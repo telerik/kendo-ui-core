@@ -76,6 +76,7 @@
                 );
             }
 
+            view.defsId = uniqueId();
             view.template = SVGView.template;
             if (!view.template) {
                 view.template = SVGView.template = renderTemplate(
@@ -112,23 +113,33 @@
 
         renderDefinitions: function() {
             var view = this,
+                id = view.defsId,
                 output = ViewBase.fn.renderDefinitions.call(view);
 
-            return output.length > 0 ? "<defs>" + output + "</defs>" : "";
+            return "<defs id='" + id + "'>" + output + "</defs>";
         },
 
         renderElement: function(element) {
-            var container = doc.createElement("div"),
+            var view = this,
+                container = doc.createElement("div"),
+                defsCurrent = doc.getElementById(view.defsId),
+                defsElement,
                 domElement;
 
             dataviz.renderSVG(container,
                 "<?xml version='1.0' ?>" +
                 "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
+                view.renderDefinitions() +
                 element.render() +
                 "</svg>"
             );
 
-            domElement = container.firstElementChild.firstChild;
+            defsElement = container.firstElementChild.firstChild;
+            domElement = container.firstElementChild.lastChild;
+
+            if (defsCurrent && defsCurrent.textContent !== defsElement.textContent) {
+                defsCurrent.parentNode.replaceChild(defsElement, defsCurrent);
+            }
 
             return domElement;
         },

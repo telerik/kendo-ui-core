@@ -1929,11 +1929,11 @@
             var anim = this,
                 options = anim.options,
                 element = anim.element,
+                elementId = element.options.id,
                 delay = options.delay || 0,
                 start = +new Date() + delay,
                 duration = options.duration,
                 finish = start + duration,
-                domElement = doc.getElementById(element.options.id),
                 easing = $.easing[options.easing],
                 wallTime,
                 time,
@@ -1953,10 +1953,10 @@
 
                     anim.step(easingPos);
 
-                    element.refresh(domElement);
+                    element.refresh(doc.getElementById(elementId));
 
                     if (wallTime < finish) {
-                        requestAnimFrame(loop, domElement);
+                        requestAnimFrame(loop);
                     }
                 };
 

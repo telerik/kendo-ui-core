@@ -177,8 +177,7 @@
                 themeOptions,
                 themes = dataviz.ui.themes || {},
                 theme,
-                themeName,
-                dataSourceOptions = (userOptions || {}).dataSource;
+                themeName;
 
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
@@ -204,6 +203,15 @@
 
             chart.wrapper = chart.element;
 
+            chart._initDataSource(userOptions);
+
+            kendo.notify(chart, dataviz.ui);
+        },
+
+        _initDataSource: function(userOptions) {
+            var chart = this,
+                dataSourceOptions = (userOptions || {}).dataSource;
+
             chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
 
             chart.dataSource = DataSource
@@ -213,11 +221,9 @@
             chart._redraw();
             chart._attachEvents();
 
-            if (dataSourceOptions && options.autoBind) {
+            if (dataSourceOptions && chart.options.autoBind) {
                 chart.dataSource.fetch();
             }
-
-            kendo.notify(chart, dataviz.ui);
         },
 
         setDataSource: function(dataSource) {
@@ -424,9 +430,10 @@
         },
 
         _start: function(e) {
-            var chart = this;
+            var chart = this,
+                events = chart._events;
 
-            if (defined(chart._events[DRAG_START])) {
+            if (defined(events[DRAG_START] || events[DRAG] || events[DRAG_END])) {
                 chart._startNavigation(e, DRAG_START);
             }
         },
@@ -716,6 +723,7 @@
                 seriesLength = series.length,
                 data = chart.dataSource.view(),
                 grouped = (chart.dataSource.group() || []).length > 0,
+                categoriesData = grouped ? data[0].items : data,
                 processedSeries = [],
                 currentSeries;
 
@@ -723,7 +731,9 @@
                 currentSeries = series[seriesIx];
 
                 if (chart.isBindable(currentSeries)) {
-                    currentSeries.data = data;
+                    if (currentSeries.autoBind !== false) {
+                        currentSeries.data = data;
+                    }
 
                     append(processedSeries, grouped ?
                         chart._createGroupedSeries(currentSeries, data) :
@@ -739,11 +749,46 @@
 
             applySeriesColors(chart.options);
 
-            chart._categoriesData = grouped ? data[0].items : data;
-            bindCategories(chart.options, chart._categoriesData);
+            chart._bindCategories(categoriesData);
 
             chart.trigger(DATABOUND);
             chart._redraw();
+        },
+
+        _bindCategories: function(data) {
+            var chart = this,
+                options = chart.options,
+                definitions = [].concat(options.categoryAxis),
+                axisIx,
+                axis;
+
+            for (axisIx = 0; axisIx < definitions.length; axisIx++) {
+                axis = definitions[axisIx];
+                if (axis.autoBind !== false) {
+                    chart._bindCategoryAxis(axis, data);
+                }
+            }
+        },
+
+        _bindCategoryAxis: function(axis, data) {
+            var categoryIx,
+                category,
+                row;
+
+            if (axis.field) {
+                for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
+                    row = data[categoryIx];
+
+                    category = getField(axis.field, row);
+                    if (categoryIx === 0) {
+                        axis.categories = [category];
+                        axis.dataItems = [row];
+                    } else {
+                        axis.categories.push(category);
+                        axis.dataItems.push(row);
+                    }
+                }
+            }
         },
 
         isBindable: function(series) {
@@ -1619,6 +1664,10 @@
                 addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay) :
                 range.max;
 
+            if (dateEquals(range.min, range.max)) {
+                end = toDate(toTime(end) + 1);
+            }
+
             for (date = range.min; date < end; date = nextDate) {
                 nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
 
@@ -1636,6 +1685,8 @@
                             } else {
                                 categoryIndicies.push(categoryIx);
                             }
+                        } else if (!round && dateEquals(nextDate, end)) {
+                            lastCategoryIndicies.push(categoryIx);
                         } else {
                             break;
                         }
@@ -1648,6 +1699,12 @@
             if (lastCategoryIndicies.length) {
                 groups.push(end);
                 categoryMap.push(lastCategoryIndicies);
+            }
+
+            if (!options.max && (last(categoryMap) || []).length === 0) {
+                // Drop the last group if the user has not requested it
+                categoryMap.pop();
+                groups.pop();
             }
 
             options.min = groups[0];
@@ -5271,7 +5328,7 @@
             }
 
             plotArea.render(panes);
-            plotArea.reflowAxes(panes);
+            plotArea.reflowAxes(plotArea.panes);
             plotArea.reflowCharts(panes);
 
             for (i = 0; i < panes.length; i++) {
@@ -5333,6 +5390,10 @@
                 paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
+                if (axis.options._overlap) {
+                    continue;
+                }
+
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
                     if (leftAnchors[paneId]) {
                         axis.reflow(axis.box
@@ -5371,6 +5432,10 @@
                 pane = axis.pane;
                 paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+
+                if (axis.options._overlap) {
+                    continue;
+                }
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
                     if (!axis._mirrored) {
@@ -5678,12 +5743,11 @@
 
     var CategoricalPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            var plotArea = this,
-                axisOptions = deepExtend({}, plotArea.options, options);
+            var plotArea = this;
 
             plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
-            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
+            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker();
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
@@ -6050,6 +6114,8 @@
 
         createValueAxes: function(panes) {
             var plotArea = this,
+                tracker = plotArea.valueAxisRangeTracker,
+                defaultRange = tracker.query(),
                 definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
                 baseOptions = { vertical: !invertAxes },
@@ -6068,7 +6134,12 @@
 
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
-                    range = plotArea.valueAxisRangeTracker.query(name);
+                    range = tracker.query(name);
+
+                    if (i === 0 && defaultRange) {
+                        range.min = math.min(range.min, defaultRange.min);
+                        range.max = math.max(range.max, defaultRange.max);
+                    }
 
                     valueAxis = new NumericAxis(range.min, range.max,
                         deepExtend({}, baseOptions, axisOptions)
@@ -6154,41 +6225,27 @@
     });
 
     var AxisGroupRangeTracker = Class.extend({
-        init: function(axisOptions) {
+        init: function() {
             var tracker = this;
 
-            tracker.axisRanges = {},
-            tracker.axisOptions = [].concat(axisOptions),
-            tracker.defaultRange = { min: 0, max: 1 };
+            tracker.axisRanges = {};
         },
 
         update: function(chartAxisRanges) {
             var tracker = this,
                 axisRanges = tracker.axisRanges,
-                axisOptions = tracker.axisOptions,
                 range,
                 chartRange,
-                i,
-                axis,
-                axisName,
-                length = axisOptions.length;
+                axisName;
 
-            if (!chartAxisRanges) {
-                return;
-            }
-
-            for (i = 0; i < length; i++) {
-                axis = axisOptions[i];
-                axisName = axis.name;
+            for (axisName in chartAxisRanges) {
                 range = axisRanges[axisName];
                 chartRange = chartAxisRanges[axisName];
-                if (chartRange) {
-                    axisRanges[axisName] = range =
-                        range || { min: MAX_VALUE, max: MIN_VALUE };
+                axisRanges[axisName] = range =
+                    range || { min: MAX_VALUE, max: MIN_VALUE };
 
-                    range.min = math.min(range.min, chartRange.min);
-                    range.max = math.max(range.max, chartRange.max);
-                }
+                range.min = math.min(range.min, chartRange.min);
+                range.max = math.max(range.max, chartRange.max);
             }
         },
 
@@ -6199,20 +6256,19 @@
         query: function(axisName) {
             var tracker = this;
 
-            return tracker.axisRanges[axisName] || deepExtend({}, tracker.defaultRange);
+            return tracker.axisRanges[axisName] || { min: 0, max: 1 };
         }
     });
 
     var XYPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            var plotArea = this,
-                axisOptions = deepExtend({}, plotArea.options, options);
+            var plotArea = this;
 
             plotArea.namedXAxes = {};
             plotArea.namedYAxes = {};
 
-            plotArea.xAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.xAxis);
-            plotArea.yAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.yAxis);
+            plotArea.xAxisRangeTracker = new AxisGroupRangeTracker();
+            plotArea.yAxisRangeTracker = new AxisGroupRangeTracker();
 
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
@@ -6340,12 +6396,13 @@
             }
         },
 
-        createXYAxis: function(options, vertical) {
+        createXYAxis: function(options, vertical, axisIndex) {
             var plotArea = this,
                 axisName = options.name,
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
-                rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
-                range = rangeTracker.query(axisName),
+                tracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
+                range = tracker.query(axisName),
+                defaultRange = tracker.query(),
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
                 axis,
                 seriesIx,
@@ -6362,6 +6419,11 @@
 
                     break;
                 }
+            }
+
+            if (axisIndex === 0 && defaultRange) {
+                range.min = math.min(range.min, defaultRange.min);
+                range.max = math.max(range.max, defaultRange.max);
             }
 
             if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && dateData)) {
@@ -6394,17 +6456,17 @@
                 yAxesOptions = [].concat(options.yAxis),
                 yAxes = [];
 
-            each(xAxesOptions, function() {
+            each(xAxesOptions, function(i) {
                 axisPane = plotArea.findPane(this.pane);
                 if (inArray(axisPane, panes)) {
-                    xAxes.push(plotArea.createXYAxis(this, false));
+                    xAxes.push(plotArea.createXYAxis(this, false, i));
                 }
             });
 
-            each(yAxesOptions, function() {
+            each(yAxesOptions, function(i) {
                 axisPane = plotArea.findPane(this.pane);
                 if (inArray(axisPane, panes)) {
-                    yAxes.push(plotArea.createXYAxis(this, true));
+                    yAxes.push(plotArea.createXYAxis(this, true, i));
                 }
             });
 
@@ -6887,6 +6949,15 @@
             max: MAX_VALUE
         },
 
+        destroy: function() {
+            var that = this,
+                userEvents = that.userEvents;
+
+            if (userEvents) {
+                userEvents.destroy();
+            }
+        },
+
         _start: function(e) {
             var that = this,
                 options = that.options,
@@ -7180,7 +7251,10 @@
             }
         }
 
-        return { min: min, max: max };
+        return {
+            min: min === MAX_VALUE ? undefined : min,
+            max: max === MIN_VALUE ? undefined : max
+        };
     }
 
     function intersection(a1, a2, b1, b2) {
@@ -7292,33 +7366,6 @@
 
             options[axisName] = axes.length > 1 ? axes : axes[0];
         });
-    }
-
-    function bindCategories(options, data) {
-        var definitions = [].concat(options.categoryAxis),
-            axisIx,
-            axis,
-            categoryIx,
-            category,
-            row;
-
-        for (axisIx = 0; axisIx < definitions.length; axisIx++) {
-            axis = definitions[axisIx];
-            if (axis.field) {
-                for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
-                    row = data[categoryIx];
-
-                    category = getField(axis.field, row);
-                    if (categoryIx === 0) {
-                        axis.categories = [category];
-                        axis.dataItems = [row];
-                    } else {
-                        axis.categories.push(category);
-                        axis.dataItems.push(row);
-                    }
-                }
-            }
-        }
     }
 
     function incrementSlot(slots, index, value) {
@@ -7799,6 +7846,7 @@
         duration: duration,
         floorDate: floorDate,
         lteDateIndex: lteDateIndex,
+        sparseArrayLimits: sparseArrayLimits,
         toDate: toDate,
         toTime: toTime
     });

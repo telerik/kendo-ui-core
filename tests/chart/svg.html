@@ -248,10 +248,30 @@
                     equals(element.tagName.toLowerCase(), "g");
                 });
 
+                test("renderElement updates definitions", function() {
+                    if (browser.msie && browser.version < 9) {
+                        return;
+                    }
+
+                    var container = $("<div>").appendTo(document.body);
+                    view.renderTo(container[0]);
+
+                    view.definitions.updated = contentElementStub;
+                    element = view.renderElement({
+                        render: function() {
+                            return "<g></g>";
+                        }
+                    });
+
+                    equals(document.getElementById(view.defsId).textContent, "Content");
+                    container.remove();
+                });
+
                 // ------------------------------------------------------------
                 module("SVGView / Rendering", {
                     setup: function() {
                         view = new dataviz.SVGView();
+                        view.defsId = 'd';
                     }
                 });
 
@@ -259,7 +279,8 @@
                     equal(view.render(),
                         "<?xml version='1.0' ?>" +
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px' style='position: relative; display: block;'></svg>");
+                        "width='600px' height='400px' style='position: relative; display: block;'>" +
+                        "<defs id='d'></defs></svg>");
                 });
 
                 test("renders children", function() {
@@ -267,7 +288,8 @@
                     equal(view.render(),
                         "<?xml version='1.0' ?>" +
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
-                        "width='600px' height='400px' style='position: relative; display: block;'>Content</svg>");
+                        "width='600px' height='400px' style='position: relative; display: block;'>" +
+                        "<defs id='d'></defs>Content</svg>");
                 });
 
                 test("renders definitions", function() {
@@ -276,7 +298,7 @@
                         "<?xml version='1.0' ?>" +
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative; display: block;'>" +
-                        "<defs>Content</defs></svg>");
+                        "<defs id='d'>Content</defs></svg>");
                 });
 
                 test("renderTo returns DOM element", function() {

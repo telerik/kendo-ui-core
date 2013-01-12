@@ -218,6 +218,51 @@
                     equals(chart.dataSource._events["change"].length, 0);
                 });
 
+                // ------------------------------------------------------------
+                module("Events", {
+                    setup: function() {
+                        createChart({series: [{}]});
+                    }
+                });
+
+                test("navigation does not start if no handlers are attached", function() {
+                    stubMethod(Chart.fn, "_startNavigation", function() {
+                        ok(false);
+                    }, function() {
+                        chart._start();
+                    });
+                });
+
+                test("navigation starts if dragStart handler is attached", 1, function() {
+                    chart.bind("dragStart", function() {});
+
+                    stubMethod(Chart.fn, "_startNavigation", function() {
+                        ok(true);
+                    }, function() {
+                        chart._start();
+                    });
+                });
+
+                test("navigation starts if drag handler is attached", 1, function() {
+                    chart.bind("drag", function() {});
+
+                    stubMethod(Chart.fn, "_startNavigation", function() {
+                        ok(true);
+                    }, function() {
+                        chart._start();
+                    });
+                });
+
+                test("navigation starts if dragEnd handler is attached", 1, function() {
+                    chart.bind("dragEnd", function() {});
+
+                    stubMethod(Chart.fn, "_startNavigation", function() {
+                        ok(true);
+                    }, function() {
+                        chart._start();
+                    });
+                });
+
             })();
         </script>
 

@@ -841,6 +841,19 @@
                 test("validNumbers returns false if array contains NaN", function() {
                     ok(!validNumbers([1, 2, NaN]));
                 });
+
+                test("sparseArrayLimits ignores undefined values", function() {
+                    var l = dataviz.sparseArrayLimits([1, undefined, 2]);
+                    equals(l.min, 1);
+                    equals(l.max, 2);
+                });
+
+                test("sparseArrayLimits returns undefined for empty array", function() {
+                    var l = dataviz.sparseArrayLimits([]);
+                    equals(l.min, undefined);
+                    equals(l.max, undefined)
+                });
+
             })();
 
         </script>

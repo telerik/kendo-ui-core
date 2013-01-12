@@ -2,6 +2,7 @@
     // Imports ================================================================
     var kendo = window.kendo,
         Class = kendo.Class,
+        Observable = kendo.Observable,
         deepExtend = kendo.deepExtend,
         math = Math,
         proxy = $.proxy,
@@ -11,7 +12,9 @@
         defined = dataviz.defined,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
+        addDuration = dataviz.addDuration,
         duration = dataviz.duration,
+        last = dataviz.last,
         lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
@@ -19,6 +22,7 @@
 
     // Constants =============================================================
     var AUTO_CATEGORY_WIDTH = 28,
+        CHANGE = "change",
         CSS_PREFIX = "k-",
         DRAG = "drag",
         DRAG_END = "dragEnd",
@@ -57,7 +61,7 @@
                         majorTicks: {
                             visible: false
                         },
-                        maxDateGroups: Math.floor(width / AUTO_CATEGORY_WIDTH)
+                        maxDateGroups: math.floor(width / AUTO_CATEGORY_WIDTH)
                     }
                 }
             };
@@ -71,6 +75,34 @@
             }
 
             Chart.fn._applyDefaults.call(chart, options, themeOptions);
+        },
+
+        _initDataSource: function(userOptions) {
+            var options = userOptions || {},
+                dataSource = options.dataSource,
+                hasServerFiltering = dataSource && dataSource.serverFiltering,
+                mainAxis = [].concat(options.categoryAxis)[0],
+                naviOptions = options.navigator || {},
+                select = naviOptions.select,
+                hasSelect = select && select.from && select.to,
+                filter,
+                dummyAxis;
+
+            if (hasServerFiltering && hasSelect) {
+                filter = [].concat(dataSource.filter || []);
+
+                dummyAxis = new dataviz.DateCategoryAxis(deepExtend({
+                    baseUnit: "fit"
+                }, mainAxis, {
+                    categories: [select.from, select.to]
+                }));
+
+                dataSource.filter =
+                    Navigator.buildFilter(dummyAxis.options.min, select.to)
+                    .concat(filter);
+            }
+
+            Chart.fn._initDataSource.call(this, userOptions);
         },
 
         options: {
@@ -118,22 +150,43 @@
             var chart = this,
                 navigator = chart._navigator;
 
-            if (!navigator) {
-                navigator = chart._navigator = new Navigator(chart);
-            }
+            if (navigator && navigator.dataSource) {
+                navigator.redrawSlaves();
+            } else {
+                if (!navigator) {
+                    navigator = chart._navigator = new Navigator(chart);
+                }
 
-            navigator.applySelection();
-            Chart.fn._redraw.call(chart);
-            navigator.redraw();
+                navigator.filterAxes();
+                Chart.fn._redraw.call(chart);
+                navigator.redraw();
+            }
+        },
+
+        _onDataChanged: function() {
+            var chart = this;
+
+            Chart.fn._onDataChanged.call(chart);
+            chart._dataBound = true;
+        },
+
+        destroy: function() {
+            var chart = this;
+
+            chart._navigator.destroy();
+
+            Chart.fn.destroy.call(chart);
         }
     });
 
-    var Navigator = Class.extend({
+    var Navigator = Observable.extend({
         init: function(chart) {
             var navi = this;
 
             navi.chart = chart;
-            navi.options = chart.options.navigator;
+            navi.options = deepExtend({}, navi.options, chart.options.navigator);
+
+            navi._initDataSource();
 
             if (!defined(navi.options.hint.visible)) {
                 navi.options.hint.visible = navi.options.visible;
@@ -145,13 +198,93 @@
             chart.bind(ZOOM_END, proxy(navi._zoomEnd, navi));
         },
 
+        options: { },
+
+        _initDataSource: function() {
+            var navi = this,
+                options = navi.options,
+                autoBind = options.autoBind,
+                dsOptions = options.dataSource;
+
+            if(!defined(autoBind)) {
+               autoBind = navi.chart.options.autoBind;
+            }
+
+            navi._dataChangedHandler = proxy(navi._onDataChanged, navi);
+
+            if (dsOptions) {
+                navi.dataSource = kendo.data.DataSource
+                    .create(dsOptions)
+                    .bind(CHANGE, navi._dataChangedHandler);
+
+                if (autoBind) {
+                    navi.dataSource.fetch();
+                }
+            }
+        },
+
+        _onDataChanged: function() {
+            var navi = this,
+                chart = navi.chart,
+                series = chart.options.series,
+                seriesIx,
+                seriesLength = series.length,
+                categoryAxes = chart.options.categoryAxis,
+                axisIx,
+                axesLength = categoryAxes.length,
+                data = navi.dataSource.view(),
+                currentSeries,
+                currentAxis;
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
+                if (currentSeries.axis == NAVIGATOR_AXIS && chart.isBindable(currentSeries)) {
+                    currentSeries.data = data;
+                }
+            }
+
+            for (axisIx = 0; axisIx < axesLength; axisIx++) {
+                currentAxis = categoryAxes[axisIx];
+
+                if (currentAxis.pane == NAVIGATOR_PANE) {
+                    chart._bindCategoryAxis(currentAxis, data);
+                }
+            }
+
+            if (chart._model) {
+               navi.redraw();
+               navi.filterAxes();
+
+               if (!chart.options.dataSource || (chart.options.dataSource && chart._dataBound)) {
+                   navi.redrawSlaves();
+               }
+            }
+        },
+
+        destroy: function() {
+            var navi = this,
+                dataSource = navi.dataSource;
+
+            if (dataSource) {
+                dataSource.unbind(CHANGE, navi._dataChangeHandler);
+            }
+
+            if (navi.selection) {
+                navi.selection.destroy();
+            }
+        },
+
         redraw: function() {
+            this._redrawSelf();
+
             var navi = this,
                 chart = navi.chart,
                 options = navi.options,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
                 select = navi.options.select || {},
+                selection = navi.selection,
                 min = 0,
                 max = groups.length - 1,
                 from = min,
@@ -166,11 +299,16 @@
                     to = lteDateIndex(groups, toDate(select.to));
                 }
 
-                chart._selection = new Selection(chart, axis, {
-                    from: from,
-                    to: to,
+                if (selection) {
+                    selection.destroy();
+                    selection.wrapper.remove();
+                }
+
+                selection = navi.selection = new Selection(chart, axis, {
                     min: min,
                     max: max,
+                    from: from,
+                    to: to,
                     selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi),
@@ -188,6 +326,23 @@
             }
         },
 
+        _redrawSelf: function(silent) {
+            var plotArea = this.chart._plotArea;
+
+            if (plotArea) {
+                plotArea.redraw(last(plotArea.panes), silent);
+            }
+        },
+
+        redrawSlaves: function() {
+            var navi = this,
+                chart = navi.chart,
+                plotArea = chart._plotArea,
+                slavePanes = plotArea.panes.slice(0, -1);
+
+            chart._plotArea.redraw(slavePanes);
+        },
+
         _drag: function(e) {
             var navi = this,
                 chart = navi.chart,
@@ -198,7 +353,7 @@
                 axis = chart._plotArea.categoryAxis,
                 baseUnit = axis.options.baseUnit,
                 range = e.axisRanges[axis.options.name],
-                selection = chart._selection,
+                selection = navi.selection,
                 selectionDuration = duration(
                     axis.options.min, axis.options.max, axis.options.baseUnit
                 ),
@@ -211,32 +366,27 @@
 
             from = toDate(math.min(
                 math.max(groups[0], range.min),
-                dataviz.addDuration(
+                addDuration(
                     dataviz.last(groups), -selectionDuration, baseUnit
                 )
             ));
 
             to = toDate(math.min(
-                dataviz.addDuration(from, selectionDuration, baseUnit),
-                dataviz.last(navigatorAxis.options.categories)
+                addDuration(from, selectionDuration, baseUnit),
+                dataviz.last(groups)
             ));
 
             navi.options.select = { from: from, to: to };
 
-            if (navi._realtimeDrag()) {
-                navi.applySelection();
+            if (navi._liveDrag()) {
+                navi.filterAxes();
                 navi.redrawSlaves();
             }
 
             selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    to
-            ));
+                lteDateIndex(groups, from),
+                lteDateIndex(groups, to) + 1
+            );
 
             navi.showHint(from, to);
         },
@@ -244,7 +394,8 @@
         _dragEnd: function() {
             var navi = this;
 
-            navi.applySelection();
+            navi.filterAxes();
+            navi.filterDataSource();
             navi.redrawSlaves();
 
             if (navi.hint) {
@@ -252,7 +403,7 @@
             }
         },
 
-        _realtimeDrag: function() {
+        _liveDrag: function() {
             var support = kendo.support,
                 isTouch = support.touch,
                 browser = support.browser,
@@ -266,8 +417,7 @@
             var navi = this,
                 axis = navi.mainAxis(),
                 groups = axis.options.categories,
-                chart = navi.chart,
-                selection = chart._selection,
+                selection = navi.selection,
                 src = selection.options,
                 dst = navi.options.select;
 
@@ -283,30 +433,76 @@
             return groups[index];
         },
 
-        applySelection: function() {
+        filterAxes: function() {
             var navi = this,
+                categories,
                 select = navi.options.select || {},
                 chart = navi.chart,
-                slaveAxes = chart.options.categoryAxis,
+                allAxes = chart.options.categoryAxis,
+                from = select.from,
+                to = select.to,
+                min,
+                max,
                 i,
                 axis;
 
-            for (i = 0; i < slaveAxes.length; i++) {
-                axis = slaveAxes[i];
+            for (i = 0; i < allAxes.length; i++) {
+                axis = allAxes[i];
+                if (axis.name === NAVIGATOR_AXIS) {
+                    categories = axis.categories;
+                    if (categories && categories.length > 0) {
+                        min = toTime(categories[0]);
+                        max = toTime(last(categories));
+
+                        from = toTime(from);
+                        if (from < min || from > max) {
+                            from = min;
+                        }
+
+                        to = toTime(to);
+                        if (to < min || to > max) {
+                            to = max;
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            for (i = 0; i < allAxes.length; i++) {
+                axis = allAxes[i];
                 if (axis.pane !== NAVIGATOR_PANE) {
-                    axis.min = select.from;
-                    axis.max = select.to;
+                    axis.min = toDate(from);
+                    axis.max = toDate(to);
                 }
             }
         },
 
-        redrawSlaves: function() {
+        filterDataSource: function() {
             var navi = this,
+                select = navi.options.select || {},
                 chart = navi.chart,
-                plotArea = chart._plotArea,
-                slavePanes = plotArea.panes.slice(0, -1);
+                chartDataSource = chart.dataSource,
+                hasServerFiltering = chartDataSource && chartDataSource.options.serverFiltering,
+                transport = chartDataSource.options.transport,
+                axisOptions,
+                baseUnit;
 
-            chart._plotArea.redraw(slavePanes);
+            if (navi.dataSource && hasServerFiltering && transport) {
+                axisOptions = new dataviz.DateCategoryAxis(deepExtend({
+                    baseUnit: "fit"
+                }, chart.options.categoryAxis[0], {
+                    categories: [select.from, select.to]
+                })).options;
+
+                baseUnit = transport.read.data.baseUnit = axisOptions.baseUnit;
+                chartDataSource.filter(
+                    Navigator.buildFilter(
+                        addDuration(axisOptions.min, -axisOptions.baseUnitStep, baseUnit),
+                        addDuration(axisOptions.max, axisOptions.baseUnitStep, baseUnit)
+                    )
+                );
+            }
         },
 
         _zoom: function(e) {
@@ -316,7 +512,7 @@
                 navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
-                selection = chart._selection;
+                selection = navi.selection;
 
             e.originalEvent.preventDefault();
 
@@ -333,7 +529,7 @@
             }
 
             if (!kendo.support.touch) {
-                navi.applySelection();
+                navi.filterAxes();
                 navi.redrawSlaves();
             }
 
@@ -395,7 +591,8 @@
                 navi.hint.hide();
             }
             navi.readSelection();
-            navi.applySelection();
+            navi.filterAxes();
+            navi.filterDataSource();
             navi.redrawSlaves();
 
             navi.chart.trigger(SELECT_END, {
@@ -405,7 +602,11 @@
         },
 
         mainAxis: function() {
-            return this.chart._plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            var plotArea = this.chart._plotArea;
+
+            if (plotArea) {
+                return plotArea.namedCategoryAxes[NAVIGATOR_AXIS];
+            }
         }
     });
 
@@ -424,25 +625,36 @@
 
         panes.push(paneOptions);
 
-        Navigator.attachAxes(options);
+        Navigator.attachAxes(options, naviOptions);
         Navigator.attachSeries(options, naviOptions, themeOptions);
     };
 
-    Navigator.attachAxes = function(options) {
+    Navigator.attachAxes = function(options, naviOptions) {
         var categoryAxes,
             valueAxes;
 
         categoryAxes = options.categoryAxis = [].concat(options.categoryAxis);
         valueAxes = options.valueAxis = [].concat(options.valueAxis);
 
-        var base = {
+        var base = deepExtend({
             type: "date",
             pane: NAVIGATOR_PANE,
+            field: naviOptions.dateField,
             roundToBaseUnit: false,
             justified: true,
             tooltip: { visible: false },
-            labels: { step: 1 }
-        };
+            labels: { step: 1 },
+            autoBind: !naviOptions.dataSource,
+            autoBaseUnitSteps: {
+                minutes: [1],
+                hours: [1],
+                days: [1],
+                weeks: [],
+                months: [1],
+                years: [1]
+            },
+            _overlap: false
+        }, naviOptions.categoryAxis);
 
         categoryAxes.push(
             deepExtend({}, base, {
@@ -459,26 +671,13 @@
                 maxDateGroups: 20,
                 baseUnitStep: "auto",
                 autoBaseUnitSteps: {
-                    minutes: [],
-                    hours: [1],
-                    days: [1],
-                    weeks: [],
-                    months: [1],
-                    years: [1]
+                    minutes: []
                 },
                 majorTicks: { visible: true }
             }), deepExtend({}, base, {
                 name: NAVIGATOR_AXIS + "_ticks",
                 // TODO: Width based
                 maxDateGroups: 200,
-                autoBaseUnitSteps: {
-                    minutes: [1],
-                    hours: [1],
-                    days: [1],
-                    weeks: [],
-                    months: [1],
-                    years: [1]
-                },
                 majorTicks: {
                     visible: true,
                     width: 0.5
@@ -515,10 +714,19 @@
                     }
                 }, defaults, navigatorSeries[i], {
                     axis: NAVIGATOR_AXIS,
-                    categoryAxis: NAVIGATOR_AXIS
+                    categoryAxis: NAVIGATOR_AXIS,
+                    autoBind: !naviOptions.dataSource
                 })
             );
         }
+    };
+
+    Navigator.buildFilter = function(from, to) {
+        return [{
+            field: "Date", operator: "gte", value: toDate(from)
+        }, {
+            field: "Date", operator: "lt", value: toDate(to)
+        }];
     };
 
     var NavigatorHint = Class.extend({
@@ -627,6 +835,7 @@
     dataviz.ui.plugin(StockChart);
 
     deepExtend(dataviz, {
+        Navigator: Navigator
     });
 
 })(window.kendo.jQuery);

@@ -69,3 +69,5 @@ wrappers/java/spring-demos/src/main/webapp/resources
 wrappers/java/target
 demos/KendoCRUDService/KendoCRUDService/Content/UserFiles
 demos/mvc/src
+*-test-results.xml
+.listen_test
