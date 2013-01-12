@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../qunit.ico" />
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -535,6 +536,17 @@
                     );
                 });
 
+                test("axis can be superimposed using options._overlap", function() {
+                    valueAxis.options._overlap = true;
+                    secondaryValueAxis._overlap = true;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
+                         [valueAxis.box.x2, valueAxis.box.y1]
+                    );
+                });
+
                 test("stacked axes on left are aligned", function() {
                     plotArea.reflow(chartBox);
 
@@ -724,6 +736,23 @@
                     ok(plotArea.namedCategoryAxes["b"]);
                 });
 
+                test("axis can be superimposed using options._overlap", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: [{
+                                name: "a",
+                                _overlap: true
+                            }, {
+                                name: "b",
+                                _overlap: true
+                            }]
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    same(plotArea.namedCategoryAxes["a"].box.y1,
+                         plotArea.namedCategoryAxes["b"].box.y1);
+                });
+
                 test("first axis is set as primary category axis", function() {
                     createPlotArea(columnSeriesData, {
                         categoryAxis: [{
@@ -860,6 +889,45 @@
                     );
                 });
 
+                test("sets named primary axis min/max to series limits (impl./expl. axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "column",
+                                data: [10],
+                                axis: "A"
+                            }, {
+                                type: "column",
+                                data: [100]
+                            }], {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary axis min/max to series limits (implicit axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 350);
+                        },
+                        function() {
+                            createPlotArea(columnSeriesData, {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
                 test("NaN values are ignored when tracking axis range", 2, function() {
                     stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
@@ -874,6 +942,7 @@
                         }
                     );
                 });
+
                 test("applies gap from first series", function() {
                     equals(chartSeries.options.gap, GAP);
                 });
@@ -1144,6 +1213,48 @@
 
                 test("Candlestick chart added to pane content", function() {
                     ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+                });
+
+                test("sets named primary axis min/max to series limits (impl./expl. axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "candlestick",
+                                data: [[0, 10, 0, 0]],
+                                axis: "A"
+                            }, {
+                                type: "candlestick",
+                                data: [[0, 100, 0, 0]]
+                            }], {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary axis min/max to series limits (implicit axis)", function() {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            equal(this.valueAxis.options.min, 0);
+                            equal(this.valueAxis.options.max, 12);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "candlestick",
+                                data: [[0, 10, 0, 0]]
+                            }], {
+                                valueAxis: { name: "A" }
+                            });
+                        }
+                    );
                 });
 
                 // ------------------------------------------------------------
@@ -2623,16 +2734,16 @@
                     destroyChart();
                 });
 
-                test("does not reflow axis in different pane", function() {
+                test("partial reflows account for axes in other panes", function() {
                     createPlotArea({
-                        categoryAxis: {
+                        categoryAxis: [{
                             name: "cAxis"
-                        },
-                        valueAxis: [{
-                            name: "vAxis"
                         }, {
-                            name: "vAxisB",
-                            pane: "b"
+                            name: "cAxisB",
+                            pane: "b",
+                            categories: [
+                                "Looooooooooooooooooooooooooooooooooooooooooooooooooooooong"
+                            ]
                         }],
                         panes: [{
                             name: "a"
@@ -2641,16 +2752,14 @@
                         }]
                         }, [{
                             type: "column",
-                            data: [1000],
-                            axis: "vAxis"
+                            data: [1000]
                         }]
                     );
 
-                    var box = plotArea.namedValueAxes.vAxisB.box;
-                    plotArea.series[0].data[0] = 10;
-                    plotArea.redraw(plotArea.panes[0]);
+                    var box = plotArea.namedCategoryAxes.cAxisB.box;
+                    plotArea.redraw(plotArea.panes[1]);
 
-                    sameBox(box, plotArea.namedValueAxes.vAxisB.box);
+                    sameBox(plotArea.namedCategoryAxes.cAxisB.box, box);
                 });
 
                 // ------------------------------------------------------------
@@ -3065,6 +3174,84 @@
                     );
                 });
 
+                test("sets named primary X axis range (impl./expl. series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisX.options.min, 0);
+                            equal(this.axisX.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "scatter",
+                                data: [[10, 0]],
+                                xAxis: "A"
+                            }, {
+                                type: "scatter",
+                                data: [[100, 0]]
+                            }], {
+                                xAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary X axis range (implicit series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisX.options.min, 0);
+                            equal(this.axisX.options.max, 350);
+                        },
+                        function() {
+                            createPlotArea(scatterSeriesData, {
+                                xAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary Y axis range (impl./expl. series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisY.options.min, 0);
+                            equal(this.axisY.options.max, 120);
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "scatter",
+                                data: [[0, 10]],
+                                yAxis: "A"
+                            }, {
+                                type: "scatter",
+                                data: [[0, 100]]
+                            }], {
+                                yAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
+                test("sets named primary Y axis range (implicit series axis)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            equal(this.axisY.options.min, 0);
+                            equal(this.axisY.options.max, 350);
+                        },
+                        function() {
+                            createPlotArea(scatterSeriesData, {
+                                yAxis: { name: "A" }
+                            });
+                        }
+                    );
+                });
+
                 test("creates Numeric axes by default", function() {
                     ok(plotArea.axisX instanceof dataviz.NumericAxis);
                     ok(plotArea.axisY instanceof dataviz.NumericAxis);
@@ -3336,6 +3523,15 @@
                     equals(secondaryXAxis.box.y2, axisX.box.y1 - margin);
                 });
 
+                test("X axis can be superimposed using options._overlap", function() {
+                    axisX.options._overlap = true;
+                    secondaryXAxis.options._overlap = true;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryXAxis.box.y1, axisX.box.y1);
+                });
+
                 test("stacked X axes on top are aligned", function() {
                     plotArea.reflow(chartBox);
 
@@ -3379,6 +3575,15 @@
                     same([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
                          [axisY.box.x2 + margin, axisY.box.y1]
                     );
+                });
+
+                test("Y axis can be superimposed using options._overlap", function() {
+                    axisY.options._overlap = true;
+                    secondaryYAxis.options._overlap = true;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryYAxis.box.x2, axisY.box.x2);
                 });
 
                 test("stacked Y axes on right are aligned", function() {

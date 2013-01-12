@@ -160,6 +160,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("zoomStart", value.getBody());
     }
 
+    public boolean getAutoBind() {
+        return (boolean)getProperty("autoBind");
+    }
+
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
+    }
+
     @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
