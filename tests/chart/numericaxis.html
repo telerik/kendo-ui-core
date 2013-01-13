@@ -1819,6 +1819,91 @@
                 });
 
             })();
+
+            (function() {
+                var numericAxis,
+                    axisBox = new Box2D(0, 0, 800, 600);
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Vertical / translateRange", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, {});
+                        numericAxis.reflow(axisBox);
+                    }
+                });
+
+                test("positive delta translates range down", function() {
+                    r = numericAxis.translateRange(600);
+                    equals(Math.round(r.min), -1);
+                    equals(Math.round(r.max), 0);
+                });
+
+                test("negative delta translates range up", function() {
+                    r = numericAxis.translateRange(-600);
+                    equals(Math.round(r.min), 1);
+                    equals(Math.round(r.max), 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Vertical / Reverse / translateRange", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, { reverse: true });
+                        numericAxis.reflow(axisBox);
+                    }
+                });
+
+                test("positive delta translates range down", function() {
+                    r = numericAxis.translateRange(600);
+                    equals(Math.round(r.min), 1);
+                    equals(Math.round(r.max), 2);
+                });
+
+                test("negative delta translates range up", function() {
+                    r = numericAxis.translateRange(-600);
+                    equals(Math.round(r.min), -1);
+                    equals(Math.round(r.max), 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Horizontal / translateRange", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false });
+                        numericAxis.reflow(axisBox);
+                    }
+                });
+
+                test("positive delta translates range right", function() {
+                    r = numericAxis.translateRange(800);
+                    equals(Math.round(r.min), 1);
+                    equals(Math.round(r.max), 2);
+                });
+
+                test("negative delta translates range right", function() {
+                    r = numericAxis.translateRange(-800);
+                    equals(Math.round(r.min), -1);
+                    equals(Math.round(r.max), 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Horizontal / Reverse / translateRange", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false, reverse: true });
+                        numericAxis.reflow(axisBox);
+                    }
+                });
+
+                test("positive delta translates range right", function() {
+                    r = numericAxis.translateRange(800);
+                    equals(Math.round(r.min), -1);
+                    equals(Math.round(r.max), 0);
+                });
+
+                test("negative delta translates range right", function() {
+                    r = numericAxis.translateRange(-800);
+                    equals(Math.round(r.min), 1);
+                    equals(Math.round(r.max), 2);
+                });
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
