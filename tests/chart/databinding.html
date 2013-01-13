@@ -256,6 +256,28 @@
                     dataSource.query( { filter: { field: "period", operator: "==", value: "Mar" } } );
                 });
 
+                test("categories data is cleaned when data source returns empty view", 1, function() {
+                    var dataSource = new kendo.data.DataSource({
+                        data: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }]
+                    });
+
+                    chart = createChart({
+                        dataSource: dataSource,
+                        categoryAxis: [{
+                            field: "period"
+                        }]
+                    });
+
+                    dataSource.data([]);
+                    equal(chart.options.categoryAxis.categories.length, 0);
+                });
+
                 // ------------------------------------------------------------
                 module("Binding to DataSource / Null values", {
                     teardown: destroyChart
