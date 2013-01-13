@@ -784,6 +784,7 @@ kendo_module({
                 row;
 
             if (axis.field) {
+                axis.categories = [];
                 for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
                     row = data[categoryIx];
 
@@ -1219,6 +1220,15 @@ kendo_module({
     });
 
     var CategoryAxis = Axis.extend({
+        init: function(options) {
+            var axis = this;
+
+            Axis.fn.init.call(axis, options);
+
+            options = axis.options;
+            options.categories = options.categories.slice(0);
+        },
+
         options: {
             type: CATEGORY,
             categories: [],

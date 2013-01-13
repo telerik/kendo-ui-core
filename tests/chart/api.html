@@ -191,6 +191,19 @@
                     equals(chart.options.series.length, 0);
                 });
 
+                test("refresh cleans up generated cateories", function() {
+                    createChart({
+                        dataSource: [{ value: 1 }],
+                        series: [{ field: "value" }],
+                        categoryAxis: { categories: [] }
+                    });
+
+                    chart.options.series = [];
+                    chart.refresh();
+
+                    equals(chart.options.categoryAxis.categories.length, 0);
+                });
+
                 // ------------------------------------------------------------
                 module("destroy", {
                     setup: function() {
