@@ -1619,10 +1619,15 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 lineBox = axis.lineBox(),
-                size = options.vertical ? lineBox.height() : lineBox.width(),
+                vertical = options.vertical,
+                size = vertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = size / range,
                 offset = round(delta / scale, DEFAULT_PRECISION);
+
+            if (!vertical !== !options.reverse) {
+                offset = -offset;
+            }
 
             return {
                 min: options.min + offset,
