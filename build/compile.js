@@ -12,12 +12,16 @@ var ARGV = OPT
     .describe("bundle", "Create a bundle")
     .describe("kendo-config", "Generate download-builder/kendo-config.json (to STDOUT)")
     .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
+    .describe("beautify", "Output indented code (helps debugging)")
+    .describe("nomangle", "Don't mangle names (helps debugging)")
     .boolean("amd")
     .boolean("deps")
     .boolean("decl")
     .boolean("bundle")
     .boolean("kendo-config")
     .boolean("overwrite")
+    .boolean("beautify")
+    .boolean("nomangle")
     .wrap(80)
     .argv;
 
@@ -40,10 +44,16 @@ if (ARGV.bundle) {
     });
     fs.writeFileSync(destination, toplevel.print_to_string({ beautify: true, comments: true }));
     toplevel = squeeze(toplevel);
-    toplevel.figure_out_scope();
-    toplevel.compute_char_frequency();
-    toplevel.mangle_names();
-    fs.writeFileSync(destination_min, toplevel.print_to_string());
+    if (!ARGV["nomangle"]) {
+        toplevel.figure_out_scope();
+        toplevel.compute_char_frequency();
+        toplevel.mangle_names();
+    }
+    var codegen_options = {};
+    if (ARGV["beautify"]) {
+        codegen_options.beautify = true;
+    }
+    fs.writeFileSync(destination_min, toplevel.print_to_string(codegen_options));
     process.exit(0);
 }
 
@@ -198,10 +208,16 @@ files.forEach(function (file){
         throw new Error("Won't overwrite " + file);
     var ast = compile_one_file(file);
     ast = squeeze(ast);
-    ast.figure_out_scope();
-    ast.compute_char_frequency();
-    ast.mangle_names();
-    code = ast.print_to_string();
+    if (!ARGV["nomangle"]) {
+        ast.figure_out_scope();
+        ast.compute_char_frequency();
+        ast.mangle_names();
+    }
+    var codegen_options = {};
+    if (ARGV["beautify"]) {
+        codegen_options.beautify = true;
+    }
+    code = ast.print_to_string(codegen_options);
     fs.writeFileSync(output, code);
 });
 
