@@ -288,6 +288,27 @@
                     same(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
                 });
 
+                test("navigator sets baseUnit in read data", function() {
+                    createStockChart({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: ""
+                                }
+                            }
+                        },
+                        navigator: {
+                            select: {
+                                from: "2012/01/02",
+                                to: "2012/03/01"
+                            }
+                        }
+                    });
+
+                    chart._navigator.filterDataSource();
+                    same(chart.dataSource.options.transport.read.data.baseUnit, "days");
+                });
+
                 test("navigator filters main data source (to)", function() {
                     createStockChart({
                         navigator: {
@@ -423,7 +444,7 @@
                             dataSource: {
                                 transport: {
                                     read: {
-                                        data: defaultOptions.dataSource.data
+                                        url: ""
                                     }
                                 }
                             }

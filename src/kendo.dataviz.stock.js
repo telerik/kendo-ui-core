@@ -496,14 +496,15 @@ kendo_module({
                 axisOptions,
                 baseUnit;
 
-            if (navi.dataSource && hasServerFiltering && transport) {
+            if (navi.dataSource && hasServerFiltering && transport && transport.read) {
                 axisOptions = new dataviz.DateCategoryAxis(deepExtend({
                     baseUnit: "fit"
                 }, chart.options.categoryAxis[0], {
                     categories: [select.from, select.to]
                 })).options;
 
-                baseUnit = transport.read.data.baseUnit = axisOptions.baseUnit;
+                baseUnit = axisOptions.baseUnit;
+                deepExtend(transport.read, { data: { baseUnit: baseUnit } });
                 chartDataSource.filter(
                     Navigator.buildFilter(
                         addDuration(axisOptions.min, -axisOptions.baseUnitStep, baseUnit),
