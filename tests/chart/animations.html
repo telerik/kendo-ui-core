@@ -85,6 +85,20 @@
                     }, 100);
                 });
 
+                asyncTest("executes destroy when complete", 2, function() {
+                    anim.setup();
+                    anim.play();
+
+                    var destroyed = false;
+                    anim.destroy = function() { destroyed = true; };
+
+                    ok(!destroyed);
+                    setTimeout(function() {
+                        ok(destroyed);
+                        start();
+                    }, 100);
+                });
+
             })();
 
             (function() {

@@ -1971,19 +1971,21 @@ kendo_module({
 
                     if (wallTime < finish) {
                         requestAnimFrame(loop);
+                    } else {
+                        anim.destroy();
                     }
                 };
 
                 loop();
-                anim.stop();
             }, delay);
         },
 
         abort: function() {
             this._stopped = true;
+            this.destroy();
         },
 
-        stop: noop,
+        destroy: noop,
 
         setup: noop,
 
@@ -2035,7 +2037,7 @@ kendo_module({
             points[1].x = points[2].x = points[0].x + size;
         },
 
-        stop: function() {
+        destroy: function() {
             // Unwrap all child elements
             this.element.destroy();
         }

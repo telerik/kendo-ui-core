@@ -704,7 +704,9 @@ kendo_module({
         },
 
         refresh: function(domElement) {
-            domElement.style.clip = this._renderClip();
+            if (domElement) {
+                domElement.style.clip = this._renderClip();
+            }
         },
 
         _renderClip: function() {
