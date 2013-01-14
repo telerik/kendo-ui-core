@@ -101,6 +101,7 @@
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
+        MS_POINTER_UP = "MSPointerUp" + NS,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -136,6 +137,7 @@
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
+        TOUCH_START = "touchstart" + NS,
         TRIANGLE = "triangle",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
@@ -409,7 +411,8 @@
 
         _attachEvents: function() {
             var chart = this,
-                element = chart.element;
+                element = chart.element,
+                touchHandler = proxy(chart._touchstart, chart);
 
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
@@ -427,6 +430,10 @@
                     end: proxy(chart._end, chart)
                 });
             }
+
+            $(doc.body)
+                .bind(TOUCH_START, touchHandler)
+                .bind(MS_POINTER_UP, touchHandler);
         },
 
         _start: function(e) {
@@ -842,6 +849,37 @@
             }
 
             return groupSeries;
+        },
+
+        _touchstart: function(e) {
+            var chart = this,
+                tooltip = chart._tooltip,
+                highlight = chart._highlight,
+                tooltipOptions,
+                point;
+
+            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
+                return;
+            }
+
+            if (e.originalEvent.pointerType && e.originalEvent.pointerType !== 2) {
+                return;
+            }
+
+            point = chart._getChartElement(e);
+            if (point && point.hover) {
+                point.hover(chart, e);
+                chart._activePoint = point;
+
+                tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
+                if (tooltipOptions.visible) {
+                    tooltip.show(point);
+                }
+
+                highlight.show(point);
+            } else {
+                chart._unsetActivePoint();
+            }
         },
 
         destroy: function() {
