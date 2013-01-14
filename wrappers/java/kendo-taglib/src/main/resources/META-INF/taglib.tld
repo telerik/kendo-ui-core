@@ -9123,6 +9123,77 @@ It is used as a default field for all date axes, including the navigator pane.Th
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+        <attribute>
+            <description>Fires when an axis label is clicked.</description>
+            <name>axisLabelClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the chart has received data from the data source
+and is about to render it.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().</description>
+            <name>dragStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires as long as the user is dragging the chart using the mouse or swipe gestures.</description>
+            <name>drag</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user stops dragging the chart.</description>
+            <name>dragEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when plot area is clicked.</description>
+            <name>plotAreaClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when chart series are clicked.</description>
+            <name>seriesClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when chart series are hovered.</description>
+            <name>seriesHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user has used the mousewheel to zoom the chart.The zoom operation can be aborted by calling e.preventDefault().</description>
+            <name>zoomStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires as long as the user is zooming the chart using the mousewheel.</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user stops zooming the chart.</description>
+            <name>zoomEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user start to dragging the drag handle.</description>
+            <name>selectStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user drags the drag handle to a new position.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user stops dragging the drag handle.</description>
+            <name>selectEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -12858,6 +12929,91 @@ hex and rgb.</description>
 
 
 
+    <tag>
+        <description>Fires when an axis label is clicked.</description>
+        <name>stockChart-axisLabelClick</name>
+        <tag-class>com.kendoui.taglib.stockchart.AxisLabelClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the chart has received data from the data source
+and is about to render it.</description>
+        <name>stockChart-dataBound</name>
+        <tag-class>com.kendoui.taglib.stockchart.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().</description>
+        <name>stockChart-dragStart</name>
+        <tag-class>com.kendoui.taglib.stockchart.DragStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires as long as the user is dragging the chart using the mouse or swipe gestures.</description>
+        <name>stockChart-drag</name>
+        <tag-class>com.kendoui.taglib.stockchart.DragFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user stops dragging the chart.</description>
+        <name>stockChart-dragEnd</name>
+        <tag-class>com.kendoui.taglib.stockchart.DragEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when plot area is clicked.</description>
+        <name>stockChart-plotAreaClick</name>
+        <tag-class>com.kendoui.taglib.stockchart.PlotAreaClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when chart series are clicked.</description>
+        <name>stockChart-seriesClick</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when chart series are hovered.</description>
+        <name>stockChart-seriesHover</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesHoverFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user has used the mousewheel to zoom the chart.The zoom operation can be aborted by calling e.preventDefault().</description>
+        <name>stockChart-zoomStart</name>
+        <tag-class>com.kendoui.taglib.stockchart.ZoomStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires as long as the user is zooming the chart using the mousewheel.</description>
+        <name>stockChart-zoom</name>
+        <tag-class>com.kendoui.taglib.stockchart.ZoomFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user stops zooming the chart.</description>
+        <name>stockChart-zoomEnd</name>
+        <tag-class>com.kendoui.taglib.stockchart.ZoomEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user start to dragging the drag handle.</description>
+        <name>stockChart-selectStart</name>
+        <tag-class>com.kendoui.taglib.stockchart.SelectStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user drags the drag handle to a new position.</description>
+        <name>stockChart-select</name>
+        <tag-class>com.kendoui.taglib.stockchart.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user stops dragging the drag handle.</description>
+        <name>stockChart-selectEnd</name>
+        <tag-class>com.kendoui.taglib.stockchart.SelectEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>TabStrip</description>
         <name>tabStrip</name>

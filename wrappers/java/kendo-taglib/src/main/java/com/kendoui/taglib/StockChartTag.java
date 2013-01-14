@@ -105,6 +105,62 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
+    public void setAxisLabelClick(AxisLabelClickFunctionTag value) {
+        setEvent("axisLabelClick", value.getBody());
+    }
+
+    public void setDataBound(DataBoundFunctionTag value) {
+        setEvent("dataBound", value.getBody());
+    }
+
+    public void setDrag(DragFunctionTag value) {
+        setEvent("drag", value.getBody());
+    }
+
+    public void setDragEnd(DragEndFunctionTag value) {
+        setEvent("dragEnd", value.getBody());
+    }
+
+    public void setDragStart(DragStartFunctionTag value) {
+        setEvent("dragStart", value.getBody());
+    }
+
+    public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
+        setEvent("plotAreaClick", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
+    }
+
+    public void setSelectEnd(SelectEndFunctionTag value) {
+        setEvent("selectEnd", value.getBody());
+    }
+
+    public void setSelectStart(SelectStartFunctionTag value) {
+        setEvent("selectStart", value.getBody());
+    }
+
+    public void setSeriesClick(SeriesClickFunctionTag value) {
+        setEvent("seriesClick", value.getBody());
+    }
+
+    public void setSeriesHover(SeriesHoverFunctionTag value) {
+        setEvent("seriesHover", value.getBody());
+    }
+
+    public void setZoom(ZoomFunctionTag value) {
+        setEvent("zoom", value.getBody());
+    }
+
+    public void setZoomEnd(ZoomEndFunctionTag value) {
+        setEvent("zoomEnd", value.getBody());
+    }
+
+    public void setZoomStart(ZoomStartFunctionTag value) {
+        setEvent("zoomStart", value.getBody());
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -148,6 +204,174 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setTransitions(boolean value) {
         setProperty("transitions", value);
+    }
+
+    public String getAxisLabelClick() {
+        Function property = ((Function)getProperty("axisLabelClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setAxisLabelClick(String value) {
+        setProperty("axisLabelClick", new Function(value));
+    }
+
+    public String getDataBound() {
+        Function property = ((Function)getProperty("dataBound"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDataBound(String value) {
+        setProperty("dataBound", new Function(value));
+    }
+
+    public String getDrag() {
+        Function property = ((Function)getProperty("drag"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDrag(String value) {
+        setProperty("drag", new Function(value));
+    }
+
+    public String getDragEnd() {
+        Function property = ((Function)getProperty("dragEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDragEnd(String value) {
+        setProperty("dragEnd", new Function(value));
+    }
+
+    public String getDragStart() {
+        Function property = ((Function)getProperty("dragStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDragStart(String value) {
+        setProperty("dragStart", new Function(value));
+    }
+
+    public String getPlotAreaClick() {
+        Function property = ((Function)getProperty("plotAreaClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPlotAreaClick(String value) {
+        setProperty("plotAreaClick", new Function(value));
+    }
+
+    public String getSelect() {
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
+    }
+
+    public String getSelectEnd() {
+        Function property = ((Function)getProperty("selectEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelectEnd(String value) {
+        setProperty("selectEnd", new Function(value));
+    }
+
+    public String getSelectStart() {
+        Function property = ((Function)getProperty("selectStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelectStart(String value) {
+        setProperty("selectStart", new Function(value));
+    }
+
+    public String getSeriesClick() {
+        Function property = ((Function)getProperty("seriesClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSeriesClick(String value) {
+        setProperty("seriesClick", new Function(value));
+    }
+
+    public String getSeriesHover() {
+        Function property = ((Function)getProperty("seriesHover"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSeriesHover(String value) {
+        setProperty("seriesHover", new Function(value));
+    }
+
+    public String getZoom() {
+        Function property = ((Function)getProperty("zoom"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoom(String value) {
+        setProperty("zoom", new Function(value));
+    }
+
+    public String getZoomEnd() {
+        Function property = ((Function)getProperty("zoomEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoomEnd(String value) {
+        setProperty("zoomEnd", new Function(value));
+    }
+
+    public String getZoomStart() {
+        Function property = ((Function)getProperty("zoomStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoomStart(String value) {
+        setProperty("zoomStart", new Function(value));
     }
 
 //<< Attributes
