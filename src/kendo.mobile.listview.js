@@ -665,6 +665,7 @@ kendo_module({
             var that = this,
                 filterable = that.options.filterable,
                 events = "change",
+                searchProxy = proxy(that._search, that),
                 input;
 
             if (filterable) {
@@ -682,7 +683,8 @@ kendo_module({
                         e.preventDefault();
                     })
                     .end()
-                    .on(events, proxy(that._search, that));
+                    .on("paste", searchProxy)
+                    .on(events,  searchProxy);
 
                 that.wrapper.find(".km-filter-reset").on("click", proxy(that._clearFilter, that));
             }
