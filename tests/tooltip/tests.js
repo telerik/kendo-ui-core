@@ -8,6 +8,10 @@ tests.push(
         title: "tooltip ajax loading"
     },
     {
+        page: "tooltip/aria.html",
+        title: "tooltip aria"
+    },
+    {
         page: "tooltip/lint.html",
         title: "lint"
     }

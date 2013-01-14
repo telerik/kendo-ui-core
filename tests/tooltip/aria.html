@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.tooltip aria tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+
+        <style>
+            .k-tooltip {
+                height: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.tooltip aria tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var container,
+                Tooltip = kendo.ui.Tooltip;
+
+            module("kendo.ui.tooltip", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container);
+                },
+                teardown: function() {
+                    if (container.data("kendoTooltip")) {
+                        container.kendoTooltip("destroy");
+                    }
+
+                    container.remove();
+                }
+            });
+
+            function triggerEvent(element, type, info) {
+                element.trigger($.Event(type, info));
+
+                return element;
+            };
+
+            test("tooltip role is assign to the popup container", function() {
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show(container);
+
+                equal(tooltip.popup.element.attr("role"), "tooltip");
+            });
+
+            test("described by attribute is added to the element", function() {
+                container.attr("id", "foo");
+
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show(container);
+
+                equal(container.attr("aria-describedby"), "foo_tt_active");
+            });
+
+            test("id attribute is added to the popup", function() {
+                container.attr("id", "foo");
+
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show(container);
+
+                equal(tooltip.popup.element.attr("id"), "foo_tt_active");
+            });
+
+            test("id attribute is removed from the popup on hide", function() {
+                container.attr("id", "foo");
+
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show(container);
+                tooltip.hide();
+
+                ok(!tooltip.popup.element.filter("[id]").length);
+            });
+
+            test("described by attribute is not added if element has no id", function() {
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show(container);
+
+                ok(!container.filter("[aria-describedby]").length);
+            });
+
+            test("element id for the described by attribute is used if set", function() {
+                container.append($('<span id="first"/><span id="second"/>'));
+
+                var tooltip = new Tooltip(container, {
+                    filter: "span"
+                }),
+                first = container.find("span:first");
+
+                tooltip.show(first);
+
+                equal(first.attr("aria-describedby"), "first_tt_active");
+            });
+
+            test("popup hide removes described by attribute", function() {
+                container.attr("id", "foo");
+                var tooltip = new Tooltip(container, { });
+
+                tooltip.show(container);
+                tooltip.hide();
+                ok(!container.filter("[aria-describedby]").length);
+            });
+
+
+        </script>
+    </body>
+</html>

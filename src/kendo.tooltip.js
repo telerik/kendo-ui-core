@@ -15,12 +15,14 @@ kendo_module({
         extend = $.extend,
         proxy = $.proxy,
         isLocalUrl = kendo.isLocalUrl,
+        ARIAIDSUFFIX = "_tt_active",
+        DESCRIBEDBY = "aria-describedby",
         SHOW = "show",
         HIDE = "hide",
         ERROR = "error",
         CONTENTLOAD = "contentLoad",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div class="k-widget k-tooltip" style="margin-left:0.5em">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#">close</a></div> #}#' +
+        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip" style="margin-left:0.5em">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#">close</a></div> #}#' +
                 '<div class="k-tooltip-content"></div>' +
                 '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
             '</div>',
@@ -256,6 +258,8 @@ kendo_module({
 
             that.popup.one("deactivate", function() {
                 restoreTitle(target);
+                target.removeAttr(DESCRIBEDBY);
+                this.element.removeAttr("id");
             });
 
             that.popup.open();
@@ -272,6 +276,14 @@ kendo_module({
 
             that.popup = new Popup(wrapper, extend({
                 activate: function() {
+                    var anchor = this.options.anchor,
+                        ariaId = anchor[0].id || that.element[0].id;
+
+                    if (ariaId) {
+                        anchor.attr(DESCRIBEDBY, ariaId + ARIAIDSUFFIX);
+                        this.element.attr("id", ariaId + ARIAIDSUFFIX);
+                    }
+
                     if (options.callout) {
                         that._positionCallout();
                     }
