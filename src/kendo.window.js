@@ -611,8 +611,9 @@ kendo_module({
             that.element.find("> .k-overlay").remove();
 
             if (!$(activeElement).is(winElement) &&
-                !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon") &&
+                !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input") &&
                 (!winElement.find(activeElement).length || !winElement.find(target).length)) {
+                    alert("focus");
                 winElement.focus();
 
                 var scrollTop = $(window).scrollTop(),
