@@ -2549,7 +2549,7 @@ function pad(number, digits, end) {
         },
 
         container: function() {
-            var element = this.element.closest(kendo.roleSelector("view layout"));
+            var element = this.element.closest(kendo.roleSelector("view layout modalview"));
             return kendo.widgetInstance(element, kendo.mobile.ui) || ContainerNullObject;
         }
     });
