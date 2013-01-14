@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StockDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="StockDataModelStoreContainer">
+          <EntitySet Name="Intraday" EntityType="StockDataModel.Store.Intraday" store:Type="Tables" store:Schema="dbo" store:Name="Intraday">
+            <DefiningQuery>SELECT 
+      [Intraday].[ID] AS [ID], 
+      [Intraday].[Symbol] AS [Symbol], 
+      [Intraday].[Date] AS [Date], 
+      [Intraday].[Open] AS [Open], 
+      [Intraday].[High] AS [High], 
+      [Intraday].[Low] AS [Low], 
+      [Intraday].[Close] AS [Close], 
+      [Intraday].[Volume] AS [Volume]
+      FROM [dbo].[Intraday] AS [Intraday]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\WORK\KENDO\DEMOS\KENDOCRUDSERVICE\KENDOCRUDSERVICE\APP_DATA\STOCKDATA.MDF.dbo.Intraday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Intraday">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Symbol" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Open" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="Close" />
+            <PropertyRef Name="Volume" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Open" Type="decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="High" Type="decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Low" Type="decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Close" Type="decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Volume" Type="bigint" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StockDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="StockDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Intraday" EntityType="StockDataModel.Intraday" />
+        </EntityContainer>
+        <EntityType Name="Intraday">
+          <Key>
+            <PropertyRef Name="Symbol" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Open" />
+            <PropertyRef Name="High" />
+            <PropertyRef Name="Low" />
+            <PropertyRef Name="Close" />
+            <PropertyRef Name="Volume" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Open" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Close" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Volume" Type="Int64" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StockDataModelStoreContainer" CdmEntityContainer="StockDataEntities">
+          <EntitySetMapping Name="Intraday">
+            <EntityTypeMapping TypeName="StockDataModel.Intraday">
+              <MappingFragment StoreEntitySet="Intraday">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="Close" ColumnName="Close" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="StockDataEf">
+        <EntityTypeShape EntityType="StockDataModel.Intraday" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

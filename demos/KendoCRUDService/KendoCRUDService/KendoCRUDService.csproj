@@ -98,10 +98,16 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StockDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Common\JsonpResult.cs" />
+    <Compile Include="Models\EF\StockDataEf.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockDataEf.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\EmployeeRepository.cs" />
     <Compile Include="Models\EF\NorthwindEf.Designer.cs">
@@ -123,19 +129,29 @@
     </Compile>
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductRepository.cs" />
+    <Compile Include="Models\StockData\BaseUnit.cs" />
+    <Compile Include="Models\StockData\DataFilter.cs" />
+    <Compile Include="Models\StockData\StockDataPoint.cs" />
     <Compile Include="Northwind.svc.cs">
       <DependentUpon>Northwind.svc</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\DBCreate.StockData.sql" />
     <Content Include="App_Data\Northwind.mdf" />
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\StockData.mdf" />
+    <Content Include="App_Data\StockData_log.ldf">
+      <DependentUpon>StockData.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Northwind.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -150,6 +166,10 @@
     <EntityDeploy Include="Models\EF\NorthwindEf.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NorthwindEf.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Models\EF\StockDataEf.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StockDataEf.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -184,7 +204,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>42471</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/KendoCRUDService</IISUrl>
+          <IISUrl>http://localhost:8080/iis-kendo-crud</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
