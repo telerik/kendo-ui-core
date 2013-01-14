@@ -46,7 +46,8 @@
 .km-wp8-dark .km-actionsheet-wrapper,
 .km-wp8-dark .km-popup .k-list-container,
 .km-wp8-dark .km-modalview,
-.km-wp8-dark .km-popup-wrapper
+.km-wp8-dark .km-popup-wrapper,
+.km-wp8-dark .km-footer
 {
 	background-color: @second-background-dark;
 }
@@ -54,7 +55,8 @@
 .km-wp8-light .km-actionsheet-wrapper,
 .km-wp8-light .km-popup .k-list-container,
 .km-wp8-light .km-modalview,
-.km-wp8-light .km-popup-wrapper
+.km-wp8-light .km-popup-wrapper,
+.km-wp8-light .km-footer
 {
 	background-color: @second-background-light;
 }
@@ -140,5 +142,43 @@
 {
 	background: @accent-background;
 	width: 97%;
-	margin-left: -58px;
+	margin-left: -75px;
+}
+
+.km-wp8 .km-tabstrip
+{
+	padding:.4em 0;
+}
+
+.km-wp8 .km-tabstrip .km-button
+{
+	border-width: 0;
+	margin: 0 1.2em;
+	background-color: transparent;
+	font-size: 10px;
+}
+
+.km-wp8 .km-tabstrip .km-button.km-state-active .km-icon
+{
+	background-color: @accent-background;
+	color: @accent-text;
+}
+
+.km-wp8-dark .km-tabstrip .km-button.km-state-active .km-icon
+{
+	border-color: @main-text-dark;
+}
+
+.km-wp8-light .km-tabstrip .km-button.km-state-active .km-icon
+{
+	border-color: @main-text-light;
+}
+
+.km-wp8 .km-tabstrip .km-icon
+{
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 24px;
+	margin-bottom: .2em;
+	padding: .1em;
 }
