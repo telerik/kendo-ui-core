@@ -23,7 +23,7 @@
                                     dataType: "jsonp"
                                 },
                                 parameterMap: function(data) {
-                                    return { baseUnit: data.baseUnit, filter: JSON.stringify(data.filter) }
+                                    return JSON.stringify(data);
                                 }
                             },
                             schema: stockDataSchema
