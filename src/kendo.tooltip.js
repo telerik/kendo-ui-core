@@ -153,7 +153,7 @@ kendo_module({
         _showOn: function(e) {
             var that = this;
 
-            if (that.options.showOn === "click") {
+            if (that.options.showOn && that.options.showOn.match(/click|focus/)) {
                 that.show($(e.currentTarget));
             } else {
                 clearTimeout(that.timeout);
