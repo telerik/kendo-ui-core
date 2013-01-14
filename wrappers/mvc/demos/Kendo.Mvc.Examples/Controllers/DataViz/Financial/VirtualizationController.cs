@@ -11,6 +11,9 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         private readonly DateTime MIN_DATE = new DateTime(1990, 1, 1);
         private readonly BaseUnit DEFAULT_UNIT = BaseUnit.Months;
+        private const int DAYS_PER_WEEK = 7;
+        private const int DAYS_PER_MONTH = 31;
+        private const int TARGET_RESULT_SIZE = 50;
 
         public ActionResult Virtualization()
         {
@@ -18,25 +21,22 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [HttpPost]
-        public ActionResult _StockData([DataSourceRequest] DataSourceRequest request, BaseUnit? baseUnit)
+        public ActionResult _StockData([DataSourceRequest] DataSourceRequest request)
         {
             var dateFrom = MIN_DATE;
             var dateTo = DateTime.Now;
+            var baseUnit = DEFAULT_UNIT;
             IEnumerable<StockDataPoint> result;
 
             using (var db = new StockDataEntities())
             {
-                if (!baseUnit.HasValue)
-                {
-                    baseUnit = DEFAULT_UNIT;
-                }
-
                 if (request.Filters != null)
                 {
                     var composite = request.Filters[0] as CompositeFilterDescriptor;
                     if (composite != null) {
                         dateFrom = (DateTime)((FilterDescriptor)composite.FilterDescriptors[0]).ConvertedValue;
                         dateTo = (DateTime)((FilterDescriptor)composite.FilterDescriptors[1]).ConvertedValue;
+                        baseUnit = GetBaseUnit(dateFrom, dateTo);
                     }
                 }
 
@@ -69,6 +69,37 @@ namespace Kendo.Mvc.Examples.Controllers
             }
 
             return Json(result);
+        }
+
+        private BaseUnit GetBaseUnit(DateTime dateFrom, DateTime dateTo)
+        {
+            var diff = dateTo.Subtract(dateFrom);
+            var days = diff.TotalDays;
+            var result = BaseUnit.Years;
+
+            // Try to maintain groups count below TARGET_RESULT_SIZE
+            if (diff.TotalMinutes < TARGET_RESULT_SIZE)
+            {
+                result = BaseUnit.Minutes;
+            }
+            else if (diff.TotalHours < TARGET_RESULT_SIZE)
+            {
+                result = BaseUnit.Hours;
+            }
+            else if (days < TARGET_RESULT_SIZE)
+            {
+                result = BaseUnit.Days;
+            }
+            else if (days / DAYS_PER_WEEK < TARGET_RESULT_SIZE)
+            {
+                result = BaseUnit.Weeks;
+            }
+            else if (days / DAYS_PER_MONTH < TARGET_RESULT_SIZE)
+            {
+                result = BaseUnit.Months;
+            }
+
+            return result;
         }
     }
 }
