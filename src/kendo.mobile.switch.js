@@ -35,7 +35,7 @@ kendo_module({
             that._handle();
 
             that.constrain = 100;
-            that.that.snapPoint = 40;
+            that.snapPoint = 40;
             that.container().bind("show", $.proxy(this, "viewShow"));
 
             element = that.element[0];
