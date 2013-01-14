@@ -157,8 +157,9 @@ THEME_BUILDER_ROOT = 'http://themebuilder.kendoui.com'
 
 PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
             .exclude('**/*.cs')
-            .exclude('**/Web.config')
+            .exclude('demos/mvc/Web.config')
             .exclude('**/obj/**/*')
+            .include('demos/mvc/bin/Kendo.dll')
 
 MVC_RAZOR_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.cshtml']
                     .exclude('**/Shared/**/*')
