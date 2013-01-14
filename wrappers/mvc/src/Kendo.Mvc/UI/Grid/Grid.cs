@@ -959,7 +959,7 @@ namespace Kendo.Mvc.UI
                 popup.Name = Name + "PopUp";
             }
 
-            if (true)
+            if (popup.Title == null || popup.Title == "")
             {
                 popup.Title = CurrentItemMode == GridItemMode.Edit ? Messages.Grid_Edit : Messages.Grid_Create;
             }
