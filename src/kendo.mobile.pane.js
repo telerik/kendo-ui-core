@@ -139,6 +139,7 @@
 
             if (rel.match(WIDGET_RELS)) {
                 kendo.widgetInstance($(href), ui).openFor(link);
+                e.stopPropagation();
             } else {
                 if (target === "_top") {
                     pane = mobile.application.pane;

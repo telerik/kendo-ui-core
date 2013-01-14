@@ -23,6 +23,7 @@
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
 
         <style>
         </style>
@@ -37,6 +38,11 @@
                 <li>Foo</li>
                 <li>Bar</li>
             </ul>
+            <div data-role="footer">
+                <ul data-role="tabstrip">
+                    <li><a data-rel="actionsheet" href="#foo">Open Foo</a></li>
+                </ul>
+            </div>
         </div>
         <script>
             $(function() {
