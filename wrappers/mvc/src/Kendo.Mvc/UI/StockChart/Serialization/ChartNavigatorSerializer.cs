@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
+    using Kendo.Mvc.Extensions;
 
     internal class ChartNavigatorSerializer<T> : IChartSerializer where T : class
     {
@@ -42,6 +43,17 @@ namespace Kendo.Mvc.UI
             if (navigator.Visible.HasValue)
             {
                 result.Add("visible", navigator.Visible);
+            }
+
+            var dataSource = navigator.DataSource;
+            if (!string.IsNullOrEmpty(dataSource.Transport.Read.Url))
+            {
+                if (!dataSource.Transport.Read.Type.HasValue())
+                {
+                    dataSource.Transport.Read.Type = "POST";
+                }
+
+                result.Add("dataSource", dataSource.ToJson());
             }
 
             return result;

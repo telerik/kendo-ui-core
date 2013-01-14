@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
         public StockChart(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, urlGenerator)
         {
-            Navigator = new ChartNavigator<T>();
+            Navigator = new ChartNavigator<T>(viewContext, urlGenerator);
         }
 
         /// <summary>

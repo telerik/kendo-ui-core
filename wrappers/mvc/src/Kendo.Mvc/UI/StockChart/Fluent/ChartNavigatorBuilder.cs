@@ -110,5 +110,30 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Data Source configuration for the Navigator.
+        /// When configured, the Navigator will filter the main StockChart data source to the selected range.
+        /// </summary>
+        /// <param name="configurator">Use the configurator to set different data binding options.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart()
+        ///             .Name("Chart")
+        ///             .Navigator(navi => navi
+        ///             .DataSource(ds =>
+        ///                 {
+        ///                     ds.Ajax().Read(r => r.Action("SalesData", "Chart"));
+        ///                 })
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNavigatorBuilder<T> DataSource(Action<ReadOnlyAjaxDataSourceBuilder<T>> configurator)
+        {
+            configurator(new ReadOnlyAjaxDataSourceBuilder<T>(navigator.DataSource, navigator.ViewContext, navigator.UrlGenerator));
+
+            return this;
+        }
     }
 }
