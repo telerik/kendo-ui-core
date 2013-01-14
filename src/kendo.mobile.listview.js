@@ -22,6 +22,7 @@ kendo_module({
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
+        SEARCH_TEMPLATE = kendo.template('<form><div><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear">Clear</a></div></form>'),
 
         LAST_PAGE_REACHED = "lastPageReached",
 
@@ -664,35 +665,48 @@ kendo_module({
             var that = this,
                 filterable = that.options.filterable,
                 events = "change",
-                form,
                 input;
 
             if (filterable) {
-                input = $('<input type="search"/>')
-                    .attr("placeholder", filterable.placeholder || "Search...")
-                    .wrap("<form />");
 
-                form = input.parent().on("submit", function(e) {
-                    e.preventDefault();
-                });
-
-                that.element.before(form);
+                that.element.before(SEARCH_TEMPLATE({
+                    placeholder: filterable.placeholder || "Search..."
+                }));
 
                 if (filterable.autoFilter !== false) {
                     events += " keyup";
                 }
 
-                input.on(events, function() {
-                    var expr = {
-                        field: filterable.field,
-                        operator: filterable.operator || "startsWith",
-                        ignoreCase: filterable.ignoreCase,
-                        value: input.val()
-                    };
+                that.searchInput = that.wrapper.find("input[type=search]")
+                    .closest("form").on("submit", function(e) {
+                        e.preventDefault();
+                    })
+                    .end()
+                    .on(events, proxy(that._search, that));
 
-                    that.dataSource.filter(expr);
-                });
+                that.wrapper.find(".km-filter-reset").on("click", proxy(that._clearFilter, that));
             }
+        },
+
+        _search: function() {
+            var that = this,
+                filterable = that.options.filterable,
+                expr = {
+                    field: filterable.field,
+                    operator: filterable.operator || "startsWith",
+                    ignoreCase: filterable.ignoreCase,
+                    value: that.searchInput.val()
+                };
+
+            that.dataSource.filter(expr);
+        },
+
+        _clearFilter: function(e) {
+            this.searchInput.val("");
+
+            this.dataSource.filter(null);
+
+            e.preventDefault();
         }
     });
 

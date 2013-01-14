@@ -51,18 +51,18 @@
                     filterable: true
                 });
 
-                equal(listview.wrapper.children().length, 2);
                 ok(listview.wrapper.children().first().is("form"));
-                equal(listview.wrapper.find(">form>[type=search]").length, 1);
+                equal(listview.wrapper.find(">form [type=search]").length, 1);
             });
 
-            test("filterable does not creates search input if disabled", function() {
+            test("disabled filtering does not create search form", function() {
                 var listview = new ListView($("<ul/>"), {});
 
                 equal(listview.wrapper.children()[0], listview.element[0]);
+                equal(listview.wrapper.find(">form").length, 0);
             });
 
-            test("filterable input default placeholder", function() {
+            test("filterable input default placeholder text", function() {
                 var listview = new ListView($("<ul/>"), {
                     filterable: true
                 });
@@ -84,7 +84,7 @@
                 equal(input.attr("placeholder"), "foo");
             });
 
-            test("dataSource filter is called on keyup", function() {
+            test("dataSource is filtered on keyup", function() {
                 var listview = new ListView($("<ul/>"), {
                         filterable: true
                     }),
@@ -98,7 +98,7 @@
                 ok(filter.args("filter", 0)[0]);
             });
 
-            test("dataSource filter is called on change", function() {
+            test("dataSource is filtered on change", function() {
                 var listview = new ListView($("<ul/>"), {
                         filterable: true
                     }),
@@ -112,7 +112,7 @@
                 ok(filter.args("filter", 0)[0]);
             });
 
-            test("default filter expression is build on change", function() {
+            test("default filter expression is build", function() {
                 var listview = new ListView($("<ul/>"), {
                         filterable: true
                     }),
@@ -128,7 +128,7 @@
                 equal(expr.value, "foo");
             });
 
-            test("field is used for the expression", function() {
+            test("field option is used for the filter rexpression", function() {
                 var listview = new ListView($("<ul/>"), {
                         filterable: {
                             field: "field"
@@ -144,7 +144,7 @@
                 equal(descriptor.field, "field");
             });
 
-            test("operator is used for the expression", function() {
+            test("operator option is used for the filter expression", function() {
                 var listview = new ListView($("<ul/>"), {
                         filterable: {
                             operator: "eq"
@@ -160,7 +160,7 @@
                 equal(descriptor.operator, "eq");
             });
 
-            test("ignoreCase is used for the expression", function() {
+            test("ignoreCase option is used for the filter expression", function() {
                 var listview = new ListView($("<ul/>"), {
                         filterable: {
                             ignoreCase: false
@@ -191,6 +191,35 @@
                 equal(filter.calls("filter"), 0);
             });
 
+            test("clear button resets the filter", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: true,
+                        dataSource: {
+                            data: ["foo", "bar"]
+                        }
+                    });
+
+                listview.dataSource.filter({ operator: "eq", value: "foo" });
+                listview.wrapper.find(".km-filter-reset").click();
+
+                equal(listview.dataSource.filter(), undefined);
+                equal(listview.element.find("li").length, 2);
+            });
+
+            test("clear button clears search input text", function() {
+                var listview = new ListView($("<ul/>"), {
+                        filterable: true,
+                        dataSource: {
+                            data: ["foo", "bar"]
+                        }
+                    }),
+                    input = listview.wrapper.find("input");
+
+                input.val("foo");
+                listview.wrapper.find(".km-filter-reset").click();
+
+                equal(input.val(), "");
+            });
         </script>
     </body>
 </html>
