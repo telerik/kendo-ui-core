@@ -53,6 +53,10 @@ public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBound
         return "stockChart-navigator";
     }
 
+    public void setHint(NavigatorHintTag value) {
+        setProperty("hint", value);
+    }
+
     public void setSeries(NavigatorSeriesTag value) {
 
         setProperty("series", value.series());
@@ -82,6 +86,14 @@ public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBound
 
     public void setDateField(String value) {
         setProperty("dateField", value);
+    }
+
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
+    }
+
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
     }
 
 //<< Attributes
