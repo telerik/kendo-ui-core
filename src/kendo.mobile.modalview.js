@@ -74,8 +74,10 @@ kendo_module({
         },
 
         open: function(target) {
-            this.target = $(target);
-            this.shim.show();
+            var that = this;
+            that.target = $(target);
+            that.shim.show();
+            that.trigger("show", { view: that });
         },
 
         // Interface implementation, called from the pane click handlers

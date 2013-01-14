@@ -25,7 +25,7 @@ kendo_module({
 
     var Switch = Widget.extend({
         init: function(element, options) {
-            var that = this, width, checked, handleWidth;
+            var that = this, checked;
 
             Widget.fn.init.call(that, element, options);
 
@@ -34,23 +34,37 @@ kendo_module({
             that._background();
             that._handle();
 
+            that.constrain = 100;
+            that.that.snapPoint = 40;
+            that.container().bind("show", $.proxy(this, "viewShow"));
+
             element = that.element[0];
             element.type = "checkbox";
-
-            width = that.wrapper.width();
-            handleWidth = that.handle.outerWidth(true);
-
-            that.constrain = width - handleWidth;
-            that.snapPoint = width / 2 - handleWidth / 2;
             that._animateBackground = true;
 
             checked = that.options.checked;
+
             if (checked === null) {
                 checked = element.checked;
             }
 
             that.check(checked);
             kendo.notify(that, kendo.mobile.ui);
+        },
+
+        viewShow: function() {
+            var that = this, width, handleWidth;
+
+            width = that.wrapper.width();
+            handleWidth = that.handle.outerWidth(true);
+
+            that.constrain = width - handleWidth;
+            that.snapPoint = width / 2 - handleWidth / 2;
+
+            that.origin = parseInt(that.background.css(MARGINLEFT), 10);
+            that.background.data("origin", that.origin);
+
+            that.check(that.element[0].checked);
         },
 
         events: [
@@ -163,8 +177,6 @@ kendo_module({
                             .appendTo(that.wrapper)
                             .children(".km-switch-background");
 
-            that.origin = parseInt(background.css(MARGINLEFT), 10);
-            background.data("origin", that.origin);
             that.background = background;
         },
 
