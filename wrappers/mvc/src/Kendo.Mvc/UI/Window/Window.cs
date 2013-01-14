@@ -62,7 +62,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public string Title
+        public object Title
         {
             get;
             set;
