@@ -5,6 +5,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
     using Mvc.Tests;
     using Xunit;
     using Kendo.Mvc.UI.Tests;
+    using System.Web.Mvc;
 
     public class GridEditingSettingsBuilderTests
     {
@@ -14,6 +15,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         public GridEditingSettingsBuilderTests()
         {
             settings = new GridEditableSettings<Customer>(new Mock<IGrid>().Object);
+            settings.PopUp = WindowTestHelper.CreateWindow(null);
             builder = new GridEditingSettingsBuilder<Customer>(settings);
         }
 

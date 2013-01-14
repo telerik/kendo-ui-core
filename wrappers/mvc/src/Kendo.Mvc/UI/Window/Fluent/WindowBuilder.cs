@@ -16,6 +16,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Allows title to be shown / hidden
+        /// </summary>
+        /// <param name="show">Whether the window title will be visible</param>
+        public WindowBuilder Title(bool show)
+        {
+            Component.Title = show;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets title, which appears in the header of the window.
         /// </summary>
         public WindowBuilder Title(string title)
