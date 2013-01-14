@@ -52,11 +52,6 @@ namespace Kendo.Mvc.UI
             return Add(EffectsList.Zoom, direction.ToString().ToLower());
         }
 
-        public EffectsBuilder Slide(SlideDirection direction)
-        {
-            return Add(EffectsList.Slide, direction.ToString().ToLower());
-        }
-
         public EffectsBuilder SlideIn(SlideDirection direction)
         {
             return Add(EffectsList.SlideIn, direction.ToString().ToLower());
