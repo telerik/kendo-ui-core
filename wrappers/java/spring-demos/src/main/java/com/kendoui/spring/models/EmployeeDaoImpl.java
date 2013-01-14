@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,5 +56,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<DetailedEmployee> getDetaliedList() {
         return sessionFactory.getCurrentSession().createCriteria(DetailedEmployee.class)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<String> getCites() {        
+        return sessionFactory.getCurrentSession().createCriteria(Employee.class)
+                .setProjection(Projections.distinct(Projections.property("city"))).list();
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override    
+    public List<String> getTitles() {
+        return sessionFactory.getCurrentSession().createCriteria(Employee.class)
+                .setProjection(Projections.distinct(Projections.property("title"))).list();
     }
 }

@@ -12,4 +12,8 @@ public interface EmployeeDao {
     List<DetailedEmployee> getDetailedListByEmployeeId(Integer employeeId);
 
     List<DetailedEmployee> getDetaliedList();
+    
+    List<String> getCites();
+    
+    List<String> getTitles();
 }
