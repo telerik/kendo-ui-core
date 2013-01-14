@@ -9901,9 +9901,51 @@ It is used as a default field for the navigator axis.The data item field value m
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
+        <attribute>
+            <description>The visibility of the navigator.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
+    <tag>
+        <description>Default options for the navigator hint.</description>
+        <name>stockChart-navigator-hint</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorHintTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The format of the hint.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The hint template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The visibility of the hint.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The hint template.
+Template variables:</description>
+        <name>stockChart-navigator-hint-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorHintTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Specifies the initially selected range.The full range of values is shown if no range is specified.</description>
         <name>stockChart-navigator-select</name>
