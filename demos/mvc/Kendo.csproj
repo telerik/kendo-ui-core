@@ -660,6 +660,9 @@
     <Content Include="Views\Shared\ThemeBuilderLayout.cshtml" />
     <Content Include="Views\dataviz\bar-charts\gap-spacing.cshtml" />
     <Content Include="Views\dataviz\bar-charts\plotbands.cshtml" />
+    <Content Include="Views\dataviz\financial\index.cshtml" />
+    <Content Include="Views\dataviz\financial\panes.cshtml" />
+    <Content Include="Views\dataviz\financial\virtualization.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

@@ -1,0 +1,76 @@
+
+        <div id="example" class="k-content">
+            <div id="stock-chart"></div>
+            <script>
+                var stockDataSchema = { 
+                    model: {
+                        fields: {
+                            Date: {
+                                type: "date"
+                            }
+                        }
+                    }
+                };
+
+                function createChart() {
+                    $("#stock-chart").kendoStockChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            serverFiltering: true,
+                            transport: {
+                                read: {
+                                    url: "http://demos.kendoui.com/service/StockData",                                    
+                                    dataType: "jsonp"
+                                },
+                                parameterMap: function(data) {
+                                    return { baseUnit: data.baseUnit, filter: JSON.stringify(data.filter) }
+                                }
+                            },
+                            schema: stockDataSchema
+                        },
+                        title: {
+                            text: "The Boeing Company (NYSE:BA)"
+                        },
+                        dateField: "Date",
+                        series: [{
+                            type: "candlestick",
+                            openField: "Open",
+                            highField: "High",
+                            lowField: "Low",
+                            closeField: "Close"
+                        }],
+                        navigator: {
+                            dataSource: {
+                                transport: {
+                                    read: {
+                                        url: "http://demos.kendoui.com/service/StockData",                                    
+                                        dataType: "jsonp"
+                                    }
+                                },
+                                schema: stockDataSchema
+                            },
+                            series: {
+                                type: "area",
+                                field: "High"
+                            },
+                            select: {
+                                from: "2009/02/05",
+                                to: "2011/10/07"
+                            }
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+        </div>

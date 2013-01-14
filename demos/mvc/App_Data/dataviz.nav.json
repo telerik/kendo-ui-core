@@ -353,7 +353,10 @@
             }, {
                 "text": "Multiple panes",
                 "url": "financial/panes.html"
-            }],
+            }, {
+				"text": "Virtualization",
+				"url": "financial/virtualization.html"
+			}],
             "name": "stock-chart"
         }
     ],
