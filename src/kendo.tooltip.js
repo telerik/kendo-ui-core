@@ -131,7 +131,17 @@ kendo_module({
             callout: true,
             position: "bottom",
             showOn: "mouseenter",
-            autoHide: true
+            autoHide: true,
+            animation: {
+                open: {
+                    effects: "fade:in",
+                    duration: 0
+                },
+                close: {
+                    effects: "fade:out",
+                    duration: 100
+                }
+            }
         },
 
         events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
@@ -270,7 +280,8 @@ kendo_module({
                 },
                 close: function() {
                     that.trigger(HIDE);
-                }
+                },
+                animation: options.animation
             }, POSITIONS[options.position]));
 
             wrapper.css({

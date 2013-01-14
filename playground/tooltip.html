@@ -8,7 +8,7 @@
         <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
-        <!--script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script-->
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
         <style>
@@ -47,6 +47,16 @@
                 $("#ajax div").kendoTooltip({
                     content: {
                         url: "http://en.wikipedia.org/wiki/Red_Square"
+                    },
+                    animation: {
+                       close: {
+                            effects: "fade:out",
+                            duration: 400
+                        },
+                        open: {
+                            effects: "fade:in",
+                            duration: 600
+                        }
                     },
                     position: "center",
                     showOn: "click",

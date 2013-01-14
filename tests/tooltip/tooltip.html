@@ -441,6 +441,19 @@
 
                 ok(!tooltip.popup.visible());
             });
+
+            test("animation options are passed to the popup", function() {
+                var tooltip = new Tooltip(container, {
+                    animation: {
+                        open: {
+                            effects: "foo"
+                        }
+                    }
+                });
+                tooltip.show(container);
+
+                equal(tooltip.popup.options.animation.open.effects, "foo");
+            });
         </script>
     </body>
 </html>
