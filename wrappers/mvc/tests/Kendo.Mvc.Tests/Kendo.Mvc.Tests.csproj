@@ -171,6 +171,10 @@
     <Compile Include="UI\ListView\ListViewWorkingConditionsTests.cs" />
     <Compile Include="UI\ListView\ListViewTestHelper.cs" />
     <Compile Include="UI\ListView\ListViewBuilderTests.cs" />
+    <Compile Include="UI\StockChart\ChartNavigatorBuilderTests.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializerTests.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartNavigatorHintSerializerTests.cs" />
+    <Compile Include="UI\StockChart\Serialization\ChartDateSelectionSerializerTests.cs" />
     <Compile Include="UI\Upload\UploadMessagesBuilderTests.cs" />
     <Compile Include="UI\WidgetBaseExtensionsTests.cs" />
     <Compile Include="UI\DataSource\DataSourceTests.cs" />

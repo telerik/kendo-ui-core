@@ -9,6 +9,7 @@ DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 puts %Q{
     CREATE TABLE Intraday (
+        [ID] INT IDENTITY(1,1) NOT NULL,
         [Symbol] VARCHAR(10) NOT NULL,
         [Date] DATETIME NOT NULL,
         [Open] DECIMAL(9,3) NOT NULL,

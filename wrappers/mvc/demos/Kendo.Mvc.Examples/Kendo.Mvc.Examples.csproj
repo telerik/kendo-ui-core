@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -90,6 +91,7 @@
     <Compile Include="Controllers\DataViz\Donut_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Financial\VirtualizationController.cs" />
     <Compile Include="Controllers\DataViz\Financial\PanesController.cs" />
     <Compile Include="Controllers\DataViz\Financial\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Date_AxisController.cs" />
@@ -306,18 +308,25 @@
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
+    <Compile Include="Models\BaseUnit.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />
     <Compile Include="Models\ClientEmployeeViewModel.cs" />
     <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
     <Compile Include="Models\CrimeData.cs" />
+    <Compile Include="Models\DataFilter.cs" />
     <Compile Include="Models\JobGrowth.cs" />
     <Compile Include="Models\ScreenResolution.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
     <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
     <Compile Include="Models\SessionClientOrderRepository.cs" />
+    <Compile Include="Models\StockData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockData.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\StockDataPoint.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
@@ -346,6 +355,10 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\StockData.mdf" />
+    <Content Include="App_Data\StockData_log.ldf">
+      <DependentUpon>StockData.mdf</DependentUpon>
+    </Content>
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
@@ -373,6 +386,7 @@
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\customization\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\financial\virtualization.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\panes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
@@ -491,6 +505,7 @@
     <Content Include="Areas\aspx\Views\web\panelbar\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
+    <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
@@ -512,6 +527,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\StockData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StockData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
