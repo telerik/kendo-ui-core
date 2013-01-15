@@ -1294,6 +1294,7 @@ kendo_module({
                 tmpl,
                 updateText,
                 cancelText,
+                tempCommand,
                 attr,
                 editable = that.options.editable,
                 template = editable.template,
@@ -1310,7 +1311,10 @@ kendo_module({
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];
                     if (column.command) {
-                        command = getCommand(column.command, "edit");
+                        tempCommand = getCommand(column.command, "edit");
+                        if (tempCommand) {
+                            command = tempCommand;
+                        }
                     }
                 }
             } else {
@@ -1335,7 +1339,10 @@ kendo_module({
                             html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                         }
                     } else if (column.command) {
-                        command = getCommand(column.command, "edit");
+                        tempCommand = getCommand(column.command, "edit");
+                        if (tempCommand) {
+                            command = tempCommand;
+                        }
                     }
                 }
             }
