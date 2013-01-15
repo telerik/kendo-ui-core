@@ -422,6 +422,12 @@ var Clipboard = Class.extend({
             var html, args = { html: "" };
 
             selectRange(range);
+
+            // iOS5 will substitute the paste container with its own element
+            if (!clipboardNode.parentNode) {
+                clipboardNode = editor.body.lastChild;
+            }
+
             dom.remove(clipboardNode);
 
             if (clipboardNode.lastChild && dom.is(clipboardNode.lastChild, 'br')) {
