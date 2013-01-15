@@ -28,7 +28,7 @@ namespace Kendo.Mvc.Examples.Controllers
             var baseUnit = DEFAULT_UNIT;
             IEnumerable<StockDataPoint> result;
 
-            using (var db = new StockDataEntities())
+            using (var db = new StockDataDataContext())
             {
                 if (request.Filters.Count > 0)
                 {
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.Examples.Controllers
                         Volume = g.Sum(s => s.Volume)
                     };
 
-                result = points.ToList();
+                result = points.ToList().OrderBy(g => g.Date);
             }
 
             return Json(result);

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="StockData">
+  <DataContextMoniker Name="/StockDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="e0ff0724-060e-4303-84c1-3e1a296ae5f4" absoluteBounds="4.875, 3.125, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/StockDataDataContext/Intraday" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb174b40-aa3d-4527-916c-912bb0870cc2" absoluteBounds="4.89, 3.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -324,10 +324,10 @@
     <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
     <Compile Include="Models\SessionClientOrderRepository.cs" />
-    <Compile Include="Models\StockData.Designer.cs">
+    <Compile Include="Models\StockData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StockData.edmx</DependentUpon>
+      <DependentUpon>StockData.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\StockDataPoint.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
@@ -531,10 +531,11 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\StockData.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StockData.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <None Include="Models\StockData.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>StockData.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -917,6 +918,11 @@
   <ItemGroup>
     <None Include="Models\Northwind.dbml.layout">
       <DependentUpon>Northwind.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\StockData.dbml.layout">
+      <DependentUpon>StockData.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

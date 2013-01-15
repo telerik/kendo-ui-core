@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="StockData" Class="StockDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\StockData.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="StockDataConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Intraday" Member="Intraday">
+    <Type Name="Intraday">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Symbol" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[Open]" Member="Open" Type="System.Decimal" DbType="Decimal(9,3) NOT NULL" CanBeNull="false" />
+      <Column Name="High" Type="System.Decimal" DbType="Decimal(9,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Low" Type="System.Decimal" DbType="Decimal(9,3) NOT NULL" CanBeNull="false" />
+      <Column Name="[Close]" Member="Close" Type="System.Decimal" DbType="Decimal(9,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
