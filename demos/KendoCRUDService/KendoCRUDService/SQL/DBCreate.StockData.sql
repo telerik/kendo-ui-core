@@ -1,6 +1,6 @@
 
     CREATE TABLE Intraday (
-        [ID] INT IDENTITY(1,1) NOT NULL,
+        [ID] INT IDENTITY(1,1) PRIMARY KEY,
 		[Symbol] VARCHAR(10) NOT NULL,
         [Date] DATETIME NOT NULL,
         [Open] DECIMAL(9,3) NOT NULL,

@@ -114,6 +114,7 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// Create a new Intraday object.
         /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
         /// <param name="symbol">Initial value of the Symbol property.</param>
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="open">Initial value of the Open property.</param>
@@ -121,10 +122,10 @@ namespace KendoCRUDService.Models.EF
         /// <param name="low">Initial value of the Low property.</param>
         /// <param name="close">Initial value of the Close property.</param>
         /// <param name="volume">Initial value of the Volume property.</param>
-        /// <param name="id">Initial value of the ID property.</param>
-        public static Intraday CreateIntraday(global::System.String symbol, global::System.DateTime date, global::System.Decimal open, global::System.Decimal high, global::System.Decimal low, global::System.Decimal close, global::System.Int64 volume, global::System.Int32 id)
+        public static Intraday CreateIntraday(global::System.Int32 id, global::System.String symbol, global::System.DateTime date, global::System.Decimal open, global::System.Decimal high, global::System.Decimal low, global::System.Decimal close, global::System.Int64 volume)
         {
             Intraday intraday = new Intraday();
+            intraday.ID = id;
             intraday.Symbol = symbol;
             intraday.Date = date;
             intraday.Open = open;
@@ -132,202 +133,12 @@ namespace KendoCRUDService.Models.EF
             intraday.Low = low;
             intraday.Close = close;
             intraday.Volume = volume;
-            intraday.ID = id;
             return intraday;
         }
 
         #endregion
 
         #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Symbol
-        {
-            get
-            {
-                return _Symbol;
-            }
-            set
-            {
-                if (_Symbol != value)
-                {
-                    OnSymbolChanging(value);
-                    ReportPropertyChanging("Symbol");
-                    _Symbol = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Symbol");
-                    OnSymbolChanged();
-                }
-            }
-        }
-        private global::System.String _Symbol;
-        partial void OnSymbolChanging(global::System.String value);
-        partial void OnSymbolChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Date
-        {
-            get
-            {
-                return _Date;
-            }
-            set
-            {
-                if (_Date != value)
-                {
-                    OnDateChanging(value);
-                    ReportPropertyChanging("Date");
-                    _Date = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Date");
-                    OnDateChanged();
-                }
-            }
-        }
-        private global::System.DateTime _Date;
-        partial void OnDateChanging(global::System.DateTime value);
-        partial void OnDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Open
-        {
-            get
-            {
-                return _Open;
-            }
-            set
-            {
-                if (_Open != value)
-                {
-                    OnOpenChanging(value);
-                    ReportPropertyChanging("Open");
-                    _Open = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Open");
-                    OnOpenChanged();
-                }
-            }
-        }
-        private global::System.Decimal _Open;
-        partial void OnOpenChanging(global::System.Decimal value);
-        partial void OnOpenChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal High
-        {
-            get
-            {
-                return _High;
-            }
-            set
-            {
-                if (_High != value)
-                {
-                    OnHighChanging(value);
-                    ReportPropertyChanging("High");
-                    _High = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("High");
-                    OnHighChanged();
-                }
-            }
-        }
-        private global::System.Decimal _High;
-        partial void OnHighChanging(global::System.Decimal value);
-        partial void OnHighChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Low
-        {
-            get
-            {
-                return _Low;
-            }
-            set
-            {
-                if (_Low != value)
-                {
-                    OnLowChanging(value);
-                    ReportPropertyChanging("Low");
-                    _Low = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Low");
-                    OnLowChanged();
-                }
-            }
-        }
-        private global::System.Decimal _Low;
-        partial void OnLowChanging(global::System.Decimal value);
-        partial void OnLowChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Close
-        {
-            get
-            {
-                return _Close;
-            }
-            set
-            {
-                if (_Close != value)
-                {
-                    OnCloseChanging(value);
-                    ReportPropertyChanging("Close");
-                    _Close = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Close");
-                    OnCloseChanged();
-                }
-            }
-        }
-        private global::System.Decimal _Close;
-        partial void OnCloseChanging(global::System.Decimal value);
-        partial void OnCloseChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int64 Volume
-        {
-            get
-            {
-                return _Volume;
-            }
-            set
-            {
-                if (_Volume != value)
-                {
-                    OnVolumeChanging(value);
-                    ReportPropertyChanging("Volume");
-                    _Volume = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Volume");
-                    OnVolumeChanged();
-                }
-            }
-        }
-        private global::System.Int64 _Volume;
-        partial void OnVolumeChanging(global::System.Int64 value);
-        partial void OnVolumeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -355,6 +166,174 @@ namespace KendoCRUDService.Models.EF
         private global::System.Int32 _ID;
         partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Symbol
+        {
+            get
+            {
+                return _Symbol;
+            }
+            set
+            {
+                OnSymbolChanging(value);
+                ReportPropertyChanging("Symbol");
+                _Symbol = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Symbol");
+                OnSymbolChanged();
+            }
+        }
+        private global::System.String _Symbol;
+        partial void OnSymbolChanging(global::System.String value);
+        partial void OnSymbolChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Date
+        {
+            get
+            {
+                return _Date;
+            }
+            set
+            {
+                OnDateChanging(value);
+                ReportPropertyChanging("Date");
+                _Date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Date");
+                OnDateChanged();
+            }
+        }
+        private global::System.DateTime _Date;
+        partial void OnDateChanging(global::System.DateTime value);
+        partial void OnDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Open
+        {
+            get
+            {
+                return _Open;
+            }
+            set
+            {
+                OnOpenChanging(value);
+                ReportPropertyChanging("Open");
+                _Open = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Open");
+                OnOpenChanged();
+            }
+        }
+        private global::System.Decimal _Open;
+        partial void OnOpenChanging(global::System.Decimal value);
+        partial void OnOpenChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal High
+        {
+            get
+            {
+                return _High;
+            }
+            set
+            {
+                OnHighChanging(value);
+                ReportPropertyChanging("High");
+                _High = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("High");
+                OnHighChanged();
+            }
+        }
+        private global::System.Decimal _High;
+        partial void OnHighChanging(global::System.Decimal value);
+        partial void OnHighChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Low
+        {
+            get
+            {
+                return _Low;
+            }
+            set
+            {
+                OnLowChanging(value);
+                ReportPropertyChanging("Low");
+                _Low = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Low");
+                OnLowChanged();
+            }
+        }
+        private global::System.Decimal _Low;
+        partial void OnLowChanging(global::System.Decimal value);
+        partial void OnLowChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Close
+        {
+            get
+            {
+                return _Close;
+            }
+            set
+            {
+                OnCloseChanging(value);
+                ReportPropertyChanging("Close");
+                _Close = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Close");
+                OnCloseChanged();
+            }
+        }
+        private global::System.Decimal _Close;
+        partial void OnCloseChanging(global::System.Decimal value);
+        partial void OnCloseChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Volume
+        {
+            get
+            {
+                return _Volume;
+            }
+            set
+            {
+                OnVolumeChanging(value);
+                ReportPropertyChanging("Volume");
+                _Volume = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Volume");
+                OnVolumeChanged();
+            }
+        }
+        private global::System.Int64 _Volume;
+        partial void OnVolumeChanging(global::System.Int64 value);
+        partial void OnVolumeChanged();
 
         #endregion
 
