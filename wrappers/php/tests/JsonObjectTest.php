@@ -11,19 +11,19 @@ class JsonObjectTest extends PHPUnit_Framework_TestCase {
         $this->jsonObject = new JsonObjectTestDouble();
     }
 
-    public function test_toJSON_returns_properties_as_json() {
-        $this->jsonObject->setFoo("foo");
+    public function testToJSONSerializesAllProperties() {
+        $this->jsonObject->setFoo('foo');
 
         $this->assertEquals('{"foo":"foo"}', $this->jsonObject->toJSON());
     }
 
-    public function test_toJSON_returns_only_set_properties() {
+    public function testToJSONSerializesOnlySetProperties() {
         $this->assertEquals('{}', $this->jsonObject->toJSON());
     }
 
-    public function test_toJSON_and_nested_json_objects() {
+    public function testToJSONSerializesNestedJsonObjects() {
         $foo = new JsonObjectTestDouble();
-        $foo->setFoo("foo");
+        $foo->setFoo('foo');
 
         $this->jsonObject->setFoo($foo);
 

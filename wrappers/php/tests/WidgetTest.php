@@ -11,7 +11,7 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
         $this->widget = new WidgetTestDouble('foo');
     }
 
-    public function test_html_returns_tag_name() {
+    public function testHtmlUsesIdAndTagName() {
         $this->assertEquals('<div id="foo"></div>', $this->widget->html());
     }
 
