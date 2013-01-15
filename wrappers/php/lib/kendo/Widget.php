@@ -2,6 +2,7 @@
 
 namespace kendo\ui;
 
+require_once 'html/Element.php';
 require_once 'JsonObject.php';
 
 abstract class Widget extends \kendo\JsonObject{
@@ -13,18 +14,18 @@ abstract class Widget extends \kendo\JsonObject{
 
     abstract function tagName();
 
+    public function createElement() {
+        $element = new \kendo\html\Element($this->tagName());
+
+        $element->attr('id', $this->id);
+
+        return $element;
+    }
+
     public function html() {
-        $html = array();
+        $element = $this->createElement();
 
-        $html[] = '<';
-        $html[] = $this->tagName();
-        $html[] = ' id="';
-        $html[] = $this->id;
-        $html[] = '"></';
-        $html[] = $this->tagName();
-        $html[] = '>';
-
-        return implode($html);
+        return $element->outerHtml();
     }
 }
 
