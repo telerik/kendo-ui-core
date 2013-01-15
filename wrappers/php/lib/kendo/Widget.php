@@ -8,18 +8,32 @@ require_once 'JsonObject.php';
 abstract class Widget extends \kendo\JsonObject{
 
     private $id;
+    private $attributes = array();
 
     function __construct($id) {
         $this->id = $id;
     }
 
+    public function attr($key, $value) {
+        $this->attributes[$key] = $value;
+
+        return $this;
+    }
 
     public function createElement() {
         $element = new \kendo\html\Element($this->tagName());
 
-        $element->attr('id', $this->id);
+        $this->addAttributes($element);
 
         return $element;
+    }
+
+    protected function addAttributes(\kendo\html\Element $element) {
+        $element->attr('id', $this->id);
+
+        foreach ($this->attributes as $key => $value) {
+            $element->attr($key, $value);
+        }
     }
 
     public function html() {

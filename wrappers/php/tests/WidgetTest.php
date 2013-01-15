@@ -30,6 +30,11 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
     public function testRenderReturnsHtmlAndScript() {
         $this->assertEquals('<div id="foo"></div><script>jQuery(function(){jQuery("#foo").kendoFoo({});});</script>', $this->widget->render());
     }
+
+    public function testAttrAppliesHtmlAttributes() {
+        $this->widget->attr('title', 'bar');
+        $this->assertEquals('<div id="foo" title="bar"></div>', $this->widget->html());
+    }
 }
 
 ?>
