@@ -250,6 +250,38 @@
                 equal(container.find("a.k-grid-cancel").text(), "myCancel");
             });
 
+            test("Update and cancel button custom text when after additonal command and template", function() {
+                var grid = setup({
+                    editable: { mode: "popup", template:"<div>#=foo#</div>" },
+                    columns: [
+                        { command: { name: "edit", text: { update: "myUpdate", cancel: "myCancel", edit: "MyEdit" } } },
+                        { command: [ "foo" ] }
+                    ]
+                });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+                equal(container.find("a.k-grid-update").text(), "myUpdate");
+                equal(container.find("a.k-grid-cancel").text(), "myCancel");
+            });
+
+            test("Update and cancel button custom text when after additonal command", function() {
+                var grid = setup({
+                    editable: { mode: "popup" },
+                    columns: [
+                        { command: { name: "edit", text: { update: "myUpdate", cancel: "myCancel", edit: "MyEdit" } } },
+                        { command: [ "foo" ] }
+                    ]
+                });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+                equal(container.find("a.k-grid-update").text(), "myUpdate");
+                equal(container.find("a.k-grid-cancel").text(), "myCancel");
+            });
+
             test("Update and cancel button custom text if template is set", function() {
                 var grid = setup({columns: [ { command: { name: "edit", text: { update: "myUpdate", cancel: "myCancel", edit: "MyEdit" } } } ]});
 

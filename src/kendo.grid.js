@@ -1240,6 +1240,7 @@
                 tmpl,
                 updateText,
                 cancelText,
+                tempCommand,
                 attr,
                 editable = that.options.editable,
                 template = editable.template,
@@ -1256,7 +1257,10 @@
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];
                     if (column.command) {
-                        command = getCommand(column.command, "edit");
+                        tempCommand = getCommand(column.command, "edit");
+                        if (tempCommand) {
+                            command = tempCommand;
+                        }
                     }
                 }
             } else {
@@ -1281,7 +1285,10 @@
                             html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                         }
                     } else if (column.command) {
-                        command = getCommand(column.command, "edit");
+                        tempCommand = getCommand(column.command, "edit");
+                        if (tempCommand) {
+                            command = tempCommand;
+                        }
                     }
                 }
             }
