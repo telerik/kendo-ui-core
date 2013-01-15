@@ -15,3 +15,5 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('<div id="foo"></div>', $this->widget->html());
     }
 }
+
+?>
