@@ -30,7 +30,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
             using (var db = new StockDataEntities())
             {
-                if (request.Filters != null)
+                if (request.Filters.Count > 0)
                 {
                     var composite = request.Filters[0] as CompositeFilterDescriptor;
                     if (composite != null) {
