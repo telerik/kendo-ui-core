@@ -30,7 +30,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             
             IList<Type> controllerTypes = controllerTypeCache.GetControllerTypes(controllerName) ?? new List<Type>();
 
-            Type controllerType = GetControllerByArea(controllerTypes, routeValues);
+            Type controllerType = GetControllerByArea(requestContext, controllerTypes, routeValues);
             
             if (controllerType != null)
             {
@@ -42,13 +42,24 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             return attributes ?? new List<AuthorizeAttribute>();
         }
 
-        private Type GetControllerByArea(IList<Type> controllerTypes, RouteValueDictionary routeValues) 
+        private Type GetControllerByArea(RequestContext requestContext, IList<Type> controllerTypes, RouteValueDictionary routeValues) 
         {
             object area;
+            object namespaces;
+            string[] controllerNamespaces;
 
             if (routeValues != null && routeValues.TryGetValue("Area", out area) && area.ToString().HasValue()) 
             {
                 return controllerTypes.Where(t => t.FullName.Contains("." + area.ToString() + ".")).FirstOrDefault();
+            }
+
+            if (requestContext.RouteData.DataTokens.TryGetValue("Namespaces", out namespaces) && namespaces is string[])
+            {
+                controllerNamespaces = namespaces as string[];
+                if (controllerNamespaces.Length > 0)
+                {
+                    return controllerTypes.Where(t => t.FullName.StartsWith(controllerNamespaces[0])).FirstOrDefault();
+                }
             }
 
             return controllerTypes.FirstOrDefault();
