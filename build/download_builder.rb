@@ -13,7 +13,7 @@ namespace :download_builder do
     def download_builder_prerequisites(path, service_url)
         dist_path = File.join('dist', path)
         tree :to => dist_path,
-            :from => FileList[File.join(BUILDER_SOURCE_PATH, '**/*')].exclude(File.join('**', BUILDER_CONFIG_NAME)),
+            :from => FileList[File.join(BUILDER_SOURCE_PATH, '**/*')].exclude("**/*.erb").exclude(File.join('**', BUILDER_CONFIG_NAME)),
             :root => BUILDER_SOURCE_PATH
 
         assets_path = File.join(dist_path, 'service', 'App_Data', VERSION)
