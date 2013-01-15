@@ -6,13 +6,13 @@ require_once 'html/Element.php';
 require_once 'JsonObject.php';
 
 abstract class Widget extends \kendo\JsonObject{
+
     private $id;
 
     function __construct($id) {
         $this->id = $id;
     }
 
-    abstract function tagName();
 
     public function createElement() {
         $element = new \kendo\html\Element($this->tagName());
@@ -27,6 +27,43 @@ abstract class Widget extends \kendo\JsonObject{
 
         return $element->outerHtml();
     }
+
+    abstract function name();
+
+    public function render() {
+        $output = array();
+
+        $output[] = $this->html();
+        $output[] = '<script>';
+        $output[] = $this->script();
+        $output[] = '</script>';
+
+        return implode($output);
+    }
+
+    public function script($executeOnDomReady = true) {
+        $script = array();
+
+        if ($executeOnDomReady) {
+            $script[] = 'jQuery(function(){';
+        }
+
+        $script[] = 'jQuery("#';
+        $script[] = $this->id;
+        $script[] = '").kendo';
+        $script[] = $this->name();
+        $script[] = '(';
+        $script[] = $this->toJSON();
+        $script[] = ');';
+
+        if ($executeOnDomReady) {
+            $script[] = '});';
+        }
+
+        return implode($script);
+    }
+
+    abstract function tagName();
 }
 
 ?>
