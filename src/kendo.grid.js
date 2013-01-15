@@ -2398,7 +2398,7 @@ kendo_module({
                         .add(that.footer.attr("tabindex", -1).children(".k-grid-footer-wrap"));
                 }
 
-                if (options.resizable && that._footerWidth) {
+                if (that._footerWidth) {
                     footer.find("table").css('width', that._footerWidth);
                 }
             }
@@ -3258,9 +3258,11 @@ kendo_module({
             }
 
             tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
+            that._footerWidth = null;
 
             if (width) {
                 tables.width(width);
+                that._footerWidth = width;
             }
 
             if($.browser.msie && parseInt($.browser.version, 10) == 8) {
@@ -3347,8 +3349,10 @@ kendo_module({
                     width += parseInt(colWidth, 10);
                 }
 
+                that._footerWidth = null;
                 if (width) {
                     tables.width(width);
+                    that._footerWidth = width;
                 }
             }
 
