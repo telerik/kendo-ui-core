@@ -32,10 +32,11 @@ kendo_module({
             that._wrapper();
             that._drag();
             that._background();
+            that.origin = parseInt(that.background.css(MARGINLEFT), 10);
             that._handle();
 
-            that.constrain = 100;
-            that.snapPoint = 40;
+            that.constrain = 0;
+            that.snapPoint = 0;
             that.container().bind("show", $.proxy(this, "viewShow"));
 
             element = that.element[0];
@@ -49,6 +50,7 @@ kendo_module({
             }
 
             that.check(checked);
+            that.viewShow();
             kendo.notify(that, kendo.mobile.ui);
         },
 
@@ -61,7 +63,6 @@ kendo_module({
             that.constrain = width - handleWidth;
             that.snapPoint = width / 2 - handleWidth / 2;
 
-            that.origin = parseInt(that.background.css(MARGINLEFT), 10);
             that.background.data("origin", that.origin);
 
             that.check(that.element[0].checked);
