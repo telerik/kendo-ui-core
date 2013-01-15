@@ -283,6 +283,14 @@
                 kendo.cultures.current.numberFormat.currency.symbol = "$";
             });
 
+            test("toString with escaped currency symbol", function() {
+                kendo.cultures.current.numberFormat.currency.symbol = "lv";
+
+                equal(toString(10, "# \\$"), "10 $");
+
+                kendo.cultures.current.numberFormat.currency.symbol = "$";
+            });
+
             test("apply globalized percent symbol", function() {
                 kendo.cultures.current.numberFormat.percent.symbol = "percent";
                 equal(toString(10.1, "% #0## %"), "percent 1010 percent");
