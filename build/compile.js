@@ -10,7 +10,7 @@ var ARGV = OPT
     .describe("deps", "List dependencies")
     .describe("decl", "Add the component declarations in the source code")
     .describe("bundle", "Create a bundle")
-    .describe("kendo-config", "Generate download-builder/kendo-config.VERSION_NUMBER.json (to STDOUT)")
+    .describe("kendo-config", "Generate download-builder/kendo-config.json (to STDOUT)")
     .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
     .boolean("amd")
     .boolean("deps")
@@ -23,7 +23,7 @@ var ARGV = OPT
 
 var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
 
-var deps_file_name = path.join(KENDO_SRCDIR, "download-builder/config/kendo-config.VERSION_NUMBER.json");
+var deps_file_name = path.join(KENDO_SRCDIR, "download-builder/config/kendo-config.json");
 var deps_file = fs.readFileSync(deps_file_name, "utf8");
 deps_file = JSON.parse(deps_file);
 

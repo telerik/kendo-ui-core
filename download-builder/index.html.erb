@@ -63,9 +63,9 @@
         <script id="scriptTemplate" type="text/x-kendo-tmpl">&lt;script src="http://cdn.kendostatic.com/#= VERSION #/js/#= data #"&gt;&lt;/script&gt;</script>
 
         <script type="text/javascript">
-            var INFO_SERVICE = "SERVICE_ROOT/info.ashx",
-                GET_SERVICE = "SERVICE_ROOT/get.ashx",
-                VERSION = "VERSION_NUMBER",
+            var INFO_SERVICE = "<%= service_url %>/info.ashx",
+                GET_SERVICE = "<%= service_url %>/get.ashx",
+                VERSION = "<%= VERSION %>",
                 LICENSES = ["framework", "web", "dataviz", "mobile", "wrappers"];
 
             var categories,
