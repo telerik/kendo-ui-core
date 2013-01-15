@@ -135,5 +135,54 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the field used by the navigator date axes.
+        /// </summary>
+        /// <param name="dateField">The date field.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart(Model)
+        ///             .Name("Chart")
+        ///             .Navigator(navi => navi
+        ///                 .DateField("Date")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNavigatorBuilder<T> DateField(string dateField)
+        {
+            navigator.DateField = dateField;
+            return this;
+        }
+
+        /// <summary>
+        /// Enables or disables automatic binding.
+        /// </summary>
+        /// <param name="autoBind">
+        /// Gets or sets a value indicating if the navigator
+        /// should be data bound during initialization.
+        /// The default value is true.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart()
+        ///             .Name("Chart")
+        ///             .Navigator(navi => navi
+        ///                 .DataSource(ds =>
+        ///                 {
+        ///                     ds.Ajax().Read(r => r.Action("SalesData", "Chart"));
+        ///                 })
+        ///                 .AutoBind(false)
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNavigatorBuilder<T> AutoBind(bool autoBind)
+        {
+            navigator.AutoBind = autoBind;
+
+            return this;
+        }
     }
 }

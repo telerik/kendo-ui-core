@@ -87,6 +87,28 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating if the chart
+        /// should be data bound during initialization.
+        /// </summary>
+        public bool? AutoBind
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the date field.
+        /// </summary>
+        /// <value>
+        /// The date field.
+        /// </value>
+        public string DateField
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartNavigatorSerializer<T>(this);
