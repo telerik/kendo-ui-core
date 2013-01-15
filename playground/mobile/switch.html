@@ -1,33 +1,64 @@
 
+<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>Scrollview</title>
+        <link href="/staging/content/cdn/styles/kendo.mobile.all.min.css" rel="stylesheet" />
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.history.js"></script>
-        <script src="../../src/kendo.mobile.core.js"></script>
-        <script src="../../src/kendo.mobile.swipe.js"></script>
-        <script src="../../src/kendo.mobile.scroller.js"></script>
-        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
-        <script src="../../src/kendo.mobile.button.js"></script>
-        <script src="../../src/kendo.mobile.switch.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.scrollview.js"></script>
-        <script>
-            $(window).load(function() {
-                new kendo.mobile.Application();
-            });
-        </script>
+        <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
     </head>
     <body>
-        <div data-role="view">
-            <input type="checkbox" data-role="switch" checked>
-            <input type="checkbox" data-role="switch">
+        <div id="split-view" data-role="splitview">
+            <div data-role="pane" id="side-pane">
+                <div id="blank" data-role="view">
+                </div>
+            </div>
+            <div data-role="pane" id="main-pane">
+                <div id="view" data-role="view" data-model="viewModel" data-title='input'>
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                        </div>
+                    </div>
+                    <ul data-role="listview" data-template="item-template" data-bind="source: items"></ul>
+                </div>
+            </div>
         </div>
+        <script id="item-template" type="text/x-kendo-template">
+            <div data-template="${template}" data-bind="source: this"></div>
+        </script>
+        <script id="switch" type="text/x-kendo-template">
+            switch<input type="checkbox" data-role="switch" data-bind="checked:value"/>
+        </script>
+        <script type="text/javascript">
+            var mobileApp = new kendo.mobile.Application($(document.body));
+
+            var viewModel = kendo.observable({
+                items: [
+                    {
+                        template: 'switch',
+                        value: true
+                    }]
+            });
+
+        </script>
     </body>
 </html>
