@@ -80,6 +80,7 @@
     <Compile Include="Controllers\DataViz\Area_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Stacked_AreaController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Grouped_DataController.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\stacked_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\gap_spacing.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\multiple_axes.aspx" />

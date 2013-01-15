@@ -1,0 +1,67 @@
+@section HeadContent 
+{
+    <style>
+        .chart-wrapper {
+            margin: 0 0 0 20px;
+            width: 466px;
+            height: 434px;
+            background: url("@Url.Content("~/Content/shared/chart-wrapper-small.png")") transparent no-repeat 0 0;
+        }
+                
+        .chart-wrapper .k-chart {
+            height: 280px;
+            padding: 37px;
+            width: 390px;
+        }
+    </style>
+}
+<div class="configuration k-widget k-header" style="width: 80px">
+    <span class="configHead">Gap and spacing</span>
+    <ul class="options">
+        <li>
+            <button id="getGap" class="k-button">Set gap</button>
+            <input id="gap" type="number" value="1.5" step="0.1" style="width: 60px;" />
+        </li>
+        <li>
+            <button id="getSpacing" class="k-button">Set spacing</button>
+            <input id="spacing" type="number" value="0.4" step="0.1" style="width: 60px;" />
+        </li>
+    </ul>
+</div>
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+          .Name("chart")
+          .Title("Internet Users")
+          .Legend(legend => legend.Position(ChartLegendPosition.Bottom))
+          .Series(series => {
+              series.Column(new double[] { 67.96, 61.93, 75, 71, 78 }).Name("United States");
+              series.Column(new double[] { 15.7, 11, 20, 25, 36.6 }).Name("World");
+          })
+          .CategoryAxis(axis => axis
+              .Categories("2005", "2006", "2007", "2008", "2009")
+          )
+          .ValueAxis(axis => axis
+              .Numeric().Labels(labels => labels.Format("{0}%"))
+          )
+          .Tooltip(tooltip => tooltip
+              .Visible(true)
+              .Format("{0}%")
+          )
+    )
+</div>
+<script>
+    $(document).ready(function () {
+        var chart = $("#chart").data("kendoChart"),
+            firstSeries = chart.options.series;
+
+        $("#getGap").click(function () {
+            firstSeries[0].gap = parseFloat($("#gap").val(), 10);
+            chart.redraw();
+        });
+
+        $("#getSpacing").click(function () {
+            firstSeries[0].spacing = parseFloat($("#spacing").val(), 10);
+            chart.redraw();
+        });
+    });
+</script>
