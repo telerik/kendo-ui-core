@@ -36,6 +36,32 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Enables or disables automatic binding.
+        /// </summary>
+        /// <param name="autoBind">
+        /// Gets or sets a value indicating if the chart
+        /// should be data bound during initialization.
+        /// The default value is true.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart()
+        ///             .Name("Chart")
+        ///             .DataSource(ds =>
+        ///             {
+        ///                 ds.Ajax().Read(r => r.Action("SalesData", "Chart"));
+        ///             })
+        ///             .AutoBind(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public StockChartBuilder<T> AutoBind(bool autoBind)
+        {
+            Component.AutoBind = autoBind;
+            return this;
+        }
+
+        /// <summary>
         /// Configures the stock chart navigator.
         /// </summary>
         /// <param name="configurator">The navigator configuration action.</param>

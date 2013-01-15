@@ -492,22 +492,19 @@ kendo_module({
                 chart = navi.chart,
                 chartDataSource = chart.dataSource,
                 hasServerFiltering = chartDataSource && chartDataSource.options.serverFiltering,
-                transport = chartDataSource.options.transport,
-                axisOptions,
-                baseUnit;
+                axisOptions;
 
-            if (navi.dataSource && hasServerFiltering && transport) {
+            if (navi.dataSource && hasServerFiltering) {
                 axisOptions = new dataviz.DateCategoryAxis(deepExtend({
                     baseUnit: "fit"
                 }, chart.options.categoryAxis[0], {
                     categories: [select.from, select.to]
                 })).options;
 
-                baseUnit = transport.read.data.baseUnit = axisOptions.baseUnit;
                 chartDataSource.filter(
                     Navigator.buildFilter(
-                        addDuration(axisOptions.min, -axisOptions.baseUnitStep, baseUnit),
-                        addDuration(axisOptions.max, axisOptions.baseUnitStep, baseUnit)
+                        addDuration(axisOptions.min, -axisOptions.baseUnitStep, axisOptions.baseUnit),
+                        addDuration(axisOptions.max, axisOptions.baseUnitStep, axisOptions.baseUnit)
                     )
                 );
             }

@@ -345,8 +345,9 @@ namespace Kendo.Mvc.UI
                 if (!DataSource.Transport.Read.Type.HasValue())
                 {
                     DataSource.Transport.Read.Type = "POST";
-                }                
+                }
 
+                DataSource.Type = DataSourceType.Ajax;
                 options.Add("dataSource", DataSource.ToJson());
             }
             else if (Data != null)
