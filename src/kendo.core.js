@@ -638,6 +638,7 @@ function pad(number, digits, end) {
             sharpIndex,
             zeroIndex,
             percentIndex,
+            currencyIndex,
             startZeroIndex,
             start = -1,
             end;
@@ -775,9 +776,10 @@ function pad(number, digits, end) {
         }
 
         percentIndex = format.indexOf("%");
+        currencyIndex = format.indexOf("$");
 
         isPercent = percentIndex != -1;
-        isCurrency = format.indexOf("$") != -1;
+        isCurrency = currencyIndex != -1;
 
         //multiply number if the format has percent
         if (isPercent) {
@@ -786,6 +788,11 @@ function pad(number, digits, end) {
             } else {
                 format = format.split("\\").join("");
             }
+        }
+
+        if (isCurrency && format[currencyIndex - 1] === "\\") {
+            format = format.split("\\").join("");
+            isCurrency = false;
         }
 
         if (isCurrency || isPercent) {
