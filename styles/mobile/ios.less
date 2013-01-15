@@ -378,7 +378,13 @@
     margin-top: -1rem;
 }
 
-.km-ios .km-list .km-icon
+.km-ios .km-icon
+{
+    color: #fff;
+}
+
+.km-ios .km-list li > .km-icon,
+.km-ios .km-listview-link > .km-icon
 {
     color: #000;
 }
@@ -397,6 +403,17 @@
 {
     top: 5%;
     left: 7%;
+}
+
+.km-ios .km-button .km-icon:before,
+.km-ios .km-button .km-contactadd:before,
+.km-ios .km-button .km-rowdelete:before,
+.km-ios .km-button .km-rowinsert:before,
+.km-ios .km-button .km-detaildisclose:before
+{
+    display: block;
+    color: rgba(0,0,0,.3);
+    margin-top: -1px;
 }
 
 .km-ios .km-rowinsert
