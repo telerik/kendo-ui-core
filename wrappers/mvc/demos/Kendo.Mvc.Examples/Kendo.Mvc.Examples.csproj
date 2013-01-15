@@ -321,7 +321,7 @@
     <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
     <Compile Include="Models\SessionClientOrderRepository.cs" />
-    <Compile Include="Models\StockData.designer.cs">
+    <Compile Include="Models\StockData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StockData.dbml</DependentUpon>
@@ -528,7 +528,7 @@
     </Content>
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>StockData.designer.cs</LastGenOutput>
+      <LastGenOutput>StockData.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
