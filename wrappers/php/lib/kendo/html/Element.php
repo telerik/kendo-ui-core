@@ -8,6 +8,7 @@ class Element implements Node {
     private $tagName;
     private $selfClosing;
     private $children = array();
+    private $attributes = array();
     private $innerHtml = '';
 
     function __construct($tagName, $selfClosing = false) {
@@ -16,8 +17,18 @@ class Element implements Node {
     }
 
     public function text($value) {
-        $this->innerHtml = htmlentities($value);
+        return $this->html(htmlentities($value));
+    }
+
+    public function html($value) {
+        $this->innerHtml = $value;
         $this->children = array();
+
+        return $this;
+    }
+
+    public function attr($key, $value) {
+        $this->attributes[$key] = $value;
 
         return $this;
     }
@@ -37,6 +48,14 @@ class Element implements Node {
 
         $html[] = '<';
         $html[] = $this->tagName;
+
+        foreach ($this->attributes as $key => $value) {
+            $html[] = ' ';
+            $html[] = $key;
+            $html[] = '="';
+            $html[] = $value;
+            $html[] = '"';
+        }
 
         if ($this->selfClosing) {
             $html[] = ' />';
