@@ -21,6 +21,18 @@
                     window.triggers++;
                 </script>
             </div>
+
+            <div id="div-with-template">
+                <script id="kendo-template" type="text/x-kendo-template">
+                    #: item.text #
+                </script>
+            </div>
+
+            <div id="div-with-script-with-type">
+                <script type="text/javascript">
+                    window.triggers++;
+                </script>
+            </div>
         </div>
         <ul id="log"></ul>
 
@@ -343,9 +355,25 @@
             });
 
             test("scripts in window are executed only once", function() {
+                window.triggers = 1;
+
                 $("#div-with-script-child").kendoWindow();
 
                 equal(window.triggers, 1);
+            });
+
+            test("scripts with type in window are executed only once", function() {
+                window.triggers = 1;
+
+                $("#div-with-script-with-type").kendoWindow();
+
+                equal(window.triggers, 1);
+            });
+
+            test("template script tags are not removed from window", function() {
+                $("#div-with-template").kendoWindow();
+
+                equal($("#kendo-template").length, 1);
             });
 
             var form;

@@ -117,7 +117,9 @@
 
             if (!element.parent().is(that.appendTo)) {
                 // remove script blocks to prevent double-execution
-                element.find("script").remove();
+                element.find("script").filter(function() {
+                    return !this.type || this.type.toLowerCase().indexOf("script") >= 0;
+                }).remove();
 
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
