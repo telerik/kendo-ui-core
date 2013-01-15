@@ -290,6 +290,22 @@
                 equal(cols[1].style.width, "30px");
             });
 
+            test("footer table width is persisted in scrollable grid", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo"
+                    }]
+                });
+
+                grid.hideColumn(0);
+                grid.refresh();
+
+                var table = grid.footer.find("table");
+                equal(table.width(), 50);
+
+            });
+
             test("hide footer cols in scrollable grid with details and grouping", function() {
                 var grid = setup({
                     columns: [{
