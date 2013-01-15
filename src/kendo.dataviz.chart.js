@@ -101,7 +101,7 @@
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
-        MS_POINTER_UP = "MSPointerUp" + NS,
+        MS_POINTER_DOWN_NS = "MSPointerDown" + NS,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -137,7 +137,7 @@
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
-        TOUCH_START = "touchstart" + NS,
+        TOUCH_START_NS = "touchstart" + NS,
         TRIANGLE = "triangle",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
@@ -417,23 +417,20 @@
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
+            element.on(TOUCH_START_NS, touchHandler);
+            element.on(MS_POINTER_DOWN_NS, touchHandler);
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
                     global: true,
                     threshold: 5,
                     filter: ":not(.k-selector)",
-                    stopPropagation: true,
                     multiTouch: false,
                     start: proxy(chart._start, chart),
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
                 });
             }
-
-            $(doc.body)
-                .bind(TOUCH_START, touchHandler)
-                .bind(MS_POINTER_UP, touchHandler);
         },
 
         _start: function(e) {
