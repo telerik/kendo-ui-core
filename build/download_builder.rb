@@ -4,9 +4,9 @@ BUILDER_DEPLOY_SERVICE = 'http://www.kendoui.com/services/kendo-download'
 BUILDER_SOURCE_PATH = 'download-builder'
 
 BUILDER_DEPLOY_PATH = File.join('dist', 'download-builder')
-BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.VERSION_NUMBER.json')
+BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.json')
 
-BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html')))
+BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html.erb')))
 
 namespace :download_builder do
 
