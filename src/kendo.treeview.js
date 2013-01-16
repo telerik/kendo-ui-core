@@ -185,9 +185,7 @@
             }
 
             if (options.checkboxes && options.checkboxes.checkChildren) {
-                that.wrapper.find(":checkbox").closest(NODE).each(function(e) {
-                    that._updateIndeterminate($(this));
-                });
+                that._updateIndeterminateInitial(that.wrapper);
             }
 
             if (that.element[0].id) {
@@ -578,32 +576,54 @@
             });
         },
 
-        _updateIndeterminate: function(node) {
-            var parentNode = this.parent(node),
-                siblingCheckboxes, i, length,
-                all = true;
+        _setIndeterminate: function(node) {
+            var group = subGroup(node),
+                siblings, length,
+                all = true,
+                i;
 
-            if (parentNode.length) {
-                siblingCheckboxes = checkboxes(node.siblings().andSelf());
-                length = siblingCheckboxes.length;
+            if (!group.length) {
+                return;
+            }
 
-                if (length > 1) {
-                    for (i = 1; i < length; i++) {
-                        if (siblingCheckboxes[i].checked != siblingCheckboxes[i-1].checked ||
-                            siblingCheckboxes[i].indeterminate || siblingCheckboxes[i-1].indeterminate) {
-                            all = false;
-                            break;
-                        }
+            siblings = checkboxes(group.children());
+            length = siblings.length;
+
+            if (length > 1) {
+                for (i = 1; i < length; i++) {
+                    if (siblings[i].checked != siblings[i-1].checked ||
+                        siblings[i].indeterminate || siblings[i-1].indeterminate) {
+                        all = false;
+                        break;
                     }
-                } else {
-                    all = !siblingCheckboxes[0].indeterminate;
+                }
+            } else {
+                all = !siblings[0].indeterminate;
+            }
+
+            checkboxes(node)
+                .data("indeterminate", !all)
+                .prop("indeterminate", !all)
+                .prop(CHECKED, all && siblings[0].checked);
+        },
+
+        _updateIndeterminateInitial: function(node) {
+            var subnodes = subGroup(node).children(), i;
+
+            if (subnodes.length) {
+                for (i = 0; i < subnodes.length; i++) {
+                    this._updateIndeterminateInitial(subnodes.eq(i));
                 }
 
-                checkboxes(parentNode)
-                    .data("indeterminate", !all)
-                    .prop("indeterminate", !all)
-                    .prop(CHECKED, all && siblingCheckboxes[0].checked);
+                this._setIndeterminate(node);
+            }
+        },
 
+        _updateIndeterminate: function(node) {
+            var parentNode = this.parent(node);
+
+            if (parentNode.length) {
+                this._setIndeterminate(parentNode);
                 this._updateIndeterminate(parentNode);
             }
         },
