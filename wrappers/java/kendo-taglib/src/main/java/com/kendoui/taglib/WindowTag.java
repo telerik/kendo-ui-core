@@ -194,11 +194,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("resizable", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public Object getTitle() {
+        return (Object)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(Object value) {
         setProperty("title", value);
     }
 

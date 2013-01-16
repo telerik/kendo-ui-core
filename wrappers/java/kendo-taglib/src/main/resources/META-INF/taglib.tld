@@ -14074,10 +14074,10 @@ Window.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The text in the window title bar.</description>
+            <description>The text in the window title bar. If false, the window will be displayed without a title bar. Note that this will prevent the window from being dragged, and the window titlebar buttons will not be shown.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>Object</type>
         </attribute>
         <attribute>
             <description>Specifies whether the window will be initially visible.</description>
