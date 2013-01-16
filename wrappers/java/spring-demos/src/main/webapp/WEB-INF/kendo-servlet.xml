@@ -49,7 +49,7 @@
 		<beans:property name="driverClassName" value="org.sqlite.JDBC"/>
 		<beans:property name="url" value="#{'jdbc:sqlite:' + db.file.absolutePath}" />
 	</beans:bean>
-	
+		
 	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="northwind" />
 		<beans:property name="annotatedClasses">
@@ -71,12 +71,44 @@
 		</beans:property>
 	</beans:bean>
     
-    <!-- Enable annotation driven transactions. Required by getCurrentSession(). -->
-    <tx:annotation-driven />
-    
     <beans:bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
 	    <beans:property name = "sessionFactory" ref = "sessionFactory" />
+	</beans:bean>  
+    
+    <!-- StockData -->
+	<!-- This bean is required to get the absolute path to the SQLite database. Required by the JDBC driver.  -->
+	<beans:bean id="stockdatadb" class="org.springframework.web.context.support.ServletContextResource">
+	    <beans:constructor-arg ref="servletContext" />
+    	<beans:constructor-arg value="/WEB-INF/stockdata.db" />
 	</beans:bean>
+
+	<beans:bean id="stockdata" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName" value="org.sqlite.JDBC"/>
+		<beans:property name="url" value="#{'jdbc:sqlite:' + stockdatadb.file.absolutePath}" />
+	</beans:bean>
+  		
+	<beans:bean id="stockDataSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="stockdata" />
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				<beans:value>com.kendoui.spring.models.Intraday</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">com.kendoui.spring.hibernate.SQLiteDialect</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.format_sql">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+    <beans:bean id = "stockDataTransactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
+	    <beans:property name = "sessionFactory" ref = "stockDataSessionFactory" />
+	</beans:bean>  
+	
+    <!-- Enable annotation driven transactions. Required by getCurrentSession(). -->
+    <tx:annotation-driven />
 
 </beans:beans>
 
