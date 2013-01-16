@@ -169,7 +169,8 @@ kendo_module({
             that.ul[0].innerHTML = kendo.render(that.itemTemplate, data);
 
             if (that._open) {
-                that.popup.open()
+                that._state = "";
+                that.open()
                 that._open = false;
             }
         },
