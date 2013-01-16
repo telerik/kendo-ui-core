@@ -1100,6 +1100,22 @@
                 notEqual(treeview[0], document.activeElement);
             });
 
+            test("expand / collapse moves focus to closest item", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar", expanded: false, items: [
+                            { text: "baz" }
+                        ] }
+                    ]
+                });
+
+                treeview.focus();
+                treeview.find(".k-icon").trigger("mousedown").click();
+
+                equal(treeview.find(".k-state-focused").text(), "bar");
+            });
+
 
             module("drag & drop with load-on-demand", {
                 setup: function() {
