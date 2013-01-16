@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kendoui.spring.models.DataSourceRequest.FilterDescriptor;
 
-@Transactional("stockDataTransactionManager")
+@Transactional
 @Component
 public class IntradayDaoImpl implements IntradayDao {
     @Autowired
