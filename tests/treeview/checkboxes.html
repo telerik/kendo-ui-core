@@ -395,6 +395,21 @@
                 dom.remove();
             });
 
+            test("indeterminate state is initially set", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, checked: false, text: "bar" },
+                            { id: 3, checked: true, text: "baz" }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                ok(treeview.find(":checkbox:first").prop("indeterminate"));
+            });
 
         </script>
 
