@@ -356,7 +356,7 @@ kendo_module({
 
             element.tabIndex = 0;
             element.type = "text";
-            text.attr("placeholder", that.options.placeholder);
+            text.prop("placeholder", that.options.placeholder);
 
             if (accessKey) {
                 text.attr("accesskey", accessKey);
