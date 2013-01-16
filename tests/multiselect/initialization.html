@@ -119,6 +119,24 @@
                 ok(multiselect.popup);
             });
 
+            test("MultiSelect calls value method on init", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, {
+                    value: "0"
+                });
+
+                equal(multiselect.tagList.children().length, 1);
+            });
+
+            /*test("MultiSelect uses select.value on init", function() {
+                popuplateSelect();
+                select.value = "0";
+
+                var multiselect = new MultiSelect(select);
+
+                equal(multiselect.tagList.children().length, 1);
+            });*/
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

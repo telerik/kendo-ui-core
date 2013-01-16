@@ -34,7 +34,10 @@ kendo_module({
                 .on("blur" + ns, function() {
                     this.value = "";
 
-                    that._state = "accept";
+                    //TODO should be implemented correctly
+                    //if (that._state === "filter") {
+                        that._state = "accept";
+                    //}
                 })
                 .on("keydown" + ns, function(e) {
                     that._search();
@@ -174,6 +177,10 @@ kendo_module({
                 that._state = "";
                 that.open()
                 that._open = false;
+            }
+
+            if (that._state !== "filter") {
+                that.value(that.options.value); // || that.element.val());
             }
         },
 
@@ -425,7 +432,13 @@ kendo_module({
         _select: function(li) {
             var that = this, index, dataItem;
 
-            index = !isNaN(li) ? li : li.hide().index(),
+            if (!isNaN(li)) {
+                index = li;
+                $(that.ul[0].children[index]).hide();
+            } else {
+                index = li.hide().index();
+            }
+
             dataItem = that.dataSource.view()[index];
 
             var options = that.element[0].children,
