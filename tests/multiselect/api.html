@@ -63,6 +63,42 @@
                 ok(!multiselect.popup.visible());
             });
 
+            test("MultiSelect creates tags for the set values", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.value("0");
+
+                equal(multiselect.tagList.children().length, 1);
+                equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+                ok(multiselect.element[0].children[0].selected);
+            });
+
+            test("MultiSelect value method clears previous selected item", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.value("0");
+                multiselect.value("1");
+
+                equal(multiselect.tagList.children().length, 1);
+                equal(multiselect.tagList.children(":first").find("span").html(), "Option1");
+                ok(multiselect.element[0].children[1].selected);
+                ok(!multiselect.element[0].children[0].selected);
+            });
+
+            test("MultiSelect supports multiple values", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.value(["0", "1"]);
+
+                equal(multiselect.tagList.children().length, 2);
+                equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+                equal(multiselect.tagList.children(":last").find("span").html(), "Option1");
+                ok(multiselect.element[0].children[0].selected);
+                ok(multiselect.element[0].children[1].selected);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

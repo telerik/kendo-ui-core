@@ -61,7 +61,7 @@
 
                 multiselect.ul.children().eq(1).click();
 
-                ok(multiselect.resultList.children(":first")[0]);
+                ok(multiselect.tagList.children(":first")[0]);
             });
 
             test("MultiSelect hides selected item", function() {
@@ -97,7 +97,7 @@
                 var item = multiselect.ul.children().eq(1).click();
                 multiselect.ul.children().eq(0).click();
 
-                var tag = multiselect.resultList.children().first();
+                var tag = multiselect.tagList.children().first();
                 tag.find(".k-delete").click();
 
                 ok(!tag.parent()[0]);
@@ -112,7 +112,7 @@
                 var item = multiselect.ul.children().eq(1).click();
                 multiselect.ul.children().eq(0).click();
 
-                multiselect.resultList.children().first().find(".k-delete").click();
+                multiselect.tagList.children().first().find(".k-delete").click();
                 multiselect.popup.open();
 
                 ok(item.is(":visible"));
@@ -148,7 +148,7 @@
                 multiselect.input.click();
                 multiselect.ul.children().eq(1).click();
 
-                multiselect.resultList.children().first().find(".k-delete").click();
+                multiselect.tagList.children().first().find(".k-delete").click();
 
                 ok(!select[0].children[1].selected);
             });
@@ -175,7 +175,7 @@
                 multiselect.ul.children().eq(0).click();
 
                 //unselect item
-                multiselect.resultList.children().first().find(".k-delete").click();
+                multiselect.tagList.children().first().find(".k-delete").click();
 
                 //TODO: use method instead of _dataItems
                 equal(multiselect._dataItems.length, 1);
@@ -235,7 +235,7 @@
                 multiselect.ul.children().eq(0).click();
                 multiselect.open();
 
-                multiselect.resultList.children().first().find(".k-delete").click();
+                multiselect.tagList.children().first().find(".k-delete").click();
 
                 ok(!multiselect.popup.visible());
             });

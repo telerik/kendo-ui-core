@@ -23,7 +23,7 @@ kendo_module({
             that.element.attr("multiple", "multiple");
 
             that._wrapper();
-            that._resultList();
+            that._tagList();
             that._input();
 
             that.input
@@ -50,6 +50,7 @@ kendo_module({
 
             that._templates();
             that._dataSource();
+            that._accessors();
 
             that._list();
             that._popup();
@@ -71,6 +72,7 @@ kendo_module({
             ignoreCase: true,
             filter: "startswith",
             dataTextField: "",
+            dataValueField: "",
             minLength: 0
         },
 
@@ -88,7 +90,7 @@ kendo_module({
 
             /*that.ul.off(ns);
             that.list.off(ns);
-            that.resultList.off(ns);*/
+            that.tagList.off(ns);*/
 
             that.popup.destroy();
 
@@ -306,10 +308,10 @@ kendo_module({
                             .appendTo(this._innerWraper);
         },
 
-        _resultList: function() {
+        _tagList: function() {
             var that = this;
 
-            that.resultList = $('<ul unselectable="on" class="k-list k-reset"/>')
+            that.tagList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
                                     that._unselect($(e.target).closest("li"));
@@ -321,7 +323,7 @@ kendo_module({
             var that = this,
                 tag = $(that.tagTemplate(dataItem));
 
-            that.resultList.append(tag);
+            that.tagList.append(tag);
 
             tag.data("index", index);
 
@@ -334,16 +336,97 @@ kendo_module({
                 index = tag.index(),
                 optionIndex = tag.data("index");
 
-            that._dataItems.splice(tag.index(), 1);
+            that._dataItems.splice(index, 1);
             tag.remove();
 
             return optionIndex;
         },
 
+        value: function(value) {
+
+            if (value !== undefined) {
+                //TODO: check for null
+
+                if ($.isArray(value)) {
+                    var index, tags = this.tagList.children();
+
+                    for (var idx = 0, length = tags.length; idx < length; idx++) {
+                        this._unselect(tags.eq(idx));
+                    }
+
+                    for (var idx = 0, length = value.length; idx < length; idx++) {
+                        index = this._index(value[idx]);
+
+                        if (index > -1) {
+                            this._select(index);
+                        }
+                    }
+
+                } else {
+                    var index = this._index(value),
+                        tags = this.tagList.children();
+
+                    for (var idx = 0, length = tags.length; idx < length; idx++) {
+                        this._unselect(tags.eq(idx));
+                    }
+
+                    if (index > -1) {
+                        this._select(index);
+                    }
+                }
+            }
+        },
+
+        //copied from combobox
+        _accessors: function() {
+            var that = this,
+                element = that.element,
+                options = that.options,
+                getter = kendo.getter,
+                textField = element.attr(kendo.attr("text-field")),
+                valueField = element.attr(kendo.attr("value-field"));
+
+            if (textField) {
+                options.dataTextField = textField;
+            }
+
+            if (valueField) {
+                options.dataValueField = valueField;
+            }
+
+            that._text = getter(options.dataTextField);
+            that._value = getter(options.dataValueField);
+        },
+
+        //get index of the dataItem
+        _index: function(value) {
+            var that = this,
+                idx,
+                length,
+                data = that.dataSource.view(),
+                valueFromData;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                valueFromData = that._value(data[idx]);
+
+                if (valueFromData === undefined) {
+                    valueFromData = that._text(data[idx]);
+                }
+
+                if (valueFromData == value) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        },
+
+        //select li element and create tag
         _select: function(li) {
-            var that = this;
-                index = li.hide().index(),
-                dataItem = that.dataSource.view()[index];
+            var that = this, index, dataItem;
+
+            index = !isNaN(li) ? li : li.hide().index(),
+            dataItem = that.dataSource.view()[index];
 
             var options = that.element[0].children,
                 idx = 0,
@@ -362,6 +445,7 @@ kendo_module({
             that.input.val("");
         },
 
+        //unselect li element and remove tag
         _unselect: function(tag) {
             var that = this,
                 index = that._removeTag(tag);
@@ -380,7 +464,7 @@ kendo_module({
             this.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                         .on("click", "li.k-item", $.proxy(this._click, this));
 
-            this.list = $("<div class='k-list-resultList'/>")
+            this.list = $("<div class='k-list-tags'/>")
                         .append(this.ul);
         },
 
