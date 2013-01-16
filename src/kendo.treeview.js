@@ -216,7 +216,7 @@ kendo_module({
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
-                .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox", proxy(that._mousedown, that))
+                .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox,.k-plus,.k-minus", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
                 .on("click" + NS, function(e) {
@@ -658,7 +658,10 @@ kendo_module({
         },
 
         _mousedown: function(e) {
-            this._clickTarget = $(e.currentTarget).closest(NODE);
+            var node = $(e.currentTarget).closest(NODE);
+
+            this._clickTarget = node;
+            this.current(node);
         },
 
         _focusable: function (node) {
@@ -666,15 +669,16 @@ kendo_module({
         },
 
         _focus: function() {
-            var current = this.select();
+            var current = this.select(),
+                clickTarget = this._clickTarget;
 
             // suppress initial focus state on touch devices (until keyboard is used)
             if (kendo.support.touch) {
                 return;
             }
 
-            if (!this._focusable(current)) {
-                current = this._clickTarget;
+            if (clickTarget && clickTarget.length) {
+                current = clickTarget;
             }
 
             if (!this._focusable(current)) {
