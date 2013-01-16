@@ -587,9 +587,14 @@ kendo_module({
                 currentWindow = wrapper[0],
                 zIndex = +wrapper.css(ZINDEX),
                 originalZIndex = zIndex,
-                activeElement = document.activeElement,
+                activeElement,
                 winElement = that.element,
                 target = e && e.target ? e.target : null;
+
+            try {
+                // IE throws error when Window contains iframe
+                activeElement = document.activeElement;
+            } catch (e) {}
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
