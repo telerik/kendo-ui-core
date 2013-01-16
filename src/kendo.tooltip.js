@@ -73,7 +73,10 @@ kendo_module({
         DIMENSIONS = {
             "horizontal": { offset: "top", size: "height" },
             "vertical": { offset: "left", size: "width" }
-        };
+        },
+        DEFAULTCONTENT = function(e) {
+            return e.element.data(kendo.ns + "title");
+        }
 
     function restoreTitle(element) {
         while(element.length) {
@@ -128,7 +131,7 @@ kendo_module({
         options: {
             name: "Tooltip",
             filter: "",
-            content: "",
+            content: DEFAULTCONTENT,
             showAfter: 100,
             callout: true,
             position: "bottom",

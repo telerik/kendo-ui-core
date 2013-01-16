@@ -8,7 +8,7 @@
         <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
-        <!--script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script-->
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
         <style>
@@ -34,7 +34,6 @@
             $(document).ready(function() {
                 $("#container").kendoTooltip({
                     position: "right",
-                    showOn: "focus",
                     filter: "input",
                     content: kendo.template($("#tooltip-template").html()),
                     show: function() {
