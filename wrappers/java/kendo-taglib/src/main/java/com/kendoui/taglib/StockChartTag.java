@@ -3,9 +3,7 @@ package com.kendoui.taglib;
 
 
 import com.kendoui.taglib.stockchart.*;
-
-
-
+import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
