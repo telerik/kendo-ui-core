@@ -314,7 +314,8 @@
         },
 
         _resize: function() {
-            var that = this;
+            var that = this,
+                activeElement;
 
             if (appendingToBodyTriggersResize) {
                 var width = DOCUMENT.width();
@@ -324,7 +325,12 @@
                 that._currentWidth = width;
             }
 
-            if (!that._hovered && !contains(that.element[0], document.activeElement)) {
+            try {
+                // prevent IE JS error when inside iframe
+                activeElement = document.activeElement;
+            } catch (err) {}
+
+            if (!that._hovered && !contains(that.element[0], activeElement)) {
                 that.close();
             }
         },

@@ -646,11 +646,17 @@
 
         _click: function(e) {
             var that = this,
-                element = that.element;
+                element = that.element,
+                activeElement;
 
             that.timeView.toggle();
 
-            if (e.type === "click" && element[0] !== document.activeElement) {
+            try {
+                // prevent IE JS error when inside iframe
+                activeElement = document.activeElement;
+            } catch (err) {}
+
+            if (e.type === "click" && element[0] !== activeElement) {
                 element.focus();
             }
         },

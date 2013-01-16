@@ -745,7 +745,8 @@
         _focus: function (e) {
             var that = this,
                 target = e.target,
-                hoverItem = that._hoverItem();
+                hoverItem = that._hoverItem(),
+                activeElement;
 
             if (target != that.wrapper[0]) {
                 e.stopPropagation();
@@ -754,9 +755,14 @@
                 return;
             }
 
+            try {
+                // prevent IE JS error when inside iframe
+                activeElement = document.activeElement;
+            } catch (err) {}
+
             if (target == that.wrapper[0] && hoverItem.length) {
                 that._moveHover([], hoverItem);
-            } else if (target == that.wrapper[0] && !that._oldHoverItem && document.activeElement != that.wrapper[0]) {
+            } else if (target == that.wrapper[0] && !that._oldHoverItem && activeElement != that.wrapper[0]) {
                 that._moveHover([], that.wrapper.children().first());
             }
         },

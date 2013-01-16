@@ -478,9 +478,15 @@
         _step: function(step) {
             var that = this,
                 element = that.element,
-                value = that._parse(element.val()) || 0;
+                value = that._parse(element.val()) || 0,
+                activeElement;
 
-            if (document.activeElement != element[0]) {
+            try {
+                // prevent IE JS error when inside iframe
+                activeElement = document.activeElement;
+            } catch (err) {}
+
+            if (activeElement != element[0]) {
                 that._focusin();
             }
 

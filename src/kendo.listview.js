@@ -143,7 +143,8 @@
                 idx,
                 length,
                 template = that.template,
-                altTemplate = that.altTemplate;
+                altTemplate = that.altTemplate,
+                activeElement;
 
             if (e && e.action === "itemchange") {
                 if (!that.editable) {
@@ -189,7 +190,12 @@
                              .attr("aria-selected", "false");
             }
 
-            if (that.element[0] === document.activeElement && that.options.navigatable) {
+            try {
+                // prevent IE JS error when inside iframe
+                activeElement = document.activeElement;
+            } catch (err) {}
+
+            if (that.element[0] === activeElement && that.options.navigatable) {
                 that.current(items.eq(0));
             }
 
@@ -359,7 +365,7 @@
                             isTextBox = target.is(":text"),
                             preventDefault = kendo.preventDefault,
                             editItem = element.find("." + KEDITITEM),
-                            idx;
+                            idx, activeElement;
 
                         if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
                             //console.log("not handled");
@@ -396,7 +402,13 @@
                         } else if (keys.ENTER === key) {
                             if (editItem.length !== 0 && (canHandle || isTextBox)) {
                                 idx = that.items().index(editItem);
-                                document.activeElement.blur();
+                                try {
+                                    // prevent IE JS error when inside iframe
+                                    activeElement = document.activeElement;
+                                } catch (err) {}
+                                if (activeElement) {
+                                    activeElement.blur();
+                                }
                                 that.save();
                                 var focusAgain = function(){
                                     that.element.trigger("focus");
