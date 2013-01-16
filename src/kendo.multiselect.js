@@ -313,6 +313,7 @@ kendo_module({
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
                                     that._unselect($(e.target).closest("li"));
+                                    that.close();
                                 });
         },
 

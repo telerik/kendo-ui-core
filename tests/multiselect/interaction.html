@@ -225,6 +225,20 @@
 
                 equal(multiselect.input[0], document.activeElement);
             });
+
+            test("MultiSelect focuses input on click", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.click();
+                multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+                multiselect.open();
+
+                multiselect.resultList.children().first().find(".k-delete").click();
+
+                ok(!multiselect.popup.visible());
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
