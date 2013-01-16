@@ -40,10 +40,8 @@ namespace Kendo.Mvc.UI
                 li.Attribute("data-id", item.Id);
             }
 
-            if (item.HasChildren)
-            {
-                li.Attribute("data-hasChildren", "true");
-            }
+            li.ToggleAttribute("data-hasChildren", "true", item.HasChildren)
+              .ToggleAttribute("data-expanded", "true", item.Expanded);
 
             if (item.NextSibling == null)
             {
@@ -63,14 +61,14 @@ namespace Kendo.Mvc.UI
                 .ToggleClass(UIPrimitives.Middle, item.PreviousSibling != null && item.NextSibling != null)
                 .AppendTo(li);
 
-            if (Component.Checkboxes.Enabled)
-            {
-                CheckboxFor(item).AppendTo(div);
-            }
-
             if (item.HasChildren || hasAccessibleChildren || item.Template.HasValue())
             {
                 IconFor(item).AppendTo(div);
+            }
+
+            if (Component.Checkboxes.Enabled)
+            {
+                CheckboxFor(item).AppendTo(div);
             }
             
             return li;
