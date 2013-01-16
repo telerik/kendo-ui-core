@@ -2,27 +2,27 @@
 
 namespace kendo;
 
-interface Json {
-    public function json();
-}
+require_once 'Serializer.php';
 
-abstract class JsonObject implements Json {
-    private $json = array();
+abstract class JsonObject implements Serializable {
+    private $properties = array();
 
     public function toJSON() {
-        return json_encode($this->json, JSON_FORCE_OBJECT);
+        $serializer = new Serializer();
+
+        return $serializer->serialize($this);
     }
 
-    public function json() {
-        return $this->json;
+    public function properties() {
+        return $this->properties;
     }
 
     protected function setProperty($key, $value) {
-        if ($value instanceof Json) {
-            $value = $value->json();
+        if ($value instanceof Serializable) {
+            $value = $value->properties();
         }
 
-        $this->json[$key] = $value;
+        $this->properties[$key] = $value;
     }
 }
 
