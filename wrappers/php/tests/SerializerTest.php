@@ -1,7 +1,7 @@
 <?php
 
 require_once 'PHPUnit/Autoload.php';
-require_once 'lib/kendo/Serializer.php';
+require_once 'lib/kendo/Autoload.php';
 require_once 'JsonObjectTestDouble.php';
 
 class SerializerTest extends PHPUnit_Framework_TestCase {

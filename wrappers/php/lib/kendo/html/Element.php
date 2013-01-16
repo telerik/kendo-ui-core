@@ -2,8 +2,6 @@
 
 namespace kendo\html;
 
-include_once 'Node.php';
-
 class Element implements Node {
     private $tagName;
     private $selfClosing;

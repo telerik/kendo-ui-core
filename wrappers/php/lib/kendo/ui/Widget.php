@@ -2,12 +2,10 @@
 
 namespace kendo\ui;
 
-require_once 'html/Element.php';
-require_once 'JsonObject.php';
-
 abstract class Widget extends \kendo\JsonObject{
 
     private $id;
+
     private $attributes = array();
 
     function __construct($id) {

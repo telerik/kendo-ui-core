@@ -2,22 +2,6 @@
 
 namespace kendo;
 
-interface Serializable {
-    public function properties();
-}
-
-class JavaScriptFunction {
-    private $name;
-
-    function __construct($name) {
-        $this->name = $name;
-    }
-
-    public function name() {
-        return $this->name;
-    }
-}
-
 class Serializer {
     public function serialize($value) {
         $out = array();
@@ -28,7 +12,6 @@ class Serializer {
     }
 
     private function serializeDate(array &$out, $value) {
-        echo 'serializeDate';
         $out[] = 'new Date(';
         $out[] =  $value->getTimestamp() * 1000;
         $out[] = ')';

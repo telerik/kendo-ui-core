@@ -2,8 +2,6 @@
 
 namespace kendo;
 
-require_once 'Serializer.php';
-
 abstract class JsonObject implements Serializable {
     private $properties = array();
 

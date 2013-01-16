@@ -1,7 +1,7 @@
 <?php
 
+require_once 'lib/kendo/Autoload.php';
 require_once 'PHPUnit/Autoload.php';
-require_once 'lib/kendo/html/Element.php';
 
 class ElementTest extends PHPUnit_Framework_TestCase {
 
