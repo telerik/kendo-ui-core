@@ -58,7 +58,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>rake cdn:deploy</command>
+      <command>bundle --without development --path ~/gems &amp;&amp; bundle exec rake cdn:deploy</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
