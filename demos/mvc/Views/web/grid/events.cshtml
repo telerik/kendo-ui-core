@@ -1,7 +1,10 @@
         <script src="../../content/shared/js/people.js"></script>
 
         <div id="example" class="k-content">
-            <div id="grid"></div>
+            
+            <div class="demo-section">
+                <div id="grid"></div>
+            </div>
 
             <script>
                 function onChange(arg) {
@@ -44,5 +47,21 @@
                     });
                 });
             </script>
+            <div class="demo-section">
+                <h3>Console log</h3>
+                <div class="console"></div>
+            </div>
+            <style scoped="scoped">
+                .demo-section {
+                    width: 600px;
+                }
+                .demo-section h3 {
+                    margin: 5px 0 15px 0;
+                    text-align: center;
+                }
+                .console {
+                    border-width: 1px;
+                }
+            </style>
         </div>
-        <div class="console"></div>
+        

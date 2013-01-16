@@ -29,7 +29,7 @@
                                 }
                             },
                             batch: true,
-                            pageSize: 30,
+                            pageSize: 20,
                             schema: {
                                 model: {
                                     id: "ProductID",
@@ -47,14 +47,14 @@
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
                         pageable: true,
-                        height: 400,
+                        height: 430,
                         toolbar: ["create"],
                         columns: [
                             "ProductName",
-                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "150px" },
-                            { field: "UnitsInStock", title:"Units In Stock", width: "150px" },
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "100px" },
                             { field: "Discontinued", width: "100px" },
-                            { command: ["edit", "destroy"], title: "&nbsp;", width: "210px" }],
+                            { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }],
                         editable: "inline"
                     });
                 });

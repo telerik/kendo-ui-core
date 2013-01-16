@@ -14,7 +14,7 @@
                             serverPaging: true,
                             serverSorting: true
                         },
-                        height: 450,
+                        height: 430,
                         sortable: true,
                         pageable: true,
                         detailInit: detailInit,
@@ -24,17 +24,21 @@
                         columns: [
                             {
                                 field: "FirstName",
-                                title: "First Name"
+                                title: "First Name",
+                                width: "110px"
                             },
                             {
                                 field: "LastName",
-                                title: "Last Name"
+                                title: "Last Name",
+                                width: "110px"
                             },
                             {
-                                field: "Country"
+                                field: "Country",
+                                width: "110px"
                             },
                             {
-                                field: "City"
+                                field: "City",
+                                width: "110px"
                             },
                             {
                                 field: "Title"
@@ -53,17 +57,17 @@
                             serverPaging: true,
                             serverSorting: true,
                             serverFiltering: true,
-                            pageSize:6,
+                            pageSize: 5,
                             filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
                         },
                         scrollable: false,
                         sortable: true,
                         pageable: true,
                         columns: [
-                            { field: "OrderID", width: 70 },
-                            { field: "ShipCountry", title:"Ship Country", width: 100 },
+                            { field: "OrderID", width: "70px" },
+                            { field: "ShipCountry", title:"Ship Country", width: "110px" },
                             { field: "ShipAddress", title:"Ship Address" },
-                            { field: "ShipName", title: "Ship Name", width: 200 }
+                            { field: "ShipName", title: "Ship Name", width: "200px" }
                         ]
                     });
                 }

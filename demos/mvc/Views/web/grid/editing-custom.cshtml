@@ -52,11 +52,67 @@
                             "CategoryName": "Condiments"
                         },
                         "UnitPrice": "25.00"
+                }, {
+                    "ProductID": 8,
+                        "ProductName": "Northwoods Cranberry Sauce",
+                        "Category": {
+                            "CategoryID": 2,
+                            "CategoryName": "Condiments"
+                        },
+                        "UnitPrice": "40.00"
+                }, {
+                    "ProductID": 42,
+                        "ProductName": "Singaporean Hokkien Fried Mee",
+                        "Category": {
+                            "CategoryID": 5,
+                            "CategoryName": "Grains/Cereals"
+                        },
+                        "UnitPrice": "14.00"
+                }, {
+                    "ProductID": 57,
+                        "ProductName": "Ravioli Angelo",
+                        "Category": {
+                            "CategoryID": 5,
+                            "CategoryName": "Grains/Cereals"
+                        },
+                        "UnitPrice": "19.50"
+                }, {
+                    "ProductID": 17,
+                        "ProductName": "Alice Mutton",
+                        "Category": {
+                            "CategoryID": 6,
+                            "CategoryName": "Meat/Poultry"
+                        },
+                        "UnitPrice": "39.00"
+                }, {
+                    "ProductID": 53,
+                        "ProductName": "Perth Pasties",
+                        "Category": {
+                            "CategoryID": 6,
+                            "CategoryName": "Meat/Poultry"
+                        },
+                        "UnitPrice": "32.80"
+                }, {
+                    "ProductID": 51,
+                        "ProductName": "Manjimup Dried Apples",
+                        "Category": {
+                            "CategoryID": 7,
+                            "CategoryName": "Produce"
+                        },
+                        "UnitPrice": "53.00"
+                }, {
+                    "ProductID": 74,
+                        "ProductName": "Longlife Tofu",
+                        "Category": {
+                            "CategoryID": 7,
+                            "CategoryName": "Produce"
+                        },
+                        "UnitPrice": "10.00"
                 }];
 
                 $(document).ready(function () {
                     var dataSource = new kendo.data.DataSource({
-                       pageSize: 30,
+                       pageSize: 20,
                        data: products,
                        autoSync: true,
                        schema: {
@@ -75,13 +131,13 @@
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
                         pageable: true,
-                        height: 260,
+                        height: 430,
                         toolbar: ["create"],
                         columns: [
                             { field:"ProductName",title:"Product Name" },
-                            { field: "Category", title: "Category", width: "150px", editor: categoryDropDownEditor, template: "#=Category.CategoryName#" },
-                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "150px" },
-                            { command: "destroy", title: " ", width: "110px" }],
+                            { field: "Category", title: "Category", width: "160px", editor: categoryDropDownEditor, template: "#=Category.CategoryName#" },
+                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "120px" },
+                            { command: "destroy", title: " ", width: "90px" }],
                         editable: true
                     });
                 });

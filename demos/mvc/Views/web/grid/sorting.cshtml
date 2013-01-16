@@ -2,11 +2,15 @@
 
         <div id="example" class="k-content">
 
-            <h3>Grid with single column sorting enabled</h3>
-            <div id="singleSort" style="width:600px;"></div>
+            <div class="demo-section">
+                <h3>Grid with single column sorting enabled</h3>
+                <div id="singleSort"></div>
+            </div>
 
-            <h3>Grid with multiple column sorting enabled</h3>
-            <div id="multipleSort" style="width:600px;"></div>
+            <div class="demo-section">
+                <h3>Grid with multiple column sorting enabled</h3>
+                <div id="multipleSort"></div>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -24,11 +28,13 @@
                         columns: [
                             {
                                 field: "FirstName",
-                                title: "First Name"
+                                title: "First Name",
+                                width: 200
                             },
                             {
                                 field: "LastName",
-                                title: "Last Name"
+                                title: "Last Name",
+                                width: 200
                             },
                             {
                                 field: "Age",
@@ -51,11 +57,13 @@
                         columns: [
                             {
                                 field: "FirstName",
-                                title: "First Name"
+                                title: "First Name",
+                                width: 200
                             },
                             {
                                 field: "LastName",
-                                title: "Last Name"
+                                title: "Last Name",
+                                width: 200
                             },
                             {
                                 field: "Age"
@@ -64,4 +72,13 @@
                     });
                 });
             </script>
+            <style scoped="scoped">
+                .demo-section {
+                    width: 600px;
+                }
+                .demo-section h3 {
+                    margin: 5px 0 15px 0;
+                    text-align: center;
+                }
+            </style>
         </div>

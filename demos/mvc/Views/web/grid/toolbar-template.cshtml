@@ -4,7 +4,7 @@
             <script type="text/x-kendo-template" id="template">
                 <div class="toolbar">
                     <label class="category-label" for="category">Show products by category:</label>
-                    <input type="search" id="category" style="width: 230px"></input>
+                    <input type="search" id="category" style="width: 150px"></input>
                 </div>
             </script>
             <script>
@@ -15,17 +15,17 @@
                             transport: {
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Products"
                             },
-                            pageSize: 15,
+                            pageSize: 20,
                             serverPaging: true,
                             serverSorting: true,
                             serverFiltering: true
                         },
                         toolbar: kendo.template($("#template").html()),
-                        height: 450,
+                        height: 430,
                         sortable: true,
                         pageable: true,
                         columns: [
-                            { field: "ProductID", width: 100 },
+                            { field: "ProductID", title: "Product ID", width: 100 },
                             { field: "ProductName", title: "Product Name" },
                             { field: "UnitPrice", title: "Unit Price", width: 100 },
                             { field: "QuantityPerUnit", title: "Quantity Per Unit" }
@@ -59,6 +59,7 @@
                 #grid .k-toolbar
                 {
                     min-height: 27px;
+                    padding: 1.3em;
                 }
                 .category-label
                 {
@@ -71,7 +72,6 @@
                 }
                 .toolbar {
                     float: right;
-                    margin-right: .8em;
                 }
             </style>
         </div>

@@ -29,7 +29,7 @@
                                 }
                             },
                             batch: true,
-                            pageSize: 30,
+                            pageSize: 20,
                             schema: {
                                 model: {
                                     id: "ProductID",
@@ -48,14 +48,14 @@
                         dataSource: dataSource,
                         navigatable: true,
                         pageable: true,
-                        height: 400,
+                        height: 430,
                         toolbar: ["create", "save", "cancel"],
                         columns: [
                             "ProductName",
-                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 150 },
-                            { field: "UnitsInStock", title: "Units In Stock", width: 150 },
-                            { field: "Discontinued", width: 100 },
-                            { command: "destroy", title: "&nbsp;", width: 110 }],
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
+                            { field: "UnitsInStock", title: "Units In Stock", width: 110 },
+                            { field: "Discontinued", width: 110 },
+                            { command: "destroy", title: "&nbsp;", width: 90 }],
                         editable: true
                     });
                 });

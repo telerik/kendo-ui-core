@@ -12,14 +12,14 @@
                 $(document).ready(function () {
                     var grid = $("#grid").kendoGrid({
                         dataSource: {
-                           pageSize: 10,
+                           pageSize: 20,
                            data: createRandomData(50)
                         },
                         pageable: true,
-                        height: 260,
+                        height: 430,
                         columns: [
-                            { field: "FirstName", title: "First Name" },
-                            { field: "LastName", title: "Last Name" },
+                            { field: "FirstName", title: "First Name", width: "140px" },
+                            { field: "LastName", title: "Last Name", width: "140px" },
                             { field: "Title" },
                             { command: { text: "View Details", click: showDetails }, title: " ", width: "140px" }]
                     }).data("kendoGrid");

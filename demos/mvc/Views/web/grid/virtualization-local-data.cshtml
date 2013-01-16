@@ -17,14 +17,15 @@
                                 data: data,
                                 pageSize: 50
                             },
-                            height: 280,
+                            height: 430,
                             scrollable: {
                                 virtual: true
                             },
-                            columns: [ "Id",
-                                { field:"FirstName", title: "First Name" },
-                                { field:"LastName", title: "Last Name" },
-                                "City", "Title"
+                            columns: [ { field: "Id", title: "ID", width: "70px" },
+                                { field: "FirstName", title: "First Name", width: "130px" },
+                                { field: "LastName", title: "Last Name", width: "130px" },
+                                { field: "City", title: "City", width: "130px" },
+                                "Title"
                             ]
                         });
                     });

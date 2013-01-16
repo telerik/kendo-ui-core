@@ -3,42 +3,132 @@
             <table id="grid">
                 <thead>
                     <tr>
-                        <th data-field="rank">Rank</th>
-                        <th data-field="rating">Rating</th>
-                        <th data-field="title">Title</th>
+                        <th data-field="make">Car Make</th>
+                        <th data-field="model">Car Model</th>
                         <th data-field="year">Year</th>
+                        <th data-field="category">Category</th>
+                        <th data-field="airconditioner">Air Conditioner</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td><td>9.2</td><td>The Shawshank Redemption</td><td>1994</td>
+                        <td>Volvo</td>
+                        <td>S60</td>
+                        <td>2010</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>2</td><td>9.2</td><td>The Godfather</td><td>1972</td>
+                        <td>Audi</td>
+                        <td>A4</td>
+                        <td>2002</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>3</td><td>9</td><td>The Godfather: Part II</td><td>1974</td>
+                        <td>BMW</td>
+                        <td>535d</td>
+                        <td>2006</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>4</td><td>8.9</td><td>Il buono, il brutto, il cattivo.</td><td>1966</td>
+                        <td>BMW</td>
+                        <td>320d</td>
+                        <td>2006</td>
+                        <td>Saloon</td>
+                        <td>No</td>
                     </tr>
                     <tr>
-                        <td>5</td><td>8.9</td><td>Pulp Fiction</td><td>1994</td>
+                        <td>VW</td>
+                        <td>Passat</td>
+                        <td>2007</td>
+                        <td>Saloon</td>
+                        <td>No</td>
                     </tr>
                     <tr>
-                        <td>6</td><td>8.9</td><td>12 Angry Men</td><td>1957</td>
+                        <td>Peugeot</td>
+                        <td>407</td>
+                        <td>2006</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>7</td><td>8.9</td><td>Schindler's List</td><td>1993</td>
+                        <td>Honda</td>
+                        <td>Accord</td>
+                        <td>2008</td>
+                        <td>Saloon</td>
+                        <td>No</td>
                     </tr>
                     <tr>
-                        <td>8</td><td>8.8</td><td>One Flew Over the Cuckoo's Nest</td><td>1975</td>
+                        <td>Alfa Romeo</td>
+                        <td>159</td>
+                        <td>2008</td>
+                        <td>Saloon</td>
+                        <td>No</td>
                     </tr>
                     <tr>
-                        <td>9</td><td>8.8</td><td>Inception</td><td>2010</td>
+                        <td>Nissan</td>
+                        <td>Almera</td>
+                        <td>2001</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>10</td><td>8.8</td><td>The Dark Knight</td><td>2008</td>
+                        <td>Mitsubishi</td>
+                        <td>Lancer</td>
+                        <td>2008</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Opel</td>
+                        <td>Vectra</td>
+                        <td>2008</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Toyota</td>
+                        <td>Avensis</td>
+                        <td>2008</td>
+                        <td>Saloon</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Audi</td>
+                        <td>Q7</td>
+                        <td>2007</td>
+                        <td>SUV</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Hyundai</td>
+                        <td>Santa Fe</td>
+                        <td>2012</td>
+                        <td>SUV</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Nissan</td>
+                        <td>Qashqai</td>
+                        <td>2007</td>
+                        <td>SUV</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Mercedez</td>
+                        <td>B Class</td>
+                        <td>2007</td>
+                        <td>Hatchback</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Lancia</td>
+                        <td>Ypsilon</td>
+                        <td>2006</td>
+                        <td>Hatchback</td>
+                        <td>Yes</td>
                     </tr>
                 </tbody>
             </table>
@@ -46,7 +136,7 @@
             <script>
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
-                        height: 250
+                        height: 430
                     });
                 });
             </script>

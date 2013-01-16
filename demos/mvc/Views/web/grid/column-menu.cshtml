@@ -20,21 +20,29 @@
                                     }
                                 }
                             },
-                            pageSize: 10,
+                            pageSize: 30,
                             serverPaging: true,
                             serverFiltering: true,
                             serverSorting: true
                         },
-                        height: 250,
+                        height: 430,
                         sortable: true,
                         filterable: true,
                         columnMenu: true,
                         pageable: true,
-                        columns: [
-                            "OrderID",
-                            "ShipCountry",
-                            "ShipName",
-                            {
+                        columns: [ {
+                                field: "OrderID",
+                                title: "Order ID",
+                                width: 100
+                            }, {
+                                field: "ShipCountry",
+                                title: "Ship Country",
+                                width: 130
+                            }, {
+                                field: "ShipName",
+                                title: "Ship Name",
+                                width: 200
+                            },  {
                                 field: "ShipAddress",
                                 filterable: false
                             }
