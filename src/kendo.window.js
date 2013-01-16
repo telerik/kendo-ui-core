@@ -586,7 +586,7 @@
             try {
                 // IE throws error when Window contains iframe
                 activeElement = document.activeElement;
-            } catch (e) {}
+            } catch (err) {}
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
