@@ -16,7 +16,7 @@
 
             // ------------------------------------------------------------
             function loadConfig(callback) {
-                $.getJSON("../../download-builder/config/kendo-config.VERSION_NUMBER.json", function(data) {
+                $.getJSON("../../download-builder/config/kendo-config.json", function(data) {
                     components = data.components;
 
                     resolver = new ScriptResolver(components);
