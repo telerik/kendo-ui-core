@@ -9,3 +9,7 @@ guard :shell do
   watch(%r{^src/editor/.*\.js$}) { `rake src/kendo.editor.js` }
 end
 
+guard :shell do
+  watch(%r{^styles/**/.*\.less$}) { `rake less` }
+end
+
