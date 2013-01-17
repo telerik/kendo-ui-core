@@ -1,7 +1,9 @@
 document.write('\
     <script src="../../src/jquery.js"></script>\
     <script src="../../src/kendo.core.js"></script>\
+    <script src="../../src/kendo.userevents.js"></script>\
     <script src="../../src/kendo.popup.js"></script>\
+    <script src="../../src/kendo.draganddrop.js"></script>\
     <script src="../../src/kendo.slider.js"></script>\
     <script src="../../src/kendo.data.js"></script>\
     <script src="../../src/kendo.binder.js"></script>\

@@ -371,6 +371,7 @@ kendo_module({
             name: "ColorHSV",
             opacity: false,
             buttons: true,
+            input: true,
             preview: true,
             messages: APPLY_CANCEL
         },
@@ -495,7 +496,7 @@ kendo_module({
         _template: kendo.template(
             '<div class="k-colorpicker-hsv">' +
                 '# if (preview) { #' +
-                    '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" /></div></div>' +
+                    '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" #= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #></div></div>' +
                 '# } #' +
                 '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
                 '<input class="k-hue-slider" />' +

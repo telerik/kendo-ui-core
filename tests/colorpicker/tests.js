@@ -1,5 +1,8 @@
 tests.push(
     {
+        page: "colorpicker/initialization.html",
+        title: "Color tools - initialization"
+    },{
         page: "colorpicker/aria.html",
         title: "Color tools - ARIA tests"
     },{
