@@ -1,31 +1,65 @@
 <div id="example" class="k-content">
 
-  <p>
-    <tt>ColorHSV</tt> is the widget that is used to display the color
-    palette selector in the <tt>ColorPicker</tt> popup.  It can be used
-    independently via the <tt>kendoColorHSV</tt> method on a
-    jQuery-wrapped container element.  It triggers the same events
-    as <tt>ColorPicker</tt>.
-  </p>
+    <div class="demo-section">
+        <div id="bike">
+            <div id="bike-tail" class="inline-block"></div><div id="bike-head" class="inline-block"></div>
+        </div>
 
-  <div style="float: right" class="console"></div>
-  <div id="container"></div>
+        <div class="picker-wrapper inline-block">
+            <h3>Tail color</h3>
+            <div id="tail" class="picker"></div>
+        </div>
+        <div class="picker-wrapper inline-block">
+            <h3>Front &amp; side color</h3>
+            <div id="head" class="picker"></div>
+        </div>
+    </div>
 
-  <script>
-    var cp = $("#container").kendoColorHSV({ 
-        opacity: true
-    }).data("kendoColorHSV");
-    cp.bind({
-        select: function(ev) {
-            kendoConsole.log("Select event: " + ev.value.toCss());
-        },
-        change: function() {
-            kendoConsole.log("Change event: " + this.value());
-        },
-        cancel: function() {
-            kendoConsole.log("Cancel event");
+    <style scoped>
+        .demo-section {
+            text-align: center;
         }
-    });
-  </script>
+
+        #bike {
+            margin: -10px -10px 0;
+            background: url(../../content/web/colorpicker/background.png);
+        }
+
+        #bike-head, #bike-tail {
+            background: url(../../content/web/colorpicker/motor.png);
+            height: 299px;
+            width: 241px;
+        }
+
+        #bike-head {
+            background-position: -241px 0;
+        }
+
+        .picker-wrapper {
+            text-align: left;
+            width: 30%;
+            margin: 0 9%;
+            border: 1px solid #c5c5c5;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+        .k-ie7 .inline-block {
+            display: inline;
+            zoom: 1;
+        }
+    </style>
+
+    <script>
+        $(".picker").kendoColorHSV({
+            input: false,
+            buttons: false,
+            select: function(e) {
+                $("#bike-" + this.element.attr("id")).css("background-color", e.value.toCss());
+            }
+        });
+    </script>
 
 </div>
