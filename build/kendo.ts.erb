@@ -128,6 +128,17 @@ module kendo.data {
 module kendo.ui {
     class Widget extends Observable {
     }
+
+    interface GridColumnEditorOptions {
+        field?: string;
+        format?: string;
+        model?: kendo.data.Model;
+        values?: any[];
+    }
+
+    interface GridColumn {
+        editor?(container: JQuery, options: GridColumnEditorOptions): void;
+    }
 }
 
 module kendo.mobile.ui {

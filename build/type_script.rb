@@ -60,6 +60,11 @@ module CodeGen::TypeScript
         end
     end
 
+    MANUALLY_GENERATED = {
+        'schema' => ['model'],
+        'column' => ['editor']
+    }
+
     module Options
         include Declaration
 
@@ -88,7 +93,9 @@ module CodeGen::TypeScript
 
             result = options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
 
-            result.delete_if { |o| o.name == 'model' } if @name == 'schema'
+            if MANUALLY_GENERATED.has_key?(@name)
+                result.delete_if { |o| MANUALLY_GENERATED[@name].include?(o.name) }
+            end
 
             result
         end
