@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+    using System.Linq;
     using System.Collections;
     using System.Collections.Generic;
     /// <summary>
@@ -303,7 +304,10 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Component.Items.Clear();
 
-            (items as List<MenuItem>).ForEach(item => Component.Items.Add(item));
+            foreach (MenuItem item in items)
+            {
+                Component.Items.Add(item);
+            }
 
             return this;
         }
