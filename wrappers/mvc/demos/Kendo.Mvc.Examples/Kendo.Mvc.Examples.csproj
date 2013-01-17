@@ -283,6 +283,7 @@
     <Compile Include="Controllers\Web\Slider\IndexController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Web\Tooltip\TooltipController.cs" />
     <Compile Include="Controllers\Web\TreeView\CheckboxesController.cs" />
     <Compile Include="Controllers\Web\TreeView\NavigationController.cs" />
     <Compile Include="Controllers\Web\TreeView\Custom_DataController.cs" />
@@ -534,6 +535,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Areas\razor\Views\web\tooltip\index.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>

@@ -17,8 +17,13 @@ namespace Kendo.Mvc.Infrastructure
 
         public virtual string Initialize(string id, string name, IDictionary<string, object> options)
         {
+            return InitializeFor(EscapeRegex.Replace(id, @"\\$1"), name, options);
+        }
+
+        public virtual string InitializeFor(string selector, string name, IDictionary<string, object> options)
+        {
             return new StringBuilder().Append("jQuery(function(){jQuery(\"")
-                .Append(EscapeRegex.Replace(id, @"\\$1"))
+                .Append(selector)
                 .Append("\").kendo")
                 .Append(name)
                 .Append("(")

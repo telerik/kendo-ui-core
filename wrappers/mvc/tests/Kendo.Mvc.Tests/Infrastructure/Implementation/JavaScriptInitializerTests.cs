@@ -76,6 +76,20 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         }
 
         [Fact]
+        public void Should_output_init_statement_with_selector()
+        {
+            data["foo"] = "foo";
+            initializer.InitializeFor("#foo", "Foo", data).ShouldEqual("jQuery(function(){jQuery(\"#foo\").kendoFoo({\"foo\":\"foo\"});});");
+        }
+
+        [Fact]
+        public void Should_not_escape_invalid_selector_characters_in_the_selector()
+        {
+            data["foo"] = "foo";
+            initializer.InitializeFor("#foo.bar[0]", "Foo", data).ShouldEqual("jQuery(function(){jQuery(\"#foo.bar[0]\").kendoFoo({\"foo\":\"foo\"});});");
+        }
+
+        [Fact]
         public void Should_create_serializer_when_serializing_enumerable()
         {
             data["foo"] = new [] { "foo" };

@@ -596,6 +596,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You should set Tooltip container. Tooltip.For(container).
+        /// </summary>
+        internal static string TooltipContainerShouldBeSet {
+            get {
+                return ResourceManager.GetString("TooltipContainerShouldBeSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot set Url and ContentUrl at the same time..
         /// </summary>
         internal static string UrlAndContentUrlCannotBeSet {
