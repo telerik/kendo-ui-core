@@ -738,6 +738,22 @@
             test("parseDate return null if entered day is bigger then the possible in the current month", function() {
                 equal(parse("09/31/2012"), null);
             });
+
+            test("parseDate parses correctly ISO8601 with negative timezone", function() {
+                var result = parse("2013-01-16T16:00:00-10:00", "yyyy-MM-ddTHH:mm:sszzz");
+                equal(+result, +new Date("2013-01-16T16:00:00-10:00"));
+            });
+
+            test("parseDate returns null if format expects milliseconds", function() {
+                var result = parse("2013-01-16T16:00:00-10:00", "yyyy-MM-ddTHH:mm:ss.ffffffzzz");
+                equal(result, null);
+            });
+
+            test("parseDate parses correctly ISO8601 with Z", function() {
+                var result = parse("2013-01-17T22:00:00Z");
+
+                equal(+result, +new Date("2013-01-17T22:00:00Z"));
+            });
         </script>
     </body>
 </html>
