@@ -1273,7 +1273,7 @@ function pad(number, digits, end) {
             value.setFullYear(year);
         }
 
-        if (value.getDate() !== day) {
+        if (value.getDate() !== day && UTC === undefined) {
             return null;
         }
 
