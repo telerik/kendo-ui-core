@@ -7289,6 +7289,7 @@ kendo_module({
                 options = tooltip.options,
                 point = tooltip.point,
                 axis = tooltip.axis,
+                axisOptions = axis.options,
                 element = tooltip.element,
                 chartPadding = tooltip.chartPadding,
                 value, content,
@@ -7298,7 +7299,6 @@ kendo_module({
                 return;
             }
 
-            // Apply date format here
             value = content = axis[options.stickyMode ? "getCategory" : "getValue"](point);
 
             if (options.template) {
@@ -7308,6 +7308,10 @@ kendo_module({
                 });
             } else if (options.format) {
                 content = autoFormat(options.format, value);
+            } else {
+                if (axisOptions.type == DATE) {
+                    content = autoFormat(axisOptions.labels.dateFormats[axisOptions.baseUnit], value);
+                }
             }
 
             element.html(content);
