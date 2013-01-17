@@ -37,7 +37,7 @@ kendo_module({
 
             that.constrain = 0;
             that.snapPoint = 0;
-            that.container().bind("show", $.proxy(this, "viewShow"));
+            that.container().bind("show", $.proxy(this, "refresh"));
 
             element = that.element[0];
             element.type = "checkbox";
@@ -50,11 +50,11 @@ kendo_module({
             }
 
             that.check(checked);
-            that.viewShow();
+            that.refresh();
             kendo.notify(that, kendo.mobile.ui);
         },
 
-        viewShow: function() {
+        refresh: function() {
             var that = this, width, handleWidth;
 
             width = that.wrapper.width();

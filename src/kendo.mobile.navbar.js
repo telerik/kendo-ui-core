@@ -37,7 +37,7 @@ kendo_module({
 
             element = that.element;
 
-            that.container().bind("show", $.proxy(this, "viewShow"));
+            that.container().bind("show", $.proxy(this, "refresh"));
 
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
             createContainer("left", element);
@@ -54,7 +54,7 @@ kendo_module({
             toggleTitle(this.centerElement);
         },
 
-        viewShow: function(e) {
+        refresh: function(e) {
             var view = e.view;
             if (view.options.title) {
                 this.title(view.options.title);

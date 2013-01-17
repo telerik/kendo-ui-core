@@ -18,7 +18,7 @@ kendo_module({
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-            that.container().bind("show", $.proxy(this, "viewShow"));
+            that.container().bind("show", $.proxy(this, "refresh"));
 
             that.element
                .addClass("km-tabstrip")
@@ -93,7 +93,7 @@ kendo_module({
             }
         },
 
-        viewShow: function(e) {
+        refresh: function(e) {
             this.switchTo(e.view.id);
         },
 
