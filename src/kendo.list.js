@@ -712,6 +712,7 @@ kendo_module({
 
             if (optionLabel) {
                 options = optionLabel;
+                selectedIndex += 1;
                 idx = 1;
             }
 
