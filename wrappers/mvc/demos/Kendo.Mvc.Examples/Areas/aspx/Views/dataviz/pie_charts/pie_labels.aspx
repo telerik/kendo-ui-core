@@ -6,7 +6,7 @@
             margin: auto;
             width: 466px;
             height: 434px;
-            background: url("<%= Url.Content("~/Content/dataviz/shared/chart-wrapper-small.png") %>") transparent no-repeat 0 0;
+            background: url("<%= Url.Content("~/Content/shared/chart-wrapper-small.png") %>") transparent no-repeat 0 0;
         }
                 
         .chart-wrapper .k-chart {
@@ -62,7 +62,7 @@
         })
         .Tooltip(tooltip => tooltip
             .Visible(true)
-            .Template("#= kendo.format('{0:P}', percentage)#")
+                    .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
         )
     %>
 </div>

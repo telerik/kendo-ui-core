@@ -32,7 +32,7 @@
                     <kendo:chart-seriesItem-labels visible="true" template="#= kendo.format('{0:P}', percentage)#" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
-             <kendo:chart-tooltip visible="true" template="#= kendo.format('{0:P}', percentage)#" />
+             <kendo:chart-tooltip visible="true" template="#= category # - #= kendo.format('{0:P}', percentage)#" />
          </kendo:chart>
      </div>
     

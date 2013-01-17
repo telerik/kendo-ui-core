@@ -13,22 +13,22 @@
             series
                 .Column(new int[] { 20, 40, 45, 30, 50 })
                 .Stack(true)
-                .Color("#13558E")
+                .Color("#cc6e38")
                 .Name("on battery");
             series
                 .Column(new int[] { 20, 30, 35, 35, 40 })
                 .Stack(true)
-                .Color("#E21219")
+                .Color("#ef955f")
                 .Name("on gas");
             series
                 .Line(new double[] { 30, 38, 40, 32, 42 })
                 .Name("MPG")
-                .Color("#DE7E42")
+                .Color("#ec5e0a")
                 .Axis("mpg");
             series
                 .Line(new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 })
                 .Name("l/100 km")
-                .Color("#057589")
+                .Color("#4e4141")
                 .Axis("l100km");
         })
         .CategoryAxis(axis => axis

@@ -13,10 +13,10 @@
              <kendo:chart-title text="Hybrid car mileage report" />
              <kendo:chart-legend position="top" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="column" stack="true" color="#13558E" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" name="on battery" />
-                <kendo:chart-seriesItem type="column" stack="true" color="#E21219" data="<%= new int[] { 20, 30, 35, 35, 40 } %>" name="on gas" />
-                <kendo:chart-seriesItem type="line" color="#DE7E42" data="<%= new int[] { 30, 38, 40, 32, 42 } %>" name="MPG" axis="mpg" />
-                <kendo:chart-seriesItem type="line" color="#057589" data="<%= new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 } %>" name="l/100 km" axis="l100km" />
+                <kendo:chart-seriesItem type="column" stack="true" color="#cc6e38" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" name="on battery" />
+                <kendo:chart-seriesItem type="column" stack="true" color="#ef955f" data="<%= new int[] { 20, 30, 35, 35, 40 } %>" name="on gas" />
+                <kendo:chart-seriesItem type="line" color="#ec5e0a" data="<%= new int[] { 30, 38, 40, 32, 42 } %>" name="MPG" axis="mpg" />
+                <kendo:chart-seriesItem type="line" color="#4e4141" data="<%= new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 } %>" name="l/100 km" axis="l100km" />
              </kendo:chart-series>
              // Align the first two value axes to the left
              // and the last two to the right.

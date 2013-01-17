@@ -4,7 +4,9 @@
      <div class="chart-wrapper">
          <kendo:chart name="chart">
              <kendo:chart-title text="Break-up of Spain Electricity Production for 2008" />
-             <kendo:chart-legend position="bottom" />
+             <kendo:chart-legend position="bottom">
+       	        <kendo:chart-legend-labels template="#= text # (#= value #%)"/>    
+             </kendo:chart-legend>
              <kendo:chart-series>
                 <kendo:chart-seriesItem type="pie" data="${pieData}" />
              </kendo:chart-series>
