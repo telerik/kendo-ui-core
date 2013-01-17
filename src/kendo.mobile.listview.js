@@ -664,7 +664,7 @@ kendo_module({
         _filterable: function() {
             var that = this,
                 filterable = that.options.filterable,
-                events = "change",
+                events = "change paste",
                 searchProxy = proxy(that._search, that),
                 input;
 
@@ -683,29 +683,33 @@ kendo_module({
                         e.preventDefault();
                     })
                     .end()
-                    .on("paste", searchProxy)
-                    .on(events,  searchProxy);
+                    .on(events, searchProxy);
 
-                that.wrapper.find(".km-filter-reset").on("click", proxy(that._clearFilter, that));
+                that.clearButton = that.wrapper.find(".km-filter-reset")
+                    .on("click", proxy(that._clearFilter, that))
+                    .hide();
             }
         },
 
         _search: function() {
             var that = this,
                 filterable = that.options.filterable,
+                value = that.searchInput.val(),
                 expr = {
                     field: filterable.field,
                     operator: filterable.operator || "startsWith",
                     ignoreCase: filterable.ignoreCase,
-                    value: that.searchInput.val()
+                    value: value
                 };
+
+            that.clearButton[value.length ? "show" : "hide"]();
 
             that.dataSource.filter(expr);
         },
 
         _clearFilter: function(e) {
             this.searchInput.val("");
-
+            this.clearButton.hide();
             this.dataSource.filter(null);
 
             e.preventDefault();

@@ -32,40 +32,40 @@
 
         <script>
             var ListView = kendo.mobile.ui.ListView,
-                application;
+                ul;
 
             module("mobile listview filtering", {
                 setup: function() {
+                    ul = $("<ul/>").appendTo($("#qunit-fixture"));
                 },
                 teardown: function() {
+                    kendo.destroy($("#qunit-fixture"));
+                    $("#qunit-fixture").empty();
                 }
             });
 
-            function setup(html, options) {
-                $("#qunit-fixture").html(html);
-                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+            function setup(options) {
+                options = $.extend(true, {}, { filterable: true }, options);
+
+                return new ListView(ul, options);
             }
 
             test("filterable creates search input", function() {
-                var listview = new ListView($("<ul/>"), {
-                    filterable: true
-                });
+                var listview = setup();
 
                 ok(listview.wrapper.children().first().is("form"));
                 equal(listview.wrapper.find(">form [type=search]").length, 1);
             });
 
             test("disabled filtering does not create search form", function() {
-                var listview = new ListView($("<ul/>"), {});
+                var listview = setup({ filterable: false });
 
                 equal(listview.wrapper.children()[0], listview.element[0]);
                 equal(listview.wrapper.find(">form").length, 0);
             });
 
             test("filterable input default placeholder text", function() {
-                var listview = new ListView($("<ul/>"), {
-                    filterable: true
-                });
+                var listview = setup();
 
                 var input = listview.wrapper.find("input");
 
@@ -73,7 +73,7 @@
             });
 
             test("filterable input placeholder", function() {
-                var listview = new ListView($("<ul/>"), {
+                var listview = setup({
                     filterable: {
                         placeholder: "foo"
                     }
@@ -85,9 +85,7 @@
             });
 
             test("dataSource is filtered on keyup", function() {
-                var listview = new ListView($("<ul/>"), {
-                        filterable: true
-                    }),
+                var listview = setup(),
                     input = listview.wrapper.find("input");
 
                 var filter = stub(listview.dataSource, "filter");
@@ -99,9 +97,7 @@
             });
 
             test("dataSource is filtered on change", function() {
-                var listview = new ListView($("<ul/>"), {
-                        filterable: true
-                    }),
+                var listview = setup(),
                     input = listview.wrapper.find("input");
 
                 var filter = stub(listview.dataSource, "filter");
@@ -113,9 +109,7 @@
             });
 
             test("dataSource is filtered on paste", function() {
-                var listview = new ListView($("<ul/>"), {
-                        filterable: true
-                    }),
+                var listview = setup(),
                     input = listview.wrapper.find("input");
 
                 var filter = stub(listview.dataSource, "filter");
@@ -127,9 +121,7 @@
             });
 
             test("default filter expression is build", function() {
-                var listview = new ListView($("<ul/>"), {
-                        filterable: true
-                    }),
+                var listview = setup(),
                     input = listview.wrapper.find("input");
 
                 var filter = stub(listview.dataSource, "filter");
@@ -143,7 +135,7 @@
             });
 
             test("field option is used for the filter rexpression", function() {
-                var listview = new ListView($("<ul/>"), {
+                var listview = setup({
                         filterable: {
                             field: "field"
                         }
@@ -159,7 +151,7 @@
             });
 
             test("operator option is used for the filter expression", function() {
-                var listview = new ListView($("<ul/>"), {
+                var listview = setup({
                         filterable: {
                             operator: "eq"
                         }
@@ -175,7 +167,7 @@
             });
 
             test("ignoreCase option is used for the filter expression", function() {
-                var listview = new ListView($("<ul/>"), {
+                var listview = setup({
                         filterable: {
                             ignoreCase: false
                         }
@@ -191,7 +183,7 @@
             });
 
             test("disabling auto filter", function() {
-                var listview = new ListView($("<ul/>"), {
+                var listview = setup({
                         filterable: {
                             autoFilter: false
                         }
@@ -206,8 +198,7 @@
             });
 
             test("clear button resets the filter", function() {
-                var listview = new ListView($("<ul/>"), {
-                        filterable: true,
+                var listview = setup({
                         dataSource: {
                             data: ["foo", "bar"]
                         }
@@ -221,18 +212,48 @@
             });
 
             test("clear button clears search input text", function() {
-                var listview = new ListView($("<ul/>"), {
-                        filterable: true,
+                var listview = setup({
                         dataSource: {
                             data: ["foo", "bar"]
                         }
                     }),
+                    button = listview.wrapper.find(".km-filter-reset"),
                     input = listview.wrapper.find("input");
 
-                input.val("foo");
-                listview.wrapper.find(".km-filter-reset").click();
+                input.val("foo").trigger({ type: "keyup" });
+                button.click();
 
                 equal(input.val(), "");
+                equal(button.is(":visible"), false);
+            });
+
+            test("clear button initially hidden", function() {
+                var listview = setup();
+
+                var button = listview.wrapper.find(".km-filter-reset");
+
+                equal(button.is(":visible"), false);
+            });
+
+            test("clear button shows when typing", function() {
+                var listview = setup(),
+                    button = listview.wrapper.find(".km-filter-reset"),
+                    input = listview.wrapper.find("input");
+
+                input.val("foo").trigger({ type: "keyup" });
+
+                equal(button.is(":visible"), true);
+            });
+
+            test("clear button hides when text is empty", function() {
+                var listview = setup(),
+                    button = listview.wrapper.find(".km-filter-reset"),
+                    input = listview.wrapper.find("input");
+
+                input.val("foo").trigger({ type: "keyup" });
+                input.val("").trigger({ type: "keyup" });
+
+                equal(button.is(":visible"), false);
             });
         </script>
     </body>
