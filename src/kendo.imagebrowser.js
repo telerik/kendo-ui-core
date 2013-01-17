@@ -134,7 +134,7 @@ kendo_module({
     }
 
     var offsetTop;
-    if ($.browser.msie && parseFloat($.browser.version) < 8) {
+    if (kendo.support.browser.msie && parseFloat(kendo.support.browser.version) < 8) {
         offsetTop = function (element) {
             return element.offsetTop;
         };

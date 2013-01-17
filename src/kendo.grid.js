@@ -806,9 +806,9 @@ kendo_module({
                         });
                     } else {
                         var headerWrap = th.closest(".k-grid-header-wrap"),
-                            ieCorrection = $.browser.msie ? headerWrap.scrollLeft() : 0,
-                            webkitCorrection = $.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
-                            firefoxCorrection = $.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+                            ieCorrection = kendo.support.browser.msie ? headerWrap.scrollLeft() : 0,
+                            webkitCorrection = kendo.support.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
+                            firefoxCorrection = kendo.support.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
                         left = th.position().left - webkitCorrection + firefoxCorrection - ieCorrection;
                     }
 
@@ -2158,7 +2158,7 @@ kendo_module({
 
                 // the footer may exists if rendered from the server
                 var footer = that.wrapper.find(".k-grid-footer"),
-                    webKitRtlCorrection = (isRtl && $.browser.webkit) ? scrollbar : 0;
+                    webKitRtlCorrection = (isRtl && kendo.support.browser.webkit) ? scrollbar : 0;
 
                 if (footer.length) {
                     that.scrollables = that.scrollables.add(footer.children(".k-grid-footer-wrap"));
@@ -3272,7 +3272,7 @@ kendo_module({
                 that._footerWidth = width;
             }
 
-            if($.browser.msie && parseInt($.browser.version, 10) == 8) {
+            if(kendo.support.browser.msie && parseInt(kendo.support.browser.version, 10) == 8) {
                 tables.css("display", "inline-table");
                 setTimeout(function() {
                     tables.css("display", "table");
