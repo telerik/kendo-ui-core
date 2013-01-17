@@ -810,16 +810,25 @@ kendo_module({
             preview: true
         },
 
-        events: [ "activate", "change", "select" ],
+        events: [ "activate", "change", "select", "open", "close" ],
 
         open: function() {
-            this._getPopup().open();
+            if (!this.trigger("open")) {
+                this._getPopup().open();
+            }
         },
         close: function() {
-            this._getPopup().close();
+            if (!this.trigger("close")) {
+                this._getPopup().close();
+            }
         },
         toggle: function() {
-            this._getPopup().toggle();
+            var p = this._getPopup();
+            if (p.visible()) {
+                this.close();
+            } else {
+                this.open();
+            }
         },
         _select: function(value) {
             value = this.color(value);
@@ -884,10 +893,10 @@ kendo_module({
                     },
                     change: function(){
                         that._select(sel.color());
-                        p.close();
+                        that.close();
                     },
                     cancel: function() {
-                        p.close();
+                        that.close();
                     }
                 });
                 p.bind({

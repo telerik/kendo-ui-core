@@ -44,7 +44,7 @@
     </div>
 
     <div style="padding: 1em">
-      <input type="color" value="#22cc22" id="dropdown3" />
+      3: <input type="color" value="#22cc22" id="dropdown3" />
       <input type="color" value="#2255cc" id="dropdown4" disabled="disabled" />
       <input type="color" value="#cc88ee" id="dropdown6" />
       7: <input id="dropdown7" />
@@ -97,12 +97,18 @@
       });
 
       $("#dropdown3").data("kendoColorPicker").bind({
-        select: function(ev) {
-          console.log("SELECT: ", ev.value ? ev.value.toCssRgba() : null);
-        },
-        change: function(ev) {
-          console.log("CHANGE: ", ev.value ? ev.value.toCssRgba() : null);
-        }
+          select: function(ev) {
+              console.log("SELECT: ", ev.value ? ev.value.toCssRgba() : null);
+          },
+          change: function(ev) {
+              console.log("CHANGE: ", ev.value ? ev.value.toCssRgba() : null);
+          },
+          open: function(ev) {
+              console.log("OPEN");
+          },
+          close: function(ev) {
+              console.log("CLOSE");
+          }
       });
 
       kendo.bind($("#mvvm"));
