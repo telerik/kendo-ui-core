@@ -2,7 +2,7 @@
 
 namespace kendo;
 
-abstract class JsonObject implements Serializable {
+abstract class SerializableObject implements Serializable {
     private $properties = array();
 
     public function toJSON() {

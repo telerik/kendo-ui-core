@@ -1,8 +1,8 @@
 <?php
 
 require_once 'PHPUnit/Autoload.php';
-require_once 'lib/kendo/Autoload.php';
-require_once 'JsonObjectTestDouble.php';
+require_once __DIR__.'/../lib/kendo/Autoload.php';
+require_once 'SerializableObjectTestDouble.php';
 
 class SerializerTest extends PHPUnit_Framework_TestCase {
     private $serializer;
@@ -113,7 +113,7 @@ class SerializerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testJsonSerializesSerializablesUsingTheirProperties() {
-        $value = new JsonObjectTestDouble();
+        $value = new SerializableObjectTestDouble();
 
         $value->setFoo('foo');
 
@@ -121,9 +121,9 @@ class SerializerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testJsonSerializesNestedSerializables() {
-        $value = new JsonObjectTestDouble();
+        $value = new SerializableObjectTestDouble();
 
-        $nested = new JsonObjectTestDouble();
+        $nested = new SerializableObjectTestDouble();
 
         $nested->setFoo('bar');
 

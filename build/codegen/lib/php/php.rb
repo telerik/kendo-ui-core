@@ -28,6 +28,12 @@ module CodeGen::PHP
         }
     })
 
+    COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
+<%= options.map { |option| option.to_setter }.join %>
+//<< Properties})
+
+    COMPOSITE_OPTION = ERB.new(File.read("build/codegen/lib/php/composite_option.php.erb"), 0, '%<>')
+
     class CompositeOption < CodeGen::CompositeOption
         include Options
 
@@ -43,6 +49,16 @@ module CodeGen::PHP
 
         def php_class
             @owner.php_class + @name.pascalize
+        end
+
+        def path
+            php_namespace.gsub('\\', '/')
+        end
+
+        def to_php(filename)
+            php = File.exists?(filename) ? File.read(filename) : COMPOSITE_OPTION.result(binding)
+
+            php.sub(/\/\/>> Properties(.|\n)*\/\/<< Properties/, COMPOSITE_OPTION_PROPERTIES.result(binding))
         end
     end
 
@@ -68,8 +84,18 @@ module CodeGen::PHP
         end
     end
 
+    EVENT_SETTER = ERB.new(%{
+        public function set<%= name.pascalize %>($value) {
+            $this->setProperty('<%= name %>', new \\kendo\\JavaScriptFunction($value));
+        }
+    })
+
     class Event < CodeGen::Event
         include Options
+
+        def to_setter
+            EVENT_SETTER.result(binding)
+        end
     end
 
     class ArrayOption < CompositeOption
@@ -81,12 +107,15 @@ module CodeGen::PHP
     end
 
     class ArrayItem < CompositeOption
+        def php_class
+            super.sub(@owner.name.pascalize, '')
+        end
     end
 
     COMPONENT = ERB.new(File.read("build/codegen/lib/php/component.php.erb"), 0, '%<>')
 
     COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
-<%= options.map { |option| option.to_setter }.join %>
+<%= options.map { |option| option.to_setter }.join %><%= events.map { |events| events.to_setter }.join %>
 //<< Properties})
 
     class Component < CodeGen::Component
@@ -124,6 +153,12 @@ module CodeGen::PHP
         end
 
         def component(component)
+            write_php(component)
+
+            composite_options(component.composite_options)
+        end
+
+        def write_php(component)
             filename = "#{@path}/#{component.path}/#{component.php_class}.php"
 
             $stderr.puts("Updating #{filename}") if VERBOSE
@@ -131,29 +166,11 @@ module CodeGen::PHP
             ensure_path(filename)
 
             File.write(filename, component.to_php(filename))
-
-            #component.events.each { |event| tag(event) }
-
-            #composite_options(component.composite_options)
-        end
-
-        def tag(tag)
-            filename = "#{@path}#{tag.namespace}/#{tag.tag_class}.java"
-
-            $stderr.puts("Updating #{filename}") if VERBOSE
-
-            java = tag.to_java(filename)
-
-            File.write(filename, java.dos)
-
         end
 
         def composite_options(options)
-
             options.each do |option|
-                tag(option)
-
-                option.events.each { |option| tag(option) }
+                write_php(option)
 
                 composite_options(option.composite_options)
             end

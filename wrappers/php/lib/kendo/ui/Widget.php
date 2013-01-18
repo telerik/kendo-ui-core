@@ -2,7 +2,7 @@
 
 namespace kendo\ui;
 
-abstract class Widget extends \kendo\JsonObject{
+abstract class Widget extends \kendo\SerializableObject{
 
     private $id;
 

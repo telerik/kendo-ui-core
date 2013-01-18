@@ -1,14 +1,14 @@
 <?php
 
 require_once 'PHPUnit/Autoload.php';
-require_once 'JsonObjectTestDouble.php';
+require_once 'SerializableObjectTestDouble.php';
 
 class JsonObjectTest extends PHPUnit_Framework_TestCase {
 
     private $jsonObject;
 
     protected function setUp() {
-        $this->jsonObject = new JsonObjectTestDouble();
+        $this->jsonObject = new SerializableObjectTestDouble();
     }
 
     public function testToJSONSerializesAllProperties() {
@@ -22,7 +22,7 @@ class JsonObjectTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testToJSONSerializesNestedJsonObjects() {
-        $foo = new JsonObjectTestDouble();
+        $foo = new SerializableObjectTestDouble();
         $foo->setFoo('foo');
 
         $this->jsonObject->setFoo($foo);
