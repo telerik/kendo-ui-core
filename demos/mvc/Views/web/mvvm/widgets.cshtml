@@ -10,7 +10,7 @@
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
                 <h4>AutoComplete</h4>
             </td>
-            <td rowspan="10" style="background-color: #efefef; padding: 10px;">
+            <td rowspan="11" style="background-color: #efefef; padding: 10px;">
 <pre>
 {
     autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
@@ -93,6 +93,15 @@
             <td>
                 <h4>TreeView</h4>
                 <div data-role="treeview" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Splitter</h4>
+                <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
+                    <div>Pane 1</div>
+                    <div>Pane 2</div>
+                </div>
             </td>
         </tr>
         </tbody>
