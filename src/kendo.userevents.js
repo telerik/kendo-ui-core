@@ -328,6 +328,7 @@
             that.element.kendoDestroy(that.eventNS);
             that.surface.kendoDestroy(that.eventNS);
             that._disposeAll();
+            that.unbind();
         },
 
         capture: function() {
