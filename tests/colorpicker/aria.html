@@ -13,15 +13,13 @@
     <div id="qunit-fixture">test markup, will be hidden</div>
     <ul id="log"></ul>
 
-    <div id="x"></div>
-
-    <script>
+    <script>//<![CDATA[
         module("Color tools", {
             setup: function() {
-                cp = $("#x").kendoColorPalette().data("kendoColorPalette");
+                cp = $("<div>").kendoColorPalette().data("kendoColorPalette");
             },
             teardown: function() {
-                cp.wrapper.remove();
+                cp.destroy();
             }
         });
 
@@ -46,6 +44,6 @@
                 ok(a.length == 1 && a[0] === li[0]);
             }
         });
-    </script>
+    //]]></script>
   </body>
 </html>

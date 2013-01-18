@@ -94,7 +94,7 @@ kendo_module({
         init: function(element, options) {
             var that = this;
             ColorSelector.fn.init.call(that, element, options);
-            element = that.element;
+            element = that.wrapper = that.element;
             options = that.options;
             var colors = options.palette;
 
@@ -112,28 +112,22 @@ kendo_module({
                 colors = colors.map(parse);
             }
 
-            var content = $(that._template({
-                colors : colors,
-                value  : that._value,
-                id     : options.ariaId
-            }))
+            element.addClass("k-colorpicker-popup")
+                .append($(that._template({
+                    colors : colors,
+                    value  : that._value,
+                    id     : options.ariaId
+                })))
                 .on(CLICK_NS, ".k-item", function(ev){
                     that._select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
                 })
-                .find("*").attr(UNSELECTABLE, "on").end();
-
-            if (element) {
-                element.append(content);
-            }
-            this.wrapper = content;
-
-            content
+                .find("*").attr(UNSELECTABLE, "on").end()
                 .attr("tabIndex", 0)
                 .on(KEYDOWN_NS, bind(that._keydown, that));
 
             if (options.columns) {
                 // XXX: assuming 14px per cell; depends on CSS.
-                content.css("width", options.columns * 14 + "px");
+                element.css("width", options.columns * 14 + "px");
             }
         },
         focus: function(){
@@ -229,15 +223,13 @@ kendo_module({
             }
         },
         _template: kendo.template(
-            '<div class="k-colorpicker-popup">' +
-                '<ul class="k-palette k-reset">'+
-                '# for (var i = 0; i < colors.length; i++) { #' +
-                    '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
-                        '<div style="background-color:#= colors[i].toCss() #"></div>' +
-                    '</li>' +
-                '# } #' +
-                '</ul>' +
-            '</div>'
+            '<ul class="k-palette k-reset">'+
+            '# for (var i = 0; i < colors.length; i++) { #' +
+                '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
+                    '<div style="background-color:#= colors[i].toCss() #"></div>' +
+                '</li>' +
+            '# } #' +
+            '</ul>'
         )
     });
 
@@ -248,14 +240,11 @@ kendo_module({
             options = that.options;
             element = that.element;
 
-            var content = $(that._template(options)).find("*").attr(UNSELECTABLE, "on").end();
+            that.wrapper = element.addClass("k-colorpicker-hsv")
+                .append(that._template(options))
+                .find("*").attr(UNSELECTABLE, "on").end();
 
-            if (element) {
-                element.append(content);
-            }
-            that.wrapper = content;
-
-            var hueSlider = that._hueSlider = $(".k-hue-slider", content).kendoSlider({
+            var hueSlider = that._hueSlider = $(".k-hue-slider", element).kendoSlider({
                 min: 0,
                 max: 359,
                 tickPlacement: "none",
@@ -267,28 +256,28 @@ kendo_module({
                 //
                 // Props to Alexander Gyoshev for figuring out this solution: we use an ordinary background-image in the
                 // CSS, and inspect currentStyle.backgroundImage to get the absolute URL.
-                var el = $(".k-hue-slider .k-slider-track", content)[0];
+                var el = $(".k-hue-slider .k-slider-track", element)[0];
                 var url = el.currentStyle.backgroundImage;
                 url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
                 el.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
             }
 
-            var opSlider = that._opacitySlider = $(".k-transparency-slider", content).kendoSlider({
+            var opSlider = that._opacitySlider = $(".k-transparency-slider", element).kendoSlider({
                 min: 0,
                 max: 100,
                 tickPlacement: "none",
                 showButtons: false
             }).data("kendoSlider");
 
-            var hsvRect = that._hsvRect = $(".k-hsv-rectangle", content);
+            var hsvRect = that._hsvRect = $(".k-hsv-rectangle", element);
 
             var hsvHandle = that._hsvHandle = $(".k-draghandle", hsvRect).attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
 
-            that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", content);
+            that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", element);
 
-            that._selectedColor = $(".k-selected-color-display", content);
+            that._selectedColor = $(".k-selected-color-display", element);
 
-            that._colorAsText = $("input.k-color-value", content);
+            that._colorAsText = $("input.k-color-value", element);
 
             hueSlider.bind([ "slide", "change" ], function(ev){
                 that._updateUI(that._getHSV(ev.value, null, null, null));
@@ -333,7 +322,7 @@ kendo_module({
                 $(document).mousemove(onmove).mouseup(onup);
             });
 
-            content
+            element
                 .find("input.k-color-value").on(KEYDOWN_NS, function(ev){
                     if (ev.keyCode == KEYS.ENTER) {
                         try {
@@ -494,19 +483,17 @@ kendo_module({
             return this.options.buttons ? null : this._getHSV();
         },
         _template: kendo.template(
-            '<div class="k-colorpicker-hsv">' +
-                '# if (preview) { #' +
-                    '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" #= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #></div></div>' +
-                '# } #' +
-                '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
-                '<input class="k-hue-slider" />' +
-                '# if (opacity) { #' +
-                    '<input class="k-transparency-slider" />' +
-                '# } #' +
-                '# if (buttons) { #' +
-                    '<div class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
-                '# } #' +
-            '</div>'
+            '# if (preview) { #' +
+                '<div class="k-selected-color"><div class="k-selected-color-display"><input spellcheck="false" class="k-color-value" #= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #></div></div>' +
+            '# } #' +
+            '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
+            '<input class="k-hue-slider" />' +
+            '# if (opacity) { #' +
+                '<input class="k-transparency-slider" />' +
+            '# } #' +
+            '# if (buttons) { #' +
+                '<div class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
+            '# } #'
         )
     });
 
@@ -884,7 +871,7 @@ kendo_module({
                 } else {
                     ctor = ColorHSV;
                 }
-                var sel = this._selector = new ctor(document.body, opt);
+                var sel = this._selector = new ctor($("<div></div>").appendTo(document.body), opt);
                 that._popup = p = sel.wrapper.kendoPopup({
                     anchor: that.wrapper
                 }).data("kendoPopup");
