@@ -10,7 +10,6 @@ var kendo = window.kendo,
     RangeUtils = Editor.RangeUtils,
     Command = Editor.Command,
     keys = kendo.keys,
-    INSERTIMAGE = "Insert Image",
     KEDITORIMAGEURL = "#k-editor-image-url",
     KEDITORIMAGETITLE = "#k-editor-image-title";
 
@@ -170,6 +169,6 @@ var ImageCommand = Command.extend({
 
 kendo.ui.editor.ImageCommand = ImageCommand;
 
-registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: INSERTIMAGE}) }));
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Insert Image" }) }));
 
 })(window.kendo.jQuery);
