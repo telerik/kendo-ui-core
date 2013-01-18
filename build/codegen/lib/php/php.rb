@@ -22,13 +22,15 @@ module CodeGen::PHP
         end
     end
 
-    COMPOSITE_OPTION_SETTER = ERB.new(%{
-        public function set<%= name.pascalize %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
-            $this->setProperty('<%= name %>', $value);
-        }
-    })
+COMPOSITE_OPTION_SETTER = ERB.new(%{
+    public function set<%= name.pascalize %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
+        $this->setProperty('<%= name %>', $value);
 
-    COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
+        return $this;
+    }
+})
+
+COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <%= options.map { |option| option.to_setter }.join %>
 //<< Properties})
 
@@ -40,6 +42,7 @@ module CodeGen::PHP
         def to_setter
             COMPOSITE_OPTION_SETTER.result(binding)
         end
+
 
         def php_namespace
             return @owner.php_namespace if @owner.instance_of?(component_class)
@@ -62,17 +65,21 @@ module CodeGen::PHP
         end
     end
 
-    DATA_SOURCE_SETTER = %{
-        public function setDataSource(\\kendo\\data\\DataSource $value) {
-            $this->setProperty('dataSource', $value);
-        }
-    }
+DATA_SOURCE_SETTER = %{
+    public function setDataSource(\\kendo\\data\\DataSource $value) {
+        $this->setProperty('dataSource', $value);
 
-    OPTION_SETTER = ERB.new(%{
-        public function set<%= name.pascalize %>($value) {
-            $this->setProperty('<%= name %>', $value);
-        }
-    })
+        return $this;
+    }
+}
+
+OPTION_SETTER = ERB.new(%{
+    public function set<%= name.pascalize %>($value) {
+        $this->setProperty('<%= name %>', $value);
+
+        return $this;
+    }
+})
 
     class Option < CodeGen::Option
         include Options
@@ -84,11 +91,13 @@ module CodeGen::PHP
         end
     end
 
-    EVENT_SETTER = ERB.new(%{
-        public function set<%= name.pascalize %>($value) {
-            $this->setProperty('<%= name %>', new \\kendo\\JavaScriptFunction($value));
-        }
-    })
+EVENT_SETTER = ERB.new(%{
+    public function set<%= name.pascalize %>($value) {
+        $this->setProperty('<%= name %>', new \\kendo\\JavaScriptFunction($value));
+
+        return $this;
+    }
+})
 
     class Event < CodeGen::Event
         include Options
@@ -98,11 +107,30 @@ module CodeGen::PHP
         end
     end
 
+ARRAY_SETTER = ERB.new(%{
+    public function add<%= item.name.pascalize %>(\\<%= php_namespace %>\\<%= item.php_class %> $value) {
+        $values = $this->getProperty('<%= name %>');
+
+        if ($values == null) {
+            $values = array();
+            $this->setProperty('<%= name %>', $values);
+        }
+
+        $values[] = $value;
+
+        return $this;
+    }
+})
+
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
         def item_class
             ArrayItem
+        end
+
+        def to_setter
+            ARRAY_SETTER.result(binding)
         end
     end
 
@@ -114,7 +142,7 @@ module CodeGen::PHP
 
     COMPONENT = ERB.new(File.read("build/codegen/lib/php/component.php.erb"), 0, '%<>')
 
-    COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
+COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
 <%= options.map { |option| option.to_setter }.join %><%= events.map { |events| events.to_setter }.join %>
 //<< Properties})
 
@@ -123,6 +151,12 @@ module CodeGen::PHP
 
         def namespace
             @full_name.sub('.' + @name, '')
+        end
+
+        def php_base_class
+            return '\\kendo\\SerializableObject' if @name == 'DataSource'
+
+            '\\kendo\\ui\\Widget'
         end
 
         def path
@@ -170,9 +204,11 @@ module CodeGen::PHP
 
         def composite_options(options)
             options.each do |option|
-                write_php(option)
+
+                write_php(option) unless option.instance_of?(ArrayOption)
 
                 composite_options(option.composite_options)
+
             end
 
         end

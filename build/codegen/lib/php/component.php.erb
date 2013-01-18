@@ -2,7 +2,12 @@
 
 namespace <%= php_namespace %>;
 
-class <%= php_class %> extends \kendo\ui\Widget {
+class <%= php_class %> extends <%= php_base_class %> {
+% if namespace.include?('.ui')
+    public function name() {
+        return '<%= name %>';
+    }
+% end
 //>> Properties
 //<< Properties
 }

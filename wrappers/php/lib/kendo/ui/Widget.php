@@ -18,12 +18,8 @@ abstract class Widget extends \kendo\SerializableObject{
         return $this;
     }
 
-    public function createElement() {
-        $element = new \kendo\html\Element($this->tagName());
-
-        $this->addAttributes($element);
-
-        return $element;
+    protected function createElement() {
+        return new \kendo\html\Element('div');
     }
 
     protected function addAttributes(\kendo\html\Element $element) {
@@ -36,6 +32,8 @@ abstract class Widget extends \kendo\SerializableObject{
 
     public function html() {
         $element = $this->createElement();
+
+        $this->addAttributes($element);
 
         return $element->outerHtml();
     }
@@ -75,7 +73,6 @@ abstract class Widget extends \kendo\SerializableObject{
         return implode($script);
     }
 
-    abstract function tagName();
 }
 
 ?>

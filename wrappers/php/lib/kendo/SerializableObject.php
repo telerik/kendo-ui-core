@@ -15,6 +15,10 @@ abstract class SerializableObject implements Serializable {
         return $this->properties;
     }
 
+    protected function getProperty($key) {
+        return $this->properties[$key];
+    }
+
     protected function setProperty($key, $value) {
         if ($value instanceof Serializable) {
             $value = $value->properties();
