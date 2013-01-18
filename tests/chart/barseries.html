@@ -2251,6 +2251,18 @@
                     barClick(function() { ok(true); });
                 });
 
+                test("fires on touchstart", 1, function() {
+                    createBarChart({
+                        seriesClick: function() {
+                            ok(true);
+                        }
+                    });
+
+                    barElement.trigger($.Event("touchstart", {
+                        originalEvent: { }
+                    }));
+                });
+
                 test("fires when clicking bar labels", 1, function() {
                     createBarChart({
                         seriesDefaults: {
@@ -2293,6 +2305,18 @@
 
                 test("fires when hovering bars", 1, function() {
                     barHover(function() { ok(true); });
+                });
+
+                test("fires on touchstart", 1, function() {
+                    createBarChart({
+                        seriesHover: function() {
+                            ok(true);
+                        }
+                    });
+
+                    barElement.trigger($.Event("touchstart", {
+                        originalEvent: { }
+                    }));
                 });
 
                 test("fires when hovering bar labels", 1, function() {
