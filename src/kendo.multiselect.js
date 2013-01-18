@@ -327,12 +327,9 @@ kendo_module({
         },
 
         _addTag: function(dataItem, index) {
-            var that = this,
-                tag = $(that.tagTemplate(dataItem));
+            var that = this;
 
-            that.tagList.append(tag);
-
-            tag.data("index", index);
+            that.tagList.append($(that.tagTemplate(dataItem)));
 
             //add data item
             that._dataItems.push(dataItem);
@@ -340,13 +337,10 @@ kendo_module({
 
         _removeTag: function(tag) {
             var that = this,
-                index = tag.index(),
-                optionIndex = tag.data("index");
+                index = tag.index();
 
-            that._dataItems.splice(index, 1);
             tag.remove();
-
-            return optionIndex;
+            return that._dataItems.splice(index, 1);
         },
 
         value: function(value) {
@@ -428,7 +422,7 @@ kendo_module({
             return -1;
         },
 
-        //select li element and create tag
+        //select value
         _select: function(li) {
             var that = this, index, dataItem;
 
@@ -440,6 +434,8 @@ kendo_module({
             }
 
             dataItem = that.dataSource.view()[index];
+
+            //if (dataItem) //TODO: check whether the dataItem exists
 
             var options = that.element[0].children,
                 idx = 0,
@@ -461,10 +457,36 @@ kendo_module({
         //unselect li element and remove tag
         _unselect: function(tag) {
             var that = this,
-                index = that._removeTag(tag);
+                dataItem = that._removeTag(tag),
+                index;
 
-            $(that.ul[0].children[index]).show();
-            that.element[0].children[index].selected = false;
+            if (dataItem) {
+                dataItem = dataItem[0]
+            }
+
+            index = that._get(dataItem);
+
+            if (index !== -1) {
+               $(that.ul[0].children[index]).show();
+               that.element[0].children[index].selected = false;
+            }
+        },
+
+        _get: function(dataItem) {
+            var that = this,
+                view = that.dataSource.view(),
+                getter = kendo.getter(that.options.dataValueField),
+                value = getter(dataItem),
+                length = view.length,
+                idx = 0;
+
+            for (; idx < length; idx++) {
+                if (value === getter(view[idx])) {
+                    return idx;
+                }
+            }
+
+            return -1;
         },
 
         _click: function(e) {
