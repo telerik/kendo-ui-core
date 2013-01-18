@@ -7,7 +7,8 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Resources; 
+    using Kendo.Mvc.Resources;
+    using System.Web; 
 
     public class Tooltip : WidgetBase
     {
@@ -16,6 +17,7 @@ namespace Kendo.Mvc.UI
         {
             Callout = true;
             AutoHide = true;
+            ContentHandler = new ClientHandlerDescriptor();
         }
 
         public string Filter { get; set; }
@@ -25,6 +27,9 @@ namespace Kendo.Mvc.UI
         public bool Callout { get; set; }
         public bool AutoHide { get; set; }
         public TooltipShowOnEvent ShowOn { get; set; }
+        public string ContentUrl { get; set; }
+        public string Content { get; set; }
+        public ClientHandlerDescriptor ContentHandler { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -60,11 +65,31 @@ namespace Kendo.Mvc.UI
                 options["showOn"] = Enum.GetName(typeof(TooltipShowOnEvent), ShowOn).ToLowerInvariant();
             }
 
+            SerializeContent(options);
+
             writer.Write(Initializer.InitializeFor(SanitizeSelector(Container), "Tooltip", options));
 
             base.WriteInitializationScript(writer);
         }
-                
+
+        private void SerializeContent(Dictionary<string, object> options)
+        {
+            if (ContentUrl.HasValue())
+            {
+                options["content"] = new Dictionary<string, object>() {
+                    { "url", ContentUrl }
+                };
+            }
+            else if (ContentHandler.HasValue())
+            {
+                options["content"] = ContentHandler;
+            }
+            else if (Content.HasValue())
+            {
+                options["content"] = HttpUtility.UrlDecode(Content);
+            }
+        }                
+        
         public override void VerifySettings()
         {
             if (string.IsNullOrEmpty(Container))
@@ -103,6 +128,7 @@ namespace Kendo.Mvc.UI
             }
 
             return builder.ToString();
-        }        
+        }
+        
     }
 }

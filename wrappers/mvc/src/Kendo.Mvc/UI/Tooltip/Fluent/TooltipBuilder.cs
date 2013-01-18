@@ -1,8 +1,10 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
     using System.Web;
     using System.Web.Mvc;
-    using System;
+    using System.Web.Routing;
+    using Kendo.Mvc.Extensions;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Tooltip"/> component.
@@ -99,6 +101,123 @@ namespace Kendo.Mvc.UI.Fluent
         public TooltipBuilder Events(Action<TooltipEventBuilder> clientEventsAction)
         {
             clientEventsAction(new TooltipEventBuilder(Component.Events));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the Url, which will be requested to return the content. 
+        /// </summary>
+        /// <param name="routeValues">The route values of the Action method.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///         .For("#element")
+        ///         .LoadContentFrom(MVC.Home.Index().GetRouteValueDictionary());
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TooltipBuilder LoadContentFrom(RouteValueDictionary routeValues)
+        {
+            return routeValues.ApplyTo<TooltipBuilder>(LoadContentFrom);
+        }
+
+        /// <summary>
+        /// Sets the Url, which will be requested to return the content. 
+        /// </summary>
+        /// <param name="actionName">The action name.</param>
+        /// <param name="controllerName">The controller name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .LoadContentFrom("AjaxView_OpenSource", "Window")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TooltipBuilder LoadContentFrom(string actionName, string controllerName)
+        {
+            return LoadContentFrom(actionName, controllerName, (object)null);
+        }
+
+        /// <summary>
+        /// Sets the Url, which will be requested to return the content.
+        /// </summary>
+        /// <param name="actionName">The action name.</param>
+        /// <param name="controllerName">The controller name.</param>
+        /// <param name="routeValues">Route values.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .LoadContentFrom("AjaxView_OpenSource", "Window", new { id = 10})
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TooltipBuilder LoadContentFrom(string actionName, string controllerName, object routeValues)
+        {
+            return LoadContentFrom(actionName, controllerName, new RouteValueDictionary(routeValues));
+        }
+
+        public TooltipBuilder LoadContentFrom(string actionName, string controllerName, RouteValueDictionary routeValues)
+        {
+            UrlHelper urlHelper = new UrlHelper(Component.ViewContext.RequestContext);
+
+            return LoadContentFrom(urlHelper.Action(actionName, controllerName, routeValues));
+        }
+
+        /// <summary>
+        /// Sets the Url, which will be requested to return the content.
+        /// </summary>
+        /// <param name="value">The url.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .LoadContentFrom(Url.Action("AjaxView_OpenSource", "Window"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TooltipBuilder LoadContentFrom(string value)
+        {
+            Component.ContentUrl = value;
+
+            return this;
+        }       
+
+        /// <summary>
+        /// Sets the HTML content which the tooltip should display as a string.
+        /// </summary>
+        /// <param name="value">The action which renders the content.</param>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .Content("&lt;strong&gt; First Item Content&lt;/strong&gt;")
+        /// %&gt;
+        /// </code>        
+        public TooltipBuilder Content(string value)
+        {
+            Component.Content = value;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets JavaScript function which to return the content for the tooltip.
+        /// </summary>                
+        public TooltipBuilder ContentHandler(Func<object, object> handler)
+        {
+            Component.ContentHandler.TemplateDelegate = handler;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets JavaScript function which to return the content for the tooltip.
+        /// </summary>
+        /// <param name="handler">JavaScript function name</param>        
+        public TooltipBuilder ContentHandler(string handler)
+        {
+            Component.ContentHandler.HandlerName = handler;
 
             return this;
         }
