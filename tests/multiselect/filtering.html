@@ -101,6 +101,24 @@
                 ok(select[0].children[1].selected);
             });
 
+            /*test("MultiSelect rebinds list after filtration and does not call value method", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.ul.children().first().click();
+                multiselect.search("Option1");
+                multiselect.ul.children().first().click();
+
+                multiselect.input.click();
+
+
+                ok(select[0].children[0].selected);
+                ok(select[0].children[1].selected);
+            });*/
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

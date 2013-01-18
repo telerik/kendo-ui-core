@@ -32,12 +32,10 @@ kendo_module({
                     that.open();
                 })
                 .on("blur" + ns, function() {
-                    this.value = "";
-
-                    //TODO should be implemented correctly
-                    //if (that._state === "filter") {
+                    that.input[0].value = "";
+                    if (that._state === "filter") {
                         that._state = "accept";
-                    //}
+                    }
                 })
                 .on("keydown" + ns, function(e) {
                     that._search();
@@ -158,7 +156,7 @@ kendo_module({
             var that = this,
                 popup = that.popup;
 
-            if (that._state === "accept") {
+            if (!that.ul[0].firstChild || that._state === "accept") {
                 //rebind and open
                 that._open = true;
                 that._filterSource();
@@ -173,14 +171,17 @@ kendo_module({
 
             that.ul[0].innerHTML = kendo.render(that.itemTemplate, data);
 
-            if (that._open) {
-                that._state = "";
-                that.open()
-                that._open = false;
-            }
-
             if (that._state !== "filter") {
                 that.value(that.options.value); // || that.element.val());
+            }
+
+            if (that._open) {
+                if (that._state === "accept") {
+                    that._state = ""; //TODO: improve this
+                }
+
+                that.open()
+                that._open = false;
             }
         },
 
@@ -491,7 +492,11 @@ kendo_module({
 
         _click: function(e) {
             this._select($(e.currentTarget));
-            this._state = "accept";
+
+            if (this._state === "filter") {
+                this._state = "accept";
+            }
+
             this.close();
         },
 

@@ -54,6 +54,34 @@
                 ok(multiselect.popup.visible());
             });
 
+            test("MultiSelect calls refresh method on open if no items", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false
+                });
+
+                multiselect.open();
+
+                ok(multiselect.ul.children().length);
+            });
+
+            test("MultiSelect does not rebind on open if no filtration", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, {
+                    autoBind: true
+                });
+
+                stub(multiselect, {
+                    refresh: multiselect.refresh
+                });
+
+                multiselect.wrapper.click();
+                multiselect.input.click();
+                multiselect.wrapper.click();
+
+                equal(multiselect.calls("refresh"), 0);
+            });
+
             test("MultiSelect closes the popup element", function() {
                 popuplateSelect();
                 var multiselect = new MultiSelect(select);
