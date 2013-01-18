@@ -109,7 +109,6 @@ kendo_module({
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
-        MS_POINTER_DOWN_NS = "MSPointerDown" + NS,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -419,14 +418,12 @@ kendo_module({
 
         _attachEvents: function() {
             var chart = this,
-                element = chart.element,
-                touchHandler = proxy(chart._touchstart, chart);
+                element = chart.element;
 
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
-            element.on(TOUCH_START_NS, touchHandler);
-            element.on(MS_POINTER_DOWN_NS, touchHandler);
+            element.on(TOUCH_START_NS, proxy(chart._tap, chart));
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -653,7 +650,7 @@ kendo_module({
             }
         },
 
-        _mouseover: function(e) {
+        _startHover: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
@@ -675,7 +672,14 @@ kendo_module({
                 }
 
                 highlight.show(point);
+                return true;
+            }
+        },
 
+        _mouseover: function(e) {
+            var chart = this;
+
+            if (chart._startHover(e)) {
                 $(doc.body).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
         },
@@ -856,35 +860,14 @@ kendo_module({
             return groupSeries;
         },
 
-        _touchstart: function(e) {
-            var chart = this,
-                tooltip = chart._tooltip,
-                highlight = chart._highlight,
-                tooltipOptions,
-                point;
+        _tap: function(e) {
+            var chart = this;
 
-            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
-                return;
-            }
-
-            if (e.originalEvent.pointerType && e.originalEvent.pointerType !== 2) {
-                return;
-            }
-
-            point = chart._getChartElement(e);
-            if (point && point.hover) {
-                point.hover(chart, e);
-                chart._activePoint = point;
-
-                tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                if (tooltipOptions.visible) {
-                    tooltip.show(point);
-                }
-
-                highlight.show(point);
-            } else {
+            if (!chart._startHover(e)) {
                 chart._unsetActivePoint();
             }
+
+            chart._click(e);
         },
 
         destroy: function() {
