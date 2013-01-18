@@ -14,8 +14,7 @@
     // options can be: template (as string), cssClass, title, defaultValue
     var ToolTemplate = Class.extend({
         init: function(options) {
-            var that = this;
-            that.options = options;
+            this.options = options;
         },
 
         getHtml: function() {
@@ -330,15 +329,15 @@
         },
 
         registerTool: function(toolName, tool) {
-            var tools = Editor.fn._tools;
-            tools[toolName] = tool;
-            if (tools[toolName].options && tools[toolName].options.template) {
-                tools[toolName].options.template.options.cssClass = "k-" + toolName;
+            if (tool.options && tool.options.template) {
+                tool.options.template.options.cssClass = "k-" + toolName;
             }
+
+            Editor.fn._tools[toolName] = tool;
         },
 
         registerFormat: function(formatName, format) {
-            kendo.ui.Editor.fn.options.formats[formatName] = format;
+            Editor.fn.options.formats[formatName] = format;
         },
 
         createDialog: function (windowContent, editor, initOptions) {

@@ -376,6 +376,15 @@
                 equal(editor.value(), 'foo <a href="bar">bar</a>')
             });
 
+            test("dialog title can be localized", function() {
+                editor.options.messages.createLink = "bar";
+                var range = createRangeFromText(editor, '|foo|');
+
+                execLinkCommandOnRange(range);
+
+                equal($('.k-window .k-window-title').text(), "bar");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
