@@ -6,18 +6,46 @@
         </div>
 
         <div class="picker-wrapper inline-block">
-            <h3>Tail color</h3>
+            <h3 class="title">Tail color</h3>
             <div id="tail" class="picker"></div>
         </div>
         <div class="picker-wrapper inline-block">
-            <h3>Front &amp; side color</h3>
+            <h3 class="title">Front &amp; side color</h3>
             <div id="head" class="picker"></div>
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $(".picker").kendoColorHSV({
+                input: false,
+                buttons: false,
+                select: function(e) {
+                    $("#bike-" + this.element.attr("id")).css("background-color", e.value.toCss());
+                }
+            });
+
+            var tail = $("#tail").data("kendoColorHSV");
+            tail.value("#000");
+            tail.trigger("select", { value: tail.color() });
+
+            var head = $("#head").data("kendoColorHSV");
+            head.value("#e15613");
+            head.trigger("select", { value: head.color() });
+        });
+    </script>
+
     <style scoped>
         .demo-section {
             text-align: center;
+            width: 580px;
+            padding-bottom: 28px;
+        }
+
+        .title {
+            font-weight: normal;
+            text-transform: uppercase;
+            color: #666;
         }
 
         #bike {
@@ -31,14 +59,31 @@
             width: 241px;
         }
 
+        #bike-tail {
+            background-color: #000;
+        }
+
         #bike-head {
+            background-color: #e15613;
             background-position: -241px 0;
         }
 
         .picker-wrapper {
             text-align: left;
-            width: 30%;
-            margin: 0 9%;
+            width: 252px;
+            margin: 0 18px;
+        }
+
+        .picker-wrapper .k-hsv-gradient {
+            height: 100px;
+        }
+
+        .picker-wrapper h3 {
+            padding: 13px 0 5px;
+            text-align: left;
+        }
+
+        .picker {
             border: 1px solid #c5c5c5;
         }
 
@@ -51,15 +96,5 @@
             zoom: 1;
         }
     </style>
-
-    <script>
-        $(".picker").kendoColorHSV({
-            input: false,
-            buttons: false,
-            select: function(e) {
-                $("#bike-" + this.element.attr("id")).css("background-color", e.value.toCss());
-            }
-        });
-    </script>
 
 </div>
