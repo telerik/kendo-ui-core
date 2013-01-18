@@ -875,6 +875,8 @@ kendo_module({
             if (!chart._startHover(e)) {
                 chart._unsetActivePoint();
             }
+
+            chart._click(e);
         },
 
         destroy: function() {
