@@ -2295,6 +2295,42 @@
                     barHover(function() { ok(true); });
                 });
 
+                test("fires on touchstart", 1, function() {
+                    createBarChart({
+                        seriesHover: function() {
+                            ok(true);
+                        }
+                    });
+
+                    barElement.trigger($.Event("touchstart", {
+                        originalEvent: { }
+                    }));
+                });
+
+                test("does not fire on touchstart (mouse)", function() {
+                    createBarChart({
+                        seriesHover: function() {
+                            ok(false);
+                        }
+                    });
+
+                    barElement.trigger($.Event("touchstart", {
+                        originalEvent: { pointerType: 4 }
+                    }));
+                });
+
+                test("fires on MSPointerDown", 1, function() {
+                    createBarChart({
+                        seriesHover: function() {
+                            ok(true);
+                        }
+                    });
+
+                    barElement.trigger($.Event("MSPointerDown", {
+                        originalEvent: { }
+                    }));
+                });
+
                 test("fires when hovering bar labels", 1, function() {
                     createBarChart({
                         seriesDefaults: {

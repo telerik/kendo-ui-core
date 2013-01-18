@@ -116,6 +116,7 @@ kendo_module({
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
+        POINTER_TYPE_MOUSE = 4,
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -420,13 +421,13 @@ kendo_module({
         _attachEvents: function() {
             var chart = this,
                 element = chart.element,
-                touchHandler = proxy(chart._touchstart, chart);
+                tap = proxy(chart._tap, chart);
 
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
-            element.on(TOUCH_START_NS, touchHandler);
-            element.on(MS_POINTER_DOWN_NS, touchHandler);
+            element.on(TOUCH_START_NS, tap);
+            element.on(MS_POINTER_DOWN_NS, tap);
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -856,18 +857,19 @@ kendo_module({
             return groupSeries;
         },
 
-        _touchstart: function(e) {
+        _tap: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions,
+                pointerType = e.originalEvent.pointerType,
                 point;
 
-            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
+            if (pointerType && pointerType === POINTER_TYPE_MOUSE) {
                 return;
             }
 
-            if (e.originalEvent.pointerType && e.originalEvent.pointerType !== 2) {
+            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
                 return;
             }
 
