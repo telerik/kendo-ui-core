@@ -1,0 +1,163 @@
+module CodeGen::PHP
+
+    module Options
+        def component_class
+            Component
+        end
+
+        def composite_option_class
+            CompositeOption
+        end
+
+        def option_class
+            Option
+        end
+
+        def event_class
+            Event
+        end
+
+        def array_option_class
+            ArrayOption
+        end
+    end
+
+    COMPOSITE_OPTION_SETTER = ERB.new(%{
+        public function set<%= name.pascalize %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
+            $this->setProperty('<%= name %>', $value);
+        }
+    })
+
+    class CompositeOption < CodeGen::CompositeOption
+        include Options
+
+        def to_setter
+            COMPOSITE_OPTION_SETTER.result(binding)
+        end
+
+        def php_namespace
+            return @owner.php_namespace if @owner.instance_of?(component_class)
+
+            @owner.php_namespace
+        end
+
+        def php_class
+            @owner.php_class + @name.pascalize
+        end
+    end
+
+    DATA_SOURCE_SETTER = %{
+        public function setDataSource(\\kendo\\data\\DataSource $value) {
+            $this->setProperty('dataSource', $value);
+        }
+    }
+
+    OPTION_SETTER = ERB.new(%{
+        public function set<%= name.pascalize %>($value) {
+            $this->setProperty('<%= name %>', $value);
+        }
+    })
+
+    class Option < CodeGen::Option
+        include Options
+
+        def to_setter
+            return DATA_SOURCE_SETTER if @name == 'dataSource'
+
+            OPTION_SETTER.result(binding)
+        end
+    end
+
+    class Event < CodeGen::Event
+        include Options
+    end
+
+    class ArrayOption < CompositeOption
+        include CodeGen::Array
+
+        def item_class
+            ArrayItem
+        end
+    end
+
+    class ArrayItem < CompositeOption
+    end
+
+    COMPONENT = ERB.new(File.read("build/codegen/lib/php/component.php.erb"), 0, '%<>')
+
+    COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
+<%= options.map { |option| option.to_setter }.join %>
+//<< Properties})
+
+    class Component < CodeGen::Component
+        include Options
+
+        def namespace
+            @full_name.sub('.' + @name, '')
+        end
+
+        def path
+            namespace.gsub('.', '/')
+        end
+
+        def php_class
+            @name
+        end
+
+        def php_namespace
+            namespace.gsub('.', '\\');
+        end
+
+        def to_php(filename)
+            php = File.exists?(filename) ? File.read(filename) : COMPONENT.result(binding)
+
+            php.sub(/\/\/>> Properties(.|\n)*\/\/<< Properties/, COMPONENT_PROPERTIES.result(binding))
+        end
+    end
+
+
+    class Generator
+        include Rake::DSL
+
+        def initialize(path)
+            @path = path
+        end
+
+        def component(component)
+            filename = "#{@path}/#{component.path}/#{component.php_class}.php"
+
+            $stderr.puts("Updating #{filename}") if VERBOSE
+
+            ensure_path(filename)
+
+            File.write(filename, component.to_php(filename))
+
+            #component.events.each { |event| tag(event) }
+
+            #composite_options(component.composite_options)
+        end
+
+        def tag(tag)
+            filename = "#{@path}#{tag.namespace}/#{tag.tag_class}.java"
+
+            $stderr.puts("Updating #{filename}") if VERBOSE
+
+            java = tag.to_java(filename)
+
+            File.write(filename, java.dos)
+
+        end
+
+        def composite_options(options)
+
+            options.each do |option|
+                tag(option)
+
+                option.events.each { |option| tag(option) }
+
+                composite_options(option.composite_options)
+            end
+
+        end
+    end
+end
