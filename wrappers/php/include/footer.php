@@ -1,5 +1,7 @@
 <?php
     $php = file_get_contents($_SERVER['SCRIPT_FILENAME']);
+    $php = trim(preg_replace('/<\?php.*include.*\?>/', '', $php));
+
 ?>
             </div>
             <div class="source">
