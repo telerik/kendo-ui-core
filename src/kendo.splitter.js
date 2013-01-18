@@ -147,7 +147,8 @@ kendo_module({
 
         options: {
             name: "Splitter",
-            orientation: HORIZONTAL
+            orientation: HORIZONTAL,
+            panes: []
         },
 
         destroy: function() {
