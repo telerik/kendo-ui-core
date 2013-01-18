@@ -79,7 +79,7 @@
 
                 multiselect.open();
 
-                equal(multiselect.ul.children().length, 4); /* all items without one */
+                ok(!multiselect.ul.children().eq(1).is(":visible"));
             });
 
             test("MultiSelect filters data using selected items too", function() {
@@ -95,10 +95,28 @@
 
                 multiselect.input.click();
 
-                equal(multiselect.ul.children().length, 3); /* all items without one */
+                ok(!multiselect.ul.children().eq(0).is(":visible"));
+                ok(!multiselect.ul.children().eq(1).is(":visible"));
 
                 ok(select[0].children[0].selected);
                 ok(select[0].children[1].selected);
+            });
+
+            test("MultiSelect filters data and hides already clicked items", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.value(["0", "1"]);
+                multiselect.search("Opt");
+
+                var children = multiselect.ul.children();
+
+                equal(children.length, multiselect.dataSource.view().length);
+                ok(!children.eq(0).is(":visible"));
+                ok(!children.eq(1).is(":visible"));
             });
 
             /*test("MultiSelect rebinds list after filtration and does not call value method", function() {

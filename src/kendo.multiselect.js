@@ -11,6 +11,7 @@ kendo_module({
         ui = kendo.ui,
         Widget = ui.Widget,
         CHANGE = "change",
+        HIDE = ' style="display:none"',
         ns = ".kendoMultiSelect";
 
     var MultiSelect = Widget.extend({
@@ -144,12 +145,15 @@ kendo_module({
 
             removeFiltersForField(expression, options.dataTextField);
 
-            if (filters[0]) {
+            /*if (filters[0]) {
                 expression = expression.filters || [];
                 expression = expression.concat(filters);
             }
 
             dataSource.filter(expression);
+            */
+
+            dataSource.filter([filter]);
         },
 
         open: function() {
@@ -159,17 +163,16 @@ kendo_module({
             if (!that.ul[0].firstChild || that._state === "accept") {
                 //rebind and open
                 that._open = true;
-                that._filterSource();
+                that.dataSource.filter(null); //_filterSource();
             } else {
                 popup.open();
             }
         },
 
         refresh: function() {
-            var that = this,
-                data = that.dataSource.view();
+            var that = this;
 
-            that.ul[0].innerHTML = kendo.render(that.itemTemplate, data);
+            that.ul[0].innerHTML = that._render();
 
             if (that._state !== "filter") {
                 that.value(that.options.value); // || that.element.val());
@@ -183,6 +186,36 @@ kendo_module({
                 that.open()
                 that._open = false;
             }
+        },
+
+        _render: function() {
+            var that = this,
+                data = that.dataSource.view(),
+                template = that.itemTemplate,
+                length = data.length,
+                idx = 0, html = "", dataItem;
+
+            for(; idx < length; idx++) {
+                dataItem = data[idx];
+                html += template(dataItem, idx, that._selected(dataItem));
+            }
+            return html;
+        },
+
+        _selected: function(data) {
+            var that = this,
+                getter = that._value,
+                value = getter(data),
+                values = that._dataItems,
+                length = values.length, idx = 0;
+
+            for (; idx < length; idx++) {
+                if (getter(values[idx]) === value) {
+                    return true;
+                }
+            }
+
+            return false;
         },
 
         search: function(word) {
@@ -253,12 +286,13 @@ kendo_module({
             }
 
             if (!itemTemplate) {
-                that.itemTemplate = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                itemTemplate = kendo.template("#:data" + (options.dataTextField ? "." : "") + options.dataTextField + "#", { useWithBlock: false });
             } else {
                 itemTemplate = kendo.template(itemTemplate);
-                that.itemTemplate = function(data) {
-                    return '<li tabindex="-1" role="option" unselectable="on" class="k-item">' + itemTemplate(data) + "</li>";
-                };
+            }
+
+            that.itemTemplate = function(data, idx, hide) {
+                return '<li tabindex="-1" role="option" data-idx="' + idx + '" unselectable="on" class="k-item"' + (hide ? HIDE : "") + '>' + itemTemplate(data) + '</li>';
             }
 
             //TODO: use options.tagTemplate if defined
@@ -325,15 +359,6 @@ kendo_module({
                                     that._unselect($(e.target).closest("li"));
                                     that.close();
                                 });
-        },
-
-        _addTag: function(dataItem, index) {
-            var that = this;
-
-            that.tagList.append($(that.tagTemplate(dataItem)));
-
-            //add data item
-            that._dataItems.push(dataItem);
         },
 
         _removeTag: function(tag) {
@@ -441,7 +466,7 @@ kendo_module({
             var options = that.element[0].children,
                 idx = 0,
                 length = options.length,
-                value =  kendo.getter(that.options.dataValueField)(dataItem);
+                value =  that._value(dataItem);
 
             for (; idx < length; idx ++) {
                 if (options[idx].value === value) {
@@ -450,7 +475,8 @@ kendo_module({
                 }
             }
 
-            that._addTag(dataItem, idx);
+            that.tagList.append($(that.tagTemplate(dataItem)));
+            that._dataItems.push(dataItem);
 
             that.input.val("");
         },
@@ -465,7 +491,7 @@ kendo_module({
                 dataItem = dataItem[0]
             }
 
-            index = that._get(dataItem);
+            index = that._index(dataItem);
 
             if (index !== -1) {
                $(that.ul[0].children[index]).show();
@@ -473,22 +499,21 @@ kendo_module({
             }
         },
 
-        _get: function(dataItem) {
+        /*_get: function(dataItem) {
             var that = this,
                 view = that.dataSource.view(),
-                getter = kendo.getter(that.options.dataValueField),
-                value = getter(dataItem),
+                value = that._value(dataItem),
                 length = view.length,
                 idx = 0;
 
             for (; idx < length; idx++) {
-                if (value === getter(view[idx])) {
+                if (value === that._value(view[idx])) {
                     return idx;
                 }
             }
 
             return -1;
-        },
+        },*/
 
         _click: function(e) {
             this._select($(e.currentTarget));
