@@ -109,14 +109,12 @@ kendo_module({
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
-        MS_POINTER_DOWN_NS = "MSPointerDown" + NS,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
-        POINTER_TYPE_MOUSE = 4,
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -420,14 +418,12 @@ kendo_module({
 
         _attachEvents: function() {
             var chart = this,
-                element = chart.element,
-                tap = proxy(chart._tap, chart);
+                element = chart.element;
 
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
-            element.on(TOUCH_START_NS, tap);
-            element.on(MS_POINTER_DOWN_NS, tap);
+            element.on(TOUCH_START_NS, proxy(chart._tap, chart));
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -865,12 +861,7 @@ kendo_module({
         },
 
         _tap: function(e) {
-            var chart = this,
-                pointerType = e.originalEvent.pointerType;
-
-            if (pointerType && pointerType === POINTER_TYPE_MOUSE) {
-                return;
-            }
+            var chart = this;
 
             if (!chart._startHover(e)) {
                 chart._unsetActivePoint();
