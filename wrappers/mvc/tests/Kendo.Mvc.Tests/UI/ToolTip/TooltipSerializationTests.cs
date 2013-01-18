@@ -65,5 +65,76 @@ namespace Kendo.Mvc.UI.Tests
 
             output.ShouldContain("{\"filter\":\"\\\\#foo\"}");
         }   
-    }
+
+        [Fact]
+        public void Position_is_serialized()
+        {
+            tooltip.Position = TooltipPosition.Top;            
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"position\":\"top\"}");
+        }
+
+        [Fact]
+        public void Position_is_not_serialized_if_bottom_is_set()
+        {
+            tooltip.Position = TooltipPosition.Bottom;
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("{\"position\":}");
+        } 
+
+        [Fact]
+        public void ShowAfter_is_serialized()
+        {
+            tooltip.ShowAfter = 200;            
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"showAfter\":200}");
+        }
+
+        [Fact]
+        public void ShowAfter_is_not_serialized_if_not_set()
+        {            
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("{\"showAfter\":}");
+        }
+
+        [Fact]
+        public void Callout_is_serialized()
+        {
+            tooltip.Callout = false;
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"callout\":false}");
+        }
+
+        [Fact]
+        public void Callout_is_not_serialized_if_true()
+        {
+            tooltip.Callout = true;
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("{\"callout\":}");
+        }
+
+        [Fact]
+        public void AutoHide_is_serialized()
+        {
+            tooltip.AutoHide = false;
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"autoHide\":false}");
+        }
+
+        [Fact]
+        public void ShowOn_is_serialized()
+        {
+            tooltip.ShowOn = TooltipShowOnEvent.Click;
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"showOn\":\"click\"}");
+        }
+    }    
 }

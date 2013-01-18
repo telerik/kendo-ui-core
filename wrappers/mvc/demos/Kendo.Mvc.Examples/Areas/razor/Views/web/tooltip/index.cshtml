@@ -10,7 +10,7 @@
         tions of the shape in new colors and materials add to the growing Alvar Aalto Collection
         that remains true to his original design.</p>
     <p>
-        Born Hugo Alvar Henrik Aalto (February 3, 1898 - May 11, 1976) in Kuortane, Finland,
+        <b title="wiki: Helsinki University of Technology">Born Hugo Alvar Henrik Aalto</b> (February 3, 1898 - May 11, 1976) in Kuortane, Finland,
         was noted for his humanistic approach to modernism. He studied architecture at the
         <a href="http://en.wikipedia.org/wiki/Helsinki_University_of_Technology" title="wiki: Helsinki University of Technology">
             Helsinki University of Technology</a> from 1916 to 1921. In 1924 he married
@@ -25,8 +25,20 @@
             www.aalto.com</a></p>
 </div>
 
-@(Html.Kendo().Tooltip().For("#container").Filter("[title]"))
+@(Html.Kendo().Tooltip()
+    .For("#container")
+    .Filter("[title]")
+    .Position(TooltipPosition.Left)    
+    .Callout(false)
+    .AutoHide(false)    
+    
+)
 
+<script type="text/javascript">
+function foo() {
+    alert(1);
+}
+</script>
 <style scoped="scoped">    
     .armchair
     {

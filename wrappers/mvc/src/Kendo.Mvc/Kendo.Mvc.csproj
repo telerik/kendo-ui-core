@@ -976,8 +976,11 @@
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
     <Compile Include="UI\TimePicker\TimePicker.cs" />
+    <Compile Include="UI\Tooltip\Fluent\TooltipEventBuilder.cs" />
+    <Compile Include="UI\Tooltip\TooltipShowOn.cs" />
     <Compile Include="UI\Tooltip\Fluent\TooltipBuilder.cs" />
     <Compile Include="UI\Tooltip\Tooltip.cs" />
+    <Compile Include="UI\Tooltip\TooltipPosition.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewCheckboxesBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBuilder.cs" />
