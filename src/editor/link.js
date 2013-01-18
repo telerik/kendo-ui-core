@@ -114,7 +114,8 @@ var LinkCommand = Command.extend({
             range = that.getRange(),
             collapsed = range.collapsed,
             nodes,
-            initialText = null;
+            initialText = null,
+            messages = that.editor.options.messages;
 
         range = that.lockRange(true);
         nodes = textNodes(range);
@@ -166,7 +167,7 @@ var LinkCommand = Command.extend({
         var showText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
         var dialog = EditorUtils.createDialog(that._dialogTemplate(showText), that.editor, extend({}, that.editor.options.dialogOptions, {
-            title: "Insert link",
+            title: messages.createLink,
             close: close,
             visible: false
         }))
