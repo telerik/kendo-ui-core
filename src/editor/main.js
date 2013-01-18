@@ -377,6 +377,7 @@
         unlink: "Remove hyperlink",
         insertImage: "Insert image",
         insertHtml: "Insert HTML",
+        viewHtml: "View HTML",
         fontName: "Select font family",
         fontNameInherit: "(inherited font)",
         fontSize: "Select font size",

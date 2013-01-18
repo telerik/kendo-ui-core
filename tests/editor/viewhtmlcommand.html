@@ -17,6 +17,7 @@
         <script src="../../src/kendo.combobox.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.colorpicker.js"></script>
         <script src="../../src/kendo.editor.js"></script>
         <script src="util.js"></script>
 
@@ -118,6 +119,14 @@
                 $(".k-dialog-cancel").click();
 
                 equal(editor.value(), initialHtml);
+            });
+
+            test("dialog title can be localized", function() {
+                editor.options.messages.viewHtml = "bar";
+
+                createViewHtmlCommand();
+
+                equal($('.k-window .k-window-title').text(), "bar");
             });
         </script>
 

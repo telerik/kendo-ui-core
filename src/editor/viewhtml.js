@@ -25,7 +25,8 @@ var ViewHtmlCommand = Command.extend({
             range = editor.getRange(),
             dialog = $(ViewHtmlCommand.template).appendTo(document.body),
             content = ViewHtmlCommand.indent(editor.value()),
-            textarea = ".k-editor-textarea";
+            textarea = ".k-editor-textarea",
+            messages = editor.options.messages;
 
         function apply(e) {
             editor.value(dialog.find(textarea).val());
@@ -48,7 +49,7 @@ var ViewHtmlCommand = Command.extend({
         }
 
         dialog.kendoWindow(extend({}, editor.options.dialogOptions, {
-            title: "View HTML",
+            title: messages.viewHtml,
             close: close
         }))
             .hide()
