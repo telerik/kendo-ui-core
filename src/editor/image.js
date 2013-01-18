@@ -91,7 +91,10 @@ var ImageCommand = Command.extend({
             applied = false,
             img = RangeUtils.image(range),
             dialog, dialogWidth,
-            options = that.editor.options;
+            options = that.editor.options,
+            messages = options.messages,
+            imageBrowser = options.imageBrowser,
+            showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined);
 
         function apply(e) {
             var element = dialog.element;
@@ -128,14 +131,10 @@ var ImageCommand = Command.extend({
             }
         }
 
-        var imageBrowser = options.imageBrowser;
-        var showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined);
-
-
         dialogWidth = showBrowser ? { width: "960px" } : {};
 
         dialog = EditorUtils.createDialog(that._dialogTemplate(showBrowser), that.editor, extend(dialogWidth, options.dialogOptions, {
-            title: INSERTIMAGE,
+            title: messages.insertImage,
             close: close,
             visible: false,
             resizable: showBrowser,

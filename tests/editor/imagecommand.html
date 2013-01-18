@@ -271,6 +271,14 @@
                 equal(editor.value(), '<img alt="" src="foo%20bar%20baz" />')
             });
 
+            test("window title can be localized", function() {
+                editor.options.messages.insertImage = "bar";
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                equal($('.k-window .k-window-title').text(), "bar");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
