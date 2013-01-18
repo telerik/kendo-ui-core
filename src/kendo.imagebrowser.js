@@ -398,6 +398,7 @@
                         model.set(fileNameField, e.response[fileNameField]);
                         model.set(sizeField, e.response[sizeField]);
                         that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
+                        that._scroll();
                     });
                 }
             } else {
