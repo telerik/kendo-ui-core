@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class VirtualizationController {
     }
     
     @RequestMapping(value = "/virtualization/read", method = RequestMethod.POST)
-    public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
+    public @ResponseBody List<?> read(@RequestBody DataSourceRequest request) {
         return intraday.getList(request);
     }
 }

@@ -1,18 +1,23 @@
 package com.kendoui.spring.models;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @Entity
 @Table(name="Intraday")
 public class Intraday {
     private int id;
     private String symbol;
-    private Date date;
+    private Calendar date;
     private double close;
     private int volume;    
     private double open;
@@ -30,11 +35,13 @@ public class Intraday {
     }
 
     @Column(name="Date")
-    public Date getDate() {
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonSerialize(using=CustomDateSerializer.class)
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) throws Exception {
         this.date = date;
     }
 

@@ -1,5 +1,7 @@
 package com.kendoui.spring.models;
 
+import java.util.List;
+
 public interface IntradayDao {
-    public DataSourceResult getList(DataSourceRequest request);
+    public List<?> getList(DataSourceRequest request);
 }

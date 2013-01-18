@@ -5,7 +5,6 @@ require 'csv'
 $/ = "\r\n"
 
 YEARS_TO_ADD = Time.now.year - 2009
-DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 puts %Q{
     CREATE TABLE Intraday (
@@ -30,7 +29,7 @@ CSV.foreach('data.csv', :headers => true) do |row|
     INSERT INTO Intraday
         ([Symbol], [Date], [Open], [High], [Low], [Close], [Volume])
     VALUES
-        ('ACME', '#{date.strftime(DATE_FORMAT)}', #{row['Open']}, #{row['High']}, #{row['Low']}, #{row['Close']}, #{row['Volume']});
+        ('ACME', '#{date.to_time.to_i}', #{row['Open']}, #{row['High']}, #{row['Low']}, #{row['Close']}, #{row['Volume']});
     }
 end
 
