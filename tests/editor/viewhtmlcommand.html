@@ -120,6 +120,14 @@
 
                 equal(editor.value(), initialHtml);
             });
+
+            test("dialog title can be localized", function() {
+                editor.options.messages.viewHtml = "bar";
+
+                createViewHtmlCommand();
+
+                equal($('.k-window .k-window-title').text(), "bar");
+            });
         </script>
 
         <h1 id="qunit-header">ViewHtml command tests</h1>
