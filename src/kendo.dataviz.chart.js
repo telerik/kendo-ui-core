@@ -654,7 +654,7 @@ kendo_module({
             }
         },
 
-        _mouseover: function(e) {
+        _startHover: function(e) {
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
@@ -676,7 +676,14 @@ kendo_module({
                 }
 
                 highlight.show(point);
+                return true;
+            }
+        },
 
+        _mouseover: function(e) {
+            var chart = this;
+
+            if (chart._startHover(e)) {
                 $(doc.body).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
         },
@@ -859,32 +866,13 @@ kendo_module({
 
         _tap: function(e) {
             var chart = this,
-                tooltip = chart._tooltip,
-                highlight = chart._highlight,
-                tooltipOptions,
-                pointerType = e.originalEvent.pointerType,
-                point;
+                pointerType = e.originalEvent.pointerType;
 
             if (pointerType && pointerType === POINTER_TYPE_MOUSE) {
                 return;
             }
 
-            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
-                return;
-            }
-
-            point = chart._getChartElement(e);
-            if (point && point.hover) {
-                point.hover(chart, e);
-                chart._activePoint = point;
-
-                tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                if (tooltipOptions.visible) {
-                    tooltip.show(point);
-                }
-
-                highlight.show(point);
-            } else {
+            if (!chart._startHover(e)) {
                 chart._unsetActivePoint();
             }
         },
