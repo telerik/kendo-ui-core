@@ -17,7 +17,8 @@ kendo_module({
     var Shim = Widget.extend({
         init: function(element, options) {
             var that = this,
-                ios = kendo.mobile.application.os === "ios",
+                app = kendo.mobile.application,
+                ios = (app ? app.os : kendo.support.mobileOS.os) == "ios",
                 align = options.align || (ios ?  "bottom center" : "center center"),
                 position = options.position || (ios ? "bottom center" : "center center"),
                 effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
@@ -32,7 +33,7 @@ kendo_module({
                 that.shim.on("up", "hide");
             }
 
-            kendo.mobile.application.element.append(shim);
+            (app ? app.element : $(document.body)).append(shim);
 
             that.popup = new Popup(that.element, {
                 anchor: shim,
