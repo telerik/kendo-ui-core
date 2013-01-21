@@ -25,36 +25,40 @@
         <script src="../../src/kendo.mobile.navbar.js"></script>
     </head>
     <body>
-        <div id="Div1" data-role="view" data-transition="fade" data-title="Data" data-model="viewModel">
+        <div id="view" data-role="view" data-title="Example" data-model="viewModel">
             <div data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
                 </div>
             </div>
-            <ul data-role="listview" data-template="template" data-bind="source: items"></ul>
+            <ul data-role="listview" data-template="template-selector" data-bind="source: items"></ul>
         </div>
-
-        <script id="template" type="text/x-kendo-template">
-            <label>
-                <input type="checkbox" data-bind="checked: isSelected" onclick="return false;">
-                ${name}
-            </label>
+        <script id="template-selector" type="text/x-kendo-template">
+            <div data-template="${template}-template" data-bind="source: this"></div>
         </script>
-
+        <script id="switch-template" type="text/x-kendo-template">
+            ${name}<input type="checkbox" data-role="switch" data-bind="checked:value"/>
+        </script>
+        <script id="textbox-template" type="text/x-kendo-template">
+            ${name}<input type="text" data-bind="value: value"/>
+        </script>
         <script type="text/javascript">
             var mobileApp = new kendo.mobile.Application($(document.body));
 
             var viewModel = kendo.observable({
                 items: [
                     {
-                        name: 'checkbox 1',
-                        isSelected: true
+                        name: 'Switch Example',
+                        template: 'switch',
+                        value: true
                     },
                     {
-                        name: 'checkbox 2',
-                        isSelected: false
+                        name: 'Textbox Example',
+                        template: 'textbox',
+                        value: 'example text'
                     }]
             });
+
         </script>
     </body>
 </html>
