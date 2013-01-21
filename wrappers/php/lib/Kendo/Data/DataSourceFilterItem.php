@@ -5,19 +5,19 @@ namespace Kendo\Data;
 class DataSourceFilterItem extends \kendo\SerializableObject {
 //>> Properties
 
-    public function setOperator($value) {
+    public function operator($value) {
         $this->setProperty('operator', $value);
 
         return $this;
     }
 
-    public function setField($value) {
+    public function field($value) {
         $this->setProperty('field', $value);
 
         return $this;
     }
 
-    public function setValue($value) {
+    public function value($value) {
         $this->setProperty('value', $value);
 
         return $this;

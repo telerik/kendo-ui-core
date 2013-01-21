@@ -5,43 +5,43 @@ namespace Kendo\UI;
 class UploadAsync extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setAutoUpload($value) {
+    public function autoUpload($value) {
         $this->setProperty('autoUpload', $value);
 
         return $this;
     }
 
-    public function setBatch($value) {
+    public function batch($value) {
         $this->setProperty('batch', $value);
 
         return $this;
     }
 
-    public function setRemoveField($value) {
+    public function removeField($value) {
         $this->setProperty('removeField', $value);
 
         return $this;
     }
 
-    public function setRemoveUrl($value) {
+    public function removeUrl($value) {
         $this->setProperty('removeUrl', $value);
 
         return $this;
     }
 
-    public function setRemoveVerb($value) {
+    public function removeVerb($value) {
         $this->setProperty('removeVerb', $value);
 
         return $this;
     }
 
-    public function setSaveField($value) {
+    public function saveField($value) {
         $this->setProperty('saveField', $value);
 
         return $this;
     }
 
-    public function setSaveUrl($value) {
+    public function saveUrl($value) {
         $this->setProperty('saveUrl', $value);
 
         return $this;

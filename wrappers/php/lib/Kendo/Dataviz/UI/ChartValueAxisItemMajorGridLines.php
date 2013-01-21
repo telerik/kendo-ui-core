@@ -5,19 +5,19 @@ namespace Kendo\Dataviz\UI;
 class ChartValueAxisItemMajorGridLines extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setColor($value) {
+    public function color($value) {
         $this->setProperty('color', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;
     }
 
-    public function setWidth($value) {
+    public function width($value) {
         $this->setProperty('width', $value);
 
         return $this;

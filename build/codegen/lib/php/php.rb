@@ -23,7 +23,7 @@ module CodeGen::PHP
     end
 
 COMPOSITE_OPTION_SETTER = ERB.new(%{
-    public function set<%= name.pascalize %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
+    public function <%= name %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
         $this->setProperty('<%= name %>', $value);
 
         return $this;
@@ -66,7 +66,7 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
     end
 
 DATA_SOURCE_SETTER = %{
-    public function setDataSource(\\Kendo\\Data\\DataSource $value) {
+    public function dataSource(\\Kendo\\Data\\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
@@ -74,7 +74,7 @@ DATA_SOURCE_SETTER = %{
 }
 
 OPTION_SETTER = ERB.new(%{
-    public function set<%= name.pascalize %>($value) {
+    public function <%= name %>($value) {
         $this->setProperty('<%= name %>', $value);
 
         return $this;
@@ -92,7 +92,7 @@ OPTION_SETTER = ERB.new(%{
     end
 
 EVENT_SETTER = ERB.new(%{
-    public function set<%= name.pascalize %>($value) {
+    public function <%= name %>($value) {
         $this->setProperty('<%= name %>', new \\Kendo\\JavaScriptFunction($value));
 
         return $this;

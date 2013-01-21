@@ -5,55 +5,55 @@ namespace Kendo\Dataviz\UI;
 class ChartTitle extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setAlign($value) {
+    public function align($value) {
         $this->setProperty('align', $value);
 
         return $this;
     }
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\ChartTitleBorder $value) {
+    public function border(\Kendo\Dataviz\UI\ChartTitleBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setFont($value) {
+    public function font($value) {
         $this->setProperty('font', $value);
 
         return $this;
     }
 
-    public function setMargin($value) {
+    public function margin($value) {
         $this->setProperty('margin', $value);
 
         return $this;
     }
 
-    public function setPadding($value) {
+    public function padding($value) {
         $this->setProperty('padding', $value);
 
         return $this;
     }
 
-    public function setPosition($value) {
+    public function position($value) {
         $this->setProperty('position', $value);
 
         return $this;
     }
 
-    public function setText($value) {
+    public function text($value) {
         $this->setProperty('text', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;

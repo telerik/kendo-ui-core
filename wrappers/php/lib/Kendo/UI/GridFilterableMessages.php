@@ -5,49 +5,49 @@ namespace Kendo\UI;
 class GridFilterableMessages extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setAnd($value) {
+    public function and($value) {
         $this->setProperty('and', $value);
 
         return $this;
     }
 
-    public function setClear($value) {
+    public function clear($value) {
         $this->setProperty('clear', $value);
 
         return $this;
     }
 
-    public function setFilter($value) {
+    public function filter($value) {
         $this->setProperty('filter', $value);
 
         return $this;
     }
 
-    public function setInfo($value) {
+    public function info($value) {
         $this->setProperty('info', $value);
 
         return $this;
     }
 
-    public function setIsFalse($value) {
+    public function isFalse($value) {
         $this->setProperty('isFalse', $value);
 
         return $this;
     }
 
-    public function setIsTrue($value) {
+    public function isTrue($value) {
         $this->setProperty('isTrue', $value);
 
         return $this;
     }
 
-    public function setOR($value) {
+    public function or($value) {
         $this->setProperty('or', $value);
 
         return $this;
     }
 
-    public function setSelectValue($value) {
+    public function selectValue($value) {
         $this->setProperty('selectValue', $value);
 
         return $this;

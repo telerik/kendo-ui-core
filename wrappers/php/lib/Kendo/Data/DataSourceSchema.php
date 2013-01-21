@@ -5,49 +5,49 @@ namespace Kendo\Data;
 class DataSourceSchema extends \kendo\SerializableObject {
 //>> Properties
 
-    public function setAggregates($value) {
+    public function aggregates($value) {
         $this->setProperty('aggregates', $value);
 
         return $this;
     }
 
-    public function setData($value) {
+    public function data($value) {
         $this->setProperty('data', $value);
 
         return $this;
     }
 
-    public function setErrors($value) {
+    public function errors($value) {
         $this->setProperty('errors', $value);
 
         return $this;
     }
 
-    public function setGroups($value) {
+    public function groups($value) {
         $this->setProperty('groups', $value);
 
         return $this;
     }
 
-    public function setModel($value) {
+    public function model($value) {
         $this->setProperty('model', $value);
 
         return $this;
     }
 
-    public function setParse($value) {
+    public function parse($value) {
         $this->setProperty('parse', $value);
 
         return $this;
     }
 
-    public function setTotal($value) {
+    public function total($value) {
         $this->setProperty('total', $value);
 
         return $this;
     }
 
-    public function setType($value) {
+    public function type($value) {
         $this->setProperty('type', $value);
 
         return $this;

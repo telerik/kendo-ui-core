@@ -5,37 +5,37 @@ namespace Kendo\UI;
 class EditorImagebrowserSchemaModelFields extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setName($value) {
+    public function name($value) {
         $this->setProperty('name', $value);
 
         return $this;
     }
 
-    public function setName(\Kendo\UI\EditorImagebrowserSchemaModelFieldsName $value) {
+    public function name(\Kendo\UI\EditorImagebrowserSchemaModelFieldsName $value) {
         $this->setProperty('name', $value);
 
         return $this;
     }
 
-    public function setType($value) {
+    public function type($value) {
         $this->setProperty('type', $value);
 
         return $this;
     }
 
-    public function setType(\Kendo\UI\EditorImagebrowserSchemaModelFieldsType $value) {
+    public function type(\Kendo\UI\EditorImagebrowserSchemaModelFieldsType $value) {
         $this->setProperty('type', $value);
 
         return $this;
     }
 
-    public function setSize($value) {
+    public function size($value) {
         $this->setProperty('size', $value);
 
         return $this;
     }
 
-    public function setSize(\Kendo\UI\EditorImagebrowserSchemaModelFieldsSize $value) {
+    public function size(\Kendo\UI\EditorImagebrowserSchemaModelFieldsSize $value) {
         $this->setProperty('size', $value);
 
         return $this;

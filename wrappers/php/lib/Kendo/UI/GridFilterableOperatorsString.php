@@ -5,37 +5,37 @@ namespace Kendo\UI;
 class GridFilterableOperatorsString extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setEQ($value) {
+    public function eq($value) {
         $this->setProperty('eq', $value);
 
         return $this;
     }
 
-    public function setNeq($value) {
+    public function neq($value) {
         $this->setProperty('neq', $value);
 
         return $this;
     }
 
-    public function setStartswith($value) {
+    public function startswith($value) {
         $this->setProperty('startswith', $value);
 
         return $this;
     }
 
-    public function setContains($value) {
+    public function contains($value) {
         $this->setProperty('contains', $value);
 
         return $this;
     }
 
-    public function setDoesnotcontain($value) {
+    public function doesnotcontain($value) {
         $this->setProperty('doesnotcontain', $value);
 
         return $this;
     }
 
-    public function setEndswith($value) {
+    public function endswith($value) {
         $this->setProperty('endswith', $value);
 
         return $this;

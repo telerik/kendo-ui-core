@@ -8,151 +8,151 @@ class Window extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setActions($value) {
+    public function actions($value) {
         $this->setProperty('actions', $value);
 
         return $this;
     }
 
-    public function setAnimation(\Kendo\UI\WindowAnimation $value) {
+    public function animation(\Kendo\UI\WindowAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setAppendTo($value) {
+    public function appendTo($value) {
         $this->setProperty('appendTo', $value);
 
         return $this;
     }
 
-    public function setDraggable($value) {
+    public function draggable($value) {
         $this->setProperty('draggable', $value);
 
         return $this;
     }
 
-    public function setIframe($value) {
+    public function iframe($value) {
         $this->setProperty('iframe', $value);
 
         return $this;
     }
 
-    public function setMaxHeight($value) {
+    public function maxHeight($value) {
         $this->setProperty('maxHeight', $value);
 
         return $this;
     }
 
-    public function setMaxWidth($value) {
+    public function maxWidth($value) {
         $this->setProperty('maxWidth', $value);
 
         return $this;
     }
 
-    public function setMinHeight($value) {
+    public function minHeight($value) {
         $this->setProperty('minHeight', $value);
 
         return $this;
     }
 
-    public function setMinWidth($value) {
+    public function minWidth($value) {
         $this->setProperty('minWidth', $value);
 
         return $this;
     }
 
-    public function setModal($value) {
+    public function modal($value) {
         $this->setProperty('modal', $value);
 
         return $this;
     }
 
-    public function setResizable($value) {
+    public function resizable($value) {
         $this->setProperty('resizable', $value);
 
         return $this;
     }
 
-    public function setTitle($value) {
+    public function title($value) {
         $this->setProperty('title', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;
     }
 
-    public function setWidth($value) {
+    public function width($value) {
         $this->setProperty('width', $value);
 
         return $this;
     }
 
-    public function setHeight($value) {
+    public function height($value) {
         $this->setProperty('height', $value);
 
         return $this;
     }
 
-    public function setContent($value) {
+    public function content($value) {
         $this->setProperty('content', $value);
 
         return $this;
     }
 
-    public function setActivate($value) {
+    public function activate($value) {
         $this->setProperty('activate', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setClose($value) {
+    public function close($value) {
         $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDeactivate($value) {
+    public function deactivate($value) {
         $this->setProperty('deactivate', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDragend($value) {
+    public function dragend($value) {
         $this->setProperty('dragend', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDragstart($value) {
+    public function dragstart($value) {
         $this->setProperty('dragstart', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setError($value) {
+    public function error($value) {
         $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setOpen($value) {
+    public function open($value) {
         $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setRefresh($value) {
+    public function refresh($value) {
         $this->setProperty('refresh', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setResize($value) {
+    public function resize($value) {
         $this->setProperty('resize', new \Kendo\JavaScriptFunction($value));
 
         return $this;

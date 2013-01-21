@@ -5,55 +5,55 @@ namespace Kendo\UI;
 class GridPageable extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setPageSize($value) {
+    public function pageSize($value) {
         $this->setProperty('pageSize', $value);
 
         return $this;
     }
 
-    public function setPreviousNext($value) {
+    public function previousNext($value) {
         $this->setProperty('previousNext', $value);
 
         return $this;
     }
 
-    public function setNumeric($value) {
+    public function numeric($value) {
         $this->setProperty('numeric', $value);
 
         return $this;
     }
 
-    public function setButtonCount($value) {
+    public function buttonCount($value) {
         $this->setProperty('buttonCount', $value);
 
         return $this;
     }
 
-    public function setInput($value) {
+    public function input($value) {
         $this->setProperty('input', $value);
 
         return $this;
     }
 
-    public function setPageSizes($value) {
+    public function pageSizes($value) {
         $this->setProperty('pageSizes', $value);
 
         return $this;
     }
 
-    public function setRefresh($value) {
+    public function refresh($value) {
         $this->setProperty('refresh', $value);
 
         return $this;
     }
 
-    public function setInfo($value) {
+    public function info($value) {
         $this->setProperty('info', $value);
 
         return $this;
     }
 
-    public function setMessages(\Kendo\UI\GridPageableMessages $value) {
+    public function messages(\Kendo\UI\GridPageableMessages $value) {
         $this->setProperty('messages', $value);
 
         return $this;

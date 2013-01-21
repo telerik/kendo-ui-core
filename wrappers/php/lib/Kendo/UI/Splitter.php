@@ -8,7 +8,7 @@ class Splitter extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setOrientation($value) {
+    public function orientation($value) {
         $this->setProperty('orientation', $value);
 
         return $this;
@@ -27,31 +27,31 @@ class Splitter extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setCollapse($value) {
+    public function collapse($value) {
         $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setContentLoad($value) {
+    public function contentLoad($value) {
         $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setExpand($value) {
+    public function expand($value) {
         $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setLayoutChange($value) {
+    public function layoutChange($value) {
         $this->setProperty('layoutChange', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setResize($value) {
+    public function resize($value) {
         $this->setProperty('resize', new \Kendo\JavaScriptFunction($value));
 
         return $this;

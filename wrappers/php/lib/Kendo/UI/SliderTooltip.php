@@ -5,19 +5,19 @@ namespace Kendo\UI;
 class SliderTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setEnabled($value) {
+    public function enabled($value) {
         $this->setProperty('enabled', $value);
 
         return $this;
     }
 
-    public function setFormat($value) {
+    public function format($value) {
         $this->setProperty('format', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;

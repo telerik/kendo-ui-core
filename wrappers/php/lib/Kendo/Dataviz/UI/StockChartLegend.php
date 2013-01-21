@@ -5,55 +5,55 @@ namespace Kendo\Dataviz\UI;
 class StockChartLegend extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\StockChartLegendBorder $value) {
+    public function border(\Kendo\Dataviz\UI\StockChartLegendBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setLabels(\Kendo\Dataviz\UI\StockChartLegendLabels $value) {
+    public function labels(\Kendo\Dataviz\UI\StockChartLegendLabels $value) {
         $this->setProperty('labels', $value);
 
         return $this;
     }
 
-    public function setMargin($value) {
+    public function margin($value) {
         $this->setProperty('margin', $value);
 
         return $this;
     }
 
-    public function setOffsetX($value) {
+    public function offsetX($value) {
         $this->setProperty('offsetX', $value);
 
         return $this;
     }
 
-    public function setOffsetY($value) {
+    public function offsetY($value) {
         $this->setProperty('offsetY', $value);
 
         return $this;
     }
 
-    public function setPadding($value) {
+    public function padding($value) {
         $this->setProperty('padding', $value);
 
         return $this;
     }
 
-    public function setPosition($value) {
+    public function position($value) {
         $this->setProperty('position', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;

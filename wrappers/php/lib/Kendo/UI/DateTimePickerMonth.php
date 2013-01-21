@@ -5,13 +5,13 @@ namespace Kendo\UI;
 class DateTimePickerMonth extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setContent($value) {
+    public function content($value) {
         $this->setProperty('content', $value);
 
         return $this;
     }
 
-    public function setEmpty($value) {
+    public function empty($value) {
         $this->setProperty('empty', $value);
 
         return $this;

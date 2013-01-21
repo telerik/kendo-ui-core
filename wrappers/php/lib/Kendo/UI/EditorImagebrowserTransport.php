@@ -5,37 +5,37 @@ namespace Kendo\UI;
 class EditorImagebrowserTransport extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setRead($value) {
+    public function read($value) {
         $this->setProperty('read', $value);
 
         return $this;
     }
 
-    public function setThumbnailUrl($value) {
+    public function thumbnailUrl($value) {
         $this->setProperty('thumbnailUrl', $value);
 
         return $this;
     }
 
-    public function setUploadUrl($value) {
+    public function uploadUrl($value) {
         $this->setProperty('uploadUrl', $value);
 
         return $this;
     }
 
-    public function setImageUrl($value) {
+    public function imageUrl($value) {
         $this->setProperty('imageUrl', $value);
 
         return $this;
     }
 
-    public function setDestroy($value) {
+    public function destroy($value) {
         $this->setProperty('destroy', $value);
 
         return $this;
     }
 
-    public function setCreate($value) {
+    public function create($value) {
         $this->setProperty('create', $value);
 
         return $this;

@@ -5,13 +5,13 @@ namespace Kendo\Data;
 class DataSourceGroupItem extends \kendo\SerializableObject {
 //>> Properties
 
-    public function setField($value) {
+    public function field($value) {
         $this->setProperty('field', $value);
 
         return $this;
     }
 
-    public function setDir($value) {
+    public function dir($value) {
         $this->setProperty('dir', $value);
 
         return $this;

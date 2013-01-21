@@ -5,91 +5,91 @@ namespace Kendo\Dataviz\UI;
 class ChartValueAxisItem extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setAxisCrossingValue($value) {
+    public function axisCrossingValue($value) {
         $this->setProperty('axisCrossingValue', $value);
 
         return $this;
     }
 
-    public function setColor($value) {
+    public function color($value) {
         $this->setProperty('color', $value);
 
         return $this;
     }
 
-    public function setLabels(\Kendo\Dataviz\UI\ChartValueAxisItemLabels $value) {
+    public function labels(\Kendo\Dataviz\UI\ChartValueAxisItemLabels $value) {
         $this->setProperty('labels', $value);
 
         return $this;
     }
 
-    public function setLine(\Kendo\Dataviz\UI\ChartValueAxisItemLine $value) {
+    public function line(\Kendo\Dataviz\UI\ChartValueAxisItemLine $value) {
         $this->setProperty('line', $value);
 
         return $this;
     }
 
-    public function setMajorGridLines(\Kendo\Dataviz\UI\ChartValueAxisItemMajorGridLines $value) {
+    public function majorGridLines(\Kendo\Dataviz\UI\ChartValueAxisItemMajorGridLines $value) {
         $this->setProperty('majorGridLines', $value);
 
         return $this;
     }
 
-    public function setMajorTicks(\Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks $value) {
+    public function majorTicks(\Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks $value) {
         $this->setProperty('majorTicks', $value);
 
         return $this;
     }
 
-    public function setMajorUnit($value) {
+    public function majorUnit($value) {
         $this->setProperty('majorUnit', $value);
 
         return $this;
     }
 
-    public function setMax($value) {
+    public function max($value) {
         $this->setProperty('max', $value);
 
         return $this;
     }
 
-    public function setMin($value) {
+    public function min($value) {
         $this->setProperty('min', $value);
 
         return $this;
     }
 
-    public function setMinorGridLines(\Kendo\Dataviz\UI\ChartValueAxisItemMinorGridLines $value) {
+    public function minorGridLines(\Kendo\Dataviz\UI\ChartValueAxisItemMinorGridLines $value) {
         $this->setProperty('minorGridLines', $value);
 
         return $this;
     }
 
-    public function setMinorTicks(\Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks $value) {
+    public function minorTicks(\Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks $value) {
         $this->setProperty('minorTicks', $value);
 
         return $this;
     }
 
-    public function setMinorUnit($value) {
+    public function minorUnit($value) {
         $this->setProperty('minorUnit', $value);
 
         return $this;
     }
 
-    public function setName($value) {
+    public function name($value) {
         $this->setProperty('name', $value);
 
         return $this;
     }
 
-    public function setNarrowRange($value) {
+    public function narrowRange($value) {
         $this->setProperty('narrowRange', $value);
 
         return $this;
     }
 
-    public function setPane($value) {
+    public function pane($value) {
         $this->setProperty('pane', $value);
 
         return $this;
@@ -108,19 +108,19 @@ class ChartValueAxisItem extends \Kendo\SerializableObject {
         return $this;
     }
 
-    public function setReverse($value) {
+    public function reverse($value) {
         $this->setProperty('reverse', $value);
 
         return $this;
     }
 
-    public function setTitle(\Kendo\Dataviz\UI\ChartValueAxisItemTitle $value) {
+    public function title(\Kendo\Dataviz\UI\ChartValueAxisItemTitle $value) {
         $this->setProperty('title', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;

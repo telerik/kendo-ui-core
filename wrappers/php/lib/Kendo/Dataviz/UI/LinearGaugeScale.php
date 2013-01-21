@@ -5,55 +5,55 @@ namespace Kendo\Dataviz\UI;
 class LinearGaugeScale extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setLine(\Kendo\Dataviz\UI\LinearGaugeScaleLine $value) {
+    public function line(\Kendo\Dataviz\UI\LinearGaugeScaleLine $value) {
         $this->setProperty('line', $value);
 
         return $this;
     }
 
-    public function setLabels(\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value) {
+    public function labels(\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value) {
         $this->setProperty('labels', $value);
 
         return $this;
     }
 
-    public function setMajorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value) {
+    public function majorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value) {
         $this->setProperty('majorTicks', $value);
 
         return $this;
     }
 
-    public function setMajorUnit($value) {
+    public function majorUnit($value) {
         $this->setProperty('majorUnit', $value);
 
         return $this;
     }
 
-    public function setMax($value) {
+    public function max($value) {
         $this->setProperty('max', $value);
 
         return $this;
     }
 
-    public function setMin($value) {
+    public function min($value) {
         $this->setProperty('min', $value);
 
         return $this;
     }
 
-    public function setMinorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value) {
+    public function minorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value) {
         $this->setProperty('minorTicks', $value);
 
         return $this;
     }
 
-    public function setMinorUnit($value) {
+    public function minorUnit($value) {
         $this->setProperty('minorUnit', $value);
 
         return $this;
     }
 
-    public function setMirror($value) {
+    public function mirror($value) {
         $this->setProperty('mirror', $value);
 
         return $this;
@@ -72,13 +72,13 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
         return $this;
     }
 
-    public function setReverse($value) {
+    public function reverse($value) {
         $this->setProperty('reverse', $value);
 
         return $this;
     }
 
-    public function setVertical($value) {
+    public function vertical($value) {
         $this->setProperty('vertical', $value);
 
         return $this;

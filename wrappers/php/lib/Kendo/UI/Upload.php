@@ -8,79 +8,79 @@ class Upload extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAsync(\Kendo\UI\UploadAsync $value) {
+    public function async(\Kendo\UI\UploadAsync $value) {
         $this->setProperty('async', $value);
 
         return $this;
     }
 
-    public function setEnabled($value) {
+    public function enabled($value) {
         $this->setProperty('enabled', $value);
 
         return $this;
     }
 
-    public function setLocalization(\Kendo\UI\UploadLocalization $value) {
+    public function localization(\Kendo\UI\UploadLocalization $value) {
         $this->setProperty('localization', $value);
 
         return $this;
     }
 
-    public function setMultiple($value) {
+    public function multiple($value) {
         $this->setProperty('multiple', $value);
 
         return $this;
     }
 
-    public function setShowFileList($value) {
+    public function showFileList($value) {
         $this->setProperty('showFileList', $value);
 
         return $this;
     }
 
-    public function setCancel($value) {
+    public function cancel($value) {
         $this->setProperty('cancel', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setComplete($value) {
+    public function complete($value) {
         $this->setProperty('complete', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setError($value) {
+    public function error($value) {
         $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setProgress($value) {
+    public function progress($value) {
         $this->setProperty('progress', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setRemove($value) {
+    public function remove($value) {
         $this->setProperty('remove', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSuccess($value) {
+    public function success($value) {
         $this->setProperty('success', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setUpload($value) {
+    public function upload($value) {
         $this->setProperty('upload', new \Kendo\JavaScriptFunction($value));
 
         return $this;

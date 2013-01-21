@@ -5,13 +5,13 @@ namespace Kendo\UI;
 class PanelBarAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setCollapse(\Kendo\UI\PanelBarAnimationCollapse $value) {
+    public function collapse(\Kendo\UI\PanelBarAnimationCollapse $value) {
         $this->setProperty('collapse', $value);
 
         return $this;
     }
 
-    public function setExpand(\Kendo\UI\PanelBarAnimationExpand $value) {
+    public function expand(\Kendo\UI\PanelBarAnimationExpand $value) {
         $this->setProperty('expand', $value);
 
         return $this;

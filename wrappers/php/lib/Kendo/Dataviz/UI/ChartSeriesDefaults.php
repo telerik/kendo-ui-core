@@ -5,121 +5,121 @@ namespace Kendo\Dataviz\UI;
 class ChartSeriesDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setArea($value) {
+    public function area($value) {
         $this->setProperty('area', $value);
 
         return $this;
     }
 
-    public function setCandlestick($value) {
+    public function candlestick($value) {
         $this->setProperty('candlestick', $value);
 
         return $this;
     }
 
-    public function setOhlc($value) {
+    public function ohlc($value) {
         $this->setProperty('ohlc', $value);
 
         return $this;
     }
 
-    public function setBar($value) {
+    public function bar($value) {
         $this->setProperty('bar', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value) {
+    public function border(\Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setBubble($value) {
+    public function bubble($value) {
         $this->setProperty('bubble', $value);
 
         return $this;
     }
 
-    public function setColumn($value) {
+    public function column($value) {
         $this->setProperty('column', $value);
 
         return $this;
     }
 
-    public function setDonut($value) {
+    public function donut($value) {
         $this->setProperty('donut', $value);
 
         return $this;
     }
 
-    public function setGap($value) {
+    public function gap($value) {
         $this->setProperty('gap', $value);
 
         return $this;
     }
 
-    public function setLabels(\Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value) {
+    public function labels(\Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value) {
         $this->setProperty('labels', $value);
 
         return $this;
     }
 
-    public function setLine($value) {
+    public function line($value) {
         $this->setProperty('line', $value);
 
         return $this;
     }
 
-    public function setOverlay($value) {
+    public function overlay($value) {
         $this->setProperty('overlay', $value);
 
         return $this;
     }
 
-    public function setPie($value) {
+    public function pie($value) {
         $this->setProperty('pie', $value);
 
         return $this;
     }
 
-    public function setScatter($value) {
+    public function scatter($value) {
         $this->setProperty('scatter', $value);
 
         return $this;
     }
 
-    public function setScatterLine($value) {
+    public function scatterLine($value) {
         $this->setProperty('scatterLine', $value);
 
         return $this;
     }
 
-    public function setSpacing($value) {
+    public function spacing($value) {
         $this->setProperty('spacing', $value);
 
         return $this;
     }
 
-    public function setStack($value) {
+    public function stack($value) {
         $this->setProperty('stack', $value);
 
         return $this;
     }
 
-    public function setTooltip(\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value) {
+    public function tooltip(\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value) {
         $this->setProperty('tooltip', $value);
 
         return $this;
     }
 
-    public function setVerticalArea($value) {
+    public function verticalArea($value) {
         $this->setProperty('verticalArea', $value);
 
         return $this;
     }
 
-    public function setVerticalLine($value) {
+    public function verticalLine($value) {
         $this->setProperty('verticalLine', $value);
 
         return $this;

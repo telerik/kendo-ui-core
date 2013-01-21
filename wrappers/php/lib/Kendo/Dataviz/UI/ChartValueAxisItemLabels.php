@@ -5,79 +5,79 @@ namespace Kendo\Dataviz\UI;
 class ChartValueAxisItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\ChartValueAxisItemLabelsBorder $value) {
+    public function border(\Kendo\Dataviz\UI\ChartValueAxisItemLabelsBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setColor($value) {
+    public function color($value) {
         $this->setProperty('color', $value);
 
         return $this;
     }
 
-    public function setFont($value) {
+    public function font($value) {
         $this->setProperty('font', $value);
 
         return $this;
     }
 
-    public function setFormat($value) {
+    public function format($value) {
         $this->setProperty('format', $value);
 
         return $this;
     }
 
-    public function setMargin($value) {
+    public function margin($value) {
         $this->setProperty('margin', $value);
 
         return $this;
     }
 
-    public function setMirror($value) {
+    public function mirror($value) {
         $this->setProperty('mirror', $value);
 
         return $this;
     }
 
-    public function setPadding($value) {
+    public function padding($value) {
         $this->setProperty('padding', $value);
 
         return $this;
     }
 
-    public function setRotation($value) {
+    public function rotation($value) {
         $this->setProperty('rotation', $value);
 
         return $this;
     }
 
-    public function setSkip($value) {
+    public function skip($value) {
         $this->setProperty('skip', $value);
 
         return $this;
     }
 
-    public function setStep($value) {
+    public function step($value) {
         $this->setProperty('step', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;

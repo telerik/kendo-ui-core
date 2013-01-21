@@ -5,37 +5,37 @@ namespace Kendo\Data;
 class DataSourceTransportRead extends \kendo\SerializableObject {
 //>> Properties
 
-    public function setCache($value) {
+    public function cache($value) {
         $this->setProperty('cache', $value);
 
         return $this;
     }
 
-    public function setContentType($value) {
+    public function contentType($value) {
         $this->setProperty('contentType', $value);
 
         return $this;
     }
 
-    public function setData($value) {
+    public function data($value) {
         $this->setProperty('data', $value);
 
         return $this;
     }
 
-    public function setDataType($value) {
+    public function dataType($value) {
         $this->setProperty('dataType', $value);
 
         return $this;
     }
 
-    public function setType($value) {
+    public function type($value) {
         $this->setProperty('type', $value);
 
         return $this;
     }
 
-    public function setUrl($value) {
+    public function url($value) {
         $this->setProperty('url', $value);
 
         return $this;

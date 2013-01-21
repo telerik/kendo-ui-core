@@ -5,13 +5,13 @@ namespace Kendo\Dataviz\UI;
 class StockChartCategoryAxisItemMajorTicks extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setSize($value) {
+    public function size($value) {
         $this->setProperty('size', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;

@@ -5,31 +5,31 @@ namespace Kendo\Dataviz\UI;
 class LinearGaugeGaugeArea extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder $value) {
+    public function border(\Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setHeight($value) {
+    public function height($value) {
         $this->setProperty('height', $value);
 
         return $this;
     }
 
-    public function setMargin($value) {
+    public function margin($value) {
         $this->setProperty('margin', $value);
 
         return $this;
     }
 
-    public function setWidth($value) {
+    public function width($value) {
         $this->setProperty('width', $value);
 
         return $this;

@@ -5,13 +5,13 @@ namespace Kendo\UI;
 class DateTimePickerAnimationOpen extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setEffects($value) {
+    public function effects($value) {
         $this->setProperty('effects', $value);
 
         return $this;
     }
 
-    public function setDuration($value) {
+    public function duration($value) {
         $this->setProperty('duration', $value);
 
         return $this;

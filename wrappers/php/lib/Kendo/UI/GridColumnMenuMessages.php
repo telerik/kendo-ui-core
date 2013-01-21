@@ -5,25 +5,25 @@ namespace Kendo\UI;
 class GridColumnMenuMessages extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setColumns($value) {
+    public function columns($value) {
         $this->setProperty('columns', $value);
 
         return $this;
     }
 
-    public function setFilter($value) {
+    public function filter($value) {
         $this->setProperty('filter', $value);
 
         return $this;
     }
 
-    public function setSortAscending($value) {
+    public function sortAscending($value) {
         $this->setProperty('sortAscending', $value);
 
         return $this;
     }
 
-    public function setSortDescending($value) {
+    public function sortDescending($value) {
         $this->setProperty('sortDescending', $value);
 
         return $this;

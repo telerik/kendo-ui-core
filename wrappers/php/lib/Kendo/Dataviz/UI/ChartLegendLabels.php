@@ -5,19 +5,19 @@ namespace Kendo\Dataviz\UI;
 class ChartLegendLabels extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setColor($value) {
+    public function color($value) {
         $this->setProperty('color', $value);
 
         return $this;
     }
 
-    public function setFont($value) {
+    public function font($value) {
         $this->setProperty('font', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;

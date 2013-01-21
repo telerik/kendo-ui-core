@@ -8,43 +8,43 @@ class Menu extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAnimation(\Kendo\UI\MenuAnimation $value) {
+    public function animation(\Kendo\UI\MenuAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setCloseOnClick($value) {
+    public function closeOnClick($value) {
         $this->setProperty('closeOnClick', $value);
 
         return $this;
     }
 
-    public function setDirection($value) {
+    public function direction($value) {
         $this->setProperty('direction', $value);
 
         return $this;
     }
 
-    public function setHoverDelay($value) {
+    public function hoverDelay($value) {
         $this->setProperty('hoverDelay', $value);
 
         return $this;
     }
 
-    public function setOpenOnClick($value) {
+    public function openOnClick($value) {
         $this->setProperty('openOnClick', $value);
 
         return $this;
     }
 
-    public function setOrientation($value) {
+    public function orientation($value) {
         $this->setProperty('orientation', $value);
 
         return $this;
     }
 
-    public function setPopupCollision($value) {
+    public function popupCollision($value) {
         $this->setProperty('popupCollision', $value);
 
         return $this;
@@ -63,19 +63,19 @@ class Menu extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setClose($value) {
+    public function close($value) {
         $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setOpen($value) {
+    public function open($value) {
         $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;

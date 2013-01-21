@@ -5,25 +5,25 @@ namespace Kendo\Dataviz\UI;
 class ChartValueAxisItemPlotBand extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setFrom($value) {
+    public function from($value) {
         $this->setProperty('from', $value);
 
         return $this;
     }
 
-    public function setTO($value) {
+    public function to($value) {
         $this->setProperty('to', $value);
 
         return $this;
     }
 
-    public function setColor($value) {
+    public function color($value) {
         $this->setProperty('color', $value);
 
         return $this;
     }
 
-    public function setOpacity($value) {
+    public function opacity($value) {
         $this->setProperty('opacity', $value);
 
         return $this;

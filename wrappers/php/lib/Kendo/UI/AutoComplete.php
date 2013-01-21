@@ -12,115 +12,115 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAnimation(\Kendo\UI\AutoCompleteAnimation $value) {
+    public function animation(\Kendo\UI\AutoCompleteAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setDataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource(\Kendo\Data\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
     }
 
-    public function setDataTextField($value) {
+    public function dataTextField($value) {
         $this->setProperty('dataTextField', $value);
 
         return $this;
     }
 
-    public function setDelay($value) {
+    public function delay($value) {
         $this->setProperty('delay', $value);
 
         return $this;
     }
 
-    public function setEnable($value) {
+    public function enable($value) {
         $this->setProperty('enable', $value);
 
         return $this;
     }
 
-    public function setFilter($value) {
+    public function filter($value) {
         $this->setProperty('filter', $value);
 
         return $this;
     }
 
-    public function setHeight($value) {
+    public function height($value) {
         $this->setProperty('height', $value);
 
         return $this;
     }
 
-    public function setHighlightFirst($value) {
+    public function highlightFirst($value) {
         $this->setProperty('highlightFirst', $value);
 
         return $this;
     }
 
-    public function setIgnoreCase($value) {
+    public function ignoreCase($value) {
         $this->setProperty('ignoreCase', $value);
 
         return $this;
     }
 
-    public function setMinLength($value) {
+    public function minLength($value) {
         $this->setProperty('minLength', $value);
 
         return $this;
     }
 
-    public function setPlaceholder($value) {
+    public function placeholder($value) {
         $this->setProperty('placeholder', $value);
 
         return $this;
     }
 
-    public function setSeparator($value) {
+    public function separator($value) {
         $this->setProperty('separator', $value);
 
         return $this;
     }
 
-    public function setSuggest($value) {
+    public function suggest($value) {
         $this->setProperty('suggest', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setClose($value) {
+    public function close($value) {
         $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDataBound($value) {
+    public function dataBound($value) {
         $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setOpen($value) {
+    public function open($value) {
         $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;

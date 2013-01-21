@@ -5,19 +5,19 @@ namespace Kendo\UI;
 class EditorTool extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setName($value) {
+    public function name($value) {
         $this->setProperty('name', $value);
 
         return $this;
     }
 
-    public function setTooltip($value) {
+    public function tooltip($value) {
         $this->setProperty('tooltip', $value);
 
         return $this;
     }
 
-    public function setExec($value) {
+    public function exec($value) {
         $this->setProperty('exec', $value);
 
         return $this;

@@ -5,31 +5,31 @@ namespace Kendo\UI;
 class MenuItem extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setText($value) {
+    public function text($value) {
         $this->setProperty('text', $value);
 
         return $this;
     }
 
-    public function setImageUrl($value) {
+    public function imageUrl($value) {
         $this->setProperty('imageUrl', $value);
 
         return $this;
     }
 
-    public function setSpriteCssClass($value) {
+    public function spriteCssClass($value) {
         $this->setProperty('spriteCssClass', $value);
 
         return $this;
     }
 
-    public function setEnabled($value) {
+    public function enabled($value) {
         $this->setProperty('enabled', $value);
 
         return $this;
     }
 
-    public function setSelected($value) {
+    public function selected($value) {
         $this->setProperty('selected', $value);
 
         return $this;

@@ -8,19 +8,19 @@ class PanelBar extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAnimation($value) {
+    public function animation($value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setAnimation(\Kendo\UI\PanelBarAnimation $value) {
+    public function animation(\Kendo\UI\PanelBarAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setExpandMode($value) {
+    public function expandMode($value) {
         $this->setProperty('expandMode', $value);
 
         return $this;
@@ -39,37 +39,37 @@ class PanelBar extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setActivate($value) {
+    public function activate($value) {
         $this->setProperty('activate', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setCollapse($value) {
+    public function collapse($value) {
         $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setContentLoad($value) {
+    public function contentLoad($value) {
         $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setError($value) {
+    public function error($value) {
         $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setExpand($value) {
+    public function expand($value) {
         $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;

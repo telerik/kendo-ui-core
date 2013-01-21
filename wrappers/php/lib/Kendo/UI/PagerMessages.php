@@ -5,61 +5,61 @@ namespace Kendo\UI;
 class PagerMessages extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setDisplay($value) {
+    public function display($value) {
         $this->setProperty('display', $value);
 
         return $this;
     }
 
-    public function setEmpty($value) {
+    public function empty($value) {
         $this->setProperty('empty', $value);
 
         return $this;
     }
 
-    public function setPage($value) {
+    public function page($value) {
         $this->setProperty('page', $value);
 
         return $this;
     }
 
-    public function setOF($value) {
+    public function of($value) {
         $this->setProperty('of', $value);
 
         return $this;
     }
 
-    public function setItemsPerPage($value) {
+    public function itemsPerPage($value) {
         $this->setProperty('itemsPerPage', $value);
 
         return $this;
     }
 
-    public function setFirst($value) {
+    public function first($value) {
         $this->setProperty('first', $value);
 
         return $this;
     }
 
-    public function setPrevious($value) {
+    public function previous($value) {
         $this->setProperty('previous', $value);
 
         return $this;
     }
 
-    public function setNext($value) {
+    public function next($value) {
         $this->setProperty('next', $value);
 
         return $this;
     }
 
-    public function setLast($value) {
+    public function last($value) {
         $this->setProperty('last', $value);
 
         return $this;
     }
 
-    public function setRefresh($value) {
+    public function refresh($value) {
         $this->setProperty('refresh', $value);
 
         return $this;

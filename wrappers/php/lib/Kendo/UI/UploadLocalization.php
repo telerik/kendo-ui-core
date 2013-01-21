@@ -5,55 +5,55 @@ namespace Kendo\UI;
 class UploadLocalization extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setCancel($value) {
+    public function cancel($value) {
         $this->setProperty('cancel', $value);
 
         return $this;
     }
 
-    public function setDropFilesHere($value) {
+    public function dropFilesHere($value) {
         $this->setProperty('dropFilesHere', $value);
 
         return $this;
     }
 
-    public function setRemove($value) {
+    public function remove($value) {
         $this->setProperty('remove', $value);
 
         return $this;
     }
 
-    public function setRetry($value) {
+    public function retry($value) {
         $this->setProperty('retry', $value);
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', $value);
 
         return $this;
     }
 
-    public function setStatusFailed($value) {
+    public function statusFailed($value) {
         $this->setProperty('statusFailed', $value);
 
         return $this;
     }
 
-    public function setStatusUploaded($value) {
+    public function statusUploaded($value) {
         $this->setProperty('statusUploaded', $value);
 
         return $this;
     }
 
-    public function setStatusUploading($value) {
+    public function statusUploading($value) {
         $this->setProperty('statusUploading', $value);
 
         return $this;
     }
 
-    public function setUploadSelectedFiles($value) {
+    public function uploadSelectedFiles($value) {
         $this->setProperty('uploadSelectedFiles', $value);
 
         return $this;

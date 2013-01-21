@@ -8,7 +8,7 @@ class Grid extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAutoBind($value) {
+    public function autoBind($value) {
         $this->setProperty('autoBind', $value);
 
         return $this;
@@ -27,121 +27,121 @@ class Grid extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setColumnMenu($value) {
+    public function columnMenu($value) {
         $this->setProperty('columnMenu', $value);
 
         return $this;
     }
 
-    public function setColumnMenu(\Kendo\UI\GridColumnMenu $value) {
+    public function columnMenu(\Kendo\UI\GridColumnMenu $value) {
         $this->setProperty('columnMenu', $value);
 
         return $this;
     }
 
-    public function setDataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource(\Kendo\Data\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
     }
 
-    public function setEditable($value) {
+    public function editable($value) {
         $this->setProperty('editable', $value);
 
         return $this;
     }
 
-    public function setEditable(\Kendo\UI\GridEditable $value) {
+    public function editable(\Kendo\UI\GridEditable $value) {
         $this->setProperty('editable', $value);
 
         return $this;
     }
 
-    public function setFilterable($value) {
+    public function filterable($value) {
         $this->setProperty('filterable', $value);
 
         return $this;
     }
 
-    public function setFilterable(\Kendo\UI\GridFilterable $value) {
+    public function filterable(\Kendo\UI\GridFilterable $value) {
         $this->setProperty('filterable', $value);
 
         return $this;
     }
 
-    public function setReorderable($value) {
+    public function reorderable($value) {
         $this->setProperty('reorderable', $value);
 
         return $this;
     }
 
-    public function setResizable($value) {
+    public function resizable($value) {
         $this->setProperty('resizable', $value);
 
         return $this;
     }
 
-    public function setGroupable($value) {
+    public function groupable($value) {
         $this->setProperty('groupable', $value);
 
         return $this;
     }
 
-    public function setGroupable(\Kendo\UI\GridGroupable $value) {
+    public function groupable(\Kendo\UI\GridGroupable $value) {
         $this->setProperty('groupable', $value);
 
         return $this;
     }
 
-    public function setHeight($value) {
+    public function height($value) {
         $this->setProperty('height', $value);
 
         return $this;
     }
 
-    public function setNavigatable($value) {
+    public function navigatable($value) {
         $this->setProperty('navigatable', $value);
 
         return $this;
     }
 
-    public function setPageable($value) {
+    public function pageable($value) {
         $this->setProperty('pageable', $value);
 
         return $this;
     }
 
-    public function setPageable(\Kendo\UI\GridPageable $value) {
+    public function pageable(\Kendo\UI\GridPageable $value) {
         $this->setProperty('pageable', $value);
 
         return $this;
     }
 
-    public function setScrollable($value) {
+    public function scrollable($value) {
         $this->setProperty('scrollable', $value);
 
         return $this;
     }
 
-    public function setScrollable(\Kendo\UI\GridScrollable $value) {
+    public function scrollable(\Kendo\UI\GridScrollable $value) {
         $this->setProperty('scrollable', $value);
 
         return $this;
     }
 
-    public function setSelectable($value) {
+    public function selectable($value) {
         $this->setProperty('selectable', $value);
 
         return $this;
     }
 
-    public function setSortable($value) {
+    public function sortable($value) {
         $this->setProperty('sortable', $value);
 
         return $this;
     }
 
-    public function setSortable(\Kendo\UI\GridSortable $value) {
+    public function sortable(\Kendo\UI\GridSortable $value) {
         $this->setProperty('sortable', $value);
 
         return $this;
@@ -160,115 +160,115 @@ class Grid extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setDetailTemplate($value) {
+    public function detailTemplate($value) {
         $this->setProperty('detailTemplate', $value);
 
         return $this;
     }
 
-    public function setRowTemplate($value) {
+    public function rowTemplate($value) {
         $this->setProperty('rowTemplate', $value);
 
         return $this;
     }
 
-    public function setAltRowTemplate($value) {
+    public function altRowTemplate($value) {
         $this->setProperty('altRowTemplate', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setColumnHide($value) {
+    public function columnHide($value) {
         $this->setProperty('columnHide', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setColumnReorder($value) {
+    public function columnReorder($value) {
         $this->setProperty('columnReorder', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setColumnResize($value) {
+    public function columnResize($value) {
         $this->setProperty('columnResize', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setColumnShow($value) {
+    public function columnShow($value) {
         $this->setProperty('columnShow', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDataBound($value) {
+    public function dataBound($value) {
         $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDataBinding($value) {
+    public function dataBinding($value) {
         $this->setProperty('dataBinding', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDetailCollapse($value) {
+    public function detailCollapse($value) {
         $this->setProperty('detailCollapse', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDetailExpand($value) {
+    public function detailExpand($value) {
         $this->setProperty('detailExpand', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDetailInit($value) {
+    public function detailInit($value) {
         $this->setProperty('detailInit', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setEdit($value) {
+    public function edit($value) {
         $this->setProperty('edit', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setFilterMenuInit($value) {
+    public function filterMenuInit($value) {
         $this->setProperty('filterMenuInit', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setColumnMenuInit($value) {
+    public function columnMenuInit($value) {
         $this->setProperty('columnMenuInit', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setRemove($value) {
+    public function remove($value) {
         $this->setProperty('remove', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSave($value) {
+    public function save($value) {
         $this->setProperty('save', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSaveChanges($value) {
+    public function saveChanges($value) {
         $this->setProperty('saveChanges', new \Kendo\JavaScriptFunction($value));
 
         return $this;

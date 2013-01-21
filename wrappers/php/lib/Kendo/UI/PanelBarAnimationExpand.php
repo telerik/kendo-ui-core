@@ -5,19 +5,19 @@ namespace Kendo\UI;
 class PanelBarAnimationExpand extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setDuration($value) {
+    public function duration($value) {
         $this->setProperty('duration', $value);
 
         return $this;
     }
 
-    public function setEffects($value) {
+    public function effects($value) {
         $this->setProperty('effects', $value);
 
         return $this;
     }
 
-    public function setShow($value) {
+    public function show($value) {
         $this->setProperty('show', $value);
 
         return $this;

@@ -5,49 +5,49 @@ namespace Kendo\Dataviz\UI;
 class ChartSeriesDefaultsTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltipBorder $value) {
+    public function border(\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltipBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setColor($value) {
+    public function color($value) {
         $this->setProperty('color', $value);
 
         return $this;
     }
 
-    public function setFont($value) {
+    public function font($value) {
         $this->setProperty('font', $value);
 
         return $this;
     }
 
-    public function setFormat($value) {
+    public function format($value) {
         $this->setProperty('format', $value);
 
         return $this;
     }
 
-    public function setPadding($value) {
+    public function padding($value) {
         $this->setProperty('padding', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;

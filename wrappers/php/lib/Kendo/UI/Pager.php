@@ -8,79 +8,79 @@ class Pager extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAutoBind($value) {
+    public function autoBind($value) {
         $this->setProperty('autoBind', $value);
 
         return $this;
     }
 
-    public function setButtonCount($value) {
+    public function buttonCount($value) {
         $this->setProperty('buttonCount', $value);
 
         return $this;
     }
 
-    public function setDataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource(\Kendo\Data\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
     }
 
-    public function setSelectTemplate($value) {
+    public function selectTemplate($value) {
         $this->setProperty('selectTemplate', $value);
 
         return $this;
     }
 
-    public function setLinkTemplate($value) {
+    public function linkTemplate($value) {
         $this->setProperty('linkTemplate', $value);
 
         return $this;
     }
 
-    public function setInfo($value) {
+    public function info($value) {
         $this->setProperty('info', $value);
 
         return $this;
     }
 
-    public function setInput($value) {
+    public function input($value) {
         $this->setProperty('input', $value);
 
         return $this;
     }
 
-    public function setNumeric($value) {
+    public function numeric($value) {
         $this->setProperty('numeric', $value);
 
         return $this;
     }
 
-    public function setPageSizes($value) {
+    public function pageSizes($value) {
         $this->setProperty('pageSizes', $value);
 
         return $this;
     }
 
-    public function setPreviousNext($value) {
+    public function previousNext($value) {
         $this->setProperty('previousNext', $value);
 
         return $this;
     }
 
-    public function setRefresh($value) {
+    public function refresh($value) {
         $this->setProperty('refresh', $value);
 
         return $this;
     }
 
-    public function setMessages(\Kendo\UI\PagerMessages $value) {
+    public function messages(\Kendo\UI\PagerMessages $value) {
         $this->setProperty('messages', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;

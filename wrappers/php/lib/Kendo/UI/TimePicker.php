@@ -8,73 +8,73 @@ class TimePicker extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAnimation(\Kendo\UI\TimePickerAnimation $value) {
+    public function animation(\Kendo\UI\TimePickerAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setCulture($value) {
+    public function culture($value) {
         $this->setProperty('culture', $value);
 
         return $this;
     }
 
-    public function setDates($value) {
+    public function dates($value) {
         $this->setProperty('dates', $value);
 
         return $this;
     }
 
-    public function setFormat($value) {
+    public function format($value) {
         $this->setProperty('format', $value);
 
         return $this;
     }
 
-    public function setInterval($value) {
+    public function interval($value) {
         $this->setProperty('interval', $value);
 
         return $this;
     }
 
-    public function setMax($value) {
+    public function max($value) {
         $this->setProperty('max', $value);
 
         return $this;
     }
 
-    public function setMin($value) {
+    public function min($value) {
         $this->setProperty('min', $value);
 
         return $this;
     }
 
-    public function setParseFormats($value) {
+    public function parseFormats($value) {
         $this->setProperty('parseFormats', $value);
 
         return $this;
     }
 
-    public function setValue($value) {
+    public function value($value) {
         $this->setProperty('value', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setClose($value) {
+    public function close($value) {
         $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setOpen($value) {
+    public function open($value) {
         $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
 
         return $this;

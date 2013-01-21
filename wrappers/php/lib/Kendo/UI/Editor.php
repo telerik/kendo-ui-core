@@ -8,19 +8,19 @@ class Editor extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setEncoded($value) {
+    public function encoded($value) {
         $this->setProperty('encoded', $value);
 
         return $this;
     }
 
-    public function setMessages($value) {
+    public function messages($value) {
         $this->setProperty('messages', $value);
 
         return $this;
     }
 
-    public function setStylesheets($value) {
+    public function stylesheets($value) {
         $this->setProperty('stylesheets', $value);
 
         return $this;
@@ -39,43 +39,43 @@ class Editor extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setImagebrowser(\Kendo\UI\EditorImagebrowser $value) {
+    public function imagebrowser(\Kendo\UI\EditorImagebrowser $value) {
         $this->setProperty('imagebrowser', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setExecute($value) {
+    public function execute($value) {
         $this->setProperty('execute', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setKeydown($value) {
+    public function keydown($value) {
         $this->setProperty('keydown', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setKeyup($value) {
+    public function keyup($value) {
         $this->setProperty('keyup', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setPaste($value) {
+    public function paste($value) {
         $this->setProperty('paste', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;

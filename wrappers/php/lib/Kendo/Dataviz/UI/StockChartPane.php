@@ -5,49 +5,49 @@ namespace Kendo\Dataviz\UI;
 class StockChartPane extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setName($value) {
+    public function name($value) {
         $this->setProperty('name', $value);
 
         return $this;
     }
 
-    public function setMargin($value) {
+    public function margin($value) {
         $this->setProperty('margin', $value);
 
         return $this;
     }
 
-    public function setPadding($value) {
+    public function padding($value) {
         $this->setProperty('padding', $value);
 
         return $this;
     }
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\StockChartPaneBorder $value) {
+    public function border(\Kendo\Dataviz\UI\StockChartPaneBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setHeight($value) {
+    public function height($value) {
         $this->setProperty('height', $value);
 
         return $this;
     }
 
-    public function setTitle($value) {
+    public function title($value) {
         $this->setProperty('title', $value);
 
         return $this;
     }
 
-    public function setTitle(\Kendo\Dataviz\UI\StockChartPaneTitle $value) {
+    public function title(\Kendo\Dataviz\UI\StockChartPaneTitle $value) {
         $this->setProperty('title', $value);
 
         return $this;

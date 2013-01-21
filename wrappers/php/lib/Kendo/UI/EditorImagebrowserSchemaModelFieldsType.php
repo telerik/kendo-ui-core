@@ -5,13 +5,13 @@ namespace Kendo\UI;
 class EditorImagebrowserSchemaModelFieldsType extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setParse($value) {
+    public function parse($value) {
         $this->setProperty('parse', $value);
 
         return $this;
     }
 
-    public function setField($value) {
+    public function field($value) {
         $this->setProperty('field', $value);
 
         return $this;

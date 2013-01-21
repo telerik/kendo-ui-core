@@ -8,67 +8,67 @@ class RangeSlider extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setLargeStep($value) {
+    public function largeStep($value) {
         $this->setProperty('largeStep', $value);
 
         return $this;
     }
 
-    public function setMax($value) {
+    public function max($value) {
         $this->setProperty('max', $value);
 
         return $this;
     }
 
-    public function setMin($value) {
+    public function min($value) {
         $this->setProperty('min', $value);
 
         return $this;
     }
 
-    public function setOrientation($value) {
+    public function orientation($value) {
         $this->setProperty('orientation', $value);
 
         return $this;
     }
 
-    public function setSelectionEnd($value) {
+    public function selectionEnd($value) {
         $this->setProperty('selectionEnd', $value);
 
         return $this;
     }
 
-    public function setSelectionStart($value) {
+    public function selectionStart($value) {
         $this->setProperty('selectionStart', $value);
 
         return $this;
     }
 
-    public function setSmallStep($value) {
+    public function smallStep($value) {
         $this->setProperty('smallStep', $value);
 
         return $this;
     }
 
-    public function setTickPlacement($value) {
+    public function tickPlacement($value) {
         $this->setProperty('tickPlacement', $value);
 
         return $this;
     }
 
-    public function setTooltip(\Kendo\UI\RangeSliderTooltip $value) {
+    public function tooltip(\Kendo\UI\RangeSliderTooltip $value) {
         $this->setProperty('tooltip', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSlide($value) {
+    public function slide($value) {
         $this->setProperty('slide', new \Kendo\JavaScriptFunction($value));
 
         return $this;

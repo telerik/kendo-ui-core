@@ -5,25 +5,25 @@ namespace Kendo\UI;
 class GridColumnCommandItem extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setName($value) {
+    public function name($value) {
         $this->setProperty('name', $value);
 
         return $this;
     }
 
-    public function setText($value) {
+    public function text($value) {
         $this->setProperty('text', $value);
 
         return $this;
     }
 
-    public function setClassName($value) {
+    public function className($value) {
         $this->setProperty('className', $value);
 
         return $this;
     }
 
-    public function setClick($value) {
+    public function click($value) {
         $this->setProperty('click', $value);
 
         return $this;

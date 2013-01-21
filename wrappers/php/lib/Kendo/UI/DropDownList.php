@@ -8,127 +8,127 @@ class DropDownList extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAnimation(\Kendo\UI\DropDownListAnimation $value) {
+    public function animation(\Kendo\UI\DropDownListAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setAutoBind($value) {
+    public function autoBind($value) {
         $this->setProperty('autoBind', $value);
 
         return $this;
     }
 
-    public function setCascadeFrom($value) {
+    public function cascadeFrom($value) {
         $this->setProperty('cascadeFrom', $value);
 
         return $this;
     }
 
-    public function setDataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource(\Kendo\Data\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
     }
 
-    public function setDataTextField($value) {
+    public function dataTextField($value) {
         $this->setProperty('dataTextField', $value);
 
         return $this;
     }
 
-    public function setDataValueField($value) {
+    public function dataValueField($value) {
         $this->setProperty('dataValueField', $value);
 
         return $this;
     }
 
-    public function setDelay($value) {
+    public function delay($value) {
         $this->setProperty('delay', $value);
 
         return $this;
     }
 
-    public function setEnable($value) {
+    public function enable($value) {
         $this->setProperty('enable', $value);
 
         return $this;
     }
 
-    public function setHeight($value) {
+    public function height($value) {
         $this->setProperty('height', $value);
 
         return $this;
     }
 
-    public function setIgnoreCase($value) {
+    public function ignoreCase($value) {
         $this->setProperty('ignoreCase', $value);
 
         return $this;
     }
 
-    public function setIndex($value) {
+    public function index($value) {
         $this->setProperty('index', $value);
 
         return $this;
     }
 
-    public function setOptionLabel($value) {
+    public function optionLabel($value) {
         $this->setProperty('optionLabel', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;
     }
 
-    public function setText($value) {
+    public function text($value) {
         $this->setProperty('text', $value);
 
         return $this;
     }
 
-    public function setValue($value) {
+    public function value($value) {
         $this->setProperty('value', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setClose($value) {
+    public function close($value) {
         $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDataBound($value) {
+    public function dataBound($value) {
         $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setOpen($value) {
+    public function open($value) {
         $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setCascade($value) {
+    public function cascade($value) {
         $this->setProperty('cascade', new \Kendo\JavaScriptFunction($value));
 
         return $this;

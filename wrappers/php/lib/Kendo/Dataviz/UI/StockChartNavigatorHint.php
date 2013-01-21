@@ -5,19 +5,19 @@ namespace Kendo\Dataviz\UI;
 class StockChartNavigatorHint extends \kendo\SerializableObject {
 //>> Properties
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;
     }
 
-    public function setTemplate($value) {
+    public function template($value) {
         $this->setProperty('template', $value);
 
         return $this;
     }
 
-    public function setFormat($value) {
+    public function format($value) {
         $this->setProperty('format', $value);
 
         return $this;

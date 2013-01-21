@@ -14,14 +14,14 @@
         'Ukraine', 'United Kingdom', 'Vatican City');
 
     $dataSource = new \Kendo\Data\DataSource();
-    $dataSource->setData($countries);
+    $dataSource->data($countries);
 
     $autoComplete = new \Kendo\UI\AutoComplete('country');
 
-    $autoComplete->setDataSource($dataSource)
-                 ->setFilter('startswith')
-                 ->setPlaceholder('Select country...')
-                 ->setSeparator(', ');
+    $autoComplete->dataSource($dataSource)
+                 ->filter('startswith')
+                 ->placeholder('Select country...')
+                 ->separator(', ');
 
     echo $autoComplete->render();
 ?>

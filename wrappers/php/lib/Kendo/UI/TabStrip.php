@@ -8,49 +8,49 @@ class TabStrip extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAnimation(\Kendo\UI\TabStripAnimation $value) {
+    public function animation(\Kendo\UI\TabStripAnimation $value) {
         $this->setProperty('animation', $value);
 
         return $this;
     }
 
-    public function setCollapsible($value) {
+    public function collapsible($value) {
         $this->setProperty('collapsible', $value);
 
         return $this;
     }
 
-    public function setDataContentField($value) {
+    public function dataContentField($value) {
         $this->setProperty('dataContentField', $value);
 
         return $this;
     }
 
-    public function setDataContentUrlField($value) {
+    public function dataContentUrlField($value) {
         $this->setProperty('dataContentUrlField', $value);
 
         return $this;
     }
 
-    public function setDataImageUrlField($value) {
+    public function dataImageUrlField($value) {
         $this->setProperty('dataImageUrlField', $value);
 
         return $this;
     }
 
-    public function setDataSpriteCssClass($value) {
+    public function dataSpriteCssClass($value) {
         $this->setProperty('dataSpriteCssClass', $value);
 
         return $this;
     }
 
-    public function setDataTextField($value) {
+    public function dataTextField($value) {
         $this->setProperty('dataTextField', $value);
 
         return $this;
     }
 
-    public function setDataUrlField($value) {
+    public function dataUrlField($value) {
         $this->setProperty('dataUrlField', $value);
 
         return $this;
@@ -69,25 +69,25 @@ class TabStrip extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setActivate($value) {
+    public function activate($value) {
         $this->setProperty('activate', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setContentLoad($value) {
+    public function contentLoad($value) {
         $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setError($value) {
+    public function error($value) {
         $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;

@@ -8,7 +8,7 @@ class Chart extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setAxisDefaults($value) {
+    public function axisDefaults($value) {
         $this->setProperty('axisDefaults', $value);
 
         return $this;
@@ -27,25 +27,25 @@ class Chart extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setChartArea(\Kendo\Dataviz\UI\ChartChartArea $value) {
+    public function chartArea(\Kendo\Dataviz\UI\ChartChartArea $value) {
         $this->setProperty('chartArea', $value);
 
         return $this;
     }
 
-    public function setDataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource(\Kendo\Data\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
     }
 
-    public function setAutoBind($value) {
+    public function autoBind($value) {
         $this->setProperty('autoBind', $value);
 
         return $this;
     }
 
-    public function setLegend(\Kendo\Dataviz\UI\ChartLegend $value) {
+    public function legend(\Kendo\Dataviz\UI\ChartLegend $value) {
         $this->setProperty('legend', $value);
 
         return $this;
@@ -64,7 +64,7 @@ class Chart extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setPlotArea(\Kendo\Dataviz\UI\ChartPlotArea $value) {
+    public function plotArea(\Kendo\Dataviz\UI\ChartPlotArea $value) {
         $this->setProperty('plotArea', $value);
 
         return $this;
@@ -83,37 +83,37 @@ class Chart extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setSeriesColors($value) {
+    public function seriesColors($value) {
         $this->setProperty('seriesColors', $value);
 
         return $this;
     }
 
-    public function setSeriesDefaults(\Kendo\Dataviz\UI\ChartSeriesDefaults $value) {
+    public function seriesDefaults(\Kendo\Dataviz\UI\ChartSeriesDefaults $value) {
         $this->setProperty('seriesDefaults', $value);
 
         return $this;
     }
 
-    public function setTheme($value) {
+    public function theme($value) {
         $this->setProperty('theme', $value);
 
         return $this;
     }
 
-    public function setTitle(\Kendo\Dataviz\UI\ChartTitle $value) {
+    public function title(\Kendo\Dataviz\UI\ChartTitle $value) {
         $this->setProperty('title', $value);
 
         return $this;
     }
 
-    public function setTooltip(\Kendo\Dataviz\UI\ChartTooltip $value) {
+    public function tooltip(\Kendo\Dataviz\UI\ChartTooltip $value) {
         $this->setProperty('tooltip', $value);
 
         return $this;
     }
 
-    public function setTransitions($value) {
+    public function transitions($value) {
         $this->setProperty('transitions', $value);
 
         return $this;
@@ -158,85 +158,85 @@ class Chart extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function setAxisLabelClick($value) {
+    public function axisLabelClick($value) {
         $this->setProperty('axisLabelClick', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDataBound($value) {
+    public function dataBound($value) {
         $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDragStart($value) {
+    public function dragStart($value) {
         $this->setProperty('dragStart', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDrag($value) {
+    public function drag($value) {
         $this->setProperty('drag', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setDragEnd($value) {
+    public function dragEnd($value) {
         $this->setProperty('dragEnd', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setPlotAreaClick($value) {
+    public function plotAreaClick($value) {
         $this->setProperty('plotAreaClick', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSeriesClick($value) {
+    public function seriesClick($value) {
         $this->setProperty('seriesClick', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSeriesHover($value) {
+    public function seriesHover($value) {
         $this->setProperty('seriesHover', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setZoomStart($value) {
+    public function zoomStart($value) {
         $this->setProperty('zoomStart', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setZoom($value) {
+    public function zoom($value) {
         $this->setProperty('zoom', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setZoomEnd($value) {
+    public function zoomEnd($value) {
         $this->setProperty('zoomEnd', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelectStart($value) {
+    public function selectStart($value) {
         $this->setProperty('selectStart', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelectEnd($value) {
+    public function selectEnd($value) {
         $this->setProperty('selectEnd', new \Kendo\JavaScriptFunction($value));
 
         return $this;

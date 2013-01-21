@@ -5,13 +5,13 @@ namespace Kendo\Dataviz\UI;
 class StockChartNavigatorSelect extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setFrom($value) {
+    public function from($value) {
         $this->setProperty('from', $value);
 
         return $this;
     }
 
-    public function setTO($value) {
+    public function to($value) {
         $this->setProperty('to', $value);
 
         return $this;

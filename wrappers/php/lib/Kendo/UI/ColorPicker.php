@@ -8,61 +8,61 @@ class ColorPicker extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setButtons($value) {
+    public function buttons($value) {
         $this->setProperty('buttons', $value);
 
         return $this;
     }
 
-    public function setColumns($value) {
+    public function columns($value) {
         $this->setProperty('columns', $value);
 
         return $this;
     }
 
-    public function setMessages($value) {
+    public function messages($value) {
         $this->setProperty('messages', $value);
 
         return $this;
     }
 
-    public function setPalette($value) {
+    public function palette($value) {
         $this->setProperty('palette', $value);
 
         return $this;
     }
 
-    public function setOpacity($value) {
+    public function opacity($value) {
         $this->setProperty('opacity', $value);
 
         return $this;
     }
 
-    public function setPreview($value) {
+    public function preview($value) {
         $this->setProperty('preview', $value);
 
         return $this;
     }
 
-    public function setToolIcon($value) {
+    public function toolIcon($value) {
         $this->setProperty('toolIcon', $value);
 
         return $this;
     }
 
-    public function setValue($value) {
+    public function value($value) {
         $this->setProperty('value', $value);
 
         return $this;
     }
 
-    public function setChange($value) {
+    public function change($value) {
         $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
 
-    public function setSelect($value) {
+    public function select($value) {
         $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
 
         return $this;

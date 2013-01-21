@@ -8,25 +8,25 @@ class LinearGauge extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setGaugeArea(\Kendo\Dataviz\UI\LinearGaugeGaugeArea $value) {
+    public function gaugeArea(\Kendo\Dataviz\UI\LinearGaugeGaugeArea $value) {
         $this->setProperty('gaugeArea', $value);
 
         return $this;
     }
 
-    public function setPointer(\Kendo\Dataviz\UI\LinearGaugePointer $value) {
+    public function pointer(\Kendo\Dataviz\UI\LinearGaugePointer $value) {
         $this->setProperty('pointer', $value);
 
         return $this;
     }
 
-    public function setScale(\Kendo\Dataviz\UI\LinearGaugeScale $value) {
+    public function scale(\Kendo\Dataviz\UI\LinearGaugeScale $value) {
         $this->setProperty('scale', $value);
 
         return $this;
     }
 
-    public function setTransitions($value) {
+    public function transitions($value) {
         $this->setProperty('transitions', $value);
 
         return $this;

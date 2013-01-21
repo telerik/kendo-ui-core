@@ -5,31 +5,31 @@ namespace Kendo\UI;
 class EditorImagebrowser extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setFileTypes($value) {
+    public function fileTypes($value) {
         $this->setProperty('fileTypes', $value);
 
         return $this;
     }
 
-    public function setPath($value) {
+    public function path($value) {
         $this->setProperty('path', $value);
 
         return $this;
     }
 
-    public function setTransport(\Kendo\UI\EditorImagebrowserTransport $value) {
+    public function transport(\Kendo\UI\EditorImagebrowserTransport $value) {
         $this->setProperty('transport', $value);
 
         return $this;
     }
 
-    public function setSchema(\Kendo\UI\EditorImagebrowserSchema $value) {
+    public function schema(\Kendo\UI\EditorImagebrowserSchema $value) {
         $this->setProperty('schema', $value);
 
         return $this;
     }
 
-    public function setMessages(\Kendo\UI\EditorImagebrowserMessages $value) {
+    public function messages(\Kendo\UI\EditorImagebrowserMessages $value) {
         $this->setProperty('messages', $value);
 
         return $this;

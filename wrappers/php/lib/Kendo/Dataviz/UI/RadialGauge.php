@@ -8,37 +8,37 @@ class RadialGauge extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function setGaugeArea(\Kendo\Dataviz\UI\RadialGaugeGaugeArea $value) {
+    public function gaugeArea(\Kendo\Dataviz\UI\RadialGaugeGaugeArea $value) {
         $this->setProperty('gaugeArea', $value);
 
         return $this;
     }
 
-    public function setPointer(\Kendo\Dataviz\UI\RadialGaugePointer $value) {
+    public function pointer(\Kendo\Dataviz\UI\RadialGaugePointer $value) {
         $this->setProperty('pointer', $value);
 
         return $this;
     }
 
-    public function setRangeSize($value) {
+    public function rangeSize($value) {
         $this->setProperty('rangeSize', $value);
 
         return $this;
     }
 
-    public function setRangeDistance($value) {
+    public function rangeDistance($value) {
         $this->setProperty('rangeDistance', $value);
 
         return $this;
     }
 
-    public function setScale(\Kendo\Dataviz\UI\RadialGaugeScale $value) {
+    public function scale(\Kendo\Dataviz\UI\RadialGaugeScale $value) {
         $this->setProperty('scale', $value);
 
         return $this;
     }
 
-    public function setTransitions($value) {
+    public function transitions($value) {
         $this->setProperty('transitions', $value);
 
         return $this;

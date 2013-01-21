@@ -5,13 +5,13 @@ namespace Kendo\Data;
 class DataSourceAggregateItem extends \kendo\SerializableObject {
 //>> Properties
 
-    public function setField($value) {
+    public function field($value) {
         $this->setProperty('field', $value);
 
         return $this;
     }
 
-    public function setAggregate($value) {
+    public function aggregate($value) {
         $this->setProperty('aggregate', $value);
 
         return $this;

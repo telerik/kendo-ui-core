@@ -5,31 +5,31 @@ namespace Kendo\Dataviz\UI;
 class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function setBackground($value) {
+    public function background($value) {
         $this->setProperty('background', $value);
 
         return $this;
     }
 
-    public function setBorder(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder $value) {
+    public function border(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder $value) {
         $this->setProperty('border', $value);
 
         return $this;
     }
 
-    public function setSize($value) {
+    public function size($value) {
         $this->setProperty('size', $value);
 
         return $this;
     }
 
-    public function setType($value) {
+    public function type($value) {
         $this->setProperty('type', $value);
 
         return $this;
     }
 
-    public function setVisible($value) {
+    public function visible($value) {
         $this->setProperty('visible', $value);
 
         return $this;
