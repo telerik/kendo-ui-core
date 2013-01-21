@@ -18,10 +18,19 @@ public class Intraday {
     private String symbol;
     private Date date;
     private double close;
-    private int volume;    
+    private long volume;    
     private double open;
     private double high;
     private double low;
+    
+    public Intraday(double open, double high, double low, double close, long volume) {
+        //this.date = date;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
+    }
     
     @Id
     @Column(name="ID")
@@ -54,7 +63,7 @@ public class Intraday {
     }
 
     @Column(name="Volume")
-    public int getVolume() {
+    public long getVolume() {
         return volume;
     }
 
