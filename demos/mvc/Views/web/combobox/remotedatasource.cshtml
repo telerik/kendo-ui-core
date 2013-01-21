@@ -6,18 +6,16 @@
             <script>
                 $(document).ready(function() {
                     $("#titles").kendoComboBox({
-                        index: 0,
-                        placeholder: "Select movie",
-                        dataTextField: "Name",
-                        dataValueField: "Id",
+                        placeholder: "Select product",
+                        dataTextField: "ProductName",
+                        dataValueField: "ProductID",
                         filter: "contains",
                         dataSource: {
-                            type: "odata",
-                            serverFiltering: true,
-                            serverPaging: true,
-                            pageSize: 20,
                             transport: {
-                                read: "http://odata.netflix.com/Catalog/Titles"
+                                read: {
+                                    dataType: "jsonp",
+                                    url: "http://demos.kendoui.com/service/Products",
+                                }
                             }
                         }
                     });
