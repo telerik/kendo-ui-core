@@ -1890,6 +1890,9 @@ kendo_module({
             } else {
                 that._destroyed = [];
                 that._data = that._observe(pristine);
+                if (that.options.serverPaging) {
+                    that._total = that.reader.total(that._pristine);
+                }
                 that._change();
             }
         },
