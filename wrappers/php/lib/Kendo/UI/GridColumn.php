@@ -11,12 +11,6 @@ class GridColumn extends \Kendo\SerializableObject {
         return $this;
     }
 
-    public function command($value) {
-        $this->setProperty('command', $value);
-
-        return $this;
-    }
-
     public function addCommandItem(\Kendo\UI\GridColumnCommandItem $value) {
         $values = $this->getProperty('command');
 
@@ -44,12 +38,6 @@ class GridColumn extends \Kendo\SerializableObject {
 
     public function field($value) {
         $this->setProperty('field', $value);
-
-        return $this;
-    }
-
-    public function filterable($value) {
-        $this->setProperty('filterable', $value);
 
         return $this;
     }

@@ -137,12 +137,6 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
         return $this;
     }
 
-    public function line($value) {
-        $this->setProperty('line', $value);
-
-        return $this;
-    }
-
     public function line(\Kendo\Dataviz\UI\ChartSeriesItemLine $value) {
         $this->setProperty('line', $value);
 

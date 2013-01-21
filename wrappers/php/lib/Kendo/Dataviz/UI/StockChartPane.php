@@ -41,12 +41,6 @@ class StockChartPane extends \Kendo\SerializableObject {
         return $this;
     }
 
-    public function title($value) {
-        $this->setProperty('title', $value);
-
-        return $this;
-    }
-
     public function title(\Kendo\Dataviz\UI\StockChartPaneTitle $value) {
         $this->setProperty('title', $value);
 

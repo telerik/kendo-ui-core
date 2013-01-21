@@ -27,12 +27,6 @@ class Grid extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function columnMenu($value) {
-        $this->setProperty('columnMenu', $value);
-
-        return $this;
-    }
-
     public function columnMenu(\Kendo\UI\GridColumnMenu $value) {
         $this->setProperty('columnMenu', $value);
 
@@ -45,20 +39,8 @@ class Grid extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function editable($value) {
-        $this->setProperty('editable', $value);
-
-        return $this;
-    }
-
     public function editable(\Kendo\UI\GridEditable $value) {
         $this->setProperty('editable', $value);
-
-        return $this;
-    }
-
-    public function filterable($value) {
-        $this->setProperty('filterable', $value);
 
         return $this;
     }
@@ -81,12 +63,6 @@ class Grid extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function groupable($value) {
-        $this->setProperty('groupable', $value);
-
-        return $this;
-    }
-
     public function groupable(\Kendo\UI\GridGroupable $value) {
         $this->setProperty('groupable', $value);
 
@@ -105,20 +81,8 @@ class Grid extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function pageable($value) {
-        $this->setProperty('pageable', $value);
-
-        return $this;
-    }
-
     public function pageable(\Kendo\UI\GridPageable $value) {
         $this->setProperty('pageable', $value);
-
-        return $this;
-    }
-
-    public function scrollable($value) {
-        $this->setProperty('scrollable', $value);
 
         return $this;
     }
@@ -131,12 +95,6 @@ class Grid extends \Kendo\UI\Widget {
 
     public function selectable($value) {
         $this->setProperty('selectable', $value);
-
-        return $this;
-    }
-
-    public function sortable($value) {
-        $this->setProperty('sortable', $value);
 
         return $this;
     }

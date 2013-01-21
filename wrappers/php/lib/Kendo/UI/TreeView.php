@@ -14,12 +14,6 @@ class TreeView extends \Kendo\UI\Widget {
         return $this;
     }
 
-    public function checkboxes($value) {
-        $this->setProperty('checkboxes', $value);
-
-        return $this;
-    }
-
     public function checkboxes(\Kendo\UI\TreeViewCheckboxes $value) {
         $this->setProperty('checkboxes', $value);
 

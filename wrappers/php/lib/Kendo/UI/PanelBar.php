@@ -8,12 +8,6 @@ class PanelBar extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function animation($value) {
-        $this->setProperty('animation', $value);
-
-        return $this;
-    }
-
     public function animation(\Kendo\UI\PanelBarAnimation $value) {
         $this->setProperty('animation', $value);
 

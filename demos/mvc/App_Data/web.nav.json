@@ -34,7 +34,7 @@
                     "meta": "This demo of Kendo UI Autocomplete control shows how autocomplete suggestions are given upon typing and the data is loaded from OData remote data source."
                 },
                 {
-                    "packages": [ "mvc", "jsp" ],
+                    "packages": [ "mvc", "jsp", "php" ],
                     "text": "Server filtering",
                     "url": "autocomplete/serverfiltering.html"
                 },

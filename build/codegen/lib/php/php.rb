@@ -20,6 +20,12 @@ module CodeGen::PHP
         def array_option_class
             ArrayOption
         end
+
+        def unique_options
+            composite = composite_options
+
+            options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
+        end
     end
 
 COMPOSITE_OPTION_SETTER = ERB.new(%{
@@ -31,7 +37,7 @@ COMPOSITE_OPTION_SETTER = ERB.new(%{
 })
 
 COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
-<%= options.map { |option| option.to_setter }.join %>
+<%= unique_options.map { |option| option.to_setter }.join %>
 //<< Properties})
 
     COMPOSITE_OPTION = ERB.new(File.read("build/codegen/lib/php/composite_option.php.erb"), 0, '%<>')
@@ -145,7 +151,7 @@ ARRAY_SETTER = ERB.new(%{
     COMPONENT = ERB.new(File.read("build/codegen/lib/php/component.php.erb"), 0, '%<>')
 
 COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
-<%= options.map { |option| option.to_setter }.join %><%= events.map { |events| events.to_setter }.join %>
+<%= unique_options.map { |option| option.to_setter }.join %><%= events.map { |events| events.to_setter }.join %>
 //<< Properties})
 
     class Component < CodeGen::Component
