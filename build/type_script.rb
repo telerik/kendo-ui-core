@@ -62,7 +62,8 @@ module CodeGen::TypeScript
 
     MANUALLY_GENERATED = {
         'schema' => ['model'],
-        'column' => ['editor']
+        'column' => ['editor'],
+        'transport' => ['parameterMap']
     }
 
     module Options

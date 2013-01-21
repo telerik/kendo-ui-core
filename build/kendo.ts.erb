@@ -84,6 +84,46 @@ module kendo.data {
         children?: any;
     }
 
+    interface DataSourceTransport {
+        parameterMap?(data: DataSourceTransportParameterMapData, type: string): any;
+    }
+
+    interface DataSourceParameterMapDataAggregate {
+        field?: string;
+        aggregate?: string;
+    }
+
+    interface DataSourceParameterMapDataGroup {
+        aggregate?: DataSourceParameterMapDataAggregate[];
+        field?: string;
+        dir?: string;
+    }
+
+    interface DataSourceParameterMapDataFilter {
+        field?: string;
+        filters?: DataSourceParameterMapDataFilter[];
+        logic?: string;
+        operator?: string;
+        value?: any;
+    }
+
+    interface DataSourceParameterMapDataSort {
+        field?: string;
+        dir?: string;
+    }
+
+    interface DataSourceTransportParameterMapData {
+        aggregate?: DataSourceParameterMapDataAggregate[];
+        group?: DataSourceParameterMapDataGroup[];
+        filter?: DataSourceParameterMapDataFilter;
+        models?: Model[];
+        page?: number;
+        pageSize?: number;
+        skip?: number;
+        sort?: DataSourceParameterMapDataSort[];
+        take?: number;
+    }
+
     interface DataSourceSchema {
         model?: DataSourceSchemaModel;
     }
