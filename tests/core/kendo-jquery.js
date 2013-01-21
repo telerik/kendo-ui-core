@@ -42,22 +42,30 @@ function dispatchRealEvent(element, eventType) {
 }
 
 test("Skips syntetic mouse events", 3, function() {
-    var div = $$("<div />").appendTo(document.body).handler({
-            _down: function() { ok(true) },
-            _move: function() { ok(true) },
-            _up: function() { ok(true) }
-        });
+    var mouseAndTouchPresent = kendo.support.mouseAndTouchPresent;
+    kendo.support.mouseAndTouchPresent = true;
 
-    div.on("up", "_up");
-    div.on("move", "_move");
-    div.on("down", "_down");
+    try {
+        var div = $$("<div />").appendTo(document.body).handler({
+                _down: function() { ok(true) },
+                _move: function() { ok(true) },
+                _up: function() { ok(true) }
+            });
 
-    div.trigger("touchstart");
-    div.trigger("touchmove");
-    div.trigger("touchend");
-    dispatchRealEvent(div, "mousedown");
-    dispatchRealEvent(div, "mousemove");
-    dispatchRealEvent(div, "mouseup");
+        div.on("up", "_up");
+        div.on("move", "_move");
+        div.on("down", "_down");
+
+        div.trigger("touchstart");
+        div.trigger("touchmove");
+        div.trigger("touchend");
+        dispatchRealEvent(div, "mousedown");
+        dispatchRealEvent(div, "mousemove");
+        dispatchRealEvent(div, "mouseup");
+    }
+    finally {
+        kendo.support.mouseAndTouchPresent = mouseAndTouchPresent;
+    }
 })
 
 test("Is instance of jQuery", function() {

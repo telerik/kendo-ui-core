@@ -11,7 +11,6 @@ kendo_module({
         Node = window.Node,
         mobile = kendo.mobile,
         ui = mobile.ui,
-        support = kendo.support,
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
@@ -36,19 +35,6 @@ kendo_module({
 
         whitespaceRegExp = /^\s+$/,
         buttonRegExp = /button/;
-
-    function touchLabelHandler(e) {
-        var target = $(e.target),
-            clickedOnInput = target.is("input"),
-            input = clickedOnInput ? target : target.find("input");
-
-        // check the input
-        input.attr("checked", input.is(":radio") ? true : !input[0].checked);
-
-        if (!clickedOnInput) {
-            input.trigger("change"); // trigger the change event for any listeners (MVVM)
-        }
-    }
 
     function whitespace() {
         return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(whitespaceRegExp);
@@ -107,11 +93,6 @@ kendo_module({
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
                 .on(TRIGGER, ITEM_SELECTOR, "_click");
-
-            if (support.mobileOS && support.mobileOS.ios) {
-                element.on("touchend", ".km-listview-label", touchLabelHandler)
-                    .on("click", ".km-listview-label", kendo.preventDefault);
-            }
 
             element.wrap(WRAPPER);
             that.wrapper = that.element.parent();

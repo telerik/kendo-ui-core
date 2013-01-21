@@ -252,28 +252,6 @@
 
                 ok(dom.find("li a").is(".km-listview-link"));
             });
-
-
-            test("checking a checkbox updates the view-model", function() {
-                var dom = $('<ul data-role="listview" ><li><label><input type="checkbox" data-bind="checked: foo"/>Foo</label></li></ul>');
-                var os = kendo.support.mobileOS;
-
-                try {
-
-                    var observable = kendo.observable({
-                        foo: true
-                    });
-
-                    kendo.support.mobileOS = { ios: true };
-                    kendo.bind(dom, observable, kendo.mobile.ui);
-                    dom.find("label").trigger("touchend");
-                } finally {
-                    kendo.support.mobileOS = os;
-                }
-
-                equal(observable.foo, false);
-            });
-
         </script>
     </body>
 </html>
