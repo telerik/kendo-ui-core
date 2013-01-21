@@ -356,7 +356,6 @@ kendo_module({
             that.tagList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
-                                    debugger;
                                     that._unselect($(e.target).closest("li"));
                                     that.close();
                                 });
