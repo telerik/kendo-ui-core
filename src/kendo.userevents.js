@@ -21,6 +21,7 @@ kendo_module({
 
         // UserEvents events
         PRESS = "press",
+        SELECT = "select",
         START = "start",
         MOVE = "move",
         END = "end",
@@ -30,19 +31,6 @@ kendo_module({
         GESTURECHANGE = "gesturechange",
         GESTUREEND = "gestureend",
         GESTURETAP = "gesturetap";
-
-    function preventTrigger(e) {
-        e.preventDefault();
-
-        var target = $(e.data.root),   // Determine the correct parent to receive the event and bubble.
-            parent = target.closest(".k-widget").parent();
-
-        if (!parent[0]) {
-            parent = target.parent();
-        }
-
-        parent.trigger($.Event(e.type, { target: target[0] }));
-    }
 
     function touchDelta(touch1, touch2) {
         var x1 = touch1.x.location,
@@ -262,6 +250,19 @@ kendo_module({
         }
     });
 
+    function preventTrigger(e) {
+        e.preventDefault();
+
+        var target = $(e.data.root),   // Determine the correct parent to receive the event and bubble.
+            parent = target.closest(".k-widget").parent();
+
+        if (!parent[0]) {
+            parent = target.parent();
+        }
+
+        parent.trigger($.Event(e.type, { target: target[0] }));
+    }
+
     var UserEvents = Observable.extend({
         init: function(element, options) {
             var that = this,
@@ -272,6 +273,7 @@ kendo_module({
             that.threshold = options.threshold || 0;
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
+            that.allowSelection = options.allowSelection;
             that.eventNS = kendo.guid();
 
             element = $(element).handler(that).autoApplyNS(that.eventNS);
@@ -298,9 +300,7 @@ kendo_module({
                 element.on("dragstart", kendo.preventDefault);
             }
 
-            if (!options.allowSelection) {
-                element.on("mousedown selectstart", filter, { root: element }, preventTrigger);
-            }
+            element.on("mousedown selectstart", filter, { root: element }, "_select");
 
             if (support.eventCapture) {
                 var downEvents = kendo.eventMap.up.split(" "),
@@ -328,7 +328,9 @@ kendo_module({
             GESTURESTART,
             GESTURECHANGE,
             GESTUREEND,
-            GESTURETAP], options);
+            GESTURETAP,
+            SELECT
+            ], options);
         },
 
         destroy: function() {
@@ -402,6 +404,12 @@ kendo_module({
             return $.grep(this.touches, function(touch) {
                 return touch.isMoved();
             }).length;
+        },
+
+        _select: function(e) {
+           if (!this.allowSelection || this.trigger(SELECT, e)) {
+                preventTrigger(e);
+           }
         },
 
         _start: function(e) {
