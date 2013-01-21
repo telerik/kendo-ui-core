@@ -1707,6 +1707,8 @@ function pad(number, digits, end) {
 
         support.kineticScrollNeeded = support.mobileOS && support.touch;
 
+        support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
+
         function detectBrowser(ua) {
             var browser = false, match = [],
                 browserRxs = {
@@ -2083,7 +2085,6 @@ function pad(number, digits, end) {
         support.click = "click";
         support.resize = "resize";
     }
-
 
     var wrapExpression = function(members) {
         var result = "d",
@@ -2709,6 +2710,15 @@ function pad(number, digits, end) {
         cancel: "mouseleave touchcancel"
     };
 
+    if (support.touch && (support.mobileOS.ios || support.mobileOS.android)) {
+        eventMap = {
+            down: "touchstart",
+            move: "touchmove",
+            up: "touchend touchcancel",
+            cancel: "touchcancel"
+        };
+    }
+
     if (support.pointers) {
         eventMap = {
             down: "MSPointerDown",
@@ -2782,8 +2792,9 @@ function pad(number, digits, end) {
             }
 
             // setup mouse trap
-            if (support.touch && events.search(/mouse|click/) > -1 && this[0] !== document.documentElement) {
+            if (support.mouseAndTouchPresent && events.search(/mouse|click/) > -1 && this[0] !== document.documentElement) {
                 MouseEventNormalizer.setupMouseMute();
+
                 var selector = args.length === 2 ? null : args[1],
                     bustClick = events.indexOf("click") > -1 && events.indexOf("touchend") > -1;
 
@@ -2795,7 +2806,7 @@ function pad(number, digits, end) {
                     selector,
                     {
                         bustClick: bustClick
-                    } );
+                    });
             }
 
             if (typeof callback === STRING) {
