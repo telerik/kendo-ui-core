@@ -119,7 +119,22 @@
                 ok(!container.filter("[aria-describedby]").length);
             });
 
+            test("aria hidden is set when popup is not visible", function() {
+                var tooltip = new Tooltip(container, { });
 
+                tooltip.show(container);
+                tooltip.hide();
+                ok(tooltip.popup.element.filter("[aria-hidden=true]").length);
+            });
+
+            test("aria hidden is removed when popup is visible", function() {
+                var tooltip = new Tooltip(container, { });
+
+                tooltip.show(container);
+                tooltip.hide();
+                tooltip.show(container);
+                ok(!tooltip.popup.element.filter("[aria-hidden=true]").length);
+            });
         </script>
     </body>
 </html>
