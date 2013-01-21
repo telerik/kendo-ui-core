@@ -119,24 +119,15 @@
                 ok(!children.eq(1).is(":visible"));
             });
 
-            /*test("MultiSelect rebinds list after filtration and does not call value method", function() {
+            test("MultiSelect hides popup if no data", function() {
                 popuplateSelect();
+                var multiselect = new MultiSelect(select);
 
-                var multiselect = new MultiSelect(select, {
-                    delay: 0
-                });
+                multiselect.wrapper.click();
+                multiselect.search("no such item");
 
-                multiselect.ul.children().first().click();
-                multiselect.search("Option1");
-                multiselect.ul.children().first().click();
-
-                multiselect.input.click();
-
-
-                ok(select[0].children[0].selected);
-                ok(select[0].children[1].selected);
-            });*/
-
+                ok(!multiselect.popup.visible());
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

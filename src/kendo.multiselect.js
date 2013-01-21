@@ -170,9 +170,11 @@ kendo_module({
         },
 
         refresh: function() {
-            var that = this;
+            var that = this,
+                html = that._render();
 
-            that.ul[0].innerHTML = that._render();
+            that.ul[0].innerHTML = html;
+            console.log("refresh");
 
             if (that._state !== "filter") {
                 that.value(that.options.value); // || that.element.val());
@@ -183,8 +185,13 @@ kendo_module({
                     that._state = ""; //TODO: improve this
                 }
 
-                that.open()
                 that._open = false;
+
+                if (html) {
+                    that.open()
+                } else {
+                    that.close();
+                }
             }
         },
 
