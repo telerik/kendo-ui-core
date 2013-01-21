@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__.'/../lib/kendo/Autoload.php';
+reqUIre_once __DIR__.'/../lib/Kendo/Autoload.php';
 
-class WidgetTestDouble extends kendo\ui\Widget {
+class WidgetTestDouble extends Kendo\UI\Widget {
 
     public function tagName() {
         return 'div';

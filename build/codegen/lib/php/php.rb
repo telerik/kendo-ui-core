@@ -66,7 +66,7 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
     end
 
 DATA_SOURCE_SETTER = %{
-    public function setDataSource(\\kendo\\data\\DataSource $value) {
+    public function setDataSource(\\Kendo\\Data\\DataSource $value) {
         $this->setProperty('dataSource', $value);
 
         return $this;
@@ -93,7 +93,7 @@ OPTION_SETTER = ERB.new(%{
 
 EVENT_SETTER = ERB.new(%{
     public function set<%= name.pascalize %>($value) {
-        $this->setProperty('<%= name %>', new \\kendo\\JavaScriptFunction($value));
+        $this->setProperty('<%= name %>', new \\Kendo\\JavaScriptFunction($value));
 
         return $this;
     }
@@ -154,13 +154,13 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
         end
 
         def php_base_class
-            return '\\kendo\\SerializableObject' if @name == 'DataSource'
+            return '\\Kendo\\SerializableObject' if @name == 'DataSource'
 
-            '\\kendo\\ui\\Widget'
+            '\\Kendo\\UI\\Widget'
         end
 
         def path
-            namespace.gsub('.', '/')
+            php_namespace.gsub('\\', '/')
         end
 
         def php_class
@@ -168,7 +168,7 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
         end
 
         def php_namespace
-            namespace.gsub('.', '\\');
+            namespace.split('.').map { |ns| ns.pascalize }.join('\\')
         end
 
         def to_php(filename)

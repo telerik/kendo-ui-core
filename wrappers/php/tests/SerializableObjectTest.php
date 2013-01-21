@@ -1,7 +1,7 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'SerializableObjectTestDouble.php';
+reqUIre_once 'PHPUnit/Autoload.php';
+reqUIre_once 'SerializableObjectTestDouble.php';
 
 class JsonObjectTest extends PHPUnit_Framework_TestCase {
 

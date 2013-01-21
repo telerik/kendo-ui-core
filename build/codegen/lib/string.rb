@@ -4,6 +4,8 @@ class String
     end
 
     def pascalize
+        return self.upcase if self.length < 3
+
         self.sub(/^./) { |c| c.upcase }
     end
 

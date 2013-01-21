@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__.'/../lib/kendo/Autoload.php';
-require_once 'PHPUnit/Autoload.php';
+reqUIre_once __DIR__.'/../lib/Kendo/Autoload.php';
+reqUIre_once 'PHPUnit/Autoload.php';
 
 class ElementTest extends PHPUnit_Framework_TestCase {
 
     private $element;
 
     protected function setUp() {
-        $this->element = new \kendo\html\Element('div');
+        $this->element = new \Kendo\Html\Element('div');
     }
 
     public function testOuterHtmlReturnsTheHtmlContentsOfTheElement() {
@@ -16,17 +16,17 @@ class ElementTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testSelfClosingElementsDoNotEmitClosingTag() {
-        $element = new kendo\html\Element('img', true);
+        $element = new Kendo\Html\Element('img', true);
 
         $this->assertEquals('<img />', $element->outerHtml());
     }
 
     public function testAppendReturnsSelf() {
-        $this->assertEquals($this->element, $this->element->append(new kendo\html\Element('span')));
+        $this->assertEquals($this->element, $this->element->append(new Kendo\Html\Element('span')));
     }
 
     public function testOuterHtmlIncludesTheChildren() {
-        $child = new kendo\html\Element('span');
+        $child = new Kendo\Html\Element('span');
 
         $this->element->append($child);
 
@@ -44,7 +44,7 @@ class ElementTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testTextOverridesChildren(){
-        $this->element->append(new kendo\html\Element('span'));
+        $this->element->append(new Kendo\Html\Element('span'));
 
         $this->element->text('foo');
 
@@ -58,19 +58,19 @@ class ElementTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHtmlSetsTheHtmlContentOfTheElement() {
-        $this->element->html('<span>foo</span>');
+        $this->element->Html('<span>foo</span>');
 
         $this->assertEquals('<div><span>foo</span></div>', $this->element->outerHtml());
     }
 
     public function testHtmlReturnsSelf() {
-        $this->assertEquals($this->element, $this->element->html('foo'));
+        $this->assertEquals($this->element, $this->element->Html('foo'));
     }
 
     public function testHtmlOverridesChildren(){
-        $this->element->append(new kendo\html\Element('span'));
+        $this->element->append(new Kendo\Html\Element('span'));
 
-        $this->element->html('foo');
+        $this->element->Html('foo');
 
         $this->assertEquals('<div>foo</div>', $this->element->outerHtml());
     }

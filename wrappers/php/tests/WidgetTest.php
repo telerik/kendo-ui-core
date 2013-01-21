@@ -1,7 +1,7 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'WidgetTestDouble.php';
+reqUIre_once 'PHPUnit/Autoload.php';
+reqUIre_once 'WidgetTestDouble.php';
 
 class WidgetTest extends PHPUnit_Framework_TestCase {
 
@@ -12,7 +12,7 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHtmlUsesIdAndTagName() {
-        $this->assertEquals('<div id="foo"></div>', $this->widget->html());
+        $this->assertEquals('<div id="foo"></div>', $this->widget->Html());
     }
 
     public function testScriptReturnsPluginInitializationStatement() {
@@ -33,7 +33,7 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
 
     public function testAttrAppliesHtmlAttributes() {
         $this->widget->attr('title', 'bar');
-        $this->assertEquals('<div id="foo" title="bar"></div>', $this->widget->html());
+        $this->assertEquals('<div id="foo" title="bar"></div>', $this->widget->Html());
     }
 }
 

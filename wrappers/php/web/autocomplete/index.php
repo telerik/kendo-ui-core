@@ -1,6 +1,6 @@
 <?php require_once '../../include/header.php' ?>
 
-<?php require_once '../../lib/kendo/Autoload.php' ?>
+<?php require_once '../../lib/Kendo/Autoload.php' ?>
 
 <p>Start typing the name of a European country</p>
 <label for="country">Shipping countries:</label>
@@ -13,10 +13,10 @@
         'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Turkey',
         'Ukraine', 'United Kingdom', 'Vatican City');
 
-    $dataSource = new \kendo\data\DataSource();
+    $dataSource = new \Kendo\Data\DataSource();
     $dataSource->setData($countries);
 
-    $autoComplete = new \kendo\ui\AutoComplete('country');
+    $autoComplete = new \Kendo\UI\AutoComplete('country');
 
     $autoComplete->setDataSource($dataSource)
                  ->setFilter('startswith')
