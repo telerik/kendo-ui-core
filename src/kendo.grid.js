@@ -1680,8 +1680,8 @@ kendo_module({
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
-                    draggableElements: ">.k-grid-header " + GROUPINGDRAGGABLES + ",>table>.k-grid-header " + GROUPINGDRAGGABLES,
-                    filter: ">.k-grid-header " + GROUPINGFILTER + ",>table>.k-grid-header " + GROUPINGFILTER,
+                    draggableElements: that.content ? ">.k-grid-header " + GROUPINGDRAGGABLES : ">table>.k-grid-header " + GROUPINGDRAGGABLES,
+                    filter: that.content ? ">.k-grid-header " + GROUPINGFILTER : ">table>.k-grid-header " + GROUPINGFILTER,
                     allowDrag: that.options.reorderable
                 }));
             }
