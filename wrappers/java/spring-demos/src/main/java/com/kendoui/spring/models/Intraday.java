@@ -1,6 +1,5 @@
 package com.kendoui.spring.models;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,7 +16,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Intraday {
     private int id;
     private String symbol;
-    private Calendar date;
+    private Date date;
     private double close;
     private int volume;    
     private double open;
@@ -37,11 +36,11 @@ public class Intraday {
     @Column(name="Date")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonSerialize(using=CustomDateSerializer.class)
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) throws Exception {
+    public void setDate(Date date) throws Exception {
         this.date = date;
     }
 

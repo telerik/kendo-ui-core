@@ -48,6 +48,8 @@
 	<beans:bean id="sample" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName" value="org.sqlite.JDBC"/>
 		<beans:property name="url" value="#{'jdbc:sqlite:' + db.file.absolutePath}" />
+	    <beans:property name="maxActive" value="1" />
+	    <beans:property name="maxIdle" value="1" />
 	</beans:bean>
 		
 	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

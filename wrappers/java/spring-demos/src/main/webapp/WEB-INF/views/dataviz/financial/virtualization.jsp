@@ -12,7 +12,7 @@
                 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />  
                 <kendo:dataSource-transport-parameterMap>
                 	<script>
-	                	function parameterMap(options) { 
+	                	function parameterMap(options) {
                 			return JSON.stringify(options);
 	                	}
                 	</script>
@@ -32,7 +32,14 @@
         <kendo:stockChart-navigator>
 	        <kendo:dataSource>
 	             <kendo:dataSource-transport>
-	                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
+	                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />  
+	                <kendo:dataSource-transport-parameterMap>
+	                	<script>
+		                	function parameterMap(options) {
+	                			return JSON.stringify(options);
+		                	}
+	                	</script>
+	                </kendo:dataSource-transport-parameterMap>
                  </kendo:dataSource-transport>
 	        </kendo:dataSource>
             <kendo:stockChart-navigator-series>

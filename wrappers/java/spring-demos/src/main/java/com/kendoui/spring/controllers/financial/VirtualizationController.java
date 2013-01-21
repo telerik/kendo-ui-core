@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.DataSourceRequest;
-import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.IntradayDao;
 
 @Controller("dataviz-financial-virtualization-controller")
@@ -36,6 +35,6 @@ public class VirtualizationController {
     
     @RequestMapping(value = "/virtualization/read", method = RequestMethod.POST)
     public @ResponseBody List<?> read(@RequestBody DataSourceRequest request) {
-        return intraday.getList(request);
+        return intraday.getList(request);        
     }
 }
