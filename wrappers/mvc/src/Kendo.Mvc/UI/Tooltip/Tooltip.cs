@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
@@ -18,6 +19,7 @@ namespace Kendo.Mvc.UI
             Callout = true;
             AutoHide = true;
             ContentHandler = new ClientHandlerDescriptor();
+            Animation = new PopupAnimation();
         }
 
         public string Filter { get; set; }
@@ -30,6 +32,9 @@ namespace Kendo.Mvc.UI
         public string ContentUrl { get; set; }
         public string Content { get; set; }
         public ClientHandlerDescriptor ContentHandler { get; set; }
+        public PopupAnimation Animation { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -63,6 +68,29 @@ namespace Kendo.Mvc.UI
             if (ShowOn != TooltipShowOnEvent.MouseEnter)
             {
                 options["showOn"] = Enum.GetName(typeof(TooltipShowOnEvent), ShowOn).ToLowerInvariant();
+            }
+
+            var animation = Animation.ToJson();
+
+            if (animation.Any())
+            {
+                if (animation["animation"] is bool)
+                {
+                    options["animation"] = false;
+                }
+                else
+                {
+                    options["animation"] = animation["animation"];
+                }
+            }
+
+            if (Width != 0)
+            {
+                options.Add("width", Width);
+            }
+            if (Height != 0)
+            {
+                options.Add("height", Height);
             }
 
             SerializeContent(options);

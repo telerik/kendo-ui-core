@@ -28,10 +28,11 @@
 @(Html.Kendo().Tooltip()
     .For("#container")
     .Filter("[title]")
-    .Position(TooltipPosition.Left)    
+    .Position(TooltipPosition.Left)
     .Callout(false)
-    .AutoHide(false)    
-    
+    .AutoHide(false)
+    .Width(1000)
+    .Height(800)      
 )
 
 <script type="text/javascript">

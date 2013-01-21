@@ -131,7 +131,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Tooltip()
         ///             .For("#element")
-        ///             .LoadContentFrom("AjaxView_OpenSource", "Window")
+        ///             .LoadContentFrom("AjaxView_OpenSource", "Tooltip")
         /// %&gt;
         /// </code>
         /// </example>
@@ -150,7 +150,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Tooltip()
         ///             .For("#element")
-        ///             .LoadContentFrom("AjaxView_OpenSource", "Window", new { id = 10})
+        ///             .LoadContentFrom("AjaxView_OpenSource", "Tooltip", new { id = 10})
         /// %&gt;
         /// </code>
         /// </example>
@@ -174,7 +174,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Tooltip()
         ///             .For("#element")
-        ///             .LoadContentFrom(Url.Action("AjaxView_OpenSource", "Window"))
+        ///             .LoadContentFrom(Url.Action("AjaxView_OpenSource", "Tooltip"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -218,6 +218,65 @@ namespace Kendo.Mvc.UI.Fluent
         public TooltipBuilder ContentHandler(string handler)
         {
             Component.ContentHandler.HandlerName = handler;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the animation effects of the window.
+        /// </summary>
+        /// <param name="enable">Whether the component animation is enabled.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .Animation(false)
+        /// </code>
+        /// </example>
+        public TooltipBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the animation effects of the panelbar.
+        /// </summary>
+        /// <param name="animationAction">The action that configures the animation.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .Animation(animation => animation.Expand)
+        /// </code>
+        /// </example>
+        public TooltipBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+
+            animationAction(new PopupAnimationBuilder(Component.Animation));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the width of the tooltip.
+        /// </summary>
+        public TooltipBuilder Width(int width)
+        {
+
+            Component.Width = width;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the height of the tooltip.
+        /// </summary>
+        public TooltipBuilder Height(int height)
+        {
+
+            Component.Height = height;
 
             return this;
         }
