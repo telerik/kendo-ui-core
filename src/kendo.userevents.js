@@ -407,7 +407,7 @@ kendo_module({
         },
 
         _select: function(e) {
-           if (!this.allowSelection || this.trigger(SELECT, e)) {
+           if (!this.allowSelection || this.trigger(SELECT, { event: e })) {
                 preventTrigger(e);
            }
         },
