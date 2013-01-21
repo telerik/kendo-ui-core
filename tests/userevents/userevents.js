@@ -220,7 +220,6 @@ module("gestures", {
         press(10, 20);
         move(15, 25);
     }
-
 });
 
 test("gesture start passes the center of the two touches", 2, function(){
@@ -346,4 +345,27 @@ test("raises end on end call", 1, function(){
     userEvents.press(10, 20);
     userEvents.move(15, 25);
     userEvents.end(15, 25);
+});
+
+module("selection", {
+    setup: function() {
+        element = $('<div />');
+        userEvents = new UserEvents(element, { allowSelection: true });
+    }
+});
+
+test("raises select on mousedown", 1, function(){
+    userEvents.bind("select", function(e) {
+        ok(true);
+    });
+
+    element.trigger("mousedown");
+});
+
+test("raises select on selectstart", 1, function(){
+    userEvents.bind("select", function(e) {
+        ok(true);
+    });
+
+    element.trigger("selectstart");
 });
