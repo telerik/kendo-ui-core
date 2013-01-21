@@ -174,7 +174,6 @@ kendo_module({
                 html = that._render();
 
             that.ul[0].innerHTML = html;
-            console.log("refresh");
 
             if (that._state !== "filter") {
                 that.value(that.options.value); // || that.element.val());
@@ -202,6 +201,13 @@ kendo_module({
                 length = data.length,
                 idx = 0, html = "", dataItem;
 
+            //render options
+            that._options(data);
+
+            //TODO: 1. Select options if any values
+            //      2. Unselected values - create custom options for them
+
+
             for(; idx < length; idx++) {
                 dataItem = data[idx];
                 html += template(dataItem, idx, that._selected(dataItem));
@@ -223,6 +229,103 @@ kendo_module({
             }
 
             return false;
+        },
+
+        _options: function(data) {
+            var that = this,
+                element = that.element,
+                length = data.length,
+                options = "",
+                option,
+                dataItem,
+                dataText,
+                encodedText,
+                dataValue,
+                idx = 0;
+
+            var dataItems = that._dataItems.slice(0), //clone dataItems
+                diLength = dataItems.length,
+                diValue, diText,
+                diIndex;
+
+            for (; idx < length; idx++) {
+                option = "<option";
+                dataItem = data[idx];
+                dataText = that._text(dataItem);
+                dataValue = that._value(dataItem);
+
+                if (dataValue !== undefined) {
+                    dataValue += "";
+
+                    if (dataValue.indexOf('"') !== -1) {
+                        dataValue = dataValue.replace(quotRegExp, "&quot;");
+                    }
+
+                    option += ' value="' + dataValue + '"';
+                }
+
+                if (dataText !== undefined) {
+                    encodedText = kendo.htmlEncode(dataText);
+                }
+
+                if (dataItems.length) {
+                    diIndex = 0;
+                    for (; diIndex < diLength; diIndex++) {
+                        dataItem = dataItems[diIndex];
+                        diValue = that._value(dataItem);
+                        diText = that._text(dataItem);
+
+                        if (diValue !== undefined && dataValue === diValue) {
+                            option += ' selected="selected"';
+                            dataItems.splice(diIndex, 1);
+                            break;
+                        } else if (diText !== undefined && dataText === diText) {
+                            option += ' selected="selected"';
+                            dataItems.splice(diIndex, 1);
+                            break;
+                        }
+                    }
+                }
+
+                option += ">" + encodedText;
+                option += "</option>";
+                options += option;
+            }
+
+            diLength = dataItems.length
+
+            if (diLength) {
+                diIndex = 0;
+                for (; diIndex < diLength; diIndex++) {
+                    dataItem = dataItems[diIndex];
+                    dataText = that._text(dataItem);
+                    dataValue = that._value(dataItem);
+
+                    option = "<option";
+
+                    if (dataValue !== undefined) {
+                        dataValue += "";
+
+                        if (dataValue.indexOf('"') !== -1) {
+                            dataValue = dataValue.replace(quotRegExp, "&quot;");
+                        }
+
+                        option += ' value="' + dataValue + '"';
+                    }
+
+                    if (dataText !== undefined) {
+                        encodedText = kendo.htmlEncode(dataText);
+                    }
+
+
+                    option += ' selected="selected"';
+                    option += ">" + encodedText;
+                    option += "</option>";
+                    options += option;
+                }
+            }
+
+            element.html(options);
         },
 
         search: function(word) {
