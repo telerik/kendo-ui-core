@@ -44,34 +44,37 @@
     .BindTo(new List<SelectListItem>()
     {
         new SelectListItem() {
-        Text = "The Shawshank Redemption", Value ="1"
+        Text = "12 Angry Men", Value ="1"
         },
         new SelectListItem() {
-        Text = "The Godfather", Value ="2"
+        Text = "Il buono, il brutto, il cattivo.", Value ="2"
         },
         new SelectListItem() {
-        Text = "The Godfather: Part II", Value ="3"
+        Text = "Inception", Value ="3"
         },
         new SelectListItem() {
-        Text = "Il buono, il brutto, il cattivo.", Value ="4"
+        Text = "One Flew Over the Cuckoo's Nest", Value ="4"
         },
         new SelectListItem() {
         Text = "Pulp Fiction", Value ="5"
         },
         new SelectListItem() {
-        Text = "12 Angry Men", Value ="6"
+        Text = "Schindler's List", Value ="6"
         },
         new SelectListItem() {
-        Text = "Schindler's List", Value ="7"
+        Text = "The Dark Knight", Value ="7"
         },
         new SelectListItem() {
-        Text = "One Flew Over the Cuckoo's Nest", Value ="8"
+        Text = "The Godfather", Value ="8"
         },
         new SelectListItem() {
-        Text = "Inception", Value ="9"
+        Text = "The Godfather: Part II", Value ="9"
         },
         new SelectListItem() {
-        Text = "The Dark Knight", Value ="10"
+        Text = "The Shawshank Redemption", Value ="10"
+        },
+        new SelectListItem() {
+        Text = "The Shawshank Redemption 2", Value ="10"
         }
     })
 %>
