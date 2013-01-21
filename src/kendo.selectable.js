@@ -45,7 +45,7 @@ kendo_module({
             multiple = that.options.multiple;
             that.userEvents = new kendo.UserEvents(that.element, {
                 global: true,
-                allowSelection: !multiple,
+                allowSelection: true,
                 filter: (!supportEventDelegation ? "." + SELECTABLE + " " : "") + that.options.filter,
                 tap: proxy(that._tap, that)
             });
@@ -54,7 +54,8 @@ kendo_module({
                 that.userEvents
                    .bind("start", proxy(that._start, that))
                    .bind("move", proxy(that._move, that))
-                   .bind("end", proxy(that._end, that));
+                   .bind("end", proxy(that._end, that))
+                   .bind("select", proxy(that._select, that));
             }
         },
 
@@ -221,6 +222,15 @@ kendo_module({
             }
 
             return element;
+        },
+
+        _select: function(e) {
+            if ($(e.event.target).is("input,a,textarea")) {
+                this.userEvents.cancel();
+                this._downTarget = null;
+            } else {
+                e.preventDefault();
+            }
         },
 
         clear: function() {
