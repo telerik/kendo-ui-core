@@ -24,7 +24,7 @@ class GridColumnCommandItem extends \Kendo\SerializableObject {
     }
 
     public function click($value) {
-        $this->setProperty('click', $value);
+        $this->setProperty('click', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }

@@ -31,7 +31,7 @@ class GridColumn extends \Kendo\SerializableObject {
     }
 
     public function editor($value) {
-        $this->setProperty('editor', $value);
+        $this->setProperty('editor', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }

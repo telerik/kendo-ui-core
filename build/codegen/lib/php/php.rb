@@ -87,6 +87,8 @@ OPTION_SETTER = ERB.new(%{
         def to_setter
             return DATA_SOURCE_SETTER if @name == 'dataSource'
 
+            return EVENT_SETTER.result(binding) if @type[0] == 'Function' && @type.size == 1
+
             OPTION_SETTER.result(binding)
         end
     end

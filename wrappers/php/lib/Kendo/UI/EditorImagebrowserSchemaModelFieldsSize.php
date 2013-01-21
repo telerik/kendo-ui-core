@@ -12,7 +12,7 @@ class EditorImagebrowserSchemaModelFieldsSize extends \Kendo\SerializableObject 
     }
 
     public function parse($value) {
-        $this->setProperty('parse', $value);
+        $this->setProperty('parse', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }

@@ -18,7 +18,7 @@ class EditorTool extends \Kendo\SerializableObject {
     }
 
     public function exec($value) {
-        $this->setProperty('exec', $value);
+        $this->setProperty('exec', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }

@@ -30,7 +30,7 @@ class DataSourceTransport extends \kendo\SerializableObject {
     }
 
     public function parameterMap($value) {
-        $this->setProperty('parameterMap', $value);
+        $this->setProperty('parameterMap', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }

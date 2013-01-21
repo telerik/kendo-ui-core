@@ -6,7 +6,7 @@ class EditorImagebrowserSchemaModelFieldsType extends \Kendo\SerializableObject 
 //>> Properties
 
     public function parse($value) {
-        $this->setProperty('parse', $value);
+        $this->setProperty('parse', new \Kendo\JavaScriptFunction($value));
 
         return $this;
     }
