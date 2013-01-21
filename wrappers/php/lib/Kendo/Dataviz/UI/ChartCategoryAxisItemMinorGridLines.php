@@ -6,27 +6,19 @@ class ChartCategoryAxisItemMinorGridLines extends \Kendo\SerializableObject {
 //>> Properties
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function dashType($value) {
-        $this->setProperty('dashType', $value);
-
-        return $this;
+        return $this->setProperty('dashType', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
     public function width($value) {
-        $this->setProperty('width', $value);
-
-        return $this;
+        return $this->setProperty('width', $value);
     }
 
 //<< Properties

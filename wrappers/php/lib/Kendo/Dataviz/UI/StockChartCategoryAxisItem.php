@@ -6,166 +6,107 @@ class StockChartCategoryAxisItem extends \Kendo\SerializableObject {
 //>> Properties
 
     public function axisCrossingValue($value) {
-        $this->setProperty('axisCrossingValue', $value);
-
-        return $this;
+        return $this->setProperty('axisCrossingValue', $value);
     }
 
     public function categories($value) {
-        $this->setProperty('categories', $value);
-
-        return $this;
+        return $this->setProperty('categories', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function field($value) {
-        $this->setProperty('field', $value);
-
-        return $this;
+        return $this->setProperty('field', $value);
     }
 
     public function justified($value) {
-        $this->setProperty('justified', $value);
-
-        return $this;
+        return $this->setProperty('justified', $value);
     }
 
     public function labels(\Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels $value) {
-        $this->setProperty('labels', $value);
-
-        return $this;
+        return $this->setProperty('labels', $value);
     }
 
     public function line(\Kendo\Dataviz\UI\StockChartCategoryAxisItemLine $value) {
-        $this->setProperty('line', $value);
-
-        return $this;
+        return $this->setProperty('line', $value);
     }
 
     public function majorGridLines(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorGridLines $value) {
-        $this->setProperty('majorGridLines', $value);
-
-        return $this;
+        return $this->setProperty('majorGridLines', $value);
     }
 
     public function majorTicks(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks $value) {
-        $this->setProperty('majorTicks', $value);
-
-        return $this;
+        return $this->setProperty('majorTicks', $value);
     }
 
     public function minorGridLines(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines $value) {
-        $this->setProperty('minorGridLines', $value);
-
-        return $this;
+        return $this->setProperty('minorGridLines', $value);
     }
 
     public function minorTicks(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorTicks $value) {
-        $this->setProperty('minorTicks', $value);
-
-        return $this;
+        return $this->setProperty('minorTicks', $value);
     }
 
     public function name($value) {
-        $this->setProperty('name', $value);
-
-        return $this;
+        return $this->setProperty('name', $value);
     }
 
     public function pane($value) {
-        $this->setProperty('pane', $value);
-
-        return $this;
+        return $this->setProperty('pane', $value);
     }
 
     public function addPlotBand(\Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand $value) {
-        $values = $this->getProperty('plotBands');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('plotBands', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('plotBands', $value);
     }
 
     public function reverse($value) {
-        $this->setProperty('reverse', $value);
-
-        return $this;
+        return $this->setProperty('reverse', $value);
     }
 
     public function title(\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle $value) {
-        $this->setProperty('title', $value);
-
-        return $this;
+        return $this->setProperty('title', $value);
     }
 
     public function type($value) {
-        $this->setProperty('type', $value);
-
-        return $this;
+        return $this->setProperty('type', $value);
     }
 
     public function autoBaseUnitSteps($value) {
-        $this->setProperty('autoBaseUnitSteps', $value);
-
-        return $this;
+        return $this->setProperty('autoBaseUnitSteps', $value);
     }
 
     public function baseUnit($value) {
-        $this->setProperty('baseUnit', $value);
-
-        return $this;
+        return $this->setProperty('baseUnit', $value);
     }
 
     public function baseUnitStep($value) {
-        $this->setProperty('baseUnitStep', $value);
-
-        return $this;
+        return $this->setProperty('baseUnitStep', $value);
     }
 
     public function max($value) {
-        $this->setProperty('max', $value);
-
-        return $this;
+        return $this->setProperty('max', $value);
     }
 
     public function min($value) {
-        $this->setProperty('min', $value);
-
-        return $this;
+        return $this->setProperty('min', $value);
     }
 
     public function roundToBaseUnit($value) {
-        $this->setProperty('roundToBaseUnit', $value);
-
-        return $this;
+        return $this->setProperty('roundToBaseUnit', $value);
     }
 
     public function weekStartDay($value) {
-        $this->setProperty('weekStartDay', $value);
-
-        return $this;
+        return $this->setProperty('weekStartDay', $value);
     }
 
     public function maxDateGroups($value) {
-        $this->setProperty('maxDateGroups', $value);
-
-        return $this;
+        return $this->setProperty('maxDateGroups', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

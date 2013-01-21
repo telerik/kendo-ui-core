@@ -6,15 +6,11 @@ class TreeViewAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
     public function collapse(\Kendo\UI\TreeViewAnimationCollapse $value) {
-        $this->setProperty('collapse', $value);
-
-        return $this;
+        return $this->setProperty('collapse', $value);
     }
 
     public function expand(\Kendo\UI\TreeViewAnimationExpand $value) {
-        $this->setProperty('expand', $value);
-
-        return $this;
+        return $this->setProperty('expand', $value);
     }
 
 //<< Properties

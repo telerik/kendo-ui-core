@@ -6,21 +6,15 @@ class StockChartNavigatorSeriesItemHighlightLine extends \Kendo\SerializableObje
 //>> Properties
 
     public function width($value) {
-        $this->setProperty('width', $value);
-
-        return $this;
+        return $this->setProperty('width', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
 //<< Properties

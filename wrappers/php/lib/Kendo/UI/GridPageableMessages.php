@@ -6,63 +6,43 @@ class GridPageableMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     public function display($value) {
-        $this->setProperty('display', $value);
-
-        return $this;
+        return $this->setProperty('display', $value);
     }
 
     public function empty($value) {
-        $this->setProperty('empty', $value);
-
-        return $this;
+        return $this->setProperty('empty', $value);
     }
 
     public function page($value) {
-        $this->setProperty('page', $value);
-
-        return $this;
+        return $this->setProperty('page', $value);
     }
 
     public function of($value) {
-        $this->setProperty('of', $value);
-
-        return $this;
+        return $this->setProperty('of', $value);
     }
 
     public function itemsPerPage($value) {
-        $this->setProperty('itemsPerPage', $value);
-
-        return $this;
+        return $this->setProperty('itemsPerPage', $value);
     }
 
     public function first($value) {
-        $this->setProperty('first', $value);
-
-        return $this;
+        return $this->setProperty('first', $value);
     }
 
     public function previous($value) {
-        $this->setProperty('previous', $value);
-
-        return $this;
+        return $this->setProperty('previous', $value);
     }
 
     public function next($value) {
-        $this->setProperty('next', $value);
-
-        return $this;
+        return $this->setProperty('next', $value);
     }
 
     public function last($value) {
-        $this->setProperty('last', $value);
-
-        return $this;
+        return $this->setProperty('last', $value);
     }
 
     public function refresh($value) {
-        $this->setProperty('refresh', $value);
-
-        return $this;
+        return $this->setProperty('refresh', $value);
     }
 
 //<< Properties

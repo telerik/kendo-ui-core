@@ -9,69 +9,47 @@ class RangeSlider extends \Kendo\UI\Widget {
 //>> Properties
 
     public function largeStep($value) {
-        $this->setProperty('largeStep', $value);
-
-        return $this;
+        return $this->setProperty('largeStep', $value);
     }
 
     public function max($value) {
-        $this->setProperty('max', $value);
-
-        return $this;
+        return $this->setProperty('max', $value);
     }
 
     public function min($value) {
-        $this->setProperty('min', $value);
-
-        return $this;
+        return $this->setProperty('min', $value);
     }
 
     public function orientation($value) {
-        $this->setProperty('orientation', $value);
-
-        return $this;
+        return $this->setProperty('orientation', $value);
     }
 
     public function selectionEnd($value) {
-        $this->setProperty('selectionEnd', $value);
-
-        return $this;
+        return $this->setProperty('selectionEnd', $value);
     }
 
     public function selectionStart($value) {
-        $this->setProperty('selectionStart', $value);
-
-        return $this;
+        return $this->setProperty('selectionStart', $value);
     }
 
     public function smallStep($value) {
-        $this->setProperty('smallStep', $value);
-
-        return $this;
+        return $this->setProperty('smallStep', $value);
     }
 
     public function tickPlacement($value) {
-        $this->setProperty('tickPlacement', $value);
-
-        return $this;
+        return $this->setProperty('tickPlacement', $value);
     }
 
     public function tooltip(\Kendo\UI\RangeSliderTooltip $value) {
-        $this->setProperty('tooltip', $value);
-
-        return $this;
+        return $this->setProperty('tooltip', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function slide($value) {
-        $this->setProperty('slide', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('slide', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

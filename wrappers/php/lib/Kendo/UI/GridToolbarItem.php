@@ -6,21 +6,15 @@ class GridToolbarItem extends \Kendo\SerializableObject {
 //>> Properties
 
     public function name($value) {
-        $this->setProperty('name', $value);
-
-        return $this;
+        return $this->setProperty('name', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function text($value) {
-        $this->setProperty('text', $value);
-
-        return $this;
+        return $this->setProperty('text', $value);
     }
 
 //<< Properties

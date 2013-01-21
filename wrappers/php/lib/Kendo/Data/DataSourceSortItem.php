@@ -6,15 +6,11 @@ class DataSourceSortItem extends \kendo\SerializableObject {
 //>> Properties
 
     public function field($value) {
-        $this->setProperty('field', $value);
-
-        return $this;
+        return $this->setProperty('field', $value);
     }
 
     public function dir($value) {
-        $this->setProperty('dir', $value);
-
-        return $this;
+        return $this->setProperty('dir', $value);
     }
 
 //<< Properties

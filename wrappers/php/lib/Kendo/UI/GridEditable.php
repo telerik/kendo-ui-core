@@ -6,39 +6,27 @@ class GridEditable extends \Kendo\SerializableObject {
 //>> Properties
 
     public function confirmation($value) {
-        $this->setProperty('confirmation', $value);
-
-        return $this;
+        return $this->setProperty('confirmation', $value);
     }
 
     public function createAt($value) {
-        $this->setProperty('createAt', $value);
-
-        return $this;
+        return $this->setProperty('createAt', $value);
     }
 
     public function destroy($value) {
-        $this->setProperty('destroy', $value);
-
-        return $this;
+        return $this->setProperty('destroy', $value);
     }
 
     public function mode($value) {
-        $this->setProperty('mode', $value);
-
-        return $this;
+        return $this->setProperty('mode', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function update($value) {
-        $this->setProperty('update', $value);
-
-        return $this;
+        return $this->setProperty('update', $value);
     }
 
 //<< Properties

@@ -6,177 +6,119 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
 //>> Properties
 
     public function type($value) {
-        $this->setProperty('type', $value);
-
-        return $this;
+        return $this->setProperty('type', $value);
     }
 
     public function dashType($value) {
-        $this->setProperty('dashType', $value);
-
-        return $this;
+        return $this->setProperty('dashType', $value);
     }
 
     public function data($value) {
-        $this->setProperty('data', $value);
-
-        return $this;
+        return $this->setProperty('data', $value);
     }
 
     public function highField($value) {
-        $this->setProperty('highField', $value);
-
-        return $this;
+        return $this->setProperty('highField', $value);
     }
 
     public function field($value) {
-        $this->setProperty('field', $value);
-
-        return $this;
+        return $this->setProperty('field', $value);
     }
 
     public function groupNameTemplate($value) {
-        $this->setProperty('groupNameTemplate', $value);
-
-        return $this;
+        return $this->setProperty('groupNameTemplate', $value);
     }
 
     public function name($value) {
-        $this->setProperty('name', $value);
-
-        return $this;
+        return $this->setProperty('name', $value);
     }
 
     public function highlight(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemHighlight $value) {
-        $this->setProperty('highlight', $value);
-
-        return $this;
+        return $this->setProperty('highlight', $value);
     }
 
     public function aggregate($value) {
-        $this->setProperty('aggregate', $value);
-
-        return $this;
+        return $this->setProperty('aggregate', $value);
     }
 
     public function axis($value) {
-        $this->setProperty('axis', $value);
-
-        return $this;
+        return $this->setProperty('axis', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function closeField($value) {
-        $this->setProperty('closeField', $value);
-
-        return $this;
+        return $this->setProperty('closeField', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function colorField($value) {
-        $this->setProperty('colorField', $value);
-
-        return $this;
+        return $this->setProperty('colorField', $value);
     }
 
     public function downColor($value) {
-        $this->setProperty('downColor', $value);
-
-        return $this;
+        return $this->setProperty('downColor', $value);
     }
 
     public function downColorField($value) {
-        $this->setProperty('downColorField', $value);
-
-        return $this;
+        return $this->setProperty('downColorField', $value);
     }
 
     public function gap($value) {
-        $this->setProperty('gap', $value);
-
-        return $this;
+        return $this->setProperty('gap', $value);
     }
 
     public function labels(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLabels $value) {
-        $this->setProperty('labels', $value);
-
-        return $this;
+        return $this->setProperty('labels', $value);
     }
 
-    public function line(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine $value) {
-        $this->setProperty('line', $value);
-
-        return $this;
+    public function line($value) {
+        return $this->setProperty('line', $value);
     }
 
     public function lowField($value) {
-        $this->setProperty('lowField', $value);
-
-        return $this;
+        return $this->setProperty('lowField', $value);
     }
 
     public function markers(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers $value) {
-        $this->setProperty('markers', $value);
-
-        return $this;
+        return $this->setProperty('markers', $value);
     }
 
     public function missingValues($value) {
-        $this->setProperty('missingValues', $value);
-
-        return $this;
+        return $this->setProperty('missingValues', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
     public function openField($value) {
-        $this->setProperty('openField', $value);
-
-        return $this;
+        return $this->setProperty('openField', $value);
     }
 
     public function overlay(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemOverlay $value) {
-        $this->setProperty('overlay', $value);
-
-        return $this;
+        return $this->setProperty('overlay', $value);
     }
 
     public function spacing($value) {
-        $this->setProperty('spacing', $value);
-
-        return $this;
+        return $this->setProperty('spacing', $value);
     }
 
     public function stack($value) {
-        $this->setProperty('stack', $value);
-
-        return $this;
+        return $this->setProperty('stack', $value);
     }
 
     public function tooltip(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemTooltip $value) {
-        $this->setProperty('tooltip', $value);
-
-        return $this;
+        return $this->setProperty('tooltip', $value);
     }
 
     public function width($value) {
-        $this->setProperty('width', $value);
-
-        return $this;
+        return $this->setProperty('width', $value);
     }
 
 //<< Properties

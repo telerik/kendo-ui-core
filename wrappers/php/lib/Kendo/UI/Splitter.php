@@ -9,52 +9,31 @@ class Splitter extends \Kendo\UI\Widget {
 //>> Properties
 
     public function orientation($value) {
-        $this->setProperty('orientation', $value);
-
-        return $this;
+        return $this->setProperty('orientation', $value);
     }
 
     public function addPane(\Kendo\UI\SplitterPane $value) {
-        $values = $this->getProperty('panes');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('panes', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('panes', $value);
     }
 
     public function collapse($value) {
-        $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
     }
 
     public function contentLoad($value) {
-        $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
     }
 
     public function expand($value) {
-        $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
     }
 
     public function layoutChange($value) {
-        $this->setProperty('layoutChange', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('layoutChange', new \Kendo\JavaScriptFunction($value));
     }
 
     public function resize($value) {
-        $this->setProperty('resize', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('resize', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

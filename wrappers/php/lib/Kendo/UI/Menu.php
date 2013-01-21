@@ -9,76 +9,47 @@ class Menu extends \Kendo\UI\Widget {
 //>> Properties
 
     public function animation(\Kendo\UI\MenuAnimation $value) {
-        $this->setProperty('animation', $value);
-
-        return $this;
+        return $this->setProperty('animation', $value);
     }
 
     public function closeOnClick($value) {
-        $this->setProperty('closeOnClick', $value);
-
-        return $this;
+        return $this->setProperty('closeOnClick', $value);
     }
 
     public function direction($value) {
-        $this->setProperty('direction', $value);
-
-        return $this;
+        return $this->setProperty('direction', $value);
     }
 
     public function hoverDelay($value) {
-        $this->setProperty('hoverDelay', $value);
-
-        return $this;
+        return $this->setProperty('hoverDelay', $value);
     }
 
     public function openOnClick($value) {
-        $this->setProperty('openOnClick', $value);
-
-        return $this;
+        return $this->setProperty('openOnClick', $value);
     }
 
     public function orientation($value) {
-        $this->setProperty('orientation', $value);
-
-        return $this;
+        return $this->setProperty('orientation', $value);
     }
 
     public function popupCollision($value) {
-        $this->setProperty('popupCollision', $value);
-
-        return $this;
+        return $this->setProperty('popupCollision', $value);
     }
 
     public function addItem(\Kendo\UI\MenuItem $value) {
-        $values = $this->getProperty('items');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('items', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('items', $value);
     }
 
     public function close($value) {
-        $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
     }
 
     public function open($value) {
-        $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
     }
 
     public function select($value) {
-        $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

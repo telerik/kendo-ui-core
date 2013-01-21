@@ -1,5 +1,4 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'application/json') {
 
     require_once '../../lib/DataSourceResult.php';
@@ -12,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'applica
 
     exit;
 }
-
 ?>
 <?php require_once '../../include/header.php' ?>
 
@@ -22,37 +20,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'applica
 
     $read = new \Kendo\Data\DataSourceTransportRead();
 
-    $read->url('serverfiltering.php')
+    $read->url('remote-data.php')
          ->contentType('application/json')
          ->type('POST');
 
     $transport->read($read);
 
-    $schema  = new \Kendo\Data\DataSourceSchema();
+    $schema = new \Kendo\Data\DataSourceSchema();
     $schema->data('data')
            ->total('total');
 
     $dataSource = new \Kendo\Data\DataSource();
 
     $dataSource->transport($transport)
+               ->pageSize(10)
                ->schema($schema)
-               ->serverFiltering(false);
+               ->serverPaging(true);
 
-    $autoComplete = new \Kendo\UI\AutoComplete('products');
+    $grid = new \Kendo\UI\Grid('grid');
 
-    $autoComplete->dataSource($dataSource)
-                 ->dataTextField('ProductName')
-                 ->ignoreCase(false);
+    $productName = new \Kendo\UI\GridColumn();
+    $productName->field('ProductName')
+                ->title('Product Name');
 
-    echo $autoComplete->render();
+    $grid->addColumn($productName)
+         ->dataSource($dataSource)
+         ->pageable(true);
+
+    echo $grid->render();
 ?>
-    <div>
-        <label for="products">Choose product:</label>
-    </div>
-    <style scoped="scoped">
-        .k-autocomplete
-        {
-            width: 250px;
-        }
-    </style>
+
 <?php require_once '../../include/footer.php' ?>

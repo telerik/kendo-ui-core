@@ -5,34 +5,24 @@ namespace Kendo\Data;
 class DataSourceTransport extends \Kendo\SerializableObject {
 //>> Properties
 
-    public function create(\Kendo\Data\DataSourceTransportCreate $value) {
-        $this->setProperty('create', $value);
-
-        return $this;
+    public function create($value) {
+        return $this->setProperty('create', $value);
     }
 
-    public function destroy(\Kendo\Data\DataSourceTransportDestroy $value) {
-        $this->setProperty('destroy', $value);
-
-        return $this;
+    public function destroy($value) {
+        return $this->setProperty('destroy', $value);
     }
 
     public function parameterMap($value) {
-        $this->setProperty('parameterMap', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('parameterMap', new \Kendo\JavaScriptFunction($value));
     }
 
-    public function read(\Kendo\Data\DataSourceTransportRead $value) {
-        $this->setProperty('read', $value);
-
-        return $this;
+    public function read($value) {
+        return $this->setProperty('read', $value);
     }
 
-    public function update(\Kendo\Data\DataSourceTransportUpdate $value) {
-        $this->setProperty('update', $value);
-
-        return $this;
+    public function update($value) {
+        return $this->setProperty('update', $value);
     }
 
 //<< Properties

@@ -9,153 +9,103 @@ class ComboBox extends \Kendo\UI\Widget {
 //>> Properties
 
     public function animation(\Kendo\UI\ComboBoxAnimation $value) {
-        $this->setProperty('animation', $value);
-
-        return $this;
+        return $this->setProperty('animation', $value);
     }
 
     public function autoBind($value) {
-        $this->setProperty('autoBind', $value);
-
-        return $this;
+        return $this->setProperty('autoBind', $value);
     }
 
     public function cascadeFrom($value) {
-        $this->setProperty('cascadeFrom', $value);
-
-        return $this;
+        return $this->setProperty('cascadeFrom', $value);
     }
 
     public function dataSource(\Kendo\Data\DataSource $value) {
-        $this->setProperty('dataSource', $value);
-
-        return $this;
+        return $this->setProperty('dataSource', $value);
     }
 
     public function dataTextField($value) {
-        $this->setProperty('dataTextField', $value);
-
-        return $this;
+        return $this->setProperty('dataTextField', $value);
     }
 
     public function dataValueField($value) {
-        $this->setProperty('dataValueField', $value);
-
-        return $this;
+        return $this->setProperty('dataValueField', $value);
     }
 
     public function delay($value) {
-        $this->setProperty('delay', $value);
-
-        return $this;
+        return $this->setProperty('delay', $value);
     }
 
     public function enable($value) {
-        $this->setProperty('enable', $value);
-
-        return $this;
+        return $this->setProperty('enable', $value);
     }
 
     public function filter($value) {
-        $this->setProperty('filter', $value);
-
-        return $this;
+        return $this->setProperty('filter', $value);
     }
 
     public function height($value) {
-        $this->setProperty('height', $value);
-
-        return $this;
+        return $this->setProperty('height', $value);
     }
 
     public function highlightFirst($value) {
-        $this->setProperty('highlightFirst', $value);
-
-        return $this;
+        return $this->setProperty('highlightFirst', $value);
     }
 
     public function ignoreCase($value) {
-        $this->setProperty('ignoreCase', $value);
-
-        return $this;
+        return $this->setProperty('ignoreCase', $value);
     }
 
     public function index($value) {
-        $this->setProperty('index', $value);
-
-        return $this;
+        return $this->setProperty('index', $value);
     }
 
     public function minLength($value) {
-        $this->setProperty('minLength', $value);
-
-        return $this;
+        return $this->setProperty('minLength', $value);
     }
 
     public function placeholder($value) {
-        $this->setProperty('placeholder', $value);
-
-        return $this;
+        return $this->setProperty('placeholder', $value);
     }
 
     public function suggest($value) {
-        $this->setProperty('suggest', $value);
-
-        return $this;
+        return $this->setProperty('suggest', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function text($value) {
-        $this->setProperty('text', $value);
-
-        return $this;
+        return $this->setProperty('text', $value);
     }
 
     public function value($value) {
-        $this->setProperty('value', $value);
-
-        return $this;
+        return $this->setProperty('value', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function close($value) {
-        $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('close', new \Kendo\JavaScriptFunction($value));
     }
 
     public function dataBound($value) {
-        $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
     }
 
     public function open($value) {
-        $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('open', new \Kendo\JavaScriptFunction($value));
     }
 
     public function select($value) {
-        $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
     }
 
     public function cascade($value) {
-        $this->setProperty('cascade', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('cascade', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

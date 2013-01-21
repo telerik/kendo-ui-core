@@ -6,15 +6,11 @@ class AutoCompleteAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
     public function close(\Kendo\UI\AutoCompleteAnimationClose $value) {
-        $this->setProperty('close', $value);
-
-        return $this;
+        return $this->setProperty('close', $value);
     }
 
     public function open(\Kendo\UI\AutoCompleteAnimationOpen $value) {
-        $this->setProperty('open', $value);
-
-        return $this;
+        return $this->setProperty('open', $value);
     }
 
 //<< Properties

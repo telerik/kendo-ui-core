@@ -6,21 +6,15 @@ class GridFilterable extends \Kendo\SerializableObject {
 //>> Properties
 
     public function extra($value) {
-        $this->setProperty('extra', $value);
-
-        return $this;
+        return $this->setProperty('extra', $value);
     }
 
     public function messages(\Kendo\UI\GridFilterableMessages $value) {
-        $this->setProperty('messages', $value);
-
-        return $this;
+        return $this->setProperty('messages', $value);
     }
 
     public function operators(\Kendo\UI\GridFilterableOperators $value) {
-        $this->setProperty('operators', $value);
-
-        return $this;
+        return $this->setProperty('operators', $value);
     }
 
 //<< Properties

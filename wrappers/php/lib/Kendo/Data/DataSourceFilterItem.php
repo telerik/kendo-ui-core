@@ -6,21 +6,15 @@ class DataSourceFilterItem extends \kendo\SerializableObject {
 //>> Properties
 
     public function operator($value) {
-        $this->setProperty('operator', $value);
-
-        return $this;
+        return $this->setProperty('operator', $value);
     }
 
     public function field($value) {
-        $this->setProperty('field', $value);
-
-        return $this;
+        return $this->setProperty('field', $value);
     }
 
     public function value($value) {
-        $this->setProperty('value', $value);
-
-        return $this;
+        return $this->setProperty('value', $value);
     }
 
 //<< Properties

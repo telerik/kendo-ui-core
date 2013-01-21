@@ -6,33 +6,23 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
 //>> Properties
 
     public function background($value) {
-        $this->setProperty('background', $value);
-
-        return $this;
+        return $this->setProperty('background', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function size($value) {
-        $this->setProperty('size', $value);
-
-        return $this;
+        return $this->setProperty('size', $value);
     }
 
     public function type($value) {
-        $this->setProperty('type', $value);
-
-        return $this;
+        return $this->setProperty('type', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

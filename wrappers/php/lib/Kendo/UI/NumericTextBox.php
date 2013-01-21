@@ -9,81 +9,55 @@ class NumericTextBox extends \Kendo\UI\Widget {
 //>> Properties
 
     public function culture($value) {
-        $this->setProperty('culture', $value);
-
-        return $this;
+        return $this->setProperty('culture', $value);
     }
 
     public function decimals($value) {
-        $this->setProperty('decimals', $value);
-
-        return $this;
+        return $this->setProperty('decimals', $value);
     }
 
     public function downArrowText($value) {
-        $this->setProperty('downArrowText', $value);
-
-        return $this;
+        return $this->setProperty('downArrowText', $value);
     }
 
     public function format($value) {
-        $this->setProperty('format', $value);
-
-        return $this;
+        return $this->setProperty('format', $value);
     }
 
     public function max($value) {
-        $this->setProperty('max', $value);
-
-        return $this;
+        return $this->setProperty('max', $value);
     }
 
     public function min($value) {
-        $this->setProperty('min', $value);
-
-        return $this;
+        return $this->setProperty('min', $value);
     }
 
     public function placeholder($value) {
-        $this->setProperty('placeholder', $value);
-
-        return $this;
+        return $this->setProperty('placeholder', $value);
     }
 
     public function spinners($value) {
-        $this->setProperty('spinners', $value);
-
-        return $this;
+        return $this->setProperty('spinners', $value);
     }
 
     public function step($value) {
-        $this->setProperty('step', $value);
-
-        return $this;
+        return $this->setProperty('step', $value);
     }
 
     public function upArrowText($value) {
-        $this->setProperty('upArrowText', $value);
-
-        return $this;
+        return $this->setProperty('upArrowText', $value);
     }
 
     public function value($value) {
-        $this->setProperty('value', $value);
-
-        return $this;
+        return $this->setProperty('value', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function spin($value) {
-        $this->setProperty('spin', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('spin', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

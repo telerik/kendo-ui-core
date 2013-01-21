@@ -6,9 +6,7 @@ class GridGroupableMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     public function empty($value) {
-        $this->setProperty('empty', $value);
-
-        return $this;
+        return $this->setProperty('empty', $value);
     }
 
 //<< Properties

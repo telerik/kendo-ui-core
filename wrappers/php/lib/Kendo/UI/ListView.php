@@ -9,87 +9,59 @@ class ListView extends \Kendo\UI\Widget {
 //>> Properties
 
     public function autoBind($value) {
-        $this->setProperty('autoBind', $value);
-
-        return $this;
+        return $this->setProperty('autoBind', $value);
     }
 
     public function dataSource(\Kendo\Data\DataSource $value) {
-        $this->setProperty('dataSource', $value);
-
-        return $this;
+        return $this->setProperty('dataSource', $value);
     }
 
     public function navigatable($value) {
-        $this->setProperty('navigatable', $value);
-
-        return $this;
+        return $this->setProperty('navigatable', $value);
     }
 
     public function selectable($value) {
-        $this->setProperty('selectable', $value);
-
-        return $this;
+        return $this->setProperty('selectable', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function editTemplate($value) {
-        $this->setProperty('editTemplate', $value);
-
-        return $this;
+        return $this->setProperty('editTemplate', $value);
     }
 
     public function altTemplate($value) {
-        $this->setProperty('altTemplate', $value);
-
-        return $this;
+        return $this->setProperty('altTemplate', $value);
     }
 
     public function pageable($value) {
-        $this->setProperty('pageable', $value);
-
-        return $this;
+        return $this->setProperty('pageable', $value);
     }
 
     public function tagName($value) {
-        $this->setProperty('tagName', $value);
-
-        return $this;
+        return $this->setProperty('tagName', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function dataBound($value) {
-        $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
     }
 
     public function dataBinding($value) {
-        $this->setProperty('dataBinding', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('dataBinding', new \Kendo\JavaScriptFunction($value));
     }
 
     public function edit($value) {
-        $this->setProperty('edit', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('edit', new \Kendo\JavaScriptFunction($value));
     }
 
     public function remove($value) {
-        $this->setProperty('remove', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('remove', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

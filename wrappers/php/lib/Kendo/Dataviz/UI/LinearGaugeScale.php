@@ -6,82 +6,51 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 //>> Properties
 
     public function line(\Kendo\Dataviz\UI\LinearGaugeScaleLine $value) {
-        $this->setProperty('line', $value);
-
-        return $this;
+        return $this->setProperty('line', $value);
     }
 
     public function labels(\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value) {
-        $this->setProperty('labels', $value);
-
-        return $this;
+        return $this->setProperty('labels', $value);
     }
 
     public function majorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value) {
-        $this->setProperty('majorTicks', $value);
-
-        return $this;
+        return $this->setProperty('majorTicks', $value);
     }
 
     public function majorUnit($value) {
-        $this->setProperty('majorUnit', $value);
-
-        return $this;
+        return $this->setProperty('majorUnit', $value);
     }
 
     public function max($value) {
-        $this->setProperty('max', $value);
-
-        return $this;
+        return $this->setProperty('max', $value);
     }
 
     public function min($value) {
-        $this->setProperty('min', $value);
-
-        return $this;
+        return $this->setProperty('min', $value);
     }
 
     public function minorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value) {
-        $this->setProperty('minorTicks', $value);
-
-        return $this;
+        return $this->setProperty('minorTicks', $value);
     }
 
     public function minorUnit($value) {
-        $this->setProperty('minorUnit', $value);
-
-        return $this;
+        return $this->setProperty('minorUnit', $value);
     }
 
     public function mirror($value) {
-        $this->setProperty('mirror', $value);
-
-        return $this;
+        return $this->setProperty('mirror', $value);
     }
 
     public function addRange(\Kendo\Dataviz\UI\LinearGaugeScaleRange $value) {
-        $values = $this->getProperty('ranges');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('ranges', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('ranges', $value);
     }
 
     public function reverse($value) {
-        $this->setProperty('reverse', $value);
-
-        return $this;
+        return $this->setProperty('reverse', $value);
     }
 
     public function vertical($value) {
-        $this->setProperty('vertical', $value);
-
-        return $this;
+        return $this->setProperty('vertical', $value);
     }
 
 //<< Properties

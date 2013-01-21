@@ -6,15 +6,11 @@ class AutoCompleteAnimationOpen extends \Kendo\SerializableObject {
 //>> Properties
 
     public function effects($value) {
-        $this->setProperty('effects', $value);
-
-        return $this;
+        return $this->setProperty('effects', $value);
     }
 
     public function duration($value) {
-        $this->setProperty('duration', $value);
-
-        return $this;
+        return $this->setProperty('duration', $value);
     }
 
 //<< Properties

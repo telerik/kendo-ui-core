@@ -6,27 +6,19 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     public function columns($value) {
-        $this->setProperty('columns', $value);
-
-        return $this;
+        return $this->setProperty('columns', $value);
     }
 
     public function filter($value) {
-        $this->setProperty('filter', $value);
-
-        return $this;
+        return $this->setProperty('filter', $value);
     }
 
     public function sortAscending($value) {
-        $this->setProperty('sortAscending', $value);
-
-        return $this;
+        return $this->setProperty('sortAscending', $value);
     }
 
     public function sortDescending($value) {
-        $this->setProperty('sortDescending', $value);
-
-        return $this;
+        return $this->setProperty('sortDescending', $value);
     }
 
 //<< Properties

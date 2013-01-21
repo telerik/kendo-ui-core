@@ -6,57 +6,39 @@ class EditorImagebrowserMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     public function uploadFile($value) {
-        $this->setProperty('uploadFile', $value);
-
-        return $this;
+        return $this->setProperty('uploadFile', $value);
     }
 
     public function orderBy($value) {
-        $this->setProperty('orderBy', $value);
-
-        return $this;
+        return $this->setProperty('orderBy', $value);
     }
 
     public function orderByName($value) {
-        $this->setProperty('orderByName', $value);
-
-        return $this;
+        return $this->setProperty('orderByName', $value);
     }
 
     public function orderBySize($value) {
-        $this->setProperty('orderBySize', $value);
-
-        return $this;
+        return $this->setProperty('orderBySize', $value);
     }
 
     public function directoryNotFound($value) {
-        $this->setProperty('directoryNotFound', $value);
-
-        return $this;
+        return $this->setProperty('directoryNotFound', $value);
     }
 
     public function emptyFolder($value) {
-        $this->setProperty('emptyFolder', $value);
-
-        return $this;
+        return $this->setProperty('emptyFolder', $value);
     }
 
     public function deleteFile($value) {
-        $this->setProperty('deleteFile', $value);
-
-        return $this;
+        return $this->setProperty('deleteFile', $value);
     }
 
     public function invalidFileType($value) {
-        $this->setProperty('invalidFileType', $value);
-
-        return $this;
+        return $this->setProperty('invalidFileType', $value);
     }
 
     public function overwriteFile($value) {
-        $this->setProperty('overwriteFile', $value);
-
-        return $this;
+        return $this->setProperty('overwriteFile', $value);
     }
 
 //<< Properties

@@ -6,63 +6,43 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     public function background($value) {
-        $this->setProperty('background', $value);
-
-        return $this;
+        return $this->setProperty('background', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function font($value) {
-        $this->setProperty('font', $value);
-
-        return $this;
+        return $this->setProperty('font', $value);
     }
 
     public function format($value) {
-        $this->setProperty('format', $value);
-
-        return $this;
+        return $this->setProperty('format', $value);
     }
 
     public function margin($value) {
-        $this->setProperty('margin', $value);
-
-        return $this;
+        return $this->setProperty('margin', $value);
     }
 
     public function padding($value) {
-        $this->setProperty('padding', $value);
-
-        return $this;
+        return $this->setProperty('padding', $value);
     }
 
     public function position($value) {
-        $this->setProperty('position', $value);
-
-        return $this;
+        return $this->setProperty('position', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

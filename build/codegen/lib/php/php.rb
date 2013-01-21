@@ -22,17 +22,15 @@ module CodeGen::PHP
         end
 
         def unique_options
-            composite = composite_options
+            simple = simple_options
 
-            options.find_all {|o| o.composite? || !composite.any? { |composite| composite.name == o.name } }
+            options.find_all {|o| !o.composite? || !simple.any? { |simple| simple.name == o.name } }
         end
     end
 
 COMPOSITE_OPTION_SETTER = ERB.new(%{
     public function <%= name %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
-        $this->setProperty('<%= name %>', $value);
-
-        return $this;
+        return $this->setProperty('<%= name %>', $value);
     }
 })
 
@@ -73,17 +71,13 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 
 DATA_SOURCE_SETTER = %{
     public function dataSource(\\Kendo\\Data\\DataSource $value) {
-        $this->setProperty('dataSource', $value);
-
-        return $this;
+        return $this->setProperty('dataSource', $value);
     }
 }
 
 OPTION_SETTER = ERB.new(%{
     public function <%= name %>($value) {
-        $this->setProperty('<%= name %>', $value);
-
-        return $this;
+        return $this->setProperty('<%= name %>', $value);
     }
 })
 
@@ -101,9 +95,7 @@ OPTION_SETTER = ERB.new(%{
 
 EVENT_SETTER = ERB.new(%{
     public function <%= name %>($value) {
-        $this->setProperty('<%= name %>', new \\Kendo\\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('<%= name %>', new \\Kendo\\JavaScriptFunction($value));
     }
 })
 
@@ -117,16 +109,7 @@ EVENT_SETTER = ERB.new(%{
 
 ARRAY_SETTER = ERB.new(%{
     public function add<%= item.name.pascalize %>(\\<%= php_namespace %>\\<%= item.php_class %> $value) {
-        $values = $this->getProperty('<%= name %>');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('<%= name %>', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('<%= name %>', $value);
     }
 })
 

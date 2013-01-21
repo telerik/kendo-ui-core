@@ -9,237 +9,131 @@ class Chart extends \Kendo\UI\Widget {
 //>> Properties
 
     public function axisDefaults($value) {
-        $this->setProperty('axisDefaults', $value);
-
-        return $this;
+        return $this->setProperty('axisDefaults', $value);
     }
 
     public function addCategoryAxisItem(\Kendo\Dataviz\UI\ChartCategoryAxisItem $value) {
-        $values = $this->getProperty('categoryAxis');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('categoryAxis', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('categoryAxis', $value);
     }
 
     public function chartArea(\Kendo\Dataviz\UI\ChartChartArea $value) {
-        $this->setProperty('chartArea', $value);
-
-        return $this;
+        return $this->setProperty('chartArea', $value);
     }
 
     public function dataSource(\Kendo\Data\DataSource $value) {
-        $this->setProperty('dataSource', $value);
-
-        return $this;
+        return $this->setProperty('dataSource', $value);
     }
 
     public function autoBind($value) {
-        $this->setProperty('autoBind', $value);
-
-        return $this;
+        return $this->setProperty('autoBind', $value);
     }
 
     public function legend(\Kendo\Dataviz\UI\ChartLegend $value) {
-        $this->setProperty('legend', $value);
-
-        return $this;
+        return $this->setProperty('legend', $value);
     }
 
     public function addPane(\Kendo\Dataviz\UI\ChartPane $value) {
-        $values = $this->getProperty('panes');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('panes', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('panes', $value);
     }
 
     public function plotArea(\Kendo\Dataviz\UI\ChartPlotArea $value) {
-        $this->setProperty('plotArea', $value);
-
-        return $this;
+        return $this->setProperty('plotArea', $value);
     }
 
     public function addSeriesItem(\Kendo\Dataviz\UI\ChartSeriesItem $value) {
-        $values = $this->getProperty('series');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('series', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('series', $value);
     }
 
     public function seriesColors($value) {
-        $this->setProperty('seriesColors', $value);
-
-        return $this;
+        return $this->setProperty('seriesColors', $value);
     }
 
     public function seriesDefaults(\Kendo\Dataviz\UI\ChartSeriesDefaults $value) {
-        $this->setProperty('seriesDefaults', $value);
-
-        return $this;
+        return $this->setProperty('seriesDefaults', $value);
     }
 
     public function theme($value) {
-        $this->setProperty('theme', $value);
-
-        return $this;
+        return $this->setProperty('theme', $value);
     }
 
     public function title(\Kendo\Dataviz\UI\ChartTitle $value) {
-        $this->setProperty('title', $value);
-
-        return $this;
+        return $this->setProperty('title', $value);
     }
 
     public function tooltip(\Kendo\Dataviz\UI\ChartTooltip $value) {
-        $this->setProperty('tooltip', $value);
-
-        return $this;
+        return $this->setProperty('tooltip', $value);
     }
 
     public function transitions($value) {
-        $this->setProperty('transitions', $value);
-
-        return $this;
+        return $this->setProperty('transitions', $value);
     }
 
     public function addValueAxisItem(\Kendo\Dataviz\UI\ChartValueAxisItem $value) {
-        $values = $this->getProperty('valueAxis');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('valueAxis', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('valueAxis', $value);
     }
 
     public function addXAxisItem(\Kendo\Dataviz\UI\ChartXAxisItem $value) {
-        $values = $this->getProperty('xAxis');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('xAxis', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('xAxis', $value);
     }
 
     public function addYAxisItem(\Kendo\Dataviz\UI\ChartYAxisItem $value) {
-        $values = $this->getProperty('yAxis');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('yAxis', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('yAxis', $value);
     }
 
     public function axisLabelClick($value) {
-        $this->setProperty('axisLabelClick', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('axisLabelClick', new \Kendo\JavaScriptFunction($value));
     }
 
     public function dataBound($value) {
-        $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('dataBound', new \Kendo\JavaScriptFunction($value));
     }
 
     public function dragStart($value) {
-        $this->setProperty('dragStart', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('dragStart', new \Kendo\JavaScriptFunction($value));
     }
 
     public function drag($value) {
-        $this->setProperty('drag', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('drag', new \Kendo\JavaScriptFunction($value));
     }
 
     public function dragEnd($value) {
-        $this->setProperty('dragEnd', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('dragEnd', new \Kendo\JavaScriptFunction($value));
     }
 
     public function plotAreaClick($value) {
-        $this->setProperty('plotAreaClick', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('plotAreaClick', new \Kendo\JavaScriptFunction($value));
     }
 
     public function seriesClick($value) {
-        $this->setProperty('seriesClick', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('seriesClick', new \Kendo\JavaScriptFunction($value));
     }
 
     public function seriesHover($value) {
-        $this->setProperty('seriesHover', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('seriesHover', new \Kendo\JavaScriptFunction($value));
     }
 
     public function zoomStart($value) {
-        $this->setProperty('zoomStart', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('zoomStart', new \Kendo\JavaScriptFunction($value));
     }
 
     public function zoom($value) {
-        $this->setProperty('zoom', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('zoom', new \Kendo\JavaScriptFunction($value));
     }
 
     public function zoomEnd($value) {
-        $this->setProperty('zoomEnd', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('zoomEnd', new \Kendo\JavaScriptFunction($value));
     }
 
     public function selectStart($value) {
-        $this->setProperty('selectStart', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('selectStart', new \Kendo\JavaScriptFunction($value));
     }
 
     public function select($value) {
-        $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
     }
 
     public function selectEnd($value) {
-        $this->setProperty('selectEnd', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('selectEnd', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

@@ -6,39 +6,27 @@ class DataSourceTransportDestroy extends \kendo\SerializableObject {
 //>> Properties
 
     public function cache($value) {
-        $this->setProperty('cache', $value);
-
-        return $this;
+        return $this->setProperty('cache', $value);
     }
 
     public function contentType($value) {
-        $this->setProperty('contentType', $value);
-
-        return $this;
+        return $this->setProperty('contentType', $value);
     }
 
     public function data($value) {
-        $this->setProperty('data', $value);
-
-        return $this;
+        return $this->setProperty('data', $value);
     }
 
     public function dataType($value) {
-        $this->setProperty('dataType', $value);
-
-        return $this;
+        return $this->setProperty('dataType', $value);
     }
 
     public function type($value) {
-        $this->setProperty('type', $value);
-
-        return $this;
+        return $this->setProperty('type', $value);
     }
 
     public function url($value) {
-        $this->setProperty('url', $value);
-
-        return $this;
+        return $this->setProperty('url', $value);
     }
 
 //<< Properties

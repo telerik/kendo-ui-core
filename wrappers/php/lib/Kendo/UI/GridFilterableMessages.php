@@ -6,51 +6,35 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     public function and($value) {
-        $this->setProperty('and', $value);
-
-        return $this;
+        return $this->setProperty('and', $value);
     }
 
     public function clear($value) {
-        $this->setProperty('clear', $value);
-
-        return $this;
+        return $this->setProperty('clear', $value);
     }
 
     public function filter($value) {
-        $this->setProperty('filter', $value);
-
-        return $this;
+        return $this->setProperty('filter', $value);
     }
 
     public function info($value) {
-        $this->setProperty('info', $value);
-
-        return $this;
+        return $this->setProperty('info', $value);
     }
 
     public function isFalse($value) {
-        $this->setProperty('isFalse', $value);
-
-        return $this;
+        return $this->setProperty('isFalse', $value);
     }
 
     public function isTrue($value) {
-        $this->setProperty('isTrue', $value);
-
-        return $this;
+        return $this->setProperty('isTrue', $value);
     }
 
     public function or($value) {
-        $this->setProperty('or', $value);
-
-        return $this;
+        return $this->setProperty('or', $value);
     }
 
     public function selectValue($value) {
-        $this->setProperty('selectValue', $value);
-
-        return $this;
+        return $this->setProperty('selectValue', $value);
     }
 
 //<< Properties

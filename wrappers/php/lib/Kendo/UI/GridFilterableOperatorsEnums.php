@@ -6,15 +6,11 @@ class GridFilterableOperatorsEnums extends \Kendo\SerializableObject {
 //>> Properties
 
     public function eq($value) {
-        $this->setProperty('eq', $value);
-
-        return $this;
+        return $this->setProperty('eq', $value);
     }
 
     public function neq($value) {
-        $this->setProperty('neq', $value);
-
-        return $this;
+        return $this->setProperty('neq', $value);
     }
 
 //<< Properties

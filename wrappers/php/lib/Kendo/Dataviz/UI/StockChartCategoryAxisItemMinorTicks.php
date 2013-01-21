@@ -6,15 +6,11 @@ class StockChartCategoryAxisItemMinorTicks extends \Kendo\SerializableObject {
 //>> Properties
 
     public function size($value) {
-        $this->setProperty('size', $value);
-
-        return $this;
+        return $this->setProperty('size', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

@@ -6,21 +6,15 @@ class RadialGaugePointer extends \Kendo\SerializableObject {
 //>> Properties
 
     public function cap(\Kendo\Dataviz\UI\RadialGaugePointerCap $value) {
-        $this->setProperty('cap', $value);
-
-        return $this;
+        return $this->setProperty('cap', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function value($value) {
-        $this->setProperty('value', $value);
-
-        return $this;
+        return $this->setProperty('value', $value);
     }
 
 //<< Properties

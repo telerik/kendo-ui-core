@@ -6,9 +6,7 @@ class GridScrollable extends \Kendo\SerializableObject {
 //>> Properties
 
     public function virtual($value) {
-        $this->setProperty('virtual', $value);
-
-        return $this;
+        return $this->setProperty('virtual', $value);
     }
 
 //<< Properties

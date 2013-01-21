@@ -6,27 +6,19 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
 //>> Properties
 
     public function string(\Kendo\UI\GridFilterableOperatorsString $value) {
-        $this->setProperty('string', $value);
-
-        return $this;
+        return $this->setProperty('string', $value);
     }
 
     public function number(\Kendo\UI\GridFilterableOperatorsNumber $value) {
-        $this->setProperty('number', $value);
-
-        return $this;
+        return $this->setProperty('number', $value);
     }
 
     public function date(\Kendo\UI\GridFilterableOperatorsDate $value) {
-        $this->setProperty('date', $value);
-
-        return $this;
+        return $this->setProperty('date', $value);
     }
 
     public function enums(\Kendo\UI\GridFilterableOperatorsEnums $value) {
-        $this->setProperty('enums', $value);
-
-        return $this;
+        return $this->setProperty('enums', $value);
     }
 
 //<< Properties

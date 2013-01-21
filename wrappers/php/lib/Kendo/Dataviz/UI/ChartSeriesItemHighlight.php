@@ -6,27 +6,19 @@ class ChartSeriesItemHighlight extends \Kendo\SerializableObject {
 //>> Properties
 
     public function border(\Kendo\Dataviz\UI\ChartSeriesItemHighlightBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function line(\Kendo\Dataviz\UI\ChartSeriesItemHighlightLine $value) {
-        $this->setProperty('line', $value);
-
-        return $this;
+        return $this->setProperty('line', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
 //<< Properties

@@ -6,45 +6,31 @@ class UploadAsync extends \Kendo\SerializableObject {
 //>> Properties
 
     public function autoUpload($value) {
-        $this->setProperty('autoUpload', $value);
-
-        return $this;
+        return $this->setProperty('autoUpload', $value);
     }
 
     public function batch($value) {
-        $this->setProperty('batch', $value);
-
-        return $this;
+        return $this->setProperty('batch', $value);
     }
 
     public function removeField($value) {
-        $this->setProperty('removeField', $value);
-
-        return $this;
+        return $this->setProperty('removeField', $value);
     }
 
     public function removeUrl($value) {
-        $this->setProperty('removeUrl', $value);
-
-        return $this;
+        return $this->setProperty('removeUrl', $value);
     }
 
     public function removeVerb($value) {
-        $this->setProperty('removeVerb', $value);
-
-        return $this;
+        return $this->setProperty('removeVerb', $value);
     }
 
     public function saveField($value) {
-        $this->setProperty('saveField', $value);
-
-        return $this;
+        return $this->setProperty('saveField', $value);
     }
 
     public function saveUrl($value) {
-        $this->setProperty('saveUrl', $value);
-
-        return $this;
+        return $this->setProperty('saveUrl', $value);
     }
 
 //<< Properties

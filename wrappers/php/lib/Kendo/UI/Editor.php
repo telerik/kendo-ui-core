@@ -9,76 +9,47 @@ class Editor extends \Kendo\UI\Widget {
 //>> Properties
 
     public function encoded($value) {
-        $this->setProperty('encoded', $value);
-
-        return $this;
+        return $this->setProperty('encoded', $value);
     }
 
     public function messages($value) {
-        $this->setProperty('messages', $value);
-
-        return $this;
+        return $this->setProperty('messages', $value);
     }
 
     public function stylesheets($value) {
-        $this->setProperty('stylesheets', $value);
-
-        return $this;
+        return $this->setProperty('stylesheets', $value);
     }
 
     public function addTool(\Kendo\UI\EditorTool $value) {
-        $values = $this->getProperty('tools');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('tools', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('tools', $value);
     }
 
     public function imagebrowser(\Kendo\UI\EditorImagebrowser $value) {
-        $this->setProperty('imagebrowser', $value);
-
-        return $this;
+        return $this->setProperty('imagebrowser', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function execute($value) {
-        $this->setProperty('execute', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('execute', new \Kendo\JavaScriptFunction($value));
     }
 
     public function keydown($value) {
-        $this->setProperty('keydown', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('keydown', new \Kendo\JavaScriptFunction($value));
     }
 
     public function keyup($value) {
-        $this->setProperty('keyup', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('keyup', new \Kendo\JavaScriptFunction($value));
     }
 
     public function paste($value) {
-        $this->setProperty('paste', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('paste', new \Kendo\JavaScriptFunction($value));
     }
 
     public function select($value) {
-        $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

@@ -6,27 +6,19 @@ class GridColumnCommandItem extends \Kendo\SerializableObject {
 //>> Properties
 
     public function name($value) {
-        $this->setProperty('name', $value);
-
-        return $this;
+        return $this->setProperty('name', $value);
     }
 
     public function text($value) {
-        $this->setProperty('text', $value);
-
-        return $this;
+        return $this->setProperty('text', $value);
     }
 
     public function className($value) {
-        $this->setProperty('className', $value);
-
-        return $this;
+        return $this->setProperty('className', $value);
     }
 
     public function click($value) {
-        $this->setProperty('click', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('click', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

@@ -6,39 +6,27 @@ class StockChartChartArea extends \Kendo\SerializableObject {
 //>> Properties
 
     public function background($value) {
-        $this->setProperty('background', $value);
-
-        return $this;
+        return $this->setProperty('background', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\StockChartChartAreaBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function height($value) {
-        $this->setProperty('height', $value);
-
-        return $this;
+        return $this->setProperty('height', $value);
     }
 
     public function margin($value) {
-        $this->setProperty('margin', $value);
-
-        return $this;
+        return $this->setProperty('margin', $value);
     }
 
     public function width($value) {
-        $this->setProperty('width', $value);
-
-        return $this;
+        return $this->setProperty('width', $value);
     }
 
 //<< Properties

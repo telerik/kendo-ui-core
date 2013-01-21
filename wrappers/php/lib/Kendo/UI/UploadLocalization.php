@@ -6,57 +6,39 @@ class UploadLocalization extends \Kendo\SerializableObject {
 //>> Properties
 
     public function cancel($value) {
-        $this->setProperty('cancel', $value);
-
-        return $this;
+        return $this->setProperty('cancel', $value);
     }
 
     public function dropFilesHere($value) {
-        $this->setProperty('dropFilesHere', $value);
-
-        return $this;
+        return $this->setProperty('dropFilesHere', $value);
     }
 
     public function remove($value) {
-        $this->setProperty('remove', $value);
-
-        return $this;
+        return $this->setProperty('remove', $value);
     }
 
     public function retry($value) {
-        $this->setProperty('retry', $value);
-
-        return $this;
+        return $this->setProperty('retry', $value);
     }
 
     public function select($value) {
-        $this->setProperty('select', $value);
-
-        return $this;
+        return $this->setProperty('select', $value);
     }
 
     public function statusFailed($value) {
-        $this->setProperty('statusFailed', $value);
-
-        return $this;
+        return $this->setProperty('statusFailed', $value);
     }
 
     public function statusUploaded($value) {
-        $this->setProperty('statusUploaded', $value);
-
-        return $this;
+        return $this->setProperty('statusUploaded', $value);
     }
 
     public function statusUploading($value) {
-        $this->setProperty('statusUploading', $value);
-
-        return $this;
+        return $this->setProperty('statusUploading', $value);
     }
 
     public function uploadSelectedFiles($value) {
-        $this->setProperty('uploadSelectedFiles', $value);
-
-        return $this;
+        return $this->setProperty('uploadSelectedFiles', $value);
     }
 
 //<< Properties

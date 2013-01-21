@@ -9,75 +9,51 @@ class Calendar extends \Kendo\UI\Widget {
 //>> Properties
 
     public function culture($value) {
-        $this->setProperty('culture', $value);
-
-        return $this;
+        return $this->setProperty('culture', $value);
     }
 
     public function dates($value) {
-        $this->setProperty('dates', $value);
-
-        return $this;
+        return $this->setProperty('dates', $value);
     }
 
     public function depth($value) {
-        $this->setProperty('depth', $value);
-
-        return $this;
+        return $this->setProperty('depth', $value);
     }
 
     public function footer($value) {
-        $this->setProperty('footer', $value);
-
-        return $this;
+        return $this->setProperty('footer', $value);
     }
 
     public function format($value) {
-        $this->setProperty('format', $value);
-
-        return $this;
+        return $this->setProperty('format', $value);
     }
 
     public function max($value) {
-        $this->setProperty('max', $value);
-
-        return $this;
+        return $this->setProperty('max', $value);
     }
 
     public function min($value) {
-        $this->setProperty('min', $value);
-
-        return $this;
+        return $this->setProperty('min', $value);
     }
 
     public function month(\Kendo\UI\CalendarMonth $value) {
-        $this->setProperty('month', $value);
-
-        return $this;
+        return $this->setProperty('month', $value);
     }
 
     public function start($value) {
-        $this->setProperty('start', $value);
-
-        return $this;
+        return $this->setProperty('start', $value);
     }
 
     public function value($value) {
-        $this->setProperty('value', $value);
-
-        return $this;
+        return $this->setProperty('value', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function navigate($value) {
-        $this->setProperty('navigate', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('navigate', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

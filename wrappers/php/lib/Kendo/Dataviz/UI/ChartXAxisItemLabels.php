@@ -6,93 +6,63 @@ class ChartXAxisItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     public function background($value) {
-        $this->setProperty('background', $value);
-
-        return $this;
+        return $this->setProperty('background', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\ChartXAxisItemLabelsBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function font($value) {
-        $this->setProperty('font', $value);
-
-        return $this;
+        return $this->setProperty('font', $value);
     }
 
     public function format($value) {
-        $this->setProperty('format', $value);
-
-        return $this;
+        return $this->setProperty('format', $value);
     }
 
     public function margin($value) {
-        $this->setProperty('margin', $value);
-
-        return $this;
+        return $this->setProperty('margin', $value);
     }
 
     public function mirror($value) {
-        $this->setProperty('mirror', $value);
-
-        return $this;
+        return $this->setProperty('mirror', $value);
     }
 
     public function padding($value) {
-        $this->setProperty('padding', $value);
-
-        return $this;
+        return $this->setProperty('padding', $value);
     }
 
     public function rotation($value) {
-        $this->setProperty('rotation', $value);
-
-        return $this;
+        return $this->setProperty('rotation', $value);
     }
 
     public function skip($value) {
-        $this->setProperty('skip', $value);
-
-        return $this;
+        return $this->setProperty('skip', $value);
     }
 
     public function step($value) {
-        $this->setProperty('step', $value);
-
-        return $this;
+        return $this->setProperty('step', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
     public function culture($value) {
-        $this->setProperty('culture', $value);
-
-        return $this;
+        return $this->setProperty('culture', $value);
     }
 
     public function dateFormats($value) {
-        $this->setProperty('dateFormats', $value);
-
-        return $this;
+        return $this->setProperty('dateFormats', $value);
     }
 
 //<< Properties

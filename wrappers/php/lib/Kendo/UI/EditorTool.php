@@ -6,21 +6,15 @@ class EditorTool extends \Kendo\SerializableObject {
 //>> Properties
 
     public function name($value) {
-        $this->setProperty('name', $value);
-
-        return $this;
+        return $this->setProperty('name', $value);
     }
 
     public function tooltip($value) {
-        $this->setProperty('tooltip', $value);
-
-        return $this;
+        return $this->setProperty('tooltip', $value);
     }
 
     public function exec($value) {
-        $this->setProperty('exec', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('exec', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

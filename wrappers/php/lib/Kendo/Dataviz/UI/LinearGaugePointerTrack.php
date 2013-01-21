@@ -6,33 +6,23 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
 //>> Properties
 
     public function border(\Kendo\Dataviz\UI\LinearGaugePointerTrackBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
     public function size($value) {
-        $this->setProperty('size', $value);
-
-        return $this;
+        return $this->setProperty('size', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

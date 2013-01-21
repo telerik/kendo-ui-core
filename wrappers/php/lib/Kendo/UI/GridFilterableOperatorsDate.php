@@ -6,39 +6,27 @@ class GridFilterableOperatorsDate extends \Kendo\SerializableObject {
 //>> Properties
 
     public function eq($value) {
-        $this->setProperty('eq', $value);
-
-        return $this;
+        return $this->setProperty('eq', $value);
     }
 
     public function neq($value) {
-        $this->setProperty('neq', $value);
-
-        return $this;
+        return $this->setProperty('neq', $value);
     }
 
     public function gte($value) {
-        $this->setProperty('gte', $value);
-
-        return $this;
+        return $this->setProperty('gte', $value);
     }
 
     public function gt($value) {
-        $this->setProperty('gt', $value);
-
-        return $this;
+        return $this->setProperty('gt', $value);
     }
 
     public function lte($value) {
-        $this->setProperty('lte', $value);
-
-        return $this;
+        return $this->setProperty('lte', $value);
     }
 
     public function lt($value) {
-        $this->setProperty('lt', $value);
-
-        return $this;
+        return $this->setProperty('lt', $value);
     }
 
 //<< Properties

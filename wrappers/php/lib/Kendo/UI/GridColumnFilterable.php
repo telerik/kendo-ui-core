@@ -6,9 +6,7 @@ class GridColumnFilterable extends \Kendo\SerializableObject {
 //>> Properties
 
     public function ui($value) {
-        $this->setProperty('ui', $value);
-
-        return $this;
+        return $this->setProperty('ui', $value);
     }
 
 //<< Properties

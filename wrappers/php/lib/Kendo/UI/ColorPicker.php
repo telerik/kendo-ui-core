@@ -9,63 +9,43 @@ class ColorPicker extends \Kendo\UI\Widget {
 //>> Properties
 
     public function buttons($value) {
-        $this->setProperty('buttons', $value);
-
-        return $this;
+        return $this->setProperty('buttons', $value);
     }
 
     public function columns($value) {
-        $this->setProperty('columns', $value);
-
-        return $this;
+        return $this->setProperty('columns', $value);
     }
 
     public function messages($value) {
-        $this->setProperty('messages', $value);
-
-        return $this;
+        return $this->setProperty('messages', $value);
     }
 
     public function palette($value) {
-        $this->setProperty('palette', $value);
-
-        return $this;
+        return $this->setProperty('palette', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
     public function preview($value) {
-        $this->setProperty('preview', $value);
-
-        return $this;
+        return $this->setProperty('preview', $value);
     }
 
     public function toolIcon($value) {
-        $this->setProperty('toolIcon', $value);
-
-        return $this;
+        return $this->setProperty('toolIcon', $value);
     }
 
     public function value($value) {
-        $this->setProperty('value', $value);
-
-        return $this;
+        return $this->setProperty('value', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function select($value) {
-        $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

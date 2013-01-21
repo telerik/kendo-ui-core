@@ -6,21 +6,15 @@ class RangeSliderTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
     public function enabled($value) {
-        $this->setProperty('enabled', $value);
-
-        return $this;
+        return $this->setProperty('enabled', $value);
     }
 
     public function format($value) {
-        $this->setProperty('format', $value);
-
-        return $this;
+        return $this->setProperty('format', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
 //<< Properties

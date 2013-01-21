@@ -6,15 +6,11 @@ class StockChartNavigatorSelect extends \Kendo\SerializableObject {
 //>> Properties
 
     public function from($value) {
-        $this->setProperty('from', $value);
-
-        return $this;
+        return $this->setProperty('from', $value);
     }
 
     public function to($value) {
-        $this->setProperty('to', $value);
-
-        return $this;
+        return $this->setProperty('to', $value);
     }
 
 //<< Properties

@@ -6,52 +6,31 @@ class StockChartNavigator extends \Kendo\SerializableObject {
 //>> Properties
 
     public function dataSource(\Kendo\Data\DataSource $value) {
-        $this->setProperty('dataSource', $value);
-
-        return $this;
+        return $this->setProperty('dataSource', $value);
     }
 
     public function autoBind($value) {
-        $this->setProperty('autoBind', $value);
-
-        return $this;
+        return $this->setProperty('autoBind', $value);
     }
 
     public function dateField($value) {
-        $this->setProperty('dateField', $value);
-
-        return $this;
+        return $this->setProperty('dateField', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
     public function addSeriesItem(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItem $value) {
-        $values = $this->getProperty('series');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('series', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('series', $value);
     }
 
     public function select(\Kendo\Dataviz\UI\StockChartNavigatorSelect $value) {
-        $this->setProperty('select', $value);
-
-        return $this;
+        return $this->setProperty('select', $value);
     }
 
     public function hint(\Kendo\Dataviz\UI\StockChartNavigatorHint $value) {
-        $this->setProperty('hint', $value);
-
-        return $this;
+        return $this->setProperty('hint', $value);
     }
 
 //<< Properties

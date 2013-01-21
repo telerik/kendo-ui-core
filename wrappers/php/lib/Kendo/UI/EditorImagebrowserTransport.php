@@ -6,39 +6,27 @@ class EditorImagebrowserTransport extends \Kendo\SerializableObject {
 //>> Properties
 
     public function read($value) {
-        $this->setProperty('read', $value);
-
-        return $this;
+        return $this->setProperty('read', $value);
     }
 
     public function thumbnailUrl($value) {
-        $this->setProperty('thumbnailUrl', $value);
-
-        return $this;
+        return $this->setProperty('thumbnailUrl', $value);
     }
 
     public function uploadUrl($value) {
-        $this->setProperty('uploadUrl', $value);
-
-        return $this;
+        return $this->setProperty('uploadUrl', $value);
     }
 
     public function imageUrl($value) {
-        $this->setProperty('imageUrl', $value);
-
-        return $this;
+        return $this->setProperty('imageUrl', $value);
     }
 
     public function destroy($value) {
-        $this->setProperty('destroy', $value);
-
-        return $this;
+        return $this->setProperty('destroy', $value);
     }
 
     public function create($value) {
-        $this->setProperty('create', $value);
-
-        return $this;
+        return $this->setProperty('create', $value);
     }
 
 //<< Properties

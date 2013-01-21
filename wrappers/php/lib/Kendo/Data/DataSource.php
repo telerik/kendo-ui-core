@@ -6,163 +6,91 @@ class DataSource extends \Kendo\SerializableObject {
 //>> Properties
 
     public function addAggregateItem(\Kendo\Data\DataSourceAggregateItem $value) {
-        $values = $this->getProperty('aggregate');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('aggregate', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('aggregate', $value);
     }
 
     public function autoSync($value) {
-        $this->setProperty('autoSync', $value);
-
-        return $this;
+        return $this->setProperty('autoSync', $value);
     }
 
     public function batch($value) {
-        $this->setProperty('batch', $value);
-
-        return $this;
+        return $this->setProperty('batch', $value);
     }
 
     public function data($value) {
-        $this->setProperty('data', $value);
-
-        return $this;
+        return $this->setProperty('data', $value);
     }
 
     public function addFilterItem(\Kendo\Data\DataSourceFilterItem $value) {
-        $values = $this->getProperty('filter');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('filter', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('filter', $value);
     }
 
     public function addGroupItem(\Kendo\Data\DataSourceGroupItem $value) {
-        $values = $this->getProperty('group');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('group', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('group', $value);
     }
 
     public function page($value) {
-        $this->setProperty('page', $value);
-
-        return $this;
+        return $this->setProperty('page', $value);
     }
 
     public function pageSize($value) {
-        $this->setProperty('pageSize', $value);
-
-        return $this;
+        return $this->setProperty('pageSize', $value);
     }
 
     public function schema(\Kendo\Data\DataSourceSchema $value) {
-        $this->setProperty('schema', $value);
-
-        return $this;
+        return $this->setProperty('schema', $value);
     }
 
     public function serverAggregates($value) {
-        $this->setProperty('serverAggregates', $value);
-
-        return $this;
+        return $this->setProperty('serverAggregates', $value);
     }
 
     public function serverFiltering($value) {
-        $this->setProperty('serverFiltering', $value);
-
-        return $this;
+        return $this->setProperty('serverFiltering', $value);
     }
 
     public function serverGrouping($value) {
-        $this->setProperty('serverGrouping', $value);
-
-        return $this;
+        return $this->setProperty('serverGrouping', $value);
     }
 
     public function serverPaging($value) {
-        $this->setProperty('serverPaging', $value);
-
-        return $this;
+        return $this->setProperty('serverPaging', $value);
     }
 
     public function serverSorting($value) {
-        $this->setProperty('serverSorting', $value);
-
-        return $this;
+        return $this->setProperty('serverSorting', $value);
     }
 
     public function addSortItem(\Kendo\Data\DataSourceSortItem $value) {
-        $values = $this->getProperty('sort');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('sort', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('sort', $value);
     }
 
     public function transport(\Kendo\Data\DataSourceTransport $value) {
-        $this->setProperty('transport', $value);
-
-        return $this;
+        return $this->setProperty('transport', $value);
     }
 
     public function type($value) {
-        $this->setProperty('type', $value);
-
-        return $this;
+        return $this->setProperty('type', $value);
     }
 
     public function change($value) {
-        $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
     }
 
     public function error($value) {
-        $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
     }
 
     public function sync($value) {
-        $this->setProperty('sync', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('sync', new \Kendo\JavaScriptFunction($value));
     }
 
     public function requestStart($value) {
-        $this->setProperty('requestStart', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('requestStart', new \Kendo\JavaScriptFunction($value));
     }
 
     public function requestEnd($value) {
-        $this->setProperty('requestEnd', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('requestEnd', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

@@ -489,7 +489,7 @@
                     "url": "grid/remote-data.html",
                     "title": "Remote data binding example in KendoGrid",
                     "meta": "This example and demo source code illustrate how KendoGrid component can be bound to remote data by using the DataSource component.",
-                    "packages": ["online", "offline", "jsp"]
+                    "packages": ["online", "offline", "jsp", "php"]
                 },
                 {
                     "text": "Ajax binding",

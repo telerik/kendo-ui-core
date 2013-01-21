@@ -6,39 +6,27 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
 //>> Properties
 
     public function eq($value) {
-        $this->setProperty('eq', $value);
-
-        return $this;
+        return $this->setProperty('eq', $value);
     }
 
     public function neq($value) {
-        $this->setProperty('neq', $value);
-
-        return $this;
+        return $this->setProperty('neq', $value);
     }
 
     public function startswith($value) {
-        $this->setProperty('startswith', $value);
-
-        return $this;
+        return $this->setProperty('startswith', $value);
     }
 
     public function contains($value) {
-        $this->setProperty('contains', $value);
-
-        return $this;
+        return $this->setProperty('contains', $value);
     }
 
     public function doesnotcontain($value) {
-        $this->setProperty('doesnotcontain', $value);
-
-        return $this;
+        return $this->setProperty('doesnotcontain', $value);
     }
 
     public function endswith($value) {
-        $this->setProperty('endswith', $value);
-
-        return $this;
+        return $this->setProperty('endswith', $value);
     }
 
 //<< Properties

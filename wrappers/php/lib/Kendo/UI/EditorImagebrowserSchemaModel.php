@@ -6,15 +6,11 @@ class EditorImagebrowserSchemaModel extends \Kendo\SerializableObject {
 //>> Properties
 
     public function id($value) {
-        $this->setProperty('id', $value);
-
-        return $this;
+        return $this->setProperty('id', $value);
     }
 
     public function fields(\Kendo\UI\EditorImagebrowserSchemaModelFields $value) {
-        $this->setProperty('fields', $value);
-
-        return $this;
+        return $this->setProperty('fields', $value);
     }
 
 //<< Properties

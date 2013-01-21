@@ -6,124 +6,79 @@ class GridColumn extends \Kendo\SerializableObject {
 //>> Properties
 
     public function attributes($value) {
-        $this->setProperty('attributes', $value);
-
-        return $this;
+        return $this->setProperty('attributes', $value);
     }
 
-    public function addCommandItem(\Kendo\UI\GridColumnCommandItem $value) {
-        $values = $this->getProperty('command');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('command', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+    public function command($value) {
+        return $this->setProperty('command', $value);
     }
 
     public function editor($value) {
-        $this->setProperty('editor', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('editor', new \Kendo\JavaScriptFunction($value));
     }
 
     public function encoded($value) {
-        $this->setProperty('encoded', $value);
-
-        return $this;
+        return $this->setProperty('encoded', $value);
     }
 
     public function field($value) {
-        $this->setProperty('field', $value);
-
-        return $this;
+        return $this->setProperty('field', $value);
     }
 
-    public function filterable(\Kendo\UI\GridColumnFilterable $value) {
-        $this->setProperty('filterable', $value);
-
-        return $this;
+    public function filterable($value) {
+        return $this->setProperty('filterable', $value);
     }
 
     public function format($value) {
-        $this->setProperty('format', $value);
-
-        return $this;
+        return $this->setProperty('format', $value);
     }
 
     public function headerAttributes($value) {
-        $this->setProperty('headerAttributes', $value);
-
-        return $this;
+        return $this->setProperty('headerAttributes', $value);
     }
 
     public function headerTemplate($value) {
-        $this->setProperty('headerTemplate', $value);
-
-        return $this;
+        return $this->setProperty('headerTemplate', $value);
     }
 
     public function hidden($value) {
-        $this->setProperty('hidden', $value);
-
-        return $this;
+        return $this->setProperty('hidden', $value);
     }
 
     public function sortable($value) {
-        $this->setProperty('sortable', $value);
-
-        return $this;
+        return $this->setProperty('sortable', $value);
     }
 
     public function template($value) {
-        $this->setProperty('template', $value);
-
-        return $this;
+        return $this->setProperty('template', $value);
     }
 
     public function aggregates($value) {
-        $this->setProperty('aggregates', $value);
-
-        return $this;
+        return $this->setProperty('aggregates', $value);
     }
 
     public function groupHeaderTemplate($value) {
-        $this->setProperty('groupHeaderTemplate', $value);
-
-        return $this;
+        return $this->setProperty('groupHeaderTemplate', $value);
     }
 
     public function groupFooterTemplate($value) {
-        $this->setProperty('groupFooterTemplate', $value);
-
-        return $this;
+        return $this->setProperty('groupFooterTemplate', $value);
     }
 
     public function footerTemplate($value) {
-        $this->setProperty('footerTemplate', $value);
-
-        return $this;
+        return $this->setProperty('footerTemplate', $value);
     }
 
     public function title($value) {
-        $this->setProperty('title', $value);
-
-        return $this;
+        return $this->setProperty('title', $value);
     }
 
     public function width($value) {
-        $this->setProperty('width', $value);
-
-        return $this;
+        return $this->setProperty('width', $value);
     }
 
     public function menu($value) {
-        $this->setProperty('menu', $value);
-
-        return $this;
+        return $this->setProperty('menu', $value);
     }
 
 //<< Properties

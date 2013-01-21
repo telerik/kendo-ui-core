@@ -6,57 +6,39 @@ class StockChartLegend extends \Kendo\SerializableObject {
 //>> Properties
 
     public function background($value) {
-        $this->setProperty('background', $value);
-
-        return $this;
+        return $this->setProperty('background', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\StockChartLegendBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function labels(\Kendo\Dataviz\UI\StockChartLegendLabels $value) {
-        $this->setProperty('labels', $value);
-
-        return $this;
+        return $this->setProperty('labels', $value);
     }
 
     public function margin($value) {
-        $this->setProperty('margin', $value);
-
-        return $this;
+        return $this->setProperty('margin', $value);
     }
 
     public function offsetX($value) {
-        $this->setProperty('offsetX', $value);
-
-        return $this;
+        return $this->setProperty('offsetX', $value);
     }
 
     public function offsetY($value) {
-        $this->setProperty('offsetY', $value);
-
-        return $this;
+        return $this->setProperty('offsetY', $value);
     }
 
     public function padding($value) {
-        $this->setProperty('padding', $value);
-
-        return $this;
+        return $this->setProperty('padding', $value);
     }
 
     public function position($value) {
-        $this->setProperty('position', $value);
-
-        return $this;
+        return $this->setProperty('position', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

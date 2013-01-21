@@ -8,65 +8,40 @@ class PanelBar extends \Kendo\UI\Widget {
     }
 //>> Properties
 
-    public function animation(\Kendo\UI\PanelBarAnimation $value) {
-        $this->setProperty('animation', $value);
-
-        return $this;
+    public function animation($value) {
+        return $this->setProperty('animation', $value);
     }
 
     public function expandMode($value) {
-        $this->setProperty('expandMode', $value);
-
-        return $this;
+        return $this->setProperty('expandMode', $value);
     }
 
     public function addItem(\Kendo\UI\PanelBarItem $value) {
-        $values = $this->getProperty('items');
-
-        if ($values == null) {
-            $values = array();
-            $this->setProperty('items', $values);
-        }
-
-        $values[] = $value;
-
-        return $this;
+        return $this->add('items', $value);
     }
 
     public function activate($value) {
-        $this->setProperty('activate', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('activate', new \Kendo\JavaScriptFunction($value));
     }
 
     public function collapse($value) {
-        $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
     }
 
     public function contentLoad($value) {
-        $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
     }
 
     public function error($value) {
-        $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
     }
 
     public function expand($value) {
-        $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
     }
 
     public function select($value) {
-        $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
-
-        return $this;
+        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
     }
 
 //<< Properties

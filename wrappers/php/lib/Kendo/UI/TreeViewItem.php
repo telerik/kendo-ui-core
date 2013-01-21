@@ -6,39 +6,27 @@ class TreeViewItem extends \Kendo\SerializableObject {
 //>> Properties
 
     public function text($value) {
-        $this->setProperty('text', $value);
-
-        return $this;
+        return $this->setProperty('text', $value);
     }
 
     public function imageUrl($value) {
-        $this->setProperty('imageUrl', $value);
-
-        return $this;
+        return $this->setProperty('imageUrl', $value);
     }
 
     public function spriteCssClass($value) {
-        $this->setProperty('spriteCssClass', $value);
-
-        return $this;
+        return $this->setProperty('spriteCssClass', $value);
     }
 
     public function enabled($value) {
-        $this->setProperty('enabled', $value);
-
-        return $this;
+        return $this->setProperty('enabled', $value);
     }
 
     public function selected($value) {
-        $this->setProperty('selected', $value);
-
-        return $this;
+        return $this->setProperty('selected', $value);
     }
 
     public function expanded($value) {
-        $this->setProperty('expanded', $value);
-
-        return $this;
+        return $this->setProperty('expanded', $value);
     }
 
 //<< Properties

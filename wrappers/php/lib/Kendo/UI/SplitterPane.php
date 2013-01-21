@@ -6,51 +6,35 @@ class SplitterPane extends \Kendo\SerializableObject {
 //>> Properties
 
     public function collapsed($value) {
-        $this->setProperty('collapsed', $value);
-
-        return $this;
+        return $this->setProperty('collapsed', $value);
     }
 
     public function collapsible($value) {
-        $this->setProperty('collapsible', $value);
-
-        return $this;
+        return $this->setProperty('collapsible', $value);
     }
 
     public function contentUrl($value) {
-        $this->setProperty('contentUrl', $value);
-
-        return $this;
+        return $this->setProperty('contentUrl', $value);
     }
 
     public function max($value) {
-        $this->setProperty('max', $value);
-
-        return $this;
+        return $this->setProperty('max', $value);
     }
 
     public function min($value) {
-        $this->setProperty('min', $value);
-
-        return $this;
+        return $this->setProperty('min', $value);
     }
 
     public function resizable($value) {
-        $this->setProperty('resizable', $value);
-
-        return $this;
+        return $this->setProperty('resizable', $value);
     }
 
     public function scrollable($value) {
-        $this->setProperty('scrollable', $value);
-
-        return $this;
+        return $this->setProperty('scrollable', $value);
     }
 
     public function size($value) {
-        $this->setProperty('size', $value);
-
-        return $this;
+        return $this->setProperty('size', $value);
     }
 
 //<< Properties

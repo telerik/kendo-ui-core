@@ -6,15 +6,11 @@ class DatePickerMonth extends \Kendo\SerializableObject {
 //>> Properties
 
     public function content($value) {
-        $this->setProperty('content', $value);
-
-        return $this;
+        return $this->setProperty('content', $value);
     }
 
     public function empty($value) {
-        $this->setProperty('empty', $value);
-
-        return $this;
+        return $this->setProperty('empty', $value);
     }
 
 //<< Properties

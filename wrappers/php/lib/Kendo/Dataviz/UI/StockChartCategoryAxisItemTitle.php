@@ -6,57 +6,39 @@ class StockChartCategoryAxisItemTitle extends \Kendo\SerializableObject {
 //>> Properties
 
     public function background($value) {
-        $this->setProperty('background', $value);
-
-        return $this;
+        return $this->setProperty('background', $value);
     }
 
     public function border(\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitleBorder $value) {
-        $this->setProperty('border', $value);
-
-        return $this;
+        return $this->setProperty('border', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function font($value) {
-        $this->setProperty('font', $value);
-
-        return $this;
+        return $this->setProperty('font', $value);
     }
 
     public function margin($value) {
-        $this->setProperty('margin', $value);
-
-        return $this;
+        return $this->setProperty('margin', $value);
     }
 
     public function position($value) {
-        $this->setProperty('position', $value);
-
-        return $this;
+        return $this->setProperty('position', $value);
     }
 
     public function rotation($value) {
-        $this->setProperty('rotation', $value);
-
-        return $this;
+        return $this->setProperty('rotation', $value);
     }
 
     public function text($value) {
-        $this->setProperty('text', $value);
-
-        return $this;
+        return $this->setProperty('text', $value);
     }
 
     public function visible($value) {
-        $this->setProperty('visible', $value);
-
-        return $this;
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

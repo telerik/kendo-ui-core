@@ -6,15 +6,11 @@ class DataSourceGroupItemAggregate extends \kendo\SerializableObject {
 //>> Properties
 
     public function field($value) {
-        $this->setProperty('field', $value);
-
-        return $this;
+        return $this->setProperty('field', $value);
     }
 
     public function aggregate($value) {
-        $this->setProperty('aggregate', $value);
-
-        return $this;
+        return $this->setProperty('aggregate', $value);
     }
 
 //<< Properties

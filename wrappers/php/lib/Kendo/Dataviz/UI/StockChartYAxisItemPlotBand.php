@@ -6,27 +6,19 @@ class StockChartYAxisItemPlotBand extends \Kendo\SerializableObject {
 //>> Properties
 
     public function from($value) {
-        $this->setProperty('from', $value);
-
-        return $this;
+        return $this->setProperty('from', $value);
     }
 
     public function to($value) {
-        $this->setProperty('to', $value);
-
-        return $this;
+        return $this->setProperty('to', $value);
     }
 
     public function color($value) {
-        $this->setProperty('color', $value);
-
-        return $this;
+        return $this->setProperty('color', $value);
     }
 
     public function opacity($value) {
-        $this->setProperty('opacity', $value);
-
-        return $this;
+        return $this->setProperty('opacity', $value);
     }
 
 //<< Properties

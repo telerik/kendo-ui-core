@@ -6,15 +6,11 @@ class GridSortable extends \Kendo\SerializableObject {
 //>> Properties
 
     public function allowUnsort($value) {
-        $this->setProperty('allowUnsort', $value);
-
-        return $this;
+        return $this->setProperty('allowUnsort', $value);
     }
 
     public function mode($value) {
-        $this->setProperty('mode', $value);
-
-        return $this;
+        return $this->setProperty('mode', $value);
     }
 
 //<< Properties
