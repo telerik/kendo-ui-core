@@ -356,6 +356,7 @@ kendo_module({
             that.tagList = $('<ul unselectable="on" class="k-list k-reset"/>')
                                 .appendTo(that._innerWraper)
                                 .on("click" + ns, ".k-delete", function(e) {
+                                    debugger;
                                     that._unselect($(e.target).closest("li"));
                                     that.close();
                                 });
@@ -485,35 +486,25 @@ kendo_module({
         _unselect: function(tag) {
             var that = this,
                 dataItem = that._removeTag(tag),
-                index;
+                value, index;
 
             if (dataItem) {
                 dataItem = dataItem[0]
             }
 
-            index = that._index(dataItem);
+            value = that._value(dataItem);
+
+            if (value === undefined) { //test this
+                value = that._text(dataItem);
+            }
+
+            index = that._index(that._value(dataItem));
 
             if (index !== -1) {
                $(that.ul[0].children[index]).show();
                that.element[0].children[index].selected = false;
             }
         },
-
-        /*_get: function(dataItem) {
-            var that = this,
-                view = that.dataSource.view(),
-                value = that._value(dataItem),
-                length = view.length,
-                idx = 0;
-
-            for (; idx < length; idx++) {
-                if (value === that._value(view[idx])) {
-                    return idx;
-                }
-            }
-
-            return -1;
-        },*/
 
         _click: function(e) {
             this._select($(e.currentTarget));
