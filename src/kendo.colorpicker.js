@@ -115,6 +115,7 @@ kendo_module({
             element.addClass("k-colorpicker-popup")
                 .append($(that._template({
                     colors : colors,
+                    size   : options.size,
                     value  : that._value,
                     id     : options.ariaId
                 })))
@@ -125,18 +126,24 @@ kendo_module({
                 .attr("tabIndex", 0)
                 .on(KEYDOWN_NS, bind(that._keydown, that));
 
+            var size = options.size;
+            if (size) {
+                size += "px";
+                element.find(".k-item").css({ width: size, height: size });
+            }
+
             if (options.columns) {
-                // XXX: assuming 14px per cell; depends on CSS.
-                element.css("width", options.columns * 14 + "px");
+                element.css("width", options.columns * (options.size || 14) + "px");
             }
         },
         focus: function(){
             this.wrapper.focus();
         },
         options: {
-            name: "ColorPalette",
-            columns: 10,
-            palette: "basic"
+            name    : "ColorPalette",
+            columns : 10,
+            size    : null,
+            palette : "basic"
         },
         _onEnable: function(enable) {
             if (enable) {

@@ -2561,6 +2561,10 @@ span.k-numerictextbox
     .k-item {
         display: block;
         float: left;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         width: 14px;
         height: 14px;
         overflow: hidden;
@@ -2581,8 +2585,6 @@ span.k-numerictextbox
             background: transparent;
             .box-shadow(0 1px 4px #000);
             border: 1px solid #fff;
-            width: 12px;
-            height: 12px;
         }
     }
 }

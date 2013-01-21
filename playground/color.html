@@ -67,7 +67,7 @@
     </div>
 
     <script>
-      window.flat = $("#flat").kendoColorPalette().data("kendoColorPalette");
+      window.flat = $("#flat").kendoColorPalette({ size: 25 }).data("kendoColorPalette");
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });
       $("#dropdown2").kendoColorPicker({ palette: "websafe", toolIcon: "k-backColor" });
