@@ -808,22 +808,13 @@ kendo_module({
         events: [ "activate", "change", "select", "open", "close" ],
 
         open: function() {
-            if (!this.trigger("open")) {
-                this._getPopup().open();
-            }
+            this._getPopup().open();
         },
         close: function() {
-            if (!this.trigger("close")) {
-                this._getPopup().close();
-            }
+            this._getPopup().close();
         },
         toggle: function() {
-            var p = this._getPopup();
-            if (p.visible()) {
-                this.close();
-            } else {
-                this.open();
-            }
+            this._getPopup().toggle();
         },
         _select: function(value) {
             value = this.color(value);
@@ -895,13 +886,22 @@ kendo_module({
                     }
                 });
                 p.bind({
-                    close: function(){
+                    close: function(ev){
+                        if (that.trigger("close")) {
+                            ev.preventDefault();
+                            return;
+                        }
                         var color = sel._selectOnHide();
                         if (!color) {
                             that.wrapper.focus();
                             that._updateUI(that.color());
                         } else {
                             that._select(color);
+                        }
+                    },
+                    open: function(ev) {
+                        if (that.trigger("open")) {
+                            ev.preventDefault();
                         }
                     },
                     activate: function(){

@@ -26,6 +26,12 @@
             },
             change: function(){
                 kendoConsole.log("Change in " + this.element.attr("id"));
+            },
+            open: function() {
+                kendoConsole.log("Open in " + this.element.attr("id"));
+            },
+            close: function() {
+                kendoConsole.log("Close in " + this.element.attr("id"));
             }
         });
     });
