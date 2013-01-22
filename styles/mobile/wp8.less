@@ -33,12 +33,25 @@
 	background-color: @main-background;
 }
 
-.km-wp8-dark
+.km-wp8 a
+{
+	text-decoration: none;
+}
+
+.km-wp8-dark,
+.km-wp8-dark a,
+.km-wp8-dark .k-widget,
+.km-wp8-dark .k-group,
+.km-wp8-dark .k-content
 {
 	color: @main-text-dark;
 }
 
-.km-wp8-light
+.km-wp8-light,
+.km-wp8-light a,
+.km-wp8-light .k-widget,
+.km-wp8-light .k-group,
+.km-wp8-light .k-content
 {
 	color: @main-text-light;
 }
@@ -61,12 +74,17 @@
 	background-color: @second-background-light;
 }
 
+.km-wp8 .km-actionsheet li
+{
+	padding: .2em 1em;
+}
+
 .km-wp8 .km-button,
 .km-root .km-wp8 .km-view .km-buttongroup .km-button
 {
 	border-style: solid;
 	border-width: 2px;
-	border-radius: 0;
+	.border-radius(0);
 	padding: .04em .5em .16em;
 }
 
@@ -82,9 +100,9 @@
 
 .km-root .km-wp8 .km-view .km-buttongroup .km-button
 {
-	border-radius: 0;
+	.border-radius(0);
 	display: inline-block;
-	margin-left: .6em;
+	margin-left: 1px;
 }
 
 .km-root .km-wp8 .km-view .km-buttongroup .km-button:first-child
@@ -92,10 +110,37 @@
 	margin-left: 0;
 }
 
-.km-wp8 .km-switch-wrapper,
-.km-wp8 .km-switch-handle
+.km-wp8 .km-button.km-state-active
 {
-	border-radius: 0;
+	background: @accent-background;
+}
+
+.km-pages > li
+{
+	width: .2em;
+	height: .2em;
+}
+
+.km-wp8-dark .km-pages > li
+{
+	background: @main-text-dark;
+}
+
+.km-wp8-light .km-pages > li
+{
+	background: @main-text-light;
+}
+
+.km-wp8 .km-pages .km-current-page
+{
+	background: @accent-background;
+}
+
+.km-wp8 .km-switch-wrapper,
+.km-wp8 .km-switch-handle,
+.km-wp8 .km-switch-container
+{
+	.border-radius(0);
 }
 
 .km-wp8 .km-switch-wrapper
@@ -119,13 +164,14 @@
 .km-wp8 .km-switch-handle
 {
 	width: 1.4em;
-	margin: -2px 0 0 -2px;
+	margin: -2px 0 0 0;
 }
 
 .km-wp8-dark .km-switch-handle
 {
 	background: @main-text-dark;
 	border: 2px solid @main-background;
+	border-right-width: 0;
 }
 
 .km-wp8-light .km-switch-handle
@@ -142,7 +188,7 @@
 {
 	background: @accent-background;
 	width: 97%;
-	margin-left: -75px;
+	margin-left: -70px;
 }
 
 .km-wp8 .km-tabstrip
@@ -178,7 +224,7 @@
 {
 	border-width: 2px;
 	border-style: solid;
-	border-radius: 24px;
+	.border-radius(24px);
 	margin-bottom: .2em;
 	padding: .1em;
 }
