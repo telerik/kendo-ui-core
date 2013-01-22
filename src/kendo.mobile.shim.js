@@ -9,7 +9,7 @@
         init: function(element, options) {
             var that = this,
                 app = kendo.mobile.application,
-                ios = (app ? app.os : kendo.support.mobileOS.os) == "ios",
+                ios = (app ? app.os : kendo.support.mobileOS.name) == "ios",
                 align = options.align || (ios ?  "bottom center" : "center center"),
                 position = options.position || (ios ? "bottom center" : "center center"),
                 effect = options.effect || (ios ? "slideIn:up" : "fade:in"),

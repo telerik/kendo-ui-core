@@ -60,6 +60,10 @@ tests.push(
         title: "mobile pane"
     },
     {
+        page: "mobile/shim.html",
+        title: "mobile shim"
+    },
+    {
         page: "mobile/splitview.html",
         title: "mobile splitview"
     },
