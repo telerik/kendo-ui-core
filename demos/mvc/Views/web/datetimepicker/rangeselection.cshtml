@@ -2,10 +2,10 @@
         <div id="example" class="k-content">
             <div class="demo-section" style="width: 535px;">
                 <label for="start">Start date:</label>
-                <input id="start" value="10/10/2012" />
+                <input id="start" />
 
                 <label for="end" style="margin-left:3em">End date:</label>
-                <input id="end" value="10/10/2012"/>
+                <input id="end"/>
             </div>
             <script>
                 $(document).ready(function() {
@@ -29,12 +29,16 @@
                         }
                     }
 
+                    var today = new Date(kendo.format('{0:MM-dd-yyyy}', new Date()))
+
                     var start = $("#start").kendoDateTimePicker({
+                        value: today,
                         change: startChange,
                         parseFormats: ["MM/dd/yyyy"]
                     }).data("kendoDateTimePicker");
 
                     var end = $("#end").kendoDateTimePicker({
+                        value: today,
                         change: endChange,
                         parseFormats: ["MM/dd/yyyy"]
                     }).data("kendoDateTimePicker");
