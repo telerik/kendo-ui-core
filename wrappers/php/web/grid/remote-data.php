@@ -3,11 +3,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'applica
 
     require_once '../../lib/DataSourceResult.php';
 
+    $request = json_decode(file_get_contents('php://input'));
+
     $result = new DataSourceResult('sqlite:../../northwind.db');
 
     header('Content-Type: application/json');
 
-    echo json_encode($result->read('SELECT ProductName from Products'));
+    echo json_encode($result->read('SELECT ProductName from Products', $request));
 
     exit;
 }
@@ -24,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'applica
          ->contentType('application/json')
          ->type('POST');
 
-    $transport->read($read);
+    $transport->read($read)
+              ->parameterMap('function(data) {
+                  return JSON.stringify(data);
+              }');
 
     $schema = new \Kendo\Data\DataSourceSchema();
     $schema->data('data')
