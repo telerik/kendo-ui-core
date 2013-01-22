@@ -325,6 +325,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="Tooltip"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///             .For("Container")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TooltipBuilder Tooltip()
+        {
+            return new TooltipBuilder(new Tooltip(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="ColorPicker"/>.
         /// </summary>
         /// <example>

@@ -76,7 +76,7 @@ kendo_module({
         },
         DEFAULTCONTENT = function(e) {
             return e.element.data(kendo.ns + "title");
-        }
+        };
 
     function restoreTitle(element) {
         while(element.length) {
@@ -262,7 +262,9 @@ kendo_module({
             that.popup.one("deactivate", function() {
                 restoreTitle(target);
                 target.removeAttr(DESCRIBEDBY);
-                this.element.removeAttr("id");
+
+                this.element.removeAttr("id")
+                    .attr("aria-hidden", true);
             });
 
             that.popup.open();
@@ -291,6 +293,7 @@ kendo_module({
                         that._positionCallout();
                     }
 
+                    this.element.removeAttr("aria-hidden");
                     that.trigger(SHOW);
                 },
                 close: function() {

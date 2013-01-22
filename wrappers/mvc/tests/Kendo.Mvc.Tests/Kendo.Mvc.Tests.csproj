@@ -178,6 +178,9 @@
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializerTests.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorHintSerializerTests.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartDateSelectionSerializerTests.cs" />
+    <Compile Include="UI\ToolTip\TooltipSerializationTests.cs" />
+    <Compile Include="UI\ToolTip\ToolTipTestHelper.cs" />
+    <Compile Include="UI\ToolTip\TooltipWorkingConditionsTests.cs" />
     <Compile Include="UI\Upload\UploadMessagesBuilderTests.cs" />
     <Compile Include="UI\WidgetBaseExtensionsTests.cs" />
     <Compile Include="UI\DataSource\DataSourceTests.cs" />
