@@ -411,6 +411,21 @@
                 ok(treeview.find(":checkbox:first").prop("indeterminate"));
             });
 
+            test("checkChildren:false does not update parent node state after checks", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar", selected: true }
+                        ] }
+                    ],
+                    checkboxes: true
+                });
+
+                check();
+
+                ok(!treeview.find(":checkbox:first").prop("checked"));
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

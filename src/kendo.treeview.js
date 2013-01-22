@@ -646,8 +646,6 @@ kendo_module({
                 node.find(":checkbox").each(function() {
                     that.dataItem(this).set(CHECKED, isChecked);
                 });
-
-                that._updateIndeterminate(node);
             } else {
                 that.dataItem(node).set(CHECKED, isChecked);
             }
@@ -1109,8 +1107,9 @@ kendo_module({
                             .data("indeterminate", false)
                             .prop("indeterminate", false);
 
-                        that._updateIndeterminate(node);
-
+                        if (that.options.checkboxes.checkChildren) {
+                            that._updateIndeterminate(node);
+                        }
                     } else if (field == "expanded") {
                         that._toggle(that.findByUid(item.uid), item, item[field]);
                     }
