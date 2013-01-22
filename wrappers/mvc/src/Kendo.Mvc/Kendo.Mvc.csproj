@@ -474,6 +474,8 @@
     <Compile Include="UI\Calendar\MonthTemplate.cs" />
     <Compile Include="Infrastructure\JsonObject.cs" />
     <Compile Include="UI\EventBuilder.cs" />
+    <Compile Include="UI\FlatColorPicker\FlatColorPicker.cs" />
+    <Compile Include="UI\FlatColorPicker\Fluent\FlatColorPickerBuilder.cs" />
     <Compile Include="UI\Gauge\Enums\GaugeRadialScaleLabelsPosition.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeLinearScaleLabelsBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialScaleLabelsBuilder.cs" />
