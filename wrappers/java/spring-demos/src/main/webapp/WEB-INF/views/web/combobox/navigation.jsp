@@ -5,10 +5,10 @@
 
 <demo:header />
 <div class="demo-section">
-	<h3>T-shirt Fabric</h3>
-	<kendo:comboBox name="fabric" filter="contains" placeholder="Select fabric..." index="3" suggest="true" 
+	<h3>T-shirt Size</h3>
+	<kendo:comboBox name="fabric" filter="contains" placeholder="Select size..." index="3" suggest="true" 
 	                dataTextField="text" dataValueField="value" accesskey="w">
-	          <kendo:dataSource data="${fabrics}"></kendo:dataSource>
+	          <kendo:dataSource data="${sizes}"></kendo:dataSource>
 	</kendo:comboBox>
 </div>
 	

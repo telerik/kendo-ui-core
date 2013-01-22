@@ -13,11 +13,13 @@ public class NavigationController {
     
     @RequestMapping(value = {"/navigation"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("fabrics", new DropDownListItem[] {
-                new DropDownListItem("Cotton", "1"),
-                new DropDownListItem("Polyester", "2"),
-                new DropDownListItem("Cotton/Polyester", "3"),
-                new DropDownListItem("Rib Knit", "4")
+        model.addAttribute("sizes", new DropDownListItem[] {
+                new DropDownListItem("X-Small", "1"),
+                new DropDownListItem("Small", "2"),
+                new DropDownListItem("Medium", "3"),
+                new DropDownListItem("Large", "4"),
+                new DropDownListItem("X-Large", "5"),
+                new DropDownListItem("2X-Large", "6"),
         });
         return "web/combobox/navigation";
     }    
