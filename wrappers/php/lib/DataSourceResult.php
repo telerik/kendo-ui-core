@@ -7,68 +7,66 @@ class DataSourceResult {
         $this->db = new PDO($dsn);
     }
 
-    private function total($select) {
-        $tableName = $this->table($select);
-
-        $statement = $this->db->prepare('SELECT COUNT(*) FROM '.$tableName);
+    private function total($tableName) {
+        $statement = $this->db->prepare("SELECT COUNT(*) FROM $tableName");
 
         $statement->execute();
 
         return $statement->fetch(PDO::FETCH_NUM);
     }
 
-    private function table($select) {
-        preg_match('/from ([^ ]*)/i', $select, $matches);
+    private function page($sql, $skip, $take) {
+        $sql .= ' LIMIT :skip,:take';
 
-        return $matches[1];
+
+        return $sql;
     }
 
-    private function page($select, $skip, $take) {
-        $select .= ' LIMIT :skip,:take';
-
-
-        return $select;
-    }
-
-    private function sort($select, $sort) {
+    private function sort($sql, $columns, $sort) {
         $count = count($sort);
 
         if ($count > 0) {
-            $select .= ' ORDER BY ';
+            $sql .= ' ORDER BY ';
 
             $order = array();
 
             for ($index = 0; $index < $count; $index ++) {
-                $dir = 'ASC';
                 $field = $sort[$index]->field;
 
-                if ($sort[$index]->dir == 'desc') {
-                    $dir = 'DESC';
+                if (in_array($field, $columns)) {
+                    $dir = 'ASC';
+
+                    if ($sort[$index]->dir == 'desc') {
+                        $dir = 'DESC';
+                    }
+
+                    $order[] = "$field $dir";
                 }
 
-                $order[] = "`$field` $dir";
             }
 
-            $select .= implode(',', $order);
+            $sql .= implode(',', $order);
         }
 
-        return $select;
+        return $sql;
     }
 
-    public function read($select, $request = null) {
+    public function read($table, $columns, $request = null) {
         $result = array();
 
-        $result['total'] = $this->total($select);
+        $result['total'] = $this->total($table);
+
+        $sql = sprintf('SELECT %s FROM %s', implode(', ', $columns), $table);
 
         if (isset($request->sort)) {
-            $select = $this->sort($select, $request->sort);
+            $sql = $this->sort($sql, $columns, $request->sort);
         }
 
         if (isset($request->skip) && isset($request->take)) {
-            $select = $this->page($select, $request->skip, $request->take);
+            $sql = $this->page($sql, $request->skip, $request->take);
         }
 
-        $statement = $this->db->prepare($select);
+        $statement = $this->db->prepare($sql);
 
         if (isset($request->skip) && isset($request->take)) {
             $statement->bindValue(':skip', (int)$request->skip);

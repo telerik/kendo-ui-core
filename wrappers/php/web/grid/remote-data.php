@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     header('Content-Type: application/json');
 
-    echo json_encode($result->read('SELECT ProductName, UnitPrice from Products', $request));
+    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
 
     exit;
 }
@@ -54,8 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               ->format('{0:c}')
               ->title('Unit Price');
 
+    $unitsInStock = new \Kendo\UI\GridColumn();
+    $unitsInStock->field('UnitsInStock')
+              ->format('{0:c}')
+              ->title('Units In Stock');
+
     $grid->addColumn($productName)
          ->addColumn($unitPrice)
+         ->addColumn($unitsInStock)
          ->dataSource($dataSource)
          ->sortable(true)
          ->pageable(true);
