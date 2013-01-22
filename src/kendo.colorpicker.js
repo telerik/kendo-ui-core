@@ -310,6 +310,7 @@ kendo_module({
             that._updateUI(that._value || new _RGB(1, 0, 0, 1));
 
             hsvRect.on(MOUSEDOWN_NS, function(ev){
+                hsvRect.addClass("k-dragging");
                 hsvHandle.focus();
                 var r = hsvRect.offset();
                 var rw = hsvRect.width();
@@ -335,6 +336,7 @@ kendo_module({
                         .unbind("mousemove", onmove)
                         .unbind("mouseup", onup);
                     preventDefault(ev);
+                    hsvRect.removeClass("k-dragging");
                 }
                 onmove(ev);
                 $(document).mousemove(onmove).mouseup(onup);
