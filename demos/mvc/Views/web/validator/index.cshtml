@@ -132,9 +132,13 @@
 
                     $("button").click(function() {
                         if (validator.validate()) {
-                            status.text("Hooray! Your tickets has been booked!").addClass("valid");
-                            } else {
-                            status.text("Oops! There is invalid data in the form.").addClass("invalid");
+                            status.text("Hooray! Your tickets has been booked!")
+                                .removeClass("invalid")
+                                .addClass("valid");
+                        } else {
+                            status.text("Oops! There is invalid data in the form.")
+                                .removeClass("valid")
+                                .addClass("invalid");
                         }
                     });
                 });
