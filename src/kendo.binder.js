@@ -631,6 +631,7 @@
                     value = this.bindings[VALUE].get(),
                     values = value,
                     field = this.options.valueField || this.options.textField,
+                    found = false,
                     optionValue;
 
                 if (!(values instanceof ObservableArray)) {
@@ -652,8 +653,13 @@
 
                         if (optionValue == value) {
                             options[optionIndex].selected = true;
+                            found = true;
                         }
                     }
+                }
+
+                if (!found) {
+                    element.selectedIndex = -1;
                 }
             },
             destroy: function() {
