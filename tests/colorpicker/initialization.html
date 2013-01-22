@@ -14,10 +14,10 @@
     <ul id="log"></ul>
 
     <script>
-        module("ColorHSV");
+        module("FlatColorPicker");
 
         test("input: false does not show input", function() {
-            var dom = $("<div />").appendTo("body").kendoColorHSV({ input: false });
+            var dom = $("<div />").appendTo("body").kendoFlatColorPicker({ input: false });
 
             var input = dom.find(".k-color-value");
 

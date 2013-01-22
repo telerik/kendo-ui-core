@@ -17,7 +17,7 @@
 
     <script>
         $(document).ready(function() {
-            $(".picker").kendoColorHSV({
+            $(".picker").kendoFlatColorPicker({
                 input: false,
                 buttons: false,
                 select: function(e) {
@@ -25,11 +25,11 @@
                 }
             });
 
-            var tail = $("#tail").data("kendoColorHSV");
+            var tail = $("#tail").data("kendoFlatColorPicker");
             tail.value("#000");
             tail.trigger("select", { value: tail.color() });
 
-            var head = $("#head").data("kendoColorHSV");
+            var head = $("#head").data("kendoFlatColorPicker");
             head.value("#e15613");
             head.trigger("select", { value: head.color() });
         });

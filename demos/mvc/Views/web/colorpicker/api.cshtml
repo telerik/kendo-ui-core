@@ -29,10 +29,10 @@
         palette: "websafe"
     }).data("kendoColorPicker");
 
-    var colorhsv = $("#colorhsv").kendoColorHSV({
+    var colorhsv = $("#colorhsv").kendoFlatColorPicker({
         buttons: false,
         value: "#00f"
-    }).data("kendoColorHSV");
+    }).data("kendoFlatColorPicker");
 
     colorpicker.bind("change", function() {
         colorhsv.value(this.value());

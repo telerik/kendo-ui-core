@@ -251,7 +251,7 @@ kendo_module({
         )
     });
 
-    var ColorHSV = ColorSelector.extend({
+    var FlatColorPicker = ColorSelector.extend({
         init: function(element, options) {
             var that = this;
             ColorSelector.fn.init.call(that, element, options);
@@ -375,7 +375,7 @@ kendo_module({
             ColorSelector.fn.destroy.call(this);
         },
         options: {
-            name: "ColorHSV",
+            name: "FlatColorPicker",
             opacity: false,
             buttons: true,
             input: true,
@@ -878,7 +878,7 @@ kendo_module({
                 if (opt.palette) {
                     ctor = ColorPalette;
                 } else {
-                    ctor = ColorHSV;
+                    ctor = FlatColorPicker;
                 }
                 var sel = this._selector = new ctor($("<div></div>").appendTo(document.body), opt);
                 that._popup = p = sel.wrapper.kendoPopup({
@@ -934,7 +934,7 @@ kendo_module({
     }
 
     ui.plugin(ColorPalette);
-    ui.plugin(ColorHSV);
+    ui.plugin(FlatColorPicker);
     ui.plugin(ColorPicker);
 
     kendo.parseColor = parse;
