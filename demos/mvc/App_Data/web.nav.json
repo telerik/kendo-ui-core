@@ -829,6 +829,12 @@
                     "url": "multiselect/index.html",
                     "title": "Kendo MultiSelect demo",
                     "meta": "This demo shows the core functionality of KendoMultiSelect widget."
+                },
+                {
+                    "text": "Binding to remote data",
+                    "url": "multiselect/remotedatasource.html",
+                    "title": "Kendo MultiSelect demo",
+                    "meta": ""
                 }
             ]
         },
