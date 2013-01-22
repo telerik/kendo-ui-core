@@ -16,22 +16,23 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $(".picker").kendoFlatColorPicker({
-                input: false,
-                buttons: false,
-                select: function(e) {
-                    $("#bike-" + this.element.attr("id")).css("background-color", e.value.toCss());
-                }
-            });
 
-            var tail = $("#tail").data("kendoFlatColorPicker");
-            tail.value("#000");
-            tail.trigger("select", { value: tail.color() });
+        function select(e) {
+            $("#bike-" + this.element.attr("id")).css("background-color", e.value.toCss());
+        }
 
-            var head = $("#head").data("kendoFlatColorPicker");
-            head.value("#e15613");
-            head.trigger("select", { value: head.color() });
+        $("#tail").kendoFlatColorPicker({
+            input: false,
+            buttons: false,
+            value: "#000",
+            select: select
+        });
+
+        $("#head").kendoFlatColorPicker({
+            input: false,
+            buttons: false,
+            value: "#e15613",
+            select: select
         });
     </script>
 

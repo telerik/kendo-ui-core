@@ -133,6 +133,21 @@
                     "title": "Demo of various options supported by the HSV selector",
                     "meta": "Demo of various options supported by the HSV selector"
                 },{
+                    "text": "Flat color picker",
+                    "url": "colorpicker/flatcolorpicker.html",
+                    "title": "Standalone ColorHSV",
+                    "meta": "Standalone ColorHSV"
+                },{
+                    "text": "Standalone ColorPalette",
+                    "url": "colorpicker/palette.html",
+                    "title": "Standalone ColorPalette",
+                    "meta": "Standalone ColorPalette"
+                },{
+                    "text": "Keyboard support",
+                    "url": "colorpicker/navigation.html",
+                    "title": "ColorPicker keyboard navigation",
+                    "meta": "ColorPicker keyboard navigation"
+                },{
                     "text": "Events",
                     "url": "colorpicker/events.html",
                     "title": "ColorPicker events",
@@ -142,21 +157,6 @@
                     "url": "colorpicker/api.html",
                     "title": "ColorPicker API demo",
                     "meta": "ColorPicker API demo"
-                },{
-                    "text": "Keyboard",
-                    "url": "colorpicker/navigation.html",
-                    "title": "ColorPicker keyboard navigation",
-                    "meta": "ColorPicker keyboard navigation"
-                },{
-                    "text": "Standalone ColorPalette",
-                    "url": "colorpicker/palette.html",
-                    "title": "Standalone ColorPalette",
-                    "meta": "Standalone ColorPalette"
-                },{
-                    "text": "Standalone ColorHSV",
-                    "url": "colorpicker/hsv.html",
-                    "title": "Standalone ColorHSV",
-                    "meta": "Standalone ColorHSV"
                 }
             ]
         },
