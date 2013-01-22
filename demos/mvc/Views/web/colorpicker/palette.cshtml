@@ -1,28 +1,44 @@
-<div id="example" class="k-content">
+<div id="example">
 
-    <div class="palette-wrapper">
-        <h3>Basic</h3>
-        <div id="basic"></div>
-        <script>
-            $("#basic").kendoColorPalette({
-                palette: "basic"
-            })
-        </script>
+    <div class="column">
+        <div class="palette-wrapper">
+            <h3>WebSafe</h3>
+            <div id="websafe"></div>
+            <script>
+                $("#websafe").kendoColorPalette({
+                    palette: "websafe"
+                })
+            </script>
+        </div>
     </div>
 
-    <br style="clear: both">
+    <div class="column">
+        <div class="palette-wrapper">
+            <h3>Basic</h3>
+            <div id="basic"></div>
+            <script>
+                $("#basic").kendoColorPalette({
+                    palette: "basic"
+                })
+            </script>
+        </div>
 
-    <div class="palette-wrapper">
-        <h3>WebSafe</h3>
-        <div id="websafe"></div>
-        <script>
-            $("#websafe").kendoColorPalette({
-                palette: "websafe"
-            })
-        </script>
+        <br style="clear:both">
+
+        <div class="palette-wrapper">
+            <h3>Monochrome</h3>
+            <div id="monochrome"></div>
+            <script>
+                $("#monochrome").kendoColorPalette({
+                    columns: 12,
+                    palette: [
+                        "#000000", "#1a1a1a", "#333333", "#4d4d4d", "#666666", "#808080",
+                        "#999999", "#b3b3b3", "#cccccc", "#e6e6e6", "#f2f2f2", "#ffffff"
+                    ]
+                })
+            </script>
+        </div>
     </div>
-
-    <br style="clear: both">
 
     <div class="palette-wrapper">
         <h3>Office</h3>
@@ -205,8 +221,29 @@
     </div>
 
     <style scoped>
+        .column {
+            display: inline-block;
+            vertical-align: top;
+        }
+
         .palette-wrapper {
+            margin-bottom: 25px;
             float: left;
+            margin-right: 14px;
+        }
+
+        .palette-wrapper h3 {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+
+        .column {
+            width: 310px;
+        }
+
+        .column .palette-wrapper {
+            display: block;
         }
     </style>
 
