@@ -42,16 +42,18 @@
 	<!-- This bean is required to get the absolute path to the SQLite database. Required by the JDBC driver.  -->
 	<beans:bean id="db" class="org.springframework.web.context.support.ServletContextResource">
 	    <beans:constructor-arg ref="servletContext" />
-    	<beans:constructor-arg value="/WEB-INF/northwind.db" />
+    	<beans:constructor-arg value="/WEB-INF/sample.db" />
 	</beans:bean>
 
-	<beans:bean id="northwind" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<beans:bean id="sample" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName" value="org.sqlite.JDBC"/>
 		<beans:property name="url" value="#{'jdbc:sqlite:' + db.file.absolutePath}" />
+	    <beans:property name="maxActive" value="1" />
+	    <beans:property name="maxIdle" value="1" />
 	</beans:bean>
-	
+		
 	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<beans:property name="dataSource" ref="northwind" />
+		<beans:property name="dataSource" ref="sample" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.kendoui.spring.models.Product</beans:value>
@@ -59,7 +61,8 @@
 				<beans:value>com.kendoui.spring.models.Customer</beans:value>
 				<beans:value>com.kendoui.spring.models.Category</beans:value>
 				<beans:value>com.kendoui.spring.models.Employee</beans:value>
-				<beans:value>com.kendoui.spring.models.DetailedEmployee</beans:value>				
+				<beans:value>com.kendoui.spring.models.DetailedEmployee</beans:value>	
+				<beans:value>com.kendoui.spring.models.Intraday</beans:value>			
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -71,12 +74,12 @@
 		</beans:property>
 	</beans:bean>
     
-    <!-- Enable annotation driven transactions. Required by getCurrentSession(). -->
-    <tx:annotation-driven />
-    
     <beans:bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
 	    <beans:property name = "sessionFactory" ref = "sessionFactory" />
-	</beans:bean>
+	</beans:bean>  
+    
+    <!-- Enable annotation driven transactions. Required by getCurrentSession(). -->
+    <tx:annotation-driven />
 
 </beans:beans>
 

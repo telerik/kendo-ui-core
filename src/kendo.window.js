@@ -856,10 +856,6 @@ kendo_module({
                 contentHtml.attr("style", "overflow:hidden;");
             }
 
-            if (options.iframe && options.content) {
-                contentHtml.html(templates.contentFrame(options));
-            }
-
             wrapper = $(templates.wrapper(options));
 
             if (options.title !== false) {

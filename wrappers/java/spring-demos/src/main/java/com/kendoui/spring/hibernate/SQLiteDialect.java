@@ -28,7 +28,7 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.LONGVARCHAR, "longvarchar");
         registerColumnType(Types.DATE, "date");
         registerColumnType(Types.TIME, "time");
-        registerColumnType(Types.TIMESTAMP, "timestamp");
+        registerColumnType(Types.TIMESTAMP, "datetime");
         registerColumnType(Types.BINARY, "blob");
         registerColumnType(Types.VARBINARY, "blob");
         registerColumnType(Types.LONGVARBINARY, "blob");
@@ -41,6 +41,11 @@ public class SQLiteDialect extends Dialect {
         registerFunction("mod", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "?1 % ?2"));
         registerFunction("substr", new StandardSQLFunction("substr", StandardBasicTypes.STRING));
         registerFunction("substring", new StandardSQLFunction("substr", StandardBasicTypes.STRING));
+        registerFunction("year", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%Y', ?1 / 1000, 'unixepoch')"));
+        registerFunction("month", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "(strftime('%m', ?1 / 1000, 'unixepoch') - 1)"));
+        registerFunction("day", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%d', ?1 / 1000, 'unixepoch')"));
+        registerFunction("hour", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%H', ?1 / 1000, 'unixepoch')"));
+        registerFunction("minute", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%M', ?1 / 1000, 'unixepoch')"));
     }
 
     public boolean supportsIdentityColumns() {
