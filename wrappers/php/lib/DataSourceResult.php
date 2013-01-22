@@ -36,6 +36,8 @@ class DataSourceResult {
         if ($count > 0) {
             $select .= ' ORDER BY ';
 
+            $order = array();
+
             for ($index = 0; $index < $count; $index ++) {
                 $dir = 'ASC';
                 $field = $sort[$index]->field;
@@ -44,8 +46,10 @@ class DataSourceResult {
                     $dir = 'DESC';
                 }
 
-                $select .= "`$field` $dir";
+                $order[] = "`$field` $dir";
             }
+
+            $select .= implode(',', $order);
         }
 
         return $select;

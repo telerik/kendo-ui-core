@@ -16,12 +16,10 @@ abstract class SerializableObject implements Serializable {
     }
 
     protected function add($key, $value) {
-        $exists = array_key_exists($key, $this->properties);
+        $values = array();
 
-        if ($exists) {
+        if (array_key_exists($key, $this->properties)) {
             $values = $this->properties[$key];
-        } else {
-            $values = array();
         }
 
         if ($value instanceof Serializable) {
@@ -30,9 +28,7 @@ abstract class SerializableObject implements Serializable {
 
         $values[] = $value;
 
-        if (!$exists) {
-            $this->properties[$key] = $values;
-        }
+        $this->properties[$key] = $values;
 
         return $this;
     }
