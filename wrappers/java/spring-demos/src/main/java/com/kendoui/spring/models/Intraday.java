@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @Entity
@@ -28,8 +29,10 @@ public class Intraday {
         
     }
     
-    public Intraday(int year, double open, double high, double low, double close, long volume) {
-        this.date = new GregorianCalendar(year, 0, 0, 0, 0);
+    // Splitting the date in parts allows for easier grouping by the DAO
+    public Intraday(int year, int month, int day, int hour, int minute,
+            double open, double high, double low, double close, long volume) {
+        this.date = new GregorianCalendar(year, month, day, hour, minute);
         this.open = open;
         this.high = high;
         this.low = low;
@@ -39,6 +42,7 @@ public class Intraday {
     
     @Id
     @Column(name="ID")
+    @JsonIgnore
     public int getId() {
         return id;
     }

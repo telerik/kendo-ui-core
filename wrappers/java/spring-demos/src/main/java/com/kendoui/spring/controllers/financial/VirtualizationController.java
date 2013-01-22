@@ -41,12 +41,4 @@ public class VirtualizationController {
     public @ResponseBody List<Intraday> read(@RequestBody DataSourceRequest request) {
         return intraday.getList(request);        
     }
-
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleRuntimeException(RuntimeException e)
-    {
-        e.printStackTrace();
-        return e.getMessage();
-    }
 }

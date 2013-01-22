@@ -18,13 +18,6 @@
                 	</script>
                 </kendo:dataSource-transport-parameterMap>
              </kendo:dataSource-transport>
-            <kendo:dataSource-schema data="data" total="total">
-                    <kendo:dataSource-schema-model>
-                        <kendo:dataSource-schema-model-fields>
-                            <kendo:dataSource-schema-model-field name="Date" type="date" />
-                        </kendo:dataSource-schema-model-fields>
-                    </kendo:dataSource-schema-model>
-                </kendo:dataSource-schema>
         </kendo:dataSource>
         <kendo:stockChart-series>
             <kendo:stockChart-seriesItem type="candlestick" openField="open" highField="high" lowField="low" closeField="close" />

@@ -26,7 +26,7 @@ public class IntradayDaoImpl implements IntradayDao {
     private final int TIME_PER_DAY = 24 * TIME_PER_HOUR;
     private final int DAYS_PER_WEEK = 7;
     private final int DAYS_PER_MONTH = 31;
-    private final int TARGET_RESULT_SIZE = 50;
+    private final int TARGET_RESULT_SIZE = 100;
     
     @Autowired
     private SessionFactory sessionFactory;
@@ -54,16 +54,25 @@ public class IntradayDaoImpl implements IntradayDao {
                 }
             }
         }
-
+        
         Query query = sessionFactory.getCurrentSession()
                 .createQuery(
                         "select new Intraday(" +
                                 "year(i.date), " +
+                                "month(i.date), " +
+                                "day(i.date), " +
+                                "hour(i.date), " +
+                                "minute(i.date), " +
                                 "max(i.open), max(i.high), min(i.low), max(i.close), sum(i.volume))" +
                         "from Intraday i " +
                         "where i.date between :from and :to " +
                         "group by " +
-                        "year(i.date), month(i.date)"
+                            "year(i.date)" +
+                            // Group only by the date parts that are significant for the specified base unit
+                            (BaseUnit.Months.compareTo(baseUnit) <= 0 ? ", month(i.date)" : "") +
+                            (BaseUnit.Weeks.compareTo(baseUnit) <= 0 ? ", day(i.date)" : "") +
+                            (BaseUnit.Hours.compareTo(baseUnit) <= 0 ? ", hour(i.date)" : "") +
+                            (BaseUnit.Minutes.compareTo(baseUnit) <= 0 ? ", minute(i.date)" : "")
                 )
                 .setParameter("from", dateFrom)
                 .setParameter("to", dateTo);
