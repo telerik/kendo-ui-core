@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dataSource->transport($transport)
                ->pageSize(10)
                ->schema($schema)
+               ->serverFiltering(true)
                ->serverSorting(true)
                ->serverPaging(true);
 
