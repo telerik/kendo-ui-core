@@ -39,6 +39,16 @@ module kendo {
 }
 
 module kendo.data {
+    interface ObservableObjectEvent {
+        sender?: ObservableObject;
+        field?: string;
+    }
+
+    interface ObservableObjectSetEvent extends ObservableObjectEvent {
+        value?: any;
+        preventDefault?: Function;
+    }
+
     class ObservableObject extends Observable{
         constructor(value?: any);
         get(name: string): any;
