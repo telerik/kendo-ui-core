@@ -108,63 +108,30 @@ kendo_module({
             popup.close();
         },
 
-        /*_buildFilters: function(filter) {
-            var options = this.options,
-                dataItems = this._dataItems,
-                ignoreCase = options.ignoreCase,
-                field = options.dataTextField,
-                length = dataItems.length,
-                idx = 0, dataItem, value,
-                filters = [];
-
-            for(; idx < length; idx++) {
-                dataItem = dataItems[idx];
-                value = dataItem[field];
-
-                filters.push({
-                    value: ignoreCase ? value.toLowerCase() : value,
-                    field: field,
-                    operator: "neq",
-                    ignoreCase: ignoreCase
-                });
-            }
-
-            if (filter) {
-                filters.push(filter);
-            }
-
-            return filters;
-        },*/
-
         _filterSource: function(filter) {
-            //get this from combobox
-            /*var that = this,
+            var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
-                expression = dataSource.filter() || {}
-                filters = that._buildFilters(filter);
+                expression = dataSource.filter() || {};
 
             removeFiltersForField(expression, options.dataTextField);
 
-            /*if (filters[0]) {
+            if (filter) {
                 expression = expression.filters || [];
-                expression = expression.concat(filters);
+                expression.push(filter);
             }
 
             dataSource.filter(expression);
-            */
-
-            this.dataSource.filter([filter]);
         },
+
 
         open: function() {
             var that = this,
                 popup = that.popup;
 
             if (!that.ul[0].firstChild || that._state === "accept") {
-                //rebind and open
                 that._open = true;
-                that.dataSource.filter(null); //_filterSource();
+                that._filterSource();
             } else {
                 popup.open();
             }
@@ -226,26 +193,29 @@ kendo_module({
 
         _selected: function(values, dataItem) {
             var that = this,
-                valueAccessor = that._value,
                 textAccessor = that._text,
+                valueAccessor = that._value,
                 value = valueAccessor(dataItem),
-                text = textAccessor(dataItem),
                 length = values.length,
-                dataText, dataValue,
                 selected = false,
+                dataValue,
                 idx = 0;
+
+            if (value === undefined) {
+                value = textAccessor(dataItem);
+            }
 
             for (; idx < length; idx++) {
                 dataItem = values[idx];
                 dataValue = valueAccessor(dataItem);
-                dataText = textAccessor(dataItem);
 
-                if (dataValue !== undefined) {
-                    selected = dataValue === value;
-                    break;
-                } else if (dataText !== undefined) {
-                    selected = dataText === value;
-                    break;
+                if (dataValue === undefined) {
+                    dataValue = textAccessor(dataItem);
+                }
+
+                if (dataValue !== undefined && dataValue === value) {
+                    selected = true;
+                    break
                 }
             }
 
