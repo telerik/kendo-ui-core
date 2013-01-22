@@ -91,13 +91,15 @@ kendo_module({
     });
 
     function map(a, f) {
-        if (a.map) return a.map(f);
+        if (a.map) {
+            return a.map(f);
+        }
         var ret = [];
         for (var i = 0; i < a.length; ++i) {
             ret[i] = f(a[i]);
         }
         return ret;
-    };
+    }
 
     var ColorPalette = ColorSelector.extend({
         init: function(element, options) {
