@@ -14,7 +14,7 @@
 
 <%= Html.Kendo().DateTimePicker()
       .Name("datetimepicker")
-      .Value(DateTime.Today)
+      .Value(DateTime.Now)      
       .Footer("Today - #=kendo.toString(data, 'd') #")
       .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
                          "<div class=\"birthday\"></div>" +
