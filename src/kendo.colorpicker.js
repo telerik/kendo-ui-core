@@ -258,7 +258,7 @@ kendo_module({
             options = that.options;
             element = that.element;
 
-            that.wrapper = element.addClass("k-colorpicker-hsv")
+            that.wrapper = element.addClass("k-flatcolorpicker")
                 .append(that._template(options))
                 .find("*").attr(UNSELECTABLE, "on").end();
 
