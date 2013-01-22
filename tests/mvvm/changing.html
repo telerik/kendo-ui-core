@@ -486,6 +486,23 @@
                 equal(calls, 1);
             });
 
+            test("select value which doesn't exist sets selectedIndex to -1", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar"],
+                    bar: "bar"
+                });
+
+                var calls = 0;
+
+                var dom = $('<select data-bind="source:foo,value:bar"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("bar", "baz");
+
+                equal(dom[0].selectedIndex, -1);
+            });
+
             test("tracking changes of observable items in array", function() {
                 var viewModel = kendo.observable( {
                     foo: [{ name: "foo" }]
