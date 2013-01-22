@@ -108,7 +108,7 @@ kendo_module({
             popup.close();
         },
 
-        _buildFilters: function(filter) {
+        /*_buildFilters: function(filter) {
             var options = this.options,
                 dataItems = this._dataItems,
                 ignoreCase = options.ignoreCase,
@@ -134,10 +134,11 @@ kendo_module({
             }
 
             return filters;
-        },
+        },*/
 
         _filterSource: function(filter) {
-            var that = this,
+            //get this from combobox
+            /*var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
                 expression = dataSource.filter() || {}
@@ -153,7 +154,7 @@ kendo_module({
             dataSource.filter(expression);
             */
 
-            dataSource.filter([filter]);
+            this.dataSource.filter([filter]);
         },
 
         open: function() {
@@ -171,9 +172,9 @@ kendo_module({
 
         refresh: function() {
             var that = this,
-                html = that._render();
+                data = that.dataSource.view();
 
-            that.ul[0].innerHTML = html;
+            that._render(data);
 
             if (that._state !== "filter") {
                 that.value(that.options.value); // || that.element.val());
@@ -186,7 +187,7 @@ kendo_module({
 
                 that._open = false;
 
-                if (html) {
+                if (data[0]) {
                     that.open()
                 } else {
                     that.close();
@@ -194,140 +195,93 @@ kendo_module({
             }
         },
 
-        _render: function() {
+        _render: function(data) {
             var that = this,
-                data = that.dataSource.view(),
-                template = that.itemTemplate,
                 length = data.length,
-                idx = 0, html = "", dataItem;
-
-            //render options
-            that._options(data);
-
-            //TODO: 1. Select options if any values
-            //      2. Unselected values - create custom options for them
-
+                template = that.itemTemplate,
+                idx = 0,
+                html = "",
+                options = "",
+                values = that._dataItems.slice(0),
+                dataItem, selected;
 
             for(; idx < length; idx++) {
                 dataItem = data[idx];
-                html += template(dataItem, idx, that._selected(dataItem));
+                selected = that._selected(values, dataItem);
+
+                html += template(dataItem, idx, selected);
+                options += that._option(dataItem, selected);
             }
-            return html;
-        },
 
-        _selected: function(data) {
-            var that = this,
-                getter = that._value,
-                value = getter(data),
-                values = that._dataItems,
-                length = values.length, idx = 0;
-
-            for (; idx < length; idx++) {
-                if (getter(values[idx]) === value) {
-                    return true;
+            length = values.length
+            if (length) {
+                for (idx = 0; idx < length; idx++) {
+                    options += that._option(values[idx], true);
                 }
             }
 
-            return false;
+            that.ul[0].innerHTML = html;
+            that.element.html(options);
         },
 
-        _options: function(data) {
+        _selected: function(values, dataItem) {
             var that = this,
-                element = that.element,
-                length = data.length,
-                options = "",
-                option,
-                dataItem,
-                dataText,
-                encodedText,
-                dataValue,
+                valueAccessor = that._value,
+                textAccessor = that._text,
+                value = valueAccessor(dataItem),
+                text = textAccessor(dataItem),
+                length = values.length,
+                dataText, dataValue,
+                selected = false,
                 idx = 0;
 
-            var dataItems = that._dataItems.slice(0), //clone dataItems
-                diLength = dataItems.length,
-                diValue, diText,
-                diIndex;
-
             for (; idx < length; idx++) {
-                option = "<option";
-                dataItem = data[idx];
-                dataText = that._text(dataItem);
-                dataValue = that._value(dataItem);
+                dataItem = values[idx];
+                dataValue = valueAccessor(dataItem);
+                dataText = textAccessor(dataItem);
 
                 if (dataValue !== undefined) {
-                    dataValue += "";
-
-                    if (dataValue.indexOf('"') !== -1) {
-                        dataValue = dataValue.replace(quotRegExp, "&quot;");
-                    }
-
-                    option += ' value="' + dataValue + '"';
-                }
-
-                if (dataText !== undefined) {
-                    encodedText = kendo.htmlEncode(dataText);
-                }
-
-                if (dataItems.length) {
-                    diIndex = 0;
-                    for (; diIndex < diLength; diIndex++) {
-                        dataItem = dataItems[diIndex];
-                        diValue = that._value(dataItem);
-                        diText = that._text(dataItem);
-
-                        if (diValue !== undefined && dataValue === diValue) {
-                            option += ' selected="selected"';
-                            dataItems.splice(diIndex, 1);
-                            diLength -= 1;
-                            break;
-                        } else if (diText !== undefined && dataText === diText) {
-                            option += ' selected="selected"';
-                            dataItems.splice(diIndex, 1);
-                            diLength -= 1;
-                            break;
-                        }
-                    }
-                }
-
-                option += ">" + encodedText;
-                option += "</option>";
-                options += option;
-            }
-
-            diLength = dataItems.length
-
-            if (diLength) {
-                diIndex = 0;
-                for (; diIndex < diLength; diIndex++) {
-                    dataItem = dataItems[diIndex];
-                    dataText = that._text(dataItem);
-                    dataValue = that._value(dataItem);
-
-                    option = "<option";
-
-                    if (dataValue !== undefined) {
-                        dataValue += "";
-
-                        if (dataValue.indexOf('"') !== -1) {
-                            dataValue = dataValue.replace(quotRegExp, "&quot;");
-                        }
-
-                        option += ' value="' + dataValue + '"';
-                    }
-
-                    if (dataText !== undefined) {
-                        encodedText = kendo.htmlEncode(dataText);
-                    }
-
-
-                    option += ' selected="selected"';
-                    option += ">" + encodedText;
-                    option += "</option>";
-                    options += option;
+                    selected = dataValue === value;
+                    break;
+                } else if (dataText !== undefined) {
+                    selected = dataText === value;
+                    break;
                 }
             }
 
-            element.html(options);
+            if (selected) {
+                values.splice(idx, 1);
+            }
+
+            return selected;
+        },
+
+        _option: function(dataItem, selected) {
+            var option = "<option",
+                dataText = this._text(dataItem);
+                dataValue = this._value(dataItem);
+
+            if (dataValue !== undefined) {
+                dataValue += "";
+
+                if (dataValue.indexOf('"') !== -1) {
+                    dataValue = dataValue.replace(quotRegExp, "&quot;");
+                }
+
+                option += ' value="' + dataValue + '"';
+            }
+
+            if (selected) {
+                option += ' selected="selected"';
+            }
+
+            option += ">";
+
+            if (dataText !== undefined) {
+                option += kendo.htmlEncode(dataText);
+            }
+
+            return option += "</option>";
         },
 
         search: function(word) {

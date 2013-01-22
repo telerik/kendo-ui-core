@@ -5,19 +5,19 @@
 
     <script>
         $(document).ready(function() {
-        $("#titles").kendoMultiSelect({
-        dataTextField: "Name",
-        dataValueField: "Id",
-        dataSource: {
-        type: "odata",
-        serverFiltering: true,
-        serverPaging: true,
-        pageSize: 20,
-        transport: {
-        read: "http://odata.netflix.com/Catalog/Titles"
-        }
-        }
-        });
+            $("#titles").kendoMultiSelect({
+                dataTextField: "Name",
+                dataValueField: "Id",
+                dataSource: {
+                    type: "odata",
+                    serverFiltering: true,
+                    serverPaging: true,
+                    pageSize: 20,
+                    transport: {
+                        read: "http://odata.netflix.com/Catalog/Titles"
+                    }
+                }
+            });
         });
     </script>
 
