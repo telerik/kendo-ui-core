@@ -1,0 +1,81 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.ui.PopOver Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <h1 id="qunit-header">kendo.mobile.ui.Shim Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <ul id="log"></ul>
+
+        <script type="text/fixture" id="fixture">
+            <div data-role="view">
+                <div id="shim">
+                </div>
+            </div>
+        </script>
+
+        <script>
+            var root = $('#qunit-fixture'),
+                app, shim;
+
+            module("Shim", {
+                setup: function () {
+                    root.html($("#fixture").text()).wrapInner("<div />");
+                    kendo.support.mobileOS = kendo.support.detectOS("Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3");
+                    app = root.children().first();
+                },
+                teardown: function () {
+                    root.empty();
+                }
+            });
+
+            test("Shim initialized in body if without Application", 1, function(){
+                shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
+
+                ok(shim.shim.parent()[0] == document.body);
+            });
+
+            test("Shim defaults to current mobileOS if without Application", 1, function(){
+                shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
+
+                ok(shim.popup.options.origin == "bottom center");
+            });
+
+            test("Shim initialized in app.pane.element", 1, function(){
+                var a = new kendo.mobile.Application(app);
+                shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
+
+                ok(shim.shim.parent()[0] == a.pane.element[0]);
+            });
+
+            test("Shim defaults to forced application platform os", 1, function(){
+                var a = new kendo.mobile.Application(app, { platform: "android" });
+                shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
+
+                ok(shim.popup.options.origin == "center center");
+            });
+
+        </script>
+    </body>
+</html>
