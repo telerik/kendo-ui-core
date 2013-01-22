@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'application/json') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     require_once '../../lib/DataSourceResult.php';
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['CONTENT_TYPE'] == 'applica
 
     $transport->read($read)
               ->parameterMap('function(data) {
-                  return JSON.stringify(data);
+                  return kendo.stringify(data);
               }');
 
     $schema = new \Kendo\Data\DataSourceSchema();
