@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI
                 options["value"] = Value;
             }
 
-            writer.Write(Initializer.Initialize(Selector, "ColorHSV", options));
+            writer.Write(Initializer.Initialize(Selector, "FlatColorPicker", options));
 
             base.WriteInitializationScript(writer);
         }

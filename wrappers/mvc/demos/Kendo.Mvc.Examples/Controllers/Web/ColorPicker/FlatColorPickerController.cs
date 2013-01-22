@@ -4,7 +4,7 @@
 
     public partial class ColorPickerController : Controller
     {
-        public ActionResult Hsv()
+        public ActionResult FlatColorPicker()
         {
             return View();
         }
