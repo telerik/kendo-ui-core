@@ -278,10 +278,12 @@ kendo_module({
                         if (diValue !== undefined && dataValue === diValue) {
                             option += ' selected="selected"';
                             dataItems.splice(diIndex, 1);
+                            diLength -= 1;
                             break;
                         } else if (diText !== undefined && dataText === diText) {
                             option += ' selected="selected"';
                             dataItems.splice(diIndex, 1);
+                            diLength -= 1;
                             break;
                         }
                     }

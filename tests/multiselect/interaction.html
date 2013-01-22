@@ -239,6 +239,27 @@
 
                 ok(!multiselect.popup.visible());
             });
+
+            test("MultiSelect selects all selected options after filtering", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.click();
+                multiselect.ul.children().eq(0).click();
+                multiselect.ul.children().eq(1).click();
+
+                multiselect.input.click();
+                multiselect.search("Option4");
+
+                multiselect.ul.children().eq(0).click();
+
+                var options = select[0].children;
+
+                equal(options.length, 3);
+                ok(options[0].selected);
+                ok(options[1].selected);
+                ok(options[2].selected);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
