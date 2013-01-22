@@ -1,6 +1,7 @@
 package com.kendoui.spring.models;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,15 +17,19 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Intraday {
     private int id;
     private String symbol;
-    private Date date;
+    private Calendar date;
     private double close;
     private long volume;    
     private double open;
     private double high;
     private double low;
     
-    public Intraday(double open, double high, double low, double close, long volume) {
-        //this.date = date;
+    public Intraday() {
+        
+    }
+    
+    public Intraday(int year, double open, double high, double low, double close, long volume) {
+        this.date = new GregorianCalendar(year, 0, 0, 0, 0);
         this.open = open;
         this.high = high;
         this.low = low;
@@ -45,11 +50,11 @@ public class Intraday {
     @Column(name="Date")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonSerialize(using=CustomDateSerializer.class)
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) throws Exception {
+    public void setDate(Calendar date) throws Exception {
         this.date = date;
     }
 

@@ -2,18 +2,13 @@ package com.kendoui.spring.models;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +19,7 @@ import com.kendoui.spring.models.DataSourceRequest.FilterDescriptor;
 @Component
 public class IntradayDaoImpl implements IntradayDao {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-    private final Date MIN_DATE = dateFormat.parse("1990-01-01T00:00:00.000Z");
+    private final Calendar MIN_DATE = new GregorianCalendar();
     private final BaseUnit DEFAULT_UNIT = BaseUnit.Months;
     private final int TIME_PER_MINUTE = 1000 * 60;
     private final int TIME_PER_HOUR = 60 * TIME_PER_MINUTE;
@@ -37,20 +32,22 @@ public class IntradayDaoImpl implements IntradayDao {
     private SessionFactory sessionFactory;
     
     IntradayDaoImpl() throws ParseException {
+        MIN_DATE.setTime(dateFormat.parse("1990-01-01T00:00:00.000Z"));
     }
     
+    @SuppressWarnings("unchecked")
     @Override
-    public List<?> getList(DataSourceRequest request) {
-        Date dateFrom = MIN_DATE;
-        Date dateTo = new Date();
+    public List<Intraday> getList(DataSourceRequest request) {
+        Calendar dateFrom = MIN_DATE;
+        Calendar dateTo = new GregorianCalendar();
         BaseUnit baseUnit = DEFAULT_UNIT;
         
         if (request != null) {
             List<FilterDescriptor> filters = request.getFilter().getFilters();
             if (filters.size() == 2) {
                 try {
-                    dateFrom = dateFormat.parse(filters.get(0).getValue().toString());
-                    dateTo = dateFormat.parse(filters.get(1).getValue().toString());
+                    dateFrom.setTime(dateFormat.parse(filters.get(0).getValue().toString()));
+                    dateTo.setTime(dateFormat.parse(filters.get(1).getValue().toString()));
                     baseUnit = getBaseUnit(dateFrom, dateTo);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -60,8 +57,9 @@ public class IntradayDaoImpl implements IntradayDao {
 
         Query query = sessionFactory.getCurrentSession()
                 .createQuery(
-                        /*  + '-' + month(i.date) + '-' + day(i.date) */
-                        "select new Intraday(max(i.open), max(i.high), min(i.low), max(i.close), sum(i.volume))" +
+                        "select new Intraday(" +
+                                "year(i.date), " +
+                                "max(i.open), max(i.high), min(i.low), max(i.close), sum(i.volume))" +
                         "from Intraday i " +
                         "where i.date between :from and :to " +
                         "group by " +
@@ -73,9 +71,9 @@ public class IntradayDaoImpl implements IntradayDao {
         return query.list();
     }
 
-    private BaseUnit getBaseUnit(Date dateFrom, Date dateTo)
+    private BaseUnit getBaseUnit(Calendar dateFrom, Calendar dateTo)
     {
-        long diff = dateTo.getTime() - dateFrom.getTime();
+        long diff = dateTo.getTimeInMillis() - dateFrom.getTimeInMillis();
         long minutes = diff / TIME_PER_MINUTE;
         long hours = diff / TIME_PER_HOUR;
         long days = diff / TIME_PER_DAY;

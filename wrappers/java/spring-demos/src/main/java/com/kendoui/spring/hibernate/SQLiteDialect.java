@@ -41,12 +41,11 @@ public class SQLiteDialect extends Dialect {
         registerFunction("mod", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "?1 % ?2"));
         registerFunction("substr", new StandardSQLFunction("substr", StandardBasicTypes.STRING));
         registerFunction("substring", new StandardSQLFunction("substr", StandardBasicTypes.STRING));
-        registerFunction("year", new SQLFunctionTemplate(StandardBasicTypes.TIMESTAMP, "strftime('%Y', ?1 / 1000, 'unixepoch')"));
-        registerFunction("month", new SQLFunctionTemplate(StandardBasicTypes.TIMESTAMP, "strftime('%m', ?1 / 1000, 'unixepoch')"));
-        registerFunction("day", new SQLFunctionTemplate(StandardBasicTypes.TIMESTAMP, "strftime('%d', ?1 / 1000, 'unixepoch')"));
-        registerFunction("hour", new SQLFunctionTemplate(StandardBasicTypes.TIMESTAMP, "strftime('%H', ?1 / 1000, 'unixepoch')"));
-        registerFunction("minute", new SQLFunctionTemplate(StandardBasicTypes.TIMESTAMP, "strftime('%M', ?1 / 1000, 'unixepoch')"));
-        registerFunction("to_time", new SQLFunctionTemplate(StandardBasicTypes.TIMESTAMP, "strftime('%s', '?1') * 1000"));
+        registerFunction("year", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%Y', ?1 / 1000, 'unixepoch')"));
+        registerFunction("month", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%m', ?1 / 1000, 'unixepoch')"));
+        registerFunction("day", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%d', ?1 / 1000, 'unixepoch')"));
+        registerFunction("hour", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%H', ?1 / 1000, 'unixepoch')"));
+        registerFunction("minute", new SQLFunctionTemplate(StandardBasicTypes.INTEGER, "strftime('%M', ?1 / 1000, 'unixepoch')"));
     }
 
     public boolean supportsIdentityColumns() {

@@ -7,14 +7,18 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.kendoui.spring.models.DataSourceRequest;
+import com.kendoui.spring.models.Intraday;
 import com.kendoui.spring.models.IntradayDao;
 
 @Controller("dataviz-financial-virtualization-controller")
@@ -34,7 +38,15 @@ public class VirtualizationController {
     }
     
     @RequestMapping(value = "/virtualization/read", method = RequestMethod.POST)
-    public @ResponseBody List<?> read(@RequestBody DataSourceRequest request) {
+    public @ResponseBody List<Intraday> read(@RequestBody DataSourceRequest request) {
         return intraday.getList(request);        
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleRuntimeException(RuntimeException e)
+    {
+        e.printStackTrace();
+        return e.getMessage();
     }
 }
