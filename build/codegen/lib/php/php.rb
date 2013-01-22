@@ -1,5 +1,9 @@
 module CodeGen::PHP
 
+    MANUALLY_GENERATED = {
+        'schema' => ['model']
+    }
+
     module Options
         def component_class
             Component
@@ -24,7 +28,13 @@ module CodeGen::PHP
         def unique_options
             simple = simple_options
 
-            options.find_all {|o| !o.composite? || !simple.any? { |simple| simple.name == o.name } }
+            result = options.find_all {|o| !o.composite? || !simple.any? { |simple| simple.name == o.name } }
+
+            if MANUALLY_GENERATED.has_key?(@name)
+                result.delete_if { |o| MANUALLY_GENERATED[@name].include?(o.name) }
+            end
+
+            result
         end
     end
 

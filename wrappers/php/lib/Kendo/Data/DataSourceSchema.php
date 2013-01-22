@@ -3,6 +3,10 @@
 namespace Kendo\Data;
 
 class DataSourceSchema extends \kendo\SerializableObject {
+    public function model(\Kendo\Data\DataSourceSchemaModel $value) {
+        return $this->setProperty('model', $value);
+    }
+
 //>> Properties
 
     public function aggregates($value) {
@@ -19,10 +23,6 @@ class DataSourceSchema extends \kendo\SerializableObject {
 
     public function groups($value) {
         return $this->setProperty('groups', $value);
-    }
-
-    public function model($value) {
-        return $this->setProperty('model', $value);
     }
 
     public function parse($value) {

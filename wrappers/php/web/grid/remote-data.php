@@ -31,8 +31,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   return kendo.stringify(data);
               }');
 
+    $model = new \Kendo\Data\DataSourceSchemaModel();
+
+    $productNameField = new \Kendo\Data\DataSourceSchemaModelField();
+    $productNameField->field('ProductName')
+                     ->type('string');
+
+    $unitPriceField = new \Kendo\Data\DataSourceSchemaModelField();
+    $unitPriceField->field('UnitPrice')
+                   ->type('number');
+
+    $unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField();
+    $unitsInStockField->field('UnitsInStock')
+                      ->type('number');
+
+    $model->addField($productNameField)
+          ->addField($unitPriceField)
+          ->addField($unitsInStockField);
+
     $schema = new \Kendo\Data\DataSourceSchema();
     $schema->data('data')
+           ->model($model)
            ->total('total');
 
     $dataSource = new \Kendo\Data\DataSource();
@@ -64,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          ->addColumn($unitsInStock)
          ->dataSource($dataSource)
          ->sortable(true)
+         ->filterable(true)
          ->pageable(true);
 
     echo $grid->render();
