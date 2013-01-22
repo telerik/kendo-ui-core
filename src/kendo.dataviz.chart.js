@@ -667,6 +667,7 @@ kendo_module({
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions,
+                returnValue = true,
                 point;
 
             if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
@@ -683,12 +684,13 @@ kendo_module({
                     tooltip.plotArea = chart._plotArea;
                     if (tooltipOptions.shared) {
                         point = chart._eventCoordinates(e);
+                        returnValue = false;
                     }
                     tooltip.show(point);
                 }
 
                 highlight.show(point);
-                return true;
+                return returnValue;
             }
         },
 
@@ -723,7 +725,7 @@ kendo_module({
                         if (tooltipOptions.shared) {
                             point = coords = chart._eventCoordinates(e);
                         }
-                        tooltip.show(point);
+                        tooltip.show(seriesPoint);
                         highlight.show(seriesPoint);
                     }
                 }
@@ -6335,34 +6337,6 @@ kendo_module({
                     return currentPane;
                 }
             }
-        },
-
-        pointsByCategory: function(category) {
-            var plotArea = this,
-                charts = plotArea.charts,
-                points, pointCategory, point, i, j, result = [];
-
-            for (i = 0; i < charts.length; i++) {
-                points = charts[i].points;
-                for (j = 0; j < points.length; j++) {
-                    point = points[j];
-
-                    if (point) {
-                        pointCategory = point.category;
-                        if (pointCategory instanceof Date && category instanceof Date) {
-                            if (pointCategory.getTime() === category.getTime()) {
-                                result.push(point);
-                            }
-                        } else {
-                            if (pointCategory === category) {
-                                result.push(point);
-                            }
-                        }
-                    }
-                }
-            }
-
-            return result;
         }
     });
 
@@ -6825,129 +6799,6 @@ kendo_module({
             var tooltip = this;
 
             tooltip.options = deepExtend({}, tooltip.options, options);
-            options = tooltip.options;
-
-            tooltip.chartElement = chartElement;
-            tooltip.chartPadding = {
-                top: parseInt(chartElement.css("paddingTop"), 10),
-                left: parseInt(chartElement.css("paddingLeft"), 10)
-            };
-
-            tooltip.template = Tooltip.template;
-            if (!tooltip.template) {
-                tooltip.template = Tooltip.template = renderTemplate(
-                    "<div class='" + CSS_PREFIX + "tooltip' " +
-                    "style='display:none; position: absolute; font: #= d.font #;" +
-                    "border: #= d.border.width #px solid;" +
-                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
-                    "</div>"
-                );
-            }
-
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
-        },
-
-        options: {
-            background: BLACK,
-            color: WHITE,
-            border: {
-                width: 3
-            },
-            opacity: 1,
-            animation: {
-                duration: TOOLTIP_ANIMATION_DURATION
-            }
-        },
-
-        show: function(point) {
-            var tooltip = this;
-
-            tooltip.point = point;
-            tooltip.showTimeout =
-                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
-        },
-
-        _show: function() {
-            var tooltip = this,
-                point = tooltip.point,
-                element = tooltip.element,
-                options = tooltip.options,
-                chartPadding = tooltip.chartPadding,
-                anchor,
-                tooltipTemplate,
-                content,
-                tooltipOptions,
-                top,
-                left;
-
-            if (!point) {
-                return;
-            }
-            content = point.value.toString();
-
-            tooltipOptions = deepExtend({}, tooltip.options, point.options.tooltip);
-
-            if (tooltipOptions.template) {
-                tooltipTemplate = template(tooltipOptions.template);
-                content = tooltipTemplate({
-                    value: point.value,
-                    category: point.category,
-                    series: point.series,
-                    dataItem: point.dataItem,
-                    percentage: point.percentage
-                });
-            } else if (tooltipOptions.format) {
-                content = point.formatValue(tooltipOptions.format);
-            }
-
-            element.html(content);
-
-            anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
-            top = round(anchor.y + chartPadding.top) + "px";
-            left = round(anchor.x + chartPadding.left) + "px";
-
-            if (!tooltip.visible) {
-                tooltip.element.css({ top: top, left: left });
-            }
-
-            tooltip.element
-                .css({
-                   backgroundColor: tooltipOptions.background,
-                   borderColor: tooltipOptions.border.color || point.options.color,
-                   font: tooltipOptions.font,
-                   color: tooltipOptions.color,
-                   opacity: tooltipOptions.opacity,
-                   borderWidth: tooltipOptions.border.width
-                })
-                .stop(true, true)
-                .show()
-                .animate({
-                    left: left,
-                    top: top
-                }, options.animation.duration);
-
-            tooltip.visible = true;
-        },
-
-        hide: function() {
-            var tooltip = this;
-
-            clearTimeout(tooltip.showTimeout);
-
-            if (tooltip.visible) {
-                tooltip.element.fadeOut();
-
-                tooltip.point = null;
-                tooltip.visible = false;
-            }
-        }
-    });
-
-    var Tooltip = Class.extend({
-        init: function(chartElement, options) {
-            var tooltip = this;
-
-            tooltip.options = deepExtend({}, tooltip.options, options);
 
             tooltip.chartElement = chartElement;
             tooltip.chartPadding = {
@@ -7019,9 +6870,12 @@ kendo_module({
 
         pointContent: function(point) {
             var tooltip = this,
-                content = point.value.toString(),
                 options = deepExtend({}, tooltip.options, point.options.tooltip),
-                tooltipTemplate;
+                content, tooltipTemplate;
+
+            if (defined(point.value)) {
+                content = point.value.toString();
+            }
 
             if (options.template) {
                 tooltipTemplate = template(options.template);
@@ -7058,12 +6912,12 @@ kendo_module({
             var tooltip = this,
                 element = tooltip.element;
 
-            if (point) {
-                tooltip.content = tooltip.pointContent(point);
-                tooltip.anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
-            } else {
+            if (!point) {
                 return;
             }
+
+            tooltip.content = tooltip.pointContent(point);
+            tooltip.anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
             tooltip.showTimeout =
                 setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
@@ -7071,58 +6925,66 @@ kendo_module({
     });
 
     var MultiplePointTooltip = Tooltip.extend({
+        options: {
+            template: "<table style='text-align: left;'>" +
+                      "<th colspan='2'>#= category #</th>" +
+                      "# for(var i = 0; i < points.length; i++) { #" +
+                      "# var point = points[i]; #" +
+                      "# if(!point) { continue; } #" +
+                        "<tr>" +
+                            "# if(point.series.name) { #<td>#= point.series.name #:</td> # } #" +
+                                "<td># if(format) {##= point.formatValue(format) ##} else { ##= point.value ## } #</td>" +
+                            "</tr>" +
+                      "# } #" +
+                      "</table>"
+        },
+
         show: function(point) {
-            var tooltip = this,
-                options = tooltip.options,
-                content = "";
+            var tooltip = this;
 
-            if (options.shared) {
-                content = tooltip.getContent(tooltip.getPoints(point));
-            }
-
-            tooltip.element.html(content);
+            tooltip.element.html(tooltip.getContent(point));
             tooltip.anchor = point;
 
             tooltip.showTimeout =
                 setTimeout(proxy(tooltip.move, tooltip), TOOLTIP_SHOW_DELAY);
         },
 
-        getContent: function(points) {
+        getContent: function(point) {
             var tooltip = this,
-                content = "",
-                i, point;
+                plotArea = tooltip.plotArea,
+                axis = plotArea.categoryAxis,
+                axisOptions = axis.options,
+                index = axis.getCategoryIndex(point),
+                points = tooltip.pointsByCategoryIndex(index),
+                category = axis.getCategory(point),
+                length = points.length,
+                content = "", template;
 
-            if (points) {
-                for (i = 0; i < points.length; i++) {
-                    point = points[i];
-                    if (!point) {
-                        continue;
-                    }
+            if (axisOptions.type === DATE) {
+                category = autoFormat(axisOptions.labels.dateFormats[axisOptions.baseUnit], category);
+            }
 
-                    content += tooltip.pointContent(point);
-                }
+            if (length) {
+                template = kendo.template(tooltip.options.template);
+                content = template({
+                    points: points,
+                    category: category,
+                    format: tooltip.options.format
+                });
             }
 
             return content;
         },
 
-        getPoints: function(point) {
-            var tooltip = this,
-                plotArea = tooltip.plotArea,
-                pane = plotArea.pointPane(point),
-                axes = pane.axes,
-                points = [], i, axis, category;
+        pointsByCategoryIndex: function(categoryIndex) {
+            var charts = this.plotArea.charts,
+                i, result = [];
 
-            for (i = 0; i < axes.length; i++) {
-                axis = axes[i];
-
-                if (axis instanceof CategoryAxis) {
-                    category = axis.getCategory(point);
-                    append(points, plotArea.pointsByCategory(category));
-                }
+            for (i = 0; i < charts.length; i++) {
+                append(result, charts[i].categoryPoints[categoryIndex]);
             }
 
-            return points;
+            return result;
         }
     });
 
@@ -7166,7 +7028,7 @@ kendo_module({
                 if (!crosshair.tooltip) {
                     crosshair.tooltip = new CrosshairTooltip(
                         crosshair,
-                        deepExtend({}, crosshair.options.tooltip, { stickyMode: crosshair.stickyMode } )
+                        deepExtend({}, crosshair.options.tooltip, { stickyMode: crosshair.stickyMode })
                     );
                 }
                 crosshair.tooltip.showAt(point);
@@ -7309,7 +7171,7 @@ kendo_module({
             } else if (options.format) {
                 content = autoFormat(options.format, value);
             } else {
-                if (axisOptions.type == DATE) {
+                if (axisOptions.type === DATE) {
                     content = autoFormat(axisOptions.labels.dateFormats[axisOptions.baseUnit], value);
                 }
             }

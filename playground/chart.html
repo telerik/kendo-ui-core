@@ -20,20 +20,25 @@
                     theme: "blueopal",
                     series: [{
                         type: "line",
+                        name: "u",
+                        data: [ 1,null,3 ]
+                    },{
+                        type: "bar",
+                        name: "k",
                         data: [ 1,2,3 ]
                     },{
                         type: "bar",
+                        name: "u",
                         data: [ 1,2,3 ]
                     },{
                         type: "bar",
-                        data: [ 1,2,3 ]
-                    },{
-                        type: "bar",
+                        name: "r",
                         data: [ 1,2,3 ]
                     }],
                     tooltip: {
                         visible: true,
-                        shared: true
+                        shared: true,
+                        format: "c"
                     },
                     categoryAxis: {
                         crosshair: {
@@ -75,8 +80,7 @@
                         data: [ [1,2], [2,3], [3,4] ]
                     }],
                     tooltip: {
-                        visible: true,
-                        multiple: true
+                        visible: true
                     },
                     xAxis: {
                         crosshair: {
