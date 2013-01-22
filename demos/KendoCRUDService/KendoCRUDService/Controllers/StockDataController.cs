@@ -14,7 +14,7 @@ namespace KendoCRUDService.Controllers
         private readonly BaseUnit DEFAULT_UNIT = BaseUnit.Months;
         private const int DAYS_PER_WEEK = 7;
         private const int DAYS_PER_MONTH = 31;
-        private const int TARGET_RESULT_SIZE = 50;
+        private const int TARGET_RESULT_SIZE = 75;
 
         public ActionResult Index()
         {
