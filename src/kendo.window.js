@@ -832,7 +832,7 @@
             if (shouldHideOverlay) {
                 that._overlay(false).remove();
             } else if (modalWindows.length > 0) {
-                windowObject(modalWindows.eq(modalWindows.length - 2), that.options.name)._overlay(true);
+                windowObject(modalWindows.eq(modalWindows.length - 1), that.options.name)._overlay(true);
             }
         },
 
