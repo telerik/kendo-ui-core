@@ -24,7 +24,29 @@ class DataSourceResult {
     }
 
     private function page($select, $skip, $take) {
-        $select.= ' LIMIT :skip,:take';
+        $select .= ' LIMIT :skip,:take';
+
+
+        return $select;
+    }
+
+    private function sort($select, $sort) {
+        $count = count($sort);
+
+        if ($count > 0) {
+            $select .= ' ORDER BY ';
+
+            for ($index = 0; $index < $count; $index ++) {
+                $dir = 'ASC';
+                $field = $sort[$index]->field;
+
+                if ($sort[$index]->dir == 'desc') {
+                    $dir = 'DESC';
+                }
+
+                $select .= "`$field` $dir";
+            }
+        }
 
         return $select;
     }
@@ -34,13 +56,17 @@ class DataSourceResult {
 
         $result['total'] = $this->total($select);
 
-        if ($request) {
+        if (isset($request->sort)) {
+            $select = $this->sort($select, $request->sort);
+        }
+
+        if (isset($request->skip) && isset($request->take)) {
             $select = $this->page($select, $request->skip, $request->take);
         }
 
         $statement = $this->db->prepare($select);
 
-        if ($request) {
+        if (isset($request->skip) && isset($request->take)) {
             $statement->bindValue(':skip', (int)$request->skip);
             $statement->bindValue(':take', (int)$request->take);
         }

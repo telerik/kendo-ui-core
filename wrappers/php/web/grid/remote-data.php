@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dataSource->transport($transport)
                ->pageSize(10)
                ->schema($schema)
+               ->serverSorting(true)
                ->serverPaging(true);
 
     $grid = new \Kendo\UI\Grid('grid');
@@ -50,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $grid->addColumn($productName)
          ->dataSource($dataSource)
+         ->sortable(true)
          ->pageable(true);
 
     echo $grid->render();
