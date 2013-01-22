@@ -1095,6 +1095,20 @@
             ]
         },
         {
+            "text": "Tooltip",
+            "name": "tooltip",
+            "documentation": "web/tooltip",
+            "spriteCssClass": "tooltipIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "tooltip/index.html",
+                    "title": "Kendo UI Tooltip Demo",
+                    "meta": "This demo shows how Kendo UI Tooltip control works."
+                }
+            ]
+        },
+        {
             "text": "TreeView",
             "name": "treeview",
             "documentation": "web/treeview",

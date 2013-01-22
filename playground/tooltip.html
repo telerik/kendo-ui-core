@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>ComboBox</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet/less" href="../styles/web/kendo.default.less" type="text/css" media="screen" charset="utf-8">
+        <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+            .k-tooltip-button {
+                position: absolute;
+                float: right;
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset id="container" title="I'm your father :)">
+            <legend>template</legend>
+            <input id="luke_1"/> <br /><br />
+            <input id="luke_2"/>
+        </fieldset>
+
+        <fieldset id="ajax">
+            <legend>click to show tooltip with ajax loaded content</legend>
+            <div style="width: 200px; height: 200px; background: red;"><span>a red square</span></div>
+        </fieldset>
+
+        <script>
+            $(document).ready(function() {
+                $("#container").kendoTooltip({
+                    position: "right",
+                    filter: "input",
+                    content: kendo.template($("#tooltip-template").html()),
+                    show: function() {
+                        /*$(document).find("[data-role=tooltip]")
+                            .not(this.element)
+                            .kendoTooltip("hide");*/
+                    },
+                    width: 300
+                });
+
+                $("#ajax div").kendoTooltip({
+                    content: {
+                        url: "http://en.wikipedia.org/wiki/Red_Square"
+                    },
+                    animation: {
+                       close: {
+                            effects: "fade:out",
+                            duration: 400
+                        },
+                        open: {
+                            effects: "fade:in",
+                            duration: 600
+                        }
+                    },
+                    position: "center",
+                    showOn: "click",
+                    width: 800,
+                    height: 300,
+                    autoHide: false
+                });
+            });
+        </script>
+
+        <script id="tooltip-template" type="script/kendo-x-tempalte">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut ipsum odio. Nam sem nisi, tempor nec sodales non, vehicula a lorem. Cras commodo tristique lacus nec volutpat. Fusce nec quam diam, ac scelerisque nisi. Suspendisse eu arcu risus, quis luctus elit. Etiam convallis rutrum eros sed vestibulum. Fusce viverra congue placerat. Nulla sodales vehicula lobortis.
+
+            Nullam ac mauris vitae urna eleifend blandit quis eget tortor. Fusce pellentesque, nisl sed imperdiet tincidunt, elit neque iaculis mi, quis dapibus purus tortor sodales neque. Suspendisse dapibus bibendum dolor vel sagittis. Donec faucibus commodo orci, eu sollicitudin turpis cursus eu. Vivamus consequat ante eget justo eleifend porta elementum dui imperdiet. Mauris nisl mi, hendrerit vitae vehicula sit amet, ultrices sed nibh. Quisque ornare elementum tempus.
+        </script>
+    </body>
+</html>

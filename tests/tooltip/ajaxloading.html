@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.tooltip tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+
+        <style>
+            .k-tooltip {
+                height: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.tooltip.ajax Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var container,
+                Tooltip = kendo.ui.Tooltip;
+
+            QUnit.config.testTimeout = 200;
+
+            module("kendo.ui.tooltip.ajax", {
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container);
+                },
+                teardown: function() {
+                    if (container.data("kendoTooltip")) {
+                        container.kendoTooltip("destroy");
+                    }
+
+                    container.remove();
+                    $.mockjaxClear();
+                }
+            });
+
+            function triggerEvent(element, type, info) {
+                element.trigger($.Event(type, info));
+
+                return element;
+            };
+
+            test("ajax request is made when popup is shown", 1, function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    response: function(request) {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    }
+                });
+                stop();
+                tooltip.show(container);
+            });
+
+            test("loading is shown during the request", 1, function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    response: function(request) {
+                        ok(tooltip.content.find("div.k-loading-mask").length);
+                        start();
+                    }
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    }
+                });
+
+                stop();
+
+                tooltip.show(container);
+            });
+
+            test("loading is hidden when the request completes", 1, function() {
+                $.mockjax({
+                    url: "foo/baz"
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    },
+                    contentLoad: function() {
+                        ok(!tooltip.content.find("div.k-loading-mask").length);
+                        start();
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
+
+            test("response is added to the content", 1, function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    response: function() {
+                        this.responseText = "foo";
+                    }
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    },
+                    contentLoad: function() {
+                        equal(tooltip.content.text(), "foo");
+                        start();
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
+
+            test("error event is raised if request fails", 1, function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    status: 500
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    },
+                    error: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
+
+            test("local url does not create iframe", function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    status: 500
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: { url: "foo/baz" }
+                });
+
+                tooltip.show(container);
+
+                ok(!tooltip.content.find("iframe").length);
+            });
+
+            test("a remote `content` creates iframe", function() {
+                var tooltip = new Tooltip(container, {
+                    content: { url:  "http://www.telerik.com/" }
+                });
+
+                tooltip.show(container);
+
+                var iframe = tooltip.content.find("iframe");
+
+                equal(iframe.length, 1);
+                equal(iframe.attr("src"), "http://www.telerik.com/");
+            });
+
+            test("iframe is created if showIframe is set", function() {
+                var tooltip = new Tooltip(container, {
+                    content: { url:  "/foo/" },
+                    iframe: true
+                });
+
+                tooltip.show(container);
+
+                ok(tooltip.content.find("iframe").length);
+            });
+
+        </script>
+    </body>
+</html>
