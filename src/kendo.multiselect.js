@@ -410,33 +410,29 @@ kendo_module({
             if (value !== undefined) {
                 //TODO: check for null
 
-                if ($.isArray(value)) {
-                    var index, tags = this.tagList.children();
+                value = $.isArray(value) ? value : [value];
 
-                    for (var idx = 0, length = tags.length; idx < length; idx++) {
-                        this._unselect(tags.eq(idx));
-                    }
 
-                    for (var idx = 0, length = value.length; idx < length; idx++) {
-                        index = this._index(value[idx]);
+                //refactor this
+                var index,
+                    idx = 0,
+                    tags = this.tagList.children(),
+                    length = tags.length;
 
-                        if (index > -1) {
-                            this._select(index);
-                        }
-                    }
+                for (; idx < length; idx++) {
+                    this._unselect(tags.eq(idx));
+                }
 
-                } else {
-                    var index = this._index(value),
-                        tags = this.tagList.children();
-
-                    for (var idx = 0, length = tags.length; idx < length; idx++) {
-                        this._unselect(tags.eq(idx));
-                    }
+                for (idx = 0, length = value.length; idx < length; idx++) {
+                    index = this._index(value[idx]);
 
                     if (index > -1) {
                         this._select(index);
                     }
                 }
+            } else {
+                //TODO return: values of multiselect
+                this.element.val(); //jquery loops all options if val() is called
             }
         },
 
@@ -528,12 +524,11 @@ kendo_module({
             }
 
             value = that._value(dataItem);
-
             if (value === undefined) { //test this
                 value = that._text(dataItem);
             }
 
-            index = that._index(that._value(dataItem));
+            index = that._index(value); //that._value(dataItem));
 
             if (index !== -1) {
                $(that.ul[0].children[index]).show();
