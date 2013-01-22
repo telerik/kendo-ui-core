@@ -138,10 +138,15 @@
                     "title": "Standalone ColorHSV",
                     "meta": "Standalone ColorHSV"
                 },{
-                    "text": "Standalone ColorPalette",
+                    "text": "Standalone Palette",
                     "url": "colorpicker/palette.html",
                     "title": "Standalone ColorPalette",
                     "meta": "Standalone ColorPalette"
+                },{
+                    "text": "Palette presets",
+                    "url": "colorpicker/palette-presets.html",
+                    "title": "Color Palette presets",
+                    "meta": "Color Palette presets"
                 },{
                     "text": "Keyboard support",
                     "url": "colorpicker/navigation.html",
