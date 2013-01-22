@@ -2743,7 +2743,7 @@ span.k-numerictextbox
     }
 }
 
-.k-ie6, .k-ie7, .k-ie8 {
+.k-ie7, .k-ie8 {
     .k-colorpicker-hsv {
         .k-hue-slider {
             .k-slider-track {
@@ -2756,9 +2756,7 @@ span.k-numerictextbox
             }
         }
         .k-hsv-gradient {
-            filter:
-            progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffffff', endColorstr='#00ffffff',GradientType=1 ), /* IE6-8 */
-            progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ff000000',GradientType=0 ); /* IE6-8 */
+            filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#00ffffff',GradientType=1) progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000',endColorstr='#ff000000',GradientType=0)";
         }
     }
 }
