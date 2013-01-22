@@ -90,6 +90,15 @@ kendo_module({
         }
     });
 
+    function map(a, f) {
+        if (a.map) return a.map(f);
+        var ret = [];
+        for (var i = 0; i < a.length; ++i) {
+            ret[i] = f(a[i]);
+        }
+        return ret;
+    };
+
     var ColorPalette = ColorSelector.extend({
         init: function(element, options) {
             var that = this;
@@ -109,7 +118,7 @@ kendo_module({
                 colors = colors.split(",");
             }
             if ($.isArray(colors)) {
-                colors = colors.map(parse);
+                colors = map(colors, parse);
             }
 
             element.addClass("k-colorpicker-popup")
