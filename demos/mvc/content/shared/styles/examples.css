@@ -1385,6 +1385,11 @@ p#copy
     padding: 0 10px;
 }
 
+.demo-section .title {
+    margin: 5px 0 15px 0;
+    text-align: center; 
+}
+
 .k-block
 {
     width: 200px;
@@ -1625,7 +1630,7 @@ pre.prettyprint
 {
     background-color: #fff;
     border:solid #ccc;
-    border-width:1px 0;
+    border-width:1px;
     color: #333;
     font: 11px Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
     height: 200px;
