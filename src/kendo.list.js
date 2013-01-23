@@ -770,6 +770,8 @@ kendo_module({
                 change;
 
             if (cascade) {
+                that._selectedValue = options.value || that._accessor();
+
                 parent = $("#" + cascade).data("kendo" + options.name);
 
                 if (!parent) {
