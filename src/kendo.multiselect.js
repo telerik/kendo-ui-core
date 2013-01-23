@@ -648,6 +648,10 @@ kendo_module({
             that._dataItems.push(dataItem);
 
             that.input.val("");
+
+            if (that._state === "filter") {
+                that._state = "accept";
+            }
         },
 
         //unselect li element and remove tag
@@ -675,11 +679,6 @@ kendo_module({
 
         _click: function(e) {
             this._select($(e.currentTarget));
-
-            if (this._state === "filter") {
-                this._state = "accept";
-            }
-
             this.close();
         },
 
