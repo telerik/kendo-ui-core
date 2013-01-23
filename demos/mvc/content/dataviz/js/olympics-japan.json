@@ -1,0 +1,147 @@
+[
+    {
+        "year": 1984,
+        "standing": 1,
+        "number": 10,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 1988,
+        "standing": 1,
+        "number": 4,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 1992,
+        "standing": 1,
+        "number": 3,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 1996,
+        "standing": 1,
+        "number": 3,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 2000,
+        "standing": 1,
+        "number": 5,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 2004,
+        "standing": 1,
+        "number": 16,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 2008,
+        "standing": 1,
+        "number": 9,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 2012,
+        "standing": 1,
+        "number": 7,
+        "country": "Japan",
+        "medalColor": "#f3ac32"
+    },{
+        "year": 1984,
+        "standing": 2,
+        "number": 8,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 1988,
+        "standing": 2,
+        "number": 3,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 1992,
+        "standing": 2,
+        "number": 8,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 1996,
+        "standing": 2,
+        "number": 6,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 2000,
+        "standing": 2,
+        "number": 8,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 2004,
+        "standing": 2,
+        "number": 9,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 2008,
+        "standing": 2,
+        "number": 6,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 2012,
+        "standing": 2,
+        "number": 14,
+        "country": "Japan",
+        "medalColor": "#b8b8b8"
+    },{
+        "year": 1984,
+        "standing": 3,
+        "number": 14,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 1988,
+        "standing": 3,
+        "number": 7,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 1992,
+        "standing": 3,
+        "number": 11,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 1996,
+        "standing": 3,
+        "number": 5,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 2000,
+        "standing": 3,
+        "number": 5,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 2004,
+        "standing": 3,
+        "number": 12,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 2008,
+        "standing": 3,
+        "number": 10,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    },{
+        "year": 2012,
+        "standing": 3,
+        "number": 17,
+        "country": "Japan",
+        "medalColor": "#bb6e36"
+    }
+]
