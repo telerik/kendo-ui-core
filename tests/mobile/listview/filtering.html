@@ -32,11 +32,13 @@
 
         <script>
             var ListView = kendo.mobile.ui.ListView,
+                application,
                 ul;
 
             module("mobile listview filtering", {
                 setup: function() {
-                    ul = $("<ul/>").appendTo($("#qunit-fixture"));
+                    ul = $('<div data-role="view"><ul/></div>').appendTo($("#qunit-fixture"));
+                    application = new kendo.mobile.Application($("#qunit-fixture"));
                 },
                 teardown: function() {
                     kendo.destroy($("#qunit-fixture"));
@@ -254,6 +256,71 @@
                 input.val("").trigger({ type: "keyup" });
 
                 equal(button.is(":visible"), false);
+            });
+
+            test("clear filter enables endless scrolling", function() {
+                var listview = setup({
+                    endlessScroll: true,
+                    dataSource: {
+                        pageSize: 1,
+                        data: ["foo", "bar"],
+                        filter: { value: "foo" }
+                    }
+                }),
+                scroller = application.scroller();
+
+                scroller.trigger("resize");
+                scroller.trigger("scroll", { scrollTop: 0 });
+                listview.dataSource.filter([]);
+                scroller.trigger("scroll", { scrollTop: 0 });
+
+                equal(listview.items().length, 2);
+            });
+
+            test("endless scroller is initialized only once", function() {
+                var listview = setup({
+                    endlessScroll: true,
+                    dataSource: {
+                        pageSize: 1,
+                        data: ["JavaScript", "Java", "Ruby"]
+                    }
+                }),
+                scrolling = stub(listview, "initEndlessScrolling");
+
+                listview.dataSource.filter({ value: "a", operator: "contains" });
+
+                equal(scrolling.calls("initEndlessScrolling"), 0);
+            });
+
+            test("endless scroller is enabled when total resets", function() {
+                var source = ["foo", "bar"],
+                    listview = setup({
+                        endlessScroll: true,
+                        dataSource: {
+                            pageSize: 1,
+                            serverPaging: true,
+                            schema: {
+                                data: "data"
+                            },
+                            transport: {
+                                read: function(options) {
+                                    var data = source[options.data.page - 1];
+                                    options.success({
+                                        data: [data]
+                                    });
+                                }
+                            },
+                            filter: { value: "foo" }
+                        }
+                    }),
+                    scroller = application.scroller();
+
+                scroller.trigger("resize");
+                scroller.trigger("scroll", { scrollTop: 0 });
+                listview.dataSource.filter(null);
+                scroller.trigger("scroll", { scrollTop: 0 });
+
+                equal(listview.items().length, 2);
             });
         </script>
     </body>

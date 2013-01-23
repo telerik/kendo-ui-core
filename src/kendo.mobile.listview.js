@@ -234,7 +234,19 @@ kendo_module({
             that._shouldFixHeaders();
             that._style();
 
+            that._invalidateScroller();
+
             that.trigger("dataBound", { ns: ui });
+        },
+
+        _invalidateScroller: function() {
+            var that = this,
+                options = that.options,
+                dataSource = that.dataSource;
+
+            if (options.endlessScroll && that._stopEndlessScrolling && (!dataSource.total() || dataSource.page() < dataSource.totalPages())) {
+                that.initEndlessScrolling();
+            }
         },
 
         _cacheDataItems: function(view) {
@@ -271,12 +283,21 @@ kendo_module({
             }
         },
 
+        initEndlessScrolling: function() {
+            this._stopEndlessScrolling = false;
+            this._scroller().setOptions({
+                resize: this._scrollerResize,
+                scroll: this._scrollerScroll
+            });
+        },
+
         stopEndlessScrolling: function() {
             var that = this,
                 scroller = that._scroller();
 
            if (scroller && that._loadIcon) {
                that.loading = false;
+               that._stopEndlessScrolling = true;
                that._loadIcon.parent().hide();
 
                scroller.unbind("resize", that._scrollerResize)
@@ -457,10 +478,7 @@ kendo_module({
                     }
                 };
 
-                scroller.setOptions({
-                    resize: that._scrollerResize,
-                    scroll: that._scrollerScroll
-                });
+                that.initEndlessScrolling();
             }
         },
 
