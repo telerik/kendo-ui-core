@@ -1672,14 +1672,21 @@ pre.prettyprint
     float: right;
     margin: 0 0 0 15px;
     padding: 10px;
-    border: 1px solid inherit;
-    background-image: none;
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    border-width: 1px;
+    border-style: solid;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border-color: rgba(255,255,255,0.2);
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.07) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.01)), color-stop(100%,rgba(0,0,0,0.07)));
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
     min-width: 170px;
     max-width: 300px;
 }
@@ -1696,9 +1703,6 @@ pre.prettyprint
 
 .configuration-horizontal
 {
-    -webkit-border-radius: 5px 5px 0 0;
-    -moz-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
     position: static;
     height: auto;
     min-height: 0;
@@ -1709,9 +1713,6 @@ pre.prettyprint
 
 .configuration-horizontal-bottom
 {
-    -webkit-border-radius: 0 0 5px 5px;
-    -moz-border-radius: 0 0 5px 5px;
-    border-radius: 0 0 5px 5px;
     margin: 20px -21px -21px;
     position: static;
     height: auto;
@@ -1729,7 +1730,7 @@ pre.prettyprint
     text-indent: 0;
     margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #dfdfdf;
     background-position: 0 -178px;
 }
 
