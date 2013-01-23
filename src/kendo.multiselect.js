@@ -12,7 +12,15 @@ kendo_module({
         Widget = ui.Widget,
         CHANGE = "change",
         HIDE = ' style="display:none"',
-        ns = ".kendoMultiSelect";
+        ns = ".kendoMultiSelect",
+        styles = ["font-family",
+                  "font-size",
+                  "font-stretch",
+                  "font-style",
+                  "font-weight",
+                  "letter-spacing",
+                  "text-transform",
+                  "line-height"];
 
     var MultiSelect = Widget.extend({
 
@@ -26,6 +34,7 @@ kendo_module({
             that._wrapper();
             that._tagList();
             that._input();
+            that._textHolder();
 
             that.input
                 .on("click" + ns, function() {
@@ -384,6 +393,15 @@ kendo_module({
         _input: function() {
             this.input = $('<input class="k-input" style="width: 25px" />')
                             .appendTo(this._innerWraper);
+        },
+
+        _textHolder: function() {
+            var computedStyles = kendo.getComputedStyles(this.input[0], styles);
+
+            computedStyles.position = "absolute";
+            computedStyles.visibility = "hidden";
+
+            this._searchText = $("<span/>").css(computedStyles).appendTo(this.wrapper);
         },
 
         _tagList: function() {

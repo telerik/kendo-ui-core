@@ -128,6 +128,23 @@
                 equal(multiselect.tagList.children().length, 1);
             });
 
+            test("MultiSelect creates _searchText", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select),
+                    searchText = multiselect._searchText,
+                    input = multiselect.input;
+
+                equal(searchText.css("position"), "absolute");
+                equal(searchText.css("visibility"), "hidden");
+                equal(searchText.css("font-size"), input.css("font-size"));
+                equal(searchText.css("font-style"), input.css("font-style"));
+                equal(searchText.css("font-weight"), input.css("font-weight"));
+                equal(searchText.css("font-family"), input.css("font-family"));
+                equal(searchText.css("line-heigth"), input.css("line-heigth"));
+                equal(searchText.css("text-transform"), input.css("text-transform"));
+                equal(searchText.css("letter-spacing"), input.css("letter-spacing"));
+            });
+
             /*test("MultiSelect uses select.value on init", function() {
                 popuplateSelect();
                 select.value = "0";
