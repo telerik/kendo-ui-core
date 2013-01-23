@@ -282,6 +282,7 @@
                 chart = navi.chart,
                 options = navi.options,
                 axis = navi.mainAxis(),
+                axisClone = clone(axis),
                 groups = axis.options.categories,
                 select = navi.options.select || {},
                 selection = navi.selection,
@@ -304,7 +305,10 @@
                     selection.wrapper.remove();
                 }
 
-                selection = navi.selection = new Selection(chart, axis, {
+                // "Freeze" the selection axis position until the next redraw
+                axisClone.box = axis.box;
+
+                selection = navi.selection = new Selection(chart, axisClone, {
                     min: min,
                     max: max,
                     from: from,
@@ -826,6 +830,12 @@
             }, hint.options.hideDelay);
         }
     });
+
+    function ClonedObject() { }
+    function clone(obj) {
+        ClonedObject.prototype = obj;
+        return new ClonedObject();
+    }
 
     // Exports ================================================================
 
