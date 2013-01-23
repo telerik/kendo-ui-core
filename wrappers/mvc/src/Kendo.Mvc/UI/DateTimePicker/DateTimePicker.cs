@@ -13,8 +13,8 @@ namespace Kendo.Mvc.UI
 
     public class DateTimePicker : DatePickerBase
     {
-        static internal DateTime defaultMinDate = new DateTime(1899, 12, 31);
-        static internal DateTime defaultMaxDate = new DateTime(2100, 1, 1);
+        static internal DateTime defaultMinDate = new DateTime(1900, 1, 1);
+        static internal DateTime defaultMaxDate = new DateTime(2099, 12, 31);
 
         public DateTimePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)
