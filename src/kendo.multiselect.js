@@ -10,7 +10,10 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        keys = kendo.keys,
+        ID = "id",
         CHANGE = "change",
+        FOCUSED = "k-state-focused",
         HIDE = ' style="display:none"',
         ns = ".kendoMultiSelect",
         styles = ["font-family",
@@ -47,10 +50,7 @@ kendo_module({
                         that._state = "accept";
                     }
                 })
-                .on("keydown" + ns, function(e) {
-                    that._search();
-                    that._scale(String.fromCharCode(e.keyCode));
-                });
+                .on("keydown" + ns, $.proxy(that._keydown, that));
 
             that.wrapper
                 .add(that._innerWraper)
@@ -111,13 +111,6 @@ kendo_module({
             }*/
         },
 
-        close: function() {
-            var that = this,
-                popup = that.popup;
-
-            popup.close();
-        },
-
         _filterSource: function(filter) {
             var that = this,
                 options = that.options,
@@ -134,6 +127,10 @@ kendo_module({
             dataSource.filter(expression);
         },
 
+        close: function() {
+            this.popup.close();
+            this.current(null);
+        },
 
         open: function() {
             var that = this,
@@ -143,8 +140,13 @@ kendo_module({
                 that._open = true;
                 that._filterSource();
             } else {
+                that.current($(first(that.ul[0])));
                 popup.open();
             }
+        },
+
+        toggle: function(toggle) {
+            this[toggle ? "open" : "close"]();
         },
 
         refresh: function() {
@@ -415,6 +417,112 @@ kendo_module({
             that.input.width(textWidth > wrapperWidth ? wrapperWidth : textWidth);
         },
 
+        current: function(candidate) {
+            var that = this;
+                id = that._optionID;
+
+            if (candidate !== undefined) {
+                if (that._current) {
+                    that._current
+                        .removeClass(FOCUSED)
+                        .removeAttr("aria-selected")
+                        .removeAttr(ID);
+
+                    //that._focused
+                    //    .removeAttr("aria-activedescendant");
+                }
+
+                if (candidate) {
+                    candidate.addClass(FOCUSED);
+                    that._scroll(candidate);
+
+                    if (id) {
+                        candidate.attr("id", id);
+                        that._focused.attr("aria-activedescendant", id);
+                    }
+                }
+
+                that._current = candidate;
+            } else {
+                return that._current;
+            }
+        },
+
+        _scroll: function (item) {
+
+            if (!item) {
+                return;
+            }
+
+            if (item[0]) {
+                item = item[0];
+            }
+
+            var ul = this.ul[0],
+                itemOffsetTop = item.offsetTop,
+                itemOffsetHeight = item.offsetHeight,
+                ulScrollTop = ul.scrollTop,
+                ulOffsetHeight = ul.clientHeight,
+                bottomDistance = itemOffsetTop + itemOffsetHeight;
+
+            ul.scrollTop = ulScrollTop > itemOffsetTop ?
+                           itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
+                           bottomDistance - ulOffsetHeight : ulScrollTop;
+        },
+
+        _item: function(item, direction) {
+            item = item[direction]();
+
+            if (item[0] && !item.is(":visible")) {
+               item = this._item(item, direction);
+            }
+
+            return item;
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                ul = that.ul[0],
+                key = e.keyCode,
+                current = that._current,
+                visible = that.popup.visible();
+
+            //that._last = key;
+
+            if (key === keys.DOWN) {
+                if (!visible) {
+                    that.open();
+                    return;
+                }
+
+                current = sibling(current[0], "nextSibling");
+                if (current) {
+                    that.current($(current));
+                }
+
+                e.preventDefault();
+            } else if (key === keys.UP && visible) {
+                that.current($(sibling(current[0], "previousSibling")));
+                if (!that._current[0]) {
+                    that.close();
+                }
+                e.preventDefault();
+            } else if (key === keys.ENTER && visible) {
+                that._select(current);
+                that.close();
+                e.preventDefault();
+            } else if (key === keys.ESC) {
+                if (that.popup.visible()) { //TODO: test it
+                    e.preventDefault();
+                }
+
+                that.close();
+            } else {
+                that._search();
+                that._scale(String.fromCharCode(e.keyCode));
+            }
+        },
+
         _tagList: function() {
             var that = this;
 
@@ -601,6 +709,26 @@ kendo_module({
             that._innerWraper = $(wrapper[0].firstChild);
         }
     });
+
+    function first(ul) {
+        item = ul.firstChild;
+
+        if (item && item.style.display === "none") {
+            item = sibling(item, "nextSibling");
+        }
+
+        return item;
+    }
+
+    function sibling(item, direction) {
+        item = item[direction];
+
+        if (item && item.style.display === "none") {
+            item = sibling(item, direction);
+        }
+
+        return item;
+    }
 
     function removeFiltersForField(expression, field) {
         if (expression.filters) {

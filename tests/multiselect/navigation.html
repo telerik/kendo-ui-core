@@ -21,6 +21,7 @@
         <script>
             kendo.ns = "kendo-";
             var MultiSelect = kendo.ui.MultiSelect,
+                keys = kendo.keys,
                 select;
 
             $.fn.keydown = function(character) {
@@ -73,6 +74,134 @@
                 multiselect.input.keydown("2");
 
                 equal(multiselect.input.width(), wrapperWidth);
+            });
+
+            test("MultiSelect opens popup on keydown", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.DOWN
+                });
+
+                ok(multiselect.popup.visible());
+            });
+
+            test("MultiSelect highlights first LI", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.DOWN
+                });
+
+                ok(multiselect.current().hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect highlights next LI", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.DOWN
+                });
+
+                equal(multiselect.current().index(), 1);
+                ok(multiselect.current().hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect does nothing if LI is last", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.current(multiselect.ul.children().last());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.DOWN
+                });
+
+                ok(multiselect.current());
+                equal(multiselect.current().index(), multiselect.ul.children().length - 1);
+                ok(multiselect.current().hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect highlights prev LI", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.current(multiselect.ul.children().last());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.UP
+                });
+
+                equal(multiselect.current().index(), multiselect.ul.children().length - 2);
+                ok(multiselect.current().hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect closes popup if no previous LI", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.current(multiselect.ul.children().first());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.UP
+                });
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect clears current highlighted on close", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.close();
+
+                equal(multiselect.current(), null)
+            });
+
+            test("MultiSelect selects current highlighted on ENTER", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.ENTER
+                });
+
+                equal(multiselect.tagList.children().length, 1);
+            });
+
+            test("MultiSelect closes on ENTER", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.ENTER
+                });
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect closes on ESC", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.ESC
+                });
+
+                ok(!multiselect.popup.visible());
             });
 
       </script>

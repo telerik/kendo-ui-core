@@ -131,7 +131,7 @@
             test("MultiSelect creates _searchText", function() {
                 popuplateSelect();
                 var multiselect = new MultiSelect(select),
-                    searchText = multiselect._searchText,
+                    searchText = multiselect._span,
                     input = multiselect.input;
 
                 equal(searchText.css("position"), "absolute");
