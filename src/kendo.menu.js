@@ -756,7 +756,7 @@ kendo_module({
                 hoverItem = that._hoverItem(),
                 activeElement;
 
-            if (target != that.wrapper[0]) {
+            if (target != that.wrapper[0] && !$(target).is(":focusable")) {
                 e.stopPropagation();
                 $(target).closest(".k-content").closest(".k-group").closest(".k-item").addClass(FOCUSEDSTATE);
                 that.wrapper.focus();
