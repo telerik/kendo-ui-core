@@ -11,6 +11,15 @@
 	</div>
 	
     <script>
+	    var today = new Date(),
+	    birthdays = [
+	        +new Date(today.getFullYear(), today.getMonth(), 11),
+	        +new Date(today.getFullYear(), today.getMonth() + 1, 6),
+	        +new Date(today.getFullYear(), today.getMonth() + 1, 27),
+	        +new Date(today.getFullYear(), today.getMonth() - 1, 3),
+	        +new Date(today.getFullYear(), today.getMonth() - 2, 22)
+	    ];
+    
 	    function isInArray(date, dates) {
 	    	for(var idx = 0, length = dates.length; idx < length; idx++) {
 	    		if (+date === +dates[idx]) {
@@ -23,7 +32,7 @@
     </script>
     <div>
         <%
-        String template = "# if (isInArray(data.date, data.dates)) { #" +
+        String template = "# if (isInArray(data.date, birthdays)) { #" +
 	      "<div class=\"" +
 	      "# if (data.value < 10) { #" +
 	          "exhibition" +
