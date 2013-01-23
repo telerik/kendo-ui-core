@@ -9,24 +9,30 @@
 
             <script>
                 $(document).ready(function() {
-                    generatePeople(100000, function(data) {
+                    generatePeople(100, function(data) {
                         $("#loading").hide();
 
                         $("#grid").kendoGrid({
-                            dataSource: {
-                                data: data,
-                                pageSize: 50
-                            },
+                           dataSource: {
+                            type: "odata",
+                            pageSize: 100,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                            }
+                        } ,
                             height: 430,
+                            groupable: true,
                             scrollable: {
                                 virtual: true
                             },
-                            columns: [ { field: "Id", title: "ID", width: "70px" },
-                                { field: "FirstName", title: "First Name", width: "130px" },
-                                { field: "LastName", title: "Last Name", width: "130px" },
-                                { field: "City", title: "City", width: "130px" },
-                                "Title"
-                            ]
+                            columns:[
+                            { field: "OrderID", title: "Order ID", width: 60 },
+                            { field: "CustomerID", title: "Customer ID", width: 90},
+                            { field: "ShipName", title:"Ship Name", width: 220 },
+                            { field: "ShipAddress", title:"Ship Address", width: 280 },
+                            { field: "ShipCity", title:"Ship City", width: 110 },
+                            { field: "ShipCountry", title:"Ship Country", width: 110 }
+                        ]
                         });
                     });
                 });

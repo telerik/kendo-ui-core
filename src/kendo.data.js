@@ -2616,7 +2616,8 @@ kendo_module({
                             rangeEnd = range.end;
 
                             if (!remote) {
-                                processed = Query.process(range.data, { sort: that.sort(), filter: that.filter() });
+                                var sort = normalizeGroup(that.group() || []).concat(normalizeSort(that.sort() || []));
+                                processed = Query.process(range.data, { sort: sort, filter: that.filter() });
                                 rangeData = processed.data;
 
                                 if (processed.total !== undefined) {
