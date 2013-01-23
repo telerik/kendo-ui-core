@@ -4,11 +4,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<%= Html.Kendo().DatePicker()
-      .Name("datepicker")
-%>
-
+<div class='demo-section'>
+    <%= Html.Kendo().DatePicker()
+          .Name("datepicker")
+    %>
+</div>
 <script>
     $(document).ready(function() {
         $("#datepicker").closest(".k-widget")
