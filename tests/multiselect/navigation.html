@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MultiSelect navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">MultiSelect navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var MultiSelect = kendo.ui.MultiSelect,
+                select;
+
+            $.fn.keydown = function(character) {
+                var keyCode = character.charCodeAt(0);
+                $(this).trigger({
+                    type: "keydown",
+                    keyCode: keyCode
+                });
+            }
+
+            function popuplateSelect() {
+                var options = [];
+                for (var i=0; i < 5; i++) {
+                    options.push("<option value='" + i + "'>Option" + i + "</option>");
+                }
+
+                select.html(options);
+            }
+
+            module("kendo.ui.MultiSelect navigation", {
+                setup: function() {
+                    select = $("<select />").appendTo(document.body);
+                    popuplateSelect();
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            test("MultiSelect expands input element on keydown", function() {
+                var multiselect = new MultiSelect(select);
+
+                var initial = multiselect.input.width();
+
+                multiselect.input.keydown("2");
+
+                ok(multiselect.input.width() > initial);
+            });
+
+            test("MultiSelect fits input inside of the wrapper", function() {
+                var multiselect = new MultiSelect(select),
+                    wrapperWidth = 200;
+
+                multiselect.wrapper.width(wrapperWidth);
+                multiselect.input.val("222222222222222222222222222222222222222222222");
+                multiselect.input.keydown("2");
+
+                equal(multiselect.input.width(), wrapperWidth);
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

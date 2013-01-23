@@ -34,7 +34,7 @@ kendo_module({
             that._wrapper();
             that._tagList();
             that._input();
-            that._textHolder();
+            that._textContainer();
 
             that.input
                 .on("click" + ns, function() {
@@ -49,6 +49,7 @@ kendo_module({
                 })
                 .on("keydown" + ns, function(e) {
                     that._search();
+                    that._scale(String.fromCharCode(e.keyCode));
                 });
 
             that.wrapper
@@ -395,13 +396,23 @@ kendo_module({
                             .appendTo(this._innerWraper);
         },
 
-        _textHolder: function() {
+        _textContainer: function() {
             var computedStyles = kendo.getComputedStyles(this.input[0], styles);
-
             computedStyles.position = "absolute";
             computedStyles.visibility = "hidden";
 
-            this._searchText = $("<span/>").css(computedStyles).appendTo(this.wrapper);
+            this._span = $("<span/>").css(computedStyles).appendTo(this.wrapper);
+        },
+
+        _scale: function(character) {
+            var that = this,
+                wrapperWidth = that.wrapper.width(),
+                textWidth;
+
+            that._span.text(that.input.val() + character);
+            textWidth = that._span.width() + 25;
+
+            that.input.width(textWidth > wrapperWidth ? wrapperWidth : textWidth);
         },
 
         _tagList: function() {

@@ -12,6 +12,10 @@ tests.push(
         title: "multiselect filtering"
     },
     {
+        page: "multiselect/navigation.html",
+        title: "multiselect Navigation"
+    },
+    {
         page: "multiselect/api.html",
         title: "multiselect API"
     }
