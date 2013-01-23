@@ -1,42 +1,49 @@
 
         <div id="example" class="k-content">
             <div class="chart-wrapper">
-                <div id="chart"></div>
+                <div id="chart" style="background: center no-repeat url('../../content/shared/styles/world-map.png');"></div>
             </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         title: {
-                            text: "Break-up of Spain Electricity Production for 2008"
+                            position: "bottom",
+                            text: "Share of Internet Population Growth, 2007 - 2012"
                         },
                         legend: {
-                            position: "bottom",
-                            labels: {
-                                template: "#= text # (#= value #%)"
-                            }
+                            visible: false
+                        },
+                        chartArea: {
+                            background: ""
                         },
                         seriesDefaults: {
                             labels: {
                                 visible: true,
                                 position: "outsideEnd",
-                                format: "{0}%"
+                                template: "#= category #: #= value#%"
                             }
                         },
                         series: [{
                             type: "donut",
                             data: [{
-                                category: "Hydro",
-                                value: 22
-                            }, {
-                                category: "Solar",
-                                value: 2
-                            }, {
-                                category: "Nuclear",
-                                value: 49
-                            }, {
-                                category: "Wind",
-                                value: 27
+                                category: "Asia",
+                                value: 53.8
+                            },{
+                                category: "Europe",
+                                value: 16.1
+                            },{
+                                category: "Latin America",
+                                value: 11.3
+                            },{
+                                category: "Africa",
+                                value: 9.6
+                            },{
+                                category: "Middle East",
+                                value: 5.2
+                            },{
+                                category: "North America",
+                                value: 3.6
                             }]
                         }],
                         tooltip: {
