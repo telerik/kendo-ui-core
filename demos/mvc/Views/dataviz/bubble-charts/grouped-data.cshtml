@@ -2,67 +2,78 @@
         <div id="example" class="k-content">
             <div class="chart-wrapper">
                 <div id="chart"></div>
-                <ul class="k-content">
-                    <li>Circle size shows number of job applicants</li>
-                    <li>Vertical position shows number of employees</li>
-                    <li>Horizontal position shows job growth</li>
-                </ul>
             </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
-                        title: {
-                            text: "Job Growth for 2011 and 2012"
-                        },
-                        legend: {
-                            visible: true,
-                            position: "bottom"
-                        },
+                        theme: $(document).data("kendoSkin") || "uniform",
                         dataSource: {
                             transport: {
                                 read: {
-                                    url: "../../content/dataviz/js/job-stats.json",
+                                    url: function() {
+                                        return "../../content/dataviz/js/olympics-japan.json";
+                                    },
                                     dataType: "json"
                                 }
                             },
                             group: {
-                                field: "year"
+                                field: "country"
                             }
+                        },
+                        title: {
+                            text: "Olypmic Medals Won by Japan"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        chartArea: {
+                            background: ""
                         },
                         series: [{
                             type: "bubble",
-                            xField: "growth",
-                            yField: "jobs",
-                            sizeField: "applications",
-                            categoryField: "company"
+                            minSize: 0,
+                            maxSize: 70,
+                            xField: "year",
+                            yField: "standing",
+                            sizeField: "number",
+                            colorField: "medalColor"
                         }],
                         xAxis: {
                             labels: {
-                                format: "{0:N0}",
-                                skip: 1
+                                skip: 1,
+                                margin: {top: -25}
                             },
-                            axisCrossingValue: -10000,
-                            majorUnit: 2000,
-                            plotBands: [{
-                                from: -5000,
-                                to: 0,
-                                color: "#00f",
-                                opacity: 0.05
-                            }]
+                            majorUnit: 4,
+                            min: 1980,
+                            max: 2015,
+                            majorGridLines: {
+                                visible: false
+                            },
+                            line: {
+                                visible: false
+                            }
                         },
                         yAxis: {
                             labels: {
-                                format: "{0:N0}"
+                                step: 1,
+                                skip: 1,
+                                template: "#= value # place",
+                                margin: {right: -30},
+                                padding: {left: 20}
+                            },
+                            majorUnit: 1,
+                            min: 0,
+                            max: 3.7,
+                            majorGridLines: {
+                                visible: false
                             },
                             line: {
-                                width: 0
+                                visible: false
                             }
                         },
                         tooltip: {
                             visible: true,
-                            opacity: 1,
-                            template: "#= category # (#= dataItem.year #): #= kendo.toString(value.size, 'N0') # applications"
+                            template: "#= value.x #: #= value.size # Medals"
                         }
                     });
                 }
@@ -81,19 +92,10 @@
             </script>
             <style scoped>
                 .chart-wrapper {
-                    position: relative;
+                    height: 350px;
                 }
-
-                .chart-wrapper ul {
-                    font-size: 11px;
-                    margin: 62px 16px 0 0;
-                    padding: 30px;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    text-transform: uppercase;
-                    width: 150px;
-                    height: 105px;
+                .chart-wrapper .k-chart {
+                    height: 330px;
                 }
             </style>
         </div>
