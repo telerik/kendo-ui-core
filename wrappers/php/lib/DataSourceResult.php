@@ -4,7 +4,11 @@ class DataSourceResult {
     private $db;
 
     private $operators = array(
-        'eq' => '='
+        'eq' => '=',
+        'gt' => '>',
+        'gte' => '>=',
+        'lt' => '<',
+        'lte' => '<=',
     );
 
     function __construct($dsn) {
@@ -19,18 +23,17 @@ class DataSourceResult {
         return $statement->fetch(PDO::FETCH_NUM);
     }
 
-    private function page($sql, $skip, $take) {
-        $sql .= ' LIMIT :skip,:take';
-
-
-        return $sql;
+    private function page() {
+        return ' LIMIT :skip,:take';
     }
 
-    private function sort($sql, $columns, $sort) {
+    private function sort($columns, $sort) {
         $count = count($sort);
 
+        $sql = '';
+
         if ($count > 0) {
-            $sql .= ' ORDER BY ';
+            $sql = ' ORDER BY ';
 
             $order = array();
 
@@ -55,44 +58,66 @@ class DataSourceResult {
         return $sql;
     }
 
-    private function filter($sql, $columns, $filter) {
-        $filters = $filter->filters;
-
-        $count = count($filters);
-
-        $where = array();
-
-        for ($index = 0; $index < count($filters); $index++) {
-            $field = $filters[$index]->field;
-
-            if (in_array($field, $columns)) {
-                $operator = $this->operators[$filters[$index]->operator];
-
-                $where[] = "$field $operator :filter$index";
-            }
-        }
-
-        if (count($where) > 0) {
-            $logic = 'AND';
+    private function where($columns, $filter, $all) {
+        if (isset($filter->filters)) {
+            $logic = ' AND ';
 
             if ($filter->logic == 'or') {
-                $logic = 'OR';
+                $logic = ' OR ';
             }
 
-            $predicate = implode($logic, $where);
+            $filters = $filter->filters;
 
-            $sql .= " WHERE $predicate ";
+            $where = array();
+
+            for ($index = 0; $index < count($filters); $index++) {
+                $where[] = $this->where($columns, $filters[$index], $all);
+            }
+
+            $where = implode($logic, $where);
+
+            return "($where)";
         }
 
-        return $sql;
+        $field = $filter->field;
+
+        if (in_array($field, $columns)) {
+            $index = array_search($filter, $all);
+
+            $operator = $this->operators[$filter->operator];
+
+            return "$field $operator :filter$index";
+        }
+    }
+
+    private function flatten(&$all, $filter) {
+        if (isset($filter->filters)) {
+            $filters = $filter->filters;
+
+            for ($index = 0; $index < count($filters); $index++) {
+                $this->flatten($all, $filters[$index]);
+            }
+        } else {
+            $all[] = $filter;
+        }
+    }
+
+    private function filter($columns, $filter) {
+        $all = array();
+
+        $this->flatten($all, $filter);
+
+        $where = $this->where($columns, $filter, $all);
+
+        return " WHERE $where";
     }
 
     private function bindFilterValues($statement, $filter) {
-        $filters = $filter->filters;
+        $filters = array();
+        $this->flatten($filters, $filter);
 
         for ($index = 0; $index < count($filters); $index++) {
             $value = $filters[$index]->value;
-
             $statement->bindValue(":filter$index", $value);
         }
     }
@@ -105,15 +130,15 @@ class DataSourceResult {
         $sql = sprintf('SELECT %s FROM %s', implode(', ', $columns), $table);
 
         if (isset($request->filter)) {
-            $sql = $this->filter($sql, $columns, $request->filter);
+            $sql .= $this->filter($columns, $request->filter);
         }
 
         if (isset($request->sort)) {
-            $sql = $this->sort($sql, $columns, $request->sort);
+            $sql .= $this->sort($columns, $request->sort);
         }
 
         if (isset($request->skip) && isset($request->take)) {
-            $sql = $this->page($sql, $request->skip, $request->take);
+            $sql .= $this->page();
         }
 
         $statement = $this->db->prepare($sql);
