@@ -610,6 +610,9 @@ kendo_module({
             max = Math.max(r, g, b);
             v = max;
             delta = max - min;
+            if (delta === 0) {
+                return new _HSV(0, 0, v, this.a);
+            }
             if (max !== 0) {
                 s = delta / max;
                 if (r == max) {

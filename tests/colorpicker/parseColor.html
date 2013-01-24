@@ -19,6 +19,13 @@
 
       var parseColor = kendo.parseColor;
 
+      test("Convert desaturated color to HSV", function(){
+          equal(parseColor("#000").toHSV().toCss(), "#000000");
+          equal(parseColor("#888").toHSV().toCss(), "#888888");
+          equal(parseColor("#fff").toHSV().toCss(), "#ffffff");
+          equal(parseColor("#fff").toHSV().h, 0);
+      });
+
       test("Short hex notation", function(){
           var color = parseColor("#ff0");
           ok(/^#ffff00/i.test(color.toCss()));
