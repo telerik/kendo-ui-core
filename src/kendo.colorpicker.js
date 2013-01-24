@@ -72,7 +72,18 @@ kendo_module({
         _select: function(color, nohooks) {
             color = this.color(color);
             if (!nohooks) {
-                this.trigger("change");
+                this.trigger("change", { value: this.value() });
+            }
+        },
+        _triggerSelect: function(color) {
+            color = parse(color);
+            if (color && !color.equals(this.color())) {
+                if (color.a != 1) {
+                    color = color.toCssRgba();
+                } else {
+                    color = color.toCss();
+                }
+                this.trigger("select", { value: color });
             }
         },
         destroy: function() {
@@ -214,9 +225,7 @@ kendo_module({
                     .attr("aria-selected", true);
                 try {
                     var color = parse(selected.find("div").css(BACKGROUNDCOLOR));
-                    if (!color.equals(that.color())) {
-                        that.trigger("select", { value: color });
-                    }
+                    that._triggerSelect(color);
                 } catch(ex) {}
             }
         },
@@ -487,9 +496,7 @@ kendo_module({
             }
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
             that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
-            if (!color.equals(that.color())) {
-                that.trigger("select", { value: color });
-            }
+            that._triggerSelect(color);
             color = color.toHSV();
             var handle = that._hsvHandle;
             var rect = that._hsvRect;
@@ -838,10 +845,11 @@ kendo_module({
         },
         _select: function(value) {
             value = this.color(value);
-            this.trigger("change");
+            this.trigger("change", { value: this.value() });
         },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
+        _triggerSelect: ColorSelector.fn._triggerSelect,
         _isInputTypeColor: function() {
             var el = this.element[0];
             return (/^input$/i).test(el.tagName) && (/^color$/i).test(el.type);
@@ -856,9 +864,7 @@ kendo_module({
                     this.element.val(value.toCssRgba());
                 }
             }
-            if (value && !value.equals(this.color())) {
-                this.trigger("select", { value: value });
-            }
+            this._triggerSelect(value);
             this.wrapper.find(".k-selected-color").css(
                 BACKGROUNDCOLOR,
                 value ? value.toDisplay() : "transparent"
@@ -895,7 +901,7 @@ kendo_module({
                 }).data("kendoPopup");
                 sel.bind({
                     select: function(ev){
-                        that._updateUI(ev.value);
+                        that._updateUI(parse(ev.value));
                     },
                     change: function(){
                         that._select(sel.color());

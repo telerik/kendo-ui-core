@@ -98,10 +98,10 @@
 
       $("#dropdown3").data("kendoColorPicker").bind({
           select: function(ev) {
-              console.log("SELECT: ", ev.value ? ev.value.toCssRgba() : null);
+              console.log("SELECT: ", ev.value);
           },
           change: function(ev) {
-              console.log("CHANGE: ", ev.value ? ev.value.toCssRgba() : null);
+              console.log("CHANGE: ", ev.value);
           },
           open: function(ev) {
               console.log("OPEN");
