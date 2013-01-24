@@ -217,6 +217,38 @@
                 equal(multiselect.tagList.children().length, 1);
             });
 
+            test("MultiSelect creates loading element", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect._loading);
+            });
+
+            asyncTest("MultiSelect shows loading icon on progress", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.dataSource.trigger("progress");
+
+                setTimeout(function() {
+                    notEqual(multiselect._loading.css("display"), "none");
+                    start();
+                }, 200);
+            });
+
+            asyncTest("MultiSelect hides loading icon on dataSource change", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect._showBusy();
+
+                setTimeout(function() {
+                    multiselect.refresh();
+
+                    equal(multiselect._loading.css("display"), "none");
+                    start();
+                }, 200);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
