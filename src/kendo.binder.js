@@ -80,16 +80,12 @@ kendo_module({
             }
         },
 
-        start: function() {
-            if (this.observable) {
-                this.source.bind("get", this._access);
-            }
+        start: function(source) {
+            source.bind("get", this._access);
         },
 
-        stop: function() {
-            if (this.observable) {
-                this.source.unbind("get", this._access);
-            }
+        stop: function(source) {
+            source.unbind("get", this._access);
         },
 
         get: function() {
@@ -99,10 +95,11 @@ kendo_module({
                 path = that.path,
                 result = source;
 
-            that.start();
 
             if (that.observable) {
+                that.start(source);
                 result = source.get(path);
+                that.stop(source);
 
                 // Traverse the observable hierarchy if the binding is not resolved at the current level.
                 while (result === undefined && source) {
@@ -126,7 +123,11 @@ kendo_module({
                     result = proxy(result, source);
 
                     // Invoke the function
+                    that.start(source);
+
                     result = result(that.source);
+
+                    that.stop(source);
                 }
 
                 // If the binding is resolved by a parent object
@@ -139,8 +140,6 @@ kendo_module({
                           .bind(CHANGE, that._change);
                 }
             }
-
-            that.stop();
 
             return result;
         },
@@ -190,11 +189,11 @@ kendo_module({
         render: function(value) {
             var html;
 
-            this.start();
+            this.start(this.source);
 
             html = kendo.render(this.template, value);
 
-            this.stop();
+            this.stop(this.source);
 
             return html;
         }
