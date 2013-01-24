@@ -530,13 +530,17 @@ kendo_module({
 
     function setCellVisibility(cells, index, visible) {
         var pad = 0,
+            state,
             cell = cells[pad];
 
         while (cell) {
-            if (! ((!visible && cell.style.display == "none") || nonDataCellsRegExp.test(cell.className)) ) {
-                cells[index + pad].style.display = visible ? "" : "none";
+            state = visible ? true : cell.style.display !== "none";
+
+            if (state && !nonDataCellsRegExp.test(cell.className) && --index < 0) {
+                cell.style.display = visible ? "" : "none";
                 break;
             }
+
             cell = cells[++pad];
         }
     }

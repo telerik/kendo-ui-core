@@ -682,6 +682,16 @@
                 equal(args.column.field, "foo");
             });
 
+            test("hiding last consecutive columns", function() {
+                var grid = setup();
+
+                grid.hideColumn(1);
+                grid.hideColumn(2);
+
+                equal(grid.tbody.find("td:visible").length, 1, "visible column cells");
+                equal(grid.tbody.find("td:not(:visible)").length, 2, "hidden column cells");
+            });
+
         </script>
     </body>
 </html>
