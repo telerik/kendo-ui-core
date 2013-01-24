@@ -3478,7 +3478,7 @@ kendo_module({
                 }
 
                 if (that._current) {
-                    focusTable(that._current.closest("table")[0]);
+                    focusTable(that._current.closest("table")[0], true);
                 }
             }
 
@@ -3511,6 +3511,7 @@ kendo_module({
 
     function focusTable(table, direct) {
         if (direct === true) {
+            table = $(table);
             var condition = kendo.support.browser.msie && table.parent().is(".k-grid-content,.k-grid-header-wrap");
                 if (condition) {
                     var scrollTop = table.parent().scrollTop(),
@@ -3539,7 +3540,7 @@ kendo_module({
 
        if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
            setTimeout(function() {
-               focusTable(currentTable);
+               focusTable(currentTable, true);
            });
        }
 
