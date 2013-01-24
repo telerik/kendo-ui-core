@@ -14,12 +14,12 @@
 
     <script>
         function preview(e) {
-            $("#background").css("background-color", e.value.toCss());
+            $("#background").css("background-color", e.value);
         }
 
         $("#palette").kendoColorPalette({
             columns: 4,
-            size: 34 || {
+            size: {
                 width: 34,
                 height: 19
             },
@@ -30,14 +30,13 @@
                 "#e1dca5", "#d0c974", "#a29a36", "#514d1b",
                 "#c6d9f0", "#8db3e2", "#548dd4", "#17365d"
             ],
-            select: preview
+            change: preview
         });
 
         $("#picker").kendoColorPicker({
-            select: preview,
-            cancel: function() {
-                $("#background").css("background-color", this.value());
-            }
+            value: "#ffffff",
+            buttons: false,
+            select: preview
         });
     </script>
 
@@ -66,13 +65,8 @@
         }
 
         #palette {
-            margin: 4px 0;
             vertical-align: top;
             display: inline-block;
-        }
-
-        #palette .k-item {
-            height: 19px !important;
         }
 
         .k-colorpicker {
