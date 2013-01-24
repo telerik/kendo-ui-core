@@ -1,42 +1,101 @@
 <div id="example" class="k-content">
 
-  <p>
-    The <tt>"select"</tt> event triggers whenever a color is selected in the
-    drop-down.  The <tt>"change"</tt> event triggers on a “final” selection,
-    which means a color is clicked in the simple selector, or the “Apply”
-    button is clicked in the HSV picker.
-  </p>
+    <div class="demo-section">
+        <dl>
+            <dt><label for="palette-picker">ColorPicker (palette):</label></dt>
+            <dd>
+                <input type="color" id="palette-picker" value="#cc2222" data-role="colorpicker" data-palette="basic">
+            </dd>
 
-  <input type="color" id="basic" value="#cc2222"
-         data-role="colorpicker" data-palette="basic" />
+            <dt><label for="hsv-picker">ColorPicker (HSV):</label></dt>
+            <dd>
+                <input type="color" id="hsv-picker" value="#22cc22" data-role="colorpicker">
+            </dd>
 
-  <input type="color" id="hsv" value="#22cc22"
-         data-role="colorpicker" />
+            <dt>ColorPalette:</dt>
+            <dd>
+                <div id="palette" data-role="colorpalette"></div>
+            </dd>
 
-  <script> 
-    // initialize widgets
-    kendo.init($("#example"));
+            <dt>FlatColorPicker:</dt>
+            <dd>
+                <div id="flatcolorpicker" data-role="flatcolorpicker"></div>
+            </dd>
+        </dl>
+    </div>
 
-    // log events
-    $("#basic, #hsv").each(function(){
-        var colorPicker = $(this).data("kendoColorPicker");
-        colorPicker.bind({
-            select: function(){
-                kendoConsole.log("Select in " + this.element.attr("id"));
-            },
-            change: function(){
-                kendoConsole.log("Change in " + this.element.attr("id"));
-            },
-            open: function() {
-                kendoConsole.log("Open in " + this.element.attr("id"));
-            },
-            close: function() {
-                kendoConsole.log("Close in " + this.element.attr("id"));
-            }
+    <script>
+        // initialize widgets
+        kendo.init($("#example"));
+
+        // log events
+        $("#palette-picker, #hsv-picker").each(function(){
+            var colorPicker = $(this).data("kendoColorPicker");
+
+            colorPicker.bind({
+                select: function(e) {
+                    kendoConsole.log("Select in picker #" + this.element.attr("id") + " :: " + e.value);
+                },
+                change: function(e) {
+                    kendoConsole.log("Change in picker #" + this.element.attr("id") + " :: " + e.value);
+                },
+                open: function() {
+                    kendoConsole.log("Open in picker #" + this.element.attr("id"));
+                },
+                close: function() {
+                    kendoConsole.log("Close in picker #" + this.element.attr("id"));
+                }
+            });
         });
-    });
-  </script>
 
+        var colorPalette = $("#palette").data("kendoColorPalette");
+        colorPalette.bind("change", function(e) {
+            kendoConsole.log("Change in color palette :: " + e.value);
+        });
+
+        var flatColorPicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
+        flatColorPicker.bind("change", function(e) {
+            kendoConsole.log("Change in flat color picker :: " + e.value);
+        });
+    </script>
+
+    <div class="demo-section">
+        <h3 class="title">Console log</h3>
+        <div class="console"></div>
+    </div>
+
+    <style scoped>
+        .demo-section {
+            width: 500px;
+        }
+
+        .demo-section dl {
+            display: inline-block;
+        }
+
+        .demo-section dl:after {
+            content: " ";
+            clear: both;
+            font: 0/0;
+        }
+
+        .demo-section dt,
+        .demo-section dd {
+            float: left;
+            margin: 0;
+            padding: 0 0 1em;
+        }
+
+        .demo-section dt {
+            width: 45%;
+            padding-top: .3em;
+            padding-right: 5%;
+            clear: left;
+            text-align: right;
+        }
+
+        .demo-section dd {
+            width: 50%;
+        }
+    </style>
 </div>
-
-<div class="console"></div>
