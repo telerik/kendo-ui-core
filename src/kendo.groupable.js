@@ -34,7 +34,7 @@ kendo_module({
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
         dropCue = $('<div class="k-grouping-dropclue"/>'),
-        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
+        nameSpecialCharRegExp = /("|'|\[|\]|\$|\.|\:|\+)/g;
 
     function dropCueOffsetTop(element) {
         return element.position().top + 3;
@@ -215,7 +215,7 @@ kendo_module({
                 })[0];
         },
         buildIndicator: function(field, title, dir) {
-            return indicatorTmpl({ field: field, dir: dir, title: title, ns: kendo.ns });
+            return indicatorTmpl({ field: field.replace(/"/g, "'"), dir: dir, title: title, ns: kendo.ns });
         },
         descriptors: function() {
             var that = this,

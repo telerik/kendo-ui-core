@@ -42,7 +42,7 @@ kendo_module({
             }
             return false;
         },
-        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
+        nameSpecialCharRegExp = /("|'|\[|\]|\$|\.|\:|\+)/g;
 
     if (!kendo.ui.validator) {
         kendo.ui.validator = { rules: {}, messages: {} };

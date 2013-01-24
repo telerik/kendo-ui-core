@@ -14,7 +14,7 @@ kendo_module({
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
-        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g,
+        nameSpecialCharRegExp = /("|'|\[|\]|\$|\.|\:|\+)/g,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
                     '#=message#<div class="k-callout k-callout-n"></div></div>',
         CHANGE = "change";
@@ -194,7 +194,7 @@ kendo_module({
 
             values[e.field] = e.value;
 
-            input = $(':input[' + kendo.attr("bind") + '="' + (isBoolean ? 'checked:' : 'value:') + e.field + '"]', that.element);
+            input = $(':input[' + kendo.attr("bind") + '="' + (isBoolean ? 'checked:' : 'value:') + e.field.replace(nameSpecialCharRegExp, "\\$1") + '"]', that.element);
 
             try {
                 that._validationEventInProgress = true;

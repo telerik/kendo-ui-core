@@ -95,14 +95,51 @@
                 var dataItem = {"f oo": []};
                 equal(getter("['f oo'][2].bar", true)(dataItem), undefined);
             });
+
             test("getter access array with safe option", function() {
                 var dataItem = [1,2,3,4];
                 equal(getter("[2]", true)(dataItem), 3);
             });
 
+            test("getter access with array access and double-quoted index", function() {
+                var data = { foo: "foo" };
+
+                equal("foo", kendo.getter('["foo"]')(data));
+            });
+
+            test("getter access with array access and single-quoted index", function() {
+                var data = { foo: "foo" };
+
+                equal("foo", kendo.getter("['foo']")(data));
+            });
+
             test("getter access property with safe options type is correct", function() {
                 var dataItem = { foo: { bar: 0 } };
                 equal(getter("foo.bar", true)(dataItem), 0);
+            });
+
+            test("setter creates function which sets the specified expression", function() {
+                var data = { foo: "foo" };
+
+                kendo.setter("foo")(data, "bar");
+
+                equal(data.foo, "bar");
+            });
+
+            test("setter and nested expressions", function() {
+                var data = { foo: { bar: "bar" } };
+
+                kendo.setter("foo.bar")(data, "baz");
+
+                equal(data.foo.bar, "baz");
+            });
+
+            test("setter and array access expressions", function() {
+                var data = { foo: "foo" };
+
+                kendo.setter("['foo']")(data, "bar");
+
+                equal(data.foo, "bar");
             });
 
             test("expr with custom parameter name", function() {

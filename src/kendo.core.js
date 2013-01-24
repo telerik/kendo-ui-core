@@ -2205,7 +2205,7 @@ function pad(number, digits, end) {
         },
 
         setter: function(expression) {
-            return setterCache[expression] = setterCache[expression] || new Function("d,value", "d." + expression + "=value");
+            return setterCache[expression] = setterCache[expression] || new Function("d,value", kendo.expr(expression) + "=value");
         },
 
         accessor: function(expression) {

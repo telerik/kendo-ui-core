@@ -2629,7 +2629,7 @@ kendo_module({
                 }
 
                 if (length) { // data item is an object
-                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + settings.paramName + '.uid#"';
+                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + kendo.expr("uid", settings.paramName) + '#"';
                 }
 
                 rowTemplate += " role='row'>";
@@ -2719,14 +2719,14 @@ kendo_module({
                 html += field + "]#";
                 html += "${f != null ? f : ''}";
             } else {
-                html += column.encoded ? "${" : "#=";
+                html += column.encoded ? "#:" : "#=";
 
                 if (format) {
                     html += 'kendo.format(\"' + format.replace(formatRegExp,"\\$1") + '\",';
                 }
 
                 if (field) {
-                    field = paramName + "." + field;
+                    field = kendo.expr(field, paramName);
                     html += field + "==null?'':" + field;
                 } else {
                     html += "''";
@@ -2736,7 +2736,7 @@ kendo_module({
                     html += ")";
                 }
 
-                html += column.encoded ? "}" : "#";
+                html += "#";
             }
             return html;
         },

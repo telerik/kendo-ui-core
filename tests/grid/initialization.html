@@ -968,6 +968,15 @@
                 equal(grid.items().first().find("td:first").text(), "custom text1");
             });
 
+            test("column displays field defined via array access", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { field: "['foo']" }]
+                });
+
+                equal(grid.items().first().find("td:first").text(), "1");
+            });
+
             test("empty cell is displayed when value does not exists in values", function() {
                 var grid = new Grid($("<table/>"), {
                     dataSource: [{ foo: 3, bar: "bar"}],
