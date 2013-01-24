@@ -117,6 +117,19 @@
                 var multiselect = new MultiSelect(select);
 
                 ok(multiselect.popup);
+                ok(multiselect.popup instanceof kendo.ui.Popup);
+                equal(multiselect.popup.options.anchor[0], multiselect.wrapper[0]);
+                equal(multiselect.popup.element[0], multiselect.list[0]);
+            });
+
+            test("MultiSelect initializes an UL for its items", function() {
+                //select.attr("id", "multiselect");
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect.ul);
+                ok(multiselect.ul.is("ul"));
+                //ok(multiselect.list.attr("id"), input.attr("id") + "-list");
+                equal(multiselect.ul.css("overflow"), "auto");
             });
 
             test("MultiSelect calls value method on init", function() {

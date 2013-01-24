@@ -760,6 +760,7 @@ kendo_module({
 
         _list: function() {
             this.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
+                        .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
                         .on("click", "li.k-item", $.proxy(this._click, this));
 
             this.list = $("<div class='k-list-tags'/>")
