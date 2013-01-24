@@ -1905,7 +1905,7 @@ kendo_module({
                         row = current.parent().prevAll(NAVROW).first();
                         if (!row[0]) {
                             tableToFocus = that.thead.parent();
-                            focusTable(tableToFocus);
+                            focusTable(tableToFocus, true);
                             row = tableToFocus.find(NAVROW).first();
                         }
 
