@@ -123,12 +123,12 @@
             });
 
             test("MultiSelect initializes an UL for its items", function() {
-                //select.attr("id", "multiselect");
+                select.attr("id", "multiselect");
                 var multiselect = new MultiSelect(select);
 
                 ok(multiselect.ul);
                 ok(multiselect.ul.is("ul"));
-                //ok(multiselect.list.attr("id"), input.attr("id") + "-list");
+                ok(multiselect.list.attr("id"), select.attr("id") + "-list");
                 equal(multiselect.ul.css("overflow"), "auto");
             });
 

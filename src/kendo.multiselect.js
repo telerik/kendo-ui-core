@@ -765,6 +765,15 @@ kendo_module({
 
             this.list = $("<div class='k-list-tags'/>")
                         .append(this.ul);
+
+
+            var id = this.element.attr(ID);
+
+            if (id) {
+                this.list.attr(ID, id + "-list");
+                //that.ul.attr(ID, id + "_listbox");
+                //that._optionID = id + "_option_selected";
+            }
         },
 
         _wrapper: function() {
