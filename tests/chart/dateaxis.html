@@ -612,6 +612,16 @@
                     equals(dateAxis.options.baseUnit, "days");
                 });
 
+                test("Base unit is determined by series delta (DST boundary)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/03/24"), new Date("2012/03/25"), new Date("2012/03/26")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
                 test("Base unit is determined by series delta (month boundary)", function() {
                     createDateCategoryAxis({
                         categories: [
