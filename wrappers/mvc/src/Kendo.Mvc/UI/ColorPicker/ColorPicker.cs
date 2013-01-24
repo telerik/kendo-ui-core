@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
         {
             Palette = ColorPickerPalette.None;
             Enabled = true;
+            Buttons = true;
         }
 
         public ColorPickerPalette Palette { get; set; }
@@ -27,6 +28,8 @@ namespace Kendo.Mvc.UI
         public bool Enabled { get; set; }
 
         public bool Opacity { get; set; }
+
+        public bool Buttons { get; set; }
        
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -48,6 +51,11 @@ namespace Kendo.Mvc.UI
             if (Opacity)
             {
                 options["opacity"] = true;
+            }
+
+            if (!Buttons)
+            {
+                options["buttons"] = false;
             }
 
             writer.Write(Initializer.Initialize(Selector, "ColorPicker", options));

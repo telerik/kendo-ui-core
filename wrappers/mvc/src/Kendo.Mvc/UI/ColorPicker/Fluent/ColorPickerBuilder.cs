@@ -124,5 +124,24 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Shows or hides the accept/cancel buttons.
+        /// </summary>
+        /// <param name="value">Whether the buttons should be shown</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        ///             .Buttons(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPickerBuilder Buttons(bool value)
+        {
+            Component.Buttons = value;
+
+            return this;
+        }
     }
 }

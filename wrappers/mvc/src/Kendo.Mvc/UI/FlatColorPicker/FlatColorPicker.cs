@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI
         {
             Enabled = true;
             Input = true;
-            Buttons = true;
+            Buttons = false;
         }
 
         public string Value { get; set; }
@@ -42,9 +42,9 @@ namespace Kendo.Mvc.UI
                 options["input"] = false;
             }
 
-            if (!Buttons)
+            if (Buttons)
             {
-                options["buttons"] = false;
+                options["buttons"] = true;
             }
 
             if (!string.IsNullOrEmpty(Value))
