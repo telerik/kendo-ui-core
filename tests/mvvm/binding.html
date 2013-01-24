@@ -77,6 +77,14 @@
                 equal(dom.attr("data-foo"), "foo");
             });
 
+            test("binding to array access expression", function() {
+                var dom = $('<span data-bind="text: [\'1\']"></span>');
+
+                kendo.bind(dom, { "1": "foo" });
+
+                equal(dom.text(), "foo");
+            });
+
             test("binding immediate children", function() {
                 var dom = $('<span><img data-bind="attr: {alt:foo}"/></span>');
 

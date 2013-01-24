@@ -41,6 +41,17 @@
                 equal(dom.text(), "bar");
             });
 
+            test("changing a view model field reflects UI via array access", function() {
+                var viewModel = kendo.observable( {
+                    "1": "foo"
+                });
+
+                var dom = $('<span data-bind="text: [\'1\']"/>');
+                kendo.bind(dom, viewModel);
+                viewModel.set("['1']", "bar");
+                equal(dom.text(), "bar");
+            });
+
             test("field name of nested view model remains the same", 1, function() {
                 var viewModel = kendo.observable({
                     foo: {
@@ -168,6 +179,20 @@
 
                 dom.find("input").val("foo")
                     .trigger("keyup");
+            });
+
+            test("changing ui updates view model with array accessor", function() {
+                var viewModel = kendo.observable( {
+                    "1": "bar"
+                });
+
+                var dom = $('<input data-bind="value:[\'1\']"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.val("foo").trigger("change");
+
+                equal(viewModel["1"], "foo");
             });
 
             test("select of multi select updates the viewModel", function() {
