@@ -43,7 +43,7 @@
 
             module("kendo.ui.MultiSelect navigation", {
                 setup: function() {
-                    select = $("<select />").appendTo(document.body);
+                    select = $("<select multiple=multiple/>").appendTo(document.body);
                     popuplateSelect();
                 },
                 teardown: function() {

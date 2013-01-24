@@ -74,6 +74,7 @@ kendo_module({
             that._dataItems = [];
 
             that.element.hide();
+            that._initialValues = that.element.val();
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -159,8 +160,8 @@ kendo_module({
 
             that._height(length);
 
-            if (that._state !== "filter") {
-                that.value(that.options.value); // || that.element.val());
+            if (that._state !== "filter" && !that.element.val()) {
+                that.value(that.options.value || that._initialValues);
             }
 
             if (that._open) {

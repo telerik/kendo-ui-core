@@ -42,7 +42,7 @@
 
             module("kendo.ui.MultiSelect filtering", {
                 setup: function() {
-                    select = $("<select />").appendTo(document.body);
+                    select = $("<select multiple=multiple/>").appendTo(document.body);
                 },
                 teardown: function() {
                     if (select.data("kendoMultiSelect")) {

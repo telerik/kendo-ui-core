@@ -34,7 +34,7 @@
 
             module("kendo.ui.MultiSelect interaction", {
                 setup: function() {
-                    select = $("<select />").appendTo(document.body);
+                    select = $("<select multiple=multiple/>").appendTo(document.body);
                 },
                 teardown: function() {
                     if (select.data("kendoMultiSelect")) {
@@ -120,7 +120,7 @@
 
             module("kendo.ui.MultiSelect selection", {
                 setup: function() {
-                    select = $("<select />").appendTo(document.body);
+                    select = $("<select multiple=multiple />").appendTo(document.body);
                 },
                 teardown: function() {
                     if (select.data("kendoMultiSelect")) {
@@ -141,7 +141,7 @@
                 ok(select[0].children[1].selected);
             });
 
-            test("MultiSelect unselects corresponding option", function() {
+            test("MultiSelect unselects option", function() {
                 popuplateSelect();
 
                 var multiselect = new MultiSelect(select);
