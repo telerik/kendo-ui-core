@@ -79,8 +79,12 @@ kendo_module({
         _select: function(color, nohooks) {
             var prev = this._value;
             color = this.color(color);
-            if (!nohooks && !color.equals(prev)) {
-                this.trigger("change", { value: this.value() });
+            if (!nohooks) {
+                if (!color.equals(prev)) {
+                    this.trigger("change", { value: this.value() });
+                } else if (!this._standalone) {
+                    this.trigger("cancel");
+                }
             }
         },
         _triggerSelect: function(color) {
@@ -255,18 +259,19 @@ kendo_module({
             that.wrapper.find(".k-item." + ITEMSELECTEDCLASS)
                 .removeClass(ITEMSELECTEDCLASS)
                 .removeAttr("aria-selected");
-            var el = null, best = null, min = null;
+            var el = null, best = null;
+            // var min = null;
             that.wrapper.find(".k-item div").each(function(){
                 var c = parse($(this).css(BACKGROUNDCOLOR));
                 if (c) {
                     if (c.equals(color)) {
                         el = this.parentNode;
                     } else {
-                        var d = c.diff(color);
-                        if (min == null || d < min) {
-                            min = d;
-                            best = this.parentNode;
-                        }
+                        // var d = c.diff(color);
+                        // if (min == null || d < min) {
+                        //     min = d;
+                        //     best = this.parentNode;
+                        // }
                     }
                 }
             });
