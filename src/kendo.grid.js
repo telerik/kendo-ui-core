@@ -1274,7 +1274,7 @@ kendo_module({
 
                     if (navigatable) {
                         that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                        that.table.focus();
+                        focusTable(that.table);
                     }
                 });
 
@@ -1808,7 +1808,8 @@ kendo_module({
         },
 
         _scrollTo: function(element, container) {
-            var isHorizontal =  element.tagName.toLowerCase() === "td",
+            var elementToLowercase = element.tagName.toLowerCase(),
+                isHorizontal =  elementToLowercase === "td" || elementToLowercase === "th",
                 elementOffset = element[isHorizontal ? "offsetLeft" : "offsetTop"],
                 elementOffsetDir = element[isHorizontal ? "offsetWidth" : "offsetHeight"],
                 containerScroll = container[isHorizontal ? "scrollLeft" : "scrollTop"],
@@ -1890,6 +1891,7 @@ kendo_module({
                     currentIndex,
                     row,
                     index,
+                    tableToFocus,
                     shiftKey = e.shiftKey,
                     browser = kendo.support.browser,
                     current = currentProxy();
@@ -1902,7 +1904,9 @@ kendo_module({
                     if (current) {
                         row = current.parent().prevAll(NAVROW).first();
                         if (!row[0]) {
-                            row = that.thead.parent().focus().find(NAVROW).first();
+                            tableToFocus = that.thead.parent();
+                            focusTable(tableToFocus);
+                            row = tableToFocus.find(NAVROW).first();
                         }
 
                         index = current.index();
@@ -1920,7 +1924,8 @@ kendo_module({
                     if (current) {
                         row = current.parent().nextAll(NAVROW).first();
                         if (!row[0] && current.is("th")) {
-                            row = that.tbody.parent().focus().end().find(NAVROW).first();
+                            focusTable(that.tbody.parent());
+                            row = that.tbody.find(NAVROW).first();
                         }
                         index = current.index();
                         current = row.children().eq(index);
@@ -1973,7 +1978,7 @@ kendo_module({
                     }
                 } else if (keys.ESC == key) {
                     if (current && $.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
-                        that.table[0].focus();
+                        focusTable(that.table[0]);
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
                         if (isInCell) {
@@ -1990,7 +1995,7 @@ kendo_module({
                         if (browser.msie && parseInt(browser.version, 10) < 9) {
                             document.body.focus();
                         }
-                        table.focus();
+                        focusTable(table, true);
                         handled = true;
                     }
                 } else if (keys.TAB == key) {
@@ -2049,7 +2054,7 @@ kendo_module({
                 }
 
                 if (!that.editable) {
-                    that.table.focus();
+                    focusTable(that.table);
                     return;
                 }
 
@@ -2078,7 +2083,7 @@ kendo_module({
                 that.current(next);
             }
 
-            that.table.focus();
+            focusTable(that.table, true);
             if ((!isEdited && !next) || next) {
                 if (mode == "incell") {
                     that.editCell(that.current());
@@ -2446,7 +2451,7 @@ kendo_module({
                 sortable,
                 filterable,
                 closeCallback = function() {
-                    that.thead.parent().focus();
+                    focusTable(that.thead.parent(), true);
                 },
                 initCallback = function(e) {
                     that.trigger(COLUMNMENUINIT, { field: e.field, container: e.container });
@@ -2495,7 +2500,7 @@ kendo_module({
                 cell,
                 filterMenu,
                 closeCallback = function() {
-                    that.thead.parent().focus();
+                    focusTable(that.thead.parent(), true);
                 },
                 filterable = that.options.filterable;
 
@@ -2633,7 +2638,7 @@ kendo_module({
                 }
 
                 if (length) { // data item is an object
-                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + kendo.expr("uid", settings.paramName) + '#"';
+                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + settings.paramName + '.uid#"';
                 }
 
                 rowTemplate += " role='row'>";
@@ -2723,14 +2728,14 @@ kendo_module({
                 html += field + "]#";
                 html += "${f != null ? f : ''}";
             } else {
-                html += column.encoded ? "#:" : "#=";
+                html += column.encoded ? "${" : "#=";
 
                 if (format) {
                     html += 'kendo.format(\"' + format.replace(formatRegExp,"\\$1") + '\",';
                 }
 
                 if (field) {
-                    field = kendo.expr(field, paramName);
+                    field = paramName + "." + field;
                     html += field + "==null?'':" + field;
                 } else {
                     html += "''";
@@ -2740,7 +2745,7 @@ kendo_module({
                     html += ")";
                 }
 
-                html += "#";
+                html += column.encoded ? "}" : "#";
             }
             return html;
         },
@@ -3473,7 +3478,7 @@ kendo_module({
                 }
 
                 if (that._current) {
-                    that._current.closest("table")[0].focus();
+                    focusTable(that._current.closest("table")[0]);
                 }
             }
 
@@ -3504,6 +3509,24 @@ kendo_module({
        return null;
    }
 
+    function focusTable(table, direct) {
+        if (direct === true) {
+            var condition = kendo.support.browser.msie && table.parent().is(".k-grid-content,.k-grid-header-wrap");
+                if (condition) {
+                    var scrollTop = table.parent().scrollTop(),
+                        scrollLeft = table.parent().scrollLeft();
+                }
+               table.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+                if (condition) {
+                    table.parent().scrollTop(scrollTop);
+                    table.parent().scrollLeft(scrollLeft);
+                }
+
+        } else {
+            $(table).one("focusin", function(e) { e.preventDefault(); }).focus();
+        }
+    }
+
    function tableClick(e) {
        var currentTarget = $(e.currentTarget),
            currentTable = currentTarget.closest("table")[0];
@@ -3516,7 +3539,7 @@ kendo_module({
 
        if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
            setTimeout(function() {
-               currentTable.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+               focusTable(currentTable);
            });
        }
 
