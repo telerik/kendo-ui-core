@@ -172,6 +172,7 @@
     <Compile Include="Controllers\Web\DateTimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\DropDownList\ApiController.cs" />
     <Compile Include="Controllers\Web\DropDownList\CascadingDropDownListController.cs" />
+    <Compile Include="Controllers\Web\DropDownList\NavigationController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RtlController.cs" />
     <Compile Include="Controllers\Web\DropDownList\EventsController.cs" />
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
@@ -429,6 +430,7 @@
     <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\dropdownlist\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\all_tools.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\api.aspx" />

@@ -1,12 +1,14 @@
 
         <div id="example" class="k-content">
             <div id="to-do">
-                    <input id="datetimepicker" value="10/10/2011 12:00 AM" style="width:200px;" />
+                    <input id="datetimepicker" style="width:200px;" />
             </div>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 // create DateTimePicker from input HTML element
-                $("#datetimepicker").kendoDateTimePicker();
+                $("#datetimepicker").kendoDateTimePicker({
+                    value:new Date()
+                });
             });
         </script>
         <style scoped>

@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
-    <h3>Select date:</h3>
+    <h3>Select date & time:</h3>
     <%= Html.Kendo().DateTimePicker()
             .Name("datetimepicker")
             .HtmlAttributes(new { style = "width:200px", accesskey = "w" })

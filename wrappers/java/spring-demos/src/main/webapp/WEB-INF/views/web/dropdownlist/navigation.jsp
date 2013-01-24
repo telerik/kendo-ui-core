@@ -4,7 +4,8 @@
 <demo:header />
 	<div class="demo-section">
 		<h3>T-shirt Size</h3>
-		<kendo:dropDownList name="sizes" filter="contains" optionLabel="Select fabric..." accesskey="w">
+		<kendo:dropDownList name="sizes" filter="contains" accesskey="w" 
+					dataTextField="text" dataValueField="value">
 	        <kendo:dataSource data="${sizes}"></kendo:dataSource>
 		</kendo:dropDownList>
 	</div>

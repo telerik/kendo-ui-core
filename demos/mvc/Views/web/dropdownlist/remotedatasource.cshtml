@@ -1,29 +1,21 @@
 
         <div id="example" class="k-content">
             
-            <div class="demo-section" style="width: 250px; text-align: center;">
+            <div class="demo-section" style="width: 250px;">
                 <label for="titles">Select Title:</label> <input id="titles"/>
             </div>
 
             <script>
                 $(document).ready(function() {
                     $("#titles").kendoDropDownList({
-                        dataTextField: "Name",
-                        dataValueField: "Id",
+                        dataTextField: "ProductName",
+                        dataValueField: "ProductID",
                         dataSource: {
-                            type: "odata",
-                            serverFiltering: true,
-                            filter: [{
-                                field: "Name",
-                                operator: "contains",
-                                value: "Star Wars"
-                            },{
-                                field: "BoxArt.SmallUrl",
-                                operator: "neq",
-                                value: null
-                            }],
                             transport: {
-                                read: "http://odata.netflix.com/Catalog/Titles"
+                                read: {
+                                    dataType: "jsonp",
+                                    url: "http://demos.kendoui.com/service/Products",
+                                }
                             }
                         }
                     });

@@ -9,7 +9,7 @@
     <div id="cap" class="black-cap"></div>
     <div id="options">
     <h3>Cap Color</h3>
-    <kendo:dropDownList name="color" dataTextField="text" dataValueField="value" change="change" value="2">
+    <kendo:dropDownList name="color" dataTextField="text" dataValueField="value" change="change" value="1">
         <kendo:dataSource data="${colors}"></kendo:dataSource>
     </kendo:dropDownList>  
 

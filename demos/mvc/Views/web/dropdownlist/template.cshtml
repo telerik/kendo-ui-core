@@ -12,28 +12,20 @@
             <script>
                 $(document).ready(function() {
                     $("#titles").kendoDropDownList({
-                        dataTextField: "Name",
-                        dataValueField: "Id",
+                        dataTextField: "ContactName",
+                        dataValueField: "CustomerID",
                         // define custom template
-                        template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />' +
-                                  '<dl>' +
-                                      '<dt>Title:</dt><dd>${ data.Name }</dd>' +
-                                      '<dt>Year:</dt><dd>${ data.ReleaseYear }</dd>' +
-                                  '</dl>',
+                        template: "<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
+                            "<dl>" +
+                                "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
+                                "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
+                            "</dl>",
                         dataSource: {
-                            type: "odata",
-                            serverFiltering: true,
-                            filter: [{
-                                field: "Name",
-                                operator: "contains",
-                                value: "Star Wars"
-                            },{
-                                field: "BoxArt.SmallUrl",
-                                operator: "neq",
-                                value: null
-                            }],
                             transport: {
-                                read: "http://odata.netflix.com/Catalog/Titles"
+                                read: {
+                                    dataType: "jsonp",
+                                    url: "http://demos.kendoui.com/service/Customers",
+                                }
                             }
                         }
                     });

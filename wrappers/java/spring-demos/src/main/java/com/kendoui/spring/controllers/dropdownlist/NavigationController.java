@@ -5,17 +5,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kendoui.spring.models.DropDownListItem;
+
 @Controller("dropdownlist-navigation-controller")
 @RequestMapping(value="/web/dropdownlist/")
 public class NavigationController {
     
     @RequestMapping(value = {"/navigation"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("sizes", new String[] {
-            "S - 6 3/4\"",
-            "M - 7 1/4\"",
-            "L - 7 1/8\"",
-            "XL - 7 5/8\""
+        model.addAttribute("sizes", new DropDownListItem[] {
+                new DropDownListItem("X-Small", "1"),
+                new DropDownListItem("Small", "2"),
+                new DropDownListItem("Medium", "3"),
+                new DropDownListItem("Large", "4"),
+                new DropDownListItem("X-Large", "5"),
+                new DropDownListItem("2X-Large", "6"),
         });
         
         return "web/dropdownlist/navigation";
