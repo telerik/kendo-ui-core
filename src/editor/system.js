@@ -418,6 +418,8 @@ var Clipboard = Class.extend({
             selectRange(clipboardRange);
         }
 
+        range.deleteContents();
+
         setTimeout(function() {
             var html, args = { html: "" };
 
