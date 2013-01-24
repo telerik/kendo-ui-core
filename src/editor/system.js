@@ -438,6 +438,10 @@ var Clipboard = Class.extend({
 
             html = clipboardNode.innerHTML;
 
+            if (kendo.support.browser.safari) {
+                html = html.replace(/style="[^"]*"/gi, "");
+            }
+
             if (html != bom) {
                 args.html = html;
             }
