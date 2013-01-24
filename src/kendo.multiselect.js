@@ -495,21 +495,28 @@ kendo_module({
                     return;
                 }
 
-                current = sibling(current[0], "nextSibling");
                 if (current) {
-                    that.current($(current));
+                    current = sibling(current[0], "nextSibling");
+                    if (current) {
+                        that.current($(current));
+                    }
                 }
 
                 e.preventDefault();
-            } else if (key === keys.UP && visible) {
-                that.current($(sibling(current[0], "previousSibling")));
-                if (!that._current[0]) {
-                    that.close();
+            } else if (key === keys.UP) {
+                if (visible && current) {
+                    that.current($(sibling(current[0], "previousSibling")));
+
+                    if (!that._current[0]) {
+                        that.close();
+                    }
                 }
                 e.preventDefault();
-            } else if (key === keys.ENTER && visible) {
-                that._select(current);
-                that.close();
+            } else if (key === keys.ENTER) {
+                if (visible) {
+                    that._select(current);
+                    that.close();
+                }
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
