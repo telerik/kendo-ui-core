@@ -63,6 +63,17 @@
             equal(dom.find("li").text(), "foo");
         });
 
+        test("dataTextField as array access expression", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataTextField: "['foo']",
+                dataSource: [{ foo: "foo" }]
+            });
+
+            equal(dom.find("li").text(), "foo");
+        });
+
         test("binding raises the dataBinding event", 1, function() {
             var dom = $("<ul/>");
 
