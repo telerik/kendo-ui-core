@@ -2195,10 +2195,10 @@
                 y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
             } else {
                 if (options.isStacked) {
-                    x = box.x2 - tooltipWidth;
+                    x = aboveAxis ? box.x2 - tooltipWidth : box.x1;
                     y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
                 } else {
-                    x = box.x2 + TOOLTIP_OFFSET;
+                    x = aboveAxis ? box.x2 + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
                     y = box.y1;
                 }
             }
