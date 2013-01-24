@@ -11,6 +11,8 @@
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.multiselect.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" type="text/css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.default.css" type="text/css" />
     </head>
     <body>
         <h1 id="qunit-header">MultiSelect navigation</h1>
@@ -32,9 +34,10 @@
                 });
             }
 
-            function popuplateSelect() {
+            function populateSelect(length) {
                 var options = [];
-                for (var i=0; i < 5; i++) {
+                length = length || 5;
+                for (var i=0; i < length; i++) {
                     options.push("<option value='" + i + "'>Option" + i + "</option>");
                 }
 
@@ -44,7 +47,7 @@
             module("kendo.ui.MultiSelect navigation", {
                 setup: function() {
                     select = $("<select multiple=multiple/>").appendTo(document.body);
-                    popuplateSelect();
+                    populateSelect();
                 },
                 teardown: function() {
                     if (select.data("kendoMultiSelect")) {
@@ -216,6 +219,20 @@
                         ok(true);
                     }
                 });
+            });
+
+            test("MultiSelect scrolls list to the focused element", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.open();
+                multiselect.ul[0].scrollTop = 50;
+
+                multiselect.close();
+                multiselect.open();
+
+                equal(multiselect.ul[0].scrollTop, 0);
             });
 
       </script>

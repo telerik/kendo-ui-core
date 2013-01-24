@@ -145,8 +145,8 @@ kendo_module({
                 that._open = true;
                 that._filterSource();
             } else {
-                that.current($(first(that.ul[0])));
                 popup.open();
+                that.current($(first(that.ul[0])));
             }
         },
 
