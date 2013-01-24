@@ -104,6 +104,14 @@
                 var dataItem = { foo: { bar: 0 } };
                 equal(getter("foo.bar", true)(dataItem), 0);
             });
+
+            test("expr with custom parameter name", function() {
+                equal("data.foo", kendo.expr("foo", "data"));
+            });
+
+            test("safe expr with custom parameter name", function() {
+                equal("(data.foo)", kendo.expr("foo", true, "data"));
+            });
         </script>
     </body>
 </html>

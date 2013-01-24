@@ -4,6 +4,10 @@ tests.push(
         title: "core class"
     },
     {
+        page: "core/accessor.html",
+        title: "accessors"
+    },
+    {
         page: "core/kendo-jquery.html",
         title: "kendo jquery"
     },

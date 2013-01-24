@@ -2093,8 +2093,8 @@ function pad(number, digits, end) {
         support.resize = "resize";
     }
 
-    var wrapExpression = function(members) {
-        var result = "d",
+    var wrapExpression = function(members, paramName) {
+        var result = paramName || "d",
             index,
             idx,
             length,
@@ -2177,17 +2177,24 @@ function pad(number, digits, end) {
             return url && !localUrlRe.test(url);
         },
 
-        expr: function(expression, safe) {
+        expr: function(expression, safe, paramName) {
             expression = expression || "";
+
+            if (typeof safe == STRING) {
+                paramName = safe;
+                safe = false;
+            }
+
+            paramName = paramName || "d";
 
             if (expression && expression.charAt(0) !== "[") {
                 expression = "." + expression;
             }
 
             if (safe) {
-                expression =  wrapExpression(expression.split("."));
+                expression = wrapExpression(expression.split("."), paramName);
             } else {
-                expression = "d" + expression;
+                expression = paramName + expression;
             }
 
             return expression;
