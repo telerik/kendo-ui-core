@@ -234,18 +234,25 @@ kendo_module({
             that._shouldFixHeaders();
             that._style();
 
-            that._invalidateScroller();
+            that._invalidateLoadMore();
 
             that.trigger("dataBound", { ns: ui });
         },
 
-        _invalidateScroller: function() {
+        _invalidateLoadMore: function() {
             var that = this,
                 options = that.options,
-                dataSource = that.dataSource;
+                dataSource = that.dataSource,
+                shouldInit = that._stopLoadMore && (!dataSource.total() || dataSource.page() < dataSource.totalPages());
 
-            if (options.endlessScroll && that._stopEndlessScrolling && (!dataSource.total() || dataSource.page() < dataSource.totalPages())) {
-                that.initEndlessScrolling();
+            if (shouldInit) {
+                if (options.endlessScroll) {
+                    that.initEndlessScrolling();
+                }
+
+                if (options.loadMore) {
+                    that.initLoadMore();
+                }
             }
         },
 
@@ -284,7 +291,7 @@ kendo_module({
         },
 
         initEndlessScrolling: function() {
-            this._stopEndlessScrolling = false;
+            this._stopLoadMore = false;
             this._scroller().setOptions({
                 resize: this._scrollerResize,
                 scroll: this._scrollerScroll
@@ -297,7 +304,7 @@ kendo_module({
 
            if (scroller && that._loadIcon) {
                that.loading = false;
-               that._stopEndlessScrolling = true;
+               that._stopLoadMore = true;
                that._loadIcon.parent().hide();
 
                scroller.unbind("resize", that._scrollerResize)
@@ -307,10 +314,18 @@ kendo_module({
            }
         },
 
+        initLoadMore: function() {
+            var that = this;
+
+            that._stopLoadMore = false;
+            that._loadButton.on("up", proxy(that._nextPage, that));
+        },
+
         stopLoadMore: function() {
            var that = this;
 
            if (that._loadButton) {
+               that._stopLoadMore = true;
                that.loading = false;
                that._loadButton
                    .kendoDestroy()
@@ -629,7 +644,9 @@ kendo_module({
                 loadWrapper = $('<span class="km-load-more"></span>').append(that._loadIcon);
 
                 if (loadMore) {
-                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>').on("up", proxy(that._nextPage, that));
+                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>');
+
+                    that.initLoadMore();
 
                     loadWrapper.append(that._loadButton);
                 }
