@@ -2559,8 +2559,8 @@ function pad(number, digits, end) {
         events: [],
 
         view: function() {
-            var viewElement = this.element.closest(kendo.roleSelector("view splitview"));
-            return viewElement.data("kendoMobileView") || viewElement.data("kendoMobileSplitView");
+            var viewElement = this.element.closest(kendo.roleSelector("view splitview modalview"));
+            return kendo.widgetInstance(viewElement, kendo.mobile.ui);
         },
 
         container: function() {
