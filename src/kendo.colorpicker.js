@@ -77,8 +77,9 @@ kendo_module({
             this._onEnable(enable);
         },
         _select: function(color, nohooks) {
+            var prev = this._value;
             color = this.color(color);
-            if (!nohooks) {
+            if (!nohooks && !color.equals(prev)) {
                 this.trigger("change", { value: this.value() });
             }
         },
@@ -866,12 +867,9 @@ kendo_module({
         toggle: function() {
             this._getPopup().toggle();
         },
-        _select: function(value) {
-            value = this.color(value);
-            this.trigger("change", { value: this.value() });
-        },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
+        _select: ColorSelector.fn._select,
         _triggerSelect: ColorSelector.fn._triggerSelect,
         _isInputTypeColor: function() {
             var el = this.element[0];
