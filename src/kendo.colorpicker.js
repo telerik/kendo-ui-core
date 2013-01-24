@@ -116,7 +116,7 @@ kendo_module({
             }
             self.trigger(ev, { value: color });
         }
-    };
+    }
 
     function map(a, f) {
         if (a.map) {
