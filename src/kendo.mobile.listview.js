@@ -641,14 +641,14 @@
 
         _showLoading: function() {
             var view = this.view();
-            if (view) {
+            if (view && view.loader) {
                 view.loader.show();
             }
         },
 
         _hideLoading: function() {
             var view = this.view();
-            if (view) {
+            if (view && view.loader) {
                 view.loader.hide();
             }
         }
