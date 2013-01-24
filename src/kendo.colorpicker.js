@@ -123,7 +123,7 @@ kendo_module({
                 colors = map(colors, parse);
             }
 
-            element.addClass("k-colorpicker-popup")
+            element.addClass("k-colorpalette")
                 .append($(that._template({
                     colors : colors,
                     size   : options.size,
