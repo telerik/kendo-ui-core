@@ -1551,7 +1551,7 @@ kendo_module({
                 cat = toDate(categories[categoryIx]);
 
                 if (cat && lastCat) {
-                    diff = cat - lastCat;
+                    diff = dateDiff(cat, lastCat);
                     if (diff > 0) {
                         minDiff = math.min(minDiff, diff);
 
