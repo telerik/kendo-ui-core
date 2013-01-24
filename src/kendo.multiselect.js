@@ -512,7 +512,7 @@ kendo_module({
                 that.close();
                 e.preventDefault();
             } else if (key === keys.ESC) {
-                if (that.popup.visible()) { //TODO: test it
+                if (visible) {
                     e.preventDefault();
                 }
 

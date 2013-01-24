@@ -204,6 +204,20 @@
                 ok(!multiselect.popup.visible());
             });
 
+            test("MultiSelect prevent default on ESC", 1, function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.ESC,
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
