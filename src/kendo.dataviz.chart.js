@@ -7516,11 +7516,14 @@ kendo_module({
         } else if (unit === DAYS) {
             return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
         } else if (unit === HOURS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours() + value);
+            var result = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + value);
+            if (value > 0 && dateEquals(date, result)) {
+                result = addDuration(date, value + 1, unit, weekStartDay);
+            }
+            return result;
         } else if (unit === MINUTES) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours(), date.getMinutes() + value);
+            result = new Date(date.getTime() + value * TIME_PER_MINUTE);
+            return result;
         }
 
         return date;
