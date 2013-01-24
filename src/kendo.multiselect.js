@@ -11,8 +11,11 @@ kendo_module({
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        browser = kendo.support.browser,
         ID = "id",
         CHANGE = "change",
+        OPEN = "open",
+        CLOSE = "close",
         FOCUSED = "k-state-focused",
         HIDE = ' style="display:none"',
         ns = ".kendoMultiSelect",
@@ -81,6 +84,7 @@ kendo_module({
             name: "MultiSelect",
             autoBind: true,
             delay: 100,
+            height: 200,
             ignoreCase: true,
             filter: "startswith",
             dataTextField: "",
@@ -146,14 +150,14 @@ kendo_module({
         },
 
         toggle: function(toggle) {
-            this[toggle ? "open" : "close"]();
+            this[toggle ? OPEN : CLOSE]();
         },
 
         refresh: function() {
             var that = this,
-                data = that.dataSource.view();
+                length = that._render(that.dataSource.view());
 
-            that._render(data);
+            that._height(length);
 
             if (that._state !== "filter") {
                 that.value(that.options.value); // || that.element.val());
@@ -165,12 +169,7 @@ kendo_module({
                 }
 
                 that._open = false;
-
-                if (data[0]) {
-                    that.open()
-                } else {
-                    that.close();
-                }
+                that.toggle(length);
             }
         },
 
@@ -178,18 +177,21 @@ kendo_module({
             var that = this,
                 length = data.length,
                 template = that.itemTemplate,
-                idx = 0,
-                html = "",
-                options = "",
                 values = that._dataItems.slice(0),
+                visibleItems = 0, idx = 0,
+                options = "", html = "",
                 dataItem, selected;
 
-            for(; idx < length; idx++) {
+            for (; idx < length; idx++) {
                 dataItem = data[idx];
                 selected = that._selected(values, dataItem);
 
                 html += template(dataItem, idx, selected);
                 options += that._option(dataItem, selected);
+
+                if (!selected) {
+                    visibleItems += 1;
+                }
             }
 
             length = values.length
@@ -201,6 +203,8 @@ kendo_module({
 
             that.ul[0].innerHTML = html;
             that.element.html(options);
+
+            return visibleItems;
         },
 
         _selected: function(values, dataItem) {
@@ -294,7 +298,6 @@ kendo_module({
             return this.input.val();
         },
 
-
         _search: function() {
             var that = this;
 
@@ -307,16 +310,82 @@ kendo_module({
             }, that.options.delay);
         },
 
+        //refactor start
         _popup: function() {
             var that = this,
-                list = that.list,
+                input = that.input,
                 options = that.options,
                 wrapper = that.wrapper;
 
-            that.popup = new ui.Popup(list, $.extend({}, options.popup, {
+            that.popup = new ui.Popup(that.list, $.extend({}, options.popup, {
                 anchor: wrapper,
+                open: function(e) {
+                    that._adjustListWidth();
+
+                    if (that.trigger(OPEN)) {
+                        e.preventDefault();
+                    } else {
+                        /*input.attr("aria-expanded", true);
+                        that.ul.attr("aria-hidden", false);*/
+                    }
+                },
+                close: function(e) {
+                    if (that.trigger(CLOSE)) {
+                        e.preventDefault();
+                    } else {
+                        /*input.attr("aria-expanded", false);
+                        that.ul.attr("aria-hidden", true);*/
+                    }
+                },
+                animation: options.animation,
                 isRtl: kendo.support.isRtl(wrapper)
             }));
+
+            that._touchScroller = kendo.touchScroller(that.popup.element);
+        },
+
+        _height: function(length) {
+            if (length) {
+                var that = this,
+                    list = that.list,
+                    visible = that.popup.visible(),
+                    height = that.options.height;
+
+                list = list.add(list.parent(".k-animation-container")).show()
+                           .height(that.ul[0].scrollHeight > height ? height : "auto");
+
+                if (!visible) {
+                    list.hide();
+                }
+            }
+        },
+
+        _adjustListWidth: function() {
+            var list = this.list,
+                width = list[0].style.width,
+                wrapper = this.wrapper,
+                computedStyle, computedWidth;
+
+            if (!list.data("width") && width) {
+                return;
+            }
+
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
+
+            if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+            }
+
+            width = computedWidth - (list.outerWidth() - list.width());
+
+            list.css({
+                fontFamily: wrapper.css("font-family"),
+                width: width
+            })
+            .data("width", width);
+
+            return true;
         },
 
         _templates: function() {

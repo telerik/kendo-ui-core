@@ -145,6 +145,56 @@
                 equal(searchText.css("letter-spacing"), input.css("letter-spacing"));
             });
 
+
+            test("multiselect can be initialized in hidden container", function() {
+                popuplateSelect();
+
+                var div = $("<div style='display: none'></div>").appendTo(document.body),
+                    multiselect = select.appendTo(div).kendoMultiSelect().data("kendoMultiSelect");
+
+                div.show();
+                multiselect.popup.open();
+
+                equal(multiselect.popup.element.parent().width(), multiselect.wrapper.width(), 2);
+            });
+
+            test("multiselect does not set width if list has style.width", function() {
+                popuplateSelect();
+                var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
+
+                multiselect.list.width(400);
+
+                multiselect.open();
+
+                equal(multiselect.list.width(), 400);
+            });
+
+            test("MultiSelect sets static height to the list", function() {
+                var dataSource = new kendo.data.DataSource.create([1, 2, 3, 4, 5]);
+                dataSource.read();
+
+                var multiselect = select.kendoMultiSelect({
+                    autoBind: false,
+                    dataSource: dataSource,
+                    template: "<div style='height:30px'><%= data %> </div>",
+                    height: 50
+                }).data("kendoMultiSelect");
+
+                multiselect.refresh();
+
+                equal(multiselect.list.height(), 50);
+            });
+
+            test("MultiSelect shrinks ul if the height of the items is more then options.height", function() {
+                popuplateSelect();
+                var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
+                multiselect.options.height = 50;
+
+                multiselect.refresh();
+
+                equal(multiselect.list.css("height"), "50px");
+            });
+
             /*test("MultiSelect uses select.value on init", function() {
                 popuplateSelect();
                 select.value = "0";
