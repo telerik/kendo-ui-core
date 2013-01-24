@@ -1385,9 +1385,9 @@ p#copy
     padding: 0 10px;
 }
 
-.demo-section .title {
+.demo-section > .title {
     margin: 5px 0 15px 0;
-    text-align: center; 
+    text-align: center;
 }
 
 .k-block

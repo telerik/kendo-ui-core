@@ -18,21 +18,19 @@
     <script>
 
         function select(e) {
-            $("#bike-" + this.element.attr("id")).css("background-color", e.value.toCss());
+            $("#bike-" + this.element.attr("id")).css("background-color", e.value);
         }
 
         $("#tail").kendoFlatColorPicker({
-            input: false,
-            buttons: false,
+            preview: false,
             value: "#000",
-            select: select
+            change: select
         });
 
         $("#head").kendoFlatColorPicker({
-            input: false,
-            buttons: false,
+            preview: false,
             value: "#e15613",
-            select: select
+            change: select
         });
     </script>
 
@@ -76,7 +74,7 @@
         }
 
         .picker-wrapper .k-hsv-gradient {
-            height: 100px;
+            height: 140px;
         }
 
         .picker-wrapper h3 {

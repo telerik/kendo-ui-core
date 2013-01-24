@@ -1,14 +1,16 @@
 <div id="example">
 
-    <div id="background">
-        <div class="column">
-            <h3 class="title">Select Wall Paint</h3>
-            <div id="palette"></div>
-        </div>
+    <div class="demo-section">
+        <div id="background">
+            <div class="column">
+                <h3 class="title">Select Wall Paint</h3>
+                <div id="palette"></div>
+            </div>
 
-        <div class="column">
-            <h3 class="title">Choose Custom Color</h3>
-            <div id="picker"></div>
+            <div class="column">
+                <h3 class="title">Choose Custom Color</h3>
+                <div id="picker"></div>
+            </div>
         </div>
     </div>
 
@@ -41,11 +43,17 @@
     </script>
 
     <style scoped>
+
+        .demo-section {
+            width: 600px;
+            height: 600px;
+        }
+
         #background {
             background-image: url(../../content/web/colorpicker/interior-bg.png);
             background-color: transparent;
-            width: 600px;
-            height: 600px;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
         }
 

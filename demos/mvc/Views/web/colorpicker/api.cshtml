@@ -1,79 +1,72 @@
 <div id="example" class="k-content">
-  <div style="float: left">
-    <input id="colorpicker" value="#00f" />
-    <div id="colorhsv" style="margin-top: 1em"></div>
-  </div>
+    <div class="demo-section" style="float: left">
+        <label for="colorpicker">ColorPicker:</label>
+        <input id="colorpicker" value="#00f" />
+    </div>
 
-  <div class="configuration k-widget k-header" style="width: 220px">
-    <span class="configHead">API Functions</span>
-    <ul class="options">
-      <li><button id="get" class="k-button">Get value</button></li>
-      <li>
-        <input id="value" value="#ff0000" style="float: none; width: 6em" />
-        <button id="set" class="k-button">Set value</button>
-      </li>
-      <li>
-        <button id="enable" class="k-button">Enable</button> or
-        <button id="disable" class="k-button">Disable</button>
-      </li>
-      <li>
-        <button id="open" class="k-button">Open</button> or
-        <button id="close" class="k-button">Close</button> the color picker
-      </li>
-    </ul>
-  </div>
+    <div class="configuration k-widget k-header" style="width: 220px">
+        <span class="configHead">API Functions</span>
+        <ul class="options">
+            <li><button id="get" class="k-button">Get value</button></li>
+            <li>
+                <input id="value" value="#ff0000" style="float: none; width: 6em" />
+                <button id="set" class="k-button">Set value</button>
+            </li>
+            <li>
+                <button id="enable" class="k-button">Enable</button> or
+                <button id="disable" class="k-button">Disable</button>
+            </li>
+            <li>
+                <button id="open" class="k-button">Open</button> or
+                <button id="close" class="k-button">Close</button> the color picker
+            </li>
+        </ul>
+    </div>
 
-  <script>
-    var colorpicker = $("#colorpicker").kendoColorPicker({
-        toolIcon: "k-foreColor",
-        palette: "websafe"
-    }).data("kendoColorPicker");
+    <script>
+        var colorpicker = $("#colorpicker").kendoColorPicker({
+            toolIcon: "k-foreColor"
+        }).data("kendoColorPicker");
 
-    var colorhsv = $("#colorhsv").kendoFlatColorPicker({
-        buttons: false,
-        value: "#00f"
-    }).data("kendoFlatColorPicker");
+        $("#enable").click(function(){
+            colorpicker.enable();
+        });
 
-    colorpicker.bind("change", function() {
-        colorhsv.value(this.value());
-    });
+        $("#disable").click(function(){
+            colorpicker.enable(false);
+        });
 
-    colorhsv.bind("select", function(ev) {
-        colorpicker.value(ev.value);
-    });
+        $("#get").click(function(){
+            alert( colorpicker.value() );
+        });
 
-    $("#enable").click(function(){
-        colorpicker.enable();
-        colorhsv.enable();
-    });
+        $("#set").click(function(){
+            var color = $("#value").val();
+            try {
+                color = kendo.parseColor(color);
+                colorpicker.value(color);
+            } catch(ex) {
+                alert('Cannot parse color: "' + color + '"');
+            }
+        });
 
-    $("#disable").click(function(){
-        colorpicker.enable(false);
-        colorhsv.enable(false);
-    });
+        $("#open").click(function(){
+            colorpicker.open();
+        });
 
-    $("#get").click(function(){
-        alert( colorpicker.value() );
-    });
+        $("#close").click(function(){
+            colorpicker.close();
+        });
+    </script>
 
-    $("#set").click(function(){
-        var color = $("#value").val();
-        try {
-            color = kendo.parseColor(color);
-            colorpicker.value(color);
-            colorhsv.value(color);
-        } catch(ex) {
-            alert('Cannot parse color: "' + color + '"');
+    <style scoped>
+        .demo-section {
+            padding: 30px;
         }
-    });
 
-    $("#open").click(function(){
-        colorpicker.open();
-    });
+        .demo-section label {
+            padding-right: 5px;
+        }
 
-    $("#close").click(function(){
-        colorpicker.close();
-    });
-  </script>
-
+    </style>
 </div>
