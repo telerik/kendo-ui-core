@@ -35,14 +35,17 @@ kendo_module({
     var ColorSelector = Widget.extend({
         init: function(element, options) {
             var that = this;
+
             Widget.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
             that._value = options.value = parse(options.value);
+
             var ariaId = that._ariaId = options.ariaId;
             if (ariaId) {
                 element.attr("aria-labelledby", ariaId);
             }
+
             if (options._standalone) {
                 this._triggerSelect = this._triggerChange;
             }
@@ -412,7 +415,7 @@ kendo_module({
         options: {
             name: "FlatColorPicker",
             opacity: false,
-            buttons: true,
+            buttons: false,
             input: true,
             preview: true,
             messages: APPLY_CANCEL
@@ -906,39 +909,44 @@ kendo_module({
             }
         },
         _getPopup: function() {
-            var that = this, p = that._popup;
-            if (!p) {
-                var opt = this.options;
-                var ctor;
-                if (opt.palette) {
-                    ctor = ColorPalette;
+            var that = this, popup = that._popup;
+
+            if (!popup) {
+                var options = this.options;
+                var selectorType;
+
+                if (options.palette) {
+                    selectorType = ColorPalette;
                 } else {
-                    ctor = FlatColorPicker;
+                    selectorType = FlatColorPicker;
                 }
-                opt._standalone = false;
-                var sel = this._selector = new ctor($("<div></div>").appendTo(document.body), opt);
-                that._popup = p = sel.wrapper.kendoPopup({
+
+                options._standalone = false;
+
+                var selector = this._selector = new selectorType($("<div></div>").appendTo(document.body), options);
+
+                that._popup = popup = selector.wrapper.kendoPopup({
                     anchor: that.wrapper
                 }).data("kendoPopup");
-                sel.bind({
+                selector.bind({
                     select: function(ev){
                         that._updateUI(parse(ev.value));
                     },
                     change: function(){
-                        that._select(sel.color());
+                        that._select(selector.color());
                         that.close();
                     },
                     cancel: function() {
                         that.close();
                     }
                 });
-                p.bind({
+                popup.bind({
                     close: function(ev){
                         if (that.trigger("close")) {
                             ev.preventDefault();
                             return;
                         }
-                        var color = sel._selectOnHide();
+                        var color = selector._selectOnHide();
                         if (!color) {
                             that.wrapper.focus();
                             that._updateUI(that.color());
@@ -952,12 +960,12 @@ kendo_module({
                         }
                     },
                     activate: function(){
-                        sel._select(that.color(), true);
-                        sel.focus();
+                        selector._select(that.color(), true);
+                        selector.focus();
                     }
                 });
             }
-            return p;
+            return popup;
         }
     });
 
