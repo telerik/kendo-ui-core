@@ -137,14 +137,21 @@ kendo_module({
                 .attr("tabIndex", 0)
                 .on(KEYDOWN_NS, bind(that._keydown, that));
 
-            var size = options.size;
+            var size = options.size, width, height;
             if (size) {
-                size += "px";
-                element.find(".k-item").css({ width: size, height: size });
+                if (/number|string/.test(typeof size)) {
+                    width = height = parseFloat(size);
+                } else if (typeof size == "object") {
+                    width = parseFloat(size.width);
+                    height = parseFloat(size.height);
+                } else {
+                    throw new Error("Unsupported value for the 'size' argument");
+                }
+                element.find(".k-item").css({ width: width, height: height });
             }
 
             if (options.columns) {
-                element.css("width", options.columns * (options.size || 14) + "px");
+                element.css("width", options.columns * (width || 14));
             }
         },
         focus: function(){
