@@ -43,9 +43,13 @@ kendo_module({
             if (ariaId) {
                 element.attr("aria-labelledby", ariaId);
             }
+            if (options._standalone) {
+                this._triggerSelect = this._triggerChange;
+            }
         },
         options: {
-            value: null
+            value       : null,
+            _standalone : true
         },
         events: [ "change", "select", "cancel" ],
         color: function(value) {
@@ -76,15 +80,10 @@ kendo_module({
             }
         },
         _triggerSelect: function(color) {
-            color = parse(color);
-            if (color && !color.equals(this.color())) {
-                if (color.a != 1) {
-                    color = color.toCssRgba();
-                } else {
-                    color = color.toCss();
-                }
-                this.trigger("select", { value: color });
-            }
+            triggerEvent(this, "select", color);
+        },
+        _triggerChange: function(color) {
+            triggerEvent(this, "change", color);
         },
         destroy: function() {
             this.element.off(NS);
@@ -100,6 +99,24 @@ kendo_module({
             this.trigger("cancel");
         }
     });
+
+    function triggerEvent(self, ev, color) {
+        color = parse(color);
+        if (color && !color.equals(self.color())) {
+            if (ev == "change") {
+                // UI is already updated.  setting _value directly
+                // rather than calling self.color(color) to avoid an
+                // endless loop.
+                self._value = color;
+            }
+            if (color.a != 1) {
+                color = color.toCssRgba();
+            } else {
+                color = color.toCss();
+            }
+            self.trigger(ev, { value: color });
+        }
+    };
 
     function map(a, f) {
         if (a.map) {
@@ -895,6 +912,7 @@ kendo_module({
                 } else {
                     ctor = FlatColorPicker;
                 }
+                opt._standalone = false;
                 var sel = this._selector = new ctor($("<div></div>").appendTo(document.body), opt);
                 that._popup = p = sel.wrapper.kendoPopup({
                     anchor: that.wrapper
