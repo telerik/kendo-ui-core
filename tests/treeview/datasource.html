@@ -515,7 +515,18 @@
                 equal(treeviewObject.text(bar), "baz");
             });
 
-            test("complext dataTextField is evaluated with getter", function() {
+            test("dataTextField as array accessor", function() {
+                createTreeView({
+                    dataTextField: "['foo']",
+                    dataSource: [
+                        { id: 1, text: "unused", foo: "bar" }
+                    ]
+                });
+
+                equal(treeview.text(), "bar");
+            });
+
+            test("complex dataTextField is evaluated with getter", function() {
                 createTreeView({
                     dataTextField: "Product.Name",
                     dataSource: [
