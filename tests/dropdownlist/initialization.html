@@ -309,6 +309,14 @@
                 equal(dropdownlist.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
             });
 
+            test("setting dataTextField to array accessor", function(){
+                var dropdownlist = new DropDownList(input, {
+                    dataTextField : "['ProductName']"
+                });
+
+                equal(dropdownlist.template({ProductName: "foo"}), '<li tabindex="-1" role="option" unselectable="on" class="k-item">foo</li>');
+            });
+
             test("changing the template", function() {
                 var dropdownlist = new DropDownList(input, {
                     datatextField: "",

@@ -371,7 +371,7 @@ kendo_module({
             }
 
             if (!template) {
-                that.template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template('<li tabindex="-1" role="option" unselectable="on" class="k-item">${' + kendo.expr(options.dataTextField, "data") + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
