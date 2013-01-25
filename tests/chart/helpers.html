@@ -718,6 +718,30 @@
                 );
             });
 
+            test("Adding hours skips DST start", function() {
+                same(addDuration(new Date("2012/03/25 02:00"), 1, "hours"),
+                     new Date("2012/03/25 04:00:00")
+                );
+            });
+
+            test("Adding minutes skips DST start", function() {
+                same(addDuration(new Date("2012/03/25 02:00"), 60, "minutes"),
+                     new Date("2012/03/25 04:00:00")
+                );
+            });
+
+            test("Adding hours skips DST end", function() {
+                same(addDuration(new Date("2012/10/28 03:00"), 1, "hours"),
+                     new Date("2012/10/28 04:00:00")
+                );
+            });
+
+            test("Adding minutes repeats DST end", function() {
+                same(addDuration(new Date("2012/10/28 02:00"), 150, "minutes"),
+                     new Date("2012/10/28 03:30:00")
+                );
+            });
+
             test("rounds date to minutes", function() {
                 same(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
             });
