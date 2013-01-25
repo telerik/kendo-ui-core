@@ -45,13 +45,44 @@
                 }
             });
 
-            test("MultiSelect opens popup on click", function() {
+            test("MultiSelect opens popup on input click", function() {
                 popuplateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.input.click();
 
                 ok(multiselect.popup.visible());
+            });
+
+            test("MultiSelect focuses input on click", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.wrapper.click();
+
+                equal(multiselect.input[0], document.activeElement);
+            });
+
+            test("MultiSelect opens popup on tag click", function() {
+                popuplateSelect();
+                select.val("0");
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.tagList.children().first().click();
+
+                ok(multiselect.popup.visible());
+            });
+
+            test("MultiSelect do not open on tag delete", function() {
+                popuplateSelect();
+                select.val("0");
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.tagList.find(".k-delete").click();
+
+                ok(!multiselect.popup.visible());
             });
 
             test("MultiSelect selects item on click", function() {

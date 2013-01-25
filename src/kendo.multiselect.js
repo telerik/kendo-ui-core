@@ -46,10 +46,6 @@ kendo_module({
             that._loader();
 
             that.input
-                .on("click" + ns, function() {
-                    that.list.width(that.wrapper.width());
-                    that.open();
-                })
                 .on("blur" + ns, function() {
                     that.input[0].value = "";
                     if (that._state === "filter") {
@@ -61,8 +57,12 @@ kendo_module({
             that.wrapper
                 .add(that._innerWraper)
                 .on("click" + ns, function(e) {
-                    if (e.target === e.currentTarget) {
-                        that.input.focus().click();
+                    if (e.target.className.indexOf("k-delete") == -1) { //TODO: test this
+                        that.open();
+                    }
+
+                    if (that.input[0] !== document.activeElement) {
+                        that.input.focus();
                     }
                 });
 
@@ -148,7 +148,7 @@ kendo_module({
                 that._open = true;
                 that._filterSource();
             } else {
-                if (that._visibleItems) {
+                if (!popup.visible() /* TODO: test*/ && that._visibleItems) {
                     popup.open();
                     that.current($(first(that.ul[0])));
                 }
@@ -305,6 +305,7 @@ kendo_module({
             }
         },
 
+        //TODO: rename it to searchText method
         text: function() {
             return this.input.val();
         },
