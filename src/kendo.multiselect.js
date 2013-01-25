@@ -534,6 +534,10 @@ kendo_module({
                         candidate.attr("id", id);
                         that._focused.attr("aria-activedescendant", id);
                     }
+
+                    if (that._currentTag) {
+                        that.currentTag(null);
+                    }
                 }
 
                 that._current = candidate;
@@ -651,9 +655,6 @@ kendo_module({
             } else if (key === keys.HOME) {
                 if (visible) {
                     that.current($(first(that.ul[0])));
-                    if (tag) {
-                        that.currentTag(null);
-                    }
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
@@ -664,9 +665,6 @@ kendo_module({
             } else if (key === keys.END) {
                 if (visible) {
                     that.current($(last(that.ul[0])));
-                    if (tag) {
-                        that.currentTag(null);
-                    }
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 

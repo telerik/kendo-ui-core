@@ -519,7 +519,7 @@
 
                 var item = multiselect.current();
 
-                equal(item[0], multiselect.ul.children().first()[0]);
+                equal(item[0], multiselect.ul.children(":visible").first()[0]);
             });
 
             test("MultiSelect clears focused tag when navigate through the popup", function() {
