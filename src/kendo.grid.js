@@ -1834,7 +1834,8 @@ kendo_module({
                 currentProxy = proxy(that.current, that),
                 table = that.table,
                 headerTable = that.thead.parent(),
-                dataTable = table;
+                dataTable = table,
+                isRtl = kendo.support.isRtl(that.element);
 
             if (!that.options.navigatable) {
                 return;
@@ -1945,10 +1946,10 @@ kendo_module({
 
                     handled = true;
                     currentProxy(current);
-                } else if (canHandle && key == keys.LEFT) {
+                } else if (canHandle && key == (isRtl ? keys.RIGHT : keys.LEFT)) {
                     currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRSTNAVITEM));
                     handled = true;
-                } else if (canHandle && key == keys.RIGHT) {
+                } else if (canHandle && key == (isRtl ? keys.LEFT : keys.RIGHT)) {
                     if (current) {
                         if (current.next()[0]) {
                             current = current.nextAll(DATA_CELL + ":first");
