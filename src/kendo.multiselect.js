@@ -57,7 +57,7 @@ kendo_module({
             that.wrapper
                 .add(that._innerWraper)
                 .on("click" + ns, function(e) {
-                    if (e.target.className.indexOf("k-delete") == -1) { //TODO: test this
+                    if (e.target.className.indexOf("k-delete") == -1) {
                         that.open();
                     }
 
@@ -148,7 +148,7 @@ kendo_module({
                 that._open = true;
                 that._filterSource();
             } else {
-                if (!popup.visible() /* TODO: test*/ && that._visibleItems) {
+                if (!popup.visible() && that._visibleItems) {
                     popup.open();
                     that.current($(first(that.ul[0])));
                 }

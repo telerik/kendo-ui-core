@@ -23,9 +23,10 @@
             var MultiSelect = kendo.ui.MultiSelect,
                 select;
 
-            function popuplateSelect() {
+            function popuplateSelect(length) {
                 var options = [];
-                for (var i=0; i < 5; i++) {
+                length = length || 5;
+                for (var i=0; i < length; i++) {
                     options.push("<option value='" + i + "'>Option" + i + "</option>");
                 }
 
@@ -63,6 +64,16 @@
                 multiselect.open();
 
                 ok(multiselect.ul.children().length);
+            });
+
+            test("MultiSelect do not call popup.open method if no visible items", function() {
+                popuplateSelect(1);
+                var multiselect = new MultiSelect(select);
+
+                multiselect.value("0");
+                multiselect.open();
+
+                ok(!multiselect.popup.visible());
             });
 
             test("MultiSelect does not rebind on open if no filtration", function() {
