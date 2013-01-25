@@ -4028,42 +4028,6 @@
                     bar = plotArea.charts[0].points[0];
                 }
 
-                // ------------------------------------------------------------
-                module("Categorical Plot Area / pointsByCategory", {
-                    setup: function() {
-                        createColumnChart();
-                    },
-                    teardown: destroyChart
-                });
-
-                test("returns empty array if has no category", function() {
-                    equals(plotArea.pointsByCategory("").length, 0);
-                });
-
-                test("returns array with points", function() {
-                    equals(plotArea.pointsByCategory("A").length, 4);
-                });
-
-                // ------------------------------------------------------------
-                module("Categorical Plot Area / Date categoryes / pointsByCategory ", {
-                    setup: function() {
-                        createColumnChart({
-                            categoryAxis: {
-                                categories: [new Date("2012/12/18"), new Date("2012/12/19")]
-                            }
-                        });
-                    },
-                    teardown: destroyChart
-                });
-
-                test("returns empty array if has no category", function() {
-                    equals(plotArea.pointsByCategory("").length, 0);
-                });
-
-                test("returns array with points", function() {
-                    equals(plotArea.pointsByCategory(new Date("2012/12/18")).length, 4);
-                });
-
             })();
         </script>
 

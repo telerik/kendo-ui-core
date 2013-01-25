@@ -341,7 +341,7 @@ kendo_module({
                 if (options.tooltip.shared) {
                     chart._tooltip = new MultiplePointTooltip(element, options.tooltip);
                 } else {
-                    chart._tooltip = new SinglePointTooltip(element, options.tooltip);
+                    chart._tooltip = new Tooltip(element, options.tooltip);
                 }
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
@@ -6794,7 +6794,7 @@ kendo_module({
         }
     });
 
-    var Tooltip = Class.extend({
+    var BaseTooltip = Class.extend({
         init: function(chartElement, options) {
             var tooltip = this;
 
@@ -6806,9 +6806,9 @@ kendo_module({
                 left: parseInt(chartElement.css("paddingLeft"), 10)
             };
 
-            tooltip.template = Tooltip.template;
+            tooltip.template = BaseTooltip.template;
             if (!tooltip.template) {
-                tooltip.template = Tooltip.template = renderTemplate(
+                tooltip.template = BaseTooltip.template = renderTemplate(
                     "<div class='" + CSS_PREFIX + "tooltip' " +
                     "style='display:none; position: absolute; font: #= d.font #;" +
                     "border: #= d.border.width #px solid;" +
@@ -6849,15 +6849,6 @@ kendo_module({
             }
 
             element
-                .css({
-                   backgroundColor: options.background,
-                   // Here you need to pass point color
-                   borderColor: options.border.color || "blue",
-                   font: options.font,
-                   color: options.color,
-                   opacity: options.opacity,
-                   borderWidth: options.border.width
-                })
                 .stop(true, true)
                 .show()
                 .animate({
@@ -6866,6 +6857,18 @@ kendo_module({
                 }, options.animation.duration);
 
             tooltip.visible = true;
+        },
+
+        setStyle: function(options) {
+            this.element
+                    .css({
+                        backgroundColor: options.background,
+                        borderColor: options.border.color,
+                        font: options.font,
+                        color: options.color,
+                        opacity: options.opacity,
+                        borderWidth: options.border.width
+                    });
         },
 
         pointContent: function(point) {
@@ -6907,24 +6910,31 @@ kendo_module({
         }
     });
 
-    var SinglePointTooltip = Tooltip.extend({
+    var Tooltip = BaseTooltip.extend({
         show: function(point) {
             var tooltip = this,
+                options = deepExtend({}, tooltip.options, point.options.tooltip),
                 element = tooltip.element;
 
             if (!point) {
                 return;
             }
 
-            tooltip.content = tooltip.pointContent(point);
+            if (!(options.border || {}).color) {
+                options.border.color = point.options.color;
+            }
+
+            tooltip.element.html(tooltip.pointContent(point));
             tooltip.anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
+            tooltip.setStyle(options);
+
             tooltip.showTimeout =
-                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+                setTimeout(proxy(tooltip.move, tooltip), TOOLTIP_SHOW_DELAY);
         }
     });
 
-    var MultiplePointTooltip = Tooltip.extend({
+    var MultiplePointTooltip = BaseTooltip.extend({
         options: {
             template: "<table style='text-align: left;'>" +
                       "<th colspan='2'>#= category #</th>" +
@@ -6940,29 +6950,35 @@ kendo_module({
         },
 
         show: function(point) {
-            var tooltip = this;
+            var tooltip = this,
+                options = tooltip.options,
+                axis = tooltip.plotArea.categoryAxis,
+                axisOptions = axis.options,
+                index = axis.getCategoryIndex(point),
+                category = axis.getCategory(point),
+                points = tooltip.pointsByCategoryIndex(index);
 
-            tooltip.element.html(tooltip.getContent(point));
+            if (!(options.border || {}).color) {
+                options.border.color = points[0].options.color;
+            }
+
+            if (axisOptions.type === DATE) {
+                category = autoFormat(axisOptions.labels.dateFormats[axisOptions.baseUnit], category);
+            }
+
+            tooltip.element.html(tooltip.getContent(points, category));
             tooltip.anchor = point;
+
+            tooltip.setStyle(options);
 
             tooltip.showTimeout =
                 setTimeout(proxy(tooltip.move, tooltip), TOOLTIP_SHOW_DELAY);
         },
 
-        getContent: function(point) {
+        getContent: function(points, category) {
             var tooltip = this,
-                plotArea = tooltip.plotArea,
-                axis = plotArea.categoryAxis,
-                axisOptions = axis.options,
-                index = axis.getCategoryIndex(point),
-                points = tooltip.pointsByCategoryIndex(index),
-                category = axis.getCategory(point),
                 length = points.length,
                 content = "", template;
-
-            if (axisOptions.type === DATE) {
-                category = autoFormat(axisOptions.labels.dateFormats[axisOptions.baseUnit], category);
-            }
 
             if (length) {
                 template = kendo.template(tooltip.options.template);
