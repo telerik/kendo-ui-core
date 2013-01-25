@@ -211,6 +211,7 @@ kendo_module({
 
             that.ul[0].innerHTML = html;
             that.element.html(options);
+            that._visibleItems = visibleItems;
 
             return visibleItems;
         },
@@ -539,6 +540,24 @@ kendo_module({
             }
         },
 
+        currentTag: function(candidate) {
+            var that = this;
+
+            if (candidate !== undefined) {
+                if (that._currentTag) {
+                    that._currentTag.removeClass(FOCUSED);
+                }
+
+                if (candidate) {
+                    candidate.addClass(FOCUSED);
+                }
+
+                that._currentTag = candidate;
+            } else {
+                return that._currentTag;
+            }
+        },
+
         _scroll: function (item) {
 
             if (!item) {
@@ -575,13 +594,13 @@ kendo_module({
             var that = this,
                 ul = that.ul[0],
                 key = e.keyCode,
+                tag = that._currentTag,
                 current = that._current,
+                hasValue = that.input.val(),
                 visible = that.popup.visible();
 
-            //that._last = key;
-
             if (key === keys.DOWN) {
-                if (!visible) {
+                if (!visible && that._visibleItems) {
                     that.open();
                     return;
                 }
@@ -615,6 +634,43 @@ kendo_module({
                 }
 
                 that.close();
+            } else if (key === keys.LEFT) {
+                if (!hasValue) {
+                    tag = tag ? tag.prev() : $(that.tagList[0].lastChild);
+                    if (tag[0]) {
+                        that.currentTag(tag);
+                    }
+                }
+            } else if (key === keys.RIGHT) {
+                if (!hasValue && tag) {
+                    tag = tag.next();
+                    that.currentTag(tag[0] ? tag : null);
+                }
+            } else if (key === keys.HOME) {
+                if (!hasValue) {
+                    tag = that.tagList[0].firstChild;
+
+                    if (tag) {
+                        that.currentTag($(tag));
+                    }
+                }
+            } else if (key === keys.END) {
+                if (!hasValue) {
+                    tag = that.tagList[0].lastChild;
+
+                    if (tag) {
+                        that.currentTag($(tag));
+                    }
+                }
+            } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
+                if (!tag && key === keys.BACKSPACE) {
+                    tag = $(that.tagList[0].lastChild);
+                }
+
+                if (tag && tag[0]) {
+                    that._unselect(tag);
+                    that.close();
+                }
             } else {
                 that._search();
                 that._scale(String.fromCharCode(e.keyCode));
@@ -744,6 +800,8 @@ kendo_module({
 
             that.tagList.append($(that.tagTemplate(dataItem)));
             that._dataItems.push(dataItem);
+            that._visibleItems -= 1;
+            that.currentTag(null);
 
             that.input.val("");
 
@@ -755,8 +813,10 @@ kendo_module({
         //unselect li element and remove tag
         _unselect: function(tag) {
             var that = this,
-                dataItem = that._removeTag(tag),
+                dataItem = that._removeTag(tag), //TODO: move code here!
                 value, index;
+
+            that.currentTag(null);
 
             if (dataItem) {
                 dataItem = dataItem[0]
@@ -772,6 +832,7 @@ kendo_module({
             if (index !== -1) {
                $(that.ul[0].children[index]).show();
                that.element[0].children[index].selected = false;
+               that._visibleItems += 1;
             }
         },
 

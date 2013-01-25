@@ -130,6 +130,20 @@
                 ok(multiselect.current().hasClass("k-state-focused"));
             });
 
+            test("MultiSelect does not open popup if no visible items", function() {
+                populateSelect(1);
+                var multiselect = new MultiSelect(select);
+
+                multiselect.value("0");
+
+                multiselect.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: keys.DOWN
+                });
+
+                ok(!multiselect.popup.visible());
+            });
+
             test("MultiSelect highlights prev LI", function() {
                 var multiselect = new MultiSelect(select);
 
@@ -233,6 +247,240 @@
                 multiselect.open();
 
                 equal(multiselect.ul[0].scrollTop, 0);
+            });
+
+            module("kendo.ui.MultiSelect tag navigation", {
+                setup: function() {
+                    select = $("<select multiple=multiple/>").appendTo(document.body);
+                    populateSelect();
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            test("MultiSelect focuses last tag if input is empty", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["1", "2"]);
+
+                multiselect.input.focus();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.LEFT
+                });
+
+                var tag = multiselect.tagList.children().last();
+
+                ok(tag.hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect focuses previous tag if input is empty", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["1", "2"]);
+                multiselect.input.focus();
+                multiselect.currentTag(multiselect.tagList.children().last());
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.LEFT
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag.index(), 0);
+                ok(tag.hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect persist focus to the first LI on LEFT", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["1", "2"]);
+                multiselect.input.focus();
+                multiselect.currentTag(multiselect.tagList.children().first());
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.LEFT
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag.index(), 0);
+                ok(tag.hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect focuses next tag if any is focused", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["1", "2"]);
+                multiselect.input.focus();
+
+                multiselect.currentTag(multiselect.tagList.children().first());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.RIGHT
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag.index(), 1);
+                ok(tag.hasClass("k-state-focused"));
+            });
+
+            test("MultiSelect un-focuses last tag if RIGHT is pressed ", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["1", "2"]);
+                multiselect.input.focus();
+
+                multiselect.currentTag(multiselect.tagList.children().last());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.RIGHT
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag, null);
+            });
+
+            test("MultiSelect un-focuses tag on selection", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.input.click();
+
+                multiselect.currentTag(multiselect.tagList.children().last());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.ENTER
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag, null);
+            });
+
+
+            test("MultiSelect deletes focused tag", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["1", "2"]);
+                multiselect.input.focus();
+
+                multiselect.currentTag(multiselect.tagList.children().last());
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.DELETE
+                });
+
+                equal(multiselect.currentTag(), null);
+                equal(multiselect.tagList.children().length, 1);
+            });
+
+            test("MultiSelect deletes last tag on BACKSPACE if input is empty", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["0", "1"]);
+                multiselect.input.focus();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.BACKSPACE
+                });
+
+                equal(multiselect.currentTag(), null);
+                equal(multiselect.tagList.children().length, 1);
+                equal(multiselect.tagList.children().eq(0).find("span").html(), "Option0");
+            });
+
+            test("MultiSelect does not raise exception on DELETE", 1, function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+                multiselect.input.focus();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.BACKSPACE
+                });
+
+                ok(true);
+            });
+
+            test("MultiSelect focuses first tag on HOME", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["0", "1"]);
+                multiselect.input.focus();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.HOME
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag.index(), 0);
+            });
+
+            test("MultiSelect focuses last tag on END", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["0", "1"]);
+                multiselect.input.focus();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.END
+                });
+
+                var tag = multiselect.currentTag();
+
+                equal(tag.index(), 1);
+            });
+
+            test("MultiSelect closes popup when deletes tag", function() {
+                populateSelect(50);
+                var multiselect = new MultiSelect(select);
+
+                //opens popup and scrolls
+                multiselect.value(["0", "1"]);
+                multiselect.input.click();
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.BACKSPACE
+                });
+
+                ok(!multiselect.popup.visible());
             });
 
       </script>
