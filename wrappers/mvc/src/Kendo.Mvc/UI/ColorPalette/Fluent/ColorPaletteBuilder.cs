@@ -55,6 +55,65 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the amount of columns that should be shown
+        /// </summary>
+        /// <param name="columns">The initially selected color</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        ///             .Columns(5)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPaletteBuilder Columns(int columns)
+        {
+            Component.Columns = columns;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the size of the palette tiles
+        /// </summary>
+        /// <param name="columns">The tile size (for square tiles)</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        ///             .Size(32)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPaletteBuilder Size(int size)
+        {
+            Component.Size = size;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the size of the palette tiles
+        /// </summary>
+        /// <param name="columns">The tile size (for square tiles)</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        ///             .Size(s => s.Width(20).Height(10))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPaletteBuilder Size(Action<PaletteSizeBuilder> sizeAction)
+        {
+            Component.Size = new ColorPaletteTileSize();
+
+            sizeAction(new PaletteSizeBuilder(Component.Size as ColorPaletteTileSize));
+
+            return this;
+        }
         
         /// <summary>
         /// Sets the range of colors that the user can pick from.

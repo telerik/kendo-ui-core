@@ -16,6 +16,10 @@ namespace Kendo.Mvc.UI
             Palette = ColorPickerPalette.Basic;
         }
 
+        public int Columns { get; set; }
+
+        public object Size { get; set; }
+
         public ColorPickerPalette Palette { get; set; }
 
         public IEnumerable<string> PaletteColors { get; set; }
@@ -37,6 +41,25 @@ namespace Kendo.Mvc.UI
             else if (PaletteColors != null && PaletteColors.Any())
             {
                 options["palette"] = PaletteColors;
+            }
+
+            if (Columns != 10)
+            {
+                options["columns"] = Columns;
+            }
+
+            if (Size != null)
+            {
+                var size = Size as ColorPaletteTileSize;
+
+                if (size != null)
+                {
+                    options["size"] = new { width = size.Width, height = size.Height };
+                }
+                else
+                {
+                    options["size"] = (int)Size;
+                }
             }
 
             writer.Write(Initializer.Initialize(Selector, "ColorPalette", options));

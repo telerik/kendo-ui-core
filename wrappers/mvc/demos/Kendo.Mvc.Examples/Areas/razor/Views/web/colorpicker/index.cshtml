@@ -1,13 +1,68 @@
-@using (Html.BeginForm("Index", "ColorPicker"))
-{
+<div id="background">
+    <div class="column">
+        <h3 class="title">Select Wall Paint</h3>
+        @(Html.Kendo().ColorPalette()
+            .Name("palette")
+            .Columns(4)
+            .Size(s => s.Width(34).Height(19))
+            .Palette(new string[] {
+                "#f0d0c9", "#e2a293", "#d4735e", "#65281a",
+                "#eddfda", "#dcc0b6", "#cba092", "#7b4b3a",
+                "#fcecd5", "#f9d9ab", "#f6c781", "#c87d0e",
+                "#e1dca5", "#d0c974", "#a29a36", "#514d1b",
+                "#c6d9f0", "#8db3e2", "#548dd4", "#17365d"
+            })
+            .Events(events => events.Change("preview"))
+        )
+    </div>
 
-    @(Html.Kendo().ColorPicker()
-        .Name("colorpicker")
-        .Opacity(true)
-        .Value(ViewBag.color ?? "rgba(10,20,30,.5)")
-    )
-    
-    <p>Posted color is @ViewBag.color</p>
+    <div class="column">
+        <h3 class="title">Choose Custom Color</h3>
+        @(Html.Kendo().ColorPicker()
+            .Name("picker")
+            .Value("#ffffff")
+            .Events(events => events.Select("preview"))
+        )
+    </div>
+</div>
 
-    <button type="submit" class="k-button">Save</button>
-}
+<script>
+    function preview(e) {
+        $("#background").css("background-color", e.value);
+    }
+</script>
+
+<style scoped>
+    #background {
+        background-image: url(@Url.Content("~/content/web/colorpicker/interior-bg.png"));
+        background-color: transparent;
+        width: 600px;
+        height: 600px;
+        overflow: hidden;
+    }
+
+    .column {
+        margin-top: 384px;
+        float: left;
+        width: 300px;
+        text-align: center;
+    }
+
+    .column .title {
+        color: #a3a3a3;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: normal;
+        padding: 41px 0 20px;
+    }
+
+    #palette {
+        vertical-align: top;
+        display: inline-block;
+    }
+
+    .k-colorpicker {
+        vertical-align: top;
+        margin: 20px 0;
+    }
+</style>

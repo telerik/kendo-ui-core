@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
         public bool Input { get; set; }
 
         public bool Buttons { get; set; }
+
+        public object Size { get; set; }
        
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -50,6 +52,18 @@ namespace Kendo.Mvc.UI
             if (!string.IsNullOrEmpty(Value))
             {
                 options["value"] = Value;
+            }
+
+            if (Size != null)
+            {
+                if ((int?)Size != null)
+                {
+                    options["size"] = (int)Size;
+                }
+                else
+                {
+                    //options["size"] = (PaletteSize)Size;
+                }
             }
 
             writer.Write(Initializer.Initialize(Selector, "FlatColorPicker", options));

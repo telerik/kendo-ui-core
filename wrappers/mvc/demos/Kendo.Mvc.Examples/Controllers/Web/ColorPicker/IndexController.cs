@@ -4,10 +4,8 @@
 
     public partial class ColorPickerController : Controller
     {
-        public ActionResult Index(string colorpicker)
+        public ActionResult Index()
         {
-            ViewBag.color = colorpicker;
-
             return View();
         }
     }
