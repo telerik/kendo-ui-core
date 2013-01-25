@@ -649,7 +649,12 @@ kendo_module({
                     that.currentTag(tag[0] ? tag : null);
                 }
             } else if (key === keys.HOME) {
-                if (!hasValue) {
+                if (visible) {
+                    that.current($(first(that.ul[0])));
+                    if (tag) {
+                        that.currentTag(null);
+                    }
+                } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
                     if (tag) {
@@ -657,7 +662,12 @@ kendo_module({
                     }
                 }
             } else if (key === keys.END) {
-                if (!hasValue) {
+                if (visible) {
+                    that.current($(last(that.ul[0])));
+                    if (tag) {
+                        that.currentTag(null);
+                    }
+                } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 
                     if (tag) {
@@ -889,6 +899,16 @@ kendo_module({
 
         if (item && item.style.display === "none") {
             item = sibling(item, "nextSibling");
+        }
+
+        return item;
+    }
+
+    function last(ul) {
+        var item = ul.lastChild;
+
+        if (item && item.style.display === "none") {
+            item = sibling(item, "previousSibling");
         }
 
         return item;
