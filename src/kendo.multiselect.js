@@ -885,7 +885,7 @@ kendo_module({
     });
 
     function first(ul) {
-        item = ul.firstChild;
+        var item = ul.firstChild;
 
         if (item && item.style.display === "none") {
             item = sibling(item, "nextSibling");
