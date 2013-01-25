@@ -1275,7 +1275,7 @@ kendo_module({
                     if (navigatable) {
                         window.setTimeout(function(){
                             that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                            focusTable(that.table, true);                    
+                            focusTable(that.table, true);
                         }, 1);
                     }
                 });
@@ -1291,7 +1291,7 @@ kendo_module({
                     if (navigatable) {
                         window.setTimeout(function(){
                             that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                            focusTable(that.table, true);                    
+                            focusTable(that.table, true);
                         }, 1);
                     }
                 });
@@ -3530,10 +3530,11 @@ kendo_module({
     function focusTable(table, direct) {
         if (direct === true) {
             table = $(table);
-            var condition = kendo.support.browser.msie && table.parent().is(".k-grid-content,.k-grid-header-wrap");
+            var condition = kendo.support.browser.msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
+                scrollTop, scrollLeft;
                 if (condition) {
-                    var scrollTop = table.parent().scrollTop(),
-                        scrollLeft = table.parent().scrollLeft();
+                    scrollTop = table.parent().scrollTop();
+                    scrollLeft = table.parent().scrollLeft();
                 }
                table.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
                 if (condition) {
