@@ -99,6 +99,22 @@
                 var rect = view.log.rect[0];
                 ok(rect.style.fillOpacity, 0.33);
             });
+
+            test("render scale with default min, max and step", function() {
+                createScale({ });
+                var options = linearScale.options;
+                equals(options.min, 0);
+                equals(options.max, 50);
+                equals(options.majorUnit, 10);
+            });
+
+            test("render scale with min=0 max=12 step=", function() {
+                createScale({
+                    min: 0,
+                    max: 12
+                });
+                equals(linearScale.options.majorUnit, 2);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

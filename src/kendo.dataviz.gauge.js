@@ -256,10 +256,11 @@
             var scale = this,
                 scaleOptions = scale.options;
 
-            scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+            options = deepExtend({}, scaleOptions, options);
+            options.majorUnit = autoMajorUnit(options.min, options.max);
 
             Axis.fn.init.call(scale, options);
-            scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
+            scale.options.minorUnit = options.minorUnit || options.majorUnit / 10;
         },
 
         options: {
@@ -704,9 +705,9 @@
             var scale = this,
                 scaleOptions = scale.options;
 
+            options = deepExtend({}, scaleOptions, options);
             scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
-            options = deepExtend({}, scaleOptions, options);
             options = deepExtend({}, options, { labels: { mirror: options.mirror } });
 
             NumericAxis.fn.init.call(scale, 0, 1, options);
