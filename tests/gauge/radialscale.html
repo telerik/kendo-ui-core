@@ -234,6 +234,23 @@
                 equal(ring.startAngle, radialScale.slotAngle(50));
                 equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
             });
+
+            test("render scale with default min, max and step", function() {
+                createScale({ });
+                var options = radialScale.options;
+                equals(options.min, 0);
+                equals(options.max, 100);
+                equals(options.majorUnit, 20);
+            });
+
+            test("render scale with min=0 max=12 step=2", function() {
+                createScale({
+                    min: 0,
+                    max: 12
+                });
+                equals(radialScale.options.majorUnit, 2);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
