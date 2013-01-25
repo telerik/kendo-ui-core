@@ -38,11 +38,13 @@ namespace Kendo.Mvc.Examples.Controllers
             return northwind.Orders.Select(order => new OrderViewModel
             {
                 ContactName = order.Customer.ContactName,
+                Freight = order.Freight,
                 OrderDate = order.OrderDate,
                 OrderID = order.OrderID,
                 ShipAddress = order.ShipAddress,
                 ShipCountry = order.ShipCountry,
                 ShipName = order.ShipName,
+                ShipCity = order.ShipCity,
                 EmployeeID = order.EmployeeID
             });
         }

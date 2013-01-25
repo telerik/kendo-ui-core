@@ -1,5 +1,7 @@
 package com.kendoui.spring.models;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,8 @@ public class Order {
     private int employeeId;
     private String shipName;
     private String shipCity;
+    private double freight;
+    private Date orderDate;
     private String shipAddress;
     private String shipCountry;
     
@@ -36,6 +40,24 @@ public class Order {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+    
+    @Column(name="Freight")
+    public double getFreight() {
+        return freight;
+    }
+
+    public void setFreight(double freight) {
+        this.freight = freight;
+    }
+    
+    @Column(name="OrderDate")
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
     
     @Column(name="EmployeeID")

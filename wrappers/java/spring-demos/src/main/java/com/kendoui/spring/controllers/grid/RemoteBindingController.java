@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
-import com.kendoui.spring.models.ProductDao;
+import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-remote-binding-controller")
 @RequestMapping(value="/web/grid/")
 public class RemoteBindingController {
     @Autowired 
-    private ProductDao product;
+    private OrderDao order;
 
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
@@ -24,7 +24,6 @@ public class RemoteBindingController {
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
     public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
-
-        return product.getList(request);
+        return order.getList(request);
     }
 }

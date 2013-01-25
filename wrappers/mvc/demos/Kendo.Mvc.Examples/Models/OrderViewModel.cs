@@ -17,6 +17,12 @@
             set;
         }
 
+        public decimal? Freight
+        {
+            get;
+            set;
+        }
+
         public string ShipAddress
         {
             get;
@@ -31,6 +37,12 @@
         }
 
         public string ShipCountry
+        {
+            get;
+            set;
+        }
+
+        public string ShipCity
         {
             get;
             set;
