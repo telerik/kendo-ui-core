@@ -148,8 +148,10 @@ kendo_module({
                 that._open = true;
                 that._filterSource();
             } else {
-                popup.open();
-                that.current($(first(that.ul[0])));
+                if (that._visibleItems) {
+                    popup.open();
+                    that.current($(first(that.ul[0])));
+                }
             }
         },
 
@@ -600,7 +602,7 @@ kendo_module({
                 visible = that.popup.visible();
 
             if (key === keys.DOWN) {
-                if (!visible && that._visibleItems) {
+                if (!visible) {
                     that.open();
                     return;
                 }
@@ -847,7 +849,10 @@ kendo_module({
                         .on("click", "li.k-item", proxy(this._click, this));
 
             this.list = $("<div class='k-list-tags'/>")
-                        .append(this.ul);
+                        .append(this.ul)
+                        .on("mousedown" + ns, function(e) {
+                            e.preventDefault();
+                        });
 
 
             var id = this.element.attr(ID);
@@ -872,6 +877,7 @@ kendo_module({
             }
 
             that.wrapper = wrapper.addClass(element[0].className)
+                                  .on("mousedown" + ns, function(e) { e.preventDefault(); })
                                   .css("display", "");
 
             that._innerWraper = $(wrapper[0].firstChild);
