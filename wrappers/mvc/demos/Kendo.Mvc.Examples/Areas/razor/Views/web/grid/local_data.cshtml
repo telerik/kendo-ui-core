@@ -4,17 +4,18 @@
     .Name("Grid")
     .Columns(columns =>
     {
-        columns.Bound(p => p.ProductID).Groupable(false);
         columns.Bound(p => p.ProductName);
-        columns.Bound(p => p.UnitPrice);
-        columns.Bound(p => p.UnitsInStock);
+        columns.Bound(p => p.UnitPrice).Width(130);
+        columns.Bound(p => p.UnitsInStock).Width(130);
+        columns.Bound(p => p.Discontinued).Width(130);
     })
     .Pageable()
     .Sortable()
-    .Scrollable() 
+    .Scrollable(scr=>scr.Height(430)) 
     .Filterable()    
     .DataSource(dataSource => dataSource        
         .Ajax()
+        .PageSize(20)
         .ServerOperation(false)        
      )
 )
