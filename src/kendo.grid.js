@@ -1485,7 +1485,11 @@
                 }
 
                 if (index < 0) {
-                    index = 0;
+                    if (dataSource.page() > dataSource.totalPages()) {
+                        index = (dataSource.page() - 1) * pageSize;
+                    } else {
+                        index = 0;
+                    }
                 }
 
                 var model = dataSource.insert(index, {}),
