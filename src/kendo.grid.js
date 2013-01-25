@@ -1273,10 +1273,8 @@ kendo_module({
                     that.cancelRow();
 
                     if (navigatable) {
-                        window.setTimeout(function(){
-                            that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                            focusTable(that.table, true);
-                        }, 1);
+                        that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                        focusTable(that.table, true);
                     }
                 });
 
@@ -1284,16 +1282,7 @@ kendo_module({
                     e.preventDefault();
                     e.stopPropagation();
 
-                    var currentIndex = that.items().index($(that.current()).parent());
-
                     that.saveRow();
-
-                    if (navigatable) {
-                        window.setTimeout(function(){
-                            that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                            focusTable(that.table, true);
-                        }, 1);
-                    }
                 });
             }
         },
@@ -1996,7 +1985,7 @@ kendo_module({
                     }
                 } else if (keys.ESC == key) {
                     if (current && $.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
-                        focusTable(that.table[0]);
+                        focusTable(that.table[0], true);
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
                         if (isInCell) {
@@ -2656,7 +2645,7 @@ kendo_module({
                 }
 
                 if (length) { // data item is an object
-                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + settings.paramName + '.uid#"';
+                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + kendo.expr("uid", settings.paramName) + '#"';
                 }
 
                 rowTemplate += " role='row'>";
@@ -2746,14 +2735,14 @@ kendo_module({
                 html += field + "]#";
                 html += "${f != null ? f : ''}";
             } else {
-                html += column.encoded ? "${" : "#=";
+                html += column.encoded ? "#:" : "#=";
 
                 if (format) {
                     html += 'kendo.format(\"' + format.replace(formatRegExp,"\\$1") + '\",';
                 }
 
                 if (field) {
-                    field = paramName + "." + field;
+                    field = kendo.expr(field, paramName);
                     html += field + "==null?'':" + field;
                 } else {
                     html += "''";
@@ -2763,7 +2752,7 @@ kendo_module({
                     html += ")";
                 }
 
-                html += column.encoded ? "}" : "#";
+                html += "#";
             }
             return html;
         },
@@ -3536,7 +3525,7 @@ kendo_module({
                     scrollTop = table.parent().scrollTop();
                     scrollLeft = table.parent().scrollLeft();
                 }
-               table.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+               table[0].focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
                 if (condition) {
                     table.parent().scrollTop(scrollTop);
                     table.parent().scrollLeft(scrollLeft);

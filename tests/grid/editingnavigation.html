@@ -312,7 +312,7 @@
                 });
 
                 focusCell(grid).table.press(kendo.keys.ENTER).find(".k-grid-cancel").click();
-
+                                
                 equal(table.find("td")[0], grid.current()[0]);
                 ok(grid.current().hasClass("k-state-focused"));
                 equal(document.activeElement, grid.table[0]);
