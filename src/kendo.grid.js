@@ -1792,7 +1792,7 @@ kendo_module({
                     table.attr("aria-activedescendant", that._cellId);
 
                     if(element.length && scrollable) {
-                        if ($.contains(that.content, element)) {
+                        if ($.contains(that.content[0], element[0])) {
                             that._scrollTo(element.parent()[0], that.content[0]);
                         }
                         if (scrollable.virtual) {
@@ -3419,7 +3419,7 @@ kendo_module({
                 return;
             }
 
-            if (navigatable && (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement))) {
+            if (navigatable && (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement) || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {
