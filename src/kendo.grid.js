@@ -1273,8 +1273,10 @@ kendo_module({
                     that.cancelRow();
 
                     if (navigatable) {
-                        that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                        focusTable(that.table);
+                        window.setTimeout(function(){
+                            that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                            focusTable(that.table, true);                    
+                        }, 1);
                     }
                 });
 
@@ -1282,7 +1284,16 @@ kendo_module({
                     e.preventDefault();
                     e.stopPropagation();
 
+                    var currentIndex = that.items().index($(that.current()).parent());
+
                     that.saveRow();
+
+                    if (navigatable) {
+                        window.setTimeout(function(){
+                            that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                            focusTable(that.table, true);                    
+                        }, 1);
+                    }
                 });
             }
         },
@@ -1377,7 +1388,12 @@ kendo_module({
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
+                            var currentIndex = that.items().index($(that.current()).parent());
                             that.cancelRow();
+                            if (that.options.navigatable) {
+                                that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                                focusTable(that.table, true);
+                            }
                         }
                     }
                 }, options));
@@ -1787,7 +1803,9 @@ kendo_module({
                     table.attr("aria-activedescendant", that._cellId);
 
                     if(element.length && scrollable) {
-                        that._scrollTo(element.parent()[0], that.content[0]);
+                        if ($.contains(that.content, element)) {
+                            that._scrollTo(element.parent()[0], that.content[0]);
+                        }
                         if (scrollable.virtual) {
                             that._scrollTo(element[0], that.content.find(">.k-virtual-scrollable-wrap")[0]);
                         } else {
