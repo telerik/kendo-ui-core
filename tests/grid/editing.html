@@ -781,6 +781,30 @@
                 equal(item.index(), 2);
             });
 
+            test("addRow on empty page", function() {
+                var grid = setup({
+                    editable: {
+                        confirmation: false
+                    },
+                    pageable: true,
+                    dataSource: new DataSource({
+                        schema: {
+                            model: { id: "foo" }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }],
+                        pageSize: 1
+                    })
+                });
+
+                grid.dataSource.page(2);
+                grid.removeRow(grid.items());
+                grid.addRow();
+                var item = grid.element.find(".k-grid-edit-row");
+
+                equal(item.length, 1);
+                equal(grid.dataItem(item).isNew(), true);
+            });
+
             test("add row cancels previous inserted item", function() {
                 var grid = setup({
                         editable: { mode: "inline" },
