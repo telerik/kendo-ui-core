@@ -253,14 +253,13 @@
 
     var RadialScale = NumericAxis.extend({
         init: function (options) {
-            var scale = this,
-                scaleOptions = scale.options;
+            var scale = this;
 
-            options = deepExtend({}, scaleOptions, options);
-            options.majorUnit = autoMajorUnit(options.min, options.max);
+            scale.options = deepExtend({}, scale.options, options);
+            scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
-            Axis.fn.init.call(scale, options);
-            scale.options.minorUnit = options.minorUnit || options.majorUnit / 10;
+            Axis.fn.init.call(scale, scale.options);
+            scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
         },
 
         options: {
@@ -702,22 +701,19 @@
 
     var LinearScale = NumericAxis.extend({
         init: function (options) {
-            var scale = this,
-                scaleOptions = scale.options;
+            var scale = this;
 
-            options = deepExtend({}, scaleOptions, options);
-            scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+            scale.options = deepExtend({}, scale.options, options);
+            scale.options = deepExtend({}, scale.options , { labels: { mirror: scale.options.mirror } });
+            scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
-            options = deepExtend({}, options, { labels: { mirror: options.mirror } });
-
-            NumericAxis.fn.init.call(scale, 0, 1, options);
+            Axis.fn.init.call(scale, scale.options);
+            scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
         },
 
         options: {
             min: 0,
             max: 50,
-
-            minorUnit: 1,
 
             majorTicks: {
                 size: 15,
