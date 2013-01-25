@@ -708,33 +708,32 @@ kendo_module({
         },
 
         value: function(value) {
+            if (value === undefined) {
+                return this.element.val();
+            }
 
-            if (value !== undefined) {
-                //TODO: check for null
+            //refactor this
+            var index,
+                idx = 0,
+                tags = this.tagList.children(),
+                length = tags.length;
 
-                value = $.isArray(value) ? value : [value];
+            for (; idx < length; idx++) {
+                this._unselect(tags.eq(idx));
+            }
 
+            if (value === null) {
+                return;
+            }
 
-                //refactor this
-                var index,
-                    idx = 0,
-                    tags = this.tagList.children(),
-                    length = tags.length;
+            value = $.isArray(value) ? value : [value];
 
-                for (; idx < length; idx++) {
-                    this._unselect(tags.eq(idx));
+            for (idx = 0, length = value.length; idx < length; idx++) {
+                index = this._index(value[idx]);
+
+                if (index > -1) {
+                    this._select(index);
                 }
-
-                for (idx = 0, length = value.length; idx < length; idx++) {
-                    index = this._index(value[idx]);
-
-                    if (index > -1) {
-                        this._select(index);
-                    }
-                }
-            } else {
-                //TODO return: values of multiselect
-                this.element.val(); //jquery loops all options if val() is called
             }
         },
 

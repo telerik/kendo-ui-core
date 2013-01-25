@@ -150,6 +150,32 @@
                 equal(items.eq(0).css("display"), "none");
                 equal(items.eq(1).css("display"), "none");
             });
+
+            test("MultiSelect returns array with selected values", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                var items = multiselect.ul.children();
+
+                items.eq(0).click();
+                items.eq(1).click();
+
+                deepEqual(multiselect.value(), ["0", "1"]);
+            });
+
+            test("MultiSelect value with null parameter clears selected items", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                var items = multiselect.ul.children();
+
+                items.eq(0).click();
+                items.eq(1).click();
+
+                multiselect.value(null);
+
+                deepEqual(multiselect.value(), null);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
