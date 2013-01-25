@@ -277,18 +277,17 @@ kendo_module({
                 field,
                 parent = function() {
                     return that;
-                },
-                type;
+                };
 
             Observable.fn.init.call(this);
 
             for (field in value) {
                 member = value[field];
-                if (field.charAt(0) != "_") {
-                    type = toString.call(member);
 
+                if (field.charAt(0) != "_") {
                     member = that.wrap(member, field, parent);
                 }
+
                 that[field] = member;
             }
 
@@ -361,13 +360,12 @@ kendo_module({
 
         set: function(field, value) {
             var that = this,
-                current = kendo.getter(field, true)(that),
-                parent = function() { return that; };
+                current = kendo.getter(field, true)(that);
 
             if (current !== value) {
-                if (!that.trigger("set", { field: field, value: value })) {
 
-                    that._set(field, that.wrap(value, field, parent));
+                if (!that.trigger("set", { field: field, value: value })) {
+                    that._set(field, that.wrap(value, field, function() { return that; }));
 
                     that.trigger(CHANGE, { field: field });
                 }
@@ -378,35 +376,34 @@ kendo_module({
 
         wrap: function(object, field, parent) {
             var that = this,
-                type = toString.call(object),
-                isObservableArray = object instanceof ObservableArray;
+                type = toString.call(object);
 
-            if (object !== null && object !== undefined && type === "[object Object]" && !(object instanceof DataSource) && !isObservableArray) {
-                if (!(object instanceof ObservableObject)) {
-                    object = new ObservableObject(object);
+            if (object !== null && (type === "[object Object]" || type === "[object Array]")) {
+                var isObservableArray = object instanceof ObservableArray;
+                var isDataSource = object instanceof DataSource;
+
+
+                if (type === "[object Object]" && !isDataSource && !isObservableArray) {
+                    if (!(object instanceof ObservableObject)) {
+                        object = new ObservableObject(object);
+                    }
+
+                    if (object.parent() != parent()) {
+                        object.bind(GET, eventHandler(that, GET, field, true));
+                        object.bind(CHANGE, eventHandler(that, CHANGE, field, true));
+                    }
+                } else if (type === "[object Array]" || isObservableArray) {
+                    if (!isObservableArray) {
+                        object = new ObservableArray(object);
+                    }
+
+                    if (object.parent() != parent()) {
+                        object.bind(CHANGE, eventHandler(that, CHANGE, field, false));
+                    }
                 }
 
-                if (object.parent() != parent()) {
-
-                    object.parent = parent;
-
-                    object.bind(GET, eventHandler(that, GET, field, true));
-                    object.bind(CHANGE, eventHandler(that, CHANGE, field, true));
-                }
-            } else if (object !== null && (type === "[object Array]" || isObservableArray)) {
-                if (!isObservableArray) {
-                    object = new ObservableArray(object);
-                }
-
-                if (object.parent() != parent()) {
-                    object.parent = parent;
-
-                    object.bind(CHANGE, eventHandler(that, CHANGE, field, false));
-                }
-            } else if (object !== null && object instanceof DataSource) {
-                object.parent = parent; // assign parent to the DataSource if part of observable object
+                object.parent = parent;
             }
-
 
             return object;
         }

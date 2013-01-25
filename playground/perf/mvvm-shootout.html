@@ -9,7 +9,6 @@
         <script src="../../src/kendo.binder.js"></script>
         <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
         <script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
-        <script type="text/javascript" src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.4.min.js"></script>
         <script type="text/javascript" src="http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.0.0.js"></script>
     <style type="text/css">
         p {
@@ -22,7 +21,11 @@
           margin-left: 10px;
         }
 
-        #grid {
+        #ko-grid {
+          margin: 10px;
+        }
+
+        #kendo-grid {
           margin: 10px;
         }
 
@@ -45,16 +48,14 @@
     </style>
 </head>
 <body>
-    <p>
-        Folks often ask about how the difference between Backbone and Ember's approaches to model/view binding play out in web apps. This script uses the latest Backbone.js and Ember.js to animate 100 circles (or more -- change "N" in the JavaScript), so that you can see the responsiveness after you click the button, and visualize the speed difference. The Ember team is aware that in very performance-sensitive situations, like this example, its binding implementation may be too much overhead. They have reviewed this example, and hope to be able to remove this difference in the future. Note that this is just a simple benchmark: you wouldn't be doing this in an actual app.
-    </p>
-
     <button onclick="runBackbone()">Animate with Backbone</button>
-    <button onclick="runEmber()">Animate with Ember</button>
     <button onclick="runKnockout()">Animate with Knockout</button>
     <button onclick="runKendoMVVM()">Animate with Kendo MVVM</button>
 
-    <div id="grid">
+    <div id="kendo-grid">
+    </div>
+
+    <div id="ko-grid">
     </div>
 
     <script type='x-template' id='box-template'>
@@ -69,12 +70,6 @@
       <div class="box" id="box-<%= number %>" style="top: <%= top %>px; left: <%= left %>px; background: rgb(0,0,<%= color %>);">
         <%= content %>
       </div>
-    </script>
-
-    <script type="text/x-handlebars" id="handlebars-template" data-template-name="box">
-        <div class="box" {{bindAttr id="model.number" style="model.style"}}>
-          {{ model.content }}
-        </div>
     </script>
 
     <script type="text/x-kendo-template" id="kendo-template">
@@ -113,7 +108,7 @@
                     });
                 });
 
-                var $grid = $("#grid");
+                var $grid = $("#kendo-grid");
                 $grid.attr("data-bind", "source:boxes")
                      .attr("data-template", "kendo-template");
 
@@ -167,7 +162,7 @@
                     return boxViewModel;
                 }));
 
-                $("#grid").attr("data-bind", "template: { name: 'box-template' }");
+                $("#ko-grid").attr("data-bind", "template: { name: 'box-template' }");
 
                 ko.applyBindings({
                     boxes: boxes
@@ -265,69 +260,10 @@
 
         })();
 
-        // The Ember implementation:
-        (function() {
-
-            var Box = Ember.Object.extend({
-
-                top: 0,
-                left: 0,
-                content: 0,
-                count: 0,
-
-                tick: function() {
-                    var count = this.get('count') + 1;
-                    this.set('count', count);
-                    this.set('top', Math.sin(count / 10) * 10);
-                    this.set('left', Math.cos(count / 10) * 10);
-                    this.set('color', count % 255);
-                    this.set('content', count % 100);
-                },
-
-                style: function() {
-                    return 'top: ' + this.get('top') + 'px; left: ' + this.get('left') + 'px; background: rgb(0,0,' + this.get('color') + ');';
-                }.property('top', 'left', 'color')
-
-            });
-
-            var BoxView = Ember.View.extend({
-                classNames: ['box-view'],
-                templateName: 'box'
-            });
-
-            var boxes;
-
-            var emberInit = function() {
-                boxes = _.map(_.range(N), function(i) {
-                    var box = Box.create();
-                    var view = BoxView.create({
-                        model: box
-                    });
-                    view.appendTo('#grid');
-                    box.set('number', i);
-                    return box;
-                });
-            };
-
-            var emberAnimate = function() {
-                for (var i = 0, l = boxes.length; i < l; i++) {
-                    boxes[i].tick();
-                }
-                window.timeout = _.defer(emberAnimate);
-            };
-
-            window.runEmber = function() {
-                reset();
-                emberInit();
-                emberAnimate();
-            };
-
-        })();
-
         window.timeout = null;
         window.reset = function() {
-            $('#grid').empty();
-            clearTimeout(timeout);
+            //$('#grid').empty();
+//            clearTimeout(timeout);
         };
     </script>
 </body>

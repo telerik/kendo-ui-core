@@ -54,6 +54,14 @@
         return subclass;
     };
 
+    var preventDefault = function() {
+        this._defaultPrevented = true;
+    };
+
+    var isDefaultPrevented = function() {
+        return this._defaultPrevented === true;
+    };
+
     var Observable = Class.extend({
         init: function() {
             this._events = {};
@@ -128,31 +136,29 @@
             var that = this,
                 events = that._events[eventName],
                 idx,
-                length,
-                isDefaultPrevented = false;
+                length;
 
             if (events) {
                 e = e || {};
 
                 e.sender = that;
 
-                e.preventDefault = function () {
-                    isDefaultPrevented = true;
-                };
+                e._defaultPrevented = false;
 
-                e.isDefaultPrevented = function() {
-                    return isDefaultPrevented;
-                };
+                e.preventDefault = preventDefault;
+
+                e.isDefaultPrevented = isDefaultPrevented;
 
                 events = events.slice();
 
-                //Do not cache the length of the events array as removing events attached through one will fail
                 for (idx = 0, length = events.length; idx < length; idx++) {
                     events[idx].call(that, e);
                 }
+
+                return e._defaultPrevented === true;
             }
 
-            return isDefaultPrevented;
+            return false;
         },
 
         unbind: function(eventName, handler) {

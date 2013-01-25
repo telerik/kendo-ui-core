@@ -58,18 +58,16 @@ kendo_module({
 
         change: function(e) {
             var dependency,
-                idx,
                 ch,
+                field = e.field,
                 that = this;
 
             if (that.path === "this") {
                 that.trigger(CHANGE, e);
             } else {
                 for (dependency in that.dependencies) {
-                    idx = dependency.indexOf(e.field);
-
-                    if (idx === 0) {
-                       ch = dependency.charAt(e.field.length);
+                    if (dependency.indexOf(field) === 0) {
+                       ch = dependency.charAt(field.length);
 
                        if (!ch || ch === "." || ch === "[") {
                             that.trigger(CHANGE, e);
@@ -119,13 +117,10 @@ kendo_module({
                         source = source.get(path.substring(0, index));
                     }
 
-                    // Set the context (this) of the function
-                    result = proxy(result, source);
-
                     // Invoke the function
                     that.start(source);
 
-                    result = result(that.source);
+                    result = result.call(source, that.source);
 
                     that.stop(source);
                 }

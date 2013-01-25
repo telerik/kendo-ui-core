@@ -25,26 +25,124 @@
                 border: 1px solid black;
                 padding: 5px;
             }
+
+            .box {
+              border-radius: 100px;
+              width: 20px; height: 10px;
+              padding: 5px 0;
+              color: #ccc;
+              font: 10px/10px Arial;
+              text-align: center;
+              position: absolute;
+              display: none;
+            }
         </style>
     </head>
     <body>
         <div id="log"></div>
-        <div id="kendo">
-            <span style="display:none" data-bind="text: foo.bar"></span>
-        </div>
-        <script>
-                var suite = new Benchmark.Suite;
 
-                var kendoViewModel = kendo.observable({
-                    foo: { bar: "baz" }
+    <script type='x-template' id='box-template'>
+        <!-- ko foreach:boxes -->
+        <div class="box" data-bind="style: { top: top+'px', left: left+'px', backgroundColor: 'rgb(0,0,' + color + ')' }, text: content()"></div>
+        </div>
+        <!-- /ko -->
+    </script>
+
+    <script type="text/x-kendo-template" id="kendo-template">
+        <div class="box" data-bind="style: {top: top, left: left, backgroundColor: color}, text: content">
+        </div>
+    </script>
+
+        <div id="kendo-grid">
+        </div>
+
+        <div id="ko-grid">
+        </div>
+
+        <button id="profile">profile</button>
+        <button id="benchmark">benchmark</button>
+
+
+        <script>
+                $("#profile").click(function() {
+                    for (var j = 0; j < 10000; j++) {
+                        for (var i = 0; i < 100; i++) {
+                            kendoBoxes[i].tick();
+                        }
+                    }
                 });
 
-                var kendoDiv = $("#kendo");
-                var koDiv = $("#ko");
+                $("#benchmark").click(function() {
+                    suite.run(true);
+                });
+
+                var suite = new Benchmark.Suite;
+
+                var BoxViewModel = function() {
+                    this.top = 0;
+                    this.left = 0;
+                    this.content = ko.observable(0);
+                    this.count = 0;
+                    this.color = '';
+
+                    this.tick = function() {
+                        var count = this.count + 1;
+                        this.count = count;
+                        this.top = Math.sin(count / 10) * 10;
+                        this.left = Math.cos(count / 10) * 10;
+                        this.color = count % 255;
+                        this.content(count % 100);
+                    };
+                };
+
+                var kendoBoxes = [];
+
+                for (var i = 0; i < 100; i++) {
+                    kendoBoxes.push(kendo.observable({
+                        count : 0,
+                        top: "",
+                        left: "",
+                        color: "rgb(0,0,0)",
+                        content: function() {
+                            return this.get('count') % 100;
+                        },
+                        tick: function() {
+                            var count = this.get('count') + 1;
+                            this.set('count', count);
+                            this.set('top', Math.sin(count / 10) * 10 + "px");
+                            this.set('left', Math.cos(count / 10) * 10 + "px");
+                            this.set('color', 'rgb(0,0,' + count % 255 + ')');
+                        }
+                    }));
+                }
+
+                var koBoxes = [];
+
+                for (var i = 0; i < 100; i++) {
+                    koBoxes.push(new BoxViewModel());
+                }
+
+                $("#kendo-grid").attr("data-bind", "source:boxes").attr("data-template", "kendo-template");
+
+                $("#ko-grid").attr("data-bind", "template: { name: 'box-template' }");
+
+                ko.applyBindings({
+                    boxes: koBoxes
+                });
+
+                kendo.bind($("#kendo-grid"), {
+                    boxes: kendoBoxes
+                });
 
                 suite.add("Kendo MVVM", function() {
-                    kendo.bind(kendoDiv[0], kendoViewModel);
-                    kendoViewModel.set("foo.bar", new Date().getTime());
+                    for (var i = 0; i < 100; i++) {
+                        kendoBoxes[i].tick();
+                    }
+                })
+                .add("Knockout", function() {
+                    for (var i = 0; i < 100; i++) {
+                        koBoxes[i].tick();
+                    }
                 })
                 .on("complete", function() {
                     var message = "<div>User agent: " + navigator.userAgent;
@@ -57,8 +155,7 @@
                         message += "</table></div>";
 
                     $("#log").html(message);
-                })
-                .run(true);
+                });
             </script>
         </body>
     </html>
