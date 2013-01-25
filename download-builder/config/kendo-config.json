@@ -788,6 +788,17 @@
             "source": "kendo.timepicker.min.js"
         },
         {
+            "id": "tooltip",
+            "name": "Tooltip",
+            "category": "web",
+            "description": "",
+            "depends": [
+                "core",
+                "popup"
+            ],
+            "source": "kendo.tooltip.min.js"
+        },
+        {
             "id": "touch",
             "name": "Touch",
             "category": "mobile",

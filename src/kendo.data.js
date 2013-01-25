@@ -243,6 +243,12 @@ kendo_module({
                 }
             }
             return -1;
+        },
+
+        forEach: function(f) {
+            for (var i = 0; i < this.length; ++i) {
+                f(this[i], i);
+            }
         }
     });
 
@@ -291,6 +297,14 @@ kendo_module({
 
         shouldSerialize: function(field) {
             return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== FUNCTION && field !== "uid";
+        },
+
+        forEach: function(f) {
+            for (var i in this) {
+                if (this.shouldSerialize(i)) {
+                    f(this[i], i);
+                }
+            }
         },
 
         toJSON: function() {
