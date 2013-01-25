@@ -7492,30 +7492,31 @@
     }
 
     function addDuration(date, value, unit, weekStartDay) {
-        if (!date) {
-            return date;
+        var result = date;
+
+        if (date) {
+            date = toDate(date);
+
+            if (unit === YEARS) {
+                result = new Date(date.getFullYear() + value, 0, 1);
+            } else if (unit === MONTHS) {
+                result = new Date(date.getFullYear(), date.getMonth() + value, 1);
+            } else if (unit === WEEKS) {
+                result = addDuration(startOfWeek(date, weekStartDay), value * 7, DAYS);
+            } else if (unit === DAYS) {
+                result = new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
+            } else if (unit === HOURS) {
+                result = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + value);
+                if (value > 0 && dateEquals(date, result)) {
+                    result = addDuration(date, value + 1, unit, weekStartDay);
+                }
+            } else if (unit === MINUTES) {
+                result = new Date(date.getTime() + value * TIME_PER_MINUTE);
+                result.setSeconds(0);
+            }
         }
 
-        date = toDate(date);
-
-        if (unit === YEARS) {
-            return new Date(date.getFullYear() + value, 0, 1);
-        } else if (unit === MONTHS) {
-            return new Date(date.getFullYear(), date.getMonth() + value, 1);
-        } else if (unit === WEEKS) {
-            var weekStart = startOfWeek(date, weekStartDay);
-            return addDuration(weekStart, value * 7, DAYS);
-        } else if (unit === DAYS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
-        } else if (unit === HOURS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours() + value);
-        } else if (unit === MINUTES) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours(), date.getMinutes() + value);
-        }
-
-        return date;
+        return result;
     }
 
     function startOfWeek(date, weekStartDay) {
