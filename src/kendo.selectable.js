@@ -73,10 +73,12 @@ kendo_module({
                 ctrlKey = e.event.ctrlKey,
                 multiple = that.options.multiple,
                 shiftKey = multiple && e.event.shiftKey,
-                selected;
+                selected,
+                whichCode = e.event.which,
+                buttonCode = e.event.button;
 
-            //in case of hierarchy
-            if (target.closest("." + SELECTABLE)[0] !== that.element[0]) {
+            //in case of hierarchy or right-click
+            if (target.closest("." + SELECTABLE)[0] !== that.element[0] || whichCode && whichCode == 3 || buttonCode && buttonCode == 2) {
                 return;
             }
 
