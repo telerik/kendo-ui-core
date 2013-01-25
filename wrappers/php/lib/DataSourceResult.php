@@ -100,13 +100,20 @@ class DataSourceResult {
         if (in_array($field, $columns)) {
             $index = array_search($filter, $all);
 
+            $value = ":filter$index";
+
+            if ($this->isDate($filter->value)) {
+                $field = "date($field)";
+                $value = "date($value)";
+            }
+
             if ($this->isString($filter->value)) {
                 $operator = $this->stringOperators[$filter->operator];
             } else {
                 $operator = $this->operators[$filter->operator];
             }
 
-            return "$field $operator :filter$index";
+            return "$field $operator $value";
         }
     }
 
@@ -132,8 +139,12 @@ class DataSourceResult {
         return " WHERE $where";
     }
 
+    private function isDate($value) {
+        return date_parse($value)["error_count"] < 1;
+    }
+
     private function isString($value) {
-        return !is_bool($value) && !is_numeric($value);
+        return !is_bool($value) && !is_numeric($value) && !$this->isDate($value);
     }
 
     private function bindFilterValues($statement, $filter) {
@@ -143,6 +154,7 @@ class DataSourceResult {
         for ($index = 0; $index < count($filters); $index++) {
             $value = $filters[$index]->value;
             $operator = $filters[$index]->operator;
+            $date = date_parse($value);
 
             if ($operator == 'contains' || $operator == 'doesnotcontain') {
                 $value = "%$value%";
