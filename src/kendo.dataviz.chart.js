@@ -2,7 +2,8 @@ kendo_module({
     id: "chart",
     name: "Chart",
     category: "dataviz",
-    description: "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
+    description: "The Chart widget uses modern browser technologies to " +
+                 "render high-quality data visualizations in the browser.",
     depends: [ "data", "userevents", "dataviz-core", "dataviz-svg" ]
 });
 
@@ -7460,12 +7461,9 @@ kendo_module({
             return null;
         }
 
-        var get = getField.cache[field] =
-                getField.cache[field] || getter(field, true);
-
+        var get = getter(field, true);
         return get(row);
     }
-    getField.cache = {};
 
     function toDate(value) {
         var result,
