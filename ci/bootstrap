@@ -1,3 +1,4 @@
 #!/bin/bash
 
-ssh $1 'bash -s' < chef-setup.sh
+PLATFORM="ubuntu"
+ssh $1 'bash -s' < chef-setup-${2-$PLATFORM}.sh
