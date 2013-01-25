@@ -159,7 +159,7 @@ kendo_module({
                 colors = map(colors, parse);
             }
 
-            element.addClass("k-colorpalette")
+            element.addClass("k-widget k-colorpalette")
                 .append($(that._template({
                     colors : colors,
                     size   : options.size,
@@ -300,7 +300,7 @@ kendo_module({
             options = that.options;
             element = that.element;
 
-            that.wrapper = element.addClass("k-flatcolorpicker")
+            that.wrapper = element.addClass("k-widget k-flatcolorpicker")
                 .append(that._template(options))
                 .find("*").attr(UNSELECTABLE, "on").end();
 
