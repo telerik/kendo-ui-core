@@ -1588,6 +1588,40 @@ kendo_module({
         }
     });
 
+    function mergeGroups(target, dest, start, count) {
+        var group,
+            idx = 0,
+            items;
+
+        while (dest.length && count) {
+            group = dest[idx];
+            items = group.items;
+
+            if (target && target.field === group.field && target.value === group.value) {
+                if (target.hasSubgroups && target.items.length) {
+                    mergeGroups(target.items[target.items.length - 1], group.items, start, count);
+                } else {
+                    items = items.slice(start, count);
+                    count -= items.length;
+                    target.items = target.items.concat(items);
+                }
+                dest.splice(idx--, 1);
+            } else {
+                items = items.slice(start, count);
+                count -= items.length;
+                group.items = items;
+                if (!group.items.length) {
+                    dest.splice(idx--, 1);
+                }
+            }
+
+            start = 0;
+            if (++idx >= dest.length) {
+                break;
+            }
+        }
+    }
+
     function flattenGroups(data) {
         var idx, length, result = [];
 
@@ -1600,6 +1634,7 @@ kendo_module({
         }
         return result;
     }
+
     function wrapGroupItems(data, model) {
         var idx, length, group, items;
         if (model) {
@@ -2144,7 +2179,7 @@ kendo_module({
         _addRange: function(data) {
             var that = this,
                 start = that._skip || 0,
-                end = start + data.length;
+                end = start + that._flatData(data).length;
 
             that._ranges.push({ start: start, end: end, data: data });
             that._ranges.sort( function(x, y) { return x.start - y.start; } );
@@ -2615,24 +2650,27 @@ kendo_module({
                 processed,
                 options = that.options,
                 remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates,
+                flatData,
+                count,
                 length;
 
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
                 range = ranges[skipIdx];
                 if (start >= range.start && start <= range.end) {
-                    var count = 0;
+                    count = 0;
 
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
+                        flatData = that._flatData(range.data);
 
-                        if (range.data.length && start + count >= range.start) {
+                        if (flatData.length && start + count >= range.start) {
                             rangeData = range.data;
                             rangeEnd = range.end;
 
                             if (!remote) {
                                 var sort = normalizeGroup(that.group() || []).concat(normalizeSort(that.sort() || []));
                                 processed = Query.process(range.data, { sort: sort, filter: that.filter() });
-                                rangeData = processed.data;
+                                flatData = rangeData = processed.data;
 
                                 if (processed.total !== undefined) {
                                     rangeEnd = processed.total;
@@ -2643,12 +2681,12 @@ kendo_module({
                             if (start + count > range.start) {
                                 startIndex = (start + count) - range.start;
                             }
-                            endIndex = rangeData.length;
+                            endIndex = flatData.length;
                             if (rangeEnd > end) {
                                 endIndex = endIndex - (rangeEnd - end);
                             }
                             count += endIndex - startIndex;
-                            data = data.concat(rangeData.slice(startIndex, endIndex));
+                            data = that._mergeGroups(data, rangeData, startIndex, endIndex);
 
                             if (end <= range.end && count == end - start) {
                                 return data;
@@ -2659,6 +2697,22 @@ kendo_module({
                 }
             }
             return [];
+        },
+
+        _mergeGroups: function(data, range, startIndex, endIndex) {
+            if (this._isServerGrouped()) {
+                var temp = range.toJSON(),
+                    prevGroup;
+
+                if (data.length) {
+                    prevGroup = data[data.length - 1];
+                }
+
+                mergeGroups(prevGroup, temp, startIndex, endIndex);
+
+                return data.concat(temp);
+            }
+            return data.concat(range.slice(startIndex, endIndex));
         },
 
         skip: function() {
@@ -2696,8 +2750,8 @@ kendo_module({
                 }
 
                 data = that.reader.parse(data);
-                range.data = that._observe(that.reader.data(data));
-                range.end = range.start + range.data.length;
+                range.data = that._observe(that._readData(data));
+                range.end = range.start + that._flatData(range.data).length;
                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
                 if (callback) {

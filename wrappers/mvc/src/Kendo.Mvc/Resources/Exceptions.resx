@@ -322,9 +322,6 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="CannotSetAutoBindIfBoundDuringInitialization" xml:space="preserve">
     <value>Cannot set AutoBind if widget is populated during initialization</value>
   </data>
-  <data name="CannotUseGroupingAndVirtualization" xml:space="preserve">
-    <value>Grouping and Virtual Scrolling is not supported.</value>
-  </data>
   <data name="TooltipContainerShouldBeSet" xml:space="preserve">
     <value>You should set Tooltip container. Tooltip.For(container)</value>
   </data>

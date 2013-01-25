@@ -783,7 +783,7 @@
                 equal(view[1].items.length, 1);
             });
 
-            test("query does not group data if serverGrouping is true", function() {
+            test("query does not group data if serverGrouping is true", 3, function() {
                 var transport = new RemoteTransport({
                         read: "foo"
                     });
@@ -794,7 +794,7 @@
                 }).bind("change", function() {
                     start();
 
-                    var view = dataSource.view();
+                    var view = dataSource.view()[0].items;
                     equal(view.length, 2);
                     equal(view[0].age, 1);
                     equal(view[1].age, 2);
@@ -802,11 +802,11 @@
 
                 $.mockjax({
                     url: "foo",
-                    responseText: '[{"age": 1}, {"age": 2}]'
+                    responseText: '[{ "items": [{"age": 1}, {"age": 2}] }]'
                 });
 
                 dataSource.query( { group: [{ field: "age" }] });
-                stop(1);
+                stop();
             });
 
             test("group with paging", function() {
@@ -1159,7 +1159,7 @@
                     serverGrouping: true,
                     serverFiltering: true,
                     serverAggregates: true,
-                    data: [{foo: 1, bar: "1"}],
+                    data: [ { items: [{foo: 1, bar: "1"}] } ],
                     page: 10,
                     pageSize: 5,
                     sort: { field: "foo", dir: "asc" },

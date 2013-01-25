@@ -615,6 +615,188 @@
                 dataSource.range(2,1);
                 ok(dataSource.getByUid(dataSource.view()[0].uid));
             });
+
+            test("range with server grouping", function() {
+                var totalCount = 47,
+                    dataSource = new DataSource({
+                        pageSize: 20,
+                        serverPaging: true,
+                        group: "foo",
+                        serverGrouping: true,
+                        transport: {
+                            read: function(options) {
+                                var skip = options.data.skip;
+                                var take = options.data.take;
+                                var group = { items: [] };
+                                for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                                    group.items.push({ foo: i });
+                                }
+                                options.success({ groups: [group], total: totalCount });
+                            }
+                        },
+                        schema: {
+                            data: "data",
+                            groups: "groups",
+                            total: "total"
+                        }
+                    });
+
+                dataSource.read();
+                dataSource.range(6, 20);
+                var view = dataSource.view();
+                equal(view.length, 1);
+                equal(view[0].items.length, 20);
+                equal(view[0].items[0].foo, 6);
+            });
+
+            test("range with server grouping ranges are not modfied", function() {
+                var totalCount = 47,
+                    dataSource = new DataSource({
+                        pageSize: 20,
+                        serverPaging: true,
+                        group: "foo",
+                        serverGrouping: true,
+                        transport: {
+                            read: function(options) {
+                                var skip = options.data.skip;
+                                var take = options.data.take;
+                                var data = [];
+
+                                var group = { items: [] };
+                                for (var i = 0; i < 10; i++) {
+                                    group.items.push({ foo: i });
+                                }
+                                data.push(group);
+
+                                group = { items: [] };
+                                for (var i = 0; i < 10; i++) {
+                                    group.items.push({ foo: i });
+                                }
+                                data.push(group);
+                                options.success({ groups: data, total: totalCount });
+                            }
+                        },
+                        schema: {
+                            data: "data",
+                            groups: "groups",
+                            total: "total"
+                        }
+                    });
+
+                dataSource.read();
+                dataSource.range(6, 20);
+                equal(dataSource._flatData(dataSource._ranges[0].data).length, 20);
+            });
+
+            test("mergeGroup returns a subset of the data", function() {
+                var dataSource = new DataSource({
+                    serverGrouping: true,
+                    group: "foo"
+                }),
+                data = [{ field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }];
+
+                var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 1, 2);
+
+                equal(result[0].items.length, 1);
+            });
+
+            test("mergeGroup returns a subset of the data if range is of multiple groups", function() {
+                var dataSource = new DataSource({
+                        serverGrouping: true,
+                        group: "foo"
+                    }),
+                    data = [
+                        { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+                        { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }
+                    ];
+
+                var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 1, 4);
+
+                equal(result.length, 2);
+                equal(result[0].items.length, 2);
+                equal(result[1].items.length, 2);
+            });
+
+            test("mergeGroup returns a subset of the data if range is of multiple groups skiping the first groups", function() {
+                var dataSource = new DataSource({
+                        serverGrouping: true,
+                        group: "foo"
+                    }),
+                    data = [
+                        { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+                        { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }
+                    ];
+
+                var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 3, 2);
+
+                equal(result.length, 1);
+                equal(result[0].items.length, 2);
+            });
+
+            test("mergeGroup merges group with previous data", function() {
+                var dataSource = new DataSource({
+                        serverGrouping: true,
+                        group: "foo"
+                    }),
+                    data = [
+                        { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+                        { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }
+                        ],
+                    originalData = [ { field: "foo", value:"3", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }];
+
+                var result = dataSource._mergeGroups(originalData, new kendo.data.ObservableArray(data), 1, 4);
+
+                equal(result.length, 3);
+                equal(result[0].items.length, 3);
+                equal(result[1].items.length, 2);
+                equal(result[2].items.length, 2);
+            });
+
+            test("mergeGroup merges group with previous data if from the same group", function() {
+                var dataSource = new DataSource({
+                        serverGrouping: true,
+                        group: "foo"
+                    }),
+                    data = [ { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] } ],
+                    originalData = [ { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }];
+
+                var result = dataSource._mergeGroups(originalData,  new kendo.data.ObservableArray(data), 0, 2);
+
+                equal(result.length, 1);
+                equal(result[0].items.length, 5);
+            });
+
+            test("mergeGroup merges group with previous data if from the same group with nested groups", function() {
+                var dataSource = new DataSource({
+                        serverGrouping: true,
+                        group: "foo"
+                    }),
+                    data = [{ field: "foo", value:"1", hasSubgroups: true, items: [{ field: "bar", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }] }  ],
+                    originalData = [{ field: "foo", value:"1", hasSubgroups: true, items: [{ field: "bar", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }] } ];
+
+                var result = dataSource._mergeGroups(originalData, new kendo.data.ObservableArray(data), 0, 2);
+
+                equal(result.length, 1);
+                equal(result[0].items.length, 1);
+                equal(result[0].items[0].items.length, 5);
+            });
+
+            test("mergeGroup merges group with previous data if from the same group and multi group range", function() {
+                var dataSource = new DataSource({
+                        serverGrouping: true,
+                        group: "foo"
+                    }),
+                    data = [ { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+                        { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }],
+                    originalData = [ { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }];
+
+                var result = dataSource._mergeGroups(originalData, new kendo.data.ObservableArray(data), 0, 5);
+
+                equal(result.length, 2);
+                equal(result[0].items.length, 6);
+                equal(result[1].items.length, 2);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
