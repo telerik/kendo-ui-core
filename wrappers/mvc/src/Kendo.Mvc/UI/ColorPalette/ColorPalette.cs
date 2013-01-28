@@ -14,8 +14,11 @@ namespace Kendo.Mvc.UI
             : base(viewContext, initializer, viewData)
         {
             Palette = ColorPickerPalette.Basic;
+
+            Columns = ColumnsDefault;
         }
 
+        public const int ColumnsDefault = 10;
         public int Columns { get; set; }
 
         public object Size { get; set; }
@@ -43,7 +46,7 @@ namespace Kendo.Mvc.UI
                 options["palette"] = PaletteColors;
             }
 
-            if (Columns != 10)
+            if (Columns != ColumnsDefault)
             {
                 options["columns"] = Columns;
             }
