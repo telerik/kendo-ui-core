@@ -45,12 +45,6 @@ kendo_module({
 
     // Stock chart ===========================================================
     var StockChart = Chart.extend({
-        init: function(element, options) {
-            var chart = this;
-
-            Chart.fn.init.call(chart, element, options);
-        },
-
         _applyDefaults: function(options, themeOptions) {
             var chart = this,
                 width = chart.element.width() || dataviz.DEFAULT_WIDTH;
