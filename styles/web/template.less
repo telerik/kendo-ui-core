@@ -195,7 +195,8 @@
 td.k-group-cell,
 .k-calendar th,
 .k-dropzone-hovered,
-.k-upload-files
+.k-upload-files,
+.k-widget.k-popup
 {
     background-color: @group-background-color;
 }
@@ -431,7 +432,7 @@ textarea.k-textbox:hover,
 
 .k-menu .k-state-hover>.k-state-active
 {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 .k-state-highlight
@@ -445,7 +446,7 @@ textarea.k-textbox:hover,
 {
     background-color: @hover-background-color;
     border-color: @hover-border-color;
-	color: @hover-text-color;
+    color: @hover-text-color;
 }
 
 .k-state-selected,
@@ -545,7 +546,7 @@ div.k-imagebrowser-dropzone em
 .k-dropdown-wrap.k-state-hover.k-state-focused
 {
     background-color: @select-hover-background-color;
-	.composite-background(@hover-gradient);
+    .composite-background(@hover-gradient);
     border-color: @select-border-color;
 }
 
@@ -631,9 +632,9 @@ div.k-imagebrowser-dropzone em
 .input-prepend .k-tooltip-validation,
 .input-append .k-tooltip-validation
 {
-	font-size: 12px;
-	position: relative;
-	top: 3px;
+    font-size: 12px;
+    position: relative;
+    top: 3px;
 }
 
 /* Splitter */
@@ -714,14 +715,14 @@ div.k-imagebrowser-dropzone em
 .k-grid-header .k-header.k-state-focused,
 .k-grid td.k-state-focused
 {
-	background-color:lighten(@hover-background-color, 20%);
-	.box-shadow(inset 0 0 6px @hover-border-color);
+    background-color:lighten(@hover-background-color, 20%);
+    .box-shadow(inset 0 0 6px @hover-border-color);
 }
 
 .k-grid td.k-state-selected.k-state-focused
 {
-	.box-shadow(inset 0 0 6px darken(@selected-background-color, 30%));
-	background-color: lighten(@selected-background-color, 3%);
+    .box-shadow(inset 0 0 6px darken(@selected-background-color, 30%));
+    background-color: lighten(@selected-background-color, 3%);
 }
 
 .k-popup,
