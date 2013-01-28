@@ -58,19 +58,19 @@ class ElementTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHtmlSetsTheHtmlContentOfTheElement() {
-        $this->element->Html('<span>foo</span>');
+        $this->element->html('<span>foo</span>');
 
         $this->assertEquals('<div><span>foo</span></div>', $this->element->outerHtml());
     }
 
     public function testHtmlReturnsSelf() {
-        $this->assertEquals($this->element, $this->element->Html('foo'));
+        $this->assertEquals($this->element, $this->element->html('foo'));
     }
 
     public function testHtmlOverridesChildren(){
         $this->element->append(new Kendo\Html\Element('span'));
 
-        $this->element->Html('foo');
+        $this->element->html('foo');
 
         $this->assertEquals('<div>foo</div>', $this->element->outerHtml());
     }

@@ -15,7 +15,7 @@ class Element implements Node {
     }
 
     public function text($value) {
-        return $this->Html(Htmlentities($value));
+        return $this->html(Htmlentities($value));
     }
 
     public function Html($value) {

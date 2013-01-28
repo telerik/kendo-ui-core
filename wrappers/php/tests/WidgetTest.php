@@ -12,7 +12,7 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHtmlUsesIdAndTagName() {
-        $this->assertEquals('<div id="foo"></div>', $this->widget->Html());
+        $this->assertEquals('<div id="foo"></div>', $this->widget->html());
     }
 
     public function testScriptReturnsPluginInitializationStatement() {
@@ -33,7 +33,7 @@ class WidgetTest extends PHPUnit_Framework_TestCase {
 
     public function testAttrAppliesHtmlAttributes() {
         $this->widget->attr('title', 'bar');
-        $this->assertEquals('<div id="foo" title="bar"></div>', $this->widget->Html());
+        $this->assertEquals('<div id="foo" title="bar"></div>', $this->widget->html());
     }
 }
 

@@ -3,8 +3,18 @@
 namespace Kendo\UI;
 
 class Window extends \Kendo\UI\Widget {
+    protected $ignore = array('content');
+
     public function name() {
         return 'Window';
+    }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('div');
+
+        $element->html($this->getProperty('content'));
+
+        return $element;
     }
 //>> Properties
 

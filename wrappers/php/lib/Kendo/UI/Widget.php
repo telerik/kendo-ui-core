@@ -30,7 +30,7 @@ abstract class Widget extends \Kendo\SerializableObject{
         }
     }
 
-    public function Html() {
+    public function html() {
         $element = $this->createElement();
 
         $this->addAttributes($element);
@@ -43,7 +43,7 @@ abstract class Widget extends \Kendo\SerializableObject{
     public function render() {
         $output = array();
 
-        $output[] = $this->Html();
+        $output[] = $this->html();
         $output[] = '<script>';
         $output[] = $this->script();
         $output[] = '</script>';
