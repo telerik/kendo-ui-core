@@ -186,13 +186,13 @@ module("nested elements", {
     setup: function() {
         element = $('<div id="parent"><div class="foo" /><div id="child"><div class="foo" /></div></div>');
         parentEvents = new UserEvents(element, {
-            filter: element.children(".foo")
+            filter: ">.foo"
         });
 
         childElement = element.find("#child");
 
         childEvents = new UserEvents(childElement, {
-            filter: childElement.children(".foo")
+            filter: ">.foo"
         });
     }
 });

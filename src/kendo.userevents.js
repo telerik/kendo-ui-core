@@ -53,6 +53,7 @@ kendo_module({
     function getTouches(e) {
         var touches = [],
             originalEvent = e.originalEvent,
+            currentTarget = e.currentTarget,
             idx = 0, length,
             changedTouches,
             touch;
@@ -73,6 +74,7 @@ kendo_module({
                     location: touch,
                     event: e,
                     target: touch.target,
+                    currentTarget: currentTarget,
                     id: touch.identifier
                 });
             }
@@ -82,6 +84,7 @@ kendo_module({
                 location: originalEvent,
                 event: e,
                 target: e.target,
+                currentTarget: currentTarget,
                 id: originalEvent.pointerId
 
             });
@@ -90,6 +93,7 @@ kendo_module({
                 id: 1, // hardcoded ID for mouse event;
                 event: e,
                 target: e.target,
+                currentTarget: currentTarget,
                 location: e
             });
         }
@@ -440,10 +444,8 @@ kendo_module({
 
                 touch = touches[idx];
 
-                target = $(touch.target);
-
                 if (filter) {
-                    target = target.is(filter) ? target : target.closest(filter, that.element);
+                    target = $(touch.currentTarget); // target.is(filter) ? target : target.closest(filter, that.element);
                 } else {
                     target = that.element;
                 }
