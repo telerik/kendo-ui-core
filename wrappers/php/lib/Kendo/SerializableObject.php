@@ -18,6 +18,11 @@ abstract class SerializableObject implements Serializable {
 
         foreach($this->properties as $key => $value) {
             if (!in_array($key, $this->ignore)) {
+
+                if ($value instanceof Serializable) {
+                    $value = $value->properties();
+                }
+
                 $properties[$key] = $value;
             }
         }
@@ -32,10 +37,6 @@ abstract class SerializableObject implements Serializable {
             $values = $this->properties[$key];
         }
 
-        if ($value instanceof Serializable) {
-            $value = $value->properties();
-        }
-
         $values[] = $value;
 
         $this->properties[$key] = $values;
@@ -44,7 +45,11 @@ abstract class SerializableObject implements Serializable {
     }
 
     protected function getProperty($key) {
-        return $this->properties[$key];
+        if (array_key_exists($key, $this->properties)) {
+            return $this->properties[$key];
+        }
+
+        return null;
     }
 
     protected function setProperty($key, $value) {
