@@ -63,6 +63,7 @@ kendo_module({
                 id: 2,  // hardcoded ID for API call;
                 event: e,
                 target: e.target,
+                currentTarget: e.target,
                 location: e
             });
         }
