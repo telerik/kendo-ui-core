@@ -1,7 +1,9 @@
 
         <div id="example" class="k-content">
-            <div id="special-days">
-                <div id="calendar" style="width: 310px;"></div>
+            <div class="demo-section">
+                <div id="special-days">
+                    <div id="calendar"></div>
+                </div>
             </div>
 
             <script>
@@ -35,64 +37,94 @@
                                            '# } else { #' +
                                                "cocktail" +
                                            '# } #' +
-                                        '"></div>' +
-                                     '# } #' +
-                                     '#= data.value #'
+                                        '">#= data.value #</div>' +
+                                     '# } else { #' +
+                                     '#= data.value #' +
+                                     '# } #'
                         },
-                        footer: "Today - #=kendo.toString(data, 'd') #"
+                        footer: false
                     });
                 });
             </script>
 
             <style scoped>
+                .demo-section {
+                    height: 430px;
+                    width: 690px;  
+                }
                 #special-days {
-                    height: 240px;
-                    width: 500px;
-                    margin: 30px auto;
-                    padding: 22px 0 22px 21px;
-                    background: url('../../content/web/calendar/specialDays.png') transparent no-repeat 0 0;
+                    height: 100%;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    background: url('../../content/web/calendar/calendar-template.jpg') transparent no-repeat 0 bottom;
                 }
-
                 #calendar {
-                    border-radius: 3px 3px 3px 3px;
-                    border-style: solid;
-                    border-width: 1px;
+                    margin: 20px 0 0 265px;
+                    width: 340px;
+                    text-align: center;
                 }
-
-                .k-header {
-                    border-radius: 3px 3px 0 0;
-                }
-
                 #calendar .k-content {
-                    height: 168px;
+                    height: 300px;
                 }
-
+                #calendar,
+                #calendar .k-content,
+                #calendar .k-header,
+                #calendar th,
+                #calendar .k-link,
+                #calendar .k-state-hover,
+                #calendar .k-state-selected,
+                #calendar .k-state-focused {
+                    background: transparent;
+                    border-color: transparent;
+                    color: #fff;
+                    box-shadow: none;
+                }
+                #calendar .k-content .k-state-hover,
+                #calendar .k-content .k-state-focused {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                #calendar .k-state-selected, #calendar .k-state-selected.k-state-focused {
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+                #calendar .k-content .k-link {
+                    padding: 0;
+                    min-height: 40px;
+                    line-height: 40px;
+                }
+                #calendar th {
+                    padding-top: 20px;
+                    color: #8cbabf;
+                }
+                #calendar td.k-other-month .k-link {
+                    color: #8cbabf;
+                }
+                #calendar th,
+                #calendar td {
+                    text-align: center;
+                }
+                
+                /* Template Days */
+                .exhibition, .party, .cocktail {
+                        width: 40px;
+                        height: 40px;
+                        margin: auto;
+                        -webkit-border-radius: 100px;
+                        -moz-border-radius: 100px;
+                        border-radius: 50%;
+                        line-height: 40px;
+                }
                 .exhibition {
-                    background: transparent url(../../content/web/calendar/exhibition.png) no-repeat 0 50%;
-                    display: inline-block;
-                    width: 16px;
-                    height: 16px;
-                    vertical-align: middle;
-                    margin-right: 3px;
+                    background-color: #fff;
+                    color: #000;
                 }
-
                 .party {
-                    background: transparent url(../../content/web/calendar/party.png) no-repeat 0 50%;
-                    display: inline-block;
-                    width: 16px;
-                    height: 16px;
-                    vertical-align: middle;
-                    margin-right: 3px;
+                    background-color: #70c114;
                 }
-
                 .cocktail {
-                    background: transparent url(../../content/web/calendar/cocktail.png) no-repeat 0 50%;
-                    display: inline-block;
-                    width: 16px;
-                    height: 16px;
-                    vertical-align: middle;
-                    margin-right: 3px;
+                    background-color: #00a1e8;
                 }
-
             </style>
         </div>
