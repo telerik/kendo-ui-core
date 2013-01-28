@@ -1,4 +1,3 @@
 { "run_list": [
-    "recipe[nginx-origin]",
-    "recipe[rsync-origin]"
+    "recipe[nginx-origin]"
 ]}

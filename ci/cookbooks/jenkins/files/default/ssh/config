@@ -1,0 +1,6 @@
+StrictHostKeyChecking no
+
+Host kendoorigin
+    Hostname 10.177.25.183
+    User     nginx
+    Port     22
