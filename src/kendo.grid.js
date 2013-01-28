@@ -1233,7 +1233,7 @@
 
                     if (navigatable) {
                         that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                        that.table.focus();
+                        focusTable(that.table, true);
                     }
                 });
 
@@ -1336,7 +1336,12 @@
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
+                            var currentIndex = that.items().index($(that.current()).parent());
                             that.cancelRow();
+                            if (that.options.navigatable) {
+                                that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                                focusTable(that.table, true);
+                            }
                         }
                     }
                 }, options));
@@ -1746,7 +1751,9 @@
                     table.attr("aria-activedescendant", that._cellId);
 
                     if(element.length && scrollable) {
-                        that._scrollTo(element.parent()[0], that.content[0]);
+                        if ($.contains(that.content[0], element[0])) {
+                            that._scrollTo(element.parent()[0], that.content[0]);
+                        }
                         if (scrollable.virtual) {
                             that._scrollTo(element[0], that.content.find(">.k-virtual-scrollable-wrap")[0]);
                         } else {
@@ -1767,7 +1774,8 @@
         },
 
         _scrollTo: function(element, container) {
-            var isHorizontal =  element.tagName.toLowerCase() === "td",
+            var elementToLowercase = element.tagName.toLowerCase(),
+                isHorizontal =  elementToLowercase === "td" || elementToLowercase === "th",
                 elementOffset = element[isHorizontal ? "offsetLeft" : "offsetTop"],
                 elementOffsetDir = element[isHorizontal ? "offsetWidth" : "offsetHeight"],
                 containerScroll = container[isHorizontal ? "scrollLeft" : "scrollTop"],
@@ -1785,7 +1793,8 @@
                 currentProxy = proxy(that.current, that),
                 table = that.table,
                 headerTable = that.thead.parent(),
-                dataTable = table;
+                dataTable = table,
+                isRtl = kendo.support.isRtl(that.element);
 
             if (!that.options.navigatable) {
                 return;
@@ -1849,6 +1858,7 @@
                     currentIndex,
                     row,
                     index,
+                    tableToFocus,
                     shiftKey = e.shiftKey,
                     browser = kendo.support.browser,
                     current = currentProxy();
@@ -1861,7 +1871,9 @@
                     if (current) {
                         row = current.parent().prevAll(NAVROW).first();
                         if (!row[0]) {
-                            row = that.thead.parent().focus().find(NAVROW).first();
+                            tableToFocus = that.thead.parent();
+                            focusTable(tableToFocus, true);
+                            row = tableToFocus.find(NAVROW).first();
                         }
 
                         index = current.index();
@@ -1879,7 +1891,8 @@
                     if (current) {
                         row = current.parent().nextAll(NAVROW).first();
                         if (!row[0] && current.is("th")) {
-                            row = that.tbody.parent().focus().end().find(NAVROW).first();
+                            focusTable(that.tbody.parent());
+                            row = that.tbody.find(NAVROW).first();
                         }
                         index = current.index();
                         current = row.children().eq(index);
@@ -1892,10 +1905,10 @@
 
                     handled = true;
                     currentProxy(current);
-                } else if (canHandle && key == keys.LEFT) {
+                } else if (canHandle && key == (isRtl ? keys.RIGHT : keys.LEFT)) {
                     currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRSTNAVITEM));
                     handled = true;
-                } else if (canHandle && key == keys.RIGHT) {
+                } else if (canHandle && key == (isRtl ? keys.LEFT : keys.RIGHT)) {
                     if (current) {
                         if (current.next()[0]) {
                             current = current.nextAll(DATA_CELL + ":first");
@@ -1932,7 +1945,7 @@
                     }
                 } else if (keys.ESC == key) {
                     if (current && $.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
-                        that.table[0].focus();
+                        focusTable(that.table[0], true);
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
                         if (isInCell) {
@@ -1949,7 +1962,7 @@
                         if (browser.msie && parseInt(browser.version, 10) < 9) {
                             document.body.focus();
                         }
-                        table.focus();
+                        focusTable(table, true);
                         handled = true;
                     }
                 } else if (keys.TAB == key) {
@@ -2008,7 +2021,7 @@
                 }
 
                 if (!that.editable) {
-                    that.table.focus();
+                    focusTable(that.table);
                     return;
                 }
 
@@ -2037,7 +2050,7 @@
                 that.current(next);
             }
 
-            that.table.focus();
+            focusTable(that.table, true);
             if ((!isEdited && !next) || next) {
                 if (mode == "incell") {
                     that.editCell(that.current());
@@ -2405,7 +2418,7 @@
                 sortable,
                 filterable,
                 closeCallback = function() {
-                    that.thead.parent().focus();
+                    focusTable(that.thead.parent(), true);
                 },
                 cell;
 
@@ -2450,7 +2463,7 @@
                 cell,
                 filterMenu,
                 closeCallback = function() {
-                    that.thead.parent().focus();
+                    focusTable(that.thead.parent(), true);
                 },
                 filterable = that.options.filterable;
 
@@ -3358,7 +3371,7 @@
                 return;
             }
 
-            if (navigatable && (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement))) {
+            if (navigatable && (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement) || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {
@@ -3425,7 +3438,7 @@
                 }
 
                 if (that._current) {
-                    that._current.closest("table")[0].focus();
+                    focusTable(that._current.closest("table")[0], true);
                 }
             }
 
@@ -3456,6 +3469,26 @@
        return null;
    }
 
+    function focusTable(table, direct) {
+        if (direct === true) {
+            table = $(table);
+            var condition = kendo.support.browser.msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
+                scrollTop, scrollLeft;
+                if (condition) {
+                    scrollTop = table.parent().scrollTop();
+                    scrollLeft = table.parent().scrollLeft();
+                }
+               table[0].focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+                if (condition) {
+                    table.parent().scrollTop(scrollTop);
+                    table.parent().scrollLeft(scrollLeft);
+                }
+
+        } else {
+            $(table).one("focusin", function(e) { e.preventDefault(); }).focus();
+        }
+    }
+
    function tableClick(e) {
        var currentTarget = $(e.currentTarget),
            currentTable = currentTarget.closest("table")[0];
@@ -3468,7 +3501,7 @@
 
        if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
            setTimeout(function() {
-               currentTable.focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+               focusTable(currentTable, true);
            });
        }
 
