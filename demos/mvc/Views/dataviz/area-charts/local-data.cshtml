@@ -6,28 +6,93 @@
         var internetUsers = [
             {
                 "country": "United States",
+                "year": "1994",
+                "value": 4.9
+            },
+            {
+                "country": "United States",
+                "year": "1995",
+                "value": 9.2
+            },
+            {
+                "country": "United States",
+                "year": "1996",
+                "value": 16.4
+            },
+            {
+                "country": "United States",
+                "year": "1997",
+                "value": 21.6
+            },
+            {
+                "country": "United States",
+                "year": "1998",
+                "value": 30.1
+            },
+            {
+                "country": "United States",
+                "year": "1999",
+                "value": 35.9
+            },
+            {
+                "country": "United States",
+                "year": "2000",
+                "value": 43.1
+            },
+            {
+                "country": "United States",
+                "year": "2001",
+                "value": 49.2
+            },
+            {
+                "country": "United States",
+                "year": "2002",
+                "value": 59.0
+            },
+            {
+                "country": "United States",
+                "year": "2003",
+                "value": 61.9
+            },
+            {
+                "country": "United States",
+                "year": "2004",
+                "value": 65
+            },
+            {
+                "country": "United States",
                 "year": "2005",
-                "value": 67.96
+                "value": 68.3
             },
             {
                 "country": "United States",
                 "year": "2006",
-                "value": 68.93
+                "value": 69.2
             },
             {
                 "country": "United States",
                 "year": "2007",
-                "value": 75
+                "value": 75.3
             },
             {
                 "country": "United States",
                 "year": "2008",
-                "value": 74
+                "value": 74.2
             },
             {
                 "country": "United States",
                 "year": "2009",
-                "value": 78
+                "value": 71.2
+            },
+            {
+                "country": "United States",
+                "year": "2010",
+                "value": 74.2
+            },
+            {
+                "country": "United States",
+                "year": "2011",
+                "value": 78.2
             }
         ];
 
@@ -38,10 +103,10 @@
                     data: internetUsers
                 },
                 title: {
-                    text: "Internet Users"
+                    text: "Internet Users in United States"
                 },
                 legend: {
-                    position: "bottom"
+                    visible: false
                 },
                 seriesDefaults: {
                     type: "area",
@@ -57,10 +122,21 @@
                 valueAxis: {
                     labels: {
                         format: "{0}%"
+                    },
+                    line: {
+                        visible: false
                     }
                 },
                 categoryAxis: {
-                    field: "year"
+                    field: "year",
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= category # - #= value #%"
                 }
             });
         }

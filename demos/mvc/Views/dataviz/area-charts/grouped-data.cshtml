@@ -53,13 +53,28 @@
                                 format: "${0}",
                                 skip: 2,
                                 step: 2
-                            }
+                            },
+                            line: {
+                                visible: false
+                            },
+                            max: 700
                         },
                         categoryAxis: {
                             field: "date",
                             labels: {
                                 format: "MMM"
+                            },
+                            line: {
+                                visible: false
+                            },
+                            majorGridLines: {
+                                visible: false
                             }
+                        },
+                        tooltip: {
+                            visible: true,
+                            format: "{0}%",
+                            template: "#= series.name # - #= value #%"
                         }
                     });
                 }
