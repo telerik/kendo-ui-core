@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
             Enabled = true;
             Input = true;
             Buttons = false;
+            Preview = true;
         }
 
         public string Value { get; set; }
@@ -25,6 +26,8 @@ namespace Kendo.Mvc.UI
         public bool Opacity { get; set; }
 
         public bool Input { get; set; }
+
+        public bool Preview { get; set; }
 
         public bool Buttons { get; set; }
 
@@ -42,6 +45,11 @@ namespace Kendo.Mvc.UI
             if (!Input)
             {
                 options["input"] = false;
+            }
+
+            if (!Preview)
+            {
+                options["preview"] = false;
             }
 
             if (Buttons)

@@ -95,6 +95,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Indicates whether the picker will show a preview of the selected color.
+        /// </summary>
+        /// <param name="showPreview">Whether the preview area should be shown.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().FlatColorPicker()
+        ///             .Name("FlatColorPicker")
+        ///             .Preview(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public FlatColorPickerBuilder Preview(bool showPreview)
+        {
+            Component.Preview = showPreview;
+
+            return this;
+        }
+
+        /// <summary>
         /// Indicates whether the picker will show apply / cancel buttons.
         /// </summary>
         /// <param name="showButtons">Whether the buttons should be shown.</param>
