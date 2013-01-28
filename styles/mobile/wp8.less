@@ -42,7 +42,8 @@
 .km-wp8-dark a,
 .km-wp8-dark .k-widget,
 .km-wp8-dark .k-group,
-.km-wp8-dark .k-content
+.km-wp8-dark .k-content,
+.km-wp8-dark .km-button
 {
 	color: @main-text-dark;
 }
@@ -51,7 +52,8 @@
 .km-wp8-light a,
 .km-wp8-light .k-widget,
 .km-wp8-light .k-group,
-.km-wp8-light .k-content
+.km-wp8-light .k-content,
+.km-wp8-light .km-button
 {
 	color: @main-text-light;
 }
@@ -76,7 +78,7 @@
 
 .km-wp8 .km-actionsheet li
 {
-	padding: .2em 1em;
+	padding: .2em .8em;
 }
 
 .km-wp8 .km-button,
@@ -115,7 +117,42 @@
 	background: @accent-background;
 }
 
-.km-pages > li
+.km-wp8 .km-group-title
+{
+	text-transform: uppercase;
+}
+
+.km-wp8-dark .km-group-title
+{
+	color: #999;
+}
+
+.km-wp8-light .km-group-title
+{
+	color: #8c8c8c;
+}
+
+.km-scroller-pull .km-template
+{
+    text-transform: lowercase;
+}
+
+.km-navbar
+{
+	line-height: 1.6;
+}
+
+.km-navbar .km-button
+{
+	font-size: .8em;
+	line-height: 1.2;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.km-wp8 .km-pages > li
 {
 	width: .2em;
 	height: .2em;

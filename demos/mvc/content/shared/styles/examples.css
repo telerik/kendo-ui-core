@@ -2430,6 +2430,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     display: none;
 }
 
+#example .km-wp8
+{
+    font-size: 1.2rem;
+}
+
 #icon-list
 {
     margin: 0;
