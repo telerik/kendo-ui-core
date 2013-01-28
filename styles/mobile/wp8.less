@@ -278,11 +278,14 @@
 .km-wp8 input[type=week],
 .km-wp8 input[type=date],
 .km-wp8 input[type=time],
-.km-wp8 input[type=datetime]
+.km-wp8 input[type=datetime],
+.km-wp8 textarea
 {
 	border:2px solid #ccc;
 	background: #ccc;
 	color: #000;
+	font-size: 100%;
+	font-family: inherit;
 }
 
 .km-wp8 input[type=password]:focus,
@@ -297,7 +300,8 @@
 .km-wp8 input[type=week]:focus,
 .km-wp8 input[type=date]:focus,
 .km-wp8 input[type=time]:focus,
-.km-wp8 input[type=datetime]:focus
+.km-wp8 input[type=datetime]:focus,
+.km-wp8 textarea:focus
 {
 	border-color: @accent-background;
 	background-color: #fff;
