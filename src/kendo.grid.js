@@ -874,7 +874,7 @@
 
                 that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
-                    filter: ">.k-grid-header " + HEADERCELLS + ",>table>.k-grid-header " + HEADERCELLS,
+                    filter: that.content ? ">.k-grid-header " + HEADERCELLS : ">table>.k-grid-header " + HEADERCELLS,
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
