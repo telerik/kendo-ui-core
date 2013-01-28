@@ -29,6 +29,17 @@ class TabStripItem extends \Kendo\SerializableObject {
         return $this->setProperty('contentUrl', $value);
     }
 
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    public function startContent() {
+        ob_start();
+    }
+
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
 //<< Properties
 }
 

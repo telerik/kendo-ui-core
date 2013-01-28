@@ -29,6 +29,20 @@ class TreeViewItem extends \Kendo\SerializableObject {
         return $this->setProperty('expanded', $value);
     }
 
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    public function startContent() {
+        ob_start();
+    }
+
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
+    public function addItem(\Kendo\UI\TreeViewItem $item) {
+        return $this->add('items', $item);
+    }
 //<< Properties
 }
 

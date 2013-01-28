@@ -46,7 +46,25 @@ COMPOSITE_OPTION_SETTER = ERB.new(%{
 
 COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <%= unique_options.map { |option| option.to_setter }.join %>
-//<< Properties})
+
+<% if owner.name == 'items' %>
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    public function startContent() {
+        ob_start();
+    }
+
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
+<% if recursive %>
+    public function addItem(\\<%= php_namespace%>\\<%= php_class %> $item) {
+        return $this->add('items', $item);
+    }
+<% end %><% end %>
+//<< Properties}, 0, '<%>')
 
     COMPOSITE_OPTION = ERB.new(File.read("build/codegen/lib/php/composite_option.php.erb"), 0, '%<>')
 
@@ -169,7 +187,7 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
         end
 
         def php_namespace
-            namespace.split('.').map { |ns| ns.pascalize }.join('\\')
+            namespace.sub('.ui', '.UI').split('.').map { |ns| ns.pascalize }.join('\\')
         end
 
         def to_php(filename)

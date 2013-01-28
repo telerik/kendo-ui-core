@@ -7,9 +7,6 @@ class PanelBarItem extends \Kendo\SerializableObject {
         $this->text($text);
     }
 
-    public function startContent() {
-        ob_start();
-    }
 
     public function createElement() {
         $element = new \Kendo\Html\Element('li');
@@ -53,18 +50,6 @@ class PanelBarItem extends \Kendo\SerializableObject {
         return $element;
     }
 
-    public function endContent() {
-        $this->content(ob_get_clean());
-    }
-
-    public function content($value) {
-        return $this->setProperty('content', $value);
-    }
-
-    public function addItem(\Kendo\UI\PanelBarItem $item) {
-        return $this->add('items', $item);
-    }
-
 //>> Properties
 
     public function text($value) {
@@ -95,6 +80,20 @@ class PanelBarItem extends \Kendo\SerializableObject {
         return $this->setProperty('contentUrl', $value);
     }
 
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    public function startContent() {
+        ob_start();
+    }
+
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
+    public function addItem(\Kendo\UI\PanelBarItem $item) {
+        return $this->add('items', $item);
+    }
 //<< Properties
 }
 

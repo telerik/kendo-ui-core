@@ -25,6 +25,20 @@ class MenuItem extends \Kendo\SerializableObject {
         return $this->setProperty('selected', $value);
     }
 
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    public function startContent() {
+        ob_start();
+    }
+
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
+    public function addItem(\Kendo\UI\MenuItem $item) {
+        return $this->add('items', $item);
+    }
 //<< Properties
 }
 
