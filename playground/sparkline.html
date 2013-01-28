@@ -1,86 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bar Chart</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Sparklines</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.chart.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
     </head>
     <body>
-        <script type="text/javascript">
-            var baseOptions = {
-                title: {
-                },
-                legend: {
-                    visible: false
-                },
-                seriesDefaults: {
-                    type: "line",
-                    line: {
-                        width: 1,
-                        markers: {
-                            size: 2
-                        }
-                    }
-                },
-                axisDefaults: {
-                    majorGridLines: {
-                        visible: false
-                    }
-                },
-                categoryAxis: {
-                    labels: {
-                        rotation: 90,
-                        visible: false
-                    }
-                },
-                valueAxis: {
-                    labels: {
-                        visible: false
-                    }
-                }
-            };
-
-            $(document).ready(function() {
-                $(".chart1").kendoChart(
-                    $.extend(true, {}, baseOptions, {
-                        series: [{
-                            name: "Ideal",
-                            data: [3, 2, 1]
-                        },{
-                            name: "Actual",
-                            data: [3, 2.5, 2]
-                        }],
-                        valueAxis: {
-                            majorUnit: 1
-                        }
-                    })
-                );
-
-                $(".chart2").kendoChart($.extend(true, {}, baseOptions, {
+        <p>Some sparklines <span id="sparkline"></span> and more text</p>
+        <script>
+            $(function() {
+                $("#sparkline").kendoSparkline({
                     series: [{
-                        name: "Ideal",
-                        data: [300, 200, 100]
-                    },{
-                        name: "Actual",
-                        data: [300, 250, 200]
-                    }],
-                    categoryAxis: {
-                        categories: ["Now", "Then", "Later"]
-                    }
-                }));
+                        type: "line",
+                        data: [1, 2, 3]
+                    }]
+                });
             });
         </script>
-
-        <div class="chart1" style="width: 120px; height: 75px; float: left;">
-        </div>
-
-        <div class="chart2" style="width: 120px; height: 75px; margin-left: 150px;">
-        </div>
-
-        <div class="chart2" style="width: 120px; height: 75px; float: left;">
-        </div>
     </body>
 </html>
 

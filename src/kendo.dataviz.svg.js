@@ -91,7 +91,7 @@ kendo_module({
                     "<?xml version='1.0' ?>" +
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='#= d.options.width #px' height='#= d.options.height #px' " +
-                    "style='position: relative; display: block;'>" +
+                    "style='position: relative; display: " + (options.renderInline ? "inline" : "block") + ";'>" +
                     "#= d.renderDefinitions() #" +
                     "#= d.renderContent() #</svg>"
                 );
