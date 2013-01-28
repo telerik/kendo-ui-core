@@ -3,9 +3,25 @@
 namespace Kendo\UI;
 
 class PanelBar extends \Kendo\UI\Widget {
+    protected $ignore = array('items');
+
     public function name() {
         return 'PanelBar';
     }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('ul');
+        $items = $this->getProperty('items');
+
+        if ($items) {
+            foreach($items as $item) {
+                $element->append($item->createElement());
+            }
+        }
+
+        return $element;
+    }
+
 //>> Properties
 
     public function animation($value) {

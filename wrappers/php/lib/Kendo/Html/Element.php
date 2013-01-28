@@ -18,7 +18,7 @@ class Element implements Node {
         return $this->html(Htmlentities($value));
     }
 
-    public function Html($value) {
+    public function html($value) {
         $this->innerHtml = $value;
         $this->children = array();
 
