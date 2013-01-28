@@ -45,6 +45,7 @@
     function getTouches(e) {
         var touches = [],
             originalEvent = e.originalEvent,
+            currentTarget = e.currentTarget,
             idx = 0, length,
             changedTouches,
             touch;
@@ -65,6 +66,7 @@
                     location: touch,
                     event: e,
                     target: touch.target,
+                    currentTarget: currentTarget,
                     id: touch.identifier
                 });
             }
@@ -74,6 +76,7 @@
                 location: originalEvent,
                 event: e,
                 target: e.target,
+                currentTarget: currentTarget,
                 id: originalEvent.pointerId
 
             });
@@ -82,6 +85,7 @@
                 id: 1, // hardcoded ID for mouse event;
                 event: e,
                 target: e.target,
+                currentTarget: currentTarget,
                 location: e
             });
         }
@@ -432,10 +436,8 @@
 
                 touch = touches[idx];
 
-                target = $(touch.target);
-
                 if (filter) {
-                    target = target.is(filter) ? target : target.closest(filter, that.element);
+                    target = $(touch.currentTarget); // target.is(filter) ? target : target.closest(filter, that.element);
                 } else {
                     target = that.element;
                 }
