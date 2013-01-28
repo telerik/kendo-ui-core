@@ -8,48 +8,122 @@ class Editor extends \Kendo\UI\Widget {
     }
 //>> Properties
 
+    /**
+    * Indicates whether the Editor should submit encoded HTML tags.
+    * @param boolean $value
+    */
     public function encoded($value) {
         return $this->setProperty('encoded', $value);
     }
 
+    /**
+    * Defines the text of the labels that are shown within the editor. Used primarily for localization.
+    * @param Object $value
+    */
     public function messages($value) {
         return $this->setProperty('messages', $value);
     }
 
+    /**
+    * Allows custom stylesheets to be included within the editing area.
+    * @param array $value
+    */
     public function stylesheets($value) {
         return $this->setProperty('stylesheets', $value);
     }
 
+    /**
+    * Adds EditorTool to the Editor.
+    * @param \Kendo\UI\EditorTool $value
+    */
     public function addTool(\Kendo\UI\EditorTool $value) {
         return $this->add('tools', $value);
     }
 
+    /**
+    * Configuration for image browser dialog.
+    * @param \Kendo\UI\EditorImagebrowser $value
+    */
     public function imagebrowser(\Kendo\UI\EditorImagebrowser $value) {
         return $this->setProperty('imagebrowser', $value);
     }
 
+    /**
+    * Sets the change event of the Editor.
+    * Fires when Editor is blurred and its content has changed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function change($value) {
-        return $this->setProperty('change', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('change', $value);
     }
 
+    /**
+    * Sets the execute event of the Editor.
+    * Fires when an Editor command is executed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function execute($value) {
-        return $this->setProperty('execute', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('execute', $value);
     }
 
+    /**
+    * Sets the keydown event of the Editor.
+    * Fires when the user depresses a keyboard key. Triggered multiple times if the user holds the key down.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function keydown($value) {
-        return $this->setProperty('keydown', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('keydown', $value);
     }
 
+    /**
+    * Sets the keyup event of the Editor.
+    * Fires when the user releases a keyboard key.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function keyup($value) {
-        return $this->setProperty('keyup', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('keyup', $value);
     }
 
+    /**
+    * Sets the paste event of the Editor.
+    * Fires before when content is pasted in the Editor.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function paste($value) {
-        return $this->setProperty('paste', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('paste', $value);
     }
 
+    /**
+    * Sets the select event of the Editor.
+    * Fires when the Editor selection has changed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function select($value) {
-        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('select', $value);
     }
 
 //<< Properties

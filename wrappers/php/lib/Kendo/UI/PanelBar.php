@@ -24,40 +24,108 @@ class PanelBar extends \Kendo\UI\Widget {
 
 //>> Properties
 
+    /**
+    * A collection of visual animations used when PanelBar items are exapnd or collapsed through
+user interactions. Setting this option to false will disable all animations.
+    * @param boolean|\Kendo\UI\PanelBarAnimation $value
+    */
     public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 
+    /**
+    * Specifies how the PanelBar items are displayed when opened and closed. The following values
+are available:
+    * @param string $value
+    */
     public function expandMode($value) {
         return $this->setProperty('expandMode', $value);
     }
 
+    /**
+    * Adds PanelBarItem to the PanelBar.
+    * @param \Kendo\UI\PanelBarItem $value
+    */
     public function addItem(\Kendo\UI\PanelBarItem $value) {
         return $this->add('items', $value);
     }
 
+    /**
+    * Sets the activate event of the PanelBar.
+    * Triggered when an item of a PanelBar is activated.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function activate($value) {
-        return $this->setProperty('activate', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('activate', $value);
     }
 
+    /**
+    * Sets the collapse event of the PanelBar.
+    * Triggered when an item of a PanelBar is collapsed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function collapse($value) {
-        return $this->setProperty('collapse', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('collapse', $value);
     }
 
+    /**
+    * Sets the contentLoad event of the PanelBar.
+    * Fires when content is fetched from an AJAX request.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function contentLoad($value) {
-        return $this->setProperty('contentLoad', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('contentLoad', $value);
     }
 
+    /**
+    * Sets the error event of the PanelBar.
+    * Fires when AJAX request results in an error.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function error($value) {
-        return $this->setProperty('error', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('error', $value);
     }
 
+    /**
+    * Sets the expand event of the PanelBar.
+    * Triggered when an item of a PanelBar is expanded.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function expand($value) {
-        return $this->setProperty('expand', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('expand', $value);
     }
 
+    /**
+    * Sets the select event of the PanelBar.
+    * Triggered when an item of a PanelBar is selected.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function select($value) {
-        return $this->setProperty('select', new \Kendo\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('select', $value);
     }
 
 //<< Properties

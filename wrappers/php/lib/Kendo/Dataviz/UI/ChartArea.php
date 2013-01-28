@@ -2,7 +2,12 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartChartArea extends \Kendo\SerializableObject {
+/**
+* PHP wrapper for the chartArea option of Chart.
+*/
+/**
+*/
+class ChartArea extends \kendo\SerializableObject {
 //>> Properties
 
     /**
@@ -23,9 +28,9 @@ class StockChartChartArea extends \Kendo\SerializableObject {
 
     /**
     * The border of the chart area.
-    * @param \Kendo\Dataviz\UI\StockChartChartAreaBorder $value
+    * @param \Kendo\Dataviz\UI\ChartAreaBorder $value
     */
-    public function border(\Kendo\Dataviz\UI\StockChartChartAreaBorder $value) {
+    public function border(\Kendo\Dataviz\UI\ChartAreaBorder $value) {
         return $this->setProperty('border', $value);
     }
 

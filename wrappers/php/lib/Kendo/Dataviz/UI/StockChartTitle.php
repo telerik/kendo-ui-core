@@ -5,38 +5,74 @@ namespace Kendo\Dataviz\UI;
 class StockChartTitle extends \Kendo\SerializableObject {
 //>> Properties
 
+    /**
+    * The alignment of the title.
+    * @param string $value
+    */
     public function align($value) {
         return $this->setProperty('align', $value);
     }
 
+    /**
+    * The background color of the title.
+    * @param string $value
+    */
     public function background($value) {
         return $this->setProperty('background', $value);
     }
 
+    /**
+    * The border of the title.
+    * @param \Kendo\Dataviz\UI\StockChartTitleBorder $value
+    */
     public function border(\Kendo\Dataviz\UI\StockChartTitleBorder $value) {
         return $this->setProperty('border', $value);
     }
 
+    /**
+    * The font of the title.
+    * @param string $value
+    */
     public function font($value) {
         return $this->setProperty('font', $value);
     }
 
+    /**
+    * The margin of the title.
+    * @param float|Object $value
+    */
     public function margin($value) {
         return $this->setProperty('margin', $value);
     }
 
+    /**
+    * The padding of the title.
+    * @param float|Object $value
+    */
     public function padding($value) {
         return $this->setProperty('padding', $value);
     }
 
+    /**
+    * The position of the title.
+    * @param string $value
+    */
     public function position($value) {
         return $this->setProperty('position', $value);
     }
 
+    /**
+    * The title of the chart. You can also set the text directly for a title with default options.
+    * @param string $value
+    */
     public function text($value) {
         return $this->setProperty('text', $value);
     }
 
+    /**
+    * The visibility of the title.
+    * @param boolean $value
+    */
     public function visible($value) {
         return $this->setProperty('visible', $value);
     }

@@ -4,6 +4,25 @@ module CodeGen::PHP
         'schema' => ['model']
     }
 
+    TYPES = {
+        'Number' => 'float',
+        'String' => 'string',
+        'Boolean' => 'boolean',
+        'Object' => 'Object',
+        'Array' => 'array',
+        'Function' => '\kendo\JavaScriptFunction',
+        'Date' => 'date'
+    }
+
+    KEYWORDS = [ '__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case',
+'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo',
+'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile',
+'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements',
+'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new',
+'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch',
+'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor'
+ ]
+
     module Options
         def component_class
             Component
@@ -25,6 +44,12 @@ module CodeGen::PHP
             ArrayOption
         end
 
+        def php_name
+            return "_#{name}" if KEYWORDS.include?(@name)
+
+            @name
+        end
+
         def unique_options
             simple = simple_options
 
@@ -38,8 +63,13 @@ module CodeGen::PHP
         end
     end
 
+
 COMPOSITE_OPTION_SETTER = ERB.new(%{
-    public function <%= name %>(\\<%= php_namespace %>\\<%= php_class %> $value) {
+    /**
+    * <%= description %>
+    * @param <%= php_type %> $value
+    */
+    public function <%= php_name %>(<%= php_type %> $value) {
         return $this->setProperty('<%= name %>', $value);
     }
 })
@@ -48,20 +78,34 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <%= unique_options.map { |option| option.to_setter }.join %>
 
 <% if owner.name == 'items' %>
+    /**
+    * Sets the HTML content of the <%= php_class %>.
+    * @param string $value
+    */
     public function content($value) {
         return $this->setProperty('content', $value);
     }
 
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the <%= php_class %>.
+    */
     public function startContent() {
         ob_start();
     }
 
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the <%= php_class %>.
+    */
     public function endContent() {
         $this->content(ob_get_clean());
     }
 <% if recursive %>
-    public function addItem(\\<%= php_namespace%>\\<%= php_class %> $item) {
-        return $this->add('items', $item);
+    /**
+    * Adds <%= php_type %>.
+    * @param <%= php_type %> $value
+    */
+    public function addItem(<%= php_type %> $value) {
+        return $this->add('items', $value);
     }
 <% end %><% end %>
 //<< Properties}, 0, '<%>')
@@ -83,7 +127,11 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
         end
 
         def php_class
-            @owner.php_class + @name.pascalize
+            @owner.php_class + @name.pascalize.sub(@owner.name, '')
+        end
+
+        def php_type
+            "\\#{php_namespace}\\#{php_class}"
         end
 
         def path
@@ -97,33 +145,88 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
         end
     end
 
-DATA_SOURCE_SETTER = %{
+DATA_SOURCE_SETTER = ERB.new(%{
+    /**
+    * Sets the data source of the <%= owner.php_class %>.
+    * @param \\Kendo\\Data\\DataSource $value
+    */
     public function dataSource(\\Kendo\\Data\\DataSource $value) {
         return $this->setProperty('dataSource', $value);
     }
-}
+})
+
+HIERARCHY_DATA_SOURCE_SETTER = ERB.new(%{
+    /**
+    * Sets the data source of the <%= owner.php_class %>.
+    * @param \\Kendo\\Data\\HierarchyDataSource $value
+    */
+    public function dataSource(\\Kendo\\Data\\HierarchyDataSource $value) {
+        return $this->setProperty('dataSource', $value);
+    }
+})
 
 OPTION_SETTER = ERB.new(%{
-    public function <%= name %>($value) {
+    /**
+    * <%= description %>
+    * @param <%= php_type %> $value
+    */
+    public function <%= php_name %>($value) {
         return $this->setProperty('<%= name %>', $value);
     }
 })
 
+FUNCTION_SETTER = ERB.new(%{
+    /**
+    * Sets the <%= name %> option of the <%= owner.php_class %>.
+    * <%= description %>
+    * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
+    public function <%= php_name %>($value) {
+        if (is_string($value)) {
+            $value = new \\Kendo\\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('<%= name %>', $value);
+    }
+})
     class Option < CodeGen::Option
         include Options
 
         def to_setter
-            return DATA_SOURCE_SETTER if @name == 'dataSource'
+            if @name == 'dataSource'
+                return (@owner.name == 'TreeView' ? HIERARCHY_DATA_SOURCE_SETTER : DATA_SOURCE_SETTER).result(binding);
+            end
 
-            return EVENT_SETTER.result(binding) if @type[0] == 'Function' && @type.size == 1
+            return FUNCTION_SETTER.result(binding) if @type[0] == 'Function' && @type.size == 1
 
             OPTION_SETTER.result(binding)
+        end
+
+        def php_type
+            composite = @owner.composite_options.find_all { |o| o.name == @name && o != self }
+
+            types = @type.map { |type| TYPES[type] }
+
+            composite.each do |o|
+                types.push(o.php_type);
+            end
+
+            types.join('|')
         end
     end
 
 EVENT_SETTER = ERB.new(%{
+    /**
+    * Sets the <%= name %> event of the <%= owner.php_class %>.
+    * <%= description %>
+    * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    */
     public function <%= name %>($value) {
-        return $this->setProperty('<%= name %>', new \\Kendo\\JavaScriptFunction($value));
+        if (is_string($value)) {
+            $value = new \\Kendo\\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('<%= name %>', $value);
     }
 })
 
@@ -136,7 +239,11 @@ EVENT_SETTER = ERB.new(%{
     end
 
 ARRAY_SETTER = ERB.new(%{
-    public function add<%= item.name.pascalize %>(\\<%= php_namespace %>\\<%= item.php_class %> $value) {
+    /**
+    * Adds <%= item.php_class %> to the <%= owner.php_class %>.
+    * @param <%= item.php_type %> $value
+    */
+    public function add<%= item.name.pascalize %>(<%= item.php_type %> $value) {
         return $this->add('<%= name %>', $value);
     }
 })
