@@ -1,6 +1,7 @@
 <?php
     $php = file_get_contents($_SERVER['SCRIPT_FILENAME']);
     $php = trim(preg_replace('/<\?php.*include.*\?>/', '', $php));
+    $dataSourceResult = '';
 
     if (strpos($php, 'DataSourceResult.php')) {
         $dataSourceResult = file_get_contents('../../lib/DataSourceResult.php');

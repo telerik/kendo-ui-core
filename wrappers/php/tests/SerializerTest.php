@@ -1,8 +1,8 @@
 <?php
 
-reqUIre_once 'PHPUnit/Autoload.php';
-reqUIre_once __DIR__.'/../lib/Kendo/Autoload.php';
-reqUIre_once 'SerializableObjectTestDouble.php';
+require_once 'PHPUnit/Autoload.php';
+require_once __DIR__.'/../lib/Kendo/Autoload.php';
+require_once 'SerializableObjectTestDouble.php';
 
 class SerializerTest extends PHPUnit_Framework_TestCase {
     private $serializer;

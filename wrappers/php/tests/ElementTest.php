@@ -1,7 +1,7 @@
 <?php
 
-reqUIre_once __DIR__.'/../lib/Kendo/Autoload.php';
-reqUIre_once 'PHPUnit/Autoload.php';
+require_once __DIR__.'/../lib/Kendo/Autoload.php';
+require_once 'PHPUnit/Autoload.php';
 
 class ElementTest extends PHPUnit_Framework_TestCase {
 

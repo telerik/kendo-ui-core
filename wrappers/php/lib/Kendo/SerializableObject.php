@@ -5,6 +5,8 @@ namespace Kendo;
 abstract class SerializableObject implements Serializable {
     private $properties = array();
 
+    protected $ignore = array();
+
     public function toJSON() {
         $serializer = new Serializer();
 
@@ -12,7 +14,15 @@ abstract class SerializableObject implements Serializable {
     }
 
     public function properties() {
-        return $this->properties;
+        $properties = array();
+
+        foreach($this->properties as $key => $value) {
+            if (!in_array($key, $this->ignore)) {
+                $properties[$key] = $value;
+            }
+        }
+
+        return $properties;
     }
 
     protected function add($key, $value) {

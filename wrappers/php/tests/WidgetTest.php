@@ -1,7 +1,7 @@
 <?php
 
-reqUIre_once 'PHPUnit/Autoload.php';
-reqUIre_once 'WidgetTestDouble.php';
+require_once 'PHPUnit/Autoload.php';
+require_once 'WidgetTestDouble.php';
 
 class WidgetTest extends PHPUnit_Framework_TestCase {
 

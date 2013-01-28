@@ -1,6 +1,6 @@
 <?php
 
-reqUIre_once __DIR__.'/../lib/Kendo/Autoload.php';
+require_once __DIR__.'/../lib/Kendo/Autoload.php';
 
 class WidgetTestDouble extends Kendo\UI\Widget {
 
