@@ -132,17 +132,17 @@
 	color: #8c8c8c;
 }
 
-.km-scroller-pull .km-template
+.km-wp8 .km-scroller-pull .km-template
 {
     text-transform: lowercase;
 }
 
-.km-navbar
+.km-wp8 .km-navbar
 {
 	line-height: 1.6;
 }
 
-.km-navbar .km-button
+.km-wp8 .km-navbar .km-button
 {
 	font-size: .8em;
 	line-height: 1.2;
@@ -264,4 +264,41 @@
 	.border-radius(24px);
 	margin-bottom: .2em;
 	padding: .1em;
+}
+
+.km-wp8 input[type=password],
+.km-wp8 input[type=search],
+.km-wp8 input[type=number],
+.km-wp8 input[type=tel],
+.km-wp8 input[type=url],
+.km-wp8 input[type=email],
+.km-wp8 input[type=text]:not(.k-input),
+.km-wp8 input[type=month],
+.km-wp8 input[type=color],
+.km-wp8 input[type=week],
+.km-wp8 input[type=date],
+.km-wp8 input[type=time],
+.km-wp8 input[type=datetime]
+{
+	border:2px solid #ccc;
+	background: #ccc;
+	color: #000;
+}
+
+.km-wp8 input[type=password]:focus,
+.km-wp8 input[type=search]:focus,
+.km-wp8 input[type=number]:focus,
+.km-wp8 input[type=tel]:focus,
+.km-wp8 input[type=url]:focus,
+.km-wp8 input[type=email]:focus,
+.km-wp8 input[type=text]:not(.k-input):focus,
+.km-wp8 input[type=month]:focus,
+.km-wp8 input[type=color]:focus,
+.km-wp8 input[type=week]:focus,
+.km-wp8 input[type=date]:focus,
+.km-wp8 input[type=time]:focus,
+.km-wp8 input[type=datetime]:focus
+{
+	border-color: @accent-background;
+	background-color: #fff;
 }
