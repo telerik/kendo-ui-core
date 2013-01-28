@@ -265,6 +265,9 @@
         },
 
         changeTheme: function(themeName, animate) {
+            // Set transparent background to the chart area.
+            extend(kendo.dataviz.ui.themes[themeName].chart, { chartArea: { background: "transparent" } });
+
             if (Application.getThemeUrl(themeName) == Application.getCurrentThemeLink().attr("href")) {
                 return;
             }
