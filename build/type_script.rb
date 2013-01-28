@@ -17,6 +17,9 @@ module CodeGen::TypeScript
         'docs/api/framework/observablearray.md',
         'docs/api/framework/widget.md',
         'docs/api/framework/mobilewidget.md',
+        'docs/api/framework/draggable.md',
+        'docs/api/framework/droptarget.md',
+        'docs/api/framework/droptargetarea.md',
         'docs/api/web/ui.md'
     ]
 

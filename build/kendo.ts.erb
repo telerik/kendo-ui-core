@@ -179,6 +179,90 @@ module kendo.ui {
     class Widget extends Observable {
     }
 
+    class Draggable extends kendo.ui.Widget{
+        element: JQuery;
+        currentTarget: JQuery;
+        constructor(element: Element, options?: DraggableOptions);
+        options: DraggableOptions;
+    }
+
+    interface DraggableEvent extends JQueryEventObject {
+        sender?: Draggable;
+    }
+
+    class DropTarget extends kendo.ui.Widget{
+        element: JQuery;
+        constructor(element: Element, options?: DropTargetOptions);
+        options: DropTargetOptions;
+        destroyGroup(): void;
+    }
+
+    interface DropTargetOptions {
+        group?: string;
+        dragenter?(e: DropTargetDragenterEvent): void;
+        dragleave?(e: DropTargetDragleaveEvent): void;
+        drop?(e: DropTargetDropEvent): void;
+    }
+
+    interface DropTargetEvent extends JQueryEventObject {
+        sender?: DropTarget;
+    }
+
+    interface DropTargetDragenterEvent extends DropTargetEvent {
+        draggable?: kendo.ui.Draggable;
+    }
+
+    interface DropTargetDragleaveEvent extends DropTargetEvent {
+        draggable?: kendo.ui.Draggable;
+    }
+
+    interface DropTargetDropEvent extends DropTargetEvent {
+        draggable?: kendo.ui.Draggable;
+    }
+
+    class DropTargetArea extends kendo.ui.Widget{
+        element: JQuery;
+        constructor(element: Element, options?: DropTargetAreaOptions);
+        options: DropTargetAreaOptions;
+    }
+
+    interface DropTargetAreaOptions {
+        group?: string;
+        filter?: string;
+        dragenter?(e: DropTargetAreaDragenterEvent): void;
+        dragleave?(e: DropTargetAreaDragleaveEvent): void;
+        drop?(e: DropTargetAreaDropEvent): void;
+    }
+
+    interface DropTargetAreaEvent extends JQueryEventObject {
+        sender: DropTargetArea;
+    }
+
+    interface DropTargetAreaDragenterEvent extends DropTargetAreaEvent {
+        draggable?: JQuery;
+    }
+
+    interface DropTargetAreaDragleaveEvent extends DropTargetAreaEvent {
+        draggable?: JQuery;
+    }
+
+    interface DropTargetAreaDropEvent extends DropTargetAreaEvent {
+        draggable?: kendo.ui.Draggable;
+        dropTarget?: JQuery;
+    }
+
+    interface DraggableOptions {
+        axis?: string;
+        cursorOffset?: any;
+        distance?: number;
+        group?: string;
+        hint?: Function;
+        drag?(e: DraggableEvent): void;
+        dragcancel?(e: DraggableEvent): void;
+        dragend?(e: DraggableEvent): void;
+        dragstart?(e: DraggableEvent): void;
+    }
+
     interface GridColumnEditorOptions {
         field?: string;
         format?: string;
@@ -225,6 +309,9 @@ module <%= key %> {
 % end
 
 interface JQueryXHR {
+}
+
+interface JQueryEventObject {
 }
 
 interface JQuery {
