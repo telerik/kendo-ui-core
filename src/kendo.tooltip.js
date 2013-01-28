@@ -14,6 +14,7 @@ kendo_module({
         isPlainObject = $.isPlainObject,
         extend = $.extend,
         proxy = $.proxy,
+        DOCUMENT = $(document),
         isLocalUrl = kendo.isLocalUrl,
         ARIAIDSUFFIX = "_tt_active",
         DESCRIBEDBY = "aria-describedby",
@@ -119,6 +120,8 @@ kendo_module({
 
             that.dimensions = DIMENSIONS[axis];
 
+            that._documentKeyDownHandler = proxy(that.hide, that);
+
             that.element
                 .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
                 .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that));
@@ -199,7 +202,7 @@ kendo_module({
                     }
 
                     element.find("." + KCONTENTFRAME)
-                        .unbind("load" + NS)
+                        .off("load" + NS)
                         .on("load" + NS, function(){
                             that.trigger(CONTENTLOAD);
                             element.show();
@@ -265,6 +268,8 @@ kendo_module({
 
                 this.element.removeAttr("id")
                     .attr("aria-hidden", true);
+
+                DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
 
             that.popup.open();
@@ -294,6 +299,9 @@ kendo_module({
                     }
 
                     this.element.removeAttr("aria-hidden");
+
+                    DOCUMENT.on("keydown" + NS, that._documentKeyDownHandler);
+
                     that.trigger(SHOW);
                 },
                 close: function() {
@@ -372,6 +380,8 @@ kendo_module({
             }
 
             this.element.off(NS);
+
+            DOCUMENT.off("keydown" + NS, this._documentKeyDownHandler);
 
             Widget.fn.destroy.call(this);
         }

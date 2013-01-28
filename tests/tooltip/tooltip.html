@@ -44,6 +44,10 @@
                 }
             });
 
+            $.fn.press = function(key, ctrl, shift, alt) {
+                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt } );
+            }
+
             function triggerEvent(element, type, info) {
                 element.trigger($.Event(type, info));
 
@@ -454,6 +458,16 @@
 
                 equal(tooltip.popup.options.animation.open.effects, "foo");
             });
+
+            test("pressing esc closes the tooltip", function() {
+                var tooltip = new Tooltip(container, {
+                });
+                tooltip.show(container);
+                container.press(kendo.ESC);
+
+                ok(!tooltip.popup.visible());
+            });
+
         </script>
     </body>
 </html>
