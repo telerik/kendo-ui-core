@@ -10,7 +10,7 @@ elif grep -q 'Red Hat' /proc/version
 then
     yum update -y
     yum groupinstall -y "Development Tools"
-    yum install -y curl dmidecode zlib-devel libffi-devel openssl-devel
+    yum install -y curl dmidecode zlib-devel libffi-devel openssl-devel wget
 
     # libyaml
     cd /tmp
