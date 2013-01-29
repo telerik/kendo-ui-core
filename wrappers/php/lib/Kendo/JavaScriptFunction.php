@@ -3,14 +3,14 @@
 namespace Kendo;
 
 class JavaScriptFunction {
-    private $name;
+    private $value;
 
-    function __construct($name) {
-        $this->name = $name;
+    function __construct($value) {
+        $this->value = $value;
     }
 
-    public function name() {
-        return $this->name;
+    public function value() {
+        return $this->value;
     }
 }
 ?>

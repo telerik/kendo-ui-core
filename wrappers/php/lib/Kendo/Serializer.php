@@ -63,7 +63,7 @@ class Serializer {
         } else if ($value instanceof Serializable) {
             $this->serializeAssociativeArray($out, $value->properties());
         } else if ($value instanceof JavaScriptFunction) {
-            $out[] = $value->name();
+            $out[] = $value->value();
         } else if (is_array($value)) {
             if ($this->associativeArray($value) || empty($value)) {
                 $this->serializeAssociativeArray($out, $value);
