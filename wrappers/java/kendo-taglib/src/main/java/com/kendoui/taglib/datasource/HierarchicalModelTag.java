@@ -31,6 +31,14 @@ public class HierarchicalModelTag extends BaseTag {
         setProperty("hasChildren", hasChildren);
     }
 
+    public Object getChildren() {
+        return (Object)getProperty("children");
+    }
+    
+    public void setChildren(Object children) {
+        setProperty("children", children);
+    }
+
     public void setFields(FieldsTag fieldsTag) {
         setProperty("fields", fieldsTag.properties());
     }

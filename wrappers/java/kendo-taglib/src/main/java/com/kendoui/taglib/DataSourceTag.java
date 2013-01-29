@@ -18,6 +18,15 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 //>> doEndTag
 //<< doEndTag
         
+        try {
+            // allow nesting in hierarchical model
+            HierarchicalModelTag hierarchicalModel = (HierarchicalModelTag)findParentWithClass(HierarchicalModelTag.class);
+            
+            hierarchicalModel.setChildren(this);
+            
+            return super.doEndTag();
+        } catch(JspException ex) { }
+        
         DataBoundWidget widget = (DataBoundWidget)findParentWithClass(DataBoundWidget.class);
         
         widget.setDataSource(this);

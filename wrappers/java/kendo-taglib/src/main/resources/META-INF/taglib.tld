@@ -14345,6 +14345,13 @@ has been clicked on a window with static content.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
     	</attribute>
+
+    	<attribute>
+    	 	<description>The name of the field which holds the child items array.</description>
+            <name>children</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+    	</attribute>
     </tag>
 
     <tag>
