@@ -8,7 +8,7 @@ class StockChartSeriesItemHighlightBorder extends \Kendo\SerializableObject {
     /**
     * The width of the border.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder
     */
     public function width($value) {
         return $this->setProperty('width', $value);
@@ -17,7 +17,7 @@ class StockChartSeriesItemHighlightBorder extends \Kendo\SerializableObject {
     /**
     * The border color.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -26,7 +26,7 @@ class StockChartSeriesItemHighlightBorder extends \Kendo\SerializableObject {
     /**
     * The border opacity.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);

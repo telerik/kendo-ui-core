@@ -8,7 +8,7 @@ class DataSourceGroupItem extends \kendo\SerializableObject {
     /**
     * Specifies the field to group by.
     * @param string $value
-    * @returns \Kendo\Data\DataSourceGroupItem
+    * @return \Kendo\Data\DataSourceGroupItem
     */
     public function field($value) {
         return $this->setProperty('field', $value);
@@ -17,7 +17,7 @@ class DataSourceGroupItem extends \kendo\SerializableObject {
     /**
     * Specifies the order of the groupped items.
     * @param string $value
-    * @returns \Kendo\Data\DataSourceGroupItem
+    * @return \Kendo\Data\DataSourceGroupItem
     */
     public function dir($value) {
         return $this->setProperty('dir', $value);
@@ -26,7 +26,7 @@ class DataSourceGroupItem extends \kendo\SerializableObject {
     /**
     * Adds DataSourceGroupItemAggregate to the DataSourceGroupItem.
     * @param \Kendo\Data\DataSourceGroupItemAggregate,... $value one or more DataSourceGroupItemAggregate to add.
-    * @returns \Kendo\Data\DataSourceGroupItem
+    * @return \Kendo\Data\DataSourceGroupItem
     */
     public function addAggregate(\Kendo\Data\DataSourceGroupItemAggregate $value) {
         return $this->add('aggregates', func_get_args());

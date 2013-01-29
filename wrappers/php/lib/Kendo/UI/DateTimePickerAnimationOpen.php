@@ -8,7 +8,7 @@ class DateTimePickerAnimationOpen extends \Kendo\SerializableObject {
     /**
     * Effect to be used for opening of the popup.
     * @param string $value
-    * @returns \Kendo\UI\DateTimePickerAnimationOpen
+    * @return \Kendo\UI\DateTimePickerAnimationOpen
     */
     public function effects($value) {
         return $this->setProperty('effects', $value);
@@ -17,7 +17,7 @@ class DateTimePickerAnimationOpen extends \Kendo\SerializableObject {
     /**
     * Difines the animation duration.
     * @param float $value
-    * @returns \Kendo\UI\DateTimePickerAnimationOpen
+    * @return \Kendo\UI\DateTimePickerAnimationOpen
     */
     public function duration($value) {
         return $this->setProperty('duration', $value);

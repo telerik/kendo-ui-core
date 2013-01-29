@@ -8,7 +8,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Specifies the text displayed by the item
     * @param string $value
-    * @returns \Kendo\UI\TabStripItem
+    * @return \Kendo\UI\TabStripItem
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -17,7 +17,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Specifies the URL of the image displayed by the item
     * @param string $value
-    * @returns \Kendo\UI\TabStripItem
+    * @return \Kendo\UI\TabStripItem
     */
     public function imageUrl($value) {
         return $this->setProperty('imageUrl', $value);
@@ -26,7 +26,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Specifies the class name for the sprite image displayed by the item
     * @param string $value
-    * @returns \Kendo\UI\TabStripItem
+    * @return \Kendo\UI\TabStripItem
     */
     public function spriteCssClass($value) {
         return $this->setProperty('spriteCssClass', $value);
@@ -35,7 +35,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially enabled
     * @param boolean $value
-    * @returns \Kendo\UI\TabStripItem
+    * @return \Kendo\UI\TabStripItem
     */
     public function enabled($value) {
         return $this->setProperty('enabled', $value);
@@ -44,7 +44,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially selected
     * @param boolean $value
-    * @returns \Kendo\UI\TabStripItem
+    * @return \Kendo\UI\TabStripItem
     */
     public function selected($value) {
         return $this->setProperty('selected', $value);
@@ -53,7 +53,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Specifies the url from which the item content will be loaded
     * @param string $value
-    * @returns \Kendo\UI\TabStripItem
+    * @return \Kendo\UI\TabStripItem
     */
     public function contentUrl($value) {
         return $this->setProperty('contentUrl', $value);
@@ -62,7 +62,7 @@ class TabStripItem extends \Kendo\SerializableObject {
     /**
     * Sets the HTML content of the TabStripItem.
     * @param string $value
-    * @returns \Kendo\UI\TabStripItems    */
+    * @return \Kendo\UI\TabStripItems    */
     public function content($value) {
         return $this->setProperty('content', $value);
     }

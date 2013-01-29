@@ -8,7 +8,7 @@ class StockChartSeriesItemHighlight extends \Kendo\SerializableObject {
     /**
     * The border of highlighted points. The color is computed automatically from the base point color.
     * @param \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
     */
     public function border(\Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder $value) {
         return $this->setProperty('border', $value);
@@ -17,7 +17,7 @@ class StockChartSeriesItemHighlight extends \Kendo\SerializableObject {
     /**
     * The highlight color.** Available only for pie series **
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -26,7 +26,7 @@ class StockChartSeriesItemHighlight extends \Kendo\SerializableObject {
     /**
     * Line options for highlighted points. The color is computed automatically from the base point color.** Available only for candlestick series **
     * @param \Kendo\Dataviz\UI\StockChartSeriesItemHighlightLine $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
     */
     public function line(\Kendo\Dataviz\UI\StockChartSeriesItemHighlightLine $value) {
         return $this->setProperty('line', $value);
@@ -35,7 +35,7 @@ class StockChartSeriesItemHighlight extends \Kendo\SerializableObject {
     /**
     * The opacity of the highlighted points.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);

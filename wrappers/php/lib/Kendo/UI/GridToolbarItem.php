@@ -11,7 +11,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
     /**
     * The name of the command. One of the predefined or a custom.
     * @param string $value
-    * @returns \Kendo\UI\GridToolbarItem
+    * @return \Kendo\UI\GridToolbarItem
     */
     public function name($value) {
         return $this->setProperty('name', $value);
@@ -20,7 +20,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
     /**
     * The template for the command button.
     * @param string $value
-    * @returns \Kendo\UI\GridToolbarItem
+    * @return \Kendo\UI\GridToolbarItem
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -29,7 +29,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
     /**
     * The text of the command that will be set on the button.
     * @param string $value
-    * @returns \Kendo\UI\GridToolbarItem
+    * @return \Kendo\UI\GridToolbarItem
     */
     public function text($value) {
         return $this->setProperty('text', $value);

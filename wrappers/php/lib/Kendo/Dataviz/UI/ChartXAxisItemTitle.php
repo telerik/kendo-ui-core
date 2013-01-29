@@ -9,7 +9,7 @@ class ChartXAxisItemTitle extends \Kendo\SerializableObject {
     * The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -18,7 +18,7 @@ hex and rgb.
     /**
     * The border of the title.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemTitleBorder $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function border(\Kendo\Dataviz\UI\ChartXAxisItemTitleBorder $value) {
         return $this->setProperty('border', $value);
@@ -27,7 +27,7 @@ hex and rgb.
     /**
     * The text color of the title. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -36,7 +36,7 @@ hex and rgb.
     /**
     * The font style of the title.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -45,7 +45,7 @@ hex and rgb.
     /**
     * The margin of the title.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -54,7 +54,7 @@ hex and rgb.
     /**
     * The padding of the title.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -63,7 +63,7 @@ hex and rgb.
     /**
     * The position of the title.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function position($value) {
         return $this->setProperty('position', $value);
@@ -72,7 +72,7 @@ hex and rgb.
     /**
     * The rotation angle of the title.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function rotation($value) {
         return $this->setProperty('rotation', $value);
@@ -81,7 +81,7 @@ hex and rgb.
     /**
     * The text of the title.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -90,7 +90,7 @@ hex and rgb.
     /**
     * The visibility of the title.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartXAxisItemTitle
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemTitle
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

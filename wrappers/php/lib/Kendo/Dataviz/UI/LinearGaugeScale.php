@@ -8,7 +8,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * Configures the axis line.
     * @param \Kendo\Dataviz\UI\LinearGaugeScaleLine $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function line(\Kendo\Dataviz\UI\LinearGaugeScaleLine $value) {
         return $this->setProperty('line', $value);
@@ -17,7 +17,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * Configures the scale labels.
     * @param \Kendo\Dataviz\UI\LinearGaugeScaleLabels $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function labels(\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value) {
         return $this->setProperty('labels', $value);
@@ -26,7 +26,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * Configures the scale major ticks.
     * @param \Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function majorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value) {
         return $this->setProperty('majorTicks', $value);
@@ -35,7 +35,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * The interval between major divisions.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function majorUnit($value) {
         return $this->setProperty('majorUnit', $value);
@@ -44,7 +44,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * The maximum value of the scale.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -53,7 +53,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * The minimum value of the scale.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -62,7 +62,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * Configures the scale minor ticks.
     * @param \Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function minorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value) {
         return $this->setProperty('minorTicks', $value);
@@ -71,7 +71,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     /**
     * The interval between minor divisions.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function minorUnit($value) {
         return $this->setProperty('minorUnit', $value);
@@ -81,7 +81,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
     * Mirrors the scale labels and ticks.
 If the labels are normally on the left side of the scale, mirroring the scale will render them to the right.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function mirror($value) {
         return $this->setProperty('mirror', $value);
@@ -90,7 +90,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
     /**
     * Adds LinearGaugeScaleRange to the LinearGaugeScale.
     * @param \Kendo\Dataviz\UI\LinearGaugeScaleRange,... $value one or more LinearGaugeScaleRange to add.
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function addRange(\Kendo\Dataviz\UI\LinearGaugeScaleRange $value) {
         return $this->add('ranges', func_get_args());
@@ -99,7 +99,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
     /**
     * Reverses the axis direction - values increase from right to left and from top to bottom.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function reverse($value) {
         return $this->setProperty('reverse', $value);
@@ -108,7 +108,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
     /**
     * The position of the gauge.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScale
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function vertical($value) {
         return $this->setProperty('vertical', $value);

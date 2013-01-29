@@ -8,7 +8,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     /**
     * The color of the lines. Any valid CSS color string will work here, including hex and rgb.Note: This will also effect the major and minor ticks, but not the grid lines.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,7 +17,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     /**
     * The dash type of the line.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -26,7 +26,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     /**
     * The visibility of the lines.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -36,7 +36,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     * The width of the line. This will also effect the major and minor ticks, but
 not the grid lines.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
     public function width($value) {
         return $this->setProperty('width', $value);

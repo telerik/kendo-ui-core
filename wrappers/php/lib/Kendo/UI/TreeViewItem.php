@@ -8,7 +8,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Specifies the text displayed by the item
     * @param string $value
-    * @returns \Kendo\UI\TreeViewItem
+    * @return \Kendo\UI\TreeViewItem
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -17,7 +17,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Specifies the URL of the image displayed by the item
     * @param string $value
-    * @returns \Kendo\UI\TreeViewItem
+    * @return \Kendo\UI\TreeViewItem
     */
     public function imageUrl($value) {
         return $this->setProperty('imageUrl', $value);
@@ -26,7 +26,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Specifies the class name for the sprite image displayed by the item
     * @param string $value
-    * @returns \Kendo\UI\TreeViewItem
+    * @return \Kendo\UI\TreeViewItem
     */
     public function spriteCssClass($value) {
         return $this->setProperty('spriteCssClass', $value);
@@ -35,7 +35,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially enabled
     * @param boolean $value
-    * @returns \Kendo\UI\TreeViewItem
+    * @return \Kendo\UI\TreeViewItem
     */
     public function enabled($value) {
         return $this->setProperty('enabled', $value);
@@ -44,7 +44,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially selected
     * @param boolean $value
-    * @returns \Kendo\UI\TreeViewItem
+    * @return \Kendo\UI\TreeViewItem
     */
     public function selected($value) {
         return $this->setProperty('selected', $value);
@@ -53,7 +53,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially expanded
     * @param boolean $value
-    * @returns \Kendo\UI\TreeViewItem
+    * @return \Kendo\UI\TreeViewItem
     */
     public function expanded($value) {
         return $this->setProperty('expanded', $value);
@@ -62,7 +62,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Sets the HTML content of the TreeViewItem.
     * @param string $value
-    * @returns \Kendo\UI\TreeViewItems    */
+    * @return \Kendo\UI\TreeViewItems    */
     public function content($value) {
         return $this->setProperty('content', $value);
     }
@@ -83,7 +83,7 @@ class TreeViewItem extends \Kendo\SerializableObject {
     /**
     * Adds \Kendo\UI\TreeViewItem.
     * @param \Kendo\UI\TreeViewItem $value
-    * @returns \Kendo\UI\TreeView    */
+    * @return \Kendo\UI\TreeView    */
     public function addItem(\Kendo\UI\TreeViewItem $value) {
         return $this->add('items', $value);
     }

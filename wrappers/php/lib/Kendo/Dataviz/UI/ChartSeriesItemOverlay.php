@@ -8,7 +8,7 @@ class ChartSeriesItemOverlay extends \Kendo\SerializableObject {
     /**
     * The gradient name.Available options:
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemOverlay
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemOverlay
     */
     public function gradient($value) {
         return $this->setProperty('gradient', $value);

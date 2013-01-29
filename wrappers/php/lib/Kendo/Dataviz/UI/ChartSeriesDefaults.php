@@ -9,7 +9,7 @@ class ChartSeriesDefaults extends \Kendo\SerializableObject {
     * The area configuration options.
 The default options for all area series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function area($value) {
         return $this->setProperty('area', $value);
@@ -19,7 +19,7 @@ The default options for all area series. For more details see the series options
     * The candlestick configuration options.
 The default options for all candlestick series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function candlestick($value) {
         return $this->setProperty('candlestick', $value);
@@ -29,7 +29,7 @@ The default options for all candlestick series. For more details see the series 
     * The ohlc configuration options.
 The default options for all ohlc series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function ohlc($value) {
         return $this->setProperty('ohlc', $value);
@@ -38,7 +38,7 @@ The default options for all ohlc series. For more details see the series options
     /**
     * The default options for all bar series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function bar($value) {
         return $this->setProperty('bar', $value);
@@ -47,7 +47,7 @@ The default options for all ohlc series. For more details see the series options
     /**
     * The border of the series.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function border(\Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value) {
         return $this->setProperty('border', $value);
@@ -57,7 +57,7 @@ The default options for all ohlc series. For more details see the series options
     * The bubble configuration options.
 The default options for all bubble series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function bubble($value) {
         return $this->setProperty('bubble', $value);
@@ -67,7 +67,7 @@ The default options for all bubble series. For more details see the series optio
     * The column configuration options.
 The default options for all column series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function column($value) {
         return $this->setProperty('column', $value);
@@ -77,7 +77,7 @@ The default options for all column series. For more details see the series optio
     * The donut configuration options.
 The default options for all donut series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function donut($value) {
         return $this->setProperty('donut', $value);
@@ -86,7 +86,7 @@ The default options for all donut series. For more details see the series option
     /**
     * The distance between category clusters.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function gap($value) {
         return $this->setProperty('gap', $value);
@@ -95,7 +95,7 @@ The default options for all donut series. For more details see the series option
     /**
     * Configures the series data labels.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function labels(\Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value) {
         return $this->setProperty('labels', $value);
@@ -105,7 +105,7 @@ The default options for all donut series. For more details see the series option
     * The line configuration options.
 The default options for all line series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function line($value) {
         return $this->setProperty('line', $value);
@@ -114,7 +114,7 @@ The default options for all line series. For more details see the series options
     /**
     * The effects overlay.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function overlay($value) {
         return $this->setProperty('overlay', $value);
@@ -124,7 +124,7 @@ The default options for all line series. For more details see the series options
     * The pie configuration options.
 The default options for all pie series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function pie($value) {
         return $this->setProperty('pie', $value);
@@ -134,7 +134,7 @@ The default options for all pie series. For more details see the series options.
     * The scatter configuration options.
 The default options for all scatter series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function scatter($value) {
         return $this->setProperty('scatter', $value);
@@ -144,7 +144,7 @@ The default options for all scatter series. For more details see the series opti
     * The scatterLine configuration options.
 The default options for all scatterLine series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function scatterLine($value) {
         return $this->setProperty('scatterLine', $value);
@@ -153,7 +153,7 @@ The default options for all scatterLine series. For more details see the series 
     /**
     * Space between bars.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function spacing($value) {
         return $this->setProperty('spacing', $value);
@@ -162,7 +162,7 @@ The default options for all scatterLine series. For more details see the series 
     /**
     * A value indicating if the series should be stacked.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function stack($value) {
         return $this->setProperty('stack', $value);
@@ -171,7 +171,7 @@ The default options for all scatterLine series. For more details see the series 
     /**
     * The data point tooltip configuration options.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function tooltip(\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value) {
         return $this->setProperty('tooltip', $value);
@@ -181,7 +181,7 @@ The default options for all scatterLine series. For more details see the series 
     * The vertical area configuration options.
 The default options for all vertical area series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function verticalArea($value) {
         return $this->setProperty('verticalArea', $value);
@@ -191,7 +191,7 @@ The default options for all vertical area series. For more details see the serie
     * The vertical line configuration options.
 The default options for all vertical line series. For more details see the series options.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaults
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function verticalLine($value) {
         return $this->setProperty('verticalLine', $value);

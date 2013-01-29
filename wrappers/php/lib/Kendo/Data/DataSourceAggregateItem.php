@@ -8,7 +8,7 @@ class DataSourceAggregateItem extends \kendo\SerializableObject {
     /**
     * Specifies the field on which the aggregate will be calculated.
     * @param string $value
-    * @returns \Kendo\Data\DataSourceAggregateItem
+    * @return \Kendo\Data\DataSourceAggregateItem
     */
     public function field($value) {
         return $this->setProperty('field', $value);
@@ -17,7 +17,7 @@ class DataSourceAggregateItem extends \kendo\SerializableObject {
     /**
     * Specifies the aggregate function. Possible values are: "min", "max", "count", "sum", "average"
     * @param string $value
-    * @returns \Kendo\Data\DataSourceAggregateItem
+    * @return \Kendo\Data\DataSourceAggregateItem
     */
     public function aggregate($value) {
         return $this->setProperty('aggregate', $value);

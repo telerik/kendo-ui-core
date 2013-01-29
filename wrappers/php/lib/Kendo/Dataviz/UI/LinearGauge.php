@@ -12,7 +12,7 @@ class LinearGauge extends \Kendo\UI\Widget {
     * The gauge area configuration options.
 This is the entire visible area of the gauge.
     * @param \Kendo\Dataviz\UI\LinearGaugeGaugeArea $value
-    * @returns \Kendo\Dataviz\UI\LinearGauge
+    * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function gaugeArea(\Kendo\Dataviz\UI\LinearGaugeGaugeArea $value) {
         return $this->setProperty('gaugeArea', $value);
@@ -21,7 +21,7 @@ This is the entire visible area of the gauge.
     /**
     * The pointer configuration options.
     * @param \Kendo\Dataviz\UI\LinearGaugePointer $value
-    * @returns \Kendo\Dataviz\UI\LinearGauge
+    * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function pointer(\Kendo\Dataviz\UI\LinearGaugePointer $value) {
         return $this->setProperty('pointer', $value);
@@ -30,7 +30,7 @@ This is the entire visible area of the gauge.
     /**
     * Configures the scale.
     * @param \Kendo\Dataviz\UI\LinearGaugeScale $value
-    * @returns \Kendo\Dataviz\UI\LinearGauge
+    * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function scale(\Kendo\Dataviz\UI\LinearGaugeScale $value) {
         return $this->setProperty('scale', $value);
@@ -39,7 +39,7 @@ This is the entire visible area of the gauge.
     /**
     * A value indicating if transition animations should be played.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\LinearGauge
+    * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function transitions($value) {
         return $this->setProperty('transitions', $value);

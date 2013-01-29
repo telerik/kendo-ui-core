@@ -8,7 +8,7 @@ class ChartCategoryAxisItemPlotBand extends \Kendo\SerializableObject {
     /**
     * The start position of the plot band in axis units.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
     */
     public function from($value) {
         return $this->setProperty('from', $value);
@@ -17,7 +17,7 @@ class ChartCategoryAxisItemPlotBand extends \Kendo\SerializableObject {
     /**
     * The end position of the plot band in axis units.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
     */
     public function to($value) {
         return $this->setProperty('to', $value);
@@ -26,7 +26,7 @@ class ChartCategoryAxisItemPlotBand extends \Kendo\SerializableObject {
     /**
     * The color of the plot band.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -35,7 +35,7 @@ class ChartCategoryAxisItemPlotBand extends \Kendo\SerializableObject {
     /**
     * The opacity of the plot band.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemPlotBand
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);

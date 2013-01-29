@@ -8,7 +8,7 @@ class RadialGaugeScaleRange extends \Kendo\SerializableObject {
     /**
     * The start position of the range in scale units.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\RadialGaugeScaleRange
     */
     public function from($value) {
         return $this->setProperty('from', $value);
@@ -17,7 +17,7 @@ class RadialGaugeScaleRange extends \Kendo\SerializableObject {
     /**
     * The end position of the range in scale units.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\RadialGaugeScaleRange
     */
     public function to($value) {
         return $this->setProperty('to', $value);
@@ -26,7 +26,7 @@ class RadialGaugeScaleRange extends \Kendo\SerializableObject {
     /**
     * The opacity of the range.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\RadialGaugeScaleRange
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -36,7 +36,7 @@ class RadialGaugeScaleRange extends \Kendo\SerializableObject {
     * The color of the range.
 Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\RadialGaugeScaleRange
     */
     public function color($value) {
         return $this->setProperty('color', $value);

@@ -8,7 +8,7 @@ class LinearGaugeScaleRange extends \Kendo\SerializableObject {
     /**
     * The start position of the range in scale units.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleRange
     */
     public function from($value) {
         return $this->setProperty('from', $value);
@@ -17,7 +17,7 @@ class LinearGaugeScaleRange extends \Kendo\SerializableObject {
     /**
     * The end position of the range in scale units.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleRange
     */
     public function to($value) {
         return $this->setProperty('to', $value);
@@ -26,7 +26,7 @@ class LinearGaugeScaleRange extends \Kendo\SerializableObject {
     /**
     * The opacity of the range.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleRange
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -36,7 +36,7 @@ class LinearGaugeScaleRange extends \Kendo\SerializableObject {
     * The color of the range.
 Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleRange
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleRange
     */
     public function color($value) {
         return $this->setProperty('color', $value);

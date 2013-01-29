@@ -8,7 +8,7 @@ class AutoCompleteAnimationOpen extends \Kendo\SerializableObject {
     /**
     * Effect to be used for opening of the popup.
     * @param string $value
-    * @returns \Kendo\UI\AutoCompleteAnimationOpen
+    * @return \Kendo\UI\AutoCompleteAnimationOpen
     */
     public function effects($value) {
         return $this->setProperty('effects', $value);
@@ -17,7 +17,7 @@ class AutoCompleteAnimationOpen extends \Kendo\SerializableObject {
     /**
     * Difines the animation duration.
     * @param float $value
-    * @returns \Kendo\UI\AutoCompleteAnimationOpen
+    * @return \Kendo\UI\AutoCompleteAnimationOpen
     */
     public function duration($value) {
         return $this->setProperty('duration', $value);

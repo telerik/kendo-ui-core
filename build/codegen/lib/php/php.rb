@@ -68,7 +68,7 @@ COMPOSITE_OPTION_SETTER = ERB.new(%{
     /**
     * <%= description %>
     * @param <%= php_type %> $value
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function <%= php_name %>(<%= php_type %> $value) {
         return $this->setProperty('<%= name %>', $value);
@@ -82,7 +82,7 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
     /**
     * Sets the HTML content of the <%= php_class %>.
     * @param string $value
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function content($value) {
         return $this->setProperty('content', $value);
@@ -105,7 +105,7 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
     /**
     * Adds <%= php_type %>.
     * @param <%= php_type %> $value
-    * @returns <%= owner.owner.php_type %>
+    * @return <%= owner.owner.php_type %>
     */
     public function addItem(<%= php_type %> $value) {
         return $this->add('items', $value);
@@ -152,7 +152,7 @@ DATA_SOURCE_SETTER = ERB.new(%{
     /**
     * Sets the data source of the <%= owner.php_class %>.
     * @param \\Kendo\\Data\\DataSource $value
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function dataSource(\\Kendo\\Data\\DataSource $value) {
         return $this->setProperty('dataSource', $value);
@@ -163,7 +163,7 @@ HIERARCHY_DATA_SOURCE_SETTER = ERB.new(%{
     /**
     * Sets the data source of the <%= owner.php_class %>.
     * @param \\Kendo\\Data\\HierarchyDataSource $value
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function dataSource(\\Kendo\\Data\\HierarchyDataSource $value) {
         return $this->setProperty('dataSource', $value);
@@ -174,7 +174,7 @@ OPTION_SETTER = ERB.new(%{
     /**
     * <%= description %>
     * @param <%= php_type %> $value
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function <%= php_name %>($value) {
         return $this->setProperty('<%= name %>', $value);
@@ -186,7 +186,7 @@ FUNCTION_SETTER = ERB.new(%{
     * Sets the <%= name %> option of the <%= owner.php_class %>.
     * <%= description %>
     * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function <%= php_name %>($value) {
         if (is_string($value)) {
@@ -227,7 +227,7 @@ EVENT_SETTER = ERB.new(%{
     * Sets the <%= name %> event of the <%= owner.php_class %>.
     * <%= description %>
     * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function <%= name %>($value) {
         if (is_string($value)) {
@@ -250,7 +250,7 @@ ARRAY_SETTER = ERB.new(%{
     /**
     * Adds <%= item.php_class %> to the <%= owner.php_class %>.
     * @param <%= item.php_type %>,... $value one or more <%= item.php_class %> to add.
-    * @returns <%= owner.php_type %>
+    * @return <%= owner.php_type %>
     */
     public function add<%= item.name.pascalize %>(<%= item.php_type %> $value) {
         return $this->add('<%= name %>', func_get_args());

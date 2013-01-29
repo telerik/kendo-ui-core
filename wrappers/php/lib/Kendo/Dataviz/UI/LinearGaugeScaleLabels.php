@@ -9,7 +9,7 @@ class LinearGaugeScaleLabels extends \Kendo\SerializableObject {
     * The background color of the labels.
 Any valid CSS color string will work here, including hex and rgb
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -18,7 +18,7 @@ Any valid CSS color string will work here, including hex and rgb
     /**
     * The border of the labels.
     * @param \Kendo\Dataviz\UI\LinearGaugeScaleLabelsBorder $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function border(\Kendo\Dataviz\UI\LinearGaugeScaleLabelsBorder $value) {
         return $this->setProperty('border', $value);
@@ -28,7 +28,7 @@ Any valid CSS color string will work here, including hex and rgb
     * The text color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -37,7 +37,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The font style of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -46,7 +46,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The format of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -55,7 +55,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The margin of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -64,7 +64,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The padding of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -74,7 +74,7 @@ Any valid CSS color string will work here, including hex and rgb.
     * The label template.
 Template variables:
     * @param string|\kendo\JavaScriptFunction $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -83,7 +83,7 @@ Template variables:
     /**
     * The visibility of the labels.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeScaleLabels
+    * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

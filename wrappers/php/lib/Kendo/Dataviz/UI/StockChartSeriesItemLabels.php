@@ -8,7 +8,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The background color of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -17,7 +17,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The border of the labels.
     * @param \Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function border(\Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value) {
         return $this->setProperty('border', $value);
@@ -26,7 +26,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The text color of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -35,7 +35,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The font style of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -44,7 +44,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The format of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -53,7 +53,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The margin of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -62,7 +62,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The padding of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -71,7 +71,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * Defines the position of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function position($value) {
         return $this->setProperty('position', $value);
@@ -80,7 +80,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The label template. Template variables:
     * @param string|\kendo\JavaScriptFunction $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -89,7 +89,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The visibility of the labels.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

@@ -8,7 +8,7 @@ class GridFilterable extends \Kendo\SerializableObject {
     /**
     * Indicates whether second filter input is enabled/disabled.
     * @param boolean $value
-    * @returns \Kendo\UI\GridFilterable
+    * @return \Kendo\UI\GridFilterable
     */
     public function extra($value) {
         return $this->setProperty('extra', $value);
@@ -17,7 +17,7 @@ class GridFilterable extends \Kendo\SerializableObject {
     /**
     * Sets the filter menu messages.
     * @param \Kendo\UI\GridFilterableMessages $value
-    * @returns \Kendo\UI\GridFilterable
+    * @return \Kendo\UI\GridFilterable
     */
     public function messages(\Kendo\UI\GridFilterableMessages $value) {
         return $this->setProperty('messages', $value);
@@ -26,7 +26,7 @@ class GridFilterable extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of filter operators.
     * @param \Kendo\UI\GridFilterableOperators $value
-    * @returns \Kendo\UI\GridFilterable
+    * @return \Kendo\UI\GridFilterable
     */
     public function operators(\Kendo\UI\GridFilterableOperators $value) {
         return $this->setProperty('operators', $value);

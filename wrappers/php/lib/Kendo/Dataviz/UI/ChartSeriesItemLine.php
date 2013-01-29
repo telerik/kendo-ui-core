@@ -8,7 +8,7 @@ class ChartSeriesItemLine extends \Kendo\SerializableObject {
     /**
     * The line color.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLine
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLine
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,7 +17,7 @@ class ChartSeriesItemLine extends \Kendo\SerializableObject {
     /**
     * The line opacity.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLine
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLine
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -26,7 +26,7 @@ class ChartSeriesItemLine extends \Kendo\SerializableObject {
     /**
     * The line width.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLine
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLine
     */
     public function width($value) {
         return $this->setProperty('width', $value);

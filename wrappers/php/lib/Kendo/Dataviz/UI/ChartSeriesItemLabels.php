@@ -8,7 +8,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * Defines the alignment of the labels.** Available for donut and pie series. **
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function align($value) {
         return $this->setProperty('align', $value);
@@ -17,7 +17,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The background color of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -26,7 +26,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The border of the labels.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function border(\Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder $value) {
         return $this->setProperty('border', $value);
@@ -35,7 +35,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The text color of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -44,7 +44,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The distance of the labels.** Available for donut and pie series. **
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function distance($value) {
         return $this->setProperty('distance', $value);
@@ -53,7 +53,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The font style of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -62,7 +62,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The format of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -71,7 +71,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The margin of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -80,7 +80,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The padding of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -89,7 +89,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * Defines the position of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function position($value) {
         return $this->setProperty('position', $value);
@@ -98,7 +98,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The label template. Template variables:
     * @param string|\kendo\JavaScriptFunction $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -107,7 +107,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * The visibility of the labels.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

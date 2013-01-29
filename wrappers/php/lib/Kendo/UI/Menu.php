@@ -12,7 +12,7 @@ class Menu extends \Kendo\UI\Widget {
     * A collection of Animation objects, used to change default animations. A value of false will disable all animations in the widget.Available animations for the Menu are listed below.  Each animation has a reverse options which is used for the close effect by default, but can be over-ridden
 by setting the close animation.  Each animation also has a direction which can be set off the animation (i.e. slideIn:Down).
     * @param \Kendo\UI\MenuAnimation $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function animation(\Kendo\UI\MenuAnimation $value) {
         return $this->setProperty('animation', $value);
@@ -21,7 +21,7 @@ by setting the close animation.  Each animation also has a direction which can b
     /**
     * Specifies that sub menus should close after item selection (provided they won't navigate).
     * @param boolean $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function closeOnClick($value) {
         return $this->setProperty('closeOnClick', $value);
@@ -32,7 +32,7 @@ by setting the close animation.  Each animation also has a direction which can b
 You can also specify different direction for root and sub menu items, separating them with space. The example below will initialize the root menu to open upwards and
 its sub menus to the left.
     * @param string $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function direction($value) {
         return $this->setProperty('direction', $value);
@@ -41,7 +41,7 @@ its sub menus to the left.
     /**
     * Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
     * @param float $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function hoverDelay($value) {
         return $this->setProperty('hoverDelay', $value);
@@ -50,7 +50,7 @@ its sub menus to the left.
     /**
     * Specifies that the root sub menus will be opened on item click.
     * @param boolean $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function openOnClick($value) {
         return $this->setProperty('openOnClick', $value);
@@ -59,7 +59,7 @@ its sub menus to the left.
     /**
     * Root menu orientation. Could be horizontal or vertical.
     * @param string $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function orientation($value) {
         return $this->setProperty('orientation', $value);
@@ -70,7 +70,7 @@ its sub menus to the left.
 meaning it will move to fit in screen boundaries in all directions, and "fit flip" for a sub menu with vertical parent, meaning it will fit vertically and flip over
 its parent horizontally. You can also switch off the screen boundary detection completely if you set the popupCollision to false.
     * @param string $value
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function popupCollision($value) {
         return $this->setProperty('popupCollision', $value);
@@ -79,7 +79,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
     /**
     * Adds MenuItem to the Menu.
     * @param \Kendo\UI\MenuItem,... $value one or more MenuItem to add.
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function addItem(\Kendo\UI\MenuItem $value) {
         return $this->add('items', func_get_args());
@@ -89,7 +89,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
     * Sets the close event of the Menu.
     * Fires after a sub menu gets closed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function close($value) {
         if (is_string($value)) {
@@ -103,7 +103,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
     * Sets the open event of the Menu.
     * Fires before a sub menu gets opened.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function open($value) {
         if (is_string($value)) {
@@ -117,7 +117,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
     * Sets the select event of the Menu.
     * Fires when a menu item gets selected.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @returns \Kendo\UI\Menu
+    * @return \Kendo\UI\Menu
     */
     public function select($value) {
         if (is_string($value)) {

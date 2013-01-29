@@ -9,7 +9,7 @@ class StockChartCategoryAxisItem extends \Kendo\SerializableObject {
     * Category index at which the first value axis crosses this axis. (Only for object)Category indicies at which the value axes cross the category axis. (Only for array)Note: Specify an index greater than or equal to the number
 of categories to denote the far end of the axis.
     * @param Object|date|array $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function axisCrossingValue($value) {
         return $this->setProperty('axisCrossingValue', $value);
@@ -18,7 +18,7 @@ of categories to denote the far end of the axis.
     /**
     * Array of category names.
     * @param array $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function categories($value) {
         return $this->setProperty('categories', $value);
@@ -28,7 +28,7 @@ of categories to denote the far end of the axis.
     * Color to apply to all axis elements. Any valid CSS color string will work here, including hex and rgb.
 Individual color settings for line and labels take priority.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -37,7 +37,7 @@ Individual color settings for line and labels take priority.
     /**
     * The data field containing the category name.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function field($value) {
         return $this->setProperty('field', $value);
@@ -46,7 +46,7 @@ Individual color settings for line and labels take priority.
     /**
     * Positions categories and series points on major ticks. This removes the empty space before and after the series.This option is ignored if either column, ohlc or candlestick series are plotted on the axis.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function justified($value) {
         return $this->setProperty('justified', $value);
@@ -55,7 +55,7 @@ Individual color settings for line and labels take priority.
     /**
     * Configures the axis labels.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function labels(\Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels $value) {
         return $this->setProperty('labels', $value);
@@ -64,7 +64,7 @@ Individual color settings for line and labels take priority.
     /**
     * Configures the axis line. This will also effect major and minor ticks, but not gridlines.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemLine $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function line(\Kendo\Dataviz\UI\StockChartCategoryAxisItemLine $value) {
         return $this->setProperty('line', $value);
@@ -74,7 +74,7 @@ Individual color settings for line and labels take priority.
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorGridLines $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function majorGridLines(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorGridLines $value) {
         return $this->setProperty('majorGridLines', $value);
@@ -83,7 +83,7 @@ body of the chart.
     /**
     * The major ticks of the axis.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function majorTicks(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks $value) {
         return $this->setProperty('majorTicks', $value);
@@ -93,7 +93,7 @@ body of the chart.
     * Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
 the body of the chart.Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to true.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function minorGridLines(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines $value) {
         return $this->setProperty('minorGridLines', $value);
@@ -102,7 +102,7 @@ the body of the chart.Note that minor grid lines are not visible by default, the
     /**
     * The minor ticks of the axis.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorTicks $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function minorTicks(\Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorTicks $value) {
         return $this->setProperty('minorTicks', $value);
@@ -111,7 +111,7 @@ the body of the chart.Note that minor grid lines are not visible by default, the
     /**
     * The unique axis name.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function name($value) {
         return $this->setProperty('name', $value);
@@ -121,7 +121,7 @@ the body of the chart.Note that minor grid lines are not visible by default, the
     * The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function pane($value) {
         return $this->setProperty('pane', $value);
@@ -130,7 +130,7 @@ The axis will be rendered in the first (default) pane if not set.
     /**
     * Adds StockChartCategoryAxisItemPlotBand to the StockChartCategoryAxisItem.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand,... $value one or more StockChartCategoryAxisItemPlotBand to add.
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function addPlotBand(\Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand $value) {
         return $this->add('plotBands', func_get_args());
@@ -140,7 +140,7 @@ The axis will be rendered in the first (default) pane if not set.
     * Reverses the axis direction -
 categories are listed from right to left and from top to bottom.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function reverse($value) {
         return $this->setProperty('reverse', $value);
@@ -149,7 +149,7 @@ categories are listed from right to left and from top to bottom.
     /**
     * The title of the category axis.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function title(\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle $value) {
         return $this->setProperty('title', $value);
@@ -158,7 +158,7 @@ categories are listed from right to left and from top to bottom.
     /**
     * The axis type.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function type($value) {
         return $this->setProperty('type', $value);
@@ -168,7 +168,7 @@ categories are listed from right to left and from top to bottom.
     * Specifies the discrete baseUnitStep values when
 either baseUnit is set to "fit" or baseUnitStep is set to "auto".The default configuration is as follows:Each setting can be overriden individually.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function autoBaseUnitSteps($value) {
         return $this->setProperty('autoBaseUnitSteps', $value);
@@ -181,7 +181,7 @@ between subsequent categories. Available options:Setting baseUnit to "fit" will 
 that the total number of categories does not exceed maxDateGroups.Series data is aggregated for the specified base unit by using the
 series.aggregate function.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function baseUnit($value) {
         return $this->setProperty('baseUnit', $value);
@@ -191,7 +191,7 @@ series.aggregate function.
     * Sets the step (interval) between categories in base units.
 Specifiying "auto" will set the step to such value that the total number of categories does not exceed maxDateGroups.This option is ignored if baseUnit is set to "fit".
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function baseUnitStep($value) {
         return $this->setProperty('baseUnitStep', $value);
@@ -203,7 +203,7 @@ By default, the minimum date is the same as the last category.
 This is often used in combination with the min and roundToBaseUnit configuration options to
 set up a fixed date range.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -215,7 +215,7 @@ By default, the minimum date is the same as the first category.
 This is often used in combination with the max and roundToBaseUnit configuration options to
 set up a fixed date range.
     * @param Object $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -225,7 +225,7 @@ set up a fixed date range.
     * By default, the first and last dates will be rounded off to the nearest base unit.
 Specifying false for this option will disable this behavior.This option is most useful in combination with explicit min and max dates.It will be ignored if either column, ohlc or candlestick series are plotted on the axis.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function roundToBaseUnit($value) {
         return $this->setProperty('roundToBaseUnit', $value);
@@ -235,7 +235,7 @@ Specifying false for this option will disable this behavior.This option is most 
     * Specifies the week start day when baseUnit is set to "weeks".
 Use the kendo.days constants to specify the day by name.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function weekStartDay($value) {
         return $this->setProperty('weekStartDay', $value);
@@ -245,7 +245,7 @@ Use the kendo.days constants to specify the day by name.
     * Specifies the maximum number of groups (categories) to produce when
 either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is ignored in all other cases.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function maxDateGroups($value) {
         return $this->setProperty('maxDateGroups', $value);
@@ -254,7 +254,7 @@ either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is 
     /**
     * The visibility of the axis.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

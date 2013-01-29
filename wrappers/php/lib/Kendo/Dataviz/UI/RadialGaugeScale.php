@@ -9,7 +9,7 @@ class RadialGaugeScale extends \Kendo\SerializableObject {
     * The end angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function endAngle($value) {
         return $this->setProperty('endAngle', $value);
@@ -18,7 +18,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * Configures the scale labels.
     * @param \Kendo\Dataviz\UI\RadialGaugeScaleLabels $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function labels(\Kendo\Dataviz\UI\RadialGaugeScaleLabels $value) {
         return $this->setProperty('labels', $value);
@@ -27,7 +27,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * Configures the scale major ticks.
     * @param \Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function majorTicks(\Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks $value) {
         return $this->setProperty('majorTicks', $value);
@@ -36,7 +36,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * The interval between major divisions.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function majorUnit($value) {
         return $this->setProperty('majorUnit', $value);
@@ -45,7 +45,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * The maximum value of the scale.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -54,7 +54,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * The minimum value of the scale.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -63,7 +63,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * Configures the scale minor ticks.
     * @param \Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function minorTicks(\Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks $value) {
         return $this->setProperty('minorTicks', $value);
@@ -72,7 +72,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * The interval between minor divisions.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function minorUnit($value) {
         return $this->setProperty('minorUnit', $value);
@@ -81,7 +81,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * Adds RadialGaugeScaleRange to the RadialGaugeScale.
     * @param \Kendo\Dataviz\UI\RadialGaugeScaleRange,... $value one or more RadialGaugeScaleRange to add.
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function addRange(\Kendo\Dataviz\UI\RadialGaugeScaleRange $value) {
         return $this->add('ranges', func_get_args());
@@ -90,7 +90,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     /**
     * Reverses the scale direction - values are increase anticlockwise.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function reverse($value) {
         return $this->setProperty('reverse', $value);
@@ -100,7 +100,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     * The start angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\RadialGaugeScale
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function startAngle($value) {
         return $this->setProperty('startAngle', $value);

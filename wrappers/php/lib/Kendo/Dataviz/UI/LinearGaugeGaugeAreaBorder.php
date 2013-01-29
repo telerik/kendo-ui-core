@@ -8,7 +8,7 @@ class LinearGaugeGaugeAreaBorder extends \Kendo\SerializableObject {
     /**
     * The color of the border. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder
+    * @return \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,7 +17,7 @@ class LinearGaugeGaugeAreaBorder extends \Kendo\SerializableObject {
     /**
     * The dash type of the border.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder
+    * @return \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -26,7 +26,7 @@ class LinearGaugeGaugeAreaBorder extends \Kendo\SerializableObject {
     /**
     * The width of the border.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder
+    * @return \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder
     */
     public function width($value) {
         return $this->setProperty('width', $value);

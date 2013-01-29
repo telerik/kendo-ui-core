@@ -9,7 +9,7 @@ class ChartSeriesDefaultsLabels extends \Kendo\SerializableObject {
     * The background color of the labels. Any valid CSS color string will work here,
 including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -18,7 +18,7 @@ including hex and rgb.
     /**
     * The border of the labels.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsBorder $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function border(\Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsBorder $value) {
         return $this->setProperty('border', $value);
@@ -28,7 +28,7 @@ including hex and rgb.
     * The text color of the labels. Any valid CSS color string will work here, inlcuding hex
 and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -38,7 +38,7 @@ and rgb.
     * The font style of the labels.
 labels
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -47,7 +47,7 @@ labels
     /**
     * The format of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -56,7 +56,7 @@ labels
     /**
     * The margin of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -65,7 +65,7 @@ labels
     /**
     * The padding of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -75,7 +75,7 @@ labels
     * The label template.
 Template variables:
     * @param string|\kendo\JavaScriptFunction $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -84,7 +84,7 @@ Template variables:
     /**
     * The visibility of the labels.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

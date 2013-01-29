@@ -8,7 +8,7 @@ class ChartSeriesItemConnectors extends \Kendo\SerializableObject {
     /**
     * The color of the connector line.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemConnectors
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemConnectors
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,7 +17,7 @@ class ChartSeriesItemConnectors extends \Kendo\SerializableObject {
     /**
     * The padding between the connector line and the label, and connector line and donut chart.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemConnectors
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemConnectors
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -26,7 +26,7 @@ class ChartSeriesItemConnectors extends \Kendo\SerializableObject {
     /**
     * The width of the connector line.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemConnectors
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemConnectors
     */
     public function width($value) {
         return $this->setProperty('width', $value);

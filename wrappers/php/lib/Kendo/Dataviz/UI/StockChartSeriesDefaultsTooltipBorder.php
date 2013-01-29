@@ -8,7 +8,7 @@ class StockChartSeriesDefaultsTooltipBorder extends \Kendo\SerializableObject {
     /**
     * The color of the border.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder
+    * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,7 +17,7 @@ class StockChartSeriesDefaultsTooltipBorder extends \Kendo\SerializableObject {
     /**
     * The width of the border.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder
+    * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder
     */
     public function width($value) {
         return $this->setProperty('width', $value);

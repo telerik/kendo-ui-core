@@ -8,7 +8,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the text of the cancel button text.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function cancel($value) {
         return $this->setProperty('cancel', $value);
@@ -17,7 +17,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the drop zone hint.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function dropFilesHere($value) {
         return $this->setProperty('dropFilesHere', $value);
@@ -26,7 +26,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the text of the remove button text.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function remove($value) {
         return $this->setProperty('remove', $value);
@@ -35,7 +35,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the text of the retry button text.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function retry($value) {
         return $this->setProperty('retry', $value);
@@ -44,7 +44,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the "Select..." button text.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function select($value) {
         return $this->setProperty('select', $value);
@@ -53,7 +53,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the status message for failed uploads.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function statusFailed($value) {
         return $this->setProperty('statusFailed', $value);
@@ -62,7 +62,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the status message for uploaded files.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function statusUploaded($value) {
         return $this->setProperty('statusUploaded', $value);
@@ -71,7 +71,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the status message for files that are being uploaded.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function statusUploading($value) {
         return $this->setProperty('statusUploading', $value);
@@ -80,7 +80,7 @@ class UploadLocalization extends \Kendo\SerializableObject {
     /**
     * Sets the text of the "Upload files" button.
     * @param string $value
-    * @returns \Kendo\UI\UploadLocalization
+    * @return \Kendo\UI\UploadLocalization
     */
     public function uploadSelectedFiles($value) {
         return $this->setProperty('uploadSelectedFiles', $value);

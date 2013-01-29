@@ -9,7 +9,7 @@ class StockChartValueAxisItemLine extends \Kendo\SerializableObject {
     * The color of the line. This will also effect the major and minor ticks, but
 not the grid lines.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartValueAxisItemLine
+    * @return \Kendo\Dataviz\UI\StockChartValueAxisItemLine
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -18,7 +18,7 @@ not the grid lines.
     /**
     * The dash type of the line.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartValueAxisItemLine
+    * @return \Kendo\Dataviz\UI\StockChartValueAxisItemLine
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -27,7 +27,7 @@ not the grid lines.
     /**
     * The visibility of the line.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartValueAxisItemLine
+    * @return \Kendo\Dataviz\UI\StockChartValueAxisItemLine
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -37,7 +37,7 @@ not the grid lines.
     * The width of the line. This will also effect the major and minor ticks, but
 not the grid lines.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartValueAxisItemLine
+    * @return \Kendo\Dataviz\UI\StockChartValueAxisItemLine
     */
     public function width($value) {
         return $this->setProperty('width', $value);

@@ -9,7 +9,7 @@ class StockChartCategoryAxisItemMajorTicks extends \Kendo\SerializableObject {
     * The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks
     */
     public function size($value) {
         return $this->setProperty('size', $value);
@@ -18,7 +18,7 @@ on the chart.
     /**
     * The visibility of the major ticks.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

@@ -9,7 +9,7 @@ class ChartValueAxisItemLabels extends \Kendo\SerializableObject {
     * The background color of the labels. Any valid CSS color string will work here, including
 hex and rgb
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -18,7 +18,7 @@ hex and rgb
     /**
     * The border of the labels.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemLabelsBorder $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function border(\Kendo\Dataviz\UI\ChartValueAxisItemLabelsBorder $value) {
         return $this->setProperty('border', $value);
@@ -27,7 +27,7 @@ hex and rgb
     /**
     * The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -36,7 +36,7 @@ hex and rgb
     /**
     * The font style of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -45,7 +45,7 @@ hex and rgb
     /**
     * The format of the labels.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -54,7 +54,7 @@ hex and rgb
     /**
     * The margin of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -65,7 +65,7 @@ hex and rgb
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function mirror($value) {
         return $this->setProperty('mirror', $value);
@@ -74,7 +74,7 @@ mirroring the axis will render them to the right.
     /**
     * The padding of the labels.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -83,7 +83,7 @@ mirroring the axis will render them to the right.
     /**
     * The rotation angle of the labels.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function rotation($value) {
         return $this->setProperty('rotation', $value);
@@ -93,7 +93,7 @@ mirroring the axis will render them to the right.
     * Number of labels to skip.
 Skips rendering the first n labels.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function skip($value) {
         return $this->setProperty('skip', $value);
@@ -103,7 +103,7 @@ Skips rendering the first n labels.
     * Label rendering step.
 Every n-th label is rendered where n is the step
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function step($value) {
         return $this->setProperty('step', $value);
@@ -113,7 +113,7 @@ Every n-th label is rendered where n is the step
     * The label template.
 Template variables:
     * @param string|\kendo\JavaScriptFunction $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -122,7 +122,7 @@ Template variables:
     /**
     * The visibility of the labels.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartValueAxisItemLabels
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

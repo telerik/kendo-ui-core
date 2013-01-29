@@ -10,7 +10,7 @@ class StockChartCategoryAxisItemMinorGridLines extends \Kendo\SerializableObject
 rgb.Note that this setting has no effect if the visibility of the minor
 grid lines is not set to true.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -19,7 +19,7 @@ grid lines is not set to true.
     /**
     * The dash type of the grid lines.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -28,7 +28,7 @@ grid lines is not set to true.
     /**
     * The visibility of the lines.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -38,7 +38,7 @@ grid lines is not set to true.
     * The width of the lines.Note that this setting has no effect if the visibility of the minor
 grid lines is not set to true.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines
     */
     public function width($value) {
         return $this->setProperty('width', $value);

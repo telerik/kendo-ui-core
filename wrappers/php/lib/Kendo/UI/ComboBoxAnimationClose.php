@@ -8,7 +8,7 @@ class ComboBoxAnimationClose extends \Kendo\SerializableObject {
     /**
     * Effect to be used for closing of the popup.
     * @param string $value
-    * @returns \Kendo\UI\ComboBoxAnimationClose
+    * @return \Kendo\UI\ComboBoxAnimationClose
     */
     public function effects($value) {
         return $this->setProperty('effects', $value);
@@ -17,7 +17,7 @@ class ComboBoxAnimationClose extends \Kendo\SerializableObject {
     /**
     * Difines the animation duration.
     * @param float $value
-    * @returns \Kendo\UI\ComboBoxAnimationClose
+    * @return \Kendo\UI\ComboBoxAnimationClose
     */
     public function duration($value) {
         return $this->setProperty('duration', $value);

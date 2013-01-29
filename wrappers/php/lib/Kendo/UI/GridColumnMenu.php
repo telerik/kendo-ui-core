@@ -8,7 +8,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     /**
     * Enable/disable columns section in column header menu.
     * @param boolean $value
-    * @returns \Kendo\UI\GridColumnMenu
+    * @return \Kendo\UI\GridColumnMenu
     */
     public function columns($value) {
         return $this->setProperty('columns', $value);
@@ -17,7 +17,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     /**
     * Enable/disable filter section in column header menu.
     * @param boolean $value
-    * @returns \Kendo\UI\GridColumnMenu
+    * @return \Kendo\UI\GridColumnMenu
     */
     public function filterable($value) {
         return $this->setProperty('filterable', $value);
@@ -26,7 +26,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     /**
     * Enable/disable sorting section in column header menu.
     * @param boolean $value
-    * @returns \Kendo\UI\GridColumnMenu
+    * @return \Kendo\UI\GridColumnMenu
     */
     public function sortable($value) {
         return $this->setProperty('sortable', $value);
@@ -35,7 +35,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     /**
     * Sets the columnMenu messages.
     * @param \Kendo\UI\GridColumnMenuMessages $value
-    * @returns \Kendo\UI\GridColumnMenu
+    * @return \Kendo\UI\GridColumnMenu
     */
     public function messages(\Kendo\UI\GridColumnMenuMessages $value) {
         return $this->setProperty('messages', $value);

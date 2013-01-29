@@ -8,7 +8,7 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The background color of the current series markers.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -17,7 +17,7 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The border of the markers.
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder $value
-    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
     */
     public function border(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder $value) {
         return $this->setProperty('border', $value);
@@ -26,7 +26,7 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The marker size.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
     */
     public function size($value) {
         return $this->setProperty('size', $value);
@@ -35,7 +35,7 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * Configures the markers shape type.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
     */
     public function type($value) {
         return $this->setProperty('type', $value);
@@ -44,7 +44,7 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The markers visibility.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

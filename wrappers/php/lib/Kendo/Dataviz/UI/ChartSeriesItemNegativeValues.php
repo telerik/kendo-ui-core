@@ -8,7 +8,7 @@ class ChartSeriesItemNegativeValues extends \Kendo\SerializableObject {
     /**
     * The color of the negative values.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,7 +17,7 @@ class ChartSeriesItemNegativeValues extends \Kendo\SerializableObject {
     /**
     * The visibility of the negative values.
     * @param boolean $value
-    * @returns \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

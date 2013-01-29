@@ -13,7 +13,7 @@ class ChartArea extends \kendo\SerializableObject {
     /**
     * The background color of the chart area.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartArea
+    * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -22,7 +22,7 @@ class ChartArea extends \kendo\SerializableObject {
     /**
     * The background opacity of the chart area.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartArea
+    * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -31,7 +31,7 @@ class ChartArea extends \kendo\SerializableObject {
     /**
     * The border of the chart area.
     * @param \Kendo\Dataviz\UI\ChartAreaBorder $value
-    * @returns \Kendo\Dataviz\UI\ChartArea
+    * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function border(\Kendo\Dataviz\UI\ChartAreaBorder $value) {
         return $this->setProperty('border', $value);
@@ -40,7 +40,7 @@ class ChartArea extends \kendo\SerializableObject {
     /**
     * The height of the chart area.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartArea
+    * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function height($value) {
         return $this->setProperty('height', $value);
@@ -49,7 +49,7 @@ class ChartArea extends \kendo\SerializableObject {
     /**
     * The margin of the chart area.
     * @param float|Object $value
-    * @returns \Kendo\Dataviz\UI\ChartArea
+    * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -58,7 +58,7 @@ class ChartArea extends \kendo\SerializableObject {
     /**
     * The width of the chart area.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartArea
+    * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function width($value) {
         return $this->setProperty('width', $value);

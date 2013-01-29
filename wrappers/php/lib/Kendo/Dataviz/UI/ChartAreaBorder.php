@@ -13,7 +13,7 @@ class ChartAreaBorder extends \kendo\SerializableObject {
     /**
     * The color of the border.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartAreaBorder
+    * @return \Kendo\Dataviz\UI\ChartAreaBorder
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -22,7 +22,7 @@ class ChartAreaBorder extends \kendo\SerializableObject {
     /**
     * The dash type of the border.
     * @param string $value
-    * @returns \Kendo\Dataviz\UI\ChartAreaBorder
+    * @return \Kendo\Dataviz\UI\ChartAreaBorder
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -31,7 +31,7 @@ class ChartAreaBorder extends \kendo\SerializableObject {
     /**
     * The width of the border.
     * @param float $value
-    * @returns \Kendo\Dataviz\UI\ChartAreaBorder
+    * @return \Kendo\Dataviz\UI\ChartAreaBorder
     */
     public function width($value) {
         return $this->setProperty('width', $value);

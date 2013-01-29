@@ -8,7 +8,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of the "Is equal to" filter option for columns with string values.
     * @param string $value
-    * @returns \Kendo\UI\GridFilterableOperatorsString
+    * @return \Kendo\UI\GridFilterableOperatorsString
     */
     public function eq($value) {
         return $this->setProperty('eq', $value);
@@ -17,7 +17,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of the "Is not equal to" filter option for columns with string values.
     * @param string $value
-    * @returns \Kendo\UI\GridFilterableOperatorsString
+    * @return \Kendo\UI\GridFilterableOperatorsString
     */
     public function neq($value) {
         return $this->setProperty('neq', $value);
@@ -26,7 +26,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of the "Starts with" filter option for columns with string values.
     * @param string $value
-    * @returns \Kendo\UI\GridFilterableOperatorsString
+    * @return \Kendo\UI\GridFilterableOperatorsString
     */
     public function startswith($value) {
         return $this->setProperty('startswith', $value);
@@ -35,7 +35,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of the "Contains" filter option for columns with string values.
     * @param string $value
-    * @returns \Kendo\UI\GridFilterableOperatorsString
+    * @return \Kendo\UI\GridFilterableOperatorsString
     */
     public function contains($value) {
         return $this->setProperty('contains', $value);
@@ -44,7 +44,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of the "Does not contain" filter option for columns with string values.
     * @param string $value
-    * @returns \Kendo\UI\GridFilterableOperatorsString
+    * @return \Kendo\UI\GridFilterableOperatorsString
     */
     public function doesnotcontain($value) {
         return $this->setProperty('doesnotcontain', $value);
@@ -53,7 +53,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     /**
     * Enable/Disable and set the text of the "Ends with" filter option for columns with string values.
     * @param string $value
-    * @returns \Kendo\UI\GridFilterableOperatorsString
+    * @return \Kendo\UI\GridFilterableOperatorsString
     */
     public function endswith($value) {
         return $this->setProperty('endswith', $value);
