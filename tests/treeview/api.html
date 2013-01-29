@@ -121,6 +121,16 @@
                 equals(treeview.find(".k-state-selected").length, 1);
             });
 
+            test("select([]) removes selection from nodes", function() {
+                createTreeView([
+                    { text: "foo", selected: true }
+                ]);
+
+                treeviewObject.select([]);
+
+                equal(treeview.find(".k-state-selected").length, 0);
+            });
+
             test("text(node) returns node text", function() {
                 createTreeView([
                         { text: "foo", items: [

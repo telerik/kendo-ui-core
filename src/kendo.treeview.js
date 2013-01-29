@@ -1282,13 +1282,13 @@ kendo_module({
 
             node = $(node, element).closest(NODE);
 
-            if (node.length) {
-                element.find(".k-state-selected").each(function() {
-                    var dataItem = that.dataItem(this);
-                    dataItem.set("selected", false);
-                    delete dataItem.selected;
-                });
+            element.find(".k-state-selected").each(function() {
+                var dataItem = that.dataItem(this);
+                dataItem.set("selected", false);
+                delete dataItem.selected;
+            });
 
+            if (node.length) {
                 that.dataItem(node).set("selected", true);
             }
         },
