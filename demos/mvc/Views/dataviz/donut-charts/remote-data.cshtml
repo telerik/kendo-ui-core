@@ -1,46 +1,22 @@
 
         <div id="example" class="k-content">
             <div class="chart-wrapper">
-                <div id="chart" class="combined-donuts"></div>
-                <div class="single-donuts">
-                    <div id="chart2006" class="donut"></div>
-                    <div id="chart2008" class="donut"></div>
-                    <div id="chart2010" class="donut"></div>
-                </div>
-                
-                
+                <div id="chart1024"></div>
+		<div id="chart800"></div>
             </div>
-            <style scoped>
-                .chart-wrapper 
-                {
-                	text-align: center;
-                	padding-top: 20px;
-                	background-repeat: no-repeat;
-                }
-                .single-donuts
-                {
-                	width: 390px;
-                	height: 150px;
-                	margin: 0 auto;
-                }
-                .chart-wrapper .donut 
-                {
-                	float: left;
-                	width: 130px;
-                	height: 130px;
-                	padding: 0;
-                }
-                .chart-wrapper .combined-donuts 
-                {
-                	width: 500px;
-                	height: 280px;
-                	margin: 0 auto;
-                	padding: 0;
-                }
-            </style>
+	    <style scoped>
+		#chart1024,
+		#chart800 {
+		    display: inline-block;
+		    width: 340px;
+		}
+		.chart-wrapper, .chart-wrapper .k-chart {
+		    height: 350px;
+		}
+	    </style>
             <script>
                 function createChart() {
-                    $("#chart").kendoChart({
+                    $("#chart1024").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         dataSource: {
                             transport: {
@@ -49,6 +25,13 @@
                                     dataType: "json"
                                 }
                             },
+                            filter: {
+				logic: "or",
+				filters: [
+				    {field: "resolution", operator: "eq", value: "Other"},
+				    {field: "resolution", operator: "eq", value: "1024x768"}
+				]
+			    },
                             sort: {
                                 field: "order",
                                 dir: "asc"
@@ -61,7 +44,7 @@
                             position: "top"
                         },
                         title: {
-                            text: "Screen resolution trends"
+                            text: "1024x768 screen resolution trends"
                         },
                         seriesDefaults: {
                             type: "donut"
@@ -70,22 +53,16 @@
                             field: "share",
                             categoryField: "resolution",
                             visibleInLegendField: "visibleInLegend",
-                            padding: 10
+			    padding: 10
                         }],
                         tooltip: {
                             visible: true,
                             template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
                         }
                     });
-
-                    $("#chart2006").kendoChart({
+		    
+		    $("#chart800").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
-                        title: {
-                            text: "2006"
-                        },
-                        legend: {
-                            visible: false
-                        },
                         dataSource: {
                             transport: {
                                 read: {
@@ -94,96 +71,38 @@
                                 }
                             },
                             filter: {
-                                field: "year",
-                                operator: "eq",
-                                value: 2006
-                            },
+				logic: "or",
+				filters: [
+				    {field: "resolution", operator: "eq", value: "Other"},
+				    {field: "resolution", operator: "eq", value: "800x600"}
+				]
+			    },
                             sort: {
                                 field: "order",
                                 dir: "asc"
+                            },
+                            group: {
+                                field: "year"
                             }
-                        },
-                        series: [{
-                            type: "donut",
-                            field: "share",
-                            padding: 0
-                        }],
-                        tooltip: {
-                            visible: true,
-                            template: "#= dataItem.resolution #: #= value #%"
-                        }
-                    });
-
-                    $("#chart2008").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
-                        title: {
-                            text: "2008"
                         },
                         legend: {
-                            visible: false
+                            position: "top"
                         },
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/screen_resolution.json",
-                                    dataType: "json"
-                                }
-                            },
-                            filter: {
-                                field: "year",
-                                operator: "eq",
-                                value: 2008
-                            },
-                            sort: {
-                                field: "order",
-                                dir: "asc"
-                            }
-                        },
-                        series: [{
-                            type: "donut",
-                            field: "share",
-                            padding: 0
-                        }],
-                        tooltip: {
-                            visible: true,
-                            template: "#= dataItem.resolution #: #= value #%"
-                        }
-                    });
-
-
-                    $("#chart2010").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
                         title: {
-                            text: "2010"
+                            text: "800x600 screen resolution trends"
                         },
-                        legend: {
-                            visible: false
-                        },
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/screen_resolution.json",
-                                    dataType: "json"
-                                }
-                            },
-                            filter: {
-                                field: "year",
-                                operator: "eq",
-                                value: 2010
-                            },
-                            sort: {
-                                field: "order",
-                                dir: "asc"
-                            }
+                        seriesDefaults: {
+                            type: "donut"
                         },
                         series: [{
-                            type: "donut",
                             field: "share",
-                            padding: 0
+                            categoryField: "resolution",
+                            visibleInLegendField: "visibleInLegend",
+			    padding: 10
                         }],
                         tooltip: {
                             visible: true,
-                            template: "#= dataItem.resolution #: #= value #%"
+                            template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
                         }
                     });
                 }
