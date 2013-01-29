@@ -17,10 +17,10 @@
         </kendo:grid-toolbar>
         <kendo:grid-columns>
             <kendo:grid-column title="Product Name" field="productName" />
-            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" width="140px" />
-            <kendo:grid-column title="Units In Stock" field="unitsInStock" width="140px" />
+            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" width="100px" />
+            <kendo:grid-column title="Units In Stock" field="unitsInStock" width="100px" />
             <kendo:grid-column title="Discontinued" field="discontinued" width="100px"/>
-            <kendo:grid-column title="&nbsp;" width="200px">
+            <kendo:grid-column title="&nbsp;" width="172px">
             	<kendo:grid-column-command>
             		<kendo:grid-column-commandItem name="edit" />
             		<kendo:grid-column-commandItem name="destroy" />
