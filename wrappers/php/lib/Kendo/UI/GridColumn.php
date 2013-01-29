@@ -8,6 +8,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * Definition of column cells' HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.
     * @param Object $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function attributes($value) {
         return $this->setProperty('attributes', $value);
@@ -16,6 +17,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".
     * @param string|\Kendo\UI\GridColumnCommand $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function command($value) {
         return $this->setProperty('command', $value);
@@ -25,6 +27,7 @@ class GridColumn extends \Kendo\SerializableObject {
     * Sets the editor option of the GridColumn.
     * Provides a way to specify custom editor for this column.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\GridColumn
     */
     public function editor($value) {
         if (is_string($value)) {
@@ -37,6 +40,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * Specified whether the column content is escaped. Disable encoding if the data contains HTML markup.
     * @param boolean $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function encoded($value) {
         return $this->setProperty('encoded', $value);
@@ -45,6 +49,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * The field from the datasource that will be displayed in the column.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function field($value) {
         return $this->setProperty('field', $value);
@@ -53,6 +58,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * Specifies whether given column is filterable.
     * @param boolean|\Kendo\UI\GridColumnFilterable $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function filterable($value) {
         return $this->setProperty('filterable', $value);
@@ -61,6 +67,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * The format that will be applied on the column cells.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -69,6 +76,7 @@ class GridColumn extends \Kendo\SerializableObject {
     /**
     * Definition of column header cell's HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.
     * @param Object $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function headerAttributes($value) {
         return $this->setProperty('headerAttributes', $value);
@@ -78,6 +86,7 @@ class GridColumn extends \Kendo\SerializableObject {
     * The template for column's header cell. If sorting is enabled, it will be wrapped in a <a class="k-link"> element, so the template should consist of only inline elements
 in order to have valid HTML markup in the Grid.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function headerTemplate($value) {
         return $this->setProperty('headerTemplate', $value);
@@ -86,6 +95,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * Specifies whether given column is hidden.
     * @param boolean $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function hidden($value) {
         return $this->setProperty('hidden', $value);
@@ -94,6 +104,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * Specifies whether given column is sortable.
     * @param boolean $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function sortable($value) {
         return $this->setProperty('sortable', $value);
@@ -102,6 +113,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The template for column's cells.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -110,6 +122,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The aggregates to be used when grouping is applied
     * @param array $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function aggregates($value) {
         return $this->setProperty('aggregates', $value);
@@ -118,6 +131,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The template for group header item.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function groupHeaderTemplate($value) {
         return $this->setProperty('groupHeaderTemplate', $value);
@@ -126,6 +140,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The template for column's cell in group footer item.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function groupFooterTemplate($value) {
         return $this->setProperty('groupFooterTemplate', $value);
@@ -134,6 +149,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The template for column's cell in footer item.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function footerTemplate($value) {
         return $this->setProperty('footerTemplate', $value);
@@ -142,6 +158,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The text that will be displayed in the column header.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function title($value) {
         return $this->setProperty('title', $value);
@@ -150,6 +167,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * The width of the column.
     * @param string $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function width($value) {
         return $this->setProperty('width', $value);
@@ -158,6 +176,7 @@ in order to have valid HTML markup in the Grid.
     /**
     * Indicates whether the column should be visible in column menu.
     * @param boolean $value
+    * @returns \Kendo\UI\GridColumn
     */
     public function menu($value) {
         return $this->setProperty('menu', $value);

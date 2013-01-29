@@ -8,6 +8,7 @@ class StockChartNavigatorSelect extends \Kendo\SerializableObject {
     /**
     * The lower boundary of the selected range.
     * @param date $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSelect
     */
     public function from($value) {
         return $this->setProperty('from', $value);
@@ -16,6 +17,7 @@ class StockChartNavigatorSelect extends \Kendo\SerializableObject {
     /**
     * The upper boundary of the selected range.
     * @param date $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSelect
     */
     public function to($value) {
         return $this->setProperty('to', $value);

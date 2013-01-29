@@ -11,6 +11,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether the grid will call read on the DataSource initially.
     * @param boolean $value
+    * @returns \Kendo\UI\Grid
     */
     public function autoBind($value) {
         return $this->setProperty('autoBind', $value);
@@ -19,6 +20,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Adds GridColumn to the Grid.
     * @param \Kendo\UI\GridColumn,... $value one or more GridColumn to add.
+    * @returns \Kendo\UI\Grid
     */
     public function addColumn(\Kendo\UI\GridColumn $value) {
         return $this->add('columns', func_get_args());
@@ -27,6 +29,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Enables column header menu
     * @param boolean|\Kendo\UI\GridColumnMenu $value
+    * @returns \Kendo\UI\Grid
     */
     public function columnMenu($value) {
         return $this->setProperty('columnMenu', $value);
@@ -35,6 +38,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Sets the data source of the Grid.
     * @param \Kendo\Data\DataSource $value
+    * @returns \Kendo\UI\Grid
     */
     public function dataSource(\Kendo\Data\DataSource $value) {
         return $this->setProperty('dataSource', $value);
@@ -43,6 +47,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether editing is enabled/disabled.
     * @param boolean|\Kendo\UI\GridEditable $value
+    * @returns \Kendo\UI\Grid
     */
     public function editable($value) {
         return $this->setProperty('editable', $value);
@@ -51,6 +56,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether filtering is enabled/disabled.
     * @param boolean|\Kendo\UI\GridFilterable $value
+    * @returns \Kendo\UI\Grid
     */
     public function filterable($value) {
         return $this->setProperty('filterable', $value);
@@ -59,6 +65,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether column reordering is enabled/disable.
     * @param boolean $value
+    * @returns \Kendo\UI\Grid
     */
     public function reorderable($value) {
         return $this->setProperty('reorderable', $value);
@@ -67,6 +74,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether column resizing is enabled/disable.
     * @param boolean $value
+    * @returns \Kendo\UI\Grid
     */
     public function resizable($value) {
         return $this->setProperty('resizable', $value);
@@ -75,6 +83,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether grouping is enabled/disabled.
     * @param boolean|\Kendo\UI\GridGroupable $value
+    * @returns \Kendo\UI\Grid
     */
     public function groupable($value) {
         return $this->setProperty('groupable', $value);
@@ -83,6 +92,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Sets the height of the grid.
     * @param float|string $value
+    * @returns \Kendo\UI\Grid
     */
     public function height($value) {
         return $this->setProperty('height', $value);
@@ -91,6 +101,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether keyboard navigation is enabled/disabled.
     * @param boolean $value
+    * @returns \Kendo\UI\Grid
     */
     public function navigatable($value) {
         return $this->setProperty('navigatable', $value);
@@ -99,6 +110,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether paging is enabled/disabled.
     * @param boolean|\Kendo\UI\GridPageable $value
+    * @returns \Kendo\UI\Grid
     */
     public function pageable($value) {
         return $this->setProperty('pageable', $value);
@@ -107,6 +119,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Enable/disable grid scrolling.
     * @param boolean|\Kendo\UI\GridScrollable $value
+    * @returns \Kendo\UI\Grid
     */
     public function scrollable($value) {
         return $this->setProperty('scrollable', $value);
@@ -115,6 +128,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Indicates whether selection is enabled/disabled. Possible values:
     * @param string $value
+    * @returns \Kendo\UI\Grid
     */
     public function selectable($value) {
         return $this->setProperty('selectable', $value);
@@ -123,6 +137,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Defines whether grid columns are sortable.
     * @param boolean|\Kendo\UI\GridSortable $value
+    * @returns \Kendo\UI\Grid
     */
     public function sortable($value) {
         return $this->setProperty('sortable', $value);
@@ -131,6 +146,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Adds GridToolbarItem to the Grid.
     * @param \Kendo\UI\GridToolbarItem,... $value one or more GridToolbarItem to add.
+    * @returns \Kendo\UI\Grid
     */
     public function addToolbarItem(\Kendo\UI\GridToolbarItem $value) {
         return $this->add('toolbar', func_get_args());
@@ -139,6 +155,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * The id of the template used for rendering the detail rows in the grid.
     * @param string $value
+    * @returns \Kendo\UI\Grid
     */
     public function detailTemplate($value) {
         return $this->setProperty('detailTemplate', $value);
@@ -147,6 +164,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * The id of the template used for rendering the rows in the grid.
     * @param string $value
+    * @returns \Kendo\UI\Grid
     */
     public function rowTemplate($value) {
         return $this->setProperty('rowTemplate', $value);
@@ -155,6 +173,7 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * The id of the template used for rendering the alternate rows in the grid.
     * @param string $value
+    * @returns \Kendo\UI\Grid
     */
     public function altRowTemplate($value) {
         return $this->setProperty('altRowTemplate', $value);
@@ -164,6 +183,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the change event of the Grid.
     * Fires when the grid selection has changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function change($value) {
         if (is_string($value)) {
@@ -177,6 +197,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the columnHide event of the Grid.
     * Fires when the user hides a column.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function columnHide($value) {
         if (is_string($value)) {
@@ -190,6 +211,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the columnReorder event of the Grid.
     * Fires when the user changes the order of a column.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function columnReorder($value) {
         if (is_string($value)) {
@@ -203,6 +225,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the columnResize event of the Grid.
     * Fires when the user resizes a column.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function columnResize($value) {
         if (is_string($value)) {
@@ -216,6 +239,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the columnShow event of the Grid.
     * Fires when a column is shown.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function columnShow($value) {
         if (is_string($value)) {
@@ -229,6 +253,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the dataBound event of the Grid.
     * Fires when the grid has received data from the data source.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function dataBound($value) {
         if (is_string($value)) {
@@ -242,6 +267,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the dataBinding event of the Grid.
     * Fires when the grid is about to be rendered.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function dataBinding($value) {
         if (is_string($value)) {
@@ -255,6 +281,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the detailCollapse event of the Grid.
     * Fires when the grid detail row is collapsed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function detailCollapse($value) {
         if (is_string($value)) {
@@ -268,6 +295,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the detailExpand event of the Grid.
     * Fires when the grid detail row is expanded.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function detailExpand($value) {
         if (is_string($value)) {
@@ -281,6 +309,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the detailInit event of the Grid.
     * Fires when the grid detail is initialized.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function detailInit($value) {
         if (is_string($value)) {
@@ -294,6 +323,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the edit event of the Grid.
     * Fires when the grid enters edit mode.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function edit($value) {
         if (is_string($value)) {
@@ -307,6 +337,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the filterMenuInit event of the Grid.
     * Fires when the grid column filter menu is initialized.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function filterMenuInit($value) {
         if (is_string($value)) {
@@ -320,6 +351,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the columnMenuInit event of the Grid.
     * Fires when the grid column menu is initialized.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function columnMenuInit($value) {
         if (is_string($value)) {
@@ -333,6 +365,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the remove event of the Grid.
     * Fires before the grid item is removed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function remove($value) {
         if (is_string($value)) {
@@ -346,6 +379,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the save event of the Grid.
     * Fires before the grid item is changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function save($value) {
         if (is_string($value)) {
@@ -359,6 +393,7 @@ class Grid extends \Kendo\UI\Widget {
     * Sets the saveChanges event of the Grid.
     * Fires before the grid calls DataSource sync.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Grid
     */
     public function saveChanges($value) {
         if (is_string($value)) {

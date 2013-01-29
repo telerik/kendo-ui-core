@@ -8,6 +8,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The background color of the current series markers.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -16,6 +17,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The border of the markers.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemMarkersBorder $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
     public function border(\Kendo\Dataviz\UI\ChartSeriesItemMarkersBorder $value) {
         return $this->setProperty('border', $value);
@@ -24,6 +26,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The marker size.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
     public function size($value) {
         return $this->setProperty('size', $value);
@@ -32,6 +35,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * Configures the markers shape type.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
     public function type($value) {
         return $this->setProperty('type', $value);
@@ -40,6 +44,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     /**
     * The markers visibility.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

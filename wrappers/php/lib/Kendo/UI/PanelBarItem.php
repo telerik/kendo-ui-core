@@ -55,6 +55,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies the text displayed by the item
     * @param string $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -63,6 +64,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies the URL of the image displayed by the item
     * @param string $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function imageUrl($value) {
         return $this->setProperty('imageUrl', $value);
@@ -71,6 +73,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies the class name for the sprite image displayed by the item
     * @param string $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function spriteCssClass($value) {
         return $this->setProperty('spriteCssClass', $value);
@@ -79,6 +82,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially enabled
     * @param boolean $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function enabled($value) {
         return $this->setProperty('enabled', $value);
@@ -87,6 +91,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially selected
     * @param boolean $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function selected($value) {
         return $this->setProperty('selected', $value);
@@ -95,6 +100,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially expanded
     * @param boolean $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function expanded($value) {
         return $this->setProperty('expanded', $value);
@@ -103,6 +109,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Specifies the url from which the item content will be loaded
     * @param string $value
+    * @returns \Kendo\UI\PanelBarItem
     */
     public function contentUrl($value) {
         return $this->setProperty('contentUrl', $value);
@@ -111,7 +118,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Sets the HTML content of the PanelBarItem.
     * @param string $value
-    */
+    * @returns \Kendo\UI\PanelBarItems    */
     public function content($value) {
         return $this->setProperty('content', $value);
     }
@@ -132,7 +139,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     /**
     * Adds \Kendo\UI\PanelBarItem.
     * @param \Kendo\UI\PanelBarItem $value
-    */
+    * @returns \Kendo\UI\PanelBar    */
     public function addItem(\Kendo\UI\PanelBarItem $value) {
         return $this->add('items', $value);
     }

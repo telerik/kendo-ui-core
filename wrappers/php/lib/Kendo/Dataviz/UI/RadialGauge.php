@@ -12,6 +12,7 @@ class RadialGauge extends \Kendo\UI\Widget {
     * The gauge area configuration options.
 This is the entire visible area of the gauge.
     * @param \Kendo\Dataviz\UI\RadialGaugeGaugeArea $value
+    * @returns \Kendo\Dataviz\UI\RadialGauge
     */
     public function gaugeArea(\Kendo\Dataviz\UI\RadialGaugeGaugeArea $value) {
         return $this->setProperty('gaugeArea', $value);
@@ -20,6 +21,7 @@ This is the entire visible area of the gauge.
     /**
     * The pointer configuration options.
     * @param \Kendo\Dataviz\UI\RadialGaugePointer $value
+    * @returns \Kendo\Dataviz\UI\RadialGauge
     */
     public function pointer(\Kendo\Dataviz\UI\RadialGaugePointer $value) {
         return $this->setProperty('pointer', $value);
@@ -28,6 +30,7 @@ This is the entire visible area of the gauge.
     /**
     * The width of the range indicators.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\RadialGauge
     */
     public function rangeSize($value) {
         return $this->setProperty('rangeSize', $value);
@@ -36,6 +39,7 @@ This is the entire visible area of the gauge.
     /**
     * The distance from the range indicators to the ticks.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\RadialGauge
     */
     public function rangeDistance($value) {
         return $this->setProperty('rangeDistance', $value);
@@ -44,6 +48,7 @@ This is the entire visible area of the gauge.
     /**
     * Configures the scale.
     * @param \Kendo\Dataviz\UI\RadialGaugeScale $value
+    * @returns \Kendo\Dataviz\UI\RadialGauge
     */
     public function scale(\Kendo\Dataviz\UI\RadialGaugeScale $value) {
         return $this->setProperty('scale', $value);
@@ -52,6 +57,7 @@ This is the entire visible area of the gauge.
     /**
     * A value indicating if transition animations should be played.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\RadialGauge
     */
     public function transitions($value) {
         return $this->setProperty('transitions', $value);

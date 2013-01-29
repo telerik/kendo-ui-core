@@ -8,6 +8,7 @@ class ChartLegend extends \Kendo\SerializableObject {
     /**
     * The background color of the legend. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -16,6 +17,7 @@ class ChartLegend extends \Kendo\SerializableObject {
     /**
     * The border of the legend.
     * @param \Kendo\Dataviz\UI\ChartLegendBorder $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function border(\Kendo\Dataviz\UI\ChartLegendBorder $value) {
         return $this->setProperty('border', $value);
@@ -24,6 +26,7 @@ class ChartLegend extends \Kendo\SerializableObject {
     /**
     * Configures the legend labels.
     * @param \Kendo\Dataviz\UI\ChartLegendLabels $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function labels(\Kendo\Dataviz\UI\ChartLegendLabels $value) {
         return $this->setProperty('labels', $value);
@@ -32,6 +35,7 @@ class ChartLegend extends \Kendo\SerializableObject {
     /**
     * The margin of the legend.
     * @param float|Object $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -42,6 +46,7 @@ class ChartLegend extends \Kendo\SerializableObject {
 For instance, a value of 20 will move the legend 20 pixels to the right of it's initial position.  A negative value will move the legend
 to the left of the current position.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function offsetX($value) {
         return $this->setProperty('offsetX', $value);
@@ -52,6 +57,7 @@ to the left of the current position.
 For instance, a value of 20 will move the legend 20 pixels down from it's initial position.  A negative value will move the legend
 upwards from the current position.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function offsetY($value) {
         return $this->setProperty('offsetY', $value);
@@ -60,6 +66,7 @@ upwards from the current position.
     /**
     * The padding of the legend.
     * @param float|Object $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -68,6 +75,7 @@ upwards from the current position.
     /**
     * The positions of the legend.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function position($value) {
         return $this->setProperty('position', $value);
@@ -76,6 +84,7 @@ upwards from the current position.
     /**
     * The visibility of the legend.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartLegend
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

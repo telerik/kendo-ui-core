@@ -8,6 +8,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Specifies the text displayed by the item
     * @param string $value
+    * @returns \Kendo\UI\MenuItem
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -16,6 +17,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Specifies the URL of the image displayed by the item
     * @param string $value
+    * @returns \Kendo\UI\MenuItem
     */
     public function imageUrl($value) {
         return $this->setProperty('imageUrl', $value);
@@ -24,6 +26,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Specifies the class name for the sprite image displayed by the item
     * @param string $value
+    * @returns \Kendo\UI\MenuItem
     */
     public function spriteCssClass($value) {
         return $this->setProperty('spriteCssClass', $value);
@@ -32,6 +35,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially enabled
     * @param boolean $value
+    * @returns \Kendo\UI\MenuItem
     */
     public function enabled($value) {
         return $this->setProperty('enabled', $value);
@@ -40,6 +44,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Specifies whether the item is initially selected
     * @param boolean $value
+    * @returns \Kendo\UI\MenuItem
     */
     public function selected($value) {
         return $this->setProperty('selected', $value);
@@ -48,7 +53,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Sets the HTML content of the MenuItem.
     * @param string $value
-    */
+    * @returns \Kendo\UI\MenuItems    */
     public function content($value) {
         return $this->setProperty('content', $value);
     }
@@ -69,7 +74,7 @@ class MenuItem extends \Kendo\SerializableObject {
     /**
     * Adds \Kendo\UI\MenuItem.
     * @param \Kendo\UI\MenuItem $value
-    */
+    * @returns \Kendo\UI\Menu    */
     public function addItem(\Kendo\UI\MenuItem $value) {
         return $this->add('items', $value);
     }

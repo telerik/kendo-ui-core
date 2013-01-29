@@ -9,6 +9,7 @@ class StockChartPaneTitle extends \Kendo\SerializableObject {
     * The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -17,6 +18,7 @@ hex and rgb.
     /**
     * The border of the title.
     * @param \Kendo\Dataviz\UI\StockChartPaneTitleBorder $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function border(\Kendo\Dataviz\UI\StockChartPaneTitleBorder $value) {
         return $this->setProperty('border', $value);
@@ -25,6 +27,7 @@ hex and rgb.
     /**
     * The text color of the title. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -33,6 +36,7 @@ hex and rgb.
     /**
     * The font style of the title.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -41,6 +45,7 @@ hex and rgb.
     /**
     * The margin of the title.
     * @param float|Object $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -49,6 +54,7 @@ hex and rgb.
     /**
     * The position of the title.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function position($value) {
         return $this->setProperty('position', $value);
@@ -57,6 +63,7 @@ hex and rgb.
     /**
     * The text of the title.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -65,6 +72,7 @@ hex and rgb.
     /**
     * The visibility of the title.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChartPaneTitle
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

@@ -8,6 +8,7 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
     /**
     * The border of the track.
     * @param \Kendo\Dataviz\UI\LinearGaugePointerTrackBorder $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointerTrack
     */
     public function border(\Kendo\Dataviz\UI\LinearGaugePointerTrackBorder $value) {
         return $this->setProperty('border', $value);
@@ -16,6 +17,7 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
     /**
     * The color of the track.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointerTrack
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -24,6 +26,7 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
     /**
     * The opacity of the track.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointerTrack
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -32,6 +35,7 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
     /**
     * The size of the track.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointerTrack
     */
     public function size($value) {
         return $this->setProperty('size', $value);
@@ -40,6 +44,7 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
     /**
     * The visibility of the track.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointerTrack
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

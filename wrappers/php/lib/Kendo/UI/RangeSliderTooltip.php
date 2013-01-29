@@ -8,6 +8,7 @@ class RangeSliderTooltip extends \Kendo\SerializableObject {
     /**
     * Disables (false) or enables (true) the tooltip of the RangeSlider.
     * @param boolean $value
+    * @returns \Kendo\UI\RangeSliderTooltip
     */
     public function enabled($value) {
         return $this->setProperty('enabled', $value);
@@ -17,6 +18,7 @@ class RangeSliderTooltip extends \Kendo\SerializableObject {
     * Format string for the text of the tooltip. Note: The applied format will also influence the appearance of
 the RangeSlider tick labels.
     * @param string $value
+    * @returns \Kendo\UI\RangeSliderTooltip
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -25,6 +27,7 @@ the RangeSlider tick labels.
     /**
     * Template of the tooltip.
     * @param string $value
+    * @returns \Kendo\UI\RangeSliderTooltip
     */
     public function template($value) {
         return $this->setProperty('template', $value);

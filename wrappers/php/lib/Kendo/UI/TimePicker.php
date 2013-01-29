@@ -11,6 +11,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
     * @param \Kendo\UI\TimePickerAnimation $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function animation(\Kendo\UI\TimePickerAnimation $value) {
         return $this->setProperty('animation', $value);
@@ -19,6 +20,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the culture info used by the widget.
     * @param string $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function culture($value) {
         return $this->setProperty('culture', $value);
@@ -27,6 +29,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.
     * @param array $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function dates($value) {
         return $this->setProperty('dates', $value);
@@ -35,6 +38,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.
     * @param string $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -43,6 +47,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the interval, between values in the popup list, in minutes.
     * @param float $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function interval($value) {
         return $this->setProperty('interval', $value);
@@ -51,6 +56,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the end value in the popup list.
     * @param date $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -59,6 +65,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the start value in the popup list.
     * @param date $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -67,6 +74,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the formats, which are used to parse the value set with the value method or by direct input. If not set the value of the options.format will be used. Note that value of the format option is always used.
     * @param array $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function parseFormats($value) {
         return $this->setProperty('parseFormats', $value);
@@ -75,6 +83,7 @@ class TimePicker extends \Kendo\UI\Widget {
     /**
     * Specifies the selected time.
     * @param date $value
+    * @returns \Kendo\UI\TimePicker
     */
     public function value($value) {
         return $this->setProperty('value', $value);
@@ -84,6 +93,7 @@ class TimePicker extends \Kendo\UI\Widget {
     * Sets the change event of the TimePicker.
     * Triggered when the underlying value of a TimePicker is changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TimePicker
     */
     public function change($value) {
         if (is_string($value)) {
@@ -97,6 +107,7 @@ class TimePicker extends \Kendo\UI\Widget {
     * Sets the close event of the TimePicker.
     * Fires when the time drop-down list is closed
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TimePicker
     */
     public function close($value) {
         if (is_string($value)) {
@@ -110,6 +121,7 @@ class TimePicker extends \Kendo\UI\Widget {
     * Sets the open event of the TimePicker.
     * Fires when the time drop-down list is opened
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TimePicker
     */
     public function open($value) {
         if (is_string($value)) {

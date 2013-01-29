@@ -8,6 +8,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * The type of the series. Available types:
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function type($value) {
         return $this->setProperty('type', $value);
@@ -16,6 +17,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * The series line dash type.** Applicable only to line series **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -24,6 +26,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * Array of data items. The data item type can be either a:
     * @param array $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function data($value) {
         return $this->setProperty('data', $value);
@@ -32,6 +35,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * The data field containing the high value.** Available for candlestick and ohlc series only **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function highField($value) {
         return $this->setProperty('highField', $value);
@@ -40,6 +44,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * The data field containing the series value.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function field($value) {
         return $this->setProperty('field', $value);
@@ -48,6 +53,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * Name template for auto-generated series when binding to grouped data.Template variables:
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function groupNameTemplate($value) {
         return $this->setProperty('groupNameTemplate', $value);
@@ -56,6 +62,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * The series name visible in the legend.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function name($value) {
         return $this->setProperty('name', $value);
@@ -64,6 +71,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     /**
     * Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemHighlight $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function highlight(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemHighlight $value) {
         return $this->setProperty('highlight', $value);
@@ -73,6 +81,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     * Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
 The function return value is displayed instead of the individual points.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function aggregate($value) {
         return $this->setProperty('aggregate', $value);
@@ -81,6 +90,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The name of the value axis to use.** Applicable to area, column, line, ohlc and candlestick series **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function axis($value) {
         return $this->setProperty('axis', $value);
@@ -89,6 +99,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The border of the points.** Applicable to column, ohlc and candlestick series **
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemBorder $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function border(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemBorder $value) {
         return $this->setProperty('border', $value);
@@ -97,6 +108,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The data field containing the close value.** Available for candlestick and ohlc series only **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function closeField($value) {
         return $this->setProperty('closeField', $value);
@@ -105,6 +117,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The series base color.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -113,6 +126,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The data field containing the point color.** Applicable for column, candlestick and ohlc series. **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function colorField($value) {
         return $this->setProperty('colorField', $value);
@@ -121,6 +135,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The series color when open value is smoller then close value.** Available for candlestick series only **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function downColor($value) {
         return $this->setProperty('downColor', $value);
@@ -129,6 +144,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The data field containing the body color.** Available for candlestick series only **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function downColorField($value) {
         return $this->setProperty('downColorField', $value);
@@ -137,6 +153,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The distance between category clusters.** Applicable for column, candlestick and ohlc series. **
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function gap($value) {
         return $this->setProperty('gap', $value);
@@ -145,6 +162,7 @@ The function return value is displayed instead of the individual points.
     /**
     * Configures the series data labels.
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLabels $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function labels(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLabels $value) {
         return $this->setProperty('labels', $value);
@@ -153,6 +171,7 @@ The function return value is displayed instead of the individual points.
     /**
     * Line options.** Applicable to area, candlestick and ohlc series. **
     * @param string|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function line($value) {
         return $this->setProperty('line', $value);
@@ -161,6 +180,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The data field containing the low value.** Available for candlestick and ohlc series **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function lowField($value) {
         return $this->setProperty('lowField', $value);
@@ -169,6 +189,7 @@ The function return value is displayed instead of the individual points.
     /**
     * Marker options.** Applicable for area and line series. **
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function markers(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers $value) {
         return $this->setProperty('markers', $value);
@@ -177,6 +198,7 @@ The function return value is displayed instead of the individual points.
     /**
     * Configures the behavior for handling missing values.** Applicable for area and line series. **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function missingValues($value) {
         return $this->setProperty('missingValues', $value);
@@ -185,6 +207,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The series opacity.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -193,6 +216,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The data field containing the open value.** Available for candlestick and ohlc series **
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function openField($value) {
         return $this->setProperty('openField', $value);
@@ -201,6 +225,7 @@ The function return value is displayed instead of the individual points.
     /**
     * The effects overlay.
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemOverlay $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function overlay(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemOverlay $value) {
         return $this->setProperty('overlay', $value);
@@ -209,6 +234,7 @@ The function return value is displayed instead of the individual points.
     /**
     * Space between points as proportion of the point width.Available for column, candlestick and ohlc series.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function spacing($value) {
         return $this->setProperty('spacing', $value);
@@ -218,6 +244,7 @@ The function return value is displayed instead of the individual points.
     * A value indicating if the series should be stacked.  String value indicates that the series should be stacked in a group with the specified name.
 Available for column series.
     * @param boolean|boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function stack($value) {
         return $this->setProperty('stack', $value);
@@ -226,6 +253,7 @@ Available for column series.
     /**
     * The data point tooltip configuration options.
     * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemTooltip $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function tooltip(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemTooltip $value) {
         return $this->setProperty('tooltip', $value);
@@ -234,6 +262,7 @@ Available for column series.
     /**
     * The line width.** Applicable for area and line series. **
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function width($value) {
         return $this->setProperty('width', $value);

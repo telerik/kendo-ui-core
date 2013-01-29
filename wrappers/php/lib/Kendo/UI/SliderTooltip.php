@@ -9,6 +9,7 @@ class SliderTooltip extends \Kendo\SerializableObject {
     * Disables (false) or enables (true) the tooltip of
 the Slider.
     * @param boolean $value
+    * @returns \Kendo\UI\SliderTooltip
     */
     public function enabled($value) {
         return $this->setProperty('enabled', $value);
@@ -19,6 +20,7 @@ the Slider.
 format will also influence the appearance of the Slider
 tick labels.
     * @param string $value
+    * @returns \Kendo\UI\SliderTooltip
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -27,6 +29,7 @@ tick labels.
     /**
     * Template of the tooltip.
     * @param string $value
+    * @returns \Kendo\UI\SliderTooltip
     */
     public function template($value) {
         return $this->setProperty('template', $value);

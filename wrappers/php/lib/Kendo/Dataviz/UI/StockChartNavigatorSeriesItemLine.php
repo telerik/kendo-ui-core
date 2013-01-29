@@ -8,6 +8,7 @@ class StockChartNavigatorSeriesItemLine extends \Kendo\SerializableObject {
     /**
     * The line color.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -16,6 +17,7 @@ class StockChartNavigatorSeriesItemLine extends \Kendo\SerializableObject {
     /**
     * The line opacity.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -24,6 +26,7 @@ class StockChartNavigatorSeriesItemLine extends \Kendo\SerializableObject {
     /**
     * The line width.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine
     */
     public function width($value) {
         return $this->setProperty('width', $value);

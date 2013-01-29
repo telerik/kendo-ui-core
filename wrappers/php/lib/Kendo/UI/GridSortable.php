@@ -8,6 +8,7 @@ class GridSortable extends \Kendo\SerializableObject {
     /**
     * Defines whether column can have unsorted state.
     * @param boolean $value
+    * @returns \Kendo\UI\GridSortable
     */
     public function allowUnsort($value) {
         return $this->setProperty('allowUnsort', $value);
@@ -16,6 +17,7 @@ class GridSortable extends \Kendo\SerializableObject {
     /**
     * Defines sorting mode. Possible values:
     * @param string $value
+    * @returns \Kendo\UI\GridSortable
     */
     public function mode($value) {
         return $this->setProperty('mode', $value);

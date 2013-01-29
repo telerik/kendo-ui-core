@@ -8,6 +8,7 @@ class StockChartNavigatorSeriesItemMarkersBorder extends \Kendo\SerializableObje
     /**
     * The color of the border.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -16,6 +17,7 @@ class StockChartNavigatorSeriesItemMarkersBorder extends \Kendo\SerializableObje
     /**
     * The width of the border.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder
     */
     public function width($value) {
         return $this->setProperty('width', $value);

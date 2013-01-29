@@ -8,6 +8,7 @@ class DropDownListAnimation extends \Kendo\SerializableObject {
     /**
     * Animation to be used for closing of the popup.
     * @param \Kendo\UI\DropDownListAnimationClose $value
+    * @returns \Kendo\UI\DropDownListAnimation
     */
     public function close(\Kendo\UI\DropDownListAnimationClose $value) {
         return $this->setProperty('close', $value);
@@ -16,6 +17,7 @@ class DropDownListAnimation extends \Kendo\SerializableObject {
     /**
     * Animation to be used for opening of the popup.
     * @param \Kendo\UI\DropDownListAnimationOpen $value
+    * @returns \Kendo\UI\DropDownListAnimation
     */
     public function open(\Kendo\UI\DropDownListAnimationOpen $value) {
         return $this->setProperty('open', $value);

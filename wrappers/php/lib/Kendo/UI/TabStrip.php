@@ -12,6 +12,7 @@ class TabStrip extends \Kendo\UI\Widget {
     * A collection of visual animations used when TabStrip tab are selected through
 user interactions. Setting this option to false will disable all animations.
     * @param \Kendo\UI\TabStripAnimation $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function animation(\Kendo\UI\TabStripAnimation $value) {
         return $this->setProperty('animation', $value);
@@ -20,6 +21,7 @@ user interactions. Setting this option to false will disable all animations.
     /**
     * Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.
     * @param boolean $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function collapsible($value) {
         return $this->setProperty('collapsible', $value);
@@ -29,6 +31,7 @@ user interactions. Setting this option to false will disable all animations.
     * Sets the field of the data item that provides the text content of
 the tab content element.
     * @param string $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function dataContentField($value) {
         return $this->setProperty('dataContentField', $value);
@@ -38,6 +41,7 @@ the tab content element.
     * Sets the field of the data item that provides the URL for
 the ajax loaded tab content.
     * @param string $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function dataContentUrlField($value) {
         return $this->setProperty('dataContentUrlField', $value);
@@ -47,6 +51,7 @@ the ajax loaded tab content.
     * Sets the field of the data item that provides the image URL of
 the tab.
     * @param string $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function dataImageUrlField($value) {
         return $this->setProperty('dataImageUrlField', $value);
@@ -56,6 +61,7 @@ the tab.
     * Sets the field of the data item that provides the CSS class of
 the tab.
     * @param string $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function dataSpriteCssClass($value) {
         return $this->setProperty('dataSpriteCssClass', $value);
@@ -64,6 +70,7 @@ the tab.
     /**
     * Sets the field of the data item that provides the text name of the tab.
     * @param string $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function dataTextField($value) {
         return $this->setProperty('dataTextField', $value);
@@ -73,6 +80,7 @@ the tab.
     * Sets the field of the data item that provides the link URL for the
 tab.
     * @param string $value
+    * @returns \Kendo\UI\TabStrip
     */
     public function dataUrlField($value) {
         return $this->setProperty('dataUrlField', $value);
@@ -81,6 +89,7 @@ tab.
     /**
     * Adds TabStripItem to the TabStrip.
     * @param \Kendo\UI\TabStripItem,... $value one or more TabStripItem to add.
+    * @returns \Kendo\UI\TabStrip
     */
     public function addItem(\Kendo\UI\TabStripItem $value) {
         return $this->add('items', func_get_args());
@@ -90,6 +99,7 @@ tab.
     * Sets the activate event of the TabStrip.
     * Triggered just after a tab is being made visible, but before the end of the animation
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TabStrip
     */
     public function activate($value) {
         if (is_string($value)) {
@@ -103,6 +113,7 @@ tab.
     * Sets the contentLoad event of the TabStrip.
     * Triggered when content is fetched from an AJAX request.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TabStrip
     */
     public function contentLoad($value) {
         if (is_string($value)) {
@@ -116,6 +127,7 @@ tab.
     * Sets the error event of the TabStrip.
     * Triggered when an AJAX request results in an error.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TabStrip
     */
     public function error($value) {
         if (is_string($value)) {
@@ -129,6 +141,7 @@ tab.
     * Sets the select event of the TabStrip.
     * Triggered before a tab is selected.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\TabStrip
     */
     public function select($value) {
         if (is_string($value)) {

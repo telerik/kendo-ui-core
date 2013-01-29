@@ -11,6 +11,7 @@ class Splitter extends \Kendo\UI\Widget {
     /**
     * Specifies the orientation of the Splitter.
     * @param string $value
+    * @returns \Kendo\UI\Splitter
     */
     public function orientation($value) {
         return $this->setProperty('orientation', $value);
@@ -19,6 +20,7 @@ class Splitter extends \Kendo\UI\Widget {
     /**
     * Adds SplitterPane to the Splitter.
     * @param \Kendo\UI\SplitterPane,... $value one or more SplitterPane to add.
+    * @returns \Kendo\UI\Splitter
     */
     public function addPane(\Kendo\UI\SplitterPane $value) {
         return $this->add('panes', func_get_args());
@@ -28,6 +30,7 @@ class Splitter extends \Kendo\UI\Widget {
     * Sets the collapse event of the Splitter.
     * Triggered when a pane of a Splitter is collapsed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Splitter
     */
     public function collapse($value) {
         if (is_string($value)) {
@@ -41,6 +44,7 @@ class Splitter extends \Kendo\UI\Widget {
     * Sets the contentLoad event of the Splitter.
     * Triggered when the content for a pane has finished loading.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Splitter
     */
     public function contentLoad($value) {
         if (is_string($value)) {
@@ -54,6 +58,7 @@ class Splitter extends \Kendo\UI\Widget {
     * Sets the expand event of the Splitter.
     * Triggered when a pane of a Splitter is expanded.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Splitter
     */
     public function expand($value) {
         if (is_string($value)) {
@@ -67,6 +72,7 @@ class Splitter extends \Kendo\UI\Widget {
     * Sets the layoutChange event of the Splitter.
     * Fires when the splitter layout has changed
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Splitter
     */
     public function layoutChange($value) {
         if (is_string($value)) {
@@ -80,6 +86,7 @@ class Splitter extends \Kendo\UI\Widget {
     * Sets the resize event of the Splitter.
     * Triggered when a pane is resized.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Splitter
     */
     public function resize($value) {
         if (is_string($value)) {

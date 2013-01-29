@@ -8,6 +8,7 @@ class PanelBarAnimation extends \Kendo\SerializableObject {
     /**
     * The visual animation(s) that will be used when PanelBar items are closed.
     * @param \Kendo\UI\PanelBarAnimationCollapse $value
+    * @returns \Kendo\UI\PanelBarAnimation
     */
     public function collapse(\Kendo\UI\PanelBarAnimationCollapse $value) {
         return $this->setProperty('collapse', $value);
@@ -16,6 +17,7 @@ class PanelBarAnimation extends \Kendo\SerializableObject {
     /**
     * The visual animation(s) that will be used when opening items.
     * @param \Kendo\UI\PanelBarAnimationExpand $value
+    * @returns \Kendo\UI\PanelBarAnimation
     */
     public function expand(\Kendo\UI\PanelBarAnimationExpand $value) {
         return $this->setProperty('expand', $value);

@@ -8,6 +8,7 @@ class EditorImagebrowserSchemaModel extends \Kendo\SerializableObject {
     /**
     * The name of the field which acts as an identifier.
     * @param string $value
+    * @returns \Kendo\UI\EditorImagebrowserSchemaModel
     */
     public function id($value) {
         return $this->setProperty('id', $value);
@@ -16,6 +17,7 @@ class EditorImagebrowserSchemaModel extends \Kendo\SerializableObject {
     /**
     * 
     * @param \Kendo\UI\EditorImagebrowserSchemaModelFields $value
+    * @returns \Kendo\UI\EditorImagebrowserSchemaModel
     */
     public function fields(\Kendo\UI\EditorImagebrowserSchemaModelFields $value) {
         return $this->setProperty('fields', $value);

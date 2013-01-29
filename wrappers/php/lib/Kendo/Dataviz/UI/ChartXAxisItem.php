@@ -9,6 +9,7 @@ class ChartXAxisItem extends \Kendo\SerializableObject {
     * Color to apply to all axis elements.
 Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -18,6 +19,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     * The axis type.Note: The Chart will automatically switch to a date axis if the series X value
 is of type Date. Specify type explicitly when such behavior is undesired.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function type($value) {
         return $this->setProperty('type', $value);
@@ -27,6 +29,7 @@ is of type Date. Specify type explicitly when such behavior is undesired.
     * Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
 axis maximum value to denote the far end of the axis.
     * @param Object|date|array $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function axisCrossingValue($value) {
         return $this->setProperty('axisCrossingValue', $value);
@@ -36,6 +39,7 @@ axis maximum value to denote the far end of the axis.
     * The base time interval for the axis labels.
 The default baseUnit is determined automatically from the value range. Available options:
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function baseUnit($value) {
         return $this->setProperty('baseUnit', $value);
@@ -44,6 +48,7 @@ The default baseUnit is determined automatically from the value range. Available
     /**
     * Configures the axis labels.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemLabels $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function labels(\Kendo\Dataviz\UI\ChartXAxisItemLabels $value) {
         return $this->setProperty('labels', $value);
@@ -52,6 +57,7 @@ The default baseUnit is determined automatically from the value range. Available
     /**
     * The interval between major divisions in base units.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function majorUnit($value) {
         return $this->setProperty('majorUnit', $value);
@@ -61,6 +67,7 @@ The default baseUnit is determined automatically from the value range. Available
     * The end date of the axis.
 This is often used in combination with the min configuration option.
     * @param Object $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -70,6 +77,7 @@ This is often used in combination with the min configuration option.
     * The maximum value of the axis.
 This is often used in combination with the max configuration option.
     * @param Object $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -79,6 +87,7 @@ This is often used in combination with the max configuration option.
     * The interval between minor divisions in base units.
 It defaults to 1/5th of the majorUnit.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function minorUnit($value) {
         return $this->setProperty('minorUnit', $value);
@@ -87,6 +96,7 @@ It defaults to 1/5th of the majorUnit.
     /**
     * Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemLine $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function line(\Kendo\Dataviz\UI\ChartXAxisItemLine $value) {
         return $this->setProperty('line', $value);
@@ -96,6 +106,7 @@ It defaults to 1/5th of the majorUnit.
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function majorGridLines(\Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines $value) {
         return $this->setProperty('majorGridLines', $value);
@@ -104,6 +115,7 @@ body of the chart.
     /**
     * The major ticks of the axis.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemMajorTicks $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function majorTicks(\Kendo\Dataviz\UI\ChartXAxisItemMajorTicks $value) {
         return $this->setProperty('majorTicks', $value);
@@ -112,6 +124,7 @@ body of the chart.
     /**
     * The unique axis name.
     * @param Object $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function name($value) {
         return $this->setProperty('name', $value);
@@ -120,6 +133,7 @@ body of the chart.
     /**
     * Prevents the automatic axis range from snapping to 0.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function narrowRange($value) {
         return $this->setProperty('narrowRange', $value);
@@ -129,6 +143,7 @@ body of the chart.
     * The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function pane($value) {
         return $this->setProperty('pane', $value);
@@ -137,6 +152,7 @@ The axis will be rendered in the first (default) pane if not set.
     /**
     * Adds ChartXAxisItemPlotBand to the ChartXAxisItem.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemPlotBand,... $value one or more ChartXAxisItemPlotBand to add.
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function addPlotBand(\Kendo\Dataviz\UI\ChartXAxisItemPlotBand $value) {
         return $this->add('plotBands', func_get_args());
@@ -146,6 +162,7 @@ The axis will be rendered in the first (default) pane if not set.
     * Reverses the axis direction -
 values increase from right to left and from top to bottom.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function reverse($value) {
         return $this->setProperty('reverse', $value);
@@ -154,6 +171,7 @@ values increase from right to left and from top to bottom.
     /**
     * The title of the value axis.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemTitle $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function title(\Kendo\Dataviz\UI\ChartXAxisItemTitle $value) {
         return $this->setProperty('title', $value);
@@ -162,6 +180,7 @@ values increase from right to left and from top to bottom.
     /**
     * The visibility of the axis.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);

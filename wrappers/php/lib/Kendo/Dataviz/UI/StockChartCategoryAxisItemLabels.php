@@ -8,6 +8,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
     /**
     * The background color of the labels. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function background($value) {
         return $this->setProperty('background', $value);
@@ -16,6 +17,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
     /**
     * The border of the labels.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabelsBorder $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function border(\Kendo\Dataviz\UI\StockChartCategoryAxisItemLabelsBorder $value) {
         return $this->setProperty('border', $value);
@@ -24,6 +26,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
     /**
     * The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -32,6 +35,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
     /**
     * The font style of the labels.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -40,6 +44,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
     /**
     * The format of the labels.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -48,6 +53,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
     /**
     * The margin of the labels.
     * @param float|Object $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -58,6 +64,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function mirror($value) {
         return $this->setProperty('mirror', $value);
@@ -66,6 +73,7 @@ mirroring the axis will render them to the right.
     /**
     * The padding of the labels.
     * @param float|Object $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
@@ -74,6 +82,7 @@ mirroring the axis will render them to the right.
     /**
     * The rotation angle of the labels.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function rotation($value) {
         return $this->setProperty('rotation', $value);
@@ -83,6 +92,7 @@ mirroring the axis will render them to the right.
     * Number of labels to skip.
 Skips rendering the first n labels.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function skip($value) {
         return $this->setProperty('skip', $value);
@@ -92,6 +102,7 @@ Skips rendering the first n labels.
     * Label rendering step.
 Every n-th label is rendered where n is the step
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function step($value) {
         return $this->setProperty('step', $value);
@@ -101,6 +112,7 @@ Every n-th label is rendered where n is the step
     * The label template.
 Template variables:
     * @param string|\kendo\JavaScriptFunction $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -109,6 +121,7 @@ Template variables:
     /**
     * The visibility of the labels.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -117,6 +130,7 @@ Template variables:
     /**
     * Culture to use for formatting the dates. See Globalization for more information.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function culture($value) {
         return $this->setProperty('culture', $value);
@@ -125,6 +139,7 @@ Template variables:
     /**
     * Date format strings
     * @param Object $value
+    * @returns \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function dateFormats($value) {
         return $this->setProperty('dateFormats', $value);

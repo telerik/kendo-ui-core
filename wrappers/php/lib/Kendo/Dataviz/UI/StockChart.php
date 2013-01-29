@@ -12,6 +12,7 @@ class StockChart extends \Kendo\UI\Widget {
     * The field containing the point date.
 It is used as a default field for all date axes, including the navigator pane.The data item field value must be either:
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function dateField($value) {
         return $this->setProperty('dateField', $value);
@@ -20,6 +21,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
     /**
     * The data navigator configuration options.
     * @param \Kendo\Dataviz\UI\StockChartNavigator $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function navigator(\Kendo\Dataviz\UI\StockChartNavigator $value) {
         return $this->setProperty('navigator', $value);
@@ -28,6 +30,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
     /**
     * Default options for all chart axes.
     * @param Object $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function axisDefaults($value) {
         return $this->setProperty('axisDefaults', $value);
@@ -36,6 +39,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
     /**
     * Adds StockChartCategoryAxisItem to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItem,... $value one or more StockChartCategoryAxisItem to add.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function addCategoryAxisItem(\Kendo\Dataviz\UI\StockChartCategoryAxisItem $value) {
         return $this->add('categoryAxis', func_get_args());
@@ -45,6 +49,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
     * The chart area configuration options.
 This is the entire visible area of the chart.
     * @param \Kendo\Dataviz\UI\StockChartChartArea $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function chartArea(\Kendo\Dataviz\UI\StockChartChartArea $value) {
         return $this->setProperty('chartArea', $value);
@@ -53,6 +58,7 @@ This is the entire visible area of the chart.
     /**
     * Sets the data source of the StockChart.
     * @param \Kendo\Data\DataSource $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function dataSource(\Kendo\Data\DataSource $value) {
         return $this->setProperty('dataSource', $value);
@@ -61,6 +67,7 @@ This is the entire visible area of the chart.
     /**
     * Indicates whether the chart will call read on the data source initially.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function autoBind($value) {
         return $this->setProperty('autoBind', $value);
@@ -69,6 +76,7 @@ This is the entire visible area of the chart.
     /**
     * The chart legend configuration options.
     * @param \Kendo\Dataviz\UI\StockChartLegend $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function legend(\Kendo\Dataviz\UI\StockChartLegend $value) {
         return $this->setProperty('legend', $value);
@@ -77,6 +85,7 @@ This is the entire visible area of the chart.
     /**
     * Adds StockChartPane to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartPane,... $value one or more StockChartPane to add.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function addPane(\Kendo\Dataviz\UI\StockChartPane $value) {
         return $this->add('panes', func_get_args());
@@ -85,6 +94,7 @@ This is the entire visible area of the chart.
     /**
     * The plot area configuration options. This is the area containing the plotted series.
     * @param \Kendo\Dataviz\UI\StockChartPlotArea $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function plotArea(\Kendo\Dataviz\UI\StockChartPlotArea $value) {
         return $this->setProperty('plotArea', $value);
@@ -93,6 +103,7 @@ This is the entire visible area of the chart.
     /**
     * Adds StockChartSeriesItem to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartSeriesItem,... $value one or more StockChartSeriesItem to add.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function addSeriesItem(\Kendo\Dataviz\UI\StockChartSeriesItem $value) {
         return $this->add('series', func_get_args());
@@ -101,6 +112,7 @@ This is the entire visible area of the chart.
     /**
     * The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.
     * @param array $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function seriesColors($value) {
         return $this->setProperty('seriesColors', $value);
@@ -109,6 +121,7 @@ This is the entire visible area of the chart.
     /**
     * Default values for each series.
     * @param \Kendo\Dataviz\UI\StockChartSeriesDefaults $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function seriesDefaults(\Kendo\Dataviz\UI\StockChartSeriesDefaults $value) {
         return $this->setProperty('seriesDefaults', $value);
@@ -117,6 +130,7 @@ This is the entire visible area of the chart.
     /**
     * Sets Chart theme. Available themes: default, blueOpal, black.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function theme($value) {
         return $this->setProperty('theme', $value);
@@ -125,6 +139,7 @@ This is the entire visible area of the chart.
     /**
     * The chart title configuration options or text.
     * @param \Kendo\Dataviz\UI\StockChartTitle $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function title(\Kendo\Dataviz\UI\StockChartTitle $value) {
         return $this->setProperty('title', $value);
@@ -133,6 +148,7 @@ This is the entire visible area of the chart.
     /**
     * The data point tooltip configuration options.
     * @param \Kendo\Dataviz\UI\StockChartTooltip $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function tooltip(\Kendo\Dataviz\UI\StockChartTooltip $value) {
         return $this->setProperty('tooltip', $value);
@@ -141,6 +157,7 @@ This is the entire visible area of the chart.
     /**
     * A value indicating if transition animations should be played.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function transitions($value) {
         return $this->setProperty('transitions', $value);
@@ -149,6 +166,7 @@ This is the entire visible area of the chart.
     /**
     * Adds StockChartValueAxisItem to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartValueAxisItem,... $value one or more StockChartValueAxisItem to add.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function addValueAxisItem(\Kendo\Dataviz\UI\StockChartValueAxisItem $value) {
         return $this->add('valueAxis', func_get_args());
@@ -157,6 +175,7 @@ This is the entire visible area of the chart.
     /**
     * Adds StockChartXAxisItem to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartXAxisItem,... $value one or more StockChartXAxisItem to add.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function addXAxisItem(\Kendo\Dataviz\UI\StockChartXAxisItem $value) {
         return $this->add('xAxis', func_get_args());
@@ -165,6 +184,7 @@ This is the entire visible area of the chart.
     /**
     * Adds StockChartYAxisItem to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartYAxisItem,... $value one or more StockChartYAxisItem to add.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function addYAxisItem(\Kendo\Dataviz\UI\StockChartYAxisItem $value) {
         return $this->add('yAxis', func_get_args());
@@ -174,6 +194,7 @@ This is the entire visible area of the chart.
     * Sets the axisLabelClick event of the StockChart.
     * Fires when an axis label is clicked.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function axisLabelClick($value) {
         if (is_string($value)) {
@@ -188,6 +209,7 @@ This is the entire visible area of the chart.
     * Fires when the chart has received data from the data source
 and is about to render it.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function dataBound($value) {
         if (is_string($value)) {
@@ -201,6 +223,7 @@ and is about to render it.
     * Sets the dragStart event of the StockChart.
     * Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function dragStart($value) {
         if (is_string($value)) {
@@ -214,6 +237,7 @@ and is about to render it.
     * Sets the drag event of the StockChart.
     * Fires as long as the user is dragging the chart using the mouse or swipe gestures.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function drag($value) {
         if (is_string($value)) {
@@ -227,6 +251,7 @@ and is about to render it.
     * Sets the dragEnd event of the StockChart.
     * Fires when the user stops dragging the chart.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function dragEnd($value) {
         if (is_string($value)) {
@@ -240,6 +265,7 @@ and is about to render it.
     * Sets the plotAreaClick event of the StockChart.
     * Fires when plot area is clicked.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function plotAreaClick($value) {
         if (is_string($value)) {
@@ -253,6 +279,7 @@ and is about to render it.
     * Sets the seriesClick event of the StockChart.
     * Fires when chart series are clicked.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function seriesClick($value) {
         if (is_string($value)) {
@@ -266,6 +293,7 @@ and is about to render it.
     * Sets the seriesHover event of the StockChart.
     * Fires when chart series are hovered.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function seriesHover($value) {
         if (is_string($value)) {
@@ -279,6 +307,7 @@ and is about to render it.
     * Sets the zoomStart event of the StockChart.
     * Fires when the user has used the mousewheel to zoom the chart.The zoom operation can be aborted by calling e.preventDefault().
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function zoomStart($value) {
         if (is_string($value)) {
@@ -292,6 +321,7 @@ and is about to render it.
     * Sets the zoom event of the StockChart.
     * Fires as long as the user is zooming the chart using the mousewheel.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function zoom($value) {
         if (is_string($value)) {
@@ -305,6 +335,7 @@ and is about to render it.
     * Sets the zoomEnd event of the StockChart.
     * Fires when the user stops zooming the chart.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function zoomEnd($value) {
         if (is_string($value)) {
@@ -318,6 +349,7 @@ and is about to render it.
     * Sets the selectStart event of the StockChart.
     * Fires when the user start to dragging the drag handle.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function selectStart($value) {
         if (is_string($value)) {
@@ -331,6 +363,7 @@ and is about to render it.
     * Sets the select event of the StockChart.
     * Fires when the user drags the drag handle to a new position.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function select($value) {
         if (is_string($value)) {
@@ -344,6 +377,7 @@ and is about to render it.
     * Sets the selectEnd event of the StockChart.
     * Fires when the user stops dragging the drag handle.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Dataviz\UI\StockChart
     */
     public function selectEnd($value) {
         if (is_string($value)) {

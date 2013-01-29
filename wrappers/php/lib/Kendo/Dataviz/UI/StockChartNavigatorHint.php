@@ -8,6 +8,7 @@ class StockChartNavigatorHint extends \kendo\SerializableObject {
     /**
     * The visibility of the hint.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorHint
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -17,6 +18,7 @@ class StockChartNavigatorHint extends \kendo\SerializableObject {
     * The hint template.
 Template variables:
     * @param string|\kendo\JavaScriptFunction $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorHint
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -25,6 +27,7 @@ Template variables:
     /**
     * The format of the hint.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorHint
     */
     public function format($value) {
         return $this->setProperty('format', $value);

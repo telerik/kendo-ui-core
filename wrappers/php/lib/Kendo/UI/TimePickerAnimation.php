@@ -8,6 +8,7 @@ class TimePickerAnimation extends \Kendo\SerializableObject {
     /**
     * Animation to be used for closing of the popup.
     * @param \Kendo\UI\TimePickerAnimationClose $value
+    * @returns \Kendo\UI\TimePickerAnimation
     */
     public function close(\Kendo\UI\TimePickerAnimationClose $value) {
         return $this->setProperty('close', $value);
@@ -16,6 +17,7 @@ class TimePickerAnimation extends \Kendo\SerializableObject {
     /**
     * Animation to be used for opening of the popup.
     * @param \Kendo\UI\TimePickerAnimationOpen $value
+    * @returns \Kendo\UI\TimePickerAnimation
     */
     public function open(\Kendo\UI\TimePickerAnimationOpen $value) {
         return $this->setProperty('open', $value);

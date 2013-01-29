@@ -8,6 +8,7 @@ class LinearGaugePointer extends \Kendo\SerializableObject {
     /**
     * The border of the pointer.
     * @param \Kendo\Dataviz\UI\LinearGaugePointerBorder $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function border(\Kendo\Dataviz\UI\LinearGaugePointerBorder $value) {
         return $this->setProperty('border', $value);
@@ -16,6 +17,7 @@ class LinearGaugePointer extends \Kendo\SerializableObject {
     /**
     * The color of the pointer.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -24,6 +26,7 @@ class LinearGaugePointer extends \Kendo\SerializableObject {
     /**
     * The margin of the pointer.
     * @param float|Object $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
@@ -33,6 +36,7 @@ class LinearGaugePointer extends \Kendo\SerializableObject {
     * The opacity of the pointer.
 Any valid CSS color string will work here, including hex and rgb.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
@@ -41,6 +45,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The shape of the pointer.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function shape($value) {
         return $this->setProperty('shape', $value);
@@ -49,6 +54,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The size of the pointer.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function size($value) {
         return $this->setProperty('size', $value);
@@ -58,6 +64,7 @@ Any valid CSS color string will work here, including hex and rgb.
     * The element arround/under the pointer.
 (available only for 'barIndicator' shape)
     * @param \Kendo\Dataviz\UI\LinearGaugePointerTrack $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function track(\Kendo\Dataviz\UI\LinearGaugePointerTrack $value) {
         return $this->setProperty('track', $value);
@@ -66,6 +73,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The value of the gauge.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\LinearGaugePointer
     */
     public function value($value) {
         return $this->setProperty('value', $value);

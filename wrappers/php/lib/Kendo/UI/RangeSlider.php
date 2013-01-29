@@ -12,6 +12,7 @@ class RangeSlider extends \Kendo\UI\Widget {
     * The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: The allied largeStep will also set large tick for every large step.
     * @param float $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function largeStep($value) {
         return $this->setProperty('largeStep', $value);
@@ -20,6 +21,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
     /**
     * The maximum value of the RangeSlider.
     * @param float $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -28,6 +30,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
     /**
     * The minimum value of the RangeSlider.
     * @param float $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -38,6 +41,7 @@ handle must be focused). Note: The allied largeStep will also set large tick for
 The orientation of a RangeSlider; "horizontal" or
 "vertical".
     * @param string $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function orientation($value) {
         return $this->setProperty('orientation', $value);
@@ -46,6 +50,7 @@ The orientation of a RangeSlider; "horizontal" or
     /**
     * The selection end value of the RangeSlider.
     * @param float $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function selectionEnd($value) {
         return $this->setProperty('selectionEnd', $value);
@@ -54,6 +59,7 @@ The orientation of a RangeSlider; "horizontal" or
     /**
     * The selection start value of the RangeSlider.
     * @param float $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function selectionStart($value) {
         return $this->setProperty('selectionStart', $value);
@@ -64,6 +70,7 @@ The orientation of a RangeSlider; "horizontal" or
 user (1) clicks on the increase or decrease buttons of the RangeSlider, (2) presses the
 arrow keys (the drag handle must be focused), or (3) drags the drag handle.
     * @param float $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function smallStep($value) {
         return $this->setProperty('smallStep', $value);
@@ -72,6 +79,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
     /**
     * Denotes the location of the tick marks in the RangeSlider. The available options are:
     * @param string $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function tickPlacement($value) {
         return $this->setProperty('tickPlacement', $value);
@@ -80,6 +88,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
     /**
     * Configuration of the RangeSlider tooltip.
     * @param \Kendo\UI\RangeSliderTooltip $value
+    * @returns \Kendo\UI\RangeSlider
     */
     public function tooltip(\Kendo\UI\RangeSliderTooltip $value) {
         return $this->setProperty('tooltip', $value);
@@ -89,6 +98,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
     * Sets the change event of the RangeSlider.
     * Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\RangeSlider
     */
     public function change($value) {
         if (is_string($value)) {
@@ -102,6 +112,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
     * Sets the slide event of the RangeSlider.
     * Fires when the user drags the drag handle to a new position.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\RangeSlider
     */
     public function slide($value) {
         if (is_string($value)) {

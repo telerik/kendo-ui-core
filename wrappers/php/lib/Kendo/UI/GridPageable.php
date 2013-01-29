@@ -8,6 +8,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines the number of records which will be displyed.
     * @param float $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function pageSize($value) {
         return $this->setProperty('pageSize', $value);
@@ -16,6 +17,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines if buttons for navigating to the first, last, previous and next pages will be shown.
     * @param boolean $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function previousNext($value) {
         return $this->setProperty('previousNext', $value);
@@ -24,6 +26,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines if numeric portion of the pager will be shown.
     * @param boolean $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function numeric($value) {
         return $this->setProperty('numeric', $value);
@@ -32,6 +35,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines the number of buttons displayed in the numeric pager.
     * @param float $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function buttonCount($value) {
         return $this->setProperty('buttonCount', $value);
@@ -40,6 +44,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines if an input element which allows the user to navigate to given page will be displayed.
     * @param boolean $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function input($value) {
         return $this->setProperty('input', $value);
@@ -48,6 +53,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Displayes a list with predefined page sizes. An array of values to be displayed can be provided.
     * @param boolean|array $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function pageSizes($value) {
         return $this->setProperty('pageSizes', $value);
@@ -56,6 +62,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines if a refresh button will be displayed.
     * @param boolean $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function refresh($value) {
         return $this->setProperty('refresh', $value);
@@ -64,6 +71,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines if a label showing current paging information will be displayed.
     * @param boolean $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function info($value) {
         return $this->setProperty('info', $value);
@@ -72,6 +80,7 @@ class GridPageable extends \Kendo\SerializableObject {
     /**
     * Defines texts shown within the pager.
     * @param \Kendo\UI\GridPageableMessages $value
+    * @returns \Kendo\UI\GridPageable
     */
     public function messages(\Kendo\UI\GridPageableMessages $value) {
         return $this->setProperty('messages', $value);

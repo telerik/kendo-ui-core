@@ -8,6 +8,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Adds DataSourceAggregateItem to the DataSource.
     * @param \Kendo\Data\DataSourceAggregateItem,... $value one or more DataSourceAggregateItem to add.
+    * @returns \Kendo\Data\DataSource
     */
     public function addAggregateItem(\Kendo\Data\DataSourceAggregateItem $value) {
         return $this->add('aggregate', func_get_args());
@@ -16,6 +17,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Enables (true) or disables (false) the automatic invocation of the sync() method for each change made.
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function autoSync($value) {
         return $this->setProperty('autoSync', $value);
@@ -24,6 +26,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Enables (true) or disables (false) batch mode.
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function batch($value) {
         return $this->setProperty('batch', $value);
@@ -32,6 +35,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Specifies the local JavaScript object to use for the data source.
     * @param array $value
+    * @returns \Kendo\Data\DataSource
     */
     public function data($value) {
         return $this->setProperty('data', $value);
@@ -40,6 +44,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Adds DataSourceFilterItem to the DataSource.
     * @param \Kendo\Data\DataSourceFilterItem,... $value one or more DataSourceFilterItem to add.
+    * @returns \Kendo\Data\DataSource
     */
     public function addFilterItem(\Kendo\Data\DataSourceFilterItem $value) {
         return $this->add('filter', func_get_args());
@@ -48,6 +53,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Adds DataSourceGroupItem to the DataSource.
     * @param \Kendo\Data\DataSourceGroupItem,... $value one or more DataSourceGroupItem to add.
+    * @returns \Kendo\Data\DataSource
     */
     public function addGroupItem(\Kendo\Data\DataSourceGroupItem $value) {
         return $this->add('group', func_get_args());
@@ -56,6 +62,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Sets the index of the displayed page of data.
     * @param float $value
+    * @returns \Kendo\Data\DataSource
     */
     public function page($value) {
         return $this->setProperty('page', $value);
@@ -64,6 +71,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Sets the number of records which contains a given page of data.
     * @param float $value
+    * @returns \Kendo\Data\DataSource
     */
     public function pageSize($value) {
         return $this->setProperty('pageSize', $value);
@@ -72,6 +80,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Set the object responsible for describing the raw data format.
     * @param \Kendo\Data\DataSourceSchema $value
+    * @returns \Kendo\Data\DataSource
     */
     public function schema(\Kendo\Data\DataSourceSchema $value) {
         return $this->setProperty('schema', $value);
@@ -80,6 +89,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Determines if aggregates are calculated on the server or not. By default aggregates are calculated client-side.
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function serverAggregates($value) {
         return $this->setProperty('serverAggregates', $value);
@@ -88,6 +98,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Determines if filtering of the data is handled on the server. By default filtering is performed client-side.By default, a filter object is sent to the server with the query string in the following form:Possible values for operator include:
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function serverFiltering($value) {
         return $this->setProperty('serverFiltering', $value);
@@ -96,6 +107,7 @@ class DataSource extends \Kendo\SerializableObject {
     /**
     * Determines if grouping of the data is handled on the server. By default grouping is performed client-side.By default, a group object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function serverGrouping($value) {
         return $this->setProperty('serverGrouping', $value);
@@ -105,6 +117,7 @@ class DataSource extends \Kendo\SerializableObject {
     * Determines if paging of the data is on the server. By default paging is performed client-side. If serverPaging is enabled the
 total number of data items should also be returned in the response. Use the schema.total setting to customize that.The following options are sent to the server as part of the query string by default:
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function serverPaging($value) {
         return $this->setProperty('serverPaging', $value);
@@ -113,6 +126,7 @@ total number of data items should also be returned in the response. Use the sche
     /**
     * Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.By default, a sort object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.
     * @param boolean $value
+    * @returns \Kendo\Data\DataSource
     */
     public function serverSorting($value) {
         return $this->setProperty('serverSorting', $value);
@@ -121,6 +135,7 @@ total number of data items should also be returned in the response. Use the sche
     /**
     * Adds DataSourceSortItem to the DataSource.
     * @param \Kendo\Data\DataSourceSortItem,... $value one or more DataSourceSortItem to add.
+    * @returns \Kendo\Data\DataSource
     */
     public function addSortItem(\Kendo\Data\DataSourceSortItem $value) {
         return $this->add('sort', func_get_args());
@@ -129,6 +144,7 @@ total number of data items should also be returned in the response. Use the sche
     /**
     * Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.
     * @param \Kendo\Data\DataSourceTransport $value
+    * @returns \Kendo\Data\DataSource
     */
     public function transport(\Kendo\Data\DataSourceTransport $value) {
         return $this->setProperty('transport', $value);
@@ -137,6 +153,7 @@ total number of data items should also be returned in the response. Use the sche
     /**
     * Loads transport with preconfigured settings. Currently supports only "odata" (Requires kendo.data.odata.js to be included).
     * @param string $value
+    * @returns \Kendo\Data\DataSource
     */
     public function type($value) {
         return $this->setProperty('type', $value);
@@ -146,6 +163,7 @@ total number of data items should also be returned in the response. Use the sche
     * Sets the change event of the DataSource.
     * Fires when data is changed or read from the transport.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Data\DataSource
     */
     public function change($value) {
         if (is_string($value)) {
@@ -159,6 +177,7 @@ total number of data items should also be returned in the response. Use the sche
     * Sets the error event of the DataSource.
     * Fires when an error occurs during data read or sync.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Data\DataSource
     */
     public function error($value) {
         if (is_string($value)) {
@@ -172,6 +191,7 @@ total number of data items should also be returned in the response. Use the sche
     * Sets the sync event of the DataSource.
     * Fires after changes are synced.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Data\DataSource
     */
     public function sync($value) {
         if (is_string($value)) {
@@ -185,6 +205,7 @@ total number of data items should also be returned in the response. Use the sche
     * Sets the requestStart event of the DataSource.
     * Fires when data request is to be made.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Data\DataSource
     */
     public function requestStart($value) {
         if (is_string($value)) {
@@ -198,6 +219,7 @@ total number of data items should also be returned in the response. Use the sche
     * Sets the requestEnd event of the DataSource.
     * Fires when a data request is received. Raised after a Create, Read, Update or Destroy request is performed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Data\DataSource
     */
     public function requestEnd($value) {
         if (is_string($value)) {

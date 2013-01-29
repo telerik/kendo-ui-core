@@ -8,6 +8,7 @@ class ChartXAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The color of the lines.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -16,6 +17,7 @@ class ChartXAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The visibility of the lines.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -24,6 +26,7 @@ class ChartXAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The width of the lines.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
     */
     public function width($value) {
         return $this->setProperty('width', $value);

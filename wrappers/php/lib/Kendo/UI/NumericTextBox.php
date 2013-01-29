@@ -11,6 +11,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the culture info used by the NumericTextBox widget.
     * @param string $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function culture($value) {
         return $this->setProperty('culture', $value);
@@ -19,6 +20,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the number precision. If not set precision defined by current culture is used.
     * @param float $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function decimals($value) {
         return $this->setProperty('decimals', $value);
@@ -27,6 +29,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the text of the tooltip on the down arrow.
     * @param string $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function downArrowText($value) {
         return $this->setProperty('downArrowText', $value);
@@ -35,6 +38,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the format of the number. Any valid number format is allowed.
     * @param string $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function format($value) {
         return $this->setProperty('format', $value);
@@ -43,6 +47,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the largest value the user can enter.
     * @param float $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function max($value) {
         return $this->setProperty('max', $value);
@@ -51,6 +56,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the smallest value the user can enter.
     * @param float $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function min($value) {
         return $this->setProperty('min', $value);
@@ -59,6 +65,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the text displayed when the input is empty.
     * @param string $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function placeholder($value) {
         return $this->setProperty('placeholder', $value);
@@ -67,6 +74,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies whether the up/down spin buttons should be rendered
     * @param boolean $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function spinners($value) {
         return $this->setProperty('spinners', $value);
@@ -75,6 +83,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the increment/decrement step.
     * @param float $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function step($value) {
         return $this->setProperty('step', $value);
@@ -83,6 +92,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the text of the tooltip on the up arrow.
     * @param string $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function upArrowText($value) {
         return $this->setProperty('upArrowText', $value);
@@ -91,6 +101,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     /**
     * Specifies the value of the NumericTextBox widget.
     * @param float $value
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function value($value) {
         return $this->setProperty('value', $value);
@@ -100,6 +111,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     * Sets the change event of the NumericTextBox.
     * Fires when the value is changed
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function change($value) {
         if (is_string($value)) {
@@ -113,6 +125,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     * Sets the spin event of the NumericTextBox.
     * Fires when the value is changed from the spin buttons
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\NumericTextBox
     */
     public function spin($value) {
         if (is_string($value)) {

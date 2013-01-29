@@ -8,6 +8,7 @@ class StockChartNavigatorSeriesItemOverlay extends \Kendo\SerializableObject {
     /**
     * The gradient name.Available options:
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemOverlay
     */
     public function gradient($value) {
         return $this->setProperty('gradient', $value);

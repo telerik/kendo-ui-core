@@ -8,6 +8,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
     /**
     * Options for remote create data operation, or the URL of the remote service.
     * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportCreate $value
+    * @returns \Kendo\Data\DataSourceTransport
     */
     public function create($value) {
         return $this->setProperty('create', $value);
@@ -16,6 +17,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
     /**
     * Options for remote destroy data operation, or the URL of the remote service.
     * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportDestroy $value
+    * @returns \Kendo\Data\DataSourceTransport
     */
     public function destroy($value) {
         return $this->setProperty('destroy', $value);
@@ -25,6 +27,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
     * Sets the parameterMap option of the DataSourceTransport.
     * Converts the request parameters and data from the internal format to a format suitable for the remote service.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\Data\DataSourceTransport
     */
     public function parameterMap($value) {
         if (is_string($value)) {
@@ -37,6 +40,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
     /**
     * Options for remote read data operation, or the URL of the remote service.
     * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportRead $value
+    * @returns \Kendo\Data\DataSourceTransport
     */
     public function read($value) {
         return $this->setProperty('read', $value);
@@ -45,6 +49,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
     /**
     * Options for remote update data operation, or the URL of the remote service.
     * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportUpdate $value
+    * @returns \Kendo\Data\DataSourceTransport
     */
     public function update($value) {
         return $this->setProperty('update', $value);

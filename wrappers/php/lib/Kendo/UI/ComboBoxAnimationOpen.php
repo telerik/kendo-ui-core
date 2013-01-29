@@ -8,6 +8,7 @@ class ComboBoxAnimationOpen extends \Kendo\SerializableObject {
     /**
     * Effect to be used for opening of the popup.
     * @param string $value
+    * @returns \Kendo\UI\ComboBoxAnimationOpen
     */
     public function effects($value) {
         return $this->setProperty('effects', $value);
@@ -16,6 +17,7 @@ class ComboBoxAnimationOpen extends \Kendo\SerializableObject {
     /**
     * Difines the animation duration.
     * @param float $value
+    * @returns \Kendo\UI\ComboBoxAnimationOpen
     */
     public function duration($value) {
         return $this->setProperty('duration', $value);

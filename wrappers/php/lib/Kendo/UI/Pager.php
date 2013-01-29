@@ -11,6 +11,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Indicates whether the pager refresh method will be called within its initialization.
     * @param boolean $value
+    * @returns \Kendo\UI\Pager
     */
     public function autoBind($value) {
         return $this->setProperty('autoBind', $value);
@@ -19,6 +20,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines the number of buttons displayed in the numeric pager.
     * @param float $value
+    * @returns \Kendo\UI\Pager
     */
     public function buttonCount($value) {
         return $this->setProperty('buttonCount', $value);
@@ -27,6 +29,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Sets the data source of the Pager.
     * @param \Kendo\Data\DataSource $value
+    * @returns \Kendo\UI\Pager
     */
     public function dataSource(\Kendo\Data\DataSource $value) {
         return $this->setProperty('dataSource', $value);
@@ -35,6 +38,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * The template for selectbox with predefined page sizes.
     * @param string $value
+    * @returns \Kendo\UI\Pager
     */
     public function selectTemplate($value) {
         return $this->setProperty('selectTemplate', $value);
@@ -43,6 +47,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * The template for page number links.
     * @param string $value
+    * @returns \Kendo\UI\Pager
     */
     public function linkTemplate($value) {
         return $this->setProperty('linkTemplate', $value);
@@ -51,6 +56,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines if a label showing current paging information will be displayed.
     * @param boolean $value
+    * @returns \Kendo\UI\Pager
     */
     public function info($value) {
         return $this->setProperty('info', $value);
@@ -59,6 +65,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines if an input element which allows the user to navigate to given page will be displayed.
     * @param boolean $value
+    * @returns \Kendo\UI\Pager
     */
     public function input($value) {
         return $this->setProperty('input', $value);
@@ -67,6 +74,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines if numeric portion of the pager will be shown.
     * @param boolean $value
+    * @returns \Kendo\UI\Pager
     */
     public function numeric($value) {
         return $this->setProperty('numeric', $value);
@@ -75,6 +83,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automaticaly selected in created selectbox.
     * @param boolean|array $value
+    * @returns \Kendo\UI\Pager
     */
     public function pageSizes($value) {
         return $this->setProperty('pageSizes', $value);
@@ -83,6 +92,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines if buttons for navigating to the first, last, previous and next pages will be shown.
     * @param boolean $value
+    * @returns \Kendo\UI\Pager
     */
     public function previousNext($value) {
         return $this->setProperty('previousNext', $value);
@@ -91,6 +101,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines if a refresh button will be displayed. Click on that button will call DataSource read() method to get actual data.
     * @param boolean $value
+    * @returns \Kendo\UI\Pager
     */
     public function refresh($value) {
         return $this->setProperty('refresh', $value);
@@ -99,6 +110,7 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Defines texts shown within the pager.
     * @param \Kendo\UI\PagerMessages $value
+    * @returns \Kendo\UI\Pager
     */
     public function messages(\Kendo\UI\PagerMessages $value) {
         return $this->setProperty('messages', $value);
@@ -108,6 +120,7 @@ class Pager extends \Kendo\UI\Widget {
     * Sets the change event of the Pager.
     * Fires when the current page has changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\Pager
     */
     public function change($value) {
         if (is_string($value)) {

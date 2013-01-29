@@ -8,6 +8,7 @@ class AutoCompleteAnimation extends \Kendo\SerializableObject {
     /**
     * Animation to be used for closing of the popup.
     * @param \Kendo\UI\AutoCompleteAnimationClose $value
+    * @returns \Kendo\UI\AutoCompleteAnimation
     */
     public function close(\Kendo\UI\AutoCompleteAnimationClose $value) {
         return $this->setProperty('close', $value);
@@ -16,6 +17,7 @@ class AutoCompleteAnimation extends \Kendo\SerializableObject {
     /**
     * Animation to be used for opening of the popup.
     * @param \Kendo\UI\AutoCompleteAnimationOpen $value
+    * @returns \Kendo\UI\AutoCompleteAnimation
     */
     public function open(\Kendo\UI\AutoCompleteAnimationOpen $value) {
         return $this->setProperty('open', $value);

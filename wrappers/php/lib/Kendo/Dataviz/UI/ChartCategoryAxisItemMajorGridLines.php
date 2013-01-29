@@ -8,6 +8,7 @@ class ChartCategoryAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The color of the lines. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -16,6 +17,7 @@ class ChartCategoryAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The dash type of the grid lines.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -24,6 +26,7 @@ class ChartCategoryAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The visibility of the lines.
     * @param boolean $value
+    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -32,6 +35,7 @@ class ChartCategoryAxisItemMajorGridLines extends \Kendo\SerializableObject {
     /**
     * The width of the lines.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines
     */
     public function width($value) {
         return $this->setProperty('width', $value);

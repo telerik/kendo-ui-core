@@ -8,6 +8,7 @@ class ChartSeriesItemLabelsBorder extends \Kendo\SerializableObject {
     /**
     * The color of the border.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -16,6 +17,7 @@ class ChartSeriesItemLabelsBorder extends \Kendo\SerializableObject {
     /**
     * The dash type of the border.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder
     */
     public function dashType($value) {
         return $this->setProperty('dashType', $value);
@@ -24,6 +26,7 @@ class ChartSeriesItemLabelsBorder extends \Kendo\SerializableObject {
     /**
     * The width of the border.
     * @param float $value
+    * @returns \Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder
     */
     public function width($value) {
         return $this->setProperty('width', $value);

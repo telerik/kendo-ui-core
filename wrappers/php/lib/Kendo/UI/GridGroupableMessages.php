@@ -8,6 +8,7 @@ class GridGroupableMessages extends \Kendo\SerializableObject {
     /**
     * Sets the text of the empty grouping area message
     * @param string $value
+    * @returns \Kendo\UI\GridGroupableMessages
     */
     public function _empty($value) {
         return $this->setProperty('empty', $value);

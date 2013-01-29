@@ -9,6 +9,7 @@ class StockChartLegendLabels extends \Kendo\SerializableObject {
     * The color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartLegendLabels
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,6 +18,7 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The font style of the labels.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartLegendLabels
     */
     public function font($value) {
         return $this->setProperty('font', $value);
@@ -28,6 +30,7 @@ Template variables:
 *   text - the text the legend item.
 *   series - the data series.
     * @param string $value
+    * @returns \Kendo\Dataviz\UI\StockChartLegendLabels
     */
     public function template($value) {
         return $this->setProperty('template', $value);

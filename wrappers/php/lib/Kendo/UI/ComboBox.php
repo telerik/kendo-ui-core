@@ -11,6 +11,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn off the animation.
     * @param \Kendo\UI\ComboBoxAnimation $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function animation(\Kendo\UI\ComboBoxAnimation $value) {
         return $this->setProperty('animation', $value);
@@ -19,6 +20,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Controls whether to bind the widget to the DataSource on initialization.
     * @param boolean $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function autoBind($value) {
         return $this->setProperty('autoBind', $value);
@@ -27,6 +29,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Use it to set the Id of the parent DropDownList.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function cascadeFrom($value) {
         return $this->setProperty('cascadeFrom', $value);
@@ -35,6 +38,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Sets the data source of the ComboBox.
     * @param \Kendo\Data\DataSource $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function dataSource(\Kendo\Data\DataSource $value) {
         return $this->setProperty('dataSource', $value);
@@ -43,6 +47,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Sets the field of the data item that provides the text content of the list items.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function dataTextField($value) {
         return $this->setProperty('dataTextField', $value);
@@ -51,6 +56,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Sets the field of the data item that provides the value content of the list items.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function dataValueField($value) {
         return $this->setProperty('dataValueField', $value);
@@ -59,6 +65,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Specifies the delay in ms after which the ComboBox will start filtering dataSource.
     * @param float $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function delay($value) {
         return $this->setProperty('delay', $value);
@@ -67,6 +74,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Controls whether the ComboBox should be initially enabled.
     * @param boolean $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function enable($value) {
         return $this->setProperty('enable', $value);
@@ -75,6 +83,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Defines the type of filtration. If "none" the ComboBox will not filter the items.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function filter($value) {
         return $this->setProperty('filter', $value);
@@ -83,6 +92,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Define the height of the drop-down list in pixels.
     * @param float $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function height($value) {
         return $this->setProperty('height', $value);
@@ -91,6 +101,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Controls whether the first item will be automatically highlighted.
     * @param boolean $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function highlightFirst($value) {
         return $this->setProperty('highlightFirst', $value);
@@ -99,6 +110,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Defines whether the filtration should be case sensitive.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function ignoreCase($value) {
         return $this->setProperty('ignoreCase', $value);
@@ -107,6 +119,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Defines the initial selected item.
     * @param float $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function index($value) {
         return $this->setProperty('index', $value);
@@ -115,6 +128,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Specifies the minimum characters that should be typed before the ComboBox activates
     * @param float $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function minLength($value) {
         return $this->setProperty('minLength', $value);
@@ -123,6 +137,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * A string that appears in the textbox when the combobox has no value.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function placeholder($value) {
         return $this->setProperty('placeholder', $value);
@@ -131,6 +146,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Controls whether the ComboBox should automatically auto-type the rest of text.
     * @param boolean $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function suggest($value) {
         return $this->setProperty('suggest', $value);
@@ -139,6 +155,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Template to be used for rendering the items in the list.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function template($value) {
         return $this->setProperty('template', $value);
@@ -147,6 +164,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Define the text of the widget, when the autoBind is set to false.
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function text($value) {
         return $this->setProperty('text', $value);
@@ -155,6 +173,7 @@ class ComboBox extends \Kendo\UI\Widget {
     /**
     * Define the value of the widget
     * @param string $value
+    * @returns \Kendo\UI\ComboBox
     */
     public function value($value) {
         return $this->setProperty('value', $value);
@@ -164,6 +183,7 @@ class ComboBox extends \Kendo\UI\Widget {
     * Sets the change event of the ComboBox.
     * Fires when the value has been changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\ComboBox
     */
     public function change($value) {
         if (is_string($value)) {
@@ -177,6 +197,7 @@ class ComboBox extends \Kendo\UI\Widget {
     * Sets the close event of the ComboBox.
     * Fires when the drop-down list is closed
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\ComboBox
     */
     public function close($value) {
         if (is_string($value)) {
@@ -190,6 +211,7 @@ class ComboBox extends \Kendo\UI\Widget {
     * Sets the dataBound event of the ComboBox.
     * Fires when the ComboBox has received data from the data source.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\ComboBox
     */
     public function dataBound($value) {
         if (is_string($value)) {
@@ -203,6 +225,7 @@ class ComboBox extends \Kendo\UI\Widget {
     * Sets the open event of the ComboBox.
     * Fires when the drop-down list is opened
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\ComboBox
     */
     public function open($value) {
         if (is_string($value)) {
@@ -216,6 +239,7 @@ class ComboBox extends \Kendo\UI\Widget {
     * Sets the select event of the ComboBox.
     * Triggered when a Li element is selected.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\ComboBox
     */
     public function select($value) {
         if (is_string($value)) {
@@ -229,6 +253,7 @@ class ComboBox extends \Kendo\UI\Widget {
     * Sets the cascade event of the ComboBox.
     * Triggered when value of the widget is changed via API or user interaction.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @returns \Kendo\UI\ComboBox
     */
     public function cascade($value) {
         if (is_string($value)) {

@@ -8,6 +8,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the info text.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function display($value) {
         return $this->setProperty('display', $value);
@@ -16,6 +17,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the info text shown when there are no records to be displayed.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function _empty($value) {
         return $this->setProperty('empty', $value);
@@ -24,6 +26,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the first part of the text of the input option.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function page($value) {
         return $this->setProperty('page', $value);
@@ -32,6 +35,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the last part of the text of the input option.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function of($value) {
         return $this->setProperty('of', $value);
@@ -40,6 +44,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the text displayed after the select element of the pageSizes mode.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function itemsPerPage($value) {
         return $this->setProperty('itemsPerPage', $value);
@@ -48,6 +53,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the text of the first page button tooltip.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function first($value) {
         return $this->setProperty('first', $value);
@@ -56,6 +62,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the text of the previous page button tooltip.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function previous($value) {
         return $this->setProperty('previous', $value);
@@ -64,6 +71,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the text of the next page button tooltip.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function next($value) {
         return $this->setProperty('next', $value);
@@ -72,6 +80,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the text of the last page button tooltip.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function last($value) {
         return $this->setProperty('last', $value);
@@ -80,6 +89,7 @@ class GridPageableMessages extends \Kendo\SerializableObject {
     /**
     * Defines the text of the refresh button tooltip.
     * @param string $value
+    * @returns \Kendo\UI\GridPageableMessages
     */
     public function refresh($value) {
         return $this->setProperty('refresh', $value);
