@@ -176,9 +176,7 @@
                 ok(!item.is(".km-state-active"), "list item is not marked as active");
             });
 
-            test("handles contents' click events", function() {
-                expect(2);
-
+            test("handles contents' click events", 2, function() {
                 var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
                     link = dom.find("li>a");
 
@@ -190,7 +188,7 @@
                 });
 
                 link.trigger(kendo.support.mousedown);
-                link.trigger("click");
+                link.trigger("mouseup");
             });
 
             test("handles contents' click events in grouped mode", 1, function() {
@@ -205,7 +203,7 @@
                 });
 
                 console.log(dom.html());
-                item.trigger("click");
+                item.trigger("mouseup");
             });
 
 
@@ -220,11 +218,11 @@
                     e.preventDefault();
                 });
 
-                dom.bind("click", function(e) {
+                dom.bind("mouseup", function(e) {
                     ok(e.isDefaultPrevented());
                 });
 
-                link.trigger("click");
+                link.trigger("mouseup");
             });
 
             test("passes button if a button is clicked", function() {
