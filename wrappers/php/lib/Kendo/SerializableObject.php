@@ -30,14 +30,16 @@ abstract class SerializableObject implements Serializable {
         return $properties;
     }
 
-    protected function add($key, $value) {
+    protected function add($key, $items) {
         $values = array();
 
         if (array_key_exists($key, $this->properties)) {
             $values = $this->properties[$key];
         }
 
-        $values[] = $value;
+        foreach($items as $item) {
+            $values[] = $item;
+        }
 
         $this->properties[$key] = $values;
 

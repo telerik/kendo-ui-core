@@ -136,10 +136,10 @@ The axis will be rendered in the first (default) pane if not set.
 
     /**
     * Adds ChartYAxisItemPlotBand to the ChartYAxisItem.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItemPlotBand $value
+    * @param \Kendo\Dataviz\UI\ChartYAxisItemPlotBand,... $value one or more ChartYAxisItemPlotBand to add.
     */
     public function addPlotBand(\Kendo\Dataviz\UI\ChartYAxisItemPlotBand $value) {
-        return $this->add('plotBands', $value);
+        return $this->add('plotBands', func_get_args());
     }
 
     /**

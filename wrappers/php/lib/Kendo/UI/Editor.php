@@ -34,10 +34,10 @@ class Editor extends \Kendo\UI\Widget {
 
     /**
     * Adds EditorTool to the Editor.
-    * @param \Kendo\UI\EditorTool $value
+    * @param \Kendo\UI\EditorTool,... $value one or more EditorTool to add.
     */
     public function addTool(\Kendo\UI\EditorTool $value) {
-        return $this->add('tools', $value);
+        return $this->add('tools', func_get_args());
     }
 
     /**

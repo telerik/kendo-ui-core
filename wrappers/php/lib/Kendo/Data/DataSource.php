@@ -7,10 +7,10 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceAggregateItem to the DataSource.
-    * @param \Kendo\Data\DataSourceAggregateItem $value
+    * @param \Kendo\Data\DataSourceAggregateItem,... $value one or more DataSourceAggregateItem to add.
     */
     public function addAggregateItem(\Kendo\Data\DataSourceAggregateItem $value) {
-        return $this->add('aggregate', $value);
+        return $this->add('aggregate', func_get_args());
     }
 
     /**
@@ -39,18 +39,18 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceFilterItem to the DataSource.
-    * @param \Kendo\Data\DataSourceFilterItem $value
+    * @param \Kendo\Data\DataSourceFilterItem,... $value one or more DataSourceFilterItem to add.
     */
     public function addFilterItem(\Kendo\Data\DataSourceFilterItem $value) {
-        return $this->add('filter', $value);
+        return $this->add('filter', func_get_args());
     }
 
     /**
     * Adds DataSourceGroupItem to the DataSource.
-    * @param \Kendo\Data\DataSourceGroupItem $value
+    * @param \Kendo\Data\DataSourceGroupItem,... $value one or more DataSourceGroupItem to add.
     */
     public function addGroupItem(\Kendo\Data\DataSourceGroupItem $value) {
-        return $this->add('group', $value);
+        return $this->add('group', func_get_args());
     }
 
     /**
@@ -120,10 +120,10 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Adds DataSourceSortItem to the DataSource.
-    * @param \Kendo\Data\DataSourceSortItem $value
+    * @param \Kendo\Data\DataSourceSortItem,... $value one or more DataSourceSortItem to add.
     */
     public function addSortItem(\Kendo\Data\DataSourceSortItem $value) {
-        return $this->add('sort', $value);
+        return $this->add('sort', func_get_args());
     }
 
     /**

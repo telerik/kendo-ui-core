@@ -18,10 +18,10 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Adds GridColumn to the Grid.
-    * @param \Kendo\UI\GridColumn $value
+    * @param \Kendo\UI\GridColumn,... $value one or more GridColumn to add.
     */
     public function addColumn(\Kendo\UI\GridColumn $value) {
-        return $this->add('columns', $value);
+        return $this->add('columns', func_get_args());
     }
 
     /**
@@ -130,10 +130,10 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Adds GridToolbarItem to the Grid.
-    * @param \Kendo\UI\GridToolbarItem $value
+    * @param \Kendo\UI\GridToolbarItem,... $value one or more GridToolbarItem to add.
     */
     public function addToolbarItem(\Kendo\UI\GridToolbarItem $value) {
-        return $this->add('toolbar', $value);
+        return $this->add('toolbar', func_get_args());
     }
 
     /**

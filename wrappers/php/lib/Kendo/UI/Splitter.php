@@ -18,10 +18,10 @@ class Splitter extends \Kendo\UI\Widget {
 
     /**
     * Adds SplitterPane to the Splitter.
-    * @param \Kendo\UI\SplitterPane $value
+    * @param \Kendo\UI\SplitterPane,... $value one or more SplitterPane to add.
     */
     public function addPane(\Kendo\UI\SplitterPane $value) {
-        return $this->add('panes', $value);
+        return $this->add('panes', func_get_args());
     }
 
     /**

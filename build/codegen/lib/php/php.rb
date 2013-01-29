@@ -241,10 +241,10 @@ EVENT_SETTER = ERB.new(%{
 ARRAY_SETTER = ERB.new(%{
     /**
     * Adds <%= item.php_class %> to the <%= owner.php_class %>.
-    * @param <%= item.php_type %> $value
+    * @param <%= item.php_type %>,... $value one or more <%= item.php_class %> to add.
     */
     public function add<%= item.name.pascalize %>(<%= item.php_type %> $value) {
-        return $this->add('<%= name %>', $value);
+        return $this->add('<%= name %>', func_get_args());
     }
 })
 

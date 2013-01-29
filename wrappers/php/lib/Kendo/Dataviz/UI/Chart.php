@@ -18,10 +18,10 @@ class Chart extends \Kendo\UI\Widget {
 
     /**
     * Adds ChartCategoryAxisItem to the Chart.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItem $value
+    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItem,... $value one or more ChartCategoryAxisItem to add.
     */
     public function addCategoryAxisItem(\Kendo\Dataviz\UI\ChartCategoryAxisItem $value) {
-        return $this->add('categoryAxis', $value);
+        return $this->add('categoryAxis', func_get_args());
     }
 
     /**
@@ -59,10 +59,10 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartPane to the Chart.
-    * @param \Kendo\Dataviz\UI\ChartPane $value
+    * @param \Kendo\Dataviz\UI\ChartPane,... $value one or more ChartPane to add.
     */
     public function addPane(\Kendo\Dataviz\UI\ChartPane $value) {
-        return $this->add('panes', $value);
+        return $this->add('panes', func_get_args());
     }
 
     /**
@@ -75,10 +75,10 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartSeriesItem to the Chart.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItem $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesItem,... $value one or more ChartSeriesItem to add.
     */
     public function addSeriesItem(\Kendo\Dataviz\UI\ChartSeriesItem $value) {
-        return $this->add('series', $value);
+        return $this->add('series', func_get_args());
     }
 
     /**
@@ -131,26 +131,26 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartValueAxisItem to the Chart.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItem $value
+    * @param \Kendo\Dataviz\UI\ChartValueAxisItem,... $value one or more ChartValueAxisItem to add.
     */
     public function addValueAxisItem(\Kendo\Dataviz\UI\ChartValueAxisItem $value) {
-        return $this->add('valueAxis', $value);
+        return $this->add('valueAxis', func_get_args());
     }
 
     /**
     * Adds ChartXAxisItem to the Chart.
-    * @param \Kendo\Dataviz\UI\ChartXAxisItem $value
+    * @param \Kendo\Dataviz\UI\ChartXAxisItem,... $value one or more ChartXAxisItem to add.
     */
     public function addXAxisItem(\Kendo\Dataviz\UI\ChartXAxisItem $value) {
-        return $this->add('xAxis', $value);
+        return $this->add('xAxis', func_get_args());
     }
 
     /**
     * Adds ChartYAxisItem to the Chart.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItem $value
+    * @param \Kendo\Dataviz\UI\ChartYAxisItem,... $value one or more ChartYAxisItem to add.
     */
     public function addYAxisItem(\Kendo\Dataviz\UI\ChartYAxisItem $value) {
-        return $this->add('yAxis', $value);
+        return $this->add('yAxis', func_get_args());
     }
 
     /**

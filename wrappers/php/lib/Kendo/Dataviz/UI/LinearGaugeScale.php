@@ -80,10 +80,10 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
 
     /**
     * Adds LinearGaugeScaleRange to the LinearGaugeScale.
-    * @param \Kendo\Dataviz\UI\LinearGaugeScaleRange $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleRange,... $value one or more LinearGaugeScaleRange to add.
     */
     public function addRange(\Kendo\Dataviz\UI\LinearGaugeScaleRange $value) {
-        return $this->add('ranges', $value);
+        return $this->add('ranges', func_get_args());
     }
 
     /**

@@ -32,6 +32,18 @@ class JsonObjectTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('{"foo":{"foo":"foo"}}', $this->jsonObject->toJSON());
     }
 
+    public function testAddCreatesArrays() {
+        $this->jsonObject->addFoo('foo');
+
+        $this->assertEquals('{"foo":["foo"]}', $this->jsonObject->toJSON());
+    }
+
+    public function testAddAcceptsVariableNumberOfArguments() {
+        $this->jsonObject->addFoo('foo', 'bar');
+
+        $this->assertEquals('{"foo":["foo","bar"]}', $this->jsonObject->toJSON());
+    }
+
     public function testToJSONSIgnoredProperties() {
         $this->jsonObject->setBar('bar');
 

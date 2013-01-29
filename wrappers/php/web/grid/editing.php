@@ -94,14 +94,10 @@ $unitsInStockField->type('number');
 
 $discontinuedField = new \Kendo\Data\DataSourceSchemaModelField('Discontinued');
 $discontinuedField->type('boolean')
-                 ->validation(array('required' => true, 'min' => 0));
+                  ->validation(array('required' => true, 'min' => 0));
 
 $model->id('ProductID')
-      ->addField($productIDField)
-      ->addField($productNameField)
-      ->addField($unitPriceField)
-      ->addField($unitsInStockField)
-      ->addField($discontinuedField);
+      ->addField($productIDField, $productNameField, $unitPriceField, $unitsInStockField, $discontinuedField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
@@ -142,15 +138,10 @@ $command->command('destroy')
         ->title('&nbsp;')
         ->width(110);
 
-$grid->addColumn($productName)
-     ->addColumn($unitPrice)
-     ->addColumn($unitsInStock)
-     ->addColumn($discontinued)
-     ->addColumn($command)
+$grid->addColumn($productName, $unitPrice, $unitsInStock, $discontinued, $command)
      ->dataSource($dataSource)
-     ->addToolbarItem(new \Kendo\UI\GridToolbarItem('create'))
-     ->addToolbarItem(new \Kendo\UI\GridToolbarItem('save'))
-     ->addToolbarItem(new \Kendo\UI\GridToolbarItem('cancel'))
+     ->addToolbarItem(new \Kendo\UI\GridToolbarItem('create'),
+        new \Kendo\UI\GridToolbarItem('save'), new \Kendo\UI\GridToolbarItem('cancel'))
      ->height(400)
      ->navigatable(true)
      ->editable(true)
