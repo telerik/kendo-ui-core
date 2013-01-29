@@ -6165,7 +6165,7 @@ kendo_module({
                 }
             }
 
-            return true
+            return true;
         },
 
         createValueAxes: function(panes) {
