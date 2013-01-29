@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode($result->update('Products', $columns, $request->models, 'ProductID'));
     } else if ($type == 'read') {
         echo json_encode($result->read('Products', $columns, $request));
+    } else if ($type == 'destroy') {
+        echo json_encode($result->destroy('Products', $request->models, 'ProductID'));
     }
 
     exit;
@@ -38,8 +40,15 @@ $update->url('editing.php?type=update')
      ->contentType('application/json')
      ->type('POST');
 
+$destroy = new \Kendo\Data\DataSourceTransportDestroy();
+
+$destroy->url('editing.php?type=destroy')
+     ->contentType('application/json')
+     ->type('POST');
+
 $transport->read($read)
           ->update($update)
+          ->destroy($destroy)
           ->parameterMap('function(data) {
               return kendo.stringify(data);
           }');
@@ -102,8 +111,8 @@ $discontinued = new \Kendo\UI\GridColumn();
 $discontinued->field('Discontinued')
           ->width(100);
 
-$destroy = new \Kendo\UI\GridColumn();
-$destroy->command('destroy')
+$command = new \Kendo\UI\GridColumn();
+$command->command('destroy')
         ->title('&nbsp;')
         ->width(110);
 
@@ -111,7 +120,7 @@ $grid->addColumn($productName)
      ->addColumn($unitPrice)
      ->addColumn($unitsInStock)
      ->addColumn($discontinued)
-     ->addColumn($destroy)
+     ->addColumn($command)
      ->dataSource($dataSource)
      ->addToolbarItem(new \Kendo\UI\GridToolbarItem('create'))
      ->addToolbarItem(new \Kendo\UI\GridToolbarItem('save'))

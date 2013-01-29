@@ -168,6 +168,36 @@ class DataSourceResult {
         }
     }
 
+    public function destroy($table, $models, $key) {
+        $result = array();
+
+        if (!is_array($models)) {
+            $models = array($models);
+        }
+
+        $errors = array();
+
+        foreach ($models as $model) {
+            $sql = "DELETE FROM $table WHERE $key=?";
+
+            $statement = $this->db->prepare($sql);
+
+            $statement->execute(array($model->$key));
+
+            $status = $statement->errorInfo();
+
+            if ($status[1] > 0) {
+                $errors[] = $status[2];
+            }
+        }
+
+        if (count($errors) > 0) {
+            $result['errors'] = $errors;
+        }
+
+        return $result;
+    }
+
     public function update($table, $columns, $models, $key) {
         $result = array();
 
