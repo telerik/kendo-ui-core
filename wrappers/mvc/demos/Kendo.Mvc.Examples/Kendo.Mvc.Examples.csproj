@@ -201,6 +201,7 @@
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
+    <Compile Include="Controllers\Web\Grid\Editing_PopupController.cs" />
     <Compile Include="Controllers\Web\Grid\Filter_Menu_CustomizationController.cs" />
     <Compile Include="Controllers\Web\Grid\NavigationController.cs" />
     <Compile Include="Controllers\Web\Grid\RtlController.cs" />
@@ -318,6 +319,8 @@
     <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
     <Compile Include="Models\BaseUnit.cs" />
+    <Compile Include="Models\ClientCategoryViewModel.cs" />
+    <Compile Include="Models\ClientProductViewModel.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />
@@ -331,6 +334,7 @@
     <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
     <Compile Include="Models\SessionClientOrderRepository.cs" />
+    <Compile Include="Models\SessionClientProductRepository.cs" />
     <Compile Include="Models\StockData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -452,6 +456,8 @@
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\columnsettings.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_menu.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\editing_popup.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientCategory.ascx" />
     <Content Include="Areas\aspx\Views\web\grid\filter_menu_customization.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\foreignkeycolumn.aspx" />
@@ -539,6 +545,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\razor\Views\web\grid\filter_menu_customization.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\editing_popup.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientCategory.cshtml" />
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />

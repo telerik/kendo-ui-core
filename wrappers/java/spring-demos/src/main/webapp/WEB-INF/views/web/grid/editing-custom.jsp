@@ -11,7 +11,7 @@
 <c:url value="/web/grid/editing-custom/categories" var="categoriesUrl" />
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" editable="true">
+    <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" editable="true" height="430px">
         <kendo:grid-toolbar>
             <kendo:grid-toolbarItem name="create"/>
             <kendo:grid-toolbarItem name="save"/>
@@ -19,11 +19,12 @@
         </kendo:grid-toolbar>
         <kendo:grid-columns>
             <kendo:grid-column title="Product Name" field="productName" />
-            <kendo:grid-column title="Category" field="category" editor="categoryDropDownEditor" template="#=category.categoryName#"  />
-            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
-            <kendo:grid-column command="destroy" title="&nbsp;" />
+            <kendo:grid-column title="Category" field="category" editor="categoryDropDownEditor" template="#=category.categoryName#"
+            	width="160px"  />
+            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" width="120px" />
+            <kendo:grid-column command="destroy" title="&nbsp;" width="120px" />
         </kendo:grid-columns>
-        <kendo:dataSource pageSize="10" batch="true">
+        <kendo:dataSource pageSize="20" batch="true">
             <kendo:dataSource-transport>
                 <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
@@ -51,7 +52,7 @@
                         <kendo:dataSource-schema-model-field name="unitPrice" type="number">
                         	<kendo:dataSource-schema-model-field-validation required="true" min="1" />
                         </kendo:dataSource-schema-model-field>                       
-                        <kendo:dataSource-schema-model-field name="category" defaultValue="<%=new Category() %>" />
+                        <kendo:dataSource-schema-model-field name="category" defaultValue="${defaultCategory}" />
                     </kendo:dataSource-schema-model-fields>
                 </kendo:dataSource-schema-model>
             </kendo:dataSource-schema>

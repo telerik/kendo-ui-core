@@ -2,10 +2,12 @@ package com.kendoui.spring.controllers.grid;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +29,9 @@ public class EditingCustomController {
     private CategoryDao category;
     
     @RequestMapping(value = "/editing-custom", method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model) {
+        Category defaultCategory = category.getList().get(0);
+        model.addAttribute("defaultCategory", defaultCategory);
         return "web/grid/editing-custom";
     }
     
@@ -71,11 +75,18 @@ public class EditingCustomController {
         
         for (Map<String, Object> model : models) {
             Product product = new Product();
+            final Map<String, Object> categoryMap = (Map<String, Object>)model.get("category");
+            
+            Category category = new Category(); 
+            category.setCategoryId((int) categoryMap.get("categoryId"));
+            category.setCategoryName((String) categoryMap.get("categoryName"));
+            
+            product.setCategoryId(category.getCategoryId());
+            product.setCategory(category);
             
             product.setProductName((String)model.get("productName"));
             product.setUnitPrice(Double.parseDouble(model.get("unitPrice").toString()));
-            product.setCategoryId((int)model.get("categoryId"));
-            
+    
             products.add(product);
         }
         
