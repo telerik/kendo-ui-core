@@ -40,7 +40,7 @@
 
                 treeviewObject.enable(node, false);
 
-                equals(node.find(".k-plus-disabled").length, 1);
+                equal(node.find(".k-plus-disabled").length, 1);
                 ok(node.find(".k-in").hasClass("k-state-disabled"));
             });
 
@@ -55,7 +55,7 @@
 
                 treeviewObject.enable(node);
 
-                equals(node.find(".k-plus").length, 1);
+                equal(node.find(".k-plus").length, 1);
                 ok(!node.find(".k-in").hasClass("k-state-disabled"));
             });
 
@@ -106,7 +106,7 @@
 
                 treeviewObject.select(node);
 
-                equals(treeview.find(".k-state-selected").length, 1);
+                equal(treeview.find(".k-state-selected").length, 1);
             });
 
             test("select(selector) limits selector to treeview", function() {
@@ -118,7 +118,7 @@
 
                 treeviewObject.select(".k-item:last");
 
-                equals(treeview.find(".k-state-selected").length, 1);
+                equal(treeview.find(".k-state-selected").length, 1);
             });
 
             test("select([]) removes selection from nodes", function() {
@@ -140,8 +140,8 @@
 
                 var node = treeview.find(".k-item:first");
 
-                equals(treeviewObject.text(node), "foo");
-                equals(treeviewObject.text(node.find(".k-in:first")), "foo");
+                equal(treeviewObject.text(node), "foo");
+                equal(treeviewObject.text(node.find(".k-in:first")), "foo");
             });
 
             test("text(node) returns node text if inner element is passed", function() {
@@ -153,7 +153,7 @@
 
                 var node = treeview.find(".k-item .k-in:first");
 
-                equals(treeviewObject.text(node), "foo");
+                equal(treeviewObject.text(node), "foo");
             });
 
             test("text(node, 'text') sets node text", function() {
@@ -165,7 +165,7 @@
 
                 treeviewObject.text(node, "bar");
 
-                equals(treeviewObject.text(node), "bar");
+                equal(treeviewObject.text(node), "bar");
             });
 
             test("findByText(text) returns single node", function() {
@@ -177,7 +177,7 @@
 
                 var node = treeview.find(".k-item:first");
 
-                equals(treeviewObject.findByText("foo")[0], node[0]);
+                equal(treeviewObject.findByText("foo")[0], node[0]);
             });
 
             test("findByText(text) returns multiple nodes", function() {
@@ -190,8 +190,8 @@
                 var nodes = treeview.find(".k-item"),
                     result = treeviewObject.findByText("foo");
 
-                equals(result[0], nodes[0]);
-                equals(result[1], nodes[2]);
+                equal(result[0], nodes[0]);
+                equal(result[1], nodes[2]);
             });
 
             test("append(nodeData, root) appends new node to empty parent", function() {
@@ -203,14 +203,14 @@
 
                 var appendedNode = treeviewObject.append({ text: "bar" }, root);
 
-                equals(root.find(".k-group").length, 1);
-                equals(root.find(".k-group").css("display"), "block");
-                equals(root.find(".k-item").length, 1);
-                equals(appendedNode[0], root.find(".k-item")[0]);
-                equals(treeviewObject.text(appendedNode), "bar");
+                equal(root.find(".k-group").length, 1);
+                equal(root.find(".k-group").css("display"), "block");
+                equal(root.find(".k-item").length, 1);
+                equal(appendedNode[0], root.find(".k-item")[0]);
+                equal(treeviewObject.text(appendedNode), "bar");
                 ok(appendedNode.find(">div").hasClass("k-bot"));
                 ok(appendedNode.hasClass("k-last"));
-                equals(root.find(">div>.k-minus.k-icon").length, 1);
+                equal(root.find(">div>.k-minus.k-icon").length, 1);
             });
 
             test("append(nodeData, parentNode) appends new node to parent with existing group", function() {
@@ -224,12 +224,12 @@
 
                 var appendedNode = treeviewObject.append({ text: "bar" }, parentNode);
 
-                equals(parentNode.find(".k-group").length, 1);
-                equals(parentNode.find(".k-group").css("display"), "block");
-                equals(parentNode.find(".k-item").length, 2);
-                equals(appendedNode[0], parentNode.find(".k-item:last")[0]);
+                equal(parentNode.find(".k-group").length, 1);
+                equal(parentNode.find(".k-group").css("display"), "block");
+                equal(parentNode.find(".k-item").length, 2);
+                equal(appendedNode[0], parentNode.find(".k-item:last")[0]);
                 ok(!appendedNode.prev(".k-item").hasClass("k-last"));
-                equals(appendedNode.find(">div.k-bot").length, 1);
+                equal(appendedNode.find(">div.k-bot").length, 1);
             });
 
             test("append(nodeData) appends new node to root", function() {
@@ -241,9 +241,9 @@
 
                 var appendedNode = treeviewObject.append({ text: "bar" });
 
-                equals(rootGroup.length, 1);
-                equals(treeview.find("div").length, 2);
-                equals(rootGroup.find("> .k-item").length, 2);
+                equal(rootGroup.length, 1);
+                equal(treeview.find("div").length, 2);
+                equal(rootGroup.find("> .k-item").length, 2);
                 ok(rootGroup.find("> .k-item").hasClass("k-first"));
             });
 
@@ -262,9 +262,9 @@
 
                 var appendedNode = treeviewObject.append(subNode[0], newParent);
 
-                equals(appendedNode[0], newParent.find(".k-item")[0]);
-                equals(rootGroup.children().length, 2);
-                equals(treeviewObject.findByText("buzz").find(".k-bot").length, 1);
+                equal(appendedNode[0], newParent.find(".k-item")[0]);
+                equal(rootGroup.children().length, 2);
+                equal(treeviewObject.findByText("buzz").find(".k-bot").length, 1);
             });
 
             test("append(nodeElement) appends node to root", function() {
@@ -279,10 +279,10 @@
 
                 var appendedNode = treeviewObject.append(subNode[0]);
 
-                equals(treeviewObject.findByText("bar")[0], appendedNode[0]);
-                equals(rootGroup.children().length, 2);
-                equals(treeview.find(".k-icon").length, 0);
-                equals(rootGroup.find(".k-group").length, 0);
+                equal(treeviewObject.findByText("bar")[0], appendedNode[0]);
+                equal(rootGroup.children().length, 2);
+                equal(treeview.find(".k-icon").length, 0);
+                equal(rootGroup.find(".k-group").length, 0);
             });
 
             test("append() of single child to same parent does not remove it", function() {
@@ -300,19 +300,19 @@
 
                 subNode = treeviewObject.findByText("bar");
 
-                equals(subNode[0], appendedNode[0]);
-                equals(rootGroup.children().length, 1);
-                equals(rootNode.find(".k-group").length, 1);
-                equals(rootNode.find(".k-group").children().length, 1);
+                equal(subNode[0], appendedNode[0]);
+                equal(rootGroup.children().length, 1);
+                equal(rootNode.find(".k-group").length, 1);
+                equal(rootNode.find(".k-group").children().length, 1);
 
                 appendedNode = treeviewObject.append(subNode[0], rootNode);
 
                 subNode = treeviewObject.findByText("bar");
 
-                equals(subNode[0], appendedNode[0]);
-                equals(rootGroup.children().length, 1);
-                equals(rootNode.find(".k-group").length, 1);
-                equals(rootNode.find(".k-group").children().length, 1);
+                equal(subNode[0], appendedNode[0]);
+                equal(rootGroup.children().length, 1);
+                equal(rootNode.find(".k-group").length, 1);
+                equal(rootNode.find(".k-group").children().length, 1);
             });
 
             test("append() of array of items", function() {
@@ -323,8 +323,8 @@
                         { text: "bar" }
                     ]);
 
-                equals(treeview.find(".k-group").length, 1);
-                equals(treeview.find(".k-group").children().length, 2);
+                equal(treeview.find(".k-group").length, 1);
+                equal(treeview.find(".k-group").children().length, 2);
             });
 
             test("append() uses item template when creating items", function() {
@@ -469,9 +469,9 @@
 
                 var insertedNode = treeviewObject.insertAfter({ text: "bar" }, rootItem);
 
-                equals(rootGroup.find("> .k-item").length, 3);
-                equals(rootGroup.find("> .k-item:contains('bar')").index(), 1);
-                equals(insertedNode[0], rootGroup.find("> .k-item")[1]);
+                equal(rootGroup.find("> .k-item").length, 3);
+                equal(rootGroup.find("> .k-item:contains('bar')").index(), 1);
+                equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
             });
 
             test("insertBefore(nodeData, element) inserts new node before element", function() {
@@ -486,9 +486,9 @@
 
                 var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
 
-                equals(rootGroup.find("> .k-item").length, 3);
-                equals(rootGroup.find("> .k-item:contains('bar')").index(), 1);
-                equals(insertedNode[0], rootGroup.find("> .k-item")[1]);
+                equal(rootGroup.find("> .k-item").length, 3);
+                equal(rootGroup.find("> .k-item:contains('bar')").index(), 1);
+                equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
             });
 
             test("insertBefore(nodeData, element) updates item classes", function() {
@@ -506,8 +506,8 @@
                 ok(rootItem.hasClass("k-last"));
                 ok(!rootItem.find(">div").hasClass("k-top"));
                 ok(rootItem.find(">div").hasClass("k-bot"));
-                equals(treeview.find("li").length, 2);
-                equals(treeview.find("div").length, 2);
+                equal(treeview.find("li").length, 2);
+                equal(treeview.find("div").length, 2);
             });
 
             test("remove(node) removes nodes", function() {
@@ -523,10 +523,10 @@
 
                 rootItems = treeview.find(".k-item");
 
-                equals(rootItems.length, 1);
-                equals(rootGroup.find(".k-in:contains('bar')").length, 1);
-                equals(treeview.find("li").length, 1);
-                equals(treeview.find("div").length, 1);
+                equal(rootItems.length, 1);
+                equal(rootGroup.find(".k-in:contains('bar')").length, 1);
+                equal(treeview.find("li").length, 1);
+                equal(treeview.find("div").length, 1);
             });
 
             test("remove(node) updates classes", function() {
@@ -540,8 +540,8 @@
 
                 var items = treeview.find(".k-item");
 
-                equals(items.length, 1);
-                equals(items.find(".k-group").length, 0);
+                equal(items.length, 1);
+                equal(items.find(".k-group").length, 0);
             });
 
             test("remove('.k-item') removes all items, but not root list", function() {
@@ -553,7 +553,7 @@
 
                 treeviewObject.remove(".k-item");
 
-                equals(treeview.find(".k-item").length, 0);
+                equal(treeview.find(".k-item").length, 0);
                 ok(treeview.find("> .k-group").length);
                 ok(!treeview.hasClass("k-item"));
             });
