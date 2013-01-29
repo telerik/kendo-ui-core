@@ -12,4 +12,5 @@ VERSION_Q = version_data['release'].to_i
 VERSION_SERVICE_PACK = version_data['servicePack']
 
 VERSION = "#{VERSION_YEAR}.#{VERSION_Q}.#{month * 100 + now.day}"
+CURRENT_COMMIT = `git rev-parse HEAD`.strip
 BETA = !!ENV['BETA']

@@ -35,6 +35,12 @@ directory "/usr/share/nginx/html" do
     mode "0755"
 end
 
+directory "/usr/share/nginx/html/staging" do
+    owner "nginx"
+    group "nginx"
+    mode "0755"
+end
+
 service "nginx" do
     action :restart
 end

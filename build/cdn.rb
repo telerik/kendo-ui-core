@@ -14,7 +14,7 @@ namespace :cdn do
         git add #{VERSION};
         git commit --message "Automatic CDN upload of #{VERSION}";
         git push;
-        rsync -avz --exclude '.git' --delete-excluded ./ kendoorigin:/usr/share/nginx/html/;
+        rsync -avz --exclude '.git' --delete-excluded ./ #{KENDO_ORIGIN_HOST}:/usr/share/nginx/html/;
         SH
     end
 end
