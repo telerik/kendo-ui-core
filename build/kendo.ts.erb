@@ -315,6 +315,16 @@ interface JQueryEventObject {
 }
 
 interface JQuery {
+
+    kendoDraggable(): JQuery;
+    kendoDraggable(options: kendo.ui.DraggableOptions): JQuery;
+
+    kendoDropTarget(): JQuery;
+    kendoDropTarget(options: kendo.ui.DropTargetOptions): JQuery;
+
+    kendoDropTargetArea(): JQuery;
+    kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
+
 % components.each do |component|
 % if component.full_name.include?('ui')
     kendo<%= component.plugin%>(): JQuery;
