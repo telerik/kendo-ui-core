@@ -361,6 +361,27 @@
                     equals(plotArea.axes[1].options.justified, true);
                 });
 
+                test("categoryAxis should have justified true if the type of the series is area", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "area",
+                            data: [100]
+                        }], { });
+
+                    equals(plotArea.axes[0].options.justified, true);
+                });
+
+                test("categoryAxis should have justified false if the one of the all series is not from type area", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "area",
+                            data: [100]
+                        },{
+                            type: "bar",
+                            data: [100]
+                        }], { });
+
+                    equals(plotArea.axes[0].options.justified, false);
+                });
+
                 test("categoryAxis roundToBaseUnit is not altered with line series", function() {
                     var plotArea = new dataviz.CategoricalPlotArea([{
                             type: "line",
