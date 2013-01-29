@@ -965,6 +965,7 @@
 
         _editable: function() {
             var that = this,
+                selectable = that.selectable && that.selectable.options.multiple,
                 editable = that.options.editable,
                 handler = function () {
                     var target = document.activeElement,
@@ -996,6 +997,9 @@
 
                             if (that.editable) {
                                 if (that.editable.end()) {
+                                    if (selectable) {
+                                        $(document.activeElement).blur();
+                                    }
                                     that.closeCell();
                                     that.editCell(td);
                                 }
@@ -1110,10 +1114,19 @@
 
         closeCell: function() {
             var that = this,
-                cell = that._editContainer.removeClass("k-edit-cell"),
-                id = cell.closest("tr").attr(kendo.attr("uid")),
-                column = that.columns[that.cellIndex(cell)],
-                model = that.dataSource.getByUid(id);
+                cell,
+                id,
+                column,
+                model;
+
+            if (!that._editContainer) {
+                return;
+            }
+
+            cell = that._editContainer.removeClass("k-edit-cell");
+            id = cell.closest("tr").attr(kendo.attr("uid"));
+            column = that.columns[that.cellIndex(cell)];
+            model = that.dataSource.getByUid(id);
 
             cell.parent().removeClass("k-grid-edit-row");
 
