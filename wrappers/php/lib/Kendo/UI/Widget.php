@@ -38,7 +38,7 @@ abstract class Widget extends \Kendo\SerializableObject{
         return $element->outerHtml();
     }
 
-    abstract function name();
+    protected abstract function name();
 
     public function render() {
         $output = array();

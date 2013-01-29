@@ -3,7 +3,7 @@
 namespace Kendo\UI;
 
 class DateTimePicker extends \Kendo\UI\Widget {
-    public function name() {
+    protected function name() {
         return 'DateTimePicker';
     }
 //>> Properties

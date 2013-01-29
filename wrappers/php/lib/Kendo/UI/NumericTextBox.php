@@ -3,7 +3,7 @@
 namespace Kendo\UI;
 
 class NumericTextBox extends \Kendo\UI\Widget {
-    public function name() {
+    protected function name() {
         return 'NumericTextBox';
     }
 //>> Properties

@@ -3,7 +3,7 @@
 namespace Kendo\UI;
 
 class DropDownList extends \Kendo\UI\Widget {
-    public function name() {
+    protected function name() {
         return 'DropDownList';
     }
 //>> Properties

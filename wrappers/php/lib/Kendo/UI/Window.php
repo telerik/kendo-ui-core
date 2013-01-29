@@ -5,7 +5,7 @@ namespace Kendo\UI;
 class Window extends \Kendo\UI\Widget {
     protected $ignore = array('content');
 
-    public function name() {
+    protected function name() {
         return 'Window';
     }
 

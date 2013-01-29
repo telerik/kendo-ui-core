@@ -3,7 +3,7 @@
 namespace Kendo\UI;
 
 class ColorPicker extends \Kendo\UI\Widget {
-    public function name() {
+    protected function name() {
         return 'ColorPicker';
     }
 //>> Properties

@@ -3,7 +3,7 @@
 namespace Kendo\Dataviz\UI;
 
 class Chart extends \Kendo\UI\Widget {
-    public function name() {
+    protected function name() {
         return 'Chart';
     }
 //>> Properties

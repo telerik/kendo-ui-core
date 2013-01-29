@@ -3,7 +3,7 @@
 namespace Kendo\UI;
 
 class ListView extends \Kendo\UI\Widget {
-    public function name() {
+    protected function name() {
         return 'ListView';
     }
 //>> Properties

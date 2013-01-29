@@ -5,7 +5,7 @@ namespace Kendo\UI;
 class PanelBar extends \Kendo\UI\Widget {
     protected $ignore = array('items');
 
-    public function name() {
+    protected function name() {
         return 'PanelBar';
     }
 
