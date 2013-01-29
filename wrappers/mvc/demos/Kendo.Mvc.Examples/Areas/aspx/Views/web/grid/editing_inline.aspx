@@ -16,8 +16,10 @@
             .Pageable()
             .Sortable()
             .Scrollable()
+            .HtmlAttributes(new { style = "height:430px;" })
             .DataSource(dataSource => dataSource
                 .Ajax()
+                .PageSize(20)
                 .Events(events => events.Error("error_handler"))
                 .Model(model => model.Id(p => p.ProductID))
                 .Create(update => update.Action("EditingInline_Create", "Grid"))

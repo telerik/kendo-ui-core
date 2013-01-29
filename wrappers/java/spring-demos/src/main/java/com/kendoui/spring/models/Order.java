@@ -1,6 +1,7 @@
 package com.kendoui.spring.models;
 
-import java.sql.Date;
+
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @Entity
 @Table(name="Orders")
@@ -18,7 +21,7 @@ public class Order {
     private String shipName;
     private String shipCity;
     private double freight;
-    private Date orderDate;
+    private Calendar orderDate;
     private String shipAddress;
     private String shipCountry;
     
@@ -52,11 +55,12 @@ public class Order {
     }
     
     @Column(name="OrderDate")
-    public Date getOrderDate() {
+    @JsonSerialize(using=CustomDateSerializer.class)
+    public Calendar getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(Calendar orderDate) {
         this.orderDate = orderDate;
     }
     

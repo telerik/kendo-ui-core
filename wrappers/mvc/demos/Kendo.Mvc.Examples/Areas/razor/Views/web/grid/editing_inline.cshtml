@@ -1,6 +1,7 @@
-﻿@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
-    .Name("Grid")    
-    .Columns(columns => {        
+﻿@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+    .Name("Grid")
+    .Columns(columns =>
+    {
         columns.Bound(p => p.ProductName);
         columns.Bound(p => p.UnitPrice).Width(140);
         columns.Bound(p => p.UnitsInStock).Width(140);
@@ -12,8 +13,10 @@
     .Pageable()
     .Sortable()
     .Scrollable()
-    .DataSource(dataSource => dataSource        
-        .Ajax()                 
+    .HtmlAttributes(new { style = "height:430px;"})
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
         .Events(events => events.Error("error_handler"))
         .Model(model => model.Id(p => p.ProductID))
         .Create(update => update.Action("EditingInline_Create", "Grid"))
