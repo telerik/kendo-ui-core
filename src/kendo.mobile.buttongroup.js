@@ -22,7 +22,7 @@ kendo_module({
 
             that.element.addClass("km-buttongroup").find("li").each(that._button);
 
-            that.element.on("down", SELECTOR, "_mousedown");
+            that.element.on(that.options.selectOn, SELECTOR, "_select");
 
             that.select(that.options.index);
         },
@@ -33,6 +33,7 @@ kendo_module({
 
         options: {
             name: "ButtonGroup",
+            selectOn: "down",
             index: -1
         },
 
@@ -79,8 +80,8 @@ kendo_module({
             }
         },
 
-        _mousedown: function(e) {
-            if (e.which > 1) {
+        _select: function(e) {
+            if (e.which > 1 || e.isDefaultPrevented()) {
                 return;
             }
 

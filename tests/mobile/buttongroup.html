@@ -79,9 +79,9 @@
             });
 
             test("Honor li.km-state-active on init", function() {
-                var segmented = new ButtonGroup($("<ul><li class='km-state-active'>Text1</li><li>Text2</li></ul>"));
+                var group = new ButtonGroup($("<ul><li class='km-state-active'>Text1</li><li>Text2</li></ul>"));
 
-                equal(segmented.current().index(), 0);
+                equal(group.current().index(), 0);
             });
 
             test("Add icon if no image and data attribute", function() {
@@ -94,7 +94,7 @@
             });
 
             test("Select li on init", function() {
-                var segmented = new ButtonGroup(dom, {
+                var group = new ButtonGroup(dom, {
                     index: 0
                 });
 
@@ -102,9 +102,9 @@
             });
 
             test("Select li as jQuery object", function() {
-                var segmented = new ButtonGroup(dom);
+                var group = new ButtonGroup(dom);
 
-                segmented.select(dom.children("li:first"));
+                group.select(dom.children("li:first"));
 
                 var current = dom.find(".km-state-active");
 
@@ -114,26 +114,26 @@
             });
 
             test("Select by index", function() {
-                var segmented = new ButtonGroup(dom);
+                var group = new ButtonGroup(dom);
 
-                segmented.select(0);
+                group.select(0);
 
                 ok(dom.children("li:first").hasClass("km-state-active"));
             });
 
             test("Do not select if index is negative", function() {
-                var segmented = new ButtonGroup(dom);
+                var group = new ButtonGroup(dom);
 
-                segmented.select(-1);
+                group.select(-1);
 
                 equal(dom.children("li.km-state-active").length, 0);
             });
 
             test("Only one li is selected", function() {
-                var segmented = new ButtonGroup(dom);
+                var group = new ButtonGroup(dom);
 
-                segmented.select(0);
-                segmented.select(1);
+                group.select(0);
+                group.select(1);
 
                 var current = dom.find(".km-state-active");
 
@@ -143,30 +143,49 @@
             });
 
             test("Click button should select it", function() {
-                var segmented = new ButtonGroup(dom);
+                var group = new ButtonGroup(dom);
 
-                segmented._mousedown({
-                    currentTarget: dom.find("li:last")[0]
-                });
+                dom.find("li:last").trigger("mousedown");
 
                 equal(dom.children("li.km-state-active").index(), 1);
             });
 
-            asyncTest("Raise change event", function() {
-                var segmented = new ButtonGroup(dom, {
+            test("selects and triggers", 2, function() {
+                var group = new ButtonGroup(dom, {
                     select: function() {
-                        ok(true);
                         equal(this.selectedIndex, 1);
-                        start();
                     }
                 });
 
                 equal(this.selectedIndex, undefined);
 
-                segmented._mousedown({
-                    currentTarget: dom.find("li:last")[0]
-                });
+                dom.find("li:last").trigger("mousedown");
             });
+
+            test("group accepts event phase configuration option", 2, function() {
+                var group = new ButtonGroup(dom, {
+                    selectOn: "up",
+                    select: function() {
+                        ok(true);
+                        equal(this.selectedIndex, 1);
+                    }
+                });
+
+                dom.find("li:last").trigger("mouseup");
+            });
+
+            test("group does not select button if event is prevented", 1, function() {
+                var group = new ButtonGroup(dom, {
+                    selectOn: "up"
+                });
+
+                var e = new $.Event(null, { type: "mouseup" });
+                e.preventDefault();
+
+                dom.find("li:last").trigger(e);
+                equal(group.selectedIndex, undefined);
+            });
+
 
             test("binding visible to false hides the widget", function() {
                 var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
