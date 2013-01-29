@@ -1,7 +1,7 @@
 <?php
 require_once '../../include/header.php';
 require_once '../../lib/Kendo/Autoload.php';
-
+?>
 <p>Start typing the name of a European country</p>
 <label for="country">Shipping countries:</label>
 <?php
