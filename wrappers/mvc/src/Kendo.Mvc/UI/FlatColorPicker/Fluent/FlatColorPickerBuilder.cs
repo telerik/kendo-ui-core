@@ -30,9 +30,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public FlatColorPickerBuilder Events(Action<ColorPickerEventBuilder> clientEventsAction)
+        public FlatColorPickerBuilder Events(Action<SimpleColorPickerEventBuilder> clientEventsAction)
         {
-            clientEventsAction(new ColorPickerEventBuilder(Component.Events));
+            clientEventsAction(new SimpleColorPickerEventBuilder(Component.Events));
 
             return this;
         }

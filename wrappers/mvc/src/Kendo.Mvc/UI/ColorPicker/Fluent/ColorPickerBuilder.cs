@@ -143,5 +143,24 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Shows a tool icon.
+        /// </summary>
+        /// <param name="cssClass">The CSS class that will be used for styling</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        ///             .ToolIcon("k-foreColor")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPickerBuilder ToolIcon(string cssClass)
+        {
+            Component.ToolIcon = cssClass;
+
+            return this;
+        }
     }
 }

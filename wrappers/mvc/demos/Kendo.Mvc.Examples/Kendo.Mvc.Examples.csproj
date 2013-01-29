@@ -120,6 +120,10 @@
     <Compile Include="Controllers\DataViz\Area_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\IndexController.cs" />
+    <Compile Include="Controllers\Web\ColorPicker\ApiController.cs" />
+    <Compile Include="Controllers\Web\ColorPicker\EventsController.cs" />
+    <Compile Include="Controllers\Web\ColorPicker\NavigationController.cs" />
+    <Compile Include="Controllers\Web\ColorPicker\Palette_PresetsController.cs" />
     <Compile Include="Controllers\Web\ColorPicker\FlatColorPickerController.cs" />
     <Compile Include="Controllers\Web\ColorPicker\PaletteController.cs" />
     <Compile Include="Controllers\Web\ColorPicker\IndexController.cs" />
@@ -517,6 +521,10 @@
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\flatcolorpicker.cshtml" />
+    <Content Include="Areas\razor\Views\web\colorpicker\palette_presets.cshtml" />
+    <Content Include="Areas\razor\Views\web\colorpicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\colorpicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\colorpicker\api.cshtml" />
     <None Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
     <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\window\rtl.aspx" />

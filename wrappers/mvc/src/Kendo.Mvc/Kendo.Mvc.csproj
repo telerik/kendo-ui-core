@@ -406,6 +406,7 @@
     <Compile Include="UI\ColorPalette\ColorPalette.cs" />
     <Compile Include="UI\ColorPalette\ColorPaletteTileSize.cs" />
     <Compile Include="UI\ColorPalette\Fluent\ColorPaletteBuilder.cs" />
+    <Compile Include="UI\ColorPalette\Fluent\SimpleColorPickerEventBuilder.cs" />
     <Compile Include="UI\ColorPalette\Fluent\PaletteSizeBuilder.cs" />
     <Compile Include="UI\ColorPicker\ColorPicker.cs" />
     <Compile Include="UI\ColorPicker\ColorPickerPalette.cs" />

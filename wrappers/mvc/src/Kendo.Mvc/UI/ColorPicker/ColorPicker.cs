@@ -23,6 +23,8 @@ namespace Kendo.Mvc.UI
 
         public IEnumerable<string> PaletteColors { get; set; }
 
+        public string ToolIcon { get; set; }
+
         public string Value { get; set; }
 
         public bool Enabled { get; set; }
@@ -56,6 +58,11 @@ namespace Kendo.Mvc.UI
             if (!Buttons)
             {
                 options["buttons"] = false;
+            }
+
+            if (!string.IsNullOrEmpty(ToolIcon))
+            {
+                options["toolIcon"] = ToolIcon;
             }
 
             writer.Write(Initializer.Initialize(Selector, "ColorPicker", options));
