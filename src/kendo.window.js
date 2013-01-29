@@ -821,6 +821,7 @@
                 that.dragging.destroy();
             }
 
+            that.element.children("iframe").remove();
             that.wrapper.remove().add(that.wrapper.find(".k-resize-handle,.k-window-titlebar")).off(NS);
 
             $(window).off("resize", that._resizeHandler);
