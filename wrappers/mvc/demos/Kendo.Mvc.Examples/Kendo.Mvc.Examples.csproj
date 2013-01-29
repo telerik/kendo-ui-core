@@ -517,6 +517,13 @@
     <Content Include="Areas\aspx\Views\web\slider\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
     <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\flatcolorpicker.aspx" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\palette.aspx" />
+    <Content Include="Areas\aspx\Views\web\colorpicker\palette_presets.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
