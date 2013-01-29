@@ -67,10 +67,10 @@ module CodeGen::PHP
 COMPOSITE_OPTION_SETTER = ERB.new(%{
     /**
     * <%= description %>
-    * @param <%= php_type %> $value
+    * @param mixed|<%= php_type %> $value
     * @return <%= owner.php_type %>
     */
-    public function <%= php_name %>(<%= php_type %> $value) {
+    public function <%= php_name %>($value) {
         return $this->setProperty('<%= name %>', $value);
     }
 })
@@ -217,6 +217,8 @@ FUNCTION_SETTER = ERB.new(%{
             composite.each do |o|
                 types.push(o.php_type);
             end
+
+            types.push('mixed') if composite.any?
 
             types.join('|')
         end

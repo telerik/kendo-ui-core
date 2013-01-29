@@ -43,10 +43,10 @@ class ChartPane extends \Kendo\SerializableObject {
 
     /**
     * The border of the pane.
-    * @param \Kendo\Dataviz\UI\ChartPaneBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartPaneBorder $value
     * @return \Kendo\Dataviz\UI\ChartPane
     */
-    public function border(\Kendo\Dataviz\UI\ChartPaneBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -61,7 +61,7 @@ class ChartPane extends \Kendo\SerializableObject {
 
     /**
     * The pane title text or configuration.
-    * @param string|\Kendo\Dataviz\UI\ChartPaneTitle $value
+    * @param string|\Kendo\Dataviz\UI\ChartPaneTitle|mixed $value
     * @return \Kendo\Dataviz\UI\ChartPane
     */
     public function title($value) {

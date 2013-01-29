@@ -27,7 +27,7 @@ class PanelBar extends \Kendo\UI\Widget {
     /**
     * A collection of visual animations used when PanelBar items are exapnd or collapsed through
 user interactions. Setting this option to false will disable all animations.
-    * @param boolean|\Kendo\UI\PanelBarAnimation $value
+    * @param boolean|\Kendo\UI\PanelBarAnimation|mixed $value
     * @return \Kendo\UI\PanelBar
     */
     public function animation($value) {

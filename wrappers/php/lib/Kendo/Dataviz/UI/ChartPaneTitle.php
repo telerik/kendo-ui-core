@@ -17,10 +17,10 @@ hex and rgb.
 
     /**
     * The border of the title.
-    * @param \Kendo\Dataviz\UI\ChartPaneTitleBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartPaneTitleBorder $value
     * @return \Kendo\Dataviz\UI\ChartPaneTitle
     */
-    public function border(\Kendo\Dataviz\UI\ChartPaneTitleBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

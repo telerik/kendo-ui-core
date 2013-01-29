@@ -109,10 +109,10 @@ class Pager extends \Kendo\UI\Widget {
 
     /**
     * Defines texts shown within the pager.
-    * @param \Kendo\UI\PagerMessages $value
+    * @param mixed|\Kendo\UI\PagerMessages $value
     * @return \Kendo\UI\Pager
     */
-    public function messages(\Kendo\UI\PagerMessages $value) {
+    public function messages($value) {
         return $this->setProperty('messages', $value);
     }
 

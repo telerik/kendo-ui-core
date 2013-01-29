@@ -28,7 +28,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Enables column header menu
-    * @param boolean|\Kendo\UI\GridColumnMenu $value
+    * @param boolean|\Kendo\UI\GridColumnMenu|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function columnMenu($value) {
@@ -46,7 +46,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether editing is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridEditable $value
+    * @param boolean|\Kendo\UI\GridEditable|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function editable($value) {
@@ -55,7 +55,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether filtering is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridFilterable $value
+    * @param boolean|\Kendo\UI\GridFilterable|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function filterable($value) {
@@ -82,7 +82,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether grouping is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridGroupable $value
+    * @param boolean|\Kendo\UI\GridGroupable|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function groupable($value) {
@@ -109,7 +109,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether paging is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridPageable $value
+    * @param boolean|\Kendo\UI\GridPageable|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function pageable($value) {
@@ -118,7 +118,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Enable/disable grid scrolling.
-    * @param boolean|\Kendo\UI\GridScrollable $value
+    * @param boolean|\Kendo\UI\GridScrollable|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function scrollable($value) {
@@ -136,7 +136,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Defines whether grid columns are sortable.
-    * @param boolean|\Kendo\UI\GridSortable $value
+    * @param boolean|\Kendo\UI\GridSortable|mixed $value
     * @return \Kendo\UI\Grid
     */
     public function sortable($value) {

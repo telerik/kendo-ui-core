@@ -25,10 +25,10 @@ class StockChartTitle extends \Kendo\SerializableObject {
 
     /**
     * The border of the title.
-    * @param \Kendo\Dataviz\UI\StockChartTitleBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartTitleBorder $value
     * @return \Kendo\Dataviz\UI\StockChartTitle
     */
-    public function border(\Kendo\Dataviz\UI\StockChartTitleBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

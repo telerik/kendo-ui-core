@@ -17,10 +17,10 @@ including hex and rgb.
 
     /**
     * The border of the labels.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsLabelsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaultsLabelsBorder $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsLabels
     */
-    public function border(\Kendo\Dataviz\UI\StockChartSeriesDefaultsLabelsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

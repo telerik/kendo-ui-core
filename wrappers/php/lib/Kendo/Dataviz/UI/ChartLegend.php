@@ -16,19 +16,19 @@ class ChartLegend extends \Kendo\SerializableObject {
 
     /**
     * The border of the legend.
-    * @param \Kendo\Dataviz\UI\ChartLegendBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartLegendBorder $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
-    public function border(\Kendo\Dataviz\UI\ChartLegendBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
     /**
     * Configures the legend labels.
-    * @param \Kendo\Dataviz\UI\ChartLegendLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartLegendLabels $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
-    public function labels(\Kendo\Dataviz\UI\ChartLegendLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 

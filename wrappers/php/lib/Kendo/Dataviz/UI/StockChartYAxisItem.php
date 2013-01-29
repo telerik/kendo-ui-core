@@ -47,10 +47,10 @@ Individual color settings for line and labels take priority. Any valid CSS color
 
     /**
     * Configures the axis labels.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItemLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItemLabels $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItem
     */
-    public function labels(\Kendo\Dataviz\UI\StockChartYAxisItemLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
@@ -95,29 +95,29 @@ It defaults to 1/5th of the majorUnit.
 
     /**
     * Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItemLine $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItemLine $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItem
     */
-    public function line(\Kendo\Dataviz\UI\StockChartYAxisItemLine $value) {
+    public function line($value) {
         return $this->setProperty('line', $value);
     }
 
     /**
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItemMajorGridLines $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItemMajorGridLines $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItem
     */
-    public function majorGridLines(\Kendo\Dataviz\UI\StockChartYAxisItemMajorGridLines $value) {
+    public function majorGridLines($value) {
         return $this->setProperty('majorGridLines', $value);
     }
 
     /**
     * The major ticks of the axis.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItemMajorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItemMajorTicks $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItem
     */
-    public function majorTicks(\Kendo\Dataviz\UI\StockChartYAxisItemMajorTicks $value) {
+    public function majorTicks($value) {
         return $this->setProperty('majorTicks', $value);
     }
 
@@ -170,10 +170,10 @@ values increase from right to left and from top to bottom.
 
     /**
     * The title of the value axis.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItemTitle $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItemTitle $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItem
     */
-    public function title(\Kendo\Dataviz\UI\StockChartYAxisItemTitle $value) {
+    public function title($value) {
         return $this->setProperty('title', $value);
     }
 

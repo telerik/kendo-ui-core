@@ -17,10 +17,10 @@ hex and rgb
 
     /**
     * The border of the labels.
-    * @param \Kendo\Dataviz\UI\ChartXAxisItemLabelsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemLabelsBorder $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLabels
     */
-    public function border(\Kendo\Dataviz\UI\ChartXAxisItemLabelsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

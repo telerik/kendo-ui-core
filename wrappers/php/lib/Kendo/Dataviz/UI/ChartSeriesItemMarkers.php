@@ -16,10 +16,10 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * The border of the markers.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemMarkersBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemMarkersBorder $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
-    public function border(\Kendo\Dataviz\UI\ChartSeriesItemMarkersBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

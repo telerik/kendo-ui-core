@@ -17,10 +17,10 @@ Any valid CSS color string will work here, including hex and rgb
 
     /**
     * The border of the labels.
-    * @param \Kendo\Dataviz\UI\RadialGaugeScaleLabelsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleLabelsBorder $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScaleLabels
     */
-    public function border(\Kendo\Dataviz\UI\RadialGaugeScaleLabelsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

@@ -11,10 +11,10 @@ class TabStrip extends \Kendo\UI\Widget {
     /**
     * A collection of visual animations used when TabStrip tab are selected through
 user interactions. Setting this option to false will disable all animations.
-    * @param \Kendo\UI\TabStripAnimation $value
+    * @param mixed|\Kendo\UI\TabStripAnimation $value
     * @return \Kendo\UI\TabStrip
     */
-    public function animation(\Kendo\UI\TabStripAnimation $value) {
+    public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 

@@ -54,19 +54,19 @@ It is used as a default field for the navigator axis.The data item field value m
 
     /**
     * Specifies the initially selected range.The full range of values is shown if no range is specified.
-    * @param \Kendo\Dataviz\UI\StockChartNavigatorSelect $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSelect $value
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
-    public function select(\Kendo\Dataviz\UI\StockChartNavigatorSelect $value) {
+    public function select($value) {
         return $this->setProperty('select', $value);
     }
 
     /**
     * Default options for the navigator hint.
-    * @param \Kendo\Dataviz\UI\StockChartNavigatorHint $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorHint $value
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
-    public function hint(\Kendo\Dataviz\UI\StockChartNavigatorHint $value) {
+    public function hint($value) {
         return $this->setProperty('hint', $value);
     }
 

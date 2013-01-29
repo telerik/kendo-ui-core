@@ -79,10 +79,10 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Set the object responsible for describing the raw data format.
-    * @param \Kendo\Data\DataSourceSchema $value
+    * @param mixed|\Kendo\Data\DataSourceSchema $value
     * @return \Kendo\Data\DataSource
     */
-    public function schema(\Kendo\Data\DataSourceSchema $value) {
+    public function schema($value) {
         return $this->setProperty('schema', $value);
     }
 
@@ -143,10 +143,10 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.
-    * @param \Kendo\Data\DataSourceTransport $value
+    * @param mixed|\Kendo\Data\DataSourceTransport $value
     * @return \Kendo\Data\DataSource
     */
-    public function transport(\Kendo\Data\DataSourceTransport $value) {
+    public function transport($value) {
         return $this->setProperty('transport', $value);
     }
 

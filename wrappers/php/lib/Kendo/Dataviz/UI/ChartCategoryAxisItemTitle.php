@@ -17,10 +17,10 @@ hex and rgb.
 
     /**
     * The border of the title.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemTitleBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemTitleBorder $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemTitle
     */
-    public function border(\Kendo\Dataviz\UI\ChartCategoryAxisItemTitleBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

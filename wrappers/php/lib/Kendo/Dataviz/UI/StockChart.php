@@ -20,10 +20,10 @@ It is used as a default field for all date axes, including the navigator pane.Th
 
     /**
     * The data navigator configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartNavigator $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigator $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function navigator(\Kendo\Dataviz\UI\StockChartNavigator $value) {
+    public function navigator($value) {
         return $this->setProperty('navigator', $value);
     }
 
@@ -48,10 +48,10 @@ It is used as a default field for all date axes, including the navigator pane.Th
     /**
     * The chart area configuration options.
 This is the entire visible area of the chart.
-    * @param \Kendo\Dataviz\UI\StockChartChartArea $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartChartArea $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function chartArea(\Kendo\Dataviz\UI\StockChartChartArea $value) {
+    public function chartArea($value) {
         return $this->setProperty('chartArea', $value);
     }
 
@@ -75,10 +75,10 @@ This is the entire visible area of the chart.
 
     /**
     * The chart legend configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartLegend $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartLegend $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function legend(\Kendo\Dataviz\UI\StockChartLegend $value) {
+    public function legend($value) {
         return $this->setProperty('legend', $value);
     }
 
@@ -93,10 +93,10 @@ This is the entire visible area of the chart.
 
     /**
     * The plot area configuration options. This is the area containing the plotted series.
-    * @param \Kendo\Dataviz\UI\StockChartPlotArea $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartPlotArea $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function plotArea(\Kendo\Dataviz\UI\StockChartPlotArea $value) {
+    public function plotArea($value) {
         return $this->setProperty('plotArea', $value);
     }
 
@@ -120,10 +120,10 @@ This is the entire visible area of the chart.
 
     /**
     * Default values for each series.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaults $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaults $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function seriesDefaults(\Kendo\Dataviz\UI\StockChartSeriesDefaults $value) {
+    public function seriesDefaults($value) {
         return $this->setProperty('seriesDefaults', $value);
     }
 
@@ -138,19 +138,19 @@ This is the entire visible area of the chart.
 
     /**
     * The chart title configuration options or text.
-    * @param \Kendo\Dataviz\UI\StockChartTitle $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartTitle $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function title(\Kendo\Dataviz\UI\StockChartTitle $value) {
+    public function title($value) {
         return $this->setProperty('title', $value);
     }
 
     /**
     * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartTooltip $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartTooltip $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function tooltip(\Kendo\Dataviz\UI\StockChartTooltip $value) {
+    public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
     }
 

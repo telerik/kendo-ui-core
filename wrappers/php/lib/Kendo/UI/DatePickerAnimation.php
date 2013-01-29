@@ -7,19 +7,19 @@ class DatePickerAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation(s) used for hiding of the pop-up.
-    * @param \Kendo\UI\DatePickerAnimationClose $value
+    * @param mixed|\Kendo\UI\DatePickerAnimationClose $value
     * @return \Kendo\UI\DatePickerAnimation
     */
-    public function close(\Kendo\UI\DatePickerAnimationClose $value) {
+    public function close($value) {
         return $this->setProperty('close', $value);
     }
 
     /**
     * The animation(s) used for displaying of the pop-up.
-    * @param \Kendo\UI\DatePickerAnimationOpen $value
+    * @param mixed|\Kendo\UI\DatePickerAnimationOpen $value
     * @return \Kendo\UI\DatePickerAnimation
     */
-    public function open(\Kendo\UI\DatePickerAnimationOpen $value) {
+    public function open($value) {
         return $this->setProperty('open', $value);
     }
 

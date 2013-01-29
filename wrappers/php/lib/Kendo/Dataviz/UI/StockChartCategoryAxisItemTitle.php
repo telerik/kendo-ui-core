@@ -17,10 +17,10 @@ hex and rgb.
 
     /**
     * The border of the title.
-    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitleBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitleBorder $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle
     */
-    public function border(\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitleBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

@@ -17,10 +17,10 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * The border of the gauge area.
-    * @param \Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder $value
     * @return \Kendo\Dataviz\UI\LinearGaugeGaugeArea
     */
-    public function border(\Kendo\Dataviz\UI\LinearGaugeGaugeAreaBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

@@ -7,7 +7,7 @@ class EditorImagebrowserSchemaModelFields extends \Kendo\SerializableObject {
 
     /**
     * The field which contains the name of the image/directory
-    * @param string|\Kendo\UI\EditorImagebrowserSchemaModelFieldsName $value
+    * @param string|\Kendo\UI\EditorImagebrowserSchemaModelFieldsName|mixed $value
     * @return \Kendo\UI\EditorImagebrowserSchemaModelFields
     */
     public function name($value) {
@@ -16,7 +16,7 @@ class EditorImagebrowserSchemaModelFields extends \Kendo\SerializableObject {
 
     /**
     * The field which contains the type of the entry. Either f for image or d for directory.
-    * @param string|\Kendo\UI\EditorImagebrowserSchemaModelFieldsType $value
+    * @param string|\Kendo\UI\EditorImagebrowserSchemaModelFieldsType|mixed $value
     * @return \Kendo\UI\EditorImagebrowserSchemaModelFields
     */
     public function type($value) {
@@ -25,7 +25,7 @@ class EditorImagebrowserSchemaModelFields extends \Kendo\SerializableObject {
 
     /**
     * The field which contains the size of image.
-    * @param string|\Kendo\UI\EditorImagebrowserSchemaModelFieldsSize $value
+    * @param string|\Kendo\UI\EditorImagebrowserSchemaModelFieldsSize|mixed $value
     * @return \Kendo\UI\EditorImagebrowserSchemaModelFields
     */
     public function size($value) {

@@ -54,57 +54,57 @@ Individual color settings for line and labels take priority.
 
     /**
     * Configures the axis labels.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemLabels $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function labels(\Kendo\Dataviz\UI\ChartCategoryAxisItemLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
     /**
     * Configures the axis line. This will also effect major and minor ticks, but not gridlines.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemLine $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemLine $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function line(\Kendo\Dataviz\UI\ChartCategoryAxisItemLine $value) {
+    public function line($value) {
         return $this->setProperty('line', $value);
     }
 
     /**
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function majorGridLines(\Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines $value) {
+    public function majorGridLines($value) {
         return $this->setProperty('majorGridLines', $value);
     }
 
     /**
     * The major ticks of the axis.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemMajorTicks $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function majorTicks(\Kendo\Dataviz\UI\ChartCategoryAxisItemMajorTicks $value) {
+    public function majorTicks($value) {
         return $this->setProperty('majorTicks', $value);
     }
 
     /**
     * Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
 the body of the chart.Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to true.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorGridLines $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemMinorGridLines $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function minorGridLines(\Kendo\Dataviz\UI\ChartCategoryAxisItemMinorGridLines $value) {
+    public function minorGridLines($value) {
         return $this->setProperty('minorGridLines', $value);
     }
 
     /**
     * The minor ticks of the axis.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function minorTicks(\Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks $value) {
+    public function minorTicks($value) {
         return $this->setProperty('minorTicks', $value);
     }
 
@@ -148,10 +148,10 @@ categories are listed from right to left and from top to bottom.
 
     /**
     * The title of the category axis.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemTitle $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemTitle $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */
-    public function title(\Kendo\Dataviz\UI\ChartCategoryAxisItemTitle $value) {
+    public function title($value) {
         return $this->setProperty('title', $value);
     }
 

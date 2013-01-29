@@ -25,10 +25,10 @@ class StockChartPlotArea extends \Kendo\SerializableObject {
 
     /**
     * The border of the plot area.
-    * @param \Kendo\Dataviz\UI\StockChartPlotAreaBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartPlotAreaBorder $value
     * @return \Kendo\Dataviz\UI\StockChartPlotArea
     */
-    public function border(\Kendo\Dataviz\UI\StockChartPlotAreaBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

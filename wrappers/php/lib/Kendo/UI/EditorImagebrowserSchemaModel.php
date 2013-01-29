@@ -16,10 +16,10 @@ class EditorImagebrowserSchemaModel extends \Kendo\SerializableObject {
 
     /**
     * 
-    * @param \Kendo\UI\EditorImagebrowserSchemaModelFields $value
+    * @param mixed|\Kendo\UI\EditorImagebrowserSchemaModelFields $value
     * @return \Kendo\UI\EditorImagebrowserSchemaModel
     */
-    public function fields(\Kendo\UI\EditorImagebrowserSchemaModelFields $value) {
+    public function fields($value) {
         return $this->setProperty('fields', $value);
     }
 

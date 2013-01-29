@@ -47,10 +47,10 @@ Individual color settings for line and labels take priority. Any valid CSS color
 
     /**
     * Configures the axis labels.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItemLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartYAxisItemLabels $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
     */
-    public function labels(\Kendo\Dataviz\UI\ChartYAxisItemLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
@@ -95,29 +95,29 @@ It defaults to 1/5th of the majorUnit.
 
     /**
     * Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItemLine $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartYAxisItemLine $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
     */
-    public function line(\Kendo\Dataviz\UI\ChartYAxisItemLine $value) {
+    public function line($value) {
         return $this->setProperty('line', $value);
     }
 
     /**
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItemMajorGridLines $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartYAxisItemMajorGridLines $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
     */
-    public function majorGridLines(\Kendo\Dataviz\UI\ChartYAxisItemMajorGridLines $value) {
+    public function majorGridLines($value) {
         return $this->setProperty('majorGridLines', $value);
     }
 
     /**
     * The major ticks of the axis.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItemMajorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartYAxisItemMajorTicks $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
     */
-    public function majorTicks(\Kendo\Dataviz\UI\ChartYAxisItemMajorTicks $value) {
+    public function majorTicks($value) {
         return $this->setProperty('majorTicks', $value);
     }
 
@@ -170,10 +170,10 @@ values increase from right to left and from top to bottom.
 
     /**
     * The title of the value axis.
-    * @param \Kendo\Dataviz\UI\ChartYAxisItemTitle $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartYAxisItemTitle $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
     */
-    public function title(\Kendo\Dataviz\UI\ChartYAxisItemTitle $value) {
+    public function title($value) {
         return $this->setProperty('title', $value);
     }
 

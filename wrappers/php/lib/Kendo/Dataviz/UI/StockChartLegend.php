@@ -16,19 +16,19 @@ class StockChartLegend extends \Kendo\SerializableObject {
 
     /**
     * The border of the legend.
-    * @param \Kendo\Dataviz\UI\StockChartLegendBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartLegendBorder $value
     * @return \Kendo\Dataviz\UI\StockChartLegend
     */
-    public function border(\Kendo\Dataviz\UI\StockChartLegendBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
     /**
     * Configures the legend labels.
-    * @param \Kendo\Dataviz\UI\StockChartLegendLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartLegendLabels $value
     * @return \Kendo\Dataviz\UI\StockChartLegend
     */
-    public function labels(\Kendo\Dataviz\UI\StockChartLegendLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 

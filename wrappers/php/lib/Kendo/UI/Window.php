@@ -45,10 +45,10 @@ and "Maximize".
     /**
     * A collection of {Animation} objects, used to change default animations. A value of false
 will disable all animations in the widget.
-    * @param \Kendo\UI\WindowAnimation $value
+    * @param mixed|\Kendo\UI\WindowAnimation $value
     * @return \Kendo\UI\Window
     */
-    public function animation(\Kendo\UI\WindowAnimation $value) {
+    public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 

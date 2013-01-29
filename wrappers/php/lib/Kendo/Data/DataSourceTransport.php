@@ -7,7 +7,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
 
     /**
     * Options for remote create data operation, or the URL of the remote service.
-    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportCreate $value
+    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportCreate|mixed $value
     * @return \Kendo\Data\DataSourceTransport
     */
     public function create($value) {
@@ -16,7 +16,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
 
     /**
     * Options for remote destroy data operation, or the URL of the remote service.
-    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportDestroy $value
+    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportDestroy|mixed $value
     * @return \Kendo\Data\DataSourceTransport
     */
     public function destroy($value) {
@@ -39,7 +39,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
 
     /**
     * Options for remote read data operation, or the URL of the remote service.
-    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportRead $value
+    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportRead|mixed $value
     * @return \Kendo\Data\DataSourceTransport
     */
     public function read($value) {
@@ -48,7 +48,7 @@ class DataSourceTransport extends \Kendo\SerializableObject {
 
     /**
     * Options for remote update data operation, or the URL of the remote service.
-    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportUpdate $value
+    * @param string|\kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportUpdate|mixed $value
     * @return \Kendo\Data\DataSourceTransport
     */
     public function update($value) {

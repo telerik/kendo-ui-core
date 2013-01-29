@@ -7,28 +7,28 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 
     /**
     * Configures the axis line.
-    * @param \Kendo\Dataviz\UI\LinearGaugeScaleLine $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleLine $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
-    public function line(\Kendo\Dataviz\UI\LinearGaugeScaleLine $value) {
+    public function line($value) {
         return $this->setProperty('line', $value);
     }
 
     /**
     * Configures the scale labels.
-    * @param \Kendo\Dataviz\UI\LinearGaugeScaleLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
-    public function labels(\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
     /**
     * Configures the scale major ticks.
-    * @param \Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
-    public function majorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value) {
+    public function majorTicks($value) {
         return $this->setProperty('majorTicks', $value);
     }
 
@@ -61,10 +61,10 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 
     /**
     * Configures the scale minor ticks.
-    * @param \Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
-    public function minorTicks(\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value) {
+    public function minorTicks($value) {
         return $this->setProperty('minorTicks', $value);
     }
 

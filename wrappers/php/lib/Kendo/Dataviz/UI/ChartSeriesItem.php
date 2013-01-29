@@ -88,10 +88,10 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
 
     /**
     * Configures the appearance of highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemHighlight $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemHighlight $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function highlight(\Kendo\Dataviz\UI\ChartSeriesItemHighlight $value) {
+    public function highlight($value) {
         return $this->setProperty('highlight', $value);
     }
 
@@ -116,10 +116,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The border of the points.** Applicable to bar, column, bubble, donut, pie, ohlc and candlestick series **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemBorder $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function border(\Kendo\Dataviz\UI\ChartSeriesItemBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -161,10 +161,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The label connectors options.** Applicable to donut and pie series. **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemConnectors $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemConnectors $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function connectors(\Kendo\Dataviz\UI\ChartSeriesItemConnectors $value) {
+    public function connectors($value) {
         return $this->setProperty('connectors', $value);
     }
 
@@ -197,16 +197,16 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Configures the series data labels.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemLabels $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function labels(\Kendo\Dataviz\UI\ChartSeriesItemLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
     /**
     * Line options.** Applicable to area, candlestick and ohlc series. **
-    * @param string|\Kendo\Dataviz\UI\ChartSeriesItemLine $value
+    * @param string|\Kendo\Dataviz\UI\ChartSeriesItemLine|mixed $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
     public function line($value) {
@@ -233,10 +233,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Marker options.** Applicable to area, line, scatter and scatterLine series **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemMarkers $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemMarkers $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function markers(\Kendo\Dataviz\UI\ChartSeriesItemMarkers $value) {
+    public function markers($value) {
         return $this->setProperty('markers', $value);
     }
 
@@ -269,10 +269,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The settings for negative values.** Applicable only to bubble series. **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemNegativeValues $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function negativeValues(\Kendo\Dataviz\UI\ChartSeriesItemNegativeValues $value) {
+    public function negativeValues($value) {
         return $this->setProperty('negativeValues', $value);
     }
 
@@ -296,10 +296,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The effects overlay.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemOverlay $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemOverlay $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function overlay(\Kendo\Dataviz\UI\ChartSeriesItemOverlay $value) {
+    public function overlay($value) {
         return $this->setProperty('overlay', $value);
     }
 
@@ -361,10 +361,10 @@ If not specified, the available space is split evenly between the series.Availab
 
     /**
     * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemTooltip $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemTooltip $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function tooltip(\Kendo\Dataviz\UI\ChartSeriesItemTooltip $value) {
+    public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
     }
 

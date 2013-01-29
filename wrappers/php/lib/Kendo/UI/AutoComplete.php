@@ -14,10 +14,10 @@ class AutoComplete extends \Kendo\UI\Widget {
 
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
-    * @param \Kendo\UI\AutoCompleteAnimation $value
+    * @param mixed|\Kendo\UI\AutoCompleteAnimation $value
     * @return \Kendo\UI\AutoComplete
     */
-    public function animation(\Kendo\UI\AutoCompleteAnimation $value) {
+    public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 

@@ -12,10 +12,10 @@ class Upload extends \Kendo\UI\Widget {
     * Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the
 async mode help topic
 for more details.
-    * @param \Kendo\UI\UploadAsync $value
+    * @param mixed|\Kendo\UI\UploadAsync $value
     * @return \Kendo\UI\Upload
     */
-    public function async(\Kendo\UI\UploadAsync $value) {
+    public function async($value) {
         return $this->setProperty('async', $value);
     }
 
@@ -31,10 +31,10 @@ Upload may be re-enabled via enable().
 
     /**
     * Sets the strings rendered by the Upload.
-    * @param \Kendo\UI\UploadLocalization $value
+    * @param mixed|\Kendo\UI\UploadLocalization $value
     * @return \Kendo\UI\Upload
     */
-    public function localization(\Kendo\UI\UploadLocalization $value) {
+    public function localization($value) {
         return $this->setProperty('localization', $value);
     }
 

@@ -16,10 +16,10 @@ class StockChartTooltip extends \Kendo\SerializableObject {
 
     /**
     * The border configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartTooltipBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartTooltipBorder $value
     * @return \Kendo\Dataviz\UI\StockChartTooltip
     */
-    public function border(\Kendo\Dataviz\UI\StockChartTooltipBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

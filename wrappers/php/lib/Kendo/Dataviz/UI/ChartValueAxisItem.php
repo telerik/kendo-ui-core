@@ -26,38 +26,38 @@ Individual color settings for line and labels take priority. Any valid CSS color
 
     /**
     * Configures the axis labels.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemLabels $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function labels(\Kendo\Dataviz\UI\ChartValueAxisItemLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
     /**
     * Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemLine $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemLine $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function line(\Kendo\Dataviz\UI\ChartValueAxisItemLine $value) {
+    public function line($value) {
         return $this->setProperty('line', $value);
     }
 
     /**
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemMajorGridLines $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemMajorGridLines $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function majorGridLines(\Kendo\Dataviz\UI\ChartValueAxisItemMajorGridLines $value) {
+    public function majorGridLines($value) {
         return $this->setProperty('majorGridLines', $value);
     }
 
     /**
     * The major ticks of the axis.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function majorTicks(\Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks $value) {
+    public function majorTicks($value) {
         return $this->setProperty('majorTicks', $value);
     }
 
@@ -92,19 +92,19 @@ This is often used in combination with the max configuration option.
 
     /**
     * Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemMinorGridLines $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemMinorGridLines $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function minorGridLines(\Kendo\Dataviz\UI\ChartValueAxisItemMinorGridLines $value) {
+    public function minorGridLines($value) {
         return $this->setProperty('minorGridLines', $value);
     }
 
     /**
     * The minor ticks of the axis.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function minorTicks(\Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks $value) {
+    public function minorTicks($value) {
         return $this->setProperty('minorTicks', $value);
     }
 
@@ -167,10 +167,10 @@ values increase from right to left and from top to bottom.
 
     /**
     * The title of the value axis.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemTitle $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItemTitle $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
-    public function title(\Kendo\Dataviz\UI\ChartValueAxisItemTitle $value) {
+    public function title($value) {
         return $this->setProperty('title', $value);
     }
 

@@ -16,10 +16,10 @@ class ChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The border of the labels.
-    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemLabelsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItemLabelsBorder $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLabels
     */
-    public function border(\Kendo\Dataviz\UI\ChartCategoryAxisItemLabelsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

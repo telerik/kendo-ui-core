@@ -11,10 +11,10 @@ class Menu extends \Kendo\UI\Widget {
     /**
     * A collection of Animation objects, used to change default animations. A value of false will disable all animations in the widget.Available animations for the Menu are listed below.  Each animation has a reverse options which is used for the close effect by default, but can be over-ridden
 by setting the close animation.  Each animation also has a direction which can be set off the animation (i.e. slideIn:Down).
-    * @param \Kendo\UI\MenuAnimation $value
+    * @param mixed|\Kendo\UI\MenuAnimation $value
     * @return \Kendo\UI\Menu
     */
-    public function animation(\Kendo\UI\MenuAnimation $value) {
+    public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 

@@ -43,10 +43,10 @@ class StockChartPane extends \Kendo\SerializableObject {
 
     /**
     * The border of the pane.
-    * @param \Kendo\Dataviz\UI\StockChartPaneBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartPaneBorder $value
     * @return \Kendo\Dataviz\UI\StockChartPane
     */
-    public function border(\Kendo\Dataviz\UI\StockChartPaneBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -61,7 +61,7 @@ class StockChartPane extends \Kendo\SerializableObject {
 
     /**
     * The pane title text or configuration.
-    * @param string|\Kendo\Dataviz\UI\StockChartPaneTitle $value
+    * @param string|\Kendo\Dataviz\UI\StockChartPaneTitle|mixed $value
     * @return \Kendo\Dataviz\UI\StockChartPane
     */
     public function title($value) {

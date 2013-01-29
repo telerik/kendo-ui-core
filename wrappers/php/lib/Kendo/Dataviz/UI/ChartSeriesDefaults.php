@@ -46,10 +46,10 @@ The default options for all ohlc series. For more details see the series options
 
     /**
     * The border of the series.
-    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
-    public function border(\Kendo\Dataviz\UI\ChartSeriesDefaultsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -94,10 +94,10 @@ The default options for all donut series. For more details see the series option
 
     /**
     * Configures the series data labels.
-    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
-    public function labels(\Kendo\Dataviz\UI\ChartSeriesDefaultsLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
@@ -170,10 +170,10 @@ The default options for all scatterLine series. For more details see the series 
 
     /**
     * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
-    public function tooltip(\Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip $value) {
+    public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
     }
 

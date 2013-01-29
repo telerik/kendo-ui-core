@@ -7,10 +7,10 @@ class LinearGaugePointer extends \Kendo\SerializableObject {
 
     /**
     * The border of the pointer.
-    * @param \Kendo\Dataviz\UI\LinearGaugePointerBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugePointerBorder $value
     * @return \Kendo\Dataviz\UI\LinearGaugePointer
     */
-    public function border(\Kendo\Dataviz\UI\LinearGaugePointerBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -63,10 +63,10 @@ Any valid CSS color string will work here, including hex and rgb.
     /**
     * The element arround/under the pointer.
 (available only for 'barIndicator' shape)
-    * @param \Kendo\Dataviz\UI\LinearGaugePointerTrack $value
+    * @param mixed|\Kendo\Dataviz\UI\LinearGaugePointerTrack $value
     * @return \Kendo\Dataviz\UI\LinearGaugePointer
     */
-    public function track(\Kendo\Dataviz\UI\LinearGaugePointerTrack $value) {
+    public function track($value) {
         return $this->setProperty('track', $value);
     }
 

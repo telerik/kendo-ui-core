@@ -73,10 +73,10 @@ class Calendar extends \Kendo\UI\Widget {
 
     /**
     * Templates for the cells rendered in the "month" view.
-    * @param \Kendo\UI\CalendarMonth $value
+    * @param mixed|\Kendo\UI\CalendarMonth $value
     * @return \Kendo\UI\Calendar
     */
-    public function month(\Kendo\UI\CalendarMonth $value) {
+    public function month($value) {
         return $this->setProperty('month', $value);
     }
 

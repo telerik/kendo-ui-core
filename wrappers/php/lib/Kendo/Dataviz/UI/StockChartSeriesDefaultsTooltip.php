@@ -16,10 +16,10 @@ class StockChartSeriesDefaultsTooltip extends \Kendo\SerializableObject {
 
     /**
     * The border configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip
     */
-    public function border(\Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

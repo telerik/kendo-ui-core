@@ -16,10 +16,10 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The border of the labels.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
-    public function border(\Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

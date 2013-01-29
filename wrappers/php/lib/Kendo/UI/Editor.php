@@ -46,10 +46,10 @@ class Editor extends \Kendo\UI\Widget {
 
     /**
     * Configuration for image browser dialog.
-    * @param \Kendo\UI\EditorImagebrowser $value
+    * @param mixed|\Kendo\UI\EditorImagebrowser $value
     * @return \Kendo\UI\Editor
     */
-    public function imagebrowser(\Kendo\UI\EditorImagebrowser $value) {
+    public function imagebrowser($value) {
         return $this->setProperty('imagebrowser', $value);
     }
 

@@ -29,10 +29,10 @@ class Chart extends \Kendo\UI\Widget {
     /**
     * The chart area configuration options.
 This is the entire visible area of the chart.
-    * @param \Kendo\Dataviz\UI\ChartArea $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartArea $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function chartArea(\Kendo\Dataviz\UI\ChartArea $value) {
+    public function chartArea($value) {
         return $this->setProperty('chartArea', $value);
     }
 
@@ -56,10 +56,10 @@ This is the entire visible area of the chart.
 
     /**
     * The chart legend configuration options.
-    * @param \Kendo\Dataviz\UI\ChartLegend $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartLegend $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function legend(\Kendo\Dataviz\UI\ChartLegend $value) {
+    public function legend($value) {
         return $this->setProperty('legend', $value);
     }
 
@@ -74,10 +74,10 @@ This is the entire visible area of the chart.
 
     /**
     * The plot area configuration options. This is the area containing the plotted series.
-    * @param \Kendo\Dataviz\UI\ChartPlotArea $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartPlotArea $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function plotArea(\Kendo\Dataviz\UI\ChartPlotArea $value) {
+    public function plotArea($value) {
         return $this->setProperty('plotArea', $value);
     }
 
@@ -101,10 +101,10 @@ This is the entire visible area of the chart.
 
     /**
     * Default values for each series.
-    * @param \Kendo\Dataviz\UI\ChartSeriesDefaults $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesDefaults $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function seriesDefaults(\Kendo\Dataviz\UI\ChartSeriesDefaults $value) {
+    public function seriesDefaults($value) {
         return $this->setProperty('seriesDefaults', $value);
     }
 
@@ -119,19 +119,19 @@ This is the entire visible area of the chart.
 
     /**
     * The chart title configuration options or text.
-    * @param \Kendo\Dataviz\UI\ChartTitle $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartTitle $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function title(\Kendo\Dataviz\UI\ChartTitle $value) {
+    public function title($value) {
         return $this->setProperty('title', $value);
     }
 
     /**
     * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\ChartTooltip $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartTooltip $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function tooltip(\Kendo\Dataviz\UI\ChartTooltip $value) {
+    public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
     }
 

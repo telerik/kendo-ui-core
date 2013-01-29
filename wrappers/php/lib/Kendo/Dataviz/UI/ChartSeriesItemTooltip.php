@@ -16,10 +16,10 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
 
     /**
     * The border configuration options.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemTooltipBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemTooltipBorder $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
-    public function border(\Kendo\Dataviz\UI\ChartSeriesItemTooltipBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 

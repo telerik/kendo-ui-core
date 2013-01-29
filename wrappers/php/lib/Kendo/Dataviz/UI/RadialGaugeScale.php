@@ -17,19 +17,19 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Configures the scale labels.
-    * @param \Kendo\Dataviz\UI\RadialGaugeScaleLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleLabels $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
-    public function labels(\Kendo\Dataviz\UI\RadialGaugeScaleLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
     /**
     * Configures the scale major ticks.
-    * @param \Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
-    public function majorTicks(\Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks $value) {
+    public function majorTicks($value) {
         return $this->setProperty('majorTicks', $value);
     }
 
@@ -62,10 +62,10 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Configures the scale minor ticks.
-    * @param \Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
-    public function minorTicks(\Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks $value) {
+    public function minorTicks($value) {
         return $this->setProperty('minorTicks', $value);
     }
 

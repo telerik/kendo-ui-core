@@ -16,7 +16,7 @@ class GridColumn extends \Kendo\SerializableObject {
 
     /**
     * Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".
-    * @param string|\Kendo\UI\GridColumnCommand $value
+    * @param string|\Kendo\UI\GridColumnCommand|mixed $value
     * @return \Kendo\UI\GridColumn
     */
     public function command($value) {
@@ -57,7 +57,7 @@ class GridColumn extends \Kendo\SerializableObject {
 
     /**
     * Specifies whether given column is filterable.
-    * @param boolean|\Kendo\UI\GridColumnFilterable $value
+    * @param boolean|\Kendo\UI\GridColumnFilterable|mixed $value
     * @return \Kendo\UI\GridColumn
     */
     public function filterable($value) {

@@ -70,10 +70,10 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
 
     /**
     * Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemHighlight $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemHighlight $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
-    public function highlight(\Kendo\Dataviz\UI\StockChartSeriesItemHighlight $value) {
+    public function highlight($value) {
         return $this->setProperty('highlight', $value);
     }
 
@@ -98,10 +98,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The border of the points.** Applicable to column, ohlc and candlestick series **
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemBorder $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
-    public function border(\Kendo\Dataviz\UI\StockChartSeriesItemBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -161,16 +161,16 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Configures the series data labels.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemLabels $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
-    public function labels(\Kendo\Dataviz\UI\StockChartSeriesItemLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
     /**
     * Line options.** Applicable to area, candlestick and ohlc series. **
-    * @param string|\Kendo\Dataviz\UI\StockChartSeriesItemLine $value
+    * @param string|\Kendo\Dataviz\UI\StockChartSeriesItemLine|mixed $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
     public function line($value) {
@@ -188,10 +188,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Marker options.** Applicable for area and line series. **
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemMarkers $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemMarkers $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
-    public function markers(\Kendo\Dataviz\UI\StockChartSeriesItemMarkers $value) {
+    public function markers($value) {
         return $this->setProperty('markers', $value);
     }
 
@@ -224,10 +224,10 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The effects overlay.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemOverlay $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemOverlay $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
-    public function overlay(\Kendo\Dataviz\UI\StockChartSeriesItemOverlay $value) {
+    public function overlay($value) {
         return $this->setProperty('overlay', $value);
     }
 
@@ -252,10 +252,10 @@ Available for column series.
 
     /**
     * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemTooltip $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemTooltip $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
-    public function tooltip(\Kendo\Dataviz\UI\StockChartSeriesItemTooltip $value) {
+    public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
     }
 

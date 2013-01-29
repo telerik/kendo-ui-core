@@ -10,10 +10,10 @@ class DropDownList extends \Kendo\UI\Widget {
 
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
-    * @param \Kendo\UI\DropDownListAnimation $value
+    * @param mixed|\Kendo\UI\DropDownListAnimation $value
     * @return \Kendo\UI\DropDownList
     */
-    public function animation(\Kendo\UI\DropDownListAnimation $value) {
+    public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 

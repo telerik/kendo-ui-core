@@ -11,10 +11,10 @@ class DateTimePicker extends \Kendo\UI\Widget {
     /**
     * The animation(s) used for opening and/or closing the pop-ups. Setting this value to false
 will disable the animation(s).
-    * @param \Kendo\UI\DateTimePickerAnimation $value
+    * @param mixed|\Kendo\UI\DateTimePickerAnimation $value
     * @return \Kendo\UI\DateTimePicker
     */
-    public function animation(\Kendo\UI\DateTimePickerAnimation $value) {
+    public function animation($value) {
         return $this->setProperty('animation', $value);
     }
 
@@ -93,10 +93,10 @@ settings are available for the depth value:
 
     /**
     * Templates for the cells rendered in the calendar "month" view.
-    * @param \Kendo\UI\DateTimePickerMonth $value
+    * @param mixed|\Kendo\UI\DateTimePickerMonth $value
     * @return \Kendo\UI\DateTimePicker
     */
-    public function month(\Kendo\UI\DateTimePickerMonth $value) {
+    public function month($value) {
         return $this->setProperty('month', $value);
     }
 

@@ -25,28 +25,28 @@ class EditorImagebrowser extends \Kendo\SerializableObject {
 
     /**
     * Specifies the settings for loading and saving data.
-    * @param \Kendo\UI\EditorImagebrowserTransport $value
+    * @param mixed|\Kendo\UI\EditorImagebrowserTransport $value
     * @return \Kendo\UI\EditorImagebrowser
     */
-    public function transport(\Kendo\UI\EditorImagebrowserTransport $value) {
+    public function transport($value) {
         return $this->setProperty('transport', $value);
     }
 
     /**
     * Set the object responsible for describing the image raw data format.
-    * @param \Kendo\UI\EditorImagebrowserSchema $value
+    * @param mixed|\Kendo\UI\EditorImagebrowserSchema $value
     * @return \Kendo\UI\EditorImagebrowser
     */
-    public function schema(\Kendo\UI\EditorImagebrowserSchema $value) {
+    public function schema($value) {
         return $this->setProperty('schema', $value);
     }
 
     /**
     * Defines texts shown within the pager.
-    * @param \Kendo\UI\EditorImagebrowserMessages $value
+    * @param mixed|\Kendo\UI\EditorImagebrowserMessages $value
     * @return \Kendo\UI\EditorImagebrowser
     */
-    public function messages(\Kendo\UI\EditorImagebrowserMessages $value) {
+    public function messages($value) {
         return $this->setProperty('messages', $value);
     }
 

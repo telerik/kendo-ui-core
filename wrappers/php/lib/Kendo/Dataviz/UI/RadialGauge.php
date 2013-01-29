@@ -11,19 +11,19 @@ class RadialGauge extends \Kendo\UI\Widget {
     /**
     * The gauge area configuration options.
 This is the entire visible area of the gauge.
-    * @param \Kendo\Dataviz\UI\RadialGaugeGaugeArea $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeGaugeArea $value
     * @return \Kendo\Dataviz\UI\RadialGauge
     */
-    public function gaugeArea(\Kendo\Dataviz\UI\RadialGaugeGaugeArea $value) {
+    public function gaugeArea($value) {
         return $this->setProperty('gaugeArea', $value);
     }
 
     /**
     * The pointer configuration options.
-    * @param \Kendo\Dataviz\UI\RadialGaugePointer $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugePointer $value
     * @return \Kendo\Dataviz\UI\RadialGauge
     */
-    public function pointer(\Kendo\Dataviz\UI\RadialGaugePointer $value) {
+    public function pointer($value) {
         return $this->setProperty('pointer', $value);
     }
 
@@ -47,10 +47,10 @@ This is the entire visible area of the gauge.
 
     /**
     * Configures the scale.
-    * @param \Kendo\Dataviz\UI\RadialGaugeScale $value
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScale $value
     * @return \Kendo\Dataviz\UI\RadialGauge
     */
-    public function scale(\Kendo\Dataviz\UI\RadialGaugeScale $value) {
+    public function scale($value) {
         return $this->setProperty('scale', $value);
     }
 

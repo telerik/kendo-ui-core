@@ -37,10 +37,10 @@ The default options for all ohlc series. For more details see the series options
 
     /**
     * The border of the series.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsBorder $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaultsBorder $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaults
     */
-    public function border(\Kendo\Dataviz\UI\StockChartSeriesDefaultsBorder $value) {
+    public function border($value) {
         return $this->setProperty('border', $value);
     }
 
@@ -65,10 +65,10 @@ The default options for all column series. For more details see the series optio
 
     /**
     * Configures the series data labels.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsLabels $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaultsLabels $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaults
     */
-    public function labels(\Kendo\Dataviz\UI\StockChartSeriesDefaultsLabels $value) {
+    public function labels($value) {
         return $this->setProperty('labels', $value);
     }
 
@@ -121,10 +121,10 @@ The default options for all pie series. For more details see the series options.
 
     /**
     * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip $value
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaults
     */
-    public function tooltip(\Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip $value) {
+    public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
     }
 
