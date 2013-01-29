@@ -73,9 +73,9 @@ class MenuItem extends \Kendo\SerializableObject {
     }
     /**
     * Adds \Kendo\UI\MenuItem.
-    * @param \Kendo\UI\MenuItem $value
+    * @param mixed|\Kendo\UI\MenuItem $value
     * @return \Kendo\UI\Menu    */
-    public function addItem(\Kendo\UI\MenuItem $value) {
+    public function addItem($value) {
         return $this->add('items', $value);
     }
 //<< Properties

@@ -38,10 +38,10 @@ It is used as a default field for all date axes, including the navigator pane.Th
 
     /**
     * Adds StockChartCategoryAxisItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItem,... $value one or more StockChartCategoryAxisItem to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItem,... $value one or more StockChartCategoryAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function addCategoryAxisItem(\Kendo\Dataviz\UI\StockChartCategoryAxisItem $value) {
+    public function addCategoryAxisItem($value) {
         return $this->add('categoryAxis', func_get_args());
     }
 
@@ -84,10 +84,10 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartPane to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartPane,... $value one or more StockChartPane to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartPane,... $value one or more StockChartPane to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function addPane(\Kendo\Dataviz\UI\StockChartPane $value) {
+    public function addPane($value) {
         return $this->add('panes', func_get_args());
     }
 
@@ -102,10 +102,10 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartSeriesItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItem,... $value one or more StockChartSeriesItem to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItem,... $value one or more StockChartSeriesItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function addSeriesItem(\Kendo\Dataviz\UI\StockChartSeriesItem $value) {
+    public function addSeriesItem($value) {
         return $this->add('series', func_get_args());
     }
 
@@ -165,28 +165,28 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartValueAxisItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartValueAxisItem,... $value one or more StockChartValueAxisItem to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartValueAxisItem,... $value one or more StockChartValueAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function addValueAxisItem(\Kendo\Dataviz\UI\StockChartValueAxisItem $value) {
+    public function addValueAxisItem($value) {
         return $this->add('valueAxis', func_get_args());
     }
 
     /**
     * Adds StockChartXAxisItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartXAxisItem,... $value one or more StockChartXAxisItem to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartXAxisItem,... $value one or more StockChartXAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function addXAxisItem(\Kendo\Dataviz\UI\StockChartXAxisItem $value) {
+    public function addXAxisItem($value) {
         return $this->add('xAxis', func_get_args());
     }
 
     /**
     * Adds StockChartYAxisItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItem,... $value one or more StockChartYAxisItem to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItem,... $value one or more StockChartYAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
-    public function addYAxisItem(\Kendo\Dataviz\UI\StockChartYAxisItem $value) {
+    public function addYAxisItem($value) {
         return $this->add('yAxis', func_get_args());
     }
 

@@ -78,10 +78,10 @@ its parent horizontally. You can also switch off the screen boundary detection c
 
     /**
     * Adds MenuItem to the Menu.
-    * @param \Kendo\UI\MenuItem,... $value one or more MenuItem to add.
+    * @param mixed|\Kendo\UI\MenuItem,... $value one or more MenuItem to add.
     * @return \Kendo\UI\Menu
     */
-    public function addItem(\Kendo\UI\MenuItem $value) {
+    public function addItem($value) {
         return $this->add('items', func_get_args());
     }
 

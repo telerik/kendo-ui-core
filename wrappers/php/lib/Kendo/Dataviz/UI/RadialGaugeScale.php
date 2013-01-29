@@ -80,10 +80,10 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Adds RadialGaugeScaleRange to the RadialGaugeScale.
-    * @param \Kendo\Dataviz\UI\RadialGaugeScaleRange,... $value one or more RadialGaugeScaleRange to add.
+    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleRange,... $value one or more RadialGaugeScaleRange to add.
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
-    public function addRange(\Kendo\Dataviz\UI\RadialGaugeScaleRange $value) {
+    public function addRange($value) {
         return $this->add('ranges', func_get_args());
     }
 

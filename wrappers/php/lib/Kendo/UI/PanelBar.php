@@ -46,10 +46,10 @@ are available:
 
     /**
     * Adds PanelBarItem to the PanelBar.
-    * @param \Kendo\UI\PanelBarItem,... $value one or more PanelBarItem to add.
+    * @param mixed|\Kendo\UI\PanelBarItem,... $value one or more PanelBarItem to add.
     * @return \Kendo\UI\PanelBar
     */
-    public function addItem(\Kendo\UI\PanelBarItem $value) {
+    public function addItem($value) {
         return $this->add('items', func_get_args());
     }
 

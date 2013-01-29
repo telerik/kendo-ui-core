@@ -104,10 +104,10 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <% if recursive %>
     /**
     * Adds <%= php_type %>.
-    * @param <%= php_type %> $value
+    * @param mixed|<%= php_type %> $value
     * @return <%= owner.owner.php_type %>
     */
-    public function addItem(<%= php_type %> $value) {
+    public function addItem($value) {
         return $this->add('items', $value);
     }
 <% end %><% end %>
@@ -249,10 +249,10 @@ EVENT_SETTER = ERB.new(%{
 ARRAY_SETTER = ERB.new(%{
     /**
     * Adds <%= item.php_class %> to the <%= owner.php_class %>.
-    * @param <%= item.php_type %>,... $value one or more <%= item.php_class %> to add.
+    * @param mixed|<%= item.php_type %>,... $value one or more <%= item.php_class %> to add.
     * @return <%= owner.php_type %>
     */
-    public function add<%= item.name.pascalize %>(<%= item.php_type %> $value) {
+    public function add<%= item.name.pascalize %>($value) {
         return $this->add('<%= name %>', func_get_args());
     }
 })

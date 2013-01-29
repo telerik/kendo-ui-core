@@ -45,10 +45,10 @@ It is used as a default field for the navigator axis.The data item field value m
 
     /**
     * Adds StockChartNavigatorSeriesItem to the StockChartNavigator.
-    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem,... $value one or more StockChartNavigatorSeriesItem to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItem,... $value one or more StockChartNavigatorSeriesItem to add.
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
-    public function addSeriesItem(\Kendo\Dataviz\UI\StockChartNavigatorSeriesItem $value) {
+    public function addSeriesItem($value) {
         return $this->add('series', func_get_args());
     }
 

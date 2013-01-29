@@ -88,10 +88,10 @@ tab.
 
     /**
     * Adds TabStripItem to the TabStrip.
-    * @param \Kendo\UI\TabStripItem,... $value one or more TabStripItem to add.
+    * @param mixed|\Kendo\UI\TabStripItem,... $value one or more TabStripItem to add.
     * @return \Kendo\UI\TabStrip
     */
-    public function addItem(\Kendo\UI\TabStripItem $value) {
+    public function addItem($value) {
         return $this->add('items', func_get_args());
     }
 

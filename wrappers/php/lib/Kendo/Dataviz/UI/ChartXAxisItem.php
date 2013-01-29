@@ -151,10 +151,10 @@ The axis will be rendered in the first (default) pane if not set.
 
     /**
     * Adds ChartXAxisItemPlotBand to the ChartXAxisItem.
-    * @param \Kendo\Dataviz\UI\ChartXAxisItemPlotBand,... $value one or more ChartXAxisItemPlotBand to add.
+    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemPlotBand,... $value one or more ChartXAxisItemPlotBand to add.
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
-    public function addPlotBand(\Kendo\Dataviz\UI\ChartXAxisItemPlotBand $value) {
+    public function addPlotBand($value) {
         return $this->add('plotBands', func_get_args());
     }
 

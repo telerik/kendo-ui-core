@@ -129,10 +129,10 @@ The axis will be rendered in the first (default) pane if not set.
 
     /**
     * Adds StockChartCategoryAxisItemPlotBand to the StockChartCategoryAxisItem.
-    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand,... $value one or more StockChartCategoryAxisItemPlotBand to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand,... $value one or more StockChartCategoryAxisItemPlotBand to add.
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
-    public function addPlotBand(\Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand $value) {
+    public function addPlotBand($value) {
         return $this->add('plotBands', func_get_args());
     }
 

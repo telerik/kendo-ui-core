@@ -82,9 +82,9 @@ class TreeViewItem extends \Kendo\SerializableObject {
     }
     /**
     * Adds \Kendo\UI\TreeViewItem.
-    * @param \Kendo\UI\TreeViewItem $value
+    * @param mixed|\Kendo\UI\TreeViewItem $value
     * @return \Kendo\UI\TreeView    */
-    public function addItem(\Kendo\UI\TreeViewItem $value) {
+    public function addItem($value) {
         return $this->add('items', $value);
     }
 //<< Properties

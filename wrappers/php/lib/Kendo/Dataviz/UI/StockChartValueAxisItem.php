@@ -148,10 +148,10 @@ The axis will be rendered in the first (default) pane if not set.
 
     /**
     * Adds StockChartValueAxisItemPlotBand to the StockChartValueAxisItem.
-    * @param \Kendo\Dataviz\UI\StockChartValueAxisItemPlotBand,... $value one or more StockChartValueAxisItemPlotBand to add.
+    * @param mixed|\Kendo\Dataviz\UI\StockChartValueAxisItemPlotBand,... $value one or more StockChartValueAxisItemPlotBand to add.
     * @return \Kendo\Dataviz\UI\StockChartValueAxisItem
     */
-    public function addPlotBand(\Kendo\Dataviz\UI\StockChartValueAxisItemPlotBand $value) {
+    public function addPlotBand($value) {
         return $this->add('plotBands', func_get_args());
     }
 

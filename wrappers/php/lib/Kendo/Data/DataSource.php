@@ -7,10 +7,10 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceAggregateItem to the DataSource.
-    * @param \Kendo\Data\DataSourceAggregateItem,... $value one or more DataSourceAggregateItem to add.
+    * @param mixed|\Kendo\Data\DataSourceAggregateItem,... $value one or more DataSourceAggregateItem to add.
     * @return \Kendo\Data\DataSource
     */
-    public function addAggregateItem(\Kendo\Data\DataSourceAggregateItem $value) {
+    public function addAggregateItem($value) {
         return $this->add('aggregate', func_get_args());
     }
 
@@ -43,19 +43,19 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceFilterItem to the DataSource.
-    * @param \Kendo\Data\DataSourceFilterItem,... $value one or more DataSourceFilterItem to add.
+    * @param mixed|\Kendo\Data\DataSourceFilterItem,... $value one or more DataSourceFilterItem to add.
     * @return \Kendo\Data\DataSource
     */
-    public function addFilterItem(\Kendo\Data\DataSourceFilterItem $value) {
+    public function addFilterItem($value) {
         return $this->add('filter', func_get_args());
     }
 
     /**
     * Adds DataSourceGroupItem to the DataSource.
-    * @param \Kendo\Data\DataSourceGroupItem,... $value one or more DataSourceGroupItem to add.
+    * @param mixed|\Kendo\Data\DataSourceGroupItem,... $value one or more DataSourceGroupItem to add.
     * @return \Kendo\Data\DataSource
     */
-    public function addGroupItem(\Kendo\Data\DataSourceGroupItem $value) {
+    public function addGroupItem($value) {
         return $this->add('group', func_get_args());
     }
 
@@ -134,10 +134,10 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Adds DataSourceSortItem to the DataSource.
-    * @param \Kendo\Data\DataSourceSortItem,... $value one or more DataSourceSortItem to add.
+    * @param mixed|\Kendo\Data\DataSourceSortItem,... $value one or more DataSourceSortItem to add.
     * @return \Kendo\Data\DataSource
     */
-    public function addSortItem(\Kendo\Data\DataSourceSortItem $value) {
+    public function addSortItem($value) {
         return $this->add('sort', func_get_args());
     }
 

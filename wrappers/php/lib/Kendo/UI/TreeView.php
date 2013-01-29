@@ -109,10 +109,10 @@ HierarchicalDataSource instance), the default value of this option is false.
 
     /**
     * Adds TreeViewItem to the TreeView.
-    * @param \Kendo\UI\TreeViewItem,... $value one or more TreeViewItem to add.
+    * @param mixed|\Kendo\UI\TreeViewItem,... $value one or more TreeViewItem to add.
     * @return \Kendo\UI\TreeView
     */
-    public function addItem(\Kendo\UI\TreeViewItem $value) {
+    public function addItem($value) {
         return $this->add('items', func_get_args());
     }
 
