@@ -805,7 +805,7 @@ kendo_module({
                         data = template(contentTemplate)(data || {});
                     }
 
-                    that.element.html(data);
+                    that.element.html(data).prop("scrollTop", 0);
 
                     that.trigger(REFRESH);
                 }, that)
