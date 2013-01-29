@@ -27,6 +27,14 @@ kendo_module({
 
     // Sparkline =============================================================
     var Sparkline = Chart.extend({
+        init: function(element, options) {
+            var chart = this;
+
+            Chart.fn.init.call(chart, element, options);
+
+            chart.element.addClass(CSS_PREFIX + "sparkline");
+        },
+
         options: {
             name: "Sparkline",
             axisDefaults: {
@@ -49,7 +57,7 @@ kendo_module({
             var chart = this,
                 model = Chart.fn._getModel.call(chart);
 
-            model.options.renderInline = true;
+            model.options.inline = true;
 
             return model;
         }

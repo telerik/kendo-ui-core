@@ -254,6 +254,11 @@
                     equals(element.tagName.toLowerCase(), "h1");
                 });
 
+                test("renders inline", function() {
+                    view = new dataviz.VMLView({ inline: true });
+                    ok(view.render().indexOf("span") > -1);
+                });
+
                 // ------------------------------------------------------------
                 module("VML View / Decorators", {
                     setup: function() {

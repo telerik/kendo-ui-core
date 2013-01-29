@@ -86,12 +86,14 @@ kendo_module({
 
             view.defsId = uniqueId();
             view.template = SVGView.template;
+            view.display = view.options.inline ? "inline" : "block";
+
             if (!view.template) {
                 view.template = SVGView.template = renderTemplate(
                     "<?xml version='1.0' ?>" +
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='#= d.options.width #px' height='#= d.options.height #px' " +
-                    "style='position: relative; display: " + (options.renderInline ? "inline" : "block") + ";'>" +
+                    "style='position: relative; display: #= d.display #;'>" +
                     "#= d.renderDefinitions() #" +
                     "#= d.renderContent() #</svg>"
                 );
@@ -100,8 +102,7 @@ kendo_module({
 
         options: {
             width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT,
-            idPrefix: ""
+            height: DEFAULT_HEIGHT
         },
 
         renderTo: function(container) {

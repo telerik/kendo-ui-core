@@ -83,12 +83,14 @@ kendo_module({
             }
 
             view.template = VMLView.template;
+            view.tagName = view.options.inline ? "span" : "div";
+
             if (!view.template) {
                 view.template = VMLView.template = renderTemplate(
-                    "<div style='width:#= d.options.width #px; " +
+                    "<#= d.tagName # style='width:#= d.options.width #px; " +
                     "height:#= d.options.height #px; " +
                     "position: relative;'>" +
-                    "#= d.renderContent() #</div>"
+                    "#= d.renderContent() #</#= d.tagName #>"
                 );
             }
         },

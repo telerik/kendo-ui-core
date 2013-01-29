@@ -13,16 +13,44 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <style>
+            .k-sparkline {
+                display: inline-block;
+                *display: inline;
+                zoom: 1;
+            }
+        </style>
     </head>
     <body>
         <p>Some sparklines <span id="sparkline"></span> and more text</p>
         <script>
+            var points = [];
+            for (var i = 0; i < 6 * Math.PI; i+=0.3) {
+                points.push(Math.round(Math.sin(i) * 1000));
+            };
+
             $(function() {
                 $("#sparkline").kendoSparkline({
                     series: [{
                         type: "line",
-                        data: [1, 2, 3]
-                    }]
+                        data: points,
+                        width: 1,
+                        markers: {
+                            visible: false
+                        }
+                    }],
+                    axisDefaults: {
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    valueAxis: {
+                        visible: false
+                    },
+                    categoryAxis: {
+                        visible: false
+                    },
+                    transitions: false
                 });
             });
         </script>

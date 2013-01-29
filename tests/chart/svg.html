@@ -311,6 +311,11 @@
                     container.remove();
                 });
 
+                test("renders inline", function() {
+                    view = new dataviz.SVGView({ inline: true });
+                    ok(view.render().indexOf("display: inline;") > -1);
+                });
+
                 // ------------------------------------------------------------
                 module("SVGView / Gradient fill", {
                     setup: function() {
