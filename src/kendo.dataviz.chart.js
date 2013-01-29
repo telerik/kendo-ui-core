@@ -6104,6 +6104,10 @@
                         axisCrossingValue: invertAxes ? categories.length : 0
                     }, axisOptions);
 
+                    if (!defined(axisOptions.justified)) {
+                        axisOptions.justified = plotArea.inJustified();
+                    }
+
                     if (plotArea.axisRequiresRounding(name, i)) {
                         axisOptions.justified = false;
                         axisOptions.roundToBaseUnit = true;
@@ -6138,6 +6142,21 @@
             } else {
                 plotArea.axisX = primaryAxis;
             }
+        },
+
+        inJustified: function() {
+            var plotArea = this,
+                series = plotArea.series,
+                i, currentSeries;
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                if (currentSeries.type !== AREA) {
+                    return false;
+                }
+            }
+
+            return true
         },
 
         createValueAxes: function(panes) {
