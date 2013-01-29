@@ -1,42 +1,54 @@
 <div id="example" class="k-content">
-    <div class="configuration k-widget k-header" style="width: 80px">
-        <span class="configHead">Gap and spacing</span>
-        <ul class="options">
-            <li>
-                <button id="getGap" class="k-button">Set gap</button>
-                <input id="gap" type="number" value="1.5" step="0.1" style="width: 60px;" />
-            </li>
-            <li>
-                <button id="getSpacing" class="k-button">Set spacing</button>
-                <input id="spacing" type="number" value="0.4" step="0.1" style="width: 60px;" />
-            </li>
-        </ul>
-    </div>
     <div class="chart-wrapper">
         <div id="chart"></div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Gap</span>
+            <ul class="options">
+                <li>
+                    <input id="gap" type="number" value="1.5" step="0.1" style="width: 60px;" />
+                    <button id="getGap" class="k-button">Set gap</button
+                </li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <span class="configHead">Spacing</span>
+            <ul class="options">
+                <li>
+                    <input id="spacing" type="number" value="0.4" step="0.1" style="width: 60px;" />
+                    <button id="getSpacing" class="k-button">Set spacing</button>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
 <script>    function createChart() {
         $("#chart").kendoChart({
             theme: $(document).data("kendoSkin") || "default",            title: {
-                text: "Internet Users"
+                text: "Site Visitors Stats /thousands/"
             },            legend: {
                 position: "bottom"
             },            seriesDefaults: {
                 type: "column"
             },            series: [{
-                name: "United States",                data: [67.96, 61.93, 75, 71, 78]
+                name: "Total Visits",
+                data: [56000, 63000, 74000, 91000, 117000, 138000]
             }, {
-                name: "World",                data: [15.7, 11, 20, 25, 36.6]
+                name: "Unique visitors",
+                data: [52000, 34000, 23000, 48000, 67000, 83000]
             }],            valueAxis: {
-                labels: {
-                    format: "{0}%"
+                line: {
+                    visible: false
                 }
             },            categoryAxis: {
-                categories: [2005, 2006, 2007, 2008, 2009]
+                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                majorGridLines: {
+                    visible: false
+                }
             },            tooltip: {
-                visible: true,                format: "{0}%"
+                visible: true,                format: "{0}"
             }
         });
     }
@@ -73,20 +85,7 @@
 </script>
 
 <style scoped>
-    .chart-wrapper {
-        margin: 0 0 0 20px;
-        width: 466px;
-        height: 434px;
-        background: url("../../content/shared/styles/chart-wrapper-small.png") transparent no-repeat 0 0;
-    }
-                
-    .chart-wrapper .k-chart {
-        height: 280px;
-        padding: 37px;
-        width: 390px;
-    }
-    
-    .configuration input {
-        float: right;
+    .chart-wrapper, .chart-wrapper .k-chart {
+        height: 300px;
     }
 </style>

@@ -33,7 +33,10 @@
                             name: "Wind"
                         }],
                         categoryAxis: {
-                            field: "year"
+                            field: "year",
+                            majorGridLines: {
+                                visible: false
+                            }
                         },
                         valueAxis: {
                             labels: {
@@ -41,12 +44,20 @@
                             },
                             majorUnit: 10000,
                             plotBands: [{
-                                from: 7500,
-                                to: 25000,
-                                color: "#000",
-                                opacity: 0.2
+                                from: 10000,
+                                to: 30000,
+                                color: "#c00",
+                                opacity: 0.3
+                            }, {
+                                from: 30000,
+                                to: 30500,
+                                color: "#c00",
+                                opacity: 0.8
                             }],
-                            max: 80000
+                            max: 70000,
+                            line: {
+                                visible: false
+                            }
                         },
                         tooltip: {
                             visible: true,

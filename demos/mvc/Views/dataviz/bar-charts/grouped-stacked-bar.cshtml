@@ -62,10 +62,16 @@
                         valueAxis: {
                             labels: {
                                 template: "#= kendo.format('{0:N0}', value / 1000) # M"
+                            },
+                            line: {
+                                visible: false
                             }
                         },
                         categoryAxis: {
-                            categories: [1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010]
+                            categories: [1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010],
+                            majorGridLines: {
+                                visible: false
+                            }
                         },
                         tooltip: {
                             visible: true,
