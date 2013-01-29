@@ -1,93 +1,91 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+require_once '../../lib/DataSourceResult.php';
+require_once '../../lib/Kendo/Autoload.php';
 
-    require_once '../../lib/DataSourceResult.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    header('Content-Type: application/json');
 
     $request = json_decode(file_get_contents('php://input'));
 
     $result = new DataSourceResult('sqlite:../../northwind.db');
 
-    header('Content-Type: application/json');
-
     echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
 
     exit;
 }
-?>
-<?php require_once '../../include/header.php' ?>
 
-<?php require_once '../../lib/Kendo/Autoload.php' ?>
-<?php
-    $transport = new \Kendo\Data\DataSourceTransport();
+require_once '../../include/header.php';
 
-    $read = new \Kendo\Data\DataSourceTransportRead();
+$transport = new \Kendo\Data\DataSourceTransport();
 
-    $read->url('remote-data.php')
-         ->contentType('application/json')
-         ->type('POST');
+$read = new \Kendo\Data\DataSourceTransportRead();
 
-    $transport->read($read)
-              ->parameterMap('function(data) {
-                  return kendo.stringify(data);
-              }');
+$read->url('remote-data.php')
+     ->contentType('application/json')
+     ->type('POST');
 
-    $model = new \Kendo\Data\DataSourceSchemaModel();
+$transport->read($read)
+          ->parameterMap('function(data) {
+              return kendo.stringify(data);
+          }');
 
-    $productNameField = new \Kendo\Data\DataSourceSchemaModelField();
-    $productNameField->field('ProductName')
-                     ->type('string');
+$model = new \Kendo\Data\DataSourceSchemaModel();
 
-    $unitPriceField = new \Kendo\Data\DataSourceSchemaModelField();
-    $unitPriceField->field('UnitPrice')
-                   ->type('number');
+$productNameField = new \Kendo\Data\DataSourceSchemaModelField();
+$productNameField->field('ProductName')
+                 ->type('string');
 
-    $unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField();
-    $unitsInStockField->field('UnitsInStock')
-                      ->type('number');
+$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField();
+$unitPriceField->field('UnitPrice')
+               ->type('number');
 
-    $model->addField($productNameField)
-          ->addField($unitPriceField)
-          ->addField($unitsInStockField);
+$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField();
+$unitsInStockField->field('UnitsInStock')
+                  ->type('number');
 
-    $schema = new \Kendo\Data\DataSourceSchema();
-    $schema->data('data')
-           ->model($model)
-           ->total('total');
+$model->addField($productNameField)
+      ->addField($unitPriceField)
+      ->addField($unitsInStockField);
 
-    $dataSource = new \Kendo\Data\DataSource();
+$schema = new \Kendo\Data\DataSourceSchema();
+$schema->data('data')
+       ->model($model)
+       ->total('total');
 
-    $dataSource->transport($transport)
-               ->pageSize(10)
-               ->schema($schema)
-               ->serverFiltering(true)
-               ->serverSorting(true)
-               ->serverPaging(true);
+$dataSource = new \Kendo\Data\DataSource();
 
-    $grid = new \Kendo\UI\Grid('grid');
+$dataSource->transport($transport)
+           ->pageSize(10)
+           ->schema($schema)
+           ->serverFiltering(true)
+           ->serverSorting(true)
+           ->serverPaging(true);
 
-    $productName = new \Kendo\UI\GridColumn();
-    $productName->field('ProductName')
-                ->title('Product Name');
+$grid = new \Kendo\UI\Grid('grid');
 
-    $unitPrice = new \Kendo\UI\GridColumn();
-    $unitPrice->field('UnitPrice')
-              ->format('{0:c}')
-              ->title('Unit Price');
+$productName = new \Kendo\UI\GridColumn();
+$productName->field('ProductName')
+            ->title('Product Name');
 
-    $unitsInStock = new \Kendo\UI\GridColumn();
-    $unitsInStock->field('UnitsInStock')
-              ->format('{0:c}')
-              ->title('Units In Stock');
+$unitPrice = new \Kendo\UI\GridColumn();
+$unitPrice->field('UnitPrice')
+          ->format('{0:c}')
+          ->title('Unit Price');
 
-    $grid->addColumn($productName)
-         ->addColumn($unitPrice)
-         ->addColumn($unitsInStock)
-         ->dataSource($dataSource)
-         ->sortable(true)
-         ->filterable(true)
-         ->pageable(true);
+$unitsInStock = new \Kendo\UI\GridColumn();
+$unitsInStock->field('UnitsInStock')
+          ->format('{0:c}')
+          ->title('Units In Stock');
 
-    echo $grid->render();
+$grid->addColumn($productName)
+     ->addColumn($unitPrice)
+     ->addColumn($unitsInStock)
+     ->dataSource($dataSource)
+     ->sortable(true)
+     ->filterable(true)
+     ->pageable(true);
+
+echo $grid->render();
 ?>
 
-<?php require_once '../../include/footer.php' ?>
+<?php require_once '../../include/footer.php'; ?>

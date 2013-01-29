@@ -1,20 +1,20 @@
-<?php require_once '../../include/header.php' ?>
-
-<?php require_once '../../lib/Kendo/Autoload.php' ?>
-
 <?php
-    $panelbar = new \Kendo\UI\PanelBar('panelbar');
 
-    $panelbar->attr('style', 'width: 300px')
-             ->expandMode('single');
+require_once '../../include/header.php';
+require_once '../../lib/Kendo/Autoload.php';
 
-    $teamMates = new \Kendo\UI\PanelBarItem();
+$panelbar = new \Kendo\UI\PanelBar('panelbar');
 
-    $teamMates->text('My Teammates')
-              ->expanded(true);
+$panelbar->attr('style', 'width: 300px')
+         ->expandMode('single');
 
-    $teamMates->startContent();
+$teamMates = new \Kendo\UI\PanelBarItem();
+
+$teamMates->text('My Teammates')
+          ->expanded(true)
+          ->startContent();
 ?>
+
 <div style="padding: 10px;">
     <div class="teamMate">
         <img src="../../content/web/panelbar/andrew.jpg" alt="Andrew Fuller">
@@ -34,44 +34,44 @@
 </div>
 
 <?php
-    $teamMates->endContent();
+$teamMates->endContent();
 
-    $panelbar->addItem($teamMates);
+$panelbar->addItem($teamMates);
 
-    $projects = new \Kendo\UI\PanelBarItem();
+$projects = new \Kendo\UI\PanelBarItem();
 
-    $projects->text('Projects')
-             ->addItem(new \Kendo\UI\PanelBarItem('New Business Plan'));
+$projects->text('Projects')
+         ->addItem(new \Kendo\UI\PanelBarItem('New Business Plan'));
 
-    $panelbar->addItem($projects);
+$panelbar->addItem($projects);
 
-    $forecasts = new \Kendo\UI\PanelBarItem();
+$forecasts = new \Kendo\UI\PanelBarItem();
 
-    $forecasts->text('Sales Forecasts')
-            ->addItem(new \Kendo\UI\PanelBarItem('Q1 Forecast'))
-            ->addItem(new \Kendo\UI\PanelBarItem('Q2 Forecast'))
-            ->addItem(new \Kendo\UI\PanelBarItem('Q3 Forecast'))
-            ->addItem(new \Kendo\UI\PanelBarItem('Q4 Forecast'));
+$forecasts->text('Sales Forecasts')
+        ->addItem(new \Kendo\UI\PanelBarItem('Q1 Forecast'))
+        ->addItem(new \Kendo\UI\PanelBarItem('Q2 Forecast'))
+        ->addItem(new \Kendo\UI\PanelBarItem('Q3 Forecast'))
+        ->addItem(new \Kendo\UI\PanelBarItem('Q4 Forecast'));
 
-    $projects->addItem($forecasts)
-             ->addItem(new \Kendo\UI\PanelBarItem('Sales Reports'));
+$projects->addItem($forecasts)
+         ->addItem(new \Kendo\UI\PanelBarItem('Sales Reports'));
 
-    $programs = new \Kendo\UI\PanelBarItem('Programs');
+$programs = new \Kendo\UI\PanelBarItem('Programs');
 
-    $programs->addItem(new \Kendo\UI\PanelBarItem('Monday'))
-             ->addItem(new \Kendo\UI\PanelBarItem('Tuesday'))
-             ->addItem(new \Kendo\UI\PanelBarItem('Wednesday'))
-             ->addItem(new \Kendo\UI\PanelBarItem('Thursday'))
-             ->addItem(new \Kendo\UI\PanelBarItem('Friday'));
+$programs->addItem(new \Kendo\UI\PanelBarItem('Monday'))
+         ->addItem(new \Kendo\UI\PanelBarItem('Tuesday'))
+         ->addItem(new \Kendo\UI\PanelBarItem('Wednesday'))
+         ->addItem(new \Kendo\UI\PanelBarItem('Thursday'))
+         ->addItem(new \Kendo\UI\PanelBarItem('Friday'));
 
-    $panelbar->addItem($programs);
+$panelbar->addItem($programs);
 
-    $communication = new \Kendo\UI\PanelBarItem();
+$communication = new \Kendo\UI\PanelBarItem();
 
-    $communication->text('Communication')
-                  ->enabled(false);
+$communication->text('Communication')
+              ->enabled(false);
 
-    $panelbar->addItem($communication);
+$panelbar->addItem($communication);
 ?>
 
 <div id="organizer">
@@ -114,4 +114,4 @@
         border: 1px solid #ccc;
     }
 </style>
-<?php require_once '../../include/footer.php' ?>
+<?php require_once '../../include/footer.php'; ?>

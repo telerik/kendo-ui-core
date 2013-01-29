@@ -1,17 +1,15 @@
-<?php require_once '../../include/header.php' ?>
-
-<?php require_once '../../lib/Kendo/Autoload.php' ?>
-
 <?php
-    $window = new \Kendo\UI\Window('window');
 
-    $window->title('About Alvar Aalto')
-           ->width('600px')
-           ->close('onClose');
+require_once '../../include/header.php';
+require_once '../../lib/Kendo/Autoload.php';
 
-    ob_start(); // turn on output buffering to store the following HTML in a variable
+$window = new \Kendo\UI\Window('window');
+
+$window->title('About Alvar Aalto')
+       ->width('600px')
+       ->close('onClose')
+       ->startContent();
 ?>
-
     <div class="armchair">
         <img src="../../content/web/window/armchair-402.png"
              alt="Artek Alvar Aalto - Armchair 402" />
@@ -41,10 +39,7 @@
         <a href="http://www.aalto.com/about-alvar-aalto.html" title="About Alvar Aalto">www.aalto.com</a>
     </p>
 <?php
-
-    $content = ob_get_clean(); // get the previous HTML in a variable to set as window content
-
-    $window->content($content);
+    $window->endContent();
 
     echo $window->render();
 ?>
@@ -87,4 +82,4 @@
         margin-bottom: 10px;
     }
 </style>
-<?php require_once '../../include/footer.php' ?>
+<?php require_once '../../include/footer.php'; ?>
