@@ -211,9 +211,11 @@ kendo_module({
 
             if (loading) {
                 appendMethod = "append";
-            } else if (options.appendOnRefresh) {
+            } else if (options.appendOnRefresh && !that._filter) {
                 appendMethod = "prepend";
             }
+
+            that._filter = false;
 
             contents = $(contents);
             element[appendMethod](contents);
@@ -738,11 +740,12 @@ kendo_module({
                 };
 
             that.clearButton[value.length ? "show" : "hide"]();
-
+            that._filter = true;
             that.dataSource.filter(expr);
         },
 
         _clearFilter: function(e) {
+            this._filter = true;
             this.searchInput.val("");
             this.clearButton.hide();
             this.dataSource.filter(null);

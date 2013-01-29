@@ -385,6 +385,40 @@
 
                 equal(listview.items().length, 2);
             });
+
+            test("filtering ignores append on refresh", function() {
+                var listview = setup({
+                    pullToRefresh: true,
+                    appendOnRefresh: true,
+                    filterable: true,
+                    dataSource: {
+                        data: ["foo", "bar"]
+                    }
+                });
+
+                listview.wrapper.find("input").val("foo").trigger({ type: "change" });
+
+                equal(listview.items().length, 1);
+            });
+
+            test("clear filter ignores append on refresh", function() {
+                var listview = setup({
+                    pullToRefresh: true,
+                    appendOnRefresh: true,
+                    filterable: true,
+                    dataSource: {
+                        data: ["foo", "bar"],
+                        filter: {
+                            value: "foo"
+                        }
+                    }
+                });
+
+                listview.wrapper.find(".km-filter-reset").click();
+
+                equal(listview.items().length, 2);
+            });
+
         </script>
     </body>
 </html>
