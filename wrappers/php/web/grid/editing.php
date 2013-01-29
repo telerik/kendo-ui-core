@@ -13,13 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $columns = array('ProductID', 'ProductName', 'UnitPrice', 'UnitsInStock', 'Discontinued');
 
-    if ($type == 'update') {
-        echo json_encode($result->update('Products', $columns, $request->models, 'ProductID'));
-    } else if ($type == 'read') {
-        echo json_encode($result->read('Products', $columns, $request));
-    } else if ($type == 'destroy') {
-        echo json_encode($result->destroy('Products', $request->models, 'ProductID'));
+    switch($type) {
+        case 'create':
+            $result = $result->create('Products', $columns, $request->models, 'ProductID');
+            break;
+        case 'read':
+            $result = $result->read('Products', $columns, $request);
+            break;
+        case 'update':
+            $result = $result->update('Products', $columns, $request->models, 'ProductID');
+            break;
+        case 'destroy':
+            $result = $result->destroy('Products', $request->models, 'ProductID');
+            break;
     }
+
+    echo json_encode($result);
 
     exit;
 }
@@ -27,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require_once '../../include/header.php';
 
 $transport = new \Kendo\Data\DataSourceTransport();
+
+$create = new \Kendo\Data\DataSourceTransportCreate();
+
+$create->url('editing.php?type=create')
+     ->contentType('application/json')
+     ->type('POST');
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
@@ -46,7 +61,8 @@ $destroy->url('editing.php?type=destroy')
      ->contentType('application/json')
      ->type('POST');
 
-$transport->read($read)
+$transport->create($create)
+          ->read($read)
           ->update($update)
           ->destroy($destroy)
           ->parameterMap('function(data) {

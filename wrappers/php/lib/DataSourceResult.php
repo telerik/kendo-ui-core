@@ -25,9 +25,9 @@ class DataSourceResult {
         $this->db = new PDO($dsn);
     }
 
-    private function total($tableName, $columns, $request) {
+    private function total($tableName, $properties, $request) {
         if (isset($request->filter)) {
-            $where = $this->filter($columns, $request->filter);
+            $where = $this->filter($properties, $request->filter);
             $statement = $this->db->prepare("SELECT COUNT(*) FROM $tableName $where");
             $this->bindFilterValues($statement, $request->filter);
         } else {
@@ -43,7 +43,7 @@ class DataSourceResult {
         return ' LIMIT :skip,:take';
     }
 
-    private function sort($columns, $sort) {
+    private function sort($properties, $sort) {
         $count = count($sort);
 
         $sql = '';
@@ -56,7 +56,7 @@ class DataSourceResult {
             for ($index = 0; $index < $count; $index ++) {
                 $field = $sort[$index]->field;
 
-                if (in_array($field, $columns)) {
+                if (in_array($field, $properties)) {
                     $dir = 'ASC';
 
                     if ($sort[$index]->dir == 'desc') {
@@ -74,7 +74,7 @@ class DataSourceResult {
         return $sql;
     }
 
-    private function where($columns, $filter, $all) {
+    private function where($properties, $filter, $all) {
         if (isset($filter->filters)) {
             $logic = ' AND ';
 
@@ -87,7 +87,7 @@ class DataSourceResult {
             $where = array();
 
             for ($index = 0; $index < count($filters); $index++) {
-                $where[] = $this->where($columns, $filters[$index], $all);
+                $where[] = $this->where($properties, $filters[$index], $all);
             }
 
             $where = implode($logic, $where);
@@ -97,7 +97,7 @@ class DataSourceResult {
 
         $field = $filter->field;
 
-        if (in_array($field, $columns)) {
+        if (in_array($field, $properties)) {
             $index = array_search($filter, $all);
 
             $value = ":filter$index";
@@ -129,12 +129,12 @@ class DataSourceResult {
         }
     }
 
-    private function filter($columns, $filter) {
+    private function filter($properties, $filter) {
         $all = array();
 
         $this->flatten($all, $filter);
 
-        $where = $this->where($columns, $filter, $all);
+        $where = $this->where($properties, $filter, $all);
 
         return " WHERE $where";
     }
@@ -168,6 +168,56 @@ class DataSourceResult {
         }
     }
 
+    public function create($table, $properties, $models, $key) {
+        $result = array();
+        $data = array();
+
+        if (!is_array($models)) {
+            $models = array($models);
+        }
+
+        $errors = array();
+
+        foreach ($models as $model) {
+            $columns = array();
+            $values = array();
+            $input_parameters = array();
+
+            foreach ($properties as $property) {
+                if ($property != $key) {
+                    $columns[] = $property;
+                    $values[] = '?';
+                    $input_parameters[] = $model->$property;
+                }
+            }
+
+            $columns = implode(', ', $columns);
+            $values = implode(', ', $values);
+
+            $sql = "INSERT INTO $table ($columns) VALUES ($values)";
+
+            $statement = $this->db->prepare($sql);
+
+            $statement->execute($input_parameters);
+
+            $status = $statement->errorInfo();
+
+            if ($status[1] > 0) {
+                $errors[] = $status[2];
+            } else {
+                $data[] = array($key => $this->db->lastInsertId());
+            }
+        }
+
+        if (count($errors) > 0) {
+            $result['errors'] = $errors;
+        } else {
+            $result['data'] = $data;
+        }
+
+        return $result;
+    }
+
     public function destroy($table, $models, $key) {
         $result = array();
 
@@ -198,10 +248,10 @@ class DataSourceResult {
         return $result;
     }
 
-    public function update($table, $columns, $models, $key) {
+    public function update($table, $properties, $models, $key) {
         $result = array();
 
-        if (in_array($key, $columns)) {
+        if (in_array($key, $properties)) {
 
             if (!is_array($models)) {
                 $models = array($models);
@@ -214,10 +264,10 @@ class DataSourceResult {
 
                 $input_parameters = array();
 
-                foreach ($columns as $column) {
-                    if ($column != $key) {
-                        $set[] = "$column=?";
-                        $input_parameters[] = $model->$column;
+                foreach ($properties as $property) {
+                    if ($property != $key) {
+                        $set[] = "$property=?";
+                        $input_parameters[] = $model->$property;
                     }
                 }
 
@@ -246,19 +296,19 @@ class DataSourceResult {
         return $result;
     }
 
-    public function read($table, $columns, $request = null) {
+    public function read($table, $properties, $request = null) {
         $result = array();
 
-        $result['total'] = $this->total($table, $columns, $request);
+        $result['total'] = $this->total($table, $properties, $request);
 
-        $sql = sprintf('SELECT %s FROM %s', implode(', ', $columns), $table);
+        $sql = sprintf('SELECT %s FROM %s', implode(', ', $properties), $table);
 
         if (isset($request->filter)) {
-            $sql .= $this->filter($columns, $request->filter);
+            $sql .= $this->filter($properties, $request->filter);
         }
 
         if (isset($request->sort)) {
-            $sql .= $this->sort($columns, $request->sort);
+            $sql .= $this->sort($properties, $request->sort);
         }
 
         if (isset($request->skip) && isset($request->take)) {
