@@ -1,41 +1,43 @@
 
         <div id="example" class="k-content">
-            <div class="configuration k-widget k-header" style="width:170px;">
-                <span class="configHead">API Functions</span>
-                <ul class="options">
-                    <li>
-                        <input id="typeColumn" name="seriesType"
-                                type="radio" value="column" checked="checked" autocomplete="off" />
-                        <label for="typeColumn">Columns</label>
-                    </li>
-                    <li>
-                        <input id="typeBar" name="seriesType"
-                                type="radio" value="bar" autocomplete="off" />
-                        <label for="typeBar">Bars</label>
-                    </li>
-                    <li>
-                        <input id="typeLine" name="seriesType"
-                                type="radio" value="line" autocomplete="off" />
-                        <label for="typeLine">Lines</label>
-                    </li>
-                    <li>
-                        <input id="stack" type="checkbox" autocomplete="off" checked="checked" />
-                        <label for="stack">Stacked</label>
-                    </li>
-                </ul>
-                <p>
-                    <strong>refresh()</strong> will be called on each configuration change
-                </p>
-            </div>
             <div class="chart-wrapper">
                 <div id="chart"></div>
+            </div>
+            <div class="configuration-horizontal">
+                <div class="config-section">
+                    <span class="configHead">API Functions</span>
+                    <ul class="options">
+                        <li>
+                            <input id="typeColumn" name="seriesType"
+                                        type="radio" value="column" checked="checked" autocomplete="off" />
+                            <label for="typeColumn">Columns</label>
+                        </li>
+                        <li>
+                            <input id="typeBar" name="seriesType"
+                                        type="radio" value="bar" autocomplete="off" />
+                            <label for="typeBar">Bars</label>
+                        </li>
+                        <li>
+                            <input id="typeLine" name="seriesType"
+                                        type="radio" value="line" autocomplete="off" />
+                            <label for="typeLine">Lines</label>
+                        </li>
+                        <li>
+                            <input id="stack" type="checkbox" autocomplete="off" checked="checked" />
+                            <label for="stack">Stacked</label>
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>refresh()</strong> will be called on each configuration change
+                    </p>
+                </div>
             </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         title: {
-                            text: "Internet Users"
+                            text: "Site Visitors Stats /thousands/"
                         },
                         legend: {
                             position: "bottom"
@@ -45,26 +47,29 @@
                             stack: true
                         },
                         series: [{
-                            name: "United States",
-                            data: [67.96, 68.93, 75, 74, 78],
-
+                            name: "Total Visits",
+                            data: [56000, 63000, 74000, 91000, 117000, 138000],
+                            
                             // Line chart marker type
                             markers: { type: "square" }
                         }, {
-                            name: "World",
-                            data: [15.7, 16.7, 20, 23.5, 26.6]
+                            name: "Unique visitors",
+                            data: [52000, 34000, 23000, 48000, 67000, 83000]
                         }],
                         valueAxis: {
-                            labels: {
-                                format: "{0}%"
+                            line: {
+                                visible: false
                             }
                         },
                         categoryAxis: {
-                            categories: [2005, 2006, 2007, 2008, 2009]
+                            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                            majorGridLines: {
+                                visible: false
+                            }
                         },
                         tooltip: {
                             visible: true,
-                            format: "{0}%"
+                            format: "{0}"
                         }
                     });
                 }
@@ -80,7 +85,7 @@
                         });
                     }, 400);
 
-                    $(".configuration").bind("change", refresh);
+                    $(".configuration-horizontal").bind("change", refresh);
                 });
 
                 function refresh() {
@@ -98,17 +103,8 @@
                 }
             </script>
             <style scoped>
-                .chart-wrapper {
-                	margin: 0 0 0 20px;
-                	width: 466px;
-                	height: 434px;
-                	background: url("../../content/shared/styles/chart-wrapper-small.png") transparent no-repeat 0 0;
-                }
-                
-                .chart-wrapper .k-chart {
-                    height: 280px;
-                    padding: 37px;
-                    width: 390px;
+                .chart-wrapper, .chart-wrapper .k-chart {
+                    height: 300px;
                 }
             </style>
         </div>
