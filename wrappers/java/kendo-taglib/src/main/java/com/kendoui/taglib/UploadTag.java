@@ -54,11 +54,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "upload";
     }
 
-    public void setAsync(AsyncTag value) {
+    public void setAsync(com.kendoui.taglib.upload.AsyncTag value) {
         setProperty("async", value);
     }
 
-    public void setLocalization(LocalizationTag value) {
+    public void setLocalization(com.kendoui.taglib.upload.LocalizationTag value) {
         setProperty("localization", value);
     }
 

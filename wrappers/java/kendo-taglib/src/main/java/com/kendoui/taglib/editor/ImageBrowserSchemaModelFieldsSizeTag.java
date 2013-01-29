@@ -3,28 +3,27 @@ package com.kendoui.taglib.editor;
 
 
 import com.kendoui.taglib.BaseTag;
-
-
-
-
-
 import com.kendoui.taglib.json.Function;
+
+
+
+
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserSchemaModelFieldsNameTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ImageBrowserSchemaModelFieldsSizeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ImagebrowserSchemaModelFieldsTag parent = (ImagebrowserSchemaModelFieldsTag)findParentWithClass(ImagebrowserSchemaModelFieldsTag.class);
+        ImageBrowserSchemaModelFieldsTag parent = (ImageBrowserSchemaModelFieldsTag)findParentWithClass(ImageBrowserSchemaModelFieldsTag.class);
 
 
-        parent.setName(this);
+        parent.setSize(this);
 
 //<< doEndTag
 
@@ -50,10 +49,10 @@ public class ImagebrowserSchemaModelFieldsNameTag extends  BaseTag  /* interface
 //>> Attributes
 
     public static String tagName() {
-        return "editor-imagebrowser-schema-model-fields-name";
+        return "editor-imageBrowser-schema-model-fields-size";
     }
 
-    public void setParse(ImagebrowserSchemaModelFieldsNameParseFunctionTag value) {
+    public void setParse(ImageBrowserSchemaModelFieldsSizeParseFunctionTag value) {
         setEvent("parse", value.getBody());
     }
 

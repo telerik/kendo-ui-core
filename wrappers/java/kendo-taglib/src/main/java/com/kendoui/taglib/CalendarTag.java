@@ -48,7 +48,7 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "calendar";
     }
 
-    public void setMonth(MonthTag value) {
+    public void setMonth(com.kendoui.taglib.calendar.MonthTag value) {
         setProperty("month", value);
     }
 

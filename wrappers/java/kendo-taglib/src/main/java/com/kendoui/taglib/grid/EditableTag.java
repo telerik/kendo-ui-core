@@ -58,6 +58,14 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("confirmation", value);
     }
 
+    public String getCreateAt() {
+        return (String)getProperty("createAt");
+    }
+
+    public void setCreateAt(String value) {
+        setProperty("createAt", value);
+    }
+
     public boolean getDestroy() {
         return (boolean)getProperty("destroy");
     }

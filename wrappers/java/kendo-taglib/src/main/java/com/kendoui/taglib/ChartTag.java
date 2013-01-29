@@ -54,11 +54,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
-    public void setChartArea(ChartAreaTag value) {
+    public void setChartArea(com.kendoui.taglib.chart.ChartAreaTag value) {
         setProperty("chartArea", value);
     }
 
-    public void setLegend(LegendTag value) {
+    public void setLegend(com.kendoui.taglib.chart.LegendTag value) {
         setProperty("legend", value);
     }
 
@@ -68,7 +68,7 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
-    public void setPlotArea(PlotAreaTag value) {
+    public void setPlotArea(com.kendoui.taglib.chart.PlotAreaTag value) {
         setProperty("plotArea", value);
     }
 
@@ -78,11 +78,11 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
-    public void setTitle(TitleTag value) {
+    public void setTitle(com.kendoui.taglib.chart.TitleTag value) {
         setProperty("title", value);
     }
 
-    public void setTooltip(TooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.chart.TooltipTag value) {
         setProperty("tooltip", value);
     }
 

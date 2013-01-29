@@ -14,7 +14,7 @@ import com.kendoui.taglib.EditorTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class ImageBrowserTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -24,7 +24,7 @@ public class ImagebrowserTag extends  BaseTag  /* interfaces *//* interfaces */ 
         EditorTag parent = (EditorTag)findParentWithClass(EditorTag.class);
 
 
-        parent.setImagebrowser(this);
+        parent.setImageBrowser(this);
 
 //<< doEndTag
 
@@ -50,18 +50,18 @@ public class ImagebrowserTag extends  BaseTag  /* interfaces *//* interfaces */ 
 //>> Attributes
 
     public static String tagName() {
-        return "editor-imagebrowser";
+        return "editor-imageBrowser";
     }
 
-    public void setMessages(ImagebrowserMessagesTag value) {
+    public void setMessages(com.kendoui.taglib.editor.ImageBrowserMessagesTag value) {
         setProperty("messages", value);
     }
 
-    public void setSchema(ImagebrowserSchemaTag value) {
+    public void setSchema(com.kendoui.taglib.editor.ImageBrowserSchemaTag value) {
         setProperty("schema", value);
     }
 
-    public void setTransport(ImagebrowserTransportTag value) {
+    public void setTransport(com.kendoui.taglib.editor.ImageBrowserTransportTag value) {
         setProperty("transport", value);
     }
 

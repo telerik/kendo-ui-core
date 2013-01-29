@@ -50,7 +50,7 @@ public class GroupableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-groupable";
     }
 
-    public void setMessages(GroupableMessagesTag value) {
+    public void setMessages(com.kendoui.taglib.grid.GroupableMessagesTag value) {
         setProperty("messages", value);
     }
 

@@ -50,11 +50,11 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dateTimePicker-animation";
     }
 
-    public void setClose(AnimationCloseTag value) {
+    public void setClose(com.kendoui.taglib.datetimepicker.AnimationCloseTag value) {
         setProperty("close", value);
     }
 
-    public void setOpen(AnimationOpenTag value) {
+    public void setOpen(com.kendoui.taglib.datetimepicker.AnimationOpenTag value) {
         setProperty("open", value);
     }
 

@@ -50,11 +50,11 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "window-animation";
     }
 
-    public void setClose(AnimationCloseTag value) {
+    public void setClose(com.kendoui.taglib.window.AnimationCloseTag value) {
         setProperty("close", value);
     }
 
-    public void setOpen(AnimationOpenTag value) {
+    public void setOpen(com.kendoui.taglib.window.AnimationOpenTag value) {
         setProperty("open", value);
     }
 

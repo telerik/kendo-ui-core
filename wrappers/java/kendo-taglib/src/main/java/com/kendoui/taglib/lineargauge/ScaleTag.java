@@ -50,19 +50,19 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         return "linearGauge-scale";
     }
 
-    public void setLabels(ScaleLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.lineargauge.ScaleLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(ScaleLineTag value) {
+    public void setLine(com.kendoui.taglib.lineargauge.ScaleLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorTicks(ScaleMajorTicksTag value) {
+    public void setMajorTicks(com.kendoui.taglib.lineargauge.ScaleMajorTicksTag value) {
         setProperty("majorTicks", value);
     }
 
-    public void setMinorTicks(ScaleMinorTicksTag value) {
+    public void setMinorTicks(com.kendoui.taglib.lineargauge.ScaleMinorTicksTag value) {
         setProperty("minorTicks", value);
     }
 

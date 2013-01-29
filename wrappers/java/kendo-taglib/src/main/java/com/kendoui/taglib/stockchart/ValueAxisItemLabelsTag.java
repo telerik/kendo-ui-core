@@ -51,7 +51,7 @@ public class ValueAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfa
         return "stockChart-valueAxisItem-labels";
     }
 
-    public void setBorder(ValueAxisItemLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.ValueAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

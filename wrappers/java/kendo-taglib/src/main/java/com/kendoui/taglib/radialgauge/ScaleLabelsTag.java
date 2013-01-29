@@ -51,7 +51,7 @@ public class ScaleLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "radialGauge-scale-labels";
     }
 
-    public void setBorder(ScaleLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.radialgauge.ScaleLabelsBorderTag value) {
         setProperty("border", value);
     }
 

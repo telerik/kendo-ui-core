@@ -3836,6 +3836,12 @@ CSS-supported notation.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The size (width and height) of a color cell for the Palette picker.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>A CSS class name to display an icon in the color picker button.  If
 specified, the HTML for the element will look like this:</description>
             <name>toolIcon</name>
@@ -5498,8 +5504,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Configuration for image browser dialog.</description>
-        <name>editor-imagebrowser</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserTag</tag-class>
+        <name>editor-imageBrowser</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5519,8 +5525,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Defines texts shown within the pager.</description>
-        <name>editor-imagebrowser-messages</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserMessagesTag</tag-class>
+        <name>editor-imageBrowser-messages</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserMessagesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -5583,8 +5589,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Set the object responsible for describing the image raw data format.</description>
-        <name>editor-imagebrowser-schema</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaTag</tag-class>
+        <name>editor-imageBrowser-schema</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaTag</tag-class>
         <body-content>JSP</body-content>
 
 
@@ -5592,8 +5598,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Set the object which describes the image/directory entry fields. Note that a name, type and size fields should be set.</description>
-        <name>editor-imagebrowser-schema-model</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelTag</tag-class>
+        <name>editor-imageBrowser-schema-model</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5607,8 +5613,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description></description>
-        <name>editor-imagebrowser-schema-model-fields</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5634,8 +5640,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>The field which contains the name of the image/directory</description>
-        <name>editor-imagebrowser-schema-model-fields-name</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsNameTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields-name</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsNameTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5656,14 +5662,14 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
-        <name>editor-imagebrowser-schema-model-fields-name-parse</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsNameParseFunctionTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields-name-parse</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsNameParseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
         <description>The field which contains the size of image.</description>
-        <name>editor-imagebrowser-schema-model-fields-size</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsSizeTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields-size</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsSizeTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5684,14 +5690,14 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
-        <name>editor-imagebrowser-schema-model-fields-size-parse</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsSizeParseFunctionTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields-size-parse</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsSizeParseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
         <description>The field which contains the type of the entry. Either f for image or d for directory.</description>
-        <name>editor-imagebrowser-schema-model-fields-type</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsTypeTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields-type</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsTypeTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5712,8 +5718,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
-        <name>editor-imagebrowser-schema-model-fields-type-parse</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserSchemaModelFieldsTypeParseFunctionTag</tag-class>
+        <name>editor-imageBrowser-schema-model-fields-type-parse</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsTypeParseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -5721,8 +5727,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>Specifies the settings for loading and saving data.</description>
-        <name>editor-imagebrowser-transport</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserTransportTag</tag-class>
+        <name>editor-imageBrowser-transport</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -5767,8 +5773,8 @@ the minimum and maximum values.</description>
 
     <tag>
         <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>
-        <name>editor-imagebrowser-transport-imageUrl</name>
-        <tag-class>com.kendoui.taglib.editor.ImagebrowserTransportImageUrlFunctionTag</tag-class>
+        <name>editor-imageBrowser-transport-imageUrl</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportImageUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -6329,6 +6335,12 @@ in order to have valid HTML markup in the Grid.</description>
             <name>confirmation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the created record should be inserted at the top or at the bottom of the current page. Available values are "top" and "bottom".</description>
+            <name>createAt</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>Indicates whether item should be deleted when click on delete button.</description>
@@ -13172,7 +13184,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <name>tabStrip-item</name>
         <tag-class>com.kendoui.taglib.tabstrip.ItemTag</tag-class>
 
-        <body-content>JSP</body-content>
+        <body-content>empty</body-content>
         <attribute>
             <description>Specifies the url from which the item content will be loaded</description>
             <name>contentUrl</name>
@@ -13386,6 +13398,202 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <description>Fires when the time drop-down list is opened</description>
         <name>timePicker-open</name>
         <tag-class>com.kendoui.taglib.timepicker.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Tooltip</description>
+        <name>tooltip</name>
+        <tag-class>com.kendoui.taglib.TooltipTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip.</description>
+            <name>autoHide</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the tooltip callout will be displayed.</description>
+            <name>callout</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The text or a function which result will be shown within the tooltip.
+By default the tooltip will display the target element title attribute content.</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies a selector for elements, within the container, for which the tooltip will be displayed.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The height (in pixels) of the tooltip.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Explicitly states whether content iframe should be created.</description>
+            <name>iframe</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Specify the delay in milliseconds before the tooltip is shown. This option is ignored if showOn is set to "click" or "focus".</description>
+            <name>showAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The event on which the tooltip will be shown. Predefined values are "mouseenter", "click" and "focus".</description>
+            <name>showOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width (in pixels) of the tooltip.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Triggered when an AJAX request for content completes.</description>
+            <name>contentLoad</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Tooltip is shown.</description>
+            <name>show</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Tooltip is hidden</description>
+            <name>hide</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when an AJAX request for content fails.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>A collection of {Animation} objects, used to change default animations. A value of false
+will disable all animations in the widget.</description>
+        <name>tooltip-animation</name>
+        <tag-class>com.kendoui.taglib.tooltip.AnimationTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The animation that will be used when a Tooltip closes.</description>
+        <name>tooltip-animation-close</name>
+        <tag-class>com.kendoui.taglib.tooltip.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for closing of the tooltip.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when a Tooltip opens.</description>
+        <name>tooltip-animation-open</name>
+        <tag-class>com.kendoui.taglib.tooltip.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for opening of the Tooltip.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>The text or a function which result will be shown within the tooltip.
+By default the tooltip will display the target element title attribute content.</description>
+        <name>tooltip-content</name>
+        <tag-class>com.kendoui.taglib.tooltip.ContentTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies a URL or request options that the tooltip should load its content from.Note: For URLs starting with a protocol (e.g. http://),
+a container iframe element is automatically created. This behavior may change in future
+versions, so it is advisable to always use the iframe configuration option.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>Triggered when an AJAX request for content completes.</description>
+        <name>tooltip-contentLoad</name>
+        <tag-class>com.kendoui.taglib.tooltip.ContentLoadFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered when a Tooltip is shown.</description>
+        <name>tooltip-show</name>
+        <tag-class>com.kendoui.taglib.tooltip.ShowFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered when a Tooltip is hidden</description>
+        <name>tooltip-hide</name>
+        <tag-class>com.kendoui.taglib.tooltip.HideFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered when an AJAX request for content fails.</description>
+        <name>tooltip-error</name>
+        <tag-class>com.kendoui.taglib.tooltip.ErrorFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

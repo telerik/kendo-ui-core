@@ -58,7 +58,7 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "window";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.window.AnimationTag value) {
         setProperty("animation", value);
     }
 

@@ -51,7 +51,7 @@ public class NavigatorSeriesItemLabelsTag extends  BaseTag  /* interfaces *//* i
         return "stockChart-navigator-seriesItem-labels";
     }
 
-    public void setBorder(NavigatorSeriesItemLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.NavigatorSeriesItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

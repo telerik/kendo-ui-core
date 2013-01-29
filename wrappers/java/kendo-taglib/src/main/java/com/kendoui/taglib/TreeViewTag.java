@@ -63,11 +63,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         return "treeView";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.treeview.AnimationTag value) {
         setProperty("animation", value);
     }
 
-    public void setCheckboxes(CheckboxesTag value) {
+    public void setCheckboxes(com.kendoui.taglib.treeview.CheckboxesTag value) {
         setProperty("checkboxes", value);
     }
 

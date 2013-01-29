@@ -191,7 +191,7 @@ METHODS = %{
 //<< Attributes
 }
 COMPOSITE_OPTION_SETTER = ERB.new(%{
-    public void set<%= name.pascalize %>(<%= tag_class %> value) {
+    public void set<%= name.pascalize %>(com.kendoui.taglib.<%= namespace %>.<%= tag_class %> value) {
         setProperty("<%= name %>", value);
     }
 })

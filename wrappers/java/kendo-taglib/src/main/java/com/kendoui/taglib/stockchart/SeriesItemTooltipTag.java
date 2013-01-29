@@ -51,7 +51,7 @@ public class SeriesItemTooltipTag extends  BaseTag  /* interfaces *//* interface
         return "stockChart-seriesItem-tooltip";
     }
 
-    public void setBorder(SeriesItemTooltipBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.SeriesItemTooltipBorderTag value) {
         setProperty("border", value);
     }
 

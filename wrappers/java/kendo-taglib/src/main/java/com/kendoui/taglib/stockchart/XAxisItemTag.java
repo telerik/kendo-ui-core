@@ -49,19 +49,19 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-xAxisItem";
     }
 
-    public void setLabels(XAxisItemLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.stockchart.XAxisItemLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(XAxisItemLineTag value) {
+    public void setLine(com.kendoui.taglib.stockchart.XAxisItemLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorGridLines(XAxisItemMajorGridLinesTag value) {
+    public void setMajorGridLines(com.kendoui.taglib.stockchart.XAxisItemMajorGridLinesTag value) {
         setProperty("majorGridLines", value);
     }
 
-    public void setMajorTicks(XAxisItemMajorTicksTag value) {
+    public void setMajorTicks(com.kendoui.taglib.stockchart.XAxisItemMajorTicksTag value) {
         setProperty("majorTicks", value);
     }
 
@@ -71,7 +71,7 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     }
 
-    public void setTitle(XAxisItemTitleTag value) {
+    public void setTitle(com.kendoui.taglib.stockchart.XAxisItemTitleTag value) {
         setProperty("title", value);
     }
 

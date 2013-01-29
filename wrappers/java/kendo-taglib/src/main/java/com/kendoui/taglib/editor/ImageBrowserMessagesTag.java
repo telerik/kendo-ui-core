@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserMessagesTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class ImageBrowserMessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ImagebrowserTag parent = (ImagebrowserTag)findParentWithClass(ImagebrowserTag.class);
+        ImageBrowserTag parent = (ImageBrowserTag)findParentWithClass(ImageBrowserTag.class);
 
 
         parent.setMessages(this);
@@ -48,7 +48,7 @@ public class ImagebrowserMessagesTag extends  BaseTag  /* interfaces *//* interf
 //>> Attributes
 
     public static String tagName() {
-        return "editor-imagebrowser-messages";
+        return "editor-imageBrowser-messages";
     }
 
     public String getDeleteFile() {

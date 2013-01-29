@@ -49,15 +49,15 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
-    public void setChartArea(ChartAreaTag value) {
+    public void setChartArea(com.kendoui.taglib.stockchart.ChartAreaTag value) {
         setProperty("chartArea", value);
     }
 
-    public void setLegend(LegendTag value) {
+    public void setLegend(com.kendoui.taglib.stockchart.LegendTag value) {
         setProperty("legend", value);
     }
 
-    public void setNavigator(NavigatorTag value) {
+    public void setNavigator(com.kendoui.taglib.stockchart.NavigatorTag value) {
         setProperty("navigator", value);
     }
 
@@ -67,7 +67,7 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
-    public void setPlotArea(PlotAreaTag value) {
+    public void setPlotArea(com.kendoui.taglib.stockchart.PlotAreaTag value) {
         setProperty("plotArea", value);
     }
 
@@ -77,11 +77,11 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
-    public void setTitle(TitleTag value) {
+    public void setTitle(com.kendoui.taglib.stockchart.TitleTag value) {
         setProperty("title", value);
     }
 
-    public void setTooltip(TooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.stockchart.TooltipTag value) {
         setProperty("tooltip", value);
     }
 

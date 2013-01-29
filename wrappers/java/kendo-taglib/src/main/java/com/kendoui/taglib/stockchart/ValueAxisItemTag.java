@@ -49,27 +49,27 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         return "stockChart-valueAxisItem";
     }
 
-    public void setLabels(ValueAxisItemLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.stockchart.ValueAxisItemLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(ValueAxisItemLineTag value) {
+    public void setLine(com.kendoui.taglib.stockchart.ValueAxisItemLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorGridLines(ValueAxisItemMajorGridLinesTag value) {
+    public void setMajorGridLines(com.kendoui.taglib.stockchart.ValueAxisItemMajorGridLinesTag value) {
         setProperty("majorGridLines", value);
     }
 
-    public void setMajorTicks(ValueAxisItemMajorTicksTag value) {
+    public void setMajorTicks(com.kendoui.taglib.stockchart.ValueAxisItemMajorTicksTag value) {
         setProperty("majorTicks", value);
     }
 
-    public void setMinorGridLines(ValueAxisItemMinorGridLinesTag value) {
+    public void setMinorGridLines(com.kendoui.taglib.stockchart.ValueAxisItemMinorGridLinesTag value) {
         setProperty("minorGridLines", value);
     }
 
-    public void setMinorTicks(ValueAxisItemMinorTicksTag value) {
+    public void setMinorTicks(com.kendoui.taglib.stockchart.ValueAxisItemMinorTicksTag value) {
         setProperty("minorTicks", value);
     }
 
@@ -79,7 +79,7 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
 
     }
 
-    public void setTitle(ValueAxisItemTitleTag value) {
+    public void setTitle(com.kendoui.taglib.stockchart.ValueAxisItemTitleTag value) {
         setProperty("title", value);
     }
 

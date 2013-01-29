@@ -53,7 +53,7 @@ public class ColumnMenuTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "grid-columnMenu";
     }
 
-    public void setMessages(ColumnMenuMessagesTag value) {
+    public void setMessages(com.kendoui.taglib.grid.ColumnMenuMessagesTag value) {
         setProperty("messages", value);
     }
 

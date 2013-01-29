@@ -57,7 +57,7 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
         return "panelBar";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.panelbar.AnimationTag value) {
         setProperty("animation", value);
     }
 

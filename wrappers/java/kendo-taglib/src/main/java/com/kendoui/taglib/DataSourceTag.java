@@ -74,7 +74,7 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 
     }
 
-    public void setSchema(SchemaTag value) {
+    public void setSchema(com.kendoui.taglib.datasource.SchemaTag value) {
         setProperty("schema", value);
     }
 
@@ -84,7 +84,7 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 
     }
 
-    public void setTransport(TransportTag value) {
+    public void setTransport(com.kendoui.taglib.datasource.TransportTag value) {
         setProperty("transport", value);
     }
 

@@ -54,11 +54,11 @@ public class DatePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "datePicker";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.datepicker.AnimationTag value) {
         setProperty("animation", value);
     }
 
-    public void setMonth(MonthTag value) {
+    public void setMonth(com.kendoui.taglib.datepicker.MonthTag value) {
         setProperty("month", value);
     }
 

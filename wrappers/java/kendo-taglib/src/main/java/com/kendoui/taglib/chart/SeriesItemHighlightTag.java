@@ -51,11 +51,11 @@ public class SeriesItemHighlightTag extends  BaseTag  /* interfaces *//* interfa
         return "chart-seriesItem-highlight";
     }
 
-    public void setBorder(SeriesItemHighlightBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.SeriesItemHighlightBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLine(SeriesItemHighlightLineTag value) {
+    public void setLine(com.kendoui.taglib.chart.SeriesItemHighlightLineTag value) {
         setProperty("line", value);
     }
 

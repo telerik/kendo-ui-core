@@ -54,7 +54,7 @@ public class TimePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "timePicker";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.timepicker.AnimationTag value) {
         setProperty("animation", value);
     }
 

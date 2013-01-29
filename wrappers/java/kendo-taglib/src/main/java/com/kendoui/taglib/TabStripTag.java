@@ -57,7 +57,7 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         return "tabStrip";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.tabstrip.AnimationTag value) {
         setProperty("animation", value);
     }
 

@@ -49,31 +49,31 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         return "stockChart-navigator-seriesItem";
     }
 
-    public void setBorder(NavigatorSeriesItemBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.NavigatorSeriesItemBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setHighlight(NavigatorSeriesItemHighlightTag value) {
+    public void setHighlight(com.kendoui.taglib.stockchart.NavigatorSeriesItemHighlightTag value) {
         setProperty("highlight", value);
     }
 
-    public void setLabels(NavigatorSeriesItemLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.stockchart.NavigatorSeriesItemLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(NavigatorSeriesItemLineTag value) {
+    public void setLine(com.kendoui.taglib.stockchart.NavigatorSeriesItemLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMarkers(NavigatorSeriesItemMarkersTag value) {
+    public void setMarkers(com.kendoui.taglib.stockchart.NavigatorSeriesItemMarkersTag value) {
         setProperty("markers", value);
     }
 
-    public void setOverlay(NavigatorSeriesItemOverlayTag value) {
+    public void setOverlay(com.kendoui.taglib.stockchart.NavigatorSeriesItemOverlayTag value) {
         setProperty("overlay", value);
     }
 
-    public void setTooltip(NavigatorSeriesItemTooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.stockchart.NavigatorSeriesItemTooltipTag value) {
         setProperty("tooltip", value);
     }
 

@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserSchemaModelFieldsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ImageBrowserSchemaModelFieldsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ImagebrowserSchemaModelTag parent = (ImagebrowserSchemaModelTag)findParentWithClass(ImagebrowserSchemaModelTag.class);
+        ImageBrowserSchemaModelTag parent = (ImageBrowserSchemaModelTag)findParentWithClass(ImageBrowserSchemaModelTag.class);
 
 
         parent.setFields(this);
@@ -48,18 +48,18 @@ public class ImagebrowserSchemaModelFieldsTag extends  BaseTag  /* interfaces */
 //>> Attributes
 
     public static String tagName() {
-        return "editor-imagebrowser-schema-model-fields";
+        return "editor-imageBrowser-schema-model-fields";
     }
 
-    public void setName(ImagebrowserSchemaModelFieldsNameTag value) {
+    public void setName(com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsNameTag value) {
         setProperty("name", value);
     }
 
-    public void setSize(ImagebrowserSchemaModelFieldsSizeTag value) {
+    public void setSize(com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsSizeTag value) {
         setProperty("size", value);
     }
 
-    public void setType(ImagebrowserSchemaModelFieldsTypeTag value) {
+    public void setType(com.kendoui.taglib.editor.ImageBrowserSchemaModelFieldsTypeTag value) {
         setProperty("type", value);
     }
 

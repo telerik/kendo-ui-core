@@ -53,7 +53,7 @@ public class TitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "chart-title";
     }
 
-    public void setBorder(TitleBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.TitleBorderTag value) {
         setProperty("border", value);
     }
 

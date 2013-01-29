@@ -51,7 +51,7 @@ public class CategoryAxisItemLabelsTag extends  BaseTag  /* interfaces *//* inte
         return "chart-categoryAxisItem-labels";
     }
 
-    public void setBorder(CategoryAxisItemLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.CategoryAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

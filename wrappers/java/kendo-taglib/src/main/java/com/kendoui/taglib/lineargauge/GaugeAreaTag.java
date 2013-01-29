@@ -50,7 +50,7 @@ public class GaugeAreaTag extends BaseTag /* interfaces *//* interfaces */ {
         return "linearGauge-gaugeArea";
     }
 
-    public void setBorder(GaugeAreaBorderTag value) {
+    public void setBorder(com.kendoui.taglib.lineargauge.GaugeAreaBorderTag value) {
         setProperty("border", value);
     }
 

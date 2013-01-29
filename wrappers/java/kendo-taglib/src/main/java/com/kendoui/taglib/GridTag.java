@@ -64,7 +64,7 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         return "grid";
     }
 
-    public void setColumnMenu(ColumnMenuTag value) {
+    public void setColumnMenu(com.kendoui.taglib.grid.ColumnMenuTag value) {
         setProperty("columnMenu", value);
     }
 
@@ -74,27 +74,27 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     }
 
-    public void setEditable(EditableTag value) {
+    public void setEditable(com.kendoui.taglib.grid.EditableTag value) {
         setProperty("editable", value);
     }
 
-    public void setFilterable(FilterableTag value) {
+    public void setFilterable(com.kendoui.taglib.grid.FilterableTag value) {
         setProperty("filterable", value);
     }
 
-    public void setGroupable(GroupableTag value) {
+    public void setGroupable(com.kendoui.taglib.grid.GroupableTag value) {
         setProperty("groupable", value);
     }
 
-    public void setPageable(PageableTag value) {
+    public void setPageable(com.kendoui.taglib.grid.PageableTag value) {
         setProperty("pageable", value);
     }
 
-    public void setScrollable(ScrollableTag value) {
+    public void setScrollable(com.kendoui.taglib.grid.ScrollableTag value) {
         setProperty("scrollable", value);
     }
 
-    public void setSortable(SortableTag value) {
+    public void setSortable(com.kendoui.taglib.grid.SortableTag value) {
         setProperty("sortable", value);
     }
 

@@ -49,19 +49,19 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "chart-yAxisItem";
     }
 
-    public void setLabels(YAxisItemLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.chart.YAxisItemLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(YAxisItemLineTag value) {
+    public void setLine(com.kendoui.taglib.chart.YAxisItemLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorGridLines(YAxisItemMajorGridLinesTag value) {
+    public void setMajorGridLines(com.kendoui.taglib.chart.YAxisItemMajorGridLinesTag value) {
         setProperty("majorGridLines", value);
     }
 
-    public void setMajorTicks(YAxisItemMajorTicksTag value) {
+    public void setMajorTicks(com.kendoui.taglib.chart.YAxisItemMajorTicksTag value) {
         setProperty("majorTicks", value);
     }
 
@@ -71,7 +71,7 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     }
 
-    public void setTitle(YAxisItemTitleTag value) {
+    public void setTitle(com.kendoui.taglib.chart.YAxisItemTitleTag value) {
         setProperty("title", value);
     }
 

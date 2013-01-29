@@ -51,19 +51,19 @@ public class FilterableOperatorsTag extends  BaseTag  /* interfaces *//* interfa
         return "grid-filterable-operators";
     }
 
-    public void setDate(FilterableOperatorsDateTag value) {
+    public void setDate(com.kendoui.taglib.grid.FilterableOperatorsDateTag value) {
         setProperty("date", value);
     }
 
-    public void setEnums(FilterableOperatorsEnumsTag value) {
+    public void setEnums(com.kendoui.taglib.grid.FilterableOperatorsEnumsTag value) {
         setProperty("enums", value);
     }
 
-    public void setNumber(FilterableOperatorsNumberTag value) {
+    public void setNumber(com.kendoui.taglib.grid.FilterableOperatorsNumberTag value) {
         setProperty("number", value);
     }
 
-    public void setString(FilterableOperatorsStringTag value) {
+    public void setString(com.kendoui.taglib.grid.FilterableOperatorsStringTag value) {
         setProperty("string", value);
     }
 

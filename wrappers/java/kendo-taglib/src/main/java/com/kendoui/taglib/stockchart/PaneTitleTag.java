@@ -51,7 +51,7 @@ public class PaneTitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-pane-title";
     }
 
-    public void setBorder(PaneTitleBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.PaneTitleBorderTag value) {
         setProperty("border", value);
     }
 

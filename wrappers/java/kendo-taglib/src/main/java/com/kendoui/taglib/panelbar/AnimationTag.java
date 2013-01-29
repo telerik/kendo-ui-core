@@ -50,11 +50,11 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "panelBar-animation";
     }
 
-    public void setCollapse(AnimationCollapseTag value) {
+    public void setCollapse(com.kendoui.taglib.panelbar.AnimationCollapseTag value) {
         setProperty("collapse", value);
     }
 
-    public void setExpand(AnimationExpandTag value) {
+    public void setExpand(com.kendoui.taglib.panelbar.AnimationExpandTag value) {
         setProperty("expand", value);
     }
 

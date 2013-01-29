@@ -48,7 +48,7 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
         return "pager";
     }
 
-    public void setMessages(MessagesTag value) {
+    public void setMessages(com.kendoui.taglib.pager.MessagesTag value) {
         setProperty("messages", value);
     }
 

@@ -53,11 +53,11 @@ public class FilterableTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "grid-filterable";
     }
 
-    public void setMessages(FilterableMessagesTag value) {
+    public void setMessages(com.kendoui.taglib.grid.FilterableMessagesTag value) {
         setProperty("messages", value);
     }
 
-    public void setOperators(FilterableOperatorsTag value) {
+    public void setOperators(com.kendoui.taglib.grid.FilterableOperatorsTag value) {
         setProperty("operators", value);
     }
 

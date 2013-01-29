@@ -57,7 +57,7 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
         return "menu";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.menu.AnimationTag value) {
         setProperty("animation", value);
     }
 

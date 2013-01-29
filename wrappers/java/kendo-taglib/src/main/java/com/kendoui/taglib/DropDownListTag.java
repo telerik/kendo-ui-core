@@ -54,7 +54,7 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         return "dropDownList";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.dropdownlist.AnimationTag value) {
         setProperty("animation", value);
     }
 

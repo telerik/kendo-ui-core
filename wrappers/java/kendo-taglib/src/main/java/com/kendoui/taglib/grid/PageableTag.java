@@ -50,7 +50,7 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-pageable";
     }
 
-    public void setMessages(PageableMessagesTag value) {
+    public void setMessages(com.kendoui.taglib.grid.PageableMessagesTag value) {
         setProperty("messages", value);
     }
 

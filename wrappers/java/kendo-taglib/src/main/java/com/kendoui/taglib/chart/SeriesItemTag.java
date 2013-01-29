@@ -49,39 +49,39 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "chart-seriesItem";
     }
 
-    public void setBorder(SeriesItemBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.SeriesItemBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setConnectors(SeriesItemConnectorsTag value) {
+    public void setConnectors(com.kendoui.taglib.chart.SeriesItemConnectorsTag value) {
         setProperty("connectors", value);
     }
 
-    public void setHighlight(SeriesItemHighlightTag value) {
+    public void setHighlight(com.kendoui.taglib.chart.SeriesItemHighlightTag value) {
         setProperty("highlight", value);
     }
 
-    public void setLabels(SeriesItemLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.chart.SeriesItemLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(SeriesItemLineTag value) {
+    public void setLine(com.kendoui.taglib.chart.SeriesItemLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMarkers(SeriesItemMarkersTag value) {
+    public void setMarkers(com.kendoui.taglib.chart.SeriesItemMarkersTag value) {
         setProperty("markers", value);
     }
 
-    public void setNegativeValues(SeriesItemNegativeValuesTag value) {
+    public void setNegativeValues(com.kendoui.taglib.chart.SeriesItemNegativeValuesTag value) {
         setProperty("negativeValues", value);
     }
 
-    public void setOverlay(SeriesItemOverlayTag value) {
+    public void setOverlay(com.kendoui.taglib.chart.SeriesItemOverlayTag value) {
         setProperty("overlay", value);
     }
 
-    public void setTooltip(SeriesItemTooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.chart.SeriesItemTooltipTag value) {
         setProperty("tooltip", value);
     }
 

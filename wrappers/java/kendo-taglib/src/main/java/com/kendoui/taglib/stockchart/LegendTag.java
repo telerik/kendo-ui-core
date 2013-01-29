@@ -53,11 +53,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-legend";
     }
 
-    public void setBorder(LegendBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.LegendBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLabels(LegendLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.stockchart.LegendLabelsTag value) {
         setProperty("labels", value);
     }
 

@@ -50,15 +50,15 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         return "radialGauge-scale";
     }
 
-    public void setLabels(ScaleLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.radialgauge.ScaleLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setMajorTicks(ScaleMajorTicksTag value) {
+    public void setMajorTicks(com.kendoui.taglib.radialgauge.ScaleMajorTicksTag value) {
         setProperty("majorTicks", value);
     }
 
-    public void setMinorTicks(ScaleMinorTicksTag value) {
+    public void setMinorTicks(com.kendoui.taglib.radialgauge.ScaleMinorTicksTag value) {
         setProperty("minorTicks", value);
     }
 

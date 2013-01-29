@@ -50,7 +50,7 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
         return "radialGauge-pointer";
     }
 
-    public void setCap(PointerCapTag value) {
+    public void setCap(com.kendoui.taglib.radialgauge.PointerCapTag value) {
         setProperty("cap", value);
     }
 

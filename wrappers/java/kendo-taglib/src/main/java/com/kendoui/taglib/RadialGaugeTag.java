@@ -46,15 +46,15 @@ public class RadialGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "radialGauge";
     }
 
-    public void setGaugeArea(GaugeAreaTag value) {
+    public void setGaugeArea(com.kendoui.taglib.radialgauge.GaugeAreaTag value) {
         setProperty("gaugeArea", value);
     }
 
-    public void setPointer(PointerTag value) {
+    public void setPointer(com.kendoui.taglib.radialgauge.PointerTag value) {
         setProperty("pointer", value);
     }
 
-    public void setScale(ScaleTag value) {
+    public void setScale(com.kendoui.taglib.radialgauge.ScaleTag value) {
         setProperty("scale", value);
     }
 

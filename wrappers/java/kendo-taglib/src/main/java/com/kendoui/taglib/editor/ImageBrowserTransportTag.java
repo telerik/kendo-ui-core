@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserTransportTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class ImageBrowserTransportTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ImagebrowserTag parent = (ImagebrowserTag)findParentWithClass(ImagebrowserTag.class);
+        ImageBrowserTag parent = (ImageBrowserTag)findParentWithClass(ImageBrowserTag.class);
 
 
         parent.setTransport(this);
@@ -48,10 +48,10 @@ public class ImagebrowserTransportTag extends  BaseTag  /* interfaces *//* inter
 //>> Attributes
 
     public static String tagName() {
-        return "editor-imagebrowser-transport";
+        return "editor-imageBrowser-transport";
     }
 
-    public void setImageUrl(ImagebrowserTransportImageUrlFunctionTag value) {
+    public void setImageUrl(ImageBrowserTransportImageUrlFunctionTag value) {
         setEvent("imageUrl", value.getBody());
     }
 

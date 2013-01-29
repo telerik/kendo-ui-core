@@ -85,7 +85,7 @@ public class RangeSliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "rangeSlider";
     }
 
-    public void setTooltip(TooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.rangeslider.TooltipTag value) {
         setProperty("tooltip", value);
     }
 

@@ -51,7 +51,7 @@ public class ValueAxisItemTitleTag extends  BaseTag  /* interfaces *//* interfac
         return "chart-valueAxisItem-title";
     }
 
-    public void setBorder(ValueAxisItemTitleBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.ValueAxisItemTitleBorderTag value) {
         setProperty("border", value);
     }
 

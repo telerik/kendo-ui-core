@@ -1,23 +1,25 @@
 
-package com.kendoui.taglib.editor;
+package com.kendoui.taglib.tooltip;
 
 import com.kendoui.taglib.FunctionTag;
+
+import com.kendoui.taglib.TooltipTag;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserTransportImageUrlFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ErrorFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ImagebrowserTransportTag parent = (ImagebrowserTransportTag)findParentWithClass(ImagebrowserTransportTag.class);
+        TooltipTag parent = (TooltipTag)findParentWithClass(TooltipTag.class);
 
 
-        parent.setImageUrl(this);
+        parent.setError(this);
 
 //<< doEndTag
 

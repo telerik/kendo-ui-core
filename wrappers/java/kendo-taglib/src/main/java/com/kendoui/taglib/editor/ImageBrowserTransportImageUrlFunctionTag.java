@@ -7,17 +7,17 @@ import com.kendoui.taglib.FunctionTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ImagebrowserSchemaModelFieldsSizeParseFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ImageBrowserTransportImageUrlFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ImagebrowserSchemaModelFieldsSizeTag parent = (ImagebrowserSchemaModelFieldsSizeTag)findParentWithClass(ImagebrowserSchemaModelFieldsSizeTag.class);
+        ImageBrowserTransportTag parent = (ImageBrowserTransportTag)findParentWithClass(ImageBrowserTransportTag.class);
 
 
-        parent.setParse(this);
+        parent.setImageUrl(this);
 
 //<< doEndTag
 

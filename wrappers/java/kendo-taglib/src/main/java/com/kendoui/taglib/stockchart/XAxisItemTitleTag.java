@@ -51,7 +51,7 @@ public class XAxisItemTitleTag extends  BaseTag  /* interfaces *//* interfaces *
         return "stockChart-xAxisItem-title";
     }
 
-    public void setBorder(XAxisItemTitleBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.XAxisItemTitleBorderTag value) {
         setProperty("border", value);
     }
 

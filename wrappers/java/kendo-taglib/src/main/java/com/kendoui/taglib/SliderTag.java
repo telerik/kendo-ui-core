@@ -53,7 +53,7 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "slider";
     }
 
-    public void setTooltip(TooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.slider.TooltipTag value) {
         setProperty("tooltip", value);
     }
 

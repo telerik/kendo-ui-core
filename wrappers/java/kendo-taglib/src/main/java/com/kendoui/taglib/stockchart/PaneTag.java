@@ -49,11 +49,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-pane";
     }
 
-    public void setBorder(PaneBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.PaneBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setTitle(PaneTitleTag value) {
+    public void setTitle(com.kendoui.taglib.stockchart.PaneTitleTag value) {
         setProperty("title", value);
     }
 

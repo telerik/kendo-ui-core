@@ -53,7 +53,7 @@ public class ChartAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-chartArea";
     }
 
-    public void setBorder(ChartAreaBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.ChartAreaBorderTag value) {
         setProperty("border", value);
     }
 

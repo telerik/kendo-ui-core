@@ -51,7 +51,7 @@ public class PointerTrackTag extends  BaseTag  /* interfaces *//* interfaces */ 
         return "linearGauge-pointer-track";
     }
 
-    public void setBorder(PointerTrackBorderTag value) {
+    public void setBorder(com.kendoui.taglib.lineargauge.PointerTrackBorderTag value) {
         setProperty("border", value);
     }
 

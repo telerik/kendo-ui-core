@@ -51,7 +51,7 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         return "stockChart-yAxisItem-labels";
     }
 
-    public void setBorder(YAxisItemLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.YAxisItemLabelsBorderTag value) {
         setProperty("border", value);
     }
 

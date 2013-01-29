@@ -54,7 +54,7 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         return "comboBox";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.combobox.AnimationTag value) {
         setProperty("animation", value);
     }
 

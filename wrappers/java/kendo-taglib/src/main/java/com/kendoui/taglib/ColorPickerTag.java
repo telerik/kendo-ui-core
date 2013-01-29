@@ -103,6 +103,14 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("preview", value);
     }
 
+    public float getSize() {
+        return (float)getProperty("size");
+    }
+
+    public void setSize(float value) {
+        setProperty("size", value);
+    }
+
     public String getToolIcon() {
         return (String)getProperty("toolIcon");
     }

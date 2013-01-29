@@ -53,11 +53,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "chart-legend";
     }
 
-    public void setBorder(LegendBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.LegendBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLabels(LegendLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.chart.LegendLabelsTag value) {
         setProperty("labels", value);
     }
 

@@ -53,7 +53,7 @@ public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "chart-plotArea";
     }
 
-    public void setBorder(PlotAreaBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.PlotAreaBorderTag value) {
         setProperty("border", value);
     }
 

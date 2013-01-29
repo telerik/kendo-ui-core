@@ -51,7 +51,7 @@ public class CategoryAxisItemTitleTag extends  BaseTag  /* interfaces *//* inter
         return "stockChart-categoryAxisItem-title";
     }
 
-    public void setBorder(CategoryAxisItemTitleBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.CategoryAxisItemTitleBorderTag value) {
         setProperty("border", value);
     }
 

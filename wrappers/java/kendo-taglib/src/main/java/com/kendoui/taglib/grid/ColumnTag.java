@@ -53,7 +53,7 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     }
 
-    public void setFilterable(ColumnFilterableTag value) {
+    public void setFilterable(com.kendoui.taglib.grid.ColumnFilterableTag value) {
         setProperty("filterable", value);
     }
 

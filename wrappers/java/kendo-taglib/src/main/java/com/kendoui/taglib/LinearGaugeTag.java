@@ -46,15 +46,15 @@ public class LinearGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "linearGauge";
     }
 
-    public void setGaugeArea(GaugeAreaTag value) {
+    public void setGaugeArea(com.kendoui.taglib.lineargauge.GaugeAreaTag value) {
         setProperty("gaugeArea", value);
     }
 
-    public void setPointer(PointerTag value) {
+    public void setPointer(com.kendoui.taglib.lineargauge.PointerTag value) {
         setProperty("pointer", value);
     }
 
-    public void setScale(ScaleTag value) {
+    public void setScale(com.kendoui.taglib.lineargauge.ScaleTag value) {
         setProperty("scale", value);
     }
 

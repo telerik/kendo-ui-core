@@ -49,27 +49,27 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         return "chart-categoryAxisItem";
     }
 
-    public void setLabels(CategoryAxisItemLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.chart.CategoryAxisItemLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setLine(CategoryAxisItemLineTag value) {
+    public void setLine(com.kendoui.taglib.chart.CategoryAxisItemLineTag value) {
         setProperty("line", value);
     }
 
-    public void setMajorGridLines(CategoryAxisItemMajorGridLinesTag value) {
+    public void setMajorGridLines(com.kendoui.taglib.chart.CategoryAxisItemMajorGridLinesTag value) {
         setProperty("majorGridLines", value);
     }
 
-    public void setMajorTicks(CategoryAxisItemMajorTicksTag value) {
+    public void setMajorTicks(com.kendoui.taglib.chart.CategoryAxisItemMajorTicksTag value) {
         setProperty("majorTicks", value);
     }
 
-    public void setMinorGridLines(CategoryAxisItemMinorGridLinesTag value) {
+    public void setMinorGridLines(com.kendoui.taglib.chart.CategoryAxisItemMinorGridLinesTag value) {
         setProperty("minorGridLines", value);
     }
 
-    public void setMinorTicks(CategoryAxisItemMinorTicksTag value) {
+    public void setMinorTicks(com.kendoui.taglib.chart.CategoryAxisItemMinorTicksTag value) {
         setProperty("minorTicks", value);
     }
 
@@ -79,7 +79,7 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
 
     }
 
-    public void setTitle(CategoryAxisItemTitleTag value) {
+    public void setTitle(com.kendoui.taglib.chart.CategoryAxisItemTitleTag value) {
         setProperty("title", value);
     }
 

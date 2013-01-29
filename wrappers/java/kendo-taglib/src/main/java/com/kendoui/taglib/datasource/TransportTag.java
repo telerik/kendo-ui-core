@@ -51,19 +51,19 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dataSource-transport";
     }
 
-    public void setCreate(TransportCreateTag value) {
+    public void setCreate(com.kendoui.taglib.datasource.TransportCreateTag value) {
         setProperty("create", value);
     }
 
-    public void setDestroy(TransportDestroyTag value) {
+    public void setDestroy(com.kendoui.taglib.datasource.TransportDestroyTag value) {
         setProperty("destroy", value);
     }
 
-    public void setRead(TransportReadTag value) {
+    public void setRead(com.kendoui.taglib.datasource.TransportReadTag value) {
         setProperty("read", value);
     }
 
-    public void setUpdate(TransportUpdateTag value) {
+    public void setUpdate(com.kendoui.taglib.datasource.TransportUpdateTag value) {
         setProperty("update", value);
     }
 

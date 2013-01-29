@@ -54,7 +54,7 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
         return "autoComplete";
     }
 
-    public void setAnimation(AnimationTag value) {
+    public void setAnimation(com.kendoui.taglib.autocomplete.AnimationTag value) {
         setProperty("animation", value);
     }
 
