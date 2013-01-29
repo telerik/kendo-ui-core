@@ -72,19 +72,29 @@ $transport->create($create)
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
 $productIDField = new \Kendo\Data\DataSourceSchemaModelField('ProductID');
-$productIDField->type('number');
+$productIDField->type('number')
+               ->editable(false)
+               ->nullable(true);
 
 $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-$productNameField->type('string');
+$productNameField->type('string')
+                 ->validation(array('required' => true));
+
+
+$unitPriceValidation = new \Kendo\Data\DataSourceSchemaModelFieldValidation();
+$unitPriceValidation->required(true)
+                    ->min(1);
 
 $unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
-$unitPriceField->type('number');
+$unitPriceField->type('number')
+               ->validation($unitPriceValidation);
 
 $unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
 $unitsInStockField->type('number');
 
 $discontinuedField = new \Kendo\Data\DataSourceSchemaModelField('Discontinued');
-$discontinuedField->type('boolean');
+$discontinuedField->type('boolean')
+                 ->validation(array('required' => true, 'min' => 0));
 
 $model->id('ProductID')
       ->addField($productIDField)

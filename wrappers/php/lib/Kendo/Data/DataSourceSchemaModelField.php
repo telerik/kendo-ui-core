@@ -14,6 +14,22 @@ class DataSourceSchemaModelField extends \kendo\SerializableObject {
     public function type($value) {
         return $this->setProperty('type', $value);
     }
+
+    public function validation($value) {
+        return $this->setProperty('validation', $value);
+    }
+
+    public function editable($value) {
+        return $this->setProperty('editable', $value);
+    }
+
+    public function nullable($value) {
+        return $this->setProperty('nullable', $value);
+    }
+
+    public function defaultValue($value) {
+        return $this->setProperty('defaultValue', $value);
+    }
 }
 
 ?>
