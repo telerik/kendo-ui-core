@@ -8,35 +8,39 @@
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         title: {
-                            text: "Internet Users"
+                            text: "Site Visitors Stats /thousands/"
                         },
                         legend: {
-                            position: "bottom"
-                        },
-                        chartArea: {
-                            background: ""
+                            visible: false
                         },
                         seriesDefaults: {
                             type: "bar"
                         },
                         series: [{
-                            name: "World",
-                            data: [15.7, 16.7, 20, 23.5, 26.6]
+                            name: "Total Visits",
+                            data: [100000, 103000, 106000, 111000, 120000, 138000]
                         }, {
-                            name: "United States",
-                            data: [67.96, 68.93, 75, 74, 78]
+                            name: "Unique visitors",
+                            data: [63000, 50000, 43000, 48000, 67000, 83000]
                         }],
                         valueAxis: {
-                            labels: {
-                                format: "{0}%"
+                            max: 140000,
+                            line: {
+                                visible: false
+                            },
+                            minorGridLines: {
+                                visible: true
                             }
                         },
                         categoryAxis: {
-                            categories: [2005, 2006, 2007, 2008, 2009]
+                            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                            majorGridLines: {
+                                visible: false
+                            }
                         },
                         tooltip: {
                             visible: true,
-                            format: "{0}%"
+                            template: "#= series.name #: #= value #"
                         }
                     });
                 }
