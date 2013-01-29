@@ -15,7 +15,7 @@
 
 var SelectionUtils = {
     selectionFromWindow: function(window) {
-        if (browser.msie && browser.version < 9) {
+        if (!("getSelection" in window)) {
             return new W3CSelection(window.document);
         }
 
