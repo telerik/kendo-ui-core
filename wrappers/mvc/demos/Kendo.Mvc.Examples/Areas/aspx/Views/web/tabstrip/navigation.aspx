@@ -28,6 +28,15 @@
                 </div>
                 <span class="sunny">&nbsp;</span>
                 <% });
+                   
+            tabstrip.Add().Text("London")
+                .Content(() => { %>
+                <div class="weather">
+                    <h2>21<span>&ordm;C</span></h2>
+                    <p>Sunny weather in London.</p>
+                </div>
+                <span class="sunny">&nbsp;</span>
+                <% });
 
             tabstrip.Add().Text("Moscow")
                 .Content(() => { %>
@@ -54,7 +63,7 @@
 <ul id="keyboard-nav" class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider">Access key</span>
+            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
             +
             <span class="key-button">w</span>
         </span>

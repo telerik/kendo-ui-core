@@ -1,4 +1,4 @@
-        <script src="../../content/shared/js/people.js"></script>
+        <script src="../../content/shared/js/products.js"></script>
 
         <div id="example" class="k-content">
             <div class="k-rtl">
@@ -9,16 +9,14 @@
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            data: createRandomData(50),
+                            data: products,
                             schema: {
                                 model: {
                                     fields: {
-                                        FirstName: { type: "string" },
-                                        LastName: { type: "string" },
-                                        City: { type: "string" },
-                                        Title: { type: "string" },
-                                        BirthDate: { type: "date" },
-                                        Age: { type: "number" }
+                                        ProductName: { type: "string" },
+                                        UnitPrice: { type: "number" },
+                                        UnitsInStock: { type: "number" },
+                                        Discontinued: { type: "boolean" }
                                     }
                                 }
                             },
@@ -29,32 +27,10 @@
                         resizable: true,
                         pageable: true,
                         columns: [
-                            {
-                                field: "FirstName",
-                                title: "First Name",
-                                width: 100
-                            },
-                            {
-                                field: "LastName",
-                                title: "Last Name",
-                                width: 100
-                            },
-                            {
-                                field: "City",
-                                width: 100
-                            },
-                            {
-                                field: "Title"
-                            },
-                            {
-                                field: "BirthDate",
-                                title: "Birth Date",
-                                template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #'
-                            },
-                            {
-                                field: "Age",
-                                width: 50
-                            }
+                            "ProductName",
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px" },
+                            { field: "UnitsInStock", title: "Units In Stock", width: "130px" },
+                            { field: "Discontinued", width: "130px" }
                         ]
                     });
                 });

@@ -10,6 +10,7 @@
     .Scrollable()
     .DataSource(dataSource => dataSource
         .Ajax()
+        .PageSize(15)
         .Read(read => read.Action("Products_Read", "Grid"))
      )
      .Resizable(resize => resize.Columns(true))

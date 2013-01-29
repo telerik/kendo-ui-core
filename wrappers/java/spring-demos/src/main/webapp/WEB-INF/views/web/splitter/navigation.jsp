@@ -9,15 +9,16 @@
             <kendo:splitter-pane-content>
                 <kendo:splitter name="horizontal" style="height: 100%; width: 100%;">
 				    <kendo:splitter-panes>
-				        <kendo:splitter-pane collapsible="true" size="220px">
+				        <kendo:splitter-pane collapsible="true" size="220px" id="left-pane">
 				            <kendo:splitter-pane-content>
 				                <div class="pane-content">
 					                <h3>Inner splitter / left pane</h3>
 	                                <p>Resizable and collapsible.</p>
                                 </div>
 				            </kendo:splitter-pane-content>
+				           
 				        </kendo:splitter-pane>
-				        <kendo:splitter-pane collapsible="false">
+				        <kendo:splitter-pane collapsible="false"  id="center-pane">
 				            <kendo:splitter-pane-content>
 				                <div class="pane-content">
 					                <h3>Inner splitter / center pane</h3>
@@ -25,7 +26,7 @@
                                 </div>
 				            </kendo:splitter-pane-content>
 				        </kendo:splitter-pane>
-				        <kendo:splitter-pane collapsible="true" size="220px">
+				        <kendo:splitter-pane collapsible="true" size="220px"  id="right-pane">
 				            <kendo:splitter-pane-content>
 				                <div class="pane-content">
 					                <h3>Inner splitter / right pane</h3>
@@ -37,7 +38,7 @@
 				</kendo:splitter>
             </kendo:splitter-pane-content>
         </kendo:splitter-pane>
-        <kendo:splitter-pane collapsible="false" resizable="false" size="100px">
+        <kendo:splitter-pane collapsible="false" resizable="false" size="100px"  id="bottom-pane">
             <kendo:splitter-pane-content>
                 <div class="pane-content">
 	                <h3>Outer splitter / bottom pane</h3>

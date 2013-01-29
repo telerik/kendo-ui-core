@@ -133,6 +133,11 @@
 	    float: right;
 	}
 	
+	#keyboard-nav
+    {
+        padding-top: 35px;
+    }
+	
 	#forecast h2 {
 	    font-weight: lighter;
 	    font-size: 5em;

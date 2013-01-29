@@ -8,14 +8,16 @@
 	            <kendo:grid-column title="Product Name" field="productName" />
 	            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
 	            <kendo:grid-column title="Units In Stock" field="unitsInStock" />
+	            <kendo:grid-column title="Discontinued" field="discontinued" />
 	        </kendo:grid-columns>
-	        <kendo:dataSource data="${products}" pageSize="10">        
+	        <kendo:dataSource data="${products}" pageSize="15">        
 	            <kendo:dataSource-schema>
 	                <kendo:dataSource-schema-model>
 	                    <kendo:dataSource-schema-model-fields>
 	                        <kendo:dataSource-schema-model-field name="productName" type="string" />
 	                        <kendo:dataSource-schema-model-field name="unitPrice" type="number" />
 	                        <kendo:dataSource-schema-model-field name="unitsInStock" type="number" />
+	                        <kendo:dataSource-schema-model-field name="discontinued" type="bool" />
 	                    </kendo:dataSource-schema-model-fields>
 	                </kendo:dataSource-schema-model>
 	            </kendo:dataSource-schema>
