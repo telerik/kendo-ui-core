@@ -9,6 +9,20 @@ class Window extends \Kendo\UI\Widget {
         return 'Window';
     }
 
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the PanelBarItem.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the Window.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
+
     protected function createElement() {
         $element = new \Kendo\Html\Element('div');
 
