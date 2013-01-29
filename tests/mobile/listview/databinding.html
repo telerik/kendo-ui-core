@@ -1,4 +1,4 @@
-<!DOCTYPE dom>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -263,7 +263,7 @@
                 link = dom.find("li");
 
                 link.trigger(kendo.support.mousedown);
-                link.trigger("click");
+                link.trigger("mouseup");
             });
 
             test("resetting dataSource detaches the previouse events", function() {
@@ -515,7 +515,7 @@
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
 
-                    listview.parent().find(".km-load").click();
+                    listview.parent().find(".km-load").trigger("mouseup");
                 }
 
                 ds.bind("change", firstAssert);
@@ -555,7 +555,7 @@
                 function firstAssert() {
                     ds.unbind("change", firstAssert);
 
-                    listview.parent().find(".km-load").click();
+                    listview.parent().find(".km-load").trigger("mouseup");
                 }
 
                 ds.bind("change", firstAssert);
@@ -575,7 +575,7 @@
                 ok(button.is(":visible"));
                 ok(!icon.is(":visible"));
 
-                button.click();
+                button.trigger("mouseup");
 
                 ok(!button.is(":visible"));
                 equal(icon.css("display"), "block");
@@ -603,7 +603,7 @@
                     ok(!icon.is(":visible"));
                 });
 
-                button.click();
+                button.trigger("mouseup");
             });
 
             module("endless scrolling", {

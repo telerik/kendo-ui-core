@@ -15,12 +15,9 @@
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
 
-        NS = ".kendoMobileListView",
         LAST_PAGE_REACHED = "lastPageReached",
-        CLICK = "click",
-        TRIGGER = "touchend click",
-        TRIGGER_NS = TRIGGER.split(" ").join(NS + " ") + NS,
 
+        CLICK = "click",
         CHANGE = "change",
         PROGRESS = "progress",
         FUNCTION = "function",
@@ -84,7 +81,7 @@
             element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
-                .on(TRIGGER, ITEM_SELECTOR, "_click");
+                .on("up", ITEM_SELECTOR, "_click");
 
             element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
@@ -283,7 +280,7 @@
            if (that._loadButton) {
                that.loading = false;
                that._loadButton
-                   .off(TRIGGER_NS)
+                   .kendoDestroy()
                    .parent().hide();
 
                that.trigger(LAST_PAGE_REACHED);
@@ -602,8 +599,7 @@
                 loadWrapper = $('<span class="km-load-more"></span>').append(that._loadIcon);
 
                 if (loadMore) {
-                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
-                                        .on(TRIGGER_NS, proxy(that._nextPage, that));
+                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>').on("up", proxy(that._nextPage, that));
 
                     loadWrapper.append(that._loadButton);
                 }
