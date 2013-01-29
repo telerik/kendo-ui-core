@@ -31,17 +31,14 @@ $transport->read($read)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
-$productNameField = new \Kendo\Data\DataSourceSchemaModelField();
-$productNameField->field('ProductName')
-                 ->type('string');
+$productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+$productNameField->type('string');
 
-$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField();
-$unitPriceField->field('UnitPrice')
-               ->type('number');
+$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
+$unitPriceField->type('number');
 
-$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField();
-$unitsInStockField->field('UnitsInStock')
-                  ->type('number');
+$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
+$unitsInStockField->type('number');
 
 $model->addField($productNameField)
       ->addField($unitPriceField)
