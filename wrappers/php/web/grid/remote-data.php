@@ -71,7 +71,6 @@ $unitPrice->field('UnitPrice')
 
 $unitsInStock = new \Kendo\UI\GridColumn();
 $unitsInStock->field('UnitsInStock')
-          ->format('{0:c}')
           ->title('Units In Stock');
 
 $grid->addColumn($productName)
