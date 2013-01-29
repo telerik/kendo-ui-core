@@ -168,6 +168,54 @@ class DataSourceResult {
         }
     }
 
+    public function update($table, $columns, $models, $key) {
+        $result = array();
+
+        if (in_array($key, $columns)) {
+
+            if (!is_array($models)) {
+                $models = array($models);
+            }
+
+            $errors = array();
+
+            foreach ($models as $model) {
+                $set = array();
+
+                $input_parameters = array();
+
+                foreach ($columns as $column) {
+                    if ($column != $key) {
+                        $set[] = "$column=?";
+                        $input_parameters[] = $model->$column;
+                    }
+                }
+
+                $input_parameters[] = $model->$key;
+
+                $set = implode(', ', $set);
+
+                $sql = "UPDATE $table SET $set WHERE $key=?";
+
+                $statement = $this->db->prepare($sql);
+
+                $statement->execute($input_parameters);
+
+                $status = $statement->errorInfo();
+
+                if ($status[1] > 0) {
+                    $errors[] = $status[2];
+                }
+            }
+
+            if (count($errors) > 0) {
+                $result['errors'] = $errors;
+            }
+        }
+
+        return $result;
+    }
+
     public function read($table, $columns, $request = null) {
         $result = array();
 
@@ -200,7 +248,7 @@ class DataSourceResult {
 
         $statement->execute();
 
-        $data = $statement->fetchAll();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         $result['data'] = $data;
 
