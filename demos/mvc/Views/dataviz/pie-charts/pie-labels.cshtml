@@ -1,66 +1,69 @@
 
         <div id="example" class="k-content">
-            <div class="configuration k-widget k-header" style="width:170px;">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">Pie Chart</span>
-                <ul class="options">
-                    <li>
-                        <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
-                        <label for="labels">Show labels</label>
-                    </li>
-                    <li>
-                        <input id="alignCircle" name="alignType" type="radio"
-                               value="circle" checked="checked" autocomplete="off" />
-                        <label for="alignCircle">- aligned in circle</label>
-                    </li>
-                    <li>
-                        <input id="alignColumn" name="alignType" type="radio"
-                               value="column" autocomplete="off" />
-                        <label for="alignColumn">- aligned in columns</label>
-                    </li>
-                </ul>
-            </div>
             <div class="chart-wrapper">
                 <div id="chart"></div>
+            </div>
+            <div class="configuration-horizontal">
+                <div class="config-section">
+                    <span class="configHead">Labels Configuration</span>
+                    <ul class="options">
+                        <li>
+                            <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
+                            <label for="labels">Show labels</label>
+                        </li>
+                        <li>
+                            <input id="alignCircle" name="alignType" type="radio"
+                                   value="circle" checked="checked" autocomplete="off" />
+                            <label for="alignCircle">Aligned in circle</label>
+                        </li>
+                        <li>
+                            <input id="alignColumn" name="alignType" type="radio"
+                                   value="column" autocomplete="off" />
+                            <label for="alignColumn">Aligned in columns</label>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         title: {
-                            text: "Internet Users in United States"
+                            text: "What is you favourite sport?"
                         },
                         legend: {
-                            position: "bottom"
+                           position: "top"                            
                         },
                         seriesDefaults: {
                             labels: {
-                                template: "#= kendo.format('{0:P}', percentage)#",
-                                visible: true
+                                template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+                                position: "outsideEnd",
+                                visible: true,
+                                background: "transparent"
                             }
                         },
                         series: [{
                             type: "pie",
-                            data: [ {
-                                category: "2005",
-                                value: 67.96
+                            data: [{
+                                category: "Football",
+                                value: 35
                             }, {
-                                category: "2006",
-                                value: 68.93
+                                category: "Basketball",
+                                value: 25
                             }, {
-                                category: "2007",
-                                value: 75
+                                category: "Volleyball",
+                                value: 20
                             }, {
-                                category: "2008",
-                                value: 74
+                                category: "Rugby",
+                                value: 10
                             }, {
-                                category: "2009",
-                                value: 78
-                            } ]
+                                category: "Tennis",
+                                value: 10
+                            }]
                         }],
                         tooltip: {
                             visible: true,
-                            template: "#= category # - #= kendo.format('{0:P}', percentage)#"
+                            template: "#= category # - #= kendo.format('{0:P}', percentage) #"
                         }
                     });
                 }
@@ -76,7 +79,7 @@
                         });
                     }, 400);
 
-                    $(".configuration").bind("change", refresh);
+                    $(".configuration-horizontal").bind("change", refresh);
                 });
 
                 function refresh() {
@@ -97,17 +100,8 @@
             </script>
 
             <style scoped>
-                .chart-wrapper {
-                	margin: 0 0 0 20px;
-                	width: 466px;
-                	height: 434px;
-                	background: url("../../content/shared/styles/chart-wrapper-small.png") transparent no-repeat 0 0;
-                }
-                
-                .chart-wrapper .k-chart {
-                    height: 280px;
-                    padding: 37px;
-                    width: 390px;
+                .chart-wrapper, .chart-wrapper .k-chart {
+                    height: 400px;
                 }
             </style>
         </div>

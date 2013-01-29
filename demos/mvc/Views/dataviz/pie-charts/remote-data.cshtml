@@ -1,43 +1,88 @@
 
         <div id="example" class="k-content absConf">
             <div class="chart-wrapper" style="margin: auto;">
-                <div id="chart"></div>
+                <h3>1024x768 screen resolution trends</h3>
+                <div id="chart2000" class="small-chart"></div>
+                <div id="chart2001" class="small-chart"></div>
+                <div id="chart2002" class="small-chart"></div>
+                <div id="chart2003" class="small-chart"></div>
+                <div id="chart2004" class="small-chart"></div>
+                <div id="chart2005" class="small-chart"></div>
+                <div id="chart2006" class="small-chart"></div>
+                <div id="chart2007" class="small-chart"></div>
+                <div id="chart2008" class="small-chart"></div>
+                <div id="chart2009" class="small-chart"></div>
             </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/spain-electricity.json",
-                                    dataType: "json"
-                                }
-                            },
-                            sort: {
-                                field: "year",
-                                dir: "asc"
-                            }
-                        },
-                        title: {
-                            text: "Spain electricity production (GWh)"
-                        },
-                        legend: {
-                            position: "top"
-                        },
-                        seriesDefaults: {
-                            type: "pie"
-                        },
-                        series: [{
-                            field: "nuclear",
-                            categoryField: "year"
-                        }],
-                        tooltip: {
-                            visible: true,
-                            format: "N0"
-                        }
-                    });
+            <style scoped>
+                .chart-wrapper {
+                    text-align: center;
+                    height: 340px;
                 }
+                .chart-wrapper h3 {
+                    padding: 1em 0;
+                    font-size: 1.5em;
+                    font-weight: normal;
+                }
+                .k-chart.small-chart {
+                    display: inline-block;
+                    width: 120px;
+                    height: 120px;
+                }
+            </style>
+            <script>
+                function createSmallChart(year) {
+                        $("#chart" + year).kendoChart({
+                                theme: $(document).data("kendoSkin") || "default",
+                                dataSource: {
+                                    transport: {
+                                        read: {
+                                            url: "../../content/dataviz/js/screen_resolution.json",
+                                            dataType: "json"
+                                        }
+                                    },
+                                    filter: {
+                                        field: "year", operator: "eq", value: year
+                                    },
+                                    sort: {
+                                        field: "year",
+                                        dir: "asc"
+                                    }
+                                },
+                                title: {
+                                    text: year
+                                },
+                                legend: {
+                                    position: "top"
+                                },
+                                seriesDefaults: {
+                                    type: "pie"
+                                },
+                                series: [{
+                                    field: "share",
+                                    categoryField: "resolution",
+                                    padding: 0
+                                }],
+                                tooltip: {
+                                    visible: true,
+                                    format: "N0",
+                                    template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+                                }
+                        });
+                }
+                
+            
+                function createChart() {
+                        createSmallChart(2000);
+                        createSmallChart(2001);
+                        createSmallChart(2002);
+                        createSmallChart(2003);
+                        createSmallChart(2004);
+                        createSmallChart(2005);
+                        createSmallChart(2006);
+                        createSmallChart(2007);
+                        createSmallChart(2008);
+                        createSmallChart(2009);
+                }   
 
                 $(document).ready(function() {
                     setTimeout(function() {
