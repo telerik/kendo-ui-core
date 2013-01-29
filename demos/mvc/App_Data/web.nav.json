@@ -527,8 +527,7 @@
                     "text": "Popup editing",
                     "url": "grid/editing-popup.html",
                     "title": "Popup data editing example for Kendo UI Grid widget",
-                    "meta": "This demo illustrates how the records in KendoGrid can be easily modified in a pop-up dialog.",
-                    "packages": ["!mvc"]
+                    "meta": "This demo illustrates how the records in KendoGrid can be easily modified in a pop-up dialog."
                 },
                 {
                     "text": "Editing custom editor",
