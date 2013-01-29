@@ -1428,7 +1428,7 @@ kendo_module({
                 }
 
                 if (position >= tickPos && position <= nextTickPos) {
-                    categoryIx = math.max(0, vertical ? majorTicks.length - i - 2: i);
+                    categoryIx = i;
                     break;
                 }
             }
