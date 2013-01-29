@@ -1,22 +1,11 @@
 
         <div id="example" class="k-content">
             <div class="chart-wrapper">
-                <div id="chart1024"></div>
-		<div id="chart800"></div>
+                <div id="chart"></div>
             </div>
-	    <style scoped>
-		#chart1024,
-		#chart800 {
-		    display: inline-block;
-		    width: 340px;
-		}
-		.chart-wrapper, .chart-wrapper .k-chart {
-		    height: 350px;
-		}
-	    </style>
             <script>
                 function createChart() {
-                    $("#chart1024").kendoChart({
+                    $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         dataSource: {
                             transport: {
@@ -25,13 +14,6 @@
                                     dataType: "json"
                                 }
                             },
-                            filter: {
-				logic: "or",
-				filters: [
-				    {field: "resolution", operator: "eq", value: "Other"},
-				    {field: "resolution", operator: "eq", value: "1024x768"}
-				]
-			    },
                             sort: {
                                 field: "order",
                                 dir: "asc"
@@ -45,51 +27,6 @@
                         },
                         title: {
                             text: "1024x768 screen resolution trends"
-                        },
-                        seriesDefaults: {
-                            type: "donut"
-                        },
-                        series: [{
-                            field: "share",
-                            categoryField: "resolution",
-                            visibleInLegendField: "visibleInLegend",
-			    padding: 10
-                        }],
-                        tooltip: {
-                            visible: true,
-                            template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
-                        }
-                    });
-		    
-		    $("#chart800").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/screen_resolution.json",
-                                    dataType: "json"
-                                }
-                            },
-                            filter: {
-				logic: "or",
-				filters: [
-				    {field: "resolution", operator: "eq", value: "Other"},
-				    {field: "resolution", operator: "eq", value: "800x600"}
-				]
-			    },
-                            sort: {
-                                field: "order",
-                                dir: "asc"
-                            },
-                            group: {
-                                field: "year"
-                            }
-                        },
-                        legend: {
-                            position: "top"
-                        },
-                        title: {
-                            text: "800x600 screen resolution trends"
                         },
                         seriesDefaults: {
                             type: "donut"

@@ -6,17 +6,10 @@
 	"order": 1
 },{
 	"year": 2000,
-	"resolution": "800x600",
-	"share": 56,
+	"resolution": "Other",
+	"share": 75,
 	"visibleInLegend": false,
 	"order": 2,
-	"color": "#c00"
-},{
-	"year": 2000,
-	"resolution": "Other",
-	"share": 20,
-	"visibleInLegend": false,
-	"order": 3,
 	"color": "#ccc"
 },{
 	"year": 2001,
@@ -26,16 +19,10 @@
 	"order": 1
 },{
 	"year": 2001,
-	"resolution": "800x600",
-	"share": 55,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2001,
 	"resolution": "Other",
-	"share": 20,
+	"share": 71,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2002,
@@ -45,16 +32,10 @@
 	"order": 1
 },{
 	"year": 2002,
-	"resolution": "800x600",
-	"share": 52,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2002,
 	"resolution": "Other",
-	"share": 20,
+	"share": 66,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2003,
@@ -64,16 +45,10 @@
 	"order": 1
 },{
 	"year": 2003,
-	"resolution": "800x600",
-	"share": 47,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2003,
 	"resolution": "Other",
-	"share": 20,
+	"share": 60,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2004,
@@ -83,16 +58,10 @@
 	"order": 1
 },{
 	"year": 2004,
-	"resolution": "800x600",
-	"share": 37,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2004,
 	"resolution": "Other",
-	"share": 20,
+	"share": 53,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2005,
@@ -102,16 +71,10 @@
 	"order": 1
 },{
 	"year": 2005,
-	"resolution": "800x600",
-	"share": 30,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2005,
 	"resolution": "Other",
-	"share": 20,
+	"share": 47,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2006,
@@ -122,16 +85,10 @@
 	"color": "#c00"
 },{
 	"year": 2006,
-	"resolution": "800x600",
-	"share": 20,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2006,
 	"resolution": "Other",
-	"share": 20,
+	"share": 43,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2007,
@@ -141,16 +98,10 @@
 	"order": 1
 },{
 	"year": 2007,
-	"resolution": "800x600",
-	"share": 14,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2007,
 	"resolution": "Other",
-	"share": 20,
+	"share": 46,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2008,
@@ -160,16 +111,10 @@
 	"order": 1
 },{
 	"year": 2008,
-	"resolution": "800x600",
-	"share": 8,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2008,
 	"resolution": "Other",
-	"share": 20,
+	"share": 52,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 },{
 	"year": 2009,
@@ -179,15 +124,9 @@
 	"order": 1
 },{
 	"year": 2009,
-	"resolution": "800x600",
-	"share": 4,
-	"visibleInLegend": false,
-	"order": 2
-},{
-	"year": 2009,
 	"resolution": "Other",
-	"share": 20,
+	"share": 64,
 	"visibleInLegend": false,
-	"order": 3,
+	"order": 2,
 	"color": "#ccc"
 }]
