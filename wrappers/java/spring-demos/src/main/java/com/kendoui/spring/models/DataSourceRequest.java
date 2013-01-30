@@ -4,7 +4,10 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,9 +120,14 @@ public class DataSourceRequest {
                 value = Short.parseShort(value.toString());
             } else if (type == boolean.class || type == Boolean.class) {
                 value = Boolean.parseBoolean(value.toString());
+            } else if (type == Date.class){
+                SimpleDateFormat df = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" );
+                String input = value.toString();
+                value = df.parse(input);
             }
         }catch (IntrospectionException e) {
         }catch(NumberFormatException nfe) {
+        }catch (ParseException e) {
         }
         
         switch(operator) {

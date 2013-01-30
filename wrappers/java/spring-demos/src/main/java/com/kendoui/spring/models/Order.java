@@ -1,7 +1,7 @@
 package com.kendoui.spring.models;
 
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class Order {
     private String shipName;
     private String shipCity;
     private double freight;
-    private Calendar orderDate;
+    private Date orderDate;
     private String shipAddress;
     private String shipCountry;
     
@@ -55,12 +55,12 @@ public class Order {
     }
     
     @Column(name="OrderDate")
-    @JsonSerialize(using=CustomDateSerializer.class)
-    public Calendar getOrderDate() {
+    @JsonSerialize(using=CustomUtilDateSerializer.class)
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Calendar orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
     
