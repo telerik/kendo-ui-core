@@ -2,7 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
-        .Name("Grid")
+        .Name("grid")
         .Columns(columns =>
         {
             columns.Bound(p => p.OrderID).Filterable(false).Width(100);
@@ -13,8 +13,9 @@
         })
         .Pageable()
         .Sortable()
-        .Scrollable(scr=>scr.Height(430))
+        .Scrollable()
         .Filterable()
+        .HtmlAttributes(new { style = "height:430px;" })
         .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(20)
