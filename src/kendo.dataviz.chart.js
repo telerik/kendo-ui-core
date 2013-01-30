@@ -358,9 +358,11 @@ kendo_module({
             var chart = this,
                 options = chart.options,
                 element = chart.element,
+                height = math.round(element.innerHeight()),
+                width = math.round(element.innerWidth()),
                 model = new RootElement(deepExtend({
-                    width: element.width() || DEFAULT_WIDTH,
-                    height: element.height() || DEFAULT_HEIGHT,
+                    width: width || DEFAULT_WIDTH,
+                    height: height || DEFAULT_HEIGHT,
                     transitions: options.transitions
                     }, options.chartArea)),
                 plotArea;
