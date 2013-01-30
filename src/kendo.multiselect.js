@@ -119,20 +119,57 @@ kendo_module({
             }*/
         },
 
-        _filterSource: function(filter) {
-            var that = this,
-                options = that.options,
-                dataSource = that.dataSource,
-                expression = dataSource.filter() || {};
+        current: function(candidate) {
+            var that = this;
+                id = that._optionID;
 
-            removeFiltersForField(expression, options.dataTextField);
+            if (candidate !== undefined) {
+                if (that._current) {
+                    that._current
+                        .removeClass(FOCUSED)
+                        .removeAttr("aria-selected")
+                        .removeAttr(ID);
 
-            if (filter) {
-                expression = expression.filters || [];
-                expression.push(filter);
+                    //that._focused
+                    //    .removeAttr("aria-activedescendant");
+                }
+
+                if (candidate) {
+                    candidate.addClass(FOCUSED);
+                    that._scroll(candidate);
+
+                    if (id) {
+                        candidate.attr("id", id);
+                        that._focused.attr("aria-activedescendant", id);
+                    }
+
+                    if (that._currentTag) {
+                        that.currentTag(null);
+                    }
+                }
+
+                that._current = candidate;
+            } else {
+                return that._current;
             }
+        },
 
-            dataSource.filter(expression);
+        currentTag: function(candidate) {
+            var that = this;
+
+            if (candidate !== undefined) {
+                if (that._currentTag) {
+                    that._currentTag.removeClass(FOCUSED);
+                }
+
+                if (candidate) {
+                    candidate.addClass(FOCUSED);
+                }
+
+                that._currentTag = candidate;
+            } else {
+                return that._currentTag;
+            }
         },
 
         close: function() {
@@ -147,11 +184,9 @@ kendo_module({
             if (!that.ul[0].firstChild || that._state === "accept") {
                 that._open = true;
                 that._filterSource();
-            } else {
-                if (!popup.visible() && that._visibleItems) {
-                    popup.open();
-                    that.current($(first(that.ul[0])));
-                }
+            } else if (!popup.visible() && that._visibleItems) {
+                popup.open();
+                that.current($(first(that.ul[0])));
             }
         },
 
@@ -176,10 +211,9 @@ kendo_module({
 
                 that._open = false;
                 that.toggle(length);
-            } else {
-                that.current($(first(that.ul[0])));
             }
 
+            that.current($(first(that.ul[0])));
             that._hideBusy();
         },
 
@@ -302,6 +336,22 @@ kendo_module({
                     ignoreCase: ignoreCase
                 });
             }
+        },
+
+        _filterSource: function(filter) {
+            var that = this,
+                options = that.options,
+                dataSource = that.dataSource,
+                expression = dataSource.filter() || {};
+
+            removeFiltersForField(expression, options.dataTextField);
+
+            if (filter) {
+                expression = expression.filters || [];
+                expression.push(filter);
+            }
+
+            dataSource.filter(expression);
         },
 
         _search: function() {
@@ -504,59 +554,6 @@ kendo_module({
             textWidth = that._span.width() + 25;
 
             that.input.width(textWidth > wrapperWidth ? wrapperWidth : textWidth);
-        },
-
-        current: function(candidate) {
-            var that = this;
-                id = that._optionID;
-
-            if (candidate !== undefined) {
-                if (that._current) {
-                    that._current
-                        .removeClass(FOCUSED)
-                        .removeAttr("aria-selected")
-                        .removeAttr(ID);
-
-                    //that._focused
-                    //    .removeAttr("aria-activedescendant");
-                }
-
-                if (candidate) {
-                    candidate.addClass(FOCUSED);
-                    that._scroll(candidate);
-
-                    if (id) {
-                        candidate.attr("id", id);
-                        that._focused.attr("aria-activedescendant", id);
-                    }
-
-                    if (that._currentTag) {
-                        that.currentTag(null);
-                    }
-                }
-
-                that._current = candidate;
-            } else {
-                return that._current;
-            }
-        },
-
-        currentTag: function(candidate) {
-            var that = this;
-
-            if (candidate !== undefined) {
-                if (that._currentTag) {
-                    that._currentTag.removeClass(FOCUSED);
-                }
-
-                if (candidate) {
-                    candidate.addClass(FOCUSED);
-                }
-
-                that._currentTag = candidate;
-            } else {
-                return that._currentTag;
-            }
         },
 
         _scroll: function (item) {
@@ -777,34 +774,24 @@ kendo_module({
         //select value
         _select: function(li) {
             var that = this,
-                options = that.element[0].children,
-                length = options.length,
-                idx, dataItem, value;
+                dataItem,
+                idx;
 
             if (!isNaN(li)) {
                 idx = li;
-                $(that.ul[0].children[idx]).hide();
+                that.ul[0].children[idx].style.display = "none";
             } else {
-                idx = li.data("idx");
+                idx = li.hide().data("idx");
             }
 
-            //if (dataItem) //TODO: check whether the dataItem exists
+            that.element[0].children[idx].selected = true;
+
             dataItem = that.dataSource.view()[idx];
-            value = that._value(dataItem);
-            idx = 0;
-
-            for (; idx < length; idx ++) {
-                if (options[idx].value == value) {
-                    options[idx].selected = true;
-                    break;
-                }
-            }
-
             that.tagList.append(that.tagTemplate(dataItem));
             that._dataItems.push(dataItem);
+
             that._visibleItems -= 1;
             that.currentTag(null);
-
             that.input.val("");
 
             if (that._state === "filter") {
