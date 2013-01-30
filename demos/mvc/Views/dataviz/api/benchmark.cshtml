@@ -3,9 +3,9 @@
 }
         <div id="example" class="k-content">
             <div class="chart-wrapper">
+                <div id="chart"></div>
                 <button id="playButton" class="k-button" onclick="playButtonClick()">Start update</button>
                 <div id="fpsCount">-- FPS / (-- ms per frame)</div>
-                <div id="chart"></div>
             </div>
             <script>
                 var TICKS_PER_DAY = 86400000,
@@ -28,23 +28,35 @@
                         series: [{
                             type: "column",
                             name: "Stock A",
+                            color: "#ffba00",
+                            overlay: {
+                                gradient: "none"
+                            },
                             data: stocks[0]
                         }, {
                             type: "line",
                             name: "Stock B",
+                            color: "#565656",
                             data: stocks[1]
                         }, {
                             type: "line",
                             name: "Stock C",
+                            color: "#ffba00",
                             data: stocks[2]
                         }],
                         valueAxis: {
                             labels: {
                                 format: "${0}"
+                            },
+                            line: {
+                                visible: false
                             }
                         },
                         categoryAxis: {
-                            categories: categoryList
+                            categories: categoryList,
+                            majorGridLines: {
+                                visible: false
+                            }
                         },
                         transitions: false
                     });
@@ -140,9 +152,20 @@
                 }
             </script>
             <style scoped>
-                #main {
-                    border-left: 0;
-                    width: 940px;
+                .chart-wrapper .k-chart {
+                    height: 390px;
+                }
+                .chart-wrapper #playButton {
+                    position: absolute;
+                    right: 15px;
+                    bottom: 15px;
+                }
+                
+                .chart-wrapper #fpsCount {
+                    position: absolute;
+                    left: 15px;
+                    bottom: 20px;
+                    white-space: nowrap;
                 }
             </style>
         </div>

@@ -2354,19 +2354,6 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     margin-left: 0;
 }
 
-.chart-wrapper #playButton {
-    position: absolute;
-    right: 15px;
-    bottom: 56px;
-}
-
-.chart-wrapper #fpsCount {
-    position: absolute;
-    left: 15px;
-    bottom: 60px;
-    white-space: nowrap;
-}
-
 .chart-wrapper .k-chart {
     width: 700px;
     height: 430px;
