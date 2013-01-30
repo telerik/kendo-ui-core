@@ -155,16 +155,17 @@ kendo_module({
             if (typeof colors == "string") {
                 colors = colors.split(",");
             }
+
             if ($.isArray(colors)) {
                 colors = map(colors, parse);
             }
 
             element.addClass("k-widget k-colorpalette")
                 .append($(that._template({
-                    colors : colors,
-                    size   : options.size,
-                    value  : that._value,
-                    id     : options.ariaId
+                    colors: colors,
+                    tileSize: options.tileSize,
+                    value: that._value,
+                    id: options.ariaId
                 })))
                 .on(CLICK_NS, ".k-item", function(ev){
                     that._select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
@@ -173,15 +174,15 @@ kendo_module({
                 .attr("tabIndex", 0)
                 .on(KEYDOWN_NS, bind(that._keydown, that));
 
-            var size = options.size, width, height;
-            if (size) {
-                if (/number|string/.test(typeof size)) {
-                    width = height = parseFloat(size);
-                } else if (typeof size == "object") {
-                    width = parseFloat(size.width);
-                    height = parseFloat(size.height);
+            var tileSize = options.tileSize, width, height;
+            if (tileSize) {
+                if (/number|string/.test(typeof tileSize)) {
+                    width = height = parseFloat(tileSize);
+                } else if (typeof tileSize == "object") {
+                    width = parseFloat(tileSize.width);
+                    height = parseFloat(tileSize.height);
                 } else {
-                    throw new Error("Unsupported value for the 'size' argument");
+                    throw new Error("Unsupported value for the 'tileSize' argument");
                 }
                 element.find(".k-item").css({ width: width, height: height });
             }
@@ -194,10 +195,10 @@ kendo_module({
             this.wrapper.focus();
         },
         options: {
-            name    : "ColorPalette",
-            columns : 10,
-            size    : null,
-            palette : "basic"
+            name: "ColorPalette",
+            columns: 10,
+            tileSize: null,
+            palette: "basic"
         },
         _onEnable: function(enable) {
             if (enable) {
