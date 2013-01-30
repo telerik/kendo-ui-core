@@ -7202,13 +7202,15 @@ kendo_module({
             opacity: 1,
             animation: {
                 duration: TOOLTIP_ANIMATION_DURATION
-            }
+            },
+            padding: 10
         },
 
         showAt: function(point) {
             var tooltip = this,
                 element = tooltip.element;
 
+            tooltip.point = point;
             tooltip.element.html(tooltip.content(point));
             tooltip.anchor = tooltip.tooltipAnchor(element.outerWidth(), element.outerHeight());
 
@@ -7266,16 +7268,33 @@ kendo_module({
 
         tooltipAnchor: function(width, height) {
             var tooltip = this,
+                options = tooltip.options,
+                position = options.position,
                 vertical = tooltip.axis.options.vertical,
                 points = tooltip.crosshair.points,
+                fPoint = points[0],
+                sPoint = points[1],
+                halfWidth = width / 2,
+                halfHeight = height / 2,
+                padding = options.padding,
                 x, y;
 
             if (vertical) {
-                x = points[1].x;
-                y = points[1].y - height / 2;
+                if (position === LEFT) {
+                    x = fPoint.x - width - padding;
+                    y = fPoint.y - halfHeight;
+                } else {
+                    x = sPoint.x + padding;
+                    y = sPoint.y - halfHeight;
+                }
             } else {
-                x = points[0].x + 10;
-                y = points[0].y;
+                if (position === BOTTOM) {
+                    x = sPoint.x - halfWidth;
+                    y = sPoint.y + padding;
+                } else {
+                    x = fPoint.x - halfWidth;
+                    y = fPoint.y - height - padding;
+                }
             }
 
             return Point2D(x, y);
