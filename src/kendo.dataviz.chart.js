@@ -6856,8 +6856,6 @@ kendo_module({
             }
         },
 
-        show: $.noop,
-
         move: function() {
             var tooltip = this,
                 options = tooltip.options,
@@ -7192,6 +7190,7 @@ kendo_module({
                 );
             }
             tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
+            tooltip.setStyle(tooltip.options);
         },
 
         options: {
@@ -7207,33 +7206,51 @@ kendo_module({
         },
 
         showAt: function(point) {
-            var tooltip = this;
+            var tooltip = this,
+                element = tooltip.element;
 
-            tooltip.point = point;
-            tooltip.showTimeout =
-                setTimeout(proxy(tooltip._move, tooltip), TOOLTIP_SHOW_DELAY);
+            tooltip.element.html(tooltip.content(point));
+            tooltip.anchor = tooltip.tooltipAnchor(element.outerWidth(), element.outerHeight());
+
+            tooltip.move();
         },
 
-        _move: function() {
+        move: function() {
+            var tooltip = this,
+                anchor = tooltip.anchor,
+                element = tooltip.element,
+                chartPadding = tooltip.chartPadding, top, left;
+
+            top = round(anchor.y + chartPadding.top) + "px";
+            left = round(anchor.x + chartPadding.left) + "px";
+
+            element.css({ top: top, left: left }).show();
+        },
+
+        setStyle: function(options) {
+            this.element
+                    .css({
+                        backgroundColor: options.background,
+                        borderColor: options.border.color,
+                        font: options.font,
+                        color: options.color,
+                        opacity: options.opacity,
+                        borderWidth: options.border.width
+                    });
+        },
+
+        content: function(point) {
             var tooltip = this,
                 options = tooltip.options,
-                point = tooltip.point,
                 axis = tooltip.axis,
                 axisOptions = axis.options,
-                element = tooltip.element,
-                chartPadding = tooltip.chartPadding,
-                value, content,
-                anchor, top, left, template;
-
-            if (!point) {
-                return;
-            }
+                content, value, tooltipTemplate;
 
             value = content = axis[options.stickyMode ? "getCategory" : "getValue"](point);
 
             if (options.template) {
-                template = template(options.template);
-                content = template({
+                tooltipTemplate = template(options.template);
+                content = tooltipTemplate({
                     value: value
                 });
             } else if (options.format) {
@@ -7244,48 +7261,10 @@ kendo_module({
                 }
             }
 
-            element.html(content);
-
-            anchor = tooltip.tooltipPosition(element.outerWidth(), element.outerHeight());
-            top = round(anchor.y + chartPadding.top) + "px";
-            left = round(anchor.x + chartPadding.left) + "px";
-
-            if (!tooltip.visible) {
-                tooltip.element.css({ top: top, left: left });
-            }
-
-            element
-                .css({
-                   backgroundColor: options.background,
-                   borderColor: options.border.color,
-                   font: options.font,
-                   color: options.color,
-                   opacity: options.opacity,
-                   borderWidth: options.border.width
-                })
-                .stop(true, true)
-                .show()
-                .animate({
-                    left: left,
-                    top: top
-                }, options.animation.duration);
-
-            tooltip.visible = true;
+            return content;
         },
 
-        hide: function() {
-            var tooltip = this;
-
-            clearTimeout(tooltip.showTimeout);
-            if (tooltip.visible) {
-                tooltip.element.fadeOut();
-
-                tooltip.point = null;
-                tooltip.visible = false;
-            }
-        },
-
-        tooltipPosition: function(width, height) {
+        tooltipAnchor: function(width, height) {
             var tooltip = this,
                 vertical = tooltip.axis.options.vertical,
                 points = tooltip.crosshair.points,
@@ -7300,6 +7279,12 @@ kendo_module({
             }
 
             return Point2D(x, y);
+        },
+
+        hide: function() {
+            var tooltip = this;
+            tooltip.element.hide();
+            tooltip.point = null;
         }
     });
 
