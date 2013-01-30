@@ -3777,6 +3777,56 @@ and is about to render it.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>ColorPalette</description>
+        <name>colorPalette</name>
+        <tag-class>com.kendoui.taglib.ColorPaletteTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The number of columns to display.  When you pass "websafe" this will
+automatically default to 18.</description>
+            <name>columns</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the color palette to display.  It can be a string with
+comma-separated colors in hex representation, an array of Color
+objects or of strings that parseColor understands.  As a shortcut,
+you can pass "basic" to get the simple palette (this is the default)
+or "websafe" to get the Web-safe palette.</description>
+            <name>palette</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The size of a color cell.</description>
+            <name>tileSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Triggers when a new color has been changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Triggers when a new color has been changed.</description>
+        <name>colorPalette-change</name>
+        <tag-class>com.kendoui.taglib.colorpalette.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>ColorPicker</description>
         <name>colorPicker</name>
         <tag-class>com.kendoui.taglib.ColorPickerTag</tag-class>
@@ -3837,7 +3887,7 @@ CSS-supported notation.</description>
         </attribute>
         <attribute>
             <description>The size (width and height) of a color cell for the Palette picker.</description>
-            <name>size</name>
+            <name>tileSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -5856,6 +5906,59 @@ as a collection of required properties, while the insertHtml tool requires a col
         <description>Fires when the Editor selection has changed.</description>
         <name>editor-select</name>
         <tag-class>com.kendoui.taglib.editor.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>FlatColorPicker</description>
+        <name>flatColorPicker</name>
+        <tag-class>com.kendoui.taglib.FlatColorPickerTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether we should display the Apply / Cancel buttons.</description>
+            <name>buttons</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Allows customization of "Apply" / "Cancel" labels.</description>
+            <name>messages</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether we should display the opacity slider to allow
+selection of transparency.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether we should display the preview bar which displays the
+current color and the input field.</description>
+            <name>preview</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Triggers when a new color has been selected.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Triggers when a new color has been selected.</description>
+        <name>flatColorPicker-change</name>
+        <tag-class>com.kendoui.taglib.flatcolorpicker.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

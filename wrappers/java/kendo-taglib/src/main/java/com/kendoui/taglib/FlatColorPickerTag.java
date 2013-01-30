@@ -2,19 +2,18 @@
 package com.kendoui.taglib;
 
 
-import com.kendoui.taglib.colorpicker.*;
 
-
+import com.kendoui.taglib.flatcolorpicker.ChangeFunctionTag;
 import com.kendoui.taglib.json.Function;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
+public class FlatColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
-    public ColorPickerTag() {
-        super("ColorPicker");
+    public FlatColorPickerTag() {
+        super("FlatColorPicker");
     }
     
     @Override
@@ -44,15 +43,11 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "colorPicker";
+        return "flatColorPicker";
     }
 
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
-    }
-
-    public void setSelect(SelectFunctionTag value) {
-        setEvent("select", value.getBody());
     }
 
     public boolean getButtons() {
@@ -61,14 +56,6 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setButtons(boolean value) {
         setProperty("buttons", value);
-    }
-
-    public float getColumns() {
-        return (float)getProperty("columns");
-    }
-
-    public void setColumns(float value) {
-        setProperty("columns", value);
     }
 
     public Object getMessages() {
@@ -87,44 +74,12 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("opacity", value);
     }
 
-    public String getPalette() {
-        return (String)getProperty("palette");
-    }
-
-    public void setPalette(String value) {
-        setProperty("palette", value);
-    }
-
     public boolean getPreview() {
         return (boolean)getProperty("preview");
     }
 
     public void setPreview(boolean value) {
         setProperty("preview", value);
-    }
-
-    public float getTileSize() {
-        return (float)getProperty("tileSize");
-    }
-
-    public void setTileSize(float value) {
-        setProperty("tileSize", value);
-    }
-
-    public String getToolIcon() {
-        return (String)getProperty("toolIcon");
-    }
-
-    public void setToolIcon(String value) {
-        setProperty("toolIcon", value);
-    }
-
-    public String getValue() {
-        return (String)getProperty("value");
-    }
-
-    public void setValue(String value) {
-        setProperty("value", value);
     }
 
     public String getChange() {
@@ -137,18 +92,6 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setChange(String value) {
         setProperty("change", new Function(value));
-    }
-
-    public String getSelect() {
-        Function property = ((Function)getProperty("select"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setSelect(String value) {
-        setProperty("select", new Function(value));
     }
 
 //<< Attributes
