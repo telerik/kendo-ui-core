@@ -731,8 +731,11 @@ kendo_module({
         },
 
         _mousemove: function(e) {
-            var chart = this,
-                plotArea = chart._plotArea,
+            var chart = this;
+            if (chart._lastTime && new Date() - chart._lastTime < 20) {
+                return;
+            }
+            var plotArea = chart._plotArea,
                 crosshairs = plotArea.crosshairs,
                 length = crosshairs.length,
                 coords = chart._eventCoordinates(e),
@@ -740,6 +743,8 @@ kendo_module({
                 tooltip = chart._tooltip,
                 tooltipOptions = tooltip.options || {},
                 i, crosshair;
+
+            chart._lastTime = new Date();
 
             if (length) {
                 for (i = 0; i < length; i++) {
@@ -7102,7 +7107,9 @@ kendo_module({
             if (crosshair._visible) {
                 crosshair._visible = false;
                 crosshair.repaint();
-                crosshair.tooltip.hide();
+                if (crosshair.tooltip) {
+                    crosshair.tooltip.hide();
+                }
             }
         },
 
@@ -7204,10 +7211,10 @@ kendo_module({
 
             tooltip.point = point;
             tooltip.showTimeout =
-                setTimeout(proxy(tooltip._show, tooltip), TOOLTIP_SHOW_DELAY);
+                setTimeout(proxy(tooltip._move, tooltip), TOOLTIP_SHOW_DELAY);
         },
 
-        _show: function() {
+        _move: function() {
             var tooltip = this,
                 options = tooltip.options,
                 point = tooltip.point,
