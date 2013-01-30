@@ -7033,7 +7033,7 @@ kendo_module({
                 result = [],
                 i, j, points, point;
 
-            if (categoryIndex != null) {
+            if (categoryIndex !== null) {
                 for (i = 0; i < charts.length; i++) {
                     points = charts[i].categoryPoints[categoryIndex];
                     for (j = 0; j < points.length; j++) {
