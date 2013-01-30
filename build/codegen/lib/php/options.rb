@@ -29,6 +29,10 @@ module CodeGen::PHP
             @name
         end
 
+        def path
+            php_namespace.gsub('\\', '/')
+        end
+
         def unique_options
             simple = simple_options
 
@@ -39,6 +43,12 @@ module CodeGen::PHP
             end
 
             result
+        end
+    end
+
+    module ArrayItem
+        def php_class
+            super.sub(@owner.name.pascalize, '')
         end
     end
 end

@@ -26,7 +26,7 @@ module CodeGen::PHP::Wrappers
 COMPOSITE_OPTION_SETTER = ERB.new(%{
     /**
     * <%= description %>
-    * @param mixed|<%= php_type %> $value
+    * @param <%= php_type %>|array $value
     * @return <%= owner.php_type %>
     */
     public function <%= php_name %>($value) {
@@ -63,7 +63,7 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <% if recursive %>
     /**
     * Adds <%= php_type %>.
-    * @param mixed|<%= php_type %> $value
+    * @param <%= php_type %>|array $value
     * @return <%= owner.owner.php_type %>
     */
     public function addItem($value) {
@@ -79,10 +79,6 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 
         def to_setter
             COMPOSITE_OPTION_SETTER.result(binding)
-        end
-
-        def path
-            php_namespace.gsub('\\', '/')
         end
 
         def to_php(filename)
@@ -178,7 +174,7 @@ EVENT_SETTER = ERB.new(%{
 ARRAY_SETTER = ERB.new(%{
     /**
     * Adds <%= item.php_class %> to the <%= owner.php_class %>.
-    * @param mixed|<%= item.php_type %>,... $value one or more <%= item.php_class %> to add.
+    * @param <%= item.php_type %>|array,... $value one or more <%= item.php_class %> to add.
     * @return <%= owner.php_type %>
     */
     public function add<%= item.name.pascalize %>($value) {
@@ -198,9 +194,7 @@ ARRAY_SETTER = ERB.new(%{
     end
 
     class ArrayItem < CompositeOption
-        def php_class
-            super.sub(@owner.name.pascalize, '')
-        end
+        include CodeGen::PHP::ArrayItem
     end
 
     COMPONENT = ERB.new(File.read("build/codegen/lib/php/component.php.erb"), 0, '%<>')
@@ -211,10 +205,6 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
 
     class Component < CodeGen::PHP::Component
         include Options
-
-        def path
-            php_namespace.gsub('\\', '/')
-        end
 
         def to_php(filename)
             php = File.exists?(filename) ? File.read(filename) : COMPONENT.result(binding)

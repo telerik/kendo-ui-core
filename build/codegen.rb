@@ -17,6 +17,7 @@ require 'codegen/lib/php/event'
 require 'codegen/lib/php/option'
 require 'codegen/lib/php/component'
 require 'codegen/lib/php/php'
+require 'codegen/lib/php/api'
 
 namespace :generate do
     def import_metadata(component)
@@ -30,26 +31,44 @@ namespace :generate do
     end
 
     desc 'Generate PHP wrappers'
-    task :php do
-        components = CodeGen::MarkdownParser.all(CodeGen::PHP::Wrappers::Component)
+    task :php => ['php:wrappers']
 
-        components.each do |component|
+    namespace :php do
+        desc 'Generate PHP classes'
+        task :wrappers do
+            components = CodeGen::MarkdownParser.all(CodeGen::PHP::Wrappers::Component)
 
-            import_metadata(component)
+            components.each do |component|
 
-            generator = CodeGen::PHP::Wrappers::Generator.new('wrappers/php/lib')
+                import_metadata(component)
 
-            generator.component(component)
+                generator = CodeGen::PHP::Wrappers::Generator.new('wrappers/php/lib')
 
+                generator.component(component)
+
+            end
         end
 
+        desc 'Generate PHP API reference'
+        task :api do
+            components = CodeGen::MarkdownParser.all(CodeGen::PHP::API::Component)
+
+            components.each do |component|
+
+                import_metadata(component)
+
+                generator = CodeGen::PHP::API::Generator.new('docs/api/wrappers/php/')
+
+                generator.component(component)
+
+            end
+        end
     end
 
     desc 'Generate JSP wrappers'
     task :java => ['java:tld', 'java:jsp']
 
     namespace :java do
-
 
         desc 'Generate JSP classes'
         task :jsp do
