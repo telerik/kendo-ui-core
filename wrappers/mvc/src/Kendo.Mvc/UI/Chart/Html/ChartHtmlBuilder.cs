@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Html
         {
             return new HtmlElement("div")
                 .Attributes(chart.HtmlAttributes)
-                .PrependClass(UIPrimitives.Widget, "k-chart");
+                .PrependClass("k-chart");
         }
 
         /// <summary>
