@@ -31,6 +31,10 @@ module CodeGen
             Method
         end
 
+        def widget?
+            @full_name.include?('.ui.')
+        end
+
         def import(metadata)
             metadata[:options].each do |option|
 
