@@ -71,7 +71,7 @@ COMPONENT_DESCRIPTION = ERB.new(%{
 A PHP class representing Kendo [<%= name %>](<%= api_link %>).
 
 <% if widget? %>
-## Configuration
+## Usage
 
 To use <%= php_class %> in a PHP page instantiate a new instance, configure it via the available
 configuration [methods](#methods) and output it by `echo`-ing the result of the `render` method.
