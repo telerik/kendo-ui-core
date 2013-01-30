@@ -2723,8 +2723,6 @@ function pad(number, digits, end) {
         }
     };
 
-    var kendoJQuery = $.sub();
-
     var eventMap = {
         down: "touchstart mousedown",
         move: "mousemove touchmove",
@@ -2762,8 +2760,7 @@ function pad(number, digits, end) {
                     var ret,
                         target = this,
                         related = event.relatedTarget,
-                        handleObj = event.handleObj,
-                        selector = handleObj.selector;
+                        handleObj = event.handleObj;
 
                     // For mousenter/leave call the handler if related is outside the target.
                     // NB: No relatedTarget if the mouse left/entered the browser window
