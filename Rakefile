@@ -3,7 +3,6 @@ require 'rake/testtask'
 
 require 'bundler/setup'
 require 'tempfile'
-require 'uri'
 
 VERBOSE = verbose == true
 

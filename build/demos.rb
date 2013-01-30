@@ -279,7 +279,7 @@ namespace :demos do
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
         'dist/demos/staging/content/cdn/styles/telerik',
-        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', URI.join(STAGING_CDN_ROOT, CURRENT_COMMIT).to_s, URI.join(STAGING_CDN_ROOT, CURRENT_COMMIT, 'themebuilder').to_s)
+        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', STAGING_CDN_ROOT + CURRENT_COMMIT, STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder')
     ]
 
     zip 'dist/demos/staging.zip' => :staging_site
