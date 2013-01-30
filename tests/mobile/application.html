@@ -6,9 +6,11 @@
 
         <script type="text/javascript">
             var realUserAgent = navigator.userAgent;
-            navigator.__defineGetter__('userAgent', function(){
-                return 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3'; // mock userAgent
-            });
+            if (navigator.__defineGetter__) {
+                navigator.__defineGetter__('userAgent', function(){
+                    return 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3'; // mock userAgent
+                });
+            }
         </script>
 
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
@@ -28,9 +30,11 @@
         <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script type="text/javascript">
+            if (navigator.__defineGetter__) {
             navigator.__defineGetter__('userAgent', function(){
                 return realUserAgent;
             });
+            }
         </script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
@@ -235,13 +239,15 @@
                 ok(application.element.hasClass("km-android"));
             });
 
-            test("Forcing platform layout still reports correct device", 1, function() {
-                setup('<div data-role="view" />', {
-                    platform: "android"
-                });
+            if (navigator.__defineGetter__) {
+                test("Forcing platform layout still reports correct device", 1, function() {
+                    setup('<div data-role="view" />', {
+                        platform: "android"
+                    });
 
-                ok(application.element.hasClass("km-on-ios"), "App element had to have km-on-ios, has " + application.element.attr("class"));
-            });
+                    ok(application.element.hasClass("km-on-ios"), "App element had to have km-on-ios, has " + application.element.attr("class"));
+                });
+            }
 
             test("Raises meaningful error when the app can't find views", 1, function() {
                 try {
