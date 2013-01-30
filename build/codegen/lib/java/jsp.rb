@@ -440,6 +440,9 @@ public interface Items {
 
             java = tag.to_java(filename)
 
+            dir = File.dirname(filename)
+            Dir.mkdir(dir) unless Dir.exists?(dir)
+
             File.write(filename, java.dos)
 
         end
