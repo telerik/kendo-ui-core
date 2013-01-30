@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         {
             IHtmlNode tag = builder.CreateChart();
 
-            tag.Attribute("class").ShouldEqual("k-widget k-chart");
+            tag.Attribute("class").ShouldEqual("k-chart");
         }
 
         [Fact]
