@@ -165,7 +165,7 @@
             var tabstrip = getTabStrip();
             var $item = $(getRootItem(6));
 
-            var e = new $.Event('mouseup');
+            var e = new $.Event('click');
 
             $item.find('> .k-link').trigger(e);
 
@@ -206,7 +206,7 @@
 
             isRaised = false;
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             ok(isRaised);
         });
@@ -217,7 +217,7 @@
 
             isActivateRaised = false;
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             setTimeout(function () {
                 ok(isActivateRaised);
@@ -228,7 +228,7 @@
         test('clicking first item should select it', function() {
             var item = getRootItem(0);
 
-            item.find('.k-link').trigger('mouseup');
+            item.find('.k-link').trigger('click');
 
             ok(item.hasClass('k-state-active'));
         });
@@ -323,7 +323,7 @@
 
             isRaised = false;
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             ok(isRaised);
         });

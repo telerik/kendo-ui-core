@@ -90,7 +90,7 @@
         asyncTest('clicking should make clicked item active', function() {
             var item = getRootItem(2);
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             setTimeout(function() {
                 ok(item.hasClass('k-state-active'));
@@ -101,7 +101,7 @@
         asyncTest('clicking should make all items except clicked unactive', function() {
             var item = getRootItem(0);
 
-            item.find('> .k-link').trigger('mouseup');
+            item.find('> .k-link').trigger('click');
 
             setTimeout(function() {
                 equal(item.parent().find('.k-state-active').length, 1);
@@ -119,9 +119,9 @@
 //                    e.preventDefault();
 //                };
 //
-//            tabStrip.delegate('.k-link', 'mouseup', testHandler);
-//            item.find('> .k-link').trigger('mouseup');
-//            tabStrip.undelegate('.k-link', 'mouseup', testHandler);
+//            tabStrip.delegate('.k-link', 'click', testHandler);
+//            item.find('> .k-link').trigger('click');
+//            tabStrip.undelegate('.k-link', 'click', testHandler);
 //
 //            setTimeout(function() {
 //                ok(isDefaultPrevented);

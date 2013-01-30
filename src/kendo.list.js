@@ -46,7 +46,7 @@ kendo_module({
                         .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
-                        .on("touchend" + ns + " click" + ns, LI, proxy(that._click, that))
+                        .on("click" + ns, LI, proxy(that._click, that))
                         .attr({
                             tabIndex: -1,
                             role: "listbox",
@@ -200,10 +200,6 @@ kendo_module({
         _click: function(e) {
             if (!e.isDefaultPrevented()) {
                 this._accept($(e.currentTarget));
-
-                if (e.type === "touchend") {
-                    e.preventDefault();
-                }
             }
         },
 

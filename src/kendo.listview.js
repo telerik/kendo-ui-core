@@ -586,7 +586,7 @@ kendo_module({
 
        _crudHandlers: function() {
            var that = this,
-               clickNS = "touchend" + NS + " " + CLICK + NS;
+               clickNS = CLICK + NS;
 
            that.element.on(clickNS, ".k-edit-button", function(e) {
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
