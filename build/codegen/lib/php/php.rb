@@ -1,27 +1,4 @@
-module CodeGen::PHP
-
-    MANUALLY_GENERATED = {
-        'schema' => ['model']
-    }
-
-    TYPES = {
-        'Number' => 'float',
-        'String' => 'string',
-        'Boolean' => 'boolean',
-        'Object' => 'Object',
-        'Array' => 'array',
-        'Function' => '\kendo\JavaScriptFunction',
-        'Date' => 'date'
-    }
-
-    KEYWORDS = [ '__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case',
-'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo',
-'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile',
-'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements',
-'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new',
-'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch',
-'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor'
- ]
+module CodeGen::PHP::Wrappers
 
     module Options
         def component_class
@@ -42,24 +19,6 @@ module CodeGen::PHP
 
         def array_option_class
             ArrayOption
-        end
-
-        def php_name
-            return "_#{name}" if KEYWORDS.include?(@name)
-
-            @name
-        end
-
-        def unique_options
-            simple = simple_options
-
-            result = options.find_all {|o| !o.composite? || !simple.any? { |simple| simple.name == o.name } }
-
-            if MANUALLY_GENERATED.has_key?(@name)
-                result.delete_if { |o| MANUALLY_GENERATED[@name].include?(o.name) }
-            end
-
-            result
         end
     end
 
@@ -115,26 +74,11 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 
     COMPOSITE_OPTION = ERB.new(File.read("build/codegen/lib/php/composite_option.php.erb"), 0, '%<>')
 
-    class CompositeOption < CodeGen::CompositeOption
+    class CompositeOption < CodeGen::PHP::CompositeOption
         include Options
 
         def to_setter
             COMPOSITE_OPTION_SETTER.result(binding)
-        end
-
-
-        def php_namespace
-            return @owner.php_namespace if @owner.instance_of?(component_class)
-
-            @owner.php_namespace
-        end
-
-        def php_class
-            @owner.php_class + @name.pascalize.sub(@owner.name, '')
-        end
-
-        def php_type
-            "\\#{php_namespace}\\#{php_class}"
         end
 
         def path
@@ -196,7 +140,7 @@ FUNCTION_SETTER = ERB.new(%{
         return $this->setProperty('<%= name %>', $value);
     }
 })
-    class Option < CodeGen::Option
+    class Option < CodeGen::PHP::Option
         include Options
 
         def to_setter
@@ -207,20 +151,6 @@ FUNCTION_SETTER = ERB.new(%{
             return FUNCTION_SETTER.result(binding) if @type[0] == 'Function' && @type.size == 1
 
             OPTION_SETTER.result(binding)
-        end
-
-        def php_type
-            composite = @owner.composite_options.find_all { |o| o.name == @name && o != self }
-
-            types = @type.map { |type| TYPES[type] }
-
-            composite.each do |o|
-                types.push(o.php_type);
-            end
-
-            types.push('mixed') if composite.any?
-
-            types.join('|')
         end
     end
 
@@ -239,10 +169,7 @@ EVENT_SETTER = ERB.new(%{
         return $this->setProperty('<%= name %>', $value);
     }
 })
-
-    class Event < CodeGen::Event
-        include Options
-
+    class Event < CodeGen::PHP::Event
         def to_setter
             EVENT_SETTER.result(binding)
         end
@@ -258,7 +185,6 @@ ARRAY_SETTER = ERB.new(%{
         return $this->add('<%= name %>', func_get_args());
     }
 })
-
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
@@ -283,33 +209,11 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
 <%= unique_options.map { |option| option.to_setter }.join %><%= events.map { |events| events.to_setter }.join %>
 //<< Properties})
 
-    class Component < CodeGen::Component
+    class Component < CodeGen::PHP::Component
         include Options
-
-        def namespace
-            @full_name.sub('.' + @name, '')
-        end
-
-        def php_base_class
-            return '\\Kendo\\SerializableObject' if @name == 'DataSource'
-
-            '\\Kendo\\UI\\Widget'
-        end
 
         def path
             php_namespace.gsub('\\', '/')
-        end
-
-        def php_class
-            @name
-        end
-
-        def php_type
-            "\\#{php_namespace}\\#{php_class}"
-        end
-
-        def php_namespace
-            namespace.sub('.ui', '.UI').split('.').map { |ns| ns.pascalize }.join('\\')
         end
 
         def to_php(filename)
@@ -318,7 +222,6 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
             php.sub(/\/\/>> Properties(.|\n)*\/\/<< Properties/, COMPONENT_PROPERTIES.result(binding))
         end
     end
-
 
     class Generator
         include Rake::DSL
