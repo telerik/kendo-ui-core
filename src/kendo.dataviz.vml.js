@@ -666,10 +666,10 @@ kendo_module({
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = renderTemplate(
-                    "<div #= d.renderId(d.options.id) #" +
+                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; white-space: nowrap;'>" +
-                    "#= d.renderContent() #</div>"
+                    "#= d.renderContent() #</span>"
                 );
             }
         }
@@ -684,13 +684,13 @@ kendo_module({
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
-                    "<div #= d.renderId(d.options.id) #" +
+                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
                         "top:#= d.box.y1 #px; " +
                         "left:#= d.box.x1 #px; " +
                         "clip:#= d._renderClip() #;' >" +
-                    "#= d.renderContent() #</div>"
+                    "#= d.renderContent() #</span>"
                 );
 
                 clipRect.clipTemplate = VMLClipRect.clipTemplate = renderTemplate(

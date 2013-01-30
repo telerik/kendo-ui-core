@@ -46,20 +46,31 @@ kendo_module({
                 visible: false
             },
             tooltip: {
-                visible: true
+                visible: false
             },
             legend: {
                 visible: false
             }
         },
 
-        _getModel: function() {
+        _modelOptions: function() {
             var chart = this,
-                model = Chart.fn._getModel.call(chart);
+                options = Chart.fn._modelOptions.call(chart),
+                element = chart.element;
 
-            model.options.inline = true;
+            options.inline = true;
 
-            return model;
+            // TODO: Container width or computed
+            options.width = 80;
+            // TODO: Container height or default
+            options.height = 20;
+
+            element.css({
+                width: options.width,
+                height: options.height
+            });
+
+            return options;
         }
     });
 

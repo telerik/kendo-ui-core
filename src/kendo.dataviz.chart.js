@@ -366,13 +366,7 @@ kendo_module({
             var chart = this,
                 options = chart.options,
                 element = chart.element,
-                height = math.round(element.innerHeight()),
-                width = math.round(element.innerWidth()),
-                model = new RootElement(deepExtend({
-                    width: width || DEFAULT_WIDTH,
-                    height: height || DEFAULT_HEIGHT,
-                    transitions: options.transitions
-                    }, options.chartArea)),
+                model = new RootElement(chart._modelOptions()),
                 plotArea;
 
             model.parent = chart;
@@ -387,6 +381,20 @@ kendo_module({
             model.reflow();
 
             return model;
+        },
+
+        _modelOptions: function() {
+            var chart = this,
+                options = chart.options,
+                element = chart.element,
+                height = math.round(element.innerHeight()),
+                width = math.round(element.innerWidth());
+
+            return deepExtend({
+                width: width || DEFAULT_WIDTH,
+                height: height || DEFAULT_HEIGHT,
+                transitions: options.transitions
+            }, options.chartArea);
         },
 
         _createPlotArea: function() {
