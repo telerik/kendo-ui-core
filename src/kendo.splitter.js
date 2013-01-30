@@ -104,21 +104,26 @@
         _attachEvents: function() {
             var that = this,
                 orientation = that.options.orientation,
-                splitbarSelector = " > .k-splitbar-" + orientation,
-                splitbarDraggableSelector = ".k-splitbar-draggable-" + orientation,
-                expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
+                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation,
+                expandCollapseSelector = "> .k-splitbar .k-icon:not(.k-resize-handle)";
 
+            // do not use delegated events to increase performance of nested elements
             that.element
-                .on("keydown" + NS, splitbarSelector, "_keydown")
-                .on("mousedown" + NS, splitbarSelector, function(e) { e.currentTarget.focus(); })
-                .on("focus" + NS, splitbarSelector, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
-                .on("blur" + NS, splitbarSelector, function(e) { $(e.currentTarget).removeClass(FOCUSED); that.resizing.end(); })
-                .on(MOUSEENTER + NS, splitbarDraggableSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on(MOUSELEAVE + NS, splitbarDraggableSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on("mousedown" + NS, ">" + splitbarDraggableSelector, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
-                .on("mouseup" + NS, ">" + splitbarDraggableSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
-                .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
-                .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
+                .find(splitbarDraggableSelector)
+                    .on("keydown" + NS, $.proxy(that._keydown, that))
+                    .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
+                    .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
+                    .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED); that.resizing.end(); })
+                    .on(MOUSEENTER + NS, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
+                    .on(MOUSELEAVE + NS, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
+                    .on("mousedown" + NS, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
+                    .on("mouseup" + NS, function() { that._panes().children(".k-splitter-overlay").remove(); })
+                .end()
+                .find(expandCollapseSelector)
+                    .off(NS)
+                    .on(MOUSEENTER + NS, function() { $(this).addClass("k-state-hover"); })
+                    .on(MOUSELEAVE + NS, function() { $(this).removeClass('k-state-hover'); })
+                .end()
                 .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
                 .on(CLICK + NS, ".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", that._arrowClick(EXPAND))
                 .on("dblclick" + NS, ".k-splitbar", proxy(that._togglePane, that))
@@ -144,11 +149,17 @@
         },
 
         destroy: function() {
-            var that = this;
+            var that = this,
+                orientation = that.options.orientation,
+                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation,
+                expandCollapseSelector = "> .k-splitbar .k-icon:not(.k-resize-handle)";
 
             Widget.fn.destroy.call(that);
 
-            that.element.off(NS);
+            that.element.off(NS)
+                .find(splitbarDraggableSelector).off(NS).end()
+                .find(expandCollapseSelector).off(NS).end();
+
             that.resizing.destroy();
 
             $(window).off("resize", that._resizeHandler);
