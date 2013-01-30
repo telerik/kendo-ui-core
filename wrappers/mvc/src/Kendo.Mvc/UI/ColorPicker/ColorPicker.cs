@@ -32,6 +32,8 @@ namespace Kendo.Mvc.UI
         public bool Opacity { get; set; }
 
         public bool Buttons { get; set; }
+
+        public object TileSize { get; set; }
        
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -63,6 +65,20 @@ namespace Kendo.Mvc.UI
             if (!string.IsNullOrEmpty(ToolIcon))
             {
                 options["toolIcon"] = ToolIcon;
+            }
+
+            if (TileSize != null)
+            {
+                var tileSize = TileSize as ColorPaletteTileSize;
+
+                if (tileSize != null)
+                {
+                    options["tileSize"] = new { width = tileSize.Width, height = tileSize.Height };
+                }
+                else
+                {
+                    options["tileSize"] = (int)TileSize;
+                }
             }
 
             writer.Write(Initializer.Initialize(Selector, "ColorPicker", options));

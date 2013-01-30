@@ -78,18 +78,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the size of the palette tiles
         /// </summary>
-        /// <param name="columns">The tile size (for square tiles)</param>
+        /// <param name="tileSize">The tile size (for square tiles)</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().ColorPalette()
         ///             .Name("ColorPalette")
-        ///             .Size(32)
+        ///             .TileSize(32)
         /// %&gt;
         /// </code>
         /// </example>
-        public ColorPaletteBuilder Size(int size)
+        public ColorPaletteBuilder TileSize(int tileSize)
         {
-            Component.Size = size;
+            Component.TileSize = tileSize;
 
             return this;
         }
@@ -102,15 +102,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().ColorPalette()
         ///             .Name("ColorPalette")
-        ///             .Size(s => s.Width(20).Height(10))
+        ///             .TileSize(s => s.Width(20).Height(10))
         /// %&gt;
         /// </code>
         /// </example>
-        public ColorPaletteBuilder Size(Action<PaletteSizeBuilder> sizeAction)
+        public ColorPaletteBuilder TileSize(Action<PaletteSizeBuilder> sizeAction)
         {
-            Component.Size = new ColorPaletteTileSize();
+            Component.TileSize = new ColorPaletteTileSize();
 
-            sizeAction(new PaletteSizeBuilder(Component.Size as ColorPaletteTileSize));
+            sizeAction(new PaletteSizeBuilder(Component.TileSize as ColorPaletteTileSize));
 
             return this;
         }

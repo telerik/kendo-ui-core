@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI
         public const int ColumnsDefault = 10;
         public int Columns { get; set; }
 
-        public object Size { get; set; }
+        public object TileSize { get; set; }
 
         public ColorPickerPalette Palette { get; set; }
 
@@ -51,17 +51,17 @@ namespace Kendo.Mvc.UI
                 options["columns"] = Columns;
             }
 
-            if (Size != null)
+            if (TileSize != null)
             {
-                var size = Size as ColorPaletteTileSize;
+                var tileSize = TileSize as ColorPaletteTileSize;
 
-                if (size != null)
+                if (tileSize != null)
                 {
-                    options["size"] = new { width = size.Width, height = size.Height };
+                    options["tileSize"] = new { width = tileSize.Width, height = tileSize.Height };
                 }
                 else
                 {
-                    options["size"] = (int)Size;
+                    options["tileSize"] = (int)TileSize;
                 }
             }
 

@@ -162,5 +162,45 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the size of the palette tiles
+        /// </summary>
+        /// <param name="tileSize">The tile size (for square tiles)</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        ///             .TileSize(32)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPickerBuilder TileSize(int tileSize)
+        {
+            Component.TileSize = tileSize;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the size of the palette tiles
+        /// </summary>
+        /// <param name="columns">The tile size (for square tiles)</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPalette()
+        ///             .Name("ColorPalette")
+        ///             .TileSize(s => s.Width(20).Height(10))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ColorPickerBuilder TileSize(Action<PaletteSizeBuilder> sizeAction)
+        {
+            Component.TileSize = new ColorPaletteTileSize();
+
+            sizeAction(new PaletteSizeBuilder(Component.TileSize as ColorPaletteTileSize));
+
+            return this;
+        }
     }
 }

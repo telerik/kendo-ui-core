@@ -11,7 +11,7 @@
             <%= Html.Kendo().ColorPalette()
                 .Name("palette")
                 .Columns(4)
-                .Size(s => s.Width(34).Height(19))
+                .TileSize(s => s.Width(34).Height(19))
                 .Palette(new string[] {
                     "#f0d0c9", "#e2a293", "#d4735e", "#65281a",
                     "#eddfda", "#dcc0b6", "#cba092", "#7b4b3a",
