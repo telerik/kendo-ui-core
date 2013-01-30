@@ -24,10 +24,6 @@ module CodeGen::PHP::API
             "$#{@name.camelize}"
         end
 
-        def php_types
-            php_type.split('|')
-        end
-
         def value
             "new #{php_type}()"
         end
@@ -77,14 +73,16 @@ CONFIGURATION = ERB.new(%{
     end
 
 COMPOSITE_OPTION_SECTION = ERB.new(%{
-### <%= php_name %> `<%= php_type %>|array`
+### <%= php_name %> `<%= php_types %>`
 
 <%= description %>
 
+<% if simple %>
+<%= simple.examples %>
+<% end %>
 #### Example - using <%= php_type %>
 
     <%= owner.variable %> = <%= owner.value %>;
-
     <%= variable %> = <%= value %>;
     <%= first_option.variable %> = <%= first_option.value %>;
     <%= variable %>-><%= first_option.php_name %>(<%= first_option.variable %>);
@@ -109,6 +107,10 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
             option = @options[0] unless option
 
             option
+        end
+
+        def simple
+            @owner.simple_options.find { |o| o.name == @name }
         end
     end
 
@@ -147,27 +149,22 @@ Sets the data source of the <%= name %>.
 })
 
 OPTION_SECTION = ERB.new(%{
-### <%= php_name %> `<%= php_type %>`
+### <%= php_name %> `<%= php_types %>`
 
 <%= description %>
 
-<% if php_types.size > 1 %>
-<% php_types.each do |type| %>
-<% next if type == 'array' && composite %>
+}, 0, '<%>')
+
+OPTION_SECTION_EXAMPLES = ERB.new(%{
+<% php_types.split('|').each do |type| %>
 
 #### Example - using <%= type %>
 
     <%= owner.variable %> = <%= owner.value %>;
     <%= owner.variable %>-><%= php_name %>(<%= CodeGen::PHP::API.value(type) %>);
 <% end %>
-<% else %>
-
-#### Example
-
-    <%= owner.variable %> = <%= owner.value %>;
-    <%= owner.variable %>-><%= php_name %>(<%= value %>);
-<% end %>
 }, 0, '<%>')
+
     class Option < CodeGen::PHP::Option
         include Options
 
@@ -178,15 +175,19 @@ OPTION_SECTION = ERB.new(%{
                 return DATA_SOURCE_SECTION.result(binding)
             end
 
-            OPTION_SECTION.result(binding)
+            markdown = OPTION_SECTION.result(binding)
+
+            markdown += examples
+
+            markdown
         end
 
-        def composite
-            return owner.composite_options.find { |o| o.name == @name }
+        def examples
+            OPTION_SECTION_EXAMPLES.result(binding)
         end
 
         def value
-            CodeGen::PHP::API.value(php_types[0])
+            CodeGen::PHP::API.value(php_types.split('|')[0])
         end
     end
 
