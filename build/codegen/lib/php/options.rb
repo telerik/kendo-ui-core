@@ -8,7 +8,7 @@ module CodeGen::PHP
         'String' => 'string',
         'Boolean' => 'boolean',
         'Array' => 'array',
-        'Function' => '\kendo\JavaScriptFunction',
+        'Function' => '\Kendo\JavaScriptFunction',
         'Date' => 'date'
     }
 

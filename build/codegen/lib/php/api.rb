@@ -36,6 +36,8 @@ module CodeGen::PHP::API
 
         return 'true' if type == 'boolean'
 
+        return "new \\Kendo\\JavaScriptFunction('function() { }')" if type == '\Kendo\JavaScriptFunction'
+
         "new #{type}()"
     end
 
@@ -54,9 +56,9 @@ A PHP class representing Kendo <%= name %>.
 
 })
 
-CONFIGURATION = ERB.new(%{
-## Configuration
-<%= unique_options.map { |option| option.to_markdown_section }.join %>
+METHODS = ERB.new(%{
+## Methods
+<%= (unique_options + events).sort { |a, b| a.name <=> b.name }.map { |option| option.to_markdown_section }.join %>
 })
     class Component < CodeGen::PHP::Component
         include Options
@@ -66,14 +68,18 @@ CONFIGURATION = ERB.new(%{
 
             markdown += COMPONENT_DESCRIPTION.result(binding)
 
-            markdown += CONFIGURATION.result(binding)
+            markdown += METHODS.result(binding)
 
             markdown
         end
     end
 
 COMPOSITE_OPTION_SECTION = ERB.new(%{
-### <%= php_name %> `<%= php_types %>`
+### <%= php_name %>
+
+#### Parameters
+
+##### $value `<%= php_types %>`
 
 <%= description %>
 
@@ -94,11 +100,32 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
     <%= first_option.variable %> = <%= first_option.value %>;
     <%= owner.variable %>-><%= php_name %>(array('<%= first_option.name %>' => <%= first_option.variable %>));
 })
+
+COMPOSITE_OPTION_DESCRIPTION = ERB.new(%{
+# <%= php_type %>
+
+A PHP class representing the <%= name %> setting of <%= owner.php_class %>.
+
+})
     class CompositeOption < CodeGen::PHP::CompositeOption
         include Options
 
         def to_markdown_section
             COMPOSITE_OPTION_SECTION.result(binding)
+        end
+
+        def to_markdown
+            markdown = METADATA.result(binding)
+
+            markdown += COMPOSITE_OPTION_DESCRIPTION.result(binding)
+
+            markdown += METHODS.result(binding)
+
+            markdown
+        end
+
+        def events
+            []
         end
 
         def first_option
@@ -115,8 +142,13 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
     end
 
 DATA_SOURCE_SECTION = ERB.new(%{
-### dataSource `\\Kendo\\Data\\DataSource|array`
+### dataSource
+
 Sets the data source of the <%= name %>.
+
+#### Parameters
+
+##### $value `\\Kendo\\Data\\DataSource|array`
 
 #### Example - using \\Kendo\\Data\\DataSource
 
@@ -132,8 +164,13 @@ Sets the data source of the <%= name %>.
 })
 
 HIERARCHICAL_DATA_SOURCE_SECTION = ERB.new(%{
-### dataSource `\\Kendo\\Data\\HierarchicalDataSource|array`
+### dataSource
+
 Sets the data source of the <%= name %>.
+
+#### Parameters
+
+##### $value `\\Kendo\\Data\\HierarchicalDataSource|array`
 
 #### Example - using \\Kendo\\Data\\HierarchicalDataSource
 
@@ -191,14 +228,82 @@ OPTION_SECTION_EXAMPLES = ERB.new(%{
         end
     end
 
+EVENT_SECTION = ERB.new(%{
+### <%= php_name %>
+
+<%= description %>
+
+#### Parameters
+
+##### $value `string|\\Kendo\\JavaScriptFunction`
+
+#### Example - using string which defines a JavaScript function
+
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= owner.variable %>-><%= php_name %>('function(e) { }');
+
+#### Example - using string which defines a JavaScript name
+    <script>
+        function on<%= name.pascalize %>(e) {
+            // handle the <%= name %> event.
+        }
+    </script>
+    <?php
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= owner.variable %>-><%= php_name %>('on<%= name.pascalize %>');
+    ?>
+
+#### Example - using \\Kendo\\JavaScriptFunction
+
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= owner.variable %>-><%= php_name %>(new \\Kendo\\JavaScriptFunction('function(e) { }'));
+}, 0, '<%>')
     class Event < CodeGen::PHP::Event
+        def to_markdown_section
+            EVENT_SECTION.result(binding)
+        end
     end
+
+ARRAY_SECTION = ERB.new(%{
+### add<%= item.name.pascalize %>
+
+Adds one or more <%= item.php_class %> to the <%= owner.php_class %>.
+
+#### Parameters
+
+##### $value[, $value2, ...] `<%= item.php_types %>`
+
+#### Example - using <%= item.php_type %>
+
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= item.variable %> = <%= item.value %>;
+    <%= item.first_option.variable %> = <%= item.first_option.value %>;
+    <%= item.variable %>-><%= item.first_option.php_name %>(<%= item.first_option.variable %>);
+    <%= owner.variable %>->add<%= item.name.pascalize %>(<%= item.variable %>);
+
+#### Example - using array
+
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= item.first_option.variable %> = <%= item.first_option.value %>;
+    <%= owner.variable %>->add<%= item.name.pascalize %>(array('<%= item.first_option.name %>' => <%= item.first_option.variable %>));
+
+#### Example - adding more than one <%= item.php_class %>
+
+    <%= owner.variable %> = <%= owner.value %>;
+    $first  = <%= item.value %>;
+    $second = <%= item.value %>;
+    <%= owner.variable %>->add<%= item.name.pascalize %>($first, $second);
+})
 
     class ArrayOption < CompositeOption
         include CodeGen::Array
 
         def item_class
             ArrayItem
+        end
+
+        def to_markdown_section
+            ARRAY_SECTION.result(binding)
         end
     end
 
@@ -216,7 +321,7 @@ OPTION_SECTION_EXAMPLES = ERB.new(%{
         def component(component)
             write_markdown(component)
 
-#            composite_options(component.composite_options)
+            composite_options(component.composite_options)
         end
 
         def write_markdown(component)
