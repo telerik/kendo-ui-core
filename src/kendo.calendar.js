@@ -1182,10 +1182,6 @@
     }
 
     function mousetoggle(e) {
-        if (e.type.indexOf("touch") === -1) {
-            e.stopImmediatePropagation();
-        }
-
         $(this).toggleClass(HOVER, MOUSEENTER.indexOf(e.type) > -1 || e.type == FOCUS);
     }
 
