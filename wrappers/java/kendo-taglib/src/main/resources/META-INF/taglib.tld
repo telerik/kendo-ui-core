@@ -3819,6 +3819,28 @@ or "websafe" to get the Web-safe palette.</description>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
+    <tag>
+        <description>The size of a color cell.</description>
+        <name>colorPalette-tileSize</name>
+        <tag-class>com.kendoui.taglib.colorpalette.TileSizeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The height of the color cell.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The width of the color cell.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
 
     <tag>
         <description>Triggers when a new color has been changed.</description>
@@ -3886,7 +3908,7 @@ CSS-supported notation.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The size (width and height) of a color cell for the Palette picker.</description>
+            <description>The size of a color cell.</description>
             <name>tileSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -3923,8 +3945,40 @@ original value.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Fires when the picker popup is opening.</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the picker popup is closing.</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
+
+    <tag>
+        <description>The size of a color cell.</description>
+        <name>colorPicker-tileSize</name>
+        <tag-class>com.kendoui.taglib.colorpicker.TileSizeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The height of the color cell.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The width of the color cell.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -3943,6 +3997,18 @@ ESC would cancel the selection and the color will revert to the
 original value.</description>
         <name>colorPicker-select</name>
         <tag-class>com.kendoui.taglib.colorpicker.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the picker popup is opening.</description>
+        <name>colorPicker-open</name>
+        <tag-class>com.kendoui.taglib.colorpicker.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the picker popup is closing.</description>
+        <name>colorPicker-close</name>
+        <tag-class>com.kendoui.taglib.colorpicker.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

@@ -47,8 +47,20 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "colorPicker";
     }
 
+    public void setTileSize(com.kendoui.taglib.colorpicker.TileSizeTag value) {
+        setProperty("tileSize", value);
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
+    }
+
+    public void setClose(CloseFunctionTag value) {
+        setEvent("close", value.getBody());
+    }
+
+    public void setOpen(OpenFunctionTag value) {
+        setEvent("open", value.getBody());
     }
 
     public void setSelect(SelectFunctionTag value) {
@@ -137,6 +149,30 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setChange(String value) {
         setProperty("change", new Function(value));
+    }
+
+    public String getClose() {
+        Function property = ((Function)getProperty("close"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setClose(String value) {
+        setProperty("close", new Function(value));
+    }
+
+    public String getOpen() {
+        Function property = ((Function)getProperty("open"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setOpen(String value) {
+        setProperty("open", new Function(value));
     }
 
     public String getSelect() {

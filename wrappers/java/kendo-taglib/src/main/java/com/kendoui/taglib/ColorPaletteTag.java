@@ -46,6 +46,10 @@ public class ColorPaletteTag extends WidgetTag /* interfaces *//* interfaces */ 
         return "colorPalette";
     }
 
+    public void setTileSize(com.kendoui.taglib.colorpalette.TileSizeTag value) {
+        setProperty("tileSize", value);
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
