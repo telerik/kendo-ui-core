@@ -708,18 +708,18 @@ kendo_module({
         },
 
         value: function(value) {
+            var that = this,
+                tags = $(that.tagList[0].children),
+                length = tags.length,
+                dataItemIndex,
+                idx = 0;
+
             if (value === undefined) {
-                return this.element.val();
+                return that.element.val();
             }
 
-            //refactor this
-            var index,
-                idx = 0,
-                tags = this.tagList.children(),
-                length = tags.length;
-
             for (; idx < length; idx++) {
-                this._unselect(tags.eq(idx));
+                that._unselect(tags.eq(idx));
             }
 
             if (value === null) {
@@ -729,10 +729,9 @@ kendo_module({
             value = $.isArray(value) ? value : [value];
 
             for (idx = 0, length = value.length; idx < length; idx++) {
-                index = this._index(value[idx]);
-
-                if (index > -1) {
-                    this._select(index);
+                dataItemIndex = that._index(value[idx]);
+                if (dataItemIndex > -1) {
+                    that._select(dataItemIndex);
                 }
             }
         },
@@ -783,23 +782,22 @@ kendo_module({
 
         //select value
         _select: function(li) {
-            var that = this, index, dataItem;
+            var that = this,
+                options = that.element[0].children,
+                length = options.length,
+                idx, dataItem, value;
 
             if (!isNaN(li)) {
-                index = li;
-                $(that.ul[0].children[index]).hide();
+                idx = li;
+                $(that.ul[0].children[idx]).hide();
             } else {
-                index = li.hide().index();
+                idx = li.data("idx");
             }
 
-            dataItem = that.dataSource.view()[index];
-
             //if (dataItem) //TODO: check whether the dataItem exists
-
-            var options = that.element[0].children,
-                idx = 0,
-                length = options.length,
-                value =  that._value(dataItem);
+            dataItem = that.dataSource.view()[idx];
+            value = that._value(dataItem);
+            idx = 0;
 
             for (; idx < length; idx ++) {
                 if (options[idx].value === value) {
@@ -823,17 +821,15 @@ kendo_module({
         //unselect li element and remove tag
         _unselect: function(tag) {
             var that = this,
-                dataItem = that._removeTag(tag), //TODO: move code here!
-                value, index;
+                index = tag.index(),
+                dataItem, value, index;
 
+            tag.remove();
             that.currentTag(null);
-
-            if (dataItem) {
-                dataItem = dataItem[0]
-            }
+            dataItem = that._dataItems.splice(index, 1)[0];
 
             value = that._value(dataItem);
-            if (value === undefined) { //test this
+            if (value === undefined) { //TODO: test this
                 value = that._text(dataItem);
             }
 
