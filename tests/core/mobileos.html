@@ -146,20 +146,20 @@
             test("detects Windows Phone 7.5 and as a phone", function() {
                 var result = detect("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 800)");
 
-                ok(result.device == "winphone");
-                ok(result.majorVersion == 9);
-                ok(result.flatVersion == 900);
-                ok(result.windows);
+                ok(result.device == "wp");
+                ok(result.majorVersion == 7);
+                ok(result.flatVersion == 750);
+                ok(result.wp);
                 ok(!result.tablet);
             });
 
             test("detects Windows Phone 8 and as a phone", function() {
-                var result = detect("Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone OS 8.0; Trident/6.0; IEMobile/10.0; NOKIA; Lumia 800)");
+                var result = detect("Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)");
 
-                ok(result.device == "winphone");
-                ok(result.majorVersion == 10);
-                ok(result.flatVersion == 1000);
-                ok(result.windows);
+                ok(result.device == "wp");
+                ok(result.majorVersion == 8);
+                ok(result.flatVersion == 800);
+                ok(result.wp);
                 ok(!result.tablet);
             });
 
