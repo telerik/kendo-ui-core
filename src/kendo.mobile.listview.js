@@ -22,7 +22,7 @@ kendo_module({
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
-        SEARCH_TEMPLATE = kendo.template('<form><div><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear">Clear</a></div></form>'),
+        SEARCH_TEMPLATE = kendo.template('<form><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-icon km-clear km-filter-reset" title="Clear">Clear</a></div></form>'),
 
         LAST_PAGE_REACHED = "lastPageReached",
 

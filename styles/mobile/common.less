@@ -727,6 +727,37 @@
     margin-top: -.32rem;
 }
 
+/* Filtering */
+
+.km-filter-wrap
+{
+	position: relative;
+	margin: 0 .7em;
+}
+
+.km-tablet .km-filter-wrap
+{
+	max-width: 24em;
+	margin: 0 auto;
+}
+
+.km-filter-wrap > .km-icon
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: center;
+	text-indent: -4444px;
+	background: red;
+	z-index: 1;
+}
+
+.km-filter-wrap > input
+{
+	width: 100%;
+	.box-sizing(border-box);
+}
+
 /* Pull to refresh */
 
 .km-scroller-pull
