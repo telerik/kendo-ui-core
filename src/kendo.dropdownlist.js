@@ -152,7 +152,7 @@
                     .on(HOVEREVENTS, that._toggleHover);
 
                 wrapper
-                    .on("touchend" + ns + " click" + ns, function(e) {
+                    .on("click" + ns, function(e) {
                             that._blured = false;
                             e.preventDefault();
                             that.toggle();

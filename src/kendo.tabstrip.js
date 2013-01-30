@@ -188,7 +188,7 @@
 
             that.wrapper.children(".k-tabstrip-items")
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
-                .on("touchend" + NS + " mouseup" + NS, " > " + NAVIGATABLEITEMS, function(e) {
+                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, function(e) {
                     if (that._click($(e.currentTarget))) {
                         e.preventDefault();
                     }

@@ -171,7 +171,7 @@
             wrapper
                 .on("mouseenter" + NS, TITLEBAR_BUTTONS, function () { $(this).addClass(KHOVERSTATE); })
                 .on("mouseleave" + NS, TITLEBAR_BUTTONS, function () { $(this).removeClass(KHOVERSTATE); })
-                .on("touchend" + NS + " click" + NS, TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
+                .on("click" + NS, TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
 
             windowContent
                 .on("keydown" + NS, proxy(that._keydown, that))

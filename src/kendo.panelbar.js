@@ -218,7 +218,7 @@
                     }
                 })
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
-                .on("touchend" + NS + " mouseup" + NS, disabledItems, false)
+                .on("click" + NS, disabledItems, false)
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, function() {
                     var item = that.select();

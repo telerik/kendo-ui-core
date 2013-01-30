@@ -10,7 +10,7 @@
         CLOSE = "close",
         CHANGE = "change",
         ns = ".kendoTimePicker",
-        CLICK = "touchend" + ns + " click" + ns,
+        CLICK = "click" + ns,
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         LI = "li",

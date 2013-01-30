@@ -147,7 +147,7 @@
                         '"><span class="k-icon k-i-refresh">' + options.messages.refresh + "</span></a>");
                 }
 
-                that.element.on("touchend" + NS + " " + CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
+                that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
             }
 
             if (options.info) {
@@ -157,7 +157,7 @@
             }
 
             that.element
-                .on("touchend" + NS + " " + CLICK + NS , "a", proxy(that._click, that))
+                .on(CLICK + NS , "a", proxy(that._click, that))
                 .addClass("k-pager-wrap k-widget");
 
             if (options.autoBind) {
