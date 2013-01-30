@@ -1,6 +1,8 @@
 
         <div id="example" class="k-content">
-            <div id="stock-chart" style="height: 500px;"></div>
+            <div class="chart-wrapper">
+                <div id="stock-chart"></div>
+            </div>
             <script>
                 function createChart() {
                     $("#stock-chart").kendoStockChart({
@@ -22,13 +24,16 @@
                         }, {
                             name: "volumePane",
                             title: "Volume",
-                            height: 100 // pixels
+                            height: 150 // pixels
                         }],
                         categoryAxis: {
                             pane: "volumePane"
                         },
                         valueAxes: [{
                             // Default axis
+                            line: {
+                                visible: false
+                            }
                         }, {
                             name: "volumeAxis",
                             pane: "volumePane",
@@ -40,6 +45,7 @@
                             highField: "High",
                             lowField: "Low",
                             closeField: "Close"
+                            
                         }, {
                             type: "column",
                             field: "Volume",
@@ -73,4 +79,9 @@
                     }, 400);
                 });
             </script>
+            <style scoped>
+                .chart-wrapper, .chart-wrapper .k-chart {
+                    height: 500px;
+                }
+            </style>
         </div>
