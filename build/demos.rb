@@ -255,9 +255,19 @@ namespace :demos do
 
     task :release => 'demos/mvc/bin/Kendo.dll'
 
-    task :staging_site => [:js,
+    task :upload_to_cdn => [:js,
         :less,
         :release,
+        'dist/demos/staging/content/cdn/js',
+        'dist/demos/staging/content/cdn/themebuilder',
+        'dist/demos/staging/content/cdn/styles',
+        'dist/demos/staging/content/cdn/styles/telerik'
+    ] do |t|
+        sh "rsync -avz dist/demos/staging/content/cdn/ #{KENDO_ORIGIN_HOST}:/usr/share/nginx/html/staging/#{CURRENT_COMMIT}/"
+    end
+
+    task :staging_site => [
+        :upload_to_cdn,
         'themebuilder:staging',
         'dist/demos/staging',
         'dist/demos/staging/src/aspnetmvc/controllers',
@@ -269,7 +279,7 @@ namespace :demos do
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
         'dist/demos/staging/content/cdn/styles/telerik',
-        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', '~/content/cdn', '~/content/cdn/themebuilder')
+        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', URI.join(STAGING_CDN_ROOT, CURRENT_COMMIT).to_s, URI.join(STAGING_CDN_ROOT, CURRENT_COMMIT, 'themebuilder').to_s)
     ]
 
     zip 'dist/demos/staging.zip' => :staging_site
