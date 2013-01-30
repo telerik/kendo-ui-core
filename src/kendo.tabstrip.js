@@ -42,9 +42,7 @@ kendo_module({
         HOVERSTATE = "k-state-hover",
         TABONTOP = "k-tab-on-top",
         NAVIGATABLEITEMS = ".k-item:not(." + DISABLEDSTATE + ")",
-        CLICKABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS,
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
-        DISABLEDLINKS = ".k-tabstrip-items > .k-state-disabled .k-link",
 
         templates = {
             content: template(
@@ -171,18 +169,6 @@ kendo_module({
 
             options = that.options;
 
-            that.wrapper
-                .on(CLICK + NS, DISABLEDLINKS, false)
-                .on("touchend" + NS + " mouseup" + NS, CLICKABLEITEMS, function(e) {
-                    if (that._click($(e.currentTarget))) {
-                        e.preventDefault();
-                    }
-                })
-                .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
-                .on("keydown" + NS, $.proxy(that._keydown, that))
-                .on("focus" + NS, $.proxy(that._active, that))
-                .on("blur" + NS, function() { that._current(null); });
-
             that._isRtl = kendo.support.isRtl(that.wrapper);
 
             that._tabindex();
@@ -201,6 +187,20 @@ kendo_module({
                         $(item).find(">." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
                     });
             }
+
+            that.wrapper
+                .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
+                .on("keydown" + NS, $.proxy(that._keydown, that))
+                .on("focus" + NS, $.proxy(that._active, that))
+                .on("blur" + NS, function() { that._current(null); });
+
+            that.wrapper.children(".k-tabstrip-items")
+                .on(CLICK + NS, ".k-state-disabled .k-link", false)
+                .on("touchend" + NS + " mouseup" + NS, " > " + NAVIGATABLEITEMS, function(e) {
+                    if (that._click($(e.currentTarget))) {
+                        e.preventDefault();
+                    }
+                });
 
             var selectedItems = that.tabGroup.children("li." + ACTIVESTATE),
                 content = that.contentHolder(selectedItems.index());

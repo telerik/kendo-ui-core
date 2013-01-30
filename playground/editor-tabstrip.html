@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Editor playground</title>
+
+    <meta name="viewport" content="width=device-width,user-scalable=1,initial-scale=1.0" />
+
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+    <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css">
+
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/module.js"></script>
+    <!-- <script src="../src/kendo.core.js"></script> -->
+    <!-- <script src="../src/kendo.data.js"></script> -->
+    <!-- <script src="../src/kendo.draganddrop.js"></script> -->
+    <!-- <script src="../src/kendo.binder.js"></script> -->
+    <!-- <script src="../src/kendo.popup.js"></script> -->
+    <!-- <script src="../src/kendo.list.js"></script> -->
+    <!-- <script src="../src/kendo.dropdownlist.js"></script> -->
+    <!-- <script src="../src/kendo.combobox.js"></script> -->
+    <!-- <script src="../src/kendo.fx.js"></script> -->
+    <!-- <script src="../src/kendo.window.js"></script> -->
+    <script src="../src/kendo.editor.js"></script>
+    <script src="../src/kendo.tabstrip.js"></script>
+
+    <style>
+        html, body {
+            font: 12px/1.5 Tahoma,sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="forecast">
+        <div id="tabstrip">
+            <ul>
+                <li class="k-state-active">
+                    Paris
+                </li>
+                <li>
+                    New York
+                </li>
+                <li>
+                    London
+                </li>
+                <li>
+                    Moscow
+                </li>
+                <li>
+                    Sydney
+                </li>
+            </ul>
+            <div>
+                <div class="weather">
+                    <textarea id="editor" rows="10" cols="30" style="width:200px;height:200px">
+                        Kendo UI Editor allows your users
+                    </textarea>
+
+                    <button>Value!</button>
+                </div>
+                <span class="rainy">&nbsp;</span>
+            </div>
+            <div>
+                <div class="weather">
+                    <h2>29<span>&ordm;C</span></h2>
+                    <p>Sunny weather in New York.</p>
+                </div>
+                <span class="sunny">&nbsp;</span>
+            </div>
+            <div>
+                <div class="weather">
+                    <h2>21<span>&ordm;C</span></h2>
+                    <p>Sunny weather in London.</p>
+                </div>
+                <span class="sunny">&nbsp;</span>
+            </div>
+            <div>
+                <div class="weather">
+                    <h2>16<span>&ordm;C</span></h2>
+                    <p>Cloudy weather in Moscow.</p>
+                </div>
+                <span class="cloudy">&nbsp;</span>
+            </div>
+            <div>
+                <div class="weather">
+                    <h2>17<span>&ordm;C</span></h2>
+                    <p>Rainy weather in Sidney.</p>
+                </div>
+                <span class="rainy">&nbsp;</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#tabstrip").kendoTabStrip();
+
+        $("#editor").kendoEditor({ tools: [ "bold", "italic" ] });
+
+        $("button").click(function() {
+            alert($("#editor").data("kendoEditor").value());
+        });
+    </script>
+</body>
+</html>
