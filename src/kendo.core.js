@@ -2747,9 +2747,20 @@ function pad(number, digits, end) {
         };
     }
 
-    function applyEventMap(e) {
-        return (eventMap[e] || e);
-    }
+
+    var getEventMap = function(e) { return (eventMap[e] || e); },
+        eventRegEx = /([^ ]+)/g,
+        nsEventRegEx = /( |$)/g;
+
+    kendo.applyEventMap = function(events, ns) {
+        events = events.replace(eventRegEx, getEventMap);
+
+        if (ns) {
+            events = events.replace(nsEventRegEx, "." + ns + " ");
+        }
+
+        return events;
+    };
 
     var on = $.fn.on;
 
@@ -2782,8 +2793,7 @@ function pad(number, digits, end) {
         },
 
         autoApplyNS: function(ns) {
-            ns = ns || kendo.guid();
-            this.data("kendoNS", "." + ns);
+            this.data("kendoNS", ns || kendo.guid());
             return this;
         },
 
@@ -2804,11 +2814,7 @@ function pad(number, digits, end) {
             }
 
             var callback =  args[args.length - 1],
-                events = args[0].replace(/([^ ]+)/g, applyEventMap);
-
-            if (ns) {
-                events = events.replace(/( |$)/g, ns + " ");
-            }
+                events = kendo.applyEventMap(args[0], ns);
 
             // setup mouse trap
             if (support.mouseAndTouchPresent && events.search(/mouse|click/) > -1 && this[0] !== document.documentElement) {
@@ -2845,14 +2851,12 @@ function pad(number, digits, end) {
         },
 
         kendoDestroy: function(ns) {
+            ns = ns || this.data("kendoNS");
+
             if (ns) {
-                ns = "." + ns;
-            } else {
-                ns = this.data("kendoNS");
+                this.off("." + ns);
             }
-            if (ns) {
-                this.off(ns);
-            }
+
             return this;
         }
     });
