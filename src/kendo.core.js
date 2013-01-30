@@ -2730,14 +2730,13 @@ function pad(number, digits, end) {
 
 
     var getEventMap = function(e) { return (eventMap[e] || e); },
-        eventRegEx = /([^ ]+)/g,
-        nsEventRegEx = /( |$)/g;
+        eventRegEx = /([^ ]+)/g;
 
     kendo.applyEventMap = function(events, ns) {
         events = events.replace(eventRegEx, getEventMap);
 
         if (ns) {
-            events = events.replace(nsEventRegEx, "." + ns + " ");
+            events = events.replace(eventRegEx, "$1." + ns);
         }
 
         return events;
