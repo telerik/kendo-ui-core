@@ -7,7 +7,6 @@ module CodeGen::PHP
         'Number' => 'float',
         'String' => 'string',
         'Boolean' => 'boolean',
-        'Object' => 'Object',
         'Array' => 'array',
         'Function' => '\kendo\JavaScriptFunction',
         'Date' => 'date'
@@ -34,9 +33,9 @@ module CodeGen::PHP
         end
 
         def unique_options
-            simple = simple_options
+            composite = composite_options.map { |o| o.name }
 
-            result = options.find_all {|o| !o.composite? || !simple.any? { |simple| simple.name == o.name } }
+            result = options.find_all {|o| o.composite? || !composite.include?(o.name) }
 
             if MANUALLY_GENERATED.has_key?(@name)
                 result.delete_if { |o| MANUALLY_GENERATED[@name].include?(o.name) }

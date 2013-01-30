@@ -26,7 +26,7 @@ module CodeGen::PHP::Wrappers
 COMPOSITE_OPTION_SETTER = ERB.new(%{
     /**
     * <%= description %>
-    * @param <%= php_type %>|array $value
+    * @param <%= php_types %> $value
     * @return <%= owner.php_type %>
     */
     public function <%= php_name %>($value) {
@@ -63,7 +63,7 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <% if recursive %>
     /**
     * Adds <%= php_type %>.
-    * @param <%= php_type %>|array $value
+    * @param <%= php_types %> $value
     * @return <%= owner.owner.php_type %>
     */
     public function addItem($value) {
@@ -113,7 +113,7 @@ HIERARCHY_DATA_SOURCE_SETTER = ERB.new(%{
 OPTION_SETTER = ERB.new(%{
     /**
     * <%= description %>
-    * @param <%= php_type %> $value
+    * @param <%= php_types %> $value
     * @return <%= owner.php_type %>
     */
     public function <%= php_name %>($value) {
@@ -174,7 +174,7 @@ EVENT_SETTER = ERB.new(%{
 ARRAY_SETTER = ERB.new(%{
     /**
     * Adds <%= item.php_class %> to the <%= owner.php_class %>.
-    * @param <%= item.php_type %>|array,... $value one or more <%= item.php_class %> to add.
+    * @param <%= item.php_types %>,... $value one or more <%= item.php_class %> to add.
     * @return <%= owner.php_type %>
     */
     public function add<%= item.name.pascalize %>($value) {

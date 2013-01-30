@@ -25,7 +25,7 @@ class DataSourceGroupItem extends \kendo\SerializableObject {
 
     /**
     * Adds DataSourceGroupItemAggregate to the DataSourceGroupItem.
-    * @param mixed|\Kendo\Data\DataSourceGroupItemAggregate,... $value one or more DataSourceGroupItemAggregate to add.
+    * @param \Kendo\Data\DataSourceGroupItemAggregate|array,... $value one or more DataSourceGroupItemAggregate to add.
     * @return \Kendo\Data\DataSourceGroupItem
     */
     public function addAggregate($value) {

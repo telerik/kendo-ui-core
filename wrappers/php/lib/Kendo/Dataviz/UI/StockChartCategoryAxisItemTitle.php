@@ -17,7 +17,7 @@ hex and rgb.
 
     /**
     * The border of the title.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitleBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitleBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle
     */
     public function border($value) {
@@ -44,7 +44,7 @@ hex and rgb.
 
     /**
     * The margin of the title.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle
     */
     public function margin($value) {

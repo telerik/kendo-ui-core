@@ -34,7 +34,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
 
     /**
     * Sets the columnMenu messages.
-    * @param mixed|\Kendo\UI\GridColumnMenuMessages $value
+    * @param \Kendo\UI\GridColumnMenuMessages|array $value
     * @return \Kendo\UI\GridColumnMenu
     */
     public function messages($value) {

@@ -10,7 +10,7 @@ class ComboBox extends \Kendo\UI\Widget {
 
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn off the animation.
-    * @param mixed|\Kendo\UI\ComboBoxAnimation $value
+    * @param \Kendo\UI\ComboBoxAnimation|array $value
     * @return \Kendo\UI\ComboBox
     */
     public function animation($value) {

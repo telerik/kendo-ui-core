@@ -87,7 +87,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
 
     /**
     * Configuration of the RangeSlider tooltip.
-    * @param mixed|\Kendo\UI\RangeSliderTooltip $value
+    * @param \Kendo\UI\RangeSliderTooltip|array $value
     * @return \Kendo\UI\RangeSlider
     */
     public function tooltip($value) {

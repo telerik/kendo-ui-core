@@ -11,7 +11,7 @@ class LinearGauge extends \Kendo\UI\Widget {
     /**
     * The gauge area configuration options.
 This is the entire visible area of the gauge.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeGaugeArea $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeGaugeArea|array $value
     * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function gaugeArea($value) {
@@ -20,7 +20,7 @@ This is the entire visible area of the gauge.
 
     /**
     * The pointer configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugePointer $value
+    * @param \Kendo\Dataviz\UI\LinearGaugePointer|array $value
     * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function pointer($value) {
@@ -29,7 +29,7 @@ This is the entire visible area of the gauge.
 
     /**
     * Configures the scale.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScale $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScale|array $value
     * @return \Kendo\Dataviz\UI\LinearGauge
     */
     public function scale($value) {

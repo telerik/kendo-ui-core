@@ -7,7 +7,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
 
     /**
     * Enable/Disable and set the text of filter operators for fields of type string.
-    * @param mixed|\Kendo\UI\GridFilterableOperatorsString $value
+    * @param \Kendo\UI\GridFilterableOperatorsString|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
     public function string($value) {
@@ -16,7 +16,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
 
     /**
     * Enable/Disable and set the text of filter operators for fields of type number.
-    * @param mixed|\Kendo\UI\GridFilterableOperatorsNumber $value
+    * @param \Kendo\UI\GridFilterableOperatorsNumber|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
     public function number($value) {
@@ -25,7 +25,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
 
     /**
     * Enable/Disable and set the text of filter operators for fields of type date.
-    * @param mixed|\Kendo\UI\GridFilterableOperatorsDate $value
+    * @param \Kendo\UI\GridFilterableOperatorsDate|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
     public function date($value) {
@@ -34,7 +34,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
 
     /**
     * Enable/Disable and set the text of filter operators for foreign key columns.
-    * @param mixed|\Kendo\UI\GridFilterableOperatorsEnums $value
+    * @param \Kendo\UI\GridFilterableOperatorsEnums|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
     public function enums($value) {

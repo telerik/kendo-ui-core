@@ -7,7 +7,7 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceAggregateItem to the DataSource.
-    * @param mixed|\Kendo\Data\DataSourceAggregateItem,... $value one or more DataSourceAggregateItem to add.
+    * @param \Kendo\Data\DataSourceAggregateItem|array,... $value one or more DataSourceAggregateItem to add.
     * @return \Kendo\Data\DataSource
     */
     public function addAggregateItem($value) {
@@ -43,7 +43,7 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceFilterItem to the DataSource.
-    * @param mixed|\Kendo\Data\DataSourceFilterItem,... $value one or more DataSourceFilterItem to add.
+    * @param \Kendo\Data\DataSourceFilterItem|array,... $value one or more DataSourceFilterItem to add.
     * @return \Kendo\Data\DataSource
     */
     public function addFilterItem($value) {
@@ -52,7 +52,7 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Adds DataSourceGroupItem to the DataSource.
-    * @param mixed|\Kendo\Data\DataSourceGroupItem,... $value one or more DataSourceGroupItem to add.
+    * @param \Kendo\Data\DataSourceGroupItem|array,... $value one or more DataSourceGroupItem to add.
     * @return \Kendo\Data\DataSource
     */
     public function addGroupItem($value) {
@@ -79,7 +79,7 @@ class DataSource extends \Kendo\SerializableObject {
 
     /**
     * Set the object responsible for describing the raw data format.
-    * @param mixed|\Kendo\Data\DataSourceSchema $value
+    * @param \Kendo\Data\DataSourceSchema|array $value
     * @return \Kendo\Data\DataSource
     */
     public function schema($value) {
@@ -134,7 +134,7 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Adds DataSourceSortItem to the DataSource.
-    * @param mixed|\Kendo\Data\DataSourceSortItem,... $value one or more DataSourceSortItem to add.
+    * @param \Kendo\Data\DataSourceSortItem|array,... $value one or more DataSourceSortItem to add.
     * @return \Kendo\Data\DataSource
     */
     public function addSortItem($value) {
@@ -143,7 +143,7 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.
-    * @param mixed|\Kendo\Data\DataSourceTransport $value
+    * @param \Kendo\Data\DataSourceTransport|array $value
     * @return \Kendo\Data\DataSource
     */
     public function transport($value) {

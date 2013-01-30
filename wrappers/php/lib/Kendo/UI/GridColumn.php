@@ -7,7 +7,7 @@ class GridColumn extends \Kendo\SerializableObject {
 
     /**
     * Definition of column cells' HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\UI\GridColumn
     */
     public function attributes($value) {
@@ -15,12 +15,12 @@ class GridColumn extends \Kendo\SerializableObject {
     }
 
     /**
-    * Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".
-    * @param string|\Kendo\UI\GridColumnCommand|mixed $value
+    * Adds GridColumnCommandItem to the GridColumn.
+    * @param \Kendo\UI\GridColumnCommandItem|array,... $value one or more GridColumnCommandItem to add.
     * @return \Kendo\UI\GridColumn
     */
-    public function command($value) {
-        return $this->setProperty('command', $value);
+    public function addCommandItem($value) {
+        return $this->add('command', func_get_args());
     }
 
     /**
@@ -57,7 +57,7 @@ class GridColumn extends \Kendo\SerializableObject {
 
     /**
     * Specifies whether given column is filterable.
-    * @param boolean|\Kendo\UI\GridColumnFilterable|mixed $value
+    * @param boolean|\Kendo\UI\GridColumnFilterable|array $value
     * @return \Kendo\UI\GridColumn
     */
     public function filterable($value) {
@@ -75,7 +75,7 @@ class GridColumn extends \Kendo\SerializableObject {
 
     /**
     * Definition of column header cell's HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\UI\GridColumn
     */
     public function headerAttributes($value) {

@@ -17,7 +17,7 @@ Any valid CSS color string will work here, including hex and rgb
 
     /**
     * The border of the labels.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleLabelsBorder $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleLabelsBorder|array $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function border($value) {
@@ -54,7 +54,7 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * The margin of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function margin($value) {
@@ -63,7 +63,7 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * The padding of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScaleLabels
     */
     public function padding($value) {

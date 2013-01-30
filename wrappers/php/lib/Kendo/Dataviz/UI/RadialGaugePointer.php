@@ -7,7 +7,7 @@ class RadialGaugePointer extends \Kendo\SerializableObject {
 
     /**
     * The cap configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\RadialGaugePointerCap $value
+    * @param \Kendo\Dataviz\UI\RadialGaugePointerCap|array $value
     * @return \Kendo\Dataviz\UI\RadialGaugePointer
     */
     public function cap($value) {

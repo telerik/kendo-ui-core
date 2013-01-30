@@ -30,7 +30,7 @@ class ChartArea extends \kendo\SerializableObject {
 
     /**
     * The border of the chart area.
-    * @param mixed|\Kendo\Dataviz\UI\ChartAreaBorder $value
+    * @param \Kendo\Dataviz\UI\ChartAreaBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function border($value) {
@@ -48,7 +48,7 @@ class ChartArea extends \kendo\SerializableObject {
 
     /**
     * The margin of the chart area.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function margin($value) {

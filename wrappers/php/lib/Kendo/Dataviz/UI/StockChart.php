@@ -20,7 +20,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
 
     /**
     * The data navigator configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigator $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigator|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function navigator($value) {
@@ -29,7 +29,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
 
     /**
     * Default options for all chart axes.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function axisDefaults($value) {
@@ -38,7 +38,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
 
     /**
     * Adds StockChartCategoryAxisItem to the StockChart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItem,... $value one or more StockChartCategoryAxisItem to add.
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItem|array,... $value one or more StockChartCategoryAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function addCategoryAxisItem($value) {
@@ -48,7 +48,7 @@ It is used as a default field for all date axes, including the navigator pane.Th
     /**
     * The chart area configuration options.
 This is the entire visible area of the chart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartChartArea $value
+    * @param \Kendo\Dataviz\UI\StockChartChartArea|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function chartArea($value) {
@@ -75,7 +75,7 @@ This is the entire visible area of the chart.
 
     /**
     * The chart legend configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartLegend $value
+    * @param \Kendo\Dataviz\UI\StockChartLegend|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function legend($value) {
@@ -84,7 +84,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartPane to the StockChart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartPane,... $value one or more StockChartPane to add.
+    * @param \Kendo\Dataviz\UI\StockChartPane|array,... $value one or more StockChartPane to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function addPane($value) {
@@ -93,7 +93,7 @@ This is the entire visible area of the chart.
 
     /**
     * The plot area configuration options. This is the area containing the plotted series.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartPlotArea $value
+    * @param \Kendo\Dataviz\UI\StockChartPlotArea|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function plotArea($value) {
@@ -102,7 +102,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartSeriesItem to the StockChart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItem,... $value one or more StockChartSeriesItem to add.
+    * @param \Kendo\Dataviz\UI\StockChartSeriesItem|array,... $value one or more StockChartSeriesItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function addSeriesItem($value) {
@@ -120,7 +120,7 @@ This is the entire visible area of the chart.
 
     /**
     * Default values for each series.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaults $value
+    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaults|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function seriesDefaults($value) {
@@ -138,7 +138,7 @@ This is the entire visible area of the chart.
 
     /**
     * The chart title configuration options or text.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartTitle $value
+    * @param \Kendo\Dataviz\UI\StockChartTitle|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function title($value) {
@@ -147,7 +147,7 @@ This is the entire visible area of the chart.
 
     /**
     * The data point tooltip configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartTooltip $value
+    * @param \Kendo\Dataviz\UI\StockChartTooltip|array $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function tooltip($value) {
@@ -165,7 +165,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartValueAxisItem to the StockChart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartValueAxisItem,... $value one or more StockChartValueAxisItem to add.
+    * @param \Kendo\Dataviz\UI\StockChartValueAxisItem|array,... $value one or more StockChartValueAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function addValueAxisItem($value) {
@@ -174,7 +174,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartXAxisItem to the StockChart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartXAxisItem,... $value one or more StockChartXAxisItem to add.
+    * @param \Kendo\Dataviz\UI\StockChartXAxisItem|array,... $value one or more StockChartXAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function addXAxisItem($value) {
@@ -183,7 +183,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds StockChartYAxisItem to the StockChart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartYAxisItem,... $value one or more StockChartYAxisItem to add.
+    * @param \Kendo\Dataviz\UI\StockChartYAxisItem|array,... $value one or more StockChartYAxisItem to add.
     * @return \Kendo\Dataviz\UI\StockChart
     */
     public function addYAxisItem($value) {

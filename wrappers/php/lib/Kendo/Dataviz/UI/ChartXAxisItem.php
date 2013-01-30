@@ -28,7 +28,7 @@ is of type Date. Specify type explicitly when such behavior is undesired.
     /**
     * Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
 axis maximum value to denote the far end of the axis.
-    * @param Object|date|array $value
+    * @param |date|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function axisCrossingValue($value) {
@@ -47,7 +47,7 @@ The default baseUnit is determined automatically from the value range. Available
 
     /**
     * Configures the axis labels.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemLabels $value
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemLabels|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function labels($value) {
@@ -66,7 +66,7 @@ The default baseUnit is determined automatically from the value range. Available
     /**
     * The end date of the axis.
 This is often used in combination with the min configuration option.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function max($value) {
@@ -76,7 +76,7 @@ This is often used in combination with the min configuration option.
     /**
     * The maximum value of the axis.
 This is often used in combination with the max configuration option.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function min($value) {
@@ -95,7 +95,7 @@ It defaults to 1/5th of the majorUnit.
 
     /**
     * Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemLine $value
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemLine|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function line($value) {
@@ -105,7 +105,7 @@ It defaults to 1/5th of the majorUnit.
     /**
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines $value
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function majorGridLines($value) {
@@ -114,7 +114,7 @@ body of the chart.
 
     /**
     * The major ticks of the axis.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemMajorTicks $value
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemMajorTicks|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function majorTicks($value) {
@@ -123,7 +123,7 @@ body of the chart.
 
     /**
     * The unique axis name.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function name($value) {
@@ -151,7 +151,7 @@ The axis will be rendered in the first (default) pane if not set.
 
     /**
     * Adds ChartXAxisItemPlotBand to the ChartXAxisItem.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemPlotBand,... $value one or more ChartXAxisItemPlotBand to add.
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemPlotBand|array,... $value one or more ChartXAxisItemPlotBand to add.
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function addPlotBand($value) {
@@ -170,7 +170,7 @@ values increase from right to left and from top to bottom.
 
     /**
     * The title of the value axis.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItemTitle $value
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemTitle|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem
     */
     public function title($value) {

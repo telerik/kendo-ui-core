@@ -25,7 +25,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The border of the labels.
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemLabelsBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function border($value) {
@@ -70,7 +70,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The margin of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function margin($value) {
@@ -79,7 +79,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The padding of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function padding($value) {

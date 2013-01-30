@@ -7,7 +7,7 @@ class TabStripAnimation extends \Kendo\SerializableObject {
 
     /**
     * The visual animation(s) that will be used when the current tab is closed.
-    * @param mixed|\Kendo\UI\TabStripAnimationClose $value
+    * @param \Kendo\UI\TabStripAnimationClose|array $value
     * @return \Kendo\UI\TabStripAnimation
     */
     public function close($value) {
@@ -16,7 +16,7 @@ class TabStripAnimation extends \Kendo\SerializableObject {
 
     /**
     * The visual animation(s) that will be used when the new tab is shown.
-    * @param mixed|\Kendo\UI\TabStripAnimationOpen $value
+    * @param \Kendo\UI\TabStripAnimationOpen|array $value
     * @return \Kendo\UI\TabStripAnimation
     */
     public function open($value) {

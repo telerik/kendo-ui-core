@@ -10,7 +10,7 @@ class TimePicker extends \Kendo\UI\Widget {
 
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
-    * @param mixed|\Kendo\UI\TimePickerAnimation $value
+    * @param \Kendo\UI\TimePickerAnimation|array $value
     * @return \Kendo\UI\TimePicker
     */
     public function animation($value) {

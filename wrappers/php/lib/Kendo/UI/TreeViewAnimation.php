@@ -7,7 +7,7 @@ class TreeViewAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation that will be used when collapsing items.
-    * @param mixed|\Kendo\UI\TreeViewAnimationCollapse $value
+    * @param \Kendo\UI\TreeViewAnimationCollapse|array $value
     * @return \Kendo\UI\TreeViewAnimation
     */
     public function collapse($value) {
@@ -16,7 +16,7 @@ class TreeViewAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation that will be used when expanding items.
-    * @param mixed|\Kendo\UI\TreeViewAnimationExpand $value
+    * @param \Kendo\UI\TreeViewAnimationExpand|array $value
     * @return \Kendo\UI\TreeViewAnimation
     */
     public function expand($value) {

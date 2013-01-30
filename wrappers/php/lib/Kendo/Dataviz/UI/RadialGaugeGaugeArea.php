@@ -8,7 +8,7 @@ class RadialGaugeGaugeArea extends \Kendo\SerializableObject {
     /**
     * The background of the gauge area.
 Any valid CSS color string will work here, including hex and rgb.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\RadialGaugeGaugeArea
     */
     public function background($value) {
@@ -17,7 +17,7 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * The border of the gauge area.
-    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeGaugeAreaBorder $value
+    * @param \Kendo\Dataviz\UI\RadialGaugeGaugeAreaBorder|array $value
     * @return \Kendo\Dataviz\UI\RadialGaugeGaugeArea
     */
     public function border($value) {
@@ -35,7 +35,7 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * The margin of the gauge area.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\RadialGaugeGaugeArea
     */
     public function margin($value) {

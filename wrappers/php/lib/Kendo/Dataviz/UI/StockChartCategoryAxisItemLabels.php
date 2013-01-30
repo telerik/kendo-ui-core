@@ -16,7 +16,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The border of the labels.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemLabelsBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabelsBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function border($value) {
@@ -52,7 +52,7 @@ class StockChartCategoryAxisItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The margin of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function margin($value) {
@@ -72,7 +72,7 @@ mirroring the axis will render them to the right.
 
     /**
     * The padding of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function padding($value) {
@@ -138,7 +138,7 @@ Template variables:
 
     /**
     * Date format strings
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */
     public function dateFormats($value) {

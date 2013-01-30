@@ -95,7 +95,7 @@ increase and decrease buttons of a Slider.
 
     /**
     * Configuration of the Slider tooltip.
-    * @param mixed|\Kendo\UI\SliderTooltip $value
+    * @param \Kendo\UI\SliderTooltip|array $value
     * @return \Kendo\UI\Slider
     */
     public function tooltip($value) {

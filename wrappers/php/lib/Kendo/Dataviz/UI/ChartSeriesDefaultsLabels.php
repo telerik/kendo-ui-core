@@ -17,7 +17,7 @@ including hex and rgb.
 
     /**
     * The border of the labels.
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsBorder $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function border($value) {
@@ -55,7 +55,7 @@ labels
 
     /**
     * The margin of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function margin($value) {
@@ -64,7 +64,7 @@ labels
 
     /**
     * The padding of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function padding($value) {

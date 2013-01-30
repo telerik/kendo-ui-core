@@ -19,7 +19,7 @@ class Editor extends \Kendo\UI\Widget {
 
     /**
     * Defines the text of the labels that are shown within the editor. Used primarily for localization.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\UI\Editor
     */
     public function messages($value) {
@@ -37,7 +37,7 @@ class Editor extends \Kendo\UI\Widget {
 
     /**
     * Adds EditorTool to the Editor.
-    * @param mixed|\Kendo\UI\EditorTool,... $value one or more EditorTool to add.
+    * @param \Kendo\UI\EditorTool|array,... $value one or more EditorTool to add.
     * @return \Kendo\UI\Editor
     */
     public function addTool($value) {
@@ -46,11 +46,11 @@ class Editor extends \Kendo\UI\Widget {
 
     /**
     * Configuration for image browser dialog.
-    * @param mixed|\Kendo\UI\EditorImagebrowser $value
+    * @param \Kendo\UI\EditorImageBrowser|array $value
     * @return \Kendo\UI\Editor
     */
-    public function imagebrowser($value) {
-        return $this->setProperty('imagebrowser', $value);
+    public function imageBrowser($value) {
+        return $this->setProperty('imageBrowser', $value);
     }
 
     /**

@@ -7,7 +7,7 @@ class ChartSeriesItemHighlight extends \Kendo\SerializableObject {
 
     /**
     * The border of highlighted points. The color is computed automatically from the base point color.
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemHighlightBorder $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemHighlightBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemHighlight
     */
     public function border($value) {
@@ -25,7 +25,7 @@ class ChartSeriesItemHighlight extends \Kendo\SerializableObject {
 
     /**
     * Line options for highlighted points. The color is computed automatically from the base point color.** Available only for candlestick series **
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemHighlightLine $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemHighlightLine|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemHighlight
     */
     public function line($value) {

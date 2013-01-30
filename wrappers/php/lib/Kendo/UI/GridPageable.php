@@ -79,7 +79,7 @@ class GridPageable extends \Kendo\SerializableObject {
 
     /**
     * Defines texts shown within the pager.
-    * @param mixed|\Kendo\UI\GridPageableMessages $value
+    * @param \Kendo\UI\GridPageableMessages|array $value
     * @return \Kendo\UI\GridPageable
     */
     public function messages($value) {

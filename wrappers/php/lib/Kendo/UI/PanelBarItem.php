@@ -138,7 +138,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
     }
     /**
     * Adds \Kendo\UI\PanelBarItem.
-    * @param mixed|\Kendo\UI\PanelBarItem $value
+    * @param \Kendo\UI\PanelBarItem|array $value
     * @return \Kendo\UI\PanelBar    */
     public function addItem($value) {
         return $this->add('items', $value);

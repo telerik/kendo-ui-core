@@ -73,7 +73,7 @@ class Calendar extends \Kendo\UI\Widget {
 
     /**
     * Templates for the cells rendered in the "month" view.
-    * @param mixed|\Kendo\UI\CalendarMonth $value
+    * @param \Kendo\UI\CalendarMonth|array $value
     * @return \Kendo\UI\Calendar
     */
     public function month($value) {

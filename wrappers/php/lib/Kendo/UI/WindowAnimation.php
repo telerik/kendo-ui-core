@@ -7,7 +7,7 @@ class WindowAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation that will be used when a Window closes.
-    * @param mixed|\Kendo\UI\WindowAnimationClose $value
+    * @param \Kendo\UI\WindowAnimationClose|array $value
     * @return \Kendo\UI\WindowAnimation
     */
     public function close($value) {
@@ -16,7 +16,7 @@ class WindowAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation that will be used when a Window opens.
-    * @param mixed|\Kendo\UI\WindowAnimationOpen $value
+    * @param \Kendo\UI\WindowAnimationOpen|array $value
     * @return \Kendo\UI\WindowAnimation
     */
     public function open($value) {

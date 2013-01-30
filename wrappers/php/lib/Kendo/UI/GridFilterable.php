@@ -16,7 +16,7 @@ class GridFilterable extends \Kendo\SerializableObject {
 
     /**
     * Sets the filter menu messages.
-    * @param mixed|\Kendo\UI\GridFilterableMessages $value
+    * @param \Kendo\UI\GridFilterableMessages|array $value
     * @return \Kendo\UI\GridFilterable
     */
     public function messages($value) {
@@ -25,7 +25,7 @@ class GridFilterable extends \Kendo\SerializableObject {
 
     /**
     * Enable/Disable and set the text of filter operators.
-    * @param mixed|\Kendo\UI\GridFilterableOperators $value
+    * @param \Kendo\UI\GridFilterableOperators|array $value
     * @return \Kendo\UI\GridFilterable
     */
     public function operators($value) {

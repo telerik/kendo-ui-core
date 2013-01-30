@@ -7,7 +7,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 
     /**
     * Configures the axis line.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleLine $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleLine|array $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function line($value) {
@@ -16,7 +16,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 
     /**
     * Configures the scale labels.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleLabels $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleLabels|array $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function labels($value) {
@@ -25,7 +25,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 
     /**
     * Configures the scale major ticks.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleMajorTicks|array $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function majorTicks($value) {
@@ -61,7 +61,7 @@ class LinearGaugeScale extends \Kendo\SerializableObject {
 
     /**
     * Configures the scale minor ticks.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks $value
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleMinorTicks|array $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function minorTicks($value) {
@@ -89,7 +89,7 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
 
     /**
     * Adds LinearGaugeScaleRange to the LinearGaugeScale.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugeScaleRange,... $value one or more LinearGaugeScaleRange to add.
+    * @param \Kendo\Dataviz\UI\LinearGaugeScaleRange|array,... $value one or more LinearGaugeScaleRange to add.
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
     */
     public function addRange($value) {

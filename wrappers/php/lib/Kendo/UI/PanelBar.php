@@ -27,7 +27,7 @@ class PanelBar extends \Kendo\UI\Widget {
     /**
     * A collection of visual animations used when PanelBar items are exapnd or collapsed through
 user interactions. Setting this option to false will disable all animations.
-    * @param boolean|\Kendo\UI\PanelBarAnimation|mixed $value
+    * @param boolean|\Kendo\UI\PanelBarAnimation|array $value
     * @return \Kendo\UI\PanelBar
     */
     public function animation($value) {
@@ -46,7 +46,7 @@ are available:
 
     /**
     * Adds PanelBarItem to the PanelBar.
-    * @param mixed|\Kendo\UI\PanelBarItem,... $value one or more PanelBarItem to add.
+    * @param \Kendo\UI\PanelBarItem|array,... $value one or more PanelBarItem to add.
     * @return \Kendo\UI\PanelBar
     */
     public function addItem($value) {

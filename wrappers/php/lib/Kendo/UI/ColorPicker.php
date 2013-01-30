@@ -32,8 +32,17 @@ makes sense for your colors.
     }
 
     /**
+    * The size (width and height) of a color cell for the Palette picker.
+    * @param float $value
+    * @return \Kendo\UI\ColorPicker
+    */
+    public function size($value) {
+        return $this->setProperty('size', $value);
+    }
+
+    /**
     * Allows customization of "Apply" / "Cancel" labels.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\UI\ColorPicker
     */
     public function messages($value) {

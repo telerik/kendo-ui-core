@@ -16,7 +16,7 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * The border of the markers.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkersBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
     */
     public function border($value) {

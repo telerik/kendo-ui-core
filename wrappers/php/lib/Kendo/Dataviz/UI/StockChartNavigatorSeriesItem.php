@@ -70,7 +70,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
 
     /**
     * Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemHighlight $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemHighlight|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function highlight($value) {
@@ -98,7 +98,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The border of the points.** Applicable to column, ohlc and candlestick series **
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function border($value) {
@@ -161,7 +161,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Configures the series data labels.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLabels $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLabels|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function labels($value) {
@@ -170,7 +170,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Line options.** Applicable to area, candlestick and ohlc series. **
-    * @param string|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine|mixed $value
+    * @param string|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLine|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function line($value) {
@@ -188,7 +188,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * Marker options.** Applicable for area and line series. **
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function markers($value) {
@@ -224,7 +224,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The effects overlay.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemOverlay $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemOverlay|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function overlay($value) {
@@ -252,7 +252,7 @@ Available for column series.
 
     /**
     * The data point tooltip configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemTooltip $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemTooltip|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function tooltip($value) {

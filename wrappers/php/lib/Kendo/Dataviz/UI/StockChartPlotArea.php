@@ -25,7 +25,7 @@ class StockChartPlotArea extends \Kendo\SerializableObject {
 
     /**
     * The border of the plot area.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartPlotAreaBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartPlotAreaBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartPlotArea
     */
     public function border($value) {
@@ -34,7 +34,7 @@ class StockChartPlotArea extends \Kendo\SerializableObject {
 
     /**
     * The margin of the plot area.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartPlotArea
     */
     public function margin($value) {

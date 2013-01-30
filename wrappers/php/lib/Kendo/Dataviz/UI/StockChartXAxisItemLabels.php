@@ -17,7 +17,7 @@ hex and rgb
 
     /**
     * The border of the labels.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartXAxisItemLabelsBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartXAxisItemLabelsBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartXAxisItemLabels
     */
     public function border($value) {
@@ -53,7 +53,7 @@ hex and rgb
 
     /**
     * The margin of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartXAxisItemLabels
     */
     public function margin($value) {
@@ -73,7 +73,7 @@ mirroring the axis will render them to the right.
 
     /**
     * The padding of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartXAxisItemLabels
     */
     public function padding($value) {
@@ -138,7 +138,7 @@ Every n-th label is rendered where n is the step
 
     /**
     * Date format strings
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartXAxisItemLabels
     */
     public function dateFormats($value) {

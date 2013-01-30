@@ -16,7 +16,7 @@ class ChartPane extends \Kendo\SerializableObject {
 
     /**
     * The margin of the pane.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartPane
     */
     public function margin($value) {
@@ -25,7 +25,7 @@ class ChartPane extends \Kendo\SerializableObject {
 
     /**
     * The padding of the pane.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartPane
     */
     public function padding($value) {
@@ -43,7 +43,7 @@ class ChartPane extends \Kendo\SerializableObject {
 
     /**
     * The border of the pane.
-    * @param mixed|\Kendo\Dataviz\UI\ChartPaneBorder $value
+    * @param \Kendo\Dataviz\UI\ChartPaneBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartPane
     */
     public function border($value) {
@@ -61,7 +61,7 @@ class ChartPane extends \Kendo\SerializableObject {
 
     /**
     * The pane title text or configuration.
-    * @param string|\Kendo\Dataviz\UI\ChartPaneTitle|mixed $value
+    * @param string|\Kendo\Dataviz\UI\ChartPaneTitle|array $value
     * @return \Kendo\Dataviz\UI\ChartPane
     */
     public function title($value) {

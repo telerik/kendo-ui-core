@@ -28,7 +28,7 @@ Refer to the jQuery.ajax documentation for further info.
     /**
     * Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.
-    * @param Object|string|\kendo\JavaScriptFunction $value
+    * @param |string|\kendo\JavaScriptFunction $value
     * @return \Kendo\Data\DataSourceTransportCreate
     */
     public function data($value) {

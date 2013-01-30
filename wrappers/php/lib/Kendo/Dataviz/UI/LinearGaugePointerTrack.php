@@ -7,7 +7,7 @@ class LinearGaugePointerTrack extends \Kendo\SerializableObject {
 
     /**
     * The border of the track.
-    * @param mixed|\Kendo\Dataviz\UI\LinearGaugePointerTrackBorder $value
+    * @param \Kendo\Dataviz\UI\LinearGaugePointerTrackBorder|array $value
     * @return \Kendo\Dataviz\UI\LinearGaugePointerTrack
     */
     public function border($value) {

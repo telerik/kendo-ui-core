@@ -11,7 +11,7 @@ class TreeView extends \Kendo\UI\Widget {
     /**
     * A collection of visual animations used when items are expanded or collapsed through user interaction.
 Setting this option to false will disable all animations.
-    * @param mixed|\Kendo\UI\TreeViewAnimation $value
+    * @param \Kendo\UI\TreeViewAnimation|array $value
     * @return \Kendo\UI\TreeView
     */
     public function animation($value) {
@@ -20,7 +20,7 @@ Setting this option to false will disable all animations.
 
     /**
     * If true or an object, renders checkboxes within each treeview item.
-    * @param boolean|\Kendo\UI\TreeViewCheckboxes|mixed $value
+    * @param boolean|\Kendo\UI\TreeViewCheckboxes|array $value
     * @return \Kendo\UI\TreeView
     */
     public function checkboxes($value) {
@@ -109,7 +109,7 @@ HierarchicalDataSource instance), the default value of this option is false.
 
     /**
     * Adds TreeViewItem to the TreeView.
-    * @param mixed|\Kendo\UI\TreeViewItem,... $value one or more TreeViewItem to add.
+    * @param \Kendo\UI\TreeViewItem|array,... $value one or more TreeViewItem to add.
     * @return \Kendo\UI\TreeView
     */
     public function addItem($value) {

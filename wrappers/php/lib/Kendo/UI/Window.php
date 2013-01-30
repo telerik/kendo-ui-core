@@ -45,7 +45,7 @@ and "Maximize".
     /**
     * A collection of {Animation} objects, used to change default animations. A value of false
 will disable all animations in the widget.
-    * @param mixed|\Kendo\UI\WindowAnimation $value
+    * @param \Kendo\UI\WindowAnimation|array $value
     * @return \Kendo\UI\Window
     */
     public function animation($value) {
@@ -55,7 +55,7 @@ will disable all animations in the widget.
     /**
     * The element that the Window will be appended to.
 Note that this does not constrain the window dragging within the given element.
-    * @param Object|string $value
+    * @param |string $value
     * @return \Kendo\UI\Window
     */
     public function appendTo($value) {
@@ -174,7 +174,7 @@ Window.
 
     /**
     * The content of the window
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\UI\Window
     */
     public function content($value) {

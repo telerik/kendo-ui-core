@@ -8,7 +8,7 @@ class StockChartCategoryAxisItem extends \Kendo\SerializableObject {
     /**
     * Category index at which the first value axis crosses this axis. (Only for object)Category indicies at which the value axes cross the category axis. (Only for array)Note: Specify an index greater than or equal to the number
 of categories to denote the far end of the axis.
-    * @param Object|date|array $value
+    * @param |date|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function axisCrossingValue($value) {
@@ -54,7 +54,7 @@ Individual color settings for line and labels take priority.
 
     /**
     * Configures the axis labels.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function labels($value) {
@@ -63,7 +63,7 @@ Individual color settings for line and labels take priority.
 
     /**
     * Configures the axis line. This will also effect major and minor ticks, but not gridlines.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemLine $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemLine|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function line($value) {
@@ -73,7 +73,7 @@ Individual color settings for line and labels take priority.
     /**
     * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorGridLines $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorGridLines|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function majorGridLines($value) {
@@ -82,7 +82,7 @@ body of the chart.
 
     /**
     * The major ticks of the axis.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMajorTicks|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function majorTicks($value) {
@@ -92,7 +92,7 @@ body of the chart.
     /**
     * Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
 the body of the chart.Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid lines visibility being set to true.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorGridLines|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function minorGridLines($value) {
@@ -101,7 +101,7 @@ the body of the chart.Note that minor grid lines are not visible by default, the
 
     /**
     * The minor ticks of the axis.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorTicks $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemMinorTicks|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function minorTicks($value) {
@@ -129,7 +129,7 @@ The axis will be rendered in the first (default) pane if not set.
 
     /**
     * Adds StockChartCategoryAxisItemPlotBand to the StockChartCategoryAxisItem.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand,... $value one or more StockChartCategoryAxisItemPlotBand to add.
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemPlotBand|array,... $value one or more StockChartCategoryAxisItemPlotBand to add.
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function addPlotBand($value) {
@@ -148,7 +148,7 @@ categories are listed from right to left and from top to bottom.
 
     /**
     * The title of the category axis.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle $value
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemTitle|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function title($value) {
@@ -167,7 +167,7 @@ categories are listed from right to left and from top to bottom.
     /**
     * Specifies the discrete baseUnitStep values when
 either baseUnit is set to "fit" or baseUnitStep is set to "auto".The default configuration is as follows:Each setting can be overriden individually.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function autoBaseUnitSteps($value) {
@@ -190,7 +190,7 @@ series.aggregate function.
     /**
     * Sets the step (interval) between categories in base units.
 Specifiying "auto" will set the step to such value that the total number of categories does not exceed maxDateGroups.This option is ignored if baseUnit is set to "fit".
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function baseUnitStep($value) {
@@ -202,7 +202,7 @@ Specifiying "auto" will set the step to such value that the total number of cate
 By default, the minimum date is the same as the last category.
 This is often used in combination with the min and roundToBaseUnit configuration options to
 set up a fixed date range.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function max($value) {
@@ -214,7 +214,7 @@ set up a fixed date range.
 By default, the minimum date is the same as the first category.
 This is often used in combination with the max and roundToBaseUnit configuration options to
 set up a fixed date range.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function min($value) {

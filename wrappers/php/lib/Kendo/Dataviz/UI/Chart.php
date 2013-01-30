@@ -10,7 +10,7 @@ class Chart extends \Kendo\UI\Widget {
 
     /**
     * Default options for all chart axes.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function axisDefaults($value) {
@@ -19,7 +19,7 @@ class Chart extends \Kendo\UI\Widget {
 
     /**
     * Adds ChartCategoryAxisItem to the Chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartCategoryAxisItem,... $value one or more ChartCategoryAxisItem to add.
+    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItem|array,... $value one or more ChartCategoryAxisItem to add.
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function addCategoryAxisItem($value) {
@@ -29,7 +29,7 @@ class Chart extends \Kendo\UI\Widget {
     /**
     * The chart area configuration options.
 This is the entire visible area of the chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartArea $value
+    * @param \Kendo\Dataviz\UI\ChartArea|array $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function chartArea($value) {
@@ -56,7 +56,7 @@ This is the entire visible area of the chart.
 
     /**
     * The chart legend configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\ChartLegend $value
+    * @param \Kendo\Dataviz\UI\ChartLegend|array $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function legend($value) {
@@ -65,7 +65,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartPane to the Chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartPane,... $value one or more ChartPane to add.
+    * @param \Kendo\Dataviz\UI\ChartPane|array,... $value one or more ChartPane to add.
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function addPane($value) {
@@ -74,7 +74,7 @@ This is the entire visible area of the chart.
 
     /**
     * The plot area configuration options. This is the area containing the plotted series.
-    * @param mixed|\Kendo\Dataviz\UI\ChartPlotArea $value
+    * @param \Kendo\Dataviz\UI\ChartPlotArea|array $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function plotArea($value) {
@@ -83,7 +83,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartSeriesItem to the Chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItem,... $value one or more ChartSeriesItem to add.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItem|array,... $value one or more ChartSeriesItem to add.
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function addSeriesItem($value) {
@@ -101,7 +101,7 @@ This is the entire visible area of the chart.
 
     /**
     * Default values for each series.
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesDefaults $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesDefaults|array $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function seriesDefaults($value) {
@@ -119,7 +119,7 @@ This is the entire visible area of the chart.
 
     /**
     * The chart title configuration options or text.
-    * @param mixed|\Kendo\Dataviz\UI\ChartTitle $value
+    * @param \Kendo\Dataviz\UI\ChartTitle|array $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function title($value) {
@@ -128,7 +128,7 @@ This is the entire visible area of the chart.
 
     /**
     * The data point tooltip configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\ChartTooltip $value
+    * @param \Kendo\Dataviz\UI\ChartTooltip|array $value
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function tooltip($value) {
@@ -146,7 +146,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartValueAxisItem to the Chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartValueAxisItem,... $value one or more ChartValueAxisItem to add.
+    * @param \Kendo\Dataviz\UI\ChartValueAxisItem|array,... $value one or more ChartValueAxisItem to add.
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function addValueAxisItem($value) {
@@ -155,7 +155,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartXAxisItem to the Chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartXAxisItem,... $value one or more ChartXAxisItem to add.
+    * @param \Kendo\Dataviz\UI\ChartXAxisItem|array,... $value one or more ChartXAxisItem to add.
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function addXAxisItem($value) {
@@ -164,7 +164,7 @@ This is the entire visible area of the chart.
 
     /**
     * Adds ChartYAxisItem to the Chart.
-    * @param mixed|\Kendo\Dataviz\UI\ChartYAxisItem,... $value one or more ChartYAxisItem to add.
+    * @param \Kendo\Dataviz\UI\ChartYAxisItem|array,... $value one or more ChartYAxisItem to add.
     * @return \Kendo\Dataviz\UI\Chart
     */
     public function addYAxisItem($value) {

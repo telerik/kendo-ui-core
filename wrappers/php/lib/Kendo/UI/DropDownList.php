@@ -10,7 +10,7 @@ class DropDownList extends \Kendo\UI\Widget {
 
     /**
     * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
-    * @param mixed|\Kendo\UI\DropDownListAnimation $value
+    * @param \Kendo\UI\DropDownListAnimation|array $value
     * @return \Kendo\UI\DropDownList
     */
     public function animation($value) {
@@ -109,7 +109,7 @@ class DropDownList extends \Kendo\UI\Widget {
 
     /**
     * Define the text of the default empty item. If the value is an object, then the widget will use it directly.
-    * @param string|Object $value
+    * @param string| $value
     * @return \Kendo\UI\DropDownList
     */
     public function optionLabel($value) {

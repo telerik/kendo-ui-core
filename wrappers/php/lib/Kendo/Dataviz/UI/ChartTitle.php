@@ -25,7 +25,7 @@ class ChartTitle extends \Kendo\SerializableObject {
 
     /**
     * The border of the title.
-    * @param mixed|\Kendo\Dataviz\UI\ChartTitleBorder $value
+    * @param \Kendo\Dataviz\UI\ChartTitleBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
     public function border($value) {
@@ -43,7 +43,7 @@ class ChartTitle extends \Kendo\SerializableObject {
 
     /**
     * The margin of the title.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
     public function margin($value) {
@@ -52,7 +52,7 @@ class ChartTitle extends \Kendo\SerializableObject {
 
     /**
     * The padding of the title.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
     public function padding($value) {

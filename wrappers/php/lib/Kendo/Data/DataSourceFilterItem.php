@@ -25,7 +25,7 @@ class DataSourceFilterItem extends \kendo\SerializableObject {
 
     /**
     * Specifies the value to filter for.
-    * @param Object $value
+    * @param  $value
     * @return \Kendo\Data\DataSourceFilterItem
     */
     public function value($value) {

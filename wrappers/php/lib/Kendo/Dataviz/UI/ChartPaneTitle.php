@@ -17,7 +17,7 @@ hex and rgb.
 
     /**
     * The border of the title.
-    * @param mixed|\Kendo\Dataviz\UI\ChartPaneTitleBorder $value
+    * @param \Kendo\Dataviz\UI\ChartPaneTitleBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartPaneTitle
     */
     public function border($value) {
@@ -44,7 +44,7 @@ hex and rgb.
 
     /**
     * The margin of the title.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartPaneTitle
     */
     public function margin($value) {

@@ -17,7 +17,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Configures the scale labels.
-    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleLabels $value
+    * @param \Kendo\Dataviz\UI\RadialGaugeScaleLabels|array $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function labels($value) {
@@ -26,7 +26,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Configures the scale major ticks.
-    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks $value
+    * @param \Kendo\Dataviz\UI\RadialGaugeScaleMajorTicks|array $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function majorTicks($value) {
@@ -62,7 +62,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Configures the scale minor ticks.
-    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks $value
+    * @param \Kendo\Dataviz\UI\RadialGaugeScaleMinorTicks|array $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function minorTicks($value) {
@@ -80,7 +80,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 
     /**
     * Adds RadialGaugeScaleRange to the RadialGaugeScale.
-    * @param mixed|\Kendo\Dataviz\UI\RadialGaugeScaleRange,... $value one or more RadialGaugeScaleRange to add.
+    * @param \Kendo\Dataviz\UI\RadialGaugeScaleRange|array,... $value one or more RadialGaugeScaleRange to add.
     * @return \Kendo\Dataviz\UI\RadialGaugeScale
     */
     public function addRange($value) {

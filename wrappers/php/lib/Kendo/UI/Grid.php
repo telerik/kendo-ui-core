@@ -19,7 +19,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Adds GridColumn to the Grid.
-    * @param mixed|\Kendo\UI\GridColumn,... $value one or more GridColumn to add.
+    * @param \Kendo\UI\GridColumn|array,... $value one or more GridColumn to add.
     * @return \Kendo\UI\Grid
     */
     public function addColumn($value) {
@@ -28,7 +28,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Enables column header menu
-    * @param boolean|\Kendo\UI\GridColumnMenu|mixed $value
+    * @param boolean|\Kendo\UI\GridColumnMenu|array $value
     * @return \Kendo\UI\Grid
     */
     public function columnMenu($value) {
@@ -46,7 +46,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether editing is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridEditable|mixed $value
+    * @param boolean|\Kendo\UI\GridEditable|array $value
     * @return \Kendo\UI\Grid
     */
     public function editable($value) {
@@ -55,7 +55,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether filtering is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridFilterable|mixed $value
+    * @param boolean|\Kendo\UI\GridFilterable|array $value
     * @return \Kendo\UI\Grid
     */
     public function filterable($value) {
@@ -82,7 +82,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether grouping is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridGroupable|mixed $value
+    * @param boolean|\Kendo\UI\GridGroupable|array $value
     * @return \Kendo\UI\Grid
     */
     public function groupable($value) {
@@ -109,7 +109,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether paging is enabled/disabled.
-    * @param boolean|\Kendo\UI\GridPageable|mixed $value
+    * @param boolean|\Kendo\UI\GridPageable|array $value
     * @return \Kendo\UI\Grid
     */
     public function pageable($value) {
@@ -118,7 +118,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Enable/disable grid scrolling.
-    * @param boolean|\Kendo\UI\GridScrollable|mixed $value
+    * @param boolean|\Kendo\UI\GridScrollable|array $value
     * @return \Kendo\UI\Grid
     */
     public function scrollable($value) {
@@ -136,7 +136,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Defines whether grid columns are sortable.
-    * @param boolean|\Kendo\UI\GridSortable|mixed $value
+    * @param boolean|\Kendo\UI\GridSortable|array $value
     * @return \Kendo\UI\Grid
     */
     public function sortable($value) {
@@ -145,7 +145,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * Adds GridToolbarItem to the Grid.
-    * @param mixed|\Kendo\UI\GridToolbarItem,... $value one or more GridToolbarItem to add.
+    * @param \Kendo\UI\GridToolbarItem|array,... $value one or more GridToolbarItem to add.
     * @return \Kendo\UI\Grid
     */
     public function addToolbarItem($value) {

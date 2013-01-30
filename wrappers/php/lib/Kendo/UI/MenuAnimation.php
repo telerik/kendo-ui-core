@@ -7,7 +7,7 @@ class MenuAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation that will be used when closing sub menus.
-    * @param mixed|\Kendo\UI\MenuAnimationClose $value
+    * @param \Kendo\UI\MenuAnimationClose|array $value
     * @return \Kendo\UI\MenuAnimation
     */
     public function close($value) {
@@ -16,7 +16,7 @@ class MenuAnimation extends \Kendo\SerializableObject {
 
     /**
     * The animation that will be used when opening sub menus.
-    * @param mixed|\Kendo\UI\MenuAnimationOpen $value
+    * @param \Kendo\UI\MenuAnimationOpen|array $value
     * @return \Kendo\UI\MenuAnimation
     */
     public function open($value) {

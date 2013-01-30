@@ -11,7 +11,7 @@ class TabStrip extends \Kendo\UI\Widget {
     /**
     * A collection of visual animations used when TabStrip tab are selected through
 user interactions. Setting this option to false will disable all animations.
-    * @param mixed|\Kendo\UI\TabStripAnimation $value
+    * @param \Kendo\UI\TabStripAnimation|array $value
     * @return \Kendo\UI\TabStrip
     */
     public function animation($value) {
@@ -88,7 +88,7 @@ tab.
 
     /**
     * Adds TabStripItem to the TabStrip.
-    * @param mixed|\Kendo\UI\TabStripItem,... $value one or more TabStripItem to add.
+    * @param \Kendo\UI\TabStripItem|array,... $value one or more TabStripItem to add.
     * @return \Kendo\UI\TabStrip
     */
     public function addItem($value) {

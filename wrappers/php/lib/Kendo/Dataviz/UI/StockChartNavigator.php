@@ -45,7 +45,7 @@ It is used as a default field for the navigator axis.The data item field value m
 
     /**
     * Adds StockChartNavigatorSeriesItem to the StockChartNavigator.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItem,... $value one or more StockChartNavigatorSeriesItem to add.
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem|array,... $value one or more StockChartNavigatorSeriesItem to add.
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
     public function addSeriesItem($value) {
@@ -54,7 +54,7 @@ It is used as a default field for the navigator axis.The data item field value m
 
     /**
     * Specifies the initially selected range.The full range of values is shown if no range is specified.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorSelect $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorSelect|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
     public function select($value) {
@@ -63,7 +63,7 @@ It is used as a default field for the navigator axis.The data item field value m
 
     /**
     * Default options for the navigator hint.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartNavigatorHint $value
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorHint|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
     public function hint($value) {

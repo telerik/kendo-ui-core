@@ -16,7 +16,7 @@ class ChartLegend extends \Kendo\SerializableObject {
 
     /**
     * The border of the legend.
-    * @param mixed|\Kendo\Dataviz\UI\ChartLegendBorder $value
+    * @param \Kendo\Dataviz\UI\ChartLegendBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
     public function border($value) {
@@ -25,7 +25,7 @@ class ChartLegend extends \Kendo\SerializableObject {
 
     /**
     * Configures the legend labels.
-    * @param mixed|\Kendo\Dataviz\UI\ChartLegendLabels $value
+    * @param \Kendo\Dataviz\UI\ChartLegendLabels|array $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
     public function labels($value) {
@@ -34,7 +34,7 @@ class ChartLegend extends \Kendo\SerializableObject {
 
     /**
     * The margin of the legend.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
     public function margin($value) {
@@ -65,7 +65,7 @@ upwards from the current position.
 
     /**
     * The padding of the legend.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
     public function padding($value) {

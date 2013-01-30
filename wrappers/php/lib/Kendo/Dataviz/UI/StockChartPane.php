@@ -16,7 +16,7 @@ class StockChartPane extends \Kendo\SerializableObject {
 
     /**
     * The margin of the pane.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartPane
     */
     public function margin($value) {
@@ -25,7 +25,7 @@ class StockChartPane extends \Kendo\SerializableObject {
 
     /**
     * The padding of the pane.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartPane
     */
     public function padding($value) {
@@ -43,7 +43,7 @@ class StockChartPane extends \Kendo\SerializableObject {
 
     /**
     * The border of the pane.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartPaneBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartPaneBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartPane
     */
     public function border($value) {
@@ -61,7 +61,7 @@ class StockChartPane extends \Kendo\SerializableObject {
 
     /**
     * The pane title text or configuration.
-    * @param string|\Kendo\Dataviz\UI\StockChartPaneTitle|mixed $value
+    * @param string|\Kendo\Dataviz\UI\StockChartPaneTitle|array $value
     * @return \Kendo\Dataviz\UI\StockChartPane
     */
     public function title($value) {

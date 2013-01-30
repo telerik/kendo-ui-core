@@ -16,7 +16,7 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
 
     /**
     * The border configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\ChartSeriesItemTooltipBorder $value
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemTooltipBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
     public function border($value) {
@@ -52,7 +52,7 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
 
     /**
     * The padding of the tooltip.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
     public function padding($value) {

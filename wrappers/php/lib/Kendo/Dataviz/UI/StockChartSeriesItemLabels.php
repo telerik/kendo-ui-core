@@ -16,7 +16,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The border of the labels.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartSeriesItemLabelsBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function border($value) {
@@ -52,7 +52,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The margin of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function margin($value) {
@@ -61,7 +61,7 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The padding of the labels.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function padding($value) {

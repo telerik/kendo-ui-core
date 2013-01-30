@@ -16,7 +16,7 @@ class StockChartSeriesDefaultsTooltip extends \Kendo\SerializableObject {
 
     /**
     * The border configuration options.
-    * @param mixed|\Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder $value
+    * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltipBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip
     */
     public function border($value) {
@@ -52,7 +52,7 @@ class StockChartSeriesDefaultsTooltip extends \Kendo\SerializableObject {
 
     /**
     * The padding of the tooltip.
-    * @param float|Object $value
+    * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip
     */
     public function padding($value) {
