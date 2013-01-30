@@ -10,6 +10,8 @@
             get;
             set;
         }
+
+        public string CustomerID { get; set; }
         
         public string ContactName
         {

@@ -45,7 +45,8 @@ namespace Kendo.Mvc.Examples.Controllers
                 ShipCountry = order.ShipCountry,
                 ShipName = order.ShipName,
                 ShipCity = order.ShipCity,
-                EmployeeID = order.EmployeeID
+                EmployeeID = order.EmployeeID,
+                CustomerID = order.CustomerID
             });
         }
 

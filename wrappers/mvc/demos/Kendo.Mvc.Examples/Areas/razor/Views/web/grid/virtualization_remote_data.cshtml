@@ -1,13 +1,17 @@
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()    
-    .Name("Grid")
-    .Columns(columns => {
-        columns.Bound(o => o.OrderID).Width(100);
-        columns.Bound(o => o.ShipCountry).Width(180);        
-        columns.Bound(o => o.ShipName);
-        columns.Bound(o => o.OrderDate).Format("{0:d}").Width(120); 
-    })    
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.OrderID).Width(60);
+        columns.Bound(o => o.CustomerID).Width(90);
+        columns.Bound(o => o.ShipName).Width(220);
+        columns.Bound(o => o.ShipAddress).Width(280);
+        columns.Bound(o => o.ShipCity).Width(110);
+        columns.Bound(o => o.ShipCountry).Width(110);
+    })
     .Sortable()
-    .Scrollable(scrollable => scrollable.Virtual(true).Height(280))    
+    .Scrollable(scrollable => scrollable.Virtual(true))
+    .HtmlAttributes(new { style = "height:430px;" })
     .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(100)
