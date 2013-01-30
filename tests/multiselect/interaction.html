@@ -301,6 +301,20 @@
 
                 ok(multiselect.current().parent()[0]);
             });
+
+            test("MultiSelect unselects custom option", function() {
+                var multiselect = new MultiSelect(select, {
+                    dataSource: ["item1", "item2"],
+                    value: ["item1", "item2"]
+                });
+
+                multiselect.dataSource.data(["item3", "item4"]);
+                multiselect.ul.children().eq(0).click();
+
+                multiselect.tagList.children().first().find(".k-delete").click();
+
+                ok(!select[0].children[2].selected);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

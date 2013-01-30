@@ -803,7 +803,8 @@ kendo_module({
         _unselect: function(tag) {
             var that = this,
                 index = tag.index(),
-                dataItem, value, index;
+                dataItem, value, index,
+                options, option, length;
 
             tag.remove();
             that.currentTag(null);
@@ -814,12 +815,24 @@ kendo_module({
                 value = that._text(dataItem);
             }
 
-            index = that._index(value); //that._value(dataItem));
+            index = that._index(value);
 
             if (index !== -1) {
                $(that.ul[0].children[index]).show();
                that.element[0].children[index].selected = false;
                that._visibleItems += 1;
+            } else {
+                index = that.dataSource.view().length;
+                options = that.element[0].children;
+                length = options.length;
+
+                for (; index < length; idx++) {
+                    option = options[index];
+                    if (option.value == value) {
+                        option.selected = false;
+                        break;
+                    }
+                }
             }
         },
 
