@@ -282,17 +282,16 @@ kendo_module({
         },
 
         search: function(word) {
-            word = typeof word === "string" ? word : this.text();
             var that = this,
-                length = word.length,
                 options = that.options,
                 ignoreCase = options.ignoreCase,
                 filter = options.filter,
                 field = options.dataTextField;
 
             clearTimeout(that._typing);
+            word = typeof word === "string" ? word : that.input.val();
 
-            if (length >= options.minLength) {
+            if (word.length >= options.minLength) {
                 that._state = "filter";
                 that._open = true;
 
@@ -305,16 +304,11 @@ kendo_module({
             }
         },
 
-        //TODO: rename it to searchText method
-        text: function() {
-            return this.input.val();
-        },
-
         _search: function() {
             var that = this;
 
             that._typing = setTimeout(function() {
-                var value = that.text();
+                var value = that.input.val();
                 if (that._prev !== value) {
                     that._prev = value;
                     that.search(value);
@@ -800,13 +794,13 @@ kendo_module({
             idx = 0;
 
             for (; idx < length; idx ++) {
-                if (options[idx].value === value) {
+                if (options[idx].value == value) {
                     options[idx].selected = true;
                     break;
                 }
             }
 
-            that.tagList.append($(that.tagTemplate(dataItem)));
+            that.tagList.append(that.tagTemplate(dataItem));
             that._dataItems.push(dataItem);
             that._visibleItems -= 1;
             that.currentTag(null);
