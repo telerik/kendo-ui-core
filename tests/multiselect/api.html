@@ -174,7 +174,47 @@
 
                 multiselect.value(null);
 
-                deepEqual(multiselect.value(), null);
+                equal(multiselect.value(), null);
+            });
+
+            test("MultiSelect opens popup", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+
+                ok(multiselect.popup.visible());
+            });
+
+            test("MultiSelect rebinds list on open", function() {
+                popuplateSelect(5);
+                var multiselect = new MultiSelect(select);
+
+                multiselect.search("Option1");
+                multiselect.ul.children().first().click();
+                multiselect.open();
+
+                equal(multiselect.ul.children().length, 5);
+            });
+
+            test("MultiSelect does not open list if there are no visible items", function() {
+                popuplateSelect(1);
+                var multiselect = new MultiSelect(select, {
+                    value: "0"
+                });
+                multiselect.open();
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect closes popup", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.close();
+
+                ok(!multiselect.popup.visible());
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
