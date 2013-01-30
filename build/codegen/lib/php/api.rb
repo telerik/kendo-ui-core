@@ -186,16 +186,20 @@ Sets the data source of the <%= name %>.
 })
 
 OPTION_SECTION = ERB.new(%{
-### <%= php_name %> `<%= php_types %>`
+### <%= php_name %>
 
 <%= description %>
+
+#### Parameters
+
+##### $value `<%= php_types %>`
 
 }, 0, '<%>')
 
 OPTION_SECTION_EXAMPLES = ERB.new(%{
 <% php_types.split('|').each do |type| %>
 
-#### Example - using <%= type %>
+#### Example <% if includeType %> - using <%= type %><% end %>
 
     <%= owner.variable %> = <%= owner.value %>;
     <%= owner.variable %>-><%= php_name %>(<%= CodeGen::PHP::API.value(type) %>);
@@ -214,12 +218,12 @@ OPTION_SECTION_EXAMPLES = ERB.new(%{
 
             markdown = OPTION_SECTION.result(binding)
 
-            markdown += examples
+            markdown += examples(php_types.include?('|'))
 
             markdown
         end
 
-        def examples
+        def examples(includeType = true)
             OPTION_SECTION_EXAMPLES.result(binding)
         end
 
