@@ -140,7 +140,7 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
 <% if simple %>
 <%= simple.examples %>
 <% end %>
-#### Example - using [<%= php_type %>](<%= root %><%= path.downcase %>/<%= php_class.downcase %>)
+#### Example - using [<%= php_type %>](<%= root %><%= path %>/<%= php_class %>)
 
     <%= owner.variable %> = <%= owner.value %>;
     <%= variable %> = <%= value %>;
