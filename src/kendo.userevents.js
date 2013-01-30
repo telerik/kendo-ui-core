@@ -263,7 +263,8 @@
     var UserEvents = Observable.extend({
         init: function(element, options) {
             var that = this,
-                filter;
+                filter,
+                ns = kendo.guid();
 
             options = options || {};
             filter = that.filter = options.filter;
@@ -271,9 +272,9 @@
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
             that.allowSelection = options.allowSelection;
-            that.eventNS = kendo.guid();
+            that.eventNS = ns;
 
-            element = $(element).handler(that).autoApplyNS(that.eventNS);
+            element = $(element).handler(that);
             Observable.fn.init.call(that);
 
             extend(that, {
@@ -283,21 +284,21 @@
                 pressed: false
             });
 
-            that.surface.handler(that).autoApplyNS(that.eventNS)
-                .on("move", "_move")
-                .on("up cancel", "_end");
+            that.surface.handler(that)
+                .on(kendo.applyEventMap("move", ns), "_move")
+                .on(kendo.applyEventMap("up cancel", ns), "_end");
 
-            element.on("down", filter, "_start");
+            element.on(kendo.applyEventMap("down", ns), filter, "_start");
 
             if (pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
             if (options.preventDragEvent) {
-                element.on("dragstart", kendo.preventDefault);
+                element.on(kendo.applyEventMap("dragstart", ns), kendo.preventDefault);
             }
 
-            element.on("mousedown selectstart", filter, { root: element }, "_select");
+            element.on(kendo.applyEventMap("mousedown selectstart", ns), filter, { root: element }, "_select");
 
             if (support.eventCapture) {
                 var downEvents = kendo.eventMap.up.split(" "),
