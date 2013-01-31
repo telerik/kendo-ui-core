@@ -697,6 +697,7 @@ kendo_module({
                 that._focusWithMouse(e);
 
                 that._drag.dragstart(e);
+                e.preventDefault();
             };
 
             that.wrapper
