@@ -39,7 +39,7 @@ kendo_module({
         PRECISION = 3,
         DISABLED = "disabled",
         UNDEFINED = "undefined",
-        touchLocation = kendo.touchLocation;;
+        touchLocation = kendo.touchLocation;
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
