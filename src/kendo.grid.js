@@ -1879,7 +1879,7 @@ kendo_module({
             });
 
             dataTable
-            .on("mousedown" + NS, NAVROW + ">" + NAVCELL, proxy(tableClick, that))
+            .on((kendo.support.touch ? "touchstart" + NS : "mousedown" + NS), NAVROW + ">" + NAVCELL, proxy(tableClick, that))
             .on("focus" + NS, function() {
                 var current = currentProxy();
                 if (current && current.is(":visible")) {
