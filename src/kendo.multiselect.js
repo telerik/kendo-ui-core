@@ -67,7 +67,7 @@ kendo_module({
             that.element.hide();
             that._initialValues = that.options.value || that.element.val();
             //enable/disable
-            that.enable();
+            that._enable();
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -76,19 +76,32 @@ kendo_module({
 
         options: {
             name: "MultiSelect",
+            enable: true,
             autoBind: true,
-            delay: 100,
-            height: 200,
             ignoreCase: true,
             filter: "startswith",
             dataTextField: "",
             dataValueField: "",
-            minLength: 0
+            minLength: 0,
+            height: 200,
+            delay: 100
         },
 
         events: [
 
         ],
+
+        _enable: function() {
+            var that = this,
+                options = that.options;
+
+            if (that.element.prop("disabled")) {
+                options.enable = false;
+            }
+
+            that.enable(options.enable);
+        },
+
 
         destroy: function() {
             var that = this,

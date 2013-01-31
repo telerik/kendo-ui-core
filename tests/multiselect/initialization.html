@@ -224,6 +224,20 @@
                 ok(multiselect._loading);
             });
 
+            test("MultiSelect creates loading element", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect._loading);
+            });
+
+            test("MultiSelect disables widget on init", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select.attr("disabled", "disabled"));
+
+                ok(multiselect.input.attr("disabled"));
+            });
+
             asyncTest("MultiSelect shows loading icon on progress", function() {
                 popuplateSelect();
                 var multiselect = new MultiSelect(select);
