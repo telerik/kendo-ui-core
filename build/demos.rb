@@ -173,11 +173,17 @@ SPRING_VIEWS = FileList['wrappers/java/spring-demos/src/main/webapp/WEB-INF/view
 
 SPRING_CONTROLLERS = FileList['wrappers/java/spring-demos/src/main/java/com/kendoui/spring/controllers/**/*.java']
 
+PHP = FileList['wrappers/php/{web,dataviz}/**/*.php'].include('wrappers/php/lib/*.php')
+
 %w{production staging}.each do |flavor|
 
     tree :to => "dist/demos/#{flavor}",
          :from => PRODUCTION_RESOURCES,
          :root => 'demos/mvc/'
+
+    tree :to => "dist/demos/#{flavor}/src/php",
+         :from => PHP,
+         :root => 'wrappers/php/'
 
     tree :to => "dist/demos/#{flavor}/src/jsp/views",
          :from => SPRING_VIEWS,
@@ -275,6 +281,7 @@ namespace :demos do
         'dist/demos/staging/src/aspnetmvc/views/razor',
         'dist/demos/staging/src/jsp/views',
         'dist/demos/staging/src/jsp/controllers',
+        'dist/demos/production/src/php',
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
@@ -289,6 +296,7 @@ namespace :demos do
 
     task :production_site => [:release,
         'dist/demos/production',
+        'dist/demos/production/src/php',
         'dist/demos/production/src/jsp/views',
         'dist/demos/production/src/jsp/controllers',
         'dist/demos/production/src/aspnetmvc/controllers',
