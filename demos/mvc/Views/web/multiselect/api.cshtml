@@ -1,0 +1,151 @@
+<div id="example" class="k-content">
+    <div class="configuration k-widget k-header" style="width: 210px">
+        <span class="configHead">API Functions</span>
+        <ul class="options">
+            <li>
+                <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+            </li>
+            <li>
+                <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the drop-down
+            </li>
+            <li>
+                <button id="getValue" class="k-button">Get values</button>
+            </li>
+            <li>
+                <label for="filter" style="display: block; ">Filter type:</label>
+                <select id="filter" style="width: 120px; float: right; margin-bottom: 3px; margin-top: -3px;">
+                    <option value="startswith">Starts with</option>
+                    <option value="contains">Contains</option>
+                    <option value="eq">Equal</option>
+                </select>
+            </li>
+            <li>
+                <input id="word" value="The" class="k-textbox" /> <button id="find" class="k-button">Find item</button>
+            </li>
+            <li>
+                <input id="value" value="1,2" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
+            </li>
+        </ul>
+    </div>
+
+    <select id="products"></select>
+
+    <script>
+        $(document).ready(function() {
+        var data = [
+        {text: "12 Angry Men", value:"1"},
+        {text: "Il buono, il brutto, il cattivo.", value:"2"},
+        {text: "Inception", value:"3"},
+        {text: "One Flew Over the Cuckoo's Nest", value:"4"},
+        {text: "Pulp Fiction", value:"5"},
+        {text: "Schindler's List", value:"6"},
+        {text: "The Dark Knight", value:"7"},
+        {text: "The Godfather", value:"8"},
+        {text: "The Godfather: Part II", value:"9"},
+        {text: "The Shawshank Redemption", value:"10"},
+        {text: "The Shawshank Redemption 2", value:"11"}
+        ];
+
+        $("#products").kendoMultiSelect({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: data
+        })
+        .closest(".k-widget")
+        .attr("id", "products_wrapper");
+
+        $("#filter").kendoDropDownList({
+            change: filterTypeOnChanged
+        });
+
+        var multiSelect = $("#products").data("kendoMultiSelect"),
+            setValue = function(e) {
+                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                    multiSelect.value($("#value").val().split(","));
+                }
+            },
+            setSearch = function (e) {
+                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                    multiSelect.search($("#word").val());
+                }
+            };
+
+        $("#enable").click(function() {
+            multiSelect.enable();
+        });
+
+        $("#disable").click(function() {
+            multiSelect.enable(false);
+        });
+
+        $("#open").click(function() {
+            multiSelect.open();
+        });
+
+        $("#close").click(function() {
+            multiSelect.close();
+        });
+
+        $("#getValue").click(function() {
+            alert(multiSelect.value());
+        });
+
+        $("#setValue").click(setValue);
+        $("#value").keypress(setValue);
+
+        $("#find").click(setSearch);
+        $("#word").keypress(setSearch);
+
+        function filterTypeOnChanged() {
+            multiSelect.options.filter = $("#filter").val();
+        }
+    });
+</script>
+<style scoped>
+    .configuration .k-textbox {
+        width: 40px;
+    }
+
+    #products_wrapper
+    {
+        width: 500px;
+    }
+
+    .k-readonly
+    {
+        color: gray;
+    }
+
+    .k-multiselect-wrap
+    {
+        border-width: 0px;
+        border-style: solid;
+        border-radius: 4px;
+        border-color: #C5C5C5;
+        background-color: #FFF;
+    }
+
+    .k-multiselect-wrap .k-input
+    {
+        background-color: transparent;
+        height: 1.31em;
+        line-height: 1.31em;
+        padding: 0.18em 0;
+        text-indent: 4px;
+        border: 0;
+        margin: 0;
+        float: left;
+    }
+
+    .k-multiselect-wrap li
+    {
+        display: inline-block;
+        border-style: solid;
+        border-width: 1px;
+        margin: 5px 3px;
+        padding: .15em .15em .15em .4em;
+        line-height: 1.5em;
+        float: left;
+    }
+</style>
+        </div>

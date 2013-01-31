@@ -835,6 +835,12 @@
                     "url": "multiselect/remotedatasource.html",
                     "title": "Kendo MultiSelect demo",
                     "meta": ""
+                },
+                {
+                    "text": "API",
+                    "url": "multiselect/api.html",
+                    "title": "API functions demo for KendoMultiSelect",
+                    "meta": "This demo illustrates how API functions of KendoMultiSelect control operate and how you can configure them for your web project."
                 }
             ]
         },

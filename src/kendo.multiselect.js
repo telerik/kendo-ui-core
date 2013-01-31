@@ -861,7 +861,7 @@ kendo_module({
                 options = that.element[0].children;
                 length = options.length;
 
-                for (; index < length; idx++) {
+                for (; index < length; index++) {
                     option = options[index];
                     if (option.value == value) {
                         option.selected = false;
