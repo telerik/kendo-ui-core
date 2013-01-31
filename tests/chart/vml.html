@@ -80,6 +80,17 @@
                     ok(group instanceof dataviz.VMLGroup);
                 });
 
+                test("createGroup sets inline option", function() {
+                    view = new dataviz.VMLView({ inline: true });
+                    var group = view.createGroup();
+                    ok(group.options.inline);
+                });
+
+                test("createGroup does not set inline option", function() {
+                    var group = view.createGroup();
+                    ok(!group.options.inline);
+                });
+
                 test("createText returns VMLText", function() {
                     var text = view.createText("");
                     ok(text instanceof dataviz.VMLText);
@@ -254,11 +265,6 @@
                     equals(element.tagName.toLowerCase(), "h1");
                 });
 
-                test("renders inline", function() {
-                    view = new dataviz.VMLView({ inline: true });
-                    ok(view.render().indexOf("span") > -1);
-                });
-
                 // ------------------------------------------------------------
                 module("VML View / Decorators", {
                     setup: function() {
@@ -315,6 +321,13 @@
                 test("renders div tag with default size", function() {
                     equal(view.render(),
                     "<div style='width:600px; height:400px; position: relative;'></div>");
+                });
+
+                test("renders span tag when marked as inline", function() {
+                    view = new dataviz.VMLView({ inline: true });
+                    ok(view.render().match(
+                        /\<span.*\>.*\<\/span\>/
+                    ));
                 });
 
                 test("renders children", function() {
@@ -904,9 +917,16 @@
                     kendo.support.browser.msie = msie;
                 });
 
-                test("renders group", function() {
+                test("renders div", function() {
                     equal(group.render(),
                         "<div style='position: absolute; white-space: nowrap;'></div>");
+                });
+
+                test("renders span when the marked as inline", function() {
+                    group = new dataviz.VMLGroup({ inline: true });
+                    ok(group.render().match(
+                        /\<span.*\>.*\<\/span\>/
+                    ));
                 });
 
                 test("renders children", function() {
@@ -1097,6 +1117,13 @@
                 test("renders div tag", function() {
                     ok(clipRect.render().match(
                         /\<div.*\>.*\<\/div\>/
+                    ));
+                });
+
+                test("renders span tag when marked as inline", function() {
+                    createClipRect({ inline: true });
+                    ok(clipRect.render().match(
+                        /\<span.*\>.*\<\/span\>/
                     ));
                 });
 
@@ -1487,6 +1514,15 @@
 
                 test("sets clip rect height", function() {
                     equals(decorator.decorate(rect).box.height(), 50);
+                });
+
+                test("sets inline option", function() {
+                    view.options.inline = true;
+                    ok(decorator.decorate(rect).options.inline);
+                });
+
+                test("does not set inline option", function() {
+                    ok(!decorator.decorate(rect).options.inline);
                 });
             })();
 

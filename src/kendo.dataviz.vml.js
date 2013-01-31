@@ -174,6 +174,9 @@ kendo_module({
         },
 
         createGroup: function(options) {
+            options = options || {};
+            options.inline = this.options.inline;
+
             return this.decorate(
                 new VMLGroup(options)
             );
@@ -663,13 +666,14 @@ kendo_module({
             var group = this;
             ViewElement.fn.init.call(group, options);
 
+            group.tagName = group.options.inline ? "span" : "div";
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = renderTemplate(
-                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<#= d.tagName # #= d.renderAttr(\"id\", d.options.id) #" +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; white-space: nowrap;'>" +
-                    "#= d.renderContent() #</span>"
+                    "#= d.renderContent() #</#= d.tagName #>"
                 );
             }
         }
@@ -680,17 +684,18 @@ kendo_module({
             var clipRect = this;
             ViewElement.fn.init.call(clipRect, options);
 
+            clipRect.tagName = clipRect.options.inline ? "span" : "div";
             clipRect.template = VMLClipRect.template;
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
-                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<#= d.tagName # #= d.renderAttr(\"id\", d.options.id) #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
                         "top:#= d.box.y1 #px; " +
                         "left:#= d.box.x1 #px; " +
                         "clip:#= d._renderClip() #;' >" +
-                    "#= d.renderContent() #</span>"
+                    "#= d.renderContent() #</#= d.tagName #>"
                 );
 
                 clipRect.clipTemplate = VMLClipRect.clipTemplate = renderTemplate(
@@ -893,7 +898,7 @@ kendo_module({
             if (animation && animation.type === CLIP && options.transitions) {
                 clipRect = new VMLClipRect(
                     new Box2D(0, 0, options.width, options.height),
-                    { id: uniqueId() }
+                    { id: uniqueId(), inline: options.inline }
                 );
 
                 view.animations.push(
