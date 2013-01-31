@@ -50,6 +50,13 @@ namespace Kendo.Mvc.Examples.Models
             set;
         }
 
+        [DisplayName("Quantity Per Unit")]
+        public string QuantityPerUnit
+        {
+            get;
+            set;
+        }
+
         public int CategoryID { get; set; }
 
         [UIHint("ClientCategory"), Required]

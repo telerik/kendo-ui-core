@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Web\Grid\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Grid\RowTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerRowTemplateController.cs" />
+    <Compile Include="Controllers\Web\Grid\Toolbar_TemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
     <Compile Include="Controllers\Web\Grid\EditingCustomValidationController.cs" />
     <Compile Include="Controllers\Web\Grid\SelectionController.cs" />
@@ -467,6 +468,7 @@
     <Content Include="Areas\aspx\Views\web\grid\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\rowtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverrowtemplate.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\toolbar_template.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\virtualization_remote_data.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editingcustomvalidation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\detailtemplate.aspx" />
@@ -547,6 +549,7 @@
     <Content Include="Areas\razor\Views\web\grid\filter_menu_customization.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editing_popup.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientCategory.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\toolbar_template.cshtml" />
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />

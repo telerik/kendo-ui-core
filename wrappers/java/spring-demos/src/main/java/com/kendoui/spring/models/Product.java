@@ -19,6 +19,7 @@ public class Product {
     private boolean discontinued;
     private int categoryId = 1;
     private Category category;
+    private String quantityPerUnit;
     
     @Id
     @Column(name="ProductID")
@@ -84,5 +85,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+    
+    @Column(name="QuantityPerUnit")
+    public String getQuantityPerUnit() {
+        return quantityPerUnit;
+    }
+    
+    public void setQuantityPerUnit(String quantityPerUnit) {
+        this.quantityPerUnit = quantityPerUnit;
     }
 }

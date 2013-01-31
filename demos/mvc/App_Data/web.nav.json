@@ -589,8 +589,7 @@
                     "text": "Toolbar template",
                     "url": "grid/toolbar-template.html",
                     "title": "Toolbar template demo for Kendo UI HTML5 Grid control",
-                    "meta": "This Kendo UI Grid example shows how you can add custom toolbars to the grid and create toolbar templates.",
-                    "packages": ["!mvc"]
+                    "meta": "This Kendo UI Grid example shows how you can add custom toolbars to the grid and create toolbar templates."
                 },
                 {
                     "text": "Column header template",

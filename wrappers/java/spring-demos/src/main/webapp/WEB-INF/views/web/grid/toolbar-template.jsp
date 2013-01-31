@@ -7,7 +7,7 @@
 <c:url value="/web/grid/toolbar-template/categories" var="categoriesReadUrl" />
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true">
+    <kendo:grid name="grid" pageable="true" height="430px">
     	<kendo:grid-toolbarTemplate>
     		<div class="toolbar">
     			<label class="category-label" for="categories">Show products by category:</label>
@@ -22,11 +22,12 @@
     		</div>    		
     	</kendo:grid-toolbarTemplate>
         <kendo:grid-columns>
+        	<kendo:grid-column title="Product ID" field="productId" width="100px"/>
             <kendo:grid-column title="Product Name" field="productName" />
-            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
-            <kendo:grid-column title="Units In Stock" field="unitsInStock" />
+            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" width="100px" />
+            <kendo:grid-column title="Quantity Per Unit" field="quantityPerUnit" />
         </kendo:grid-columns>
-        <kendo:dataSource pageSize="10">
+        <kendo:dataSource pageSize="20">
             <kendo:dataSource-transport>            	
                 <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST" contentType="application/json"/>
                 <kendo:dataSource-transport-parameterMap>
@@ -54,22 +55,22 @@
 	}
 </script>
  <style scoped="scoped">
-     #grid .k-toolbar
-     {
-         min-height: 27px;
-     }
-     .category-label
-     {
-         vertical-align: middle;
-         padding-right: .5em;
-     }
-     #categories
-     {
-         vertical-align: middle;
-     }
-     .toolbar {
-         float: right;
-         margin-right: .8em;
-     }
+    #grid .k-toolbar
+    {
+        min-height: 27px;
+        padding: 1.3em;
+    }
+    .category-label
+    {
+        vertical-align: middle;
+        padding-right: .5em;
+    }
+    #category
+    {
+        vertical-align: middle;
+    }
+    .toolbar {
+        float: right;
+    }
  </style>
 <demo:footer />

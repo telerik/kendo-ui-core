@@ -27,7 +27,8 @@
                          {
                              CategoryID = product.Category.CategoryID,
                              CategoryName = product.Category.CategoryName
-                         }
+                         },
+                         QuantityPerUnit = product.QuantityPerUnit
                      }).ToList();
             }
 
