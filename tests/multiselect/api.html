@@ -216,6 +216,36 @@
 
                 ok(!multiselect.popup.visible());
             });
+
+            test("MultiSelect disables widget", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { value: "1" });
+
+                multiselect.enable(false);
+
+                multiselect.tagList.find(".k-delete").click();
+
+                equal(multiselect.tagList.children().length, 1);
+                ok(multiselect.wrapper.hasClass("k-state-disabled"));
+                ok(!multiselect._innerWrapper.hasClass("k-state-disabled"));
+                ok(multiselect.input.attr("disabled"));
+            });
+
+            test("MultiSelect enables widget", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { value: "1" });
+
+                multiselect.enable(false);
+                multiselect.enable(true);
+
+                multiselect.tagList.find(".k-delete").click();
+                multiselect.wrapper.click();
+
+                equal(multiselect.tagList.children().length, 0);
+                ok(!multiselect.wrapper.hasClass("k-state-disabled"));
+                ok(!multiselect.input.attr("disabled"));
+                ok(multiselect.popup.visible());
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -54,18 +54,6 @@ kendo_module({
                 })
                 .on("keydown" + ns, proxy(that._keydown, that));
 
-            that.wrapper
-                .add(that._innerWraper)
-                .on("click" + ns, function(e) {
-                    if (e.target.className.indexOf("k-delete") == -1) {
-                        that.open();
-                    }
-
-                    if (that.input[0] !== document.activeElement) {
-                        that.input.focus();
-                    }
-                });
-
             that._templates();
             that._dataSource();
             that._accessors();
@@ -78,6 +66,8 @@ kendo_module({
 
             that.element.hide();
             that._initialValues = that.options.value || that.element.val();
+            //enable/disable
+            that.enable();
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -187,6 +177,39 @@ kendo_module({
             } else if (!popup.visible() && that._visibleItems) {
                 popup.open();
                 that.current($(first(that.ul[0])));
+            }
+        },
+
+        enable: function(enable) {
+            var that = this,
+                wrapper = that.wrapper,
+                wrappers = wrapper.add(that._innerWrapper).off(ns),
+                tagList = that.tagList.off(ns),
+                input = that.input;
+
+            if (enable === false) {
+                input.attr("disabled", "disabled");
+                wrapper.addClass("k-state-disabled");
+            } else {
+                input.removeAttr("disabled");
+                wrapper.removeClass("k-state-disabled");
+
+                wrapper
+                    .on("click" + ns, function(e) {
+                        if (e.target.className.indexOf("k-delete") == -1) {
+                            that.open();
+                        }
+
+                        if (that.input[0] !== document.activeElement) {
+                            that.input.focus();
+                        }
+                    });
+
+                tagList
+                    .on("click" + ns, ".k-delete", function(e) {
+                        that._unselect($(e.target).closest("li"));
+                        that.close();
+                    });
             }
         },
 
@@ -530,7 +553,7 @@ kendo_module({
 
         _input: function() {
             this.input = $('<input class="k-input" style="width: 25px" />')
-                            .appendTo(this._innerWraper);
+                            .appendTo(this._innerWrapper);
         },
 
         _loader: function() {
@@ -683,11 +706,7 @@ kendo_module({
             var that = this;
 
             that.tagList = $('<ul unselectable="on" class="k-list k-reset"/>')
-                                .appendTo(that._innerWraper)
-                                .on("click" + ns, ".k-delete", function(e) {
-                                    that._unselect($(e.target).closest("li"));
-                                    that.close();
-                                });
+                                .appendTo(that._innerWrapper);
         },
 
         _removeTag: function(tag) {
@@ -878,7 +897,7 @@ kendo_module({
                                   .on("mousedown" + ns, function(e) { e.preventDefault(); })
                                   .css("display", "");
 
-            that._innerWraper = $(wrapper[0].firstChild);
+            that._innerWrapper = $(wrapper[0].firstChild);
         }
     });
 

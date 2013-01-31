@@ -78,7 +78,7 @@
             test("MultiSelect appends ul to the wrapper", function() {
                 var multiselect = new MultiSelect(select);
 
-                equal(multiselect._innerWraper.children().first()[0], multiselect.tagList[0]);
+                equal(multiselect._innerWrapper.children().first()[0], multiselect.tagList[0]);
             });
 
             test("MultiSelect creates input element", function() {
@@ -90,7 +90,7 @@
             test("MultiSelect appends input to the wrapper", function() {
                 var multiselect = new MultiSelect(select);
 
-                equal(multiselect._innerWraper.children().eq(1)[0], multiselect.input[0]);
+                equal(multiselect._innerWrapper.children().eq(1)[0], multiselect.input[0]);
             });
 
             test("MultiSelect builds templates", function() {
