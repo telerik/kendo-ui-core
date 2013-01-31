@@ -2,15 +2,13 @@ kendo_module({
     id: "sparkline",
     name: "Sparkline",
     category: "dataviz",
-    description: "Sparkline widget.",
+    description: "Sparkline widgets.",
     depends: [ "chart" ]
 });
 
 (function ($, undefined) {
-    // Imports ================================================================
+    // Imports ===============================================================
     var kendo = window.kendo,
-        Class = kendo.Class,
-        Observable = kendo.Observable,
         deepExtend = kendo.deepExtend,
         math = Math,
         proxy = $.proxy,
@@ -30,27 +28,32 @@ kendo_module({
         init: function(element, options) {
             var chart = this;
 
-            Chart.fn.init.call(chart, element, options);
+            if (element.innerHTML === "") {
+                element.innerHTML = "&nbsp;";
+            }
 
+            Chart.fn.init.call(chart, element, options);
             chart.element.addClass(CSS_PREFIX + "sparkline");
         },
 
         options: {
             name: "Sparkline",
+            chartArea: {
+                margin: 0
+            },
             axisDefaults: {
+                visible: false,
                 valueAxis: {
                     narrowRange: true
                 }
             },
-            valueAxis: {
-                visible: false
-            },
             tooltip: {
-                visible: false
+                visible: true
             },
             legend: {
                 visible: false
-            }
+            },
+            transitions: false
         },
 
         _modelOptions: function() {
@@ -62,8 +65,6 @@ kendo_module({
 
             // TODO: Container width or computed
             options.width = 80;
-            // TODO: Container height or default
-            options.height = 20;
 
             element.css({
                 width: options.width,

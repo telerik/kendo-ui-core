@@ -25,8 +25,8 @@
         <p>Some sparklines <span id="sparkline"></span> and more text</p>
         <script>
             var points = [];
-            for (var i = 0; i < 6 * Math.PI; i+=0.3) {
-                points.push(Math.round(Math.sin(i) * 1000));
+            for (var i = 0; i < 20; i++) {
+                points.push(i + 2 * (i % 2 === 0 ? -i : i));
             };
 
             $(function() {
@@ -43,14 +43,7 @@
                         majorGridLines: {
                             visible: false
                         }
-                    },
-                    valueAxis: {
-                        visible: false
-                    },
-                    categoryAxis: {
-                        visible: false
-                    },
-                    transitions: false
+                    }
                 });
             });
         </script>

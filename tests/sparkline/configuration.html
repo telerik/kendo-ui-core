@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link href="../../styles/dataviz/kendo.dataviz.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                Sparkline = dataviz.ui.Sparkline;
+
+            (function() {
+                var sparkline,
+                    plotArea;
+
+                function createSparkline(options) {
+                    $("#sparkline").kendoSparkline(options);
+                    sparkline = $("#sparkline").data("kendoSparkline");
+                }
+
+                function destroySparkline() {
+                    var element = $("#sparkline");
+                    kendo.destroy(element);
+                    element.unbind().empty();
+                }
+
+                // ------------------------------------------------------------
+                module("Options / Defaults", {
+                    setup: function() {
+                        createSparkline({ });
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("tooltip is visible by default", function() {
+                    ok(sparkline.options.tooltip.visible);
+                });
+
+                test("legend is not visible by default", function() {
+                    ok(!sparkline.options.legend.visible);
+                });
+
+                test("axes are not visible by default", function() {
+                    ok(!sparkline.options.axisDefaults.visible);
+                });
+
+                test("chartArea has no margin", function() {
+                    equals(sparkline.options.chartArea.margin, 0);
+                });
+
+                test("transitions are disabled", function() {
+                    ok(!sparkline.options.transitions);
+                });
+
+                // ------------------------------------------------------------
+                module("Dimensions", {
+                    setup: function() {
+                        createSparkline();
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("auto height equals line height of empty container", function() {
+                    equals(sparkline._model.options.height, 19)
+                });
+
+                test("sets container width", function() {
+                    equals(sparkline.element[0].style.width, "80px");
+                });
+
+                test("sets container height", function() {
+                    equals(sparkline.element[0].style.height, "19px");
+                });
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.sparkline</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <span id="sparkline"></span>
+    </body>
+</html>
