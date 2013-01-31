@@ -246,6 +246,17 @@
                 ok(!multiselect.input.attr("disabled"));
                 ok(multiselect.popup.visible());
             });
+
+            test("MultiSelect returns list of selected dataItems", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { value: "1" });
+
+                var dataItems = multiselect.dataItems();
+
+                equal(dataItems.length, 1);
+                equal(dataItems[0].value, "1");
+                equal(dataItems[0].text, "Option1");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

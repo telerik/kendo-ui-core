@@ -102,6 +102,9 @@ kendo_module({
             that.enable(options.enable);
         },
 
+        dataItems: function() {
+            return this._dataItems;
+        },
 
         destroy: function() {
             var that = this,
