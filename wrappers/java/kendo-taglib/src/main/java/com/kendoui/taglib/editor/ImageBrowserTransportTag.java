@@ -51,23 +51,35 @@ public class ImageBrowserTransportTag extends  BaseTag  /* interfaces */ /* inte
         return "editor-imageBrowser-transport";
     }
 
+    public void setCreate(com.kendoui.taglib.editor.ImageBrowserTransportCreateTag value) {
+        setProperty("create", value);
+    }
+
+    public void setDestroy(com.kendoui.taglib.editor.ImageBrowserTransportDestroyTag value) {
+        setProperty("destroy", value);
+    }
+
+    public void setRead(com.kendoui.taglib.editor.ImageBrowserTransportReadTag value) {
+        setProperty("read", value);
+    }
+
     public void setImageUrl(ImageBrowserTransportImageUrlFunctionTag value) {
         setEvent("imageUrl", value.getBody());
     }
 
-    public Object getCreate() {
-        return (Object)getProperty("create");
+    public String getCreate() {
+        return (String)getProperty("create");
     }
 
-    public void setCreate(Object value) {
+    public void setCreate(String value) {
         setProperty("create", value);
     }
 
-    public Object getDestroy() {
-        return (Object)getProperty("destroy");
+    public String getDestroy() {
+        return (String)getProperty("destroy");
     }
 
-    public void setDestroy(Object value) {
+    public void setDestroy(String value) {
         setProperty("destroy", value);
     }
 
@@ -79,11 +91,11 @@ public class ImageBrowserTransportTag extends  BaseTag  /* interfaces */ /* inte
         setProperty("imageUrl", value);
     }
 
-    public Object getRead() {
-        return (Object)getProperty("read");
+    public String getRead() {
+        return (String)getProperty("read");
     }
 
-    public void setRead(Object value) {
+    public void setRead(String value) {
         setProperty("read", value);
     }
 

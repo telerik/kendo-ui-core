@@ -5851,13 +5851,13 @@ the minimum and maximum values.</description>
             <description>Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.</description>
             <name>create</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.</description>
             <name>destroy</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>
@@ -5869,7 +5869,7 @@ the minimum and maximum values.</description>
             <description>Options or URL for remote image retrieval.</description>
             <name>read</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.</description>
@@ -5886,6 +5886,177 @@ the minimum and maximum values.</description>
 
     </tag>
 
+    <tag>
+        <description>Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.</description>
+        <name>editor-imageBrowser-transport-create</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportCreateTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+        <name>editor-imageBrowser-transport-create-data</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportCreateDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The remote url to call when creating a new record.</description>
+        <name>editor-imageBrowser-transport-create-url</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportCreateUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.</description>
+        <name>editor-imageBrowser-transport-destroy</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportDestroyTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+        <name>editor-imageBrowser-transport-destroy-data</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportDestroyDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The remote url to call when creating a new record.</description>
+        <name>editor-imageBrowser-transport-destroy-url</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportDestroyUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Options or URL for remote image retrieval.</description>
+        <name>editor-imageBrowser-transport-read</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportReadTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+        <name>editor-imageBrowser-transport-read-data</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportReadDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The remote url to call when creating a new record.</description>
+        <name>editor-imageBrowser-transport-read-url</name>
+        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportReadUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>

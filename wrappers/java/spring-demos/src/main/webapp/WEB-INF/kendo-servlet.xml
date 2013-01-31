@@ -33,7 +33,7 @@
 	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	
 	    <!-- one of the properties available; the maximum file size in bytes -->
-	    <beans:property name="maxUploadSize" value="100000"/>
+	    <beans:property name="maxUploadSize" value="1000000"/>
 	</beans:bean>
 
 	<!-- The servletContext is required by the ServerContextResource  -->
@@ -72,7 +72,7 @@
 				<beans:prop key="hibernate.format_sql">true</beans:prop>
 			</beans:props>
 		</beans:property>
-	</beans:bean>
+	</beans:bean>    
     
     <beans:bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
 	    <beans:property name = "sessionFactory" ref = "sessionFactory" />
