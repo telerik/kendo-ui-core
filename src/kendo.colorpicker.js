@@ -26,7 +26,9 @@ kendo_module({
     };
     var NS = ".kendoColorTools";
     var CLICK_NS = "click" + NS;
-    var MOUSEDOWN_NS = "mousedown" + NS;
+    var MOUSEDOWN_NS = "touchstart" + NS + " mousedown" + NS;
+    var MOUSEMOVE_NS = "touchmove" + NS + " mousemove" + NS;
+    var MOUSEUP_NS = "touchend" + NS + " mouseup" + NS;
     var KEYDOWN_NS = "keydown" + NS;
 
     var browser = kendo.support.browser;
@@ -359,8 +361,9 @@ kendo_module({
                 var rw = hsvRect.width();
                 var rh = hsvRect.height();
                 function onmove(ev) {
-                    var pex = ev.pageX;
-                    var pey = ev.pageY;
+                    var pos = kendo.touchLocation(ev);
+                    var pex = pos.x;
+                    var pey = pos.y;
                     var dx = pex - r.left;
                     var dy = pey - r.top;
                     if (dx < 0) { dx = 0; }
@@ -376,13 +379,13 @@ kendo_module({
                 }
                 function onup(ev) {
                     $(document)
-                        .unbind("mousemove", onmove)
-                        .unbind("mouseup", onup);
+                        .unbind(MOUSEMOVE_NS, onmove)
+                        .unbind(MOUSEUP_NS, onup);
                     preventDefault(ev);
                     hsvRect.removeClass("k-dragging");
                 }
                 onmove(ev);
-                $(document).mousemove(onmove).mouseup(onup);
+                $(document).bind(MOUSEMOVE_NS, onmove).bind(MOUSEUP_NS, onup);
             });
 
             element
