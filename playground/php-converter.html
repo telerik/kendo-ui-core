@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Convert HTML to PHP</title>
+
+    <script src="../src/jquery.js"></script>
+
+    <style>
+        textarea, button {
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        textarea {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="in"></textarea>
+
+    <button>Convert</button>
+
+    <textarea id="out"></textarea>
+
+    <script>
+        $("button").click(function() {
+            var result = $("textarea").val();
+
+            result = result
+                .replace(/<li[^>]*>/gi, "new \\Kendo\\UI\\PanelBarItem(\"")
+                .replace(/<\/li>/gi, "\"),")
+                .replace(/<ul>/gi, "$item->addItem(")
+                .replace(/<\/ul>/gi, ")")
+
+            $("#out").val(result);
+        });
+    </script>
+</body>
+</html>
