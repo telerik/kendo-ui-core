@@ -38,7 +38,8 @@ kendo_module({
         STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
         DISABLED = "disabled",
-        UNDEFINED = "undefined";
+        UNDEFINED = "undefined",
+        touchLocation = kendo.touchLocation;;
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -571,50 +572,6 @@ kendo_module({
             value = undefined;
         }
         return value;
-    }
-
-    var touchLocation = function(e) {
-        return {
-            idx: 0,
-            x: e.pageX,
-            y: e.pageY
-        };
-    };
-
-    if (support.pointers) {
-        touchLocation = function(e) {
-            return {
-                idx: 0,
-                x: e.originalEvent.clientX,
-                y: e.originalEvent.clientY
-            };
-        };
-    }
-
-    if (support.touch) {
-        touchLocation = function(e, id) {
-            var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
-
-            if (id) {
-                var output = null;
-                $.each(changedTouches, function(idx, value) {
-                    if (id == value.identifier) {
-                        output = {
-                            idx: value.identifier,
-                            x: value.pageX,
-                            y: value.pageY
-                        };
-                    }
-                });
-                return output;
-            } else {
-                return {
-                    idx: changedTouches[0].identifier,
-                    x: changedTouches[0].pageX,
-                    y: changedTouches[0].pageY
-                };
-            }
-        };
     }
 
     function defined(value) {
