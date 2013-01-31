@@ -25,6 +25,55 @@ module kendo {
     declare function unbind(element: JQuery): void;
     declare function unbind(element: Element): void;
 
+    declare var keys: {
+        INSERT: number;
+        DELETE: number;
+        BACKSPACE: number;
+        TAB: number;
+        ENTER: number;
+        ESC: number;
+        LEFT: number;
+        UP: number;
+        RIGHT: number;
+        DOWN: number;
+        END: number;
+        HOME: number;
+        SPACEBAR: number;
+        PAGEUP: number;
+        PAGEDOWN: number;
+        F2: number;
+        F10: number;
+        F12: number;
+    }
+
+    declare var support: {
+        touch: bool;
+        pointers: bool;
+        scrollbar(): number;
+        hasHW3D: bool;
+        hasNativeScrolling: bool;
+        devicePixelRatio: number;
+        placeHolder: bool;
+        zoomLevel: number;
+        mobileOS: {
+            device: string;
+            tablet: any;
+            browser: string;
+            name: string;
+            majorVersion: string;
+            minorVersion: string;
+            flatVersion: number;
+            appMode: bool;
+        };
+        browser: {
+            msie: bool;
+            webkit: bool;
+            safari: bool;
+            opera: bool;
+            version: string;
+        };
+    }
+
     interface TemplateOptions {
         paramName?: string;
         useWithBlock?: bool;
