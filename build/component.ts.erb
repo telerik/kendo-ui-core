@@ -1,6 +1,7 @@
     class <%= type_script_type %> extends <%= type_script_base_class %>{
 % if widget?
         element: JQuery;
+        wrapper: JQuery;
         constructor(element: Element, options?: <%= type_script_options_type %>);
 % elsif options.any?
         constructor(options?: <%= type_script_options_type %>);

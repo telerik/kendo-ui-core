@@ -33,6 +33,7 @@ module CodeGen::TypeScript
         'Array' => 'any',
         'Date' => 'Date',
         'Function' => 'Function',
+        'Selection' => 'Selection',
         'Element' => 'Element',
         'jQuery' => 'JQuery',
         'jqXHR' => 'JQueryXHR',
@@ -231,10 +232,6 @@ module CodeGen::TypeScript
             @name
         end
 
-        def widget?
-            @full_name.include?('ui.')
-        end
-
         def mobile?
             @full_name.include?('mobile.')
         end
@@ -267,7 +264,7 @@ module CodeGen::TypeScript
             description = settings[:description]
             result = settings[:result]
 
-            if description =~ /Gets?\/Sets?/i
+            if description =~ /Gets?\/Sets?/i || description =~ /gets?\s+or\s+sets?/i
 
                 settings[:result] = nil
 
