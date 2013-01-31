@@ -61,7 +61,8 @@ namespace Kendo.Controllers
         private static readonly IFrameworkDescription[] frameworkDescriptions = new IFrameworkDescription []
         {
             new AspNetMvcDescription(),
-            new JspDescription()
+            new JspDescription(),
+            new PhpDescription()
         };
 
         private IEnumerable<ExampleFramework> Frameworks(string suite, string section, string example)

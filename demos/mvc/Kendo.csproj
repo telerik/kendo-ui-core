@@ -87,6 +87,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetMvcDescription.cs" />
+    <Compile Include="Models\PhpDescription.cs" />
     <Compile Include="Models\JspDescription.cs" />
     <Compile Include="Models\ExampleFile.cs" />
     <Compile Include="Models\IFrameworkDescription.cs" />
