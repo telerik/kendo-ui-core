@@ -41,7 +41,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
         if ($items) {
             $itemContainer = new \Kendo\Html\Element('ul');
 
-            foreach($items as $item) {
+            foreach ($items as $item) {
                 $itemContainer->append($item->createElement());
             }
 
