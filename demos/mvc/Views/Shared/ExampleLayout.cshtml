@@ -43,11 +43,11 @@
             @RenderSection("ExampleFooter", false)
         </div>
         <script>
-            if (!(kendo.support.browser.webkit || kendo.support.browser.mozilla)) {
+            if ((kendo.support.browser.msie && kendo.support.browser.version < 10) || kendo.support.browser.opera) {
                 $("#mobile-application-container")
                         .addClass("old-browser")
                         .empty()
-                        .html("<div class='content'><span class='centered'><strong>Kendo UI Mobile</strong><span>is fully supported only in WebKit based browsers.</span><br><br>Please use a compatible desktop browser or open the examples in a mobile WebKit based browser.</span></div>");
+                        .html("<div class='content'><span class='centered'><strong>Kendo UI Mobile</strong><span>is fully supported only in WebKit based browsers and IE10.</span><br><br>Please use a compatible desktop browser or open the examples in a mobile WebKit based browser.</span></div>");
             }
         </script>
         } else {
@@ -134,7 +134,7 @@
             $(function() {
                 applyCurrentMobileOS("#mobile-application-container");
 
-                if (!kendo.support.browser.msie && !kendo.support.browser.opera) {
+                if (!(kendo.support.browser.msie && kendo.support.browser.version < 10) && !kendo.support.browser.opera) {
                     window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"),
                     {
                         layout: "examples",
