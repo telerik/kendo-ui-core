@@ -74,8 +74,10 @@ kendo_module({
             this.popup.open();
         },
 
-        hide: function() {
-            this.popup.close();
+        hide: function(e) {
+            if (!e || !$.contains(this.shim[0], e.target)) {
+                this.popup.close();
+            }
         },
 
         destroy: function() {
