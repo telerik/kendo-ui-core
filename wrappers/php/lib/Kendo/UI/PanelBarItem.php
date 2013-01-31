@@ -26,8 +26,9 @@ class PanelBarItem extends \Kendo\SerializableObject {
         }
 
         $content = $this->getProperty('content');
+        $contentUrl = $this->getProperty('contentUrl');
 
-        if ($content) {
+        if ($content || $contentUrl) {
             $contentElement = new \Kendo\Html\Element('div');
 
             $contentElement->html($content);
@@ -40,7 +41,7 @@ class PanelBarItem extends \Kendo\SerializableObject {
         if ($items) {
             $itemContainer = new \Kendo\Html\Element('ul');
 
-            foreach($items as $item) {
+            foreach ($items as $item) {
                 $itemContainer->append($item->createElement());
             }
 
