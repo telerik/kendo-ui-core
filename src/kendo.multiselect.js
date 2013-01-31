@@ -20,7 +20,9 @@ kendo_module({
         PROGRESS = "progress",
         FOCUSED = "k-state-focused",
         HIDE = ' style="display:none"',
+        HOVER = "k-state-hover",
         ns = ".kendoMultiSelect",
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         styles = ["font-family",
                   "font-size",
                   "font-stretch",
@@ -203,8 +205,7 @@ kendo_module({
 
         enable: function(enable) {
             var that = this,
-                wrapper = that.wrapper,
-                wrappers = wrapper.add(that._innerWrapper).off(ns),
+                wrapper = that.wrapper.off(ns),
                 tagList = that.tagList.off(ns),
                 input = that.input;
 
@@ -213,9 +214,10 @@ kendo_module({
                 wrapper.addClass("k-state-disabled");
             } else {
                 input.removeAttr("disabled");
-                wrapper.removeClass("k-state-disabled");
 
                 wrapper
+                    .removeClass("k-state-disabled")
+                    .on(HOVEREVENTS, that._toggleHover)
                     .on("click" + ns, function(e) {
                         if (e.target.className.indexOf("k-delete") == -1) {
                             that.open();
@@ -227,6 +229,8 @@ kendo_module({
                     });
 
                 tagList
+                    .on("mouseenter" + ns, "li", function() { $(this).addClass(HOVER); })
+                    .on("mouseleave" + ns, "li", function() { $(this).removeClass(HOVER); })
                     .on("click" + ns, ".k-delete", function(e) {
                         that._unselect($(e.target).closest("li"));
                         that._change();
@@ -912,9 +916,15 @@ kendo_module({
             this.close();
         },
 
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+        },
+
         _list: function() {
             this.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                         .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
+                        .on("mouseenter" + ns, "li", function() { $(this).addClass(HOVER); })
+                        .on("mouseleave" + ns, "li", function() { $(this).removeClass(HOVER); })
                         .on("click", "li.k-item", proxy(this._click, this));
 
             this.list = $("<div class='k-list-tags'/>")
