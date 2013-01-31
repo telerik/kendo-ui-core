@@ -3470,15 +3470,27 @@
    }
 
     function focusTable(table, direct) {
+        var msie = kendo.support.browser.msie;
         if (direct === true) {
             table = $(table);
-            var condition = kendo.support.browser.msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
+            var condition = msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
                 scrollTop, scrollLeft;
                 if (condition) {
                     scrollTop = table.parent().scrollTop();
                     scrollLeft = table.parent().scrollLeft();
                 }
-               table[0].focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+
+                if (msie) {
+                    try {
+                        //The setActive method does not cause the document to scroll to the active object in the current page
+                        table[0].setActive();
+                    } catch(e) {
+                        table[0].focus();
+                    }
+                } else {
+                    table[0].focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+                }
+
                 if (condition) {
                     table.parent().scrollTop(scrollTop);
                     table.parent().scrollLeft(scrollLeft);
@@ -3503,7 +3515,7 @@
        if (isHeader || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
            setTimeout(function() {
                //DOMElement.focus() only for header, because IE doesn't really focus the table
-               focusTable(currentTable, isHeader);
+               focusTable(currentTable, true);
            });
        }
 
