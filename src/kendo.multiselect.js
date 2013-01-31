@@ -65,7 +65,8 @@ kendo_module({
             that._dataItems = [];
 
             that.element.hide();
-            that._initialValues = that.options.value || that.element.val();
+            that._old = that._initialValues = that.options.value || that.element.val();
+
             //enable/disable
             that._enable();
 
@@ -88,7 +89,11 @@ kendo_module({
         },
 
         events: [
-
+            "open",
+            "close",
+            "change",
+            "select",
+            "dataBound"
         ],
 
         _enable: function() {
@@ -224,6 +229,7 @@ kendo_module({
                 tagList
                     .on("click" + ns, ".k-delete", function(e) {
                         that._unselect($(e.target).closest("li"));
+                        that._change();
                         that.close();
                     });
             }
@@ -254,6 +260,8 @@ kendo_module({
 
             that.current($(first(that.ul[0])));
             that._hideBusy();
+
+            that.trigger("dataBound");
         },
 
         _render: function(data) {
@@ -662,6 +670,7 @@ kendo_module({
             } else if (key === keys.ENTER) {
                 if (visible) {
                     that._select(current);
+                    that._change();
                     that.close();
                 }
                 e.preventDefault();
@@ -710,6 +719,7 @@ kendo_module({
 
                 if (tag && tag[0]) {
                     that._unselect(tag);
+                    that._change();
                     that.close();
                 }
             } else {
@@ -760,6 +770,8 @@ kendo_module({
                     that._select(dataItemIndex);
                 }
             }
+
+            that._old = that.element.val(); //TODO: test this
         },
 
         //copied from combobox
@@ -871,8 +883,30 @@ kendo_module({
             }
         },
 
+        _change: function() {
+            var that = this,
+                value = that.value();
+
+            if (!compare(value, that._old)) {
+                that._old = value;
+
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+            }
+        },
+
         _click: function(e) {
-            this._select($(e.currentTarget));
+            var li = $(e.currentTarget);
+
+            if (this.trigger("select", {item: li})) {
+                this.close();
+                return;
+            }
+
+            this._select(li);
+            this._change();
             this.close();
         },
 
@@ -916,6 +950,27 @@ kendo_module({
             that._innerWrapper = $(wrapper[0].firstChild);
         }
     });
+
+    function compare(a, b) {
+        var length;
+
+        if ((a === null && b !== null) || (a !== null && b === null)) {
+            return false;
+        }
+
+        length = a.length;
+        if (length !== b.length) {
+            return false;
+        }
+
+        while (length--) {
+            if (a[length] !== b[length]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     function first(ul) {
         var item = ul.firstChild;

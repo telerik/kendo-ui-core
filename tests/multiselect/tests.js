@@ -1,15 +1,15 @@
 tests.push(
     {
         page: "multiselect/initialization.html",
-        title: "multiselect initialization"
+        title: "multiselect Initialization"
     },
     {
         page: "multiselect/interaction.html",
-        title: "multiselect interaction"
+        title: "multiselect Interaction"
     },
     {
         page: "multiselect/filtering.html",
-        title: "multiselect filtering"
+        title: "multiselect Filtering"
     },
     {
         page: "multiselect/navigation.html",
@@ -18,5 +18,9 @@ tests.push(
     {
         page: "multiselect/api.html",
         title: "multiselect API"
+    },
+    {
+        page: "multiselect/events.html",
+        title: "multiselect Events"
     }
 );

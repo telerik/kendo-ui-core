@@ -841,6 +841,12 @@
                     "url": "multiselect/api.html",
                     "title": "API functions demo for KendoMultiSelect",
                     "meta": "This demo illustrates how API functions of KendoMultiSelect control operate and how you can configure them for your web project."
+                },
+                {
+                    "text": "Events",
+                    "url": "multiselect/events.html",
+                    "title": "Kendo UI jQuery MultiSelect Events Sample | KendoMultiSelect Demos",
+                    "meta": "This sample shows MultiSelect events which are enabled and the demo source code guides you how you can handle the events in your widget."
                 }
             ]
         },
