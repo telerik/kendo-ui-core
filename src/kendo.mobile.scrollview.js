@@ -45,7 +45,7 @@ kendo_module({
             that.page = 0;
 
             that.inner.css("height", that.options.contentHeight);
-            that.container().bind("show", $.proxy(this, "viewShow"));
+            that.container().bind("show", $.proxy(this, "viewShow")).bind("init", $.proxy(this, "viewInit"));
 
             var movable,
                 transition,
@@ -122,6 +122,10 @@ kendo_module({
             this.userEvents.destroy();
 
             kendo.destroy(this.element);
+        },
+
+        viewInit: function() {
+            this.movable.moveAxis("x", -this.page * this.dimension.getSize());
         },
 
         viewShow: function() {
