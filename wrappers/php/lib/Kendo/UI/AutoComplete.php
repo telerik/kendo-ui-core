@@ -132,7 +132,7 @@ the dataSource.
 
     /**
     * Template to be used for rendering the items in the list.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\AutoComplete
     */
     public function template($value) {

@@ -159,15 +159,6 @@ Window.
     }
 
     /**
-    * The content of the window
-    * @param  $value
-    * @return \Kendo\UI\Window
-    */
-    public function content($value) {
-        return $this->setProperty('content', $value);
-    }
-
-    /**
     * Sets the activate event of the Window.
     * Triggered when a Window has finished its opening animation.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

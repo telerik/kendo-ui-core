@@ -1,6 +1,7 @@
 module CodeGen::PHP
     MANUALLY_GENERATED = {
-        'schema' => ['model']
+        'schema' => ['model'],
+        'Window' => ['content']
     }
 
     TYPES = {

@@ -7,7 +7,7 @@ class EditorImageBrowserTransport extends \kendo\SerializableObject {
 
     /**
     * Options or URL for remote image retrieval.
-    * @param |string $value
+    * @param string|\Kendo\UI\EditorImageBrowserTransportRead|array $value
     * @return \Kendo\UI\EditorImageBrowserTransport
     */
     public function read($value) {
@@ -43,7 +43,7 @@ class EditorImageBrowserTransport extends \kendo\SerializableObject {
 
     /**
     * Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.
-    * @param |string $value
+    * @param string|\Kendo\UI\EditorImageBrowserTransportDestroy|array $value
     * @return \Kendo\UI\EditorImageBrowserTransport
     */
     public function destroy($value) {
@@ -52,7 +52,7 @@ class EditorImageBrowserTransport extends \kendo\SerializableObject {
 
     /**
     * Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.
-    * @param |string $value
+    * @param string|\Kendo\UI\EditorImageBrowserTransportCreate|array $value
     * @return \Kendo\UI\EditorImageBrowserTransport
     */
     public function create($value) {
