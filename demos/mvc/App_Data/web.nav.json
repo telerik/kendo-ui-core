@@ -839,14 +839,30 @@
                 {
                     "text": "API",
                     "url": "multiselect/api.html",
-                    "title": "API functions demo for KendoMultiSelect",
-                    "meta": "This demo illustrates how API functions of KendoMultiSelect control operate and how you can configure them for your web project."
+                    "title": "Demo for Kendo UI MultiSelect widget API",
+                    "meta": "This sample shows all API functions for Kendo UI MultiSelect widget."
                 },
                 {
                     "text": "Events",
                     "url": "multiselect/events.html",
-                    "title": "Kendo UI jQuery MultiSelect Events Sample | KendoMultiSelect Demos",
-                    "meta": "This sample shows MultiSelect events which are enabled and the demo source code guides you how you can handle the events in your widget."
+                    "title": "Examples of events in Kendo UI jQuery MultiSelect component",
+                    "meta": "This demo demonstrates useful events which are triggered in Kendo UI MultiSelect upon user's selection of items from the drop-down list."
+                },
+                {
+                    "text": "Customizing templates",
+                    "url": "multiselect/template.html",
+                    "title": "Demo for customizing jQuery MultiSelect Templates | Kendo UI Web Demos",
+                    "meta": "This Kendo UI MultiSelect demo shows how the template of the control can be customized to change the appearance of items in the auto-searchable list."
+                },
+                {
+                    "text": "RTL support",
+                    "url": "multiselect/rtl.html",
+                    "title": "Kendo UI MultiSelect control RTL support demo",
+                    "meta": "This example shows how RTL support is enabled in Kendo UI jQuery-based MultiSelect. Any application or mobile website will be now intuitive for RTL language users."
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "multiselect/navigation.html"
                 }
             ]
         },
