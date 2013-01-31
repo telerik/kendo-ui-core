@@ -281,7 +281,7 @@ namespace :demos do
         'dist/demos/staging/src/aspnetmvc/views/razor',
         'dist/demos/staging/src/jsp/views',
         'dist/demos/staging/src/jsp/controllers',
-        'dist/demos/production/src/php',
+        'dist/demos/staging/src/php',
         'dist/demos/staging/content/cdn/js',
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
