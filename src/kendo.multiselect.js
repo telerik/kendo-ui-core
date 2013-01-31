@@ -677,6 +677,8 @@ kendo_module({
             } else if (key === keys.ESC) {
                 if (visible) {
                     e.preventDefault();
+                } else {
+                    that.currentTag(null);
                 }
 
                 that.close();

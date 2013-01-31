@@ -538,6 +538,21 @@
                 equal(multiselect.currentTag(), null);
             });
 
+            test("MultiSelect clears selection in selected items on ESC", function() {
+                var multiselect = new MultiSelect(select, { value: "1" });
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.HOME
+                });
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: keys.ESC
+                });
+
+                equal(multiselect.currentTag(), null);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
