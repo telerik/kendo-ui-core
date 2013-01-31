@@ -8,6 +8,7 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         ui = kendo.ui,
         Widget = ui.Widget,
         parse = kendo.parseDate,
@@ -44,9 +45,9 @@ kendo_module({
         BLUR = "blur" + ns,
         FOCUS = "focus",
         FOCUS_WITH_NS = FOCUS + ns,
-        MOUSEENTER = "touchstart mouseenter",
-        MOUSEENTER_WITH_NS = "touchstart" + ns + " mouseenter" + ns,
-        MOUSELEAVE = "click" + ns + " mouseleave" + ns,
+        MOUSEENTER = support.touch ? "touchstart" : "mouseenter",
+        MOUSEENTER_WITH_NS = support.touch ? "touchstart" + ns : "mouseenter" + ns,
+        MOUSELEAVE = support.touch ? "touchend" + ns + " touchmove" + ns : "mouseleave" + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         PREVARROW = "_prevArrow",
