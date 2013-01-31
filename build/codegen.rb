@@ -31,7 +31,7 @@ namespace :generate do
     end
 
     desc 'Generate PHP wrappers'
-    task :php => ['php:wrappers']
+    task :php => ['php:wrappers', 'php:api']
 
     namespace :php do
         desc 'Generate PHP classes'
