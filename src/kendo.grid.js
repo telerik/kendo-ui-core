@@ -3491,6 +3491,7 @@
 
    function tableClick(e) {
        var currentTarget = $(e.currentTarget),
+           isHeader = currentTarget.is("th"),
            currentTable = currentTarget.closest("table")[0];
 
        if (currentTable !== this.table[0] && currentTable !== this.thead.parent()[0]) {
@@ -3499,13 +3500,14 @@
 
        this.current(currentTarget);
 
-       if (currentTarget.is("th") || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
+       if (isHeader || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
            setTimeout(function() {
-               focusTable(currentTable, true);
+               //DOMElement.focus() only for header, because IE doesn't really focus the table
+               focusTable(currentTable, isHeader);
            });
        }
 
-       if (currentTarget.is("th")) {
+       if (isHeader) {
            e.preventDefault(); //if any problem occurs, call preventDefault only for the clicked header links
        }
    }
