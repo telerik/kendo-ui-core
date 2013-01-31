@@ -134,7 +134,7 @@ $discontinued->field('Discontinued')
           ->width(100);
 
 $command = new \Kendo\UI\GridColumn();
-$command->command('destroy')
+$command->addCommandItem('destroy')
         ->title('&nbsp;')
         ->width(110);
 

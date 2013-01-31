@@ -140,7 +140,8 @@ class DataSourceResult {
     }
 
     private function isDate($value) {
-        return date_parse($value)["error_count"] < 1;
+        $result = date_parse($value);
+        return $result["error_count"] < 1;
     }
 
     private function isString($value) {
