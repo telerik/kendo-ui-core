@@ -130,6 +130,7 @@ class Pager extends \Kendo\UI\Widget {
         return $this->setProperty('change', $value);
     }
 
+
 //<< Properties
 }
 

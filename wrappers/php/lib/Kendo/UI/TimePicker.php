@@ -131,6 +131,7 @@ class TimePicker extends \Kendo\UI\Widget {
         return $this->setProperty('open', $value);
     }
 
+
 //<< Properties
 }
 

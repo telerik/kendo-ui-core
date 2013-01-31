@@ -28,7 +28,7 @@ Refer to the jQuery.ajax documentation for further info.
     /**
     * Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.
-    * @param |string|\kendo\JavaScriptFunction $value
+    * @param |string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Data\DataSourceTransportDestroy
     */
     public function data($value) {
@@ -57,7 +57,7 @@ Refer to the jQuery.ajax documentation for further info.
 
     /**
     * The remote url to call when creating a new record.
-    * @param string|\kendo\JavaScriptFunction $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Data\DataSourceTransportDestroy
     */
     public function url($value) {

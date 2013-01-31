@@ -7,6 +7,7 @@ module CodeGen
 
             @item = item_class.new(:name => @name.singular,
                                    :type => 'Object',
+                                   :content => @content,
                                    :recursive => @recursive,
                                    :owner => self,
                                    :description => @description)

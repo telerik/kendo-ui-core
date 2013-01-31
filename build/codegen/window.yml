@@ -2,3 +2,4 @@
     - :name: content
       :type: Object
       :description: The content of the window
+:content: true

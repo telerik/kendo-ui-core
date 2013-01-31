@@ -126,6 +126,7 @@ class Calendar extends \Kendo\UI\Widget {
         return $this->setProperty('navigate', $value);
     }
 
+
 //<< Properties
 }
 

@@ -111,7 +111,7 @@ Every n-th label is rendered where n is the step
 
     /**
     * The label template.
-    * @param string|\kendo\JavaScriptFunction $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItemLabels
     */
     public function template($value) {

@@ -12,7 +12,7 @@ class DataSourceSchema extends \kendo\SerializableObject {
     /**
     * Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
 return the aggregate results for the current response.Result should have the following format:i.e.
-    * @param \kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\Data\DataSourceSchema
     */
     public function aggregates($value) {
@@ -22,7 +22,7 @@ return the aggregate results for the current response.Result should have the fol
     /**
     * Specifies the field from the response which contains the data items. If set to a function - the function will be called to
 return the data items for the current response.
-    * @param \kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\Data\DataSourceSchema
     */
     public function data($value) {
@@ -32,7 +32,7 @@ return the data items for the current response.
     /**
     * Specifies the field from the response which contains any errors. If set to a function - the function will be called to
 return the errors for the current response (if present). If there are any errors the error event of the DataSource will be raised.
-    * @param \kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\Data\DataSourceSchema
     */
     public function errors($value) {
@@ -42,7 +42,7 @@ return the errors for the current response (if present). If there are any errors
     /**
     * Specifies the field from the response which contains the groups. If set to a function - the function will be called to
 return the groups for the current response.Used instead of the schema.data setting if remote grouping operation is executed.The result should have the following format:
-    * @param \kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\Data\DataSourceSchema
     */
     public function groups($value) {
@@ -66,7 +66,7 @@ return the groups for the current response.Used instead of the schema.data setti
     /**
     * Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
 return the total number of data items for the current response.
-    * @param \kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\Data\DataSourceSchema
     */
     public function total($value) {

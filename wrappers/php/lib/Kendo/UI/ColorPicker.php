@@ -32,12 +32,12 @@ makes sense for your colors.
     }
 
     /**
-    * The size (width and height) of a color cell for the Palette picker.
-    * @param float $value
+    * The size of a color cell.
+    * @param float|\Kendo\UI\ColorPickerTileSize|array $value
     * @return \Kendo\UI\ColorPicker
     */
-    public function size($value) {
-        return $this->setProperty('size', $value);
+    public function tileSize($value) {
+        return $this->setProperty('tileSize', $value);
     }
 
     /**
@@ -137,6 +137,35 @@ original value.
 
         return $this->setProperty('select', $value);
     }
+
+    /**
+    * Sets the open event of the ColorPicker.
+    * Fires when the picker popup is opening.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\ColorPicker
+    */
+    public function open($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('open', $value);
+    }
+
+    /**
+    * Sets the close event of the ColorPicker.
+    * Fires when the picker popup is closing.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\ColorPicker
+    */
+    public function close($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('close', $value);
+    }
+
 
 //<< Properties
 }

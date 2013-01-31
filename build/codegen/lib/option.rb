@@ -10,6 +10,11 @@ module CodeGen
             @owner = options[:owner]
             @recursive = options[:recursive]
             @default = options[:default]
+            @content = options[:content]
+        end
+
+        def content?
+            @content
         end
 
         def composite?
@@ -43,6 +48,7 @@ module CodeGen
             parent = target_class.new(:name => @name,
                                       :owner => @owner,
                                       :recursive => @recursive,
+                                      :content => @content,
                                       :type => type,
                                       :description => @description)
 

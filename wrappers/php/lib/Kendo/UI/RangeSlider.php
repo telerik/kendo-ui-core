@@ -122,6 +122,7 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
         return $this->setProperty('slide', $value);
     }
 
+
 //<< Properties
 }
 

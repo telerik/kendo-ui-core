@@ -135,6 +135,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
         return $this->setProperty('spin', $value);
     }
 
+
 //<< Properties
 }
 

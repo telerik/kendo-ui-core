@@ -37,7 +37,7 @@ COMPOSITE_OPTION_SETTER = ERB.new(%{
 COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 <%= unique_options.map { |option| option.to_setter }.join %>
 
-<% if owner.name == 'items' %>
+<% if content? %>
     /**
     * Sets the HTML content of the <%= php_class %>.
     * @param string $value
@@ -62,12 +62,12 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
     }
 <% if recursive %>
     /**
-    * Adds <%= php_type %>.
-    * @param <%= php_types %> $value
+    * Adds one or more <%= php_type %>.
+    * @param <%= php_types %>,... $value
     * @return <%= owner.owner.php_type %>
     */
     public function addItem($value) {
-        return $this->add('items', $value);
+        return $this->add('items', func_get_args());
     }
 <% end %><% end %>
 //<< Properties}, 0, '<%>')
@@ -201,6 +201,30 @@ ARRAY_SETTER = ERB.new(%{
 
 COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
 <%= unique_options.map { |option| option.to_setter }.join %><%= events.map { |events| events.to_setter }.join %>
+<% if content? %>
+    /**
+    * Sets the HTML content of the <%= php_class %>.
+    * @param string $value
+    * @return <%= php_type %>
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the <%= php_class %>.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the <%= php_class %>.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
+<% end %>
 //<< Properties})
 
     class Component < CodeGen::PHP::Component

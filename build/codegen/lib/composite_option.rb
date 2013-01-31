@@ -12,6 +12,11 @@ class CompositeOption
         @owner = settings[:owner]
         @recursive = settings[:recursive]
         @options = []
+        @content = settings[:content]
+    end
+
+    def content?
+        @content
     end
 
     def composite?

@@ -25,6 +25,7 @@ module CodeGen
             @options = []
             @events = []
             @methods = []
+            @content = false
         end
 
         def method_class
@@ -35,7 +36,13 @@ module CodeGen
             @full_name.include?('.ui.')
         end
 
+        def content?
+            @content
+        end
+
         def import(metadata)
+            @content = metadata[:content]
+
             metadata[:options].each do |option|
 
                 @options.delete_if { |o| o.name == option[:name] }

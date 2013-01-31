@@ -127,6 +127,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
         return $this->setProperty('select', $value);
     }
 
+
 //<< Properties
 }
 

@@ -137,6 +137,7 @@ class Editor extends \Kendo\UI\Widget {
         return $this->setProperty('select', $value);
     }
 
+
 //<< Properties
 }
 

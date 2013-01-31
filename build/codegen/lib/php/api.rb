@@ -43,6 +43,29 @@ module CodeGen::PHP::API
 
             option
         end
+
+        def unique_options
+            result = super
+
+            if content?
+                result.push option_class.new(
+                    :owner => self,
+                    :name => 'content'
+                )
+
+                result.push option_class.new(
+                    :owner => self,
+                    :name => 'endContent'
+                )
+
+                result.push option_class.new(
+                    :owner => self,
+                    :name => 'startContent'
+                )
+            end
+
+            result
+        end
     end
 
     def self.value(type)
@@ -188,6 +211,61 @@ A PHP class representing the <%= name %> setting of <%= owner.php_class %>.
         end
     end
 
+MANUALLY_DOCUMENTED_OPTIONS = {
+'startContent' => ERB.new(%{
+### startContent
+
+Starts output bufferring. Any following markup will be set as the content of the <%= owner.php_class %>.
+
+#### Example
+
+    <?php
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= owner.variable %>->startContent();
+    ?>
+    <strong>Content</strong>
+    <?php
+    <%= owner.variable %>->endContent(); // content is set to <strong>Content</strong>
+    ?>
+
+}),
+
+'endContent' => ERB.new(%{
+### endContent
+
+Stops output bufferring and sets the preceding markup as the content of the <%= owner.php_class %>.
+
+#### Example
+
+    <?php
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= owner.variable %>->startContent();
+    ?>
+    <strong>Content</strong>
+    <?php
+    <%= owner.variable %>->endContent(); // content is set to <strong>Content</strong>
+    ?>
+}),
+
+'content' => ERB.new(%{
+### content
+
+Sets the HTML content of the <%= owner.php_class %>.
+
+#### Returns
+
+`<%= owner.php_class %>`
+
+#### $value `string`
+
+#### Example
+
+    <%= owner.variable %> = <%= owner.value %>;
+    <%= owner.variable %>->content('<strong>Content</strong>');
+
+})
+}
+
 DATA_SOURCE_SECTION = ERB.new(%{
 ### dataSource
 
@@ -273,9 +351,12 @@ OPTION_SECTION_EXAMPLES = ERB.new(%{
                 return DATA_SOURCE_SECTION.result(binding)
             end
 
-            markdown = OPTION_SECTION.result(binding)
-
-            markdown += examples(php_types.include?('|'))
+            if MANUALLY_DOCUMENTED_OPTIONS[@name]
+                markdown = MANUALLY_DOCUMENTED_OPTIONS[@name].result(binding)
+            else
+                markdown = OPTION_SECTION.result(binding)
+                markdown += examples(php_types.include?('|'))
+            end
 
             markdown
         end

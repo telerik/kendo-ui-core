@@ -30,6 +30,8 @@ module CodeGen
 
             recursive = settings[:recursive]
 
+            content = settings[:content]
+
             description = settings[:description]
 
             default = settings[:default]
@@ -57,6 +59,7 @@ module CodeGen
                     parent.add_option(:name => name,
                                       :type => type,
                                       :recursive => recursive,
+                                      :content => content,
                                       :default => default,
                                       :prefix => parent.name + '.',
                                       :description => description)
@@ -67,6 +70,7 @@ module CodeGen
                 @options.push option_class.new(:name => name,
                                                :owner => self,
                                                :recursive => recursive,
+                                               :content => content,
                                                :type => type,
                                                :default => default,
                                                :description => description)

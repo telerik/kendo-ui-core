@@ -2,6 +2,7 @@
     - :name: items
       :type: Array
       :recursive: true
+      :content: true
       :description: Contains the items of the menu widget
 
     - :name: items.text

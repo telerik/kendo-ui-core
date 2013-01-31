@@ -2,6 +2,7 @@
     - :name: items
       :type: Array
       :recursive: false
+      :content: true
       :description: Contains the items of the tabstrip widget
 
     - :name: items.text

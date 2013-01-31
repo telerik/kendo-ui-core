@@ -72,11 +72,11 @@ class MenuItem extends \Kendo\SerializableObject {
         $this->content(ob_get_clean());
     }
     /**
-    * Adds \Kendo\UI\MenuItem.
-    * @param \Kendo\UI\MenuItem|array $value
+    * Adds one or more \Kendo\UI\MenuItem.
+    * @param \Kendo\UI\MenuItem|array,... $value
     * @return \Kendo\UI\Menu    */
     public function addItem($value) {
-        return $this->add('items', $value);
+        return $this->add('items', func_get_args());
     }
 //<< Properties
 }

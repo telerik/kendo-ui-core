@@ -79,7 +79,7 @@ class StockChartNavigatorSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The label template. Template variables:
-    * @param string|\kendo\JavaScriptFunction $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemLabels
     */
     public function template($value) {

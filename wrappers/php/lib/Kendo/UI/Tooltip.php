@@ -30,7 +30,7 @@ will disable all animations in the widget.
     /**
     * The text or a function which result will be shown within the tooltip.
 By default the tooltip will display the target element title attribute content.
-    * @param string|\kendo\JavaScriptFunction|\Kendo\UI\TooltipContent|array $value
+    * @param string|\Kendo\JavaScriptFunction|\Kendo\UI\TooltipContent|array $value
     * @return \Kendo\UI\Tooltip
     */
     public function content($value) {
@@ -164,6 +164,7 @@ By default the tooltip will display the target element title attribute content.
 
         return $this->setProperty('error', $value);
     }
+
 
 //<< Properties
 }

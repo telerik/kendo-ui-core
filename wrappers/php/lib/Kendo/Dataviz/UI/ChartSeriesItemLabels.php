@@ -97,7 +97,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The label template. Template variables:
-    * @param string|\kendo\JavaScriptFunction $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function template($value) {

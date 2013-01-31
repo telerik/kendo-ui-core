@@ -139,6 +139,7 @@ increase and decrease buttons of a Slider.
         return $this->setProperty('slide', $value);
     }
 
+
 //<< Properties
 }
 

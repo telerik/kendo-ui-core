@@ -387,6 +387,7 @@ and is about to render it.
         return $this->setProperty('selectEnd', $value);
     }
 
+
 //<< Properties
 }
 

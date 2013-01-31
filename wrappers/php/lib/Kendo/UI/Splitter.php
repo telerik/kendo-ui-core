@@ -96,6 +96,7 @@ class Splitter extends \Kendo\UI\Widget {
         return $this->setProperty('resize', $value);
     }
 
+
 //<< Properties
 }
 

@@ -403,6 +403,7 @@ class Grid extends \Kendo\UI\Widget {
         return $this->setProperty('saveChanges', $value);
     }
 
+
 //<< Properties
 }
 

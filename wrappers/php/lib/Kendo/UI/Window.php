@@ -9,20 +9,6 @@ class Window extends \Kendo\UI\Widget {
         return 'Window';
     }
 
-    /**
-    * Starts output bufferring. Any following markup will be set as the content of the PanelBarItem.
-    */
-    public function startContent() {
-        ob_start();
-    }
-
-    /**
-    * Stops output bufferring and sets the preceding markup as the content of the Window.
-    */
-    public function endContent() {
-        $this->content(ob_get_clean());
-    }
-
     protected function createElement() {
         $element = new \Kendo\Html\Element('div');
 
@@ -307,6 +293,30 @@ has been clicked on a window with static content.
         }
 
         return $this->setProperty('resize', $value);
+    }
+
+
+    /**
+    * Sets the HTML content of the Window.
+    * @param string $value
+    * @return \Kendo\UI\Window
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the Window.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the Window.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
     }
 
 //<< Properties

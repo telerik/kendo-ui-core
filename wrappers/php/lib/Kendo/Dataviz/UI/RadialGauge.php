@@ -63,6 +63,7 @@ This is the entire visible area of the gauge.
         return $this->setProperty('transitions', $value);
     }
 
+
 //<< Properties
 }
 

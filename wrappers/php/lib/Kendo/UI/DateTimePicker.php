@@ -179,6 +179,7 @@ The following settings are available for the start value:
         return $this->setProperty('open', $value);
     }
 
+
 //<< Properties
 }
 

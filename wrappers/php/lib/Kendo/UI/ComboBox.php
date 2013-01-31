@@ -263,6 +263,7 @@ class ComboBox extends \Kendo\UI\Widget {
         return $this->setProperty('cascade', $value);
     }
 
+
 //<< Properties
 }
 

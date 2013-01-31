@@ -100,7 +100,7 @@ HierarchicalDataSource instance), the default value of this option is false.
 
     /**
     * Template for rendering of the nodes of the treeview.
-    * @param string|\kendo\JavaScriptFunction $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\TreeView
     */
     public function template($value) {
@@ -241,6 +241,7 @@ HierarchicalDataSource instance), the default value of this option is false.
 
         return $this->setProperty('navigate', $value);
     }
+
 
 //<< Properties
 }

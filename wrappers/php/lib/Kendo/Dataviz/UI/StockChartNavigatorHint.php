@@ -17,7 +17,7 @@ class StockChartNavigatorHint extends \kendo\SerializableObject {
     /**
     * The hint template.
 Template variables:
-    * @param string|\kendo\JavaScriptFunction $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorHint
     */
     public function template($value) {
