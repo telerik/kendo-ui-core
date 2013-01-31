@@ -13,10 +13,23 @@ class PanelBar extends \Kendo\UI\Widget {
         $element = new \Kendo\Html\Element('ul');
         $items = $this->getProperty('items');
 
+        $hasContentUrls = false;
+        $contentUrls = array();
+
         if ($items) {
             foreach($items as $item) {
                 $element->append($item->createElement());
+
+                if ($hasContentUrls == false) {
+                    $hasContentUrls = strlen($item->getProperty("contentUrl"));
+                }
+
+                $contentUrls[] = $item->getProperty("contentUrl");
             }
+        }
+
+        if ($hasContentUrls) {
+            $this->setProperty('contentUrls', $contentUrls);
         }
 
         return $element;
