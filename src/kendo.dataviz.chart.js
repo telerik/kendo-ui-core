@@ -8322,6 +8322,7 @@ kendo_module({
         DonutPlotArea: DonutPlotArea,
         DonutSegment: DonutSegment,
         Highlight: Highlight,
+        MultiplePointTooltip: MultiplePointTooltip,
         Legend: Legend,
         LineChart: LineChart,
         LinePoint: LinePoint,
