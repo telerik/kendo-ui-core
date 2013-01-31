@@ -173,6 +173,8 @@ kendo_module({
             } else {
                 element.addClass("km-wp-light");
             }
+
+            element.parent().css("overflow", "hidden");
         },
 
         _startHistory: function() {

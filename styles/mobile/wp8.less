@@ -1,8 +1,8 @@
 @-ms-viewport { width: device-width; }
 
 .km-wp {
-    font-size: 2em;
-    font-family: 'Segoe UI Symbol', 'Segoe UI', sans-serif;
+    font-size: 1.6em;
+    font-family: 'Segoe WP', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
 }
 
 /* Variables */
@@ -31,6 +31,11 @@
 .km-wp .km-button
 {
 	background-color: @main-background;
+}
+
+.km-wp .km-button
+{
+    text-transform: lowercase;
 }
 
 .km-wp a
@@ -85,7 +90,7 @@
 .km-root .km-wp .km-view .km-buttongroup .km-button
 {
 	border-style: solid;
-	border-width: 2px;
+	border-width: .1em;
 	.border-radius(0);
 	padding: .04em .5em .16em;
 }
@@ -117,9 +122,16 @@
 	background: @accent-background;
 }
 
+.km-wp *:not(.km-tabstrip) > .km-button.km-state-active
+{
+    color: @accent-text;
+}
+
 .km-wp .km-group-title
 {
 	text-transform: uppercase;
+    font-weight: normal;
+    font-size: .9em;
 }
 
 .km-wp-dark .km-group-title
@@ -139,17 +151,29 @@
 
 .km-wp .km-navbar
 {
-	line-height: 1.6;
+	line-height: 2.2em;
+}
+
+.km-wp .km-leftitem,
+.km-wp .km-rightitem
+{
+    line-height: 2.1em;
+    vertical-align: middle;
 }
 
 .km-wp .km-navbar .km-button
 {
-	font-size: .8em;
-	line-height: 1.2;
+	font-size: .9em;
+	line-height: 1.6em;
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
+}
+
+.km-wp .km-navbar .km-text
+{
+    vertical-align: top;
 }
 
 .km-wp .km-pages > li
@@ -230,7 +254,13 @@
 
 .km-wp .km-tabstrip
 {
-	padding:.4em 0;
+	padding: .4em 0;
+    background: transparent;
+}
+
+.km-wp.km-horizontal .km-tabstrip
+{
+	padding: .1em 0;
 }
 
 .km-wp .km-tabstrip .km-button
@@ -238,32 +268,45 @@
 	border-width: 0;
 	margin: 0 1.2em;
 	background-color: transparent;
-	font-size: 10px;
+	font-size: .5em;
 }
 
-.km-wp .km-tabstrip .km-button.km-state-active .km-icon
+.km-wp .km-tabstrip .km-state-active .km-icon
 {
 	background-color: @accent-background;
 	color: @accent-text;
 }
 
-.km-wp-dark .km-tabstrip .km-button.km-state-active .km-icon
+.km-wp-dark .km-tabstrip .km-state-active .km-icon
 {
 	border-color: @main-text-dark;
 }
 
-.km-wp-light .km-tabstrip .km-button.km-state-active .km-icon
+.km-wp-light .km-tabstrip .km-state-active .km-icon
 {
 	border-color: @main-text-light;
 }
 
 .km-wp .km-tabstrip .km-icon
 {
-	border-width: 2px;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2.4rem;
+	border-width: .08em;
 	border-style: solid;
-	.border-radius(24px);
+	.border-radius(5em);
 	margin-bottom: .2em;
 	padding: .1em;
+}
+
+.km-wp .km-icon:before
+{
+    margin-top: 2px;
+}
+
+.km-wp .km-icon:after
+{
+    margin-top: 1px;
 }
 
 .km-wp input[type=password],
@@ -281,7 +324,7 @@
 .km-wp input[type=datetime],
 .km-wp textarea
 {
-	border:2px solid #ccc;
+	border: 2px solid #ccc;
 	background: #ccc;
 	color: #000;
 	font-size: 100%;
@@ -306,3 +349,21 @@
 	border-color: @accent-background;
 	background-color: #fff;
 }
+
+/* Scroll hints */
+.km-wp .km-touch-scrollbar
+{
+    border: 1px solid rgba(255,255,255,.4);
+}
+
+.km-wp .km-vertical-scrollbar
+{
+    width: 2px;
+}
+
+.km-wp .km-horizontal-scrollbar
+{
+    height: 2px;
+}
+
+
