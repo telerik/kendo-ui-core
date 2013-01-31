@@ -1,7 +1,7 @@
 if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.support.browser.msie &&  kendo.support.browser.version >= 10)) {
     (function ($, undefined) {
 
-        var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false,
+        var devices = [ "ios", "android", "blackberry", "wp", "meego" ], CtrlDown = false,
             originalToggle, visibleOSes, wasActive, helpRead,
             deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
             extend = $.extend, importWindow, exportWindow,
@@ -11,7 +11,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             globalRedoBuffer = [],
             click = kendo.support.touch ? "touchend" : "click",
             defaultCSS = { cursor: "default", background: "", color: "", "border-color": "", font: "", "text-shadow": "" },
-            browsers = [ "-webkit-", "-moz-" ],
+            browsers = [ "-webkit-", "-moz-", "-ms-" ],
             propertyTargets = {
                 color: [ "background-color", "color", "border-color" ],
                 gradient: [ "background-image" ],
@@ -697,7 +697,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                     document.getElementById(value).checked = "checked";
                 });
             } catch(err) {
-                visibleOSes = [ "iosbox", "androidbox", "blackberrybox" ];
+                visibleOSes = [ "iosbox", "androidbox", "blackberrybox", "wpbox" ];
                 visibleOSes.forEach(function (value) {
                     document.getElementById(value).checked = "checked";
                 });

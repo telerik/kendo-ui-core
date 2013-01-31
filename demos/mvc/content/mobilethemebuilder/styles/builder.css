@@ -46,6 +46,7 @@ body
 {
     margin: 0;
     box-sizing: border-box;
+    min-height: 100%;
 }
 
 body.k-popup
@@ -68,6 +69,13 @@ body.k-popup
 .km-root
 {
     text-align: center;
+    overflow: visible !important;
+    font-size: 80%;
+}
+
+.km-root .km-wp
+{
+    font-size: 1.4em;
 }
 
 .device
@@ -77,7 +85,6 @@ body.k-popup
     position: relative;
     display: inline-block;
     overflow: visible;
-    font-size: 80%;
     margin: 100px 50px 0 15px;
     text-align: left;
     white-space: normal;
@@ -530,10 +537,18 @@ body > label
 
 .box
 {
-    position: relative;
+    position: absolute;
     z-index: 0;
-    padding: 30px 0 40px 30px;
+    padding: 40px 0 40px 30px;
     min-width: 940px;
+    width: 100%;
+    top: 197px;
+    bottom: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#fff));
     background: -moz-linear-gradient(top, #e0e0e0, #fff);
     background: linear-gradient(to bottom, #e0e0e0, #fff);
@@ -1152,20 +1167,20 @@ body > label
 
 .applyall
 {
-    position: absolute;
-    top: 8px;
+    position: fixed;
+    top: 205px;
     right: 56px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .optionsSheet
 {
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     z-index: 1000;
     right: 0;
-    top: -1px;
+    top: 197px;
     background: #7f7f7f;
     box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
     -webkit-box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
@@ -1422,4 +1437,27 @@ input.k-checkbox
 .device .km-loading:after
 {
     font: 1em/1em "Kendo UI Examples";
+}
+
+.device.km-wp .km-tabstrip .km-button
+{
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.km-wp,
+.km-wp .km-button
+{
+    background-color: #222;
+}
+
+.km-wp *:not(.km-tabstrip) > .km-state-active,
+.km-wp .km-tabstrip .km-state-active .km-icon
+{
+    background: #369;
+}
+
+.km-wp .km-tabstrip .km-state-active .km-icon
+{
+    color: #fff;
 }
