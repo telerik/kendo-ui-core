@@ -1,81 +1,76 @@
 
         <div id="example" class="k-content">
 
-            <!-- Window HTML -->
             <div id="window"></div>
 
-            <!-- open button -->
             <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
 
             <script>
-                $(document).ready(function() {
-                    var window = $("#window"),
-                        undo = $("#undo")
-                                .bind("click", function() {
-                                    window.data("kendoWindow").open();
-                                    undo.hide();
-                                });
+                function onOpen(e) {
+                    kendoConsole.log("event :: open");
+                }
 
-                    function onOpen(e) {
-                        kendoConsole.log("event :: open");
-                    }
+                function onClose(e) {
+                    $("#undo").show();
+                    kendoConsole.log("event :: close");
+                }
 
-                    function onClose(e) {
-                        undo.show();
-                        kendoConsole.log("event :: close");
-                    }
+                function onActivate(e) {
+                    kendoConsole.log("event :: activate");
+                }
 
-                    function onActivate(e) {
-                        kendoConsole.log("event :: activate");
-                    }
+                function onDeactivate(e) {
+                    kendoConsole.log("event :: deactivate");
+                }
 
-                    function onDeactivate(e) {
-                        kendoConsole.log("event :: deactivate");
-                    }
+                function onRefresh(e) {
+                    kendoConsole.log("event :: refresh");
+                }
 
-                    function onRefresh(e) {
-                        kendoConsole.log("event :: refresh");
-                    }
+                function onResize(e) {
+                    kendoConsole.log("event :: resize");
+                }
 
-                    function onResize(e) {
-                        kendoConsole.log("event :: resize");
-                    }
+                function onDragStart(e) {
+                    kendoConsole.log("event :: dragstart");
+                }
 
-                    function onDragStart(e) {
-                        kendoConsole.log("event :: dragstart");
-                    }
+                function onDragEnd(e) {
+                    kendoConsole.log("event :: dragend");
+                }
 
-                    function onDragEnd(e) {
-                        kendoConsole.log("event :: dragend");
-                    }
+                $("#undo")
+                    .bind("click", function() {
+                        $("#window").data("kendoWindow").open();
+                        $("#undo").hide();
+                    });
 
-                    if (!window.data("kendoWindow")) {
-                        window.kendoWindow({
-                            width: "630px",
-                            height: "315px",
-                            title: "Rams's Ten Principles of Good Design",
-                            actions: ["Refresh", "Close"],
-                            content: "../../content/web/window/ajax/ajaxContent1.html",
-                            open: onOpen,
-                            activate: onActivate,
-                            close: onClose,
-                            deactivate: onDeactivate,
+                if (!$("#window").data("kendoWindow")) {
+                    $("#window").kendoWindow({
+                        width: "630px",
+                        height: "315px",
+                        title: "Rams's Ten Principles of Good Design",
+                        actions: ["Refresh", "Close"],
+                        content: "../../content/web/window/ajax/ajaxContent1.html",
+                        open: onOpen,
+                        activate: onActivate,
+                        close: onClose,
+                        deactivate: onDeactivate,
 
-                            refresh: onRefresh,
+                        refresh: onRefresh,
 
-                            resize: onResize,
-                            dragstart: onDragStart,
-                            dragend: onDragEnd
-                        });
-                    }
-                });
+                        resize: onResize,
+                        dragstart: onDragStart,
+                        dragend: onDragEnd
+                    });
+                }
             </script>
 
-            <style scoped="scoped">
-                #example 
-                {
+            <style scoped>
+                #example {
                     min-height:400px;
                 }
+
                 #undo {
                     text-align: center;
                     position: absolute;
