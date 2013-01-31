@@ -12,7 +12,14 @@ class Window extends \Kendo\UI\Widget {
     protected function createElement() {
         $element = new \Kendo\Html\Element('div');
 
-        $element->html($this->getProperty('content'));
+        $content = $this->getProperty('content');
+
+        if (gettype($content) == "string") {
+            $element->html($content);
+        } else {
+            // serialize content by removing it from the ignore list
+            $this->ignore = array_diff(array('content'), $this->ignore);
+        }
 
         return $element;
     }
