@@ -145,4 +145,10 @@ div.k-gauge
 }
 
 
+/* Sparklines */
 
+.k-sparkline {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
