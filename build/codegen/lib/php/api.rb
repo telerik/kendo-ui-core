@@ -164,18 +164,21 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
 <%= simple.examples %>
 <% end %>
 #### Example - using [<%= php_type %>](<%= root %><%= path %>/<%= php_class %>)
-
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= variable %> = <%= value %>;
     <%= sample_option.variable %> = <%= sample_option.value %>;
     <%= variable %>-><%= sample_option.php_name %>(<%= sample_option.variable %>);
     <%= owner.variable %>-><%= php_name %>(<%= variable %>);
+    ?>
 
 #### Example - using array
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= sample_option.variable %> = <%= sample_option.value %>;
     <%= owner.variable %>-><%= php_name %>(array('<%= sample_option.name %>' => <%= sample_option.variable %>));
+    ?>
 })
 
 COMPOSITE_OPTION_DESCRIPTION = ERB.new(%{
@@ -260,8 +263,10 @@ Sets the HTML content of the <%= owner.php_class %>.
 
 #### Example
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= owner.variable %>->content('<strong>Content</strong>');
+    ?>
 
 })
 }
@@ -280,15 +285,19 @@ Sets the data source of the <%= name %>.
 
 #### Example - using [\\Kendo\\Data\\DataSource](/api/wrappers/php/kendo/data/datasource)
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     $dataSource = new \\Kendo\\Data\\DataSource();
     <%= owner.variable %>-><%= php_name %>($dataSource);
+    ?>
 
 #### Example - using array
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     $schema = new \\Kendo\\Data\\DataSourceSchema();
     <%= owner.variable %>-><%= php_name %>(array('schema' => $schema));
+    ?>
 })
 
 HIERARCHICAL_DATA_SOURCE_SECTION = ERB.new(%{
@@ -305,15 +314,19 @@ Sets the data source of the <%= name %>.
 
 #### Example - using [\\Kendo\\Data\\HierarchicalDataSource](/api/wrappers/php/kendo/data/hierarchicaldatasource)
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     $dataSource = new \\Kendo\\Data\\HierarchicalDataSource();
     <%= owner.variable %>-><%= php_name %>($dataSource);
+    ?>
 
 #### Example - using array
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     $schema = new \\Kendo\\Data\\DataSourceSchema();
     <%= owner.variable %>-><%= php_name %>(array('schema' => $schema));
+    ?>
 })
 
 OPTION_SECTION = ERB.new(%{
@@ -336,8 +349,10 @@ OPTION_SECTION_EXAMPLES = ERB.new(%{
 
 #### Example <% if includeType %> - using <%= type %><% end %>
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= owner.variable %>-><%= php_name %>(<%= CodeGen::PHP::API.value(type) %>);
+    ?>
 <% end %>
 }, 0, '<%>')
 
@@ -385,8 +400,10 @@ EVENT_SECTION = ERB.new(%{
 
 #### Example - using string which defines a JavaScript function
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= owner.variable %>-><%= php_name %>('function(e) { }');
+    ?>
 
 #### Example - using string which defines a JavaScript name
     <script>
@@ -401,8 +418,10 @@ EVENT_SECTION = ERB.new(%{
 
 #### Example - using [\\Kendo\\JavaScriptFunction](/api/wrappers/php/kendo/javascriptfunction)
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= owner.variable %>-><%= php_name %>(new \\Kendo\\JavaScriptFunction('function(e) { }'));
+    ?>
 }, 0, '<%>')
     class Event < CodeGen::PHP::Event
         def to_markdown_section(root)
@@ -424,24 +443,30 @@ Adds one or more <%= item.php_class %> to the <%= owner.php_class %>.
 
 #### Example - using <%= item.php_type %>
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= item.variable %> = <%= item.value %>;
     <%= item.sample_option.variable %> = <%= item.sample_option.value %>;
     <%= item.variable %>-><%= item.sample_option.php_name %>(<%= item.sample_option.variable %>);
     <%= owner.variable %>->add<%= item.name.pascalize %>(<%= item.variable %>);
+    ?>
 
 #### Example - using array
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= item.sample_option.variable %> = <%= item.sample_option.value %>;
     <%= owner.variable %>->add<%= item.name.pascalize %>(array('<%= item.sample_option.name %>' => <%= item.sample_option.variable %>));
+    ?>
 
 #### Example - adding more than one <%= item.php_class %>
 
+    <?php
     <%= owner.variable %> = <%= owner.value %>;
     $first  = <%= item.value %>;
     $second = <%= item.value %>;
     <%= owner.variable %>->add<%= item.name.pascalize %>($first, $second);
+    ?>
 })
 
     class ArrayOption < CompositeOption
