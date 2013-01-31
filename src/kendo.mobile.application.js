@@ -169,9 +169,9 @@ kendo_module({
             div = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
             bgColor = parseInt(div.css("background-color").split(",")[1], 10);
             if (bgColor === 0) {
-                element.addClass("km-wp8-dark");
+                element.addClass("km-wp-dark");
             } else {
-                element.addClass("km-wp8-light");
+                element.addClass("km-wp-light");
             }
         },
 
