@@ -27,46 +27,49 @@ require_once '../../lib/Kendo/Autoload.php';
     $today = new \Kendo\UI\PanelBarItem("Today");
     $today->expanded(true)
             ->addItem(
-                array("text" => "Jane King"),
-                array("text" => "Bob Fuller"),
-                array("text" => "Lynda Kallahan"),
-                array("text" => "Matt Sutnar")
+                new \Kendo\UI\PanelBarItem("Jane King"),
+                new \Kendo\UI\PanelBarItem("Bob Fuller"),
+                new \Kendo\UI\PanelBarItem("Lynda Kallahan"),
+                new \Kendo\UI\PanelBarItem("Matt Sutnar")
             );
+    $panelbar->addItem($today);
 
     $yesterday = new \Kendo\UI\PanelBarItem("Today");
     $yesterday
             ->addItem(
-                array("text" => "Stewart "),
-                array("text" => "Jane King"),
-                array("text" => "Steven"),
-                array("text" => "Ken Stone")
+                new \Kendo\UI\PanelBarItem("Stewart "),
+                new \Kendo\UI\PanelBarItem("Jane King"),
+                new \Kendo\UI\PanelBarItem("Steven"),
+                new \Kendo\UI\PanelBarItem("Ken Stone")
             );
+    $panelbar->addItem($yesterday);
 
     $wednesday = new \Kendo\UI\PanelBarItem("Wednesday, February 01, 2012");
     $wednesday->addItem(
-            array("text" => "Jane King"),
-            array("text" => "Lynda Kallahan"),
-            array("text" => "Todd "),
-            array("text" => "Bob Fuller")
+            new \Kendo\UI\PanelBarItem("Jane King"),
+            new \Kendo\UI\PanelBarItem("Lynda Kallahan"),
+            new \Kendo\UI\PanelBarItem("Todd "),
+            new \Kendo\UI\PanelBarItem("Bob Fuller")
         );
+    $panelbar->addItem($wednesday);
 
     $tuesday = new \Kendo\UI\PanelBarItem("Tuesday, January 31, 2012");
     $tuesday->addItem(
-            array("text" => "Emily Davolio"),
-            array("text" => "Matt Sutnar"),
-            array("text" => "Bob Fuller"),
-            array("text" => "Jenn Heinlein")
+            new \Kendo\UI\PanelBarItem("Emily Davolio"),
+            new \Kendo\UI\PanelBarItem("Matt Sutnar"),
+            new \Kendo\UI\PanelBarItem("Bob Fuller"),
+            new \Kendo\UI\PanelBarItem("Jenn Heinlein")
         );
+    $panelbar->addItem($tuesday);
 
     $monday = new \Kendo\UI\PanelBarItem("Monday, January 30, 2012");
     $monday->addItem(
-            array("text" => "Matt Sutnar"),
-            array("text" => "Joshua"),
-            array("text" => "Michael"),
-            array("text" => "Jenn Heinlein")
+            new \Kendo\UI\PanelBarItem("Matt Sutnar"),
+            new \Kendo\UI\PanelBarItem("Joshua"),
+            new \Kendo\UI\PanelBarItem("Michael"),
+            new \Kendo\UI\PanelBarItem("Jenn Heinlein")
         );
-
-    $panelbar->dataSource(array($today, $yesterday, $wednesday, $tuesday, $monday));
+    $panelbar->addItem($monday);
 
     echo $panelbar->render();
 ?>
