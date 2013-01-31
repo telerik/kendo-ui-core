@@ -28,14 +28,18 @@
             <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
 
             <script>
+                function onClose() {
+                    $("#undo").fadeIn(300);
+                }
+
                 $(document).ready(function() {
                     var original = $("#window").clone(true);
 
                     $(".configuration input").change( function() {
                         var clone = original.clone(true);
 
-                        undo.hide();
-                        window.destroy();
+                        $("#undo").hide();
+                        $("#window").data("kendoWindow").destroy();
 
                         setTimeout( function () {
                             $("#example").append(clone);
@@ -48,42 +52,37 @@
                                 ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
                     };
 
-                    var onClose = function() {
-                        undo.fadeIn(300);
-                    };
-
-                    var window, undo,
-                        initWindow = function () {
-                            var windowOptions = {
-                                                    width: "500px",
-                                                    title: "EGG CHAIR",
-                                                    visible: false,
-                                                    close: onClose
-                                                };
-
-                            if (!$("#default")[0].checked)
-                                windowOptions.animation = { open: { effects: getEffects() }, close: { effects: getEffects(), reverse: true } };
-
-                            window = $("#window").kendoWindow(windowOptions).data("kendoWindow");
-
-                            undo = $("#undo")
-                                .bind("click", function() {
-                                    window.open();
-                                    undo.fadeOut(300);
-                                });
-
-                            window.open();
+                    function initWindow () {
+                        var windowOptions = {
+                            width: "500px",
+                            title: "EGG CHAIR",
+                            visible: false,
+                            close: onClose
                         };
+
+                        if (!$("#default")[0].checked)
+                            windowOptions.animation = { open: { effects: getEffects() }, close: { effects: getEffects(), reverse: true } };
+
+                        $("#window").kendoWindow(windowOptions);
+
+                        $("#undo")
+                            .bind("click", function() {
+                                window.open();
+                                undo.fadeOut(300);
+                            });
+
+                        $("#window").data("kendoWindow").open();
+                    }
 
                     initWindow();
                 });
             </script>
 
-            <style scoped="scoped">
-                #example 
-                {
+            <style scoped>
+                #example {
                     min-height:400px;
                 }
+
                 #undo {
                     text-align: center;
                     position: absolute;

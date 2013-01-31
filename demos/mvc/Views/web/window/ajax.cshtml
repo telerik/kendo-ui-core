@@ -1,10 +1,8 @@
 
         <div id="example" class="k-content">
 
-            <!-- Window HTML -->
             <div id="window"></div>
 
-            <!-- open button -->
             <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
 
             <script>
@@ -20,15 +18,12 @@
                         undo.show();
                     }
 
-                    if (!window.data("kendoWindow")) {
-                        window.kendoWindow({
-                            width: "615px",
-                            title: "Rams's Ten Principles of Good Design",
-                            content: "../../content/web/window/ajax/ajaxContent.html",
-                            close: onClose
-                        });
-                    }
-
+                    window.kendoWindow({
+                        width: "615px",
+                        title: "Rams's Ten Principles of Good Design",
+                        content: "../../content/web/window/ajax/ajaxContent.html",
+                        close: onClose
+                    });
                 });
             </script>
 
