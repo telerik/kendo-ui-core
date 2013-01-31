@@ -1634,7 +1634,7 @@ function pad(number, digits, end) {
                 transforms = {
                     css: "-" + lowPrefix + "-",
                     prefix: prefix,
-                    event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : lowPrefix === "ms" ? "MS" : ""
+                    event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : ""
                 };
 
                 if (hasTransitions) {
