@@ -54,6 +54,7 @@ kendo_module({
 
             that._focused = that.input
                                 .on("keydown" + ns, proxy(that._keydown, that))
+                                .on("paste" + ns, proxy(that._search, that))
                                 .on("focus" + ns, function() {
                                     that._placeholder(false);
                                 })
@@ -375,6 +376,7 @@ kendo_module({
             that._typing = setTimeout(function() {
                 var value = that.input.val();
                 if (that._prev !== value) {
+                    that._scale();
                     that._prev = value;
                     that.search(value);
                 }
@@ -481,14 +483,10 @@ kendo_module({
             this._span = $("<span/>").css(computedStyles).appendTo(this.wrapper);
         },
 
-        _scale: function(character) {
+        _scale: function() {
             var that = this,
                 wrapperWidth = that.wrapper.width(),
-                textWidth;
-
-            character = character || "";
-            that._span.text(that.input.val() + character);
-            textWidth = that._span.width() + 25;
+                textWidth = that._span.text(that.input.val()).width() + 25;
 
             that.input.width(textWidth > wrapperWidth ? wrapperWidth : textWidth);
         },
@@ -598,7 +596,6 @@ kendo_module({
                 }
             } else {
                 that._search();
-                that._scale(String.fromCharCode(e.keyCode));
             }
         },
 

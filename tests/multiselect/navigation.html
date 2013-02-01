@@ -59,25 +59,29 @@
                 }
             });
 
-            test("MultiSelect expands input element on keydown", function() {
-                var multiselect = new MultiSelect(select);
-
+            asyncTest("MultiSelect expands input element on keydown", 1, function() {
+                var multiselect = new MultiSelect(select, { delay: 0 });
                 var initial = multiselect.input.width();
 
-                multiselect.input.keydown("2");
+                multiselect.input.val("2").keydown("2");
 
-                ok(multiselect.input.width() > initial);
+                setTimeout(function() {
+                    start();
+                    ok(multiselect.input.width() > initial);
+                });
             });
 
-            test("MultiSelect fits input inside of the wrapper", function() {
-                var multiselect = new MultiSelect(select),
+            asyncTest("MultiSelect fits input inside of the wrapper", 1, function() {
+                var multiselect = new MultiSelect(select, { delay: 0 }),
                     wrapperWidth = 200;
 
                 multiselect.wrapper.width(wrapperWidth);
-                multiselect.input.val("222222222222222222222222222222222222222222222");
-                multiselect.input.keydown("2");
+                multiselect.input.val("222222222222222222222222222222222222222222222").keydown("2");
 
-                equal(multiselect.input.width(), wrapperWidth);
+                setTimeout(function() {
+                    start();
+                    equal(multiselect.input.width(), wrapperWidth);
+                });
             });
 
             test("MultiSelect opens popup on keydown", function() {
