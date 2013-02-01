@@ -58,6 +58,12 @@
                 ok(multiselect.input.hasClass("k-readonly"));
             });
 
+            test("MultiSelect scales input on placeholder shows", function() {
+                var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+
+                ok(multiselect.input.width() > 35);
+            });
+
             test("MultiSelect hides placeholder if any value", function() {
                 var multiselect = new MultiSelect(select.val("0").data("placeholder", "Select..."));
 

@@ -33,7 +33,6 @@ kendo_module({
                   "line-height"];
 
     var MultiSelect = List.extend({
-
         init: function(element, options) {
             var that = this;
 
@@ -91,6 +90,8 @@ kendo_module({
 
             input.toggleClass("k-readonly", show)
                  .val(show ? that.options.placeholder : "");
+
+            that._scale();
         },
 
         options: {
