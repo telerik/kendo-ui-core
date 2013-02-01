@@ -3,6 +3,7 @@
 namespace Kendo\UI;
 
 class TreeView extends \Kendo\UI\Widget {
+    protected $ignore = array('items');
 
     protected function name() {
         return 'TreeView';
