@@ -107,6 +107,10 @@ module kendo.data {
     }
 
     class Model extends ObservableObject {
+        idField: string;
+        _defaultId: any;
+        fields: any;
+        defaults: any;
         constructor(data?: any);
         dirty: bool;
         id: any;
