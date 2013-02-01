@@ -69,9 +69,9 @@
             $(function(){
                 that.element = $(element ? element : document.body);
                 that._setupPlatform();
+                that._setupElementClass();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(that.element, that.options);
-                that._setupElementClass();
                 that._attachMeta();
 
                 if (that.options.updateDocumentTitle) {
