@@ -32,7 +32,6 @@
         FOCUSEDSTATE = "k-state-focused",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
-        ACTIVESTATE = "k-state-active",
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
@@ -196,11 +195,6 @@
             .addClass(DISABLEDSTATE)
             .removeAttr("disabled")
             .attr("aria-disabled", true);
-        item
-            .children("a")
-            .filter(":focus")
-            .parent()
-            .addClass(ACTIVESTATE);
 
         if (!item.filter("[role]").length) {
             item.attr("role", "menuitem");
