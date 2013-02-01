@@ -485,6 +485,7 @@ kendo_module({
                 wrapperWidth = that.wrapper.width(),
                 textWidth;
 
+            character = character || "";
             that._span.text(that.input.val() + character);
             textWidth = that._span.width() + 25;
 
