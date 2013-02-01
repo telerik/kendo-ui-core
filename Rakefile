@@ -49,7 +49,8 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
     'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
-    'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/'
+    'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/',
+    'wrappers/php' => 'wrappers/php'
 }
 
 MVC_CONTENT = {
@@ -65,6 +66,10 @@ MVC_CONTENT = {
 JSP_CONTENT = {
     'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR,
     'wrappers/jsp/spring-demos/src' => SPRING_DEMOS_SRC
+}
+
+PHP_CONTENT = {
+    'wrappers/php' => PHP_DEMOS_SRC
 }
 
 task :npm do
@@ -110,7 +115,8 @@ bundle :name => 'trial.hotfix',
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
-            'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR
+            'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR,
+            'wrappers/php' => PHP_LIB_SRC
        },
        :prerequisites => [
            "java:assets",
@@ -132,9 +138,11 @@ bundle :name => 'trial',
             'styles' => MIN_CSS_RESOURCES,
        }
        .merge(MVC_CONTENT)
-       .merge(JSP_CONTENT),
+       .merge(JSP_CONTENT)
+       .merge(PHP_CONTENT),
        :prerequisites => [
            "java:assets",
+           "php:assets",
            "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
            'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'mvc:assets',
@@ -261,7 +269,7 @@ bundle :name => 'jsp.commercial',
             'styles' => MIN_CSS_RESOURCES,
             'src/js' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS,
-            'src/kendo-taglib' => JSP_TAGLIB_SRC
+            'src/kendo-taglib' => JSP_TAGLIB_SRC.exclude('**/test/**/*')
        }.merge(JSP_CONTENT),
        :prerequisites => [
            "java:assets",

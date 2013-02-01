@@ -2,7 +2,8 @@ PHP_WRAPPERS_ROOT = 'wrappers/php/'
 
 PHP_DEMOS_ROOT = PHP_WRAPPERS_ROOT
 PHP_DEMOS_SRC_ROOT = PHP_DEMOS_ROOT
-PHP_DEMOS_SRC = FileList[PHP_DEMOS_SRC_ROOT + '**/*']
+PHP_LIB_SRC = FileList[PHP_WRAPPERS_ROOT + '/lib/**/*.*']
+PHP_DEMOS_SRC = FileList[PHP_DEMOS_SRC_ROOT + '**/*'].exclude('**/tests/**')
 PHP_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*'].exclude('**/globalization/**/*')
 PHP_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 PHP_DEMOS_RESOURCES = PHP_DEMOS_SRC_ROOT + 'content/'
