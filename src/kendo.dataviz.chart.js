@@ -759,7 +759,7 @@ kendo_module({
 
             if (tooltipOptions.visible && tooltipOptions.shared) {
                 tooltip.plotArea = chart._plotArea;
-                tooltip.show(point);
+                tooltip.showAt(point);
             }
         },
 
@@ -6972,7 +6972,7 @@ kendo_module({
             offset: 10
         },
 
-        show: function(point) {
+        showAt: function(point) {
             var tooltip = this,
                 options = tooltip.options,
                 axis = tooltip.plotArea.categoryAxis,
