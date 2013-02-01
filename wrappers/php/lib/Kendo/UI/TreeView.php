@@ -3,9 +3,24 @@
 namespace Kendo\UI;
 
 class TreeView extends \Kendo\UI\Widget {
+
     protected function name() {
         return 'TreeView';
     }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('ul');
+        $items = $this->getProperty('items');
+
+        if ($items) {
+            foreach($items as $item) {
+                $element->append($item->createElement());
+            }
+        }
+
+        return $element;
+    }
+
 //>> Properties
 
     /**
