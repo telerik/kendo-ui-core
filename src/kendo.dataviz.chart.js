@@ -8025,7 +8025,7 @@ kendo_module({
     function ceilDate(date, unit, weekStartDay) {
         date = toDate(date);
 
-        if (floorDate(date, unit, weekStartDay).getTime() === date.getTime()) {
+        if (date && floorDate(date, unit, weekStartDay).getTime() === date.getTime()) {
             return date;
         }
 
