@@ -45,25 +45,28 @@
                         $("#undo").hide();
                     });
 
-                if (!$("#window").data("kendoWindow")) {
-                    $("#window").kendoWindow({
-                        width: "630px",
-                        height: "315px",
-                        title: "Rams's Ten Principles of Good Design",
-                        actions: ["Refresh", "Close"],
-                        content: "../../content/web/window/ajax/ajaxContent1.html",
-                        open: onOpen,
-                        activate: onActivate,
-                        close: onClose,
-                        deactivate: onDeactivate,
+                $(document).ready(function() {
+                    if (!$("#window").data("kendoWindow")) {
+                        $("#window").kendoWindow({
+                            width: "630px",
+                            height: "315px",
+                            title: "Rams's Ten Principles of Good Design",
+                            actions: ["Refresh", "Close"],
+                            content: "../../content/web/window/ajax/ajaxContent1.html",
+                            visible: false,
+                            open: onOpen,
+                            activate: onActivate,
+                            close: onClose,
+                            deactivate: onDeactivate,
 
-                        refresh: onRefresh,
+                            refresh: onRefresh,
 
-                        resize: onResize,
-                        dragstart: onDragStart,
-                        dragend: onDragEnd
-                    });
-                }
+                            resize: onResize,
+                            dragstart: onDragStart,
+                            dragend: onDragEnd
+                        }).data("kendoWindow").open();
+                    }
+                });
             </script>
 
             <style scoped>
