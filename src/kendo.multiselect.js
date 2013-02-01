@@ -27,7 +27,6 @@ kendo_module({
         PREV = "previousSibling",
         HIDE = ' style="display:none"',
         FOCUSEDCLASS = "k-state-focused",
-        DELETECLASSSELECTOR = ".k-delete",
         HOVERCLASS = "k-state-hover",
         DISABLEDCLASS = "k-state-disabled",
         DISABLEDATTR = "disabled",
@@ -176,7 +175,7 @@ kendo_module({
                     .on("mousedown" + ns, function(e) {
                         e.preventDefault();
 
-                        if (e.target.className.indexOf(DELETECLASSSELECTOR) == -1) {
+                        if (e.target.className.indexOf("k-delete") == -1) {
                             that.open();
                         }
 
@@ -188,7 +187,7 @@ kendo_module({
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK, DELETECLASSSELECTOR, function(e) {
+                    .on(CLICK, ".k-delete", function(e) {
                         that._unselect($(e.target).closest(LI));
                         that._change();
                         that.close();
@@ -713,8 +712,6 @@ kendo_module({
             that._placeholder();
         },
 
-
-
         _template: function() {
             var that = this,
                 options = that.options,
@@ -741,7 +738,6 @@ kendo_module({
                 return '<li><span class="">' + tagTemplate(data) + '</span><span class="k-icon k-delete">delete</span></li>';
             }
         },
-
 
         _input: function() {
             this.input = $('<input class="k-input" style="width: 25px" />').appendTo(this._innerWrapper);
