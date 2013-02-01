@@ -49,6 +49,7 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
     'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
+    'src/php' => 'wrappers/php/',
     'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/',
     'wrappers/php' => 'wrappers/php'
 }
@@ -278,9 +279,25 @@ bundle :name => 'jsp.commercial',
            "dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml"
        ]
 
+bundle :name => 'php.commercial',
+       :license => 'src-license-complete',
+       :eula => 'php',
+       :changelog => %w(web mobile dataviz framework php),
+       :contents => {
+            'js' => MVC_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+            'src/js' => COMPLETE_SRC_JS,
+            'src/styles' => SRC_CSS,
+            'src/php' => PHP_LIB_SRC
+       }.merge(PHP_CONTENT),
+       :prerequisites => [
+           "php:assets"
+       ]
+
 BUNDLES = [
     'trial',
     'complete.commercial',
+    'php.commercial',
     'web.commercial',
     'web.open-source',
     'mobile.commercial',
