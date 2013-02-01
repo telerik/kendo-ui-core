@@ -109,11 +109,11 @@ bundle :name => 'trial.hotfix',
             'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
+            'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR
        },
        :prerequisites => [
            "java:assets",
-           "dist/bundles/trial/src/kendo-taglib/pom.xml",
            "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
            'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'mvc:assets'
@@ -135,7 +135,6 @@ bundle :name => 'trial',
        .merge(JSP_CONTENT),
        :prerequisites => [
            "java:assets",
-           "dist/bundles/trial/src/kendo-taglib/pom.xml",
            "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
            'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'mvc:assets',
