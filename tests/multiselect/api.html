@@ -87,7 +87,7 @@
                     refresh: multiselect.refresh
                 });
 
-                multiselect.wrapper.click();
+                multiselect.wrapper.mousedown();
                 multiselect.input.click();
                 multiselect.wrapper.click();
 
@@ -240,7 +240,7 @@
                 multiselect.enable(true);
 
                 multiselect.tagList.find(".k-delete").click();
-                multiselect.wrapper.click();
+                multiselect.wrapper.mousedown();
 
                 equal(multiselect.tagList.children().length, 0);
                 ok(!multiselect.wrapper.hasClass("k-state-disabled"));

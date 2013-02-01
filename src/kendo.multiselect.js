@@ -186,7 +186,9 @@ kendo_module({
                 wrapper
                     .removeClass("k-state-disabled")
                     .on(HOVEREVENTS, that._toggleHover)
-                    .on("click" + ns, function(e) {
+                    .on("mousedown" + ns, function(e) {
+                        e.preventDefault();
+
                         if (e.target.className.indexOf("k-delete") == -1) {
                             that.open();
                         }
@@ -763,7 +765,6 @@ kendo_module({
             }
 
             that.wrapper = wrapper.addClass(element[0].className)
-                                  .on("mousedown" + ns, function(e) { e.preventDefault(); })
                                   .css("display", "");
 
             that._innerWrapper = $(wrapper[0].firstChild);

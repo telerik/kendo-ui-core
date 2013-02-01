@@ -50,7 +50,7 @@
                 populateSelect();
                 var multiselect = new MultiSelect(select);
 
-                multiselect.input.click();
+                multiselect.input.mousedown();
 
                 ok(multiselect.popup.visible());
             });
@@ -59,7 +59,7 @@
                 populateSelect();
                 var multiselect = new MultiSelect(select);
 
-                multiselect.wrapper.click();
+                multiselect.wrapper.mousedown();
 
                 equal(multiselect.input[0], document.activeElement);
             });
@@ -70,7 +70,7 @@
 
                 var multiselect = new MultiSelect(select);
 
-                multiselect.tagList.children().first().click();
+                multiselect.tagList.children().first().mousedown();
 
                 ok(multiselect.popup.visible());
             });
@@ -89,7 +89,7 @@
             test("MultiSelect selects item on click", function() {
                 populateSelect();
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
 
                 multiselect.ul.children().eq(1).click();
 
@@ -99,7 +99,7 @@
             test("MultiSelect hides selected item", function() {
                 populateSelect();
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
 
                 var item = multiselect.ul.children().eq(1);
 
@@ -111,7 +111,7 @@
             test("MultiSelect hides popup on click", function() {
                 populateSelect();
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
 
                 var item = multiselect.ul.children().eq(1);
 
@@ -124,7 +124,7 @@
                 populateSelect();
 
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
 
                 var item = multiselect.ul.children().eq(1).click();
                 multiselect.ul.children().eq(0).click();
@@ -139,7 +139,7 @@
                 populateSelect();
 
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
 
                 var item = multiselect.ul.children().eq(1).click();
                 multiselect.ul.children().eq(0).click();
@@ -167,7 +167,7 @@
                 populateSelect();
 
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.ul.children().eq(1).click();
 
                 ok(select[0].children[1].selected);
@@ -177,7 +177,7 @@
                 populateSelect();
 
                 var multiselect = new MultiSelect(select);
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.ul.children().eq(1).click();
 
                 multiselect.tagList.children().first().find(".k-delete").click();
@@ -190,7 +190,7 @@
 
                 var multiselect = new MultiSelect(select);
 
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.ul.children().eq(1).click();
 
                 //TODO: use method instead of _dataItems
@@ -202,7 +202,7 @@
 
                 var multiselect = new MultiSelect(select);
 
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.ul.children().eq(1).click();
                 multiselect.ul.children().eq(0).click();
 
@@ -219,7 +219,7 @@
 
                 var multiselect = new MultiSelect(select);
 
-                multiselect.input.click().val("option");
+                multiselect.input.mousedown().val("option");
                 multiselect.search("option");
 
                 multiselect.ul.children().eq(0).click();
@@ -253,7 +253,7 @@
                 populateSelect();
                 var multiselect = new MultiSelect(select);
 
-                multiselect.wrapper.click();
+                multiselect.wrapper.mousedown();
 
                 equal(multiselect.input[0], document.activeElement);
             });
@@ -262,7 +262,7 @@
                 populateSelect();
                 var multiselect = new MultiSelect(select);
 
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.ul.children().eq(1).click();
                 multiselect.ul.children().eq(0).click();
                 multiselect.open();
@@ -276,11 +276,11 @@
                 populateSelect();
                 var multiselect = new MultiSelect(select);
 
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.ul.children().eq(0).click();
                 multiselect.ul.children().eq(1).click();
 
-                multiselect.input.click();
+                multiselect.input.mousedown();
                 multiselect.search("Option4");
 
                 multiselect.ul.children().eq(0).click();
