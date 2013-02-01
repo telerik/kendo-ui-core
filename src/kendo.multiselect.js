@@ -720,27 +720,26 @@ kendo_module({
                 options = that.options,
                 itemTemplate = options.itemTemplate,
                 tagTemplate = options.tagTemplate,
-                hasDataSource = options.dataSource;
+                hasDataSource = options.dataSource,
+                textTemplate;
 
-            if (that.element.is(SELECT) && that.element[0].length) {
-                if (!hasDataSource) {
-                    options.dataTextField = options.dataTextField || "text";
-                    options.dataValueField = options.dataValueField || "value";
-                }
+            if (that.element[0].length && !hasDataSource) {
+                options.dataTextField = options.dataTextField || "text";
+                options.dataValueField = options.dataValueField || "value";
             }
 
-            if (!itemTemplate) {
-                itemTemplate = kendo.template("#:data" + (options.dataTextField ? "." : "") + options.dataTextField + "#", { useWithBlock: false });
-            } else {
-                itemTemplate = kendo.template(itemTemplate);
-            }
+            textTemplate = kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false });
+
+            itemTemplate = itemTemplate ? kendo.template(itemTemplate) : textTemplate;
+            tagTemplate = tagTemplate ? kendo.template(tagTemplate) : textTemplate;
 
             that.itemTemplate = function(data, idx, hide) {
                 return '<li tabindex="-1" role="option" data-idx="' + idx + '" unselectable="on" class="k-item"' + (hide ? HIDE : "") + '>' + itemTemplate(data) + '</li>';
             }
 
-            //TODO: use options.tagTemplate if defined
-            that.tagTemplate = kendo.template('<li><span class="">#:data' + (options.dataTextField ? "." : "") + options.dataTextField + '#</span><span class="k-icon k-delete">delete</span></li>', { useWithBlock: false });
+            that.tagTemplate = function(data) {
+                return '<li><span class="">' + tagTemplate(data) + '</span><span class="k-icon k-delete">delete</span></li>';
+            }
         },
 
 
