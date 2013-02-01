@@ -112,8 +112,10 @@ bundle :name => 'trial.hotfix',
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
        },
        :prerequisites => [
-#           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-#           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
+           "java:assets",
+           "dist/bundles/trial/src/kendo-taglib/pom.xml",
+           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'mvc:assets'
        ]
 
@@ -128,10 +130,14 @@ bundle :name => 'trial',
        :contents => {
             'js' => TRIAL_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-       }.merge(MVC_CONTENT), #.merge(JSP_CONTENT), uncomment when jsp goes official
+       }
+       .merge(MVC_CONTENT)
+       .merge(JSP_CONTENT),
        :prerequisites => [
-#           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-#           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
+           "java:assets",
+           "dist/bundles/trial/src/kendo-taglib/pom.xml",
+           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
            'mvc:assets',
            'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
        ]
@@ -262,8 +268,8 @@ bundle :name => 'jsp.beta',
        }.merge(JSP_CONTENT),
        :prerequisites => [
            "java:assets",
-           "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-           "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml",
+           #"dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           #"dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml",
            #"dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml"
        ]
 

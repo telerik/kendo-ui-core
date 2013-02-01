@@ -17,7 +17,7 @@ SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/*
 SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources/'
 
-JSP_BUNDLE = 'jsp.beta'
+JSP_BUNDLES = %w{trial}
 
 # Update a pom.xml file when the VERSION changes
 class PomTask < Rake::FileTask
@@ -52,8 +52,10 @@ file JSP_TAGLIB_JAR => [POM, JSP_TAGLIB_SRC].flatten do
     mvn(POM, 'clean package')
 
     # remove older tag library jars
-    rm_rf "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/kendo-taglib", :verbose => VERBOSE
-    rm_rf "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/", :verbose => VERBOSE
+    JSP_BUNDLES.each do |bundle|
+        rm_rf "dist/bundles/#{bundle}/wrappers/jsp/kendo-taglib", :verbose => VERBOSE
+        rm_rf "dist/bundles/#{bundle}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/", :verbose => VERBOSE
+    end
 end
 
 =begin
@@ -64,32 +66,38 @@ file_copy :to => "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/W
           :from => JSP_TAGLIB_JAR
 =end
 
-file_copy :to => "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml",
-          :from => SPRING_DEMOS_ROOT + 'pom.xml'
+JSP_BUNDLES.each do |bundle|
+    file_copy :to => "dist/bundles/#{bundle}/wrappers/jsp/spring-demos/pom.xml",
+              :from => SPRING_DEMOS_ROOT + 'pom.xml'
 
+    file_copy :to => "dist/bundles/#{bundle}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+              :from => JSP_TAGLIB_JAR
+
+    file "dist/bundles/#{bundle}/wrappers/jsp/spring-demos/pom.xml" do  |t|
+        patch_demos_pom(t.name)
+    end
+end
 =begin
 file_copy :to => "dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml",
           :from => JSP_TAGLIB_POM
 =end
 
-file_copy :to => "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-          :from => JSP_TAGLIB_JAR
 
-PROJECT = <<-eos
+PROJECT = %{
     <groupId>com.kendoui</groupId>
     <version>#{VERSION}</version>
-eos
+}
 
-JUNIT = <<-eos
+JUNIT = %{
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.8.1</version>
         <scope>test</scope>
     </dependency>
-eos
+}
 
-BUILD = <<-eos
+BUILD = %{
     <build>
         <pluginManagement>
             <plugins>
@@ -104,7 +112,7 @@ BUILD = <<-eos
             </plugins>
         </pluginManagement>
     </build>
-eos
+}
 
 # Patch POM - remove parent etc.
 def patch_demos_pom(name)
@@ -114,9 +122,7 @@ def patch_demos_pom(name)
     pom.sub!(/<dependency>\n\s*<groupId>com\.kendoui(.|\n)*<\/dependency>/, '')
     pom.sub!(/<build>(.|\n)*<\/build>/, BUILD)
 
-    File.open(name, 'w') do |file|
-        file.write(pom)
-    end
+    File.write(name, pom)
 end
 
 def patch_taglib_pom(name)
@@ -127,9 +133,7 @@ def patch_taglib_pom(name)
     pom.sub!(/<\/dependencies>/, JUNIT + '</dependencies>')
     pom.sub!(/<\/dependencies>/, '</dependencies>' + BUILD)
 
-    File.open(name, 'w') do |file|
-        file.write(pom)
-    end
+    File.write(name, pom)
 end
 
 
@@ -139,9 +143,6 @@ end
 #end
 
 # Prepare the demos pom.xml for end users (commercial package)
-file "dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml" do |t|
-    patch_demos_pom(t.name)
-end
 
 # Prepare the src pom.xml for end users
 #file "dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml" do |t|
