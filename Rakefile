@@ -48,7 +48,7 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/Examples/Content/shared' => 'demos/mvc/content/shared',
     'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
-    'src/kendo-taglib/src' => 'wrappers/java/kendo-taglib/src/',
+    'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
     'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/'
 }
 
@@ -253,24 +253,22 @@ bundle :name => 'winjs.commercial',
             '.' => WIN_JS_RESOURCES
        }
 
-bundle :name => 'jsp.beta',
+bundle :name => 'jsp.commercial',
        :license => 'src-license-complete',
        :eula => 'jsp',
        :changelog => %w(web mobile dataviz framework jsp),
-       :beta => true,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
-# not required for the beta
-#            'src/js' => COMPLETE_SRC_JS,
-#            'src/styles' => SRC_CSS,
-#            'src/kendo-taglib/src' => JSP_TAGLIB_SRC
+            'src/js' => COMPLETE_SRC_JS,
+            'src/styles' => SRC_CSS,
+            'src/kendo-taglib' => JSP_TAGLIB_SRC
        }.merge(JSP_CONTENT),
        :prerequisites => [
            "java:assets",
-           #"dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-           #"dist/bundles/#{JSP_BUNDLE}/wrappers/jsp/spring-demos/pom.xml",
-           #"dist/bundles/#{JSP_BUNDLE}/src/kendo-taglib/pom.xml"
+           "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml",
+           "dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml"
        ]
 
 BUNDLES = [
@@ -281,7 +279,7 @@ BUNDLES = [
     'mobile.commercial',
     'dataviz.commercial',
     'aspnetmvc.commercial',
-    'jsp.beta',
+    'jsp.commercial',
     'aspnetmvc.hotfix.commercial',
     'trial.hotfix',
     'winjs.commercial',
