@@ -53,6 +53,11 @@ class TreeViewItem extends \Kendo\SerializableObject {
 
         return $element;
     }
+
+    public function __set($name, $value) {
+        $this->setProperty($name, $value);
+    }
+
 //>> Properties
 
     /**
