@@ -58,8 +58,8 @@
                     ok(!sparkline.options.axisDefaults.visible);
                 });
 
-                test("chartArea has no margin", function() {
-                    equals(sparkline.options.chartArea.margin, 0);
+                test("chartArea has 1px margin", function() {
+                    equals(sparkline.options.chartArea.margin, 1);
                 });
 
                 test("transitions are disabled", function() {
