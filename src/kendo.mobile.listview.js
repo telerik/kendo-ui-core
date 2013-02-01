@@ -701,9 +701,7 @@ kendo_module({
         _filterable: function() {
             var that = this,
                 filterable = that.options.filterable,
-                events = "change paste",
-                searchProxy = proxy(that._search, that),
-                input;
+                events = "change paste";
 
             if (filterable) {
 
@@ -720,35 +718,45 @@ kendo_module({
                         e.preventDefault();
                     })
                     .end()
-                    .on(events, searchProxy);
+                    .on("focus", function() {
+                        that._oldFilter = that.searchInput.val();
+                    })
+                    .on(events, proxy(that._filterChange, that));
 
                 that.clearButton = that.wrapper.find(".km-filter-reset")
-                    .on("click", proxy(that._clearFilter, that))
+                    .on(CLICK, proxy(that._clearFilter, that))
                     .hide();
             }
         },
 
-        _search: function() {
+        _search: function(expr) {
+            this._filter = true;
+            this.clearButton[expr ? "show" : "hide"]();
+            this.dataSource.filter(expr);
+        },
+
+        _filterChange: function() {
             var that = this,
                 filterable = that.options.filterable,
                 value = that.searchInput.val(),
-                expr = {
+                expr = value.length ? {
                     field: filterable.field,
                     operator: filterable.operator || "startsWith",
                     ignoreCase: filterable.ignoreCase,
                     value: value
-                };
+                } : null;
 
-            that.clearButton[value.length ? "show" : "hide"]();
-            that._filter = true;
-            that.dataSource.filter(expr);
+            if (value === that._oldFilter) {
+                return;
+            }
+
+            that._oldFilter = value;
+            that._search(expr);
         },
 
         _clearFilter: function(e) {
-            this._filter = true;
             this.searchInput.val("");
-            this.clearButton.hide();
-            this.dataSource.filter(null);
+            this._search(null);
 
             e.preventDefault();
         }

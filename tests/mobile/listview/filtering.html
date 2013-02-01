@@ -92,7 +92,7 @@
 
                 var filter = stub(listview.dataSource, "filter");
 
-                input.trigger({ type: "keyup" });
+                input.val("foo").trigger({ type: "keyup" });
 
                 equal(filter.calls("filter"), 1);
                 ok(filter.args("filter", 0)[0]);
@@ -104,10 +104,35 @@
 
                 var filter = stub(listview.dataSource, "filter");
 
-                input.trigger({ type: "change" });
+                input.val("foo").trigger({ type: "change" });
 
                 equal(filter.calls("filter"), 1);
                 ok(filter.args("filter", 0)[0]);
+            });
+
+            test("does not filter if value is the same", function() {
+                var listview = setup(),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.val("foo").trigger({ type: "keyup" }).trigger({ type: "keyup" });
+
+                equal(filter.calls("filter"), 1);
+                ok(filter.args("filter", 0)[0]);
+            });
+
+            test("clear the text resets the filter", function() {
+                var listview = setup(),
+                    input = listview.wrapper.find("input");
+
+                var filter = stub(listview.dataSource, "filter");
+
+                input.val("foo").trigger({ type: "keyup" });
+                input.val("").trigger({ type: "keyup" });
+
+                equal(filter.calls("filter"), 2);
+                equal(filter.args("filter", 1)[0], null);
             });
 
             test("dataSource is filtered on paste", function() {
