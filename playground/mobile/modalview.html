@@ -7,6 +7,7 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -22,6 +23,7 @@
         <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.mobile.shim.js"></script>
         <script src="../../src/kendo.mobile.modalview.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
 
         <script>
             function hideModal() {
@@ -32,21 +34,23 @@
                     new kendo.mobile.Application();
             });
         </script>
-        <style>
-            #myModal {
-                overflow: hidden;
-                background: white;
-                position: relative;
-            }
-        </style>
     </head>
     <body>
         <div data-role="view">
             <div data-role="header">Header</div>
-
+            <ul data-role="listview">
+                <li>Foo</li>
+                <li>Foo</li>
+            </ul>
             <a data-role="button" href="#myModal" data-rel="modalview">Show Modal</a>
+<ul data-role="listview">
+                    <li>Foo</li>
+                    <li>Foo</li>
+                    <li>Foo <input data-role="switch" type="checkbox" /></li>
+                </ul>
+        </div>
 
-            <div data-role="modalview" id="myModal">
+            <div data-role="modalview" id="myModal" style="height: auto">
                 <div data-role="header">
                     <div data-role="navbar">
                         <a data-align="right" data-role="button" data-click="hideModal">Close</a>
@@ -56,27 +60,7 @@
                 <ul data-role="listview">
                     <li>Foo</li>
                     <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
-                    <li>Foo</li>
+                    <li>Foo <input data-role="switch" type="checkbox" /></li>
                 </ul>
 
                 <div data-role="footer">
@@ -85,7 +69,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         <script>
         </script>
