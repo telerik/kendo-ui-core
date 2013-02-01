@@ -60,6 +60,7 @@ kendo_module({
                                 .on("blur" + ns, function() {
                                     that.input.val("");
                                     that._placeholder();
+                                    that.close();
                                     if (that._state === "filter") {
                                         that._state = "accept";
                                     }

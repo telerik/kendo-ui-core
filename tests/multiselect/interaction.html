@@ -24,7 +24,7 @@
             var MultiSelect = kendo.ui.MultiSelect,
                 select;
 
-            function popuplateSelect() {
+            function populateSelect() {
                 var options = [];
                 for (var i=0; i < 5; i++) {
                     options.push("<option value='" + i + "'>Option" + i + "</option>");
@@ -47,7 +47,7 @@
             });
 
             test("MultiSelect opens popup on input click", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.input.click();
@@ -56,7 +56,7 @@
             });
 
             test("MultiSelect focuses input on click", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.wrapper.click();
@@ -65,7 +65,7 @@
             });
 
             test("MultiSelect opens popup on tag click", function() {
-                popuplateSelect();
+                populateSelect();
                 select.val("0");
 
                 var multiselect = new MultiSelect(select);
@@ -76,7 +76,7 @@
             });
 
             test("MultiSelect do not open on tag delete", function() {
-                popuplateSelect();
+                populateSelect();
                 select.val("0");
 
                 var multiselect = new MultiSelect(select);
@@ -87,7 +87,7 @@
             });
 
             test("MultiSelect selects item on click", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
 
@@ -97,7 +97,7 @@
             });
 
             test("MultiSelect hides selected item", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
 
@@ -109,7 +109,7 @@
             });
 
             test("MultiSelect hides popup on click", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
 
@@ -121,7 +121,7 @@
             });
 
             test("MultiSelect deletes tag on delete button click", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
@@ -136,7 +136,7 @@
             });
 
             test("MultiSelect shows clicked item on delete", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
@@ -164,7 +164,7 @@
             });
 
             test("MultiSelect selects corresponding option", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
@@ -174,7 +174,7 @@
             });
 
             test("MultiSelect unselects option", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
                 multiselect.input.click();
@@ -186,7 +186,7 @@
             });
 
             test("MultiSelect persists selected data items", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
 
@@ -198,7 +198,7 @@
             });
 
             test("MultiSelect removes corresponding data item", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
 
@@ -215,7 +215,7 @@
             });
 
             test("MultiSelect clears input on selection", function() {
-                popuplateSelect();
+                populateSelect();
 
                 var multiselect = new MultiSelect(select);
 
@@ -236,7 +236,7 @@
             });
 
             test("MultiSelect shows all available items if input is clear", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.input.focus().val("nothing");
@@ -250,7 +250,7 @@
             });
 
             test("MultiSelect focuses input on click", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.wrapper.click();
@@ -259,7 +259,7 @@
             });
 
             test("MultiSelect focuses input on click", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.input.click();
@@ -273,7 +273,7 @@
             });
 
             test("MultiSelect selects all selected options after filtering", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.input.click();
@@ -294,7 +294,7 @@
             });
 
             test("MultiSelect highlights first item on refresh", function() {
-                popuplateSelect();
+                populateSelect();
                 var multiselect = new MultiSelect(select);
 
                 multiselect.open();
@@ -315,6 +315,17 @@
                 multiselect.tagList.children().first().find(".k-delete").click();
 
                 ok(!select[0].children[2].selected);
+            });
+
+            test("MultiSelect closes popup on blur", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.focus();
+                multiselect.open();
+                multiselect.input.blur();
+
+                ok(!multiselect.popup.visible());
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
