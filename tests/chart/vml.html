@@ -560,6 +560,11 @@
                     ok(path.render().indexOf("coordsize='1 1'") > -1);
                 });
 
+                test("sets display", function() {
+                    createPath({ visible: false });
+                    ok(path.render().indexOf("display:none;") > -1);
+                });
+
                 test("creates stroke", function() {
                     ok(path.stroke instanceof dataviz.VMLStroke);
                 });
@@ -650,6 +655,11 @@
                     ok(path.render().indexOf("opacity='0.5'") > -1);
                 });
 
+                test("refresh updates path display", function() {
+                    path.options.visible = true;
+                    path.refresh(domElement);
+                    equals(domElement.css("display"), "block");
+                });
             })();
 
             (function() {

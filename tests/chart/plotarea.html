@@ -2920,7 +2920,7 @@
                     });
 
                     $("#" + plotArea.options.id).trigger({
-                        type: "click", clientX: 300, clientY: 300
+                        type: "click", clientX: 300, clientY: 400
                     });
                 });
 
@@ -2937,7 +2937,7 @@
 
                 test("event arguments contain category", 1, function() {
                     createBarChart({
-                        plotAreaClick: function(e) { equals(e.category, "B"); }
+                        plotAreaClick: function(e) { equals(e.category, "A"); }
                     });
 
                     $("#" + plotArea.options.id).trigger({
@@ -2954,7 +2954,7 @@
                     });
 
                     $("#" + plotArea.options.id).trigger({
-                        type: "click", clientX: 300, clientY: 300
+                        type: "click", clientX: 300, clientY: 400
                     });
                 });
 
@@ -2965,7 +2965,7 @@
                         }, {
                             categories: ["a", "b"]
                         }],
-                        plotAreaClick: function(e) { same(e.category, ["B", "b"]); }
+                        plotAreaClick: function(e) { same(e.category, ["A", "a"]); }
                     });
 
                     $("#" + plotArea.options.id).trigger({
@@ -2983,7 +2983,7 @@
                         valueAxis: {
                             axisCrossingValue: [0, 100]
                         },
-                        plotAreaClick: function(e) { same(e.category, ["B", "b"]); }
+                        plotAreaClick: function(e) { same(e.category, ["A", "a"]); }
                     });
 
                     $("#" + plotArea.options.id).trigger({
@@ -3993,6 +3993,40 @@
                         type: "click", clientX: 200, clientY: 500
                     });
                 });
+
+            })();
+
+
+            (function() {
+                var chart,
+                    bar,
+                    barElement,
+                    plotArea;
+
+                var TOLERANCE = 5;
+
+                function createColumnChart(options) {
+                    chart = createChart($.extend({
+                        seriesDefaults: {
+                            type: "bar"
+                        },
+                        series: [{
+                            data: [1, 2]
+                        },{
+                            data: [1, 2]
+                        },{
+                            data: [1, 2]
+                        },{
+                            data: [1]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    bar = plotArea.charts[0].points[0];
+                }
 
             })();
         </script>

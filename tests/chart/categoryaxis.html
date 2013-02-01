@@ -1056,11 +1056,11 @@
                 });
 
                 test("returns first category for bottommost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Foo");
+                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Baz");
                 });
 
                 test("returns last category for topmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
                 });
 
                 test("returns category for middle point", function() {
@@ -1104,11 +1104,11 @@
                 });
 
                 test("returns first category for topmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
                 });
 
                 test("returns last category for bottommost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Baz");
+                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Foo");
                 });
 
                 test("returns category for middle point", function() {

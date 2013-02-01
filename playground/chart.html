@@ -12,14 +12,81 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart"></div>
+        <div id="chart" style="width: 700px; float: left;"></div>
+        <div id="scatterchart" style="width: 700px; float: left;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
+                    theme: "blueopal",
                     series: [{
-                        type: "area",
-                        data: [1,2]
-                    }]
+                        name: "u",
+                        data: [ 1,null,3 ]
+                    }],
+                    tooltip: {
+                        visible: true,
+                        shared: true,
+                        format: "c"
+                    },
+                    categoryAxis: {
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
+                        },
+                        baseUnit: "days",
+                        categories: [
+                            new Date("2011/12/31"),
+                            new Date("2012/01/01"),
+                            new Date("2012/01/02"),
+                            new Date("2012/01/03"),
+                            new Date("2012/01/04"),
+                            new Date("2012/01/05"),
+                            new Date("2012/01/06"),
+                            new Date("2012/01/07"),
+                            new Date("2012/01/08"),
+                            new Date("2012/01/09"),
+                            new Date("2012/01/10")
+                        ],
+                        type: "date"
+                    },
+                    valueAxis: {
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
+                        }
+                    }
+                });
+
+                $("#scatterchart").kendoChart({
+                    theme: "blueopal",
+                    series: [{
+                        type: "scatter",
+                        data: [ [1,2], [2,3], [3,4] ]
+                    }],
+                    tooltip: {
+                        visible: true
+                    },
+                    xAxis: {
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true,
+                                position: "center"
+                            }
+                        }
+                    },
+                    yAxis: {
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true,
+                                position: "left"
+                            }
+                        }
+                    }
                 });
             });
         </script>

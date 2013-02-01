@@ -599,6 +599,11 @@
                     ok(path.render().indexOf("fill='#f00'") > -1);
                 });
 
+                test("renders display", function() {
+                    path.options.visible = false;
+                    ok(path.render().indexOf("display: none") > -1);
+                });
+
                 test("renders empty fill when no fill is set", function() {
                     path.options.fill = "";
                     ok(path.render().indexOf("fill='none") > -1);
@@ -709,6 +714,13 @@
                     path.options.strokeOpacity = 0.4;
                     path.refresh(domElement);
                     equals(domElement.attr("stroke-opacity"), "0.4");
+                });
+
+                test("refresh updates display style property", function() {
+                    var domElement = $("<div />");
+                    path.options.visible = false;
+                    path.refresh(domElement);
+                    equals(domElement.css("display"), "none");
                 });
 
             })();

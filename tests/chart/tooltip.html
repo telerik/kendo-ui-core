@@ -33,8 +33,7 @@
                 }
 
                 function showNow(point) {
-                    tooltip.point = point;
-                    tooltip._show();
+                    tooltip.show(point);
                 }
 
                 function createPoint(options) {
@@ -122,7 +121,6 @@
                 });
 
                 asyncTest("show displays tooltip for last point with a delay", function() {
-                    tooltip.show({ /* Fake */ });
                     tooltip.show(dataPointMock);
 
                     setTimeout(function() {
@@ -203,11 +201,11 @@
                 });
 
                 test("positions tooltip on anchor", function() {
-                    dataPointMock.tooltipAnchor = function() { return new dataviz.Point2D(10, 20) };
+                    tooltip.anchor = new dataviz.Point2D(10, 20);
                     tooltip.options.animation.duration = 0;
                     tooltip.options.offsetX = 0;
                     tooltip.options.offsetY = 0;
-                    showNow(dataPointMock);
+                    tooltip.move();
 
                     same([parseInt(tooltip.element.css("left"), 10),
                           parseInt(tooltip.element.css("top"), 10)],
@@ -223,9 +221,9 @@
                     createTooltip();
                     createPoint();
 
-                    dataPointMock.tooltipAnchor = function() { return new dataviz.Point2D(10, 20) };
+                    tooltip.anchor = new dataviz.Point2D(10, 20);
                     tooltip.options.animation.duration = 0;
-                    showNow(dataPointMock);
+                    tooltip.move();
 
                     same([parseInt(tooltip.element.css("left"), 10),
                           parseInt(tooltip.element.css("top"), 10)],
@@ -267,8 +265,7 @@
                 }
 
                 function showNow(point) {
-                    tooltip.point = point;
-                    tooltip._show();
+                    tooltip.show(point);
                 }
 
                 function createSeriesPoint(options) {
@@ -333,6 +330,45 @@
                 });
 
             })();
+
+            (function() {
+                var tooltip;
+
+                function createTooltip(options) {
+                    tooltip = new dataviz.MultiplePointTooltip($("#chart"), options);
+                    tooltip.plotArea = {
+                        charts: [{
+                            categoryPoints:[ [{
+                                value: 1
+                            }], [{
+                                //empty point
+                            }] ]
+                        },{
+                            categoryPoints:[ [{
+                                value: 2
+                            }],[{
+                                value: 3
+                            }] ]
+                        }
+                    ]};
+                }
+
+                // ------------------------------------------------------------
+                module("MultiplePointTooltip / pointsByCategoryIndex", {
+                    setup: function() {
+                        createTooltip();
+                    }
+                });
+
+                test("return points", function() {
+                    equals(tooltip.pointsByCategoryIndex(0).length, 2);
+                });
+
+                test("return all points with some value", function() {
+                    equals(tooltip.pointsByCategoryIndex(1).length, 1);
+                });
+            })();
+
 
         </script>
 

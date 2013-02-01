@@ -322,6 +322,7 @@ kendo_module({
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
                     "<path #= d.renderAttr(\"id\", d.options.id) #" +
+                    "style='display: #= d.renderDisplay() #' " +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
@@ -341,7 +342,8 @@ kendo_module({
             fillOpacity: 1,
             strokeOpacity: 1,
             rotation: [0,0,0],
-            strokeLineCap: SQUARE
+            strokeLineCap: SQUARE,
+            visible: true
         },
 
         refresh: function(domElement) {
@@ -351,12 +353,11 @@ kendo_module({
                 "d": this.renderPoints(),
                 "fill-opacity": options.fillOpacity,
                 "stroke-opacity": options.strokeOpacity
-            });
+            }).css("display", this.renderDisplay());
         },
 
         clone: function() {
-            var path = this;
-            return new SVGPath(deepExtend({}, path.options));
+            return new SVGPath(deepExtend({}, this.options));
         },
 
         renderPoints: function() {
@@ -386,6 +387,10 @@ kendo_module({
             }
 
             return NONE;
+        },
+
+        renderDisplay: function() {
+            return this.options.visible ? "block" : "none";
         },
 
         destroy: function() {

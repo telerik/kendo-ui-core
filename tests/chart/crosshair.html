@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                TOLERANCE = 1;
+
+            (function() {
+                var crosshair, element, axis,
+                    plotArea, view,l;
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    options: { },
+                    backgroundBox: function () {
+                        return Box2D(0,0,200,200);
+                    }
+                });
+
+                function createAxis(options) {
+                    axis = { options: $.extend({}, { vertical: true }, options) };
+                }
+
+                function createCrosshair(options, axisOptions) {
+                    view = new ViewStub();
+                    createAxis(axisOptions);
+                    axis.plotArea = new PlotAreaStub();
+                    crosshair = new dataviz.Crosshair(axis, options);
+                    crosshair.getViewElements(view);
+                    element = crosshair.element;
+                }
+
+                // ------------------------------------------------------------
+                module("Crosshair / Configuration", {
+                    setup: function() {
+                        createCrosshair();
+                    }
+                });
+
+                test("sets width", function() {
+                    createCrosshair({ width: 2 });
+                    equals(element.options.strokeWidth, 2);
+                });
+
+                test("sets opacity", function() {
+                    createCrosshair({ opacity: 0.5 });
+                    equals(element.options.strokeOpacity, 0.5);
+                });
+
+                test("sets color", function() {
+                    createCrosshair({ color: "color" });
+                    equals(element.options.stroke, "color");
+                });
+
+                test("sets dashType", function() {
+                    createCrosshair({ dashType: "dashType" });
+                    equals(element.options.dashType, "dashType");
+                });
+
+                // ------------------------------------------------------------
+                module("Crosshair / LinePoints", {
+                    setup: function() {
+                        createCrosshair();
+                    }
+                });
+
+                test("returns vertical points", function() {
+                    createCrosshair();
+                    points = crosshair.linePoints();
+                    same([points[0].x, points[0].y], [0,0]);
+                    same([points[1].x, points[1].y], [200,0]);
+                });
+
+                test("returns horizontal points", function() {
+                createCrosshair({}, { vertical: false });
+                    points = crosshair.linePoints();
+                    same([points[0].x, points[0].y], [0,0]);
+                    same([points[1].x, points[1].y], [0,200]);
+                });
+
+            })();
+
+        </script>
+
+        <div id="chart"></div>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
+
