@@ -98,9 +98,9 @@ kendo_module({
             $(function(){
                 that.element = $(element ? element : document.body);
                 that._setupPlatform();
+                that._setupElementClass();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(that.element, that.options);
-                that._setupElementClass();
                 that._attachMeta();
 
                 if (that.options.updateDocumentTitle) {
@@ -155,7 +155,7 @@ kendo_module({
             that.os = os;
 
             that.osCssClass = osCssClass(that.os);
-            
+
             if (os.name == "wp") {
                 that._setupWP8Theme();
             }
@@ -165,7 +165,7 @@ kendo_module({
 
             var element = $(this.element),
                 div, bgColor;
-            
+
             div = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
             bgColor = parseInt(div.css("background-color").split(",")[1], 10);
             if (bgColor === 0) {
