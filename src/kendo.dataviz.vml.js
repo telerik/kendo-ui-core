@@ -138,20 +138,24 @@ kendo_module({
 
         createRect: function(box, style) {
             return this.decorate(
-                new VMLLine(box.points(), true, style)
+                new VMLLine(
+                    box.points(), true, this.setDefaults(style)
+                )
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
-                new VMLLine([new Point2D(x1, y1),
-                    new Point2D(x2, y2)], false, options)
+                new VMLLine(
+                    [new Point2D(x1, y1), new Point2D(x2, y2)],
+                    false, this.setDefaults(options)
+                )
             );
         },
 
         createPolyline: function(points, closed, options) {
             return this.decorate(
-                new VMLLine(points, closed, options)
+                new VMLLine(points, closed, this.setDefaults(options))
             );
         },
 
@@ -169,16 +173,13 @@ kendo_module({
 
         createRing: function(ring, options) {
             return this.decorate(
-                new VMLRing(ring, options)
+                new VMLRing(ring, this.setDefaults(options))
             );
         },
 
         createGroup: function(options) {
-            options = options || {};
-            options.inline = this.options.inline;
-
             return this.decorate(
-                new VMLGroup(options)
+                new VMLGroup(this.setDefaults(options))
             );
         },
 

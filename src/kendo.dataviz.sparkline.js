@@ -39,7 +39,7 @@ kendo_module({
         options: {
             name: "Sparkline",
             chartArea: {
-                margin: 0
+                margin: 1
             },
             axisDefaults: {
                 visible: false,
@@ -62,6 +62,7 @@ kendo_module({
                 element = chart.element;
 
             options.inline = true;
+            options.align = false;
 
             // TODO: Container width or computed
             options.width = 80;

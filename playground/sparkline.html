@@ -17,21 +17,30 @@
         </style>
     </head>
     <body>
-        <p>Some sparklines <span id="sparkline"></span> and more text</p>
+        <p>Some sparklines <span id="sparkline"></span> and more text<br/>
+        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
         <script>
             var points = [];
-            for (var i = 0; i < 20; i++) {
-                points.push(i + 2 * (i % 2 === 0 ? -i : i));
+            for (var i = 0; i < 5; i++) {
+                points.push(Math.round(Math.exp(i)));
             };
 
             $(function() {
                 $("#sparkline").kendoSparkline({
                     series: [{
-                        type: "line",
+                        type: "area",
+                        line: {
+                            width: 0.5
+                        },
                         data: points,
                         width: 1,
                         markers: {
-                            visible: false
+                            border: {
+                                width: 0
+                            },
+                            background: "red",
+                            size: 2,
+                            visible: true
                         }
                     }],
                     axisDefaults: {

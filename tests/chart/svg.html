@@ -104,6 +104,18 @@
                     );
                 });
 
+                test("createRect sets align default", function() {
+                    view = new dataviz.SVGView({ align: false });
+                    var rect = view.createRect(new Box2D(10, 20, 110, 220));
+                    ok(rect.options.align === false);
+                });
+
+                test("createRect overrides align default", function() {
+                    view = new dataviz.SVGView({ align: false });
+                    var rect = view.createRect(new Box2D(10, 20, 110, 220), { align: true });
+                    ok(rect.options.align === true);
+                });
+
                 test("createRect sets fill color", function() {
                     var rect = view.createRect(
                         new Box2D(10, 20, 110, 220), { fill: "#f00" });
@@ -118,6 +130,18 @@
                 test("createLine draws a line", function() {
                     var line = view.createLine(10, 20, 100, 200);
                     deepEqual(mapPoints(line.points), [ [10, 20], [100, 200] ]);
+                });
+
+                test("createLine sets align default", function() {
+                    view = new dataviz.SVGView({ align: false });
+                    var line = view.createLine(10, 20, 100, 200);
+                    ok(line.options.align === false);
+                });
+
+                test("createLine overrides align default", function() {
+                    view = new dataviz.SVGView({ align: false });
+                    var line = view.createLine(10, 20, 100, 200, { align: true });
+                    ok(line.options.align === true);
                 });
 
                 test("createPolyline returns SVGLine", function() {
@@ -152,6 +176,18 @@
                     var path = view.createPolyline([], false, { dashType: "dot" });
 
                     equals(path.options.dashType, "dot");
+                });
+
+                test("createPolyline sets align default", function() {
+                    view = new dataviz.SVGView({ align: false });
+                    var path = view.createPolyline([], false, { dashType: "dot" });
+                    ok(path.options.align === false);
+                });
+
+                test("createPolyline overrides align default", function() {
+                    view = new dataviz.SVGView({ align: false });
+                    var path = view.createPolyline([], false, { dashType: "dot" , align: true });
+                    ok(path.options.align === true);
                 });
 
                 test("createCircle returns SVGCircle", function() {

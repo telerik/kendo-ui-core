@@ -365,7 +365,6 @@ kendo_module({
         _getModel: function() {
             var chart = this,
                 options = chart.options,
-                element = chart.element,
                 model = new RootElement(chart._modelOptions()),
                 plotArea;
 

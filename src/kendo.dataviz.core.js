@@ -1839,6 +1839,22 @@ kendo_module({
             }
 
             return overlay;
+        },
+
+        setDefaults: function(options) {
+            var viewOptions = this.options;
+
+            options = options || {};
+
+            if (!defined(options.inline)) {
+                options.inline = viewOptions.inline;
+            }
+
+            if (!defined(options.align)) {
+                options.align = viewOptions.align;
+            }
+
+            return options;
         }
     });
 

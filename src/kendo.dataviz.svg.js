@@ -167,20 +167,20 @@ kendo_module({
 
         createRect: function(box, style) {
             return this.decorate(
-                new SVGLine(box.points(), true, style)
+                new SVGLine(box.points(), true, this.setDefaults(style))
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
                 new SVGLine([new Point2D(x1, y1),
-                             new Point2D(x2, y2)], false, options)
+                             new Point2D(x2, y2)], false, this.setDefaults(options))
             );
         },
 
         createPolyline: function(points, closed, options) {
             return this.decorate(
-                new SVGLine(points, closed, options)
+                new SVGLine(points, closed, this.setDefaults(options))
             );
         },
 
