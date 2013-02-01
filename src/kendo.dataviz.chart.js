@@ -5243,6 +5243,7 @@ kendo_module({
                     axis = pane.axes[j];
                     if (axis.options.crosshair && axis.options.crosshair.visible) {
                         currentCrosshair = new Crosshair(axis, axis.options.crosshair);
+
                         plotArea.crosshairs.push(currentCrosshair);
                         pane.content.append(currentCrosshair);
                     }
@@ -7069,7 +7070,10 @@ kendo_module({
         options: {
             color: BLACK,
             width: 1,
-            zIndex: -1
+            zIndex: -1,
+            tooltip: {
+                visible: true
+            }
         },
 
         repaint: function() {
@@ -7149,7 +7153,7 @@ kendo_module({
                 id: options.id,
                 stroke: options.color,
                 strokeWidth: options.width,
-                fill: "",
+                strokeOpacity: options.opacity,
                 dashType: options.dashType,
                 zIndex: options.zIndex,
                 visible: crosshair._visible
@@ -7181,7 +7185,7 @@ kendo_module({
 
             tooltip.template = CrosshairTooltip.template;
             if (!tooltip.template) {
-                tooltip.template = Tooltip.template = renderTemplate(
+                tooltip.template = CrosshairTooltip.template = renderTemplate(
                     "<div class='" + CSS_PREFIX + "tooltip' " +
                     "style='display:none; position: absolute; font: #= d.font #;" +
                     "border: #= d.border.width #px solid;" +
@@ -7212,7 +7216,7 @@ kendo_module({
 
             tooltip.point = point;
             tooltip.element.html(tooltip.content(point));
-            tooltip.anchor = tooltip.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            tooltip.anchor = tooltip.getAnchor(element.outerWidth(), element.outerHeight());
 
             tooltip.move();
         },
@@ -7266,7 +7270,7 @@ kendo_module({
             return content;
         },
 
-        tooltipAnchor: function(width, height) {
+        getAnchor: function(width, height) {
             var tooltip = this,
                 options = tooltip.options,
                 position = options.position,
@@ -8316,6 +8320,8 @@ kendo_module({
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
+        Crosshair: Crosshair,
+        CrosshairTooltip: CrosshairTooltip,
         DateCategoryAxis: DateCategoryAxis,
         DateValueAxis: DateValueAxis,
         DonutChart: DonutChart,
