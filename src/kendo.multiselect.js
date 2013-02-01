@@ -55,7 +55,7 @@ kendo_module({
             that._focused = that.input
                                 .on("keydown" + ns, proxy(that._keydown, that))
                                 .on("paste" + ns, proxy(that._search, that))
-                                .on("focus" + ns, function() {
+                                .on("focus" + ns, function(e) {
                                     that._placeholder(false);
                                 })
                                 .on("blur" + ns, function() {
@@ -87,7 +87,10 @@ kendo_module({
                 input = that.input;
 
             if (show === undefined) {
-                show = !that._dataItems[0];
+                show = false;
+                if (input[0] !== document.activeElement) {
+                    show = !that._dataItems[0];
+                }
             }
 
             input.toggleClass("k-readonly", show)

@@ -80,16 +80,16 @@
                 ok(!multiselect.input.hasClass("k-readonly"));
             });
 
-            test("MultiSelect shows placeholder if items are deleted", function() {
+            test("MultiSelect does not show placeholder if items are deleted", function() {
                 var multiselect = new MultiSelect(select.val("0").data("placeholder", "Select..."));
 
-                multiselect.input.trigger({
+                multiselect.input.focus().trigger({
                     type: "keydown",
                     keyCode: kendo.keys.BACKSPACE
                 });
 
-                equal(multiselect.input.val(), "Select...");
-                ok(multiselect.input.hasClass("k-readonly"));
+                equal(multiselect.input.val(), "");
+                ok(!multiselect.input.hasClass("k-readonly"));
             });
 
             test("MultiSelect hides placeholder on focus", function() {
