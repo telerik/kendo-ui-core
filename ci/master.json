@@ -15,5 +15,6 @@
     "recipe[mono-fcgi]",
     "recipe[nginx]",
     "recipe[monit]",
-    "recipe[screenshot]"
+    "recipe[screenshot]",
+    "recipe[tomcat]"
 ]}
