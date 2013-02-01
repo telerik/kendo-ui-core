@@ -11,7 +11,7 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"];
+        CAPTURE_EVENTS = $.map(kendo.eventMap, function(value) { return value }).join(" ").split(" ");
 
     var Loader = Widget.extend({
         init: function(container, options) {
