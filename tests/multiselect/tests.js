@@ -22,5 +22,9 @@ tests.push(
     {
         page: "multiselect/events.html",
         title: "multiselect Events"
+    },
+    {
+        page: "multiselect/placeholder.html",
+        title: "multiselect Placeholder"
     }
 );

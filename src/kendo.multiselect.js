@@ -40,7 +40,6 @@ kendo_module({
             that.ns = ns;
             List.fn.init.call(that, element, options);
 
-
             that._wrapper();
             that._tagList();
             that._input();
@@ -49,10 +48,19 @@ kendo_module({
 
             that.element.attr("multiple", "multiple").hide();
 
+            options = that.options;
+            if (!options.placeholder) {
+                options.placeholder = that.element.data("placeholder");
+            }
+
             that._focused = that.input
                                 .on("keydown" + ns, proxy(that._keydown, that))
+                                .on("focus" + ns, function() {
+                                    that._placeholder(false);
+                                })
                                 .on("blur" + ns, function() {
                                     that.input.val("");
+                                    that._placeholder();
                                     if (that._state === "filter") {
                                         that._state = "accept";
                                     }
@@ -62,13 +70,27 @@ kendo_module({
             that._accessors();
             that._popup();
 
-            that._old = that._initialValues = that.options.value || that.element.val();
             that._dataItems = [];
-            that._enable();
+            that._old = that._initialValues = options.value || that.element.val();
 
-            if (that.options.autoBind) {
+            that._enable();
+            that._placeholder();
+
+            if (options.autoBind) {
                 that.dataSource.fetch();
             }
+        },
+
+        _placeholder: function(show) {
+            var that = this,
+                input = that.input;
+
+            if (show === undefined) {
+                show = !that._dataItems[0];
+            }
+
+            input.toggleClass("k-readonly", show)
+                 .val(show ? that.options.placeholder : "");
         },
 
         options: {
@@ -578,18 +600,7 @@ kendo_module({
         },
 
         _tagList: function() {
-            var that = this;
-
-            that.tagList = $('<ul unselectable="on" class="k-list k-reset"/>')
-                                .appendTo(that._innerWrapper);
-        },
-
-        _removeTag: function(tag) {
-            var that = this,
-                index = tag.index();
-
-            tag.remove();
-            return that._dataItems.splice(index, 1);
+            this.tagList = $('<ul unselectable="on" class="k-list k-reset"/>').appendTo(this._innerWrapper);
         },
 
         value: function(value) {
@@ -607,20 +618,18 @@ kendo_module({
                 that._unselect(tags.eq(idx));
             }
 
-            if (value === null) {
-                return;
-            }
+            if (value !== null) {
+                value = $.isArray(value) ? value : [value];
 
-            value = $.isArray(value) ? value : [value];
-
-            for (idx = 0, length = value.length; idx < length; idx++) {
-                dataItemIndex = that._index(value[idx]);
-                if (dataItemIndex > -1) {
-                    that._select(dataItemIndex);
+                for (idx = 0, length = value.length; idx < length; idx++) {
+                    dataItemIndex = that._index(value[idx]);
+                    if (dataItemIndex > -1) {
+                        that._select(dataItemIndex);
+                    }
                 }
-            }
 
-            that._old = that.element.val(); //TODO: test this
+                that._old = that.element.val(); //TODO: test this
+            }
         },
 
         //can move it in List and remove it from here
@@ -666,7 +675,7 @@ kendo_module({
 
             that._visibleItems -= 1;
             that.currentTag(null);
-            that.input.val("");
+            that._placeholder();
 
             if (that._state === "filter") {
                 that._state = "accept";
@@ -707,6 +716,8 @@ kendo_module({
                     }
                 }
             }
+
+            that._placeholder();
         },
 
         _change: function() {

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MultiSelect placeholder</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">MultiSelect Placeholder</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var MultiSelect = kendo.ui.MultiSelect,
+                select;
+
+            function populateSelect() {
+                var options = [];
+                for (var i=0; i < 5; i++) {
+                    options.push("<option value='" + i + "'>Option" + i + "</option>");
+                }
+
+                select.html(options);
+            }
+
+            module("kendo.ui.MultiSelect Placeholder", {
+                setup: function() {
+                    select = $("<select multiple />").appendTo(document.body);
+                    populateSelect();
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            test("MultiSelect gets placeholder from data-placeholder attr", function() {
+                var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+
+                equal(multiselect.options.placeholder, "Select...");
+            });
+
+            test("MultiSelect shows placeholder on init", function() {
+                var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+                equal(multiselect.input.val(), "Select...");
+                ok(multiselect.input.hasClass("k-readonly"));
+            });
+
+            test("MultiSelect hides placeholder if any value", function() {
+                var multiselect = new MultiSelect(select.val("0").data("placeholder", "Select..."));
+
+                equal(multiselect.input.val(), "");
+                ok(!multiselect.input.hasClass("k-readonly"));
+            });
+
+            test("MultiSelect hides placeholder if any item is selected", function() {
+                var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+
+                multiselect.ul.children().first().click();
+
+                equal(multiselect.input.val(), "");
+                ok(!multiselect.input.hasClass("k-readonly"));
+            });
+
+            test("MultiSelect shows placeholder if items are deleted", function() {
+                var multiselect = new MultiSelect(select.val("0").data("placeholder", "Select..."));
+
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.BACKSPACE
+                });
+
+                equal(multiselect.input.val(), "Select...");
+                ok(multiselect.input.hasClass("k-readonly"));
+            });
+
+            test("MultiSelect hides placeholder on focus", function() {
+                var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+
+                multiselect.input.focus();
+
+                equal(multiselect.input.val(), "");
+                ok(!multiselect.input.hasClass("k-readonly"));
+            });
+
+            test("MultiSelect shows placeholder on focus", function() {
+                var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
+
+                multiselect.input.blur();
+
+                equal(multiselect.input.val(), "Select...");
+                ok(multiselect.input.hasClass("k-readonly"));
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
