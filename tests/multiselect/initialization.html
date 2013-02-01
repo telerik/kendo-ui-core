@@ -35,7 +35,7 @@
 
             module("kendo.ui.MultiSelect Initialization", {
                 setup: function() {
-                    select = $("<select />").appendTo(document.body);
+                    select = $("<select multiple />").appendTo(document.body);
                 },
                 teardown: function() {
                     if (select.data("kendoMultiSelect")) {
@@ -264,6 +264,26 @@
                     start();
                 }, 200);
             });
+
+            asyncTest("form reset support", 2, function() {
+                popuplateSelect();
+
+                select[0].children[1].setAttribute("selected", "selected");
+                select[0].children[2].setAttribute("selected", "selected");
+
+                var form = $("<form/>").appendTo(document).append(select),
+                    multiselect = new MultiSelect(select);
+
+                multiselect.value(["3","4"]);
+                form[0].reset();
+
+                setTimeout(function() {
+                    ok(select[0].children[1].selected);
+                    ok(select[0].children[2].selected);
+                    start();
+                }, 150);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

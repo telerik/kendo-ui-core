@@ -232,6 +232,29 @@ kendo_module({
             that._blur();
         },
 
+        _index: function(value) {
+            var that = this,
+                idx,
+                length,
+                data = that._data(),
+                valueFromData;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                valueFromData = that._value(data[idx]);
+
+                if (valueFromData === undefined) {
+                    valueFromData = that._text(data[idx]);
+                }
+
+                if (valueFromData == value) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        },
+
+
         _height: function(length) {
             if (length) {
                 var that = this,
@@ -562,28 +585,6 @@ kendo_module({
                                    .bind(REQUESTEND, that._requestEndHandler);
         },
 
-        _index: function(value) {
-            var that = this,
-                idx,
-                length,
-                data = that._data(),
-                valueFromData;
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                valueFromData = that._value(data[idx]);
-
-                if (valueFromData === undefined) {
-                    valueFromData = that._text(data[idx]);
-                }
-
-                if (valueFromData == value) {
-                    return idx;
-                }
-            }
-
-            return -1;
-        },
-
         _get: function(li) {
             var that = this,
                 data = that._data(),
@@ -750,7 +751,7 @@ kendo_module({
             if (form[0]) {
                 that._resetHandler = function() {
                     setTimeout(function() {
-                        that.value(element[0].value);
+                        that.value(element.val());
                     });
                 };
 
