@@ -23,6 +23,8 @@ kendo_module({
         DATABOUND = "dataBound",
         PROGRESS = "progress",
         SELECT = "select",
+        NEXT = "nextSibling",
+        PREV = "previousSibling",
         HIDE = ' style="display:none"',
         FOCUSEDCLASS = "k-state-focused",
         DELETECLASSSELECTOR = ".k-delete",
@@ -116,6 +118,12 @@ kendo_module({
             SELECT,
             DATABOUND
         ],
+
+        current: function(candidate) {
+            this.currentTag(null);
+            return List.fn.current.call(this, candidate);
+
+        },
 
         currentTag: function(candidate) {
             var that = this;
@@ -398,45 +406,28 @@ kendo_module({
                 visible = that.popup.visible();
 
             if (key === keys.DOWN) {
+                e.preventDefault();
+
                 if (!visible) {
                     that.open();
                     return;
                 }
 
                 if (current) {
-                    current = sibling(current[0], "nextSibling");
+                    current = sibling(current[0], NEXT);
                     if (current) {
                         that.current($(current));
-                        that.currentTag(null);
                     }
                 }
-
-                e.preventDefault();
             } else if (key === keys.UP) {
                 if (visible && current) {
-                    that.current($(sibling(current[0], "previousSibling")));
-                    that.currentTag(null);
+                    that.current($(sibling(current[0], PREV)));
 
                     if (!that._current[0]) {
                         that.close();
                     }
                 }
                 e.preventDefault();
-            } else if (key === keys.ENTER) {
-                if (visible) {
-                    that._select(current);
-                    that._change();
-                    that.close();
-                }
-                e.preventDefault();
-            } else if (key === keys.ESC) {
-                if (visible) {
-                    e.preventDefault();
-                } else {
-                    that.currentTag(null);
-                }
-
-                that.close();
             } else if (key === keys.LEFT) {
                 if (!hasValue) {
                     tag = tag ? tag.prev() : $(that.tagList[0].lastChild);
@@ -449,10 +440,25 @@ kendo_module({
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
+            } else if (key === keys.ENTER) {
+                if (visible) {
+                    that._select(current);
+                    that._change();
+                    that.close();
+
+                    e.preventDefault();
+                }
+            } else if (key === keys.ESC) {
+                if (visible) {
+                    e.preventDefault();
+                } else {
+                    that.currentTag(null);
+                }
+
+                that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
                     that.current($(first(that.ul[0])));
-                    that.currentTag(null);
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
@@ -463,7 +469,6 @@ kendo_module({
             } else if (key === keys.END) {
                 if (visible) {
                     that.current($(last(that.ul[0])));
-                    that.currentTag(null);
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 
@@ -472,7 +477,7 @@ kendo_module({
                     }
                 }
             } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
-                if (!tag && key === keys.BACKSPACE) {
+                if (key === keys.BACKSPACE && !tag) {
                     tag = $(that.tagList[0].lastChild);
                 }
 
@@ -802,7 +807,7 @@ kendo_module({
         var item = ul.firstChild;
 
         if (item && item.style.display === "none") {
-            item = sibling(item, "nextSibling");
+            item = sibling(item, NEXT);
         }
 
         return item;
@@ -812,7 +817,7 @@ kendo_module({
         var item = ul.lastChild;
 
         if (item && item.style.display === "none") {
-            item = sibling(item, "previousSibling");
+            item = sibling(item, PREV);
         }
 
         return item;
