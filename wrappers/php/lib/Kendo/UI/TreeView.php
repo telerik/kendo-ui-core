@@ -9,13 +9,15 @@ class TreeView extends \Kendo\UI\Widget {
     }
 
     protected function createElement() {
-        $element = new \Kendo\Html\Element('ul');
         $items = $this->getProperty('items');
 
         if ($items) {
+            $element = new \Kendo\Html\Element('ul');
             foreach($items as $item) {
                 $element->append($item->createElement());
             }
+        } else {
+            $element = new \Kendo\Html\Element('div');
         }
 
         return $element;
@@ -54,10 +56,10 @@ the image URL of the treeview nodes.
 
     /**
     * Sets the data source of the TreeView.
-    * @param \Kendo\Data\HierarchyDataSource $value
+    * @param \Kendo\Data\HierarchicalDataSource $value
     * @return \Kendo\UI\TreeView
     */
-    public function dataSource(\Kendo\Data\HierarchyDataSource $value) {
+    public function dataSource(\Kendo\Data\HierarchicalDataSource $value) {
         return $this->setProperty('dataSource', $value);
     }
 

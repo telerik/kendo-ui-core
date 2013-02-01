@@ -102,10 +102,10 @@ DATA_SOURCE_SETTER = ERB.new(%{
 HIERARCHY_DATA_SOURCE_SETTER = ERB.new(%{
     /**
     * Sets the data source of the <%= owner.php_class %>.
-    * @param \\Kendo\\Data\\HierarchyDataSource $value
+    * @param \\Kendo\\Data\\HierarchicalDataSource $value
     * @return <%= owner.php_type %>
     */
-    public function dataSource(\\Kendo\\Data\\HierarchyDataSource $value) {
+    public function dataSource(\\Kendo\\Data\\HierarchicalDataSource $value) {
         return $this->setProperty('dataSource', $value);
     }
 })
