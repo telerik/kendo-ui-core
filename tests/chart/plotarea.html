@@ -3234,6 +3234,28 @@
                     );
                 });
 
+                test("sets primary X axis range (date values as strings)", function() {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            same(this.axisX.options.min, new Date("2012/01/31 00:00:00"));
+                            same(this.axisX.options.max, new Date("2012/02/03 00:00:00"));
+                        },
+                        function() {
+                            createPlotArea([{
+                                type: "scatter",
+                                data: [["2012/02/01 00:00:00", 0]]
+                            }, {
+                                type: "scatter",
+                                data: [["2012/02/02 00:00:00", 0]]
+                            }], {
+                                xAxis: { type: "date" }
+                            });
+                        }
+                    );
+                });
+
                 test("sets named primary Y axis range (impl./expl. series axis)", function() {
                     var fn = dataviz.XYPlotArea.fn;
                     stubMethod(fn, "createAxes",

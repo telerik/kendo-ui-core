@@ -3474,6 +3474,10 @@ kendo_module({
                 xAxisRange = chart.xAxisRanges[xAxisName] =
                     xAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
+                if (typeof(x) === STRING) {
+                    x = toDate(x);
+                }
+
                 xAxisRange.min = math.min(xAxisRange.min, x);
                 xAxisRange.max = math.max(xAxisRange.max, x);
             }
@@ -3481,6 +3485,10 @@ kendo_module({
             if (defined(y) && y !== null) {
                 yAxisRange = chart.yAxisRanges[yAxisName] =
                     yAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                if (typeof(y) === STRING) {
+                    y = toDate(y);
+                }
 
                 yAxisRange.min = math.min(yAxisRange.min, y);
                 yAxisRange.max = math.max(yAxisRange.max, y);
