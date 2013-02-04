@@ -6,6 +6,21 @@ class Splitter extends \Kendo\UI\Widget {
     protected function name() {
         return 'Splitter';
     }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('div');
+        $element->attr('class', 'k-splitter');
+
+        $panes = $this->getProperty('panes');
+
+        if (isset($panes)) {
+            foreach ($panes as $pane) {
+                $element->append($pane->createElement());
+            }
+        }
+
+        return $element;
+    }
 //>> Properties
 
     /**

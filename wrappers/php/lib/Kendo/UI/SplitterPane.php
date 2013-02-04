@@ -3,6 +3,42 @@
 namespace Kendo\UI;
 
 class SplitterPane extends \Kendo\SerializableObject {
+    protected $ignore = array('content');
+
+    private $attributes = array();
+
+    public function attr($key, $value) {
+        $this->attributes[$key] = $value;
+
+        return $this;
+    }
+
+    protected function addAttributes(\Kendo\Html\Element $element) {
+        foreach ($this->attributes as $key => $value) {
+            $element->attr($key, $value);
+        }
+    }
+
+    public function createElement() {
+        $element = new \Kendo\Html\Element('div');
+
+        $this->addAttributes($element);
+
+        $content = $this->getProperty('content');
+
+        if (gettype($content) == "string") {
+            $element->html($content);
+        }
+
+        return $element;
+    }
+
+    /**
+    * Specifies the HTML attributes that will be applied to the pane elemnent
+    * @param  $value
+    * @return \Kendo\UI\SplitterPane
+    */
+
 //>> Properties
 
     /**
@@ -33,8 +69,7 @@ class SplitterPane extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies the maximum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The
-size of a resized pane cannot exceed the defined maximum size.
+    * Specifies the maximum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The size of a resized pane cannot exceed the defined maximum size.
     * @param string $value
     * @return \Kendo\UI\SplitterPane
     */
@@ -43,8 +78,7 @@ size of a resized pane cannot exceed the defined maximum size.
     }
 
     /**
-    * Specifies the minimum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The
-size of a resized pane cannot be less than the defined minimum size.
+    * Specifies the minimum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The size of a resized pane cannot be less than the defined minimum size.
     * @param string $value
     * @return \Kendo\UI\SplitterPane
     */
@@ -71,8 +105,7 @@ size of a resized pane cannot be less than the defined minimum size.
     }
 
     /**
-    * Specifies the size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). Note: This
-value must not exceed panes.max or be less then panes.min.
+    * Specifies the size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). This value must not exceed panes.max or be less then panes.min.
     * @param string $value
     * @return \Kendo\UI\SplitterPane
     */
@@ -80,6 +113,27 @@ value must not exceed panes.max or be less then panes.min.
         return $this->setProperty('size', $value);
     }
 
+    /**
+    * Sets the HTML content of the SplitterPane.
+    * @param string $value
+    * @return \Kendo\UI\SplitterPanes    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the SplitterPane.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the SplitterPane.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
 //<< Properties
 }
 

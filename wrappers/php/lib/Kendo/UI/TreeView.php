@@ -14,7 +14,7 @@ class TreeView extends \Kendo\UI\Widget {
 
         if ($items) {
             $element = new \Kendo\Html\Element('ul');
-            foreach($items as $item) {
+            foreach ($items as $item) {
                 $element->append($item->createElement());
             }
         } else {
