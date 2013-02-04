@@ -26,6 +26,7 @@ kendo_module({
         NEXT = "nextSibling",
         PREV = "previousSibling",
         HIDE = ' style="display:none"',
+        ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
         HOVERCLASS = "k-state-hover",
         DISABLEDCLASS = "k-state-disabled",
@@ -46,7 +47,7 @@ kendo_module({
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, id;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -57,11 +58,11 @@ kendo_module({
             that._textContainer();
             that._loader();
 
-            that.element.attr("multiple", "multiple").hide();
-
             options = that.options;
+            element = that.element.attr("multiple", "multiple").hide();
+
             if (!options.placeholder) {
-                options.placeholder = that.element.data("placeholder");
+                options.placeholder = element.data("placeholder");
             }
 
             that._focused = that.input
@@ -77,12 +78,19 @@ kendo_module({
                                     }
                                 });
 
+            id = element.attr(ID);
+
+            if (id) {
+                that._tagID = id + "_tag_active";
+            }
+
+            that._aria();
             that._dataSource();
             that._accessors();
             that._popup();
 
             that._dataItems = [];
-            that._old = that._initialValues = options.value || that.element.val();
+            that._old = that._initialValues = options.value || element.val();
 
             that._reset();
             that._enable();
@@ -129,11 +137,16 @@ kendo_module({
 
             if (candidate !== undefined) {
                 if (that._currentTag) {
-                    that._currentTag.removeClass(FOCUSEDCLASS);
+                    that._currentTag
+                        .removeClass(FOCUSEDCLASS)
+                        .removeAttr(ID);
+
+                    that.input.removeAttr("aria-activedescendant");
                 }
 
                 if (candidate) {
-                    candidate.addClass(FOCUSEDCLASS);
+                    that.input.attr("aria-activedescendant", that._tagID);
+                    candidate.addClass(FOCUSEDCLASS).attr(ID, that._tagID);
                 }
 
                 that._currentTag = candidate;
@@ -164,10 +177,12 @@ kendo_module({
                 input = that.input;
 
             if (enable === false) {
-                input.attr(DISABLEDATTR, DISABLEDATTR);
                 wrapper.addClass(DISABLEDCLASS);
+                input.attr(DISABLEDATTR, DISABLEDATTR)
+                     .attr(ARIA_DISABLED, true);
             } else {
-                input.removeAttr(DISABLEDATTR);
+                input.removeAttr(DISABLEDATTR)
+                     .attr(ARIA_DISABLED, false);
 
                 wrapper
                     .removeClass(DISABLEDCLASS)
@@ -233,9 +248,11 @@ kendo_module({
                 that.toggle(length);
             }
 
-            that.current($(first(that.ul[0])));
-            that._hideBusy();
+            if (that.popup.visible()) {
+                that.current($(first(that.ul[0])));
+            }
 
+            that._hideBusy();
             that.trigger(DATABOUND);
         },
 
@@ -494,7 +511,7 @@ kendo_module({
             var that = this;
             clearTimeout(that._busy);
             that._loading.hide();
-            //that.input.attr("aria-busy", false);
+            that.input.attr("aria-busy", false);
             that._busy = null;
         },
 
@@ -506,7 +523,7 @@ kendo_module({
             }
 
             that._busy = setTimeout(function () {
-                //that.input.attr("aria-busy", true);
+                that.input.attr("aria-busy", true);
                 that._loading.show();
             }, 100);
         },
@@ -740,11 +757,30 @@ kendo_module({
         },
 
         _input: function() {
-            this.input = $('<input class="k-input" style="width: 25px" />').appendTo(this._innerWrapper);
+            var that = this,
+                element = that.element,
+                input = that._innerWrapper.children("input.k-input");
+
+            if (!input[0]) {
+                input = $('<input class="k-input" style="width: 25px" />').appendTo(that._innerWrapper);
+            }
+
+            that.input = input.attr({
+                "role": "listbox",
+                "aria-expanded": false
+            });
         },
 
         _tagList: function() {
-            this.tagList = $('<ul unselectable="on" class="k-list k-reset"/>').appendTo(this._innerWrapper);
+            var that = this,
+                element = that.element,
+                tagList = that._innerWrapper.children("ul.k-list");
+
+            if (!tagList[0]) {
+                tagList = $('<ul unselectable="on" class="k-list k-reset"/>').appendTo(that._innerWrapper);
+            }
+
+            that.tagList = tagList;
         },
 
         _loader: function() {

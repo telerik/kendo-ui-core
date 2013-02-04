@@ -26,5 +26,9 @@ tests.push(
     {
         page: "multiselect/placeholder.html",
         title: "multiselect Placeholder"
+    },
+    {
+        page: "multiselect/aria.html",
+        title: "multiselect ARIA"
     }
 );
