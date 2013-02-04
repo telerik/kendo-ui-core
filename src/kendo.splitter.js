@@ -36,7 +36,7 @@ kendo_module({
     }
 
     function isPixelSize(size) {
-        return pxUnitsRegex.test(size);
+        return pxUnitsRegex.test(size) || /^\d+$/.test(size);
     }
 
     function isFluid(size) {
