@@ -23,10 +23,10 @@ class AutoComplete extends \Kendo\UI\Widget {
 
     /**
     * Sets the data source of the AutoComplete.
-    * @param \Kendo\Data\DataSource $value
+    * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\AutoComplete
     */
-    public function dataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 

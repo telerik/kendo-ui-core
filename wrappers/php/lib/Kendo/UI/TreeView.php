@@ -57,10 +57,10 @@ the image URL of the treeview nodes.
 
     /**
     * Sets the data source of the TreeView.
-    * @param \Kendo\Data\HierarchicalDataSource $value
+    * @param array|\Kendo\Data\HierarchicalDataSource $value
     * @return \Kendo\UI\TreeView
     */
-    public function dataSource(\Kendo\Data\HierarchicalDataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 

@@ -38,10 +38,10 @@ This is the entire visible area of the chart.
 
     /**
     * Sets the data source of the Chart.
-    * @param \Kendo\Data\DataSource $value
+    * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\Dataviz\UI\Chart
     */
-    public function dataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 

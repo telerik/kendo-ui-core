@@ -7,10 +7,10 @@ class StockChartNavigator extends \Kendo\SerializableObject {
 
     /**
     * Sets the data source of the StockChartNavigator.
-    * @param \Kendo\Data\DataSource $value
+    * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\Dataviz\UI\StockChartNavigator
     */
-    public function dataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 

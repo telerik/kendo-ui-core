@@ -91,10 +91,10 @@ COMPOSITE_OPTION_PROPERTIES = ERB.new(%{//>> Properties
 DATA_SOURCE_SETTER = ERB.new(%{
     /**
     * Sets the data source of the <%= owner.php_class %>.
-    * @param \\Kendo\\Data\\DataSource $value
+    * @param array|\\Kendo\\Data\\DataSource $value
     * @return <%= owner.php_type %>
     */
-    public function dataSource(\\Kendo\\Data\\DataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 })
@@ -102,10 +102,10 @@ DATA_SOURCE_SETTER = ERB.new(%{
 HIERARCHY_DATA_SOURCE_SETTER = ERB.new(%{
     /**
     * Sets the data source of the <%= owner.php_class %>.
-    * @param \\Kendo\\Data\\HierarchicalDataSource $value
+    * @param array|\\Kendo\\Data\\HierarchicalDataSource $value
     * @return <%= owner.php_type %>
     */
-    public function dataSource(\\Kendo\\Data\\HierarchicalDataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 })

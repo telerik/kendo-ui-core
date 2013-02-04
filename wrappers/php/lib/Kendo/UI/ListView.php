@@ -19,10 +19,10 @@ class ListView extends \Kendo\UI\Widget {
 
     /**
     * Sets the data source of the ListView.
-    * @param \Kendo\Data\DataSource $value
+    * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\ListView
     */
-    public function dataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 

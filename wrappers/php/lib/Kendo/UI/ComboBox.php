@@ -37,10 +37,10 @@ class ComboBox extends \Kendo\UI\Widget {
 
     /**
     * Sets the data source of the ComboBox.
-    * @param \Kendo\Data\DataSource $value
+    * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\ComboBox
     */
-    public function dataSource(\Kendo\Data\DataSource $value) {
+    public function dataSource($value) {
         return $this->setProperty('dataSource', $value);
     }
 
