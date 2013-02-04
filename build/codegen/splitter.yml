@@ -1,0 +1,37 @@
+:options:
+    - :name: panes
+      :type: Array
+      :content: true
+      :description: Defines the panes of the splitter
+
+    - :name: panes.collapsed
+      :type: Boolean
+      :description: Specifies whether a pane is initially collapsed (true) or expanded (true).
+
+    - :name: panes.collapsible
+      :type: Boolean
+      :description: Specifies whether a pane is collapsible (true) or not collapsible (false).
+
+    - :name: panes.contentUrl
+      :type: String
+      :description: Specifies the URL from which to load the content of a pane.
+
+    - :name: panes.max
+      :type: String
+      :description: Specifies the maximum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The size of a resized pane cannot exceed the defined maximum size.
+
+    - :name: panes.min
+      :type: String
+      :description: Specifies the minimum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The size of a resized pane cannot be less than the defined minimum size.
+
+    - :name: panes.resizable
+      :type: Boolean
+      :description: Specifies whether a pane is resizable (true) or not resizable (false).
+
+    - :name: panes.scrollable
+      :type: Boolean
+      :description: Specifies whether a pane is scrollable (true) or not scrollable (false).
+
+    - :name: panes.size
+      :type: String
+      :description: Specifies the size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). This value must not exceed panes.max or be less then panes.min.
