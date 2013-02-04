@@ -1328,6 +1328,37 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date Value Axis / Range manipulation", {
+                    setup: function() {
+                        createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    }
+                });
+
+                test("translateRange with negative delta", function() {
+                    var range = dateAxis.translateRange(-2);
+                    same(range.min, new Date("2012/01/22"));
+                    same(range.max, new Date("2012/02/05"));
+                });
+
+                test("translateRange with positive delta", function() {
+                    var range = dateAxis.translateRange(2);
+                    same(range.min, new Date("2012/01/29"));
+                    same(range.max, new Date("2012/02/12"));
+                });
+
+                test("scaleRange with negative delta shrinks range", function() {
+                    var range = dateAxis.scaleRange(-2);
+                    same(range.min, new Date("2012/01/15"));
+                    same(range.max, new Date("2012/02/26"));
+                });
+
+                test("scaleRange with positive delta expands range", function() {
+                    var range = dateAxis.scaleRange(2);
+                    same(range.min, new Date("2012/01/29"));
+                    same(range.max, new Date("2012/02/12"));
+                });
+
+                // ------------------------------------------------------------
                 module("Date Value Axis / Base unit / Days");
 
                 test("Base unit is inferred from series range", function() {

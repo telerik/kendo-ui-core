@@ -533,6 +533,10 @@
                 same(floorDate(date, "minutes"), new Date("2012/03/29 17:40"));
             });
 
+            test("floorDate returns undefined when no date is specified", function() {
+                equals(floorDate(), undefined);
+            });
+
             test("floorDate returns date when no unit is specified", function() {
                 same(floorDate(date), date);
             });
@@ -612,6 +616,10 @@
                     ceilDate(new Date("2013/01/01 00:00"), "minutes"),
                     new Date("2013/01/01 00:00")
                 );
+            });
+
+            test("ceilDate returns undefined when no date is specified", function() {
+                equals(ceilDate(), undefined);
             });
 
             test("ceilDate returns date when no unit is specified", function() {
