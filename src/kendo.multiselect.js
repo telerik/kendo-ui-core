@@ -129,6 +129,14 @@ kendo_module({
             DATABOUND
         ],
 
+        setOptions: function(options) {
+            List.fn.setOptions.call(this, options);
+
+            this._template();
+            this._accessors();
+            this._aria(that.tagList.attr(ID));
+        },
+
         current: function(candidate) {
             this.currentTag(null);
             return List.fn.current.call(this, candidate);
