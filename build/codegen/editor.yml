@@ -1,0 +1,5 @@
+:options:
+    - :name: content
+      :type: Object
+      :description: The content of the editor
+:content: true
