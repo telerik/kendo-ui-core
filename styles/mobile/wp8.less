@@ -310,6 +310,16 @@
     margin-top: 1px;
 }
 
+.km-wp.km-horizontal .km-icon:before
+{
+    margin-top: 1px;
+}
+
+.km-wp.km-horizontal .km-icon:after
+{
+    margin-top: 0;
+}
+
 .km-wp input[type=password],
 .km-wp input[type=search],
 .km-wp input[type=number],
@@ -372,4 +382,13 @@
 .km-wp .km-scroll-container
 {
     overflow: hidden;
+}
+
+/* Orientation fallback */
+
+@media all and (orientation: landscape) {
+  .km-root > .km-pane
+  {
+      animation-name: -kendo-landscape;
+  }
 }

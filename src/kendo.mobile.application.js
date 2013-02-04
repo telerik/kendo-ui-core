@@ -63,12 +63,12 @@ kendo_module({
         return classes.join(" ");
     }
 
-    function isOrientationHorizontal() {
-        return (Math.abs(window.orientation) / 90 == 1);
+    function isOrientationHorizontal(element) {
+        return OS.wp ? element.css("animation-name") == "-kendo-landscape" : (Math.abs(window.orientation) / 90 == 1);
     }
 
-    function getOrientationClass() {
-        return isOrientationHorizontal() ? HORIZONTAL : VERTICAL;
+    function getOrientationClass(element) {
+        return isOrientationHorizontal(element) ? HORIZONTAL : VERTICAL;
     }
 
     function applyViewportHeight() {
@@ -211,7 +211,7 @@ kendo_module({
                 element = that.element;
 
             element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
-            element.addClass(that.osCssClass + " " + getOrientationClass());
+            element.addClass(that.osCssClass + " " + getOrientationClass(element));
 
             if (BERRYPHONEGAP) {
                 applyViewportHeight();
@@ -219,7 +219,7 @@ kendo_module({
 
             kendo.onResize(function() {
                 element.removeClass("km-horizontal km-vertical")
-                    .addClass(getOrientationClass());
+                    .addClass(getOrientationClass(element));
 
                 if (BERRYPHONEGAP) {
                     applyViewportHeight();
