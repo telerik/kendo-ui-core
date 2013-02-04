@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $employeeId = null;
     }
 
-    $db = new PDO('sqlite:../../northwind.db');
+    $db = new PDO('sqlite:../../sample.db');
 
     $sql = 'SELECT m.EmployeeID, m.FirstName, m.LastName, m.EmployeeID, '
         . '(SELECT COUNT(*) FROM Employees x WHERE x.ReportsTo=m.EmployeeID) as HasEmployees '
