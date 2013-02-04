@@ -6983,6 +6983,7 @@ kendo_module({
             }
 
             highlight.overlayElements = [];
+            highlight.index = null;
             highlight.visible = false;
         }
     });
@@ -7097,6 +7098,7 @@ kendo_module({
 
                 tooltip.point = null;
                 tooltip.visible = false;
+                tooltip.index = null;
             }
         }
     });
