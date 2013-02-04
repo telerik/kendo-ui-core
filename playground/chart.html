@@ -17,10 +17,21 @@
         <script>
 var data = [];
             $(function() {
-                $("#chart").kendoChart({
-                    series: [{
-                        type: "area",
-                        data: [1,2]
+                for (var i = 0; i < 100; i++) {
+                    data.push({ x: new Date(2013, 1, i), y: i });
+                }
+
+                // Helper function that constructs DataSource filter
+                // for the x value
+                function getFilter(xMin, xMax) {
+                    return [{
+                        field: "x",
+                        operator: "gte",
+                        value: xMin
+                    }, {
+                        field: "x",
+                        operator: "lte",
+                        value: xMax
                     }]
                 }
 
