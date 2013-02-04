@@ -3136,6 +3136,12 @@ div.k-slider
 .k-splitbar-vertical-hover .k-collapse-next,
 .k-splitbar-vertical-hover .k-expand-prev { background-position: -16px -522px; }
 
+.k-pane > .k-splitter-overlay
+{
+    background: transparent;
+    position: absolute;
+}
+
 /* Upload */
 
 html .k-upload
