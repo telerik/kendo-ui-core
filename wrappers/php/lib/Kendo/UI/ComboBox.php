@@ -6,6 +6,11 @@ class ComboBox extends \Kendo\UI\Widget {
     protected function name() {
         return 'ComboBox';
     }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('input', true);
+    }
+
 //>> Properties
 
     /**
