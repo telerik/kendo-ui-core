@@ -6,6 +6,20 @@ class ColorPicker extends \Kendo\UI\Widget {
     protected function name() {
         return 'ColorPicker';
     }
+
+    protected function createElement() {
+        $input = new \Kendo\Html\Element('input', true);
+
+        $value = $this->getProperty('value');
+
+        $input->attr('type', 'color');
+
+        if (isset($value)) {
+            $input->attr('value', $value);
+        }
+
+        return $input;
+    }
 //>> Properties
 
     /**

@@ -41,6 +41,15 @@ automatically default to 18.
     }
 
     /**
+    * Specifies the initially selected color.
+    * @param string $value
+    * @return \Kendo\UI\ColorPalette
+    */
+    public function value($value) {
+        return $this->setProperty('value', $value);
+    }
+
+    /**
     * Sets the change event of the ColorPalette.
     * Triggers when a new color has been changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
