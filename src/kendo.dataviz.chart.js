@@ -1982,6 +1982,54 @@ kendo_module({
             }
 
             return unit;
+        },
+
+        translateRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                baseUnit = options.baseUnit,
+                weekStartDay = options.weekStartDay,
+                lineBox = axis.lineBox(),
+                size = options.vertical ? lineBox.height() : lineBox.width(),
+                range = axis.range(),
+                scale = size / (range.max - range.min),
+                offset = round(delta / scale, DEFAULT_PRECISION),
+                from = addTicks(options.min, offset),
+                to = addTicks(options.max, offset);
+
+            return {
+                min: addDuration(from, 0, baseUnit, weekStartDay),
+                max: addDuration(to, 0, baseUnit, weekStartDay)
+            };
+        },
+
+        scaleRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                baseUnit = options.baseUnit,
+                weekStartDay = options.weekStartDay,
+                rounds = math.abs(delta),
+                from = options.min,
+                to = options.max,
+                range,
+                step;
+
+            while (rounds--) {
+                range = dateDiff(from, to);
+                step = math.round(range * 0.1);
+                if (delta < 0) {
+                    from = addTicks(from, step);
+                    to = addTicks(to, -step);
+                } else {
+                    from = addTicks(from, -step);
+                    to = addTicks(to, step);
+                }
+
+                from = addDuration(from, 0, baseUnit, weekStartDay);
+                to = addDuration(to, 1, baseUnit, weekStartDay);
+            }
+
+            return { min: from, max: to };
         }
     });
 
