@@ -6,9 +6,9 @@ require_once '../../lib/Kendo/Autoload.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json');
 
-    $result = new DataSourceResult('sqlite:../../northwind.db');
+    $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('SELECT ProductName from Products'));
+    echo json_encode($result->read('Products', array('ProductID', 'ProductName')));
 
     exit;
 }
@@ -25,7 +25,7 @@ $read->url('serverfiltering.php')
 
 $transport->read($read);
 
-$schema  = new \Kendo\Data\DataSourceSchema();
+$schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
        ->total('total');
 

@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $request = json_decode(file_get_contents('php://input'));
 
-    $result = new DataSourceResult('sqlite:../../northwind.db');
+    $result = new DataSourceResult('sqlite:../../sample.db');
 
     echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
 
