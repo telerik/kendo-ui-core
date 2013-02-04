@@ -152,8 +152,9 @@
                     idx = $.inArray(data, view);
 
                     if (idx >= 0) {
-                        item = $(template(data)).attr(kendo.attr("uid"), data.uid);
-                        that.items().eq(idx).replaceWith(item);
+                        that.items().eq(idx).replaceWith(template(data));
+                        item = that.items().eq(idx);
+                        item.attr(kendo.attr("uid"), data.uid);
 
                         that.trigger("itemChange", {
                             item: item,
@@ -368,7 +369,6 @@
                             idx, activeElement;
 
                         if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
-                            //console.log("not handled");
                             return;
                         }
 
@@ -475,7 +475,7 @@
            var that = this,
                editable = that.editable,
                data,
-               container,
+               index,
                template = that.template,
                valid = true;
 
@@ -490,9 +490,11 @@
                    }
 
                    data = that._modelFromElement(editable.element);
-                   container = $(template(data)).attr(kendo.attr("uid"), data.uid);
                    that._destroyEditable();
-                   editable.element.replaceWith(container);
+
+                   index = editable.element.index();
+                   editable.element.replaceWith(template(data));
+                   that.items().eq(index).attr(kendo.attr("uid"), data.uid);
                }
            }
 
@@ -502,11 +504,12 @@
        edit: function(item) {
            var that = this,
                data = that._modelFromElement(item),
-               container = $(that.editTemplate(data)).addClass(KEDITITEM);
+               container,
+               index = item.index();
 
             that.cancel();
-            container.attr(kendo.attr("uid"), data.uid);
-            item.replaceWith(container);
+            item.replaceWith(that.editTemplate(data));
+            container = that.items().eq(index).addClass(KEDITITEM).attr(kendo.attr("uid"), data.uid);
             that.editable = container.kendoEditable({ model: data, clearContainer: false, errorTemplate: false }).data("kendoEditable");
 
             that.trigger(EDIT, { model: data, item: container });

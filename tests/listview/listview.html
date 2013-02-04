@@ -25,6 +25,7 @@
         <script>
             kendo.ns = "kendo-";
             var DataSource = kendo.data.DataSource,
+                ul,
                 dataSource;
 
             $.fn.press = function(key, ctrl, shift) {
@@ -37,15 +38,17 @@
                     navigatable: true,
                     dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
                 }, options);
-                return $("<ul/>").kendoListView(options);
+                return ul.kendoListView(options);
             }
 
             module("listview initialization", {
                 setup: function() {
+                    ul = $("<ul />").appendTo(document.body);
                     $("<div id=\"pager\"></div>").appendTo(document.body);
                 },
                 teardown: function() {
                     $("#pager").remove();
+                    ul.remove();
                 }
             });
 
