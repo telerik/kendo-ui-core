@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceSchema extends \kendo\SerializableObject {
+class DataSourceSchema extends \Kendo\SerializableObject {
     public function model(\Kendo\Data\DataSourceSchemaModel $value) {
         return $this->setProperty('model', $value);
     }

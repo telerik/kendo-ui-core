@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceTransportRead extends \kendo\SerializableObject {
+class DataSourceTransportRead extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

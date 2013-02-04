@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceFilterItem extends \kendo\SerializableObject {
+class DataSourceFilterItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

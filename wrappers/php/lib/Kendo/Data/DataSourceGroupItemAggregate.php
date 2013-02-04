@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceGroupItemAggregate extends \kendo\SerializableObject {
+class DataSourceGroupItemAggregate extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

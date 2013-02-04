@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceSchemaModelField extends \kendo\SerializableObject {
+class DataSourceSchemaModelField extends \Kendo\SerializableObject {
     function __construct($field) {
         $this->field($field);
     }

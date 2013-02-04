@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceTransportUpdate extends \kendo\SerializableObject {
+class DataSourceTransportUpdate extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

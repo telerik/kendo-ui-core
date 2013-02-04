@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class TooltipAnimationClose extends \kendo\SerializableObject {
+class TooltipAnimationClose extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

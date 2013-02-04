@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class ColorPaletteTileSize extends \kendo\SerializableObject {
+class ColorPaletteTileSize extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

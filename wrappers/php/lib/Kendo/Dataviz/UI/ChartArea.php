@@ -7,7 +7,7 @@ namespace Kendo\Dataviz\UI;
 */
 /**
 */
-class ChartArea extends \kendo\SerializableObject {
+class ChartArea extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

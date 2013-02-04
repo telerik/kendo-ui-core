@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class TooltipContent extends \kendo\SerializableObject {
+class TooltipContent extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceSchemaModelFieldValidation extends \kendo\SerializableObject {
+class DataSourceSchemaModelFieldValidation extends \Kendo\SerializableObject {
 
     public function required($value) {
         return $this->setProperty('required', $value);

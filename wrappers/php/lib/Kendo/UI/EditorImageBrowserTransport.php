@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class EditorImageBrowserTransport extends \kendo\SerializableObject {
+class EditorImageBrowserTransport extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

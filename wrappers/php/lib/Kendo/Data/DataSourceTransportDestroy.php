@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceTransportDestroy extends \kendo\SerializableObject {
+class DataSourceTransportDestroy extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

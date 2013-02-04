@@ -2,7 +2,7 @@
 
 namespace Kendo\Data;
 
-class DataSourceSortItem extends \kendo\SerializableObject {
+class DataSourceSortItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
