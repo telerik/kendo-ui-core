@@ -100,6 +100,56 @@ class DataSourceResult {
         return $groupItem;
     }
 
+    private function calculateAggregates($table, $aggregates, $request, $properties) {
+        $count = count($aggregates);
+
+        if (count($aggregates) > 0) {
+            $functions = array();
+
+            for ($index = 0; $index < $count; $index++) {
+                $aggregate = $aggregates[$index];
+                $functions[] = str_replace('average', 'AVG', $aggregate->aggregate).'('.$aggregate->field.') as '.$aggregate->field.'_'.$aggregate->aggregate;
+            }
+
+            $sql = sprintf('SELECT %s FROM %s', implode(', ', $functions), $table);
+
+            if (isset($request->filter)) {
+                $sql .= $this->filter($properties, $request->filter);
+            }
+
+            $statement = $this->db->prepare($sql);
+
+            if (isset($request->filter)) {
+                $this->bindFilterValues($statement, $request->filter);
+            }
+
+            $statement->execute();
+
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $this->convertAggregateResult($result[0]);
+        }
+        return array();
+    }
+
+    private function convertAggregateResult($properties) {
+        $result = array();
+
+        foreach($properties as $property => $value) {
+            $item = array();
+            $split = explode('_', $property);
+            $field = $split[0];
+            $function = $split[1];
+            if (array_key_exists($field, $result)) {
+                $result[$field][$function] = $value;
+            } else {
+                $result[$field] = array($function => $value);
+            }
+        }
+
+        return $result;
+    }
+
     private function sort($properties, $sort) {
         $count = count($sort);
 
@@ -395,6 +445,10 @@ class DataSourceResult {
             $result['groups'] = $data;
         } else {
             $result['data'] = $data;
+        }
+
+        if (isset($request->aggregate)) {
+            $result["aggregates"] = $this->calculateAggregates($table, $request->aggregate, $request, $properties);
         }
 
         return $result;
