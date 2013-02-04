@@ -111,10 +111,12 @@
 
 .composite-background(@gradient) when (@gradient = none) {
     background-image: @texture;
+	background-position: 50% 50%;
 }
 
 .composite-background(@gradient) when not (@gradient = none) {
     background-image: @fallback-texture;
+	background-position: 50% 50%;
     background-image: @texture, -webkit-linear-gradient(top, ~"@{gradient}");
     background-image: @texture,    -moz-linear-gradient(top, ~"@{gradient}");
     background-image: @texture,      -o-linear-gradient(top, ~"@{gradient}");
