@@ -4020,36 +4020,35 @@
 
 
             (function() {
-                var chart,
-                    bar,
-                    barElement,
-                    plotArea;
+                var plotArea;
 
-                var TOLERANCE = 5;
-
-                function createColumnChart(options) {
-                    chart = createChart($.extend({
-                        seriesDefaults: {
-                            type: "bar"
-                        },
-                        series: [{
-                            data: [1, 2]
-                        },{
-                            data: [1, 2]
-                        },{
-                            data: [1, 2]
-                        },{
-                            data: [1]
-                        }],
-                        categoryAxis: {
-                            categories: ["A", "B"]
-                        }
-                    }, options));
-
-                    plotArea = chart._model.children[1];
-                    bar = plotArea.charts[0].points[0];
+                function createPlotArea() {
+                    plotArea = new dataviz.CategoricalPlotArea([{
+                        name: "Value A",
+                        type: "bar",
+                        data: [1, null],
+                        gap: GAP
+                    }, {
+                        name: "Value B",
+                        type: "bar",
+                        data: [2, 3]
+                    }], {});
                 }
 
+                // ------------------------------------------------------------
+                module("MultiplePointTooltip / pointsByCategoryIndex", {
+                    setup: function() {
+                        createPlotArea();
+                    }
+                });
+
+                test("return points", function() {
+                    equals(plotArea.pointsByCategoryIndex(0).length, 2);
+                });
+
+                test("return all points with some value", function() {
+                    equals(plotArea.pointsByCategoryIndex(1).length, 1);
+                });
             })();
         </script>
 

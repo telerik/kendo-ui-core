@@ -331,45 +331,6 @@
 
             })();
 
-            (function() {
-                var tooltip;
-
-                function createTooltip(options) {
-                    tooltip = new dataviz.MultiplePointTooltip($("#chart"), options);
-                    tooltip.plotArea = {
-                        charts: [{
-                            categoryPoints:[ [{
-                                value: 1
-                            }], [{
-                                //empty point
-                            }] ]
-                        },{
-                            categoryPoints:[ [{
-                                value: 2
-                            }],[{
-                                value: 3
-                            }] ]
-                        }
-                    ]};
-                }
-
-                // ------------------------------------------------------------
-                module("MultiplePointTooltip / pointsByCategoryIndex", {
-                    setup: function() {
-                        createTooltip();
-                    }
-                });
-
-                test("return points", function() {
-                    equals(tooltip.pointsByCategoryIndex(0).length, 2);
-                });
-
-                test("return all points with some value", function() {
-                    equals(tooltip.pointsByCategoryIndex(1).length, 1);
-                });
-            })();
-
-
         </script>
 
         <div id="chart"></div>

@@ -344,7 +344,12 @@ kendo_module({
                 } else {
                     chart._tooltip = new Tooltip(element, options.tooltip);
                 }
-                chart._highlight = new Highlight(view, chart._viewElement);
+
+                if (options.tooltip.shared) {
+                    chart._highlight = new MultiplePointHighlight(view, chart._viewElement);
+                } else {
+                    chart._highlight = new Highlight(view, chart._viewElement);
+                }
             }
         },
 
@@ -682,11 +687,13 @@ kendo_module({
                 chart._activePoint = point;
 
                 tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                if (tooltipOptions.visible && !tooltipOptions.shared) {
-                    tooltip.show(point);
-                }
+                if (!tooltipOptions.shared) {
+                    if (tooltipOptions.visible) {
+                        tooltip.show(point);
+                    }
 
-                highlight.show(point);
+                    highlight.show(point);
+                }
                 return returnValue;
             }
         },
@@ -714,14 +721,16 @@ kendo_module({
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
-                        seriesPoint.hover(chart, e);
-                        chart._activePoint = seriesPoint;
-
                         tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                        if (tooltipOptions.visible) {
-                            tooltip.show(seriesPoint);
+                        if (!tooltipOptions.shared){
+                            seriesPoint.hover(chart, e);
+                            chart._activePoint = seriesPoint;
+
+                            if (tooltipOptions.visible) {
+                                tooltip.show(seriesPoint);
+                            }
+                            highlight.show(seriesPoint);
                         }
-                        highlight.show(seriesPoint);
                     }
                 }
             } else {
@@ -742,6 +751,7 @@ kendo_module({
                 point = Point2D(coords.x, coords.y),
                 tooltip = chart._tooltip,
                 tooltipOptions = tooltip.options || {},
+                highlight = chart._highlight,
                 i, crosshair;
 
             chart._lastTime = new Date();
@@ -760,6 +770,11 @@ kendo_module({
             if (tooltipOptions.visible && tooltipOptions.shared) {
                 tooltip.plotArea = chart._plotArea;
                 tooltip.showAt(point);
+            }
+
+            if (highlight.options.visible && tooltipOptions.shared) {
+                highlight.plotArea = chart._plotArea;
+                highlight.show(point);
             }
         },
 
@@ -5916,6 +5931,26 @@ kendo_module({
             ]);
 
             return elements;
+        },
+
+        pointsByCategoryIndex: function(categoryIndex) {
+            var charts = this.charts,
+                result = [],
+                i, j, points, point;
+
+            if (categoryIndex !== null) {
+                for (i = 0; i < charts.length; i++) {
+                    points = charts[i].categoryPoints[categoryIndex];
+                    for (j = 0; j < points.length; j++) {
+                        point = points[j];
+                        if (point && defined(point.value) && point.value !== null) {
+                            result.push(point);
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
     });
 
@@ -6848,6 +6883,7 @@ kendo_module({
             }
 
             if (point.toggleHighlight) {
+                highlight.hide();
                 point.toggleHighlight(view);
                 highlight.point = point;
                 highlight.visible = true;
@@ -6871,6 +6907,82 @@ kendo_module({
                 delete highlight.point;
             }
 
+            highlight.visible = false;
+        }
+    });
+
+    var MultiplePointHighlight = Highlight.extend({
+        init: function(view, viewElement, options) {
+            var highlight = this;
+            highlight.options = deepExtend({}, highlight.options, options);
+
+            highlight.view = view;
+            highlight.viewElement = viewElement;
+        },
+
+        options: {
+            fill: WHITE,
+            fillOpacity: 0.2,
+            stroke: WHITE,
+            strokeWidth: 1,
+            strokeOpacity: 0.2,
+            visible: true
+        },
+
+        show: function(coords) {
+            var highlight = this,
+                view = highlight.view,
+                viewElement = highlight.viewElement,
+                plotArea = highlight.plotArea,
+                categoryAxis = plotArea.categoryAxis,
+                index = categoryAxis.getCategoryIndex(coords),
+                points = plotArea.pointsByCategoryIndex(index),
+                length = points.length,
+                overlay, overlayElement, point, i;
+
+            if (highlight.index == index) {
+                return;
+            }
+
+            highlight.hide();
+            highlight.overlayElements = [];
+            highlight.index = index;
+
+            for (i = 0; i < length; i++) {
+                point = points[i];
+
+                if (point && point.highlightOverlay) {
+                    overlay = point.highlightOverlay(view, highlight.options);
+
+                    if (overlay) {
+                        overlayElement = view.renderElement(overlay);
+                        viewElement.appendChild(overlayElement);
+
+                        highlight.overlayElement = overlayElement;
+                        highlight.visible = true;
+                        highlight.overlayElements.push(overlayElement);
+                    }
+                }
+            }
+        },
+
+        hide: function() {
+            var highlight = this,
+                elements = highlight.overlayElements || [],
+                length = elements.length,
+                i, element;
+
+            for (i = 0; i < length; i++) {
+                element = elements[i];
+
+                if (element) {
+                    if (element.parentNode) {
+                        element.parentNode.removeChild(element);
+                    }
+                }
+            }
+
+            highlight.overlayElements = [];
             highlight.visible = false;
         }
     });
@@ -7031,19 +7143,20 @@ kendo_module({
         showAt: function(point) {
             var tooltip = this,
                 options = tooltip.options,
-                axis = tooltip.plotArea.categoryAxis,
+                plotArea = tooltip.plotArea,
+                axis = plotArea.categoryAxis,
                 axisOptions = axis.options,
                 index = axis.getCategoryIndex(point),
                 category = axis.getCategory(point),
-                points = tooltip.pointsByCategoryIndex(index),
+                points = plotArea.pointsByCategoryIndex(index),
                 slot = axis.getSlot(index),
                 content, hCenter;
 
-            if (tooltip.index != index) {
-                tooltip.index = index;
-            } else {
+            if (tooltip.index == index) {
                 return;
             }
+
+            tooltip.index = index;
 
             if (points.length && !(options.border || {}).color) {
                 options.border.color = points[0].options.color;
@@ -7086,26 +7199,6 @@ kendo_module({
             }
 
             return content;
-        },
-
-        pointsByCategoryIndex: function(categoryIndex) {
-            var charts = this.plotArea.charts,
-                result = [],
-                i, j, points, point;
-
-            if (categoryIndex !== null) {
-                for (i = 0; i < charts.length; i++) {
-                    points = charts[i].categoryPoints[categoryIndex];
-                    for (j = 0; j < points.length; j++) {
-                        point = points[j];
-                        if (point && defined(point.value) && point.value !== null) {
-                            result.push(point);
-                        }
-                    }
-                }
-            }
-
-            return result;
         }
     });
 
