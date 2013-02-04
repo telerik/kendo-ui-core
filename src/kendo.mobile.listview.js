@@ -714,14 +714,14 @@ kendo_module({
                 }
 
                 that.searchInput = that.wrapper.find("input[type=search]")
-                    .closest("form").on("submit", function(e) {
+                    .closest("form").on("submit" + NS, function(e) {
                         e.preventDefault();
                     })
                     .end()
-                    .on("focus", function() {
+                    .on("focus" + NS, function() {
                         that._oldFilter = that.searchInput.val();
                     })
-                    .on(events, proxy(that._filterChange, that));
+                    .on(events.split(" ").join(NS + " ") + NS, proxy(that._filterChange, that));
 
                 that.clearButton = that.wrapper.find(".km-filter-reset")
                     .on(CLICK, proxy(that._clearFilter, that))
