@@ -52,6 +52,14 @@ $unitsInStockMax = new \Kendo\Data\DataSourceAggregateItem();
 $unitsInStockMax->field("UnitsInStock")
                 ->aggregate("max");
 
+$unitsInStockCount = new \Kendo\Data\DataSourceAggregateItem();
+$unitsInStockCount->field("UnitsInStock")
+                ->aggregate("count");
+
+$group = new \Kendo\Data\DataSourceGroupItem();
+$group->field('UnitsInStock')
+      ->addAggregate($productNameCount, $unitsOnOrderAvg, $unitsInStockMin, $unitsInStockMax, $unitsInStockCount);
+
 $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
@@ -61,6 +69,7 @@ $dataSource->transport($transport)
            ->serverGrouping(true)
            ->serverFiltering(true)
            ->serverAggregates(true)
+           ->addGroupItem($group)
            ->addAggregateItem($productNameCount, $unitsOnOrderAvg, $unitsInStockMin, $unitsInStockMax)
            ->schema($schema);
 
@@ -69,6 +78,7 @@ $grid = new \Kendo\UI\Grid('grid');
 $productName = new \Kendo\UI\GridColumn();
 $productName->field('ProductName')
             ->footerTemplate('Total Count: #=count#')
+            ->groupFooterTemplate('Count: #=count#')
             ->title('Product Name');
 
 $unitPrice = new \Kendo\UI\GridColumn();
@@ -77,23 +87,26 @@ $unitPrice->field('UnitPrice')
           ->width(150)
           ->title('Unit Price');
 
-$unitsInStock = new \Kendo\UI\GridColumn();
-$unitsInStock->field('UnitsInStock')
-          ->width(150)
-          ->footerTemplate('<div>Min: #= min #</div><div>Max: #= max #</div>')
-          ->title('Units In Stock');
-
 $unitsOnOrder = new \Kendo\UI\GridColumn();
 $unitsOnOrder->field('UnitsOnOrder')
           ->width(150)
           ->footerTemplate('Average: #=average#')
+          ->groupFooterTemplate('Average: #=average#')
           ->title('Units On Order');
+
+
+$unitsInStock = new \Kendo\UI\GridColumn();
+$unitsInStock->field('UnitsInStock')
+          ->width(150)
+          ->footerTemplate('<div>Min: #= min #</div><div>Max: #= max #</div>')
+          ->groupHeaderTemplate('Units In Stock: #= value # (Count: #= count#)')
+          ->title('Units In Stock');
 
 $grid->addColumn($productName, $unitPrice, $unitsOnOrder, $unitsInStock)
      ->dataSource($dataSource)
      ->scrollable(false)
      ->sortable(true)
-     ->filterable(true)
+     //->filterable(true)
      ->pageable(true);
 
 echo $grid->render();

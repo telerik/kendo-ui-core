@@ -43,8 +43,8 @@ class DataSourceResult {
         return ' LIMIT :skip,:take';
     }
 
-    private function group($data, $groups) {
-        return $this->groupBy($data, $groups);
+    private function group($data, $groups, $table, $request, $properties) {
+        return $this->groupBy($data, $groups, $table, $request, $properties);
     }
 
     private function mergeSortDescriptors($request) {
@@ -54,7 +54,7 @@ class DataSourceResult {
         return array_merge($sort, $groups);
     }
 
-    private function groupBy($data, $groups) {
+    private function groupBy($data, $groups, $table, $request, $properties) {
         if (count($groups) > 0) {
             $field = $groups[0]->field;
             $count = count($data);
@@ -62,24 +62,24 @@ class DataSourceResult {
             $value = $data[0][$field];
 
             $hasSubgroups = count($groups) > 1;
-            $groupItem = $this->createGroup($value, $field, $hasSubgroups);
+            $groupItem = $this->createGroup($field, $value, $hasSubgroups, $groups[0]->aggregates, $table, $request, $properties);
 
             for ($index = 0; $index < $count; $index++) {
                 $item = $data[$index];
                 if ($item[$field] != $value) {
                     if (count($groups) > 1) {
-                        $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1));
+                        $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1), $table, $request, $properties);
                     }
 
                     $result[] = $groupItem;
 
-                    $groupItem = $this->createGroup($data[$index][$field], $field, $hasSubgroups);
+                    $groupItem = $this->createGroup($field, $data[$index][$field], $hasSubgroups, $groups[0]->aggregates, $table, $request, $properties);
                 }
                 $groupItem["items"][] = $item;
             }
 
             if (count($groups) > 1) {
-                $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1));
+                $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1), $table, $request, $properties);
             }
 
             $result[] = $groupItem;
@@ -89,13 +89,42 @@ class DataSourceResult {
         return array();
     }
 
-    private function createGroup($value, $field, $hasSubgroups) {
-        $groupItem = array();
-        $groupItem["field"] = $field;
-        $groupItem["aggregates"] = array();
-        $groupItem["hasSubgroups"] = $hasSubgroups;
-        $groupItem["value"] = $value;
-        $groupItem["items"] = array();
+    private function addFilterToRequest($field, $value, $request) {
+        $filters = isset($request->filter) ? $request->filter : new stdClass;
+        $filter = (object)array(
+            'logic' => 'and',
+            'filters' => array(
+                //$filters,
+                (object)array(
+                    'field' => $field,
+                    'operator' => 'eq',
+                    'value' => $value
+                ))
+            );
+
+        return (object) array('filter' => $filter);
+    }
+
+    private function addFieldToProperties($field, $properties) {
+        if (!in_array($field, $properties)) {
+            $properties[] = $field;
+        }
+        return $properties;
+    }
+
+    private function createGroup($field, $value, $hasSubgroups, $aggregates, $table, $request, $properties) {
+        if (count($aggregates) > 0) {
+            $request = $this->addFilterToRequest($field, $value, $request);
+            $properties = $this->addFieldToProperties($field, $properties);
+        }
+
+        $groupItem = array(
+            'field' => $field,
+            'aggregates' => $this->calculateAggregates($table, $aggregates, $request, $properties),
+            'hasSubgroups' => $hasSubgroups,
+            'value' => $value,
+            'items' => array()
+        );
 
         return $groupItem;
     }
@@ -441,7 +470,7 @@ class DataSourceResult {
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         if (isset($request->group) && count($request->group) > 0) {
-            $data = $this->group($data, $request->group);
+            $data = $this->group($data, $request->group, $table, $request, $properties);
             $result['groups'] = $data;
         } else {
             $result['data'] = $data;
