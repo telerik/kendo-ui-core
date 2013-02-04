@@ -44,8 +44,9 @@
 
             test("MultiSelect adds aria-owns", function() {
                 var multiselect = new MultiSelect(input.attr("id", "test"));
+                var id = multiselect.tagList.attr("id") + " " + multiselect.ul.attr("id");
 
-                equal(multiselect.input.attr("aria-owns"), multiselect.ul.attr("id"));
+                equal(multiselect.input.attr("aria-owns"), id);
             });
 
             test("MultiSelect adds aria-disabled='true'", function() {

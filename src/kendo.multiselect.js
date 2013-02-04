@@ -82,9 +82,12 @@ kendo_module({
 
             if (id) {
                 that._tagID = id + "_tag_active";
+
+                id = id + "_taglist";
+                that.tagList.attr(ID, id);
             }
 
-            that._aria();
+            that._aria(id);
             that._dataSource();
             that._accessors();
             that._popup();
@@ -129,7 +132,6 @@ kendo_module({
         current: function(candidate) {
             this.currentTag(null);
             return List.fn.current.call(this, candidate);
-
         },
 
         currentTag: function(candidate) {
@@ -145,8 +147,10 @@ kendo_module({
                 }
 
                 if (candidate) {
-                    that.input.attr("aria-activedescendant", that._tagID);
                     candidate.addClass(FOCUSEDCLASS).attr(ID, that._tagID);
+
+                    that.input
+                        .attr("aria-activedescendant", that._tagID);
                 }
 
                 that._currentTag = candidate;
@@ -777,7 +781,7 @@ kendo_module({
                 tagList = that._innerWrapper.children("ul.k-list");
 
             if (!tagList[0]) {
-                tagList = $('<ul unselectable="on" class="k-list k-reset"/>').appendTo(that._innerWrapper);
+                tagList = $('<ul role="listbox" unselectable="on" class="k-list k-reset"/>').appendTo(that._innerWrapper);
             }
 
             that.tagList = tagList;
