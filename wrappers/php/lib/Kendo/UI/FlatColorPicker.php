@@ -28,6 +28,15 @@ selection of transparency.
     }
 
     /**
+    * Specifies the initially selected color.
+    * @param string $value
+    * @return \Kendo\UI\FlatColorPicker
+    */
+    public function value($value) {
+        return $this->setProperty('value', $value);
+    }
+
+    /**
     * Specifies whether we should display the preview bar which displays the
 current color and the input field.
     * @param boolean $value
