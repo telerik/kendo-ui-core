@@ -29,7 +29,7 @@ require_once '../../lib/Kendo/Autoload.php';
     $splitter->addPane($ajaxPane);
 
     $bottomPane = new \Kendo\UI\SplitterPane();
-    $bottomPane->attr('id', 'top_pane')
+    $bottomPane->attr('id', 'bottom_pane')
                ->content('<p>Bottom pane</p>')
                ->collapsible(true)
                ->size('20%');
