@@ -43,6 +43,63 @@ class DataSourceResult {
         return ' LIMIT :skip,:take';
     }
 
+    private function group($data, $groups) {
+        return $this->groupBy($data, $groups);
+    }
+
+    private function mergeSortDescriptors($request) {
+        $sort = isset($request->sort) && count($request->sort) ? $request->sort : array();
+        $groups = isset($request->group) && count($request->group) ? $request->group : array();
+
+        return array_merge($sort, $groups);
+    }
+
+    private function groupBy($data, $groups) {
+        if (count($groups) > 0) {
+            $field = $groups[0]->field;
+            $count = count($data);
+            $result = array();
+            $value = $data[0][$field];
+
+            $hasSubgroups = count($groups) > 1;
+            $groupItem = $this->createGroup($value, $field, $hasSubgroups);
+
+            for ($index = 0; $index < $count; $index++) {
+                $item = $data[$index];
+                if ($item[$field] != $value) {
+                    if (count($groups) > 1) {
+                        $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1));
+                    }
+
+                    $result[] = $groupItem;
+
+                    $groupItem = $this->createGroup($data[$index][$field], $field, $hasSubgroups);
+                }
+                $groupItem["items"][] = $item;
+            }
+
+            if (count($groups) > 1) {
+                $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1));
+            }
+
+            $result[] = $groupItem;
+
+            return $result;
+        }
+        return array();
+    }
+
+    private function createGroup($value, $field, $hasSubgroups) {
+        $groupItem = array();
+        $groupItem["field"] = $field;
+        $groupItem["aggregates"] = array();
+        $groupItem["hasSubgroups"] = $hasSubgroups;
+        $groupItem["value"] = $value;
+        $groupItem["items"] = array();
+
+        return $groupItem;
+    }
+
     private function sort($properties, $sort) {
         $count = count($sort);
 
@@ -308,8 +365,10 @@ class DataSourceResult {
             $sql .= $this->filter($properties, $request->filter);
         }
 
-        if (isset($request->sort)) {
-            $sql .= $this->sort($properties, $request->sort);
+        $sort = $this->mergeSortDescriptors($request);
+
+        if (count($sort) > 0) {
+            $sql .= $this->sort($properties, $sort);
         }
 
         if (isset($request->skip) && isset($request->take)) {
@@ -331,7 +390,12 @@ class DataSourceResult {
 
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        $result['data'] = $data;
+        if (isset($request->group) && count($request->group) > 0) {
+            $data = $this->group($data, $request->group);
+            $result['groups'] = $data;
+        } else {
+            $result['data'] = $data;
+        }
 
         return $result;
     }

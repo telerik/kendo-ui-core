@@ -6,7 +6,7 @@
 <c:url value="/web/grid/remote-data/read" var="transportReadUrl" />
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true" height="430px" sortable="true" filterable="true">
+    <kendo:grid name="grid" pageable="true" height="430px" sortable="true" filterable="true" groupable="true">
     	<kendo:grid-scrollable/>
         <kendo:grid-columns>
             <kendo:grid-column title="Order ID" field="orderId" width="100px" filterable="false" />
