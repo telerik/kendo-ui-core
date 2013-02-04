@@ -735,7 +735,18 @@ kendo_module({
             this.dataSource.filter(expr);
         },
 
-        _filterChange: function() {
+        _filterChange: function(e) {
+            var that = this;
+            if (e.type == "paste" && that.options.filterable.autoFilter !== false) {
+                setTimeout(function() {
+                    that._applyFilter();
+                }, 1);
+            } else {
+                that._applyFilter();
+            }
+        },
+
+        _applyFilter: function() {
             var that = this,
                 filterable = that.options.filterable,
                 value = that.searchInput.val(),

@@ -135,18 +135,6 @@
                 equal(filter.args("filter", 1)[0], null);
             });
 
-            test("dataSource is filtered on paste", function() {
-                var listview = setup(),
-                    input = listview.wrapper.find("input");
-
-                var filter = stub(listview.dataSource, "filter");
-
-                input.val("foo").trigger({ type: "paste" });
-
-                equal(filter.calls("filter"), 1);
-                equal(filter.args("filter", 0)[0].value, "foo");
-            });
-
             test("default filter expression is build", function() {
                 var listview = setup(),
                     input = listview.wrapper.find("input");
