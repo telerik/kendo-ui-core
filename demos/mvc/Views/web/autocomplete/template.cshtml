@@ -1,5 +1,5 @@
 
-        <div id="example" class="k-content">           
+        <div id="example" class="k-content">
             <input id="customers"/>
 
             <script>
@@ -7,21 +7,21 @@
                     var autocomplete = $("#customers").kendoAutoComplete({
                         minLength: 1,
                         dataTextField: "ContactName",
-                        template: "<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
+                        template: "<img src=\"../../content/web/Customers/#= CustomerID #.jpg\" alt=\"#= CustomerID #\" />" +
                         "<dl>" +
-                            "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
-                            "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
+                            "<dt>Contact:</dt><dd>#: ContactName #</dd>" +
+                            "<dt>Company:</dt><dd>#: CompanyName #</dd>" +
                         "</dl>",
-                        dataSource: {                            
+                        dataSource: {
                             transport: {
                                 read:{
                                     dataType: "jsonp",
-                                    url: "http://demos.kendoui.com/service/Customers",
-                                }                                
+                                    url: "http://demos.kendoui.com/service/Customers"
+                                }
                             }
                         }
                     }).data("kendoAutoComplete");
-                            
+
                     // set width of the drop-down list
                     autocomplete.list.width(400);
                 });
