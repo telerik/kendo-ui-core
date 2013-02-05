@@ -58,6 +58,8 @@ kendo_module({
 
             that._input();
 
+            that._tabindex(that.input);
+
             that._popup();
 
             that._accessors();
@@ -554,12 +556,11 @@ kendo_module({
         _input: function() {
             var that = this,
                 element = that.element.removeClass("k-input")[0],
-                tabIndex = element.tabIndex,
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
                 SELECTOR = "input.k-input",
-                input, DOMInput,
-                name = element.name || "";
+                name = element.name || "",
+                input;
 
             if (name) {
                 name = 'name="' + name + '_input" ';
@@ -574,12 +575,10 @@ kendo_module({
                 input = wrapper.find(SELECTOR);
             }
 
-            DOMInput = input[0];
-            DOMInput.tabIndex = tabIndex;
-            DOMInput.style.cssText = element.style.cssText;
+            input[0].style.cssText = element.style.cssText;
 
             if (element.maxLength > -1) {
-                DOMInput.maxLength = element.maxLength;
+                input[0].maxLength = element.maxLength;
             }
 
             input.addClass(element.className)
