@@ -226,10 +226,6 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
 
 JAVA_WEBAPP_DIR = 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/'
 
-tree :to => 'dist/demos/staging-java',
-     :from => FileList[SPRING_DEMOS_WAR],
-     :root => "#{SPRING_DEMOS_ROOT}target/"
-
 class PatchedWebConfigTask < Rake::FileTask
     attr_accessor :cdn_root, :themebuilder_root
     def execute(args=nil)
@@ -305,8 +301,7 @@ namespace :demos do
     task :staging_java => [
         :js,
         :less,
-        SPRING_DEMOS_WAR,
-        'dist/demos/staging-java'
+        SPRING_DEMOS_WAR
     ]
 
     task :production_site => [:release,

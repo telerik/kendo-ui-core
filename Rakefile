@@ -382,7 +382,7 @@ namespace :build do
         task :demos => [ 'demos:staging', 'download_builder:staging', 'demos:staging_java' ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
             sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
-            sh "rsync -avc dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
+            sh "rm -rf #{TOMCAT_ROOT}/staging-java/ && unzip -d #{TOMCAT_ROOT}/staging-java/ #{SPRING_DEMOS_WAR}"
         end
 
         desc 'Package and publish bundles to the Stable directory'
