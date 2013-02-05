@@ -11,7 +11,6 @@ kendo_module({
         ui = kendo.ui,
         List = ui.List,
         keys = kendo.keys,
-        browser = kendo.support.browser,
         proxy = $.proxy,
         ID = "id",
         LI = "li",
@@ -35,6 +34,7 @@ kendo_module({
         MOUSEENTER = "mouseenter" + ns,
         MOUSELEAVE = "mouseleave" + ns,
         HOVEREVENTS = MOUSEENTER + " " + MOUSELEAVE,
+        quotRegExp = /"/g,
         styles = ["font-family",
                   "font-size",
                   "font-stretch",
@@ -69,7 +69,7 @@ kendo_module({
             that.input
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("paste" + ns, proxy(that._search, that))
-                .on("focus" + ns, function(e) { that._placeholder(false); })
+                .on("focus" + ns, function() { that._placeholder(false); })
                 .on("blur" + ns, function() {
                     that._placeholder();
                     that.close();
@@ -286,6 +286,14 @@ kendo_module({
                 that.current($(first(that.ul[0])));
             }
 
+            //TODO: test it and then uncomment
+            /*if (that._touchScroller) {
+                that._touchScroller.reset();
+            }
+
+            that._makeUnselectable();
+            */
+
             that._hideBusy();
             that.trigger("dataBound");
         },
@@ -346,8 +354,7 @@ kendo_module({
             var that = this,
                 element = that.element,
                 options = that.options,
-                dataSource = options.dataSource || {},
-                idx;
+                dataSource = options.dataSource || {};
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
@@ -448,7 +455,6 @@ kendo_module({
 
         _keydown: function(e) {
             var that = this,
-                ul = that.ul[0],
                 key = e.keyCode,
                 tag = that._currentTag,
                 current = that._current,
@@ -589,7 +595,7 @@ kendo_module({
 
         _option: function(dataItem, selected) {
             var option = "<option",
-                dataText = this._text(dataItem);
+                dataText = this._text(dataItem),
                 dataValue = this._value(dataItem);
 
             if (dataValue !== undefined) {
@@ -636,7 +642,7 @@ kendo_module({
                 }
             }
 
-            length = values.length
+            length = values.length;
             if (length) {
                 for (idx = 0; idx < length; idx++) {
                     options += that._option(values[idx], true);
@@ -674,7 +680,7 @@ kendo_module({
 
                 if (dataValue !== undefined && dataValue === value) {
                     selected = true;
-                    break
+                    break;
                 }
             }
 
@@ -737,7 +743,7 @@ kendo_module({
         _unselect: function(tag) {
             var that = this,
                 index = tag.index(),
-                dataItem, value, index,
+                dataItem, value,
                 options, option, length;
 
             tag.remove();
@@ -794,16 +800,15 @@ kendo_module({
 
             that.itemTemplate = function(data, idx, hide) {
                 return '<li tabindex="-1" role="option" data-idx="' + idx + '" unselectable="on" class="k-item"' + (hide ? HIDE : "") + '>' + itemTemplate(data) + '</li>';
-            }
+            };
 
             that.tagTemplate = function(data) {
                 return '<li><span class="">' + tagTemplate(data) + '</span><span class="k-icon k-delete">delete</span></li>';
-            }
+            };
         },
 
         _input: function() {
             var that = this,
-                element = that.element,
                 input = that._innerWrapper.children("input.k-input");
 
             if (!input[0]) {
@@ -818,7 +823,6 @@ kendo_module({
 
         _tagList: function() {
             var that = this,
-                element = that.element,
                 tagList = that._innerWrapper.children("ul.k-list");
 
             if (!tagList[0]) {
