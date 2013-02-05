@@ -68,41 +68,114 @@
                 equal(dom.data("kendoMultiSelect").value(), "bar");
             });
 
-            /*test("changing a value updates the view model", function() {
-                var dom = $('<select data-value-field="text" data-role="multiselect" data-bind="value:value, source:items" />');
+            test("binding multi select value to multiple objects", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 
-                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
-                observable.value = observable.items[1];
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
+
+                viewModel.selectedItem.push(viewModel.items[1]);
+                viewModel.selectedItem.push(viewModel.items[2]);
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").eq(1).is(":selected"));
+                ok(dom.find("option").eq(2).is(":selected"));
+            });
+
+            test("binding multi select value to observable object", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: null
+                });
+
+                viewModel.set("selectedItem", viewModel.items[1]);
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").eq(1).is(":selected"));
+                ok(!dom.find("option").eq(2).is(":selected"));
+            });
+
+            test("changing a value updates ObservableArray property", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
 
                 kendo.bind(dom, observable);
-                dom.data("kendoMultiSelect").value("bar");
+                dom.data("kendoMultiSelect").value(["foo", "bar"]);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                equal(observable.selectedItem[0], observable.items[0]);
+                equal(observable.selectedItem[1], observable.items[1]);
+            });
+
+            test("changing a value updates ObservableObject property", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
+
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    value: null
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value(["foo", "bar"]);
                 dom.data("kendoMultiSelect").trigger("change");
 
                 equal(observable.value, observable.items[0]);
             });
-            test("changing value to a custom one updates the view model", function() {
-                var dom = $('<select data-text-field="text" data-role="multiselect" data-bind="value:value, source:items" />');
 
-                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+            test("changing a value updates value property of ViewModel", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
 
-                observable.value = observable.items[1];
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    value: ""
+                });
 
                 kendo.bind(dom, observable);
-                dom.data("kendoMultiSelect").value("moo");
+                dom.data("kendoMultiSelect").value(["foo", "bar"]);
                 dom.data("kendoMultiSelect").trigger("change");
 
-                equal(observable.value, "moo");
+                equal(observable.value, observable.items[0].name);
             });
 
-            test("custom view model value", function() {
-                var dom = $('<select data-text-field="text" data-role="multiselect" data-bind="value:value, source:items" />');
+            test("clearing value of the widget sets model property to empty array", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
 
-                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
-                observable.value = "moo";
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    value: { name: "foo" }
+                });
 
                 kendo.bind(dom, observable);
-                equal(dom.data("kendoMultiSelect").value(), "moo");
+                dom.data("kendoMultiSelect").value(null);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                ok(observable.value instanceof kendo.data.ObservableArray);
             });
+
+            test("clearing value of the widget sets value property to empty array", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
+
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    value: "foo"
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value(null);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                ok(observable.value instanceof kendo.data.ObservableArray);
+                equal(observable.value.length, 0);
+            });
+
             test("binding multiselect initialized before binding", function() {
                 var dom = $('<select data-value-field="text" data-bind="value:value, source:items" />');
 
@@ -113,7 +186,8 @@
 
                 kendo.bind(dom, observable);
 
-                equal(dom.data("kendoMultiSelect").value(), "bar");
+                equal(dom.data("kendoMultiSelect").value().length, 1);
+                equal(dom.data("kendoMultiSelect").value()[0], "bar");
             });
 
             test("binding multiselect initialized after binding", function() {
@@ -126,11 +200,12 @@
 
                 dom.kendoMultiSelect();
 
-                equal(dom.data("kendoMultiSelect").value(), "bar");
+                equal(dom.data("kendoMultiSelect").value().length, 1);
+                equal(dom.data("kendoMultiSelect").value()[0], "bar");
             });
 
             test("binding template", function() {
-                var dom = $('<select data-template="template" data-role="multiselect" data-bind="source:items" />');
+                var dom = $('<select data-item-template="template" data-role="multiselect" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -140,7 +215,7 @@
             });
 
             test("binding template containing binding attributes", function() {
-                var dom = $('<select data-role="multiselect" data-template="template-with-attributes" data-bind="source:items" />');
+                var dom = $('<select data-role="multiselect" data-item-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -150,7 +225,7 @@
             });
 
             test("updating an item from the data source updates the corresponding multiselect item", function() {
-                var dom = $('<select data-role="multiselect" data-template="template-with-attributes" data-bind="source:items" />');
+                var dom = $('<select data-role="multiselect" data-item-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -162,7 +237,7 @@
             });
 
             test("destroying binding targets when the datasource changes", function() {
-                var dom = $('<select data-role="multiselect" data-template="template-with-attributes" data-bind="source:items" />');
+                var dom = $('<select data-role="multiselect" data-item-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"} ] });
 
@@ -227,7 +302,6 @@
                 equal(multiselect._events["dataBound"].length, 0);
                 equal(multiselect._events["dataBinding"].length, 0);
             });
-
 
             test("dataBound event is raised if attached as option", 2, function() {
                 var dom = $('<div data-role="multiselect" data-bound="dataBound" data-bind="source:items" />');
@@ -432,29 +506,6 @@
                 equal($.trim(multiselect.ul.children().eq(0).text()), "foo");
                 equal($.trim(multiselect.ul.children().eq(1).text()), "bar");
             });
-
-            test("Enter custom value after re bind", function() {
-                var dom = $('<select data-text-field="text" data-value-field="text" data-bind="source:dataSource" data-role="multiselect" />');
-                var dataSource = new kendo.data.DataSource({
-                    data: [{text:"foo"}, {text:"bar"}]
-                });
-
-                var observable = kendo.observable({
-                    dataSource: dataSource
-                });
-
-                kendo.bind(dom, observable);
-                var multiselect = dom.data("kendoMultiSelect");
-
-                multiselect.value("custom");
-
-                dataSource.add({ text: "custom"});
-
-                multiselect.value("custom2");
-
-                equal(dataSource.data().length, 3);
-                equal(multiselect.value(), "custom2");
-            });*/
         </script>
 
         <script id="template" type="text/x-kendo-template">

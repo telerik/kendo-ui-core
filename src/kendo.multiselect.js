@@ -20,7 +20,6 @@ kendo_module({
         OPEN = "open",
         CLOSE = "close",
         CHANGE = "change",
-        DATABOUND = "dataBound",
         PROGRESS = "progress",
         SELECT = "select",
         NEXT = "nextSibling",
@@ -65,18 +64,18 @@ kendo_module({
                 options.placeholder = element.data("placeholder");
             }
 
-            that._focused = that.input
-                                .on("keydown" + ns, proxy(that._keydown, that))
-                                .on("paste" + ns, proxy(that._search, that))
-                                .on("focus" + ns, function(e) { that._placeholder(false); })
-                                .on("blur" + ns, function() {
-                                    that._placeholder();
-                                    that.close();
+            that.input
+                .on("keydown" + ns, proxy(that._keydown, that))
+                .on("paste" + ns, proxy(that._search, that))
+                .on("focus" + ns, function(e) { that._placeholder(false); })
+                .on("blur" + ns, function() {
+                    that._placeholder();
+                    that.close();
 
-                                    if (that._state === FILTER) {
-                                        that._state = ACCEPT;
-                                    }
-                                });
+                    if (that._state === FILTER) {
+                        that._state = ACCEPT;
+                    }
+                });
 
             id = element.attr(ID);
 
@@ -108,6 +107,8 @@ kendo_module({
             if (options.autoBind) {
                 that.dataSource.fetch();
             }
+
+            kendo.notify(that);
         },
 
         options: {
@@ -132,15 +133,26 @@ kendo_module({
             CLOSE,
             CHANGE,
             SELECT,
-            DATABOUND
+            "dataBinding",
+            "dataBound"
         ],
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
+        },
 
         setOptions: function(options) {
             List.fn.setOptions.call(this, options);
 
             this._template();
             this._accessors();
-            this._aria(that.tagList.attr(ID));
+            this._aria(this.tagList.attr(ID));
         },
 
         current: function(candidate) {
@@ -192,7 +204,7 @@ kendo_module({
             var that = this,
                 wrapper = that.wrapper.off(ns),
                 tagList = that.tagList.off(ns),
-                input = that.input;
+                input = that.input.add(that.element);
 
             if (enable === false) {
                 wrapper.addClass(DISABLEDCLASS);
@@ -252,9 +264,11 @@ kendo_module({
         },
 
         refresh: function() {
-            var that = this,
-                length = that._render(that.dataSource.view());
+            var that = this, length;
 
+            that.trigger("dataBinding");
+
+            length = that._render(that.dataSource.view());
             that._height(length);
 
             if (that._state !== FILTER && !that.element.val()) { //TODO test for perf. Use $.val to find option.selected
@@ -271,7 +285,7 @@ kendo_module({
             }
 
             that._hideBusy();
-            that.trigger(DATABOUND);
+            that.trigger("dataBound");
         },
 
         search: function(word) {
@@ -794,7 +808,7 @@ kendo_module({
                 input = $('<input class="k-input" style="width: 25px" />').appendTo(that._innerWrapper);
             }
 
-            that.input = input.attr({
+            that._focused = that.input = input.attr({
                 "role": "listbox",
                 "aria-expanded": false
             });

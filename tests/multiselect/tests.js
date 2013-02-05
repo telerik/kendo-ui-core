@@ -30,5 +30,9 @@ tests.push(
     {
         page: "multiselect/aria.html",
         title: "multiselect ARIA"
+    },
+    {
+        page: "multiselect/mvvm.html",
+        title: "multiselect MVVM"
     }
 );
