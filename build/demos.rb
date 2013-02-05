@@ -224,6 +224,10 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
                 .sub('themebuilder', 'dist/themebuilder/staging'),
      :root => 'dist/themebuilder/staging/'
 
+tree :to => 'dist/demos/staging-java',
+     :from => FileList['dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/**/*'],
+     :root => 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/'
+
 class PatchedWebConfigTask < Rake::FileTask
     attr_accessor :cdn_root, :themebuilder_root
     def execute(args=nil)
@@ -261,7 +265,8 @@ namespace :demos do
 
     task :release => 'demos/mvc/bin/Kendo.dll'
 
-    task :upload_to_cdn => [:js,
+    task :upload_to_cdn => [
+        :js,
         :less,
         :release,
         'dist/demos/staging/content/cdn/js',
@@ -293,6 +298,14 @@ namespace :demos do
 
     desc('Build staging demo site')
     task :staging => 'dist/demos/staging.zip'
+
+    desc('Build java demos for staging')
+    task :staging_java => [
+        :js,
+        :less,
+        'dist/bundles/jsp.commercial.zip',
+        'dist/demos/staging-java'
+    ]
 
     task :production_site => [:release,
         'dist/demos/production',
