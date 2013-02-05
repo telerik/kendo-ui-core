@@ -7969,6 +7969,7 @@ kendo_module({
         delete seriesDefaults.line;
         delete seriesDefaults.verticalLine;
         delete seriesDefaults.pie;
+        delete seriesDefaults.donut;
         delete seriesDefaults.area;
         delete seriesDefaults.verticalArea;
         delete seriesDefaults.scatter;
