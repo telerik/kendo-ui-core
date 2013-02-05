@@ -27,3 +27,8 @@ cookbook_file "/etc/tomcat7/server.xml" do
     notifies :restart, resources(:service => "tomcat7")
 end
 
+directory "/var/lib/tomcat7/webapps/" do
+    owner "jenkins"
+    group "nogroup"
+    recursive true
+end
