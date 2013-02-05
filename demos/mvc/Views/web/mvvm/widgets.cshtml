@@ -17,6 +17,7 @@
     comboBoxValue: <span data-bind="text: displayComboBoxValue"></span>,
     datePickerValue: <span data-bind="text: displayDatePickerValue"></span>,
     dropDownListValue: <span data-bind="text: displayDropDownListValue"></span>,
+    multiSelectValue: <span data-bind="text: displayMultiSelectValue"></span>,
     gridSource: [
 <span data-bind="text: displayGridSource"></span>    ],
     numericTextBoxValue: <span data-bind="text: displayNumericTextBoxValue"></span>,
@@ -44,6 +45,12 @@
             <td>
                 <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
                 <h4>DropDownList </h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select multiple="multiple" data-role="multiselect" data-text-field="name" data-value-field="value" data-bind="source: colors, value: multiSelectValue"></select>
+                <h4>MultiSelect </h4>
             </td>
         </tr>
         <tr>
@@ -182,6 +189,11 @@
                 displayDropDownListValue: function() {
                     var dropDownListValue = this.get("dropDownListValue");
                     return kendo.stringify(dropDownListValue);
+                },
+                multiSelectValue: [],
+                displayMultiSelectValue: function() {
+                    var multiSelectValue = this.get("multiSelectValue");
+                    return kendo.stringify(multiSelectValue);
                 },
                 gridSource: [
                     { Name: "Socks", Price: 18.00, UnitsInStock: 39 },
@@ -341,6 +353,11 @@ var viewModel = kendo.observable({
     displayDropDownListValue: function() {
         var dropDownListValue = this.get("dropDownListValue");
         return kendo.stringify(dropDownListValue);
+    },
+    multiSelectValue: [],
+    displayMultiSelectValue: function() {
+        var multiSelectValue = this.get("multiSelectValue");
+        return kendo.stringify(multiSelectValue);
     },
     gridSource: [
         { Name: "Chai", Price: 18.00, UnitsInStock: 39 },
