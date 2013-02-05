@@ -302,7 +302,10 @@ namespace :demos do
         :js,
         :less,
         SPRING_DEMOS_WAR
-    ]
+    ] do
+        sh "rm -rf dist/demos/staging-java/"
+        sh "unzip -d dist/demos/staging-java/ #{SPRING_DEMOS_WAR}"
+    end
 
     task :production_site => [:release,
         'dist/demos/production',
