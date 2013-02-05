@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Filter_And" xml:space="preserve">
+    <value>Och</value>
+    <comment>And</comment>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Rensa</value>
+    <comment>Clear</comment>
+  </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>Är lika med</value>
+    <comment>Is equal to</comment>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>Är senare än</value>
+    <comment>Is after</comment>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Är lika eller senare än</value>
+    <comment>Is after or equal to</comment>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>Är tidigare än</value>
+    <comment>Is before</comment>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Är lika eller tidigare än</value>
+    <comment>Is before or equal to</comment>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>Är inte lika med</value>
+    <comment>Is not equal to</comment>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>Filtrera</value>
+    <comment>Filter</comment>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Visa poster med värde:</value>
+    <comment>Show items with value that:</comment>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>är falskt</value>
+    <comment>is false</comment>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>är sant</value>
+    <comment>is true</comment>
+  </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>Är lika med</value>
+    <comment>Is equal to</comment>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>Är större än</value>
+    <comment>Is greater than</comment>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Är lika eller större än</value>
+    <comment>Is greater than or equal to</comment>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>Är mindre än</value>
+    <comment>Is less than</comment>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Är lika eller mindre än</value>
+    <comment>Is less than or equal to</comment>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>Är inte lika med</value>
+    <comment>Is not equal to</comment>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Eller</value>
+    <comment>Or</comment>
+  </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>Innehåller</value>
+    <comment>Contains</comment>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Innehåller inte</value>
+    <comment>Does not contain</comment>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Slutar med</value>
+    <comment>Ends with</comment>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>Är lika med</value>
+    <comment>Is equal to</comment>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>Är inte lika med</value>
+    <comment>Is not equal to</comment>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Börjar med</value>
+    <comment>Starts with</comment>
+  </data>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>Avbryt ändringar</value>
+    <comment>Cancel changes</comment>
+  </data>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>Är du säker på att du vill radera denna post?</value>
+    <comment>Are you sure you want to delete this item?</comment>
+  </data>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>Lägg till post</value>
+    <comment>Add new item</comment>
+  </data>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>Radera</value>
+    <comment>Delete</comment>
+  </data>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>Ändra</value>
+    <comment>Edit</comment>
+  </data>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>Spara ändringar</value>
+    <comment>Save changes</comment>
+  </data>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>Välj</value>
+    <comment>Select</comment>
+  </data>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>Spara</value>
+    <comment>Update</comment>
+  </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Dra en kolumnrubrik hit för att sortera på den kolumnen</value>
+    <comment>Drag a column header and drop it here to group by that column</comment>
+  </data>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>{0} - {1} av {2} poster</value>
+    <comment>{0} - {1} of {2} items</comment>
+  </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>Det finns inga poster</value>
+    <comment>No items to display</comment>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Gå till första sidan</value>
+    <comment>Go to the first page</comment>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>poster per sida</value>
+    <comment>items per page</comment>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Gå till sista sidan</value>
+    <comment>Go to the last page</comment>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Gå till nästa sida</value>
+    <comment>Go to the next page</comment>
+  </data>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>av {0}</value>
+    <comment>of {0}</comment>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Sida</value>
+    <comment>Page</comment>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Gå till föregående sida</value>
+    <comment>Go to the previous page</comment>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Uppdatera</value>
+    <comment>Refresh</comment>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Försök igen</value>
+    <comment>Retry</comment>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Välj...</value>
+    <comment>Select...</comment>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Ta bort</value>
+    <comment>Remove</comment>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Ladda upp filer</value>
+    <comment>Upload files</comment>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>släpp filer här för att ladda upp</value>
+    <comment>drop files here to upload</comment>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>misslyckades</value>
+    <comment>failed</comment>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>uppladdad</value>
+    <comment>uploaded</comment>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>laddar upp</value>
+    <comment>uploading</comment>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>Fet</value>
+    <comment>Bold</comment>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>Lägg till länk</value>
+    <comment>Insert hyperlink</comment>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>Välj typsnitt</value>
+    <comment>Select font family</comment>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>(ärvt typsnitt)</value>
+    <comment>(inherited font)</comment>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>Välj storlek</value>
+    <comment>Select font size</comment>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>(ärvd storlek)</value>
+    <comment>(inherited size)</comment>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>Formatering</value>
+    <comment>Format</comment>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>Öka indrag</value>
+    <comment>Indent</comment>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>Lägg till HTML</value>
+    <comment>Insert HTML</comment>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>Lägg till bild</value>
+    <comment>Insert image</comment>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>Lägg till numrerad lista</value>
+    <comment>Insert ordered list</comment>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>Lägg till punktlista</value>
+    <comment>Insert unordered list</comment>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>Kursiv</value>
+    <comment>Italic</comment>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>Centrerad text</value>
+    <comment>Center text</comment>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>Marginaljusterad text</value>
+    <comment>Justify</comment>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>Vänsterjusterad text</value>
+    <comment>Align text left</comment>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>Högerjusterad text</value>
+    <comment>Align text right</comment>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>Minska indrag</value>
+    <comment>Outdent</comment>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>Genomstruken</value>
+    <comment>Strikethrough</comment>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>Stil</value>
+    <comment>Styles</comment>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>Nedsänkt</value>
+    <comment>Subscript</comment>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>Upphöjd</value>
+    <comment>Superscript</comment>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>Understruken</value>
+    <comment>Underline</comment>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>Ta bort länk</value>
+    <comment>Remove hyperlink</comment>
+  </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>Är lika med</value>
+    <comment>Is equal to</comment>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>Är inte lika med</value>
+    <comment>Is not equal to</comment>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Välj-</value>
+    <comment>-Select value-</comment>
+  </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Kolumner</value>
+    <comment>Columns</comment>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Sortera fallande</value>
+    <comment>Sort Ascending</comment>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Sortera stigande</value>
+    <comment>Sort Descending</comment>
+  </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Är du säker på att du vill radera "{0}"?</value>
+    <comment>Are you sure you want to delete "{0}"?</comment>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>En mapp med detta namn hittades ej.</value>
+    <comment>A directory with this name was not found.</comment>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Tom mapp</value>
+    <comment>Empty Folder</comment>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>Filen "{0}" är inte giltig. Tillåtna filtyper är {1}.</value>
+    <comment>The selected file "{0}" is not valid. Supported file types are {1}.</comment>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Sortera på:</value>
+    <comment>Arrange by:</comment>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Namn</value>
+    <comment>Name</comment>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Storlek</value>
+    <comment>Size</comment>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>'En fil med namn "{0}" finns redan i aktuell mapp. Vill du skriva över den?</value>
+    <comment>'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?</comment>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Ladda upp</value>
+    <comment>Upload</comment>
+  </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Bakgrundsfärg</value>
+    <comment>Background Color</comment>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Färg</value>
+    <comment>Color</comment>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>släpp filer här för att ladda upp</value>
+    <comment>drop files here to upload</comment>
+  </data>
+  <data name="Editor_DialogButtonSeparator" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Editor_DialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Editor_DialogInsert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="Editor_ImageAltText" xml:space="preserve">
+    <value>Alternate text</value>
+  </data>
+  <data name="Editor_ImageWebAddress" xml:space="preserve">
+    <value>Web address</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
+    <value>Open link in new window</value>
+  </data>
+  <data name="Editor_LinkText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Editor_LinkToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Editor_LinkWebAddress" xml:space="preserve">
+    <value>Web address</value>
+  </data>
+</root>
