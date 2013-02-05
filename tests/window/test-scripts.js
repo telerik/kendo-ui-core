@@ -1,5 +1,6 @@
 document.write('\
     <script src="../../src/jquery.js"></script>\
+    <script src="../jquery.mockjax.js"></script>\
     <script src="../../src/kendo.core.js"></script>\
     <script src="../../src/kendo.data.js"></script>\
     <script src="../../src/kendo.binder.js"></script>\

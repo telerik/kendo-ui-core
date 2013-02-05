@@ -786,7 +786,7 @@ kendo_module({
                     refreshIcon.addClass(LOADING);
                 }, 100);
 
-            jQuery.ajax(extend({
+            $.ajax(extend({
                 type: "GET",
                 dataType: "html",
                 cache: false,
