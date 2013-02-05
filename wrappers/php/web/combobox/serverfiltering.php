@@ -40,23 +40,20 @@ $dataSource->transport($transport)
            ->schema($schema)
            ->serverFiltering(true);
 
-$autoComplete = new \Kendo\UI\AutoComplete('products');
+$comboBox = new \Kendo\UI\ComboBox('products');
 
-$autoComplete->dataSource($dataSource)
-             ->dataTextField('ProductName')
-             ->ignoreCase(false);
+$comboBox->dataSource($dataSource)
+         ->dataTextField('ProductName')
+         ->dataValueField('ProductID')
+         ->filter('contains')
+         ->ignoreCase(false);
 
 ?>
-<div>
-    <label for="products">Choose product:</label>
+<div class="demo-section" style="width: 250px;">
+    <label for="products">Select product:</label>
+
 <?php
-echo $autoComplete->render();
+echo $comboBox->render();
 ?>
 </div>
-<style scoped="scoped">
-    .k-autocomplete
-    {
-        width: 250px;
-    }
-</style>
 <?php require_once '../../include/footer.php'; ?>

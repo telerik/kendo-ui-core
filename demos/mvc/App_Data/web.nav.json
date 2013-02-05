@@ -180,7 +180,7 @@
                     "meta": "Example of Kendo UI ComboBox remote data binding.  This demo shows how the auto-searchable dropdown list of the ComboBox is populated with remote data."
                 },
                 {
-                    "packages": [ "mvc", "jsp" ],
+                    "packages": [ "mvc", "jsp" , "php"],
                     "text": "Server filtering",
                     "url": "combobox/serverfiltering.html"
                 },
