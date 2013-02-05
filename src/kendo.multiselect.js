@@ -57,6 +57,8 @@ kendo_module({
             that._textContainer();
             that._loader();
 
+            that._tabindex(that.input);
+
             options = that.options;
             element = that.element.attr("multiple", "multiple").hide();
 

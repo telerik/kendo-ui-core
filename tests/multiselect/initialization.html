@@ -284,6 +284,15 @@
                 }, 150);
             });
 
+
+            test("persist tabIndex of the original element", function() {
+                var multiselect = new MultiSelect($("<select tabindex='5'/>"));
+
+                var input = multiselect.input;
+
+                equal(input.attr("tabIndex"), 5);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
