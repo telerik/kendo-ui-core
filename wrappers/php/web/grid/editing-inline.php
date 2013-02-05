@@ -39,25 +39,25 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $create = new \Kendo\Data\DataSourceTransportCreate();
 
-$create->url('editing.php?type=create')
+$create->url('editing-inline.php?type=create')
      ->contentType('application/json')
      ->type('POST');
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-$read->url('editing.php?type=read')
+$read->url('editing-inline.php?type=read')
      ->contentType('application/json')
      ->type('POST');
 
 $update = new \Kendo\Data\DataSourceTransportUpdate();
 
-$update->url('editing.php?type=update')
+$update->url('editing-inline.php?type=update')
      ->contentType('application/json')
      ->type('POST');
 
 $destroy = new \Kendo\Data\DataSourceTransportDestroy();
 
-$destroy->url('editing.php?type=destroy')
+$destroy->url('editing-inline.php?type=destroy')
      ->contentType('application/json')
      ->type('POST');
 
@@ -112,7 +112,7 @@ $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
            ->batch(true)
-           ->pageSize(30)
+           ->pageSize(20)
            ->schema($schema);
 
 $grid = new \Kendo\UI\Grid('grid');
@@ -124,12 +124,12 @@ $productName->field('ProductName')
 $unitPrice = new \Kendo\UI\GridColumn();
 $unitPrice->field('UnitPrice')
           ->format('{0:c}')
-          ->width(150)
+          ->width(100)
           ->title('Unit Price');
 
 $unitsInStock = new \Kendo\UI\GridColumn();
 $unitsInStock->field('UnitsInStock')
-          ->width(150)
+          ->width(100)
           ->title('Units In Stock');
 
 $discontinued = new \Kendo\UI\GridColumn();
@@ -137,17 +137,16 @@ $discontinued->field('Discontinued')
           ->width(100);
 
 $command = new \Kendo\UI\GridColumn();
-$command->addCommandItem('destroy')
+$command->addCommandItem('edit')
+        ->addCommandItem('destroy')
         ->title('&nbsp;')
-        ->width(110);
+        ->width(172);
 
 $grid->addColumn($productName, $unitPrice, $unitsInStock, $discontinued, $command)
      ->dataSource($dataSource)
-     ->addToolbarItem(new \Kendo\UI\GridToolbarItem('create'),
-        new \Kendo\UI\GridToolbarItem('save'), new \Kendo\UI\GridToolbarItem('cancel'))
-     ->height(400)
-     ->navigatable(true)
-     ->editable(true)
+     ->addToolbarItem(new \Kendo\UI\GridToolbarItem('create'))
+     ->height(430)
+     ->editable('inline')
      ->pageable(true);
 
 echo $grid->render();
