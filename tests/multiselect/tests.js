@@ -34,5 +34,9 @@ tests.push(
     {
         page: "multiselect/mvvm.html",
         title: "multiselect MVVM"
+    },
+    {
+        page: "multiselect/lint.html",
+        title: "multiselect Lint"
     }
 );
