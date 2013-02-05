@@ -97,6 +97,33 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        public static string Editor_DialogButtonSeparator {
+            get {
+                return ResourceManager.GetString("Editor_DialogButtonSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Editor_DialogCancel {
+            get {
+                return ResourceManager.GetString("Editor_DialogCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert.
+        /// </summary>
+        public static string Editor_DialogInsert {
+            get {
+                return ResourceManager.GetString("Editor_DialogInsert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A directory with this name was not found..
         /// </summary>
         public static string Editor_DirectoryNotFound {
@@ -174,6 +201,24 @@ namespace Kendo.Mvc.Resources {
         public static string Editor_FormatBlock {
             get {
                 return ResourceManager.GetString("Editor_FormatBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate text.
+        /// </summary>
+        public static string Editor_ImageAltText {
+            get {
+                return ResourceManager.GetString("Editor_ImageAltText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web address.
+        /// </summary>
+        public static string Editor_ImageWebAddress {
+            get {
+                return ResourceManager.GetString("Editor_ImageWebAddress", resourceCulture);
             }
         }
         
@@ -273,6 +318,42 @@ namespace Kendo.Mvc.Resources {
         public static string Editor_JustifyRight {
             get {
                 return ResourceManager.GetString("Editor_JustifyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open link in new window.
+        /// </summary>
+        public static string Editor_LinkOpenInNewWindow {
+            get {
+                return ResourceManager.GetString("Editor_LinkOpenInNewWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string Editor_LinkText {
+            get {
+                return ResourceManager.GetString("Editor_LinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ToolTip.
+        /// </summary>
+        public static string Editor_LinkToolTip {
+            get {
+                return ResourceManager.GetString("Editor_LinkToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web address.
+        /// </summary>
+        public static string Editor_LinkWebAddress {
+            get {
+                return ResourceManager.GetString("Editor_LinkWebAddress", resourceCulture);
             }
         }
         

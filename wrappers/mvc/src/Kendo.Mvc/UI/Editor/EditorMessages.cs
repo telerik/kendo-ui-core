@@ -35,7 +35,15 @@ namespace Kendo.Mvc.UI
             Styles = Messages.Editor_Styles;
             ForeColor = Messages.Editor_ForeColor;
             BackColor = Messages.Editor_BackColor;
-
+            ImageWebAddress= Messages.Editor_ImageWebAddress;
+            ImageAltText= Messages.Editor_ImageAltText;
+            LinkWebAddress = Messages.Editor_LinkWebAddress;
+            LinkText = Messages.Editor_LinkText;
+            LinkToolTip = Messages.Editor_LinkToolTip;
+            LinkOpenInNewWindow= Messages.Editor_LinkOpenInNewWindow;
+            DialogInsert = Messages.Editor_DialogInsert;
+            DialogButtonSeparator = Messages.Editor_DialogButtonSeparator;
+            DialogCancel = Messages.Editor_DialogCancel;
 
             ImageBrowserMessages = new EditorImageBrowserMessages();
         }
@@ -66,6 +74,15 @@ namespace Kendo.Mvc.UI
         public string Styles { get; set; }
         public string ForeColor { get; set; }
         public string BackColor { get; set; }
+        public string ImageWebAddress { get; set; }
+        public string ImageAltText { get; set; }
+        public string LinkWebAddress { get; set; }
+        public string LinkText { get; set; }
+        public string LinkToolTip { get; set; }
+        public string LinkOpenInNewWindow { get; set; }
+        public string DialogInsert { get; set; }
+        public string DialogButtonSeparator { get; set; }
+        public string DialogCancel { get; set; }
 
         public EditorImageBrowserMessages ImageBrowserMessages { get; set; }
 
@@ -95,6 +112,15 @@ namespace Kendo.Mvc.UI
         private const string DefaultStyles = "Styles";
         private const string DefaultBackColor = "Background color";
         private const string DefaultForeColor = "Color";
+        private const string DefaultImageWebAddress = "Web address";
+        private const string DefaultImageAltText = "Web address";
+        private const string DefaultLinkWebAddress = "Web address";
+        private const string DefaultLinkText = "Text";
+        private const string DefaultLinkToolTip = "ToolTip";
+        private const string DefaultLinkOpenInNewWindow = "Open link in new window";
+        private const string DefaultDialogInsert = "Insert";
+        private const string DefaultDialogButtonSeparator = "or";
+        private const string DefaultDialogCancel = "Cancel";
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -231,6 +257,51 @@ namespace Kendo.Mvc.UI
             if (ForeColor != DefaultForeColor)
             {
                 json["foreColor"] = ForeColor;
+            }
+
+            if (ImageWebAddress != DefaultImageWebAddress)
+            {
+                json["imageWebAddress"] = ImageWebAddress;
+            }
+
+            if (ImageAltText != DefaultImageAltText)
+            {
+                json["imageAltText"] = ImageAltText;
+            }
+
+            if (LinkWebAddress != DefaultLinkWebAddress)
+            {
+                json["linkWebAddress"] = LinkWebAddress;
+            }
+
+            if (LinkText != DefaultLinkText)
+            {
+                json["linkText"] = LinkText;
+            }
+
+            if (LinkToolTip != DefaultLinkToolTip)
+            {
+                json["linkToolTip"] = LinkToolTip;
+            }
+
+            if (LinkOpenInNewWindow != DefaultLinkOpenInNewWindow)
+            {
+                json["linkOpenInNewWindow"] = LinkOpenInNewWindow;
+            }
+
+            if (DialogInsert != DefaultDialogInsert)
+            {
+                json["dialogInsert"] = DialogInsert;
+            }
+
+            if (DialogButtonSeparator != DefaultDialogButtonSeparator)
+            {
+                json["dialogButtonSeparator"] = DialogButtonSeparator;
+            }
+
+            if (DialogCancel != DefaultDialogCancel)
+            {
+                json["dialogCancel"] = DialogCancel;
             }
         }
     }

@@ -129,6 +129,15 @@
   <data name="Editor_DeleteFile" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
+  <data name="Editor_DialogButtonSeparator" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Editor_DialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Editor_DialogInsert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
   <data name="Editor_DirectoryNotFound" xml:space="preserve">
     <value>A directory with this name was not found.</value>
   </data>
@@ -152,6 +161,12 @@
   </data>
   <data name="Editor_FormatBlock" xml:space="preserve">
     <value>Absatzstil</value>
+  </data>
+  <data name="Editor_ImageAltText" xml:space="preserve">
+    <value>Alternate text</value>
+  </data>
+  <data name="Editor_ImageWebAddress" xml:space="preserve">
+    <value>Web address</value>
   </data>
   <data name="Editor_Indent" xml:space="preserve">
     <value>Einzug vergrößern</value>
@@ -185,6 +200,18 @@
   </data>
   <data name="Editor_JustifyRight" xml:space="preserve">
     <value>Rechtsbündig</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
+    <value>Open link in new window</value>
+  </data>
+  <data name="Editor_LinkText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Editor_LinkToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Editor_LinkWebAddress" xml:space="preserve">
+    <value>Web address</value>
   </data>
   <data name="Editor_OrderBy" xml:space="preserve">
     <value>Arrange by:</value>

@@ -369,4 +369,31 @@
   <data name="Grid_SortDescending" xml:space="preserve">
     <value>降序排序</value>
   </data>
+  <data name="Editor_DialogButtonSeparator" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Editor_DialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Editor_DialogInsert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="Editor_ImageAltText" xml:space="preserve">
+    <value>Alternate text</value>
+  </data>
+  <data name="Editor_ImageWebAddress" xml:space="preserve">
+    <value>Web address</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
+    <value>Open link in new window</value>
+  </data>
+  <data name="Editor_LinkText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Editor_LinkToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Editor_LinkWebAddress" xml:space="preserve">
+    <value>Web address</value>
+  </data>
 </root>

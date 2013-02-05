@@ -1189,6 +1189,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.ru-RU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Messages.uk-UA.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.uk-UA.Designer.cs</LastGenOutput>

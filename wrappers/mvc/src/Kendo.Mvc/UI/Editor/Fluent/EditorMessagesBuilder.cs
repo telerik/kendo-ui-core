@@ -173,6 +173,69 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new EditorImageBrowserMessagesBuilder(messages.ImageBrowserMessages));
 
             return this;
+        }
+
+        public EditorMessagesBuilder ImageWebAddress(string message)
+        {
+            messages.ImageWebAddress = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder ImageAltText(string message)
+        {
+            messages.ImageAltText = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder LinkWebAddress(string message)
+        {
+            messages.LinkWebAddress = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder LinkText(string message)
+        {
+            messages.LinkText = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder LinkToolTip(string message)
+        {
+            messages.LinkToolTip = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder LinkOpenInNewWindow(string message)
+        {
+            messages.LinkOpenInNewWindow = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder DialogInsert(string message)
+        {
+            messages.DialogInsert = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder DialogButtonSeparator(string message)
+        {
+            messages.DialogButtonSeparator = message;
+
+            return this;
+        }
+
+        public EditorMessagesBuilder DialogCancel(string message)
+        {
+            messages.DialogCancel = message;
+
+            return this;
         } 
     }
 }
