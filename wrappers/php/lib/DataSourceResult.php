@@ -21,6 +21,14 @@ class DataSourceResult {
         'neq' => '!='
     );
 
+    private $aggregateFunctions = array(
+        'average' => 'AVG',
+        'min' => 'MIN',
+        'max' => 'MAX',
+        'count' => 'COUNT',
+        'sum' => 'SUM'
+    );
+
     function __construct($dsn) {
         $this->db = new PDO($dsn);
     }
@@ -44,7 +52,10 @@ class DataSourceResult {
     }
 
     private function group($data, $groups, $table, $request, $properties) {
-        return $this->groupBy($data, $groups, $table, $request, $properties);
+        if (count($data) > 0) {
+            return $this->groupBy($data, $groups, $table, $request, $properties);
+        }
+        return array();
     }
 
     private function mergeSortDescriptors($request) {
@@ -90,17 +101,19 @@ class DataSourceResult {
     }
 
     private function addFilterToRequest($field, $value, $request) {
-        $filters = isset($request->filter) ? $request->filter : new stdClass;
         $filter = (object)array(
             'logic' => 'and',
             'filters' => array(
-                //$filters,
                 (object)array(
                     'field' => $field,
                     'operator' => 'eq',
                     'value' => $value
                 ))
             );
+
+        if (isset($request->filter)) {
+            $filter->filters[] = $request->filter;
+        }
 
         return (object) array('filter' => $filter);
     }
@@ -137,7 +150,8 @@ class DataSourceResult {
 
             for ($index = 0; $index < $count; $index++) {
                 $aggregate = $aggregates[$index];
-                $functions[] = str_replace('average', 'AVG', $aggregate->aggregate).'('.$aggregate->field.') as '.$aggregate->field.'_'.$aggregate->aggregate;
+                $name = $this->aggregateFunctions[$aggregate->aggregate];
+                $functions[] = $name.'('.$aggregate->field.') as '.$aggregate->field.'_'.$aggregate->aggregate;
             }
 
             $sql = sprintf('SELECT %s FROM %s', implode(', ', $functions), $table);
@@ -158,7 +172,7 @@ class DataSourceResult {
 
             return $this->convertAggregateResult($result[0]);
         }
-        return array();
+        return (object)array();
     }
 
     private function convertAggregateResult($properties) {

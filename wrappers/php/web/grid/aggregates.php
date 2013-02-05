@@ -106,7 +106,6 @@ $grid->addColumn($productName, $unitPrice, $unitsOnOrder, $unitsInStock)
      ->dataSource($dataSource)
      ->scrollable(false)
      ->sortable(true)
-     //->filterable(true)
      ->pageable(true);
 
 echo $grid->render();

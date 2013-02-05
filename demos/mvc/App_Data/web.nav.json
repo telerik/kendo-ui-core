@@ -607,7 +607,7 @@
                     "url": "grid/aggregates.html",
                     "title": "Aggregating option demo for KendoGrid jQuery control",
                     "meta": "This example demonstrates the aggregate option for KendoGrid. Use demo source code to enable the grid to calculate aggregated values.",
-                    "packages": ["online", "offline", "jsp"]
+                    "packages": ["online", "offline", "jsp", "php"]
                 },
                 {
                     "text": "Filter menu customization",
