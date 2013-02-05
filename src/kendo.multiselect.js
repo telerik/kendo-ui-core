@@ -47,7 +47,7 @@ kendo_module({
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id;
+            var that = this, id, value;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -92,8 +92,14 @@ kendo_module({
             that._accessors();
             that._popup();
 
+            that._values = [];
             that._dataItems = [];
-            that._old = that._initialValues = options.value || element.val();
+
+            value = options.value || element.val();
+            if (value === null) {
+                value = [];
+            }
+            that._old = that._initialValues = value;
 
             that._reset();
             that._enable();
@@ -251,7 +257,7 @@ kendo_module({
 
             that._height(length);
 
-            if (that._state !== FILTER && !that.element.val()) {
+            if (that._state !== FILTER && !that.element.val()) { //TODO test for perf. Use $.val to find option.selected
                 that.value(that._initialValues);
             }
 
@@ -299,7 +305,7 @@ kendo_module({
                 idx = 0;
 
             if (value === undefined) {
-                return that.element.val();
+                return that._values;
             }
 
             for (; idx < length; idx++) {
@@ -679,6 +685,7 @@ kendo_module({
         _select: function(li) {
             var that = this,
                 dataItem,
+                value,
                 idx;
 
             if (!isNaN(li)) {
@@ -693,6 +700,14 @@ kendo_module({
             dataItem = that.dataSource.view()[idx];
             that.tagList.append(that.tagTemplate(dataItem));
             that._dataItems.push(dataItem);
+
+            //TODO test it
+            value = that._value(dataItem);
+            if (value === undefined) { //TODO: test this
+                value = that._text(dataItem);
+            }
+            that._values.push(value);
+            ///
 
             that._visibleItems -= 1;
             that.currentTag(null);
@@ -712,9 +727,11 @@ kendo_module({
             tag.remove();
             that.currentTag(null);
             dataItem = that._dataItems.splice(index, 1)[0];
+            that._values.splice(index, 1);
 
+            //TODO: test this
             value = that._value(dataItem);
-            if (value === undefined) { //TODO: test this
+            if (value === undefined) {
                 value = that._text(dataItem);
             }
 

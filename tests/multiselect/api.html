@@ -36,7 +36,7 @@
 
             module("kendo.ui.MultiSelect API", {
                 setup: function() {
-                    select = $("<select />").appendTo(document.body);
+                    select = $("<select multiple/>").appendTo(document.body);
                 },
                 teardown: function() {
                     if (select.data("kendoMultiSelect")) {
@@ -175,7 +175,15 @@
 
                 multiselect.value(null);
 
-                equal(multiselect.value(), null);
+                equal(multiselect.value().length, 0);
+            });
+
+            test("MultiSelect returns empty array if no value", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+                multiselect.value(null);
+
+                ok(multiselect.value() instanceof Array);
             });
 
             test("MultiSelect opens popup", function() {
