@@ -43,16 +43,16 @@
 
     internal class InternalHttpRequestBase : HttpRequestBase
     {
-        private readonly string appRelativeUrl;
+        private readonly string appCurrentUrl;
 
-        public InternalHttpRequestBase(string appRelativeUrl)
+        public InternalHttpRequestBase(string appCurrentUrl)
         {
-            this.appRelativeUrl = appRelativeUrl;
+            this.appCurrentUrl = appCurrentUrl;
         }
 
         public override string AppRelativeCurrentExecutionFilePath
         {
-            get { return appRelativeUrl; }
+            get { return MakeCurrentUrlRelative(appCurrentUrl); }
         }
 
         public override string PathInfo
@@ -62,7 +62,21 @@
 
         public override string CurrentExecutionFilePath
         {
-            get { return ""; }
+            get { return appCurrentUrl; }
+        }
+
+        private string MakeCurrentUrlRelative(string appCurrentUrl)
+        {
+            int appVirtualPathLength = HttpRuntime.AppDomainAppVirtualPath.Length;
+
+            if (appVirtualPathLength == 1)
+            {
+                return "~" + appCurrentUrl;
+            }
+            else
+            {
+                return "~" + appCurrentUrl.Substring(appVirtualPathLength - 1);
+            }
         }
     }
 }
