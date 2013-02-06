@@ -6,6 +6,10 @@ class DatePicker extends \Kendo\UI\Widget {
     protected function name() {
         return 'DatePicker';
     }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('input', true);
+    }
 //>> Properties
 
     /**
