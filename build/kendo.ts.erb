@@ -11,6 +11,7 @@ module kendo {
     declare function destroy(element: JQuery): void;
     declare function format(format: string, ...values: any[]): string;
     declare function htmlEncode(value: string): string;
+    declare function observable(data: any): kendo.data.ObservableObject;
     declare function parseDate(value: any, format?: string, culture?: string): Date;
     declare function parseFloat(value: any, culture?: string): number;
     declare function parseInt(value: any, culture?: string): number;
@@ -104,19 +105,29 @@ module kendo.data {
         parent(): ObservableObject;
         set(name: string, value: any): void;
         toJSON(): { [key: string]: any; };
+        uid: string;
     }
 
     class Model extends ObservableObject {
         idField: string;
         _defaultId: any;
-        fields: any;
+        fields: DataSourceSchemaModelFields;
         defaults: any;
         constructor(data?: any);
         dirty: bool;
         id: any;
-        uid: string;
         editable(field: string): bool;
         isNew(): bool;
+        static define(options: DataSourceSchemaModelWithFieldsObject): {
+            idField: string;
+            fields: DataSourceSchemaModelFields;
+            new (data?: any): Model;
+        };
+        static define(options: DataSourceSchemaModelWithFieldsArray): {
+            idField: string;
+            fields: DataSourceSchemaModelFields;
+            new (data?: any): Model;
+        };
     }
 
     class Node extends Model {
@@ -138,7 +149,8 @@ module kendo.data {
         schema?: HierarchicalDataSourceSchema;
     }
 
-    interface HierarchicalDataSourceSchema extends DataSourceSchema {
+
+    interface HierarchicalDataSourceSchema extends DataSourceSchemaWithOptionsModel {
         model?: HierarchicalDataSourceSchemaModel;
     }
 
@@ -188,12 +200,36 @@ module kendo.data {
     }
 
     interface DataSourceSchema {
+        model?: any;
+    }
+
+    interface DataSourceSchemaWithOptionsModel extends DataSourceSchema {
         model?: DataSourceSchemaModel;
+    }
+
+    interface DataSourceSchemaWithConstructorModel extends DataSourceSchema {
+        model?: {
+            idField: string;
+            fields: DataSourceSchemaModelFields;
+            new (data?: any): Model;
+        };
     }
 
     interface DataSourceSchemaModel {
         id?: string;
+        fields?: any;
+    }
+
+    interface DataSourceSchemaModelWithFieldsArray extends DataSourceSchemaModel {
         fields?: DataSourceSchemaModelField[];
+    }
+
+    interface DataSourceSchemaModelWithFieldsObject extends DataSourceSchemaModel {
+        fields?: DataSourceSchemaModelFields;
+    }
+
+    interface DataSourceSchemaModelFields {
+        [index: string]: DataSourceSchemaModelField;
     }
 
     interface DataSourceSchemaModelField {
@@ -226,12 +262,226 @@ module kendo.data {
         toJSON(): any[];
         unshift(...items: any[]): number;
     }
+
+    class DataSource extends Observable{
+        constructor(options?: DataSourceOptions);
+        options: DataSourceOptions;
+        add(model: Object): kendo.data.Model;
+        add(model: kendo.data.Model): kendo.data.Model;
+        aggregate(val: any): void;
+        aggregate(): any;
+        aggregates(): any;
+        at(index: number): kendo.data.ObservableObject;
+        cancelChanges(model?: kendo.data.Model): void;
+        data(): kendo.data.ObservableArray;
+        data(value: any): void;
+        fetch(callback?: Function): void;
+        filter(filters: DataSourceFilterItem): void;
+        filter(filters: DataSourceFilterItem[]): void;
+        filter(filters: DataSourceFilters): void;
+        filter(): DataSourceFilters;
+        get(id: any): kendo.data.Model;
+        getByUid(uid: string): kendo.data.Model;
+        group(groups: any): void;
+        group(): any;
+        hasChanges(): bool;
+        indexOf(value: kendo.data.ObservableObject): number;
+        insert(index: number, model: kendo.data.Model): kendo.data.Model;
+        insert(index: number, model: Object): kendo.data.Model;
+        page(): number;
+        page(page: number): void;
+        pageSize(): number;
+        pageSize(size: number): void;
+        query(options?: any): void;
+        read(data?: any): void;
+        remove(model: kendo.data.Model): void;
+        sort(sort: DataSourceSortItem): void;
+        sort(sort: DataSourceSortItem[]): void;
+        sort(): DataSourceSortItem[];
+        sync(): void;
+        total(): number;
+        totalPages(): number;
+        view(): kendo.data.ObservableArray;
+    }
+
+    interface DataSourceAggregateItem {
+        field?: string;
+        aggregate?: string;
+    }
+
+    interface DataSourceFilter {
+    }
+
+    interface DataSourceFilterItem extends DataSourceFilter {
+        operator?: string;
+        field?: string;
+        value?: any;
+    }
+
+    interface DataSourceFilters extends DataSourceFilter {
+        logic?: string;
+        filters?: DataSourceFilter[];
+    }
+
+    interface DataSourceGroupItemAggregate {
+        field?: string;
+        aggregate?: string;
+    }
+
+    interface DataSourceGroupItem {
+        field?: string;
+        dir?: string;
+        aggregates?: DataSourceGroupItemAggregate[];
+    }
+
+    interface DataSourceSchema {
+        aggregates?: any;
+        data?: any;
+        errors?: any;
+        groups?: any;
+        parse?: Function;
+        total?: any;
+        type?: string;
+    }
+
+    interface DataSourceSortItem {
+        field?: string;
+        dir?: string;
+    }
+
+    interface DataSourceTransportCreate {
+        cache?: bool;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
+    }
+
+    interface DataSourceTransportDestroy {
+        cache?: bool;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
+    }
+
+    interface DataSourceTransportRead {
+        cache?: bool;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
+    }
+
+    interface DataSourceTransportUpdate {
+        cache?: bool;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
+    }
+
+    interface DataSourceTransport {
+        create?: any;
+        destroy?: any;
+        read?: any;
+        update?: any;
+    }
+
+    interface DataSourceTransportWithObjectOperations extends DataSourceTransport {
+        create?: DataSourceTransportCreate;
+        destroy?: DataSourceTransportDestroy;
+        read?: DataSourceTransportRead;
+        update?: DataSourceTransportUpdate;
+    }
+
+    interface DataSourceTransportWithFunctionOperations extends DataSourceTransport {
+        create?: (options: DataSourceTransportOptions) => void;
+        destroy?: (options: DataSourceTransportOptions) => void;
+        read?: (options: DataSourceTransportReadOptions) => void;
+        update?: (options: DataSourceTransportOptions) => void;
+    }
+
+    interface DataSourceTransportOptions {
+        success: (data?: any) => void;
+        error: (error?: any) => void;
+        data: any;
+    }
+
+    interface DataSourceTransportReadOptionsData {
+        sort?: DataSourceSortItem[];
+        filter?: DataSourceFilters;
+        take?: number;
+        skip?: number;
+    }
+
+    interface DataSourceTransportReadOptions extends DataSourceTransportOptions {
+        data: DataSourceTransportReadOptionsData;
+    }
+
+    interface DataSourceTransportBatchOptionsData {
+        models: any[];
+    }
+
+    interface DataSourceTransportBatchOptions extends DataSourceTransportOptions {
+        data: DataSourceTransportBatchOptionsData;
+    }
+
+    interface DataSourceOptions {
+        aggregate?: DataSourceAggregateItem[];
+        autoSync?: bool;
+        batch?: bool;
+        data?: any;
+        filter?: any;
+        group?: DataSourceGroupItem[];
+        page?: number;
+        pageSize?: number;
+        schema?: DataSourceSchema;
+        serverAggregates?: bool;
+        serverFiltering?: bool;
+        serverGrouping?: bool;
+        serverPaging?: bool;
+        serverSorting?: bool;
+        sort?: any;
+        transport?: DataSourceTransport;
+        type?: string;
+        change? (e: DataSourceChangeEvent): void;
+        error?(e: DataSourceEvent): void;
+        sync?(e: DataSourceEvent): void;
+        requestStart?(e: DataSourceRequestStartEvent): void;
+        requestEnd?(e: DataSourceRequestEndEvent): void;
+    }
+
+    interface DataSourceEvent {
+        sender?: DataSource;
+    }
+
+    interface DataSourceChangeEvent extends DataSourceEvent {
+        field?: string;
+        value?: Model;
+        action?: string;
+        index?: number;
+        items?: Model[];
+    }
+
+    interface DataSourceRequestStartEvent extends DataSourceEvent {
+    }
+
+    interface DataSourceRequestEndEvent extends DataSourceEvent {
+        response?: any;
+        type?: string;
+    }
 }
 
 module kendo.ui {
     declare function progress(container: JQuery, toggle: bool);
 
     class Widget extends Observable {
+        destroy(): void;
     }
 
     class Draggable extends kendo.ui.Widget{

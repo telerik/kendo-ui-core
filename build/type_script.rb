@@ -10,6 +10,7 @@ module CodeGen::TypeScript
         'docs/api/framework/kendo.md',
         'docs/api/framework/class.md',
         'docs/api/framework/hierarchicaldatasource.md',
+        'docs/api/framework/datasource.md',
         'docs/api/framework/model.md',
         'docs/api/framework/observable.md',
         'docs/api/framework/observableobject.md',
