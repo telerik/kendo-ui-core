@@ -261,7 +261,8 @@ namespace :demos do
 
     task :release => 'demos/mvc/bin/Kendo.dll'
 
-    task :upload_to_cdn => [:js,
+    task :upload_to_cdn => [
+        :js,
         :less,
         :release,
         'dist/demos/staging/content/cdn/js',
@@ -293,6 +294,19 @@ namespace :demos do
 
     desc('Build staging demo site')
     task :staging => 'dist/demos/staging.zip'
+
+    desc('Build java demos for staging')
+    task :staging_java => [
+        :js,
+        :less,
+        SPRING_DEMOS_RESOURCES + "js",
+        SPRING_DEMOS_RESOURCES + "css",
+        SPRING_DEMOS_RESOURCES,
+        SPRING_DEMOS_WAR
+    ] do
+        sh "rm -rf dist/demos/staging-java/"
+        sh "unzip -d dist/demos/staging-java/ #{SPRING_DEMOS_WAR}"
+    end
 
     task :production_site => [:release,
         'dist/demos/production',

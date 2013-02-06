@@ -312,6 +312,7 @@ BUNDLES = [
 
 namespace :build do
     WEB_ROOT = "/var/www"
+    TOMCAT_ROOT = "/var/lib/tomcat7/webapps"
     ARCHIVE_ROOT = "/kendo-builds"
 
     def zip_targets(destination)
@@ -378,9 +379,10 @@ namespace :build do
         task :tests => ["tests:CI", "vsdoc:master:test", "type_script:master:test"]
 
         desc 'Update the /staging build machine web site'
-        task :demos => [ 'demos:staging', 'download_builder:staging' ] do
+        task :demos => [ 'demos:staging', 'download_builder:staging', 'demos:staging_java' ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
             sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
+            sh "rsync -avc dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
         end
 
         desc 'Package and publish bundles to the Stable directory'

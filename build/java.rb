@@ -10,7 +10,7 @@ JSP_TAGLIB_SRC_ROOT = JSP_TAGLIB_ROOT + 'src/'
 JSP_TAGLIB_SRC = FileList[JSP_TAGLIB_SRC_ROOT + '**/*'].exclude('**/target/*')
 
 SPRING_DEMOS_ROOT = JAVA_WRAPPERS_ROOT + 'spring-demos/'
-SPRING_DEMOS_WAR = "#{SPRING_DEMOS_ROOT}target/sprind-demos-#{VERSION}.war"
+SPRING_DEMOS_WAR = "#{SPRING_DEMOS_ROOT}target/spring-demos-#{VERSION}.war"
 SPRING_DEMOS_SRC_ROOT = SPRING_DEMOS_ROOT + 'src/'
 SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
 SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*'].exclude('**/globalization/**/*')
