@@ -153,29 +153,80 @@ class Grid extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the detailTemplate option of the Grid.
     * The id of the template used for rendering the detail rows in the grid.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\Grid
     */
-    public function detailTemplate($value) {
+    public function detailTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('detailTemplate', $value);
     }
 
     /**
-    * The id of the template used for rendering the rows in the grid.
-    * @param string $value
+    * Sets the detailTemplate option of the Grid.
+    * The id of the template used for rendering the detail rows in the grid.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Grid
     */
-    public function rowTemplate($value) {
+    public function detailTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('detailTemplate', $value);
+    }
+
+    /**
+    * Sets the rowTemplate option of the Grid.
+    * The id of the template used for rendering the rows in the grid.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\Grid
+    */
+    public function rowTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('rowTemplate', $value);
     }
 
     /**
+    * Sets the rowTemplate option of the Grid.
+    * The id of the template used for rendering the rows in the grid.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function rowTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('rowTemplate', $value);
+    }
+
+    /**
+    * Sets the altRowTemplate option of the Grid.
     * The id of the template used for rendering the alternate rows in the grid.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\Grid
+    */
+    public function altRowTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('altRowTemplate', $value);
+    }
+
+    /**
+    * Sets the altRowTemplate option of the Grid.
+    * The id of the template used for rendering the alternate rows in the grid.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Grid
     */
     public function altRowTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('altRowTemplate', $value);
     }
 

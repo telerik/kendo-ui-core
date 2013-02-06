@@ -45,29 +45,80 @@ class ListView extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the template option of the ListView.
     * The id of the template used for rendering the items in the listview.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\ListView
     */
-    public function template($value) {
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('template', $value);
     }
 
     /**
-    * Specifies ListView item template in edit mode.
-    * @param string $value
+    * Sets the template option of the ListView.
+    * The id of the template used for rendering the items in the listview.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
-    public function editTemplate($value) {
+    public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the editTemplate option of the ListView.
+    * Specifies ListView item template in edit mode.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\ListView
+    */
+    public function editTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('editTemplate', $value);
     }
 
     /**
+    * Sets the editTemplate option of the ListView.
+    * Specifies ListView item template in edit mode.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\ListView
+    */
+    public function editTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('editTemplate', $value);
+    }
+
+    /**
+    * Sets the altTemplate option of the ListView.
     * Template to be used for rendering the alternate items in the listview.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\ListView
+    */
+    public function altTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('altTemplate', $value);
+    }
+
+    /**
+    * Sets the altTemplate option of the ListView.
+    * Template to be used for rendering the alternate items in the listview.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
     public function altTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('altTemplate', $value);
     }
 

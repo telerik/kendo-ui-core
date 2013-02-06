@@ -83,12 +83,30 @@ class GridColumn extends \Kendo\SerializableObject {
     }
 
     /**
+    * Sets the headerTemplate option of the GridColumn.
     * The template for column's header cell. If sorting is enabled, it will be wrapped in a <a class="k-link"> element, so the template should consist of only inline elements
 in order to have valid HTML markup in the Grid.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\GridColumn
+    */
+    public function headerTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('headerTemplate', $value);
+    }
+
+    /**
+    * Sets the headerTemplate option of the GridColumn.
+    * The template for column's header cell. If sorting is enabled, it will be wrapped in a <a class="k-link"> element, so the template should consist of only inline elements
+in order to have valid HTML markup in the Grid.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\GridColumn
     */
     public function headerTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('headerTemplate', $value);
     }
 
@@ -111,11 +129,28 @@ in order to have valid HTML markup in the Grid.
     }
 
     /**
+    * Sets the template option of the GridColumn.
     * The template for column's cells.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\GridColumn
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the GridColumn.
+    * The template for column's cells.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\GridColumn
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 
@@ -129,29 +164,80 @@ in order to have valid HTML markup in the Grid.
     }
 
     /**
+    * Sets the groupHeaderTemplate option of the GridColumn.
     * The template for group header item.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumn
     */
-    public function groupHeaderTemplate($value) {
+    public function groupHeaderTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('groupHeaderTemplate', $value);
     }
 
     /**
-    * The template for column's cell in group footer item.
-    * @param string $value
+    * Sets the groupHeaderTemplate option of the GridColumn.
+    * The template for group header item.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\GridColumn
     */
-    public function groupFooterTemplate($value) {
+    public function groupHeaderTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('groupHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the groupFooterTemplate option of the GridColumn.
+    * The template for column's cell in group footer item.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\GridColumn
+    */
+    public function groupFooterTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('groupFooterTemplate', $value);
     }
 
     /**
+    * Sets the groupFooterTemplate option of the GridColumn.
+    * The template for column's cell in group footer item.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\GridColumn
+    */
+    public function groupFooterTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('groupFooterTemplate', $value);
+    }
+
+    /**
+    * Sets the footerTemplate option of the GridColumn.
     * The template for column's cell in footer item.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\GridColumn
+    */
+    public function footerTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('footerTemplate', $value);
+    }
+
+    /**
+    * Sets the footerTemplate option of the GridColumn.
+    * The template for column's cell in footer item.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\GridColumn
     */
     public function footerTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('footerTemplate', $value);
     }
 

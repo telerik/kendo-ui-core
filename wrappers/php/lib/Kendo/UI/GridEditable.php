@@ -42,11 +42,28 @@ class GridEditable extends \Kendo\SerializableObject {
     }
 
     /**
+    * Sets the template option of the GridEditable.
     * Template which will be use during popup editing
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\GridEditable
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the GridEditable.
+    * Template which will be use during popup editing
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\GridEditable
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 

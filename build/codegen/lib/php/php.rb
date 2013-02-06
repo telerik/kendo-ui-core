@@ -121,6 +121,34 @@ OPTION_SETTER = ERB.new(%{
     }
 })
 
+TEMPLATE_SETTER = ERB.new(%{
+    /**
+    * Sets the <%= name %> option of the <%= owner.php_class %>.
+    * <%= description %>
+    * @param string $value The id of the element which represents the kendo template.
+    * @return <%= owner.php_type %>
+    */
+    public function <%= php_name %>Id($value) {
+        $value = new \\Kendo\\Template($value);
+
+        return $this->setProperty('<%= name %>', $value);
+    }
+
+    /**
+    * Sets the <%= name %> option of the <%= owner.php_class %>.
+    * <%= description %>
+    * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return <%= owner.php_type %>
+    */
+    public function <%= php_name %>($value) {
+        if (is_string($value)) {
+            $value = new \\Kendo\\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('<%= name %>', $value);
+    }
+})
+
 FUNCTION_SETTER = ERB.new(%{
     /**
     * Sets the <%= name %> option of the <%= owner.php_class %>.
@@ -142,6 +170,10 @@ FUNCTION_SETTER = ERB.new(%{
         def to_setter
             if @name == 'dataSource'
                 return (@owner.name == 'TreeView' ? HIERARCHY_DATA_SOURCE_SETTER : DATA_SOURCE_SETTER).result(binding);
+            end
+
+            if @name =~ /template$/i
+                return TEMPLATE_SETTER.result(binding);
             end
 
             return FUNCTION_SETTER.result(binding) if @type[0] == 'Function' && @type.size == 1

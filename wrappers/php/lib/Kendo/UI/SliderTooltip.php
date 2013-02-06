@@ -27,11 +27,28 @@ tick labels.
     }
 
     /**
+    * Sets the template option of the SliderTooltip.
     * Template of the tooltip.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\SliderTooltip
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the SliderTooltip.
+    * Template of the tooltip.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\SliderTooltip
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 

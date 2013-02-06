@@ -25,14 +25,34 @@ Any valid CSS color string will work here, including hex and rgb.
     }
 
     /**
+    * Sets the template option of the StockChartLegendLabels.
     * The template of the labels.
 Template variables:
 *   text - the text the legend item.
 *   series - the data series.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\Dataviz\UI\StockChartLegendLabels
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the StockChartLegendLabels.
+    * The template of the labels.
+Template variables:
+*   text - the text the legend item.
+*   series - the data series.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\StockChartLegendLabels
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 

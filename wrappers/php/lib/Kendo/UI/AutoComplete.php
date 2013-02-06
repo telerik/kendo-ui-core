@@ -131,11 +131,28 @@ the dataSource.
     }
 
     /**
+    * Sets the template option of the AutoComplete.
     * Template to be used for rendering the items in the list.
-    * @param string|\Kendo\JavaScriptFunction $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\AutoComplete
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the AutoComplete.
+    * Template to be used for rendering the items in the list.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\AutoComplete
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 

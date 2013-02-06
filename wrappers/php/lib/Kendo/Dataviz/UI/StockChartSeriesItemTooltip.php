@@ -60,12 +60,30 @@ class StockChartSeriesItemTooltip extends \Kendo\SerializableObject {
     }
 
     /**
+    * Sets the template option of the StockChartSeriesItemTooltip.
     * The tooltip template.
 Template variables:
-    * @param string|\Kendo\JavaScriptFunction $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemTooltip
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the StockChartSeriesItemTooltip.
+    * The tooltip template.
+Template variables:
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemTooltip
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 

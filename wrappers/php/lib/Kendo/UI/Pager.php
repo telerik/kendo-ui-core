@@ -36,20 +36,54 @@ class Pager extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the selectTemplate option of the Pager.
     * The template for selectbox with predefined page sizes.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\Pager
     */
-    public function selectTemplate($value) {
+    public function selectTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
         return $this->setProperty('selectTemplate', $value);
     }
 
     /**
+    * Sets the selectTemplate option of the Pager.
+    * The template for selectbox with predefined page sizes.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Pager
+    */
+    public function selectTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('selectTemplate', $value);
+    }
+
+    /**
+    * Sets the linkTemplate option of the Pager.
     * The template for page number links.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\Pager
+    */
+    public function linkTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('linkTemplate', $value);
+    }
+
+    /**
+    * Sets the linkTemplate option of the Pager.
+    * The template for page number links.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Pager
     */
     public function linkTemplate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('linkTemplate', $value);
     }
 

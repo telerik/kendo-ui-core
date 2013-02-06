@@ -158,11 +158,28 @@ class ComboBox extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the template option of the ComboBox.
     * Template to be used for rendering the items in the list.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\ComboBox
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the ComboBox.
+    * Template to be used for rendering the items in the list.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ComboBox
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 

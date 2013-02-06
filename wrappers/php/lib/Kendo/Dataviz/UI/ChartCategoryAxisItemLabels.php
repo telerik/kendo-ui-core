@@ -109,12 +109,30 @@ Every n-th label is rendered where n is the step
     }
 
     /**
+    * Sets the template option of the ChartCategoryAxisItemLabels.
     * The label template.
 Template variables:
-    * @param string|\Kendo\JavaScriptFunction $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLabels
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the ChartCategoryAxisItemLabels.
+    * The label template.
+Template variables:
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLabels
     */
     public function template($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
         return $this->setProperty('template', $value);
     }
 
