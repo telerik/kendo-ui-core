@@ -248,6 +248,10 @@ def patched_web_config(name, source, cdn_root, themebuilder_root)
     task
 end
 
+tree :to => "dist/demos/staging-php/",
+     :from => FileList[PHP_WRAPPERS_ROOT + '**/*'],
+     :root => PHP_WRAPPERS_ROOT
+
 namespace :demos do
 
     desc('Build debug demo site')
@@ -307,6 +311,16 @@ namespace :demos do
         sh "rm -rf dist/demos/staging-java/"
         sh "unzip -d dist/demos/staging-java/ #{SPRING_DEMOS_WAR}"
     end
+
+    desc('Build php demos for staging')
+    task :staging_php => [
+        :js,
+        :less,
+        PHP_DEMOS_RESOURCES + "js",
+        PHP_DEMOS_RESOURCES + "css",
+        PHP_DEMOS_RESOURCES,
+        "dist/demos/staging-php/"
+    ]
 
     task :production_site => [:release,
         'dist/demos/production',
