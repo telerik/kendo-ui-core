@@ -37,6 +37,24 @@ class EditorTool extends \Kendo\SerializableObject {
         return $this->setProperty('exec', $value);
     }
 
+    /**
+    * Adds EditorToolItem to the EditorTool.
+    * @param \Kendo\UI\EditorToolItem|array,... $value one or more EditorToolItem to add.
+    * @return \Kendo\UI\EditorTool
+    */
+    public function addItem($value) {
+        return $this->add('items', func_get_args());
+    }
+
+    /**
+    * The kendo template that will be used for rendering the given tool.
+    * @param string $value
+    * @return \Kendo\UI\EditorTool
+    */
+    public function template($value) {
+        return $this->setProperty('template', $value);
+    }
+
 //<< Properties
 }
 
