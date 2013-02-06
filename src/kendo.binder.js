@@ -32,12 +32,13 @@ kendo_module({
     })();
 
     var Binding = Observable.extend( {
-        init: function(source, path) {
+        init: function(parents, path) {
             var that = this;
 
             Observable.fn.init.call(that);
 
-            that.source = source;
+            that.source = parents[0];
+            that.parents = parents;
             that.path = path;
             that.dependencies = {};
             that.dependencies[path] = true;
@@ -89,7 +90,7 @@ kendo_module({
         get: function() {
             var that = this,
                 source = that.source,
-                index,
+                index = 0,
                 path = that.path,
                 result = source;
 
@@ -101,12 +102,14 @@ kendo_module({
 
                 // Traverse the observable hierarchy if the binding is not resolved at the current level.
                 while (result === undefined && source) {
-                    source = source.parent();
+
+                    source = that.parents[++index];
 
                     if (source instanceof ObservableObject) {
                         result = source.get(path);
                     }
                 }
+
 
                 // If the result is a function - invoke it
                 if (typeof result === "function") {
@@ -157,12 +160,14 @@ kendo_module({
         get: function() {
             var source = this.source,
                 path = this.path,
+                index = 0,
                 handler;
 
             handler = source.get(path);
 
             while (!handler && source) {
-                source = source.parent();
+                source = this.parents[++index];
+
                 if (source instanceof ObservableObject) {
                     handler = source.get(path);
                 }
@@ -448,7 +453,7 @@ kendo_module({
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
-                    bindElement(child, items[idx], this.options.roles);
+                    bindElement(child, items[idx], this.options.roles, [items[idx]].concat(this.bindings.source.parents));
                 }
             }
         },
@@ -487,7 +492,7 @@ kendo_module({
 
                 if (element.children.length) {
                     for (idx = 0, length = source.length; idx < length; idx++) {
-                        bindElement(element.children[idx], source[idx], this.options.roles);
+                        bindElement(element.children[idx], source[idx], this.options.roles, [source[idx]].concat(this.bindings.source.parents) );
                     }
                 }
             }
@@ -809,7 +814,7 @@ kendo_module({
             },
 
             itemChange: function(e) {
-                bindElement(e.item[0], e.data, this._ns(e.ns));
+                bindElement(e.item[0], e.data, this._ns(e.ns), [e.data].concat(this.bindings.source.parents));
             },
 
             dataBinding: function() {
@@ -847,7 +852,7 @@ kendo_module({
                     }
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], view[idx], this._ns(e.ns));
+                        bindElement(items[idx], view[idx], this._ns(e.ns), [view[idx]].concat(this.bindings.source.parents));
                     }
                 }
             },
@@ -1180,7 +1185,7 @@ kendo_module({
         return result;
     }
 
-    function bindElement(element, source, roles) {
+    function bindElement(element, source, roles, parents) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
@@ -1189,6 +1194,8 @@ kendo_module({
             bindings,
             options = {},
             target;
+
+        parents = parents || [source];
 
         if (role || bind) {
             unbindElement(element);
@@ -1209,10 +1216,10 @@ kendo_module({
 
             target.source = source;
 
-            bindings = createBindings(bind, source, Binding);
+            bindings = createBindings(bind, parents, Binding);
 
             if (options.template) {
-                bindings.template = new TemplateBinding(source, "", options.template);
+                bindings.template = new TemplateBinding(parents, "", options.template);
             }
 
             if (bindings.click) {
@@ -1226,15 +1233,15 @@ kendo_module({
             }
 
             if (bind.attr) {
-                bindings.attr = createBindings(bind.attr, source, Binding);
+                bindings.attr = createBindings(bind.attr, parents, Binding);
             }
 
             if (bind.style) {
-                bindings.style = createBindings(bind.style, source, Binding);
+                bindings.style = createBindings(bind.style, parents, Binding);
             }
 
             if (bind.events) {
-                bindings.events = createBindings(bind.events, source, EventBinding);
+                bindings.events = createBindings(bind.events, parents, EventBinding);
             }
 
             target.bind(bindings);
@@ -1246,7 +1253,7 @@ kendo_module({
 
         if (deep && children) {
             for (idx = 0; idx < children.length; idx++) {
-                bindElement(children[idx], source, roles);
+                bindElement(children[idx], source, roles, parents);
             }
         }
     }
