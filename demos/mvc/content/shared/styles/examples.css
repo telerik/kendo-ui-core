@@ -1422,18 +1422,18 @@ p#copy
 
 .widgetGrid .mobile-widgets
 {
-    width:340px;
+    width:320px;
 }
 
 .widgetGrid .mobile-framework
 {
-    width:240px;
+    width:210px;
     background:rgba(221, 221, 221, 0.2);
 }
 
 .widgetGrid .mobile-devices
 {
-    width:390px;
+    width:440px;
     position: relative;
     min-height: 176px;
 }
@@ -1556,7 +1556,6 @@ p#copy
     float:left;
     width:97px;
     padding-bottom:73px;
-    margin-right:12px;
     text-align:center;
 }
 
@@ -2372,6 +2371,10 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 #device-wrapper.blackberry {
     background-image: url("blackberrySkin.png");
+}
+
+#device-wrapper.wp {
+    background-image: url("wpSkin.png");
 }
 
 .tablet #device-wrapper,

@@ -431,7 +431,7 @@
 
     var kendoSkin = "default";
 
-    window.kendoMobileOS = "wp";
+    window.kendoMobileOS = "ios";
 
     $(Application.init);
 
