@@ -16,5 +16,6 @@
     "recipe[nginx]",
     "recipe[monit]",
     "recipe[screenshot]",
+    "recipe[php]",
     "recipe[tomcat]"
 ]}
