@@ -301,6 +301,9 @@ namespace :demos do
     task :staging_java => [
         :js,
         :less,
+        SPRING_DEMOS_RESOURCES + "js",
+        SPRING_DEMOS_RESOURCES + "css",
+        SPRING_DEMOS_RESOURCES,
         SPRING_DEMOS_WAR
     ] do
         sh "rm -rf dist/demos/staging-java/"
