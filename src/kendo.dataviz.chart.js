@@ -6286,7 +6286,7 @@ kendo_module({
                     type  = axisOptions.type || "";
                     axisOptions = deepExtend({
                         vertical: invertAxes,
-                        axisCrossingValue: invertAxes ? categories.length : 0
+                        axisCrossingValue: invertAxes ? MAX_VALUE : 0
                     }, axisOptions);
 
                     if (!defined(axisOptions.justified)) {
