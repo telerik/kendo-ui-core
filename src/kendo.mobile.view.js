@@ -450,6 +450,7 @@ kendo_module({
 
             that.url = url;
             that.trigger(SHOW_START);
+            mobile.application.element.css("pointer-events", "none");
 
             if (!url) {
                 element = that.rootView;
@@ -563,6 +564,7 @@ kendo_module({
             if (that._view !== view) {
                 view.switchWith(that._view, transition, params, function() {
                     that._view = view;
+                    mobile.application.element.css("pointer-events", "");
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
