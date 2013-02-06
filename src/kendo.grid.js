@@ -1219,9 +1219,13 @@ kendo_module({
             model = that._modelForContainer(row);
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
-                that.dataSource.remove(model);
-
                 mode = that._editMode();
+
+                if (mode !== "incell") {
+                    that.cancelRow();
+                }
+
+                that.dataSource.remove(model);
 
                 if (mode === "inline" || mode === "popup") {
                     that.dataSource.sync();
