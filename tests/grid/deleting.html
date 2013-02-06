@@ -301,6 +301,29 @@
 
                 ok(sync.calls("sync"));
             });
+
+            test("removeRow calls cancelRow if record is edited", function() {
+                var grid = setup( { editable: { mode: "inline", confirmation: false } });
+                    cancelRowMethod = stub(grid, "cancelRow");
+
+                grid.addRow();
+                grid.removeRow(grid.items().eq(1));
+
+                equal(cancelRowMethod.calls("cancelRow"), 3);//2 times called from addRow
+
+            });
+
+            test("removeRow does not call cancelRow if record is in incell edit", function() {
+                var grid = setup( { editable: { mode: "incell", confirmation: false } });
+                    cancelRowMethod = stub(grid, "cancelRow");
+
+                grid.addRow();
+
+                grid.removeRow(grid.items().eq(1));
+
+                ok(!cancelRowMethod.calls("cancelRow"));//2 times called from addRow
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
