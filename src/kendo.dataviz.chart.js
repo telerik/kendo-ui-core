@@ -147,6 +147,7 @@ kendo_module({
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
+        TOOLTIP_HIDE_DELAY = 100,
         TOUCH_START_NS = "touchstart" + NS,
         TRIANGLE = "triangle",
         VALUE = "value",
@@ -440,8 +441,10 @@ kendo_module({
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(TOUCH_START_NS, proxy(chart._tap, chart));
-            element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
+            if (chart._plotArea.crosshairs.length) {
+                element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
+            }
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -673,28 +676,38 @@ kendo_module({
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
-                tooltipOptions,
-                returnValue = true,
+                tooltipOptions = tooltip.options || {},
+                coords = chart._eventCoordinates(e),
                 point;
 
-            if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
-                return;
-            }
+            if (tooltipOptions.shared) {
+                point = Point2D(coords.x, coords.y);
+                if (tooltipOptions.visible && tooltipOptions.shared) {
+                    tooltip.plotArea = chart._plotArea;
+                    tooltip.showAt(point);
+                }
 
-            point = chart._getChartElement(e);
-            if (point && point.hover) {
-                point.hover(chart, e);
-                chart._activePoint = point;
+                if (highlight.options.visible && tooltipOptions.shared) {
+                    highlight.plotArea = chart._plotArea;
+                    highlight.show(point);
+                }
+            } else {
+                if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
+                    return;
+                }
+                point = chart._getChartElement(e);
+                if (point && point.hover) {
+                    point.hover(chart, e);
+                    chart._activePoint = point;
 
-                tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                if (!tooltipOptions.shared) {
+                    tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
                     if (tooltipOptions.visible) {
                         tooltip.show(point);
                     }
 
                     highlight.show(point);
+                    return true;
                 }
-                return returnValue;
             }
         },
 
@@ -702,6 +715,7 @@ kendo_module({
             var chart = this;
 
             if (chart._startHover(e)) {
+                console.log(1);
                 $(document).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMoveTracking, chart));
             }
         },
@@ -749,9 +763,6 @@ kendo_module({
                 length = crosshairs.length,
                 coords = chart._eventCoordinates(e),
                 point = Point2D(coords.x, coords.y),
-                tooltip = chart._tooltip,
-                tooltipOptions = tooltip.options || {},
-                highlight = chart._highlight,
                 i, crosshair;
 
             chart._lastTime = new Date();
@@ -765,16 +776,6 @@ kendo_module({
                         crosshair.hide();
                     }
                 }
-            }
-
-            if (tooltipOptions.visible && tooltipOptions.shared) {
-                tooltip.plotArea = chart._plotArea;
-                tooltip.showAt(point);
-            }
-
-            if (highlight.options.visible && tooltipOptions.shared) {
-                highlight.plotArea = chart._plotArea;
-                highlight.show(point);
             }
         },
 
@@ -792,7 +793,7 @@ kendo_module({
                 }
             }
 
-            setTimeout(proxy(tooltip.hide(), TOOLTIP_SHOW_DELAY));
+            setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
         },
 
         _unsetActivePoint: function() {
