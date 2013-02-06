@@ -715,7 +715,6 @@ kendo_module({
             var chart = this;
 
             if (chart._startHover(e)) {
-                console.log(1);
                 $(document).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMoveTracking, chart));
             }
         },
