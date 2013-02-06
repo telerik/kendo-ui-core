@@ -224,8 +224,6 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
                 .sub('themebuilder', 'dist/themebuilder/staging'),
      :root => 'dist/themebuilder/staging/'
 
-JAVA_WEBAPP_DIR = 'dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/src/main/webapp/'
-
 class PatchedWebConfigTask < Rake::FileTask
     attr_accessor :cdn_root, :themebuilder_root
     def execute(args=nil)
