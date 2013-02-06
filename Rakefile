@@ -379,10 +379,16 @@ namespace :build do
         task :tests => ["tests:CI", "vsdoc:master:test", "type_script:master:test"]
 
         desc 'Update the /staging build machine web site'
-        task :demos => [ 'demos:staging', 'download_builder:staging', 'demos:staging_java' ] do
+        task :demos => [
+            'demos:staging',
+            'download_builder:staging',
+            'demos:staging_java',
+            'demos:staging_php'
+        ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
             sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
             sh "rsync -avc dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
+            sh "rsync -avc dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
         end
 
         desc 'Package and publish bundles to the Stable directory'
