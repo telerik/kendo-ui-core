@@ -65,36 +65,6 @@
                     template: $("#backgroundColor-template").html()
                 },
                 {
-                    name: "viewHtml",
-                    tooltip: "View HTML",
-                    exec: function(e) {
-                        var editor = $(this).data("kendoEditor");
-
-                        var dialog = $($("#viewHtml-template").html())
-                            .find("textarea").val(editor.value()).end()
-                            .find(".viewHtml-update")
-                                .click(function() {
-                                    editor.value(dialog.element.find("textarea").val());
-                                    dialog.close();
-                                })
-                            .end()
-                            .find(".viewHtml-cancel")
-                                .click(function() {
-                                    dialog.close();
-                                })
-                            .end()
-                            .kendoWindow({
-                                modal: true,
-                                title: "View HTML",
-                                deactivate: function() {
-                                    dialog.destroy();
-                                }
-                            }).data("kendoWindow");
-
-                        dialog.center().open();
-                    }
-                },
-                {
                     name: "custom",
                     tooltip: "Insert a horizontal rule",
                     exec: function(e) {

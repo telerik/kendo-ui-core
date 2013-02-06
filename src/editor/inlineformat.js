@@ -472,12 +472,13 @@ var StyleTool = Tool.extend({
     },
 
     initialize: function(ui, initOptions) {
-        var editor = initOptions.editor;
+        var editor = initOptions.editor,
+            options = this.options;
 
         new Editor.SelectBox(ui, {
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: editor.options.style,
+            dataSource: options.items || editor.options.style,
             title: editor.options.messages.style,
             change: function () {
                 Tool.exec(editor, "style", this.value());

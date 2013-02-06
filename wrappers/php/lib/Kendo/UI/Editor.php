@@ -6,6 +6,18 @@ class Editor extends \Kendo\UI\Widget {
     protected function name() {
         return 'Editor';
     }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('textarea');
+
+        $content = $this->getProperty('content');
+
+        if (gettype($content) == "string") {
+            $element->html($content);
+        }
+
+        return $element;
+    }
 //>> Properties
 
     /**
@@ -137,6 +149,29 @@ class Editor extends \Kendo\UI\Widget {
         return $this->setProperty('select', $value);
     }
 
+
+    /**
+    * Sets the HTML content of the Editor.
+    * @param string $value
+    * @return \Kendo\UI\Editor
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the Editor.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the Editor.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
 
 //<< Properties
 }
