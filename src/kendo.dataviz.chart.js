@@ -6366,9 +6366,9 @@ kendo_module({
 
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
-                    range = tracker.query(name);
+                    range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
 
-                    if (i === 0 && defaultRange) {
+                    if (i === 0 && range && defaultRange) {
                         range.min = math.min(range.min, defaultRange.min);
                         range.max = math.max(range.max, defaultRange.max);
                     }
@@ -6482,13 +6482,11 @@ kendo_module({
         },
 
         reset: function(axisName) {
-            delete this.axisRanges[axisName];
+            this.axisRanges[axisName] = undefined;
         },
 
         query: function(axisName) {
-            var tracker = this;
-
-            return tracker.axisRanges[axisName] || { min: 0, max: 1 };
+            return this.axisRanges[axisName];
         }
     });
 
@@ -6633,8 +6631,8 @@ kendo_module({
                 axisName = options.name,
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
                 tracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
-                range = tracker.query(axisName),
                 defaultRange = tracker.query(),
+                range = tracker.query(axisName) || defaultRange || { min: 0, max: 1 },
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
                 axis,
                 seriesIx,
