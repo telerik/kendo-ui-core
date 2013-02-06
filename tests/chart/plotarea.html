@@ -1134,12 +1134,7 @@
                 });
 
                 test("value axis crosses at last category", function() {
-                    ok(plotArea.categoryAxis.options.axisCrossingValue >= 3);
-                });
-
-                test("value axis crosses at last category when no categories are defined", function() {
-                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData);
-                    ok(plotArea.categoryAxis.options.axisCrossingValue >= 3);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 3);
                 });
 
                 test("value axis crossing can be changed", function() {

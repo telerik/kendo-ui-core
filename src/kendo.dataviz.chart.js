@@ -6159,7 +6159,7 @@
                     type  = axisOptions.type || "";
                     axisOptions = deepExtend({
                         vertical: invertAxes,
-                        axisCrossingValue: invertAxes ? MAX_VALUE : 0
+                        axisCrossingValue: invertAxes ? categories.length : 0
                     }, axisOptions);
 
                     if (!defined(axisOptions.justified)) {
