@@ -249,9 +249,19 @@ kendo_module({
             var idx = 0,
                 length = this.length;
 
-            for (; i < length; i++) {
-                callback(this[i], i);
+            for (; idx < length; idx++) {
+                callback(this[idx], idx, this);
             }
+        },
+
+        map: function(callback) {
+            var result = [];
+
+            this.forEach(function(value, idx, that) {
+                result[idx] = callback(value, idx, that);
+            });
+
+            return result;
         }
     });
 
