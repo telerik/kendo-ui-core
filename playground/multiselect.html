@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Autocomplete</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../styles/web/kendo.default.css" type="text/css" media="screen" charset="utf-8">
+        <style type="text/css" media="screen">
+
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>Vanilla select</legend>
+            <select multiple>
+                <option>Item1</option>
+                <option>Item2</option>
+                <option>Item3</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>MultiSelect</legend>
+            <select  id="multi" style="width: 300px" multiple="multiple">
+                <option>Item1</option>
+                <option>Item2</option>
+                <option>Item3</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>MultiSelect</legend>
+            <select  id="big" style="width: 300px" multiple="multiple">
+                <option>Item1</option>
+                <option>Item2</option>
+                <option>Item3</option>
+            </select>
+        </fieldset>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $("#multi").kendoMultiSelect();
+
+                var options = "";
+                for (var i = 0; i < 10000; i++) {
+                   var option = "<option"
+                       option += " value=" + i;
+
+                   option += ">";
+
+                   option += "text" + i;
+
+                   option += "</option>";
+                   options += option;
+                }
+
+                var big = $("#big");
+                big.html(options);
+
+                big.kendoMultiSelect();
+            });
+        </script>
+    </body>
+</html>

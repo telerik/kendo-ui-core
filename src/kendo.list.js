@@ -151,7 +151,7 @@ kendo_module({
             that._value = getter(options.dataValueField);
         },
 
-        _aria: function() {
+        _aria: function(id) {
             var that = this,
                 options = that.options,
                 element = that._focused;
@@ -160,9 +160,9 @@ kendo_module({
                 element.attr("aria-autocomplete", options.suggest ? "both" : "list");
             }
 
-            if (that.element[0].id) {
-                element.attr("aria-owns", that.ul[0].id);
-            }
+            id = id ? id + " " + that.ul[0].id : that.ul[0].id;
+
+            element.attr("aria-owns", id);
 
             that.ul.attr("aria-live", !options.filter || options.filter === "none" ? "off" : "polite");
         },
@@ -231,6 +231,29 @@ kendo_module({
 
             that._blur();
         },
+
+        _index: function(value) {
+            var that = this,
+                idx,
+                length,
+                data = that._data(),
+                valueFromData;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                valueFromData = that._value(data[idx]);
+
+                if (valueFromData === undefined) {
+                    valueFromData = that._text(data[idx]);
+                }
+
+                if (valueFromData == value) {
+                    return idx;
+                }
+            }
+
+            return -1;
+        },
+
 
         _height: function(length) {
             if (length) {
@@ -562,28 +585,6 @@ kendo_module({
                                    .bind(REQUESTEND, that._requestEndHandler);
         },
 
-        _index: function(value) {
-            var that = this,
-                idx,
-                length,
-                data = that._data(),
-                valueFromData;
-
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                valueFromData = that._value(data[idx]);
-
-                if (valueFromData === undefined) {
-                    valueFromData = that._text(data[idx]);
-                }
-
-                if (valueFromData == value) {
-                    return idx;
-                }
-            }
-
-            return -1;
-        },
-
         _get: function(li) {
             var that = this,
                 data = that._data(),
@@ -750,7 +751,7 @@ kendo_module({
             if (form[0]) {
                 that._resetHandler = function() {
                     setTimeout(function() {
-                        that.value(element[0].value);
+                        that.value(element.val());
                     });
                 };
 

@@ -1,0 +1,70 @@
+        <div id="example" class="k-content">
+            <div class="configuration k-widget k-header">
+                <span class="infoHead">Information</span>
+                <p>
+                    Open the ComboBox to see the customized appearance of the items.
+                </p>
+            </div>
+
+            <select id="titles"></select>
+
+            <script>
+                $(document).ready(function() {
+                    $("#titles").kendoMultiSelect({
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        // define custom template
+                        itemTemplate: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />' +
+                                  '<dl>' +
+                                      '<dt>Title:</dt><dd>${ data.Name }</dd>' +
+                                      '<dt>Year:</dt><dd>${ data.ReleaseYear }</dd>' +
+                                  '</dl>',
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
+                        }
+                    });
+
+                    var multiselect = $("#titles").data("kendoMultiSelect");
+
+                    // set width of the drop-down list
+                    multiselect.list.width(400);
+                });
+            </script>
+
+            <style scoped>
+                #titles-list .k-item {
+                    overflow: hidden; /* clear floated images */
+                }
+
+                #titles-list img {
+                    box-shadow: 0 0 4px rgba(255,255,255,.7);
+                    float: left;
+                    margin: 5px;
+                }
+
+                #titles-list dl {
+                    margin-left: 85px;
+                }
+
+                #titles-list dt,
+                #titles-list dd {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                #titles-list dt {
+                    font-weight: bold;
+                    padding-top: .5em;
+                }
+
+                #titles-list dd {
+                    padding-bottom: .3em;
+                }
+            </style>
+        </div>

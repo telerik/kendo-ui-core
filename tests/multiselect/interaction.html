@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MultiSelect interaction</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">MultiSelect interaction</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var MultiSelect = kendo.ui.MultiSelect,
+                select;
+
+            function populateSelect() {
+                var options = [];
+                for (var i=0; i < 5; i++) {
+                    options.push("<option value='" + i + "'>Option" + i + "</option>");
+                }
+
+                select.html(options);
+            }
+
+            module("kendo.ui.MultiSelect interaction", {
+                setup: function() {
+                    select = $("<select multiple=multiple/>").appendTo(document.body);
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            test("MultiSelect opens popup on input click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.mousedown();
+
+                ok(multiselect.popup.visible());
+            });
+
+            test("MultiSelect focuses input on click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.wrapper.mousedown();
+
+                equal(multiselect.input[0], document.activeElement);
+            });
+
+            test("MultiSelect opens popup on tag click", function() {
+                populateSelect();
+                select.val("0");
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.tagList.children().first().mousedown();
+
+                ok(multiselect.popup.visible());
+            });
+
+            test("MultiSelect do not open on tag delete", function() {
+                populateSelect();
+                select.val("0");
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.tagList.find(".k-delete").click();
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect selects item on click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+
+                multiselect.ul.children().eq(1).click();
+
+                ok(multiselect.tagList.children(":first")[0]);
+            });
+
+            test("MultiSelect hides selected item", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+
+                var item = multiselect.ul.children().eq(1);
+
+                item.click();
+
+                equal(item[0].style.display, "none");
+            });
+
+            test("MultiSelect hides popup on click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+
+                var item = multiselect.ul.children().eq(1);
+
+                item.click();
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect deletes tag on delete button click", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+
+                var item = multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+
+                var tag = multiselect.tagList.children().first();
+                tag.find(".k-delete").click();
+
+                ok(!tag.parent()[0]);
+            });
+
+            test("MultiSelect shows clicked item on delete", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+
+                var item = multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+
+                multiselect.tagList.children().first().find(".k-delete").click();
+                multiselect.popup.open();
+
+                notEqual(item[0].style.display, "none");
+            });
+
+            module("kendo.ui.MultiSelect selection", {
+                setup: function() {
+                    select = $("<select multiple=multiple />").appendTo(document.body);
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            test("MultiSelect selects corresponding option", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+                multiselect.ul.children().eq(1).click();
+
+                ok(select[0].children[1].selected);
+            });
+
+            test("MultiSelect unselects option", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+                multiselect.input.mousedown();
+                multiselect.ul.children().eq(1).click();
+
+                multiselect.tagList.children().first().find(".k-delete").click();
+
+                ok(!select[0].children[1].selected);
+            });
+
+            test("MultiSelect persists selected data items", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.mousedown();
+                multiselect.ul.children().eq(1).click();
+
+                //TODO: use method instead of _dataItems
+                equal(multiselect._dataItems.length, 1);
+            });
+
+            test("MultiSelect removes corresponding data item", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.mousedown();
+                multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+
+                //unselect item
+                multiselect.tagList.children().first().find(".k-delete").click();
+
+                //TODO: use method instead of _dataItems
+                equal(multiselect._dataItems.length, 1);
+                equal(multiselect._dataItems[0].value, 0);
+            });
+
+            test("MultiSelect clears input on selection", function() {
+                populateSelect();
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.mousedown().val("option");
+                multiselect.search("option");
+
+                multiselect.ul.children().eq(0).click();
+
+                equal(multiselect.input.val(), "");
+            });
+
+            test("MultiSelect clears input on blur", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.focus().val("test").blur();
+
+                equal(multiselect.input.val(), "");
+            });
+
+            test("MultiSelect shows all available items if input is clear", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.focus().val("nothing");
+                multiselect.search("nothing");
+
+                multiselect.input.blur();
+
+                multiselect.open();
+
+                equal(multiselect.ul.children().length, 5);
+            });
+
+            test("MultiSelect focuses input on click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.wrapper.mousedown();
+
+                equal(multiselect.input[0], document.activeElement);
+            });
+
+            test("MultiSelect focuses input on click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.mousedown();
+                multiselect.ul.children().eq(1).click();
+                multiselect.ul.children().eq(0).click();
+                multiselect.open();
+
+                multiselect.tagList.children().first().find(".k-delete").click();
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("MultiSelect selects all selected options after filtering", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.mousedown();
+                multiselect.ul.children().eq(0).click();
+                multiselect.ul.children().eq(1).click();
+
+                multiselect.input.mousedown();
+                multiselect.search("Option4");
+
+                multiselect.ul.children().eq(0).click();
+
+                var options = select[0].children;
+
+                equal(options.length, 3);
+                ok(options[0].selected);
+                ok(options[1].selected);
+                ok(options[2].selected);
+            });
+
+            test("MultiSelect highlights first item on refresh", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.open();
+                multiselect.refresh();
+
+                ok(multiselect.current().parent()[0]);
+            });
+
+            test("MultiSelect unselects custom option", function() {
+                var multiselect = new MultiSelect(select, {
+                    dataSource: ["item1", "item2"],
+                    value: ["item1", "item2"]
+                });
+
+                multiselect.dataSource.data(["item3", "item4"]);
+                multiselect.ul.children().eq(0).click();
+
+                multiselect.tagList.children().first().find(".k-delete").click();
+
+                ok(!select[0].children[2].selected);
+            });
+
+            test("MultiSelect closes popup on blur", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.input.focus();
+                multiselect.open();
+                multiselect.input.blur();
+
+                ok(!multiselect.popup.visible());
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -1,0 +1,105 @@
+<div id="example" class="k-content">
+    <select id="select"></select>
+    <script>
+        $(document).ready(function() {
+            function onDataBound() {
+                if ("kendoConsole" in window) {
+                    kendoConsole.log("event: dataBound");
+                }
+            }
+
+            function onOpen() {
+                if ("kendoConsole" in window) {
+                    kendoConsole.log("event: open");
+                }
+            }
+
+            function onClose() {
+                if ("kendoConsole" in window) {
+                    kendoConsole.log("event: close");
+                }
+            }
+
+            function onChange() {
+                if ("kendoConsole" in window) {
+                    kendoConsole.log("event: change");
+                }
+            }
+
+            function onSelect(e) {
+                if ("kendoConsole" in window) {
+                    var dataItem = this.dataSource.view()[e.item.index()];
+                    kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")" );
+                }
+            };
+
+            var data = [
+                { text: "Item 1", value:"1" },
+                { text: "Item 2", value:"2" },
+                { text: "Item 3", value:"3" },
+                { text: "Item 4", value:"4" },
+                { text: "Item 5", value:"5" },
+                { text: "Item 6", value:"6" }
+            ];
+
+            $("#select").kendoMultiSelect({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: data,
+                dataBound: onDataBound,
+                select: onSelect,
+                change: onChange,
+                close: onClose,
+                open: onOpen
+            });
+        });
+    </script>
+    <div class="console"></div>
+</div>
+<style scoped>
+    .configuration .k-textbox {
+        width: 40px;
+    }
+
+    #products_wrapper
+    {
+        width: 500px;
+    }
+
+    .k-readonly
+    {
+        color: gray;
+    }
+
+    .k-multiselect-wrap
+    {
+        border-width: 0px;
+        border-style: solid;
+        border-radius: 4px;
+        border-color: #C5C5C5;
+        background-color: #FFF;
+    }
+
+    .k-multiselect-wrap .k-input
+    {
+        background-color: transparent;
+        height: 1.31em;
+        line-height: 1.31em;
+        padding: 0.18em 0;
+        text-indent: 4px;
+        border: 0;
+        margin: 0;
+        float: left;
+    }
+
+    .k-multiselect-wrap li
+    {
+        display: inline-block;
+        border-style: solid;
+        border-width: 1px;
+        margin: 5px 3px;
+        padding: .15em .15em .15em .4em;
+        line-height: 1.5em;
+        float: left;
+    }
+</style>

@@ -819,6 +819,54 @@
             ]
         },
         {
+            "text": "MultiSelect",
+            "name": "multiselect",
+            "documentation": "web/multiselect",
+            "spriteCssClass": "multiselectIcon",
+            "items": [
+                {
+                    "text": "Basic Usage",
+                    "url": "multiselect/index.html",
+                    "title": "Kendo MultiSelect demo",
+                    "meta": "This demo shows the core functionality of KendoMultiSelect widget."
+                },
+                {
+                    "text": "Binding to remote data",
+                    "url": "multiselect/remotedatasource.html",
+                    "title": "Kendo MultiSelect demo",
+                    "meta": ""
+                },
+                {
+                    "text": "API",
+                    "url": "multiselect/api.html",
+                    "title": "Demo for Kendo UI MultiSelect widget API",
+                    "meta": "This sample shows all API functions for Kendo UI MultiSelect widget."
+                },
+                {
+                    "text": "Events",
+                    "url": "multiselect/events.html",
+                    "title": "Examples of events in Kendo UI jQuery MultiSelect component",
+                    "meta": "This demo demonstrates useful events which are triggered in Kendo UI MultiSelect upon user's selection of items from the drop-down list."
+                },
+                {
+                    "text": "Customizing templates",
+                    "url": "multiselect/template.html",
+                    "title": "Demo for customizing jQuery MultiSelect Templates | Kendo UI Web Demos",
+                    "meta": "This Kendo UI MultiSelect demo shows how the template of the control can be customized to change the appearance of items in the auto-searchable list."
+                },
+                {
+                    "text": "RTL support",
+                    "url": "multiselect/rtl.html",
+                    "title": "Kendo UI MultiSelect control RTL support demo",
+                    "meta": "This example shows how RTL support is enabled in Kendo UI jQuery-based MultiSelect. Any application or mobile website will be now intuitive for RTL language users."
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "multiselect/navigation.html"
+                }
+            ]
+        },
+        {
             "text": "NumericTextBox",
             "name": "numerictextbox",
             "documentation": "web/numerictextbox",

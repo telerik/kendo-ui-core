@@ -2884,6 +2884,10 @@ kendo_module({
             record = {};
             option = options[idx];
 
+            if (option.disabled) {
+                continue;
+            }
+
             record[firstField.field] = option.text;
 
             value = option.attributes.value;

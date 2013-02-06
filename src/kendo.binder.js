@@ -897,38 +897,62 @@ kendo_module({
                 this.widget.first(CHANGE, this._change);
 
                 var value = this.bindings.value.get();
+
                 this._valueIsObservableObject = value == null || value instanceof ObservableObject;
+                this._valueIsObservableArray = value instanceof ObservableArray;
             },
 
             change: function() {
-                var value = this.widget.value();
-                var idx, length;
-
-                var field = this.options.dataValueField || this.options.dataTextField;
+                var value = this.widget.value(),
+                    field = this.options.dataValueField || this.options.dataTextField,
+                    isArray = toString.call(value) === "[object Array]",
+                    isObservableObject = this._valueIsObservableObject,
+                    valueIndex, valueLength, values = [],
+                    sourceItem, sourceValue,
+                    idx, length, source;
 
                 if (field) {
-                    var source,
-                        isObservableObject = this._valueIsObservableObject;
 
                     if (this.bindings.source) {
                         source = this.bindings.source.get();
                     }
 
-                    if (value === "" && isObservableObject) {
+                    if (value === "" && isObservableObject ) {
                         value = null;
                     } else {
                         if (!source || source instanceof kendo.data.DataSource) {
                             source = this.widget.dataSource.view();
                         }
 
+                        if (isArray) {
+                            valueLength = value.length;
+                            values = value.slice(0);
+                        }
+
                         for (idx = 0, length = source.length; idx < length; idx++) {
-                            if (source[idx].get(field) == value) {
-                                if (isObservableObject) {
-                                    value = source[idx];
-                                } else {
-                                    value = source[idx].get(field);
+                            sourceItem = source[idx];
+                            sourceValue = sourceItem.get(field);
+
+                            if (isArray) {
+                                for (valueIndex = 0; valueIndex < valueLength; valueIndex++) {
+                                    if (sourceValue == values[valueIndex]) {
+                                        values[valueIndex] = sourceItem;
+                                        break;
+                                    }
                                 }
+                            } else if (sourceValue == value) {
+                                value = isObservableObject ? sourceItem : sourceValue;
                                 break;
+                            }
+                        }
+
+                        if (values[0]) {
+                            if (this._valueIsObservableArray) {
+                                value = values;
+                            } else if (isObservableObject || !field) {
+                                value = values[0];
+                            } else {
+                                value = values[0].get(field);
                             }
                         }
                     }
@@ -938,11 +962,20 @@ kendo_module({
             },
 
             refresh: function() {
-                var field = this.options.dataValueField || this.options.dataTextField;
-                var value = this.bindings.value.get();
+                var field = this.options.dataValueField || this.options.dataTextField,
+                    value = this.bindings.value.get(),
+                    idx = 0, length,
+                    values = [];
 
-                if (field && value instanceof ObservableObject) {
-                    value = value.get(field);
+                if (field) {
+                    if (value instanceof ObservableArray) {
+                        for (length = value.length; idx < length; idx++) {
+                            values[idx] = value[idx].get(field);
+                        }
+                        value = values;
+                    } else if (value instanceof ObservableObject) {
+                        value = value.get(field);
+                    }
                 }
 
                 this.widget.value(value);

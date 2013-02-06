@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MultiSelect filtering</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">MultiSelect filtering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var MultiSelect = kendo.ui.MultiSelect,
+                select;
+
+            $.fn.keydown = function(character) {
+                var keyCode = character.charCodeAt(0);
+                $(this).trigger({
+                    type: "keydown",
+                    keyCode: keyCode
+                });
+            }
+
+            function popuplateSelect() {
+                var options = [];
+                for (var i=0; i < 5; i++) {
+                    options.push("<option value='" + i + "'>Option" + i + "</option>");
+                }
+
+                select.html(options);
+            }
+
+            module("kendo.ui.MultiSelect filtering", {
+                setup: function() {
+                    select = $("<select multiple=multiple/>").appendTo(document.body);
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            asyncTest("MultiSelect filters items on keydown", 1, function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.input.val("Option1").keydown("1");
+
+                setTimeout(function() {
+                    start();
+                    equal(multiselect.ul.children().length, 1);
+                });
+            });
+
+            test("MultiSelect filters data on rebind depending on the selected items", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.search("Option1");
+                multiselect.ul.children().first().click();
+
+                multiselect.open();
+
+                ok(!multiselect.ul.children().eq(1).is(":visible"));
+            });
+
+            test("MultiSelect filters data using selected items too", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.ul.children().first().click();
+                multiselect.search("Option1");
+                multiselect.ul.children().first().click();
+
+                multiselect.input.click();
+
+                ok(!multiselect.ul.children().eq(0).is(":visible"));
+                ok(!multiselect.ul.children().eq(1).is(":visible"));
+
+                ok(select[0].children[0].selected);
+                ok(select[0].children[1].selected);
+            });
+
+            test("MultiSelect filters data and hides already clicked items", function() {
+                popuplateSelect();
+
+                var multiselect = new MultiSelect(select, {
+                    delay: 0
+                });
+
+                multiselect.value(["0", "1"]);
+                multiselect.search("Opt");
+
+                var children = multiselect.ul.children();
+
+                equal(children.length, multiselect.dataSource.view().length);
+                ok(!children.eq(0).is(":visible"));
+                ok(!children.eq(1).is(":visible"));
+            });
+
+            test("MultiSelect hides popup if no data", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.wrapper.click();
+                multiselect.search("no such item");
+
+                ok(!multiselect.popup.visible());
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

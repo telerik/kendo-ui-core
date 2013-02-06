@@ -1,0 +1,22 @@
+        <div id="example" class="k-content">
+
+            <div class="k-rtl">
+                <select id="select"></select>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    var data = [
+                        { text: "Item 1", value:"1" },
+                        { text: "Item 2", value:"2" },
+                        { text: "Item 3", value:"3" }
+                    ];
+
+                    $("#select").kendoMultiSelect({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: data
+                    });
+                });
+            </script>
+        </div>

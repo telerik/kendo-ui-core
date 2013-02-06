@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MultiSelect Events</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">MultiSelect Events</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var MultiSelect = kendo.ui.MultiSelect,
+                select;
+
+            function populateSelect(length) {
+                var options = [];
+                length = length || 5;
+                for (var i=0; i < length; i++) {
+                    options.push("<option value='" + i + "'>Option" + i + "</option>");
+                }
+
+                select.html(options);
+            }
+
+            module("kendo.ui.MultiSelect Events", {
+                setup: function() {
+                    select = $("<select multiple/>").appendTo(document.body);
+                    populateSelect();
+                },
+                teardown: function() {
+                    if (select.data("kendoMultiSelect")) {
+                        select.data("kendoMultiSelect").destroy();
+                    }
+
+                    select.parents(".k-widget").remove();
+                }
+            });
+
+            test("MultiSelect triggers open event", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    open: function() {
+                        ok(true);
+                    }
+                });
+
+                multiselect.open();
+            });
+
+            test("MultiSelect triggers close event", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    close: function() {
+                        ok(true);
+                    }
+                });
+
+                multiselect.open();
+                multiselect.close();
+            });
+
+            test("MultiSelect triggers dataBound event on refresh", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    dataBound: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("MultiSelect raises change event on click", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                multiselect.open();
+                multiselect.ul.children().first().click();
+            });
+
+            test("MultiSelect raises change event on enter", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                multiselect.open();
+                multiselect.input.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+            });
+
+            test("MultiSelect raises change event delete", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    change: function() {
+                        ok(true);
+                    },
+                    value: ["1", "2"]
+                });
+
+                multiselect.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.BACKSPACE
+                });
+            });
+
+            test("MultiSelect raises change event on delete button", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    change: function() {
+                        ok(true);
+                    },
+                    value: ["1", "2"]
+                });
+
+                multiselect.tagList.find(".k-delete").first().click();
+            });
+
+            test("MultiSelect raises select event", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    select: function() {
+                        ok(true);
+                    }
+                });
+
+                multiselect.open();
+                multiselect.ul.children().first().click();
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

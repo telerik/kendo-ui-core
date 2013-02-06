@@ -60,7 +60,8 @@ namespace Kendo.Models
             "kendo.upload.js",
             "kendo.window.js",
             "kendo.imagebrowser.js",
-            "kendo.editor.js"
+            "kendo.editor.js",
+            "kendo.multiselect.js"
 #else
             "http://code.jquery.com/jquery-1.8.2.min.js",
             "kendo.all.min.js"

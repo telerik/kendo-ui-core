@@ -113,7 +113,7 @@
                 equal(dataSource.pageSize(), 10);
             });
 
-            test("infer from html table", function() {
+            test(" skips disabled optionsinfer from html table", function() {
                 var table = $("<table><tr><td>foo1</td><td>bar1</td></tr><tr><td>foo2</td><td>bar2</td></tr></table>"),
                     dataSource = DataSource.create({
                         table: table,
@@ -152,6 +152,19 @@
                 equal(dataSource.data()[0].value, "1");
                 equal(dataSource.data()[1].text, "foo2");
                 equal(dataSource.data()[1].value, "2");
+            });
+
+            test("infer from html select skips disabled options", function() {
+                var select = $("<select><option disabled value=1>foo1</option><option value=2>foo2</option></select>"),
+                    dataSource = DataSource.create({
+                        select: select,
+                        fields: [ { field: "text" }, { field: "value" } ]
+                    });
+
+                dataSource.read();
+                equal(dataSource.data().length, 1);
+                equal(dataSource.data()[0].text, "foo2");
+                equal(dataSource.data()[0].value, "2");
             });
 
             test("initialize data source from array", function() {
