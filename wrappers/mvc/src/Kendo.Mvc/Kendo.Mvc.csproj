@@ -444,6 +444,8 @@
     <Compile Include="UI\Calendar\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\IPicker.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\ListBuilderBase.cs" />
+    <Compile Include="UI\DropDownListBase\ListBase.cs" />
     <Compile Include="UI\DropDownListBase\DropDownListBase.cs" />
     <Compile Include="UI\DropDownListBase\FilterType.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListBuilderBase.cs" />
@@ -609,6 +611,9 @@
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
+    <Compile Include="UI\MultiSelect\Fluent\MultiSelectBuilder.cs" />
+    <Compile Include="UI\MultiSelect\Html\MultiSelectHtmlBuilder.cs" />
+    <Compile Include="UI\MultiSelect\MultiSelect.cs" />
     <Compile Include="UI\Pageable\Fluent\PageableMessagesBuilder.cs" />
     <Compile Include="UI\Pageable\PageableMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />

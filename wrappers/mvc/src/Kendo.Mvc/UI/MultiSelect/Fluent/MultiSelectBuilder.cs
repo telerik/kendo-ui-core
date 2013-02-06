@@ -1,22 +1,21 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using Kendo.Mvc.UI;
-    
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Collections.Generic;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="ComboBox"/> component.
+    /// Defines the fluent interface for configuring the <see cref="MultiSelect"/> component.
     /// </summary>
-    public class ComboBoxBuilder : DropDownListBuilderBase<ComboBox, ComboBoxBuilder>
+    public class MultiSelectBuilder : ListBuilderBase<MultiSelect, MultiSelectBuilder>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ComboBoxBuilder"/> class.
+        /// Initializes a new instance of the <see cref="MultiSelectBuilder"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public ComboBoxBuilder(ComboBox component)
+        public MultiSelectBuilder(MultiSelect component)
             : base(component)
         {
         }
@@ -26,13 +25,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .AutoBind(false)
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder AutoBind(bool autoBind)
+        public MultiSelectBuilder AutoBind(bool autoBind)
         {
             Component.AutoBind = autoBind;
 
@@ -40,13 +39,13 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Binds the ComboBox to a list of DropDownListItem.
+        /// Binds the MultiSelect to a list of DropDownListItem.
         /// </summary>
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Telerik().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .BindTo(new List<DropDownListItem>
         ///             {
         ///                 new DropDownListItem{
@@ -61,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder BindTo(IEnumerable<DropDownListItem> dataSource)
+        public MultiSelectBuilder BindTo(IEnumerable<DropDownListItem> dataSource)
         {
             if (string.IsNullOrEmpty(Component.DataValueField)
                 && string.IsNullOrEmpty(Component.DataTextField))
@@ -71,19 +70,20 @@ namespace Kendo.Mvc.UI.Fluent
             }
 
             Component.DataSource.Data = dataSource;
-            Component.Value = dataSource.SelectedValue();
+            Component.Value = dataSource.Where(item => item.Selected == true)
+                                        .Select(item => item.Value ?? item.Text);
 
             return this;
         }
 
         /// <summary>
-        /// Binds the ComboBox to a list of SelectListItem.
+        /// Binds the MultiSelect to a list of SelectListItem.
         /// </summary>
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Telerik().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .BindTo(new List<SelectListItem>
         ///             {
         ///                 new SelectListItem{
@@ -98,7 +98,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder BindTo(IEnumerable<SelectListItem> dataSource)
+        public MultiSelectBuilder BindTo(IEnumerable<SelectListItem> dataSource)
         {
             return BindTo(dataSource.Select(item => new DropDownListItem
             {
@@ -113,14 +113,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().DropDownList()
-        ///             .Name("DropDownList")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .DataTextField("Text")
         ///             .DataValueField("Value")
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder DataValueField(string field)
+        public MultiSelectBuilder DataValueField(string field)
         {
             Component.DataValueField = field;
 
@@ -132,13 +132,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .Filter("startswith");
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder Filter(string filter)
+        public MultiSelectBuilder Filter(string filter)
         {
             Component.Filter = filter;
 
@@ -150,13 +150,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .Filter(FilterType.Contains);
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder Filter(FilterType filter)
+        public MultiSelectBuilder Filter(FilterType filter)
         {
             Component.Filter = filter.ToString().ToLower();
 
@@ -164,13 +164,13 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the items in the ComboBox
+        /// Defines the items in the MultiSelect
         /// </summary>
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Telerik().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .Items(items =>
         ///             {
         ///                 items.Add().Text("First Item");
@@ -179,7 +179,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder Items(Action<DropDownListItemFactory> addAction)
+        public MultiSelectBuilder Items(Action<DropDownListItemFactory> addAction)
         {
             var items = new List<DropDownListItem>();
 
@@ -193,13 +193,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .HighlightFirst(true)
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder HighlightFirst(bool highlightFirst)
+        public MultiSelectBuilder HighlightFirst(bool highlightFirst)
         {
             Component.HighlightFirst = highlightFirst;
 
@@ -211,57 +211,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .MinLength(3)
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder MinLength(int length)
+        public MultiSelectBuilder MinLength(int length)
         {
 
             Component.MinLength = length;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Use it to set selected item index
-        /// </summary>
-        /// <param name="index">Item index.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
-        ///             .SelectedIndex(0);
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ComboBoxBuilder SelectedIndex(int index)
-        {
-            if (index != -1)
-            {
-            }
-
-            Component.SelectedIndex = index;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Controls whether the ComboBox should automatically auto-type the rest of text.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
-        ///             .Suggest(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ComboBoxBuilder Suggest(bool suggest)
-        {
-            Component.Suggest = suggest;
 
             return this;
         }
@@ -271,13 +230,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ComboBox()
-        ///             .Name("ComboBox")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
         ///             .Placeholder("Select country...")
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder Placeholder(string placeholder)
+        public MultiSelectBuilder Placeholder(string placeholder)
         {
             Component.Placeholder = placeholder;
 
@@ -285,38 +244,91 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Use it to set the Id of the parent ComboBox.
+        /// Template to be used for rendering the items in the list.
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
-        ///             .Name("ComboBox2")
-        ///             .CascadeFrom("ComboBox1")
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .ItemTemplate("#= data #")
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder CascadeFrom(string cascadeFrom)
+        public MultiSelectBuilder ItemTemplate(string template)
         {
-            Component.CascadeFrom = cascadeFrom;
+            Component.ItemTemplate = template;
 
             return this;
         }
 
         /// <summary>
-        /// Define the text of the widget, when the autoBind is set to false.
+        /// TemplateId to be used for rendering the items in the list.
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
-        ///             .Name("ComboBox")
-        ///             .Text("Chai")
-        ///             .AutoBind(false)
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .ItemTemplateId("widgetTemplateId")
         /// %&gt;
         /// </code>
         /// </example>
-        public ComboBoxBuilder Text(string text)
+        public MultiSelectBuilder ItemTemplateId(string templateId)
         {
-            Component.Text = text;
+            Component.ItemTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Template to be used for rendering the tags of the selected items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .TagTemplate("#= data #")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MultiSelectBuilder TagTemplate(string template)
+        {
+            Component.TagTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// TemplateId to be used for rendering the tags of the selected items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .TagTemplateId("widgetTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MultiSelectBuilder TagTemplateId(string templateId)
+        {
+            Component.TagTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the value of the widget.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .Value(new string[] { "1" })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MultiSelectBuilder Value(IEnumerable<string> value)
+        {
+            Component.Value = value;
 
             return this;
         }

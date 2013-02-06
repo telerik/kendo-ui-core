@@ -244,6 +244,7 @@
     <Compile Include="Controllers\Web\Menu\OrientationController.cs" />
     <Compile Include="Controllers\Web\Menu\ImagesController.cs" />
     <Compile Include="Controllers\Web\Menu\IndexController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\IndexController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\NavigationController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\RtlController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\GlobalizationController.cs" />
@@ -564,6 +565,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\razor\Views\web\tooltip\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\index.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>

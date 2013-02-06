@@ -1,19 +1,19 @@
-namespace Kendo.Mvc.UI
+﻿namespace Kendo.Mvc.UI
 {
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
-
-    using System.Globalization;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
-    public class ComboBox : DropDownListBase
+    public class MultiSelect : DropDownListBase
     {
         //Escape meta characters: http://api.jquery.com/category/selectors/
         private static readonly Regex EscapeRegex = new Regex(@"([;&,\.\+\*~'\:\""\!\^\$\[\]\(\)\|\/])", RegexOptions.Compiled);
 
-        public ComboBox(ViewContext viewContext,  IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
+        public MultiSelect(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, viewData, urlGenerator)
         {
         }
@@ -24,16 +24,10 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public string CascadeFrom
+        public string DataValueField
         {
             get;
             set;
-        }
-
-        public string DataValueField 
-        { 
-            get; 
-            set; 
         }
 
         public string Filter
@@ -60,37 +54,31 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public int? SelectedIndex
+        public string ItemTemplate
         {
             get;
             set;
         }
 
-        public bool? Suggest
+        public string ItemTemplateId
         {
             get;
             set;
         }
 
-        public string Text
+        public string TagTemplate
         {
             get;
             set;
         }
 
-        public string Template
+        public string TagTemplateId
         {
             get;
             set;
         }
 
-        public string TemplateId
-        {
-            get;
-            set;
-        }
-
-        public string Value
+        public IEnumerable<string> Value
         {
             get;
             set;
@@ -98,16 +86,39 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
+            /*if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
             {
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
                     HandlerName = "function() { return kendo.ui.ComboBox.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
                 };
+            }*/
+
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
             }
 
             var options = this.SeriailzeBaseOptions();
 
+            if (!string.IsNullOrEmpty(ItemTemplateId))
+            {
+                options["itemTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, ItemTemplateId) };
+            }
+            else if (!string.IsNullOrEmpty(ItemTemplate))
+            {
+                options["itemTemplate"] = ItemTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(TagTemplateId))
+            {
+                options["tagTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, TagTemplateId) };
+            }
+            else if (!string.IsNullOrEmpty(TagTemplate))
+            {
+                options["tagTemplate"] = TagTemplate;
+            }
             if (AutoBind != null)
             {
                 options["autoBind"] = AutoBind;
@@ -122,12 +133,7 @@ namespace Kendo.Mvc.UI
             {
                 options["filter"] = Filter;
             }
-
-            if (SelectedIndex != null && SelectedIndex > -1)
-            {
-                options["index"] = SelectedIndex;
-            }
-
+            
             if (HighlightFirst != null)
             {
                 options["highlightFirst"] = HighlightFirst;
@@ -143,52 +149,40 @@ namespace Kendo.Mvc.UI
                 options["placeholder"] = Placeholder;
             }
 
-            if (Suggest != null)
+            var value = GetValue();
+
+            if (value != null)
             {
-                options["suggest"] = Suggest;
+                options["value"] = value;
             }
 
-            if (!string.IsNullOrEmpty(CascadeFrom))
-            {
-                options["cascadeFrom"] = CascadeFrom;
-            }
-
-            var text = this.GetInputValue();
-            if (!string.IsNullOrEmpty(text))
-            {
-                options["text"] = text;
-            }
-
-            writer.Write(Initializer.Initialize(Selector, "ComboBox", options));
+            writer.Write(Initializer.Initialize(Selector, "MultiSelect", options));
 
             base.WriteInitializationScript(writer);
         }
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            new DropDownListHtmlBuilderBase(this).Build().WriteTo(writer);
+            new MultiSelectHtmlBuilder(this).Build().WriteTo(writer);
 
             base.WriteHtml(writer);
         }
 
-        protected string GetInputValue()
+        private IEnumerable<string> GetValue()
         {
-            var inputName = Name + "_input";
-            var text = this.GetValue<string>(inputName, null);
-
-            if (string.IsNullOrEmpty(text)) {
-                var result = this.ViewContext.Controller.ValueProvider.GetValue(inputName);
-
-                var found = result != null;
-                if (found)
-                {
-                    return (string)result.ConvertTo(typeof(string), CultureInfo.CurrentCulture);
-                }
-
-                text = Text;
+            ModelState state;
+            if (ViewData.ModelState.TryGetValue(Name, out state) && (state.Value != null))
+            {
+                //if (ViewData.ModelState.IsValidField(Name)) TODO: Do I need this ?
+                return state.Value.ConvertTo(typeof(string[]), null) as IEnumerable<string>;
+            }
+            else if (Value == null)
+            {
+                //if (Name.HasValue())   
+                return ViewData.Eval(Name) as IEnumerable<string>;
             }
 
-            return text;
+            return Value;
         }
     }
 }

@@ -48,6 +48,24 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string Template
+        {
+            get;
+            set;
+        }
+
+        public string TemplateId
+        {
+            get;
+            set;
+        }
+
+        public string Value
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();

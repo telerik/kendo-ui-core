@@ -616,6 +616,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="MultiSelect"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Text("First Item");
+        ///                 items.Add().Text("Second Item");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MultiSelectBuilder MultiSelect()
+        {
+            return new MultiSelectBuilder(new MultiSelect(ViewContext, Initializer, ViewData, UrlGenerator));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Slider"/>.
         /// </summary>
         /// <example>
@@ -1260,6 +1280,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="MultiSelect"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelectFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual MultiSelectBuilder MultiSelectFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
+        {
+            return MultiSelect().Name(GetName(expression))
+                                .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                                .Value(GetIEnumerableValues(expression));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="UI.Slider{T}"/>.
         /// </summary>
         /// <example>
@@ -1492,6 +1527,11 @@ namespace Kendo.Mvc.UI.Fluent
         {
             object model = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
             return model != null && model.GetType().IsPredefinedType() ? Convert.ToString(model) : string.Empty;
+        }
+
+        private IEnumerable<string> GetIEnumerableValues<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            return ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as IEnumerable<string>;
         }
 
         private Nullable<TValue> GetRangeValidationParameter<TValue>(IEnumerable<ModelValidator> validators, string parameter) where TValue : struct

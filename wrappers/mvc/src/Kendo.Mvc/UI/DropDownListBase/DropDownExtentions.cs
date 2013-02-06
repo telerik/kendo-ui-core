@@ -5,14 +5,16 @@ namespace Kendo.Mvc.UI
 
     internal static class DropDownExtentions
     {
-        internal static void ValueOfSelectedItem(this DropDownListBase instance, IEnumerable<DropDownListItem> source)
+        internal static string SelectedValue(this IEnumerable<DropDownListItem> source)
         {
             var selectListItem = source.Where(item => item.Selected == true).FirstOrDefault();
 
             if (selectListItem != null)
             {
-                instance.Value = selectListItem.Value ?? selectListItem.Text;
+                return selectListItem.Value ?? selectListItem.Text;
             }
+
+            return null;
         }
     }
 }
