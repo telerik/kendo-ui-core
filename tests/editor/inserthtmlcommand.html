@@ -1,82 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.colorpicker.js"></script>
-        <script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+    <script src="../../src/jquery.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit-runner.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.combobox.js"></script>
+    <script src="../../src/kendo.dropdownlist.js"></script>
+    <script src="../../src/kendo.window.js"></script>
+    <script src="../../src/kendo.colorpicker.js"></script>
+    <script src="../../src/kendo.editor.js"></script>
+    <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+    <script>
 
-var InsertHtmlCommand;
+        var InsertHtmlCommand = kendo.ui.editor.InsertHtmlCommand;
 
-$("#Editor1").kendoEditor();
+        $("#Editor1").kendoEditor();
 
-QUnit.config.testStart.push(function() {
-    editor = getEditor();
-    InsertHtmlCommand = kendo.ui.editor.InsertHtmlCommand;
-});
+        module("InsertHtmlCommand", {
+            setup: function() {
+                editor = getEditor();
+            }
+        });
 
-test('exec calls clipboard paste', function() {
-    var range = createRangeFromText(editor, 'f|o|o');
+        test('exec calls clipboard paste', function() {
+            var range = createRangeFromText(editor, 'f|o|o');
 
-    var oldPaste = editor.clipboard.paste;
-    var argument;
+            var oldPaste = editor.clipboard.paste;
+            var argument;
 
-    try {
-        editor.clipboard.paste = function() { argument = arguments[0]; }
+            try {
+                editor.clipboard.paste = function() { argument = arguments[0]; }
 
-        var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });
-        command.editor = editor;
-        command.exec();
-        equal(argument, '<span class="test-icon"></span>');
+                var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });
+                command.editor = editor;
+                command.exec();
+                equal(argument, '<span class="test-icon"></span>');
 
-    } finally {
-        editor.clipboard.paste = oldPaste;
-    }
-});
+                } finally {
+                editor.clipboard.paste = oldPaste;
+            }
+        });
 
-test('exec inserts html parameter', function() {
-    var range = createRangeFromText(editor, 'fo||o');
-    editor.selectRange(range);
+        test('exec inserts html parameter', function() {
+            var range = createRangeFromText(editor, 'fo||o');
+            editor.selectRange(range);
 
-    var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });
-    command.editor = editor;
-    command.exec();
-    equal(editor.value(), 'fo<span class="test-icon"></span>o');
-});
+            var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });
+            command.editor = editor;
+            command.exec();
+            equal(editor.value(), 'fo<span class="test-icon"></span>o');
+        });
 
-</script>
+        test("insertHtml tool gets snippets from its items collection", function() {
+            var dom = $("<textarea></textarea>").appendTo("body");
+            dom.kendoEditor({
+                tools: [
+                    { name: "insertHtml", items: [
+                        { text: "foo", value: "bar" }
+                    ] }
+                ]
+            });
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+            var editor = dom.data("kendoEditor");
+
+            var data = editor.wrapper.find("select").data("kendoSelectBox").dataSource.data();
+
+            equal(data.length, 1);
+            equal(data[0].text, "foo");
+            equal(data[0].value, "bar");
+
+            dom.data("kendoEditor").wrapper.remove();
+        });
+
+        test("insertHtml tool gets snippets from its legacy configuration", function() {
+            var dom = $("<textarea></textarea>").appendTo("body");
+            dom.kendoEditor({
+                tools: [
+                    { name: "insertHtml" }
+                ],
+                insertHtml: [
+                    { text: "foo", value: "bar" }
+                ]
+            });
+
+            var editor = dom.data("kendoEditor");
+
+            var data = editor.wrapper.find("select").data("kendoSelectBox").dataSource.data();
+
+            equal(data.length, 1);
+            equal(data[0].text, "foo");
+            equal(data[0].value, "bar");
+
+            dom.data("kendoEditor").wrapper.remove();
+        });
+
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>

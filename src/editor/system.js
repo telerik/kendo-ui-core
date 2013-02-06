@@ -95,10 +95,12 @@ var InsertHtmlCommand = Command.extend({
 
 var InsertHtmlTool = Tool.extend({
     initialize: function(ui, initOptions) {
-        var editor = initOptions.editor;
+        var editor = initOptions.editor,
+            options = this.options,
+            dataSource = options.items ? options.items : editor.options.insertHtml;
 
         new Editor.SelectBox(ui, {
-            dataSource: editor.options.insertHtml || [],
+            dataSource: dataSource,
             dataTextField: "text",
             dataValueField: "value",
             change: function () {
