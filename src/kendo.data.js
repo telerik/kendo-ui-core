@@ -245,9 +245,12 @@ kendo_module({
             return -1;
         },
 
-        forEach: function(f) {
-            for (var i = 0; i < this.length; ++i) {
-                f(this[i], i);
+        forEach: function(callback) {
+            var idx = 0,
+                length = this.length;
+
+            for (; i < length; i++) {
+                callback(this[i], i);
             }
         }
     });
