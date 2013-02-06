@@ -654,6 +654,12 @@
                     }
                 });
 
+                test("defaults to 1 px stroke width", function() {
+                    path.options.strokeWidth = undefined;
+                    path.options.dashType = "dot";
+                    ok(path.render().indexOf("stroke-dasharray='1.5 3.5'") > -1);
+                });
+
                 test("renders dot", function() {
                     path.options.dashType = "dot";
                     ok(path.render().indexOf("stroke-dasharray='1.5 3.5'") > -1);
