@@ -937,10 +937,10 @@
 
         dashType = dashType ? dashType.toLowerCase() : null;
 
-        if (dashType && dashType != SOLID && strokeWidth) {
+        if (dashType && dashType != SOLID) {
             dashTypeArray = SVG_DASH_TYPE[dashType];
             for (i = 0; i < dashTypeArray.length; i++) {
-                result.push(dashTypeArray[i] * strokeWidth);
+                result.push(dashTypeArray[i] * (strokeWidth || 1));
             }
 
             return "stroke-dasharray='" + result.join(" ") + "' ";
