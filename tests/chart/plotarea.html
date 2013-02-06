@@ -115,6 +115,20 @@
                     chartSeries = plotArea.charts[0];
                 }
 
+                function assertAxisRange(axis, min, max, series, options) {
+                    var fn = dataviz.CategoricalPlotArea.fn;
+                    stubMethod(fn, "createValueAxes",
+                        function(panes) {
+                            fn._stubbed["createValueAxes"].call(this, panes);
+                            same(this[axis].options.min, min);
+                            same(this[axis].options.max, max);
+                        },
+                        function() {
+                            plotArea = createPlotArea(series, options);
+                        }
+                    );
+                }
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Axes", {
                     setup: function() {
@@ -201,16 +215,8 @@
                     same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
-                test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
-                        function() {
-                            equal(this.valueAxisRangeTracker.query("primary").min, 0);
-                            equal(this.valueAxisRangeTracker.query("primary").max, 1);
-                        },
-                        function() {
-                            plotArea = new dataviz.CategoricalPlotArea([]);
-                        }
-                    );
+                test("axis limit is [0, 1.2] when no series are configured", 2, function() {
+                    assertAxisRange("valueAxis", 0, 1.2, []);
                 });
 
                 test("NaN values are ignored when tracking axis range", 2, function() {
@@ -910,42 +916,38 @@
                     );
                 });
 
-                test("sets named primary axis min/max to series limits (impl./expl. axis)", function() {
-                    var fn = dataviz.CategoricalPlotArea.fn;
-                    stubMethod(fn, "createValueAxes",
-                        function(panes) {
-                            fn._stubbed["createValueAxes"].call(this, panes);
-                            equal(this.valueAxis.options.min, 0);
-                            equal(this.valueAxis.options.max, 120);
-                        },
-                        function() {
-                            createPlotArea([{
-                                type: "column",
-                                data: [10],
-                                axis: "A"
-                            }, {
-                                type: "column",
-                                data: [100]
-                            }], {
-                                valueAxis: { name: "A" }
-                            });
-                        }
+                test("sets named default axis min/max to series limits (expl. axis)", 2, function() {
+                    assertAxisRange("valueAxis", 0, 120,
+                        [{ type: "column", data: [100], axis: "A" }],
+                        { valueAxis: { name: "A" } }
                     );
                 });
 
-                test("sets named primary axis min/max to series limits (implicit axis)", function() {
-                    var fn = dataviz.CategoricalPlotArea.fn;
-                    stubMethod(fn, "createValueAxes",
-                        function(panes) {
-                            fn._stubbed["createValueAxes"].call(this, panes);
-                            equal(this.valueAxis.options.min, 0);
-                            equal(this.valueAxis.options.max, 350);
-                        },
-                        function() {
-                            createPlotArea(columnSeriesData, {
-                                valueAxis: { name: "A" }
-                            });
-                        }
+                test("sets named primary axis min/max to series limits (impl. axis)", function() {
+                    assertAxisRange("valueAxis", 0, 120,
+                        [{ type: "column", data: [100] }],
+                        { valueAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named default axis min/max to series limits (expl. axis, 0 < value < 1)", 2, function() {
+                    assertAxisRange("valueAxis", 0, .12,
+                        [{ type: "column", data: [.1], axis: "A" }],
+                        { valueAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named primary axis min/max to series limits (impl. axis, 0 < value < 1)", 2, function() {
+                    assertAxisRange("valueAxis", 0, .12,
+                        [{ type: "column", data: [.1] }],
+                        { valueAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named primary axis min/max to series limits (implicit axis)", 2, function() {
+                    assertAxisRange("valueAxis", 0, 350,
+                        columnSeriesData,
+                        { valueAxis: { name: "A" } }
                     );
                 });
 
@@ -2674,7 +2676,7 @@
                     plotArea.series[0].data[0] = undefined;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    equals(plotArea.valueAxisRangeTracker.query("vAxis").max, 1);
+                    same(plotArea.valueAxisRangeTracker.query("vAxis"), undefined);
                 });
 
                 test("Updates plotArea.categoryAxis alias", function() {
@@ -3135,6 +3137,20 @@
                     chartSeries = plotArea.charts[0];
                 }
 
+                function assertAxisRange(axis, min, max, series, options) {
+                    var fn = dataviz.XYPlotArea.fn;
+                    stubMethod(fn, "createAxes",
+                        function(panes) {
+                            fn._stubbed["createAxes"].call(this, panes);
+                            same(this[axis].options.min, min);
+                            same(this[axis].options.max, max);
+                        },
+                        function() {
+                            plotArea = createPlotArea(series, options);
+                        }
+                    );
+                }
+
                 // ------------------------------------------------------------
                 module("XY PlotArea / Axes", {
                     setup: function() {
@@ -3171,128 +3187,90 @@
                     same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
-                test("X axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.XYPlotArea.fn, "createAxes",
-                        function() {
-                            equal(this.xAxisRangeTracker.query("primary").min, 0);
-                            equal(this.xAxisRangeTracker.query("primary").max, 1);
-                        },
-                        function() {
-                            plotArea = new dataviz.XYPlotArea([]);
+                test("X axis limit is [0, 1.2] when no series are configured", 2, function() {
+                    assertAxisRange("axisX", 0, 1.2, []);
+                });
+
+                test("Y axis limit is [0, 1.2] when no series are configured", 2, function() {
+                    assertAxisRange("axisY", 0, 1.2, []);
+                });
+
+                test("sets named primary X axis range (impl. series axis)", 2, function() {
+                    assertAxisRange("axisX", 0, 120,
+                        [{ type: "scatter", data: [[100, 0]] }],
+                        { xAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named primary X axis range (expl. series axis)", 2, function() {
+                    assertAxisRange("axisX", 0, 120,
+                        [{ type: "scatter", data: [[100, 0]], xAxis: "A" }],
+                        { xAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named primary X axis range (impl. series axis, 0 < value < 1)", 2, function() {
+                    assertAxisRange("axisX", 0, .12,
+                        [{ type: "scatter", data: [[.10, 0]] }],
+                        { xAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named primary X axis range (expl. series axis, 0 < value < 1)", 2, function() {
+                    assertAxisRange("axisX", 0, .12,
+                        [{ type: "scatter", data: [[.10, 0]], xAxis: "A" }],
+                        { xAxis: { name: "A" } }
+                    );
+                });
+
+                test("sets named primary X axis range (implicit series axis)", 2, function() {
+                    assertAxisRange("axisX", 0, 350, scatterSeriesData, { xAxis: { name: "A" } });
+                });
+
+                test("sets primary X axis range (date values as strings)", 2, function() {
+                    assertAxisRange("axisX", new Date("2012/01/31 00:00:00"), new Date("2012/02/03 00:00:00"),
+                        [{
+                            type: "scatter",
+                            data: [["2012/02/01 00:00:00", 0]]
+                        }, {
+                            type: "scatter",
+                            data: [["2012/02/02 00:00:00", 0]]
+                        }], {
+                            xAxis: { type: "date" }
                         }
                     );
                 });
 
-                test("Y axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.XYPlotArea.fn, "createAxes",
-                        function() {
-                            equal(this.yAxisRangeTracker.query("primary").min, 0);
-                            equal(this.yAxisRangeTracker.query("primary").max, 1);
-                        },
-                        function() {
-                            plotArea = new dataviz.XYPlotArea([]);
-                        }
+                test("sets named primary Y axis range (impl. series axis)", 2, function() {
+                    assertAxisRange("axisY", 0, 120,
+                        [{ type: "scatter", data: [[0, 100]] }],
+                        { yAxis: { name: "A" } }
                     );
                 });
 
-                test("sets named primary X axis range (impl./expl. series axis)", function() {
-                    var fn = dataviz.XYPlotArea.fn;
-                    stubMethod(fn, "createAxes",
-                        function(panes) {
-                            fn._stubbed["createAxes"].call(this, panes);
-                            equal(this.axisX.options.min, 0);
-                            equal(this.axisX.options.max, 120);
-                        },
-                        function() {
-                            createPlotArea([{
-                                type: "scatter",
-                                data: [[10, 0]],
-                                xAxis: "A"
-                            }, {
-                                type: "scatter",
-                                data: [[100, 0]]
-                            }], {
-                                xAxis: { name: "A" }
-                            });
-                        }
+                test("sets named primary Y axis range (expl. series axis)", 2, function() {
+                    assertAxisRange("axisY", 0, 120,
+                        [{ type: "scatter", data: [[0, 100]], yAxis: "A" }],
+                        { yAxis: { name: "A" } }
                     );
                 });
 
-                test("sets named primary X axis range (implicit series axis)", function() {
-                    var fn = dataviz.XYPlotArea.fn;
-                    stubMethod(fn, "createAxes",
-                        function(panes) {
-                            fn._stubbed["createAxes"].call(this, panes);
-                            equal(this.axisX.options.min, 0);
-                            equal(this.axisX.options.max, 350);
-                        },
-                        function() {
-                            createPlotArea(scatterSeriesData, {
-                                xAxis: { name: "A" }
-                            });
-                        }
+                test("sets named primary Y axis range (impl. series axis, 0 < value < 1)", 2, function() {
+                    assertAxisRange("axisY", 0, .12,
+                        [{ type: "scatter", data: [[0, .1]] }],
+                        { yAxis: { name: "A" } }
                     );
                 });
 
-                test("sets primary X axis range (date values as strings)", function() {
-                    var fn = dataviz.XYPlotArea.fn;
-                    stubMethod(fn, "createAxes",
-                        function(panes) {
-                            fn._stubbed["createAxes"].call(this, panes);
-                            same(this.axisX.options.min, new Date("2012/01/31 00:00:00"));
-                            same(this.axisX.options.max, new Date("2012/02/03 00:00:00"));
-                        },
-                        function() {
-                            createPlotArea([{
-                                type: "scatter",
-                                data: [["2012/02/01 00:00:00", 0]]
-                            }, {
-                                type: "scatter",
-                                data: [["2012/02/02 00:00:00", 0]]
-                            }], {
-                                xAxis: { type: "date" }
-                            });
-                        }
-                    );
-                });
-
-                test("sets named primary Y axis range (impl./expl. series axis)", function() {
-                    var fn = dataviz.XYPlotArea.fn;
-                    stubMethod(fn, "createAxes",
-                        function(panes) {
-                            fn._stubbed["createAxes"].call(this, panes);
-                            equal(this.axisY.options.min, 0);
-                            equal(this.axisY.options.max, 120);
-                        },
-                        function() {
-                            createPlotArea([{
-                                type: "scatter",
-                                data: [[0, 10]],
-                                yAxis: "A"
-                            }, {
-                                type: "scatter",
-                                data: [[0, 100]]
-                            }], {
-                                yAxis: { name: "A" }
-                            });
-                        }
+                test("sets named primary Y axis range (expl. series axis, 0 < value < 1)", 2, function() {
+                    assertAxisRange("axisY", 0, .12,
+                        [{ type: "scatter", data: [[0, .1]], yAxis: "A" }],
+                        { yAxis: { name: "A" } }
                     );
                 });
 
                 test("sets named primary Y axis range (implicit series axis)", function() {
-                    var fn = dataviz.XYPlotArea.fn;
-                    stubMethod(fn, "createAxes",
-                        function(panes) {
-                            fn._stubbed["createAxes"].call(this, panes);
-                            equal(this.axisY.options.min, 0);
-                            equal(this.axisY.options.max, 350);
-                        },
-                        function() {
-                            createPlotArea(scatterSeriesData, {
-                                yAxis: { name: "A" }
-                            });
-                        }
-                    );
+                    assertAxisRange("axisY", 0, 350, scatterSeriesData, { yAxis: { name: "A" } });
                 });
 
                 test("creates Numeric axes by default", function() {
@@ -3855,7 +3833,7 @@
                     plotArea.series[0].data[0][0] = undefined;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    equals(plotArea.xAxisRangeTracker.query("xAxis").max, 1);
+                    same(plotArea.xAxisRangeTracker.query("xAxis"), undefined);
                 });
 
                 test("Resets range tracker for pane y axes", function() {
@@ -3869,7 +3847,7 @@
                     plotArea.series[0].data[0][1] = undefined;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    equals(plotArea.yAxisRangeTracker.query("yAxis").max, 1);
+                    same(plotArea.yAxisRangeTracker.query("yAxis"), undefined);
                 });
 
                 test("Updates plotArea.axisX alias", function() {
