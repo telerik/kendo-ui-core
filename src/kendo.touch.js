@@ -76,6 +76,7 @@ kendo_module({
             }
 
             that.events = new kendo.UserEvents(element, {
+                filter: options.filter,
                 surface: options.surface,
                 multiTouch: options.multiTouch,
                 allowSelection: true,
