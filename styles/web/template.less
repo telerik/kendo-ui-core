@@ -111,12 +111,10 @@
 
 .composite-background(@gradient) when (@gradient = none) {
     background-image: @texture;
-	background-position: 50% 50%;
 }
 
 .composite-background(@gradient) when not (@gradient = none) {
     background-image: @fallback-texture;
-	background-position: 50% 50%;
     background-image: @texture, -webkit-linear-gradient(top, ~"@{gradient}");
     background-image: @texture,    -moz-linear-gradient(top, ~"@{gradient}");
     background-image: @texture,      -o-linear-gradient(top, ~"@{gradient}");
@@ -315,12 +313,12 @@ textarea.k-textbox:hover,
 .k-textbox,
 .k-button,
 .k-draghandle,
-.k-tile,
 .k-autocomplete,
 .k-state-highlight,
 .k-tabstrip-items .k-item
 {
     .composite-background(@widget-gradient);
+    background-position: 50% 50%;
 }
 
 .k-tabstrip-items .k-state-active
@@ -485,6 +483,7 @@ textarea.k-textbox:hover,
 .k-draghandle.k-state-selected:hover
 {
     .composite-background(@selected-gradient);
+    background-position: 50% 50%;
 }
 
 .k-state-hover,
@@ -549,6 +548,7 @@ div.k-imagebrowser-dropzone em
 {
     background-color: @select-hover-background-color;
     .composite-background(@hover-gradient);
+    background-position: 50% 50%;
     border-color: @select-border-color;
 }
 
