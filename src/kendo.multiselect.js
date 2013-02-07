@@ -348,7 +348,7 @@ kendo_module({
                     }
                 }
 
-                that._old = that.element.val();
+                that._old = that._values.slice();
             }
         },
 
@@ -420,7 +420,7 @@ kendo_module({
                 value = that.value();
 
             if (!compare(value, that._old)) {
-                that._old = value;
+                that._old = value.slice();
 
                 that.trigger(CHANGE);
 

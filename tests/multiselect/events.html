@@ -102,12 +102,17 @@
                 });
             });
 
-            test("MultiSelect raises change event delete", 1, function() {
+            test("MultiSelect raises change event delete", 2, function() {
                 var multiselect = new MultiSelect(select, {
                     change: function() {
                         ok(true);
                     },
                     value: ["1", "2"]
+                });
+
+                multiselect.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.BACKSPACE
                 });
 
                 multiselect.input.focus().trigger({
@@ -136,6 +141,19 @@
 
                 multiselect.open();
                 multiselect.ul.children().first().click();
+            });
+
+            test("MultiSelect does not raise change event when set value using value method", function() {
+                var multiselect = new MultiSelect(select, {
+                    change: function() {
+                        ok(false);
+                    }
+                });
+
+                multiselect.value(["1","2"]);
+
+                //simulate change
+                multiselect._change();
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
