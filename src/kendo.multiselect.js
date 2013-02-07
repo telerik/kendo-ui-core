@@ -823,13 +823,16 @@ kendo_module({
 
         _input: function() {
             var that = this,
+                accessKey = that.element[0].accessKey,
                 input = that._innerWrapper.children("input.k-input");
 
             if (!input[0]) {
                 input = $('<input class="k-input" style="width: 25px" />').appendTo(that._innerWrapper);
             }
 
+            that.element.removeAttr("accesskey");
             that._focused = that.input = input.attr({
+                "accesskey": accessKey,
                 "role": "listbox",
                 "aria-expanded": false
             });

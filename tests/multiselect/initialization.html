@@ -312,7 +312,13 @@
                 equal(multiselect.current(), null);
             });
 
+            test("Copy accesskey to the visible input", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select.attr("accesskey", "w"), { highlightFirst: false });
 
+                ok(!multiselect.element.attr("accesskey"));
+                equal(multiselect.input.attr("accesskey"), "w");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
