@@ -30,7 +30,11 @@ class TabStrip extends \Kendo\UI\Widget {
 
                 $contentUrls[] = $item->getProperty("contentUrl");
 
-                $element->append($item->createContentElement());
+                $contentElement = $item->createContentElement();
+
+                if ($contentElement) {
+                    $element->append($contentElement);
+                }
             }
         }
 
