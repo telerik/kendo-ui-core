@@ -6,6 +6,10 @@ class TimePicker extends \Kendo\UI\Widget {
     protected function name() {
         return 'TimePicker';
     }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('input', true);
+    }
 //>> Properties
 
     /**
