@@ -356,6 +356,16 @@
                 equal(result[0], 2);
                 equal(result[1], 4);
             });
+
+            test("find returns the first item that matches the requirements", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 3, 4] });
+
+                var result = viewModel.get("foo").find(function(value) {
+                    return value % 2 === 1;
+                });
+
+                equal(result, 3);
+            });
         </script>
     </head>
 </html>

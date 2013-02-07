@@ -280,6 +280,19 @@ kendo_module({
             }
 
             return result;
+        },
+
+        find: function(callback) {
+            var idx = 0,
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (callback(item, idx, this)) {
+                    return item;
+                }
+            }
         }
     });
 
