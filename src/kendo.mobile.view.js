@@ -572,6 +572,9 @@ kendo_module({
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
+                if (mobile.application) {
+                    mobile.application.element.css("pointer-events", "");
+                }
                 that._view.updateParams(params);
                 that.trigger(VIEW_SHOW, {view: view});
             }
