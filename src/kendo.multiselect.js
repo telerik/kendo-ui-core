@@ -476,13 +476,22 @@ kendo_module({
 
                 if (current) {
                     current = sibling(current[0], NEXT);
-                    if (current) {
-                        that.current($(current));
-                    }
+                } else {
+                    current = that.ul[0].firstChild;
+                }
+
+                if (current) {
+                    that.current($(current));
                 }
             } else if (key === keys.UP) {
-                if (visible && current) {
-                    that.current($(sibling(current[0], PREV)));
+                if (visible) {
+                    if (current) {
+                        current = sibling(current[0], PREV);
+                    } else {
+                        current = that.ul[0].lastChild;
+                    }
+
+                    that.current($(current));
 
                     if (!that._current[0]) {
                         that.close();
