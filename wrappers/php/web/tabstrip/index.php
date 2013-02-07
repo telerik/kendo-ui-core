@@ -5,6 +5,7 @@ require_once '../../lib/Kendo/Autoload.php';
 
 ?>
 
+<div id="forecast">
 <?php
     $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
 
@@ -84,6 +85,7 @@ require_once '../../lib/Kendo/Autoload.php';
 
     echo $tabstrip->render();
 ?>
+</div>
 
 <style scoped>
     #forecast {

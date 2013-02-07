@@ -3,9 +3,44 @@
 namespace Kendo\UI;
 
 class TabStrip extends \Kendo\UI\Widget {
+    protected $ignore = array('items');
+
     protected function name() {
         return 'TabStrip';
     }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('div');
+
+        $tabs = new \Kendo\Html\Element('ul');
+        $element->append($tabs);
+
+        $items = $this->getProperty('items');
+
+        $hasContentUrls = false;
+        $contentUrls = array();
+
+        if ($items) {
+            foreach($items as $item) {
+                $tabs->append($item->createElement());
+
+                if ($hasContentUrls == false) {
+                    $hasContentUrls = strlen($item->getProperty("contentUrl"));
+                }
+
+                $contentUrls[] = $item->getProperty("contentUrl");
+
+                $element->append($item->createContentElement());
+            }
+        }
+
+        if ($hasContentUrls) {
+            $this->setProperty('contentUrls', $contentUrls);
+        }
+
+        return $element;
+    }
+
 //>> Properties
 
     /**

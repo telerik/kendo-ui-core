@@ -3,6 +3,39 @@
 namespace Kendo\UI;
 
 class TabStripItem extends \Kendo\SerializableObject {
+    public function createElement() {
+        $element = new \Kendo\Html\Element('li');
+
+        if ($this->getProperty('selected')) {
+            $element->attr('class', 'k-state-active');
+        }
+
+        if ($this->getProperty('enabled') === false) {
+            $element->attr('disabled', 'disabled');
+        }
+
+        $text = $this->getProperty('text');
+
+        if ($text) {
+            $element->append(new \Kendo\Html\Text($text));
+        }
+
+        return $element;
+    }
+
+    public function createContentElement() {
+        $content = $this->getProperty('content');
+        $contentUrl = $this->getProperty('contentUrl');
+
+        if ($content || $contentUrl) {
+            $contentElement = new \Kendo\Html\Element('div');
+
+            $contentElement->html($content);
+
+            return $contentElement;
+        }
+    }
+
 //>> Properties
 
     /**
