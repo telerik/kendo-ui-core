@@ -345,6 +345,17 @@
                 equal(result[0], 4);
                 equal(result[1], 8);
             });
+
+            test("filter collects returned results from iteration", 2, function() {
+                var viewModel = kendo.observable({ foo: [2, 3, 4] });
+
+                var result = viewModel.get("foo").filter(function(value) {
+                    return value % 2 === 0;
+                });
+
+                equal(result[0], 2);
+                equal(result[1], 4);
+            });
         </script>
     </head>
 </html>

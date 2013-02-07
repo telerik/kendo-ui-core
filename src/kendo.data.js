@@ -255,11 +255,29 @@ kendo_module({
         },
 
         map: function(callback) {
-            var result = [];
+            var idx = 0,
+                result = [],
+                length = this.length;
 
-            this.forEach(function(value, idx, that) {
-                result[idx] = callback(value, idx, that);
-            });
+            for (; idx < length; idx++) {
+                result[idx] = callback(this[idx], idx, this);
+            }
+
+            return result;
+        },
+
+        filter: function(callback) {
+            var idx = 0,
+                result = [],
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (callback(item, idx, this)) {
+                    result[result.length] = item;
+                }
+            }
 
             return result;
         }
