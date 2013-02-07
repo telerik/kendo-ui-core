@@ -435,7 +435,7 @@
 
             that.url = url;
             that.trigger(SHOW_START);
-            if (mobile.application) {
+            if (mobile.application && mobile.application.element) {
                 mobile.application.element.css("pointer-events", "none");
             }
 
@@ -540,17 +540,18 @@
         },
 
         _show: function(view, transition, params) {
-            var that = this;
+            var that = this,
+                hasApp = mobile.application && mobile.application.element;
             if (that._view !== view) {
                 view.switchWith(that._view, transition, params, function() {
                     that._view = view;
-                    if (mobile.application) {
+                    if (hasApp) {
                         mobile.application.element.css("pointer-events", "");
                     }
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
-                if (mobile.application) {
+                if (hasApp) {
                     mobile.application.element.css("pointer-events", "");
                 }
                 that._view.updateParams(params);
