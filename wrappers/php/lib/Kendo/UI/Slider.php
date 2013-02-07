@@ -6,6 +6,11 @@ class Slider extends \Kendo\UI\Widget {
     protected function name() {
         return 'Slider';
     }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('input', true);
+    }
+
 //>> Properties
 
     /**

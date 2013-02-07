@@ -6,6 +6,40 @@ class RangeSlider extends \Kendo\UI\Widget {
     protected function name() {
         return 'RangeSlider';
     }
+
+    protected function createElement() {
+        $element = parent::createElement();
+
+        $element->append($this->createInput("$this->id[0]", 'selectionStart'));
+        $element->append($this->createInput("$this->id[1]", 'selectionEnd'));
+
+        return $element;
+    }
+
+    private function createInput($name, $propertyName) {
+        $element = new \Kendo\Html\Element('input', true);
+
+        $element->attr('name', $name);
+        $element->attr('type', 'range');
+
+        if ($this->getProperty('min') !== null) {
+            $element->attr('min', $this->getProperty('min'));
+        }
+
+        if ($this->getProperty('max') !== null) {
+            $element->attr('max', $this->getProperty('max'));
+        }
+
+        if ($this->getProperty('step') !== null) {
+            $element->attr('step', $this->getProperty('step'));
+        }
+
+        if ($this->getProperty($propertyName) !== null) {
+            $element->attr('value', $this->getProperty($propertyName));
+        }
+
+        return $element;
+    }
 //>> Properties
 
     /**

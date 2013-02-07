@@ -4,7 +4,7 @@ namespace Kendo\UI;
 
 abstract class Widget extends \Kendo\SerializableObject{
 
-    private $id;
+    protected $id;
 
     private $attributes = array();
     private $isClientTemplate = false;
