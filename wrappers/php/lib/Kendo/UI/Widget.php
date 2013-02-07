@@ -26,6 +26,10 @@ abstract class Widget extends \Kendo\SerializableObject{
     protected function addAttributes(\Kendo\Html\Element $element) {
         $element->attr('id', $this->id);
 
+        if ($element->tagName() == 'textarea' || $element->tagName() == 'input') {
+            $element->attr('name', $this->id);
+        }
+
         foreach ($this->attributes as $key => $value) {
             $element->attr($key, $value);
         }

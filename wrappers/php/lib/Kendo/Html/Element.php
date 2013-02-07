@@ -14,6 +14,10 @@ class Element implements Node {
         $this->selfClosing = $selfClosing;
     }
 
+    public function tagName() {
+        return $this->tagName;
+    }
+
     public function text($value) {
         return $this->html(Htmlentities($value));
     }
