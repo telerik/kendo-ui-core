@@ -663,7 +663,8 @@ kendo_module({
         },
 
         destroy: function() {
-            var that = this;
+            var that = this,
+                element;
 
             Widget.fn.destroy.call(that);
 
@@ -687,19 +688,19 @@ kendo_module({
                            .unbind(PROGRESS, that._progressHandler)
                            .unbind(ERROR, that._errorHandler);
 
-            that.element
+            element = that.element
                 .add(that.wrapper)
                 .add(that.table)
                 .add(that.thead)
                 .add(that.wrapper.find(">.k-grid-toolbar"));
 
             if (that.content) {
-                that.element
-                    .add(that.content)
-                    .add(that.content.find(">.k-virtual-scrollable-wrap"));
+                element = element
+                        .add(that.content)
+                        .add(that.content.find(">.k-virtual-scrollable-wrap"));
             }
 
-            that.element.off(NS);
+            element.off(NS);
 
             kendo.destroy(that.wrapper);
         },
