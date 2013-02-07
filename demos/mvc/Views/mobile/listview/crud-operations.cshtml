@@ -1,0 +1,137 @@
+<div data-role="view" data-title="Products List" data-init="listViewInit">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <ul id="listview"></ul>
+
+    <script id="itemTemplate" type="text/x-kendo-template">
+        <a href="\\#detailview?uid=#=uid#" > #=ProductName# </a>
+        <a href="\\#" data-role="button" style="display:none;width: 40px; float:right;" >Delete</a>
+    </script>
+</div>
+
+<div data-role="view" id="detailview" data-show="detailShow" data-init="detailInit">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a class="nav-button" data-align="left" data-role="button" id="cancel">Cancel</a>
+            <span data-role="view-title">Details</span>
+            <a class="nav-button" data-align="right" data-role="button" id="done">Done</a>
+        </div>
+    </header>
+
+    <form>
+        <input type="text" data-bind="value: ProductName"/>
+        <input type="checkbox" data-role="switch" data-bind="checked: Discontinued"/>
+        <input type="number" value="20" data-bind="value: UnitPrice"/>
+    </form>
+</div>
+
+<script>
+    var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        dataSource = new kendo.data.DataSource({
+            transport: {
+                read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { editable: false, nullable: true },
+                        ProductName: "ProductName",
+                        UnitPrice: { type: "number" },
+                        Discontinued: { type: "boolean" }
+                    }
+                }
+            }
+        });
+
+    function listViewInit(e) {
+        e.view.element.find("#listview").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#itemTemplate").html()
+        })
+        .kendoTouch({
+            filter: ">li",
+            enableSwipe: true,
+            touchstart: touchstart,
+            swipe: swipe
+        });
+    }
+
+    function swipe(e) {
+        var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+        button.expand().duration(200).play();
+    }
+
+    function touchstart(e) {
+        var target = $(e.touch.initialTouch),
+            listview = $("#listview").data("kendoMobileListView"),
+            model,
+            button = $(e.touch.target).find("[data-role=button]:visible");
+
+        if (target.closest("[data-role=button]")[0]) {
+            model = dataSource.getByUid($(e.touch.target).attr("data-uid"));
+            dataSource.remove(model);
+
+            //prevent `swipe`
+            this.events.cancel();
+        } else if (button[0]) {
+            button.hide();
+
+            //prevent `swipe`
+            this.events.cancel();
+        } else {
+            listview.items().find("[data-role=button]:visible").hide();
+        }
+    }
+
+    function detailShow(e) {
+        var model = dataSource.getByUid(e.view.params.uid);
+
+        kendo.bind(e.view.element, model, kendo.mobile.ui);
+    }
+
+    function detailInit(e) {
+        var view = e.view;
+        view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+            dataSource.one("change", function() {
+                view.loader.hide();
+                window.kendoMobileApplication.navigate("#:back");
+            });
+
+            view.loader.show();
+            dataSource.sync();
+        });
+
+        view.element.find("#cancel").data("kendoMobileButton").bind("click", function() {
+            dataSource.one("change", function() {
+                view.loader.hide();
+                window.kendoMobileApplication.navigate("#:back");
+            });
+
+            view.loader.show();
+            dataSource.cancelChanges();
+        });
+    }
+</script>
+
