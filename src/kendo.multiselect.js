@@ -118,6 +118,7 @@ kendo_module({
             name: "MultiSelect",
             enable: true,
             autoBind: true,
+            highlightFirst: true,
             dataTextField: "",
             dataValueField: "",
             delay: 100,
@@ -258,7 +259,7 @@ kendo_module({
                 that._filterSource();
             } else if (!popup.visible() && that._visibleItems) {
                 popup.open();
-                that.current($(first(that.ul[0])));
+                that.current(that.options.highlightFirst ? $(first(that.ul[0])) : null);
             }
         },
 
@@ -267,7 +268,9 @@ kendo_module({
         },
 
         refresh: function() {
-            var that = this, length;
+            var that = this,
+                li = null,
+                length;
 
             that.trigger("dataBinding");
 
@@ -284,17 +287,17 @@ kendo_module({
                 that.toggle(length);
             }
 
-            if (that.popup.visible()) {
-                that.current($(first(that.ul[0])));
+            if (that.popup.visible() && that.options.highlightFirst) {
+                li = $(first(that.ul[0]));
             }
+
+            that.current(li);
 
             if (that._touchScroller) {
                 that._touchScroller.reset();
             }
 
-            /*
             that._makeUnselectable();
-            */
 
             that._hideBusy();
             that.trigger("dataBound");

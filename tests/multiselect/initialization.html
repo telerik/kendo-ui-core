@@ -293,6 +293,26 @@
                 equal(input.attr("tabIndex"), 5);
             });
 
+            test("do not highlight first on open", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { highlightFirst: false });
+
+                multiselect.open();
+
+                equal(multiselect.current(), null);
+            });
+
+            test("do not highlight first item on refresh", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { highlightFirst: false });
+
+                multiselect.open();
+                multiselect.refresh();
+
+                equal(multiselect.current(), null);
+            });
+
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
