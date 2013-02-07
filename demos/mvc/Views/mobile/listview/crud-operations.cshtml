@@ -95,6 +95,7 @@
 
             //prevent `swipe`
             this.events.cancel();
+            e.event.stopPropagation();
         } else if (button[0]) {
             button.hide();
 
