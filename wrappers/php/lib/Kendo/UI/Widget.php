@@ -7,6 +7,7 @@ abstract class Widget extends \Kendo\SerializableObject{
     private $id;
 
     private $attributes = array();
+    private $isClientTemplate = false;
 
     function __construct($id) {
         $this->id = $id;
@@ -51,6 +52,16 @@ abstract class Widget extends \Kendo\SerializableObject{
         return implode($output);
     }
 
+    public function renderInTemplate() {
+        $this->isClientTemplate = true;
+
+        $output = $this->render();
+
+        $this->isClientTemplate = false;
+
+        return str_replace('</script>', '<\\/script>', $output);
+    }
+
     public function script($executeOnDomReady = true) {
         $script = array();
 
@@ -58,7 +69,9 @@ abstract class Widget extends \Kendo\SerializableObject{
             $script[] = 'jQuery(function(){';
         }
 
-        $script[] = 'jQuery("#';
+        $prefix = $this->isClientTemplate ? '\#' : '#';
+
+        $script[] = 'jQuery("'.$prefix;
         $script[] = $this->id;
         $script[] = '").kendo';
         $script[] = $this->name();

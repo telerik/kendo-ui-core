@@ -456,6 +456,18 @@ class Grid extends \Kendo\UI\Widget {
 
 
 //<< Properties
+
+    /**
+    * Sets the toolbar option of the Grid.
+    * The id of the template used for rendering the toolbar in the grid.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\Grid
+    */
+    public function toolbarTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('toolbar', $value);
+    }
 }
 
 ?>
