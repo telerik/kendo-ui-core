@@ -7,8 +7,34 @@ class PanelBarItem extends \Kendo\SerializableObject {
         $this->text($text);
     }
 
+    protected function createContentElement($element) {
+        $content = $this->getProperty('content');
+        $contentUrl = $this->getProperty('contentUrl');
 
-    public function createElement() {
+        if ($content || $contentUrl) {
+            $contentElement = new \Kendo\Html\Element('div');
+
+            $contentElement->html($content);
+
+            $element->append($contentElement);
+        }
+    }
+
+    protected function createSubGroup($element) {
+        $items = $this->getProperty('items');
+
+        if ($items) {
+            $itemContainer = new \Kendo\Html\Element('ul');
+
+            foreach ($items as $item) {
+                $itemContainer->append($item->createElement());
+            }
+
+            $element->append($itemContainer);
+        }
+    }
+
+    protected function createItem() {
         $element = new \Kendo\Html\Element('li');
 
         if ($this->getProperty('expanded')) {
@@ -25,30 +51,17 @@ class PanelBarItem extends \Kendo\SerializableObject {
             $element->append(new \Kendo\Html\Text($text));
         }
 
-        $content = $this->getProperty('content');
-        $contentUrl = $this->getProperty('contentUrl');
-
-        if ($content || $contentUrl) {
-            $contentElement = new \Kendo\Html\Element('div');
-
-            $contentElement->html($content);
-
-            $element->append($contentElement);
-        }
-
-        $items = $this->getProperty('items');
-
-        if ($items) {
-            $itemContainer = new \Kendo\Html\Element('ul');
-
-            foreach ($items as $item) {
-                $itemContainer->append($item->createElement());
-            }
-
-            $element->append($itemContainer);
-        }
-
         return $element;
+    }
+
+    public function createElement() {
+        $item = $this->createItem();
+
+        $this->createContentElement($item);
+
+        $this->createSubGroup($item);
+
+        return $item;
     }
 
 //>> Properties
