@@ -83,14 +83,10 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     /**
     * Sets the groupNameTemplate option of the ChartSeriesItem.
     * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
     public function groupNameTemplate($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('groupNameTemplate', $value);
     }
 

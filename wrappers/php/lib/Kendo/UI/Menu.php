@@ -3,9 +3,37 @@
 namespace Kendo\UI;
 
 class Menu extends \Kendo\UI\Widget {
+    protected $ignore = array('items');
+
     protected function name() {
         return 'Menu';
     }
+
+    protected function createElement() {
+        $items = $this->getProperty('items');
+
+        if ($items) {
+            $element = new \Kendo\Html\Element('ul');
+            foreach ($items as $item) {
+                $element->append($item->createElement());
+            }
+        } else {
+            $element = new \Kendo\Html\Element('div');
+        }
+
+        return $element;
+    }
+
+    /**
+    * Sets the data of the Menu.
+    * @param array $value
+    * @return \Kendo\UI\Menu
+    */
+    public function dataSource(array $value) {
+        return $this->setProperty('dataSource', $value);
+    }
+
+
 //>> Properties
 
     /**

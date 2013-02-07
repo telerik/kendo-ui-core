@@ -38,14 +38,10 @@ class TreeViewCheckboxes extends \Kendo\SerializableObject {
     /**
     * Sets the template option of the TreeViewCheckboxes.
     * Template for the checkbox rendering. Used to set the  checkbox name attribute, or to add hidden inputs that will be posted along the checkboxes.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\TreeViewCheckboxes
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

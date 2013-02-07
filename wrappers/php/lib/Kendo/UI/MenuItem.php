@@ -2,7 +2,38 @@
 
 namespace Kendo\UI;
 
-class MenuItem extends \Kendo\SerializableObject {
+class MenuItem extends \Kendo\UI\NavigationalItem {
+    function __construct($text = null) {
+        $this->text($text);
+    }
+
+    protected function renderContent($element) {
+        $content = $this->getProperty('content');
+
+        if ($content) {
+            $subgroup = new \Kendo\Html\Element('ul');
+            $subitem = new \Kendo\Html\Element('li');
+            $subitem->html($content);
+            $subgroup->append($subitem);
+
+            $element->append($subgroup);
+        }
+    }
+
+    public function createElement() {
+        $element = parent::createElement();
+
+        $enabled = $this->getProperty('enabled') !== false;
+
+        if (!$enabled) {
+            $element->attr('disabled', 'disabled');
+        }
+
+        $this->renderContent($element);
+
+        return $element;
+    }
+
 //>> Properties
 
     /**

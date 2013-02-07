@@ -32,14 +32,10 @@ class GridToolbarItem extends \Kendo\SerializableObject {
     /**
     * Sets the template option of the GridToolbarItem.
     * The template for the command button.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\GridToolbarItem
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

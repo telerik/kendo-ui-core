@@ -131,14 +131,10 @@ HierarchicalDataSource instance), the default value of this option is false.
     /**
     * Sets the template option of the TreeView.
     * Template for rendering of the nodes of the treeview.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\TreeView
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

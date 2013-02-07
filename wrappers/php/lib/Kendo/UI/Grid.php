@@ -167,14 +167,10 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Sets the detailTemplate option of the Grid.
     * The id of the template used for rendering the detail rows in the grid.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\Grid
     */
     public function detailTemplate($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('detailTemplate', $value);
     }
 
@@ -193,14 +189,10 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Sets the rowTemplate option of the Grid.
     * The id of the template used for rendering the rows in the grid.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\Grid
     */
     public function rowTemplate($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('rowTemplate', $value);
     }
 
@@ -219,14 +211,10 @@ class Grid extends \Kendo\UI\Widget {
     /**
     * Sets the altRowTemplate option of the Grid.
     * The id of the template used for rendering the alternate rows in the grid.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\Grid
     */
     public function altRowTemplate($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('altRowTemplate', $value);
     }
 

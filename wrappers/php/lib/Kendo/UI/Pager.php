@@ -50,14 +50,10 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Sets the selectTemplate option of the Pager.
     * The template for selectbox with predefined page sizes.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\Pager
     */
     public function selectTemplate($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('selectTemplate', $value);
     }
 
@@ -76,14 +72,10 @@ class Pager extends \Kendo\UI\Widget {
     /**
     * Sets the linkTemplate option of the Pager.
     * The template for page number links.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\UI\Pager
     */
     public function linkTemplate($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('linkTemplate', $value);
     }
 

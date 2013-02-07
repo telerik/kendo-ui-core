@@ -124,14 +124,10 @@ Every n-th label is rendered where n is the step
     /**
     * Sets the template option of the ChartXAxisItemLabels.
     * The label template.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLabels
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

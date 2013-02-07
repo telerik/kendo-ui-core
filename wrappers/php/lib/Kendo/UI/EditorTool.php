@@ -47,8 +47,21 @@ class EditorTool extends \Kendo\SerializableObject {
     }
 
     /**
+    * Sets the template option of the EditorTool.
     * The kendo template that will be used for rendering the given tool.
-    * @param string $value
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\EditorTool
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the EditorTool.
+    * The kendo template that will be used for rendering the given tool.
+    * @param string $value The template content.
     * @return \Kendo\UI\EditorTool
     */
     public function template($value) {
