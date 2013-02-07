@@ -41,6 +41,15 @@ class TabStrip extends \Kendo\UI\Widget {
         return $element;
     }
 
+    /**
+    * Sets the data of the TabStrip.
+    * @param array $value
+    * @return \Kendo\UI\TabStrip
+    */
+    public function dataSource(array $value) {
+        return $this->setProperty('dataSource', $value);
+    }
+
 //>> Properties
 
     /**
