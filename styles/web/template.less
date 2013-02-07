@@ -326,9 +326,9 @@ textarea.k-textbox:hover,
     background: @active-background-color;
 }
 
-.k-tooltip
+.k-widget.k-tooltip
 {
-    background-image: @texture;
+    background-image: @tooltip-texture;
 }
 
 .k-block,
@@ -336,7 +336,6 @@ textarea.k-textbox:hover,
 .k-grid-header,
 .k-toolbar,
 .k-grouping-header,
-.k-tooltip,
 .k-pager-wrap,
 .k-button,
 .k-draghandle
@@ -616,14 +615,14 @@ div.k-imagebrowser-dropzone em
 
 /* Tooltip */
 
-.k-tooltip
+.k-widget.k-tooltip
 {
     border-color: @tooltip-border-color;
     background-color: @tooltip-background-color;
     color: @tooltip-text-color;
 }
 
-.k-tooltip-validation
+.k-widget.k-tooltip-validation
 {
     border-color: @validation-border-color;
     background-color: @validation-background-color;
@@ -736,7 +735,8 @@ div.k-imagebrowser-dropzone em
 .k-autocomplete.k-state-border-up,
 .k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-active,
-.k-imagebrowser .k-image
+.k-imagebrowser .k-image,
+.k-tooltip
 {
     .box-shadow(0 2px 2px 0 @shadow-color);
 }
