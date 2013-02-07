@@ -78,6 +78,7 @@ namespace Kendo.Models
             "kendo.data.xml.js",
             "kendo.model.js",
             "kendo.data.js",
+            "kendo.binder.js",
             "kendo.selectable.js",
             "kendo.list.js",
             "kendo.dropdownlist.js",

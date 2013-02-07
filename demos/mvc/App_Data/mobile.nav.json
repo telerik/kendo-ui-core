@@ -139,8 +139,13 @@
                     "url": "listview/templates.html",
                     "title": "Custom templates for group items | Kendo UI Mobile List View",
                     "meta": "This demo shows how custom templates can be applied to Kendo UI ListView widget to override the appearance of the group items."
+                },
+                {
+                    "text": "CRUD Operations",
+                    "url": "listview/crud-operations.html",
+                    "title": "Kendo UI Mobile List View CRUD operations",
+                    "meta": "This demo illustrates how implement CRUD operations in Kendo UI ListView widget."
                 }
-
             ]
         },
         {

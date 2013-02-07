@@ -153,12 +153,15 @@ kendo_module({
                 userEvents: userEvents,
                 target: target,
                 currentTarget: touchInfo.currentTarget,
+                initialTouch: touchInfo.target,
                 id: touchInfo.id,
                 _moved: false,
                 _finished: false
             });
 
-            that._trigger(PRESS, touchInfo);
+            that.notifyInit = function() {
+                that._trigger(PRESS, touchInfo);
+            };
         },
 
         move: function(touchInfo) {
@@ -456,7 +459,9 @@ kendo_module({
                     continue;
                 }
 
-                that.touches.push(new Touch(that, target, touch));
+                touch = new Touch(that, target, touch);
+                that.touches.push(touch);
+                touch.notifyInit();
 
                 if (that._isMultiTouch()) {
                     that.notify("gesturestart", {});
