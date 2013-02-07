@@ -87,7 +87,6 @@ kendo_module({
                 target: e.target,
                 currentTarget: currentTarget,
                 id: originalEvent.pointerId
-
             });
         } else {
             touches.push({

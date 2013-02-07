@@ -131,7 +131,7 @@ kendo_module({
         },
 
         _triggerTouch: function(type, e) {
-            this.trigger(type, { touch: e.touch });
+            this.trigger(type, { touch: e.touch, event: e.event });
         },
 
         _touchstart: function(e) {
