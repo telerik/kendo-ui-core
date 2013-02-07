@@ -502,19 +502,19 @@
     <comment>drop files here to upload</comment>
   </data>
   <data name="Editor_DialogButtonSeparator" xml:space="preserve">
-    <value>or</value>
+    <value>eller</value>
   </data>
   <data name="Editor_DialogCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Avbryt</value>
   </data>
   <data name="Editor_DialogInsert" xml:space="preserve">
-    <value>Insert</value>
+    <value>Lägg till</value>
   </data>
   <data name="Editor_ImageAltText" xml:space="preserve">
-    <value>Alternate text</value>
+    <value>Alternativ text</value>
   </data>
   <data name="Editor_ImageWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Webbadress</value>
   </data>
   <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
     <value>Open link in new window</value>
@@ -526,6 +526,6 @@
     <value>ToolTip</value>
   </data>
   <data name="Editor_LinkWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Webbadress</value>
   </data>
 </root>
