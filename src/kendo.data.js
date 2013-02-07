@@ -323,6 +323,11 @@ kendo_module({
             }
 
             return false;
+        },
+
+        // non-standard collection methods
+        remove: function(item) {
+            this.splice(this.indexOf(item), 1);
         }
     });
 

@@ -406,6 +406,15 @@
 
                 ok(!result);
             });
+
+            test("remove removes the given item", 2, function() {
+                var viewModel = kendo.observable({ foo: [3, 5] });
+
+                viewModel.foo.remove(3);
+
+                equal(viewModel.foo.length, 1);
+                equal(viewModel.foo[0], 5);
+            });
         </script>
     </head>
 </html>
