@@ -12,13 +12,27 @@ class Menu extends \Kendo\UI\Widget {
     protected function createElement() {
         $items = $this->getProperty('items');
 
-        $element = new \Kendo\Html\Element('ul');
-        foreach ($items as $item) {
-            $element->append($item->createElement());
+        if ($items) {
+            $element = new \Kendo\Html\Element('ul');
+            foreach ($items as $item) {
+                $element->append($item->createElement());
+            }
+        } else {
+            $element = new \Kendo\Html\Element('div');
         }
 
         return $element;
     }
+
+    /**
+    * Sets the data of the Menu.
+    * @param array $value
+    * @return \Kendo\UI\Menu
+    */
+    public function dataSource(array $value) {
+        return $this->setProperty('dataSource', $value);
+    }
+
 
 //>> Properties
 
