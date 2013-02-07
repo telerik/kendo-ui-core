@@ -195,6 +195,7 @@ file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
     csproj.gsub!(/\.\.\\shared\\Kendo\.snk/, 'Kendo.snk')
     csproj.gsub!(/<Content Include=".*?data\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '')
     csproj.gsub!(/<Content Include=".*?combobox\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '')
+    csproj.gsub!(/<Content Include=".*?multiselect\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '')
     csproj.gsub!(/<Content Include=".*?validator\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '<Content Include="..\\js\\kendo.aspnetmvc.js"><Link>Scripts\\kendo.aspnetmvc.js</Link></Content>')
     csproj.gsub!('<Link>Kendo.snk</Link>', '')
     csproj.gsub!(/\.\.\\shared\\CommonAssemblyInfo\.cs/, 'CommonAssemblyInfo.cs')
