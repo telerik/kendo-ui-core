@@ -11,7 +11,7 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), "build", "codegen", "lib")
 
 CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
-STAGING_CDN_ROOT = 'http://d27sykwwdi0q8o.cloudfront.net/staging/'
+STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
 require 'version'
 require 'zip'
