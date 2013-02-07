@@ -153,6 +153,7 @@ kendo_module({
                 userEvents: userEvents,
                 target: target,
                 currentTarget: touchInfo.currentTarget,
+                initialTouch: touchInfo.target,
                 id: touchInfo.id,
                 _moved: false,
                 _finished: false
