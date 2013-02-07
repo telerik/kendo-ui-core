@@ -101,6 +101,7 @@ kendo_module({
                 value = [];
             }
             that._old = that._initialValues = value;
+            that._setInitialValues = !!value[0];
 
             that._reset();
             that._enable();
@@ -273,7 +274,8 @@ kendo_module({
             length = that._render(that.dataSource.view());
             that._height(length);
 
-            if (that._state !== FILTER && !that.element.val()) { //TODO test for perf. Use $.val to find option.selected
+            if (that._setInitialValues) {
+                that._setInitialValues = false;
                 that.value(that._initialValues);
             }
 
@@ -286,11 +288,11 @@ kendo_module({
                 that.current($(first(that.ul[0])));
             }
 
-            //TODO: test it and then uncomment
-            /*if (that._touchScroller) {
+            if (that._touchScroller) {
                 that._touchScroller.reset();
             }
 
+            /*
             that._makeUnselectable();
             */
 

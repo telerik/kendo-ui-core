@@ -129,6 +129,20 @@
 
                 ok(!multiselect.popup.visible());
             });
+
+            test("MultiSelect do not show initial values on rebind", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { delay: 0, value: ["1", "2"] });
+
+                multiselect.search("Option0");
+                multiselect.ul.children().first().click();
+                multiselect.value(null);
+
+                multiselect.open();
+
+                equal(multiselect.value().length, 0);
+                equal(multiselect.element.val(), null);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
