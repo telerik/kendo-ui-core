@@ -1,22 +1,22 @@
 
 <div id="tshirt-view" class="k-header">
-	<h2>Customize your Kendo T-shirt</h2>
-	<img id="tshirt" src="@Url.Content("~/Content/web/combobox/tShirt.png")" />
+	<h2>Customers:</h2>
     <div id="options">
 
-    <h3>T-shirt Size</h3>
     @(Html.Kendo().MultiSelect()
-          .Name("size")
-          .Placeholder("Select size...")
+          .Name("customers")
+          .Placeholder("Choose customers...")
           .BindTo(new List<string>() {
-              "X-Small",
-              "Small",
-              "Medium",
-              "Large",
-              "X-Large",
-              "2X-Large"
+              "Maria Anders",
+              "Ana Trujillo",
+              "Antonio Moreno",
+              "Thomas Hardy",
+              "Christina Berglund",
+              "Hanna Moos",
+              "Frédérique Citeaux",
+              "Laurence Lebihan",
+              "Elizabeth Lincoln"
           })
-          .Value(new string[] { "Small", "Large" })
     )
 	</div>
 </div>

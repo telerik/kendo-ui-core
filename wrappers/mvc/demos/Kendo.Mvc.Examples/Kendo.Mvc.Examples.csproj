@@ -244,7 +244,14 @@
     <Compile Include="Controllers\Web\Menu\OrientationController.cs" />
     <Compile Include="Controllers\Web\Menu\ImagesController.cs" />
     <Compile Include="Controllers\Web\Menu\IndexController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\ApiController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\ClientFilteringController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\EventsController.cs" />
     <Compile Include="Controllers\Web\MultiSelect\IndexController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\NavigationController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\RtlController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\ServerFilteringController.cs" />
+    <Compile Include="Controllers\Web\MultiSelect\TemplateController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\NavigationController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\RtlController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\GlobalizationController.cs" />
@@ -566,6 +573,13 @@
     </Content>
     <Content Include="Areas\razor\Views\web\tooltip\index.cshtml" />
     <Content Include="Areas\razor\Views\web\multiselect\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\serverfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\clientfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\web\multiselect\template.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>
