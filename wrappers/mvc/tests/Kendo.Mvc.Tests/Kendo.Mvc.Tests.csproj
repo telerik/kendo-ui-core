@@ -282,7 +282,6 @@
     <Compile Include="Infrastructure\Implementation\ActionMethodCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\VirtualPathProviderWrapperTests.cs" />
     <Compile Include="LinkedObjectCollectionTests.cs" />
-    <Compile Include="Infrastructure\Implementation\AuthorizeAttributeCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerAuthorizationTests.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerTypeCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\DummyControllers.cs" />
