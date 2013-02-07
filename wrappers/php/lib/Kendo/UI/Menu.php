@@ -3,9 +3,23 @@
 namespace Kendo\UI;
 
 class Menu extends \Kendo\UI\Widget {
+    protected $ignore = array('items');
+
     protected function name() {
         return 'Menu';
     }
+
+    protected function createElement() {
+        $items = $this->getProperty('items');
+
+        $element = new \Kendo\Html\Element('ul');
+        foreach ($items as $item) {
+            $element->append($item->createElement());
+        }
+
+        return $element;
+    }
+
 //>> Properties
 
     /**
