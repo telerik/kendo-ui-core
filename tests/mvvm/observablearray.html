@@ -366,6 +366,46 @@
 
                 equal(result, 3);
             });
+
+            test("every returns true if all items satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 4] });
+
+                var result = viewModel.get("foo").every(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(result);
+            });
+
+            test("every returns false if one item does not satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 3, 4] });
+
+                var result = viewModel.get("foo").every(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(!result);
+            });
+
+            test("some returns true if some items satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 4] });
+
+                var result = viewModel.get("foo").some(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(result);
+            });
+
+            test("some returns false if no items satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [3, 5] });
+
+                var result = viewModel.get("foo").some(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(!result);
+            });
         </script>
     </head>
 </html>

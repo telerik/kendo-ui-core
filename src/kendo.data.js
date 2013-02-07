@@ -293,6 +293,36 @@ kendo_module({
                     return item;
                 }
             }
+        },
+
+        every: function(callback) {
+            var idx = 0,
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (!callback(item, idx, this)) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        some: function(callback) {
+            var idx = 0,
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (callback(item, idx, this)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     });
 
