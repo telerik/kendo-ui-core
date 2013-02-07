@@ -88,14 +88,10 @@ Template variables:
     * Sets the template option of the ChartSeriesDefaultsLabels.
     * The label template.
 Template variables:
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

@@ -45,14 +45,10 @@ Template variables:
 Template variables:
 *   text - the text the legend item.
 *   series - the data series.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\StockChartLegendLabels
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

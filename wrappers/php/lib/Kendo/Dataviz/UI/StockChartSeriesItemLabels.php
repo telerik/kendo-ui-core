@@ -92,14 +92,10 @@ class StockChartSeriesItemLabels extends \Kendo\SerializableObject {
     /**
     * Sets the template option of the StockChartSeriesItemLabels.
     * The label template. Template variables:
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemLabels
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 

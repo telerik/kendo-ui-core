@@ -137,14 +137,10 @@ TEMPLATE_SETTER = ERB.new(%{
     /**
     * Sets the <%= name %> option of the <%= owner.php_class %>.
     * <%= description %>
-    * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return <%= owner.php_type %>
     */
     public function <%= php_name %>($value) {
-        if (is_string($value)) {
-            $value = new \\Kendo\\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('<%= name %>', $value);
     }
 })

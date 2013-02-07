@@ -41,14 +41,10 @@ Template variables:
     * Sets the template option of the ChartLegendLabels.
     * The template of the labels.
 Template variables:
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartLegendLabels
     */
     public function template($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('template', $value);
     }
 
