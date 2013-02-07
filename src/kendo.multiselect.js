@@ -337,6 +337,10 @@ kendo_module({
                 return that._values;
             }
 
+            if (that._fetchItems(value)) {
+                return;
+            }
+
             for (; idx < length; idx++) {
                 that._unselect(tags.eq(idx));
             }
@@ -384,6 +388,22 @@ kendo_module({
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
                            .unbind(PROGRESS, that._progressHandler);
+        },
+
+        _fetchItems: function(value) {
+            var that = this;
+
+            if (!that._fetch && !that.ul[0].firstChild) {
+                that.dataSource.one(CHANGE, function() {
+                    that.value(value);
+                    that._fetch = false;
+                });
+
+                that._fetch = true;
+                that.dataSource.fetch();
+
+                return true;
+            }
         },
 
         _reset: function() {
