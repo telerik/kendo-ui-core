@@ -6,6 +6,10 @@ class NumericTextBox extends \Kendo\UI\Widget {
     protected function name() {
         return 'NumericTextBox';
     }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('input', true);
+    }
 //>> Properties
 
     /**
