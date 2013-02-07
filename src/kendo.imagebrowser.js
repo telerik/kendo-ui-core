@@ -743,6 +743,7 @@ kendo_module({
                 element = $(li),
                 dataItem = that.dataSource.getByUid(element.attr(kendo.attr("uid"))),
                 name = dataItem.get(that._getFieldName(NAMEFIELD)),
+                thumbnailUrl = that.options.transport.thumbnailUrl,
                 img = $("<img />", {
                     alt: name
                 })
@@ -752,10 +753,14 @@ kendo_module({
                 });
 
             element.find(".k-loading").after(img);
-
+            if (isFunction(thumbnailUrl)) {
+                thumbnailUrl = thumbnailUrl(that.path(), encodeURIComponent(name));
+            } else {
+                thumbnailUrl = thumbnailUrl + "?path=" + that.path() + encodeURIComponent(name);
+            }
             // IE8 will trigger the load event immediately when the src is assign
             // if the image is loaded from the cache
-            img.attr("src", that.options.transport.thumbnailUrl + "?path=" + that.path() + encodeURIComponent(name));
+            img.attr("src", thumbnailUrl);
 
             li.loaded = true;
         },
