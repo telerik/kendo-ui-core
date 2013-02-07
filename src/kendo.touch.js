@@ -71,7 +71,7 @@ kendo_module({
 
             function gestureEventProxy(name) {
                 return function(e) {
-                    that.trigger(name, { touches: e.touches, distance: e.distance, center: e.center });
+                    that.trigger(name, { touches: e.touches, distance: e.distance, center: e.center, event: e.event });
                 };
             }
 
