@@ -825,34 +825,46 @@
             "spriteCssClass": "multiselectIcon",
             "items": [
                 {
-                    "text": "Basic Usage",
+                    "text": "Basic usage",
                     "url": "multiselect/index.html",
-                    "title": "Kendo MultiSelect demo",
-                    "meta": "This demo shows the core functionality of KendoMultiSelect widget."
+                    "title": "jQuery-based MultiSelect widget Demo | Kendo UI Web Demos",
+                    "meta": "This demo shows core functionality of Kendo UI MultiSelect"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Binding to remote data",
                     "url": "multiselect/remotedatasource.html",
-                    "title": "Kendo MultiSelect demo",
-                    "meta": ""
+                    "title": "Kendo UI jQuery MultiSelect example of binding to remote data",
+                    "meta": "Example of Kendo UI MultiSelect remote data binding."
+                },
+                {
+                    "packages": [ "mvc", "jsp" , "php"],
+                    "text": "Server filtering",
+                    "url": "multiselect/serverfiltering.html"
+                },
+                {
+                    "packages": [ "mvc", "jsp" ],
+                    "text": "Client filtering",
+                    "url": "multiselect/clientfiltering.html"
+                },
+
+                {
+                    "text": "Customizing templates",
+                    "url": "multiselect/template.html",
+                    "title": "Demo for customizing jQuery MultiSelect Templates | Kendo UI Web Demos",
+                    "meta": "This Kendo UI MultiSelect demo shows how the template of the control can be customized to change the appearance of items and tags."
+                },
+                {
+                    "text": "Events",
+                    "url": "multiselect/events.html",
+                    "title": "Examples of events in Kendo UI jQuery MultiSelect component",
+                    "meta": "This demo demonstrates useful events which are triggered in Kendo UI MultiSelect upon user's selection of an item from the drop-down list."
                 },
                 {
                     "text": "API",
                     "url": "multiselect/api.html",
                     "title": "Demo for Kendo UI MultiSelect widget API",
                     "meta": "This sample shows all API functions for Kendo UI MultiSelect widget."
-                },
-                {
-                    "text": "Events",
-                    "url": "multiselect/events.html",
-                    "title": "Examples of events in Kendo UI jQuery MultiSelect component",
-                    "meta": "This demo demonstrates useful events which are triggered in Kendo UI MultiSelect upon user's selection of items from the drop-down list."
-                },
-                {
-                    "text": "Customizing templates",
-                    "url": "multiselect/template.html",
-                    "title": "Demo for customizing jQuery MultiSelect Templates | Kendo UI Web Demos",
-                    "meta": "This Kendo UI MultiSelect demo shows how the template of the control can be customized to change the appearance of items in the auto-searchable list."
                 },
                 {
                     "text": "RTL support",
