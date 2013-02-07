@@ -1211,6 +1211,9 @@
     <Content Include="..\..\..\..\src\aspnetmvc\kendo.data.aspnetmvc.js">
       <Link>Scripts\kendo.data.aspnetmvc.js</Link>
     </Content>
+    <Content Include="..\..\..\..\src\aspnetmvc\kendo.multiselect.aspnetmvc.js">
+      <Link>Scripts\kendo.multiselect.aspnetmvc.js</Link>
+    </Content>
     <Content Include="..\..\..\..\src\aspnetmvc\kendo.validator.aspnetmvc.js">
       <Link>Scripts\kendo.validator.aspnetmvc.js</Link>
     </Content>

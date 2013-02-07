@@ -86,13 +86,13 @@
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            /*if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
+            if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
             {
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
-                    HandlerName = "function() { return kendo.ui.ComboBox.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
+                    HandlerName = "function() { return kendo.ui.MultiSelect.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
                 };
-            }*/
+            }
 
             var idPrefix = "#";
             if (IsInClientTemplate)
