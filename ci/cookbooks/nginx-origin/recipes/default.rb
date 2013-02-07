@@ -29,6 +29,11 @@ cookbook_file "/etc/nginx/mime.types" do
     source "mime.types"
 end
 
+cookbook_file "/etc/cron.daily/clean-staging" do
+    source "clean-staging"
+    mode "0755"
+end
+
 directory "/usr/share/nginx/html" do
     owner "nginx"
     group "nginx"
