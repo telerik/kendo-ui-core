@@ -83,7 +83,6 @@
     <Compile Include="Infrastructure\Implementation\CacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerContextCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerDescriptorCacheTests.cs" />
-    <Compile Include="Infrastructure\Implementation\AuthorizationContextCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\DependencyInjectionContainerTests.cs" />
     <Compile Include="Infrastructure\Implementation\NoCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
