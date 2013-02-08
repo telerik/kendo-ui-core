@@ -413,6 +413,72 @@
                 row.find("td:first input").val("baz").change();
                 grid.saveRow();
             });
+
+            test("cancel event is raised when cancel button is clicked", 2, function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "popup",
+                    cancel: function(e) {
+                        equal(e.model, dataSource.get("bar"));
+                        ok(e.container.length);
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+
+                $(".k-grid-cancel").click();
+            });
+
+            test("preventing the cancel event leaves the window open when cancel button is clicked", function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "popup",
+                    cancel: function(e) {
+                        e.preventDefault();
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+
+                $(".k-grid-cancel").click();
+
+                equal($(".k-grid-cancel:visible").length, 1);
+            });
+
+            test("cancel event is raised when window is closed", 2, function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "popup",
+                    cancel: function(e) {
+                        equal(e.model, dataSource.get("bar"));
+                        ok(e.container.length);
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+
+                $(".k-i-close").click();
+            });
+
+            test("preventing the cancel event leaves the window open when close button is clicked", function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "popup",
+                    cancel: function(e) {
+                        e.preventDefault();
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+
+                $(".k-i-close").click();
+
+                equal($(".k-grid-cancel:visible").length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
