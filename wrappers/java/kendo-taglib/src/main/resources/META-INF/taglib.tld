@@ -8189,6 +8189,227 @@ by setting the close animation.  Each animation also has a direction which can b
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>MultiSelect</description>
+        <name>multiSelect</name>
+        <tag-class>com.kendoui.taglib.MultiSelectTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether to bind the widget to the DataSource on initialization.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>A local JavaScript object or instance of DataSource or the data that the multiselect will be bound to.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the field of the data item that provides the value content of the list items.</description>
+            <name>dataValueField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay in ms after which the multiselect will start filtering dataSource.</description>
+            <name>delay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the multiselect should be initially enabled.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the type of filtration.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Define the height of the drop-down list in pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the first item will be automatically highlighted.</description>
+            <name>highlightFirst</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines whether the filtration should be case sensitive.</description>
+            <name>ignoreCase</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the items in the list.</description>
+            <name>itemTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the limit of the selected items. If set to null widget will not limit number of the selected items.</description>
+            <name>maxSelectedItems</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minimum characters that should be typed before the multiselect activates</description>
+            <name>minLength</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>A string that appears in the textbox when the multiselect has no value.</description>
+            <name>placeholder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Template to be used for rendering the tags of the selected items.</description>
+            <name>tagTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Define the value of the widget</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>Fires when the value has been changed.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is closed</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the multiselect has received data from the data source.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the drop-down list is opened</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered when a Li element is selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
+        <name>multiSelect-animation</name>
+        <tag-class>com.kendoui.taglib.multiselect.AnimationTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Animation to be used for closing of the popup.</description>
+        <name>multiSelect-animation-close</name>
+        <tag-class>com.kendoui.taglib.multiselect.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for closing of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Animation to be used for opening of the popup.</description>
+        <name>multiSelect-animation-open</name>
+        <tag-class>com.kendoui.taglib.multiselect.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Difines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for opening of the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>Fires when the value has been changed.</description>
+        <name>multiSelect-change</name>
+        <tag-class>com.kendoui.taglib.multiselect.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the drop-down list is closed</description>
+        <name>multiSelect-close</name>
+        <tag-class>com.kendoui.taglib.multiselect.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the multiselect has received data from the data source.</description>
+        <name>multiSelect-dataBound</name>
+        <tag-class>com.kendoui.taglib.multiselect.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the drop-down list is opened</description>
+        <name>multiSelect-open</name>
+        <tag-class>com.kendoui.taglib.multiselect.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered when a Li element is selected.</description>
+        <name>multiSelect-select</name>
+        <tag-class>com.kendoui.taglib.multiselect.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>NumericTextBox</description>
         <name>numericTextBox</name>
         <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
@@ -13581,7 +13802,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <name>tabStrip-item</name>
         <tag-class>com.kendoui.taglib.tabstrip.ItemTag</tag-class>
 
-        <body-content>JSP</body-content>
+        <body-content>empty</body-content>
         <attribute>
             <description>Specifies the url from which the item content will be loaded</description>
             <name>contentUrl</name>
