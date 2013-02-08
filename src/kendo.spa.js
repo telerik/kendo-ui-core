@@ -122,5 +122,27 @@ kendo_module({
         }
     });
 
+    var View = Observable.extend({
+        init: function(options) {
+            Observable.fn.init.call(this);
+            this.template = options.template;
+            this.tagName = options.tagName || "div";
+            this.model = options.model;
+        },
+
+        render: function() {
+            var that = this;
+            if (!that.element) {
+                var element = $("<" + that.tagName + " />");
+                element.append($(that.template).html());
+                that.element = element;
+                kendo.bind(that.element, that.model);
+            }
+
+            return that.element;
+        }
+    })
+
     kendo.Router = Router;
+    kendo.View = View;
 })(window.kendo.jQuery);
