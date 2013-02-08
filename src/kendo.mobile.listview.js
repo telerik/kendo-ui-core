@@ -25,7 +25,6 @@ kendo_module({
         SEARCH_TEMPLATE = kendo.template('<form><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
         NS = ".kendoMobileListView",
         LAST_PAGE_REACHED = "lastPageReached",
-
         CLICK = "click",
         CHANGE = "change",
         PROGRESS = "progress",
@@ -320,7 +319,7 @@ kendo_module({
             var that = this;
 
             that._stopLoadMore = false;
-            that._loadButton.on("up", proxy(that._nextPage, that));
+            that._loadButton.autoApplyNS().on("up", proxy(that._nextPage, that));
         },
 
         stopLoadMore: function() {

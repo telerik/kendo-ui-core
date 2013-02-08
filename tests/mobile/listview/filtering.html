@@ -347,9 +347,9 @@
                 }),
                 loadButton = listview.wrapper.find(".km-load");
 
-                loadButton.click();
+                loadButton.trigger("mouseup");
                 listview.dataSource.filter(null);
-                loadButton.click();
+                loadButton.trigger("mouseup");
 
                 equal(listview.items().length, 2);
             });
@@ -392,9 +392,9 @@
                     }),
                     loadButton = listview.wrapper.find(".km-load");
 
-                loadButton.click();
+                loadButton.trigger("mouseup");
                 listview.dataSource.filter(null);
-                loadButton.click();
+                loadButton.trigger("mouseup");
 
                 equal(listview.items().length, 2);
             });
