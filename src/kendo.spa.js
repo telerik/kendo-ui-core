@@ -41,7 +41,9 @@ kendo_module({
                 length = params.length;
 
             for (; idx < length; idx ++) {
-                params[idx] = decodeURIComponent(params[idx]);
+                if (typeof params[idx] !== 'undefined') {
+                    params[idx] = decodeURIComponent(params[idx]);
+                }
             }
 
             this._callback.apply(null, params);

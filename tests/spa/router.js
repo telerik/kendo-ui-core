@@ -59,3 +59,45 @@ test("recognizes an url", 1, function(){
     router.start();
     navigate("/foo");
 });
+
+test("parses params", 1, function(){
+    var router = new kendo.Router();
+
+    router.route("/:foo", function(foo) {
+        equal(foo, "foo");
+    });
+
+    router.start();
+    navigate("/foo");
+});
+
+test("parses optional params", 4, function() {
+    var router = new kendo.Router();
+
+    router.route("/:foo(/:bar)", function(foo, bar) {
+        equal(foo, "foo");
+
+        if (bar) {
+            equal(bar, "bar");
+        } else {
+            ok(true);
+        }
+    });
+
+    router.start();
+    navigate("/foo/bar");
+    navigate("/foo");
+});
+
+test("parses splat params", 2, function() {
+    var router = new kendo.Router();
+
+    router.route("/:foo/*bar", function(foo, bar) {
+        equal(foo, "foo");
+
+        equal(bar, "bar/baz");
+    });
+
+    router.start();
+    navigate("/foo/bar/baz");
+});
