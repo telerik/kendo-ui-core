@@ -2730,7 +2730,7 @@
                 that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
             }
 
-            if ((!isEmptyObject(aggregates) && !footer.length) ||
+            if ((that._group && !isEmptyObject(aggregates)) || (!isEmptyObject(aggregates) && !footer.length) ||
                 grep(that.columns, function(column) { return column.footerTemplate; }).length) {
 
                 that.footerTemplate = that._footerTmpl(aggregates, "footerTemplate", "k-footer-template");
