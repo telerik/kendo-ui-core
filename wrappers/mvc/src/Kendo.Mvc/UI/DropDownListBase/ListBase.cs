@@ -65,7 +65,7 @@
             set;
         }
 
-        public IDictionary<string, object> SeriailzeBaseOptions()
+        protected virtual IDictionary<string, object> SeriailzeBaseOptions()
         {
             var options = new Dictionary<string, object>(Events);
             

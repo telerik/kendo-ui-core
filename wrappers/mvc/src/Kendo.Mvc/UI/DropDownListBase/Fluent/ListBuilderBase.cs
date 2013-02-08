@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI.Fluent
 
 
     public class ListBuilderBase<TDropDown, TDropDownBuilder> : WidgetBuilderBase<TDropDown, TDropDownBuilder>, IHideObjectMembers
-        where TDropDown : DropDownListBase
+        where TDropDown : ListBase
         where TDropDownBuilder : WidgetBuilderBase<TDropDown, TDropDownBuilder>
     {
         public ListBuilderBase(TDropDown component)

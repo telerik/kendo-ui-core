@@ -30,7 +30,7 @@
             set;
         }
 
-        public IDictionary<string, object> SeriailzeBaseOptions()
+        protected override IDictionary<string, object> SeriailzeBaseOptions()
         {
             var options = base.SeriailzeBaseOptions();
 

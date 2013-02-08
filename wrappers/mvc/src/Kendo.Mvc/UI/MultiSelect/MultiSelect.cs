@@ -8,7 +8,7 @@
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
-    public class MultiSelect : DropDownListBase
+    public class MultiSelect : ListBase
     {
         //Escape meta characters: http://api.jquery.com/category/selectors/
         private static readonly Regex EscapeRegex = new Regex(@"([;&,\.\+\*~'\:\""\!\^\$\[\]\(\)\|\/])", RegexOptions.Compiled);
