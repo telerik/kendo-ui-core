@@ -124,9 +124,10 @@
             "@list-border-radius":                { readonly: true, value: "@main-border-radius - 1" },
             "@inner-border-radius":               { readonly: true, value: "@main-border-radius - 2" },
             "@slider-border-radius":              { readonly: true, value: "13px" },
-            "@draghandle-border-radius":          { readonly: true, value: "7px" },
-            "@draghandle-border-color":           { readonly: true, value: "@widget-border-color" },
-            "@draghandle-background-color":       { readonly: true, value: "@widget-background-color" },
+
+            "@draghandle-border-radius":          constant("border-radius", ".k-draghandle"),
+            "@draghandle-border-color":           constant(BORDERCOLOR, ".k-draghandle"),
+            "@draghandle-background-color":       constant(BGCOLOR, ".k-draghandle"),
             "@draghandle-shadow":                 { readonly: true, value: "none" },
             "@draghandle-hover-border-color":     { readonly: true, value: "@hover-border-color" },
             "@draghandle-hover-background-color": { readonly: true, value: "@hover-background-color" },
@@ -230,6 +231,11 @@
                 "@validation-background-color":   "Background",
                 "@validation-border-color":       "Border color",
                 "@validation-text-color":         "Text color"
+            },
+            "Drag handle": {
+                "@draghandle-border-radius":      "Border radius",
+                "@draghandle-border-color":       "Border color",
+                "@draghandle-background-color":   "Background"
             },
             "Misc": {
                 "@main-border-radius":            "Border radius",
