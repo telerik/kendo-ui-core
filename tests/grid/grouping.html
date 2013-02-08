@@ -221,6 +221,69 @@
                 equal(headerCells.length, 2);
             });
 
+            test("grouping scrollable grid creates footer group cells", function() {
+                 var grid = new Grid(table(), {
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    groupable: true,
+                    scrollable: true,
+                    columns: [ { field: "foo", footerTemplate: "foo" }, "bar" ]
+                });
+
+                grid.dataSource.group([{field: "foo"}]);
+
+                var cells = grid.footer.find("td");
+                equal(cells.length, 3);
+                ok(cells.eq(0).is(".k-group-cell"));
+            });
+
+            test("ungroup scrollable grid remove footer group cells", function() {
+                 var grid = new Grid(table(), {
+                    dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                    groupable: true,
+                    scrollable: true,
+                    columns: [ { field: "foo", footerTemplate: "foo" }, "bar" ]
+                });
+
+                grid.dataSource.group([{field: "foo"}]);
+                grid.dataSource.group([]);
+
+                var cells = grid.footer.find("td");
+                equal(cells.length, 2);
+            });
+
+            test("grouping scrollable grid with aggregates creates footer group cells", function() {
+                 var grid = new Grid(table(), {
+                     dataSource:{
+                         data: [{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                         group: [{ field: "foo" }],
+                         aggregate: [{ field: "foo", aggregate: "count" }]
+                     },
+                     groupable: true,
+                     scrollable: true,
+                });
+
+                var cells = grid.footer.find("td");
+                equal(cells.length, 3);
+                ok(cells.eq(0).is(".k-group-cell"));
+            });
+
+            test("ungroup scrollable grid with aggregates removes footer group cells", function() {
+                 var grid = new Grid(table(), {
+                     dataSource:{
+                         data: [{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
+                         group: [{ field: "foo" }],
+                         aggregate: [{ field: "foo", aggregate: "count" }]
+                     },
+                     groupable: true,
+                     scrollable: true,
+                });
+
+                grid.dataSource.group([]);
+
+                var cells = grid.footer.find("td");
+                equal(cells.length, 2);
+            });
+
             test("collapseGroup hides all group data rows", function() {
                 var grid = new Grid(table(), {
                     dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
