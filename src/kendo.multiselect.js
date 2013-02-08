@@ -121,10 +121,11 @@ kendo_module({
             highlightFirst: true,
             dataTextField: "",
             dataValueField: "",
-            delay: 100,
-            minLength: 0,
             filter: "startswith",
             ignoreCase: true,
+            minLength: 0,
+            delay: 100,
+            maxSelectedItems: null,
             itemTemplate: "",
             tagTemplate: "",
             placeholder: "",
@@ -250,15 +251,14 @@ kendo_module({
         },
 
         open: function() {
-            var that = this,
-                popup = that.popup;
+            var that = this;
 
             if (!that.ul[0].firstChild || that._state === ACCEPT) {
                 that._state = "";
                 that._open = true;
                 that._filterSource();
-            } else if (!popup.visible() && that._visibleItems) {
-                popup.open();
+            } else if (that._visibleItems && that._allowSelection()) {
+                that.popup.open();
                 that.current(that.options.highlightFirst ? $(first(that.ul[0])) : null);
             }
         },
@@ -738,11 +738,22 @@ kendo_module({
             }, that.options.delay);
         },
 
+        _allowSelection: function() {
+            var max = this.options.maxSelectedItems;
+            return max === null || max > this._values.length;
+        },
+
         _select: function(li) {
             var that = this,
+                max = that.options.maxSelectedItems,
+                values = that._values,
                 dataItem,
                 value,
                 idx;
+
+            if (!that._allowSelection()) {
+                return;
+            }
 
             if (!isNaN(li)) {
                 idx = li;
@@ -762,7 +773,7 @@ kendo_module({
             if (value === undefined) { //TODO: test this
                 value = that._text(dataItem);
             }
-            that._values.push(value);
+            values.push(value);
             ///
 
             that._visibleItems -= 1;

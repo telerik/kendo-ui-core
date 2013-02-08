@@ -276,6 +276,26 @@
                 equal(multiselect.dataSource.view().length, 5);
                 equal(multiselect.value().length, 1);
             });
+
+            test("MultiSelect does not allow selection more than maxSelectedItems", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { maxSelectedItems: 1 });
+
+                multiselect.value(["1", "2"]);
+
+                equal(multiselect.value().length, 1);
+                equal(multiselect.dataItems().length, 1);
+            });
+
+            test("MultiSelect does not open popup if values >= maxSelectedItems", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { maxSelectedItems: 2 });
+
+                multiselect.value(["1", "2"]);
+                multiselect.open();
+
+                ok(!multiselect.popup.visible());
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
