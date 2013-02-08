@@ -71,9 +71,10 @@ class DataSourceResult {
             $count = count($data);
             $result = array();
             $value = $data[0][$field];
+            $aggregates = isset($groups[0]->aggregates) ? $groups[0]->aggregates : array();
 
             $hasSubgroups = count($groups) > 1;
-            $groupItem = $this->createGroup($field, $value, $hasSubgroups, $groups[0]->aggregates, $table, $request, $properties);
+            $groupItem = $this->createGroup($field, $value, $hasSubgroups, $aggregates, $table, $request, $properties);
 
             for ($index = 0; $index < $count; $index++) {
                 $item = $data[$index];
@@ -84,7 +85,8 @@ class DataSourceResult {
 
                     $result[] = $groupItem;
 
-                    $groupItem = $this->createGroup($field, $data[$index][$field], $hasSubgroups, $groups[0]->aggregates, $table, $request, $properties);
+                    $groupItem = $this->createGroup($field, $data[$index][$field], $hasSubgroups, $aggregates, $table, $request, $properties);
+                    $value = $item[$field];
                 }
                 $groupItem["items"][] = $item;
             }
