@@ -410,7 +410,7 @@
                     "url": "editor/imagebrowser.html",
                     "title": "Interactive image browser demo in Kendo UI Editor",
                     "meta": "This demo shows the new appearance and functionality of the image browser, integrated in Kendo UI Editor for sophisticated webapps and mobile websites.",
-                    "packages": [ "mvc", "online", "jsp" ]
+                    "packages": [ "online", "mvc", "jsp", "php" ]
                 },
                 {
                     "text": "All tools",
