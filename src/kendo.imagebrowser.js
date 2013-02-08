@@ -639,10 +639,12 @@ kendo_module({
         _listViewChange: function() {
             var selected = this._selectedItem();
 
-            this.toolbar.find(".k-delete").parent().removeClass("k-state-disabled");
+            if (selected) {
+                this.toolbar.find(".k-delete").parent().removeClass("k-state-disabled");
 
-            if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
-                this.trigger(CHANGE);
+                if (selected.get(this._getFieldName(TYPEFIELD)) === "f") {
+                    this.trigger(CHANGE);
+                }
             }
         },
 
