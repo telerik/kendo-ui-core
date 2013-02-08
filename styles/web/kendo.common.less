@@ -1485,7 +1485,8 @@ div.k-grid-header .k-header
     padding: 0 .6em;
 }
 
-.k-grid .k-group-cell+td,
+.k-grid > table > tbody .k-group-cell+td,
+.k-grid > .k-grid-content .k-group-cell+td,
 .k-grid .k-hierarchy-cell+td
 {
     border-left-width: 0;
