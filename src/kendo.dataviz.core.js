@@ -1722,6 +1722,10 @@ kendo_module({
             return a._childIndex - b._childIndex;
         },
 
+        renderId: function(id) {
+            return this.renderAttr(ViewElement.ID_ATTRIBUTE, id);
+        },
+
         renderAttr: function (name, value) {
             return defined(value) ? " " + name + "='" + value + "' " : "";
         },
@@ -1741,6 +1745,18 @@ kendo_module({
             return output;
         }
     });
+
+    ViewElement.ID_ATTRIBUTE = "id";
+    var getElement = function(id) {
+        return doc.getElementById(id);
+    };
+
+    if (kendo.support.browser.msie) {
+        ViewElement.ID_ATTRIBUTE = "data-id";
+        getElement = function(id) {
+            return $("[data-id='" + id + "']")[0];
+        }
+    }
 
     var ViewBase = ViewElement.extend({
         init: function(options) {
@@ -1977,7 +1993,7 @@ kendo_module({
 
                     anim.step(easingPos);
 
-                    element.refresh(doc.getElementById(elementId));
+                    element.refresh(getElement(elementId));
 
                     if (wallTime < finish) {
                         requestAnimFrame(loop);
@@ -2819,6 +2835,7 @@ kendo_module({
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
+        getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,
