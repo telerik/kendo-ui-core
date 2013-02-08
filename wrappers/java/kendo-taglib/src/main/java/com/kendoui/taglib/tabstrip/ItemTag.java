@@ -118,7 +118,10 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
     public void setText(String value) {
         setProperty("text", value);
     }
-
+    
+    public void setItems(ItemsTag value) {
+        items = value.items();
+    }
 //<< Attributes
   
 

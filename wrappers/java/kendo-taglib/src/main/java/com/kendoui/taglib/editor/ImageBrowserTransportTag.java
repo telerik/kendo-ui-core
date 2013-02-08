@@ -63,10 +63,6 @@ public class ImageBrowserTransportTag extends  BaseTag  /* interfaces */ /* inte
         setProperty("read", value);
     }
 
-    public void setThumbnailUrl(ImageBrowserTransportThumbnailUrlFunctionTag value) {
-        setEvent("thumbnailUrl", value.getBody());
-    }
-
     public void setImageUrl(ImageBrowserTransportImageUrlFunctionTag value) {
         setEvent("imageUrl", value.getBody());
     }

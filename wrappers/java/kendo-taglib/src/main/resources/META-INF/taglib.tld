@@ -3812,12 +3812,6 @@ or "websafe" to get the Web-safe palette.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Specifies the initially selected color.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>Triggers when a new color has been changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5574,12 +5568,6 @@ the minimum and maximum values.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The content of the editor</description>
-            <name>content</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
             <description>Indicates whether the Editor should submit encoded HTML tags.</description>
             <name>encoded</name>
             <rtexprvalue>true</rtexprvalue>
@@ -5884,8 +5872,7 @@ the minimum and maximum values.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.
-If function is assign, the current path and image name will be provided.</description>
+            <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.</description>
             <name>thumbnailUrl</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -6072,13 +6059,6 @@ Refer to the jQuery.ajax documentation for further info.</description>
     </tag>
 
     <tag>
-        <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.
-If function is assign, the current path and image name will be provided.</description>
-        <name>editor-imageBrowser-transport-thumbnailUrl</name>
-        <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportThumbnailUrlFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
         <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>
         <name>editor-imageBrowser-transport-imageUrl</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportImageUrlFunctionTag</tag-class>
@@ -6114,46 +6094,12 @@ as a collection of required properties, while the insertHtml tool requires a col
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The kendo template that will be used for rendering the given tool.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>The text which will be displayed when the end-user hovers the tool button with the mouse.</description>
             <name>tooltip</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
     </tag>
-
-    <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
-        <name>editor-tool-items</name>
-        <tag-class>com.kendoui.taglib.editor.ToolItemsTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
-        <name>editor-tool-item</name>
-        <tag-class>com.kendoui.taglib.editor.ToolItemTag</tag-class>
-
-        <body-content>empty</body-content>
-        <attribute>
-            <description>The string that the popup item will show.</description>
-            <name>text</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The value that will be applied by the tool when this item is selected.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-    </tag>
-
 
 
     <tag>
@@ -6236,12 +6182,6 @@ current color and the input field.</description>
             <name>preview</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the initially selected color.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
         <attribute>
             <description>Triggers when a new color has been selected.</description>
@@ -9388,14 +9328,14 @@ tick labels.</description>
     </tag>
 
     <tag>
-        <description>Defines the panes of the splitter</description>
+        <description>An array of pane definitions.</description>
         <name>splitter-panes</name>
         <tag-class>com.kendoui.taglib.splitter.PanesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Defines the panes of the splitter</description>
+        <description>An array of pane definitions.</description>
         <name>splitter-pane</name>
         <tag-class>com.kendoui.taglib.splitter.PaneTag</tag-class>
 
@@ -9419,13 +9359,15 @@ tick labels.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the maximum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The size of a resized pane cannot exceed the defined maximum size.</description>
+            <description>Specifies the maximum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The
+size of a resized pane cannot exceed the defined maximum size.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the minimum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The size of a resized pane cannot be less than the defined minimum size.</description>
+            <description>Specifies the minimum size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). The
+size of a resized pane cannot be less than the defined minimum size.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -9443,7 +9385,8 @@ tick labels.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). This value must not exceed panes.max or be less then panes.min.</description>
+            <description>Specifies the size of a pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). Note: This
+value must not exceed panes.max or be less then panes.min.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -14032,11 +13975,11 @@ the sprite CSS class of the treeview nodes.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of the treeview nodes.
-If an array, each level uses the field that is at the same index in the array, or the last item in the array.</description>
+            <description>Sets the field of the data item that provides
+the text content of the treeview nodes.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>Sets the field of the data item that provides
