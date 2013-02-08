@@ -506,6 +506,22 @@
                 equal(grid.footer.find("tr:first > td:first")[0].offsetWidth, resizedWidth);
             });
 
+            test("column footer is aligned with content after resize and refresh", function() {
+                 var grid = new Grid(table, {
+                    dataSource: { data: [ { foo: "foo", bar: "bar" } ], pageSize: 1 },
+                    resizable: true,
+                    columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = grid.footer.find("tr:first > td:first")[0].offsetWidth;
+
+                resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+                grid.content.scrollLeft(10);
+                grid.refresh();
+
+                equal(grid.content.scrollLeft(), grid.footer.find(".k-grid-footer-wrap").scrollLeft());
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
