@@ -4069,10 +4069,14 @@ kendo_module({
                 value = data.value,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
-                point,
                 valueParts = this.splitValue(value),
                 hasValue = validNumbers(valueParts),
-                cluster;
+                categoryPoints = chart.categoryPoints[categoryIx],
+                point, cluster;
+
+            if (!categoryPoints) {
+                chart.categoryPoints[categoryIx] = categoryPoints = [];
+            }
 
             if (hasValue) {
                 point = chart.createPoint(value, series);
@@ -4109,6 +4113,7 @@ kendo_module({
             }
 
             chart.points.push(point);
+            categoryPoints.push(point);
         },
 
         createPoint: function(value, series) {
