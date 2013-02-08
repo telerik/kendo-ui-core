@@ -56,3 +56,18 @@ test("binds to a given model", 1, function() {
 
     view.render().find("a").trigger("click");
 });
+
+test("unbinds handlers on destroy", 1, function() {
+    var view = new kendo.View({
+        template: "<i><a data-bind='click: foo'>Foo</a></i>",
+        model: kendo.observable({ foo: function() { ok(true); } })
+    });
+
+    var el = view.render();
+
+    el.find("a").trigger("click");
+
+    view.destroy();
+
+    el.find("a").trigger("click");
+});

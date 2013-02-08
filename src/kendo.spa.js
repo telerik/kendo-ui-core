@@ -140,6 +140,13 @@ kendo_module({
             }
 
             return that.element;
+        },
+
+        destroy: function() {
+            if (this.element) {
+                kendo.unbind(this.element);
+                this.element.remove();
+            }
         }
     })
 
