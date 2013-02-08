@@ -85,6 +85,14 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("select", value.getBody());
     }
 
+    public Object getContent() {
+        return (Object)getProperty("content");
+    }
+
+    public void setContent(Object value) {
+        setProperty("content", value);
+    }
+
     public boolean getEncoded() {
         return (boolean)getProperty("encoded");
     }

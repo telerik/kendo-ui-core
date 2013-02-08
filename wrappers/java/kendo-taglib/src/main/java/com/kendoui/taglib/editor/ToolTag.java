@@ -74,6 +74,14 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
     public String getTooltip() {
         return (String)getProperty("tooltip");
     }
