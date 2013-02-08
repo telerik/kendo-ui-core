@@ -599,6 +599,7 @@ kendo_module({
         events: [
            CHANGE,
            "dataBinding",
+           "cancel",
            DATABOUND,
            DETAILEXPAND,
            DETAILCOLLAPSE,
@@ -1285,6 +1286,10 @@ kendo_module({
                 container.on(CLICK + NS, "a.k-grid-cancel", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
+
+                    if (that.trigger("cancel", { container: container, model: model })) {
+                        return;
+                    }
 
                     var currentIndex = that.items().index($(that.current()).parent());
 
