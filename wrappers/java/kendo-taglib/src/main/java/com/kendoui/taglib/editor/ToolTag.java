@@ -50,6 +50,12 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "editor-tool";
     }
 
+    public void setItems(ToolItemsTag value) {
+
+        items = value.items();
+
+    }
+
     public void setExec(ToolExecFunctionTag value) {
         setEvent("exec", value.getBody());
     }
@@ -72,6 +78,14 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setName(String value) {
         setProperty("name", value);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
     }
 
     public String getTooltip() {

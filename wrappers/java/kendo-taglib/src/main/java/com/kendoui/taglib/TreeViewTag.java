@@ -142,11 +142,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setProperty("dataSpriteCssClassField", value);
     }
 
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
+    public Object getDataTextField() {
+        return (Object)getProperty("dataTextField");
     }
 
-    public void setDataTextField(String value) {
+    public void setDataTextField(Object value) {
         setProperty("dataTextField", value);
     }
 

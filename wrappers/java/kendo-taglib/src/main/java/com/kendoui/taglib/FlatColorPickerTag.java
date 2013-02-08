@@ -82,6 +82,14 @@ public class FlatColorPickerTag extends WidgetTag /* interfaces *//* interfaces 
         setProperty("preview", value);
     }
 
+    public String getValue() {
+        return (String)getProperty("value");
+    }
+
+    public void setValue(String value) {
+        setProperty("value", value);
+    }
+
     public String getChange() {
         Function property = ((Function)getProperty("change"));
         if (property != null) {
