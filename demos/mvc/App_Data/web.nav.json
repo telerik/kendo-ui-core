@@ -613,8 +613,7 @@
                     "text": "Filter menu customization",
                     "url": "grid/filter-menu-customization.html",
                     "title": "Demo for Kendo UI HTML5 Grid column filter menu customization",
-                    "meta": "This example demonstrates the how to customize the filter menu of KendoGrid.",
-                    "packages": ["online", "offline", "mvc", "jsp"]
+                    "meta": "This example demonstrates the how to customize the filter menu of KendoGrid."
                 },
                 {
                     "text": "Server aggregates",
