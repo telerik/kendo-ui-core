@@ -2360,6 +2360,7 @@
                 html = "",
                 footerTemplate = that.footerTemplate,
                 options = that.options,
+                footerWrap,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
 
             if (footerTemplate) {
@@ -2385,13 +2386,18 @@
 
             if (footer.length) {
                 if (options.scrollable) {
+                    footerWrap = footer.attr("tabindex", -1).children(".k-grid-footer-wrap");
                     that.scrollables = that.scrollables
                         .not(".k-grid-footer-wrap")
-                        .add(that.footer.attr("tabindex", -1).children(".k-grid-footer-wrap"));
+                        .add(footerWrap);
                 }
 
                 if (that._footerWidth) {
                     footer.find("table").css('width', that._footerWidth);
+                }
+
+                if (footerWrap) {
+                    footerWrap.scrollLeft(that.content.scrollLeft());
                 }
             }
         },
