@@ -22,7 +22,7 @@
     </head>
     <body class="k-default">
         <h3>The Boeing Company (NYSE:BA)</h3>
-        <div id="chart" style="width: 900px; height: 500px; border: 1px solid red;"></div>
+        <div id="chart" style="width: 900px; height: 500px; border: 1px solid red; background: blue;"></div>
         <script>
             $(function() {
                 $("#chart").kendoStockChart({
@@ -40,24 +40,31 @@
                             }
                         }
                     },
+                    tooltip: {
+                        shared: true,
+                        visible: true
+                    },
                     dateField: "Date",
-                    panes: [{
-                        title: "Value"
-                    }, {
-                        name: "volumePane",
-                        title: "Volume",
-                        height: 100 // pixels
-                    }],
                     categoryAxis: {
-                        pane: "volumePane"
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
+                        }
                     },
                     valueAxes: [{
                         // Default axis
-                        name: "price"
+                        name: "price",
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true
+                            }
+                        }
                     }, {
                         name: "volume",
-                        pane: "volumePane",
-                        visible: false
+                        visible: true
                     }],
                     series: [{
                         type: "candlestick",

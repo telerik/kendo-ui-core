@@ -442,7 +442,7 @@ kendo_module({
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(TOUCH_START_NS, proxy(chart._tap, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
-            if (chart._plotArea.crosshairs.length) {
+            if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._tooltip.options.shared)) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
 
@@ -676,38 +676,26 @@ kendo_module({
             var chart = this,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
-                tooltipOptions = tooltip.options || {},
-                coords = chart._eventCoordinates(e),
+                tooltipOptions = chart.options.tooltip,
                 point;
 
-            if (tooltipOptions.shared) {
-                point = Point2D(coords.x, coords.y);
-                if (tooltipOptions.visible && tooltipOptions.shared) {
-                    tooltip.plotArea = chart._plotArea;
-                    tooltip.showAt(point);
+            if (chart._suppressHover || !highlight ||
+                highlight.overlayElement === e.target || tooltipOptions.shared) {
+                return;
+            }
+
+            point = chart._getChartElement(e);
+            if (point && point.hover) {
+                point.hover(chart, e);
+                chart._activePoint = point;
+
+                tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
+                if (tooltipOptions.visible) {
+                    tooltip.show(point);
                 }
 
-                if (highlight.options.visible && tooltipOptions.shared) {
-                    highlight.plotArea = chart._plotArea;
-                    highlight.show(point);
-                }
-            } else {
-                if (chart._suppressHover || !highlight || highlight.overlayElement === e.target) {
-                    return;
-                }
-                point = chart._getChartElement(e);
-                if (point && point.hover) {
-                    point.hover(chart, e);
-                    chart._activePoint = point;
-
-                    tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                    if (tooltipOptions.visible) {
-                        tooltip.show(point);
-                    }
-
-                    highlight.show(point);
-                    return true;
-                }
+                highlight.show(point);
+                return true;
             }
         },
 
@@ -762,6 +750,9 @@ kendo_module({
                 length = crosshairs.length,
                 coords = chart._eventCoordinates(e),
                 point = Point2D(coords.x, coords.y),
+                tooltip = chart._tooltip,
+                highlight = chart._highlight,
+                tooltipOptions = tooltip.options || {},
                 i, crosshair;
 
             chart._lastTime = new Date();
@@ -774,6 +765,18 @@ kendo_module({
                     } else {
                         crosshair.hide();
                     }
+                }
+            }
+
+            if (tooltipOptions.shared) {
+                if (tooltipOptions.visible && tooltipOptions.shared) {
+                    tooltip.plotArea = chart._plotArea;
+                    tooltip.showAt(point);
+                }
+
+                if (highlight.options.visible && tooltipOptions.shared) {
+                    highlight.plotArea = chart._plotArea;
+                    highlight.show(point);
                 }
             }
         },
@@ -4320,9 +4323,7 @@ kendo_module({
             var segment = this;
 
             segment.render();
-
             segment.box = targetBox;
-
             segment.reflowLabel();
         },
 
@@ -4333,11 +4334,8 @@ kendo_module({
                 label = segment.label,
                 labelsOptions = options.labels,
                 labelsDistance = labelsOptions.distance,
-                lp,
-                x1,
                 angle = sector.middle(),
-                labelWidth,
-                labelHeight;
+                lp, x1, labelWidth, labelHeight;
 
             if (label) {
                 labelHeight = label.box.height();
@@ -4510,18 +4508,9 @@ kendo_module({
                 seriesCount = series.length,
                 overlayId = uniqueId(),
                 bindableFields = chart.bindableFields(),
-                currentSeries,
-                pointData,
-                fields,
-                seriesIx,
-                angle,
-                data,
-                anglePerValue,
-                value,
-                explode,
-                total,
-                currentAngle,
-                i;
+                currentSeries, pointData, fields, seriesIx,
+                angle, data, anglePerValue, value, explode,
+                total, currentAngle, i;
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -4642,14 +4631,10 @@ kendo_module({
                 seriesCount = options.series.length,
                 leftSideLabels = [],
                 rightSideLabels = [],
-                seriesConfig,
-                seriesIndex,
-                label,
-                segment,
-                sector,
-                r, i, c;
+                seriesConfig, seriesIndex, label,
+                segment, sector, r, i, c;
 
-            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
+            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding;
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
             r = halfMinWidth - padding;
             c = new Point2D(
@@ -4723,12 +4708,10 @@ kendo_module({
                 segment = segments[segments.length - 1],
                 sector = segment.sector,
                 firstBox = labels[0].box,
-                secondBox,
                 count = labels.length - 1,
-                distances = [],
-                distance,
                 lr = sector.r + segment.options.labels.distance,
-                i;
+                distances = [],
+                secondBox, distance, i;
 
             distance = round(firstBox.y1 - (sector.c.y - lr - firstBox.height() - firstBox.height() / 2));
             distances.push(distance);
@@ -4747,15 +4730,12 @@ kendo_module({
         distributeLabels: function(distances, labels) {
             var chart = this,
                 count = distances.length,
-                remaining,
-                left,
-                right,
-                i;
+                remaining, left, right, i;
 
             for (i = 0; i < count; i++) {
                 left = right = i;
                 remaining = -distances[i];
-                while(remaining > 0 && (left >= 0 || right < count)) {
+                while (remaining > 0 && (left >= 0 || right < count)) {
                     remaining = chart._takeDistance(distances, i, --left, remaining);
                     remaining = chart._takeDistance(distances, i, ++right, remaining);
                 }
@@ -4784,10 +4764,7 @@ kendo_module({
                 labelOptions = segment.options.labels,
                 labelDistance = labelOptions.distance,
                 boxY = sector.c.y - (sector.r + labelDistance) - labels[0].box.height(),
-                label,
-                boxX,
-                box,
-                i;
+                label, boxX, box, i;
 
             distances[0] += 2;
             for (i = 0; i < labelsCount; i++) {
@@ -4825,16 +4802,11 @@ kendo_module({
                 connectors = options.connectors,
                 segments = chart.segments,
                 connectorLine,
-                sector,
+                lines = [],
                 count = segments.length,
                 space = 4,
-                angle,
-                lines = [],
-                points,
-                segment,
-                seriesIx,
-                label,
-                i;
+                sector, angle, points, segment,
+                seriesIx, label, i;
 
             for (i = 0; i < count; i++) {
                 segment = segments[i];
@@ -5316,7 +5288,7 @@ kendo_module({
                         currentCrosshair = new Crosshair(axis, axis.options.crosshair);
 
                         plotArea.crosshairs.push(currentCrosshair);
-                        pane.content.append(currentCrosshair);
+                        plotArea.append(currentCrosshair);
                     }
                 }
             }
@@ -5724,15 +5696,9 @@ kendo_module({
         fitAxes: function(panes) {
             var plotArea = this,
                 axes = plotArea.groupAxes(panes).any,
-                paneAxes,
-                paneBox,
-                axisBox,
                 offsetX = 0,
-                offsetY,
-                currentPane,
-                currentAxis,
-                i,
-                j;
+                paneAxes, paneBox, axisBox, offsetY,
+                currentPane, currentAxis, i, j;
 
             for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
@@ -5875,12 +5841,7 @@ kendo_module({
             var plotArea = this,
                 axes = plotArea.axes,
                 axesCount = axes.length,
-                lineBox,
-                box,
-                i,
-                j,
-                axisA,
-                axisB;
+                lineBox, box, i, j, axisA, axisB;
 
             for (i = 0; i < axesCount; i++) {
                 axisA = axes[i];
@@ -5941,10 +5902,12 @@ kendo_module({
             if (categoryIndex !== null) {
                 for (i = 0; i < charts.length; i++) {
                     points = charts[i].categoryPoints[categoryIndex];
-                    for (j = 0; j < points.length; j++) {
-                        point = points[j];
-                        if (point && defined(point.value) && point.value !== null) {
-                            result.push(point);
+                    if (points && points.length) {
+                        for (j = 0; j < points.length; j++) {
+                            point = points[j];
+                            if (point && defined(point.value) && point.value !== null) {
+                                result.push(point);
+                            }
                         }
                     }
                 }
@@ -7237,6 +7200,8 @@ kendo_module({
         showAt: function(point) {
             var crosshair = this;
 
+            crosshair.updateAxisReference();
+
             crosshair._visible = true;
             crosshair.point = point;
             crosshair.repaint();
@@ -7268,16 +7233,16 @@ kendo_module({
             var crosshair = this,
                 axis = crosshair.axis,
                 vertical = axis.options.vertical,
-                plotAreaBox = axis.plotArea.backgroundBox(),
+                box = crosshair.getBox(),
                 point = crosshair.point,
                 dim = vertical ? Y : X,
                 slot, lineStart, lineEnd;
 
-            lineStart = Point2D(plotAreaBox.x1, plotAreaBox.y1);
+            lineStart = Point2D(box.x1, box.y1);
             if (vertical) {
-                lineEnd = Point2D(plotAreaBox.x2, plotAreaBox.y1);
+                lineEnd = Point2D(box.x2, box.y1);
             } else {
-                lineEnd = Point2D(plotAreaBox.x1, plotAreaBox.y2);
+                lineEnd = Point2D(box.x1, box.y2);
             }
 
             if (point) {
@@ -7290,6 +7255,33 @@ kendo_module({
             }
 
             return [lineStart, lineEnd];
+        },
+
+        getBox: function() {
+            var crosshair = this,
+                axis = crosshair.axis,
+                axes = axis.pane.axes,
+                length = axes.length,
+                vertical = axis.options.vertical,
+                box = axis.lineBox().clone(),
+                dim = vertical ? X : Y,
+                axisLineBox, currentAxis, i;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+                if (currentAxis.options.vertical != vertical) {
+                    if (!axisLineBox) {
+                        axisLineBox = currentAxis.lineBox().clone();
+                    } else {
+                        axisLineBox.wrap(currentAxis.lineBox());
+                    }
+                }
+            }
+
+            box[dim + 1] = axisLineBox[dim + 1];
+            box[dim + 2] = axisLineBox[dim + 2];
+
+            return box;
         },
 
         getViewElements: function(view) {
@@ -7314,6 +7306,22 @@ kendo_module({
             append(elements, ChartElement.fn.getViewElements.call(crosshair, view));
 
             return elements;
+        },
+
+        updateAxisReference: function() {
+            var crosshair = this,
+                axis = crosshair.axis,
+                plotArea = axis.plotArea,
+                axes = plotArea.axes,
+                currentAxis, i;
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                if (defined(axis.axisIndex) && axis.axisIndex === currentAxis.axisIndex) {
+                    crosshair.axis = currentAxis;
+                    break;
+                }
+            }
         }
     });
 
@@ -8335,24 +8343,22 @@ kendo_module({
     }
 
     function axisGroupBox(axes) {
-        var box = new Box2D(),
-            i,
-            length = axes.length,
-            currentAxis;
+        var length = axes.length,
+            box, i, axisBox;
 
         if (length > 0) {
             for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
+                axisBox = axes[i].box;
 
-                if (i === 0) {
-                    box = currentAxis.box.clone();
+                if (!box) {
+                    box = axisBox.clone();
                 } else {
-                    box.wrap(currentAxis.box);
+                    box.wrap(axisBox);
                 }
             }
         }
 
-        return box;
+        return box || Box2D();
     }
 
     function equalsIgnoreCase(a, b) {
