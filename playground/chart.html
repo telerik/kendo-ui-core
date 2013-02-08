@@ -10,106 +10,94 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 700px; float: left;"></div>
-        <div id="scatterchart" style="width: 700px; float: left;"></div>
+        <div id="chart" style="width: 900px; float: left;"></div>
         <script>
             $(function() {
-                $("#chart").kendoChart({
-                    theme: "blueopal",
-                    series: [{
-                        name: "u",
-                        data: [ 1,null,3 ]
-                    },{
-                        name: "u",
-                        data: [ 1,2,3 ]
-                    },{
-                        name: "u",
-                        data: [ 1,2,3 ]
-                        },{
-                        type: "line",
-                        name: "u",
-                        data: [ 1,2,3 ]
-                    },{
-                        type: "line",
-                        name: "u",
-                        data: [ 1,2,3 ]
-                    }],
-                    tooltip: {
-                        visible: true,
-                        shared: true,
-                        format: "c"
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true
+                var data = [];
+                for (var i = 0; i < 100; i++) {
+                    data.push({ x: new Date(2013, 1, i), y: i });
+                }
+
+                // Helper function that constructs DataSource filter
+                // for the x value
+                function getFilter(xMin, xMax) {
+                    return [{
+                        field: "x",
+                        operator: "gte",
+                        value: xMin
+                    }, {
+                        field: "x",
+                        operator: "lte",
+                        value: xMax
+                    }]
+                }
+
+                $(function() {
+                    $("#chart").kendoChart({
+                        dataSource: {
+                            data: data,
+                            filter: getFilter(new Date("2013/02/10").getTime(), new Date("2013/02/20").getTime()),
+                            schema: {
+                                model: {
+                                    fields: {
+                                        x: {
+                                            type: "date"
+                                        }
+                                    }
+                                }
                             }
                         },
-                        baseUnit: "days",
-                        categories: [
-                            new Date("2011/12/31"),
-                            new Date("2012/01/01"),
-                            new Date("2012/01/02"),
-                            new Date("2012/01/03"),
-                            new Date("2012/01/04"),
-                            new Date("2012/01/05"),
-                            new Date("2012/01/06"),
-                            new Date("2012/01/07"),
-                            new Date("2012/01/08"),
-                            new Date("2012/01/09"),
-                            new Date("2012/01/10")
-                        ],
-                        type: "date"
-                    },
-                    valueAxis: {
-                        crosshair: {
-                            visible: true,
+                        xAxis: {
+                            type: "date",
+                            name: "xAxis",
+                            baseUnit: "days",
+                            majorUnit: 1,
+                            min: new Date("2013/02/10"),
+                            max: new Date("2013/02/20")
+                        },
+                        series: [{
+                            type: "scatterLine",
+                            xField: "x",
+                            yField: "y",
+                            markers: {
+                                visible: true
+                            },
                             tooltip: {
                                 visible: true
                             }
-                        }
-                    }
-                });
+                        }],
+                        transitions: false,
+                        drag: onDrag,
+                        zoom: onDrag
+                    });
 
-                $("#scatterchart").kendoChart({
-                    theme: "blueopal",
-                    series: [{
-                        type: "scatter",
-                        data: [ [1,2], [2,3], [3,4] ]
-                    }],
-                    tooltip: {
-                        visible: true
-                    },
-                    xAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true,
-                                position: "center"
-                            }
-                        }
-                    },
-                    yAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true,
-                                position: "left"
-                            }
+                    var chart = $("#chart").data("kendoChart");
+
+                    function onDrag(e) {
+                        var ds = chart.dataSource;
+                        var options = chart.options;
+
+                        var xRange = e.axisRanges.xAxis;
+                        if (xRange) {
+                            // Suggested axis ranges
+                            var xMin = xRange.min;
+                            var xMax = xRange.max;
+
+                            // Set x axis range in chart options
+                            options.xAxis.min = xMin;
+                            options.xAxis.max = xMax;
+
+                            // Filters the data source and rebinds the chart
+                            // which also applies the axis limits set above
+                            ds.filter(getFilter(xMin, xMax));
                         }
                     }
                 });
             });
         </script>
-
-        <style>
-            #chart .k-tooltip {
-                padding: 5px;
-            }
-        </style>
     </body>
 </html>
 
