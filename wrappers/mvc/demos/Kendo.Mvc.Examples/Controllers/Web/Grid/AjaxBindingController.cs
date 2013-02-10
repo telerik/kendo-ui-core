@@ -10,10 +10,5 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View();
         }
-
-        public ActionResult Orders_Read([DataSourceRequest] DataSourceRequest request)
-        {
-            return Json(GetOrders().ToDataSourceResult(request));
-        }
     }
 }
