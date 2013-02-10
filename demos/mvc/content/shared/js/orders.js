@@ -12,8 +12,7 @@ var orders = [{
     ShipCity : "Reims",
     ShipRegion : "",
     ShipPostalCode : "51100",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10249,
     CustomerID : "TOMSP",
@@ -28,8 +27,7 @@ var orders = [{
     ShipCity : "Münster",
     ShipRegion : "",
     ShipPostalCode : "44087",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10250,
     CustomerID : "HANAR",
@@ -44,8 +42,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10251,
     CustomerID : "VICTE",
@@ -60,8 +57,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10252,
     CustomerID : "SUPRD",
@@ -76,8 +72,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10253,
     CustomerID : "HANAR",
@@ -92,8 +87,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10254,
     CustomerID : "CHOPS",
@@ -108,8 +102,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10255,
     CustomerID : "RICSU",
@@ -124,8 +117,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10256,
     CustomerID : "WELLI",
@@ -140,8 +132,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10257,
     CustomerID : "HILAA",
@@ -156,8 +147,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10258,
     CustomerID : "ERNSH",
@@ -172,8 +162,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10259,
     CustomerID : "CENTC",
@@ -188,8 +177,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05022",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10260,
     CustomerID : "OTTIK",
@@ -204,8 +192,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10261,
     CustomerID : "QUEDE",
@@ -220,8 +207,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10262,
     CustomerID : "RATTC",
@@ -236,8 +222,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10263,
     CustomerID : "ERNSH",
@@ -252,8 +237,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10264,
     CustomerID : "FOLKO",
@@ -268,8 +252,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10265,
     CustomerID : "BLONP",
@@ -284,8 +267,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10266,
     CustomerID : "WARTH",
@@ -300,8 +282,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10267,
     CustomerID : "FRANK",
@@ -316,8 +297,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10268,
     CustomerID : "GROSR",
@@ -332,8 +312,7 @@ var orders = [{
     ShipCity : "Caracas",
     ShipRegion : "DF",
     ShipPostalCode : "1081",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10269,
     CustomerID : "WHITC",
@@ -348,8 +327,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10270,
     CustomerID : "WARTH",
@@ -364,8 +342,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10271,
     CustomerID : "SPLIR",
@@ -380,8 +357,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10272,
     CustomerID : "RATTC",
@@ -396,8 +372,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10273,
     CustomerID : "QUICK",
@@ -412,8 +387,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10274,
     CustomerID : "VINET",
@@ -428,8 +402,7 @@ var orders = [{
     ShipCity : "Reims",
     ShipRegion : "",
     ShipPostalCode : "51100",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10275,
     CustomerID : "MAGAA",
@@ -444,8 +417,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10276,
     CustomerID : "TORTU",
@@ -460,8 +432,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10277,
     CustomerID : "MORGK",
@@ -476,8 +447,7 @@ var orders = [{
     ShipCity : "Leipzig",
     ShipRegion : "",
     ShipPostalCode : "04179",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10278,
     CustomerID : "BERGS",
@@ -492,8 +462,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10279,
     CustomerID : "LEHMS",
@@ -508,8 +477,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10280,
     CustomerID : "BERGS",
@@ -524,8 +492,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10281,
     CustomerID : "ROMEY",
@@ -540,8 +507,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28001",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10282,
     CustomerID : "ROMEY",
@@ -556,8 +522,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28001",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10283,
     CustomerID : "LILAS",
@@ -572,8 +537,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10284,
     CustomerID : "LEHMS",
@@ -588,8 +552,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10285,
     CustomerID : "QUICK",
@@ -604,8 +567,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10286,
     CustomerID : "QUICK",
@@ -620,8 +582,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10287,
     CustomerID : "RICAR",
@@ -636,8 +597,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10288,
     CustomerID : "REGGC",
@@ -652,8 +612,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10289,
     CustomerID : "BSBEV",
@@ -668,8 +627,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10290,
     CustomerID : "COMMI",
@@ -684,8 +642,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05432-043",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10291,
     CustomerID : "QUEDE",
@@ -700,8 +657,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10292,
     CustomerID : "TRADH",
@@ -716,8 +672,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05634-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10293,
     CustomerID : "TORTU",
@@ -732,8 +687,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10294,
     CustomerID : "RATTC",
@@ -748,8 +702,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10295,
     CustomerID : "VINET",
@@ -764,8 +717,7 @@ var orders = [{
     ShipCity : "Reims",
     ShipRegion : "",
     ShipPostalCode : "51100",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10296,
     CustomerID : "LILAS",
@@ -780,8 +732,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10297,
     CustomerID : "BLONP",
@@ -796,8 +747,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10298,
     CustomerID : "HUNGO",
@@ -812,8 +762,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10299,
     CustomerID : "RICAR",
@@ -828,8 +777,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10300,
     CustomerID : "MAGAA",
@@ -844,8 +792,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10301,
     CustomerID : "WANDK",
@@ -860,8 +807,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10302,
     CustomerID : "SUPRD",
@@ -876,8 +822,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10303,
     CustomerID : "GODOS",
@@ -892,8 +837,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10304,
     CustomerID : "TORTU",
@@ -908,8 +852,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10305,
     CustomerID : "OLDWO",
@@ -924,8 +867,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10306,
     CustomerID : "ROMEY",
@@ -940,8 +882,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28001",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10307,
     CustomerID : "LONEP",
@@ -956,8 +897,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10308,
     CustomerID : "ANATR",
@@ -972,8 +912,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05021",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10309,
     CustomerID : "HUNGO",
@@ -988,8 +927,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10310,
     CustomerID : "THEBI",
@@ -1004,8 +942,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97201",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10311,
     CustomerID : "DUMON",
@@ -1020,8 +957,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10312,
     CustomerID : "WANDK",
@@ -1036,8 +972,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10313,
     CustomerID : "QUICK",
@@ -1052,8 +987,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10314,
     CustomerID : "RATTC",
@@ -1068,8 +1002,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10315,
     CustomerID : "ISLAT",
@@ -1084,8 +1017,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10316,
     CustomerID : "RATTC",
@@ -1100,8 +1032,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10317,
     CustomerID : "LONEP",
@@ -1116,8 +1047,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10318,
     CustomerID : "ISLAT",
@@ -1132,8 +1062,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10319,
     CustomerID : "TORTU",
@@ -1148,8 +1077,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10320,
     CustomerID : "WARTH",
@@ -1164,8 +1092,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10321,
     CustomerID : "ISLAT",
@@ -1180,8 +1107,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10322,
     CustomerID : "PERIC",
@@ -1196,8 +1122,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10323,
     CustomerID : "KOENE",
@@ -1212,8 +1137,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10324,
     CustomerID : "SAVEA",
@@ -1228,8 +1152,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10325,
     CustomerID : "KOENE",
@@ -1244,8 +1167,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10326,
     CustomerID : "BOLID",
@@ -1260,8 +1182,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28023",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10327,
     CustomerID : "FOLKO",
@@ -1276,8 +1197,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10328,
     CustomerID : "FURIB",
@@ -1292,8 +1212,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10329,
     CustomerID : "SPLIR",
@@ -1308,8 +1227,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10330,
     CustomerID : "LILAS",
@@ -1324,8 +1242,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10331,
     CustomerID : "BONAP",
@@ -1340,8 +1257,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10332,
     CustomerID : "MEREP",
@@ -1356,8 +1272,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10333,
     CustomerID : "WARTH",
@@ -1372,8 +1287,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10334,
     CustomerID : "VICTE",
@@ -1388,8 +1302,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10335,
     CustomerID : "HUNGO",
@@ -1404,8 +1317,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10336,
     CustomerID : "PRINI",
@@ -1420,8 +1332,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1756",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10337,
     CustomerID : "FRANK",
@@ -1436,8 +1347,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10338,
     CustomerID : "OLDWO",
@@ -1452,8 +1362,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10339,
     CustomerID : "MEREP",
@@ -1468,8 +1377,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10340,
     CustomerID : "BONAP",
@@ -1484,8 +1392,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10341,
     CustomerID : "SIMOB",
@@ -1500,8 +1407,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10342,
     CustomerID : "FRANK",
@@ -1516,8 +1422,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10343,
     CustomerID : "LEHMS",
@@ -1532,8 +1437,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10344,
     CustomerID : "WHITC",
@@ -1548,8 +1452,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10345,
     CustomerID : "QUICK",
@@ -1564,8 +1467,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10346,
     CustomerID : "RATTC",
@@ -1580,8 +1482,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10347,
     CustomerID : "FAMIA",
@@ -1596,8 +1497,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10348,
     CustomerID : "WANDK",
@@ -1612,8 +1512,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10349,
     CustomerID : "SPLIR",
@@ -1628,8 +1527,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10350,
     CustomerID : "LAMAI",
@@ -1644,8 +1542,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10351,
     CustomerID : "ERNSH",
@@ -1660,8 +1557,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10352,
     CustomerID : "FURIB",
@@ -1676,8 +1572,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10353,
     CustomerID : "PICCO",
@@ -1692,8 +1587,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10354,
     CustomerID : "PERIC",
@@ -1708,8 +1602,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10355,
     CustomerID : "AROUT",
@@ -1724,8 +1617,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10356,
     CustomerID : "WANDK",
@@ -1740,8 +1632,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10357,
     CustomerID : "LILAS",
@@ -1756,8 +1647,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10358,
     CustomerID : "LAMAI",
@@ -1772,8 +1662,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10359,
     CustomerID : "SEVES",
@@ -1788,8 +1677,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10360,
     CustomerID : "BLONP",
@@ -1804,8 +1692,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10361,
     CustomerID : "QUICK",
@@ -1820,8 +1707,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10362,
     CustomerID : "BONAP",
@@ -1836,8 +1722,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10363,
     CustomerID : "DRACD",
@@ -1852,8 +1737,7 @@ var orders = [{
     ShipCity : "Aachen",
     ShipRegion : "",
     ShipPostalCode : "52066",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10364,
     CustomerID : "EASTC",
@@ -1868,8 +1752,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10365,
     CustomerID : "ANTON",
@@ -1884,8 +1767,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10366,
     CustomerID : "GALED",
@@ -1900,8 +1782,7 @@ var orders = [{
     ShipCity : "Barcelona",
     ShipRegion : "",
     ShipPostalCode : "8022",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10367,
     CustomerID : "VAFFE",
@@ -1916,8 +1797,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10368,
     CustomerID : "ERNSH",
@@ -1932,8 +1812,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10369,
     CustomerID : "SPLIR",
@@ -1948,8 +1827,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10370,
     CustomerID : "CHOPS",
@@ -1964,8 +1842,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10371,
     CustomerID : "LAMAI",
@@ -1980,8 +1857,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10372,
     CustomerID : "QUEEN",
@@ -1996,8 +1872,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10373,
     CustomerID : "HUNGO",
@@ -2012,8 +1887,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10374,
     CustomerID : "WOLZA",
@@ -2028,8 +1902,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 10375,
     CustomerID : "HUNGC",
@@ -2044,8 +1917,7 @@ var orders = [{
     ShipCity : "Elgin",
     ShipRegion : "OR",
     ShipPostalCode : "97827",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10376,
     CustomerID : "MEREP",
@@ -2060,8 +1932,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10377,
     CustomerID : "SEVES",
@@ -2076,8 +1947,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10378,
     CustomerID : "FOLKO",
@@ -2092,8 +1962,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10379,
     CustomerID : "QUEDE",
@@ -2108,8 +1977,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10380,
     CustomerID : "HUNGO",
@@ -2124,8 +1992,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10381,
     CustomerID : "LILAS",
@@ -2140,8 +2007,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10382,
     CustomerID : "ERNSH",
@@ -2156,8 +2022,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10383,
     CustomerID : "AROUT",
@@ -2172,8 +2037,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10384,
     CustomerID : "BERGS",
@@ -2188,8 +2052,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10385,
     CustomerID : "SPLIR",
@@ -2204,8 +2067,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10386,
     CustomerID : "FAMIA",
@@ -2220,8 +2082,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10387,
     CustomerID : "SANTG",
@@ -2236,8 +2097,7 @@ var orders = [{
     ShipCity : "Stavern",
     ShipRegion : "",
     ShipPostalCode : "4110",
-    ShipCountry : "Norway",
-
+    ShipCountry : "Norway"
 }, {
     OrderID : 10388,
     CustomerID : "SEVES",
@@ -2252,8 +2112,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10389,
     CustomerID : "BOTTM",
@@ -2268,8 +2127,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10390,
     CustomerID : "ERNSH",
@@ -2284,8 +2142,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10391,
     CustomerID : "DRACD",
@@ -2300,8 +2157,7 @@ var orders = [{
     ShipCity : "Aachen",
     ShipRegion : "",
     ShipPostalCode : "52066",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10392,
     CustomerID : "PICCO",
@@ -2316,8 +2172,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10393,
     CustomerID : "SAVEA",
@@ -2332,8 +2187,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10394,
     CustomerID : "HUNGC",
@@ -2348,8 +2202,7 @@ var orders = [{
     ShipCity : "Elgin",
     ShipRegion : "OR",
     ShipPostalCode : "97827",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10395,
     CustomerID : "HILAA",
@@ -2364,8 +2217,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10396,
     CustomerID : "FRANK",
@@ -2380,8 +2232,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10397,
     CustomerID : "PRINI",
@@ -2396,8 +2247,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1756",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10398,
     CustomerID : "SAVEA",
@@ -2412,8 +2262,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10399,
     CustomerID : "VAFFE",
@@ -2428,8 +2277,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10400,
     CustomerID : "EASTC",
@@ -2444,8 +2292,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10401,
     CustomerID : "RATTC",
@@ -2460,8 +2307,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10402,
     CustomerID : "ERNSH",
@@ -2476,8 +2322,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10403,
     CustomerID : "ERNSH",
@@ -2492,8 +2337,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10404,
     CustomerID : "MAGAA",
@@ -2508,8 +2352,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10405,
     CustomerID : "LINOD",
@@ -2524,8 +2367,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10406,
     CustomerID : "QUEEN",
@@ -2540,8 +2382,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10407,
     CustomerID : "OTTIK",
@@ -2556,8 +2397,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10408,
     CustomerID : "FOLIG",
@@ -2572,8 +2412,7 @@ var orders = [{
     ShipCity : "Lille",
     ShipRegion : "",
     ShipPostalCode : "59000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10409,
     CustomerID : "OCEAN",
@@ -2588,8 +2427,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10410,
     CustomerID : "BOTTM",
@@ -2604,8 +2442,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10411,
     CustomerID : "BOTTM",
@@ -2620,8 +2457,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10412,
     CustomerID : "WARTH",
@@ -2636,8 +2472,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10413,
     CustomerID : "LAMAI",
@@ -2652,8 +2487,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10414,
     CustomerID : "FAMIA",
@@ -2668,8 +2502,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10415,
     CustomerID : "HUNGC",
@@ -2684,8 +2517,7 @@ var orders = [{
     ShipCity : "Elgin",
     ShipRegion : "OR",
     ShipPostalCode : "97827",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10416,
     CustomerID : "WARTH",
@@ -2700,8 +2532,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10417,
     CustomerID : "SIMOB",
@@ -2716,8 +2547,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10418,
     CustomerID : "QUICK",
@@ -2732,8 +2562,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10419,
     CustomerID : "RICSU",
@@ -2748,8 +2577,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10420,
     CustomerID : "WELLI",
@@ -2764,8 +2592,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10421,
     CustomerID : "QUEDE",
@@ -2780,8 +2607,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10422,
     CustomerID : "FRANS",
@@ -2796,8 +2622,7 @@ var orders = [{
     ShipCity : "Torino",
     ShipRegion : "",
     ShipPostalCode : "10100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10423,
     CustomerID : "GOURL",
@@ -2812,8 +2637,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10424,
     CustomerID : "MEREP",
@@ -2828,8 +2652,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10425,
     CustomerID : "LAMAI",
@@ -2844,8 +2667,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10426,
     CustomerID : "GALED",
@@ -2860,8 +2682,7 @@ var orders = [{
     ShipCity : "Barcelona",
     ShipRegion : "",
     ShipPostalCode : "8022",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10427,
     CustomerID : "PICCO",
@@ -2876,8 +2697,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10428,
     CustomerID : "REGGC",
@@ -2892,8 +2712,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10429,
     CustomerID : "HUNGO",
@@ -2908,8 +2727,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10430,
     CustomerID : "ERNSH",
@@ -2924,8 +2742,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10431,
     CustomerID : "BOTTM",
@@ -2940,8 +2757,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10432,
     CustomerID : "SPLIR",
@@ -2956,8 +2772,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10433,
     CustomerID : "PRINI",
@@ -2972,8 +2787,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1756",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10434,
     CustomerID : "FOLKO",
@@ -2988,8 +2802,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10435,
     CustomerID : "CONSH",
@@ -3004,8 +2817,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX1 6LT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10436,
     CustomerID : "BLONP",
@@ -3020,8 +2832,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10437,
     CustomerID : "WARTH",
@@ -3036,8 +2847,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10438,
     CustomerID : "TOMSP",
@@ -3052,8 +2862,7 @@ var orders = [{
     ShipCity : "Münster",
     ShipRegion : "",
     ShipPostalCode : "44087",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10439,
     CustomerID : "MEREP",
@@ -3068,8 +2877,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10440,
     CustomerID : "SAVEA",
@@ -3084,8 +2892,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10441,
     CustomerID : "OLDWO",
@@ -3100,8 +2907,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10442,
     CustomerID : "ERNSH",
@@ -3116,8 +2922,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10443,
     CustomerID : "REGGC",
@@ -3132,8 +2937,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10444,
     CustomerID : "BERGS",
@@ -3148,8 +2952,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10445,
     CustomerID : "BERGS",
@@ -3164,8 +2967,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10446,
     CustomerID : "TOMSP",
@@ -3180,8 +2982,7 @@ var orders = [{
     ShipCity : "Münster",
     ShipRegion : "",
     ShipPostalCode : "44087",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10447,
     CustomerID : "RICAR",
@@ -3196,8 +2997,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10448,
     CustomerID : "RANCH",
@@ -3212,8 +3012,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10449,
     CustomerID : "BLONP",
@@ -3228,8 +3027,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10450,
     CustomerID : "VICTE",
@@ -3244,8 +3042,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10451,
     CustomerID : "QUICK",
@@ -3260,8 +3057,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10452,
     CustomerID : "SAVEA",
@@ -3276,8 +3072,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10453,
     CustomerID : "AROUT",
@@ -3292,8 +3087,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10454,
     CustomerID : "LAMAI",
@@ -3308,8 +3102,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10455,
     CustomerID : "WARTH",
@@ -3324,8 +3117,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10456,
     CustomerID : "KOENE",
@@ -3340,8 +3132,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10457,
     CustomerID : "KOENE",
@@ -3356,8 +3147,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10458,
     CustomerID : "SUPRD",
@@ -3372,8 +3162,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10459,
     CustomerID : "VICTE",
@@ -3388,8 +3177,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10460,
     CustomerID : "FOLKO",
@@ -3404,8 +3192,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10461,
     CustomerID : "LILAS",
@@ -3420,8 +3207,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10462,
     CustomerID : "CONSH",
@@ -3436,8 +3222,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX1 6LT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10463,
     CustomerID : "SUPRD",
@@ -3452,8 +3237,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10464,
     CustomerID : "FURIB",
@@ -3468,8 +3252,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10465,
     CustomerID : "VAFFE",
@@ -3484,8 +3267,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10466,
     CustomerID : "COMMI",
@@ -3500,8 +3282,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05432-043",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10467,
     CustomerID : "MAGAA",
@@ -3516,8 +3297,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10468,
     CustomerID : "KOENE",
@@ -3532,8 +3312,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10469,
     CustomerID : "WHITC",
@@ -3548,8 +3327,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10470,
     CustomerID : "BONAP",
@@ -3564,8 +3342,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10471,
     CustomerID : "BSBEV",
@@ -3580,8 +3357,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10472,
     CustomerID : "SEVES",
@@ -3596,8 +3372,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10473,
     CustomerID : "ISLAT",
@@ -3612,8 +3387,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10474,
     CustomerID : "PERIC",
@@ -3628,8 +3402,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10475,
     CustomerID : "SUPRD",
@@ -3644,8 +3417,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10476,
     CustomerID : "HILAA",
@@ -3660,8 +3432,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10477,
     CustomerID : "PRINI",
@@ -3676,8 +3447,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1756",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10478,
     CustomerID : "VICTE",
@@ -3692,8 +3462,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10479,
     CustomerID : "RATTC",
@@ -3708,8 +3477,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10480,
     CustomerID : "FOLIG",
@@ -3724,8 +3492,7 @@ var orders = [{
     ShipCity : "Lille",
     ShipRegion : "",
     ShipPostalCode : "59000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10481,
     CustomerID : "RICAR",
@@ -3740,8 +3507,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10482,
     CustomerID : "LAZYK",
@@ -3756,8 +3522,7 @@ var orders = [{
     ShipCity : "Walla Walla",
     ShipRegion : "WA",
     ShipPostalCode : "99362",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10483,
     CustomerID : "WHITC",
@@ -3772,8 +3537,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10484,
     CustomerID : "BSBEV",
@@ -3788,8 +3552,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10485,
     CustomerID : "LINOD",
@@ -3804,8 +3567,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10486,
     CustomerID : "HILAA",
@@ -3820,8 +3582,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10487,
     CustomerID : "QUEEN",
@@ -3836,8 +3597,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10488,
     CustomerID : "FRANK",
@@ -3852,8 +3612,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10489,
     CustomerID : "PICCO",
@@ -3868,8 +3627,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10490,
     CustomerID : "HILAA",
@@ -3884,8 +3642,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10491,
     CustomerID : "FURIB",
@@ -3900,8 +3657,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10492,
     CustomerID : "BOTTM",
@@ -3916,8 +3672,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10493,
     CustomerID : "LAMAI",
@@ -3932,8 +3687,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10494,
     CustomerID : "COMMI",
@@ -3948,8 +3702,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05432-043",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10495,
     CustomerID : "LAUGB",
@@ -3964,8 +3717,7 @@ var orders = [{
     ShipCity : "Vancouver",
     ShipRegion : "BC",
     ShipPostalCode : "V3F 2K1",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10496,
     CustomerID : "TRADH",
@@ -3980,8 +3732,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05634-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10497,
     CustomerID : "LEHMS",
@@ -3996,8 +3747,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10498,
     CustomerID : "HILAA",
@@ -4012,8 +3762,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10499,
     CustomerID : "LILAS",
@@ -4028,8 +3777,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10500,
     CustomerID : "LAMAI",
@@ -4044,8 +3792,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10501,
     CustomerID : "BLAUS",
@@ -4060,8 +3807,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10502,
     CustomerID : "PERIC",
@@ -4076,8 +3822,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10503,
     CustomerID : "HUNGO",
@@ -4092,8 +3837,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10504,
     CustomerID : "WHITC",
@@ -4108,8 +3852,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10505,
     CustomerID : "MEREP",
@@ -4124,8 +3867,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10506,
     CustomerID : "KOENE",
@@ -4140,8 +3882,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10507,
     CustomerID : "ANTON",
@@ -4156,8 +3897,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10508,
     CustomerID : "OTTIK",
@@ -4172,8 +3912,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10509,
     CustomerID : "BLAUS",
@@ -4188,8 +3927,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10510,
     CustomerID : "SAVEA",
@@ -4204,8 +3942,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10511,
     CustomerID : "BONAP",
@@ -4220,8 +3957,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10512,
     CustomerID : "FAMIA",
@@ -4236,8 +3972,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10513,
     CustomerID : "WANDK",
@@ -4252,8 +3987,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10514,
     CustomerID : "ERNSH",
@@ -4268,8 +4002,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10515,
     CustomerID : "QUICK",
@@ -4284,8 +4017,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10516,
     CustomerID : "HUNGO",
@@ -4300,8 +4032,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10517,
     CustomerID : "NORTS",
@@ -4316,8 +4047,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "SW7 1RZ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10518,
     CustomerID : "TORTU",
@@ -4332,8 +4062,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10519,
     CustomerID : "CHOPS",
@@ -4348,8 +4077,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10520,
     CustomerID : "SANTG",
@@ -4364,8 +4092,7 @@ var orders = [{
     ShipCity : "Stavern",
     ShipRegion : "",
     ShipPostalCode : "4110",
-    ShipCountry : "Norway",
-
+    ShipCountry : "Norway"
 }, {
     OrderID : 10521,
     CustomerID : "CACTU",
@@ -4380,8 +4107,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10522,
     CustomerID : "LEHMS",
@@ -4396,8 +4122,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10523,
     CustomerID : "SEVES",
@@ -4412,8 +4137,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10524,
     CustomerID : "BERGS",
@@ -4428,8 +4152,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10525,
     CustomerID : "BONAP",
@@ -4444,8 +4167,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10526,
     CustomerID : "WARTH",
@@ -4460,8 +4182,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10527,
     CustomerID : "QUICK",
@@ -4476,8 +4197,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10528,
     CustomerID : "GREAL",
@@ -4492,8 +4212,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10529,
     CustomerID : "MAISD",
@@ -4508,8 +4227,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10530,
     CustomerID : "PICCO",
@@ -4524,8 +4242,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10531,
     CustomerID : "OCEAN",
@@ -4540,8 +4257,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10532,
     CustomerID : "EASTC",
@@ -4556,8 +4272,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10533,
     CustomerID : "FOLKO",
@@ -4572,8 +4287,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10534,
     CustomerID : "LEHMS",
@@ -4588,8 +4302,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10535,
     CustomerID : "ANTON",
@@ -4604,8 +4317,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10536,
     CustomerID : "LEHMS",
@@ -4620,8 +4332,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10537,
     CustomerID : "RICSU",
@@ -4636,8 +4347,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10538,
     CustomerID : "BSBEV",
@@ -4652,8 +4362,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10539,
     CustomerID : "BSBEV",
@@ -4668,8 +4377,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10540,
     CustomerID : "QUICK",
@@ -4684,8 +4392,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10541,
     CustomerID : "HANAR",
@@ -4700,8 +4407,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10542,
     CustomerID : "KOENE",
@@ -4716,8 +4422,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10543,
     CustomerID : "LILAS",
@@ -4732,8 +4437,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10544,
     CustomerID : "LONEP",
@@ -4748,8 +4452,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10545,
     CustomerID : "LAZYK",
@@ -4764,8 +4467,7 @@ var orders = [{
     ShipCity : "Walla Walla",
     ShipRegion : "WA",
     ShipPostalCode : "99362",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10546,
     CustomerID : "VICTE",
@@ -4780,8 +4482,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10547,
     CustomerID : "SEVES",
@@ -4796,8 +4497,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10548,
     CustomerID : "TOMSP",
@@ -4812,8 +4512,7 @@ var orders = [{
     ShipCity : "Münster",
     ShipRegion : "",
     ShipPostalCode : "44087",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10549,
     CustomerID : "QUICK",
@@ -4828,8 +4527,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10550,
     CustomerID : "GODOS",
@@ -4844,8 +4542,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10551,
     CustomerID : "FURIB",
@@ -4860,8 +4557,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10552,
     CustomerID : "HILAA",
@@ -4876,8 +4572,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10553,
     CustomerID : "WARTH",
@@ -4892,8 +4587,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10554,
     CustomerID : "OTTIK",
@@ -4908,8 +4602,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10555,
     CustomerID : "SAVEA",
@@ -4924,8 +4617,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10556,
     CustomerID : "SIMOB",
@@ -4940,8 +4632,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10557,
     CustomerID : "LEHMS",
@@ -4956,8 +4647,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10558,
     CustomerID : "AROUT",
@@ -4972,8 +4662,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10559,
     CustomerID : "BLONP",
@@ -4988,8 +4677,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10560,
     CustomerID : "FRANK",
@@ -5004,8 +4692,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10561,
     CustomerID : "FOLKO",
@@ -5020,8 +4707,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10562,
     CustomerID : "REGGC",
@@ -5036,8 +4722,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10563,
     CustomerID : "RICAR",
@@ -5052,8 +4737,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10564,
     CustomerID : "RATTC",
@@ -5068,8 +4752,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10565,
     CustomerID : "MEREP",
@@ -5084,8 +4767,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10566,
     CustomerID : "BLONP",
@@ -5100,8 +4782,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10567,
     CustomerID : "HUNGO",
@@ -5116,8 +4797,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10568,
     CustomerID : "GALED",
@@ -5132,8 +4812,7 @@ var orders = [{
     ShipCity : "Barcelona",
     ShipRegion : "",
     ShipPostalCode : "8022",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10569,
     CustomerID : "RATTC",
@@ -5148,8 +4827,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10570,
     CustomerID : "MEREP",
@@ -5164,8 +4842,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10571,
     CustomerID : "ERNSH",
@@ -5180,8 +4857,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10572,
     CustomerID : "BERGS",
@@ -5196,8 +4872,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10573,
     CustomerID : "ANTON",
@@ -5212,8 +4887,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10574,
     CustomerID : "TRAIH",
@@ -5228,8 +4902,7 @@ var orders = [{
     ShipCity : "Kirkland",
     ShipRegion : "WA",
     ShipPostalCode : "98034",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10575,
     CustomerID : "MORGK",
@@ -5244,8 +4917,7 @@ var orders = [{
     ShipCity : "Leipzig",
     ShipRegion : "",
     ShipPostalCode : "04179",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10576,
     CustomerID : "TORTU",
@@ -5260,8 +4932,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10577,
     CustomerID : "TRAIH",
@@ -5276,8 +4947,7 @@ var orders = [{
     ShipCity : "Kirkland",
     ShipRegion : "WA",
     ShipPostalCode : "98034",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10578,
     CustomerID : "BSBEV",
@@ -5292,8 +4962,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10579,
     CustomerID : "LETSS",
@@ -5308,8 +4977,7 @@ var orders = [{
     ShipCity : "San Francisco",
     ShipRegion : "CA",
     ShipPostalCode : "94117",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10580,
     CustomerID : "OTTIK",
@@ -5324,8 +4992,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10581,
     CustomerID : "FAMIA",
@@ -5340,8 +5007,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10582,
     CustomerID : "BLAUS",
@@ -5356,8 +5022,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10583,
     CustomerID : "WARTH",
@@ -5372,8 +5037,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10584,
     CustomerID : "BLONP",
@@ -5388,8 +5052,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10585,
     CustomerID : "WELLI",
@@ -5404,8 +5067,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10586,
     CustomerID : "REGGC",
@@ -5420,8 +5082,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10587,
     CustomerID : "QUEDE",
@@ -5436,8 +5097,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10588,
     CustomerID : "QUICK",
@@ -5452,8 +5112,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10589,
     CustomerID : "GREAL",
@@ -5468,8 +5127,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10590,
     CustomerID : "MEREP",
@@ -5484,8 +5142,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10591,
     CustomerID : "VAFFE",
@@ -5500,8 +5157,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10592,
     CustomerID : "LEHMS",
@@ -5516,8 +5172,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10593,
     CustomerID : "LEHMS",
@@ -5532,8 +5187,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10594,
     CustomerID : "OLDWO",
@@ -5548,8 +5202,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10595,
     CustomerID : "ERNSH",
@@ -5564,8 +5217,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10596,
     CustomerID : "WHITC",
@@ -5580,8 +5232,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10597,
     CustomerID : "PICCO",
@@ -5596,8 +5247,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10598,
     CustomerID : "RATTC",
@@ -5612,8 +5262,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10599,
     CustomerID : "BSBEV",
@@ -5628,8 +5277,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10600,
     CustomerID : "HUNGC",
@@ -5644,8 +5292,7 @@ var orders = [{
     ShipCity : "Elgin",
     ShipRegion : "OR",
     ShipPostalCode : "97827",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10601,
     CustomerID : "HILAA",
@@ -5660,8 +5307,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10602,
     CustomerID : "VAFFE",
@@ -5676,8 +5322,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10603,
     CustomerID : "SAVEA",
@@ -5692,8 +5337,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10604,
     CustomerID : "FURIB",
@@ -5708,8 +5352,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10605,
     CustomerID : "MEREP",
@@ -5724,8 +5367,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10606,
     CustomerID : "TRADH",
@@ -5740,8 +5382,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05634-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10607,
     CustomerID : "SAVEA",
@@ -5756,8 +5397,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10608,
     CustomerID : "TOMSP",
@@ -5772,8 +5412,7 @@ var orders = [{
     ShipCity : "Münster",
     ShipRegion : "",
     ShipPostalCode : "44087",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10609,
     CustomerID : "DUMON",
@@ -5788,8 +5427,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10610,
     CustomerID : "LAMAI",
@@ -5804,8 +5442,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10611,
     CustomerID : "WOLZA",
@@ -5820,8 +5457,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 10612,
     CustomerID : "SAVEA",
@@ -5836,8 +5472,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10613,
     CustomerID : "HILAA",
@@ -5852,8 +5487,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10614,
     CustomerID : "BLAUS",
@@ -5868,8 +5502,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10615,
     CustomerID : "WILMK",
@@ -5884,8 +5517,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10616,
     CustomerID : "GREAL",
@@ -5900,8 +5532,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10617,
     CustomerID : "GREAL",
@@ -5916,8 +5547,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10618,
     CustomerID : "MEREP",
@@ -5932,8 +5562,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10619,
     CustomerID : "MEREP",
@@ -5948,8 +5577,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10620,
     CustomerID : "LAUGB",
@@ -5964,8 +5592,7 @@ var orders = [{
     ShipCity : "Vancouver",
     ShipRegion : "BC",
     ShipPostalCode : "V3F 2K1",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10621,
     CustomerID : "ISLAT",
@@ -5980,8 +5607,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10622,
     CustomerID : "RICAR",
@@ -5996,8 +5622,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10623,
     CustomerID : "FRANK",
@@ -6012,8 +5637,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10624,
     CustomerID : "THECR",
@@ -6028,8 +5652,7 @@ var orders = [{
     ShipCity : "Butte",
     ShipRegion : "MT",
     ShipPostalCode : "59801",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10625,
     CustomerID : "ANATR",
@@ -6044,8 +5667,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05021",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10626,
     CustomerID : "BERGS",
@@ -6060,8 +5682,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10627,
     CustomerID : "SAVEA",
@@ -6076,8 +5697,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10628,
     CustomerID : "BLONP",
@@ -6092,8 +5712,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10629,
     CustomerID : "GODOS",
@@ -6108,8 +5727,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10630,
     CustomerID : "KOENE",
@@ -6124,8 +5742,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10631,
     CustomerID : "LAMAI",
@@ -6140,8 +5757,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10632,
     CustomerID : "WANDK",
@@ -6156,8 +5772,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10633,
     CustomerID : "ERNSH",
@@ -6172,8 +5787,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10634,
     CustomerID : "FOLIG",
@@ -6188,8 +5802,7 @@ var orders = [{
     ShipCity : "Lille",
     ShipRegion : "",
     ShipPostalCode : "59000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10635,
     CustomerID : "MAGAA",
@@ -6204,8 +5817,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10636,
     CustomerID : "WARTH",
@@ -6220,8 +5832,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10637,
     CustomerID : "QUEEN",
@@ -6236,8 +5847,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10638,
     CustomerID : "LINOD",
@@ -6252,8 +5862,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10639,
     CustomerID : "SANTG",
@@ -6268,8 +5877,7 @@ var orders = [{
     ShipCity : "Stavern",
     ShipRegion : "",
     ShipPostalCode : "4110",
-    ShipCountry : "Norway",
-
+    ShipCountry : "Norway"
 }, {
     OrderID : 10640,
     CustomerID : "WANDK",
@@ -6284,8 +5892,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10641,
     CustomerID : "HILAA",
@@ -6300,8 +5907,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10642,
     CustomerID : "SIMOB",
@@ -6316,8 +5922,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10643,
     CustomerID : "ALFKI",
@@ -6332,8 +5937,7 @@ var orders = [{
     ShipCity : "Berlin",
     ShipRegion : "",
     ShipPostalCode : "12209",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10644,
     CustomerID : "WELLI",
@@ -6348,8 +5952,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10645,
     CustomerID : "HANAR",
@@ -6364,8 +5967,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10646,
     CustomerID : "HUNGO",
@@ -6380,8 +5982,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10647,
     CustomerID : "QUEDE",
@@ -6396,8 +5997,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10648,
     CustomerID : "RICAR",
@@ -6412,8 +6012,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10649,
     CustomerID : "MAISD",
@@ -6428,8 +6027,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10650,
     CustomerID : "FAMIA",
@@ -6444,8 +6042,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10651,
     CustomerID : "WANDK",
@@ -6460,8 +6057,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10652,
     CustomerID : "GOURL",
@@ -6476,8 +6072,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10653,
     CustomerID : "FRANK",
@@ -6492,8 +6087,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10654,
     CustomerID : "BERGS",
@@ -6508,8 +6102,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10655,
     CustomerID : "REGGC",
@@ -6524,8 +6117,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10656,
     CustomerID : "GREAL",
@@ -6540,8 +6132,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10657,
     CustomerID : "SAVEA",
@@ -6556,8 +6147,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10658,
     CustomerID : "QUICK",
@@ -6572,8 +6162,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10659,
     CustomerID : "QUEEN",
@@ -6588,8 +6177,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10660,
     CustomerID : "HUNGC",
@@ -6604,8 +6192,7 @@ var orders = [{
     ShipCity : "Elgin",
     ShipRegion : "OR",
     ShipPostalCode : "97827",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10661,
     CustomerID : "HUNGO",
@@ -6620,8 +6207,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10662,
     CustomerID : "LONEP",
@@ -6636,8 +6222,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10663,
     CustomerID : "BONAP",
@@ -6652,8 +6237,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10664,
     CustomerID : "FURIB",
@@ -6668,8 +6252,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10665,
     CustomerID : "LONEP",
@@ -6684,8 +6267,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10666,
     CustomerID : "RICSU",
@@ -6700,8 +6282,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10667,
     CustomerID : "ERNSH",
@@ -6716,8 +6297,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10668,
     CustomerID : "WANDK",
@@ -6732,8 +6312,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10669,
     CustomerID : "SIMOB",
@@ -6748,8 +6327,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10670,
     CustomerID : "FRANK",
@@ -6764,8 +6342,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10671,
     CustomerID : "FRANR",
@@ -6780,8 +6357,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10672,
     CustomerID : "BERGS",
@@ -6796,8 +6372,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10673,
     CustomerID : "WILMK",
@@ -6812,8 +6387,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10674,
     CustomerID : "ISLAT",
@@ -6828,8 +6402,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10675,
     CustomerID : "FRANK",
@@ -6844,8 +6417,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10676,
     CustomerID : "TORTU",
@@ -6860,8 +6432,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10677,
     CustomerID : "ANTON",
@@ -6876,8 +6447,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10678,
     CustomerID : "SAVEA",
@@ -6892,8 +6462,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10679,
     CustomerID : "BLONP",
@@ -6908,8 +6477,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10680,
     CustomerID : "OLDWO",
@@ -6924,8 +6492,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10681,
     CustomerID : "GREAL",
@@ -6940,8 +6507,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10682,
     CustomerID : "ANTON",
@@ -6956,8 +6522,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10683,
     CustomerID : "DUMON",
@@ -6972,8 +6537,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10684,
     CustomerID : "OTTIK",
@@ -6988,8 +6552,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10685,
     CustomerID : "GOURL",
@@ -7004,8 +6567,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10686,
     CustomerID : "PICCO",
@@ -7020,8 +6582,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10687,
     CustomerID : "HUNGO",
@@ -7036,8 +6597,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10688,
     CustomerID : "VAFFE",
@@ -7052,8 +6612,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10689,
     CustomerID : "BERGS",
@@ -7068,8 +6627,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10690,
     CustomerID : "HANAR",
@@ -7084,8 +6642,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10691,
     CustomerID : "QUICK",
@@ -7100,8 +6657,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10692,
     CustomerID : "ALFKI",
@@ -7116,8 +6672,7 @@ var orders = [{
     ShipCity : "Berlin",
     ShipRegion : "",
     ShipPostalCode : "12209",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10693,
     CustomerID : "WHITC",
@@ -7132,8 +6687,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10694,
     CustomerID : "QUICK",
@@ -7148,8 +6702,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10695,
     CustomerID : "WILMK",
@@ -7164,8 +6717,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10696,
     CustomerID : "WHITC",
@@ -7180,8 +6732,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10697,
     CustomerID : "LINOD",
@@ -7196,8 +6747,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10698,
     CustomerID : "ERNSH",
@@ -7212,8 +6762,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10699,
     CustomerID : "MORGK",
@@ -7228,8 +6777,7 @@ var orders = [{
     ShipCity : "Leipzig",
     ShipRegion : "",
     ShipPostalCode : "04179",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10700,
     CustomerID : "SAVEA",
@@ -7244,8 +6792,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10701,
     CustomerID : "HUNGO",
@@ -7260,8 +6807,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10702,
     CustomerID : "ALFKI",
@@ -7276,8 +6822,7 @@ var orders = [{
     ShipCity : "Berlin",
     ShipRegion : "",
     ShipPostalCode : "12209",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10703,
     CustomerID : "FOLKO",
@@ -7292,8 +6837,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10704,
     CustomerID : "QUEEN",
@@ -7308,8 +6852,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10705,
     CustomerID : "HILAA",
@@ -7324,8 +6867,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10706,
     CustomerID : "OLDWO",
@@ -7340,8 +6882,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10707,
     CustomerID : "AROUT",
@@ -7356,8 +6897,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10708,
     CustomerID : "THEBI",
@@ -7372,8 +6912,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97201",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10709,
     CustomerID : "GOURL",
@@ -7388,8 +6927,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10710,
     CustomerID : "FRANS",
@@ -7404,8 +6942,7 @@ var orders = [{
     ShipCity : "Torino",
     ShipRegion : "",
     ShipPostalCode : "10100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10711,
     CustomerID : "SAVEA",
@@ -7420,8 +6957,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10712,
     CustomerID : "HUNGO",
@@ -7436,8 +6972,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10713,
     CustomerID : "SAVEA",
@@ -7452,8 +6987,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10714,
     CustomerID : "SAVEA",
@@ -7468,8 +7002,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10715,
     CustomerID : "BONAP",
@@ -7484,8 +7017,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10716,
     CustomerID : "RANCH",
@@ -7500,8 +7032,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10717,
     CustomerID : "FRANK",
@@ -7516,8 +7047,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10718,
     CustomerID : "KOENE",
@@ -7532,8 +7062,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10719,
     CustomerID : "LETSS",
@@ -7548,8 +7077,7 @@ var orders = [{
     ShipCity : "San Francisco",
     ShipRegion : "CA",
     ShipPostalCode : "94117",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10720,
     CustomerID : "QUEDE",
@@ -7564,8 +7092,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10721,
     CustomerID : "QUICK",
@@ -7580,8 +7107,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10722,
     CustomerID : "SAVEA",
@@ -7596,8 +7122,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10723,
     CustomerID : "WHITC",
@@ -7612,8 +7137,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10724,
     CustomerID : "MEREP",
@@ -7628,8 +7152,7 @@ var orders = [{
     ShipCity : "Montréal",
     ShipRegion : "Québec",
     ShipPostalCode : "H1J 1C3",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10725,
     CustomerID : "FAMIA",
@@ -7644,8 +7167,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05442-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10726,
     CustomerID : "EASTC",
@@ -7660,8 +7182,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10727,
     CustomerID : "REGGC",
@@ -7676,8 +7197,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10728,
     CustomerID : "QUEEN",
@@ -7692,8 +7212,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10729,
     CustomerID : "LINOD",
@@ -7708,8 +7227,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10730,
     CustomerID : "BONAP",
@@ -7724,8 +7242,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10731,
     CustomerID : "CHOPS",
@@ -7740,8 +7257,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10732,
     CustomerID : "BONAP",
@@ -7756,8 +7272,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10733,
     CustomerID : "BERGS",
@@ -7772,8 +7287,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10734,
     CustomerID : "GOURL",
@@ -7788,8 +7302,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10735,
     CustomerID : "LETSS",
@@ -7804,8 +7317,7 @@ var orders = [{
     ShipCity : "San Francisco",
     ShipRegion : "CA",
     ShipPostalCode : "94117",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10736,
     CustomerID : "HUNGO",
@@ -7820,8 +7332,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10737,
     CustomerID : "VINET",
@@ -7836,8 +7347,7 @@ var orders = [{
     ShipCity : "Reims",
     ShipRegion : "",
     ShipPostalCode : "51100",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10738,
     CustomerID : "SPECD",
@@ -7852,8 +7362,7 @@ var orders = [{
     ShipCity : "Paris",
     ShipRegion : "",
     ShipPostalCode : "75016",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10739,
     CustomerID : "VINET",
@@ -7868,8 +7377,7 @@ var orders = [{
     ShipCity : "Reims",
     ShipRegion : "",
     ShipPostalCode : "51100",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10740,
     CustomerID : "WHITC",
@@ -7884,8 +7392,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10741,
     CustomerID : "AROUT",
@@ -7900,8 +7407,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10742,
     CustomerID : "BOTTM",
@@ -7916,8 +7422,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10743,
     CustomerID : "AROUT",
@@ -7932,8 +7437,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10744,
     CustomerID : "VAFFE",
@@ -7948,8 +7452,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10745,
     CustomerID : "QUICK",
@@ -7964,8 +7467,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10746,
     CustomerID : "CHOPS",
@@ -7980,8 +7482,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10747,
     CustomerID : "PICCO",
@@ -7996,8 +7497,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10748,
     CustomerID : "SAVEA",
@@ -8012,8 +7512,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10749,
     CustomerID : "ISLAT",
@@ -8028,8 +7527,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10750,
     CustomerID : "WARTH",
@@ -8044,8 +7542,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10751,
     CustomerID : "RICSU",
@@ -8060,8 +7557,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10752,
     CustomerID : "NORTS",
@@ -8076,8 +7572,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "SW7 1RZ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10753,
     CustomerID : "FRANS",
@@ -8092,8 +7587,7 @@ var orders = [{
     ShipCity : "Torino",
     ShipRegion : "",
     ShipPostalCode : "10100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10754,
     CustomerID : "MAGAA",
@@ -8108,8 +7602,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10755,
     CustomerID : "BONAP",
@@ -8124,8 +7617,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10756,
     CustomerID : "SPLIR",
@@ -8140,8 +7632,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10757,
     CustomerID : "SAVEA",
@@ -8156,8 +7647,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10758,
     CustomerID : "RICSU",
@@ -8172,8 +7662,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10759,
     CustomerID : "ANATR",
@@ -8188,8 +7677,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05021",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10760,
     CustomerID : "MAISD",
@@ -8204,8 +7692,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10761,
     CustomerID : "RATTC",
@@ -8220,8 +7707,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10762,
     CustomerID : "FOLKO",
@@ -8236,8 +7722,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10763,
     CustomerID : "FOLIG",
@@ -8252,8 +7737,7 @@ var orders = [{
     ShipCity : "Lille",
     ShipRegion : "",
     ShipPostalCode : "59000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10764,
     CustomerID : "ERNSH",
@@ -8268,8 +7752,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10765,
     CustomerID : "QUICK",
@@ -8284,8 +7767,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10766,
     CustomerID : "OTTIK",
@@ -8300,8 +7782,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10767,
     CustomerID : "SUPRD",
@@ -8316,8 +7797,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10768,
     CustomerID : "AROUT",
@@ -8332,8 +7812,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10769,
     CustomerID : "VAFFE",
@@ -8348,8 +7827,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10770,
     CustomerID : "HANAR",
@@ -8364,8 +7842,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10771,
     CustomerID : "ERNSH",
@@ -8380,8 +7857,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10772,
     CustomerID : "LEHMS",
@@ -8396,8 +7872,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10773,
     CustomerID : "ERNSH",
@@ -8412,8 +7887,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10774,
     CustomerID : "FOLKO",
@@ -8428,8 +7902,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10775,
     CustomerID : "THECR",
@@ -8444,8 +7917,7 @@ var orders = [{
     ShipCity : "Butte",
     ShipRegion : "MT",
     ShipPostalCode : "59801",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10776,
     CustomerID : "ERNSH",
@@ -8460,8 +7932,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10777,
     CustomerID : "GOURL",
@@ -8476,8 +7947,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10778,
     CustomerID : "BERGS",
@@ -8492,8 +7962,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10779,
     CustomerID : "MORGK",
@@ -8508,8 +7977,7 @@ var orders = [{
     ShipCity : "Leipzig",
     ShipRegion : "",
     ShipPostalCode : "04179",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10780,
     CustomerID : "LILAS",
@@ -8524,8 +7992,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10781,
     CustomerID : "WARTH",
@@ -8540,8 +8007,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10782,
     CustomerID : "CACTU",
@@ -8556,8 +8022,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10783,
     CustomerID : "HANAR",
@@ -8572,8 +8037,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10784,
     CustomerID : "MAGAA",
@@ -8588,8 +8052,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10785,
     CustomerID : "GROSR",
@@ -8604,8 +8067,7 @@ var orders = [{
     ShipCity : "Caracas",
     ShipRegion : "DF",
     ShipPostalCode : "1081",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10786,
     CustomerID : "QUEEN",
@@ -8620,8 +8082,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10787,
     CustomerID : "LAMAI",
@@ -8636,8 +8097,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10788,
     CustomerID : "QUICK",
@@ -8652,8 +8112,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10789,
     CustomerID : "FOLIG",
@@ -8668,8 +8127,7 @@ var orders = [{
     ShipCity : "Lille",
     ShipRegion : "",
     ShipPostalCode : "59000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10790,
     CustomerID : "GOURL",
@@ -8684,8 +8142,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10791,
     CustomerID : "FRANK",
@@ -8700,8 +8157,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10792,
     CustomerID : "WOLZA",
@@ -8716,8 +8172,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 10793,
     CustomerID : "AROUT",
@@ -8732,8 +8187,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10794,
     CustomerID : "QUEDE",
@@ -8748,8 +8202,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10795,
     CustomerID : "ERNSH",
@@ -8764,8 +8217,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10796,
     CustomerID : "HILAA",
@@ -8780,8 +8232,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10797,
     CustomerID : "DRACD",
@@ -8796,8 +8247,7 @@ var orders = [{
     ShipCity : "Aachen",
     ShipRegion : "",
     ShipPostalCode : "52066",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10798,
     CustomerID : "ISLAT",
@@ -8812,8 +8262,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10799,
     CustomerID : "KOENE",
@@ -8828,8 +8277,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10800,
     CustomerID : "SEVES",
@@ -8844,8 +8292,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10801,
     CustomerID : "BOLID",
@@ -8860,8 +8307,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28023",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10802,
     CustomerID : "SIMOB",
@@ -8876,8 +8322,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10803,
     CustomerID : "WELLI",
@@ -8892,8 +8337,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10804,
     CustomerID : "SEVES",
@@ -8908,8 +8352,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10805,
     CustomerID : "THEBI",
@@ -8924,8 +8367,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97201",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10806,
     CustomerID : "VICTE",
@@ -8940,8 +8382,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10807,
     CustomerID : "FRANS",
@@ -8956,8 +8397,7 @@ var orders = [{
     ShipCity : "Torino",
     ShipRegion : "",
     ShipPostalCode : "10100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10808,
     CustomerID : "OLDWO",
@@ -8972,8 +8412,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10809,
     CustomerID : "WELLI",
@@ -8988,8 +8427,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10810,
     CustomerID : "LAUGB",
@@ -9004,8 +8442,7 @@ var orders = [{
     ShipCity : "Vancouver",
     ShipRegion : "BC",
     ShipPostalCode : "V3F 2K1",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10811,
     CustomerID : "LINOD",
@@ -9020,8 +8457,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10812,
     CustomerID : "REGGC",
@@ -9036,8 +8472,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10813,
     CustomerID : "RICAR",
@@ -9052,8 +8487,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10814,
     CustomerID : "VICTE",
@@ -9068,8 +8502,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10815,
     CustomerID : "SAVEA",
@@ -9084,8 +8517,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10816,
     CustomerID : "GREAL",
@@ -9100,8 +8532,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10817,
     CustomerID : "KOENE",
@@ -9116,8 +8547,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10818,
     CustomerID : "MAGAA",
@@ -9132,8 +8562,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10819,
     CustomerID : "CACTU",
@@ -9148,8 +8577,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10820,
     CustomerID : "RATTC",
@@ -9164,8 +8592,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10821,
     CustomerID : "SPLIR",
@@ -9180,8 +8607,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10822,
     CustomerID : "TRAIH",
@@ -9196,8 +8622,7 @@ var orders = [{
     ShipCity : "Kirkland",
     ShipRegion : "WA",
     ShipPostalCode : "98034",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10823,
     CustomerID : "LILAS",
@@ -9212,8 +8637,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10824,
     CustomerID : "FOLKO",
@@ -9228,8 +8652,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10825,
     CustomerID : "DRACD",
@@ -9244,8 +8667,7 @@ var orders = [{
     ShipCity : "Aachen",
     ShipRegion : "",
     ShipPostalCode : "52066",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10826,
     CustomerID : "BLONP",
@@ -9260,8 +8682,7 @@ var orders = [{
     ShipCity : "Strasbourg",
     ShipRegion : "",
     ShipPostalCode : "67000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10827,
     CustomerID : "BONAP",
@@ -9276,8 +8697,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10828,
     CustomerID : "RANCH",
@@ -9292,8 +8712,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10829,
     CustomerID : "ISLAT",
@@ -9308,8 +8727,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10830,
     CustomerID : "TRADH",
@@ -9324,8 +8742,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05634-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10831,
     CustomerID : "SANTG",
@@ -9340,8 +8757,7 @@ var orders = [{
     ShipCity : "Stavern",
     ShipRegion : "",
     ShipPostalCode : "4110",
-    ShipCountry : "Norway",
-
+    ShipCountry : "Norway"
 }, {
     OrderID : 10832,
     CustomerID : "LAMAI",
@@ -9356,8 +8772,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10833,
     CustomerID : "OTTIK",
@@ -9372,8 +8787,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10834,
     CustomerID : "TRADH",
@@ -9388,8 +8802,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05634-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10835,
     CustomerID : "ALFKI",
@@ -9404,8 +8817,7 @@ var orders = [{
     ShipCity : "Berlin",
     ShipRegion : "",
     ShipPostalCode : "12209",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10836,
     CustomerID : "ERNSH",
@@ -9420,8 +8832,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10837,
     CustomerID : "BERGS",
@@ -9436,8 +8847,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10838,
     CustomerID : "LINOD",
@@ -9452,8 +8862,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10839,
     CustomerID : "TRADH",
@@ -9468,8 +8877,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05634-030",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10840,
     CustomerID : "LINOD",
@@ -9484,8 +8892,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10841,
     CustomerID : "SUPRD",
@@ -9500,8 +8907,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10842,
     CustomerID : "TORTU",
@@ -9516,8 +8922,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10843,
     CustomerID : "VICTE",
@@ -9532,8 +8937,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10844,
     CustomerID : "PICCO",
@@ -9548,8 +8952,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10845,
     CustomerID : "QUICK",
@@ -9564,8 +8967,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10846,
     CustomerID : "SUPRD",
@@ -9580,8 +8982,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10847,
     CustomerID : "SAVEA",
@@ -9596,8 +8997,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10848,
     CustomerID : "CONSH",
@@ -9612,8 +9012,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX1 6LT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10849,
     CustomerID : "KOENE",
@@ -9628,8 +9027,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10850,
     CustomerID : "VICTE",
@@ -9644,8 +9042,7 @@ var orders = [{
     ShipCity : "Lyon",
     ShipRegion : "",
     ShipPostalCode : "69004",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10851,
     CustomerID : "RICAR",
@@ -9660,8 +9057,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10852,
     CustomerID : "RATTC",
@@ -9676,8 +9072,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10853,
     CustomerID : "BLAUS",
@@ -9692,8 +9087,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10854,
     CustomerID : "ERNSH",
@@ -9708,8 +9102,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10855,
     CustomerID : "OLDWO",
@@ -9724,8 +9117,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10856,
     CustomerID : "ANTON",
@@ -9740,8 +9132,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05023",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10857,
     CustomerID : "BERGS",
@@ -9756,8 +9147,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10858,
     CustomerID : "LACOR",
@@ -9772,8 +9162,7 @@ var orders = [{
     ShipCity : "Versailles",
     ShipRegion : "",
     ShipPostalCode : "78000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10859,
     CustomerID : "FRANK",
@@ -9788,8 +9177,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10860,
     CustomerID : "FRANR",
@@ -9804,8 +9192,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10861,
     CustomerID : "WHITC",
@@ -9820,8 +9207,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10862,
     CustomerID : "LEHMS",
@@ -9836,8 +9222,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10863,
     CustomerID : "HILAA",
@@ -9852,8 +9237,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10864,
     CustomerID : "AROUT",
@@ -9868,8 +9252,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10865,
     CustomerID : "QUICK",
@@ -9884,8 +9267,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10866,
     CustomerID : "BERGS",
@@ -9900,8 +9282,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10867,
     CustomerID : "LONEP",
@@ -9916,8 +9297,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10868,
     CustomerID : "QUEEN",
@@ -9932,8 +9312,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10869,
     CustomerID : "SEVES",
@@ -9948,8 +9327,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "OX15 4NB",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10870,
     CustomerID : "WOLZA",
@@ -9964,8 +9342,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 10871,
     CustomerID : "BONAP",
@@ -9980,8 +9357,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10872,
     CustomerID : "GODOS",
@@ -9996,8 +9372,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10873,
     CustomerID : "WILMK",
@@ -10012,8 +9387,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10874,
     CustomerID : "GODOS",
@@ -10028,8 +9402,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10875,
     CustomerID : "BERGS",
@@ -10044,8 +9417,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10876,
     CustomerID : "BONAP",
@@ -10060,8 +9432,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10877,
     CustomerID : "RICAR",
@@ -10076,8 +9447,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10878,
     CustomerID : "QUICK",
@@ -10092,8 +9462,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10879,
     CustomerID : "WILMK",
@@ -10108,8 +9477,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10880,
     CustomerID : "FOLKO",
@@ -10124,8 +9492,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10881,
     CustomerID : "CACTU",
@@ -10140,8 +9507,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10882,
     CustomerID : "SAVEA",
@@ -10156,8 +9522,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10883,
     CustomerID : "LONEP",
@@ -10172,8 +9537,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10884,
     CustomerID : "LETSS",
@@ -10188,8 +9552,7 @@ var orders = [{
     ShipCity : "San Francisco",
     ShipRegion : "CA",
     ShipPostalCode : "94117",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10885,
     CustomerID : "SUPRD",
@@ -10204,8 +9567,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10886,
     CustomerID : "HANAR",
@@ -10220,8 +9582,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10887,
     CustomerID : "GALED",
@@ -10236,8 +9597,7 @@ var orders = [{
     ShipCity : "Barcelona",
     ShipRegion : "",
     ShipPostalCode : "8022",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10888,
     CustomerID : "GODOS",
@@ -10252,8 +9612,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10889,
     CustomerID : "RATTC",
@@ -10268,8 +9627,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10890,
     CustomerID : "DUMON",
@@ -10284,8 +9642,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10891,
     CustomerID : "LEHMS",
@@ -10300,8 +9657,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10892,
     CustomerID : "MAISD",
@@ -10316,8 +9672,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10893,
     CustomerID : "KOENE",
@@ -10332,8 +9687,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10894,
     CustomerID : "SAVEA",
@@ -10348,8 +9702,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10895,
     CustomerID : "ERNSH",
@@ -10364,8 +9717,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10896,
     CustomerID : "MAISD",
@@ -10380,8 +9732,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10897,
     CustomerID : "HUNGO",
@@ -10396,8 +9747,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10898,
     CustomerID : "OCEAN",
@@ -10412,8 +9762,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10899,
     CustomerID : "LILAS",
@@ -10428,8 +9777,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10900,
     CustomerID : "WELLI",
@@ -10444,8 +9792,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10901,
     CustomerID : "HILAA",
@@ -10460,8 +9807,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10902,
     CustomerID : "FOLKO",
@@ -10476,8 +9822,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10903,
     CustomerID : "HANAR",
@@ -10492,8 +9837,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10904,
     CustomerID : "WHITC",
@@ -10508,8 +9852,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10905,
     CustomerID : "WELLI",
@@ -10524,8 +9867,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10906,
     CustomerID : "WOLZA",
@@ -10540,8 +9882,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 10907,
     CustomerID : "SPECD",
@@ -10556,8 +9897,7 @@ var orders = [{
     ShipCity : "Paris",
     ShipRegion : "",
     ShipPostalCode : "75016",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10908,
     CustomerID : "REGGC",
@@ -10572,8 +9912,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10909,
     CustomerID : "SANTG",
@@ -10588,8 +9927,7 @@ var orders = [{
     ShipCity : "Stavern",
     ShipRegion : "",
     ShipPostalCode : "4110",
-    ShipCountry : "Norway",
-
+    ShipCountry : "Norway"
 }, {
     OrderID : 10910,
     CustomerID : "WILMK",
@@ -10604,8 +9942,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 10911,
     CustomerID : "GODOS",
@@ -10620,8 +9957,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10912,
     CustomerID : "HUNGO",
@@ -10636,8 +9972,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10913,
     CustomerID : "QUEEN",
@@ -10652,8 +9987,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10914,
     CustomerID : "QUEEN",
@@ -10668,8 +10002,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10915,
     CustomerID : "TORTU",
@@ -10684,8 +10017,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10916,
     CustomerID : "RANCH",
@@ -10700,8 +10032,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10917,
     CustomerID : "ROMEY",
@@ -10716,8 +10047,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28001",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10918,
     CustomerID : "BOTTM",
@@ -10732,8 +10062,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10919,
     CustomerID : "LINOD",
@@ -10748,8 +10077,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10920,
     CustomerID : "AROUT",
@@ -10764,8 +10092,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10921,
     CustomerID : "VAFFE",
@@ -10780,8 +10107,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10922,
     CustomerID : "HANAR",
@@ -10796,8 +10122,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10923,
     CustomerID : "LAMAI",
@@ -10812,8 +10137,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10924,
     CustomerID : "BERGS",
@@ -10828,8 +10152,7 @@ var orders = [{
     ShipCity : "Luleå",
     ShipRegion : "",
     ShipPostalCode : "S-958 22",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10925,
     CustomerID : "HANAR",
@@ -10844,8 +10167,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10926,
     CustomerID : "ANATR",
@@ -10860,8 +10182,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05021",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10927,
     CustomerID : "LACOR",
@@ -10876,8 +10197,7 @@ var orders = [{
     ShipCity : "Versailles",
     ShipRegion : "",
     ShipPostalCode : "78000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10928,
     CustomerID : "GALED",
@@ -10892,8 +10212,7 @@ var orders = [{
     ShipCity : "Barcelona",
     ShipRegion : "",
     ShipPostalCode : "8022",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10929,
     CustomerID : "FRANK",
@@ -10908,8 +10227,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10930,
     CustomerID : "SUPRD",
@@ -10924,8 +10242,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10931,
     CustomerID : "RICSU",
@@ -10940,8 +10257,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10932,
     CustomerID : "BONAP",
@@ -10956,8 +10272,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10933,
     CustomerID : "ISLAT",
@@ -10972,8 +10287,7 @@ var orders = [{
     ShipCity : "Cowes",
     ShipRegion : "Isle of Wight",
     ShipPostalCode : "PO31 7PJ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10934,
     CustomerID : "LEHMS",
@@ -10988,8 +10302,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10935,
     CustomerID : "WELLI",
@@ -11004,8 +10317,7 @@ var orders = [{
     ShipCity : "Resende",
     ShipRegion : "SP",
     ShipPostalCode : "08737-363",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10936,
     CustomerID : "GREAL",
@@ -11020,8 +10332,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10937,
     CustomerID : "CACTU",
@@ -11036,8 +10347,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10938,
     CustomerID : "QUICK",
@@ -11052,8 +10362,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10939,
     CustomerID : "MAGAA",
@@ -11068,8 +10377,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10940,
     CustomerID : "BONAP",
@@ -11084,8 +10392,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10941,
     CustomerID : "SAVEA",
@@ -11100,8 +10407,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10942,
     CustomerID : "REGGC",
@@ -11116,8 +10422,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10943,
     CustomerID : "BSBEV",
@@ -11132,8 +10437,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10944,
     CustomerID : "BOTTM",
@@ -11148,8 +10452,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10945,
     CustomerID : "MORGK",
@@ -11164,8 +10467,7 @@ var orders = [{
     ShipCity : "Leipzig",
     ShipRegion : "",
     ShipPostalCode : "04179",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10946,
     CustomerID : "VAFFE",
@@ -11180,8 +10482,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10947,
     CustomerID : "BSBEV",
@@ -11196,8 +10497,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10948,
     CustomerID : "GODOS",
@@ -11212,8 +10512,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10949,
     CustomerID : "BOTTM",
@@ -11228,8 +10527,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10950,
     CustomerID : "MAGAA",
@@ -11244,8 +10542,7 @@ var orders = [{
     ShipCity : "Bergamo",
     ShipRegion : "",
     ShipPostalCode : "24100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 10951,
     CustomerID : "RICSU",
@@ -11260,8 +10557,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10952,
     CustomerID : "ALFKI",
@@ -11276,8 +10572,7 @@ var orders = [{
     ShipCity : "Berlin",
     ShipRegion : "",
     ShipPostalCode : "12209",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10953,
     CustomerID : "AROUT",
@@ -11292,8 +10587,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10954,
     CustomerID : "LINOD",
@@ -11308,8 +10602,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10955,
     CustomerID : "FOLKO",
@@ -11324,8 +10617,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10956,
     CustomerID : "BLAUS",
@@ -11340,8 +10632,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10957,
     CustomerID : "HILAA",
@@ -11356,8 +10647,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10958,
     CustomerID : "OCEAN",
@@ -11372,8 +10662,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10959,
     CustomerID : "GOURL",
@@ -11388,8 +10677,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10960,
     CustomerID : "HILAA",
@@ -11404,8 +10692,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10961,
     CustomerID : "QUEEN",
@@ -11420,8 +10707,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10962,
     CustomerID : "QUICK",
@@ -11436,8 +10722,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10963,
     CustomerID : "FURIB",
@@ -11452,8 +10737,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1675",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 10964,
     CustomerID : "SPECD",
@@ -11468,8 +10752,7 @@ var orders = [{
     ShipCity : "Paris",
     ShipRegion : "",
     ShipPostalCode : "75016",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10965,
     CustomerID : "OLDWO",
@@ -11484,8 +10767,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10966,
     CustomerID : "CHOPS",
@@ -11500,8 +10782,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 10967,
     CustomerID : "TOMSP",
@@ -11516,8 +10797,7 @@ var orders = [{
     ShipCity : "Münster",
     ShipRegion : "",
     ShipPostalCode : "44087",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10968,
     CustomerID : "ERNSH",
@@ -11532,8 +10812,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10969,
     CustomerID : "COMMI",
@@ -11548,8 +10827,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05432-043",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10970,
     CustomerID : "BOLID",
@@ -11564,8 +10842,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28023",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 10971,
     CustomerID : "FRANR",
@@ -11580,8 +10857,7 @@ var orders = [{
     ShipCity : "Nantes",
     ShipRegion : "",
     ShipPostalCode : "44000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10972,
     CustomerID : "LACOR",
@@ -11596,8 +10872,7 @@ var orders = [{
     ShipCity : "Versailles",
     ShipRegion : "",
     ShipPostalCode : "78000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10973,
     CustomerID : "LACOR",
@@ -11612,8 +10887,7 @@ var orders = [{
     ShipCity : "Versailles",
     ShipRegion : "",
     ShipPostalCode : "78000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 10974,
     CustomerID : "SPLIR",
@@ -11628,8 +10902,7 @@ var orders = [{
     ShipCity : "Lander",
     ShipRegion : "WY",
     ShipPostalCode : "82520",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10975,
     CustomerID : "BOTTM",
@@ -11644,8 +10917,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10976,
     CustomerID : "HILAA",
@@ -11660,8 +10932,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10977,
     CustomerID : "FOLKO",
@@ -11676,8 +10947,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10978,
     CustomerID : "MAISD",
@@ -11692,8 +10962,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 10979,
     CustomerID : "ERNSH",
@@ -11708,8 +10977,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10980,
     CustomerID : "FOLKO",
@@ -11724,8 +10992,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10981,
     CustomerID : "HANAR",
@@ -11740,8 +11007,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10982,
     CustomerID : "BOTTM",
@@ -11756,8 +11022,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 10983,
     CustomerID : "SAVEA",
@@ -11772,8 +11037,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10984,
     CustomerID : "SAVEA",
@@ -11788,8 +11052,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10985,
     CustomerID : "HUNGO",
@@ -11804,8 +11067,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 10986,
     CustomerID : "OCEAN",
@@ -11820,8 +11082,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 10987,
     CustomerID : "EASTC",
@@ -11836,8 +11097,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 10988,
     CustomerID : "RATTC",
@@ -11852,8 +11112,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10989,
     CustomerID : "QUEDE",
@@ -11868,8 +11127,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-673",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 10990,
     CustomerID : "ERNSH",
@@ -11884,8 +11142,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 10991,
     CustomerID : "QUICK",
@@ -11900,8 +11157,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10992,
     CustomerID : "THEBI",
@@ -11916,8 +11172,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97201",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 10993,
     CustomerID : "FOLKO",
@@ -11932,8 +11187,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 10994,
     CustomerID : "VAFFE",
@@ -11948,8 +11202,7 @@ var orders = [{
     ShipCity : "Århus",
     ShipRegion : "",
     ShipPostalCode : "8200",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 10995,
     CustomerID : "PERIC",
@@ -11964,8 +11217,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 10996,
     CustomerID : "QUICK",
@@ -11980,8 +11232,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 10997,
     CustomerID : "LILAS",
@@ -11996,8 +11247,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 10998,
     CustomerID : "WOLZA",
@@ -12012,8 +11262,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 10999,
     CustomerID : "OTTIK",
@@ -12028,8 +11277,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11000,
     CustomerID : "RATTC",
@@ -12044,8 +11292,7 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11001,
     CustomerID : "FOLKO",
@@ -12060,8 +11307,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 11002,
     CustomerID : "SAVEA",
@@ -12076,8 +11322,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11003,
     CustomerID : "THECR",
@@ -12092,8 +11337,7 @@ var orders = [{
     ShipCity : "Butte",
     ShipRegion : "MT",
     ShipPostalCode : "59801",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11004,
     CustomerID : "MAISD",
@@ -12108,8 +11352,7 @@ var orders = [{
     ShipCity : "Bruxelles",
     ShipRegion : "",
     ShipPostalCode : "B-1180",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 11005,
     CustomerID : "WILMK",
@@ -12124,8 +11367,7 @@ var orders = [{
     ShipCity : "Helsinki",
     ShipRegion : "",
     ShipPostalCode : "21240",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 11006,
     CustomerID : "GREAL",
@@ -12140,8 +11382,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11007,
     CustomerID : "PRINI",
@@ -12156,8 +11397,7 @@ var orders = [{
     ShipCity : "Lisboa",
     ShipRegion : "",
     ShipPostalCode : "1756",
-    ShipCountry : "Portugal",
-
+    ShipCountry : "Portugal"
 }, {
     OrderID : 11008,
     CustomerID : "ERNSH",
@@ -12172,8 +11412,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 11009,
     CustomerID : "GODOS",
@@ -12188,8 +11427,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 11010,
     CustomerID : "REGGC",
@@ -12204,8 +11442,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 11011,
     CustomerID : "ALFKI",
@@ -12220,8 +11457,7 @@ var orders = [{
     ShipCity : "Berlin",
     ShipRegion : "",
     ShipPostalCode : "12209",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11012,
     CustomerID : "FRANK",
@@ -12236,8 +11472,7 @@ var orders = [{
     ShipCity : "München",
     ShipRegion : "",
     ShipPostalCode : "80805",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11013,
     CustomerID : "ROMEY",
@@ -12252,8 +11487,7 @@ var orders = [{
     ShipCity : "Madrid",
     ShipRegion : "",
     ShipPostalCode : "28001",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 11014,
     CustomerID : "LINOD",
@@ -12268,8 +11502,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 11015,
     CustomerID : "SANTG",
@@ -12284,8 +11517,7 @@ var orders = [{
     ShipCity : "Stavern",
     ShipRegion : "",
     ShipPostalCode : "4110",
-    ShipCountry : "Norway",
-
+    ShipCountry : "Norway"
 }, {
     OrderID : 11016,
     CustomerID : "AROUT",
@@ -12300,8 +11532,7 @@ var orders = [{
     ShipCity : "Colchester",
     ShipRegion : "Essex",
     ShipPostalCode : "CO7 6JX",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 11017,
     CustomerID : "ERNSH",
@@ -12316,8 +11547,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 11018,
     CustomerID : "LONEP",
@@ -12332,8 +11562,7 @@ var orders = [{
     ShipCity : "Portland",
     ShipRegion : "OR",
     ShipPostalCode : "97219",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11019,
     CustomerID : "RANCH",
@@ -12348,8 +11577,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 11020,
     CustomerID : "OTTIK",
@@ -12364,8 +11592,7 @@ var orders = [{
     ShipCity : "Köln",
     ShipRegion : "",
     ShipPostalCode : "50739",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11021,
     CustomerID : "QUICK",
@@ -12380,8 +11607,7 @@ var orders = [{
     ShipCity : "Cunewalde",
     ShipRegion : "",
     ShipPostalCode : "01307",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11022,
     CustomerID : "HANAR",
@@ -12396,8 +11622,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 11023,
     CustomerID : "BSBEV",
@@ -12412,8 +11637,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "EC2 5NT",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 11024,
     CustomerID : "EASTC",
@@ -12428,8 +11652,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 11025,
     CustomerID : "WARTH",
@@ -12444,8 +11667,7 @@ var orders = [{
     ShipCity : "Oulu",
     ShipRegion : "",
     ShipPostalCode : "90110",
-    ShipCountry : "Finland",
-
+    ShipCountry : "Finland"
 }, {
     OrderID : 11026,
     CustomerID : "FRANS",
@@ -12460,8 +11682,7 @@ var orders = [{
     ShipCity : "Torino",
     ShipRegion : "",
     ShipPostalCode : "10100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 11027,
     CustomerID : "BOTTM",
@@ -12476,8 +11697,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 11028,
     CustomerID : "KOENE",
@@ -12492,8 +11712,7 @@ var orders = [{
     ShipCity : "Brandenburg",
     ShipRegion : "",
     ShipPostalCode : "14776",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11029,
     CustomerID : "CHOPS",
@@ -12508,8 +11727,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 11030,
     CustomerID : "SAVEA",
@@ -12524,8 +11742,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11031,
     CustomerID : "SAVEA",
@@ -12540,8 +11757,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11032,
     CustomerID : "WHITC",
@@ -12556,8 +11772,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11033,
     CustomerID : "RICSU",
@@ -12572,8 +11787,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 11034,
     CustomerID : "OLDWO",
@@ -12588,8 +11802,7 @@ var orders = [{
     ShipCity : "Anchorage",
     ShipRegion : "AK",
     ShipPostalCode : "99508",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11035,
     CustomerID : "SUPRD",
@@ -12604,8 +11817,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 11036,
     CustomerID : "DRACD",
@@ -12620,8 +11832,7 @@ var orders = [{
     ShipCity : "Aachen",
     ShipRegion : "",
     ShipPostalCode : "52066",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11037,
     CustomerID : "GODOS",
@@ -12636,8 +11847,7 @@ var orders = [{
     ShipCity : "Sevilla",
     ShipRegion : "",
     ShipPostalCode : "41101",
-    ShipCountry : "Spain",
-
+    ShipCountry : "Spain"
 }, {
     OrderID : 11038,
     CustomerID : "SUPRD",
@@ -12652,8 +11862,7 @@ var orders = [{
     ShipCity : "Charleroi",
     ShipRegion : "",
     ShipPostalCode : "B-6000",
-    ShipCountry : "Belgium",
-
+    ShipCountry : "Belgium"
 }, {
     OrderID : 11039,
     CustomerID : "LINOD",
@@ -12668,8 +11877,7 @@ var orders = [{
     ShipCity : "I. de Margarita",
     ShipRegion : "Nueva Esparta",
     ShipPostalCode : "4980",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 11040,
     CustomerID : "GREAL",
@@ -12684,8 +11892,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11041,
     CustomerID : "CHOPS",
@@ -12700,8 +11907,7 @@ var orders = [{
     ShipCity : "Bern",
     ShipRegion : "",
     ShipPostalCode : "3012",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 11042,
     CustomerID : "COMMI",
@@ -12716,8 +11922,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05432-043",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 11043,
     CustomerID : "SPECD",
@@ -12732,8 +11937,7 @@ var orders = [{
     ShipCity : "Paris",
     ShipRegion : "",
     ShipPostalCode : "75016",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 11044,
     CustomerID : "WOLZA",
@@ -12748,8 +11952,7 @@ var orders = [{
     ShipCity : "Warszawa",
     ShipRegion : "",
     ShipPostalCode : "01-012",
-    ShipCountry : "Poland",
-
+    ShipCountry : "Poland"
 }, {
     OrderID : 11045,
     CustomerID : "BOTTM",
@@ -12764,8 +11967,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 11046,
     CustomerID : "WANDK",
@@ -12780,8 +11982,7 @@ var orders = [{
     ShipCity : "Stuttgart",
     ShipRegion : "",
     ShipPostalCode : "70563",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11047,
     CustomerID : "EASTC",
@@ -12796,8 +11997,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 11048,
     CustomerID : "BOTTM",
@@ -12812,8 +12012,7 @@ var orders = [{
     ShipCity : "Tsawassen",
     ShipRegion : "BC",
     ShipPostalCode : "T2F 8M4",
-    ShipCountry : "Canada",
-
+    ShipCountry : "Canada"
 }, {
     OrderID : 11049,
     CustomerID : "GOURL",
@@ -12828,8 +12027,7 @@ var orders = [{
     ShipCity : "Campinas",
     ShipRegion : "SP",
     ShipPostalCode : "04876-786",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 11050,
     CustomerID : "FOLKO",
@@ -12844,8 +12042,7 @@ var orders = [{
     ShipCity : "Bräcke",
     ShipRegion : "",
     ShipPostalCode : "S-844 67",
-    ShipCountry : "Sweden",
-
+    ShipCountry : "Sweden"
 }, {
     OrderID : 11051,
     CustomerID : "LAMAI",
@@ -12860,8 +12057,7 @@ var orders = [{
     ShipCity : "Toulouse",
     ShipRegion : "",
     ShipPostalCode : "31000",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 11052,
     CustomerID : "HANAR",
@@ -12876,8 +12072,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "05454-876",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 11053,
     CustomerID : "PICCO",
@@ -12892,8 +12087,7 @@ var orders = [{
     ShipCity : "Salzburg",
     ShipRegion : "",
     ShipPostalCode : "5020",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 11054,
     CustomerID : "CACTU",
@@ -12908,8 +12102,7 @@ var orders = [{
     ShipCity : "Buenos Aires",
     ShipRegion : "",
     ShipPostalCode : "1010",
-    ShipCountry : "Argentina",
-
+    ShipCountry : "Argentina"
 }, {
     OrderID : 11055,
     CustomerID : "HILAA",
@@ -12924,8 +12117,7 @@ var orders = [{
     ShipCity : "San Cristóbal",
     ShipRegion : "Táchira",
     ShipPostalCode : "5022",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 11056,
     CustomerID : "EASTC",
@@ -12940,8 +12132,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "WX3 6FW",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 11057,
     CustomerID : "NORTS",
@@ -12956,8 +12147,7 @@ var orders = [{
     ShipCity : "London",
     ShipRegion : "",
     ShipPostalCode : "SW7 1RZ",
-    ShipCountry : "UK",
-
+    ShipCountry : "UK"
 }, {
     OrderID : 11058,
     CustomerID : "BLAUS",
@@ -12972,8 +12162,7 @@ var orders = [{
     ShipCity : "Mannheim",
     ShipRegion : "",
     ShipPostalCode : "68306",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11059,
     CustomerID : "RICAR",
@@ -12988,8 +12177,7 @@ var orders = [{
     ShipCity : "Rio de Janeiro",
     ShipRegion : "RJ",
     ShipPostalCode : "02389-890",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 11060,
     CustomerID : "FRANS",
@@ -13004,8 +12192,7 @@ var orders = [{
     ShipCity : "Torino",
     ShipRegion : "",
     ShipPostalCode : "10100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 11061,
     CustomerID : "GREAL",
@@ -13020,8 +12207,7 @@ var orders = [{
     ShipCity : "Eugene",
     ShipRegion : "OR",
     ShipPostalCode : "97403",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11062,
     CustomerID : "REGGC",
@@ -13036,8 +12222,7 @@ var orders = [{
     ShipCity : "Reggio Emilia",
     ShipRegion : "",
     ShipPostalCode : "42100",
-    ShipCountry : "Italy",
-
+    ShipCountry : "Italy"
 }, {
     OrderID : 11063,
     CustomerID : "HUNGO",
@@ -13052,8 +12237,7 @@ var orders = [{
     ShipCity : "Cork",
     ShipRegion : "Co. Cork",
     ShipPostalCode : "",
-    ShipCountry : "Ireland",
-
+    ShipCountry : "Ireland"
 }, {
     OrderID : 11064,
     CustomerID : "SAVEA",
@@ -13068,8 +12252,7 @@ var orders = [{
     ShipCity : "Boise",
     ShipRegion : "ID",
     ShipPostalCode : "83720",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11065,
     CustomerID : "LILAS",
@@ -13084,8 +12267,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 11066,
     CustomerID : "WHITC",
@@ -13100,8 +12282,7 @@ var orders = [{
     ShipCity : "Seattle",
     ShipRegion : "WA",
     ShipPostalCode : "98124",
-    ShipCountry : "USA",
-
+    ShipCountry : "USA"
 }, {
     OrderID : 11067,
     CustomerID : "DRACD",
@@ -13116,8 +12297,7 @@ var orders = [{
     ShipCity : "Aachen",
     ShipRegion : "",
     ShipPostalCode : "52066",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11068,
     CustomerID : "QUEEN",
@@ -13132,8 +12312,7 @@ var orders = [{
     ShipCity : "Sao Paulo",
     ShipRegion : "SP",
     ShipPostalCode : "05487-020",
-    ShipCountry : "Brazil",
-
+    ShipCountry : "Brazil"
 }, {
     OrderID : 11069,
     CustomerID : "TORTU",
@@ -13148,8 +12327,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 11070,
     CustomerID : "LEHMS",
@@ -13164,8 +12342,7 @@ var orders = [{
     ShipCity : "Frankfurt a.M.",
     ShipRegion : "",
     ShipPostalCode : "60528",
-    ShipCountry : "Germany",
-
+    ShipCountry : "Germany"
 }, {
     OrderID : 11071,
     CustomerID : "LILAS",
@@ -13180,8 +12357,7 @@ var orders = [{
     ShipCity : "Barquisimeto",
     ShipRegion : "Lara",
     ShipPostalCode : "3508",
-    ShipCountry : "Venezuela",
-
+    ShipCountry : "Venezuela"
 }, {
     OrderID : 11072,
     CustomerID : "ERNSH",
@@ -13196,8 +12372,7 @@ var orders = [{
     ShipCity : "Graz",
     ShipRegion : "",
     ShipPostalCode : "8010",
-    ShipCountry : "Austria",
-
+    ShipCountry : "Austria"
 }, {
     OrderID : 11073,
     CustomerID : "PERIC",
@@ -13212,8 +12387,7 @@ var orders = [{
     ShipCity : "México D.F.",
     ShipRegion : "",
     ShipPostalCode : "05033",
-    ShipCountry : "Mexico",
-
+    ShipCountry : "Mexico"
 }, {
     OrderID : 11074,
     CustomerID : "SIMOB",
@@ -13228,8 +12402,7 @@ var orders = [{
     ShipCity : "Kobenhavn",
     ShipRegion : "",
     ShipPostalCode : "1734",
-    ShipCountry : "Denmark",
-
+    ShipCountry : "Denmark"
 }, {
     OrderID : 11075,
     CustomerID : "RICSU",
@@ -13244,8 +12417,7 @@ var orders = [{
     ShipCity : "Genève",
     ShipRegion : "",
     ShipPostalCode : "1204",
-    ShipCountry : "Switzerland",
-
+    ShipCountry : "Switzerland"
 }, {
     OrderID : 11076,
     CustomerID : "BONAP",
@@ -13260,8 +12432,7 @@ var orders = [{
     ShipCity : "Marseille",
     ShipRegion : "",
     ShipPostalCode : "13008",
-    ShipCountry : "France",
-
+    ShipCountry : "France"
 }, {
     OrderID : 11077,
     CustomerID : "RATTC",
@@ -13276,5 +12447,5 @@ var orders = [{
     ShipCity : "Albuquerque",
     ShipRegion : "NM",
     ShipPostalCode : "87110",
-    ShipCountry : "USA",
+    ShipCountry : "USA"
 }];
