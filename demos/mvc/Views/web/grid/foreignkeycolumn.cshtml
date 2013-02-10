@@ -1,39 +1,8 @@
+        <script src="../../content/shared/js/products.js" type="text/javascript"></script>
         <div id="example" class="k-content">
             <div id="grid"></div>
 
-            <script>
-                var products = [ {
-                    "ProductID": 1,
-                        "ProductName": "Chai",
-                        "CategoryID": 1,
-                        "UnitPrice": "18.00"
-                }, {
-                    "ProductID": 2,
-                        "ProductName": "Chang",
-                        "CategoryID": 1,
-                        "UnitPrice": "19.00"
-                }, {
-                    "ProductID": 3,
-                        "ProductName": "Aniseed Syrup",
-                        "CategoryID": 2,
-                        "UnitPrice": "10.00"
-                }, {
-                    "ProductID": 4,
-                        "ProductName": "Chef Anton's Cajun Seasoning",
-                        "CategoryID": 2,
-                        "UnitPrice": "22.00"
-                }, {
-                    "ProductID": 5,
-                        "ProductName": "Chef Anton's Gumbo Mix",
-                        "CategoryID": 2,
-                        "UnitPrice": "21.35"
-                }, {
-                    "ProductID": 6,
-                        "ProductName": "Grandma's Boysenberry Spread",
-                        "CategoryID": 2,
-                        "UnitPrice": "25.00"
-                }];
-
+            <script>               
                 var categories = [{
                     "value": 1,
                     "text": "Beverages"
@@ -62,33 +31,34 @@
 
                 $(document).ready(function () {
                     var dataSource = new kendo.data.DataSource({
-                       pageSize: 30,
-                       data: products,
-                       autoSync: true,
-                       schema: {
-                           model: {
-                             id: "ProductID",
-                             fields: {
-                                ProductID: { editable: false, nullable: true },
-                                ProductName: { validation: { required: true } },
-                                CategoryID: { field: "CategoryID", type: "number", defaultValue: 1 },
-                                UnitPrice: { type: "number", validation: { required: true, min: 1} }
-                             }
-                           }
-                       }
+                        pageSize: 20,
+                        data: products,
+                        autoSync: true,
+                        schema: {
+                            model: {
+                                id: "ProductID",
+                                fields: {
+                                    ProductID: { editable: false, nullable: true },
+                                    ProductName: { validation: { required: true} },
+                                    CategoryID: { field: "CategoryID", type: "number", defaultValue: 1 },
+                                    UnitPrice: { type: "number", validation: { required: true, min: 1} }
+                                }
+                            }
+                        }
                     });
 
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
                         filterable: true,
-                        scrollable: false,
-                        toolbar: ["create"],
                         groupable: true,
+                        pageable: true,
+                        height: 430,
+                        toolbar: ["create"],
                         columns: [
-                            { field:"ProductName",title:"Product Name" },
+                            { field: "ProductName", title: "Product Name" },
                             { field: "CategoryID", width: "150px", values: categories, title: "Category" },
-                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "150px" },
-                            { command: "destroy", title: " ", width: "110px" }],
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "150px" },
+                            { command: "destroy", title: " ", width: "110px"}],
                         editable: true
                     });
                 });

@@ -59,7 +59,7 @@ namespace Kendo.Mvc.Examples.Models
 
         public int CategoryID { get; set; }
 
-        [UIHint("ClientCategory"), Required]
+        [UIHint("ClientCategory")]
         public ClientCategoryViewModel Category { get; set; }
     }
 }

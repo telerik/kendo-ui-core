@@ -572,6 +572,7 @@
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\String.ascx" />
     <Content Include="Views\The-views-are-in-the-Areas-folder.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -596,6 +597,7 @@
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
