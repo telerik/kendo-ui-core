@@ -624,8 +624,7 @@
                     "text": "Sorting",
                     "url": "grid/sorting.html",
                     "title": "Demo for the sorting functionality of Kendo UI Grid control",
-                    "meta": "This example demonstrates how to sort the data in KendoGrid. Use the demo source code to look into the logic of the grid sorting and implement it easily in your app.",
-                    "packages": ["!mvc"]
+                    "meta": "This example demonstrates how to sort the data in KendoGrid. Use the demo source code to look into the logic of the grid sorting and implement it easily in your app."
                 },
                 {
                     "text": "Selection",

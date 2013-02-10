@@ -270,10 +270,13 @@
     <Content Include="content\shared\images\patterns\pattern9.png" />
     <Content Include="content\shared\images\people\1.jpg" />
     <Content Include="content\shared\js\console.js" />
+    <Content Include="content\shared\js\employees.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\less.js" />
+    <Content Include="content\shared\js\orders.js" />
     <Content Include="content\shared\js\people.js" />
     <Content Include="content\shared\js\prettify.js" />
+    <Content Include="content\shared\js\products.js" />
     <Content Include="content\shared\styles\aeroviewr.png" />
     <Content Include="content\shared\styles\bg-glossy.png" />
     <Content Include="content\shared\styles\blackberrySkin.png" />
