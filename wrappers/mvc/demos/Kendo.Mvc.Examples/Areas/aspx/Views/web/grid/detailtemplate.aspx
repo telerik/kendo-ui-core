@@ -70,21 +70,30 @@
             this.expandRow(this.tbody.find("tr.k-master-row").first());
         }
     </script>
-</asp:Content>
 
-<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
     <style scoped="scoped">
-	    .employee-details ul
+        .k-detail-cell .k-tabstrip .k-content {
+            padding: 0.2em;
+        }
+        .employee-details ul
         {
             list-style:none;
             font-style:italic;
-            margin-bottom: 20px;
+            margin: 15px;
+            padding: 0;
+        }
+        .employee-details ul li
+        {
+            margin: 0;
+            line-height: 1.7em;
         }
 
         .employee-details label
         {
             display:inline-block;
             width:90px;
+            padding-right: 10px;
+            text-align: right;
             font-style:normal;
             font-weight:bold;
         }
