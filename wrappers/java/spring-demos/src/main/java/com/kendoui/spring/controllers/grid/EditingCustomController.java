@@ -2,7 +2,6 @@ package com.kendoui.spring.controllers.grid;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
