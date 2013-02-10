@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
+import com.kendoui.spring.models.OrderDao;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-selection-controller")
 @RequestMapping(value="/web/grid/")
 public class SelectionController {
     @Autowired 
-    private ProductDao product;
+    private OrderDao order;
 
     @RequestMapping(value = "/selection", method = RequestMethod.GET)
     public String index() {
@@ -25,6 +26,6 @@ public class SelectionController {
     @RequestMapping(value = "/selection/read", method = RequestMethod.POST)
     public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
 
-        return product.getList(request);
+        return order.getList(request);
     }
 }

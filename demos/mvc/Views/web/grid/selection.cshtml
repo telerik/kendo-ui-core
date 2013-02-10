@@ -1,4 +1,4 @@
-        <script src="../../content/shared/js/people.js"></script>
+        <script src="../../content/shared/js/orders.js"></script>
 
         <div id="example" class="k-content">
 
@@ -13,56 +13,61 @@
             </div>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     $("#rowSelection").kendoGrid({
                         dataSource: {
-                            data: createRandomData(20),
+                            data: orders,
                             pageSize: 5
                         },
                         selectable: "multiple",
-                        pageable: true,
+                        pageable: {
+                            buttonCount: 5
+                        },
                         scrollable: false,
                         navigatable: true,
                         columns: [
                             {
-                                field: "FirstName",
-                                title: "First Name",
+                                field: "ShipCountry",
+                                title: "Ship Country",
                                 width: 200
                             },
                             {
-                                field: "LastName",
-                                title: "Last Name",
+                                field: "Freight",
                                 width: 200
                             },
                             {
-                                field: "Age"
+                                field: "OrderDate",
+                                title: "Order Date",
+                                format: "{0:dd/MM/yyyy}"
                             }
                         ]
                     });
 
                     $("#cellSelection").kendoGrid({
                         dataSource: {
-                            data: createRandomData(20),
+                            data: orders,
                             pageSize: 5
                         },
                         selectable: "multiple cell",
-                        pageable: true,
+                        pageable: {
+                            buttonCount: 5
+                        },
                         scrollable: false,
                         navigatable: true,
                         columns: [
                             {
-                                field: "FirstName",
-                                title: "First Name",
+                                field: "ShipCountry",
+                                title: "Ship Country",
                                 width: 200
                             },
                             {
-                                field: "LastName",
-                                title: "Last Name",
+                                field: "Freight",
                                 width: 200
                             },
                             {
-                                field: "Age",
-                                title: "Age"
+                                field: "OrderDate",
+                                title: "Order Date",
+                                format: "{0:dd/MM/yyyy}"
                             }
                         ]
                     });
