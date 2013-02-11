@@ -2295,7 +2295,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barClick(function(e) {
-                        equals(e.element.attr("id") || e.element.data("id"), bar.options.id);
+                        equals(e.element[0], getElement(bar.options.id));
                     });
                 });
 
@@ -2351,7 +2351,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barHover(function(e) {
-                        equals(e.element.attr("id") || e.element.data("id"), bar.options.id);
+                        equals(e.element[0], getElement(bar.options.id));
                     });
                 });
 
