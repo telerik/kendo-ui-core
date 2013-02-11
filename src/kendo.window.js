@@ -159,8 +159,6 @@
                 that.refresh(content);
             }
 
-            that.toFront();
-
             windowContent = wrapper.children(KWINDOWCONTENT);
             that._tabindex(windowContent);
 
@@ -218,7 +216,7 @@
             $(window).on("resize", that._resizeHandler);
 
             if (options.visible) {
-                that.element.focus();
+                that.toFront();
                 that.trigger(OPEN);
                 that.trigger(ACTIVATE);
             }
