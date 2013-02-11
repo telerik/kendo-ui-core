@@ -20,6 +20,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",
+        CANCEL = "cancel",
         DATABOUND = "dataBound",
         DATABINDING = "dataBinding",
         Widget = kendo.ui.Widget,
@@ -81,6 +82,7 @@ kendo_module({
 
         events: [
             CHANGE,
+            CANCEL,
             DATABINDING,
             DATABOUND,
             EDIT,
@@ -582,8 +584,13 @@ kendo_module({
                dataSource = that.dataSource;
 
            if (that.editable) {
-               dataSource.cancelChanges(that._modelFromElement(that.editable.element));
-               that._closeEditable(false);
+               var container = that.editable.element;
+               var model = that._modelFromElement(container);
+
+               if (!that.trigger(CANCEL, { model: model, container: container})) {
+                   dataSource.cancelChanges(model);
+                   that._closeEditable(false);
+               }
            }
        },
 
