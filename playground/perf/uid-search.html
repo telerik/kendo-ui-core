@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM binding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="benchmark.js"></script>
+        <script src="js_bintrees/bintree.js"></script>
+        <script src="js_bintrees/rbtree.js"></script>
+        <script src="js_bintrees/avltree.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <style>
+            body {
+                padding: 1em;
+                margin: 1em;
+            }
+
+            table {
+                table-layout: fixed;
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="log"></div>
+        <script>
+                var data = [];
+                for (var i = 0; i < 100; i++) {
+                    data.push(kendo.dataviz.uniqueId());
+                }
+
+                var suite = new Benchmark.Suite;
+
+                function compareStrings(a, b) {
+                    return a.localeCompare(b);
+                }
+
+                function makeTest(structure) {
+                    return function() {
+                        var tree = new structure(compareStrings, {}),
+                            i,
+                            result;
+
+                        for (i = 0; i < data.length; i++) {
+                            tree.insert(data[i]);
+                        };
+
+                        for (i = 0; i < data.length; i++) {
+                            if (i % 3 === 0) {
+                                result = tree.find(data[i]);
+
+                                if (result !== data[i]) {
+                                    console.log("failed to find " + data[i]);
+                                }
+                            }
+                        };
+                    }
+                }
+
+                var List = kendo.Class.extend({
+                    init: function() {
+                        this.keys = [];
+                    },
+
+                    insert: function(key) {
+                        this.keys.push(key);
+                    },
+
+                    find: function(key) {
+                        var index = indexOf(key, this.keys);
+                        if (index > -1) {
+                            return key;
+                        }
+                    }
+                });
+
+                var Map = kendo.Class.extend({
+                    init: function() {
+                        this.map = {};
+                    },
+
+                    insert: function(key) {
+                        this.map[key] = true;
+                    },
+
+                    find: function(key) {
+                        var result = this.map[key];
+                        if (result) {
+                            return key;
+                        }
+                    }
+                });
+
+                suite
+                .add("vadimg/RBTree", makeTest(RBTree))
+                .add("vadimg/BinTree", makeTest(BinTree))
+                .add("AVLTree", makeTest(AVLTree))
+                .add("List", makeTest(BinTree))
+                .add("Map", makeTest(Map))
+                .on("complete", function() {
+                    var message = "<div>User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table></div>";
+
+                    $("#log").html(message);
+                })
+                .run(true);
+            </script>
+        </body>
+    </html>
+    </body>
+</html>
