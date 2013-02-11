@@ -753,6 +753,7 @@ kendo_module({
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = tooltip.options || {},
+                pane = plotArea.paneByPoint(coords),
                 i, crosshair;
 
             chart._lastTime = new Date();
@@ -769,13 +770,19 @@ kendo_module({
             }
 
             if (tooltipOptions.shared) {
+                if (pane && pane.options.name === "_navigator" && tooltipOptions.shared) {
+                    tooltip.hide();
+                    highlight.hide();
+                    return;
+                }
+
                 if (tooltipOptions.visible && tooltipOptions.shared) {
-                    tooltip.plotArea = chart._plotArea;
+                    tooltip.plotArea = plotArea;
                     tooltip.showAt(point);
                 }
 
                 if (highlight.options.visible && tooltipOptions.shared) {
-                    highlight.plotArea = chart._plotArea;
+                    highlight.plotArea = plotArea;
                     highlight.show(point);
                 }
             }
@@ -5924,6 +5931,19 @@ kendo_module({
             }
 
             return result;
+        },
+
+        paneByPoint: function(point) {
+            var plotArea = this,
+                panes = plotArea.panes,
+                pane, i;
+
+            for (i = 0; i < panes.length; i++) {
+                pane = panes[i];
+                if (pane.box.containsPoint(point)) {
+                    return pane;
+                }
+            }
         }
     });
 
