@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM binding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="benchmark.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <style>
+            body {
+                padding: 1em;
+                margin: 1em;
+            }
+
+            table {
+                table-layout: fixed;
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <div id="log"></div>
+        <script>
+                var ids = [];
+                for (var i = 0; i < 1000; i++) {
+                    var e = $("<div />").appendTo(document.getElementById("container"));
+                    if (i % 10 === 0) {
+                        var uid = kendo.dataviz.uniqueId();
+                        e.append($("<div />", { id: uid, name: uid, "data-id": uid }));
+                        ids.push(uid);
+                    }
+                }
+
+                var suite = new Benchmark.Suite;
+
+                suite
+                    .add("getElementById", function() {
+                        for (var i = 0; i < ids.length; i++) {
+                            if (!document.getElementById(ids[i])) {
+                                console.log("getElementById: failed to find " + ids[i]);
+                            }
+                        }
+                    })
+                    .add("getElementsByName", function() {
+                        for (var i = 0; i < ids.length; i++) {
+                            if (document.getElementsByName(ids[i]).length !== 1) {
+                                console.log("getElementsByName: failed to find " + ids[i]);
+                            }
+                        }
+                    })
+                    .add("data-id selector", function() {
+                        for (var i = 0; i < ids.length; i++) {
+                            if ($("[data-id='" + ids[i] + "']").length !== 1) {
+                                console.log("data-id selector: failed to find " + ids[i]);
+                            }
+                        }
+                    })
+                    .on("complete", function() {
+                        var message = "<div>User agent: " + navigator.userAgent;
+                        message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                            var results = $.makeArray(this);
+                            results.sort(function(a, b) { return b.hz - a.hz });
+                            $.each(results, function(index) {
+                                message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                            });
+                            message += "</table></div>";
+
+                        $("#log").html(message);
+                    })
+                    .run(true);
+            </script>
+        </body>
+    </html>
+    </body>
+</html>
