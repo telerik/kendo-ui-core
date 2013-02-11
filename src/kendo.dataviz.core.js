@@ -1723,7 +1723,7 @@ kendo_module({
             return a._childIndex - b._childIndex;
         },
 
-        renderModelId: function(id) {
+        renderId: function(id) {
             return this.renderAttr(this.modelIdAttr, id);
         },
 

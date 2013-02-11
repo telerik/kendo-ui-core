@@ -322,10 +322,34 @@
             (function() {
                 var text;
 
+                function createText(options) {
+                    text = new dataviz.VMLText("Text", options);
+                }
+
                 module("VMLText", {
                     setup: function() {
-                        text = new dataviz.VMLText();
+                        createText();
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createText({ id: "1" });
+                    ok(text.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createText({ id: "1" });
+                    ok(text.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders content", function() {
@@ -411,6 +435,26 @@
                     setup: function() {
                         createRotatedText({ rotation: 45 });
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createRotatedText({ id: "1" });
+                    ok(text.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createRotatedText({ id: "1" });
+                    ok(text.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders shape with textpath", function() {
@@ -535,6 +579,26 @@
                         domElement = $("<div><path /><fill /><stroke /></div>")
                                      .appendTo($("<div />"));
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createPath({ id: "1" });
+                    ok(path.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createPath({ id: "1" });
+                    ok(path.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders path tag", function() {
@@ -815,6 +879,26 @@
                     }
                 });
 
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    var group = new dataviz.VMLGroup({ id: 1 });
+                    ok(group.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    var group = new dataviz.VMLGroup({ id: 1 });
+                    ok(group.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
                 test("renders group", function() {
                     equal(group.render(),
                         "<div style='position: absolute; white-space: nowrap;'></div>");
@@ -849,6 +933,26 @@
                     setup: function() {
                         createCircle();
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createCircle({ id: "1" });
+                    ok(circle.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createCircle({ id: "1" });
+                    ok(circle.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders oval tag", function() {
@@ -963,6 +1067,26 @@
                     setup: function() {
                         createClipRect();
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createClipRect({ id: 1 });
+                    ok(clipRect.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createClipRect({ id: 1 });
+                    ok(clipRect.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders div tag", function() {

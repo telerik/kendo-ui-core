@@ -403,6 +403,26 @@
                     }
                 });
 
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    group = new dataviz.SVGGroup({ id: "1" });
+                    ok(group.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    group = new dataviz.SVGGroup({ id: "1" });
+                    ok(group.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
                 test("renders g tag", function() {
                     equal(group.render(), "<g></g>");
                 });
@@ -443,6 +463,26 @@
                     setup: function() {
                         createText();
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createText({ id: "1" });
+                    ok(text.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createText({ id: "1" });
+                    ok(text.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders content", function() {
@@ -587,6 +627,26 @@
                     setup: function() {
                         path = new dataviz.SVGPath();
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    path = new dataviz.SVGPath({ id: "1" });
+                    ok(path.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    path = new dataviz.SVGPath({ id: "1" });
+                    ok(path.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders path tag", function() {
@@ -795,10 +855,34 @@
             (function() {
                 var circle;
 
+                function createCircle(options) {
+                    circle = new dataviz.SVGCircle(new Point2D(10, 20), 30, options);
+                }
+
                 module("SVGCircle", {
                     setup: function() {
-                        circle = new dataviz.SVGCircle(new Point2D(10, 20), 30);
+                        createCircle();
                     }
+                });
+
+                test("renders data-id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    createCircle({ id: "1" });
+                    ok(circle.render().indexOf("data-id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    createCircle({ id: "1" });
+                    ok(circle.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders circle tag", function() {
@@ -871,6 +955,26 @@
                     setup: function() {
                         clipPath = new dataviz.SVGClipPath();
                     }
+                });
+
+                test("renders id in IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = true;
+
+                    clipPath = new dataviz.SVGClipPath({ id: "1" });
+                    ok(clipPath.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
+                });
+
+                test("renders id in non-IE", function() {
+                    var msie = kendo.support.browser.msie;
+                    kendo.support.browser.msie = false;
+
+                    clipPath = new dataviz.SVGClipPath({ id: "1" });
+                    ok(clipPath.render().indexOf(" id='1'") > -1);
+
+                    kendo.support.browser.msie = msie;
                 });
 
                 test("renders clipPath tag", function() {
