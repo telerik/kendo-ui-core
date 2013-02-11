@@ -124,13 +124,13 @@ kendo_module({
                 id = view.defsId,
                 output = ViewBase.fn.renderDefinitions.call(view);
 
-            return "<defs " + view.renderId(id) + ">" + output + "</defs>";
+            return "<defs id='" + id + "'>" + output + "</defs>";
         },
 
         renderElement: function(element) {
             var view = this,
                 container = doc.createElement("div"),
-                defsCurrent = dataviz.getElement(view.defsId),
+                defsCurrent = doc.getElementById(view.defsId),
                 defsElement,
                 domElement;
 
@@ -260,7 +260,7 @@ kendo_module({
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = renderTemplate(
-                    "<text #= d.renderId(d.options.id) # " +
+                    "<text #= d.renderModelId(d.options.id) # " +
                     "#= d.renderDataAttributes() # " +
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
@@ -321,7 +321,7 @@ kendo_module({
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
-                    "<path #= d.renderId(d.options.id) #" +
+                    "<path #= d.renderModelId(d.options.id) #" +
                     "style='display: #= d.renderDisplay() #' " +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
@@ -611,7 +611,7 @@ kendo_module({
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = renderTemplate(
-                    "<circle #= d.renderId(d.options.id) # " +
+                    "<circle #= d.renderModelId(d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
                     "cx='#= d.c.x #' cy='#= d.c.y #' " +
                     "r='#= d.r #' " +
@@ -656,7 +656,7 @@ kendo_module({
             if (!group.template) {
                 group.template = SVGGroup.template =
                 renderTemplate(
-                    "<g#= d.renderId(d.options.id) #" +
+                    "<g#= d.renderModelId(d.options.id) #" +
                     "#= d.renderDataAttributes() #" +
                     "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                     "#= d.renderContent() #</g>"
@@ -673,7 +673,7 @@ kendo_module({
             clip.template = SVGClipPath.template;
             if (!clip.template) {
                 clip.template = SVGClipPath.template =
-                renderTemplate("<clipPath#= d.renderId(d.options.id) #>" +
+                renderTemplate("<clipPath#= d.renderModelId(d.options.id) #>" +
                          "#= d.renderContent() #</clipPath>");
             }
         }

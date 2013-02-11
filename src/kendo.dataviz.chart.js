@@ -15,7 +15,6 @@ kendo_module({
         math = Math,
         extend = $.extend,
         proxy = $.proxy,
-        doc = document,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -46,7 +45,7 @@ kendo_module({
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
-        getElement = dataviz.getElement,
+        getElementByModelId = dataviz.getElementByModelId,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
         interpolateValue = dataviz.interpolateValue,
@@ -3098,7 +3097,7 @@ kendo_module({
                 fillOpacity: element.highlighted ? opacity : undefined
             })[0];
 
-            marker.refresh(getElement(this.options.id));
+            marker.refresh(getElementByModelId(this.options.id));
         }
     });
 
@@ -5225,7 +5224,7 @@ kendo_module({
         refresh: function() {
             var pane = this,
                 view = pane.view,
-                element = getElement(pane.options.id);
+                element = getElementByModelId(pane.options.id);
 
             if (view && element) {
                 element.parentNode.replaceChild(
@@ -7225,7 +7224,7 @@ kendo_module({
 
             crosshair.getViewElements(crosshair._view);
             element = crosshair.element;
-            element.refresh(getElement(crosshair.options.id));
+            element.refresh(getElementByModelId(crosshair.options.id));
         },
 
         showAt: function(point) {

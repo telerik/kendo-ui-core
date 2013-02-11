@@ -967,6 +967,37 @@
                 });
             })();
 
+            (function() {
+                var getElementById = dataviz.getElementByModelId,
+                    container,
+                    msie;
+
+                // ------------------------------------------------------------
+                module("getElementById", {
+                    setup: function() {
+                        msie = kendo.support.browser.msie;
+                        container = $("<div id='container' />");
+                        $(document.body).append(container);
+                    },
+                    teardown: function() {
+                        container.remove();
+                        kendo.support.browser.msie = msie;
+                    }
+                });
+
+                test("searches for elements by id in non-IE", function() {
+                    kendo.support.browser.msie = false;
+                    $("<div id='test' />").appendTo(container);
+                    ok(getElementById("test"));
+                });
+
+                test("searches for elements by data-id in IE", function() {
+                    kendo.support.browser.msie = true;
+                    $("<div data-id='test' />").appendTo(container);
+                    ok(getElementById("test"));
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

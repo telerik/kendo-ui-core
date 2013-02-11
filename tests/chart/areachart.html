@@ -1206,7 +1206,7 @@
                     segment;
 
                 function getElement(modelElement) {
-                    return $(document.getElementById(modelElement.options.id));
+                    return $(dataviz.getElementByModelId(modelElement.options.id));
                 }
 
                 function createAreaChart(options) {

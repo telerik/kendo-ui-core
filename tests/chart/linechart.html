@@ -1213,7 +1213,7 @@
                     segment;
 
                 function getElement(modelElement) {
-                    return $(document.getElementById(modelElement.options.id));
+                    return $(dataviz.getElementByModelId(modelElement.options.id));
                 }
 
                 function createLineChart(options) {
@@ -1315,7 +1315,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointClick(function(e) {
-                        equals(e.element.attr("id"), marker.options.id);
+                        equals(e.element.attr("id") || e.element.data("id"), marker.options.id);
                     });
                 });
 
@@ -1379,7 +1379,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointHover(function(e) {
-                        equals(e.element.attr("id"), marker.options.id);
+                        equals(e.element.attr("id") || e.element.data("id"), marker.options.id);
                     });
                 });
 

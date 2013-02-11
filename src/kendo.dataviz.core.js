@@ -1676,6 +1676,7 @@ kendo_module({
             var element = this;
             element.children = [];
             element.options = deepExtend({}, element.options, options);
+            element.modelIdAttr = kendo.support.browser.msie ? "data-id" : "id";
         },
 
         render: function() {
@@ -1722,8 +1723,8 @@ kendo_module({
             return a._childIndex - b._childIndex;
         },
 
-        renderId: function(id) {
-            return this.renderAttr(ViewElement.ID_ATTRIBUTE, id);
+        renderModelId: function(id) {
+            return this.renderAttr(this.modelIdAttr, id);
         },
 
         renderAttr: function (name, value) {
@@ -1745,18 +1746,6 @@ kendo_module({
             return output;
         }
     });
-
-    ViewElement.ID_ATTRIBUTE = "id";
-    var getElement = function(id) {
-        return doc.getElementById(id);
-    };
-
-    if (kendo.support.browser.msie) {
-        ViewElement.ID_ATTRIBUTE = "data-id";
-        getElement = function(id) {
-            return $("[data-id='" + id + "']")[0];
-        }
-    }
 
     var ViewBase = ViewElement.extend({
         init: function(options) {
@@ -1993,7 +1982,9 @@ kendo_module({
 
                     anim.step(easingPos);
 
-                    element.refresh(getElement(elementId));
+                    // TODO: Cache without breaking fix in
+                    // https://github.com/telerik/kendo/commit/c774a37973bad8cbbc319f256d23943518046ccd
+                    element.refresh(getElementByModelId(elementId));
 
                     if (wallTime < finish) {
                         requestAnimFrame(loop);
@@ -2746,6 +2737,14 @@ kendo_module({
         return kendo.toString(value, format);
     }
 
+    function getElementByModelId(modelId) {
+        if (kendo.support.browser.msie) {
+            return $("[data-id='" + modelId + "']")[0];
+        } else {
+            return doc.getElementById(modelId);
+        }
+    }
+
     // Exports ================================================================
     /**
      * @name kendo.dataviz
@@ -2835,7 +2834,7 @@ kendo_module({
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
-        getElement: getElement,
+        getElementByModelId: getElementByModelId,
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,

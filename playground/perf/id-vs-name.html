@@ -35,7 +35,7 @@
                     var e = $("<div />").appendTo(document.getElementById("container"));
                     if (i % 10 === 0) {
                         var uid = kendo.dataviz.uniqueId();
-                        e.append($("<div />", { id: uid, name: uid, "data-id": uid }));
+                        e.append($("<div />", { id: uid, name: uid, "data-id": uid, "class": uid }));
                         ids.push(uid);
                     }
                 }
@@ -61,6 +61,13 @@
                         for (var i = 0; i < ids.length; i++) {
                             if ($("[data-id='" + ids[i] + "']").length !== 1) {
                                 console.log("data-id selector: failed to find " + ids[i]);
+                            }
+                        }
+                    })
+                    .add("class selector", function() {
+                        for (var i = 0; i < ids.length; i++) {
+                            if ($("." + ids[i]).length !== 1) {
+                                console.log("class selector: failed to find " + ids[i]);
                             }
                         }
                     })
