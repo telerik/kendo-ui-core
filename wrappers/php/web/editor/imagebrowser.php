@@ -63,10 +63,6 @@ require_once '../../lib/Kendo/Autoload.php';
     echo $editor->render();
 ?>
 
-<script>
-    $(document).ready( function () { $("#editor").data("kendoEditor").exec("insertImage"); });
-</script>
-
 <?php require_once '../../include/footer.php'; ?>
 
 
