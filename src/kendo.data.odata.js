@@ -17,6 +17,7 @@ kendo_module({
             lt: "lt",
             lte: "le",
             contains : "substringof",
+            doesnotcontain: "substringof",
             endswith: "endswith",
             startswith: "startswith"
         },
@@ -107,6 +108,9 @@ kendo_module({
                             format = "{0}({2}," + format + ")";
                         } else {
                             format = "{0}(" + format + ",{2})";
+                            if (operator === "doesnotcontain") {
+                                format += " eq false";
+                            }
                         }
                     } else {
                         format = "{2} {0} " + format;
