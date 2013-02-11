@@ -219,6 +219,11 @@
                 ok(result.$filter, "substringof('bar',Name)");
             });
 
+            test("$filter and doesnotcontain operator uses substringof", function() {
+                var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "doesnotcontain", value: "bar"} ]}});
+                equal(result.$filter, "substringof('bar',Name) eq false");
+            });
+
             test("$filter and neq operator", function() {
                 var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "neq", value: "bar"} ]} });
 
