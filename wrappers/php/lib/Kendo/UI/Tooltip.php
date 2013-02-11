@@ -6,6 +6,34 @@ class Tooltip extends \Kendo\UI\Widget {
     public function name() {
         return 'Tooltip';
     }
+
+    public function html() {
+        //tooltip does not render content
+    }
+
+    public function script($executeOnDomReady = true) {
+        $script = array();
+
+        if ($executeOnDomReady) {
+            $script[] = 'jQuery(function(){';
+        }
+
+        //Tooltip should have a selector instead of id
+        $script[] = 'jQuery("';
+        $script[] = $this->id;
+        $script[] = '").kendo';
+        $script[] = $this->name();
+        $script[] = '(';
+        $script[] = $this->toJSON();
+        $script[] = ');';
+
+        if ($executeOnDomReady) {
+            $script[] = '});';
+        }
+
+        return implode($script);
+    }
+
 //>> Properties
 
     /**
