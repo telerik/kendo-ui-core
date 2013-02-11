@@ -45,7 +45,7 @@ kendo_module({
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
-        getElementByModelId = dataviz.getElementByModelId,
+        getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
         interpolateValue = dataviz.interpolateValue,
@@ -3097,7 +3097,7 @@ kendo_module({
                 fillOpacity: element.highlighted ? opacity : undefined
             })[0];
 
-            marker.refresh(getElementByModelId(this.options.id));
+            marker.refresh(getElement(this.options.id));
         }
     });
 
@@ -5224,7 +5224,7 @@ kendo_module({
         refresh: function() {
             var pane = this,
                 view = pane.view,
-                element = getElementByModelId(pane.options.id);
+                element = getElement(pane.options.id);
 
             if (view && element) {
                 element.parentNode.replaceChild(
@@ -7224,7 +7224,7 @@ kendo_module({
 
             crosshair.getViewElements(crosshair._view);
             element = crosshair.element;
-            element.refresh(getElementByModelId(crosshair.options.id));
+            element.refresh(getElement(crosshair.options.id));
         },
 
         showAt: function(point) {

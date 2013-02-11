@@ -1984,7 +1984,7 @@ kendo_module({
 
                     // TODO: Cache without breaking fix in
                     // https://github.com/telerik/kendo/commit/c774a37973bad8cbbc319f256d23943518046ccd
-                    element.refresh(getElementByModelId(elementId));
+                    element.refresh(getElement(elementId));
 
                     if (wallTime < finish) {
                         requestAnimFrame(loop);
@@ -2737,7 +2737,7 @@ kendo_module({
         return kendo.toString(value, format);
     }
 
-    function getElementByModelId(modelId) {
+    function getElement(modelId) {
         if (kendo.support.browser.msie) {
             return $("[data-id='" + modelId + "']")[0];
         } else {
@@ -2834,7 +2834,7 @@ kendo_module({
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
-        getElementByModelId: getElementByModelId,
+        getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,

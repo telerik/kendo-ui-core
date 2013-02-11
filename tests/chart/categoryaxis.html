@@ -18,7 +18,7 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
-                getElementByModelId = dataviz.getElementByModelId,
+                getElement = dataviz.getElement,
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
                 view,
@@ -1429,7 +1429,7 @@
 
                     plotArea = chart._model.children[1];
                     label = plotArea.categoryAxis.labels[1];
-                    $(getElementByModelId(label.options.id)).click();
+                    $(getElement(label.options.id)).click();
                 }
 
                 // ------------------------------------------------------------
@@ -1520,7 +1520,7 @@
 
                     plotArea = chart._model.children[1];
                     label = plotArea.categoryAxis.labels[1];
-                    $(getElementByModelId(label.options.id)).click();
+                    $(getElement(label.options.id)).click();
                 }
 
                 // ------------------------------------------------------------

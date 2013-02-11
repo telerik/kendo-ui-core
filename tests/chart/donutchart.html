@@ -334,8 +334,8 @@
                         segment = plotArea.charts[0].segments[0],
                         label = segment.children[0];
 
-                    segmentElement = $(dataviz.getElementByModelId(segment.options.id));
-                    labelElement = $(dataviz.getElementByModelId(label.options.id));
+                    segmentElement = $(dataviz.getElement(segment.options.id));
+                    labelElement = $(dataviz.getElement(label.options.id));
                 }
 
                 module("Donut Chart / Events / seriesClick ", {
