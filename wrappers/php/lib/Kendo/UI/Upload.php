@@ -6,6 +6,15 @@ class Upload extends \Kendo\UI\Widget {
     protected function name() {
         return 'Upload';
     }
+
+    protected function createElement() {
+        $element = new \Kendo\Html\Element('input', true);
+
+        $element->attr('type', 'file');
+
+        return $element;
+    }
+
 //>> Properties
 
     /**

@@ -66,6 +66,10 @@ abstract class Widget extends \Kendo\SerializableObject{
         return str_replace('</script>', '<\\/script>', $output);
     }
 
+    private function escapeSelector($value) {
+        return preg_replace('/([\[\]])/', "\\\\\\\\\\1", $value);
+    }
+
     public function script($executeOnDomReady = true) {
         $script = array();
 
@@ -76,7 +80,7 @@ abstract class Widget extends \Kendo\SerializableObject{
         $prefix = $this->isClientTemplate ? '\#' : '#';
 
         $script[] = 'jQuery("'.$prefix;
-        $script[] = $this->id;
+        $script[] = $this->escapeSelector($this->id);
         $script[] = '").kendo';
         $script[] = $this->name();
         $script[] = '(';
