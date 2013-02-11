@@ -12,6 +12,20 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        public GridEventBuilder Cancel(Func<object, object> handler)
+        {
+            Handler("cancel", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder Cancel(string handler)
+        {
+            Handler("cancel", handler);
+
+            return this;
+        }
+
         public ListViewEventBuilder Change(Func<object, object> handler)
         {
             Handler("change", handler);
@@ -38,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
             Handler("edit", handler);
 
             return this;
-        }        
+        }
 
         public ListViewEventBuilder Remove(Func<object, object> handler)
         {
