@@ -72,12 +72,46 @@ test("unbinds handlers on destroy", 1, function() {
     el.find("a").trigger("click");
 });
 
+test("triggers init when rendered initially", 1, function() {
+    var view = new kendo.View({
+        template: "<i />",
+        init: function() { ok(true); }
+    });
+
+    view.render();
+    view.render();
+});
+
+test("triggers show when rendered", 2, function() {
+    var view = new kendo.View({
+        template: "<i />",
+        show: function() { ok(true); }
+    });
+
+    view.render();
+    view.render();
+});
+
+module("Layout", { });
+
 test("layout renders view in a given region", 1, function() {
-    var layout = new kendo.Layout({ template: "<div><span id='foo' /><span id='bar' /></div>" }),
+    var layout = new kendo.Layout({ template: "<div><span id='container' /></div>" }),
         view = new kendo.View({ template: '<span id="baz">Baz</span>' });
 
     layout.render();
-    layout.showIn('#bar', view);
 
-    equal(layout.element.find("#bar").html(), '<div>' + view.element.html() + '</div>');
+    layout.showIn('#container', view);
+
+    equal(layout.element.find("#container").html(), '<div>' + view.element.html() + '</div>');
+});
+
+test("layout triggers view hide when replacing views", 1, function() {
+    var layout = new kendo.Layout({ template: "<div><span id='container' /></div>" }),
+        foo = new kendo.View({ template: '<span>Foo</span>', hide: function() { ok(true); } }),
+        bar = new kendo.View({ template: '<span>Foo</span>' });
+
+    layout.render();
+
+    layout.showIn('#container', foo);
+    layout.showIn('#container', bar);
 });

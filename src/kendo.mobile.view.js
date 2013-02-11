@@ -460,7 +460,7 @@ kendo_module({
                 mobile.application.element.css("pointer-events", "none");
             }
 
-            if (!url) {
+            if (!url || url === "/") {
                 element = that.rootView;
             } else {
                 element = container.children("[" + attr("url") + "='" + urlPath + "']");

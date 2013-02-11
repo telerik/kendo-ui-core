@@ -22,6 +22,7 @@
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.spa.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
@@ -204,7 +205,7 @@
                 ok(true);
             }
 
-            test("Loads initial view depending on options", function() {
+            test("Loads initial view depending on options", 2, function() {
                 setup('<div data-role="view" id="test1">Page 1</div><div data-role="view" id="page2">Page 2</div>', {
                     initial: "page2"
                 });

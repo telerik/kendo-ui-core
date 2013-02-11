@@ -19,7 +19,6 @@ kendo_module({
         document = window.document;
 
     var History = kendo.Observable.extend({
-
         start: function(options) {
             options = options || {};
 
@@ -99,7 +98,6 @@ kendo_module({
             }
         },
 
-
         _makePushStateUrl: function(address) {
             var that = this;
 
@@ -159,3 +157,132 @@ kendo_module({
 
     kendo.history = new History();
 })(window.kendo.jQuery);
+
+(function() {
+    var kendo = window.kendo,
+        history = kendo.history,
+        Observable = kendo.Observable,
+        INIT = "init",
+        ROUTE_MISSING = "routeMissing",
+        optionalParam = /\((.*?)\)/g,
+        namedParam = /(\(\?)?:\w+/g,
+        splatParam = /\*\w+/g,
+        escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g;
+
+    function namedParamReplace(match, optional) {
+        return optional ? match : '([^\/]+)';
+    }
+
+    function routeToRegExp(route) {
+        return new RegExp('^' + route
+            .replace(escapeRegExp, '\\$&')
+            .replace(optionalParam, '(?:$1)?')
+            .replace(namedParam, namedParamReplace)
+            .replace(splatParam, '(.*?)') + '$');
+    }
+
+    var Route = kendo.Class.extend({
+        init: function(route, callback) {
+            if (!(route instanceof RegExp)) {
+                route = routeToRegExp(route);
+            }
+
+            this.route = route;
+            this._callback = callback;
+        },
+
+        callback: function(url) {
+            var params = this.route.exec(url).slice(1),
+                idx = 0,
+                length = params.length;
+
+            for (; idx < length; idx ++) {
+                if (typeof params[idx] !== 'undefined') {
+                    params[idx] = decodeURIComponent(params[idx]);
+                }
+            }
+
+            this._callback.apply(null, params);
+        },
+
+        worksWith: function(url) {
+            if (this.route.test(url)) {
+                this.callback(url);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    });
+
+    var Router = Observable.extend({
+        init: function(options) {
+            Observable.fn.init.call(this);
+            this.routes = [];
+            this.bind([INIT, ROUTE_MISSING], options);
+        },
+
+        destroy: function() {
+            history.unbind("ready", this._readyProxy);
+            history.unbind("change", this._urlChangedProxy);
+            this.unbind();
+        },
+
+        start: function() {
+            var that = this,
+                readyProxy = function(e) {
+                    if (!e.url) {
+                        e.url = "/";
+                    }
+
+                    if (!that.trigger(INIT, e)) {
+                        that._urlChanged(e.url);
+                    }
+                },
+
+                urlChangedProxy = function(e) {
+                    that._urlChanged(e.url);
+                };
+
+            kendo.history.start({
+                ready: readyProxy,
+                change: urlChangedProxy
+            });
+
+            this._urlChangedProxy = urlChangedProxy;
+            this._readyProxy = readyProxy;
+        },
+
+        route: function(route, callback) {
+            this.routes.push(new Route(route, callback));
+        },
+
+        navigate: function(url, silent) {
+            kendo.history.navigate(url, silent);
+        },
+
+        _urlChanged: function(url) {
+            if (!url) {
+                url = "/";
+            }
+
+            var idx = 0,
+                routes = this.routes,
+                route,
+                length = routes.length;
+
+            for (; idx < length; idx ++) {
+                 route = routes[idx];
+
+                 if (route.worksWith(url)) {
+                    return;
+                 }
+            }
+
+            this.trigger(ROUTE_MISSING, { url: url });
+        }
+    });
+
+    kendo.Route = Route;
+    kendo.Router = Router;
+})();

@@ -16,8 +16,8 @@ module("Router", {
 
 test("raises init when started", 1, function(){
     router = new kendo.Router({
-        init: function() {
-            ok(true);
+        init: function(e) {
+            equal(e.url, "/");
         }
     })
 
@@ -35,7 +35,7 @@ test("navigates to / by default", 1, function(){
 });
 
 
-module("Router routing", {
+module("Router params", {
     setup: function() {
         location.hash = '';
         router = new kendo.Router();
@@ -100,4 +100,30 @@ test("parses splat params", 2, function() {
 
     router.start();
     navigate("/foo/bar/baz");
+});
+
+test("triggers route missing if no route found", 2, function(){
+    var router = new kendo.Router();
+
+    router.route("/", function() {
+        ok(true);
+    });
+
+    router.bind("routeMissing", function(e) {
+        equal(e.url, "/foo")
+    });
+
+    router.start();
+    navigate("/foo");
+});
+
+test("navigates to a given url", 1, function(){
+    var router = new kendo.Router();
+
+    router.route("/foo", function() {
+        ok(true);
+    });
+
+    router.start();
+    router.navigate("/foo");
 });
