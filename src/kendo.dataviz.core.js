@@ -1676,6 +1676,7 @@ kendo_module({
             var element = this;
             element.children = [];
             element.options = deepExtend({}, element.options, options);
+            element.modelIdAttr = kendo.support.browser.msie ? "data-id" : "id";
         },
 
         render: function() {
@@ -1720,6 +1721,10 @@ kendo_module({
             }
 
             return a._childIndex - b._childIndex;
+        },
+
+        renderId: function(id) {
+            return this.renderAttr(this.modelIdAttr, id);
         },
 
         renderAttr: function (name, value) {
@@ -1954,6 +1959,7 @@ kendo_module({
                 options = anim.options,
                 element = anim.element,
                 elementId = element.options.id,
+                domElement,
                 delay = options.delay || 0,
                 start = +new Date() + delay,
                 duration = options.duration,
@@ -1977,7 +1983,11 @@ kendo_module({
 
                     anim.step(easingPos);
 
-                    element.refresh(doc.getElementById(elementId));
+                    if (!domElement || detached(domElement)) {
+                        domElement = getElement(elementId);
+                    }
+
+                    element.refresh(domElement);
 
                     if (wallTime < finish) {
                         requestAnimFrame(loop);
@@ -2432,10 +2442,69 @@ kendo_module({
         yellow: "ffff00", yellowgreen: "9acd32"
     };
 
+    var LRUCache = Class.extend({
+        init: function(size) {
+            this._size = size;
+            this._length = 0;
+            this._map = {};
+        },
+
+        put: function(key, value) {
+            var lru = this,
+                map = lru._map,
+                entry = { key: key, value: value };
+
+            map[key] = entry;
+
+            if (!lru._head) {
+                lru._head = lru._tail = entry;
+            } else {
+                lru._tail.newer = entry;
+                entry.older = lru._tail;
+                lru._tail = entry;
+            }
+
+            if (lru._length >= lru._size) {
+                map[lru._head.key] = null;
+                lru._head = lru._head.newer;
+                lru._head.older = null;
+            } else {
+                lru._length++;
+            }
+        },
+
+        get: function(key) {
+            var lru = this,
+                entry = lru._map[key];
+
+            if (entry) {
+                if (entry === lru._head && entry !== lru._tail) {
+                    lru._head = entry.newer;
+                    lru._head.older = null;
+                }
+
+                if (entry !== lru._tail) {
+                    if (entry.older) {
+                        entry.older.newer = entry.newer;
+                        entry.newer.older = entry.older;
+                    }
+
+                    entry.older = lru._tail;
+                    entry.newer = null;
+
+                    lru._tail.newer = entry;
+                    lru._tail = entry;
+                }
+
+                return entry.value;
+            }
+        }
+    });
+
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),
             cacheKey = text + styleHash + rotation,
-            cachedResult = measureText.cache[cacheKey],
+            cachedResult = measureText.cache.get(cacheKey),
             size = {
                 width: 0,
                 height: 0,
@@ -2486,12 +2555,12 @@ kendo_module({
             size.height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
         }
 
-        measureText.cache[cacheKey] = size;
+        measureText.cache.put(cacheKey, size);
 
         return size;
     }
 
-    measureText.cache = {};
+    measureText.cache = new LRUCache(1000);
     measureText.baselineMarker =
         $("<div class='" + CSS_PREFIX + "baseline-marker' " +
             "style='display: inline-block; vertical-align: baseline;" +
@@ -2671,6 +2740,24 @@ kendo_module({
         return kendo.toString(value, format);
     }
 
+    function getElement(modelId) {
+        if (kendo.support.browser.msie) {
+            return $("[data-id='" + modelId + "']")[0];
+        } else {
+            return doc.getElementById(modelId);
+        }
+    }
+
+    function detached(element) {
+        var parent = element.parentNode;
+
+        while(parent && parent.parentNode) {
+            parent = parent.parentNode;
+        }
+
+        return parent !== doc;
+    }
+
     // Exports ================================================================
     /**
      * @name kendo.dataviz
@@ -2740,6 +2827,7 @@ kendo_module({
         BarIndicatorAnimatin: BarIndicatorAnimatin,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
+        LRUCache: LRUCache,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
         Ring: Ring,
@@ -2759,6 +2847,7 @@ kendo_module({
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
+        getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,

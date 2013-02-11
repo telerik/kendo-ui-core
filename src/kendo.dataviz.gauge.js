@@ -9,8 +9,7 @@ kendo_module({
 (function ($, undefined) {
 
     // Imports ================================================================
-    var doc = document,
-        math = Math,
+    var math = Math,
 
         kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -30,6 +29,7 @@ kendo_module({
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
+        getElement = getElement,
         getSpacing = dataviz.getSpacing,
         defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
@@ -152,7 +152,7 @@ kendo_module({
             }
 
             if (animationOptions.transitions === false) {
-                needle.refresh(doc.getElementById(options.id));
+                needle.refresh(getElement(options.id));
             } else {
                 animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
                     startAngle: oldAngle,
@@ -845,7 +845,7 @@ kendo_module({
                 pointer.getViewElements(pointer._view);
 
                 element.points = pointer.element.points;
-                element.refresh(doc.getElementById(options.id));
+                element.refresh(getElement(options.id));
             } else {
                 options.animation = deepExtend({}, options.animation, {
                     endPosition: scale.getSlot(scale.options.min, options.value),

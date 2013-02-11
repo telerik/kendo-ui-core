@@ -1105,8 +1105,8 @@
                         segment = plotArea.charts[0].segments[0],
                         label = segment.children[0];
 
-                    segmentElement = $("#" + segment.options.id);
-                    labelElement = $("#" + label.options.id);
+                    segmentElement = $(dataviz.getElement(segment.options.id));
+                    labelElement = $(dataviz.getElement(label.options.id));
                 }
 
                 module("Pie Chart / Events / seriesClick ", {

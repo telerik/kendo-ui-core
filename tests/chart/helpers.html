@@ -888,6 +888,116 @@
 
             })();
 
+            (function() {
+                var lru;
+
+                // ------------------------------------------------------------
+                module("LRUCache", {
+                    setup: function() {
+                        lru = new dataviz.LRUCache(4);
+                        lru.put("a", 1);
+                        lru.put("b", 2);
+                        lru.put("c", 3);
+                    }
+                });
+
+                test("put sets head", function() {
+                    same(lru._head.value, 1);
+                });
+
+                test("put sets tail", function() {
+                    same(lru._tail.value, 3);
+                });
+
+                test("put sets newer ref", function() {
+                    equals(lru._head.newer.value, 2);
+                });
+
+                test("put sets older ref", function() {
+                    equals(lru._tail.older.value, 2);
+                });
+
+                test("put does not clean last element if within size", function() {
+                    lru.put("d", 4);
+                    equals(lru._head.value, 1);
+                });
+
+                test("put cleans last element if exceeding size", function() {
+                    lru.put("d", 4);
+                    lru.put("e", 5);
+                    equals(lru._head.value, 2);
+                    same(lru._head.older, null);
+                    same(lru._map["a"], null);
+                });
+
+                test("get retrieves value by key", function() {
+                    equals(lru.get("a"), 1);
+                });
+
+                test("get retrieves single value", function() {
+                    lru = new dataviz.LRUCache(1);
+                    lru.put("a", 1);
+                    equals(lru.get("a"), 1);
+                });
+
+                test("get moves head to tail", function() {
+                    equals(lru.get("a"), 1);
+                    equals(lru._tail.value, 1);
+                });
+
+                test("get patches head reference", function() {
+                    equals(lru.get("a"), 1);
+                    equals(lru._head.value, 2);
+                    equals(lru._head.older, null);
+                });
+
+                test("get moves middle to tail", function() {
+                    equals(lru.get("b"), 2);
+                    equals(lru._tail.value, 2);
+                });
+
+                test("get patches middle references", function() {
+                    equals(lru.get("b"), 2);
+                    same(lru._head.newer.older, lru._head);
+                });
+
+                test("get keeps tail in place", function() {
+                    equals(lru.get("c"), 3);
+                    equals(lru._tail.value, 3);
+                });
+            })();
+
+            (function() {
+                var getElementById = dataviz.getElement,
+                    container,
+                    msie;
+
+                // ------------------------------------------------------------
+                module("getElementById", {
+                    setup: function() {
+                        msie = kendo.support.browser.msie;
+                        container = $("<div id='container' />");
+                        $(document.body).append(container);
+                    },
+                    teardown: function() {
+                        container.remove();
+                        kendo.support.browser.msie = msie;
+                    }
+                });
+
+                test("searches for elements by id in non-IE", function() {
+                    kendo.support.browser.msie = false;
+                    $("<div id='test' />").appendTo(container);
+                    ok(getElementById("test"));
+                });
+
+                test("searches for elements by data-id in IE", function() {
+                    kendo.support.browser.msie = true;
+                    $("<div data-id='test' />").appendTo(container);
+                    ok(getElementById("test"));
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
