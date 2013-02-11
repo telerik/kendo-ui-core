@@ -15,22 +15,33 @@ class ImageBrowserEntry {
     }
 }
 
+function getImageType($filename) {
+    $type = getimagesize($filename)[2];
+
+    if ($type == IMAGETYPE_JPEG) {
+        $type = 'jpeg';
+    } elseif ($type == IMAGETYPE_GIF) {
+        $type = 'gif';
+    } elseif ($type == IMAGETYPE_PNG) {
+        $type = 'png';
+    }
+
+    return $type;
+}
+
 class Thumbnail {
     private $image;
     private $type;
 
     function __construct($filename) {
-        $type = getimagesize($filename)[2];
+        $type = getImageType($filename);
         $image = null;
 
-        if ($type == IMAGETYPE_JPEG) {
-            $type = 'jpeg';
+        if ($type == 'jpeg') {
             $image = imagecreatefromjpeg($filename);
-        } elseif ($type == IMAGETYPE_GIF) {
-            $type = 'gif';
+        } elseif ($type == 'gif') {
             $image = imagecreatefromgif($filename);
-        } elseif ($type == IMAGETYPE_PNG) {
-            $type = 'png';
+        } elseif ($type == 'png') {
             $image = imagecreatefrompng($filename);
         }
 
@@ -65,11 +76,9 @@ class Thumbnail {
                 $height *= $ratio;
                 $width = $containerSize;
             }
-
-            $this->resize($width, $height);
-        } else {
-            $this->persistTransparency($this->image);
         }
+
+        $this->resize($width, $height);
     }
 
     private function persistTransparency($image) {
@@ -158,13 +167,12 @@ class ImageBrowser {
         echo json_encode($entries);
     }
 
-    public function getThumbnail($path) {
-        $this->ensureAccess($path);
+    public function setImageHeaders($path, $type) {
+        if (!$type) {
+            $type = getImageType($path);
+        }
 
-        // resize image
-        $image = new Thumbnail($path);
-
-        header("Content-type: image/" . $image->getType());
+        header("Content-type: image/" . $type);
         header("Expires: Mon, 1 Jan 2099 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
         header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -175,9 +183,27 @@ class ImageBrowser {
         $size = filesize($path);
         header("Content-Length: $size bytes");
 
-        $image->downscale();
+        ob_clean();
+        flush();
+    }
 
+    public function getThumbnail($path) {
+        $this->ensureAccess($path);
+
+        $image = new Thumbnail($path);
+
+        $this->setImageHeaders($path, $image->getType());
+
+        $image->downscale();
         $image->render();
+    }
+
+    public function getImage($path) {
+        $this->ensureAccess($path);
+
+        $this->setImageHeaders($path);
+
+        readfile($path);
     }
 
     public function destroy($path, $entry) {
@@ -209,8 +235,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $path = $imageBrowser->basePath() . $parameters['path'];
 
-    if ($parameters['action'] == 'thumbnail') {
-        $imageBrowser->getThumbnail($path);
+    switch ($parameters['action']) {
+        case 'thumbnail': $imageBrowser->getThumbnail($path); break;
+        case 'image': $imageBrowser->getImage($path); break;
     }
 }
 
