@@ -145,6 +145,12 @@
                     "url": "listview/editing.html",
                     "title": "Kendo UI Mobile List View edit/delete operations",
                     "meta": "This demo illustrates how implement edit/delete operations in Kendo UI ListView widget."
+                },
+                {
+                    "text": "Filtering",
+                    "url": "listview/filtering.html",
+                    "title": "Kendo UI Mobile List View filtering",
+                    "meta": "This demo illustrates how implement filtering in Kendo UI ListView widget."
                 }
             ]
         },
