@@ -62,6 +62,10 @@
                                 }
                             }
                         };
+
+                        if (tree.destroy) {
+                            tree.destroy();
+                        }
                     }
                 }
 
@@ -99,12 +103,44 @@
                     }
                 });
 
+                var ScopedMap = kendo.Class.extend({
+                    init: function() {
+                        var frameIndex=frames.length,
+                            f = this.cacheFrame = document.createElement('iframe');
+
+                        f.style.display="none";
+                        document.body.appendChild(f);
+
+                        var w = frames[frameIndex];
+                        this.map = {};
+                    },
+
+                    insert: function(key) {
+                        this.map[key] = true;
+                    },
+
+                    find: function(key) {
+                        var result = this.map[key];
+                        if (result) {
+                            return key;
+                        }
+                    },
+
+                    destroy: function() {
+                        this.cache = {};
+                        this.cacheFrame.src = "";
+                        document.body.removeChild(this.cacheFrame); 
+                        this.cacheFrame = null;
+                    }
+                });
+
                 suite
                 .add("vadimg/RBTree", makeTest(RBTree))
                 .add("vadimg/BinTree", makeTest(BinTree))
                 .add("AVLTree", makeTest(AVLTree))
                 .add("List", makeTest(BinTree))
                 .add("Map", makeTest(Map))
+                .add("ScopedMap", makeTest(ScopedMap))
                 .on("complete", function() {
                     var message = "<div>User agent: " + navigator.userAgent;
                     message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
