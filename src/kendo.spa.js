@@ -68,6 +68,7 @@ kendo_module({
         Observable = kendo.Observable,
         Route = kendo.Route,
         INIT = "init",
+        SCRIPT = "SCRIPT",
         EVENTS = [ INIT ];
 
     var Router = Observable.extend({
@@ -131,10 +132,14 @@ kendo_module({
         },
 
         render: function() {
-            var that = this;
+            var that = this,
+                element,
+                template;
+
             if (!that.element) {
-                var element = $("<" + that.tagName + " />");
-                element.append($(that.template).html());
+                element = $("<" + that.tagName + " />");
+                template = $(that.template);
+                element.append(template[0].tagName === SCRIPT ? template.html() : template);
                 that.element = element;
                 kendo.bind(that.element, that.model);
             }

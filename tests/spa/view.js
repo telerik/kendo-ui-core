@@ -10,7 +10,7 @@ test("reads contents from a passed string", 1, function() {
         template: "<span>Foo</span>"
     });
 
-    equal(view.render().html(), "Foo");
+    equal(view.render().html(), "<span>Foo</span>");
 });
 
 test("reads contents from a given script tag", 2, function() {
