@@ -39,6 +39,10 @@ tests.push(
         page: "mobile/listview/mvvm.html",
         title: "mobile listview mvvm"
     },
+	{
+        page: "mobile/listview/filtering.html",
+        title: "mobile listview filtering"
+    },
     {
         page: "mobile/loader.html",
         title: "mobile loader"

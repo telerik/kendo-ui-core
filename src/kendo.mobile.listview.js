@@ -22,9 +22,9 @@ kendo_module({
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
-
+        SEARCH_TEMPLATE = kendo.template('<form><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
+        NS = ".kendoMobileListView",
         LAST_PAGE_REACHED = "lastPageReached",
-
         CLICK = "click",
         CHANGE = "change",
         PROGRESS = "progress",
@@ -102,6 +102,8 @@ kendo_module({
 
             that._fixHeaders();
 
+            that._filterable();
+
             if (options.dataSource && that.options.autoBind) {
                 that.dataSource.fetch();
             } else {
@@ -133,7 +135,8 @@ kendo_module({
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
-            pullOffset: 140
+            pullOffset: 140,
+            filterable: false
         },
 
         setOptions: function(options) {
@@ -207,9 +210,11 @@ kendo_module({
 
             if (loading) {
                 appendMethod = "append";
-            } else if (options.appendOnRefresh) {
+            } else if (options.appendOnRefresh && !that._filter) {
                 appendMethod = "prepend";
             }
+
+            that._filter = false;
 
             contents = $(contents);
             element[appendMethod](contents);
@@ -230,7 +235,26 @@ kendo_module({
             that._shouldFixHeaders();
             that._style();
 
+            that._invalidateLoadMore();
+
             that.trigger("dataBound", { ns: ui });
+        },
+
+        _invalidateLoadMore: function() {
+            var that = this,
+                options = that.options,
+                dataSource = that.dataSource,
+                shouldInit = that._stopLoadMore && (!dataSource.total() || dataSource.page() < dataSource.totalPages());
+
+            if (shouldInit) {
+                if (options.endlessScroll) {
+                    that.initEndlessScrolling();
+                }
+
+                if (options.loadMore) {
+                    that.initLoadMore();
+                }
+            }
         },
 
         _cacheDataItems: function(view) {
@@ -267,12 +291,21 @@ kendo_module({
             }
         },
 
+        initEndlessScrolling: function() {
+            this._stopLoadMore = false;
+            this._scroller().setOptions({
+                resize: this._scrollerResize,
+                scroll: this._scrollerScroll
+            });
+        },
+
         stopEndlessScrolling: function() {
             var that = this,
                 scroller = that._scroller();
 
            if (scroller && that._loadIcon) {
                that.loading = false;
+               that._stopLoadMore = true;
                that._loadIcon.parent().hide();
 
                scroller.unbind("resize", that._scrollerResize)
@@ -282,10 +315,18 @@ kendo_module({
            }
         },
 
+        initLoadMore: function() {
+            var that = this;
+
+            that._stopLoadMore = false;
+            that._loadButton.autoApplyNS().on("up", proxy(that._nextPage, that));
+        },
+
         stopLoadMore: function() {
            var that = this;
 
            if (that._loadButton) {
+               that._stopLoadMore = true;
                that.loading = false;
                that._loadButton
                    .kendoDestroy()
@@ -453,10 +494,7 @@ kendo_module({
                     }
                 };
 
-                scroller.setOptions({
-                    resize: that._scrollerResize,
-                    scroll: that._scrollerScroll
-                });
+                that.initEndlessScrolling();
             }
         },
 
@@ -607,7 +645,9 @@ kendo_module({
                 loadWrapper = $('<span class="km-load-more"></span>').append(that._loadIcon);
 
                 if (loadMore) {
-                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>').on("up", proxy(that._nextPage, that));
+                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>');
+
+                    that.initLoadMore();
 
                     loadWrapper.append(that._loadButton);
                 }
@@ -655,6 +695,80 @@ kendo_module({
             if (view && view.loader) {
                 view.loader.hide();
             }
+        },
+
+        _filterable: function() {
+            var that = this,
+                filterable = that.options.filterable,
+                events = "change paste";
+
+            if (filterable) {
+
+                that.element.before(SEARCH_TEMPLATE({
+                    placeholder: filterable.placeholder || "Search..."
+                }));
+
+                if (filterable.autoFilter !== false) {
+                    events += " keyup";
+                }
+
+                that.searchInput = that.wrapper.find("input[type=search]")
+                    .closest("form").on("submit" + NS, function(e) {
+                        e.preventDefault();
+                    })
+                    .end()
+                    .on("focus" + NS, function() {
+                        that._oldFilter = that.searchInput.val();
+                    })
+                    .on(events.split(" ").join(NS + " ") + NS, proxy(that._filterChange, that));
+
+                that.clearButton = that.wrapper.find(".km-filter-reset")
+                    .on(CLICK, proxy(that._clearFilter, that))
+                    .hide();
+            }
+        },
+
+        _search: function(expr) {
+            this._filter = true;
+            this.clearButton[expr ? "show" : "hide"]();
+            this.dataSource.filter(expr);
+        },
+
+        _filterChange: function(e) {
+            var that = this;
+            if (e.type == "paste" && that.options.filterable.autoFilter !== false) {
+                setTimeout(function() {
+                    that._applyFilter();
+                }, 1);
+            } else {
+                that._applyFilter();
+            }
+        },
+
+        _applyFilter: function() {
+            var that = this,
+                filterable = that.options.filterable,
+                value = that.searchInput.val(),
+                expr = value.length ? {
+                    field: filterable.field,
+                    operator: filterable.operator || "startsWith",
+                    ignoreCase: filterable.ignoreCase,
+                    value: value
+                } : null;
+
+            if (value === that._oldFilter) {
+                return;
+            }
+
+            that._oldFilter = value;
+            that._search(expr);
+        },
+
+        _clearFilter: function(e) {
+            this.searchInput.val("");
+            this._search(null);
+
+            e.preventDefault();
         }
     });
 

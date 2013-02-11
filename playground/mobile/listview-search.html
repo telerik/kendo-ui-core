@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>LsitView filtering</title>
+        <link rel="stylesheet" href="../../styles/mobile/kendo.mobile.all.css">
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <style type="text/css">
+            input[type=search]::-webkit-search-decoration,
+            input[type=search]::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="view" id="flat" data-init="mobileListViewDataBindInitFlat" data-title="ListView" data-layout="databinding" >
+            <ul id="flat-listview"></ul>
+        </div>
+
+        <script>
+            var flatData = [ "Sashimi salad", "Chirashi sushi", "Seaweed salad", "Edamame", "Miso soup", "Maguro", "Shake", "Shiromi", "Tekka maki", "Hosomaki Mix", "California rolls", "Seattle rolls", "Spicy Tuna rolls", "Ebi rolls", "Chicken Teriyaki", "Salmon Teriyaki", "Gohan", "Tori Katsu", "Yaki Udon" ];
+            var data = [{ field: "foo" }, { field: "bar" }];
+
+            var groupedData = [
+            {name: "Sashimi salad", letter: "S" },
+            {name: "Chirashi sushi", letter: "C" },
+            {name: "Seaweed salad", letter: "S" },
+            {name: "Edamame", letter: "E" },
+            {name: "Miso soup", letter: "M" },
+            {name: "Maguro", letter: "M" },
+            {name: "Shake", letter: "S" },
+            {name: "Shiromi", letter: "S" },
+            {name: "Tekka maki", letter: "T" },
+            {name: "Hosomaki Mix", letter: "H" },
+            {name: "California rolls", letter: "C" },
+            {name: "Seattle rolls", letter: "S" },
+            {name: "Spicy Tuna rolls", letter: "S" },
+            {name: "Ebi rolls", letter: "E" },
+            {name: "Chicken Teriyaki", letter: "C" },
+            {name: "Salmon Teriyaki", letter: "S" },
+            {name: "Gohan", letter: "G" },
+            {name: "Tori Katsu", letter: "T" },
+            {name: "Yaki Udon", letter: "Y" }
+            ];
+
+            function mobileListViewDataBindInitFlat() {
+                var listview = $("#flat-listview").kendoMobileListView({
+                    dataSource: {
+                        data: groupedData,
+                        group: "letter"
+                    },
+                    template: "${name}",
+                    filterable: {
+                        field: "name"
+                    }
+                }).data("kendoMobileListView");
+            }
+
+        </script>
+
+
+        <script>
+            var app = new kendo.mobile.Application(document.body);
+        </script>
+    </body>
+</html>

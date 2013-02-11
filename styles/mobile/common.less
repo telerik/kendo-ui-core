@@ -727,6 +727,51 @@
     margin-top: -.32rem;
 }
 
+/* Filtering */
+
+.km-filter-wrap
+{
+	position: relative;
+	margin: 0 .7em;
+}
+
+.km-tablet .km-filter-wrap
+{
+	max-width: 24em;
+	margin: 0 auto;
+}
+
+.km-filter-wrap > input[type="search"]::-webkit-search-cancel-button
+{
+	display: none;
+}
+
+.km-filter-wrap > input
+{
+	width: 100%;
+	.box-sizing(border-box);
+}
+
+.km-filter-reset
+{
+	margin-left: -2em;
+	text-align: center;
+	z-index: 1;
+	text-decoration: none;
+}
+
+.km-filter-reset .km-clear
+{
+	font-size: 1.6em;
+}
+
+.km-filter-reset > .km-text
+{
+	position:absolute;
+	top: -3333px;
+	left: -3333px;
+}
+
 /* Pull to refresh */
 
 .km-scroller-pull
