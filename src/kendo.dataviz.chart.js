@@ -771,8 +771,7 @@ kendo_module({
 
             if (tooltipOptions.shared) {
                 if (pane && pane.options.name === "_navigator" && tooltipOptions.shared) {
-                    tooltip.hide();
-                    highlight.hide();
+                    chart._unsetActivePoint();
                     return;
                 }
 
@@ -6378,6 +6377,7 @@ kendo_module({
                         }
                         plotArea.namedValueAxes[name] = valueAxis;
                     }
+                    valueAxis.axisIndex = i;
 
                     axes.push(valueAxis);
                     plotArea.appendAxis(valueAxis);
@@ -7349,7 +7349,9 @@ kendo_module({
 
             for (i = 0; i < axes.length; i++) {
                 currentAxis = axes[i];
-                if (defined(axis.axisIndex) && axis.axisIndex === currentAxis.axisIndex) {
+                if (defined(axis.axisIndex) &&
+                    axis instanceof NumericAxis != currentAxis instanceof CategoryAxis &&
+                    axis.axisIndex === currentAxis.axisIndex) {
                     crosshair.axis = currentAxis;
                     break;
                 }
