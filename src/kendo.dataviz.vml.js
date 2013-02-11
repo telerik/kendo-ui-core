@@ -207,7 +207,7 @@
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = renderTemplate(
-                    "<kvml:textbox #= d.renderAttr(\"id\", d.options.id) # " +
+                    "<kvml:textbox #= d.renderId(d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
@@ -249,7 +249,7 @@
             text.template = VMLRotatedText.template;
             if (!text.template) {
                 text.template = VMLRotatedText.template = renderTemplate(
-                    "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
+                    "<kvml:shape #= d.renderId(d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; top: 0px; left: 0px; " +
                     "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
@@ -354,7 +354,7 @@
             path.template = VMLPath.template;
             if (!path.template) {
                 path.template = VMLPath.template = renderTemplate(
-                    "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
+                    "<kvml:shape #= d.renderId(d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position:absolute; #= d.renderSize() #' " +
                     "coordorigin='0 0' #= d.renderCoordsize() # >" +
@@ -593,7 +593,7 @@
             circle.template = VMLCircle.template;
             if (!circle.template) {
                 circle.template = VMLCircle.template = renderTemplate(
-                    "<kvml:oval #= d.renderAttr(\"id\", d.options.id) # " +
+                    "<kvml:oval #= d.renderId(d.options.id) # " +
                             "#= d.renderDataAttributes() #" +
                             "style='position:absolute; " +
                             "width:#= d.r * 2 #px; height:#= d.r * 2 #px; " +
@@ -649,7 +649,7 @@
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = renderTemplate(
-                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<div #= d.renderId(d.options.id) #" +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; white-space: nowrap;'>" +
                     "#= d.renderContent() #</div>"
@@ -667,7 +667,7 @@
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
-                    "<div #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<div #= d.renderId(d.options.id) #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
                         "top:#= d.box.y1 #px; " +

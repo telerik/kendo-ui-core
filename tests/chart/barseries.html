@@ -18,6 +18,7 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                getElement = dataviz.getElement,
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
@@ -2223,7 +2224,7 @@
 
                     plotArea = chart._model.children[1];
                     bar = plotArea.charts[0].points[0];
-                    barElement = $("#" + bar.options.id);
+                    barElement = $(getElement(bar.options.id));
                 }
 
                 function barClick(callback) {
@@ -2275,7 +2276,7 @@
                         seriesClick: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].points[0].children[0];
-                    $("#" + label.options.id).click();
+                    $(getElement(label.options.id)).click();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2294,7 +2295,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barClick(function(e) {
-                        equals(e.element.attr("id"), bar.options.id);
+                        equals(e.element[0], getElement(bar.options.id));
                     });
                 });
 
@@ -2331,7 +2332,7 @@
                         seriesHover: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].points[0].children[0];
-                    $("#" + label.options.id).mouseover();
+                    $(getElement(label.options.id)).mouseover();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2350,7 +2351,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barHover(function(e) {
-                        equals(e.element.attr("id"), bar.options.id);
+                        equals(e.element[0], getElement(bar.options.id));
                     });
                 });
 

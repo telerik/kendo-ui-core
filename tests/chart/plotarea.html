@@ -20,6 +20,7 @@
         <script type="text/javascript">
 
             var dataviz = kendo.dataviz,
+                getElement = dataviz.getElement,
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 1000, 1000),
                 view,
@@ -2747,12 +2748,12 @@
 
                     plotArea = chart._model.children[1];
                     var paneId = plotArea.panes[0].options.id;
-                    var element = document.getElementById(paneId);
+                    var element = getElement(paneId);
 
                     plotArea.series[0].data[0] = 10;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    notEqual(document.getElementById(paneId), element);
+                    notEqual(getElement(paneId), element);
 
                     destroyChart();
                 });
@@ -2868,7 +2869,7 @@
 
                     plotArea = chart._model.children[1];
                     bar = plotArea.charts[0].points[0];
-                    barElement = $("#" + bar.options.id);
+                    barElement = $(getElement(bar.options.id));
                 }
 
                 // ------------------------------------------------------------
@@ -2891,7 +2892,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -2901,7 +2902,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 580
                     });
                 });
@@ -2911,7 +2912,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 3000, clientY: 0
                     });
                 });
@@ -2921,7 +2922,7 @@
                         plotAreaClick: function(e) { equals(e.value, 0.4, TOLERANCE); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -2932,7 +2933,7 @@
                         plotAreaClick: function(e) { same(e.value, [1, 255], TOLERANCE); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -2942,7 +2943,7 @@
                         plotAreaClick: function(e) { equals(e.category, "B"); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -2955,7 +2956,7 @@
                         plotAreaClick: function(e) { equals(e.category, ""); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -2970,7 +2971,7 @@
                         plotAreaClick: function(e) { same(e.category, ["B", "b"]); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -2988,7 +2989,7 @@
                         plotAreaClick: function(e) { same(e.category, ["B", "b"]); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -3002,7 +3003,7 @@
                         plotAreaClick: function(e) { equals(e.category.toString(), date.toString()); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -3057,7 +3058,7 @@
                         }
                     );
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 450
                     });
                 });
@@ -3069,7 +3070,7 @@
                         }
                     );
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 450
                     });
                 });
@@ -3098,7 +3099,7 @@
 
                     plotArea = chart._model.children[1];
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -3914,7 +3915,7 @@
 
                     plotArea = chart._model.children[1];
                     point = plotArea.charts[0].points[0];
-                    pointElement = $("#" + point.options.id);
+                    pointElement = $(getElement(point.options.id));
                 }
 
                 // ------------------------------------------------------------
@@ -3937,7 +3938,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 300, clientY: 300
                     });
                 });
@@ -3947,7 +3948,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 3000, clientY: 0
                     });
                 });
@@ -3957,7 +3958,7 @@
                         plotAreaClick: function(e) { equals(e.x, 12, TOLERANCE); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 200, clientY: 500
                     });
                 });
@@ -3968,7 +3969,7 @@
                         plotAreaClick: function(e) { same(e.x, [12, 193], TOLERANCE); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 200, clientY: 500
                     });
                 });
@@ -3978,7 +3979,7 @@
                         plotAreaClick: function(e) { equals(e.y, 24, TOLERANCE); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 200, clientY: 500
                     });
                 });
@@ -3989,7 +3990,7 @@
                         plotAreaClick: function(e) { same(e.y, [24, 278], TOLERANCE); }
                     });
 
-                    $("#" + plotArea.options.id).trigger({
+                    $(getElement(plotArea.options.id)).trigger({
                         type: "click", clientX: 200, clientY: 500
                     });
                 });

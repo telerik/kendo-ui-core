@@ -18,6 +18,7 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                getElement = dataviz.getElement,
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
@@ -1212,8 +1213,8 @@
                     label,
                     segment;
 
-                function getElement(modelElement) {
-                    return $(document.getElementById(modelElement.options.id));
+                function getElementFromModel(modelElement) {
+                    return $(getElement(modelElement.options.id));
                 }
 
                 function createLineChart(options) {
@@ -1243,7 +1244,7 @@
                         seriesClick: callback
                     });
 
-                    getElement(marker).click();
+                    getElementFromModel(marker).click();
                 }
 
                 function linePointHover(callback) {
@@ -1251,7 +1252,7 @@
                         seriesHover: callback
                     });
 
-                    getElement(marker).mouseover();
+                    getElementFromModel(marker).mouseover();
                 }
 
                 function lineClick(callback, x, y) {
@@ -1259,7 +1260,7 @@
                         seriesClick: callback
                     });
 
-                    triggerEvent("click", getElement(segment), x, y);
+                    triggerEvent("click", getElementFromModel(segment), x, y);
                 }
 
                 function lineHover(callback, x, y) {
@@ -1267,7 +1268,7 @@
                         seriesHover: callback
                     });
 
-                    triggerEvent("mouseover", getElement(segment), x, y);
+                    triggerEvent("mouseover", getElementFromModel(segment), x, y);
                 }
 
                 // ------------------------------------------------------------
@@ -1290,7 +1291,7 @@
                         },
                         seriesClick: function(e) { ok(true); }
                     });
-                    getElement(label).click();
+                    getElementFromModel(label).click();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -1315,7 +1316,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointClick(function(e) {
-                        equals(e.element.attr("id"), marker.options.id);
+                        equals(e.element[0], getElement(marker.options.id));
                     });
                 });
 
@@ -1354,7 +1355,7 @@
                         },
                         seriesHover: function(e) { ok(true); }
                     });
-                    getElement(label).mouseover();
+                    getElementFromModel(label).mouseover();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -1379,7 +1380,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointHover(function(e) {
-                        equals(e.element.attr("id"), marker.options.id);
+                        equals(e.element[0], getElement(marker.options.id));
                     });
                 });
 

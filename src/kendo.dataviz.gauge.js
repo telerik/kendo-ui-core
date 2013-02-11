@@ -1,8 +1,7 @@
 (function ($, undefined) {
 
     // Imports ================================================================
-    var doc = document,
-        math = Math,
+    var math = Math,
 
         kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -22,6 +21,7 @@
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
+        getElement = getElement,
         getSpacing = dataviz.getSpacing,
         defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
@@ -144,7 +144,7 @@
             }
 
             if (animationOptions.transitions === false) {
-                needle.refresh(doc.getElementById(options.id));
+                needle.refresh(getElement(options.id));
             } else {
                 animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
                     startAngle: oldAngle,
@@ -837,7 +837,7 @@
                 pointer.getViewElements(pointer._view);
 
                 element.points = pointer.element.points;
-                element.refresh(doc.getElementById(options.id));
+                element.refresh(getElement(options.id));
             } else {
                 options.animation = deepExtend({}, options.animation, {
                     endPosition: scale.getSlot(scale.options.min, options.value),

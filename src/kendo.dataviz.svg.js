@@ -252,7 +252,7 @@
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = renderTemplate(
-                    "<text #= d.renderAttr(\"id\", d.options.id) # " +
+                    "<text #= d.renderId(d.options.id) # " +
                     "#= d.renderDataAttributes() # " +
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
@@ -313,7 +313,7 @@
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
-                    "<path #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<path #= d.renderId(d.options.id) #" +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
@@ -598,7 +598,7 @@
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = renderTemplate(
-                    "<circle #= d.renderAttr(\"id\", d.options.id) # " +
+                    "<circle #= d.renderId(d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
                     "cx='#= d.c.x #' cy='#= d.c.y #' " +
                     "r='#= d.r #' " +
@@ -643,7 +643,7 @@
             if (!group.template) {
                 group.template = SVGGroup.template =
                 renderTemplate(
-                    "<g#= d.renderAttr(\"id\", d.options.id) #" +
+                    "<g#= d.renderId(d.options.id) #" +
                     "#= d.renderDataAttributes() #" +
                     "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                     "#= d.renderContent() #</g>"

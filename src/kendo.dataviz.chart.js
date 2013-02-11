@@ -1,12 +1,12 @@
 (function ($, undefined) {
     // Imports ================================================================
-    var each = $.each,
+    var doc = document,
+        each = $.each,
         isArray = $.isArray,
         map = $.map,
         math = Math,
         extend = $.extend,
         proxy = $.proxy,
-        doc = document,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -37,6 +37,7 @@
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
+        getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
         interpolateValue = dataviz.interpolateValue,
@@ -3001,7 +3002,7 @@
                 fillOpacity: element.highlighted ? opacity : undefined
             })[0];
 
-            marker.refresh(doc.getElementById(this.options.id));
+            marker.refresh(getElement(this.options.id));
         }
     });
 
@@ -5154,7 +5155,7 @@
         refresh: function() {
             var pane = this,
                 view = pane.view,
-                element = document.getElementById(pane.options.id);
+                element = getElement(pane.options.id);
 
             if (view && element) {
                 element.parentNode.replaceChild(
