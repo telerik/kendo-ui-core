@@ -167,6 +167,10 @@ kendo_module({
                 that.refresh(content);
             }
 
+            if (options.visible) {
+                that.toFront();
+            }
+
             windowContent = wrapper.children(KWINDOWCONTENT);
             that._tabindex(windowContent);
 
@@ -224,7 +228,6 @@ kendo_module({
             $(window).on("resize", that._resizeHandler);
 
             if (options.visible) {
-                that.toFront();
                 that.trigger(OPEN);
                 that.trigger(ACTIVATE);
             }
