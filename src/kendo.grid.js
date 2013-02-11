@@ -599,6 +599,7 @@ kendo_module({
         events: [
            CHANGE,
            "dataBinding",
+           "cancel",
            DATABOUND,
            DETAILEXPAND,
            DETAILCOLLAPSE,
@@ -1286,6 +1287,10 @@ kendo_module({
                     e.preventDefault();
                     e.stopPropagation();
 
+                    if (that.trigger("cancel", { container: container, model: model })) {
+                        return;
+                    }
+
                     var currentIndex = that.items().index($(that.current()).parent());
 
                     that.cancelRow();
@@ -1395,7 +1400,13 @@ kendo_module({
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
+                            if (that.trigger("cancel", { container: container, model: model })) {
+                                e.preventDefault();
+                                return;
+                            }
+
                             var currentIndex = that.items().index($(that.current()).parent());
+
                             that.cancelRow();
                             if (that.options.navigatable) {
                                 that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());

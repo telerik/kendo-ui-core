@@ -450,6 +450,39 @@
                 row.find("td:first input").val("baz").change();
                 grid.saveRow();
             });
+
+            test("cancel event is raised when cancel button is clicked", 2, function() {
+                var grid = setup({
+                    columns: ["foo", "name", { command: "edit" }],
+                    editable: "inline",
+                    cancel: function(e) {
+                        equal(e.model, dataSource.get("bar"));
+                        ok(e.container.length);
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+                row.find(".k-grid-cancel").click();
+            });
+
+            test("calling preventDefault in the cancel event handler leaves the grid in edit mode", function() {
+                var grid = setup({
+                    columns: ["foo", { command: "edit" }],
+                    editable: "inline",
+                    cancel: function(e) {
+                        e.preventDefault();
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+
+                row.find(".k-grid-cancel").click();
+
+                equal(1, table.find("tr:first").find(".k-grid-cancel").length);
+            });
+
             test("sync is not call if save event is canceled", function() {
                 var grid = setup({
                     columns: ["foo", "name"],

@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the name of the JavaScript function that will handle the the Change client-side event.
         /// </summary>
-        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param> 
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// @(Html.Kendo().Grid()
@@ -56,10 +56,55 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the Cancel client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.Cancel(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder Cancel(Func<object, object> handler)
+        {
+            Handler("cancel", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the Cancel client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.Cancel("gridCancel"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder Cancel(string handler)
+        {
+            Handler("cancel", handler);
+
+            return this;
+        }
+
         /// <summary>
         /// Defines the name of the JavaScript function that will handle the the Edit client-side event.
         /// </summary>
-        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>    
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// @(Html.Kendo().Grid()

@@ -148,6 +148,37 @@
                 ok(called);
             });
 
+            test("clicking the cancel button raises the cancel event", 2, function() {
+                var called = false,
+                    listView = setup({
+                        editTemplate: '<li><button class="k-cancel-button"></li>',
+                        cancel: function(e) {
+                            ok(e.model);
+                            equal(e.container.length, 1);
+                        }
+                    });
+
+                listView.edit(listView.element.children().first());
+
+                listView.element.find(".k-cancel-button").click();
+            });
+
+            test("preventing the cancel event leaves the item in edit mode", function() {
+                var called = false,
+                    listView = setup({
+                        editTemplate: '<li><button class="k-cancel-button"></li>',
+                        cancel: function(e) {
+                            e.preventDefault();
+                        }
+                    });
+
+                listView.edit(listView.element.children().first());
+
+                listView.element.find(".k-cancel-button").click();
+
+                equal(listView.element.find(".k-cancel-button").length, 1);
+            });
+
             test("item and model is send to edit event arguments", function() {
                 var args = {},
                     listView = setup({
