@@ -723,7 +723,7 @@ kendo_module({
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
                         tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                        if (!tooltipOptions.shared){
+                        if (!tooltipOptions.shared) {
                             seriesPoint.hover(chart, e);
                             chart._activePoint = seriesPoint;
 
@@ -760,7 +760,7 @@ kendo_module({
             if (length) {
                 for (i = 0; i < length; i++) {
                     crosshair = crosshairs[i];
-                    if (plotArea.backgroundBox().containsPoint(coords)) {
+                    if (crosshair.box.containsPoint(coords)) {
                         crosshair.showAt(point);
                     } else {
                         crosshair.hide();
@@ -5902,10 +5902,15 @@ kendo_module({
         pointsByCategoryIndex: function(categoryIndex) {
             var charts = this.charts,
                 result = [],
-                i, j, points, point;
+                i, j, points, point, chart;
 
             if (categoryIndex !== null) {
                 for (i = 0; i < charts.length; i++) {
+                    chart = charts[i];
+                    if (chart.pane.options.name === "_navigator") {
+                        continue;
+                    }
+
                     points = charts[i].categoryPoints[categoryIndex];
                     if (points && points.length) {
                         for (j = 0; j < points.length; j++) {
@@ -7101,7 +7106,7 @@ kendo_module({
                       "# var point = points[i]; #" +
                         "<tr>" +
                             "# if(point.series.name) { #<td>#= point.series.name #:</td> # } #" +
-                                "<td># if(format) {##= point.formatValue(format) ##} else { ##= point.value ## } #</td>" +
+                                "<td>#= pointContent(point) #</td>" +
                         "</tr>" +
                       "# } #" +
                       "</table>",
@@ -7162,7 +7167,7 @@ kendo_module({
                 content = template({
                     points: points,
                     category: category,
-                    format: tooltip.options.format
+                    pointContent: tooltip.pointContent
                 });
             }
 
@@ -7258,6 +7263,8 @@ kendo_module({
                     lineStart[dim] = lineEnd[dim] = point[dim];
                 }
             }
+
+            crosshair.box = box;
 
             return [lineStart, lineEnd];
         },
