@@ -153,8 +153,15 @@ kendo_module({
                 this.element.remove();
             }
         }
-    })
+    });
+
+    var Layout = View.extend({
+        showIn: function(container, view) {
+            this.element.find(container).append(view.render());
+        }
+    });
 
     kendo.Router = Router;
+    kendo.Layout = Layout;
     kendo.View = View;
 })(window.kendo.jQuery);

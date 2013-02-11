@@ -71,3 +71,13 @@ test("unbinds handlers on destroy", 1, function() {
 
     el.find("a").trigger("click");
 });
+
+test("layout renders view in a given region", 1, function() {
+    var layout = new kendo.Layout({ template: "<div><span id='foo' /><span id='bar' /></div>" }),
+        view = new kendo.View({ template: '<span id="baz">Baz</span>' });
+
+    layout.render();
+    layout.showIn('#bar', view);
+
+    equal(layout.element.find("#bar").html(), '<div>' + view.element.html() + '</div>');
+});
