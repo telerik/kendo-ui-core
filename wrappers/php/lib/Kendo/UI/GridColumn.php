@@ -249,6 +249,16 @@ in order to have valid HTML markup in the Grid.
     }
 
 //<< Properties
+
+    /**
+    * Specifies the local JavaScript array to use as foreign key values.
+    * @param array $value
+    * @return \Kendo\UI\GridColumn
+    */
+    public function values($value) {
+        return $this->setProperty('values', $value);
+    }
+
 }
 
 ?>
