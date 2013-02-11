@@ -12,14 +12,14 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
-        public GridEventBuilder Cancel(Func<object, object> handler)
+        public ListViewEventBuilder Cancel(Func<object, object> handler)
         {
             Handler("cancel", handler);
 
             return this;
         }
 
-        public GridEventBuilder Cancel(string handler)
+        public ListViewEventBuilder Cancel(string handler)
         {
             Handler("cancel", handler);
 
