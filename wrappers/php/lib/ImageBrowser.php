@@ -5,6 +5,30 @@ function startsWith($haystack, $needle)
     return !strncmp($haystack, $needle, strlen($needle));
 }
 
+function endsWith($haystack, $needle)
+{
+    $length = strlen($needle);
+
+    if ($length == 0) {
+        return true;
+    }
+
+    return (substr($haystack, -$length) === $needle);
+}
+
+function rmdir_r($dir) {
+    $files = array_diff(scandir($dir), array('.','..'));
+
+    foreach ($files as $file) {
+        if (is_dir("$dir/$file")) {
+            rmdir_r("$dir/$file");
+        } else {
+            unlink("$dir/$file");
+        }
+    }
+    return rmdir($dir);
+}
+
 class ImageBrowserEntry {
     public $name;
     public $type = 'f';
@@ -114,7 +138,7 @@ class Thumbnail {
 }
 
 class ImageBrowser {
-    private $contentPath = '/home/gyoshev/github/kendo/wrappers/php/content/shared/';
+    private $contentPath = '/home/gyoshev/github/kendo/wrappers/php/resources/imagebrowser/';
 
     private function canAccess($path) {
         return startsWith(realpath($path), realpath($this->contentPath));
@@ -127,8 +151,16 @@ class ImageBrowser {
         }
     }
 
+    private function normalize($path) {
+        if (!endsWith($path, '/')) {
+            $path .= '/';
+        }
+
+        return $path;
+    }
+
     public function basePath() {
-        return $this->contentPath;
+        return $this->normalize($this->contentPath);
     }
 
     public function getList($path) {
@@ -207,15 +239,41 @@ class ImageBrowser {
     }
 
     public function destroy($path, $entry) {
-        $this->ensureAccess($path);
+        $target = $this->normalize($path) . $entry;
+
+        $this->ensureAccess($target);
+
+        if (is_dir($target)) {
+            rmdir_r($target);
+        } else {
+            unlink($target);
+        }
     }
 
     public function create($path, $entry) {
         $this->ensureAccess($path);
+
+        mkdir($path . $entry);
     }
 
     public function saveFile($file, $path) {
+        $path = $this->normalize($path);
+
         $this->ensureAccess($path);
+
+        $name = basename($file['name']);
+
+        $target = $path . $name;
+
+        move_uploaded_file($file['tmp_name'], $target);
+
+        header('Content-Type: application/json');
+
+        $result = new ImageBrowserEntry();
+        $result->size = filesize($target);
+        $result->name = $name;
+
+        echo json_encode($result);
     }
 }
 
@@ -228,16 +286,26 @@ $action = $parameters['action'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $path = $imageBrowser->basePath() . (isset($_POST['path']) ? $_POST['path'] : '');
+    $name = (isset($_POST['name']) ? $_POST['name'] : '');
 
-    if ($parameters['action'] == 'read') {
+    if ($action == 'read') {
         $imageBrowser->getList($path);
+    } elseif ($action == 'create') {
+        $imageBrowser->create($path, $name);
+    } elseif ($action == 'destroy') {
+        $imageBrowser->destroy($path, $name);
+    } elseif ($action == 'upload') {
+        if (isset($_FILES['file'])) {
+            $imageBrowser->saveFile($_FILES['file'], $path);
+        }
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $path = $imageBrowser->basePath() . $parameters['path'];
 
-    switch ($parameters['action']) {
-        case 'thumbnail': $imageBrowser->getThumbnail($path); break;
-        case 'image': $imageBrowser->getImage($path); break;
+    if ($action == 'thumbnail') {
+        $imageBrowser->getThumbnail($path);
+    } elseif ($action == 'image') {
+        $imageBrowser->getImage($path);
     }
 }
 
