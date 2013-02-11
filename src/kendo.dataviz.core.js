@@ -1959,6 +1959,7 @@ kendo_module({
                 options = anim.options,
                 element = anim.element,
                 elementId = element.options.id,
+                domElement,
                 delay = options.delay || 0,
                 start = +new Date() + delay,
                 duration = options.duration,
@@ -1982,9 +1983,11 @@ kendo_module({
 
                     anim.step(easingPos);
 
-                    // TODO: Cache without breaking fix in
-                    // https://github.com/telerik/kendo/commit/c774a37973bad8cbbc319f256d23943518046ccd
-                    element.refresh(getElement(elementId));
+                    if (!domElement || detached(domElement)) {
+                        domElement = getElement(elementId);
+                    }
+
+                    element.refresh(domElement);
 
                     if (wallTime < finish) {
                         requestAnimFrame(loop);
@@ -2743,6 +2746,16 @@ kendo_module({
         } else {
             return doc.getElementById(modelId);
         }
+    }
+
+    function detached(element) {
+        var parent = element.parentNode;
+
+        while(parent && parent.parentNode) {
+            parent = parent.parentNode;
+        }
+
+        return parent !== doc;
     }
 
     // Exports ================================================================
