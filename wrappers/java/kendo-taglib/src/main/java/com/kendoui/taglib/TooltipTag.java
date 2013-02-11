@@ -2,10 +2,17 @@
 package com.kendoui.taglib;
 
 
+import java.io.IOException;
+import java.io.StringWriter;
+
 import com.kendoui.taglib.tooltip.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Empty;
+import com.kendoui.taglib.html.Script;
 import com.kendoui.taglib.json.Function;
+import com.kendoui.taglib.json.Serializer;
 
 
 import javax.servlet.jsp.JspException;
@@ -16,6 +23,37 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
     public TooltipTag() {
         super("Tooltip");
     }
+    
+    @Override
+    protected Element<?> createElement() {
+        return new Empty();
+    }
+    
+    @Override
+    public Script script() {
+        StringWriter content = new StringWriter();
+
+        content.append("jQuery(function(){jQuery(\"")
+               .append(getName())
+               .append("\").kendo")
+               .append("Tooltip")
+               .append("(");
+
+        try {
+            new Serializer().serialize(content, this);
+        } catch (IOException exception) {
+            // StringWriter is not supposed to throw IOException
+        }
+
+        content.append(");})");
+
+        Script script = new Script();
+
+        script.html(content.toString());
+
+        return script;
+    }
+
     
     @Override
     public int doEndTag() throws JspException {
