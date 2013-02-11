@@ -7364,7 +7364,14 @@ kendo_module({
             var tooltip = this,
                 chartElement = crosshair.axis.getRoot().parent.element;
 
-            tooltip.options = deepExtend({}, tooltip.options, options);
+            tooltip.options = deepExtend({},
+                tooltip.options, {
+                    border: {
+                        color: crosshair.axis.plotArea.options.seriesColors[0]
+                    }
+                },
+                options);
+
             tooltip.axis = crosshair.axis;
             tooltip.crosshair = crosshair;
             options = tooltip.options;
@@ -7390,7 +7397,6 @@ kendo_module({
 
         options: {
             background: BLACK,
-            color: WHITE,
             border: {
                 width: 3
             },

@@ -125,6 +125,11 @@ kendo_module({
                 title: {
                     font: SANS16,
                     margin: 5
+                },
+                crosshair: {
+                    tooltip: {
+                        font: SANS12
+                    }
                 }
             },
             tooltip: {
@@ -250,6 +255,13 @@ kendo_module({
                 },
                 title: {
                     color: WHITE
+                },
+                crosshair: {
+                    tooltip: {
+                        background: "#3d3d3d",
+                        color: WHITE,
+                        opacity: 0.8
+                    }
                 }
             },
             tooltip: {
@@ -327,6 +339,13 @@ kendo_module({
                 },
                 title: {
                     color: "#293135"
+                },
+                crosshair: {
+                    tooltip:{
+                        background: WHITE,
+                        color: BLACK,
+                        opacity: 0.8
+                    }
                 }
             },
             tooltip: {
@@ -445,6 +464,13 @@ kendo_module({
                 },
                 title: {
                     color: "#ffffff"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: "#1b141a",
+                        color: "#ffffff",
+                        opacity: 1
+                    }
                 }
             },
             tooltip: {
@@ -522,6 +548,13 @@ kendo_module({
                 },
                 title: {
                     color: "#232323"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: WHITE,
+                        color: BLACK,
+                        opacity: 0.8
+                    }
                 }
             },
             tooltip: {
@@ -624,6 +657,13 @@ kendo_module({
                 },
                 title: {
                     color: "#4e5968"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: WHITE,
+                        color: "#4e5968",
+                        opacity: 0.8
+                    }
                 }
             },
             tooltip: {
@@ -705,6 +745,12 @@ kendo_module({
                 },
                 title: {
                     color: "#777777"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: WHITE,
+                        color: BLACK
+                    }
                 }
             },
             tooltip: {
@@ -806,6 +852,12 @@ kendo_module({
                 },
                 title: {
                     color: "#ffffff"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: "#0e0e0e",
+                        color: "#ffffff"
+                    }
                 }
             },
             tooltip: {
@@ -932,6 +984,13 @@ kendo_module({
                 },
                 title: {
                     color: "#ffffff"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: "#212a33",
+                        color: "#ffffff",
+                        opacity: 1
+                    }
                 }
             },
             tooltip: {
@@ -1058,6 +1117,13 @@ kendo_module({
                 },
                 title: {
                     color: "#686868"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: "#ffffff",
+                        color: "#686868",
+                        opacity: 0.8
+                    }
                 }
             },
             tooltip: {
@@ -1185,6 +1251,13 @@ kendo_module({
                 },
                 title: {
                     color: "#343434"
+                },
+                crosshair: {
+                    tooltip: {
+                        background: "#ffffff",
+                        color: "#343434",
+                        opacity: 0.8
+                    }
                 }
             },
             tooltip: {
