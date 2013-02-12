@@ -64,10 +64,12 @@ def bundle(options)
     end
 
     if vsdoc_sources
-        sources = FileList["docs/api/{#{vsdoc_sources.keys[0].join(",")}}/*.md"]
-        vsdoc_path = File.join(path, "vsdoc", "kendo.#{vsdoc_sources.values[0]}-vsdoc.js")
-        vsdoc vsdoc_path => sources
-        prerequisites.push(vsdoc_path)
+        vsdoc_sources.keys.each_with_index do |key, index|
+            sources = FileList["docs/api/{#{vsdoc_sources.keys[index].join(",")}}/*.md"]
+            vsdoc_path = File.join(path, "vsdoc", "kendo.#{vsdoc_sources.values[index]}-vsdoc.js")
+            vsdoc vsdoc_path => sources
+            prerequisites.push(vsdoc_path)
+        end
     end
 
     if type_script_sources
