@@ -21,10 +21,10 @@ class ListView extends \Kendo\UI\Widget {
 
         if ($this->getProperty('pageable')) {
             $pager = new \Kendo\Html\Element('div');
-            $pager->attr('id', $this->id . '_pager');
+            $pager->attr('id', "{$this->id}_pager");
 
 
-            $html .= $pager->outerHtml();
+            $html = "$html {$pager->outerHtml()}";
         }
 
         return $html;
@@ -38,7 +38,7 @@ class ListView extends \Kendo\UI\Widget {
 
         //adjust pager settings
         if ($this->getProperty('pageable')) {
-            $properties['pageable'] = array('pagerId' => $this->id . '_pager');
+            $properties['pageable'] = array('pagerId' => "{$this->id}_pager");
         }
 
         return $properties;
