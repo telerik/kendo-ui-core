@@ -105,6 +105,7 @@
 
         events: [
             CLICK,
+            "dataBound",
             LAST_PAGE_REACHED
         ],
 
