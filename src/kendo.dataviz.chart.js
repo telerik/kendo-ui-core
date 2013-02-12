@@ -1887,7 +1887,7 @@ kendo_module({
                 max = options.max || seriesMax,
                 baseUnit = options.baseUnit || axis.timeUnits(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
-                autoMin = floorDate(toTime(min) - 1, baseUnit),
+                autoMin = floorDate(toTime(min) - 1, baseUnit) || toDate(max),
                 autoMax = ceilDate(toTime(max) + 1, baseUnit),
                 userMajorUnit = options.majorUnit ? options.majorUnit : undefined,
                 majorUnit = userMajorUnit || dataviz.ceil(
@@ -6631,14 +6631,17 @@ kendo_module({
                 seriesIx,
                 series = plotArea.series,
                 currentSeries,
+                seriesAxisName,
                 firstPointValue,
-                dateData;
+                typeSamples = [axisOptions.min, axisOptions.max],
+                inferredDate;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
-                if (currentSeries[vertical ? "yAxis" : "xAxis"] == axisOptions.name) {
+                seriesAxisName = currentSeries[vertical ? "yAxis" : "xAxis"];
+                if ((seriesAxisName == axisOptions.name) || (axisIndex == 0 && !seriesAxisName)) {
                     firstPointValue = bindPoint(currentSeries, 0).value;
-                    dateData = firstPointValue[vertical ? "y" : "x"] instanceof Date;
+                    typeSamples.push(firstPointValue[vertical ? "y" : "x"]);
 
                     break;
                 }
@@ -6649,7 +6652,14 @@ kendo_module({
                 range.max = math.max(range.max, defaultRange.max);
             }
 
-            if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && dateData)) {
+            for (i = 0; i < typeSamples.length; i++) {
+                if (typeSamples[i] instanceof Date) {
+                    inferredDate = true;
+                    break;
+                }
+            }
+
+            if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && inferredDate)) {
                 axis = new DateValueAxis(range.min, range.max, axisOptions);
             } else {
                 axis = new NumericAxis(range.min, range.max, axisOptions);
