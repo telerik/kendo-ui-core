@@ -24,7 +24,7 @@ module("History", {
 });
 
 function url(expected) {
-    equal(loc.href, expected);
+    equal(expected, loc.href.replace(/#$/, ''));
 }
 
 function startWithHash() {
@@ -136,6 +136,18 @@ test("triggers events when history changed", function() {
     });
 
     kendoHistory.navigate("/new-location");
+});
+
+test("alllows prevention of hash change if preventDefault called", function() {
+    expect(1);
+    startWithHash();
+
+    kendoHistory.change(function(e) {
+        e.preventDefault();
+    });
+
+    kendoHistory.navigate("/new-location");
+    url(initial);
 });
 
 test("strips hash from passed urls", function() {

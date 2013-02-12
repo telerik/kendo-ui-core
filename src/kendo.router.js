@@ -80,7 +80,7 @@ kendo_module({
             return window.history && window.history.pushState;
         },
 
-        _checkUrl: function() {
+        _checkUrl: function(e) {
             var that = this, current = that._currentLocation();
 
             if (current != that.current) {
@@ -142,15 +142,17 @@ kendo_module({
                 return;
             }
 
+            if (!silent) {
+                if (that.trigger("change", { url: to })) {
+                    to = that.current; // revert to current,
+                }
+            }
+
             if (that._pushState) {
                 history.pushState({}, document.title, that._makePushStateUrl(to));
                 that.current = to;
             } else {
                 location.hash = that.current = to;
-            }
-
-            if (!silent) {
-                that.trigger("change", {url: that.current});
             }
         }
     });
