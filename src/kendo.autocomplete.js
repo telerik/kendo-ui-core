@@ -71,6 +71,7 @@ kendo_module({
             }
 
             that._wrapper();
+            that._loader();
 
             that._accessors();
 
@@ -142,10 +143,12 @@ kendo_module({
                 that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
+                that._progressHandler = proxy(that._showBusy, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
-                .bind("change", that._refreshHandler);
+                .bind("change", that._refreshHandler)
+                .bind("progress", that._progressHandler);
         },
 
         setDataSource: function(dataSource) {
@@ -258,6 +261,7 @@ kendo_module({
 
             that._makeUnselectable();
 
+            that._hideBusy();
             that.trigger("dataBound");
         },
 
@@ -444,6 +448,27 @@ kendo_module({
             }
         },
 
+        _hideBusy: function () {
+            var that = this;
+            clearTimeout(that._busy);
+            that._loading.hide();
+            that.element.attr("aria-busy", false);
+            that._busy = null;
+        },
+
+        _showBusy: function () {
+            var that = this;
+
+            if (that._busy) {
+                return;
+            }
+
+            that._busy = setTimeout(function () {
+                that.element.attr("aria-busy", true);
+                that._loading.show();
+            }, 100);
+        },
+
         _placeholder: function(show) {
             if (placeholderSupported) {
                 return;
@@ -514,6 +539,10 @@ kendo_module({
                     that.current(li.addClass(SELECTED));
                 }
             }
+        },
+
+        _loader: function() {
+            this._loading = $('<span class="k-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
         _toggleHover: function(e) {

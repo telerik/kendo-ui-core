@@ -174,7 +174,7 @@
 
             test("Value of the autocomplete is empty string when placeholder is used", function() {
                 var autocomplete = new AutoComplete($("<input/>"),{
-                    placeholder: "Select..."
+                    placeholder: "input..."
                 });
 
                 equal(autocomplete.value(), "");
@@ -182,7 +182,7 @@
 
             test("destroy method works", function() {
                 var autocomplete = new AutoComplete($("<input/>"),{
-                    placeholder: "Select..."
+                    placeholder: "input..."
                 });
 
                 autocomplete.destroy();
@@ -206,7 +206,7 @@
 
             test("AutoComplete adds ARIA role='textbox'", function() {
                 var autocomplete = new AutoComplete(input, {
-                    placeholder: "Select..."
+                    placeholder: "input..."
                 });
 
                 equal(autocomplete.element.attr("role"), "textbox");
@@ -214,7 +214,7 @@
 
             test("AutoComplete adds aria-haspopup", function() {
                 var autocomplete = new AutoComplete(input, {
-                    placeholder: "Select..."
+                    placeholder: "input..."
                 });
 
                 equal(autocomplete.element.attr("aria-haspopup"), "true");
@@ -222,7 +222,7 @@
 
             test("AutoComplete adds aria-owns", function() {
                 var autocomplete = new AutoComplete(input.attr("id", "test"), {
-                    placeholder: "Select..."
+                    placeholder: "input..."
                 });
 
                 equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
@@ -230,7 +230,7 @@
 
             test("AutoComplete adds aria-autocomplete='both'", function() {
                 var autocomplete = new AutoComplete(input.attr("id", "test"), {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     suggest: true
                 });
 
@@ -239,7 +239,7 @@
 
             test("AutoComplete adds aria-autocomplete='list' if no suggest", function() {
                 var autocomplete = new AutoComplete(input.attr("id", "test"), {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     suggest: false
                 });
 
@@ -248,7 +248,7 @@
 
             test("Autocomplete sets tabindex", function() {
                 var autocomplete = new AutoComplete(input.attr("id", "test"), {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     suggest: false
                 });
 
@@ -257,7 +257,7 @@
 
             test("Autocomplete preserves tab order", function() {
                 var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     suggest: false
                 });
 
@@ -266,7 +266,7 @@
 
             test("Autocomplete adds aria-disabled=false", function() {
                 var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     suggest: false
                 });
 
@@ -275,7 +275,7 @@
 
             test("Autocomplete adds aria-disabled=true", function() {
                 var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     suggest: false,
                     enable: false
                 });
@@ -285,7 +285,7 @@
 
             test("Autocomplete adds aria-expanded", function() {
                 var autocomplete = new AutoComplete(input, {
-                    placeholder: "Select...",
+                    placeholder: "input...",
                     dataSource: ["Item"],
                     suggest: false
                 });
@@ -293,6 +293,37 @@
                 autocomplete.search("I");
 
                 equal(autocomplete.element.attr("aria-expanded"), "true");
+            });
+
+            //loading
+            test("AutoComplete creates loading element", function() {
+                var autocomplete = new AutoComplete(input);
+
+                ok(autocomplete._loading);
+            });
+
+            asyncTest("AutoComplete shows loading icon on progress", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete.dataSource.trigger("progress");
+
+                setTimeout(function() {
+                    notEqual(autocomplete._loading.css("display"), "none");
+                    start();
+                }, 200);
+            });
+
+            asyncTest("AutoComplete hides loading icon on dataSource change", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete._showBusy();
+
+                setTimeout(function() {
+                    autocomplete.refresh();
+
+                    equal(autocomplete._loading.css("display"), "none");
+                    start();
+                }, 200);
             });
 
       </script>
