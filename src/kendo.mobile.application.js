@@ -3,7 +3,7 @@ kendo_module({
     name: "Application",
     category: "mobile",
     description: "The Mobile application provides a framework to build native looking web applications on mobile devices.",
-    depends: [ "mobile.pane" ]
+    depends: [ "mobile.pane", "router" ]
 });
 
 (function($, undefined) {

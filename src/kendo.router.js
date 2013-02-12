@@ -1,10 +1,10 @@
 kendo_module({
-    id: "history",
-    name: "History",
-    category: "mobile",
-    description: "History",
+    id: "router",
+    name: "history",
+    category: "framework",
+    description: "Kendo Router",
     depends: [ "core" ],
-    hidden: true
+    hidden: false
 });
 
 (function($, undefined) {

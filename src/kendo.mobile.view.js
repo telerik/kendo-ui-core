@@ -3,7 +3,7 @@ kendo_module({
     name: "View",
     category: "mobile",
     description: "Mobile View",
-    depends: [ "core", "fx", "history", "mobile.scroller" ],
+    depends: [ "core", "fx", "mobile.scroller" ],
     hidden: true
 });
 

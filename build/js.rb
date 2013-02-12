@@ -65,6 +65,7 @@ file "src/kendo.aspnetmvc.js" => JS_BUILDFILE
 # Suites
 WEB_JS = FileList[
     "src/kendo.core.js",
+    "src/kendo.router.js",
     "src/kendo.fx.js",
     "src/kendo.data.odata.js",
     "src/kendo.data.xml.js",
@@ -115,6 +116,7 @@ WEB_MIN_JS = FileList[WEB_SRC_JS].ext('min.js').include('src/jquery.min.js')
 
 DATAVIZ_JS = FileList[
     "src/kendo.core.js",
+    "src/kendo.router.js",
     "src/kendo.data.odata.js",
     "src/kendo.data.xml.js",
     "src/kendo.data.js",
@@ -141,7 +143,7 @@ MOBILE_JS = FileList[
     "src/kendo.data.js",
     "src/kendo.binder.js",
     "src/kendo.validator.js",
-    "src/kendo.history.js",
+    "src/kendo.router.js",
     "src/kendo.userevents.js",
     "src/kendo.draganddrop.js",
     "src/kendo.popup.js",
@@ -179,6 +181,7 @@ CDN_MIN_JS = FileList[MVC_MIN_JS]
 
 WIN_JS = FileList[
     "src/kendo.core.js",
+    "src/kendo.router.js",
     "src/kendo.fx.js",
     "src/kendo.data.odata.js",
     "src/kendo.data.xml.js",
