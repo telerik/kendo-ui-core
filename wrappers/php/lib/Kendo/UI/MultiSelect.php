@@ -6,6 +6,10 @@ class MultiSelect extends \Kendo\UI\Widget {
     public function name() {
         return 'MultiSelect';
     }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('select');
+    }
 //>> Properties
 
     /**
