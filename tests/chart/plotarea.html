@@ -3334,6 +3334,34 @@
                     same(plotArea.axisX.options.type, "date");
                 });
 
+                test("Automatically detects date X axis from min setting", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: []
+                    }], {
+                        xAxis: {
+                            min: new Date(2012, 02, 01)
+                        }
+                    });
+
+                    same(plotArea.axisX.options.type, "date");
+                });
+
+                test("Automatically detects date X axis from max setting", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: []
+                    }], {
+                        xAxis: {
+                            max: new Date(2012, 02, 01)
+                        }
+                    });
+
+                    same(plotArea.axisX.options.type, "date");
+                });
+
                 test("Automatic detection of X axis can be overriden", function() {
                     createPlotArea([{
                         name: "Value A",
@@ -3380,6 +3408,34 @@
                         yField: "y",
                         data: [{ x: 100, y: new Date(2012, 02, 01) }]
                     }]);
+
+                    same(plotArea.axisY.options.type, "date");
+                });
+
+                test("Automatically detects date Y axis from min setting", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: []
+                    }], {
+                        yAxis: {
+                            min: new Date(2012, 02, 01)
+                        }
+                    });
+
+                    same(plotArea.axisY.options.type, "date");
+                });
+
+                test("Automatically detects date Y axis from max setting", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: []
+                    }], {
+                        yAxis: {
+                            max: new Date(2012, 02, 01)
+                        }
+                    });
 
                     same(plotArea.axisY.options.type, "date");
                 });
