@@ -104,7 +104,6 @@ kendo_module({
         LINE_MARKER_SIZE = 8,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
-        MIN_DATE = new Date(0),
         MINUTES = "minutes",
         MONTHS = "months",
         MOUSELEAVE_NS = "mouseleave" + NS,
@@ -1888,7 +1887,7 @@ kendo_module({
                 max = options.max || seriesMax,
                 baseUnit = options.baseUnit || axis.timeUnits(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
-                autoMin = floorDate(toTime(min) - 1, baseUnit) || MIN_DATE,
+                autoMin = floorDate(toTime(min) - 1, baseUnit) || toDate(max),
                 autoMax = ceilDate(toTime(max) + 1, baseUnit),
                 userMajorUnit = options.majorUnit ? options.majorUnit : undefined,
                 majorUnit = userMajorUnit || dataviz.ceil(
