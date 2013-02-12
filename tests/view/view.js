@@ -1,13 +1,13 @@
 module("View", {
     setup: function() {
-        var templateElement = $('<script id="template" type="text/x-kendo-template">Foo</script>');
-        $(document.body).append(templateElement);
+        var contentElement = $('<script id="content" type="text/x-kendo-template">Foo</script>');
+        $(document.body).append(contentElement);
     }
 });
 
 test("reads contents from a passed string", 1, function() {
     var view = new kendo.View({
-        template: "<span>Foo</span>"
+        content: "<span>Foo</span>"
     });
 
     equal(view.render().html(), "<span>Foo</span>");
@@ -15,7 +15,17 @@ test("reads contents from a passed string", 1, function() {
 
 test("reads contents from a given script tag", 2, function() {
     var view = new kendo.View({
-        template: "#template"
+        content: "#content"
+    });
+
+    ok(view.render() instanceof jQuery);
+
+    equal(view.render().html(), "Foo");
+});
+
+test("accepts id without #", 2, function() {
+    var view = new kendo.View({
+        content: "content"
     });
 
     ok(view.render() instanceof jQuery);
@@ -25,7 +35,7 @@ test("reads contents from a given script tag", 2, function() {
 
 test("reuses element", 1, function() {
     var view = new kendo.View({
-        template: "#template"
+        content: "#content"
     });
 
     equal(view.render(), view.render());
@@ -33,7 +43,7 @@ test("reuses element", 1, function() {
 
 test("renders a div", 1, function() {
     var view = new kendo.View({
-        template: "#template"
+        content: "#content"
     });
 
     ok(view.render().is("div"));
@@ -41,7 +51,7 @@ test("renders a div", 1, function() {
 
 test("can render as any tag", 1, function() {
     var view = new kendo.View({
-        template: "#template",
+        content: "#content",
         tagName: "span"
     });
 
@@ -50,7 +60,7 @@ test("can render as any tag", 1, function() {
 
 test("binds to a given model", 1, function() {
     var view = new kendo.View({
-        template: "<i><a data-bind='click: foo'>Foo</a></i>",
+        content: "<i><a data-bind='click: foo'>Foo</a></i>",
         model: kendo.observable({ foo: function() { ok(true); } })
     });
 
@@ -59,7 +69,7 @@ test("binds to a given model", 1, function() {
 
 test("unbinds handlers on destroy", 1, function() {
     var view = new kendo.View({
-        template: "<i><a data-bind='click: foo'>Foo</a></i>",
+        content: "<i><a data-bind='click: foo'>Foo</a></i>",
         model: kendo.observable({ foo: function() { ok(true); } })
     });
 
@@ -74,7 +84,7 @@ test("unbinds handlers on destroy", 1, function() {
 
 test("triggers init when rendered initially", 1, function() {
     var view = new kendo.View({
-        template: "<i />",
+        content: "<i />",
         init: function() { ok(true); }
     });
 
@@ -84,7 +94,7 @@ test("triggers init when rendered initially", 1, function() {
 
 test("triggers show when rendered", 2, function() {
     var view = new kendo.View({
-        template: "<i />",
+        content: "<i />",
         show: function() { ok(true); }
     });
 
@@ -95,8 +105,8 @@ test("triggers show when rendered", 2, function() {
 module("Layout", { });
 
 test("layout renders view in a given region", 1, function() {
-    var layout = new kendo.Layout({ template: "<div><span id='container' /></div>" }),
-        view = new kendo.View({ template: '<span id="baz">Baz</span>' });
+    var layout = new kendo.Layout({ content: "<div><span id='container' /></div>" }),
+        view = new kendo.View({ content: '<span id="baz">Baz</span>' });
 
     layout.render();
 
@@ -106,9 +116,9 @@ test("layout renders view in a given region", 1, function() {
 });
 
 test("layout triggers view hide when replacing views", 1, function() {
-    var layout = new kendo.Layout({ template: "<div><span id='container' /></div>" }),
-        foo = new kendo.View({ template: '<span>Foo</span>', hide: function() { ok(true); } }),
-        bar = new kendo.View({ template: '<span>Foo</span>' });
+    var layout = new kendo.Layout({ content: "<div><span id='container' /></div>" }),
+        foo = new kendo.View({ content: '<span>Foo</span>', hide: function() { ok(true); } }),
+        bar = new kendo.View({ content: '<span>Foo</span>' });
 
     layout.render();
 

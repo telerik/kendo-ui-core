@@ -1,6 +1,6 @@
 kendo_module({
-    id: "spa",
-    name: "Single Page Application",
+    id: "view",
+    name: "View",
     category: "framework",
     depends: [ "core" ],
     hidden: false
@@ -18,7 +18,7 @@ kendo_module({
     var View = Observable.extend({
         init: function(options) {
             Observable.fn.init.call(this);
-            this.template = options.template;
+            this.content = options.content;
             this.tagName = options.tagName || "div";
             this.model = options.model;
             this.bind([ INIT, SHOW, HIDE ], options);
@@ -27,14 +27,14 @@ kendo_module({
         render: function(container) {
             var that = this,
                 element,
-                template;
+                content;
 
             container = $(container);
 
             if (!that.element) {
                 element = $("<" + that.tagName + " />");
-                template = $(that.template);
-                element.append(template[0].tagName === SCRIPT ? template.html() : template);
+                content = $(document.getElementById(that.content) || that.content); // support passing id without #
+                element.append(content[0].tagName === SCRIPT ? content.html() : content);
                 that.element = element;
                 kendo.bind(that.element, that.model);
                 this.trigger(INIT);
