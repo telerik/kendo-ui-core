@@ -110,7 +110,6 @@ kendo_module({
                     }
                 }
 
-
                 // If the result is a function - invoke it
                 if (typeof result === "function") {
                     index = path.lastIndexOf(".");
@@ -871,8 +870,9 @@ kendo_module({
                     widget.bind("dataBound", that._dataBound);
                     widget.bind("itemChange", that._itemChange);
 
-                    if (widget.dataSource instanceof kendo.data.DataSource) {
-                        source = that.bindings.source.get();
+                    source = that.bindings.source.get();
+
+                    if (widget.dataSource instanceof kendo.data.DataSource && widget.dataSource != source) {
                         if (source instanceof kendo.data.DataSource) {
                             widget.setDataSource(source);
                         } else if (source && source._dataSource) {

@@ -382,7 +382,6 @@ kendo_module({
                 var isObservableArray = object instanceof ObservableArray;
                 var isDataSource = object instanceof DataSource;
 
-
                 if (type === "[object Object]" && !isDataSource && !isObservableArray) {
                     if (!(object instanceof ObservableObject)) {
                         object = new ObservableObject(object);
@@ -392,8 +391,8 @@ kendo_module({
                         object.bind(GET, eventHandler(that, GET, field, true));
                         object.bind(CHANGE, eventHandler(that, CHANGE, field, true));
                     }
-                } else if (type === "[object Array]" || isObservableArray) {
-                    if (!isObservableArray) {
+                } else if (type === "[object Array]" || isObservableArray || isDataSource) {
+                    if (!isObservableArray && !isDataSource) {
                         object = new ObservableArray(object);
                     }
 

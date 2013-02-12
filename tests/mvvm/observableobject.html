@@ -346,6 +346,19 @@
 
                 strictEqual(observable.foo.parent(), observable);
             });
+
+            test("datasource change event propagates to parent", 1, function() {
+                var observable = new kendo.observable( {
+                    dataSource: new kendo.data.DataSource()
+                });
+
+                observable.bind("change", function(e) {
+                    equal(e.action, "add");
+                });
+
+                observable.dataSource.add({});
+            });
+
         </script>
     </head>
 </html>
