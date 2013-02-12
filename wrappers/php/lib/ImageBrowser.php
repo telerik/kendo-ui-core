@@ -138,7 +138,8 @@ class Thumbnail {
 }
 
 class ImageBrowser {
-    private $contentPath = '/home/gyoshev/github/kendo/wrappers/php/resources/imagebrowser/';
+    // path to file upload directory
+    private $contentPath = '/../resources/imagebrowser/';
 
     private function canAccess($path) {
         return startsWith(realpath($path), realpath($this->contentPath));
@@ -160,7 +161,7 @@ class ImageBrowser {
     }
 
     public function basePath() {
-        return $this->normalize($this->contentPath);
+        return $this->normalize(realpath(dirname(__FILE__) . $this->contentPath));
     }
 
     public function getList($path) {
