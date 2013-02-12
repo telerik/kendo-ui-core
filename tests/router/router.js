@@ -102,6 +102,32 @@ test("parses splat params", 2, function() {
     navigate("/foo/bar/baz");
 });
 
+test("triggers change on url change", 2, function(){
+    var router = new kendo.Router();
+
+
+    router.one("change", function(e) { equal(e.url, "/") });
+    router.start();
+    router.one("change", function(e) { equal(e.url, "/foo") });
+    navigate("/foo");
+});
+
+test("preventing default does not hit the route", 0, function(){
+    var router = new kendo.Router();
+
+    router.start();
+
+    router.route("/foo", function(url) {
+        ok(false);
+    });
+
+    router.one("change", function(e) {
+        e.preventDefault();
+    });
+
+    navigate("/foo");
+});
+
 test("triggers route missing if no route found", 2, function(){
     var router = new kendo.Router();
 
@@ -117,7 +143,7 @@ test("triggers route missing if no route found", 2, function(){
     navigate("/foo");
 });
 
-test("navigates to a given url", 1, function(){
+test("navigate method navigates to a given url", 1, function(){
     var router = new kendo.Router();
 
     router.route("/foo", function() {

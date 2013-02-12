@@ -166,6 +166,7 @@ kendo_module({
         Observable = kendo.Observable,
         INIT = "init",
         ROUTE_MISSING = "routeMissing",
+        CHANGE = "change",
         optionalParam = /\((.*?)\)/g,
         namedParam = /(\(\?)?:\w+/g,
         splatParam = /\*\w+/g,
@@ -221,7 +222,7 @@ kendo_module({
         init: function(options) {
             Observable.fn.init.call(this);
             this.routes = [];
-            this.bind([INIT, ROUTE_MISSING], options);
+            this.bind([INIT, ROUTE_MISSING, CHANGE], options);
         },
 
         destroy: function() {
@@ -238,12 +239,12 @@ kendo_module({
                     }
 
                     if (!that.trigger(INIT, e)) {
-                        that._urlChanged(e.url);
+                        that._urlChanged(e);
                     }
                 },
 
                 urlChangedProxy = function(e) {
-                    that._urlChanged(e.url);
+                    that._urlChanged(e);
                 };
 
             kendo.history.start({
@@ -263,9 +264,15 @@ kendo_module({
             kendo.history.navigate(url, silent);
         },
 
-        _urlChanged: function(url) {
+        _urlChanged: function(e) {
+            var url = e.url;
             if (!url) {
                 url = "/";
+            }
+
+            if (this.trigger(CHANGE, {url: e.url})) {
+                e.preventDefault();
+                return;
             }
 
             var idx = 0,
