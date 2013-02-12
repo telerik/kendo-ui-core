@@ -745,7 +745,6 @@ kendo_module({
 
         _select: function(li) {
             var that = this,
-                max = that.options.maxSelectedItems,
                 values = that._values,
                 dataItem,
                 value,
