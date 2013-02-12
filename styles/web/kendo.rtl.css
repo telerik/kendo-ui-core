@@ -18,12 +18,12 @@
 .k-rtl .k-picker-wrap,
 .k-rtl .k-numeric-wrap
 {
-    padding-right: 2px;
+    padding-right: 0;
     padding-left: 22px;
 }
 
 .k-rtl .k-datetimepicker .k-picker-wrap {
-    padding-right: 2px;
+    padding-right: 0;
     padding-left: 42px;
 }
 
@@ -33,6 +33,14 @@
 {
     right: auto;
     left: 0;
+}
+
+.k-rtl .k-dropdown-wrap .k-input,
+.k-rtl .k-picker-wrap .k-input,
+.k-rtl .k-numeric-wrap .k-input
+{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
 
 .k-rtl .k-datetimepicker .k-picker-wrap .k-icon
