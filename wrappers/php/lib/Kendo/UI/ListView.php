@@ -6,6 +6,44 @@ class ListView extends \Kendo\UI\Widget {
     protected function name() {
         return 'ListView';
     }
+
+    protected function createElement() {
+        $tagName = $this->getProperty('tagName');
+        if ($tagName == NULL) {
+            $tagName = 'div';
+        }
+
+        return new \Kendo\Html\Element($tagName);
+    }
+
+    public function html() {
+        $html = parent::html();
+
+        if ($this->getProperty('pageable')) {
+            $pager = new \Kendo\Html\Element('div');
+            $pager->attr('id', $this->id . '_pager');
+
+
+            $html .= $pager->outerHtml();
+        }
+
+        return $html;
+    }
+
+    public function properties() {
+        $properties = parent::properties();
+
+        //remove tagName from init script
+        unset($properties['tagName']);
+
+        //adjust pager settings
+        if ($this->getProperty('pageable')) {
+            $properties['pageable'] = array('pagerId' => $this->id . '_pager');
+        }
+
+        return $properties;
+    }
+
 //>> Properties
 
     /**

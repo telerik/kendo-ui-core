@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
+    echo json_encode($result->read('Products', array('ProductID', 'ProductName', 'UnitPrice', 'UnitsInStock'), $request));
 
     exit;
 }
@@ -21,14 +21,56 @@ require_once '../../include/header.php';
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
-        <h3>${ProductName}</h3>
-        <p>${kendo.toString(UnitPrice, "c")}</p>
+        <img src="../../content/web/foods/#:ProductID#.jpg" alt="#:ProductName# image" />
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
 </script>
 
 <?php
+
+    $transport = new \Kendo\Data\DataSourceTransport();
+
+    $read = new \Kendo\Data\DataSourceTransportRead();
+
+    $read->url('index.php')
+         ->contentType('application/json')
+         ->type('POST');
+
+    $transport->read($read)
+              ->parameterMap('function(data) {
+                return kendo.stringify(data); }');
+
+    $model = new \Kendo\Data\DataSourceSchemaModel();
+
+    $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+    $productNameField->type('string');
+
+    $unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
+    $unitPriceField->type('number');
+
+    $unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
+    $unitsInStockField->type('number');
+
+    $model->addField($productNameField)
+          ->addField($unitPriceField)
+          ->addField($unitsInStockField);
+
+    $schema = new \Kendo\Data\DataSourceSchema();
+    $schema->data('data')
+           ->model($model)
+           ->total('total');
+
+    $dataSource = new \Kendo\Data\DataSource();
+
+    $dataSource->transport($transport)
+               ->schema($schema)
+               ->pageSize(15);
+
     $listview = new \Kendo\UI\ListView('listView');
+    $listview->dataSource($dataSource)
+             ->templateId('template')
+             ->pageable(true);
 
     echo $listview->render();
 ?>
