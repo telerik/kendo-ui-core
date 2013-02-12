@@ -219,6 +219,20 @@ class Grid extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the cancel event of the Grid.
+    * Raised when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window (popup editing mode).
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function cancel($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('cancel', $value);
+    }
+
+    /**
     * Sets the change event of the Grid.
     * Fires when the grid selection has changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

@@ -167,6 +167,20 @@ class ListView extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the cancel event of the ListView.
+    * Raised when the user clicks the "cancel" button.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\ListView
+    */
+    public function cancel($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('cancel', $value);
+    }
+
+    /**
     * Sets the change event of the ListView.
     * Fires when the list view selection has changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
