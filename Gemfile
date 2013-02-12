@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gem "rake"
 gem "github_api"
 gem "kramdown"
+gem "nokogiri"
 gem "rubyzip", :require => 'zip/zip'
 
 group :development do

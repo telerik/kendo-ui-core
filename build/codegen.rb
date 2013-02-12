@@ -2,6 +2,8 @@ require 'codegen/lib/options'
 require 'codegen/lib/markdown_parser'
 require 'codegen/lib/component'
 
+require 'nokogiri'
+require 'codegen/lib/mvc/api'
 require 'codegen/lib/java/module'
 require 'codegen/lib/java/composite_option'
 require 'codegen/lib/java/event'
@@ -27,6 +29,16 @@ namespace :generate do
             yaml = YAML.load(File.read(metadata))
 
             component.import(yaml)
+        end
+    end
+
+    namespace :mvc do
+
+        desc 'Generate MVC API reference'
+        task :api => 'Kendo.Mvc.xml' do
+            parser = CodeGen::MVC::API::XmlParser.new('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml')
+
+            parser.components
         end
     end
 
