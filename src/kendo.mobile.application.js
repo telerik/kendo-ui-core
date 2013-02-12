@@ -9,7 +9,6 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
-        history = kendo.history,
         support = kendo.support,
         Pane = mobile.ui.Pane,
 
@@ -203,7 +202,7 @@ kendo_module({
                     routeMissing: function(e) {
                         that.pane.navigate(e.url);
                     }
-                })
+                });
 
             that.pane.bind("navigate", function(e) {
                 router.navigate(e.url, true);
