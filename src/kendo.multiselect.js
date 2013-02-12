@@ -383,13 +383,6 @@ kendo_module({
                                    .bind(PROGRESS, that._progressHandler);
         },
 
-        _unbindDataSource: function() {
-            var that = this;
-
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(PROGRESS, that._progressHandler);
-        },
-
         _fetchItems: function(value) {
             var that = this;
 
