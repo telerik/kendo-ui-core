@@ -138,8 +138,9 @@
                 // if no pages present, try to retain the current position
                 if (!pageElements[0]) {
                     that.page = Math.floor((-that.movable.x) / width);
-                    that.scrollTo(that.page);
                 }
+
+                that.scrollTo(that.page, true);
 
                 pages = that.pages = ceil(dimension.getTotal() / width);
 
@@ -159,13 +160,13 @@
            this.dimensions.refresh();
         },
 
-        scrollTo: function(page) {
+        scrollTo: function(page, instant) {
             this.page = page;
-            this._moveTo(- page * this.dimension.getSize(), Transition.easeOutExpo);
+            this._moveTo(- page * this.dimension.getSize(), Transition.easeOutExpo, instant);
         },
 
-        _moveTo: function(location, ease) {
-            this.transition.moveTo({ location: location, duration: this.options.duration, ease: ease });
+        _moveTo: function(location, ease, instant) {
+            this.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
         },
 
         _dragEnd: function(e) {
