@@ -283,6 +283,5 @@ kendo_module({
         }
     });
 
-    kendo.Route = Route;
     kendo.Router = Router;
 })();
