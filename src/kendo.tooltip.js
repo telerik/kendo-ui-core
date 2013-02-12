@@ -22,6 +22,7 @@ kendo_module({
         HIDE = "hide",
         ERROR = "error",
         CONTENTLOAD = "contentLoad",
+        REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
         TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip" style="margin-left:0.5em">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#">close</a></div> #}#' +
                 '<div class="k-tooltip-content"></div>' +
@@ -76,7 +77,7 @@ kendo_module({
             "vertical": { offset: "left", size: "width" }
         },
         DEFAULTCONTENT = function(e) {
-            return e.element.data(kendo.ns + "title");
+            return e.target.data(kendo.ns + "title");
         };
 
     function restoreTitle(element) {
@@ -152,7 +153,7 @@ kendo_module({
             }
         },
 
-        events: [ SHOW, HIDE, CONTENTLOAD, ERROR ],
+        events: [ SHOW, HIDE, CONTENTLOAD, ERROR, REQUESTSTART ],
 
         _mouseenter: function(e) {
             saveTitleAttributes($(e.currentTarget));
@@ -187,6 +188,10 @@ kendo_module({
                 if (!showIframe) {
                     element.empty();
                     kendo.ui.progress(element, true);
+
+                    contentOptions.data = contentOptions.data || {};
+                    that.trigger(REQUESTSTART, { data: contentOptions.data, target: target });
+
                     // perform AJAX request
                     that._ajaxRequest(contentOptions);
                 } else {
@@ -209,7 +214,7 @@ kendo_module({
                         });
                 }
             } else if (contentOptions && isFunction(contentOptions)) {
-                contentOptions = contentOptions({ element: target });
+                contentOptions = contentOptions({ target: target });
                 that.content.html(contentOptions);
             } else {
                 that.content.html(contentOptions);

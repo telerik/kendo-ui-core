@@ -194,6 +194,90 @@
                 ok(tooltip.content.find("iframe").length);
             });
 
+            test("requestStart is triggered", 1, function() {
+                $.mockjax({
+                    url: "foo/baz"
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    },
+                    requestStart: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
+
+            test("requestStart add request data if such does not exist", 1, function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    response: function(settings) {
+                        equal(settings.data.bar, "foo");
+                        start();
+                    }
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    },
+                    requestStart: function(e) {
+                        e.data.bar = "foo"
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
+
+            test("requestStart updates request data", 1, function() {
+                $.mockjax({
+                    url: "foo/baz",
+                    response: function(settings) {
+                        equal(settings.data.bar, "foo");
+                        start();
+                    }
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz",
+                        data: {
+                            bar: "boo"
+                        }
+                    },
+                    requestStart: function(e) {
+                        e.data.bar = "foo"
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
+
+            test("target is passed to the requestStart", 1, function() {
+                $.mockjax({
+                    url: "foo/baz"
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    },
+                    requestStart: function(e) {
+                        equal(e.target, container);
+                        start();
+                    }
+                });
+
+                stop();
+                tooltip.show(container);
+            });
         </script>
     </body>
 </html>
