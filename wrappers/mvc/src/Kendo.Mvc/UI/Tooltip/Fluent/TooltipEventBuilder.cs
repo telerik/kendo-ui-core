@@ -192,5 +192,49 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Defines the inline handler of the RequestStart client-side event
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  @(Html.Kendo().Tooltip()
+        ///            .For("#element")
+        ///            .Events(events => events.RequestStart(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///  )
+        /// </code>
+        /// </example>
+        public TooltipEventBuilder RequestStart(Func<object, object> handler)
+        {
+            Handler("requestStart", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the RequestStart client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .Events(events => events.RequestStart("requestStart"))
+        /// )
+        /// </code>
+        /// </example>
+        public TooltipEventBuilder RequestStart(string handler)
+        {
+            Handler("requestStart", handler);
+
+            return this;
+        }
     }
 }
