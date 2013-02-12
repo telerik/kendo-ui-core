@@ -1422,6 +1422,42 @@
                 equal(dataSource.view().length, 1);
                 equal(dataSource.total(), 1);
             });
+
+            test("sync after remove calculates total", function() {
+                var dataSource = new DataSource({
+                    //data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                                total: 2
+                            });
+                        },
+                        destroy: function(options) {
+                            options.success();
+                        }
+                    },
+                    schema: {
+                        data: "data",
+                        total: "total",
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.remove(dataSource.get(1));
+                dataSource.sync();
+
+                equal(dataSource.view().length, 1);
+                equal(dataSource.total(), 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

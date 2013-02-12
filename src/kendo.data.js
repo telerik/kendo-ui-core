@@ -2296,7 +2296,7 @@ kendo_module({
                     total++;
                 } else if (action === "remove") {
                     total--;
-                } else if (action !== "itemchange" && !that.options.serverPaging) {
+                } else if (action !== "itemchange" && action !== "sync" && !that.options.serverPaging) {
                     total = that.reader.total(that._pristine);
                 }
 
