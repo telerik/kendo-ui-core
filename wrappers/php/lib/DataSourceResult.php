@@ -44,7 +44,7 @@ class DataSourceResult {
 
         $statement->execute();
 
-        return $statement->fetch(PDO::FETCH_NUM);
+        return (int)($statement->fetch(PDO::FETCH_NUM)[0]);
     }
 
     private function page() {
@@ -358,7 +358,8 @@ class DataSourceResult {
             if ($status[1] > 0) {
                 $errors[] = $status[2];
             } else {
-                $data[] = array($key => $this->db->lastInsertId());
+                $model->$key = $this->db->lastInsertId();
+                $data[] = $model;
             }
         }
 
@@ -444,6 +445,10 @@ class DataSourceResult {
             if (count($errors) > 0) {
                 $result['errors'] = $errors;
             }
+        }
+
+        if (count($result) == 0) {
+            $result = "";
         }
 
         return $result;
