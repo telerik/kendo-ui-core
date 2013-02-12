@@ -683,7 +683,20 @@
         },
 
         focus: function() {
-            this.wrapper.focus();
+            var wrapper = this.wrapper,
+                scrollContainer = wrapper[0],
+                scrollTop,
+                body = document.body;
+
+            do {
+                scrollContainer = scrollContainer.parentNode;
+            } while (scrollContainer.scrollHeight <= scrollContainer.clientHeight && scrollContainer != body);
+
+            scrollTop = scrollContainer.scrollTop;
+
+            wrapper.focus();
+
+            scrollContainer.scrollTop = scrollTop;
         },
 
         _blur: function(e) {
