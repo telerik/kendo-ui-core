@@ -24,7 +24,7 @@ kendo_module({
         CONTENTLOAD = "contentLoad",
         REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
-        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip" style="margin-left:0.5em">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#">close</a></div> #}#' +
+        TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close">close</a></div> #}#' +
                 '<div class="k-tooltip-content"></div>' +
                 '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
             '</div>',
@@ -243,9 +243,12 @@ kendo_module({
             }, options));
         },
 
-        hide: function() {
+        hide: function(e) {
             if (this.popup) {
                 this.popup.close();
+                if (e) {
+                    e.preventDefault();
+                }
             }
         },
 

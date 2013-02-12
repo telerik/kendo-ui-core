@@ -299,6 +299,19 @@
     margin: -3px -6px 0 3px;
 }
 
+/* ToolTip */
+
+.k-rtl .k-tooltip-button
+{
+	text-align: left;
+}
+
+.k-rtl .k-tooltip-closable .k-tooltip-content
+{
+	padding-right: 0;
+	padding-left: 20px;
+}
+
 /* TreeView */
 
 .k-rtl .k-treeview .k-item
