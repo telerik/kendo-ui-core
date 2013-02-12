@@ -6634,12 +6634,13 @@ kendo_module({
                 seriesAxisName,
                 firstPointValue,
                 typeSamples = [axisOptions.min, axisOptions.max],
-                inferredDate;
+                inferredDate,
+                i;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 seriesAxisName = currentSeries[vertical ? "yAxis" : "xAxis"];
-                if ((seriesAxisName == axisOptions.name) || (axisIndex == 0 && !seriesAxisName)) {
+                if ((seriesAxisName == axisOptions.name) || (axisIndex === 0 && !seriesAxisName)) {
                     firstPointValue = bindPoint(currentSeries, 0).value;
                     typeSamples.push(firstPointValue[vertical ? "y" : "x"]);
 
