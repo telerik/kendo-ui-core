@@ -94,11 +94,10 @@ kendo_module({
                 path = that.path,
                 result = source;
 
+            that.start(that.source);
 
             if (that.observable) {
-                that.start(source);
                 result = source.get(path);
-                that.stop(source);
 
                 // Traverse the observable hierarchy if the binding is not resolved at the current level.
                 while (result === undefined && source) {
@@ -137,6 +136,8 @@ kendo_module({
                           .bind(CHANGE, that._change);
                 }
             }
+
+            that.stop(that.source);
 
             return result;
         },

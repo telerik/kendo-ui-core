@@ -877,6 +877,24 @@
                 equal(dom.find("li").text(), "bar");
             });
 
+            test("tracks changes of parent field bound to dependent parent field", function() {
+                var dom = $('<ul data-bind="source: items" data-template="ul-template-alias"></ul>');
+
+                var viewModel = kendo.observable({
+                    root: "foo",
+                    rootAlias: function(item) {
+                        return item.get("foo");
+                    },
+                    items: [ {foo: "foo" } ]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.items[0].set("foo", "bar");
+
+                equal(dom.find("li").text(), "bar");
+            });
+
             test("tracks changes of element bound to parent field within a child template", function() {
                 var dom = $('<div><span data-bind="text:root"/><ul data-bind="source: items" data-template="ul-input-template"></ul></div>');
 
