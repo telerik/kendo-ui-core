@@ -590,6 +590,128 @@ Use the kendo.days constants to specify the day by name.</description>
     </tag>
 
     <tag>
+        <description>The crosshair configuration options.</description>
+        <name>chart-categoryAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>chart-categoryAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>chart-categoryAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>chart-categoryAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
         <description>Configures the axis labels.</description>
         <name>chart-categoryAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisItemLabelsTag</tag-class>
@@ -2370,6 +2492,128 @@ values increase from right to left and from top to bottom.</description>
     </tag>
 
     <tag>
+        <description>The crosshair configuration options.</description>
+        <name>chart-valueAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>chart-valueAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>chart-valueAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>chart-valueAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
         <description>Configures the axis labels.</description>
         <name>chart-valueAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.chart.ValueAxisItemLabelsTag</tag-class>
@@ -2876,6 +3120,128 @@ is of type Date. Specify type explicitly when such behavior is undesired.</descr
     </tag>
 
     <tag>
+        <description>The crosshair configuration options.</description>
+        <name>chart-xAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>chart-xAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>chart-xAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>chart-xAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
         <description>Configures the axis labels.</description>
         <name>chart-xAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.chart.XAxisItemLabelsTag</tag-class>
@@ -3333,6 +3699,128 @@ is of type Date. Specify type explicitly when such behavior is undesired.</descr
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+    </tag>
+
+    <tag>
+        <description>The crosshair configuration options.</description>
+        <name>chart-yAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>chart-yAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>chart-yAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>chart-yAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
     <tag>
@@ -5414,7 +5902,8 @@ the minimum and maximum values.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.</description>
+            <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.
+ Note that object should have atleast the dataValueField and dataTextField properties. Otherwise, widget will show undefined.</description>
             <name>optionLabel</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -6127,34 +6616,6 @@ as a collection of required properties, while the insertHtml tool requires a col
         </attribute>
     </tag>
 
-    <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
-        <name>editor-tool-items</name>
-        <tag-class>com.kendoui.taglib.editor.ToolItemsTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
-        <name>editor-tool-item</name>
-        <tag-class>com.kendoui.taglib.editor.ToolItemTag</tag-class>
-
-        <body-content>empty</body-content>
-        <attribute>
-            <description>The string that the popup item will show.</description>
-            <name>text</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The value that will be applied by the tool when this item is selected.</description>
-            <name>value</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-    </tag>
-
-
 
     <tag>
         <description>The JavaScript function which will be executed when the end-user clicks the tool button.</description>
@@ -6371,6 +6832,11 @@ current color and the input field.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Raised when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window (popup editing mode).</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <description>Fires when the grid selection has changed.</description>
@@ -7252,6 +7718,12 @@ Or template to be used for rendering the toolbar content.</description>
 
 
     <tag>
+        <description>Raised when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window (popup editing mode).</description>
+        <name>grid-cancel</name>
+        <tag-class>com.kendoui.taglib.grid.CancelFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Fires when the grid selection has changed.</description>
         <name>grid-change</name>
         <tag-class>com.kendoui.taglib.grid.ChangeFunctionTag</tag-class>
@@ -7937,6 +8409,11 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>Raised when the user clicks the "cancel" button.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the list view selection has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7966,6 +8443,12 @@ and is about to render it.</description>
     </tag>
 
 
+    <tag>
+        <description>Raised when the user clicks the "cancel" button.</description>
+        <name>listView-cancel</name>
+        <tag-class>com.kendoui.taglib.listview.CancelFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Fires when the list view selection has changed.</description>
         <name>listView-change</name>
@@ -9967,6 +10450,128 @@ Use the kendo.days constants to specify the day by name.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
+    </tag>
+
+    <tag>
+        <description>The crosshair configuration options.</description>
+        <name>stockChart-categoryAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>stockChart-categoryAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>stockChart-categoryAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>stockChart-categoryAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
     <tag>
@@ -12238,6 +12843,128 @@ values increase from right to left and from top to bottom.</description>
     </tag>
 
     <tag>
+        <description>The crosshair configuration options.</description>
+        <name>stockChart-valueAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.stockchart.ValueAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>stockChart-valueAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.ValueAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>stockChart-valueAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.ValueAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>stockChart-valueAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.ValueAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
         <description>Configures the axis labels.</description>
         <name>stockChart-valueAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.stockchart.ValueAxisItemLabelsTag</tag-class>
@@ -12744,6 +13471,128 @@ is of type Date. Specify type explicitly when such behavior is undesired.</descr
     </tag>
 
     <tag>
+        <description>The crosshair configuration options.</description>
+        <name>stockChart-xAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>stockChart-xAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>stockChart-xAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>stockChart-xAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
         <description>Configures the axis labels.</description>
         <name>stockChart-xAxisItem-labels</name>
         <tag-class>com.kendoui.taglib.stockchart.XAxisItemLabelsTag</tag-class>
@@ -13201,6 +14050,128 @@ is of type Date. Specify type explicitly when such behavior is undesired.</descr
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+    </tag>
+
+    <tag>
+        <description>The crosshair configuration options.</description>
+        <name>stockChart-yAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the crosshair.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip configuration options.</description>
+        <name>stockChart-yAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the tooltip.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip template.
+Template variables:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border configuration options.</description>
+        <name>stockChart-yAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The tooltip template.
+Template variables:</description>
+        <name>stockChart-yAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
     <tag>
@@ -14107,6 +15078,11 @@ By default the tooltip will display the target element title attribute content.<
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Triggered before an AJAX request started.</description>
+            <name>requestStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Triggered when an AJAX request for content fails.</description>
             <name>error</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14206,6 +15182,12 @@ versions, so it is advisable to always use the iframe configuration option.</des
         <description>Triggered when a Tooltip is hidden</description>
         <name>tooltip-hide</name>
         <tag-class>com.kendoui.taglib.tooltip.HideFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered before an AJAX request started.</description>
+        <name>tooltip-requestStart</name>
+        <tag-class>com.kendoui.taglib.tooltip.RequestStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

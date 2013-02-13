@@ -105,6 +105,10 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("hide", value.getBody());
     }
 
+    public void setRequestStart(RequestStartFunctionTag value) {
+        setEvent("requestStart", value.getBody());
+    }
+
     public void setShow(ShowFunctionTag value) {
         setEvent("show", value.getBody());
     }
@@ -223,6 +227,18 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setHide(String value) {
         setProperty("hide", new Function(value));
+    }
+
+    public String getRequestStart() {
+        Function property = ((Function)getProperty("requestStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setRequestStart(String value) {
+        setProperty("requestStart", new Function(value));
     }
 
     public String getShow() {

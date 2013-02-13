@@ -104,6 +104,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     }
 
+    public void setCancel(CancelFunctionTag value) {
+        setEvent("cancel", value.getBody());
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }
@@ -299,6 +303,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setSortable(boolean value) {
         setProperty("sortable", value);
+    }
+
+    public String getCancel() {
+        Function property = ((Function)getProperty("cancel"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCancel(String value) {
+        setProperty("cancel", new Function(value));
     }
 
     public String getChange() {

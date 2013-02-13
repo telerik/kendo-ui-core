@@ -49,6 +49,10 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "chart-yAxisItem";
     }
 
+    public void setCrosshair(com.kendoui.taglib.chart.YAxisItemCrosshairTag value) {
+        setProperty("crosshair", value);
+    }
+
     public void setLabels(com.kendoui.taglib.chart.YAxisItemLabelsTag value) {
         setProperty("labels", value);
     }

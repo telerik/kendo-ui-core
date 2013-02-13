@@ -49,6 +49,10 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "stockChart-xAxisItem";
     }
 
+    public void setCrosshair(com.kendoui.taglib.stockchart.XAxisItemCrosshairTag value) {
+        setProperty("crosshair", value);
+    }
+
     public void setLabels(com.kendoui.taglib.stockchart.XAxisItemLabelsTag value) {
         setProperty("labels", value);
     }
