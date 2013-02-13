@@ -109,16 +109,20 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 //<< destroy
 
         super.destroy();
-    }
-
-    public void setPageable(PageableTag value) {
-        setProperty("pageable", value);
-    }
+    }    
     
 //>> Attributes
 
     public static String tagName() {
         return "listView";
+    }
+
+    public void setPageable(com.kendoui.taglib.listview.PageableTag value) {
+        setProperty("pageable", value);
+    }
+
+    public void setCancel(CancelFunctionTag value) {
+        setEvent("cancel", value.getBody());
     }
 
     public void setChange(ChangeFunctionTag value) {
@@ -208,6 +212,18 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setTemplate(String value) {
         setProperty("template", value);
+    }
+
+    public String getCancel() {
+        Function property = ((Function)getProperty("cancel"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCancel(String value) {
+        setProperty("cancel", new Function(value));
     }
 
     public String getChange() {
