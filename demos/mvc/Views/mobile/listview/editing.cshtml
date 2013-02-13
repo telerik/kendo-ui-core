@@ -1,4 +1,4 @@
-<div data-role="view" data-title="Products List" data-init="listViewInit">
+<div data-role="view" id="edit-listview" data-title="Products List" data-init="listViewInit">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -9,12 +9,12 @@
     <ul id="listview"></ul>
 
     <script id="itemTemplate" type="text/x-kendo-template">
-        <a href="\\#detailview?uid=#=uid#" > #=ProductName# </a>
-        <a href="\\#" data-role="button" style="display:none;width: 40px; float:right;" >Delete</a>
+        <a href="\\#edit-detailview?uid=#=uid#"> #=ProductName# </a>
+        <a href="\\#" data-role="button" class="delete" >Delete</a>
     </script>
 </div>
 
-<div data-role="view" id="detailview" data-show="detailShow" data-init="detailInit">
+<div data-role="view" id="edit-detailview" data-show="detailShow" data-init="detailInit">
     <header data-role="header">
         <div data-role="navbar">
             <a class="nav-button" data-align="left" data-role="button" id="cancel">Cancel</a>
@@ -24,11 +24,86 @@
     </header>
 
     <form>
-        <input type="text" data-bind="value: ProductName"/>
-        <input type="checkbox" data-role="switch" data-bind="checked: Discontinued"/>
-        <input type="number" value="20" data-bind="value: UnitPrice"/>
+        <ul data-role="listview" data-style="inset" onclick="">
+            <li>
+                <label>Product Name
+                    <input type="text" data-bind="value: ProductName"/>
+                </label>
+            </li>
+            <li>
+                Discontinued
+                    <input type="checkbox" data-role="switch" data-bind="checked: Discontinued"/>
+                
+            </li>
+            <li>
+                <label>Unit Price
+                    <input type="number" value="20" data-bind="value: UnitPrice"/>
+                </label>
+            </li>
+        </ul>
     </form>
 </div>
+
+<style scoped>
+    .km-ios #edit-listview .km-navbar,
+    .km-ios #edit-detailview .km-navbar {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../../content/shared/images/patterns/pattern1.png);
+        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../../content/shared/images/patterns/pattern1.png);
+    }
+    .km-ios #edit-listview .km-navbar .km-button,
+    .km-ios #edit-detailview .km-navbar .km-button {
+        background-color: #000;
+    }
+    .km-ios #edit-detailview #done {
+        background-color: Green;
+    }
+    .km-tablet .km-ios #edit-listview .km-view-title,
+    .km-tablet .km-ios #edit-detailview .km-view-title {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+    .km-ios #edit-listview .km-content,
+    .km-ios #edit-detailview .km-content,
+    .km-ios #edit-detailview .km-insetcontent, 
+    .km-ios #edit-listview li,
+    .km-ios #edit-detailview li {
+        background: #373737;
+    }
+    .km-ios #edit-listview li > a,
+    .km-ios #edit-detailview li,
+    .km-ios #edit-detailview input,
+    .km-ios #edit-detailview li > a {
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .km-ios #edit-detailview .km-listinset > li,
+    .km-ios #edit-detailview .km-listgroupinset .km-list > li,
+    .km-ios #edit-detailview .km-listinset > li:first-child,
+    .km-ios #edit-detailview .km-listgroupinset .km-list >  li:first-child,
+    .km-ios #edit-detailview .km-listinset > li:last-child,
+    .km-ios #edit-detailview .km-listgroupinset .km-list >  li:last-child {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        border-color: #565656;
+    }
+    .km-ios #edit-detailview .km-listinset > li:first-child,
+    .km-ios #edit-detailview .km-listgroupinset .km-list > li:first-child {
+        border-width: 1px;
+    }
+    .km-ios #edit-detailview .km-listinset > li,
+    .km-ios #edit-detailview .km-listgroupinset .km-list > li {
+        border-width: 0 1px 1px;
+    }
+    #edit-listview .delete {
+        display:none;
+        position: absolute;
+        top: .15em;
+        right: .5em;
+        width: 60px;
+        background-color: #bd2729;
+    }
+</style>
 
 <script>
     var crudServiceBaseUrl = "http://demos.kendoui.com/service",
