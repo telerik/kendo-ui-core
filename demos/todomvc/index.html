@@ -56,7 +56,7 @@
                     <label data-bind="text: title, events: { dblclick: edit }"></label>
                     <button class="destroy" data-bind="click: remove"></button>
                 </div>
-                <input class="edit" data-bind="value: title, events: { change: hideEdit, keyup: keyup }">
+                <input class="edit" data-bind="value: title, events: { blur: hideEdit, keyup: keyup }">
             </li>
         </script>
     </body>
