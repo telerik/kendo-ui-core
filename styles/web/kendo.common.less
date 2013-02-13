@@ -2086,7 +2086,7 @@ span.k-datetimepicker .k-select+.k-select
 {
     height: 1.65em;
     line-height: 1.65em;
-    padding: 0.18em 0;
+    padding: 0.178em 0;
     text-indent: 4px;
     border: 0;
     margin: 0;
@@ -2105,8 +2105,8 @@ span.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: 1.5em;
-    line-height: 1.5em;
+    min-height: 1.56em;
+    line-height: 1.56em;
     vertical-align: middle;
     padding: 3px;
 }
@@ -2531,6 +2531,9 @@ span.k-numerictextbox
 
 .k-colorpicker
 {
+	.k-picker-wrap {
+		padding-bottom: 4px;
+	}
     .k-selected-color {
         font-size: 0;
         vertical-align: top;
@@ -2542,7 +2545,7 @@ span.k-numerictextbox
     }
     .k-tool-icon {
         position: relative;
-        top: -4px;
+        top: -2px;
         display: inline-block;
         padding: 2px 3px;
         font-size: 0;
@@ -2556,6 +2559,7 @@ span.k-numerictextbox
             height: 3px;
             width: @grid-size;
             position: absolute;
+			left: 2px;
             bottom: -4px;
         }
     }

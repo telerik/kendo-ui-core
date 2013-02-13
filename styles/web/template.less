@@ -704,10 +704,17 @@ div.k-imagebrowser-dropzone em
     .box-shadow(none);
 }
 
-.k-state-hover,
-.k-state-focused
+.k-state-hover
 {
     .box-shadow(@hover-shadow);
+}
+
+.k-autocomplete.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-picker-wrap.k-state-focused,
+.k-numeric-wrap.k-state-focused
+{
+    .box-shadow(@focused-shadow);
 }
 
 .k-state-selected
