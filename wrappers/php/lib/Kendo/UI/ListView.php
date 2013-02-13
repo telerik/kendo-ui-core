@@ -37,8 +37,14 @@ class ListView extends \Kendo\UI\Widget {
         unset($properties['tagName']);
 
         //adjust pager settings
-        if ($this->getProperty('pageable')) {
-            $properties['pageable'] = array('pagerId' => "{$this->id}_pager");
+        $pageable = $properties['pageable'];
+        if ($pageable) {
+            if (!is_array($pageable)) {
+                $pageable = array();
+            }
+
+            $pageable['pagerId'] = "{$this->id}_pager";
+            $properties['pageable'] = $pageable;
         }
 
         return $properties;
