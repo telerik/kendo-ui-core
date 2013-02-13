@@ -600,7 +600,7 @@
                 element;
 
             if (modelId) {
-                element = model.modelMap[modelId];
+                element = model.modelMap.get(modelId);
             }
 
             if (element && element.aliasFor) {

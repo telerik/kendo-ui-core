@@ -437,7 +437,7 @@
             if (element.discoverable) {
                 root = element.getRoot();
                 if (root) {
-                    root.modelMap[modelId] = element;
+                    root.modelMap.put(modelId, element);
                 }
             }
 
@@ -460,7 +460,7 @@
                 i;
 
             if (root && modelId) {
-                delete root.modelMap[modelId];
+                root.modelMap.remove(modelId);
             }
 
             for (i = 0; i < children.length; i++) {
@@ -503,7 +503,7 @@
             var root = this;
 
             // Logical tree ID to element map
-            root.modelMap = {};
+            root.modelMap = createModelMap();
 
             ChartElement.fn.init.call(root, options);
         },
@@ -2482,6 +2482,58 @@
             }
         }
     });
+
+    var Hashtable = Class.extend({
+        init: function() {
+            this._map = {};
+        },
+
+        put: function(key, value) {
+            this._map[key] = value;
+        },
+
+        get: function(key) {
+            return this._map[key];
+        },
+
+        remove: function(key) {
+            delete this._map[key];
+        }
+    });
+
+    var List = Class.extend({
+        init: function() {
+            this._keys = [];
+            this._values = [];
+        },
+
+        put: function(key, value) {
+            this._keys.push(key);
+            this._values.push(value);
+        },
+
+        get: function(key) {
+            var index = indexOf(key, this._keys);
+
+            if (index !== -1) {
+                return this._values[index];
+            }
+        },
+
+        remove: function(key) {
+            var list = this,
+                index = indexOf(key, list._keys);
+
+            if (index !== -1) {
+                list._keys[index] = null;
+                list._values[index] = null;
+            }
+        }
+    });
+
+    function createModelMap() {
+        return kendo.support.browser.msie ? new List() : new Hashtable();
+    }
 
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),

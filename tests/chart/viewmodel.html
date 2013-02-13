@@ -104,7 +104,7 @@
                     chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
 
-                    ok(root.modelMap[chartElement.options.modelId]);
+                    ok(root.modelMap.get(chartElement.options.modelId));
                 });
 
                 test("disableDiscovery unregisters model id from root", function() {
@@ -115,7 +115,7 @@
                     chartElement.getViewElements(view);
                     chartElement.disableDiscovery();
 
-                    ok(!root.modelMap[chartElement.options.modelId]);
+                    ok(!root.modelMap.get(chartElement.options.modelId));
                 })
 
                 test("disableDiscovery recurses on children", function() {
@@ -133,7 +133,7 @@
                     chartElement.getViewElements(view);
                     chartElement.disableDiscovery();
 
-                    ok(!root.modelMap[child2.options.modelId]);
+                    ok(!root.modelMap.get(child2.options.modelId));
                 });;
 
                 test("getViewElements associates children with discoverable elements", function() {
@@ -161,7 +161,7 @@
                     chartElement.getViewElements(view);
                     child.getViewElements(view);
 
-                    ok(root.modelMap[child.options.modelId] == chartElement);
+                    ok(root.modelMap.get(child.options.modelId) == chartElement);
                 });
 
                 test("getViewElements does not associate already discoverable children", function() {
