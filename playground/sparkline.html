@@ -6,6 +6,7 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
         <script src="../src/kendo.dataviz.sparkline.js"></script>
@@ -17,38 +18,150 @@
         </style>
     </head>
     <body>
-        <p>Some sparklines <span id="sparkline"></span> and more text<br/>
-        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+        <p>
+        Admire woman female rebecca black forever alone house sister donut. Super Rage unsave 9000 scumbag one does not simply le me crying megusta men. Too mainstream iron man cool party bottom just scared diablo 3. Dog happy yao college anonymous trolololo genius jackie chan russia pikachu. Games i dont get it the avengers essay hammer left easter back you don't say? No Bad on brother rainbow captain dolar ba dumm tss grin. Final week basic math superhero bra star wars happy if you know what i mean <span id="sparkline"></span> homer impossibru. Oboma bacon hulk derp t-rex vegan movie twitter panda simpson. Venenatis viverra puking rainbows food win homework problem? Mother computer german elephant <span id="sparkline-bar"></span> note steve jobs blizzard troll not okay amnesia angry birds morbi. Charlie Sheen i know that feel feel like a sir wodka le derp father right i'm watching u collection. Unlock eat y u no.
+        </p>
+        <p>
+        Friendzoned high school le derp alcohol loki freddie mercury all the things sandwich <span id="sparkline-stacked-bar"></span>yao. Clinton students always varius diablo 3 unlock i'm watching u elephant megusta. Vegan pokeman sister money feel like a sir not okay movies good guy. Bart scumbag too mainstream simpson cuteness overload father you don't say? Just if you know what i mean oh stop it, you hac captain top le me face on that on. Hammer for drink not bad y u no cereal angry birds donut really? Homer party russia lol viverra lose derp close enough cellphone in class. Collection why problem? True Story one does not simply finals avengers lois search basic math crying dog bear. Jackie Chan silent hill back morbi bacon cookie monster super rage humor. Nyan cat movie puking rainbows bra bottom gasp easter phone happy thor. Charlie Sheen genius college win pikachu gentlemen facepalm dad superhero. Monocle joke amnesia happy woman no bad essay trolololo steve jobs male. Gag creepy me gusta.
+        </p>
+        <p>
+        Gag oh stop it, you vegan search donut always forever alone dad fun meme superhero dog. Super Rage grey russia charlie sheen luke note eat that. I'm Watching U amet architect twitter rainbow gentlemen clinton nother to do here feel like a sir. Scared poker face on jackie chan <span id="sparkline-negative-bar"></span>le me hulk facebook drink essay. Admire anonymous creepy me gusta hammer monocle michelle laptop german college games house. Final week y u no a problem? Face students unsave angry birds cool no unlock cookie monster genius t-rex  megusta female. Keyboard computer back oboma cuteness overload panda phone basic math peter griffin i know that feel. You Don't Say? Puking Rainbows star wars <span id="sparkline-line"></span> venenatis i see what you did there rebecca black lol facepalm friendzoned pikachu mother. Movie i dont get it close enough in alcohol <span id="sparkline-pie"></span>easter thor trolololo bottom read.
+        </p>
+        <div id="target" style="width: 200px; height: 200px; background: #aaa; position: relative;">Move mouse here</div>
         <script>
-            var points = [];
-            for (var i = 0; i < 5; i++) {
-                points.push(Math.round(Math.exp(i)));
-            };
+            var mouseLog = new kendo.data.ObservableArray([]),
+                p1,
+                lastMove = new Date();
 
-            $(function() {
-                $("#sparkline").kendoSparkline({
-                    series: [{
-                        type: "area",
-                        line: {
-                            width: 0.5
-                        },
-                        data: points,
-                        width: 1,
-                        markers: {
-                            border: {
-                                width: 0
-                            },
-                            background: "red",
-                            size: 2,
+            $("#target").on("mousemove", function(e) {
+                var p2 = { x: e.clientX, y: e.clientY },
+                    distance,
+                    time,
+                    speed;
+
+                p1 = p1 || p2;
+
+                distance = Math.round(Math.sqrt(
+                    Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
+                ));
+
+                time = new Date() - lastMove;
+
+                if (time > 30) {
+                    var speed = Math.round((distance / time) * 1000);
+                    mouseLog.push({ speed: speed, invertedSpeed: -speed });
+
+                    if (mouseLog.length > 15) {
+                        mouseLog.shift();
+                    }
+
+                    $("#sparkline").data("kendoSparkline").dataSource.sync();
+
+                    p1 = p2;
+                    lastMove = new Date();
+                }
+            });
+
+            function buildSparkline(data, options) {
+            }
+
+            function buildOptions(options) {
+                return kendo.deepExtend({
+                    dataSource: {
+                        data: mouseLog
+                    },
+                    categoryAxis: {
+                        field: "speed",
+                        crosshair: {
                             visible: true
                         }
-                    }],
+                    },
                     axisDefaults: {
                         majorGridLines: {
                             visible: false
                         }
+                    },
+                    tooltip: {
+                        visible: false
                     }
-                });
+                }, options);
+            };
+
+            $(function() {
+                $("#sparkline").kendoSparkline(
+                    buildOptions({
+                        series: [{
+                            type: "area",
+                            field: "speed"
+                        }]
+                    })
+                );
+
+                $("#sparkline-bar").kendoSparkline(
+                    buildOptions({
+                        series: [{
+                            type: "column",
+                            field: "speed"
+                        }]
+                    })
+                );
+
+                $("#sparkline-stacked-bar").kendoSparkline(
+                    buildOptions({
+                        seriesDefaults: {
+                            stack: true
+                        },
+                        series: [{
+                            type: "column",
+                            field: "speed"
+                        }, {
+                            type: "column",
+                            field: "speed"
+                        }]
+                    })
+                );
+
+                $("#sparkline-negative-bar").kendoSparkline(
+                    buildOptions({
+                        seriesDefaults: {
+                            stack: true
+                        },
+                        series: [{
+                            type: "column",
+                            field: "speed"
+                        }, {
+                            type: "column",
+                            field: "invertedSpeed"
+                        }]
+                    })
+                );
+
+                $("#sparkline-line").kendoSparkline(
+                    buildOptions({
+                        seriesDefaults: {
+                            stack: true
+                        },
+                        series: [{
+                            type: "line",
+                            field: "speed"
+                        }, {
+                            type: "line",
+                            field: "speed"
+                        }]
+                    })
+                );
+
+                $("#sparkline-pie").kendoSparkline(
+                    buildOptions({
+                        dataSource: {
+                            data: [1, 2, 2]
+                        },
+                        series: [{
+                            type: "pie",
+                            field: "speed"
+                        }]
+                    })
+                );
             });
         </script>
     </body>

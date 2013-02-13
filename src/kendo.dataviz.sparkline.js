@@ -39,12 +39,43 @@ kendo_module({
         options: {
             name: "Sparkline",
             chartArea: {
-                margin: 1
+                margin: 2
             },
             axisDefaults: {
                 visible: false,
                 valueAxis: {
                     narrowRange: true
+                }
+            },
+            seriesDefaults: {
+                area: {
+                    line: {
+                        width: 0.5
+                    },
+                    width: 1,
+                    markers: {
+                        border: {
+                            width: 0
+                        },
+                        background: "red",
+                        size: 2,
+                        visible: true
+                    }
+                },
+                line: {
+                    width: 0.5,
+                    markers: {
+                        border: {
+                            width: 0
+                        },
+                        background: "red",
+                        size: 2
+                    }
+                },
+                column: {
+                    overlay: {
+                        gradient: null
+                    }
                 }
             },
             tooltip: {
