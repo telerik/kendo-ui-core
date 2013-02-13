@@ -15,12 +15,21 @@
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds/>
   <slaves>
-       <slave>
+      <slave>
       <name>kendobuild-slave1</name>
+      <description>Slave #1</description>
+      <remoteFS>/var/lib/jenkins/</remoteFS>
+      <numExecutors>3</numExecutors>
+      <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@0.22">
         <host>kendobuild-slave1</host>
+        <port>22</port>
+        <password>r88gdu/xp5y2ZhD12l4mGQ==</password>
+      </launcher>
       <label>slave</label>
+      <nodeProperties/>
+      <userId>anonymous</userId>
     </slave>
   </slaves>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
