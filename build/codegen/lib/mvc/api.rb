@@ -1,4 +1,5 @@
 module CodeGen::MVC
+
     NAMESPACES = [
         'Kendo.Mvc',
         'Kendo.Mvc.Extensions',
@@ -31,6 +32,12 @@ module CodeGen::MVC
     class Example < Struct.new(:code)
     end
 
+    class Property < Struct.new(:name, :summary)
+    end
+
+    class Field < Struct.new(:name, :summary)
+    end
+
     module CodeGen::MVC::API
         class XmlParser
             def initialize(filename)
@@ -55,22 +62,30 @@ module CodeGen::MVC
 
                     component = Component.new(namespace, type)
 
-                    parse_methods(component.type, document) do |method|
+                    prefix = component.type + '.'
+
+                    parse_methods(prefix, document) do |method|
                         component.methods.push(method)
+                    end
+
+                    parse_properties(prefix, document) do |property|
+                        component.properties.push(property)
+                    end
+
+                    parse_fields(prefix, document) do |field|
+                        component.fields.push(field)
                     end
                 end
 
             end
 
-            def parse_methods(type, document)
-                prefix = type + '.'
-
-                document.css("member[name^='M:#{type}']").each do |method|
+            def parse_methods(prefix, document)
+                document.css("member[name^='M:#{prefix}']").each do |method|
                     name = method['name']
 
                     next if name =~ /#ctor/
 
-                    name = parse_name(name[2..-1].sub(prefix, ''))
+                    name = parse_name(prefix, name)
 
                     summary = parse_summary(method)
 
@@ -81,6 +96,26 @@ module CodeGen::MVC
                     returns = parse_returns(method)
 
                     yield Method.new(name, summary, parameters, examples, returns) if block_given?
+                end
+            end
+
+            def parse_properties(prefix, document)
+                document.css("member[name^='P:#{prefix}']").each do |property|
+                    name = parse_name(prefix, property['name'])
+
+                    summary = parse_summary(property)
+
+                    yield Property.new(name, summary) if block_given?
+                end
+            end
+
+            def parse_fields(prefix, document)
+                document.css("member[name^='F:#{prefix}']").each do |field|
+                    name = parse_name(prefix, field['name'])
+
+                    summary = parse_summary(field)
+
+                    yield Field.new(name, summary) if block_given?
                 end
             end
 
@@ -111,7 +146,8 @@ module CodeGen::MVC
                 node.css('summary').first.text.strip
             end
 
-            def parse_name(name)
+            def parse_name(prefix, name)
+                name = name[2..-1].sub(prefix, '')
                 result = ''
                 idx = 0
                 length = name.size
