@@ -57,6 +57,11 @@ namespace Kendo.Mvc.UI
         /// </summary>
         bool? NarrowRange { get; set; }
 
+        /// <summary>
+        /// The axis crosshair configuration.
+        /// </summary>
+        ChartAxisCrosshair Crosshair { get; set; }
+
         IChartSerializer CreateSerializer();
     }
 }

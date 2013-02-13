@@ -1,16 +1,13 @@
 namespace Kendo.Mvc.UI
 {
-    public class ChartLine
+    public class ChartLine : ChartLineBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartLine" /> class.
         /// </summary>
         public ChartLine(int width, string color, ChartDashType dashType, bool visible)
+            : base(width, color, dashType, visible)
         {
-            Width = width;
-            Color = color;
-            Visible = visible;
-            DashType = dashType;
         }
 
         /// <summary>
@@ -20,52 +17,7 @@ namespace Kendo.Mvc.UI
         {
         }
 
-        /// <summary>
-        /// Gets or sets the line width.
-        /// </summary>
-        public int? Width
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the line opacity.
-        /// </summary>
-        public double? Opacity
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the line color.
-        /// </summary>
-        public string Color
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the line visibility.
-        /// </summary>
-        public bool? Visible
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the line dash type.
-        /// </summary>
-        public ChartDashType? DashType
-        {
-            get;
-            set;
-        }
-
-        public IChartSerializer CreateSerializer()
+        public override IChartSerializer CreateSerializer()
         {
             return new ChartLineSerializer(this);
         }

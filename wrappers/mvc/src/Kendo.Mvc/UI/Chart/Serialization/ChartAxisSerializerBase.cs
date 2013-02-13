@@ -79,6 +79,12 @@ namespace Kendo.Mvc.UI
                 result.Add("minorTicks", minorTicks);
             }
 
+            var crosshair = axis.Crosshair.CreateSerializer().Serialize();
+            if (crosshair.Count > 0)
+            {
+                result.Add("crosshair", crosshair);
+            }
+
             return result;
         }
     }

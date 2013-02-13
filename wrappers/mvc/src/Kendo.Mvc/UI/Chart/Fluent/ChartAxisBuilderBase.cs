@@ -56,6 +56,29 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the major ticks.
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(axis => axis
+        ///                .Crosshair(crosshair => crosshair
+        ///                    .Visible(false)
+        ///                )
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TAxisBuilder Crosshair(Action<ChartAxisCrosshairBuilder> configurator)
+        {
+            configurator(new ChartAxisCrosshairBuilder(Axis.Crosshair));
+
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
         /// Sets the axis name.
         /// </summary>
         /// <param name="name">The axis name.</param>

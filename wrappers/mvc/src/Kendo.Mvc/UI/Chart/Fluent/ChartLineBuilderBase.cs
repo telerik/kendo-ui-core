@@ -5,13 +5,13 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class ChartLineBuilderBase : IHideObjectMembers
     {
-        private readonly ChartLine line;
+        private readonly ChartLineBase line;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartLineBuilder" /> class.
         /// </summary>
         /// <param name="chartLine">The chart line.</param>
-        public ChartLineBuilderBase(ChartLine chartLine)
+        public ChartLineBuilderBase(ChartLineBase chartLine)
         {
             line = chartLine;
         }

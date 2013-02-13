@@ -229,6 +229,8 @@
     <Compile Include="UI\Chart\Axes\ChartAxisLabelDateFormats.cs" />
     <Compile Include="UI\Chart\Axes\ChartDateAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisBaseUnitSteps.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisCrosshair.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisCrosshairTooltip.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartDateAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
@@ -245,6 +247,8 @@
     <Compile Include="UI\Chart\ChartLine.cs" />
     <Compile Include="UI\Chart\ChartTooltip.cs" />
     <Compile Include="UI\Chart\ChartPane.cs" />
+    <Compile Include="UI\Chart\ChartTooltipBase.cs" />
+    <Compile Include="UI\Chart\ChartLineBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
@@ -253,6 +257,8 @@
     <Compile Include="UI\Chart\Fluent\ChartPieSeriesHighlightBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartCandlestickSeriesHighlightBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartOHLCSeriesHighlightBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisCrosshairBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisCrosshairTooltipBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -326,6 +332,10 @@
     <Compile Include="UI\Chart\Serialization\ChartPaneSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesHighlightSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartTooltipBaseSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisCrosshairTooltipSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLineBaseSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisCrosshairSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />

@@ -21,6 +21,7 @@ namespace Kendo.Mvc.UI
             Title = new ChartAxisTitle();
             MajorTicks = new ChartAxisTicks();
             MinorTicks = new ChartAxisTicks();
+            Crosshair = new ChartAxisCrosshair();
         }
 
         /// <summary>
@@ -37,6 +38,15 @@ namespace Kendo.Mvc.UI
         /// The axis major ticks configuration.
         /// </summary>
         public ChartAxisTicks MajorTicks
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The axis crosshair configuration.
+        /// </summary>
+        public ChartAxisCrosshair Crosshair
         {
             get;
             set;
