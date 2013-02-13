@@ -6,17 +6,13 @@ module("View", {
 });
 
 test("reads contents from a passed string", 1, function() {
-    var view = new kendo.View({
-        content: "<span>Foo</span>"
-    });
+    var view = new kendo.View("<span>Foo</span>");
 
     equal(view.render().html(), "<span>Foo</span>");
 });
 
 test("reads contents from a given script tag", 2, function() {
-    var view = new kendo.View({
-        content: "#content"
-    });
+    var view = new kendo.View("#content");
 
     ok(view.render() instanceof jQuery);
 
@@ -24,9 +20,7 @@ test("reads contents from a given script tag", 2, function() {
 });
 
 test("accepts id without #", 2, function() {
-    var view = new kendo.View({
-        content: "content"
-    });
+    var view = new kendo.View("content");
 
     ok(view.render() instanceof jQuery);
 
@@ -34,44 +28,31 @@ test("accepts id without #", 2, function() {
 });
 
 test("reuses element", 1, function() {
-    var view = new kendo.View({
-        content: "#content"
-    });
+    var view = new kendo.View("#content");
 
     equal(view.render(), view.render());
 });
 
 test("renders a div", 1, function() {
-    var view = new kendo.View({
-        content: "#content"
-    });
+    var view = new kendo.View("#content");
 
     ok(view.render().is("div"));
 });
 
 test("can render as any tag", 1, function() {
-    var view = new kendo.View({
-        content: "#content",
-        tagName: "span"
-    });
+    var view = new kendo.View( "#content", { tagName: "span" });
 
     ok(view.render().is("span"));
 });
 
 test("binds to a given model", 1, function() {
-    var view = new kendo.View({
-        content: "<i><a data-bind='click: foo'>Foo</a></i>",
-        model: kendo.observable({ foo: function() { ok(true); } })
-    });
+    var view = new kendo.View( "<i><a data-bind='click: foo'>Foo</a></i>", { model: kendo.observable({ foo: function() { ok(true); } }) });
 
     view.render().find("a").trigger("click");
 });
 
 test("unbinds handlers on destroy", 1, function() {
-    var view = new kendo.View({
-        content: "<i><a data-bind='click: foo'>Foo</a></i>",
-        model: kendo.observable({ foo: function() { ok(true); } })
-    });
+    var view = new kendo.View( "<i><a data-bind='click: foo'>Foo</a></i>", { model: kendo.observable({ foo: function() { ok(true); } }) });
 
     var el = view.render();
 
@@ -83,30 +64,24 @@ test("unbinds handlers on destroy", 1, function() {
 });
 
 test("triggers init when rendered initially", 1, function() {
-    var view = new kendo.View({
-        content: "<i />",
-        init: function() { ok(true); }
-    });
+    var view = new kendo.View( "<i />", { init: function() { ok(true); } });
 
     view.render();
     view.render();
 });
 
 test("triggers show when rendered", 2, function() {
-    var view = new kendo.View({
-        content: "<i />",
-        show: function() { ok(true); }
-    });
+    var view = new kendo.View( "<i />", { show: function() { ok(true); } });
 
-    view.render();
-    view.render();
+    view.render("#foo");
+    view.render("#bar");
 });
 
 module("Layout", { });
 
 test("layout renders view in a given region", 1, function() {
-    var layout = new kendo.Layout({ content: "<div><span id='container' /></div>" }),
-        view = new kendo.View({ content: '<span id="baz">Baz</span>' });
+    var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+        view = new kendo.View('<span id="baz">Baz</span>');
 
     layout.render();
 
@@ -116,9 +91,9 @@ test("layout renders view in a given region", 1, function() {
 });
 
 test("layout triggers view hide when replacing views", 1, function() {
-    var layout = new kendo.Layout({ content: "<div><span id='container' /></div>" }),
-        foo = new kendo.View({ content: '<span>Foo</span>', hide: function() { ok(true); } }),
-        bar = new kendo.View({ content: '<span>Foo</span>' });
+    var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+        foo = new kendo.View('<span>Foo</span>', { hide: function() { ok(true); } }),
+        bar = new kendo.View('<span>Foo</span>');
 
     layout.render();
 

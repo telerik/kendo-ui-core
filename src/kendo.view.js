@@ -16,20 +16,22 @@ kendo_module({
         HIDE = "hide";
 
     var View = Observable.extend({
-        init: function(options) {
-            Observable.fn.init.call(this);
-            this.content = options.content;
-            this.tagName = options.tagName || "div";
-            this.model = options.model;
-            this.bind([ INIT, SHOW, HIDE ], options);
+        init: function(content, options) {
+            var that = this;
+            options = options || {};
+
+            Observable.fn.init.call(that);
+            that.content = content;
+            that.tagName = options.tagName || "div";
+            that.model = options.model;
+
+            that.bind([ INIT, SHOW, HIDE ], options);
         },
 
         render: function(container) {
             var that = this,
                 element,
                 content;
-
-            container = $(container);
 
             if (!that.element) {
                 element = $("<" + that.tagName + " />");
@@ -40,8 +42,11 @@ kendo_module({
                 this.trigger(INIT);
             }
 
-            this.trigger(SHOW);
-            container.append(element);
+            if (container) {
+                this.trigger(SHOW);
+                $(container).append(that.element);
+            }
+
             return that.element;
         },
 
@@ -59,8 +64,8 @@ kendo_module({
     });
 
     var Layout = View.extend({
-        init: function(options) {
-            View.fn.init.call(this, options);
+        init: function(content, options) {
+            View.fn.init.call(this, content, options);
             this.regions = {};
         },
 
@@ -71,7 +76,7 @@ kendo_module({
                 previousView.hide();
             }
 
-            view.render(this.element.find(container), previousView);
+            view.render(this.render().find(container), previousView);
             this.regions[container] = view;
         }
     });
