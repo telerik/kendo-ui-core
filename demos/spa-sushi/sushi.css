@@ -1,0 +1,76 @@
+html, body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #eeecec;
+}
+
+header {
+    background: white;
+}
+
+#cart {
+    position: absolute;
+    top: 133px;
+    right: 0px;
+    background: black;
+    color: white;
+    width: 190px;
+    padding: 3px 10px;
+}
+
+#cart a {
+    color: white;
+}
+
+#cart-contents {
+    border: 0;
+    background: black;
+    color: white;
+    min-height: 10px;
+}
+
+#cart-contents li {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    margin: 10px;
+}
+
+#cart-contents li button {
+    position: absolute;
+    top: 0;
+}
+
+h1 {
+    background: url(images/logo.png) left top no-repeat;
+    height: 141px;
+    width: 219px;
+    margin: 0 auto;
+    text-indent: -10000px;
+    overflow: hidden;
+}
+
+#main {
+    border: 0;
+}
+
+#main li {
+    float: left;
+    width: 200px;
+    padding: 20px;
+    list-style: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #e4e4e4;
+    text-indent: 20px;
+    text-align: right;
+    font-size: 0.7rem;
+}
