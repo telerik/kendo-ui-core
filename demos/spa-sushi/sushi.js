@@ -112,25 +112,10 @@ var detailModel = kendo.observable({
 });
 
 // Views and layouts
-var layout = new kendo.Layout({
-    content: "#layout",
-    model: layoutModel
-});
-
-var index = new kendo.View({
-    content: "#index",
-    model: indexModel
-});
-
-var checkout = new kendo.View({
-    content: "#checkout",
-    model: checkoutModel
-});
-
-var detail = new kendo.View({
-    content: "#detail",
-    model: detailModel
-})
+var layout = new kendo.Layout("layout", { model: layoutModel });
+var index = new kendo.View("index", { model: indexModel });
+var checkout = new kendo.View("checkout", { model: checkoutModel });
+var detail = new kendo.View("detail", { model: detailModel });
 
 var sushi = new kendo.Router({
     init: function() {

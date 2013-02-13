@@ -138,10 +138,7 @@ model = kendo.observable({
     }
 });
 
-var main = new kendo.View({
-    content: "#main",
-    model: model
-});
+var main = new kendo.View("main", { model: model });
 
 router = new kendo.Router({
     init: function() {
