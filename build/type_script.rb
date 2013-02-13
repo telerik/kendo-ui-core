@@ -238,7 +238,13 @@ module CodeGen::TypeScript
             @full_name.include?('mobile.')
         end
 
+        def fx?
+            @full_name.include?('FX')
+        end
+
         def type_script_base_class
+            return if fx?
+
             return 'kendo.ui.Widget' if widget? && !mobile?
 
             return 'kendo.mobile.ui.Widget' if widget? && mobile?

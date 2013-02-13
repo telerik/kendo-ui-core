@@ -1,4 +1,4 @@
-    class <%= type_script_type %> extends <%= type_script_base_class %>{
+    class <%= type_script_type %> <%= 'extends ' + type_script_base_class if type_script_base_class %> {
 % if widget?
         element: JQuery;
         wrapper: JQuery;
