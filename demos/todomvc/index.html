@@ -51,7 +51,6 @@
         <script type="text/x-kendo-template" id="toDoItem">
             <li data-bind="attr: { class: liClass }">
                 <div class="view">
-                    <span data-bind="text: liClass"></span>
                     <input class="toggle" type="checkbox" data-bind="checked: complete">
                     <label data-bind="text: title, events: { dblclick: edit }"></label>
                     <button class="destroy" data-bind="click: remove"></button>
