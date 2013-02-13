@@ -433,8 +433,12 @@ kendo_module({
                     number = parseInt(String.fromCharCode(key), 10);
                     if (!isNaN(number)) {
                         number = number + "";
-                        element.value = value.substring(0, selectionStart) + number + value.substring(selectionEnd);
-                        caret(element, selectionStart + number.length);
+                        value = value.substring(0, selectionStart) + number + value.substring(selectionEnd);
+                        if (element.maxLength > value.length) {
+                            element.value = value;
+                            caret(element, selectionStart + number.length);
+                        }
+
                         prevent = true;
                     }
                 }

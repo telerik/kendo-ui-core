@@ -218,6 +218,15 @@
                 ok(textbox._prevent(192 /* ` */, shiftKey));
                 equal(input.val(), "");
             });
+
+            test("NumericTextBox prevents if value is longer then maxLength", function() {
+                var textbox = new NumericTextBox(input.attr("maxLength", 2).val("10")),
+                    shiftKey = true;
+
+                textbox.focus();
+                ok(textbox._prevent(48 /* 0 */, shiftKey));
+                equal(input.val(), "10");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
