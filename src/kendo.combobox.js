@@ -384,6 +384,7 @@ kendo_module({
                 dataItem = that.dataItem();
 
                 if (dataItem && textAccessor(dataItem) === text) {
+                    that._triggerCascade();
                     return;
                 }
 

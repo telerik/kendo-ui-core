@@ -173,6 +173,7 @@ kendo_module({
                     })
                     .on("focusout" + ns, function() {
                         if (!that._blured) {
+                            that._triggerCascade();
                             that._blur();
                             dropDownWrapper.removeClass(FOCUSED);
 

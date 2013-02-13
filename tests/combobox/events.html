@@ -439,6 +439,23 @@
 
                 combobox.input.blur();
             });
+
+            test("ComboBox trigger cascade on TAB", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo"],
+                    cascade: function() {
+                        ok(true);
+                    }
+                }).data("kendoComboBox");
+
+                combobox.open();
+                combobox.input.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                combobox.text(combobox.text());
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
