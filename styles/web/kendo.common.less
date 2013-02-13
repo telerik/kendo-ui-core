@@ -1917,8 +1917,13 @@ span.k-dropdown
 .k-picker-wrap.k-state-border-down,
 .k-numeric-wrap.k-state-border-down
 {
-    border-bottom: 0;
+    border-bottom-width: 0;
     padding-bottom: 1px;
+}
+
+.k-colorpicker .k-picker-wrap.k-state-border-down
+{
+	border-bottom-width: 1px;
 }
 
 .k-textbox,
@@ -2565,9 +2570,6 @@ span.k-numerictextbox
     }
     .k-icon {
     cursor: pointer;
-    }
-    &:focus {
-        outline: 1px dotted #000;
     }
 }
 

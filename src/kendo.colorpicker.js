@@ -816,14 +816,16 @@ kendo_module({
             if (arguments.length === 0) {
                 enable = true;
             }
-            var that = this, wrapper = that.wrapper;
+            var that = this, wrapper = that.wrapper, innerWraper = wrapper.children(".k-picker-wrap");
             that.element.attr("disabled", !enable);
             wrapper.attr("disabled", !enable);
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", 0)
-                    .on("mouseenter" + NS, function() { wrapper.children(".k-picker-wrap").addClass("k-state-hover"); })
-                    .on("mouseleave" + NS, function() { wrapper.children(".k-picker-wrap").removeClass("k-state-hover"); })
+                    .on("mouseenter" + NS, function() { innerWraper.addClass("k-state-hover"); })
+                    .on("mouseleave" + NS, function() { innerWraper.removeClass("k-state-hover"); })
+                    .on("focus" + NS, function () { innerWraper.addClass("k-state-focused"); })
+                    .on("blur" + NS, function () { innerWraper.removeClass("k-state-focused"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
