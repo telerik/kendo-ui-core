@@ -117,13 +117,10 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         return "listView";
     }
 
-<<<<<<< HEAD
     public void setPageable(com.kendoui.taglib.listview.PageableTag value) {
         setProperty("pageable", value);
     }
 
-=======
->>>>>>> Update java wrappers.
     public void setCancel(CancelFunctionTag value) {
         setEvent("cancel", value.getBody());
     }
