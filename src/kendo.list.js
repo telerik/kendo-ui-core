@@ -618,6 +618,7 @@ kendo_module({
             var that = this,
                 key = e.keyCode,
                 ul = that.ul[0],
+                methodName = that.popup.visible() ? "_select" : "_accept",
                 current = that._current,
                 down = key === keys.DOWN,
                 pressed;
@@ -631,9 +632,10 @@ kendo_module({
                     } else {
                         current = current[0].nextSibling;
                     }
-                    that._select(current);
+
+                    that[methodName](current);
                 } else {
-                    that._select(current ? current[0].previousSibling : ul.lastChild);
+                    that[methodName](current ? current[0].previousSibling : ul.lastChild);
                 }
                 e.preventDefault();
                 pressed = true;

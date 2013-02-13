@@ -455,7 +455,7 @@ kendo_module({
         _accept: function(li) {
             var that = this;
 
-            if (li && that.popup.visible()) {
+            if (li) {
                 that._focus(li);
             } else {
                 that.text(that.text());

@@ -222,6 +222,18 @@
                 ok(origCalled);
             });
 
+            test("change should be raised on down arrow and closed popup", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["foo", "bar"],
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                dropdownlist.wrapper.focus();
+                dropdownlist.wrapper.press(kendo.keys.DOWN);
+            });
+
             test("open event when click arrow", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
