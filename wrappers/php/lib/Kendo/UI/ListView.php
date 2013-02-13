@@ -150,7 +150,7 @@ class ListView extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether paging is enabled/disabled.
-    * @param boolean $value
+    * @param boolean|\Kendo\UI\ListViewPageable|array $value
     * @return \Kendo\UI\ListView
     */
     public function pageable($value) {

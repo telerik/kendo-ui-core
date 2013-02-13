@@ -12,8 +12,88 @@
       :description: Template to be used for rendering the alternate items in the listview.
 
     - :name: pageable
-      :type: Boolean
+      :type: Boolean | Object
+      :recursive: false
+      :content: false
       :description: Indicates whether paging is enabled/disabled.
+
+    - :name: pageable.pageSize
+      :type: Number
+      :description: Defines the number of records which will be displyed.
+
+    - :name: pageable.previousNext
+      :type: Boolean
+      :description: Defines if buttons for navigating to the first, last, previous and next pages will be shown.
+
+    - :name: pageable.numeric
+      :type: Boolean
+      :description: Defines if numeric portion of the pager will be shown.
+
+    - :name: pageable.buttonCount
+      :type: Number
+      :description: Defines the number of buttons displayed in the numeric pager.
+
+    - :name: pageable.input
+      :type: Boolean
+      :description: Defines if an input element which allows the user to navigate to given page will be displayed.
+
+    - :name: pageable.pageSizes
+      :type: Boolean | Array
+      :description: Displayes a list with predefined page sizes. An array of values to be displayed can be provided.
+
+    - :name: pageable.refresh
+      :type: Boolean
+      :description: Defines if a refresh button will be displayed.
+
+    - :name: pageable.info
+      :type: Boolean
+      :description: Defines if a label showing current paging information will be displayed.
+
+    - :name: pageable.messages
+      :type: Object
+      :recursive: false
+      :content: false
+      :description: Defines texts shown within the pager.
+
+    - :name: pageable.messages.display
+      :type: String
+      :description: Defines the info text.
+
+    - :name: pageable.messages.empty
+      :type: String
+      :description: Defines the info text shown when there are no records to be displayed.
+
+    - :name: pageable.messages.page
+      :type: String
+      :description: Defines the first part of the text of the input option.
+
+    - :name: pageable.messages.of
+      :type: String
+      :description: Defines the last part of the text of the input option.
+
+    - :name: pageable.messages.itemsPerPage
+      :type: String
+      :description: Defines the text displayed after the select element of the pageSizes mode.
+
+    - :name: pageable.messages.first
+      :type: String
+      :description: Defines the text of the first page button tooltip.
+
+    - :name: pageable.messages.previous
+      :type: String
+      :description: Defines the text of the previous page button tooltip.
+
+    - :name: pageable.messages.next
+      :type: String
+      :description: Defines the text of the next page button tooltip.
+
+    - :name: pageable.messages.last
+      :type: String
+      :description: Defines the text of the last page button tooltip.
+
+    - :name: pageable.messages.refresh
+      :type: String
+      :description: Defines the text of the refresh button tooltip.
 
     - :name: tagName
       :type: String
