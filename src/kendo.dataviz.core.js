@@ -1972,7 +1972,7 @@
                     element.refresh(domElement);
 
                     if (wallTime < finish) {
-                        requestAnimFrame(loop);
+                        dataviz.requestFrame(loop);
                     } else {
                         anim.destroy();
                     }
@@ -2658,7 +2658,7 @@
             "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
     }
 
-    var requestAnimFrame =
+    var requestFrameFn =
         window.requestAnimationFrame       ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame    ||
@@ -2667,6 +2667,10 @@
         function(callback, element) {
             setTimeout(callback, ANIMATION_STEP);
         };
+
+    dataviz.requestFrame = function(callback, delay) {
+        return requestFrameFn(callback, delay);
+    };
 
     function inArray(value, array) {
         return indexOf(value, array) != -1;
