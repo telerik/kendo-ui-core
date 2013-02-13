@@ -7,6 +7,7 @@ end
 
 package "php5-common"
 package "php5-cli"
+package "php5-gd"
 package "php5-sqlite"
 package "php5-fpm"
 
