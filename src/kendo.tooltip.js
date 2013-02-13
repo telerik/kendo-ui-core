@@ -148,7 +148,8 @@ kendo_module({
                 },
                 close: {
                     effects: "fade:out",
-                    duration: 100
+                    duration: 40,
+                    hide: true
                 }
             }
         },
