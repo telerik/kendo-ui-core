@@ -271,8 +271,9 @@ namespace Kendo.Mvc.UI
             {
                 var type = MemberType.GetNonNullableType();
                 var values = new List<IDictionary<string, object>>();
+                var underlyingType = Enum.GetUnderlyingType(type);
 
-                foreach (int value in Enum.GetValues(type))
+                foreach (var value in Enum.GetValues(type))
                 {
                     var obj = new Dictionary<string, object>();
 
@@ -291,7 +292,7 @@ namespace Kendo.Mvc.UI
                         }
                     }
 
-                    obj["value"] = value;
+                    obj["value"] = Convert.ChangeType(value, underlyingType);
                     obj["text"] = name;
 
                     values.Add(obj);
