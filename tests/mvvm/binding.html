@@ -1233,7 +1233,6 @@
 
                 var dom = $("<div data-bind='source: foo' data-template='mobile-widget-template' />");
                 kendo.bind(dom, kendo.observable({foo: ["bar"]}), kendo.mobile.ui, kendo.ui);
-                console.log(dom);
                 ok(dom.find("span").data("kendoMobileTestWidget"));
             });
         </script>

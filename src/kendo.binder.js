@@ -88,56 +88,59 @@ kendo_module({
         },
 
         get: function() {
+
             var that = this,
                 source = that.source,
                 index = 0,
                 path = that.path,
                 result = source;
 
-
-            if (that.observable) {
-                that.start(that.source);
-                result = source.get(path);
-
-                // Traverse the observable hierarchy if the binding is not resolved at the current level.
-                while (result === undefined && source) {
-
-                    source = that.parents[++index];
-
-                    if (source instanceof ObservableObject) {
-                        result = source.get(path);
-                    }
-                }
-
-                // If the result is a function - invoke it
-                if (typeof result === "function") {
-                    index = path.lastIndexOf(".");
-
-                    // If the function is a member of a nested observable object make that nested observable the context (this) of the function
-                    if (index > 0) {
-                        source = source.get(path.substring(0, index));
-                    }
-
-                    // Invoke the function
-                    that.start(source);
-
-                    result = result.call(source, that.source);
-
-                    that.stop(source);
-                }
-
-                // If the binding is resolved by a parent object
-                if (source && source !== that.source) {
-
-                    that.currentSource = source; // save parent object
-
-                    // Listen for changes in the parent object
-                    source.unbind(CHANGE, that._change)
-                          .bind(CHANGE, that._change);
-                }
-                that.stop(that.source);
+            if (!that.observable) {
+                return result;
             }
 
+            that.start(that.source);
+
+            result = source.get(path);
+
+            // Traverse the observable hierarchy if the binding is not resolved at the current level.
+            while (result === undefined && source) {
+
+                source = that.parents[++index];
+
+                if (source instanceof ObservableObject) {
+                    result = source.get(path);
+                }
+            }
+
+            // If the result is a function - invoke it
+            if (typeof result === "function") {
+                index = path.lastIndexOf(".");
+
+                // If the function is a member of a nested observable object make that nested observable the context (this) of the function
+                if (index > 0) {
+                    source = source.get(path.substring(0, index));
+                }
+
+                // Invoke the function
+                that.start(source);
+
+                result = result.call(source, that.source);
+
+                that.stop(source);
+            }
+
+            // If the binding is resolved by a parent object
+            if (source && source !== that.source) {
+
+                that.currentSource = source; // save parent object
+
+                // Listen for changes in the parent object
+                source.unbind(CHANGE, that._change)
+                      .bind(CHANGE, that._change);
+            }
+
+            that.stop(that.source);
 
             return result;
         },
