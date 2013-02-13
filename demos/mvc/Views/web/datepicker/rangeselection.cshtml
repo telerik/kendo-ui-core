@@ -10,22 +10,36 @@
             <script>
                 $(document).ready(function() {
                     function startChange() {
-                        var startDate = start.value();
+                        var startDate = start.value(),
+                        endDate = end.value();
 
                         if (startDate) {
                             startDate = new Date(startDate);
-                            startDate.setDate(startDate.getDate() + 1);
+                            startDate.setDate(startDate.getDate());
                             end.min(startDate);
+                        } else if (endDate) {
+                            start.max(new Date(endDate));
+                        } else {
+                            endDate = new Date();
+                            start.max(endDate);
+                            end.min(endDate);
                         }
                     }
 
                     function endChange() {
-                        var endDate = end.value();
+                        var endDate = end.value(),
+                        startDate = start.value();
 
                         if (endDate) {
                             endDate = new Date(endDate);
-                            endDate.setDate(endDate.getDate() - 1);
+                            endDate.setDate(endDate.getDate());
                             start.max(endDate);
+                        } else if (startDate) {
+                            end.min(new Date(startDate));
+                        } else {
+                            endDate = new Date();
+                            start.max(endDate);
+                            end.min(endDate);
                         }
                     }
 
