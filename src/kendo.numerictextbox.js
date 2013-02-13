@@ -434,7 +434,7 @@ kendo_module({
                     if (!isNaN(number)) {
                         number = number + "";
                         value = value.substring(0, selectionStart) + number + value.substring(selectionEnd);
-                        if (element.maxLength > value.length) {
+                        if (element.maxLength === -1 || element.maxLength > value.length) {
                             element.value = value;
                             caret(element, selectionStart + number.length);
                         }
