@@ -257,6 +257,7 @@ kendo_module({
                     color: WHITE
                 },
                 crosshair: {
+                    color: "#8e8e8e",
                     tooltip: {
                         background: "#3d3d3d",
                         color: WHITE,
@@ -341,7 +342,8 @@ kendo_module({
                     color: "#293135"
                 },
                 crosshair: {
-                    tooltip:{
+                    color: "#9aabb2",
+                    tooltip: {
                         background: WHITE,
                         color: BLACK,
                         opacity: 0.8
@@ -470,7 +472,8 @@ kendo_module({
                         background: "#1b141a",
                         color: "#ffffff",
                         opacity: 1
-                    }
+                    },
+                    color: "#ffffff"
                 }
             },
             tooltip: {
@@ -554,7 +557,8 @@ kendo_module({
                         background: WHITE,
                         color: BLACK,
                         opacity: 0.8
-                    }
+                    },
+                    color: "#8e8e8e"
                 }
             },
             tooltip: {
@@ -663,7 +667,8 @@ kendo_module({
                         background: WHITE,
                         color: "#4e5968",
                         opacity: 0.8
-                    }
+                    },
+                    color: "#a6b1c0"
                 }
             },
             tooltip: {
@@ -750,7 +755,8 @@ kendo_module({
                     tooltip: {
                         background: WHITE,
                         color: BLACK
-                    }
+                    },
+                    color: "#c7c7c7"
                 }
             },
             tooltip: {
@@ -857,7 +863,8 @@ kendo_module({
                     tooltip: {
                         background: "#0e0e0e",
                         color: "#ffffff"
-                    }
+                    },
+                    color: "#cecece"
                 }
             },
             tooltip: {
@@ -990,7 +997,8 @@ kendo_module({
                         background: "#212a33",
                         color: "#ffffff",
                         opacity: 1
-                    }
+                    },
+                    color: "#8c909e"
                 }
             },
             tooltip: {
@@ -1123,7 +1131,8 @@ kendo_module({
                         background: "#ffffff",
                         color: "#686868",
                         opacity: 0.8
-                    }
+                    },
+                    color: "#9e9e9e"
                 }
             },
             tooltip: {
@@ -1257,7 +1266,8 @@ kendo_module({
                         background: "#ffffff",
                         color: "#343434",
                         opacity: 0.8
-                    }
+                    },
+                    color: "#b8b8b8"
                 }
             },
             tooltip: {
