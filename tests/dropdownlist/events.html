@@ -410,7 +410,7 @@
                 ddl.value("bar");
             });
 
-            test("DropDownList does not trigger cascade if item is not changed", 1, function() {
+            test("DropDownList trigger cascade when change value using value method", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     cascade: function() {
@@ -420,6 +420,28 @@
 
                 input.data("kendoDropDownList").value("foo");
             });
+
+            test("DropDownList trigger change on search if popup is closed", 2, function() {
+                var change, cascade;
+
+                input.kendoDropDownList({
+                    autoBind: false,
+                    dataSource: ["foo", "bar"],
+                    cascade: function() {
+                        cascade = true;
+                    },
+                    change: function() {
+                        change = true;
+                    }
+                });
+
+                input.data("kendoDropDownList")._word = "b";
+                input.data("kendoDropDownList")._search();
+
+                ok(cascade);
+                ok(change);
+            });
+
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

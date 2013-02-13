@@ -406,6 +406,10 @@ kendo_module({
             }, that.options.delay);
 
             that.search(that._word);
+            if (!that.popup.visible()) {
+                that._triggerCascade();
+                that._change();
+            }
         },
 
         _select: function(li) {
