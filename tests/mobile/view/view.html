@@ -78,6 +78,16 @@
                 setup('<div data-role="view" id="page1"><div data-role="content">Content</div></div>');
                 equal(root.find("[data-role=content]").length, 1);
             });
+
+            test("contentElement() returns content if View is stretched", function() {
+                setup('<div data-role="view" data-stretch="true"></div>');
+                ok(view.content[0] == view.contentElement()[0]);
+            });
+
+            test("contentElement() returns scrollerContent if View is not stretched", function() {
+                setup('<div data-role="view"></div>');
+                ok(view.scrollerContent[0] == view.contentElement()[0]);
+            });
         </script>
     </body>
 </html>
