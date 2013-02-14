@@ -63,10 +63,14 @@ METHOD = ERB.new(%{
 #### Parameters
 <%= parameters.each_with_index.map { |parameter, index| parameter.to_markdown(parameterTypes[index])}.join %>
 <% end %>
+<% if returns %>
+#### Returns
+<%= returns %>
+<% end %>
 })
     class Method < Struct.new(:name, :summary, :parameters, :examples, :returns)
         def to_markdown
-            parameterTypes = /\(([^\)]*)\)$/.match(name)[1].split('|');
+            parameterTypes = /\(([^\)]*)\)$/.match(name)[1].split('|') if parameters.any?
 
             METHOD.result(binding)
         end
@@ -225,7 +229,7 @@ PARAMETER = ERB.new(%{
             def parse_parameterss(method)
                 method.xpath('param').map do |parameter|
                     name = parameter['name']
-                    summary = parameter.text
+                    summary = parameter.text.strip
 
                     Parameter.new(name, summary)
                 end
@@ -241,7 +245,7 @@ PARAMETER = ERB.new(%{
 
             def parse_returns(method)
                 method.xpath('returns').each do |returns|
-                    return returns.text
+                    return returns.text.strip
                 end
             end
 
