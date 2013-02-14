@@ -1,4 +1,3 @@
-        <script src="../../content/shared/js/people.js"></script>
 
         <div id="example" class="k-content">
 
@@ -22,55 +21,64 @@
             <div id="grid" style="width:500px;"></div>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            data: createRandomData(20),
+                            transport: {
+                                read: {
+                                    url: "http://demos.kendoui.com/service/Products",
+                                    dataType: "jsonp"
+                                }
+                            },
                             pageSize: 5,
                             group: {
-                                field: "Age",
+                                field: "UnitsInStock",
                                 dir: "asc"
                             }
                         },
                         selectable: "multiple row",
-                        pageable: true,
+                        pageable: {
+                            buttonCount: 5
+                        },
                         scrollable: false,
                         groupable: true,
                         columns: [
                             {
-                                field: "FirstName",
-                                title: "First Name"
+                                field: "ProductName",
+                                title: "Product Name"
                             },
                             {
-                                field: "LastName",
-                                title: "Last Name"
+                                field: "UnitPrice",
+                                title: "Unit Price",
+                                format: "{0:c}"
                             },
                             {
-                                field: "Age"
+                                field: "UnitsInStock",
+                                title: "Units In Stock"
                             }
                         ]
                     });
 
-                    $(".clearSelection").click(function() {
+                    $(".clearSelection").click(function () {
                         $("#grid").data("kendoGrid").clearSelection();
                     });
 
-                    var selectRow = function(e) {
+                    var selectRow = function (e) {
                         if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
-                                var grid = $("#grid").data("kendoGrid"),
+                            var grid = $("#grid").data("kendoGrid"),
                                     rowIndex = $("#selectRow").val(),
                                     row = grid.tbody.find(">tr:not(.k-grouping-row)").eq(rowIndex);
 
-                                grid.select(row);
-                            }
-                        },
-                        toggleGroup = function(e) {
+                            grid.select(row);
+                        }
+                    },
+                        toggleGroup = function (e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
                                 var grid = $("#grid").data("kendoGrid"),
                                     rowIndex = $("#groupRow").val(),
                                     row = grid.tbody.find(">tr.k-grouping-row").eq(rowIndex);
 
-                                if(row.has(".k-i-collapse").length) {
+                                if (row.has(".k-i-collapse").length) {
                                     grid.collapseGroup(row);
                                 } else {
                                     grid.expandGroup(row);

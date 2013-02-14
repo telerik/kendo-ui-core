@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
-import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-selection-controller")
 @RequestMapping(value="/web/grid/")
