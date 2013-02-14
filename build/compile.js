@@ -77,6 +77,7 @@ if (ARGV["kendo-config"]) {
         var c = ast.component;
         if (c) {
             c.source = filename.replace(/\.js$/i, ".min.js");
+            c.widgets = extract_widget_info(ast);
             components.push(c);
         }
     });
@@ -220,6 +221,77 @@ files.forEach(function (file){
     code = ast.print_to_string(codegen_options);
     fs.writeFileSync(output, code);
 });
+
+function extract_widget_info(ast) {
+    ast.figure_out_scope();
+    var widgets = [];
+    var scope = null;
+
+    // Quick-n-dirty heuristic that should cover the use cases in Kendo.
+    function dumb_eval(node) {
+        if (node instanceof u2.AST_Constant) {
+            return node.getValue();
+        }
+        if (node instanceof u2.AST_SymbolRef) {
+            var init = node.definition().init;
+            if (init) {
+                return dumb_eval(init);
+            }
+            return node.name;
+        }
+        if (node instanceof u2.AST_Dot) {
+            return dumb_eval(node.expression) + "." + node.property;
+        }
+        if (node instanceof u2.AST_Call && is_widget(node)) {
+            return "kendo.ui.Widget.extend";
+        }
+        return null;        // dunno how to handle
+    }
+
+    // determine if node points to [window.]kendo.ui.SOMETHING
+    function is_widget(node) {
+        if (node instanceof u2.AST_Call &&
+            node.expression instanceof u2.AST_Dot &&
+            node.expression.property == "extend") {
+            var x = dumb_eval(node.expression);
+            if (!x) return false;
+            return /^(window\.)?(kendo|kendo\.dataviz|kendo\.mobile)\.ui\..+?\.extend/.test(x);
+        }
+    }
+
+    var tw = new u2.TreeWalker(function(node, descend){
+        if (node instanceof u2.AST_Scope) {
+            var save_scope = scope;
+            scope = node;
+            descend();
+            scope = save_scope;
+            return true;
+        }
+        if (is_widget(node)) {
+            var def = node.args[0];
+            var options = def.properties.filter(function(prop){
+                return prop.key == "options";
+            })[0];
+            if (options) {
+                options = options.value;
+                var name = options.properties.filter(function(prop){
+                    return prop.key == "name";
+                })[0];
+                if (name && name.value) {
+                    name = name.value.value;
+                    widgets.push({
+                        name : name,
+                        file : node.start.file,
+                        line : node.start.line,
+                        col  : node.start.col
+                    });
+                }
+            }
+        }
+    });
+    ast.walk(tw);
+    return widgets;
+}
 
 function extract_deps(ast, comp_filename) {
     var component, is_bundle = false;

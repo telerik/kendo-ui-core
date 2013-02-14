@@ -30,7 +30,8 @@
             "depends": [
                 "data"
             ],
-            "source": "kendo.aspnetmvc.min.js"
+            "source": "kendo.aspnetmvc.min.js",
+            "widgets": []
         },
         {
             "id": "autocomplete",
@@ -40,7 +41,15 @@
             "depends": [
                 "list"
             ],
-            "source": "kendo.autocomplete.min.js"
+            "source": "kendo.autocomplete.min.js",
+            "widgets": [
+                {
+                    "name": "AutoComplete",
+                    "file": "kendo.autocomplete.js",
+                    "line": 56,
+                    "col": 23
+                }
+            ]
         },
         {
             "id": "binder",
@@ -51,7 +60,8 @@
                 "core",
                 "data"
             ],
-            "source": "kendo.binder.min.js"
+            "source": "kendo.binder.min.js",
+            "widgets": []
         },
         {
             "id": "calendar",
@@ -61,7 +71,15 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.calendar.min.js"
+            "source": "kendo.calendar.min.js",
+            "widgets": [
+                {
+                    "name": "Calendar",
+                    "file": "kendo.calendar.js",
+                    "line": 67,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "colorpicker",
@@ -73,7 +91,27 @@
                 "popup",
                 "slider"
             ],
-            "source": "kendo.colorpicker.min.js"
+            "source": "kendo.colorpicker.min.js",
+            "widgets": [
+                {
+                    "name": "ColorPalette",
+                    "file": "kendo.colorpicker.js",
+                    "line": 142,
+                    "col": 23
+                },
+                {
+                    "name": "FlatColorPicker",
+                    "file": "kendo.colorpicker.js",
+                    "line": 299,
+                    "col": 26
+                },
+                {
+                    "name": "ColorPicker",
+                    "file": "kendo.colorpicker.js",
+                    "line": 772,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "columnmenu",
@@ -85,7 +123,15 @@
                 "menu"
             ],
             "advanced": true,
-            "source": "kendo.columnmenu.min.js"
+            "source": "kendo.columnmenu.min.js",
+            "widgets": [
+                {
+                    "name": "ColumnMenu",
+                    "file": "kendo.columnmenu.js",
+                    "line": 33,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "combobox",
@@ -95,14 +141,23 @@
             "depends": [
                 "list"
             ],
-            "source": "kendo.combobox.min.js"
+            "source": "kendo.combobox.min.js",
+            "widgets": [
+                {
+                    "name": "ComboBox",
+                    "file": "kendo.combobox.js",
+                    "line": 36,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "core",
             "name": "Core",
             "category": "framework",
             "description": "The core of the Kendo framework.",
-            "source": "kendo.core.min.js"
+            "source": "kendo.core.min.js",
+            "widgets": []
         },
         {
             "id": "data",
@@ -130,7 +185,8 @@
                     ]
                 }
             ],
-            "source": "kendo.data.min.js"
+            "source": "kendo.data.min.js",
+            "widgets": []
         },
         {
             "id": "data.odata",
@@ -140,7 +196,8 @@
                 "core"
             ],
             "hidden": true,
-            "source": "kendo.data.odata.min.js"
+            "source": "kendo.data.odata.min.js",
+            "widgets": []
         },
         {
             "id": "data.xml",
@@ -150,7 +207,8 @@
                 "core"
             ],
             "hidden": true,
-            "source": "kendo.data.xml.min.js"
+            "source": "kendo.data.xml.min.js",
+            "widgets": []
         },
         {
             "id": "chart",
@@ -163,7 +221,15 @@
                 "dataviz-core",
                 "dataviz-svg"
             ],
-            "source": "kendo.dataviz.chart.min.js"
+            "source": "kendo.dataviz.chart.min.js",
+            "widgets": [
+                {
+                    "name": "Chart",
+                    "file": "kendo.dataviz.chart.js",
+                    "line": 186,
+                    "col": 16
+                }
+            ]
         },
         {
             "id": "dataviz-core",
@@ -173,7 +239,8 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.dataviz.core.min.js"
+            "source": "kendo.dataviz.core.min.js",
+            "widgets": []
         },
         {
             "id": "gauge",
@@ -184,7 +251,21 @@
                 "dataviz-core",
                 "dataviz-svg"
             ],
-            "source": "kendo.dataviz.gauge.min.js"
+            "source": "kendo.dataviz.gauge.min.js",
+            "widgets": [
+                {
+                    "name": "RadialGauge",
+                    "file": "kendo.dataviz.gauge.js",
+                    "line": 1292,
+                    "col": 22
+                },
+                {
+                    "name": "LinearGauge",
+                    "file": "kendo.dataviz.gauge.js",
+                    "line": 1324,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "stock-chart",
@@ -194,7 +275,15 @@
             "depends": [
                 "chart"
             ],
-            "source": "kendo.dataviz.stock.min.js"
+            "source": "kendo.dataviz.stock.min.js",
+            "widgets": [
+                {
+                    "name": "StockChart",
+                    "file": "kendo.dataviz.stock.js",
+                    "line": 47,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "dataviz-svg",
@@ -204,7 +293,8 @@
             "depends": [
                 "dataviz-core"
             ],
-            "source": "kendo.dataviz.svg.min.js"
+            "source": "kendo.dataviz.svg.min.js",
+            "widgets": []
         },
         {
             "id": "themes",
@@ -214,7 +304,8 @@
             "depends": [
                 "dataviz-core"
             ],
-            "source": "kendo.dataviz.themes.min.js"
+            "source": "kendo.dataviz.themes.min.js",
+            "widgets": []
         },
         {
             "id": "dataviz-vml",
@@ -224,7 +315,8 @@
             "depends": [
                 "dataviz-core"
             ],
-            "source": "kendo.dataviz.vml.min.js"
+            "source": "kendo.dataviz.vml.min.js",
+            "widgets": []
         },
         {
             "id": "datepicker",
@@ -235,7 +327,15 @@
                 "calendar",
                 "popup"
             ],
-            "source": "kendo.datepicker.min.js"
+            "source": "kendo.datepicker.min.js",
+            "widgets": [
+                {
+                    "name": "DatePicker",
+                    "file": "kendo.datepicker.js",
+                    "line": 267,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "datetimepicker",
@@ -246,7 +346,15 @@
                 "datepicker",
                 "timepicker"
             ],
-            "source": "kendo.datetimepicker.min.js"
+            "source": "kendo.datetimepicker.min.js",
+            "widgets": [
+                {
+                    "name": "DateTimePicker",
+                    "file": "kendo.datetimepicker.js",
+                    "line": 47,
+                    "col": 25
+                }
+            ]
         },
         {
             "id": "draganddrop",
@@ -257,7 +365,27 @@
                 "core",
                 "userevents"
             ],
-            "source": "kendo.draganddrop.min.js"
+            "source": "kendo.draganddrop.min.js",
+            "widgets": [
+                {
+                    "name": "DropTarget",
+                    "file": "kendo.draganddrop.js",
+                    "line": 425,
+                    "col": 21
+                },
+                {
+                    "name": "DropTargetArea",
+                    "file": "kendo.draganddrop.js",
+                    "line": 517,
+                    "col": 25
+                },
+                {
+                    "name": "Draggable",
+                    "file": "kendo.draganddrop.js",
+                    "line": 539,
+                    "col": 20
+                }
+            ]
         },
         {
             "id": "dropdownlist",
@@ -267,7 +395,15 @@
             "depends": [
                 "list"
             ],
-            "source": "kendo.dropdownlist.min.js"
+            "source": "kendo.dropdownlist.min.js",
+            "widgets": [
+                {
+                    "name": "DropDownList",
+                    "file": "kendo.dropdownlist.js",
+                    "line": 25,
+                    "col": 23
+                }
+            ]
         },
         {
             "id": "editable",
@@ -280,7 +416,15 @@
                 "binder"
             ],
             "hidden": true,
-            "source": "kendo.editable.min.js"
+            "source": "kendo.editable.min.js",
+            "widgets": [
+                {
+                    "name": "Editable",
+                    "file": "kendo.editable.js",
+                    "line": 146,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "editor",
@@ -293,7 +437,21 @@
                 "window",
                 "colorpicker"
             ],
-            "source": "kendo.editor.min.js"
+            "source": "kendo.editor.min.js",
+            "widgets": [
+                {
+                    "name": "Editor",
+                    "file": "kendo.editor.js",
+                    "line": 416,
+                    "col": 17
+                },
+                {
+                    "name": "SelectBox",
+                    "file": "kendo.editor.js",
+                    "line": 5385,
+                    "col": 16
+                }
+            ]
         },
         {
             "id": "filtermenu",
@@ -305,7 +463,15 @@
                 "dropdownlist"
             ],
             "advanced": true,
-            "source": "kendo.filtermenu.min.js"
+            "source": "kendo.filtermenu.min.js",
+            "widgets": [
+                {
+                    "name": "FilterMenu",
+                    "file": "kendo.filtermenu.js",
+                    "line": 113,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "fx",
@@ -315,7 +481,8 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.fx.min.js"
+            "source": "kendo.fx.min.js",
+            "widgets": []
         },
         {
             "id": "grid",
@@ -400,7 +567,21 @@
                     ]
                 }
             ],
-            "source": "kendo.grid.min.js"
+            "source": "kendo.grid.min.js",
+            "widgets": [
+                {
+                    "name": "VirtualScrollable",
+                    "file": "kendo.grid.js",
+                    "line": 115,
+                    "col": 29
+                },
+                {
+                    "name": "Grid",
+                    "file": "kendo.grid.js",
+                    "line": 548,
+                    "col": 15
+                }
+            ]
         },
         {
             "id": "groupable",
@@ -411,7 +592,15 @@
                 "draganddrop"
             ],
             "advanced": true,
-            "source": "kendo.groupable.min.js"
+            "source": "kendo.groupable.min.js",
+            "widgets": [
+                {
+                    "name": "Groupable",
+                    "file": "kendo.groupable.js",
+                    "line": 43,
+                    "col": 20
+                }
+            ]
         },
         {
             "id": "history",
@@ -422,7 +611,8 @@
                 "core"
             ],
             "hidden": true,
-            "source": "kendo.history.min.js"
+            "source": "kendo.history.min.js",
+            "widgets": []
         },
         {
             "id": "imagebrowser",
@@ -433,7 +623,27 @@
                 "listview",
                 "upload"
             ],
-            "source": "kendo.imagebrowser.min.js"
+            "source": "kendo.imagebrowser.min.js",
+            "widgets": [
+                {
+                    "name": "ImageBrowser",
+                    "file": "kendo.imagebrowser.js",
+                    "line": 184,
+                    "col": 23
+                },
+                {
+                    "name": "SearchBox",
+                    "file": "kendo.imagebrowser.js",
+                    "line": 867,
+                    "col": 20
+                },
+                {
+                    "name": "Breadcrumbs",
+                    "file": "kendo.imagebrowser.js",
+                    "line": 982,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "list",
@@ -444,7 +654,8 @@
                 "popup"
             ],
             "hidden": true,
-            "source": "kendo.list.min.js"
+            "source": "kendo.list.min.js",
+            "widgets": []
         },
         {
             "id": "listview",
@@ -472,7 +683,15 @@
                     ]
                 }
             ],
-            "source": "kendo.listview.min.js"
+            "source": "kendo.listview.min.js",
+            "widgets": [
+                {
+                    "name": "ListView",
+                    "file": "kendo.listview.js",
+                    "line": 44,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "menu",
@@ -482,7 +701,15 @@
             "depends": [
                 "popup"
             ],
-            "source": "kendo.menu.min.js"
+            "source": "kendo.menu.min.js",
+            "widgets": [
+                {
+                    "name": "Menu",
+                    "file": "kendo.menu.js",
+                    "line": 246,
+                    "col": 15
+                }
+            ]
         },
         {
             "id": "mobile.actionsheet",
@@ -492,7 +719,15 @@
             "depends": [
                 "mobile.popover"
             ],
-            "source": "kendo.mobile.actionsheet.min.js"
+            "source": "kendo.mobile.actionsheet.min.js",
+            "widgets": [
+                {
+                    "name": "ActionSheet",
+                    "file": "kendo.mobile.actionsheet.js",
+                    "line": 21,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "mobile.application",
@@ -502,7 +737,8 @@
             "depends": [
                 "mobile.pane"
             ],
-            "source": "kendo.mobile.application.min.js"
+            "source": "kendo.mobile.application.min.js",
+            "widgets": []
         },
         {
             "id": "mobile.button",
@@ -512,7 +748,27 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.button.min.js"
+            "source": "kendo.mobile.button.min.js",
+            "widgets": [
+                {
+                    "name": "Button",
+                    "file": "kendo.mobile.button.js",
+                    "line": 28,
+                    "col": 17
+                },
+                {
+                    "name": "BackButton",
+                    "file": "kendo.mobile.button.js",
+                    "line": 117,
+                    "col": 21
+                },
+                {
+                    "name": "DetailButton",
+                    "file": "kendo.mobile.button.js",
+                    "line": 133,
+                    "col": 23
+                }
+            ]
         },
         {
             "id": "mobile.buttongroup",
@@ -522,7 +778,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.buttongroup.min.js"
+            "source": "kendo.mobile.buttongroup.min.js",
+            "widgets": [
+                {
+                    "name": "ButtonGroup",
+                    "file": "kendo.mobile.buttongroup.js",
+                    "line": 17,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "mobile.listview",
@@ -532,7 +796,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.listview.min.js"
+            "source": "kendo.mobile.listview.min.js",
+            "widgets": [
+                {
+                    "name": "ListView",
+                    "file": "kendo.mobile.listview.js",
+                    "line": 79,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "mobile.loader",
@@ -543,7 +815,15 @@
                 "core"
             ],
             "hidden": true,
-            "source": "kendo.mobile.loader.min.js"
+            "source": "kendo.mobile.loader.min.js",
+            "widgets": [
+                {
+                    "name": "Loader",
+                    "file": "kendo.mobile.loader.js",
+                    "line": 16,
+                    "col": 17
+                }
+            ]
         },
         {
             "id": "mobile.modalview",
@@ -553,7 +833,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.modalview.min.js"
+            "source": "kendo.mobile.modalview.min.js",
+            "widgets": [
+                {
+                    "name": "ModalView",
+                    "file": "kendo.mobile.modalview.js",
+                    "line": 17,
+                    "col": 20
+                }
+            ]
         },
         {
             "id": "mobile.navbar",
@@ -563,7 +851,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.navbar.min.js"
+            "source": "kendo.mobile.navbar.min.js",
+            "widgets": [
+                {
+                    "name": "NavBar",
+                    "file": "kendo.mobile.navbar.js",
+                    "line": 32,
+                    "col": 17
+                }
+            ]
         },
         {
             "id": "mobile.pane",
@@ -575,7 +871,15 @@
                 "mobile.loader"
             ],
             "hidden": true,
-            "source": "kendo.mobile.pane.min.js"
+            "source": "kendo.mobile.pane.min.js",
+            "widgets": [
+                {
+                    "name": "Pane",
+                    "file": "kendo.mobile.pane.js",
+                    "line": 46,
+                    "col": 15
+                }
+            ]
         },
         {
             "id": "mobile.popover",
@@ -585,7 +889,21 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.popover.min.js"
+            "source": "kendo.mobile.popover.min.js",
+            "widgets": [
+                {
+                    "name": "Popup",
+                    "file": "kendo.mobile.popover.js",
+                    "line": 67,
+                    "col": 16
+                },
+                {
+                    "name": "PopOver",
+                    "file": "kendo.mobile.popover.js",
+                    "line": 162,
+                    "col": 18
+                }
+            ]
         },
         {
             "id": "mobile.scroller",
@@ -597,7 +915,15 @@
                 "fx",
                 "draganddrop"
             ],
-            "source": "kendo.mobile.scroller.min.js"
+            "source": "kendo.mobile.scroller.min.js",
+            "widgets": [
+                {
+                    "name": "Scroller",
+                    "file": "kendo.mobile.scroller.js",
+                    "line": 209,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "mobile.scrollview",
@@ -607,7 +933,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.scrollview.min.js"
+            "source": "kendo.mobile.scrollview.min.js",
+            "widgets": [
+                {
+                    "name": "ScrollView",
+                    "file": "kendo.mobile.scrollview.js",
+                    "line": 30,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "mobile.shim",
@@ -618,7 +952,15 @@
                 "popup"
             ],
             "hidden": true,
-            "source": "kendo.mobile.shim.min.js"
+            "source": "kendo.mobile.shim.min.js",
+            "widgets": [
+                {
+                    "name": "Shim",
+                    "file": "kendo.mobile.shim.js",
+                    "line": 17,
+                    "col": 15
+                }
+            ]
         },
         {
             "id": "mobile.spitview",
@@ -628,7 +970,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.splitview.min.js"
+            "source": "kendo.mobile.splitview.min.js",
+            "widgets": [
+                {
+                    "name": "SplitView",
+                    "file": "kendo.mobile.splitview.js",
+                    "line": 15,
+                    "col": 20
+                }
+            ]
         },
         {
             "id": "mobile.switch",
@@ -638,7 +988,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.switch.min.js"
+            "source": "kendo.mobile.switch.min.js",
+            "widgets": [
+                {
+                    "name": "Switch",
+                    "file": "kendo.mobile.switch.js",
+                    "line": 26,
+                    "col": 17
+                }
+            ]
         },
         {
             "id": "mobile.tabstrip",
@@ -648,7 +1006,15 @@
             "depends": [
                 "mobile.application"
             ],
-            "source": "kendo.mobile.tabstrip.min.js"
+            "source": "kendo.mobile.tabstrip.min.js",
+            "widgets": [
+                {
+                    "name": "TabStrip",
+                    "file": "kendo.mobile.tabstrip.js",
+                    "line": 16,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "mobile.view",
@@ -662,7 +1028,21 @@
                 "mobile.scroller"
             ],
             "hidden": true,
-            "source": "kendo.mobile.view.min.js"
+            "source": "kendo.mobile.view.min.js",
+            "widgets": [
+                {
+                    "name": "View",
+                    "file": "kendo.mobile.view.js",
+                    "line": 35,
+                    "col": 15
+                },
+                {
+                    "name": "Layout",
+                    "file": "kendo.mobile.view.js",
+                    "line": 317,
+                    "col": 17
+                }
+            ]
         },
         {
             "id": "multiselect",
@@ -672,7 +1052,15 @@
             "depends": [
                 "list"
             ],
-            "source": "kendo.multiselect.min.js"
+            "source": "kendo.multiselect.min.js",
+            "widgets": [
+                {
+                    "name": "MultiSelect",
+                    "file": "kendo.multiselect.js",
+                    "line": 47,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "numerictextbox",
@@ -682,7 +1070,15 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.numerictextbox.min.js"
+            "source": "kendo.numerictextbox.min.js",
+            "widgets": [
+                {
+                    "name": "NumericTextBox",
+                    "file": "kendo.numerictextbox.js",
+                    "line": 41,
+                    "col": 25
+                }
+            ]
         },
         {
             "id": "pager",
@@ -692,7 +1088,15 @@
                 "data"
             ],
             "advanced": true,
-            "source": "kendo.pager.min.js"
+            "source": "kendo.pager.min.js",
+            "widgets": [
+                {
+                    "name": "Pager",
+                    "file": "kendo.pager.js",
+                    "line": 65,
+                    "col": 16
+                }
+            ]
         },
         {
             "id": "panelbar",
@@ -702,7 +1106,15 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.panelbar.min.js"
+            "source": "kendo.panelbar.min.js",
+            "widgets": [
+                {
+                    "name": "PanelBar",
+                    "file": "kendo.panelbar.js",
+                    "line": 200,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "popup",
@@ -712,7 +1124,15 @@
                 "core"
             ],
             "advanced": true,
-            "source": "kendo.popup.min.js"
+            "source": "kendo.popup.min.js",
+            "widgets": [
+                {
+                    "name": "Popup",
+                    "file": "kendo.popup.js",
+                    "line": 57,
+                    "col": 16
+                }
+            ]
         },
         {
             "id": "reorderable",
@@ -723,7 +1143,15 @@
                 "draganddrop"
             ],
             "advanced": true,
-            "source": "kendo.reorderable.min.js"
+            "source": "kendo.reorderable.min.js",
+            "widgets": [
+                {
+                    "name": "Reorderable",
+                    "file": "kendo.reorderable.js",
+                    "line": 25,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "resizable",
@@ -734,7 +1162,15 @@
                 "draganddrop"
             ],
             "advanced": true,
-            "source": "kendo.resizable.min.js"
+            "source": "kendo.resizable.min.js",
+            "widgets": [
+                {
+                    "name": "Resizable",
+                    "file": "kendo.resizable.js",
+                    "line": 22,
+                    "col": 20
+                }
+            ]
         },
         {
             "id": "selectable",
@@ -745,7 +1181,15 @@
                 "userevents"
             ],
             "advanced": true,
-            "source": "kendo.selectable.min.js"
+            "source": "kendo.selectable.min.js",
+            "widgets": [
+                {
+                    "name": "Selectable",
+                    "file": "kendo.selectable.js",
+                    "line": 34,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "slider",
@@ -755,7 +1199,21 @@
             "depends": [
                 "draganddrop"
             ],
-            "source": "kendo.slider.min.js"
+            "source": "kendo.slider.min.js",
+            "widgets": [
+                {
+                    "name": "Slider",
+                    "file": "kendo.slider.js",
+                    "line": 581,
+                    "col": 17
+                },
+                {
+                    "name": "RangeSlider",
+                    "file": "kendo.slider.js",
+                    "line": 1158,
+                    "col": 22
+                }
+            ]
         },
         {
             "id": "sortable",
@@ -765,7 +1223,15 @@
                 "data"
             ],
             "advanced": true,
-            "source": "kendo.sortable.min.js"
+            "source": "kendo.sortable.min.js",
+            "widgets": [
+                {
+                    "name": "Sortable",
+                    "file": "kendo.sortable.js",
+                    "line": 22,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "splitter",
@@ -775,7 +1241,15 @@
             "depends": [
                 "resizable"
             ],
-            "source": "kendo.splitter.min.js"
+            "source": "kendo.splitter.min.js",
+            "widgets": [
+                {
+                    "name": "Splitter",
+                    "file": "kendo.splitter.js",
+                    "line": 63,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "tabstrip",
@@ -785,7 +1259,15 @@
             "depends": [
                 "data"
             ],
-            "source": "kendo.tabstrip.min.js"
+            "source": "kendo.tabstrip.min.js",
+            "widgets": [
+                {
+                    "name": "TabStrip",
+                    "file": "kendo.tabstrip.js",
+                    "line": 156,
+                    "col": 19
+                }
+            ]
         },
         {
             "id": "timepicker",
@@ -795,7 +1277,15 @@
             "depends": [
                 "popup"
             ],
-            "source": "kendo.timepicker.min.js"
+            "source": "kendo.timepicker.min.js",
+            "widgets": [
+                {
+                    "name": "TimePicker",
+                    "file": "kendo.timepicker.js",
+                    "line": 456,
+                    "col": 21
+                }
+            ]
         },
         {
             "id": "tooltip",
@@ -806,7 +1296,15 @@
                 "core",
                 "popup"
             ],
-            "source": "kendo.tooltip.min.js"
+            "source": "kendo.tooltip.min.js",
+            "widgets": [
+                {
+                    "name": "Tooltip",
+                    "file": "kendo.tooltip.js",
+                    "line": 113,
+                    "col": 18
+                }
+            ]
         },
         {
             "id": "touch",
@@ -817,7 +1315,15 @@
                 "core",
                 "userevents"
             ],
-            "source": "kendo.touch.min.js"
+            "source": "kendo.touch.min.js",
+            "widgets": [
+                {
+                    "name": "Touch",
+                    "file": "kendo.touch.js",
+                    "line": 57,
+                    "col": 16
+                }
+            ]
         },
         {
             "id": "treeview",
@@ -828,7 +1334,15 @@
                 "data",
                 "draganddrop"
             ],
-            "source": "kendo.treeview.min.js"
+            "source": "kendo.treeview.min.js",
+            "widgets": [
+                {
+                    "name": "TreeView",
+                    "file": "kendo.treeview.js",
+                    "line": 126,
+                    "col": 15
+                }
+            ]
         },
         {
             "id": "upload",
@@ -838,7 +1352,15 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.upload.min.js"
+            "source": "kendo.upload.min.js",
+            "widgets": [
+                {
+                    "name": "Upload",
+                    "file": "kendo.upload.js",
+                    "line": 24,
+                    "col": 17
+                }
+            ]
         },
         {
             "id": "userevents",
@@ -848,7 +1370,8 @@
                 "core"
             ],
             "hidden": true,
-            "source": "kendo.userevents.min.js"
+            "source": "kendo.userevents.min.js",
+            "widgets": []
         },
         {
             "id": "validator",
@@ -858,7 +1381,15 @@
             "depends": [
                 "core"
             ],
-            "source": "kendo.validator.min.js"
+            "source": "kendo.validator.min.js",
+            "widgets": [
+                {
+                    "name": "Validator",
+                    "file": "kendo.validator.js",
+                    "line": 78,
+                    "col": 20
+                }
+            ]
         },
         {
             "id": "window",
@@ -868,7 +1399,15 @@
             "depends": [
                 "draganddrop"
             ],
-            "source": "kendo.window.min.js"
+            "source": "kendo.window.min.js",
+            "widgets": [
+                {
+                    "name": "Window",
+                    "file": "kendo.window.js",
+                    "line": 103,
+                    "col": 17
+                }
+            ]
         }
     ]
 }
