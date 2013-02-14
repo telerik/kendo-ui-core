@@ -1,10 +1,10 @@
 module CodeGen::MVC
 
     NAMESPACES = [
-        'Kendo.Mvc',
-        'Kendo.Mvc.Extensions',
+        'Kendo.Mvc.UI.Fluent',
         'Kendo.Mvc.UI',
-        'Kendo.Mvc.UI.Fluent'
+        'Kendo.Mvc.Extensions',
+        'Kendo.Mvc'
     ]
 
     COMPONENT = ERB.new(%{---
@@ -73,13 +73,27 @@ METHOD = ERB.new(%{
     end
 
 PARAMETER = ERB.new(%{
-##### <%= name %> `<%= type %>`
+##### <%= name %> <%= type %>
 <%= summary %>
 })
     class Parameter < Struct.new(:name, :summary)
         def to_markdown(type)
+            known = false
+
+            NAMESPACES.each do |namespace|
+                if type.include?(namespace)
+                    known = true
+
+                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/api/wrappers/aspnet-mvc/#{namespace}/\\1)")
+                    break
+                end
+            end
+
+            type = "`#{type}`" unless known
+
             PARAMETER.result(binding)
         end
+
     end
 
     class Example < Struct.new(:code)
@@ -95,6 +109,8 @@ PARAMETER = ERB.new(%{
         def to_markdown
             PROPERTY.result(binding)
         end
+
+
     end
 
     FIELD = ERB.new(%{### <%= name %>
