@@ -38,7 +38,14 @@ namespace :generate do
         task :api => 'Kendo.Mvc.xml' do
             parser = CodeGen::MVC::API::XmlParser.new('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml')
 
-            parser.components
+            generator = CodeGen::MVC::API::Generator.new('docs/api/wrappers/aspnet-mvc/')
+
+            parser.components do |component|
+                if component.name =~ /ChartAreaBuilder/
+                    generator.component(component)
+                    break
+                end
+            end
         end
     end
 

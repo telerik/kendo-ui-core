@@ -7,11 +7,34 @@ module CodeGen::MVC
         'Kendo.Mvc.UI.Fluent'
     ]
 
-    class Component
-        attr_reader :full_name, :name, :methods, :properties, :fields, :type
+    COMPONENT = ERB.new(%{---
+title:<%= name %>
+slug:aspnetmvc-<%= full_name.downcase %>
+publish:true
+---
 
-        def initialize(namespace, type)
+# <%= full_name %>
+<%= summary %>
+<% if !fields.empty? %>
+## Fields
+<%= fields.map { |field| field.to_markdown }.join %>
+<% end %>
+<% if !properties.empty? %>
+## Properties
+<%= properties.map { |property| property.to_markdown }.join %>
+<% end %>
+<% if !methods.empty? %>
+## Methods
+<%= methods.map { |method| method.to_markdown }.join %>
+<% end %>
+})
+
+    class Component
+        attr_reader :full_name, :name, :methods, :properties, :fields, :type, :namespace, :summary
+
+        def initialize(namespace, type, summary)
             @namespace = namespace
+            @summary = summary
             @type = type
             @full_name = @type.sub(/`\d/, '')
             @name = @full_name.sub(@namespace + '.', '')
@@ -20,25 +43,85 @@ module CodeGen::MVC
             @fields = []
         end
 
+        def empty?
+            @methods.empty? && @fields.empty? && @properties.empty? && @summary
+        end
+
+        def to_markdown
+            COMPONENT.result(binding)
+        end
     end
 
+METHOD = ERB.new(%{
+### <%= name.gsub('<', '\\<').gsub('>', '\\>').gsub('|', ',') %>
+<%= summary %>
+<% if !examples.empty? %>
+#### Example
+<%= examples.map { |example| example.to_markdown }.join %>
+<% end %>
+<% if !parameters.empty? %>
+#### Parameters
+<%= parameters.each_with_index.map { |parameter, index| parameter.to_markdown(parameterTypes[index])}.join %>
+<% end %>
+})
     class Method < Struct.new(:name, :summary, :parameters, :examples, :returns)
+        def to_markdown
+            parameterTypes = /\(([^\)]*)\)$/.match(name)[1].split('|');
+
+            METHOD.result(binding)
+        end
     end
 
+PARAMETER = ERB.new(%{
+##### <%= name %> `<%= type %>`
+<%= summary %>
+})
     class Parameter < Struct.new(:name, :summary)
-
+        def to_markdown(type)
+            PARAMETER.result(binding)
+        end
     end
 
     class Example < Struct.new(:code)
+        def to_markdown
+            code.gsub(/^[ ]{4}/, '').sub(/^[ ]{4}/, '').sub(/^[ ]{8}%/, '    %').gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&quot;/, '"');
+        end
     end
 
+    PROPERTY = ERB.new(%{### <%= name %>
+<%= summary %>
+})
     class Property < Struct.new(:name, :summary)
+        def to_markdown
+            PROPERTY.result(binding)
+        end
     end
 
+    FIELD = ERB.new(%{### <%= name %>
+<%= summary %>
+})
     class Field < Struct.new(:name, :summary)
+        def to_markdown
+            FIELD.result(binding)
+        end
     end
 
     module CodeGen::MVC::API
+        class Generator
+            def initialize(path)
+                @path = path
+            end
+
+            def component(component)
+                return if component.empty?
+
+                filename = "#{@path}#{component.namespace}/#{component.name}.md"
+
+                File.write(filename, component.to_markdown)
+            end
+
+        end
+
         class XmlParser
             def initialize(filename)
                 @filename = filename
@@ -58,9 +141,11 @@ module CodeGen::MVC
 
                     namespace = type.split('.')[0...-1].join('.')
 
+                    summary = parse_summary(member)
+
                     next unless NAMESPACES.include?(namespace)
 
-                    component = Component.new(namespace, type)
+                    component = Component.new(namespace, type, summary)
 
                     prefix = component.type + '.'
 
@@ -75,6 +160,8 @@ module CodeGen::MVC
                     parse_fields(prefix, document) do |field|
                         component.fields.push(field)
                     end
+
+                    yield component if block_given?
                 end
 
             end
@@ -143,7 +230,9 @@ module CodeGen::MVC
             end
 
             def parse_summary(node)
-                node.css('summary').first.text.strip
+                summary = node.css('summary').first
+
+                return summary.text.strip if summary
             end
 
             def parse_name(prefix, name)
@@ -158,10 +247,10 @@ module CodeGen::MVC
                     ch = name[idx]
                     idx +=1
 
-                    if ch == ''
+                    if ch == '{'
                         open +=1
                         result += '<'
-                    elsif ch == 'end'
+                    elsif ch == '}'
                         close +=1
                         result += '>'
                     elsif ch == ','

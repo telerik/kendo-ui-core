@@ -114,6 +114,7 @@ function exportDocs() {
                 if (kind == "M" && name.indexOf("#ctor") < 0) {
                     var method = parseMethod(member);
 
+                    console.log(shortName);
                     method.name = shortName;
 
                     type.methods.push(method);
@@ -144,6 +145,7 @@ function exportDocs() {
         markdown += "\nslug:aspnetmvc-" + name.toLowerCase();
         markdown += "\npublish:true";
         markdown += "\n---";
+
 
         markdown += "\n\n# " + name;
 
