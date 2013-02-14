@@ -464,6 +464,7 @@ kendo_module({
     ui.Select = List.extend({
         init: function(element, options) {
             List.fn.init.call(this, element, options);
+            this._initial = this.element.val();
         },
 
         setDataSource: function(dataSource) {
@@ -753,7 +754,7 @@ kendo_module({
             if (form[0]) {
                 that._resetHandler = function() {
                     setTimeout(function() {
-                        that.value(element.val());
+                        that.value(that._initial);
                     });
                 };
 
