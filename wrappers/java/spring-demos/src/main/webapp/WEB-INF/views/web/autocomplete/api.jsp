@@ -29,7 +29,7 @@
     </div>
     <script>
 	     $(document).ready(function() {
-	         var autocomplete = $("#colors").data("kendoAutoComplete"),
+	         var autocomplete = $("#input").data("kendoAutoComplete"),
 	             setValue = function(e) {
 	                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
 	                     autocomplete.value($("#value").val());

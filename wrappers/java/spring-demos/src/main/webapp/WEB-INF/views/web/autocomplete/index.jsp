@@ -4,7 +4,7 @@
     <div>
         <p>Start typing the name of a European country</p>
     
-        <label for="country">Shipping countries:</label>
+        <label for="countries">Shipping countries:</label>
         
 	    <%
 	    String[] countries = {
@@ -60,7 +60,7 @@
 	        "Vatican City"
 	    };
 	    %>
-	    <kendo:autoComplete name="country" filter="startswith" placeholder="Select country..." separator=", ">
+	    <kendo:autoComplete name="countries" filter="startswith" placeholder="Select country..." separator=", ">
 	        <kendo:dataSource data="<%=countries%>">
 	        </kendo:dataSource>
 	    </kendo:autoComplete>
