@@ -1785,12 +1785,21 @@
                 elementOffsetDir = element[isHorizontal ? "offsetWidth" : "offsetHeight"],
                 containerScroll = container[isHorizontal ? "scrollLeft" : "scrollTop"],
                 containerOffsetDir = container[isHorizontal ? "clientWidth" : "clientHeight"],
-                bottomDistance = elementOffset + elementOffsetDir;
+                bottomDistance = elementOffset + elementOffsetDir,
+                result = 0;
 
-            container[isHorizontal ? "scrollLeft" : "scrollTop"] = containerScroll > elementOffset ?
-                                    elementOffset :
-                                    (bottomDistance > (containerScroll + containerOffsetDir) ?
-                                        (bottomDistance - containerOffsetDir) : containerScroll);
+                if (containerScroll > elementOffset) {
+                    result = elementOffset;
+                } else if (bottomDistance > (containerScroll + containerOffsetDir)) {
+                    if (elementOffsetDir <= containerOffsetDir) {
+                        result = (bottomDistance - containerOffsetDir);
+                    } else {
+                        result = elementOffset;
+                    }
+                } else {
+                    result = containerScroll;
+                }
+                container[isHorizontal ? "scrollLeft" : "scrollTop"] = result;
         },
 
         _navigatable: function() {
