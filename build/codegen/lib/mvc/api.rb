@@ -150,9 +150,9 @@ PARAMETER = ERB.new(%{
                     $1.sub(/^.*?(\w+)$/, '\1')
                 end
 
-                document = Nokogiri.XML(xml)
+                document = Nokogiri.XML(xml).xpath("/doc/members").first
 
-                document.css("member[name^='T:']").each do |member|
+                document.xpath("member[starts-with(@name,'T:')]").each do |member|
                     type = member['name'][2..-1]
 
                     namespace = type.split('.')[0...-1].join('.')
@@ -183,7 +183,7 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_methods(prefix, document)
-                document.css("member[name^='M:#{prefix}']").each do |method|
+                document.xpath("member[starts-with(@name,'M:#{prefix}')]").each do |method|
                     name = method['name']
 
                     next if name =~ /#ctor/
@@ -203,7 +203,7 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_properties(prefix, document)
-                document.css("member[name^='P:#{prefix}']").each do |property|
+                document.xpath("member[starts-with(@name,'P:#{prefix}')]").each do |property|
                     name = parse_name(prefix, property['name'])
 
                     summary = parse_summary(property)
@@ -213,7 +213,7 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_fields(prefix, document)
-                document.css("member[name^='F:#{prefix}']").each do |field|
+                document.xpath("member[starts-with(@name,'F:#{prefix}')]").each do |field|
                     name = parse_name(prefix, field['name'])
 
                     summary = parse_summary(field)
@@ -223,7 +223,7 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_parameterss(method)
-                method.css('param').map do |parameter|
+                method.xpath('param').map do |parameter|
                     name = parameter['name']
                     summary = parameter.text
 
@@ -232,21 +232,21 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_examples(method)
-                method.css('example').map do |example|
-                    code = example.css('code').first.text
+                method.xpath('example').map do |example|
+                    code = example.xpath('code').first.text
 
                     Example.new(code)
                 end
             end
 
             def parse_returns(method)
-                method.css('returns').each do |returns|
+                method.xpath('returns').each do |returns|
                     return returns.text
                 end
             end
 
             def parse_summary(node)
-                summary = node.css('summary').first
+                summary = node.xpath('summary').first
 
                 return summary.text.strip if summary
             end

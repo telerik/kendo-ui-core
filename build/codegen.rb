@@ -41,10 +41,7 @@ namespace :generate do
             generator = CodeGen::MVC::API::Generator.new('docs/api/wrappers/aspnet-mvc/')
 
             parser.components do |component|
-                if component.name =~ /ChartAreaBuilder/
-                    generator.component(component)
-                    break
-                end
+                generator.component(component)
             end
         end
     end
