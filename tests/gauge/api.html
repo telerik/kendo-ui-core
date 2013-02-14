@@ -19,107 +19,137 @@
                 gaugeElement,
                 gauge;
 
-            function createGauge() {
-                gaugeElement = $("<div />").kendoRadialGauge({
-                    pointer: {
-                        value: 50
-                    },
+            (function() {
+                function createRadialGauge(options) {
+                    gaugeElement = $("<div />").kendoRadialGauge(kendo.deepExtend({
+                        pointer: {
+                            value: 50
+                        },
 
-                    scale: {
-                        min: 0,
-                        max: 100
+                        scale: {
+                            min: 0,
+                            max: 100
+                        }
+                    }, options));
+
+                    gauge = gaugeElement.data("kendoRadialGauge");
+                }
+
+                module("Gauge API / Radial", {
+                    setup: function() {
+                        createRadialGauge();
                     }
                 });
 
-                gauge = gaugeElement.data("kendoRadialGauge");
-            }
+                test("value() method calls pointer.value()", function() {
+                    var calls = 0,
+                        usedValue;
 
-            module("Gauge API / Radial", {
-                setup: function() {
-                    createGauge();
-                }
-            });
+                    gauge._pointers[0].value = function(value) {
+                        calls++;
+                        usedValue = value;
+                    };
 
-            test("value() method calls pointer.value()", function() {
-                var calls = 0,
-                    usedValue;
+                    gauge.value(10);
 
-                gauge._pointers[0].value = function(value) {
-                    calls++;
-                    usedValue = value;
-                };
+                    equal(calls, 1);
+                    equal(usedValue, 10);
+                });
 
-                gauge.value(10);
+                test("value(x) does not fail with transitions disabled", function() {
+                    createRadialGauge({ transitions: false });
+                    gauge.value(10);
+                });
 
-                equal(calls, 1);
-                equal(usedValue, 10);
-            });
+                test("value() with no args returns pointer value", function() {
+                    gauge.value(11);
 
-            test("value() with no args returns pointer value", function() {
-                gauge.value(11);
+                    equal(gauge.value(), 11);
+                });
 
-                equal(gauge.value(), 11);
-            });
+                test("svg() exports SVG", function() {
+                    ok(gauge.svg().match(/<svg.*<\/svg>/));
+                });
 
-            test("svg() exports SVG", function() {
-                ok(gauge.svg().match(/<svg.*<\/svg>/));
-            });
+                test("svg() exports to SVG when the browser does not support SVG and VML", function() {
+                    function unavailable() { return false; }
 
-            test("svg() exports to SVG when the browser does not support SVG and VML", function() {
-                function unavailable() { return false; }
-
-                stubMethod(dataviz.SVGView, "available", unavailable, function() {
-                    stubMethod(dataviz.VMLView, "available", unavailable, function() {
-                        createGauge();
-                        ok(gauge.svg().match(/<svg.*<\/svg>/));
+                    stubMethod(dataviz.SVGView, "available", unavailable, function() {
+                        stubMethod(dataviz.VMLView, "available", unavailable, function() {
+                            createRadialGauge();
+                            ok(gauge.svg().match(/<svg.*<\/svg>/));
+                        });
                     });
                 });
-            });
 
-            test("svg() does not replace model", function() {
-                var oldModel = gauge._model;
-                gauge.svg();
-                ok(oldModel === gauge._model);
-            });
+                test("svg() does not replace model", function() {
+                    var oldModel = gauge._model;
+                    gauge.svg();
+                    ok(oldModel === gauge._model);
+                });
 
-            test("svg() does not replace view", function() {
-                var oldView = gauge._view;
-                gauge.svg();
-                ok(oldView === gauge._view);
-            });
+                test("svg() does not replace view", function() {
+                    var oldView = gauge._view;
+                    gauge.svg();
+                    ok(oldView === gauge._view);
+                });
 
-            module("Gauge API / Linear", {
-                setup: function() {
-                    gaugeElement = $("<div />").kendoLinearGauge({
+            })();
+
+            (function() {
+                function createLinearGauge(options) {
+                    gaugeElement = $("<div />").kendoRadialGauge(kendo.deepExtend({
                         pointer: {
                             value: 50
+                        },
+
+                        scale: {
+                            min: 0,
+                            max: 100
                         }
-                    });
+                    }, options));
 
-                    gauge = gaugeElement.data("kendoLinearGauge");
+                    gauge = gaugeElement.data("kendoRadialGauge");
                 }
-            });
 
-            test("value() method calls pointer.value()", function() {
-                var calls = 0,
-                    usedValue;
+                module("Gauge API / Linear", {
+                    setup: function() {
+                        gaugeElement = $("<div />").kendoLinearGauge({
+                            pointer: {
+                                value: 50
+                            }
+                        });
 
-                gauge._pointers[0].value = function(value) {
-                    calls++;
-                    usedValue = value;
-                };
+                        gauge = gaugeElement.data("kendoLinearGauge");
+                    }
+                });
 
-                gauge.value(10);
+                test("value() method calls pointer.value()", function() {
+                    var calls = 0,
+                        usedValue;
 
-                equal(calls, 1);
-                equal(usedValue, 10);
-            });
+                    gauge._pointers[0].value = function(value) {
+                        calls++;
+                        usedValue = value;
+                    };
 
-            test("value() with no args returns pointer value", function() {
-                gauge.value(11);
+                    gauge.value(10);
 
-                equal(gauge.value(), 11);
-            });
+                    equal(calls, 1);
+                    equal(usedValue, 10);
+                });
+
+                test("value(x) does not fail with transitions disabled", function() {
+                    createLinearGauge({ transitions: false });
+                    gauge.value(10);
+                });
+
+                test("value() with no args returns pointer value", function() {
+                    gauge.value(11);
+
+                    equal(gauge.value(), 11);
+                });
+            })();
 
         </script>
 
