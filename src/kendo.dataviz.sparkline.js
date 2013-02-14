@@ -43,6 +43,9 @@ kendo_module({
             },
             axisDefaults: {
                 visible: false,
+                majorGridLines: {
+                    visible: false
+                },
                 valueAxis: {
                     narrowRange: true
                 }
@@ -79,6 +82,7 @@ kendo_module({
                 }
             },
             tooltip: {
+                shared: true,
                 visible: true
             },
             legend: {
