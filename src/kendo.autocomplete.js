@@ -76,6 +76,7 @@ kendo_module({
             that._accessors();
 
             that._dataSource();
+            that._ignoreCase();
 
             element[0].type = "text";
             wrapper = that.wrapper;

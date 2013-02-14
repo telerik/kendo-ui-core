@@ -326,6 +326,28 @@
                 }, 200);
             });
 
+            test("AutoComplete sets ignoreCase option to false", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataTextField: "ID",
+                    dataSource: {
+                        data: [
+                            { ID: 1 }
+                        ],
+                        schema: {
+                            model: {
+                                fields: {
+                                    ID: {
+                                        type: "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                equal(autocomplete.options.ignoreCase, false);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

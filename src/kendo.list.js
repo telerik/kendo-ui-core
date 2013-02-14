@@ -68,6 +68,19 @@ kendo_module({
             }
         },
 
+        _ignoreCase: function() {
+            var that = this,
+                model = that.dataSource.reader.model;
+
+            if (model && model.fields) {
+                field = model.fields[that.options.dataTextField];
+
+                if (field && field.type && field.type !== "string") {
+                    that.options.ignoreCase = false;
+                }
+            }
+        },
+
         items: function() {
             return this.ul[0].children;
         },

@@ -90,6 +90,7 @@ kendo_module({
 
             that._aria(id);
             that._dataSource();
+            that._ignoreCase();
             that._accessors();
             that._popup();
 
