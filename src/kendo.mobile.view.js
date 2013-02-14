@@ -152,6 +152,12 @@
             return contents;
         },
 
+        contentElement: function() {
+            var that = this;
+
+            return that.options.stretch ? that.content : that.scrollerContent;
+        },
+
         _scroller: function() {
             var that = this;
 
