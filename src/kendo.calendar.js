@@ -330,6 +330,7 @@ kendo_module({
             var that = this,
             view = that._view,
             options = that.options,
+            old = that._view,
             min = options.min,
             max = options.max;
 
@@ -348,9 +349,13 @@ kendo_module({
             }
 
             that._value = value;
-            that._changeView = !value || view && view.compare(value, that._current) !== 0;
 
-            that.navigate(value);
+            if (old && value === null && that._cell) {
+                that._cell.removeClass("k-state-selected");
+            } else {
+                that._changeView = !value || view && view.compare(value, that._current) !== 0;
+                that.navigate(value);
+            }
         },
 
         _move: function(e) {

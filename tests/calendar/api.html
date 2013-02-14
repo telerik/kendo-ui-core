@@ -710,6 +710,20 @@
 
                 equal(calendar.view().name, "month");
             });
+
+            test("value method does not navigate when clear value", 1, function() {
+                var calendar = new Calendar(div, {
+                    value: new Date()
+                });
+
+                stub(calendar, {
+                    navigate: calendar.navigate
+                });
+
+                calendar.value(null);
+
+                equal(calendar.calls("navigate"), 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
