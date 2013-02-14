@@ -23,6 +23,8 @@
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
+                QUnit.config.testTimeout = 1000;
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -440,6 +442,28 @@
 
                 ok(cascade);
                 ok(change);
+            });
+
+            asyncTest("DropDownList trigger change on loop", 2, function() {
+                var cascade;
+
+                input.kendoDropDownList({
+                    dataSource: ["too", "too1"],
+                    cascade: function() {
+                        cascade = true;
+                    },
+                    change: function() {
+                        ok(cascade);
+                        ok(true);
+                        start();
+                    }
+                });
+
+                input.data("kendoDropDownList")._last = "t";
+                input.data("kendoDropDownList").wrapper.trigger({
+                    type: "keypress",
+                    keyCode: 116 //"t"
+                });
             });
 
        </script>

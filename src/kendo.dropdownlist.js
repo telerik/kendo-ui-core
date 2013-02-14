@@ -380,11 +380,53 @@ kendo_module({
             }
         },
 
+        _selectNext: function(character, index) {
+            var that = this,
+                ignoreCase = that.options.ignoreCase,
+                data = that.dataSource.view(),
+                length = data.length,
+                text;
+
+            for (; index < length; index++) {
+                text = that._text(data[index]);
+                if (text) {
+                    text = text + "";
+                    if (ignoreCase) {
+                        text = text.toLowerCase();
+                    }
+
+                    if (text.indexOf(character) === 0) {
+                        that._select(index);
+                        that._triggerEvents();
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        },
+
         _keypress: function(e) {
             var that = this;
 
             setTimeout(function() {
-                that._word += String.fromCharCode(e.keyCode || e.charCode);
+                var character = String.fromCharCode(e.keyCode || e.charCode),
+                    index = that.selectedIndex;
+
+                if (that.options.ignoreCase) {
+                    character = character.toLowerCase();
+                }
+
+                if (character === that._last && index > -1) {
+                    that._word = character;
+                    if (that._selectNext(character, index + 1)) {
+                        return;
+                    }
+                } else {
+                    that._word += character;
+                }
+
+                that._last = character;
                 that._search();
             });
         },
@@ -406,10 +448,7 @@ kendo_module({
             }, that.options.delay);
 
             that.search(that._word);
-            if (!that.popup.visible()) {
-                that._triggerCascade();
-                that._change();
-            }
+            that._triggerEvents();
         },
 
         _select: function(li) {
@@ -444,6 +483,13 @@ kendo_module({
                         that._current.attr("aria-selected", true);
                     }
                 }
+            }
+        },
+
+        _triggerEvents: function() {
+            if (!this.popup.visible()) {
+                this._triggerCascade();
+                this._change();
             }
         },
 

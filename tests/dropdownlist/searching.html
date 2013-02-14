@@ -108,6 +108,78 @@
                 equal(dropdownlist.selectedIndex, 1);
             });
 
+            asyncTest("_search method select next item if starts with same character", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["text1", "text2", "text3"]
+                });
+
+                dropdownlist._keypress({
+                    keyCode: 116 //"t"
+                });
+
+                dropdownlist._keypress({
+                    keyCode: 116 //"t"
+                });
+
+                setTimeout(function() {
+                    equal(dropdownlist.selectedIndex, 1);
+                    start();
+                });
+            });
+
+            asyncTest("_search method loops matched items", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["text1", "text2"]
+                });
+
+                dropdownlist._last = "t";
+                dropdownlist._keypress({
+                    keyCode: 116 //"t"
+                });
+
+                dropdownlist._keypress({
+                    keyCode: 116 //"t"
+                });
+
+                setTimeout(function() {
+                    equal(dropdownlist.selectedIndex, 0);
+                    start();
+                });
+            });
+
+            asyncTest("_search method trigger change", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["text1", "text2", "text3"],
+                    change: function() {
+                        ok(true);
+                        start();
+                    }
+                });
+
+                dropdownlist._last = "t";
+                dropdownlist._keypress({
+                    keyCode: 116 //"t"
+                });
+            });
+
+            asyncTest("_search method honor ignoreCase option", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["text1", "Text2", "Text3"],
+                    ignoreCase: true
+                });
+
+                dropdownlist.select(1);
+                dropdownlist._last = "t";
+                dropdownlist._keypress({
+                    keyCode: 116 //"t"
+                });
+
+                setTimeout(function() {
+                    equal(dropdownlist.selectedIndex, 2);
+                    start();
+                });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
