@@ -24,19 +24,29 @@
 	        kendoConsole.log("Grid data binding");
 	    }
 	</script>
-			
-    <kendo:grid name="grid" pageable="true" sortable="true" selectable="true"
-    	change="onChange" dataBound="onDataBound" dataBinding="onDataBinding">
-        <kendo:grid-columns>
-            <kendo:grid-column title="Product Name" field="productName" />
-            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
-            <kendo:grid-column title="Units In Stock" field="unitsInStock" />
-        </kendo:grid-columns>
-        <kendo:dataSource pageSize="10">             
-            <kendo:dataSource-transport>
-                <kendo:dataSource-transport-read url="${transportReadUrl}"/>
-            </kendo:dataSource-transport>
-        </kendo:dataSource>       
-    </kendo:grid>    
-    <div class="console"></div>    
+	<div class="demo-section">
+        <kendo:grid name="grid" pageable="true" sortable="true" selectable="true"
+	    	change="onChange" dataBound="onDataBound" dataBinding="onDataBinding">
+	        <kendo:grid-columns>
+	            <kendo:grid-column title="Product Name" field="productName" />
+	            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
+	            <kendo:grid-column title="Units In Stock" field="unitsInStock" />
+	        </kendo:grid-columns>
+	        <kendo:dataSource pageSize="10">             
+	            <kendo:dataSource-transport>
+	                <kendo:dataSource-transport-read url="${transportReadUrl}"/>
+	            </kendo:dataSource-transport>
+	        </kendo:dataSource>       
+	    </kendo:grid>       
+   </div>	
+      
+   <div class="demo-section">
+       <h3 class="title">Console log</h3>
+       <div class="console"></div>
+   </div>
+   <style scoped="scoped">
+       .demo-section {
+           width: 600px;
+       }
+   </style>   
 <demo:footer />

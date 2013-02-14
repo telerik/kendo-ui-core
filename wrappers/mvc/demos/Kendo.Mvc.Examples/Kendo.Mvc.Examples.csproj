@@ -202,6 +202,7 @@
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_PopupController.cs" />
+    <Compile Include="Controllers\Web\Grid\EventsController.cs" />
     <Compile Include="Controllers\Web\Grid\Filter_Menu_CustomizationController.cs" />
     <Compile Include="Controllers\Web\Grid\SortingController.cs" />
     <Compile Include="Controllers\Web\Grid\NavigationController.cs" />
@@ -468,6 +469,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_menu.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing_popup.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientCategory.ascx" />
+    <Content Include="Areas\aspx\Views\web\grid\events.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\filter_menu_customization.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\foreignkeycolumn.aspx" />
@@ -569,6 +571,7 @@
     <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientCategory.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\toolbar_template.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\sorting.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\events.cshtml" />
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />

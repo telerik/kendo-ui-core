@@ -676,8 +676,7 @@
                     "text": "Events",
                     "url": "grid/events.html",
                     "title": "Kendo UI Grid Events Demo",
-                    "meta": "This example demonstrates different events which are available in KendoGrid widget and the code explains how you can use them for  your project.",
-                    "packages": ["!mvc"]
+                    "meta": "This example demonstrates different events which are available in KendoGrid widget and the code explains how you can use them for  your project."
                 },
                 {
                     "text": "API",
