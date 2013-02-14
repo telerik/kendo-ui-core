@@ -114,7 +114,7 @@
                 calendar.min(options.min);
                 calendar.max(options.max);
 
-                calendar.navigate(that._value, options.start);
+                calendar.navigate(that._value || that._current, options.start);
                 that.value(that._value);
             }
         },
