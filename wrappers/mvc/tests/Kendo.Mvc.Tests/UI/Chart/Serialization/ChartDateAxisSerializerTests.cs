@@ -24,6 +24,7 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.Labels).Returns(new ChartAxisLabels());
             axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand<DateTime>>());
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle());
+            axisMock.SetupGet(a => a.Crosshair).Returns(new ChartAxisCrosshair());
         }
 
         [Fact]
