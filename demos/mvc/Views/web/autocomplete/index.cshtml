@@ -2,9 +2,9 @@
         <div id="example" class="k-content">
 
 			<div id="shipping">
-            <label for="input" class="info">Choose shipping countries:</label>
+            <label for="countries" class="info">Choose shipping countries:</label>
 
-            <input id="input" />
+            <input id="countries" />
 
             <div class="hint">Start typing the name of an European country</div>
 
@@ -66,7 +66,7 @@
                         ];
 
                     //create AutoComplete UI component
-                    $("#input").kendoAutoComplete({
+                    $("#countries").kendoAutoComplete({
                         dataSource: data,
                         filter: "startswith",
                         placeholder: "Select country...",

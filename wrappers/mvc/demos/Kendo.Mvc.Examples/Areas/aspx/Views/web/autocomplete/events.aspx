@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-The AutoComplete is bound to a collection of strings: "Item1", "Item2", "Item3".
+<label for="states">Select a state in USA:</label>
 
 <%= Html.Kendo().AutoComplete()
         .Name("states")

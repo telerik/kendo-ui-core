@@ -5,10 +5,10 @@
 			<img id="tshirt" src="../../content/web/combobox/tShirt.png" />
             <div id="options">
 			<h3>T-shirt Fabric</h3>
-            <input id="input" placeholder="Select fabric..." />
+            <input id="fabric" placeholder="Select fabric..." />
 
             <h3>T-shirt Size</h3>
-            <select id="select" placeholder="Select size...">
+            <select id="size" placeholder="Select size...">
 				<option>X-Small</option>
 				<option>Small</option>
 				<option>Medium</option>
@@ -59,7 +59,7 @@
             <script>
                 $(document).ready(function() {
                     // create ComboBox from input HTML element
-                    $("#input").kendoComboBox({
+                    $("#fabric").kendoComboBox({
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: [
@@ -74,14 +74,14 @@
                     });
 
                     // create ComboBox from select HTML element
-                    $("#select").kendoComboBox();
+                    $("#size").kendoComboBox();
 
-					var input = $("#input").data("kendoComboBox");
-					var select = $("#select").data("kendoComboBox");
+                    var fabric = $("#fabric").data("kendoComboBox");
+					var select = $("#size").data("kendoComboBox");
 
 
 					$("#get").click(function() {
-                        alert('Thank you! Your Choice is:\n\nFabric ID: '+input.value()+' and Size: '+select.value());
+					    alert('Thank you! Your Choice is:\n\nFabric ID: ' + fabric.value() + ' and Size: ' + select.value());
                     });
                 });
             </script>

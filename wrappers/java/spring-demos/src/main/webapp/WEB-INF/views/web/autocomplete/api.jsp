@@ -1,5 +1,7 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <demo:header />
 	<div class="configuration k-widget k-header">
 	    <span class="configHead">API Functions</span>
@@ -18,9 +20,9 @@
 	    </ul>
     </div>
     
-    <div>
-        <label for="colors">Select a color:</label>
-        <kendo:autoComplete name="colors" filter="contains">
+    <div id="colors">
+        <label for="input">Select a color:</label>
+        <kendo:autoComplete name="input" filter="startswith">
             <kendo:dataSource data="${colors}">
             </kendo:dataSource>
         </kendo:autoComplete>
@@ -48,12 +50,28 @@
 	     });
 	</script>
 	<style scoped>
-		.configuration {
-		    height: 410px;
-		    margin-bottom: -21px;
-		}
-		.configuration .k-textbox {
-		    width: 40px;
-		}
+          	#colors {
+                width: 366px;
+                height: 180px;
+                padding: 114px 0 0 0;
+                 background: url(<c:url value="/resources/web/autocomplete/palette.png" />) transparent no-repeat right 0;
+                margin: 30px 0 30px 120px;
+                text-align: center;
+			}
+           	#colors label {
+                display: block;
+                color: #333;
+                padding-bottom: 5px;
+ 			}
+           #input {
+                    margin-right: 50px;
+            }
+            .configuration {
+                height: 410px;
+                margin-bottom: -21px;
+            }
+            .configuration .k-textbox {
+                width: 40px;
+            }
     </style>
 <demo:footer />

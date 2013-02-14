@@ -24,9 +24,9 @@
         </div>
 
         <div id="colors">
-            <label for="products">Primary color</label>
+            <label for="input">Primary color</label>
             <%= Html.Kendo().AutoComplete()
-                    .Name("products")
+                    .Name("input")
                     .BindTo(new string[] 
                     {
                     "Red-violet",
@@ -47,7 +47,7 @@
 
         <script>
             $(document).ready(function() {
-                var autocomplete = $("#products").data("kendoAutoComplete"),
+                var autocomplete = $("#input").data("kendoAutoComplete"),
                     setValue = function(e) {
                         if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                             autocomplete.value($("#value").val());
@@ -81,7 +81,7 @@
                 color: #333;
                 padding-bottom: 5px;
  			}
-            #products {
+            #input {
                 margin-right: 50px;
             }
             .configuration {

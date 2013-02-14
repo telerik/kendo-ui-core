@@ -9,11 +9,13 @@
     <div class="console"></div>
 </div>
 
-<%= Html.Kendo().Calendar()
-        .Name("calendar")
-        .HtmlAttributes(new { style = "width: 243px;" })
-        .Events(e => e.Change("change").Navigate("navigate"))
-%> 
+<div class="reports">
+    <%= Html.Kendo().Calendar()
+            .Name("calendar")
+            .HtmlAttributes(new { style = "width: 243px;" })
+            .Events(e => e.Change("change").Navigate("navigate"))
+    %> 
+</div>
 
 <script>
     function change() {
@@ -26,6 +28,13 @@
 </script>
 
 <style scoped="scoped">
+    .reports {
+        width: 265px;
+        height: 247px;
+        padding: 108px 0 0 20px;
+        background: url('<%=Url.Content("~/content/web/calendar/reports.png")%>') transparent no-repeat 0 0;
+        margin: 30px 105px 20px;
+    }
     .configuration {
         height: 390px;
         width: 200px;

@@ -19,8 +19,8 @@
             </div>
 
             <div id="colors">
-               <label for="products">Primary color</label>
-               <input id="products" />
+               <label for="input">Primary color</label>
+               <input id="input" />
             </div>
 
             <script>
@@ -40,9 +40,9 @@
                         "Violet"
                     ];
 
-                    $("#products").kendoAutoComplete(data);
+                    $("#input").kendoAutoComplete(data);
 
-                    var autocomplete = $("#products").data("kendoAutoComplete"),
+                    var autocomplete = $("#input").data("kendoAutoComplete"),
                         setValue = function(e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                                 autocomplete.value($("#value").val());
@@ -76,7 +76,7 @@
                     color: #333;
                     padding-bottom: 5px;
  				}
-                #products {
+                #input {
                     margin-right: 50px;
                 }
                 .configuration {

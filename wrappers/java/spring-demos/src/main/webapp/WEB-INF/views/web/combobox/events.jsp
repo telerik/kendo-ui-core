@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
     <div>
-        <kendo:comboBox name="input" open="onOpen" close="onClose" change="onChange" select="onSelect"
+        <kendo:comboBox name="input" open="onOpen" close="onClose" change="onChange" dataBound="onDataBound" select="onSelect"
             dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>
@@ -27,6 +27,12 @@
         function onChange() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: change");
+            }
+        }
+        
+        function onDataBound() {
+            if ("kendoConsole" in window) {
+                kendoConsole.log("event :: dataBound");
             }
         }
     
