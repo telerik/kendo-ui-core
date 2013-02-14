@@ -432,7 +432,7 @@ namespace Kendo.Mvc.UI.Fluent
             Handler("dataBound", handler);
 
             return this;
-        }
+        }        
 
         /// <summary>
         /// Defines the name of the JavaScript function that will handle the the DataBound client-side event.
@@ -449,6 +449,50 @@ namespace Kendo.Mvc.UI.Fluent
         public GridEventBuilder DataBound(string handler)
         {
             Handler("dataBound", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the DataBinding client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.DataBinding(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder DataBinding(Func<object, object> handler)
+        {
+            Handler("dataBinding", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the DataBinding client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.DataBinding("gridDataBinding"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder DataBinding(string handler)
+        {
+            Handler("dataBinding", handler);
 
             return this;
         }
