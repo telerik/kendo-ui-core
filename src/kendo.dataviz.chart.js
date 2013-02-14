@@ -1447,14 +1447,12 @@ kendo_module({
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + 1],
                 lineEnd = lineBox[valueAxis + 2],
-                position = point[valueAxis],
+                pos = point[valueAxis],
                 majorTicks = axis.getMajorTickPositions(),
-                tickPos,
-                nextTickPos,
-                i,
-                categoryIx;
+                diff = MAX_VALUE,
+                tickPos, nextTickPos, i, categoryIx;
 
-            if (position < lineStart || position > lineEnd) {
+            if (pos < lineStart || pos > lineEnd) {
                 return null;
             }
 
@@ -1471,14 +1469,21 @@ kendo_module({
                     nextTickPos = majorTicks[i];
                 }
 
-                if (options.justified && position === nextTickPos) {
-                    categoryIx = math.max(0, vertical ? majorTicks.length - i - 1 : i + 1);
-                    break;
-                }
+                if (options.justified) {
+                    if (pos === nextTickPos) {
+                        categoryIx = math.max(0, vertical ? majorTicks.length - i - 1 : i + 1);
+                        break;
+                    }
 
-                if (position >= tickPos && position <= nextTickPos) {
-                    categoryIx = i;
-                    break;
+                    if (math.abs(pos - tickPos) < diff) {
+                        diff = pos - tickPos;
+                        categoryIx = i;
+                    }
+                } else {
+                    if (pos >= tickPos && pos <= nextTickPos) {
+                        categoryIx = i;
+                        break;
+                    }
                 }
             }
 
