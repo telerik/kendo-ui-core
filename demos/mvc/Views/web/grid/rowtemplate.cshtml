@@ -1,15 +1,15 @@
         <div id="example" class="k-content">
-            <table id="netflixTable">
+            <table id="grid">
                 <thead>
                     <tr>
-                        <th class="cover">
-                            Cover
+                        <th class="photo">
+                            Picture
                         </th>
-                        <th class="title">
-                            Title
+                        <th class="details">
+                            Details
                         </th>
                         <th>
-                            Rating
+                            ID
                         </th>
                     </tr>
                 </thead>
@@ -20,55 +20,44 @@
                 </tbody>
             </table>
            <script id="rowTemplate" type="text/x-kendo-tmpl">
-                <tr>
-                    <td class="cover">
-                        <img src="${ BoxArt.SmallUrl }" alt="${ Name }" />
-                    </td>
-                    <td class="title">
-                        <span class="name">${ Name }</span>
-                        <span class="description">${ ShortSynopsis }</span>
-                    </td>
-                    <td class="rating">
-                        ${ AverageRating }
-                    </td>
-                </tr>
+	            <tr>
+		            <td class="photo">
+			            <img src="../../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+		            </td>
+		            <td class="details">
+			            <span class="title">#: Title #</span>
+			            <span class="description">Name : #: FirstName# #: LastName#</span>
+                        <span class="description">Country : #: Country# </span>
+		            </td>
+		            <td class="employeeID">
+		               #: EmployeeID #
+		            </td>
+	            </tr>
             </script>
             <script>
-                $(document).ready(function() {
-                    $("#netflixTable").kendoGrid({
-                        dataSource: {
+	            $(document).ready(function() {
+		            $("#grid").kendoGrid({
+			            dataSource: {
                             type: "odata",
-                            serverFiltering: true,
-                            filter: [{
-                                field: "Name",
-                                operator: "contains",
-                                value: "Star Wars"
-                                },{
-                                field: "BoxArt.SmallUrl",
-                                operator: "neq",
-                                value: null
-                                },{
-                                field: "ShortSynopsis",
-                                operator: "neq",
-                                value: null
-                            }],
-                            transport: {
-                                read: "http://odata.netflix.com/Catalog/Titles"
-                            }
-                        },
-                        rowTemplate: kendo.template($("#rowTemplate").html()),
-                        height: 430
-                    });
-                });
+				            transport: {
+					            read: {	
+						            url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
+					            }
+				            }
+			            },
+			            rowTemplate: kendo.template($("#rowTemplate").html()),
+			            height: 430
+		            });
+	            });
             </script>
             <style scoped>
-                .cover {
-                    width: 64px;
+                .photo {
+                    width: 100px;                    
                 }
+                .details {
+                    width: 400px;
+                }                
                 .title {
-                    width: 420px;
-                }
-                .name {
                     display: block;
                     font-size: 1.6em; 
                 }
@@ -76,13 +65,13 @@
                     display: block;
                     padding-top: 1.6em;
                 }
-                .rating {
+                .employeeID {
                     font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
                     font-size: 50px;
                     font-weight: bold;
                     color: #898989;
                 }
-                td.cover, .rating {
+                td.photo, .employeeID {
                     text-align: center;
                 }
                 .k-grid-header .k-header {
