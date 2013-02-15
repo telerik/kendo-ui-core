@@ -87,7 +87,7 @@ namespace Kendo.Mvc.UI.Fluent
             return BindTo(dataSource.Select(item => new DropDownListItem
             {
                 Text = item.Text,
-                Value = item.Value,
+                Value = item.Value ?? item.Text,
                 Selected = item.Selected
             }));
         }
