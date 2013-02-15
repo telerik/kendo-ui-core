@@ -384,7 +384,7 @@ kendo_module({
         _selectNext: function(character, index) {
             var that = this,
                 ignoreCase = that.options.ignoreCase,
-                data = that.dataSource.view(),
+                data = that._data(),
                 length = data.length,
                 text;
 
