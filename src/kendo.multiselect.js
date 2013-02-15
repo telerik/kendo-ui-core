@@ -737,16 +737,6 @@ kendo_module({
             return max === null || max > this._values.length;
         },
 
-        _dataValue: function(dataItem) {
-            var value = this._value(dataItem);
-
-            if (value === undefined) { //TODO: test this
-                value = this._text(dataItem);
-            }
-
-            return value;
-        },
-
         _select: function(li) {
             var that = this,
                 values = that._values,

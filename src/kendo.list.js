@@ -250,17 +250,10 @@ kendo_module({
             var that = this,
                 idx,
                 length,
-                data = that._data(),
-                valueFromData;
+                data = that._data();
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                valueFromData = that._value(data[idx]);
-
-                if (valueFromData === undefined) {
-                    valueFromData = that._text(data[idx]);
-                }
-
-                if (valueFromData == value) {
+                if (that._dataValue(data[idx]) == value) {
                     return idx;
                 }
             }
@@ -268,6 +261,15 @@ kendo_module({
             return -1;
         },
 
+        _dataValue: function(dataItem) {
+            var value = this._value(dataItem);
+
+            if (value === undefined) {
+                value = this._text(dataItem);
+            }
+
+            return value;
+        },
 
         _height: function(length) {
             if (length) {
