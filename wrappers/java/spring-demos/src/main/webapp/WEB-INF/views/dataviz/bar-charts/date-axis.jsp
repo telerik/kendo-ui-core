@@ -17,8 +17,13 @@
 	        </li>
 	        <li>
 	            <input id="baseUnitMonths" name="baseUnit"
-	                    type="radio" value="months" checked="checked" autocomplete="off" />
+	                    type="radio" value="months" autocomplete="off" />
 	            <label for="baseUnitMonths">Months</label>
+	        </li>
+         	<li>
+	            <input id="baseUnitWeeks" name="baseUnit"
+	                    type="radio" value="weeks" checked="checked" autocomplete="off" />
+	            <label for="baseUnitMonths">Weeks</label>
 	        </li>
 	        <li>
 	            <input id="baseUnitDays" name="baseUnit"
@@ -40,12 +45,12 @@
 	        </li>
 	        <li>
 	            <input id="aggregateSum" name="aggregate"
-	                    type="radio" value="sum" checked="checked" autocomplete="off" />
+	                    type="radio" value="sum" autocomplete="off" />
 	            <label for="aggregateSum">Sum</label>
 	        </li>
 	        <li>
 	            <input id="aggregateAvg" name="aggregate"
-	                    type="radio" value="avg" autocomplete="off" />
+	                    type="radio" value="avg" checked="checked" autocomplete="off" />
 	            <label for="aggregateAvg">Avg</label>
 	        </li>
 	        <li>
@@ -59,19 +64,31 @@
      <div class="chart-wrapper">
          <% 
              String[] categories = {
-                "2011/12/30", "2011/12/31",
-                "2012/01/01", "2012/01/02",
-                "2012/01/03"
+        		 "2011/12/20","2011/12/21",
+        		 "2011/12/22","2011/12/23",
+        		 "2011/12/24","2011/12/25",
+        		 "2011/12/26","2011/12/27",
+        		 "2011/12/28","2011/12/29",
+        		 "2011/12/30","2011/12/31",
+        		 "2012/01/01","2012/01/02",
+        		 "2012/01/03","2012/01/04",
+        		 "2012/01/05"
              };
          %>
          <kendo:chart name="chart">
-             <kendo:chart-title text="Units sold" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="column" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" aggregate="sum" />
+                <kendo:chart-seriesItem type="column" data="<%= new int[] { 30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30 } %>" aggregate="avg" />
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem type="date" categories="<%= categories %>" baseUnit="months" />
+                <kendo:chart-categoryAxisItem type="date" categories="<%= categories %>" baseUnit="weeks">
+                	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
+                </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
+             <kendo:chart-valueAxis>
+                <kendo:chart-valueAxisItem >
+                    <kendo:chart-valueAxisItem-line visible="false"/>
+                </kendo:chart-valueAxisItem>
+             </kendo:chart-valueAxis>
          </kendo:chart>
      </div>
     <script>

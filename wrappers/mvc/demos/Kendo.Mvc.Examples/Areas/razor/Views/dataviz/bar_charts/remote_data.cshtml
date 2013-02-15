@@ -14,10 +14,12 @@
         .CategoryAxis(axis => axis
             .Categories(model => model.Year)
             .Labels(labels => labels.Rotation(-90))
+            .MajorGridLines(lines => lines.Visible(false))
         )
         .ValueAxis(axis => axis.Numeric()
             .Labels(labels => labels.Format("{0:N0}"))
             .MajorUnit(10000)
+            .Line(line => line.Visible(false))
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)

@@ -36,11 +36,14 @@
                 <kendo:chart-seriesItem type="column" data="<%= new int[] { 19442, 23020, 25868, 31462, 39223 } %>" name="80+" stack="Male" />
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem categories="<%= categories %>" />
+                <kendo:chart-categoryAxisItem categories="<%= categories %>">
+                	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
+                </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
                 <kendo:chart-valueAxisItem>
                     <kendo:chart-valueAxisItem-labels template="#= kendo.format('{0:N0}', value / 1000) # M" />
+                    <kendo:chart-valueAxisItem-line visible="false"/>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
              <kendo:chart-tooltip visible="true" template="#= series.stack #s, age #= series.name #" />

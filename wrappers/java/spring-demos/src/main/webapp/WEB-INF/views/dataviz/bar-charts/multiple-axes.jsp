@@ -15,7 +15,7 @@
              <kendo:chart-series>
                 <kendo:chart-seriesItem type="column" stack="true" color="#cc6e38" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" name="on battery" />
                 <kendo:chart-seriesItem type="column" stack="true" color="#ef955f" data="<%= new int[] { 20, 30, 35, 35, 40 } %>" name="on gas" />
-                <kendo:chart-seriesItem type="line" color="#ec5e0a" data="<%= new int[] { 30, 38, 40, 32, 42 } %>" name="MPG" axis="mpg" />
+                <kendo:chart-seriesItem type="line" color="#ec5e0a" data="<%= new int[] { 30, 38, 40, 32, 42 } %>" name="mpg" axis="mpg" />
                 <kendo:chart-seriesItem type="line" color="#4e4141" data="<%= new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 } %>" name="l/100 km" axis="l100km" />
              </kendo:chart-series>
              // Align the first two value axes to the left
@@ -34,10 +34,10 @@
                 <kendo:chart-valueAxisItem name="km" min="0" max="161" majorUnit="32">
                     <kendo:chart-valueAxisItem-title text="km" />
                 </kendo:chart-valueAxisItem>
-                <kendo:chart-valueAxisItem name="mpg" color="#DE7E42">
+                <kendo:chart-valueAxisItem name="mpg" color="#ec5e0a">
                     <kendo:chart-valueAxisItem-title text="miles per gallon" />
                 </kendo:chart-valueAxisItem>
-                <kendo:chart-valueAxisItem name="l100km" color="#057589">
+                <kendo:chart-valueAxisItem name="l100km" color="#4e4141">
                     <kendo:chart-valueAxisItem-title text="liters per 100km" />
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>

@@ -25,11 +25,13 @@
              <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem field="year">
                     <kendo:chart-categoryAxisItem-labels rotation="-90" />
+                    <kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
                 <kendo:chart-valueAxisItem majorUnit="10000">
                     <kendo:chart-valueAxisItem-labels format="{0:N0}"/>
+                    <kendo:chart-valueAxisItem-line visible="false"/>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
              <kendo:chart-tooltip visible="true" format="{0}%" />

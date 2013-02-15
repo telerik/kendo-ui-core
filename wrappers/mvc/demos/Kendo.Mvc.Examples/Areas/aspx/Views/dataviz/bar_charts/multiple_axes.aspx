@@ -22,7 +22,7 @@
                 .Name("on gas");
             series
                 .Line(new double[] { 30, 38, 40, 32, 42 })
-                .Name("MPG")
+                .Name("mpg")
                 .Color("#ec5e0a")
                 .Axis("mpg");
             series
@@ -54,12 +54,12 @@
         .ValueAxis(axis => axis
             .Numeric("mpg")
                 .Title("miles per gallon")
-                .Color("#DE7E42")
+                .Color("#ec5e0a")
         )
         .ValueAxis(axis => axis
             .Numeric("l100km")
                 .Title("liters per 100km")
-                .Color("#057589")
+                .Color("#4e4141")
         )
     %>
 </div>

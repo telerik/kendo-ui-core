@@ -52,11 +52,14 @@
         )
         .CategoryAxis(axis => axis
             .Categories("1990", "1995", "2000", "2005", "2010")
+            .MajorGridLines(lines => lines.Visible(false))
         )
         .ValueAxis(axis => axis
-            .Numeric().Labels(labels => 
+            .Numeric()
+            .Labels(labels => 
                 labels.Template("#= kendo.format('{0:N0}', value / 1000) # M")
             )
+            .Line(line => line.Visible(false))
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)

@@ -10,7 +10,8 @@
             .Position(ChartLegendPosition.Top)
         )
         .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Bar_Charts")))
-        .Series(series => {
+        .Series(series =>
+        {
             series.Column(model => model.Nuclear).Name("Nuclear");
             series.Column(model => model.Hydro).Name("Hydro");
             series.Column(model => model.Wind).Name("Wind");
@@ -18,10 +19,12 @@
         .CategoryAxis(axis => axis
             .Categories(model => model.Year)
             .Labels(labels => labels.Rotation(-90))
+            .MajorGridLines(lines => lines.Visible(false))
         )
         .ValueAxis(axis => axis.Numeric()
             .Labels(labels => labels.Format("{0:N0}"))
             .MajorUnit(10000)
+            .Line(line => line.Visible(false))
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)
