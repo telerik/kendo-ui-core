@@ -434,7 +434,7 @@
                 if (key == 110) {
                     element.value = value.substring(0, selectionStart) + separator + value.substring(selectionEnd);
                     caret(element, selectionStart + separator.length);
-                } else {
+                } else if (!shiftKey) {
                     prevent = false;
                 }
             } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109 || key == 173) && selectionStart === 0) { //sign

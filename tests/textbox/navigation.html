@@ -218,6 +218,14 @@
                 ok(textbox._prevent(192 /* ` */, shiftKey));
                 equal(input.val(), "");
             });
+
+            test("NumericTextBox prevents '>' symbol", function() {
+                var textbox = new NumericTextBox(input),
+                    shiftKey = true;
+
+                textbox.focus();
+                ok(textbox._prevent(190 /* > */, shiftKey));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
