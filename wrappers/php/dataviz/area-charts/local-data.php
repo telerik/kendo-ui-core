@@ -1,5 +1,6 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
+require_once '../../include/chart_data.php';
 require_once '../../include/header.php';
 ?>
 <div class="chart-wrapper">
@@ -26,26 +27,7 @@ $tooltip->visible(true)
 
 $dataSource = new \Kendo\Data\DataSource();
 
-$dataSource->data(array(
-    array('country'=> 'United States', 'year'=> '1994', 'value'=> 4.9),
-    array('country'=> 'United States', 'year'=> '1995', 'value'=> 9.2),
-    array('country'=> 'United States', 'year'=> '1996', 'value'=> 16.4),
-    array('country'=> 'United States', 'year'=> '1997', 'value'=> 21.6),
-    array('country'=> 'United States', 'year'=> '1998', 'value'=> 30.1),
-    array('country'=> 'United States', 'year'=> '1999', 'value'=> 35.9),
-    array('country'=> 'United States', 'year'=> '2000', 'value'=> 43.1),
-    array('country'=> 'United States', 'year'=> '2001', 'value'=> 49.2),
-    array('country'=> 'United States', 'year'=> '2002', 'value'=> 59.0),
-    array('country'=> 'United States', 'year'=> '2003', 'value'=> 61.9),
-    array('country'=> 'United States', 'year'=> '2004', 'value'=> 65),
-    array('country'=> 'United States', 'year'=> '2005', 'value'=> 68.3),
-    array('country'=> 'United States', 'year'=> '2006', 'value'=> 69.2),
-    array('country'=> 'United States', 'year'=> '2007', 'value'=> 75.3),
-    array('country'=> 'United States', 'year'=> '2008', 'value'=> 74.2),
-    array('country'=> 'United States', 'year'=> '2009', 'value'=> 71.2),
-    array('country'=> 'United States', 'year'=> '2010', 'value'=> 74.2),
-    array('country'=> 'United States', 'year'=> '2011', 'value'=> 78.2)
-));
+$dataSource->data(chart_united_states_internet_usage());
 
 $chart = new \Kendo\Dataviz\UI\Chart('chart');
 $chart->title(array('text' => 'Internet Users in United States'))
