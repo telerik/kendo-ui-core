@@ -1160,6 +1160,18 @@
                     "url": "tooltip/index.html",
                     "title": "Kendo UI Tooltip Demo",
                     "meta": "This demo shows how Kendo UI Tooltip control works."
+                },
+                {
+                    "text": "Events",
+                    "url": "tooltip/events.html",
+                    "title": "Events demo for Kendo UI Tooltip",
+                    "meta": "This sample shows all events which are triggered by Kendo UI Tooltip widget."
+                },
+                {
+                    "text": "API",
+                    "url": "tooltip/api.html",
+                    "title": "API demo for Kendo UI Tooltip",
+                    "meta": "This example shows API functions of Kendo UI Tooltip component."
                 }
             ]
         },

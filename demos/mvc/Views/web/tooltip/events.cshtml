@@ -1,0 +1,37 @@
+        <div id="example" class="k-content">
+
+            <div id="tooltip" class="k-group">Hover Me</div>
+
+            <script>
+                function onShow(e) {
+                    kendoConsole.log("event :: show");
+                }
+
+                function onHide(e) {
+                    kendoConsole.log("event :: hide");
+                }
+
+                $(document).ready(function() {
+                    $("#tooltip").kendoTooltip({
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        show: onShow,
+                        hide: onHide,
+                        width: 300
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #tooltip {
+                    margin: 0px auto;
+                    text-align: center;
+                    width: 300px;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                }
+            </style>
+        </div>
+        <br/>
+        <div class="console"></div>

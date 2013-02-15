@@ -1,0 +1,48 @@
+        <div id="example" class="k-content" "min-height: 360px">
+            <div class="configuration k-widget k-header" style="z-index:10000">
+                <span class="configHead">API Functions</span>
+                <ul class="options">
+                    <li>
+                       Show at  <select id="selector">
+                            <option value="1">Target 1</option>
+                            <option value="2">Target 2</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="tooltip">
+                <div id="target1" class="k-group">Target 1</div>
+                <div id="target2" class="k-group">Target 2</div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    var tooltip = $("#tooltip").kendoTooltip({
+                        autoHide: false,
+                        showOn: "click",
+                        position: "right",
+                        filter: "div",
+                        width: 300,
+                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    }).data("kendoTooltip");
+
+                    $("#selector").kendoDropDownList({
+                        change: function () {
+                            tooltip.show($("#target" + this.value()));
+                        }
+                    });
+                });
+            </script>
+            <style scoped>
+                #target1, #target2 {
+                    text-align: center;
+                    width: 200px;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                    margin: 10px;
+                }
+            </style>
+        </div>
