@@ -77,6 +77,10 @@
                 equal(toString(10, "####.#0#"), "10.00");
             });
 
+            test("decimal does not round number to the last 0 if # follows", function() {
+                equal(toString(10.12345, "0.000#####"), "10.12345");
+            });
+
             test("one digit after decimal point", function() {
                 equal(toString(10, "####.0"), "10.0");
             });
@@ -114,7 +118,7 @@
             });
 
             test("toString does not crash when number placeholder is in literal", function() {
-                equal(toString(10.12, "#.# '# y.0'"), "10.12 '# y.0'");
+                equal(toString(10.12, "#.# '# y.0'"), "10.1 '# y.0'");
             });
 
             test("toString does not throw exception when format integer with 0.## format", function() {
@@ -134,13 +138,22 @@
                 equal(toString(3.235555, "0.#0"), "3.24");
             });
 
+            test("toString method removes decimal part if no number placeholder", function() {
+                equal(toString(3.235555, "0."), "3");
+                equal(toString(3.235555, "0."), "3");
+            });
+
             test("toString method formats correctly negative number", function() {
                 equal(toString(-1, "0##"), "-001");
             });
 
             //negative custom toString
             test("toString decimal number -0.001 with negative format", function() {
-                equal(toString(-0.001, "####;-(#.#)"), "-(0.001)");
+                equal(toString(-0.001, "####;-(#.###)"), "-(0.001)");
+            });
+
+            test("toString decimal number -0.001 with negative format rounds number", function() {
+                equal(toString(-0.001, "####;-(#.#)"), "-(0.0)");
             });
 
             test("toString decimal number -123", function() {
