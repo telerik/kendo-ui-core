@@ -737,11 +737,20 @@ kendo_module({
             return max === null || max > this._values.length;
         },
 
+        _dataValue: function(dataItem) {
+            var value = this._value(dataItem);
+
+            if (value === undefined) { //TODO: test this
+                value = this._text(dataItem);
+            }
+
+            return value;
+        },
+
         _select: function(li) {
             var that = this,
                 values = that._values,
                 dataItem,
-                value,
                 idx;
 
             if (!that._allowSelection()) {
@@ -758,16 +767,10 @@ kendo_module({
             that.element[0].children[idx].selected = true;
 
             dataItem = that.dataSource.view()[idx];
+
             that.tagList.append(that.tagTemplate(dataItem));
             that._dataItems.push(dataItem);
-
-            //TODO test it
-            value = that._value(dataItem);
-            if (value === undefined) { //TODO: test this
-                value = that._text(dataItem);
-            }
-            values.push(value);
-            ///
+            values.push(that._dataValue(dataItem));
 
             that._visibleItems -= 1;
             that.currentTag(null);
@@ -786,15 +789,11 @@ kendo_module({
 
             tag.remove();
             that.currentTag(null);
-            dataItem = that._dataItems.splice(index, 1)[0];
+
             that._values.splice(index, 1);
+            dataItem = that._dataItems.splice(index, 1)[0];
 
-            //TODO: test this
-            value = that._value(dataItem);
-            if (value === undefined) {
-                value = that._text(dataItem);
-            }
-
+            value = that._dataValue(dataItem);
             index = that._index(value);
 
             if (index !== -1) {
