@@ -5,28 +5,31 @@
      <div class="chart-wrapper">
          <% 
              String[] categories = {
-                 "2005", "2006",
-                 "2007", "2008",
-                 "2009"
+                 "Jan", "Feb", 
+                 "Mar", "Apr",
+                 "May", "Jun"
              };
          %>
          <kendo:chart name="chart">
-             <kendo:chart-title text="Internet Users" />
-             <kendo:chart-legend position="bottom" />
+             <kendo:chart-title text="Site Visitors Stats /thousands/" />
+             <kendo:chart-legend visible="false" />
              <kendo:chart-chartArea background="transparent" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="bar" data="<%= new double[] { 15.7, 16.7, 20, 23.5, 26.6 } %>" name="World" />
-                <kendo:chart-seriesItem type="bar" data="<%= new double[] { 67.96, 68.93, 75, 74, 78 } %>" name="United States" />
+                <kendo:chart-seriesItem type="bar" data="<%= new double[] { 56000, 63000, 74000, 91000, 117000, 138000 } %>" name="Total Visits" />
+                <kendo:chart-seriesItem type="bar" data="<%= new double[] { 52000, 34000, 23000, 48000, 67000, 83000 } %>" name="Unique visitors" />
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem categories="<%= categories %>" />
+                <kendo:chart-categoryAxisItem categories="<%= categories %>">
+                	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
+                </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem>
-                    <kendo:chart-valueAxisItem-labels format="{0}%" />
+                <kendo:chart-valueAxisItem max="140000">
+                    <kendo:chart-valueAxisItem-line visible="false"/>
+                    <kendo:chart-valueAxisItem-majorGridLines visible="true"/>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
-             <kendo:chart-tooltip visible="true" format="{0}%" />
+             <kendo:chart-tooltip visible="true" template="#= series.name #: #= value #" />
          </kendo:chart>
      </div>
     <style>

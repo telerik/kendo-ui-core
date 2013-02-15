@@ -11,7 +11,8 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDat
             .Group(group => group.Add(model => model.Symbol))
             .Sort(sort => sort.Add(model => model.Date).Ascending())
         )
-        .Series(series => {
+        .Series(series =>
+        {
             series.Area(model => model.Close)
                 .Name("close")
                 .GroupNameTemplate("#= group.value # (#= series.name #)");
@@ -25,10 +26,14 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDat
                 .Skip(2)
                 .Step(2)
             )
+            .Line(line => line.Visible(false))
+            .Max(700)
         )
         .CategoryAxis(axis => axis
             .Categories(model => model.Date)
             .Labels(labels => labels.Format("MMM"))
+            .Line(line => line.Visible(false))
+            .MajorGridLines(lines => lines.Visible(false))
             .Justify()
         )
     %>

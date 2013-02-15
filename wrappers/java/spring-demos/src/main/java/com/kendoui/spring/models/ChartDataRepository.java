@@ -41,11 +41,24 @@ public class ChartDataRepository {
     
     public static List<InternetUsers> InternetUsers() {
         List<InternetUsers> result =  new ArrayList<InternetUsers>();
-        result.add(new InternetUsers(2005, 67.96, "United States"));
-        result.add(new InternetUsers(2006, 68.93, "United States"));
-        result.add(new InternetUsers(2007, 75, "United States"));
-        result.add(new InternetUsers(2008, 74, "United States"));
-        result.add(new InternetUsers(2009, 78, "United States"));
+        result.add(new InternetUsers(1994,4.9,"United States"));
+        result.add(new InternetUsers(1995,9.2,"United States"));
+        result.add(new InternetUsers(1996,16.4,"United States"));
+        result.add(new InternetUsers(1997,21.6,"United States"));
+        result.add(new InternetUsers(1998,30.1,"United States"));
+        result.add(new InternetUsers(1999,35.9,"United States"));
+        result.add(new InternetUsers(2000,43.1,"United States"));
+        result.add(new InternetUsers(2001,49.2,"United States"));
+        result.add(new InternetUsers(2002,59.0,"United States"));
+        result.add(new InternetUsers(2003,61.9,"United States"));
+        result.add(new InternetUsers(2004,65,"United States"));
+        result.add(new InternetUsers(2005,68.3,"United States"));
+        result.add(new InternetUsers(2006,69.2,"United States"));
+        result.add(new InternetUsers(2007,75.3,"United States"));
+        result.add(new InternetUsers(2008,74.2,"United States"));
+        result.add(new InternetUsers(2009,71.2,"United States"));
+        result.add(new InternetUsers(2010,74.2,"United States"));
+        result.add(new InternetUsers(2011,78.2,"United States"));
         
         return result;
     }

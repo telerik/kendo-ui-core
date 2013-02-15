@@ -12,26 +12,31 @@
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart()
         .Name("chart")
-        .Title("Internet Users")
+        .Title("Site Visitors Stats /thousands/")
         .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom)
+            .Visible(false)
         )
         .ChartArea(chartArea => chartArea
             .Background("transparent")
         )
-        .Series(series => {
-            series.Bar(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name("World");
-            series.Bar(new double[] { 67.96, 68.93, 75, 74, 78 }).Name("United States");
+        .Series(series =>
+        {
+            series.Bar(new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
+            series.Bar(new double[] { 52000, 34000, 23000, 48000, 67000, 83000 }).Name("Unique visitors");
         })
         .CategoryAxis(axis => axis
-            .Categories("2005", "2006", "2007", "2008", "2009")
+            .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
+            .MajorGridLines(lines => lines.Visible(false))
         )
         .ValueAxis(axis => axis
-            .Numeric().Labels(labels => labels.Format("{0}%"))
+            .Numeric()
+            .Max(140000)
+            .Line(line => line.Visible(false))
+            .MajorGridLines(lines => lines.Visible(true))
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)
-            .Format("{0}%")
+            .Template("#= series.name #: #= value #")
         )
     %>
 </div>

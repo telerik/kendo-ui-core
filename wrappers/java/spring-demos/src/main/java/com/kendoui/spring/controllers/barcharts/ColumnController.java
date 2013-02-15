@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/dataviz/bar-charts/")
 public class ColumnController {
     @RequestMapping(value = {"/column"}, method = RequestMethod.GET)
-    public String index() {
+    public String index() {       
         return "/dataviz/bar-charts/column";
     }
 }

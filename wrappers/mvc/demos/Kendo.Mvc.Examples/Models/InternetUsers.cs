@@ -16,6 +16,13 @@ namespace Kendo.Mvc.Examples.Models
             Country = country;
         }
 
+        public InternetUsers(int year, double value, string country)
+        {
+            Year = year;
+            Value = value;
+            Country = country;
+        }
+
         public int Year { get; set; }
         public double Value { get; set; }
         public string Country { get; set; }

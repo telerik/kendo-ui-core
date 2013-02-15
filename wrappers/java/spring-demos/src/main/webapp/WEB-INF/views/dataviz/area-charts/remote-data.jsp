@@ -32,7 +32,7 @@
                     <kendo:chart-valueAxisItem-labels format="{0:N0}" />
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
-             <kendo:chart-tooltip visible="true" format="{0}%" />
+             <kendo:chart-tooltip visible="true" format="{0:N0}" />
          </kendo:chart>
     </div>
 <demo:footer />

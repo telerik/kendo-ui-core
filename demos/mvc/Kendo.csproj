@@ -667,6 +667,7 @@
     <Content Include="Views\dataviz\financial\index.cshtml" />
     <Content Include="Views\dataviz\financial\panes.cshtml" />
     <Content Include="Views\dataviz\financial\virtualization.cshtml" />
+    <Content Include="Views\web\grid\column-resizing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

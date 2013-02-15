@@ -13,10 +13,10 @@
              <kendo:chart-title text="Hybrid car mileage report" />
              <kendo:chart-legend position="top" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="column" stack="true" color="#13558E" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" name="on battery" />
-                <kendo:chart-seriesItem type="column" stack="true" color="#E21219" data="<%= new int[] { 20, 30, 35, 35, 40 } %>" name="on gas" />
-                <kendo:chart-seriesItem type="area" color="#DE7E42" data="<%= new int[] { 30, 38, 40, 32, 42 } %>" name="MPG" axis="mpg" />
-                <kendo:chart-seriesItem type="area" color="#057589" data="<%= new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 } %>" name="l/100 km" axis="l100km" />
+                <kendo:chart-seriesItem type="column" stack="true" color="#003c72" data="<%= new int[] { 20, 40, 45, 30, 50 } %>" name="on battery" />
+                <kendo:chart-seriesItem type="column" stack="true" color="#0399d4" data="<%= new int[] { 20, 30, 35, 35, 40 } %>" name="on gas" />
+                <kendo:chart-seriesItem type="area" color="#642381" data="<%= new int[] { 30, 38, 40, 32, 42 } %>" name="mpg" axis="mpg" />
+                <kendo:chart-seriesItem type="area" color="#e5388a" data="<%= new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 } %>" name="l/100 km" axis="l100km" />
              </kendo:chart-series>
              // Align the first two value axes to the left
              // and the last two to the right.
@@ -34,10 +34,10 @@
                 <kendo:chart-valueAxisItem name="km" min="0" max="161" majorUnit="32">
                     <kendo:chart-valueAxisItem-title text="km" />
                 </kendo:chart-valueAxisItem>
-                <kendo:chart-valueAxisItem name="mpg" color="#DE7E42">
+                <kendo:chart-valueAxisItem name="mpg" color="#642381">
                     <kendo:chart-valueAxisItem-title text="miles per gallon" />
                 </kendo:chart-valueAxisItem>
-                <kendo:chart-valueAxisItem name="l100km" color="#057589">
+                <kendo:chart-valueAxisItem name="l100km" color="#e5388a">
                     <kendo:chart-valueAxisItem-title text="liters per 100km" />
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>

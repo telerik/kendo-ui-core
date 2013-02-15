@@ -33,11 +33,14 @@
               <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem field="date">
                     <kendo:chart-categoryAxisItem-labels format="MMM" />
+                    <kendo:chart-categoryAxisItem-line visible="false"/>
+                    <kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem>
-                    <kendo:chart-valueAxisItem-labels format="\${0}" />
+                <kendo:chart-valueAxisItem max="700">
+                    <kendo:chart-valueAxisItem-labels format="\${0}" step="2" skip="2" />
+                    <kendo:chart-valueAxisItem-line visible="false"/>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
          </kendo:chart>
