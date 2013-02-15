@@ -1,32 +1,35 @@
 <?php
     $php = file_get_contents($_SERVER['SCRIPT_FILENAME']);
     $php = trim(preg_replace('/(<php\?)?.*require_once.*?(header|footer).*\r?\n?\r?\n?/', '', $php));
-    $dataSourceResult = '';
-
-    if (strpos($php, 'DataSourceResult.php')) {
-        $dataSourceResult = file_get_contents('../../lib/DataSourceResult.php');
-    }
+    $knownFiles = array(
+        'DataSourceResult.php' => '../../lib/DataSourceResult.php',
+        'chart_data.php' => '../../include/chart_data.php'
+    )
 ?>
             </div>
             <div class="source">
                 Source:
                 <a href="#" class="offline-button view selected">PHP</a>
 <?php
-    if ($dataSourceResult) {
+    foreach ($knownFiles as $name => $path) {
+        if(strpos($php, $name)) {
 ?>
-                <a href="#" class="offline-button controller">DataSourceResult.php</a>
+                <a href="#" class="offline-button controller"><?= $name ?></a>
 <?php
+        }
     }
 ?>
                 <div class="code">
                     <pre class="prettyprint view"><?= htmlentities($php) ?>
                     </pre>
 <?php
-    if ($dataSourceResult) {
+    foreach ($knownFiles as $name => $path) {
+        if(strpos($php, $name)) {
 ?>
-                    <pre class="prettyprint controller"><?= htmlentities($dataSourceResult) ?>
+                    <pre class="prettyprint controller"><?= htmlentities(file_get_contents($path)) ?>
                     </pre>
 <?php
+        }
     }
 ?>
                 </div>
