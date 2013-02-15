@@ -219,6 +219,14 @@
                 equal(input.val(), "");
             });
 
+            test("NumericTextBox prevents '>' symbol", function() {
+                var textbox = new NumericTextBox(input),
+                    shiftKey = true;
+
+                textbox.focus();
+                ok(textbox._prevent(190 /* > */, shiftKey));
+            });
+
             test("NumericTextBox prevents if value is longer then maxLength", function() {
                 var textbox = new NumericTextBox(input.attr("maxLength", 2).val("10")),
                     shiftKey = true;
