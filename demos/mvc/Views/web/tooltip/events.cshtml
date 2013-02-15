@@ -1,6 +1,9 @@
         <div id="example" class="k-content">
 
-            <div id="tooltip" class="k-group">Hover Me</div>
+            <div class="demo-section">
+                <span id="autohide-true" class="key-button wider">Hover me!</span>
+                <span id="autohide-false" class="key-button wider">Hover me too!</span>
+            </div>
 
             <script>
                 function onShow(e) {
@@ -12,26 +15,42 @@
                 }
 
                 $(document).ready(function() {
-                    $("#tooltip").kendoTooltip({
-                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    $("#autohide-true").kendoTooltip({
+                        content: "Hello!",
                         show: onShow,
                         hide: onHide,
-                        width: 300
+                        position: "top"
+                    });
+                    $("#autohide-false").kendoTooltip({
+                        autoHide: false,
+                        show: onShow,
+                        hide: onHide,
+                        position: "top",
+                        content: "Hello!",
                     });
                 });
             </script>
-
+            
+            <div class="demo-section">
+                <h3 class="title">Console log</h3>
+                <div class="console"></div>
+            </div>
+            <style scoped="scoped">
+                .demo-section {
+                    width: 600px;
+                }
+            </style>
             <style scoped>
-                #tooltip {
-                    margin: 0px auto;
+                .demo-section {
+                    padding-top: 2em;
+                    padding-bottom: 2em;
                     text-align: center;
-                    width: 300px;
-                    white-space: nowrap;
-                    border-width: 1px;
-                    border-style: solid;
-                    padding: 2em;
+                }
+                .wider {
+                    margin: 0 20px;
+                    padding: 15px 8px;
+                    line-height: 23px;
+                    width: 120px;
                 }
             </style>
         </div>
-        <br/>
-        <div class="console"></div>
