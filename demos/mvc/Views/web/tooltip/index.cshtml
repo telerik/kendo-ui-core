@@ -17,11 +17,13 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#agglomerations").kendoTooltip({
+                    var tooltip = $("#agglomerations").kendoTooltip({
                         filter: "a",
                         width: 120,
                         position: "top"
-                    });
+                    }).data("kendoTooltip");
+
+                    tooltip.show($("#canton"));
 
                     $("#agglomerations").find("a").click(false);
                 });

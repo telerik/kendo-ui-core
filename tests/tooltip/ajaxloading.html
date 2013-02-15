@@ -74,45 +74,6 @@
                 tooltip.show(container);
             });
 
-            test("loading is shown during the request", 1, function() {
-                $.mockjax({
-                    url: "foo/baz",
-                    response: function(request) {
-                        ok(tooltip.content.find("div.k-loading-mask").length);
-                        start();
-                    }
-                });
-
-                var tooltip = new Tooltip(container, {
-                    content: {
-                        url: "foo/baz"
-                    }
-                });
-
-                stop();
-
-                tooltip.show(container);
-            });
-
-            test("loading is hidden when the request completes", 1, function() {
-                $.mockjax({
-                    url: "foo/baz"
-                });
-
-                var tooltip = new Tooltip(container, {
-                    content: {
-                        url: "foo/baz"
-                    },
-                    contentLoad: function() {
-                        ok(!tooltip.content.find("div.k-loading-mask").length);
-                        start();
-                    }
-                });
-
-                stop();
-                tooltip.show(container);
-            });
-
             test("response is added to the content", 1, function() {
                 $.mockjax({
                     url: "foo/baz",

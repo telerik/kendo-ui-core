@@ -164,12 +164,12 @@ kendo_module({
             var that = this;
 
             if (that.options.showOn && that.options.showOn.match(/click|focus/)) {
-                that.show($(e.currentTarget));
+                that._show($(e.currentTarget));
             } else {
                 clearTimeout(that.timeout);
 
                 that.timeout = setTimeout(function() {
-                    that.show($(e.currentTarget));
+                    that._show($(e.currentTarget));
                 }, that.options.showAfter);
             }
         },
@@ -253,6 +253,11 @@ kendo_module({
         },
 
         show: function(target) {
+            saveTitleAttributes(target);
+            this._show(target);
+        },
+
+        _show: function(target) {
             var that = this,
                 current = that.target();
 
