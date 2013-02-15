@@ -734,7 +734,7 @@
                 seriesLength = series.length,
                 data = chart.dataSource.view(),
                 grouped = (chart.dataSource.group() || []).length > 0,
-                categoriesData = grouped ? data[0].items : data,
+                categoriesData = grouped ? (data[0] || []).items : data,
                 processedSeries = [],
                 currentSeries;
 
