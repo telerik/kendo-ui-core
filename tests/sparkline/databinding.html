@@ -39,66 +39,69 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Options / Defaults", {
+                module("Data Binding / Array", {
                     setup: function() {
-                        createSparkline({ });
+                        createSparkline([1, 2]);
                     },
                     teardown: destroySparkline
                 });
 
-                test("tooltip is visible by default", function() {
-                    ok(sparkline.options.tooltip.visible);
+                test("array is used to initialize data source", function() {
+                    equals(sparkline.dataSource.data().length, 2);
                 });
 
-                test("legend is not visible by default", function() {
-                    ok(!sparkline.options.legend.visible);
+                test("observable array is used to initialize data source", function() {
+                    createSparkline(new kendo.data.ObservableArray([1, 2]));
+                    equals(sparkline.dataSource.data().length, 2);
                 });
 
-                test("axes are not visible by default", function() {
-                    ok(!sparkline.options.axisDefaults.visible);
+                test("default series are created", function() {
+                    equals(sparkline.options.series.length, 1);
                 });
 
-                test("chartArea has 2px margin", function() {
-                    equals(sparkline.options.chartArea.margin, 2);
-                });
-
-                test("transitions are disabled", function() {
-                    ok(!sparkline.options.transitions);
+                test("default series are bound to array items", function() {
+                    equals(sparkline.options.series[0].field, "*");
+                    equals(sparkline.options.series[0].data.length, 2);
                 });
 
                 // ------------------------------------------------------------
-                module("Dimensions", {
+                module("Data Binding / Data Source / Implicit series", {
                     setup: function() {
-                        createSparkline();
+                        createSparkline({
+                            dataSource: [1, 2]
+                        });
                     },
                     teardown: destroySparkline
                 });
 
-                test("auto height equals line height of empty container", function() {
-                    equals(sparkline._model.options.height, 19)
+                test("default series are created", function() {
+                    equals(sparkline.options.series.length, 1);
                 });
 
-                test("sets default container width for 2 points", function() {
-                    createSparkline([1, 2]);
-                    equals(sparkline.element[0].style.width, "10px");
+                test("default series are bound to array items", function() {
+                    equals(sparkline.options.series[0].field, "*");
+                    equals(sparkline.options.series[0].data.length, 2);
                 });
 
-                test("sets default container width for 4 points", function() {
-                    createSparkline([1, 2, 3, 4]);
-                    equals(sparkline.element[0].style.width, "20px");
+                // ------------------------------------------------------------
+                module("Data Binding / Data Source / Explicit series", {
+                    setup: function() {
+                        createSparkline({
+                            dataSource: [{ value: 1 }, { value: 2 }],
+                            series: [{
+                                field: "value"
+                            }]
+                        });
+                    },
+                    teardown: destroySparkline
                 });
 
-                test("sets default container width when binding to inline data", function() {
-                    createSparkline({
-                        series: [{
-                            data: [1, 2]
-                        }]
-                    });
-                    equals(sparkline.element[0].style.width, "10px");
+                test("default series are not created", function() {
+                    equals(sparkline.options.series.length, 1);
                 });
 
-                test("sets container height", function() {
-                    equals(sparkline.element[0].style.height, "19px");
+                test("series are data bound", function() {
+                    equals(sparkline.options.series[0].data.length, 2);
                 });
             })();
         </script>

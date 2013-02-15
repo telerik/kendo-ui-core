@@ -9,16 +9,14 @@ kendo_module({
 (function ($, undefined) {
     // Imports ===============================================================
     var kendo = window.kendo,
-        deepExtend = kendo.deepExtend,
-        math = Math,
-        proxy = $.proxy,
-
         dataviz = kendo.dataviz,
-        template = kendo.template,
-        defined = dataviz.defined,
+
         Chart = dataviz.ui.Chart,
-        last = dataviz.last,
-        renderTemplate = dataviz.renderTemplate;
+        ObservableArray = kendo.data.ObservableArray,
+
+        deepExtend = kendo.deepExtend,
+        isArray = $.isArray,
+        math = Math;
 
     // Constants =============================================================
     var CSS_PREFIX = "k-";
@@ -28,11 +26,22 @@ kendo_module({
         init: function(element, options) {
             var chart = this;
 
-            if (element.innerHTML === "") {
-                element.innerHTML = "&nbsp;";
+            options = options || {};
+
+            if (isArray(options) || options instanceof ObservableArray) {
+                options = { dataSource: options };
             }
 
+            options = deepExtend({
+                    series: [{ field: "*" }]
+                },options, {
+                    seriesDefaults: {
+                        type: options.type
+                    }
+            });
+
             Chart.fn.init.call(chart, element, options);
+
             chart.element.addClass(CSS_PREFIX + "sparkline");
         },
 
@@ -51,6 +60,8 @@ kendo_module({
                 }
             },
             seriesDefaults: {
+                autoBind: true,
+                type: "line",
                 area: {
                     line: {
                         width: 0.5
@@ -85,22 +96,39 @@ kendo_module({
                 shared: true,
                 visible: true
             },
+            categoryAxis: {
+                crosshair: {
+                    visible: true,
+                    tooltip: {
+                        visible: false
+                    }
+                }
+            },
             legend: {
                 visible: false
             },
-            transitions: false
+            transitions: false,
+            pointWidth: 5
         },
 
         _modelOptions: function() {
             var chart = this,
-                options = Chart.fn._modelOptions.call(chart),
+                chartOptions = chart.options,
+                options,
                 element = chart.element;
 
-            options.inline = true;
-            options.align = false;
+            if (element[0].innerHTML === "") {
+                element[0].innerHTML = "&nbsp;";
+            }
 
-            // TODO: Container width or computed
-            options.width = 80;
+            options = deepExtend({
+                width: chart._width(),
+                height: element.innerHeight(),
+                transitions: chartOptions.transitions
+            }, chartOptions.chartArea, {
+                inline: true,
+                align: false
+            });
 
             element.css({
                 width: options.width,
@@ -108,6 +136,25 @@ kendo_module({
             });
 
             return options;
+        },
+
+        _width: function() {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                dsTotal = chart.dataSource.total(),
+                seriesTotal = 0,
+                i,
+                currentSeries;
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                if (currentSeries.data) {
+                    seriesTotal = math.max(seriesTotal, currentSeries.data.length);
+                }
+            }
+
+            return math.max(dsTotal, seriesTotal) * options.pointWidth;
         }
     });
 
