@@ -841,7 +841,7 @@ kendo_module({
             };
 
             that.tagTemplate = function(data) {
-                return '<li><span class="">' + tagTemplate(data) + '</span><span class="k-icon k-delete">delete</span></li>';
+                return '<li class="k-button"><span>' + tagTemplate(data) + '</span><span class="k-icon k-delete">delete</span></li>';
             };
         },
 
