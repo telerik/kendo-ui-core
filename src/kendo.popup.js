@@ -164,6 +164,7 @@ kendo_module({
             anchor: BODY,
             collision: "flip fit",
             viewport: window,
+            copyAnchorStyles: true,
             animation: {
                 open: {
                     effects: "slideIn:down",
@@ -215,7 +216,9 @@ kendo_module({
                 anchor = $(options.anchor);
 
             if (!that.visible()) {
-                element.css(kendo.getComputedStyles(anchor[0], styles));
+                if (options.copyAnchorStyles) {
+                    element.css(kendo.getComputedStyles(anchor[0], styles));
+                }
 
                 if (element.data("animating") || that.trigger(OPEN)) {
                     return;

@@ -315,6 +315,7 @@ kendo_module({
                 close: function() {
                     that.trigger(HIDE);
                 },
+                copyAnchorStyles: false,
                 animation: options.animation
             }, POSITIONS[options.position]));
 
