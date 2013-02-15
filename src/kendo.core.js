@@ -630,6 +630,7 @@ function pad(number, digits, end) {
             decimalIndex,
             sharpIndex,
             zeroIndex,
+            hasZero, hasSharp,
             percentIndex,
             currencyIndex,
             startZeroIndex,
@@ -807,20 +808,30 @@ function pad(number, digits, end) {
         length = format.length;
 
         if (decimalIndex != -1) {
-            zeroIndex = format.lastIndexOf(ZERO);
-            sharpIndex = format.lastIndexOf(SHARP);
+            zeroIndex = format.lastIndexOf(ZERO) - decimalIndex;
+            sharpIndex = format.lastIndexOf(SHARP) - decimalIndex;
             fraction = number.toString().split(POINT)[1] || EMPTY;
+            hasZero = zeroIndex > -1;
+            hasSharp = sharpIndex > -1;
+            idx = fraction.length;
 
-            if (sharpIndex > zeroIndex && fraction.length > (sharpIndex - zeroIndex)) {
-                idx = sharpIndex;
-            } else if (zeroIndex != -1 && zeroIndex >= decimalIndex) {
+            if (!hasZero && !hasSharp) {
+                format = format.split(POINT)[0];
+                length = format.length;
+                idx = 0;
+            } if (hasZero && zeroIndex > sharpIndex) {
                 idx = zeroIndex;
+            } else if (sharpIndex > zeroIndex) {
+                if (hasSharp && idx > sharpIndex) {
+                    idx = sharpIndex;
+                } else if (hasZero && idx < zeroIndex) {
+                    idx = zeroIndex;
+                }
             }
 
-            if (idx) {
-                number = number.toFixed(idx - decimalIndex);
+            if (idx > -1) {
+                number = number.toFixed(idx);
             }
-
         } else {
             number = number.toFixed(0);
         }
