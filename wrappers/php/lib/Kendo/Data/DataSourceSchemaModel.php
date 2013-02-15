@@ -7,8 +7,8 @@ class DataSourceSchemaModel extends \Kendo\SerializableObject {
         return $this->setProperty('id', $value);
     }
 
-    public function addField(\Kendo\Data\DataSourceSchemaModelField $value) {
-        return $this->add('fields', $value);
+    public function addField($value) {
+        return $this->add('fields', func_get_args());
     }
 }
 
