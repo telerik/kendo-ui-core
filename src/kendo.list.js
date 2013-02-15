@@ -29,7 +29,11 @@ kendo_module({
         proxy = $.proxy,
         browser = kendo.support.browser,
         isIE8 = browser.msie && parseInt(browser.version, 10) < 9,
-        quotRegExp = /"/g;
+        quotRegExp = /"/g,
+        alternativeNames = {
+            "ComboBox": "DropDownList",
+            "DropDownList": "ComboBox"
+        };
 
     var List = Widget.extend({
         init: function(element, options) {
@@ -782,13 +786,19 @@ kendo_module({
             var that = this,
                 options = that.options,
                 cascade = options.cascadeFrom,
-                parent, select, valueField,
+                parent, parentElement,
+                select, valueField,
                 change;
 
             if (cascade) {
                 that._selectedValue = options.value || that._accessor();
 
-                parent = $("#" + cascade).data("kendo" + options.name);
+                parentElement = $("#" + cascade);
+                parent = parentElement.data("kendo" + options.name);
+
+                if (!parent) {
+                    parent = parentElement.data("kendo" + alternativeNames[options.name]);
+                }
 
                 if (!parent) {
                     return;
