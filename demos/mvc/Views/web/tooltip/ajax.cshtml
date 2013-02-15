@@ -1,24 +1,24 @@
         <div id="example" class="k-content">
             <div class="demo-section">
-                <ul class="dairy-photos">
+                <ul id="products" class="dairy-photos">
                     <li>
-                        <a href="#"><img src="../../content/web/foods/11.jpg" /></a>
+                        <a href="#" data-id="1"><img src="../../content/web/foods/11.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/12.jpg" /></a>
+                        <a href="#" data-id="2"><img src="../../content/web/foods/12.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/31.jpg" /></a>
+                        <a href="#" data-id="3"><img src="../../content/web/foods/31.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/32.jpg" /></a>
+                        <a href="#" data-id="4"><img src="../../content/web/foods/32.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/33.jpg" /></a>
+                        <a href="#" data-id="5"><img src="../../content/web/foods/33.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/59.jpg" /></a>
+                        <a href="#" data-id="6"><img src="../../content/web/foods/59.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/60.jpg" /></a>
+                        <a href="#" data-id="7"><img src="../../content/web/foods/60.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/69.jpg" /></a>
+                        <a href="#" data-id="8"><img src="../../content/web/foods/69.jpg" /></a>
                     </li><li>
-                        <a href="#"><img src="../../content/web/foods/72.jpg" /></a>
+                        <a href="#" data-id="9"><img src="../../content/web/foods/72.jpg" /></a>
                     </li>
                 </ul>
                 <div class="dairy-description">
@@ -29,14 +29,23 @@
             </div>
 
             <script>
+                var urlFormat = "../../content/web/tooltip/ajax/ajaxContent{0}.html";
+
                 $(document).ready(function() {
-                    $("#agglomerations").kendoTooltip({
+                    $("#products").kendoTooltip({
                         filter: "a",
-                        width: 120,
-                        position: "top"
+                        content: {
+                            url: "../../content/web/tooltip/ajax/ajaxContent1.html"
+                        },
+                        width: 220,
+                        height: 300,
+                        position: "top",
+                        requestStart: function(e) {
+                            e.options.url = kendo.format(urlFormat, e.target.data("id"));
+                        }
                     });
 
-                    $("#agglomerations").find("a").click(false);
+                    $("#products").find("a").click(false);
                 });
             </script>
 
