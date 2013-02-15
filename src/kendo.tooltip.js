@@ -186,12 +186,11 @@ kendo_module({
                     showIframe = !isLocalUrl(contentOptions.url);
                 }
 
+                that.trigger(REQUESTSTART, { options: contentOptions, target: target });
+
                 if (!showIframe) {
                     element.empty();
                     kendo.ui.progress(element, true);
-
-                    contentOptions.data = contentOptions.data || {};
-                    that.trigger(REQUESTSTART, { data: contentOptions.data, target: target });
 
                     // perform AJAX request
                     that._ajaxRequest(contentOptions);

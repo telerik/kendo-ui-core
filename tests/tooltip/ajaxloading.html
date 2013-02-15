@@ -227,7 +227,9 @@
                         url: "foo/baz"
                     },
                     requestStart: function(e) {
-                        e.data.bar = "foo"
+                        e.options.data = {
+                            bar: "foo"
+                        }
                     }
                 });
 
@@ -252,7 +254,7 @@
                         }
                     },
                     requestStart: function(e) {
-                        e.data.bar = "foo"
+                        e.options.data.bar = "foo"
                     }
                 });
 
