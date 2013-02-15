@@ -1162,6 +1162,12 @@
                     "meta": "This demo shows how Kendo UI Tooltip control works."
                 },
                 {
+                    "text": "Loading content with AJAX",
+                    "url": "tooltip/ajax.html",
+                    "title": "AJAX loaded content with Kendo UI Tooltip widget",
+                    "meta": "This example illustrates how content in Kendo UI window widget can be loaded, using AJAX."
+                },
+                {
                     "text": "Events",
                     "url": "tooltip/events.html",
                     "title": "Events demo for Kendo UI Tooltip",
