@@ -36,7 +36,7 @@
                 <kendo:dataSource-transport-read url="${transportReadUrl}"/>
             </kendo:dataSource-transport>
             <kendo:dataSource-group>
-            	<kendo:dataSource-groupItem field="UnitsInStock" dir="asc" />
+            	<kendo:dataSource-groupItem field="unitsInStock" dir="asc" />
             </kendo:dataSource-group>
         </kendo:dataSource>       
    </kendo:grid>       
