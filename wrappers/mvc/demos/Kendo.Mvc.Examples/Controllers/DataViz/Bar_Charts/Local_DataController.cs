@@ -8,21 +8,27 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class Bar_ChartsController : Controller
     {
-        private const string HighlightColor = "#aaa";
+        private Dictionary<int, string> userColors = new Dictionary<int, string>() { 
+            {1,"#ffd600"},
+            {2,"#565656"}
+        };
 
         public ActionResult Local_Data()
         {
-            var internetUsers = ChartDataRepository.InternetUsers();
+            var blogComments = ChartDataRepository.BlogComments();
             var viewModel = new List<BarChartsLocalDataViewModel>();
 
-            for (var i = 1; i < internetUsers.Count; i++)
+            for (var i = 0; i < blogComments.Count; i++)
             {
-                var data = internetUsers[i];
+                var data = blogComments[i];
                 var model = new BarChartsLocalDataViewModel(data);
-                if (internetUsers[i - 1].Value > data.Value)
+                if (model.Day > 14 && model.Day < 21)
                 {
-                    // Highlight years with less users than the previous year
-                    model.Color = HighlightColor;
+                    model.UserColor = userColors[2];
+                }
+                else
+                {
+                    model.UserColor = userColors[1];
                 }
 
                 viewModel.Add(model);

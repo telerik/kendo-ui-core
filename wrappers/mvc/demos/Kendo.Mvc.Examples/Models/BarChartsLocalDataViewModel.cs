@@ -3,17 +3,17 @@ using System.Linq;
 
 namespace Kendo.Mvc.Examples.Models
 {
-    public class BarChartsLocalDataViewModel : InternetUsers
+    public class BarChartsLocalDataViewModel : BlogComments
     {
         public BarChartsLocalDataViewModel()
         {
         }
 
-        public BarChartsLocalDataViewModel(InternetUsers internetUsers)
-            : base(internetUsers.Year, internetUsers.Country, internetUsers.Value)
+        public BarChartsLocalDataViewModel(BlogComments blogComments)
+            : base(blogComments.Blog, blogComments.Day, blogComments.Value)
         {
         }
 
-        public string Color { get; set; }
+        public string UserColor { get; set; }
     }
 }

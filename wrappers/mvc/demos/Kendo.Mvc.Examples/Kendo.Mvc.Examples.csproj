@@ -83,6 +83,7 @@
     <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\PlotbandsController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Local_DataController.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
     <Compile Include="Models\BaseUnit.cs" />
+    <Compile Include="Models\BlogComments.cs" />
     <Compile Include="Models\BubbleChartsGroupedDataViewModel.cs" />
     <Compile Include="Models\ClientCategoryViewModel.cs" />
     <Compile Include="Models\ClientProductViewModel.cs" />
@@ -399,6 +401,7 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked_bar.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked_bar.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
@@ -556,6 +559,7 @@
     <Content Include="Areas\aspx\Views\web\multiselect\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\multiselect\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\multiselect\template.aspx" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\plotbands.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />

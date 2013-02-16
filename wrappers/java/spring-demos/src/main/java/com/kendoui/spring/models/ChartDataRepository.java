@@ -269,6 +269,45 @@ public class ChartDataRepository {
         return result;
     }
     
+    public static List<BlogComments> BlogComments()
+    {
+        List<BlogComments> result = new ArrayList<BlogComments>();
+        result.add(new BlogComments("My blog", 1, 3));
+        result.add(new BlogComments("My blog", 2, 7));
+        result.add(new BlogComments("My blog", 3, 12));
+        result.add(new BlogComments("My blog", 4, 15));
+        result.add(new BlogComments("My blog", 5, 6));
+        result.add(new BlogComments("My blog", 6, 23));
+        result.add(new BlogComments("My blog", 7, 12));
+        result.add(new BlogComments("My blog", 8, 10));
+        result.add(new BlogComments("My blog", 9, 17));
+        result.add(new BlogComments("My blog", 10, 13));
+        result.add(new BlogComments("My blog", 11, 14));
+        result.add(new BlogComments("My blog", 12, 15));
+        result.add(new BlogComments("My blog", 13, 3));
+        result.add(new BlogComments("My blog", 14, 6));
+        result.add(new BlogComments("My blog", 15, 23));
+        result.add(new BlogComments("My blog", 16, 25));
+        result.add(new BlogComments("My blog", 17, 21));
+        result.add(new BlogComments("My blog", 18, 18));
+        result.add(new BlogComments("My blog", 19, 17));
+        result.add(new BlogComments("My blog", 20, 16));
+        result.add(new BlogComments("My blog", 21, 11));
+        result.add(new BlogComments("My blog", 22, 3));
+        result.add(new BlogComments("My blog", 23, 8));
+        result.add(new BlogComments("My blog", 24, 5));
+        result.add(new BlogComments("My blog", 25, 4));
+        result.add(new BlogComments("My blog", 26, 1));
+        result.add(new BlogComments("My blog", 27, 7));
+        result.add(new BlogComments("My blog", 28, 6));
+        result.add(new BlogComments("My blog", 29, 3));
+        result.add(new BlogComments("My blog", 30, 6));
+           
+        return result;
+    }
+    
+    
+    
     public static List<StockDataPoint> BoingStockDataFirstPart() {
         List<StockDataPoint> result = new ArrayList<StockDataPoint>();
         result.add(new StockDataPoint("2000/01/03", 41.62, 41.69, 39.81, 40.12, 2632000));

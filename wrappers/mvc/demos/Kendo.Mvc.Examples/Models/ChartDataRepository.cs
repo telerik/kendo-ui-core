@@ -211,6 +211,41 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
+        public static IList<BlogComments> BlogComments()
+        {
+            return new BlogComments[] {                 new BlogComments("My blog", 1, 3),
+                 new BlogComments("My blog", 2, 7),
+                 new BlogComments("My blog", 3, 12),
+                 new BlogComments("My blog", 4, 15),
+                 new BlogComments("My blog", 5, 6),
+                 new BlogComments("My blog", 6, 23),
+                 new BlogComments("My blog", 7, 12),
+                 new BlogComments("My blog", 8, 10),
+                 new BlogComments("My blog", 9, 17),
+                 new BlogComments("My blog", 10, 13),
+                 new BlogComments("My blog", 11, 14),
+                 new BlogComments("My blog", 12, 15),
+                 new BlogComments("My blog", 13, 3),
+                 new BlogComments("My blog", 14, 6),
+                 new BlogComments("My blog", 15, 23),
+                 new BlogComments("My blog", 16, 25),
+                 new BlogComments("My blog", 17, 21),
+                 new BlogComments("My blog", 18, 18),
+                 new BlogComments("My blog", 19, 17),
+                 new BlogComments("My blog", 20, 16),
+                 new BlogComments("My blog", 21, 11),
+                 new BlogComments("My blog", 22, 3),
+                 new BlogComments("My blog", 23, 8),
+                 new BlogComments("My blog", 24, 5),
+                 new BlogComments("My blog", 25, 4),
+                 new BlogComments("My blog", 26, 1),
+                 new BlogComments("My blog", 27, 7),
+                 new BlogComments("My blog", 28, 6),
+                 new BlogComments("My blog", 29, 3),
+                 new BlogComments("My blog", 30, 6) 
+            };
+        }
+
         public static IEnumerable<StockDataPoint> StockData()
         {
             return new StockDataPoint[]

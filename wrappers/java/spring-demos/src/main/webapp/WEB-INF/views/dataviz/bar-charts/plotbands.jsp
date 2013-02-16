@@ -24,14 +24,16 @@
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem field="year">
-                    <kendo:chart-categoryAxisItem-labels rotation="-90" />
+                    <kendo:chart-categoryAxisItem-majorGridLines visible="false" />
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem majorUnit="10000" max="80000">
+                <kendo:chart-valueAxisItem majorUnit="10000" max="70000">
                     <kendo:chart-valueAxisItem-labels format="{0:N0}"/>
+					<kendo:chart-valueAxisItem-line visible="false"/>
                     <kendo:chart-valueAxisItem-plotBands>
-                        <kendo:chart-valueAxisItem-plotBand from="7500" to="25000" color="#000" opacity="0.2" />
+                        <kendo:chart-valueAxisItem-plotBand from="10000" to="30000" color="#c00" opacity="0.3" />
+                        <kendo:chart-valueAxisItem-plotBand from="30000" to="30500" color="#c00" opacity="0.8" />
                     </kendo:chart-valueAxisItem-plotBands>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>

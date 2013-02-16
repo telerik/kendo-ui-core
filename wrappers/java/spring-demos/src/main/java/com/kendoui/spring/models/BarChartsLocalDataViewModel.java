@@ -1,17 +1,17 @@
 package com.kendoui.spring.models;
 
-public class BarChartsLocalDataViewModel extends InternetUsers {
-    public BarChartsLocalDataViewModel(InternetUsers internetUsers) {
-        super(internetUsers.getYear(), internetUsers.getValue(), internetUsers.getCountry());
+public class BarChartsLocalDataViewModel extends BlogComments {
+    public BarChartsLocalDataViewModel(BlogComments blogComments) {
+        super(blogComments.getBlog(), blogComments.getDay(), blogComments.getValue());
     }
 
-    private String color;
+    private String userColor;
 
-    public String getColor() {
-        return color;
+    public String getUserColor() {
+        return userColor;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setUserColor(String userColor) {
+        this.userColor = userColor;
     }
 }

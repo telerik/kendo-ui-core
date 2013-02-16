@@ -5,20 +5,30 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.BarChart
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart(Model)
         .Name("chart")
-        .Title("Internet Users")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom)
+        .Title(title => title
+            .Text("Comments per day")
+            .Align(ChartTextAlignment.Left)
         )
-        .Series(series => {
-            series.Bar(model => model.Value, model => model.Color)
-                .Name("United States")
-                .Labels(labels => labels.Format("{0}%").Visible(true));
+        .Legend(legend => legend
+            .Visible(false)
+        )
+        .Series(series =>
+        {
+            series.Column(
+                model => model.Value,
+                model => model.UserColor
+            )
+            .Labels(labels => labels.Background("transparent").Visible(true));
         })
         .CategoryAxis(axis => axis
-            .Categories(model => model.Year)
+            .Categories(model => model.Day)
+            .MajorGridLines(lines => lines.Visible(false))
+            .Line(line => line.Visible(false))
         )
         .ValueAxis(axis => axis.Numeric()
-            .Labels(labels => labels.Format("{0}%"))
+            .Max(28)
+            .MajorGridLines(lines => lines.Visible(false))
+            .Visible(false)
         )
     %>
 </div>

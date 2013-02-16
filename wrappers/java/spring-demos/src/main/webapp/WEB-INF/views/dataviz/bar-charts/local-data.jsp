@@ -3,20 +3,23 @@
 <demo:header />
      <div class="chart-wrapper">
          <kendo:chart name="chart">
-             <kendo:chart-title text="Internet Users" />
-             <kendo:chart-legend position="bottom" />
+             <kendo:chart-title text="Comments per day" align="left" />
+             <kendo:chart-legend visible="false" />
              <kendo:dataSource data="${viewModel}" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="bar" field="value" colorField="color" name="United States">
-                    <kendo:chart-seriesItem-labels format="{0}%" visible="true" />
+                <kendo:chart-seriesItem type="column" field="value" colorField="userColor">
+                    <kendo:chart-seriesItem-labels background="transparent" visible="true" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem field="year" />
+                <kendo:chart-categoryAxisItem field="day">
+                	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
+                	<kendo:chart-categoryAxisItem-line visible="false"/>
+                </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem>
-                    <kendo:chart-valueAxisItem-labels format="{0}%" />
+                <kendo:chart-valueAxisItem max="28" visible="false">
+                    <kendo:chart-valueAxisItem-majorGridLines visible="false"/>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
          </kendo:chart>
