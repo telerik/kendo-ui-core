@@ -331,6 +331,7 @@
     <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
     <Compile Include="Models\BaseUnit.cs" />
+    <Compile Include="Models\BubbleChartsGroupedDataViewModel.cs" />
     <Compile Include="Models\ClientCategoryViewModel.cs" />
     <Compile Include="Models\ClientProductViewModel.cs" />
     <Compile Include="Models\Config.cs" />
@@ -341,6 +342,7 @@
     <Compile Include="Models\CrimeData.cs" />
     <Compile Include="Models\DataFilter.cs" />
     <Compile Include="Models\JobGrowth.cs" />
+    <Compile Include="Models\Medals.cs" />
     <Compile Include="Models\ScreenResolution.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
     <Compile Include="Models\PagerViewModel.cs" />

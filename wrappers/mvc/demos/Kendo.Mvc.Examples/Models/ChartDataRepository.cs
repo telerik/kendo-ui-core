@@ -182,6 +182,35 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
+        public static IList<Medals> Medals()
+        {
+            return new Medals[] {                new Medals(1984,1,10,"Japan"),
+                new Medals(1988,1,4,"Japan"),
+                new Medals(1992,1,3,"Japan"),
+                new Medals(1996,1,3,"Japan"),
+                new Medals(2000,1,5,"Japan"),
+                new Medals(2004,1,16,"Japan"),
+                new Medals(2008,1,9,"Japan"),
+                new Medals(2012,1,7,"Japan"),
+                new Medals(1984,2,8,"Japan"),
+                new Medals(1988,2,3,"Japan"),
+                new Medals(1992,2,8,"Japan"),
+                new Medals(1996,2,6,"Japan"),
+                new Medals(2000,2,8,"Japan"),
+                new Medals(2004,2,9,"Japan"),
+                new Medals(2008,2,6,"Japan"),
+                new Medals(2012,2,14,"Japan"),
+                new Medals(1984,3,14,"Japan"),
+                new Medals(1988,3,7,"Japan"),
+                new Medals(1992,3,11,"Japan"),
+                new Medals(1996,3,5,"Japan"),
+                new Medals(2000,3,5,"Japan"),
+                new Medals(2004,3,12,"Japan"),
+                new Medals(2008,3,10,"Japan"),
+                new Medals(2012,3,17,"Japan") 
+            };
+        }
+
         public static IEnumerable<StockDataPoint> StockData()
         {
             return new StockDataPoint[]

@@ -30,7 +30,7 @@
              <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem categories="<%= categories %>">
                 	<kendo:chart-categoryAxisItem-line visible="false"/>
-                	<kendo:chart-categoryAxisItem-labels margin="<%= padding %>" />
+                	<kendo:chart-categoryAxisItem-labels padding="<%= padding %>" />
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>

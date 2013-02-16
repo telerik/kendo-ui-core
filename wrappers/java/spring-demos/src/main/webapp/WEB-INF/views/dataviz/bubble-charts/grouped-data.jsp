@@ -1,63 +1,57 @@
+<%@page import="java.util.HashMap"%>
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/dataviz/bubble-charts/grouped-data/read" var="readUrl" />
 
+<% 
+	HashMap<String, Object> xMargin = new HashMap<String, Object>();
+	xMargin.put("top", -25);
+	
+	HashMap<String, Object> yMargin = new HashMap<String, Object>();
+	yMargin.put("right", -30);
+	
+	HashMap<String, Object> yPadding = new HashMap<String, Object>();
+	yPadding.put("left", 20);
+%>
+
 <demo:header />
      <div class="chart-wrapper">
          <kendo:chart name="chart">
-             <kendo:chart-title text="Job Growth for 2011 and 2012" />
-             <kendo:chart-legend position="bottom" />
+             <kendo:chart-title text="Olypmic Medals Won by Japan" />
+             <kendo:chart-legend visible="false" />
              <kendo:dataSource>
                  <kendo:dataSource-transport>
                      <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
                  </kendo:dataSource-transport>
                  <kendo:dataSource-group>
-                     <kendo:dataSource-groupItem field="year" />
+                     <kendo:dataSource-groupItem field="country" />
                  </kendo:dataSource-group>
              </kendo:dataSource>
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="bubble" xfield="growth" yfield="jobs" sizeField="applications" categoryField="company" />
+                <kendo:chart-seriesItem type="bubble" xfield="year" yfield="standing" sizeField="number" colorField="color" opacity="0.9" />
              </kendo:chart-series>
              <kendo:chart-xAxis>
-                <kendo:chart-xAxisItem axisCrossingValue="-10000" majorUnit="2000">
-                    <kendo:chart-xAxisItem-labels format="{0:N0}" skip="1" />
-                    <kendo:chart-xAxisItem-plotBands>
-                        <kendo:chart-xAxisItem-plotBand from="-5000" to="0" color="#00f" opacity="0.05" />
-                    </kendo:chart-xAxisItem-plotBands>
+                <kendo:chart-xAxisItem majorUnit="4" min="1980" max="2015" >
+                    <kendo:chart-xAxisItem-labels skip="1" margin="<%= xMargin %>" />
+                    <kendo:chart-xAxisItem-line visible="false" />
+                    <kendo:chart-xAxisItem-majorGridLines visible="false"/>
                 </kendo:chart-xAxisItem>
              </kendo:chart-xAxis>
              <kendo:chart-yAxis>
-                <kendo:chart-yAxisItem>
-                    <kendo:chart-yAxisItem-labels format="{0:N0}" skip="1" />
+                <kendo:chart-yAxisItem majorUnit="1" min="0" max="3.7">
+                    <kendo:chart-yAxisItem-labels step="1" skip="1" template="#= value # place" margin="<%= yMargin %>" padding="<%= yPadding %>"/>
                     <kendo:chart-yAxisItem-line visible="false" />
+                    <kendo:chart-yAxisItem-majorGridLines visible="false"/>
                 </kendo:chart-yAxisItem>
              </kendo:chart-yAxis>
-             <kendo:chart-tooltip visible="true" template="#= category # (#= dataItem.Year #): #= kendo.toString(value.size, 'N0') # applications" />
+             <kendo:chart-tooltip visible="true" template="#= value.x #: #= value.size # Medals" />
          </kendo:chart>
-         
-         <ul class="k-content">
-             <li>Circle size shows number of job applicants</li>
-             <li>Vertical position shows number of employees</li>
-             <li>Horizontal position shows job growth</li>
-         </ul>
     </div>
     <style>
 	    .chart-wrapper {
 	        position: relative;
-	    }
-	
-	    .chart-wrapper ul {
-	        font-size: 11px;
-	        margin: 62px 16px 0 0;
-	        padding: 30px;
-	        position: absolute;
-	        right: 0;
-	        top: 0;
-	        text-transform: uppercase;
-	        width: 150px;
-	        height: 105px;
 	    }
 	</style>
 <demo:footer />

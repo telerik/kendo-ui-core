@@ -238,6 +238,37 @@ public class ChartDataRepository {
         return result;
     }
     
+    public static List<Medals> Medals()
+    {
+        List<Medals> result = new ArrayList<Medals>();
+        result.add(new Medals(1984,1,10,"Japan"));
+        result.add(new Medals(1988,1,4,"Japan"));
+        result.add(new Medals(1992,1,3,"Japan"));
+        result.add(new Medals(1996,1,3,"Japan"));
+        result.add(new Medals(2000,1,5,"Japan"));
+        result.add(new Medals(2004,1,16,"Japan"));
+        result.add(new Medals(2008,1,9,"Japan"));
+        result.add(new Medals(2012,1,7,"Japan"));
+        result.add(new Medals(1984,2,8,"Japan"));
+        result.add(new Medals(1988,2,3,"Japan"));
+        result.add(new Medals(1992,2,8,"Japan"));
+        result.add(new Medals(1996,2,6,"Japan"));
+        result.add(new Medals(2000,2,8,"Japan"));
+        result.add(new Medals(2004,2,9,"Japan"));
+        result.add(new Medals(2008,2,6,"Japan"));
+        result.add(new Medals(2012,2,14,"Japan"));
+        result.add(new Medals(1984,3,14,"Japan"));
+        result.add(new Medals(1988,3,7,"Japan"));
+        result.add(new Medals(1992,3,11,"Japan"));
+        result.add(new Medals(1996,3,5,"Japan"));
+        result.add(new Medals(2000,3,5,"Japan"));
+        result.add(new Medals(2004,3,12,"Japan"));
+        result.add(new Medals(2008,3,10,"Japan"));
+        result.add(new Medals(2012,3,17,"Japan"));
+           
+        return result;
+    }
+    
     public static List<StockDataPoint> BoingStockDataFirstPart() {
         List<StockDataPoint> result = new ArrayList<StockDataPoint>();
         result.add(new StockDataPoint("2000/01/03", 41.62, 41.69, 39.81, 40.12, 2632000));
