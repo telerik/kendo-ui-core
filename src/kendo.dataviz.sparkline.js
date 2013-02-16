@@ -26,6 +26,14 @@ kendo_module({
         init: function(element, options) {
             var chart = this;
 
+            element = $(element);
+            element.addClass(CSS_PREFIX + "sparkline");
+
+            chart._elementState = {
+                width: element.innerWidth(),
+                style: element[0].style.cssText
+            };
+
             options = options || {};
 
             if (isArray(options) || options instanceof ObservableArray) {
@@ -37,12 +45,10 @@ kendo_module({
                 },options, {
                     seriesDefaults: {
                         type: options.type
-                    }
+                }
             });
 
             Chart.fn.init.call(chart, element, options);
-
-            chart.element.addClass(CSS_PREFIX + "sparkline");
         },
 
         options: {
@@ -111,10 +117,20 @@ kendo_module({
             pointWidth: 5
         },
 
+        destroy: function() {
+            var chart = this,
+                element = chart.element;
+
+            element[0].style.cssText = chart._elementState.style;
+
+            Chart.fn.destroy.call(this);
+        },
+
         _modelOptions: function() {
             var chart = this,
                 chartOptions = chart.options,
                 options,
+                width = chart._elementState.width,
                 element = chart.element;
 
             if (element[0].innerHTML === "") {
@@ -122,7 +138,7 @@ kendo_module({
             }
 
             options = deepExtend({
-                width: chart._width(),
+                width: width ? width : chart._autoWidth(),
                 height: element.innerHeight(),
                 transitions: chartOptions.transitions
             }, chartOptions.chartArea, {
@@ -138,7 +154,7 @@ kendo_module({
             return options;
         },
 
-        _width: function() {
+        _autoWidth: function() {
             var chart = this,
                 options = chart.options,
                 series = options.series,
