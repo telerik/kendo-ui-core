@@ -11,13 +11,13 @@
         <kendo:grid-columns>
             <kendo:grid-column title="Order ID" field="orderId" width="100px" filterable="false" />
             <kendo:grid-column title="Freight" field="freight" width="100px" />
-            <kendo:grid-column title="Order Date" field="orderDate" format="{0:dd/MM/yyyy}" width="140px"/>
+            <kendo:grid-column title="Order Date" field="orderDate" format="{0:MM/dd/yyyy}" width="140px"/>
             <kendo:grid-column title="Ship Name" field="shipName" />
             <kendo:grid-column title="Ship City" field="shipCity" width="150px" />
         </kendo:grid-columns>
         <kendo:dataSource pageSize="20" serverPaging="true" serverSorting="true" serverFiltering="true" serverGrouping="true">
             <kendo:dataSource-transport>            	
-                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST"  contentType="application/json"/>  
+                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST" contentType="application/json"/>  
                 <kendo:dataSource-transport-parameterMap>
                 	function(options){return JSON.stringify(options);}
                 </kendo:dataSource-transport-parameterMap>              

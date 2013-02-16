@@ -22,6 +22,7 @@ public class Order {
     private String shipCity;
     private double freight;
     private Date orderDate;
+    private Date shippedDate;
     private String shipAddress;
     private String shipCountry;
     
@@ -62,6 +63,16 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+    
+    @Column(name="ShippedDate")
+    @JsonSerialize(using=CustomUtilDateSerializer.class)
+    public Date getShippedDate() {
+        return shippedDate;
+    }
+
+    public void setShippedDate(Date shippedDate) {
+        this.shippedDate = shippedDate;
     }
     
     @Column(name="EmployeeID")

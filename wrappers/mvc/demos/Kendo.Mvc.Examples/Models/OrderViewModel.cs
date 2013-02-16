@@ -38,6 +38,12 @@
             set;
         }
 
+        public DateTime? ShippedDate
+        {
+            get;
+            set;
+        }
+
         public string ShipCountry
         {
             get;

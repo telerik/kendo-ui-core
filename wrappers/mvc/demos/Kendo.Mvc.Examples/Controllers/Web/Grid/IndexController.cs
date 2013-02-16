@@ -45,11 +45,12 @@ namespace Kendo.Mvc.Examples.Controllers
                 ContactName = order.Customer.ContactName,
                 Freight = order.Freight,
                 OrderDate = order.OrderDate,
+                ShippedDate = order.ShippedDate,
                 OrderID = order.OrderID,
                 ShipAddress = order.ShipAddress,
                 ShipCountry = order.ShipCountry,
                 ShipName = order.ShipName,
-                ShipCity = order.ShipCity,
+                ShipCity = order.ShipCity,               
                 EmployeeID = order.EmployeeID,
                 CustomerID = order.CustomerID
             });

@@ -1,4 +1,3 @@
-        <script src="../../content/shared/js/people.js"></script>
 
         <div id="example" class="k-content">
             <div id="grid"></div>
@@ -7,16 +6,19 @@
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            data: createRandomData(50),
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                            },
                             schema: {
                                 model: {
                                     fields: {
-                                        FirstName: { type: "string" },
-                                        LastName: { type: "string" },
-                                        City: { type: "string" },
-                                        Title: { type: "string" },
-                                        BirthDate: { type: "date" },
-                                        Age: { type: "number" }
+                                        OrderID: { type: "number" },
+                                        ShipCountry: { type: "string" },
+                                        ShipCity: { type: "string" },
+                                        ShipName: { type: "string" },
+                                        OrderDate: { type: "date" },
+                                        ShippedDate: { type: "date" }
                                     }
                                 }
                             },
@@ -28,31 +30,35 @@
                         pageable: true,
                         columns: [
                             {
-                                field: "FirstName",
-                                title: "First Name",
+                                field: "OrderDate",
+                                title: "Order Date",
+                                width: 110,
+                                format: "{0:MM/dd/yyyy}"
+                            },
+                            {
+                                field: "ShipCountry",
+                                title: "Ship Country",
                                 width: 110
                             },
                             {
-                                field: "LastName",
-                                title: "Last Name",
+                                field: "ShipCity",
+                                title: "Ship City",
                                 width: 110
                             },
                             {
-                                field: "City",
-                                width: 110
-                            },
-                            {
-                                field: "Title",
+                                field: "ShipName",
+                                title: "Ship Name",
                                 width: 200
                             },
                             {
-                                field: "BirthDate",
-                                title: "Birth Date",
-                                template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #'
+                                field: "ShippedDate",
+                                title: "Shipped Date",
+                                format: "{0:MM/dd/yyyy}"
                             },
                             {
-                                field: "Age",
-                                width: 50
+                                field: "OrderID",
+                                title: "ID",
+                                width: 60
                             }
                         ]
                     });
