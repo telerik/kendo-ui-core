@@ -3,12 +3,12 @@
 
 <demo:header />
 	<div class="k-rtl">
-	    <kendo:grid name="grid" pageable="true" sortable="true" height="300">
+	    <kendo:grid name="grid" pageable="true" sortable="true" height="430">
 	        <kendo:grid-columns>
 	            <kendo:grid-column title="Product Name" field="productName" />
-	            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" />
-	            <kendo:grid-column title="Units In Stock" field="unitsInStock" />
-	            <kendo:grid-column title="Discontinued" field="discontinued" />
+	            <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" width="130px" />
+	            <kendo:grid-column title="Units In Stock" field="unitsInStock" width="130px" />
+	            <kendo:grid-column title="Discontinued" field="discontinued" width="130px" />
 	        </kendo:grid-columns>
 	        <kendo:dataSource data="${products}" pageSize="15">        
 	            <kendo:dataSource-schema>
