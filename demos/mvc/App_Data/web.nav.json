@@ -784,8 +784,7 @@
                     "text": "ModelBinding",
                     "url": "menu/modelbinding.html"
                 },
-                {
-                    "packages": [ "!mvc" ],
+                {                    
                     "text": "Animation effects",
                     "url": "menu/animation.html",
                     "title": "Animation effects example in KendoMenu widget",

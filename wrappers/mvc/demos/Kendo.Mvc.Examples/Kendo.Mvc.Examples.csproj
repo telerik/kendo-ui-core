@@ -236,6 +236,7 @@
     <Compile Include="Controllers\Web\ListView\SelectionController.cs" />
     <Compile Include="Controllers\Web\ListView\EditingController.cs" />
     <Compile Include="Controllers\Web\ListView\IndexController.cs" />
+    <Compile Include="Controllers\Web\Menu\AnimationController.cs" />
     <Compile Include="Controllers\Web\Menu\ApiController.cs" />
     <Compile Include="Controllers\Web\Menu\NavigationController.cs" />
     <Compile Include="Controllers\Web\Menu\RtlController.cs" />
@@ -503,6 +504,7 @@
     <Content Include="Areas\aspx\Views\web\listview\EditorTemplates\ProductViewModel.ascx" />
     <Content Include="Areas\aspx\Views\web\listview\selection.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\menu\animation.aspx" />
     <Content Include="Areas\aspx\Views\web\menu\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\rtl.aspx" />
@@ -595,6 +597,7 @@
     <Content Include="Areas\razor\Views\web\multiselect\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\multiselect\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\multiselect\template.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\animation.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>
