@@ -63,6 +63,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void NegativeColor_should_set_negative_color()
+        {
+            builder.NegativeColor("Blue");
+            series.NegativeColor.ShouldEqual("Blue");
+        }
+
+        [Fact]
+        public void NegativeColor_should_return_builder()
+        {
+            builder.NegativeColor("Blue").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Tooltip_should_set_visibility()
         {
             builder.Tooltip(true);

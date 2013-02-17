@@ -232,6 +232,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_negative_color()
+        {
+            series.NegativeColor = "Blue";
+            GetJson(series)["negativeColor"].ShouldEqual("Blue");
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_negative_color()
+        {
+            GetJson(series).ContainsKey("negativeColor").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Bar_serializes_overlay()
         {
             series.Overlay = ChartBarSeriesOverlay.None;
