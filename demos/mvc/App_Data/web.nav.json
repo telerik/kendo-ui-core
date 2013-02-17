@@ -1236,8 +1236,7 @@
                     "title": "Example of binding Kendo UI TreeView to OData service",
                     "meta": "This sample shows how Kendo UI TreeView widget can be bound to oData service."
                 },
-                {
-                    "packages": [ "!mvc" ],
+                {                    
                     "text": "Templates",
                     "url": "treeview/templates.html",
                     "title": "Example of templates for Kendo UI TreeView",

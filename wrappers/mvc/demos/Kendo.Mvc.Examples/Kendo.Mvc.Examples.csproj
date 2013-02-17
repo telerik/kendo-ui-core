@@ -314,6 +314,7 @@
     <Compile Include="Controllers\Web\TreeView\ImagesController.cs" />
     <Compile Include="Controllers\Web\TreeView\DragDropController.cs" />
     <Compile Include="Controllers\Web\TreeView\IndexController.cs" />
+    <Compile Include="Controllers\Web\TreeView\TemplatesController.cs" />
     <Compile Include="Controllers\Web\Upload\AsyncController.cs" />
     <Compile Include="Controllers\Web\Upload\ApiController.cs" />
     <Compile Include="Controllers\Web\Upload\RtlController.cs" />
@@ -339,6 +340,7 @@
     <Compile Include="Models\CategoryItem.cs" />
     <Compile Include="Models\ClientCategoryViewModel.cs" />
     <Compile Include="Models\ClientProductViewModel.cs" />
+    <Compile Include="Models\ClientTreeViewItemModel.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />
@@ -382,6 +384,7 @@
     <Compile Include="Models\NavigationWidget.cs" />
     <Compile Include="Models\SessionProductRepository.cs" />
     <Compile Include="Models\SubCategoryItem.cs" />
+    <Compile Include="Models\TreeViewRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -537,6 +540,7 @@
     <Content Include="Areas\aspx\Views\web\treeview\checkboxes.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\local_data.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\templates.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
@@ -614,6 +618,7 @@
     <Content Include="Areas\razor\Views\web\menu\animation.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\animation.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\templates.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>
