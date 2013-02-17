@@ -1329,8 +1329,7 @@
                     "title": "AJAX loaded content with Kendo UI Window widget",
                     "meta": "This example illustrates how content in Kendo UI window widget can be loaded, using AJAX."
                 },
-                {
-                    "packages": [ "!mvc" ],
+                {                    
                     "text": "Animation effects",
                     "url": "window/animation.html",
                     "title": "Animation effects demo for Kendo UI window widget",

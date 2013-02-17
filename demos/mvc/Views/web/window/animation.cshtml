@@ -20,7 +20,7 @@
 
             <div id="window">
                 <div style="text-align: center;">
-                    <img src="../../content/web/window/egg-chair.png" />
+                    <img src="../../content/web/window/egg-chair.png" alt="ARNE JACOBSEN EGG CHAIR" />
                     <p>ARNE JACOBSEN EGG CHAIR<br /> Image by: <a href="http://www.conranshop.co.uk/" title="http://www.conranshop.co.uk/">http://www.conranshop.co.uk/</a></p>
                 </div>
             </div>
@@ -32,16 +32,16 @@
                     $("#undo").fadeIn(300);
                 }
 
-                $(document).ready(function() {
+                $(document).ready(function () {
                     var original = $("#window").clone(true);
 
-                    $(".configuration input").change( function() {
+                    $(".configuration input").change(function () {
                         var clone = original.clone(true);
 
                         $("#undo").hide();
                         $("#window").data("kendoWindow").destroy();
 
-                        setTimeout( function () {
+                        setTimeout(function () {
                             $("#example").append(clone);
                             initWindow();
                         }, 200);
@@ -52,7 +52,7 @@
                                 ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
                     };
 
-                    function initWindow () {
+                    function initWindow() {
                         var windowOptions = {
                             width: "500px",
                             title: "EGG CHAIR",
@@ -61,14 +61,14 @@
                         };
 
                         if (!$("#default")[0].checked)
-                            windowOptions.animation = { open: { effects: getEffects() }, close: { effects: getEffects(), reverse: true } };
+                            windowOptions.animation = { open: { effects: getEffects() }, close: { effects: getEffects(), reverse: true} };
 
                         $("#window").kendoWindow(windowOptions);
 
                         $("#undo")
-                            .bind("click", function() {
-                                window.open();
-                                undo.fadeOut(300);
+                            .bind("click", function () {
+                                $("#window").data("kendoWindow").open();
+                                $("#undo").fadeOut(300);
                             });
 
                         $("#window").data("kendoWindow").open();
