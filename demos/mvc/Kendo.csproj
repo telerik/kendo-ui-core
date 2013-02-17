@@ -672,6 +672,9 @@
     <Content Include="Views\web\splitter\navigation.cshtml" />
     <Content Include="Views\web\treeview\navigation.cshtml" />
     <Content Include="Views\web\treeview\animation.cshtml" />
+    <Content Include="Views\web\menu\orientation.cshtml" />
+    <Content Include="Views\web\menu\direction.cshtml" />
+    <Content Include="Views\web\treeview\checkboxes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

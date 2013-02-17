@@ -1,9 +1,11 @@
-﻿@model string[]
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<string[]>" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
            
-@using (Html.BeginForm("Checkboxes", "TreeView", FormMethod.Post, new { @class = "container" }))
-{   
+<% using (Html.BeginForm("Checkboxes", "TreeView", FormMethod.Post, new { @class = "container" }))
+   {%>
     <div class="treeview-back">
-        @(Html.Kendo().TreeView()
+        <%:Html.Kendo().TreeView()
             .Name("treeview")
             .Checkboxes(checkboxes =>
                 {
@@ -50,25 +52,24 @@
             {
                 item.Checked = Model.Contains(item.Id);
             })
-        )
+        %>
     </div>    
     <button id="find" class="k-button">Find checked nodes</button>
-}
+  <% }
+%>
 
 <div id="result">
-@if (Model.Length > 0)
-{
-    <text>Checked nodes: @(String.Join(", ", Model)) </text>
-}
-else
-{
-    <text>No nodes checked.</text>
-}
+<% if (Model.Length > 0) { %>
+    Checked nodes: <%: String.Join(", ", Model)%>
+<% } 
+   else { %>
+   No nodes checked.
+<% } %>
 </div>
 
 <style scoped>
     #treeview .k-sprite {
-        background-image: url("@Url.Content("~/Content/web/treeview/coloricons-sprite.png")");
+        background-image: url("<%=Url.Content("~/Content/web/treeview/coloricons-sprite.png")%>");
     }
 
     .rootfolder { background-position: 0 0; }
@@ -109,3 +110,5 @@ else
         border-radius: 8px;
     }
 </style>
+
+</asp:Content>

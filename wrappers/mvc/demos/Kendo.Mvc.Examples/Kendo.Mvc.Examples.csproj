@@ -531,6 +531,7 @@
     <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\animation.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\checkboxes.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />

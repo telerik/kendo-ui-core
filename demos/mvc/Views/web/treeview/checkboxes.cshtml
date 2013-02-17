@@ -1,6 +1,13 @@
 <div id="example" class="k-content">
-        <div id="treeview" class="demo-section"></div>
-
+    
+    <div class="container">        
+        <div class="treeview-back ">
+            <div id="treeview"></div>
+        </div>
+        <button id="find" class="k-button">Find checked nodes</button>
+    </div>
+    <div id="result">No nodes checked.
+    </div>
         <script>
             $("#treeview").kendoTreeView({
                 checkboxes: {
@@ -32,14 +39,28 @@
                     ]
                 }]
             });
+            $("#find").on("click", function () {
+                var checkedNodes = [],
+                    treeView = $("#treeview").data("kendoTreeView");
+    
+                findCheckedNodes(treeView.dataSource.view(), checkedNodes);
+                $("#result").html(checkedNodes.length > 0 ?  "Checked nodes: " + checkedNodes.join(",") : "No nodes checked.");
+            });
+
+            function findCheckedNodes(nodes, checkedNodes) {                
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i].checked) {
+                        checkedNodes.push(nodes[i].id);
+                    }
+
+                    if (nodes[i].hasChildren) {
+                        findCheckedNodes(nodes[i].children.view(), checkedNodes);
+                    }
+                }
+            }
         </script>
 
         <style scoped>
-            #treeview {
-                width: 300px;
-                margin: 0 auto;
-            }
-
             #treeview .k-sprite {
                 background-image: url("../../content/web/treeview/coloricons-sprite.png");
             }
@@ -49,5 +70,37 @@
             .pdf        { background-position: 0 -32px; }
             .html       { background-position: 0 -48px; }
             .image      { background-position: 0 -64px; }
+
+            .treeview-back 
+            {
+                float: left;
+                margin: 0 0 2em;
+                padding: 20px;
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+            }
+
+            .container
+            {
+                margin: 0 30px;
+                float: left;
+                width: 220px;
+            }
+
+            #result 
+            {
+                float: left;
+                padding: 10px;
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+            }
         </style>
     </div>

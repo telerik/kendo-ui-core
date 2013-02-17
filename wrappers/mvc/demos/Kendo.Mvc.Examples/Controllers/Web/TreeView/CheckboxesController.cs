@@ -7,12 +7,13 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Checkboxes()
         {
-            return View();
+            return View(new string[0]);
         }
 
         [HttpPost]
-        public ActionResult Checkboxes(int[] checkedNodes)
+        public ActionResult Checkboxes(string[] checkedNodes)
         {
+            checkedNodes = checkedNodes ?? new string[0];
             return View(checkedNodes);
         }
     }
