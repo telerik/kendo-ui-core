@@ -9,6 +9,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.Electric
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
         )
+        .SeriesColors(new string[] { "#42a7ff", "#666666", "#999999", "#cccccc" })
         .Series(series =>
         {
             series.Donut(

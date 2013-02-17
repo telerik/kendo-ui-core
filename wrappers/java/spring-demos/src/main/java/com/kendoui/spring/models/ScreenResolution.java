@@ -42,7 +42,7 @@ public class ScreenResolution {
     public boolean isVisibleInLegend() {
         return visibleInLegend;
     }
-
+    
     public void setVisibleInLegend(boolean visibleInLegend) {
         this.visibleInLegend = visibleInLegend;
     }

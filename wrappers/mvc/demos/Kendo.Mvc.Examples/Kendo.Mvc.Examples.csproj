@@ -343,6 +343,7 @@
     <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
     <Compile Include="Models\CrimeData.cs" />
     <Compile Include="Models\DataFilter.cs" />
+    <Compile Include="Models\DonutChartsRemoteDataViewModel.cs" />
     <Compile Include="Models\JobGrowth.cs" />
     <Compile Include="Models\Medals.cs" />
     <Compile Include="Models\ScreenResolution.cs" />

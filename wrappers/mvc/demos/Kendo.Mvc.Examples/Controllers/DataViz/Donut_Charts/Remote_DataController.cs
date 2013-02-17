@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
+
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -12,9 +14,34 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        private Dictionary<int, string> resolutionColors = new Dictionary<int, string>() { 
+            {1,"#ccc"},
+            {2,"#c00"}
+        };
+
         public ActionResult _WorldScreenResolution()
         {
-            return Json(ChartDataRepository.WorldScreenResolution());
+
+            var screenResolutions = ChartDataRepository.WorldScreenResolution();
+            var viewModel = new List<DonutChartsRemoteDataViewModel>();
+
+            for (var i = 0; i < screenResolutions.Count; i++)
+            {
+                var data = screenResolutions[i];
+                var model = new DonutChartsRemoteDataViewModel(data);
+                if (model.Year == "2005" && model.Resolution == "1024x768")
+                {
+                    model.Color = resolutionColors[2];
+                }
+                else if (model.Resolution == "Other")
+                {
+                    model.Color = resolutionColors[1];
+                }
+
+                viewModel.Add(model);
+            }
+
+            return Json(viewModel);
         }
     }
 }

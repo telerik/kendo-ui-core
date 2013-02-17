@@ -16,11 +16,11 @@ public class PieLabelsController {
     @RequestMapping(value = {"/donut-labels"}, method = RequestMethod.GET)
     public String index(Model model) {
         List<PiePoint> pieChartData = new ArrayList<PiePoint>();
-        pieChartData.add(new PiePoint("2005", 67.96));
-        pieChartData.add(new PiePoint("2006", 68.93));
-        pieChartData.add(new PiePoint("2007", 75));
-        pieChartData.add(new PiePoint("2008", 74));
-        pieChartData.add(new PiePoint("2009", 78));
+        pieChartData.add(new PiePoint("Football",35));
+        pieChartData.add(new PiePoint("Basketball",25));
+        pieChartData.add(new PiePoint("Volleyball",20));
+        pieChartData.add(new PiePoint("Rugby",10));
+        pieChartData.add(new PiePoint("Tennis",10));;
         model.addAttribute("donutData", pieChartData);
         
         return "/dataviz/donut-charts/donut-labels";

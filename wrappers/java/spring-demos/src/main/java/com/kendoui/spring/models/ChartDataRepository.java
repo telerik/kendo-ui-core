@@ -117,21 +117,26 @@ public class ChartDataRepository {
     
     public static List<ScreenResolution> WorldScreenResolution() {
         List<ScreenResolution> result =  new ArrayList<ScreenResolution>();
-        result.add(new ScreenResolution("2006", "Higher", 17, true, 1));
-        result.add(new ScreenResolution("2006", "1024x768", 57, true, 2));
-        result.add(new ScreenResolution("2006", "800x600", 20, true, 3));
-        result.add(new ScreenResolution("2006", "640x480", 0, true, 4));
-        result.add(new ScreenResolution("2006", "Unknown", 6, true, 5));
-        result.add(new ScreenResolution("2008", "Higher", 38, false, 1));
-        result.add(new ScreenResolution("2008", "1024x768", 48, false, 2));
-        result.add(new ScreenResolution("2008", "800x600", 8, false, 3));
-        result.add(new ScreenResolution("2008", "640x480", 0, false, 4));
-        result.add(new ScreenResolution("2008", "Unknown", 6, false, 5));
-        result.add(new ScreenResolution("2010", "Higher", 76, false, 1));
-        result.add(new ScreenResolution("2010", "1024x768", 20, false, 2));
-        result.add(new ScreenResolution("2010", "800x600", 3, false, 3));
-        result.add(new ScreenResolution("2010", "640x480", 0, false, 4));
-        result.add(new ScreenResolution("2010", "Unknown", 3, false, 5));
+        result.add(new ScreenResolution("2000","1024x768",25,false,1));
+        result.add(new ScreenResolution("2000","Other",75,false,2));
+        result.add(new ScreenResolution("2001","1024x768",29,false,1));
+        result.add(new ScreenResolution("2001","Other",71,false,2));
+        result.add(new ScreenResolution("2002","1024x768",34,false,1));
+        result.add(new ScreenResolution("2002","Other",66,false,2));
+        result.add(new ScreenResolution("2003","1024x768",40,false,1));
+        result.add(new ScreenResolution("2003","Other",60,false,2));
+        result.add(new ScreenResolution("2004","1024x768",47,false,1));
+        result.add(new ScreenResolution("2004","Other",53,false,2));
+        result.add(new ScreenResolution("2005","1024x768",53,false,1));
+        result.add(new ScreenResolution("2005","Other",47,false,2));
+        result.add(new ScreenResolution("2006","1024x768",57,false,1));
+        result.add(new ScreenResolution("2006","Other",43,false,2));
+        result.add(new ScreenResolution("2007","1024x768",54,false,1));
+        result.add(new ScreenResolution("2007","Other",46,false,2));
+        result.add(new ScreenResolution("2008","1024x768",48,false,1));
+        result.add(new ScreenResolution("2008","Other",52,false,2));
+        result.add(new ScreenResolution("2009","1024x768",36,false,1));
+        result.add(new ScreenResolution("2009","Other",64,false,2));
         
         return result;
     }
