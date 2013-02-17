@@ -2196,6 +2196,10 @@ kendo_module({
             ChartElement.fn.init.call(bar, options);
 
             bar.value = value;
+            if (value < 0 && options.negativeColor) {
+                bar.options.color = options.negativeColor;
+            }
+
             bar.options.id = uniqueId();
             bar.enableDiscovery();
         },

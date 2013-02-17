@@ -1569,8 +1569,9 @@
                     setup: function() {
                         barChart = new dataviz.BarChart(plotArea, {
                             series: [{
-                                data: [0, 1],
+                                data: [0, -1],
                                 color: "#f00",
+                                negativeColor: "#00f",
                                 opacity: 0.5,
                                 overlay: "none"
                             }]
@@ -1580,6 +1581,10 @@
 
                 test("applies series fill color to bars", function() {
                     equal(barChart.points[0].options.color, "#f00");
+                });
+
+                test("applies series negative fill color to negative bars", function() {
+                    equal(barChart.points[1].options.color, "#00f");
                 });
 
                 test("applies series opacity color to bars", function() {
