@@ -36,6 +36,8 @@
                 furniture.Add().Text("Curtains & Blinds");
                 furniture.Add().Text("Carpets");
             });
+
+        treeview.Add().Text("Storage");
     })
 %>
 
