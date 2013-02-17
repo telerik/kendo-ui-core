@@ -669,6 +669,9 @@
     <Content Include="Views\dataviz\financial\virtualization.cshtml" />
     <Content Include="Views\web\grid\column-resizing.cshtml" />
     <Content Include="Views\web\panelbar\rtl.cshtml" />
+    <Content Include="Views\web\splitter\navigation.cshtml" />
+    <Content Include="Views\web\treeview\navigation.cshtml" />
+    <Content Include="Views\web\treeview\animation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

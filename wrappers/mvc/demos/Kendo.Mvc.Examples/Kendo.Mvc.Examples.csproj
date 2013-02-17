@@ -303,6 +303,7 @@
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Web\Tooltip\TooltipController.cs" />
+    <Compile Include="Controllers\Web\TreeView\AnimationController.cs" />
     <Compile Include="Controllers\Web\TreeView\CheckboxesController.cs" />
     <Compile Include="Controllers\Web\TreeView\NavigationController.cs" />
     <Compile Include="Controllers\Web\TreeView\Custom_DataController.cs" />
@@ -529,6 +530,7 @@
     <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\animation.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
@@ -605,6 +607,7 @@
     <Content Include="Areas\razor\Views\web\multiselect\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\multiselect\template.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\animation.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\animation.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>

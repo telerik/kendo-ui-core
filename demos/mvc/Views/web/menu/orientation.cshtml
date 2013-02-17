@@ -1,0 +1,189 @@
+﻿
+        <div id="example" class="k-content">
+    
+            <div class="configuration k-widget k-header">
+                <span class="configHead">Orientation Settings</span>
+                <ul class="options">
+                    <li>      
+                        <label for="orientation">orientation</label> 
+                        <input id="orientation" name="orientation" />                                          
+                    </li>
+                </ul>
+                <br />
+                <a class="k-button" id="apply" href="#">Apply</a>
+            </div>
+            
+            <ul id="menu">
+                <li>
+                    Mens
+                    <ul>
+                        <li>Footwear
+                            <ul>
+                                <li>Leisure Trainers</li>
+                                <li>Running Shoes</li>
+                                <li>Outdoor Footwear</li>
+                                <li>Sandals/Flip Flops</li>
+                                <li>Footwear Accessories</li>
+
+                            </ul>
+                        </li>
+                        <li>Leisure Clothing
+                            <ul>
+                                <li>T-Shirts</li>
+                                <li>Hoodies &amp; Sweatshirts</li>
+                                <li>Jackets</li>
+                                <li>Pants</li>
+                                <li>Shorts</li>
+                            </ul>
+                        </li>
+                        <li>Sports Clothing
+                            <ul>
+                                <li>Football</li>
+                                <li>Basketball</li>
+                                <li>Golf</li>
+                                <li>Tennis</li>
+                                <li>Swimwear</li>
+                            </ul>
+                        </li>
+                        <li>Accessories
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Womens
+                    <ul>
+                        <li>Footwear
+                            <ul>
+                                <li>Leisure Trainers</li>
+                                <li>Running Shoes</li>
+                                <li>Outdoor Footwear</li>
+                                <li>Sandals/Flip Flops</li>
+                                <li>Footwear Accessories</li>
+
+                            </ul>
+                        </li>
+                        <li>Leisure Clothing
+                            <ul>
+                                <li>T-Shirts</li>
+                                <li>Jackets</li>
+                            </ul>
+                        </li>
+                        <li>Sports Clothing
+                            <ul>
+                                <li>Basketball</li>
+                                <li>Golf</li>
+                                <li>Tennis</li>
+                                <li>Swimwear</li>
+                            </ul>
+                        </li>
+                        <li>Accessories
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Boys
+                    <ul>
+                        <li>Footwear
+                            <ul>
+                                <li>Leisure Trainers</li>
+                                <li>Running Shoes</li>
+                                <li>Outdoor Footwear</li>
+                                <li>Sandals/Flip Flops</li>
+                                <li>Footwear Accessories</li>
+                            </ul>
+                        </li>
+                        <li>Leisure Clothing
+                            <ul>
+                                <li>T-Shirts</li>
+                                <li>Hoodies &amp; Sweatshirts</li>
+                                <li>Jackets</li>
+                                <li>Pants</li>
+                                <li>Shorts</li>
+                            </ul>
+                        </li>
+                        <li>Sports Clothing
+                            <ul>
+                                <li>Football</li>
+                                <li>Basketball</li>
+                                <li>Rugby</li>
+                                <li>Tennis</li>
+                                <li>Swimwear</li>
+                            </ul>
+                        </li>
+                        <li>Accessories
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Girls
+                    <ul>
+                        <li>Footwear
+                            <ul>
+                                <li>Leisure Trainers</li>
+                                <li>Running Shoes</li>
+                                <li>Fitness Trainers</li>
+                                <li>Sandals/Flip Flops</li>
+                                <li>Footwear Accessories</li>
+                            </ul>
+                        </li>
+                        <li>Leisure Clothing
+                            <ul>
+                                <li>T-Shirts</li>
+                                <li>Hoodies &amp; Sweatshirts</li>
+                                <li>Jackets</li>
+                                <li>Pants</li>
+                                <li>Shorts</li>
+                            </ul>
+                        </li>
+                        <li>Sports Clothing
+                            <ul>
+                                <li>Basketball</li>
+                                <li>Tennis</li>
+                                <li>Swimwear</li>
+                            </ul>
+                        </li>
+                        <li>Accessories
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <script>
+                $(document).ready(function () {
+                    $("#orientation").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        value: "horizontal",
+                        dataSource: [{ text: "Horizontal", value: "horizontal" },
+                            { text: "Vertical", value: "vertical"}]
+                    });
+                    var original = $("#menu").clone(true);
+
+                    original.find(".k-state-active").removeClass("k-state-active");
+
+                    $("#apply").click(function (e) {
+                        e.preventDefault();
+                        var menu = $("#menu"),
+                                clone = original.clone(true);
+
+                        menu.data("kendoMenu").close($("#menu .k-link"));
+
+                        menu.replaceWith(clone);
+
+                        initMenu();
+                    });
+
+                    var initMenu = function () {
+                        var orientation = $("#orientation").data("kendoDropDownList").value();
+                        $("#menu").kendoMenu({
+                            orientation: orientation
+                        })
+                        .css({
+                            width: "300px",
+                            marginRight: "220px"
+                        });
+                    };
+
+                    initMenu();
+                });
+            </script>
+        </div>

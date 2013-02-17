@@ -14,11 +14,11 @@
 
                 <%= Html.Kendo().DropDownList()
                       .Name("orientation")
-                      .BindTo(new string[] 
-                      {
-                          "Horizontal",
-                          "Vertical"
-                      })
+                      .Items(items =>
+                            {
+                                items.Add().Text("Horizontal").Value("horizontal");
+                                items.Add().Text("Vertical").Value("vertical");
+                            })
                       .SelectedIndex(Model == MenuOrientation.Horizontal ? 0 : 1)
                 %>
             </li>
@@ -29,7 +29,7 @@
 <% Html.EndForm(); %>
 
 <%= Html.Kendo().Menu()
-      .Name("Menu")
+      .Name("menu")
       .HtmlAttributes(new { style = "margin-right: 220px; width: 300px;" })
       .Items(items =>
       {

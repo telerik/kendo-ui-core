@@ -770,9 +770,10 @@
                     "meta": "This demo shows how the pop-up direction of the items in Kendo UI dropdown jQuery menu can be changed, depending on your web app development needs."
                 },
                 {
-                    "packages": [ "mvc" ],
                     "text": "Orientation",
-                    "url": "menu/orientation.html"
+					"title": "Kendo UI Menu direction demo",
+                    "url": "menu/orientation.html",
+					"meta": "This demo shows how the orientation of the Kendo UI Menu can be changed through the configuration."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -1198,8 +1199,7 @@
                     "title": "jQuery drag & drop Treeview Demo in Kendo UI Web framework",
                     "meta": "This example shows how items in Kendo TreeView can be dragged and dropped to a specific place. Use the demo source code to try this functionality of the HTML5 component."
                 },
-                {
-                    "packages": [ "!mvc" ],
+                {                    
                     "text": "Animation effects",
                     "url": "treeview/animation.html",
                     "title": "Animation effects sample for Kendo UI jQuery Tree component",

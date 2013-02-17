@@ -11,7 +11,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             MenuOrientation value = MenuOrientation.Horizontal;
 
-            if (orientation == "Vertical")
+            if (orientation == "vertical")
             {
                 value = MenuOrientation.Vertical;
             }
