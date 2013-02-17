@@ -96,17 +96,17 @@
 
                 test("sets default container width for 2 points", function() {
                     createSparkline([1, 2]);
-                    equals(sparkline.element[0].style.width, "10px");
+                    equals(sparkline.element[0].style.width, "14px");
                 });
 
                 test("sets default container width for 4 points", function() {
                     createSparkline([1, 2, 3, 4]);
-                    equals(sparkline.element[0].style.width, "20px");
+                    equals(sparkline.element[0].style.width, "24px");
                 });
 
                 test("sets container width based on custom pointWidth", function() {
                     createSparkline({ dataSource: [1, 2], pointWidth: 10 });
-                    equals(sparkline.element[0].style.width, "20px");
+                    equals(sparkline.element[0].style.width, "24px");
                 });
 
                 test("sets default container width when binding to inline data", function() {
@@ -115,10 +115,17 @@
                             data: [1, 2]
                         }]
                     });
-                    equals(sparkline.element[0].style.width, "10px");
+                    equals(sparkline.element[0].style.width, "14px");
                 });
 
                 test("custom width is preserved", function() {
+                    $("#sparkline").css("width", "30");
+                    createSparkline();
+                    equals(sparkline.element.innerWidth(), 30);
+                });
+
+                test("custom width is set when overriding existing widget", function() {
+                    createSparkline([1, 2]);
                     $("#sparkline").css("width", "30");
                     createSparkline();
                     equals(sparkline.element.innerWidth(), 30);

@@ -35,7 +35,6 @@ kendo_module({
             };
 
             options = options || {};
-
             if (isArray(options) || options instanceof ObservableArray) {
                 options = { dataSource: options };
             }
@@ -133,9 +132,7 @@ kendo_module({
                 width = chart._elementState.width,
                 element = chart.element;
 
-            if (element[0].innerHTML === "") {
-                element[0].innerHTML = "&nbsp;";
-            }
+            element[0].innerHTML = "&nbsp;";
 
             options = deepExtend({
                 width: width ? width : chart._autoWidth(),
@@ -157,9 +154,11 @@ kendo_module({
         _autoWidth: function() {
             var chart = this,
                 options = chart.options,
+                margin = dataviz.getSpacing(options.chartArea.margin),
                 series = options.series,
                 dsTotal = chart.dataSource.total(),
                 seriesTotal = 0,
+                width,
                 i,
                 currentSeries;
 
@@ -170,7 +169,12 @@ kendo_module({
                 }
             }
 
-            return math.max(dsTotal, seriesTotal) * options.pointWidth;
+            width = math.max(dsTotal, seriesTotal) * options.pointWidth;
+            if (width > 0) {
+                width += margin.left + margin.right;
+            }
+
+            return width;
         }
     });
 
