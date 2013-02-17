@@ -24,15 +24,15 @@ kendo_module({
     // Sparkline =============================================================
     var Sparkline = Chart.extend({
         init: function(element, options) {
-            var chart = this;
+            var chart = this,
+                stage = chart.stage = $("<span />");
 
-            element = $(element);
-            element.addClass(CSS_PREFIX + "sparkline");
+            element = $(element)
+                .empty()
+                .addClass(CSS_PREFIX + "sparkline")
+                .append(stage);
 
-            chart._elementState = {
-                width: element.innerWidth(),
-                style: element[0].style.cssText
-            };
+            chart._initialWidth = element.innerWidth();
 
             options = options || {};
             if (isArray(options) || options instanceof ObservableArray) {
@@ -116,39 +116,35 @@ kendo_module({
             pointWidth: 5
         },
 
-        destroy: function() {
-            var chart = this,
-                element = chart.element;
-
-            element[0].style.cssText = chart._elementState.style;
-
-            Chart.fn.destroy.call(this);
-        },
-
         _modelOptions: function() {
             var chart = this,
                 chartOptions = chart.options,
                 options,
-                width = chart._elementState.width,
-                element = chart.element;
+                width = chart._initialWidth,
+                stage = chart.stage;
 
-            element[0].innerHTML = "&nbsp;";
+            chart.stage[0].innerHTML = "&nbsp;";
 
             options = deepExtend({
                 width: width ? width : chart._autoWidth(),
-                height: element.innerHeight(),
+                height: stage.innerHeight(),
                 transitions: chartOptions.transitions
             }, chartOptions.chartArea, {
                 inline: true,
                 align: false
             });
 
-            element.css({
+            stage.css({
                 width: options.width,
                 height: options.height
             });
 
             return options;
+        },
+
+        _renderView: function() {
+            var chart = this;
+            return chart._view.renderTo(chart.stage[0]);
         },
 
         _autoWidth: function() {

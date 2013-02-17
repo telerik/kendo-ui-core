@@ -147,7 +147,8 @@ div.k-gauge
 
 /* Sparklines */
 
-.k-sparkline {
+.k-sparkline,
+.k-sparkline span{
     display: inline-block;
     *display: inline;
     zoom: 1;

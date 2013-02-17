@@ -81,7 +81,7 @@
                 });
 
                 test("auto height equals line height of empty container", function() {
-                    equals(sparkline._model.options.height, 19, TOLERANCE)
+                    equals(sparkline.stage.height(), 19, TOLERANCE);
                 });
 
                 test("custom height is preserved", function() {
@@ -90,23 +90,25 @@
                     equals(sparkline.element.innerHeight(), 30);
                 });
 
-                test("sets container height", function() {
-                    equals(parseInt(sparkline.element[0].style.height, 10), 19, TOLERANCE);
-                });
-
                 test("sets default container width for 2 points", function() {
                     createSparkline([1, 2]);
-                    equals(sparkline.element[0].style.width, "14px");
+                    equals(sparkline.element.width(), 14);
                 });
 
                 test("sets default container width for 4 points", function() {
                     createSparkline([1, 2, 3, 4]);
-                    equals(sparkline.element[0].style.width, "24px");
+                    equals(sparkline.element.width(), 24);
+                });
+
+                test("sets default container width after replacing existing widget", function() {
+                    createSparkline([1, 2]);
+                    createSparkline([1, 2, 3, 4]);
+                    equals(sparkline.element.width(), 24);
                 });
 
                 test("sets container width based on custom pointWidth", function() {
                     createSparkline({ dataSource: [1, 2], pointWidth: 10 });
-                    equals(sparkline.element[0].style.width, "24px");
+                    equals(sparkline.element.width(), 24);
                 });
 
                 test("sets default container width when binding to inline data", function() {
@@ -115,27 +117,13 @@
                             data: [1, 2]
                         }]
                     });
-                    equals(sparkline.element[0].style.width, "14px");
+                    equals(sparkline.element.width(), 14);
                 });
 
                 test("custom width is preserved", function() {
                     $("#sparkline").css("width", "30");
                     createSparkline();
                     equals(sparkline.element.innerWidth(), 30);
-                });
-
-                test("custom width is set when overriding existing widget", function() {
-                    createSparkline([1, 2]);
-                    $("#sparkline").css("width", "30");
-                    createSparkline();
-                    equals(sparkline.element.innerWidth(), 30);
-                });
-
-                test("restores styles on destroy", function() {
-                    var style = $("#sparkline")[0].style.cssText;
-                    createSparkline([1, 2]);
-                    sparkline.destroy();
-                    equals($("#sparkline")[0].style.cssText, style);
                 });
 
             })();

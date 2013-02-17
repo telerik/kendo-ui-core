@@ -338,8 +338,8 @@ kendo_module({
 
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
+                chart._viewElement = chart._renderView(view);
 
-                chart._viewElement = view.renderTo(element[0]);
                 if (options.tooltip.shared) {
                     chart._tooltip = new MultiplePointTooltip(element, chart._plotArea, options.tooltip);
                     chart._highlight = new MultiplePointHighlight(view, chart._viewElement, chart._plotArea);
@@ -348,6 +348,11 @@ kendo_module({
                     chart._highlight = new Highlight(view, chart._viewElement);
                 }
             }
+        },
+
+        _renderView: function() {
+            var chart = this;
+            return chart._view.renderTo(chart.element[0]);
         },
 
         svg: function() {
