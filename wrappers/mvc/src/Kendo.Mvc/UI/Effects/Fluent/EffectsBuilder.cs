@@ -75,6 +75,13 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
+        public EffectsBuilder Reverse(bool value)
+        {
+            Effects.Reverse = value;
+
+            return this;
+        }
+
         public EffectsBuilder Duration(AnimationDuration value)
         {
             return Duration((int)value);

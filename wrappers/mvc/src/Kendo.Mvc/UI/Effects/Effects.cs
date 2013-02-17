@@ -32,6 +32,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool Reverse 
+        {
+            get; 
+            set; 
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (Container.Any())
@@ -40,7 +46,11 @@ namespace Kendo.Mvc.UI
 
                 options["effects"] = string.Join(" ", Container);
                 options["duration"] = Duration;
-
+                if (Reverse)
+                {
+                    options["reverse"] = Reverse;
+                }
+                
                 json[Name] = options;
             }
         }
