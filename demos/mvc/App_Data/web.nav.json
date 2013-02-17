@@ -1217,8 +1217,7 @@
                     "title": "Creating tree nodes with checkboxes | Kendo UI TreeView Demo",
                     "meta": "This sample illustrates how you can easily create tree nodes with checkboxes by simply setting the child item of the checkboxes to true."
                 },
-                {
-                    "packages": [ "!mvc" ],
+                {                    
                     "text": "Binding to local data",
                     "url": "treeview/local-data.html",
                     "title": "Binding to local data demo for Kendo UI TreeView control",
