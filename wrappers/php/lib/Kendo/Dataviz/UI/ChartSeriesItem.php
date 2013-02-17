@@ -281,6 +281,15 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
+    * Color to use for bars with negative values.** Applicable only to bar and column series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function negativeColor($value) {
+        return $this->setProperty('negativeColor', $value);
+    }
+
+    /**
     * The settings for negative values.** Applicable only to bubble series. **
     * @param \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem

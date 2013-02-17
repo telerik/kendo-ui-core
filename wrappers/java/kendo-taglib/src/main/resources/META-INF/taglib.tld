@@ -1697,6 +1697,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>Color to use for bars with negative values.** Applicable only to bar and column series. **</description>
+            <name>negativeColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12317,6 +12323,12 @@ The function return value is displayed instead of the individual points.</descri
         <attribute>
             <description>The series name visible in the legend.</description>
             <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Color to use for bars with negative values.** Applicable only to column series. **The plot stops before the missing point and continues after it.</description>
+            <name>negativeColor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
