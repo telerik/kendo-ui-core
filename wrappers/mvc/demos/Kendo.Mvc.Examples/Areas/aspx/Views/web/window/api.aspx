@@ -22,7 +22,7 @@
         .Height(315)
         .Title("Rams's Ten Principles of Good Design")
         .Actions(actions => actions.Refresh().Maximize().Close())
-        .LoadContentFrom("ajaxcontent", "window")
+        .LoadContentFrom("ajaxcontent1", "window")
 %>
 
 <script>

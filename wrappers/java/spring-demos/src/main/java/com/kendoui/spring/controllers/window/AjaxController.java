@@ -17,5 +17,10 @@ public class AjaxController {
     public String content() {
         return "web/window/ajax_content";
     }
+    
+    @RequestMapping(value = "/content1", method = RequestMethod.GET)
+    public String content1() {
+        return "web/window/ajax_content1";
+    }
 }
 

@@ -14,9 +14,11 @@
         .Name("window")
         .Width(630)
         .Height(315)
+        .Draggable()
+        .Resizable()
         .Title("Rams's Ten Principles of Good Design")
         .Actions(actions => actions.Refresh().Maximize().Close())
-        .LoadContentFrom("ajaxcontent", "window")
+        .LoadContentFrom("ajaxcontent1", "window")
 )
 
 <script>

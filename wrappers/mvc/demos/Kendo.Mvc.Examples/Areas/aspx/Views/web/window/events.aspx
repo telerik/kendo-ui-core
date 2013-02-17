@@ -10,7 +10,7 @@
         .Height(315)
         .Title("Rams's Ten Principles of Good Design")
         .Actions(actions => actions.Refresh().Close())
-        .LoadContentFrom("ajaxcontent", "window")
+        .LoadContentFrom("ajaxcontent1", "window")
         .Draggable()
         .Events(events => events
             .Open("onOpen")

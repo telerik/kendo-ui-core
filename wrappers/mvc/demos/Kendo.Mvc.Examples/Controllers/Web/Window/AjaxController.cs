@@ -13,5 +13,10 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View();
         }
+
+        public ActionResult AjaxContent1()
+        {
+            return PartialView();
+        }
     }
 }
