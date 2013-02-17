@@ -1,6 +1,9 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+    <link href="<%= Url.Content("~/Content/web/kendo.common.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/web/kendo.default.min.css") %>" rel="stylesheet" type="text/css" />
+    <script src="<%= Url.Content("~/Scripts/kendo.web.min.js") %>"></script>
     <style>
         #gauge-container {
             background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container-partial.png") %>) no-repeat 50% 50%;
@@ -14,9 +17,10 @@
             width: 350px;
             height: 300px;
             margin: 0 auto;
+            border-color: transparent;
         }
 
-        #gauge-container input {
+        #gauge-container .k-slider {
             margin-top: -11px;
             width: 140px;
         }
@@ -36,7 +40,14 @@
         )
     %>
 
-    <input id="gauge-value" value="65" onchange="javascript:change();">
+    <%= Html.Kendo().Slider()
+        .Name("gauge-value")
+        .Value(65)
+        .Min(0)
+        .Max(180)
+        .ShowButtons(false)
+        .Events(e => e.Change("change"))
+    %>
 </div>
 <script>
     function change(e) {

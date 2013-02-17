@@ -2,12 +2,17 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <demo:header />
+	<link href="<c:url value='/Content/web/kendo.common.min.css' />" rel="stylesheet" type="text/css" />
+    <link href="<c:url value='/Content/web/kendo.default.min.css' />" rel="stylesheet" type="text/css" />
+    <script src="<c:url value='/Scripts/kendo.web.min.js' />"></script>
+    
      <div id="gauge-container">
          <kendo:radialGauge name="gauge">
             <kendo:radialGauge-pointer value="65" />
             <kendo:radialGauge-scale minorUnit="5" startAngle="-30" endAngle="210" max="180" />
          </kendo:radialGauge>
-         <input id="gauge-value" value="65" onchange="javascript:change();">
+         <kendo:slider name="gauge-value" value="65" change="change" min="0" max="180" showButtons="false">
+         </kendo:slider>
      </div>
 	<script>
 	    function change(e) {
@@ -27,9 +32,10 @@
             width: 350px;
             height: 300px;
             margin: 0 auto;
+            border-color: transparent;
         }
 
-        #gauge-container input {
+        #gauge-container .k-slider {
             margin-top: -11px;
             width: 140px;
         }

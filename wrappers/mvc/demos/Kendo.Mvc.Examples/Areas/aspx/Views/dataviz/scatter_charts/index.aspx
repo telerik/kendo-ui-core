@@ -4,63 +4,51 @@
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart()
         .Name("chart")
-        .Title("Price-Performance Ratio")
+        .Title("Rainfall - Wind Speed")
         .Legend(legend => legend
-            .Visible(false)
+            .Position(ChartLegendPosition.Bottom)
         )
         .SeriesDefaults(seriesDefaults => seriesDefaults
             .Scatter().Labels(labels => labels
-                .Visible(true)
-                .Template("#= series.name #")
-                .Position(ChartPointLabelsPosition.Right)
+                .Visible(false)
             )
         )
-        .Series(series => {
-            series.Scatter(new int[][] { new [] { 120, 102 } })
-                .Name("Pentium D 915");
-            
-            series.Scatter(new int[][] { new [] { 160, 118 } })
-                .Name("Pentium D 950");
-            
-            series.Scatter(new int[][] { new [] { 1000, 137 } })
-                .Name("Pentium XE 965")
-                .Labels(labels => labels.Position(ChartPointLabelsPosition.Left));
-            
-            series.Scatter(new int[][] { new [] { 170, 125 } })
-                .Name("Athlon 64 X2 4200+");
-            
-            series.Scatter(new int[][] { new [] { 205, 138 } })
-                .Name("Athlon 64 X2 4600+");
-            
-            series.Scatter(new int[][] { new [] { 800, 147 } })
-                .Name("Athlon 64 FX-62");
-            
-            series.Scatter(new int[][] { new [] { 170, 130 } })
-                .Name("Core 2 Duo E6400");
-            
-            series.Scatter(new int[][] { new [] { 305, 163 } })
-                .Name("Core 2 Duo E6600");
-            
-            series.Scatter(new int[][] { new [] { 530, 177 } })
-                .Name("Core 2 Duo E6700");
-            
-            series.Scatter(new int[][] { new [] { 1000, 190 } })
-                .Name("Core 2 Duo Extreme X6800")
-                .Labels(labels => labels.Position(ChartPointLabelsPosition.Left));
+        .Series(series =>
+        {
+            series.Scatter(new double[][] { new[] { 16.4, 5.4 }, new[] { 21.7, 2 }, new[] { 25.4, 3 }, new[] { 19.0, 2.0 }, new[] { 10.9, 1 }, new[] { 13.6, 3.2 }, new[] { 10.9, 7.4 }, new[] { 10.9, 0 }, new[] { 10.9, 8.2 }, new[] { 16.4, 0 }, new[] { 16.4, 1.8 }, new[] { 13.6, 0.3 }, new[] { 13.6, 0 }, new[] { 29.9, 0 }, new[] { 27.1, 2.3 }, new[] { 16.4, 0 }, new[] { 13.6, 3.7 }, new[] { 10.9, 5.2 }, new[] { 16.4, 6.5 }, new[] { 10.9, 0 }, new[] { 24.5, 7.1 }, new[] { 10.9, 0 }, new[] { 8.1, 4.7 }, new[] { 19.0, 0.0 }, new[] { 21.7, 1.8 }, new[] { 27.1, 0 }, new[] { 24.5, 0 }, new[] { 27.1, 0 }, new[] { 29.9, 1.5 }, new[] { 27.1, 0.8 }, new[] { 22.1, 2 } })
+                .Name("January 2008");
+
+            series.Scatter(new double[][] { new[] { 6.4, 13.4 }, new[] { 1.7, 11 }, new[] { 5.4, 8 }, new[] { 9.0, 17.0 }, new[] { 1.9, 4 }, new[] { 3.6, 12.2 }, new[] { 1.9, 14.4 }, new[] { 1.9, 9 }, new[] { 1.9, 13.2 }, new[] { 1.4, 7 }, new[] { 6.4, 8.8 }, new[] { 3.6, 4.3 }, new[] { 1.6, 10 }, new[] { 9.9, 2 }, new[] { 7.1, 15 }, new[] { 1.4, 0 }, new[] { 3.6, 13.7 }, new[] { 1.9, 15.2 }, new[] { 6.4, 16.5 }, new[] { 0.9, 10 }, new[] { 4.5, 17.1 }, new[] { 10.9, 10 }, new[] { 0.1, 14.7 }, new[] { 9.0, 10.0 }, new[] { 2.7, 11.8 }, new[] { 2.1, 10 }, new[] { 2.5, 10 }, new[] { 27.1, 10 }, new[] { 2.9, 11.5 }, new[] { 7.1, 10.8 }, new[] { 2.1, 12 } })
+                .Name("January 2009");
+
+            series.Scatter(new double[][] { new[] { 21.7, 3 }, new[] { 13.6, 3.5 }, new[] { 13.6, 3 }, new[] { 29.9, 3 }, new[] { 21.7, 20 }, new[] { 19.0, 2.0 }, new[] { 10.9, 3 }, new[] { 28.0, 4.0 }, new[] { 27.1, 0.3 }, new[] { 16.4, 4 }, new[] { 13.6, 0 }, new[] { 19.0, 5.0 }, new[] { 16.4, 3 }, new[] { 24.5, 3 }, new[] { 32.6, 3 }, new[] { 27.1, 4 }, new[] { 13.6, 6 }, new[] { 13.6, 8 }, new[] { 13.6, 5 }, new[] { 10.9, 4 }, new[] { 16.4, 0 }, new[] { 32.6, 10.3 }, new[] { 21.7, 20.8 }, new[] { 24.5, 0.8 }, new[] { 16.4, 0 }, new[] { 21.7, 6.9 }, new[] { 13.6, 7.7 }, new[] { 16.4, 0 }, new[] { 8.1, 0 }, new[] { 16.4, 0 }, new[] { 16.4, 0 } })
+                .Name("January 2010");
         })
         .XAxis(x => x
             .Numeric()
-            .Title(title => title.Text("Price"))
-            .Labels(labels => labels.Format("${0}")).Max(1000)
+            .Title(title => title.Text("Wind Speed [km/h]"))
+            .Crosshair(crosshair => crosshair
+                .Visible(true)
+                .Tooltip(tooltip => tooltip
+                    .Visible(true)
+                    .Format("{0:n1}")
+                )
+                )
+            .Max(35)
         )
         .YAxis(y => y
             .Numeric()
-            .Title(title => title.Text("Performance Ratio"))
-            .Labels(labels => labels.Format("{0}%")).Min(80)
-        )
-        .Tooltip(tooltip => tooltip
-            .Visible(true)
-            .Template("#= series.name #")
+            .Title(title => title.Text("Rainfall [mm]"))
+            .AxisCrossingValue(-5)
+            .Crosshair(crosshair => crosshair
+                .Visible(true)
+                .Tooltip(tooltip => tooltip
+                    .Visible(true)
+                    .Format("{0:n1}")
+                )
+            )
+            .Min(-5)
+            .Max(25)
         )
     %>
 </div>

@@ -17,7 +17,7 @@
         </kendo:stockChart-series>
         <kendo:stockChart-navigator>
             <kendo:stockChart-navigator-series>
-                <kendo:stockChart-navigator-seriesItem type="line" field="close" />
+                <kendo:stockChart-navigator-seriesItem type="area" field="close" />
             </kendo:stockChart-navigator-series>
             <kendo:stockChart-navigator-select from="${from}" to="${to}" />
         </kendo:stockChart-navigator>

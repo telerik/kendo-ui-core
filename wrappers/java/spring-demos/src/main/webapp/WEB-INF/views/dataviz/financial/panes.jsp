@@ -14,13 +14,15 @@
         <kendo:stockChart-title text="The Boeing Company (NYSE:BA)" />
         <kendo:stockChart-panes>
             <kendo:stockChart-pane title="Value" />
-            <kendo:stockChart-pane name="volumePane" title="Volume" height="100" />
+            <kendo:stockChart-pane name="volumePane" title="Volume" height="150" />
         </kendo:stockChart-panes>
         <kendo:stockChart-categoryAxis>
             <kendo:stockChart-categoryAxisItem pane="volumePane" />
         </kendo:stockChart-categoryAxis>
         <kendo:stockChart-valueAxis>
-            <kendo:stockChart-valueAxisItem />
+            <kendo:stockChart-valueAxisItem>
+            	<kendo:stockChart-valueAxisItem-line visible="false"/>
+            </kendo:stockChart-valueAxisItem>
             <kendo:stockChart-valueAxisItem name="volumeAxis" pane="volumePane" visible="false" />
         </kendo:stockChart-valueAxis>
         <kendo:stockChart-series>
@@ -31,9 +33,14 @@
         </kendo:stockChart-series>
         <kendo:stockChart-navigator>
             <kendo:stockChart-navigator-series>
-                <kendo:stockChart-navigator-seriesItem type="line" field="close" />
+                <kendo:stockChart-navigator-seriesItem type="area" field="close" />
             </kendo:stockChart-navigator-series>
             <kendo:stockChart-navigator-select from="${from}" to="${to}" />
         </kendo:stockChart-navigator>
      </kendo:stockChart>
+     <style>
+	    #stockChart {
+	    	height: 500px;
+	    }
+	</style>
 <demo:footer />

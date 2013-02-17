@@ -11,22 +11,24 @@
             .Action("_BoeingStockData", "Financial")
         ))
         .DateField("Date")
-        .Panes(panes => {
+        .Panes(panes =>
+        {
             panes.Add().Title("Value");
-            panes.Add("volumePane").Title("Volume").Height(100);
+            panes.Add("volumePane").Title("Volume").Height(150);
         })
         .CategoryAxis(axis => axis.Pane("volumePane"))
-        .ValueAxis(axis => axis.Numeric())
+        .ValueAxis(axis => axis.Numeric().Line(line => line.Visible(false)))
         .ValueAxis(axis => axis.Numeric("volumeAxis").Pane("volumePane").Visible(false))
-        .Series(series => {
+        .Series(series =>
+        {
             series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
             series.Column(s => s.Volume).Axis("volumeAxis")
-                  .Aggregate(ChartSeriesAggregate.Sum)
                   .Tooltip(tooltip => tooltip.Format("{0:C0}"));
         })
         .Navigator(nav => nav
-            .Series(series => {
-                series.Line(s => s.Volume);
+            .Series(series =>
+            {
+                series.Area(s => s.Close);
             })
             .Select(
                 DateTime.Parse("2009/02/05"),

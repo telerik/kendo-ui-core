@@ -33,8 +33,8 @@
                 <kendo:radialGauge-scale-labels position="inside" />
                 <kendo:radialGauge-scale-ranges>
                     <kendo:radialGauge-scale-range from="80" to="120" color="#ffc700" />
-                    <kendo:radialGauge-scale-range from="120" to="120" color="#ff7a00" />
-                    <kendo:radialGauge-scale-range from="120" to="120" color="#c20000" />
+                    <kendo:radialGauge-scale-range from="120" to="150" color="#ff7a00" />
+                    <kendo:radialGauge-scale-range from="150" to="180" color="#c20000" />
                 </kendo:radialGauge-scale-ranges>
             </kendo:radialGauge-scale>
          </kendo:radialGauge>
