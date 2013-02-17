@@ -860,7 +860,6 @@ kendo_module({
         getPaint: function(paint) {
             var decorator = this,
                 view = decorator.view,
-                baseUrl = decorator.baseUrl(),
                 definitions = view.definitions,
                 overlay,
                 overlayId,
@@ -876,7 +875,7 @@ kendo_module({
                         definitions[overlayId] = gradient;
                     }
 
-                    return "url(" + baseUrl + "#" + gradient.options.id + ")";
+                    return "url(" + decorator.baseUrl() + "#" + gradient.options.id + ")";
                 } else {
                     return NONE;
                 }
