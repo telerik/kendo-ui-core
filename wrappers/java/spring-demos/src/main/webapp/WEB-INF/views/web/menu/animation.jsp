@@ -16,7 +16,8 @@
             <input id="expand" name="animation" type="radio" ${ animation == "expand" ? "checked=\"checked\"" : "" } value="expand" /> <label for="expand">expand animation</label>
         </li>  
         <li> 
-        	<input id="opacity" name="opacity" type="checkbox" ${ opacity ? "checked=\"checked\"" : "" } /> <label for="opacity">animate opacity</label>           
+        	<input id="opacity" name="opacity" type="checkbox" ${ opacity ? "checked=\"checked\"" : "" } value="true" /> <label for="opacity">animate opacity</label>
+        	<input name="opacity" type="hidden" value="false">           
         </li>
         <li>
         	<input id="delay" name="delay" type="text" value="${delay}" class="k-textbox" /> <label for="delay">open/close delay</label>
@@ -28,7 +29,7 @@
 
 <kendo:menu name="menu" hoverDelay="${delay}">
 	<kendo:menu-animation>
-		<kendo:menu-animation-open effects="${animationString}" duration="400"/>
+		<kendo:menu-animation-open effects="${animationConfig}"/>
 	</kendo:menu-animation>	
     <kendo:menu-items>
         <kendo:menu-item text="Furniture">
