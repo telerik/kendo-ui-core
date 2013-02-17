@@ -5,36 +5,38 @@
 
 <demo:header />
 <div class="k-rtl">
-    <kendo:treeView name="treeview">
-        <kendo:treeView-items>
-            <kendo:treeView-item text="My Web Site" spriteCssClass="folder" expanded="true">
-                <kendo:treeView-items>
-                    <kendo:treeView-item text="images" spriteCssClass="folder" expanded="true">
-                        <kendo:treeView-items>
-                            <kendo:treeView-item text="logo.png" spriteCssClass="image" />
-                            <kendo:treeView-item text="body-back.png" spriteCssClass="image" />
-                            <kendo:treeView-item text="my-photo.jpg" spriteCssClass="image" />
-                        </kendo:treeView-items>
-                    </kendo:treeView-item>
-                    <kendo:treeView-item text="resources" spriteCssClass="folder" expanded="true">
-                        <kendo:treeView-items>
-                            <kendo:treeView-item text="pdf" spriteCssClass="folder" expanded="true">
-                                <kendo:treeView-items>
-                                    <kendo:treeView-item text="brochure.pdf" spriteCssClass="pdf" />
-                                    <kendo:treeView-item text="prices.pdf" spriteCssClass="pdf" />
-                                </kendo:treeView-items>
-                            </kendo:treeView-item>
-                            <kendo:treeView-item text="zip" spriteCssClass="folder" />
-                        </kendo:treeView-items>
-                    </kendo:treeView-item>
-                    <kendo:treeView-item text="about.html" spriteCssClass="html" />
-                    <kendo:treeView-item text="contacts.html" spriteCssClass="html" />
-                    <kendo:treeView-item text="index.html" spriteCssClass="html" />
-                    <kendo:treeView-item text="portfolio.html" spriteCssClass="html" />
-                </kendo:treeView-items>
-            </kendo:treeView-item>
-        </kendo:treeView-items>
-    </kendo:treeView>
+	<div class="demo-section">		
+	    <kendo:treeView name="treeview">
+	        <kendo:treeView-items>
+	            <kendo:treeView-item text="My Web Site" spriteCssClass="folder" expanded="true">
+	                <kendo:treeView-items>
+	                    <kendo:treeView-item text="images" spriteCssClass="folder" expanded="true">
+	                        <kendo:treeView-items>
+	                            <kendo:treeView-item text="logo.png" spriteCssClass="image" />
+	                            <kendo:treeView-item text="body-back.png" spriteCssClass="image" />
+	                            <kendo:treeView-item text="my-photo.jpg" spriteCssClass="image" />
+	                        </kendo:treeView-items>
+	                    </kendo:treeView-item>
+	                    <kendo:treeView-item text="resources" spriteCssClass="folder" expanded="true">
+	                        <kendo:treeView-items>
+	                            <kendo:treeView-item text="pdf" spriteCssClass="folder" expanded="true">
+	                                <kendo:treeView-items>
+	                                    <kendo:treeView-item text="brochure.pdf" spriteCssClass="pdf" />
+	                                    <kendo:treeView-item text="prices.pdf" spriteCssClass="pdf" />
+	                                </kendo:treeView-items>
+	                            </kendo:treeView-item>
+	                            <kendo:treeView-item text="zip" spriteCssClass="folder" />
+	                        </kendo:treeView-items>
+	                    </kendo:treeView-item>
+	                    <kendo:treeView-item text="about.html" spriteCssClass="html" />
+	                    <kendo:treeView-item text="contacts.html" spriteCssClass="html" />
+	                    <kendo:treeView-item text="index.html" spriteCssClass="html" />
+	                    <kendo:treeView-item text="portfolio.html" spriteCssClass="html" />
+	                </kendo:treeView-items>
+	            </kendo:treeView-item>
+	        </kendo:treeView-items>
+	    </kendo:treeView>
+    </div>
 </div>
 
     <style scoped>
