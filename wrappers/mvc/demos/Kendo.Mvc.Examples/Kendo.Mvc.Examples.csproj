@@ -304,6 +304,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Web\Tooltip\TooltipController.cs" />
     <Compile Include="Controllers\Web\TreeView\AnimationController.cs" />
+    <Compile Include="Controllers\Web\TreeView\ApiController.cs" />
     <Compile Include="Controllers\Web\TreeView\CheckboxesController.cs" />
     <Compile Include="Controllers\Web\TreeView\Local_DataController.cs" />
     <Compile Include="Controllers\Web\TreeView\NavigationController.cs" />
@@ -619,6 +620,7 @@
     <Content Include="Areas\razor\Views\web\treeview\animation.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\local_data.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\templates.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\api.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>

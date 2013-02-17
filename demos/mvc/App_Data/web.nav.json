@@ -1248,8 +1248,7 @@
                     "title": "Demo for Kendo UI TreeView widget events ",
                     "meta": "This sample shows built-in events in Kendo jQuery tree widget. Events are triggered when the user selects, collapses, expands, adds or removes an item on the list."
                 },
-                {
-                    "packages": [ "!mvc" ],
+                {                    
                     "text": "API",
                     "url": "treeview/api.html",
                     "title": "Kendo UI TreeView API Example",
