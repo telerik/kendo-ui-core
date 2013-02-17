@@ -5,17 +5,25 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
+<div class="configuration k-widget k-header" style="float:none;max-width:none;margin:0 0 2em;">
+    <span class="infoHead">Information</span>
+    <p>
+        The following demo shows how to customize some of the native Editor tools (font size, font name and block format) by modifying the tools' item
+        collections, as well as how to create completely custom tools.
+    </p>
+</div>
+
 <% Html.Kendo().Editor()
-      .Name("Editor")
+      .Name("editor")
       .HtmlAttributes(new { style = "width: 740px;height:440px" })
       .Tools(tools => tools
         .Clear()
         .FontName(items => items
-            .Add("Garamond", "garamond")
-            .Add("Verdana", "Verdana")
+            .Add("Verdana", "Verdana,Geneva,sans-serif")
+            .Add("Garamond", "Garamond, serif")
         )
         .FontSize(items => items
-            .Add("12px", "12px")
+            .Add("1 (8pt)", "xx-small")
             .Add("16px", "16px")
         )
         .FormatBlock(items => items
@@ -62,7 +70,7 @@ function execFunction(e) {
 $(document).ready(function(){
     $("#templateTool").kendoDropDownList({
         change: function(e) {
-            $("#Editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+            $("#editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
         }
     });
 });
