@@ -23,56 +23,6 @@
         </p>
         <p>
         Friendzoned high school le derp alcohol loki freddie mercury all the things sandwich <span id="sparkline-composite"></span>yao. Clinton students always varius diablo 3 unlock i'm watching u elephant megusta. Vegan pokeman sister money feel like a sir not okay movies good guy. Bart scumbag too mainstream simpson cuteness overload father you don't say? Just if you know what i mean oh stop it, you hac captain top le me face on that on. Hammer for drink not bad y u no cereal angry birds donut really? Homer party russia lol viverra lose derp close enough cellphone in class. Collection why problem? True Story one does not simply finals avengers lois search basic math crying dog bear. Jackie Chan silent hill back morbi bacon cookie monster super rage humor. Nyan cat movie puking rainbows bra bottom gasp easter phone happy thor. Charlie Sheen genius college win pikachu gentlemen facepalm dad superhero. Monocle joke amnesia happy woman no bad essay trolololo steve jobs male. Gag creepy me gusta.
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
-        <span class="perf"></span>
         </p>
         <div id="target" style="width: 200px; height: 200px; background: #aaa; position: relative;">Move mouse here</div>
         <script>
@@ -84,11 +34,9 @@
             $(function() {
                 $("#sparkline").kendoSparkline(speedLog);
 
-                $(".perf").kendoSparkline(speedLog);
-
                 $("#sparkline-bar").kendoSparkline({
                     dataSource: speedLog,
-                    type: "column" // TODO: Treat as 'column' for sparklines
+                    type: "bar" // TODO: Treat as 'column' for sparklines
                 });
 
                 $("#sparkline-composite").kendoSparkline({
@@ -117,7 +65,7 @@
 
                 time = new Date() - lastMove;
 
-                if (time > 500) {
+                if (time > 30) {
                     var speed = Math.round((distance / time) * 1000);
                     detailLog.push({ speed: speed, moreSpeed: speed * 2 });
                     speedLog.push(speed);
