@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Extend VS Clone</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="benchmark.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <style>
+            body {
+                padding: 1em;
+                margin: 1em;
+            }
+
+            table {
+                table-layout: fixed;
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+
+            .box {
+              border-radius: 100px;
+              width: 20px; height: 10px;
+              padding: 5px 0;
+              color: #ccc;
+              font: 10px/10px Arial;
+              text-align: center;
+              position: absolute;
+              display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="log"></div>
+
+        <button id="benchmark">benchmark</button>
+
+        <script>
+            function ClonedObject() { }
+            function clone(obj) {
+                ClonedObject.prototype = obj;
+                return new ClonedObject();
+            }
+
+            function deepClone(source) {
+                var destination = clone(source);
+
+                deepCloneMembers(destination);
+
+                return destination;
+            }
+
+            function deepCloneMembers(obj) {
+                var ObservableArray = kendo.data.ObservableArray,
+                    property,
+                    propValue,
+                    propType,
+                    destProp;
+
+                for (property in obj) {
+                    propValue = obj[property];
+                    propType = typeof propValue;
+                    if (propType === "object" && propValue !== null && propValue.constructor !== Array && propValue.constructor !== ObservableArray) {
+                        if (!(propValue instanceof Date)) {
+                            obj[property] = clone(propValue);
+                            deepCloneMembers(obj[property]);
+                        }
+                    }
+                }
+            }
+
+                $("#benchmark").click(function() {
+                    suite.run(true);
+                });
+
+                var suite = new Benchmark.Suite;
+                suite.add("deepExtend", function() {
+                    for (var i = 0; i < 100; i++) {
+                        var dest = kendo.deepExtend({}, kendo.dataviz.ui.themes);
+                    }
+                })
+                .add("deepClone", function() {
+                    for (var i = 0; i < 100; i++) {
+                        var dest = deepClone(kendo.dataviz.ui.themes);
+                    }
+                })
+                .on("complete", function() {
+                    var message = "<div>User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table></div>";
+
+                    $("#log").html(message);
+                });
+            </script>
+        </body>
+    </html>
+    </body>
+</html>
