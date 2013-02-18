@@ -15,14 +15,23 @@ import com.kendoui.spring.models.DonutChartsBasicUsageViewModel;
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        List<DonutChartsBasicUsageViewModel> donutChartData = new ArrayList<DonutChartsBasicUsageViewModel>();
-        donutChartData.add(new DonutChartsBasicUsageViewModel("Asia",53.8,"#9de219"));
-        donutChartData.add(new DonutChartsBasicUsageViewModel("Europe",16.1,"#90cc38"));
-        donutChartData.add(new DonutChartsBasicUsageViewModel("LatinAmerica",11.3,"#068c35"));
-        donutChartData.add(new DonutChartsBasicUsageViewModel("Africa",9.6,"#006634"));
-        donutChartData.add(new DonutChartsBasicUsageViewModel("MiddleEast",5.2,"#004d38"));
-        donutChartData.add(new DonutChartsBasicUsageViewModel("NorthAmerica",3.6,"#033939"));
-        model.addAttribute("donutData", donutChartData);
+        List<DonutChartsBasicUsageViewModel> donutData2011 = new ArrayList<DonutChartsBasicUsageViewModel>();
+        donutData2011.add(new DonutChartsBasicUsageViewModel("Asia",30.8,"#9de219"));
+        donutData2011.add(new DonutChartsBasicUsageViewModel("Europe",21.1,"#90cc38"));
+        donutData2011.add(new DonutChartsBasicUsageViewModel("LatinAmerica",16.3,"#068c35"));
+        donutData2011.add(new DonutChartsBasicUsageViewModel("Africa",17.6,"#006634"));
+        donutData2011.add(new DonutChartsBasicUsageViewModel("MiddleEast",5.2,"#004d38"));
+        donutData2011.add(new DonutChartsBasicUsageViewModel("NorthAmerica",4.6,"#033939"));        
+        model.addAttribute("donutData2011", donutData2011);
+
+        List<DonutChartsBasicUsageViewModel> donutData2012 = new ArrayList<DonutChartsBasicUsageViewModel>();
+        donutData2012.add(new DonutChartsBasicUsageViewModel("Asia",53.8,"#9de219"));
+        donutData2012.add(new DonutChartsBasicUsageViewModel("Europe",16.1,"#90cc38"));
+        donutData2012.add(new DonutChartsBasicUsageViewModel("LatinAmerica",11.3,"#068c35"));
+        donutData2012.add(new DonutChartsBasicUsageViewModel("Africa",9.6,"#006634"));
+        donutData2012.add(new DonutChartsBasicUsageViewModel("MiddleEast",5.2,"#004d38"));
+        donutData2012.add(new DonutChartsBasicUsageViewModel("NorthAmerica",3.6,"#033939"));        
+        model.addAttribute("donutData2012", donutData2012);
         
         return "/dataviz/donut-charts/index";
     }
