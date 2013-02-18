@@ -785,7 +785,7 @@
                     "text": "ModelBinding",
                     "url": "menu/modelbinding.html"
                 },
-                {                    
+                {
                     "text": "Animation effects",
                     "url": "menu/animation.html",
                     "title": "Animation effects example in KendoMenu widget",
@@ -1165,7 +1165,13 @@
                     "text": "Loading content with AJAX",
                     "url": "tooltip/ajax.html",
                     "title": "AJAX loaded content with Kendo UI Tooltip widget",
-                    "meta": "This example illustrates how content in Kendo UI window widget can be loaded, using AJAX."
+                    "meta": "This example illustrates how content in Kendo UI Tooltip widget can be loaded, using AJAX."
+                },
+                {
+                    "text": "Content template",
+                    "url": "tooltip/template.html",
+                    "title": "Template content shown in Kendo UI Tooltip widget",
+                    "meta": "This example illustrates how template can be used as content of Kendo UI Tooltip widget"
                 },
                 {
                     "text": "Events",
@@ -1199,7 +1205,7 @@
                     "title": "jQuery drag & drop Treeview Demo in Kendo UI Web framework",
                     "meta": "This example shows how items in Kendo TreeView can be dragged and dropped to a specific place. Use the demo source code to try this functionality of the HTML5 component."
                 },
-                {                    
+                {
                     "text": "Animation effects",
                     "url": "treeview/animation.html",
                     "title": "Animation effects sample for Kendo UI jQuery Tree component",
@@ -1217,7 +1223,7 @@
                     "title": "Creating tree nodes with checkboxes | Kendo UI TreeView Demo",
                     "meta": "This sample illustrates how you can easily create tree nodes with checkboxes by simply setting the child item of the checkboxes to true."
                 },
-                {                    
+                {
                     "text": "Binding to local data",
                     "url": "treeview/local-data.html",
                     "title": "Binding to local data demo for Kendo UI TreeView control",
@@ -1236,7 +1242,7 @@
                     "title": "Example of binding Kendo UI TreeView to OData service",
                     "meta": "This sample shows how Kendo UI TreeView widget can be bound to oData service."
                 },
-                {                    
+                {
                     "text": "Templates",
                     "url": "treeview/templates.html",
                     "title": "Example of templates for Kendo UI TreeView",
@@ -1248,7 +1254,7 @@
                     "title": "Demo for Kendo UI TreeView widget events ",
                     "meta": "This sample shows built-in events in Kendo jQuery tree widget. Events are triggered when the user selects, collapses, expands, adds or removes an item on the list."
                 },
-                {                    
+                {
                     "text": "API",
                     "url": "treeview/api.html",
                     "title": "Kendo UI TreeView API Example",
@@ -1329,7 +1335,7 @@
                     "title": "AJAX loaded content with Kendo UI Window widget",
                     "meta": "This example illustrates how content in Kendo UI window widget can be loaded, using AJAX."
                 },
-                {                    
+                {
                     "text": "Animation effects",
                     "url": "window/animation.html",
                     "title": "Animation effects demo for Kendo UI window widget",
