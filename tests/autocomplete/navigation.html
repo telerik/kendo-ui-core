@@ -90,14 +90,15 @@
 
             test("clicking an item applies selected style", 1, function() {
                 var autocomplete = new AutoComplete(input, {
-                    dataSource: ["baz", "bar"]
+                    dataSource: ["baz", "bar"],
+                    change: function() {
+                        ok(autocomplete.ul.children().eq(0).is(".k-state-selected"));
+                    }
                 });
 
                 input.val("ba");
                 autocomplete.search();
                 autocomplete.ul.children().eq(0).trigger(CLICK);
-
-                ok(autocomplete.ul.children().eq(0).is(".k-state-selected"));
             });
 
             test("changing the current popup item does not update the input value", function() {
@@ -264,19 +265,6 @@
                         ok(true);
                     }
                 });
-            });
-
-            test("clicking item more than once", 1, function() {
-                var autocomplete = new AutoComplete(input, {
-                    dataSource: ["baz", "bar"],
-                    separator: ", "
-                });
-
-                input.val("b");
-                autocomplete.search();
-                autocomplete.ul.children().first().trigger(CLICK).trigger(CLICK);
-
-                equal(input.val(), "baz, ");
             });
 
             test("pressing the down arrows when the popup is not visible does not change value", function() {
