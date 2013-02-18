@@ -14,7 +14,7 @@ namespace KendoCRUDService.Models
             if (result == null)
             {
                 HttpContext.Current.Session["Products"] = result =
-                    new NorthwindDataContext().Products.Select(p => new ProductModel
+                    new SampleDataContext().Products.Select(p => new ProductModel
                      {
                          ProductID = p.ProductID,
                          ProductName = p.ProductName,
