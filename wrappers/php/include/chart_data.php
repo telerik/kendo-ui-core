@@ -1,4 +1,29 @@
 <?php
+function chart_screen_resolution() {
+    return array(
+        array('year' => 2000, 'resolution' => '1024x768', 'share' => 25, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2000, 'resolution' => 'Other', 'share' => 75, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2001, 'resolution' => '1024x768', 'share' => 29, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2001, 'resolution' => 'Other', 'share' => 71, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2002, 'resolution' => '1024x768', 'share' => 34, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2002, 'resolution' => 'Other', 'share' => 66, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2003, 'resolution' => '1024x768', 'share' => 40, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2003, 'resolution' => 'Other', 'share' => 60, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2004, 'resolution' => '1024x768', 'share' => 47, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2004, 'resolution' => 'Other', 'share' => 53, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2005, 'resolution' => '1024x768', 'share' => 53, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2005, 'resolution' => 'Other', 'share' => 47, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2006, 'resolution' => '1024x768', 'share' => 57, 'visibleInLegend' => false, 'order' => 1, 'color' => '#c00'),
+        array('year' => 2006, 'resolution' => 'Other', 'share' => 43, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2007, 'resolution' => '1024x768', 'share' => 54, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2007, 'resolution' => 'Other', 'share' => 46, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2008, 'resolution' => '1024x768', 'share' => 48, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2008, 'resolution' => 'Other', 'share' => 52, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc'),
+        array('year' => 2009, 'resolution' => '1024x768', 'share' => 36, 'visibleInLegend' => false, 'order' => 1),
+        array('year' => 2009, 'resolution' => 'Other', 'share' => 64, 'visibleInLegend' => false, 'order' => 2, 'color' => '#ccc')
+   );
+}
+
 function chart_japan_medals() {
     return array(
         array('year' => 1984, 'standing' => 1, 'number' => 10, 'country' => 'Japan', 'medalColor' => '#f3ac32'),
@@ -25,7 +50,7 @@ function chart_japan_medals() {
         array('year' => 2004, 'standing' => 3, 'number' => 12, 'country' => 'Japan', 'medalColor' => '#bb6e36'),
         array('year' => 2008, 'standing' => 3, 'number' => 10, 'country' => 'Japan', 'medalColor' => '#bb6e36'),
         array('year' => 2012, 'standing' => 3, 'number' => 17, 'country' => 'Japan', 'medalColor' => '#bb6e36')
-    );
+   );
 }
 
 function chart_crime_stats() {
@@ -80,7 +105,7 @@ function chart_crime_stats() {
         array('state' => 'West Virginia', 'murder' => 4.4, 'burglary' => 621.2, 'population' => 1814468),
         array('state' => 'Wisconsin', 'murder' => 3.5, 'burglary' => 440.8, 'population' => 5627967),
         array('state' => 'Wyoming', 'murder' => 2.7, 'burglary' => 476.3, 'population' => 532668)
-    );
+   );
 }
 
 function chart_blog_comments() {
@@ -115,7 +140,7 @@ function chart_blog_comments() {
         array('blog' => 'My blog', 'day' => '28', 'value' => 6, 'userColor' => '#ffd600'),
         array('blog' => 'My blog', 'day' => '29', 'value' => 3, 'userColor' => '#ffd600'),
         array('blog' => 'My blog', 'day' => '30', 'value' => 6, 'userColor' => '#ffd600')
-    );
+   );
 }
 
 function chart_spain_electricity_production() {
@@ -129,7 +154,7 @@ function chart_spain_electricity_production() {
         array('country' => 'Spain', 'year' => '2002', 'unit' => 'GWh',  'hydro' => 26270, 'wind' => 9342, 'nuclear' => 63016),
         array('country' => 'Spain', 'year' => '2001', 'unit' => 'GWh',  'hydro' => 43864, 'wind' => 6759, 'nuclear' => 63708),
         array('country' => 'Spain', 'year' => '2000', 'unit' => 'GWh',  'hydro' => 31807, 'wind' => 4727, 'nuclear' => 62206)
-    );
+   );
 }
 
 function chart_united_states_internet_usage() {
@@ -152,47 +177,47 @@ function chart_united_states_internet_usage() {
         array('country'=> 'United States', 'year'=> '2009', 'value'=> 71.2),
         array('country'=> 'United States', 'year'=> '2010', 'value'=> 74.2),
         array('country'=> 'United States', 'year'=> '2011', 'value'=> 78.2)
-    );
+   );
 }
 
 function chart_stock_prices() {
     return array(
-        array('date'=> '12/30/2011', 'close'=> 405, 'volume'=> 6414369, 'open'=> 403.51, 'high'=> 406.28, 'low'=> 403.49, 'symbol'=> '2. AAPL' ),
-        array('date'=> '11/30/2011', 'close'=> 382.2, 'volume'=> 14464710, 'open'=> 381.29, 'high'=> 382.276, 'low'=> 378.3, 'symbol'=> '2. AAPL' ),
-        array('date'=> '10/31/2011', 'close'=> 404.78, 'volume'=> 13762250, 'open'=> 402.42, 'high'=> 409.33, 'low'=> 401.05, 'symbol'=> '2. AAPL' ),
-        array('date'=> '9/30/2011', 'close'=> 381.32, 'volume'=> 19553550, 'open'=> 387.12, 'high'=> 388.89, 'low'=> 381.18, 'symbol'=> '2. AAPL' ),
-        array('date'=> '8/31/2011', 'close'=> 384.83, 'volume'=> 18643770, 'open'=> 390.57, 'high'=> 392.08, 'low'=> 381.86, 'symbol'=> '2. AAPL' ),
-        array('date'=> '7/29/2011', 'close'=> 390.48, 'volume'=> 22550900, 'open'=> 387.64, 'high'=> 395.15, 'low'=> 384, 'symbol'=> '2. AAPL' ),
-        array('date'=> '6/30/2011', 'close'=> 335.67, 'volume'=> 11526680, 'open'=> 334.7, 'high'=> 336.13, 'low'=> 332.84, 'symbol'=> '2. AAPL' ),
-        array('date'=> '5/31/2011', 'close'=> 347.83, 'volume'=> 14869200, 'open'=> 341.1, 'high'=> 347.83, 'low'=> 341, 'symbol'=> '2. AAPL' ),
-        array('date'=> '4/29/2011', 'close'=> 350.13, 'volume'=> 29776300, 'open'=> 346.78, 'high'=> 353.95, 'low'=> 346.666, 'symbol'=> '2. AAPL' ),
-        array('date'=> '3/31/2011', 'close'=> 348.5075, 'volume'=> 9779020, 'open'=> 346.36, 'high'=> 349.8, 'low'=> 346.06, 'symbol'=> '2. AAPL' ),
-        array('date'=> '2/28/2011', 'close'=> 353.21, 'volume'=> 14356740, 'open'=> 351.24, 'high'=> 355.05, 'low'=> 351.12, 'symbol'=> '2. AAPL' ),
-        array('date'=> '1/31/2011', 'close'=> 339.32, 'volume'=> 13457510, 'open'=> 335.8, 'high'=> 340.04, 'low'=> 334.3, 'symbol'=> '2. AAPL' ),
-        array('date'=> '12/30/2011', 'close'=> 173.1, 'volume'=> 4279069, 'open'=> 173.36, 'high'=> 175.17, 'low'=> 172.49, 'symbol'=> '3. AMZN' ),
-        array('date'=> '11/30/2011', 'close'=> 192.29, 'volume'=> 7700490, 'open'=> 194.76, 'high'=> 195.3, 'low'=> 188.75, 'symbol'=> '3. AMZN' ),
-        array('date'=> '10/31/2011', 'close'=> 213.51, 'volume'=> 7336799, 'open'=> 215.79, 'high'=> 218.89, 'low'=> 213.04, 'symbol'=> '3. AMZN' ),
-        array('date'=> '9/30/2011', 'close'=> 216.23, 'volume'=> 6549641, 'open'=> 218.19, 'high'=> 223, 'low'=> 215.21, 'symbol'=> '3. AMZN' ),
-        array('date'=> '8/31/2011', 'close'=> 215.23, 'volume'=> 7397287, 'open'=> 212.27, 'high'=> 216.17, 'low'=> 211.35, 'symbol'=> '3. AMZN' ),
-        array('date'=> '7/29/2011', 'close'=> 222.52, 'volume'=> 5166268, 'open'=> 221.29, 'high'=> 225.75, 'low'=> 219.51, 'symbol'=> '3. AMZN' ),
-        array('date'=> '6/30/2011', 'close'=> 204.49, 'volume'=> 4446007, 'open'=> 200.78, 'high'=> 205.2, 'low'=> 200.5, 'symbol'=> '3. AMZN' ),
-        array('date'=> '5/31/2011', 'close'=> 196.69, 'volume'=> 3405698, 'open'=> 195.94, 'high'=> 198.44, 'low'=> 195.03, 'symbol'=> '3. AMZN' ),
-        array('date'=> '4/29/2011', 'close'=> 195.81, 'volume'=> 5697726, 'open'=> 194.38, 'high'=> 196.59, 'low'=> 193.78, 'symbol'=> '3. AMZN' ),
-        array('date'=> '3/31/2011', 'close'=> 180.13, 'volume'=> 4824628, 'open'=> 179.31, 'high'=> 181.57, 'low'=> 178.5, 'symbol'=> '3. AMZN' ),
-        array('date'=> '2/28/2011', 'close'=> 173.29, 'volume'=> 6781774, 'open'=> 173.91, 'high'=> 175.89, 'low'=> 172.15, 'symbol'=> '3. AMZN' ),
-        array('date'=> '1/31/2011', 'close'=> 169.64, 'volume'=> 6716002, 'open'=> 170.16, 'high'=> 171.44, 'low'=> 167.41, 'symbol'=> '3. AMZN' ),
-        array('date'=> '12/30/2011', 'close'=> 645.9, 'volume'=> 1780941, 'open'=> 642.02, 'high'=> 646.76, 'low'=> 642.02, 'symbol'=> '1. GOOG' ),
-        array('date'=> '11/30/2011', 'close'=> 599.39, 'volume'=> 3390173, 'open'=> 597.95, 'high'=> 599.51, 'low'=> 592.09, 'symbol'=> '1. GOOG' ),
-        array('date'=> '10/31/2011', 'close'=> 592.64, 'volume'=> 2557538, 'open'=> 595.09, 'high'=> 599.69, 'low'=> 591.67, 'symbol'=> '1. GOOG' ),
-        array('date'=> '9/30/2011', 'close'=> 515.04, 'volume'=> 2723353, 'open'=> 520.21, 'high'=> 524, 'low'=> 514.38, 'symbol'=> '1. GOOG' ),
-        array('date'=> '8/31/2011', 'close'=> 540.96, 'volume'=> 2689989, 'open'=> 544.74, 'high'=> 546.3, 'low'=> 536, 'symbol'=> '1. GOOG' ),
-        array('date'=> '7/29/2011', 'close'=> 603.69, 'volume'=> 4133695, 'open'=> 604.23, 'high'=> 614.96, 'low'=> 603.69, 'symbol'=> '1. GOOG' ),
-        array('date'=> '6/30/2011', 'close'=> 506.38, 'volume'=> 2427330, 'open'=> 501.99, 'high'=> 506.67, 'low'=> 501.5, 'symbol'=> '1. GOOG' ),
-        array('date'=> '5/31/2011', 'close'=> 529.02, 'volume'=> 2685830, 'open'=> 525, 'high'=> 529.05, 'low'=> 523.5, 'symbol'=> '1. GOOG' ),
-        array('date'=> '4/29/2011', 'close'=> 544.1, 'volume'=> 3522997, 'open'=> 540, 'high'=> 544.1, 'low'=> 538.51, 'symbol'=> '1. GOOG' ),
-        array('date'=> '3/31/2011', 'close'=> 586.76, 'volume'=> 2028228, 'open'=> 583, 'high'=> 588.1612, 'low'=> 581.74, 'symbol'=> '1. GOOG' ),
-        array('date'=> '2/28/2011', 'close'=> 613.4, 'volume'=> 2281411, 'open'=> 610, 'high'=> 616.49, 'low'=> 608.01, 'symbol'=> '1. GOOG' ),
-        array('date'=> '1/31/2011', 'close'=> 600.36, 'volume'=> 2804332, 'open'=> 603.6, 'high'=> 604.47, 'low'=> 595.55, 'symbol'=> '1. GOOG' )
-    );
+        array('date'=> '12/30/2011', 'close'=> 405, 'volume'=> 6414369, 'open'=> 403.51, 'high'=> 406.28, 'low'=> 403.49, 'symbol'=> '2. AAPL'),
+        array('date'=> '11/30/2011', 'close'=> 382.2, 'volume'=> 14464710, 'open'=> 381.29, 'high'=> 382.276, 'low'=> 378.3, 'symbol'=> '2. AAPL'),
+        array('date'=> '10/31/2011', 'close'=> 404.78, 'volume'=> 13762250, 'open'=> 402.42, 'high'=> 409.33, 'low'=> 401.05, 'symbol'=> '2. AAPL'),
+        array('date'=> '9/30/2011', 'close'=> 381.32, 'volume'=> 19553550, 'open'=> 387.12, 'high'=> 388.89, 'low'=> 381.18, 'symbol'=> '2. AAPL'),
+        array('date'=> '8/31/2011', 'close'=> 384.83, 'volume'=> 18643770, 'open'=> 390.57, 'high'=> 392.08, 'low'=> 381.86, 'symbol'=> '2. AAPL'),
+        array('date'=> '7/29/2011', 'close'=> 390.48, 'volume'=> 22550900, 'open'=> 387.64, 'high'=> 395.15, 'low'=> 384, 'symbol'=> '2. AAPL'),
+        array('date'=> '6/30/2011', 'close'=> 335.67, 'volume'=> 11526680, 'open'=> 334.7, 'high'=> 336.13, 'low'=> 332.84, 'symbol'=> '2. AAPL'),
+        array('date'=> '5/31/2011', 'close'=> 347.83, 'volume'=> 14869200, 'open'=> 341.1, 'high'=> 347.83, 'low'=> 341, 'symbol'=> '2. AAPL'),
+        array('date'=> '4/29/2011', 'close'=> 350.13, 'volume'=> 29776300, 'open'=> 346.78, 'high'=> 353.95, 'low'=> 346.666, 'symbol'=> '2. AAPL'),
+        array('date'=> '3/31/2011', 'close'=> 348.5075, 'volume'=> 9779020, 'open'=> 346.36, 'high'=> 349.8, 'low'=> 346.06, 'symbol'=> '2. AAPL'),
+        array('date'=> '2/28/2011', 'close'=> 353.21, 'volume'=> 14356740, 'open'=> 351.24, 'high'=> 355.05, 'low'=> 351.12, 'symbol'=> '2. AAPL'),
+        array('date'=> '1/31/2011', 'close'=> 339.32, 'volume'=> 13457510, 'open'=> 335.8, 'high'=> 340.04, 'low'=> 334.3, 'symbol'=> '2. AAPL'),
+        array('date'=> '12/30/2011', 'close'=> 173.1, 'volume'=> 4279069, 'open'=> 173.36, 'high'=> 175.17, 'low'=> 172.49, 'symbol'=> '3. AMZN'),
+        array('date'=> '11/30/2011', 'close'=> 192.29, 'volume'=> 7700490, 'open'=> 194.76, 'high'=> 195.3, 'low'=> 188.75, 'symbol'=> '3. AMZN'),
+        array('date'=> '10/31/2011', 'close'=> 213.51, 'volume'=> 7336799, 'open'=> 215.79, 'high'=> 218.89, 'low'=> 213.04, 'symbol'=> '3. AMZN'),
+        array('date'=> '9/30/2011', 'close'=> 216.23, 'volume'=> 6549641, 'open'=> 218.19, 'high'=> 223, 'low'=> 215.21, 'symbol'=> '3. AMZN'),
+        array('date'=> '8/31/2011', 'close'=> 215.23, 'volume'=> 7397287, 'open'=> 212.27, 'high'=> 216.17, 'low'=> 211.35, 'symbol'=> '3. AMZN'),
+        array('date'=> '7/29/2011', 'close'=> 222.52, 'volume'=> 5166268, 'open'=> 221.29, 'high'=> 225.75, 'low'=> 219.51, 'symbol'=> '3. AMZN'),
+        array('date'=> '6/30/2011', 'close'=> 204.49, 'volume'=> 4446007, 'open'=> 200.78, 'high'=> 205.2, 'low'=> 200.5, 'symbol'=> '3. AMZN'),
+        array('date'=> '5/31/2011', 'close'=> 196.69, 'volume'=> 3405698, 'open'=> 195.94, 'high'=> 198.44, 'low'=> 195.03, 'symbol'=> '3. AMZN'),
+        array('date'=> '4/29/2011', 'close'=> 195.81, 'volume'=> 5697726, 'open'=> 194.38, 'high'=> 196.59, 'low'=> 193.78, 'symbol'=> '3. AMZN'),
+        array('date'=> '3/31/2011', 'close'=> 180.13, 'volume'=> 4824628, 'open'=> 179.31, 'high'=> 181.57, 'low'=> 178.5, 'symbol'=> '3. AMZN'),
+        array('date'=> '2/28/2011', 'close'=> 173.29, 'volume'=> 6781774, 'open'=> 173.91, 'high'=> 175.89, 'low'=> 172.15, 'symbol'=> '3. AMZN'),
+        array('date'=> '1/31/2011', 'close'=> 169.64, 'volume'=> 6716002, 'open'=> 170.16, 'high'=> 171.44, 'low'=> 167.41, 'symbol'=> '3. AMZN'),
+        array('date'=> '12/30/2011', 'close'=> 645.9, 'volume'=> 1780941, 'open'=> 642.02, 'high'=> 646.76, 'low'=> 642.02, 'symbol'=> '1. GOOG'),
+        array('date'=> '11/30/2011', 'close'=> 599.39, 'volume'=> 3390173, 'open'=> 597.95, 'high'=> 599.51, 'low'=> 592.09, 'symbol'=> '1. GOOG'),
+        array('date'=> '10/31/2011', 'close'=> 592.64, 'volume'=> 2557538, 'open'=> 595.09, 'high'=> 599.69, 'low'=> 591.67, 'symbol'=> '1. GOOG'),
+        array('date'=> '9/30/2011', 'close'=> 515.04, 'volume'=> 2723353, 'open'=> 520.21, 'high'=> 524, 'low'=> 514.38, 'symbol'=> '1. GOOG'),
+        array('date'=> '8/31/2011', 'close'=> 540.96, 'volume'=> 2689989, 'open'=> 544.74, 'high'=> 546.3, 'low'=> 536, 'symbol'=> '1. GOOG'),
+        array('date'=> '7/29/2011', 'close'=> 603.69, 'volume'=> 4133695, 'open'=> 604.23, 'high'=> 614.96, 'low'=> 603.69, 'symbol'=> '1. GOOG'),
+        array('date'=> '6/30/2011', 'close'=> 506.38, 'volume'=> 2427330, 'open'=> 501.99, 'high'=> 506.67, 'low'=> 501.5, 'symbol'=> '1. GOOG'),
+        array('date'=> '5/31/2011', 'close'=> 529.02, 'volume'=> 2685830, 'open'=> 525, 'high'=> 529.05, 'low'=> 523.5, 'symbol'=> '1. GOOG'),
+        array('date'=> '4/29/2011', 'close'=> 544.1, 'volume'=> 3522997, 'open'=> 540, 'high'=> 544.1, 'low'=> 538.51, 'symbol'=> '1. GOOG'),
+        array('date'=> '3/31/2011', 'close'=> 586.76, 'volume'=> 2028228, 'open'=> 583, 'high'=> 588.1612, 'low'=> 581.74, 'symbol'=> '1. GOOG'),
+        array('date'=> '2/28/2011', 'close'=> 613.4, 'volume'=> 2281411, 'open'=> 610, 'high'=> 616.49, 'low'=> 608.01, 'symbol'=> '1. GOOG'),
+        array('date'=> '1/31/2011', 'close'=> 600.36, 'volume'=> 2804332, 'open'=> 603.6, 'high'=> 604.47, 'low'=> 595.55, 'symbol'=> '1. GOOG')
+   );
 }
 ?>
