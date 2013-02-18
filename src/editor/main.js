@@ -788,7 +788,7 @@
                 html = html.replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p $1><br _moz_dirty="" /><\/p>');
             }
 
-            if (browser.msie && parseInt(browser.version, 10) < 9) {
+            if (browser.msie && browser.version < 9) {
                 // Internet Explorer removes comments from the beginning of the html
                 html = "<br/>" + html;
 

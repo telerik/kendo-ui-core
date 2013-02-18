@@ -34,7 +34,7 @@ var normalize = function (node) {
     }
 };
 
-if (browser.msie && parseInt(browser.version, 10) >= 8) {
+if (browser.msie && browser.version >= 8) {
     normalize = function(parent) {
         if (parent.nodeType == 1 && parent.firstChild) {
             var prev = parent.firstChild,

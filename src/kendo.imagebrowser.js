@@ -101,7 +101,8 @@
     });
 
     function bindDragEventWrappers(element, onDragEnter, onDragLeave) {
-        var hideInterval, lastDrag;
+        var hideInterval, lastDrag,
+            browser = kendo.support.browser;
 
         element
             .on("dragenter" + NS, function(e) {
@@ -126,7 +127,7 @@
     }
 
     var offsetTop;
-    if (kendo.support.browser.msie && parseFloat(kendo.support.browser.version) < 8) {
+    if (browser.msie && browser.version < 8) {
         offsetTop = function (element) {
             return element.offsetTop;
         };

@@ -1973,7 +1973,7 @@
                             }
                         }
 
-                        if (browser.msie && parseInt(browser.version, 10) < 9) {
+                        if (browser.msie && browser.version < 9) {
                             document.body.focus();
                         }
                         focusTable(table, true);
@@ -3199,7 +3199,8 @@
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
-                columnIndex;
+                columnIndex,
+                browser = kendo.support.browser;
 
             if (typeof column == "number") {
                 column = columns[column];
@@ -3265,7 +3266,7 @@
                 that._footerWidth = width;
             }
 
-            if(kendo.support.browser.msie && parseInt(kendo.support.browser.version, 10) == 8) {
+            if(browser.msie && browser.version == 8) {
                 tables.css("display", "inline-table");
                 setTimeout(function() {
                     tables.css("display", "table");
