@@ -297,13 +297,13 @@ kendo_module({
             var attr = "[" + kendo.attr("field") + "=",
                 columns = this._ownerColumns(),
                 allselector = map(columns, function(col) {
-                    return attr + col.field.replace(nameSpecialCharRegExp, "\\$1") + "]";
+                    return attr + '"' + col.field.replace(nameSpecialCharRegExp, "\\$1") + '"]';
                 }).join(","),
                 visible = grep(columns, function(field) {
                     return !field.hidden;
                 }),
                 selector = map(visible, function(col) {
-                    return attr + col.field.replace(nameSpecialCharRegExp, "\\$1") + "]";
+                    return attr + '"' + col.field.replace(nameSpecialCharRegExp, "\\$1") + '"]';
                 }).join(",");
 
             this.wrapper.find(allselector).attr("checked", false);
