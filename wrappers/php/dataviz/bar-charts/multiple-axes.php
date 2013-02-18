@@ -7,27 +7,27 @@ $battery->type('column')
         ->data(array(20, 40, 45, 30, 50))
         ->stack(true)
         ->name('on battery')
-        ->color('#003c72');
+        ->color('#cc6e38');
 
 $gas = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $gas->type('column')
     ->data(array(20, 30, 35, 35, 40))
     ->stack(true)
     ->name('on gas')
-    ->color('#0399d4');
+    ->color('#ef955f');
 
 $mpg = new \Kendo\Dataviz\UI\ChartSeriesItem();
-$mpg->type('area')
+$mpg->type('line')
     ->data(array(30, 38, 40, 32, 42))
     ->name('mpg')
-    ->color('#642381')
+    ->color('#ec5e0a')
     ->axis('mpg');
 
 $l100km = new \Kendo\Dataviz\UI\ChartSeriesItem();
-$l100km->type('area')
+$l100km->type('line')
        ->data(array(7.8, 6.2, 5.9, 7.4, 5.6))
        ->name('l/100 km')
-       ->color('#e5388a')
+       ->color('#4e4141')
        ->axis('l100km');
 
 $milesAxis= new \Kendo\Dataviz\UI\ChartValueAxisItem();

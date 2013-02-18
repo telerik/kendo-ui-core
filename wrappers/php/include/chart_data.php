@@ -1,16 +1,51 @@
 <?php
 
+function chart_blog_comments() {
+    return array(
+        array('blog'=> 'My blog', 'day'=> '1', 'value'=> 3, 'userColor'=> '#ffd600'),
+        array('blog' => 'My blog', 'day' => '2', 'value' => 7, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '3', 'value' => 12, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '4', 'value' => 15, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '5', 'value' => 6, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '6', 'value' => 23, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '7', 'value' => 12, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '8', 'value' => 10, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '9', 'value' => 17, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '10', 'value' => 13, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '11', 'value' => 14, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '12', 'value' => 15, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '13', 'value' => 3, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '14', 'value' => 6, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '15', 'value' => 23, 'userColor' => '#565656'),
+        array('blog' => 'My blog', 'day' => '16', 'value' => 25, 'userColor' => '#565656'),
+        array('blog' => 'My blog', 'day' => '17', 'value' => 21, 'userColor' => '#565656'),
+        array('blog' => 'My blog', 'day' => '18', 'value' => 18, 'userColor' => '#565656'),
+        array('blog' => 'My blog', 'day' => '19', 'value' => 17, 'userColor' => '#565656'),
+        array('blog' => 'My blog', 'day' => '20', 'value' => 16, 'userColor' => '#565656'),
+        array('blog' => 'My blog', 'day' => '21', 'value' => 11, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '22', 'value' => 3, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '23', 'value' => 8, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '24', 'value' => 5, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '25', 'value' => 4, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '26', 'value' => 1, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '27', 'value' => 7, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '28', 'value' => 6, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '29', 'value' => 3, 'userColor' => '#ffd600'),
+        array('blog' => 'My blog', 'day' => '30', 'value' => 6, 'userColor' => '#ffd600')
+    );
+}
+
 function chart_spain_electricity_production() {
     return array(
-        array('country' => 'Spain', 'year' => '2008', 'unit' => 'GWh', 'hydro' => 26112, 'wind' => 32203, 'nuclear' => 58973),
-        array('country' => 'Spain', 'year' => '2007', 'unit' => 'GWh', 'hydro' => 30522, 'wind' => 27568, 'nuclear' => 55103),
-        array('country' => 'Spain', 'year' => '2006', 'unit' => 'GWh', 'hydro' => 29831, 'wind' => 23297, 'nuclear' => 60126),
-        array('country' => 'Spain', 'year' => '2005', 'unit' => 'GWh', 'hydro' => 23025, 'wind' => 21176, 'nuclear' => 57539),
-        array('country' => 'Spain', 'year' => '2004', 'unit' => 'GWh', 'hydro' => 34439, 'wind' => 15700, 'nuclear' => 63606),
-        array('country' => 'Spain', 'year' => '2003', 'unit' => 'GWh', 'hydro' => 43897, 'wind' => 12075, 'nuclear' => 61875),
-        array('country' => 'Spain', 'year' => '2002', 'unit' => 'GWh', 'hydro' => 26270, 'wind' => 9342, 'nuclear' => 63016),
-        array('country' => 'Spain', 'year' => '2001', 'unit' => 'GWh', 'hydro' => 43864, 'wind' => 6759, 'nuclear' => 63708),
-        array('country' => 'Spain', 'year' => '2000', 'unit' => 'GWh', 'hydro' => 31807, 'wind' => 4727, 'nuclear' => 62206)
+        array('country' => 'Spain', 'year' => '2008', 'unit' => 'GWh',  'hydro' => 26112, 'wind' => 32203, 'nuclear' => 58973),
+        array('country' => 'Spain', 'year' => '2007', 'unit' => 'GWh',  'hydro' => 30522, 'wind' => 27568, 'nuclear' => 55103),
+        array('country' => 'Spain', 'year' => '2006', 'unit' => 'GWh',  'hydro' => 29831, 'wind' => 23297, 'nuclear' => 60126),
+        array('country' => 'Spain', 'year' => '2005', 'unit' => 'GWh',  'hydro' => 23025, 'wind' => 21176, 'nuclear' => 57539),
+        array('country' => 'Spain', 'year' => '2004', 'unit' => 'GWh',  'hydro' => 34439, 'wind' => 15700, 'nuclear' => 63606),
+        array('country' => 'Spain', 'year' => '2003', 'unit' => 'GWh',  'hydro' => 43897, 'wind' => 12075, 'nuclear' => 61875),
+        array('country' => 'Spain', 'year' => '2002', 'unit' => 'GWh',  'hydro' => 26270, 'wind' => 9342, 'nuclear' => 63016),
+        array('country' => 'Spain', 'year' => '2001', 'unit' => 'GWh',  'hydro' => 43864, 'wind' => 6759, 'nuclear' => 63708),
+        array('country' => 'Spain', 'year' => '2000', 'unit' => 'GWh',  'hydro' => 31807, 'wind' => 4727, 'nuclear' => 62206)
     );
 }
 
