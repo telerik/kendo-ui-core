@@ -78,9 +78,8 @@ kendo_module({
                         border: {
                             width: 0
                         },
-                        background: "red",
                         size: 2,
-                        visible: true
+                        visible: false
                     }
                 },
                 line: {
@@ -89,8 +88,8 @@ kendo_module({
                         border: {
                             width: 0
                         },
-                        background: "red",
-                        size: 2
+                        size: 2,
+                        visible: false
                     }
                 },
                 column: {
