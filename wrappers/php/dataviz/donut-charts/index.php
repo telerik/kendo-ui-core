@@ -1,6 +1,5 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
-require_once '../../include/chart_data.php';
 require_once '../../include/header.php';
 
 $series2011 = new \Kendo\Dataviz\UI\ChartSeriesItem();
