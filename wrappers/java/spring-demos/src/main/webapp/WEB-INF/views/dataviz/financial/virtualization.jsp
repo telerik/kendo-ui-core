@@ -36,7 +36,7 @@
                  </kendo:dataSource-transport>
 	        </kendo:dataSource>
             <kendo:stockChart-navigator-series>
-                <kendo:stockChart-navigator-seriesItem type="line" field="close" />
+                <kendo:stockChart-navigator-seriesItem type="area" field="high" />
             </kendo:stockChart-navigator-series>
             <kendo:stockChart-navigator-select from="${from}" to="${to}" />
         </kendo:stockChart-navigator>

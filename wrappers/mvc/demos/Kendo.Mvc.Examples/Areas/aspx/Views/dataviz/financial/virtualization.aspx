@@ -26,7 +26,7 @@
             )
             .Series(series =>
             {
-                series.Line(s => s.Volume);
+                series.Area(s => s.High);
             })
             .Select(
                 DateTime.Parse("2009/02/05"),

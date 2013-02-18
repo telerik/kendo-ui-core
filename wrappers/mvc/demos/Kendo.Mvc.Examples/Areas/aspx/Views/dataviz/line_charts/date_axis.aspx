@@ -33,8 +33,13 @@
         </li>
         <li>
             <input id="baseUnitMonths" name="baseUnit"
-                    type="radio" value="months" checked="checked" autocomplete="off" />
+                    type="radio" value="months" autocomplete="off" />
             <label for="baseUnitMonths">Months</label>
+        </li>
+        <li>
+            <input id="baseUnitWeeks" name="baseUnit"
+                    type="radio" value="weeks" checked="checked" autocomplete="off" />
+            <label for="baseUnitWeeks">Weeks</label>
         </li>
         <li>
             <input id="baseUnitDays" name="baseUnit"
@@ -56,12 +61,12 @@
         </li>
         <li>
             <input id="aggregateSum" name="aggregate"
-                    type="radio" value="sum" checked="checked" autocomplete="off" />
+                    type="radio" value="sum" autocomplete="off" />
             <label for="aggregateSum">Sum</label>
         </li>
         <li>
             <input id="aggregateAvg" name="aggregate"
-                    type="radio" value="avg" autocomplete="off" />
+                    type="radio" value="avg" checked="checked" autocomplete="off" />
             <label for="aggregateAvg">Avg</label>
         </li>
         <li>
@@ -79,16 +84,22 @@
         .Series(series =>
         {
             series
-                .Line(new int[] { 20, 40, 45, 30, 50 })
-                .Aggregate(ChartSeriesAggregate.Sum);
+                .Line(new int[] { 30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30 })
+                .Aggregate(ChartSeriesAggregate.Avg);
         })
         .CategoryAxis(axis => axis
             .Date()
-            .BaseUnit(ChartAxisBaseUnit.Months)
+            .BaseUnit(ChartAxisBaseUnit.Weeks)
             .Categories(
+                DateTime.Parse("2011/12/20"), DateTime.Parse("2011/12/21"),
+                DateTime.Parse("2011/12/22"), DateTime.Parse("2011/12/23"),
+                DateTime.Parse("2011/12/24"), DateTime.Parse("2011/12/25"),
+                DateTime.Parse("2011/12/26"), DateTime.Parse("2011/12/27"),
+                DateTime.Parse("2011/12/28"), DateTime.Parse("2011/12/29"),
                 DateTime.Parse("2011/12/30"), DateTime.Parse("2011/12/31"),
                 DateTime.Parse("2012/01/01"), DateTime.Parse("2012/01/02"),
-                DateTime.Parse("2012/01/03")
+                DateTime.Parse("2012/01/03"), DateTime.Parse("2012/01/04"),
+                DateTime.Parse("2012/01/05")
             )
         )
     %>
