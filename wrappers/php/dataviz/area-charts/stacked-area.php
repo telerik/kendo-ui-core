@@ -1,10 +1,6 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
-?>
-
-<div class="chart-wrapper">
-<?php
 
 $chrome = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $chrome->name('Chrome')
@@ -57,10 +53,4 @@ $chart->title(array('text' => 'Browser Usage Trends'))
 
 echo $chart->render();
 ?>
-</div>
-<style type="text/css">
-    #chart {
-        background: center no-repeat url('../../content/shared/styles/world-map.png');
-    }
-</style>
 <?php require_once '../../include/footer.php'; ?>

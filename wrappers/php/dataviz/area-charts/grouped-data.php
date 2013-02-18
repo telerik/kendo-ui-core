@@ -13,9 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 require_once '../../include/header.php';
-?>
-<div class="chart-wrapper">
-<?php
 
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->type('area')
@@ -74,5 +71,4 @@ $chart->title(array('text' => 'Stock Prices'))
 
 echo $chart->render();
 ?>
-</div>
 <?php require_once '../../include/footer.php'; ?>

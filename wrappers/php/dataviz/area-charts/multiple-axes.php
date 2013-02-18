@@ -1,10 +1,6 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
-?>
-
-<div class="chart-wrapper">
-<?php
 
 $battery = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $battery->type('column')
@@ -73,10 +69,4 @@ $chart->title(array('text' => 'Hybrid car mileage report'))
 
 echo $chart->render();
 ?>
-</div>
-<style type="text/css">
-    #chart {
-        background: center no-repeat url('../../content/shared/styles/world-map.png');
-    }
-</style>
 <?php require_once '../../include/footer.php'; ?>

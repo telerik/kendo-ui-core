@@ -13,9 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 require_once '../../include/header.php';
-?>
-<div class="chart-wrapper">
-<?php
 
 $nuclear = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $nuclear->field('nuclear')
@@ -63,5 +60,4 @@ $chart->title(array('text' => 'Spain electricity production (GWh)'))
 
 echo $chart->render();
 ?>
-</div>
 <?php require_once '../../include/footer.php'; ?>

@@ -2,9 +2,6 @@
 require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/chart_data.php';
 require_once '../../include/header.php';
-?>
-<div class="chart-wrapper">
-<?php
 
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->field('value')
@@ -48,5 +45,4 @@ $chart->title(array('text' => 'Internet Users in United States'))
 
 echo $chart->render();
 ?>
-</div>
 <?php require_once '../../include/footer.php'; ?>

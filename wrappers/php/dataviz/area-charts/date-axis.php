@@ -1,10 +1,6 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
-?>
-
-<div class="chart-wrapper">
-<?php
 
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->type('area')
@@ -40,7 +36,6 @@ $chart->addSeriesItem($series)
 
 echo $chart->render();
 ?>
-</div>
 <div class="configuration-horizontal">
     <div class="config-section">
         <span class="configHead">Base date unit</span>
@@ -125,9 +120,4 @@ $(function() {
     }
 });
 </script>
-<style type="text/css">
-    .chart-wrapper, .chart-wrapper .k-chart {
-        height: 300px;
-    }
-</style>
 <?php require_once '../../include/footer.php'; ?>
