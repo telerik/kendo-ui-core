@@ -58,8 +58,7 @@ namespace Kendo.Mvc.UI.Html
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
                    .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)
-                   .ToggleClass("input-validation-error", !Component.IsValid())
-                   .PrependClass(UIPrimitives.Input);
+                   .ToggleClass("input-validation-error", !Component.IsValid());
         }
     }
 }
