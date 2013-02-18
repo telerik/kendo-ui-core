@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// The server side wrapper for Kendo UI Grid
@@ -1305,11 +1306,12 @@ namespace Kendo.Mvc.UI
         {
             return Columns.OfType<GridActionColumn<T>>().SelectMany(c => c.Commands).OfType<TCommand>().Any() ||
                 ToolBar.Commands.OfType<TCommand>().Any();
-        }        
+        }       
 
         private void InitializeEditors()
         {            
             var skip = ViewContext.HttpContext.Items["$SelfInitialize$"] != null && (bool)ViewContext.HttpContext.Items["$SelfInitialize$"] == true;
+            var popupSlashes = new Regex("(?<=data-val-regex-pattern=\")([^\"]*)", RegexOptions.Multiline);
 
             ViewContext.HttpContext.Items["$SelfInitialize$"] = true;            
             
@@ -1323,7 +1325,10 @@ namespace Kendo.Mvc.UI
 
                 htmlHelper.EditorForModel(dataItem, Editable.TemplateName, Columns.OfType<IGridForeignKeyColumn>().Select(c => c.SerializeSelectList), Editable.AdditionalViewData).AppendTo(container);
 
-                EditorHtml = container.InnerHtml;
+                EditorHtml = popupSlashes.Replace(container.InnerHtml, match =>
+                {
+                    return match.Groups[0].Value.Replace("\\", IsInClientTemplate ? "\\\\\\\\" : "\\\\");
+                });                
             }
             else
             {
