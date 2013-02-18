@@ -829,8 +829,9 @@ function pad(number, digits, end) {
             idx = fraction.length;
 
             if (!hasZero && !hasSharp) {
-                format = format.split(POINT)[0];
+                format = format.substring(0, decimalIndex) + format.substring(decimalIndex + 1);
                 length = format.length;
+                decimalIndex = -1;
                 idx = 0;
             } if (hasZero && zeroIndex > sharpIndex) {
                 idx = zeroIndex;

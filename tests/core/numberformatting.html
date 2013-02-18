@@ -331,6 +331,10 @@
                 equal(toString(1110.1, "n", "custom"), "1 110,1000");
             });
 
+            test("toString removes incorrect decimal separators", function() {
+                equal(toString(10, "# y. test"), "10 y test");
+            });
+
         </script>
     </body>
 </html>
