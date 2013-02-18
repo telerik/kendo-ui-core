@@ -360,6 +360,17 @@
             "name": "stock-chart"
         }
     ],
+    "sparklines": [{
+            "text": "Sparklines",
+            "documentation": "dataviz/sparklines",
+            "spriteCssClass": "sparklineIcon",
+            "items": [{
+                "text": "Basic usage",
+                "url": "sparklines/index.html"
+            }],
+            "name": "sparklines"
+        }
+    ],,
     "Sample Dashboards": [
         {
             "text": "Stock History",

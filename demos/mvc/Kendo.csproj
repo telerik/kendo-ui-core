@@ -675,6 +675,8 @@
     <Content Include="Views\web\menu\orientation.cshtml" />
     <Content Include="Views\web\menu\direction.cshtml" />
     <Content Include="Views\web\treeview\checkboxes.cshtml" />
+    <Content Include="Views\dataviz\api\benchmark.cshtml" />
+    <Content Include="Views\dataviz\sparklines\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
