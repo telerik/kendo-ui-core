@@ -55,6 +55,11 @@ namespace Kendo.Mvc.Examples.Models
             set;
         }
 
-        public short UnitsOnOrder { get; set; }
+        [DataType("Integer")]
+        public int UnitsOnOrder 
+        { 
+            get; 
+            set; 
+        }
     }
 }
