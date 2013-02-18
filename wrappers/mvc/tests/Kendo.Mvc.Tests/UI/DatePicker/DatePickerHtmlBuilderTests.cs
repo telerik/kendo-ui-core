@@ -37,14 +37,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Build_render_input_css_classes()
-        {
-            IHtmlNode tag = renderer.Build();
-
-            tag.Attribute("class").ShouldEqual(UIPrimitives.Input);
-        }
-
-        [Fact]
         public void Build_render_input_with_id_and_name()
         {
             datePicker.Name = "datepicker?";
@@ -53,16 +45,6 @@ namespace Kendo.Mvc.UI.Tests
 
             tag.Attribute("id").ShouldEqual("datepicker_");
             tag.Attribute("name").ShouldEqual("datepicker?");
-        }
-
-        [Fact]
-        public void Build_renders_html_attributes()
-        {
-            datePicker.HtmlAttributes.Add("class", "t-test");
-
-            IHtmlNode tag = renderer.Build();
-
-            tag.Attribute("class").ShouldEqual(UIPrimitives.Input + " t-test");
         }
 
         [Fact]
