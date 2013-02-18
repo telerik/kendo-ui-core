@@ -134,6 +134,14 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Strips_type_from_donut_defaults()
+        {
+            seriesDefaults.Donut.StartAngle = 45;
+            var pieData = GetJson(seriesDefaults)["donut"];
+            ((IDictionary<string, object>)pieData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Strips_type_from_scatter_defaults()
         {
             seriesDefaults.Scatter.Opacity = 0.5;
