@@ -1,0 +1,41 @@
+<div id="example" class="k-content">
+    <div class="demo-section">
+        <table id="listView">
+        </table>
+    </div>
+
+    <script id="template" type="text/x-kendo-template">
+        <tr>
+            <td>${ kendo.toString(items[0].Date, "MMMM") }</td>
+            <td><span class="sparkline-t" /></td>
+        </tr>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#listView").kendoListView({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "http://localhost:8080/iis-kendo-crud/Weather/SOFIA",                                    
+                            dataType: "jsonp"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                Date: {
+                                    type: "date"
+                                }
+                            }
+                        }
+                    },
+                    group: {
+                        field: "Date.getMonth()"
+                    }
+                },
+                template: kendo.template($("#template").html())
+            });
+        });
+    </script>
+</div>

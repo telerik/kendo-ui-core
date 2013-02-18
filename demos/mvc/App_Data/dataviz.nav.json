@@ -367,10 +367,13 @@
             "items": [{
                 "text": "Basic usage",
                 "url": "sparklines/index.html"
+            }, {
+                "text": "Binding to remote data",
+                "url": "sparklines/remote-data.html"
             }],
             "name": "sparklines"
         }
-    ],,
+    ],
     "Sample Dashboards": [
         {
             "text": "Stock History",
