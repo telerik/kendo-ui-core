@@ -260,6 +260,15 @@ either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is 
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * The crosshair configuration options.
+    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemCrosshair|array $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
+    */
+    public function crosshair($value) {
+        return $this->setProperty('crosshair', $value);
+    }
+
 //<< Properties
 }
 

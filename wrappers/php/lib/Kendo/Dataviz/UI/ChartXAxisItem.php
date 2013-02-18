@@ -186,6 +186,15 @@ values increase from right to left and from top to bottom.
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * The crosshair configuration options.
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemCrosshair|array $value
+    * @return \Kendo\Dataviz\UI\ChartXAxisItem
+    */
+    public function crosshair($value) {
+        return $this->setProperty('crosshair', $value);
+    }
+
 //<< Properties
 }
 

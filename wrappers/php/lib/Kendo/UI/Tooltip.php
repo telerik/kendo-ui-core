@@ -180,6 +180,20 @@ By default the tooltip will display the target element title attribute content.
     }
 
     /**
+    * Sets the requestStart event of the Tooltip.
+    * Triggered before an AJAX request started.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Tooltip
+    */
+    public function requestStart($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('requestStart', $value);
+    }
+
+    /**
     * Sets the error event of the Tooltip.
     * Triggered when an AJAX request for content fails.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
