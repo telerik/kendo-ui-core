@@ -1,5 +1,6 @@
 ﻿namespace Kendo.Mvc.Infrastructure.Implementation
 {
+    using System;
     using System.Web;
     using System.Web.Routing;
 
@@ -67,16 +68,24 @@
 
         private string MakeCurrentUrlRelative(string appCurrentUrl)
         {
+            string result = string.Empty;
             int appVirtualPathLength = HttpRuntime.AppDomainAppVirtualPath.Length;
-
+            
             if (appVirtualPathLength == 1)
             {
-                return "~" + appCurrentUrl;
+                result = appCurrentUrl;
             }
             else
             {
-                return "~" + appCurrentUrl.Substring(appVirtualPathLength - 1);
+                result = appCurrentUrl.Substring(appVirtualPathLength);
             }
+
+            if (!result.StartsWith("/"))
+            {
+                result = "/" + result;
+            }
+
+            return "~" + result;
         }
     }
 }
