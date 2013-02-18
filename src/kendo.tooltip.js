@@ -277,7 +277,6 @@ kendo_module({
             }
 
             that.popup.one("deactivate", function() {
-                console.log(2);
                 restoreTitle(target);
                 target.removeAttr(DESCRIBEDBY);
 
