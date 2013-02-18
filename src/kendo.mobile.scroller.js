@@ -380,8 +380,8 @@ kendo_module({
             that.pulled = false;
             that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
             that.hintContainer.html(that.refreshTemplate({}));
-            that.trigger("pull");
             that.yinertia.freeze(that.options.pullOffset / 2);
+            that.trigger("pull");
         },
 
         _paneChange: function() {
