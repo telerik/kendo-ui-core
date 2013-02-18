@@ -13,37 +13,21 @@
     </head>
     <body>
         <div id="chart" style="width: 700px; float: left;"></div>
+        <div id="scatterchart" style="width: 700px; float: left;"></div>
         <script>
-            var data = [{"Period":"1-3","Comp1":1,"Comp2":2,"Comp3":3,"Comp4":0},
-                {"Period":"3-5","Comp1":2,"Comp2":5,"Comp3":0,"Comp4":2},
-                {"Period":"5-7","Comp1":3,"Comp2":1,"Comp3":4,"Comp4":2},
-                {"Period":"7-9","Comp1":2,"Comp2":3,"Comp3":5,"Comp4":1},
-                {"Period":"9+","Comp1":3,"Comp2":1,"Comp3":2,"Comp4":2}];
-
+            $(function() {
                 $("#chart").kendoChart({
-                    dataSource:  data,
+                    theme: "blueopal",
                     series: [{
-                        type: "column",
-                        field: "Comp1",
-                        name: "Comp1",
-                        stack: "a"
-                    },{
-                        type: "column",
-                        field: "Comp2",
-                        name: "Comp2"
-                    },{
-                        type: "column",
-                        field: "Comp3",
-                        name: "Comp3"     
-                    },{
-                        type: "column",
-                        field: "Comp4",
-                        name: "Comp4"       
-                    }],
-                    categoryAxis: {
-                        field: "Period"
-                    }
+                        name: "u",
+                        type: "bullet",
+                        data: [ { target: 3, value: 2} ],
+                        color: "red",
+                        gap: 1.5,
+                        spacing: 1.2
+                    }]
                 });
+            });
         </script>
 
         <style>

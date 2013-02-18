@@ -164,7 +164,7 @@ kendo_module({
         ZOOM_END = "zoomEnd",
 
         CATEGORICAL_CHARTS = [
-            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC
+            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, "bullet"
         ],
         XY_CHARTS = [
             SCATTER, SCATTER_LINE, BUBBLE
@@ -426,6 +426,7 @@ kendo_module({
                 xySeries = [],
                 pieSeries = [],
                 donutSeries = [],
+                bulletSeries = [],
                 plotArea;
 
             for (i = 0; i < length; i++) {
@@ -439,6 +440,8 @@ kendo_module({
                     pieSeries.push(currentSeries);
                 } else if (currentSeries.type === DONUT) {
                     donutSeries.push(currentSeries);
+                } else if (currentSeries.type === "bullet") {
+                    bulletSeries.push(currentSeries);
                 }
             }
 
@@ -2330,7 +2333,7 @@ kendo_module({
             return elements;
         },
 
-        highlightOverlay: function(view, options){
+        highlightOverlay: function(view, options) {
             var bar = this,
                 box = bar.box;
 
@@ -2845,6 +2848,230 @@ kendo_module({
         }
     });
 
+    var BulletChart = CategoricalChart.extend({
+        addValue: function(data, category, categoryIx, series, seriesIx) {
+            var chart = this,
+                categoryPoints = chart.categoryPoints[categoryIx],
+                seriesPoints = chart.seriesPoints[seriesIx],
+                point;
+
+            if (!categoryPoints) {
+                chart.categoryPoints[categoryIx] = categoryPoints = [];
+            }
+
+            if (!seriesPoints) {
+                chart.seriesPoints[seriesIx] = seriesPoints = [];
+            }
+
+            chart.updateRange(data, categoryIx, series);
+
+            point = chart.createPoint(data, categoryIx, series);
+            if (point) {
+                point.category = category;
+                point.series = series;
+                point.seriesIx = seriesIx;
+                point.owner = chart;
+                point.dataItem = series.data[categoryIx];
+            }
+
+            chart.points.push(point);
+            seriesPoints.push(point);
+            categoryPoints.push(point);
+        },
+
+        reflowCategories: function(categorySlots) {
+            var chart = this,
+                children = chart.children,
+                childrenLength = children.length,
+                i;
+
+            for (i = 0; i < childrenLength; i++) {
+                children[i].reflow(categorySlots[i]);
+            }
+        },
+
+        createPoint: function(data, categoryIx, series) {
+            var chart = this,
+                options = chart.options,
+                children = chart.children,
+                bullet, cluster;
+
+            bullet = new Bullet(data,
+                deepExtend({}, {
+                    vertical: !options.invertAxes,
+                    overlay: series.overlay,
+                    categoryIx: categoryIx,
+                    invertAxes: options.invertAxes
+                }, series));
+
+            cluster = children[categoryIx];
+            if (!cluster) {
+                cluster = new ClusterLayout({
+                    vertical: options.invertAxes,
+                    gap: options.gap,
+                    spacing: options.spacing
+                });
+                chart.append(cluster);
+            }
+
+            cluster.append(bullet);
+
+            return bullet;
+        },
+
+        updateRange: function(data, categoryIx, series) {
+            var chart = this,
+                axisName = series.axis,
+                value = data.value,
+                target = data.fields.target,
+                axisRange = chart.valueAxisRanges[axisName];
+
+            if (defined(value) && !isNaN(value) && defined(target && !isNaN(target))) {
+                axisRange = chart.valueAxisRanges[axisName] =
+                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                axisRange.min = math.min.apply(math, [axisRange.min, value, target]);
+                axisRange.max = math.max.apply(math, [axisRange.max, value, target]);
+            }
+        },
+
+        bindableFields: function() {
+            return ["target"];
+        },
+
+        formatPointValue: function(point, format) {
+            return autoFormat(format, point.value, point.target);
+        }
+    });
+
+    var Bullet = ChartElement.extend({
+        init: function(data, options) {
+            var bullet = this;
+
+            ChartElement.fn.init.call(bullet, options);
+
+            bullet.data = data;
+            bullet.options.id = uniqueId();
+            bullet.enableDiscovery();
+            bullet.render();
+        },
+
+        options: {
+            color: WHITE,
+            border: {
+                width: 1
+            },
+            vertical: false,
+            animation: {
+                type: BAR
+            },
+            opacity: 1,
+            target: {
+                shape: "",
+                border: {
+                    width: 0,
+                    color: "green"
+                },
+                width: 2
+            }
+        },
+
+        render: function() {
+            var bullet = this,
+                options = bullet.options;
+
+            bullet.target = new Target({
+                id: bullet.options.id,
+                type: options.target.shape,
+                background: options.target.color || options.color,
+                width: options.target.width,
+                opacity: options.opacity,
+                zIndex: options.zIndex,
+                border: options.target.border,
+                align: "right",
+                animation: ""
+            });
+
+            bullet.append(bullet.target);
+        },
+
+        reflow: function(box) {
+            var bullet = this,
+                options = bullet.options,
+                chart = bullet.owner,
+                target = bullet.target,
+                invertAxes = options.invertAxes,
+                valueAxis = chart.seriesValueAxis(bullet.options),
+                axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis),
+                categorySlot = chart.categorySlot(chart.categoryAxis, options.categoryIx, valueAxis),
+                targetValueSlot = chart.valueSlot(valueAxis, bullet.data.fields.target, axisCrossingValue),
+                targetSlotX = invertAxes ? targetValueSlot : categorySlot,
+                targetSlotY = invertAxes ? categorySlot : targetValueSlot,
+                targetSlot = new Box2D(
+                    targetSlotX.x1, targetSlotY.y1,
+                    targetSlotX.x2, targetSlotY.y2
+                );
+
+            target.options.height = targetSlot.height();
+            target.reflow(targetSlot);
+
+            bullet.box = box;
+        },
+
+        getViewElements: function(view) {
+            var bullet = this,
+                options = bullet.options,
+                vertical = options.vertical,
+                border = options.border.width > 0 ? {
+                    stroke: options.border.color || options.color,
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType
+                } : {},
+                box = bullet.box,
+                rectStyle = deepExtend({
+                    id: options.id,
+                    fill: options.color,
+                    fillOpacity: options.opacity,
+                    strokeOpacity: options.opacity,
+                    vertical: options.vertical,
+                    aboveAxis: options.aboveAxis,
+                    animation: options.animation,
+                    data: { modelId: options.modelId }
+                }, border),
+                elements = [];
+
+            if (box.width() > 0 && box.height() > 0) {
+                if (options.overlay) {
+                    rectStyle.overlay = deepExtend({
+                        rotation: vertical ? 0 : 90
+                    }, options.overlay);
+                }
+
+                elements.push(view.createRect(box, rectStyle));
+            }
+
+            append(elements, ChartElement.fn.getViewElements.call(bullet, view));
+
+            return elements;
+        },
+
+        highlightOverlay: function(view, options){
+            var bullet = this,
+                box = bullet.box;
+
+            options = deepExtend({ data: { modelId: bullet.options.modelId } }, options);
+
+            return view.createRect(box, options);
+        },
+
+        formatValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point, format);
+        }
+    });
+    deepExtend(Bullet.fn, PointEventsMixin);
+
     var ShapeElement = BoxElement.extend({
         init: function(options) {
             var marker = this;
@@ -2891,6 +3118,9 @@ kendo_module({
             return [ element ];
         }
     });
+
+    var Target = ShapeElement.extend();
+    deepExtend(Target.fn, PointEventsMixin);
 
     var LinePoint = ChartElement.extend({
         init: function(value, options) {
@@ -5985,7 +6215,7 @@ kendo_module({
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
+                    series[0].type, [BAR, "bullet", VERTICAL_LINE, VERTICAL_AREA]
                 );
             }
 
@@ -6069,6 +6299,11 @@ kendo_module({
 
                 plotArea.createOHLCChart(
                     plotArea.filterSeriesByType(paneSeries, OHLC),
+                    pane
+                );
+
+                plotArea.createBulletChart(
+                    plotArea.filterSeriesByType(paneSeries, "bullet"),
                     pane
                 );
             }
@@ -6197,6 +6432,23 @@ kendo_module({
                 });
 
             plotArea.appendChart(barChart, pane);
+        },
+
+        createBulletChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                bulletChart = new BulletChart(plotArea, {
+                    series: series,
+                    invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
+                });
+
+            plotArea.appendChart(bulletChart, pane);
         },
 
         createLineChart: function(series, pane) {
@@ -7145,8 +7397,7 @@ kendo_module({
     var Tooltip = BaseTooltip.extend({
         show: function(point) {
             var tooltip = this,
-                options = deepExtend({}, tooltip.options, point.options.tooltip),
-                element = tooltip.element;
+                options = deepExtend({}, tooltip.options, point.options.tooltip);
 
             if (!point) {
                 return;
