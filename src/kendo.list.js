@@ -28,7 +28,7 @@ kendo_module({
         extend = $.extend,
         proxy = $.proxy,
         browser = kendo.support.browser,
-        isIE8 = browser.msie && parseInt(browser.version, 10) < 9,
+        isIE8 = browser.msie && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
             "ComboBox": "DropDownList",

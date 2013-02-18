@@ -32,7 +32,7 @@ kendo_module({
     var KEYDOWN_NS = "keydown" + NS;
 
     var browser = kendo.support.browser;
-    var isIE8 = browser.msie && parseInt(browser.version, 10) < 9;
+    var isIE8 = browser.msie && browser.version < 9;
 
     var ColorSelector = Widget.extend({
         init: function(element, options) {

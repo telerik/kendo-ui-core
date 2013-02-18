@@ -22,7 +22,7 @@ kendo_module({
         cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
-        isIE8 = browser.msie && (parseInt(browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
+        isIE8 = browser.msie && browser.version < 9,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
         KEYDOWN_NS = "keydown" + ns,

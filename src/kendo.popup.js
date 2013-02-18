@@ -12,7 +12,7 @@ kendo_module({
         Widget = ui.Widget,
         support = kendo.support,
         getOffset = kendo.getOffset,
-        browser = kendo.support.browser,
+        browser = support.browser,
         appendingToBodyTriggersResize = browser.msie && browser.version < 9,
         OPEN = "open",
         CLOSE = "close",

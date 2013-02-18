@@ -1754,12 +1754,13 @@ function pad(number, digits, end) {
                         browser = {};
                         browser[agent] = true;
                         browser[match[1].toLowerCase()] = true;
-                        browser.version = match[2];
+                        browser.version = parseInt(document.documentMode || match[2], 10);
 
                         break;
                     }
                 }
             }
+
             return browser;
         }
 
@@ -1768,8 +1769,7 @@ function pad(number, digits, end) {
         (function(browser) {
             // add browser-specific CSS class
             var cssClass,
-                version = "" + browser.version,
-                majorVersion = version.substring(0, version.indexOf("."));
+                majorVersion = parseInt(browser.version, 10);
 
             if (browser.msie) {
                 cssClass = "ie";
