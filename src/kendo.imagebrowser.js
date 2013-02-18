@@ -5,6 +5,7 @@
         proxy = $.proxy,
         extend = $.extend,
         placeholderSupported = kendo.support.placeholder,
+        browser = kendo.support.browser,
         isFunction = $.isFunction,
         trimSlashesRegExp = /(^\/|\/$)/g,
         CHANGE = "change",
@@ -101,8 +102,7 @@
     });
 
     function bindDragEventWrappers(element, onDragEnter, onDragLeave) {
-        var hideInterval, lastDrag,
-            browser = kendo.support.browser;
+        var hideInterval, lastDrag;
 
         element
             .on("dragenter" + NS, function(e) {
