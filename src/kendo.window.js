@@ -946,7 +946,7 @@ kendo_module({
                 height: wrapper.height()
             };
 
-            that.containerOffset = wnd.appendTo.offset(),
+            that.containerOffset = wnd.appendTo.offset();
 
             wrapper
                 .append(templates.overlay)
@@ -1047,7 +1047,7 @@ kendo_module({
 
             wnd.trigger(DRAGSTART);
 
-            wnd.initialWindowPosition = wnd.wrapper.position();
+            wnd.initialWindowPosition = kendo.getOffset(wnd.wrapper, "position");
 
             wnd.startPosition = {
                 left: e.x.client - wnd.initialWindowPosition.left,

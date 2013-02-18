@@ -357,7 +357,7 @@ kendo_module({
             hsvRect.on(MOUSEDOWN_NS, function(ev){
                 hsvRect.addClass("k-dragging");
                 hsvHandle.focus();
-                var r = hsvRect.offset();
+                var r = kendo.getOffset(hsvRect);
                 var rw = hsvRect.width();
                 var rh = hsvRect.height();
                 function onmove(ev) {

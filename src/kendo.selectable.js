@@ -287,7 +287,7 @@ kendo_module({
     });
 
     function collision(element, position) {
-        var elementPosition = element.offset(),
+        var elementPosition = kendo.getOffset(element),
             right = position.left + position.width,
             bottom = position.top + position.height;
 

@@ -435,12 +435,12 @@ kendo_module({
                 wrapper.css(that._align(origins, positions));
             }
 
-            var pos = getOffset(wrapper, POSITION),
+            var pos = getOffset(wrapper, POSITION, anchor[0] === wrapper.offsetParent()[0]),
                 offset = getOffset(wrapper),
                 anchorParent = anchor.offsetParent().parent(".k-animation-container"); // If the parent is positioned, get the current positions
 
             if (anchorParent.length && anchorParent.data(FITTED)) {
-                pos = getOffset(wrapper, POSITION);
+                pos = getOffset(wrapper, POSITION, true);
                 offset = getOffset(wrapper);
             }
 

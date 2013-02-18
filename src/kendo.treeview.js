@@ -1644,7 +1644,7 @@ kendo_module({
            },
            cursorOffset: {
                left: 10,
-               top: kendo.support.touch ? -40 / kendo.support.zoomLevel() : 10
+               top: kendo.support.touch || kendo.support.pointers ? -40 / kendo.support.zoomLevel() : 10
            },
            dragstart: proxy(that.dragstart, that),
            dragcancel: proxy(that.dragcancel, that),
@@ -1711,7 +1711,7 @@ kendo_module({
 
                 if (hoveredItem.length) {
                     itemHeight = hoveredItem.outerHeight();
-                    itemTop = hoveredItem.offset().top;
+                    itemTop = kendo.getOffset(hoveredItem).top;
                     itemContent = dropTarget.closest(".k-in");
                     delta = itemHeight / (itemContent.length > 0 ? 4 : 2);
 

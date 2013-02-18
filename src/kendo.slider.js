@@ -382,12 +382,11 @@ kendo_module({
 
         _getDragableArea: function() {
             var that = this,
-                offsetLeft = that._trackDiv.offset().left,
-                offsetTop = that._trackDiv.offset().top;
+                offset = kendo.getOffset(that._trackDiv);
 
             return {
-                startPoint: that._isHorizontal ? offsetLeft : offsetTop + that._maxSelection,
-                endPoint: that._isHorizontal ? offsetLeft + that._maxSelection : offsetTop
+                startPoint: that._isHorizontal ? offset.left : offset.top + that._maxSelection,
+                endPoint: that._isHorizontal ? offset.left + that._maxSelection : offset.top
             };
         },
 
@@ -1100,7 +1099,7 @@ kendo_module({
                 owner = that.owner,
                 positionTop = 0,
                 positionLeft = 0,
-                dragHandleOffset = that.dragHandle.offset(),
+                dragHandleOffset = kendo.getOffset(that.dragHandle),
                 margin = 4,
                 callout = that.tooltipDiv.find(".k-callout"),
                 dragHandles,
@@ -1109,8 +1108,8 @@ kendo_module({
 
             if (that.type) {
                 dragHandles = owner.wrapper.find(DRAG_HANDLE);
-                firstDragHandleOffset = dragHandles.eq(0).offset();
-                secondDragHandleOffset = dragHandles.eq(1).offset();
+                firstDragHandleOffset = kendo.getOffset(dragHandles.eq(0));
+                secondDragHandleOffset = kendo.getOffset(dragHandles.eq(1));
 
                 if (owner._isHorizontal) {
                     positionTop = secondDragHandleOffset.top;

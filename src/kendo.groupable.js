@@ -83,7 +83,7 @@ kendo_module({
                             return;
                         }
                         if(lastCuePosition) {
-                            position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft"), 10) + parseInt(lastCuePosition.element.css("marginRight"), 10));
+                            position = that._dropCuePosition(kendo.getOffset(dropCue).left + parseInt(lastCuePosition.element.css("marginLeft"), 10) + parseInt(lastCuePosition.element.css("marginRight"), 10));
                             if(position && that._canDrop($(sourceIndicator), position.element, position.left)) {
                                 if(position.before) {
                                     position.element.before(sourceIndicator || that.buildIndicator(field, title));
@@ -339,7 +339,7 @@ kendo_module({
                 left;
             that._dropCuePositions = $.map(indicators, function(item) {
                 item = $(item);
-                left = item.offset().left;
+                left = kendo.getOffset(item).left;
                 return {
                     left: parseInt(left, 10),
                     right: parseInt(left + item.outerWidth(), 10),

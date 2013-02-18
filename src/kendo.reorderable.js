@@ -47,15 +47,17 @@ kendo_module({
                         return;
                     }
 
-                    var dropTarget = this.element,
+                    var dropTarget = this.element, offset,
                         same = dropTarget[0] === that._draggable[0];
 
                     toggleHintClass(e.draggable.hint, same);
                     if (!same) {
+                        offset = kendo.getOffset(dropTarget);
+
                         that.reorderDropCue.css({
                              height: dropTarget.outerHeight(),
-                             top: dropTarget.offset().top,
-                             left: dropTarget.offset().left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
+                             top: offset.top,
+                             left: offset.left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
                         })
                         .appendTo(document.body);
                     }

@@ -1789,7 +1789,8 @@ function pad(number, digits, end) {
         })(support.browser);
 
         support.zoomLevel = function() {
-            return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
+            return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
+                   support.pointers ? (window.outerWidth / window.innerWidth) : 1;
         };
 
         support.eventCapture = document.documentElement.addEventListener;
@@ -1834,7 +1835,7 @@ function pad(number, digits, end) {
         return $.trim($(element).contents().filter(function () { return this.nodeType != 8; }).html()) === "";
     }
 
-    function getOffset(element, type) {
+    function getOffset(element, type, positioned) {
         if (!type) {
             type = "offset";
         }
@@ -1844,14 +1845,19 @@ function pad(number, digits, end) {
 
         if (support.touch && mobileOS.ios && mobileOS.flatVersion < 410) { // Extra processing only in broken iOS'
             var offset = type == "offset" ? result : element.offset(),
-                positioned = (result.left == offset.left && result.top == offset.top);
+                position = (result.left == offset.left && result.top == offset.top);
 
-            if (positioned) {
+            if (position) {
                 return {
                     top: result.top - window.scrollY,
                     left: result.left - window.scrollX
                 };
             }
+        }
+
+        if (kendo.support.pointers && !positioned) { // IE10 touch zoom is living in a separate viewport.
+            result.top -= (window.pageYOffset - document.documentElement.scrollTop);
+            result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
         }
 
         return result;
