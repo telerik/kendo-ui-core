@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI
         public bool IsSelfInitialized
         {
             get;
-            private set;
+            set;
         }
 
         public bool IsInClientTemplate
