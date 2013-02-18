@@ -13,6 +13,8 @@ kendo_module({
 
         Chart = dataviz.ui.Chart,
         ObservableArray = kendo.data.ObservableArray,
+        MultiplePointTooltip = dataviz.MultiplePointTooltip,
+        Tooltip = dataviz.Tooltip,
 
         deepExtend = kendo.deepExtend,
         isArray = $.isArray,
@@ -159,8 +161,24 @@ kendo_module({
             return options;
         },
 
+        _createTooltip: function() {
+            var chart = this,
+                options = chart.options,
+                element = chart.element,
+                tooltip;
+
+            if (options.tooltip.shared) {
+                tooltip = new SparklineMultiplePointTooltip(element, options.tooltip);
+            } else {
+                tooltip = new SparklineTooltip(element, options.tooltip);
+            }
+
+            return tooltip;
+        },
+
         _renderView: function() {
             var chart = this;
+            chart.element.empty().append(chart.stage);
             return chart._view.renderTo(chart.stage[0]);
         },
 
@@ -188,6 +206,24 @@ kendo_module({
             }
 
             return width;
+        }
+    });
+
+    var SparklineTooltip = Tooltip.extend({
+        _anchor: function(point) {
+            var anchor = Tooltip.fn._anchor.call(this, point);
+            anchor.y = -this.element.height() - this.options.offset;
+
+            return anchor;
+        }
+    });
+
+    var SparklineMultiplePointTooltip = MultiplePointTooltip.extend({
+        _anchor: function(point, slot) {
+            var anchor = MultiplePointTooltip.fn._anchor.call(this, point, slot);
+            anchor.y = -this.element.height() - this.options.offset;
+
+            return anchor;
         }
     });
 

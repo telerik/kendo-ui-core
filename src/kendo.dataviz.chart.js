@@ -329,7 +329,6 @@ kendo_module({
         _redraw: function() {
             var chart = this,
                 options = chart.options,
-                element = chart.element,
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
@@ -339,15 +338,30 @@ kendo_module({
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
                 chart._viewElement = chart._renderView(view);
+                chart._tooltip = chart._createTooltip();
 
                 if (options.tooltip.shared) {
-                    chart._tooltip = new MultiplePointTooltip(element, chart._plotArea, options.tooltip);
-                    chart._highlight = new MultiplePointHighlight(view, chart._viewElement, chart._plotArea);
+                    chart._tooltip = new MultiplePointTooltip(element, options.tooltip);
+                    chart._highlight = new MultiplePointHighlight(view, chart._viewElement);
                 } else {
-                    chart._tooltip = new Tooltip(element, options.tooltip);
                     chart._highlight = new Highlight(view, chart._viewElement);
                 }
             }
+        },
+
+        _createTooltip: function() {
+            var chart = this,
+                options = chart.options,
+                element = chart.element,
+                tooltip;
+
+            if (options.tooltip.shared) {
+                tooltip = new MultiplePointTooltip(element, options.tooltip);
+            } else {
+                tooltip = new Tooltip(element, options.tooltip);
+            }
+
+            return tooltip;
         },
 
         _renderView: function() {
@@ -7081,7 +7095,21 @@ kendo_module({
                     });
         },
 
-        pointContent: function(point) {
+        hide: function() {
+            var tooltip = this;
+
+            clearTimeout(tooltip.showTimeout);
+
+            if (tooltip.visible) {
+                tooltip.element.fadeOut();
+
+                tooltip.point = null;
+                tooltip.visible = false;
+                tooltip.index = null;
+            }
+        },
+
+        _pointContent: function(point) {
             var tooltip = this,
                 options = deepExtend({}, tooltip.options, point.options.tooltip),
                 content, tooltipTemplate;
@@ -7106,18 +7134,11 @@ kendo_module({
             return content;
         },
 
-        hide: function() {
-            var tooltip = this;
+        _anchor: function(point) {
+            var tooltip = this,
+                element = tooltip.element;
 
-            clearTimeout(tooltip.showTimeout);
-
-            if (tooltip.visible) {
-                tooltip.element.fadeOut();
-
-                tooltip.point = null;
-                tooltip.visible = false;
-                tooltip.index = null;
-            }
+            return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
         }
     });
 
@@ -7135,8 +7156,8 @@ kendo_module({
                 options.border.color = point.options.color;
             }
 
-            tooltip.element.html(tooltip.pointContent(point));
-            tooltip.anchor = point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            tooltip.element.html(tooltip._pointContent(point));
+            tooltip.anchor = tooltip._anchor(point);
 
             tooltip.setStyle(options);
 
@@ -7161,7 +7182,7 @@ kendo_module({
                       "# var point = points[i]; #" +
                         "<tr>" +
                             "# if(point.series.name) { #<td>#= point.series.name #:</td> # } #" +
-                                "<td>#= pointContent(point) #</td>" +
+                                "<td>#= content(point) #</td>" +
                         "</tr>" +
                       "# } #" +
                       "</table>",
@@ -7178,7 +7199,7 @@ kendo_module({
                 category = axis.getCategory(point),
                 points = plotArea.pointsByCategoryIndex(index),
                 slot = axis.getSlot(index),
-                content, hCenter;
+                content;
 
             if (tooltip.index == index) {
                 return;
@@ -7194,18 +7215,13 @@ kendo_module({
                 category = autoFormat(axisOptions.labels.dateFormats[axisOptions.baseUnit], category);
             }
 
-            content = tooltip.getContent(points, category);
+            content = tooltip._content(points, category);
             if (!defined(content)) {
                 tooltip.hide();
                 return;
             }
             tooltip.element.html(content);
-            hCenter = point.y - tooltip.element.height() / 2;
-            if (axis.options.vertical) {
-                tooltip.anchor = Point2D(point.x + options.offset, hCenter);
-            } else {
-                tooltip.anchor = Point2D(slot.x1 + slot.width() / 2 + options.offset, hCenter);
-            }
+            tooltip.anchor = tooltip._anchor(point, slot);
 
             tooltip.setStyle(options);
 
@@ -7213,7 +7229,24 @@ kendo_module({
                 setTimeout(proxy(tooltip.move, tooltip), TOOLTIP_SHOW_DELAY);
         },
 
-        getContent: function(points, category) {
+        _anchor: function(point, slot) {
+            var tooltip = this,
+                options = tooltip.options,
+                plotArea = tooltip.plotArea,
+                axis = plotArea.categoryAxis,
+                anchor,
+                hCenter = point.y - tooltip.element.height() / 2;
+
+            if (axis.options.vertical) {
+                anchor = Point2D(point.x + options.offset, hCenter);
+            } else {
+                anchor = Point2D(slot.x1 + slot.width() / 2 + options.offset, hCenter);
+            }
+
+            return anchor;
+        },
+
+        _content: function(points, category) {
             var tooltip = this,
                 content, template;
 
@@ -7222,7 +7255,7 @@ kendo_module({
                 content = template({
                     points: points,
                     category: category,
-                    pointContent: tooltip.pointContent
+                    content: tooltip._pointContent
                 });
             }
 
