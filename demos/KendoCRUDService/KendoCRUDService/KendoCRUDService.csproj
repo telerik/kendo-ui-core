@@ -100,6 +100,7 @@
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StockDataController.cs" />
+    <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -130,6 +131,8 @@
     <Compile Include="Models\StockData\BaseUnit.cs" />
     <Compile Include="Models\StockData\DataFilter.cs" />
     <Compile Include="Models\StockData\StockDataPoint.cs" />
+    <Compile Include="Models\Weather\WeatherRepository.cs" />
+    <Compile Include="Models\Weather\WeatherModel.cs" />
     <Compile Include="Northwind.svc.cs">
       <DependentUpon>Northwind.svc</DependentUpon>
     </Compile>
