@@ -267,6 +267,7 @@ kendo_module({
 
             if (current && current[0] != target[0]) {
                 that.popup.close();
+                that.popup.element.kendoStop(true);// animation can be too long to hide the element before it is shown again
             }
 
             if (!current || current[0] != target[0]) {
@@ -276,6 +277,7 @@ kendo_module({
             }
 
             that.popup.one("deactivate", function() {
+                console.log(2);
                 restoreTitle(target);
                 target.removeAttr(DESCRIBEDBY);
 
