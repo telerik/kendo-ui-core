@@ -59,6 +59,14 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The default settings for all donut series
+        /// </summary>
+        IChartDonutSeries Donut
+        {
+            get;
+        }
+
+        /// <summary>
         /// The default settings for all scatter series
         /// </summary>
         IChartScatterSeries Scatter

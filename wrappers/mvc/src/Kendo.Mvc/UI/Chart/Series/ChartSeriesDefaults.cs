@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
             Line = new ChartLineSeries<T, object>();
             VerticalLine = new ChartLineSeries<T, object>();
             Pie = new ChartPieSeries<T, object>();
+            Donut = new ChartDonutSeries<T, object>();
             Scatter = new ChartScatterSeries<T, object, object>();
             ScatterLine = new ChartScatterLineSeries<T, object, object>();
             Area = new ChartAreaSeries<T, object>();
@@ -77,6 +78,15 @@ namespace Kendo.Mvc.UI
         /// The default settings for all pie series.
         /// </summary>
         public IChartPieSeries Pie
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all donut series.
+        /// </summary>
+        public IChartDonutSeries Donut
         {
             get;
             private set;

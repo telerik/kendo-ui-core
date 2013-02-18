@@ -70,6 +70,14 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the default settings for donut series.
+        /// </summary>
+        public virtual ChartPieSeriesBuilder<TModel> Donut()
+        {
+            return new ChartDonutSeriesBuilder<TModel>(chart.SeriesDefaults.Donut);
+        }
+
+        /// <summary>
         /// Defines the default settings for scatter series.
         /// </summary>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter()

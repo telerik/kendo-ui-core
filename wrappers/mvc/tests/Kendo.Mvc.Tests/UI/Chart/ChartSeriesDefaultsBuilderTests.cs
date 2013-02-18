@@ -70,5 +70,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
             builder.ScatterLine().Opacity(.5);
             chart.SeriesDefaults.ScatterLine.Opacity.ShouldEqual(0.5);
         }
+
+        [Fact]
+        public void Pie_sets_PieSeries_options()
+        {
+            builder.Pie().StartAngle(42);
+            chart.SeriesDefaults.Pie.StartAngle.ShouldEqual(42);
+        }
+
+        [Fact]
+        public void Donut_sets_DonutSeries_options()
+        {
+            builder.Donut().StartAngle(42);
+            chart.SeriesDefaults.Donut.StartAngle.ShouldEqual(42);
+        }
     }
 }
