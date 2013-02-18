@@ -17,16 +17,8 @@ namespace Kendo.Mvc.UI
             Max = DateTime.Today;
 
             Interval = 30;
-
-            Dates = new List<DateTime>();
         }
-
-        public List<DateTime> Dates 
-        { 
-            get; 
-            set; 
-        }
-
+        
         public int Interval
         {
             get;

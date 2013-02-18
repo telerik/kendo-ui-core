@@ -16,7 +16,9 @@ namespace Kendo.Mvc.UI
             ParseFormats = new List<string>();
             
             Animation = new PopupAnimation();
-            
+
+            Dates = new List<DateTime>();
+
             Value = null;
             Enabled = true;
         }
@@ -49,6 +51,12 @@ namespace Kendo.Mvc.UI
 
                 return info;
             }
+        }
+
+        public IList<DateTime> Dates
+        {
+            get;
+            set;
         }
 
         public string Format

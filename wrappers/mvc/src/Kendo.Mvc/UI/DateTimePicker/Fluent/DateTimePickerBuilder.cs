@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Binds the TimeView to a list of DateTime objects.
         /// </summary>
-        /// <param name="dataSource">The data source.</param>
+        /// <param name="dates">The dates.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().TimePicker()
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DateTimePickerBuilder BindTo(List<DateTime> dates)
+        public DateTimePickerBuilder BindTo(IList<DateTime> dates)
         {
 
             Component.Dates = dates;

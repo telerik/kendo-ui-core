@@ -1,8 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePicker"/> component.
@@ -16,6 +16,29 @@ namespace Kendo.Mvc.UI.Fluent
         public DatePickerBuilder(DatePicker component)
             : base(component)
         {
+        }
+
+        /// <summary>
+        /// Specifies a list of dates, which will be passed to the month template.
+        /// </summary>
+        /// <param name="dates">The dates.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TimePicker()
+        ///             .Name("TimePicker")
+        ///             .BindTo(new List<DateTime>
+        ///             {
+        ///                 DateTime.Now
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DatePickerBuilder BindTo(List<DateTime> dates)
+        {
+
+            Component.Dates = dates;
+
+            return this;
         }
 
         /// <summary>

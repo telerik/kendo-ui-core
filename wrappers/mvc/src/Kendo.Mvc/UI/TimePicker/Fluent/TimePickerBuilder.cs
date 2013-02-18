@@ -100,7 +100,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TimePickerBuilder BindTo(List<DateTime> dates)
+        public TimePickerBuilder BindTo(IList<DateTime> dates)
         {
             Component.Dates = dates;
 

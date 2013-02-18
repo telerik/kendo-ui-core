@@ -24,8 +24,6 @@ namespace Kendo.Mvc.UI
 
             MonthTemplate = new MonthTemplate();
 
-            Dates = new List<DateTime>();
-
             Interval = 30;
         }
 
@@ -58,13 +56,7 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
-        public List<DateTime> Dates
-        {
-            get;
-            set;
-        }
-
+        
         public int Interval
         {
             get;
