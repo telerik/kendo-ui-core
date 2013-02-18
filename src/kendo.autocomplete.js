@@ -201,7 +201,13 @@ kendo_module({
         },
 
         close: function () {
-            var that = this;
+            var that = this,
+                current = that._current;
+
+            if (current) {
+                current.removeClass(SELECTED);
+            }
+
             that.current(null);
             that.popup.close();
         },
