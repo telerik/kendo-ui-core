@@ -2,30 +2,23 @@
             <div class="demo-section">
                 <ul id="products" class="dairy-photos">
                     <li>
-                        <a href="#" data-id="11" title="Queso Cabrales"><img src="../../content/web/foods/11.jpg" /></a>
+                        <a href="#" data-id="11" title="A cheese made in the artisan tradition by rural dairy farmers in the north of Spain"><img src="../../content/web/foods/11.jpg" /> Queso de Cabrales</a>
                     </li><li>
-                        <a href="#" data-id="12" title="Queso Manchego La Pastora"><img src="../../content/web/foods/12.jpg" /></a>
+                        <a href="#" data-id="12" title="A cheese made in the La Mancha region of Spain from the milk of sheep of the Manchega breed"><img src="../../content/web/foods/12.jpg" /> Queso<br /> Manchego</a>
                     </li><li>
-                        <a href="#" data-id="31" title="Gorgonzola Telino"><img src="../../content/web/foods/31.jpg" /></a>
+                        <a href="#" data-id="31" title="A veined Italian blue cheese, made from unskimmed cow's milk"><img src="../../content/web/foods/31.jpg" /> Gorgonzola Telino</a>
                     </li><li>
-                        <a href="#" data-id="32" title="Mascarpone Fabioli"><img src="../../content/web/foods/32.jpg" /></a>
+                        <a href="#" data-id="32" title="An Italian cheese made from cream"><img src="../../content/web/foods/32.jpg" /> Mascarpone Fabioli</a>
                     </li><li>
-                        <a href="#" data-id="33" title="Geitost"><img src="../../content/web/foods/33.jpg" /></a>
+                        <a href="#" data-id="33" title="A white cheese made from goat milk"><img src="../../content/web/foods/33.jpg" /> Geitost</a>
                     </li><li>
-                        <a href="#" data-id="59" title="Raclette Courdavault"><img src="../../content/web/foods/59.jpg" /></a>
+                        <a href="#" data-id="59" title="A semi-firm, cow's milk cheese"><img src="../../content/web/foods/59.jpg" /> Raclette Courdavault</a>
                     </li><li>
-                        <a href="#" data-id="60" title="Camembert Pierrott"><img src="../../content/web/foods/60.jpg" /></a>
+                        <a href="#" data-id="60" title="A soft, creamy, surface-ripened cow's milk cheese"><img src="../../content/web/foods/60.jpg" /> Camembert Pierrott</a>
                     </li><li>
-                        <a href="#" data-id="69" title="Gudbrandsdalsost"><img src="../../content/web/foods/69.jpg" /></a>
-                    </li><li>
-                        <a href="#" data-id="72" title="Mozzarella di Giovanni"><img src="../../content/web/foods/72.jpg" /></a>
+                        <a href="#" data-id="72" title="A fresh cheese, originally from southern Italy, made from either buffalo's or cow's milk by the pasta filata method"><img src="../../content/web/foods/72.jpg" /> Mozzarella di Giovanni</a>
                     </li>
                 </ul>
-                <div class="dairy-description">
-                    <h2>Dairy Products</h2>
-                    <p>Queso Cabrales, Queso Manchego La Pastora, Gorgonzola Telino, Mascarpone Fabioli, Geitost, Raclette Courdavault, Camembert Pierrott, Gudbrandsdalsost, Flotemysost, Mozzarella di Giovanni</p>
-                    <p>Hover an image for details.</p>
-                </div>
             </div>
 
             <script>
@@ -35,8 +28,8 @@
                     $("#products").kendoTooltip({
                         filter: "a",
                         content: kendo.template($("#template").html()),
-                        width: 220,
-                        height: 300,
+                        width: 400,
+                        height: 200,
                         position: "top"
                     });
 
@@ -46,55 +39,59 @@
 
             <script id="template" type="text/x-kendo-template">
                 <img src="../../content/web/foods/200/#=target.data('id')#.jpg" alt="#=target.data('title')#" />
-                <h3>#=target.data('title')#</h3>
+                <p>#=target.data('title')#</p>
             </script>
 
             <style scoped="scoped">
                 .demo-section {
-                    height: 460px;
+                    width: 620px;
+                    border: 0;
+                    background: #ffc851 url('../../content/web/tooltip/cheese.jpg') no-repeat 100% 100%;
                 }
                 .dairy-photos {
-                    float: left;
                     list-style-type: none;
-                    margin: 60px 0 0 60px;
+                    margin: 15px 0 15px 10px;
                     padding: 0;
-                    width: 330px;
-                    line-height: 0;
                 }
                 .dairy-photos li {
                     display: inline-block;
-                    margin: 0;
+                    margin: 5px;
                     padding: 0;
-                    width:110px;
-                    height: 110px;
-                    position: relative;
-                }
-                .dairy-photos li:hover {
-                    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.8);
-                    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.8);
-                    box-shadow: 0 0 10px rgba(0,0,0,0.8);
-                    z-index: 1;
-                }
-                .dairy-photos li,
-                .dairy-photos li:hover {
-                    transition: all .2s;
-                    -moz-transition: all .2s;
-                    -webkit-transition: all .2s;
+                    vertical-align: top;
                 }
                 .dairy-photos a {
-                    display: inline-block;
+                    display: block;
+                    width: 100px;
+                    height: 155px;
+                    padding: 0 0 0 10px;
+                    font-size: .9em;
+                    line-height: 1.2em;
+                    text-transform: uppercase;
+                    color: #777;
+                    background-color: rgba(255,255,255,0.8);
+                    -moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+                    -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+                    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
                 }
-                .dairy-description {
-                    float: right;
-                    width: 200px;
-                    margin: 80px 60px 0 0;
+                .dairy-photos a:hover {
+                    color: #fff;
+                    background-color: #000;
                 }
-                .dairy-description h2 {
-                    font-size: 2.7em;
-                    font-weight: normal;
+                .dairy-photos a img {
+                    margin: 0 0 5px -10px;
                 }
-                .dairy-description p {
-                    line-height: 2em;
+                .k-tooltip-content {
+                    vertical-align: middle;
+                }
+                .k-tooltip-content img,
+                .k-tooltip-content p {
+                    float: left;
+                }
+                .k-tooltip-content p {
+                    font-size: 1.4em;
+                    padding: 20px;
+                    width: 160px;
+                    text-align: left;
                 }
             </style>
         </div>
