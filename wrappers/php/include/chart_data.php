@@ -1,4 +1,22 @@
 <?php
+function chart_price_performance() {
+    return array(
+        array('family' => 'Pentium', 'model' => 'D 820', 'price' => 105, 'performance' => 100),
+        array('family' => 'Pentium', 'model' => 'D 915', 'price' => 120, 'performance' => 102),
+        array('family' => 'Pentium', 'model' => 'D 945', 'price' => 160, 'performance' => 118),
+        array('family' => 'Pentium', 'model' => 'XE 965', 'price' => 1000, 'performance' => 137),
+        array('family' => 'Core 2 Duo', 'model' => 'E6300', 'price' => 185, 'performance' => 134),
+        array('family' => 'Core 2 Duo', 'model' => 'E6400', 'price' => 210, 'performance' => 143),
+        array('family' => 'Core 2 Duo', 'model' => 'E6600', 'price' => 305, 'performance' => 163),
+        array('family' => 'Core 2 Duo', 'model' => 'E6700', 'price' => 530, 'performance' => 177),
+        array('family' => 'Core 2 Extreme', 'model' => 'X6800', 'price' => 1000, 'performance' => 190),
+        array('family' => 'Athlon 64', 'model' => 'X2 3800+', 'price' => 148, 'performance' => 115),
+        array('family' => 'Athlon 64', 'model' => 'X2 4200+', 'price' => 170, 'performance' => 125),
+        array('family' => 'Athlon 64', 'model' => 'X2 4600+', 'price' => 205, 'performance' => 138),
+        array('family' => 'Athlon 64', 'model' => 'X2 5000+', 'price' => 290, 'performance' => 143),
+        array('family' => 'Athlon 64', 'model' => 'FX-62', 'price' => 800, 'performance' => 147)
+    );
+}
 function chart_screen_resolution() {
     return array(
         array('year' => 2000, 'resolution' => '1024x768', 'share' => 25, 'visibleInLegend' => false, 'order' => 1),

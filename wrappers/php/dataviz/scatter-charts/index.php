@@ -50,7 +50,8 @@ $chart->title(array('text' => 'Rainfall - Wind Speed'))
       ->seriesDefaults(array('type' => 'scatter'))
       ->addXAxisItem($xAxis)
       ->addYAxisItem($yAxis)
-      ->tooltip(array('visible' => true, 'format' => '{3}: {2:N0} applications', 'opacity' => 1))
-      ->addSeriesItem($series2008, $series2009);
+      ->addSeriesItem($series2008, $series2009, $series2010);
+
+echo $chart->render();
 ?>
 <?php require_once '../../include/footer.php'; ?>
