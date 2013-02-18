@@ -52,8 +52,7 @@ namespace Kendo.Mvc.UI.Html
                    .ToggleAttribute("max", "{0}".FormatWith(Component.Max), Component.Max.HasValue)
                    .ToggleAttribute("step", "{0}".FormatWith(Component.Step), Component.Step.HasValue)
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)
-                   .ToggleClass("input-validation-error", !Component.IsValid())
-                   .PrependClass(UIPrimitives.Input);
+                   .ToggleClass("input-validation-error", !Component.IsValid());
         }
     }
 }
