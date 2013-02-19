@@ -1178,7 +1178,7 @@
                 });
 
                 test("Returns correct first partial category (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(98, 0)),
+                    same(dateAxis.getCategory(new Point2D(14, 0)),
                            new Date("2012/02/01 15:00:00"));
                 });
 
@@ -1189,7 +1189,7 @@
 
                 test("Returns correct first full slot (right edge)", function() {
                     same(dateAxis.getCategory(new Point2D(324, 0)).toString(),
-                         new Date("2012/02/02 00:00:00").toString());
+                         new Date("2012/02/03 00:00:00").toString());
                 });
 
                 test("Returns correct last full slot (left edge)", function() {
@@ -1199,7 +1199,7 @@
 
                 test("Returns correct last full slot (right edge)", function() {
                     same(dateAxis.getCategory(new Point2D(776, 0)).toString(),
-                         new Date("2012/02/04 00:00:00").toString());
+                         new Date("2012/02/05 00:00:00").toString());
                 });
 
                 test("Returns correct last partial slot (left edge)", function() {
@@ -1209,7 +1209,7 @@
 
                 test("Returns correct last partial slot (right edge)", function() {
                     same(dateAxis.getCategory(new Point2D(785, 0)).toString(),
-                         new Date("2012/02/05 00:00:00").toString());
+                         new Date("2012/02/05 01:00:00").toString());
                 });
 
             })();

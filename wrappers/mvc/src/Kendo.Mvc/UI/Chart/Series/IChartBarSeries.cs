@@ -91,5 +91,14 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the series color for negative values
+        /// </summary>
+        string NegativeColor
+        {
+            get;
+            set;
+        }
     }
 }

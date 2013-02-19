@@ -1,0 +1,76 @@
+<div id="example" class="k-content">
+    <table id="weather" class="metrotable">
+        <thead>
+            <tr>
+                <th>MONTH</th>
+                <th>MAX TEMP &deg;C</th>
+                <th>WIND SPEED KM/H</th>
+                <th>RAINFALL MM</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script id="template" type="text/x-kendo-template">
+        <tr>
+            <td>${month}</td>
+            <td><span class="sparkline-tmax"></span></td>
+            <td><span class="sparkline-wnd"></span></td>
+            <td><span class="sparkline-rain"></span></td>
+        </tr>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Create a row template using the above definition
+            var template = kendo.template($("#template").html());
+
+            var months = [ "January", "February", "March", "April", "May", "June" ];
+
+            for (var i = 0; i < months.length; i++) {
+                var monthNumber = i + 1;
+
+                var row = $("#weather tbody")
+                    .append(template({ month: months[i] }))
+                    .find("tr:last");
+
+                var rowDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://tsonev/iis-kendo-crud/Weather/SOFIA/2012/" + monthNumber,
+                            dataType: "jsonp"
+                        }
+                    }
+                });
+
+                $(".sparkline-tmax", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    autoBind:false,
+                    series: [{
+                        type: "bar",
+                        field: "TMax",
+                        color: "red",
+                        negativeColor: "blue"
+                    }]
+                });
+
+                $(".sparkline-wnd", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    autoBind:false,
+                    series: [{
+                        field: "Wind"
+                    }]
+                });
+
+                $(".sparkline-rain", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    series: [{
+                        type: "area",
+                        field: "Rain"
+                    }]
+                });
+            }
+        });
+    </script>
+</div>

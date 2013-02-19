@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Sparklines</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../jquery.sparkline.js"></script>
+        <script src="../raphael-min.js"></script>
+        <script src="../sparky.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <link href="../../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="target" style="width: 200px; height: 200px; background: #aaa; position: relative;">Move mouse here</div>
+        <input type="button" id="omnipotent" value="Use omnipotent sparklines" />
+        <input type="button" id="kendo" value="Use Kendo UI sparklines" />
+        <div id="container"></div>
+
+        <script>
+            var speedLog = [],
+                p1,
+                lastMove = new Date();
+
+            $(function() {
+                for (var i = 0; i < 25; i++) {
+                    $("#container").append("<p><span class='sparkline' style='width: 80px'></span></p>");
+                }
+
+                $("#omnipotent").click(function() {
+                    $("input").remove();
+
+                    setInterval(function() {
+                        $(".sparkline").sparkline(speedLog);
+                    }, 20);
+                });
+
+                $("#kendo").click(function() {
+                    $("input").remove();
+
+                    $(".sparkline").kendoSparkline({
+                        series: [{
+                            data: speedLog
+                        }],
+                        panes: [{
+                            name: "default"
+                        }]
+                    });
+                    setInterval(function() {
+                        $(".sparkline").each(function() {
+                            var sparkline = $(this).data("kendoSparkline");
+                            sparkline.options.series[0].data = speedLog;
+                            sparkline.redraw("default");
+                        });
+                    }, 20);
+                });
+            });
+
+            $("#target").on("mousemove", function(e) {
+                var p2 = { x: e.clientX, y: e.clientY },
+                    distance,
+                    time,
+                    speed;
+
+                p1 = p1 || p2;
+
+                distance = Math.round(Math.sqrt(
+                    Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
+                ));
+
+                time = new Date() - lastMove;
+
+                if (time > 30) {
+                    var speed = Math.round((distance / time) * 1000);
+                    speedLog.push(speed);
+
+                    if (speedLog.length > 15) {
+                        speedLog.shift();
+                    }
+
+                    p1 = p2;
+                    lastMove = new Date();
+                }
+            });
+        </script>
+    </body>
+</html>
+

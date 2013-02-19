@@ -269,6 +269,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
+    public String getNegativeColor() {
+        return (String)getProperty("negativeColor");
+    }
+
+    public void setNegativeColor(String value) {
+        setProperty("negativeColor", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }

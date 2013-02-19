@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link href="../../styles/dataviz/kendo.dataviz.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                Sparkline = dataviz.ui.Sparkline;
+
+            (function() {
+                var sparkline,
+                    plotArea;
+
+                function createSparkline(options) {
+                    $("#sparkline").kendoSparkline(options);
+                    sparkline = $("#sparkline").data("kendoSparkline");
+                }
+
+                function destroySparkline() {
+                    var element = $("#sparkline");
+                    kendo.destroy(element);
+                    element.unbind().empty();
+                }
+
+                // ------------------------------------------------------------
+                module("Data Binding / Array", {
+                    setup: function() {
+                        createSparkline([1, 2]);
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("array is used to initialize data source", function() {
+                    equals(sparkline.dataSource.data().length, 2);
+                });
+
+                test("observable array is used to initialize data source", function() {
+                    createSparkline(new kendo.data.ObservableArray([1, 2]));
+                    equals(sparkline.dataSource.data().length, 2);
+                });
+
+                test("default series are created", function() {
+                    equals(sparkline.options.series.length, 1);
+                });
+
+                test("default series are bound to array items", function() {
+                    equals(sparkline.options.series[0].field, "*");
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Data Binding / Data Source / Implicit series", {
+                    setup: function() {
+                        createSparkline({
+                            dataSource: [1, 2]
+                        });
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("default series are created", function() {
+                    equals(sparkline.options.series.length, 1);
+                });
+
+                test("default series are bound to array items", function() {
+                    equals(sparkline.options.series[0].field, "*");
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
+
+                test("default series are bound to existing data source", function() {
+                    createSparkline({
+                        dataSource: new kendo.data.DataSource({
+                            data: [1, 2]
+                        })
+                    });
+
+                    equals(sparkline.options.series[0].field, "*");
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
+
+                test("default series inherit seriesDefaults options", function() {
+                    createSparkline({
+                        seriesDefaults: {
+                            field: "value"
+                        }
+                    });
+
+                    equals(sparkline.options.series[0].field, "value");
+                });
+
+                // ------------------------------------------------------------
+                module("Data Binding / Data Source / Explicit series", {
+                    setup: function() {
+                        createSparkline({
+                            dataSource: [{ value: 1 }, { value: 2 }],
+                            series: [{
+                                field: "value"
+                            }]
+                        });
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("default series are not created", function() {
+                    equals(sparkline.options.series.length, 1);
+                });
+
+                test("series are data bound", function() {
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
+
+                test("series are bound to existing data source", function() {
+                    createSparkline({
+                        dataSource: new kendo.data.DataSource({
+                            data: [{ value: 1 }, { value: 2 }],
+                        }),
+                        series: [{
+                            field: "value"
+                        }]
+                    });
+
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.sparkline</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <span id="sparkline"></span>
+    </body>
+</html>

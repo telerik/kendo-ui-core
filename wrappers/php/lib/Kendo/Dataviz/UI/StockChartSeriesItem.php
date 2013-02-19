@@ -218,6 +218,15 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
+    * Color to use for bars with negative values.** Applicable only to column series. **The plot stops before the missing point and continues after it.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function negativeColor($value) {
+        return $this->setProperty('negativeColor', $value);
+    }
+
+    /**
     * The series opacity.
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem

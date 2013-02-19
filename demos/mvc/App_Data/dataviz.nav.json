@@ -286,6 +286,18 @@
             }],
             "name": "scatter-charts"
         }, {
+            "text": "Sparklines",
+            "documentation": "dataviz/sparklines",
+            "spriteCssClass": "sparklineIcon",
+            "items": [{
+                "text": "Basic usage",
+                "url": "sparklines/index.html"
+            }, {
+                "text": "Binding to remote data",
+                "url": "sparklines/remote-data.html"
+            }],
+            "name": "sparklines"
+        }, {
             "text": "API",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartIcon",

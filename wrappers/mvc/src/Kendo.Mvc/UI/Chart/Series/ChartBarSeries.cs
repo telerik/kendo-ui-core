@@ -150,6 +150,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the series color for negative values
+        /// </summary>
+        public string NegativeColor
+        {
+            get;
+            set;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartBarSeriesSerializer(this);

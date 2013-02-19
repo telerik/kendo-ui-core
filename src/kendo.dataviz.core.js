@@ -1723,8 +1723,9 @@ kendo_module({
             return a._childIndex - b._childIndex;
         },
 
-        renderId: function(id) {
-            return this.renderAttr(this.modelIdAttr, id);
+        renderId: function() {
+            var element = this;
+            return element.renderAttr(element.modelIdAttr, element.options.id);
         },
 
         renderAttr: function (name, value) {
@@ -1839,6 +1840,22 @@ kendo_module({
             }
 
             return overlay;
+        },
+
+        setDefaults: function(options) {
+            var viewOptions = this.options;
+
+            options = options || {};
+
+            if (!defined(options.inline)) {
+                options.inline = viewOptions.inline;
+            }
+
+            if (!defined(options.align)) {
+                options.align = viewOptions.align;
+            }
+
+            return options;
         }
     });
 

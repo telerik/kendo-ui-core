@@ -13,7 +13,7 @@ namespace KendoCRUDService.Models
 
             if (result == null)
             {
-                HttpContext.Current.Session["Employees"] = result = new NorthwindDataContext().Employees.Select(e => new EmployeeModel
+                HttpContext.Current.Session["Employees"] = result = new SampleDataContext().Employees.Select(e => new EmployeeModel
                     {
                         EmployeeId = e.EmployeeID,
                         FullName = e.FirstName + " " + e.LastName,

@@ -211,5 +211,25 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the bar color for negative values
+        /// </summary>
+        /// <param name="color">The bar color for negative values(CSS syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales).NegativeColor("Red"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBarSeriesBuilder<T> NegativeColor(string color)
+        {
+            Series.NegativeColor = color;
+
+            return this;
+        }
     }
 }

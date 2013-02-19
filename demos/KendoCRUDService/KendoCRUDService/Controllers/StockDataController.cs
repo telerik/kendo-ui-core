@@ -23,7 +23,7 @@ namespace KendoCRUDService.Controllers
             var baseUnit = DEFAULT_UNIT;
             IEnumerable<StockDataPoint> result;
 
-            using (var db = new StockDataEntities())
+            using (var db = new SampleEntities())
             {
                 var filter = this.DeserializeObject<DataFilter>("filter");
                 if (filter != null && filter.Filters != null)

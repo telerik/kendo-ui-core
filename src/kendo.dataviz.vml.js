@@ -83,12 +83,14 @@ kendo_module({
             }
 
             view.template = VMLView.template;
+            view.tagName = view.options.inline ? "span" : "div";
+
             if (!view.template) {
                 view.template = VMLView.template = renderTemplate(
-                    "<div style='width:#= d.options.width #px; " +
+                    "<#= d.tagName # style='width:#= d.options.width #px; " +
                     "height:#= d.options.height #px; " +
                     "position: relative;'>" +
-                    "#= d.renderContent() #</div>"
+                    "#= d.renderContent() #</#= d.tagName #>"
                 );
             }
         },
@@ -136,20 +138,24 @@ kendo_module({
 
         createRect: function(box, style) {
             return this.decorate(
-                new VMLLine(box.points(), true, style)
+                new VMLLine(
+                    box.points(), true, this.setDefaults(style)
+                )
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
-                new VMLLine([new Point2D(x1, y1),
-                    new Point2D(x2, y2)], false, options)
+                new VMLLine(
+                    [new Point2D(x1, y1), new Point2D(x2, y2)],
+                    false, this.setDefaults(options)
+                )
             );
         },
 
         createPolyline: function(points, closed, options) {
             return this.decorate(
-                new VMLLine(points, closed, options)
+                new VMLLine(points, closed, this.setDefaults(options))
             );
         },
 
@@ -167,13 +173,13 @@ kendo_module({
 
         createRing: function(ring, options) {
             return this.decorate(
-                new VMLRing(ring, options)
+                new VMLRing(ring, this.setDefaults(options))
             );
         },
 
         createGroup: function(options) {
             return this.decorate(
-                new VMLGroup(options)
+                new VMLGroup(this.setDefaults(options))
             );
         },
 
@@ -215,7 +221,7 @@ kendo_module({
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = renderTemplate(
-                    "<kvml:textbox #= d.renderId(d.options.id) # " +
+                    "<kvml:textbox #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
@@ -257,7 +263,7 @@ kendo_module({
             text.template = VMLRotatedText.template;
             if (!text.template) {
                 text.template = VMLRotatedText.template = renderTemplate(
-                    "<kvml:shape #= d.renderId(d.options.id) # " +
+                    "<kvml:shape #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; top: 0px; left: 0px; " +
                     "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
@@ -362,7 +368,7 @@ kendo_module({
             path.template = VMLPath.template;
             if (!path.template) {
                 path.template = VMLPath.template = renderTemplate(
-                    "<kvml:shape #= d.renderId(d.options.id) # " +
+                    "<kvml:shape #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position:absolute; #= d.renderSize() # display:#= d.renderDisplay() #;' " +
                     "coordorigin='0 0' #= d.renderCoordsize() #>" +
@@ -608,7 +614,7 @@ kendo_module({
             circle.template = VMLCircle.template;
             if (!circle.template) {
                 circle.template = VMLCircle.template = renderTemplate(
-                    "<kvml:oval #= d.renderId(d.options.id) # " +
+                    "<kvml:oval #= d.renderId() # " +
                             "#= d.renderDataAttributes() #" +
                             "style='position:absolute; " +
                             "width:#= d.r * 2 #px; height:#= d.r * 2 #px; " +
@@ -661,13 +667,14 @@ kendo_module({
             var group = this;
             ViewElement.fn.init.call(group, options);
 
+            group.tagName = group.options.inline ? "span" : "div";
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = renderTemplate(
-                    "<div #= d.renderId(d.options.id) #" +
+                    "<#= d.tagName # #= d.renderId() #" +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; white-space: nowrap;'>" +
-                    "#= d.renderContent() #</div>"
+                    "#= d.renderContent() #</#= d.tagName #>"
                 );
             }
         }
@@ -678,17 +685,18 @@ kendo_module({
             var clipRect = this;
             ViewElement.fn.init.call(clipRect, options);
 
+            clipRect.tagName = clipRect.options.inline ? "span" : "div";
             clipRect.template = VMLClipRect.template;
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
-                    "<div #= d.renderId(d.options.id) #" +
+                    "<#= d.tagName # #= d.renderId() #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
                         "top:#= d.box.y1 #px; " +
                         "left:#= d.box.x1 #px; " +
                         "clip:#= d._renderClip() #;' >" +
-                    "#= d.renderContent() #</div>"
+                    "#= d.renderContent() #</#= d.tagName #>"
                 );
 
                 clipRect.clipTemplate = VMLClipRect.clipTemplate = renderTemplate(
@@ -891,7 +899,7 @@ kendo_module({
             if (animation && animation.type === CLIP && options.transitions) {
                 clipRect = new VMLClipRect(
                     new Box2D(0, 0, options.width, options.height),
-                    { id: uniqueId() }
+                    { id: uniqueId(), inline: options.inline }
                 );
 
                 view.animations.push(

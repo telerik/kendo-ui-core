@@ -86,12 +86,14 @@ kendo_module({
 
             view.defsId = uniqueId();
             view.template = SVGView.template;
+            view.display = view.options.inline ? "inline" : "block";
+
             if (!view.template) {
                 view.template = SVGView.template = renderTemplate(
                     "<?xml version='1.0' ?>" +
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='#= d.options.width #px' height='#= d.options.height #px' " +
-                    "style='position: relative; display: block;'>" +
+                    "style='position: relative; display: #= d.display #;'>" +
                     "#= d.renderDefinitions() #" +
                     "#= d.renderContent() #</svg>"
                 );
@@ -100,8 +102,7 @@ kendo_module({
 
         options: {
             width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT,
-            idPrefix: ""
+            height: DEFAULT_HEIGHT
         },
 
         renderTo: function(container) {
@@ -166,20 +167,20 @@ kendo_module({
 
         createRect: function(box, style) {
             return this.decorate(
-                new SVGLine(box.points(), true, style)
+                new SVGLine(box.points(), true, this.setDefaults(style))
             );
         },
 
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
                 new SVGLine([new Point2D(x1, y1),
-                             new Point2D(x2, y2)], false, options)
+                             new Point2D(x2, y2)], false, this.setDefaults(options))
             );
         },
 
         createPolyline: function(points, closed, options) {
             return this.decorate(
-                new SVGLine(points, closed, options)
+                new SVGLine(points, closed, this.setDefaults(options))
             );
         },
 
@@ -260,7 +261,7 @@ kendo_module({
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = renderTemplate(
-                    "<text #= d.renderId(d.options.id) # " +
+                    "<text #= d.renderId() # " +
                     "#= d.renderDataAttributes() # " +
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
@@ -321,7 +322,7 @@ kendo_module({
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
-                    "<path #= d.renderId(d.options.id) #" +
+                    "<path #= d.renderId() #" +
                     "style='display: #= d.renderDisplay() #' " +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
@@ -611,7 +612,7 @@ kendo_module({
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = renderTemplate(
-                    "<circle #= d.renderId(d.options.id) # " +
+                    "<circle #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "cx='#= d.c.x #' cy='#= d.c.y #' " +
                     "r='#= d.r #' " +
@@ -656,7 +657,7 @@ kendo_module({
             if (!group.template) {
                 group.template = SVGGroup.template =
                 renderTemplate(
-                    "<g#= d.renderId(d.options.id) #" +
+                    "<g#= d.renderId() #" +
                     "#= d.renderDataAttributes() #" +
                     "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                     "#= d.renderContent() #</g>"
@@ -859,7 +860,6 @@ kendo_module({
         getPaint: function(paint) {
             var decorator = this,
                 view = decorator.view,
-                baseUrl = decorator.baseUrl(),
                 definitions = view.definitions,
                 overlay,
                 overlayId,
@@ -875,7 +875,7 @@ kendo_module({
                         definitions[overlayId] = gradient;
                     }
 
-                    return "url(" + baseUrl + "#" + gradient.options.id + ")";
+                    return "url(" + decorator.baseUrl() + "#" + gradient.options.id + ")";
                 } else {
                     return NONE;
                 }

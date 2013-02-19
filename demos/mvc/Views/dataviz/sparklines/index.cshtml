@@ -1,0 +1,69 @@
+<div id="example" class="k-content">
+    <table id="weather" class="metrotable">
+        <thead>
+            <tr>
+                <th>MONTH</th>
+                <th>WIND SPEED KM/H</th>
+                <th>RAINFALL MM</th>
+                <th>MAX TEMP &deg;C</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>JANUARY</td>
+                <td><span id="sparkline-wnd"></span></td>
+                <td><span id="sparkline-rain"></span></td>
+                <td><span id="sparkline-tmax"></span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            // Binding directly to an array
+            $("#sparkline-wnd").kendoSparkline([
+                5.5, 8.1, 8.1, 24.5, 21.7, 21.7, 24.5, 16.4, 13.6, 13.6,
+                16.4, 21.7, 27.1, 24.5, 27.1, 24.5, 21.7, 13.6, 13.6,
+                29.9, 19, 8.1, 16.4, 16.4, 16.4, 10.9, 16.4, 19, 13.6
+            ]);
+
+            // User-set Sparkline type
+            $("#sparkline-rain").kendoSparkline({
+                // Shortcut for seriesDefaults.type
+                type: "area",
+                dataSource: [
+                    0, 0, 0, 0, 1.8, 19.7, 1.3, 0.8, 0.3,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7.2, 1.5,
+                    0.3, 0, 5.1, 17.2, 5.9, 0, 0, 0
+                ],
+                tooltip: {
+                    format: "{0} mm"
+                }
+            });
+
+            // Traditional Chart syntax
+            $("#sparkline-tmax").kendoSparkline({
+                seriesDefaults: {
+                    type: "bar",
+                    negativeColor: "blue"
+                },
+                dataSource: [
+                    3.3, 5.2, 3.2, 11, 9, 2, 2, 3, 3, 2.2,
+                    4, 5.5, 2.7, 0, -1, 0, 1, 5, 6, 3, 2.2,
+                    6.2, 6, 2.4, -1.4, 0, -2.7, -2.4, -5, -5.4
+                ],
+                tooltip: {
+                    format: "{0} &deg;C"
+                }
+            });
+        });
+    </script>
+    <style scoped>
+        #weather th,
+        #weather td
+        {
+            text-transform: none;
+            font-size: inherit;
+        }
+    </style>
+</div>

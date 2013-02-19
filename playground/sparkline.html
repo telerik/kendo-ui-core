@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bar Chart</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Sparklines</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.chart.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <style>
+        </style>
     </head>
     <body>
-        <script type="text/javascript">
-            var baseOptions = {
-                title: {
-                },
-                legend: {
-                    visible: false
-                },
-                seriesDefaults: {
-                    type: "line",
-                    line: {
-                        width: 1,
-                        markers: {
-                            size: 2
-                        }
-                    }
-                },
-                axisDefaults: {
-                    majorGridLines: {
-                        visible: false
-                    }
-                },
-                categoryAxis: {
-                    labels: {
-                        rotation: 90,
-                        visible: false
-                    }
-                },
-                valueAxis: {
-                    labels: {
-                        visible: false
-                    }
-                }
-            };
+        <p>
+        Admire woman female rebecca black <span id="sparkline"></span> forever alone house sister donut. Super Rage unsave 9000 scumbag one does not simply le me crying megusta men. Too mainstream iron man cool party bottom just scared diablo 3. Dog happy yao college anonymous trolololo genius jackie chan russia pikachu. Games i dont get it the avengers essay hammer left easter back you don't say? No Bad on brother rainbow captain dolar ba dumm tss grin. Final week basic math superhero bra star wars happy if you know what i mean homer impossibru. Oboma bacon hulk derp t-rex vegan movie twitter panda simpson. Venenatis viverra puking rainbows food win homework problem? Mother computer german elephant <span id="sparkline-bar"></span> note steve jobs blizzard troll not okay amnesia angry birds morbi. Charlie Sheen i know that feel feel like a sir wodka le derp father right i'm watching u collection. Unlock eat y u no.
+        </p>
+        <p>
+        Friendzoned high school le derp alcohol loki freddie mercury all the things sandwich <span id="sparkline-composite"></span>yao. Clinton students always varius diablo 3 unlock i'm watching u elephant megusta. Vegan pokeman sister money feel like a sir not okay movies good guy. Bart scumbag too mainstream simpson cuteness overload father you don't say? Just if you know what i mean oh stop it, you hac captain top le me face on that on. Hammer for drink not bad y u no cereal angry birds donut really? Homer party russia lol viverra lose derp close enough cellphone in class. Collection why problem? True Story one does not simply finals avengers lois search basic math crying dog bear. Jackie Chan silent hill back morbi bacon cookie monster super rage humor. Nyan cat movie puking rainbows bra bottom gasp easter phone happy thor. Charlie Sheen genius college win pikachu gentlemen facepalm dad superhero. Monocle joke amnesia happy woman no bad essay trolololo steve jobs male. Gag creepy me gusta.
+        </p>
+        <div id="target" style="width: 200px; height: 200px; background: #aaa; position: relative;">Move mouse here</div>
+        <script>
+            var speedLog = new kendo.data.ObservableArray([]),
+                detailLog = new kendo.data.ObservableArray([]),
+                p1,
+                lastMove = new Date();
 
-            $(document).ready(function() {
-                $(".chart1").kendoChart(
-                    $.extend(true, {}, baseOptions, {
-                        series: [{
-                            name: "Ideal",
-                            data: [3, 2, 1]
-                        },{
-                            name: "Actual",
-                            data: [3, 2.5, 2]
-                        }],
-                        valueAxis: {
-                            majorUnit: 1
-                        }
-                    })
-                );
+            $(function() {
+                $("#sparkline").kendoSparkline(speedLog);
 
-                $(".chart2").kendoChart($.extend(true, {}, baseOptions, {
+                $("#sparkline-bar").kendoSparkline({
+                    dataSource: speedLog,
+                    type: "bar"
+                });
+
+                $("#sparkline-composite").kendoSparkline({
+                    dataSource: detailLog,
                     series: [{
-                        name: "Ideal",
-                        data: [300, 200, 100]
-                    },{
-                        name: "Actual",
-                        data: [300, 250, 200]
-                    }],
-                    categoryAxis: {
-                        categories: ["Now", "Then", "Later"]
+                        type: "column",
+                        field: "speed"
+                    }, {
+                        type: "line",
+                        field: "moreSpeed"
+                    }]
+                });
+            });
+
+            $("#target").on("mousemove", function(e) {
+                var p2 = { x: e.clientX, y: e.clientY },
+                    distance,
+                    time,
+                    speed;
+
+                p1 = p1 || p2;
+
+                distance = Math.round(Math.sqrt(
+                    Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
+                ));
+
+                time = new Date() - lastMove;
+
+                if (time > 30) {
+                    var speed = Math.round((distance / time) * 1000);
+                    detailLog.push({ speed: speed, moreSpeed: speed * 2 });
+                    speedLog.push(speed);
+
+                    if (speedLog.length > 15) {
+                        speedLog.shift();
+                        detailLog.shift();
                     }
-                }));
+
+                    $("#sparkline").data("kendoSparkline").dataSource.sync();
+
+                    p1 = p2;
+                    lastMove = new Date();
+                }
             });
         </script>
-
-        <div class="chart1" style="width: 120px; height: 75px; float: left;">
-        </div>
-
-        <div class="chart2" style="width: 120px; height: 75px; margin-left: 150px;">
-        </div>
-
-        <div class="chart2" style="width: 120px; height: 75px; float: left;">
-        </div>
     </body>
 </html>
 

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.375" name="Northwind">
+  <DataContextMoniker Name="/SampleDataContext" />
+  <nestedChildShapes>
+    <classShape Id="fb0a5fdb-c033-4584-93c5-18d38bd99054" absoluteBounds="1.75, 0.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/SampleDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fc2e193c-b976-4aa6-bfa8-6655aca2794e" absoluteBounds="1.7650000000000001, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="eb035c58-d1be-4e74-a913-4e6517ba7c46" absoluteBounds="5.375, 1.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/SampleDataContext/Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fe125316-cb3f-432b-a7b0-aefa553c5297" absoluteBounds="5.39, 2.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.375 : 2.66429768880208); (3.75 : 2.66429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/SampleDataContext/Category/Category_Product" />
+      <nodes>
+        <classShapeMoniker Id="eb035c58-d1be-4e74-a913-4e6517ba7c46" />
+        <classShapeMoniker Id="fb0a5fdb-c033-4584-93c5-18d38bd99054" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b9614664-0e2b-4c38-ab7a-c951fb139343" absoluteBounds="3.75, 3.875, 2, 4.2708154296875">
+      <DataClassMoniker Name="/SampleDataContext/Employee" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b1a4b3d-56b2-452b-a487-150f035d76a0" absoluteBounds="3.7649999999999997, 4.335, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.45923076923077 : 8.1458154296875); (4.45923076923077 : 8.3958154296875); (5.05461538461539 : 8.3958154296875); (5.05461538461539 : 8.1458154296875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/SampleDataContext/Employee/Employee_Employee" />
+      <nodes>
+        <classShapeMoniker Id="b9614664-0e2b-4c38-ab7a-c951fb139343" />
+        <classShapeMoniker Id="b9614664-0e2b-4c38-ab7a-c951fb139343" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8fff1cf3-e579-465d-b875-2b6a7cf1d581" absoluteBounds="6.5, 3.875, 2, 3.1170068359375">
+      <DataClassMoniker Name="/SampleDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4919612f-0d69-4d86-96b6-1324d977deab" absoluteBounds="6.515, 4.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c8647408-e565-429d-8d45-957d7e6ddab6" absoluteBounds="0.625, 4.375, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/SampleDataContext/Intraday" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6fd89315-4642-4ba1-ab2b-e0c3d54f3512" absoluteBounds="0.64000000000000012, 4.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="051504fc-c16a-4efe-a293-575c49a00257" absoluteBounds="0.625, 7.375, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/SampleDataContext/Weather" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e0ff9f4a-94e6-400d-8b42-1e8c8785cb7a" absoluteBounds="0.64, 7.8350000000000009, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

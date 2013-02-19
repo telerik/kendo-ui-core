@@ -80,6 +80,23 @@
                     ok(group instanceof dataviz.VMLGroup);
                 });
 
+                test("createGroup sets inline default", function() {
+                    view = new dataviz.VMLView({ inline: true });
+                    var group = view.createGroup();
+                    ok(group.options.inline);
+                });
+
+                test("createGroup overrides inline default", function() {
+                    view = new dataviz.VMLView({ inline: true });
+                    var group = view.createGroup({ inline: false });
+                    ok(!group.options.inline);
+                });
+
+                test("createGroup does not set inline default", function() {
+                    var group = view.createGroup();
+                    ok(!group.options.inline);
+                });
+
                 test("createText returns VMLText", function() {
                     var text = view.createText("");
                     ok(text instanceof dataviz.VMLText);
@@ -119,6 +136,18 @@
                     equal(rect.options.fill, "#f00");
                 });
 
+                test("createRect sets align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var rect = view.createRect(new Box2D(10, 20, 110, 220));
+                    ok(rect.options.align === false);
+                });
+
+                test("createRect overrides align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var rect = view.createRect(new Box2D(10, 20, 110, 220), { align: true });
+                    ok(rect.options.align === true);
+                });
+
                 test("createLine returns VMLLine", function() {
                     var line = view.createLine();
                     ok(line instanceof dataviz.VMLLine);
@@ -127,6 +156,18 @@
                 test("createLine draws a line", function() {
                     var line = view.createLine(10, 20, 100, 200);
                     deepEqual(mapPoints(line.points), [ [10, 20], [100, 200] ]);
+                });
+
+                test("createLine sets align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var line = view.createLine(10, 20, 100, 200);
+                    ok(line.options.align === false);
+                });
+
+                test("createLine overrides align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var line = view.createLine(10, 20, 100, 200, { align: true });
+                    ok(line.options.align === true);
                 });
 
                 test("createPolyline returns VMLLine", function() {
@@ -156,6 +197,18 @@
                     var path = view.createPolyline([], false, { dashType: "dot" });
 
                     equals(path.options.dashType, "dot");
+                });
+
+                test("createPolyline sets align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var path = view.createPolyline([], false, { dashType: "dot" });
+                    ok(path.options.align === false);
+                });
+
+                test("createPolyline overrides align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var path = view.createPolyline([], false, { dashType: "dot" , align: true });
+                    ok(path.options.align === true);
                 });
 
                 test("createCircle returns VMLCircle", function() {
@@ -238,6 +291,18 @@
                     equals(ring.options.strokeWidth, 2);
                 });
 
+                test("createRing sets align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var ring = view.createRing({}, { strokeWidth: 2});
+                    ok(ring.options.align === false);
+                });
+
+                test("createRing overrides align default", function() {
+                    view = new dataviz.VMLView({ align: false });
+                    var ring = view.createRing({}, { strokeWidth: 2, align: true });
+                    ok(ring.options.align === true);
+                });
+
                 test("renderTo returns DOM element", function() {
                     var container = $("<div />").appendTo(document.body);
                     equals(view.renderTo(container[0]), container[0].firstChild);
@@ -310,6 +375,13 @@
                 test("renders div tag with default size", function() {
                     equal(view.render(),
                     "<div style='width:600px; height:400px; position: relative;'></div>");
+                });
+
+                test("renders span tag when marked as inline", function() {
+                    view = new dataviz.VMLView({ inline: true });
+                    ok(view.render().match(
+                        /\<span.*\>.*\<\/span\>/
+                    ));
                 });
 
                 test("renders children", function() {
@@ -899,9 +971,16 @@
                     kendo.support.browser.msie = msie;
                 });
 
-                test("renders group", function() {
+                test("renders div", function() {
                     equal(group.render(),
                         "<div style='position: absolute; white-space: nowrap;'></div>");
+                });
+
+                test("renders span when the marked as inline", function() {
+                    group = new dataviz.VMLGroup({ inline: true });
+                    ok(group.render().match(
+                        /\<span.*\>.*\<\/span\>/
+                    ));
                 });
 
                 test("renders children", function() {
@@ -1092,6 +1171,13 @@
                 test("renders div tag", function() {
                     ok(clipRect.render().match(
                         /\<div.*\>.*\<\/div\>/
+                    ));
+                });
+
+                test("renders span tag when marked as inline", function() {
+                    createClipRect({ inline: true });
+                    ok(clipRect.render().match(
+                        /\<span.*\>.*\<\/span\>/
                     ));
                 });
 
@@ -1482,6 +1568,15 @@
 
                 test("sets clip rect height", function() {
                     equals(decorator.decorate(rect).box.height(), 50);
+                });
+
+                test("sets inline option", function() {
+                    view.options.inline = true;
+                    ok(decorator.decorate(rect).options.inline);
+                });
+
+                test("does not set inline option", function() {
+                    ok(!decorator.decorate(rect).options.inline);
                 });
             })();
 

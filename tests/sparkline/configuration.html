@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link href="../../styles/dataviz/kendo.dataviz.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                Sparkline = dataviz.ui.Sparkline,
+                TOLERANCE = 1;
+
+            (function() {
+                var sparkline,
+                    plotArea;
+
+                function createSparkline(options) {
+                    $("#sparkline").kendoSparkline(options);
+                    sparkline = $("#sparkline").data("kendoSparkline");
+                }
+
+                function destroySparkline() {
+                    var element = $("#sparkline");
+                    kendo.destroy(element);
+                    element.unbind().empty();
+                }
+
+                // ------------------------------------------------------------
+                module("Options / Defaults", {
+                    setup: function() {
+                        createSparkline({ });
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("tooltip is visible by default", function() {
+                    ok(sparkline.options.tooltip.visible);
+                });
+
+                test("legend is not visible by default", function() {
+                    ok(!sparkline.options.legend.visible);
+                });
+
+                test("axes are not visible by default", function() {
+                    ok(!sparkline.options.axisDefaults.visible);
+                });
+
+                test("chartArea has 2px margin", function() {
+                    equals(sparkline.options.chartArea.margin, 2);
+                });
+
+                test("transitions are disabled", function() {
+                    ok(!sparkline.options.transitions);
+                });
+
+                // ------------------------------------------------------------
+                module("Dimensions", {
+                    setup: function() {
+                        createSparkline();
+                    },
+                    teardown: function() {
+                        destroySparkline();
+                        $("#sparkline")
+                            .css("height", "auto")
+                            .css("width", "auto");
+                    }
+                });
+
+                test("auto height equals line height of empty container", function() {
+                    equals(sparkline.stage.height(), 19, TOLERANCE);
+                });
+
+                test("custom height is preserved", function() {
+                    $("#sparkline").css("height", "30");
+                    createSparkline();
+                    equals(sparkline.element.innerHeight(), 30);
+                });
+
+                test("sets default container width for 2 points", function() {
+                    createSparkline([1, 2]);
+                    equals(sparkline.element.width(), 14);
+                });
+
+                test("sets default container width for 4 points", function() {
+                    createSparkline([1, 2, 3, 4]);
+                    equals(sparkline.element.width(), 24);
+                });
+
+                test("sets default container width after replacing existing widget", function() {
+                    createSparkline([1, 2]);
+                    createSparkline([1, 2, 3, 4]);
+                    equals(sparkline.element.width(), 24);
+                });
+
+                test("sets container width based on custom pointWidth", function() {
+                    createSparkline({ dataSource: [1, 2], pointWidth: 10 });
+                    equals(sparkline.element.width(), 24);
+                });
+
+                test("sets default container width when binding to inline data", function() {
+                    createSparkline({
+                        series: [{
+                            data: [1, 2]
+                        }]
+                    });
+                    equals(sparkline.element.width(), 14);
+                });
+
+                test("custom width is preserved", function() {
+                    $("#sparkline").css("width", "30");
+                    createSparkline();
+                    equals(sparkline.element.innerWidth(), 30);
+                });
+
+                // ------------------------------------------------------------
+                module("Series", {
+                    setup: function() {
+                    }
+                });
+
+                test("bar is alias for column", function() {
+                    createSparkline({ dataSource: [1, 2], type: "bar" });
+                    equals(sparkline._plotArea.charts[0].options.invertAxes, false);
+                });
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.sparkline</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <span id="sparkline"></span>
+    </body>
+</html>
