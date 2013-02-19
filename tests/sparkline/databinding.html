@@ -93,6 +93,17 @@
                     equals(sparkline.options.series[0].field, "*");
                     equals(sparkline.options.series[0].data.length, 2);
                 });
+
+                test("default series inherit seriesDefaults options", function() {
+                    createSparkline({
+                        seriesDefaults: {
+                            field: "value"
+                        }
+                    });
+
+                    equals(sparkline.options.series[0].field, "value");
+                });
+
                 // ------------------------------------------------------------
                 module("Data Binding / Data Source / Explicit series", {
                     setup: function() {
