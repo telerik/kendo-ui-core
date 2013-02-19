@@ -4,7 +4,6 @@
             <tr>
                 <th>MONTH</th>
                 <th>MAX TEMP &deg;C</th>
-                <th>MIN TEMP &deg;C</th>
                 <th>WIND SPEED KM/H</th>
                 <th>RAINFALL MM</th>
             </tr>
@@ -17,7 +16,6 @@
         <tr>
             <td>${month}</td>
             <td><span class="sparkline-tmax"></span></td>
-            <td><span class="sparkline-tmin"></span></td>
             <td><span class="sparkline-wnd"></span></td>
             <td><span class="sparkline-rain"></span></td>
         </tr>
@@ -27,15 +25,14 @@
         $(document).ready(function() {
             // Create a row template using the above definition
             var template = kendo.template($("#template").html());
-            
-            var monthNames = [ "January", "February", "March", "April", "May", "June",
-                               "July", "August", "September", "October", "November", "December" ];
 
-            for (var i = 0; i < monthNames.length; i++) {
+            var months = [ "January", "February", "March", "April", "May", "June" ];
+
+            for (var i = 0; i < months.length; i++) {
                 var monthNumber = i + 1;
 
                 var row = $("#weather tbody")
-                    .append(template({ month: monthNames[i] }))
+                    .append(template({ month: months[i] }))
                     .find("tr:last");
 
                 var rowDataSource = new kendo.data.DataSource({
@@ -49,20 +46,10 @@
 
                 $(".sparkline-tmax", row).kendoSparkline({
                     dataSource: rowDataSource,
-                    series: [{
-                        type: "bar",
-                        field: "TMax",
-                        color: "red",
-                        negativeColor: "blue"
-                    }]
-                });
-
-                $(".sparkline-tmin", row).kendoSparkline({
-                    dataSource: rowDataSource,
                     autoBind:false,
                     series: [{
                         type: "bar",
-                        field: "TMin",
+                        field: "TMax",
                         color: "red",
                         negativeColor: "blue"
                     }]
@@ -78,7 +65,6 @@
 
                 $(".sparkline-rain", row).kendoSparkline({
                     dataSource: rowDataSource,
-                    autoBind:false,
                     series: [{
                         type: "area",
                         field: "Rain"
