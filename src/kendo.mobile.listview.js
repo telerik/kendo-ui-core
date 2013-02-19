@@ -86,6 +86,10 @@ kendo_module({
 
             options = that.options;
 
+            if (options.scrollTreshold) {
+                options.scrollThreshold = options.scrollTreshold;
+            }
+
             element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
@@ -131,7 +135,7 @@ kendo_module({
             loadMore: false,
             loadMoreText: "Press to load more",
             endlessScroll: false,
-            scrollTreshold: 30,
+            scrollThreshold: 30,
             pullToRefresh: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
@@ -223,7 +227,7 @@ kendo_module({
 
             if (loading) {
                 that.loading = false;
-                that._calcTreshold();
+                that._calcThreshold();
                 that._toggleLoader(false);
             }
 
@@ -487,10 +491,10 @@ kendo_module({
                 that._scrollHeight = scroller.element.height();
                 that._scrollerResize = function() {
                     that._scrollHeight = scroller.element.height();
-                    that._calcTreshold();
+                    that._calcThreshold();
                 },
                 that._scrollerScroll = function(e) {
-                    if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
+                    if (!that.loading && e.scrollTop + that._scrollHeight > that._threshold) {
                         that._nextPage();
                     }
                 };
@@ -499,12 +503,12 @@ kendo_module({
             }
         },
 
-        _calcTreshold: function() {
+        _calcThreshold: function() {
             var that = this,
                 scroller = that._scroller();
 
             if (scroller) {
-                that._treshold = scroller.scrollHeight() - that.options.scrollTreshold;
+                that._threshold = scroller.scrollHeight() - that.options.scrollThreshold;
             }
         },
 
