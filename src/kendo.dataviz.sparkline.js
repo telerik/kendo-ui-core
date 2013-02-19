@@ -34,7 +34,7 @@ kendo_module({
                 .addClass(CSS_PREFIX + "sparkline")
                 .append(stage);
 
-            chart._initialWidth = math.floor(element.innerWidth());
+            chart._initialWidth = math.floor(element.width());
 
             options = options || {};
             if (isArray(options) || options instanceof ObservableArray) {
@@ -145,7 +145,7 @@ kendo_module({
 
             options = deepExtend({
                 width: width ? width : chart._autoWidth(),
-                height: stage.innerHeight(),
+                height: stage.height(),
                 transitions: chartOptions.transitions
             }, chartOptions.chartArea, {
                 inline: true,
