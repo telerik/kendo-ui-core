@@ -500,6 +500,16 @@
                 equal(div.find("input").val(), "baz");
             });
 
+            test("skip binding input type file without binding", function() {
+                var editable = div.append($('<div><input type="file" name="foo"/></div>')).kendoEditable({
+                    fields: "foo",
+                    model: defaultModel,
+                    clearContainer: false
+                });
+
+                ok(!div.find("input[type=file]").filter("[data-bind]").length);
+            });
+
             test("does not bind input element of upload widget", function() {
                 var editable = div.append($('<div><input name="baz" data-role="upload"/></div>')).kendoEditable({
                     model: defaultModel,
