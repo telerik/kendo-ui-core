@@ -34,7 +34,7 @@ kendo_module({
                 .addClass(CSS_PREFIX + "sparkline")
                 .append(stage);
 
-            chart._initialWidth = element.innerWidth();
+            chart._initialWidth = math.floor(element.innerWidth());
 
             options = options || {};
             if (isArray(options) || options instanceof ObservableArray) {
