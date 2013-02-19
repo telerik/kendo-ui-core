@@ -344,8 +344,8 @@ kendo_module({
                 chart._tooltip = chart._createTooltip();
 
                 if (options.tooltip.shared) {
-                    chart._tooltip = new MultiplePointTooltip(element, options.tooltip);
-                    chart._highlight = new MultiplePointHighlight(view, chart._viewElement);
+                    chart._highlight =
+                        new MultiplePointHighlight(view, chart._viewElement, chart._plotArea);
                 } else {
                     chart._highlight = new Highlight(view, chart._viewElement);
                 }
@@ -359,7 +359,7 @@ kendo_module({
                 tooltip;
 
             if (options.tooltip.shared) {
-                tooltip = new MultiplePointTooltip(element, options.tooltip);
+                tooltip = new MultiplePointTooltip(element, chart._plotArea, options.tooltip);
             } else {
                 tooltip = new Tooltip(element, options.tooltip);
             }

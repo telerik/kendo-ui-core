@@ -167,7 +167,7 @@ kendo_module({
                 tooltip;
 
             if (options.tooltip.shared) {
-                tooltip = new SparklineMultiplePointTooltip(element, options.tooltip);
+                tooltip = new SparklineMultiplePointTooltip(element, chart._plotArea, options.tooltip);
             } else {
                 tooltip = new SparklineTooltip(element, options.tooltip);
             }
