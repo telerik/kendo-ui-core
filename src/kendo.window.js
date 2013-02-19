@@ -338,7 +338,7 @@ kendo_module({
             }
 
             if (options.draggable && !e.ctrlKey && !isMaximized) {
-                offset = wrapper.offset();
+                offset = kendo.getOffset(wrapper);
 
                 if (keyCode == keys.UP) {
                     handled = wrapper.css("top", offset.top - distance);
@@ -937,7 +937,7 @@ kendo_module({
                 wrapper = wnd.wrapper;
 
             that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
-            that.initialCursorPosition = wrapper.offset();
+            that.initialCursorPosition = kendo.getOffset(wrapper, "position");
 
             that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
@@ -946,7 +946,7 @@ kendo_module({
                 height: wrapper.height()
             };
 
-            that.containerOffset = wnd.appendTo.offset();
+            that.containerOffset = kendo.getOffset(wnd.appendTo);
 
             wrapper
                 .append(templates.overlay)
@@ -1043,7 +1043,7 @@ kendo_module({
             var wnd = this.owner,
                 element = wnd.element,
                 actions = element.find(".k-window-actions"),
-                containerOffset = wnd.appendTo.offset();
+                containerOffset = kendo.getOffset(wnd.appendTo);
 
             wnd.trigger(DRAGSTART);
 

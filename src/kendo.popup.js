@@ -29,7 +29,6 @@ kendo_module({
         LOCATION = "location",
         POSITION = "position",
         VISIBLE = "visible",
-        FITTED = "fitted",
         EFFECTS = "effects",
         ACTIVE = "k-state-active",
         ACTIVEBORDER = "k-state-border",
@@ -437,9 +436,9 @@ kendo_module({
 
             var pos = getOffset(wrapper, POSITION, anchor[0] === wrapper.offsetParent()[0]),
                 offset = getOffset(wrapper),
-                anchorParent = anchor.offsetParent().parent(".k-animation-container"); // If the parent is positioned, get the current positions
+                anchorParent = anchor.offsetParent().parent(".k-animation-container,.k-popup,.k-group"); // If the parent is positioned, get the current positions
 
-            if (anchorParent.length && anchorParent.data(FITTED)) {
+            if (anchorParent.length) {
                 pos = getOffset(wrapper, POSITION, true);
                 offset = getOffset(wrapper);
             }
@@ -466,12 +465,6 @@ kendo_module({
 
             if (collisions[1] === "fit") {
                 location.left += that._fit(offsets.left, wrapper.outerWidth(), viewport.width() / zoomLevel);
-            }
-
-            if (location.left != pos.left || location.top != pos.top) {
-                wrapper.data(FITTED, true);
-            } else {
-                wrapper.removeData(FITTED);
             }
 
             var flipPos = extend({}, location);
