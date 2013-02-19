@@ -598,7 +598,7 @@ kendo_module({
                 var layout = $(this),
                     platform = attrValue(layout,  "platform");
 
-                if (platform === undefined || platform === mobile.application.os) {
+                if (platform === undefined || platform === mobile.application.os.name) {
                     that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, ui.roles);
                 }
             });

@@ -416,7 +416,7 @@
             });
 
             test("Uses platform specific layouts", 1, function() {
-                kendo.mobile.application = {os: "ios"};
+                kendo.mobile.application = { os: { name: "ios" } };
 
                 root.html('<div data-role="view" id="page1">Page 1</div> \
                 <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \

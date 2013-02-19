@@ -18,7 +18,7 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 app = kendo.mobile.application,
-                osname = app ? app.os : kendo.support.mobileOS.name,
+                osname = app ? app.os.name : kendo.support.mobileOS.name,
                 ioswp = osname === "ios" || osname === "wp",
                 align = options.align || (ioswp ?  "bottom center" : "center center"),
                 position = options.position || (ioswp ? "bottom center" : "center center"),
