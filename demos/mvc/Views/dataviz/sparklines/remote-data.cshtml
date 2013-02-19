@@ -37,7 +37,7 @@
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "http://localhost:8080/iis-kendo-crud/Weather/SOFIA",                                    
+                        url: "http://tsonev/iis-kendo-crud/Weather/SOFIA",
                         dataType: "jsonp"
                     }
                 },
@@ -64,38 +64,38 @@
                             var rowData = data[month].items;
 
                             $(".sparkline-tmax", row).kendoSparkline({
-                                seriesDefaults: {
+                                series: [{
+                                    data: rowData,
                                     type: "bar",
                                     field: "TMax",
                                     color: "red",
                                     negativeColor: "blue"
-                                },
-                                dataSource: rowData
+                                }]
                             });
 
                             $(".sparkline-tmin", row).kendoSparkline({
-                                seriesDefaults: {
+                                series: [{
+                                    data: rowData,
                                     type: "bar",
                                     field: "TMin",
                                     color: "red",
                                     negativeColor: "blue"
-                                },
-                                dataSource: rowData
+                                }]
                             });
 
                             $(".sparkline-wnd", row).kendoSparkline({
-                                seriesDefaults: {
+                                series: [{
+                                    data: rowData,
                                     field: "Wind"
-                                },
-                                dataSource: rowData
+                                }]
                             });
 
                             $(".sparkline-rain", row).kendoSparkline({
-                                seriesDefaults: {
+                                series: [{
+                                    data: rowData,
                                     type: "area",
                                     field: "Rain"
-                                },
-                                dataSource: rowData
+                                }]
                             });
                         });
                 }
