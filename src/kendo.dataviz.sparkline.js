@@ -25,9 +25,11 @@ kendo_module({
 
     // Sparkline =============================================================
     var Sparkline = Chart.extend({
-        init: function(element, options) {
+        init: function(element, userOptions) {
             var chart = this,
-                stage = chart.stage = $("<span />");
+                stage = chart.stage = $("<span />"),
+                options = userOptions || {},
+                defaults;
 
             element = $(element)
                 .empty()
@@ -36,22 +38,16 @@ kendo_module({
 
             chart._initialWidth = math.floor(element.width());
 
-            options = options || {};
             if (isArray(options) || options instanceof ObservableArray) {
                 options = { dataSource: options };
             }
 
-            options = deepExtend({
-                    seriesDefaults: {
-                        field: "*"
-                    },
-                    series: [{}]
-                },options, {
-                    seriesDefaults: {
-                        type: options.type
-                    }
-                }
-            );
+            options.series = options.series || [{}];
+            defaults = options.seriesDefaults = options.seriesDefaults || {};
+            defaults.field = defaults.field || "*";
+            if (options.type) {
+                defaults.type = options.type;
+            }
 
             Chart.fn.init.call(chart, element, options);
         },

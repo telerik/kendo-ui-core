@@ -83,6 +83,16 @@
                     equals(sparkline.options.series[0].data.length, 2);
                 });
 
+                test("default series are bound to existing data source", function() {
+                    createSparkline({
+                        dataSource: new kendo.data.DataSource({
+                            data: [1, 2]
+                        })
+                    });
+
+                    equals(sparkline.options.series[0].field, "*");
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
                 // ------------------------------------------------------------
                 module("Data Binding / Data Source / Explicit series", {
                     setup: function() {
@@ -103,6 +113,20 @@
                 test("series are data bound", function() {
                     equals(sparkline.options.series[0].data.length, 2);
                 });
+
+                test("series are bound to existing data source", function() {
+                    createSparkline({
+                        dataSource: new kendo.data.DataSource({
+                            data: [{ value: 1 }, { value: 2 }],
+                        }),
+                        series: [{
+                            field: "value"
+                        }]
+                    });
+
+                    equals(sparkline.options.series[0].data.length, 2);
+                });
+
             })();
         </script>
 

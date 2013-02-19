@@ -199,6 +199,7 @@ kendo_module({
                 .addClass("k-chart")
                 .css("position", "relative");
 
+            // Used by the ThemeBuilder
             chart._originalOptions = deepExtend({}, options);
 
             themeName = options.theme;
