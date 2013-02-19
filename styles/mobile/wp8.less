@@ -51,7 +51,8 @@
 .km-wp-dark .k-content,
 .km-wp-dark .km-button,
 .km-wp-dark .km-load-more,
-.km-wp-dark .km-scroller-pull
+.km-wp-dark .km-scroller-pull,
+.km-wp-dark .km-detail
 {
 	color: @main-text-dark;
 }
@@ -63,7 +64,8 @@
 .km-wp-light .k-content,
 .km-wp-light .km-button,
 .km-wp-light .km-load-more,
-.km-wp-light .km-scroller-pull
+.km-wp-light .km-scroller-pull,
+.km-wp-light .km-detail
 {
 	color: @main-text-light;
 }
@@ -133,6 +135,9 @@
 	background: @accent-background;
 }
 
+.km-wp .km-detail:active,
+.km-wp .km-detail.km-state-active,
+.km-wp li.km-state-active .km-detail,
 .km-wp *:not(.km-tabstrip) > .km-button:active,
 .km-wp *:not(.km-tabstrip) > .km-button.km-state-active,
 .km-wp li.km-state-active .km-listview-link,
@@ -193,16 +198,24 @@
 .km-wp .km-button
 {
 	font-size: .9em;
-	line-height: 1.6em;
+	line-height: 1.3em;
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-.km-wp .km-navbar .km-text
+.km-wp .km-button .km-icon
 {
-    vertical-align: top;
+    margin-top: -4px;
+    vertical-align: middle;
+}
+
+.km-wp .km-button .km-text
+{
+    margin-top: -3px;
+    display: inline-block;
+    padding-bottom: 3px;
 }
 
 .km-wp .km-pages > li
@@ -440,24 +453,21 @@
     overflow: hidden;
 }
 
-/* ListView Detail Icons */
+/* Badges */
 
-.km-wp .km-badge,
-.km-wp .km-detail
+.km-wp .km-badge
 {
     .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: @accent-text;
     border: .3em solid @accent-text;
-}
-
-.km-wp .km-badge
-{
-    background: @accent-background;
+    background-color: @accent-background;
     border: 0;
     background-clip: padding-box;
     line-height: 1.1rem;
     .border-radius(2em);
 }
+
+/* ListView Detail Icons */
 
 .km-wp .km-detail
 {
