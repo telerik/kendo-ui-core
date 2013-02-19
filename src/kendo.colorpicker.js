@@ -96,8 +96,12 @@ kendo_module({
             triggerEvent(this, "change", color);
         },
         destroy: function() {
-            if (this.element) this.element.off(NS);
-            if (this.wrapper) this.wrapper.off(NS).find("*").off(NS);
+            if (this.element) {
+                this.element.off(NS);
+            }
+            if (this.wrapper) {
+                this.wrapper.off(NS).find("*").off(NS);
+            }
             this.wrapper = null;
             Widget.fn.destroy.call(this);
         },
