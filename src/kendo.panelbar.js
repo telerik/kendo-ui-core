@@ -32,7 +32,6 @@ kendo_module({
         CONTENT = "k-content",
         ACTIVATE = "activate",
         COLLAPSE = "collapse",
-        CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
@@ -237,12 +236,13 @@ kendo_module({
                 })
                 .attr("role", "menu");
 
-            if (options.contentUrls) {
+            /*if (options.contentUrls) {
                 element.find("> .k-item")
                     .each(function(index, item) {
-                        $(item).find(LINKSELECTOR).data(CONTENTURL, options.contentUrls[index]);
+                        var span = $(item).find(LINKSELECTOR);
+                        span.replaceWith('<a class="k-link k-header" href="' + options.contentUrls[index] + '">' + span.html() + '</a>');
                     });
-            }
+            }*/
 
             content = element.find("li." + ACTIVECLASS + " > ." + CONTENT);
 
@@ -714,13 +714,16 @@ kendo_module({
                 idx = 0;
 
             for(; idx < length; idx++) {
-                this._updateItemClasses(items[idx]);
+                this._updateItemClasses(items[idx], idx);
             }
         },
 
-        _updateItemClasses: function(item) {
+        _updateItemClasses: function(item, index) {
             var selected = this._selected,
-                link;
+                contentUrls = this.options.contentUrls,
+                url = contentUrls && contentUrls[index],
+                root = this.element[0],
+                wrapElement, link;
 
             item = $(item).addClass("k-item").attr("role", "menuitem");
 
@@ -728,11 +731,16 @@ kendo_module({
                 .children(IMG)
                 .addClass(IMAGE);
 
-            item
-                .children("a")
-                .addClass(LINK)
-                .children(IMG)
-                .addClass(IMAGE);
+            link = item
+                    .children("a")
+                    .addClass(LINK);
+
+            if (link[0]) {
+                link.attr("href", url); //url can be undefined
+
+                link.children(IMG)
+                    .addClass(IMAGE);
+            }
 
             item
                 .filter(":not([disabled]):not([class*=k-state])")
@@ -766,10 +774,15 @@ kendo_module({
             }
 
             if (!item.children(LINKSELECTOR)[0]) {
+                wrapElement = "<span class='" + LINK + "'/>";
+                if (contentUrls && contentUrls[index] && item[0].parentNode == root) {
+                    wrapElement = '<a class="k-link k-header" href="' + contentUrls[index] + '"/>';
+                }
+
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
-                    .wrapAll("<span class='" + LINK + "'/>");
+                    .wrapAll(wrapElement);
             }
 
             if (item.parent(".k-panelbar")[0]) {
@@ -799,7 +812,7 @@ kendo_module({
 
             contents = item.find(GROUPS).add(item.find(CONTENTS));
             href = link.attr(HREF);
-            isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
+            isAnchor = href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1);
             prevent = !!(isAnchor || contents.length);
 
             if (contents.data("animating")) {
@@ -933,7 +946,7 @@ kendo_module({
             $.ajax({
                 type: "GET",
                 cache: false,
-                url: link.data(CONTENTURL) || link.attr(HREF),
+                url: link.attr(HREF),
                 dataType: "html",
                 data: data,
 

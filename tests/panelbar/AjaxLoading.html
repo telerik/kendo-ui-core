@@ -31,7 +31,7 @@
         <li><a>Based on jQuery</a>
             <div></div>
         </li>
-        <li class="k-state-active"><a>Wide Cross-browser support</a>
+        <li class="k-state-active">Wide Cross-browser support
             <div></div>
         </li>
     </ul>
@@ -53,6 +53,13 @@
         }
 
         module("AjaxLoading");
+
+        test("PanelBar renders anchor instead of span if contentUrl", function() {
+            var children = $("#PanelBar1").find("li:last").children();
+
+            equal(children.filter("a").length, 1)
+            equal(children.filter("span").length, 0)
+        });
 
         asyncTest("clicking collapsed content items should expand them", function() {
             var item = getRootItem(0);
