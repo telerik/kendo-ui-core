@@ -42,12 +42,16 @@ kendo_module({
             }
 
             options = deepExtend({
-                    series: [{ field: "*" }]
+                    seriesDefaults: {
+                        field: "*"
+                    },
+                    series: [{}]
                 },options, {
                     seriesDefaults: {
                         type: options.type
+                    }
                 }
-            });
+            );
 
             Chart.fn.init.call(chart, element, options);
         },

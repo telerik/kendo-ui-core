@@ -1,41 +1,108 @@
 <div id="example" class="k-content">
-    <div class="demo-section">
-        <table id="listView">
-        </table>
-    </div>
+    <table id="weather" class="metrotable">
+        <thead>
+            <tr>
+                <th>MONTH</th>
+                <th>MAX TEMP &deg;C</th>
+                <th>MIN TEMP &deg;C</th>
+                <th>WIND SPEED KM/H</th>
+                <th>RAINFALL MM</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>JANUARY</td>
+                <td><span id="sparkline-wnd"></span></td>
+                <td><span id="sparkline-rain"></span></td>
+                <td><span id="sparkline-tmax"></span></td>
+            </tr>
+        </tbody>
+    </table>
 
     <script id="template" type="text/x-kendo-template">
-        <tr>
+        <tr data-month="${value}">
             <td>${ kendo.toString(items[0].Date, "MMMM") }</td>
-            <td><span class="sparkline-t" /></td>
+            <td><span class="sparkline-tmax"></span></td>
+            <td><span class="sparkline-tmin"></span></td>
+            <td><span class="sparkline-wnd"></span></td>
+            <td><span class="sparkline-rain"></span></td>
         </tr>
     </script>
 
     <script>
         $(document).ready(function() {
-            $("#listView").kendoListView({
-                dataSource: {
-                    transport: {
-                        read: {
-                            url: "http://localhost:8080/iis-kendo-crud/Weather/SOFIA",                                    
-                            dataType: "jsonp"
-                        }
-                    },
-                    schema: {
-                        model: {
-                            fields: {
-                                Date: {
-                                    type: "date"
-                                }
-                            }
-                        }
-                    },
-                    group: {
-                        field: "Date.getMonth()"
+            // Create a template for each row using the above definition
+            var template = kendo.template($("#template").html());
+
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "http://localhost:8080/iis-kendo-crud/Weather/SOFIA",                                    
+                        dataType: "jsonp"
                     }
                 },
-                template: kendo.template($("#template").html())
+                schema: {
+                    model: {
+                        fields: {
+                            Date: {
+                                type: "date"
+                            }
+                        }
+                    }
+                },
+                group: {
+                    field: "Date.getMonth()"
+                },
+                change: function() {
+                    var data = this.view();
+
+                    $("#weather tbody")
+                        .html(kendo.render(template, this.view()))
+                        .find("tr").each(function() {
+                            var row = $(this);
+                            var month = parseInt(row.data("month"), 10);
+                            var rowData = data[month].items;
+
+                            $(".sparkline-tmax", row).kendoSparkline({
+                                seriesDefaults: {
+                                    type: "bar",
+                                    field: "TMax",
+                                    color: "red",
+                                    negativeColor: "blue"
+                                },
+                                dataSource: rowData
+                            });
+
+                            $(".sparkline-tmin", row).kendoSparkline({
+                                seriesDefaults: {
+                                    type: "bar",
+                                    field: "TMin",
+                                    color: "red",
+                                    negativeColor: "blue"
+                                },
+                                dataSource: rowData
+                            });
+
+                            $(".sparkline-wnd", row).kendoSparkline({
+                                seriesDefaults: {
+                                    field: "Wind"
+                                },
+                                dataSource: rowData
+                            });
+
+                            $(".sparkline-rain", row).kendoSparkline({
+                                seriesDefaults: {
+                                    type: "area",
+                                    field: "Rain"
+                                },
+                                dataSource: rowData
+                            });
+                        });
+                }
             });
+
+            // Read the data from the remote service
+            dataSource.read();
         });
     </script>
 </div>
