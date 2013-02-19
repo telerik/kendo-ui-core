@@ -19,7 +19,7 @@
     }
 
     function convertToValueBinding(container) {
-        container.find(":input:not(:button, [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "]), select").each(function() {
+        container.find(":input:not(:button, [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file]), select").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" ||  this.type === "radio" ? "checked:" : "value:",
