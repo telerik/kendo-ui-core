@@ -3,7 +3,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="chart-wrapper">
-    <%= Html.Kendo().Chart<Kendo.Mvc.Examples.Models.DonutChartsRemoteDataViewModel>()
+    <%= Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ScreenResolutionRemoteDataViewModel>()
         .Name("chart")
         .Title("1024x768 screen resolution trends")
         .Legend(legend => legend

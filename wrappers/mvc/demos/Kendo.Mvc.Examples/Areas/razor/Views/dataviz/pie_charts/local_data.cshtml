@@ -7,6 +7,7 @@
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
         )
+        .SeriesColors(new string[] { "#42a7ff", "#666666", "#999999", "#cccccc" })
         .Series(series => {
             series.Pie(
                 model => model.Percentage,

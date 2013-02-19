@@ -42,27 +42,27 @@
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart()
         .Name("chart")
-        .Title("Internet Users in United States")
+        .Title("What is you favourite sport?")
         .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom)
+            .Position(ChartLegendPosition.Top)
         )
         .Series(series =>
         {
             series.Pie(new dynamic[] {
-                new { category = "2005", value = 67.96 },
-                new { category = "2006", value = 68.93 },
-                new { category = "2007", value = 75 }, 
-                new { category = "2008", value = 74 }, 
-                new { category = "2009", value = 78 }                 
+                new {category = "Football",value = 35},
+                new {category = "Basketball",value = 25},
+                new {category = "Volleyball",value = 20},
+                new {category = "Rugby",value = 10},
+                new {category = "Tennis",value = 10}            
             })
             .Labels(labels => labels
                 .Visible(true)
-                .Template("#= kendo.format('{0:P}', percentage)#")
+                .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
             );
         })
         .Tooltip(tooltip => tooltip
             .Visible(true)
-                    .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
+            .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
         )
     %>
 </div>

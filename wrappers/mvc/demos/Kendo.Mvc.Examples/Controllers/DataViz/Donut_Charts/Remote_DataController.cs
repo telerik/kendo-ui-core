@@ -23,12 +23,12 @@ namespace Kendo.Mvc.Examples.Controllers
         {
 
             var screenResolutions = ChartDataRepository.WorldScreenResolution();
-            var viewModel = new List<DonutChartsRemoteDataViewModel>();
+            var viewModel = new List<ScreenResolutionRemoteDataViewModel>();
 
             for (var i = 0; i < screenResolutions.Count; i++)
             {
                 var data = screenResolutions[i];
-                var model = new DonutChartsRemoteDataViewModel(data);
+                var model = new ScreenResolutionRemoteDataViewModel(data);
                 if (model.Year == "2005" && model.Resolution == "1024x768")
                 {
                     model.Color = resolutionColors[2];

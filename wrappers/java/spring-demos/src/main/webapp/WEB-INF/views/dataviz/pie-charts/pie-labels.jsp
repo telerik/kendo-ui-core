@@ -25,11 +25,11 @@
 
      <div class="chart-wrapper">
          <kendo:chart name="chart">
-             <kendo:chart-title text="Break-up of Spain Electricity Production for 2008" />
-             <kendo:chart-legend position="bottom" />
+             <kendo:chart-title text="What is you favourite sport?" />
+             <kendo:chart-legend position="top" />
              <kendo:chart-series>
                 <kendo:chart-seriesItem type="pie" data="${pieData}">
-                    <kendo:chart-seriesItem-labels visible="true" template="#= kendo.format('{0:P}', percentage)#" />
+                    <kendo:chart-seriesItem-labels visible="true" template="#= category # - #= kendo.format('{0:P}', percentage)#" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-tooltip visible="true" template="#= category # - #= kendo.format('{0:P}', percentage)#" />

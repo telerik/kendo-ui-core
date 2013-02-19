@@ -20,7 +20,7 @@ public class PieLabelsController {
         pieChartData.add(new PiePoint("Basketball",25));
         pieChartData.add(new PiePoint("Volleyball",20));
         pieChartData.add(new PiePoint("Rugby",10));
-        pieChartData.add(new PiePoint("Tennis",10));;
+        pieChartData.add(new PiePoint("Tennis",10));
         model.addAttribute("donutData", pieChartData);
         
         return "/dataviz/donut-charts/donut-labels";

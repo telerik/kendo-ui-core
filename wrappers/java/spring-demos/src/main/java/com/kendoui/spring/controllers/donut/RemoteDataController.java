@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kendoui.spring.models.DonutChartsRemoteDataViewModel;
+import com.kendoui.spring.models.ScreenResolutionRemoteDataViewModel;
 import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ScreenResolution;
 
@@ -28,16 +28,16 @@ public class RemoteDataController {
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
-    public @ResponseBody List<DonutChartsRemoteDataViewModel> read() {
+    public @ResponseBody List<ScreenResolutionRemoteDataViewModel> read() {
         
         
         List<ScreenResolution> screenResolutions = ChartDataRepository.WorldScreenResolution();
-        List<DonutChartsRemoteDataViewModel> viewModel =  new ArrayList<DonutChartsRemoteDataViewModel>();
+        List<ScreenResolutionRemoteDataViewModel> viewModel =  new ArrayList<ScreenResolutionRemoteDataViewModel>();
         
         for (int i = 0; i < screenResolutions.size(); i++)
         {
             ScreenResolution data = screenResolutions.get(i);
-            DonutChartsRemoteDataViewModel item = new DonutChartsRemoteDataViewModel(data);
+            ScreenResolutionRemoteDataViewModel item = new ScreenResolutionRemoteDataViewModel(data);
             if (item.getYear() == "2005" && item.getResolution() == "1024x768")
             {
                 item.setColor(resolutionColors.get(2));
