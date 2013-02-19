@@ -15,5 +15,14 @@ namespace KendoCRUDService.Controllers
         {
             return this.Jsonp(WeatherRepository.ByStation(station));
         }
+
+        //
+        // GET: /Weather/SOFIA/2012/1
+        // (January)
+
+        public ActionResult ByMonth(string station, int year, int month)
+        {
+            return this.Jsonp(WeatherRepository.ByMonth(station, year, month));
+        }
     }
 }

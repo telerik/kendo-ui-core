@@ -20,7 +20,13 @@ namespace KendoCRUDService
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "WeatherRoute",
+                "WeatherByMonth",
+                "weather/{station}/{year}/{month}",
+                new { controller = "Weather", action = "ByMonth" }
+            );
+
+            routes.MapRoute(
+                "WeatherByStation",
                 "weather/{station}",
                 new { controller = "Weather", action = "Index" }
             );

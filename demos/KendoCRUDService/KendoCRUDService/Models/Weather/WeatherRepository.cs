@@ -9,7 +9,7 @@ namespace KendoCRUDService.Models
     {
         public static IList<WeatherModel> ByStation(string station)
         {
-            var sessionKey = "Weather" + station;
+            var sessionKey = "w_byStation_" + station;
             var result = HttpContext.Current.Session[sessionKey] as IList<WeatherModel>;
 
             if (result == null)
@@ -23,6 +23,24 @@ namespace KendoCRUDService.Models
                          Rain = w.Rain,
                          Wind = w.Wind
                      }).ToList();
+            }
+
+            return result;
+        }
+
+        public static IList<WeatherModel> ByMonth(string station, int year, int month)
+        {
+            var sessionKey = "w_byMonth_" + station + year + month;
+            var result = HttpContext.Current.Session[sessionKey] as IList<WeatherModel>;
+
+            if (result == null)
+            {
+                using (var db = new SampleDataContext()) {
+                    HttpContext.Current.Session[sessionKey] = result =
+                        ByStation(station)
+                            .Where(w => w.Date.Year == year && w.Date.Month == month)
+                            .ToList();
+                }
             }
 
             return result;
