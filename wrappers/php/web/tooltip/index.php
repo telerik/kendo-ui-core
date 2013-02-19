@@ -23,6 +23,13 @@ echo $tooltip->render();
         <a href="#" title="Osaka - 16,800,000" id="osaka"></a>
         <a href="#" title="Moscow - 16,200,000" id="moscow"></a>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#agglomerations").data("kendoTooltip").show($("#canton"));
+        });
+    </script>
+
     <style scoped="scoped">
 
         .demo-section {
