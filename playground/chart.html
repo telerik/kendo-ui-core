@@ -13,105 +13,37 @@
     </head>
     <body>
         <div id="chart" style="width: 700px; float: left;"></div>
-        <div id="scatterchart" style="width: 700px; float: left;"></div>
         <script>
-            $(function() {
-                var data=[{
-                    value: 1
-                },{
-                    value: 1
-                },{
-                    value: 1
-                },{
-                    value: 1
-                }];
-                $("#chart").kendoChart({
-                    theme: "blueopal",
-                    series: [{
-                        name: "u",
-                        data: [ 1,null,3 ]
-                    },{
-                        name: "u",
-                        data: [ 1,2,3 ]
-                    },{
-                        name: "u",
-                        data: [ 1,2,3 ]
-                        },{
-                        type: "line",
-                        name: "u",
-                        data: [ 1,2,3 ]
-                    },{
-                        type: "line",
-                        name: "u",
-                        data: [ 1,2,3 ]
-                    }],
-                    tooltip: {
-                        visible: true,
-                        shared: true,
-                        format: "c"
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true
-                            }
-                        },
-                        baseUnit: "days",
-                        categories: [
-                            new Date("2011/12/31"),
-                            new Date("2012/01/01"),
-                            new Date("2012/01/02"),
-                            new Date("2012/01/03"),
-                            new Date("2012/01/04"),
-                            new Date("2012/01/05"),
-                            new Date("2012/01/06"),
-                            new Date("2012/01/07"),
-                            new Date("2012/01/08"),
-                            new Date("2012/01/09"),
-                            new Date("2012/01/10")
-                        ],
-                        type: "date"
-                    },
-                    valueAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true
-                            }
-                        }
-                    }
-                });
+            var data = [{"Period":"1-3","Comp1":1,"Comp2":2,"Comp3":3,"Comp4":0},
+                {"Period":"3-5","Comp1":2,"Comp2":5,"Comp3":0,"Comp4":2},
+                {"Period":"5-7","Comp1":3,"Comp2":1,"Comp3":4,"Comp4":2},
+                {"Period":"7-9","Comp1":2,"Comp2":3,"Comp3":5,"Comp4":1},
+                {"Period":"9+","Comp1":3,"Comp2":1,"Comp3":2,"Comp4":2}];
 
-                $("#scatterchart").kendoChart({
-                    theme: "blueopal",
+                $("#chart").kendoChart({
+                    dataSource:  data,
                     series: [{
-                        type: "scatter",
-                        data: [ [1,2], [2,3], [3,4] ]
+                        type: "column",
+                        field: "Comp1",
+                        name: "Comp1",
+                        stack: "a"
+                    },{
+                        type: "column",
+                        field: "Comp2",
+                        name: "Comp2"
+                    },{
+                        type: "column",
+                        field: "Comp3",
+                        name: "Comp3"     
+                    },{
+                        type: "column",
+                        field: "Comp4",
+                        name: "Comp4"       
                     }],
-                    tooltip: {
-                        visible: true
-                    },
-                    xAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true,
-                                position: "center"
-                            }
-                        }
-                    },
-                    yAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true,
-                                position: "left"
-                            }
-                        }
+                    categoryAxis: {
+                        field: "Period"
                     }
                 });
-            });
         </script>
 
         <style>
