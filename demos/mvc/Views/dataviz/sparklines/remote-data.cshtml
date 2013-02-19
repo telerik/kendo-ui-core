@@ -10,18 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>JANUARY</td>
-                <td><span id="sparkline-wnd"></span></td>
-                <td><span id="sparkline-rain"></span></td>
-                <td><span id="sparkline-tmax"></span></td>
-            </tr>
         </tbody>
     </table>
 
     <script id="template" type="text/x-kendo-template">
-        <tr data-month="${value}">
-            <td>${ kendo.toString(items[0].Date, "MMMM") }</td>
+        <tr>
+            <td>${month}</td>
             <td><span class="sparkline-tmax"></span></td>
             <td><span class="sparkline-tmin"></span></td>
             <td><span class="sparkline-wnd"></span></td>
@@ -31,78 +25,66 @@
 
     <script>
         $(document).ready(function() {
-            // Create a template for each row using the above definition
+            // Create a row template using the above definition
             var template = kendo.template($("#template").html());
+            
+            var monthNames = [ "January", "February", "March", "April", "May", "June",
+                               "July", "August", "September", "October", "November", "December" ];
 
-            var dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: "http://tsonev/iis-kendo-crud/Weather/SOFIA",
-                        dataType: "jsonp"
-                    }
-                },
-                schema: {
-                    model: {
-                        fields: {
-                            Date: {
-                                type: "date"
-                            }
+            for (var i = 0; i < monthNames.length; i++) {
+                var monthNumber = i + 1;
+
+                var row = $("#weather tbody")
+                    .append(template({ month: monthNames[i] }))
+                    .find("tr:last");
+
+                var rowDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://tsonev/iis-kendo-crud/Weather/SOFIA/2012/" + monthNumber,
+                            dataType: "jsonp"
                         }
                     }
-                },
-                group: {
-                    field: "Date.getMonth()"
-                },
-                change: function() {
-                    var data = this.view();
+                });
 
-                    $("#weather tbody")
-                        .html(kendo.render(template, this.view()))
-                        .find("tr").each(function() {
-                            var row = $(this);
-                            var month = parseInt(row.data("month"), 10);
-                            var rowData = data[month].items;
+                $(".sparkline-tmax", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    series: [{
+                        type: "bar",
+                        field: "TMax",
+                        color: "red",
+                        negativeColor: "blue"
+                    }]
+                });
 
-                            $(".sparkline-tmax", row).kendoSparkline({
-                                series: [{
-                                    data: rowData,
-                                    type: "bar",
-                                    field: "TMax",
-                                    color: "red",
-                                    negativeColor: "blue"
-                                }]
-                            });
+                $(".sparkline-tmin", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    autoBind:false,
+                    series: [{
+                        type: "bar",
+                        field: "TMin",
+                        color: "red",
+                        negativeColor: "blue"
+                    }]
+                });
 
-                            $(".sparkline-tmin", row).kendoSparkline({
-                                series: [{
-                                    data: rowData,
-                                    type: "bar",
-                                    field: "TMin",
-                                    color: "red",
-                                    negativeColor: "blue"
-                                }]
-                            });
+                $(".sparkline-wnd", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    autoBind:false,
+                    series: [{
+                        field: "Wind"
+                    }]
+                });
 
-                            $(".sparkline-wnd", row).kendoSparkline({
-                                series: [{
-                                    data: rowData,
-                                    field: "Wind"
-                                }]
-                            });
-
-                            $(".sparkline-rain", row).kendoSparkline({
-                                series: [{
-                                    data: rowData,
-                                    type: "area",
-                                    field: "Rain"
-                                }]
-                            });
-                        });
-                }
-            });
-
-            // Read the data from the remote service
-            dataSource.read();
+                $(".sparkline-rain", row).kendoSparkline({
+                    dataSource: rowDataSource,
+                    autoBind:false,
+                    series: [{
+                        type: "area",
+                        field: "Rain"
+                    }]
+                });
+            }
         });
     </script>
 </div>
