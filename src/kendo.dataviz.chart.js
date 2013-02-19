@@ -341,14 +341,10 @@ kendo_module({
 
                 chart._viewElement = view.renderTo(element[0]);
                 if (options.tooltip.shared) {
-                    chart._tooltip = new MultiplePointTooltip(element, options.tooltip);
+                    chart._tooltip = new MultiplePointTooltip(element, chart._plotArea, options.tooltip);
+                    chart._highlight = new MultiplePointHighlight(view, chart._viewElement, chart._plotArea);
                 } else {
                     chart._tooltip = new Tooltip(element, options.tooltip);
-                }
-
-                if (options.tooltip.shared) {
-                    chart._highlight = new MultiplePointHighlight(view, chart._viewElement);
-                } else {
                     chart._highlight = new Highlight(view, chart._viewElement);
                 }
             }
@@ -776,12 +772,10 @@ kendo_module({
                 }
 
                 if (tooltipOptions.visible && tooltipOptions.shared) {
-                    tooltip.plotArea = plotArea;
                     tooltip.showAt(point);
                 }
 
                 if (highlight.options.visible && tooltipOptions.shared) {
-                    highlight.plotArea = plotArea;
                     highlight.show(point);
                 }
             }
@@ -6914,9 +6908,10 @@ kendo_module({
     });
 
     var MultiplePointHighlight = Highlight.extend({
-        init: function(view, viewElement, options) {
+        init: function(view, viewElement, plotArea, options) {
             var highlight = this;
             highlight.options = deepExtend({}, highlight.options, options);
+            highlight.plotArea = plotArea;
 
             highlight.view = view;
             highlight.viewElement = viewElement;
@@ -7130,6 +7125,14 @@ kendo_module({
     });
 
     var MultiplePointTooltip = BaseTooltip.extend({
+        init: function(element, plotArea, options) {
+            var tooltip = this;
+
+            BaseTooltip.fn.init.call(tooltip, element, options);
+
+            tooltip.plotArea = plotArea;
+        },
+
         options: {
             template: "<table style='text-align: left;'>" +
                       "<th colspan='2'>#= category #</th>" +
