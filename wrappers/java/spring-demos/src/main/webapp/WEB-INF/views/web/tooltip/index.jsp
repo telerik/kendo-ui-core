@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />   
-   <kendo:tooltip name="#agglomerations" filter="a" width="120" position="top"/>
+   <kendo:tooltip name="#agglomerations" filter="a" width="120" position="top" />
    
    <div id="agglomerations">
         <a href="#" title="Canton - 26,300,000" id="canton"></a>
@@ -21,6 +21,12 @@
     </div>
     
     <c:url value="/resources/web/tooltip/world-map.jpg" var="mapUrl" />
+    
+    <script>
+    	$(document).ready(function() {
+    		$("#agglomerations").data("kendoTooltip").show($("#canton"));
+    	});
+    </script>
     
     <style scoped="scoped">
 

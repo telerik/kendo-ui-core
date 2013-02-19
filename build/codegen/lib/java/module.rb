@@ -12,7 +12,8 @@ module CodeGen::Java
 
     IGNORED = {
         'chart' => ['axisDefaults', 'seriesDefaults'],
-        'stockchart' => ['axisDefaults', 'seriesDefaults']
+        'stockchart' => ['axisDefaults', 'seriesDefaults'],
+        'tooltip' => ['content']
     }
 
     def self.ignored?(component, option)

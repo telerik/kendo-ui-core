@@ -1691,6 +1691,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>Color to use for bars with negative values.** Applicable only to bar and column series. **</description>
+            <name>negativeColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6616,6 +6622,34 @@ as a collection of required properties, while the insertHtml tool requires a col
         </attribute>
     </tag>
 
+    <tag>
+        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
+        <name>editor-tool-items</name>
+        <tag-class>com.kendoui.taglib.editor.ToolItemsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
+        <name>editor-tool-item</name>
+        <tag-class>com.kendoui.taglib.editor.ToolItemTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The string that the popup item will show.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The value that will be applied by the tool when this item is selected.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+
 
     <tag>
         <description>The JavaScript function which will be executed when the end-user clicks the tool button.</description>
@@ -8441,6 +8475,134 @@ and is about to render it.</description>
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
+
+    <tag>
+        <description>Indicates whether paging is enabled/disabled.</description>
+        <name>listView-pageable</name>
+        <tag-class>com.kendoui.taglib.listview.PageableTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the number of buttons displayed in the numeric pager.</description>
+            <name>buttonCount</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines if a label showing current paging information will be displayed.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines if an input element which allows the user to navigate to given page will be displayed.</description>
+            <name>input</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines if numeric portion of the pager will be shown.</description>
+            <name>numeric</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the number of records which will be displyed.</description>
+            <name>pageSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Displayes a list with predefined page sizes. An array of values to be displayed can be provided.</description>
+            <name>pageSizes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</description>
+            <name>previousNext</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines if a refresh button will be displayed.</description>
+            <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Defines texts shown within the pager.</description>
+        <name>listView-pageable-messages</name>
+        <tag-class>com.kendoui.taglib.listview.PageableMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the info text.</description>
+            <name>display</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the info text shown when there are no records to be displayed.</description>
+            <name>empty</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of the first page button tooltip.</description>
+            <name>first</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text displayed after the select element of the pageSizes mode.</description>
+            <name>itemsPerPage</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of the last page button tooltip.</description>
+            <name>last</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of the next page button tooltip.</description>
+            <name>next</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the last part of the text of the input option.</description>
+            <name>of</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the first part of the text of the input option.</description>
+            <name>page</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of the previous page button tooltip.</description>
+            <name>previous</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the text of the refresh button tooltip.</description>
+            <name>refresh</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
+
 
 
     <tag>
@@ -12159,6 +12321,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>Color to use for bars with negative values.** Applicable only to column series. **The plot stops before the missing point and continues after it.</description>
+            <name>negativeColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The series opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15014,13 +15182,6 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The text or a function which result will be shown within the tooltip.
-By default the tooltip will display the target element title attribute content.</description>
-            <name>content</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>Specifies a selector for elements, within the container, for which the tooltip will be displayed.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15143,26 +15304,6 @@ will disable all animations in the widget.</description>
 
     </tag>
 
-
-
-
-    <tag>
-        <description>The text or a function which result will be shown within the tooltip.
-By default the tooltip will display the target element title attribute content.</description>
-        <name>tooltip-content</name>
-        <tag-class>com.kendoui.taglib.tooltip.ContentTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Specifies a URL or request options that the tooltip should load its content from.Note: For URLs starting with a protocol (e.g. http://),
-a container iframe element is automatically created. This behavior may change in future
-versions, so it is advisable to always use the iframe configuration option.</description>
-            <name>url</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-
-    </tag>
 
 
 
@@ -16064,6 +16205,82 @@ has been clicked on a window with static content.</description>
 
 
 <!-- Auto-generated -->
+
+	<tag>
+		<description>Tooltip content</description>
+		<name>tooltip-content</name>
+		<tag-class>com.kendoui.taglib.tooltip.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+            <description></description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+	</tag>
+	
+	 <tag>
+        <description>Specifies a URL or request options that the tooltip should load its content from.</description>
+        <name>tooltip-content-url</name>
+        <tag-class>com.kendoui.taglib.tooltip.ContentAjaxOptionsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+	
 	<tag>
 		<description>PanelBar Item content</description>
 		<name>panelBar-item-content</name>

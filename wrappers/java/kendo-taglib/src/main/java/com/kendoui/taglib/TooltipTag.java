@@ -13,6 +13,7 @@ import com.kendoui.taglib.html.Empty;
 import com.kendoui.taglib.html.Script;
 import com.kendoui.taglib.json.Function;
 import com.kendoui.taglib.json.Serializer;
+import com.kendoui.taglib.json.Template;
 
 
 import javax.servlet.jsp.JspException;
@@ -89,10 +90,6 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("animation", value);
     }
 
-    public void setContent(com.kendoui.taglib.tooltip.ContentTag value) {
-        setProperty("content", value);
-    }
-
     public void setContentLoad(ContentLoadFunctionTag value) {
         setEvent("contentLoad", value.getBody());
     }
@@ -127,14 +124,6 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setCallout(boolean value) {
         setProperty("callout", value);
-    }
-
-    public String getContent() {
-        return (String)getProperty("content");
-    }
-
-    public void setContent(String value) {
-        setProperty("content", value);
     }
 
     public String getFilter() {
@@ -253,6 +242,21 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("show", new Function(value));
     }
 
-//<< Attributes
-
+//<< Attributes   
+    
+    public void setContent(com.kendoui.taglib.tooltip.ContentTag value) {
+        setProperty("content", value);        
+    }
+    
+    public void setContent(Template value) {
+        setProperty("content", value);        
+    }
+    
+    public void setContent(String value) {        
+        setProperty("content", value);        
+    }
+    
+    public void setContent(Object value) {        
+        setProperty("content", value);        
+    }
 }
