@@ -261,7 +261,7 @@ kendo_module({
             text.template = SVGText.template;
             if (!text.template) {
                 text.template = SVGText.template = renderTemplate(
-                    "<text #= d.renderId(d.options.id) # " +
+                    "<text #= d.renderId() # " +
                     "#= d.renderDataAttributes() # " +
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
@@ -322,7 +322,7 @@ kendo_module({
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
-                    "<path #= d.renderId(d.options.id) #" +
+                    "<path #= d.renderId() #" +
                     "style='display: #= d.renderDisplay() #' " +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
@@ -612,7 +612,7 @@ kendo_module({
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = renderTemplate(
-                    "<circle #= d.renderId(d.options.id) # " +
+                    "<circle #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "cx='#= d.c.x #' cy='#= d.c.y #' " +
                     "r='#= d.r #' " +
@@ -657,7 +657,7 @@ kendo_module({
             if (!group.template) {
                 group.template = SVGGroup.template =
                 renderTemplate(
-                    "<g#= d.renderId(d.options.id) #" +
+                    "<g#= d.renderId() #" +
                     "#= d.renderDataAttributes() #" +
                     "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                     "#= d.renderContent() #</g>"

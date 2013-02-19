@@ -221,7 +221,7 @@ kendo_module({
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = renderTemplate(
-                    "<kvml:textbox #= d.renderId(d.options.id) # " +
+                    "<kvml:textbox #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
@@ -263,7 +263,7 @@ kendo_module({
             text.template = VMLRotatedText.template;
             if (!text.template) {
                 text.template = VMLRotatedText.template = renderTemplate(
-                    "<kvml:shape #= d.renderId(d.options.id) # " +
+                    "<kvml:shape #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; top: 0px; left: 0px; " +
                     "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
@@ -368,7 +368,7 @@ kendo_module({
             path.template = VMLPath.template;
             if (!path.template) {
                 path.template = VMLPath.template = renderTemplate(
-                    "<kvml:shape #= d.renderId(d.options.id) # " +
+                    "<kvml:shape #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position:absolute; #= d.renderSize() # display:#= d.renderDisplay() #;' " +
                     "coordorigin='0 0' #= d.renderCoordsize() #>" +
@@ -614,7 +614,7 @@ kendo_module({
             circle.template = VMLCircle.template;
             if (!circle.template) {
                 circle.template = VMLCircle.template = renderTemplate(
-                    "<kvml:oval #= d.renderId(d.options.id) # " +
+                    "<kvml:oval #= d.renderId() # " +
                             "#= d.renderDataAttributes() #" +
                             "style='position:absolute; " +
                             "width:#= d.r * 2 #px; height:#= d.r * 2 #px; " +
@@ -671,7 +671,7 @@ kendo_module({
             group.template = VMLGroup.template;
             if (!group.template) {
                 group.template = VMLGroup.template = renderTemplate(
-                    "<#= d.tagName # #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<#= d.tagName # #= d.renderId() #" +
                     "#= d.renderDataAttributes() #" +
                     "style='position: absolute; white-space: nowrap;'>" +
                     "#= d.renderContent() #</#= d.tagName #>"
@@ -690,7 +690,7 @@ kendo_module({
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
-                    "<#= d.tagName # #= d.renderAttr(\"id\", d.options.id) #" +
+                    "<#= d.tagName # #= d.renderId() #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
                         "top:#= d.box.y1 #px; " +

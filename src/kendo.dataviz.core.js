@@ -1723,8 +1723,9 @@ kendo_module({
             return a._childIndex - b._childIndex;
         },
 
-        renderId: function(id) {
-            return this.renderAttr(this.modelIdAttr, id);
+        renderId: function() {
+            var element = this;
+            return element.renderAttr(element.modelIdAttr, element.options.id);
         },
 
         renderAttr: function (name, value) {
