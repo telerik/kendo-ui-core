@@ -63,7 +63,7 @@ kendo_module({
     }
 
     function containerBoundaries(container, element) {
-        var offset = container.offset(),
+        var offset = getOffset(container),
             minX = offset.left + numericCssPropery(container, "borderLeftWidth") + numericCssPropery(container, "paddingLeft"),
             minY = offset.top + numericCssPropery(container, "borderTopWidth") + numericCssPropery(container, "paddingTop"),
             maxX = minX + container.width() - element.outerWidth(true),
