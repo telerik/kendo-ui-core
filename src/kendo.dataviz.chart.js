@@ -68,6 +68,7 @@ kendo_module({
         BLACK = "#000",
         BOTTOM = "bottom",
         BUBBLE = "bubble",
+        BULLET = "bullet",
         CANDLESTICK = "candlestick",
         CATEGORY = "category",
         CENTER = "center",
@@ -152,6 +153,7 @@ kendo_module({
         TRIANGLE = "triangle",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
+        VERTICAL_BULLET = "verticalBullet",
         VERTICAL_LINE = "verticalLine",
         WEEKS = "weeks",
         WHITE = "#fff",
@@ -164,7 +166,7 @@ kendo_module({
         ZOOM_END = "zoomEnd",
 
         CATEGORICAL_CHARTS = [
-            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, "bullet"
+            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
         ],
         XY_CHARTS = [
             SCATTER, SCATTER_LINE, BUBBLE
@@ -441,7 +443,7 @@ kendo_module({
                     pieSeries.push(currentSeries);
                 } else if (currentSeries.type === DONUT) {
                     donutSeries.push(currentSeries);
-                } else if (currentSeries.type === "bullet") {
+                } else if (currentSeries.type === BULLET) {
                     bulletSeries.push(currentSeries);
                 }
             }
@@ -2973,7 +2975,9 @@ kendo_module({
                     width: 0,
                     color: "green"
                 },
-                width: 2
+                line: {
+                    width: 2
+                }
             }
         },
 
@@ -2985,12 +2989,11 @@ kendo_module({
                 id: bullet.options.id,
                 type: options.target.shape,
                 background: options.target.color || options.color,
-                width: options.target.width,
                 opacity: options.opacity,
                 zIndex: options.zIndex,
                 border: options.target.border,
-                align: "right",
-                animation: ""
+                vAlign: TOP,
+                align: RIGHT
             });
 
             bullet.append(bullet.target);
@@ -3013,7 +3016,8 @@ kendo_module({
                     targetSlotX.x2, targetSlotY.y2
                 );
 
-            target.options.height = targetSlot.height();
+            target.options.height = invertAxes ? targetSlot.height() : options.target.line.width;
+            target.options.width = invertAxes ? options.target.line.width : targetSlot.width();
             target.reflow(targetSlot);
 
             bullet.box = box;
@@ -3066,20 +3070,14 @@ kendo_module({
         },
 
         formatValue: function(format) {
-            var point = this;
+            var bullet = this;
 
-            return point.owner.formatPointValue(point, format);
+            return bullet.owner.formatPointValue(bullet, format);
         }
     });
     deepExtend(Bullet.fn, PointEventsMixin);
 
     var ShapeElement = BoxElement.extend({
-        init: function(options) {
-            var marker = this;
-
-            BoxElement.fn.init.call(marker, options);
-        },
-
         options: {
             type: CIRCLE,
             align: CENTER,
@@ -6216,7 +6214,7 @@ kendo_module({
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, "bullet", VERTICAL_LINE, VERTICAL_AREA]
+                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA]
                 );
             }
 
@@ -6304,7 +6302,7 @@ kendo_module({
                 );
 
                 plotArea.createBulletChart(
-                    plotArea.filterSeriesByType(paneSeries, "bullet"),
+                    plotArea.filterSeriesByType(paneSeries, [BULLET, VERTICAL_BULLET]),
                     pane
                 );
             }
@@ -6314,22 +6312,10 @@ kendo_module({
             var plotArea = this,
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
-                categoryAxis,
-                axisPane,
-                categories,
-                categoryMap,
-                groupIx,
-                categoryIndicies,
-                seriesIx,
-                currentSeries,
-                seriesClone,
-                srcData,
-                data,
-                srcValues,
-                i,
-                categoryIx,
-                pointData,
-                value;
+                categoryAxis, axisPane, categories, categoryMap,
+                groupIx, categoryIndicies, seriesIx, currentSeries,
+                seriesClone, srcData, data, srcValues, i,
+                categoryIx, pointData, value;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -8343,6 +8329,8 @@ kendo_module({
         delete seriesDefaults.bubble;
         delete seriesDefaults.candlestick;
         delete seriesDefaults.ohlc;
+        delete seriesDefaults.bullet;
+        delete seriesDefaults.verticalBullet;
     }
 
     function applySeriesColors(options) {

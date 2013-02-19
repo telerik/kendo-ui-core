@@ -111,6 +111,20 @@ kendo_module({
                 column: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
+                },
+                bullet: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING,
+                    target: {
+                        color: "#ff0000"
+                    }
+                },
+                verticalBullet: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING,
+                    target: {
+                        color: "#ff0000"
+                    }
                 }
             },
             categoryAxis: {

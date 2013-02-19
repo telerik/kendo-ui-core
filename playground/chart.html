@@ -12,20 +12,97 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 700px; float: left;"></div>
-        <div id="scatterchart" style="width: 700px; float: left;"></div>
+        <div id="chart" style="width: 80px; float: left;"></div>
+        <div id="chart1" style="width: 80px; float: left;"></div>
+        <div id="chart2" style="width: 80px; float: left;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
                     theme: "blueopal",
+                    legend: {
+                        visible: false
+                    },
                     series: [{
                         name: "u",
-                        type: "bullet",
-                        data: [ { target: 3, value: 2} ],
-                        color: "red",
-                        gap: 1.5,
-                        spacing: 1.2
-                    }]
+                        type: "verticalBullet",
+                        data: [ { target: 3, value: 2}]
+                    }],
+                    categoryAxis: {
+                        categories: ["A"]
+                    },
+                    valueAxis: {
+                        plotBands: [{
+                            from: 0, to: 1, color: "red", opacity: 0.5
+                        },{
+                            from: 1, to: 2.5, color: "green", opacity: 0.5
+                        },{
+                            from: 2.5, to: 4, color: "blue", opacity: 0.5
+                        }],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tootlip: {
+                        visible: true
+                    }
+                });
+                $("#chart1").kendoChart({
+                    theme: "blueopal",
+                    legend: {
+                        visible: false
+                    },
+                    series: [{
+                        name: "u",
+                        type: "verticalBullet",
+                        data: [ { target: 3, value: 2}]
+                    }],
+                    categoryAxis: {
+                        categories: ["B"]
+                    },
+                    valueAxis: {
+                        plotBands: [{
+                            from: 0, to: 1, color: "red", opacity: 0.5
+                        },{
+                            from: 1, to: 2.5, color: "green", opacity: 0.5
+                        },{
+                            from: 2.5, to: 4, color: "blue", opacity: 0.5
+                        }],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tootlip: {
+                        visible: true
+                    }
+                });
+                $("#chart2").kendoChart({
+                    theme: "blueopal",
+                    legend: {
+                        visible: false
+                    },
+                    series: [{
+                        name: "u",
+                        type: "verticalBullet",
+                        data: [ { target: 3, value: 2}]
+                    }],
+                    categoryAxis: {
+                        categories: ["C"]
+                    },
+                    valueAxis: {
+                        plotBands: [{
+                            from: 0, to: 1, color: "red", opacity: 0.5
+                        },{
+                            from: 1, to: 2.5, color: "green", opacity: 0.5
+                        },{
+                            from: 2.5, to: 4, color: "blue", opacity: 0.5
+                        }],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tootlip: {
+                        visible: true
+                    }
                 });
             });
         </script>
