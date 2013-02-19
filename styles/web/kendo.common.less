@@ -1724,11 +1724,6 @@ html body .k-grid tbody .k-button-icon
 }
 
 
-.k-ie7 .k-edit-cell .k-textbox,
-.k-ie7 .k-grid-edit-row .k-textbox
-{
-}
-
 html .k-edit-cell .k-tooltip,
 html .k-grid-edit-row .k-tooltip
 {
@@ -1894,21 +1889,6 @@ span.k-dropdown
     padding: 2px;
     border-width: 1px;
     border-style: solid;
-}
-
-.k-list-container.k-state-border-up,
-.k-autocomplete.k-state-border-up,
-.k-dropdown-wrap.k-state-border-up,
-.k-picker-wrap.k-state-border-up,
-.k-numeric-wrap.k-state-border-up
-{
-    /*padding-top: 1px;*/
-}
-
-.k-dropdown-wrap.k-state-border-up .k-select,
-.k-picker-wrap.k-state-border-up .k-select
-{
-    top: 1px;
 }
 
 .k-list-container.k-state-border-down,
@@ -2486,7 +2466,7 @@ input.k-textbox
     line-height: 1.6em;
 }
 
-.k-ie7 input.k-textbox { display: block; line-height: 1.72em; height: 1.72em; text-indent: .3em; }
+.k-ie7 input.k-textbox { line-height: 1.72em; height: 1.72em; text-indent: .3em; }
 
 textarea.k-textbox
 {
@@ -2537,7 +2517,7 @@ span.k-numerictextbox
 .k-colorpicker
 {
 	.k-picker-wrap {
-		padding-bottom: 4px;
+		padding-bottom: 3px;
 	}
     .k-selected-color {
         font-size: 0;
@@ -2547,12 +2527,13 @@ span.k-numerictextbox
         height: @grid-size;
         width: @grid-size;
         border: 1px solid #ccc;
+		margin:3px 2px 0 1px;
     }
     .k-tool-icon {
         position: relative;
         top: -2px;
         display: inline-block;
-        padding: 2px 3px;
+        padding: 3px 3px 2px;
         font-size: 0;
         line-height: 0;
         background-repeat: no-repeat;
@@ -2564,8 +2545,8 @@ span.k-numerictextbox
             height: 3px;
             width: @grid-size;
             position: absolute;
-			left: 2px;
-            bottom: -4px;
+			left: 1px;
+            bottom: -3px;
         }
     }
     .k-icon {
