@@ -133,7 +133,8 @@
 .km-wp .km-button.km-state-active,
 .km-wp li.km-state-active .km-listview-link,
 .km-wp li.km-state-active .km-listview-label,
-.km-wp li.km-state-active .km-detail
+.km-wp li.km-state-active .km-detail,
+.km-wp .km-actionsheet > li > a:active
 {
 	background: @accent-background;
 }
@@ -144,7 +145,8 @@
 .km-wp *:not(.km-tabstrip) > .km-button:active,
 .km-wp *:not(.km-tabstrip) > .km-button.km-state-active,
 .km-wp .km-state-active .km-listview-link,
-.km-wp .km-state-active .km-listview-label
+.km-wp .km-state-active .km-listview-label,
+.km-wp .km-actionsheet > li > a:active
 {
     color: @accent-text;
 }
@@ -199,6 +201,7 @@
 .km-wp .km-navbar
 {
 	line-height: 2.2em;
+    background: @main-background;
 }
 
 .km-wp .km-leftitem,
@@ -532,4 +535,23 @@
 {
     font-size: .86em;
     margin-left: -2px;
+}
+
+/* ActionSheet */
+
+.km-wp .km-actionsheet > li
+{
+    padding: 0;
+}
+
+.km-wp li.km-actionsheet-title,
+.km-wp .km-actionsheet > li > a
+{
+    display: block;
+    padding: .3em .8em;
+}
+
+.km-wp li.km-actionsheet-title
+{
+    font-weight: bold;
 }
