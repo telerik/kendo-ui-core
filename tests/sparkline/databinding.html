@@ -52,9 +52,9 @@
                     equals(sparkline.options.seriesDefaults.data.length, 2);
                 });
 
-                test("observable array is used to initialize data source", function() {
+                test("observable array is used to initialize series data", function() {
                     createSparkline(new kendo.data.ObservableArray([1, 2]));
-                    equals(sparkline.dataSource.data().length, 2);
+                    equals(sparkline.options.seriesDefaults.data.length, 2);
                 });
 
                 test("default series are created", function() {

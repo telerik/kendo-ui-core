@@ -27,8 +27,7 @@ kendo_module({
         init: function(element, userOptions) {
             var chart = this,
                 stage = chart.stage = $("<span />"),
-                options = userOptions || {},
-                defaults;
+                options = userOptions || {};
 
             element = $(element)
                 .empty()
@@ -37,21 +36,18 @@ kendo_module({
 
             chart._initialWidth = math.floor(element.width());
 
-            if (isArray(options)) {
+            if (isArray(options) || options instanceof ObservableArray) {
                 options = { seriesDefaults: { data: options } };
-            } else if (options instanceof ObservableArray) {
-                options = { dataSource: options };
             }
 
             options.series = options.series || [{}];
-            defaults = options.seriesDefaults = options.seriesDefaults || {};
-            if (options.type) {
-                defaults.type = options.type;
-            }
 
-            if (options.data) {
-                defaults.data = options.data;
-            }
+            deepExtend(options, {
+                seriesDefaults: {
+                    type: options.type,
+                    data: options.data
+                }
+            });
 
             Chart.fn.init.call(chart, element, options);
         },
