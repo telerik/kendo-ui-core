@@ -96,19 +96,19 @@
                 {
                     "name": "ColorPalette",
                     "file": "kendo.colorpicker.js",
-                    "line": 142,
+                    "line": 146,
                     "col": 23
                 },
                 {
                     "name": "FlatColorPicker",
                     "file": "kendo.colorpicker.js",
-                    "line": 299,
+                    "line": 303,
                     "col": 26
                 },
                 {
                     "name": "ColorPicker",
                     "file": "kendo.colorpicker.js",
-                    "line": 772,
+                    "line": 776,
                     "col": 22
                 }
             ]
@@ -226,7 +226,7 @@
                 {
                     "name": "Chart",
                     "file": "kendo.dataviz.chart.js",
-                    "line": 186,
+                    "line": 188,
                     "col": 16
                 }
             ]
@@ -280,7 +280,7 @@
                 {
                     "name": "Sparkline",
                     "file": "kendo.dataviz.sparkline.js",
-                    "line": 25,
+                    "line": 28,
                     "col": 20
                 }
             ]
@@ -350,7 +350,7 @@
                 {
                     "name": "DatePicker",
                     "file": "kendo.datepicker.js",
-                    "line": 267,
+                    "line": 268,
                     "col": 21
                 }
             ]
@@ -646,19 +646,19 @@
                 {
                     "name": "ImageBrowser",
                     "file": "kendo.imagebrowser.js",
-                    "line": 184,
+                    "line": 185,
                     "col": 23
                 },
                 {
                     "name": "SearchBox",
                     "file": "kendo.imagebrowser.js",
-                    "line": 867,
+                    "line": 868,
                     "col": 20
                 },
                 {
                     "name": "Breadcrumbs",
                     "file": "kendo.imagebrowser.js",
-                    "line": 982,
+                    "line": 983,
                     "col": 22
                 }
             ]
@@ -1129,7 +1129,7 @@
                 {
                     "name": "PanelBar",
                     "file": "kendo.panelbar.js",
-                    "line": 200,
+                    "line": 199,
                     "col": 19
                 }
             ]
@@ -1147,7 +1147,7 @@
                 {
                     "name": "Popup",
                     "file": "kendo.popup.js",
-                    "line": 57,
+                    "line": 56,
                     "col": 16
                 }
             ]
@@ -1222,13 +1222,13 @@
                 {
                     "name": "Slider",
                     "file": "kendo.slider.js",
-                    "line": 581,
+                    "line": 580,
                     "col": 17
                 },
                 {
                     "name": "RangeSlider",
                     "file": "kendo.slider.js",
-                    "line": 1158,
+                    "line": 1157,
                     "col": 22
                 }
             ]
