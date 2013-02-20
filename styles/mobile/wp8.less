@@ -183,12 +183,14 @@
     text-transform: lowercase;
 }
 
+.km-wp-dark .km-loader h1,
 .km-wp-dark .km-filter-reset .km-clear
 {
 	color: @main-text-dark;
 }
 
-.km-wp-list .km-filter-reset .km-clear
+.km-wp-light .km-loader h1,
+.km-wp-light .km-filter-reset .km-clear
 {
 	color: @main-text-light;
 }
@@ -554,4 +556,152 @@
 .km-wp li.km-actionsheet-title
 {
     font-weight: bold;
+}
+
+/* Loader */
+
+.km-wp .km-loader
+{
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    left: 0;
+    .border-radius(0);
+    border: 0;
+    margin: -50px 0 0;
+    font-size: 1.2rem;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.km-wp-dark .km-loader
+{
+    background: @second-background-dark;
+}
+
+.km-wp-light .km-loader
+{
+    background: @second-background-light;
+}
+
+.km-wp .km-loader h1
+{
+    position: absolute;
+    display: none;
+    font-size: 1em;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+    bottom: 0;
+}
+
+.km-wp .km-loader .km-loading
+{
+    .animation(none);
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.km-wp .km-loader:before,
+.km-wp .km-loader:after,
+.km-wp .km-loader .km-loading,
+.km-wp .km-loader .km-loading:after,
+.km-wp .km-loader .km-loading:before
+{
+    position: absolute;
+    display: inline-block;
+    content: "\e0ea";
+    top: 0;
+    left: 0;
+    border: 0;
+    color: @main-text-dark;
+    width: 100px;
+    height: 8px;
+    font-size: 8px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-family: "Kendo UI";
+}
+
+.km-wp .km-loader:before,
+.km-wp .km-loader:after,
+.km-wp .km-loader .km-loading
+{
+    left: 50%;
+    margin-left: -50px;
+    top: 46%;
+}
+
+.km-wp-light .km-loader:before,
+.km-wp-light .km-loader:after,
+.km-wp-light .km-loader .km-loading,
+.km-wp-light .km-loader .km-loading:after,
+.km-wp-light .km-loader .km-loading:before
+{
+    color: @main-text-light;
+}
+
+.km-wp .km-loader:before,
+.km-wp .km-loader:after,
+.km-wp .km-loader .km-loading:after,
+.km-wp .km-loader .km-loading:before
+{
+    opacity: 0;
+    .animation(km-wpload 2s infinite linear);
+}
+
+.km-wp .km-loader .km-loading:after
+{
+    .animation-delay(0);
+}
+
+.km-wp .km-loader .km-loading:before
+{
+    .animation-delay(.3s);
+}
+
+.km-wp .km-loader:before
+{
+    .animation-delay(.6s);
+}
+
+.km-wp .km-loader:after
+{
+    .animation-delay(.9s);
+}
+
+@-moz-keyframes km-wpload
+{
+    0% { transform: translateX(0); opacity: .1; }
+    8% { transform: translateX(30%); }
+    16% { opacity: 1; }
+    34% { opacity: 1; }
+    42% { transform: translateX(70%); }
+    50% { transform: translateX(100%); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-webkit-keyframes km-wpload
+{
+    0% { transform: translateX(0); opacity: .1; }
+    8% { transform: translateX(30%); }
+    16% { opacity: 1; }
+    34% { opacity: 1; }
+    42% { transform: translateX(70%); }
+    50% { transform: translateX(100%); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes km-wpload
+{
+    0% { transform: translateX(0); opacity: .1; }
+    8% { transform: translateX(30%); }
+    16% { opacity: 1; }
+    34% { opacity: 1; }
+    42% { transform: translateX(70%); }
+    50% { transform: translateX(100%); opacity: 0; }
+    100% { opacity: 0; }
 }
