@@ -115,7 +115,6 @@ kendo_module({
                 }
             },
             tooltip: {
-                shared: true,
                 visible: true
             },
             categoryAxis: {
