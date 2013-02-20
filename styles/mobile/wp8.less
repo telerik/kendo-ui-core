@@ -103,12 +103,14 @@
 	padding: .04em .5em .16em;
 }
 
-.km-wp-dark .km-button
+.km-wp-dark .km-button,
+.km-wp-dark .km-listview-link:after
 {
 	border-color: @main-text-dark;
 }
 
-.km-wp-light .km-button
+.km-wp-light .km-button,
+.km-wp-light .km-listview-link:after
 {
 	border-color: @main-text-light;
 }
@@ -141,10 +143,15 @@
 .km-wp li.km-state-active .km-detail,
 .km-wp *:not(.km-tabstrip) > .km-button:active,
 .km-wp *:not(.km-tabstrip) > .km-button.km-state-active,
-.km-wp li.km-state-active .km-listview-link,
-.km-wp li.km-state-active .km-listview-label
+.km-wp .km-state-active .km-listview-link,
+.km-wp .km-state-active .km-listview-label
 {
     color: @accent-text;
+}
+
+.km-wp .km-state-active .km-listview-link:after
+{
+    border-color: @accent-text;
 }
 
 .km-wp .km-view-title
