@@ -89,6 +89,14 @@
 
                 equal(result, null);
             });
+
+            test("kendo.culture method extends numberFormat to use groupSizes", function() {
+                var nFormat = kendo.culture().numberFormat;
+
+                equal(nFormat.groupSizes, nFormat.groupSize);
+                equal(nFormat.percent.groupSizes, nFormat.percent.groupSize);
+                equal(nFormat.currency.groupSizes, nFormat.currency.groupSize);
+            });
         </script>
     </body>
 </html>

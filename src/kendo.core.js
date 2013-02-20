@@ -520,6 +520,12 @@ function pad(number, digits, end) {
         return culture || kendo.cultures.current;
     }
 
+    function expandNumberFormat(numberFormat) {
+        numberFormat.groupSizes = numberFormat.groupSize;
+        numberFormat.percent.groupSizes = numberFormat.percent.groupSize;
+        numberFormat.currency.groupSizes = numberFormat.currency.groupSize;
+    }
+
     kendo.culture = function(cultureName) {
         var cultures = kendo.cultures, culture;
 
@@ -527,6 +533,11 @@ function pad(number, digits, end) {
             culture = findCulture(cultureName) || cultures[EN];
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
+
+            if (globalize) {
+                expandNumberFormat(culture.numberFormat);
+            }
+
         } else {
             return cultures.current;
         }
