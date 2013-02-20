@@ -2442,6 +2442,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     font-size: 1.2rem;
 }
 
+#example #device-wrapper .km-wp8 img
+{
+    border-radius: 0;
+}
+
 #icon-list
 {
     margin: 0;
