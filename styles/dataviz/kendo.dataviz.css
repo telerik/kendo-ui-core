@@ -28,6 +28,7 @@ div.k-gauge
     padding: 2px 6px;
     white-space: nowrap;
     z-index: 1000;
+    line-height: normal;
 }
 
 .k-chart .k-tooltip table {
