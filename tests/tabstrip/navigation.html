@@ -53,6 +53,15 @@
             equal(div.attr("tabindex"), 1);
         });
 
+        test("TabStrip does not select anything if no items", function() {
+            div.kendoTabStrip();
+
+            div.focus();
+
+            equal(div.data("kendoTabStrip")._current(), null);
+        });
+
+
         test("TabStrip selects first item on focus", function() {
             div.kendoTabStrip();
             addItems(2);

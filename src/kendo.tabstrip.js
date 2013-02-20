@@ -220,7 +220,11 @@ kendo_module({
 
         _active: function() {
             var item = this.tabGroup.children().filter("." + ACTIVESTATE);
-            this._current(item[0] ? item : this._endItem("first"));
+
+            item = item[0] ? item : this._endItem("first");
+            if (item[0]) {
+                this._current(item);
+            }
         },
 
         _endItem: function(action) {
