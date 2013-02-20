@@ -20,7 +20,9 @@ kendo_module({
         math = Math;
 
     // Constants =============================================================
-    var CSS_PREFIX = "k-";
+    var CSS_PREFIX = "k-",
+        DEFAULT_WIDTH = 150,
+        BULLET = "bullet";
 
     // Sparkline =============================================================
     var Sparkline = Chart.extend({
@@ -47,6 +49,16 @@ kendo_module({
                     type: options.type
                 }
             });
+
+            if (options.series[0].type === BULLET || options.type === BULLET) {
+                options = deepExtend({}, {
+                        categoryAxis: {
+                            crosshair: {
+                                visible: false
+                            }
+                        }
+                    }, options);
+            }
 
             Chart.fn.init.call(chart, element, options);
         },
@@ -204,6 +216,10 @@ kendo_module({
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
+                if (currentSeries.type === BULLET) {
+                    return DEFAULT_WIDTH;
+                }
+
                 if (currentSeries.data) {
                     seriesTotal = math.max(seriesTotal, currentSeries.data.length);
                 }
