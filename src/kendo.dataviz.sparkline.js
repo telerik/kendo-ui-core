@@ -92,9 +92,20 @@ kendo_module({
                         visible: false
                     }
                 },
+                bar: {
+                    overlay: {
+                        gradient: null
+                    },
+                    border: {
+                        width: 0
+                    }
+                },
                 column: {
                     overlay: {
                         gradient: null
+                    },
+                    border: {
+                        width: 0
                     }
                 }
             },
