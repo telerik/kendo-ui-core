@@ -136,6 +136,12 @@
                     createSparkline({ data: [1, 2], type: "bar" });
                     equals(sparkline._plotArea.charts[0].options.invertAxes, false);
                 });
+
+                test("bullet wrap the options data array", function() {
+                    var data = [1,2];
+                    createSparkline({ data: data, type: "bullet" });
+                    same(sparkline._plotArea.series[0].data[0], data);
+                });
             })();
         </script>
 

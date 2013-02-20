@@ -40,12 +40,11 @@ kendo_module({
                 options = { seriesDefaults: { data: options } };
             }
 
-            options.series = options.series || [{}];
+            options.series = options.series || [{ data: options.data }];
 
             deepExtend(options, {
                 seriesDefaults: {
-                    type: options.type,
-                    data: options.data
+                    type: options.type
                 }
             });
 

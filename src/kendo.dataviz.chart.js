@@ -2852,6 +2852,27 @@ kendo_module({
     });
 
     var BulletChart = CategoricalChart.extend({
+        init: function(plotArea, options) {
+            var chart = this;
+
+            chart.wrapData(options);
+
+            CategoricalChart.fn.init.call(chart, plotArea, options);
+        },
+
+        wrapData: function(options) {
+            var series = options.series,
+                i, data, seriesItem;
+
+            for (i = 0; i < series.length; i++) {
+                seriesItem = series[i];
+                data = seriesItem.data;
+                if (data && !isArray(data[0]) && typeof(data[0]) != "object") {
+                    seriesItem.data = [data];
+                }
+            }
+        },
+
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 categoryPoints = chart.categoryPoints[categoryIx],
