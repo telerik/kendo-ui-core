@@ -848,6 +848,16 @@ div.k-imagebrowser-dropzone em
     .border-radius(0 @main-border-radius @main-border-radius 0);
 }
 
+.k-rtl .k-dropdown-wrap .k-select,
+.k-rtl .k-picker-wrap .k-select,
+.k-rtl .k-numeric-wrap .k-select,
+.k-rtl .k-datetimepicker .k-select+.k-select,
+.k-rtl .k-animation-container .k-calendar-container,
+.k-rtl .k-list-container.k-state-border-right
+{
+    .border-radius(@main-border-radius 0 0 @main-border-radius);
+}
+
 .k-textbox > input,
 .k-autocomplete .k-input,
 .k-colorpicker .k-selected-color,

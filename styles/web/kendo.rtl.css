@@ -33,6 +33,7 @@
 {
     right: auto;
     left: 0;
+    border-width: 0 1px 0 0;
 }
 
 .k-rtl .k-dropdown-wrap .k-input,
@@ -45,7 +46,7 @@
 
 .k-rtl .k-datetimepicker .k-picker-wrap .k-icon
 {
-    margin: 0 3px 0 0;
+    margin: 0 2px 0 0;
 }
 
 /* Editor */
