@@ -2964,7 +2964,7 @@ kendo_module({
         },
 
         formatPointValue: function(point, format) {
-            return autoFormat(format, point.value, point.target);
+            return autoFormat(format, point.value.value, point.value.target);
         }
     });
 
@@ -2974,7 +2974,7 @@ kendo_module({
 
             ChartElement.fn.init.call(bullet, options);
 
-            bullet.data = data;
+            bullet.value = { value: data.value, target: data.fields.target };
             bullet.options.id = uniqueId();
             bullet.enableDiscovery();
             bullet.render();
@@ -2999,6 +2999,9 @@ kendo_module({
                 line: {
                     width: 2
                 }
+            },
+            tooltip: {
+                format: "Value: {0}</br>Target: {1}"
             }
         },
 
@@ -3029,7 +3032,7 @@ kendo_module({
                 valueAxis = chart.seriesValueAxis(bullet.options),
                 axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis),
                 categorySlot = chart.categorySlot(chart.categoryAxis, options.categoryIx, valueAxis),
-                targetValueSlot = chart.valueSlot(valueAxis, bullet.data.fields.target, axisCrossingValue),
+                targetValueSlot = chart.valueSlot(valueAxis, bullet.value.target, axisCrossingValue),
                 targetSlotX = invertAxes ? targetValueSlot : categorySlot,
                 targetSlotY = invertAxes ? categorySlot : targetValueSlot,
                 targetSlot = new Box2D(
@@ -3079,6 +3082,31 @@ kendo_module({
             append(elements, ChartElement.fn.getViewElements.call(bullet, view));
 
             return elements;
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var bar = this,
+                options = bar.options,
+                box = bar.box,
+                vertical = options.vertical,
+                aboveAxis = options.aboveAxis,
+                x,
+                y;
+
+            if (vertical) {
+                x = box.x2 + TOOLTIP_OFFSET;
+                y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
+            } else {
+                if (options.isStacked) {
+                    x = aboveAxis ? box.x2 - tooltipWidth : box.x1;
+                    y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
+                } else {
+                    x = aboveAxis ? box.x2 + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
+                    y = box.y1;
+                }
+            }
+
+            return new Point2D(x, y);
         },
 
         highlightOverlay: function(view, options){
