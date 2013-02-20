@@ -115,7 +115,8 @@ kendo_module({
                 }
             },
             tooltip: {
-                visible: true
+                visible: true,
+                shared: true
             },
             categoryAxis: {
                 crosshair: {
@@ -238,6 +239,10 @@ kendo_module({
             anchor.y = -this.element.height() - this.options.offset;
 
             return anchor;
+        },
+
+        _hideElement: function() {
+            this.element.hide();
         }
     });
 

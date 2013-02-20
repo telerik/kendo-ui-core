@@ -7340,12 +7340,16 @@ kendo_module({
             clearTimeout(tooltip.showTimeout);
 
             if (tooltip.visible) {
-                tooltip.element.fadeOut();
+                tooltip._hideElement();
 
                 tooltip.point = null;
                 tooltip.visible = false;
                 tooltip.index = null;
             }
+        },
+
+        _hideElement: function() {
+            this.element.fadeOut();
         },
 
         _pointContent: function(point) {
