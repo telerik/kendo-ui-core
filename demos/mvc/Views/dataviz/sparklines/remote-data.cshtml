@@ -1,20 +1,46 @@
 <div id="example" class="k-content">
-    <table id="weather" class="metrotable">
-        <thead>
-            <tr>
-                <th>MONTH</th>
-                <th>MAX TEMP &deg;C</th>
-                <th>WIND SPEED KM/H</th>
-                <th>RAINFALL MM</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="chart-wrapper">
+        <table id="weather">
+            <thead>
+                <tr>
+                    <th class="month">MONTH</th>
+                    <th>MAX TEMP &deg;C</th>
+                    <th>WIND SPEED KM/H</th>
+                    <th>RAINFALL MM</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    
+    <style scoped>
+        .chart-wrapper {
+            height: 370px;
+        }
+        .chart-wrapper .k-chart {
+            width: auto;
+            height: auto;
+        }
+        .chart-wrapper table {
+            border-collapse: collapse;
+            line-height: 50px;
+        }
+        .chart-wrapper table td, .chart-wrapper table th {
+            padding: 0;
+            width: 200px;
+            text-align: center;
+        }
+        .chart-wrapper .month, .chart-wrapper .month {
+            width: 80px;
+            text-align: right;
+            padding-right: 20px;
+        }
+    </style>
 
     <script id="template" type="text/x-kendo-template">
         <tr>
-            <td>${month}</td>
+            <td class="month">${month}</td>
             <td><span class="sparkline-tmax"></span></td>
             <td><span class="sparkline-wnd"></span></td>
             <td><span class="sparkline-rain"></span></td>
