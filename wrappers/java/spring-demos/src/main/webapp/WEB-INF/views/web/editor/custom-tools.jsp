@@ -14,7 +14,27 @@
 
 <kendo:editor name="editor" style="width:740px;height:440px">
     <kendo:editor-tools>
-        <kendo:editor-tool name="custom" tooltip="Horizontal Rule">
+   		 <kendo:editor-tool name="fontName">
+	         <kendo:editor-tool-items>
+	         	<kendo:editor-tool-item value="Verdana,Geneva,sans-serif" text="Verdana" />
+	         	<kendo:editor-tool-item value="Garamond, serif" text="Garamond" />
+	         </kendo:editor-tool-items>
+         </kendo:editor-tool>
+         <kendo:editor-tool name="fontSize">
+	         <kendo:editor-tool-items>
+	         	<kendo:editor-tool-item value="xx-small" text="1 (8pt)" />
+	         	<kendo:editor-tool-item value="16px" text="16px" />
+	         </kendo:editor-tool-items>
+         </kendo:editor-tool>
+         <kendo:editor-tool name="formatBlock">
+	         <kendo:editor-tool-items>
+	         	<kendo:editor-tool-item value="p" text="Paragraph" />
+	         	<kendo:editor-tool-item value="Fieldset" text="fieldset" />
+	         </kendo:editor-tool-items>
+         </kendo:editor-tool>
+          <kendo:editor-tool template="<label for='templateTool' style='vertical-align:middle;'>Background:</label> <select id='templateTool'><option value=''>none</option><option value='\\#ff9'>yellow</option><option value='\\#dfd'>green</option></select>">
+         </kendo:editor-tool>
+        <kendo:editor-tool name="custom" tooltip="Insert a horizontal rule">
             <kendo:editor-tool-exec>
                 <script>
                 function custom_tool_exec(e) {
@@ -24,7 +44,7 @@
                 }
                 </script>
             </kendo:editor-tool-exec>
-        </kendo:editor-tool>
+        </kendo:editor-tool>         
     </kendo:editor-tools>
     <kendo:editor-value>
          &lt;p&gt;
@@ -51,5 +71,15 @@
             &lt;/p&gt;
     </kendo:editor-value>
 </kendo:editor>
+
+<script>
+$(document).ready(function(){
+	$("#templateTool").kendoDropDownList({
+	    change: function(e) {
+	        $("#editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+	    }
+	});
+});
+</script>
 
 <demo:footer />
