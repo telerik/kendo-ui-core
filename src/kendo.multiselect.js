@@ -605,6 +605,9 @@ kendo_module({
                 if (input[0] !== document.activeElement) {
                     show = !that._dataItems[0];
                 }
+                that.wrapper.removeClass(FOCUSEDCLASS);
+            } else {
+                that.wrapper.addClass(FOCUSEDCLASS);
             }
 
             input.toggleClass("k-readonly", show)
@@ -853,10 +856,10 @@ kendo_module({
 
         _tagList: function() {
             var that = this,
-                tagList = that._innerWrapper.children("ul.k-list");
+                tagList = that._innerWrapper.children("ul");
 
             if (!tagList[0]) {
-                tagList = $('<ul role="listbox" unselectable="on" class="k-list k-reset"/>').appendTo(that._innerWrapper);
+                tagList = $('<ul role="listbox" unselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
             }
 
             that.tagList = tagList;
