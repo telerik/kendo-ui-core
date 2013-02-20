@@ -37,10 +37,14 @@ div.k-gauge
 }
 
 .k-chart .k-tooltip th {
+    width: auto;
     text-align: center;
+    padding: 1px;
 }
 
 .k-chart .k-tooltip td {
+    width: auto;
+    text-align: left;
     padding: .1em .2em;
 }
 

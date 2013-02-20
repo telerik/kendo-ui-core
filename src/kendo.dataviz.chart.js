@@ -7414,7 +7414,7 @@ kendo_module({
         },
 
         options: {
-            template: "<table style='text-align: left;'>" +
+            sharedTemplate: "<table>" +
                       "<th colspan='2'>#= category #</th>" +
                       "# for(var i = 0; i < points.length; i++) { #" +
                       "# var point = points[i]; #" +
@@ -7489,7 +7489,7 @@ kendo_module({
                 content, template;
 
             if (points.length) {
-                template = kendo.template(tooltip.options.template);
+                template = kendo.template(tooltip.options.sharedTemplate);
                 content = template({
                     points: points,
                     category: category,
