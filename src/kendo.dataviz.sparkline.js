@@ -78,46 +78,22 @@ kendo_module({
                 }
             },
             seriesDefaults: {
-                autoBind: true,
                 type: "line",
                 area: {
                     line: {
                         width: 0.5
-                    },
-                    width: 1,
-                    markers: {
-                        border: {
-                            width: 0
-                        },
-                        size: 2,
-                        visible: false
                     }
                 },
-                line: {
-                    width: 0.5,
-                    markers: {
-                        border: {
-                            width: 0
-                        },
-                        size: 2,
-                        visible: false
-                    }
+                width: 0.5,
+                overlay: {
+                    gradient: null
                 },
-                bar: {
-                    overlay: {
-                        gradient: null
-                    },
-                    border: {
-                        width: 0
-                    }
+                border: {
+                    width: 0
                 },
-                column: {
-                    overlay: {
-                        gradient: null
-                    },
-                    border: {
-                        width: 0
-                    }
+                markers: {
+                    size: 2,
+                    visible: false
                 }
             },
             tooltip: {
@@ -136,6 +112,7 @@ kendo_module({
                 visible: false
             },
             transitions: false,
+
             pointWidth: 5
         },
 
