@@ -25,11 +25,13 @@
 
             (function() {
                 var sparkline,
-                    plotArea;
+                    plotArea,
+                    liveSeries;
 
                 function createSparkline(options) {
                     $("#sparkline").kendoSparkline(options);
                     sparkline = $("#sparkline").data("kendoSparkline");
+                    liveSeries = sparkline._plotArea.charts[0].options.series
                 }
 
                 function destroySparkline() {
@@ -46,8 +48,8 @@
                     teardown: destroySparkline
                 });
 
-                test("array is used to initialize data source", function() {
-                    equals(sparkline.dataSource.data().length, 2);
+                test("array is used to initialize series data", function() {
+                    equals(sparkline.options.seriesDefaults.data.length, 2);
                 });
 
                 test("observable array is used to initialize data source", function() {
@@ -60,15 +62,14 @@
                 });
 
                 test("default series are bound to array items", function() {
-                    equals(sparkline.options.series[0].field, "*");
-                    equals(sparkline.options.series[0].data.length, 2);
+                    equals(liveSeries[0].data.length, 2);
                 });
 
                 // ------------------------------------------------------------
-                module("Data Binding / Data Source / Implicit series", {
+                module("Data Binding / Data", {
                     setup: function() {
                         createSparkline({
-                            dataSource: [1, 2]
+                            data: [1, 2]
                         });
                     },
                     teardown: destroySparkline
@@ -79,19 +80,7 @@
                 });
 
                 test("default series are bound to array items", function() {
-                    equals(sparkline.options.series[0].field, "*");
-                    equals(sparkline.options.series[0].data.length, 2);
-                });
-
-                test("default series are bound to existing data source", function() {
-                    createSparkline({
-                        dataSource: new kendo.data.DataSource({
-                            data: [1, 2]
-                        })
-                    });
-
-                    equals(sparkline.options.series[0].field, "*");
-                    equals(sparkline.options.series[0].data.length, 2);
+                    equals(liveSeries[0].data.length, 2);
                 });
 
                 test("default series inherit seriesDefaults options", function() {
@@ -102,6 +91,29 @@
                     });
 
                     equals(sparkline.options.series[0].field, "value");
+                });
+
+                // ------------------------------------------------------------
+                module("Data Binding / Data Source / Implicit series", {
+                    setup: function() {
+                        createSparkline({
+                            seriesDefaults: {
+                                field: "value"
+                            },
+                            dataSource: new kendo.data.DataSource({
+                                data: [{ value: 1 }, { value: 2 }]
+                            })
+                        });
+                    },
+                    teardown: destroySparkline
+                });
+
+                test("default series are created", function() {
+                    equals(sparkline.options.series.length, 1);
+                });
+
+                test("default series are bound to existing data source", function() {
+                    equals(sparkline.options.series[0].data.length, 2);
                 });
 
                 // ------------------------------------------------------------

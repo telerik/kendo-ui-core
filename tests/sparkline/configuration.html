@@ -133,7 +133,7 @@
                 });
 
                 test("bar is alias for column", function() {
-                    createSparkline({ dataSource: [1, 2], type: "bar" });
+                    createSparkline({ data: [1, 2], type: "bar" });
                     equals(sparkline._plotArea.charts[0].options.invertAxes, false);
                 });
             })();

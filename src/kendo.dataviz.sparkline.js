@@ -38,15 +38,20 @@ kendo_module({
 
             chart._initialWidth = math.floor(element.width());
 
-            if (isArray(options) || options instanceof ObservableArray) {
+            if (isArray(options)) {
+                options = { seriesDefaults: { data: options } };
+            } else if (options instanceof ObservableArray) {
                 options = { dataSource: options };
             }
 
             options.series = options.series || [{}];
             defaults = options.seriesDefaults = options.seriesDefaults || {};
-            defaults.field = defaults.field || "*";
             if (options.type) {
                 defaults.type = options.type;
+            }
+
+            if (options.data) {
+                defaults.data = options.data;
             }
 
             Chart.fn.init.call(chart, element, options);

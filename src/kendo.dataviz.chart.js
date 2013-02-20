@@ -8436,7 +8436,7 @@ kendo_module({
     });
 
     function getField(field, row) {
-        if (row === null || field === "*") {
+        if (row === null) {
             return row;
         }
 
