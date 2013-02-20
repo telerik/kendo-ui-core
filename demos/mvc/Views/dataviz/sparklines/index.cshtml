@@ -29,9 +29,10 @@
 
             // User-set Sparkline type
             $("#sparkline-rain").kendoSparkline({
-                // Shortcut for seriesDefaults.type
+                // Alias for seriesDefaults.type
+                // Alias for seriesDefaults.data
                 type: "area",
-                dataSource: [
+                data: [
                     0, 0, 0, 0, 1.8, 19.7, 1.3, 0.8, 0.3,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7.2, 1.5,
                     0.3, 0, 5.1, 17.2, 5.9, 0, 0, 0
@@ -43,15 +44,15 @@
 
             // Traditional Chart syntax
             $("#sparkline-tmax").kendoSparkline({
-                seriesDefaults: {
+                series: [{
                     type: "bar",
-                    negativeColor: "blue"
-                },
-                dataSource: [
-                    3.3, 5.2, 3.2, 11, 9, 2, 2, 3, 3, 2.2,
-                    4, 5.5, 2.7, 0, -1, 0, 1, 5, 6, 3, 2.2,
-                    6.2, 6, 2.4, -1.4, 0, -2.7, -2.4, -5, -5.4
-                ],
+                    negativeColor: "blue",
+                    data: [
+                        3.3, 5.2, 3.2, 11, 9, 2, 2, 3, 3, 2.2,
+                        4, 5.5, 2.7, 0, -1, 0, 1, 5, 6, 3, 2.2,
+                        6.2, 6, 2.4, -1.4, 0, -2.7, -2.4, -5, -5.4
+                    ]
+                }],
                 tooltip: {
                     format: "{0} &deg;C"
                 }
