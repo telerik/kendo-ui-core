@@ -245,6 +245,16 @@
 	background: @accent-background;
 }
 
+.km-wp .km-switch
+{
+    height: 2.4rem;
+}
+
+.km-wp .km-list .km-switch
+{
+    margin-top: -1.2rem;
+}
+
 .km-wp .km-switch-wrapper,
 .km-wp .km-switch-handle,
 .km-wp .km-switch-container
@@ -255,9 +265,8 @@
 .km-wp .km-switch-wrapper
 {
 	border-style: solid;
-	border-width: 2px;
-	padding: 2px;
-	box-sizing: border-box;
+	border-width: 3px;
+	.box-sizing(border-box);
 }
 
 .km-wp-dark .km-switch-wrapper
@@ -270,21 +279,44 @@
 	border-color: @main-text-light;
 }
 
+.km-wp .km-switch-container
+{
+    left: 3px;
+    top: 3px;
+    right: 3px;
+    bottom: 3px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+}
+
+.km-wp-light .km-switch-container
+{
+    .box-shadow(inset 0 0 0 3px @main-text-dark);
+}
+
+.km-wp-dark .km-switch-container
+{
+    .box-shadow(inset 0 0 0 3px @main-text-light);
+}
+
 .km-wp .km-switch-handle
 {
 	width: 1.4em;
-	margin: -2px 0 0 0;
+	margin-top: -3px;
+    padding-bottom: 6px;
+    z-index: 1;
 }
 
 .km-wp-dark .km-switch-handle
 {
+    .box-shadow(0 0 0 4px @main-text-light);
 	background: @main-text-dark;
-	border: 2px solid @main-background;
-	border-right-width: 0;
 }
 
 .km-wp-light .km-switch-handle
 {
+    .box-shadow(0 0 0 4px @main-text-dark);
 	background: @main-text-light;
 }
 
@@ -296,8 +328,8 @@
 .km-wp .km-switch-background
 {
 	background: @accent-background;
-	width: 97%;
-	margin-left: -70px;
+	width: 100%;
+	margin-left: -6em;
 }
 
 .km-wp .km-tabstrip

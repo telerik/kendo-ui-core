@@ -139,7 +139,7 @@ kendo_module({
                 handle = that.handle,
                 element = that.element[0],
                 value = element.checked,
-                duration = 200,
+                duration = kendo.mobile.application && kendo.mobile.application.os.wp ? 100 : 200,
                 distance;
 
             that.wrapper
