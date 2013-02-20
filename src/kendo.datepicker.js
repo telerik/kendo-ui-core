@@ -142,6 +142,7 @@ kendo_module({
                 } else {
                     element.off(ns);
                     calendar.destroy();
+                    calendar.element.remove();
                     DatePicker.sharedCalendar = null;
                 }
             }
