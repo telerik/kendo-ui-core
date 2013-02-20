@@ -345,7 +345,7 @@ kendo_module({
 
                 if (options.tooltip.shared) {
                     chart._highlight =
-                        new MultiplePointHighlight(view, chart._viewElement, chart._plotArea);
+                        new SharedHighlight(view, chart._viewElement, chart._plotArea);
                 } else {
                     chart._highlight = new Highlight(view, chart._viewElement);
                 }
@@ -359,7 +359,7 @@ kendo_module({
                 tooltip;
 
             if (options.tooltip.shared) {
-                tooltip = new MultiplePointTooltip(element, chart._plotArea, options.tooltip);
+                tooltip = new SharedTooltip(element, chart._plotArea, options.tooltip);
             } else {
                 tooltip = new Tooltip(element, options.tooltip);
             }
@@ -7181,7 +7181,7 @@ kendo_module({
         }
     });
 
-    var MultiplePointHighlight = Highlight.extend({
+    var SharedHighlight = Highlight.extend({
         init: function(view, viewElement, plotArea, options) {
             var highlight = this;
             highlight.options = deepExtend({}, highlight.options, options);
@@ -7408,7 +7408,7 @@ kendo_module({
         }
     });
 
-    var MultiplePointTooltip = BaseTooltip.extend({
+    var SharedTooltip = BaseTooltip.extend({
         init: function(element, plotArea, options) {
             var tooltip = this;
 
@@ -8836,7 +8836,7 @@ kendo_module({
         DonutPlotArea: DonutPlotArea,
         DonutSegment: DonutSegment,
         Highlight: Highlight,
-        MultiplePointTooltip: MultiplePointTooltip,
+        SharedTooltip: SharedTooltip,
         Legend: Legend,
         LineChart: LineChart,
         LinePoint: LinePoint,

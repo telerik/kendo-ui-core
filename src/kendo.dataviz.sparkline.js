@@ -13,7 +13,7 @@ kendo_module({
 
         Chart = dataviz.ui.Chart,
         ObservableArray = kendo.data.ObservableArray,
-        MultiplePointTooltip = dataviz.MultiplePointTooltip,
+        SharedTooltip = dataviz.SharedTooltip,
         Tooltip = dataviz.Tooltip,
 
         deepExtend = kendo.deepExtend,
@@ -183,7 +183,7 @@ kendo_module({
                 tooltip;
 
             if (options.tooltip.shared) {
-                tooltip = new SparklineMultiplePointTooltip(element, chart._plotArea, options.tooltip);
+                tooltip = new SparklineSharedTooltip(element, chart._plotArea, options.tooltip);
             } else {
                 tooltip = new SparklineTooltip(element, options.tooltip);
             }
@@ -233,9 +233,9 @@ kendo_module({
         }
     });
 
-    var SparklineMultiplePointTooltip = MultiplePointTooltip.extend({
+    var SparklineSharedTooltip = SharedTooltip.extend({
         _anchor: function(point, slot) {
-            var anchor = MultiplePointTooltip.fn._anchor.call(this, point, slot);
+            var anchor = SharedTooltip.fn._anchor.call(this, point, slot);
             anchor.y = -this.element.height() - this.options.offset;
 
             return anchor;
