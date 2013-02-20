@@ -34,6 +34,7 @@ div.k-gauge
 .k-chart .k-tooltip table {
     border-spacing: 0;
     border-collapse: collapse;
+    margin: auto;
 }
 
 .k-chart .k-tooltip th {
