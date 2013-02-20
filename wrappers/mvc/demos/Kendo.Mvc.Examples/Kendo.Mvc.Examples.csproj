@@ -302,6 +302,10 @@
     <Compile Include="Controllers\Web\Slider\IndexController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Web\Tooltip\AjaxController.cs" />
+    <Compile Include="Controllers\Web\Tooltip\ApiController.cs" />
+    <Compile Include="Controllers\Web\Tooltip\EventsController.cs" />
+    <Compile Include="Controllers\Web\Tooltip\TemplateController.cs" />
     <Compile Include="Controllers\Web\Tooltip\TooltipController.cs" />
     <Compile Include="Controllers\Web\TreeView\AnimationController.cs" />
     <Compile Include="Controllers\Web\TreeView\ApiController.cs" />
@@ -538,6 +542,12 @@
     <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\tooltip\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\web\tooltip\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\tooltip\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\tooltip\details.ascx" />
+    <Content Include="Areas\aspx\Views\web\tooltip\template.aspx" />
+    <Content Include="Areas\aspx\Views\web\tooltip\index.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\animation.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\api.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\checkboxes.aspx" />
@@ -599,6 +609,7 @@
     <Content Include="Areas\razor\Views\web\grid\sorting.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\events.cshtml" />
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\tooltip\template.cshtml" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
     <Content Include="Views\Shared\EditorTemplates\String.ascx" />
@@ -629,6 +640,10 @@
     <Content Include="Areas\razor\Views\web\upload\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\window\animation.cshtml" />
     <Content Include="Areas\razor\Views\web\window\ajaxcontent1.cshtml" />
+    <Content Include="Areas\razor\Views\web\tooltip\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\web\tooltip\details.cshtml" />
+    <Content Include="Areas\razor\Views\web\tooltip\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\tooltip\api.cshtml" />
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>StockData.Designer.cs</LastGenOutput>

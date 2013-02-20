@@ -31,6 +31,7 @@ namespace Kendo.Mvc.UI
         public TooltipShowOnEvent ShowOn { get; set; }
         public string ContentUrl { get; set; }
         public string Content { get; set; }
+        public string ContentTemplateId { get; set; }
         public ClientHandlerDescriptor ContentHandler { get; set; }
         public PopupAnimation Animation { get; set; }
         public int Width { get; set; }
@@ -111,6 +112,15 @@ namespace Kendo.Mvc.UI
             else if (ContentHandler.HasValue())
             {
                 options["content"] = ContentHandler;
+            } 
+            else  if (!String.IsNullOrEmpty(ContentTemplateId))
+            {
+                var idPrefix = "#";
+                if (IsInClientTemplate)
+                {
+                    idPrefix = "\\" + idPrefix;
+                }
+                options["content"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ContentTemplateId) };
             }
             else if (Content.HasValue())
             {

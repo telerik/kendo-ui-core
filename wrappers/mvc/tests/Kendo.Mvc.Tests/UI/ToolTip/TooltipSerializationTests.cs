@@ -136,5 +136,53 @@ namespace Kendo.Mvc.UI.Tests
 
             output.ShouldContain("{\"showOn\":\"click\"}");
         }
+
+        [Fact]
+        public void ContentTemplateId_is_serialized()
+        {
+            tooltip.ContentTemplateId = "foo";
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"content\":kendo.template($('#foo').html())}");
+        }
+
+        [Fact]
+        public void ContentTemplateId_has_priority_over_content()
+        {
+            tooltip.ContentTemplateId = "foo";
+            tooltip.Content = "bar";
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"content\":kendo.template($('#foo').html())}");
+        }
+
+        [Fact]
+        public void ContentHandler_is_serialized()
+        {
+            tooltip.ContentHandler.HandlerName = "foo";            
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"content\":foo}");
+        }
+
+        [Fact]
+        public void ContentHandler_has_higher_priority_over_content()
+        {
+            tooltip.ContentHandler.HandlerName = "foo";
+            tooltip.Content = "bar";
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"content\":foo}");
+        }
+
+        [Fact]
+        public void ContentHandler_has_higher_priority_over_template()
+        {
+            tooltip.ContentHandler.HandlerName = "foo";
+            tooltip.ContentTemplateId = "foo";
+            tooltip.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"content\":foo}");
+        }
     }    
 }

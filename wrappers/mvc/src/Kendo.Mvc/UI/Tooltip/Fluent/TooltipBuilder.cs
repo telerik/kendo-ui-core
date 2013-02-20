@@ -202,6 +202,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the id of kendo template which will be used as tooltip content.
+        /// </summary>
+        /// <param name="value">The id of the template</param>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Tooltip()
+        ///             .For("#element")
+        ///             .Content("template")
+        /// %&gt;
+        /// </code>        
+        public TooltipBuilder ContentTemplateId(string value)
+        {
+            Component.ContentTemplateId = value;
+            return this;
+        }
+
+        /// <summary>
         /// Sets JavaScript function which to return the content for the tooltip.
         /// </summary>                
         public TooltipBuilder ContentHandler(Func<object, object> handler)
