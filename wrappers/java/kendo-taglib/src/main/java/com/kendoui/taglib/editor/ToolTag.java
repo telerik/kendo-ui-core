@@ -89,6 +89,14 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
     public void setTooltip(String value) {
         setProperty("tooltip", value);
     }
+    
+    public Object getItems() {
+        return getProperty("items");
+    }
+
+    public void setItems(Object value) {
+        setProperty("items", value);
+    }
 
 //<< Attributes
 

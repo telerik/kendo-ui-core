@@ -4,9 +4,6 @@ package com.kendoui.taglib.editor;
 
 import com.kendoui.taglib.ContentTag;
 
-
-
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
@@ -19,8 +16,13 @@ public class ToolItemsTag extends ContentTag /* interfaces */ /* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
-//<< doEndTag
+        
+        ToolTag parent = (ToolTag)findParentWithClass(ToolTag.class);
 
+        parent.setItems(items);
+        
+//<< doEndTag
+              
         return super.doEndTag();
     }
 
