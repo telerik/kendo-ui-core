@@ -552,6 +552,7 @@
     <Content Include="Areas\aspx\Views\web\treeview\api.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\checkboxes.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\templates.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
