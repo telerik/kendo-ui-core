@@ -1,11 +1,16 @@
         <div id="example" class="k-content">
             <table id="grid">
+                <colgroup>
+                    <col class="photo" />
+                    <col class="details"/>
+                    <col/>
+                </colgroup>
                 <thead>
                     <tr>
-                        <th class="photo">
+                        <th>
                             Picture
                         </th>
-                        <th class="details">
+                        <th>
                             Details
                         </th>
                         <th>
@@ -19,40 +24,40 @@
                     </tr>
                 </tbody>
             </table>
-           <script id="rowTemplate" type="text/x-kendo-tmpl">
+            <script id="rowTemplate" type="text/x-kendo-tmpl">
 	            <tr>
 		            <td class="photo">
-			            <img src="../../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="../../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
 		            </td>
 		            <td class="details">
-			            <span class="title">#: Title #</span>
-			            <span class="description">Name : #: FirstName# #: LastName#</span>
-                        <span class="description">Country : #: Country# </span>
+			           <span class="title">#: Title #</span>
+			           <span class="description">Name : #: FirstName# #: LastName#</span>
+			           <span class="description">Country : #: Country# </span>
 		            </td>
 		            <td class="employeeID">
 		               #: EmployeeID #
 		            </td>
-	            </tr>
+	           </tr>
             </script>
             <script>
-	            $(document).ready(function() {
-		            $("#grid").kendoGrid({
-			            dataSource: {
-                            type: "odata",
-				            transport: {
-					            read: {	
-						            url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
-					            }
-				            }
-			            },
-			            rowTemplate: kendo.template($("#rowTemplate").html()),
-			            height: 430
-		            });
-	            });
+               $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                          type: "odata",
+                          transport: {
+                              read: {	
+                                  url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
+                              }
+                          }
+                        },
+                        rowTemplate: kendo.template($("#rowTemplate").html()),
+                        height: 430
+                    });
+               });
             </script>
             <style scoped>
                 .photo {
-                    width: 100px;                    
+                    width: 140px;                    
                 }
                 .details {
                     width: 400px;

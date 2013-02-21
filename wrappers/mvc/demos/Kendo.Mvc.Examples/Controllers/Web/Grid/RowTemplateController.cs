@@ -12,9 +12,9 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
-        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult RowTemplate_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(new NorthwindDataContext().Customers.ToDataSourceResult(request));
+            return Json(GetEmployees().ToDataSourceResult(request));
         }
     }
 }
