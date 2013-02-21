@@ -4,7 +4,7 @@
                 <div id="stock-chart"></div>
             </div>
             <script>
-                var stockDataSchema = { 
+                var stockDataSchema = {
                     model: {
                         fields: {
                             Date: {
@@ -16,12 +16,11 @@
 
                 function createChart() {
                     $("#stock-chart").kendoStockChart({
-                        theme: $(document).data("kendoSkin") || "default",
                         dataSource: {
                             serverFiltering: true,
                             transport: {
                                 read: {
-                                    url: "http://demos.kendoui.com/service/StockData",                                    
+                                    url: "http://demos.kendoui.com/service/StockData",
                                     dataType: "jsonp"
                                 },
                                 parameterMap: function(data) {
@@ -45,7 +44,7 @@
                             dataSource: {
                                 transport: {
                                     read: {
-                                        url: "http://demos.kendoui.com/service/StockData",                                    
+                                        url: "http://demos.kendoui.com/service/StockData",
                                         dataType: "jsonp"
                                     }
                                 },

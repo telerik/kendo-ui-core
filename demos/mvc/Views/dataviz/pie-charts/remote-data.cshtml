@@ -32,7 +32,6 @@
             <script>
                 function createSmallChart(year) {
                         $("#chart" + year).kendoChart({
-                                theme: $(document).data("kendoSkin") || "default",
                                 dataSource: {
                                     transport: {
                                         read: {
@@ -69,8 +68,8 @@
                                 }
                         });
                 }
-                
-            
+
+
                 function createChart() {
                         createSmallChart(2000);
                         createSmallChart(2001);
@@ -82,7 +81,7 @@
                         createSmallChart(2007);
                         createSmallChart(2008);
                         createSmallChart(2009);
-                }   
+                }
 
                 $(document).ready(function() {
                     setTimeout(function() {

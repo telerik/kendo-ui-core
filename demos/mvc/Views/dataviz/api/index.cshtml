@@ -35,7 +35,6 @@
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
                         title: {
                             text: "Site Visitors Stats /thousands/"
                         },
@@ -49,7 +48,7 @@
                         series: [{
                             name: "Total Visits",
                             data: [56000, 63000, 74000, 91000, 117000, 138000],
-                            
+
                             // Line chart marker type
                             markers: { type: "square" }
                         }, {

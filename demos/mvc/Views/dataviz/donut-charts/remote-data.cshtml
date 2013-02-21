@@ -6,7 +6,6 @@
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
                         dataSource: {
                             transport: {
                                 read: {
@@ -30,13 +29,13 @@
                         },
                         seriesDefaults: {
                             type: "donut",
-			                startAngle: 270
+                            startAngle: 270
                         },
                         series: [{
                             field: "share",
                             categoryField: "resolution",
                             visibleInLegendField: "visibleInLegend",
-			                padding: 10
+                            padding: 10
                         }],
                         tooltip: {
                             visible: true,
