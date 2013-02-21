@@ -711,6 +711,7 @@ kendo_module({
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = chart.options.tooltip,
+                highlightOptions = chart.options.highlight,
                 point;
 
             if (chart._suppressHover || !highlight ||
@@ -728,7 +729,11 @@ kendo_module({
                     tooltip.show(point);
                 }
 
-                highlight.show(point);
+                highlightOptions = deepExtend({}, highlightOptions, point.options.highlight);
+                if (highlightOptions.visible !== false) {
+                    highlight.show(point);
+                }
+
                 return true;
             }
         },
@@ -748,6 +753,7 @@ kendo_module({
                 coords = chart._eventCoordinates(e),
                 point = chart._activePoint,
                 tooltipOptions,
+                highlightOptions,
                 owner,
                 seriesPoint;
 
@@ -764,7 +770,11 @@ kendo_module({
                             if (tooltipOptions.visible) {
                                 tooltip.show(seriesPoint);
                             }
-                            highlight.show(seriesPoint);
+
+                            highlightOptions = deepExtend({}, chart.options.highlight, point.options.highlight);
+                            if (highlightOptions.visible !== false) {
+                                highlight.show(seriesPoint);
+                            }
                         }
                     }
                 }
@@ -787,6 +797,7 @@ kendo_module({
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = tooltip.options || {},
+                highlightOptions = highlight.options || {},
                 pane = plotArea.paneByPoint(coords),
                 i, crosshair;
 
