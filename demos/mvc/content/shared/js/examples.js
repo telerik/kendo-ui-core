@@ -266,11 +266,14 @@
         },
 
         publishTheme: function(themeName) {
-            kendo.dataviz.ui.Chart.fn.options.theme = themeName;
-            kendo.dataviz.ui.StockChart.fn.options.theme = themeName;
-            kendo.dataviz.ui.Sparkline.fn.options.theme = themeName;
-            kendo.dataviz.ui.RadialGauge.fn.options.theme = themeName;
-            kendo.dataviz.ui.LinearGauge.fn.options.theme = themeName;
+            var themable = ["Chart", "StockChart", "Sparkline", "RadialGauge", "LinearGauge"];
+
+            for (var i = 0; i < themable.length; i++) {
+                var widget = kendo.dataviz.ui[themable[i]];
+                if (widget) {
+                    widget.fn.options.theme = themeName;
+                }
+            }
 
             $(doc).data("kendoSkin", themeName);
         },
