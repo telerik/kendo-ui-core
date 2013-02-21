@@ -2157,6 +2157,60 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
+        <description>The target of the bullet chart.</description>
+        <name>chart-seriesItem-target</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The border of the target.</description>
+        <name>chart-seriesItem-target-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The target line.</description>
+        <name>chart-seriesItem-target-line</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The data point tooltip configuration options.</description>
         <name>chart-seriesItem-tooltip</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTooltipTag</tag-class>
@@ -2362,6 +2416,13 @@ Template variables:</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The shared tooltip template.
+Template variables:</description>
+            <name>sharedTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The tooltip template.
@@ -11609,6 +11670,60 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
+        <description>The target of the bullet chart.</description>
+        <name>sparkline-seriesItem-target</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The border of the target.</description>
+        <name>sparkline-seriesItem-target-border</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The target line.</description>
+        <name>sparkline-seriesItem-target-line</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The data point tooltip configuration options.</description>
         <name>sparkline-seriesItem-tooltip</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemTooltipTag</tag-class>
@@ -12003,6 +12118,19 @@ Template variables:</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be shared.</description>
+            <name>shared</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The shared tooltip template.
+Template variables:</description>
+            <name>sharedTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The tooltip template.
@@ -15185,6 +15313,60 @@ Available for column series.</description>
 
 
     <tag>
+        <description>The target of the bullet chart.</description>
+        <name>stockChart-seriesItem-target</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The border of the target.</description>
+        <name>stockChart-seriesItem-target-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The target line.</description>
+        <name>stockChart-seriesItem-target-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The data point tooltip configuration options.</description>
         <name>stockChart-seriesItem-tooltip</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTooltipTag</tag-class>
@@ -15390,6 +15572,19 @@ Template variables:</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the tooltip should be shared.</description>
+            <name>shared</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The shared tooltip template.
+Template variables:</description>
+            <name>sharedTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The tooltip template.

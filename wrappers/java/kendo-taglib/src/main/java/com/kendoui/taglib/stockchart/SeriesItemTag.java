@@ -73,6 +73,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("overlay", value);
     }
 
+    public void setTarget(com.kendoui.taglib.stockchart.SeriesItemTargetTag value) {
+        setProperty("target", value);
+    }
+
     public void setTooltip(com.kendoui.taglib.stockchart.SeriesItemTooltipTag value) {
         setProperty("tooltip", value);
     }

@@ -101,6 +101,14 @@ public class TooltipTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("padding", value);
     }
 
+    public String getSharedTemplate() {
+        return (String)getProperty("sharedTemplate");
+    }
+
+    public void setSharedTemplate(String value) {
+        setProperty("sharedTemplate", value);
+    }
+
     public String getTemplate() {
         return (String)getProperty("template");
     }

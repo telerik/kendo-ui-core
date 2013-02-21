@@ -77,6 +77,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("overlay", value);
     }
 
+    public void setTarget(com.kendoui.taglib.sparkline.SeriesItemTargetTag value) {
+        setProperty("target", value);
+    }
+
     public void setTooltip(com.kendoui.taglib.sparkline.SeriesItemTooltipTag value) {
         setProperty("tooltip", value);
     }
