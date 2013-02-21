@@ -227,7 +227,7 @@
                 exampleElement[0].style.cssText = exampleElement[0].style.cssText;
             }
 
-            $(doc).data("kendoSkin", themeName);
+            Application.publishTheme(themeName);
             $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
         },
 
@@ -261,7 +261,18 @@
         replaceTheme: function(themeName) {
             Application.replaceWebTheme(themeName);
             Application.replaceDVTheme(themeName);
+
             $("#example").trigger("kendo:skinChange");
+        },
+
+        publishTheme: function(themeName) {
+            kendo.dataviz.ui.Chart.fn.options.theme = themeName;
+            kendo.dataviz.ui.StockChart.fn.options.theme = themeName;
+            kendo.dataviz.ui.Sparkline.fn.options.theme = themeName;
+            kendo.dataviz.ui.RadialGauge.fn.options.theme = themeName;
+            kendo.dataviz.ui.LinearGauge.fn.options.theme = themeName;
+
+            $(doc).data("kendoSkin", themeName);
         },
 
         changeTheme: function(themeName, animate) {
@@ -399,7 +410,7 @@
                     }
                 });
 
-            $(doc).data("kendoSkin", kendoSkin);
+            Application.publishTheme(kendoSkin);
 
             $("#qr").off().click(function(e){
                 var bigQR = $("#qrBig");

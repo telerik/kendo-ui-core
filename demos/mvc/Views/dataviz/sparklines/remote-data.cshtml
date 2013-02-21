@@ -13,7 +13,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <style scoped>
         .chart-wrapper {
             height: 370px;
@@ -48,12 +48,13 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        function createSparklines() {
             // Create a row template using the above definition
             var template = kendo.template($("#template").html());
 
             var months = [ "January", "February", "March", "April", "May", "June" ];
 
+            $("#weather tbody").empty();
             for (var i = 0; i < months.length; i++) {
                 var monthNumber = i + 1;
 
@@ -99,6 +100,9 @@
                     }]
                 });
             }
-        });
+        }
+
+        $(document).ready(createSparklines);
+        $("#example").bind("kendo:skinChange", createSparklines);
     </script>
 </div>
