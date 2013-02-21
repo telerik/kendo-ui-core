@@ -331,7 +331,6 @@ kendo_module({
 
         _redraw: function() {
             var chart = this,
-                options = chart.options,
                 model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
