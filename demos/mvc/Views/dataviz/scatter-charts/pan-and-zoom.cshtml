@@ -1,0 +1,87 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                // Generate sample data
+                var data = [];
+                for (var x = -100; x < 100; x += 0.2) {
+                    data.push({ x: x, y: Math.sin(x) });
+                }
+
+                // Helper function that constructs DataSource filter
+                // for the x value
+                function getFilter(xMin, xMax) {
+                    return [{
+                        field: "x",
+                        operator: "gt",
+                        value: xMin
+                    }, {
+                        field: "x",
+                        operator: "lt",
+                        value: xMax
+                    }]
+                }
+
+                function createChart() {
+                    $("#chart").kendoChart({
+                        dataSource: {
+                            data: data,
+                            filter: getFilter(-10, 10)
+                        },
+                        xAxis: {
+                            name: "xAxis",
+                            min: -10,
+                            max: 10,
+                            labels: {
+                                format: "{0:N1}"
+                            }
+                        },
+                        series: [{
+                            type: "scatterLine",
+                            xField: "x",
+                            yField: "y",
+                            markers: {
+                                visible: false
+                            }
+                        }],
+                        transitions: false,
+                        drag: onDrag,
+                        zoom: onDrag
+                    });
+
+                    function onDrag(e) {
+                        var chart = e.sender;
+                        var ds = chart.dataSource;
+                        var options = chart.options;
+
+                        // Prevent document scrolling on mousewheel zoom
+                        e.originalEvent.preventDefault();
+
+                        var xRange = e.axisRanges.xAxis;
+                        if (xRange) {
+                            // Suggested axis ranges
+                            var xMin = xRange.min;
+                            var xMax = xRange.max;
+
+                            // Limit maximum zoom-in
+                            if (xMax - xMin < 2) {
+                                return;
+                            }
+
+                            // Set x axis range in chart options
+                            options.xAxis.min = xMin;
+                            options.xAxis.max = xMax;
+
+                            // Filters the data source and rebinds the chart
+                            // which also applies the axis limits set above
+                            ds.filter(getFilter(xMin, xMax));
+                        }
+                    }
+                }
+
+                $(document).ready(createChart);
+                $("#example").bind("kendo:skinChange", createChart);
+            </script>
+        </div>
