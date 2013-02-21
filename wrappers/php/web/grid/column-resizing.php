@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Employees', array('FirstName', 'LastName', 'City', 'Title', 'BirthDate'), $request));
+    echo json_encode($result->read('Orders', array('OrderID', 'ShipCountry', 'ShipAddress', 'ShipName', 'EmployeeID'), $request));
 
     exit;
 }
@@ -31,25 +31,61 @@ $transport->read($read)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
+$orderIDField = new \Kendo\Data\DataSourceSchemaModelField('OrderID');
+$orderIDField->type('number');
+
+$shipNameField = new \Kendo\Data\DataSourceSchemaModelField('ShipName');
+$shipNameField->type('string');
+
+$shipAddressField = new \Kendo\Data\DataSourceSchemaModelField('ShipAddress');
+$shipAddressField->type('string');
+
+$shipCountryField = new \Kendo\Data\DataSourceSchemaModelField('ShipCountry');
+$shipCountryField->type('string');
+
+$model->addField($orderIDField)
+      ->addField($shipNameField)
+      ->addField($shipAddressField)
+      ->addField($shipCountryField);
+
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
+       ->model($model)
        ->total('total');
 
 $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
-           ->pageSize(6)
+           ->pageSize(15)
            ->serverPaging(true)
            ->serverSorting(true)
            ->schema($schema);
 
 $grid = new \Kendo\UI\Grid('rowSelection');
 
-$sortable = new \Kendo\UI\GridSortable();
-$sortable->mode('single')
-    ->allowUnsort(false);
+$orderID = new \Kendo\UI\GridColumn();
+$orderID->field('OrderID')
+    ->width(130)
+    ->title('Order ID');
+
+$shipCountry = new \Kendo\UI\GridColumn();
+$shipCountry->field('ShipCountry')
+    ->width(160)
+    ->title('Ship Country');
+
+$shipName = new \Kendo\UI\GridColumn();
+$shipName->field('ShipName')
+    ->title('Ship Name')
+    ->width(220);
+
+$shipAddress = new \Kendo\UI\GridColumn();
+$shipAddress->field('ShipAddress')
+    ->filterable(false)
+    ->title('Ship Address');
 
 $grid->dataSource($dataSource)
+     ->addColumn($orderID, $shipCountry, $shipName, $shipAddress)
+     ->height(430)
      ->resizable(true)
      ->pageable(true);
 

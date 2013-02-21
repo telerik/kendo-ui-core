@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
+    echo json_encode($result->read('Orders', array('ShipCountry', 'Freight', 'OrderDate'), $request));
 
     exit;
 }
@@ -31,8 +31,22 @@ $transport->read($read)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
+$shipCountryField = new \Kendo\Data\DataSourceSchemaModelField('ShipCountry');
+$shipCountryField->type('string');
+
+$frieghtField = new \Kendo\Data\DataSourceSchemaModelField('Frieght');
+$frieghtField->type('number');
+
+$orderDateField = new \Kendo\Data\DataSourceSchemaModelField('OrderDate');
+$orderDateField->type('date');
+
+$model->addField($shipCountryField)
+      ->addField($frieghtField)
+      ->addField($orderDateField);
+
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
+       ->model($model)
        ->total('total');
 
 $dataSource = new \Kendo\Data\DataSource();
@@ -43,27 +57,25 @@ $dataSource->transport($transport)
            ->serverSorting(true)
            ->schema($schema);
 
+$shipCountry = new \Kendo\UI\GridColumn();
+$shipCountry->field('ShipCountry')
+            ->width(300)
+            ->title('Ship Country');
 
-$productName = new \Kendo\UI\GridColumn();
-$productName->field('ProductName')
-            ->title('Product Name');
+$freight = new \Kendo\UI\GridColumn();
+$freight->field('Freight')
+          ->width(300);
 
-$unitPrice = new \Kendo\UI\GridColumn();
-$unitPrice->field('UnitPrice')
-          ->format('{0:c}')
-          ->width(150)
-          ->title('Unit Price');
-
-$unitsInStock = new \Kendo\UI\GridColumn();
-$unitsInStock->field('UnitsInStock')
-          ->width(150)
-          ->title('Units In Stock');
+$orderDate = new \Kendo\UI\GridColumn();
+$orderDate->field('OrderDate')
+          ->format('{0:dd/MM/yyyy}')
+          ->title('Order Date');
 ?>
    <h3>Grid with multiple row selection enabled</h3>
 <?php
 $grid = new \Kendo\UI\Grid('rowSelection');
 
-$grid->addColumn($productName, $unitPrice, $unitsInStock)
+$grid->addColumn($shipCountry, $freight, $orderDate)
      ->dataSource($dataSource)
      ->navigatable(true)
      ->scrollable(false)
@@ -80,7 +92,7 @@ echo $grid->render();
 
 $grid = new \Kendo\UI\Grid('cellSelection');
 
-$grid->addColumn($productName, $unitPrice, $unitsInStock)
+$grid->addColumn($shipCountry, $freight, $orderDate)
      ->dataSource($dataSource)
      ->navigatable(true)
      ->scrollable(false)

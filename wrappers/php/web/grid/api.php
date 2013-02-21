@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Employees', array('FirstName', 'LastName', 'City'), $request));
+    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
 
     exit;
 }
@@ -37,7 +37,7 @@ $schema->data('data')
 
 $dataSource = new \Kendo\Data\DataSource();
 $group = new \Kendo\Data\DataSourceGroupItem();
-$group->field('City');
+$group->field('UnitsInStock');
 
 $dataSource->transport($transport)
            ->pageSize(5)
@@ -49,18 +49,20 @@ $dataSource->transport($transport)
 
 $grid = new \Kendo\UI\Grid('grid');
 
-$firstName = new \Kendo\UI\GridColumn();
-$firstName->field("FirstName")
-    ->title('First Name');
+$productName = new \Kendo\UI\GridColumn();
+$productName->field('ProductName')
+            ->title('Product Name');
 
-$lastName = new \Kendo\UI\GridColumn();
-$lastName->field("LastName")
-    ->title('Last Name');
+$unitPrice = new \Kendo\UI\GridColumn();
+$unitPrice->field('UnitPrice')
+          ->format('{0:c}')
+          ->title('Unit Price');
 
-$city = new \Kendo\UI\GridColumn();
-$city->field('City');
+$unitsInStock = new \Kendo\UI\GridColumn();
+$unitsInStock->field('UnitsInStock')
+          ->title('Units In Stock');
 
-$grid->addColumn($firstName, $lastName, $city)
+$grid->addColumn($productName, $unitPrice, $unitsInStock)
      ->attr('style', 'width:700px')
      ->selectable('row multiple')
      ->pageable(true)

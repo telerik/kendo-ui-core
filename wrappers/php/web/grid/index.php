@@ -29,10 +29,26 @@ $transport ->read($read)
               return kendo.stringify(data);
           }');
 
+$model = new \Kendo\Data\DataSourceSchemaModel();
+
+$productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+$productNameField->type('string');
+
+$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
+$unitPriceField->type('number');
+
+$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
+$unitsInStockField->type('number');
+
+$model->addField($productNameField)
+      ->addField($unitPriceField)
+      ->addField($unitsInStockField);
+
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
        ->errors('errors')
        ->groups('groups')
+       ->model($model)
        ->total('total');
 
 $dataSource = new \Kendo\Data\DataSource();

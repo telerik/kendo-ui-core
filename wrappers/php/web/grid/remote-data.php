@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
+    echo json_encode($result->read('Orders', array('ShipName', 'Freight', 'OrderDate', 'OrderID', 'ShipCity'), $request));
 
     exit;
 }
@@ -31,18 +31,26 @@ $transport->read($read)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
-$productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-$productNameField->type('string');
+$shipNameField = new \Kendo\Data\DataSourceSchemaModelField('ShipName');
+$shipNameField->type('string');
 
-$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
-$unitPriceField->type('number');
+$shipCityField = new \Kendo\Data\DataSourceSchemaModelField('ShipCity');
+$shipCityField->type('string');
 
-$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
-$unitsInStockField->type('number');
+$orderIDField = new \Kendo\Data\DataSourceSchemaModelField('OrderID');
+$orderIDField->type('number');
 
-$model->addField($productNameField)
-      ->addField($unitPriceField)
-      ->addField($unitsInStockField);
+$freightField = new \Kendo\Data\DataSourceSchemaModelField('Freight');
+$freightField->type('number');
+
+$orderDateField = new \Kendo\Data\DataSourceSchemaModelField('OrderDate');
+$orderDateField->type('date');
+
+$model->addField($shipNameField)
+      ->addField($freightField)
+      ->addField($orderIDField)
+      ->addField($shipCityField)
+      ->addField($orderDateField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
@@ -60,22 +68,33 @@ $dataSource->transport($transport)
 
 $grid = new \Kendo\UI\Grid('grid');
 
-$productName = new \Kendo\UI\GridColumn();
-$productName->field('ProductName')
-            ->title('Product Name');
+$orderID = new \Kendo\UI\GridColumn();
+$orderID->field('OrderID')
+            ->filterable(false)
+            ->title('Order ID');
 
-$unitPrice = new \Kendo\UI\GridColumn();
-$unitPrice->field('UnitPrice')
+$freight = new \Kendo\UI\GridColumn();
+$freight->field('Freight')
           ->format('{0:c}')
-          ->title('Unit Price');
+          ->title('Freight');
 
-$unitsInStock = new \Kendo\UI\GridColumn();
-$unitsInStock->field('UnitsInStock')
-          ->title('Units In Stock');
+$orderDate = new \Kendo\UI\GridColumn();
+$orderDate->field('OrderDate')
+          ->width(120)
+          ->format('{0:MM/dd/yyyy}')
+          ->title('OrderDate');
 
-$grid->addColumn($productName)
-     ->addColumn($unitPrice)
-     ->addColumn($unitsInStock)
+$shipName = new \Kendo\UI\GridColumn();
+$shipName->field('ShipName')
+          ->width(260)
+          ->title('Ship Name');
+
+$shipCity= new \Kendo\UI\GridColumn();
+$shipCity->field('ShipCity')
+          ->width(150)
+          ->title('Ship City');
+
+$grid->addColumn($orderID, $freight, $orderDate, $shipName, $shipCity)
      ->dataSource($dataSource)
      ->sortable(true)
      ->filterable(true)

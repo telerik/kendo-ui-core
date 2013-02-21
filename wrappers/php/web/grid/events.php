@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Employees', array('FirstName', 'LastName', 'City', 'Title'), $request));
+    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
 
     exit;
 }
@@ -28,9 +28,24 @@ $transport->read($read)
           ->parameterMap('function(data) {
               return kendo.stringify(data);
           }');
+$model = new \Kendo\Data\DataSourceSchemaModel();
+
+$productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+$productNameField->type('string');
+
+$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
+$unitPriceField->type('number');
+
+$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
+$unitsInStockField->type('number');
+
+$model->addField($productNameField)
+      ->addField($unitPriceField)
+      ->addField($unitsInStockField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
+       ->model($model)
        ->total('total');
 
 $dataSource = new \Kendo\Data\DataSource();
@@ -43,19 +58,23 @@ $dataSource->transport($transport)
 
 $grid = new \Kendo\UI\Grid('grid');
 
-$firstName = new \Kendo\UI\GridColumn();
-$firstName->field("FirstName")
-    ->title('First Name');
+$productName = new \Kendo\UI\GridColumn();
+$productName->field('ProductName')
+            ->title('Product Name');
 
-$lastName = new \Kendo\UI\GridColumn();
-$lastName->field("LastName")
-    ->title('Last Name');
+$unitPrice = new \Kendo\UI\GridColumn();
+$unitPrice->field('UnitPrice')
+          ->format('{0:c}')
+          ->width(150)
+          ->title('Unit Price');
 
-$city = new \Kendo\UI\GridColumn();
-$city->field('City');
+$unitsInStock = new \Kendo\UI\GridColumn();
+$unitsInStock->field('UnitsInStock')
+          ->width(150)
+          ->title('Units In Stock');
 
-$grid->addColumn($firstName, $lastName, $city)
-     ->selectable('cell multiple')
+$grid->addColumn($productName, $unitPrice, $unitsInStock)
+         ->selectable('cell multiple')
      ->pageable(true)
      ->sortable(true)
      ->dataSource($dataSource)
