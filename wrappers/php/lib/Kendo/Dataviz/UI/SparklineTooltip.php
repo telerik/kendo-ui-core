@@ -92,6 +92,39 @@ Template variables:
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * A value indicating if the tooltip should be shared.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\SparklineTooltip
+    */
+    public function shared($value) {
+        return $this->setProperty('shared', $value);
+    }
+
+    /**
+    * Sets the sharedTemplate option of the SparklineTooltip.
+    * The shared tooltip template.
+Template variables:
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\Dataviz\UI\SparklineTooltip
+    */
+    public function sharedTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('sharedTemplate', $value);
+    }
+
+    /**
+    * Sets the sharedTemplate option of the SparklineTooltip.
+    * The shared tooltip template.
+Template variables:
+    * @param string $value The template content.
+    * @return \Kendo\Dataviz\UI\SparklineTooltip
+    */
+    public function sharedTemplate($value) {
+        return $this->setProperty('sharedTemplate', $value);
+    }
+
 //<< Properties
 }
 

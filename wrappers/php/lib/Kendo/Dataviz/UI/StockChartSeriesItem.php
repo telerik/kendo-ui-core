@@ -290,6 +290,15 @@ Available for column series.
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The target of the bullet chart.
+    * @param \Kendo\Dataviz\UI\StockChartSeriesItemTarget|array $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function target($value) {
+        return $this->setProperty('target', $value);
+    }
+
 //<< Properties
 }
 

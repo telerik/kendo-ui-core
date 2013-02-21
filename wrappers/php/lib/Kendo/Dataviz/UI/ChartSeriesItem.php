@@ -444,6 +444,15 @@ If not specified, the available space is split evenly between the series.Availab
         return $this->setProperty('yField', $value);
     }
 
+    /**
+    * The target of the bullet chart.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemTarget|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function target($value) {
+        return $this->setProperty('target', $value);
+    }
+
 //<< Properties
 }
 

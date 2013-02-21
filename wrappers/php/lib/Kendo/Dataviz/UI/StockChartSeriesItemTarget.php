@@ -1,0 +1,29 @@
+<?php
+
+namespace Kendo\Dataviz\UI;
+
+class StockChartSeriesItemTarget extends \kendo\SerializableObject {
+//>> Properties
+
+    /**
+    * The target line.
+    * @param \Kendo\Dataviz\UI\StockChartSeriesItemTargetLine|array $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemTarget
+    */
+    public function line($value) {
+        return $this->setProperty('line', $value);
+    }
+
+    /**
+    * The border of the target.
+    * @param \Kendo\Dataviz\UI\StockChartSeriesItemTargetBorder|array $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemTarget
+    */
+    public function border($value) {
+        return $this->setProperty('border', $value);
+    }
+
+//<< Properties
+}
+
+?>
