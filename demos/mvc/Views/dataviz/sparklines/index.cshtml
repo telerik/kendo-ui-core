@@ -38,7 +38,7 @@
     </div>
 
     <script>
-        $(document).ready(function() {
+        function createSparklines() {
             // Binding directly to an array
             $("#press-log").kendoSparkline([
                 936, 968, 1025, 999, 998, 1014, 1017, 1010, 1010, 1007,
@@ -113,7 +113,10 @@
                 type: "pie",
                 data: [24]
             });
-        });
+        }
+
+        $(document).ready(createSparklines);
+        $("#example").bind("kendo:skinChange", createSparklines);
     </script>
 
     <style scoped>
