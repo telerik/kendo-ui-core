@@ -21,7 +21,7 @@ kendo_module({
 
     // Constants =============================================================
     var CSS_PREFIX = "k-",
-        DEFAULT_WIDTH = 150,
+        DEAULT_BULLET_WIDTH = 150,
         BULLET = "bullet";
 
     // Sparkline =============================================================
@@ -194,7 +194,11 @@ kendo_module({
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 if (currentSeries.type === BULLET) {
-                    return DEFAULT_WIDTH;
+                    return DEAULT_BULLET_WIDTH;
+                }
+
+                if (currentSeries.type === "pie") {
+                    return chart.stage.height();
                 }
 
                 if (currentSeries.data) {
