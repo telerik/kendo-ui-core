@@ -924,7 +924,7 @@ kendo_module({
         },
 
         isBindable: function(series) {
-            var valueFields = valueFieldsByChartType(series.type),
+            var valueFields = valueFieldsBySeriesType(series.type),
                 result = true,
                 field, i;
 
@@ -2498,7 +2498,7 @@ kendo_module({
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
-                var value = data.value;
+                var value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
                 axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis);
@@ -2582,6 +2582,10 @@ kendo_module({
 
         formatPointValue: function(point, format) {
             return autoFormat(format, point.value);
+        },
+
+        pointValue: function(data) {
+            return data.value;
         }
     });
 
@@ -2887,9 +2891,9 @@ kendo_module({
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(data, categoryIx, series);
+            chart.updateRange(data.value, categoryIx, series);
 
-            point = chart.createPoint(data, categoryIx, series);
+            point = chart.createPoint(data.value, categoryIx, series);
             if (point) {
                 point.category = category;
                 point.series = series;
@@ -2943,38 +2947,38 @@ kendo_module({
             return bullet;
         },
 
-        updateRange: function(data, categoryIx, series) {
+        updateRange: function(value, categoryIx, series) {
             var chart = this,
                 axisName = series.axis,
-                value = data.value,
-                target = data.fields.target,
+                current = value.current,
+                target = value.target,
                 axisRange = chart.valueAxisRanges[axisName];
 
-            if (defined(value) && !isNaN(value) && defined(target && !isNaN(target))) {
+            if (defined(current) && !isNaN(current) && defined(target && !isNaN(target))) {
                 axisRange = chart.valueAxisRanges[axisName] =
                     axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
-                axisRange.min = math.min.apply(math, [axisRange.min, value, target]);
-                axisRange.max = math.max.apply(math, [axisRange.max, value, target]);
+                axisRange.min = math.min.apply(math, [axisRange.min, current, target]);
+                axisRange.max = math.max.apply(math, [axisRange.max, current, target]);
             }
         },
 
-        bindableFields: function() {
-            return ["target"];
+        formatPointValue: function(point, format) {
+            return autoFormat(format, point.value.current, point.value.target);
         },
 
-        formatPointValue: function(point, format) {
-            return autoFormat(format, point.value.value, point.value.target);
+        pointValue: function(data) {
+            return data.value.current;
         }
     });
 
     var Bullet = ChartElement.extend({
-        init: function(data, options) {
+        init: function(value, options) {
             var bullet = this;
 
             ChartElement.fn.init.call(bullet, options);
 
-            bullet.value = { value: data.value, target: data.fields.target };
+            bullet.value = value;
             bullet.options.id = uniqueId();
             bullet.enableDiscovery();
             bullet.render();
@@ -3001,7 +3005,7 @@ kendo_module({
                 }
             },
             tooltip: {
-                format: "Value: {0}</br>Target: {1}"
+                format: "Current: {0}</br>Target: {1}"
             }
         },
 
@@ -8264,7 +8268,7 @@ kendo_module({
         }
 
         function execComposite(values, aggregate, series) {
-            var valueFields = valueFieldsByChartType(series.type),
+            var valueFields = valueFieldsBySeriesType(series.type),
                 valueFieldsCount = valueFields.length,
                 count = values.length,
                 i,
@@ -8622,11 +8626,13 @@ kendo_module({
         return diff;
     }
 
-    function valueFieldsByChartType(type) {
+    function valueFieldsBySeriesType(type) {
         var result = [VALUE];
 
         if (inArray(type, [CANDLESTICK, OHLC])){
             result = ["open", "high", "low", "close"];
+        } else if (inArray(type, [BULLET, VERTICAL_BULLET])) {
+            result = ["current", "target"];
         } else if (inArray(type, XY_CHARTS)) {
             result = [X, Y];
             if (type === BUBBLE) {
@@ -8643,7 +8649,7 @@ kendo_module({
             fields = {},
             srcValueFields,
             srcPointFields,
-            valueFields = valueFieldsByChartType(series.type),
+            valueFields = valueFieldsBySeriesType(series.type),
             value,
             result = { value: pointData };
 
