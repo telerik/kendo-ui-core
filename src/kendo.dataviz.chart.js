@@ -343,7 +343,7 @@ kendo_module({
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
 
-                if (options.tooltip.shared) {
+                if (chart._sharedTooltip()) {
                     chart._highlight =
                         new SharedHighlight(view, chart._viewElement, chart._plotArea);
                 } else {
@@ -352,13 +352,20 @@ kendo_module({
             }
         },
 
+        _sharedTooltip: function() {
+            var chart = this,
+                options = chart.options;
+
+            return chart._plotArea instanceof CategoricalPlotArea && options.tooltip.shared;
+        },
+
         _createTooltip: function() {
             var chart = this,
                 options = chart.options,
                 element = chart.element,
                 tooltip;
 
-            if (options.tooltip.shared) {
+            if (chart._sharedTooltip()) {
                 tooltip = new SharedTooltip(element, chart._plotArea, options.tooltip);
             } else {
                 tooltip = new Tooltip(element, options.tooltip);
@@ -470,7 +477,7 @@ kendo_module({
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(TOUCH_START_NS, proxy(chart._tap, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
-            if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._tooltip.options.shared)) {
+            if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip())) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
 
@@ -708,7 +715,7 @@ kendo_module({
                 point;
 
             if (chart._suppressHover || !highlight ||
-                highlight.overlayElement === e.target || tooltipOptions.shared) {
+                highlight.overlayElement === e.target || chart._sharedTooltip()) {
                 return;
             }
 
@@ -751,7 +758,7 @@ kendo_module({
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
                         tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
-                        if (!tooltipOptions.shared) {
+                        if (!chart._sharedTooltip()) {
                             seriesPoint.hover(chart, e);
                             chart._activePoint = seriesPoint;
 
@@ -797,17 +804,17 @@ kendo_module({
                 }
             }
 
-            if (tooltipOptions.shared) {
-                if (pane && pane.options.name === "_navigator" && tooltipOptions.shared) {
+            if (chart._sharedTooltip()) {
+                if (pane && pane.options.name === "_navigator") {
                     chart._unsetActivePoint();
                     return;
                 }
 
-                if (tooltipOptions.visible && tooltipOptions.shared) {
+                if (tooltipOptions.visible) {
                     tooltip.showAt(point);
                 }
 
-                if (highlight.options.visible && tooltipOptions.shared) {
+                if (highlight.options.visible) {
                     highlight.show(point);
                 }
             }

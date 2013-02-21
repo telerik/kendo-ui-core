@@ -165,7 +165,7 @@ kendo_module({
                 element = chart.element,
                 tooltip;
 
-            if (options.tooltip.shared) {
+            if (chart._sharedTooltip()) {
                 tooltip = new SparklineSharedTooltip(element, chart._plotArea, options.tooltip);
             } else {
                 tooltip = Chart.fn._createTooltip.call(chart);
