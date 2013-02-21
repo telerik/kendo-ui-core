@@ -1,16 +1,10 @@
 @section HeadContent 
 {
-    <style>
-        .chart-wrapper {
-            margin: 0 0 0 20px;
-            width: 466px;
-            height: 434px;
-            background: url("@Url.Content("~/Content/shared/chart-wrapper-small.png")") transparent no-repeat 0 0;
-        }
-                
-        .chart-wrapper .k-chart {
+    <style> 
+        .k-chart {
             height: 280px;
             padding: 37px;
+            margin: 0 0 50px 0;
             width: 390px;
         }
     </style>
@@ -28,27 +22,25 @@
         </li>
     </ul>
 </div>
-<div class="chart-wrapper">
-    @(Html.Kendo().Chart()
-          .Name("chart")
-          .Title("Internet Users")
-          .Legend(legend => legend.Position(ChartLegendPosition.Bottom))
-          .Series(series => {
-              series.Column(new double[] { 67.96, 61.93, 75, 71, 78 }).Name("United States");
-              series.Column(new double[] { 15.7, 11, 20, 25, 36.6 }).Name("World");
-          })
-          .CategoryAxis(axis => axis
-              .Categories("2005", "2006", "2007", "2008", "2009")
-          )
-          .ValueAxis(axis => axis
-              .Numeric().Labels(labels => labels.Format("{0}%"))
-          )
-          .Tooltip(tooltip => tooltip
-              .Visible(true)
-              .Format("{0}%")
-          )
-    )
-</div>
+@(Html.Kendo().Chart()
+        .Name("chart")
+        .Title("Internet Users")
+        .Legend(legend => legend.Position(ChartLegendPosition.Bottom))
+        .Series(series => {
+            series.Column(new double[] { 67.96, 61.93, 75, 71, 78 }).Name("United States");
+            series.Column(new double[] { 15.7, 11, 20, 25, 36.6 }).Name("World");
+        })
+        .CategoryAxis(axis => axis
+            .Categories("2005", "2006", "2007", "2008", "2009")
+        )
+        .ValueAxis(axis => axis
+            .Numeric().Labels(labels => labels.Format("{0}%"))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}%")
+        )
+)
 <script>
     $(document).ready(function () {
         var chart = $("#chart").data("kendoChart"),
@@ -63,5 +55,10 @@
             firstSeries[0].spacing = parseFloat($("#spacing").val(), 10);
             chart.redraw();
         });
+
+        if (kendo.ui.NumericTextBox) {
+            $("#gap").kendoNumericTextBox();
+            $("#spacing").kendoNumericTextBox();
+        }
     });
 </script>

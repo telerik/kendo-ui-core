@@ -1,17 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-<style>
-    .chart-wrapper {
-        margin: auto;
-        width: 466px;
-        height: 434px;
-        background: url("<%= Url.Content("~/Content/dataviz/shared/chart-wrapper-small.png") %>") transparent no-repeat 0 0;
-    }
-                
-    .chart-wrapper .k-chart {
+<style> 
+    .k-chart {
         height: 280px;
         padding: 37px;
+        margin: 0 0 50px 0;
         width: 390px;
     }
 </style>
@@ -45,37 +39,33 @@
         <strong>refresh()</strong> will be called on each configuration change
     </p>
 </div>
-
-<div class="chart-wrapper">
-    <%= Html.Kendo().Chart()
-        .Name("chart")
-        .Title("Site Visitors Stats /thousands/")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom)
-        )
-        .SeriesDefaults(seriesDefaults => seriesDefaults
-            .Column().Stack(true)
-        )
-        .Series(series =>
-        {
-            series.Column(new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
-            series.Column(new double[] { 52000, 34000, 23000, 48000, 67000, 83000 }).Name("Unique visitors");
-        })
-        .CategoryAxis(axis => axis
-            .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
-            .MajorGridLines(lines => lines.Visible(false))
-        )
-        .ValueAxis(axis => axis
-            .Numeric()
-            .Line(line => line.Visible(false))
-        )
-        .Tooltip(tooltip => tooltip
-            .Visible(true)
-            .Format("{0}")
-        )
-    %>
-</div>
-
+<%= Html.Kendo().Chart()
+    .Name("chart")
+    .Title("Site Visitors Stats /thousands/")
+    .Legend(legend => legend
+        .Position(ChartLegendPosition.Bottom)
+    )
+    .SeriesDefaults(seriesDefaults => seriesDefaults
+        .Column().Stack(true)
+    )
+    .Series(series =>
+    {
+        series.Column(new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
+        series.Column(new double[] { 52000, 34000, 23000, 48000, 67000, 83000 }).Name("Unique visitors");
+    })
+    .CategoryAxis(axis => axis
+        .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
+        .MajorGridLines(lines => lines.Visible(false))
+    )
+    .ValueAxis(axis => axis
+        .Numeric()
+        .Line(line => line.Visible(false))
+    )
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0}")
+    )
+%>
 <script>
     $(document).ready(function() {
         $(".configuration").bind("change", refresh);

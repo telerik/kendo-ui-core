@@ -61,36 +61,34 @@
 	    </ul>
 	    <p>Custom aggregate functions are supported.</p>
 	</div>
-     <div class="chart-wrapper">
-         <% 
-             String[] categories = {
-        		 "2011/12/20","2011/12/21",
-        		 "2011/12/22","2011/12/23",
-        		 "2011/12/24","2011/12/25",
-        		 "2011/12/26","2011/12/27",
-        		 "2011/12/28","2011/12/29",
-        		 "2011/12/30","2011/12/31",
-        		 "2012/01/01","2012/01/02",
-        		 "2012/01/03","2012/01/04",
-        		 "2012/01/05"
-             };
-         %>
-         <kendo:chart name="chart">
-             <kendo:chart-series>
-                <kendo:chart-seriesItem type="column" data="<%= new int[] { 30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30 } %>" aggregate="avg" />
-             </kendo:chart-series>
-             <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem type="date" categories="<%= categories %>" baseUnit="weeks">
-                	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
-                </kendo:chart-categoryAxisItem>
-             </kendo:chart-categoryAxis>
-             <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem >
-                    <kendo:chart-valueAxisItem-line visible="false"/>
-                </kendo:chart-valueAxisItem>
-             </kendo:chart-valueAxis>
-         </kendo:chart>
-     </div>
+    <% 
+        String[] categories = {
+   		 "2011/12/20","2011/12/21",
+   		 "2011/12/22","2011/12/23",
+   		 "2011/12/24","2011/12/25",
+   		 "2011/12/26","2011/12/27",
+   		 "2011/12/28","2011/12/29",
+   		 "2011/12/30","2011/12/31",
+   		 "2012/01/01","2012/01/02",
+   		 "2012/01/03","2012/01/04",
+   		 "2012/01/05"
+        };
+    %>
+    <kendo:chart name="chart">
+        <kendo:chart-series>
+           <kendo:chart-seriesItem type="column" data="<%= new int[] { 30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30 } %>" aggregate="avg" />
+        </kendo:chart-series>
+        <kendo:chart-categoryAxis>
+           <kendo:chart-categoryAxisItem type="date" categories="<%= categories %>" baseUnit="weeks">
+           	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
+           </kendo:chart-categoryAxisItem>
+        </kendo:chart-categoryAxis>
+        <kendo:chart-valueAxis>
+           <kendo:chart-valueAxisItem >
+               <kendo:chart-valueAxisItem-line visible="false"/>
+           </kendo:chart-valueAxisItem>
+        </kendo:chart-valueAxis>
+    </kendo:chart>
     <script>
 	    $(document).ready(function() {
 	        $(".configuration").bind("change", refresh);
@@ -113,17 +111,10 @@
 	    }
 	</script>
     <style>
-	    .chart-wrapper {
-	    	background: transparent url(<c:url value="/resources/shared/styles/chart-wrapper-small.png" />) no-repeat 0 0;
-	        margin: 0 0 0 20px;
-	        width: 466px;
-	        height: 434px;
-	    }
-	                
-	    .chart-wrapper .k-chart {
+	    .k-chart {
 	        height: 280px;
 	        padding: 37px;
-	        width: 390px;
+	        width: 590px;
 	    }
 	</style>
 <demo:footer />

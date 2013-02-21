@@ -4,11 +4,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" >
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.common.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.default.min.css")">
     <link href="@Url.Content("~/Content/dataviz/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/dataviz/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/shared/examples-offline.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.dataviz.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
     <script src="@Url.Content("~/Scripts/console.js")"></script>
     <script src="@Url.Content("~/Scripts/prettify.js")"></script>
@@ -17,7 +19,9 @@
 <body>
     <div class="page">
         @Html.Partial("~/Views/Shared/_Navigation.cshtml")
-        @RenderBody()
+        <div id="example" class="k-content">
+            @RenderBody()
+        </div>
         @Html.Partial("~/Views/Shared/_Source.cshtml")
     </div>
 </body>

@@ -29,38 +29,37 @@
             <strong>refresh()</strong> will be called on each configuration change
         </p>
     </div>
-
-    <div class="chart-wrapper">
-    	 <% 
-			 String[] categories = {
-    			 "Jan", "Feb", 
-    			 "Mar", "Apr", 
-    			 "May", "Jun"
-			 };
-		 %>
-    	 <kendo:chart name="chart">
-    	 	 <kendo:chart-title text="Site Visitors Stats /thousands/" />
-    	 	 <kendo:chart-legend position="bottom" />
-    	 	 <kendo:chart-series>
-    	 	 	<kendo:chart-seriesItem type="column" data="<%= new int[] { 56000, 63000, 74000, 91000, 117000, 138000 } %>" name="Total Visits" stack="true">
-    	 	 		<kendo:chart-seriesItem-markers type="square" />
-    	 	 	</kendo:chart-seriesItem>
-    	 	 	<kendo:chart-seriesItem type="column" data="<%= new int[] { 52000, 34000, 23000, 48000, 67000, 83000 } %>" name="Unique visitors" stack="true" />
-    	 	 </kendo:chart-series>
-    	 	 <kendo:chart-categoryAxis>
-    	 	 	<kendo:chart-categoryAxisItem categories="<%= categories %>">
-    	 	 		<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
-    	 	 	</kendo:chart-categoryAxisItem>
-    	 	 </kendo:chart-categoryAxis>
-    	 	 <kendo:chart-valueAxis>
-    	 	 	<kendo:chart-valueAxisItem>
-    	 	 		
-    	 	 		<kendo:chart-valueAxisItem-line visible="false"/>
-    	 	 	</kendo:chart-valueAxisItem>
-    	 	 </kendo:chart-valueAxis>
-    	 	 <kendo:chart-tooltip visible="true" format="{0}" />
-    	 </kendo:chart>
-    </div>
+    
+ 	 <% 
+		String[] categories = {
+					 "Jan", "Feb", 
+					 "Mar", "Apr", 
+					 "May", "Jun"
+		};
+	%>
+	<kendo:chart name="chart">
+		 <kendo:chart-title text="Site Visitors Stats /thousands/" />
+		 <kendo:chart-legend position="bottom" />
+		 <kendo:chart-series>
+		 	<kendo:chart-seriesItem type="column" data="<%= new int[] { 56000, 63000, 74000, 91000, 117000, 138000 } %>" name="Total Visits" stack="true">
+		 		<kendo:chart-seriesItem-markers type="square" />
+		 	</kendo:chart-seriesItem>
+		 	<kendo:chart-seriesItem type="column" data="<%= new int[] { 52000, 34000, 23000, 48000, 67000, 83000 } %>" name="Unique visitors" stack="true" />
+		 </kendo:chart-series>
+		 <kendo:chart-categoryAxis>
+		 	<kendo:chart-categoryAxisItem categories="<%= categories %>">
+		 		<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
+		 	</kendo:chart-categoryAxisItem>
+		 </kendo:chart-categoryAxis>
+		 <kendo:chart-valueAxis>
+		 	<kendo:chart-valueAxisItem>
+		 		
+		 		<kendo:chart-valueAxisItem-line visible="false"/>
+		 	</kendo:chart-valueAxisItem>
+		 </kendo:chart-valueAxis>
+		 <kendo:chart-tooltip visible="true" format="{0}" />
+	</kendo:chart>
+	
     <script>
 	     $(document).ready(function() {
 	    	 $(".configuration").bind("change", refresh);
@@ -82,17 +81,11 @@
 	</script>
 	
 	<style>
-	    .chart-wrapper {
-	    	background: transparent url(<c:url value="/resources/shared/styles/chart-wrapper-small.png" />) no-repeat 0 0;
-	        margin: auto;
-	        width: 466px;
-	        height: 434px;
-	    }
-	                
-	    .chart-wrapper .k-chart {
+	    .k-chart {
 	        height: 280px;
 	        padding: 37px;
-	        width: 390px;
+	        margin: 0 0 50px 0;
+	        width: 590px;
 	    }
 	</style>
 <demo:footer />

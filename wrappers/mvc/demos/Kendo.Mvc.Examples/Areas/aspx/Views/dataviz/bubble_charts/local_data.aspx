@@ -9,7 +9,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.JobGrowt
 
     .chart-wrapper ul {
         font-size: 11px;
-        margin: 62px 16px 0 0;
+        margin: 53px 20px 0 0;
         padding: 30px;
         position: absolute;
         right: 0;

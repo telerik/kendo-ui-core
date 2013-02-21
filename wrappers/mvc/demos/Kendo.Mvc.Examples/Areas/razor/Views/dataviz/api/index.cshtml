@@ -1,15 +1,9 @@
 @section HeadContent {
-<style>
-    .chart-wrapper {
-        margin: auto;
-        width: 466px;
-        height: 434px;
-        background: url("@Url.Content("~/Content/dataviz/shared/chart-wrapper-small.png")") transparent no-repeat 0 0;
-    }
-                
-    .chart-wrapper .k-chart {
+<style>   
+    .k-chart {
         height: 280px;
         padding: 37px;
+        margin: 0 0 50px 0;
         width: 390px;
     }
 </style>
@@ -42,34 +36,33 @@
         <strong>refresh()</strong> will be called on each configuration change
     </p>
 </div>
-
-<div class="chart-wrapper">
-    @(Html.Kendo().Chart()
-        .Name("chart")
-        .Title("Internet Users")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom)
-        )
-        .SeriesDefaults(seriesDefaults => seriesDefaults
-            .Column().Stack(true)
-        )
-        .Series(series => {
-            series.Column(new double[] { 67.96, 68.93, 75, 74, 78 }).Name("United States");
-            series.Column(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name("World");
-        })
-        .CategoryAxis(axis => axis
-            .Categories("2005", "2006", "2007", "2008", "2009")
-        )
-        .ValueAxis(axis => axis
-            .Numeric().Labels(labels => labels.Format("{0}%"))
-        )
-        .Tooltip(tooltip => tooltip
-            .Visible(true)
-            .Format("{0}%")
-        )
-    ) 
-</div>
-
+@(Html.Kendo().Chart()
+    .Name("chart")
+    .Title("Site Visitors Stats /thousands/")
+    .Legend(legend => legend
+        .Position(ChartLegendPosition.Bottom)
+    )
+    .SeriesDefaults(seriesDefaults => seriesDefaults
+        .Column().Stack(true)
+    )
+    .Series(series =>
+    {
+        series.Column(new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
+        series.Column(new double[] { 52000, 34000, 23000, 48000, 67000, 83000 }).Name("Unique visitors");
+    })
+    .CategoryAxis(axis => axis
+        .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
+        .MajorGridLines(lines => lines.Visible(false))
+    )
+    .ValueAxis(axis => axis
+        .Numeric()
+        .Line(line => line.Visible(false))
+    )
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0}")
+    )
+) 
 <script>
     $(document).ready(function() {
         $(".configuration").bind("change", refresh);

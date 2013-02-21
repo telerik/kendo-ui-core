@@ -24,12 +24,13 @@
              </kendo:chart-yAxis>
              <kendo:chart-tooltip visible="true" format="{3}: {2:N0} applications" />
          </kendo:chart>
+		<ul class="k-content">
+		    <li>Circle size shows number of job applicants</li>
+		    <li>Vertical position shows number of employees</li>
+		    <li>Horizontal position shows job growth</li>
+		</ul>
      </div>
-    <ul class="k-content">
-        <li>Circle size shows number of job applicants</li>
-        <li>Vertical position shows number of employees</li>
-        <li>Horizontal position shows job growth</li>
-    </ul>
+  
     <style>
 	    .chart-wrapper {
 	        position: relative;
@@ -37,7 +38,7 @@
 	
 	    .chart-wrapper ul {
 	        font-size: 11px;
-	        margin: 62px 16px 0 0;
+	        margin: 53px 20px 0 0;
 	        padding: 30px;
 	        position: absolute;
 	        right: 0;

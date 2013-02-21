@@ -8,7 +8,7 @@
 
     .chart-wrapper ul {
         font-size: 11px;
-        margin: 62px 16px 0 0;
+        margin: 53px 20px 0 0;
         padding: 30px;
         position: absolute;
         right: 0;

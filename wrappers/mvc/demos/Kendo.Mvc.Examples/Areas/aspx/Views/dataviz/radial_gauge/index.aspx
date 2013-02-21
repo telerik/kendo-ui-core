@@ -1,9 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="<%= Url.Content("~/Content/web/kendo.common.min.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= Url.Content("~/Content/web/kendo.default.min.css") %>" rel="stylesheet" type="text/css" />
-    <script src="<%= Url.Content("~/Scripts/kendo.web.min.js") %>"></script>
     <style>
         #gauge-container {
             background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container-partial.png") %>) no-repeat 50% 50%;

@@ -13,7 +13,7 @@
         .Navigator(nav => nav
             .Series(series =>
             {
-                series.Line(s => s.Volume);
+                series.Area(s => s.Close);
             })
             .Select(
                 DateTime.Parse("2009/02/05"),

@@ -1,18 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-<style>
-    .chart-wrapper {
-        margin: 0 0 0 20px;
-        width: 466px;
-        height: 434px;
-        background: url("<%= Url.Content("~/Content/shared/chart-wrapper-small.png") %>") transparent no-repeat 0 0;
-    }
-                
-    .chart-wrapper .k-chart {
+<style> 
+    .k-chart {
         height: 280px;
         padding: 37px;
-        width: 390px;
+        width: 590px;
     }
 </style>
 </asp:Content>
@@ -77,37 +70,35 @@
     </ul>
     <p>Custom aggregate functions are supported.</p>
 </div>
-<div class="chart-wrapper">
-    <%= Html.Kendo().Chart()
-        .Name("chart")
-        .Series(series =>
-        {
-            series
-                .Column(new int[] { 30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30 })
-                .Aggregate(ChartSeriesAggregate.Avg);
-        })
-        .CategoryAxis(axis => axis
-            .Date()
-            .BaseUnit(ChartAxisBaseUnit.Weeks)
-            .Categories(
-                DateTime.Parse("2011/12/20"), DateTime.Parse("2011/12/21"),
-                DateTime.Parse("2011/12/22"), DateTime.Parse("2011/12/23"),
-                DateTime.Parse("2011/12/24"), DateTime.Parse("2011/12/25"),
-                DateTime.Parse("2011/12/26"), DateTime.Parse("2011/12/27"),
-                DateTime.Parse("2011/12/28"), DateTime.Parse("2011/12/29"),
-                DateTime.Parse("2011/12/30"), DateTime.Parse("2011/12/31"),
-                DateTime.Parse("2012/01/01"), DateTime.Parse("2012/01/02"),
-                DateTime.Parse("2012/01/03"), DateTime.Parse("2012/01/04"),
-                DateTime.Parse("2012/01/05")
-            )
-            .MajorGridLines(lines => lines.Visible(false))
+<%= Html.Kendo().Chart()
+    .Name("chart")
+    .Series(series =>
+    {
+        series
+            .Column(new int[] { 30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30 })
+            .Aggregate(ChartSeriesAggregate.Avg);
+    })
+    .CategoryAxis(axis => axis
+        .Date()
+        .BaseUnit(ChartAxisBaseUnit.Weeks)
+        .Categories(
+            DateTime.Parse("2011/12/20"), DateTime.Parse("2011/12/21"),
+            DateTime.Parse("2011/12/22"), DateTime.Parse("2011/12/23"),
+            DateTime.Parse("2011/12/24"), DateTime.Parse("2011/12/25"),
+            DateTime.Parse("2011/12/26"), DateTime.Parse("2011/12/27"),
+            DateTime.Parse("2011/12/28"), DateTime.Parse("2011/12/29"),
+            DateTime.Parse("2011/12/30"), DateTime.Parse("2011/12/31"),
+            DateTime.Parse("2012/01/01"), DateTime.Parse("2012/01/02"),
+            DateTime.Parse("2012/01/03"), DateTime.Parse("2012/01/04"),
+            DateTime.Parse("2012/01/05")
         )
-        .ValueAxis(axis => axis
-            .Numeric()
-            .Line(line => line.Visible(false))
-        )
-    %>
-</div>
+        .MajorGridLines(lines => lines.Visible(false))
+    )
+    .ValueAxis(axis => axis
+        .Numeric()
+        .Line(line => line.Visible(false))
+    )
+%>
 <script>
     $(document).ready(function() {
         $(".configuration").bind("change", refresh);

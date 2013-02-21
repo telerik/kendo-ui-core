@@ -1,17 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-        .chart-wrapper {
-            margin: auto;
-            width: 466px;
-            height: 434px;
-            background: url("<%= Url.Content("~/Content/shared/chart-wrapper-small.png") %>") transparent no-repeat 0 0;
-        }
-                
-        .chart-wrapper .k-chart {
+    <style>    
+        .k-chart {
             height: 280px;
             padding: 37px;
+            margin: 0 0 50px 0;
             width: 390px;
         }
     </style>
@@ -38,37 +32,33 @@
         </li>
     </ul>
 </div>
-
-<div class="chart-wrapper">
-    <%= Html.Kendo().Chart()
-        .Name("chart")
-        .Title("What is you favourite sport?")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Top)
-        )
-        .Series(series =>
-        {
-            series.Donut(new dynamic[] {
-        new {category = "Football",value = 35},
-        new {category = "Basketball",value = 25},
-        new {category = "Volleyball",value = 20},
-        new {category = "Rugby",value = 10},
-        new {category = "Tennis",value = 10}                
-    })
-            .Labels(labels => labels
-                .Visible(true)
-                .Position(ChartPieLabelsPosition.OutsideEnd)
-                .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
-                .Background("transparent")
-            );
-        })
-        .Tooltip(tooltip => tooltip
+<%= Html.Kendo().Chart()
+    .Name("chart")
+    .Title("What is you favourite sport?")
+    .Legend(legend => legend
+        .Position(ChartLegendPosition.Top)
+    )
+    .Series(series =>
+    {
+        series.Donut(new dynamic[] {
+    new {category = "Football",value = 35},
+    new {category = "Basketball",value = 25},
+    new {category = "Volleyball",value = 20},
+    new {category = "Rugby",value = 10},
+    new {category = "Tennis",value = 10}                
+})
+        .Labels(labels => labels
             .Visible(true)
-            .Template("#= category # - #= kendo.format('{0:P}', percentage) #")
-        )
-    %>
-</div>
-
+            .Position(ChartPieLabelsPosition.OutsideEnd)
+            .Template("#= category # - #= kendo.format('{0:P}', percentage)#")
+            .Background("transparent")
+        );
+    })
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Template("#= category # - #= kendo.format('{0:P}', percentage) #")
+    )
+%>
 <script>
     $(document).ready(function() {
         $(".configuration").bind("change", refresh);

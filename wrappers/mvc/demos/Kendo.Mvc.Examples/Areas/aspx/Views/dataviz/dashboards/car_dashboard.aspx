@@ -20,6 +20,7 @@
 
         .k-gauge {
             float: left;
+            border-color: transparent;
         }
 
         #rpm {

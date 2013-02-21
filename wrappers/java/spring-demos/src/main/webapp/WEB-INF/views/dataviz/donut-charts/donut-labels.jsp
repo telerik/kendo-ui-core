@@ -23,18 +23,16 @@
         </ul>
     </div>
 
-     <div class="chart-wrapper">
-         <kendo:chart name="chart">
-             <kendo:chart-title text="What is you favourite sport?" />
-             <kendo:chart-legend position="top" />
-             <kendo:chart-series>
-                <kendo:chart-seriesItem type="donut" data="${donutData}">
-                    <kendo:chart-seriesItem-labels visible="true" template="#= category # - #= kendo.format('{0:P}', percentage)#" position="outsideEnd" background="transparent" />
-                </kendo:chart-seriesItem>
-             </kendo:chart-series>
-             <kendo:chart-tooltip visible="true" template="#= category # - #= kendo.format('{0:P}', percentage) #" />
-         </kendo:chart>
-     </div>
+   <kendo:chart name="chart">
+       <kendo:chart-title text="What is you favourite sport?" />
+       <kendo:chart-legend position="top" />
+       <kendo:chart-series>
+          <kendo:chart-seriesItem type="donut" data="${donutData}">
+              <kendo:chart-seriesItem-labels visible="true" template="#= category # - #= kendo.format('{0:P}', percentage)#" position="outsideEnd" background="transparent" />
+          </kendo:chart-seriesItem>
+       </kendo:chart-series>
+       <kendo:chart-tooltip visible="true" template="#= category # - #= kendo.format('{0:P}', percentage) #" />
+   </kendo:chart>
     
 	<script>
 		$(document).ready(function() {
@@ -59,16 +57,10 @@
 	</script>
          
     <style>
-	    .chart-wrapper {
-	    	background: transparent url(<c:url value="/resources/shared/styles/chart-wrapper-small.png" />) no-repeat 0 0;
-	        margin: auto;
-	        width: 466px;
-	        height: 434px;
-	    }
-	            
-	    .chart-wrapper .k-chart {
+	    .k-chart {
 	        height: 280px;
 	        padding: 37px;
+	        margin: 0 0 50px 0;
 	        width: 390px;
 	    }
 	</style>
