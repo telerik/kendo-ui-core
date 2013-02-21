@@ -268,10 +268,12 @@
         publishTheme: function(themeName) {
             var themable = ["Chart", "StockChart", "Sparkline", "RadialGauge", "LinearGauge"];
 
-            for (var i = 0; i < themable.length; i++) {
-                var widget = kendo.dataviz.ui[themable[i]];
-                if (widget) {
-                    widget.fn.options.theme = themeName;
+            if (kendo.dataviz) {
+                for (var i = 0; i < themable.length; i++) {
+                    var widget = kendo.dataviz.ui[themable[i]];
+                    if (widget) {
+                        widget.fn.options.theme = themeName;
+                    }
                 }
             }
 
