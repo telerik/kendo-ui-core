@@ -69,6 +69,58 @@
                 same([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238, 44, 276], TOLERANCE);
             });
 
+            module("RadialScale / Configuration");
+
+            test("render scale with default min, max and step", function() {
+                createScale({ });
+                var options = linearScale.options;
+                equals(options.min, 0);
+                equals(options.max, 50);
+                equals(options.majorUnit, 10);
+            });
+
+            test("render scale with min=0 max=12 step=2", function() {
+                createScale({
+                    min: 0,
+                    max: 12
+                });
+                equals(linearScale.options.majorUnit, 2);
+            });
+
+            test("sets auto majorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000
+                });
+                equals(linearScale.options.majorUnit, 200);
+            });
+
+            test("sets auto minorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000
+                });
+                equals(linearScale.options.minorUnit, 20);
+            });
+
+            test("sets majorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000,
+                    majorUnit: 10
+                });
+                equals(linearScale.options.majorUnit, 10);
+            });
+
+            test("sets auto minorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000,
+                    minorUnit: 10
+                });
+                equals(linearScale.options.minorUnit, 10);
+            });
+
             module("Linear Scale/ Ranges/ Configuration");
 
             test("render color", function() {
@@ -100,21 +152,6 @@
                 ok(rect.style.fillOpacity, 0.33);
             });
 
-            test("render scale with default min, max and step", function() {
-                createScale({ });
-                var options = linearScale.options;
-                equals(options.min, 0);
-                equals(options.max, 50);
-                equals(options.majorUnit, 10);
-            });
-
-            test("render scale with min=0 max=12 step=2", function() {
-                createScale({
-                    min: 0,
-                    max: 12
-                });
-                equals(linearScale.options.majorUnit, 2);
-            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

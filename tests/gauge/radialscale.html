@@ -235,7 +235,9 @@
                 equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
             });
 
-            test("render scale with default min, max and step", function() {
+            module("RadialScale / Configuration");
+
+            test("render scale with default min, max and majorUnit", function() {
                 createScale({ });
                 var options = radialScale.options;
                 equals(options.min, 0);
@@ -243,12 +245,46 @@
                 equals(options.majorUnit, 20);
             });
 
-            test("render scale with min=0 max=12 step=2", function() {
+            test("render scale with min=0 max=12 majorUnit=2", function() {
                 createScale({
                     min: 0,
                     max: 12
                 });
                 equals(radialScale.options.majorUnit, 2);
+            });
+
+            test("sets auto majorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000
+                });
+                equals(radialScale.options.majorUnit, 200);
+            });
+
+            test("sets auto minorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000
+                });
+                equals(radialScale.options.minorUnit, 20);
+            });
+
+            test("sets majorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000,
+                    majorUnit: 10
+                });
+                equals(radialScale.options.majorUnit, 10);
+            });
+
+            test("sets auto minorUnit", function() {
+                createScale({
+                    min: 0,
+                    max: 1000,
+                    minorUnit: 10
+                });
+                equals(radialScale.options.minorUnit, 10);
             });
 
         </script>

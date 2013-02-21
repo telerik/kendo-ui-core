@@ -30,5 +30,9 @@ tests.push(
     {
         page: "gauge/mvvm.html",
         title: "gauge mvvm"
+    },
+    {
+        page: "gauge/lint.html",
+        title: "gauge lint"
     }
 );

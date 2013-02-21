@@ -264,7 +264,7 @@ kendo_module({
             var scale = this;
 
             scale.options = deepExtend({}, scale.options, options);
-            scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+            scale.options.majorUnit = scale.options.majorUnit || autoMajorUnit(scale.options.min, scale.options.max);
 
             Axis.fn.init.call(scale, scale.options);
             scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
@@ -713,7 +713,7 @@ kendo_module({
 
             scale.options = deepExtend({}, scale.options, options);
             scale.options = deepExtend({}, scale.options , { labels: { mirror: scale.options.mirror } });
-            scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+            scale.options.majorUnit = scale.options.majorUnit || autoMajorUnit(scale.options.min, scale.options.max);
 
             Axis.fn.init.call(scale, scale.options);
             scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
