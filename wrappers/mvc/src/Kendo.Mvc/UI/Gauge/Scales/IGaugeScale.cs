@@ -44,6 +44,11 @@ namespace Kendo.Mvc.UI
         /// </summary>
         bool? Reverse { get; set; }
 
+        /// <summary>
+        /// The line.
+        /// </summary>
+        ChartLine Line { get; set; }
+
         IChartSerializer CreateSerializer();
     }
 }

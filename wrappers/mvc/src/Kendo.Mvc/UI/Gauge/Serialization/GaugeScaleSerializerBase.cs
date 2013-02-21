@@ -47,6 +47,13 @@ namespace Kendo.Mvc.UI
                 result.Add("minorTicks", minorTicks);
             }
 
+            var line = scale.Line.CreateSerializer().Serialize();
+
+            if (line.Count > 0)
+            {
+                result.Add("line", line);
+            }
+
             return result;
         }
     }

@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI.Tests
             scaleMock.SetupGet(scale => scale.MajorTicks).Returns(new GaugeScaleTicks());
             scaleMock.SetupGet(a => a.Ranges).Returns(new List<GaugeScaleRanges>());
             serializer = new GaugeScaleSerializerBase(scaleMock.Object);
+            scaleMock.SetupGet(a => a.Line).Returns(new ChartLine());
         }
 
         [Fact]

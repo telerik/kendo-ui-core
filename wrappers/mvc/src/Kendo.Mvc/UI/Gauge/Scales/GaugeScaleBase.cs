@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
             Ranges = new List<GaugeScaleRanges>();
             MajorTicks = new GaugeScaleTicks();
             MinorTicks = new GaugeScaleTicks();
+            Line = new ChartLine();
         }
 
         /// <summary>
@@ -81,6 +82,15 @@ namespace Kendo.Mvc.UI
         /// The scale reverse.
         /// </summary>
         public bool? Reverse
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The line reverse.
+        /// </summary>
+        public ChartLine Line
         {
             get;
             set;

@@ -468,6 +468,7 @@
     <Compile Include="Infrastructure\JsonObject.cs" />
     <Compile Include="UI\EventBuilder.cs" />
     <Compile Include="UI\Gauge\Enums\GaugeRadialScaleLabelsPosition.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeLineBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeLinearScaleLabelsBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialScaleLabelsBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\LinearGaugeBuilder.cs" />
