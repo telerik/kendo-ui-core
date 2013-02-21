@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().Editor()
-      .Name("Editor")
+      .Name("editor")
       .HtmlAttributes(new { style = "width: 740px;height:250px" })
       .Value(() =>
            { %>

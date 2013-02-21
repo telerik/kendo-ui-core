@@ -22,7 +22,7 @@
 </div>
 
 <% Html.Kendo().Editor()
-      .Name("Editor")
+      .Name("editor")
       .HtmlAttributes(new { style = "width:600px;height:440px" })
       .Value(() =>
            { %>
@@ -54,7 +54,7 @@
 
 <script>
     $(document).ready(function() {
-        var editor = $("#Editor").data("kendoEditor");
+        var editor = $("#editor").data("kendoEditor");
 
         var setValue = function () {
             editor.value($("#value").val());

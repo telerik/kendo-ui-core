@@ -1,26 +1,20 @@
-@model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
-           
-@{
-    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
-}
+<%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+<%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
-<div class="configuration k-widget k-header" style="width: 190px">
-    <ul class="options">
-        <li>Choose culture: 
-            @(Html.Kendo().DropDownList()
-                .Name("CulturesSelector")
-                .BindTo(new[] { "en-US", "de-DE", "bg-BG", "fr-FR", "pl-PL", "ru-RU", "uk-UA" })
-                .Value(culture)
-                .Events(events => events.Change("cultureChange"))
-            )
-        </li>
-    </ul>
-</div>
+<demo:header />
 
-@(Html.Kendo().Editor()
-      .Name("editor")
-      .HtmlAttributes(new { style = "width: 700px;height:440px" })
-      .Value(@<text>
+<kendo:editor name="editor" stylesheets="<%= new String[]{request.getContextPath() + \"/resources/web/editor/editorStyles.css\"}%>" 
+	style="width:740px;height:440px">
+    <kendo:editor-tools>
+   		 <kendo:editor-tool name="style">
+	         <kendo:editor-tool-items>
+	         	<kendo:editor-tool-item value="hlError" text="Highlight Error" />
+	         	<kendo:editor-tool-item value="hlOK" text="Highlight OK" />
+	         	<kendo:editor-tool-item value="inlineCode" text="Inline Code" />
+	         </kendo:editor-tool-items>
+         </kendo:editor-tool>     
+    </kendo:editor-tools>
+    <kendo:editor-value>
             <p>
                <img src="http://www.kendoui.com/Image/kendo-logo.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
             </p>
@@ -43,23 +37,7 @@
                 Read <a href="http://www.kendoui.com/documentation/introduction.aspx">more details</a> or send us your
                 <a href="http://www.kendoui.com/forums.aspx">feedback</a>!
             </p>
-      </text>)
-)
+    </kendo:editor-value>
+</kendo:editor>
 
-<script type="text/javascript">
-    var href = window.location.href;
-    if (href.indexOf('culture') > -1) {
-        $('#culture').val(href.replace(/(.*)culture=([^&]*)/, '$2'));
-    }
-
-    function cultureChange() {
-        var value = this.value();
-        if (href.indexOf('culture') > -1) {
-            href = href.replace(/culture=([^&]*)/, 'culture=' + value);
-        } else {
-            href += href.indexOf('?') > -1 ? '&culture=' + value : '?culture=' + value;
-        }
-        window.location.href = href;
-    }
-
-</script>
+<demo:footer />

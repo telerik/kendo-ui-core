@@ -8,7 +8,7 @@
 <div class="k-rtl">
 
 <% Html.Kendo().Editor()
-      .Name("Editor")
+      .Name("editor")
       .HtmlAttributes(new { style = "width: 740px;height:440px" })
       .Value(() =>
            { %>

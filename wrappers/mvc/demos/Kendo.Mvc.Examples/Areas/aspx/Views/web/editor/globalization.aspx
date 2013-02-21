@@ -19,7 +19,7 @@
 </div>
 
 <% Html.Kendo().Editor()
-      .Name("Editor")
+      .Name("editor")
       .HtmlAttributes(new { style = "width: 700px;height:440px" })
       .Value(() => 
       {
