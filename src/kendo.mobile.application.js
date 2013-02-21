@@ -140,7 +140,7 @@ kendo_module({
         },
 
         _setupPlatform: function() {
-            var that = this,
+            var that = this, wpThemeProxy,
                 platform = that.options.platform,
                 os = OS || MOBILE_PLATFORMS[DEFAULT_OS];
 
@@ -157,17 +157,26 @@ kendo_module({
             that.osCssClass = osCssClass(that.os);
 
             if (os.name == "wp") {
+                wpThemeProxy = proxy(that._setupWP8Theme, that);
+
+                $(window).on("focusin", wpThemeProxy); // Restore theme on browser focus (requires click).
+                document.addEventListener("resume", wpThemeProxy); // PhoneGap fires resume.
+
                 that._setupWP8Theme();
             }
         },
 
         _setupWP8Theme: function() {
+            var that = this,
+                element = $(that.element),
+                bgColor;
 
-            var element = $(this.element),
-                div, bgColor;
+            if (!that._bgColorDiv) {
+                that._bgColorDiv = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
+            }
 
-            div = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
-            bgColor = parseInt(div.css("background-color").split(",")[1], 10);
+            bgColor = parseInt(that._bgColorDiv.css("background-color").split(",")[1], 10);
+            element.removeClass("km-wp-dark km-wp-light");
             if (bgColor === 0) {
                 element.addClass("km-wp-dark");
             } else {
