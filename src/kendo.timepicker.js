@@ -164,6 +164,8 @@ kendo_module({
                 toString = kendo.toString,
                 template = that.template,
                 start = new DATE(+min),
+                startDay = start.getDate(),
+                msStart, lastIdx,
                 idx = 0, length,
                 html = "";
 
@@ -178,16 +180,26 @@ kendo_module({
                 if (msMin > msMax) {
                     msMax += MS_PER_DAY;
                 }
-                length = (msMax - msMin) / msInterval + 1;
+
+                length = ((msMax - msMin) / msInterval) + 1;
             }
+
+            lastIdx = parseInt(length, 10);
 
             for (; idx < length; idx++) {
                 if (idx) {
                     setTime(start, msInterval, ignoreDST);
                 }
 
-                if (msMax && getMilliseconds(start) > msMax) {
-                    start = new DATE(+max);
+                if (msMax && lastIdx == idx) {
+                    msStart = getMilliseconds(start);
+                    if (startDay < start.getDate()) {
+                        msStart += MS_PER_DAY;
+                    }
+
+                    if (msStart > msMax) {
+                        start = new DATE(+max);
+                    }
                 }
 
                 html += template(toString(start, format, options.culture));

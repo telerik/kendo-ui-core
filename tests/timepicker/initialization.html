@@ -66,6 +66,20 @@
                 equal(tv.template(kendo.toString(date, "hh:mm tt")), '<li tabindex="-1" role="option" class="k-item" unselectable="on">' + kendo.toString(date, "hh:mm tt") + '</li>');
             });
 
+            test("TimeView renders last item equal to the MAX time", function() {
+                var tv = new TimeView({
+                        format: "hh:mm tt",
+                        anchor: input,
+                        min: new Date(2000, 0, 1, 0, 0, 0),
+                        max: new Date(2000, 0, 1, 23, 59, 0),
+                        interval: 15
+                    });
+
+                tv.refresh();
+
+                equal(tv.ul.find("li:last").html(), "11:59 PM");
+            });
+
             //TimePicker
             test("_wrapper() wraps input element", function() {
                 input.css("width", "200");
