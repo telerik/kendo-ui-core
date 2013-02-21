@@ -131,9 +131,6 @@
 .km-wp .km-button:active,
 .km-wp .km-detail.km-state-active,
 .km-wp .km-button.km-state-active,
-.km-wp li.km-state-active .km-listview-link,
-.km-wp li.km-state-active .km-listview-label,
-.km-wp li.km-state-active .km-detail,
 .km-wp .km-actionsheet > li > a:active
 {
 	background: @accent-background;
@@ -141,19 +138,84 @@
 
 .km-wp .km-detail:active,
 .km-wp .km-detail.km-state-active,
-.km-wp li.km-state-active .km-detail,
 .km-wp *:not(.km-tabstrip) > .km-button:active,
 .km-wp *:not(.km-tabstrip) > .km-button.km-state-active,
-.km-wp .km-state-active .km-listview-link,
-.km-wp .km-state-active .km-listview-label,
 .km-wp .km-actionsheet > li > a:active
 {
     color: @accent-text;
 }
 
+.km-wp .km-list > li > .km-icon,
+.km-wp .km-listview-link > .km-icon
+{
+    margin: -.1em .2em 0 -.4em;
+    width: 1.3em;
+    height: 1.3em;
+    text-align: center;
+    font-size: 1.6em;
+    vertical-align: middle;
+}
+
+.km-wp .km-list > li > .km-icon:before,
+.km-wp .km-listview-link > .km-icon:before
+{
+    display: none;
+}
+
+.km-wp .km-list > li > .km-icon:after,
+.km-wp .km-listview-link > .km-icon:after,
+{
+    display: inline-block;
+    width: auto;
+}
+
+.km-wp-dark .km-list > li > .km-icon,
+.km-wp-dark .km-listview-link > .km-icon
+{
+    background: @third-background-dark
+}
+
+.km-wp-light .km-list > li > .km-icon,
+.km-wp-light .km-listview-link > .km-icon
+{
+    background: @third-background-light
+}
+
+.km-wp .km-listview-link,
+.km-wp .km-listview-label
+{
+    padding-bottom: .3em;
+    .pTransition(transform .1s, color .1s);
+    transition-property: transform, color;
+    transition-duration: .1s;
+}
+
+.km-wp .km-state-active .km-listview-link,
+.km-wp .km-state-active .km-listview-label
+{
+    .transform(scale(.98, .94));
+}
+
+.km-wp-dark .km-state-active .km-listview-link,
+.km-wp-dark .km-state-active .km-listview-label
+{
+    color: @second-background-light;
+}
+
+.km-wp-light .km-state-active .km-listview-link,
+.km-wp-light .km-state-active .km-listview-label
+{
+    color: @second-background-dark;
+}
+
 .km-wp .km-state-active .km-listview-link:after
 {
     border-color: @accent-text;
+}
+
+.km-wp .km-listview-link:after
+{
+    display: none;
 }
 
 .km-wp .km-view-title
@@ -164,18 +226,16 @@
 .km-wp .km-group-title
 {
 	text-transform: uppercase;
-    font-weight: normal;
-    font-size: 1.2em;
+    font-size: 1em;
+    padding: 0;
+    margin-bottom: .2em;
+    background: @accent-background;
+    color: @accent-text;
 }
 
-.km-wp-dark .km-group-title
+.km-wp .km-group-title .km-text
 {
-	color: #999;
-}
-
-.km-wp-light .km-group-title
-{
-	color: #8c8c8c;
+    text-indent: .7em;
 }
 
 .km-wp .km-scroller-pull .km-template
@@ -216,7 +276,7 @@
 .km-wp .km-navbar .km-view-title
 {
 	visibility: visible;
-	font-size: 2em;
+	font-size: 1.6em;
 }
 
 .km-wp .km-button
@@ -231,7 +291,6 @@
 
 .km-wp .km-button .km-icon
 {
-	display: none;
     margin-top: -4px;
     vertical-align: middle;
 }
