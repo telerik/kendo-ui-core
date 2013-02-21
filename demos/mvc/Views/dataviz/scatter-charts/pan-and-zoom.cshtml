@@ -47,11 +47,11 @@
                             }
                         }],
                         transitions: false,
-                        drag: onDrag,
-                        zoom: onDrag
+                        drag: setRange,
+                        zoom: setRange
                     });
 
-                    function onDrag(e) {
+                    function setRange(e) {
                         var chart = e.sender;
                         var ds = chart.dataSource;
                         var options = chart.options;

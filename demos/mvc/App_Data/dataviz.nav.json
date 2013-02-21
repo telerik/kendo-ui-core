@@ -113,7 +113,15 @@
                     "packages": [ "!offline" ]
 				}, {
                     "text": "Gap and spacing",
-                    "url": "bar-charts/gap-spacing.html"
+                    "url": "bar-charts/gap-spacing.html",
+                    "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Gap and Spacing Example",
+                    "meta": "This sample demonstrates how to control the appearance of your Kendo UI jQuery bar charts."
+				}, {
+                    "text": "Pan and zoom",
+                    "url": "bar-charts/pan-and-zoom.html",
+                    "title": "Pan and zoom example | Kendo UI Bar Charts",
+                    "meta": "This demo shows how to implement pan and zoom in Kendo UI Bar Charts by filtering the the DataSource component.",
+                    "packages": [ "!mvc" ]
             }],
             "name": "bar-charts"
         }, {
@@ -286,7 +294,7 @@
 				}, {
                     "text": "Pan and zoom",
                     "url": "scatter-charts/pan-and-zoom.html",
-                    "title": "Example of using the Kendo UI Charts events to add interactivity",
+                    "title": "Pan and zoom example | Kendo UI DataViz Demos",
                     "meta": "This demo shows how to implement pan and zoom in Kendo UI Scatter Charts by filtering the the DataSource component.",
                     "packages": [ "!mvc" ]
             }],

@@ -1,0 +1,96 @@
+
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        // Minimum distance in px to start dragging
+        var DRAG_STEP = 50;
+    
+        // Minimum/maximum range length
+        var MIN_RANGE = 10;
+        var MAX_RANGE = 20;
+    
+        // Sample data
+        var data = [];
+        for (var i = 0; i < 100; i++) {
+            var val = Math.round(Math.random() * 10);
+            data.push({
+                // We'll scroll the chart by filtering the index
+                index: i,
+                val: val
+            });
+        }   
+        
+        // Selected Range
+        var rangeStart = 0;
+        var rangeLength = MIN_RANGE;
+    
+        // Helper function that constructs DataSource filter
+        function getFilter(start, length) {
+            return [{
+                field: "index",
+                operator: "gte",
+                value: start
+            }, {
+                field: "index",
+                operator: "lte",
+                value: start + length
+            }]
+        }
+
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    data: data,
+                    filter: getFilter(rangeStart, rangeLength)
+                },
+                categoryAxis: {
+                    field: "index"
+                },
+                valueAxis: {
+                    // Optionally set min and max
+                    // to avoid axis range changes
+                },
+                series: [{
+                    type: "column",
+                    field: "val"
+                }],
+                transitions: false,
+                drag: onDrag,
+                dragEnd: onDragEnd,
+                zoom: onZoom
+            });
+
+            var newStart;
+            function onDrag(e) {
+                var chart = e.sender;
+                var ds = chart.dataSource;
+                var delta = Math.round(e.originalEvent.x.initialDelta / DRAG_STEP);
+                  
+                if (delta != 0) {
+                    newStart = Math.max(0, rangeStart - delta);
+                    newStart = Math.min(data.length - rangeLength, newStart);
+                    ds.filter(getFilter(newStart, rangeLength));
+                }
+            }
+              
+            function onDragEnd() {
+                rangeStart = newStart;
+            }
+              
+            function onZoom(e) {
+                var chart = e.sender;
+                var ds = chart.dataSource;
+                rangeLength = Math.min(Math.max(rangeLength + e.delta, MIN_RANGE), MAX_RANGE);
+                ds.filter(getFilter(rangeStart, rangeLength));
+
+                // Prevent document scrolling
+                e.originalEvent.preventDefault();
+            }
+        }
+
+        $(document).ready(createChart);
+        $("#example").bind("kendo:skinChange", createChart);
+    </script>
+</div>
