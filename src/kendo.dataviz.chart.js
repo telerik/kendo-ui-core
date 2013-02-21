@@ -7573,7 +7573,7 @@ kendo_module({
             width: 1,
             zIndex: -1,
             tooltip: {
-                visible: true
+                visible: false
             }
         },
 
