@@ -33,7 +33,6 @@ kendo_module({
 
             element = $(element)
                 .empty()
-                .addClass(CSS_PREFIX + "sparkline")
                 .append(stage);
 
             chart._initialWidth = math.floor(element.width());

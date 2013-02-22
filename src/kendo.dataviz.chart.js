@@ -198,7 +198,7 @@ kendo_module({
             options = deepExtend({}, chart.options, userOptions);
 
             chart.element
-                .addClass("k-chart")
+                .addClass(CSS_PREFIX + options.name.toLowerCase())
                 .css("position", "relative");
 
             // Used by the ThemeBuilder
