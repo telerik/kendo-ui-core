@@ -41,30 +41,13 @@
                         }
                     },
                     tooltip: {
-                        shared: true,
-                        visible: true
+                        visible: true,
+                        template: "Open: #= dataItem.dataItems[0].Open #"
                     },
                     dateField: "Date",
-                    categoryAxis: {
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true
-                            }
-                        }
-                    },
                     valueAxes: [{
                         // Default axis
-                        name: "price",
-                        crosshair: {
-                            visible: true,
-                            tooltip: {
-                                visible: true
-                            }
-                        }
-                    }, {
-                        name: "volume",
-                        visible: true
+                        name: "price"
                     }],
                     series: [{
                         type: "candlestick",
@@ -73,11 +56,10 @@
                         lowField: "Low",
                         closeField: "Close",
                         // TODO: Shouldn't be necessary
-                        axis: "price"
-                    }, {
-                        type: "bar",
-                        field: "Volume",
-                        axis: "volume"
+                        axis: "price",
+                        aggregate: function(data, series, dataItems) {
+                            return { Open: 1, High: 4, Low: 0, Close: 2, dataItems: dataItems };
+                        }
                     }],
                     navigator: {
                         dataSource: {
