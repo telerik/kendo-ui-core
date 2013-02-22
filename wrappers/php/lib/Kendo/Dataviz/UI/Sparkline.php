@@ -3,9 +3,19 @@
 namespace Kendo\Dataviz\UI;
 
 class Sparkline extends \Kendo\UI\Widget {
+    function __construct($id, $data = null) {
+        parent::__construct($id);
+        $this->data($data);
+    }
+
+    protected function createElement() {
+        return new \Kendo\Html\Element('span', true);
+    }
+
     public function name() {
         return 'Sparkline';
     }
+
 //>> Properties
 
     /**
