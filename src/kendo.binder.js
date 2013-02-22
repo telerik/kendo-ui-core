@@ -1194,6 +1194,7 @@ kendo_module({
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
             children = element.children,
+            childrenCopy = [],
             deep = true,
             bindings,
             options = {},
@@ -1256,8 +1257,13 @@ kendo_module({
         }
 
         if (deep && children) {
+            // https://github.com/telerik/kendo/issues/1240 for the weirdness.
             for (idx = 0; idx < children.length; idx++) {
-                bindElement(children[idx], source, roles, parents);
+                childrenCopy[idx] = children[idx];
+            }
+
+            for (idx = 0; idx < childrenCopy.length; idx++) {
+                bindElement(childrenCopy[idx], source, roles, parents);
             }
         }
     }
