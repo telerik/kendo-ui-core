@@ -56,16 +56,6 @@ will disable all animations in the widget.
     }
 
     /**
-    * The text or a function which result will be shown within the tooltip.
-By default the tooltip will display the target element title attribute content.
-    * @param string|\Kendo\JavaScriptFunction|\Kendo\UI\TooltipContent|array $value
-    * @return \Kendo\UI\Tooltip
-    */
-    public function content($value) {
-        return $this->setProperty('content', $value);
-    }
-
-    /**
     * Specifies if the tooltip callout will be displayed.
     * @param boolean $value
     * @return \Kendo\UI\Tooltip
@@ -207,6 +197,29 @@ By default the tooltip will display the target element title attribute content.
         return $this->setProperty('error', $value);
     }
 
+
+    /**
+    * Sets the HTML content of the Tooltip.
+    * @param string $value
+    * @return \Kendo\UI\Tooltip
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the Tooltip.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the Tooltip.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
 
 //<< Properties
 }

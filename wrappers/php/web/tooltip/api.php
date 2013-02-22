@@ -7,11 +7,17 @@ $tooltip = new \Kendo\UI\Tooltip('#tooltip'); // select the container for the to
 $tooltip->filter('div')
     ->autoHide(false)
     ->showOn('click')
-    ->width(300)
-    ->content('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
-    ->position('right');
+    ->position('right')
+    ->width(300);
 
+$tooltip->startContent();
+?>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<?php
+
+$tooltip->endContent();
 echo $tooltip->render();
+
 ?>
 
     <div class="configuration k-widget k-header" style="z-index:10000">
