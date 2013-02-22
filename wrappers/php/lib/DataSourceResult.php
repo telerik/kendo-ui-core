@@ -44,7 +44,8 @@ class DataSourceResult {
 
         $statement->execute();
 
-        return (int)($statement->fetch(PDO::FETCH_NUM)[0]);
+        $total = $statement->fetch(PDO::FETCH_NUM);
+        return (int)($total[0]);
     }
 
     private function page() {
