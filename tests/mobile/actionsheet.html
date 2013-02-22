@@ -6,6 +6,8 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
@@ -130,6 +132,23 @@
 
                 root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
+            });
+
+            module("integration", {
+                setup: function() {
+                    kendo.mobile.ui.Shim.fn.options.duration = 0;
+                }
+            });
+
+            test("#1240 - 2 actionsheets work in a view with model", 2, function() {
+                var markup = '<div data-role="view" data-model="foo"><ul id="foo" data-role="actionsheet"></ul><ul id="bar" data-role="actionsheet"></ul></div>';
+
+                window.foo = kendo.observable();
+                root.html(markup);
+                new kendo.mobile.Application(root);
+
+                ok(root.find("#foo").data("kendoMobileActionSheet"));
+                ok(root.find("#bar").data("kendoMobileActionSheet"));
             });
         </script>
     </body>
