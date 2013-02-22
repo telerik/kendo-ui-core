@@ -20,7 +20,8 @@ kendo_module({
         math = Math;
 
     // Constants =============================================================
-    var DEAULT_BULLET_WIDTH = 150,
+    var CSS_PREFIX = "k-",
+        DEAULT_BULLET_WIDTH = 150,
         BULLET = "bullet";
 
     // Sparkline =============================================================
@@ -30,7 +31,9 @@ kendo_module({
                 stage = chart.stage = $("<span />"),
                 options = userOptions || {};
 
-            element = $(element).empty().append(stage);
+            element = $(element)
+                .addClass(CSS_PREFIX + "sparkline")
+                .empty().append(stage);
 
             chart._initialWidth = math.floor(element.width());
 
