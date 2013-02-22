@@ -739,6 +739,7 @@
     <Content Include="Views\dataviz\sparklines\remote-data.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\pan-and-zoom.cshtml" />
     <Content Include="Views\dataviz\bar-charts\pan-and-zoom.cshtml" />
+    <Content Include="Views\dataviz\bullet-charts\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

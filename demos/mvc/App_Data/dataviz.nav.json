@@ -153,6 +153,15 @@
                     "packages": [ "!offline" ]
             }]
         }, {
+            "text": "Bullet Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartBulletIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "bullet-charts/index.html",
+                    "title": "Kendo UI Bullet Chart widget demo"
+			}]
+        }, {
             "text": "Line Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartLineIcon",

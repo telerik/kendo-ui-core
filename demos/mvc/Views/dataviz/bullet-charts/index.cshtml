@@ -1,0 +1,65 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart" style="height: 100px;"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "bullet",
+                    data: [[2,3]]
+                }],
+                categoryAxis: {
+                    categories: ["A"]
+                },
+                valueAxis: {
+                    plotBands: [{
+                        from: 0, to: 1, color: "red", opacity: 0.5
+                    }, {
+                        from: 1, to: 2.5, color: "green", opacity: 0.5
+                    }, {
+                        from: 2.5, to: 4, color: "blue", opacity: 0.5
+                    }],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                // Initialize the chart with a delay to make sure
+                // the initial animation is visible
+                createChart();
+
+                $("#example").bind("kendo:skinChange", function(e) {
+                    createChart();
+                });
+            }, 400);
+        });
+    </script>
+    <style scoped>
+        .chart-wrapper {
+            position: relative;
+        }
+
+        .chart-wrapper ul {
+            font-size: 11px;
+            margin: 63px 30px 0 0;
+            padding: 30px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            text-transform: uppercase;
+            width: 146px;
+            height: 94px;
+        }
+    </style>
+</div>
