@@ -1,39 +1,48 @@
 <div id="example" class="k-content">
-    <div class="panel">
-        <h1>
-            Climate control history
-        </h1>
-        <table class="history-table">
-            <tr>
-                <td>Pressure</td>
-                <td><span id="press-log"></span></td>
-                <td>980 mb</td>
-            </tr>
-            <tr>
-                <td>Temperature</td>
-                <td><span id="temp-log"></span></td>
-                <td>22 &deg;C</td>
-            </tr>
-            <tr>
-                <td>Humidity</td>
-                <td><span id="hum-log"></span></td>
-                <td>32 %</td>
-            </tr>
-        </table>
-        <h1>
-            Temperature control
-        </h1>
-        <div class="stats">
-            <span id="temp-range"></span>
+    <div class="chart-wrapper">
+        <div class="climate">
+            <h1>
+                Climate control history
+            </h1>
+            <table class="history">
+                <tr>
+                    <td class="item">Pressure</td>
+                    <td class="spark"><span id="press-log"></span></td>
+                    <td class="value">980<span>mb</span></td>
+                </tr>
+                <tr>
+                    <td class="item">Temperature</td>
+                    <td class="spark"><span id="temp-log"></span></td>
+                    <td class="value">22<span>&deg;C</span></td>
+                </tr>
+                <tr>
+                    <td class="item">Humidity</td>
+                    <td class="spark"><span id="hum-log"></span></td>
+                    <td class="value">32<span>%</span></td>
+                </tr>
+            </table>
         </div>
-        <h1>
-            Conditioner working time
-        </h1>
-        <div class="stats">
-            <span id="stats-mon"></span>
-            <span id="stats-tue"></span>
-            <span id="stats-wed"></span>
-            <span id="stats-thu"></span>
+        <div class="temperature">
+            <h1>
+                Temperature control
+            </h1>
+            <div class="stats">
+                <span id="temp-range"></span>
+            </div>
+        </div>
+        <div class="conditioner">
+            <h1>
+                Conditioner working time
+            </h1>
+            <div class="stats">
+                <span id="stats-mon"></span>
+                <span id="stats-tue"></span>
+                <span id="stats-wed"></span>
+                <span id="stats-thu"></span>
+                <span id="stats-fri"></span>
+                <span id="stats-sat"></span>
+                <span id="stats-sun"></span>
+            </div>
         </div>
     </div>
 
@@ -96,22 +105,37 @@
             // Pie "sparklines"
             $("#stats-mon").kendoSparkline({
                 type: "pie",
-                data: [8, 16]
+                data: [14, 10]
             });
 
             $("#stats-tue").kendoSparkline({
                 type: "pie",
-                data: [4, 20]
+                data: [8, 16]
             });
 
             $("#stats-wed").kendoSparkline({
                 type: "pie",
-                data: [24]
+                data: [8, 16]
             });
 
             $("#stats-thu").kendoSparkline({
                 type: "pie",
-                data: [24]
+                data: [12, 12]
+            });
+            
+            $("#stats-fri").kendoSparkline({
+                type: "pie",
+                data: [6, 18]
+            });
+            
+            $("#stats-sat").kendoSparkline({
+                type: "pie",
+                data: [1, 23]
+            });
+            
+            $("#stats-sun").kendoSparkline({
+                type: "pie",
+                data: [5, 19]
             });
         }
 
@@ -120,20 +144,73 @@
     </script>
 
     <style scoped>
-        .panel {
-            background-color: #eee;
-        }
-
-        h1 {
-            text-color: #073B59;
+        .chart-wrapper {
+            width: 460px;
+            margin: 0 auto 30px auto;            
+            color: #124251;
+            font-weight: bold;            
             text-transform: uppercase;
-            font-family: arial, sans-serif;
-            font-size: 12px;
+        }
+        .climate, .temperature, .conditioner {
+            margin: 0 30px;
+            padding: 30px 0;
+            border-top: 0;
+            border-bottom: 1px solid #72c6d0;
+        }
+        .temperature, .conditioner {
+            border-top: 1px solid #afe0e5;
+        }
+        .conditioner {
+            border-bottom: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.2em;
         }
 
-        .history-table td,
+        .history {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .history td {
+            padding: 0;
+        }
+        .history td.item {
+            text-align: right;
+            line-height: normal;
+            vertical-align: bottom;
+        }
+        .history td.spark {
+            text-align: center;
+            line-height: 50px;
+            padding: 0 5px;
+        }
+        .history td.value {
+            font-size: 2em;
+            font-weight: normal;
+            line-height: normal;
+            vertical-align: bottom;
+        }
+        .history td.value span {
+            font-size: .5em;
+            vertical-align: top;
+        }
         .stats {
-            line-height: 40px;
+            text-align: center;
+        }
+        #stats-mon,
+        #stats-tue,
+        #stats-wed,
+        #stats-thu,
+        #stats-fri,
+        #stats-sat,
+        #stats-sun {
+            width: 50px;
+            line-height: 50px;
+        }
+        #temp-range {
+            width: 400px;
+            line-height: 50px;
         }
     </style>
 </div>
