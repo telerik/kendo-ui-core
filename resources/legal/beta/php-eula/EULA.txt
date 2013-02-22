@@ -1,5 +1,5 @@
 
-Telerik End User License Agreement Kendo UI Complete for JSP Beta Trial
+Telerik End User License Agreement Kendo UI Complete for PHP Beta Trial
 
 (Last updated February 26, 2013)
 
@@ -7,12 +7,12 @@ IMPORTANT – PLEASE READ THIS END USER LICENSE AGREEMENT (THE “AGREEMENT”) CAREFU
 
 SOFTWARE PRODUCT LICENSE
 
-This is a license agreement and not an agreement for sale. The Telerik computer software known as Kendo UI for JSP (Java Server Pages) Beta and any updates, upgrades, modifications and error corrections thereto provided to You by Telerik (the “Programs”) and any accompanying documentation (the “Documentation and, together with the Programs, the “Software”) is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties and contains confidential information and trade secrets. Telerik retains all rights not expressly granted to you in this License.
+This is a license agreement and not an agreement for sale. The Telerik computer software known as Kendo UI Complete for PHP (Hypertext Preprocessor) Beta, which includes Kendo UI Web, Kendo UI DataViz, Kendo UI Mobile and server wrappers for PHP, and any updates, upgrades, modifications and error corrections thereto provided to You by Telerik (the “Programs”) and any accompanying documentation (the “Documentation” and, together with the Programs, the “Software”) is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties and contains confidential information and trade secrets. Telerik retains all rights not expressly granted to you in this License.
 
 I. BETA LICENSE
 
 1. License Grant. 
-Telerik hereby grants to you, and you accept, a non–exclusive, non–transferable license to install and use the Software for evaluation purposes only, solely as authorized below. 
+Telerik hereby grants to you, and you accept, a limited, non–exclusive, non–transferable license to install and use the Software in minified and source code form for evaluation purposes only, solely as authorized below. 
 
 2. Scope of Use. 
 You are granted a Beta license pursuant to Section 1 for the sole purpose of testing the Software’s functionality.  You are not allowed to integrate the Software into end products or use it for any commercial or productive purpose.
@@ -30,11 +30,15 @@ No dedicated technical support is provided with the Software. However, as part o
 
 III. LICENSE LIMITATIONS 
 
-1. You are not allowed to disassemble, decompile or “unlock”, decode or otherwise reverse translate or engineer, or attempt in any manner to reconstruct or discover any source code or underlying algorithms the Software that is provided to you in object code form only.
+1. You are not allowed to disassemble, decompile, “unlock”, decode or otherwise reverse translate or engineer, or attempt in any manner to reconstruct or discover any source code or underlying algorithms of the Software that is provided to you in object code form only.
 
 2. You are not allowed to resell, transfer, rent, lease, or sublicense the Software and your associated rights. 
 
 3. You are not allowed to use, copy, modify, merge, or distribute copies of the Software or any accompanying documents, except as permitted in this License.
+
+4. Any modifications You develop to the Software will be the exclusive property of Telerik, and You agree to and hereby do assign all right, title and interest in and to such modifications and all rights associated therewith to Telerik.
+ 
+5. You acknowledge that the Software’s minified code and source code is confidential and contains valuable and proprietary trade secrets of Telerik.  Under no circumstances may any portion of the Software’s minified code, source code or any modified version of the source code be distributed, disclosed or otherwise made available to any third party.
 
 IV. DELIVERY
 
@@ -42,11 +46,11 @@ Telerik shall make the Software available to Licensee for downloading in electro
 
 V. INTELLECTUAL PROPERTY
 
-All title and ownership rights in and to the Software (including but not limited to any images, photographs, animations, video, audio, music, text embedded in the Software), the intellectual property embodied in the Software, and any trademarks or service marks of Telerik that are used in connection with the Software are and shall at all times remain exclusively owned by Telerik and its licensors.  All title and intellectual property rights in and to the content that may be accessed through use of the Software is the property of the respective content owner and may be protected by applicable copyright or other intellectual property laws and treaties.  This Agreement grants you no rights to use such content.
+All title and ownership rights in and to the Software (including but not limited to any images, photographs, animations, video, audio, music, or text embedded in the Software), the intellectual property embodied in the Software, and any trademarks or service marks of Telerik that are used in connection with the Software are and shall at all times remain exclusively owned by Telerik and its licensors.  All title and intellectual property rights in and to the content that may be accessed through use of the Software is the property of the respective content owner and may be protected by applicable copyright or other intellectual property laws and treaties.  This Agreement grants you no rights to use such content. Any Open Source Software that may be delivered by Telerik embedded in or in association with Telerik products is provided pursuant to the open source license applicable to the software and subject to the disclaimers and limitations on liability set forth in such license.
 
 VI. PRE-RELEASE CODE; NO WARRANTY
 
-THE SOFTWARE CONTAINS PRERELEASE CODE THAT IS NOT AT THE LEVEL OF PERFORMANCE AND COMPATIBILITY OF A FINAL, GENERALLY AVAILABLE, PRODUCT OFFERING AND MAY NOT OPERATE CORRECTLY. YOUR EXERCISE OF ANY RIGHTS UNDER THIS BETA LICENSE IS AT YOUR SOLE DISCRETION AND YOU ASSUME ALL RESPONSIBILITY FOR, AND RISK OF, ANY AND ALL DAMAGES THAT MAY RESULT FROM OR IN CONNECTION WITH THE EXERCISE OF SUCH RIGHTS, INCLUDING WITHOUT LIMITATION THE LOSS OF ANY DATA OR OTHER CONTENT.
+THE SOFTWARE CONTAINS PRERELEASE CODE THAT IS NOT AT THE LEVEL OF PERFORMANCE AND COMPATIBILITY OF A FINAL, GENERALLY AVAILABLE PRODUCT OFFERING AND MAY NOT OPERATE CORRECTLY. YOUR EXERCISE OF ANY RIGHTS UNDER THIS BETA LICENSE IS AT YOUR SOLE DISCRETION AND YOU ASSUME ALL RESPONSIBILITY FOR, AND RISK OF, ANY AND ALL DAMAGES THAT MAY RESULT FROM OR IN CONNECTION WITH THE EXERCISE OF SUCH RIGHTS, INCLUDING WITHOUT LIMITATION THE LOSS OF ANY DATA OR OTHER CONTENT.
 
 THE SOFTWARE IS LICENSED ‘AS IS’.  YOU BEAR THE RISK OF USING IT. TELERIK GIVES NO EXPRESS WARRANTIES, GUARANTEES OR CONDITIONS.  YOU MAY HAVE ADDITIONAL RIGHTS UNDER YOUR LOCAL LAWS WHICH THIS AGREEMENT CANNOT CHANGE.  TO THE EXTENT PERMITTED UNDER YOUR LOCAL LAWS, TELERIK EXCLUDES THE IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
 
@@ -56,11 +60,11 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL TELERIK BE L
 
 VIII. TERM AND TERMINATION
 
-Unless terminated earlier, this agreement shall terminate 160 days from the date You downloaded the Software. Telerik may terminate this agreement at any time upon written notice to You. This agreement shall terminate immediately if You breach the terms and conditions of this agreement.  Upon termination of this agreement for any reason, all licenses granted to You under this agreement shall terminate.
+Unless terminated earlier, this agreement shall terminate upon release of a commercial version of Kendo UI Complete for PHP. Telerik may terminate this agreement at any time upon written notice to You. This agreement shall terminate immediately if You breach the terms and conditions of this agreement.  Upon termination of this agreement for any reason, all licenses granted to You under this agreement shall terminate.
 
 IX. CONFIDENTIALITY
 
-Except as otherwise provided herein, You expressly undertake to retain in confidence all information and know-how transmitted or disclosed to You that Telerik has identified as being proprietary and/or confidential or that, by the nature of the circumstances surrounding the disclosure, ought in good faith to be treated as proprietary and/or confidential, and expressly undertake to make no use of such information and know-how except under the terms and during the existence of this Agreement.  However, You shall have an obligation to maintain the confidentiality of information that (i) You received rightfully from a third party without an obligation to maintain such information in confidence; (ii) Telerik has disclosed to a third party without any obligation to maintain such information in confidence; (iii) was known to You prior to its disclosure by Telerik; or (iv) is independently developed by You without use of the confidential information of Telerik.  Without limiting the foregoing, Licensee shall treat any source code for the Software as confidential information and shall not disclose, disseminate, or distribute such materials to any third party without Telerik’s prior written permission.  Each party’s obligations under this Section shall apply at all times during the term of this agreement and for ten (10) years following termination of this agreement.
+Except as otherwise provided herein, You expressly undertake to retain in confidence all information and know-how transmitted or disclosed to You that Telerik has identified as being proprietary and/or confidential or that, by the nature of the circumstances surrounding the disclosure, ought in good faith to be treated as proprietary and/or confidential, and expressly undertake to make no use of such information and know-how except under the terms and during the existence of this Agreement.  However, You shall have an obligation to maintain the confidentiality of information that (i) You received rightfully from a third party without an obligation to maintain such information in confidence; (ii) Telerik has disclosed to a third party without any obligation to maintain such information in confidence; (iii) was known to You prior to its disclosure by Telerik; or (iv) is independently developed by You without use of the confidential information of Telerik.  Without limiting the foregoing, Licensee shall treat any source code for the Software as confidential information and shall not disclose, disseminate, or distribute such materials to any third party without Telerik’s prior written permission.  Each party’s obligations under this Section 10 shall apply at all times during the term of this Agreement and for five (5) years following termination of this Agreement, provided, however, that (i) obligations with respect to source code shall survive in perpetuity and (ii) trade secrets shall be maintained as such until they fall into the public domain.
 
 X. FEEDBACK
 
@@ -76,7 +80,7 @@ You may not assign, sublicense, sub-contract, or otherwise transfer this agreeme
 
 XIII. SURVIVAL
 
-Sections V, VI, VII, and VIII, IX, X, XI, XII, XIII, XIV and any confidentiality obligations set forth herein shall survive the expiration or termination of this Agreement.
+Sections III.5, V, VI, VII, VIII, IX, X, XI, XII, XIII, XIV and any confidentiality obligations set forth herein shall survive the expiration or termination of this Agreement.
 
 XIV. Force Majeure
 
