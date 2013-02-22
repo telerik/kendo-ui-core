@@ -14,9 +14,9 @@ public class EventsController {
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("items", new DropDownListItem[] {
-                new DropDownListItem("Item 1", "1"),
-                new DropDownListItem("Item 2", "2"),
-                new DropDownListItem("Item 3", "3")
+                new DropDownListItem("Item1", "1"),
+                new DropDownListItem("Item2", "2"),
+                new DropDownListItem("Item3", "3")
         });
         
         return "web/dropdownlist/events";

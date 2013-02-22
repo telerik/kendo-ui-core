@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
     <div>
-        <kendo:dropDownList name="input" open="onOpen" close="onClose" change="onChange" select="onSelect"
+        <kendo:dropDownList name="dropdownlist" open="onOpen" close="onClose" change="onChange" select="onSelect"
             dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>
