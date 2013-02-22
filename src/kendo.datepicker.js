@@ -382,6 +382,39 @@ kendo_module({
             });
         },
 
+        readonly: function(readonly) {
+            var that = this,
+                icon = that._dateIcon.off(ns),
+                wrapper = that._inputWrapper.off(ns),
+                element = that.element;
+
+            if (readonly === false) {
+                wrapper
+                    .removeClass(STATEDISABLED)
+                    .addClass(DEFAULT);
+
+                element.attr(DISABLED, false)
+                       .attr("readonly", false)
+                       .attr(ARIA_DISABLED, false);
+                       .attr("aria-readonly", false);
+            } else {
+                wrapper
+                    .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
+                    .on(HOVEREVENTS, that._toggleHover);
+
+
+                element.attr(DISABLED, false)
+                       .attr("readonly", true)
+                       .attr(ARIA_DISABLED, false);
+                       .attr("aria-readonly", true);
+
+                icon.on(CLICK, proxy(that._click, that))
+                    .on(MOUSEDOWN, preventDefault);
+            }
+
+        },
+
         enable: function(enable) {
             var that = this,
                 icon = that._dateIcon.off(ns),
