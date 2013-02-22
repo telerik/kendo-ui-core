@@ -42,6 +42,24 @@ class SparklineSeriesItem extends \kendo\SerializableObject {
     }
 
     /**
+    * The data field containing the current value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItem
+    */
+    public function currentField($value) {
+        return $this->setProperty('currentField', $value);
+    }
+
+    /**
+    * The data field containing the target value.** Available for bullet and verticalBullet series. **** Available for pie series **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItem
+    */
+    public function targetField($value) {
+        return $this->setProperty('targetField', $value);
+    }
+
+    /**
     * The data field containing the series value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem

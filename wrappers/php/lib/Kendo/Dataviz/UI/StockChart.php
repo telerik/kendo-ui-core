@@ -28,6 +28,24 @@ It is used as a default field for all date axes, including the navigator pane.Th
     }
 
     /**
+    * The data field containing the current value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChart
+    */
+    public function series.currentField($value) {
+        return $this->setProperty('series.currentField', $value);
+    }
+
+    /**
+    * The data field containing the target value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChart
+    */
+    public function series.targetField($value) {
+        return $this->setProperty('series.targetField', $value);
+    }
+
+    /**
     * Default options for all chart axes.
     * @param  $value
     * @return \Kendo\Dataviz\UI\StockChart

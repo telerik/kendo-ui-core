@@ -445,6 +445,24 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
+    * The data field containing the current value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function currentField($value) {
+        return $this->setProperty('currentField', $value);
+    }
+
+    /**
+    * The data field containing the target value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function targetField($value) {
+        return $this->setProperty('targetField', $value);
+    }
+
+    /**
     * The target of the bullet chart.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemTarget|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
