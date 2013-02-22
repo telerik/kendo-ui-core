@@ -7,10 +7,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($type == 'save') {
         $files = $_FILES['files'];
-        // save the files
+        // Save the uploaded files
+        /*
+        for ($index = 0; $index < count($files['name']); $index++) {
+            $file = $files['tmp_name'][$index];
+            if (is_uploaded_file($file)) {
+                move_uploaded_file($file, './' . $files['name'][$index]);
+            }
+        }
+        */
     } else if ($type == 'remove') {
         $fileNames = $_POST['fileNames'];
-        // delete the files
+        // Delete uploaded files
+        /*
+        for ($index = 0; $index < count($fileNames); $index++) {
+            unlink('./' . $fileNames[$index]);
+        }
+        */
     }
 
     // Return an empty string to signify success
@@ -39,7 +52,8 @@ $upload = new \Kendo\UI\Upload('files[]');
 $upload->async(array(
         'saveUrl' => 'async.php?type=save',
         'removeUrl' => 'async.php?type=remove',
-        'autoUpload' => true
+        'autoUpload' => true,
+        'removeField' => 'fileNames[]'
        ));
 
 echo $upload->render();
