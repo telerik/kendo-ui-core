@@ -130,7 +130,7 @@ var ImageCommand = Command.extend({
             }
         }
 
-        dialogWidth = showBrowser ? { width: "960px" } : {};
+        dialogWidth = showBrowser ? { width: "960px", height: "630px" } : {};
 
         dialog = EditorUtils.createDialog(that._dialogTemplate(showBrowser), that.editor, extend(dialogWidth, options.dialogOptions, {
             title: messages.insertImage,
