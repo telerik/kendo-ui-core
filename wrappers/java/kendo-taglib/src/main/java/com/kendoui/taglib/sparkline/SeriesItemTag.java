@@ -125,6 +125,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("colorField", value);
     }
 
+    public String getCurrentField() {
+        return (String)getProperty("currentField");
+    }
+
+    public void setCurrentField(String value) {
+        setProperty("currentField", value);
+    }
+
     public String getDashType() {
         return (String)getProperty("dashType");
     }
@@ -251,6 +259,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setStartAngle(float value) {
         setProperty("startAngle", value);
+    }
+
+    public String getTargetField() {
+        return (String)getProperty("targetField");
+    }
+
+    public void setTargetField(String value) {
+        setProperty("targetField", value);
     }
 
     public String getType() {

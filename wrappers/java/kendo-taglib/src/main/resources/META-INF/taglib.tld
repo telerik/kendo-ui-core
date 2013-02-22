@@ -1589,6 +1589,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The data field containing the current value.** Available for bullet and verticalBullet series. **</description>
+            <name>currentField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The series line dash type.** Applicable only to line and scatterLine series **</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1745,6 +1751,12 @@ If not specified, the available space is split evenly between the series.Availab
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The data field containing the target value.** Available for bullet and verticalBullet series. **</description>
+            <name>targetField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The type of the series. Available types:</description>
@@ -11242,6 +11254,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The data field containing the current value.** Available for bullet and verticalBullet series. **</description>
+            <name>currentField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The series line dash type.** Applicable only to line series **</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11338,6 +11356,12 @@ If not specified, the available space is split evenly between the series.Availab
             <name>startAngle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The data field containing the target value.** Available for bullet and verticalBullet series. **** Available for pie series **</description>
+            <name>targetField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The type of the series. Available types:</description>
@@ -13020,6 +13044,18 @@ and is about to render it.</description>
             <description>The field containing the point date.
 It is used as a default field for all date axes, including the navigator pane.The data item field value must be either:</description>
             <name>dateField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The data field containing the current value.** Available for bullet and verticalBullet series. **</description>
+            <name>series.currentField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The data field containing the target value.** Available for bullet and verticalBullet series. **</description>
+            <name>series.targetField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>

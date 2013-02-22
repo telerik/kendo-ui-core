@@ -180,6 +180,22 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setProperty("dateField", value);
     }
 
+    public String getSeries.currentField() {
+        return (String)getProperty("series.currentField");
+    }
+
+    public void setSeries.currentField(String value) {
+        setProperty("series.currentField", value);
+    }
+
+    public String getSeries.targetField() {
+        return (String)getProperty("series.targetField");
+    }
+
+    public void setSeries.targetField(String value) {
+        setProperty("series.targetField", value);
+    }
+
     public Object getSeriesColors() {
         return (Object)getProperty("seriesColors");
     }
