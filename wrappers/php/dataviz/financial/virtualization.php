@@ -1,19 +1,5 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
-require_once '../../lib/DataSourceResult.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Content-Type: application/json');
-
-    $request = json_decode(file_get_contents('php://input'));
-
-    $result = new DataSourceResult('sqlite:../../sample.db');
-
-    echo json_encode($result->read('Intraday', array('Date', 'Open', 'High', 'Low', 'Close'), $request));
-
-    exit;
-}
-
 require_once '../../include/header.php';
 
 $series = new \Kendo\Dataviz\UI\StockChartSeriesItem();
@@ -25,7 +11,7 @@ $series->type('candlestick')
 
 
 $transport = new \Kendo\Data\DataSourceTransport();
-$transport->read(array('url' => 'virtualization.php', 'type' => 'POST', 'dataType' => 'json'))
+$transport->read(array('url' => '_intraday.php', 'type' => 'POST', 'dataType' => 'json'))
           ->parameterMap('function(data) {
               return kendo.stringify(data);
           }');
