@@ -13,7 +13,7 @@
                 <tr>
                     <td class="item">Temperature</td>
                     <td class="spark"><span id="temp-log"></span></td>
-                    <td class="value">22<span>&deg;C</span></td>
+                    <td class="value">21<span>&deg;C</span></td>
                 </tr>
                 <tr>
                     <td class="item">Humidity</td>
@@ -34,15 +34,15 @@
             <h1>
                 Conditioner working time
             </h1>
-            <div class="stats">
-                <span id="stats-mon"></span>
-                <span id="stats-tue"></span>
-                <span id="stats-wed"></span>
-                <span id="stats-thu"></span>
-                <span id="stats-fri"></span>
-                <span id="stats-sat"></span>
-                <span id="stats-sun"></span>
-            </div>
+            <ul class="pie-list stats">
+                <li>MON <span id="stats-mon"></span></li>
+                <li>TUE <span id="stats-tue"></span></li>
+                <li>WED <span id="stats-wed"></span></li>
+                <li>THU <span id="stats-thu"></span></li>
+                <li>FRI <span id="stats-fri"></span></li>
+                <li>SAT <span id="stats-sat"></span></li>
+                <li>SUN <span id="stats-sun"></span></li>
+            </ul>
         </div>
     </div>
 
@@ -53,7 +53,7 @@
                 936, 968, 1025, 999, 998, 1014, 1017, 1010, 1010, 1007,
                 1004, 988, 990, 988, 987, 995, 946, 954, 991, 984,
                 974, 956, 986, 936, 955, 1021, 1013, 1005, 958, 953,
-                952, 940, 937, 980, 966, 965, 928, 916, 910, 908
+                952, 940, 937, 980, 966, 965, 928, 916, 910, 980
             ]);
 
             // User-set Sparkline type
@@ -79,7 +79,7 @@
                     63, 64, 63, 67, 58, 56, 53, 59, 51, 54
                 ],
                 tooltip: {
-                    format: "{0} &deg;C"
+                    format: "{0} %"
                 }
             });
 
@@ -146,28 +146,20 @@
     <style scoped>
         .chart-wrapper {
             width: 460px;
-            margin: 0 auto 30px auto;            
-            color: #124251;
+            height: 100%;
+            margin: 0 auto 30px auto;
+            padding: 0 0 30px 0;
             font-weight: bold;            
             text-transform: uppercase;
         }
         .climate, .temperature, .conditioner {
             margin: 0 30px;
-            padding: 30px 0;
-            border-top: 0;
-            border-bottom: 1px solid #72c6d0;
-        }
-        .temperature, .conditioner {
-            border-top: 1px solid #afe0e5;
-        }
-        .conditioner {
-            border-bottom: 0;
+            padding: 30px 0 0 0;
         }
         h1 {
             margin-bottom: 20px;
             font-size: 1.2em;
         }
-
         .history {
             border-collapse: collapse;
             width: 100%;
@@ -198,6 +190,15 @@
         .stats {
             text-align: center;
         }
+        .pie-list {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .pie-list li {
+            display: inline-block;
+            width: 54px;
+        }
         #stats-mon,
         #stats-tue,
         #stats-wed,
@@ -205,7 +206,8 @@
         #stats-fri,
         #stats-sat,
         #stats-sun {
-            width: 50px;
+            display: block;
+            width: 54px;
             line-height: 50px;
         }
         #temp-range {
