@@ -18,7 +18,7 @@ border:0;
 }
 
 html {
-    font: 75% 'Droid Sans', serif;
+    font: 75% 'Droid Sans', sans-serif;
     height: 100%;
     background: #0c0c0c url('images/background-image.png')repeat left top;
 }
@@ -172,7 +172,7 @@ h1 a{
 	font-size: 11px;
 	line-height: 20px;
 	vertical-align: middle;
-	
+
 }
 
 .button{
@@ -189,7 +189,7 @@ h3{
 #shopping-cart{
 	position: relative;
 	text-align: right;
-	float: right; 
+	float: right;
 	width: 200px;
 	background-color: #1f1f1f;
 	height: 100%;
@@ -314,7 +314,7 @@ h3{
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: rgba(0,0,0,0);	
+	background-color: rgba(0,0,0,0);
 }
 
 .view-selected-items:hover:after {
@@ -325,7 +325,7 @@ h3{
 }
 
 #main-section{
-	padding-top: 21px; 
+	padding-top: 21px;
 }
 
 #main-section ul li {
@@ -354,7 +354,7 @@ h3{
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: rgba(0,0,0,0);	
+	background-color: rgba(0,0,0,0);
 }
 
 .view-details:hover strong {
@@ -437,7 +437,7 @@ h3{
 	padding-right: 20px;
 	line-height: .9em;
 	overflow: hidden;
-}	
+}
 
 .total-price span{
 	font-size: 14px;
@@ -486,21 +486,21 @@ h3{
 	width: 100px;
 	background: #000 url('images/nav-prev.png') no-repeat center;
 }
-	
+
 #navigate-prev:hover{
 	background: #d60041 url('images/nav-prev.png') no-repeat center;
-}	
-	
+}
+
 #description{
 	display: inline-block;
 	vertical-align: top;
 	color: #2e2e2e;
-}	
-	
+}
+
 .main-image{
 	width: 200px;
 	height: 200px;
-}	
+}
 
 #description h1{
 	padding-top: 20px;
@@ -510,7 +510,7 @@ h3{
 	line-height: 27px;
 	font-weight: normal;
 	display: inline-block;
-}	
+}
 
 #description p{
 	padding-left: 20px;
@@ -673,7 +673,7 @@ p#details-total-price span{
     margin: 0;
 	font-size: 12px;
 	line-height: 16px;
-}	
+}
 
 #nutrition-info dl dd{
 	color: #2e2e2e;
@@ -692,8 +692,8 @@ p#details-total-price span{
 
 #navigate-next:hover{
 	background: #d60041 url('images/nav-next.png') no-repeat center;
-}	
-	
+}
+
 
 #details-top-image{
 	background: url('images/sushi-preview.png') no-repeat top left;
@@ -744,7 +744,7 @@ padding-right: 40px;
 }
 
 table{
-	width: 100%;	
+	width: 100%;
 	padding-left: 100px;
 	padding-right: 100px;
 	border-spacing: 0;
@@ -765,8 +765,8 @@ table tbody tr td{
 	border-bottom: 1px solid #dadada;
 	padding: 0;
 }
- 
-table tbody tr{ 
+
+table tbody tr{
 	padding: 0;
 }
 
@@ -777,12 +777,12 @@ table thead th:first-child{
 }
 
 table tbody td:first-child + th {
-	text-align: center;	
+	text-align: center;
 }
 
 table thead th:first-child + th + th {
 	font-size: 13px;
-	text-align: right;	
+	text-align: right;
 }
 
 table tbody input{
@@ -799,13 +799,13 @@ table tbody td:first-child {
 }
 
 table tbody td:first-child + td {
-	text-align: left;	
+	text-align: left;
 	width: 70px;
 }
 
 table tbody td img{
 	display: inline-block;
-}	
+}
 
 table tbody td span{
 	display: inline-block;
@@ -817,13 +817,12 @@ table tbody td span{
 
 table tbody td:first-child + td + td {
 	font-size: 21px;
-	text-align: right;	
+	text-align: right;
 	width: 200px;
 }
 
 table tbody td:first-child + td + td p{
 
-	
 }
 
 .table-price{

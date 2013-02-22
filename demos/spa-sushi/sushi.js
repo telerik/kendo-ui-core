@@ -88,6 +88,7 @@ var checkoutModel = kendo.observable({
 
 var indexModel = kendo.observable({
     items: items,
+    cart: cart,
 
     addToCart: function(e) {
         cart.add(e.data);

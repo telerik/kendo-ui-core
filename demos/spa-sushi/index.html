@@ -11,6 +11,7 @@
         <script src="../../src/kendo.view.js"></script>
         <script src="../../src/kendo.listview.js"></script>
         <script src="sushi.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
         <link href="sushi.css" rel="stylesheet" />
     </head>
     <body>
@@ -20,8 +21,9 @@
             <div id="wrapper">
                 <div id="header">
                     <h1 class="logo"><a href="#/"></a></h1>
-                    <div id="cart"> Your Cart (<span data-bind="text: cartContentsCount"></span>) <a data-bind="visible: checkoutIsVisible" href="#/checkout">Checkout</a></div>
-                    <ul data-role="listview" data-bind="source: cart.contents" data-template="cart-item" id="cart-contents"></ul>
+
+                    <a id="cart-info" href="#">Shopping Cart<span><span data-bind="text: cartContentsCount"></span> items</span></a>
+                    <!-- <div id="cart"> Your Cart () <a data-bind="visible: checkoutIsVisible" href="#/checkout">Checkout</a></div> -->
                 </div>
 
                 <p data-bind="visible: cart.cleared"> Thank you for your order!</p>
@@ -34,7 +36,24 @@
         </script>
 
         <script type="text/x-kendo-template" id="index">
-            <ul data-role="listview" data-bind="source: items" data-template="item" id="main"></ul>
+            <div id="main-section">
+                <div id="shop-info">
+
+                    <ul data-role="listview" data-bind="source: cart.contents" data-template="cart-item" id="shop-list"></ul>
+
+                    <div id="shopping-cart">
+                        <span id="arrow"></span>
+                        <h3>your<br/>shopping cart</h3>
+                        <p class="total-price"><span>$</span>86.00</p>
+                        <a id="empty-cart" href="#">empty cart</a><a id="checkout" href="#">checkout</a>
+                    </div>
+                </div>
+
+                <ul data-role="listview" data-bind="source: items" data-template="item" id="main"></ul>
+                <ul>
+                </ul>
+            </div>
+
         </script>
 
         <script type="text/x-kendo-template" id="checkout">
@@ -59,18 +78,24 @@
         </script>
 
         <script type="text/x-kendo-template" id="cart-item">
-        <li>
-            <a href="\#/menu/#: item.id #"><img src="http://demos.kendoui.com/sushi/content/images/75/#= item.image #" /></a>
-            X <span data-bind="text: quantity"></span>
-            <button data-bind="click: removeFromCart">X</button>
-        </li>
+            <li class="selected-products-list">
+                <a data-bind="click: removeFromCart" class="view-selected-items"><img
+                    width="100" height="100"
+                    src="http://demos.kendoui.com/sushi/content/images/75/#= item.image #" /></a>
+                <span class="selected-image-price"><span data-bind="text: quantity"></span>x<span data-bind="text: price"></span></span>
+            </li>
         </script>
 
         <script type="text/x-kendo-template" id="item">
-        <li>
-            <a href="\#/menu/#: id #"><img src="http://demos.kendoui.com/sushi/content/images/200/#= image #" /></a>
-            #: name # <button data-bind="click: addToCart">Add to cart</button>
-        </li>
+            <li class="products">
+                <a class="view-details" href="\#/menu/#: id #">
+                    <img class="main-image" src="http://demos.kendoui.com/sushi/content/images/200/#= image #" alt="#: name#" title="#: name #" />
+                    <strong data-bind="text: name"></strong>
+                    <span class="price"><span>$</span>#: price #</span>
+                </a>
+
+                <button class="add-to-cart" data-bind="click: addToCart">Add to cart</button>
+            </li>
         </script>
     </body>
 </html>
