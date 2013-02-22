@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section" style="width: 250px;">
-    <label for="products">Select Title:</label>
+    <label for="products">Select product:</label>
     <%= Html.Kendo().DropDownList()
           .Name("products")
           .DataTextField("ProductName")

@@ -6,8 +6,8 @@
 <c:url value="/web/dropdownlist/remote-data/read" var="readUrl" />
 
 <demo:header />
-    <div>
-        <label for="products">Choose product:</label>
+    <div class="demo-section" style="width: 250px;">
+        <label for="products">Select product:</label>
         
         <kendo:dropDownList name="products" dataTextField="productName" dataValueField="productId">
             <kendo:dataSource>
