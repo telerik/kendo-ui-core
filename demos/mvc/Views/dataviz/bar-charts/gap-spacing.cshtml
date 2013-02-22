@@ -24,30 +24,39 @@
     </div>
 </div>
 
-<script>    function createChart() {
+<script>
+    function createChart() {
         $("#chart").kendoChart({
+            title: {
                 text: "Site Visitors Stats /thousands/"
-            },            legend: {
+            },
+            legend: {
                 position: "bottom"
-            },            seriesDefaults: {
+            },
+            seriesDefaults: {
                 type: "column"
-            },            series: [{
+            },
+            series: [{
                 name: "Total Visits",
                 data: [56000, 63000, 74000, 91000, 117000, 138000]
             }, {
                 name: "Unique visitors",
                 data: [52000, 34000, 23000, 48000, 67000, 83000]
-            }],            valueAxis: {
+            }],
+            valueAxis: {
                 line: {
                     visible: false
                 }
-            },            categoryAxis: {
+            },
+            categoryAxis: {
                 categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                 majorGridLines: {
                     visible: false
                 }
-            },            tooltip: {
-                visible: true,                format: "{0}"
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}"
             }
         });
     }
@@ -57,10 +66,7 @@
             // Initialize the chart with a delay to make sure
             // the initial animation is visible
             createChart();
-
-            $("#example").bind("kendo:skinChange", function (e) {
-                createChart();
-            });
+            $("#example").bind("kendo:skinChange", createChart);
 
             var chart = $("#chart").data("kendoChart"),
                 firstSeries = chart.options.series;
