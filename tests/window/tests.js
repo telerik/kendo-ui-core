@@ -16,6 +16,10 @@ tests.push(
         title: "window mvvm"
     },
     {
+        page: "window/interaction.html",
+        title: "window api"
+    },
+    {
         page: "window/lint.html",
         title: "window lint"
     },

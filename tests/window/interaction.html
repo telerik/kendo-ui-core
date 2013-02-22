@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.window Tests</title>
+        <script src="test-scripts.js"></script>
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Window Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture"></div>
+        <ul id="log"></ul>
+
+        <script>
+            var Window = kendo.ui.Window;
+
+            module("interaction", {
+                teardown: function() {
+                    $(".k-widget").remove();
+                }
+            });
+
+            function createWindow(options, element) {
+                element = element || $("<div class='wnd' />").appendTo(document.body);
+                return element.kendoWindow(options).data("kendoWindow");
+            }
+
+            test("double-clicking refresh does not maximize window", function() {
+                var dialog = createWindow({
+                    actions: [ "refresh" ]
+                });
+
+                dialog.wrapper.find(".k-i-refresh").trigger("dblclick");
+
+                ok(!dialog.options.isMaximized);
+            });
+
+        </script>
+    </body>
+</html>

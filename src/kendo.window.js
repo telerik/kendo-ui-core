@@ -189,7 +189,13 @@ kendo_module({
                 .on("blur" + NS, function() { wrapper.removeClass(KFOCUSEDSTATE); });
 
             if (options.resizable) {
-                wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
+                wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, function(e) {
+                    if (!$(e.target).closest(".k-window-action").length) {
+                        that.toggleMaximization();
+                    }
+
+                    return this;
+                });
 
                 each("n e s w se sw ne nw".split(" "), function(index, handler) {
                     wrapper.append(templates.resizeHandle(handler));
