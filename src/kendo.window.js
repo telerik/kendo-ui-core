@@ -401,6 +401,10 @@ kendo_module({
             var target = $(e.target).closest(".k-window-action").find(".k-icon"),
                 that = this;
 
+            if (that._closing) {
+                return;
+            }
+
             each({
                 "k-i-close": function() { that._close(true); },
                 "k-i-maximize": that.maximize,
@@ -478,6 +482,8 @@ kendo_module({
                 overlay;
 
             if (!that.trigger(OPEN)) {
+                that._closing = false;
+
                 that.toFront();
 
                 that.element.focus();
@@ -526,6 +532,7 @@ kendo_module({
                 shouldHideOverlay, overlay;
 
             if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !!userTriggered })) {
+                that._closing = true;
                 options.visible = false;
 
                 $(KWINDOW).each(function(i, element) {
@@ -638,6 +645,10 @@ kendo_module({
         },
 
         toggleMaximization: function () {
+            if (this._closing) {
+                return this;
+            }
+
             return this[this.options.isMaximized ? "restore" : "maximize"]();
         },
 
