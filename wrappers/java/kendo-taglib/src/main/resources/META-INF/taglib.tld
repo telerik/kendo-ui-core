@@ -13048,18 +13048,6 @@ It is used as a default field for all date axes, including the navigator pane.Th
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The data field containing the current value.** Available for bullet and verticalBullet series. **</description>
-            <name>series.currentField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The data field containing the target value.** Available for bullet and verticalBullet series. **</description>
-            <name>series.targetField</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
             <name>seriesColors</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14928,6 +14916,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The data field containing the current value.** Available for bullet and verticalBullet series. **</description>
+            <name>currentField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The series line dash type.** Applicable only to line series **</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15029,6 +15023,12 @@ Available for column series.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The data field containing the target value.** Available for bullet and verticalBullet series. **</description>
+            <name>targetField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The type of the series. Available types:</description>
