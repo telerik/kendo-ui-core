@@ -1,34 +1,110 @@
 <div id="example" class="k-content">
     <div class="chart-wrapper">
-        <div id="chart" style="height: 100px;"></div>
+        <div id="chart-mmHg"></div>
+        <div id="chart-hPa"></div>
     </div>
     <script>
         function createChart() {
-            $("#chart").kendoChart({
+            $("#chart-mmHg").kendoChart({
                 legend: {
                     visible: false
                 },
                 series: [{
-                    type: "bullet",
-                    data: [[2,3]]
+                    type: "verticalBullet",
+                    data: [[750, 762.5], [754, 768.5], [762, 770], [764, 773], [753, 760], [748, 765], [740, 760], [755, 758], [765, 768], [776, 783], [768, 770], [760, 762.5], [763, 768], [758, 766]],
+                    color: "#ffffff",
+                    opacity: .8,
+                    target: {
+                        color: "#ffffff"
+                    }
                 }],
                 categoryAxis: {
-                    categories: ["A"]
+                    majorGridLines: {
+                        visible: false
+                    },
+                    majorTicks: {
+                        visible: false
+                    },
+                    title: {
+                        text: "mmHg"
+                    },
+                    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                 },
-                valueAxis: {
+                valueAxis: [{
                     plotBands: [{
-                        from: 0, to: 1, color: "red", opacity: 0.5
-                    }, {
-                        from: 1, to: 2.5, color: "green", opacity: 0.5
-                    }, {
-                        from: 2.5, to: 4, color: "blue", opacity: 0.5
+                        from: 772, to: 790, color: "#2890cc", opacity: .5
+                    },{
+                        from: 752, to: 772, color: "#2890cc", opacity: .7
+                    },{
+                        from: 715, to: 752, color: "#2890cc", opacity: .5
+                    },{
+                        from: 761, to: 761.5, color: "#ff0000", opacity: 1
                     }],
                     majorGridLines: {
                         visible: false
-                    }
-                },
+                    },
+                    min: 715,
+                    max: 790,
+                    minorTicks: {
+                        visible: true
+                    }                    
+                }],
                 tooltip: {
-                    visible: true
+                    visible: true,
+                    shared: true,
+                    template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+                }
+            });
+            
+            $("#chart-hPa").kendoChart({
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "verticalBullet",
+                    data: [[1001, 1017],[1005, 1024],[1016, 1026],[1019, 1030],[1004, 1013],[998, 1020],[987, 1013],[1006.5, 1010],[1020, 1023],[1035, 1044],[1025, 1026],[1013, 1017],[1017, 1023],[1010, 1021]],
+                    color: "#ffffff",
+                    opacity: .8,
+                    target: {
+                        color: "#ffffff"
+                    }
+                }],
+                categoryAxis: {
+                    majorGridLines: {
+                        visible: false
+                    },
+                    axisCrossingValue: 14,
+                    majorTicks: {
+                        visible: false
+                    },
+                    title: {
+                        text: "hPa"
+                    },
+                    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                },
+                valueAxis: [{
+                    plotBands: [{
+                        from: 1027, to: 1050, color: "#8ebc00", opacity: .6
+                    },{
+                        from: 1002, to: 1027, color: "#8ebc00", opacity: .8
+                    },{
+                        from: 955, to: 1002, color: "#8ebc00", opacity: .6
+                    },{
+                        from: 1014, to: 1014.5, color: "#ff0000", opacity: 1
+                    }],
+                    majorGridLines: {
+                        visible: false
+                    },
+                    min: 955,
+                    max: 1050,
+                    minorTicks: {
+                        visible: true
+                    }
+                }],
+                tooltip: {
+                    visible: true,
+                    shared: true,
+                    template: "Maximum: #= value.target # <br /> Average: #= value.current #"
                 }
             });
         }
@@ -47,19 +123,15 @@
     </script>
     <style scoped>
         .chart-wrapper {
-            position: relative;
+            padding-top: 20px;
         }
-
-        .chart-wrapper ul {
-            font-size: 11px;
-            margin: 63px 30px 0 0;
-            padding: 30px;
-            position: absolute;
-            right: 0;
-            top: 0;
-            text-transform: uppercase;
-            width: 146px;
-            height: 94px;
+        .chart-wrapper .k-chart {
+            width: 325px;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .chart-wrapper .k-tooltip {
+            text-align: left;
         }
     </style>
 </div>
