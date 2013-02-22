@@ -17,6 +17,9 @@
             <kendo:dataSource>
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${categoriesUrl}" type="POST" contentType="application/json"/>
+                   <kendo:dataSource-transport-parameterMap>
+                	   function(options){return JSON.stringify(options);}
+                   </kendo:dataSource-transport-parameterMap> 
                 </kendo:dataSource-transport>
                 <kendo:dataSource-schema data="data" total="total">
                 </kendo:dataSource-schema>
@@ -31,6 +34,9 @@
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${productsUrl}" type="POST" contentType="application/json"/>
+                   <kendo:dataSource-transport-parameterMap>
+                	   function(options){return JSON.stringify(options);}
+                   </kendo:dataSource-transport-parameterMap> 
                 </kendo:dataSource-transport>
                 <kendo:dataSource-schema data="data" total="total">
                 </kendo:dataSource-schema>
@@ -45,6 +51,9 @@
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${ordersUrl}" type="POST" contentType="application/json"/>
+                   <kendo:dataSource-transport-parameterMap>
+                	   function(options){return JSON.stringify(options);}
+                   </kendo:dataSource-transport-parameterMap> 
                 </kendo:dataSource-transport>
             </kendo:dataSource>
         </kendo:dropDownList>
