@@ -17,18 +17,20 @@
         <div id="application"></div>
 
         <script type="text/x-kendo-template" id="layout">
-            <header>
-                <h1>Kendo Sushi</h1>
-                <div id="cart"> Your Cart (<span data-bind="text: cartContentsCount"></span>) <a data-bind="visible: checkoutIsVisible" href="#/checkout">Checkout</a></div>
-                <ul data-role="listview" data-bind="source: cart.contents" data-template="cart-item" id="cart-contents"></ul>
-            </header>
+            <div id="wrapper">
+                <div id="header">
+                    <h1 class="logo"><a href="#/"></a></h1>
+                    <div id="cart"> Your Cart (<span data-bind="text: cartContentsCount"></span>) <a data-bind="visible: checkoutIsVisible" href="#/checkout">Checkout</a></div>
+                    <ul data-role="listview" data-bind="source: cart.contents" data-template="cart-item" id="cart-contents"></ul>
+                </div>
 
-            <p data-bind="visible: cart.cleared"> Thank you for your order!</p>
-            <section id="content"></section>
+                <p data-bind="visible: cart.cleared"> Thank you for your order!</p>
+                <section id="content"></section>
 
-            <footer>
-                <p>&copy; 2013. Made with love from your favorite HTML5 samurai.</p>
-            </footer>
+                <footer>
+                    <p>&copy; 2013. Made with love from your favorite HTML5 samurai.</p>
+                </footer>
+            </div>
         </script>
 
         <script type="text/x-kendo-template" id="index">
