@@ -51,6 +51,24 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The data field containing the current value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function currentField($value) {
+        return $this->setProperty('currentField', $value);
+    }
+
+    /**
+    * The data field containing the target value.** Available for bullet and verticalBullet series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function targetField($value) {
+        return $this->setProperty('targetField', $value);
+    }
+
+    /**
     * Sets the groupNameTemplate option of the StockChartSeriesItem.
     * Name template for auto-generated series when binding to grouped data.Template variables:
     * @param string $value The id of the element which represents the kendo template.
