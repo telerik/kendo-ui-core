@@ -22,8 +22,7 @@
                 <div id="header">
                     <h1 class="logo"><a href="#/"></a></h1>
 
-                    <a id="cart-info" href="#">Shopping Cart<span><span data-bind="text: cartContentsCount"></span> items</span></a>
-                    <!-- <div id="cart"> Your Cart () <a data-bind="visible: checkoutIsVisible" href="#/checkout">Checkout</a></div> -->
+                    <a id="cart-info" href="#">Shopping Cart<span><span data-bind="text: cart.contentsCount"></span> items</span></a>
                 </div>
 
                 <p data-bind="visible: cart.cleared"> Thank you for your order!</p>
@@ -37,27 +36,25 @@
 
         <script type="text/x-kendo-template" id="index">
             <div id="main-section">
-                <div id="shop-info">
+                <div id="shop-info" data-bind="attr: { class: cartContentsClass }">
 
                     <ul data-role="listview" data-bind="source: cart.contents" data-template="cart-item" id="shop-list"></ul>
 
                     <div id="shopping-cart">
                         <span id="arrow"></span>
                         <h3>your<br/>shopping cart</h3>
-                        <p class="total-price"><span>$</span>86.00</p>
-                        <a id="empty-cart" href="#">empty cart</a><a id="checkout" href="#">checkout</a>
+                        <p class="total-price" data-bind="html: totalPrice"></p>
+                        <a id="empty-cart" href="#" data-bind="click: emptyCart">empty cart</a><a id="checkout" href="#">checkout</a>
                     </div>
                 </div>
 
                 <ul data-role="listview" data-bind="source: items" data-template="item" id="main"></ul>
-                <ul>
-                </ul>
             </div>
 
         </script>
 
         <script type="text/x-kendo-template" id="checkout">
-            <h2>Your Order (<span data-bind="text: totalPrice"></span>)</h2>
+            <h2>Your Order ()</h2>
             <table data-role="listview" data-bind="source: cart.contents" data-template="large-cart-item" id="checkout"></table>
             <button data-bind="click: proceed">Checkout</button>
         </script>
@@ -82,7 +79,7 @@
                 <a data-bind="click: removeFromCart" class="view-selected-items"><img
                     width="100" height="100"
                     src="http://demos.kendoui.com/sushi/content/images/75/#= item.image #" /></a>
-                <span class="selected-image-price"><span data-bind="text: quantity"></span>x<span data-bind="text: price"></span></span>
+                <span class="selected-image-price"><span data-bind="text: quantity"></span>x<span data-bind="text: itemPrice"></span></span>
             </li>
         </script>
 

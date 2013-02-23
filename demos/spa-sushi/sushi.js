@@ -8,6 +8,10 @@ var cart = kendo.observable({
     contents: [],
     cleared: false,
 
+    contentsCount: function() {
+        return this.get("contents").length;
+    },
+
     add: function(item) {
         var found = false;
 
@@ -37,6 +41,11 @@ var cart = kendo.observable({
         }
     },
 
+    empty: function() {
+        var contents = this.get("contents");
+        contents.splice(0, contents.length);
+    },
+
     clear: function() {
         var contents = this.get("contents");
         contents.splice(0, contents.length);
@@ -46,22 +55,31 @@ var cart = kendo.observable({
 
 var layoutModel = kendo.observable({
     cart: cart,
+});
 
-    checkoutIsVisible: function() {
-        return this.cartContentsCount() > 0;
-    },
+var indexModel = kendo.observable({
+    items: items,
+    cart: cart,
 
-    cartContentsCount: function() {
-        return this.get("cart").get("contents").length;
+    cartContentsClass: function() {
+        return this.cart.contentsCount() > 0 ? "active" : "empty";
     },
 
     removeFromCart: function(e) {
         this.get("cart").remove(e.data);
-    }
-});
+    },
 
-var checkoutModel = kendo.observable({
-    cart: cart,
+    addToCart: function(e) {
+        cart.add(e.data);
+    },
+
+    emptyCart: function() {
+        cart.empty();
+    },
+
+    itemPrice: function(cartItem) {
+        return kendo.format("{0:c}", cartItem.item.price);
+    },
 
     totalPrice: function() {
         var price = 0,
@@ -76,22 +94,9 @@ var checkoutModel = kendo.observable({
         return kendo.format("{0:c}", price);
     },
 
-    removeFromCart: function(e) {
-        this.get("cart").remove(e.data);
-    },
-
     proceed: function(e) {
         this.get("cart").clear();
         sushi.navigate("/");
-    }
-});
-
-var indexModel = kendo.observable({
-    items: items,
-    cart: cart,
-
-    addToCart: function(e) {
-        cart.add(e.data);
     }
 });
 
@@ -115,7 +120,7 @@ var detailModel = kendo.observable({
 // Views and layouts
 var layout = new kendo.Layout("layout", { model: layoutModel });
 var index = new kendo.View("index", { model: indexModel });
-var checkout = new kendo.View("checkout", { model: checkoutModel });
+var checkout = new kendo.View("checkout");
 var detail = new kendo.View("detail", { model: detailModel });
 
 var sushi = new kendo.Router({
