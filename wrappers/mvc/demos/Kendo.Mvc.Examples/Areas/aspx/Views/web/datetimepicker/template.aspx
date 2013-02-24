@@ -11,17 +11,17 @@
         Apply special style for the birthdays.
     </p>
 </div>
-
-<%= Html.Kendo().DateTimePicker()
-      .Name("datetimepicker")
-      .Value(DateTime.Now)      
-      .Footer("Today - #=kendo.toString(data, 'd') #")
-      .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
-                         "<div class=\"birthday\"></div>" +
-                     "# } #" +
-                     "#= data.value #")
-%>
-
+<div class="demo-section">
+    <%= Html.Kendo().DateTimePicker()
+          .Name("datetimepicker")
+          .Value(DateTime.Now)      
+          .Footer("Today - #=kendo.toString(data, 'd') #")
+          .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
+                             "<div class=\"birthday\"></div>" +
+                         "# } #" +
+                         "#= data.value #")
+    %>
+</div>
 <script>
     var today = new Date(),
         birthdays = [
@@ -41,6 +41,11 @@
 </script>
 
 <style scoped="scoped">
+    .demo-section {
+        margin: 0 0;
+        width: 185px;
+    }
+
     .birthday {
         background: transparent url('<%= Url.Content("~/Content/web/calendar/cake.png") %>') no-repeat 0 50%;
         display: inline-block;
