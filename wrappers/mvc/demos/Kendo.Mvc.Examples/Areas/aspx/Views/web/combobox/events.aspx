@@ -4,28 +4,29 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<%= Html.Kendo().ComboBox()
-        .Name("combobox")
-        .DataTextField("Text")
-        .DataValueField("Value")
-        .BindTo(new List<SelectListItem>()
-        {
-            new SelectListItem() {
-                Text = "Item1", Value = "1"  
-            },
-            new SelectListItem() {
-                Text = "Item2", Value = "2"  
-            },
-            new SelectListItem() {
-                Text = "Item3", Value = "3"  
-            }
-        })
-        .Events(e =>
-        {
-            e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
-        })
-%>
-
+<div class="demo-section">
+    <%= Html.Kendo().ComboBox()
+            .Name("combobox")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .BindTo(new List<SelectListItem>()
+            {
+                new SelectListItem() {
+                    Text = "Item 1", Value = "1"  
+                },
+                new SelectListItem() {
+                    Text = "Item 2", Value = "2"  
+                },
+                new SelectListItem() {
+                    Text = "Item 3", Value = "3"  
+                }
+            })
+            .Events(e =>
+            {
+                e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
+            })
+    %>
+</div>
 <script>
     function open() {
         kendoConsole.log("event: open");
@@ -50,5 +51,7 @@
         }
     };
 </script>
-<div class="console"></div>
+<div class="demo-section">
+    <div class="console"></div>
+</div>
 </asp:Content>

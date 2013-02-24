@@ -461,7 +461,6 @@
     <Content Include="Views\web\combobox\api.cshtml" />
     <Content Include="Views\web\combobox\events.cshtml" />
     <Content Include="Views\web\combobox\index.cshtml" />
-    <Content Include="Views\web\combobox\remotedatasource.cshtml" />
     <Content Include="Views\web\combobox\template.cshtml" />
     <Content Include="Views\web\datasource\index.cshtml" />
     <Content Include="Views\web\datasource\local-operations.cshtml" />

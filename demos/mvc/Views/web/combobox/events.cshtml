@@ -1,6 +1,8 @@
 
         <div id="example" class="k-content">
-            <input id="input"/>
+            <div class="demo-section">
+                <input id="combobox"/>
+            </div>
             <script>
                 $(document).ready(function() {
                     function onOpen() {
@@ -40,7 +42,7 @@
                         { text: "Item 3", value:"3" }
                     ];
 
-                    $("#input").kendoComboBox({
+                    $("#combobox").kendoComboBox({
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: data,
@@ -52,5 +54,8 @@
                     });
                 });
             </script>
+            <div class="demo-section">
+                <div class="console"></div>
+            </div>
         </div>
-        <div class="console"></div>
+        

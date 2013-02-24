@@ -1,16 +1,16 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
-    <div>
-        <kendo:comboBox name="input" open="onOpen" close="onClose" change="onChange" dataBound="onDataBound" select="onSelect"
+    <div class="demo-section">
+        <kendo:comboBox name="combobox" open="onOpen" close="onClose" change="onChange" dataBound="onDataBound" select="onSelect"
             dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>
         </kendo:comboBox>
     </div>
-    
-    <div class="console"></div>
-    
+    <div class="demo-section">
+    	<div class="console"></div>
+    </div>
     <script>
         function onOpen() {
             if ("kendoConsole" in window) {
