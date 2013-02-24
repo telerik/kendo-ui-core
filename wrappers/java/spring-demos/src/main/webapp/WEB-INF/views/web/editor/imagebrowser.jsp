@@ -9,10 +9,13 @@
 <c:url value="/web/editor/imagebrowser/upload" var="transportUploadUrl" />
 <c:url value="/web/editor/imagebrowser/create" var="transportCreateUrl" />
 <c:url value="/web/editor/imagebrowser/destroy" var="transportDestroyUrl" />
-<c:url value="/resources/shared/imagebrowser/{0}" var="transportImageUrl" />
+<c:url value="/resources/web/editor/UserFiles/Images/{0}" var="transportImageUrl" />
 
 
 <kendo:editor name="editor" style="width:740px;height:440px">
+	<kendo:editor-tools>
+		<kendo:editor-tool name="insertImage"/>
+	</kendo:editor-tools>
 	<kendo:editor-imageBrowser>
 		<kendo:editor-imageBrowser-transport 
 			read="${ transportReadUrl }" 
