@@ -35,6 +35,12 @@
                         }
                     }
 
+                    function onDataBound(e) {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: dataBound");
+                        }
+                    }
+
                     var data = [
                             "Alabama",
                             "Alaska",
@@ -99,7 +105,8 @@
                         select: onSelect,
                         change: onChange,
                         close: onClose,
-                        open: onOpen
+                        open: onOpen,
+                        dataBound: onDataBound
                     });
                 });
             </script>

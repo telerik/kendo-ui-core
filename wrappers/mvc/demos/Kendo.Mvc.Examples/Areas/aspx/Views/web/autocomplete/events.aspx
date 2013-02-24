@@ -5,9 +5,13 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-<label for="states">Select a state in USA:</label>
-
-<%= Html.Kendo().AutoComplete()
+<div class="configuration k-widget k-header" style="width: 200px">
+    <span class="configHead">Events log</span>
+    <div class="console"></div>
+</div>
+<div id="taxi">
+    <label for="states">Select a state in USA:</label>
+    <%=Html.Kendo().AutoComplete()
         .Name("states")
         .BindTo(new string[]
         {
@@ -70,33 +74,73 @@
         })
         .Events(e =>
         {
-            e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
+            e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound");
         })
-%>
+    %>
+</div>
 
 <script>
-    function open() {
-        kendoConsole.log("event: open");
-    };
+    function onOpen() {
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event :: open");
+        }
+    }
 
-    function close() {
-        kendoConsole.log("event: close");
-    };
+    function onClose() {
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event :: close");
+        }
+    }
 
-    function change() {
-        kendoConsole.log("event: change");
-    };
+    function onChange() {
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event :: change");
+        }
+    }
 
-    function dataBound() {
-        kendoConsole.log("event: dataBound");
-    };
-
-    function select(e) {
+    function onSelect(e) {
         if ("kendoConsole" in window) {
             var dataItem = this.dataItem(e.item.index());
-            kendoConsole.log("event :: select (" + dataItem + ")" );
+            kendoConsole.log("event :: select (" + dataItem + ")");
         }
-    };
+    }
+
+    function onDataBound(e) {
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event :: dataBound");
+        }
+    }
 </script>
-<div class="console"></div>
+
+<style scoped>
+	#taxi {
+		width: 240px;
+		height: 160px;
+		padding: 80px 0 0 200px;
+		background: url('<%=Url.Content("~/content/web/autocomplete/taxi.png")%>') transparent no-repeat 0 0;
+		margin: 40px 0 30px 40px;
+	}
+	#taxi label {
+		display: block;
+		color: #333;
+		padding-bottom: 5px;
+	}
+	.k-autocomplete {
+		display: block;
+		clear: left;
+		width: 200px;
+		vertical-align: middle;
+	}
+	.configuration {
+		height: 360px;
+		margin-bottom: -21px;
+	}
+	.configuration .console {
+		background-color: transparent;
+		border: 0;
+		height: 320px;
+		overflow: auto;
+	}
+</style>
+
 </asp:Content>
