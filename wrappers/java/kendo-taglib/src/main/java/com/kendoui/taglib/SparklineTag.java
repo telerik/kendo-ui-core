@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.sparkline.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Span;
 import com.kendoui.taglib.json.Function;
 
 
@@ -15,6 +17,11 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
 
     public SparklineTag() {
         super("Sparkline");
+    }
+
+    @Override
+    public Element<?> createElement() {
+        return new Span();
     }
     
     @Override
