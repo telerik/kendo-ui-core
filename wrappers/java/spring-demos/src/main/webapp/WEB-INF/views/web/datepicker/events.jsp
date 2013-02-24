@@ -7,6 +7,9 @@
 	<kendo:datePicker name="datepicker" change="change" open="open" close="close">
 	</kendo:datePicker>
 </div>
+<div class="demo-section">
+    <div class="console"></div>
+</div>
 
 <script>
     function open() {
@@ -21,6 +24,5 @@
         kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
     }
 </script>
-<div class="console"></div>
 
 <demo:footer />

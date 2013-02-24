@@ -13,7 +13,9 @@
       })
 %>
 </div>
-
+<div class="demo-section">
+    <div class="console"></div>
+</div>
 <script>
     function open() {
         kendoConsole.log("Open");
@@ -27,5 +29,5 @@
         kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
     }
 </script>
-<div class="console"></div>
+
 </asp:Content>
