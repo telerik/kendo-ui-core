@@ -12,6 +12,8 @@
           .DataTextField("ProductName")
           .DataValueField("ProductID")
           .Filter("contains")
+          .MinLength(3)
+          .AutoBind(false)
           .DataSource(source => {
               source.Read(read =>
               {

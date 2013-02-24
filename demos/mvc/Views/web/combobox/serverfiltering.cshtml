@@ -1,20 +1,24 @@
 
         <div id="example" class="k-content">
-            Select a title from Netflix:
-            <input id="titles"/>
-
+            <div class="demo-section" style="width: 250px;">
+                <label for="products">Select product:</label>
+                <input id="products"/>
+            </div>
             <script>
                 $(document).ready(function() {
-                    $("#titles").kendoComboBox({
+                    $("#products").kendoComboBox({
                         placeholder: "Select product",
                         dataTextField: "ProductName",
                         dataValueField: "ProductID",
                         filter: "contains",
+                        autoBind: false,
+                        minLength: 3,
                         dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
                             transport: {
                                 read: {
-                                    dataType: "jsonp",
-                                    url: "http://demos.kendoui.com/service/Products",
+                                    url: "http://demos.kendoui.com/service/Northwind.svc/Products",
                                 }
                             }
                         }

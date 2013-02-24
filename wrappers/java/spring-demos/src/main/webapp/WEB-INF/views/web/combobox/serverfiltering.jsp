@@ -6,10 +6,11 @@
 <c:url value="/web/combobox/remote-data/read" var="readUrl" />
 
 <demo:header />
-    <div>
-        <label for="products">Choose product:</label>
+    <div class="demo-section" style="width: 250px;">
+        <label for="products">Select product:</label>
         
-        <kendo:comboBox name="products" dataTextField="productName" dataValueField="productId" filter="startswith">
+        <kendo:comboBox name="products" dataTextField="productName" dataValueField="productId" filter="contains"
+        	autoBind="false" minLength="3">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>

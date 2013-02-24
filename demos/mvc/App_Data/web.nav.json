@@ -167,17 +167,11 @@
                     "meta": "This Combobox UI example shows how you can easily apply an editable text box with flexible auto-searchable functionality of the dropdown list into your web app."
                 },
                 {
-                    "packages": [ "!mvc" ],
-                    "text": "Binding to remote data",
-                    "url": "combobox/remotedatasource.html",
-                    "title": "Kendo UI jQuery ComboBox example of binding to remote data",
-                    "meta": "Example of Kendo UI ComboBox remote data binding.  This demo shows how the auto-searchable dropdown list of the ComboBox is populated with remote data."
-                },
-                {
-                    "packages": [ "mvc", "jsp" , "php"],
                     "text": "Server filtering",
-                    "url": "combobox/serverfiltering.html"
-                },
+                    "url": "combobox/serverfiltering.html",
+                    "title": "Kendo UI jQuery ComboBox example of server filtering",
+                    "meta": "Example of Kendo UI ComboBox server filtering.  This demo shows how the auto-searchable dropdown list of the ComboBox is filtered on the the server based on the input."
+                },  
                 {
                     "packages": [ "mvc", "jsp" ],
                     "text": "Client filtering",
