@@ -21,24 +21,15 @@
 	    	return false;
 	    }
     </script>
-    <div>
         <%
-        String template = "# if (isInArray(data.date, data.dates)) { #" +
-	      "<div class=\"" +
-	      "# if (data.value < 10) { #" +
-	          "exhibition" +
-	      "# } else if ( data.value < 20 ) { #" +
-	          "party" +
-	      "# } else { #" +
-	          "cocktail" +
-	      "# } #" +
-	   "\"></div>" +
-	"# } #" +
-	"#= data.value #";
+        String template = "# if (isInArray(+data.date, data.dates)) { #" +
+                         "<div class=\"birthday\"></div>" +
+                     "# } #" +
+                     "#= data.value #";
     
     String footer = "Today - #=kendo.toString(data, 'd') #";
     %>
-        
+     <div class="demo-section" style="width: 155px;">   
         <kendo:datePicker name="datepicker" value="<%=new Date()%>" dates="${dates}" footer="<%=footer%>">
             <kendo:datePicker-month content="<%=template%>"/>
         </kendo:datePicker>
@@ -52,31 +43,13 @@
 	    });
 	</script>
 	
-    <style scoped>       
-        #calendar .k-content {
-            height: 168px;
-        }
-        
-        .exhibition {
-            background: transparent url(<c:url value="/resources/web/calendar/exhibition.png"/>) no-repeat 0 50%;
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-            margin-right: 3px;
+    <style scoped>          
+        .demo-section {
+            margin: 0 0;
         }
 
-        .party {
-            background: transparent url(<c:url value="/resources/web/calendar/party.png" />) no-repeat 0 50%;
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-            margin-right: 3px;
-        }
-
-        .cocktail {
-            background: transparent url(<c:url value="/resources/web/calendar/cocktail.png" />) no-repeat 0 50%;
+        .birthday {
+            background: transparent url(<c:url value="/resources/web/calendar/cake.png"/>)  no-repeat 0 50%;
             display: inline-block;
             width: 16px;
             height: 16px;

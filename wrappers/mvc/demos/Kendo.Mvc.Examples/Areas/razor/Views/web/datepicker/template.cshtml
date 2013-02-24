@@ -4,17 +4,17 @@
         Apply special style for the birthdays.
     </p>
 </div>
-
-@(Html.Kendo().DatePicker()
-      .Name("datepicker")
-      .Value(DateTime.Today)
-      .Footer("Today - #=kendo.toString(data, 'd') #")
-      .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
-                         "<div class=\"birthday\"></div>" +
-                     "# } #" +
-                     "#= data.value #")
-)
-
+<div class="demo-section" style="width: 155px;">
+    @(Html.Kendo().DatePicker()
+          .Name("datepicker")
+          .Value(DateTime.Today)
+          .Footer("Today - #=kendo.toString(data, 'd') #")
+          .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
+                             "<div class=\"birthday\"></div>" +
+                         "# } #" +
+                         "#= data.value #")
+    )
+</div>
 <script>
     var today = new Date(),
         birthdays = [
