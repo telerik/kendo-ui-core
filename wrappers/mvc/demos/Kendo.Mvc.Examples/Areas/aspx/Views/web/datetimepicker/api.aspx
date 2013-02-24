@@ -4,6 +4,27 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="configuration k-widget k-header" style="width: 220px">
+    <span class="configHead">API Functions</span>
+    <ul class="options">
+        <li>
+            <button id="get" class="k-button">Get value</button>
+        </li>
+        <li>
+            <input id="value" value="10/10/2000 12:00" style="float:none" />
+            <button id="set" class="k-button">Set value</button>
+        </li>
+        <li>
+            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+        </li>
+        <li>
+            <button id="openDateView" class="k-button">Open</button> or <button id="closeDateView" class="k-button">Close</button> the date view
+        </li>
+        <li>
+            <button id="openTimeView" class="k-button">Open</button> or <button id="closeTimeView" class="k-button">Close</button> the time view
+        </li>
+    </ul>
+</div>
 <div class="demo-section">
     <%= Html.Kendo().DateTimePicker()
           .Name("datetimepicker")
@@ -54,25 +75,11 @@
         });
     });
 </script>
-<div class="configuration k-widget k-header" style="width: 220px">
-    <span class="configHead">API Functions</span>
-    <ul class="options">
-        <li>
-            <button id="get" class="k-button">Get value</button>
-        </li>
-        <li>
-            <input id="value" value="10/10/2000 12:00" style="float:none" />
-            <button id="set" class="k-button">Set value</button>
-        </li>
-        <li>
-            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
-        </li>
-        <li>
-            <button id="openDateView" class="k-button">Open</button> or <button id="closeDateView" class="k-button">Close</button> the date view
-        </li>
-        <li>
-            <button id="openTimeView" class="k-button">Open</button> or <button id="closeTimeView" class="k-button">Close</button> the time view
-        </li>
-    </ul>
-</div>
+
+<style scoped>
+    .demo-section {
+        margin: 0 0;
+        width: 185px;
+    }
+</style>
 </asp:Content>
