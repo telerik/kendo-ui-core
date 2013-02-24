@@ -3,8 +3,8 @@
         
             <div class="demo-section">            
                 <div class="k-rtl">
-                    <label for="products">Select a state in USA:</label>
-                    <input id="products" />
+                    <label for="states">Select a state in USA:</label>
+                    <input id="states" />
                 </div>
             </div>
             <script>
@@ -69,8 +69,9 @@
                             "Wyoming"
                         ];
 
-                    $("#products").kendoAutoComplete({
-                        dataSource: data
+                    $("#states").kendoAutoComplete({
+                        dataSource: data,
+                        placeholder: "Select state..."
                     });
                 });
             </script>

@@ -6,11 +6,10 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
     <div class="k-rtl">
-        <label for="country">Select a state in USA:</label>
+        <label for="states">Select a state in USA:</label>
     
         <%= Html.Kendo().AutoComplete()
-              .Name("country")
-              .Filter("startswith")
+              .Name("states")
               .Placeholder("Select state...")
                       .BindTo(new string[] {
                     "Alabama",
@@ -69,8 +68,7 @@
                     "West Virginia",
                     "Wisconsin",
                     "Wyoming"
-              })
-              .Separator(", ")
+              })              
         %>
 
     </div>
