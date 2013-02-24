@@ -36,74 +36,82 @@
              </li>
          </ul>
     </div>
-    
-    <kendo:comboBox name="movies" dataTextField="text" dataValueField="value">
-        <kendo:dataSource data="${movies}"></kendo:dataSource>
-    </kendo:comboBox>
-    
+    <div class="demo-section">
+    	<label for="movies">Select movie: </label>
+	    <kendo:comboBox name="movies" dataTextField="text" dataValueField="value">
+	        <kendo:dataSource data="${movies}"></kendo:dataSource>
+	    </kendo:comboBox>
+    </div>
     <script>
 	     $(document).ready(function() {
+	     	$("#movies").closest(".k-widget")
+                    .attr("id", "movies_wrapper");
+                    
 	         $("#filter").kendoDropDownList({
-	             change: filterTypeOnChanged
-	         });
-	
-	         var combobox = $("#movies").data("kendoComboBox"),
-	             setValue = function(e) {
-	                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
-	                     combobox.value($("#value").val());
-	             },
-	             setIndex = function(e) {
-	                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
-	                     var index = parseInt($("#index").val());
-	                     combobox.select(index);
-	                 }
-	             },
-	             setSearch = function (e) {
-	                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
-	                     combobox.search($("#word").val());
-	             };
-	
-	         $("#enable").click(function() {
-	             combobox.enable();
-	         });
-	
-	         $("#disable").click(function() {
-	             combobox.enable(false);
-	         });
-	
-	         $("#open").click(function() {
-	             combobox.open();
-	         });
-	
-	         $("#close").click(function() {
-	             combobox.close();
-	         });
-	
-	         $("#getValue").click(function() {
-	             alert(combobox.value());
-	         });
-	
-	         $("#getText").click(function() {
-	             alert(combobox.text());
-	         });
-	
-	         $("#setValue").click(setValue);
-	         $("#value").keypress(setValue);
-	
-	         $("#select").click(setIndex);
-	         $("#index").keypress(setIndex);
-	
-	         $("#find").click(setSearch);
-	         $("#word").keypress(setSearch);
-	
-	         function filterTypeOnChanged() {
-	             combobox.options.filter = $("#filter").val();
-	         }
+					change: filterTypeOnChanged
+				});
+
+				var combobox = $("#movies").data("kendoComboBox"),
+					setValue = function(e) {
+						if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+							combobox.value($("#value").val());
+					},
+					setIndex = function(e) {
+						if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+							var index = parseInt($("#index").val());
+							combobox.select(index);
+						}
+					},
+					setSearch = function (e) {
+						if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+							combobox.search($("#word").val());
+					};
+
+				$("#enable").click(function() {
+					combobox.enable();
+				});
+
+				$("#disable").click(function() {
+					combobox.enable(false);
+				});
+
+				$("#open").click(function() {
+					combobox.open();
+				});
+
+				$("#close").click(function() {
+					combobox.close();
+				});
+
+				$("#getValue").click(function() {
+					alert(combobox.value());
+				});
+
+				$("#getText").click(function() {
+					alert(combobox.text());
+				});
+
+				$("#setValue").click(setValue);
+				$("#value").keypress(setValue);
+
+				$("#select").click(setIndex);
+				$("#index").keypress(setIndex);
+
+				$("#find").click(setSearch);
+				$("#word").keypress(setSearch);
+
+				function filterTypeOnChanged() {
+					combobox.options.filter = $("#filter").val();
+				}
 	     });
 	</script>
 	<style scoped>
 	   .configuration .k-textbox {
 	       width: 40px;
 	   }
+	   .demo-section{
+			width:250px;
+			margin-right: 360px;            
+		}
 	</style>
 <demo:footer />

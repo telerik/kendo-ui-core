@@ -4,87 +4,87 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class=”demo-section”>
-    <div class="configuration k-widget k-header" style="width: 210px">
-        <span class="configHead">API Functions</span>
-        <ul class="options">
-            <li>
-                <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
-            </li>
-            <li>
-                <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the drop-down
-            </li>
-            <li>
-                <button id="getValue" class="k-button">Get value</button> or <button id="getText" class="k-button">Get text</button>
-            </li>
-            <li>
-                <label for="filter" style="display: block; ">Filter type:</label>
-                <select id="filter" style="width: 120px; float: right; margin-bottom: 3px; margin-top: -3px;">
-                    <option value="none">None</option>
-                    <option value="startswith">Starts with</option>
-                    <option value="contains">Contains</option>
-                    <option value="eq">Equal</option>
-                </select>
-            </li>
-            <li>
-                <input id="word" value="The" class="k-textbox" /> <button id="find" class="k-button">Find item</button>
-            </li>
-            <li>
-                <input id="index" value="0" class="k-textbox" /> <button id="select" class="k-button">Select by index</button>
-            </li>
-            <li>
-                <input id="value" value="1" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
-            </li>
-        </ul>
-    </div>
+<div class="configuration k-widget k-header" style="width: 210px">
+    <span class="configHead">API Functions</span>
+    <ul class="options">
+        <li>
+            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+        </li>
+        <li>
+            <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the drop-down
+        </li>
+        <li>
+            <button id="getValue" class="k-button">Get value</button> or <button id="getText" class="k-button">Get text</button>
+        </li>
+        <li>
+            <label for="filter" style="display: block; ">Filter type:</label>
+            <select id="filter" style="width: 120px; float: right; margin-bottom: 3px; margin-top: -3px;">
+                <option value="none">None</option>
+                <option value="startswith">Starts with</option>
+                <option value="contains">Contains</option>
+                <option value="eq">Equal</option>
+            </select>
+        </li>
+        <li>
+            <input id="word" value="The" class="k-textbox" /> <button id="find" class="k-button">Find item</button>
+        </li>
+        <li>
+            <input id="index" value="0" class="k-textbox" /> <button id="select" class="k-button">Select by index</button>
+        </li>
+        <li>
+            <input id="value" value="1" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
+        </li>
+    </ul>
 </div>
 
-<%= Html.Kendo().ComboBox()
-    .Name("movies")
-    .DataTextField("Text")
-    .DataValueField("Value")
-    .BindTo(new List<SelectListItem>()
-    {
-        new SelectListItem() {
-        Text = "12 Angry Men", Value ="1"
-        },
-        new SelectListItem() {
-        Text = "Il buono, il brutto, il cattivo.", Value ="2"
-        },
-        new SelectListItem() {
-        Text = "Inception", Value ="3"
-        },
-        new SelectListItem() {
-        Text = "One Flew Over the Cuckoo's Nest", Value ="4"
-        },
-        new SelectListItem() {
-        Text = "Pulp Fiction", Value ="5"
-        },
-        new SelectListItem() {
-        Text = "Schindler's List", Value ="6"
-        },
-        new SelectListItem() {
-        Text = "The Dark Knight", Value ="7"
-        },
-        new SelectListItem() {
-        Text = "The Godfather", Value ="8"
-        },
-        new SelectListItem() {
-        Text = "The Godfather: Part II", Value ="9"
-        },
-        new SelectListItem() {
-        Text = "The Shawshank Redemption", Value ="10"
-        },
-        new SelectListItem() {
-        Text = "The Shawshank Redemption 2", Value ="10"
-        }
-    })
-%>
-
+<div class="demo-section">
+    <label for="movies">Select movie: </label>
+    <%= Html.Kendo().ComboBox()
+        .Name("movies")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "12 Angry Men", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Il buono, il brutto, il cattivo.", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Inception", Value ="3"
+            },
+            new SelectListItem() {
+            Text = "One Flew Over the Cuckoo's Nest", Value ="4"
+            },
+            new SelectListItem() {
+            Text = "Pulp Fiction", Value ="5"
+            },
+            new SelectListItem() {
+            Text = "Schindler's List", Value ="6"
+            },
+            new SelectListItem() {
+            Text = "The Dark Knight", Value ="7"
+            },
+            new SelectListItem() {
+            Text = "The Godfather", Value ="8"
+            },
+            new SelectListItem() {
+            Text = "The Godfather: Part II", Value ="9"
+            },
+            new SelectListItem() {
+            Text = "The Shawshank Redemption", Value ="10"
+            },
+            new SelectListItem() {
+            Text = "The Shawshank Redemption 2", Value ="10"
+            }
+        })
+    %>
+</div>
 <script>
     $(document).ready(function() {
         $("#movies").closest(".k-widget")
-                    .attr("id", "products_wrapper");
+                    .attr("id", "movies_wrapper");
 
         $("#filter").kendoDropDownList({
             change: filterTypeOnChanged
@@ -147,6 +147,11 @@
 <style scoped>
     .configuration .k-textbox {
         width: 40px;
+    }
+
+    .demo-section{
+        width:250px;
+        margin-right: 360px;            
     }
 </style>
 </asp:Content>

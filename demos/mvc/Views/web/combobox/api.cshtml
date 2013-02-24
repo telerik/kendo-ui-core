@@ -1,5 +1,6 @@
 
         <div id="example" class="k-content">
+                   
             <div class="configuration k-widget k-header" style="width: 210px">
                 <span class="configHead">API Functions</span>
                 <ul class="options">
@@ -32,8 +33,10 @@
                     </li>
                 </ul>
            </div>
-
-            <input id="products" />
+            <div class="demo-section">
+                <label for="movies">Select movie: </label>
+                <input id="movies" />
+            </div>            
 
             <script>
                 $(document).ready(function() {
@@ -51,19 +54,19 @@
                         {text: "The Shawshank Redemption 2", value:"11"}
                     ];
 
-                    $("#products").kendoComboBox({
+                    $("#movies").kendoComboBox({
                                        dataTextField: "text",
                                        dataValueField: "value",
                                        dataSource: data
                                   })
                                   .closest(".k-widget")
-                                  .attr("id", "products_wrapper");
+                                  .attr("id", "movies_wrapper");
 
                     $("#filter").kendoDropDownList({
                         change: filterTypeOnChanged
                     });
 
-                    var combobox = $("#products").data("kendoComboBox"),
+                    var combobox = $("#movies").data("kendoComboBox"),
                         setValue = function(e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                                 combobox.value($("#value").val());
@@ -120,6 +123,10 @@
             <style scoped>
                 .configuration .k-textbox {
                     width: 40px;
+                }
+                .demo-section{
+                    width:250px;
+                    margin-right: 360px;            
                 }
             </style>
         </div>
