@@ -1,173 +1,306 @@
 [
-    {
-        "id": 1,
-         "name": "Sashimi salad",
-         "price": 12.00,
-         "image": "sashimi-salad.jpg",
-         "category": "Cold starters",
-         "description": "Organic greens topped with market fresh sashimi, wasabi soy vinaigrette.",
-         "featured": true
-    },
-    {
-        "id": 2,
-         "name": "Chirashi sushi",
-         "price": 21.00,
-         "image": "chirashi-sushi.jpg",
-         "category": "Cold starters",
-         "description": "Sushi bar variety with sushi rice.",
-         "featured": false
-    },
-    {
-        "id": 3,
-         "name": "Seaweed salad",
-         "price": 17.00,
-         "image": "seaweed-salad.jpg",
-         "category": "Cold starters",
-         "description": "A nice seaweed salad.",
-         "featured": true
-    },
-    {
-        "id": 4,
-         "name": "Edamame",
-         "price": 4.00,
-         "image": "edamame.jpg",
-         "category": "Warm Starters",
-         "description": "Boiled soy beans with salt ",
-         "featured": true
-    },
-    {
-        "id": 5,
-         "name": "Miso soup",
-         "price": 4.00,
-         "image": "miso-soup.jpg",
-         "category": "Warm Starters",
-         "description": "Soy bean soup with Wacame seaweed, tofu and spring onion.",
-         "featured": false
-    },
-    {
-        "id": 6,
-         "name": "Maguro",
-         "price": 12.50,
-         "image": "maguro.jpg",
-         "category": "Sashimi",
-         "description": "Tuna pieces.",
-         "featured": true
-    },
-    {
-        "id": 7,
-         "name": "Shake",
-         "price": 10.00,
-         "image": "shake.jpg",
-         "category": "Sashimi",
-         "description": "",
-         "featured": false
-    },
-    {
-        "id": 8,
-         "name": "Shiromi",
-         "price": 9.50,
-         "image": "shiromi.jpg",
-         "category": "Sashimi",
-         "description": "White fish pieces.",
-         "featured": false
-    },
-    {
-        "id": 9,
-         "name": "Tekka maki",
-         "price": 6.00,
-         "image": "tekka-maki.jpg",
-         "category": "Hosomaki",
-         "description": "Tuna roll with wasabi. - 6 pieces",
-         "featured": true
-    },
-    {
-        "id": 10,
-         "name": "Hosomaki Mix",
-         "price": 17.00,
-         "image": "hosomaki-mix.jpg",
-         "category": "Hosomaki",
-         "description": "18 pieces.",
-         "featured": false
-    },
-    {
-        "id": 11,
-         "name": "California rolls",
-         "price": 7.75,
-         "image": "california-rolls.jpg",
-         "category": "Traditionall Rolls",
-         "description": "Crab sticks, avocado and cucumber. - 8 pieces",
-         "featured": true
-    },
-    {
-        "id": 12,
-         "name": "Seattle rolls",
-         "price": 8.00,
-         "image": "seattle-rolls.jpg",
-         "category": "Traditionall Rolls",
-         "description": "Smoked salmon. Cucumber. Cream cheese.",
-         "featured": false
-    },
-    {
-        "id": 13,
-         "name": "Spicy Tuna rolls",
-         "price": 6.00,
-         "image": "spicytuna-rolls.jpg",
-         "category": "Traditionall Rolls",
-         "description": "Spicy tuna, spring onion and avocado. - 6 pieces",
-         "featured": true
-    },
-    {
-        "id": 14,
-         "name": "Ebi rolls",
-         "price": 8.00,
-         "image": "ebi-rolls.jpg",
-         "category": "Traditionall Rolls",
-         "description": "King prawns, avocado and asparagus. - 8 pieces",
-         "featured": false
-    },
-    {
-        "id": 15,
-         "name": "Chicken Teriyaki",
-         "price": 12.00,
-         "image": "chicken-teriyaki.jpg",
-         "category": "Hot Dishes",
-         "description": "Sauted chicken with teiyaki sauce.",
-         "featured": false
-    },
-    {
-        "id": 16,
-         "name": "Salmon Teriyaki",
-         "price": 13.50,
-         "image": "salmon-teriyaki.jpg",
-         "category": "Hot Dishes",
-         "description": "Sauted salmon with teriyaki sauce.",
-         "featured": true
-    },
-    {
-        "id": 17,
-         "name": "Gohan",
-         "price": 3.00,
-         "image": "gohan.jpg",
-         "category": "Hot Dishes",
-         "description": "Steamed rice.",
-         "featured": false
-    },
-    {
-        "id": 18,
-         "name": "Tori Katsu",
-         "price": 11.00,
-         "image": "tori-katsu.jpg",
-         "category": "Hot Dishes",
-         "description": "Pan-fried chicken breast with yasai salad.",
-         "featured": false
-    },
-    {
-        "id": 19,
-         "name": "Yaki Udon",
-         "price": 11.50,
-         "image": "yaki-udon.jpg",
-         "category": "Hot Dishes",
-         "description": "Udon noddles with chicken, king prawns and vegetables.",
-         "featured": true
+  {
+    "id": 1,
+    "name": "Sashimi salad",
+    "price": 12.0,
+    "image": "sashimi-salad.jpg",
+    "category": "Cold starters",
+    "description": "Organic greens topped with market fresh sashimi, wasabi soy vinaigrette.",
+    "featured": true,
+    "stats": {
+      "protein": 2.9156,
+      "fat": 2.4396,
+      "carbohydrate": 3.8071,
+      "energy": 17.5775,
+      "sugar": 0.3738
     }
+  },
+  {
+    "id": 2,
+    "name": "Chirashi sushi",
+    "price": 21.0,
+    "image": "chirashi-sushi.jpg",
+    "category": "Cold starters",
+    "description": "Sushi bar variety with sushi rice.",
+    "featured": false,
+    "stats": {
+      "protein": 2.3138,
+      "fat": 0.6041,
+      "carbohydrate": 7.8006,
+      "energy": 7.5314,
+      "sugar": 0.3114
+    }
+  },
+  {
+    "id": 3,
+    "name": "Seaweed salad",
+    "price": 17.0,
+    "image": "seaweed-salad.jpg",
+    "category": "Cold starters",
+    "description": "A nice seaweed salad.",
+    "featured": true,
+    "stats": {
+      "protein": 0.229,
+      "fat": 2.2852,
+      "carbohydrate": 4.8824,
+      "energy": 5.1003,
+      "sugar": 0.0037
+    }
+  },
+  {
+    "id": 4,
+    "name": "Edamame",
+    "price": 4.0,
+    "image": "edamame.jpg",
+    "category": "Warm Starters",
+    "description": "Boiled soy beans with salt ",
+    "featured": true,
+    "stats": {
+      "protein": 0.7436,
+      "fat": 1.9771,
+      "carbohydrate": 0.674,
+      "energy": 17.294,
+      "sugar": 0.1028
+    }
+  },
+  {
+    "id": 5,
+    "name": "Miso soup",
+    "price": 4.0,
+    "image": "miso-soup.jpg",
+    "category": "Warm Starters",
+    "description": "Soy bean soup with Wacame seaweed, tofu and spring onion.",
+    "featured": false,
+    "stats": {
+      "protein": 2.7642,
+      "fat": 2.1552,
+      "carbohydrate": 9.5294,
+      "energy": 9.393,
+      "sugar": 0.1399
+    }
+  },
+  {
+    "id": 6,
+    "name": "Maguro",
+    "price": 12.5,
+    "image": "maguro.jpg",
+    "category": "Sashimi",
+    "description": "Tuna pieces.",
+    "featured": true,
+    "stats": {
+      "protein": 2.2293,
+      "fat": 0.7329,
+      "carbohydrate": 0.0618,
+      "energy": 28.2176,
+      "sugar": 0.4018
+    }
+  },
+  {
+    "id": 7,
+    "name": "Shake",
+    "price": 10.0,
+    "image": "shake.jpg",
+    "category": "Sashimi",
+    "description": "",
+    "featured": false,
+    "stats": {
+      "protein": 1.4804,
+      "fat": 1.4739,
+      "carbohydrate": 0.2237,
+      "energy": 16.9406,
+      "sugar": 0.245
+    }
+  },
+  {
+    "id": 8,
+    "name": "Shiromi",
+    "price": 9.5,
+    "image": "shiromi.jpg",
+    "category": "Sashimi",
+    "description": "White fish pieces.",
+    "featured": false,
+    "stats": {
+      "protein": 0.2814,
+      "fat": 1.3963,
+      "carbohydrate": 1.5973,
+      "energy": 16.4487,
+      "sugar": 0.0509
+    }
+  },
+  {
+    "id": 9,
+    "name": "Tekka maki",
+    "price": 6.0,
+    "image": "tekka-maki.jpg",
+    "category": "Hosomaki",
+    "description": "Tuna roll with wasabi. - 6 pieces",
+    "featured": true,
+    "stats": {
+      "protein": 0.9559,
+      "fat": 1.6395,
+      "carbohydrate": 7.4319,
+      "energy": 9.7847,
+      "sugar": 0.4771
+    }
+  },
+  {
+    "id": 10,
+    "name": "Hosomaki Mix",
+    "price": 17.0,
+    "image": "hosomaki-mix.jpg",
+    "category": "Hosomaki",
+    "description": "18 pieces.",
+    "featured": false,
+    "stats": {
+      "protein": 2.683,
+      "fat": 2.858,
+      "carbohydrate": 1.6309,
+      "energy": 23.8901,
+      "sugar": 0.4839
+    }
+  },
+  {
+    "id": 11,
+    "name": "California rolls",
+    "price": 7.75,
+    "image": "california-rolls.jpg",
+    "category": "Traditionall Rolls",
+    "description": "Crab sticks, avocado and cucumber. - 8 pieces",
+    "featured": true,
+    "stats": {
+      "protein": 0.848,
+      "fat": 0.1205,
+      "carbohydrate": 3.6646,
+      "energy": 18.6541,
+      "sugar": 0.0174
+    }
+  },
+  {
+    "id": 12,
+    "name": "Seattle rolls",
+    "price": 8.0,
+    "image": "seattle-rolls.jpg",
+    "category": "Traditionall Rolls",
+    "description": "Smoked salmon. Cucumber. Cream cheese.",
+    "featured": false,
+    "stats": {
+      "protein": 2.2802,
+      "fat": 2.309,
+      "carbohydrate": 9.5136,
+      "energy": 18.6961,
+      "sugar": 0.2533
+    }
+  },
+  {
+    "id": 13,
+    "name": "Spicy Tuna rolls",
+    "price": 6.0,
+    "image": "spicytuna-rolls.jpg",
+    "category": "Traditionall Rolls",
+    "description": "Spicy tuna, spring onion and avocado. - 6 pieces",
+    "featured": true,
+    "stats": {
+      "protein": 1.0003,
+      "fat": 1.5621,
+      "carbohydrate": 2.6322,
+      "energy": 25.0911,
+      "sugar": 0.0474
+    }
+  },
+  {
+    "id": 14,
+    "name": "Ebi rolls",
+    "price": 8.0,
+    "image": "ebi-rolls.jpg",
+    "category": "Traditionall Rolls",
+    "description": "King prawns, avocado and asparagus. - 8 pieces",
+    "featured": false,
+    "stats": {
+      "protein": 2.826,
+      "fat": 2.854,
+      "carbohydrate": 2.433,
+      "energy": 19.2756,
+      "sugar": 0.439
+    }
+  },
+  {
+    "id": 15,
+    "name": "Chicken Teriyaki",
+    "price": 12.0,
+    "image": "chicken-teriyaki.jpg",
+    "category": "Hot Dishes",
+    "description": "Sauted chicken with teiyaki sauce.",
+    "featured": false,
+    "stats": {
+      "protein": 2.2375,
+      "fat": 2.6376,
+      "carbohydrate": 7.4605,
+      "energy": 18.7052,
+      "sugar": 0.4271
+    }
+  },
+  {
+    "id": 16,
+    "name": "Salmon Teriyaki",
+    "price": 13.5,
+    "image": "salmon-teriyaki.jpg",
+    "category": "Hot Dishes",
+    "description": "Sauted salmon with teriyaki sauce.",
+    "featured": true,
+    "stats": {
+      "protein": 2.5748,
+      "fat": 0.0234,
+      "carbohydrate": 6.5532,
+      "energy": 22.7136,
+      "sugar": 0.1158
+    }
+  },
+  {
+    "id": 17,
+    "name": "Gohan",
+    "price": 3.0,
+    "image": "gohan.jpg",
+    "category": "Hot Dishes",
+    "description": "Steamed rice.",
+    "featured": false,
+    "stats": {
+      "protein": 2.4622,
+      "fat": 2.672,
+      "carbohydrate": 9.7993,
+      "energy": 25.1129,
+      "sugar": 0.3426
+    }
+  },
+  {
+    "id": 18,
+    "name": "Tori Katsu",
+    "price": 11.0,
+    "image": "tori-katsu.jpg",
+    "category": "Hot Dishes",
+    "description": "Pan-fried chicken breast with yasai salad.",
+    "featured": false,
+    "stats": {
+      "protein": 1.0267,
+      "fat": 2.2143,
+      "carbohydrate": 6.1597,
+      "energy": 17.8688,
+      "sugar": 0.0161
+    }
+  },
+  {
+    "id": 19,
+    "name": "Yaki Udon",
+    "price": 11.5,
+    "image": "yaki-udon.jpg",
+    "category": "Hot Dishes",
+    "description": "Udon noddles with chicken, king prawns and vegetables.",
+    "featured": true,
+    "stats": {
+      "protein": 1.7697,
+      "fat": 0.2534,
+      "carbohydrate": 6.9919,
+      "energy": 7.508,
+      "sugar": 0.1798
+    }
+  }
 ]

@@ -55,11 +55,6 @@ var cart = kendo.observable({
 
 var layoutModel = kendo.observable({
     cart: cart,
-});
-
-var indexModel = kendo.observable({
-    items: items,
-    cart: cart,
 
     cartContentsClass: function() {
         return this.cart.contentsCount() > 0 ? "active" : "empty";
@@ -67,10 +62,6 @@ var indexModel = kendo.observable({
 
     removeFromCart: function(e) {
         this.get("cart").remove(e.data);
-    },
-
-    addToCart: function(e) {
-        cart.add(e.data);
     },
 
     emptyCart: function() {
@@ -92,6 +83,15 @@ var indexModel = kendo.observable({
         }
 
         return kendo.format("{0:c}", price);
+    }
+});
+
+var indexModel = kendo.observable({
+    items: items,
+    cart: cart,
+
+    addToCart: function(e) {
+        cart.add(e.data);
     },
 
     proceed: function(e) {
@@ -118,10 +118,10 @@ var detailModel = kendo.observable({
 });
 
 // Views and layouts
-var layout = new kendo.Layout("layout", { model: layoutModel });
-var index = new kendo.View("index", { model: indexModel });
-var checkout = new kendo.View("checkout");
-var detail = new kendo.View("detail", { model: detailModel });
+var layout = new kendo.Layout("layout-template", { model: layoutModel });
+var index = new kendo.View("index-template", { model: indexModel });
+var checkout = new kendo.View("checkout-template");
+var detail = new kendo.View("detail-template", { model: detailModel });
 
 var sushi = new kendo.Router({
     init: function() {
@@ -140,7 +140,7 @@ sushi.route("/checkout", function() {
 
 sushi.route("/menu/:id", function(itemID) {
     items.fetch(function(e) {
-        detail.model().setCurrent(itemID);
+        detailModel.setCurrent(itemID);
         layout.showIn("#content", detail);
     });
 });
