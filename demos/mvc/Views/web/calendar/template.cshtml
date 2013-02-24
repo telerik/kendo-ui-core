@@ -9,7 +9,7 @@
             <script>
                 $(document).ready(function() {
                     var today = new Date(),
-                        birthdays = [
+                        events = [
                            +new Date(today.getFullYear(), today.getMonth(), 8),
                            +new Date(today.getFullYear(), today.getMonth(), 12),
                            +new Date(today.getFullYear(), today.getMonth(), 24),
@@ -25,7 +25,7 @@
 
                     $("#calendar").kendoCalendar({
                         value: today,
-                        dates: birthdays,
+                        dates: events,
                         month: {
                             // template for dates in month view
                             content: '# if ($.inArray(+data.date, data.dates) != -1) { #' +
