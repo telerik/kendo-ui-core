@@ -4,26 +4,26 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="demo-section" style="width: 535px;">
+    <label for="start">Start date:</label>
 
-<label for="start">Start date:</label>
+    <%= Html.Kendo().DateTimePicker()
+          .Name("start")
+          .Value(DateTime.Today)
+          .Max(DateTime.Today)
+          .ParseFormats(new string[] { "MM/dd/yyyy" })
+          .Events(e => e.Change("startChange"))
+    %>
 
-<%= Html.Kendo().DateTimePicker()
-      .Name("start")
-      .Value(DateTime.Today)
-      .Max(DateTime.Today)
-      .ParseFormats(new string[] { "MM/dd/yyyy" })
-      .Events(e => e.Change("startChange"))
-%>
-
-<label for="end" style="margin-left:3em">End date:</label>
-<%= Html.Kendo().DateTimePicker()
-      .Name("end")
-      .Value(DateTime.Today)
-      .Min(DateTime.Today)
-      .ParseFormats(new string[] { "MM/dd/yyyy" })
-      .Events(e => e.Change("endChange"))
-%>
-
+    <label for="end" style="margin-left:3em">End date:</label>
+    <%= Html.Kendo().DateTimePicker()
+          .Name("end")
+          .Value(DateTime.Today)
+          .Min(DateTime.Today)
+          .ParseFormats(new string[] { "MM/dd/yyyy" })
+          .Events(e => e.Change("endChange"))
+    %>
+</div>
 <script>
     function startChange() {
         var endPicker = $("#end").data("kendoDateTimePicker"),

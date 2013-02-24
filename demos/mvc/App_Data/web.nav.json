@@ -280,7 +280,6 @@
                     "meta": "The example illustrates how DateTimePicker UI handles both dates and times. Usable interface and date/time selection functionality in a single jQuery UI Control for your web app."
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Range selection",
                     "url": "datetimepicker/rangeselection.html",
                     "title": "Date range selection functionality in Kendo UI DateTimePicker",
