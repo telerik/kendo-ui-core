@@ -1,6 +1,7 @@
 <%@page import="java.util.Calendar"%>
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <demo:header />
 
 <div class="configuration k-widget k-header">
@@ -31,10 +32,10 @@
         </li>
     </ul>
 </div>
-
-<kendo:calendar name="calendar" value="<%= Calendar.getInstance().getTime() %>">
-</kendo:calendar>
-
+<div class="reports">
+	<kendo:calendar name="calendar" value="<%= Calendar.getInstance().getTime() %>">
+	</kendo:calendar>
+</div>
 <script>
 	$(document).ready(function() {
 	    var calendar = $("#calendar").data("kendoCalendar"),
@@ -76,5 +77,25 @@
 	    $("#navigate").click(navigate);
 	});
 </script>
+<style scoped="scoped">
+	.reports {
+		width: 265px;
+		height: 247px;
+		padding: 108px 0 0 20px;
+		background: url('<c:url value="/resources/web/calendar/reports.png"/>') transparent no-repeat 0 0;
+		margin: 30px 105px 20px;
+	}
+	.configuration {
+        height: 390px;
+        width: 200px;
+    }
+    .configuration .console {
+        background-color: transparent;
+        border: 0;
+        height: 342px;
+        overflow: auto;
+    }
+</style>
+
 
 <demo:footer />
