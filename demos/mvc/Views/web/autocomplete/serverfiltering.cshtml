@@ -1,0 +1,31 @@
+
+        <div id="example" class="k-content">
+            <div class="demo-section">
+                <label for="products">Select product:</label>
+                <input id="products"/>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $("#products").kendoAutoComplete({
+                        dataTextField: "ProductName",
+                        filter: "contains",
+                        minLength: 3,
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                            }
+                        }
+                    });
+                });
+            </script>
+
+            <style scoped>                
+                .demo-section {
+                	width: 250px;
+                }
+            </style>
+        </div>

@@ -27,16 +27,10 @@
                     "meta": "How jQuery-based Autocomplete widget works, view demo source code of Kendo UI Autocomplete."
                 },
                 {
-                    "packages": [ "!mvc" ],
-                    "text": "Binding to remote data",
-                    "url": "autocomplete/remotedatasource.html",
-                    "title": "Example of binding to remote data in Kendo UI jQuery-powered Autocomplete widget",
-                    "meta": "This demo of Kendo UI Autocomplete control shows how autocomplete suggestions are given upon typing and the data is loaded from OData remote data source."
-                },
-                {
-                    "packages": [ "mvc", "jsp", "php" ],
                     "text": "Server filtering",
-                    "url": "autocomplete/serverfiltering.html"
+                    "url": "autocomplete/serverfiltering.html",
+                    "title": "Example of filtering the data remotely in Kendo UI jQuery-powered Autocomplete widget",
+                    "meta": "This demo of Kendo UI Autocomplete control shows how autocomplete suggestions are given upon typing and the data is loaded from OData remote data source."
                 },
                 {
                     "packages": [ "mvc" ],
