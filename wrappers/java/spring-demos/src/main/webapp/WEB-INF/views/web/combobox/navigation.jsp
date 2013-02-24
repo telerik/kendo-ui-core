@@ -6,7 +6,7 @@
 <demo:header />
 <div class="demo-section">
 	<h3>T-shirt Size</h3>
-	<kendo:comboBox name="fabric" filter="contains" placeholder="Select size..." index="3" suggest="true" 
+	<kendo:comboBox name="size" filter="contains" placeholder="Select size..." index="3" suggest="true" 
 	                dataTextField="text" dataValueField="value" accesskey="w">
 	          <kendo:dataSource data="${sizes}"></kendo:dataSource>
 	</kendo:comboBox>
