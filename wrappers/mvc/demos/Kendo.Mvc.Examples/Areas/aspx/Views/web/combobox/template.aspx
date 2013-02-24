@@ -11,6 +11,7 @@
     </p>
 </div>
 
+<label for="customers">Select customer:</label>
 <%= Html.Kendo().ComboBox()
       .Name("customers")
       .DataTextField("ContactName")

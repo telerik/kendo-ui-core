@@ -6,12 +6,12 @@
                     Open the ComboBox to see the customized appearance of the items.
                 </p>
             </div>
-
-            <input id="titles" />
+            <label for="customers">Select customer:</label>
+            <input id="customers" />
 
             <script>
                 $(document).ready(function() {
-                    $("#titles").kendoComboBox({
+                    $("#customers").kendoComboBox({
                         filter:"startswith",
                         dataTextField: "ContactName",
                         dataValueField: "CustomerID",
@@ -31,7 +31,7 @@
                         }
                     });
 
-                    var combobox = $("#titles").data("kendoComboBox");
+                    var combobox = $("#customers").data("kendoComboBox");
 
                     // set width of the drop-down list
                     combobox.list.width(400);
@@ -39,32 +39,32 @@
             </script>
 
             <style scoped>
-                #titles-list .k-item {
+                #customers-list .k-item {
                     overflow: hidden; /* clear floated images */
                 }
 
-                #titles-list img {
+                #customers-list img {
                     box-shadow: 0 0 4px rgba(255,255,255,.7);
                     float: left;
                     margin: 5px;
                 }
 
-                #titles-list dl {
+                #customers-list dl {
                     margin-left: 85px;
                 }
 
-                #titles-list dt,
-                #titles-list dd {
+                #customers-list dt,
+                #customers-list dd {
                     margin: 0;
                     padding: 0;
                 }
 
-                #titles-list dt {
+                #customers-list dt {
                     font-weight: bold;
                     padding-top: .5em;
                 }
 
-                #titles-list dd {
+                #customers-list dd {
                     padding-bottom: .3em;
                 }
             </style>
