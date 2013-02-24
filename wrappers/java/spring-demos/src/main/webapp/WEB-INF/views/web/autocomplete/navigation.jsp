@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
     <div class="demo-section">   
-        <label for="country">Shipping countries:</label>
+        <label for="countries">Choose country: </label>
         
 	    <%
 	    String[] countries = {
@@ -58,7 +58,7 @@
 	        "Vatican City"
 	    };
 	    %>
-	    <kendo:autoComplete name="country" filter="startswith" placeholder="Select country..." separator=", " accesskey="w">
+	    <kendo:autoComplete name="countries" filter="startswith" placeholder="Select country..." separator=", " accesskey="w">
 	        <kendo:dataSource data="<%=countries%>">
 	        </kendo:dataSource>
 	    </kendo:autoComplete>
@@ -115,7 +115,7 @@
     <style scoped="scoped">
         .k-autocomplete
         {
-            width: 250px;
+            width: 200px;
         }
         
         div.demo-section
