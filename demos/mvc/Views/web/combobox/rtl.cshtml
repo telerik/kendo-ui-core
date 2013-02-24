@@ -1,10 +1,10 @@
 
-        <div id="example" class="k-content">
-
-            <div class="k-rtl">
-                <input id="input" />
+        <div id="example" class="k-content">            
+            <div class="demo-section">            
+                <div class="k-rtl">
+                    <input id="combobox" />
+                </div>
             </div>
-
             <script>
                 $(document).ready(function() {
                     var data = [
@@ -13,7 +13,7 @@
                         { text: "Item 3", value:"3" }
                     ];
 
-                    $("#input").kendoComboBox({
+                    $("#combobox").kendoComboBox({
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: data
