@@ -2174,6 +2174,12 @@ If not specified, the available space is split evenly between the series.Availab
         <tag-class>com.kendoui.taglib.chart.SeriesItemTargetTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The target color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
 
     </tag>
 
@@ -11699,6 +11705,12 @@ If not specified, the available space is split evenly between the series.Availab
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The target color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
 
     </tag>
 
@@ -15354,6 +15366,12 @@ Available for column series.</description>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The target color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
 
     </tag>
 

@@ -59,6 +59,14 @@ public class SeriesItemTargetTag extends  BaseTag  /* interfaces */ /* interface
         setProperty("line", value);
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
 //<< Attributes
 
 }
