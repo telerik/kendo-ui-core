@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $db = new PDO('sqlite:../../sample.db');
 
-    $sql = 'SELECT m.EmployeeID, m.FirstName, m.LastName, m.EmployeeID, '
+    $sql = 'SELECT m.EmployeeID, m.FirstName, m.LastName, '
         . '(SELECT COUNT(*) FROM Employees x WHERE x.ReportsTo=m.EmployeeID) as HasEmployees '
         . 'FROM Employees m '
         . 'WHERE ReportsTo is ?';
