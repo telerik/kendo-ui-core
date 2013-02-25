@@ -144,6 +144,10 @@ tests.push(
         title: "editor mswordformatcleaner"
     },
     {
+        page: "editor/webkitformatcleaner.html",
+        title: "editor webkitformatcleaner"
+    },
+    {
         page: "editor/newline.html",
         title: "editor newline"
     },

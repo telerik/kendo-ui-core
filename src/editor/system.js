@@ -365,7 +365,7 @@ var Keyboard = Class.extend({
 var Clipboard = Class.extend({
     init: function(editor) {
         this.editor = editor;
-        this.cleaners = [new MSWordFormatCleaner()];
+        this.cleaners = [new MSWordFormatCleaner(), new WebkitFormatCleaner()];
     },
 
     htmlToFragment: function(html) {
@@ -439,10 +439,6 @@ var Clipboard = Class.extend({
             }
 
             html = clipboardNode.innerHTML;
-
-            if (kendo.support.browser.safari) {
-                html = html.replace(/style="[^"]*"/gi, "");
-            }
 
             if (html != bom) {
                 args.html = html;
@@ -667,6 +663,31 @@ var MSWordFormatCleaner = Class.extend({
     }
 });
 
+var WebkitFormatCleaner = Class.extend({
+    init: function() {
+        this.replacements = [
+            /\s+class="Apple-style-span[^"]*"/gi, '',
+            /\s+style="[^"]*"/gi, ''
+        ];
+    },
+
+    applicable: function(html) {
+        return (/class="?Apple-style-span|style="[^"]*-webkit-nbsp-mode/i).test(html);
+    },
+
+    clean: function(html) {
+        var that = this,
+            replacements = that.replacements,
+            i, l;
+
+        for (i = 0, l = replacements.length; i < l; i += 2) {
+            html = html.replace(replacements[i], replacements[i+1]);
+        }
+
+        return html;
+    }
+});
+
 extend(Editor, {
     Command: Command,
     GenericCommand: GenericCommand,
@@ -677,7 +698,8 @@ extend(Editor, {
     SystemHandler: SystemHandler,
     Keyboard: Keyboard,
     Clipboard: Clipboard,
-    MSWordFormatCleaner: MSWordFormatCleaner
+    MSWordFormatCleaner: MSWordFormatCleaner,
+    WebkitFormatCleaner: WebkitFormatCleaner
 });
 
 registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Insert HTML", initialValue: "Insert HTML"})}));
