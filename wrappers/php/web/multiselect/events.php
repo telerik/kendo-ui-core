@@ -1,3 +1,5 @@
+<div class="demo-section">
+<h3 class="title">Select Continents</h3>
 <?php
 
 require_once '../../lib/DataSourceResult.php';
@@ -10,9 +12,13 @@ $multiselect = new \Kendo\UI\MultiSelect('select');
 $multiselect->dataTextField('text')
          ->dataValueField('value')
          ->dataSource(array(
-            array('text' => 'Item 1', 'value' => '1'),
-            array('text' => 'Item 2', 'value' => '2'),
-            array('text' => 'Item 3', 'value' => '3')
+            array('text' => 'Africa', 'value' => '1'),
+            array('text' => 'Europe', 'value' => '2'),
+            array('text' => 'Asia', 'value' => '3'),
+            array('text' => 'North America', 'value' => '4'),
+            array('text' => 'South America', 'value' => '5'),
+            array('text' => 'Antarctica', 'value' => '6'),
+            array('text' => 'Australia', 'value' => '7')
          ))
          ->select('onSelect')
          ->change('onChange')
@@ -21,6 +27,7 @@ $multiselect->dataTextField('text')
 
 echo $multiselect->render();
 ?>
+</div>
 
 <script>
     function onOpen() {
@@ -48,5 +55,13 @@ echo $multiselect->render();
         }
     };
 </script>
-<div class="console"></div>
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
+<style scoped="scoped">
+    .demo-section {
+        width: 600px;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

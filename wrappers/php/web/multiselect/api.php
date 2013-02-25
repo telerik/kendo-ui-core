@@ -35,6 +35,7 @@ require_once '../../include/header.php';
         </li>
     </ul>
 </div>
+<div class="demo-section">
 <?php
 $multiselect = new \Kendo\UI\MultiSelect('movies');
 
@@ -56,6 +57,7 @@ $multiselect->dataTextField('text')
 
 echo $multiselect->render();
 ?>
+</div>
 <script>
 $(function() {
     $("#filter").kendoDropDownList({
@@ -106,6 +108,11 @@ $(function() {
 <style scoped>
     .configuration .k-textbox {
         width: 40px;
+    }
+    .demo-section {
+        float: left;
+        width: 450px;
+        margin-left: 0;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

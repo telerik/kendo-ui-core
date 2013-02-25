@@ -20,6 +20,8 @@ require_once '../../include/header.php';
         Open the ComboBox to see the customized appearance of the items.
     </p>
 </div>
+<div class="demo-section">
+    <h3 class="title">Select customers</h3>
 <?php
 $read = new \Kendo\Data\DataSourceTransportRead();
 $read->url('template.php')
@@ -43,58 +45,60 @@ $multiselect->minLength(1)
             ->dataSource($dataSource)
             ->itemTemplate(<<<TEMPLATE
                 <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
-                <dl>
-                    <dt>Contact:</dt><dd>#: ContactName #</dd>
-                    <dt>Company:</dt><dd>#: CompanyName #</dd>
-                </dl>
+                <h3>#: ContactName #</h3>
+                <h3>#: CompanyName #</h3>
 TEMPLATE
             )
             ->tagTemplate(<<<TEMPLATE
-                <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
-                <dl>
-                    <dt>Contact:</dt><dd>#: ContactName #</dd>
-                </dl>
+                <img class="tag-image" src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
+                #: ContactName #
 TEMPLATE
 );
 
 echo $multiselect->render();
 
 ?>
-
+</div>
 <script>
     $(function() {
-        $("#customers").data("kendoMultiSelect").list.width(400);
+        var customers = $("#customers").data("kendoMultiSelect");
+        customers.wrapper.attr("id", "customers-wrapper");
     });
 </script>
-
 <style scoped>
+    .demo-section {
+        width: 450px;
+        margin-top: 40px;
+    }
+
+    .tag-image {
+        width: auto;
+        height: 1.4em;
+        margin-right: 3px;
+    }
+
+    #customers-wrapper .k-multiselect-wrap .k-input {
+        height: 1.8em;
+        line-height: 1.8em;
+    }
+
     #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
 
     #customers-list img {
-        box-shadow: 0 0 4px rgba(255,255,255,.7);
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
-        margin: 5px;
+        margin: 5px 20px 5px 5px;
     }
-
-    #customers-list dl {
-        margin-left: 85px;
+    #customers-list h3 {
+        margin: 30px 0 10px 0;
+        font-size: 2em;
     }
-
-    #customers-list dt,
-    #customers-list dd {
+    #customers-list p {
         margin: 0;
-        padding: 0;
-    }
-
-    #customers-list dt {
-        font-weight: bold;
-        padding-top: .5em;
-    }
-
-    #customers-list dd {
-        padding-bottom: .3em;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>
