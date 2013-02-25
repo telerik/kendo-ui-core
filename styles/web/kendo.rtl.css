@@ -225,6 +225,20 @@
     margin-right: -4px;
 }
 
+/* Multiselect */
+
+.k-rtl .k-multiselect-wrap .k-input
+{
+    float: right;
+}
+
+.k-rtl .k-multiselect-wrap li
+{
+    padding-left:.15em;
+    padding-right: .4em;
+    float: right;
+}
+
 /* PanelBar */
 
 .k-rtl .k-panelbar-expand,

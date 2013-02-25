@@ -478,6 +478,7 @@ kendo_module({
                 tag = that._currentTag,
                 current = that._current,
                 hasValue = that.input.val(),
+                isRtl = kendo.support.isRtl(that.wrapper),
                 visible = that.popup.visible();
 
             if (key === keys.DOWN) {
@@ -512,14 +513,14 @@ kendo_module({
                     }
                 }
                 e.preventDefault();
-            } else if (key === keys.LEFT) {
+            } else if ((key === keys.LEFT && !isRtl) || (key === keys.RIGHT && isRtl)) {
                 if (!hasValue) {
                     tag = tag ? tag.prev() : $(that.tagList[0].lastChild);
                     if (tag[0]) {
                         that.currentTag(tag);
                     }
                 }
-            } else if (key === keys.RIGHT) {
+            } else if ((key === keys.RIGHT && !isRtl) || (key === keys.LEFT && isRtl)) {
                 if (!hasValue && tag) {
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
