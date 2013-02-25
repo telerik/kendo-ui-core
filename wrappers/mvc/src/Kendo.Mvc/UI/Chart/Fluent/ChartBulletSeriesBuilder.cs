@@ -243,5 +243,29 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configure the data point tooltip for the series.
+        /// </summary>
+        /// <param name="configurator">Use the configurator to set data tooltip options.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bullet(s => s.Current, s => s.Target)
+        ///                .Tooltip(tooltip =>
+        ///                {
+        ///                    tooltip.Visible(true).Format("{0:C}");
+        ///                })
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartBulletSeriesBuilder<T> Target(Action<ChartBulletTargetBuilder> configurator)
+        {
+            configurator(new ChartBulletTargetBuilder(Series.Target));
+
+            return this;
+        }
     }
 }

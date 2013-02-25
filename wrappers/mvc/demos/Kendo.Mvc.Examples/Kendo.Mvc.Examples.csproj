@@ -88,6 +88,8 @@
     <Compile Include="Controllers\DataViz\Bubble_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Bullet_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Bullet_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
@@ -354,6 +356,8 @@
     <Compile Include="Models\ClientOrderViewModel.cs" />
     <Compile Include="Models\ClientEmployeeViewModel.cs" />
     <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
+    <Compile Include="Models\BulletChartItem.cs" />
+    <Compile Include="Models\BulletChartLocalDataViewModel.cs" />
     <Compile Include="Models\CrimeData.cs" />
     <Compile Include="Models\DataFilter.cs" />
     <Compile Include="Models\Northwind.designer.cs">
@@ -428,11 +432,14 @@
     <Content Include="Areas\aspx\Views\dataviz\bubble_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bubble_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bubble_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bullet_charts\local_data.aspx">
+      <SubType>
+      </SubType>
+    </Content>
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\donut_labels.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\customization\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\virtualization.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\panes.aspx" />
@@ -577,6 +584,7 @@
     <Content Include="Areas\aspx\Views\web\upload\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\window\ajaxcontent1.ascx" />
     <Content Include="Areas\aspx\Views\web\window\animation.aspx" />
+    <None Include="Areas\razor\Views\dataviz\bullet_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
     <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />
     <Content Include="Areas\aspx\Views\web\colorpicker\events.aspx" />
@@ -596,6 +604,8 @@
     <Content Include="Areas\razor\Views\dataviz\bar_charts\plotbands.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\sparklines\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\sparklines\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bullet_charts\index.cshtml" />
+    <Content Include="Areas\aspx\Views\dataviz\bullet_charts\index.aspx" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />

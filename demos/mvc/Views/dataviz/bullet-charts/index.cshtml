@@ -10,12 +10,12 @@
                 <td class="chart"><div id="chart-hPa"></div></td>
             </tr>
             <tr>
-                <td class="item">temp</td>
-                <td class="chart"><div id="chart-temp"></div></td>
-            </tr>
-            <tr>
                 <td class="item">hum</td>
                 <td class="chart"><div id="chart-hum"></div></td>
+            </tr>
+            <tr>
+                <td class="item">temp</td>
+                <td class="chart"><div id="chart-temp"></div></td>
             </tr>
         </table>
     </div>
@@ -44,11 +44,9 @@
                 },
                 valueAxis: [{
                     plotBands: [{
-                        from: 772, to: 795, color: "#2890cc", opacity: .5
+                        from: 715, to: 752, color: "#ccc", opacity: .6
                     }, {
-                        from: 752, to: 772, color: "#2890cc", opacity: .7
-                    }, {
-                        from: 715, to: 752, color: "#2890cc", opacity: .5
+                        from: 752, to: 772, color: "#ccc", opacity: .3
                     }],
                     majorGridLines: {
                         visible: false
@@ -89,17 +87,53 @@
                 },
                 valueAxis: [{
                     plotBands: [{
-                        from: 1027, to: 1055, color: "#8ebc00", opacity: .6
+                        from: 955, to: 1002, color: "#ccc", opacity: .6
                     }, {
-                        from: 1002, to: 1027, color: "#8ebc00", opacity: .8
-                    }, {
-                        from: 955, to: 1002, color: "#8ebc00", opacity: .6
+                        from: 1002, to: 1027, color: "#ccc", opacity: .3
                     }],
                     majorGridLines: {
                         visible: false
                     },
                     min: 955,
                     max: 1055,
+                    minorTicks: {
+                        visible: true
+                    }
+                }],
+                tooltip: {
+                    visible: true,
+                    shared: true,
+                    template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+                }
+            });
+
+            $("#chart-hum").kendoChart({
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "bullet",
+                    data: [[45, 60]]
+                }],
+                categoryAxis: {
+                    majorGridLines: {
+                        visible: false
+                    },
+                    majorTicks: {
+                        visible: false
+                    }
+                },
+                valueAxis: [{
+                    plotBands: [{
+                        from: 0, to: 33, color: "#ccc", opacity: .6
+                    }, {
+                        from: 33, to: 66, color: "#ccc", opacity: .3
+                    }],
+                    majorGridLines: {
+                        visible: false
+                    },
+                    min: 0,
+                    max: 100,
                     minorTicks: {
                         visible: true
                     }
@@ -150,46 +184,6 @@
                     template: "Maximum: #= value.target # <br /> Average: #= value.current #"
                 }
             });
-
-            $("#chart-hum").kendoChart({
-                legend: {
-                    visible: false
-                },
-                series: [{
-                    type: "bullet",
-                    data: [[45, 60]]
-                }],
-                categoryAxis: {
-                    majorGridLines: {
-                        visible: false
-                    },
-                    majorTicks: {
-                        visible: false
-                    }
-                },
-                valueAxis: [{
-                    plotBands: [{
-                        from: 0, to: 33, color: "blue", opacity: .3
-                    }, {
-                        from: 33, to: 66, color: "green", opacity: .3
-                    }, {
-                        from: 66, to: 100, color: "red", opacity: .3
-                    }],
-                    majorGridLines: {
-                        visible: false
-                    },
-                    min: 0,
-                    max: 100,
-                    minorTicks: {
-                        visible: true
-                    }
-                }],
-                tooltip: {
-                    visible: true,
-                    shared: true,
-                    template: "Maximum: #= value.target # <br /> Average: #= value.current #"
-                }
-            });
         }
 
         $(document).ready(function() {
@@ -221,6 +215,11 @@
             width: 20px;
             text-align: right;
             padding-bottom: 22px;
+        }
+        
+        .chart-wrapper  {
+            width: 450px;
+            height: 350px;    
         }
     </style>
 </div>

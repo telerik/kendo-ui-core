@@ -621,18 +621,6 @@
             ]
         },
         {
-            "id": "router",
-            "name": "Router",
-            "category": "framework",
-            "description": "Router",
-            "depends": [
-                "core"
-            ],
-            "hidden": false,
-            "source": "kendo.router.min.js",
-            "widgets": []
-        },
-        {
             "id": "imagebrowser",
             "name": "ImageBrowser",
             "category": "web",
@@ -1191,6 +1179,18 @@
             ]
         },
         {
+            "id": "router",
+            "name": "history",
+            "category": "framework",
+            "description": "Kendo Router",
+            "depends": [
+                "core"
+            ],
+            "hidden": false,
+            "source": "kendo.router.min.js",
+            "widgets": []
+        },
+        {
             "id": "selectable",
             "name": "Selectable",
             "category": "framework",
@@ -1300,7 +1300,7 @@
                 {
                     "name": "TimePicker",
                     "file": "kendo.timepicker.js",
-                    "line": 456,
+                    "line": 468,
                     "col": 21
                 }
             ]
@@ -1408,6 +1408,17 @@
                     "col": 20
                 }
             ]
+        },
+        {
+            "id": "view",
+            "name": "View",
+            "category": "framework",
+            "depends": [
+                "core"
+            ],
+            "hidden": false,
+            "source": "kendo.view.min.js",
+            "widgets": []
         },
         {
             "id": "window",

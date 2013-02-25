@@ -280,5 +280,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the tooltip shared
+        /// </summary>
+        /// <param name="shared">The tooltip shared.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Tooltip(tooltip => tooltip
+        ///               .Visible(true)
+        ///               .Shared(true)
+        ///           )
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartTooltipBuilder Shared(bool shared)
+        {
+            tooltip.Shared = shared;
+            return this;
+        }
     }
 }
