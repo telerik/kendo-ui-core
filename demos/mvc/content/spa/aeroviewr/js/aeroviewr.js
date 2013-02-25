@@ -1,6 +1,6 @@
 var model,
     router,
-    imagePlaceHolder = { image_url: "../content/spa/aeroviewr/images/loading.gif" },
+    imagePlaceHolder = { image_url: "content/spa/aeroviewr/images/loading.gif", calculatedWidth: 400 },
     popularQuery = { url: '/photos', settings: { feature: 'popular', page: 1, image_size: 1, rpp: 50 } };
 
 var photos = new kendo.data.DataSource({
@@ -27,6 +27,7 @@ model = kendo.observable({
         this.set("current", parseInt(photoID));
 
         _500px.api('/photos/' + photoID, { image_size: 4 }, function(response) {
+            response.data.photo.calculatedWidth = (500 / response.data.photo.height) * response.data.photo.width;
             model.set("currentPhoto", response.data.photo);
         });
     },

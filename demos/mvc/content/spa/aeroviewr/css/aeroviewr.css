@@ -1,4 +1,5 @@
 * {
+    font-family: "Droid Sans", sans-serif;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -9,7 +10,6 @@ body, html, #root, #root > div {
     padding: 0;
     background: #000;
     height: 100%;
-    font-family: sans-serif;
 }
 
 .focused header, .focused footer, .focused #details {
@@ -21,13 +21,14 @@ body, html, #root, #root > div {
 ***************************/
 header {
     position: fixed;
+    z-index: 100;
     top: 0;
-    background: #222 url("../images/texture-darker.png");
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,.2);
     box-shadow: 0 0 20px #000;
     -moz-box-shadow: 0 0 20px #000;
     -webkit-box-shadow: 0 0 20px #000;
+    background: url("../images/texture-darker.png");
     padding: 20px;
     color: white;
 }
@@ -68,9 +69,9 @@ header #slideshow-button {
     -moz-transition: width 200ms;
     -webkit-transition: width 200ms;
     position: relative;
-    float: right;
     top: 0;
     width: 0;
+    float: right;
     height: 500px;
     color: white;
     text-align: left;
@@ -86,7 +87,6 @@ header #slideshow-button {
 #details > div
 {
     width: 400px;
-    height: 100%;
     margin-left: 30px;
 }
 
@@ -95,35 +95,48 @@ header #slideshow-button {
 }
 
 #details p,
-#details dt,
-#details dd
+#details ul
 {
     font-size: 13px;
-}
-
-#details dt,
-#details dd
-{
-    font-size: 12px;
-    float: left;
-    width: 100px;
 }
 
 #details h2
 {
     font-weight: normal;
     font-size: 30px;
+    line-height: 38px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-#details dt
+#details ul span
 {
-    clear: left;
+    display: inline-block;
+    font-size: 12px;
+    width: 100px;
     color: #949494;
+    vertical-align: top;
 }
 
-#details dd
+#details ul div
 {
     color: #ffd200;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#details ul
+{
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#details img
+{
+    width: 100px;
+    float: left;
 }
 
 #image-container {
@@ -144,13 +157,18 @@ header #slideshow-button {
     width: 100%;
 }
 
-#image-wrap img {
+#image-inner-wrap > img {
     height: 500px;
-    display: block;
+    display: inline-block;
     margin: 0 auto;
+    transition: width 200ms;
+    -moz-transition: width 200ms;
+    -webkit-transition: width 200ms;
 }
 
 #image-inner-wrap {
+    height: 502px;
+    white-space: nowrap;
     border: 1px solid #555;
     border: 1px solid rgba(255,255,255,.2);
     display: inline-block;
@@ -167,29 +185,36 @@ header #slideshow-button {
 
 footer {
     position: fixed;
+    z-index: 100;
     bottom: 0;
     width: 100%;
+    border-top: 1px solid rgba(255,255,255,.2);
+    box-shadow: 0 0 20px #000;
+    -moz-box-shadow: 0 0 20px #000;
+    -webkit-box-shadow: 0 0 20px #000;
+    background: url("../images/texture-darker.png");
 }
 
 #photo-thumbs {
     border: 0;
     overflow: hidden;
     width: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 4px 70px;
-    border-top: 1px solid rgba(255,255,255,.2);
+    background: transparent;
+    padding: 4px 70px 6px;
     white-space: nowrap;
-    height: 80px;
+    height: 82px;
 }
 
 #photo-thumbs a {
     display: inline-block;
+    border: 1px solid transparent;
 }
 
 #photo-thumbs img {
     display: block;
     width: 70px;
     height: 70px;
+    border: 0;
 }
 
 #photo-thumbs a.selected {
@@ -199,9 +224,9 @@ footer {
 
 .scroll-arrow {
     opacity: .3;
-    transition: opacity 200ms;
-    -moz-transition: opacity 200ms;
-    -webkit-transition: opacity 200ms;
+    transition: opacity 200ms, background-color 200ms, color 200ms;
+    -moz-transition: opacity 200ms, background-color 200ms, color 200ms;
+    -webkit-transition: opacity 200ms, background-color 200ms, color 200ms;
     position: absolute;
     top: 0;
     left: 0;
@@ -210,8 +235,8 @@ footer {
     z-index: 2;
     height: 30px;
     width: 30px;
-    margin: 25px 20px;
-    line-height: 20px;
+    margin: 26px 20px 24px;
+    line-height: 22px;
     text-align: center;
     font-size: 2em;
     padding: 2px;
@@ -242,9 +267,9 @@ footer:hover .scroll-arrow {
 .aeroLogo a,
 #details
 {
+    font-weight: normal;
     margin: 0;
     display: inline-block;
-    font: "Segoe UI", "Droid Sans", sans-serif;
     text-decoration: none;
 }
 

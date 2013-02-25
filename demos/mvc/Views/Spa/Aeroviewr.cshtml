@@ -8,6 +8,7 @@
         <link rel="shortcut icon" href="favicon.ico">
 
         <link rel="stylesheet" href="@Url.Content("~/content/spa/aeroviewr/css/aeroviewr.css")" />
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 
         @foreach (string styleName in Kendo.Models.StyleGroups.All) {
             <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
@@ -33,7 +34,7 @@
                     <label>Search: <input type="search" data-bind="value: query" /></label>
                 </form>
                 <h1 class="aeroLogo"><a href="">aero<span>viewr</span></a></h1>&nbsp;
-                <button id="slideshow-button" data-bind="text: slideShowButtonText, click: toggleSlideShow"></button>
+                <!--button id="slideshow-button" data-bind="text: slideShowButtonText, click: toggleSlideShow"></button-->
             </header>
 
             <section data-bind="events: { dblclick: toggleFocus, click: toggleShowDetails }" id="image-container">
@@ -43,22 +44,29 @@
                             <div>
                                 <h2 data-bind="text: currentPhoto.name"></h2>
                                 <p data-bind="html: currentPhoto.description"></p>
-                                <dl>
-                                    <dt>Camera:</dt><dd data-bind="text: currentPhoto.camera"></dd>
-                                    <dt>Aperture:</dt><dd data-bind="text: currentPhoto.aperture"></dd>
-                                    <dt>ISO:</dt><dd data-bind="text: currentPhoto.iso"></dd>
-                                </dl>
+                                <ul>
+                                    <li data-bind="visible: currentPhoto.camera"><span>Camera</span><div data-bind="text: currentPhoto.camera"></div></li>
+                                    <li data-bind="visible: currentPhoto.focal_length"><span>Focal Length</span><div data-bind="text: currentPhoto.focal_length"></div></li>
+                                    <li data-bind="visible: currentPhoto.shutter_speed"><span>Shutter Speed</span><div data-bind="text: currentPhoto.shutter_speed"></div></li>
+                                    <li data-bind="visible: currentPhoto.aperture"><span>Aperture</span><div data-bind="text: currentPhoto.aperture"></div></li>
+                                    <li data-bind="visible: currentPhoto.iso"><span>ISO</span><div data-bind="text: currentPhoto.iso"></div></li>
+                                    <li data-bind="visible: currentPhoto.times_viewed"><span>Times Viewed</span><div data-bind="text: currentPhoto.times_viewed"></div></li>
+                                    <li data-bind="visible: currentPhoto.rating"><span>Rating</span><div data-bind="text: currentPhoto.rating + '%'"></div></li>
+                                    <li data-bind="visible: currentPhoto.category"><span>Category</span><div data-bind="text: currentPhoto.category"></div></li>
+                                    <li data-bind="visible: currentPhoto.user.fullname"><span>Copyright</span><div data-bind="text: currentPhoto.user.fullname"></div></li>
+                                    <li data-bind="visible: currentPhoto.user.userpic_url"><span>Avatar</span><div><img data-bind="attr: { src: currentPhoto.user.userpic_url }"/></div></li>
+                                </ul>
                             </div>
                         </section>
-                        <img data-bind="attr: { src: currentPhoto.image_url }">
+                        <img data-bind="attr: { src: currentPhoto.image_url, width: currentPhoto.calculatedWidth }"/>
                     </div>
                 </div>
             </section>
 
             <footer>
-                <a data-bind="click: scrollLeft" id="scroll-left" class="scroll-arrow">&laquo;</a>
+                <a data-bind="click: scrollLeft" id="scroll-left" class="scroll-arrow">&#x2039;</a>
                 <div data-role="listview" data-auto-bind="false" data-bind="{ source: photos }" data-template="photo-thumb" id="photo-thumbs"></div>
-                <a data-bind="click: scrollRight" id="scroll-right" class="scroll-arrow">&raquo;</a>
+                <a data-bind="click: scrollRight" id="scroll-right" class="scroll-arrow">&#x203A;</a>
             </footer>
         </script>
 
