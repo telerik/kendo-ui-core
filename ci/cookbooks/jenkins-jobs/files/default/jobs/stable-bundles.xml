@@ -62,7 +62,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-        <command>bundle --without development --path ~/gems &amp;&amp; bundle exec rake build:master:bundles;</command>
+        <command>bundle --without development --path ~/gems &amp;&amp; BETA=true bundle exec rake build:master:bundles;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
