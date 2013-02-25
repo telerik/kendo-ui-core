@@ -517,13 +517,13 @@
     <value>Webbadress</value>
   </data>
   <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
-    <value>Open link in new window</value>
+    <value>Öppna länk i ett nytt fönster</value>
   </data>
   <data name="Editor_LinkText" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="Editor_LinkToolTip" xml:space="preserve">
-    <value>ToolTip</value>
+    <value>Skärmtips</value>
   </data>
   <data name="Editor_LinkWebAddress" xml:space="preserve">
     <value>Webbadress</value>
