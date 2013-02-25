@@ -28,7 +28,9 @@
         </ul>
     </div>
 
-    <select id="products"></select>
+    <div class="demo-section">
+        <select id="products"></select>
+    </div>
 
     <script>
         $(document).ready(function() {
@@ -100,52 +102,14 @@
             multiSelect.options.filter = $("#filter").val();
         }
     });
-</script>
-<style scoped>
-    .configuration .k-textbox {
-        width: 40px;
-    }
-
-    #products_wrapper
-    {
-        width: 500px;
-    }
-
-    .k-readonly
-    {
-        color: gray;
-    }
-
-    .k-multiselect-wrap
-    {
-        border-width: 0px;
-        border-style: solid;
-        border-radius: 4px;
-        border-color: #C5C5C5;
-        background-color: #FFF;
-    }
-
-    .k-multiselect-wrap .k-input
-    {
-        background-color: transparent;
-        height: 1.31em;
-        line-height: 1.31em;
-        padding: 0.18em 0;
-        text-indent: 4px;
-        border: 0;
-        margin: 0;
-        float: left;
-    }
-
-    .k-multiselect-wrap li
-    {
-        display: inline-block;
-        border-style: solid;
-        border-width: 1px;
-        margin: 5px 3px;
-        padding: .15em .15em .15em .4em;
-        line-height: 1.5em;
-        float: left;
-    }
-</style>
-        </div>
+    </script>
+    <style scoped>
+        .configuration .k-textbox {
+            width: 40px;
+        }
+        .demo-section {
+            width: 450px;
+            margin-left: 0;
+        }
+    </style>
+</div>

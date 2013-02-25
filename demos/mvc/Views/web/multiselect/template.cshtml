@@ -1,12 +1,8 @@
         <div id="example" class="k-content">
-            <div class="configuration k-widget k-header">
-                <span class="infoHead">Information</span>
-                <p>
-                    Open the ComboBox to see the customized appearance of the items.
-                </p>
+            <div class="demo-section">
+                <h3 class="title">Select titles from Netflix</h3>
+                <select id="titles"></select>
             </div>
-
-            <select id="titles"></select>
 
             <script>
                 $(document).ready(function() {
@@ -38,6 +34,10 @@
             </script>
 
             <style scoped>
+                .demo-section {
+                    width: 406px;
+                    margin-top: 40px;
+                }
                 #titles-list .k-item {
                     overflow: hidden; /* clear floated images */
                 }

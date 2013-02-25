@@ -1,15 +1,60 @@
         <div id="example" class="k-content">
 
-            <div class="k-rtl">
+            <div class="demo-section k-rtl">
+                <h3 class="title">Select Countries in Europe</h3>
                 <select id="select"></select>
             </div>
 
             <script>
                 $(document).ready(function() {
                     var data = [
-                        { text: "Item 1", value:"1" },
-                        { text: "Item 2", value:"2" },
-                        { text: "Item 3", value:"3" }
+                        { text: "Albania", value:"1" },
+                        { text: "Andorra", value:"2" },
+                        { text: "Armenia", value:"3" },
+                        { text: "Austria", value:"4" },
+                        { text: "Azerbaijan", value:"5" },
+                        { text: "Belarus", value:"6" },
+                        { text: "Belgium", value:"7" },
+                        { text: "Bosnia and Herzegovina", value:"8" },
+                        { text: "Bulgaria", value:"9" },
+                        { text: "Croatia", value:"10" },
+                        { text: "Cyprus", value:"11" },
+                        { text: "Czech Republic", value:"12" },
+                        { text: "Denmark", value:"13" },
+                        { text: "Estonia", value:"14" },
+                        { text: "Finland", value:"15" },
+                        { text: "France", value:"16" },
+                        { text: "Georgia", value:"17" },
+                        { text: "Germany", value:"18" },
+                        { text: "Greece", value:"19" },
+                        { text: "Hungary", value:"20" },
+                        { text: "Iceland", value:"21" },
+                        { text: "Ireland", value:"22" },
+                        { text: "Italy", value:"23" },
+                        { text: "Latvia", value:"24" },
+                        { text: "Liechtenstein", value:"25" },
+                        { text: "Lithuania", value:"26" },
+                        { text: "Luxembourg", value:"27" },
+                        { text: "Macedonia", value:"28" },
+                        { text: "Malta", value:"29" },
+                        { text: "Moldova", value:"30" },
+                        { text: "Monaco", value:"31" },
+                        { text: "Montenegro", value:"32" },
+                        { text: "Netherlands", value:"33" },
+                        { text: "Norway", value:"34" },
+                        { text: "Poland", value:"35" },
+                        { text: "Portugal", value:"36" },
+                        { text: "Romania", value:"37" },
+                        { text: "San Marino", value:"38" },
+                        { text: "Serbia", value:"39" },
+                        { text: "Slovakia", value:"40" },
+                        { text: "Slovenia", value:"41" },
+                        { text: "Spain", value:"42" },
+                        { text: "Sweden", value:"43" },
+                        { text: "Switzerland", value:"44" },
+                        { text: "Ukraine", value:"45" },
+                        { text: "United Kingdom", value:"46" },
+                        { text: "Vatican City", value:"47" }
                     ];
 
                     $("#select").kendoMultiSelect({
@@ -19,4 +64,10 @@
                     });
                 });
             </script>
+                <style scoped="scoped">
+                .demo-section {
+                    width: 406px;
+                    margin-top: 40px;
+                }
+            </style>
         </div>
