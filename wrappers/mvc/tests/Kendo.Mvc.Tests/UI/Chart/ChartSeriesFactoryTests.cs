@@ -275,13 +275,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Bubble_should_create_unbound_scatter_series_from_data()
-        {
-            var builder = factory.Bubble(new int[] { 1 });
-            builder.Series.ShouldBeType<ChartBubbleSeries<SalesData, object, object, object>>();
-        }
-
-        [Fact]
         public void Pie_should_create_bound_Pie_series_from_expression()
         {
             var builder = factory.Pie(s => s.RepSales, s => s.RepName);
