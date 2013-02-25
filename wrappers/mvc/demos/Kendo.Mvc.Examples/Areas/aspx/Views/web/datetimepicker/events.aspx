@@ -5,16 +5,22 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="demo-section" style="width:155px">
-<%= Html.Kendo().DateTimePicker()
-      .Name("datetimepicker")
-      .Events(e =>
-      {
-          e.Change("change").Open("open").Close("close");
-      })
-%>
+<div class="demo-section" style="width: 185px;">
+    <h3 class="title">Select date and time
+    </h3>
+    <%= Html.Kendo().DateTimePicker()
+          .Name("datetimepicker")
+          .Events(e =>
+          {
+              e.Change("change").Open("open").Close("close");
+          })
+    %>
 </div>
-
+<div class="demo-section">                
+    <h3 class="title">Console log
+    </h3>
+    <div class="console"></div>
+</div>
 <script>
     function open(e) {
         kendoConsole.log("Open :: " + e.view + "-view");
@@ -28,5 +34,5 @@
         kendoConsole.log("Change :: " + kendo.toString(this.value(), 'g'));
     }
 </script>
-<div class="console"></div>
+
 </asp:Content>

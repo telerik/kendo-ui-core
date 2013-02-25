@@ -77,7 +77,6 @@
 </script>
 <style scoped>
     .demo-section {
-        margin: 0 0;
         width: 185px;
     }
 </style>

@@ -42,7 +42,6 @@
 
 <style scoped="scoped">
     .demo-section {
-        margin: 0 0;
         width: 185px;
     }
 
