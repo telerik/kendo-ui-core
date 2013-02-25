@@ -28,7 +28,7 @@
           .ItemTemplate("<img src=\"" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" />" +
                         "<h3>#: data.ContactName #</h3>" +
                         "<p>#: data.CompanyName #</p>")
-          .TagTemplate("<img class="tag-image" src=\"" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" />" +
+          .TagTemplate("<img class=\"tag-image\" src=\"" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" />" +
                        "#: data.ContactName #")
     %>
 </div>
