@@ -27,46 +27,46 @@
             </li>
         </ul>
     </div>
-            
-    <%= Html.Kendo().DropDownList()
-            .Name("movies")
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .BindTo(new List<SelectListItem>()
-            {
-                new SelectListItem() {
-                Text = "The Shawshank Redemption", Value ="1"
-                },
-                new SelectListItem() {
-                Text = "The Godfather", Value ="2"
-                },
-                new SelectListItem() {
-                Text = "The Godfather: Part II", Value ="3"
-                },
-                new SelectListItem() {
-                Text = "Il buono, il brutto, il cattivo.", Value ="4"
-                },
-                new SelectListItem() {
-                Text = "Pulp Fiction", Value ="5"
-                },
-                new SelectListItem() {
-                Text = "12 Angry Men", Value ="6"
-                },
-                new SelectListItem() {
-                Text = "Schindler's List", Value ="7"
-                },
-                new SelectListItem() {
-                Text = "One Flew Over the Cuckoo's Nest", Value ="8"
-                },
-                new SelectListItem() {
-                Text = "Inception", Value ="9"
-                },
-                new SelectListItem() {
-                Text = "The Dark Knight", Value ="10"
-                }
-            })
-    %>
-
+    <div class="demo-section">        
+        <%= Html.Kendo().DropDownList()
+                .Name("movies")
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .BindTo(new List<SelectListItem>()
+                {
+                    new SelectListItem() {
+                    Text = "The Shawshank Redemption", Value ="1"
+                    },
+                    new SelectListItem() {
+                    Text = "The Godfather", Value ="2"
+                    },
+                    new SelectListItem() {
+                    Text = "The Godfather: Part II", Value ="3"
+                    },
+                    new SelectListItem() {
+                    Text = "Il buono, il brutto, il cattivo.", Value ="4"
+                    },
+                    new SelectListItem() {
+                    Text = "Pulp Fiction", Value ="5"
+                    },
+                    new SelectListItem() {
+                    Text = "12 Angry Men", Value ="6"
+                    },
+                    new SelectListItem() {
+                    Text = "Schindler's List", Value ="7"
+                    },
+                    new SelectListItem() {
+                    Text = "One Flew Over the Cuckoo's Nest", Value ="8"
+                    },
+                    new SelectListItem() {
+                    Text = "Inception", Value ="9"
+                    },
+                    new SelectListItem() {
+                    Text = "The Dark Knight", Value ="10"
+                    }
+                })
+        %>
+    </div>
     <script>
         $(document).ready(function() {
             $("#movies").closest(".k-widget")
@@ -125,6 +125,11 @@
     <style scoped>
         .configuration .k-textbox {
             width: 40px;
+        }
+        
+        .demo-section
+        {
+            width:150px;
         }
     </style>
 </asp:Content>

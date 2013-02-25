@@ -4,29 +4,34 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-
-<%= Html.Kendo().DropDownList()
-        .Name("dropdownlist")
-        .DataTextField("Text")
-        .DataValueField("Value")
-        .BindTo(new List<SelectListItem>()
-        {
-            new SelectListItem() {
-                Text = "Item1", Value = "1"  
-            },
-            new SelectListItem() {
-                Text = "Item2", Value = "2"  
-            },
-            new SelectListItem() {
-                Text = "Item3", Value = "3"  
-            }
-        })
-        .Events(e =>
-        {
-            e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
-        })
-%>
-
+<div class="demo-section">
+    <h3 class="title">Select item</h3>
+    <%= Html.Kendo().DropDownList()
+            .Name("dropdownlist")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .BindTo(new List<SelectListItem>()
+            {
+                new SelectListItem() {
+                    Text = "Item1", Value = "1"  
+                },
+                new SelectListItem() {
+                    Text = "Item2", Value = "2"  
+                },
+                new SelectListItem() {
+                    Text = "Item3", Value = "3"  
+                }
+            })
+            .Events(e =>
+            {
+                e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
+            })
+    %>
+</div>
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
 <script>
     function open() {
         kendoConsole.log("event: open");
@@ -51,5 +56,10 @@
         }
     };
 </script>
-<div class="console"></div>
+<style scoped>
+    .demo-section
+    {
+        text-align:center;
+    }
+</style>
 </asp:Content>

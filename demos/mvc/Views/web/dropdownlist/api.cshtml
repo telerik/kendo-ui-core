@@ -24,7 +24,9 @@
                 </ul>
             </div>
             
-            <input id="products" />
+            <div class="demo-section">
+                <input id="movies" />
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -41,7 +43,7 @@
                         {text: "The Dark Knight", value:"10"}
                     ];
 
-                    $("#products").kendoDropDownList({
+                    $("#movies").kendoDropDownList({
                                       dataTextField: "text",
                                       dataValueField: "value",
                                       dataSource: data
@@ -49,7 +51,7 @@
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
 
-                    var dropdownlist = $("#products").data("kendoDropDownList"),
+                     var dropdownlist = $("#movies").data("kendoDropDownList"),
                         setValue = function(e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                                 dropdownlist.value($("#value").val());
@@ -102,6 +104,12 @@
             <style scoped>
                 .configuration .k-textbox {
                     width: 40px;
+                }
+                
+                .demo-section
+                {
+                    width:150px;
+                    margin-right: 360px;
                 }
             </style>
         </div>

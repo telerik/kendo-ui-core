@@ -47,4 +47,10 @@
             }
         }
     </script>
+    <style scoped>
+	    .demo-section
+	    {
+	        text-align:center;
+	    }
+	</style>  
 <demo:footer />

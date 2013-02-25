@@ -27,11 +27,11 @@
 	        </li>
 	    </ul>
 	</div>
-    
-    <kendo:dropDownList name="movies" dataTextField="text" dataValueField="value">
-        <kendo:dataSource data="${movies}"></kendo:dataSource>
-    </kendo:dropDownList>
-    
+    <div class="demo-section"> 
+	    <kendo:dropDownList name="movies" dataTextField="text" dataValueField="value">
+	        <kendo:dataSource data="${movies}"></kendo:dataSource>
+	    </kendo:dropDownList>
+    </div>	
     <script>
 	    $(document).ready(function() {
 	        $("#movies").closest(".k-widget")
@@ -91,5 +91,10 @@
 	    .configuration .k-textbox {
 	        width: 40px;
 	    }
+	    
+	    .demo-section
+	    {
+	        width:150px;
+	    }  	    
 	</style>
 <demo:footer />

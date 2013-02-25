@@ -1,7 +1,8 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
-    <div>
+	<div class="demo-section">
+	    <h3 class="title">Select item</h3>
         <kendo:dropDownList name="dropdownlist" open="onOpen" close="onClose" change="onChange" select="onSelect"
             dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
@@ -9,7 +10,10 @@
         </kendo:dropDownList>
     </div>
     
-    <div class="console"></div>
+	<div class="demo-section">
+	    <h3 class="title">Console log</h3>
+	    <div class="console"></div>
+	</div>
     
     <script>
         function onOpen() {
@@ -37,4 +41,10 @@
             }
         }
     </script>
+    <style scoped>
+	    .demo-section
+	    {
+	        text-align:center;
+	    }
+	</style>
 <demo:footer />
