@@ -2824,9 +2824,25 @@ span.k-numerictextbox
 
 .k-editor-toolbar li
 {
-    display: inline; /* would have been inline-block, if not for IE */
+    display: inline; /* mandatory for IE7. Floats and the inline-block hack break it */
     vertical-align: middle;
 }
+
+.k-webkit .k-editor-toolbar,
+.k-ff .k-editor-toolbar,
+.k-ie9 .k-editor-toolbar
+{
+    padding: 0;
+}
+
+.k-webkit .k-editor-toolbar li,
+.k-ff .k-editor-toolbar li,
+.k-ie9 .k-editor-toolbar li
+{
+    display: inline-block;
+    padding: .1em 0;
+}
+
 
 .k-editor-toolbar .k-editor-dropdown,
 .k-editor-toolbar .k-editor-combobox,
