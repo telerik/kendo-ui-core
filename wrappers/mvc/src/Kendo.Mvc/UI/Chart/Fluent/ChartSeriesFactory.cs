@@ -1171,7 +1171,7 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, TTarget>> targetExpression,
             Expression<Func<TModel, string>> colorExpression = null)
         {
-            var builder = Bullet(currentExpression, targetExpression, colorExpression);
+            ChartBulletSeriesBuilder<TModel> builder = Bullet(currentExpression, targetExpression, colorExpression);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -1208,7 +1208,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet(Type memberType, string currentMemberName, string targetMemberName, string colorMemberName = null)
         {
-            var builder = Bullet(memberType, currentMemberName, targetMemberName);
+            ChartBulletSeriesBuilder<TModel> builder = Bullet(memberType, currentMemberName, targetMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -1222,7 +1222,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet(IEnumerable data)
         {
-            var builder = Bullet(data);
+            ChartBulletSeriesBuilder<TModel> builder = Bullet(data);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
