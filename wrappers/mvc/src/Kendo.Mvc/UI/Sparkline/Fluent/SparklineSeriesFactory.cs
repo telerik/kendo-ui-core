@@ -428,12 +428,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colorExpression">
         /// The expression used to extract the point color from the chart model
         /// </param>
-        public virtual ChartBulletSeriesBuilder<TModel> Bullet<TCurrent, TTarget>(
-            Expression<Func<TModel, TCurrent>> currentExpression,
-            Expression<Func<TModel, TTarget>> targetExpression,
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet<TValue>(
+            Expression<Func<TModel, TValue>> currentExpression,
+            Expression<Func<TModel, TValue>> targetExpression,
             Expression<Func<TModel, string>> colorExpression = null)
         {
-            var bulletSeries = new ChartBulletSeries<TModel, TCurrent, TTarget>(currentExpression, targetExpression, colorExpression);
+            var bulletSeries = new ChartBulletSeries<TModel, TValue>(currentExpression, targetExpression, colorExpression);
 
             Container.Series.Add(bulletSeries);
 
@@ -474,7 +474,7 @@ namespace Kendo.Mvc.UI.Fluent
             var currentExpr = BuildMemberExpression(memberType, currentMemberName);
             var targetExpr = BuildMemberExpression(memberType, targetMemberName);
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
-            var seriesType = typeof(ChartBulletSeries<,,>).MakeGenericType(typeof(TModel), currentExpr.Body.Type);
+            var seriesType = typeof(ChartBulletSeries<,>).MakeGenericType(typeof(TModel), currentExpr.Body.Type);
             var series = (IChartBulletSeries)BuildSeries(seriesType, currentExpr, targetExpr, colorExpr);
 
             series.CurrentMember = currentMemberName;
@@ -499,7 +499,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBulletSeriesBuilder<TModel> Bullet(IEnumerable data)
         {
-            ChartBulletSeries<TModel, object, object> bulletSeries = new ChartBulletSeries<TModel, object, object>(data);
+            ChartBulletSeries<TModel, object> bulletSeries = new ChartBulletSeries<TModel, object>(data);
 
             Container.Series.Add(bulletSeries);
 
