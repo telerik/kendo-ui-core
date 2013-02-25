@@ -1,15 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using IOFile = System.IO.File;
-using System.Text.RegularExpressions;
 
 namespace Kendo.Controllers
 {
     public class SourceController : BaseController
     {
+        private static readonly IDictionary<Regex, string> Filters = new Dictionary<Regex, string> 
+        { 
+            { new Regex(@"(<php\?)?.*require_once.*?(header|footer).*\r?\n?\r?\n?"), "" },
+            { new Regex(@"<%@taglib prefix=""demo""[^>]*>\r?\n?"), "" },
+            { new Regex(@"<demo:[^>]*>\r?\n?"), "" }
+        };
+
         public ActionResult Index(string path)
         {
             if (String.IsNullOrEmpty(path) || (!path.StartsWith("~/Views") && !path.StartsWith("~/src")))
@@ -33,6 +41,11 @@ namespace Kendo.Controllers
             else
             {
                 source = IOFile.ReadAllText(mappedPath);
+
+                foreach (var filter in Filters)
+                {
+                    source = filter.Key.Replace(source, filter.Value);
+                }
             }
 
             return Content("<pre class='prettyprint'>" + HttpUtility.HtmlEncode(source) + "</pre>", "text/plain");
