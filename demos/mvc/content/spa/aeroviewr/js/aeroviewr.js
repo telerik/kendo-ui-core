@@ -1,6 +1,6 @@
 var model,
     router,
-    imagePlaceHolder = { image_url: "images/loading.gif" },
+    imagePlaceHolder = { image_url: "../content/spa/aeroviewr/images/loading.gif" },
     popularQuery = { url: '/photos', settings: { feature: 'popular', page: 1, image_size: 1, rpp: 50 } };
 
 var photos = new kendo.data.DataSource({
