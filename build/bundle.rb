@@ -9,6 +9,7 @@ def bundle(options)
     eula = options[:eula]
     readme = options[:readme]
     vsdoc_sources = options[:vsdoc]
+    vsdoc_dest = options[:vsdoc_dest] || "vsdoc"
     type_script_sources = options[:type_script]
     changelog_suites = options[:changelog]
     demo_suites = options[:demos]
@@ -66,7 +67,7 @@ def bundle(options)
     if vsdoc_sources
         vsdoc_sources.keys.each_with_index do |key, index|
             sources = FileList["docs/api/{#{vsdoc_sources.keys[index].join(",")}}/*.md"]
-            vsdoc_path = File.join(path, "vsdoc", "kendo.#{vsdoc_sources.values[index]}-vsdoc.js")
+            vsdoc_path = File.join(path, vsdoc_dest, "kendo.#{vsdoc_sources.values[index]}-vsdoc.js")
             vsdoc vsdoc_path => sources
             prerequisites.push(vsdoc_path)
         end

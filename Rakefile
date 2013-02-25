@@ -273,6 +273,13 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
 
 bundle :name => 'cdn.commercial',
        :license => 'src-license-cdn',
+       :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :vsdoc_dest => 'js',
        :contents => {
            'js' => COMPLETE_MIN_JS + MVC_MIN_JS,
            'styles' => MIN_CSS_RESOURCES,
