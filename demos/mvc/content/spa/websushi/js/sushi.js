@@ -55,6 +55,10 @@ var cart = kendo.observable({
 });
 
 var layoutModel = kendo.observable({
+    cart: cart
+});
+
+var cartPreviewModel = kendo.observable({
     cart: cart,
 
     cartContentsClass: function() {
@@ -102,24 +106,45 @@ var indexModel = kendo.observable({
 });
 
 var detailModel = kendo.observable({
-    current: {},
     imgUrl: function() {
         return "http://demos.kendoui.com/sushi/content/images/200/" + this.get("current").image
     },
 
-    setCurrent: function(itemID) {
-        var item = items.get(itemID),
-            current = this.get("current");
+    price: function() {
+        return kendo.format("{0:c}", this.get("current").price);
+    },
 
-        current.set("name", item.name);
-        current.set("description", item.description);
-        current.set("image", item.image);
-        current.set("id", item.id);
+    setCurrent: function(itemID) {
+        this.set("current", items.get(itemID));
+    },
+
+    previousHref: function() {
+        var id = this.get("current").id - 1;
+        if (id === 0) {
+           id = items.data().length - 1;
+        }
+
+        return "#/menu/" + id;
+    },
+
+    nextHref: function() {
+        var id = this.get("current").id + 1;
+
+        if (id === items.data().length) {
+           id = 1;
+        }
+
+        return "#/menu/" + id;
+    },
+
+    kCal: function() {
+        return kendo.toString(this.get("current").stats.energy /  4.184, "0.0000");
     }
 });
 
 // Views and layouts
 var layout = new kendo.Layout("layout-template", { model: layoutModel });
+var cartPreview = new kendo.Layout("cart-preview-template", { model: cartPreviewModel });
 var index = new kendo.View("index-template", { model: indexModel });
 var checkout = new kendo.View("checkout-template");
 var detail = new kendo.View("detail-template", { model: detailModel });
@@ -133,20 +158,23 @@ var sushi = new kendo.Router({
 // Routing
 sushi.route("/", function() {
     layout.showIn("#content", index);
+    layout.showIn("#pre-content", cartPreview);
 });
 
 sushi.route("/checkout", function() {
     layout.showIn("#content", checkout);
+    cartPreview.hide();
 });
 
 sushi.route("/menu/:id", function(itemID) {
+    layout.showIn("#pre-content", cartPreview);
+
     items.fetch(function(e) {
         detailModel.setCurrent(itemID);
         layout.showIn("#content", detail);
     });
 });
 
-console.log("Foo");
 $(function() {
     sushi.start();
 });

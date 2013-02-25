@@ -305,6 +305,7 @@ h3{
     width: 200px;
     border-top: 1px dotted #a6a6a6;
     color: #d60041;
+    background-color: #fff;
     font-size: 11px;
     line-height: 38px;
     vertical-align: middle;
@@ -608,14 +609,13 @@ p#details-total-price span{
 
 .buy {
     text-align: center;
-    float: right;
     height: 28px;
     width: 111px;
     color: #fff ;
     font-size: 11px;
     text-transform: uppercase;
     margin-top: 25px;
-    margin-right: 18px;
+    margin-left: 18px;
     background: rgb(214,0,65);
     background: -moz-linear-gradient(top,  rgba(214,0,65,1) 0%, rgba(169,0,64,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,0,65,1)), color-stop(100%,rgba(169,0,64,1)));
@@ -690,6 +690,8 @@ p#details-total-price span{
     float: left;
     margin-left: 12px;
     line-height: 16px;
+    text-align: right;
+    width: 45px;
 }
 
 #navigate-next {
