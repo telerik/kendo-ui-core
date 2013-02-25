@@ -5,6 +5,8 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
+    <h3 class="title">Select item
+    </h3>
     <%= Html.Kendo().ComboBox()
             .Name("combobox")
             .DataTextField("Text")
@@ -26,6 +28,11 @@
                 e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
             })
     %>
+</div>
+<div class="demo-section">
+    <h3 class="title">Console log
+    </h3>
+    <div class="console"></div>
 </div>
 <script>
     function open() {
@@ -51,7 +58,4 @@
         }
     };
 </script>
-<div class="demo-section">
-    <div class="console"></div>
-</div>
 </asp:Content>

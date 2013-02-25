@@ -2,6 +2,8 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
     <div class="demo-section">
+        <h3 class="title">Select item
+        </h3>
         <kendo:comboBox name="combobox" open="onOpen" close="onClose" change="onChange" dataBound="onDataBound" select="onSelect"
             dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
@@ -9,6 +11,8 @@
         </kendo:comboBox>
     </div>
     <div class="demo-section">
+        <h3 class="title">Console log
+    	</h3>
     	<div class="console"></div>
     </div>
     <script>
