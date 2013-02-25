@@ -296,6 +296,16 @@
                 equal(dom.find("li").length, 2);
             });
 
+            test("clearing groups does not throw error", function() {
+                dom = $("<ul/>");
+
+                listView = new ListView(dom, {dataSource: dataSource});
+
+                listView.dataSource.query({});
+
+                ok(true);
+            });
+
             var application;
 
             module("pull to refresh", {

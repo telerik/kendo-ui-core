@@ -179,6 +179,7 @@ kendo_module({
                 loading = that.loading,
                 appendMethod = "html",
                 contents,
+                groups,
                 data,
                 item;
 
@@ -206,7 +207,9 @@ kendo_module({
 
             that.trigger("dataBinding");
 
-            if (dataSource.group()[0]) {
+            groups = dataSource.group();
+
+            if (groups && groups[0]) {
                 options.type = "group";
                 contents = kendo.render(that.groupTemplate, view);
             } else {
