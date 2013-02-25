@@ -1222,10 +1222,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet(IEnumerable data)
         {
-            ChartBulletSeriesBuilder<TModel> builder = Bullet(data);
-            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+            ChartBulletSeries<TModel, object> bulletSeries = new ChartBulletSeries<TModel, object>(data);
+            bulletSeries.Orientation = ChartSeriesOrientation.Vertical;
 
-            return builder;
+            Container.Series.Add(bulletSeries);
+
+            return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
         }
 
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
