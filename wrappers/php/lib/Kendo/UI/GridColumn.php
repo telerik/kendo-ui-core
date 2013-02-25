@@ -240,6 +240,15 @@ in order to have valid HTML markup in the Grid.
     }
 
     /**
+    * An array of values that will be used in a foreign key column. Each item in the array should have a text and value field.
+    * @param array $value
+    * @return \Kendo\UI\GridColumn
+    */
+    public function values($value) {
+        return $this->setProperty('values', $value);
+    }
+
+    /**
     * Indicates whether the column should be visible in column menu.
     * @param boolean $value
     * @return \Kendo\UI\GridColumn
@@ -249,16 +258,6 @@ in order to have valid HTML markup in the Grid.
     }
 
 //<< Properties
-
-    /**
-    * Specifies the local JavaScript array to use as foreign key values.
-    * @param array $value
-    * @return \Kendo\UI\GridColumn
-    */
-    public function values($value) {
-        return $this->setProperty('values', $value);
-    }
-
 }
 
 ?>
