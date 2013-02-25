@@ -41,8 +41,7 @@
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
                     "title": "Example of jQuery & HTML5 Kendo UI Area Chart bound to remote data",
-                    "meta": "This demo shows how Kendo UI Area Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo shows how Kendo UI Area Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
                 }, {
                     "text": "Binding to local data",
                     "url": "area-charts/local-data.html",
@@ -50,8 +49,7 @@
                     "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
                 }, {
                     "text": "Binding to grouped data",
-                    "url": "area-charts/grouped-data.html",
-                    "packages": [ "!offline" ]
+                    "url": "area-charts/grouped-data.html"
             }],
             "name": "area-charts"
         }, {
@@ -92,8 +90,7 @@
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
                     "title": "Binding to remote data demo | Kendo UI HTML5 jQuery Bar Charts",
-                    "meta": "This demo shows how Kendo UI Bar Charts widget can be bound to remote data to produce high-performance report in your business app.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo shows how Kendo UI Bar Charts widget can be bound to remote data to produce high-performance report in your business app."
                 }, {
                     "text": "Binding to local data",
                     "url": "bar-charts/local-data.html",
@@ -103,14 +100,12 @@
                     "text": "Binding to grouped data",
                     "url": "bar-charts/grouped-data.html",
                     "title": "Grouped data binding demo for Kendo UI HTML5 Bar Charts",
-                    "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group.",
-                    "packages": [ "!offline" ]
+                    "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group."
 				}, {
                     "text": "Plot bands",
                     "url": "bar-charts/plotbands.html",
                     "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Plot Bands Example",
-                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
-                    "packages": [ "!offline" ]
+                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders."
 				}, {
                     "text": "Gap and spacing",
                     "url": "bar-charts/gap-spacing.html",
@@ -138,8 +133,7 @@
                     "text": "Binding to remote data",
                     "url": "bubble-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Bubble Chart demo",
-                    "meta": "This demo illustrates binding to remote data feature of Kendo UI Bubble Chart for rich HTML5 visualizations.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo illustrates binding to remote data feature of Kendo UI Bubble Chart for rich HTML5 visualizations."
                 }, {
                     "text": "Binding to local data",
                     "url": "bubble-charts/local-data.html",
@@ -149,8 +143,7 @@
                     "text": "Binding to grouped data",
                     "url": "bubble-charts/grouped-data.html",
                     "title": "Binding to grouped data example | Kendo UI HTML5 Bubble Charts",
-                    "meta": "This demo shows how to bind Kendo UI Bubble Charts component to grouped data. See how you can implement the feature in your rich web app.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo shows how to bind Kendo UI Bubble Charts component to grouped data. See how you can implement the feature in your rich web app."
             }]
         }, {
             "text": "Bullet Charts",
@@ -189,8 +182,7 @@
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Line Charts features",
-                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart.",
-                    "packages": [ "!offline" ]
+                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart."
                 }, {
                     "text": "Binding to local data",
                     "url": "line-charts/local-data.html",
@@ -200,8 +192,7 @@
                     "text": "Binding to grouped data",
                     "url": "line-charts/grouped-data.html",
                     "title": "Binding to grouped data demo | Kendo UI Line Charts",
-                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts.",
-                    "packages": [ "!offline" ]
+                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts."
             }],
             "name": "line-charts"
         }, {
@@ -222,8 +213,7 @@
                     "text": "Binding to remote data",
                     "url": "donut-charts/remote-data.html",
                     "title": "Binding to remote data demo for Kendo UI Donut Charts",
-                    "meta": "This example shows how to bind Kendo UI Donut Charts to remote data.",
-                    "packages": [ "!offline" ]
+                    "meta": "This example shows how to bind Kendo UI Donut Charts to remote data."
                 }, {
                     "text": "Binding to local data",
                     "url": "donut-charts/local-data.html",
@@ -249,8 +239,7 @@
                     "text": "Binding to remote data",
                     "url": "pie-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Pie Charts",
-                    "meta": "This demo illustrates how Kendo UI Pie Charts can be bound to remote data by configuring Kendo UI DataSource component.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo illustrates how Kendo UI Pie Charts can be bound to remote data by configuring Kendo UI DataSource component."
                 }, {
                     "text": "Binding to local data",
                     "url": "pie-charts/local-data.html",
@@ -276,8 +265,7 @@
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html",
                     "title": "Date Axis demo in Kendo UI Scatter Charts ",
-                    "meta": "This example illustrates all properties, specific to date value axis of Kendo UI jQuery Scatter Charts.",
-                    "packages": [ "!offline" ]
+                    "meta": "This example illustrates all properties, specific to date value axis of Kendo UI jQuery Scatter Charts."
                 }, {
                     "text": "Multi-axis",
                     "url": "scatter-charts/multiple-axes.html",
@@ -287,8 +275,7 @@
                     "text": "Binding to remote data",
                     "url": "scatter-charts/remote-data.html",
                     "title": "Remote data-bound scatter series example | Kendo UI Scatter Charts",
-                    "meta": "This demo shows how scatter series of Kendo UI Scatter Charts can be bound to remote data source items.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo shows how scatter series of Kendo UI Scatter Charts can be bound to remote data source items."
                 }, {
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html",
@@ -298,8 +285,7 @@
                     "text": "Binding to grouped data",
                     "url": "scatter-charts/grouped-data.html",
                     "title": "Example of Kendo UI Scatter Charts bound to grouped data",
-                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component.",
-                    "packages": [ "!offline" ]
+                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component."
 				}, {
                     "text": "Pan and zoom",
                     "url": "scatter-charts/pan-and-zoom.html",
@@ -333,8 +319,7 @@
                     "text": "Events",
                     "url": "api/events.html",
                     "title": "Events API for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
-                    "meta": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components.",
-                    "packages": [ "!offline" ]
+                    "meta": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components."
 				}, {
 					"text": "Benchmark",
 					"packages": [ "!mvc" ],
