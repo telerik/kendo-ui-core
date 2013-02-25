@@ -86,7 +86,9 @@
     <Compile Include="Infrastructure\Implementation\DependencyInjectionContainerTests.cs" />
     <Compile Include="Infrastructure\Implementation\NoCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
-    <Compile Include="Sparkline\Serialization\SparklineSerializationTests.cs" />
+    <Compile Include="UI\Sparkline\SparklineBuilderTests.cs" />
+    <Compile Include="UI\Sparkline\SparklineHtmlBuilderTests.cs" />
+    <Compile Include="UI\Sparkline\Serialization\SparklineSerializationTests.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="UI\Chart\ChartClientEventsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartBuilderTests.cs" />

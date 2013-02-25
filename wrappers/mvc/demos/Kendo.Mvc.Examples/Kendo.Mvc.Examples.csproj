@@ -101,6 +101,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Grouped_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Sparklines\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
@@ -455,6 +456,7 @@
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\sparklines\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />

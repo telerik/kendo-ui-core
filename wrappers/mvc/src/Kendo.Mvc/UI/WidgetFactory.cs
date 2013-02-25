@@ -10,8 +10,8 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
+    using System.Collections;
 
     /// <summary>
     /// Creates the fluent API builders of the Kendo UI widgets

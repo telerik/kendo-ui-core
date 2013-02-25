@@ -403,6 +403,14 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        protected virtual HtmlBuilderBase HtmlBuilder
+        {
+            get
+            {
+                return new ChartHtmlBuilder<T>(this);
+            }
+        }
+
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             if (!HtmlAttributes.ContainsKey("id"))
@@ -410,7 +418,7 @@ namespace Kendo.Mvc.UI
                 HtmlAttributes["id"] = Id;
             }
 
-            new ChartHtmlBuilder<T>(this)
+            HtmlBuilder
                 .Build()
                 .WriteTo(writer);
 

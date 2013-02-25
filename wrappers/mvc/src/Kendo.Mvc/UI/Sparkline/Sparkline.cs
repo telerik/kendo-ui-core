@@ -3,6 +3,8 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
+    using System.Web.UI;
+    using Kendo.Mvc.UI.Html;
 
     public class Sparkline<T> : Chart<T>
         where T : class
@@ -69,6 +71,14 @@ namespace Kendo.Mvc.UI
             else
             {
                 base.SerializeDataSource(options);
+            }
+        }
+
+        protected override HtmlBuilderBase HtmlBuilder
+        {
+            get
+            {
+                return new SparklineHtmlBuilder<T>(this);
             }
         }
     }

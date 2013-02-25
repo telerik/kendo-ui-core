@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Sparkline{T}"/> component.
@@ -16,6 +17,67 @@ namespace Kendo.Mvc.UI.Fluent
         public SparklineBuilder(Sparkline<T> component)
             : base(component)
         {
+        }
+
+        /// <summary>
+        /// Sets the Sparkline data.
+        /// </summary>
+        /// <param name="data">The data for the default Sparkline series.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Sparkline()
+        ///             .Name("Sparkline")
+        ///             .Data(new int[] { 1, 2 })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual SparklineBuilder<T> Data(IEnumerable data)
+        {
+            var boxedData = new List<T>();
+            foreach (T item in data)
+            {
+                boxedData.Add(item);
+            }
+
+            Component.Data = boxedData;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the type of the sparkline.
+        /// </summary>
+        /// <param name="theme">The Sparkline type.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Sparkline()
+        ///             .Name("Sparkline")
+        ///             .Type(SparklineType.Area)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public SparklineBuilder<T> Type(SparklineType type)
+        {
+            Component.Type = type;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the per-point width of the sparkline.
+        /// </summary>
+        /// <param name="theme">The Sparkline per-point width.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Sparkline()
+        ///             .Name("Sparkline")
+        ///             .PointWidth(2)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public SparklineBuilder<T> PointWidth(double pointWidth)
+        {
+            Component.PointWidth = pointWidth;
+            return this;
         }
 
         /// <summary>

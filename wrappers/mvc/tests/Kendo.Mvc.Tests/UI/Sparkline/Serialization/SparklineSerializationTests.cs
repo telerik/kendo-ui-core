@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             sparkline.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldNotContain("\"pointWidth\"");
+            output.ShouldNotContain("\"data\"");
         }
     }
 }
