@@ -5,15 +5,19 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section" style="width:155px">
-<%= Html.Kendo().DatePicker()
-      .Name("datepicker")
-      .Events(e =>
-      {
-          e.Change("change").Open("open").Close("close");
-      })
-%>
+    <h3 class="title">Select date
+    </h3>
+    <%= Html.Kendo().DatePicker()
+          .Name("datepicker")
+          .Events(e =>
+          {
+              e.Change("change").Open("open").Close("close");
+          })
+    %>
 </div>
 <div class="demo-section">
+    <h3 class="title">Console log
+    </h3>
     <div class="console"></div>
 </div>
 <script>
