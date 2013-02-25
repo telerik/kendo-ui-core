@@ -338,7 +338,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        private void SerializeDataSource(IDictionary<string, object> options)
+        protected virtual void SerializeDataSource(IDictionary<string, object> options)
         {
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {

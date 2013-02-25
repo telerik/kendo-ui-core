@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Default_configuration_outputs_empty_tChart_init()
+        public void Default_configuration_outputs_empty_kendoChart_init()
         {
             chart.WriteInitializationScript(textWriter.Object);
 

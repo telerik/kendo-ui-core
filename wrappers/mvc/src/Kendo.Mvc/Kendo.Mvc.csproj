@@ -932,6 +932,9 @@
     <Compile Include="UI\Slider\SliderOrientation.cs" />
     <Compile Include="UI\Slider\SliderTickPlacement.cs" />
     <Compile Include="UI\Slider\Html\SliderHtmlBuilder.cs" />
+    <Compile Include="UI\Sparkline\Enums\ChartSeriesType.cs" />
+    <Compile Include="UI\Sparkline\Fluent\SparklineBuilder.cs" />
+    <Compile Include="UI\Sparkline\Sparkline.cs" />
     <Compile Include="UI\Splitter\Fluent\SplitterPaneBuilder.cs" />
     <Compile Include="UI\Splitter\Fluent\SplitterPaneFactory.cs" />
     <Compile Include="UI\Splitter\Fluent\SplitterEventBuilder.cs" />
