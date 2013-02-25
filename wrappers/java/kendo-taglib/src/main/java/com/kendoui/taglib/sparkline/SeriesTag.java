@@ -21,6 +21,11 @@ public class SeriesTag extends BaseTag /* interfaces */ /* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+        SparklineTag parent = (SparklineTag)findParentWithClass(SparklineTag.class);
+
+
+        parent.setSeries(this);
+
 //<< doEndTag
 
         return super.doEndTag();

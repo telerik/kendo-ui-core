@@ -62,7 +62,8 @@
 				<beans:value>com.kendoui.spring.models.Category</beans:value>
 				<beans:value>com.kendoui.spring.models.Employee</beans:value>
 				<beans:value>com.kendoui.spring.models.DetailedEmployee</beans:value>	
-				<beans:value>com.kendoui.spring.models.Intraday</beans:value>			
+				<beans:value>com.kendoui.spring.models.Intraday</beans:value>	
+				<beans:value>com.kendoui.spring.models.Weather</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

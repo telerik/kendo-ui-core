@@ -18,7 +18,7 @@ puts %Q{
         [Rain] DECIMAL(5,2) NOT NULL,
         [Snow] DECIMAL(5,2) NULL,
         [Events] VARCHAR(255) NULL
-    )
+    );
 
     BEGIN TRANSACTION;
 }
@@ -30,7 +30,7 @@ CSV.foreach('sofia.csv', :headers => true) do |row|
     INSERT INTO Weather
         ([Station], [Date], [TMax], [TMin], [Wind], [Gust], [Rain], [Snow], [Events])
     VALUES
-        ('SOFIA', #{date.to_time.to_i * 1000}, #{row['TMax']}, #{row['TMin']}, #{row['Wind']}, #{row['Gust']}, #{row['Rain']}, #{row['Snow']}, '#{row['Events']}')
+        ('SOFIA', #{date.to_time.to_i * 1000}, #{row['TMax']}, #{row['TMin']}, #{row['Wind']}, #{row['Gust']}, #{row['Rain']}, #{row['Snow']}, '#{row['Events']}');
     }
 end
 
