@@ -10,9 +10,9 @@
 
 <script type="text/x-kendo-tmpl" id="template">
 	<div class="product">
-        <img src="../../resources/web/foods/#=productId#.jpg" alt="#=productName# image" />
-        <h3>#=productName#</h3>
-    	<p>#=kendo.toString(unitPrice, "c")#</p>
+        <img src="../../resources/web/foods/#:productId#.jpg" alt="#:productName# image" />
+        <h3>#:productName#</h3>
+    	<p>#:kendo.toString(unitPrice, "c")#</p>
 	</div>
 </script>
 

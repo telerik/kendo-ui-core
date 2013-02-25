@@ -13,13 +13,13 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
     <div class="product-view">
             <dl>
                 <dt>Product Name</dt>
-                <dd>${ProductName}</dd>
+                <dd>#:ProductName#</dd>
                 <dt>Unit Price</dt>
-                <dd>${kendo.toString(UnitPrice, "c")}</dd>
+                <dd>#:kendo.toString(UnitPrice, "c")#</dd>
                 <dt>Units In Stock</dt>
-                <dd>${UnitsInStock}</dd>
+                <dd>#:UnitsInStock#</dd>
                 <dt>Discontinued</dt>
-                <dd>${Discontinued}</dd>
+                <dd>#:Discontinued#</dd>
             </dl>
             <div class="edit-buttons">
                 <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>

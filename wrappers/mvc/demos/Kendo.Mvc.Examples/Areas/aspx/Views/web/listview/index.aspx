@@ -5,11 +5,11 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="<%=Url.Content("~/content/web/foods/")%>${ProductID}.jpg" alt="${ProductName} image" />
-        <h3>${ProductName}</h3>
+        <img src="<%=Url.Content("~/content/web/foods/")%>#:ProductID#.jpg" alt="#:ProductName# image" />
+        <h3>#:ProductName#</h3>
         <dl>
             <dt>Price:</dt>
-            <dd>${kendo.toString(UnitPrice, "c")}</dd>
+            <dd>#:kendo.toString(UnitPrice, "c")#</dd>
         </dl>
     </div>
 </script>

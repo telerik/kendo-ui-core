@@ -8,21 +8,21 @@
 
 <script id="list-view-template" type="text/x-kendo-template">
     <div class="product-view">
-            <dl>
-                <dt>Product Name</dt>
-                <dd>${ProductName}</dd>
-                <dt>Unit Price</dt>
-                <dd>${kendo.toString(UnitPrice, "c")}</dd>
-                <dt>Units In Stock</dt>
-                <dd>${UnitsInStock}</dd>
-                <dt>Discontinued</dt>
-                <dd>${Discontinued}</dd>
-            </dl>
-            <div class="edit-buttons">
-                <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>
-                <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span>Delete</a>
-            </div>
+        <dl>
+            <dt>Product Name</dt>
+            <dd>#:ProductName#</dd>
+            <dt>Unit Price</dt>
+            <dd>#:kendo.toString(UnitPrice, "c")#</dd>
+            <dt>Units In Stock</dt>
+            <dd>#:UnitsInStock#</dd>
+            <dt>Discontinued</dt>
+            <dd>#:Discontinued#</dd>
+        </dl>
+        <div class="edit-buttons">
+            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>
+            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span>Delete</a>
         </div>
+    </div>
 </script>
 
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
