@@ -33,6 +33,7 @@
     </ul>
 </div>
 
+<div class="demo-section">
 <%= Html.Kendo().MultiSelect()
     .Name("movies")
     .BindTo(new List<SelectListItem>()
@@ -72,6 +73,7 @@
         }
     })
 %>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -114,7 +116,7 @@
 
         $("#setValue").click(setValue);
         $("#value").keypress(setValue);
-        
+
         $("#find").click(setSearch);
         $("#word").keypress(setSearch);
 
@@ -126,6 +128,11 @@
 <style scoped>
     .configuration .k-textbox {
         width: 40px;
+    }
+    .demo-section {
+        float: left;
+        width: 450px;
+        margin-left: 0;
     }
 </style>
 </asp:Content>

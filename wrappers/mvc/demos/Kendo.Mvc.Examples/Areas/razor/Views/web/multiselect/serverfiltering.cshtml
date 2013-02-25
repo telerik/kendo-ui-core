@@ -1,11 +1,11 @@
-<div class="demo-section" style="width: 250px;">
-    <label for="products">Select product:</label>
+<div class="demo-section">
+    <h3 class="title">Select Products</h3>
 
     @(Html.Kendo().MultiSelect()
           .Name("products")
           .DataTextField("ProductName")
           .DataValueField("ProductID")
-          .Filter("contains")
+          .Placeholder("Select products...")
           .DataSource(source => {
               source.Read(read =>
               {
@@ -15,3 +15,9 @@
           })
     )
 </div>
+<style scoped>
+    .demo-section {
+        width: 450px;
+        margin-top: 40px;
+    }
+</style>

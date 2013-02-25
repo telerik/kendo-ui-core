@@ -4,8 +4,8 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="demo-section" style="width: 250px;">
-    <label for="products">Select product:</label>
+<div class="demo-section">
+    <h3 class="title">Select Products</h3>
     <%= Html.Kendo().MultiSelect()
           .Name("products")
           .DataTextField("ProductName")
@@ -20,4 +20,10 @@
           })
     %>
 </div>
+<style scoped>
+    .demo-section {
+        width: 450px;
+        margin-top: 40px;
+    }
+</style>
 </asp:Content>

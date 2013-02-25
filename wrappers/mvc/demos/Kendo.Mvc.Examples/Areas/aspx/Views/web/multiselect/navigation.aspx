@@ -166,13 +166,6 @@
     </li>
 </ul>
 
-
-<script>
-    $(document).ready(function () {
-        $("#select").kendoMultiSelect();
-    });
-</script>
-
 <style scoped>
     div.demo-section
     {

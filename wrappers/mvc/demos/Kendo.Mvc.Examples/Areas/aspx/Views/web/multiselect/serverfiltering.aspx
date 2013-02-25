@@ -1,12 +1,11 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="demo-section" style="width: 250px;">
-    <label for="products">Select product:</label>
-
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<div class="demo-section">
+    <h3 class="title">Select Products</h3>
     <%= Html.Kendo().MultiSelect()
           .Name("products")
           .DataTextField("ProductName")
@@ -21,4 +20,10 @@
           })
     %>
 </div>
+<style scoped>
+    .demo-section {
+        width: 450px;
+        margin-top: 40px;
+    }
+</style>
 </asp:Content>

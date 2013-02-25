@@ -4,27 +4,45 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<%= Html.Kendo().MultiSelect()
-        .Name("multiselect")
-        .DataTextField("Text")
-        .DataValueField("Value")
-        .BindTo(new List<SelectListItem>()
-        {
-            new SelectListItem() {
-                Text = "Item1", Value = "1"  
-            },
-            new SelectListItem() {
-                Text = "Item2", Value = "2"  
-            },
-            new SelectListItem() {
-                Text = "Item3", Value = "3"  
-            }
-        })
-        .Events(e =>
-        {
-            e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
-        })
+<%
+    var continents = new List<SelectListItem> {
+        new SelectListItem() {
+            Text = "Africa", Value = "1"
+        },
+        new SelectListItem() {
+            Text = "Europe", Value = "2"
+        },
+        new SelectListItem() {
+            Text = "Asia", Value = "3"
+        },
+        new SelectListItem() {
+            Text = "North America", Value = "4"
+        },
+        new SelectListItem() {
+            Text = "South America", Value = "5"
+        },
+        new SelectListItem() {
+            Text = "Antarctica", Value = "6"
+        },
+        new SelectListItem() {
+            Text = "Australia", Value = "7"
+        }
+    };
 %>
+
+<div class="demo-section">
+    <h3 class="title">Select Continents</h3>
+    <%= Html.Kendo().MultiSelect()
+            .Name("multiselect")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .BindTo(continents)
+            .Events(e =>
+            {
+                e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
+            })
+    %>
+</div>
 
 <script>
     function open() {
@@ -50,5 +68,14 @@
         }
     };
 </script>
-<div class="console"></div>
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
+
+<style scoped="scoped">
+    .demo-section {
+        width: 600px;
+    }
+</style>
 </asp:Content>

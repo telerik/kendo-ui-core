@@ -1,21 +1,39 @@
-<div class="k-rtl">
+<div class="demo-section k-rtl">
+    <h3 class="title">Select Continents</h3>
+    @(Html.Kendo().MultiSelect()
+            .Name("multiselect")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .BindTo(new List<SelectListItem>()
+            {
+                new SelectListItem() {
+                    Text = "Africa", Value = "1"
+                },
+                new SelectListItem() {
+                    Text = "Europe", Value = "2"
+                },
+                new SelectListItem() {
+                    Text = "Asia", Value = "3"
+                },
+                new SelectListItem() {
+                    Text = "North America", Value = "4"
+                },
+                new SelectListItem() {
+                    Text = "South America", Value = "5"
+                },
+                new SelectListItem() {
+                    Text = "Antarctica", Value = "6"
+                },
+                new SelectListItem() {
+                    Text = "Australia", Value = "7"
+                }
+            })
+    )
 
-@(Html.Kendo().MultiSelect()
-        .Name("multiselect")
-        .DataTextField("Text")
-        .DataValueField("Value")
-        .BindTo(new List<SelectListItem>()
-        {
-            new SelectListItem() {
-                Text = "Item1", Value = "1"  
-            },
-            new SelectListItem() {
-                Text = "Item2", Value = "2"  
-            },
-            new SelectListItem() {
-                Text = "Item3", Value = "3"  
-            }
-        })
-)
-
+    <style scoped="scoped">
+        .demo-section {
+            width: 406px;
+            margin-top: 40px;
+        }
+    </style>
 </div>
