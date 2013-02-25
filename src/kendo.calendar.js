@@ -156,15 +156,18 @@
 
         destroy: function() {
             var that = this,
-                today = that._today.off(ns);
+                today = that._today;
 
             that.element.off(ns);
             that._title.off(ns);
             that[PREVARROW].off(ns);
             that[NEXTARROW].off(ns);
 
-            kendo.destroy(today);
             kendo.destroy(that._view);
+
+            if (today) {
+                kendo.destroy(today.off(ns));
+            }
 
             Widget.fn.destroy.call(that);
         },
