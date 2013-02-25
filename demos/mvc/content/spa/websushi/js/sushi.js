@@ -51,6 +51,19 @@ var cart = kendo.observable({
         var contents = this.get("contents");
         contents.splice(0, contents.length);
         this.set("cleared", true);
+    },
+
+    total: function() {
+        var price = 0,
+            contents = this.get("contents"),
+            length = contents.length,
+            i = 0;
+
+        for (; i < length; i ++) {
+            price += parseInt(contents[i].item.price) * contents[i].quantity;
+        }
+
+        return kendo.format("{0:c}", price);
     }
 });
 
@@ -78,16 +91,12 @@ var cartPreviewModel = kendo.observable({
     },
 
     totalPrice: function() {
-        var price = 0,
-            contents = this.get("cart").get("contents"),
-            length = contents.length,
-            i = 0;
+        return this.get("cart").total();
+    },
 
-        for (; i < length; i ++) {
-            price += parseInt(contents[i].item.price) * contents[i].quantity;
-        }
-
-        return kendo.format("{0:c}", price);
+    proceed: function(e) {
+        this.get("cart").clear();
+        sushi.navigate("/");
     }
 });
 
@@ -97,11 +106,6 @@ var indexModel = kendo.observable({
 
     addToCart: function(e) {
         cart.add(e.data);
-    },
-
-    proceed: function(e) {
-        this.get("cart").clear();
-        sushi.navigate("/");
     }
 });
 
@@ -112,6 +116,10 @@ var detailModel = kendo.observable({
 
     price: function() {
         return kendo.format("{0:c}", this.get("current").price);
+    },
+
+    addToCart: function(e) {
+        cart.add(this.get("current"));
     },
 
     setCurrent: function(itemID) {
@@ -146,7 +154,7 @@ var detailModel = kendo.observable({
 var layout = new kendo.Layout("layout-template", { model: layoutModel });
 var cartPreview = new kendo.Layout("cart-preview-template", { model: cartPreviewModel });
 var index = new kendo.View("index-template", { model: indexModel });
-var checkout = new kendo.View("checkout-template");
+var checkout = new kendo.View("checkout-template", {model: cartPreviewModel });
 var detail = new kendo.View("detail-template", { model: detailModel });
 
 var sushi = new kendo.Router({

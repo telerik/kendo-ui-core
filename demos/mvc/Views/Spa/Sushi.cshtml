@@ -62,10 +62,9 @@
                 <ul data-role="listview" data-bind="source: cart.contents" data-template="cart-item" id="shop-list"></ul>
 
                 <div id="shopping-cart">
-                    <span id="arrow"></span>
                     <h3>your<br/>shopping cart</h3>
                     <p class="total-price" data-bind="html: totalPrice"></p>
-                    <a id="empty-cart" href="#" data-bind="click: emptyCart">empty cart</a><a id="checkout" href="#">checkout</a>
+                    <a id="empty-cart" href="#" data-bind="click: emptyCart">empty cart</a><a id="checkout" href="#/checkout">checkout</a>
                 </div>
             </div>
         </script>
@@ -75,9 +74,27 @@
         </script>
 
         <script type="text/x-kendo-template" id="checkout-template">
-            <h2>Your Order ()</h2>
-            <table data-role="listview" data-bind="source: cart.contents" data-template="large-cart-item" id="checkout"></table>
-            <button data-bind="click: proceed">Checkout</button>
+			<div id="checkout-top-image"></div>
+
+			<div id="details-checkout">
+				<h1>Order Details</h1>
+				<a href="#" class="close"></a>
+				<table>
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Quantity</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody data-role="listview" data-bind="source: cart.contents" data-template="large-cart-item">
+					</tbody>
+				</table>
+				<p id="total-checkout"><em>total:</em><span data-bind="text: totalPrice"></span></p>
+				<a class="cancel-order" href="#" data-bind="click: emptyCart">cancel order</a><button class="order-now" data-bind="click: proceed">order now!</button>
+			</div>
+
+			<div id="checkout-bottom-image"></div>
         </script>
 
         <script type="text/x-kendo-template" id="detail-template">
@@ -95,7 +112,7 @@
 						<p data-bind="text: current.description"></p>
                         <p id="price-quantity" data-bind="text: price"></p>
 						<div id="details-total">
-							<button class="buy">Add to cart</button>
+							<button class="buy" data-bind="click: addToCart">Add to cart</button>
 						</div>
 					</div>
 				</div><div id="nutrition-info"><h2>Nutritional Information</h2>
@@ -121,10 +138,9 @@
 
         <script type="text/x-kendo-template" id="large-cart-item">
             <tr>
-                <td><img src="@Url.Content("~/content/spa/websushi/images/200/#= item.image #")" /></td>
-                <td data-bind="text: quantity"></td>
-                <td data-bind="text: price"></td>
-                <td><button data-bind="click: removeFromCart">X</button></td>
+                <td> <div class="cart-image-wrapper"><img src="@Url.Content("~/content/spa/websushi/images/200/#= item.image #")" /></div> <span data-bind="text: item.name"></span></td>
+                <td><input type="text" data-role="numerictextbox" data-bind="value: quantity"></td>
+                <td><p class="table-price" data-bind="text: itemPrice"><p></td>
             </tr>
         </script>
 

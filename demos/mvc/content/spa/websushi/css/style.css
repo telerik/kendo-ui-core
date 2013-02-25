@@ -128,7 +128,6 @@ h1 a{
     display: block;
     width: 8px;
     height: 6px;
-    background: url('images/arrow.png') no-repeat left top;
     position: absolute;
     right: 10px;
     top: 12px;
@@ -1018,4 +1017,11 @@ table tbody td:after{
     content:"";
     clear:both;
     display: block;
+}
+
+.cart-image-wrapper {
+    display: inline-block;
+    float: left;
+    height: 100px;
+    overflow: hidden;
 }
