@@ -4769,7 +4769,7 @@ kendo_module({
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
-                sector = point.sector.clone().expand(15),
+                sector = point.sector.clone().expand(TOOLTIP_OFFSET),
                 w = tooltipWidth / 2,
                 h = tooltipHeight / 2,
                 midAndle = sector.middle(),
