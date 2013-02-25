@@ -76,6 +76,7 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\MobileDeviceController.cs" />
     <Compile Include="Controllers\IntegrationController.cs" />
+    <Compile Include="Controllers\SpaController.cs" />
     <Compile Include="Controllers\ThemeBuilderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
@@ -497,6 +498,7 @@
     <Content Include="Views\web\grid\virtualization-remote-data.cshtml" />
     <Content Include="Views\web\integration\index.cshtml" />
     <Content Include="Views\web\integration\jquery-templates.cshtml" />
+    <Content Include="Views\Spa\Sushi.cshtml" />
     <Content Include="Views\web\menu\animation.cshtml" />
     <Content Include="Views\web\menu\api.cshtml" />
     <Content Include="Views\web\menu\events.cshtml" />

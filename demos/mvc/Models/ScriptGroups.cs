@@ -11,6 +11,8 @@ namespace Kendo.Models
 #if DEBUG
             "jquery.js",
             "kendo.core.js",
+            "kendo.router.js",
+            "kendo.view.js",
             "kendo.fx.js",
             "kendo.data.odata.js",
             "kendo.data.xml.js",
@@ -86,7 +88,7 @@ namespace Kendo.Models
             "kendo.tabstrip.js",
             "kendo.panelbar.js",
             "kendo.popup.js",
-            "kendo.history.js",
+            "kendo.router.js",
             "kendo.userevents.js",
             "kendo.draganddrop.js",
             "kendo.touch.js",

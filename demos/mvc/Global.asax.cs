@@ -30,6 +30,18 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "WebSushi",
+                "websushi",
+                new { controller = "Spa", action = "Sushi" }
+            );
+
+            routes.MapRoute(
+                "Aeroviewr",
+                "aeroviewr",
+                new { controller = "Spa", action = "Aeroviewr" }
+            );
+
+            routes.MapRoute(
                 "Simulator",
                 "mobile/simulator",
                 new { controller = "Integration", action = "Simulator" }

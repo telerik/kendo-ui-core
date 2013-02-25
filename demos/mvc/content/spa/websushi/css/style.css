@@ -4,7 +4,7 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, input, p, th, td, button, s
     border:0;
 }
 
-a{
+a {
 text-decoration:none;
 color:#000;
 }
@@ -27,6 +27,10 @@ h1, h2, h3, #main-nav, #main-nav li, ul, ul li {
     list-style: none outside none;
     margin: 0;
     padding: 0;
+}
+
+html .k-listview {
+    border: 0;
 }
 
 #wrapper{

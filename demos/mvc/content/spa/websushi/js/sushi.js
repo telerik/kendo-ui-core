@@ -1,7 +1,8 @@
 // models / data
+
 var items = new kendo.data.DataSource({
     schema: { model: {} },
-    transport: { read: { url: "menu.json", dataType: "json" } }
+    transport: { read: { url: window.sushiMenuPath, dataType: "json" } }
 });
 
 var cart = kendo.observable({
@@ -145,6 +146,7 @@ sushi.route("/menu/:id", function(itemID) {
     });
 });
 
+console.log("Foo");
 $(function() {
     sushi.start();
 });
