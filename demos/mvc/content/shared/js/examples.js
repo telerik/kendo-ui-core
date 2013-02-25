@@ -120,7 +120,7 @@
 
                 $($.grep(items, condition)).addClass("active");
 
-                if (widget == "dashboards" || widget == "overview") {
+                if (widget == "dashboards" || widget == "overview" || widget == "spa") {
                     $("#themeWrap").hide();
                 } else if (href.indexOf("mobile") == -1) {
                     $("#themeWrap").show();

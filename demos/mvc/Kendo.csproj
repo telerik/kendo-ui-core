@@ -519,6 +519,7 @@
     <Content Include="content\web\panelbar\ajax\ajaxContent3.html" />
     <Content Include="content\web\panelbar\ajax\ajaxContent4.html" />
     <Content Include="content\web\panelbar\ajax\ajaxContent5.html" />
+    <Content Include="Views\web\spa\index.cshtml" />
     <Content Include="Views\web\slider\api.cshtml" />
     <Content Include="Views\web\slider\events.cshtml" />
     <Content Include="Views\web\slider\index.cshtml" />

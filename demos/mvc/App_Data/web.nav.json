@@ -1479,6 +1479,21 @@
         },
         {
             "packages": ["!mvc"],
+            "text": "Single-Page Application",
+            "name": "spa",
+            "documentation": "framework/kendo",
+            "spriteCssClass": "spaIcon",
+            "items": [
+                {
+                    "text": "Launch",
+                    "url": "spa/index.html",
+                    "title": "Kendo UI Single-Page application",
+                    "meta": "This example demonstrates the basic usage and functionality of Kendo UI Single-Page Application."
+                }
+            ]
+        },
+        {
+            "packages": ["!mvc"],
             "text": "Effects",
             "name": "fx",
             "documentation": "framework/kendo",

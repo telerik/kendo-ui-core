@@ -1,4 +1,4 @@
-@if (ViewBag.CurrentExample.Url.IndexOf("dashboard") == -1)
+@if (ViewBag.CurrentExample.Url.IndexOf("dashboard") == -1 && ViewBag.CurrentExample.Url.IndexOf("spa") == -1)
 {
 <div id="examples-nav">
     @Html.Partial("Pager")
