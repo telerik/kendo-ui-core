@@ -7,13 +7,13 @@ namespace Kendo.Mvc.UI.Tests
 
     public class ChartBulletSeriesSerializerTests
     {
-        protected ChartBulletSeries<SalesData, decimal, decimal> series;
+        protected ChartBulletSeries<SalesData, decimal> series;
 
         public ChartBulletSeriesSerializerTests()
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             chart.Data = SalesDataBuilder.GetCollection();
-            series = new ChartBulletSeries<SalesData, decimal, decimal>(s => s.RepSales, s => s.TotalSales, s => s.Color);
+            series = new ChartBulletSeries<SalesData, decimal>(s => s.RepSales, s => s.TotalSales, s => s.Color);
         }
 
         [Fact]

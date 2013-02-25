@@ -17,8 +17,7 @@
             .Background("transparent")
         )
         .Series(series => {
-            series.Bar(new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }).Name("Total Visits");
-            series.Bar(new double[] { 52000, 34000, 23000, 48000, 67000, 83000 }).Name("Unique visitors");
+            series.VerticalBullet(new double[][] { new double[] {1,2} }).Name("Total Visits");
         })
         .CategoryAxis(axis => axis
             .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
@@ -26,7 +25,6 @@
         )
         .ValueAxis(axis => axis
             .Numeric()
-            .Max(140000)
             .Line(line => line.Visible(false))
             .MajorGridLines(lines => lines.Visible(true))
         )

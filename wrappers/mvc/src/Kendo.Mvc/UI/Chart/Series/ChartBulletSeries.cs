@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
-    public class ChartBulletSeries<TModel, TCurrent, TTarget> : IChartBulletSeries where TModel : class
+    public class ChartBulletSeries<TModel, TValue> : IChartBulletSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBulletSeries{TModel, TCurrent, TTarget}"/> class.
@@ -15,8 +15,8 @@ namespace Kendo.Mvc.UI
         /// <param name="currentExpression">The expression used to extract the point current from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         public ChartBulletSeries(
-            Expression<Func<TModel, TCurrent>> currentExpression,
-            Expression<Func<TModel, TTarget>> targetExpression,
+            Expression<Func<TModel, TValue>> currentExpression,
+            Expression<Func<TModel, TValue>> targetExpression,
             Expression<Func<TModel, string>> colorExpression)
         {
             if (typeof(TModel).IsPlainType() && !currentExpression.IsBindable())
