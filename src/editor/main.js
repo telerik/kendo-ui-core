@@ -230,6 +230,8 @@ kendo_module({
 
             $(editor.document)
                 .on("keydown" + NS, function (e) {
+                    var range;
+
                     if (e.keyCode === keys.F10) {
                         // Handling with timeout to avoid the default IE menu
                         setTimeout(function() {
@@ -248,6 +250,23 @@ kendo_module({
 
                         e.preventDefault();
                         return;
+                    } else if (e.keyCode === keys.BACKSPACE) {
+                        range = editor.getRange();
+
+                        var ancestor,
+                            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
+                            dom = kendo.ui.editor.Dom;
+
+                        range.deleteContents();
+
+                        ancestor = range.commonAncestorContainer;
+
+                        if (dom.name(ancestor) === "p" && ancestor.innerHTML === "") {
+                            ancestor.innerHTML = emptyParagraphContent;
+                            range.setStart(ancestor, 0);
+                            range.collapse(true);
+                            editor.selectRange(range);
+                        }
                     }
 
                     var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
@@ -265,7 +284,7 @@ kendo_module({
                         if (isFirstKeyDown) {
                             isFirstKeyDown = false;
                         } else {
-                            var range = editor.getRange();
+                            range = editor.getRange();
                             editor.pendingFormats.apply(range);
                             editor.selectRange(range);
                         }
@@ -296,16 +315,25 @@ kendo_module({
                     editor.keyboard.keyup(e);
                 })
                 .on("mousedown" + NS, function(e) {
-                        editor.pendingFormats.clear();
+                    editor.pendingFormats.clear();
 
-                        var target = $(e.target);
+                    var target = $(e.target);
 
-                        if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
-                            window.open(target.attr("href"), "_new");
-                        }
+                    if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
+                        window.open(target.attr("href"), "_new");
+                    }
                 })
-                .on("mouseup" + NS, function(){
+                .on("mouseup" + NS, function() {
                     select(editor);
+                })
+                .on("click" + NS, function(e) {
+                    var dom = kendo.ui.editor.Dom, range;
+
+                    if (dom.name(e.target) === "img") {
+                        range = editor.createRange();
+                        range.selectNode(e.target);
+                        editor.selectRange(range);
+                    }
                 });
 
             $(editor.window)
