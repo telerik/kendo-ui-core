@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <%= Html.Kendo().TreeView()
     .Name("treeview")
-    .HtmlAttributes(new { @class = "demo-section" })
+    .HtmlAttributes(new { @class = "demo-section", style = "width: 200px" })
     .DragAndDrop(true)
     .Events(events => events
         .Select("onSelect")
@@ -40,6 +40,12 @@
         treeview.Add().Text("Storage");
     })
 %>
+
+<div class="demo-section">
+    <h3 class="title">Console log
+    </h3>
+    <div class="console"></div>
+</div>
 
 <script>
     var treeview;
@@ -85,5 +91,4 @@
     });
 </script>
 
-<div class="console"></div>
 </asp:Content>

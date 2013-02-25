@@ -3,10 +3,19 @@
 
 <demo:header />
 
-<div class="demo-section" style="width:155px">
+<div class="demo-section" style="width:250px;text-align:center;">            
+    <h3 class="title">Select time
+    </h3>
 	<kendo:timePicker name="timepicker" change="change" open="open" close="close">
 	</kendo:timePicker>
 </div>
+
+<div class="demo-section">
+    <h3 class="title">Console log
+    </h3>
+    <div class="console"></div>
+</div>
+
 
 <script>
     function open() {

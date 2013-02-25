@@ -2,21 +2,30 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="demo-section">
-    <%=Html.Kendo().TreeView()
-        .Name("treeview")
-        .DataTextField("Name")
-        .DataSource(dataSource => dataSource
-            .Read(read => read
-                .Action("Employees", "TreeView")
-            )
+
+<%=Html.Kendo().TreeView()
+    .Name("treeview")
+    .HtmlAttributes(new { @class = "demo-section" })
+    .DataTextField("Name")
+    .DataSource(dataSource => dataSource
+        .Read(read => read
+            .Action("Employees", "TreeView")
         )
-    %>
-</div>
+    )
+%>
+
 
 <style scoped>
+    #example {
+        text-align: center;
+    }
     .demo-section {
-        width: 200px;
+        display: inline-block;
+        vertical-align: top;
+        width: 320px;
+        height: 300px;
+        text-align: left;
+        margin: 0 2em;
     }
 </style>
 

@@ -4,13 +4,19 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<%= Html.Kendo().NumericTextBox()
-        .Name("numerictextbox")
-        .Events(e => e
-             .Change("change")
-             .Spin("spin")
-        )
-%>
+<div class="demo-section">
+    <%= Html.Kendo().NumericTextBox()
+            .Name("numerictextbox")
+            .Events(e => e
+                 .Change("change")
+                 .Spin("spin")
+            )
+    %>
+</div>            
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
 <script>
     function change() {
         kendoConsole.log("Change :: " + this.value());
@@ -20,6 +26,4 @@
         kendoConsole.log("Spin :: " + this.value());
     }
 </script>
-
-<div class="console"></div>
 </asp:Content>

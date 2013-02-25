@@ -3,7 +3,13 @@
 
 <demo:header />
 
-<kendo:numericTextBox name="numerictextbox" change="change" spin="spin"></kendo:numericTextBox>
+<div class="demo-section">
+	<kendo:numericTextBox name="numerictextbox" change="change" spin="spin"></kendo:numericTextBox>
+</div>
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
 
 <script>
     function change() {

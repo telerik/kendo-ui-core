@@ -2,19 +2,19 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <demo:header />
-
-    <kendo:treeView name="treeview" select="onSelect" collapse="onCollapse" expand="onExpand"
+<div class="demo-section" style="width: 200px">
+    <kendo:treeView name="treeview" select="onSelect" collapse="onCollapse" expand="onExpand" 
                     dragAndDrop="true" dragstart="onDragStart" drag="onDrag" drop="onDrop" 
                     dragend="onDragEnd">
         <kendo:treeView-items>
-            <kendo:treeView-item text="Furniture">
+            <kendo:treeView-item text="Furniture" expanded="true">
                 <kendo:treeView-items>
                     <kendo:treeView-item text="Tables & Chairs" />
                     <kendo:treeView-item text="Sofas" />
                     <kendo:treeView-item text="Occasional Furniture" />
                 </kendo:treeView-items>
             </kendo:treeView-item>
-            <kendo:treeView-item text="Decor">
+            <kendo:treeView-item text="Decor" expanded="true">
                 <kendo:treeView-items>
                     <kendo:treeView-item text="Bed Linen" />
                     <kendo:treeView-item text="Curtains & Blinds" />
@@ -24,7 +24,12 @@
             <kendo:treeView-item text="Storage" />
         </kendo:treeView-items>
     </kendo:treeView>
-    
+</div>    
+    <div class="demo-section">
+	    <h3 class="title">Console log
+	    </h3>
+	    <div class="console"></div>
+	</div>
     <script>
 	    function onSelect(e) {
 	        kendoConsole.log("Selected: " + this.text(e.node));
@@ -92,5 +97,7 @@
 	        kendoConsole.log("Navigate " + this.text(e.node));
 	    }
     </script>
-    <div class="console"></div>
+    
+    <style scoped>
+    </style>
 <demo:footer />
