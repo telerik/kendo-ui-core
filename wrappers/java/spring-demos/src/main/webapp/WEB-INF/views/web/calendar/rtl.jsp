@@ -3,7 +3,9 @@
 <demo:header />
 
 <div class="k-rtl">
-    <kendo:calendar name="calendar"></kendo:calendar>
+	<div class="demo-section"> 
+    	<kendo:calendar name="calendar"></kendo:calendar>
+   	</div>
 </div>
 
 <demo:footer />

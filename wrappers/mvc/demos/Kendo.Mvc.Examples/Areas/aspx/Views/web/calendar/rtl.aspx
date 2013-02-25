@@ -6,10 +6,11 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
 <div class="k-rtl">
-
-    <%= Html.Kendo().Calendar()
-            .Name("calendar")
-    %>
+    <div class="demo-section"> 
+        <%= Html.Kendo().Calendar()
+                .Name("calendar")
+        %>
+    </div>
 </div>
 
 </asp:Content>
