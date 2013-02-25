@@ -933,6 +933,8 @@
     <Compile Include="UI\Slider\SliderTickPlacement.cs" />
     <Compile Include="UI\Slider\Html\SliderHtmlBuilder.cs" />
     <Compile Include="UI\Sparkline\Enums\ChartSeriesType.cs" />
+    <Compile Include="UI\Sparkline\Fluent\SparklineSeriesDefaultsBuilder.cs" />
+    <Compile Include="UI\Sparkline\Fluent\SparklineSeriesFactory.cs" />
     <Compile Include="UI\Sparkline\Fluent\SparklineBuilder.cs" />
     <Compile Include="UI\Sparkline\Html\SparklineHtmlBuilder.cs" />
     <Compile Include="UI\Sparkline\Sparkline.cs" />

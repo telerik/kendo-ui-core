@@ -172,10 +172,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public SparklineBuilder<T> Series(Action<ChartSeriesFactory<T>> configurator)
+        public SparklineBuilder<T> Series(Action<SparklineSeriesFactory<T>> configurator)
         {
-
-            ChartSeriesFactory<T> factory = new ChartSeriesFactory<T>(Component);
+            SparklineSeriesFactory<T> factory = new SparklineSeriesFactory<T>(Component);
 
             configurator(factory);
 
@@ -194,10 +193,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public SparklineBuilder<T> SeriesDefaults(Action<ChartSeriesDefaultsBuilder<T>> configurator)
+        public SparklineBuilder<T> SeriesDefaults(Action<SparklineSeriesDefaultsBuilder<T>> configurator)
         {
-
-            configurator(new ChartSeriesDefaultsBuilder<T>(Component));
+            configurator(new SparklineSeriesDefaultsBuilder<T>(Component));
 
             return this;
         }
