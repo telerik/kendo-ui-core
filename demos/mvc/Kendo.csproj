@@ -499,6 +499,8 @@
     <Content Include="Views\web\integration\index.cshtml" />
     <Content Include="Views\web\integration\jquery-templates.cshtml" />
     <Content Include="Views\Spa\Sushi.cshtml" />
+    <Content Include="Views\Spa\Aeroviewr.cshtml" />
+    <Content Include="Views\Spa\AeroviewrCallback.cshtml" />
     <Content Include="Views\web\menu\animation.cshtml" />
     <Content Include="Views\web\menu\api.cshtml" />
     <Content Include="Views\web\menu\events.cshtml" />

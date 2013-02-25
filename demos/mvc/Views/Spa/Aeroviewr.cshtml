@@ -1,18 +1,28 @@
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html>
     <head>
         <title>AeroViewr &mdash; Kendo UI Demo</title>
         <link rel="shortcut icon" href="favicon.ico">
-        <script src="../../src/jquery.min.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.router.js"></script>
-        <script src="../../src/kendo.view.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.binder.js"></script>
-        <script src="../../src/kendo.listview.js"></script>
-        <script src="500px.js"></script>
-        <script src="aeroviewr.js"></script>
-        <link href="aeroviewr.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="@Url.Content("~/content/spa/aeroviewr/css/aeroviewr.css")" />
+
+        @foreach (string styleName in Kendo.Models.StyleGroups.All) {
+            <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+        }
+
+        @if (ViewBag.Debug) {
+            <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+        }
+
+        @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
+            <script src="@Url.Script(scriptName)"></script>
+        }
+
+        <script src="@Url.Content("~/content/spa/aeroviewr/js/500px.js")"></script>
+        <script src="@Url.Content("~/content/spa/aeroviewr/js/aeroviewr.js")"></script>
     </head>
     <body>
         <div id="root"></div>

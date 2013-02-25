@@ -42,6 +42,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "AeroviewrCallback",
+                "aeroviewr/callback.html",
+                new { controller = "Spa", action = "AeroviewrCallback" }
+            );
+
+            routes.MapRoute(
                 "Simulator",
                 "mobile/simulator",
                 new { controller = "Integration", action = "Simulator" }

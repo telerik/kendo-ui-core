@@ -25,5 +25,10 @@ namespace Kendo.Controllers
 #endif
             return View();
         }
+
+        public ActionResult AeroviewrCallback()
+        {
+            return View();
+        }
     }
 }
