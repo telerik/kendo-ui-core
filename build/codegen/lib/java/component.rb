@@ -20,10 +20,6 @@ module CodeGen::Java
             @name + 'Tag'
         end
 
-        def delete_ignored
-            @options.delete_if { |o| CodeGen::Java.ignored?(@name, o.name) }
-        end
-
     end
 
 end

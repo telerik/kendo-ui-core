@@ -13,7 +13,8 @@ module CodeGen::Java
     IGNORED = {
         'chart' => ['axisDefaults', 'seriesDefaults'],
         'stockchart' => ['axisDefaults', 'seriesDefaults'],
-        'tooltip' => ['content']
+        'tooltip' => ['content'],
+        'column' => ['values']
     }
 
     def self.ignored?(component, option)
@@ -35,6 +36,11 @@ module CodeGen::Java
         def simple_options
             @options.find_all { |o| !o.composite? }
                     .sort { |a, b| a.name <=> b.name }
+        end
+
+        def delete_ignored
+           @options.delete_if { |o| CodeGen::Java.ignored?(@name, o.name) }
+           composite_options.each { |o| o.delete_ignored }
         end
 
     end
