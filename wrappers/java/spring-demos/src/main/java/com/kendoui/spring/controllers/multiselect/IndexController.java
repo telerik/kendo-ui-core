@@ -14,13 +14,26 @@ public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         
-        model.addAttribute("sizes", new String[] {
-            "X-Small",
-            "Small",
-            "Medium",
-            "Large",
-            "X-Large",
-            "2X-Large"
+        model.addAttribute("attendees", new String[] {
+            "Steven White",
+            "Nancy King",
+            "Anne King",
+            "Nancy Davolio",
+            "Robert Davolio",
+            "Michael Leverling",
+            "Andrew Callahan",
+            "Michael Suyama",
+            "Anne King",
+            "Laura Peacock",
+            "Robert Fuller",
+            "Janet White",
+            "Nancy Leverling",
+            "Robert Buchanan",
+            "Andrew Fuller",
+            "Anne Davolio",
+            "Andrew Suyama",
+            "Nige Buchanan",
+            "Laura Fuller"
         });
         
         return "web/multiselect/index";

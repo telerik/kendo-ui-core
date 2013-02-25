@@ -4,47 +4,40 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
-    <div id="tshirt-view" class="k-header">
-	    <h2>Customize your Kendo T-shirt</h2>
-	    <div id="options">
-   		    <h3>T-shirt Size</h3>  
-		    <kendo:multiSelect name="size" placeholder="Select size..." index="3" suggest="true">
-                <kendo:dataSource data="${sizes}"></kendo:dataSource>
-		    </kendo:multiSelect>
-	    </div>
+	<%
+	String[] values = {"Anne King", "Andrew Fuller"};
+	%>
+    <div class="demo-section">
+        <h2>Invite Attendees</h2>
+        <label for="required">Required</label> 
+	    <kendo:multiSelect name="required" placeholder="Select attendees..." value="values">
+	        <kendo:dataSource data="${attendees}"></kendo:dataSource>
+	    </kendo:multiSelect>
+	    <label for="optional">Optional</label>
+	    <kendo:multiSelect name="optional" placeholder="Select attendees...">
+	        <kendo:dataSource data="${attendees}"></kendo:dataSource>
+	    </kendo:multiSelect>
+	    <button class="k-button" id="get">Send Invitation</button>
 	</div>
 	<style scoped>
-	    #example h2 {
-	        font-weight: normal;
-	    }
-	    #tshirt-view {
-	        border-radius: 10px 10px 10px 10px;
-	        border-style: solid;
-	        border-width: 1px;
-	        overflow: hidden;
-	        width: 500px;
-	        margin: 30px auto;
-	        padding: 20px 20px 0 20px;
-	    }
-	    #tshirt {
-	        float: left;
-	        margin: 30px 40px 30px 20px;
-	    }
-	    #options {
-	        padding: 30px;
-	    }
-	    #options h3 {
-	        font-size: 1em;
-	        font-weight: bold;
-	        margin: 25px 0 8px 0;
-	    }
-	    #get {
-	        margin-top: 25px;
-	    }
-	
-	    .k-readonly
-	    {
-	        color: gray;
-	    }
-	</style>
+        .demo-section {
+            width: 350px;
+            height: 200px;
+            padding: 30px;
+        }
+        .demo-section h2 {
+            font-weight: normal;
+        }
+        .demo-section label {
+            display: inline-block;
+            margin: 15px 0 5px 0;
+        }
+        .demo-section select {
+            width: 350px;
+        }
+        #get {
+            float: right;
+            margin: 25px auto 0;
+        }
+    </style>
 <demo:footer />

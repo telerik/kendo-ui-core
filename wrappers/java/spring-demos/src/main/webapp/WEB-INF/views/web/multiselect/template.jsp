@@ -3,20 +3,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
-    <div>
         <c:url value="/web/multiselect/template/read" var="readUrl" />
 
         <%
-        String template = "<img src=\"/spring-demos/resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
-                "<dl>" +
-                "<dt>Contact:</dt><dd>#:data.contactName#</dd>" +
-                "<dt>Company:</dt><dd>#:data.companyName#</dd>" +
-            "</dl>";
+        String itemTemplate = "<img src=\"/spring-demos/resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
+				              "<h3>#: data.ContactName #</h3>" +
+					          "<p>#: data.CompanyName #</p>";
+					          
+        String tagTemplate = "<img class=\"tag-image\" src=\"/spring-demos/resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
+				              "#: data.ContactName #";
         %>
         
-        <label for="customers">Choose customer:</label>
+    <div class="demo-section">
+        <h3 class="title">Select customers</h3>
         
-        <kendo:multiSelect name="customers" placeholder="type 'John' ..." itenTemplate="<%=template%>" height="300"
+        <kendo:multiSelect name="customers" placeholder="type 'John' ..." itenTemplate="<%=itemTemplate%>" height="300"
             dataTextField="contactName" dataValueField="customerID">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
@@ -36,11 +37,45 @@
         
         <script>
 	    $(document).ready(function() {
-	        var multiselect = $("#customers").data("kendoMultiSelect");
-	
-	        // set width of the drop-down list
-	        multiselect.list.width(400);
+	    	var customers = $("#customers").data("kendoMultiSelect");
+            customers.wrapper.attr("id", "customers-wrapper");     
 	    });
 	    </script>
+	    <style scoped>
+           .demo-section {
+               width: 450px;
+               margin-top: 40px;
+           }
+
+           .tag-image {
+               width: auto;
+               height: 1.4em;
+               margin-right: 3px;
+           }
+
+           #customers-wrapper .k-multiselect-wrap .k-input {
+               height: 1.8em;
+               line-height: 1.8em;
+           }
+
+           #customers-list .k-item {
+               overflow: hidden; /* clear floated images */
+           }
+
+           #customers-list img {
+               -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+               -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+               box-shadow: 0 0 2px rgba(0,0,0,.4);
+               float: left;
+               margin: 5px 20px 5px 5px;
+           }
+           #customers-list h3 {
+               margin: 30px 0 10px 0;
+               font-size: 2em;
+           }
+           #customers-list p {
+               margin: 0;
+           }
+       </style>
     </div>
 <demo:footer />

@@ -13,10 +13,14 @@ public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("items", new DropDownListItem[] {
-                new DropDownListItem("Item 1", "1"),
-                new DropDownListItem("Item 2", "2"),
-                new DropDownListItem("Item 3", "3")
+        model.addAttribute("continents", new DropDownListItem[] {
+                new DropDownListItem("Africa", "1"),
+                new DropDownListItem("Europe", "1"),
+                new DropDownListItem("Asia", "1"),
+                new DropDownListItem("North America", "1"),
+                new DropDownListItem("South America", "1"),
+                new DropDownListItem("Antarctica", "1"),
+                new DropDownListItem("Australia", "1")
         });       
         return "web/multiselect/rtl";
     }    

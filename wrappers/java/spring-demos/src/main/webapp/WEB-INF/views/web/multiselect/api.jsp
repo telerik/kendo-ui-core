@@ -33,16 +33,18 @@
          </ul>
     </div>
 
-    <kendo:multiSelect name="movies" dataTextField="text" dataValueField="value">
-        <kendo:dataSource data="${movies}"></kendo:dataSource>
-    </kendo:multiSelect>
-    
+    <div class="demo-section">
+        <kendo:multiSelect name="movies" dataTextField="text" dataValueField="value">
+            <kendo:dataSource data="${movies}"></kendo:dataSource>
+        </kendo:multiSelect>
+    </div>
+
     <script>
 	     $(document).ready(function() {
 	         $("#filter").kendoDropDownList({
 	             change: filterTypeOnChanged
 	         });
-	
+
 	         var multiselect = $("#movies").data("kendoMultiSelect"),
 	             setValue = function(e) {
 	                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
@@ -53,33 +55,33 @@
 	                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
 	                     multiselect.search($("#word").val());
 	             };
-	
+
 	         $("#enable").click(function() {
 	             multiselect.enable();
 	         });
-	
+
 	         $("#disable").click(function() {
 	             multiselect.enable(false);
 	         });
-	
+
 	         $("#open").click(function() {
 	             multiselect.open();
 	         });
-	
+
 	         $("#close").click(function() {
 	             multiselect.close();
 	         });
-	
+
 	         $("#getValue").click(function() {
 	             alert(multiselect.value());
 	         });
-	
+
 	         $("#setValue").click(setValue);
 	         $("#value").keypress(setValue);
-		
+
 	         $("#find").click(setSearch);
 	         $("#word").keypress(setSearch);
-	
+
 	         function filterTypeOnChanged() {
 	             multiselect.options.filter = $("#filter").val();
 	         }
@@ -89,5 +91,10 @@
 	   .configuration .k-textbox {
 	       width: 40px;
 	   }
+       .demo-section {
+           float: left;
+           width: 450px;
+           margin-left: 0;
+       }
 	</style>
 <demo:footer />

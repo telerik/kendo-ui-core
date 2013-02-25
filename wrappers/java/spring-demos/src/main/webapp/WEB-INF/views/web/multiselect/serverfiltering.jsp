@@ -6,8 +6,8 @@
 <c:url value="/web/multiselect/remote-data/read" var="readUrl" />
 
 <demo:header />
-    <div>
-        <label for="products">Choose product:</label>
+    <div class="demo-section">
+        <h3 class="title">Select Products</h3>
         
         <kendo:multiSelect name="products" dataTextField="productName" dataValueField="productId" filter="startswith">
             <kendo:dataSource serverFiltering="true">
@@ -26,4 +26,10 @@
             </kendo:dataSource>
         </kendo:multiSelect>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 450px;
+            margin-top: 40px;
+        }
+    </style>
 <demo:footer />
