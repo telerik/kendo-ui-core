@@ -11,24 +11,32 @@
     </p>
 </div>
 <div style="width:45%">
-    <%= Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("Save", "Upload")
-            .Remove("Remove", "Upload")
-            .AutoUpload(true)
-        )
-        .Events(events => events
-            .Cancel("onCancel")
-            .Complete("onComplete")
-            .Error("onError")
-            .Progress("onProgress")
-            .Remove("onRemove")
-            .Select("onSelect")
-            .Success("onSuccess")
-            .Upload("onUpload")
-        )
-    %>
+    <div class="demo-section">
+        <%= Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("Save", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+            )
+            .Events(events => events
+                .Cancel("onCancel")
+                .Complete("onComplete")
+                .Error("onError")
+                .Progress("onProgress")
+                .Remove("onRemove")
+                .Select("onSelect")
+                .Success("onSuccess")
+                .Upload("onUpload")
+            )
+        %>
+    </div>
+</div>
+
+<div class="demo-section" style="margin-top: 50px;">
+    <h3 class="title">Console log
+    </h3>
+    <div class="console"></div>
 </div>
 <script>
     function onSelect(e) {
@@ -76,5 +84,4 @@
     }
 </script>
 
-<div class="console"></div>
 </asp:Content>

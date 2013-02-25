@@ -18,7 +18,7 @@
 </div>
 
 <form method="post" action="<c:url value='/web/upload/' />" style="width:45%">
-    <div>
+    <div class="demo-section">
     
         <kendo:upload name="files" />
         

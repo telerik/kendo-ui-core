@@ -19,9 +19,11 @@
     </ul>
 </div>
 <form method="post" style="width:45%">
-    <%= Html.Kendo().Upload()
-        .Name("files")
-    %>
+    <div class="demo-section">
+        <%= Html.Kendo().Upload()
+            .Name("files")
+        %>
+    </div>
 </form>
 <script>
     function getUpload() {

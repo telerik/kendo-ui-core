@@ -22,9 +22,11 @@
 <c:url value="/web/upload/async/remove" var="removeUrl" />
 
 <div style="width:45%">
-    <kendo:upload name="files">
-        <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
-    </kendo:upload>
+	<div class="demo-section">
+	    <kendo:upload name="files">
+	        <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
+	    </kendo:upload>
+    </div>
 </div>
 
 <demo:footer />

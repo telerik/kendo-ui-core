@@ -12,12 +12,14 @@
 </div>
 
 <div style="width:45%">
-    @(Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("Save", "Upload")
-            .Remove("Remove", "Upload")
-            .AutoUpload(true)
+    <div class="demo-section">
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("Save", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+            )
         )
-    )
+    </div>
 </div>

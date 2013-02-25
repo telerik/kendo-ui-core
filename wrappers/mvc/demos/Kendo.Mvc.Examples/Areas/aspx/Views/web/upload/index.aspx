@@ -16,7 +16,7 @@
         </p>
     </div>
     <form method="post" action='<%= Url.Action("Submit") %>' style="width:45%">
-        <div>
+        <div class="demo-section">
             <%= Html.Kendo().Upload()
                 .Name("files")
             %>

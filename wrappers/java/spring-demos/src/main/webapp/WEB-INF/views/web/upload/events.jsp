@@ -16,13 +16,19 @@
 <c:url value="/web/upload/events/remove" var="removeUrl" />
 
 <div style="width:45%">
-    <kendo:upload name="files" select="onSelect" upload="onUpload" 
-        success="onSuccess" error="onError" complete="onComplete" progress="onProgress">
-        <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
-    </kendo:upload>
+    <div class="demo-section">
+	    <kendo:upload name="files" select="onSelect" upload="onUpload" 
+	        success="onSuccess" error="onError" complete="onComplete" progress="onProgress">
+	        <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
+	    </kendo:upload>
+    </div>
 </div>
 
-<div class="console"></div>
+<div class="demo-section" style="margin-top: 50px;">
+    <h3 class="title">Console log
+    </h3>
+    <div class="console"></div>
+</div>
 
  <script>
     function onSelect(e) {

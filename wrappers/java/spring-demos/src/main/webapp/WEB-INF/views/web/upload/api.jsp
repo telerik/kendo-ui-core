@@ -21,7 +21,7 @@
 </div>
 
 <form method="post" style="width:45%">
-    <div>
+    <div class="demo-section">
         <kendo:upload name="files" />
     </div>
 </form>
