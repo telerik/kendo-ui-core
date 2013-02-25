@@ -1,0 +1,164 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart-mmHg"></div>
+        <div id="chart-hPa"></div>
+    </div>
+    <script>
+        function createChart() {
+            var mmhgData = [
+                    { current: 750, target: 762.5 }, { current: 754, target: 768.5 },
+                    { current: 762, target: 770 }, { current: 764, target: 773 },
+                    { current: 753, target: 760 }, { current: 748, target: 765 },
+                    { current: 740, target: 760 }, { current: 755, target: 758 },
+                    { current: 765, target: 768 }, { current: 776, target: 783 },
+                    { current: 768, target: 770 }, { current: 760, target: 762.5 },
+                    { current: 763, target: 768}, { current: 758, target: 766 }
+                ],
+                hPaData = [
+                    { current: 1001, target: 1017 }, { current: 1005, target: 1024 },
+                    { current: 1016, target: 1026 }, { current: 1019, target: 1030 },
+                    { current: 1004, target: 1013 }, { current: 998, target: 1020 },
+                    { current: 987, target: 1013 }, { current: 1006.5, target: 1010 },
+                    { current: 1020, target: 1023 }, { current: 1035, target: 1044 },
+                    { current: 1025, target: 1026 }, { current: 1013, target: 1017 },
+                    { current: 1017, target: 1023 }, { current: 1010, target: 1021 }
+               ];
+
+            $("#chart-mmHg").kendoChart({
+                legend: {
+                    visible: false
+                },
+                dataSource: {
+                    data: mmhgData
+                },
+                series: [{
+                    type: "verticalBullet",
+                    color: "#ffffff",
+                    opacity: .8,
+                    target: {
+                        color: "#ffffff"
+                    },
+                    currentField: "current",
+                    targetField: "target"
+                }],
+                categoryAxis: {
+                    majorGridLines: {
+                        visible: false
+                    },
+                    majorTicks: {
+                        visible: false
+                    },
+                    title: {
+                        text: "mmHg"
+                    },
+                    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                },
+                valueAxis: [{
+                    plotBands: [{
+                        from: 772, to: 790, color: "#2890cc", opacity: .5
+                    },{
+                        from: 752, to: 772, color: "#2890cc", opacity: .7
+                    },{
+                        from: 715, to: 752, color: "#2890cc", opacity: .5
+                    },{
+                        from: 761, to: 761.5, color: "#ff0000", opacity: 1
+                    }],
+                    majorGridLines: {
+                        visible: false
+                    },
+                    min: 715,
+                    max: 790,
+                    minorTicks: {
+                        visible: true
+                    }                    
+                }],
+                tooltip: {
+                    visible: true,
+                    shared: true,
+                    template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+                }
+            });
+            
+            $("#chart-hPa").kendoChart({
+                legend: {
+                    visible: false
+                },
+                dataSource: {
+                    data: hPaData
+                },
+                series: [{
+                    type: "verticalBullet",
+                    color: "#ffffff",
+                    opacity: .8,
+                    target: {
+                        color: "#ffffff"
+                    },
+                    currentField: "current",
+                    targetField: "target"
+                }],
+                categoryAxis: {
+                    majorGridLines: {
+                        visible: false
+                    },
+                    axisCrossingValue: 14,
+                    majorTicks: {
+                        visible: false
+                    },
+                    title: {
+                        text: "hPa"
+                    },
+                    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                },
+                valueAxis: [{
+                    plotBands: [{
+                        from: 1027, to: 1050, color: "#8ebc00", opacity: .6
+                    },{
+                        from: 1002, to: 1027, color: "#8ebc00", opacity: .8
+                    },{
+                        from: 955, to: 1002, color: "#8ebc00", opacity: .6
+                    },{
+                        from: 1014, to: 1014.5, color: "#ff0000", opacity: 1
+                    }],
+                    majorGridLines: {
+                        visible: false
+                    },
+                    min: 955,
+                    max: 1050,
+                    minorTicks: {
+                        visible: true
+                    }
+                }],
+                tooltip: {
+                    visible: true,
+                    shared: true,
+                    template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                // Initialize the chart with a delay to make sure
+                // the initial animation is visible
+                createChart();
+
+                $("#example").bind("kendo:skinChange", function(e) {
+                    createChart();
+                });
+            }, 400);
+        });
+    </script>
+    <style scoped>
+        .chart-wrapper {
+            padding-top: 20px;
+        }
+        .chart-wrapper .k-chart {
+            width: 325px;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .chart-wrapper .k-tooltip {
+            text-align: left;
+        }
+    </style>
+</div>

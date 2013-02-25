@@ -744,6 +744,7 @@
     <Content Include="Views\dataviz\scatter-charts\pan-and-zoom.cshtml" />
     <Content Include="Views\dataviz\bar-charts\pan-and-zoom.cshtml" />
     <Content Include="Views\dataviz\bullet-charts\index.cshtml" />
+    <Content Include="Views\dataviz\bullet-charts\local-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

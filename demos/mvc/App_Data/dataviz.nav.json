@@ -151,8 +151,10 @@
             "spriteCssClass": "chartBulletIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "bullet-charts/index.html",
-                    "title": "Kendo UI Bullet Chart widget demo"
+                    "url": "bullet-charts/index.html"
+			}, {
+                    "text": "Binding to local data",
+                    "url": "bullet-charts/local-data.html"
 			}]
         }, {
             "text": "Line Charts",
