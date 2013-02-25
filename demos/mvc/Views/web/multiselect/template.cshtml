@@ -1,18 +1,20 @@
         <div id="example" class="k-content">
             <div class="demo-section">
-                <h3 class="title">Select titles from Netflix</h3>
-                <select id="titles"></select>
+                <h3 class="title">Select customers</h3>
+                <select id="customers"></select>
             </div>
 
             <script>
                 $(document).ready(function() {
-                    $("#titles").kendoMultiSelect({
+                    $("#customers").kendoMultiSelect({
                         dataTextField: "ContactName",
                         dataValueField: "CustomerID",
                         // define custom template
                         itemTemplate: '<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
                                       '<h3>${ data.ContactName }</h3>' +
                                       '<p>${ data.CompanyName }</p>',
+                        tagTemplate:  '<img class="tag-image" src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
+                                      '#: data.ContactName #',
                         dataSource: {
                             transport: {
                                 read: {
@@ -23,8 +25,6 @@
                         },
                         height: 300
                     });
-
-                    var multiselect = $("#titles").data("kendoMultiSelect");
                 });
             </script>
 
@@ -33,22 +33,29 @@
                     width: 450px;
                     margin-top: 40px;
                 }
-                #titles-list .k-item {
+
+                .tag-image {
+                    width: auto;
+                    height: 1.4em;
+                    margin-right: 3px;
+                }
+
+                #customers-list .k-item {
                     overflow: hidden; /* clear floated images */
                 }
 
-                #titles-list img {
+                #customers-list img {
                     -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
                     -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
                     box-shadow: 0 0 2px rgba(0,0,0,.4);
                     float: left;
                     margin: 5px 20px 5px 5px;
                 }
-                #titles-list h3 {
+                #customers-list h3 {
                     margin: 30px 0 10px 0;
                     font-size: 2em;
                 }
-                #titles-list p {
+                #customers-list p {
                     margin: 0;
                 }
             </style>

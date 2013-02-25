@@ -1,28 +1,28 @@
 
 <div id="example" class="k-content">
     <div class="demo-section">
-        <h3 class="title">Select titles from Netflix</h3>
-        <select id="titles"></select>
+        <h3 class="title">Select Products</h3>
+        <select id="products"></select>
     </div>
     <script>
         $(document).ready(function() {
-            $("#titles").kendoMultiSelect({
-                dataTextField: "Name",
-                dataValueField: "Id",
+            $("#products").kendoMultiSelect({
+                placeholder: "Select products...",
+                dataTextField: "ProductName",
+                dataValueField: "ProductID",
                 dataSource: {
                     type: "odata",
                     serverFiltering: true,
-                    serverPaging: true,
-                    pageSize: 20,
                     transport: {
-                        read: "http://odata.netflix.com/Catalog/Titles"
+                        read: {
+                            url: "http://demos.kendoui.com/service/Northwind.svc/Products",
+                        }
                     }
                 }
             });
         });
     </script>
-
-    <style scoped="scoped">
+    <style scoped>
         .demo-section {
             width: 450px;
             margin-top: 40px;

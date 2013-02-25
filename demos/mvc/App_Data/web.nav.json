@@ -171,7 +171,7 @@
                     "url": "combobox/serverfiltering.html",
                     "title": "Kendo UI jQuery ComboBox example of server filtering",
                     "meta": "Example of Kendo UI ComboBox server filtering.  This demo shows how the auto-searchable dropdown list of the ComboBox is filtered on the the server based on the input."
-                },  
+                },
                 {
                     "packages": [ "mvc", "jsp" ],
                     "text": "Client filtering",
@@ -815,16 +815,10 @@
                     "meta": "This demo shows core functionality of Kendo UI MultiSelect"
                 },
                 {
-                    "packages": [ "!mvc" ],
-                    "text": "Binding to remote data",
-                    "url": "multiselect/remotedatasource.html",
-                    "title": "Kendo UI jQuery MultiSelect example of binding to remote data",
-                    "meta": "Example of Kendo UI MultiSelect remote data binding."
-                },
-                {
-                    "packages": [ "mvc", "jsp" , "php"],
                     "text": "Server filtering",
-                    "url": "multiselect/serverfiltering.html"
+                    "url": "multiselect/serverfiltering.html",
+                    "title": "Kendo UI jQuery MultiSelect example of server filtering",
+                    "meta": "Example of Kendo UI MultiSelect server filtering.  This demo shows how the auto-searchable dropdown list of the MultiSelect is filtered on the the server based on the input."
                 },
                 {
                     "packages": [ "mvc", "jsp" ],
