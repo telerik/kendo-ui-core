@@ -25,6 +25,9 @@
                         },
                         height: 300
                     });
+
+                    var customers = $("#customers").data("kendoMultiSelect");
+                    customers.wrapper.attr("id", "customers-wrapper");
                 });
             </script>
 
@@ -38,6 +41,11 @@
                     width: auto;
                     height: 1.4em;
                     margin-right: 3px;
+                }
+
+                #customers-wrapper .k-multiselect-wrap .k-input {
+                    height: 1.8em;
+                    line-height: 1.8em;
                 }
 
                 #customers-list .k-item {
