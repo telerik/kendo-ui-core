@@ -594,6 +594,8 @@
     <Content Include="Areas\aspx\Views\web\multiselect\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\multiselect\template.aspx" />
     <Content Include="Areas\razor\Views\dataviz\bar_charts\plotbands.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\sparklines\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\sparklines\remote_data.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
