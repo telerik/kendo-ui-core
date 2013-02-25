@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Sample" Class="WeatherDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Sample.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SampleConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Weather" Member="Weather">
+    <Type Name="Weather">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Station" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TMax" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TMin" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Wind" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Gust" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Rain" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Snow" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Events" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

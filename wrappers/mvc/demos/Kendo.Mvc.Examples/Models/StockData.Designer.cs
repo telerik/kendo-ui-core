@@ -22,7 +22,7 @@ namespace Kendo.Mvc.Examples.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="StockData")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Sample")]
 	public partial class StockDataDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -36,7 +36,7 @@ namespace Kendo.Mvc.Examples.Models
     #endregion
 		
 		public StockDataDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["StockDataConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SampleConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

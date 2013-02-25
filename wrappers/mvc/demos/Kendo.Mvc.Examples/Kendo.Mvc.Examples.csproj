@@ -355,6 +355,11 @@
     <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
     <Compile Include="Models\CrimeData.cs" />
     <Compile Include="Models\DataFilter.cs" />
+    <Compile Include="Models\Northwind.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Northwind.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ScreenResolutionRemoteDataViewModel.cs" />
     <Compile Include="Models\JobGrowth.cs" />
     <Compile Include="Models\Medals.cs" />
@@ -364,7 +369,7 @@
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
     <Compile Include="Models\SessionClientOrderRepository.cs" />
     <Compile Include="Models\SessionClientProductRepository.cs" />
-    <Compile Include="Models\StockData.Designer.cs">
+    <Compile Include="Models\StockData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StockData.dbml</DependentUpon>
@@ -380,11 +385,6 @@
     <Compile Include="Models\ElectricityProduction.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
-    <Compile Include="Models\Northwind.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Northwind.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\OfflineFilter.cs" />
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationProvider.cs" />
@@ -392,16 +392,17 @@
     <Compile Include="Models\SessionProductRepository.cs" />
     <Compile Include="Models\SubCategoryItem.cs" />
     <Compile Include="Models\TreeViewRepository.cs" />
+    <Compile Include="Models\Weather.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Weather.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Northwind.mdf" />
-    <Content Include="App_Data\Northwind_log.ldf">
-      <DependentUpon>Northwind.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\StockData.mdf" />
-    <Content Include="App_Data\StockData_log.ldf">
-      <DependentUpon>StockData.mdf</DependentUpon>
+    <Content Include="App_Data\Sample.mdf" />
+    <Content Include="App_Data\Sample_log.ldf">
+      <DependentUpon>Sample.mdf</DependentUpon>
     </Content>
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
@@ -647,12 +648,22 @@
     <Content Include="Areas\razor\Views\web\tooltip\details.cshtml" />
     <Content Include="Areas\razor\Views\web\tooltip\events.cshtml" />
     <Content Include="Areas\razor\Views\web\tooltip\api.cshtml" />
-    <None Include="Models\StockData.dbml">
+    <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>StockData.Designer.cs</LastGenOutput>
+      <LastGenOutput>Northwind.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <None Include="Models\StockData.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>StockData.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\Weather.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Weather.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -1013,11 +1024,6 @@
     <Content Include="Areas\razor\Views\web\treeview\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\window\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\window\navigation.cshtml" />
-    <None Include="Models\Northwind.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="sample.sitemap">
       <SubType>Designer</SubType>
     </Content>
@@ -1040,6 +1046,11 @@
   <ItemGroup>
     <None Include="Models\StockData.dbml.layout">
       <DependentUpon>StockData.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Weather.dbml.layout">
+      <DependentUpon>Weather.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

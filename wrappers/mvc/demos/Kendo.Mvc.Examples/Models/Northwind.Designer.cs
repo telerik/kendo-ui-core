@@ -22,7 +22,7 @@ namespace Kendo.Mvc.Examples.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Northwind")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Sample")]
 	public partial class NorthwindDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.Examples.Models
     #endregion
 		
 		public NorthwindDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NorthwindConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SampleConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
