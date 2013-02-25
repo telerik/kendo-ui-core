@@ -7,35 +7,30 @@
             <script>
                 $(document).ready(function() {
                     $("#titles").kendoMultiSelect({
-                        dataTextField: "Name",
-                        dataValueField: "Id",
+                        dataTextField: "ContactName",
+                        dataValueField: "CustomerID",
                         // define custom template
-                        itemTemplate: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />' +
-                                  '<dl>' +
-                                      '<dt>Title:</dt><dd>${ data.Name }</dd>' +
-                                      '<dt>Year:</dt><dd>${ data.ReleaseYear }</dd>' +
-                                  '</dl>',
+                        itemTemplate: '<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
+                                      '<h3>${ data.ContactName }</h3>' +
+                                      '<p>${ data.CompanyName }</p>',
                         dataSource: {
-                            type: "odata",
-                            serverFiltering: true,
-                            serverPaging: true,
-                            pageSize: 20,
                             transport: {
-                                read: "http://odata.netflix.com/Catalog/Titles"
+                                read: {
+                                    dataType: "jsonp",
+                                    url: "http://demos.kendoui.com/service/Customers",
+                                }
                             }
-                        }
+                        },
+                        height: 300
                     });
 
                     var multiselect = $("#titles").data("kendoMultiSelect");
-
-                    // set width of the drop-down list
-                    multiselect.list.width(400);
                 });
             </script>
 
             <style scoped>
                 .demo-section {
-                    width: 406px;
+                    width: 450px;
                     margin-top: 40px;
                 }
                 #titles-list .k-item {
@@ -43,28 +38,18 @@
                 }
 
                 #titles-list img {
-                    box-shadow: 0 0 4px rgba(255,255,255,.7);
+                    -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+                    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+                    box-shadow: 0 0 2px rgba(0,0,0,.4);
                     float: left;
-                    margin: 5px;
+                    margin: 5px 20px 5px 5px;
                 }
-
-                #titles-list dl {
-                    margin-left: 85px;
+                #titles-list h3 {
+                    margin: 30px 0 10px 0;
+                    font-size: 2em;
                 }
-
-                #titles-list dt,
-                #titles-list dd {
+                #titles-list p {
                     margin: 0;
-                    padding: 0;
-                }
-
-                #titles-list dt {
-                    font-weight: bold;
-                    padding-top: .5em;
-                }
-
-                #titles-list dd {
-                    padding-bottom: .3em;
                 }
             </style>
         </div>
