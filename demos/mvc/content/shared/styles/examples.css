@@ -1409,19 +1409,19 @@ p#copy
 .widgetGrid .narrowCol:first-child
 {
     background:#eee;
-    background:rgba(191,191,191,.2);
+    background:rgba(221,221,221,.5);
 }
 
 .widgetGrid .wideCol,
 .widgetGrid .narrowCol
 {
     float:left;
-    width:650px;
+    width:640px;
 }
 
 .widgetGrid .narrowCol
 {
-    width:310px;
+    width:320px;
 }
 
 .widgetGrid .narrowCol ul:empty
@@ -1461,9 +1461,12 @@ p#copy
 .widgetGrid ul
 {
     float:left;
-    width:110px;
     margin:8px 0 0 18px;
     padding:0 0 20px;
+}
+.widgetGrid .wideCol ul
+{
+    width:110px;
 }
 
 .widgetGrid li
@@ -1502,16 +1505,17 @@ p#copy
 {
     width:180px;
     min-height: 176px;
+    background:rgba(221, 221, 221, 0.3);
 }
 
 .widgetGrid .financial
 {
     width:150px;
     min-height: 176px;
-    background:rgba(221, 221, 221, 0.2);
+    background:rgba(221, 221, 221, 0.1);
 }
 
-.dashboards ul,
+.wideCol.dashboards ul,
 #deviceList
 {
     width:auto;
