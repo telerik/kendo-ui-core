@@ -201,12 +201,12 @@ namespace Kendo.Mvc.UI
 
             if (CreateLink != DefaultCreateLink)
             {
-                json["createLink"] = DefaultCreateLink;
+                json["createLink"] = CreateLink;
             }
 
             if (Unlink != DefaultUnlink)
             {
-                json["unlink"] = DefaultUnlink;
+                json["unlink"] = Unlink;
             }
 
             if (InsertImage != DefaultInsertImage)
