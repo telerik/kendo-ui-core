@@ -15,6 +15,15 @@ class SparklineSeriesItemTarget extends \kendo\SerializableObject {
     }
 
     /**
+    * The target color.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItemTarget
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
     * The border of the target.
     * @param \Kendo\Dataviz\UI\SparklineSeriesItemTargetBorder|array $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemTarget

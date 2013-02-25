@@ -15,6 +15,15 @@ class ChartSeriesItemTarget extends \kendo\SerializableObject {
     }
 
     /**
+    * The target color.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemTarget
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
     * The border of the target.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemTargetBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTarget
