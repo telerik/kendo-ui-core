@@ -241,10 +241,10 @@
     <value>刷新</value>
   </data>
   <data name="Filter_StringDoesNotContain" xml:space="preserve">
-    <value>Does not contain</value>
+    <value>不包含</value>
   </data>
   <data name="Filter_Or" xml:space="preserve">
-    <value>Or</value>
+    <value>或者</value>
   </data>
   <data name="Editor_Bold" xml:space="preserve">
     <value>粗体</value>
@@ -319,19 +319,19 @@
     <value>移除链接</value>
   </data>
   <data name="Pager_First" xml:space="preserve">
-    <value>Go to the first page</value>
+    <value>首页</value>
   </data>
   <data name="Pager_ItemsPerPage" xml:space="preserve">
     <value>items per page</value>
   </data>
   <data name="Pager_Last" xml:space="preserve">
-    <value>Go to the last page</value>
+    <value>末页</value>
   </data>
   <data name="Pager_Next" xml:space="preserve">
-    <value>Go to the next page</value>
+    <value>后页</value>
   </data>
   <data name="Pager_Previous" xml:space="preserve">
-    <value>Go to the previous page</value>
+    <value>前页</value>
   </data>
   <data name="Upload_Cancel" xml:space="preserve">
     <value>取消</value>
