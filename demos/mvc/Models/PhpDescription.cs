@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Kendo.Models
 {
     public class PhpDescription : IFrameworkDescription
     {
-        private static readonly IDictionary<string, string> RelatedFiles = new Dictionary<string, string> {
-            { "DataSourceResult.php", "~/src/php/lib/DataSourceResult.php" }
-        };
+        private static readonly string [] Ignored = { "Autoload.php", "header.php", "footer.php" };
 
         public string Name
         {
@@ -36,14 +35,17 @@ namespace Kendo.Models
             {
                 var php = File.ReadAllText(path);
 
-                foreach (var keyValuePair in RelatedFiles)
+                foreach (Match match in Regex.Matches(php, @"require_once\s+['""](?<include>[^'""]+)"))
                 {
-                    if (php.Contains(keyValuePair.Key))
+                    var include = match.Groups["include"].Value;
+                    var name = Path.GetFileName(include);
+
+                    if (!Ignored.Contains(name))
                     {
                         yield return new ExampleFile
                         {
-                            Name = keyValuePair.Key,
-                            Url = keyValuePair.Value
+                            Name = name,
+                            Url = VirtualPathUtility.Combine(url, include)
                         };
                     }
                 }
