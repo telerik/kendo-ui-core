@@ -201,6 +201,6 @@ asyncTest("supports #:back pseudo url for going back", 1, function() {
     setTimeout(function() {
         start();
         equal(loc.hash, '');
-    }, 100);
+    }, 300);
 });
 
