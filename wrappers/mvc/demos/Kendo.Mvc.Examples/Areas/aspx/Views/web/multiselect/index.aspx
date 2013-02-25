@@ -31,6 +31,7 @@
               "Nige Buchanan",
               "Laura Fuller"
           })
+          .Value(new string[] { "Anne King", "Andrew Fuller" })
     %>
     <label for="optional">Optional</label>
     <%= Html.Kendo().MultiSelect()
