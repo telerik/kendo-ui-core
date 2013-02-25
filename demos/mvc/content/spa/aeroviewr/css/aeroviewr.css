@@ -90,8 +90,14 @@ header #slideshow-button {
     margin-left: 30px;
 }
 
-#details a {
+#details a
+{
     color: white;
+}
+
+#details p
+{
+    white-space: normal;
 }
 
 #details p,
