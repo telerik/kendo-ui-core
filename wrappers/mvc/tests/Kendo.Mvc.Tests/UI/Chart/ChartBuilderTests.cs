@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             Action<ChartEventBuilder> clientEventsAction = eventBuilder => eventBuilder.DataBinding("dataBinding");
             builder.Events(clientEventsAction);
-            ((ClientHandlerDescriptor) chart.Events["dataBinding"]).HandlerName.ShouldEqual("dataBinding");
+            ((ClientHandlerDescriptor)chart.Events["dataBinding"]).HandlerName.ShouldEqual("dataBinding");
         }
 
         [Fact]

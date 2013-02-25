@@ -1064,6 +1064,170 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartCandlestickSeriesBuilder<TModel>(candlestickSeries);
         }
 
+        /// <summary>
+        /// Defines bound bullet series.
+        /// </summary>
+        /// <param name="currentExpression">
+        /// The expression used to extract the point current value from the chart model
+        /// </param>
+        /// <param name="targetExpression">
+        /// The expression used to extract the point target value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet<TCurrent, TTarget>(
+            Expression<Func<TModel, TCurrent>> currentExpression,
+            Expression<Func<TModel, TTarget>> targetExpression,
+            Expression<Func<TModel, string>> colorExpression = null)
+        {
+            var bulletSeries = new ChartBulletSeries<TModel, TCurrent, TTarget>(currentExpression, targetExpression, colorExpression);
+
+            Container.Series.Add(bulletSeries);
+
+            return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
+        }
+
+        /// <summary>
+        /// Defines bound bar series.
+        /// </summary>
+        /// <param name="currentMemberName">
+        /// The name of the current value member.
+        /// </param>
+        /// <param name="targetMemberName">
+        /// The name of the target value member.
+        /// </param>
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet(string currentMemberName, string targetMemberName, string colorMemberName = null)
+        {
+            return Bullet(null, currentMemberName, targetMemberName, colorMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound bullet series.
+        /// </summary>
+        /// <param name="currentMemberType">
+        /// The type of the current value member.
+        /// </param>
+        /// <param name="targetMemberName">
+        /// The name of the target value member.
+        /// </param>
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet(Type memberType, string currentMemberName, string targetMemberName, string colorMemberName = null)
+        {
+            var currentExpr = BuildMemberExpression(memberType, currentMemberName);
+            var targetExpr = BuildMemberExpression(memberType, targetMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
+            var seriesType = typeof(ChartBulletSeries<,,>).MakeGenericType(typeof(TModel), currentExpr.Body.Type);
+            var series = (IChartBulletSeries)BuildSeries(seriesType, currentExpr, targetExpr, colorExpr);
+
+            series.CurrentMember = currentMemberName;
+            series.TargetMember = targetMemberName;
+            series.ColorMember = colorMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = currentMemberName.AsTitle() + targetMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartBulletSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines bar series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet(IEnumerable data)
+        {
+            ChartBulletSeries<TModel, object, object> bulletSeries = new ChartBulletSeries<TModel, object, object>(data);
+
+            Container.Series.Add(bulletSeries);
+
+            return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
+        }
+
+        /// <summary>
+        /// Defines bound verticalBullet series.
+        /// </summary>
+        /// <param name="currentExpression">
+        /// The expression used to extract the point current value from the chart model
+        /// </param>
+        /// <param name="targetExpression">
+        /// The expression used to extract the point target value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet<TCurrent, TTarget>(
+            Expression<Func<TModel, TCurrent>> currentExpression,
+            Expression<Func<TModel, TTarget>> targetExpression,
+            Expression<Func<TModel, string>> colorExpression = null)
+        {
+            var builder = Bullet(currentExpression, targetExpression, colorExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound verticalBullet series.
+        /// </summary>
+        /// <param name="currentMemberName">
+        /// The name of the current value member.
+        /// </param>
+        /// <param name="targetMemberName">
+        /// The name of the target value member.
+        /// </param>
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet(string currentMemberName, string targetMemberName, string colorMemberName = null)
+        {
+            return VerticalBullet(null, currentMemberName, targetMemberName, colorMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound verticalBullet series.
+        /// </summary>
+        /// <param name="currentMemberType">
+        /// The type of the current value member.
+        /// </param>
+        /// <param name="targetMemberName">
+        /// The name of the target value member.
+        /// </param>
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet(Type memberType, string currentMemberName, string targetMemberName, string colorMemberName = null)
+        {
+            var builder = Bullet(memberType, currentMemberName, targetMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bar series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet(IEnumerable data)
+        {
+            var builder = Bullet(data);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

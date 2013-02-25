@@ -122,6 +122,8 @@
     <Compile Include="UI\Chart\ChartCandlestickSeriesHighlightBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartOHLCSeriesHighlightBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartPaneBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartBulletSeriesBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartBulletTargetBuilderTests.cs" />
     <Compile Include="UI\Chart\OHLCData.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="UI\Chart\Serialization\ChartAxisBaseUnitStepsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesHighlightSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartElementBorderSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartBulletSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\ColorPicker\ColorPickerSerializationTests.cs" />
     <Compile Include="UI\ColorPicker\ColorPickerTestHelper.cs" />
