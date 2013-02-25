@@ -313,7 +313,7 @@
                 strictEqual((new kendo.data.ObservableArray([])).parent(), undefined);
             });
 
-            test("adding item to nested array triggers change event of the parent",1, function() {
+            test("adding item to nested array triggers change event of the parent", 1, function() {
                 var viewModel = kendo.observable({ foo: [{
                         bar: { items: [] }
                     } ] });
@@ -323,6 +323,97 @@
                 });
 
                 viewModel.get("foo")[0].bar.items.push({ baz: "moo" });
+            });
+
+            test("forEach calls callback for each item", 3, function() {
+                var viewModel = kendo.observable({ foo: ["foo"] });
+
+                viewModel.foo.forEach(function(value, index, item) {
+                    equal(value, "foo");
+                    strictEqual(index, 0);
+                    equal(item, viewModel.foo);
+                });
+            });
+
+            test("map collects returned results from iteration", 2, function() {
+                var viewModel = kendo.observable({ foo: [2, 4] });
+
+                var result = viewModel.get("foo").map(function(value) {
+                    return value * 2;
+                });
+
+                equal(result[0], 4);
+                equal(result[1], 8);
+            });
+
+            test("filter collects returned results from iteration", 2, function() {
+                var viewModel = kendo.observable({ foo: [2, 3, 4] });
+
+                var result = viewModel.get("foo").filter(function(value) {
+                    return value % 2 === 0;
+                });
+
+                equal(result[0], 2);
+                equal(result[1], 4);
+            });
+
+            test("find returns the first item that matches the requirements", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 3, 4] });
+
+                var result = viewModel.get("foo").find(function(value) {
+                    return value % 2 === 1;
+                });
+
+                equal(result, 3);
+            });
+
+            test("every returns true if all items satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 4] });
+
+                var result = viewModel.get("foo").every(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(result);
+            });
+
+            test("every returns false if one item does not satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 3, 4] });
+
+                var result = viewModel.get("foo").every(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(!result);
+            });
+
+            test("some returns true if some items satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [2, 4] });
+
+                var result = viewModel.get("foo").some(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(result);
+            });
+
+            test("some returns false if no items satisfy the provided requirement", 1, function() {
+                var viewModel = kendo.observable({ foo: [3, 5] });
+
+                var result = viewModel.get("foo").some(function(value) {
+                    return value % 2 === 0;
+                });
+
+                ok(!result);
+            });
+
+            test("remove removes the given item", 2, function() {
+                var viewModel = kendo.observable({ foo: [3, 5] });
+
+                viewModel.foo.remove(3);
+
+                equal(viewModel.foo.length, 1);
+                equal(viewModel.foo[0], 5);
             });
         </script>
     </head>

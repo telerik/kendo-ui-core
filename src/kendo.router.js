@@ -1,10 +1,10 @@
 kendo_module({
-    id: "history",
-    name: "History",
-    category: "mobile",
-    description: "History",
+    id: "router",
+    name: "history",
+    category: "framework",
+    description: "Kendo Router",
     depends: [ "core" ],
-    hidden: true
+    hidden: false
 });
 
 (function($, undefined) {
@@ -19,7 +19,6 @@ kendo_module({
         document = window.document;
 
     var History = kendo.Observable.extend({
-
         start: function(options) {
             options = options || {};
 
@@ -81,7 +80,7 @@ kendo_module({
             return window.history && window.history.pushState;
         },
 
-        _checkUrl: function() {
+        _checkUrl: function(e) {
             var that = this, current = that._currentLocation();
 
             if (current != that.current) {
@@ -98,7 +97,6 @@ kendo_module({
                 return url;
             }
         },
-
 
         _makePushStateUrl: function(address) {
             var that = this;
@@ -144,18 +142,155 @@ kendo_module({
                 return;
             }
 
+            if (!silent) {
+                if (that.trigger("change", { url: to })) {
+                    to = that.current; // revert to current,
+                }
+            }
+
             if (that._pushState) {
                 history.pushState({}, document.title, that._makePushStateUrl(to));
                 that.current = to;
             } else {
                 location.hash = that.current = to;
             }
-
-            if (!silent) {
-                that.trigger("change", {url: that.current});
-            }
         }
     });
 
     kendo.history = new History();
 })(window.kendo.jQuery);
+
+(function() {
+    var kendo = window.kendo,
+        history = kendo.history,
+        Observable = kendo.Observable,
+        INIT = "init",
+        ROUTE_MISSING = "routeMissing",
+        CHANGE = "change",
+        optionalParam = /\((.*?)\)/g,
+        namedParam = /(\(\?)?:\w+/g,
+        splatParam = /\*\w+/g,
+        escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g;
+
+    function namedParamReplace(match, optional) {
+        return optional ? match : '([^\/]+)';
+    }
+
+    function routeToRegExp(route) {
+        return new RegExp('^' + route
+            .replace(escapeRegExp, '\\$&')
+            .replace(optionalParam, '(?:$1)?')
+            .replace(namedParam, namedParamReplace)
+            .replace(splatParam, '(.*?)') + '$');
+    }
+
+    var Route = kendo.Class.extend({
+        init: function(route, callback) {
+            if (!(route instanceof RegExp)) {
+                route = routeToRegExp(route);
+            }
+
+            this.route = route;
+            this._callback = callback;
+        },
+
+        callback: function(url) {
+            var params = this.route.exec(url).slice(1),
+                idx = 0,
+                length = params.length;
+
+            for (; idx < length; idx ++) {
+                if (typeof params[idx] !== 'undefined') {
+                    params[idx] = decodeURIComponent(params[idx]);
+                }
+            }
+
+            this._callback.apply(null, params);
+        },
+
+        worksWith: function(url) {
+            if (this.route.test(url)) {
+                this.callback(url);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    });
+
+    var Router = Observable.extend({
+        init: function(options) {
+            Observable.fn.init.call(this);
+            this.routes = [];
+            this.bind([INIT, ROUTE_MISSING, CHANGE], options);
+        },
+
+        destroy: function() {
+            history.unbind("ready", this._readyProxy);
+            history.unbind("change", this._urlChangedProxy);
+            this.unbind();
+        },
+
+        start: function() {
+            var that = this,
+                readyProxy = function(e) {
+                    if (!e.url) {
+                        e.url = "/";
+                    }
+
+                    if (!that.trigger(INIT, e)) {
+                        that._urlChanged(e);
+                    }
+                },
+
+                urlChangedProxy = function(e) {
+                    that._urlChanged(e);
+                };
+
+            kendo.history.start({
+                ready: readyProxy,
+                change: urlChangedProxy
+            });
+
+            this._urlChangedProxy = urlChangedProxy;
+            this._readyProxy = readyProxy;
+        },
+
+        route: function(route, callback) {
+            this.routes.push(new Route(route, callback));
+        },
+
+        navigate: function(url, silent) {
+            kendo.history.navigate(url, silent);
+        },
+
+        _urlChanged: function(e) {
+            var url = e.url;
+            if (!url) {
+                url = "/";
+            }
+
+            if (this.trigger(CHANGE, {url: e.url})) {
+                e.preventDefault();
+                return;
+            }
+
+            var idx = 0,
+                routes = this.routes,
+                route,
+                length = routes.length;
+
+            for (; idx < length; idx ++) {
+                 route = routes[idx];
+
+                 if (route.worksWith(url)) {
+                    return;
+                 }
+            }
+
+            this.trigger(ROUTE_MISSING, { url: url });
+        }
+    });
+
+    kendo.Router = Router;
+})();

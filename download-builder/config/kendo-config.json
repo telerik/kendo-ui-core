@@ -621,15 +621,15 @@
             ]
         },
         {
-            "id": "history",
-            "name": "History",
-            "category": "mobile",
-            "description": "History",
+            "id": "router",
+            "name": "Router",
+            "category": "framework",
+            "description": "Router",
             "depends": [
                 "core"
             ],
-            "hidden": true,
-            "source": "kendo.history.min.js",
+            "hidden": false,
+            "source": "kendo.router.min.js",
             "widgets": []
         },
         {
@@ -753,7 +753,8 @@
             "category": "mobile",
             "description": "The Mobile application provides a framework to build native looking web applications on mobile devices.",
             "depends": [
-                "mobile.pane"
+                "mobile.pane",
+                "router"
             ],
             "source": "kendo.mobile.application.min.js",
             "widgets": []
@@ -1042,7 +1043,6 @@
             "depends": [
                 "core",
                 "fx",
-                "history",
                 "mobile.scroller"
             ],
             "hidden": true,

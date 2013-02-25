@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AeroViewr &mdash; Kendo UI Demo</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.view.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.listview.js"></script>
+        <script src="500px.js"></script>
+        <script src="aeroviewr.js"></script>
+        <link href="aeroviewr.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/x-kendo-template" id="main">
+            <header>
+                <button id="slideshow-button" data-bind="text: slideShowButtonText, click: toggleSlideShow"></button>
+
+                <form data-bind="events: { submit: performSearch }">
+                    <label>Search: <input type="search" data-bind="value: query" /></label>
+                </form>
+            </header>
+
+            <section data-bind="attr: { class: detailsClass }" id="details">
+                <h2 data-bind="text: currentPhoto.name"></h2>
+                <p data-bind="html: currentPhoto.description"></p>
+                <dl>
+                    <dt>Camera:</dt><dd data-bind="text: currentPhoto.camera"></dd>
+                    <dt>Aperture:</dt><dd data-bind="text: currentPhoto.aperture"></dd>
+                    <dt>ISO:</dt><dd data-bind="text: currentPhoto.iso"></dd>
+                </dl>
+            </section>
+
+            <section data-bind="events: { dblclick: toggleFocus, click: toggleShowDetails }" id="image-container">
+                <div id="image-wrap">
+                    <img data-bind="attr: { src: currentPhoto.image_url }">
+                </div>
+            </section>
+
+            <footer>
+                <a data-bind="click: scrollLeft" id="scroll-left" class="scroll-arrow">&laquo;</a>
+                <div data-role="listview" data-auto-bind="false" data-bind="{ source: photos }" data-template="photo-thumb" id="photo-thumbs"></div>
+                <a data-bind="click: scrollRight" id="scroll-right" class="scroll-arrow">&raquo;</a>
+            </footer>
+        </script>
+
+        <script type="text/x-kendo-template" id="photo-thumb">
+            <a data-bind="attr: { href: thumbHref, class: thumbClass }"><img data-bind="attr: { src: image_url }"></a>
+        </script>
+    </body>
+</html>

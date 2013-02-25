@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="http://todomvc.com/assets/base.css">
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.view.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="app.js"></script>
+        <meta charset=utf-8 />
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/x-kendo-template" id="main-template">
+            <section id="todoapp">
+                <header id="header">
+                    <form data-bind="events: { submit: add }">
+                        <h1>todos</h1>
+                        <input id="new-todo" placeholder="What needs to be done?" autofocus>
+                    </form>
+                </header>
+
+                <section id="main">
+                    <input id="toggle-all" type="checkbox">
+                    <label for="toggle-all">Mark all as complete</label>
+                    <ul id="todo-list" data-bind="source: currentItems" data-template="toDoItem"></ul>
+                </section>
+
+                <footer id="footer">
+                    <span id="todo-count"><strong data-bind="text: remainingCount"></strong> <span data-bind="text: remainingCountItem"></span> left</span>
+                    <ul id="filters">
+                        <li> <a data-bind="attr: { class: allFilterClass }" href="#/">All</a> </li>
+                        <li> <a data-bind="attr: { class: activeFilterClass }" href="#/active">Active</a> </li>
+                        <li> <a data-bind="attr: { class: completedFilterClass }" href="#/completed">Completed</a> </li>
+                    </ul>
+
+                    <button id="clear-completed" data-bind="click: clearCompleted, visible: clearCompletedVisible, text: clearCompletedText"></button>
+                </footer>
+            </section>
+
+            <div id="info">
+                <p>Double-click to edit a todo</p>
+                <p>Written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
+                <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+            </div>
+        </script>
+
+        <script type="text/x-kendo-template" id="toDoItem">
+            <li data-bind="attr: { class: liClass }">
+                <div class="view">
+                    <input class="toggle" type="checkbox" data-bind="checked: complete">
+                    <label data-bind="text: title, events: { dblclick: edit }"></label>
+                    <button class="destroy" data-bind="click: remove"></button>
+                </div>
+                <input class="edit" data-bind="value: title, events: { blur: hideEdit, keyup: keyup }">
+            </li>
+        </script>
+    </body>
+</html>
+

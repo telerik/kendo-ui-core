@@ -3,13 +3,12 @@ kendo_module({
     name: "Application",
     category: "mobile",
     description: "The Mobile application provides a framework to build native looking web applications on mobile devices.",
-    depends: [ "mobile.pane" ]
+    depends: [ "mobile.pane", "router" ]
 });
 
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
-        history = kendo.history,
         support = kendo.support,
         Pane = mobile.ui.Pane,
 
@@ -188,31 +187,30 @@ kendo_module({
 
         _startHistory: function() {
             var that = this,
-                historyEvents,
-                initial = that.options.initial;
+                initial = that.options.initial,
+                router = new kendo.Router({
+                    init: function(e) {
+                        var url = e.url;
 
-            historyEvents = {
-                change: function(e) {
-                    that.pane.navigate(e.url);
-                },
+                        if (url === "/" && initial) {
+                            router.navigate(initial, true);
+                            that.pane.navigate(initial);
+                            e.preventDefault(); // prevents from executing routeMissing, by default
+                        }
+                    },
 
-                ready: function(e) {
-                    var url = e.url;
-
-                    if (!url && initial) {
-                        url = initial;
-                        history.navigate(initial, true);
+                    routeMissing: function(e) {
+                        that.pane.navigate(e.url);
                     }
-
-                    that.pane.navigate(url);
-                }
-            };
+                });
 
             that.pane.bind("navigate", function(e) {
-                history.navigate(e.url, true);
+                router.navigate(e.url, true);
             });
 
-            history.start($.extend(that.options, historyEvents));
+            router.start();
+
+            that.router = router;
         },
 
         _setupElementClass: function() {

@@ -245,10 +245,89 @@ kendo_module({
             return -1;
         },
 
-        forEach: function(f) {
-            for (var i = 0; i < this.length; ++i) {
-                f(this[i], i);
+        forEach: function(callback) {
+            var idx = 0,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                callback(this[idx], idx, this);
             }
+        },
+
+        map: function(callback) {
+            var idx = 0,
+                result = [],
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                result[idx] = callback(this[idx], idx, this);
+            }
+
+            return result;
+        },
+
+        filter: function(callback) {
+            var idx = 0,
+                result = [],
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (callback(item, idx, this)) {
+                    result[result.length] = item;
+                }
+            }
+
+            return result;
+        },
+
+        find: function(callback) {
+            var idx = 0,
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (callback(item, idx, this)) {
+                    return item;
+                }
+            }
+        },
+
+        every: function(callback) {
+            var idx = 0,
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (!callback(item, idx, this)) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        some: function(callback) {
+            var idx = 0,
+                item,
+                length = this.length;
+
+            for (; idx < length; idx++) {
+                item = this[idx];
+                if (callback(item, idx, this)) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        // non-standard collection methods
+        remove: function(item) {
+            this.splice(this.indexOf(item), 1);
         }
     });
 

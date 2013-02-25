@@ -3,7 +3,7 @@ kendo_module({
     name: "View",
     category: "mobile",
     description: "Mobile View",
-    depends: [ "core", "fx", "history", "mobile.scroller" ],
+    depends: [ "core", "fx", "mobile.scroller" ],
     hidden: true
 });
 
@@ -460,7 +460,7 @@ kendo_module({
                 mobile.application.element.css("pointer-events", "none");
             }
 
-            if (!url) {
+            if (!url || url === "/") {
                 element = that.rootView;
             } else {
                 element = container.children("[" + attr("url") + "='" + urlPath + "']");
