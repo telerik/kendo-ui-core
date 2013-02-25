@@ -17,51 +17,58 @@
         <script src="../src/kendo.treeview.js"></script>
     </head>
     <body>
-        <div id='foo' style="height:125px; width: 300px; overflow-y:scroll; border-width:5px; border-style:solid;">
-            <div>Other stuff and fancy things</div>
-            <div id="treeview-left"> </div>
-        </div>
+                <ul id="treeview">
+                    <li data-expanded="true">
+                        <span class="k-sprite folder"></span>
+                        My Web Site
+                        <ul>
+                            <li data-expanded="true">
+                                <span class="k-sprite folder"></span>images
+                                <ul>
+                                    <li><span class="k-sprite image"></span>logo.png</li>
+                                    <li><span class="k-sprite image"></span>body-back.png</li>
+                                    <li><span class="k-sprite image"></span>my-photo.jpg</li>
+                                </ul>
+                            </li>
+                            <li data-expanded="true">
+                                <span class="k-sprite folder"></span>resources
+                                <ul>
+                                    <li data-expanded="true">
+                                        <span class="k-sprite folder"></span>pdf
+                                        <ul>
+                                            <li><span class="k-sprite pdf"></span>brochure.pdf</li>
+                                            <li><span class="k-sprite pdf"></span>pricfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffes.pdf</li>
+                                        </ul>
+                                    </li>
+                                    <li><span class="k-sprite folder"></span>zip</li>
+                                </ul>
+                            </li>
+                            <li><span class="k-sprite html"></span>about.html</li>
+                            <li><span class="k-sprite html"></span>contacts.html</li>
+                            <li><span class="k-sprite html"></span>index.html</li>
+                            <li><span class="k-sprite html"></span>portfolio.html</li>
+                        </ul>
+                    </li>
+                </ul>
 
         <script>
-            $("#treeview-left").kendoTreeView({
-                dataSource: [
-                    { text: "Furniture", items: [
-                        { text: "Tables & Chairs"},
-                        { text: "Sofas"},
-                        { text: "Occasional Furniture"}
-                    ]},
-                    { text: "Decor", items: [
-                        { text: "Bed Linen"},
-                        { text: "Curtains & Blinds"},
-                        { text: "Carpets"}
-                    ]},
-                    { text: "Decor1", items: [
-                        { text: "Bed Linen1"},
-                        { text: "Curtains & Blinds1"},
-                        { text: "Carpets1"}
-                    ]},
-                    { text: "Decor2", items: [
-                        { text: "Bed Linen2"},
-                        { text: "Curtains & Blinds2"},
-                        { text: "Carpets2"}
-                    ]},
-                    { text: "Decor3", items: [
-                        { text: "Bed Linen3"},
-                        { text: "Curtains & Blinds3"},
-                        { text: "Carpets3"}
-                    ]},
-                    { text: "Decor4", items: [
-                        { text: "Bed Linen4"},
-                        { text: "Curtains & Blinds4"},
-                        { text: "Carpets4"}
-                    ]},
-                    { text: "Decor5", items: [
-                        { text: "Bed Linen5"},
-                        { text: "Curtains & Blinds5"},
-                        { text: "Carpets5"}
-                    ]}
-                ]
-            });
+            $("#treeview").kendoTreeView();
         </script>
+
+        <style>
+            .k-widget {
+                width: 200px;
+            }
+
+            #treeview .k-sprite {
+                background-image: url("../../content/web/treeview/coloricons-sprite.png");
+            }
+
+            .rootfolder { background-position: 0 0; }
+            .folder { background-position: 0 -16px; }
+            .pdf { background-position: 0 -32px; }
+            .html { background-position: 0 -48px; }
+            .image { background-position: 0 -64px; }
+        </style>
     </body>
 </html>
