@@ -121,8 +121,38 @@
 
                 viewEngine.bind("viewShow", function(e) {
                     start();
-                    equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
+                    equal(root.find("#page2").length, 1, "Remote view is inserted in the application DOM element");
                     equal(e.view.element[0], root.find("#page2")[0]);
+                });
+
+                viewEngine.showView("page2.html");
+            });
+
+            asyncTest("If view is missing, treats body contents as the view", 2, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><span>Foo</span></body>'
+                });
+
+                viewEngine.bind("viewShow", function(e) {
+                    start();
+                    equal(root.find("[data-url='page2.html']").length, 1, "Remote view is inserted in the application DOM element");
+                    equal(e.view.contentElement().html(), '<span>Foo</span>');
+                });
+
+                viewEngine.showView("page2.html");
+            });
+
+            asyncTest("Treats generict HTML content as the view", 2, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<span>Foo</span><span>Bar</span>'
+                });
+
+                viewEngine.bind("viewShow", function(e) {
+                    start();
+                    equal(root.find("[data-url='page2.html']").length, 1, "Remote view is inserted in the application DOM element");
+                    equal(e.view.contentElement().html(), '<span>Foo</span><span>Bar</span>');
                 });
 
                 viewEngine.showView("page2.html");

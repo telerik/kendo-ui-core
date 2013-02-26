@@ -553,6 +553,12 @@ kendo_module({
 
             views = that._hideViews(sandbox);
             view = views.first();
+
+            // Generic HTML content found as remote view - no remote view markers
+            if (!view.length) {
+                views = view = sandbox.wrapInner("<div data-role=view />").children(); // one element
+            }
+
             view.hide().attr(attr("url"), urlPath);
 
             that._setupLayouts(sandbox);
