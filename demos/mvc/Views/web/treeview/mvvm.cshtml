@@ -1,5 +1,14 @@
 <div id="example" class="k-content">
-    <div class="current-state">
+    <div class="demo-section files">
+        <h3><span data-bind="text: name"></span>'s files</h3>
+        <div data-role="treeview"
+            data-drag-and-drop="true"
+            data-text-field="name"
+            data-spritecssclass-field="type"
+            data-bind="source: files"></div>
+    </div>
+
+    <div class="demo-section current-state">
         <h4>Current view model state:</h4>
         <pre>
 {
@@ -7,14 +16,6 @@
     files: <span data-bind="text: printFiles"></span>
 }
         </pre>
-    </div>
-    <div class="files">
-        <h3><span data-bind="text: name"></span>'s files</h3>
-        <div data-role="treeview"
-            data-drag-and-drop="true"
-            data-text-field="name"
-            data-spritecssclass-field="type"
-            data-bind="source: files"></div>
     </div>
 
     <script>
@@ -39,15 +40,32 @@
                     ] }
                 ]),
                 printFiles: function() {
-                    // helper function for printing the hierarchical model
-                    var items = this.files.toJSON(),
-                        jsonString = JSON.stringify(items, null, 2);
+                    // helper function that prints the relevant data from the hierarchical model
+                    var items = this.get("files").toJSON();
+
+                    function removeFields(item) {
+                        delete item.index;
+
+                        if (item.items.length == 0) {
+                            delete item.items;
+                        } else {
+                            item.items = $.map(item.items, removeFields);
+                        }
+
+                        return item;
+                    }
+
+                    $.map(items, removeFields);
+
+                    var jsonString = JSON.stringify(items, null, 2);
 
                     return jsonString.replace(/\n/gi, "\n    ")
                                 .replace(/\n\s*("name)/gi, " $1")
                                 .replace(/\n\s*("type)/gi, " $1")
                                 .replace(/\n\s*("expanded)/gi, " $1")
+                                .replace(/\n\s*("selected)/gi, " $1")
                                 .replace(/\n\s*("items)/gi, " $1")
+                                .replace(/\s*\n\s*(})/gi, " $1")
                                 .replace(/(\s*)]\n\s*}/gi, "] }");
                 }
             });
@@ -58,9 +76,7 @@
 
     <style scoped>
         .current-state {
-            float: right;
-            width: 300px;
-            margin: 60px 85px 0 0;
+            margin: 20px 0 0;
         }
 
         .current-state pre {
@@ -70,18 +86,12 @@
         .files h3 {
             color: #787878;
             border-bottom: 1px solid #ccc;
-        }
-
-        .files {
-            float: left;
-            clear: left;
-            width: 300px;
-            margin: 30px 0;
-            padding: 60px 0 30px 30px;
+            padding-bottom: .4em;
+            margin-bottom: .4em;
         }
 
         .files .k-treeview {
-            height: 400px;
+            height: 300px;
         }
 
         .files .k-sprite {
