@@ -1,0 +1,60 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <table id="weather" class="weather">
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Costs</th>
+                    <th>Benefits</th>
+                    <th>A sword!</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Norway</td>
+                    <td><span id="bar"></span></td>
+                    <td><span id="bar-stacked"></span></td>
+                    <td><span id="bar-negative"</span></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function createSparklines() {
+            $("#bar").kendoSparkline({
+                type: "bar",
+                data: [57.23],
+                valueAxis: {
+                    max: 100
+                }
+            });
+
+            $("#bar-stacked").kendoSparkline({
+                type: "bar",
+                series: [{
+                    data: [58]
+                }, {
+                    data: [42]
+                }]
+            });
+
+            $("#bar-negative").kendoSparkline({
+                type: "bar",
+                series: [{
+                    data: [24]
+                }, {
+                    data: [-12],
+                    negativeColor: "#aaa"
+                }],
+                categoryAxis: {
+                    visible: true
+                }
+            });
+        }
+
+        $(document).ready(createSparklines);
+        $("#example").bind("kendo:skinChange", createSparklines);
+    </script>
+</div>
