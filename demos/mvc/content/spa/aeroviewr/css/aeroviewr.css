@@ -184,7 +184,7 @@ header #slideshow-button {
     width: 100%;
 }
 
-#image-inner-wrap > .loading
+#image-inner-wrap .loading
 {
     background: url("../images/loading.gif") no-repeat 50% 50%;
     display: inline-block;
@@ -195,7 +195,9 @@ header #slideshow-button {
     -webkit-transition: width 200ms;
 }
 
-#image-inner-wrap > .loading > img {
+#image-inner-wrap .image {
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
     height: 500px;
     transition: width 200ms;
     -moz-transition: width 200ms;

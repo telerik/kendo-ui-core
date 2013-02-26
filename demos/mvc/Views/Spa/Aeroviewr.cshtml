@@ -59,7 +59,7 @@
                             </div>
                         </section>
                         <div class="loading" data-bind="style: { width: currentPhoto.calculatedWidth }">
-                            <img data-bind="attr: { src: currentPhoto.image_url }, style: { width: currentPhoto.calculatedWidth, visibility: currentPhoto.image_url ? 'visible' : 'hidden' } "/>
+                            <div class="image" data-bind="style: { backgroundImage: currentPhoto.backgroundPhoto, width: currentPhoto.calculatedWidth, visibility: currentPhoto.image_url ? 'visible' : 'hidden' } "></div>
                         </div>
                     </div>
                 </div>

@@ -62,6 +62,7 @@ model = kendo.observable({
             imagePlaceHolder.calculatedWidth = photo.calculatedWidth = ((500 / photo.height) * photo.width) + "px";
             photo.categoryName = photo.category ? categories[photo.category] : "";
             photo.noAvatar = photo.user.userpic_url == "/graphics/userpic.png";
+            photo.backgroundPhoto = photo.image_url ? "url('" + photo.image_url + "')" : "";
             model.set("currentPhoto", photo);
         });
     },
