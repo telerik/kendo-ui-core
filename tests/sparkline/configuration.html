@@ -100,14 +100,24 @@
                     equals(sparkline.element.width(), 24);
                 });
 
-                test("sets default container width after replacing existing widget", function() {
-                    createSparkline([1, 2]);
-                    createSparkline([1, 2, 3, 4]);
+                test("sets container width based on custom pointWidth", function() {
+                    createSparkline({ dataSource: [1, 2], pointWidth: 10 });
                     equals(sparkline.element.width(), 24);
                 });
 
-                test("sets container width based on custom pointWidth", function() {
-                    createSparkline({ dataSource: [1, 2], pointWidth: 10 });
+                test("sets default container width for bullet series", function() {
+                    createSparkline({ data: [[1, 2]], type: "bullet" });
+                    equals(sparkline.element.width(), 150);
+                });
+
+                test("sets default container width for bar series", function() {
+                    createSparkline({ data: [1], type: "bar" });
+                    equals(sparkline.element.width(), 150);
+                });
+
+                test("sets default container width after replacing existing widget", function() {
+                    createSparkline([1, 2]);
+                    createSparkline([1, 2, 3, 4]);
                     equals(sparkline.element.width(), 24);
                 });
 
@@ -126,15 +136,22 @@
                     equals(sparkline.element.innerWidth(), 30);
                 });
 
+                test("custom width is preserved for bullet series", function() {
+                    $("#sparkline").css("width", "30");
+                    createSparkline({ type: "bullet" });
+                    equals(sparkline.element.innerWidth(), 30);
+                });
+
+                test("custom width is preserved for bar series", function() {
+                    $("#sparkline").css("width", "30");
+                    createSparkline({ type: "bar" });
+                    equals(sparkline.element.innerWidth(), 30);
+                });
+
                 // ------------------------------------------------------------
                 module("Series", {
                     setup: function() {
                     }
-                });
-
-                test("bar is alias for column", function() {
-                    createSparkline({ data: [1, 2], type: "bar" });
-                    equals(sparkline._plotArea.charts[0].options.invertAxes, false);
                 });
 
                 test("bullet wrap the options data array", function() {
