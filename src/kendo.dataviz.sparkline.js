@@ -86,6 +86,9 @@ kendo_module({
                         width: 0.5
                     }
                 },
+                bar: {
+                    stack: true
+                },
                 width: 0.5,
                 overlay: {
                     gradient: null

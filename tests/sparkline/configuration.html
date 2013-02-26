@@ -159,6 +159,11 @@
                     createSparkline({ data: data, type: "bullet" });
                     same(sparkline._plotArea.series[0].data[0], data);
                 });
+
+                test("bar is stacked by default", function() {
+                    createSparkline({ data: [1], type: "bar" });
+                    same(sparkline._plotArea.series[0].stack, true);
+                });
             })();
         </script>
 
