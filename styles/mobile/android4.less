@@ -775,6 +775,7 @@
     outline: none;
     margin-top: -1.05em;
     .border-radius(0);
+    font-size: 1em;
     .box-sizing(padding-box);
 }
 
@@ -790,15 +791,20 @@
     padding: 0;
     width: auto;
     min-width: 8em;
-    margin-top: -1.2rem;
+}
+
+.km-root .km-android .k-dropdown
+{
+    margin-top: -1.2em;
 }
 
 .km-android .k-dropdown .k-dropdown-wrap
 {
     width: 100%;
-    padding: .25em .4em;
+    padding: .1em .3em;
     .border-radius(0);
     .box-sizing(border-box);
+
 }
 
 .km-android .k-dropdown .k-input
@@ -960,7 +966,7 @@
 .km-android .km-popup .k-item,
 .km-android .km-actionsheet > li > a
 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: normal;
     color: #fff;
     display: block;
@@ -977,12 +983,19 @@
     border: 0;
 }
 
+.km-android .km-popup .k-state-hover,
 .km-android .km-popup .k-state-focused,
 .km-android .km-popup .k-state-selected,
 .km-android .km-actionsheet > li > a:focus,
 .km-android .km-actionsheet > li > a:active
 {
     background: #33b5e5;
+}
+
+.km-android .km-popup .k-state-hover
+{
+    color: #fff;
+    background: rgba(51,181,229,.6);
 }
 
 .km-android li.km-actionsheet-cancel > a
