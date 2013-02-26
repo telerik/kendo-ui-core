@@ -238,4 +238,42 @@ function chart_stock_prices() {
         array('date'=> '1/31/2011', 'close'=> 600.36, 'volume'=> 2804332, 'open'=> 603.6, 'high'=> 604.47, 'low'=> 595.55, 'symbol'=> '1. GOOG')
    );
 }
+
+function mmHg_data() {
+    return array(
+        array('current' => 750, 'target' => 762.5, 'category' => 1 ),
+        array('current' => 754, 'target' => 768.5, 'category' => 2 ),
+        array('current' => 762, 'target' => 770, 'category' => 3 ),
+        array('current' => 764, 'target' => 773, 'category' => 4 ),
+        array('current' => 753, 'target' => 760, 'category' => 5 ),
+        array('current' => 748, 'target' => 765, 'category' => 6 ),
+        array('current' => 740, 'target' => 760, 'category' => 7 ),
+        array('current' => 755, 'target' => 758, 'category' => 8 ),
+        array('current' => 765, 'target' => 768, 'category' => 9 ),
+        array('current' => 776, 'target' => 783, 'category' => 10 ),
+        array('current' => 768, 'target' => 770, 'category' => 11 ),
+        array('current' => 760, 'target' => 762.5, 'category' => 12 ),
+        array('current' => 763, 'target' => 768, 'category' => 13 ),
+        array('current' => 758, 'target' => 766, 'category' => 14 )
+    );
+}
+
+function hPa_data() {
+    return array(
+        array('current' => 1001, 'target' => 1017, 'category' => 1 ),
+        array('current' => 1005, 'target' => 1024, 'category' => 2 ),
+        array('current' => 1016, 'target' => 1026, 'category' => 3 ),
+        array('current' => 1019, 'target' => 1030, 'category' => 4 ),
+        array('current' => 1004, 'target' => 1013, 'category' => 5 ),
+        array('current' => 998, 'target' => 1020, 'category' => 6 ),
+        array('current' => 987, 'target' => 1013, 'category' => 7 ),
+        array('current' => 1006.5, 'target' => 1010, 'category' => 8 ),
+        array('current' => 1020, 'target' => 1023, 'category' => 9 ),
+        array('current' => 1035, 'target' => 1044, 'category' => 10 ),
+        array('current' => 1025, 'target' => 1026, 'category' => 11 ),
+        array('current' => 1013, 'target' => 1017, 'category' => 12 ),
+        array('current' => 1017, 'target' => 1023, 'category' => 13 ),
+        array('current' => 1010, 'target' => 1021, 'category' => 14 )
+    );
+}
 ?>
