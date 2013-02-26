@@ -25,7 +25,7 @@ for (int i = 0; i < months.Length; i++) {
                         .Name("sparkline-tmax-" + i)
                         .DataSource(ds => ds.Read(read => read.Url(readUrl)))
                         .Series(series => series
-                            .Bar("TMax").Color("#ff0000").NegativeColor("#0099ff")
+                            .Column("TMax").Color("#ff0000").NegativeColor("#0099ff")
                         )
                 %>
             </td>

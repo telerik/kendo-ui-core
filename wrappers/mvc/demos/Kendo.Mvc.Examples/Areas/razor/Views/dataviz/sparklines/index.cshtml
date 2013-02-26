@@ -16,7 +16,7 @@
                 <td class="spark">
                     @(Html.Kendo().Sparkline()
                             .Name("temp-log")
-                            .Type(SparklineType.Bar)
+                            .Type(SparklineType.Column)
                             .Tooltip(tooltip => tooltip.Format("{0} &deg;C"))
                             .Data(ViewBag.TemperatureData)
                    )
@@ -43,7 +43,7 @@
         </h1>
         <div class="stats">
             @(Html.Kendo().Sparkline()
-                    .Name("temp-range")        
+                    .Name("temp-range")
                     .Type(SparklineType.Bullet)
                     .ValueAxis(axis => axis
                         .Numeric()

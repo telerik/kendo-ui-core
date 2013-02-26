@@ -30,7 +30,7 @@ for (int i = 0; i < months.length; i++) {
             			</kendo:dataSource-transport>
             		</kendo:dataSource>
             		<kendo:sparkline-series>
-            			<kendo:sparkline-seriesItem type="bar" field="TMax" color="#ff0000" negativeColor="#0099ff" />
+            			<kendo:sparkline-seriesItem type="column" field="TMax" color="#ff0000" negativeColor="#0099ff" />
             		</kendo:sparkline-series>
             	</kendo:sparkline>
             </td>

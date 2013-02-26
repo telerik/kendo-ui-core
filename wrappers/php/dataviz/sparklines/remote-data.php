@@ -34,7 +34,7 @@ for ($i = 0; $i < count($months); $i++) {
             <td>
 <?php
     $tmaxSeries = new \Kendo\Dataviz\UI\SparklineSeriesItem();
-    $tmaxSeries->type('bar')
+    $tmaxSeries->type('column')
         ->field('TMax')
         ->color('#ff0000')
         ->negativeColor('#0099ff');

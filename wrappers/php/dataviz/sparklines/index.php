@@ -34,7 +34,7 @@ $tempLogTooltip->format('{0} &deg;C');
 
 $tempLog = new \Kendo\Dataviz\UI\Sparkline('temp-log');
 
-$tempLog->type('bar')
+$tempLog->type('column')
         ->data(array(
             16, 17, 18, 19, 20, 21, 21, 22, 23, 22,
             20, 18, 17, 17, 16, 16, 17, 18, 19, 20,

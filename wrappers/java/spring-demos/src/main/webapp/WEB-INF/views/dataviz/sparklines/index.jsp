@@ -19,7 +19,7 @@
             <tr>
                 <td class="item">Temperature</td>
                 <td class="spark">
-	                <kendo:sparkline name="temp-log" type="bar" data="${temperatureData}">
+	                <kendo:sparkline name="temp-log" type="column" data="${temperatureData}">
 	                	<kendo:sparkline-tooltip format="{0} &deg;C"></kendo:sparkline-tooltip>
 	                </kendo:sparkline>
                 </td>

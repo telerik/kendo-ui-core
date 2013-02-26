@@ -19,7 +19,7 @@
                 <td class="spark">
                     <%= Html.Kendo().Sparkline()
                             .Name("temp-log")
-                            .Type(SparklineType.Bar)
+                            .Type(SparklineType.Column)
                             .Tooltip(tooltip => tooltip.Format("{0} &deg;C"))
                             .Data(ViewBag.TemperatureData)
                     %>
