@@ -460,13 +460,13 @@
                 {
                     "name": "Editor",
                     "file": "kendo.editor.js",
-                    "line": 416,
+                    "line": 444,
                     "col": 17
                 },
                 {
                     "name": "SelectBox",
                     "file": "kendo.editor.js",
-                    "line": 5385,
+                    "line": 5435,
                     "col": 16
                 }
             ]
