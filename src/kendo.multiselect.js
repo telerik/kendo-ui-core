@@ -26,6 +26,7 @@ kendo_module({
         HIDE = ' style="display:none"',
         ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
+        HIDDENCLASS = "k-loading-hidden",
         HOVERCLASS = "k-state-hover",
         DISABLEDCLASS = "k-state-disabled",
         DISABLEDATTR = "disabled",
@@ -579,8 +580,8 @@ kendo_module({
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that._loading.hide();
             that.input.attr("aria-busy", false);
+            that._loading.addClass(HIDDENCLASS);
             that._busy = null;
         },
 
@@ -593,7 +594,7 @@ kendo_module({
 
             that._busy = setTimeout(function () {
                 that.input.attr("aria-busy", true);
-                that._loading.show();
+                that._loading.removeClass(HIDDENCLASS);
             }, 100);
         },
 
@@ -867,7 +868,7 @@ kendo_module({
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-loading" style="display:none"></span>').insertAfter(this.input);
+            this._loading = $('<span class="k-icon k-loading"></span>').insertAfter(this.input);
         },
 
         _textContainer: function() {

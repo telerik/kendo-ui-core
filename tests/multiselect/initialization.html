@@ -253,7 +253,7 @@
                 multiselect.dataSource.trigger("progress");
 
                 setTimeout(function() {
-                    notEqual(multiselect._loading.css("display"), "none");
+                    ok(!multiselect._loading.hasClass("k-loading-hidden"));
                     start();
                 }, 200);
             });
@@ -266,8 +266,7 @@
 
                 setTimeout(function() {
                     multiselect.refresh();
-
-                    equal(multiselect._loading.css("display"), "none");
+                    ok(multiselect._loading.hasClass("k-loading-hidden"));
                     start();
                 }, 200);
             });
