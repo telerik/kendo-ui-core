@@ -21,8 +21,11 @@ kendo_module({
 
     // Constants =============================================================
     var CSS_PREFIX = "k-",
+        DEAULT_BAR_WIDTH = 150,
         DEAULT_BULLET_WIDTH = 150,
-        BULLET = "bullet";
+        BAR = "bar",
+        BULLET = "bullet",
+        PIE = "pie";
 
     // Sparkline =============================================================
     var Sparkline = Chart.extend({
@@ -83,6 +86,9 @@ kendo_module({
                         width: 0.5
                     }
                 },
+                bar: {
+                    stack: true
+                },
                 width: 0.5,
                 overlay: {
                     gradient: null
@@ -113,23 +119,6 @@ kendo_module({
             transitions: false,
 
             pointWidth: 5
-        },
-
-        _getModel: function() {
-            var chart = this,
-                series = chart.options.series,
-                i,
-                currentSeries;
-
-            for (i = 0; i < series.length; i++) {
-                currentSeries = series[i];
-
-                if (currentSeries.type === "bar") {
-                    currentSeries.type = "column";
-                }
-            }
-
-            return Chart.fn._getModel.call(chart);
         },
 
         _modelOptions: function() {
@@ -192,11 +181,16 @@ kendo_module({
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
+
+                if (currentSeries.type === BAR) {
+                    return DEAULT_BAR_WIDTH;
+                }
+
                 if (currentSeries.type === BULLET) {
                     return DEAULT_BULLET_WIDTH;
                 }
 
-                if (currentSeries.type === "pie") {
+                if (currentSeries.type === PIE) {
                     return chart.stage.height();
                 }
 

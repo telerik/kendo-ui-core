@@ -1,0 +1,166 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <table id="stats" class="stats">
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Hourly compensation costs USD</th>
+                    <th>Annual change %</th>
+                    <th>Benefit components %</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script id="template" type="text/x-kendo-template">
+        <tr>
+            <td>${country}</td>
+            <td><span class="bar-hourly"></span></td>
+            <td><span class="bar-change"></span></td>
+            <td><span class="bar-benefits"></span></td>
+        </tr>
+    </script>
+
+    <script>
+        var data = [{
+            country: "Norway",
+            hourly: 57.53,
+            change: 4.3,
+            benefits: [{
+                type: "Social",
+                value: 17.7
+            }, {
+                type: "Direct",
+                value: 14.6
+            }]
+        }, {
+            country: "Switzerland",
+            hourly: 53.20,
+            change: -2.3,
+            benefits: [{
+                type: "Social",
+                value: 15.45
+            }, {
+                type: "Direct",
+                value: 20.09
+            }]
+        }, {
+            country: "Belgium",
+            hourly: 50.70,
+            change: 1.3,
+            benefits: [{
+                type: "Social",
+                value: 32.33
+            }, {
+                type: "Direct",
+                value: 20.3
+            }]
+        }, {
+            country: "Denmark",
+            hourly: 45.48,
+            change: 2.7,
+            benefits: [{
+                type: "Social",
+                value: 6.75
+            }, {
+                type: "Direct",
+                value: 16.75
+            }]
+        }, {
+            country: "Sweden",
+            hourly: 43.81,
+            change: 1.3,
+            benefits: [{
+                type: "Social",
+                value: 33.03
+            }, {
+                type: "Direct",
+                value: 10.41
+            }]
+        }, {
+            country: "Germany",
+            hourly: 43.76,
+            change: 0.2,
+            benefits: [{
+                type: "Social",
+                value: 21.76
+            }, {
+                type: "Direct",
+                value: 19.76
+            }]
+        }];
+
+        function createSparklines() {
+            // Create a row template using the above definition
+            var template = kendo.template($("#template").html());
+
+            $("#stats tbody").empty();
+            for (var i = 0; i < data.length; i++) {
+                var rowData = data[i];
+
+                var row = $("#stats tbody")
+                    .append(template(rowData))
+                    .find("tr:last");
+
+                $(".bar-hourly", row).kendoSparkline({
+                    type: "bar",
+                    data: [rowData.hourly],
+                    valueAxis: {
+                        max: 100
+                    }
+                });
+
+                $(".bar-change", row).kendoSparkline({
+                    type: "bar",
+                    series: [{
+                        data: [rowData.change],
+                        negativeColor: "#aaa"
+                    }],
+                    valueAxis: {
+                        min: -5,
+                        max: 5
+                    },
+                    categoryAxis: {
+                        visible: true
+                    }
+                });
+
+                $(".bar-benefits", row).kendoSparkline({
+                    type: "bar",
+                    dataSource: {
+                        data: rowData.benefits,
+                        group: {
+                            field: "type",
+                            dir: "asc"
+                        }
+                    },
+                    series: [{
+                        field: "value"
+                    }],
+                    valueAxis: {
+                        max: 100
+                    }
+                });
+            }
+        }
+
+        $(document).ready(createSparklines);
+        $("#example").bind("kendo:skinChange", createSparklines);
+    </script>
+
+    <style scoped>
+        .chart-wrapper {
+            height: 370px;
+        }
+        .stats {
+            border-collapse: collapse;
+            line-height: 25px;
+        }
+        .stats td, .stats th {
+            padding: 0;
+            width: 200px;
+        }
+    </style>
+</div>
