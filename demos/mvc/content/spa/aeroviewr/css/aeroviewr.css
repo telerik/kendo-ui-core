@@ -39,14 +39,18 @@ header label {
 }
 
 header input {
+    background: #222;
     background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #555;
     border: 1px solid rgba(255,255,255,.2);
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     border-radius: 16px;
     color: white;
-    font-size: 1.2em;
+    font-size: 1em;
+    padding: 2px 5px;
+    outline: 0;
 }
 
 header #slideshow-button {

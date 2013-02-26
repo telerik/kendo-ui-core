@@ -54,7 +54,7 @@
                                     <li data-bind="visible: currentPhoto.rating"><span>Rating</span><div data-bind="text: currentPhoto.rating + '%'"></div></li>
                                     <li data-bind="visible: currentPhoto.categoryName"><span>Category</span><div data-bind="text: currentPhoto.categoryName"></div></li>
                                     <li data-bind="visible: currentPhoto.user.fullname"><span>Copyright</span><div data-bind="text: currentPhoto.user.fullname"></div></li>
-                                    <li data-bind="visible: currentPhoto.user.userpic_url"><span>Avatar</span><div><img data-bind="attr: { src: currentPhoto.user.userpic_url }"/></div></li>
+                                    <li data-bind="invisible: currentPhoto.noAvatar"><span>Avatar</span><div><img data-bind="attr: { src: currentPhoto.user.userpic_url }"/></div></li>
                                 </ul>
                             </div>
                         </section>
