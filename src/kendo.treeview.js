@@ -628,10 +628,19 @@ kendo_module({
         },
 
         _updateIndeterminate: function(node) {
-            var parentNode = this.parent(node);
+            var parentNode = this.parent(node),
+                checkbox;
 
             if (parentNode.length) {
                 this._setIndeterminate(parentNode);
+                checkbox = parentNode.children("div").find(":checkbox");
+
+                if (checkbox.prop("indeterminate") === false) {
+                    this.dataItem(parentNode).set(CHECKED, checkbox.prop(CHECKED));
+                } else {
+                    this.dataItem(parentNode).checked = false;
+                }
+
                 this._updateIndeterminate(parentNode);
             }
         },
@@ -642,13 +651,7 @@ kendo_module({
                 node = checkbox.closest(NODE),
                 that = this;
 
-            if (that.options.checkboxes.checkChildren) {
-                node.find(":checkbox").each(function() {
-                    that.dataItem(this).set(CHECKED, isChecked);
-                });
-            } else {
-                that.dataItem(node).set(CHECKED, isChecked);
-            }
+            that.dataItem(node).set(CHECKED, isChecked);
         },
 
         _toggleButtonClick: function (e) {
@@ -1089,7 +1092,12 @@ kendo_module({
 
         _updateNode: function(field, items) {
             var that = this, i, node, item,
+                isChecked,
                 context = { treeview: that.options, item: item };
+
+            function setChecked() {
+                that.dataItem(this).set(CHECKED, isChecked);
+            }
 
             if (field == "selected") {
                 item = items[0];
@@ -1115,12 +1123,16 @@ kendo_module({
                     } else if (field == CHECKED) {
                         node = that.findByUid(item.uid);
 
+                        isChecked = item[field];
+
                         node.children("div").find(":checkbox")
                             .prop(CHECKED, item[field])
                             .data("indeterminate", false)
                             .prop("indeterminate", false);
 
                         if (that.options.checkboxes.checkChildren) {
+                            node.find(":checkbox").each(setChecked);
+
                             that._updateIndeterminate(node);
                         }
                     } else if (field == "expanded") {
