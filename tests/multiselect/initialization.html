@@ -76,6 +76,13 @@
                 ok(multiselect.tagList);
             });
 
+            test("MultiSelect wraps tagList and clears float", function() {
+                var multiselect = new MultiSelect(select);
+
+                ok(multiselect.tagList.parent().hasClass("k-multiselect-wrap"));
+                ok(multiselect.tagList.parent().hasClass("k-floatwrap"));
+            });
+
             test("MultiSelect appends ul to the wrapper", function() {
                 var multiselect = new MultiSelect(select);
 

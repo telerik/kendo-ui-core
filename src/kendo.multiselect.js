@@ -888,7 +888,7 @@ kendo_module({
                 wrapper = element.wrap('<div class="k-widget k-multiselect k-header" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
 
-                $('<div class="k-multiselect-wrap floatWrap" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).css("display", "");
