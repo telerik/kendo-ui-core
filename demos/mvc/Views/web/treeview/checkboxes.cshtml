@@ -1,106 +1,117 @@
 <div id="example" class="k-content">
-    
-    <div class="container">        
+
+    <div class="container">
         <div class="treeview-back ">
             <div id="treeview"></div>
         </div>
-        <button id="find" class="k-button">Find checked nodes</button>
     </div>
-    <div id="result">No nodes checked.
-    </div>
-        <script>
-            $("#treeview").kendoTreeView({
-                checkboxes: {
-                    checkChildren: true
-                },
 
-                dataSource: [{
-                    id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
-                        {
-                            id: 2, text: "Kendo UI Project", expanded: true, spriteCssClass: "folder", items: [
-                                { id: 3, text: "about.html", spriteCssClass: "html" },
-                                { id: 4, text: "index.html", spriteCssClass: "html" },
-                                { id: 5, text: "logo.png", spriteCssClass: "image" }
-                            ]
-                        },
-                        {
-                            id: 6, text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
-                                { id: 7, text: "mockup.jpg", spriteCssClass: "image" },
-                                { id: 8, text: "Research.pdf", spriteCssClass: "pdf" },
-                            ]
-                        },
-                        {
-                            id: 9, text: "Reports", expanded: true, spriteCssClass: "folder", items: [
-                                { id: 10, text: "February.pdf", spriteCssClass: "pdf" },
-                                { id: 11, text: "March.pdf", spriteCssClass: "pdf" },
-                                { id: 12, text: "April.pdf", spriteCssClass: "pdf" }
-                            ]
-                        }
-                    ]
-                }]
-            });
-            $("#find").on("click", function () {
-                var checkedNodes = [],
-                    treeView = $("#treeview").data("kendoTreeView");
-    
-                findCheckedNodes(treeView.dataSource.view(), checkedNodes);
-                $("#result").html(checkedNodes.length > 0 ?  "Checked nodes: " + checkedNodes.join(",") : "No nodes checked.");
-            });
+    <div id="result">No nodes checked.</div>
 
-            function findCheckedNodes(nodes, checkedNodes) {                
-                for (var i = 0; i < nodes.length; i++) {
-                    if (nodes[i].checked) {
-                        checkedNodes.push(nodes[i].id);
+    <script>
+        $("#treeview").kendoTreeView({
+            checkboxes: {
+                checkChildren: true
+            },
+
+            dataSource: [{
+                id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
+                    {
+                        id: 2, text: "Kendo UI Project", expanded: true, spriteCssClass: "folder", items: [
+                            { id: 3, text: "about.html", spriteCssClass: "html" },
+                            { id: 4, text: "index.html", spriteCssClass: "html" },
+                            { id: 5, text: "logo.png", spriteCssClass: "image" }
+                        ]
+                    },
+                    {
+                        id: 6, text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
+                            { id: 7, text: "mockup.jpg", spriteCssClass: "image" },
+                            { id: 8, text: "Research.pdf", spriteCssClass: "pdf" },
+                        ]
+                    },
+                    {
+                        id: 9, text: "Reports", expanded: true, spriteCssClass: "folder", items: [
+                            { id: 10, text: "February.pdf", spriteCssClass: "pdf" },
+                            { id: 11, text: "March.pdf", spriteCssClass: "pdf" },
+                            { id: 12, text: "April.pdf", spriteCssClass: "pdf" }
+                        ]
                     }
+                ]
+            }]
+        });
 
-                    if (nodes[i].hasChildren) {
-                        findCheckedNodes(nodes[i].children.view(), checkedNodes);
-                    }
+        // function that gathers IDs of checked nodes
+        function checkedNodeIds(nodes, checkedNodes) {
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].checked) {
+                    checkedNodes.push(nodes[i].id);
+                }
+
+                if (nodes[i].hasChildren) {
+                    checkedNodeIds(nodes[i].children.view(), checkedNodes);
                 }
             }
-        </script>
+        }
 
-        <style scoped>
-            #treeview .k-sprite {
-                background-image: url("../../content/web/treeview/coloricons-sprite.png");
+        // show checked node IDs on datasource change
+        $("#treeview").data("kendoTreeView").dataSource.bind("change", function() {
+            var checkedNodes = [],
+                treeView = $("#treeview").data("kendoTreeView"),
+                message;
+
+            checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+            if (checkedNodes.length > 0) {
+                message = "IDs of checked nodes: " + checkedNodes.join(",");
+            } else {
+                message = "No nodes checked.";
             }
 
-            .rootfolder { background-position: 0 0; }
-            .folder     { background-position: 0 -16px; }
-            .pdf        { background-position: 0 -32px; }
-            .html       { background-position: 0 -48px; }
-            .image      { background-position: 0 -64px; }
+            $("#result").html(message);
+        });
+    </script>
 
-            .treeview-back 
-            {
-                float: left;
-                margin: 0 0 2em;
-                padding: 20px;
-                -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
-                -webkit-border-radius: 8px;
-                -moz-border-radius: 8px;
-                border-radius: 8px;
-            }
+    <style scoped>
+        #treeview .k-sprite {
+            background-image: url("../../content/web/treeview/coloricons-sprite.png");
+        }
 
-            .container
-            {
-                margin: 0 30px;
-                float: left;
-                width: 220px;
-            }
+        .rootfolder { background-position: 0 0; }
+        .folder     { background-position: 0 -16px; }
+        .pdf        { background-position: 0 -32px; }
+        .html       { background-position: 0 -48px; }
+        .image      { background-position: 0 -64px; }
 
-            #result 
-            {
-                float: left;
-                padding: 10px;
-                -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
-                -webkit-border-radius: 8px;
-                -moz-border-radius: 8px;
-                border-radius: 8px;
-            }
-        </style>
-    </div>
+        .treeview-back
+        {
+            float: left;
+            margin: 0 0 2em;
+            padding: 20px;
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+        }
+
+        .container
+        {
+            margin: 0 30px;
+            float: left;
+            width: 220px;
+        }
+
+        #result
+        {
+            float: left;
+            padding: 10px;
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+        }
+    </style>
+</div>
