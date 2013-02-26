@@ -189,6 +189,10 @@ header #slideshow-button {
     background: url("../images/loading.gif") no-repeat 50% 50%;
     display: inline-block;
     margin: 0 auto;
+    height: 500px;
+    transition: width 200ms;
+    -moz-transition: width 200ms;
+    -webkit-transition: width 200ms;
 }
 
 #image-inner-wrap > .loading > img {
