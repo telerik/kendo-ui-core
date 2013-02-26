@@ -320,7 +320,26 @@ var InlineFormatTool = FormatTool.extend({
     }
 });
 
-var FontTool = Tool.extend({
+var DelayedExecutionTool = Tool.extend({
+    willDelayExecution: inlineFormatWillDelayExecution,
+
+    update: function(ui, nodes, pendingFormats) {
+        var list = ui.data(this.type),
+            pendingFormat = pendingFormats.getPending(this.name),
+            format;
+
+        if (pendingFormat && pendingFormat.options.params) {
+            format = pendingFormat.options.params.value;
+        } else {
+            format = this.finder.getFormat(nodes);
+        }
+
+        list.close();
+        list.value(format);
+    }
+});
+
+var FontTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
         Tool.fn.init.call(that, options);
@@ -343,23 +362,6 @@ var FontTool = Tool.extend({
                 return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
             }
         }));
-    },
-
-    willDelayExecution: inlineFormatWillDelayExecution,
-
-    update: function(ui, nodes, pendingFormats) {
-        var list = ui.data(this.type),
-            pendingFormat = pendingFormats.getPending(this.name),
-            format;
-
-        if (pendingFormat && pendingFormat.options.params) {
-            format = pendingFormat.options.params.value;
-        } else {
-            format = this.finder.getFormat(nodes);
-        }
-
-        list.close();
-        list.value(format);
     },
 
     initialize: function (ui, initOptions) {
@@ -439,11 +441,12 @@ var ColorTool = Tool.extend({
     }
 });
 
-var StyleTool = Tool.extend({
+var StyleTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
         Tool.fn.init.call(that, options);
 
+        that.type = "kendoSelectBox";
         that.format = [{ tags: ["span"] }];
         that.finder = new GreedyInlineFormatFinder(that.format, "className");
     },
@@ -455,12 +458,6 @@ var StyleTool = Tool.extend({
                 return new GreedyInlineFormatter(format, { className: commandArguments.value });
             }
         }));
-    },
-
-    update: function(ui, nodes) {
-        var list = ui.data("kendoSelectBox");
-        list.close();
-        list.value(this.finder.getFormat(nodes));
     },
 
     initialize: function(ui, initOptions) {
