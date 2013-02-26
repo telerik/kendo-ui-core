@@ -1250,6 +1250,11 @@
                 {
                     "text": "Keyboard navigation",
                     "url": "treeview/navigation.html"
+                }, {
+                    "text": "MVVM",
+                    "url": "treeview/mvvm.html",
+                    "title": "Demo for Kendo UI TreeView widget with MVVM binding",
+                    "meta": "This example shows how to bind the Kendo UI TreeView component with the Kendo MVVM framework."
                 }
             ]
         },
