@@ -37,9 +37,9 @@
                 <!--button id="slideshow-button" data-bind="text: slideShowButtonText, click: toggleSlideShow"></button-->
             </header>
 
-            <section data-bind="events: { dblclick: toggleFocus, click: toggleShowDetails }" id="image-container">
+            <section data-bind="events: { click: toggleFocus }" id="image-container">
                 <div id="image-wrap">
-                    <div id="image-inner-wrap">
+                    <div id="image-inner-wrap" data-bind="events: { click: toggleShowDetails }">
                         <section data-bind="attr: { class: detailsClass }" id="details">
                             <div>
                                 <h2 data-bind="text: currentPhoto.name, visible: currentPhoto.name"></h2>
@@ -58,7 +58,9 @@
                                 </ul>
                             </div>
                         </section>
-                        <img data-bind="attr: { src: currentPhoto.image_url, width: currentPhoto.calculatedWidth }"/>
+                        <div class="loading" data-bind="attr: { width: currentPhoto.calculatedWidth }">
+                            <img data-bind="attr: { src: currentPhoto.image_url, width: currentPhoto.calculatedWidth }, style: { visibility: currentPhoto.image_url ? 'visible' : 'hidden' "/>
+                        </div>
                     </div>
                 </div>
             </section>

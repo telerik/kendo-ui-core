@@ -30,7 +30,7 @@ var model,
         26: "Transporation",
         27: "Urban Exploration"
     },
-    imagePlaceHolder = { image_url: "../content/spa/aeroviewr/images/loading.gif", calculatedWidth: 400, noAvatar: true },
+    imagePlaceHolder = { image_url: "", calculatedWidth: 400, noAvatar: true },
     popularQuery = { url: '/photos', settings: { feature: 'popular', page: 1, image_size: 1, rpp: 50 } };
 
 var photos = new kendo.data.DataSource({
@@ -59,7 +59,7 @@ model = kendo.observable({
         _500px.api('/photos/' + photoID, { image_size: 4 }, function(response) {
             var photo = response.data.photo;
 
-            photo.calculatedWidth = (500 / photo.height) * photo.width;
+            imagePlaceHolder.calculatedWidth = photo.calculatedWidth = (500 / photo.height) * photo.width;
             photo.categoryName = photo.category ? categories[photo.category] : "";
             photo.noAvatar = photo.user.userpic_url == "/graphics/userpic.png";
             model.set("currentPhoto", photo);
@@ -126,8 +126,9 @@ model = kendo.observable({
         $("#photo-thumbs").animate({ scrollLeft: "-=" + width }, 500);
     },
 
-    toggleShowDetails: function() {
+    toggleShowDetails: function(e) {
         this.set("showDetails", !this.get("showDetails"));
+        e.stopImmediatePropagation();
     },
 
     slideShowButtonText: function() {

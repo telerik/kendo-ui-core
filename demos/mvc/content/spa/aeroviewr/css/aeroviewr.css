@@ -12,8 +12,25 @@ body, html, #root, #root > div {
     height: 100%;
 }
 
-.focused header, .focused footer, .focused #details {
-    display: none;
+header, footer
+{
+    transition: transform 100ms;
+    -moz-transition: -moz-transform 100ms;
+    -webkit-transition: -webkit-transform 100ms;
+}
+
+.focused header
+{
+    transform: translatey(-100px);
+    -moz-transform: translatey(-100px);
+    -webkit-transform: translatey(-100px);
+}
+
+.focused footer
+{
+    transform: translatey(100px);
+    -moz-transform: translatey(100px);
+    -webkit-transform: translatey(100px);
 }
 
 /***************************
@@ -167,10 +184,15 @@ header #slideshow-button {
     width: 100%;
 }
 
-#image-inner-wrap > img {
-    height: 500px;
+#image-inner-wrap > .loading
+{
+    background: url("../images/loading.gif") no-repeat 50% 50%;
     display: inline-block;
     margin: 0 auto;
+}
+
+#image-inner-wrap > .loading > img {
+    height: 500px;
     transition: width 200ms;
     -moz-transition: width 200ms;
     -webkit-transition: width 200ms;
