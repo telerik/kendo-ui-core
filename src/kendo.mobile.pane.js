@@ -122,8 +122,7 @@ kendo_module({
                 .on("down", roleSelector(linkRoles), "_mouseup")
                 .on("up", roleSelector(buttonRoles), "_mouseup")
                 .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
-                .on("touchstart", roleSelector(buttonRoles), captureGhostClick)
-                .on("touchstart", ".km-popup .k-item", kendo.preventDefault); // Prevent ghost clicks in DropDownList
+                .on("touchstart", roleSelector(buttonRoles), captureGhostClick);
         },
 
         _mouseup: function(e) {
