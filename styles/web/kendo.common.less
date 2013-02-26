@@ -2148,6 +2148,7 @@ body .k-datetimepicker .k-select
 
 .k-multiselect-wrap
 {
+	position: relative;
     border-width: 0px;
     border-style: solid;
     border-radius: 4px;
@@ -2174,6 +2175,18 @@ body .k-datetimepicker .k-select
     padding: .1em .15em .1em .4em;
     line-height: 1.5em;
     float: left;
+}
+
+.k-multiselect .k-loading
+{
+	position: absolute;
+	right: 3px;
+	bottom: 4px;
+}
+
+.k-multiselect .k-loading-hidden
+{
+	visibility: hidden;
 }
 
 /* Calendar */
