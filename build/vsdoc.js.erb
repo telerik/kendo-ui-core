@@ -25,7 +25,7 @@ var kendo = {
         /// <%= method.description.strip.gsub(/\n/, "\n/// ")  %>
         /// </summary>
 % method.parameters.each do |param|
-        /// <param name="<%= param.name %>" type="<%= param.type %>" <%= param.type === "Element" ? 'domElement="true">' : '>' %><%= param.description.strip.gsub(/\n/, " ") %></param>
+        /// <param name="<%= param.name %>" type="<%= param.vsdoc_type %>" <%= param.type === "Element" ? 'domElement="true">' : '>' %><%= param.description.strip.gsub(/\n/, " ") %></param>
 % end
 % if method.result && method.result.type
         /// <returns type="<%= method.result.type %>"><%= method.result.description.gsub(/\r?\n/, '') %></returns>
