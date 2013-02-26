@@ -291,7 +291,7 @@ kendo_module({
             that._oldTable = from;
 
             if (!from || that._changeView) {
-                title.html(currentView.title(value, culture));
+                title.html(currentView.title(value, min, max, culture));
 
                 that._table = to = $(currentView.content(extend({
                     min: min,
@@ -822,7 +822,7 @@ kendo_module({
         },
         views: [{
             name: MONTH,
-            title: function(date, culture) {
+            title: function(date, min, max, culture) {
                 return getCalendarInfo(culture).months.names[date.getMonth()] + " " + date.getFullYear();
             },
             content: function(options) {
@@ -1016,12 +1016,8 @@ kendo_module({
         },
         {
             name: "decade",
-            title: function(date) {
-                var start = date.getFullYear();
-
-                start = start - start % 10;
-
-                return start + "-" + (start + 9);
+            title: function(date, min, max) {
+                return title(date, min, max, 10);
             },
             content: function(options) {
                 var year = options.date.getFullYear(),
@@ -1062,18 +1058,16 @@ kendo_module({
         },
         {
             name: CENTURY,
-            title: function(date) {
-                var start = date.getFullYear();
-
-                start = start - start % 100;
-
-                return start + "-" + (start + 99);
+            title: function(date, min, max) {
+                return title(date, min, max, 100);
             },
             content: function(options) {
                 var year = options.date.getFullYear(),
-                minYear = options.min.getFullYear(),
-                maxYear = options.max.getFullYear(),
-                toDateString = this.toDateString;
+                min = options.min.getFullYear(),
+                max = options.max.getFullYear(),
+                toDateString = this.toDateString,
+                minYear = min,
+                maxYear = max;
 
                 minYear = minYear - minYear % 10;
                 maxYear = maxYear - maxYear % 10;
@@ -1088,10 +1082,20 @@ kendo_module({
                     max: new DATE(maxYear, 0, 1),
                     setter: this.setDate,
                     build: function(date, idx) {
-                        var year = date.getFullYear();
+                        var start = date.getFullYear(),
+                            end = start + 9;
+
+                        if (start < min) {
+                            start = min;
+                        }
+
+                        if (end > max) {
+                            end = max;
+                        }
+
                         return {
-                            value: year + " - " + (year + 9),
                             ns: kendo.ns,
+                            value: start + " - " + end,
                             dateString: toDateString(date),
                             cssClass: idx === 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
@@ -1118,6 +1122,25 @@ kendo_module({
             }
         }]
     };
+
+    function title(date, min, max, modular) {
+        var start = date.getFullYear(),
+            minYear = min.getFullYear(),
+            maxYear = max.getFullYear(),
+            end;
+
+        start = start - start % modular;
+        end = start + (modular - 1);
+
+        if (start < minYear) {
+            start = minYear;
+        }
+        if (end > maxYear) {
+            end = maxYear;
+        }
+
+        return start + "-" + end;
+    }
 
     function view(options) {
         var idx = 0,

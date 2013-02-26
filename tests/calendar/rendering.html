@@ -183,7 +183,7 @@
                 var date = new Date(),
                     text = kendo.getCulture("bg-BG").calendars.standard.months.names[date.getMonth()] + " " + date.getFullYear();
 
-                    equal(calendar.views[0].title(date, "bg-BG"), text);
+                    equal(calendar.views[0].title(date, null, null, "bg-BG"), text);
             });
 
             test("month view renders days", function() {
@@ -540,7 +540,18 @@
 
             test("decade title renders decade range title", function() {
                 var today = new Date(2011, 9, 10);
-                equal(calendar.views[2].title(today), "2010-2019");
+                var min = new Date(2000, 9, 10);
+                var max = new Date(2020, 9, 10);
+
+                equal(calendar.views[2].title(today, min, max), "2010-2019");
+            });
+
+            test("decade title renders decade range within min/max values", function() {
+                var today = new Date(2015, 9, 10);
+                var min = new Date(2013, 9, 10);
+                var max = new Date(2018, 9, 10);
+
+                equal(calendar.views[2].title(today, min, max), "2013-2018");
             });
 
             test("decade view renders meta view  4x3 cells", function() {
@@ -605,8 +616,18 @@
 
             test("century title renders century title", function() {
                 var today = new Date(2011, 9, 10);
+                var min = new Date(1900, 9, 10);
+                var max = new Date(2100, 9, 10);
 
-                equal(calendar.views[3].title(today), "2000-2099");
+                equal(calendar.views[3].title(today, min, max), "2000-2099");
+            });
+
+            test("century title renders century title within min/max values", function() {
+                var today = new Date(2011, 9, 10);
+                var min = new Date(2010, 9, 10);
+                var max = new Date(2050, 9, 10);
+
+                equal(calendar.views[3].title(today, min, max), "2010-2050");
             });
 
             test("century view renders meta view  4x3 cells", function() {
@@ -634,7 +655,7 @@
                 }));
 
                 equal(div.find("tbody").find("td > a").length, 1);
-                equal(div.find("tbody").find("a").html(), "2010 - 2019");
+                equal(div.find("tbody").find("a").html(), "2011 - 2011");
             });
 
             test("century view does not render decades less then min", function() {
