@@ -1,6 +1,36 @@
 var model,
     router,
-    imagePlaceHolder = { image_url: "content/spa/aeroviewr/images/loading.gif", calculatedWidth: 400 },
+    categories = {
+        0: "Uncategorized",
+        1: "Celebrities",
+        2: "Film",
+        3: "Journalism",
+        4: "Nude",
+        5: "Black and White",
+        6: "Still Life",
+        7: "People",
+        8: "Landscapes",
+        9: "City and Architecture",
+        10: "Abstract",
+        11: "Animals",
+        12: "Macro",
+        13: "Travel",
+        14: "Fashion",
+        15: "Commercial",
+        16: "Concert",
+        17: "Sport",
+        18: "Nature",
+        19: "Performing Arts",
+        20: "Family",
+        21: "Street",
+        22: "Underwater",
+        23: "Food",
+        24: "Fine Art",
+        25: "Wedding",
+        26: "Transporation",
+        27: "Urban Exploration"
+    },
+    imagePlaceHolder = { image_url: "../content/spa/aeroviewr/images/loading.gif", calculatedWidth: 400 },
     popularQuery = { url: '/photos', settings: { feature: 'popular', page: 1, image_size: 1, rpp: 50 } };
 
 var photos = new kendo.data.DataSource({
@@ -27,8 +57,11 @@ model = kendo.observable({
         this.set("current", parseInt(photoID));
 
         _500px.api('/photos/' + photoID, { image_size: 4 }, function(response) {
-            response.data.photo.calculatedWidth = (500 / response.data.photo.height) * response.data.photo.width;
-            model.set("currentPhoto", response.data.photo);
+            var photo = response.data.photo;
+
+            photo.calculatedWidth = (500 / photo.height) * photo.width;
+            photo.categoryName = photo.category ? categories[photo.category] : "";
+            model.set("currentPhoto", photo);
         });
     },
 

@@ -42,8 +42,8 @@
                     <div id="image-inner-wrap">
                         <section data-bind="attr: { class: detailsClass }" id="details">
                             <div>
-                                <h2 data-bind="text: currentPhoto.name"></h2>
-                                <p data-bind="html: currentPhoto.description"></p>
+                                <h2 data-bind="text: currentPhoto.name, visible: currentPhoto.name"></h2>
+                                <p data-bind="html: currentPhoto.description, visible: currentPhoto.description"></p>
                                 <ul>
                                     <li data-bind="visible: currentPhoto.camera"><span>Camera</span><div data-bind="text: currentPhoto.camera"></div></li>
                                     <li data-bind="visible: currentPhoto.focal_length"><span>Focal Length</span><div data-bind="text: currentPhoto.focal_length"></div></li>
@@ -52,7 +52,7 @@
                                     <li data-bind="visible: currentPhoto.iso"><span>ISO</span><div data-bind="text: currentPhoto.iso"></div></li>
                                     <li data-bind="visible: currentPhoto.times_viewed"><span>Times Viewed</span><div data-bind="text: currentPhoto.times_viewed"></div></li>
                                     <li data-bind="visible: currentPhoto.rating"><span>Rating</span><div data-bind="text: currentPhoto.rating + '%'"></div></li>
-                                    <li data-bind="visible: currentPhoto.category"><span>Category</span><div data-bind="text: currentPhoto.category"></div></li>
+                                    <li data-bind="visible: currentPhoto.categoryName"><span>Category</span><div data-bind="text: currentPhoto.categoryName"></div></li>
                                     <li data-bind="visible: currentPhoto.user.fullname"><span>Copyright</span><div data-bind="text: currentPhoto.user.fullname"></div></li>
                                     <li data-bind="visible: currentPhoto.user.userpic_url"><span>Avatar</span><div><img data-bind="attr: { src: currentPhoto.user.userpic_url }"/></div></li>
                                 </ul>
