@@ -648,7 +648,7 @@ kendo_module({
                 if (e.altKey) {
                     that.toggle(down);
                 } else if (down) {
-                    if (!current || (that.selectedIndex === -1 && !that.value())) {
+                    if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === ul.firstChild)) {
                         current = ul.firstChild;
                     } else {
                         current = current[0].nextSibling;

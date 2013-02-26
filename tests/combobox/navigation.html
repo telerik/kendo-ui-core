@@ -346,6 +346,22 @@
 
                 equal(combobox.value(), "foo");
             });
+
+            test("ComboBox selects next after search", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo", "bar", "baz"]
+                }).data("kendoComboBox");
+
+                combobox.search("bar");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                equal(combobox.value(), "baz");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
