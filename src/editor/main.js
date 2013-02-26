@@ -959,8 +959,8 @@
             this.options = options;
         },
 
-        initialize: function($ui, options) {
-            $ui.attr({ unselectable: "on", title: options.title });
+        initialize: function(ui, options) {
+            ui.attr({ unselectable: "on", title: options.title });
         },
 
         command: function (commandArguments) {

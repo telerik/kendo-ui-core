@@ -29,7 +29,11 @@
 
         <script>
 
-            $("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor({
+                messages: {
+                    unlink: "unlink foo"
+                }
+            });
 
             var componentType = kendo.support.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
 
@@ -208,6 +212,10 @@
                 editor.trigger('select');
 
                 equals($('select.k-fontSize').data(componentType).value(), 'xx-large');
+            });
+
+            test("unlink applies custom title", function() {
+                equal(editor.wrapper.find(".k-unlink").attr("title"), "unlink foo");
             });
 
         </script>
