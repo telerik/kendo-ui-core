@@ -20,7 +20,6 @@ kendo_module({
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
-        HIDDENCLASS = "k-loading-hidden",
         HOVER = "k-state-hover",
         ns = ".kendoAutoComplete",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
@@ -459,7 +458,7 @@ kendo_module({
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that._loading.addClass(HIDDENCLASS);
+            that._loading.hide();
             that.element.attr("aria-busy", false);
             that._busy = null;
         },
@@ -473,7 +472,7 @@ kendo_module({
 
             that._busy = setTimeout(function () {
                 that.element.attr("aria-busy", true);
-                that._loading.removeClass(HIDDENCLASS);
+                that._loading.show();
             }, 100);
         },
 
@@ -550,7 +549,7 @@ kendo_module({
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
         _toggleHover: function(e) {
