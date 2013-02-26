@@ -1476,12 +1476,19 @@ p#copy
 
 .widgetGrid a
 {
+    display: inline-block;
     color:#4e4e4e;
 }
 
 .widgetGrid a:hover
 {
     color:#e26b1d;
+}
+
+.widgetGrid .new-widget
+{
+    padding-right: 22px;
+    background: url(tag-new.png) no-repeat right center;
 }
 
 /*DataViz dashboard navigation*/

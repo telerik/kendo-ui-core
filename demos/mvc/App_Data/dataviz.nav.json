@@ -149,6 +149,7 @@
             "text": "Bullet Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBulletIcon",
+			"new": true,
             "items": [{
                     "text": "Basic usage",
                     "url": "bullet-charts/index.html"
@@ -300,6 +301,7 @@
             "text": "Sparklines",
             "documentation": "dataviz/sparklines",
             "spriteCssClass": "sparklineIcon",
+			"new": true,
             "items": [{
                 "text": "Basic usage",
                 "url": "sparklines/index.html"
