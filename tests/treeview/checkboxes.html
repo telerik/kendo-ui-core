@@ -22,14 +22,22 @@
         <ol id="qunit-tests"></ol>
 
         <script>
-            function check(node) {
+            function check(node, checked) {
                 node = $(node || ".k-state-selected");
 
                 if (!node.hasClass("k-item")) {
                     node = node.parentsUntil(".k-treeview", ".k-item").eq(0);
                 }
 
-                node.find(":checkbox").eq(0).prop("checked", true).trigger("change");
+                if (typeof checked == "undefined") {
+                    checked = true;
+                }
+
+                node.find(":checkbox").eq(0).prop("checked", checked).trigger("change");
+            }
+
+            function uncheck(node) {
+                check(false, false);
             }
 
             function removeTreeViews() {
@@ -424,6 +432,43 @@
                 check();
 
                 ok(!treeview.find(":checkbox:first").prop("checked"));
+            });
+
+            test("checking all child checkboxes updates parent checked state", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar", selected: true },
+                            { id: 3, text: "baz", checked: true }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                check();
+
+                ok(treeviewObject.dataSource.get(1).checked);
+            });
+
+            test("remove checked state on indeterminate parents", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar", selected: true },
+                            { id: 3, text: "baz", checked: true }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                check();
+                uncheck();
+
+                ok(!treeviewObject.dataSource.get(1).checked);
             });
 
         </script>
