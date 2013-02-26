@@ -456,9 +456,6 @@ kendo_module({
 
             that.url = url;
             that.trigger(SHOW_START);
-            if (mobile.application && mobile.application.element) {
-                mobile.application.element.css("pointer-events", "none");
-            }
 
             if (!url || url === "/") {
                 element = that.rootView;
@@ -574,20 +571,14 @@ kendo_module({
         },
 
         _show: function(view, transition, params) {
-            var that = this,
-                hasApp = mobile.application && mobile.application.element;
+            var that = this;
+
             if (that._view !== view) {
                 view.switchWith(that._view, transition, params, function() {
                     that._view = view;
-                    if (hasApp) {
-                        mobile.application.element.css("pointer-events", "");
-                    }
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
-                if (hasApp) {
-                    mobile.application.element.css("pointer-events", "");
-                }
                 that._view.updateParams(params);
                 that.trigger(VIEW_SHOW, {view: view});
             }

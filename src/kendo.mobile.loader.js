@@ -55,10 +55,12 @@ kendo_module({
 
         transition: function() {
             this.transitioning = true;
+            this.container.css("pointer-events", "none");
         },
 
         transitionDone: function() {
             this.transitioning = false;
+            this.container.css("pointer-events", "");
         },
 
         _attachCapture: function() {
