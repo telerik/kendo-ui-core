@@ -214,9 +214,9 @@ var UnlinkTool = Tool.extend({
         Tool.fn.init.call(this, $.extend(options, {command:UnlinkCommand}));
     },
 
-    initialize: function(ui) {
-        ui.attr("unselectable", "on")
-          .addClass("k-state-disabled");
+    initialize: function(ui, options) {
+        Tool.fn.initialize.call(this, ui, options);
+        ui.addClass("k-state-disabled");
     },
 
     update: function (ui, nodes) {
