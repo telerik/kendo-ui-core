@@ -17,6 +17,7 @@ kendo_module({
         INIT = "init",
         SHOW = "show",
         BEFORE_SHOW = "beforeShow",
+        AFTER_SHOW = "afterShow",
         HIDE = "hide",
         Z_INDEX = "z-index",
         attrValue = kendo.attrValue,
@@ -54,6 +55,7 @@ kendo_module({
             INIT,
             BEFORE_SHOW,
             SHOW,
+            AFTER_SHOW,
             HIDE
         ],
 
@@ -125,7 +127,11 @@ kendo_module({
         },
 
         switchWith: function(view, transition, params, callback) {
-            var that = this;
+            var that = this,
+                complete = function() {
+                    that.trigger(AFTER_SHOW, {view: that});
+                    callback();
+                };
 
             if (that.trigger(BEFORE_SHOW, {view: that})) {
                 return;
@@ -144,11 +150,11 @@ kendo_module({
                     next: that,
                     transition: transition,
                     defaultTransition: view.options.defaultTransition,
-                    complete: callback
+                    complete: complete
                 });
             } else {
                 that.showStart();
-                callback();
+                complete();
             }
         },
 
@@ -423,6 +429,7 @@ kendo_module({
             if (!that.rootView[0]) {
                 throw new Error('Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
             }
+
             that._view = null;
 
             that.layouts = {};

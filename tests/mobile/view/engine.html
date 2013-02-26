@@ -105,6 +105,14 @@
                 hidden($("#foo"));
             });
 
+            test("after show is triggered after the view transition is finished", 1, function() {
+                root.html('<div data-role="view"id="foo">Foo</div><div data-after-show="success" data-role="view" id="bar">Bar</div>').show();
+                viewEngine = new kendo.mobile.ViewEngine({ container: root });
+
+                viewEngine.showView("#foo");
+                viewEngine.showView("#bar");
+            });
+
             test("hidden view triggers hide event", 1, function() {
                 root.html('<div data-role="view" data-hide="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
                 viewEngine = new kendo.mobile.ViewEngine({ container: root });
