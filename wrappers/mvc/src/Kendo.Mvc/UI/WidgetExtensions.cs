@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Collections.Generic;
 
-    internal static class WidgetExtensions
+    public static class WidgetExtensions
     {
         public static string GetValue<T>(this IWidget instance, T value)
         {
