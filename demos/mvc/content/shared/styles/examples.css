@@ -1074,6 +1074,13 @@ p#copy
 .mobileSplitViewIcon{background-position:-80px -100px;}
 .mobileActionSheetIcon{background-position:-100px -100px;}
 .mobileModalViewIcon{background-position:-120px -100px;}
+.colorPickerIcon{background-position:-60px -120px;}
+.multiselectIcon{background-position:-140px -120px;}
+.tooltipIcon{background-position:-40px -120px;}
+.spaIcon{background-position:-120px -120px;}
+.sparklineIcon{background-position:-80px -120px;}
+.chartBulletIcon{background-position:-100px -120px;}
+
 
 #mainWrapInner
 {
