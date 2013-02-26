@@ -33,11 +33,16 @@ var LinkFormatter = Class.extend({
 
         if (attributes.innerHTML) {
             markers = RangeUtils.getMarkers(range);
+
             doc = RangeUtils.documentFromRange(range);
 
             range.deleteContents();
             a = dom.create(doc, "a", attributes);
             range.insertNode(a);
+
+            if (dom.name(a.parentNode) == "a") {
+                dom.insertAfter(a, a.parentNode);
+            }
 
             if (markers.length > 1) {
                 dom.insertAfter(markers[markers.length - 1], a);
