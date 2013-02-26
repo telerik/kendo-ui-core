@@ -56,7 +56,7 @@ class VsDocMethod
             elsif member.title =~ /Returns/
                 match = member.contents.match /`?(.+)`(.*)/
 
-                raise "Invalid param statement - '#{membe.contents}' - #{method.name}" unless match
+                raise "Invalid param statement - '#{member.contents}' - #{method.name}" unless match
 
                 method.returns = match[1]
                 method.returns_description = match[2]
