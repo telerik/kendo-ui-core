@@ -9,7 +9,7 @@
     <ul id="listview"></ul>
 
     <script id="itemTemplate" type="text/x-kendo-template">
-        <a href="\\#edit-detailview?uid=#=uid#"> #=ProductName# </a>
+        <a> #=ProductName# </a>
         <a href="\\#" data-role="button" class="delete" >Delete</a>
     </script>
 </div>
@@ -17,7 +17,7 @@
 <div data-role="view" id="edit-detailview" data-show="detailShow" data-init="detailInit">
     <header data-role="header">
         <div data-role="navbar">
-            <a class="nav-button" data-align="left" data-role="button" id="cancel">Cancel</a>
+            <a class="nav-button" data-align="left" data-role="backbutton" id="cancel">Cancel</a>
             <span data-role="view-title">Details</span>
             <a class="nav-button" data-align="right" data-role="button" id="done">Done</a>
         </div>
@@ -33,7 +33,7 @@
             <li>
                 Discontinued
                     <input type="checkbox" data-role="switch" data-bind="checked: Discontinued"/>
-                
+
             </li>
             <li>
                 <label>Unit Price
@@ -64,7 +64,7 @@
     }
     .km-ios #edit-listview .km-content,
     .km-ios #edit-detailview .km-content,
-    .km-ios #edit-detailview .km-insetcontent, 
+    .km-ios #edit-detailview .km-insetcontent,
     .km-ios #edit-listview li,
     .km-ios #edit-detailview li {
         background: #373737;
@@ -76,7 +76,7 @@
         text-decoration: none;
         color: #fff;
     }
-    
+
     .km-ios #edit-detailview .km-listinset > li,
     .km-ios #edit-detailview .km-listgroupinset .km-list > li,
     .km-ios #edit-detailview .km-listinset > li:first-child,
@@ -149,8 +149,14 @@
             filter: ">li",
             enableSwipe: true,
             touchstart: touchstart,
+            tap: navigate,
             swipe: swipe
         });
+    }
+
+    function navigate(e) {
+        var itemUID = $(e.touch.currentTarget).data("uid");
+        kendo.mobile.application.navigate("#edit-detailview?uid=" + itemUID);
     }
 
     function swipe(e) {
@@ -199,7 +205,8 @@
             dataSource.sync();
         });
 
-        view.element.find("#cancel").data("kendoMobileButton").bind("click", function() {
+        view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
+            e.preventDefault();
             dataSource.one("change", function() {
                 view.loader.hide();
                 window.kendoMobileApplication.navigate("#:back");
