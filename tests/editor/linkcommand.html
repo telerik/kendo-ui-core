@@ -385,6 +385,22 @@
                 equal($('.k-window .k-window-title').text(), "bar");
             });
 
+            function createLink(range, text, url) {
+                execLinkCommandOnRange(range);
+                $('#k-editor-link-url').val(url);
+                $('#k-editor-link-text').val(text);
+                $('.k-dialog-insert').click();
+            }
+
+            test("inserting links squentially does not render invalid markup", function() {
+                editor.value("");
+
+                createLink(editor.getRange(), "foo", "foo");
+                createLink(editor.getRange(), "bar", "bar");
+
+                equal(editor.value(), '<a href="foo">foo</a><a href="bar">bar</a>');
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
