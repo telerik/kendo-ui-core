@@ -93,6 +93,15 @@ Template variables:
     }
 
     /**
+    * A value indicating if the tooltip should be displayed.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartTooltip
+    */
+    public function shared($value) {
+        return $this->setProperty('shared', $value);
+    }
+
+    /**
     * Sets the sharedTemplate option of the ChartTooltip.
     * The shared tooltip template.
 Template variables:
