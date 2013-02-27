@@ -502,7 +502,8 @@ function pad(number, digits, end) {
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 0
+                firstDay: 0,
+                twoDigitYearMax: 2029
             }
         }
     }};
@@ -1110,13 +1111,12 @@ function pad(number, digits, end) {
             valueIdx = 0,
             literal = false,
             date = new Date(),
-            shortYearCutOff = 30,
+            twoDigitYearMax = calendar.twoDigitYearMax || 2029,
             defaultYear = date.getFullYear(),
             ch, count, length, pattern,
             pmHour, UTC, ISO8601, matches,
             amDesignators, pmDesignators,
-            hoursOffset, minutesOffset,
-            century;
+            hoursOffset, minutesOffset;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1165,11 +1165,14 @@ function pad(number, digits, end) {
                     }
 
                     if (count == 2) {
-                        century = defaultYear - defaultYear % 100;
-                        if (shortYearCutOff < year) {
-                            century -= 100;
+                        if (typeof twoDigitYearMax === "string") {
+                            twoDigitYearMax = defaultYear + parseInt(twoDigitYearMax, 10);
                         }
-                        year = century + year;
+
+                        year = (defaultYear - defaultYear % 100) + year;
+                        if (year > twoDigitYearMax) {
+                            year -= 100;
+                        }
                     }
                 } else if (ch === "h" ) {
                     lookAhead("h");

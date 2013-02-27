@@ -91,6 +91,34 @@
                 equal(result.getFullYear(), 1931);
             });
 
+            test('parse short year 29 should return year 2029', function () { // ISO format
+
+                var result = parse("12/23/29", "M/d/yy");
+                equal(result.getFullYear(), 2029);
+            });
+
+            test('parse gets shortYearCutOff from culture', function () { // ISO format
+                var culture = kendo.culture();
+                culture.calendars.standard.twoDigitYearMax = 2020;
+
+                var result = parse("12/23/21", "M/d/yy");
+                equal(result.getFullYear(), 1921);
+
+                culture.calendars.standard.twoDigitYearMax = 2029;
+            });
+
+            test('parse supports shortYearCutOff as string', function () { // ISO format
+                var culture = kendo.culture();
+                culture.calendars.standard.twoDigitYearMax = '+19';
+
+                var year = (new Date()).getFullYear() + 19,
+                    result = parse("12/23/" + (year - 2000), "M/d/yy");
+
+                equal(result.getFullYear(), year);
+
+                culture.calendars.standard.twoDigitYearMax = 2029;
+            });
+
             test('parse G date format time parsing', function () { // ISO format
 
                 var dateFormat = "G";
