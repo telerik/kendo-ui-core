@@ -273,7 +273,11 @@
                             return console.error(err);
                         }
 
-                        callback(constants, tree.toCSS());
+                        try {
+                            callback(constants, tree.toCSS());
+                        } catch(e) {
+                            console.error(e.message);
+                        }
                     }
                 );
             },
