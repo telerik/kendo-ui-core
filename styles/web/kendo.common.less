@@ -256,6 +256,8 @@ html body .k-button-bare
 .sprite-hoverable(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
     .sprite-position(@row, @column);
 
+	&:hover,
+	.k-link:hover > &,
     .k-state-hover &,
     .k-button:hover &,
     .k-textbox:hover &,
@@ -268,6 +270,8 @@ html body .k-button-bare
 .sprite-hoverable(@row, @column) when not (ispixel(@column)) {
     .sprite-position(@row, @column);
 
+	&:hover,
+	.k-link:hover > &,
     .k-state-hover &,
     .k-button:hover &,
     .k-textbox:hover &,
