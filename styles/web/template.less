@@ -908,3 +908,21 @@ div.k-imagebrowser-dropzone em
 {
     .border-radius(@draghandle-border-radius);
 }
+
+// Retina sprite
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-device-pixel-ratio: 2) {
+    .k-icon,
+    .k-grouping-dropclue,
+    .k-drop-hint,
+    .k-callout,
+    .k-column-menu .k-sprite,
+    .k-tool-icon,
+    .k-tool-icon.k-state-hover,
+    .k-tool-icon.k-state-active,
+    .k-tool-icon.k-state-active.k-state-hover {
+        background-image: url('@{image-folder}/sprite@2x.png');
+        background-size: 192px 336px;
+    }
+}
