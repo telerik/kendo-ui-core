@@ -468,6 +468,19 @@
                 ok(!tooltip.popup.visible());
             });
 
+            test("leaving the element closes the popup", function() {
+                container.append('<span title="foo"/><span/>');
+
+                var tooltip = new Tooltip(container, {
+                    filter: "[title]"
+                });
+
+                tooltip.show(container.find("[title]"));
+
+                container.find("span").first().trigger("mouseleave");
+
+                ok(!tooltip.popup.visible());
+            });
         </script>
     </body>
 </html>
