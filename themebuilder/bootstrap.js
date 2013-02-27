@@ -14,10 +14,11 @@
         KENDO_LOCATION = "http://cdn.kendostatic.com/2013.1.226/",
         JQUERY_LOCATION = "/kendo-demos/src/js/jquery.js",
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
-        requiredCss = ["styles/kendo.black.css", "styles/styles.css"],
+        requiredCss = ["styles/styles.css"],
         bootstrapCss = "styles/bootstrap.css",
         // </generated variables>
         KENDO_COMMON_CSS_LOCATION = KENDO_LOCATION + "styles/kendo.common.min.css",
+        KENDO_BLACK_CSS_LOCATION = KENDO_LOCATION + "styles/kendo.black.min.css",
         KENDO_ALL_LOCATION = KENDO_LOCATION + "js/kendo.all.min.js";
 
     function ThemeBuilderInterface() {
@@ -120,6 +121,7 @@
             doc.write([
                 "<!DOCTYPE html><html><head><meta charset='utf-8' />",
                  stylesheet(KENDO_COMMON_CSS_LOCATION),
+                 stylesheet(KENDO_BLACK_CSS_LOCATION),
                  map(requiredCss, function(styleSheetName) {
                      return stylesheet(applicationRoot + styleSheetName);
                  }).join(""),

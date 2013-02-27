@@ -1,12 +1,5 @@
 THEME_BUILDER_BUILDFILE = 'build/theme_builder.rb'
 
-file_copy :to => 'themebuilder/styles/kendo.black.css',
-          :from => 'styles/web/kendo.black.css'
-
-tree :to => 'themebuilder/styles/Black',
-     :from => FileList['styles/web/Black/**/*'],
-     :root => 'styles/web/Black/'
-
 tree :to => 'themebuilder/styles/textures',
      :from => FileList['styles/web/textures/**/*'],
      :root => 'styles/web/textures/'
@@ -94,13 +87,11 @@ CLEAN.include('themebuilder/scripts/themebuilder.all*css')
 CLEAN.include('themebuilder/scripts/template.js')
 
 file_merge 'themebuilder/styles/themebuilder.all.css' => [
-    'themebuilder/styles/kendo.black.css',
-    'themebuilder/styles/styles.css',
+    'themebuilder/styles/styles.css'
 ]
 file 'themebuilder/styles/themebuilder.all.css' => THEME_BUILDER_BUILDFILE
 
 THEME_BUILDER_RESOURCES = FileList['themebuilder/scripts/themebuilder.all.min.js']
-                .include('themebuilder/styles/Black/**/*')
                 .include('themebuilder/styles/textures/**/*')
                 .include('themebuilder/styles/sprite.png')
                 .include('themebuilder/styles/bootstrap.min.css')
@@ -122,8 +113,6 @@ namespace :themebuilder do
     task :sources => [
         'themebuilder/scripts/less.js',
         'themebuilder/scripts/template.js',
-        'themebuilder/styles/kendo.black.css',
-        'themebuilder/styles/Black',
         'themebuilder/styles/textures'
     ]
 
