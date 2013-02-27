@@ -46,12 +46,15 @@ kendo_module({
     DATE = Date;
 
     function normalize(options) {
-        var parseFormats = options.parseFormats;
+        var parseFormats = options.parseFormats,
+            format = options.format;
 
         calendar.normalize(options);
 
         parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
-        parseFormats.splice(0, 0, options.format);
+        if ($.inArray(format, parseFormats) === -1) {
+            parseFormats.splice(0, 0, options.format);
+        }
 
         options.parseFormats = parseFormats;
     }

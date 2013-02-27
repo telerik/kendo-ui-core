@@ -620,12 +620,15 @@ kendo_module({
     }
 
     function normalize(options) {
-        var patterns = kendo.getCulture(options.culture).calendars.standard.patterns;
+        var patterns = kendo.getCulture(options.culture).calendars.standard.patterns,
+            timeFormat;
 
         options.format = extractFormat(options.format || patterns.g);
-        options.timeFormat = extractFormat(options.timeFormat || patterns.t);
+        options.timeFormat = timeFormat = extractFormat(options.timeFormat || patterns.t);
         kendo.DateView.normalize(options);
-        options.parseFormats.splice(1, 0, options.timeFormat);
+        if ($.inArray(timeFormat, options.parseFormats) === -1) {
+            options.parseFormats.splice(1, 0, timeFormat);
+        }
     }
 
     ui.plugin(DateTimePicker);

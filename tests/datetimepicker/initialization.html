@@ -168,6 +168,18 @@
                 equal(datetimepicker.options.parseFormats[2], "MM/dd/yy");
             });
 
+            test("DateTimePicker does not modify parseFormats if format exists in the array", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                    format: "MM/dd/yy",
+                    parseFormats: ["MM/dd/yyyy", "MM/dd/yy", "h:mm tt"]
+                }).data("kendoDateTimePicker");
+
+                equal(datetimepicker.options.parseFormats.length, 3);
+                equal(datetimepicker.options.parseFormats[0], "MM/dd/yyyy");
+                equal(datetimepicker.options.parseFormats[1], datetimepicker.options.format);
+                equal(datetimepicker.options.parseFormats[2], datetimepicker.options.timeFormat);
+            });
+
             test("DateTimePicker uses options.dates if today is in dates", function() {
                 var datetimepicker = input.kendoDateTimePicker({
                     dates: [new Date(2000, 10, 10, 18, 0, 0)]

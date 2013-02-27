@@ -281,6 +281,17 @@
                 equal(datepicker.options.parseFormats[1], "MM/dd/yy");
             });
 
+            test("DatePicker does not modify parseFormats if format exists in the array", function() {
+                var datepicker = input.kendoDatePicker({
+                    format: "MM/dd/yy",
+                    parseFormats: ["MM/dd/yyyy", "MM/dd/yy"]
+                }).data("kendoDatePicker");
+
+                equal(datepicker.options.parseFormats.length, 2);
+                equal(datepicker.options.parseFormats[0], "MM/dd/yyyy");
+                equal(datepicker.options.parseFormats[1], datepicker.options.format);
+            });
+
             test("DatePicker copies input's className to the wrapper", function() {
                 var datepicker = input.addClass("test").kendoDatePicker().data("kendoDatePicker");
 
