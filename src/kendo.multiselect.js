@@ -289,8 +289,12 @@ kendo_module({
                 that.toggle(length);
             }
 
-            if (that.popup.visible() && that.options.highlightFirst) {
-                li = $(first(that.ul[0]));
+            if (that.popup.visible()) {
+                that.popup._position();
+
+                if (that.options.highlightFirst) {
+                    li = $(first(that.ul[0]));
+                }
             }
 
             that.current(li);
