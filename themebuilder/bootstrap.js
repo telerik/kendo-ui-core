@@ -62,16 +62,13 @@
 
         _createWindow: function () {
             var that = this,
-                dialog = jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>")
-                    .css({
-                        display: "none",
-                        height: 0
-                    })
-                    .find("#ktb-close")
-                        .click(jQuery.proxy(that.close, that))
-                    .end()
-                    .appendTo(doc.body),
+                dialog = jQuery("<div id='ktb-wrap'><div id='ktb-close' /></div>"),
                 start;
+
+            dialog
+                .css({ display: "none", height: 0 })
+                .on("click", "#ktb-close", jQuery.proxy(that.close, that))
+                .appendTo(doc.body);
 
             if (kendo.ui && kendo.ui.Draggable) {
                 that.draggable = dialog.kendoDraggable({
