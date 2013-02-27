@@ -426,6 +426,55 @@
                 equal(input.val(), kendo.toString(today, "dd MMM yyyy"));
             });
 
+            test("DateTimePicker does not call change on blur if no text change", function() {
+                var date = new Date(1919, 0, 1),
+                    datetimepicker = input.kendoDateTimePicker({
+                        format: "MM/dd/yy",
+                        value: new Date(date)
+                    }).data("kendoDateTimePicker");
+
+                datetimepicker.options.parseFormats = ["MM/dd/yyyy", "MM/dd/yy"];
+
+                //simulate change
+                input.focus().blur();
+
+                equal(+datetimepicker.value(), +date);
+            });
+
+            test("DateTimePicker does not call change on ENTER if no text change", function() {
+                var date = new Date(1919, 0, 1),
+                    datetimepicker = input.kendoDateTimePicker({
+                        format: "MM/dd/yy",
+                        value: new Date(date)
+                    }).data("kendoDateTimePicker");
+
+                datetimepicker.options.parseFormats = ["MM/dd/yyyy", "MM/dd/yy"];
+
+                //simulate change
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+
+                equal(+datetimepicker.value(), +date);
+            });
+
+            test("DateTimePicker does set focused date of calendar if no text change", function() {
+                var date = new Date(1919, 0, 1),
+                    datetimepicker = input.kendoDateTimePicker({
+                        format: "MM/dd/yy",
+                        value: new Date(date)
+                    }).data("kendoDateTimePicker");
+
+                datetimepicker.options.parseFormats = ["MM/dd/yyyy", "MM/dd/yy"];
+
+                input.focus();
+                datetimepicker.open();
+
+                equal(+datetimepicker.dateView._current, +date);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

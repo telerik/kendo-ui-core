@@ -299,12 +299,14 @@ kendo_module({
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
                     } else {
-                        date = parse(element.val(), options.parseFormats, options.culture);
-                        if (!date) {
-                            that.dateView.value(date);
-                        } else {
-                            that.dateView._current = date;
-                            that.dateView.calendar._focus(date);
+                        if (that.element.val() !== that._oldText) {
+                            date = parse(element.val(), options.parseFormats, options.culture);
+                            if (!date) {
+                                that.dateView.value(date);
+                            } else {
+                                that.dateView._current = date;
+                                that.dateView.calendar._focus(date);
+                            }
                         }
 
                         element.attr(ARIA_EXPANDED, true);
@@ -448,6 +450,8 @@ kendo_module({
             if (that._old === null) {
                 that.element.val("");
             }
+
+            that._oldText = that.element.val();
         },
 
         _toggleHover: function(e) {
@@ -455,10 +459,14 @@ kendo_module({
         },
 
         _blur: function() {
-            var that = this;
+            var that = this,
+                value = that.element.val();
 
             that.close();
-            that._change(that.element.val());
+            if (value !== that._oldText) {
+                that._change(value);
+            }
+
             that._inputWrapper.removeClass(FOCUSED);
         },
 
@@ -480,6 +488,8 @@ kendo_module({
 
             if (+that._old != +value) {
                 that._old = value;
+                that._oldText = that.element.val();
+
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
@@ -489,10 +499,11 @@ kendo_module({
 
         _keydown: function(e) {
             var that = this,
-                dateView = that.dateView;
+                dateView = that.dateView,
+                value = that.element.val();
 
-            if (!dateView.popup.visible() && e.keyCode == keys.ENTER) {
-                that._change(that.element.val());
+            if (!dateView.popup.visible() && e.keyCode == keys.ENTER && value !== that._oldText) {
+                that._change(value);
             } else {
                 dateView.move(e);
                 that._updateARIA(dateView._current);

@@ -286,6 +286,39 @@
 
                 equal(input.val(), "12:00 AM");
             });
+
+            test("TimePicker does not call change on blur if no text change", function() {
+                var date = new Date(1919, 0, 1, 14, 0, 0),
+                    timepicker = input.kendoTimePicker({
+                        format: "hh",
+                        value: new Date(date)
+                    }).data("kendoTimePicker");
+
+                timepicker.options.parseFormats = ["hh:mm tt", "hh"];
+
+                //simulate change
+                input.focus().blur();
+
+                equal(+timepicker.value(), +date);
+            });
+
+            test("TimePicker does not call change on ENTER if no text change", function() {
+                var date = new Date(1919, 0, 1, 14, 0, 0),
+                    timepicker = input.kendoTimePicker({
+                        format: "hh",
+                        value: new Date(date)
+                    }).data("kendoTimePicker");
+
+                timepicker.options.parseFormats = ["hh:mm tt", "hh"];
+
+                //simulate change
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+
+                equal(+timepicker.value(), +date);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

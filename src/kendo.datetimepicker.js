@@ -72,7 +72,9 @@ kendo_module({
                    })
                    .on("blur" + ns, function() {
                         that._inputWrapper.removeClass(FOCUSED);
-                        that._change(element.val());
+                        if (element.val() !== that._oldText) {
+                            that._change(element.val());
+                        }
                         that.close("date");
                         that.close("time");
                     })
@@ -247,10 +249,11 @@ kendo_module({
             }
 
             that._old = that._update(value);
-
             if (that._old === null) {
                 that.element.val("");
             }
+
+            that._oldText = that.element.val();
         },
 
         _change: function(value) {
@@ -260,6 +263,8 @@ kendo_module({
 
             if (+that._old != +value) {
                 that._old = value;
+                that._oldText = that.element.val();
+
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
@@ -393,6 +398,7 @@ kendo_module({
             var that = this,
                 dateView = that.dateView,
                 timeView = that.timeView,
+                value = that.element.val(),
                 isDateViewVisible = dateView.popup.visible();
 
             if (e.altKey && e.keyCode === kendo.keys.DOWN) {
@@ -402,8 +408,8 @@ kendo_module({
                 that._updateARIA(dateView._current);
             } else if (timeView.popup.visible()) {
                 timeView.move(e);
-            } else if (e.keyCode === kendo.keys.ENTER) {
-                that._change(that.element.val());
+            } else if (e.keyCode === kendo.keys.ENTER && value !== that._oldText) {
+                that._change(value);
             }
         },
 
@@ -456,12 +462,15 @@ kendo_module({
                     if (that.trigger(OPEN, dateViewParams)) {
                         e.preventDefault();
                     } else {
-                        date = parse(element.val(), options.parseFormats, options.culture);
-                        if (!date) {
-                            that.dateView.value(date);
-                        } else {
-                            that.dateView._current = date;
-                            that.dateView.calendar._focus(date);
+
+                        if (that.element.val() !== that._oldText) {
+                            date = parse(element.val(), options.parseFormats, options.culture);
+                            if (!date) {
+                                that.dateView.value(date);
+                            } else {
+                                that.dateView._current = date;
+                                that.dateView.calendar._focus(date);
+                            }
                         }
 
                         div.attr(ARIA_HIDDEN, false);

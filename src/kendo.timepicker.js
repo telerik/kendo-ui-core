@@ -653,13 +653,18 @@ kendo_module({
             if (that._old === null) {
                 that.element.val("");
             }
+
+            that._oldText = that.element.val();
         },
 
         _blur: function() {
-            var that = this;
+            var that = this,
+                value = that.element.val();
 
             that.close();
-            that._change(that.element.val());
+            if (value !== that._oldText) {
+                that._change(value);
+            }
             that._inputWrapper.removeClass(FOCUSED);
         },
 
@@ -687,6 +692,8 @@ kendo_module({
 
             if (+that._old != +value) {
                 that._old = value;
+                that._oldText = that.element.val();
+
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
@@ -714,12 +721,13 @@ kendo_module({
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                timeView = that.timeView;
+                timeView = that.timeView,
+                value = that.element.val();
 
             if (timeView.popup.visible() || e.altKey) {
                 timeView.move(e);
-            } else if (key === keys.ENTER) {
-                that._change(that.element.val());
+            } else if (key === keys.ENTER && value !== that._oldText) {
+                that._change(value);
             }
         },
 
