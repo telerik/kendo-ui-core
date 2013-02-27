@@ -2436,6 +2436,12 @@ Template variables:</description>
             <type>Object</type>
         </attribute>
         <attribute>
+            <description>A value indicating if the tooltip should be shared.</description>
+            <name>shared</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The shared tooltip template.
 Template variables:</description>
             <name>sharedTemplate</name>
