@@ -327,6 +327,34 @@
 
                 ok(!multiselect.popup.visible());
             });
+
+            test("MultiSelect sets height on select", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select);
+
+                stub(multiselect, {
+                    _height: multiselect._height
+                });
+
+                multiselect._select(0);
+
+                equals(multiselect.calls("_height"), 1);
+            });
+
+            test("MultiSelect sets height on unselect", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select, {
+                    value: "0"
+                });
+
+                stub(multiselect, {
+                    _height: multiselect._height
+                });
+
+                multiselect._unselect(multiselect.tagList.children(":first"));
+
+                equals(multiselect.calls("_height"), 1);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

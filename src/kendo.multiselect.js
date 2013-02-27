@@ -770,6 +770,7 @@ kendo_module({
             that._visibleItems -= 1;
             that.currentTag(null);
             that._placeholder();
+            that._height(that._visibleItems);
 
             if (that._state === FILTER) {
                 that._state = ACCEPT;
@@ -795,6 +796,7 @@ kendo_module({
                $(that.ul[0].children[index]).show();
                that.element[0].children[index].selected = false;
                that._visibleItems += 1;
+               that._height(that._visibleItems);
             } else {
                 index = that.dataSource.view().length;
                 options = that.element[0].children;
