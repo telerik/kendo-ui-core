@@ -35,7 +35,10 @@ def live_cdn_version
     /cdn\.kendostatic\.com\/(\d+\.\d+\.\d+)\//.match(demo_html)[1]
 end
 
-file 'dist/themebuilder/production/bootstrap.js' => 'themebuilder/bootstrap.js' do |t|
+file 'dist/themebuilder/production/bootstrap.js' => [
+    'themebuilder/bootstrap.js',
+    THEME_BUILDER_BUILDFILE
+] do |t|
 
     version = live_cdn_version
 
