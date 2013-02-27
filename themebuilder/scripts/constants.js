@@ -31,18 +31,25 @@
         BGCOLOR = "background-color",
         BORDERCOLOR = "border-color",
         COLOR = "color",
+        cssPropertyFrom = function(cssClass, property) {
+            var dummy = $("<div class='" + cssClass + "' />"), result;
+
+            dummy.css("display", "none")
+                .appendTo(context.document.body),
+
+            result = dummy.css(property);
+
+            dummy.remove();
+
+            return result;
+        },
         webConstants = {
             "@image-folder": {
                 readonly: true,
                 infer: function() {
-                    var icon = $("<div class='k-icon' />")
-                            .css("display", "none")
-                            .appendTo(context.document.body),
-                        result = icon.css("background-image")
+                    var result = cssPropertyFrom("k-icon", "background-image")
                             .replace(/url\(["']?(.*?)\/sprite\.png["']?\)$/i, "\"$1\""),
                         cdnRootRe = /cdn\.kendostatic\.com/i;
-
-                    icon.remove();
 
                     result = result.replace(cdnRootRe, "da7xgjtj801h2.cloudfront.net");
 
@@ -65,6 +72,19 @@
             )),
 
             "@texture":                         { readonly: true, value: "none" },
+            "@tooltip-texture":                 {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom("k-widget k-tooltip", "background-image");
+                }
+            },
+
+            "@focused-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom("k-picker-wrap k-state-focused", "box-shadow");
+                }
+            },
 
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
             "@widget-gradient":                 { readonly: true, value: "none" },
