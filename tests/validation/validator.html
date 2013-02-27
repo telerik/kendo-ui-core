@@ -275,6 +275,27 @@
                 equal(input.next("span").text(), "invalid");
             });
 
+            test("hideMessages hides the validation message", function() {
+                var input = $('<input type="text" required validationMessage="invalid" />'),
+                validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+
+                validator.validate();
+                validator.hideMessages();
+
+                ok(!input.next("span").is(":visible"));
+            });
+
+            test("hideMessages hides the validation messages for the container", function() {
+                container.append($('<input type="text" name="foo" required validationMessage="invalid" /><input type="text" name="bar" required validationMessage="invalid" />')),
+                validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+
+                validator.validate();
+                validator.hideMessages();
+
+                equal(container.find("span.k-invalid-msg").length, 2);
+                ok(!container.find("span.k-invalid-msg").is(":visible"));
+            });
+
             test("multiple calls to validation does not render multiple messages", function() {
                 var input = $('<input type="text" required validationMessage="invalid" />'),
                 validator = setup(input, { errorTemplate: "<span>${message}</span>" });
@@ -334,6 +355,7 @@
 
                 ok(!input.next("span:visible").length);
             });
+
             test("external message element is shown when validating input with specail charecters", function() {
                 var input = $('<input name="f.b" type="text" required validationMessage="invalid" /><input name="f.b.c" type="hidden" /><span class="k-invalid-msg" data-kendo-for="f.b" id="foo"></span>');
                 container.append(input);

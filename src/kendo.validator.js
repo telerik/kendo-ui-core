@@ -276,6 +276,18 @@ kendo_module({
             return valid;
         },
 
+        hideMessages: function() {
+            var that = this,
+                className = "." + INVALIDMSG,
+                element = that.element;
+
+            if (!element.is(INPUTSELECTOR)) {
+                element.find(className).hide();
+            } else {
+                element.next(className).hide();
+            }
+        },
+
         _findMessageContainer: function(fieldName) {
             var locators = kendo.ui.validator.messageLocators,
                 name,
