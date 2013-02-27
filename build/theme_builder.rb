@@ -52,7 +52,7 @@ end
 
 file 'dist/themebuilder/staging/bootstrap.js' => 'themebuilder/bootstrap.js' do |t|
 
-    patch_bootstrap(t.name, t.prerequisites[0], "http://mvc-kendobuild/staging/content/cdn/")
+    patch_bootstrap(t.name, t.prerequisites[0], STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder/')
 
 end
 
