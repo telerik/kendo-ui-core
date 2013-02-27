@@ -93,7 +93,7 @@ Template variables:
     }
 
     /**
-    * A value indicating if the tooltip should be displayed.
+    * A value indicating if the tooltip should be shared.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
