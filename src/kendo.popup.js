@@ -286,6 +286,7 @@ kendo_module({
         close: function() {
             var that = this,
                 options = that.options,
+                wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element)),
                 animation, openEffects, closeEffects;
 
             if (that.visible()) {
@@ -310,7 +311,7 @@ kendo_module({
                 openEffects = that.element.data(EFFECTS);
                 closeEffects = animation.effects;
 
-                (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element))["css"]({ overflow: HIDDEN });
+                wrap.css({ overflow: HIDDEN });
 
                 if (!closeEffects && !kendo.size(closeEffects) && openEffects && kendo.size(openEffects)) {
                     animation.effects = openEffects;
