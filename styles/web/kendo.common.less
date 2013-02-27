@@ -256,8 +256,7 @@ html body .k-button-bare
 .sprite-hoverable(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
     .sprite-position(@row, @column);
 
-	&:hover,
-	.k-link:hover > &,
+	.k-link:not(.k-state-disabled):hover > &,
     .k-state-hover &,
     .k-button:hover &,
     .k-textbox:hover &,
@@ -270,8 +269,7 @@ html body .k-button-bare
 .sprite-hoverable(@row, @column) when not (ispixel(@column)) {
     .sprite-position(@row, @column);
 
-	&:hover,
-	.k-link:hover > &,
+	.k-link:not(.k-state-disabled):hover > &,
     .k-state-hover &,
     .k-button:hover &,
     .k-textbox:hover &,
@@ -1425,8 +1423,8 @@ div.k-grid-header .k-header
 
 /* Grid :: filtering */
 
-.k-grid-filter,
-.k-header-column-menu
+.k-header > .k-grid-filter,
+.k-header > .k-header-column-menu
 {
     float: right;
     margin: -.5em -.6em -.4em;
