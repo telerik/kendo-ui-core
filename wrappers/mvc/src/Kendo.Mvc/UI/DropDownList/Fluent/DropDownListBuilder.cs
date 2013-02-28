@@ -112,6 +112,27 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Events(events =>
+        ///                 events.Change("change")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DropDownListBuilder Events(Action<DropDownListEventBuilder> clientEventsAction)
+        {
+            clientEventsAction(new DropDownListEventBuilder(Component.Events));
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the items in the DropDownList
         /// </summary>
         /// <param name="addAction">The add action.</param>

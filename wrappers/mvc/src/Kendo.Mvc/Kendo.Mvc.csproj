@@ -215,6 +215,7 @@
     </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteEventBuilder.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarSelectionSettingsBuilder.cs" />
@@ -433,6 +434,7 @@
     <Compile Include="UI\ComboBox\ComboBox.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
     <Compile Include="UI\ClientHandlerDescriptor.cs" />
+    <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\DataSourceRequest.cs" />
@@ -466,6 +468,7 @@
     <Compile Include="UI\DropDownListBase\DropDownListBase.cs" />
     <Compile Include="UI\DropDownListBase\FilterType.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListBuilderBase.cs" />
+    <Compile Include="UI\DropDownList\Fluent\DropDownListEventBuilder.cs" />
     <Compile Include="UI\Editor\EditorImageBrowserMessages.cs" />
     <Compile Include="UI\Editor\EditorImageBrowserOperation.cs" />
     <Compile Include="UI\Editor\EditorMessages.cs" />
@@ -629,6 +632,7 @@
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
+    <Compile Include="UI\MultiSelect\Fluent\MultiSelectEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectBuilder.cs" />
     <Compile Include="UI\MultiSelect\Html\MultiSelectHtmlBuilder.cs" />
     <Compile Include="UI\MultiSelect\MultiSelect.cs" />

@@ -128,6 +128,27 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .Events(events =>
+        ///                 events.Change("change")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MultiSelectBuilder Events(Action<MultiSelectEventBuilder> clientEventsAction)
+        {
+            clientEventsAction(new MultiSelectEventBuilder(Component.Events));
+
+            return this;
+        }
+
+        /// <summary>
         /// Use it to enable filtering of items.
         /// </summary>
         /// <example>

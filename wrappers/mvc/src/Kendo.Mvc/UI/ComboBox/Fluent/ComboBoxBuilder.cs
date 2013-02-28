@@ -128,6 +128,27 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .Events(events =>
+        ///                 events.Change("change")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ComboBoxBuilder Events(Action<ComboBoxEventBuilder> clientEventsAction)
+        {
+            clientEventsAction(new ComboBoxEventBuilder(Component.Events));
+
+            return this;
+        }
+
+        /// <summary>
         /// Use it to enable filtering of items.
         /// </summary>
         /// <example>

@@ -1,3 +1,6 @@
+using Kendo.Mvc.UI.Fluent;
+using System;
+
 namespace Kendo.Mvc.UI.Fluent
 {
         /// <summary>
@@ -12,6 +15,27 @@ namespace Kendo.Mvc.UI.Fluent
         public AutoCompleteBuilder(AutoComplete component)
             : base(component)
         {
+        }
+
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .Events(events =>
+        ///                 events.Change("change")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public AutoCompleteBuilder Events(Action<AutoCompleteEventBuilder> clientEventsAction)
+        {
+            clientEventsAction(new AutoCompleteEventBuilder(Component.Events));
+
+            return this;
         }
 
         /// <summary>

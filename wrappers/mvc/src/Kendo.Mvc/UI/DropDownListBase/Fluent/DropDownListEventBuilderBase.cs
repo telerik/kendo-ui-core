@@ -3,13 +3,13 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
 
-    public class DropDownListEventBuilderBase : EventBuilder
+    public class DropDownListEventBuilderBase<TDropDownEventBuilder> : EventBuilder
+        where TDropDownEventBuilder : DropDownListEventBuilderBase<TDropDownEventBuilder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DropDownListEventBuilderBase"/> class.
         /// </summary>
         /// <param name="Events">The client events.</param>
-        /// <param name="viewContext">The view context.</param>
         public DropDownListEventBuilderBase(IDictionary<string, object> events) : base(events)
         {
         }
@@ -33,11 +33,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Select(Func<object, object> handler)
+        public TDropDownEventBuilder Select(Func<object, object> handler)
         {
             Handler("select", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Select(string handler)
+        public TDropDownEventBuilder Select(string handler)
         {
             Handler("select", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -77,11 +77,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Change(Func<object, object> handler)
+        public TDropDownEventBuilder Change(Func<object, object> handler)
         {
             Handler("change", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -96,11 +96,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Change(string handler)
+        public TDropDownEventBuilder Change(string handler)
         {
             Handler("change", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -121,11 +121,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase DataBound(Func<object, object> handler)
+        public TDropDownEventBuilder DataBound(Func<object, object> handler)
         {
             Handler("dataBound", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -140,11 +140,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase DataBound(string handler)
+        public TDropDownEventBuilder DataBound(string handler)
         {
             Handler("dataBound", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -159,11 +159,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Open(string handler)
+        public TDropDownEventBuilder Open(string handler)
         {
             Handler("open", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -184,11 +184,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Open(Func<object, object> handler)
+        public TDropDownEventBuilder Open(Func<object, object> handler)
         {
             Handler("open", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -209,11 +209,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Close(Func<object, object> handler)
+        public TDropDownEventBuilder Close(Func<object, object> handler)
         {
             Handler("close", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
 
         /// <summary>
@@ -228,11 +228,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// )
         /// </code>
         /// </example>
-        public DropDownListEventBuilderBase Close(string handler)
+        public TDropDownEventBuilder Close(string handler)
         {
             Handler("close", handler);
 
-            return this;
+            return this as TDropDownEventBuilder;
         }
     }
 }
