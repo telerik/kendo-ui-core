@@ -590,6 +590,7 @@
     </Content>
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
+    <None Include="content\dataviz\js\april-sales.json" />
     <None Include="content\dataviz\js\job-stats.json" />
     <None Include="content\dataviz\js\crime-stats.json" />
     <None Include="content\dataviz\js\screen_resolution.json" />
@@ -745,6 +746,7 @@
     <Content Include="Views\dataviz\bar-charts\pan-and-zoom.cshtml" />
     <Content Include="Views\dataviz\bullet-charts\index.cshtml" />
     <Content Include="Views\dataviz\bullet-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\bullet-charts\remote-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

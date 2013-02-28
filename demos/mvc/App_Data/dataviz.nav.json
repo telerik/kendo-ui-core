@@ -156,6 +156,9 @@
 			}, {
                     "text": "Binding to local data",
                     "url": "bullet-charts/local-data.html"
+			}, {
+                    "text": "Binding to remote data",
+                    "url": "bullet-charts/remote-data.html"
 			}]
         }, {
             "text": "Line Charts",

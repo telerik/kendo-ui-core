@@ -1,0 +1,84 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart-sales"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart-sales").kendoChart({
+                title: {
+                    text: "April sales per day"
+                },
+                legend: {
+                    visible: false
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/april-sales.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                series: [{
+                    type: "verticalBullet",
+                    currentField: "current",
+                    targetField: "target",
+                    target: {
+                        color: "#aaaaaa"
+                    },
+                    gap: 4
+                }],
+                categoryAxis: {
+                    majorGridLines: {
+                        visible: false
+                    },
+                    field: "category"
+                },
+                valueAxis: [{
+                    min: 2000,
+                    max: 11000,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorTicks: {
+                        visible: true
+                    },
+                    plotBands: [{
+                        from: 1000, to: 3000, color: "#aaaaaa", opacity: 0.55
+                    }, {
+                        from: 3000, to: 5000, color: "#aaaaaa", opacity: 0.4
+                    }, {
+                        from: 5000, to: 8000, color: "#aaaaaa", opacity: 0.25
+                    }, {
+                        from: 8000, to: 11000, color: "#aaaaaa", opacity: 0.1
+                    }],             
+                }],
+                tooltip: {
+                    visible: true,
+                    shared: true,
+                    template: "Target: #= value.target # items<br /> Actual: #= value.current # items"
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                // Initialize the chart with a delay to make sure
+                // the initial animation is visible
+                createChart();
+
+                $("#example").bind("kendo:skinChange", function(e) {
+                    createChart();
+                });
+            }, 400);
+        });
+    </script>
+    <style scoped>
+        .chart-wrapper {
+            padding-top: 20px;
+        }
+        .chart-wrapper .k-tooltip {
+            text-align: left;
+        }
+    </style>
+</div>

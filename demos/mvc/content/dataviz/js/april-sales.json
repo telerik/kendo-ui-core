@@ -1,0 +1,152 @@
+[
+   {
+      "current": 2373,
+      "target": 5000,
+      "category": 1
+   },
+   {
+      "current": 3283,
+      "target": 5250,
+      "category": 2
+   },
+   {
+      "current": 4532,
+      "target": 5500,
+      "category": 3
+   },
+   {
+      "current": 4620,
+      "target": 5750,
+      "category": 4
+   },
+   {
+      "current": 6504,
+      "target": 6000,
+      "category": 5
+   },
+   {
+      "current": 6715,
+      "target": 6250,
+      "category": 6
+   },
+   {
+      "current": 6234,
+      "target": 6500,
+      "category": 7
+   },
+   {
+      "current": 6750,
+      "target": 6750,
+      "category": 8
+   },
+   {
+      "current": 6300,
+      "target": 7000,
+      "category": 9
+   },
+   {
+      "current": 6459,
+      "target": 7250,
+      "category": 10
+   },
+   {
+      "current": 8305,
+      "target": 7500,
+      "category": 11
+   },
+   {
+      "current": 7222,
+      "target": 7750,
+      "category": 12
+   },
+   {
+      "current": 6734,
+      "target": 8000,
+      "category": 13
+   },
+   {
+      "current": 7863,
+      "target": 8250,
+      "category": 14
+   },
+   {
+      "current": 8743,
+      "target": 8500,
+      "category": 15
+   },
+   {
+      "current": 8846,
+      "target": 8750,
+      "category": 16
+   },
+   {
+      "current": 8567,
+      "target": 9000,
+      "category": 17
+   },
+   {
+      "current": 8193,
+      "target": 9250,
+      "category": 18
+   },
+   {
+      "current": 9458,
+      "target": 9500,
+      "category": 19
+   },
+   {
+      "current": 9254,
+      "target": 9750,
+      "category": 20
+   },
+   {
+      "current": 10234,
+      "target": 10000,
+      "category": 21
+   },
+   {
+      "current": 9608,
+      "target": 10250,
+      "category": 22
+   },
+   {
+      "current": 9350,
+      "target": 10500,
+      "category": 23
+   },
+   {
+      "current": 8842,
+      "target": 10500,
+      "category": 24
+   },
+   {
+      "current": 8349,
+      "target": 10500,
+      "category": 25
+   },
+   {
+      "current": 8846,
+      "target": 10500,
+      "category": 26
+   },
+   {
+      "current": 9567,
+      "target": 10500,
+      "category": 27
+   },
+   {
+      "current": 10734,
+      "target": 10500,
+      "category": 28
+   },
+   {
+      "current": 10124,
+      "target": 10500,
+      "category": 29
+   },
+   {
+      "current": 9680,
+      "target": 10500,
+      "category": 30
+   }
+]
