@@ -533,10 +533,12 @@ kendo_module({
                 }
             } else if (key === keys.ENTER) {
                 if (visible) {
-                    that._select(current);
+                    if (current) {
+                        that._select(current);
+                    }
+
                     that._change();
                     that.close();
-
                     e.preventDefault();
                 }
             } else if (key === keys.ESC) {
