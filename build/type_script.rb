@@ -3,7 +3,7 @@ require 'codegen/lib/options'
 require 'codegen/lib/markdown_parser'
 require 'codegen/lib/component'
 
-TYPE_SCRIPT = ERB.new(File.read("build/kendo.ts.erb"), 0, '%<>')
+TYPE_SCRIPT = ERB.new(File.read("build/codegen/lib/type_script/kendo.ts.erb"), 0, '%<>')
 
 module CodeGen::TypeScript
     EXCLUDE = [
@@ -135,7 +135,7 @@ module CodeGen::TypeScript
 
     end
 
-    EVENT = ERB.new(File.read("build/event.ts.erb"), 0, '%<>')
+    EVENT = ERB.new(File.read("build/codegen/lib/type_script/event.ts.erb"), 0, '%<>')
 
     class CompositeEventOption < CodeGen::CompositeEventOption
         include Options
@@ -193,7 +193,7 @@ module CodeGen::TypeScript
         end
     end
 
-    PARAMETER = ERB.new(File.read("build/parameter.ts.erb"), 0, '%<>')
+    PARAMETER = ERB.new(File.read("build/codegen/lib/type_script/parameter.ts.erb"), 0, '%<>')
 
     class CompositeParameter < CodeGen::CompositeParameter
         include Declaration
@@ -223,7 +223,7 @@ module CodeGen::TypeScript
         end
     end
 
-    COMPONENT = ERB.new(File.read("build/component.ts.erb"), 0, '%<>')
+    COMPONENT = ERB.new(File.read("build/codegen/lib/type_script/component.ts.erb"), 0, '%<>')
 
     class Component < CodeGen::Component
         include Options
@@ -285,7 +285,7 @@ module CodeGen::TypeScript
         end
     end
 
-    COMPOSITE = ERB.new(File.read("build/composite_option.ts.erb"), 0, '%<>')
+    COMPOSITE = ERB.new(File.read("build/codegen/lib/type_script/composite_option.ts.erb"), 0, '%<>')
 
     class CompositeOption < CodeGen::CompositeOption
         include Options
