@@ -386,6 +386,14 @@ var Dom = {
             Dom.style(element, attributes.style);
             delete attributes.style;
         }
+
+        for (var attr in attributes) {
+            if (attributes[attr] === null) {
+                element.removeAttribute(attr);
+                delete attributes[attr];
+            }
+        }
+
         return extend(element, attributes);
     },
 

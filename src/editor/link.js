@@ -144,9 +144,7 @@ var LinkCommand = Command.extend({
                 }
 
                 target = $("#k-editor-link-target", element).is(":checked");
-                if (target) {
-                    that.attributes.target = "_blank";
-                }
+                that.attributes.target = target ? "_blank" : null;
 
                 that.formatter.apply(range, that.attributes);
             }
