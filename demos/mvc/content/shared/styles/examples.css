@@ -2740,3 +2740,12 @@ ul.keyboard-legend li {
     font: 1em/1em "Kendo UI Examples";
 }
 
+/* Retina Support */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-device-pixel-ratio: 2) {
+    .widgetGrid .new-widget {
+        background-image: url('tag-new@2x.png');
+        background-size: 18px 9px;
+    }
+}
