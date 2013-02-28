@@ -55,7 +55,7 @@
              	<kendo:chart-categoryAxisItem field="category" axisCrossingValue="14">
              		<kendo:chart-categoryAxisItem-majorGridLines visible="false" />
              		<kendo:chart-categoryAxisItem-majorTicks visible="false" />
-             		<kendo:chart-categoryAxisItem-title text="mmHg" />
+             		<kendo:chart-categoryAxisItem-title text="hPa" />
              	</kendo:chart-categoryAxisItem>
           	 </kendo:chart-categoryAxis>
              <kendo:chart-tooltip visible="true" shared="true" template="Maximum: #= value.target # <br /> Average: #= value.current #" />
