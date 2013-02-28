@@ -72,6 +72,7 @@ kendo_module({
                 .on("paste" + ns, proxy(that._search, that))
                 .on("focus" + ns, function() { that._placeholder(false); })
                 .on("blur" + ns, function() {
+                    clearTimeout(that._typing);
                     that._placeholder();
                     that.close();
 
@@ -577,6 +578,7 @@ kendo_module({
                     that.close();
                 }
             } else {
+                clearTimeout(that._typing);
                 that._search();
             }
         },
