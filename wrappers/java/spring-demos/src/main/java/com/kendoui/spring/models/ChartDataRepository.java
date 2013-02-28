@@ -4,6 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChartDataRepository {
+    public static List<BulletPoint> mmhgData() {
+        List<BulletPoint> result = new ArrayList<BulletPoint>();
+        result.add(new BulletPoint(750, 762.5, "1"));
+        result.add(new BulletPoint(754, 768.5, "2"));
+        result.add(new BulletPoint(762, 770, "3"));
+        result.add(new BulletPoint(764, 773, "4"));
+        result.add(new BulletPoint(753, 760, "5"));
+        result.add(new BulletPoint(748, 765, "6"));
+        result.add(new BulletPoint(740, 760, "7"));
+        result.add(new BulletPoint(755, 758, "8"));
+        result.add(new BulletPoint(765, 768, "9"));
+        result.add(new BulletPoint(776, 783, "10"));
+        result.add(new BulletPoint(768, 770, "11"));
+        result.add(new BulletPoint(760, 762.5, "12"));
+        result.add(new BulletPoint(763, 768, "13"));
+        result.add(new BulletPoint(758, 766, "14"));
+                   
+        return result;
+    }
+    
+    public static List<BulletPoint> hPaData() {
+        List<BulletPoint> result = new ArrayList<BulletPoint>();
+        result.add(new BulletPoint(1001, 1017, "1"));
+        result.add(new BulletPoint(1005, 1024, "2"));
+        result.add(new BulletPoint(1016, 1026, "3"));
+        result.add(new BulletPoint(1019, 1030, "4"));
+        result.add(new BulletPoint(1004, 1013, "5"));
+        result.add(new BulletPoint(998, 1020, "6"));
+        result.add(new BulletPoint(987, 1013, "7"));
+        result.add(new BulletPoint(1006.5, 1010, "8"));
+        result.add(new BulletPoint(1020, 1023, "9"));
+        result.add(new BulletPoint(1035, 1044, "10"));
+        result.add(new BulletPoint(1025, 1026, "11"));
+        result.add(new BulletPoint(1013, 1017, "12"));
+        result.add(new BulletPoint(1017, 1023, "13"));
+        result.add(new BulletPoint(1010, 1021, "14"));
+                   
+        return result;
+    }
+    
     public static List<PricePerformance> PricePerformanceData() {
         List<PricePerformance> result = new ArrayList<PricePerformance>();
         result.add(new PricePerformance("Pentium", "D 820", 105, 100));
