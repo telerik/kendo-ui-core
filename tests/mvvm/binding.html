@@ -510,6 +510,25 @@
                 ok(dom.find("option").eq(2).is(":selected"));
             });
 
+            test("binding multi select is update if value is removed", function() {
+                var dom = $('<select multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
+
+                viewModel.selectedItem.push(viewModel.items[1]);
+                viewModel.selectedItem.push(viewModel.items[2]);
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.selectedItem.pop();
+
+                ok(dom.find("option").eq(1).is(":selected"));
+                equal(dom.find("option:selected").length, 1);
+            });
+
             test("checked binding binds radiobutton by value", function() {
                 var dom = $('<input type="radio" value="foo" data-bind="checked:selectedItem"/>');
 
