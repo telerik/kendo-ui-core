@@ -612,6 +612,10 @@
 
             clearTimeout(that._typing);
 
+            if (key === keys.TAB) {
+                that._triggerCascade();
+            }
+
             if (key != keys.TAB && !that._move(e)) {
                that._search();
             }
