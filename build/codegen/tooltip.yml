@@ -1,5 +1,5 @@
 :options:
     - :name: content
       :type: Object
-      :description: The content of the window
+      :description: The content of the tooltip
 :content: true
