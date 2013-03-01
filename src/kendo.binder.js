@@ -638,6 +638,8 @@
                     values = new ObservableArray([value]);
                 }
 
+                element.selectedIndex = -1;
+
                 for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
                     value = values[valueIndex];
 
@@ -647,6 +649,7 @@
 
                     for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
                         optionValue = options[optionIndex].value;
+
                         if (optionValue === "" && value !== "") {
                             optionValue = options[optionIndex].text;
                         }
@@ -656,10 +659,6 @@
                             found = true;
                         }
                     }
-                }
-
-                if (!found) {
-                    element.selectedIndex = -1;
                 }
             },
             destroy: function() {
