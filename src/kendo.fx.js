@@ -350,7 +350,9 @@ kendo_module({
                  */
                 if (transitions.event) {
                     element.one(transitions.event, stopTransition);
-                    delay = 500;
+                    if (options.duration !== 0) {
+                        delay = 500;
+                    }
                 }
 
                 timeoutID = setTimeout(stopTransition, options.duration + delay);
