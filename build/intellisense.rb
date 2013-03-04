@@ -6,7 +6,11 @@ require 'codegen/lib/component'
 INTELLISENSE_DOC_TEMPLATE_CONTENTS = File.read(File.join(File.dirname(__FILE__), "intellisense.js.erb"))
 INTELLISENSE_DOC_TEMPLATE = ERB.new INTELLISENSE_DOC_TEMPLATE_CONTENTS, 0, '%<>'
 
-module CodeGen::INTELLISENSEIntellisense
+module CodeGen::IntelliSense
+    EXCLUDE = [
+        'docs/api/framework/fx.md'
+    ]
+
     class Component < CodeGen::Component
 
         def real_class?
@@ -56,12 +60,14 @@ end
 
 def get_intellisense(sources)
 
+    sources = sources.find_all { |source| !CodeGen::IntelliSense::EXCLUDE.include?(source) }
+
     classes = sources.map do |source|
         parser = CodeGen::MarkdownParser.new
 
         markdown = File.read(source)
 
-        parser.parse(File.read(source), CodeGen::INTELLISENSEIntellisense::Component)
+        parser.parse(File.read(source), CodeGen::IntelliSense::Component)
     end
 
     classes.sort! {|a, b| a.full_name <=> b.full_name }
@@ -88,7 +94,6 @@ end
 
 namespace :intellisense do
     INTELLISENSEDOC_SOURCES = FileList['docs/api/{web,mobile,dataviz,framework}/*.md']
-                                .exclude('docs/api/framework/fx.md')
 
     %w(master production).each do |branch|
         namespace branch do

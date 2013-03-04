@@ -9,6 +9,7 @@ def bundle(options)
     eula = options[:eula]
     readme = options[:readme]
     vsdoc_sources = options[:vsdoc]
+    intellisense_sources = options[:intellisense]
     vsdoc_dest = options[:vsdoc_dest] || "vsdoc"
     type_script_sources = options[:type_script]
     changelog_suites = options[:changelog]
@@ -73,6 +74,14 @@ def bundle(options)
         end
     end
 
+    if intellisense_sources
+        intellisense_sources.keys.each_with_index do |key, index|
+            sources = FileList["docs/api/{#{intellisense_sources.keys[index].join(",")}}/*.md"]
+            intellisense_path = File.join(path, vsdoc_dest, "kendo.#{intellisense_sources.values[index]}.min.intellisense.js")
+            intellisense intellisense_path => sources
+            prerequisites.push(intellisense_path)
+        end
+    end
     if type_script_sources
         md = FileList["docs/api/{#{type_script_sources.keys[0].join(",")}}/*.md"]
         type_script_path = File.join(path, "typescript", "kendo.#{type_script_sources.values[0]}.d.ts")
