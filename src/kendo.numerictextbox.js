@@ -3,7 +3,7 @@ kendo_module({
     name: "NumericTextBox",
     category: "web",
     description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
-    depends: [ "core" ]
+    depends: [ "core", "userevents" ]
 });
 
 (function($, undefined) {
@@ -22,7 +22,6 @@ kendo_module({
         ns = ".kendoNumericTextBox",
         TOUCHEND = "touchend",
         MOUSELEAVE = "mouseleave" + ns,
-        MOUSEDOWN = "touchstart" + ns + " mousedown" + ns,
         MOUSEUP = "touchcancel" + ns + " " + "touchend" + ns + " mouseup" + ns + " " + MOUSELEAVE,
         HOVEREVENTS = "mouseenter" + ns + " " + MOUSELEAVE,
         DEFAULT = "k-state-default",
@@ -115,12 +114,14 @@ kendo_module({
             CHANGE,
             SPIN
         ],
+
         enable: function(enable) {
             var that = this,
                 text = that._text.add(that.element),
-                wrapper = that._inputWrapper.off(HOVEREVENTS),
-                upArrow = that._upArrow.off(MOUSEDOWN),
-                downArrow = that._downArrow.off(MOUSEDOWN);
+                wrapper = that._inputWrapper.off(HOVEREVENTS);
+
+            that._upArrowEventHandler.unbind("press");
+            that._downArrowEventHandler.unbind("press");
 
             that._toggleText(true);
 
@@ -138,13 +139,13 @@ kendo_module({
 
                 text.removeAttr(DISABLED);
 
-                upArrow.on(MOUSEDOWN, function(e) {
+                that._upArrowEventHandler.bind("press", function(e) {
                     e.preventDefault();
                     that._spin(1);
                     that._upArrow.addClass(SELECTED);
                 });
 
-                downArrow.on(MOUSEDOWN, function(e) {
+                that._downArrowEventHandler.bind("press", function(e) {
                     e.preventDefault();
                     that._spin(-1);
                     that._downArrow.addClass(SELECTED);
@@ -249,7 +250,9 @@ kendo_module({
             }
 
             that._upArrow = arrows.eq(0);
+            that._upArrowEventHandler = new kendo.UserEvents(that._upArrow);
             that._downArrow = arrows.eq(1);
+            that._downArrowEventHandler = new kendo.UserEvents(that._downArrow);
         },
 
         _blur: function() {
