@@ -128,6 +128,7 @@ kendo_module({
             ignoreCase: true,
             minLength: 0,
             delay: 100,
+            value: null,
             maxSelectedItems: null,
             itemTemplate: "",
             tagTemplate: "",
@@ -878,7 +879,7 @@ kendo_module({
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading"></span>').insertAfter(this.input);
+            this._loading = $('<span class="k-icon k-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.input);
         },
 
         _textContainer: function() {
