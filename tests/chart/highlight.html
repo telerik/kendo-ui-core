@@ -25,8 +25,12 @@
 
             function createHighlight(options) {
                 viewMock = {
-                    renderElement: function() {
-                        return $("<div class='overlay'></div>")[0];
+                    renderElement: function(element) {
+                        return $("<div class='" + element.type + "'></div>")[0];
+                    },
+
+                    createGroup: function() {
+                        return { type: "group" };
                     }
                 };
 
@@ -36,7 +40,7 @@
             (function() {
                 var ElementStub = {
                     highlightOverlay: function() {
-                        return new dataviz.ViewElement();
+                        return { type: "overlay" };
                     }
                 }
 
@@ -77,9 +81,9 @@
                     });
                 });
 
-                test("Renders overlay element", function() {
+                test("Renders overlay element in container", function() {
                     highlight.show(ElementStub);
-                    equals($(".overlay").length, 1);
+                    equals($(".group > .overlay").length, 1);
                 });
 
                 test("Does not render overlay if no overlay element exists", function() {
@@ -93,6 +97,12 @@
                     equals($(".overlay").length, 0);
                 });
 
+                test("Does not remove container element", function() {
+                    highlight.show(ElementStub);
+                    highlight.hide();
+                    equals($(".group").length, 1);
+                });
+
                 test("Sets visible property on show", function() {
                     highlight.show(ElementStub);
                     ok(highlight.visible);
@@ -101,6 +111,39 @@
                 test("Sets visible property on hide", function() {
                     highlight.hide();
                     ok(!highlight.visible);
+                });
+
+                // ------------------------------------------------------------
+                module("Highlight / Overlay / Multiple points", {
+                    setup: function() {
+                        createHighlight();
+                    },
+                    teardown: function() {
+                        $("#viewElement").empty();
+                    }
+                });
+
+                test("Retrieves overlay elements", 2, function() {
+                    highlight.show([{
+                        highlightOverlay: function() {
+                            ok(true);
+                        }
+                    }, {
+                        highlightOverlay: function() {
+                            ok(true);
+                        }
+                    }]);
+                });
+
+                test("Renders overlay elements", function() {
+                    highlight.show([ElementStub, ElementStub]);
+                    equals($(".overlay").length, 2);
+                });
+
+                test("Removes overlay elements", function() {
+                    highlight.show([ElementStub, ElementStub]);
+                    highlight.hide();
+                    equals($(".overlay").length, 0);
                 });
 
             })();
@@ -112,7 +155,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Highlight / In place", {
+                module("Highlight / Toggle", {
                     setup: function() {
                         createHighlight({
                             fill: "#cf0",
@@ -151,8 +194,42 @@
                     ok(!highlight.visible);
                 });
 
-            })();
+                // ------------------------------------------------------------
+                module("Highlight / Toggle / Multiple points", {
+                    setup: function() {
+                        createHighlight();
+                    },
+                    teardown: function() {
+                        $("#viewElement").empty();
+                    }
+                });
 
+                test("Calls toggleHighlight on show", 2, function() {
+                    highlight.show([{
+                        toggleHighlight: function(view) {
+                            ok(true);
+                        }
+                    }, {
+                        toggleHighlight: function(view) {
+                            ok(true);
+                        }
+                    }]);
+                });
+
+                test("Calls toggleHighlight on hide", 4, function() {
+                    highlight.show([{
+                        toggleHighlight: function(view) {
+                            ok(true);
+                        }
+                    }, {
+                        toggleHighlight: function(view) {
+                            ok(true);
+                        }
+                    }]);
+                    highlight.hide();
+                });
+
+            })();
         </script>
 
         <div id="viewElement"></div>

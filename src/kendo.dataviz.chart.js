@@ -687,10 +687,10 @@ kendo_module({
                 paddingTop = parseInt(element.css("paddingTop"), 10),
                 win = $(window);
 
-            return {
-                x: clientX - offset.left - paddingLeft + win.scrollLeft(),
-                y: clientY - offset.top - paddingTop + win.scrollTop()
-            };
+            return new Point2D(
+                clientX - offset.left - paddingLeft + win.scrollLeft(),
+                clientY - offset.top - paddingTop + win.scrollTop()
+            );
         },
 
         _click: function(e) {
@@ -789,15 +789,15 @@ kendo_module({
             if (chart._lastTime && new Date() - chart._lastTime < 20) {
                 return;
             }
+
             var plotArea = chart._plotArea,
                 crosshairs = plotArea.crosshairs,
                 length = crosshairs.length,
                 coords = chart._eventCoordinates(e),
-                point = Point2D(coords.x, coords.y),
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = tooltip.options || {},
-                highlightOptions = highlight.options || {},
+                highlightOptions = chart.options.highlight,
                 pane = plotArea.paneByPoint(coords),
                 i, crosshair;
 
@@ -807,7 +807,7 @@ kendo_module({
                 for (i = 0; i < length; i++) {
                     crosshair = crosshairs[i];
                     if (crosshair.box.containsPoint(coords)) {
-                        crosshair.showAt(point);
+                        crosshair.showAt(coords);
                     } else {
                         crosshair.hide();
                     }
@@ -821,11 +821,11 @@ kendo_module({
                 }
 
                 if (tooltipOptions.visible) {
-                    tooltip.showAt(point);
+                    tooltip.showAt(coords);
                 }
 
                 if (highlight.options.visible) {
-                    highlight.show(point);
+                    highlight.show(coords);
                 }
             }
         },
@@ -7191,6 +7191,9 @@ kendo_module({
 
             highlight.view = view;
             highlight.viewElement = viewElement;
+
+            highlight._container = view.renderElement(view.createGroup());
+            viewElement.appendChild(highlight._container);
         },
 
         options: {
@@ -7201,52 +7204,55 @@ kendo_module({
             strokeOpacity: 0.2
         },
 
-        show: function(point) {
+        show: function(points) {
             var highlight = this,
                 view = highlight.view,
-                viewElement = highlight.viewElement,
+                container = highlight._container,
                 overlay,
-                overlayElement;
+                overlayElement,
+                i,
+                point;
 
             highlight.hide();
+            highlight.visible = true;
+            highlight._activePoints = points = [].concat(points);
 
-            if (point.highlightOverlay) {
-                overlay = point.highlightOverlay(view, highlight.options);
+            for (i = 0; i < points.length; i++) {
+                point = points[i];
 
-                if (overlay) {
-                    overlayElement = view.renderElement(overlay);
-                    viewElement.appendChild(overlayElement);
+                if (point.highlightOverlay) {
+                    overlay = point.highlightOverlay(view, highlight.options);
 
-                    highlight.overlayElement = overlayElement;
-                    highlight.visible = true;
+                    if (overlay) {
+                        overlayElement = view.renderElement(overlay);
+                        container.appendChild(overlayElement);
+                    }
                 }
-            }
 
-            if (point.toggleHighlight) {
-                highlight.hide();
-                point.toggleHighlight(view);
-                highlight.point = point;
-                highlight.visible = true;
+                if (point.toggleHighlight) {
+                    point.toggleHighlight(view);
+                }
             }
         },
 
         hide: function() {
             var highlight = this,
-                overlayElement = highlight.overlayElement;
+                points = highlight._activePoints,
+                point;
 
-            if (overlayElement) {
-                if (overlayElement.parentNode) {
-                    overlayElement.parentNode.removeChild(overlayElement);
+            $(highlight._container).empty();
+
+            if (points) {
+                for (i = 0; i < points.length; i++) {
+                    point = points[i];
+
+                    if (point.toggleHighlight) {
+                        point.toggleHighlight(highlight.view);
+                    }
                 }
-
-                delete highlight.overlayElement;
             }
 
-            if (highlight.point) {
-                highlight.point.toggleHighlight(highlight.view);
-                delete highlight.point;
-            }
-
+            highlight._activePoints = null;
             highlight.visible = false;
         }
     });
@@ -7259,15 +7265,6 @@ kendo_module({
 
             highlight.view = view;
             highlight.viewElement = viewElement;
-        },
-
-        options: {
-            fill: WHITE,
-            fillOpacity: 0.2,
-            stroke: WHITE,
-            strokeWidth: 1,
-            strokeOpacity: 0.2,
-            visible: true
         },
 
         show: function(coords) {
