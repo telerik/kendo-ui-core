@@ -260,10 +260,13 @@
                                     equal(combobox.value(), "");
                                 });
                 var combobox = new ComboBox(select, {
-                    dataSource: [{text: "foo"}, {text: "bar"}]
+                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataValueField: "text",
+                    dataTextField: "text"
                 });
 
-                combobox._old = "test";
+                combobox.select(0);
+
                 combobox.input.focus().val("").press(kendo.keys.BACKSPACE).blur();
 
             });

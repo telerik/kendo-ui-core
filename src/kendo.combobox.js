@@ -23,7 +23,6 @@ kendo_module({
         DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
         MOUSEDOWN = "mousedown" + ns,
-        SELECT = "select",
         ARIA_DISABLED = "aria-disabled",
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
@@ -100,14 +99,13 @@ kendo_module({
             that._aria();
 
             that._oldIndex = that.selectedIndex = -1;
-            that._old = options.value || that._accessor();
 
             if (options.autoBind) {
                 that._filterSource();
             } else {
                 text = options.text;
 
-                if (!text && element.is(SELECT)) {
+                if (!text && that._isSelect) {
                     text = element.children(":selected").text();
                 }
 
@@ -127,6 +125,8 @@ kendo_module({
             name: "ComboBox",
             enable: true,
             index: -1,
+            text: null,
+            value: null,
             autoBind: true,
             delay: 200,
             dataTextField: "",
@@ -248,7 +248,7 @@ kendo_module({
                 that.popup._position();
             }
 
-            if (that.element.is(SELECT)) {
+            if (that._isSelect) {
                 if (state === STATE_REBIND) {
                     that._state = "";
                     value = that.value();
@@ -474,7 +474,7 @@ kendo_module({
                 that._state = STATE_ACCEPT;
             }
 
-            if (element.is(SELECT)) {
+            if (that._isSelect) {
                 if (!custom) {
                     custom = that._option = $("<option/>");
                     element.append(custom);
