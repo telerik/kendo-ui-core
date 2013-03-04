@@ -44,6 +44,42 @@ public class ChartDataRepository {
         return result;
     }
     
+    public static List<AprilSales> AprilSalesData() {
+        List<AprilSales> result = new ArrayList<AprilSales>();
+        result.add(new AprilSales(2373, 5000, "1"));
+        result.add(new AprilSales(3283, 5250, "2"));
+        result.add(new AprilSales(4532, 5500, "3"));
+        result.add(new AprilSales(4620, 5750, "4"));
+        result.add(new AprilSales(6504, 6000, "5"));
+        result.add(new AprilSales(6715, 6250, "6"));
+        result.add(new AprilSales(6234, 6500, "7"));
+        result.add(new AprilSales(6750, 6750, "8"));
+        result.add(new AprilSales(6300, 7000, "9"));
+        result.add(new AprilSales(6459, 7250, "10"));
+        result.add(new AprilSales(8305, 7500, "11"));
+        result.add(new AprilSales(7222, 7750, "12"));
+        result.add(new AprilSales(6734, 8000, "13"));
+        result.add(new AprilSales(7863, 8250, "14"));
+        result.add(new AprilSales(8743, 8500, "15"));
+        result.add(new AprilSales(8846, 8750, "16"));
+        result.add(new AprilSales(8567, 9000, "17"));
+        result.add(new AprilSales(8193, 9250, "18"));
+        result.add(new AprilSales(9458, 9500, "19"));
+        result.add(new AprilSales(9254, 9750, "20"));
+        result.add(new AprilSales(10234, 10000, "21"));
+        result.add(new AprilSales(9608, 10250, "22"));
+        result.add(new AprilSales(9350, 10500, "23"));
+        result.add(new AprilSales(8842, 10500, "24"));
+        result.add(new AprilSales(8349, 10500, "25"));
+        result.add(new AprilSales(8846, 10500, "26"));
+        result.add(new AprilSales(9567, 10500, "27"));
+        result.add(new AprilSales(10734, 10500, "28"));
+        result.add(new AprilSales(10124, 10500, "29"));
+        result.add(new AprilSales(9680, 10500, "30"));
+
+        return result;
+    }
+    
     public static List<PricePerformance> PricePerformanceData() {
         List<PricePerformance> result = new ArrayList<PricePerformance>();
         result.add(new PricePerformance("Pentium", "D 820", 105, 100));
