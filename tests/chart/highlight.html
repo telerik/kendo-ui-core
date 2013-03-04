@@ -27,10 +27,6 @@
                 viewMock = {
                     renderElement: function(element) {
                         return $("<div class='" + element.type + "'></div>")[0];
-                    },
-
-                    createGroup: function() {
-                        return { type: "group" };
                     }
                 };
 
@@ -81,9 +77,9 @@
                     });
                 });
 
-                test("Renders overlay element in container", function() {
+                test("Renders overlay element", function() {
                     highlight.show(ElementStub);
-                    equals($(".group > .overlay").length, 1);
+                    equals($(".overlay").length, 1);
                 });
 
                 test("Does not render overlay if no overlay element exists", function() {
@@ -95,12 +91,6 @@
                     highlight.show(ElementStub);
                     highlight.hide();
                     equals($(".overlay").length, 0);
-                });
-
-                test("Does not remove container element", function() {
-                    highlight.show(ElementStub);
-                    highlight.hide();
-                    equals($(".group").length, 1);
                 });
 
                 test("Sets visible property on show", function() {

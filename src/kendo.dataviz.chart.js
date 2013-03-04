@@ -709,7 +709,7 @@ kendo_module({
                 point;
 
             if (chart._suppressHover || !highlight ||
-                highlight.overlayElement === e.target || chart._sharedTooltip()) {
+                inArray(e.target, highlight._overlays) || chart._sharedTooltip()) {
                 return;
             }
 
@@ -7197,8 +7197,7 @@ kendo_module({
             highlight.view = view;
             highlight.viewElement = viewElement;
 
-            highlight._container = view.renderElement(view.createGroup());
-            viewElement.appendChild(highlight._container);
+            highlight._overlays = [];
         },
 
         options: {
@@ -7212,15 +7211,16 @@ kendo_module({
         show: function(points) {
             var highlight = this,
                 view = highlight.view,
-                container = highlight._container,
+                viewElement = highlight.viewElement,
                 overlay,
+                overlays = highlight._overlays,
                 overlayElement,
                 i,
                 point;
 
             highlight.hide();
             highlight.visible = true;
-            highlight._activePoints = points = [].concat(points);
+            highlight._points = points = [].concat(points);
 
             for (i = 0; i < points.length; i++) {
                 point = points[i];
@@ -7230,7 +7230,8 @@ kendo_module({
 
                     if (overlay) {
                         overlayElement = view.renderElement(overlay);
-                        container.appendChild(overlayElement);
+                        viewElement.appendChild(overlayElement);
+                        overlays.push(overlayElement);
                     }
                 }
 
@@ -7242,11 +7243,16 @@ kendo_module({
 
         hide: function() {
             var highlight = this,
-                points = highlight._activePoints,
+                points = highlight._points,
+                overlays = highlight._overlays,
+                overlay,
                 i,
                 point;
 
-            $(highlight._container).empty();
+            while (overlays.length) {
+                overlay = highlight._overlays.pop();
+                overlay.parentNode.removeChild(overlay);
+            }
 
             if (points) {
                 for (i = 0; i < points.length; i++) {
@@ -7258,7 +7264,7 @@ kendo_module({
                 }
             }
 
-            highlight._activePoints = null;
+            highlight._points = [];
             highlight.visible = false;
         }
     });
