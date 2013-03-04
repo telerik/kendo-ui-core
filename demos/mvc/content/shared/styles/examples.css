@@ -74,7 +74,7 @@ html
 
 .widgetGrid .centerWrap
 {
-    width:976px;
+    width:968px;
 }
 
 /*header*/
@@ -992,14 +992,14 @@ p#copy
 
 #mainWrap
 {
-    padding-top:70px;
+    padding-top:60px;
     position:relative;
 }
 
 #exampleTitle
 {
     position:absolute;
-    top:28px;
+    top:23px;
     left:0;
     font:23px/1.6 arial,helvetica,sans-serif;
     font-weight:normal;
@@ -1016,8 +1016,8 @@ p#copy
 {
     width:20px;
     height:20px;
-    float: left;
-    margin:8px 11px 0 0;
+    float:left;
+    margin:7px 11px 0 0;
     background:no-repeat url(sprite.widgets.png);
     -webkit-transform: translatez(0);
 }
@@ -1438,29 +1438,29 @@ p#copy
 
 .widgetGrid .mobile-widgets
 {
-    width:300px;
+    width:292px;
 }
 
 .widgetGrid .mobile-framework
 {
     width:210px;
-    background:rgba(221, 221, 221, 0.2);
+    background:rgba(221, 221, 221, .25);
 }
 
 .widgetGrid .mobile-devices
 {
     width:460px;
     position: relative;
-    min-height: 176px;
+    min-height: 159px;
 }
 
 .widgetGrid h2
 {
     border-bottom:1px solid #dfdfdf;
-    margin:0 18px;
-    padding-top:14px;
-    font-size:12px;
-    line-height:1.6;
+    margin:0 14px;
+    padding-top:8px;
+    font-size:11px;
+    line-height:1.5;
     text-transform:uppercase;
     font-weight: normal;
 }
@@ -1468,8 +1468,8 @@ p#copy
 .widgetGrid ul
 {
     float:left;
-    margin:8px 0 0 18px;
-    padding:0 0 20px;
+    margin:8px 0 0 14px;
+    padding:0 0 10px;
 }
 .widgetGrid .wideCol ul
 {
@@ -1518,15 +1518,15 @@ p#copy
 .widgetGrid .gauges
 {
     width:180px;
-    min-height: 176px;
-    background:rgba(221, 221, 221, 0.3);
+    min-height: 159px;
+    background:rgba(221, 221, 221, 0.33);
 }
 
 .widgetGrid .financial
 {
     width:150px;
-    min-height: 176px;
-    background:rgba(221, 221, 221, 0.1);
+    min-height: 159px;
+    background:rgba(221, 221, 221, 0.15);
 }
 
 .wideCol.dashboards ul,
@@ -1596,8 +1596,10 @@ p#copy
 
 .osName
 {
-    height: 57px;
     display: block;
+    height: 47px;
+    padding-top: 10px;
+    line-height: 1.3;
 }
 
 .osName strong
