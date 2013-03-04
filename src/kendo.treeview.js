@@ -73,7 +73,7 @@ kendo_module({
     };
 
     function checkboxes(node) {
-        return node.children("div").find(":checkbox:first");
+        return node.children("div").find(".k-checkbox:first :checkbox");
     }
 
     function updateNodeHtml(node) {
@@ -633,7 +633,7 @@ kendo_module({
 
             if (parentNode.length) {
                 this._setIndeterminate(parentNode);
-                checkbox = parentNode.children("div").find(":checkbox");
+                checkbox = parentNode.children("div").find(".k-checkbox > :checkbox");
 
                 if (checkbox.prop("indeterminate") === false) {
                     this.dataItem(parentNode).set(CHECKED, checkbox.prop(CHECKED));
@@ -808,7 +808,7 @@ kendo_module({
                 target,
                 focused = that.current(),
                 expanded = that._expanded(focused),
-                checkbox = focused.find(":checkbox:first"),
+                checkbox = focused.find(".k-checkbox:first :checkbox"),
                 rtl = kendo.support.isRtl(that.element);
 
             if (e.target != e.currentTarget) {
@@ -1125,13 +1125,13 @@ kendo_module({
 
                         isChecked = item[field];
 
-                        node.children("div").find(":checkbox")
+                        node.children("div").find(".k-checkbox :checkbox")
                             .prop(CHECKED, item[field])
                             .data("indeterminate", false)
                             .prop("indeterminate", false);
 
                         if (that.options.checkboxes.checkChildren) {
-                            node.find(":checkbox").each(setChecked);
+                            node.find(".k-checkbox :checkbox").each(setChecked);
 
                             that._updateIndeterminate(node);
                         }

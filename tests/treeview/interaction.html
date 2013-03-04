@@ -740,6 +740,19 @@
                 ok(true);
             });
 
+            test("space on item with custom checkbox does nothing", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                    ],
+                    template: "<input type='checkbox'>#= item.text #"
+                });
+
+                treeview.press(keys.SPACEBAR);
+
+                ok(!treeview.find(":checkbox").prop("checked"));
+            });
+
             test("blurring the treeview removes the focused state", function() {
                 createTreeView({
                     dataSource: [
