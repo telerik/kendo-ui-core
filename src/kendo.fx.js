@@ -309,18 +309,25 @@ kendo_module({
                     options
                 );
 
-                var stopTransition = function() {
-                   if (timeoutID) {
-                       clearTimeout(timeoutID);
-                       timeoutID = null;
-                       element
-                           .removeData(ABORT_ID)
-                           .dequeue()
-                           .css(TRANSITION, "")
-                           .css(TRANSITION);
+                var stopTransitionCalled = false;
 
-                       options.complete.call(element);
-                   }
+                var stopTransition = function() {
+                    if (!stopTransitionCalled) {
+                        stopTransitionCalled = true;
+
+                        if (timeoutID) {
+                            clearTimeout(timeoutID);
+                            timeoutID = null;
+                        }
+
+                        element
+                        .removeData(ABORT_ID)
+                        .dequeue()
+                        .css(TRANSITION, "")
+                        .css(TRANSITION);
+
+                        options.complete.call(element);
+                    }
                 };
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
@@ -335,9 +342,15 @@ kendo_module({
                 element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
                 element.css(css).css(TRANSFORM);
 
-                if (browser.mozilla) {
+                /**
+                 * Use transitionEnd event for browsers who support it - but duplicate it with setTimeout, as the transitionEnd event will not be triggered if no CSS properties change.
+                 * This should be cleaned up at some point (widget by widget), and refactored to widgets not relying on the complete callback if no transition occurs.
+                 *
+                 * For IE9 and below, resort to setTimeout.
+                 */
+                if (transitions.event) {
                     element.one(transitions.event, stopTransition);
-                    delay = 50;
+                    delay = 500;
                 }
 
                 timeoutID = setTimeout(stopTransition, options.duration + delay);

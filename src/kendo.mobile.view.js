@@ -315,6 +315,7 @@ kendo_module({
                 parallax: parallax,
                 complete: complete,
                 transition: transition
+                // ,duration: 1000
             };
         },
 
