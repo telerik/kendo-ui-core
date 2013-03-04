@@ -3,20 +3,20 @@
         <div class="side" id="store">
             <button class="toggle">Library</button>
         </div>
-        <div class="current side" id="library">
+
+        <div class="side" id="library">
             <button class="toggle">Store</button>
         </div>
     </div>
 
     <script>
-        $(".toggle").click(function () {
-            var currentSide = $(".current"),
-                otherSide = $(".side:not(.current)");
+        var effect = kendo.fx("#container").flipHorizontal($("#library"), $("#store")).duration(1000),
+            reverse = false;
 
-            currentSide.removeClass("current");
-            otherSide.addClass("current");
-
-            kendo.fx("#container").flipHorizontal(currentSide, otherSide).play();
+        $(".toggle").click(function() {
+            effect.stop();
+            reverse ? effect.reverse() : effect.play();
+            reverse = !reverse;
         });
     </script>
 
