@@ -179,9 +179,19 @@
 
                 that.dataSource.bind(CHANGE, that._refreshHandler);
 
-                that.menu.element.on("click" + NS, ".k-sort-asc, .k-sort-desc", function() {
-                    var item = $(this),
-                        dir = item.hasClass("k-sort-asc") ? ASC : DESC;
+                that.menu.bind("select", function(e) {
+                    var item = $(e.item),
+                        dir;
+
+                    if (item.hasClass("k-sort-asc")) {
+                        dir = ASC;
+                    } else if (item.hasClass("k-sort-desc")) {
+                        dir = DESC;
+                    }
+
+                    if (!dir) {
+                        return;
+                    }
 
                     item.parent().find(".k-sort-" + (dir == ASC ? DESC : ASC)).removeClass(ACTIVE);
 
