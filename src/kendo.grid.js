@@ -1376,7 +1376,7 @@
 
                 if (!column.command && column.field && (!model.editable || model.editable(column.field))) {
                     fields.push({ field: column.field, format: column.format, editor: column.editor, values: column.values });
-                    cell.attr("data-container-for", column.field);
+                    cell.attr(kendo.attr("container-for"), column.field);
                     cell.empty();
                 } else if (column.command) {
                     command = getCommand(column.command, "edit");

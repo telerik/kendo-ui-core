@@ -32,6 +32,8 @@
                 Model = kendo.data.Model,
                 dataSource;
 
+            kendo.ns = "kendo-";
+
             function setup(options) {
                 options = $.extend(true, {}, {
                 editable: "popup",
@@ -146,7 +148,7 @@
                 equal(elements.length, 4);
                 ok(elements.eq(0).hasClass("k-edit-label"));
                 equal(elements.eq(0).find("label").attr("for"), "foo");
-                equal(elements.eq(1).data("container-for"), "foo");
+                equal(elements.eq(1).data("kendo-container-for"), "foo");
                 ok(elements.eq(1).hasClass("k-edit-field"));
             });
 

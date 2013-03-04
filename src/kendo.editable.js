@@ -163,7 +163,7 @@
                 type = isValuesEditor ? "values" : fieldType(modelField),
                 isCustomEditor = isObject && field.editor,
                 editor = isCustomEditor ? field.editor : editors[type],
-                container = that.element.find("[data-container-for=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
+                container = that.element.find("[" + kendo.attr("container-for") + "=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
 
             editor = editor ? editor : editors["string"];
 
