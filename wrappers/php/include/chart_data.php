@@ -1,4 +1,38 @@
 <?php
+
+function chart_april_sales() {
+	return array(array('current' => 2373, 'target' => 5000, 'category' => 1),
+		array('current' => 3283, 'target' => 5250, 'category' => 2),
+		array('current' => 4532, 'target' => 5500, 'category' => 3),
+		array('current' => 4620, 'target' => 5750, 'category' => 4),
+		array('current' => 6504, 'target' => 6000, 'category' => 5),
+		array('current' => 6715, 'target' => 6250, 'category' => 6),
+		array('current' => 6234, 'target' => 6500, 'category' => 7),
+		array('current' => 6750, 'target' => 6750, 'category' => 8),
+		array('current' => 6300, 'target' => 7000, 'category' => 9),
+		array('current' => 6459, 'target' => 7250, 'category' => 10),
+		array('current' => 8305, 'target' => 7500, 'category' => 11),
+		array('current' => 7222, 'target' => 7750, 'category' => 12),
+		array('current' => 6734, 'target' => 8000, 'category' => 13),
+		array('current' => 7863, 'target' => 8250, 'category' => 14),
+		array('current' => 8743, 'target' => 8500, 'category' => 15),
+		array('current' => 8846, 'target' => 8750, 'category' => 16),
+		array('current' => 8567, 'target' => 9000, 'category' => 17),
+		array('current' => 8193, 'target' => 9250, 'category' => 18),
+		array('current' => 9458, 'target' => 9500, 'category' => 19),
+		array('current' => 9254, 'target' => 9750, 'category' => 20),
+		array('current' => 10234, 'target' => 10000, 'category' => 21),
+		array('current' => 9608, 'target' => 10250, 'category' => 22),
+		array('current' => 9350, 'target' => 10500, 'category' => 23),
+		array('current' => 8842, 'target' => 10500, 'category' => 24),
+		array('current' => 8349, 'target' => 10500, 'category' => 25),
+		array('current' => 8846, 'target' => 10500, 'category' => 26),
+		array('current' => 9567, 'target' => 10500, 'category' => 27),
+		array('current' => 10734, 'target' => 10500, 'category' => 28),
+		array('current' => 10124, 'target' => 10500, 'category' => 29),
+		array('current' => 9680, 'target' => 10500, 'category' => 30));
+}
+
 function chart_price_performance() {
     return array(
         array('family' => 'Pentium', 'model' => 'D 820', 'price' => 105, 'performance' => 100),
