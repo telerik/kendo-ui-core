@@ -22,6 +22,7 @@ require 'mvc'
 require 'java'
 require 'php'
 require 'vsdoc'
+require 'intellisense'
 require 'type_script'
 require 'changelog'
 require 'bundle'
@@ -98,6 +99,12 @@ bundle :name => 'complete.commercial',
            %w(dataviz framework) => 'dataviz',
            %w(mobile framework) => 'mobile'
        },
+       :intellisense => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework),
        :demos => %w(web dataviz mobile),
@@ -112,6 +119,12 @@ bundle :name => 'trial.hotfix',
        :license => 'src-license-complete',
        :eula => 'trial',
        :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :intellisense => {
            %w(web mobile dataviz framework) => 'all',
            %w(web framework) => 'web',
            %w(dataviz framework) => 'dataviz',
@@ -146,6 +159,12 @@ bundle :name => 'trial',
            %w(dataviz framework) => 'dataviz',
            %w(mobile framework) => 'mobile'
        },
+       :intellisense => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :demos => %w(web dataviz mobile),
@@ -169,6 +188,7 @@ bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => 'web',
        :vsdoc => { %w(web framework) => "web" },
+       :intellisense => { %w(web framework) => "web" },
        :type_script => { %w(web framework) => "web" },
        :changelog => %w(web framework),
        :demos => %w(web),
@@ -182,6 +202,7 @@ bundle :name => 'web.commercial',
 bundle :name => 'web.open-source',
        :license => 'src-license-web',
        :vsdoc => { %w(web framework) => 'web' },
+       :intellisense => { %w(web framework) => 'web' },
        :type_script => { %w(web framework) => 'web' },
        :changelog => %w(web framework),
        :demos => %w(web),
@@ -195,6 +216,7 @@ bundle :name => 'web.open-source',
 bundle :name => 'mobile.commercial',
        :license => 'src-license-mobile',
        :vsdoc => { %w(mobile framework) => 'mobile' },
+       :intellisense => { %w(mobile framework) => 'mobile' },
        :type_script => { %w(mobile framework) => 'mobile' },
        :changelog => %w(mobile framework),
        :demos => %w(mobile),
@@ -209,6 +231,7 @@ bundle :name => 'mobile.commercial',
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
        :vsdoc => { %w(dataviz framework) => "dataviz" },
+       :intellisense => { %w(dataviz framework) => "dataviz" },
        :type_script => { %w(dataviz framework) => "dataviz" },
        :changelog => %w(dataviz framework),
        :eula => 'dataviz',
@@ -225,6 +248,12 @@ bundle :name => 'aspnetmvc.commercial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
        :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :intellisense => {
            %w(web mobile dataviz framework) => 'all',
            %w(web framework) => 'web',
            %w(dataviz framework) => 'dataviz',
@@ -259,6 +288,12 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
            %w(dataviz framework) => 'dataviz',
            %w(mobile framework) => 'mobile'
        },
+       :intellisense => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :contents => {
@@ -274,6 +309,12 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
 bundle :name => 'cdn.commercial',
        :license => 'src-license-cdn',
        :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :intellisense => {
            %w(web mobile dataviz framework) => 'all',
            %w(web framework) => 'web',
            %w(dataviz framework) => 'dataviz',
@@ -408,7 +449,7 @@ namespace :build do
 
     namespace :master do
         desc 'Runs test suite over the master branch'
-        task :tests => ["tests:CI", "vsdoc:master:test", "type_script:master:test"]
+        task :tests => ["tests:CI", "vsdoc:master:test", "intellisense:master:test", "type_script:master:test"]
 
         desc 'Update the /staging build machine web site'
         task :demos => [
