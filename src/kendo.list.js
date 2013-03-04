@@ -44,6 +44,7 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
             element = that.element;
 
+            that._isSelect = element.is(SELECT);
             that._template();
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
@@ -70,6 +71,21 @@ kendo_module({
                 that.ul.attr(ID, id + "_listbox");
                 that._optionID = id + "_option_selected";
             }
+
+            that._initValue();
+        },
+
+        _initValue: function() {
+            var that = this,
+                value = that.options.value;
+
+            if (value) {
+                that.element.val(value);
+            } else {
+                value = that.element.val();
+            }
+
+            that._old = value;
         },
 
         _ignoreCase: function() {
@@ -195,8 +211,13 @@ kendo_module({
         _change: function() {
             var that = this,
                 index = that.selectedIndex,
+                optionValue = that.options.value,
                 value = that.value(),
                 trigger;
+
+            if (that._isSelect && !that._bound && optionValue) {
+                value = optionValue;
+            }
 
             if (value !== that._old) {
                 trigger = true;
@@ -402,7 +423,7 @@ kendo_module({
                 template = options.template,
                 hasDataSource = options.dataSource;
 
-            if (that.element.is(SELECT) && that.element[0].length) {
+            if (that._isSelect && that.element[0].length) {
                 if (!hasDataSource) {
                     options.dataTextField = options.dataTextField || "text";
                     options.dataValueField = options.dataValueField || "value";
@@ -420,8 +441,10 @@ kendo_module({
         },
 
        _triggerCascade: function() {
-            if (this._old !== this.value()) {
-                this.trigger("cascade");
+            var that = this,
+                value = that.value();
+            if ((!that._bound && value) || that._old !== value) {
+                that.trigger("cascade");
             }
         },
 
@@ -516,7 +539,7 @@ kendo_module({
 
         _accessor: function(value, idx) {
             var element = this.element,
-                isSelect = element.is(SELECT),
+                isSelect = this._isSelect,
                 option, selectedIndex;
 
             element = element[0];
@@ -581,7 +604,7 @@ kendo_module({
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            if (element.is(SELECT)) {
+            if (that._isSelect) {
                 idx = element[0].selectedIndex;
                 if (idx > -1) {
                     options.index = idx;

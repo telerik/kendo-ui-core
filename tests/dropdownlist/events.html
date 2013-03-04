@@ -427,7 +427,6 @@
                 var change, cascade;
 
                 input.kendoDropDownList({
-                    autoBind: false,
                     dataSource: ["foo", "bar"],
                     cascade: function() {
                         cascade = true;
@@ -465,6 +464,34 @@
                     keyCode: 116 //"t"
                 });
             });
+
+            test("DropDownList does not raise change if options.value and autoBind:false", function() {
+                var ddl = input.kendoDropDownList({
+                    autoBind: false,
+                    dataSource: ["foo", "bar"],
+                    change: function() {
+                        ok(false);
+                    },
+                    value: "bar"
+                }).data("kendoDropDownList");
+
+                ddl._change();
+            });
+
+            test("DropDownList from empty SELECT with autoBind:false does not raise change event", function() {
+                var select = $("<select/>"),
+                    dropdownlist = new DropDownList(select, {
+                        autoBind: false,
+                        value: "bar",
+                        dataSource: ["foo", "bar"],
+                        change: function() {
+                            ok(false);
+                        }
+                    });
+
+                dropdownlist._change();
+            });
+
 
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>

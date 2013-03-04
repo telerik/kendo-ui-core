@@ -47,7 +47,7 @@ kendo_module({
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id, value;
+            var that = this, id;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -99,13 +99,6 @@ kendo_module({
             that._values = [];
             that._dataItems = [];
 
-            value = options.value || element.val();
-            if (value === null) {
-                value = [];
-            }
-            that._old = that._initialValues = value;
-            that._setInitialValues = !!value[0];
-
             that._reset();
             that._enable();
             that._placeholder();
@@ -128,6 +121,7 @@ kendo_module({
             ignoreCase: true,
             minLength: 0,
             delay: 100,
+            value: null,
             maxSelectedItems: null,
             itemTemplate: "",
             tagTemplate: "",
@@ -436,6 +430,18 @@ kendo_module({
             }
 
             dataSource.filter(expression);
+        },
+
+        _initValue: function() {
+            var that = this,
+                value = that.options.value || that.element.val();
+
+            if (value === null) {
+                value = [];
+            }
+
+            that._old = that._initialValues = value;
+            that._setInitialValues = !!value[0];
         },
 
         _change: function() {
@@ -878,7 +884,7 @@ kendo_module({
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading"></span>').insertAfter(this.input);
+            this._loading = $('<span class="k-icon k-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.input);
         },
 
         _textContainer: function() {

@@ -762,6 +762,17 @@
 
                 equal(document.activeElement, dropdownlist.wrapper[0]);
             });
+
+            test("DropDownList sets value of the element if options.value and autoBind set to false", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    dropdownlist = new DropDownList(input, {
+                        autoBind: false,
+                        dataSource: data,
+                        value: "1"
+                    });
+
+                equal(dropdownlist.value(), "1");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

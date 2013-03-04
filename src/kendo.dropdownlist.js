@@ -65,8 +65,7 @@ kendo_module({
 
             that._cascade();
 
-            that.selectedIndex = -1;
-
+            that._oldIndex = that.selectedIndex = -1;
             if (index !== undefined) {
                 options.index = index;
             }
@@ -74,7 +73,7 @@ kendo_module({
             if (options.autoBind) {
                 that.dataSource.fetch();
             } else {
-                text = options.text;
+                text = options.text || "";
                 if (!text) {
                     optionLabel = that._optionLabelText(options.optionLabel),
                     useOptionLabel = optionLabel && options.index === 0;
@@ -89,6 +88,7 @@ kendo_module({
                         text = optionLabel;
                     }
                 }
+
                 that.text(text);
             }
 
@@ -98,9 +98,10 @@ kendo_module({
         options: {
             name: "DropDownList",
             enable: true,
-            index: 0,
             autoBind: true,
-            text: "",
+            index: 0,
+            text: null,
+            value: null,
             template: "",
             delay: 500,
             height: 200,
