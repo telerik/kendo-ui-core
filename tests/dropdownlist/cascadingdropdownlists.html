@@ -24,6 +24,8 @@
             var DropDownList = kendo.ui.DropDownList,
                 parent, child;
 
+            QUnit.config.testTimeout = 500;
+
             module("kendo.ui.DropDownLists Cascading DropDownLists", {
                 setup: function() {
                     parent = $("<input id='parent' />").appendTo(document.body);
@@ -148,13 +150,11 @@
                     cascadeFrom: "parent",
                     autoBind: false,
                     cascade: function() {
-                        ddl2.dataSource.bind("change", function() {
-                            start();
-                            $.mockjaxClear();
+                        start();
+                        $.mockjaxClear();
 
-                            equal(ddl.value(), "2");
-                            equal(ddl2.value(), "item4");
-                        });
+                        equal(ddl.value(), "2");
+                        equal(ddl2.value(), "item4");
                     }
                 });
 
@@ -209,14 +209,12 @@
                     cascadeFrom: "child",
                     autoBind: false,
                     cascade: function() {
-                        ddl3.dataSource.bind("change", function() {
-                            start();
-                            $.mockjaxClear();
+                        start();
+                        $.mockjaxClear();
 
-                            equal(ddl.value(), "2");
-                            equal(ddl2.value(), "item4");
-                            equal(ddl3.value(), "item4");
-                        });
+                        equal(ddl.value(), "2");
+                        equal(ddl2.value(), "item4");
+                        equal(ddl3.value(), "item4");
                     }
                 });
 

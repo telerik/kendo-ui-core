@@ -65,8 +65,7 @@ kendo_module({
 
             that._cascade();
 
-            that.selectedIndex = -1;
-
+            that._oldIndex = that.selectedIndex = -1;
             if (index !== undefined) {
                 options.index = index;
             }
@@ -98,9 +97,10 @@ kendo_module({
         options: {
             name: "DropDownList",
             enable: true,
-            index: 0,
             autoBind: true,
+            index: 0,
             text: "",
+            value: "",
             template: "",
             delay: 500,
             height: 200,

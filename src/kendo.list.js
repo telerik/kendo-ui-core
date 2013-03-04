@@ -39,11 +39,12 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 ns = that.ns,
-                id;
+                id, value;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
 
+            that._isSelect = element.is(SELECT);
             that._template();
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
@@ -70,6 +71,15 @@ kendo_module({
                 that.ul.attr(ID, id + "_listbox");
                 that._optionID = id + "_option_selected";
             }
+
+            value = that.options.value;
+            if (value) {
+                element.val(value);
+            } else {
+                value = element.val();
+            }
+
+            that._old = value;
         },
 
         _ignoreCase: function() {
@@ -197,6 +207,10 @@ kendo_module({
                 index = that.selectedIndex,
                 value = that.value(),
                 trigger;
+
+            if (that._isSelect && !that._bound && that.options.value) {
+                value = that.options.value;
+            }
 
             if (value !== that._old) {
                 trigger = true;
@@ -402,7 +416,7 @@ kendo_module({
                 template = options.template,
                 hasDataSource = options.dataSource;
 
-            if (that.element.is(SELECT) && that.element[0].length) {
+            if (that._isSelect && that.element[0].length) {
                 if (!hasDataSource) {
                     options.dataTextField = options.dataTextField || "text";
                     options.dataValueField = options.dataValueField || "value";
@@ -516,7 +530,7 @@ kendo_module({
 
         _accessor: function(value, idx) {
             var element = this.element,
-                isSelect = element.is(SELECT),
+                isSelect = this._isSelect,
                 option, selectedIndex;
 
             element = element[0];
@@ -581,7 +595,7 @@ kendo_module({
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            if (element.is(SELECT)) {
+            if (that._isSelect) {
                 idx = element[0].selectedIndex;
                 if (idx > -1) {
                     options.index = idx;
