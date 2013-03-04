@@ -778,7 +778,24 @@ kendo_module({
             }
         },
 
+        _updateCrosshairs: function(coords) {
+            var crosshairs = this._plotArea.crosshairs,
+                i,
+                current;
+
+            for (i = 0; i < crosshairs.length; i++) {
+                current = crosshairs[i];
+
+                if (current.box.containsPoint(coords)) {
+                    current.showAt(coords);
+                } else {
+                    current.hide();
+                }
+            }
+        },
+
         _mousemove: function(e) {
+            // TODO: Add _mousemoveThrottle
             var chart = this;
             if (chart._lastTime && new Date() - chart._lastTime < 20) {
                 return;
@@ -789,26 +806,14 @@ kendo_module({
                 coords = chart._eventCoordinates(e),
                 index,
                 points,
-                crosshairs = plotArea.crosshairs,
-                length = crosshairs.length,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = tooltip.options || {},
-                pane = plotArea.paneByPoint(coords),
-                i, crosshair;
+                pane = plotArea.paneByPoint(coords);
 
             chart._lastTime = new Date();
 
-            if (length) {
-                for (i = 0; i < length; i++) {
-                    crosshair = crosshairs[i];
-                    if (crosshair.box.containsPoint(coords)) {
-                        crosshair.showAt(coords);
-                    } else {
-                        crosshair.hide();
-                    }
-                }
-            }
+            chart._updateCrosshairs(coords);
 
             if (chart._sharedTooltip()) {
                 if (pane && pane.options.name === "_navigator") {
