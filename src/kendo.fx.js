@@ -50,8 +50,10 @@ kendo_module({
         COMPLETE_CALLBACK = "completeCallback",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform",
-        PERSPECTIVE = cssPrefix + "perspective",
         BACKFACE = cssPrefix + "backface-visibility",
+        PERSPECTIVE = cssPrefix + "perspective",
+        DEFAULT_PERSPECTIVE = "800px",
+        TRANSFORM_PERSPECTIVE = "perspective(" + DEFAULT_PERSPECTIVE + ")",
         directions = {
             left: {
                 reverse: "right",
@@ -1240,8 +1242,8 @@ kendo_module({
 
             start[BACKFACE] = HIDDEN;
 
-            end[TRANSFORM] = reverse ? rotation.start : rotation.end;
-            start[TRANSFORM] = reverse ? rotation.end : rotation.start;
+            end[TRANSFORM] = TRANSFORM_PERSPECTIVE + (reverse ? rotation.start : rotation.end);
+            start[TRANSFORM] = TRANSFORM_PERSPECTIVE + (reverse ? rotation.end : rotation.start);
         },
 
         setup: function() {
@@ -1345,7 +1347,7 @@ kendo_module({
         },
 
         prepare: function(start) {
-            start[PERSPECTIVE] = 1000;
+            start[PERSPECTIVE] = DEFAULT_PERSPECTIVE;
             start.transformStyle = "preserve-3d";
         },
 
@@ -1386,7 +1388,7 @@ kendo_module({
         },
 
         prepare: function(start) {
-            start[PERSPECTIVE] = 1000;
+            start[PERSPECTIVE] = DEFAULT_PERSPECTIVE;
             start.transformStyle = "preserve-3d";
         }
     });
