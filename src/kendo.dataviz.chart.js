@@ -341,13 +341,7 @@ kendo_module({
                 view = chart._view = viewType.fromModel(model);
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
-
-                if (chart._sharedTooltip()) {
-                    chart._highlight =
-                        new SharedHighlight(view, chart._viewElement, chart._plotArea);
-                } else {
-                    chart._highlight = new Highlight(view, chart._viewElement);
-                }
+                chart._highlight = new Highlight(view, chart._viewElement);
             }
         },
 
@@ -791,13 +785,15 @@ kendo_module({
             }
 
             var plotArea = chart._plotArea,
+                categoryAxis = plotArea.categoryAxis,
+                coords = chart._eventCoordinates(e),
+                index,
+                points,
                 crosshairs = plotArea.crosshairs,
                 length = crosshairs.length,
-                coords = chart._eventCoordinates(e),
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = tooltip.options || {},
-                highlightOptions = chart.options.highlight,
                 pane = plotArea.paneByPoint(coords),
                 i, crosshair;
 
@@ -820,12 +816,16 @@ kendo_module({
                     return;
                 }
 
+                index = categoryAxis.getCategoryIndex(coords);
+                points = plotArea.pointsByCategoryIndex(index);
+
                 if (tooltipOptions.visible) {
                     tooltip.showAt(coords);
                 }
 
-                if (highlight.options.visible) {
-                    highlight.show(coords);
+                if (highlight.options.visible !== false && highlight._index !== index) {
+                    highlight.show(points);
+                    highlight._index = index;
                 }
             }
         },
@@ -7238,6 +7238,7 @@ kendo_module({
         hide: function() {
             var highlight = this,
                 points = highlight._activePoints,
+                i,
                 point;
 
             $(highlight._container).empty();
@@ -7253,75 +7254,6 @@ kendo_module({
             }
 
             highlight._activePoints = null;
-            highlight.visible = false;
-        }
-    });
-
-    var SharedHighlight = Highlight.extend({
-        init: function(view, viewElement, plotArea, options) {
-            var highlight = this;
-            highlight.options = deepExtend({}, highlight.options, options);
-            highlight.plotArea = plotArea;
-
-            highlight.view = view;
-            highlight.viewElement = viewElement;
-        },
-
-        show: function(coords) {
-            var highlight = this,
-                view = highlight.view,
-                viewElement = highlight.viewElement,
-                plotArea = highlight.plotArea,
-                categoryAxis = plotArea.categoryAxis,
-                index = categoryAxis.getCategoryIndex(coords),
-                points = plotArea.pointsByCategoryIndex(index),
-                length = points.length,
-                overlay, overlayElement, point, i;
-
-            if (highlight.index == index) {
-                return;
-            }
-
-            highlight.hide();
-            highlight.overlayElements = [];
-            highlight.index = index;
-
-            for (i = 0; i < length; i++) {
-                point = points[i];
-
-                if (point && point.highlightOverlay) {
-                    overlay = point.highlightOverlay(view, highlight.options);
-
-                    if (overlay) {
-                        overlayElement = view.renderElement(overlay);
-                        viewElement.appendChild(overlayElement);
-
-                        highlight.overlayElement = overlayElement;
-                        highlight.visible = true;
-                        highlight.overlayElements.push(overlayElement);
-                    }
-                }
-            }
-        },
-
-        hide: function() {
-            var highlight = this,
-                elements = highlight.overlayElements || [],
-                length = elements.length,
-                i, element;
-
-            for (i = 0; i < length; i++) {
-                element = elements[i];
-
-                if (element) {
-                    if (element.parentNode) {
-                        element.parentNode.removeChild(element);
-                    }
-                }
-            }
-
-            highlight.overlayElements = [];
-            highlight.index = null;
             highlight.visible = false;
         }
     });

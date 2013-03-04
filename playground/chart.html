@@ -18,9 +18,15 @@
                 $("#chart").kendoChart({
                     series: [{
                         data: [1, 2 ,3]
+                    }, {
+                        data: [3, 2 ,1]
                     }],
                     categoryAxis: {
-                        categories: ["A"]
+                        categories: ["A", "B", "C"]
+                    },
+                    tooltip: {
+                        visible: true,
+                        shared: true
                     }
                 });
             });
