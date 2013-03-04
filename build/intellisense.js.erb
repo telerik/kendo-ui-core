@@ -1,26 +1,25 @@
-var kendo = {
-    ui: {},
-    mobile: {ui: {}},
-    dataviz: {ui: {}},
-    data: {}
-};
-
 % classes.each do |the_class|
 
 % if the_class.real_class?
-<%= the_class.full_name %> = function() { };
+intellisense.annotate(<%= the_class.namespace %>, {
+    <%= the_class.name %>: function() {
+        /// <signature>
+        /// <summary>Constructor of <%= the_class.full_name %></summary>
+        /// </signature>
+    }
+});
 
-<%= the_class.full_name %>.prototype = {
-
+var <%= the_class.redirect %> = <%= the_class.full_name %>;
+<%= the_class.full_name %> = function() {
+var _object = new <%= the_class.redirect %>();
+intellisense.annotate(_object, {
 % bind = false
 % unbind = false
-
-% the_class.methods.each do |method|
-
+% the_class.methods.each_with_index do |method, index|
 % bind = true if method.name == "bind"
 % unbind = true if method.name == "unbind"
-
     <%= method.name %>: function(<%= method.parameters.map { |param| param.name }.join "," %>) {
+        /// <signature>
         /// <summary>
         /// <%= method.description.strip.gsub(/\n/, "\n/// ")  %>
         /// </summary>
@@ -30,63 +29,79 @@ var kendo = {
 % if method.result && method.result.type
         /// <returns type="<%= method.result.type %>"><%= method.result.description.gsub(/\r?\n/, '') %></returns>
 % end
-
-    },
+        /// </signature>
+    }<% if index < the_class.methods.size - 1 || !bind || !unbind %>,<% end %>
 % end
 
 % if !bind
     bind: function(event, callback) {
+        /// <signature>
         /// <summary>
         /// Binds to a widget event.
         /// </summary>
         /// <param name="event" type="String">The event name</param>
         /// <param name="callback" type="Function">The callback to be executed when the event is triggered.</param>
+        /// </signature>
     },
 % end
 
 % if !unbind
     unbind: function(event, callback) {
+        /// <signature>
         /// <summary>
         /// Unbinds a callback from a widget event.
         /// </summary>
         /// <param name="event" type="String">The event name</param>
         /// <param name="callback" type="Function">The callback to be removed.</param>
+        /// </signature>
     }
-% else
-    self: null
 % end
 
+});
+
+return _object;
+
 };
 
-$.fn.get<%= the_class.plugin.sub("kendo", "Kendo") %> = function() {
-    /// <summary>
-    /// Returns a reference to the <%= the_class.full_name %> widget, instantiated on the selector.
-    /// </summary>
-    /// <returns type="<%= the_class.full_name %>">The <%= the_class.full_name %> instance (if present).</returns>
+intellisense.redirectDefinition(<%= the_class.full_name %>, <%= the_class.redirect %>);
+
+% if the_class.widget?
+
+jQuery.fn.<%= the_class.plugin %> = function() {
+    this.data("<%= the_class.plugin %>", new <%= the_class.full_name %>());
+
+    return this;
 };
 
-$.fn.<%= the_class.plugin %> = function(options) {
-    /// <summary>
-    /// Instantiates a <%= the_class.full_name %> widget based the DOM elements that match the selector.
-
+intellisense.annotate(jQuery.fn, {
+    get<%= the_class.plugin.sub("kendo", "Kendo") %>: function() {
+        /// <signature>
+        /// <summary>
+        /// Returns a reference to the <%= the_class.full_name %> widget, instantiated on the selector.
+        /// </summary>
+        /// <returns type="<%= the_class.full_name %>">The <%= the_class.full_name %> instance (if present).</returns>
+        /// </signature>
+    },
+    <%= the_class.plugin %>: function(options) {
+        /// <signature>
+        /// <summary>
+        /// Instantiates a <%= the_class.full_name %> widget based the DOM elements that match the selector.
 % if the_class.options.length
-    /// &#10;Accepts an object with the following configuration options:
-    /// &#10;
+        /// &#10;Accepts an object with the following configuration options:
+        /// &#10;
 % the_class.options.each do |option|
-    /// &#10;<%= option.name %> — <%= option.type.join('|') %> <% if option.default %>(default: <%= option.default %>)<%end%>
-    /// &#10;<%= option.description.strip.gsub(/\n/, "\n/// &#10;").gsub(/<(?:.|\n)*?>/, '') %>
-    /// &#10;
+        /// &#10;<%= option.name %> — <%= option.type.join('|') %> <% if option.default %>(default: <%= option.default %>)<%end%>
+        /// &#10;<%= option.description.strip.gsub(/\n/, "\n/// &#10;").gsub(/<(?:.|\n)*?>/, '') %>
+        /// &#10;
 % end
 % end
-    /// </summary>
-    /// <param name="options" type="Object">
-    /// The widget configuration options
-    /// </param>
-};
-
-% else # namespace
-if (!<%= the_class.name %>) {
-    <%= the_class.name %> = {};
-}
+        /// </summary>
+        /// <param name="options" type="Object">
+        /// The widget configuration options
+        /// </param>
+        /// </signature>
+    }
+});
+% end
 % end
 % end

@@ -24,6 +24,14 @@ module CodeGen::INTELLISENSEIntellisense
         def methods
             @methods.find_all { |m| !m.name.include?('.') }
         end
+
+        def redirect
+            "_#{full_name.downcase.gsub('.', '_')}"
+        end
+
+        def namespace
+            @full_name.sub('.' + @name, '')
+        end
     end
 
     class Method < CodeGen::Method
@@ -79,7 +87,9 @@ def intellisense(*args, &block)
 end
 
 namespace :intellisense do
-    INTELLISENSEDOC_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
+    INTELLISENSEDOC_SOURCES = FileList['docs/api/{web,mobile,dataviz,framework}/*.md']
+                                .exclude('docs/api/framework/fx.md')
+
     %w(master production).each do |branch|
         namespace branch do
             desc "Test .intellisense generation"
