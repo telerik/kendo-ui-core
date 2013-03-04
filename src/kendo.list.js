@@ -39,7 +39,7 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 ns = that.ns,
-                id, value;
+                id;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -72,11 +72,17 @@ kendo_module({
                 that._optionID = id + "_option_selected";
             }
 
-            value = that.options.value;
+            that._initValue();
+        },
+
+        _initValue: function() {
+            var that = this,
+                value = that.options.value;
+
             if (value) {
-                element.val(value);
+                that.element.val(value);
             } else {
-                value = element.val();
+                value = that.element.val();
             }
 
             that._old = value;

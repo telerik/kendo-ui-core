@@ -73,7 +73,7 @@ kendo_module({
             if (options.autoBind) {
                 that.dataSource.fetch();
             } else {
-                text = options.text;
+                text = options.text || "";
                 if (!text) {
                     optionLabel = that._optionLabelText(options.optionLabel),
                     useOptionLabel = optionLabel && options.index === 0;
@@ -88,6 +88,7 @@ kendo_module({
                         text = optionLabel;
                     }
                 }
+
                 that.text(text);
             }
 

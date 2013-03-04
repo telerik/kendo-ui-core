@@ -47,7 +47,7 @@ kendo_module({
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id, value;
+            var that = this, id;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -98,13 +98,6 @@ kendo_module({
 
             that._values = [];
             that._dataItems = [];
-
-            value = options.value || element.val();
-            if (value === null) {
-                value = [];
-            }
-            that._old = that._initialValues = value;
-            that._setInitialValues = !!value[0];
 
             that._reset();
             that._enable();
@@ -437,6 +430,18 @@ kendo_module({
             }
 
             dataSource.filter(expression);
+        },
+
+        _initValue: function() {
+            var that = this,
+                value = that.options.value || that.element.val();
+
+            if (value === null) {
+                value = [];
+            }
+
+            that._old = that._initialValues = value;
+            that._setInitialValues = !!value[0];
         },
 
         _change: function() {
