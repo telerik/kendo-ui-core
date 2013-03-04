@@ -205,11 +205,12 @@ kendo_module({
         _change: function() {
             var that = this,
                 index = that.selectedIndex,
+                optionValue = that.options.value,
                 value = that.value(),
                 trigger;
 
-            if (that._isSelect && !that._bound && that.options.value) {
-                value = that.options.value;
+            if (that._isSelect && !that._bound && optionValue) {
+                value = optionValue;
             }
 
             if (value !== that._old) {
@@ -434,8 +435,10 @@ kendo_module({
         },
 
        _triggerCascade: function() {
-            if (this._old !== this.value()) {
-                this.trigger("cascade");
+            var that = this,
+                value = that.value();
+            if ((!that._bound && value) || that._old !== value) {
+                that.trigger("cascade");
             }
         },
 

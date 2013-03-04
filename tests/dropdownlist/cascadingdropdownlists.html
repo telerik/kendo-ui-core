@@ -116,6 +116,50 @@
                 equal(childCB.text(), "Select");
             });
 
+            asyncTest("Cascading DDLs with initial values", 2, function() {
+                $.mockjaxSettings.responseTime = 0;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: [
+                    {text: "item1", id: 1},
+                    {text: "item2", id: 1},
+                    {text: "item3", id: 2},
+                    {text: "item4", id: 2}
+                ] });
+
+                var ddl = new DropDownList(parent, {
+                    optionLabel: "Select",
+                    dataValueField: "id",
+                    dataTextField: "id",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    value: "2"
+                });
+
+                var ddl2 = new DropDownList(child, {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    cascadeFrom: "parent",
+                    autoBind: false,
+                    cascade: function() {
+                        start();
+                        $.mockjaxClear();
+
+                        equal(ddl.value(), "2");
+                        equal(ddl2.value(), "item4");
+                    },
+                    value: "item4"
+                });
+            });
+
             asyncTest("Cascading DDLs handles consecutive calls of value method", 2, function() {
                 $.mockjaxSettings.responseTime = 0;
                 $.mockjaxSettings.contentType = "text/html";
