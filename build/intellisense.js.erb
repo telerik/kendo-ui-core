@@ -9,10 +9,11 @@ intellisense.annotate(<%= the_class.namespace %>, {
     }
 });
 
-var <%= the_class.redirect %> = <%= the_class.full_name %>;
-<%= the_class.full_name %> = function() {
-var _object = new <%= the_class.redirect %>();
-intellisense.annotate(_object, {
+<%= the_class.full_name %> = (function() {
+var original = <%= the_class.full_name %>;
+var wrapper = function() {
+var instance = new original();
+intellisense.annotate(instance, {
 % bind = false
 % unbind = false
 % the_class.methods.each_with_index do |method, index|
@@ -59,11 +60,15 @@ intellisense.annotate(_object, {
 
 });
 
-return _object;
+return instance;
 
 };
 
-intellisense.redirectDefinition(<%= the_class.full_name %>, <%= the_class.redirect %>);
+intellisense.redirectDefinition(wrapper, original);
+
+return wrapper;
+
+})();
 
 % if the_class.widget?
 
