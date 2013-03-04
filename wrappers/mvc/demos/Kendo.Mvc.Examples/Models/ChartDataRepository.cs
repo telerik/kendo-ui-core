@@ -5,6 +5,43 @@ namespace Kendo.Mvc.Examples.Models
 {
     public class ChartDataRepository
     {
+        public static IList<AprilSales> AprilSalesData() 
+        {
+            return new AprilSales[]
+            {
+                new AprilSales(2373, 5000, "1"),
+                new AprilSales(3283, 5250, "2"),
+                new AprilSales(4532, 5500, "3"),
+                new AprilSales(4620, 5750, "4"),
+                new AprilSales(6504, 6000, "5"),
+                new AprilSales(6715, 6250, "6"),
+                new AprilSales(6234, 6500, "7"),
+                new AprilSales(6750, 6750, "8"),
+                new AprilSales(6300, 7000, "9"),
+                new AprilSales(6459, 7250, "10"),
+                new AprilSales(8305, 7500, "11"),
+                new AprilSales(7222, 7750, "12"),
+                new AprilSales(6734, 8000, "13"),
+                new AprilSales(7863, 8250, "14"),
+                new AprilSales(8743, 8500, "15"),
+                new AprilSales(8846, 8750, "16"),
+                new AprilSales(8567, 9000, "17"),
+                new AprilSales(8193, 9250, "18"),
+                new AprilSales(9458, 9500, "19"),
+                new AprilSales(9254, 9750, "20"),
+                new AprilSales(10234, 10000, "21"),
+                new AprilSales(9608, 10250, "22"),
+                new AprilSales(9350, 10500, "23"),
+                new AprilSales(8842, 10500, "24"),
+                new AprilSales(8349, 10500, "25"),
+                new AprilSales(8846, 10500, "26"),
+                new AprilSales(9567, 10500, "27"),
+                new AprilSales(10734, 10500, "28"),
+                new AprilSales(10124, 10500, "29"),
+                new AprilSales(9680, 10500, "30"),
+            };
+        }
+
         public static IList<PricePerformance> PricePerformanceData()
         {
             return new List<PricePerformance>
