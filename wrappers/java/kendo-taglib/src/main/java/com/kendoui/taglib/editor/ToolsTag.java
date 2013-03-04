@@ -16,19 +16,15 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ToolsTag extends BaseTag /* interfaces *//* interfaces */ {
+public class ToolsTag extends BaseTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
-
-
+//<< doEndTag
         EditorTag parent = (EditorTag)findParentWithClass(EditorTag.class);
 
-
         parent.setTools(this);
-
-//<< doEndTag
 
         return super.doEndTag();
     }
@@ -47,9 +43,6 @@ public class ToolsTag extends BaseTag /* interfaces *//* interfaces */ {
     @Override
     public void destroy() {
 //>> destroy
-
-        tools = null;
-
 //<< destroy
 
         super.destroy();

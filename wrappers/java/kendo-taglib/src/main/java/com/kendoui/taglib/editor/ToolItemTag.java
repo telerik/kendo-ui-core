@@ -1,13 +1,18 @@
 
 package com.kendoui.taglib.editor;
 
-import com.kendoui.taglib.BaseTag;
+
+import com.kendoui.taglib.BaseItemTag;
+
+
+
+
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ToolItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ToolItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -61,5 +66,25 @@ public class ToolItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     }
 
 //<< Attributes
+
+    @Override
+    protected String getSpriteCssClass() {
+        return null;
+    }
+
+    @Override
+    protected String getImageUrl() {
+        return null;
+    }
+
+    @Override
+    protected boolean getExpanded() {
+        return false;
+    }
+
+    @Override
+    protected boolean getEnabled() {
+        return false;
+    }
 
 }

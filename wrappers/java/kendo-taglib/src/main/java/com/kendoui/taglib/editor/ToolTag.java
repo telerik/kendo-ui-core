@@ -1,6 +1,9 @@
+
 package com.kendoui.taglib.editor;
 
 
+import java.util.List;
+import java.util.Map;
 
 import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.json.Function;
@@ -13,8 +16,10 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
+public class ToolTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
+    public List<Map<String, Object>> items;
+
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
@@ -48,6 +53,12 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public static String tagName() {
         return "editor-tool";
+    }
+
+    public void setItems(ToolItemsTag value) {
+
+        items = value.items();
+
     }
 
     public void setExec(ToolExecFunctionTag value) {
@@ -88,14 +99,6 @@ public class ToolTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setTooltip(String value) {
         setProperty("tooltip", value);
-    }
-    
-    public Object getItems() {
-        return getProperty("items");
-    }
-
-    public void setItems(Object value) {
-        setProperty("items", value);
     }
 
 //<< Attributes
