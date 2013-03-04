@@ -508,7 +508,7 @@ kendo_module({
         },
 
         stop: function() {
-            $(this.element).kendoStop();
+            $(this.element).kendoStop(true, true);
         },
 
         addRestoreProperties: function(restore) {
@@ -864,7 +864,7 @@ kendo_module({
                 children[idx].stop();
             }
 
-            $(this.element).kendoStop();
+            $(this.element).kendoStop(true, true);
             return this;
         },
 
