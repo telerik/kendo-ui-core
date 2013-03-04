@@ -10,6 +10,7 @@ body, html, #root, #root > div {
     padding: 0;
     background: #000;
     height: 100%;
+    width: 100%;
 }
 
 header, footer
@@ -91,7 +92,7 @@ header #slideshow-button {
     -webkit-transition: width 200ms;
     position: relative;
     top: 0;
-    width: 0;
+    width: 1px;
     float: right;
     height: 500px;
     color: white;
@@ -303,7 +304,7 @@ footer:hover .scroll-arrow {
 
 .aeroLogo,
 .aeroLogo a,
-#details
+#details.visible
 {
     font-weight: normal;
     margin: 0;
@@ -323,3 +324,41 @@ footer:hover .scroll-arrow {
 {
     font-weight: bold;
 }
+
+/* Small screen fallback */
+
+@media only screen and (max-device-width: 1024px) {
+
+    html,
+    body,
+    #image-wrap,
+    #image-inner-wrap
+    {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-transform: translatez(0);
+    }
+
+    #image-inner-wrap .loading,
+    #image-inner-wrap .image,
+    #details
+    {
+        height: 400px;
+    }
+
+    #image-inner-wrap
+    {
+        height: 402px;
+    }
+
+    #details.visible
+    {
+        width: 330px;
+    }
+
+    #details > div
+    {
+        width: 300px;
+    }
+
+}
+

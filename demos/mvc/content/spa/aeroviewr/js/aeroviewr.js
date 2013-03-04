@@ -43,6 +43,8 @@ var photos = new kendo.data.DataSource({
     }
 });
 
+$(document).on("touchmove", false);
+
 model = kendo.observable({
     photos: photos,
     current: null,
@@ -59,7 +61,7 @@ model = kendo.observable({
         _500px.api('/photos/' + photoID, { image_size: 4 }, function(response) {
             var photo = response.data.photo;
 
-            imagePlaceHolder.calculatedWidth = photo.calculatedWidth = ((500 / photo.height) * photo.width) + "px";
+            imagePlaceHolder.calculatedWidth = photo.calculatedWidth = (($("#image-inner-wrap").find(".image").height() / photo.height) * photo.width) + "px";
             photo.categoryName = photo.category ? categories[photo.category] : "";
             photo.noAvatar = photo.user.userpic_url == "/graphics/userpic.png";
             photo.backgroundPhoto = photo.image_url ? "url('" + photo.image_url + "')" : "";
