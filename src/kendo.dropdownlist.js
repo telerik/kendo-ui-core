@@ -442,14 +442,26 @@ kendo_module({
         },
 
         _search: function() {
-            var that = this;
+            var that = this,
+                dataSource = that.dataSource,
+                word = that._word;
+
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
                 that._word = "";
             }, that.options.delay);
 
-            that.search(that._word);
+            if (!that.ul[0].firstChild) {
+                dataSource.one(CHANGE, function () {
+                    if (dataSource.data()[0]) {
+                        that.search(word);
+                    }
+                }).fetch();
+                return;
+            }
+
+            that.search(word);
             that._triggerEvents();
         },
 
