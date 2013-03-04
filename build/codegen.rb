@@ -33,7 +33,7 @@ namespace :generate do
     end
 
     desc 'Generate all server wrappers and their API reference'
-    task :all => [:php, :java, 'mvc:api']
+    task :all => [:php, :jsp, 'mvc:api']
 
     namespace :mvc do
 
@@ -85,12 +85,12 @@ namespace :generate do
     end
 
     desc 'Generate JSP wrappers'
-    task :java => ['java:tld', 'java:jsp', 'java:api']
+    task :jsp => ['jsp:tld', 'jsp:wrappers', 'jsp:api']
 
-    namespace :java do
+    namespace :jsp do
 
         desc 'Generate JSP classes'
-        task :jsp do
+        task :wrappers do
 
             components = CodeGen::MarkdownParser.all(CodeGen::Java::JSP::Component)
 
