@@ -75,6 +75,23 @@ kendo_module({
             that._initValue();
         },
 
+        _filterSource: function(filter) {
+            var that = this,
+                options = that.options,
+                dataSource = that.dataSource,
+                expression = dataSource.filter() || {};
+
+            removeFiltersForField(expression, options.dataTextField);
+
+            if (filter) {
+                expression = expression.filters || [];
+                expression.push(filter);
+            }
+
+            dataSource.filter(expression);
+        },
+
+
         _initValue: function() {
             var that = this,
                 value = that.options.value;
@@ -893,7 +910,4 @@ kendo_module({
             });
         }
     }
-
-    ui.Select.removeFiltersForField = removeFiltersForField;
-
 })(window.kendo.jQuery);

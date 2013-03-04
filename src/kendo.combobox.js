@@ -13,7 +13,6 @@ kendo_module({
         Select = ui.Select,
         support = kendo.support,
         placeholderSupported = support.placeholder,
-        removeFiltersForField = Select.removeFiltersForField,
         keys = kendo.keys,
         ns = ".kendoComboBox",
         CLICK = "click" + ns,
@@ -698,22 +697,6 @@ kendo_module({
                     that._current.attr("aria-selected", true);
                 }
             }
-        },
-
-        _filterSource: function(filter) {
-            var that = this,
-                options = that.options,
-                dataSource = that.dataSource,
-                expression = dataSource.filter() || {};
-
-            removeFiltersForField(expression, options.dataTextField);
-
-            if (filter) {
-                expression = expression.filters || [];
-                expression.push(filter);
-            }
-
-            dataSource.filter(expression);
         },
 
         _wrapper: function() {

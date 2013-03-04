@@ -300,7 +300,7 @@ kendo_module({
             } else if (length >= that.options.minLength) {
                 that._open = true;
 
-                that.dataSource.filter({
+                that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
                     operator: options.filter,
                     field: options.dataTextField,

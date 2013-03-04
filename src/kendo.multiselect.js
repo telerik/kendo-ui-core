@@ -416,22 +416,6 @@ kendo_module({
             }
         },
 
-        _filterSource: function(filter) {
-            var that = this,
-                options = that.options,
-                dataSource = that.dataSource,
-                expression = dataSource.filter() || {};
-
-            removeFiltersForField(expression, options.dataTextField);
-
-            if (filter) {
-                expression = expression.filters || [];
-                expression.push(filter);
-            }
-
-            dataSource.filter(expression);
-        },
-
         _initValue: function() {
             var that = this,
                 value = that.options.value || that.element.val();
@@ -962,19 +946,6 @@ kendo_module({
         }
 
         return item;
-    }
-
-    function removeFiltersForField(expression, field) {
-        if (expression.filters) {
-            expression.filters = $.grep(expression.filters, function(filter) {
-                removeFiltersForField(filter, field);
-                if (filter.filters) {
-                    return filter.filters.length;
-                } else {
-                    return filter.field != field;
-                }
-            });
-        }
     }
 
     ui.plugin(MultiSelect);

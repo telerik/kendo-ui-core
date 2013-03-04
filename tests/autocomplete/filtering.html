@@ -139,6 +139,84 @@
                 }, 100);
             });
 
+            test("do not remove default filter expression", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataTextField: "text",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                ok(autocomplete.dataSource.filter());
+                equal(autocomplete.dataSource.filter().filters.length, 1);
+            });
+
+            test("append autocomplete filter expression ot the default one", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataTextField: "text",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                autocomplete.search("foo1");
+
+                ok(autocomplete.dataSource.filter());
+                equal(autocomplete.dataSource.filter().filters.length, 2);
+            });
+
+            test("do not append autocomplete filter twice", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataTextField: "text",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                autocomplete.search("foo1");
+                autocomplete.search("foo2");
+
+                equal(autocomplete.dataSource.filter().filters.length, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
