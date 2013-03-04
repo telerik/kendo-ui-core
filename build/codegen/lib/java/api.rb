@@ -196,6 +196,8 @@ More documentation is available at [kendo:<%= tag_name %>](<%= namespace %>/<%= 
     end
 
     class Generator
+        include Rake::DSL
+
         def initialize(path)
             @path = path
         end
@@ -211,6 +213,8 @@ More documentation is available at [kendo:<%= tag_name %>](<%= namespace %>/<%= 
             filename ||= "#{@path}#{tag.namespace}/#{tag.tag_name.downcase.sub(tag.namespace + '-', '')}.md"
 
             $stderr.puts "Updating #{filename}" if VERBOSE
+
+            ensure_path(filename)
 
             File.write(filename, tag.to_markdown.dos)
 

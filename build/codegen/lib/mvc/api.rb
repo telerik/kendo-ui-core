@@ -244,9 +244,9 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_returns(method)
-                method.xpath('returns').each do |returns|
-                    return returns.text.strip
-                end
+                returns = method.xpath('returns').first
+
+                return returns.text.strip if returns
             end
 
             def parse_summary(node)

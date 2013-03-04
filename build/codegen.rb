@@ -32,6 +32,9 @@ namespace :generate do
         end
     end
 
+    desc 'Generate all server wrappers and their API reference'
+    task :all => [:php, :java, 'mvc:api']
+
     namespace :mvc do
 
         desc 'Generate MVC API reference'
@@ -82,7 +85,7 @@ namespace :generate do
     end
 
     desc 'Generate JSP wrappers'
-    task :java => ['java:tld', 'java:jsp']
+    task :java => ['java:tld', 'java:jsp', 'java:api']
 
     namespace :java do
 
