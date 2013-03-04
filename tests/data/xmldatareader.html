@@ -150,6 +150,22 @@
                 equal(reader.xpathToMember(""), "");
             });
 
+            test("errors as a functon", function() {
+                var reader = new XmlDataReader({ errors: function() { return "foo"; } });
+
+                var result = reader.parse("<errors>someerror</errors>");
+
+                equal(reader.errors(result), "foo");
+            });
+
+            test("errors returns the errors tag content", function() {
+                var reader = new XmlDataReader({ errors: "/errors['#text']" });
+
+                var result = reader.parse("<errors>someerror</errors>");
+
+                equal(reader.errors(result), "someerror");
+            });
+
             test("total returns a number", function() {
                 var reader = new XmlDataReader({ total: "/foo/text()"});
 

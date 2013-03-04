@@ -14,6 +14,7 @@
                 total = options.total,
                 model = options.model,
                 parse = options.parse,
+                errors = options.errors,
                 data = options.data;
 
             if (model) {
@@ -50,6 +51,17 @@
                     };
                 } else if (typeof total == "function"){
                     that.total = total;
+                }
+            }
+
+            if (errors) {
+                if (typeof errors == "string") {
+                    errors = that.getter(errors);
+                    that.errors = function(data) {
+                        return errors(data) || null;
+                    };
+                } else if (typeof errors == "function"){
+                    that.errors = errors;
                 }
             }
 
