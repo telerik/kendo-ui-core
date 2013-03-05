@@ -260,13 +260,12 @@
                 var range = createRangeFromText(editor, '|foo|');
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url')
-                .val('foo');
+                $('#k-editor-link-url').val('foo');
 
-                $('#k-editor-link-target').attr('checked', true)
+                $('#k-editor-link-target').prop('checked', true);
 
                 $('.k-dialog-insert').click();
-                equal(editor.value(), '<a href="foo" target="_blank">foo</a>')
+                equal(editor.value(), '<a href="foo" target="_blank">foo</a>');
             });
 
             test('title text box is updated', function() {
