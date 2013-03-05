@@ -194,7 +194,6 @@ kendo_module({
 
                         if (url === "/" && initial) {
                             router.navigate(initial, true);
-                            that.pane.navigate(initial);
                             e.preventDefault(); // prevents from executing routeMissing, by default
                         }
                     },

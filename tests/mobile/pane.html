@@ -65,6 +65,12 @@
                 visible("#bar");
             });
 
+            test("implements initial view setting", 1, function() {
+                root.html('<div><div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div></div>');
+                new kendo.mobile.ui.Pane(root.children().first(), { initial: "#bar" });
+                visible("#bar");
+            });
+
             test("navigates when a button is pressed", 1, function() {
                 pane = buildPane('<div data-role="view" id="foo"><a data-role="button" id="barButton" href="#bar">Go to Bar</a></div><div data-role="view" id="bar">Bar</div>');
                 root.find("#barButton").trigger("mouseup");

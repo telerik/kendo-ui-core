@@ -45,13 +45,15 @@ kendo_module({
 
     var Pane = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, initial;
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
 
             element.addClass("km-pane");
+
+            that.history = [];
 
             that.loader = new Loader(element, {
                 loading: that.options.loading
@@ -68,7 +70,12 @@ kendo_module({
                 that.trigger(VIEW_SHOW, e);
             });
 
-            that.history = [];
+            initial = that.options.initial;
+
+            if (initial) {
+                that.navigate(initial);
+            }
+
             that._setupAppLinks();
         },
 
@@ -76,6 +83,7 @@ kendo_module({
             name: "Pane",
             transition: "",
             layout: "",
+            initial: undefined,
             loading: undefined
         },
 
