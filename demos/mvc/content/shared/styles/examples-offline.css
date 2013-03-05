@@ -379,3 +379,8 @@ ul.keyboard-legend li {
     text-align: center;
 }
 
+.k-chart {
+    margin: 0 auto 15px auto;
+    width: 700px;
+    height: 430px;
+}
