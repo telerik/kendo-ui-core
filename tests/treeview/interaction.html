@@ -129,8 +129,12 @@
                 ok(!item.hasClass("k-state-selected"));
             });
 
+            function treeviewFrom(html) {
+                return $(html).appendTo("body").kendoTreeView().data("kendoTreeView");
+            }
+
             test("TreeView preserves id attributes of the enhanced html", function() {
-                var treeview = $('<ul id="treeview"><li id="custom">text<li/></ul>').kendoTreeView().data("kendoTreeView");
+                var treeview = treeviewFrom('<ul id="treeview"><li id="custom">text</li></ul>');
 
                 treeview.wrapper.focus();
 
@@ -140,7 +144,7 @@
             });
 
             test("TreeView uses id of the LI as value for aria-activedescendant", function() {
-                var treeview = $('<ul id="treeview"><li id="custom">text<li/></ul>').kendoTreeView().data("kendoTreeView");
+                var treeview = treeviewFrom('<ul id="treeview"><li id="custom">text</li></ul>');
 
                 treeview.wrapper.focus();
 
