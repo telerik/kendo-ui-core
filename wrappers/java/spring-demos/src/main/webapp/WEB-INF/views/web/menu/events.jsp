@@ -3,7 +3,7 @@
 
 <demo:header />
 <div class="demo-section">
-	<kendo:menu name="Menu" open="onOpen" close="onClose" select="onSelect">
+	<kendo:menu name="Menu" open="onOpen" close="onClose" select="onSelect" activate="onActivate" deactivate="onDeactivate">
 	    <kendo:menu-items>
 		    <kendo:menu-item text="First Item">
 		        <kendo:menu-items>
@@ -65,6 +65,14 @@
 	function onSelect(e) {
 	    kendoConsole.log("Selected: " + $(e.item).children(".k-link").text());
 	}
+
+    function onActivate(e) {
+        kendoConsole.log("Activated: " + $(e.item).children(".k-link").text());
+    }
+
+    function onDeactivate(e) {
+        kendoConsole.log("Deactivated: " + $(e.item).children(".k-link").text());
+    }
 </script>
 <div class="console"></div>
 <demo:footer />

@@ -57,7 +57,9 @@ require_once '../../lib/Kendo/Autoload.php';
 
     $menu->select('onSelect')
          ->open('onOpen')
-         ->close('onClose');
+         ->close('onClose')
+         ->activate('onActivate')
+         ->deactivate('onDeactivate');
 
     echo $menu->render();
 ?>
@@ -73,6 +75,14 @@ require_once '../../lib/Kendo/Autoload.php';
 
     function onSelect(e) {
         kendoConsole.log("Selected: " + $(e.item).children(".k-link").text());
+    }
+
+    function onActivate(e) {
+        kendoConsole.log("Activated: " + $(e.item).children(".k-link").text());
+    }
+
+    function onDeactivate(e) {
+        kendoConsole.log("Deactivated: " + $(e.item).children(".k-link").text());
     }
 </script>
 
