@@ -142,6 +142,34 @@ its parent horizontally. You can also switch off the screen boundary detection c
     }
 
     /**
+    * Sets the activate event of the Menu.
+    * Fires when a sub menu gets opened and its animation finished.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Menu
+    */
+    public function activate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('activate', $value);
+    }
+
+    /**
+    * Sets the deactivate event of the Menu.
+    * Fires when a sub menu gets closed and its animation finished.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Menu
+    */
+    public function deactivate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('deactivate', $value);
+    }
+
+    /**
     * Sets the select event of the Menu.
     * Fires when a menu item gets selected.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

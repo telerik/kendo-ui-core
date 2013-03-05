@@ -67,8 +67,16 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
 
     }
 
+    public void setActivate(ActivateFunctionTag value) {
+        setEvent("activate", value.getBody());
+    }
+
     public void setClose(CloseFunctionTag value) {
         setEvent("close", value.getBody());
+    }
+
+    public void setDeactivate(DeactivateFunctionTag value) {
+        setEvent("deactivate", value.getBody());
     }
 
     public void setOpen(OpenFunctionTag value) {
@@ -127,6 +135,18 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
         setProperty("popupCollision", value);
     }
 
+    public String getActivate() {
+        Function property = ((Function)getProperty("activate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setActivate(String value) {
+        setProperty("activate", new Function(value));
+    }
+
     public String getClose() {
         Function property = ((Function)getProperty("close"));
         if (property != null) {
@@ -137,6 +157,18 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
 
     public void setClose(String value) {
         setProperty("close", new Function(value));
+    }
+
+    public String getDeactivate() {
+        Function property = ((Function)getProperty("deactivate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setDeactivate(String value) {
+        setProperty("deactivate", new Function(value));
     }
 
     public String getOpen() {

@@ -8790,6 +8790,16 @@ its parent horizontally. You can also switch off the screen boundary detection c
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when a sub menu gets opened and its animation finished.</description>
+            <name>activate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a sub menu gets closed and its animation finished.</description>
+            <name>deactivate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when a menu item gets selected.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
@@ -8910,6 +8920,18 @@ by setting the close animation.  Each animation also has a direction which can b
         <description>Fires before a sub menu gets opened.</description>
         <name>menu-open</name>
         <tag-class>com.kendoui.taglib.menu.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when a sub menu gets opened and its animation finished.</description>
+        <name>menu-activate</name>
+        <tag-class>com.kendoui.taglib.menu.ActivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when a sub menu gets closed and its animation finished.</description>
+        <name>menu-deactivate</name>
+        <tag-class>com.kendoui.taglib.menu.DeactivateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
