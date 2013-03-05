@@ -10,19 +10,43 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart" style="width: 800px; float: left;"></div>
+        <div id="chart" style="width: 600px; height: 600px; float: left;"></div>
+        <div id="chart-vertical" style="width: 600px; height: 600px; float: left;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
+                    series: [{
+                        data: [1, null ,3]
+                    }, {
+                        data: [3, null ,1]
+                    }],
+                    categoryAxis: {
+                        categories: ["A", "B", "C"]
+                    },
+                    tooltip: {
+                        visible: true,
+                        shared: true
+                    }
+                });
+
+                $("#chart-vertical").kendoChart({
+                    seriesDefaults: {
+                        type: "bar"
+                    },
                     series: [{
                         data: [1, 2 ,3]
                     }, {
                         data: [3, 2 ,1]
                     }],
                     categoryAxis: {
-                        categories: ["A", "B", "C"]
+                        categories: [
+                            new Date("2012-01-01"),
+                            new Date("2012-01-02"),
+                            new Date("2012-01-03")
+                        ]
                     },
                     tooltip: {
                         visible: true,
