@@ -968,6 +968,37 @@
             })();
 
             (function() {
+                // ------------------------------------------------------------
+                var pool;
+
+                module("IDPool", {
+                    setup: function() {
+                        pool = new dataviz.IDPool(3, "k", 100);
+                    }
+                });
+
+                test("returns ascending IDs", function() {
+                    equals(pool.get(), "k100");
+                    equals(pool.get(), "k101");
+                });
+
+                test("reuses IDs", function() {
+                    var id = pool.get();
+                    pool.free(id);
+                    equals(pool.get(), id);
+                });
+
+                test("pool does not grow beyond max size", function() {
+                    for (var i = 0; i < 10; i++) {
+                        pool.free("id" + i);
+                    }
+
+                    equals(pool._pool.length, 3);
+                });
+
+            })();
+
+            (function() {
                 var getElementById = dataviz.getElement,
                     container,
                     msie;

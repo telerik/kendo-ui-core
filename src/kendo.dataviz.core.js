@@ -2683,6 +2683,35 @@ kendo_module({
         };
     })();
 
+    var IDPool = Class.extend({
+        init: function(size, prefix, start) {
+            this._pool = [];
+            this._size = size;
+            this._id = start;
+            this._prefix = prefix;
+        },
+
+        get: function() {
+            var that = this,
+                pool = that._pool;
+
+            if (pool.length > 0) {
+                return pool.pop();
+            }
+
+            return that._prefix + that._id++;
+        },
+
+        free: function(id) {
+            var that = this,
+                pool = that._pool;
+
+            if (pool.length < that._size) {
+                pool.push(id);
+            }
+        }
+    });
+
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEGREE;
 
@@ -2900,6 +2929,7 @@ kendo_module({
         BarIndicatorAnimatin: BarIndicatorAnimatin,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
+        IDPool: IDPool,
         LRUCache: LRUCache,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
