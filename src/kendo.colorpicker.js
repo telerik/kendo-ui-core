@@ -3,7 +3,7 @@ kendo_module({
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
-    depends: [ "core", "popup", "slider" ]
+    depends: [ "core", "popup", "slider", "userevents" ]
 });
 
 (function($, parseInt, undefined){
@@ -394,39 +394,30 @@ kendo_module({
                 hsvRect = element.find(".k-hsv-rectangle"),
                 hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
 
-            // TODO: use drag&drop component to enable touch support
-            hsvRect.on(MOUSEDOWN_NS, function(ev){
-                hsvRect.addClass("k-dragging");
-                hsvHandle.focus();
-                var r = kendo.getOffset(hsvRect);
-                var rw = hsvRect.width();
-                var rh = hsvRect.height();
-                function onmove(ev) {
-                    var pos = kendo.touchLocation(ev);
-                    var pex = pos.x;
-                    var pey = pos.y;
-                    var dx = pex - r.left;
-                    var dy = pey - r.top;
-                    if (dx < 0) { dx = 0; }
-                    if (dx > rw) { dx = rw; }
-                    if (dy < 0) { dy = 0; }
-                    if (dy > rh) { dy = rh; }
-                    hsvHandle.css({
-                        left: dx + "px",
-                        top: dy + "px"
-                    });
-                    that._svChange(dx / rw, 1 - dy / rh);
-                    preventDefault(ev);
-                }
-                function onup(ev) {
-                    $(document)
-                        .unbind(MOUSEMOVE_NS, onmove)
-                        .unbind(MOUSEUP_NS, onup);
-                    preventDefault(ev);
+            that._hsvEvents = new kendo.UserEvents(hsvRect, {
+                global: true,
+                start: function() {
+                    var element = document.documentElement;
+
+                    hsvRect.addClass("k-dragging");
+                    hsvHandle.focus();
+                    this.rectOffset = kendo.getOffset(hsvRect);
+                    this.rw = hsvRect.width();
+                    this.rh = hsvRect.height();
+                },
+                move: function(e) {
+                    var rectOffset = this.rectOffset,
+                        dx = e.x.client - rectOffset.left,
+                        dy = e.y.client - rectOffset.top;
+
+                    dx = dx < 0 ? 0 : dx > this.rw ? this.rw : dx;
+                    dy = dy < 0 ? 0 : dy > this.rh ? this.rh : dy;
+
+                    that._svChange(dx / this.rw, 1 - dy / this.rh);
+                },
+                end: function() {
                     hsvRect.removeClass("k-dragging");
                 }
-                onmove(ev);
-                $(document).bind(MOUSEMOVE_NS, onmove).bind(MOUSEUP_NS, onup);
             });
 
             that._hsvRect = hsvRect;
@@ -434,15 +425,19 @@ kendo_module({
         },
         _onEnable: function(enable) {
             this._hueSlider.enable(enable);
+
             if (this._opacitySlider) {
                 this._opacitySlider.enable(enable);
             }
-            $("input", this.wrapper).attr("disabled", !enable);
-            var h = $(".k-draghandle", this._hsvRect);
+
+            this.wrapper.find("input").attr("disabled", !enable);
+
+            var handle = this._hsvRect.find(".k-draghandle");
+
             if (enable) {
-                h.attr("tabIndex", 0);
+                handle.attr("tabIndex", 0);
             } else {
-                h.removeAttr("tabIndex");
+                handle.removeAttr("tabIndex");
             }
         },
         _keydown: function(ev) {
@@ -938,7 +933,7 @@ kendo_module({
 
                 options._standalone = false;
 
-                var selector = this._selector = new selectorType($("<div></div>").appendTo(document.body), options);
+                var selector = this._selector = new selectorType($("<div />").appendTo(document.body), options);
 
                 that._popup = popup = selector.wrapper.kendoPopup({
                     anchor: that.wrapper
