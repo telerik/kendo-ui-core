@@ -96,19 +96,19 @@
                 {
                     "name": "ColorPalette",
                     "file": "kendo.colorpicker.js",
-                    "line": 146,
+                    "line": 145,
                     "col": 23
                 },
                 {
                     "name": "FlatColorPicker",
                     "file": "kendo.colorpicker.js",
-                    "line": 303,
+                    "line": 284,
                     "col": 26
                 },
                 {
                     "name": "ColorPicker",
                     "file": "kendo.colorpicker.js",
-                    "line": 776,
+                    "line": 778,
                     "col": 22
                 }
             ]
@@ -146,7 +146,7 @@
                 {
                     "name": "ComboBox",
                     "file": "kendo.combobox.js",
-                    "line": 36,
+                    "line": 34,
                     "col": 19
                 }
             ]
@@ -1045,7 +1045,7 @@
                 {
                     "name": "Layout",
                     "file": "kendo.mobile.view.js",
-                    "line": 329,
+                    "line": 330,
                     "col": 17
                 }
             ]
@@ -1074,14 +1074,15 @@
             "category": "web",
             "description": "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
             "depends": [
-                "core"
+                "core",
+                "userevents"
             ],
             "source": "kendo.numerictextbox.min.js",
             "widgets": [
                 {
                     "name": "NumericTextBox",
                     "file": "kendo.numerictextbox.js",
-                    "line": 41,
+                    "line": 40,
                     "col": 25
                 }
             ]

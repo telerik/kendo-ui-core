@@ -243,6 +243,35 @@ bundle :name => 'dataviz.commercial',
             'src/styles' => DATAVIZ_SRC_CSS
        }
 
+# Kendo Complete for ASP.NET MVC
+
+bundle :name => 'aspnetmvc.trial',
+       :license => 'src-license-complete',
+       :eula => 'trial',
+       :readme => 'README.KendoUI.Trial',
+       :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :intellisense => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :contents => {
+            'js' => TRIAL_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+       }
+       .merge(MVC_CONTENT),
+       :prerequisites => [
+           'mvc:assets',
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
+       ]
 
 bundle :name => 'aspnetmvc.commercial',
        :license => 'src-license-complete',
@@ -376,6 +405,8 @@ BUNDLES = [
     'mobile.commercial',
     'dataviz.commercial',
     'aspnetmvc.commercial',
+    'aspnetmvc.trial',
+    'aspnetmvc.hotfix.commercial',
     'jsp.commercial',
     'aspnetmvc.hotfix.commercial',
     'trial.hotfix',
