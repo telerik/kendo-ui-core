@@ -1660,7 +1660,7 @@ function pad(number, digits, end) {
                 var lowPrefix = prefix.toLowerCase();
 
                 transforms = {
-                    css: "-" + lowPrefix + "-",
+                    css: (lowPrefix != "ms") ? "-" + lowPrefix + "-" : "",
                     prefix: prefix,
                     event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : ""
                 };
