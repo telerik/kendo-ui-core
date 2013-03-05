@@ -27,8 +27,6 @@ kendo_module({
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         MOUSEDOWN_NS = "touchstart" + NS + " mousedown" + NS,
-        MOUSEMOVE_NS = "touchmove" + NS + " mousemove" + NS,
-        MOUSEUP_NS = "touchend" + NS + " mouseup" + NS,
         KEYDOWN_NS = "keydown" + NS,
 
         browser = kendo.support.browser,
@@ -397,8 +395,6 @@ kendo_module({
             that._hsvEvents = new kendo.UserEvents(hsvRect, {
                 global: true,
                 start: function() {
-                    var element = document.documentElement;
-
                     hsvRect.addClass("k-dragging");
                     hsvHandle.focus();
                     this.rectOffset = kendo.getOffset(hsvRect);
