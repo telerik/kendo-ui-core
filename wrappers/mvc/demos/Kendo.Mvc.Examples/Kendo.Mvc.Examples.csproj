@@ -360,6 +360,9 @@
     <Compile Include="Models\BulletChartItem.cs" />
     <Compile Include="Models\BulletChartLocalDataViewModel.cs" />
     <Compile Include="Models\AprilSales.cs" />
+    <Compile Include="Models\CompensationStats.cs" />
+    <Compile Include="Models\SocialBenefitType.cs" />
+    <Compile Include="Models\SocialBenefits.cs" />
     <Compile Include="Models\CrimeData.cs" />
     <Compile Include="Models\DataFilter.cs" />
     <Compile Include="Models\Northwind.designer.cs">
@@ -467,6 +470,7 @@
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\sparklines\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />

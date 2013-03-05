@@ -3,7 +3,7 @@ using System;
 
 namespace Kendo.Mvc.Examples.Models
 {
-    public class ChartDataRepository
+    public partial class ChartDataRepository
     {
         public static IList<AprilSales> AprilSalesData() 
         {
