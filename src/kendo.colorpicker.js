@@ -402,15 +402,11 @@ kendo_module({
             }
 
             that._hsvEvents = new kendo.UserEvents(hsvRect, {
-                allowSelection: true,
                 global: true,
-                select: function(e) {
-                    var ev = e.event;
-                    if (ev.type == "mousedown") {
-                        hsvHandle.focus();
-                        update(ev.pageX, ev.pageY);
-                        e.preventDefault();
-                    }
+                press: function(e) {
+                    hsvHandle.focus();
+                    e = e.event;
+                    update(e.pageX, e.pageY);
                 },
                 start: function() {
                     hsvRect.addClass("k-dragging");
