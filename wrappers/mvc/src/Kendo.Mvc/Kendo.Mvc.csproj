@@ -254,7 +254,6 @@
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBubbleSeriesHighlightBuilder.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartSeriesHighlightBuilderBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPieSeriesHighlightBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartCandlestickSeriesHighlightBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartOHLCSeriesHighlightBuilder.cs" />
@@ -262,6 +261,7 @@
     <Compile Include="UI\Chart\Fluent\ChartAxisCrosshairTooltipBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBulletSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBulletTargetBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartSeriesHighlightBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />

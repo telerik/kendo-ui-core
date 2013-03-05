@@ -74,6 +74,19 @@ namespace Kendo.Mvc.UI.Tests
             GetJson().ContainsKey("line").ShouldBeFalse();
         }
 
+        [Fact]
+        public void Should_serialize_visible()
+        {
+            highlight.Visible = false;
+            GetJson()["visible"].ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Should_not_serialize_visible_if_not_set()
+        {
+            GetJson().ContainsKey("visible").ShouldBeFalse();
+        }
+
         private IDictionary<string, object> GetJson()
         {
             return highlight.CreateSerializer().Serialize();
