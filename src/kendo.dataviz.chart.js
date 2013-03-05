@@ -290,15 +290,15 @@ kendo_module({
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
+                highlight: {
+                    visible: true
+                },
                 groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
                 labels: {}
             },
             series: [],
             tooltip: {
                 visible: false
-            },
-            highlight: {
-                visible: true
             },
             transitions: true,
             valueAxis: {},
@@ -709,7 +709,6 @@ kendo_module({
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 tooltipOptions = chart.options.tooltip,
-                highlightOptions = chart.options.highlight,
                 point;
 
             if (chart._suppressHover || !highlight ||
@@ -727,10 +726,7 @@ kendo_module({
                     tooltip.show(point);
                 }
 
-                highlightOptions = deepExtend({}, highlightOptions, point.options.highlight);
-                if (highlightOptions.visible) {
-                    highlight.show(point);
-                }
+                highlight.show(point);
 
                 return true;
             }
@@ -752,7 +748,6 @@ kendo_module({
                 coords = chart._eventCoordinates(e),
                 point = chart._activePoint,
                 tooltipOptions,
-                highlightOptions,
                 owner,
                 seriesPoint;
 
@@ -769,10 +764,7 @@ kendo_module({
                             tooltip.show(seriesPoint);
                         }
 
-                        highlightOptions = deepExtend({}, options.highlight, point.options.highlight);
-                        if (highlightOptions.visible) {
-                            highlight.show(seriesPoint);
-                        }
+                        highlight.show(seriesPoint);
                     }
                 }
             } else {
@@ -823,7 +815,6 @@ kendo_module({
                 tooltip = chart._tooltip,
                 tooltipOptions = options.tooltip,
                 highlight = chart._highlight,
-                highlightOptions = options.highlight,
                 index,
                 points;
 
@@ -836,9 +827,7 @@ kendo_module({
                         tooltip.showAt(points, coords);
                     }
 
-                    if (highlightOptions.visible) {
-                        highlight.show(points);
-                    }
+                    highlight.show(points);
                 } else {
                     tooltip.hide();
                 }
@@ -7225,27 +7214,30 @@ kendo_module({
                 overlays = highlight._overlays,
                 overlayElement,
                 i,
-                point;
+                point,
+                pointOptions;
 
             highlight.hide();
-            highlight.visible = true;
             highlight._points = points = [].concat(points);
 
             for (i = 0; i < points.length; i++) {
                 point = points[i];
+                pointOptions = point.options;
 
-                if (point.highlightOverlay) {
-                    overlay = point.highlightOverlay(view, highlight.options);
+                if (!pointOptions || pointOptions.highlight.visible) {
+                    if (point.highlightOverlay) {
+                        overlay = point.highlightOverlay(view, highlight.options);
 
-                    if (overlay) {
-                        overlayElement = view.renderElement(overlay);
-                        viewElement.appendChild(overlayElement);
-                        overlays.push(overlayElement);
+                        if (overlay) {
+                            overlayElement = view.renderElement(overlay);
+                            viewElement.appendChild(overlayElement);
+                            overlays.push(overlayElement);
+                        }
                     }
-                }
 
-                if (point.toggleHighlight) {
-                    point.toggleHighlight(view);
+                    if (point.toggleHighlight) {
+                        point.toggleHighlight(view);
+                    }
                 }
             }
         },
@@ -7256,7 +7248,8 @@ kendo_module({
                 overlays = highlight._overlays,
                 overlay,
                 i,
-                point;
+                point,
+                pointOptions;
 
             while (overlays.length) {
                 overlay = highlight._overlays.pop();
@@ -7266,15 +7259,17 @@ kendo_module({
             if (points) {
                 for (i = 0; i < points.length; i++) {
                     point = points[i];
+                    pointOptions = point.options;
 
-                    if (point.toggleHighlight) {
-                        point.toggleHighlight(highlight.view);
+                    if (!pointOptions || pointOptions.highlight.visible) {
+                        if (point.toggleHighlight) {
+                            point.toggleHighlight(highlight.view);
+                        }
                     }
                 }
             }
 
             highlight._points = [];
-            highlight.visible = false;
         }
     });
 

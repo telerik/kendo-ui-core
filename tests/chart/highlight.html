@@ -61,6 +61,19 @@
                     });
                 });
 
+                test("Does not retrieve overlay element when highlight is disabled", function() {
+                    highlight.show({
+                        options: {
+                            highlight: {
+                                visible: false
+                            }
+                        },
+                        highlightOverlay: function() {
+                            ok(false);
+                        }
+                    });
+                });
+
                 test("Sets fill on overlay element", 1, function() {
                     highlight.show({
                         highlightOverlay: function(definition, options) {
@@ -91,16 +104,6 @@
                     highlight.show(ElementStub);
                     highlight.hide();
                     equals($(".overlay").length, 0);
-                });
-
-                test("Sets visible property on show", function() {
-                    highlight.show(ElementStub);
-                    ok(highlight.visible);
-                });
-
-                test("Sets visible property on hide", function() {
-                    highlight.hide();
-                    ok(!highlight.visible);
                 });
 
                 // ------------------------------------------------------------
@@ -165,6 +168,19 @@
                     });
                 });
 
+                test("Does not call toggleHighlight on show (highlight disabled)", function() {
+                    highlight.show({
+                        options: {
+                            highlight: {
+                                visible: false
+                            }
+                        },
+                        toggleHighlight: function() {
+                            ok(false);
+                        }
+                    });
+                });
+
                 test("Calls toggleHighlight on hide", 2, function() {
                     highlight.show({
                         toggleHighlight: function(view) {
@@ -174,14 +190,18 @@
                     highlight.hide();
                 });
 
-                test("Sets visible property on show", function() {
-                    highlight.show(ElementStub);
-                    ok(highlight.visible);
-                });
-
-                test("Sets visible property on hide", function() {
+                test("Does not call toggleHighlight on hide (highlight disabled)", function() {
+                    highlight.show({
+                        options: {
+                            highlight: {
+                                visible: false
+                            }
+                        },
+                        toggleHighlight: function() {
+                            ok(false);
+                        }
+                    });
                     highlight.hide();
-                    ok(!highlight.visible);
                 });
 
                 // ------------------------------------------------------------
