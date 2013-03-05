@@ -296,6 +296,9 @@ kendo_module({
             tooltip: {
                 visible: false
             },
+            highlight: {
+                visible: true
+            },
             transitions: true,
             valueAxis: {},
             plotArea: {},
@@ -832,7 +835,7 @@ kendo_module({
                     tooltip.showAt(coords);
                 }
 
-                if (highlight.options.visible !== false && highlight._index !== index) {
+                if (chart.options.highlight.visible !== false && highlight._index !== index) {
                     highlight.show(points);
                     highlight._index = index;
                 }
