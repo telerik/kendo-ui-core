@@ -69,10 +69,20 @@
                     kendoConsole.log("Selected: " + $(e.item).children(".k-link").text());
                 }
 
+                function onActivate(e) {
+                    kendoConsole.log("Activated: " + $(e.item).children(".k-link").text());
+                }
+
+                function onDeactivate(e) {
+                    kendoConsole.log("Deactivated: " + $(e.item).children(".k-link").text());
+                }
+
                 $("#menu").kendoMenu({
                     select: onSelect,
                     open: onOpen,
-                    close: onClose
+                    close: onClose,
+                    activate: onActivate,
+                    deactivate: onDeactivate
                 });
             });
         </script>

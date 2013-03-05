@@ -64,7 +64,7 @@
                     children.Add().Text("Sub Item 5");
                 });
         })
-        .Events(e => e.Open("open").Close("close").Select("select"))
+        .Events(e => e.Open("open").Close("close").Select("select").Activate("activate").Deactivate("deactivate"))
     %>
 </div>
 <div class="demo-section">
@@ -83,6 +83,14 @@
 
     function select(e) {
         kendoConsole.log("Selected: " + $(e.item).children(".k-link").text());
+    }
+
+    function activate(e) {
+        kendoConsole.log("Activated: " + $(e.item).children(".k-link").text());
+    }
+
+    function deactivate(e) {
+        kendoConsole.log("Deactivated: " + $(e.item).children(".k-link").text());
     }
 </script>
 

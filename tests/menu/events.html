@@ -11,100 +11,76 @@
         <script src="../../src/kendo.menu.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
-        <script type="text/javascript">
-
-            var isRaised;
-
-             function getRootItem(index) {
-                 return $('#Menu2').find('> .k-item').eq(index)
-             }
-
-             function getMenu() {
-                 return $("#Menu2").data("kendoMenu");
-             }
-
-             function onSelect() {
-                 isRaised = true;
-             }
-
-        </script>
+        <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet/less"/>
+        <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+        <script type="text/javascript" src="../../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
 
-    <ul id="Menu2" class="k-widget k-reset k-header k-menu" style="position: absolute; visibility: hidden">
-        <li class="k-item k-state-default" style=""><span class="k-link"><img
-                src="../../playground/Icons/Suites/mvc.png" class="k-image" alt="image">ASP.NET MVC<span
-                class="k-icon k-i-arrow-s"></span></span>
-
-            <ul class="k-group">
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Mvc/Grid.png" class="k-image" alt="image">Grid</span>
+    <ul id="Menu2" style="position: absolute; visibility: hidden">
+        <li><img src="../../playground/Icons/Suites/mvc.png">ASP.NET MVC
+            <ul>
+                <li><img
+                        src="../../playground/Icons/Mvc/Grid.png">Grid
                 </li>
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Mvc/Menu.png" class="k-image" alt="image">Menu<span
-                class="k-icon k-i-arrow-e"></span></span>
-                    <ul class="k-group">
-                        <li class="k-item k-state-default"><span class="k-link"><img
-                                src="../../playground/Icons/Mvc/Grid.png" class="k-image" alt="image">Grid</span>
+                <li><img
+                        src="../../playground/Icons/Mvc/Menu.png">Menu
+                    <ul>
+                        <li><img
+                                src="../../playground/Icons/Mvc/Grid.png">Grid
                         </li>
-                        <li class="k-item k-state-default"><span class="k-link"><img
-                                src="../../playground/Icons/Mvc/Menu.png" class="k-image" alt="image">Menu</span>
+                        <li><img
+                                src="../../playground/Icons/Mvc/Menu.png">Menu
                         </li>
-                        <li class="k-item k-state-default"><span class="k-link"><img
+                        <li><img
                                 src="../../playground/Icons/Mvc/PanelBar.png" class="k-image"
-                                alt="image">PanelBar</span></li>
-                        <li class="k-item k-state-default"><span class="k-link"><img
+                                alt="image">PanelBar</li>
+                        <li><img
                                 src="../../playground/Icons/Mvc/TabStrip.png" class="k-image"
-                                alt="image">TabStrip</span></li>
+                                alt="image">TabStrip</li>
                     </ul>
                 </li>
-                <li class="k-item k-state-default"><span class="k-link"><img
+                <li><img
                         src="../../playground/Icons/Mvc/PanelBar.png" class="k-image"
-                        alt="image">PanelBar</span></li>
-                <li class="k-item k-state-default"><span class="k-link"><img
+                        alt="image">PanelBar</li>
+                <li><img
                         src="../../playground/Icons/Mvc/TabStrip.png" class="k-image"
-                        alt="image">TabStrip</span></li>
+                        alt="image">TabStrip</li>
             </ul>
-        </li><li class="k-item k-state-default"><span class="k-link"><img src="../../playground/Icons/Suites/sl.png"
-                                                                     class="k-image" alt="image">Silverlight<span
-                class="k-icon k-i-arrow-s"></span></span>
-            <ul class="k-group">
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Sl/GridView.gif" class="k-image" alt="image">GridView</span>
+        </li><li><img src="../../playground/Icons/Suites/sl.png">Silverlight
+            <ul>
+                <li><img
+                        src="../../playground/Icons/Sl/GridView.gif">GridView
                 </li>
-                <li class="k-item k-state-default"><span class="k-link"><img
+                <li><img
                         src="../../playground/Icons/Sl/Scheduler.gif" class="k-image"
-                        alt="image">Scheduler</span></li>
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Sl/Docking.gif" class="k-image" alt="image">Docking</span>
+                        alt="image">Scheduler
                 </li>
-                <li class="k-item k-state-disabled"><span class="k-link"><img
-                        src="../../playground/Icons/Sl/Chart.gif" class="k-image" alt="image">Chart</span></li>
-                <li class="k-item k-state-default"><a href="http://www.telerik.com/products/silverlight.aspx"
-                                                      class="k-link">... and 28 more!</a></li>
+                <li><img
+                        src="../../playground/Icons/Sl/Docking.gif">Docking
+                </li>
+                <li class="k-item k-state-disabled"><img
+                        src="../../playground/Icons/Sl/Chart.gif">Chart
+                </li>
+                <li><a href="http://www.telerik.com/products/silverlight.aspx">... and 28 more!</a></li>
             </ul>
-        </li><li class="k-item k-state-default"><span class="k-link"><img src="../../playground/Icons/Suites/ajax.png"
-                                                                     class="k-image" alt="image">ASP.NET AJAX<span
-                class="k-icon k-i-arrow-s"></span></span>
-            <ul class="k-group">
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Ajax/Grid.png" class="k-image" alt="image">Grid</span></li>
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Ajax/Editor.png" class="k-image" alt="image">Editor</span>
+        </li><li><img src="../../playground/Icons/Suites/ajax.png">ASP.NET AJAX
+            <ul>
+                <li><img
+                        src="../../playground/Icons/Ajax/Grid.png">Grid</li>
+                <li><img
+                        src="../../playground/Icons/Ajax/Editor.png">Editor
                 </li>
-                <li class="k-item k-state-default"><span class="k-link"><img
+                <li><img
                         src="../../playground/Icons/Ajax/Scheduler.png" class="k-image"
-                        alt="image">Scheduler</span></li>
-                <li class="k-item k-state-default"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"
-                                                      class="k-link">... and 28 more!</a></li>
+                        alt="image">Scheduler
+                </li>
+                <li><a href="http://www.telerik.com/products/aspnet-ajax.aspx">... and 28 more!</a></li>
             </ul>
-        </li><li class="k-item k-state-default"><a href="#Menu-4" class="k-link"><img
-                src="../../playground/Icons/Suites/orm.png" class="k-image" alt="image">OpenAccess ORM<span
-                class="k-icon k-i-arrow-s"></span></a>
-            <ul class="k-group">
-                <li class="k-item">
-                    <div id="Menu-4" class="k-content">
+        </li><li><a href="#Menu-4"><img src="../../playground/Icons/Suites/orm.png">OpenAccess ORM</a>
+            <ul>
+                <li>
+                    <div id="Menu-4">
                         <img alt="Telerik OpenAccess" src="../../playground/Icons/orm-comparison.png">
                         <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">
                             Telerik OpenAccess ORM
@@ -115,35 +91,54 @@
                     </div>
                 </li>
             </ul>
-        </li><li class="k-item k-state-default"><span class="k-link"><img src="../../playground/Icons/Suites/rep.png"
-                class="k-image" alt="image">Reporting</span></li><li class="k-item k-state-default"><span class="k-link"><img
-                src="../../playground/Icons/Suites/sitefinity.png" class="k-image" alt="image">Sitefinity ASP.NET CMS</span>
-        </li><li style="border-right: 0;" class="k-item k-state-default"><span class="k-link">Other products<span
-                class="k-icon k-i-arrow-s"></span></span>
-            <ul class="k-group">
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Suites/test.png" class="k-image" alt="image">Web Testing Tools</span>
+        </li>
+            <li><img src="../../playground/Icons/Suites/rep.png">Reporting
+            </li>
+            <li>
+                <img src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS
+            </li>
+            <li>Other products
+            <ul>
+                <li><img
+                        src="../../playground/Icons/Suites/test.png">Web Testing Tools
                 </li>
-                <li class="k-item k-state-default"><span class="k-link"><img
-                        src="../../playground/Icons/Suites/win.png" class="k-image" alt="image">WinForms UI Controls</span>
+                <li><img
+                        src="../../playground/Icons/Suites/win.png">WinForms UI Controls
                 </li>
-                <li class="k-item k-state-default"><span class="k-link"><img
+                <li><img
                         src="../../playground/Icons/Suites/wpf.png" class="k-image"
-                        alt="image">WPF UI Controls</span></li>
+                        alt="image">WPF UI Controls
+                </li>
             </ul>
         </li>
     </ul>
 
 <script type="text/javascript">
 
+        function onSelect() {
+            isRaised = true;
+        }
+
+        function onOpen(e) {
+            if (window.preventOpen) {
+                e.preventDefault();
+            }
+        }
+
+        function onClose(e) {
+            if (window.preventClose) {
+                e.preventDefault();
+            }
+        }
+
         function getRootItem(index) {
 			return $('> .k-item', menu.element).eq(index);
         }
 
-        $("#Menu2").kendoMenu({ animation: false, select: onSelect });
+        $("#Menu2").kendoMenu({ animation: false, select: onSelect, open: onOpen, close: onClose });
 
-        var menu,
-            CLICK = kendo.support.touch ? "touchend" : "click";
+        var menu, isRaised,
+            CLICK = "click";
 
         module("Menu / Client Events", {
             setup: function () {
@@ -161,7 +156,7 @@
 
             item.trigger(CLICK);
 
-            equals(triggerCount, 1);
+            equal(triggerCount, 1);
         });
 
         test('clicking disabled item should not raise onSelect event on parent item', function() {
@@ -174,32 +169,40 @@
             ok(!isRaised);
         });
 
-        test("open event can be canceled", function() {
-            var opened = false;
+        asyncTest("activate event is fired after open", function() {
+            var activated = false;
 
-            menu.open = function() { opened = true };
-
-            menu.bind("open", function(e) {
-                e.preventDefault();
+            menu.bind("activate", function() {
+                activated = true;
             });
 
-            menu._mouseenter({}, $("li:first", menu.element)[0]);
+            menu.open(menu.element.children("li:eq(1)"));
 
-            equals(opened, false);
+            setTimeout(function () {
+                equal(activated, true);
+                start();
+            }, 100);
         });
 
-        test("close event can be canceled", function() {
-            var closed = false;
+        test("open event can be canceled", function() {
+            window.preventOpen = true;
 
-            menu.close = function() { closed = true };
+            menu.open(menu.element.children("li:first"));
 
-            menu.bind("close", function(e) {
-                e.preventDefault();
-            });
+            equal(menu.element.find(">li:first ul").is(":visible"), false);
+        });
 
-            menu._mouseleave({}, $("li:first", menu.element)[0]);
+        asyncTest("close event can be canceled", function() {
+            window.preventClose = true;
+            window.preventOpen = false;
 
-            equals(closed, false);
+            menu.open(menu.element.children("li:eq(2)"));
+            setTimeout(function () {
+                menu.close(menu.element.children("li:eq(2)"));
+
+                equal(menu.element.find(">li:eq(2) ul").is(":visible"), true);
+                start();
+            }, 100);
         });
 
     </script>

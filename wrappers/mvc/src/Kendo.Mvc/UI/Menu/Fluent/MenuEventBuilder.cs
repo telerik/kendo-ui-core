@@ -101,6 +101,95 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the inline handler of the Activate client-side event
+        /// </summary>
+        /// <param name="onActivateAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().Menu()
+        ///            .Name("Menu")
+        ///            .Events(events => events.Activate(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MenuEventBuilder Activate(Func<object, object> handler)
+        {
+            Handler("activate", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Activate client-side event.
+        /// </summary>
+        /// <param name="onActivateHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .Events(events => events.Activate("onActivate"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MenuEventBuilder Activate(string handler)
+        {
+            Handler("activate", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Deactivate client-side event
+        /// </summary>
+        /// <param name="onDeactivateAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().Menu()
+        ///            .Name("Menu")
+        ///            .Events(events => events.Deactivate(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MenuEventBuilder Deactivate(Func<object, object> handler)
+        {
+            Handler("deactivate", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Deactivate client-side event.
+        /// </summary>
+        /// <param name="onDeactivateHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .Events(events => events.Deactivate("onDeactivate"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MenuEventBuilder Deactivate(string handler)
+        {
+            Handler("deactivate", handler);
+            return this;
+        }
+
+        /// <summary>
         /// Defines the inline handler of the Select client-side event
         /// </summary>
         /// <param name="onSelectAction">The handler code wrapped in a text tag (Razor syntax).</param>

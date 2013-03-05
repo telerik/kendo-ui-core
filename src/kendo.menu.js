@@ -32,6 +32,8 @@ kendo_module({
         IMAGE = "k-image",
         SELECT = "select",
         ZINDEX = "zIndex",
+        ACTIVATE = "activate",
+        DEACTIVATE = "deactivate",
         MOUSEENTER = kendo.support.pointers ? "MSPointerOver" : "mouseenter",
         MOUSELEAVE = kendo.support.pointers ? "MSPointerOut" : "mouseleave",
         KENDOPOPUP = "kendoPopup",
@@ -294,6 +296,8 @@ kendo_module({
         events: [
             OPEN,
             CLOSE,
+            ACTIVATE,
+            DEACTIVATE,
             SELECT
         ],
 
@@ -531,6 +535,8 @@ kendo_module({
 
                         if (!popup) {
                             popup = ul.kendoPopup({
+                                activate: function() { that.trigger(ACTIVATE, { item: this.wrapper.parent() }) },
+                                deactivate: function() { that.trigger(DEACTIVATE, { item: this.wrapper.parent() }) },
                                 origin: directions.origin,
                                 position: directions.position,
                                 collision: options.popupCollision !== undefined ? options.popupCollision : (parentHorizontal ? "fit" : "fit flip"),
