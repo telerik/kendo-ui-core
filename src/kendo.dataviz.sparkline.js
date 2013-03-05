@@ -93,6 +93,9 @@ kendo_module({
                 overlay: {
                     gradient: null
                 },
+                highlight: {
+                    visible: false
+                },
                 border: {
                     width: 0
                 },
@@ -100,9 +103,6 @@ kendo_module({
                     size: 2,
                     visible: false
                 }
-            },
-            highlight: {
-                visible: false
             },
             tooltip: {
                 visible: true,
