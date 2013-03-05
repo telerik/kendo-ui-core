@@ -11,6 +11,9 @@ module kendo {
     declare function destroy(element: JQuery): void;
     declare function format(format: string, ...values: any[]): string;
     declare function htmlEncode(value: string): string;
+    declare function init(selector: string, ...namespaces: any[]): void;
+    declare function init(element: JQuery, ...namespaces: any[]): void;
+    declare function init(element: Element, ...namespaces: any[]): void;
     declare function observable(data: any): kendo.data.ObservableObject;
     declare function parseDate(value: any, format?: string, culture?: string): Date;
     declare function parseFloat(value: any, culture?: string): number;
@@ -581,6 +584,10 @@ module kendo.ui {
 }
 
 module kendo.mobile.ui {
+    declare function init(selector: string): void;
+    declare function init(element: JQuery): void;
+    declare function init(element: Element): void;
+
     class Widget extends kendo.ui.Widget {
     }
 
