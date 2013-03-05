@@ -47,6 +47,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating if the highlight is visible
+        /// </summary>
+        public bool? Visible
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartSeriesHighlightSerializer(this);

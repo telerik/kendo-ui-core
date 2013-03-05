@@ -10,108 +10,51 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart" style="width: 80px; float: left;"></div>
-        <div id="chart1" style="width: 80px; float: left;"></div>
-        <div id="chart2" style="width: 80px; float: left;"></div>
+        <div id="chart" style="width: 600px; height: 600px; float: left;"></div>
+        <div id="chart-vertical" style="width: 600px; height: 600px; float: left;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
-                    theme: "blueopal",
-                    legend: {
-                        visible: false
-                    },
                     series: [{
-                        name: "u",
-                        type: "verticalBullet",
-                        data: [ { target: 3, value: 2}]
+                        data: [1, null ,3]
+                    }, {
+                        data: [3, null ,1]
                     }],
                     categoryAxis: {
-                        categories: ["A"]
+                        categories: ["A", "B", "C"]
                     },
-                    valueAxis: {
-                        plotBands: [{
-                            from: 0, to: 1, color: "red", opacity: 0.5
-                        },{
-                            from: 1, to: 2.5, color: "green", opacity: 0.5
-                        },{
-                            from: 2.5, to: 4, color: "blue", opacity: 0.5
-                        }],
-                        majorGridLines: {
-                            visible: false
-                        }
-                    },
-                    tootlip: {
-                        visible: true
+                    tooltip: {
+                        visible: true,
+                        shared: true
                     }
                 });
-                $("#chart1").kendoChart({
-                    theme: "blueopal",
-                    legend: {
-                        visible: false
+
+                $("#chart-vertical").kendoChart({
+                    seriesDefaults: {
+                        type: "bar"
                     },
                     series: [{
-                        name: "u",
-                        type: "verticalBullet",
-                        data: [ { target: 3, value: 2}]
+                        data: [1, 2 ,3]
+                    }, {
+                        data: [3, 2 ,1]
                     }],
                     categoryAxis: {
-                        categories: ["B"]
+                        categories: [
+                            new Date("2012-01-01"),
+                            new Date("2012-01-02"),
+                            new Date("2012-01-03")
+                        ]
                     },
-                    valueAxis: {
-                        plotBands: [{
-                            from: 0, to: 1, color: "red", opacity: 0.5
-                        },{
-                            from: 1, to: 2.5, color: "green", opacity: 0.5
-                        },{
-                            from: 2.5, to: 4, color: "blue", opacity: 0.5
-                        }],
-                        majorGridLines: {
-                            visible: false
-                        }
-                    },
-                    tootlip: {
-                        visible: true
-                    }
-                });
-                $("#chart2").kendoChart({
-                    theme: "blueopal",
-                    legend: {
-                        visible: false
-                    },
-                    series: [{
-                        name: "u",
-                        type: "verticalBullet",
-                        data: [ { target: 3, value: 2}]
-                    }],
-                    categoryAxis: {
-                        categories: ["C"]
-                    },
-                    valueAxis: {
-                        plotBands: [{
-                            from: 0, to: 1, color: "red", opacity: 0.5
-                        },{
-                            from: 1, to: 2.5, color: "green", opacity: 0.5
-                        },{
-                            from: 2.5, to: 4, color: "blue", opacity: 0.5
-                        }],
-                        majorGridLines: {
-                            visible: false
-                        }
-                    },
-                    tootlip: {
-                        visible: true
+                    tooltip: {
+                        visible: true,
+                        shared: true
                     }
                 });
             });
         </script>
-
-        <style>
-            #chart .k-tooltip {
-                padding: 5px;
-            }
-        </style>
     </body>
 </html>
 

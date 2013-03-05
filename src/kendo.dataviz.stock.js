@@ -172,6 +172,18 @@ kendo_module({
             chart._dataBound = true;
         },
 
+        _trackSharedTooltip: function(coords) {
+            var chart = this,
+                plotArea = chart._plotArea,
+                pane = plotArea.paneByPoint(coords);
+
+            if (pane && pane.options.name === NAVIGATOR_PANE) {
+                chart._unsetActivePoint();
+            } else {
+                Chart.fn._trackSharedTooltip.call(chart, coords);
+            }
+        },
+
         destroy: function() {
             var chart = this;
 

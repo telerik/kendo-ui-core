@@ -100,7 +100,7 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **
+    * Configures the appearance of highlighted points.
     * @param \Kendo\Dataviz\UI\StockChartSeriesItemHighlight|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */

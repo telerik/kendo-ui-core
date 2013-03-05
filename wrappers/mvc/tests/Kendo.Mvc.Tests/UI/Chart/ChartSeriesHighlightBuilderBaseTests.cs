@@ -67,5 +67,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Visible_should_return_builder()
+        {
+            builder.Visible(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Visible_should_set_border_width_and_color()
+        {
+            builder.Visible(false);
+            highlight.Visible.ShouldEqual(false);
+        }
     }
 }

@@ -190,5 +190,25 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TSeriesBuilder;
         }
+
+        /// <summary>
+        /// Configures the series highlight
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>        
+        public TSeriesBuilder Highlight(Action<ChartSeriesHighlightBuilder> configurator)
+        {
+            configurator(new ChartSeriesHighlightBuilder(Series.Highlight));
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Configures the highlight visibility
+        /// </summary>
+        /// <param name="configurator">The highlight visibility.</param>
+        public TSeriesBuilder Highlight(bool visible)
+        {
+            Series.Highlight.Visible = visible;
+            return this as TSeriesBuilder;
+        }
     }
 }

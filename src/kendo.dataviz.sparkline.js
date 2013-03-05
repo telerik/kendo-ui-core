@@ -101,6 +101,9 @@ kendo_module({
                     visible: false
                 }
             },
+            highlight: {
+                visible: false
+            },
             tooltip: {
                 visible: true,
                 shared: true

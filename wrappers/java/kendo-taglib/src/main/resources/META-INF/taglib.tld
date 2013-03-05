@@ -1859,7 +1859,7 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
-        <description>Configures the appearance of highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **</description>
+        <description>Configures the appearance of highlighted points.</description>
         <name>chart-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
@@ -1871,16 +1871,22 @@ If not specified, the available space is split evenly between the series.Availab
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The opacity of the highlighted points.</description>
+            <description>The opacity of the highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the series points should be highlighted.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>
 
     <tag>
-        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.** Applicable to bubble, pie, candlestick and ohlc series. **</description>
         <name>chart-seriesItem-highlight-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightBorderTag</tag-class>
         <body-content>empty</body-content>
@@ -11468,7 +11474,7 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
-        <description>Configures the appearance of highlighted points.** Applicable to pie series. **</description>
+        <description>Configures the appearance of highlighted points.</description>
         <name>sparkline-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
@@ -11480,16 +11486,22 @@ If not specified, the available space is split evenly between the series.Availab
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The opacity of the highlighted points.</description>
+            <description>The opacity of the highlighted points.** Applicable to pie series. **</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the series points should be highlighted.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>
 
     <tag>
-        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.** Applicable to pie series. **</description>
         <name>sparkline-seriesItem-highlight-border</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemHighlightBorderTag</tag-class>
         <body-content>empty</body-content>
@@ -14344,6 +14356,12 @@ Available for column series.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
+        <attribute>
+            <description>A value indicating if the series points should be highlighted.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
@@ -15113,7 +15131,7 @@ Available for column series.</description>
 
 
     <tag>
-        <description>Configures the appearance of highlighted points.** Applicable to candlestick and ohlc series. **</description>
+        <description>Configures the appearance of highlighted points.</description>
         <name>stockChart-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightTag</tag-class>
         <body-content>JSP</body-content>
@@ -15125,16 +15143,22 @@ Available for column series.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The opacity of the highlighted points.</description>
+            <description>The opacity of the highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>A value indicating if the series points should be highlighted.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
 
     </tag>
 
     <tag>
-        <description>The border of highlighted points. The color is computed automatically from the base point color.</description>
+        <description>The border of highlighted points. The color is computed automatically from the base point color.** Applicable to bubble, pie, candlestick and ohlc series. **</description>
         <name>stockChart-seriesItem-highlight-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemHighlightBorderTag</tag-class>
         <body-content>empty</body-content>

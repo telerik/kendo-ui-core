@@ -6,7 +6,16 @@ class StockChartSeriesItemHighlight extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The border of highlighted points. The color is computed automatically from the base point color.
+    * A value indicating if the series points should be highlighted.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
+    */
+    public function visible($value) {
+        return $this->setProperty('visible', $value);
+    }
+
+    /**
+    * The border of highlighted points. The color is computed automatically from the base point color.** Applicable to bubble, pie, candlestick and ohlc series. **
     * @param \Kendo\Dataviz\UI\StockChartSeriesItemHighlightBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
     */
@@ -33,7 +42,7 @@ class StockChartSeriesItemHighlight extends \Kendo\SerializableObject {
     }
 
     /**
-    * The opacity of the highlighted points.
+    * The opacity of the highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemHighlight
     */

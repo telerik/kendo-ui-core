@@ -19,7 +19,8 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("opacity", highlight.Opacity, () => highlight.Opacity.HasValue)
-                .Add("color", highlight.Color, () => highlight.Color.HasValue());
+                .Add("color", highlight.Color, () => highlight.Color.HasValue())
+                .Add("visible", highlight.Visible, () => highlight.Visible.HasValue);
 
             var borderData = highlight.Border.CreateSerializer().Serialize();
             if (borderData.Count > 0)

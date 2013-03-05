@@ -100,7 +100,7 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Configures the appearance of highlighted points.** Applicable to bubble, pie, candlestick and ohlc series. **
+    * Configures the appearance of highlighted points.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemHighlight|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

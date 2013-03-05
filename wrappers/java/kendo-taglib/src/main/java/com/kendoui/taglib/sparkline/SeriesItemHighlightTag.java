@@ -71,6 +71,14 @@ public class SeriesItemHighlightTag extends  BaseTag  /* interfaces */ /* interf
         setProperty("opacity", value);
     }
 
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
+    }
+
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
+    }
+
 //<< Attributes
 
 }
