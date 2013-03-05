@@ -659,7 +659,7 @@ kendo_module({
                 element;
 
             if (modelId) {
-                element = model.modelMap.get(modelId);
+                element = model.modelMap[modelId];
             }
 
             if (element && element.aliasFor) {

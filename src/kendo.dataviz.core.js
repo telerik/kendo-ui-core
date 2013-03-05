@@ -44,6 +44,8 @@ kendo_module({
         FORMAT_REGEX = /\{\d+:?/,
         HEIGHT = "height",
         ID_PREFIX = "k",
+        ID_POOL_SIZE = 1000,
+        ID_START = 10000,
         INITIAL_ANIMATION_DURATION = 600,
         LEFT = "left",
         LINEAR = "linear",
@@ -455,7 +457,7 @@ kendo_module({
             if (element.discoverable) {
                 root = element.getRoot();
                 if (root) {
-                    root.modelMap.put(modelId, element);
+                    root.modelMap[modelId] = element;
                 }
             }
 
@@ -466,7 +468,7 @@ kendo_module({
             var element = this,
                 options = element.options;
 
-            options.modelId = uniqueId();
+            options.modelId = IDPool.instance.get();
             element.discoverable = true;
         },
 
@@ -478,7 +480,8 @@ kendo_module({
                 i;
 
             if (root && modelId) {
-                root.modelMap.remove(modelId);
+                root.modelMap[modelId] = undefined;
+                IDPool.instance.free(modelId);
             }
 
             for (i = 0; i < children.length; i++) {
@@ -521,7 +524,7 @@ kendo_module({
             var root = this;
 
             // Logical tree ID to element map
-            root.modelMap = createModelMap();
+            root.modelMap = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -2459,6 +2462,37 @@ kendo_module({
         yellow: "ffff00", yellowgreen: "9acd32"
     };
 
+    var IDPool = Class.extend({
+        init: function(size, prefix, start) {
+            this._pool = [];
+            this._size = size;
+            this._id = start;
+            this._prefix = prefix;
+        },
+
+        get: function() {
+            var that = this,
+                pool = that._pool;
+
+            if (pool.length > 0) {
+                return pool.pop();
+            }
+
+            return that._prefix + that._id++;
+        },
+
+        free: function(id) {
+            var that = this,
+                pool = that._pool;
+
+            if (pool.length < that._size) {
+                pool.push(id);
+            }
+        }
+    });
+
+    IDPool.instance = new IDPool(ID_POOL_SIZE, ID_PREFIX, ID_START);
+
     var LRUCache = Class.extend({
         init: function(size) {
             this._size = size;
@@ -2517,58 +2551,6 @@ kendo_module({
             }
         }
     });
-
-    var Hashtable = Class.extend({
-        init: function() {
-            this._map = {};
-        },
-
-        put: function(key, value) {
-            this._map[key] = value;
-        },
-
-        get: function(key) {
-            return this._map[key];
-        },
-
-        remove: function(key) {
-            delete this._map[key];
-        }
-    });
-
-    var List = Class.extend({
-        init: function() {
-            this._keys = [];
-            this._values = [];
-        },
-
-        put: function(key, value) {
-            this._keys.push(key);
-            this._values.push(value);
-        },
-
-        get: function(key) {
-            var index = indexOf(key, this._keys);
-
-            if (index !== -1) {
-                return this._values[index];
-            }
-        },
-
-        remove: function(key) {
-            var list = this,
-                index = indexOf(key, list._keys);
-
-            if (index !== -1) {
-                list._keys[index] = null;
-                list._values[index] = null;
-            }
-        }
-    });
-
-    function createModelMap() {
-        return kendo.support.browser.msie ? new List() : new Hashtable();
-    }
 
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),
@@ -2682,35 +2664,6 @@ kendo_module({
             return ID_PREFIX + lfsr.toString(16);
         };
     })();
-
-    var IDPool = Class.extend({
-        init: function(size, prefix, start) {
-            this._pool = [];
-            this._size = size;
-            this._id = start;
-            this._prefix = prefix;
-        },
-
-        get: function() {
-            var that = this,
-                pool = that._pool;
-
-            if (pool.length > 0) {
-                return pool.pop();
-            }
-
-            return that._prefix + that._id++;
-        },
-
-        free: function(id) {
-            var that = this,
-                pool = that._pool;
-
-            if (pool.length < that._size) {
-                pool.push(id);
-            }
-        }
-    });
 
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEGREE;
