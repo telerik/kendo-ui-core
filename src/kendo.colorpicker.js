@@ -393,9 +393,10 @@ kendo_module({
                 hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
 
             function update(x, y) {
-                var rectOffset = kendo.getOffset(hsvRect);
-                var rw = hsvRect.width(), rh = hsvRect.height();
-                var dx = x - rectOffset.left, dy = y - rectOffset.top;
+                var offset = this.offset,
+                    dx = x - offset.left, dy = y - offset.top,
+                    rw = this.width, rh = this.height;
+
                 dx = dx < 0 ? 0 : dx > rw ? rw : dx;
                 dy = dy < 0 ? 0 : dy > rh ? rh : dy;
                 that._svChange(dx / rw, 1 - dy / rh);
@@ -404,16 +405,18 @@ kendo_module({
             that._hsvEvents = new kendo.UserEvents(hsvRect, {
                 global: true,
                 press: function(e) {
+                    this.offset = kendo.getOffset(hsvRect);
+                    this.width = hsvRect.width();
+                    this.height = hsvRect.height();
                     hsvHandle.focus();
-                    e = e.event;
-                    update(e.pageX, e.pageY);
+                    update.call(this, e.x.location, e.y.location);
                 },
                 start: function() {
                     hsvRect.addClass("k-dragging");
                     hsvHandle.focus();
                 },
                 move: function(e) {
-                    update(e.x.location, e.y.location);
+                    update.call(this, e.x.location, e.y.location);
                 },
                 end: function() {
                     hsvRect.removeClass("k-dragging");
