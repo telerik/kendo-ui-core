@@ -6,7 +6,7 @@ end
 def output(title, issues)
     return if issues.length == 0
 
-    out = "<h4>#{encode(title)}</h4><ul>"
+    out = "<p><strong>#{encode(title)}</strong></p><ul>"
 
     issues.each do |issue|
         out += "<li>#{encode(issue.title)}</li>"
@@ -15,6 +15,25 @@ def output(title, issues)
     out += "</ul>"
 
     out
+end
+
+ICON_MAP = {
+    'DropDownList' => 'DropDown',
+    'DateTimePicker' => 'DatePicker',
+    'Linear Gauge' => 'Gauge',
+    'Radial Gauge' => 'Gauge',
+    'Sparkline' => 'Sparklines',
+    'StockChart' => 'ChartStock'
+}
+
+def icon_for(component)
+    if (ICON_MAP[component]) then
+        component = ICON_MAP[component]
+    end
+
+    component = encode(component)
+
+    return "<img src='/libraries/Kendo_UI_Icons_32x32/#{component}_kendoui.sflb' class='poBoxIcon' width='32' height='32' alt='Kendo UI #{component} Icon'>"
 end
 %>
 
@@ -33,9 +52,16 @@ end
             font: .75em/1.5 Tahoma, sans-serif;
         }
 
+        h1 {
+            font-size: 2.2em;
+            font-size: normal;
+        }
+
         h2 {
-            margin: 1em 0 .3em;
-            border-bottom: 1px solid #ccc;
+            font-size: 2em;
+            font-weight: normal;
+
+            margin: 1.2em 0 .3em;
             padding-bottom: .2em;
         }
 
@@ -46,23 +72,56 @@ end
             box-shadow: 0 0 10px #ccc;
             padding: 1em 2em 2em;
         }
+
+        .poBoxIcon {
+            float: left;
+            font-size: 2em;
+            margin: 1.2em .5em 0 0;
+        }
+
+        .poTopLine {
+            border-top: 2px solid #e1e1e1;
+            margin: 17px 0 40px 0;
+        }
     </style>
+
+    <base href="http://www.kendoui.com/web/whats-new/release-notes/">
 </head>
 <body>
     <div id="page">
-        <h1>Release notes for Kendo UI v<%= VERSION %></h1>
-% suites.each do |suite|
-        <h2><%= encode(suite.title) %></h2>
+        <h1 class="title">Release notes for Kendo UI v<%= VERSION %></h1>
 
-        <%= output("What's new", suite.features) %>
-        <%= output("What's fixed", suite.bugs) %>
+% suites.each do |suite|
+        <h1><%= encode(suite.title) %></h1>
+        <div class="tClear poTopLine">
+            <div class="poBoxIconText">
+                <%= output("What's new", suite.features) %>
+                <%= output("What's fixed", suite.bugs) %>
+            </div>
+        </div>
+
+% if suite.new_components.any? then
+        <h1>New UI Widgets</h1>
+% suite.new_components.each do |issue|
+        <div class="tClear poTopLine">
+            <%= icon_for(issue.title) %>
+            <div class="poBoxIconText">
+                <h2><%= encode(issue.title) %></h2>
+            </div>
+        </div>
+% end
+
+        <h1>UI Widgets Features and Updates</h1>
+% end
 
 % suite.components.each do |component_title, component|
-        <h3><%= encode(component_title) %></h3>
+        <div class="tClear poTopLine">
+            <%= icon_for(component_title) %>
+            <h2><%= encode(component_title) %></h2>
 
-        <%= output("What's new", component.features) %>
-        <%= output("What's fixed", component.bugs) %>
-
+            <%= output("What's new", component.features) %>
+            <%= output("What's fixed", component.bugs) %>
+        </div>
 % end
 % end
     </div>

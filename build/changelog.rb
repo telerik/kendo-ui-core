@@ -5,13 +5,14 @@ require 'erb'
 CHANGELOG_TEMPLATE = ERB.new(File.read(File.join(File.dirname(__FILE__), 'changelog.html.erb')), 0, '%<>')
 
 class Issue
-    attr_reader :title, :suites, :components, :internal, :framework, :bug
+    attr_reader :title, :suites, :components, :internal, :framework, :bug, :new_component
     def initialize(issue)
         @title = issue.title
         @labels = issue.labels.map {|l| l.name }
 
         @internal = @labels.join(" ") =~ /Documentation|Internal|Deleted/
         @bug = @labels.include? "Bug"
+        @new_component = @labels.include? "New widget"
 
         @suites = filtered_labels :s
 
@@ -20,16 +21,12 @@ class Issue
         @components = filtered_labels(:w) | filtered_labels(:f)
     end
 
-    def add_to(set)
-        if @bug
-            set.bugs.push(self)
-        else
-            set.features.push(self)
-        end
-    end
-
     def filtered_labels(prefix)
         @labels.grep(/#{prefix}:/i) { |l| l.split(":")[1].strip }
+    end
+
+    def framework_construct?()
+        @labels.join(" ") =~ /\b(NavBar|ScrollView|ModalView|View|ButtonGroup|Application|ActionSheet|Popup|FX)\b/
     end
 end
 
@@ -50,18 +47,21 @@ class Component
 end
 
 class Suite
-    attr_reader :bugs, :features, :title, :key
+    attr_reader :bugs, :features, :title, :key, :new_components
     attr_accessor :components
     def initialize(title, key)
         @title = title
         @key = key
         @features = []
         @bugs = []
+        @new_components = []
         @components = {}
     end
 
     def add(issue)
-        if issue.components.length == 0
+        if issue.new_component
+            @new_components.push issue
+        elsif issue.components.length == 0 || issue.framework_construct?
             if issue.bug
                 @bugs.push issue
             else
