@@ -105,8 +105,6 @@ kendo_module({
 
             that._enable();
 
-            that._popup();
-
             that._old = that._accessor();
 
             if (element[0].id) {

@@ -388,6 +388,10 @@ kendo_module({
                 isRtl: kendo.support.isRtl(wrapper)
             }));
 
+            that.popup.one(OPEN, function() {
+                that._height(that._data().length);
+            });
+
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
