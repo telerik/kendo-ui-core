@@ -3,7 +3,7 @@ kendo_module({
     name: "TabStrip",
     category: "mobile",
     description: "The mobile TabStrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.",
-    depends: [ "mobile.application" ]
+    depends: [ "core" ]
 });
 
 (function($, undefined) {
@@ -33,7 +33,22 @@ kendo_module({
         ],
 
         switchTo: function(url) {
-            this._setActiveItem(this.element.find('a[href$="' + url + '"]'));
+            var tabs = this.element.find('a'),
+                tab,
+                path,
+                parts,
+                idx = 0,
+                length = tabs.length;
+
+            for (; idx < length; idx ++) {
+                tab = tabs[idx];
+                path = tab.href.replace(/(\#.+)(\?.+)$/, "$1"); // remove the fragment query string - http://www.foo.com?foo#bar**?baz=qux**
+
+                if (path.indexOf(url, path.length - url.length) !== -1) {
+                    this._setActiveItem($(tab));
+                    return;
+                }
+            }
         },
 
         clear: function() {

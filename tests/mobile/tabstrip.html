@@ -36,12 +36,11 @@
 
             module("mobile tabstrip", {
                 setup: function() {
-                    kendo.application = {};
-                    stub(kendo.application, "navigate");
                     dom = $('<nav> \
                             <a href="foo" id="foo">foo</a> \
                             <a href="#bar" id="bar" data-icon="genius">bar</a> \
                             <a href="baz" id="baz"><img  />bar</a> \
+                            <a href="#qux?foo=bar" id="qux">qux</a> \
                         </nav>');
                     tabstrip = new Tabstrip(dom);
                 },
@@ -124,6 +123,11 @@
             test("switches to the button with the anchor url", function() {
                 tabstrip.switchTo("#bar");
                 ok(dom.find("#bar").is(".km-state-active"), "button is active");
+            });
+
+            test("switches to the button with the same url path", function() {
+                tabstrip.switchTo("#qux");
+                ok(dom.find("#qux").is(".km-state-active"), "button is active");
             });
 
             test("does not deselect current button if non-existent url", function() {
