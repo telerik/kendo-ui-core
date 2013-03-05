@@ -535,8 +535,8 @@ kendo_module({
 
                         if (!popup) {
                             popup = ul.kendoPopup({
-                                activate: function() { that.trigger(ACTIVATE, { item: this.wrapper.parent() }) },
-                                deactivate: function() { that.trigger(DEACTIVATE, { item: this.wrapper.parent() }) },
+                                activate: function() { that.trigger(ACTIVATE, { item: this.wrapper.parent() }); },
+                                deactivate: function() { that.trigger(DEACTIVATE, { item: this.wrapper.parent() }); },
                                 origin: directions.origin,
                                 position: directions.position,
                                 collision: options.popupCollision !== undefined ? options.popupCollision : (parentHorizontal ? "fit" : "fit flip"),
