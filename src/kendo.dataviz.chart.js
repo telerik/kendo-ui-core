@@ -111,6 +111,7 @@ kendo_module({
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEMOVE_NS = "mousemove" + NS,
+        MOUSEMOVE_THROTTLE = 20,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         OHLC = "ohlc",
@@ -727,7 +728,7 @@ kendo_module({
                 }
 
                 highlightOptions = deepExtend({}, highlightOptions, point.options.highlight);
-                if (highlightOptions.visible !== false) {
+                if (highlightOptions.visible) {
                     highlight.show(point);
                 }
 
@@ -745,6 +746,7 @@ kendo_module({
 
         _mouseMoveTracking: function(e) {
             var chart = this,
+                options = chart.options,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
                 coords = chart._eventCoordinates(e),
@@ -759,21 +761,16 @@ kendo_module({
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
-                        tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
                         seriesPoint.hover(chart, e);
                         chart._activePoint = seriesPoint;
 
-                        // TODO: Check directly for visible
+                        tooltipOptions = deepExtend({}, options.tooltip, point.options.tooltip);
                         if (tooltipOptions.visible) {
                             tooltip.show(seriesPoint);
                         }
 
-                        // TODO: Check directly for visible
-                        highlightOptions = deepExtend(
-                            {}, chart.options.highlight, point.options.highlight
-                        );
-
-                        if (highlightOptions.visible !== false) {
+                        highlightOptions = deepExtend({}, options.highlight, point.options.highlight);
+                        if (highlightOptions.visible) {
                             highlight.show(seriesPoint);
                         }
                     }
@@ -784,7 +781,25 @@ kendo_module({
             }
         },
 
-        _updateCrosshairs: function(coords) {
+        _mousemove: function(e) {
+            var chart = this,
+                now = new Date(),
+                timestamp = chart._mousemove.timestamp;
+
+            if (!timestamp || now - timestamp > MOUSEMOVE_THROTTLE) {
+                var coords = chart._eventCoordinates(e);
+
+                chart._trackCrosshairs(coords);
+
+                if (chart._sharedTooltip()) {
+                    chart._trackSharedTooltip(coords);
+                }
+
+                chart._mousemove.timestamp = now;
+            }
+        },
+
+        _trackCrosshairs: function(coords) {
             var crosshairs = this._plotArea.crosshairs,
                 i,
                 current;
@@ -800,45 +815,35 @@ kendo_module({
             }
         },
 
-        _mousemove: function(e) {
-            // TODO: Add _mousemoveThrottle
-            var chart = this;
-            if (chart._lastTime && new Date() - chart._lastTime < 20) {
-                return;
-            }
-
-            var plotArea = chart._plotArea,
+        _trackSharedTooltip: function(coords) {
+            var chart = this,
+                options = chart.options,
+                plotArea = chart._plotArea,
                 categoryAxis = plotArea.categoryAxis,
-                coords = chart._eventCoordinates(e),
-                index,
-                points,
                 tooltip = chart._tooltip,
+                tooltipOptions = options.tooltip,
                 highlight = chart._highlight,
-                tooltipOptions = tooltip.options || {},
-                pane = plotArea.paneByPoint(coords);
+                highlightOptions = options.highlight,
+                index,
+                points;
 
-            chart._lastTime = new Date();
-
-            chart._updateCrosshairs(coords);
-
-            if (chart._sharedTooltip()) {
-                // TODO: Move to StockChart CategoryTooltip implementation
-                if (pane && pane.options.name === "_navigator") {
-                    chart._unsetActivePoint();
-                    return;
-                }
-
-                index = categoryAxis.getCategoryIndex(coords);
+            index = categoryAxis.getCategoryIndex(coords);
+            if (index !== chart._tooltipCategoryIx) {
                 points = plotArea.pointsByCategoryIndex(index);
 
-                if (tooltipOptions.visible) {
-                    tooltip.showAt(coords);
+                if (points.length > 0) {
+                    if (tooltipOptions.visible) {
+                        tooltip.showAt(points, coords);
+                    }
+
+                    if (highlightOptions.visible) {
+                        highlight.show(points);
+                    }
+                } else {
+                    tooltip.hide();
                 }
 
-                if (chart.options.highlight.visible !== false && highlight._index !== index) {
-                    highlight.show(points);
-                    highlight._index = index;
-                }
+                chart._tooltipCategoryIx = index;
             }
         },
 
@@ -846,14 +851,11 @@ kendo_module({
             var chart = this,
                 plotArea = chart._plotArea,
                 crosshairs = plotArea.crosshairs,
-                length = crosshairs.length,
                 tooltip = chart._tooltip,
                 i;
 
-            if (length) {
-                for (i = 0; i < length; i++) {
-                    crosshairs[i].hide();
-                }
+            for (i = 0; i < crosshairs.length; i++) {
+                crosshairs[i].hide();
             }
 
             setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
@@ -7454,27 +7456,15 @@ kendo_module({
             categoryFormat: "{0:d}"
         },
 
-        showAt: function(point) {
+        showAt: function(points, coords) {
             var tooltip = this,
                 options = tooltip.options,
                 plotArea = tooltip.plotArea,
                 axis = plotArea.categoryAxis,
-                index = axis.getCategoryIndex(point),
-                category = axis.getCategory(point),
-                points = plotArea.pointsByCategoryIndex(index),
+                index = axis.getCategoryIndex(coords),
+                category = axis.getCategory(coords),
                 slot = axis.getSlot(index),
                 content;
-
-            if (tooltip.index == index) {
-                return;
-            }
-
-            tooltip.index = index;
-
-            if (points.length === 0) {
-                tooltip.hide();
-                return;
-            }
 
             if (!(options.border || {}).color) {
                 options.border.color = points[0].options.color;
@@ -7482,11 +7472,11 @@ kendo_module({
 
             content = tooltip._content(points, category);
             tooltip.element.html(content);
-            tooltip.anchor = tooltip._slotAnchor(point, slot);
+            tooltip.anchor = tooltip._slotAnchor(coords, slot);
 
             tooltip.setStyle(options);
 
-            BaseTooltip.fn.show.call(tooltip, point);
+            BaseTooltip.fn.show.call(tooltip);
         },
 
         _slotAnchor: function(point, slot) {
