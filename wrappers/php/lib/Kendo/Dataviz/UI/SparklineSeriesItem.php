@@ -100,7 +100,7 @@ class SparklineSeriesItem extends \kendo\SerializableObject {
     }
 
     /**
-    * Configures the appearance of highlighted points.** Applicable to pie series. **
+    * Configures the appearance of highlighted points.
     * @param \Kendo\Dataviz\UI\SparklineSeriesItemHighlight|array $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem
     */
