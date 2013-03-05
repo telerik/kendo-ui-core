@@ -392,24 +392,32 @@ kendo_module({
                 hsvRect = element.find(".k-hsv-rectangle"),
                 hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._keydown, that));
 
+            function update(x, y) {
+                var rectOffset = kendo.getOffset(hsvRect);
+                var rw = hsvRect.width(), rh = hsvRect.height();
+                var dx = x - rectOffset.left, dy = y - rectOffset.top;
+                dx = dx < 0 ? 0 : dx > rw ? rw : dx;
+                dy = dy < 0 ? 0 : dy > rh ? rh : dy;
+                that._svChange(dx / rw, 1 - dy / rh);
+            }
+
             that._hsvEvents = new kendo.UserEvents(hsvRect, {
+                allowSelection: true,
                 global: true,
+                select: function(e) {
+                    var ev = e.event;
+                    if (ev.type == "mousedown") {
+                        hsvHandle.focus();
+                        update(ev.pageX, ev.pageY);
+                        e.preventDefault();
+                    }
+                },
                 start: function() {
                     hsvRect.addClass("k-dragging");
                     hsvHandle.focus();
-                    this.rectOffset = kendo.getOffset(hsvRect);
-                    this.rw = hsvRect.width();
-                    this.rh = hsvRect.height();
                 },
                 move: function(e) {
-                    var rectOffset = this.rectOffset,
-                        dx = e.x.client - rectOffset.left,
-                        dy = e.y.client - rectOffset.top;
-
-                    dx = dx < 0 ? 0 : dx > this.rw ? this.rw : dx;
-                    dy = dy < 0 ? 0 : dy > this.rh ? this.rh : dy;
-
-                    that._svChange(dx / this.rw, 1 - dy / this.rh);
+                    update(e.x.location, e.y.location);
                 },
                 end: function() {
                     hsvRect.removeClass("k-dragging");
