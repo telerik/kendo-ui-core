@@ -47,11 +47,7 @@
 
                 <div id="footer">
                     <span id="copyright">Copyright &#169; 2011 - 2013 Telerik Inc. All rights reserved.</span>
-                    <ul id="bottom-menu">
-                        <li><a href="#">About this demo</a></li>
-                        <li><a href="#">What is Kendo UI?</a></li>
-                        <li><a href="#">See more demos</a></li>
-                    </ul>
+
                 </div>
             </div>
         </script>
@@ -110,8 +106,8 @@
 				id="description">
 						<h1 data-bind="text: current.name"></h1>
 						<p data-bind="text: current.description"></p>
-                        <p id="price-quantity" data-bind="text: price"></p>
 						<div id="details-total">
+							<p id="price-quantity" data-bind="text: price"></p>
 							<button class="buy" data-bind="click: addToCart">Add to cart</button>
 						</div>
 					</div>
@@ -158,7 +154,7 @@
                 <a class="view-details" href="\#/menu/#: id #">
                     <img class="main-image" src="@Url.Content("~/content/spa/websushi/images/200/#= image #")"  alt="#: name#" title="#: name #" />
                     <strong data-bind="text: name"></strong>
-                    <span class="price"><span>$</span>#: price #</span>
+                    <span class="price"><span>$</span><span data-bind="text: price"></span></span>
                 </a>
 
                 <button class="add-to-cart" data-bind="click: addToCart">Add to cart</button>

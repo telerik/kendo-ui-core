@@ -160,7 +160,7 @@ h1 a{
 #shop-info {
     height: 122px;
     background: #000000;
-    margin-bottom: 21px;
+    margin-bottom: 20px;
     overflow: hidden;
     -webkit-transition: all 200ms ease-out;
 }
@@ -296,21 +296,6 @@ h3{
     position: relative;
 }
 
-.add-to-cart {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 38px;
-    width: 200px;
-    border-top: 1px dotted #a6a6a6;
-    color: #d60041;
-    background-color: #fff;
-    font-size: 11px;
-    line-height: 38px;
-    vertical-align: middle;
-    text-transform: uppercase;
-}
-
 .view-selected-items, .view-selected-items:hover {
     display: block;
     position: relative;
@@ -332,10 +317,6 @@ h3{
     background-image: url('images/remove-icon.png');
     background-repeat: no-repeat;
     background-position: 50% 50%;
-}
-
-#main-section{
-    padding-top: 21px;
 }
 
 #main-section ul li {
@@ -397,7 +378,7 @@ h3{
     font-size: 21px;
     font-weight: normal;
     padding-top: 25px;
-    padding-bottom: 14px;
+    padding-bottom: 5px;
     width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -405,18 +386,23 @@ h3{
 }
 
 .add-to-cart {
-    height: 38px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 37px;
     width: 200px;
-    border-top: 1px dotted #a6a6a6;
+    padding-bottom: 3px;
     color: #d60041;
-    font-size: 11px;
-    line-height: 38px;
-    vertical-align: middle;
+    font-size: 12px;
     text-transform: uppercase;
+    background-color: transparent;
+    border-top: 1px dotted #a6a6a6;
 }
 
 .add-to-cart:before{
-    content:"+";
+    content:"+ ";
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 
@@ -462,13 +448,6 @@ h3{
     line-height: 1em;
 }
 
-.price span{
-    font-size: 10px;
-    display: inline-block;
-    vertical-align: text-top;
-    padding-right: 3px;
-}
-
 .icon_plus {
     width: 8px;
     height: 8px;
@@ -502,6 +481,8 @@ h3{
 
 #description{
     display: inline-block;
+    position: relative;
+    height: 200px;
     vertical-align: top;
     color: #2e2e2e;
 }
@@ -512,8 +493,8 @@ h3{
 }
 
 #description h1{
-    padding-top: 20px;
-    padding-left: 20px;
+    padding-top: 30px;
+    padding-left: 30px;
     padding-bottom: 10px;
     font-size: 36px;
     line-height: 27px;
@@ -522,21 +503,10 @@ h3{
 }
 
 #description p{
-    padding-left: 20px;
+    max-width: 300px;
+    padding-left: 30px;
     padding-bottom: 18px;
     font-size: 12px;
-    line-height: 9px;
-}
-
-p#price-quantity{
-    display: inline-block;
-    font-size: 17px;
-    padding-bottom: 17px;
-    line-height: 13px;
-}
-
-p#price-quantity sup{
-    font-size: 10px;
 }
 
 #description p input{
@@ -547,37 +517,21 @@ p#price-quantity sup{
 }
 
 p#price-quantity {
-    font-size: 17px;
-    color: #2e2e2e;
-    padding-left: 20px;
     display: inline-block;
-    line-height: 1em;
-    text-transform: uppercase;
-}
-
-p#price-quantity em{
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
     color: #787878;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: normal;
-    display: inline-block;
-    padding-right: 9px;
-    padding-left: 11px;
 }
-
-p#price-quantity span{
-    font-size: 10px;
-    display: inline-block;
-    vertical-align: text-top;
-    padding-right: 3px;
-}
-
 #details-total{
-    height: 68px;
-    line-height: 68px;
-    vertical-align: bottom;
-    border-top: 1px dotted;
-    width: 399px;
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    padding: 20px 30px;
+    border-top: 1px dotted #a6a6a6;
+    width: 339px;
 }
 
 p#details-total-price {
@@ -607,14 +561,13 @@ p#details-total-price span{
 }
 
 .buy {
-    text-align: center;
-    height: 28px;
+    float: right;
+    height: 30px;
     width: 111px;
-    color: #fff ;
-    font-size: 11px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
     text-transform: uppercase;
-    margin-top: 25px;
-    margin-left: 18px;
     background: rgb(214,0,65);
     background: -moz-linear-gradient(top,  rgba(214,0,65,1) 0%, rgba(169,0,64,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,0,65,1)), color-stop(100%,rgba(169,0,64,1)));
@@ -633,8 +586,9 @@ p#details-total-price span{
 
 .buy:before{
     content: "+ ";
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 11 px;
 }
 
 .buy:hover {
@@ -667,9 +621,7 @@ p#details-total-price span{
 
 #nutrition-info h2{
     color: #3c3c3c;
-    padding-top: 21px;
-    padding-left: 20px;
-    padding-bottom: 20px;
+    padding: 30px 20px 20px;
     font-size: 13px;
 }
 
@@ -929,8 +881,8 @@ table tbody td:first-child + td + td p{
     width: 131px;
     display: inline-block;
     margin-right: 100px;
-    margin-bottom: 49px;
-    margin-top: 53px;
+    margin-bottom: 50px;
+    margin-top: 55px;
     color: #fff;
     font-size: 13px;
     line-height: 48px;
@@ -986,22 +938,7 @@ table tbody td:first-child + td + td p{
 }
 
 #footer span{
-    padding-top: 41px;
-}
-
-#bottom-menu li{
-    float: right;
-    padding-top: 41px;
-    padding-left: 31px;
-}
-
-#bottom-menu li a{
-    text-transform:uppercase;
-    color: #ffffff;
-}
-
-#bottom-menu li a:hover{
-    color: #d60041;
+    padding-top: 40px;
 }
 
 /*clear floats*/
