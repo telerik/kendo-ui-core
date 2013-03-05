@@ -90,11 +90,10 @@ desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
 # Kendo UI Complete
-
 bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
-       :eula => "complete",
-       :readme => "README.KendoUI.Complete",
+       :eula => 'complete',
+       :readme => 'README.KendoUI.Complete',
        :vsdoc => {
            %w(web mobile dataviz framework) => 'all',
            %w(web framework) => 'web',
@@ -107,7 +106,7 @@ bundle :name => 'complete.commercial',
            %w(dataviz framework) => 'dataviz',
            %w(mobile framework) => 'mobile'
        },
-       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :type_script => { %w(web mobile dataviz framework) => 'all' },
        :changelog => %w(web mobile dataviz framework),
        :demos => %w(web dataviz mobile),
        :contents => {
@@ -117,41 +116,7 @@ bundle :name => 'complete.commercial',
             'src/styles' => SRC_CSS
        }
 
-bundle :name => 'trial.hotfix',
-       :license => 'src-license-complete',
-       :eula => 'trial',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => "all" },
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
-       :contents => {
-            'js' => TRIAL_MIN_JS,
-            'styles' => MIN_CSS_RESOURCES,
-            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
-            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
-            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
-            'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR,
-            'wrappers/php' => PHP_LIB_SRC
-       },
-       :prerequisites => [
-           "java:assets",
-           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
-           'mvc:assets'
-       ]
-
-bundle :name => 'trial',
+bundle :name => 'complete.trial',
        :license => 'src-license-complete',
        :eula => 'trial',
        :readme => 'README.KendoUI.Trial',
@@ -171,28 +136,17 @@ bundle :name => 'trial',
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :demos => %w(web dataviz mobile),
        :contents => {
-            'js' => TRIAL_MIN_JS,
+            'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
        }
-       .merge(MVC_CONTENT)
-       .merge(JSP_CONTENT)
-       .merge(PHP_CONTENT),
-       :prerequisites => [
-           "java:assets",
-           "php:assets",
-           "dist/bundles/trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
-           'dist/bundles/trial/wrappers/jsp/spring-demos/pom.xml',
-           'mvc:assets',
-           'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
-       ]
 
 # Kendo UI Web
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => 'web',
-       :vsdoc => { %w(web framework) => "web" },
-       :intellisense => { %w(web framework) => "web" },
-       :type_script => { %w(web framework) => "web" },
+       :vsdoc => { %w(web framework) => 'web' },
+       :intellisense => { %w(web framework) => 'web' },
+       :type_script => { %w(web framework) => 'web' },
        :changelog => %w(web framework),
        :demos => %w(web),
        :contents => {
@@ -235,9 +189,9 @@ bundle :name => 'mobile.commercial',
 # Kendo UI DataViz
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
-       :vsdoc => { %w(dataviz framework) => "dataviz" },
-       :intellisense => { %w(dataviz framework) => "dataviz" },
-       :type_script => { %w(dataviz framework) => "dataviz" },
+       :vsdoc => { %w(dataviz framework) => 'dataviz' },
+       :intellisense => { %w(dataviz framework) => 'dataviz' },
+       :type_script => { %w(dataviz framework) => 'dataviz' },
        :changelog => %w(dataviz framework),
        :eula => 'dataviz',
        :demos => %w(dataviz),
@@ -275,6 +229,35 @@ bundle :name => 'aspnetmvc.trial',
        :prerequisites => [
            'mvc:assets',
            'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
+       ]
+
+bundle :name => 'aspnetmvc.trial.hotfix',
+       :license => 'src-license-complete',
+       :eula => 'trial',
+       :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :intellisense => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :contents => {
+            'js' => TRIAL_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC_DLL,
+            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
+       },
+       :prerequisites => [
+           'mvc:assets'
        ]
 
 bundle :name => 'aspnetmvc.commercial',
@@ -373,6 +356,7 @@ bundle :name => 'jsp.trial',
        :eula => 'trial',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(web mobile dataviz framework jsp),
+       :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
             'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -388,6 +372,7 @@ bundle :name => 'jsp.commercial',
        :license => 'src-license-complete',
        :eula => 'jsp',
        :changelog => %w(web mobile dataviz framework jsp),
+       :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
             'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -401,7 +386,7 @@ bundle :name => 'jsp.commercial',
            "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml",
            "dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml"
        ]
-
+# Kendo UI Complete for PHP
 bundle :name => 'php.commercial',
        :license => 'src-license-complete',
        :eula => 'php',
