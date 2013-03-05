@@ -218,9 +218,9 @@ kendo_module({
                 current = items.filter("." + ITEMSELECTEDCLASS).get(0),
                 keyCode = e.keyCode;
 
-            if (e.keyCode == KEYS.LEFT) {
+            if (keyCode == KEYS.LEFT) {
                 selected = relative(items, current, -1);
-            } else if (e.keyCode == KEYS.RIGHT) {
+            } else if (keyCode == KEYS.RIGHT) {
                 selected = relative(items, current, 1);
             } else if (keyCode == KEYS.DOWN) {
                 selected = relative(items, current, that.options.columns);
@@ -240,7 +240,7 @@ kendo_module({
 
                 selected = $(selected);
 
-                current.removeClass(ITEMSELECTEDCLASS).removeAttr("aria-selected");
+                $(current).removeClass(ITEMSELECTEDCLASS).removeAttr("aria-selected");
 
                 selected.addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
 
