@@ -221,11 +221,11 @@ html body .k-button-bare
 }
 
 @media print {
-	.k-state-disabled,
-	.k-state-disabled .k-input
-	{
-		opacity:1 !important;
-	}
+    .k-state-disabled,
+    .k-state-disabled .k-input
+    {
+        opacity:1 !important;
+    }
 }
 
 .k-state-error
@@ -256,7 +256,7 @@ html body .k-button-bare
 .sprite-hoverable(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
     .sprite-position(@row, @column);
 
-	.k-link:not(.k-state-disabled):hover > &,
+    .k-link:not(.k-state-disabled):hover > &,
     .k-state-hover &,
     .k-button:hover &,
     .k-textbox:hover &,
@@ -269,7 +269,7 @@ html body .k-button-bare
 .sprite-hoverable(@row, @column) when not (ispixel(@column)) {
     .sprite-position(@row, @column);
 
-	.k-link:not(.k-state-disabled):hover > &,
+    .k-link:not(.k-state-disabled):hover > &,
     .k-state-hover &,
     .k-button:hover &,
     .k-textbox:hover &,
@@ -1905,7 +1905,7 @@ span.k-dropdown
 
 .k-colorpicker .k-picker-wrap.k-state-border-down
 {
-	border-bottom-width: 1px;
+    border-bottom-width: 1px;
 }
 
 .k-textbox,
@@ -2150,13 +2150,13 @@ body .k-datetimepicker .k-select
 
 .k-multiselect-wrap
 {
-	position: relative;
+    position: relative;
     border-width: 0px;
     border-style: solid;
     border-radius: 4px;
     border-color: #C5C5C5;
     background-color: #FFF;
-	min-height: 2.04em;
+    min-height: 2.04em;
 }
 
 .k-multiselect-wrap .k-input
@@ -2182,14 +2182,14 @@ body .k-datetimepicker .k-select
 .k-autocomplete .k-loading,
 .k-multiselect .k-loading
 {
-	position: absolute;
-	right: 3px;
-	bottom: 4px;
+    position: absolute;
+    right: 3px;
+    bottom: 4px;
 }
 
 .k-multiselect .k-loading-hidden
 {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 /* Calendar */
@@ -2556,7 +2556,7 @@ span.k-numerictextbox
             height: 3px;
             width: @grid-size;
             position: absolute;
-			left: 1px;
+            left: 1px;
             bottom: -3px;
         }
     }
@@ -2657,6 +2657,7 @@ span.k-numerictextbox
 
     .k-hsv-rectangle {
         position: relative;
+        .prohibit-selection;
         -ms-touch-action: pinch-zoom double-tap-zoom;
         .k-draghandle {
             cursor: pointer;
@@ -3377,7 +3378,7 @@ div.k-slider
 
 .k-slider-tooltip
 {
-	top:-4444px; /*prevent window resize in IE8 when appending*/
+    top:-4444px; /*prevent window resize in IE8 when appending*/
 }
 
 /* Tooltip */
@@ -3397,13 +3398,13 @@ div.k-slider
 
 .k-tooltip-button
 {
-	text-align: right;
-	height: 0;
+    text-align: right;
+    height: 0;
 }
 
 .k-tooltip-closable .k-tooltip-content
 {
-	padding-right: 20px;
+    padding-right: 20px;
 }
 
 span.k-tooltip

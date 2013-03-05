@@ -26,7 +26,6 @@ kendo_module({
         },
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
-        MOUSEDOWN_NS = "touchstart" + NS + " mousedown" + NS,
         KEYDOWN_NS = "keydown" + NS,
 
         browser = kendo.support.browser,
@@ -416,6 +415,7 @@ kendo_module({
                     hsvHandle.focus();
                 },
                 move: function(e) {
+                    e.preventDefault();
                     update.call(this, e.x.location, e.y.location);
                 },
                 end: function() {
@@ -831,7 +831,7 @@ kendo_module({
                     .on("focus" + NS, function () { innerWraper.addClass("k-state-focused"); })
                     .on("blur" + NS, function () { innerWraper.removeClass("k-state-focused"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
-                    .on(MOUSEDOWN_NS, ".k-icon", bind(that.toggle, that))
+                    .on(CLICK_NS, ".k-icon", bind(that.toggle, that))
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
                         that.trigger("activate");
                     });
