@@ -231,7 +231,7 @@ bundle :name => 'aspnetmvc.trial',
            'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
        ]
 
-bundle :name => 'aspnetmvc.trial.hotfix',
+bundle :name => 'aspnetmvc.hotfix.trial',
        :license => 'src-license-complete',
        :eula => 'trial',
        :vsdoc => {
@@ -387,6 +387,21 @@ bundle :name => 'jsp.commercial',
            "dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml"
        ]
 # Kendo UI Complete for PHP
+bundle :name => 'php.trial',
+       :license => 'src-license-complete',
+       :eula => 'trial',
+       :readme => 'README.KendoUI.Trial',
+       :changelog => %w(web mobile dataviz framework php),
+       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :contents => {
+            'js' => COMPLETE_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+       }
+       .merge(PHP_CONTENT),
+       :prerequisites => [
+           "php:assets"
+       ]
+
 bundle :name => 'php.commercial',
        :license => 'src-license-complete',
        :eula => 'php',
@@ -403,21 +418,22 @@ bundle :name => 'php.commercial',
        ]
 
 BUNDLES = [
-    'trial',
+    'aspnetmvc.commercial',
+    'aspnetmvc.hotfix.commercial',
+    'aspnetmvc.hotfix.trial',
+    'aspnetmvc.trial',
+    'cdn.commercial',
     'complete.commercial',
+    'complete.trial',
+    'dataviz.commercial',
+    'jsp.commercial',
+    'jsp.trial',
+    'mobile.commercial',
     'php.commercial',
+    'php.trial',
     'web.commercial',
     'web.open-source',
-    'mobile.commercial',
-    'dataviz.commercial',
-    'aspnetmvc.commercial',
-    'aspnetmvc.trial',
-    'aspnetmvc.hotfix.commercial',
-    'jsp.commercial',
-    'aspnetmvc.hotfix.commercial',
-    'trial.hotfix',
-    'winjs.commercial',
-    'cdn.commercial'
+    'winjs.commercial'
 ]
 
 namespace :build do
