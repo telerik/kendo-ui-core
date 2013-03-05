@@ -27,6 +27,92 @@
     </script>
 
     <script>
+        function createSparklines() {
+            // Create a row template using the above definition
+            var template = kendo.template($("#template").html());
+
+            $("#stats tbody").empty();
+            // "data" is declared at the end of the page
+            for (var i = 0; i < data.length; i++) {
+                var rowData = data[i];
+
+                var row = $("#stats tbody")
+                    .append(template(rowData))
+                    .find("tr:last");
+
+                $(".bar-hourly", row).kendoSparkline({
+                    type: "bar",
+                    data: [rowData.hourly],
+                    valueAxis: {
+                        max: 50
+                    },
+                    categoryAxis: {
+                        crosshair: {
+                            visible: false
+                        }
+                    }
+                });
+
+                $(".bar-change", row).kendoSparkline({
+                    type: "bar",
+                    series: [{
+                        data: [rowData.change],
+                        negativeColor: "#808080"
+                    }],
+                    valueAxis: {
+                        min: -40,
+                        max: 40                        
+                    },
+                    categoryAxis: {
+                        visible: true,
+                        majorTicks: {
+                            visible: false
+                        },
+                        crosshair: {
+                            visible: false
+                        }
+                    }
+                });
+                
+                $(".bar-direct", row).kendoSparkline({
+                    type: "bar",
+                    data: [rowData.direct],
+                    valueAxis: {
+                        max: 50
+                    },
+                    categoryAxis: {
+                        crosshair: {
+                            visible: false
+                        }
+                    }
+                });
+
+                $(".bar-benefits", row).kendoSparkline({
+                    type: "bar",
+                    dataSource: {
+                        data: rowData.benefits,
+                        group: {
+                            field: "type",
+                            dir: "asc"
+                        }
+                    },
+                    series: [{
+                        field: "value"
+                    }],
+                    valueAxis: {
+                        max: 10
+                    },
+                    categoryAxis: {
+                        crosshair: {
+                            visible: false
+                        }
+                    }
+                });
+            }
+        }
+
+        $(document).ready(createSparklines);
+        $("#example").bind("kendo:skinChange", createSparklines);
         var data = [{
             year: "2011",
             hourly: 46.29,
@@ -208,92 +294,6 @@
                 value: 1.84
             }]
         }];
-
-        function createSparklines() {
-            // Create a row template using the above definition
-            var template = kendo.template($("#template").html());
-
-            $("#stats tbody").empty();
-            for (var i = 0; i < data.length; i++) {
-                var rowData = data[i];
-
-                var row = $("#stats tbody")
-                    .append(template(rowData))
-                    .find("tr:last");
-
-                $(".bar-hourly", row).kendoSparkline({
-                    type: "bar",
-                    data: [rowData.hourly],
-                    valueAxis: {
-                        max: 50
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: false
-                        }
-                    }
-                });
-
-                $(".bar-change", row).kendoSparkline({
-                    type: "bar",
-                    series: [{
-                        data: [rowData.change],
-                        negativeColor: "#808080"
-                    }],
-                    valueAxis: {
-                        min: -40,
-                        max: 40                        
-                    },
-                    categoryAxis: {
-                        visible: true,
-                        majorTicks: {
-                            visible: false
-                        },
-                        crosshair: {
-                            visible: false
-                        }
-                    }
-                });
-                
-                $(".bar-direct", row).kendoSparkline({
-                    type: "bar",
-                    data: [rowData.direct],
-                    valueAxis: {
-                        max: 50
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: false
-                        }
-                    }
-                });
-
-                $(".bar-benefits", row).kendoSparkline({
-                    type: "bar",
-                    dataSource: {
-                        data: rowData.benefits,
-                        group: {
-                            field: "type",
-                            dir: "asc"
-                        }
-                    },
-                    series: [{
-                        field: "value"
-                    }],
-                    valueAxis: {
-                        max: 10
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: false
-                        }
-                    }
-                });
-            }
-        }
-
-        $(document).ready(createSparklines);
-        $("#example").bind("kendo:skinChange", createSparklines);
     </script>
 
     <style scoped>

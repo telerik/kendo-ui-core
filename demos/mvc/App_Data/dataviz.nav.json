@@ -312,8 +312,8 @@
                 "text": "Binding to remote data",
                 "url": "sparklines/remote-data.html"
             }, {
-                "text": "Data Bars",
-                "url": "sparklines/data-bars.html"
+                "text": "Binding to local data",
+                "url": "sparklines/local-data.html"
             }],
             "name": "sparklines"
         }, {
