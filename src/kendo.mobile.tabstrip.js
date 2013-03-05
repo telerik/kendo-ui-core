@@ -36,7 +36,6 @@ kendo_module({
             var tabs = this.element.find('a'),
                 tab,
                 path,
-                parts,
                 idx = 0,
                 length = tabs.length;
 
