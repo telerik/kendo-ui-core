@@ -41,6 +41,15 @@ class StockChartNavigatorSeriesItemHighlight extends \Kendo\SerializableObject {
         return $this->setProperty('opacity', $value);
     }
 
+    /**
+    * A value indicating if the series points should be highlighted.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemHighlight
+    */
+    public function visible($value) {
+        return $this->setProperty('visible', $value);
+    }
+
 //<< Properties
 }
 
