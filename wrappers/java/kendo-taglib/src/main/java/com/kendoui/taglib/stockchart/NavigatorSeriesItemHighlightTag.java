@@ -75,6 +75,14 @@ public class NavigatorSeriesItemHighlightTag extends  BaseTag  /* interfaces *//
         setProperty("opacity", value);
     }
 
+    public boolean getVisible() {
+        return (boolean)getProperty("visible");
+    }
+
+    public void setVisible(boolean value) {
+        setProperty("visible", value);
+    }
+
 //<< Attributes
 
 }

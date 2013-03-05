@@ -14356,6 +14356,12 @@ Available for column series.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
+        <attribute>
+            <description>A value indicating if the series points should be highlighted.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
