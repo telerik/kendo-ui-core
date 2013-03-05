@@ -17,7 +17,7 @@ SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/*
 SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources/'
 
-JSP_BUNDLES = ['trial', 'jsp.commercial']
+JSP_BUNDLES = ['jsp.trial', 'jsp.commercial']
 
 # Update a pom.xml file when the VERSION changes
 class PomTask < Rake::FileTask

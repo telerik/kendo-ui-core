@@ -89,6 +89,8 @@ multitask :less => [:npm, MIN_CSS].flatten
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
+# Kendo UI Complete
+
 bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
        :eula => "complete",
@@ -184,6 +186,7 @@ bundle :name => 'trial',
            'dist/bundles/trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
        ]
 
+# Kendo UI Web
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => 'web',
@@ -213,6 +216,7 @@ bundle :name => 'web.open-source',
             'src/styles' => WEB_SRC_CSS
        }
 
+# Kendo UI Mobile
 bundle :name => 'mobile.commercial',
        :license => 'src-license-mobile',
        :vsdoc => { %w(mobile framework) => 'mobile' },
@@ -228,6 +232,7 @@ bundle :name => 'mobile.commercial',
             'src/styles' => MOBILE_SRC_CSS
        }
 
+# Kendo UI DataViz
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
        :vsdoc => { %w(dataviz framework) => "dataviz" },
@@ -244,7 +249,6 @@ bundle :name => 'dataviz.commercial',
        }
 
 # Kendo Complete for ASP.NET MVC
-
 bundle :name => 'aspnetmvc.trial',
        :license => 'src-license-complete',
        :eula => 'trial',
@@ -363,12 +367,29 @@ bundle :name => 'winjs.commercial',
             '.' => WIN_JS_RESOURCES
        }
 
+# Kendo UI Complete for JSP
+bundle :name => 'jsp.trial',
+       :license => 'src-license-complete',
+       :eula => 'trial',
+       :readme => 'README.KendoUI.Trial',
+       :changelog => %w(web mobile dataviz framework jsp),
+       :contents => {
+            'js' => COMPLETE_MIN_JS,
+            'styles' => MIN_CSS_RESOURCES,
+       }
+       .merge(JSP_CONTENT),
+       :prerequisites => [
+           "java:assets",
+           "dist/bundles/jsp.trial/wrappers/jsp/spring-demos/src/main/webapp/WEB-INF/lib/#{JAR_NAME}",
+           'dist/bundles/jsp.trial/wrappers/jsp/spring-demos/pom.xml'
+       ]
+
 bundle :name => 'jsp.commercial',
        :license => 'src-license-complete',
        :eula => 'jsp',
        :changelog => %w(web mobile dataviz framework jsp),
        :contents => {
-            'js' => MVC_MIN_JS,
+            'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
             'src/js' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS,
