@@ -2,14 +2,14 @@
     display: ~"-moz-box";
     display: ~"-webkit-box";
     display: ~"-webkit-flex";
-    display: ~"-moz-flex";
     display: ~"-ms-flexbox";
-    display: ~"flex";
+    display: flex;
 }
 
 .flexbox(@type) {
     display: ~"-moz-@{type}-box";
     display: ~"-webkit-@{type}-box";
+    display: ~"-webkit-@{type}-flex";
     display: ~"-ms-@{type}-flexbox";
     display: ~"@{type}-flex";
 }
@@ -26,14 +26,12 @@
 
 .flex-direction(@direction) {
     -webkit-flex-direction: @direction;
-    -moz-flex-direction: @direction;
     -ms-flex-direction: @direction;
     flex-direction: @direction;
 }
 
 .flex-wrap(@wrap) {
     -webkit-flex-wrap: @wrap;
-    -moz-flex-wrap: @wrap;
     -ms-flex-wrap: @wrap;
     flex-wrap: @wrap;
 }
@@ -41,7 +39,6 @@
 .flex(@amount) {
     -moz-box-flex: @amount;
     -webkit-box-flex: @amount;
-    -moz-flex: @amount;
     -webkit-flex: @amount;
     -ms-flex: @amount;
     flex: @amount;
@@ -56,20 +53,17 @@
 
 .flex-align-items(@alignment) {
     -webkit-align-items: @alignment;
-    -moz-align-items: @alignment;
     align-items: @alignment;
 }
 
 .flex-align-content(@alignment) {
     -webkit-align-content: @alignment;
-    -moz-align-content: @alignment;
     align-content: @alignment;
 }
 
 .flex-pack(@pack) {
     -moz-box-pack: @pack;
     -webkit-box-pack: @pack;
-    -moz-flex-pack: @pack;
     -webkit-flex-pack: @pack;
     -ms-flex-pack: @pack;
     flex-pack: @pack;
