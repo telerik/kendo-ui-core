@@ -237,6 +237,23 @@
                 dropdownlist.popup.toggle = oldOpen;
             });
 
+            test('Disabled dropdownlist removes tabIndex', function() {
+                var dropdownlist = new DropDownList(input.attr("tabindex", 2));
+
+                dropdownlist.enable(false);
+
+                ok(!dropdownlist.wrapper.attr("tabindex"));
+            });
+
+            test('Disabled dropdownlist persists custom tabindex', function() {
+                var dropdownlist = new DropDownList($("<input tabindex='3' />"));
+
+                dropdownlist.enable(false);
+                dropdownlist.enable();
+
+                equal(dropdownlist.wrapper.attr("tabindex"), 3);
+            });
+
             test("Disabled dropdownlist does not unbind client's event handlers", 1, function() {
                 var dropdownlist = new DropDownList(input);
 

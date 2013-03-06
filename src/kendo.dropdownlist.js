@@ -20,6 +20,7 @@ kendo_module({
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
+        TABINDEX = "tabindex",
         proxy = $.proxy;
 
     var DropDownList = Select.extend( {
@@ -47,6 +48,7 @@ kendo_module({
             that._wrapper();
 
             that._tabindex();
+            that.wrapper.data(TABINDEX, that.wrapper.attr(TABINDEX));
 
             that._aria();
 
@@ -147,6 +149,7 @@ kendo_module({
                 dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (enable === false) {
+                wrapper.removeAttr(TABINDEX);
                 element.attr(ATTRIBUTE, ATTRIBUTE);
 
                 dropDownWrapper
@@ -162,6 +165,7 @@ kendo_module({
                     .on(HOVEREVENTS, that._toggleHover);
 
                 wrapper
+                    .attr(TABINDEX, wrapper.data(TABINDEX))
                     .on("click" + ns, function(e) {
                             that._blured = false;
                             e.preventDefault();
