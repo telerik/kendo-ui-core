@@ -327,7 +327,7 @@ namespace Kendo.Mvc.UI
                 Aggregates.Clear();
             }
 
-            if (Groups.Any() && Aggregates.Any())
+            if (Groups.Any() && Aggregates.Any() && Data == null)
             {
                 Groups.Each(g => g.AggregateFunctions.AddRange(Aggregates.SelectMany(a => a.Aggregates)));
             }
