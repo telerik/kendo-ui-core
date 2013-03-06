@@ -92,7 +92,7 @@
                         Application.initMobile();
 
                     }, 100);
-                } 
+                }
                 }));
             }, "html");
         },
@@ -140,7 +140,7 @@
                         Application.initMobile();
 
                     }, 100);
-                } 
+                }
                 }));
             }, "html");
         },
@@ -305,7 +305,7 @@
                                     .kendoAnimate(animation.show);
                             }, 100);
                         }
-                    } 
+                    }
                     }));
                 });
             } else {
@@ -323,7 +323,7 @@
                             href = this.href;
 
                         e.preventDefault();
-                        
+
                         if (!location.href.match(href)) {
                             updateNavLinks(element.parent(), $("#nav-pager a"));
                             Application.load(href);
