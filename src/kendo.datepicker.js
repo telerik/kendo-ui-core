@@ -479,7 +479,7 @@ kendo_module({
 
             that.dateView.toggle();
 
-            if (e.type === "click" && element[0] !== document.activeElement) {
+            if (!kendo.support.touch && element[0] !== document.activeElement) {
                 element.focus();
             }
         },

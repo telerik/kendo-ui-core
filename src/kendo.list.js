@@ -11,6 +11,7 @@ kendo_module({
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        support = kendo.support,
         htmlEncode = kendo.htmlEncode,
         ID = "id",
         LI = "li",
@@ -27,7 +28,7 @@ kendo_module({
         WIDTH = "width",
         extend = $.extend,
         proxy = $.proxy,
-        browser = kendo.support.browser,
+        browser = support.browser,
         isIE8 = browser.msie && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
@@ -48,7 +49,7 @@ kendo_module({
             that._template();
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
-                        .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
+                        .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
                         .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
                         .on("click" + ns, LI, proxy(that._click, that))
@@ -385,7 +386,7 @@ kendo_module({
                     }
                 },
                 animation: options.animation,
-                isRtl: kendo.support.isRtl(wrapper)
+                isRtl: support.isRtl(wrapper)
             }));
 
             that.popup.one(OPEN, function() {
@@ -409,7 +410,7 @@ kendo_module({
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
-            if (!kendo.support.mobileOS && that._focused[0] !== document.activeElement) {
+            if (!support.touch && that._focused[0] !== document.activeElement) {
                 that._focused.focus();
             }
 

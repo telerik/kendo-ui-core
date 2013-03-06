@@ -10,7 +10,8 @@ kendo_module({
     var kendo = window.kendo,
         keys = kendo.keys,
         extractFormat = kendo._extractFormat,
-        browser = kendo.support.browser,
+        support = kendo.support,
+        browser = support.browser,
         ui = kendo.ui,
         Widget = ui.Widget,
         OPEN = "open",
@@ -50,7 +51,7 @@ kendo_module({
         that.options = options;
 
         that.ul = $('<ul tabindex="-1" role="listbox" aria-hidden="true" unselectable="on" class="k-list k-reset"/>')
-                    .css({ overflow: kendo.support.kineticScrollNeeded ? "": "auto" })
+                    .css({ overflow: support.kineticScrollNeeded ? "": "auto" })
                     .on(CLICK, LI, proxy(that._click, that))
                     .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                     .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); });
@@ -375,7 +376,7 @@ kendo_module({
                 open: options.open,
                 close: options.close,
                 animation: options.animation,
-                isRtl: kendo.support.isRtl(options.anchor)
+                isRtl: support.isRtl(options.anchor)
             }));
 
             kendo.touchScroller(that.popup.element);
@@ -680,7 +681,7 @@ kendo_module({
                 activeElement = document.activeElement;
             } catch (err) {}
 
-            if (e.type === "click" && element[0] !== activeElement) {
+            if (!support.touch && element[0] !== activeElement) {
                 element.focus();
             }
         },

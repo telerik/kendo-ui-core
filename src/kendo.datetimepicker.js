@@ -169,7 +169,7 @@ kendo_module({
                         .on(CLICK, function(e) {
                             that.toggle("date");
 
-                            if (e.type === "click" && element[0] !== document.activeElement) {
+                            if (!kendo.support.touch && element[0] !== document.activeElement) {
                                 element.focus();
                             }
                         });
@@ -179,7 +179,7 @@ kendo_module({
                         .on(CLICK, function(e) {
                             that.toggle("time");
 
-                            if (e.type === "click" && element[0] !== document.activeElement) {
+                            if (!kendo.support.touch && element[0] !== document.activeElement) {
                                 element.focus();
                             }
                         });
