@@ -345,12 +345,6 @@ textarea.k-textbox:hover,
 
 /* icons */
 
-.k-icon,
-.k-column-menu .k-sprite
-{
-    opacity: @default-icon-opacity;
-}
-
 .k-icon:hover,
 .k-state-hover .k-icon,
 .k-state-selected .k-icon,
@@ -359,6 +353,13 @@ textarea.k-textbox:hover,
 .k-column-menu .k-state-active .k-sprite
 {
     opacity:1;
+}
+
+.k-icon,
+.k-state-disabled .k-icon,
+.k-column-menu .k-sprite
+{
+    opacity: @default-icon-opacity;
 }
 
 .k-icon,
