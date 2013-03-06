@@ -32,9 +32,9 @@
         <script src="../../src/kendo.mobile.application.js"></script>
         <script type="text/javascript">
             if (navigator.__defineGetter__) {
-            navigator.__defineGetter__('userAgent', function(){
-                return realUserAgent;
-            });
+                navigator.__defineGetter__('userAgent', function(){
+                    return realUserAgent;
+                });
             }
         </script>
         <script src="../jquery.mockjax.js"></script>
@@ -84,6 +84,7 @@
                 var root = $("<div />").append(html);
                 $("#qunit-fixture").append(root);
                 application = new kendo.mobile.Application(root, options);
+                root.addClass("k-ff19"); // Trick Firefox scroller tests, since the UA is wrong.
             }
 
             test("Navigates to remote view silently on ready", function() {
