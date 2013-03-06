@@ -128,6 +128,8 @@
 
                 ok(slider.element.is("[disabled]"));
                 ok(!slider.options.enabled);
+
+                equal(slider.wrapper.find(".k-draghandle").attr("tabindex"), -1);
             });
 
             test("disabled attribute should disable slider", function () {
@@ -153,6 +155,8 @@
 
                 ok(!slider.element.attr("disabled"));
                 ok(slider.options.enabled);
+
+                equal(slider.wrapper.find(".k-draghandle").attr("tabindex"), 0);
             });
 
             test("disable method should disable slider", function () {
@@ -366,6 +370,9 @@
 
                 ok(rangeSlider.element.find("input").is("[disabled]"));
                 ok(!rangeSlider.options.enabled);
+
+                equal(rangeSlider.wrapper.find(".k-draghandle").eq(0).attr("tabindex"), -1);
+                equal(rangeSlider.wrapper.find(".k-draghandle").eq(1).attr("tabindex"), -1);
             });
 
             test("disabled attribute should disable range slider", function () {
@@ -425,6 +432,9 @@
                 rangeSlider.enable();
 
                 ok(!rangeSlider.wrapper.hasClass("k-state-disabled"));
+
+                equal(rangeSlider.wrapper.find(".k-draghandle").eq(0).attr("tabindex"), 0);
+                equal(rangeSlider.wrapper.find(".k-draghandle").eq(1).attr("tabindex"), 0);
             });
 
             test('range slider should not trigger change if we decrease selectionStart with 1 step and selectionStart is equal to min value', function () {

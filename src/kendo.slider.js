@@ -39,6 +39,7 @@ kendo_module({
         PRECISION = 3,
         DISABLED = "disabled",
         UNDEFINED = "undefined",
+        TABINDEX = "tabindex",
         touchLocation = kendo.touchLocation;
 
     var SliderBase = Widget.extend({
@@ -666,6 +667,7 @@ kendo_module({
 
             that.wrapper
                 .find(DRAG_HANDLE)
+                .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
                     that._setTooltipTimeout();
                 })
@@ -754,6 +756,7 @@ kendo_module({
 
             that.wrapper
                 .find(DRAG_HANDLE)
+                .attr(TABINDEX, -1)
                 .off(MOUSE_UP)
                 .off(KEY_DOWN)
                 .off(CLICK)
@@ -1269,6 +1272,7 @@ kendo_module({
 
             that.wrapper
                 .find(DRAG_HANDLE)
+                .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
                     that._setTooltipTimeout();
                 })
@@ -1310,6 +1314,7 @@ kendo_module({
 
             that.wrapper
                 .find(DRAG_HANDLE)
+                .attr(TABINDEX, -1)
                 .off(MOUSE_UP)
                 .off(KEY_DOWN)
                 .off(CLICK)
