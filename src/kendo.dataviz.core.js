@@ -480,8 +480,11 @@ kendo_module({
                 i;
 
             if (root && modelId) {
+                if (root.modelMap[modelId]) {
+                    IDPool.instance.free(modelId);
+                }
+
                 root.modelMap[modelId] = undefined;
-                IDPool.instance.free(modelId);
             }
 
             for (i = 0; i < children.length; i++) {
@@ -1003,6 +1006,18 @@ kendo_module({
                     axis.labels.push(label);
                 }
             }
+        },
+
+        disableDiscovery: function() {
+            var axis = this,
+                labels = axis.labels,
+                i;
+
+            for (i = 0; i < labels.length; i++) {
+                labels[i].disableDiscovery();
+            }
+
+            ChartElement.fn.disableDiscovery.call(axis);
         },
 
         lineBox: function() {
@@ -2655,15 +2670,9 @@ kendo_module({
         return hash.sort().join(" ");
     }
 
-    var uniqueId = (function() {
-        // Implements 32-bit Linear feedback shift register
-        var lfsr = 1;
-
-        return function() {
-            lfsr = ((lfsr >>> 1) ^ (-(lfsr & 1) & 0xD0000001)) >>> 0;
-            return ID_PREFIX + lfsr.toString(16);
-        };
-    })();
+    function uniqueId() {
+        return IDPool.instance.get();
+    }
 
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEGREE;

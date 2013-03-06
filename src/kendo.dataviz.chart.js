@@ -334,8 +334,20 @@ kendo_module({
         },
 
         _redraw: function() {
-            var chart = this,
-                model = chart._model = chart._getModel(),
+            var chart = this;
+
+            if (chart._model) {
+                chart._model.disableDiscovery();
+            }
+
+            if (chart._viewElement) {
+                var pool = dataviz.IDPool.instance;
+                $("[id]", chart._viewElement).each(function() {
+                    pool.free($(this).attr("id"));
+                });
+            }
+
+            var model = chart._model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
 
@@ -5615,6 +5627,23 @@ kendo_module({
             }
 
             plotArea.panes = panes;
+        },
+
+        disableDiscovery: function() {
+            var plotArea = this,
+                charts = plotArea.charts,
+                axes = plotArea.axes,
+                i;
+
+            for (i = 0; i < charts.length; i++) {
+                charts[i].disableDiscovery();
+            }
+
+            for (i = 0; i < axes.length; i++) {
+                axes[i].disableDiscovery();
+            }
+
+            ChartElement.fn.disableDiscovery.call(plotArea);
         },
 
         createCrosshairs: function() {
