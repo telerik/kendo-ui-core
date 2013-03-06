@@ -468,7 +468,7 @@ kendo_module({
             var element = this,
                 options = element.options;
 
-            options.modelId = IDPool.instance.get();
+            options.modelId = IDPool.current.alloc();
             element.discoverable = true;
         },
 
@@ -481,7 +481,7 @@ kendo_module({
 
             if (root && modelId) {
                 if (root.modelMap[modelId]) {
-                    IDPool.instance.free(modelId);
+                    IDPool.current.free(modelId);
                 }
 
                 root.modelMap[modelId] = undefined;
@@ -2485,7 +2485,7 @@ kendo_module({
             this._prefix = prefix;
         },
 
-        get: function() {
+        alloc: function() {
             var that = this,
                 pool = that._pool;
 
@@ -2505,8 +2505,7 @@ kendo_module({
             }
         }
     });
-
-    IDPool.instance = new IDPool(ID_POOL_SIZE, ID_PREFIX, ID_START);
+    IDPool.current = new IDPool(ID_POOL_SIZE, ID_PREFIX, ID_START);
 
     var LRUCache = Class.extend({
         init: function(size) {
@@ -2671,7 +2670,7 @@ kendo_module({
     }
 
     function uniqueId() {
-        return IDPool.instance.get();
+        return IDPool.current.alloc();
     }
 
     function rotatePoint(x, y, cx, cy, angle) {

@@ -341,7 +341,7 @@ kendo_module({
             }
 
             if (chart._viewElement) {
-                var pool = dataviz.IDPool.instance;
+                var pool = dataviz.IDPool.current;
                 $("[id]", chart._viewElement).each(function() {
                     pool.free($(this).attr("id"));
                 });

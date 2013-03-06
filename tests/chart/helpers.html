@@ -978,14 +978,14 @@
                 });
 
                 test("returns ascending IDs", function() {
-                    equals(pool.get(), "k100");
-                    equals(pool.get(), "k101");
+                    equals(pool.alloc(), "k100");
+                    equals(pool.alloc(), "k101");
                 });
 
                 test("reuses IDs", function() {
-                    var id = pool.get();
+                    var id = pool.alloc();
                     pool.free(id);
-                    equals(pool.get(), id);
+                    equals(pool.alloc(), id);
                 });
 
                 test("pool does not grow beyond max size", function() {
