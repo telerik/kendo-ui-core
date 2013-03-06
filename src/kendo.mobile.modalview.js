@@ -12,6 +12,8 @@ kendo_module({
         Shim = ui.Shim,
         Widget = ui.Widget,
         OPEN = "open",
+        CLOSE = "close",
+        INIT = "init",
         WRAP = '<div class="km-modalview-wrapper" />';
 
     var ModalView = ui.View.extend({
@@ -46,6 +48,7 @@ kendo_module({
             that._scroller();
             that._model();
 
+            that.trigger(INIT);
             kendo.onResize(function() {
                 var positionedElement = that.wrapper.parent(),
                     viewPort = positionedElement.parent();
@@ -58,7 +61,9 @@ kendo_module({
         },
 
         events: [
-            OPEN
+            INIT,
+            OPEN,
+            CLOSE
         ],
 
         options: {
@@ -88,6 +93,7 @@ kendo_module({
 
         close: function() {
             this.shim.hide();
+            this.trigger(CLOSE);
         }
     });
 
