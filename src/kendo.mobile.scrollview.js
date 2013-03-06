@@ -109,6 +109,7 @@ kendo_module({
             duration: 300,
             velocityThreshold: 0.8,
             contentHeight: "auto",
+            pageSize: 1,
             bounceVelocityThreshold: 1.6
         },
 
@@ -180,7 +181,7 @@ kendo_module({
         _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
-                width = that.dimension.size,
+                width = that.dimension.size * that.options.pageSize,
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
                 snap,
