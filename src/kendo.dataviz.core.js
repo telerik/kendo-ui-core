@@ -472,7 +472,7 @@ kendo_module({
             element.discoverable = true;
         },
 
-        disableDiscovery: function() {
+        destroy: function() {
             var element = this,
                 children = element.children,
                 root = element.getRoot(),
@@ -488,7 +488,7 @@ kendo_module({
             }
 
             for (i = 0; i < children.length; i++) {
-                children[i].disableDiscovery();
+                children[i].destroy();
             }
         },
 
@@ -1008,16 +1008,16 @@ kendo_module({
             }
         },
 
-        disableDiscovery: function() {
+        destroy: function() {
             var axis = this,
                 labels = axis.labels,
                 i;
 
             for (i = 0; i < labels.length; i++) {
-                labels[i].disableDiscovery();
+                labels[i].destroy();
             }
 
-            ChartElement.fn.disableDiscovery.call(axis);
+            ChartElement.fn.destroy.call(axis);
         },
 
         lineBox: function() {

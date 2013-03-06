@@ -337,7 +337,7 @@ kendo_module({
             var chart = this;
 
             if (chart._model) {
-                chart._model.disableDiscovery();
+                chart._model.destroy();
             }
 
             if (chart._viewElement) {
@@ -5491,7 +5491,7 @@ kendo_module({
             pane.axes = [];
             pane.charts = [];
 
-            pane.content.disableDiscovery();
+            pane.content.destroy();
             pane.content.children = [];
         },
 
@@ -5629,21 +5629,21 @@ kendo_module({
             plotArea.panes = panes;
         },
 
-        disableDiscovery: function() {
+        destroy: function() {
             var plotArea = this,
                 charts = plotArea.charts,
                 axes = plotArea.axes,
                 i;
 
             for (i = 0; i < charts.length; i++) {
-                charts[i].disableDiscovery();
+                charts[i].destroy();
             }
 
             for (i = 0; i < axes.length; i++) {
-                axes[i].disableDiscovery();
+                axes[i].destroy();
             }
 
-            ChartElement.fn.disableDiscovery.call(plotArea);
+            ChartElement.fn.destroy.call(plotArea);
         },
 
         createCrosshairs: function() {

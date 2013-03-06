@@ -107,18 +107,18 @@
                     ok(root.modelMap[chartElement.options.modelId]);
                 });
 
-                test("disableDiscovery unregisters model id from root", function() {
+                test("destroy unregisters model id from root", function() {
                     var root = new dataviz.RootElement();
 
                     root.append(chartElement);
                     chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
-                    chartElement.disableDiscovery();
+                    chartElement.destroy();
 
                     ok(!root.modelMap[chartElement.options.modelId]);
                 })
 
-                test("disableDiscovery recurses on children", function() {
+                test("destroy recurses on children", function() {
                     var root = new dataviz.RootElement(),
                         child1 = new dataviz.ChartElement(),
                         child2 = new dataviz.ChartElement();
@@ -131,7 +131,7 @@
 
                     chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
-                    chartElement.disableDiscovery();
+                    chartElement.destroy();
 
                     ok(!root.modelMap[child2.options.modelId]);
                 });;
