@@ -334,23 +334,14 @@ kendo_module({
         },
 
         _redraw: function() {
-            var chart = this;
-
-            if (chart._model) {
-                chart._model.destroy();
-            }
-
-            if (chart._viewElement) {
-                var pool = dataviz.IDPool.current;
-                $("[id]", chart._viewElement).each(function() {
-                    pool.free($(this).attr("id"));
-                });
-            }
-
-            var model = chart._model = chart._getModel(),
+            var chart = this,
+                model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
 
+            chart._destroyView();
+
+            chart._model = model;
             chart._plotArea = model._plotArea;
 
             if (viewType) {
@@ -1028,7 +1019,26 @@ kendo_module({
                 chart._userEvents.destroy();
             }
 
+            chart._destroyView();
+
             Widget.fn.destroy.call(chart);
+        },
+
+        _destroyView: function() {
+            var chart = this,
+                pool = dataviz.IDPool.current,
+                model = chart._model,
+                viewElement = chart._viewElement;
+
+            if (model) {
+                model.destroy();
+            }
+
+            if (viewElement) {
+                $("[id]", viewElement).each(function() {
+                    pool.free($(this).attr("id"));
+                });
+            }
         }
     });
 
