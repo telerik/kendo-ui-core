@@ -56,23 +56,25 @@
                 return element;
             };
 
-            test("ajax request is made when popup is shown", 1, function() {
-                $.mockjax({
-                    url: "foo/baz",
-                    response: function(request) {
-                        ok(true);
-                        start();
-                    }
-                });
+            if (!kendo.support.browser.mozilla) {
+                test("ajax request is made when popup is shown", 1, function() {
+                    $.mockjax({
+                        url: "foo/baz",
+                        response: function(request) {
+                            ok(true);
+                            start();
+                        }
+                    });
 
-                var tooltip = new Tooltip(container, {
-                    content: {
-                        url: "foo/baz"
-                    }
+                    var tooltip = new Tooltip(container, {
+                        content: {
+                            url: "foo/baz"
+                        }
+                    });
+                    stop();
+                    tooltip.show(container);
                 });
-                stop();
-                tooltip.show(container);
-            });
+            }
 
             test("response is added to the content", 1, function() {
                 $.mockjax({

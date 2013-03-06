@@ -91,38 +91,41 @@
                     }
                 });
             });
-            test("data is loaded from the url if both data and url are set on the second request", 2, function() {
-                var data = [{foo: "bar" }],
-                    transport = new Transport({
-                        data: {
-                            Data: data,
-                            Total: 10
-                        },
-                        read: {
-                            url: "foo"
+
+            if (!kendo.support.browser.mozilla) {
+                test("data is loaded from the url if both data and url are set on the second request", 2, function() {
+                    var data = [{foo: "bar" }],
+                        transport = new Transport({
+                            data: {
+                                Data: data,
+                                Total: 10
+                            },
+                            read: {
+                                url: "foo"
+                            }
+                        });
+
+                    $.mockjax({
+                        url: "foo",
+                        response: function() {
+                            start();
+                            ok(true);
                         }
                     });
 
-                $.mockjax({
-                    url: "foo",
-                    response: function() {
-                        start();
-                        ok(true);
-                    }
+                    transport.read({
+                        success: function(e) {
+                           start();
+                           same(e.Data, data);
+                        }
+                    });
+                    stop();
+                    transport.read({
+                        success: function(e) {
+                        }
+                    });
                 });
-
-                transport.read({
-                    success: function(e) {
-                       start();
-                       same(e.Data, data);
-                    }
-                });
-                stop();
-                transport.read({
-                    success: function(e) {
-                    }
-                });
-            });
+            }
 
             test("parameterMap transforms single string filter", function() {
                 var transport = new Transport({
