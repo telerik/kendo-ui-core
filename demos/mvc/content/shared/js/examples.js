@@ -1,4 +1,4 @@
-(function($, window) {
+(function ($, window) {
     var Application,
         doc = document,
         extend = $.extend,
@@ -29,14 +29,14 @@
         skinRegex = /kendo\.\w+(\.min)?\.(.+)/i,
         dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi,
         supports = {
-            sessionStorage: (function() {
+            sessionStorage: (function () {
                 // try-catch for obscure cases that do not allow "sessionStorage" in window
                 // also for Safari private mode
                 try {
                     sessionStorage.setItem("kendo-test", "success!");
                     sessionStorage.removeItem("kendo-test");
                     return !!sessionStorage.getItem;
-                } catch(e) {
+                } catch (e) {
                     return false;
                 }
             })(),
@@ -44,7 +44,7 @@
         };
 
     Application = {
-        load: function(href) {
+        load: function (href) {
             this.unload();
 
             Application.fetch(href);
@@ -54,7 +54,7 @@
             }
         },
 
-        loadWidget: function(href) {
+        loadWidget: function (href) {
             this.unload();
 
             this.fetchWidget(href);
@@ -64,7 +64,7 @@
             }
         },
 
-        fetch: function(href, forced) {
+        fetch: function (href, forced) {
             var exampleWrap = $("#exampleWrap"),
                 currentHref = this.href,
                 mainWrap = $("#main");
@@ -75,15 +75,15 @@
 
             this.href = href;
 
-            $.get(href, { partial: 1 }, function(html) {
-                exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+            $.get(href, { partial: 1 }, function (html) {
+                exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
                     var items = $("#examples-nav li").removeClass("active"),
-                        item = $($.grep(items, function(li) { return href.indexOf($(li).find("a").attr("href")) > -1; })).addClass("active");
+                        item = $($.grep(items, function (li) { return href.indexOf($(li).find("a").attr("href")) > -1; })).addClass("active");
 
                     updateNavLinks(item, $("#nav-pager a"));
 
                     mainWrap.replaceWith(html);
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $("#exampleWrap")
                             .css("visibility", "visible")
                             .kendoStop(true)
@@ -92,14 +92,15 @@
                         Application.initMobile();
 
                     }, 100);
-                }}));
+                } 
+                }));
             }, "html");
         },
 
-        fetchWidget: function(href) {
+        fetchWidget: function (href) {
             var wrapInner = $("#mainWrapInner");
 
-            $.get(href + "?nav=true", function(html) {
+            $.get(href + "?nav=true", function (html) {
                 var parts = href.split("/"),
                     widget = parts[parts.length - 2],
                     dashboards = $(".dashboards li").removeClass("active"),
@@ -108,11 +109,11 @@
 
                 if (widget == "dashboards") {
                     items = dashboards;
-                    condition = function(li) {
+                    condition = function (li) {
                         return href == $(li).find("a").attr("href");
                     };
                 } else {
-                    condition = function(li) {
+                    condition = function (li) {
                         var splits = $(li.children[0]).attr("href").split("/");
                         return splits[splits.length - 2] == widget;
                     };
@@ -128,9 +129,9 @@
 
                 $("#mainWrap").toggleClass("widgetOverview", href.indexOf("overview") > -1);
 
-                wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
                     wrapInner.replaceWith(html);
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $("#exampleWrap")
                             .css("visibility", "visible")
                             .kendoStop(true)
@@ -139,11 +140,12 @@
                         Application.initMobile();
 
                     }, 100);
-                }}));
+                } 
+                }));
             }, "html");
         },
 
-        unload: function() {
+        unload: function () {
             if (kendo.ui && kendo.ui.DatePicker) {
                 kendo.ui.DatePicker.sharedCalendar = null;
             }
@@ -152,7 +154,7 @@
 
             $(doc.body)
                 .find(".k-window-content")
-                .each(function(index, kendoWindow) {
+                .each(function (index, kendoWindow) {
                     kendoWindow = $(kendoWindow).data("kendoWindow");
                     if (kendoWindow) {
                         kendoWindow.setOptions({ deactivate: function () { kendoWindow.destroy(); } });
@@ -178,32 +180,32 @@
             }, 100);
         },
 
-        getCurrentThemeLink: function() {
-            return $("head link").filter(function() {
+        getCurrentThemeLink: function () {
+            return $("head link").filter(function () {
                 return (/kendo\./gi).test(this.href) && !(/common|rtl|dataviz/gi).test(this.href);
             });
         },
 
-        getCurrentDVThemeLink: function() {
-            return $("head link").filter(function() {
+        getCurrentDVThemeLink: function () {
+            return $("head link").filter(function () {
                 return dvSkinRegex.test(this.href);
             });
         },
 
-        getThemeUrl: function(themeName) {
+        getThemeUrl: function (themeName) {
             var currentThemeUrl = Application.getCurrentThemeLink().attr("href");
 
             return currentThemeUrl.replace(skinRegex, "kendo." + themeName + "$1.$2");
         },
 
-        getDVThemeUrl: function(themeName) {
+        getDVThemeUrl: function (themeName) {
             var currentThemeUrl = Application.getCurrentDVThemeLink().attr("href");
             if (currentThemeUrl) {
                 return currentThemeUrl.replace(dvSkinRegex, "kendo.dataviz." + themeName + "$1");
             }
         },
 
-        replaceWebTheme: function(themeName) {
+        replaceWebTheme: function (themeName) {
             var newThemeUrl = Application.getThemeUrl(themeName),
                 oldThemeName = $(doc).data("kendoSkin"),
                 less = window.less,
@@ -216,7 +218,7 @@
             if (isLess) {
                 $("head style[id^='less']").remove();
 
-                less.sheets = $("head link[href$='.less']").map(function() {
+                less.sheets = $("head link[href$='.less']").map(function () {
                     return this;
                 });
 
@@ -231,7 +233,7 @@
             $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
         },
 
-        replaceDVTheme: function(themeName) {
+        replaceDVTheme: function (themeName) {
             var newThemeUrl = Application.getDVThemeUrl(themeName),
                 themeLink = Application.getCurrentDVThemeLink();
 
@@ -240,7 +242,7 @@
             }
         },
 
-        updateLink: function(link, url) {
+        updateLink: function (link, url) {
             var newLink,
                 exampleElement = $("#example");
 
@@ -258,14 +260,14 @@
             link.remove();
         },
 
-        replaceTheme: function(themeName) {
+        replaceTheme: function (themeName) {
             Application.replaceWebTheme(themeName);
             Application.replaceDVTheme(themeName);
 
             $("#example").trigger("kendo:skinChange");
         },
 
-        publishTheme: function(themeName) {
+        publishTheme: function (themeName) {
             var themable = ["Chart", "StockChart", "Sparkline", "RadialGauge", "LinearGauge"];
 
             if (kendo.dataviz) {
@@ -280,9 +282,9 @@
             $(doc).data("kendoSkin", themeName);
         },
 
-        changeTheme: function(themeName, animate) {
+        changeTheme: function (themeName, animate) {
             // Set transparent background to the chart area.
-            extend(kendo.dataviz.ui.themes[themeName].chart, { chartArea: { background: "transparent" } });
+            extend(kendo.dataviz.ui.themes[themeName].chart, { chartArea: { background: "transparent"} });
 
             if (Application.getThemeUrl(themeName) == Application.getCurrentThemeLink().attr("href")) {
                 return;
@@ -292,41 +294,42 @@
                 Application.preloadStylesheet(Application.getThemeUrl(themeName), function () {
                     var example = $("#example");
 
-                    example.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function(element) {
+                    example.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function (element) {
                         if (element[0] == example[0]) {
                             example.css("visibility", "hidden"); // Hide the element with restored opacity.
                             Application.replaceTheme(themeName);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 example
                                     .css("visibility", "visible")
                                     .kendoStop()
                                     .kendoAnimate(animation.show);
                             }, 100);
                         }
-                    }}));
+                    } 
+                    }));
                 });
             } else {
                 Application.replaceTheme(themeName);
             }
         },
 
-        init: function() {
+        init: function () {
             $("#exampleWrap").css("visibility", "visible");
 
             if (supports.pushState) {
                 $(doc)
-                    .on("click", "#examples-nav li a", function(e) {
+                    .on("click", "#examples-nav li a", function (e) {
                         var element = $(this),
                             href = this.href;
 
                         e.preventDefault();
-
+                        
                         if (!location.href.match(href)) {
                             updateNavLinks(element.parent(), $("#nav-pager a"));
                             Application.load(href);
                         }
                     })
-                    .on("click", "#nav-pager a", function(e) {
+                    .on("click", "#nav-pager a", function (e) {
                         var element = $(this),
                             url = element.attr("href"),
                             sibling = element.siblings(),
@@ -360,7 +363,7 @@
                         }
                     });
 
-                $(window).bind("popstate", function(e) {
+                $(window).bind("popstate", function (e) {
                     var state = e.originalEvent.state,
                         href;
 
@@ -381,11 +384,11 @@
 
                 try {
                     history.replaceState({ href: location.href }, null, location.href);
-                } catch (err) {}
+                } catch (err) { }
             }
 
             $(doc)
-                .on("mouseenter mouseleave", DETAILHANDLE, function(e) {
+                .on("mouseenter mouseleave", DETAILHANDLE, function (e) {
                     var element = $(this),
                         extender = element.next();
 
@@ -404,7 +407,7 @@
                             .kendoAnimate(
                                 !visible ? docsAnimation.show : docsAnimation.hide,
                                 visible,
-                                function() { $(this).css("height", ""); }
+                                function () { $(this).css("height", ""); }
                             );
 
                         $(".detailExpanded,.detailCollapsed", this)
@@ -417,7 +420,7 @@
 
             Application.publishTheme(kendoSkin);
 
-            $("#qr").off().click(function(e){
+            $("#qr").off().click(function (e) {
                 var bigQR = $("#qrBig");
                 bigQR.toggle();
                 var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
@@ -431,8 +434,8 @@
             });
         },
 
-        initMobile: function() {
-            $("#qr").off().click(function(e){
+        initMobile: function () {
+            $("#qr").off().click(function (e) {
                 var bigQR = $("#qrBig");
                 bigQR.toggle();
                 var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
@@ -494,7 +497,7 @@
         next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
     }
 
-    $.fn.mobileOsChooser = function(options) {
+    $.fn.mobileOsChooser = function (options) {
         var deviceList = $("#deviceList");
         if (deviceList.length != 1) {
             return this;
@@ -533,12 +536,12 @@
             }
         });
 
-       return this;
+        return this;
     };
 
     // sub menu dropdowns
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         var dropdown = $("#header a[href=#expand]"),
             submenus = $("#header").find(".submenu-box");
 
@@ -562,7 +565,7 @@
 
     var Widget = kendo.ui.Widget,
         ThemeChooser = Widget.extend({
-            init: function(element, options) {
+            init: function (element, options) {
                 options = options || {};
 
                 if (supports.sessionStorage) {
@@ -577,7 +580,7 @@
 
                 this.setTheme(options.theme);
 
-                this.element.on("click touchend", ".tc-link", $.proxy(function(e) {
+                this.element.on("click touchend", ".tc-link", $.proxy(function (e) {
                     e.preventDefault();
 
                     var icon = $(e.target).closest(".tc-link").find(".k-icon"),
@@ -590,7 +593,7 @@
                 }, this));
             },
 
-            _getThemeContainer: function() {
+            _getThemeContainer: function () {
                 var themeChooser = this,
                     options = this.options,
                     container = $(options.listContainer).children(".tc-theme-container");
@@ -601,7 +604,7 @@
 
                 container = $("<ul class='tc-theme-container' />").prependTo(options.listContainer);
 
-                container.on("click", ".tc-link", function(e) {
+                container.on("click", ".tc-link", function (e) {
                     e.preventDefault();
 
                     var link = $(this), theme = link.attr("data-value");
@@ -625,7 +628,7 @@
                 return container;
             },
 
-            setTheme: function(themeName) {
+            setTheme: function (themeName) {
                 var themes = this.options.themes,
                     theme;
 
@@ -645,7 +648,7 @@
                 }
             },
 
-            _render: function() {
+            _render: function () {
                 var label = this.options.label;
 
                 this.element
@@ -675,16 +678,16 @@
                     "</li>",
                 { useWithBlock: false }),
                 themes: [
-                    { text: "Default", value: "default", colors: ["#ef6f1c","#e24b17","#5a4b43","#ededed"] },
-                    { text: "Blue Opal", value: "blueopal", colors: ["#076186","#7ed3f6","#94c0d2","#daecf4"] },
-                    { text: "Bootstrap", value: "bootstrap", colors: ["#0044cc","#0088cc","#333333","#e6e6e6"] },
-                    { text: "Silver", value: "silver", colors: ["#298bc8","#515967","#bfc6d0","#eaeaec"] },
-                    { text: "Uniform", value: "uniform", colors: ["#666666","#cccccc","#e7e7e7","#ffffff"] },
-                    { text: "Metro", value: "metro", colors: ["#8ebc00","#787878","#e5e5e5","#ffffff"] },
-                    { text: "Black", value: "black", colors: ["#0167cc","#4698e9","#272727","#000000"] },
-                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9","#0e0e0e","#333333","#565656"] },
-                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c","#880275","#664e62","#1b141a"] },
-                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05","#40444f","#2f3640","#212a33"] }
+                    { text: "Default", value: "default", colors: ["#ef6f1c", "#e24b17", "#5a4b43", "#ededed"] },
+                    { text: "Blue Opal", value: "blueopal", colors: ["#076186", "#7ed3f6", "#94c0d2", "#daecf4"] },
+                    { text: "Bootstrap", value: "bootstrap", colors: ["#0044cc", "#0088cc", "#333333", "#e6e6e6"] },
+                    { text: "Silver", value: "silver", colors: ["#298bc8", "#515967", "#bfc6d0", "#eaeaec"] },
+                    { text: "Uniform", value: "uniform", colors: ["#666666", "#cccccc", "#e7e7e7", "#ffffff"] },
+                    { text: "Metro", value: "metro", colors: ["#8ebc00", "#787878", "#e5e5e5", "#ffffff"] },
+                    { text: "Black", value: "black", colors: ["#0167cc", "#4698e9", "#272727", "#000000"] },
+                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9", "#0e0e0e", "#333333", "#565656"] },
+                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c", "#880275", "#664e62", "#1b141a"] },
+                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05", "#40444f", "#2f3640", "#212a33"] }
                 ]
             }
         });
@@ -695,7 +698,7 @@
         Application: Application,
         applyCurrentMobileOS: applyCurrentMobileOS,
         applyCurrentTheme: applyCurrentTheme,
-        preventFOUC: function() {
+        preventFOUC: function () {
             $("#exampleWrap").css("visibility", "hidden");
         }
     });

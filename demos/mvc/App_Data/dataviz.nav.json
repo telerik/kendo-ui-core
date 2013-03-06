@@ -396,7 +396,7 @@
             "spriteCssClass": "chartAreaIcon",
             "thumbnailUrl": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
-            "packages": [ "!mvc" ],
+            "packages": [ "online" ],
             "items": [{
                 "text": "Launch",
                 "url": "dashboards/stock-history.html",
@@ -417,6 +417,16 @@
                 "meta": "This sample demonstrates the use of Kendo UI jQuery Gauges in the Car Dashboard app."
             }],
             "name": "car-dashboard"
+        },
+        {
+            "text": "Climate",
+            "spriteCssClass": "sparklineIcon",
+            "thumbnailUrl": "content/dataviz/dashboards/climate.gif",
+            "expanded": "true",
+            "items": [{
+                "url": "sparklines/index.html"
+            }],
+            "name": "climate-control"
         }
     ]
 }

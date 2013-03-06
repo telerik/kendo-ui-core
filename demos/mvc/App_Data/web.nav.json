@@ -1487,7 +1487,7 @@
         },
         {
             "packages": ["!mvc"],
-            "text": "Single-Page Application",
+            "text": "Single-Page App",
             "name": "spa",
             "documentation": "framework/kendo",
             "spriteCssClass": "spaIcon",
@@ -1654,6 +1654,28 @@
                     "meta": "This demo illustrates how jQuery templates can be integrated with the robust Kendo UI framework for web app development."
                 }
             ]
+        }
+    ],
+    "Sample Applications": [
+        {
+            "text": "Sushi",
+            "thumbnailUrl": "content/web/overview/websushi-dash.gif",
+            "expanded": "true",
+			"packages": [ "online" ],
+            "items": [{
+                "url": "../websushi/"
+            }],
+            "name": "websushi"
+        },
+        {
+            "text": "AeroViewr",
+            "thumbnailUrl": "content/web/overview/aeroviewr-dash.gif",
+            "expanded": "true",
+			"packages": [ "online" ],
+            "items": [{
+                "url": "../aeroviewr/"
+            }],
+            "name": "aeroviewr"
         }
     ]
 }

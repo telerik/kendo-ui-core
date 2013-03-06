@@ -30,7 +30,7 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")@(category.ToLower().Contains("financial") ? "financial" : "")">
+                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().Contains("application") ? "dashboards" : "")@(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Equals("framework") ? "framework" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")@(category.ToLower().Contains("financial") ? "financial" : "")">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
@@ -52,13 +52,19 @@
                                 }
 
                                 <li @Html.Raw(isActive ? "class=\"active\"" : "")>
-                                @if (widget.Items[0].Url.IndexOf("dashboard") == 0)
+                                @if (category.ToLower().Contains("dashboard"))
                                 {
                                     <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">
                                         <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
                                     </a>
                                 }
-                                    <a @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
+                                @if (category.ToLower().Contains("application"))
+                                {
+                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="_blank">
+                                        <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
+                                    </a>
+                                }
+                                    <a @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="@(category.ToLower().Contains("application") ? "_blank" : "")" >@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
                                 </li>
 
                                 idx++;
@@ -117,10 +123,14 @@
 
         if ("pushState" in history) {
             $(".demos-nav").on("click", "a", function(e) {
-                e.preventDefault();
-
                 var a = $(this),
                     li = a.parent();
+
+                if (a.attr("target")) {
+                    return;
+                }
+
+                e.preventDefault();
 
                 if (li.hasClass("active")) {
                     return;

@@ -45,7 +45,7 @@ html
     font-family: 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
 }
 
-#example {
+.widgetGrid .centerWrap, #example {
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -182,7 +182,8 @@ html
     color:#e26b1d;
 }
 
-.main-nav a
+.main-nav a,
+.demos-nav .dashboards .active a
 {
     color:#2e2e2e;
 }
@@ -1423,17 +1424,22 @@ p#copy
 .widgetGrid .narrowCol
 {
     float:left;
-    width:640px;
+    width:465px;
 }
 
 .widgetGrid .narrowCol
 {
-    width:320px;
+    width:260px;
 }
 
 .widgetGrid .narrowCol ul:empty
 {
     display: none;
+}
+
+.widgetGrid .framework
+{
+    background:rgba(221, 221, 221, .25);
 }
 
 .widgetGrid .mobile-widgets
@@ -1468,12 +1474,13 @@ p#copy
 .widgetGrid ul
 {
     float:left;
-    margin:8px 0 0 14px;
+    margin:8px 4px 0 14px;
     padding:0 0 10px;
 }
-.widgetGrid .wideCol ul
+.widgetGrid .wideCol ul,
+.widgetGrid .narrowCol ul
 {
-    width:110px;
+    min-width: 98px;
 }
 
 .widgetGrid li
@@ -1507,7 +1514,7 @@ p#copy
 
 .widgetGrid .dashboards
 {
-    width:526px;
+    width:235px;
 }
 
 .widgetGrid .dataviz .dashboards
@@ -1536,30 +1543,34 @@ p#copy
     margin-top:30px;
 }
 
+.wideCol.dashboards ul,
+.narrowCol.dashboards ul
+{
+    margin-top:25px;
+}
+
 .dashboards li
 {
     float:left;
-    width:168px;
-    line-height:1.4;
+    width:105px;
+    text-align: center;
 }
 
 .dashboards a
 {
-    float:left;
-    width:68px;
+    width:90px;
 }
 
 .dashboards a:first-child
 {
-    -moz-box-shadow:0 0 3px 1px #d3d3d3;
-    -webkit-box-shadow:0 0 3px 1px #d3d3d3;
-    box-shadow:0 0 3px 1px #d3d3d3;
+    -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .dashboards a+a
 {
-    width:72px;
-    padding:8px 0 0 8px;
+    padding:3px 0 0;
 }
 
 .dashboards img
