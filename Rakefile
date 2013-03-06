@@ -460,7 +460,7 @@ namespace :build do
         ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
             sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
-            sh "cp #{SPRING_DEMOS_WAR} #{TOMCAT_ROOT}/staging-java.war"
+            sh "rsync -avc dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
             sh "rsync -avc dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
         end
 

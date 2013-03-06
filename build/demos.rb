@@ -307,7 +307,10 @@ namespace :demos do
         SPRING_DEMOS_RESOURCES + "css",
         SPRING_DEMOS_RESOURCES,
         SPRING_DEMOS_WAR
-    ]
+    ] do
+        sh "rm -rf dist/demos/staging-java/"
+        sh "unzip -d dist/demos/staging-java/ #{SPRING_DEMOS_WAR}"
+    end
 
     desc('Build php demos for staging')
     task :staging_php => [
