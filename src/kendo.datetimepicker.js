@@ -166,7 +166,7 @@ kendo_module({
                     .removeAttr(DISABLED);
 
                 dateIcon.on(MOUSEDOWN, preventDefault)
-                        .on(CLICK, function(e) {
+                        .on(CLICK, function() {
                             that.toggle("date");
 
                             if (!kendo.support.touch && element[0] !== document.activeElement) {
@@ -176,7 +176,7 @@ kendo_module({
 
 
                 timeIcon.on(MOUSEDOWN, preventDefault)
-                        .on(CLICK, function(e) {
+                        .on(CLICK, function() {
                             that.toggle("time");
 
                             if (!kendo.support.touch && element[0] !== document.activeElement) {

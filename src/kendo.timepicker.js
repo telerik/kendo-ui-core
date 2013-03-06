@@ -669,7 +669,7 @@ kendo_module({
             that._inputWrapper.removeClass(FOCUSED);
         },
 
-        _click: function(e) {
+        _click: function() {
             var that = this,
                 element = that.element,
                 activeElement;
