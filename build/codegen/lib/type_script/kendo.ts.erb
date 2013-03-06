@@ -583,10 +583,13 @@ module kendo.ui {
     }
 }
 
-module kendo.mobile.ui {
+module kendo.mobile {
     declare function init(selector: string): void;
     declare function init(element: JQuery): void;
     declare function init(element: Element): void;
+}
+
+module kendo.mobile.ui {
 
     class Widget extends kendo.ui.Widget {
     }
