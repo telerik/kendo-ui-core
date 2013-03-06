@@ -732,7 +732,7 @@ kendo_module({
 
             if (value) {
                 that.value(value);
-            } else {
+            } else if (!that._bound) {
                 that.select(options.index);
             }
         },
