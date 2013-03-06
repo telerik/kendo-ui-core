@@ -157,8 +157,8 @@
 
             test("open() does not initiate second Ajax request", function() {
                 $.mockjaxSettings.responseTime = 1000;
-                $.mockjaxSettings.contentType = "text/html";
-                $.mockjax({ url: "fake.json", responseText: [] });
+                $.mockjaxSettings.contentType = "application/json";
+                $.mockjax({ url: "fake.json", responseText: '[]' });
 
                 var ddl = new DropDownList($("<input />"), {
                     autoBind: false,
@@ -346,8 +346,8 @@
 
             test("value(value) does not initiate second Ajax request", function() {
                 $.mockjaxSettings.responseTime = 1000;
-                $.mockjaxSettings.contentType = "text/html";
-                $.mockjax({ url: "fake.json", responseText: [] });
+                $.mockjaxSettings.contentType = "application/json";
+                $.mockjax({ url: "fake.json", responseText: '[]' });
 
                 var ddl = new DropDownList($("<input />"), {
                     autoBind: false,
@@ -493,8 +493,8 @@
 
             asyncTest("select value after datasource fetch", 1, function() {
                 $.mockjaxSettings.responseTime = 0;
-                $.mockjaxSettings.contentType = "text/html";
-                $.mockjax({ url: "fake.json", responseText: ["item1", "item2"] });
+                $.mockjaxSettings.contentType = "application/json";
+                $.mockjax({ url: "fake.json", responseText: '["item1", "item2"]' });
 
                 var ddl = new DropDownList($("<input />"), {
                     optionLabel: "Select",
