@@ -12,8 +12,6 @@ kendo_module({
         Widget = ui.Widget,
         support = kendo.support,
         getOffset = kendo.getOffset,
-        browser = support.browser,
-        appendingToBodyTriggersResize = browser.msie && browser.version < 9,
         OPEN = "open",
         CLOSE = "close",
         DEACTIVATE = "deactivate",
@@ -34,7 +32,6 @@ kendo_module({
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
-        DOCUMENT= $(document),
         WINDOW = $(window),
         DOCUMENT_ELEMENT = $(document.documentElement),
         RESIZE_SCROLL = "resize scroll",
@@ -136,8 +133,6 @@ kendo_module({
             that._mousedownProxy = function(e) {
                 that._mousedown(e);
             };
-
-            that._currentWidth = DOCUMENT.width();
 
             that._resizeProxy = function(e) {
                 that._resize(e);
@@ -324,25 +319,25 @@ kendo_module({
             }
         },
 
-        _resize: function() {
+        _resize: function(e) {
             var that = this,
                 activeElement;
 
-            if (appendingToBodyTriggersResize) {
-                var width = DOCUMENT.width();
-                if (width == that._currentWidth) {
-                    return;
+            if (e.type === "resize") {
+                clearTimeout(that._resizeTimeout);
+                that._resizeTimeout = setTimeout(function() {
+                    that._position();
+                    that._resizeTimeout = null;
+                }, 50);
+            } else {
+                try {
+                    // prevent IE JS error when inside iframe
+                    activeElement = document.activeElement;
+                } catch (err) {}
+
+                if (!that._hovered && !contains(that.element[0], activeElement)) {
+                    that.close();
                 }
-                that._currentWidth = width;
-            }
-
-            try {
-                // prevent IE JS error when inside iframe
-                activeElement = document.activeElement;
-            } catch (err) {}
-
-            if (!that._hovered && !contains(that.element[0], activeElement)) {
-                that.close();
             }
         },
 

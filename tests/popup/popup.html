@@ -697,6 +697,21 @@
                 equal(anchor.css("font-style"), div.css("font-style"));
             });
 
+            asyncTest("re-position on resize", function() {
+                var popup = new Popup(div, { anchor: anchor });
+                popup.open();
+
+                stub(popup, {
+                    _position: popup._position
+                });
+
+                $(window).trigger("resize");
+                setTimeout(function() {
+                    start();
+                    equal(popup.calls("_position"), 1);
+                }, 100);
+            });
+
         </script>
     </body>
 </html>
