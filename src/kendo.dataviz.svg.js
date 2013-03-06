@@ -905,7 +905,6 @@ kendo_module({
     var SVGClipAnimationDecorator = Class.extend({
         init: function(view) {
             this.view = view;
-            this.clipId = uniqueId();
         },
 
         decorate: function(element) {
@@ -915,10 +914,15 @@ kendo_module({
                 options = view.options,
                 animation = element.options.animation,
                 definitions = view.definitions,
-                clipPath = definitions[clipId],
+                clipPath,
                 clipRect;
 
             if (animation && animation.type === CLIP && options.transitions) {
+                if (!clipId) {
+                    decorator.clipId = clipId = uniqueId();
+                }
+
+                clipPath = definitions[clipId];
                 if (!clipPath) {
                     clipPath = new SVGClipPath({ id: clipId });
                     clipRect = view.createRect(

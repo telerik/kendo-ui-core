@@ -44,6 +44,8 @@ kendo_module({
         FORMAT_REGEX = /\{\d+:?/,
         HEIGHT = "height",
         ID_PREFIX = "k",
+        ID_POOL_SIZE = 1000,
+        ID_START = 10000,
         INITIAL_ANIMATION_DURATION = 600,
         LEFT = "left",
         LINEAR = "linear",
@@ -455,7 +457,7 @@ kendo_module({
             if (element.discoverable) {
                 root = element.getRoot();
                 if (root) {
-                    root.modelMap.put(modelId, element);
+                    root.modelMap[modelId] = element;
                 }
             }
 
@@ -466,11 +468,11 @@ kendo_module({
             var element = this,
                 options = element.options;
 
-            options.modelId = uniqueId();
+            options.modelId = IDPool.current.alloc();
             element.discoverable = true;
         },
 
-        disableDiscovery: function() {
+        destroy: function() {
             var element = this,
                 children = element.children,
                 root = element.getRoot(),
@@ -478,11 +480,15 @@ kendo_module({
                 i;
 
             if (root && modelId) {
-                root.modelMap.remove(modelId);
+                if (root.modelMap[modelId]) {
+                    IDPool.current.free(modelId);
+                }
+
+                root.modelMap[modelId] = undefined;
             }
 
             for (i = 0; i < children.length; i++) {
-                children[i].disableDiscovery();
+                children[i].destroy();
             }
         },
 
@@ -521,7 +527,7 @@ kendo_module({
             var root = this;
 
             // Logical tree ID to element map
-            root.modelMap = createModelMap();
+            root.modelMap = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -1000,6 +1006,18 @@ kendo_module({
                     axis.labels.push(label);
                 }
             }
+        },
+
+        destroy: function() {
+            var axis = this,
+                labels = axis.labels,
+                i;
+
+            for (i = 0; i < labels.length; i++) {
+                labels[i].destroy();
+            }
+
+            ChartElement.fn.destroy.call(axis);
         },
 
         lineBox: function() {
@@ -1676,7 +1694,6 @@ kendo_module({
             var element = this;
             element.children = [];
             element.options = deepExtend({}, element.options, options);
-            element.modelIdAttr = kendo.support.browser.msie ? "data-id" : "id";
         },
 
         render: function() {
@@ -1725,7 +1742,7 @@ kendo_module({
 
         renderId: function() {
             var element = this;
-            return element.renderAttr(element.modelIdAttr, element.options.id);
+            return element.renderAttr("id", element.options.id);
         },
 
         renderAttr: function (name, value) {
@@ -2459,6 +2476,36 @@ kendo_module({
         yellow: "ffff00", yellowgreen: "9acd32"
     };
 
+    var IDPool = Class.extend({
+        init: function(size, prefix, start) {
+            this._pool = [];
+            this._size = size;
+            this._id = start;
+            this._prefix = prefix;
+        },
+
+        alloc: function() {
+            var that = this,
+                pool = that._pool;
+
+            if (pool.length > 0) {
+                return pool.pop();
+            }
+
+            return that._prefix + that._id++;
+        },
+
+        free: function(id) {
+            var that = this,
+                pool = that._pool;
+
+            if (pool.length < that._size) {
+                pool.push(id);
+            }
+        }
+    });
+    IDPool.current = new IDPool(ID_POOL_SIZE, ID_PREFIX, ID_START);
+
     var LRUCache = Class.extend({
         init: function(size) {
             this._size = size;
@@ -2517,58 +2564,6 @@ kendo_module({
             }
         }
     });
-
-    var Hashtable = Class.extend({
-        init: function() {
-            this._map = {};
-        },
-
-        put: function(key, value) {
-            this._map[key] = value;
-        },
-
-        get: function(key) {
-            return this._map[key];
-        },
-
-        remove: function(key) {
-            delete this._map[key];
-        }
-    });
-
-    var List = Class.extend({
-        init: function() {
-            this._keys = [];
-            this._values = [];
-        },
-
-        put: function(key, value) {
-            this._keys.push(key);
-            this._values.push(value);
-        },
-
-        get: function(key) {
-            var index = indexOf(key, this._keys);
-
-            if (index !== -1) {
-                return this._values[index];
-            }
-        },
-
-        remove: function(key) {
-            var list = this,
-                index = indexOf(key, list._keys);
-
-            if (index !== -1) {
-                list._keys[index] = null;
-                list._values[index] = null;
-            }
-        }
-    });
-
-    function createModelMap() {
-        return kendo.support.browser.msie ? new List() : new Hashtable();
-    }
 
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),
@@ -2673,15 +2668,9 @@ kendo_module({
         return hash.sort().join(" ");
     }
 
-    var uniqueId = (function() {
-        // Implements 32-bit Linear feedback shift register
-        var lfsr = 1;
-
-        return function() {
-            lfsr = ((lfsr >>> 1) ^ (-(lfsr & 1) & 0xD0000001)) >>> 0;
-            return ID_PREFIX + lfsr.toString(16);
-        };
-    })();
+    function uniqueId() {
+        return IDPool.current.alloc();
+    }
 
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEGREE;
@@ -2814,11 +2803,7 @@ kendo_module({
     }
 
     function getElement(modelId) {
-        if (kendo.support.browser.msie) {
-            return $("[data-id='" + modelId + "']")[0];
-        } else {
-            return doc.getElementById(modelId);
-        }
+        return doc.getElementById(modelId);
     }
 
     function detached(element) {
@@ -2900,6 +2885,7 @@ kendo_module({
         BarIndicatorAnimatin: BarIndicatorAnimatin,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
+        IDPool: IDPool,
         LRUCache: LRUCache,
         NumericAxis: NumericAxis,
         Point2D: Point2D,

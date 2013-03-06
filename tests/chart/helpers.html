@@ -968,34 +968,34 @@
             })();
 
             (function() {
-                var getElementById = dataviz.getElement,
-                    container,
-                    msie;
-
                 // ------------------------------------------------------------
-                module("getElementById", {
+                var pool;
+
+                module("IDPool", {
                     setup: function() {
-                        msie = kendo.support.browser.msie;
-                        container = $("<div id='container' />");
-                        $(document.body).append(container);
-                    },
-                    teardown: function() {
-                        container.remove();
-                        kendo.support.browser.msie = msie;
+                        pool = new dataviz.IDPool(3, "k", 100);
                     }
                 });
 
-                test("searches for elements by id in non-IE", function() {
-                    kendo.support.browser.msie = false;
-                    $("<div id='test' />").appendTo(container);
-                    ok(getElementById("test"));
+                test("returns ascending IDs", function() {
+                    equals(pool.alloc(), "k100");
+                    equals(pool.alloc(), "k101");
                 });
 
-                test("searches for elements by data-id in IE", function() {
-                    kendo.support.browser.msie = true;
-                    $("<div data-id='test' />").appendTo(container);
-                    ok(getElementById("test"));
+                test("reuses IDs", function() {
+                    var id = pool.alloc();
+                    pool.free(id);
+                    equals(pool.alloc(), id);
                 });
+
+                test("pool does not grow beyond max size", function() {
+                    for (var i = 0; i < 10; i++) {
+                        pool.free("id" + i);
+                    }
+
+                    equals(pool._pool.length, 3);
+                });
+
             })();
 
         </script>

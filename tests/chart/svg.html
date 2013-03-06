@@ -444,17 +444,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    group = new dataviz.SVGGroup({ id: "1" });
-                    ok(group.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -506,17 +496,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createText({ id: "1" });
-                    ok(text.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -670,17 +650,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    path = new dataviz.SVGPath({ id: "1" });
-                    ok(path.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -906,17 +876,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createCircle({ id: "1" });
-                    ok(circle.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 

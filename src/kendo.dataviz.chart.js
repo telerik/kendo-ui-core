@@ -335,10 +335,13 @@ kendo_module({
 
         _redraw: function() {
             var chart = this,
-                model = chart._model = chart._getModel(),
+                model = chart._getModel(),
                 viewType = dataviz.ui.defaultView(),
                 view;
 
+            chart._destroyView();
+
+            chart._model = model;
             chart._plotArea = model._plotArea;
 
             if (viewType) {
@@ -659,7 +662,7 @@ kendo_module({
                 element;
 
             if (modelId) {
-                element = model.modelMap.get(modelId);
+                element = model.modelMap[modelId];
             }
 
             if (element && element.aliasFor) {
@@ -1016,7 +1019,26 @@ kendo_module({
                 chart._userEvents.destroy();
             }
 
+            chart._destroyView();
+
             Widget.fn.destroy.call(chart);
+        },
+
+        _destroyView: function() {
+            var chart = this,
+                pool = dataviz.IDPool.current,
+                model = chart._model,
+                viewElement = chart._viewElement;
+
+            if (model) {
+                model.destroy();
+            }
+
+            if (viewElement) {
+                $("[id]", viewElement).each(function() {
+                    pool.free($(this).attr("id"));
+                });
+            }
         }
     });
 
@@ -5479,7 +5501,7 @@ kendo_module({
             pane.axes = [];
             pane.charts = [];
 
-            pane.content.disableDiscovery();
+            pane.content.destroy();
             pane.content.children = [];
         },
 
@@ -5615,6 +5637,23 @@ kendo_module({
             }
 
             plotArea.panes = panes;
+        },
+
+        destroy: function() {
+            var plotArea = this,
+                charts = plotArea.charts,
+                axes = plotArea.axes,
+                i;
+
+            for (i = 0; i < charts.length; i++) {
+                charts[i].destroy();
+            }
+
+            for (i = 0; i < axes.length; i++) {
+                axes[i].destroy();
+            }
+
+            ChartElement.fn.destroy.call(plotArea);
         },
 
         createCrosshairs: function() {
