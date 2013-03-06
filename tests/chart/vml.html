@@ -404,17 +404,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createText({ id: "1" });
-                    ok(text.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -509,17 +499,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createRotatedText({ id: "1" });
-                    ok(text.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -653,17 +633,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createPath({ id: "1" });
-                    ok(path.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -951,17 +921,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    var group = new dataviz.VMLGroup({ id: 1 });
-                    ok(group.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -1014,17 +974,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createCircle({ id: "1" });
-                    ok(circle.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 
@@ -1148,17 +1098,7 @@
                     }
                 });
 
-                test("renders data-id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    createClipRect({ id: 1 });
-                    ok(clipRect.render().indexOf("data-id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
+                test("renders id", function() {
                     var msie = kendo.support.browser.msie;
                     kendo.support.browser.msie = false;
 

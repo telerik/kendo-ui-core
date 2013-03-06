@@ -1694,7 +1694,6 @@ kendo_module({
             var element = this;
             element.children = [];
             element.options = deepExtend({}, element.options, options);
-            element.modelIdAttr = kendo.support.browser.msie ? "data-id" : "id";
         },
 
         render: function() {
@@ -1743,7 +1742,7 @@ kendo_module({
 
         renderId: function() {
             var element = this;
-            return element.renderAttr(element.modelIdAttr, element.options.id);
+            return element.renderAttr("id", element.options.id);
         },
 
         renderAttr: function (name, value) {
@@ -2804,11 +2803,7 @@ kendo_module({
     }
 
     function getElement(modelId) {
-        if (kendo.support.browser.msie) {
-            return $("[data-id='" + modelId + "']")[0];
-        } else {
-            return doc.getElementById(modelId);
-        }
+        return doc.getElementById(modelId);
     }
 
     function detached(element) {
