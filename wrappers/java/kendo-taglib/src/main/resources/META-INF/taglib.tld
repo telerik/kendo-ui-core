@@ -1809,6 +1809,12 @@ If not specified, the available space is split evenly between the series.Availab
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The border opacity.</description>
+            <name>border.opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The color of the border.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
