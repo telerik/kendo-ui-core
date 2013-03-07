@@ -51,14 +51,6 @@ public class SeriesItemBorderTag extends  BaseTag  /* interfaces *//* interfaces
         return "chart-seriesItem-border";
     }
 
-    public float getBorder.opacity() {
-        return (float)getProperty("border.opacity");
-    }
-
-    public void setBorder.opacity(float value) {
-        setProperty("border.opacity", value);
-    }
-
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -73,6 +65,14 @@ public class SeriesItemBorderTag extends  BaseTag  /* interfaces *//* interfaces
 
     public void setDashType(String value) {
         setProperty("dashType", value);
+    }
+
+    public float getOpacity() {
+        return (float)getProperty("opacity");
+    }
+
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
     public float getWidth() {
