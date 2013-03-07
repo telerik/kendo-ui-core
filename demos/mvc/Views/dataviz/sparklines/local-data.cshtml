@@ -45,11 +45,6 @@
                     data: [rowData.hourly],
                     valueAxis: {
                         max: 50
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: false
-                        }
                     }
                 });
 
@@ -61,29 +56,21 @@
                     }],
                     valueAxis: {
                         min: -40,
-                        max: 40                        
+                        max: 40
                     },
                     categoryAxis: {
                         visible: true,
                         majorTicks: {
                             visible: false
-                        },
-                        crosshair: {
-                            visible: false
                         }
                     }
                 });
-                
+
                 $(".bar-direct", row).kendoSparkline({
                     type: "bar",
                     data: [rowData.direct],
                     valueAxis: {
                         max: 50
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: false
-                        }
                     }
                 });
 
@@ -101,11 +88,6 @@
                     }],
                     valueAxis: {
                         max: 10
-                    },
-                    categoryAxis: {
-                        crosshair: {
-                            visible: false
-                        }
                     }
                 });
             }

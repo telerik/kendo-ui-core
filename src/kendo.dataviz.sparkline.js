@@ -17,6 +17,7 @@ kendo_module({
 
         deepExtend = kendo.deepExtend,
         isArray = $.isArray,
+        inArray = dataviz.inArray,
         math = Math;
 
     // Constants =============================================================
@@ -25,7 +26,8 @@ kendo_module({
         DEAULT_BULLET_WIDTH = 150,
         BAR = "bar",
         BULLET = "bullet",
-        PIE = "pie";
+        PIE = "pie",
+        NO_CROSSHAIR = [BAR, BULLET];
 
     // Sparkline =============================================================
     var Sparkline = Chart.extend({
@@ -52,7 +54,8 @@ kendo_module({
                 }
             });
 
-            if (options.series[0].type === BULLET || options.type === BULLET) {
+            if (inArray(options.series[0].type, NO_CROSSHAIR) ||
+                inArray(options.seriesDefaults.type, NO_CROSSHAIR)) {
                 options = deepExtend({}, {
                         categoryAxis: {
                             crosshair: {

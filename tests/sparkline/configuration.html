@@ -164,6 +164,82 @@
                     createSparkline({ data: [1], type: "bar" });
                     same(sparkline._plotArea.series[0].stack, true);
                 });
+
+                test("crosshair is disabled for bullet sparkline", function() {
+                    createSparkline({ data: [1], type: "bullet" });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair is disabled for bullet seriesDefaults", function() {
+                    createSparkline({ data: [1], seriesDefaults: { type: "bullet" } });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair can be enabled for bullet sparkline", function() {
+                    createSparkline({ data: [1], type: "bullet",
+                        categoryAxis: {
+                            crosshair: {
+                                visible: true
+                            }
+                        }
+                    });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                });
+
+                test("crosshair can be enabled for bullet sparkline", function() {
+                    createSparkline({
+                        series: [{ data: [1], type: "bullet" }],
+                        categoryAxis: {
+                            crosshair: {
+                                visible: true
+                            }
+                        }
+                    });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                });
+
+                test("crosshair is disabled for bullet series", function() {
+                    createSparkline({ series: [{ data: [1], type: "bullet" }] });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair is disabled for bar sparkline", function() {
+                    createSparkline({ data: [1], type: "bar" });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair can be enabled for bar sparkline", function() {
+                    createSparkline({ data: [1], type: "bar",
+                        categoryAxis: {
+                            crosshair: {
+                                visible: true
+                            }
+                        }
+                    });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                });
+
+                test("crosshair is disabled for bar seriesDefaults", function() {
+                    createSparkline({ data: [1], seriesDefaults: { type: "bar" } });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair is disabled for bar series", function() {
+                    createSparkline({ series: [{ data: [1], type: "bar" }] });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair can be enabled for bar sparkline", function() {
+                    createSparkline({
+                        series: [{ data: [1], type: "bar" }],
+                        categoryAxis: {
+                            crosshair: {
+                                visible: true
+                            }
+                        }
+                    });
+                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                });
             })();
         </script>
 
