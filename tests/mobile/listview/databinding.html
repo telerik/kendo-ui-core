@@ -328,7 +328,7 @@
 
             asyncTest("refreshes on pull if configured", 2, function(){
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
-                var ds = kendo.data.DataSource.create({ transport: { read: { url: "foo.json", type: "json" } } });
+                var ds = kendo.data.DataSource.create({ transport: { read: { url: "foo.json", dataType: "json" } } });
                 var listview;
 
                 window.initListView = function(e) {
@@ -366,7 +366,7 @@
                 var listview;
                 var ds = kendo.data.DataSource.create({
                     transport: {
-                        read: { url: "foo.json", type: "json" },
+                        read: { url: "foo.json", dataType: "json" },
                         parameterMap: function(options) {
                             //first time DS does not send page number
                             if (options.page !== undefined) {
@@ -423,7 +423,7 @@
                 var listview, calls = 1;
                 var ds = kendo.data.DataSource.create({
                     transport: {
-                        read: { url: "foo.json", type: "json" },
+                        read: { url: "foo.json", dataType: "json" },
                         parameterMap: function(options) {
                             //first time DS does not send page number
                             if (options.page !== undefined) {
@@ -494,7 +494,7 @@
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
                 var ds = kendo.data.DataSource.create({
                     transport: {
-                        read: { url: "foo.json", type: "json" }
+                        read: { url: "foo.json", dataType: "json" }
                     },
                     serverPaging: true,
                     pageSize: 1
@@ -535,7 +535,7 @@
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
                 var ds = kendo.data.DataSource.create({
                     transport: {
-                        read: { url: "foo.json", type: "json" }
+                        read: { url: "foo.json", dataType: "json" }
                     },
                     serverPaging: true,
                     pageSize: 1
@@ -636,7 +636,7 @@
 
             asyncTest("ListView appends on scroll", 2, function(){
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
-                var ds = kendo.data.DataSource.create({ pageSize: 1, transport: { read: { url: "foo.json", type: "json" } } });
+                var ds = kendo.data.DataSource.create({ pageSize: 1, transport: { read: { url: "foo.json", dataType: "json" } } });
                 var listview;
 
                 window.initListView = function(e) {
@@ -679,7 +679,7 @@
 
                 var ds = kendo.data.DataSource.create({
                     pageSize: 1,
-                    transport: { read: { url: "foo.json", type: "json" } }
+                    transport: { read: { url: "foo.json", dataType: "json" } }
                 });
 
                 var listview;
@@ -724,7 +724,7 @@
                     pageSize: 2,
                     serverPaging: true,
                     schema: { total: function() { return 6; } },
-                    transport: { read: { url: "foo.json", type: "json" } }
+                    transport: { read: { url: "foo.json", dataType: "json" } }
                 });
 
                 var listview, calls = 1;
