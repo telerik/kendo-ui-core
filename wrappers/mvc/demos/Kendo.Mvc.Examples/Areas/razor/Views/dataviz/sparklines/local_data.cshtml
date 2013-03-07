@@ -1,7 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master"
-Inherits="System.Web.Mvc.ViewPage<IList<Kendo.Mvc.Examples.Models.CompensationStats>>" %>
+﻿@model IList<Kendo.Mvc.Examples.Models.CompensationStats>
 
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="chart-wrapper">
     <table id="stats" class="stats">
         <thead>
@@ -14,24 +12,23 @@ Inherits="System.Web.Mvc.ViewPage<IList<Kendo.Mvc.Examples.Models.CompensationSt
             </tr>
         </thead>
         <tbody>
-<%
+@{
 for (var i = 0; i < Model.Count; i++) {
     var row = Model[i];
-%>
         <tr class="rows">
-            <td class="year"><%= row.Year %></td>
+            <td class="year">@(row.Year)</td>
             <td class="hourly">
-                <%= Html.Kendo().Sparkline()
+                @(Html.Kendo().Sparkline()
                         .Name("bar-hourly-" + i)
                         .Type(SparklineType.Bar)
                         .Data(row.Hourly)
                         .ValueAxis(axis => axis.Numeric().Max(50))
                         .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px"  })
-                %>
+                )
             </td>
             <td class="change">
-                <%= Html.Kendo().Sparkline()
+                @(Html.Kendo().Sparkline()
                         .Name("bar-change-" + i)
                         .Series(series => series
                                 .Bar(new double[] { row.Change }).NegativeColor("#808080")
@@ -43,20 +40,20 @@ for (var i = 0; i < Model.Count; i++) {
                         )
                         .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px" })
-                %>
+                )
             </td>
             <td class="direct">
-                <%= Html.Kendo().Sparkline()
+                @(Html.Kendo().Sparkline()
                         .Name("bar-direct-" + i)
                         .Type(SparklineType.Bar)
                         .Data(row.Direct)
                         .ValueAxis(axis => axis.Numeric().Max(50))
                         .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px" })
-                    %>
+                )
             </td>
             <td class="benefits">
-                <%= Html.Kendo().Sparkline(row.Benefits)
+                @(Html.Kendo().Sparkline(row.Benefits)
                         .Name("bar-benefits-" + i)
                         .DataSource(ds => ds
                             .Group(g => g.Add(benefits => benefits.Type))
@@ -67,18 +64,15 @@ for (var i = 0; i < Model.Count; i++) {
                         .ValueAxis(axis => axis.Numeric().Max(10))
                         .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px"  })
-                    %>
+                )
             </td>
         </tr>
-<%
-}
-%>
+}}
         </tbody>
     </table>
 </div>
-</asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+@section HeadContent {
     <style>
         .chart-wrapper {
             padding: 10px 0;
@@ -122,4 +116,4 @@ for (var i = 0; i < Model.Count; i++) {
             text-align: center;
         }
     </style>
-</asp:Content>
+}

@@ -104,6 +104,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Grouped_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Remote_DataController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
@@ -615,6 +616,7 @@
     <Content Include="Areas\razor\Views\dataviz\bullet_charts\index.cshtml" />
     <Content Include="Areas\aspx\Views\dataviz\bullet_charts\index.aspx" />
     <Content Include="Areas\razor\Views\dataviz\bullet_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\sparklines\local_data.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
