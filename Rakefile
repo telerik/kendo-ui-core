@@ -514,6 +514,7 @@ namespace :build do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
             sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
             sh "rsync -avc dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
+            sh "curl -s --netrc http://localhost:8081/manager/text/reload?path=/staging-java"
             sh "rsync -avc dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
         end
 
