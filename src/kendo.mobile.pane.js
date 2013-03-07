@@ -62,6 +62,7 @@ kendo_module({
             that.viewEngine = new ViewEngine({
                 container: element,
                 transition: that.options.transition,
+                serverNavigation: that.options.serverNavigation,
                 layout: that.options.layout,
                 loader: that.loader
             });
@@ -100,7 +101,8 @@ kendo_module({
 
         navigate: function(url, transition) {
             var that = this,
-                history = that.history;
+                history = that.history,
+                remoteNavigation;
 
             if (url === BACK) {
                 history.pop();
@@ -109,8 +111,11 @@ kendo_module({
                 that.history.push(url);
             }
 
-            that.trigger(NAVIGATE, {url: url});
-            that.viewEngine.showView(url, transition);
+            remoteNavigation = that.viewEngine.showView(url, transition);
+
+            if (!remoteNavigation || !that.options.serverNavigation)  {
+                that.trigger(NAVIGATE, {url: url});
+            }
         },
 
         hideLoading: function() {

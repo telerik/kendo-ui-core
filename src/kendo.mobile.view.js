@@ -451,32 +451,21 @@ kendo_module({
         },
 
         showView: function(url, transition) {
-            var that = this,
-                container = that.container,
-                params = urlParams(url),
-                view,
-                element,
-                urlPath = url.split("?")[0];
-
-            if (url === that.url) {
+            if (url === this.url) {
                 return;
             }
 
+            this.trigger(SHOW_START);
+
+            var that = this,
+                remote = false,
+                showClosure = function(view) {
+                    that._show(view, transition, urlParams(url));
+                },
+                element = that._findViewElement(url),
+                view = element.data("kendoView");
+
             that.url = url;
-            that.trigger(SHOW_START);
-
-            if (!url || url === "/") {
-                element = that.rootView;
-            } else {
-                element = container.children("[" + attr("url") + "='" + urlPath + "']");
-
-                // do not try to search for "#/foo/bar" id, jQuery throws error
-                if (!element[0] && urlPath.indexOf("/") === -1) {
-                    element = container.children(urlPath.charAt(0) === "#" ? urlPath : "#" + urlPath);
-                }
-            }
-
-            view = element.data("kendoView");
 
             if (view && view.reload) {
                 view.purge();
@@ -488,10 +477,31 @@ kendo_module({
                     view = that._createView(element);
                 }
 
-                that._show(view, transition, params);
+                showClosure(view);
             } else {
-                that._loadView(url, function(view) { that._show(view, transition, params); });
+                remote = true;
+                that._loadView(url, showClosure);
             }
+
+            return remote;
+        },
+
+        _findViewElement: function(url) {
+            var element,
+                urlPath = url.split("?")[0];
+
+            if (!url || url === "/") {
+                return this.rootView;
+            }
+
+            element = this.container.children("[" + attr("url") + "='" + urlPath + "']");
+
+            // do not try to search for "#/foo/bar" id, jQuery throws error
+            if (!element[0] && urlPath.indexOf("/") === -1) {
+                element = this.container.children(urlPath.charAt(0) === "#" ? urlPath : "#" + urlPath);
+            }
+
+            return element;
         },
 
         _createView: function(element) {
@@ -520,6 +530,11 @@ kendo_module({
 
         _loadView: function(url, callback) {
             var that = this;
+
+            if (this.serverNavigation) {
+                location.href = url;
+                return;
+            }
 
             if (that._xhr) {
                 that._xhr.abort();
