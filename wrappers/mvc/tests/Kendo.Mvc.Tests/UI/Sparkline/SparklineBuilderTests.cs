@@ -23,10 +23,17 @@ namespace Kendo.Mvc.UI.Tests.Sparkline
         }
 
         [Fact]
-        public void Data_should_wrap_data()
+        public void Data_should_set_SeriesData()
         {
             builder.Data(new int[] { 1, 2, 3, 4 });
-            Assert.True(sparkline.Data is IEnumerable<object>);
+            Assert.True(sparkline.SeriesData is IEnumerable<int>);
+        }
+
+        [Fact]
+        public void Data_from_dobule_should_set_SeriesData()
+        {
+            builder.Data(1);
+            sparkline.SeriesData.ShouldEqual(new double[] { 1 });
         }
 
         [Fact]

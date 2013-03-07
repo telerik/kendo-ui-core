@@ -76,9 +76,9 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Data_is_serialized()
+        public void SeriesData_is_serialized()
         {
-            sparkline.Data = new object[] { 1, 2 };
+            sparkline.SeriesData = new object[] { 1, 2 };
             sparkline.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("\"data\":[1,2]");
