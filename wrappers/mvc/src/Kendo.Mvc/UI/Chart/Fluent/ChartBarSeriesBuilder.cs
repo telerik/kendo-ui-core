@@ -193,6 +193,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the bar border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public ChartBarSeriesBuilder<T> Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(Series.Border));
+            return this;
+        }
+
+        /// <summary>
         /// Sets the bar effects overlay
         /// </summary>
         /// <param name="overlay">The bar effects overlay. The default is ChartBarSeriesOverlay.Glass</param>

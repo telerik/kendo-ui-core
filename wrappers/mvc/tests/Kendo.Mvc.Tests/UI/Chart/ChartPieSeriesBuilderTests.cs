@@ -73,6 +73,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Border_builder_should_configure_border()
+        {
+            builder.Border(b => b.Opacity(0.5));
+            series.Border.Opacity.ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Border_builder_should_return_builder()
+        {
+            builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Overlay_should_set_overlay()
         {
             builder.Overlay(ChartPieSeriesOverlay.None);

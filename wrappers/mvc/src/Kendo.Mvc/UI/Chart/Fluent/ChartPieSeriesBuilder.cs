@@ -181,6 +181,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the pie border
+        /// </summary>
+        /// <param name="configurator">The border configuration action</param>
+        public ChartPieSeriesBuilder<T> Border(Action<ChartBorderBuilder> configurator)
+        {
+            configurator(new ChartBorderBuilder(Series.Border));
+            return this;
+        }
+
+        /// <summary>
         /// Sets the pie segments effects overlay
         /// </summary>
         /// <param name="overlay">
