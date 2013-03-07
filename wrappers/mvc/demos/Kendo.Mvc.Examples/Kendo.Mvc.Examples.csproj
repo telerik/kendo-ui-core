@@ -587,6 +587,7 @@
     <Content Include="Areas\aspx\Views\web\window\ajaxcontent1.ascx" />
     <Content Include="Areas\aspx\Views\web\window\animation.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bullet_charts\remote_data.aspx" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\gap_spacing.cshtml" />
     <None Include="Areas\razor\Views\dataviz\bullet_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
     <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />

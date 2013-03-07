@@ -20,7 +20,6 @@
         .ChartArea(chartArea => chartArea
             .Background("transparent")
         )
-        .SeriesDefaults(defaults => defaults.Column())
         .Series(series =>
         {
             series.Column(new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }).Name("India");

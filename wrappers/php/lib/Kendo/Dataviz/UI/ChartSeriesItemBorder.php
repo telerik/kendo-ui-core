@@ -24,6 +24,15 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
     }
 
     /**
+    * The border opacity.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
+    */
+    public function border.opacity($value) {
+        return $this->setProperty('border.opacity', $value);
+    }
+
+    /**
     * The width of the border.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder

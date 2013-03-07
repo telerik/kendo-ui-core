@@ -2020,6 +2020,11 @@
                     equal(rect.style.dashType, bar.options.border.dashType);
                 });
 
+                test("sets stroke opacity", function() {
+                    createBar({ border: { color: "red", width: 1, opacity: 0.5 } });
+                    equal(rect.style.strokeOpacity, bar.options.border.opacity);
+                });
+
                 test("sets fill opacity", function() {
                     createBar({ opacity: 0.5 });
                     same(rect.style.fillOpacity, bar.options.opacity);
