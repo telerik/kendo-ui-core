@@ -1,6 +1,6 @@
 
         <div id="example" class="k-content">
-        <div id="cap-view" class="k-header">
+        <div id="cap-view" class="demo-section">
             <h2>Customize your Kendo Cap</h2>
             <div id="cap" class="black-cap"></div>
             <div id="options">
@@ -19,24 +19,21 @@
             </div>
         </div>
         <style scoped>
-            #example h2 {
-                font-weight: normal;
+            .demo-section {
+		width: 460px;
+		height: 300px;
+		padding: 30px;
             }
-            #cap-view {
-                border-radius: 10px 10px 10px 10px;
-                border-style: solid;
-                border-width: 1px;
-                overflow: hidden;
-                width: 500px;
-                margin: 30px auto;
-                padding: 20px 20px 0 20px;
-                background-position: 0 -255px;
+            .demo-section h2 {
+		text-transform: uppercase;
+		font-size: 1.2em;
+		margin-bottom: 30px;
             }
             #cap {
                 float: left;
                 width: 242px;
                 height: 225px;
-                margin: 30px 40px 30px 20px;
+                margin: 20px 30px 30px 0;
                 background-image: url('../../content/web/dropdownlist/cap.png');
                 background-repeat: no-repeat;
                 background-color: transparent;
@@ -51,7 +48,7 @@
                 background-position: 0 -450px;
             }
             #options {
-                padding: 30px;
+                padding: 1px 0 30px 30px;
             }
             #options h3 {
                 font-size: 1em;
