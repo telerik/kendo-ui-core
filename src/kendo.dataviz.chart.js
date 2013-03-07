@@ -4735,6 +4735,7 @@ kendo_module({
                 border = borderOptions.width > 0 ? {
                     stroke: borderOptions.color,
                     strokeWidth: borderOptions.width,
+                    strokeOpacity: borderOptions.opacity,
                     dashType: borderOptions.dashType
                 } : {},
                 elements = [],

@@ -347,14 +347,19 @@
                     sameBox(segment.box, box);
                 });
 
-                test("sets segment border color", function() {
+                test("sets border color", function() {
                     createSegment({ border: { color: "red" } });
-                    equals(segment.options.border.color, "red");
+                    equals(sector.style.stroke, "red");
                 });
 
                 test("sets pie border width", function() {
                     createSegment({ border: { width: 4 } });
-                    equals(segment.options.border.width, 4);
+                    equals(sector.style.strokeWidth, 4);
+                });
+
+                test("sets pie border opacity", function() {
+                    createSegment({ border: { width: 4, opacity: 0.5 } });
+                    equals(sector.style.strokeOpacity, 0.5);
                 });
 
                 test("tooltipAnchor is set distance from segment", function() {
