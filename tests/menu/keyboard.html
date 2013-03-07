@@ -6,7 +6,6 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.menu.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
@@ -28,7 +27,7 @@
     </head>
     <body>
 
-        <ul id="Menu1" data-role="menu" class="k-widget k-reset k-header k-menu k-menu-horizontal" tabindex="0" style="position:absolute;visibility:hidden">
+        <ul id="Menu1" data-role="menu" class="k-widget k-reset k-header k-menu k-menu-horizontal" tabindex="0">
                 <li class="k-item k-state-default k-first"><span class="k-link">
                     First Item
                     <span class="k-icon k-i-arrow-s"></span></span><ul class="k-group">
@@ -50,7 +49,7 @@
                         <li class="k-item k-state-default k-last"><span class="k-link">Sub Item 2</span></li>
                     </ul>
                 </li>
-                <li>Fourth item
+                <li id="menuItem4">Fourth item
                     <ul>
                         <li>
                             <div id="template">
@@ -82,7 +81,7 @@
                 menu = getMenu();
                 menu._oldHoverItem = null;
                 menu.wrapper.find(FOCUSEDCLASS).removeClass(FOCUSEDSTATE);
-                
+
             },
             teardown: function() {
                 openedItem = null;
@@ -90,16 +89,20 @@
         });
 
         test('Menu focus makes first root item active', function() {
-            menu.wrapper.focus();
+            menu.wrapper[0].focus();
 
             ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
         });
 
-        test("Template focus focuses the parent Menu item", function () {
+        asyncTest("Template focus focuses the parent Menu item", function () {
             var template = menu.element.find("#template");
-            template.focus();
+            menu.open("#menuItem4");
 
-            ok(template.parents(".k-item").eq(1).hasClass(FOCUSEDSTATE));
+            setTimeout(function() {
+                start();
+                template.focus();
+                ok(template.parents(".k-item").eq(1).hasClass(FOCUSEDSTATE));
+            }, 100);
         });
 
         test('Left and right arrows move focus between first and second item', function() {

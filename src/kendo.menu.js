@@ -767,10 +767,12 @@ kendo_module({
                 return;
             }
 
-            if (target == that.wrapper[0] && hoverItem.length) {
-                that._moveHover([], hoverItem);
-            } else if (target == that.wrapper[0] && !that._oldHoverItem && active != that.wrapper[0]) {
-                that._moveHover([], that.wrapper.children().first());
+            if (active === e.currentTarget) {
+                if (hoverItem.length) {
+                    that._moveHover([], hoverItem);
+                } else if (!that._oldHoverItem) {
+                    that._moveHover([], that.wrapper.children().first());
+                }
             }
         },
 
