@@ -1,9 +1,9 @@
 namespace Kendo.Mvc.UI
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
-    using System.Web.UI;
     using Kendo.Mvc.UI.Html;
 
     public class Sparkline<T> : Chart<T>
@@ -12,6 +12,15 @@ namespace Kendo.Mvc.UI
         public Sparkline(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, urlGenerator)
         {
+        }
+
+        /// <summary>
+        /// Gets or sets the default series data
+        /// </summary>
+        public IEnumerable SeriesData
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -64,9 +73,9 @@ namespace Kendo.Mvc.UI
 
         protected override void SerializeDataSource(IDictionary<string, object> options)
         {
-            if (Data != null && string.IsNullOrEmpty(DataSource.Transport.Read.Url))
+            if (SeriesData != null)
             {
-                options.Add("data", Data);
+                options.Add("data", SeriesData);
             }
             else
             {

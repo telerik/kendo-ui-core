@@ -33,13 +33,26 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual SparklineBuilder<T> Data(IEnumerable data)
         {
-            var boxedData = new List<T>();
-            foreach (T item in data)
-            {
-                boxedData.Add(item);
-            }
+            Component.SeriesData = data;
 
-            Component.Data = boxedData;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the Sparkline data.
+        /// </summary>
+        /// <param name="data">The data for the default Sparkline series.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Sparkline()
+        ///             .Name("Sparkline")
+        ///             .Data(new int[] { 1, 2 })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual SparklineBuilder<T> Data(double data)
+        {
+            Component.SeriesData = new double[] { data };
 
             return this;
         }
