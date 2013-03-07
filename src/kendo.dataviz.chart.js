@@ -2347,6 +2347,7 @@ kendo_module({
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width,
+                    strokeOpacity: options.border.opacity,
                     dashType: options.border.dashType
                 } : {},
                 box = bar.box,
