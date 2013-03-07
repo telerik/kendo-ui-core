@@ -339,6 +339,19 @@
                equals(calls, 2);
                ok(args.node.is(treeview.find(".k-item:first")));
            });
+
+           test("selecting an item triggers change event", 1, function() {
+               createTreeView({
+                   dataSource: [
+                       { text: "foo" }
+                   ],
+                   change: function() {
+                       ok(true);
+                   }
+                });
+
+               treeview.find(".k-in").trigger("click");
+           });
         </script>
 
         <div id="qunit-fixture"> </div>

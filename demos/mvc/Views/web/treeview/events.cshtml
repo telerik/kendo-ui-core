@@ -9,7 +9,11 @@
             <script>
                 $(document).ready(function() {
                     function onSelect(e) {
-                        kendoConsole.log("Selected: " + this.text(e.node));
+                        kendoConsole.log("Selecting: " + this.text(e.node));
+                    }
+
+                    function onChange(e) {
+                        kendoConsole.log("Selection changed");
                     }
 
                     function onCollapse(e) {
@@ -58,6 +62,7 @@
                             { text: "Storage" }
                         ],
                         select: onSelect,
+                        change: onChange,
                         collapse: onCollapse,
                         expand: onExpand,
                         dragAndDrop: true,

@@ -494,6 +494,7 @@ kendo_module({
             EXPAND,
             COLLAPSE,
             SELECT,
+            CHANGE,
             NAVIGATE
         ],
 
@@ -1316,6 +1317,8 @@ kendo_module({
             if (node.length) {
                 that.dataItem(node).set("selected", true);
             }
+
+            that.trigger(CHANGE);
         },
 
         _toggle: function(node, dataItem, expand) {
