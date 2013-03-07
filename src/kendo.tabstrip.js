@@ -754,7 +754,7 @@ kendo_module({
             isAnchor = link.data(CONTENTURL) || (href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1));
             prevent = !href || isAnchor;
 
-            if (that.tabGroup.children("[data-animating], [data-in-request]").length) {
+            if (that.tabGroup.children("[data-animating]").length) {
                 return prevent;
             }
 
@@ -831,6 +831,11 @@ kendo_module({
             // handle content elements
             var contentAnimators = that.contentAnimators;
 
+            if (item.data("in-request")) {
+                that.xhr.abort();
+                item.removeAttr("data-in-request");
+            }
+
             if (contentAnimators.length === 0) {
                 oldTab.removeClass(TABONTOP);
                 item.addClass(TABONTOP) // change these directly to bring the tab on top.
@@ -891,7 +896,9 @@ kendo_module({
                         showContentElement();
                         that.trigger("change");
                     } else {
+                        item.removeAttr("data-animating");
                         that.ajaxRequest(item, contentHolder, function () {
+                            item.attr("data-animating", true);
                             showContentElement();
                             that.trigger("change");
                         });
@@ -957,17 +964,17 @@ kendo_module({
                     statusIcon = $("<span class='k-icon k-loading'/>").prependTo(link);
                 }, 100);
 
+            url = url || link.data(CONTENTURL) || link.attr(HREF);
             element.attr("data-in-request", true);
 
-            $.ajax({
+            that.xhr = $.ajax({
                 type: "GET",
                 cache: false,
-                url: url || link.data(CONTENTURL) || link.attr(HREF),
+                url: url,
                 dataType: "html",
                 data: data,
 
                 error: function (xhr, status) {
-                    element.removeAttr("data-animating");
                     if (that.trigger("error", { xhr: xhr, status: status })) {
                         this.complete();
                     }
@@ -983,7 +990,16 @@ kendo_module({
                 },
 
                 success: function (data) {
-                    content.html(data);
+                    try {
+                        content.html(data);
+                    } catch (e) {
+                        var console = window.console;
+
+                        if (console && console.error) {
+                            console.error(e.name + ": " + e.message + " in " + url);
+                        }
+                        this.error(this.xhr, "error");
+                    }
 
                     if (complete) {
                         complete.call(that, content);

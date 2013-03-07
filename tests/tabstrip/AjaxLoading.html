@@ -3,14 +3,16 @@
     <head>
         <title>kendo.ui.panelbar Tests</title>
         <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.tabstrip.js"></script>
-        <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet/less"/>
+        <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+        <script type="text/javascript" src="../../demos/mvc/content/shared/js/less.js"></script>
 
         <script type="text/javascript">
 
@@ -28,16 +30,22 @@
             }
 
             $(document).ready(function() {
-                $("#TabStrip1").kendoTabStrip({ animation: false, select: Select, contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html' ] });
+                $.mockjax({
+                    url: "error.html",
+                    response: function() {
+                        this.responseText = 'foo<script type="text/javascript">exit;<' + '/script>';
+                    }
+                });
+
+                $("#TabStrip1").kendoTabStrip({ animation: false, select: Select, contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'error.html' ] });
             });
 
         </script>
 
-
 </head>
 <body>
 
-<div class="k-widget k-tabstrip k-header" id="TabStrip1" style="visibility: hidden; position: absolute;">
+<div class="k-widget k-tabstrip k-header" id="TabStrip1" style="visibility: visible; position: absolute;">
     <ul class="k-reset k-tabstrip-items">
         <li class="k-item k-state-default k-state-active"><a class="k-link" href="#TabStrip1-1"><img alt="image"
                                                                                                     class="k-image"
@@ -87,6 +95,15 @@
             return $("#TabStrip1").data("kendoTabStrip");
         }
 
+        module("TabStrip / Ajax Loading", {
+            setup: function () {
+                window.con = window.console;
+            },
+            teardown: function () {
+                window.console = window.con;
+            }
+        });
+
         asyncTest('clicking should make clicked item active', function() {
             var item = getRootItem(2);
 
@@ -131,9 +148,27 @@
 //
         test('ajax content url should be attached to item', function() {
             var tabStrip = $(getTabStrip().element),
+                item = getRootItem(4);
+
+            equal(item.find('> .k-link').data('contentUrl'), 'AjaxView1.html');
+        });
+
+        asyncTest("ajax content with error fires error handler and writes the error message to the console", 2, function () {
+            var tabStrip = getTabStrip(),
                 item = getRootItem(5);
 
-            equals(item.find('> .k-link').data('contentUrl'), 'AjaxView2.html');
+            tabStrip.bind("error", function (e) {
+                ok(true);
+                start();
+            });
+
+            window.console = {
+                log: function (msg) {
+                    ok(msg);
+                }
+            };
+
+            item.click();
         });
 
     </script>
