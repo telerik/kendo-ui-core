@@ -19,8 +19,6 @@
         <script>
             var Transport = kendo.data.transports["aspnetmvc-ajax"];
 
-            QUnit.config.testTimeout = 100;
-
             module("AspNetMvc transport", {
                 setup: function() {
                     $.mockjaxSettings.contentType = "text/json";
