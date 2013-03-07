@@ -72,7 +72,7 @@ kendo_module({
                 that.collisions.push(that.collisions[0]);
             }
 
-            parentPopup = $(that.options.anchor).closest(".k-popup,.k-group"); // When popup is in another popup, make it relative.
+            parentPopup = $(that.options.anchor).closest(".k-popup,.k-group").filter(":not([class^=km-])"); // When popup is in another popup, make it relative.
             options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || BODY);
 
             that.element.hide()

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.router.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.mobile.button.js"></script>
+    <script src="../src/kendo.mobile.buttongroup.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.navbar.js"></script>
+    <script src="../src/kendo.mobile.shim.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.tabstrip.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.modalview.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+    <div id="home" data-role="view" data-init="loadHomeData">
+         <h1>Home</h1>
+        Click name to select: <input id="homeDropDownList" data-role="dropdownlist" data-source="customerData"
+            data-text-field="name" data-value-field="address"/>
+        <div>The kendo Drop Down list appears at the bottom of the screen and scrolls correctly when it is on the main view.  It does not seem to scroll very well when testing in the browser but works fine when testing on the iPad.  </div>
+        <div></div>
+        <a data-role="button" data-rel="modalview" href="#testModal">Launch Modal</a>
+    </div>
+
+    <div id="testModal" data-role="modalview" style="height:80%">
+        <a data-role="button" data-click="closeModal">Close</a>
+        Click name to select: <input id="homeDropDownList" data-role="dropdownlist" data-source="customerData" data-height="100px"
+            data-text-field="name" data-value-field="address"/>
+        <div>When the drop down list is in a modal view it does not behave corretly.  It does not have the proper parent and it ignores the data height.  When testing on the iPad the list also does not scroll properly.  How can I get the drop down list to behave correctly when called from a modal view. </div>
+    </div>
+    <div data-id="mainlayout" data-role="layout">
+        <header data-role="header">
+            <div data-role="navbar">Testing Application</div>
+        </header>
+        <footer data-role="footer">
+            <div data-role="tabstrip"> <a data-icon="home" href="#home">Home</a>
+
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript">
+        var customers = [{
+            id: 1,
+            name: "Mike",
+            address: "Address1"
+        }, {
+            id: 2,
+            name: "Jeff",
+            address: "Address1"
+        }, {
+            id: 3,
+            name: "John",
+            address: "Address1"
+        }, {
+            id: 4,
+            name: "Tom",
+            address: "Address1"
+        }, {
+            id: 5,
+            name: "Harry",
+            address: "Address1"
+        }, {
+            id: 6,
+            name: "Steve",
+            address: "Address1"
+        }, {
+            id: 7,
+            name: "Sam",
+            address: "Address1"
+        }, {
+            id: 8,
+            name: "Brett",
+            address: "Address1"
+        }, {
+            id: 9,
+            name: "Ryan",
+            address: "Address1"
+        }, {
+            id: 10,
+            name: "Brian",
+            address: "Address1"
+        }, {
+            id: 11,
+            name: "Howard",
+            address: "Address1"
+        }, {
+            id: 12,
+            name: "Chris",
+            address: "Address1"
+        }, {
+            id: 13,
+            name: "Buck",
+            address: "Address1"
+        }, {
+            id: 13,
+            name: "Scott",
+            address: "Address1"
+        }];
+
+        var app = new kendo.mobile.Application(document.body, {
+            initial: "#home",
+            layout: "mainlayout"
+        });
+
+        function loadHomeData() {
+        }
+
+        function closeModal() {
+            $("#testModal").data("kendoMobileModalView").close();
+        }
+
+        var customerData = new kendo.data.DataSource({
+            data: customers
+        });
+    </script>
+</body>
+</html>
