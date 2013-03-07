@@ -1,9 +1,11 @@
 <div id="example" class="k-content">
 
-  <h2>Simple (palette-based) picker:</h2>
-
-  <input type="color" id="basic" value="#cc2222" accesskey="s"
-         data-role="colorpicker" data-palette="websafe" />
+  <div class="demo-section">
+    <label for="basic">Simple (palette-based) picker:</label>
+  
+    <input type="color" id="basic" value="#00ccff" accesskey="s"
+           data-role="colorpicker" data-palette="websafe" />
+  </div>
 
   <ul class="keyboard-legend">
     <li>
@@ -55,10 +57,12 @@
     </li>
   </ul>
 
-  <h2>HSV picker</h2>
-
-  <input type="color" id="hsv" value="#22cc22" accesskey="h"
-         data-role="colorpicker" data-opacity="true" />
+  <div class="demo-section">
+    <label for="hsv">HSV picker:</label>
+  
+    <input type="color" id="hsv" value="#00ccff" accesskey="h"
+           data-role="colorpicker" data-opacity="true" />
+  </div>
 
   <ul class="keyboard-legend">
     <li>
@@ -120,5 +124,16 @@
     // initialize widgets
     kendo.init($("#example"));
   </script>
+  
+  <style scoped>
+    .demo-section {
+      margin: 0 auto 25px;
+      width: 500px;
+      min-height: 60px;
+      line-height: 60px;
+      vertical-align: middle;
+      text-align: center;
+    }
+  </style>
 
 </div>
