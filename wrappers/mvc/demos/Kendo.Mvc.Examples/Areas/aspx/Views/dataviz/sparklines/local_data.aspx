@@ -26,7 +26,6 @@ for (var i = 0; i < Model.Count; i++) {
                         .Type(SparklineType.Bar)
                         .Data(row.Hourly)
                         .ValueAxis(axis => axis.Numeric().Max(50))
-                        .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px"  })
                 %>
             </td>
@@ -51,7 +50,6 @@ for (var i = 0; i < Model.Count; i++) {
                         .Type(SparklineType.Bar)
                         .Data(row.Direct)
                         .ValueAxis(axis => axis.Numeric().Max(50))
-                        .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px" })
                     %>
             </td>
@@ -65,7 +63,6 @@ for (var i = 0; i < Model.Count; i++) {
                             .Bar(benefits => benefits.Value)
                         )
                         .ValueAxis(axis => axis.Numeric().Max(10))
-                        .ChartArea(area => area.Background("transparent"))
                         .HtmlAttributes(new { style = "width: 130px"  })
                     %>
             </td>
