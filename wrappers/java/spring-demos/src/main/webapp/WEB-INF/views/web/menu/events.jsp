@@ -74,5 +74,4 @@
         kendoConsole.log("Deactivated: " + $(e.item).children(".k-link").text());
     }
 </script>
-<div class="console"></div>
 <demo:footer />
