@@ -3,6 +3,7 @@ package com.kendoui.taglib.sparkline;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.ChartTag;
 
 
 
@@ -21,6 +22,10 @@ public class CategoryAxisTag extends BaseTag /* interfaces */ /* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+        SparklineTag parent = (SparklineTag) findParentWithClass(SparklineTag.class);
+
+
+        parent.setCategoryAxis(this);
 //<< doEndTag
 
         return super.doEndTag();
