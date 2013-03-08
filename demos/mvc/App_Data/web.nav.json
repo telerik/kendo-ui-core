@@ -230,7 +230,7 @@
                 {
                     "text": "Range selection",
                     "url": "datepicker/rangeselection.html",
-                    "title": "jQuery UI Datepicker Range Selection | Kendo UI Web Demos",
+                    "title": "jQuery Datepicker Range Selection | Kendo UI Web Demos",
                     "meta": "This demo shows how the Datepicker component works for range selections. You can easily enable users to select a date range in a handy manner."
                 },
                 {
@@ -278,7 +278,7 @@
                     "text": "Basic usage",
                     "url": "datetimepicker/index.html",
                     "title": "Kendo UI Date and Time picker example",
-                    "meta": "The example illustrates how DateTimePicker UI handles both dates and times. Usable interface and date/time selection functionality in a single jQuery UI Control for your web app."
+                    "meta": "The example illustrates how DateTimePicker UI handles both dates and times. Usable interface and date/time selection functionality in a single jQuery Control for your web app."
                 },
                 {
                     "text": "Range selection",
@@ -331,7 +331,7 @@
                     "text": "Basic usage",
                     "url": "dropdownlist/index.html",
                     "title": "Demo for jQuery-powered DropDownList widget in Kendo UI Web",
-                    "meta": "This example shows how you can easily implement interactive jQuery UI DropDownlist in your web app. Use the demo source code to try Kendo UI DropDownList."
+                    "meta": "This example shows how you can easily implement interactive jQuery DropDownlist in your web app. Use the demo source code to try Kendo UI DropDownList."
                 },
                 {
                     "text": "Binding to remote data",
@@ -705,7 +705,7 @@
                 {
                     "text": "Binding to remote data",
                     "url": "listview/remote-data.html",
-                    "title": "Example for Jquery UI Listview binding to remote data | Kendo UI demos",
+                    "title": "Example for Jquery Listview binding to remote data | Kendo UI demos",
                     "meta": "This Kendo UI ListView demo shows how the control can be bound to remote data by using Kendo UI DataSource component.",
                     "packages": ["!mvc"]
                 },
@@ -743,7 +743,7 @@
                     "text": "Basic usage",
                     "url": "menu/index.html",
                     "title": "jQuery Menu Navigation widget demo |KendoMenu Basic usage",
-                    "meta": "Example of jQuery UI Menu in Kendo UI Web framework. Look at the basic usage of the control which can be used for navigation and executing JS commands."
+                    "meta": "Example of jQuery Menu in Kendo UI Web framework. Look at the basic usage of the control which can be used for navigation and executing JS commands."
                 },
                 {
                     "text": "Images",
