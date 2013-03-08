@@ -504,7 +504,7 @@ kendo_module({
         colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="k-group-col">') + cols.join("")));
 
         table.prepend(colgroup);
-        
+
         // fill gap after column hiding
         if (browser.msie && browser.version == 8) {
             table.css("display", "inline-table");
@@ -979,6 +979,7 @@ kendo_module({
             var that = this,
                 sourceIndex = inArray(column, that.columns),
                 colSourceIndex = inArray(column, visibleColumns(that.columns)),
+                colDestIndex = inArray(that.columns[destIndex], visibleColumns(that.columns)),
                 rows,
                 idx,
                 length,
@@ -992,15 +993,15 @@ kendo_module({
             that.columns.splice(destIndex, 0, column);
             that._templates();
 
-            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
+            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex);
             if (that.options.scrollable) {
-                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
+                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex);
             }
 
             reorder(that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
 
             if (footer && footer.length) {
-                reorder(footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
+                reorder(footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex);
                 reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
             }
 
