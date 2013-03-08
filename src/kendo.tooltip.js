@@ -126,6 +126,10 @@ kendo_module({
             that.element
                 .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
                 .on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that));
+
+            if (this.options.autoHide) {
+                that.element.on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
+            }
         },
 
         options: {
@@ -282,13 +286,6 @@ kendo_module({
 
                 DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
-
-            if (that.options.autoHide) {
-                if (current) {
-                    current.off("mouseleave" + NS);
-                }
-                target.one("mouseleave" + NS, proxy(that._mouseleave, that));
-            }
 
             that.popup.open();
         },
