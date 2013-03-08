@@ -1,31 +1,38 @@
 
         <div id="example" class="k-content">
-            <div class="configuration k-widget k-header" style="width: 210px">
+            <div class="configuration-horizontal">
+                <div class="config-section">
                 <span class="configHead">API Functions</span>
                 <ul class="options">
                     <li>
-                        <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+                        <button id="enable" class="k-button">Enable</button> <button id="disable" class="k-button">Disable</button>
                     </li>
                     <li>
-                        <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the drop-down
+                        <button id="open" class="k-button">Open</button> <button id="close" class="k-button">Close</button>
                     </li>
                     <li>
-                        <button id="getValue" class="k-button">Get value</button> or <button id="getText" class="k-button">Get text</button>
-                    </li>
-                    <li>
-                        <input id="index" value="0" class="k-textbox" /> <button id="select" class="k-button">Select by index</button>
-                    </li>
-                    <li>
-                        <input id="value" value="1" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
-                    </li>
-                    <li>
-                        <input id="word" value="Pulp" class="k-textbox" /> <button id="find" class="k-button">Select item starting with</button>
+                        <button id="getValue" class="k-button">Get value</button> <button id="getText" class="k-button">Get text</button>
                     </li>
                 </ul>
+                </div>
+                <div class="config-section">
+                <span class="configHead">Selection</span>
+                <ul class="options">
+                    <li>
+                        <input id="index" value="0" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="select" class="k-button">Select by index</button>
+                    </li>
+                    <li>
+                        <input id="value" value="1" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="setValue" class="k-button">Select by value</button>
+                    </li>
+                    <li>
+                        <input id="word" value="Pulp" class="k-textbox" style="width: 100px; margin: 0;" /> <button id="find" class="k-button">Select item starting with</button>
+                    </li>
+                </ul>
+                </div>
             </div>
             
             <div class="demo-section">
-                <input id="movies" />
+                <input id="movies" style="width: 250px" />
             </div>
 
             <script>
@@ -46,7 +53,8 @@
                     $("#movies").kendoDropDownList({
                                       dataTextField: "text",
                                       dataValueField: "value",
-                                      dataSource: data
+                                      dataSource: data,
+                                      height: 100,
                                   })
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
@@ -105,11 +113,19 @@
                 .configuration .k-textbox {
                     width: 40px;
                 }
-                
-                .demo-section
-                {
-                    width:150px;
-                    margin-right: 360px;
+                .demo-section {
+                    width: 660px;
+                    padding: 30px;
+                    text-align: center;
+                }
+                .demo-section .k-dropdown {
+                    text-align: left;
+                }
+                .k-button {
+                    min-width: 80px;
+                }
+                .configuration-horizontal .options li {
+                    padding: 3px 0;
                 }
             </style>
         </div>
