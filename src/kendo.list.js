@@ -84,6 +84,10 @@ kendo_module({
             }
         },
 
+        focus: function() {
+            this._focused.focus();
+        },
+
         _filterSource: function(filter) {
             var that = this,
                 options = that.options,

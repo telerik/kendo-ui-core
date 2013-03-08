@@ -486,6 +486,11 @@
                 equal(dropdownlist.value(), "2");
             });
 
+            test("DropDownList is focused by focus method", function() {
+                dropdownlist.focus();
+                equal(dropdownlist.wrapper[0], document.activeElement);
+            });
+
             asyncTest("select value after datasource fetch", 1, function() {
                 $.mockjaxSettings.responseTime = 0;
                 $.mockjaxSettings.contentType = "text/html";
