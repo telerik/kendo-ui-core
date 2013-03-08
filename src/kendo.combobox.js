@@ -122,7 +122,7 @@ kendo_module({
 
         options: {
             name: "ComboBox",
-            enable: true,
+            enabled: true,
             index: -1,
             text: null,
             value: null,

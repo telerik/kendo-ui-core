@@ -246,6 +246,14 @@
                 ok(multiselect.input.attr("disabled"));
             });
 
+            test("MultiSelect  disables on init", function() {
+               select.kendoMultiSelect({
+                    enabled: false
+               });
+
+               ok(select.data("kendoMultiSelect").input.attr("disabled"));
+           });
+
             asyncTest("MultiSelect shows loading icon on progress", function() {
                 popuplateSelect();
                 var multiselect = new MultiSelect(select);

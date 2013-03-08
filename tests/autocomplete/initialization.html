@@ -283,6 +283,16 @@
                 equal(autocomplete.element.attr("aria-disabled"), "true");
             });
 
+            test("Autocomplete disables on init", function() {
+                var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
+                    placeholder: "input...",
+                    suggest: false,
+                    enabled: false
+                });
+
+                equal(autocomplete.element.attr("aria-disabled"), "true");
+            });
+
             test("Autocomplete adds aria-expanded", function() {
                 var autocomplete = new AutoComplete(input, {
                     placeholder: "input...",

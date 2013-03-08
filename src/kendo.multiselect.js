@@ -112,7 +112,7 @@ kendo_module({
 
         options: {
             name: "MultiSelect",
-            enable: true,
+            enabled: true,
             autoBind: true,
             highlightFirst: true,
             dataTextField: "",

@@ -120,7 +120,7 @@ kendo_module({
 
         options: {
             name: "AutoComplete",
-            enable: true,
+            enabled: true,
             suggest: false,
             template: "",
             dataTextField: "",

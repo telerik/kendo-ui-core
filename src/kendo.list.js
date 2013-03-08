@@ -76,6 +76,14 @@ kendo_module({
             that._initValue();
         },
 
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+
+            if (options && options.enable !== undefined) {
+                options.enabled = options.enable;
+            }
+        },
+
         _filterSource: function(filter) {
             var that = this,
                 options = that.options,
@@ -268,11 +276,15 @@ kendo_module({
             var that = this,
                 options = that.options;
 
-            if (that.element.prop("disabled")) {
-                options.enable = false;
+            if (options.enable !== undefined) {
+                options.enabled = options.enable;
             }
 
-            that.enable(options.enable);
+            if (that.element.prop("disabled")) {
+                options.enabled = false;
+            }
+
+            that.enable(options.enabled);
         },
 
         _focus: function(li) {

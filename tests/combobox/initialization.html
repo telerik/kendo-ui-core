@@ -323,6 +323,17 @@
                ok(combobox.input.prop("disabled"));
            });
 
+           test("ComboBox disables on init", function() {
+               input.kendoComboBox({
+                    enabled: false
+               });
+
+               var combobox = input.data("kendoComboBox");
+
+               ok(combobox._inputWrapper.hasClass("k-state-disabled"));
+               ok(combobox.input.prop("disabled"));
+           });
+
            test("rebuild select options if data", function() {
                var select = $("<select><option>&lt;script&gt;alert(1)&lt;/script&gt;</option></select>"),
 

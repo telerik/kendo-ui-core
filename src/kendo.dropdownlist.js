@@ -99,7 +99,7 @@ kendo_module({
 
         options: {
             name: "DropDownList",
-            enable: true,
+            enabled: true,
             autoBind: true,
             index: 0,
             text: null,

@@ -346,6 +346,16 @@
                 ok(wrapper.hasClass("k-state-disabled"));
             });
 
+            test("DropDownList disables on init", function() {
+                input.kendoDropDownList({
+                    enabled: false
+                });
+
+                var wrapper = input.data("kendoDropDownList")._inputWrapper;
+
+                ok(wrapper.hasClass("k-state-disabled"));
+            });
+
             if (!kendo.support.touch) {
                 test("pointer over widget should add hover state", function() {
                     var data = [{text: 1, value: 1}, {text:2, value:2}],
