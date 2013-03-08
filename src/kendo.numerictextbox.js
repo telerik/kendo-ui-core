@@ -11,6 +11,7 @@ kendo_module({
         keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
+        activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         parse = kendo.parseFloat,
         placeholderSupported = kendo.support.placeholder,
@@ -493,15 +494,9 @@ kendo_module({
         _step: function(step) {
             var that = this,
                 element = that.element,
-                value = that._parse(element.val()) || 0,
-                activeElement;
+                value = that._parse(element.val()) || 0;
 
-            try {
-                // prevent IE JS error when inside iframe
-                activeElement = document.activeElement;
-            } catch (err) {}
-
-            if (activeElement != element[0]) {
+            if (activeElement() != element[0]) {
                 that._focusin();
             }
 

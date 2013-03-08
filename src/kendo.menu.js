@@ -9,6 +9,7 @@ kendo_module({
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        activeElement = kendo._activeElement,
         touch = (kendo.support.touch && kendo.support.mobileOS),
         mobile = touch || kendo.support.pointers,
         MOUSEDOWN = kendo.support.mousedown,
@@ -754,7 +755,7 @@ kendo_module({
             var that = this,
                 target = e.target,
                 hoverItem = that._hoverItem(),
-                activeElement;
+                active = activeElement();
 
             if (target != that.wrapper[0] && !$(target).is(":focusable")) {
                 e.stopPropagation();
@@ -763,14 +764,9 @@ kendo_module({
                 return;
             }
 
-            try {
-                // prevent IE JS error when inside iframe
-                activeElement = document.activeElement;
-            } catch (err) {}
-
             if (target == that.wrapper[0] && hoverItem.length) {
                 that._moveHover([], hoverItem);
-            } else if (target == that.wrapper[0] && !that._oldHoverItem && activeElement != that.wrapper[0]) {
+            } else if (target == that.wrapper[0] && !that._oldHoverItem && active != that.wrapper[0]) {
                 that._moveHover([], that.wrapper.children().first());
             }
         },

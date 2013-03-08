@@ -13,6 +13,7 @@ kendo_module({
     parse = kendo.parseDate,
     keys = kendo.keys,
     template = kendo.template,
+    activeElement = kendo._activeElement,
     DIV = "<div />",
     SPAN = "<span />",
     ns = ".kendoDatePicker",
@@ -479,7 +480,7 @@ kendo_module({
 
             that.dateView.toggle();
 
-            if (!kendo.support.touch && element[0] !== document.activeElement) {
+            if (!kendo.support.touch && element[0] !== activeElement()) {
                 element.focus();
             }
         },

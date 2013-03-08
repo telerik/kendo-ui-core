@@ -13,6 +13,7 @@ kendo_module({
         keys = kendo.keys,
         support = kendo.support,
         htmlEncode = kendo.htmlEncode,
+        activeElement = kendo._activeElement,
         ID = "id",
         LI = "li",
         CHANGE = "change",
@@ -426,7 +427,7 @@ kendo_module({
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
-            if (!support.touch && that._focused[0] !== document.activeElement) {
+            if (!support.touch && that._focused[0] !== activeElement()) {
                 that._focused.focus();
             }
 

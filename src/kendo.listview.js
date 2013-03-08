@@ -38,6 +38,7 @@ kendo_module({
         CLICK = "click",
         NS = ".kendoListView",
         proxy = $.proxy,
+        activeElement = kendo._activeElement,
         progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
 
@@ -165,7 +166,7 @@ kendo_module({
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate,
-                activeElement;
+                active = activeElement();
 
             if (e && e.action === "itemchange") {
                 if (!that.editable) {
@@ -212,12 +213,7 @@ kendo_module({
                              .attr("aria-selected", "false");
             }
 
-            try {
-                // prevent IE JS error when inside iframe
-                activeElement = document.activeElement;
-            } catch (err) {}
-
-            if (that.element[0] === activeElement && that.options.navigatable) {
+            if (that.element[0] === active && that.options.navigatable) {
                 that.current(items.eq(0));
             }
 
@@ -387,7 +383,7 @@ kendo_module({
                             isTextBox = target.is(":text"),
                             preventDefault = kendo.preventDefault,
                             editItem = element.find("." + KEDITITEM),
-                            idx, activeElement;
+                            active = activeElement(), idx;
 
                         if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
                             return;
@@ -423,12 +419,8 @@ kendo_module({
                         } else if (keys.ENTER === key) {
                             if (editItem.length !== 0 && (canHandle || isTextBox)) {
                                 idx = that.items().index(editItem);
-                                try {
-                                    // prevent IE JS error when inside iframe
-                                    activeElement = document.activeElement;
-                                } catch (err) {}
-                                if (activeElement) {
-                                    activeElement.blur();
+                                if (active) {
+                                    active.blur();
                                 }
                                 that.save();
                                 var focusAgain = function(){

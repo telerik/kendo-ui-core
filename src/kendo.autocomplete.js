@@ -9,6 +9,7 @@ kendo_module({
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
+        activeElement = kendo._activeElement,
         placeholderSupported = support.placeholder,
         ui = kendo.ui,
         keys = kendo.keys,
@@ -252,7 +253,7 @@ kendo_module({
                 that._open = false;
                 action = length ? "open" : "close";
 
-                if (that._typing && that.element[0] !== document.activeElement) {
+                if (that._typing && that.element[0] !== activeElement()) {
                     action = "close";
                 }
 

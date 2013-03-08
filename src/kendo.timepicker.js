@@ -9,6 +9,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         keys = kendo.keys,
+        activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         support = kendo.support,
         browser = support.browser,
@@ -671,17 +672,11 @@ kendo_module({
 
         _click: function() {
             var that = this,
-                element = that.element,
-                activeElement;
+                element = that.element;
 
             that.timeView.toggle();
 
-            try {
-                // prevent IE JS error when inside iframe
-                activeElement = document.activeElement;
-            } catch (err) {}
-
-            if (!support.touch && element[0] !== activeElement) {
+            if (!support.touch && element[0] !== activeElement()) {
                 element.focus();
             }
         },

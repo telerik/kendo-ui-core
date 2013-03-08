@@ -1013,6 +1013,14 @@ function pad(number, digits, end) {
         return format;
     };
 
+    kendo._activeElement = function() {
+        try {
+            return document.activeElement;
+        } catch(e) {
+            return document.documentElement.activeElement;
+        }
+    };
+
     kendo.toString = toString;
     })();
 

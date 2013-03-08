@@ -11,6 +11,7 @@ kendo_module({
     var kendo = window.kendo,
         TimeView = kendo.TimeView,
         parse = kendo.parseDate,
+        activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         calendar = kendo.calendar,
         isInRange = calendar.isInRange,
@@ -169,7 +170,7 @@ kendo_module({
                         .on(CLICK, function() {
                             that.toggle("date");
 
-                            if (!kendo.support.touch && element[0] !== document.activeElement) {
+                            if (!kendo.support.touch && element[0] !== activeElement()) {
                                 element.focus();
                             }
                         });
@@ -179,7 +180,7 @@ kendo_module({
                         .on(CLICK, function() {
                             that.toggle("time");
 
-                            if (!kendo.support.touch && element[0] !== document.activeElement) {
+                            if (!kendo.support.touch && element[0] !== activeElement()) {
                                 element.focus();
                             }
                         });

@@ -58,6 +58,7 @@ kendo_module({
         DataSource = kendo.data.DataSource,
         Groupable = ui.Groupable,
         tbodySupportsInnerHtml = kendo.support.tbodyInnerHtml,
+        activeElement = kendo._activeElement,
         Widget = ui.Widget,
         keys = kendo.keys,
         isPlainObject = $.isPlainObject,
@@ -1032,7 +1033,7 @@ kendo_module({
                 selectable = that.selectable && that.selectable.options.multiple,
                 editable = that.options.editable,
                 handler = function () {
-                    var target = document.activeElement,
+                    var target = activeElement(),
                         cell = that._editContainer;
 
                     if (cell && !$.contains(cell[0], target) && cell[0] !== target && !$(target).closest(".k-animation-container").length) {
@@ -1062,7 +1063,7 @@ kendo_module({
                             if (that.editable) {
                                 if (that.editable.end()) {
                                     if (selectable) {
-                                        $(document.activeElement).blur();
+                                        $(activeElement()).blur();
                                     }
                                     that.closeCell();
                                     that.editCell(td);
@@ -1942,6 +1943,7 @@ kendo_module({
                     pageable = that.options.pageable,
                     dataSource = that.dataSource,
                     isInCell = that._editMode() == "incell",
+                    active,
                     currentIndex,
                     row,
                     index,
@@ -2031,7 +2033,8 @@ kendo_module({
                         }
                     }
                 } else if (keys.ESC == key) {
-                    if (current && $.contains(current[0], document.activeElement) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
+                    active = activeElement();
+                    if (current && $.contains(current[0], active) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
                         focusTable(that.table[0], true);
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
@@ -2039,7 +2042,9 @@ kendo_module({
                             that.closeCell();
                         } else {
                             currentIndex = that.items().index($(current).parent());
-                            document.activeElement.blur();
+                            if (active) {
+                                active.blur();
+                            }
                             that.cancelRow();
                             if (currentIndex >= 0) {
                                 that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
@@ -2057,7 +2062,7 @@ kendo_module({
 
                     current = $(current);
                     if (that.options.editable && isInCell) {
-                         cell = $(document.activeElement).closest(".k-edit-cell");
+                         cell = $(activeElement()).closest(".k-edit-cell");
 
                          if (cell[0] && cell[0] !== current[0]) {
                              current = cell;
@@ -2087,7 +2092,7 @@ kendo_module({
 
         _handleEditing: function(current, next) {
             var that = this,
-                activeElement = $(document.activeElement),
+                active = $(activeElement()),
                 mode = that._editMode(),
                 editContainer = that._editContainer,
                 focusable,
@@ -2100,10 +2105,10 @@ kendo_module({
             }
 
             if (that.editable) {
-                if ($.contains(editContainer[0], activeElement[0])) {
-                    activeElement.blur();
+                if ($.contains(editContainer[0], active[0])) {
+                    active.blur();
                     if (kendo.support.browser.opera) {
-                        activeElement.change();
+                        active.change();
                     }
                 }
 
@@ -3460,7 +3465,8 @@ kendo_module({
                 current = $(that.current()),
                 isCurrentInHeader = false,
                 groups = (that.dataSource.group() || []).length,
-                colspan = groups + visibleColumns(that.columns).length;
+                colspan = groups + visibleColumns(that.columns).length,
+                active;
 
             if (e && e.action === "itemchange" && that.editable) { // skip rebinding if editing is in progress
                 return;
@@ -3472,7 +3478,8 @@ kendo_module({
                 return;
             }
 
-            if (navigatable && (that.table[0] === document.activeElement || $.contains(that.table[0], document.activeElement) || (that._editContainer && that._editContainer.data("kendoWindow")))) {
+            active = activeElement();
+            if (navigatable && (that.table[0] === active || $.contains(that.table[0], active) || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {

@@ -11,6 +11,7 @@ kendo_module({
         ui = kendo.ui,
         List = ui.List,
         keys = kendo.keys,
+        activeElement = kendo._activeElement,
         proxy = $.proxy,
         ID = "id",
         LI = "li",
@@ -226,7 +227,7 @@ kendo_module({
                             that.open();
                         }
 
-                        if (that.input[0] !== document.activeElement) {
+                        if (that.input[0] !== activeElement()) {
                             that.input.focus();
                         }
                     });
@@ -602,7 +603,7 @@ kendo_module({
 
             if (show === undefined) {
                 show = false;
-                if (input[0] !== document.activeElement) {
+                if (input[0] !== activeElement()) {
                     show = !that._dataItems[0];
                 }
                 that.wrapper.removeClass(FOCUSEDCLASS);

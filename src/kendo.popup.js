@@ -12,6 +12,7 @@ kendo_module({
         Widget = ui.Widget,
         support = kendo.support,
         getOffset = kendo.getOffset,
+        activeElement = kendo._activeElement,
         OPEN = "open",
         CLOSE = "close",
         DEACTIVATE = "deactivate",
@@ -320,8 +321,7 @@ kendo_module({
         },
 
         _resize: function(e) {
-            var that = this,
-                activeElement;
+            var that = this;
 
             if (e.type === "resize") {
                 clearTimeout(that._resizeTimeout);
@@ -330,12 +330,7 @@ kendo_module({
                     that._resizeTimeout = null;
                 }, 50);
             } else {
-                try {
-                    // prevent IE JS error when inside iframe
-                    activeElement = document.activeElement;
-                } catch (err) {}
-
-                if (!that._hovered && !contains(that.element[0], activeElement)) {
+                if (!that._hovered && !contains(that.element[0], activeElement())) {
                     that.close();
                 }
             }

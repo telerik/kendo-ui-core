@@ -13,6 +13,7 @@ kendo_module({
         Select = ui.Select,
         support = kendo.support,
         placeholderSupported = support.placeholder,
+        activeElement = kendo._activeElement,
         keys = kendo.keys,
         ns = ".kendoComboBox",
         CLICK = "click" + ns,
@@ -280,7 +281,7 @@ kendo_module({
                 that._open = false;
                 open = !!length;
 
-                if (that._typing && that.input[0] !== document.activeElement) {
+                if (that._typing && that.input[0] !== activeElement()) {
                     open = false;
                 }
 

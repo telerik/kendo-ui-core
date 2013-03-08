@@ -11,6 +11,7 @@ kendo_module({
         Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
         isPlainObject = $.isPlainObject,
+        activeElement = kendo._activeElement,
         proxy = $.proxy,
         extend = $.extend,
         each = $.each,
@@ -604,14 +605,9 @@ kendo_module({
                 currentWindow = wrapper[0],
                 zIndex = +wrapper.css(ZINDEX),
                 originalZIndex = zIndex,
-                activeElement,
+                active = activeElement(),
                 winElement = that.element,
                 target = e && e.target ? e.target : null;
-
-            try {
-                // IE throws error when Window contains iframe
-                activeElement = document.activeElement;
-            } catch (err) {}
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
@@ -634,9 +630,9 @@ kendo_module({
             }
             that.element.find("> .k-overlay").remove();
 
-            if (!$(activeElement).is(winElement) &&
+            if (!$(active).is(winElement) &&
                 !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input") &&
-                (!winElement.find(activeElement).length || !winElement.find(target).length)) {
+                (!winElement.find(active).length || !winElement.find(target).length)) {
                 winElement.focus();
 
                 var scrollTop = $(window).scrollTop(),
