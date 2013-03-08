@@ -4,6 +4,6 @@ tar cj . | ssh -o 'StrictHostKeyChecking no' "$2" "
 rm -rf ~/chef &&
 mkdir ~/chef &&
 cd ~/chef &&
-tar xj &&
+tar xmj &&
 chef-solo -c solo.rb -j $1
 "
