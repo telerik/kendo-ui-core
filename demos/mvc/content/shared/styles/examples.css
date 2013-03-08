@@ -2514,6 +2514,10 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-color: #01ABAA;
 }
 
+#example .km-wp8 .km-tabstrip .km-state-active .km-icon {
+    background-color: #01ABAA;
+}
+
 #example .km-wp input[type=password]:focus,
 #example .km-wp input[type=search]:focus,
 #example .km-wp input[type=number]:focus,
