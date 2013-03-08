@@ -247,7 +247,7 @@ HierarchicalDataSource instance), the default value of this option is false.
 
     /**
     * Sets the change event of the TreeView.
-    * Triggered when the selection has changed (either by the user or through the select method.
+    * Triggered when the selection has changed (either by the user or through the select method).
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\TreeView
     */

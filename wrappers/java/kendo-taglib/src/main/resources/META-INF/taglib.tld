@@ -18269,7 +18269,7 @@ HierarchicalDataSource instance), the default value of this option is false.</de
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when the selection has changed (either by the user or through the select method.</description>
+            <description>Triggered when the selection has changed (either by the user or through the select method).</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -18482,7 +18482,7 @@ is expanded. Options include "expandVertical" and "fadeIn".</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when the selection has changed (either by the user or through the select method.</description>
+        <description>Triggered when the selection has changed (either by the user or through the select method).</description>
         <name>treeView-change</name>
         <tag-class>com.kendoui.taglib.treeview.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
