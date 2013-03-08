@@ -3,6 +3,7 @@
     .HtmlAttributes(new { @class = "demo-section",style="width: 200px" })
     .DragAndDrop(true)
     .Events(events => events
+        .Change("onChange")
         .Select("onSelect")
         .Collapse("onCollapse")
         .Expand("onExpand")
@@ -42,7 +43,11 @@
     var treeview;
 
     function onSelect(e) {
-        kendoConsole.log("Selected: " + treeview.text(e.node));
+        kendoConsole.log("Selecting: " + this.text(e.node));
+    }
+
+    function onChange(e) {
+        kendoConsole.log("Selection changed");
     }
 
     function onCollapse(e) {

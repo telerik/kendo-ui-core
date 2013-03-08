@@ -380,6 +380,52 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
 
+        /// <summary>
+        /// Defines the inline handler of the change client-side event
+        /// </summary>
+        /// <param name="onChangeAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().TreeView()
+        ///           .Name("TreeView")
+        ///           .Events(events => events.Change(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    // event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewEventBuilder Change(Func<object, object> onChangeAction)
+        {
+            Handler("change", onChangeAction);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the change client-side event.
+        /// </summary>
+        /// <param name="onChangeHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().TreeView()
+        ///            .Name("TreeView")
+        ///            .Events(events => events.Change("onChange"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewEventBuilder Change(string onChangeHandlerName)
+        {
+            Handler("change", onChangeHandlerName);
+
+            return this;
+        }
+
+
     }
 }
 

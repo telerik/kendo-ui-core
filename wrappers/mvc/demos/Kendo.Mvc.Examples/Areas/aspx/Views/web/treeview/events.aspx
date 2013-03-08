@@ -10,6 +10,7 @@
     .DragAndDrop(true)
     .Events(events => events
         .Select("onSelect")
+        .Change("onChange")
         .Collapse("onCollapse")
         .Expand("onExpand")
         .DragStart("onDragStart")
@@ -51,7 +52,11 @@
     var treeview;
 
     function onSelect(e) {
-        kendoConsole.log("Selected: " + treeview.text(e.node));
+        kendoConsole.log("Selecting: " + this.text(e.node));
+    }
+
+    function onChange(e) {
+        kendoConsole.log("Selection changed");
     }
 
     function onCollapse(e) {
