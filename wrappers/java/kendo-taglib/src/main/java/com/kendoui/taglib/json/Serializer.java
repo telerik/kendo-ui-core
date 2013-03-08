@@ -115,6 +115,8 @@ public class Serializer {
             ((Function)value).write(out);
         } else if (value.getClass().isArray()) {
             serializeArray(out, value);
+        } else if (value.getClass().isEnum()) {
+            quote(out, value.toString());
         } else {
             serializeMap(out, properties(value));
         }

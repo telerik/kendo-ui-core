@@ -21,6 +21,9 @@ public class ValueAxisTag extends BaseTag /* interfaces */ /* interfaces */ {
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+        SparklineTag parent = (SparklineTag) findParentWithClass(SparklineTag.class);
+
+        parent.setValueAxis(this);
 //<< doEndTag
 
         return super.doEndTag();

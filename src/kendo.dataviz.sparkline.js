@@ -42,11 +42,15 @@ kendo_module({
 
             chart._initialWidth = math.floor(element.width());
 
+            options = wrapNumber(options);
+
             if (isArray(options) || options instanceof ObservableArray) {
                 options = { seriesDefaults: { data: options } };
             }
 
-            options.series = options.series || [{ data: options.data }];
+            if (!options.series) {
+                options.series = [{ data: wrapNumber(options.data) }];
+            }
 
             deepExtend(options, {
                 seriesDefaults: {
@@ -231,6 +235,10 @@ kendo_module({
             this.element.hide();
         }
     });
+
+    function wrapNumber(x) {
+        return typeof x === "number" ? [x] : x;
+    }
 
     // Exports ================================================================
 

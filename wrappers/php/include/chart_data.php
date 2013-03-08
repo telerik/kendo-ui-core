@@ -310,4 +310,99 @@ function hPa_data() {
         array('current' => 1010, 'target' => 1021, 'category' => 14 )
     );
 }
+
+function sparkline_compensation_data() {
+    return array(
+        array('year' => '2011', 'hourly' => 46.29, 'change' => 16.69, 'direct' => 32.09, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 9.25),
+                 array('type' => 'Direct', 'value' => 4.41)
+            )
+        ),
+        array('year' => '2010', 'hourly' => 39.67, 'change' => 18.7, 'direct' => 29.73, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 7.93),
+                 array('type' => 'Direct', 'value' => 3.78)
+            )
+        ),
+        array('year' => '2009', 'hourly' => 33.42, 'change' => -6.93, 'direct' => 31.69, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 6.78),
+                 array('type' => 'Direct', 'value' => 3.17)
+            )
+        ),
+        array('year' => '2008', 'hourly' => 35.91, 'change' => 7.61, 'direct' => 31.87, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 7.39),
+                 array('type' => 'Direct', 'value' => 3.39)
+            )
+        ),
+        array('year' => '2007', 'hourly' => 33.37, 'change' => 14.4, 'direct' => 28.41, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 6.86),
+                 array('type' => 'Direct', 'value' => 3.15)
+            )
+        ),
+        array('year' => '2006', 'hourly' => 29.17, 'change' => 2.17, 'direct' => 25.1, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 6.07),
+                 array('type' => 'Direct', 'value' => 2.75)
+            )
+        ),
+        array('year' => '2005', 'hourly' => 28.55, 'change' => 6.73, 'direct' => 24.2, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 6.08),
+                 array('type' => 'Direct', 'value' => 2.67)
+            )
+        ),
+        array('year' => '2004', 'hourly' => 26.75, 'change' => 18.1, 'direct' => 23.34, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 5.74),
+                 array('type' => 'Direct', 'value' => 2.5)
+            )
+        ),
+        array('year' => '2003', 'hourly' => 22.65, 'change' => 30.02, 'direct' => 21.16, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 4.79),
+                 array('type' => 'Direct', 'value' => 2.12)
+            )
+        ),
+        array('year' => '2002', 'hourly' => 17.42, 'change' => 15.98, 'direct' => 17.37, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 3.61),
+                 array('type' => 'Direct', 'value' => 1.64)
+            )
+        ),
+        array('year' => '2001', 'hourly' => 15.02, 'change' => -8.69, 'direct' => 16.06, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 2.92),
+                 array('type' => 'Direct', 'value' => 1.44)
+            )
+        ),
+        array('year' => '2000', 'hourly' => 16.45, 'change' => -9.32, 'direct' => 16.06, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 3.08),
+                 array('type' => 'Direct', 'value' => 1.59)
+            )
+        ),
+        array('year' => '1999', 'hourly' => 18.14, 'change' => 5.77, 'direct' => 18.13, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 3.42),
+                 array('type' => 'Direct', 'value' => 1.75)
+            )
+        ),
+        array('year' => '1998', 'hourly' => 17.15, 'change' => -9.4, 'direct' => 18.37, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 3.17),
+                 array('type' => 'Direct', 'value' => 1.66)
+            )
+        ),
+        array('year' => '1997', 'hourly' => 18.93, 'change' => -1.25, 'direct' => 18.17, 
+            'benefits' => array(
+                 array('type' => 'Social', 'value' => 3.46),
+                 array('type' => 'Direct', 'value' => 1.84)
+            )
+        )
+    );
+}
 ?>
