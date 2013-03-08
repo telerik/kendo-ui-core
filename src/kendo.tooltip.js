@@ -99,7 +99,7 @@ kendo_module({
         var title = element.attr("title");
         if (title) {
             element.data(kendo.ns + "title", title);
-            element.removeAttr("title");
+            element.attr("title", "");
         }
     }
 

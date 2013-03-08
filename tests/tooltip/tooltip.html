@@ -271,7 +271,7 @@
 
                 triggerEvent(container, "mouseenter");
 
-                ok(!container.filter("[title]").length);
+                equal(container.attr("title"), "");
             });
 
             test("title attributes are temporary removed from element parents", function() {
@@ -282,7 +282,7 @@
 
                 triggerEvent(container.find("span"), "mouseenter");
 
-                ok(!container.filter("[title]").length);
+                equal(container.attr("title"), "");
             });
 
             test("title attributes is restored on mouse leave", function() {
