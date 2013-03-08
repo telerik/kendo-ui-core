@@ -42,6 +42,7 @@ require_once '../../lib/Kendo/Autoload.php';
 
     // attach client-side events
     $treeview->select("onSelect")
+             ->change("onChange")
              ->collapse("onCollapse")
              ->expand("onExpand")
              ->dragStart("onDragStart")
@@ -55,7 +56,11 @@ require_once '../../lib/Kendo/Autoload.php';
 
 <script>
     function onSelect(e) {
-        kendoConsole.log("Selected: " + this.text(e.node));
+        kendoConsole.log("Selecting: " + this.text(e.node));
+    }
+
+    function onChange(e) {
+        kendoConsole.log("Selection changed");
     }
 
     function onCollapse(e) {

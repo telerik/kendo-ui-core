@@ -3,9 +3,8 @@
 
 <demo:header />
 <div class="demo-section" style="width: 200px">
-    <kendo:treeView name="treeview" select="onSelect" collapse="onCollapse" expand="onExpand" 
-                    dragAndDrop="true" dragstart="onDragStart" drag="onDrag" drop="onDrop" 
-                    dragend="onDragEnd">
+    <kendo:treeView name="treeview" select="onSelect" change="onChange" collapse="onCollapse" expand="onExpand"
+                    dragAndDrop="true" dragstart="onDragStart" drag="onDrag" drop="onDrop" dragend="onDragEnd">
         <kendo:treeView-items>
             <kendo:treeView-item text="Furniture" expanded="true">
                 <kendo:treeView-items>
@@ -24,80 +23,84 @@
             <kendo:treeView-item text="Storage" />
         </kendo:treeView-items>
     </kendo:treeView>
-</div>    
+</div>
     <div class="demo-section">
-	    <h3 class="title">Console log
-	    </h3>
-	    <div class="console"></div>
-	</div>
+        <h3 class="title">Console log
+        </h3>
+        <div class="console"></div>
+    </div>
     <script>
-	    function onSelect(e) {
-	        kendoConsole.log("Selected: " + this.text(e.node));
-	    }
-	
-	    function onCollapse(e) {
-	        kendoConsole.log("Collapsing " + this.text(e.node));
-	    }
-	
-	    function onExpand(e) {
-	        kendoConsole.log("Expanding " + this.text(e.node));
-	    }
-	
-	    function onDragStart(e) {
-	        kendoConsole.log("Started dragging " + this.text(e.sourceNode));
-	    }
-	
-	    function onDrag(e) {
-	        kendoConsole.log("Started dragging " + this.text(e.sourceNode));
-	    }
-	
-	    function onDrop(e) {
-	        kendoConsole.log(
-	        "Dropped " + this.text(e.sourceNode) +
-	        " (" + (e.valid ? "valid" : "invalid") + ")"
-	        );
-	    }
-	
-	    function onDragEnd(e) {
-	        kendoConsole.log("Finished dragging " + this.text(e.sourceNode));
-	    }
-	
-	    function onSelect(e) {
-	        kendoConsole.log("Selected: " + this.text(e.node));
-	    }
-	
-	    function onCollapse(e) {
-	        kendoConsole.log("Collapsing " + this.text(e.node));
-	    }
-	
-	    function onExpand(e) {
-	        kendoConsole.log("Expanding " + this.text(e.node));
-	    }
-	
-	    function onDragStart(e) {
-	        kendoConsole.log("Started dragging " + this.text(e.sourceNode));
-	    }
-	
-	    function onDrag(e) {
-	        kendoConsole.log("Started dragging " + this.text(e.sourceNode));
-	    }
-	
-	    function onDrop(e) {
-	        kendoConsole.log(
-	        "Dropped " + this.text(e.sourceNode) +
-	        " (" + (e.valid ? "valid" : "invalid") + ")"
-	        );
-	    }
-	
-	    function onDragEnd(e) {
-	        kendoConsole.log("Finished dragging " + this.text(e.sourceNode));
-	    }
-	
-	    function onNavigate(e) {
-	        kendoConsole.log("Navigate " + this.text(e.node));
-	    }
+        function onSelect(e) {
+            kendoConsole.log("Selected: " + this.text(e.node));
+        }
+
+        function onCollapse(e) {
+            kendoConsole.log("Collapsing " + this.text(e.node));
+        }
+
+        function onExpand(e) {
+            kendoConsole.log("Expanding " + this.text(e.node));
+        }
+
+        function onDragStart(e) {
+            kendoConsole.log("Started dragging " + this.text(e.sourceNode));
+        }
+
+        function onDrag(e) {
+            kendoConsole.log("Started dragging " + this.text(e.sourceNode));
+        }
+
+        function onDrop(e) {
+            kendoConsole.log(
+            "Dropped " + this.text(e.sourceNode) +
+            " (" + (e.valid ? "valid" : "invalid") + ")"
+            );
+        }
+
+        function onDragEnd(e) {
+            kendoConsole.log("Finished dragging " + this.text(e.sourceNode));
+        }
+
+        function onSelect(e) {
+            kendoConsole.log("Selecting: " + this.text(e.node));
+        }
+
+        function onChange(e) {
+            kendoConsole.log("Selection changed");
+        }
+
+        function onCollapse(e) {
+            kendoConsole.log("Collapsing " + this.text(e.node));
+        }
+
+        function onExpand(e) {
+            kendoConsole.log("Expanding " + this.text(e.node));
+        }
+
+        function onDragStart(e) {
+            kendoConsole.log("Started dragging " + this.text(e.sourceNode));
+        }
+
+        function onDrag(e) {
+            kendoConsole.log("Started dragging " + this.text(e.sourceNode));
+        }
+
+        function onDrop(e) {
+            kendoConsole.log(
+            "Dropped " + this.text(e.sourceNode) +
+            " (" + (e.valid ? "valid" : "invalid") + ")"
+            );
+        }
+
+        function onDragEnd(e) {
+            kendoConsole.log("Finished dragging " + this.text(e.sourceNode));
+        }
+
+        function onNavigate(e) {
+            kendoConsole.log("Navigate " + this.text(e.node));
+        }
     </script>
-    
+
     <style scoped>
     </style>
 <demo:footer />
