@@ -1,8 +1,8 @@
 
         <div id="example" class="k-content">
             <div class="demo-section">
-                <label for="products">Select product:</label>
-                <input id="products"/>
+                <h2>Products</h2>
+                <input id="products" style="width: 250px" />
             </div>
             <script>
                 $(document).ready(function() {
@@ -23,9 +23,16 @@
                 });
             </script>
 
-            <style scoped>                
+            <style scoped>
                 .demo-section {
-                	width: 250px;
+                    width: 250px;
+                    margin: 35px auto 50px;
+                    padding: 30px;
+                }
+                .demo-section h2 {
+                    text-transform: uppercase;
+                    font-size: 1.2em;
+                    margin-bottom: 10px;
                 }
             </style>
         </div>

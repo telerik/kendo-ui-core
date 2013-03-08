@@ -1,12 +1,13 @@
 
         <div id="example" class="k-content">
-            <div class="configuration k-widget k-header" style="width: 200px">
-                <span class="configHead">Events log</span>
-                <div class="console"></div>
-            </div>
             <div id="taxi">
                 <label for="states">Select a state in USA:</label>
                 <input id="states"/>
+            </div>
+            <div class="demo-section">                
+                <h3 class="title">Console log
+                </h3>
+                <div class="console"></div>
             </div>
             <script>
                 $(document).ready(function() {
@@ -117,28 +118,25 @@
                     height: 160px;
                     padding: 80px 0 0 200px;
                     background: url('../../content/web/autocomplete/taxi.png') transparent no-repeat 0 0;
-                    margin: 40px 0 30px 40px;
- 				}
+                    margin: 20px auto;
+ 		}
                 #taxi label {
                     display: block;
                     color: #333;
                     padding-bottom: 5px;
- 				}
+ 		}
                 .k-autocomplete {
                     display: block;
                     clear: left;
                     width: 200px;
                     vertical-align: middle;
                 }
-                .configuration {
-                    height: 360px;
-                    margin-bottom: -21px;
+                .demo-section {
+                    width: 500px;
+                    text-align: center;
                 }
-                .configuration .console {
-                    background-color: transparent;
-                    border: 0;
-                    height: 320px;
-                    overflow: auto;
+                .console {
+                    margin: 0;
                 }
             </style>
         </div>
