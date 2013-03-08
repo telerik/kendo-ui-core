@@ -468,7 +468,10 @@ kendo_module({
         },
 
         content: function (html) {
-            var content = this.wrapper.children(KWINDOWCONTENT);
+            var content = this.wrapper.children(KWINDOWCONTENT),
+                scrollContainer = content.children(".km-scroll-container");
+
+            content = scrollContainer[0] ? scrollContainer : content;
 
             if (!html) {
                 return content.html();
@@ -823,7 +826,8 @@ kendo_module({
                         data = template(contentTemplate)(data || {});
                     }
 
-                    that.element.html(data).prop("scrollTop", 0);
+                    that.content(data);
+                    that.element.prop("scrollTop", 0);
 
                     that.trigger(REFRESH);
                 }, that)
