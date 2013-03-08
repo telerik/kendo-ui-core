@@ -374,6 +374,27 @@
                 equal(col[1].style.width, "10px");
             });
 
+            test("reorder to right when hidden column", function() {
+                var grid = new Grid(table, {
+                    columns: [
+                        { field: "foo", width: 10, hidden: true },
+                        { field: "bar", width: 20 },
+                        { field: "baz", width: 30 }
+                    ],
+                    dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+                });
+
+                grid.reorderColumn(2, grid.columns[1]);
+
+                var col = grid.thead.prev().find("col");
+
+                equal(grid.columns[0].field, "foo");
+                equal(grid.columns[1].field, "baz");
+                equal(grid.columns[2].field, "bar");
+                equal(col[0].style.width, "30px");
+                equal(col[1].style.width, "20px");
+            });
+
             function moveOverDropTarget(draggable, dropTarget) {
                 var position = dropTarget.position();
 
