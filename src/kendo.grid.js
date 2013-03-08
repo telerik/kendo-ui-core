@@ -431,6 +431,7 @@
     function normalizeCols(table, visibleColumns, hasDetails, groups) {
         var colgroup = table.find(">colgroup"),
             width,
+            browser = kendo.support.browser,
             cols = map(visibleColumns, function(column) {
                     width = column.width;
                     if (width && parseInt(width, 10) !== 0) {
@@ -451,6 +452,12 @@
         colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="k-group-col">') + cols.join("")));
 
         table.prepend(colgroup);
+        
+        // fill gap after column hiding
+        if (browser.msie && browser.version == 8) {
+            table.css("display", "inline-table");
+            window.setTimeout(function(){table.css("display", "");}, 1);
+        }
     }
 
     function convertToObject(array) {
