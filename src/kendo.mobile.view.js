@@ -458,7 +458,6 @@ kendo_module({
             this.trigger(SHOW_START);
 
             var that = this,
-                remote = false,
                 showClosure = function(view) {
                     that._show(view, transition, urlParams(url));
                 },
@@ -472,6 +471,8 @@ kendo_module({
                 element = [];
             }
 
+            this.trigger("viewTypeDetermined", { remote: element.length === 0, url: url });
+
             if (element[0]) {
                 if (!view) {
                     view = that._createView(element);
@@ -479,11 +480,8 @@ kendo_module({
 
                 showClosure(view);
             } else {
-                remote = true;
                 that._loadView(url, showClosure);
             }
-
-            return remote;
         },
 
         _findViewElement: function(url) {

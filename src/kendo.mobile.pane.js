@@ -71,6 +71,12 @@ kendo_module({
                 that.trigger(VIEW_SHOW, e);
             });
 
+            that.viewEngine.bind("viewTypeDetermined", function(e) {
+                if (!e.remote || !that.options.serverNavigation)  {
+                    that.trigger(NAVIGATE, { url: e.url });
+                }
+            });
+
             initial = that.options.initial;
 
             if (initial) {
@@ -101,8 +107,7 @@ kendo_module({
 
         navigate: function(url, transition) {
             var that = this,
-                history = that.history,
-                remoteNavigation;
+                history = that.history;
 
             if (url === BACK) {
                 history.pop();
@@ -111,11 +116,7 @@ kendo_module({
                 that.history.push(url);
             }
 
-            remoteNavigation = that.viewEngine.showView(url, transition);
-
-            if (!remoteNavigation || !that.options.serverNavigation)  {
-                that.trigger(NAVIGATE, {url: url});
-            }
+            that.viewEngine.showView(url, transition);
         },
 
         hideLoading: function() {
