@@ -77,6 +77,10 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     }
 
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
+    }
+
     public void setCollapse(CollapseFunctionTag value) {
         setEvent("collapse", value.getBody());
     }
@@ -180,6 +184,18 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     public void setTemplate(String value) {
         setProperty("template", value);
+    }
+
+    public String getChange() {
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
     }
 
     public String getCollapse() {

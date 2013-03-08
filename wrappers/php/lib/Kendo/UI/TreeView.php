@@ -246,8 +246,22 @@ HierarchicalDataSource instance), the default value of this option is false.
     }
 
     /**
+    * Sets the change event of the TreeView.
+    * Triggered when the selection has changed (either by the user or through the select method.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TreeView
+    */
+    public function change($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('change', $value);
+    }
+
+    /**
     * Sets the select event of the TreeView.
-    * Triggered when a node gets selected.
+    * Triggered when a node is being selected by the user. Cancellable.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\TreeView
     */
