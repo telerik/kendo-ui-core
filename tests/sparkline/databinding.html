@@ -65,6 +65,11 @@
                     equals(liveSeries[0].data.length, 2);
                 });
 
+                test("number is encapsulated in array", function() {
+                    createSparkline(1);
+                    equals(liveSeries[0].data[0], 1);
+                });
+
                 // ------------------------------------------------------------
                 module("Data Binding / Data", {
                     setup: function() {
@@ -91,6 +96,13 @@
                     });
 
                     equals(sparkline.options.series[0].field, "value");
+                });
+
+                test("number is encapsulated in array", function() {
+                    createSparkline({
+                        data: 1
+                    });
+                    equals(liveSeries[0].data[0], 1);
                 });
 
                 // ------------------------------------------------------------
