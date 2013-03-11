@@ -281,11 +281,12 @@ kendo_module({
 
         close: function() {
             var that = this,
-                options = that.options,
-                wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).data("olddisplay", that.element.css("display")).hide()),
+                options = that.options, wrap,
                 animation, openEffects, closeEffects;
 
             if (that.visible()) {
+                wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).hide());
+
                 if (that._closing || that.trigger(CLOSE)) {
                     return;
                 }
