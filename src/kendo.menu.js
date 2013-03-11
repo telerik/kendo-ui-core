@@ -616,7 +616,7 @@ kendo_module({
                 isEnter = e.type == MOUSEENTER || MOUSEDOWN.indexOf(e.type) !== -1;
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass(HOVERSTATE, isEnter);
+                target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "click");
             }
 
             this._removeHoverItem();
