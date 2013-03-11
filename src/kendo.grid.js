@@ -2381,7 +2381,7 @@ kendo_module({
                 column,
                 isAlt = row.hasClass("k-alt"),
                 tmp,
-                idx,
+                idx = that.items().index(row),
                 length;
 
             if (row.children(".k-edit-cell").length && !that.options.rowTemplate) {
@@ -2400,9 +2400,10 @@ kendo_module({
                 });
 
             } else if (!row.hasClass("k-grid-edit-row")) {
-                tmp = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
+                tmp = (isAlt ? that.altRowTemplate : that.rowTemplate)(model);
 
                 row.replaceWith(tmp);
+                tmp = that.items().eq(idx);
 
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];

@@ -183,8 +183,8 @@
 
                 var checkboxes = columnMenu.wrapper.find("[type=checkbox]");
                 equal(checkboxes.length, 2);
-                ok(checkboxes.eq(0).attr("checked"));
-                ok(!checkboxes.eq(1).attr("checked"));
+                ok(checkboxes.eq(0).prop("checked"));
+                ok(!checkboxes.eq(1).prop("checked"));
             });
 
             test("unchecking checkbox calls hideColumn method", function() {
@@ -197,7 +197,7 @@
                         }
                     }
                 });
-                menu.wrapper.find("[type=checkbox]").eq(0).attr("checked", true).click();
+                menu.wrapper.find("[type=checkbox]").eq(0).prop("checked", true).click();
 
                 ok(called);
             });

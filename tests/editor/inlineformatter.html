@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.colorpicker.js"></script>
-        <script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+    <script src="test-scripts.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
-
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
@@ -30,246 +14,246 @@
 
 <script>
 
-var InlineFormatter,
-    RangeEnumerator;
+    var InlineFormatter,
+        RangeEnumerator;
 
-$("#Editor1").kendoEditor();
+    $("#Editor1").kendoEditor();
 
-module("Editor / InlineFormatter", {
-    setup: function() {
-        editor = getEditor();
-        InlineFormatter = kendo.ui.editor.InlineFormatter;
-        RangeEnumerator = kendo.ui.editor.RangeEnumerator;
-    }
-});
+    module("Editor / InlineFormatter", {
+        setup: function() {
+            editor = getEditor();
+            InlineFormatter = kendo.ui.editor.InlineFormatter;
+            RangeEnumerator = kendo.ui.editor.RangeEnumerator;
+        }
+    });
 
-test('apply format applies style', function() {
-    var range = createRangeFromText(editor, '<span>|foo|</span>');
+    test('apply format applies style', function() {
+        var range = createRangeFromText(editor, '<span>|foo|</span>');
 
-    var formatter = new InlineFormatter(editor.options.formats.underline);
+        var formatter = new InlineFormatter(editor.options.formats.underline);
 
-    formatter.apply(new RangeEnumerator(range).enumerate());
+        formatter.apply(new RangeEnumerator(range).enumerate());
 
-    equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
-});
+        equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
+    });
 
-test('apply wraps text node', function() {
-    var range = createRangeFromText(editor, '|foo|');
+    test('apply wraps text node', function() {
+        var range = createRangeFromText(editor, '|foo|');
 
-    var formatter = new InlineFormatter(editor.options.formats.bold);
+        var formatter = new InlineFormatter(editor.options.formats.bold);
 
-    formatter.apply(new RangeEnumerator(range).enumerate());
+        formatter.apply(new RangeEnumerator(range).enumerate());
 
-    equal(editor.value(), '<strong>foo</strong>');
-});
+        equal(editor.value(), '<strong>foo</strong>');
+    });
 
-test('apply wraps text node and applies styles', function() {
-    var range = createRangeFromText(editor, '|foo|');
+    test('apply wraps text node and applies styles', function() {
+        var range = createRangeFromText(editor, '|foo|');
 
-    var formatter = new InlineFormatter(editor.options.formats.underline);
+        var formatter = new InlineFormatter(editor.options.formats.underline);
 
-    formatter.apply(new RangeEnumerator(range).enumerate());
+        formatter.apply(new RangeEnumerator(range).enumerate());
 
-    equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
-});
+        equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
+    });
 
-test('apply resolves style argument', function() {
-    editor.value('foo');
-    var formatter = new InlineFormatter([{tags:['span']}], {style:{color:'#f1f1f1'}});
-    formatter.apply([editor.body.firstChild]);
-    equal(editor.value(), '<span style="color:#f1f1f1;">foo</span>');
-});
+    test('apply resolves style argument', function() {
+        editor.value('foo');
+        var formatter = new InlineFormatter([{tags:['span']}], {style:{color:'#f1f1f1'}});
+        formatter.apply([editor.body.firstChild]);
+        equal(editor.value(), '<span style="color:#f1f1f1;">foo</span>');
+    });
 
-test('apply applies attributes', function() {
-    editor.value('foo');
-    var formatter = new InlineFormatter([{tags:['span']}], {id:'test'});
+    test('apply applies attributes', function() {
+        editor.value('foo');
+        var formatter = new InlineFormatter([{tags:['span']}], {id:'test'});
 
-    formatter.apply([editor.body.firstChild]);
-    equal(editor.value(), '<span id="test">foo</span>');
-});
+        formatter.apply([editor.body.firstChild]);
+        equal(editor.value(), '<span id="test">foo</span>');
+    });
 
-test('apply updates attributes', function() {
-    editor.value('<span id="foo">foo</span>');
-    var formatter = new InlineFormatter([{ tags: ['span']}], {id:'bar'});
+    test('apply updates attributes', function() {
+        editor.value('<span id="foo">foo</span>');
+        var formatter = new InlineFormatter([{ tags: ['span']}], {id:'bar'});
 
-    formatter.apply([editor.body.firstChild.firstChild]);
+        formatter.apply([editor.body.firstChild.firstChild]);
 
-    equal(editor.value(), '<span id="bar">foo</span>');
-});
+        equal(editor.value(), '<span id="bar">foo</span>');
+    });
 
-test('consolidate merges nodes of same format', function() {
-    editor.value('<span style="text-decoration:underline;">f</span><span style="text-decoration:underline;">oo</span>');
-    var formatter = new InlineFormatter(editor.options.formats.underline);
-    formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
-    equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
-});
+    test('consolidate merges nodes of same format', function() {
+        editor.value('<span style="text-decoration:underline;">f</span><span style="text-decoration:underline;">oo</span>');
+        var formatter = new InlineFormatter(editor.options.formats.underline);
+        formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
+        equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
+    });
 
-test('consolidate skips marker', function() {
-    editor.value('<span style="text-decoration:underline;">f</span><span class="k-marker"></span><span style="text-decoration:underline;">oo</span>');
-    var formatter = new InlineFormatter(editor.options.formats.underline);
-    formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
-    equal(editor.body.firstChild.childNodes[1].className, "k-marker");
-});
+    test('consolidate skips marker', function() {
+        editor.value('<span style="text-decoration:underline;">f</span><span class="k-marker"></span><span style="text-decoration:underline;">oo</span>');
+        var formatter = new InlineFormatter(editor.options.formats.underline);
+        formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
+        equal(editor.body.firstChild.childNodes[1].className, "k-marker");
+    });
 
-test('consolidate does not merge nodes which are not siblings', function() {
-    editor.value('<em>f</em><strong><em>oo</em></strong>');
-    var formatter = new InlineFormatter(editor.options.formats.italic);
-    formatter.consolidate([editor.body.firstChild, editor.body.lastChild.firstChild]);
-    equal(editor.value(), '<em>f</em><strong><em>oo</em></strong>');
-});
+    test('consolidate does not merge nodes which are not siblings', function() {
+        editor.value('<em>f</em><strong><em>oo</em></strong>');
+        var formatter = new InlineFormatter(editor.options.formats.italic);
+        formatter.consolidate([editor.body.firstChild, editor.body.lastChild.firstChild]);
+        equal(editor.value(), '<em>f</em><strong><em>oo</em></strong>');
+    });
 
-test('consolidate does not merge nodes with different styles', function() {
-    editor.value('<span style="color:#ff0000;">foo</span><span style="font-family:Courier;">bar</span>');
-    var formatter = new InlineFormatter([{ tags: ['span'] }], { style: { color: '#ff0000' } }, 'color');
-    formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
-    equal(editor.value(), '<span style="color:#ff0000;">foo</span><span style="font-family:Courier;">bar</span>');
-});
+    test('consolidate does not merge nodes with different styles', function() {
+        editor.value('<span style="color:#ff0000;">foo</span><span style="font-family:Courier;">bar</span>');
+        var formatter = new InlineFormatter([{ tags: ['span'] }], { style: { color: '#ff0000' } }, 'color');
+        formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
+        equal(editor.value(), '<span style="color:#ff0000;">foo</span><span style="font-family:Courier;">bar</span>');
+    });
 
-test('consolidate does not merge different tags', function() {
-    editor.value('<span style="color:#ff0000;">f</span><a href="#" style="color:#ff0000;">oo</a>');
-    var formatter = new InlineFormatter([{ tags: ['span'] }], { style: { color: '#ff0000' } }, 'color');
-    formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
-    equal(editor.value(), '<span style="color:#ff0000;">f</span><a href="#" style="color:#ff0000;">oo</a>');
-});
+    test('consolidate does not merge different tags', function() {
+        editor.value('<span style="color:#ff0000;">f</span><a href="#" style="color:#ff0000;">oo</a>');
+        var formatter = new InlineFormatter([{ tags: ['span'] }], { style: { color: '#ff0000' } }, 'color');
+        formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
+        equal(editor.value(), '<span style="color:#ff0000;">f</span><a href="#" style="color:#ff0000;">oo</a>');
+    });
 
-test('remove removes format when whole node contents are selected', function() {
-    var range = createRangeFromText(editor, "<strong>|foo|</strong>");
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    formatter.remove(new RangeEnumerator(range).enumerate());
-    equal(editor.value(), 'foo');
-});
+    test('remove removes format when whole node contents are selected', function() {
+        var range = createRangeFromText(editor, "<strong>|foo|</strong>");
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        formatter.remove(new RangeEnumerator(range).enumerate());
+        equal(editor.value(), 'foo');
+    });
 
-test('remove removes format when whole node is selected', function() {
-    var range = createRangeFromText(editor, "|<strong>foo</strong>|");
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    formatter.remove(new RangeEnumerator(range).enumerate());
-    equal(editor.value(), 'foo');
-});
+    test('remove removes format when whole node is selected', function() {
+        var range = createRangeFromText(editor, "|<strong>foo</strong>|");
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        formatter.remove(new RangeEnumerator(range).enumerate());
+        equal(editor.value(), 'foo');
+    });
 
-test('splits format before selection', function() {
-    var range = createRangeFromText(editor, "<strong>f|oo|</strong>");
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    formatter.split(range);
-    equal(editor.value(), '<strong>f</strong><strong>oo</strong>');
-});
+    test('splits format before selection', function() {
+        var range = createRangeFromText(editor, "<strong>f|oo|</strong>");
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        formatter.split(range);
+        equal(editor.value(), '<strong>f</strong><strong>oo</strong>');
+    });
 
-test('splits format after selection', function() {
-    var range = createRangeFromText(editor, "<strong>|fo|o</strong>");
-    var formatter = new InlineFormatter(editor.options.formats.bold);
+    test('splits format after selection', function() {
+        var range = createRangeFromText(editor, "<strong>|fo|o</strong>");
+        var formatter = new InlineFormatter(editor.options.formats.bold);
 
-    formatter.split(range);
-    equal(editor.value(), '<strong>fo</strong><strong>o</strong>');
-});
+        formatter.split(range);
+        equal(editor.value(), '<strong>fo</strong><strong>o</strong>');
+    });
 
-test('split format keeps markers', function() {
-    var range = createRangeFromText(editor, '<strong>|fo|o</strong>');
-    var formatter = new InlineFormatter(editor.options.formats.bold);
+    test('split format keeps markers', function() {
+        var range = createRangeFromText(editor, '<strong>|fo|o</strong>');
+        var formatter = new InlineFormatter(editor.options.formats.bold);
 
-    var marker = new kendo.ui.editor.Marker();
-    range = marker.add(range);
+        var marker = new kendo.ui.editor.Marker();
+        range = marker.add(range);
 
-    formatter.split(range);
-    equal(editor.body.firstChild.firstChild.className, "k-marker");
-    equal(editor.body.firstChild.lastChild.className, "k-marker");
-});
+        formatter.split(range);
+        equal(editor.body.firstChild.firstChild.className, "k-marker");
+        equal(editor.body.firstChild.lastChild.className, "k-marker");
+    });
 
-test('toggle applies format if format is not found', function() {
-    var range = createRangeFromText(editor, '|fo|');
+    test('toggle applies format if format is not found', function() {
+        var range = createRangeFromText(editor, '|fo|');
 
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    var argument;
-    formatter.apply = function() {
-        argument = arguments[0];
-    }
-    formatter.toggle(range);
-    ok($.isArray(argument));
-});
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        var argument;
+        formatter.apply = function() {
+            argument = arguments[0];
+        }
+        formatter.toggle(range);
+        ok($.isArray(argument));
+    });
 
-test('toggle removes format if format is found', function() {
-    var range = createRangeFromText(editor, '<strong>|fo|</strong>');
+    test('toggle removes format if format is found', function() {
+        var range = createRangeFromText(editor, '<strong>|fo|</strong>');
 
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    var argument;
-    formatter.remove = function() {
-        argument = arguments[0];
-    }
-    formatter.toggle(range);
-    ok($.isArray(argument));
-});
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        var argument;
+        formatter.remove = function() {
+            argument = arguments[0];
+        }
+        formatter.toggle(range);
+        ok($.isArray(argument));
+    });
 
-test('toggle splits format if format is found', function() {
-    var range = createRangeFromText(editor, '<strong>|fo|</strong>');
+    test('toggle splits format if format is found', function() {
+        var range = createRangeFromText(editor, '<strong>|fo|</strong>');
 
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    var argument;
-    formatter.split = function () {
-        argument = arguments[0];
-    }
-    formatter.toggle(range);
-    equal(argument, range);
-});
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        var argument;
+        formatter.split = function () {
+            argument = arguments[0];
+        }
+        formatter.toggle(range);
+        equal(argument, range);
+    });
 
-test('space before content preserved after removing format', function() {
-    var range = createRangeFromText(editor, 'foo<strong> |bar|</strong>');
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    var marker = new kendo.ui.editor.Marker();
-    marker.add(range);
-    formatter.toggle(range);
-    marker.remove(range);
-    equal(editor.value(), 'foo bar');
-});
+    test('space before content preserved after removing format', function() {
+        var range = createRangeFromText(editor, 'foo<strong> |bar|</strong>');
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        var marker = new kendo.ui.editor.Marker();
+        marker.add(range);
+        formatter.toggle(range);
+        marker.remove(range);
+        equal(editor.value(), 'foo bar');
+    });
 
-test('space after content preserved after removing format', function() {
-    var range = createRangeFromText(editor, '<strong>|foo| </strong>');
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    var marker = new kendo.ui.editor.Marker();
-    marker.add(range);
+    test('space after content preserved after removing format', function() {
+        var range = createRangeFromText(editor, '<strong>|foo| </strong>');
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        var marker = new kendo.ui.editor.Marker();
+        marker.add(range);
 
-    formatter.toggle(range);
-    marker.remove(range);
-    equal(editor.value(), 'foo ');
-});
+        formatter.toggle(range);
+        marker.remove(range);
+        equal(editor.value(), 'foo ');
+    });
 
-test('removeing format preserves the format element and removes the format attributes', function () {
-    var range = createRangeFromText(editor, '<span style="font-size:xx-small;text-decoration:underline;">|foo|</span>');
-    var formatter = new InlineFormatter(editor.options.formats.underline);
-    var marker = new kendo.ui.editor.Marker();
-    marker.add(range);
+    test('removeing format preserves the format element and removes the format attributes', function () {
+        var range = createRangeFromText(editor, '<span style="font-size:xx-small;text-decoration:underline;">|foo|</span>');
+        var formatter = new InlineFormatter(editor.options.formats.underline);
+        var marker = new kendo.ui.editor.Marker();
+        marker.add(range);
 
-    formatter.toggle(range);
-    marker.remove(range);
-    equal(editor.value(), '<span style="font-size:xx-small;">foo</span>');
-});
+        formatter.toggle(range);
+        marker.remove(range);
+        equal(editor.value(), '<span style="font-size:xx-small;">foo</span>');
+    });
 
-test('space before and after content preserved after removing format', function() {
-    var range = createRangeFromText(editor, 'foo<strong> |bar| baz</strong>');
-    var formatter = new InlineFormatter(editor.options.formats.bold);
-    var marker = new kendo.ui.editor.Marker();
-    marker.add(range);
-    formatter.toggle(range);
-    marker.remove(range);
-    equal(editor.value(), 'foo bar<strong> baz</strong>');
-});
+    test('space before and after content preserved after removing format', function() {
+        var range = createRangeFromText(editor, 'foo<strong> |bar| baz</strong>');
+        var formatter = new InlineFormatter(editor.options.formats.bold);
+        var marker = new kendo.ui.editor.Marker();
+        marker.add(range);
+        formatter.toggle(range);
+        marker.remove(range);
+        equal(editor.value(), 'foo bar<strong> baz</strong>');
+    });
 
-test('InlineFormatTool.willDelayExecution returns false when format will be directly applied', function() {
-    var tool = editor.options.tools.bold, range;
+    test('InlineFormatTool.willDelayExecution returns false when format will be directly applied', function() {
+        var tool = editor.options.tools.bold, range;
 
-    range = createRangeFromText(editor, 'foo|bar|baz');
+        range = createRangeFromText(editor, 'foo|bar|baz');
 
-    ok(!tool.willDelayExecution(range));
+        ok(!tool.willDelayExecution(range));
 
-    range = createRangeFromText(editor, 'foob||arbaz');
+        range = createRangeFromText(editor, 'foob||arbaz');
 
-    ok(!tool.willDelayExecution(range));
-});
+        ok(!tool.willDelayExecution(range));
+    });
 
-test('InlineFormatTool.willDelayExecution returns true when format will be added to pending formats', function() {
-    var tool = editor.options.tools.bold;
+    test('InlineFormatTool.willDelayExecution returns true when format will be added to pending formats', function() {
+        var tool = editor.options.tools.bold;
 
-    var range = createRangeFromText(editor, 'foobarbaz||');
+        var range = createRangeFromText(editor, 'foobarbaz||');
 
-    ok(tool.willDelayExecution(range));
-});
+        ok(tool.willDelayExecution(range));
+    });
 
 </script>
 

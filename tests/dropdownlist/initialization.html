@@ -555,7 +555,7 @@
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "1");
 
-                var form = $("<form/>").appendTo(document).append(input),
+                var form = $("<form/>").appendTo(document.body).append(input),
                     dropdownlist = new DropDownList(input, {
                         dataTextField: "text",
                         dataValueField: "value",
@@ -576,7 +576,7 @@
             asyncTest("form reset support (select element)", 2, function() {
                 var select = $('<select><option>Item1</option><option selected="selected">Item2</option></select>');
 
-                var form = $("<form/>").appendTo(document).append(select),
+                var form = $("<form/>").appendTo(document.body).append(select),
                     dropdownlist = new DropDownList(select);
 
                 dropdownlist.select(0);
@@ -762,13 +762,13 @@
                 equal(dropdown.value(), "Item2");
             });
 
-            test("Hidden input focuses the wrapper", function() {
+            test("Using triggerHandler('focus') focuses the wrapper", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     dropdownlist = new DropDownList(input, {
                          dataSource: data
                     });
 
-                input.focus();
+                input.triggerHandler("focus");
 
                 equal(document.activeElement, dropdownlist.wrapper[0]);
             });

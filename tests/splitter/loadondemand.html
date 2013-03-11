@@ -35,20 +35,22 @@
                 },
                 teardown: function() {
                     $.mockjaxClear();
+                    $(document).off();
                     $(".k-splitter").remove();
                 }
             });
 
-            test("ajaxRequest loads custom urls", function() {
+            test("ajaxRequest loads custom urls", 1, function() {
                 var customUrl = 'customUrl',
                     requestedUrl,
                     splitter = $(getSplitterHtml())
                         .appendTo(document.body)
-                        .bind("ajaxSend", function(e, request, settings) {
-                            e.preventDefault();
-                            requestedUrl = settings.url;
-                        })
                         .kendoSplitter().data("kendoSplitter");
+
+                $(document).on("ajaxSend", function(e, request, settings) {
+                    e.preventDefault();
+                    requestedUrl = settings.url;
+                });
 
                 $.mockjax({
                     url: customUrl,
@@ -59,30 +61,33 @@
                 equals(requestedUrl, customUrl);
             });
 
-            asyncTest("ajaxRequest places loaded data in target pane", function() {
+            asyncTest("ajaxRequest places loaded data in target pane", 1, function() {
                 var splitter = $(getSplitterHtml())
                         .appendTo(document.body)
-                        .kendoSplitter()
-                        .bind("ajaxComplete", function(e, request, settings) {
-                            if (settings.url === url) {
-                                start();
-                                equals(splitter.find(".k-pane:first")[0].innerHTML, "foobar");
-                            }
-                        });
+                        .kendoSplitter();
+
+                $(document).on("ajaxComplete", function(e, request, settings) {
+                    if (settings.url === url) {
+                        start();
+                        equals(splitter.find(".k-pane:first")[0].innerHTML, "foobar");
+                    }
+                });
+
                 splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
-            test("splitter loads content for LoadOnDemand panes when initializing", function() {
+            test("splitter loads content for LoadOnDemand panes when initializing", 2, function() {
                 var counter = 0,
                     requestedUrl;
 
+                $(document).on("ajaxSend", function(e, request, settings) {
+                    e.preventDefault();
+                    counter++;
+                    requestedUrl = settings.url;
+                });
+
                 $(getSplitterHtml())
                     .appendTo(document.body)
-                    .bind("ajaxSend", function(e, request, settings) {
-                        e.preventDefault();
-                        counter++;
-                        requestedUrl = settings.url;
-                    })
                     .kendoSplitter({
                         panes: [ {}, { contentUrl: url } ]
                     });
@@ -91,13 +96,15 @@
                 equals(requestedUrl, url);
             });
 
-            asyncTest("ajaxRequest places loading icon in pane", function() {
+            asyncTest("ajaxRequest places loading icon in pane", 2, function() {
                 var splitter = $(getSplitterHtml())
                         .appendTo(document.body)
-                        .kendoSplitter()
-                        .bind("ajaxSend", function(e, request, settings) {
-                            request.abort();
-                        });
+                        .kendoSplitter();
+
+                $(document).on("ajaxSend", function(e, request, settings) {
+                    request.abort();
+                });
+
                 splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
 
                 setTimeout(function() {
@@ -107,21 +114,22 @@
                 }, 500);
             });
 
-            asyncTest("ajaxRequest triggers contentLoad event", function() {
+            asyncTest("ajaxRequest triggers contentLoad event", 2, function() {
                 var triggered = false,
                     splitter = $(getSplitterHtml())
                         .appendTo(document.body)
                         .kendoSplitter({ contentLoad: function(e) {
                             triggered = e;
-                    }})
-                        .bind("ajaxComplete", function(e, request, settings) {
-                            if (settings.url === url) {
-                                start();
-                                ok(triggered);
-                                equals(triggered.pane, splitter.find(".k-pane:first")[0]);
-                            }
-                        });
-                 splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
+                    }});
+                $(document).on("ajaxComplete", function(e, request, settings) {
+                    if (settings.url === url) {
+                        start();
+                        ok(triggered);
+                        equals(triggered.pane, splitter.find(".k-pane:first")[0]);
+                    }
+                });
+
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
             test("ajaxRequest sends data to server", function() {

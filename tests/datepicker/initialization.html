@@ -246,7 +246,7 @@
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "12/12/2000");
 
-                var form = $("<form/>").appendTo(document).append(input),
+                var form = $("<form/>").appendTo(document.body).append(input),
                     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 datepicker.open();

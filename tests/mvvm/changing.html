@@ -129,7 +129,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("option:first").attr("selected", "selected");
+                dom.find("option:first").prop("selected", true);
                 dom.find("select").trigger("change");
                 equal(dom.find("span").text(), "foo");
             });
@@ -289,9 +289,11 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("option:last").attr("selected", "selected");
+                dom.find("option:first")[0].selected = false;
+                dom.find("option:last")[0].selected = true;
 
                 dom.trigger("change");
+                dom.triggerHandler("change");
 
                 strictEqual(viewModel.selectedItem, viewModel.foo[1]);
             });
@@ -308,7 +310,8 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("option:last").attr("selected", "selected");
+                dom.find("option:first")[0].selected = false;
+                dom.find("option:last")[0].selected = true;
 
                 dom.trigger("change");
 
@@ -344,7 +347,8 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("option:last").attr("selected", "selected");
+                dom.find("option:first")[0].selected = false;
+                dom.find("option:last")[0].selected = true;
 
                 dom.trigger("change");
 
@@ -389,7 +393,8 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.find("option:last").attr("selected", "selected");
+                dom.find("option:first")[0].selected = false;
+                dom.find("option:last")[0].selected = true;
                 dom.trigger("change");
 
                 equal(viewModel.foo, "bar");
@@ -428,7 +433,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.attr("checked", true);
+                dom.prop("checked", true);
                 dom.trigger("change");
 
                 equal(viewModel.foo, true);
@@ -441,7 +446,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.attr("checked", false);
+                dom.prop("checked", false);
                 dom.trigger("change");
 
                 equal(viewModel.foo, false);
@@ -454,7 +459,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                dom.attr("checked", true);
+                dom.prop("checked", true);
                 dom.trigger("change");
 
                 equal(viewModel.foo, true);

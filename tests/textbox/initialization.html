@@ -204,7 +204,7 @@
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 
-                var form = $("<form/>").appendTo(document).append(input),
+                var form = $("<form/>").appendTo(document.body).append(input),
                     textbox = new NumericTextBox(input);
 
                 textbox.value("1");

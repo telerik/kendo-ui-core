@@ -54,7 +54,7 @@
 
             function simulateRequestSuccess(fileIndex, response) {
                 uploadInstance._module.onRequestSuccess(
-                    { target: { responseText: response || "", statusText: "OK", status: 200 } },
+                    { target: { responseText: response || "null", statusText: "OK", status: 200 } },
                     $(".k-file", uploadInstance.wrapper).eq(fileIndex)
                 );
             }
@@ -80,7 +80,7 @@
                 $.mockjax({
                     url: "/removeAction",
                     responseTime: 0,
-                    responseText: ""
+                    responseText: "null"
                 });
                 simulateRemoveClick();
             }
@@ -218,7 +218,7 @@
 
                 var fileEntry = $(".k-file:first", uploadInstance.wrapper);
 
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, fileEntry);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "null", status: 200 } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 0);
             });
@@ -231,12 +231,12 @@
                 uploadInstance.element.removeClass("marker");
 
                 var fileEntry = $(".k-file:nth-child(1)", uploadInstance.wrapper);
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, fileEntry);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "null", status: 200 } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 1);
 
                 fileEntry = $(".k-file:nth-child(2)", uploadInstance.wrapper);
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, fileEntry);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "null", status: 200 } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 0);
             });
@@ -407,7 +407,7 @@
 
                 simulateFileSelect();
                 $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, $(".k-file", uploadInstance.wrapper));
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "null", status: 200 } }, $(".k-file", uploadInstance.wrapper));
 
                 $(".k-delete", uploadInstance.wrapper).trigger("click");
                 ok(removeCalled);

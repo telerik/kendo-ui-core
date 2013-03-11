@@ -410,7 +410,8 @@
                     });
 
                 $.mockjax({
-                    url: "foo"
+                    url: "foo",
+                    responseText: "[]"
                 });
                 stop(1);
                 transport.read({
@@ -456,7 +457,8 @@
                     });
 
                 $.mockjax({
-                    url: "foo"
+                    url: "foo",
+                    responseText: []
                 });
 
                 stop(1);
@@ -468,6 +470,7 @@
                     }
                 });
             });
+
             test("read does not send request if data exists in cache", function() {
                 var data = [1,2,3,4],
                     transport = new RemoteTransport({
@@ -522,6 +525,7 @@
                 });
 
             });
+
             test("setting cache to true applies in memory cache", function() {
                 var transport = new RemoteTransport({
                         read: "foo",
@@ -619,6 +623,7 @@
                 stop(1);
                 transport.create();
             });
+
             test("update passes its options to $.ajax", function() {
                 var transport = new RemoteTransport({
                         update: {
@@ -659,7 +664,8 @@
                     });
 
                 $.mockjax({
-                    url: "foo"
+                    url: "foo",
+                    responseText: "[]"
                 });
                 stop(1);
                 transport.update({

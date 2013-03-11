@@ -316,8 +316,8 @@ kendo_module({
                     return attr + '"' + col.field.replace(nameSpecialCharRegExp, "\\$1") + '"]';
                 }).join(",");
 
-            this.wrapper.find(allselector).attr("checked", false);
-            this.wrapper.find(selector).attr("checked", true).attr("disabled", visible.length == 1);
+            this.wrapper.find(allselector).prop("checked", false);
+            this.wrapper.find(selector).prop("checked", true).prop("disabled", visible.length == 1);
         },
 
         _filter: function() {

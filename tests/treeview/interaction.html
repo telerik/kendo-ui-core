@@ -2,19 +2,7 @@
 <html>
     <head>
         <title>TreeView interaction</title>
-        <script src="../../src/jquery.js"></script>
-        <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.userevents.js"></script>
-        <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.treeview.js"></script>
-        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
-        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less" />
-        <script src="../../demos/mvc/content/shared/js/less.js"></script>
-        <script src="test-helper.js"></script>
+        <script src="test-scripts.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">TreeView interaction</h1>
@@ -129,8 +117,12 @@
                 ok(!item.hasClass("k-state-selected"));
             });
 
+            function treeviewFrom(html) {
+                return $(html).appendTo("body").kendoTreeView().data("kendoTreeView");
+            }
+
             test("TreeView preserves id attributes of the enhanced html", function() {
-                var treeview = $('<ul id="treeview"><li id="custom">text<li/></ul>').kendoTreeView().data("kendoTreeView");
+                var treeview = treeviewFrom('<ul id="treeview"><li id="custom">text</li></ul>');
 
                 treeview.wrapper.focus();
 
@@ -140,7 +132,7 @@
             });
 
             test("TreeView uses id of the LI as value for aria-activedescendant", function() {
-                var treeview = $('<ul id="treeview"><li id="custom">text<li/></ul>').kendoTreeView().data("kendoTreeView");
+                var treeview = treeviewFrom('<ul id="treeview"><li id="custom">text</li></ul>');
 
                 treeview.wrapper.focus();
 

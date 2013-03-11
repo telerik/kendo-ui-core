@@ -18,7 +18,7 @@
         this.done = done || this.done;
         var that = this;
         $(document).ready(function () {
-            $(".runner-test-page-header").live("click", function () { $(this).next(".runner-test-page-frame").slideToggle(100); });
+            $(document.body).on("click", ".runner-test-page-header", function () { $(this).next(".runner-test-page-frame").slideToggle(100); });
             that.runPage();
         });
     }

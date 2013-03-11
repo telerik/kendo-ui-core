@@ -467,13 +467,13 @@
                 equal(document.activeElement.nodeName, "INPUT");
             });
 
-            test("Hidden input focuses visible one", function() {
+            test("Calling triggerHandler('focus') focuses visible one", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
                          dataSource: data
                     });
 
-                input.focus();
+                input.triggerHandler("focus");
 
                 equal(document.activeElement, combobox.input[0]);
             });
@@ -585,8 +585,8 @@
 
             asyncTest("ComboBox fetches only once on open and not data is returned", function() {
                 $.mockjaxSettings.responseTime = 0;
-                $.mockjaxSettings.contentType = "text/html";
-                $.mockjax({ url: "foo.json", responseText: [] });
+                $.mockjaxSettings.contentType = "application/json";
+                $.mockjax({ url: "foo.json", responseText: '[]' });
 
                 var called = 0;
                 var combo = new kendo.ui.ComboBox(input.val("Item2"), {
@@ -614,7 +614,7 @@
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 
-                var form = $("<form/>").appendTo(document).append(input),
+                var form = $("<form/>").appendTo(document.body).append(input),
                     combobox = new ComboBox(input, {
                          dataSource: [{text: 1, value: 1}, {text:2, value:2}]
                     });

@@ -738,7 +738,7 @@ kendo_module({
                 .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
 
-            $(that.element).attr(DISABLED, DISABLED);
+            $(that.element).prop(DISABLED, DISABLED);
 
             that.wrapper
                 .find(".k-button")
@@ -788,7 +788,7 @@ kendo_module({
 
             if (value >= options.min && value <= options.max) {
                 if (options.value != value) {
-                    that.element.attr("value", formatValue(value));
+                    that.element.prop("value", formatValue(value));
                     options.value = value;
                     that._refreshAriaAttr(value);
                     that._refresh();
@@ -1307,7 +1307,7 @@ kendo_module({
                 .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
 
-            that.wrapper.find("input").attr(DISABLED, DISABLED);
+            that.wrapper.find("input").prop(DISABLED, DISABLED);
 
             that.wrapper
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
@@ -1407,9 +1407,9 @@ kendo_module({
                 end >= options.min && end <= options.max && start <= end) {
                 if (selectionStart != start || selectionEnd != end) {
                     that.element.find("input")
-                        .eq(0).attr("value", formatValue(start))
+                        .eq(0).prop("value", formatValue(start))
                         .end()
-                        .eq(1).attr("value", formatValue(end));
+                        .eq(1).prop("value", formatValue(end));
 
                     options.selectionStart = start;
                     options.selectionEnd = end;
