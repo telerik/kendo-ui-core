@@ -953,7 +953,7 @@ kendo_module({
                 if (options.checkboxTemplate) {
                     checkboxTemplate = options.checkboxTemplate;
                 } else {
-                    checkboxTemplate = "<input type='checkbox' #= item.checked ? 'checked' : '' #";
+                    checkboxTemplate = "<input type='checkbox' #= (item.enabled === false) ? 'disabled' : '' # #= item.checked ? 'checked' : '' #";
 
                     if (checkboxOptions.name) {
                         checkboxTemplate += " name='" + checkboxOptions.name + "'";
