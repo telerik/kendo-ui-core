@@ -4,6 +4,7 @@
         <title>Bar Chart</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
@@ -14,10 +15,42 @@
         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart" style="width: 800px; height: 600px;"></div>
+        <div id="chart" style="width: 800px; height: 100px;"></div>
+        <textArea id="log" rows="20" cols="40"></textArea>
         <script>
             $(function() {
+                function log(message) {
+                    var area = $("#log");
+                    area.val(area.val() + message + "\n");
+                    area[0].scrollTop = area[0].scrollHeight;
+                }
+
                 $("#chart").kendoChart({
+                    series: [{
+                        type: "area",
+                        data: [1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1,
+                               1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1]
+                    }],
+                    categoryAxis: {
+                        name: "main",
+                        select: {
+                            visible: true,
+                            from: 0,
+                            to: 5
+                        }
+                    },
+                    valueAxis: {
+                        visible: false
+                    },
+                    selectStart: function(e) {
+                        log("selectStart - " + e.axis.name + ": " + e.from + " - " + e.to);
+                    },
+                    select: function(e) {
+                        log("select - " + e.axis.name + ": " + e.from + " - " + e.to);
+                    },
+                    selectEnd: function(e) {
+                        log("selectEnd - " + e.axis.name + ": " + e.from + " - " + e.to);
+                    }
                 });
             });
         </script>

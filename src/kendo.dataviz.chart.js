@@ -349,6 +349,7 @@ kendo_module({
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
                 chart._highlight = new Highlight(view, chart._viewElement);
+                chart._setupSelection();
             }
         },
 
@@ -402,6 +403,7 @@ kendo_module({
             Title.buildTitle(options.title, model);
 
             plotArea = model._plotArea = chart._createPlotArea();
+            model._plotArea.parent = model;
             if (options.legend.visible) {
                 model.append(new Legend(plotArea.options.legend));
             }
@@ -466,6 +468,43 @@ kendo_module({
             }
 
             return plotArea;
+        },
+
+        _setupSelection: function() {
+            var chart = this,
+                plotArea = chart._plotArea,
+                axes = plotArea.axes;
+
+            for (var i = 0; i < axes.length; i++) {
+                var axis = axes[i];
+                if (axis instanceof CategoryAxis) {
+                    axis.selection = new Selection(chart, axis,
+                        deepExtend({
+                            min: 0,
+                            max: axis.options.categories.length
+                        },
+                        axis.options.select
+                    ));
+
+                    axis.selection.bind(SELECT_START, function(e) {
+                        // TODO: Reference chart axis options?
+                        e.axis = this.categoryAxis.options;
+                        return chart.trigger(SELECT_START, e);
+                    });
+
+                    axis.selection.bind(SELECT, function(e) {
+                        // TODO: Reference chart axis options?
+                        e.axis = this.categoryAxis.options;
+                        return chart.trigger(SELECT, e);
+                    });
+
+                    axis.selection.bind(SELECT_END, function(e) {
+                        // TODO: Reference chart axis options?
+                        e.axis = this.categoryAxis.options;
+                        return chart.trigger(SELECT_END, e);
+                    });
+                }
+            }
         },
 
         _attachEvents: function() {
