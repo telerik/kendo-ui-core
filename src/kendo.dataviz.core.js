@@ -1782,6 +1782,15 @@ kendo_module({
             view.animations = [];
         },
 
+        destroy: function() {
+            var animations = this.animations,
+                current;
+
+            while (animations.length > 0) {
+                animations.shift().destroy();
+            }
+        },
+
         renderDefinitions: function() {
             var definitions = this.definitions,
                 definitionId,
@@ -1823,6 +1832,7 @@ kendo_module({
             }
         },
 
+        // TODO: Refactor almost identical methods
         setupAnimations: function() {
             var animations = this.animations,
                 i,
@@ -1834,10 +1844,12 @@ kendo_module({
         },
 
         playAnimations: function() {
-            var animations = this.animations;
+            var animations = this.animations,
+                i,
+                count = animations.length;
 
-            while (animations.length > 0) {
-                animations.shift().play();
+            for (i = 0; i < count; i++) {
+                animations[i].play();
             }
         },
 
@@ -2042,10 +2054,11 @@ kendo_module({
 
         abort: function() {
             this._stopped = true;
-            this.destroy();
         },
 
-        destroy: noop,
+        destroy: function() {
+            this.abort();
+        },
 
         setup: noop,
 
@@ -2098,6 +2111,8 @@ kendo_module({
         },
 
         destroy: function() {
+            ElementAnimation.fn.destroy.call(this);
+
             // Unwrap all child elements
             this.element.destroy();
         }
