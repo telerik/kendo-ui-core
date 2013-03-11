@@ -74,6 +74,8 @@
             FOCUSEDSTATE = "k-state-focused",
             FOCUSEDCLASS = "." + FOCUSEDSTATE;
 
+        QUnit.config.reorder = false;
+
         $("#Menu1").kendoMenu({ animation: false });
 
         module("Menu / Keyboard navigation", {
@@ -100,7 +102,7 @@
 
             setTimeout(function() {
                 start();
-                template.focus();
+                template[0].focus();
                 ok(template.parents(".k-item").eq(1).hasClass(FOCUSEDSTATE));
             }, 100);
         });

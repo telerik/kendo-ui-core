@@ -118,7 +118,7 @@
                     .appendTo(document.body)
                     .kendoMenu({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
 
-                menu.focus();
+                menu[0].focus();
 
                 ok(menu.filter("[aria-activedescendant]").length);
                 ok(menu.find("li#" + menu.data("kendoMenu")._ariaId).length);
@@ -129,7 +129,7 @@
                     .appendTo(document.body)
                     .kendoMenu();
 
-                menu.focus();
+                menu[0].focus();
 
                 ok(menu.filter("[aria-activedescendant=bar]").length);
                 ok(menu.find("li#bar").length);
