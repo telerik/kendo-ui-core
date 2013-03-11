@@ -23,6 +23,23 @@ namespace Kendo.Models
 #endif
         };
 
+        public static readonly IList<string> Metro = new string[]
+        {
+#if DEBUG
+            "web/kendo.common.less",
+            "web/kendo.rtl.css",
+            "web/kendo.metro.less",
+            "dataviz/kendo.dataviz.css",
+            "dataviz/kendo.dataviz.metro.css"
+#else
+            "kendo.common.min.css",
+            "kendo.rtl.min.css",
+            "kendo.metro.min.css",
+            "kendo.dataviz.min.css",
+            "kendo.dataviz.metro.min.css"
+#endif
+        };
+
         public static readonly IList<string> Simulator = new string[]
         {
 #if DEBUG

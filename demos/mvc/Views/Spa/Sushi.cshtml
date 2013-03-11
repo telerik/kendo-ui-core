@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
         <link rel="stylesheet" href="@Url.Content("~/content/spa/websushi/css/style.css")" />
 
-        @foreach (string styleName in Kendo.Models.StyleGroups.All) {
+        @foreach (string styleName in Kendo.Models.StyleGroups.Metro) {
             <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
         }
 
