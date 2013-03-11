@@ -365,7 +365,7 @@ kendo_module({
             stopQueue: function(element, clearQueue, gotoEnd) {
                 var cssValues,
                     taskKeys = element.data("keys"),
-                    retainPosition = (gotoEnd === false && taskKeys),
+                    retainPosition = (!gotoEnd && taskKeys),
                     completeCallback = element.data(COMPLETE_CALLBACK);
 
                 if (retainPosition) {
@@ -380,10 +380,9 @@ kendo_module({
                     element.css(cssValues);
                 }
 
-                element.removeData("keys");
-
-                element.stop(clearQueue);
-                return element;
+                return element
+                        .removeData("keys")
+                        .stop(clearQueue);
             }
         });
     }

@@ -308,8 +308,6 @@ kendo_module({
                 openEffects = that.element.data(EFFECTS);
                 closeEffects = animation.effects;
 
-                wrap.css({ overflow: HIDDEN });
-
                 if (!closeEffects && !kendo.size(closeEffects) && openEffects && kendo.size(openEffects)) {
                     animation.effects = openEffects;
                     animation.reverse = true;
@@ -317,7 +315,9 @@ kendo_module({
 
                 that._closing = true;
 
-                that.element.kendoStop(true).kendoAnimate(animation);
+                that.element.kendoStop(true);
+                wrap.css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
+                that.element.kendoAnimate(animation);
             }
         },
 
