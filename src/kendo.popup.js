@@ -282,7 +282,7 @@ kendo_module({
         close: function() {
             var that = this,
                 options = that.options,
-                wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element)),
+                wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).data("olddisplay", that.element.css("display")).hide()),
                 animation, openEffects, closeEffects;
 
             if (that.visible()) {
