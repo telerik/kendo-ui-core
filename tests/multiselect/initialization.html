@@ -334,6 +334,14 @@
                 equal(multiselect.input.attr("accesskey"), "w");
             });
 
+            test("Scales correctly input element when init in hidden element", function() {
+                var div = $("<div style='display:none'/>").appendTo(document.documentElement);
+                div.append(select);
+                var multiselect = new MultiSelect(select, { placeholder: "Select something..." });
+
+                ok(multiselect.input.width() > 50);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

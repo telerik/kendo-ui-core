@@ -620,7 +620,16 @@ kendo_module({
         _scale: function() {
             var that = this,
                 wrapperWidth = that.wrapper.width(),
-                textWidth = that._span.text(that.input.val()).width() + 25;
+                span = that._span.text(that.input.val()),
+                textWidth;
+
+            if (!wrapperWidth) {
+                span.appendTo(document.documentElement);
+                wrapperWidth = textWidth = span.width() + 25;
+                span.appendTo(this.wrapper);
+            } else {
+                textWidth = span.width() + 25;
+            }
 
             that.input.width(textWidth > wrapperWidth ? wrapperWidth : textWidth);
         },
