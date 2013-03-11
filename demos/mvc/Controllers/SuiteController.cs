@@ -100,7 +100,7 @@ namespace Kendo.Controllers
 
         public ActionResult SectionIndex(string suite, string section)
         {
-            var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(blackberry|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone)", RegexOptions.IgnoreCase);
+            var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(blackberry|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
             var redirect = RedirectPermanent(Url.Action("Index", new { suite = suite, section = section, example = "index" }));
 
             if (suite == "mobile" && isMobileDevice)

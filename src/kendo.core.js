@@ -1702,14 +1702,16 @@ function pad(number, digits, end) {
                     blackberry: /(BlackBerry|BB10).*?Version\/(\d+)\.(\d+(\.\d+)?)/,
                     playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/,
                     wp: /(Windows Phone(?: OS)?)\s(\d+)\.(\d+(\.\d+)?)/,
-                    windows: /(MSIE)\s+(\d+)\.(\d+(\.\d+)?)/
+                    windows: /(MSIE)\s+(\d+)\.(\d+(\.\d+)?)/,
+                    ffos: /(Mobile).*rv:(\d+)\.(\d+(\.\d+)?).*Firefox/
                 },
                 osRxs = {
                     ios: /^i(phone|pad|pod)$/i,
                     android: /^android|fire$/i,
                     blackberry: /^blackberry|playbook/i,
                     windows: /windows/,
-                    wp: /wp/
+                    wp: /wp/,
+                    meego: /ffos/
                 },
                 formFactorRxs = {
                     tablet: /playbook|ipad|fire/i
