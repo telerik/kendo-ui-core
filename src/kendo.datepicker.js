@@ -434,6 +434,7 @@ kendo_module({
         },
 
         enable: function(enable) {
+            enable = enable === undefined ? true : enable;
             this._editable(false, !enable);
         },
 

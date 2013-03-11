@@ -405,6 +405,18 @@
                 ok(datepicker._inputWrapper.hasClass("k-state-disabled"));
             });
 
+            test("enable() enables widget after readonly()", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.readonly();
+                datepicker.enable();
+
+                equal(datepicker.element.attr("readonly"), undefined);
+                equal(datepicker.element.attr("disabled"), undefined);
+                ok(datepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
             test("value method honors options.culture", function() {
                 var datepicker = input.kendoDatePicker({
                         culture: "bg-BG",
