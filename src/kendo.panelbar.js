@@ -963,7 +963,17 @@ kendo_module({
                 },
 
                 success: function (data) {
-                    contentElement.html(data);
+                    try {
+                        contentElement.html(data);
+                    } catch (e) {
+                        var console = window.console;
+
+                        if (console && console.error) {
+                            console.error(e.name + ": " + e.message + " in " + url);
+                        }
+                        this.error(this.xhr, "error");
+                    }
+
                     that._toggleGroup(contentElement, isVisible);
 
                     that.trigger(CONTENTLOAD, { item: element[0], contentElement: contentElement[0] });

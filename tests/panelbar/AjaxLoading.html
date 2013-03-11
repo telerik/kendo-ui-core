@@ -4,21 +4,44 @@
     <title>kendo.ui.panelbar Tests</title>
 
     <script src="../../src/jquery.js"></script>
-    <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../kendo-test-helpers.js"></script>
-    <script src="../../src/kendo.core.js"></script>
-    <script src="../../src/kendo.fx.js"></script>
-    <script src="../../src/kendo.panelbar.js"></script>
     <script src="../jquery.mockjax.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.panelbar.js"></script>
 
     <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-    <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+    <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../../demos/mvc/content/shared/js/less.js"></script>
 
     <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
 <script type="text/x-kendo-template" id="panelbarHTML">
+    <ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
+        <li><a>Pure ASP.NET MVC components</a>
+            <div></div>
+        </li>
+        <li><a>Completely Open Source</a>
+            <div></div>
+        </li>
+        <li><a>Exceptional Performance</a>
+            <div></div>
+        </li>
+        <li><a>Based on jQuery</a>
+            <div></div>
+        </li>
+        <li>Wide Cross-browser support
+            <div></div>
+        </li>
+        <li>Wide Cross-browser support
+            <div></div>
+        </li>
+    </ul>
+</script>
+
+<script type="text/x-kendo-template" id="activePanelbarHTML">
     <ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
         <li><a>Pure ASP.NET MVC components</a>
             <div></div>
@@ -43,6 +66,13 @@
 
         var panelbar;
 
+        $.mockjax({
+            url: "error.html",
+            response: function() {
+                this.responseText = 'foo<script type="text/javascript">exit;<' + '/script>';
+            }
+        });
+
         function createPanelBar() {
             $(document.body).append($("#panelbarHTML").html());
             panelbar = $("#PanelBar1").kendoPanelBar({
@@ -52,7 +82,8 @@
                     "AjaxView2.html",
                     "AjaxView1.html",
                     "AjaxView2.html",
-                    "AjaxView1.html"
+                    "AjaxView1.html",
+                    "error.html"
                 ]
             }).data("kendoPanelBar");
         }
@@ -69,21 +100,26 @@
 
         module("AjaxLoading", {
             setup: function() {
-                createPanelBar();
+                window.con = window.console;
             },
             teardown: function() {
+                window.console = window.con;
                 destroyPanelBar();
             }
         });
 
         test("PanelBar renders anchor instead of span if contentUrl", function() {
+            createPanelBar();
+
             var children = $("#PanelBar1").find("li:last").children();
 
-            equal(children.filter("a").length, 1)
+            equal(children.filter("a").length, 1);
             equal(children.filter("span").length, 0)
         });
 
         asyncTest("clicking collapsed content items should expand them", 1, function() {
+            createPanelBar();
+
             var item = getRootItem(0);
 
             panelbar.bind("contentLoad", function() {
@@ -96,6 +132,8 @@
         });
 
         test("clicking expanded content items should collapse them", function() {
+            createPanelBar();
+
             var item = getRootItem(0);
 
             item.trigger("click");
@@ -104,6 +142,8 @@
         });
 
         asyncTest("clicking collapsed content items should toggle arrow", 1, function() {
+            createPanelBar();
+
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
@@ -116,6 +156,8 @@
         });
 
         test("clicking expanded content items should toggle arrow", 1, function() {
+            createPanelBar();
+
             var item = getRootItem(1);
 
             item.trigger("click");
@@ -124,25 +166,60 @@
         });
 
         asyncTest("clicking should make item active", 1, function() {
+            createPanelBar();
+
             var item = getRootItem(2);
 
-            setTimeout(function() {
+            panelbar.bind("contentLoad", function() {
                 start();
                 ok(item.parent().hasClass("k-state-active"));
                 panelbar.unbind("contentLoad");
-            }, 300);
+            });
 
-            item.trigger("click");
+            item.click();
         });
 
         asyncTest("initially expanded items fetch their AJAX content", 1, function() {
+            $(document.body).append($("#activePanelbarHTML").html());
+            panelbar = $("#PanelBar1").kendoPanelBar({
+                animation: false,
+                contentUrls: [
+                    "AjaxView1.html",
+                    "AjaxView2.html",
+                    "AjaxView1.html",
+                    "AjaxView2.html",
+                    "AjaxView1.html"
+                ]
+            }).data("kendoPanelBar");
+
             var item = getRootItem(4);
 
-            setTimeout(function() {
+            panelbar.bind("contentLoad", function() {
                 start();
                 equal(item.parent().find(".k-content").css("display"), "block");
-            }, 300);
+                panelbar.unbind("contentLoad");
+            });
         });
+
+        asyncTest("ajax content with error fires error handler and writes the error message to the console", 2, function () {
+            createPanelBar();
+
+            var item = getRootItem(5);
+
+            panelbar.bind("error", function (e) {
+                ok(true);
+                start();
+            });
+
+            window.console = {
+                log: function (msg) {
+                    ok(msg);
+                }
+            };
+
+            item.click();
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.PanelBar Tests</h1>
