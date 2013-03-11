@@ -1741,8 +1741,14 @@ kendo_module({
         },
 
         renderId: function() {
-            var element = this;
-            return element.renderAttr("id", element.options.id);
+            var element = this,
+                result = "";
+
+            if (element.options.id) {
+                result = element.renderAttr("id", element.options.id);
+            }
+
+            return result;
         },
 
         renderAttr: function (name, value) {
@@ -2491,6 +2497,7 @@ kendo_module({
     var IDPool = Class.extend({
         init: function(size, prefix, start) {
             this._pool = [];
+            this._freed = {};
             this._size = size;
             this._id = start;
             this._prefix = prefix;
@@ -2498,21 +2505,27 @@ kendo_module({
 
         alloc: function() {
             var that = this,
-                pool = that._pool;
+                pool = that._pool,
+                id;
 
             if (pool.length > 0) {
-                return pool.pop();
+                id = pool.pop();
+                that._freed[id] = false;
+            } else {
+                id = that._prefix + that._id++;
             }
 
-            return that._prefix + that._id++;
+            return id;
         },
 
         free: function(id) {
             var that = this,
-                pool = that._pool;
+                pool = that._pool,
+                freed = that._freed;
 
-            if (pool.length < that._size) {
+            if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
+                freed[id] = true;
             }
         }
     });
