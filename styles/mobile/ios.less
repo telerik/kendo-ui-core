@@ -378,6 +378,31 @@
     margin-top: -1rem;
 }
 
+/* Filter box */
+
+.km-ios .km-filter-form
+{
+    color: @ios-list-border-color;
+    border-color: currentcolor;
+    background-color: currentcolor;
+    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,.3));
+}
+
+.km-ios .km-filter-wrap
+{
+    color: inherit;
+    .box-shadow(inset 0 1px 3px @ios-list-border-color);
+    .box-shadow(inset 0 1px 3px currentcolor);
+    border-color: currentcolor;
+    background: transparent;
+}
+
+.km-ios .km-listview-wrapper .km-filter-wrap
+{
+    background: #fff;
+}
+
+.km-ios .km-filter-wrap:before,
 .km-ios .km-filter-reset .km-clear
 {
 	color: #adadad;
@@ -387,6 +412,8 @@
 {
     content: "\e031";
 }
+
+/* Icons */
 
 .km-ios .km-icon
 {

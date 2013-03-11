@@ -730,10 +730,33 @@
 
 /* Filtering */
 
+.km-filter-form
+{
+    width: 100%;
+    padding: .5em 0;
+    border: 1px solid transparent;
+    border-width: 1px 0;
+}
+
 .km-filter-wrap
 {
 	position: relative;
 	margin: 0 .7em;
+    .border-radius(2em);
+    padding: .2em .4em;
+    border: 1px solid transparent;
+}
+
+.km-root .km-filter-wrap:before
+{
+    display: inline-block;
+    vertical-align: middle;
+    content: "\e0e9";
+    font-size: 1.6em;
+    width: 1em;
+    height: 1em;
+    margin-right: -1em;
+    color: inherit;
 }
 
 .km-tablet .km-filter-wrap
@@ -747,28 +770,40 @@
 	display: none;
 }
 
-.km-filter-wrap > input
+.km-filter-wrap input
 {
 	width: 100%;
 	.box-sizing(border-box);
+    border: 0;
+    background: transparent;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    vertical-align: middle;
+    padding: 0 1.4em;
 }
 
 .km-filter-reset
 {
-	margin-left: -2em;
+    display: inline-block;
+	margin-left: -1.6em;
+    vertical-align: middle;
 	text-align: center;
 	z-index: 1;
 	text-decoration: none;
+    height: 100%;
 }
 
 .km-filter-reset .km-clear
 {
 	font-size: 1.6em;
+    width: 1em;
+    height: 1em;
+    display: block;
 }
 
 .km-filter-reset > .km-text
 {
-	position:absolute;
+	position: absolute;
 	top: -3333px;
 	left: -3333px;
 }
@@ -1552,6 +1587,7 @@
 .km-on-ios .km-switch,
 .km-on-ios .km-group-title,
 .km-on-ios .km-list > li,
+.km-on-ios .km-filter-reset,
 .km-on-ios .km-shim .k-animation-container,
 .km-on-ios .km-scroll-container,
 .km-on-blackberry .km-view,
