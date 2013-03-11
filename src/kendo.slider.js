@@ -381,7 +381,7 @@ kendo_module({
             return html;
         },
 
-        _getDragableArea: function() {
+        _getDraggableArea: function() {
             var that = this,
                 offset = kendo.getOffset(that._trackDiv);
 
@@ -646,7 +646,7 @@ kendo_module({
                 }
 
                 var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
-                    dragableArea = that._getDragableArea(),
+                    dragableArea = that._getDraggableArea(),
                     target = $(e.target);
 
                 if (target.hasClass("k-draghandle")) {
@@ -932,7 +932,7 @@ kendo_module({
             that.dragHandle.addClass(STATE_SELECTED);
             $(document.documentElement).css("cursor", "pointer");
 
-            that.dragableArea = owner._getDragableArea();
+            that.dragableArea = owner._getDraggableArea();
             that.step = math.max(options.smallStep * (owner._maxSelection / owner._distance), 0);
 
             if (that.type) {
@@ -1240,7 +1240,7 @@ kendo_module({
                 }
 
                 var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
-                    dragableArea = that._getDragableArea(),
+                    dragableArea = that._getDraggableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea),
                     target = $(e.target),
                     idx;

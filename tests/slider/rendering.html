@@ -65,7 +65,7 @@
 
             test("getValueFromPosition should increase value", function () {
                 var slider = newSlider({ value: 1, smallStep: 2 }),
-                    dragableArea = slider._getDragableArea(),
+                    dragableArea = slider._getDraggableArea(),
                     step = 2 * (144 / 10);
 
                 equal(slider._getValueFromPosition(dragableArea.startPoint + step, dragableArea), 2);
