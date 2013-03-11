@@ -289,21 +289,6 @@
     margin: 0;
 }
 
-.km-blackberry .km-listview-wrapper .km-filter-wrap > input
-{
-    margin-top: .4em !important;
-}
-
-.km-blackberry .km-filter-reset .km-clear
-{
-	color: #adadad;
-}
-
-.km-blackberry .km-filter-reset .km-clear:after
-{
-    content: "\e031";
-}
-
 .km-blackberry div.km-group-title
 {
     margin-top: 0;
@@ -469,6 +454,38 @@
     text-indent: 0;
 }
 
+/* Filter box */
+
+.km-blackberry .km-listview-wrapper form .km-filter-wrap > input
+{
+    font-size: 1.2em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+.km-blackberry .km-filter-wrap:before
+{
+    margin: 0 -1.3em 0 .3em;
+}
+
+.km-blackberry .km-filter-reset
+{
+    margin-left: -2em;
+}
+
+.km-blackberry .km-filter-wrap:before,
+.km-blackberry .km-filter-reset .km-clear
+{
+	color: #adadad;
+}
+
+.km-blackberry .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+/* Icons */
+
 .km-blackberry .km-tabstrip .km-icon
 {
     width: 2.4rem;
@@ -592,7 +609,20 @@
 
 /* Forms */
 
-.km-blackberry input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
+.km-blackberry input[type=password],
+.km-blackberry input[type=search],
+.km-blackberry input[type=number],
+.km-blackberry input[type=tel],
+.km-blackberry input[type=url],
+.km-blackberry input[type=email],
+.km-blackberry input[type=month],
+.km-blackberry input[type=color],
+.km-blackberry input[type=week],
+.km-blackberry input[type=date],
+.km-blackberry input[type=time],
+.km-blackberry input[type=datetime],
+.km-blackberry input[type=datetime-local],
+.km-blackberry input[type=text]:not(.k-input),
 .km-blackberry select:not([multiple]),
 .km-blackberry .k-dropdown,
 .km-blackberry textarea
@@ -605,14 +635,41 @@
     .border-radius(~".3em");
 }
 
-.km-phone .km-blackberry input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
-.km-phone .km-blackberry select:not([multiple]),
-.km-phone .km-blackberry .k-dropdown
+.km-phone .km-blackberry .km-list input[type=password],
+.km-phone .km-blackberry .km-list input[type=search],
+.km-phone .km-blackberry .km-list input[type=number],
+.km-phone .km-blackberry .km-list input[type=tel],
+.km-phone .km-blackberry .km-list input[type=url],
+.km-phone .km-blackberry .km-list input[type=email],
+.km-phone .km-blackberry .km-list input[type=month],
+.km-phone .km-blackberry .km-list input[type=color],
+.km-phone .km-blackberry .km-list input[type=week],
+.km-phone .km-blackberry .km-list input[type=date],
+.km-phone .km-blackberry .km-list input[type=time],
+.km-phone .km-blackberry .km-list input[type=datetime],
+.km-phone .km-blackberry .km-list input[type=datetime-local],
+.km-phone .km-blackberry .km-list input[type=text]:not(.k-input),
+.km-phone .km-blackberry .km-list select:not([multiple]),
+.km-phone .km-blackberry .km-list .k-dropdown,
+.km-phone .km-blackberry .km-list textarea
 {
     margin-top: -1.1em;
 }
 
-.km-blackberry .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
+.km-blackberry .km-list input[type=password],
+.km-blackberry .km-list input[type=search],
+.km-blackberry .km-list input[type=number],
+.km-blackberry .km-list input[type=tel],
+.km-blackberry .km-list input[type=url],
+.km-blackberry .km-list input[type=email],
+.km-blackberry .km-list input[type=month],
+.km-blackberry .km-list input[type=color],
+.km-blackberry .km-list input[type=week],
+.km-blackberry .km-list input[type=date],
+.km-blackberry .km-list input[type=time],
+.km-blackberry .km-list input[type=datetime],
+.km-blackberry .km-list input[type=datetime-local],
+.km-blackberry .km-list input[type=text]:not(.k-input),
 .km-blackberry .km-list select:not([multiple]),
 .km-blackberry .km-list .k-dropdown,
 .km-blackberry .km-list textarea
@@ -659,7 +716,6 @@
 .km-blackberry input[type=text]:not(.k-input),
 .km-blackberry textarea
 {
-    margin-top: -1.05em;
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
 }
 

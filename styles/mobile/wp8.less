@@ -242,15 +242,44 @@
 }
 
 .km-wp-dark .km-loader h1,
+.km-wp-dark .km-filter-wrap:before,
 .km-wp-dark .km-filter-reset .km-clear
 {
 	color: @main-text-dark;
 }
 
 .km-wp-light .km-loader h1,
+.km-wp-light .km-filter-wrap:before,
 .km-wp-light .km-filter-reset .km-clear
 {
 	color: @main-text-light;
+}
+
+/* Filter box */
+
+.km-wp .km-listview-wrapper form .km-filter-wrap > input
+{
+    margin-top: -1px;
+    font-size: 1.2em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+.km-wp .km-filter-wrap > input::-ms-clear
+{
+    display: none;
+}
+
+.km-wp .km-filter-wrap:before
+{
+    margin: .1em -1.2em 0 .2em;
+}
+
+.km-wp .km-filter-wrap:before,
+.km-wp .km-filter-reset .km-clear
+{
+    font-size: 1em;
+	color: #adadad;
 }
 
 .km-wp .km-filter-reset .km-clear:after

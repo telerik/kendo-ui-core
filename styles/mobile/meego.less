@@ -654,6 +654,39 @@
     background: transparent;
 }
 
+/* Filter box */
+
+.km-meego .km-listview-wrapper form .km-filter-wrap > input
+{
+    margin-top: -1px;
+    .border-radius(2em);
+    font-size: 1.2em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+.km-meego .km-filter-wrap:before
+{
+    margin: 0 -1.3em 0 .3em;
+}
+
+.km-meego .km-filter-reset
+{
+    margin-left: -2em;
+}
+
+.km-meego .km-filter-wrap:before,
+.km-meego .km-filter-reset .km-clear
+{
+    font-size: 1.4em;
+	color: #adadad;
+}
+
+.km-meego .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
 /* Icon styles */
 
 .km-meego .km-icon
@@ -833,7 +866,20 @@
 
 /* Forms */
 
-.km-meego .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
+.km-meego input[type=password],
+.km-meego input[type=search],
+.km-meego input[type=number],
+.km-meego input[type=tel],
+.km-meego input[type=url],
+.km-meego input[type=email],
+.km-meego input[type=month],
+.km-meego input[type=color],
+.km-meego input[type=week],
+.km-meego input[type=date],
+.km-meego input[type=time],
+.km-meego input[type=datetime],
+.km-meego input[type=datetime-local],
+.km-meego input[type=text]:not(.k-input),
 .km-meego select:not([multiple]),
 .km-meego .k-dropdown,
 .km-meego textarea
@@ -841,11 +887,31 @@
     font-size: 1em;
     .appearance(none);
     border: 0;
-    right: .4em;
     padding: .3em .4em;
     outline: none;
-    margin-top: -1em;
     .border-radius(~".8em");
+}
+
+.km-meego .km-list input[type=password],
+.km-meego .km-list input[type=search],
+.km-meego .km-list input[type=number],
+.km-meego .km-list input[type=tel],
+.km-meego .km-list input[type=url],
+.km-meego .km-list input[type=email],
+.km-meego .km-list input[type=month],
+.km-meego .km-list input[type=color],
+.km-meego .km-list input[type=week],
+.km-meego .km-list input[type=date],
+.km-meego .km-list input[type=time],
+.km-meego .km-list input[type=datetime],
+.km-meego .km-list input[type=datetime-local],
+.km-meego .km-list input[type=text]:not(.k-input),
+.km-meego .km-list select:not([multiple]),
+.km-meego .k-dropdown,
+.km-meego .km-list textarea
+{
+    right: .4em;
+    margin-top: -1em;
 }
 
 .km-meego .k-dropdown
@@ -862,14 +928,14 @@
     .border-radius(~".8em");
 }
 
-.km-meego select:not([multiple])
+.km-meego .km-list select:not([multiple])
 {
     margin-top: -.95em;
     min-width: 6em;
     padding: .32em 2em .32em .4em;
 }
 
-.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
+.km-meego input:not(.k-input):not(.k-button),
 .km-meego select:not([multiple]),
 .km-meego .k-dropdown-wrap,
 .km-meego textarea
@@ -877,7 +943,7 @@
     .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2)");
 }
 
-.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button):focus,
+.km-meego input:not(.k-input):not(.k-button),
 .km-meego select:not([multiple]):focus,
 .km-meego .k-dropdown .k-state-focused,
 .km-meego textarea:focus

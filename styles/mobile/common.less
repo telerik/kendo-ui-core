@@ -1236,13 +1236,13 @@
 
 /* Form elements */
 
+.km-list input[type=text]:not(.k-input),
 .km-list input[type=password],
 .km-list input[type=search],
 .km-list input[type=number],
 .km-list input[type=tel],
 .km-list input[type=url],
 .km-list input[type=email],
-.km-list input[type=text]:not(.k-input),
 .km-list input[type=file],
 .km-list input[type=month],
 .km-list input[type=color],
@@ -1257,14 +1257,13 @@
 {
     width: 50%;
     .box-sizing(border-box);
-}
-
-.km-root input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
-.km-root select:not([multiple]),
-.km-root .k-dropdown,
-.km-root textarea
-{
     font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    line-height: normal;
+    z-index: 1;
+    right: 0;
+    margin-top: -1em;
 }
 
 .km-list input[type=checkbox],
@@ -1287,34 +1286,12 @@
     .user-select(none);
 }
 
-.km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not(.k-input):not(.k-button),
-.km-root .km-list select:not([multiple]),
-.km-root .km-list .k-dropdown,
-.km-root .km-list textarea
-{
-    position: absolute;
-    right: .8em;
-    top: 50%;
-    line-height: normal;
-    margin-top: -.5em;
-    z-index: 1;
-}
-
-.km-root .km-list textarea
+.km-list textarea
 {
     top: 0;
 }
 
-.km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
-.km-root .km-list select:not([multiple]),
-.km-root .km-list .k-dropdown,
-.km-root .km-list textarea
-{
-    right: 0;
-    margin-top: -1em;
-}
-
-.km-root .km-list .k-dropdown
+.km-list .k-dropdown
 {
     line-height: 1.4em;
 }
