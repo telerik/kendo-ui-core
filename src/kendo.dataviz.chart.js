@@ -7358,10 +7358,16 @@ kendo_module({
                 options = tooltip.options,
                 anchor = tooltip.anchor,
                 element = tooltip.element,
-                chartPadding = tooltip.chartPadding, top, left;
+                chartPadding = tooltip.chartPadding,
+                zoomLevel = kendo.support.zoomLevel(),
+                viewport = $(window),
+                top = round(anchor.y + chartPadding.top),
+                left = round(anchor.x + chartPadding.left),
+                offsetTop = window.pageYOffset || document.documentElement.scrollTop || 0,
+                offsetLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
 
-            top = round(anchor.y + chartPadding.top) + "px";
-            left = round(anchor.x + chartPadding.left) + "px";
+            top += tooltip._getCurrentPosition(top - offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
+            left += tooltip._getCurrentPosition(left - offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
 
             if (!tooltip.visible) {
                 element.css({ top: top, left: left });
@@ -7444,6 +7450,20 @@ kendo_module({
                 element = tooltip.element;
 
             return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+        },
+
+        _getCurrentPosition: function(offset, size, viewPortSize) {
+            var output = 0;
+
+            if (offset + size > viewPortSize) {
+                output -= size;
+            }
+
+            if (offset + output < 0) {
+                output += size;
+            }
+
+            return output;
         }
     });
 
