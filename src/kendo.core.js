@@ -1757,7 +1757,7 @@ function pad(number, digits, end) {
 
         support.mobileOS = support.detectOS(navigator.userAgent);
 
-        support.kineticScrollNeeded = support.mobileOS && support.touch;
+        support.kineticScrollNeeded = support.mobileOS && (support.touch || support.pointers);
 
         support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
 
