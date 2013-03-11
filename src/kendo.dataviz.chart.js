@@ -1014,6 +1014,7 @@ kendo_module({
 
             chart.element.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
+            $(document).off(MOUSEMOVE_TRACKING);
 
             if (chart._userEvents) {
                 chart._userEvents.destroy();
