@@ -17,7 +17,7 @@
     </head>
     <body>
 
-    <ul id="Menu2" style="position: absolute; visibility: hidden">
+    <ul id="Menu2" style="position: absolute; visibility: hidden;">
         <li><img src="../../playground/Icons/Suites/mvc.png">ASP.NET MVC
             <ul>
                 <li><img
@@ -115,27 +115,17 @@
 
 <script type="text/javascript">
 
+        QUnit.config.reorder = false;
+
         function onSelect() {
             isRaised = true;
-        }
-
-        function onOpen(e) {
-            if (window.preventOpen) {
-                e.preventDefault();
-            }
-        }
-
-        function onClose(e) {
-            if (window.preventClose) {
-                e.preventDefault();
-            }
         }
 
         function getRootItem(index) {
 			return $('> .k-item', menu.element).eq(index);
         }
 
-        $("#Menu2").kendoMenu({ animation: false, select: onSelect, open: onOpen, close: onClose });
+        $("#Menu2").kendoMenu({ animation: false, select: onSelect });
 
         var menu, isRaised,
             CLICK = "click";
@@ -169,7 +159,18 @@
             ok(!isRaised);
         });
 
+        asyncTest("open event can be canceled", function() {
+            menu.bind("open", function (e) { e.preventDefault() });
+            menu.open(menu.element.children("li:first"));
+
+            setTimeout(function () {
+                equal(menu.element.find(">li:first ul").is(":visible"), false);
+                start();
+            }, 10);
+        });
+
         asyncTest("activate event is fired after open", function() {
+            menu.unbind("open");
             var activated = false;
 
             menu.bind("activate", function() {
@@ -184,23 +185,16 @@
             }, 100);
         });
 
-        test("open event can be canceled", function() {
-            window.preventOpen = true;
-
-            menu.open(menu.element.children("li:first"));
-
-            equal(menu.element.find(">li:first ul").is(":visible"), false);
-        });
-
         asyncTest("close event can be canceled", function() {
-            window.preventClose = true;
-            window.preventOpen = false;
+            menu.unbind("activate");
+            menu.bind("close", function (e) { e.preventDefault() });
 
             menu.open(menu.element.children("li:eq(2)"));
             setTimeout(function () {
                 menu.close(menu.element.children("li:eq(2)"));
 
                 equal(menu.element.find(">li:eq(2) ul").is(":visible"), true);
+                menu.unbind("close");
                 start();
             }, 100);
         });

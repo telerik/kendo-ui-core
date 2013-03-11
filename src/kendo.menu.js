@@ -12,8 +12,8 @@ kendo_module({
         activeElement = kendo._activeElement,
         touch = (kendo.support.touch && kendo.support.mobileOS),
         mobile = touch || kendo.support.pointers,
-        MOUSEDOWN = kendo.support.mousedown,
-        CLICK = kendo.support.click,
+        MOUSEDOWN = "mousedown",
+        CLICK = "click",
         extend = $.extend,
         proxy = $.proxy,
         each = $.each,
@@ -724,13 +724,13 @@ kendo_module({
                 that._oldHoverItem = that._findRootParent(element);
                 that.close(link.parentsUntil(that.element, allItemsSelector));
                 that.clicked = false;
-                if ("touchend MSPointerUp".indexOf(e.type) != -1) {
+                if ("MSPointerUp".indexOf(e.type) != -1) {
                     e.preventDefault();
                 }
                 return;
             }
 
-            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !kendo.support.touch) {
+            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && mobile) {
                 return;
             }
 
@@ -740,6 +740,9 @@ kendo_module({
 
             that.clicked = true;
             openHandle = childGroup.is(":visible") ? CLOSE : OPEN;
+            if (!options.closeOnClick && openHandle == CLOSE) {
+                return;
+            }
             that[openHandle](element);
         },
 
