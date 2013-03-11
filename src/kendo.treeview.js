@@ -1084,7 +1084,7 @@
 
         _updateNode: function(field, items) {
             var that = this, i, node, item,
-                isChecked,
+                isChecked, isCollapsed,
                 context = { treeview: that.options, item: item };
 
             function setChecked() {
@@ -1129,6 +1129,30 @@
                         }
                     } else if (field == "expanded") {
                         that._toggle(that.findByUid(item.uid), item, item[field]);
+                    } else if (field == "enabled") {
+                        node = that.findByUid(item.uid);
+
+                        node.find(".k-checkbox :checkbox").prop("disabled", !item[field]);
+
+                        isCollapsed = !nodeContents(node).is(VISIBLE);
+
+                        node.removeAttr(ARIADISABLED);
+
+                        if (!item[field]) {
+                            if (item.selected) {
+                                item.set("selected", false);
+                            }
+
+                            if (item.expanded) {
+                                item.set("expanded", false);
+                            }
+
+                            isCollapsed = true;
+                            node.removeAttr(ARIASELECTED)
+                                .attr(ARIADISABLED, true);
+                        }
+
+                        that._updateNodeClasses(node, {}, { enabled: item[field], expanded: !isCollapsed });
                     }
                 }
             }
@@ -1232,23 +1256,7 @@
             enable = arguments.length == 2 ? !!enable : true;
 
             this._processNodes(nodes, function (index, item) {
-                var isCollapsed = !nodeContents(item).is(VISIBLE),
-                    dataItem = this.dataItem(item);
-
-                item.removeAttr(ARIADISABLED);
-
-                if (!enable) {
-                    if (dataItem.selected) {
-                        dataItem.set("selected", false);
-                    }
-
-                    this.collapse(item);
-                    isCollapsed = true;
-                    item.removeAttr(ARIASELECTED);
-                    item.attr(ARIADISABLED, true);
-                }
-
-                this._updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
+                this.dataItem(item).set("enabled", enable);
             });
         },
 

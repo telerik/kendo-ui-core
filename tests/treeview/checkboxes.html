@@ -484,6 +484,19 @@
                 equal(treeview.find(":checkbox:not([disabled])").length, 1);
             });
 
+            test("disabling an item through the API disables its checkbox", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", selected: true }
+                    ],
+                    checkboxes: true
+                });
+
+                treeviewObject.enable(treeviewObject.select(), false);
+
+                equal(treeview.find(":checkbox[disabled]").length, 1);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
