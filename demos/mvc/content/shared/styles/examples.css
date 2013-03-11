@@ -2560,21 +2560,37 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     display: none;
 }
 
-#example .km-wp8
+#example .km-wp
 {
     font-size: 1.2rem;
 }
 
-#example .km-wp8 .km-content,
-#example .km-wp8 .km-button,
-#example .km-wp8 .km-navbar,
-#example .km-wp8 .km-detail
+#example .km-wp-light .km-content,
+#example .km-wp-light .km-button,
+#example .km-wp-light .km-navbar,
+#example .km-wp-light .km-detail,
+.mobileExample .km-wp-light input:not(.k-input),
+.mobileExample .km-wp-light .k-dropdown,
+.mobileExample .km-wp-light textarea,
+.mobileExample .km-wp-light select
 {
-    background: white;
+    background: #fff;
 }
 
-#example .km-wp8 .km-tabstrip .km-button,
-#example .km-wp8 .km-tabstrip .km-button.km-state-active
+#example .km-wp-dark .km-content,
+#example .km-wp-dark .km-button,
+#example .km-wp-dark .km-navbar,
+#example .km-wp-dark .km-detail,
+.mobileExample .km-wp-dark input:not(.k-input),
+.mobileExample .km-wp-dark .k-dropdown,
+.mobileExample .km-wp-dark textarea,
+.mobileExample .km-wp-dark select
+{
+    background: #000;
+}
+
+#example .km-wp .km-tabstrip .km-button,
+#example .km-wp .km-tabstrip .km-button.km-state-active
 {
     background: transparent;
 }
@@ -2593,23 +2609,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-color: #01ABAA;
 }
 
-#example .km-wp8 .km-tabstrip .km-state-active .km-icon {
+#example .km-wp .km-tabstrip .km-state-active .km-icon {
     background-color: #01ABAA;
 }
 
-#example .km-wp input[type=password]:focus,
-#example .km-wp input[type=search]:focus,
-#example .km-wp input[type=number]:focus,
-#example .km-wp input[type=tel]:focus,
-#example .km-wp input[type=url]:focus,
-#example .km-wp input[type=email]:focus,
-#example .km-wp input[type=text]:not(.k-input):focus,
-#example .km-wp input[type=month]:focus,
-#example .km-wp input[type=color]:focus,
-#example .km-wp input[type=week]:focus,
-#example .km-wp input[type=date]:focus,
-#example .km-wp input[type=time]:focus,
-#example .km-wp input[type=datetime]:focus,
+#example .km-wp input:not(.k-input):focus,
 #example .km-wp textarea:focus
 {
 	border-color: #01ABAA;
