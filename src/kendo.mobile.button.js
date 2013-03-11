@@ -61,8 +61,14 @@ kendo_module({
         },
 
         _activate: function(e) {
+            var activeElement = document.activeElement,
+                nodeName = activeElement ? activeElement.nodeName : "";
+
             highlightButton(this, e, true);
-            document.activeElement.blur(); // Hide device keyboard
+
+            if (nodeName == "INPUT" || nodeName == "TEXTAREA") {
+                activeElement.blur(); // Hide device keyboard
+            }
         },
 
         _deactivate: function(e) {
