@@ -300,9 +300,9 @@ kendo_module({
             return position;
         },
         _drag: function(event) {
-            var location = kendo.touchLocation(event),
-                position = this._dropCuePosition(location.x);
-            if(position) {
+            var position = this._dropCuePosition(event.x.location);
+
+            if (position) {
                 dropCue.css({ left: position.left });
             }
         },

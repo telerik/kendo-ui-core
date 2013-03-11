@@ -2057,15 +2057,6 @@ function pad(number, digits, end) {
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;");
     }
 
-    var touchLocation = function(e) {
-        var originalEvent = typeof e.pageX == UNDEFINED ? e.originalEvent : e;
-        return {
-            idx: support.pointers ? originalEvent.pointerId : 0,
-            x: originalEvent.pageX,
-            y: originalEvent.pageY
-        };
-    };
-
     var eventTarget = function (e) {
         return e.target;
     };
@@ -2073,30 +2064,6 @@ function pad(number, digits, end) {
     if (support.touch) {
 
         var mobileChrome = (support.mobileOS.browser == "chrome" && !support.mobileOS.ios);
-
-        touchLocation = function(e, id) {
-            var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
-
-            if (id) {
-                var output = null;
-                each(changedTouches, function(idx, value) {
-                    if (id == value.identifier) {
-                        output = {
-                            idx: value.identifier,
-                            x: value.pageX,
-                            y: value.pageY
-                        };
-                    }
-                });
-                return output;
-            } else {
-                return {
-                    idx: changedTouches[0].identifier,
-                    x: changedTouches[0].pageX,
-                    y: changedTouches[0].pageY
-                };
-            }
-        };
 
         eventTarget = function(e) {
             var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null,
@@ -2221,7 +2188,6 @@ function pad(number, digits, end) {
         template: proxy(Template.compile, Template),
         render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
-        touchLocation: touchLocation,
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
         isLocalUrl: function(url) {

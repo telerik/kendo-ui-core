@@ -40,7 +40,7 @@ kendo_module({
         DISABLED = "disabled",
         UNDEFINED = "undefined",
         TABINDEX = "tabindex",
-        touchLocation = kendo.touchLocation;
+        getTouches = kendo.getTouches;
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -639,8 +639,13 @@ kendo_module({
             that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
-                var location = touchLocation(e),
-                    mousePosition = that._isHorizontal ? location.x : location.y,
+                var touch = getTouches(e)[0];
+
+                if (!touch) {
+                    return;
+                }
+
+                var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
                     dragableArea = that._getDragableArea(),
                     target = $(e.target);
 
@@ -1228,8 +1233,13 @@ kendo_module({
             that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
-                var location = touchLocation(e),
-                    mousePosition = that._isHorizontal ? location.x : location.y,
+                var touch = getTouches(e)[0];
+
+                if (!touch) {
+                    return;
+                }
+
+                var mousePosition = that._isHorizontal ? touch.location.pageX : touch.location.pageY,
                     dragableArea = that._getDragableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea),
                     target = $(e.target),
