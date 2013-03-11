@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lazy replacement for deepExtend</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+    </head>
+    <body>
+        <script>
+            var OBJECT = "object";
+            var UNDEFINED = undefined;
+
+            function lazyExtend(destination) {
+                var i = 1,
+                    length = arguments.length;
+
+                for (i = 1; i < length; i++) {
+                    lazyExtendOne(destination, arguments[i]);
+                }
+
+                return destination;
+            }
+
+            function lazyExtendOne(destination, source) {
+                var ObservableArray = kendo.data.ObservableArray,
+                    property,
+                    propValue,
+                    propType,
+                    destProp;
+
+                for (property in source) {
+                    propValue = source[property];
+                    propType = typeof propValue;
+                    if (propType === OBJECT && propValue !== null && propValue.constructor !== Array && propValue.constructor !== ObservableArray) {
+                        if (propValue instanceof Date) {
+                            destination[property] = new Date(propValue.getTime());
+                        } else {
+                            destProp = destination[property];
+                            if (typeof (destProp) === OBJECT) {
+                                destination[property] = destProp || {};
+                                lazyExtendOne(destination[property], propValue);
+                            } else {
+
+                                lazyExtend.totalProps++;
+
+                                (function() {
+                                    var srcKey = "_" + property + "_src";
+                                    var src = propValue;
+                                    Object.defineProperty(destination, property, {
+                                        get: function() {
+                                            if (!this[srcKey]) {
+                                                lazyExtend.hitProps++;
+                                                this[srcKey] = {};
+                                                lazyExtendOne(this[srcKey], src);
+                                            }
+                                            return this[srcKey];
+                                        }
+                                    });
+                                })();
+                            }
+                        }
+                    } else if (propType !== UNDEFINED) {
+                        destination[property] = propValue;
+                    }
+                }
+
+                return destination;
+            }
+
+            lazyExtend.totalProps = 0;
+            lazyExtend.hitProps = 0;
+
+        </script>
+    </body>
+</html>
+
