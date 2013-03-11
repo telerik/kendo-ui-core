@@ -178,13 +178,17 @@ kendo_module({
                 view = dataSource.view(),
                 loading = that.loading,
                 appendMethod = "html",
+                action = e.action,
+                items = e.items,
+                idx = 0,
                 contents,
                 groups,
+                length,
                 data,
                 item;
 
-            if (e.action === "itemchange") {
-                data = e.items[0];
+            if (action === "itemchange") {
+                data = items[0];
                 item = $(that.template(data));
 
                 element.find("[data-" + kendo.ns + "uid=" + data.uid + "]").replaceWith(item);
@@ -196,6 +200,23 @@ kendo_module({
                 });
 
                 that._style();
+                return;
+            } else if (action === "add") {
+                length = items.length;
+
+                for (; idx < length; idx) {
+                    element.append(that.template(items[0]));
+                }
+
+                that._style();
+                return;
+            } else if (action === "remove") {
+                length = items.length;
+
+                for (; idx < length; idx) {
+                    element.find("[data-" + kendo.ns + "uid=" + item.uid + "]").remove();
+                }
+
                 return;
             }
 

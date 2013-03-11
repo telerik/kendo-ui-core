@@ -253,6 +253,36 @@
                 ok(dom.find("li a").is(".km-listview-link"));
             });
 
+            test("template with links styles the links when item is added", 2, function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
+
+                var observable = kendo.observable({
+                    dataSource: [ { foo: "foo" } ]
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                observable.dataSource.push({ foo: "bar" });
+
+                var anchors = dom.find("li a");
+
+                equal(anchors.length, 2);
+                ok(anchors.last().is(".km-listview-link"));
+            });
+
+            test("ListView removes LI from UL if item is removed from list", function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
+
+                var observable = kendo.observable({
+                    dataSource: [ { foo: "foo" }, { foo: "baz" }]
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.dataSource.splice(1, 1);
+
+                equal(dom.find("li a").length, 1);
+            });
+
             test("enable filtering", function() {
                 var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" data-filterable="true" />');
 
