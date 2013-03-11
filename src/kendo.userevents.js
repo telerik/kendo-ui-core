@@ -14,7 +14,7 @@ kendo_module({
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
         Observable = kendo.Observable,
-        now = Date.now,
+        now = $.now,
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
