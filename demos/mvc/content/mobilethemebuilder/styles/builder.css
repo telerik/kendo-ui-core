@@ -124,6 +124,13 @@ body.k-popup
     background: url('../images/meego.png');
 }
 
+.km-wp:before
+{
+    padding: 90px 24px 77px 23px;
+    margin: -79px 0 0 -23px;
+    background: url('../images/wp8.png');
+}
+
 .hiddenOS
 {
     display: none;
