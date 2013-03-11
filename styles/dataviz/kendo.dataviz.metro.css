@@ -57,3 +57,7 @@
     -webkit-border-radius: 0;
     border-radius: 0;
 }
+
+.k-chart .k-tooltip {
+  background-image: none;
+}

@@ -44,6 +44,10 @@
     color: #ffffff;
 }
 
+.k-chart .k-tooltip {
+  background-image: url('textures/highlight.png');
+}
+
 .k-chart .k-navigator-hint .k-scroll {
     background: #ffffff;
 }

@@ -51,3 +51,7 @@
 .k-chart .k-navigator-hint .k-scroll {
     background: #ffffff;
 }
+
+.k-chart .k-tooltip {
+  background-image: url('textures/highlight.png');
+}

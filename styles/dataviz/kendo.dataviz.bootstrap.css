@@ -59,3 +59,7 @@
     background: rgba(0,124,204,.7);
     height: 4px;
 }
+
+.k-chart .k-tooltip {
+  background-image: none;
+}

@@ -52,3 +52,7 @@
     background: rgba(252,116,26,.7);
     height: 4px;
 }
+
+.k-chart .k-tooltip {
+  background-image: url('textures/highlight.png');
+}
