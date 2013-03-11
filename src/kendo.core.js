@@ -1711,7 +1711,7 @@ function pad(number, digits, end) {
                     blackberry: /^blackberry|playbook/i,
                     windows: /windows/,
                     wp: /wp/,
-                    meego: /ffos/
+                    meego: /meego|ffos/
                 },
                 formFactorRxs = {
                     tablet: /playbook|ipad|fire/i
