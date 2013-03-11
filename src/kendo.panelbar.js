@@ -941,12 +941,13 @@ kendo_module({
                 loadingIconTimeout = setTimeout(function () {
                     statusIcon.addClass("k-loading");
                 }, 100),
-                data = {};
+                data = {},
+                url = link.attr(HREF);
 
             $.ajax({
                 type: "GET",
                 cache: false,
-                url: link.attr(HREF),
+                url: url,
                 dataType: "html",
                 data: data,
 
