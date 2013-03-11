@@ -471,6 +471,19 @@
                 ok(!treeviewObject.dataSource.get(1).checked);
             });
 
+            test("enabled: false renders disabled checkbox", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" },
+                        { id: 2, text: "bar", enabled: false }
+                    ],
+                    checkboxes: true
+                });
+
+                equal(treeview.find(":checkbox[disabled]").length, 1);
+                equal(treeview.find(":checkbox:not([disabled])").length, 1);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
