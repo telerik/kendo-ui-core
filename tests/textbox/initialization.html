@@ -156,7 +156,7 @@
                     spinners: false
                 });
 
-                ok(!textbox._upArrow.is(":visible"));
+                ok(!textbox._upArrow.parent().is(":visible"));
                 ok(textbox._inputWrapper.hasClass("k-expand-padding"));
             });
 

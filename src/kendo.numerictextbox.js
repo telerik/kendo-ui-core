@@ -236,7 +236,7 @@
             });
 
             if (!spinners) {
-                arrows.toggle(spinners);
+                arrows.parent().toggle(spinners);
                 that._inputWrapper.addClass("k-expand-padding");
             }
 
