@@ -7354,32 +7354,43 @@ kendo_module({
         move: function() {
             var tooltip = this,
                 options = tooltip.options,
-                anchor = tooltip.anchor,
                 element = tooltip.element,
-                chartPadding = tooltip.chartPadding,
-                zoomLevel = kendo.support.zoomLevel(),
-                viewport = $(window),
-                top = round(anchor.y + chartPadding.top),
-                left = round(anchor.x + chartPadding.left),
-                offsetTop = window.pageYOffset || document.documentElement.scrollTop || 0,
-                offsetLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
-
-            top += tooltip._getCurrentPosition(top - offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
-            left += tooltip._getCurrentPosition(left - offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+                offset = tooltip._offset();
 
             if (!tooltip.visible) {
-                element.css({ top: top, left: left });
+                element.css({ top: offset.top, left: offset.left });
             }
 
             element
                 .stop(true, true)
                 .show()
                 .animate({
-                    left: left,
-                    top: top
+                    left: offset.left,
+                    top: offset.top
                 }, options.animation.duration);
 
             tooltip.visible = true;
+        },
+
+        _offset: function() {
+            var tooltip = this,
+                element = tooltip.element,
+                anchor = tooltip.anchor,
+                chartPadding = tooltip.chartPadding,
+                top = round(anchor.y + chartPadding.top),
+                left = round(anchor.x + chartPadding.left),
+                zoomLevel = kendo.support.zoomLevel(),
+                viewport = $(window),
+                offsetTop = window.pageYOffset || document.documentElement.scrollTop || 0,
+                offsetLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
+
+            top += tooltip._currentPosition(top - offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
+            left += tooltip._currentPosition(left - offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+
+            return {
+                top: top,
+                left: left
+            };
         },
 
         setStyle: function(options) {
@@ -7450,7 +7461,7 @@ kendo_module({
             return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
         },
 
-        _getCurrentPosition: function(offset, size, viewPortSize) {
+        _currentPosition: function(offset, size, viewPortSize) {
             var output = 0;
 
             if (offset + size > viewPortSize) {
@@ -7530,7 +7541,7 @@ kendo_module({
             content = tooltip._content(points, category);
             tooltip.element.html(content);
             tooltip.anchor = tooltip._slotAnchor(coords, slot);
-            tooltip._updateStyle(points[0].options);
+            tooltip._updateStyle(options, points[0].options);
             tooltip.setStyle(options);
 
             BaseTooltip.fn.show.call(tooltip);
@@ -7733,51 +7744,24 @@ kendo_module({
         }
     });
 
-    var CrosshairTooltip = Class.extend({
+    var CrosshairTooltip = BaseTooltip.extend({
         init: function(crosshair, options) {
             var tooltip = this,
                 chartElement = crosshair.axis.getRoot().parent.element;
 
-            tooltip.options = deepExtend({},
-                tooltip.options, {
-                    border: {
-                        color: crosshair.axis.plotArea.options.seriesColors[0]
-                    }
-                },
-                options);
-
-            tooltip.axis = crosshair.axis;
             tooltip.crosshair = crosshair;
-            options = tooltip.options;
 
-            tooltip.chartPadding = {
-                top: parseInt(chartElement.css("paddingTop"), 10),
-                left: parseInt(chartElement.css("paddingLeft"), 10)
-            };
+            BaseTooltip.fn.init.call(tooltip, chartElement, deepExtend({},
+                tooltip.options, {
+                    background: crosshair.axis.plotArea.options.seriesColors[0]
+                },
+                options));
 
-            tooltip.template = CrosshairTooltip.template;
-            if (!tooltip.template) {
-                tooltip.template = CrosshairTooltip.template = renderTemplate(
-                    "<div class='" + CSS_PREFIX + "tooltip' " +
-                    "style='display:none; position: absolute; font: #= d.font #;" +
-                    "border: #= d.border.width #px solid;" +
-                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
-                    "</div>"
-                );
-            }
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
+            tooltip._updateStyle(tooltip.options, {});
             tooltip.setStyle(tooltip.options);
         },
 
         options: {
-            background: BLACK,
-            border: {
-                width: 3
-            },
-            opacity: 1,
-            animation: {
-                duration: TOOLTIP_ANIMATION_DURATION
-            },
             padding: 10
         },
 
@@ -7794,32 +7778,16 @@ kendo_module({
 
         move: function() {
             var tooltip = this,
-                anchor = tooltip.anchor,
                 element = tooltip.element,
-                chartPadding = tooltip.chartPadding, top, left;
+                offset = tooltip._offset();
 
-            top = round(anchor.y + chartPadding.top) + "px";
-            left = round(anchor.x + chartPadding.left) + "px";
-
-            element.css({ top: top, left: left }).show();
-        },
-
-        setStyle: function(options) {
-            this.element
-                    .css({
-                        backgroundColor: options.background,
-                        borderColor: options.border.color,
-                        font: options.font,
-                        color: options.color,
-                        opacity: options.opacity,
-                        borderWidth: options.border.width
-                    });
+            element.css({ top: offset.top, left: offset.left }).show();
         },
 
         content: function(point) {
             var tooltip = this,
                 options = tooltip.options,
-                axis = tooltip.axis,
+                axis = tooltip.crosshair.axis,
                 axisOptions = axis.options,
                 content, value, tooltipTemplate;
 
@@ -7845,7 +7813,7 @@ kendo_module({
             var tooltip = this,
                 options = tooltip.options,
                 position = options.position,
-                vertical = tooltip.axis.options.vertical,
+                vertical = tooltip.crosshair.axis.options.vertical,
                 points = tooltip.crosshair.points,
                 fPoint = points[0],
                 sPoint = points[1],
@@ -7876,9 +7844,8 @@ kendo_module({
         },
 
         hide: function() {
-            var tooltip = this;
-            tooltip.element.hide();
-            tooltip.point = null;
+            this.element.hide();
+            this.point = null;
         }
     });
 

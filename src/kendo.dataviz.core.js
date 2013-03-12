@@ -2427,7 +2427,7 @@ kendo_module({
 
         percBrightness: function() {
             var color = this,
-                value = math.sqrt(.241 * color.r * color.r + .691 * color.g * color.g + .068 * color.b * color.b),
+                value = math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b),
                 result = WHITE;
 
             if (value > 180) {
