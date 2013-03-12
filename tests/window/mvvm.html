@@ -128,6 +128,17 @@
 
                 ok(window.wrapper.css("display") == "none");
             });
+
+            test("set width and height through data attribute", function() {
+                var dom = $('<div data-role="window" data-width="144" data-height="233"></div>').appendTo("body");
+
+                kendo.bind(dom, {});
+
+                var window = dom.data("kendoWindow");
+
+                equal(window.wrapper.width(), 144);
+                equal(window.wrapper.height(), 233);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

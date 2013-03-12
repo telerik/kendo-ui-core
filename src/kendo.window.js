@@ -318,7 +318,9 @@ kendo_module({
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity,
-            visible: null
+            visible: null,
+            height: null,
+            width: null
         },
 
         _closable: function() {
