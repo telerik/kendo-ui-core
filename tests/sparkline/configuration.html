@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
         <link href="../../styles/dataviz/kendo.dataviz.css" type="text/css" rel="stylesheet"/>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -81,7 +82,7 @@
                 });
 
                 test("auto height equals line height of empty container", function() {
-                    equal(sparkline.stage.height(), 19, TOLERANCE);
+                    QUnit.close(sparkline.stage.height(), 19, TOLERANCE);
                 });
 
                 test("custom height is preserved", function() {
