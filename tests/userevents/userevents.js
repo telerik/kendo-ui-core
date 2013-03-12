@@ -233,7 +233,7 @@ test("gesture start passes the center of the two touches", 2, function(){
 
 test("gesture start passes the distance of the two touches", 1, function(){
     userEvents.bind("gesturestart", function(e) {
-        equal(e.distance, 14.1, 0.1);
+        QUnit.close(e.distance, 14.1, 0.1);
     });
 
     press(5, 15, 2);
