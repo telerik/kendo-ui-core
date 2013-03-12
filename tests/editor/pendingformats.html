@@ -29,7 +29,7 @@
         test('pending formats are empty by default', function() {
             var pendingFormats = new PendingFormats(editor);
 
-            equals(pendingFormats.hasPending(), 0);
+            equal(pendingFormats.hasPending(), 0);
         });
 
         test('toggle() toggles pending format', function() {
@@ -65,7 +65,7 @@
 
             pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
 
-            equals(pendingFormats.getPending('fontsize').params.value, 'xx-small');
+            equal(pendingFormats.getPending('fontsize').params.value, 'xx-small');
             ok(pendingFormats.hasPending());
 
             pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
@@ -95,7 +95,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), 'f<em>o</em>o');
+            equal(editor.value(), 'f<em>o</em>o');
         });
 
         test('apply() applies pending format with parameter to range', function() {
@@ -113,7 +113,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), 'f<span style="font-size:xx-large;">o</span>o');
+            equal(editor.value(), 'f<span style="font-size:xx-large;">o</span>o');
         });
 
         test('apply() applies multiple pending formats to range', function() {
@@ -129,7 +129,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), 'f<em><strong>o</strong></em>o');
+            equal(editor.value(), 'f<em><strong>o</strong></em>o');
         });
 
         test('apply() focuses end of format after apply', function() {
@@ -146,7 +146,7 @@
 
             range.insertNode(editor.document.createElement('a'));
 
-            equals(editor.value(), 'f<em>o<a></a></em>o');
+            equal(editor.value(), 'f<em>o<a></a></em>o');
         });
 
         test('apply() removes pending format to range', function() {
@@ -161,7 +161,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), '<strong>f</strong>o<strong>o</strong>');
+            equal(editor.value(), '<strong>f</strong>o<strong>o</strong>');
         });
 
         test('apply() removes multiple pending formats to range', function() {
@@ -177,7 +177,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), '<em><strong>f</strong></em>o<em><strong>o</strong></em>');
+            equal(editor.value(), '<em><strong>f</strong></em>o<em><strong>o</strong></em>');
         });
 
         test('apply() focuses end of range after remove', function() {
@@ -199,7 +199,7 @@
 
             range.insertNode(editor.document.createElement('a'));
 
-            equals(editor.value(), '<em><strong>f</strong></em>o<a></a><em><strong>o</strong></em>');
+            equal(editor.value(), '<em><strong>f</strong></em>o<a></a><em><strong>o</strong></em>');
         });
 
         test('apply() applies format on whitespace nodes', function() {
@@ -214,7 +214,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), 'f o');
+            equal(editor.value(), 'f o');
 
             ok(pendingFormats.hasPending());
 
@@ -224,7 +224,7 @@
 
             range.insertNode(editor.document.createElement('a'));
 
-            equals(editor.value(), 'f <a></a>o');
+            equal(editor.value(), 'f <a></a>o');
         });
 
         test('apply() removes format on whitespace nodes', function() {
@@ -239,7 +239,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), 'foo');
+            equal(editor.value(), 'foo');
 
             ok(!pendingFormats.hasPending());
 
@@ -249,7 +249,7 @@
 
             range.insertNode(editor.document.createElement('a'));
 
-            equals(editor.value(), 'f<a></a>oo');
+            equal(editor.value(), 'f<a></a>oo');
         });
 
         test('apply() removes format at start of node', function() {
@@ -264,7 +264,7 @@
 
             pendingFormats.apply(range);
 
-            equals(editor.value(), 'a<strong>f</strong>oo');
+            equal(editor.value(), 'a<strong>f</strong>oo');
 
             ok(!pendingFormats.hasPending());
 
@@ -274,7 +274,7 @@
 
             range.insertNode(editor.document.createElement('a'));
 
-            equals(editor.value(), 'a<a></a><strong>f</strong>oo');
+            equal(editor.value(), 'a<a></a><strong>f</strong>oo');
         });
 
         test('isPending() returns true if specified format is pending', function() {
@@ -296,7 +296,7 @@
 
             pendingFormats.toggle(format);
 
-            equals(pendingFormats.getPending('fontsize'), format);
+            equal(pendingFormats.getPending('fontsize'), format);
         });
 
         // test offending for FF13, crashes build

@@ -104,7 +104,7 @@
                 });
 
                 dataSource.bind("requestEnd", function(e) {
-                    same(e.response, data);
+                    deepEqual(e.response, data);
                 });
 
                 dataSource.read();
@@ -117,8 +117,8 @@
                     });
 
                 dataSource.bind("requestEnd", function(e) {
-                    same(e.response, data);
-                    same(e.type, "read");
+                    deepEqual(e.response, data);
+                    deepEqual(e.type, "read");
                 });
 
                 dataSource.read();
@@ -324,7 +324,7 @@
                 dataSource.bind("error", function(e) {
                     ok(e);
                     equal(e.status, "customerror");
-                    same(e.errors, { myError: "some error" });
+                    deepEqual(e.errors, { myError: "some error" });
                 });
                 dataSource.read();
             });
@@ -365,7 +365,7 @@
                 dataSource.bind("error", function(e) {
                     ok(e);
                     equal(e.status, "customerror");
-                    same(e.errors, { myError: "some error" });
+                    deepEqual(e.errors, { myError: "some error" });
                 });
                 dataSource.read();
             });
@@ -385,7 +385,7 @@
                 dataSource.bind("error", function(e) {
                     ok(e);
                     equal(e.status, "customerror");
-                    same(e.errors, { myError: "some error" });
+                    deepEqual(e.errors, { myError: "some error" });
                 });
                 dataSource.read();
             });

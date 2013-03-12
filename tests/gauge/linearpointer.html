@@ -147,13 +147,13 @@
                         var point = points[i];
                         result.push([point.x, point.y]);
                     }
-                    same(result, [ [46.5, 284.5], [37.5, 289], [46.5, 293.5] ], TOLERANCE);
+                    deepEqual(result, [ [46.5, 284.5], [37.5, 289], [46.5, 293.5] ], TOLERANCE);
                 });
 
                 test("renders bar indicator shape", function() {
                     createPointer({ vertical: true });
                     var shape = view.log.rect[0];
-                    same(
+                    deepEqual(
                         [shape.x1, shape.y1, shape.x2, shape.y2],
                         [46.5, 289, 51.5, 289], TOLERANCE
                     );
@@ -169,13 +169,13 @@
                         var point = points[i];
                         result.push([point.x, point.y]);
                     }
-                    same(result, [ [2.5, -2.5], [7, 6.5], [11.5, -2.5] ], TOLERANCE);
+                    deepEqual(result, [ [2.5, -2.5], [7, 6.5], [11.5, -2.5] ], TOLERANCE);
                 });
 
                 test("renders bar indicator shape", function() {
                     createPointer({ vertical: false });
                     var shape = view.log.rect[0];
-                    same(
+                    deepEqual(
                         [shape.x1, shape.y1, shape.x2, shape.y2],
                         [7, -7.5, 7, -2.5], TOLERANCE
                     );

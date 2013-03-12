@@ -101,11 +101,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -118,7 +118,7 @@
                         return point.box.x1;
                     });
 
-                    same(pointsX, [0, 1]);
+                    deepEqual(pointsX, [0, 1]);
                 });
 
                 test("points are aligned to category axis", function() {
@@ -126,7 +126,7 @@
                         return point.box.y2;
                     });
 
-                    same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                    deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 test("points have set width", function() {
@@ -140,7 +140,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 2]);
+                    deepEqual(pointHeights, [1, 2]);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
@@ -187,11 +187,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
@@ -199,7 +199,7 @@
                         return point.box.y1;
                     });
 
-                    same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                    deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 test("points have set height according to value", function() {
@@ -207,7 +207,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 2]);
+                    deepEqual(pointHeights, [1, 2]);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
@@ -261,11 +261,11 @@
                 });
 
                 test("sets category axis to first series category axis", function() {
-                    equals(series.categoryAxis.options.name, "secondary");
+                    equal(series.categoryAxis.options.name, "secondary");
                 });
 
                 test("line is marked as above axis with respect to its category axis", function() {
-                    equals(series.points[0].options.aboveAxis, true);
+                    equal(series.points[0].options.aboveAxis, true);
                 });
 
                 // ------------------------------------------------------------
@@ -280,11 +280,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].max, 3);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -308,15 +308,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(lineChart.valueAxisRanges[undefined].max, 2);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("omits missing points by default", function() {
-                    equals(lineChart.points[2], null);
+                    equal(lineChart.points[2], null);
                 });
 
                 test("omits missing points when interpolating", function() {
@@ -326,7 +326,7 @@
                         ]
                     });
 
-                    equals(lineChart.points[2], null);
+                    equal(lineChart.points[2], null);
                 });
 
                 test("missing points are assumed to be 0", function() {
@@ -336,7 +336,7 @@
                         ]
                     });
 
-                    equals(lineChart.points[2].value, 0);
+                    equal(lineChart.points[2].value, 0);
                 });
 
                 test("getNearestPoint returns nearest series point (left)", function() {
@@ -372,7 +372,7 @@
                 });
 
                 test("point plot values are stacked", function() {
-                    same(
+                    deepEqual(
                         $.map(lineChart.points, function(point) { return point.plotValue }),
                         [1, 2, 3, 2, 4, 6]
                     );
@@ -397,7 +397,7 @@
                 });
 
                 test("point plot values are stacked", function() {
-                    same(
+                    deepEqual(
                         $.map(lineChart.points, function(point) { return point.plotValue }),
                         [-1, -2, -3, -2, -4, -6]
                     );
@@ -432,7 +432,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [2, 1, 2, 1]);
+                    deepEqual(pointHeights, [2, 1, 2, 1]);
                 });
 
                 // ------------------------------------------------------------
@@ -472,15 +472,15 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    same(lineChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(lineChart.valueAxisRanges[undefined].max, 4);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equals(lineChart.points[4].value, 0);
+                    equal(lineChart.points[4].value, 0);
                 });
 
                 test("missing points are skipped", function() {
@@ -491,7 +491,7 @@
                         isStacked: true
                     });
 
-                    equals(lineChart.points[4], null);
+                    equal(lineChart.points[4], null);
                 });
 
                 test("line is drawn between existing points", function() {
@@ -502,7 +502,7 @@
                         isStacked: true
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 1 ], [ 1.5, 0 ], [ 3.5, 0 ]
                     ]);
                 });
@@ -515,7 +515,7 @@
                         isStacked: true
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 1 ], [ 1.5, 0 ]
                     ]);
                 });
@@ -550,8 +550,8 @@
                     });
 
                     var lineCharts = chart._model._plotArea.charts;
-                    equals(lineCharts[0].points[0].plotValue, undefined);
-                    equals(lineCharts[1].points[0].plotValue, undefined);
+                    equal(lineCharts[0].points[0].plotValue, undefined);
+                    equal(lineCharts[1].points[0].plotValue, undefined);
                 });
 
                 // ------------------------------------------------------------
@@ -572,27 +572,27 @@
                 });
 
                 test("sets line width", function() {
-                    equals(view.log.path[0].style.strokeWidth, 4);
+                    equal(view.log.path[0].style.strokeWidth, 4);
                 });
 
                 test("sets line color", function() {
-                    equals(view.log.path[0].style.stroke, "#cf0");
+                    equal(view.log.path[0].style.stroke, "#cf0");
                 });
 
                 test("sets line opacity", function() {
-                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                    equal(view.log.path[0].style.strokeOpacity, 0.5);
                 });
 
                 test("line has same model id as its segment", function() {
-                    equals(view.log.path[0].style.data.modelId, lineChart._segments[0].options.modelId);
+                    equal(view.log.path[0].style.data.modelId, lineChart._segments[0].options.modelId);
                 });
 
                 test("renders line chart group", function() {
-                    equals(view.log.group.length, 1);
+                    equal(view.log.group.length, 1);
                 });
 
                 test("sets group animation", function() {
-                    equals(view.log.group[0].options.animation.type, "clip");
+                    equal(view.log.group[0].options.animation.type, "clip");
                 });
 
                 // ------------------------------------------------------------
@@ -605,7 +605,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 1 ], [ 1.5, 0 ]
                     ]);
                 });
@@ -617,7 +617,7 @@
                         ]
                     });
 
-                    equals(view.log.path.length, 1);
+                    equal(view.log.path.length, 1);
                 });
 
                 test("line continues after missing value", function() {
@@ -628,7 +628,7 @@
                         }]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 1.5, 1 ], [ 2.5, 0 ]
                     ]);
                 });
@@ -640,7 +640,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 1 ], [ 1.5, 0 ], [ 3.5, 0 ]
                     ]);
                 });
@@ -652,7 +652,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 1 ], [ 1.5, 0 ], [ 2.5, 2 ], [ 3.5, 0 ]
                     ]);
                 });
@@ -838,12 +838,12 @@
 
                 test("sets marker width", function() {
                     createPoint({ markers: { size: 10 } });
-                    equals(marker.options.width, 10);
+                    equal(marker.options.width, 10);
                 });
 
                 test("sets marker height", function() {
                     createPoint({ markers: { size: 10 } });
-                    equals(marker.options.height, 10);
+                    equal(marker.options.height, 10);
                 });
 
                 test("hides marker if size is 0", function() {
@@ -852,27 +852,27 @@
                 });
 
                 test("sets marker background color", function() {
-                    same(marker.options.background, point.options.markers.background);
+                    deepEqual(marker.options.background, point.options.markers.background);
                 });
 
                 test("sets default marker border color based on background", function() {
                     createPoint({ markers: { background: "#cf0" } });
-                    equals(marker.options.border.color, "#a3cc00");
+                    equal(marker.options.border.color, "#a3cc00");
                 });
 
                 test("does not change marker border color if set", function() {
                     createPoint({ markers: { border: { color: "" } } });
-                    equals(marker.options.border.color, "");
+                    equal(marker.options.border.color, "");
                 });
 
                 test("sets marker border width", function() {
                     createPoint({ markers: { border: { width: 4 } } });
-                    equals(marker.options.border.width, 4);
+                    equal(marker.options.border.width, 4);
                 });
 
                 test("sets marker visibility", function() {
                     createPoint({ markers: { visible: false }});
-                    equals(marker.options.visible, false);
+                    equal(marker.options.visible, false);
                 });
 
                 test("sets marker shape type", function() {
@@ -902,7 +902,7 @@
 
                 test("sets marker opacity", function() {
                     createPoint({ markers: { opacity: 0.5 }});
-                    same(marker.options.opacity, point.options.markers.opacity);
+                    deepEqual(marker.options.opacity, point.options.markers.opacity);
                 });
 
                 test("sets marker id", function() {
@@ -913,7 +913,7 @@
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equals(marker.options.modelId, point.options.modelId);
+                    equal(marker.options.modelId, point.options.modelId);
                 });
 
                 test("highlightOverlay returns marker outline", function() {
@@ -921,7 +921,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view);
-                    equals(view.log.circle.length, 1);
+                    equal(view.log.circle.length, 1);
                 });
 
                 test("outline element has same model id", function() {
@@ -929,7 +929,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view);
-                    equals(view.log.circle[0].style.data.modelId, point.options.modelId);
+                    equal(view.log.circle[0].style.data.modelId, point.options.modelId);
                 });
 
                 test("highlightOverlay applies render options for square markers", function() {
@@ -959,14 +959,14 @@
                 test("tooltipAnchor is at top right of marker / above axis", function() {
                     createPoint({ aboveAxis: true });
                     var anchor = point.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y],
+                    deepEqual([anchor.x, anchor.y],
                          [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y1 - 10])
                 });
 
                 test("tooltipAnchor is at bottom right of marker / below axis", function() {
                     createPoint({ aboveAxis: false });
                     var anchor = point.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y],
+                    deepEqual([anchor.x, anchor.y],
                          [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y2])
                 });
 
@@ -978,59 +978,59 @@
                 });
 
                 test("sets label text", function() {
-                    equals(label.children[0].content, VALUE);
+                    equal(label.children[0].content, VALUE);
                 });
 
                 test("applies full label format", function() {
                     createPoint({ labels: { visible: true, format: "{0}%" }});
-                    equals(label.children[0].content, VALUE + "%");
+                    equal(label.children[0].content, VALUE + "%");
                 });
 
                 test("applies simple label format", function() {
                     createPoint({ labels: { visible: true, format: "p0" }});
-                    equals(label.children[0].content, VALUE * 100 + " %");
+                    equal(label.children[0].content, VALUE * 100 + " %");
                 });
 
                 test("sets label color", function() {
                     createPoint({ labels: { visible: true, color: "#cf0" }});
-                    same(label.options.color, "#cf0");
+                    deepEqual(label.options.color, "#cf0");
                 });
 
                 test("sets label background", function() {
                     createPoint({ labels: { visible: true, background: "#cf0" }});
-                    same(label.options.background, "#cf0");
+                    deepEqual(label.options.background, "#cf0");
                 });
 
                 test("sets label border color", function() {
                     createPoint({ labels: { visible: true, border: { color: "#cf0" } }});
-                    same(label.options.border.color, "#cf0");
+                    deepEqual(label.options.border.color, "#cf0");
                 });
 
                 test("sets label border width", function() {
                     createPoint({ labels: { visible: true, border: { width: 4 } }});
-                    same(label.options.border.width, 4);
+                    deepEqual(label.options.border.width, 4);
                 });
 
                 test("sets label font", function() {
                     createPoint({ labels: { visible: true, font: "12px comic-sans" }});
-                    same(label.options.font, "12px comic-sans");
+                    deepEqual(label.options.font, "12px comic-sans");
                 });
 
                 test("sets default left margin", function() {
-                    same(label.options.margin.left, 3);
+                    deepEqual(label.options.margin.left, 3);
                 });
 
                 test("sets default right margin", function() {
-                    same(label.options.margin.right, 3);
+                    deepEqual(label.options.margin.right, 3);
                 });
 
                 test("labels are not visible by default", function() {
                     createPoint();
-                    equals(typeof label, "undefined");
+                    equal(typeof label, "undefined");
                 });
 
                 test("sets label visibility", function() {
-                    equals(label.options.visible, true);
+                    equal(label.options.visible, true);
                 });
 
                 test("label is positioned above marker", function() {
@@ -1058,27 +1058,27 @@
 
                 test("renders template", function() {
                     createPoint({ labels: { visible: true, template: "${value}%" } });
-                    equals(label.children[0].content, VALUE + "%");
+                    equal(label.children[0].content, VALUE + "%");
                 });
 
                 test("renders template even when format is set", function() {
                     createPoint({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
-                    equals(label.children[0].content, VALUE + "%");
+                    equal(label.children[0].content, VALUE + "%");
                 });
 
                 test("template has category", function() {
                     createPoint({ labels: { visible: true, template: "${category}" } });
-                    equals(point.children[1].children[0].content, CATEGORY);
+                    equal(point.children[1].children[0].content, CATEGORY);
                 });
 
                 test("template has dataItem", function() {
                     createPoint({ labels: { visible: true, template: "${dataItem.value}" } });
-                    equals(point.children[1].children[0].content, VALUE);
+                    equal(point.children[1].children[0].content, VALUE);
                 });
 
                 test("template has series", function() {
                     createPoint({ labels: { visible: true, template: "${series.name}" } });
-                    equals(point.children[1].children[0].content, SERIES_NAME);
+                    equal(point.children[1].children[0].content, SERIES_NAME);
                 });
             })();
 
@@ -1164,14 +1164,14 @@
 
                 test("renders square", function() {
                     var square = view.log.rect[0];
-                    same([square.x1, square.y1, square.x2, square.y2],
+                    deepEqual([square.x1, square.y1, square.x2, square.y2],
                          [0, 0, SIZE, SIZE]);
                 });
 
                 test("renders triangle", function() {
                     createShape({ type: "triangle" });
                     var path = view.log.path[0];
-                    same(mapPoints(path.points), [
+                    deepEqual(mapPoints(path.points), [
                         [SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]
                     ]);
                     ok(path.closed);
@@ -1180,29 +1180,29 @@
                 test("renders circle", function() {
                     createShape({ type: "circle" });
                     var circle = view.log.circle[0];
-                    same(circle.c.x, SIZE / 2);
-                    same(circle.c.y, SIZE / 2);
-                    same(circle.r, SIZE / 2);
+                    deepEqual(circle.c.x, SIZE / 2);
+                    deepEqual(circle.c.y, SIZE / 2);
+                    deepEqual(circle.r, SIZE / 2);
                 });
 
                 test("renders id", function() {
                     createShape({ id: "id" });
-                    equals(view.log.circle[0].style.id, "id");
+                    equal(view.log.circle[0].style.id, "id");
                 });
 
                 test("does not render element when hidden", function() {
                     createShape({ visible: false });
-                    equals(view.log.rect.length, 0);
+                    equal(view.log.rect.length, 0);
                 });
 
                 test("does not render element when hidden (triangle)", function() {
                     createShape({ visible: false,  type: "triangle"});
-                    equals(view.log.path.length, 0);
+                    equal(view.log.path.length, 0);
                 });
 
                 test("does not render element when hidden (circle)", function() {
                     createShape({ visible: false,  type: "circle"});
-                    equals(view.log.circle.length, 0);
+                    equal(view.log.circle.length, 0);
                 });
 
             })();
@@ -1295,28 +1295,28 @@
                 });
 
                 test("event arguments contain value", 1, function() {
-                    linePointClick(function(e) { equals(e.value, 1); });
+                    linePointClick(function(e) { equal(e.value, 1); });
                 });
 
                 test("event arguments contain category", 1, function() {
-                    linePointClick(function(e) { equals(e.category, "A"); });
+                    linePointClick(function(e) { equal(e.category, "A"); });
                 });
 
                 test("event arguments contain series", 1, function() {
                     linePointClick(function(e) {
-                        same(e.series, chart.options.series[0]);
+                        deepEqual(e.series, chart.options.series[0]);
                     });
                 });
 
                 test("event arguments contain dataItem", 1, function() {
                     linePointClick(function(e) {
-                        same(e.value, e.value);
+                        deepEqual(e.value, e.value);
                     });
                 });
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointClick(function(e) {
-                        equals(e.element[0], getElement(marker.options.id));
+                        equal(e.element[0], getElement(marker.options.id));
                     });
                 });
 
@@ -1325,11 +1325,11 @@
                 });
 
                 test("fires for closest point when clicking line (1)", 1, function() {
-                    lineClick(function(e) { equals(e.value, 1); }, 0, 0);
+                    lineClick(function(e) { equal(e.value, 1); }, 0, 0);
                 });
 
                 test("fires for closest point when clicking line (2)", 1, function() {
-                    lineClick(function(e) { equals(e.value, 2); }, 1000, 0);
+                    lineClick(function(e) { equal(e.value, 2); }, 1000, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -1358,28 +1358,28 @@
                 });
 
                 test("event arguments contain value", 1, function() {
-                    linePointHover(function(e) { equals(e.value, 1); });
+                    linePointHover(function(e) { equal(e.value, 1); });
                 });
 
                 test("event arguments contain category", 1, function() {
-                    linePointHover(function(e) { equals(e.category, "A"); });
+                    linePointHover(function(e) { equal(e.category, "A"); });
                 });
 
                 test("event arguments contain series", 1, function() {
                     linePointHover(function(e) {
-                        same(e.series, chart.options.series[0]);
+                        deepEqual(e.series, chart.options.series[0]);
                     });
                 });
 
                 test("event arguments contain dataItem", 1, function() {
                     linePointHover(function(e) {
-                        same(e.dataItem, e.value);
+                        deepEqual(e.dataItem, e.value);
                     });
                 });
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointHover(function(e) {
-                        equals(e.element[0], getElement(marker.options.id));
+                        equal(e.element[0], getElement(marker.options.id));
                     });
                 });
 
@@ -1388,11 +1388,11 @@
                 });
 
                 test("fires for closest point when hovering line (1)", 1, function() {
-                    lineHover(function(e) { equals(e.value, 1); }, 0, 0);
+                    lineHover(function(e) { equal(e.value, 1); }, 0, 0);
                 });
 
                 test("fires for closest point when hovering line (2)", 1, function() {
-                    lineHover(function(e) { equals(e.value, 2); }, 1000, 0);
+                    lineHover(function(e) { equal(e.value, 2); }, 1000, 0);
                 });
 
                 test("fires when moving over neighbor", 2, function() {

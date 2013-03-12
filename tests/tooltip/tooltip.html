@@ -189,7 +189,7 @@
 
                 tooltip.show(container.find("span:last"));
 
-                same(popup, tooltip.popup);
+                deepEqual(popup, tooltip.popup);
             });
 
             test("popup is hidden when mouse leave the element", function() {

@@ -253,33 +253,33 @@
 
                 test("sets segment border color", function() {
                     createSegment({ border: { color: "red" } });
-                    equals(segment.options.border.color, "red");
+                    equal(segment.options.border.color, "red");
                 });
 
                 test("sets donut border width", function() {
                     createSegment({ border: { width: 4 } });
-                    equals(segment.options.border.width, 4);
+                    equal(segment.options.border.width, 4);
                 });
 
                 test("tooltipAnchor is set distance from segment", function() {
                     var anchor = segment.tooltipAnchor(10, 10);
-                    same([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
+                    deepEqual([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
                 });
 
                 test("sets overlay radius", function() {
-                    equals(ring.style.overlay.r, segment.sector.r);
+                    equal(ring.style.overlay.r, segment.sector.r);
                 });
 
                 test("sets overlay inner radius", function() {
-                    equals(ring.style.overlay.ir, segment.sector.ir);
+                    equal(ring.style.overlay.ir, segment.sector.ir);
                 });
 
                 test("sets overlay cx", function() {
-                    equals(ring.style.overlay.cx, segment.sector.c.x);
+                    equal(ring.style.overlay.cx, segment.sector.c.x);
                 });
 
                 test("sets overlay cy", function() {
-                    equals(ring.style.overlay.cy, segment.sector.c.y);
+                    equal(ring.style.overlay.cy, segment.sector.c.y);
                 });
 
                 test("does not set overlay options when no overlay is defined", function() {
@@ -291,23 +291,23 @@
                     view = new ViewStub();
 
                     segment.highlightOverlay(view);
-                    equals(view.log.ring.length, 1);
+                    equal(view.log.ring.length, 1);
                 });
 
                 test("outline element has same model id", function() {
                     view = new ViewStub();
 
                     segment.highlightOverlay(view);
-                    equals(view.log.ring[0].style.data.modelId, segment.options.modelId);
+                    equal(view.log.ring[0].style.data.modelId, segment.options.modelId);
                 });
 
                 test("ring has same model id", function() {
-                    equals(ring.style.data.modelId, segment.options.modelId);
+                    equal(ring.style.data.modelId, segment.options.modelId);
                 });
 
                 test("label has same model id", function() {
                     createSegment({ labels: { visible: true } });
-                    equals(segment.label.options.modelId, segment.options.modelId);
+                    equal(segment.label.options.modelId, segment.options.modelId);
                 });
 
             })();

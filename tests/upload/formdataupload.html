@@ -721,8 +721,8 @@
 
             test("files are passed to createFormData", 2, function() {
                 uploadInstance._module.createFormData = function(sourceFiles) {
-                    equals(sourceFiles[0].name, "first.txt");
-                    equals(sourceFiles[1].name, "second.txt");
+                    equal(sourceFiles[0].name, "first.txt");
+                    equal(sourceFiles[1].name, "second.txt");
                 };
 
                 uploadInstance._module.inputFiles = function () { return getFileListMock() };

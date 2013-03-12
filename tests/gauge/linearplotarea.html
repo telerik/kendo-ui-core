@@ -42,7 +42,7 @@
                 plotArea.scale.options = { vertical: true };
                 box = plotArea.getBox(gaugeBox);
 
-                same([box.x1, box.y1, box.x2, box.y2], [100, 0, 200, 300]);
+                deepEqual([box.x1, box.y1, box.x2, box.y2], [100, 0, 200, 300]);
             });
 
             module("PlotArea / Horizontal");
@@ -54,7 +54,7 @@
                 plotArea.scale.options = { vertical: false };
                 box = plotArea.getBox(gaugeBox);
 
-                same([box.x1, box.y1, box.x2, box.y2], [0, 100, 300, 200]);
+                deepEqual([box.x1, box.y1, box.x2, box.y2], [0, 100, 300, 200]);
             });
 
             module("PlotArea / Configuration", {

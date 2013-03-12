@@ -54,7 +54,7 @@ test("multiple selection is disabled in Opera", function() {
     kendo.support.browser.opera = true;
 
     uploadInstance = createUpload();
-    equals(uploadInstance._supportsMultiple(), false);
+    equal(uploadInstance._supportsMultiple(), false);
 
     kendo.support.browser.opera = opera;
 });
@@ -69,7 +69,7 @@ test("multiple selection is disabled in Safari on Windows", function() {
         "AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2";
     };
 
-    equals(uploadInstance._supportsMultiple(), false);
+    equal(uploadInstance._supportsMultiple(), false);
 
     kendo.support.browser.safari = safari;
 });
@@ -84,7 +84,7 @@ test("multiple selection is enabled in Safari", function() {
         "AppleWebKit/534.55.3 (KHTML, like Gecko) Version/5.1.3 Safari/534.53.10";
     };
 
-    equals(uploadInstance._supportsMultiple(), true);
+    equal(uploadInstance._supportsMultiple(), true);
 
     kendo.support.browser.safari = safari;
 });

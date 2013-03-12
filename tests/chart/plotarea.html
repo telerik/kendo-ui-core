@@ -121,8 +121,8 @@
                     stubMethod(fn, "createValueAxes",
                         function(panes) {
                             fn._stubbed["createValueAxes"].call(this, panes);
-                            same(this[axis].options.min, min);
-                            same(this[axis].options.max, max);
+                            deepEqual(this[axis].options.min, min);
+                            deepEqual(this[axis].options.max, max);
                         },
                         function() {
                             plotArea = createPlotArea(series, options);
@@ -155,7 +155,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
                 test("aligns reversed axes at default crossing values", function() {
@@ -171,7 +171,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                    deepEqual([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
                 test("aligns axises at non-default crossing values", function() {
@@ -184,7 +184,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
                 test("reads crossing values from axisCrossingValues alias", function() {
@@ -197,7 +197,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValues),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValues);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
                 test("aligns reversed axes at non-default crossing values", function() {
@@ -213,7 +213,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                    deepEqual([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
                 test("axis limit is [0, 1.2] when no series are configured", 2, function() {
@@ -242,7 +242,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.categories.length, 3);
+                    equal(plotArea.categoryAxis.options.categories.length, 3);
                 });
 
                 test("accepts extra categories", function() {
@@ -255,7 +255,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.categories.length, 2);
+                    equal(plotArea.categoryAxis.options.categories.length, 2);
                 });
 
                 test("categoryAxis justified is not altered with line series", function() {
@@ -269,7 +269,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.justified, true);
+                    equal(plotArea.categoryAxis.options.justified, true);
                 });
 
                 test("categoryAxis justified is set to false with bar series", function() {
@@ -283,7 +283,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.justified, false);
+                    equal(plotArea.categoryAxis.options.justified, false);
                 });
 
                 test("categoryAxis justified is set to false with column series", function() {
@@ -297,7 +297,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.justified, false);
+                    equal(plotArea.categoryAxis.options.justified, false);
                 });
 
                 test("categoryAxis justified is set to false with OHLC series", function() {
@@ -311,7 +311,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.justified, false);
+                    equal(plotArea.categoryAxis.options.justified, false);
                 });
 
                 test("categoryAxis justified is set to false with candlestick series", function() {
@@ -325,7 +325,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.justified, false);
+                    equal(plotArea.categoryAxis.options.justified, false);
                 });
 
                 test("categoryAxis justified is not altered with bar series on secondary axis", function() {
@@ -346,7 +346,7 @@
                         }]
                     });
 
-                    equals(plotArea.categoryAxis.options.justified, true);
+                    equal(plotArea.categoryAxis.options.justified, true);
                 })
 
                 test("categoryAxis justified is not altered with bar series on primary axis", function() {
@@ -365,7 +365,7 @@
                         }]
                     });
 
-                    equals(plotArea.axes[1].options.justified, true);
+                    equal(plotArea.axes[1].options.justified, true);
                 });
 
                 test("categoryAxis should have justified true if the type of the series is area", function() {
@@ -374,7 +374,7 @@
                             data: [100]
                         }], { });
 
-                    equals(plotArea.axes[0].options.justified, true);
+                    equal(plotArea.axes[0].options.justified, true);
                 });
 
                 test("categoryAxis should have justified false if the one of the all series is not from type area", function() {
@@ -386,7 +386,7 @@
                             data: [100]
                         }], { });
 
-                    equals(plotArea.axes[0].options.justified, false);
+                    equal(plotArea.axes[0].options.justified, false);
                 });
 
                 test("categoryAxis roundToBaseUnit is not altered with line series", function() {
@@ -400,7 +400,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.roundToBaseUnit, false);
+                    equal(plotArea.categoryAxis.options.roundToBaseUnit, false);
                 });
 
                 test("categoryAxis roundToBaseUnit is set to true with bar series", function() {
@@ -414,7 +414,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.roundToBaseUnit, true);
+                    equal(plotArea.categoryAxis.options.roundToBaseUnit, true);
                 });
 
                 test("categoryAxis roundToBaseUnit is set to true with column series", function() {
@@ -428,7 +428,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.roundToBaseUnit, true);
+                    equal(plotArea.categoryAxis.options.roundToBaseUnit, true);
                 });
 
                 test("categoryAxis roundToBaseUnit is set to true with OHLC series", function() {
@@ -442,7 +442,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.roundToBaseUnit, true);
+                    equal(plotArea.categoryAxis.options.roundToBaseUnit, true);
                 });
 
                 test("categoryAxis roundToBaseUnit is set to true with candlestick series", function() {
@@ -456,7 +456,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.roundToBaseUnit, true);
+                    equal(plotArea.categoryAxis.options.roundToBaseUnit, true);
                 });
 
                 test("categoryAxis roundToBaseUnit is not altered with bar series on other axis", function() {
@@ -477,7 +477,7 @@
                         }]
                     });
 
-                    equals(plotArea.categoryAxis.options.roundToBaseUnit, false);
+                    equal(plotArea.categoryAxis.options.roundToBaseUnit, false);
                 });
 
                 test("categoryAxis justified is not altered with bar series on primary axis", function() {
@@ -496,7 +496,7 @@
                         }]
                     });
 
-                    equals(plotArea.axes[1].options.roundToBaseUnit, false);
+                    equal(plotArea.axes[1].options.roundToBaseUnit, false);
                 });
 
                 // ------------------------------------------------------------
@@ -522,7 +522,7 @@
                     var slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
                         slotY = valueAxis.getSlot(valueAxis.options.axisCrossingValue);
 
-                    equals(slotX.y1, slotY.y1);
+                    equal(slotX.y1, slotY.y1);
                 });
 
                 test("Throws error when value axis name is duplicate", function() {
@@ -559,7 +559,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
+                    deepEqual([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
                          [valueAxis.box.x1 - margin, valueAxis.box.y1]
                     );
                 });
@@ -570,7 +570,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
+                    deepEqual([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
                          [valueAxis.box.x2, valueAxis.box.y1]
                     );
                 });
@@ -578,7 +578,7 @@
                 test("stacked axes on left are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
+                    deepEqual([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
                          [valueAxis.lineBox().y1, valueAxis.lineBox().y2]
                     );
                 });
@@ -619,7 +619,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.box.x1, secondaryValueAxis.box.y1],
+                    deepEqual([secondaryValueAxis.box.x1, secondaryValueAxis.box.y1],
                          [valueAxis.box.x2 + margin, valueAxis.box.y1]
                     );
                 });
@@ -627,7 +627,7 @@
                 test("stacked axes on right are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
+                    deepEqual([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
                          [valueAxis.lineBox().y1, valueAxis.lineBox().y2]
                     );
                 });
@@ -675,13 +675,13 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryValueAxis.box.y2, valueAxis.box.y1 - margin);
+                    equal(secondaryValueAxis.box.y2, valueAxis.box.y1 - margin);
                 });
 
                 test("stacked axes on top are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
+                    deepEqual([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
                          [valueAxis.lineBox().x1, valueAxis.lineBox().x2]
                     );
                 });
@@ -719,13 +719,13 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(secondaryValueAxis.box.y1, valueAxis.box.y2 + margin);
+                    deepEqual(secondaryValueAxis.box.y1, valueAxis.box.y2 + margin);
                 });
 
                 test("stacked axes on bottom are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
+                    deepEqual([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
                          [valueAxis.lineBox().x1, valueAxis.lineBox().x2]
                     );
                 });
@@ -777,7 +777,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(plotArea.namedCategoryAxes["a"].box.y1,
+                    deepEqual(plotArea.namedCategoryAxes["a"].box.y1,
                          plotArea.namedCategoryAxes["b"].box.y1);
                 });
 
@@ -818,7 +818,7 @@
                         }]
                     });
 
-                    equals(plotArea.namedCategoryAxes.b.options.categories.length, 3);
+                    equal(plotArea.namedCategoryAxes.b.options.categories.length, 3);
                 });
 
                 test("accepts extra categories", function() {
@@ -834,7 +834,7 @@
                         }]
                     });
 
-                    equals(plotArea.namedCategoryAxes.b.options.categories.length, 2);
+                    equal(plotArea.namedCategoryAxes.b.options.categories.length, 2);
                 });
 
                 test("Throws error when unable to locate category axis", function() {
@@ -968,7 +968,7 @@
                 });
 
                 test("applies gap from first series", function() {
-                    equals(chartSeries.options.gap, GAP);
+                    equal(chartSeries.options.gap, GAP);
                 });
 
                 // ------------------------------------------------------------
@@ -1154,7 +1154,7 @@
                 });
 
                 test("applies gap from first series", function() {
-                    equals(chartSeries.options.gap, GAP);
+                    equal(chartSeries.options.gap, GAP);
                 });
 
                 test("aligns axes at default crossing values", function() {
@@ -1165,7 +1165,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
                 test("aligns reversed axes at default crossing values", function() {
@@ -1182,7 +1182,7 @@
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
 
-                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                    deepEqual([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
                 test("aligns reversed axes at non-default crossing values", function() {
@@ -1199,7 +1199,7 @@
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
 
-                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                    deepEqual([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
                 test("sets isStacked when first series is stacked", function() {
@@ -1308,7 +1308,7 @@
                         }
                     });
 
-                    same(plotArea.categoryAxis.options.categories[0].constructor, Date);
+                    deepEqual(plotArea.categoryAxis.options.categories[0].constructor, Date);
                 });
 
                 test("Automatically detects date category axis", function() {
@@ -1324,8 +1324,8 @@
                         }
                     });
 
-                    same(plotArea.categoryAxis.options.type, "date");
-                    same(plotArea.series[0].data, [100, 200, undefined, 300]);
+                    deepEqual(plotArea.categoryAxis.options.type, "date");
+                    deepEqual(plotArea.series[0].data, [100, 200, undefined, 300]);
                 });
 
                 test("User can override automatic category axis type", function() {
@@ -1342,8 +1342,8 @@
                         }
                     });
 
-                    same(plotArea.categoryAxis.options.type, "category");
-                    same(plotArea.series[0].data, [100, 200, 300]);
+                    deepEqual(plotArea.categoryAxis.options.type, "category");
+                    deepEqual(plotArea.series[0].data, [100, 200, 300]);
                 });
 
                 test("Does not alter data points when no grouping is done", function() {
@@ -1353,7 +1353,7 @@
                         categoryAxis: dateCategoryAxis
                     });
 
-                    same(plotArea.series[0].data, [100, 200, undefined, 300]);
+                    deepEqual(plotArea.series[0].data, [100, 200, undefined, 300]);
                 });
 
                 test("Does not alter data items when no grouping is done", function() {
@@ -1363,7 +1363,7 @@
                         categoryAxis: dateCategoryAxis
                     });
 
-                    same(plotArea.series[0].data, ["a", "b", undefined, "c"]);
+                    deepEqual(plotArea.series[0].data, ["a", "b", undefined, "c"]);
                 });
 
                 test("Does not alter original series data", function() {
@@ -1377,7 +1377,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(series[0].data, [100, 200, 300]);
+                    deepEqual(series[0].data, [100, 200, 300]);
                 });
 
                 test("Does not alter original series data items", function() {
@@ -1392,7 +1392,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(series[0].dataItems, ["a", "b", "c"]);
+                    deepEqual(series[0].dataItems, ["a", "b", "c"]);
                 });
 
                 // ------------------------------------------------------------
@@ -1407,7 +1407,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [300]);
                 });
 
                 test("max ignores NaN values", function() {
@@ -1420,7 +1420,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [300]);
                 });
 
                 test("min ignores NaN values", function() {
@@ -1433,7 +1433,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [100]);
+                    deepEqual(plotArea.series[0].data, [100]);
                 });
 
                 test("sum ignores NaN values", function() {
@@ -1446,7 +1446,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [400]);
+                    deepEqual(plotArea.series[0].data, [400]);
                 });
 
                 test("Aggregates bound series data", function() {
@@ -1458,7 +1458,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [300]);
                 });
 
                 test("Aggregates bound series data with custom field names", function() {
@@ -1481,7 +1481,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [[200, 200, 200, 200]]);
+                    deepEqual(plotArea.series[0].data, [[200, 200, 200, 200]]);
                 });
 
                 test("Aggregates series data with predefined function", function() {
@@ -1494,14 +1494,14 @@
                         }, dateCategoryAxis)
                     });
 
-                    same(plotArea.series[0].data, [100]);
+                    deepEqual(plotArea.series[0].data, [100]);
                 });
 
                 test("Aggregates series data with user function", 1, function() {
                     createPlotArea([{
                         data: [100, 200, 300],
                         aggregate: function(values, series) {
-                            same(values, series.data);
+                            deepEqual(values, series.data);
                             return 0;
                         }
                     }], {
@@ -1531,7 +1531,7 @@
                         ]
                     });
 
-                    same(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [300]);
                 });
 
                 test("Throws error when unable to locate category axis", function() {
@@ -1568,7 +1568,7 @@
                     }),
                     point = plotArea.series[0].data[0];
 
-                    same(point, [3,6,0,4]);
+                    deepEqual(point, [3,6,0,4]);
                 });
 
                 test("Series data with predefined function", function() {
@@ -1588,7 +1588,7 @@
                     }),
                     point = plotArea.series[0].data[0];
 
-                    same(point, [1,4,0,2]);
+                    deepEqual(point, [1,4,0,2]);
                 });
 
                 test("Series data with user function", 1, function() {
@@ -1597,7 +1597,7 @@
                         type: "candlestick",
                         aggregate: {
                             "open": function(values, series) {
-                                same(data, series.data);
+                                deepEqual(data, series.data);
                                 return 0;
                             }
                         },
@@ -1731,7 +1731,7 @@
                         };
 
                     createPlotArea(categoryAxis, valueAxis);
-                    equals(view.log.line[0].x2, plotArea.valueAxis.lineBox().x2);
+                    equal(view.log.line[0].x2, plotArea.valueAxis.lineBox().x2);
                 });
 
                 test("should not render gridlines for secondary value axis", function() {
@@ -1957,7 +1957,7 @@
                     equal(rect.style.dashType, "dot");
                     equal(rect.style.stroke, "red");
                     equal(rect.style.strokeWidth, 2);
-                    same([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
+                    deepEqual([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
                 });
 
                 test("should render plot area background", function() {
@@ -1974,7 +1974,7 @@
 
                     var rect = view.log.rect[1];
                     equal(rect.style.fill, "color");
-                    same([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
+                    deepEqual([rect.x1, rect.y1, rect.x2, rect.y2], [116, 100, 989.5, 976], TOLERANCE);
                 });
 
                 test("should set plot area background opacity", function() {
@@ -2023,19 +2023,19 @@
                 test("default pane is created", function() {
                     createPlotArea();
 
-                    equals(plotArea.panes.length, 1);
+                    equal(plotArea.panes.length, 1);
                 });
 
                 test("default pane height is same as plot area height", function() {
                     createPlotArea();
 
-                    equals(plotArea.panes[0].box.height(), plotArea.box.height());
+                    equal(plotArea.panes[0].box.height(), plotArea.box.height());
                 });
 
                 test("default pane width is same as plot area width", function() {
                     createPlotArea();
 
-                    equals(plotArea.panes[0].box.width(), plotArea.box.width());
+                    equal(plotArea.panes[0].box.width(), plotArea.box.width());
                 });
 
                 test("panes are created", function() {
@@ -2043,7 +2043,7 @@
                         panes: [{ name: "a" }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes.length, 2);
+                    equal(plotArea.panes.length, 2);
                 });
 
                 test("one chart is created per pane", function() {
@@ -2057,7 +2057,7 @@
                         data: [200]
                     }], { });
 
-                    equals(plotArea.charts.length, 1);
+                    equal(plotArea.charts.length, 1);
                 });
 
                 test("two panes occupy 50% height each by default", function() {
@@ -2066,8 +2066,8 @@
                     });
 
                     var halfHeight = plotArea.box.height() / 2;
-                    equals(plotArea.panes[0].box.height(), halfHeight);
-                    equals(plotArea.panes[1].box.height(), halfHeight);
+                    equal(plotArea.panes[0].box.height(), halfHeight);
+                    equal(plotArea.panes[1].box.height(), halfHeight);
                 });
 
                 test("second pane is positioned below the first", function() {
@@ -2075,8 +2075,8 @@
                         panes: [{ name: "a" }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[0].box.y1, 100);
-                    equals(plotArea.panes[1].box.y1, 550);
+                    equal(plotArea.panes[0].box.y1, 100);
+                    equal(plotArea.panes[1].box.y1, 550);
                 });
 
                 test("pane occupies set height in pixels", function() {
@@ -2084,7 +2084,7 @@
                         panes: [{ name: "a", height: 200 }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 200);
+                    equal(plotArea.panes[0].box.height(), 200);
                 });
 
                 test("pane occupies remaining height (in pixels)", function() {
@@ -2092,7 +2092,7 @@
                         panes: [{ name: "a", height: 200 }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[1].box.height(), 700);
+                    equal(plotArea.panes[1].box.height(), 700);
                 });
 
                 test("first pane occupies set height in percents", function() {
@@ -2100,7 +2100,7 @@
                         panes: [{ name: "a", height: "30%" }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 270);
+                    equal(plotArea.panes[0].box.height(), 270);
                 });
 
                 test("second pane occupies remaining height (in percents)", function() {
@@ -2108,7 +2108,7 @@
                         panes: [{ name: "a", height: "30%" }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[1].box.height(), 630);
+                    equal(plotArea.panes[1].box.height(), 630);
                 });
 
                 test("second pane occupies set height in percents", function() {
@@ -2116,7 +2116,7 @@
                         panes: [{ name: "a" }, { name: "b", height: "30%" }]
                     });
 
-                    equals(plotArea.panes[1].box.height(), 270);
+                    equal(plotArea.panes[1].box.height(), 270);
                 });
 
                 test("first pane occupies remaining height (in percents)", function() {
@@ -2124,7 +2124,7 @@
                         panes: [{ name: "a" }, { name: "b", height: "30%" }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 630);
+                    equal(plotArea.panes[0].box.height(), 630);
                 });
 
                 test("top margin is included in pane height", function() {
@@ -2136,8 +2136,8 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 200);
-                    equals(plotArea.panes[1].box.height(), 700);
+                    equal(plotArea.panes[0].box.height(), 200);
+                    equal(plotArea.panes[1].box.height(), 700);
                 });
 
                 test("top margin is applied", function() {
@@ -2149,7 +2149,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].paddingBox.y1, 110);
+                    equal(plotArea.panes[0].paddingBox.y1, 110);
                 });
 
                 test("bottom margin is included in pane height", function() {
@@ -2161,8 +2161,8 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 200);
-                    equals(plotArea.panes[1].box.height(), 700);
+                    equal(plotArea.panes[0].box.height(), 200);
+                    equal(plotArea.panes[1].box.height(), 700);
                 });
 
                 test("bottom margin is applied", function() {
@@ -2174,7 +2174,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].paddingBox.y2, 290);
+                    equal(plotArea.panes[0].paddingBox.y2, 290);
                 });
 
                 test("left margin is included in pane width", function() {
@@ -2186,7 +2186,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
+                    equal(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
                 });
 
                 test("left margin is applied to pane", function() {
@@ -2198,7 +2198,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].paddingBox.x1, 110);
+                    equal(plotArea.panes[0].paddingBox.x1, 110);
                 });
 
                 test("left margin offsets value axis", function() {
@@ -2210,7 +2210,7 @@
                         }]
                     });
 
-                    equals(plotArea.valueAxis.box.x1, 110);
+                    equal(plotArea.valueAxis.box.x1, 110);
                 });
 
                 test("right margin is included in pane width", function() {
@@ -2222,7 +2222,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
+                    equal(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
                 });
 
                 test("right margin is applied to pane", function() {
@@ -2234,7 +2234,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].paddingBox.x2, 990);
+                    equal(plotArea.panes[0].paddingBox.x2, 990);
                 });
 
                 test("right margin offsets value axis", function() {
@@ -2249,7 +2249,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.box.x2, 990);
+                    equal(plotArea.valueAxis.box.x2, 990);
                 });
 
                 test("value axis is rendered in the first pane by default", function() {
@@ -2261,7 +2261,7 @@
                         }]
                     });
 
-                    equals(plotArea.valueAxis.box.y1, 100);
+                    equal(plotArea.valueAxis.box.y1, 100);
                 });
 
                 test("category axis is rendered in the first pane by default", function() {
@@ -2273,7 +2273,7 @@
                         }]
                     });
 
-                    equals(plotArea.categoryAxis.box.y1, 526);
+                    equal(plotArea.categoryAxis.box.y1, 526);
                 });
 
                 test("value axis is moved to the associated pane", function() {
@@ -2288,7 +2288,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.box.y1, 550);
+                    equal(plotArea.valueAxis.box.y1, 550);
                 });
 
                 test("value axis height matches the associated pane", function() {
@@ -2306,8 +2306,8 @@
                     var axisBox = plotArea.valueAxis.box;
                     var paneBox = plotArea.panes[1].box;
 
-                    equals(axisBox.y1, paneBox.y1);
-                    equals(axisBox.y2, paneBox.y2);
+                    equal(axisBox.y1, paneBox.y1);
+                    equal(axisBox.y2, paneBox.y2);
                 });
 
                 test("category axis remains in the first pane", function() {
@@ -2322,7 +2322,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.box.y1, 526);
+                    equal(plotArea.categoryAxis.box.y1, 526);
                 });
 
                 test("category axis fits in the first pane", function() {
@@ -2337,7 +2337,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.box.y2, plotArea.panes[0].box.y2);
+                    equal(plotArea.categoryAxis.box.y2, plotArea.panes[0].box.y2);
                 });
 
                 test("category axis fits in the second pane", function() {
@@ -2352,7 +2352,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.box.y2, plotArea.panes[1].box.y2);
+                    equal(plotArea.categoryAxis.box.y2, plotArea.panes[1].box.y2);
                 });
 
                 test("right aligned value axis fits in the associated pane", function() {
@@ -2370,7 +2370,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.box.x2,
+                    equal(plotArea.valueAxis.box.x2,
                            plotArea.panes[1].box.x2);
                 });
 
@@ -2392,8 +2392,8 @@
                     var axisBox = plotArea.valueAxis.box;
                     var paneBox = plotArea.panes[1].box;
 
-                    equals(axisBox.y1, paneBox.y1);
-                    equals(axisBox.y2, paneBox.y2);
+                    equal(axisBox.y1, paneBox.y1);
+                    equal(axisBox.y2, paneBox.y2);
                 });
 
                 test("secondary value axis is positioned in the designated pane", function() {
@@ -2410,7 +2410,7 @@
                         }]
                     });
 
-                    equals(plotArea.namedValueAxes["secondary"].box.y1, 550);
+                    equal(plotArea.namedValueAxes["secondary"].box.y1, 550);
                 });
 
                 test("secondary value axis is aligned to category axis", function() {
@@ -2430,7 +2430,7 @@
                         }]
                     });
 
-                    equals(plotArea.namedValueAxes["secondary"].lineBox().x1,
+                    equal(plotArea.namedValueAxes["secondary"].lineBox().x1,
                            plotArea.categoryAxis.lineBox().x1);
                 });
 
@@ -2451,7 +2451,7 @@
                         }
                     });
 
-                    equals(plotArea.namedValueAxes["secondary"].lineBox().x1,
+                    equal(plotArea.namedValueAxes["secondary"].lineBox().x1,
                            plotArea.categoryAxis.lineBox().x2);
                 });
 
@@ -2472,7 +2472,7 @@
                         }
                     });
 
-                    equals(plotArea.namedValueAxes["secondary"].box.x2 -
+                    equal(plotArea.namedValueAxes["secondary"].box.x2 -
                            plotArea.panes[1].box.x2, 0);
                 });
 
@@ -2490,7 +2490,7 @@
                         }]
                     });
 
-                    equals(plotArea.namedValueAxes["secondary"].box.x2,
+                    equal(plotArea.namedValueAxes["secondary"].box.x2,
                            plotArea.valueAxis.box.x2);
                 });
 
@@ -2511,7 +2511,7 @@
                         }
                     });
 
-                    equals(plotArea.namedValueAxes["secondary"].box.x1,
+                    equal(plotArea.namedValueAxes["secondary"].box.x1,
                            plotArea.valueAxis.box.x1);
                 });
 
@@ -2534,7 +2534,7 @@
                         }]
                     });
 
-                    equals(plotArea.panes[1].charts[0].options.series[0].name, "series");
+                    equal(plotArea.panes[1].charts[0].options.series[0].name, "series");
                 });
 
                 // ------------------------------------------------------------
@@ -2552,7 +2552,7 @@
                     });
 
                     var textBox = plotArea.panes[0].title;
-                    equals(textBox, null);
+                    equal(textBox, null);
                 });
 
                 test("title is aligned in pane center", function() {
@@ -2567,7 +2567,7 @@
                     });
 
                     var textBox = plotArea.panes[0].title.children[0];
-                    equals(textBox.box.x1, 528.5, TOLERANCE);
+                    equal(textBox.box.x1, 528.5, TOLERANCE);
                 });
 
                 test("title is aligned left by default", function() {
@@ -2581,7 +2581,7 @@
                     });
 
                     var textBox = plotArea.panes[0].title.children[0];
-                    equals(textBox.box.x1, 100);
+                    equal(textBox.box.x1, 100);
                 });
 
                 test("title is aligned right", function() {
@@ -2596,7 +2596,7 @@
                     });
 
                     var textBox = plotArea.panes[0].title.children[0];
-                    equals(textBox.box.x1, 957, TOLERANCE);
+                    equal(textBox.box.x1, 957, TOLERANCE);
                 });
 
                 test("title text can be set directly", function() {
@@ -2608,7 +2608,7 @@
                     });
 
                     var textBox = plotArea.panes[0].title.children[0];
-                    equals(textBox.children[0].content, "Title");
+                    equal(textBox.children[0].content, "Title");
                 });
 
                 // ------------------------------------------------------------
@@ -2675,14 +2675,14 @@
                     plotArea.series[0].data[0] = 10;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    equals(plotArea.valueAxisRangeTracker.query("vAxis").max, 10);
+                    equal(plotArea.valueAxisRangeTracker.query("vAxis").max, 10);
                 });
 
                 test("Resets range tracker for pane value axes (empty series)", function() {
                     plotArea.series[0].data[0] = undefined;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    same(plotArea.valueAxisRangeTracker.query("vAxis"), undefined);
+                    deepEqual(plotArea.valueAxisRangeTracker.query("vAxis"), undefined);
                 });
 
                 test("Updates plotArea.categoryAxis alias", function() {
@@ -2924,7 +2924,7 @@
 
                 test("event arguments contain value", 1, function() {
                     createBarChart({
-                        plotAreaClick: function(e) { equals(e.value, 0.4, TOLERANCE); }
+                        plotAreaClick: function(e) { equal(e.value, 0.4, TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -2935,7 +2935,7 @@
                 test("event arguments contain multiple values", 1, function() {
                     createBarChart({
                         valueAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { same(e.value, [1, 255], TOLERANCE); }
+                        plotAreaClick: function(e) { deepEqual(e.value, [1, 255], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -2945,7 +2945,7 @@
 
                 test("event arguments contain category", 1, function() {
                     createBarChart({
-                        plotAreaClick: function(e) { equals(e.category, "A"); }
+                        plotAreaClick: function(e) { equal(e.category, "A"); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -2958,7 +2958,7 @@
                         categoryAxis: {
                             categories: ["A"]
                         },
-                        plotAreaClick: function(e) { equals(e.category, ""); }
+                        plotAreaClick: function(e) { equal(e.category, ""); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -2973,7 +2973,7 @@
                         }, {
                             categories: ["a", "b"]
                         }],
-                        plotAreaClick: function(e) { same(e.category, ["A", "a"]); }
+                        plotAreaClick: function(e) { deepEqual(e.category, ["A", "a"]); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -2991,7 +2991,7 @@
                         valueAxis: {
                             axisCrossingValue: [0, 100]
                         },
-                        plotAreaClick: function(e) { same(e.category, ["A", "a"]); }
+                        plotAreaClick: function(e) { deepEqual(e.category, ["A", "a"]); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -3005,7 +3005,7 @@
                         categoryAxis: {
                             categories: [date]
                         },
-                        plotAreaClick: function(e) { equals(e.category.toString(), date.toString()); }
+                        plotAreaClick: function(e) { equal(e.category.toString(), date.toString()); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -3059,7 +3059,7 @@
                 test("categories are scoped to pane", 1, function() {
                     createChartWithPanes(
                         function(e) {
-                            same(e.category, "C");
+                            deepEqual(e.category, "C");
                         }
                     );
 
@@ -3071,7 +3071,7 @@
                 test("values are scoped to pane", 1, function() {
                     createChartWithPanes(
                         function(e) {
-                            same(e.value, 9, TOLERANCE);
+                            deepEqual(e.value, 9, TOLERANCE);
                         }
                     );
 
@@ -3098,7 +3098,7 @@
                             data: [1, 2]
                         }],
                         plotAreaClick: function(e) {
-                            equals(e.category, "A")
+                            equal(e.category, "A")
                         }
                     });
 
@@ -3148,8 +3148,8 @@
                     stubMethod(fn, "createAxes",
                         function(panes) {
                             fn._stubbed["createAxes"].call(this, panes);
-                            same(this[axis].options.min, min);
-                            same(this[axis].options.max, max);
+                            deepEqual(this[axis].options.min, min);
+                            deepEqual(this[axis].options.max, max);
                         },
                         function() {
                             plotArea = createPlotArea(series, options);
@@ -3179,7 +3179,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
                 test("aligns axises at non-default crossing values", function() {
@@ -3190,7 +3190,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
                 test("X axis limit is [0, 1.2] when no series are configured", 2, function() {
@@ -3319,7 +3319,7 @@
                         data: [[new Date(2012, 02, 01), 100]]
                     }]);
 
-                    same(plotArea.axisX.options.type, "date");
+                    deepEqual(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatically detects date X axis for bound series", function() {
@@ -3331,7 +3331,7 @@
                         data: [{ x: new Date(2012, 02, 01), y: 100 }]
                     }]);
 
-                    same(plotArea.axisX.options.type, "date");
+                    deepEqual(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatically detects named date X axis for bound series", function() {
@@ -3347,7 +3347,7 @@
                         }
                     });
 
-                    same(plotArea.axisX.options.type, "date");
+                    deepEqual(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatically detects date X axis from min setting", function() {
@@ -3361,7 +3361,7 @@
                         }
                     });
 
-                    same(plotArea.axisX.options.type, "date");
+                    deepEqual(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatically detects date X axis from max setting", function() {
@@ -3375,7 +3375,7 @@
                         }
                     });
 
-                    same(plotArea.axisX.options.type, "date");
+                    deepEqual(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatic detection of X axis can be overriden", function() {
@@ -3413,7 +3413,7 @@
                         data: [[100, new Date(2012, 02, 01)]]
                     }]);
 
-                    same(plotArea.axisY.options.type, "date");
+                    deepEqual(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatically detects date Y axis for bound series", function() {
@@ -3425,7 +3425,7 @@
                         data: [{ x: 100, y: new Date(2012, 02, 01) }]
                     }]);
 
-                    same(plotArea.axisY.options.type, "date");
+                    deepEqual(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatically detects named date Y axis for bound series", function() {
@@ -3441,7 +3441,7 @@
                         }
                     });
 
-                    same(plotArea.axisY.options.type, "date");
+                    deepEqual(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatically detects date Y axis from min setting", function() {
@@ -3455,7 +3455,7 @@
                         }
                     });
 
-                    same(plotArea.axisY.options.type, "date");
+                    deepEqual(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatically detects date Y axis from max setting", function() {
@@ -3469,7 +3469,7 @@
                         }
                     });
 
-                    same(plotArea.axisY.options.type, "date");
+                    deepEqual(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatic detection of Y axis can be overriden", function() {
@@ -3521,7 +3521,7 @@
                         xAxis: [{ name: "a" }, { name: "b" }]
                     });
 
-                    equals(plotArea.axisX.options.name, "a");
+                    equal(plotArea.axisX.options.name, "a");
                 });
 
                 test("assigns axisY alias to first named Y axis", function() {
@@ -3529,7 +3529,7 @@
                         yAxis: [{ name: "a" }, { name: "b" }]
                     });
 
-                    equals(plotArea.axisY.options.name, "a");
+                    equal(plotArea.axisY.options.name, "a");
                 });
 
                 test("secondary X axis added to pane content", function() {
@@ -3545,7 +3545,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                    deepEqual([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
                 test("secondary X axis on the right is contained in plot area", function() {
@@ -3556,7 +3556,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryXAxis.lineBox().x2, axisX.lineBox().x2);
+                    equal(secondaryXAxis.lineBox().x2, axisX.lineBox().x2);
                 });
 
                 test("secondary X axis on the left is contained in plot area", function() {
@@ -3567,7 +3567,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryXAxis.lineBox().x1, axisX.lineBox().x1);
+                    equal(secondaryXAxis.lineBox().x1, axisX.lineBox().x1);
                 });
 
                 test("secondary Y axis on top is contained in plot area", function() {
@@ -3578,7 +3578,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryYAxis.lineBox().y1, axisY.lineBox().y1, TOLERANCE);
+                    equal(secondaryYAxis.lineBox().y1, axisY.lineBox().y1, TOLERANCE);
                 });
 
                 test("secondary Y axis on bottom is contained in plot area", function() {
@@ -3589,7 +3589,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryYAxis.lineBox().y2, axisY.lineBox().y2);
+                    equal(secondaryYAxis.lineBox().y2, axisY.lineBox().y2);
                 });
 
                 test("Throws error when X axis name is duplicate", function() {
@@ -3635,7 +3635,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryXAxis.box.y2, axisX.box.y1 - margin);
+                    equal(secondaryXAxis.box.y2, axisX.box.y1 - margin);
                 });
 
                 test("X axis can be superimposed using options._overlap", function() {
@@ -3644,13 +3644,13 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(secondaryXAxis.box.y1, axisX.box.y1);
+                    deepEqual(secondaryXAxis.box.y1, axisX.box.y1);
                 });
 
                 test("stacked X axes on top are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
+                    deepEqual([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
                          [axisX.lineBox().x1, axisX.lineBox().x2]
                     );
                 });
@@ -3687,7 +3687,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    same([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
+                    deepEqual([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
                          [axisY.box.x2 + margin, axisY.box.y1]
                     );
                 });
@@ -3698,13 +3698,13 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(secondaryYAxis.box.x2, axisY.box.x2);
+                    deepEqual(secondaryYAxis.box.x2, axisY.box.x2);
                 });
 
                 test("stacked Y axes on right are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
+                    deepEqual([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
                          [axisY.lineBox().y1, axisY.lineBox().y2]
                     );
                 });
@@ -3740,13 +3740,13 @@
 
                     plotArea.reflow(chartBox);
 
-                    same(secondaryXAxis.box.y1, axisX.box.y2 + margin);
+                    deepEqual(secondaryXAxis.box.y1, axisX.box.y2 + margin);
                 });
 
                 test("stacked X axes on bottom are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
+                    deepEqual([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
                          [axisX.lineBox().x1, axisX.lineBox().x2]
                     );
                 });
@@ -3782,7 +3782,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    same([secondaryYAxis.box.x2, secondaryYAxis.box.y1],
+                    deepEqual([secondaryYAxis.box.x2, secondaryYAxis.box.y1],
                          [axisY.box.x1 - margin, axisY.box.y1]
                     );
                 });
@@ -3790,7 +3790,7 @@
                 test("stacked Y axes on left are aligned", function() {
                     plotArea.reflow(chartBox);
 
-                    same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
+                    deepEqual([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
                          [axisY.lineBox().y1, axisY.lineBox().y2]
                     );
                 });
@@ -3920,28 +3920,28 @@
                     plotArea.series[0].data[0][0] = 10;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    equals(plotArea.xAxisRangeTracker.query("xAxis").max, 10);
+                    equal(plotArea.xAxisRangeTracker.query("xAxis").max, 10);
                 });
 
                 test("Resets range tracker for pane x axes (empty series)", function() {
                     plotArea.series[0].data[0][0] = undefined;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    same(plotArea.xAxisRangeTracker.query("xAxis"), undefined);
+                    deepEqual(plotArea.xAxisRangeTracker.query("xAxis"), undefined);
                 });
 
                 test("Resets range tracker for pane y axes", function() {
                     plotArea.series[0].data[0][1] = 10;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    equals(plotArea.yAxisRangeTracker.query("yAxis").max, 10);
+                    equal(plotArea.yAxisRangeTracker.query("yAxis").max, 10);
                 });
 
                 test("Resets range tracker for pane y axes (empty series)", function() {
                     plotArea.series[0].data[0][1] = undefined;
                     plotArea.redraw(plotArea.panes[0]);
 
-                    same(plotArea.yAxisRangeTracker.query("yAxis"), undefined);
+                    deepEqual(plotArea.yAxisRangeTracker.query("yAxis"), undefined);
                 });
 
                 test("Updates plotArea.axisX alias", function() {
@@ -4048,7 +4048,7 @@
 
                 test("event arguments contain x axis value", 1, function() {
                     createScatterChart({
-                        plotAreaClick: function(e) { equals(e.x, 12, TOLERANCE); }
+                        plotAreaClick: function(e) { equal(e.x, 12, TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4059,7 +4059,7 @@
                 test("event arguments contain multiple x axis values", 1, function() {
                     createScatterChart({
                         xAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { same(e.x, [12, 193], TOLERANCE); }
+                        plotAreaClick: function(e) { deepEqual(e.x, [12, 193], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4069,7 +4069,7 @@
 
                 test("event arguments contain y axis value", 1, function() {
                     createScatterChart({
-                        plotAreaClick: function(e) { equals(e.y, 24, TOLERANCE); }
+                        plotAreaClick: function(e) { equal(e.y, 24, TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4080,7 +4080,7 @@
                 test("event arguments contain multiple y axis values", 1, function() {
                     createScatterChart({
                         yAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { same(e.y, [24, 278], TOLERANCE); }
+                        plotAreaClick: function(e) { deepEqual(e.y, [24, 278], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4115,11 +4115,11 @@
                 });
 
                 test("return points", function() {
-                    equals(plotArea.pointsByCategoryIndex(0).length, 2);
+                    equal(plotArea.pointsByCategoryIndex(0).length, 2);
                 });
 
                 test("return all points with some value", function() {
-                    equals(plotArea.pointsByCategoryIndex(1).length, 1);
+                    equal(plotArea.pointsByCategoryIndex(1).length, 1);
                 });
             })();
         </script>

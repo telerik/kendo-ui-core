@@ -33,7 +33,7 @@
                 node.find(".k-in").trigger("click");
 
                 ok(selectedArgs);
-                equals(selectedArgs.node, node[0]);
+                equal(selectedArgs.node, node[0]);
             });
 
             test("clicking expand button triggers expand event", function() {
@@ -52,7 +52,7 @@
                     .trigger("click");
 
                 ok(expandArgs);
-                equals(expandArgs.node, $(".k-item")[0]);
+                equal(expandArgs.node, $(".k-item")[0]);
             });
 
             test("clicking collapse button triggers collapse event", function() {
@@ -71,7 +71,7 @@
                     .trigger("click");
 
                 ok(collapseArgs);
-                equals(collapseArgs.node, $(".k-item")[0]);
+                equal(collapseArgs.node, $(".k-item")[0]);
             });
 
             module("drag & drop", {
@@ -121,7 +121,7 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dragStartTriggered);
-                equals(treeviewObject.text(dragStartTriggered.sourceNode), "bar");
+                equal(treeviewObject.text(dragStartTriggered.sourceNode), "bar");
             });
 
             test("dragstart can be prevented", function () {
@@ -158,9 +158,9 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dragTriggered);
-                equals(treeviewObject.text(dragTriggered.sourceNode), "bar");
+                equal(treeviewObject.text(dragTriggered.sourceNode), "bar");
                 ok(dragTriggered.setStatusClass);
-                equals(dragTriggered.statusClass, "add");
+                equal(dragTriggered.statusClass, "add");
                 ok(dragTriggered.pageX);
                 ok(dragTriggered.pageY);
             });
@@ -182,10 +182,10 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dropTriggered);
-                equals(treeviewObject.text(dropTriggered.sourceNode), "bar");
-                equals(dropTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
+                equal(treeviewObject.text(dropTriggered.sourceNode), "bar");
+                equal(dropTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
                 ok(dropTriggered.valid);
-                equals(dropTriggered.dropPosition, "over");
+                equal(dropTriggered.dropPosition, "over");
             });
 
             test("moving node triggers dragstart/drag/drop/dragend", function () {
@@ -205,10 +205,10 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dragEndTriggered);
-                equals(treeviewObject.text(dragEndTriggered.sourceNode), "bar");
-                equals(dragEndTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
-                equals(dragEndTriggered.dropPosition, "over");
-                equals(dragEndTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equal(treeviewObject.text(dragEndTriggered.sourceNode), "bar");
+                equal(dragEndTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
+                equal(dragEndTriggered.dropPosition, "over");
+                equal(dragEndTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
             });
 
             test("drop event can be cancelled", function() {
@@ -228,8 +228,8 @@
 
                 moveNode(treeviewObject, "bar", "baz");
 
-                equals(treeviewObject.findByText("foo").find(".k-group").length, 1);
-                equals(treeviewObject.findByText("baz").find(".k-group").length, 0);
+                equal(treeviewObject.findByText("foo").find(".k-group").length, 1);
+                equal(treeviewObject.findByText("baz").find(".k-group").length, 0);
            });
 
            test("initialization of expanded nodes does not trigger expand events", function() {
@@ -301,7 +301,7 @@
                    }
                });
 
-               equals(calls, 1);
+               equal(calls, 1);
                ok(args);
                ok(typeof args.node == "undefined");
            });
@@ -326,7 +326,7 @@
 
                treeviewObject.expand(".k-item");
 
-               equals(calls, 2);
+               equal(calls, 2);
                ok(args.node.is(treeview.find(".k-item:first")));
            });
 

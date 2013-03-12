@@ -163,13 +163,13 @@
             test("complementary() of HEX Black is #fff", function() {
                 var hex = colorEngine.complementary("#000000");
 
-                equals(hex, "#fff");
+                equal(hex, "#fff");
             });
 
             test("complementary() of HEX White is #000000", function() {
                 var hex = colorEngine.complementary("#fff");
 
-                equals(hex, "#000");
+                equal(hex, "#000");
             });
 
             test("add method adds the color to the main one", 1, function () {

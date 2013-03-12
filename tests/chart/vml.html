@@ -178,25 +178,25 @@
                 test("createPolyline sets fill color", function() {
                     var path = view.createPolyline([], false, { fill: "#cf0" });
 
-                    equals(path.options.fill, "#cf0");
+                    equal(path.options.fill, "#cf0");
                 });
 
                 test("createPolyline sets stroke color", function() {
                     var path = view.createPolyline([], false, { stroke: "#cf0" });
 
-                    equals(path.options.stroke, "#cf0");
+                    equal(path.options.stroke, "#cf0");
                 });
 
                 test("createPolyline sets stroke width", function() {
                     var path = view.createPolyline([], false, { strokeWidth: 2});
 
-                    equals(path.options.strokeWidth, 2);
+                    equal(path.options.strokeWidth, 2);
                 });
 
                 test("createPolyline sets stroke width", function() {
                     var path = view.createPolyline([], false, { dashType: "dot" });
 
-                    equals(path.options.dashType, "dot");
+                    equal(path.options.dashType, "dot");
                 });
 
                 test("createPolyline sets align default", function() {
@@ -218,31 +218,31 @@
 
                 test("createCircle sets center point", function() {
                     var circle = view.createCircle(new Point2D(10, 10));
-                    same(circle.c.x, 10);
-                    same(circle.c.y, 10);
+                    deepEqual(circle.c.x, 10);
+                    deepEqual(circle.c.y, 10);
                 });
 
                 test("createCircle sets radius", function() {
                     var circle = view.createCircle(new Point2D(10, 10), 10);
-                    same(circle.r, 10);
+                    deepEqual(circle.r, 10);
                 });
 
                 test("createCircle sets fill color", function() {
                     var circle = view.createCircle(new Point2D(), 10, { fill: "#cf0" });
 
-                    equals(circle.options.fill, "#cf0");
+                    equal(circle.options.fill, "#cf0");
                 });
 
                 test("createCircle sets stroke color", function() {
                     var circle = view.createCircle(new Point2D(), 10, { stroke: "#cf0" });
 
-                    equals(circle.options.stroke, "#cf0");
+                    equal(circle.options.stroke, "#cf0");
                 });
 
                 test("createCircle sets stroke width", function() {
                     var circle = view.createCircle(new Point2D(), 10, { strokeWidth: 2});
 
-                    equals(circle.options.strokeWidth, 2);
+                    equal(circle.options.strokeWidth, 2);
                 });
 
                 test("createSector returns VMLSector", function() {
@@ -253,19 +253,19 @@
                 test("createSector sets fill color", function() {
                     var sector = view.createSector({}, { fill: "#cf0" });
 
-                    equals(sector.options.fill, "#cf0");
+                    equal(sector.options.fill, "#cf0");
                 });
 
                 test("createSector sets stroke color", function() {
                     var sector = view.createSector({}, { stroke: "#cf0" });
 
-                    equals(sector.options.stroke, "#cf0");
+                    equal(sector.options.stroke, "#cf0");
                 });
 
                 test("createSector sets stroke width", function() {
                     var sector = view.createSector({}, { strokeWidth: 2});
 
-                    equals(sector.options.strokeWidth, 2);
+                    equal(sector.options.strokeWidth, 2);
                 });
 
                 test("createRing returns VMLRing", function() {
@@ -276,19 +276,19 @@
                 test("createRing sets fill color", function() {
                     var ring = view.createRing({}, { fill: "#cf0" });
 
-                    equals(ring.options.fill, "#cf0");
+                    equal(ring.options.fill, "#cf0");
                 });
 
                 test("createRing sets stroke color", function() {
                     var ring = view.createRing({}, { stroke: "#cf0" });
 
-                    equals(ring.options.stroke, "#cf0");
+                    equal(ring.options.stroke, "#cf0");
                 });
 
                 test("createRing sets stroke width", function() {
                     var ring = view.createRing({}, { strokeWidth: 2});
 
-                    equals(ring.options.strokeWidth, 2);
+                    equal(ring.options.strokeWidth, 2);
                 });
 
                 test("createRing sets align default", function() {
@@ -305,7 +305,7 @@
 
                 test("renderTo returns DOM element", function() {
                     var container = $("<div />").appendTo(document.body);
-                    equals(view.renderTo(container[0]), container[0].firstChild);
+                    equal(view.renderTo(container[0]), container[0].firstChild);
                     container.remove();
                 });
 
@@ -316,7 +316,7 @@
                         }
                     });
 
-                    equals(element.tagName.toLowerCase(), "h1");
+                    equal(element.tagName.toLowerCase(), "h1");
                 });
 
                 // ------------------------------------------------------------
@@ -462,18 +462,18 @@
                 });
 
                 test("clone copies content", function() {
-                    equals(text.clone().content, text.content);
+                    equal(text.clone().content, text.content);
                 });
 
                 test("clone copies options", function() {
                     text.options.id = "id";
-                    equals(text.clone().options.id, text.options.id);
+                    equal(text.clone().options.id, text.options.id);
                 });
 
                 test("refresh updates visibility attribute", function() {
                     var domElement = $("<div />")[0];
                     text.refresh(domElement);
-                    equals(domElement.style.visibility, "visible");
+                    equal(domElement.style.visibility, "visible");
                 });
 
             })();
@@ -679,28 +679,28 @@
                     var options = { stroke: "#cf0" };
 
                     createPath(options);
-                    same(path.stroke.options.stroke, "#cf0");
+                    deepEqual(path.stroke.options.stroke, "#cf0");
                 });
 
                 test("sets stroke width", function() {
                     var options = { strokeWidth: 2 };
 
                     createPath(options);
-                    same(path.stroke.options.strokeWidth, 2);
+                    deepEqual(path.stroke.options.strokeWidth, 2);
                 });
 
                 test("sets stroke dash type", function() {
                     var options = { dashType: "dot" };
 
                     createPath(options);
-                    same(path.stroke.options.dashType, "dot");
+                    deepEqual(path.stroke.options.dashType, "dot");
                 });
 
                 test("sets stroke opacity", function() {
                     var options = { opacity: 0.5 };
 
                     createPath(options);
-                    same(path.stroke.options.opacity, 0.5);
+                    deepEqual(path.stroke.options.opacity, 0.5);
                 });
 
                 test("renders stroke", function() {
@@ -715,14 +715,14 @@
                     var options = { fill: "#cf0" };
 
                     createPath(options);
-                    same(path.fill.options.fill, "#cf0");
+                    deepEqual(path.fill.options.fill, "#cf0");
                 });
 
                 test("sets fill opacity", function() {
                     var options = { opacity: 0.5 };
 
                     createPath(options);
-                    same(path.fill.options.opacity, 0.5);
+                    deepEqual(path.fill.options.opacity, 0.5);
                 });
 
                 test("renders fill", function() {
@@ -742,13 +742,13 @@
                 test("refresh updates path fill opacity", function() {
                     path.options.fillOpacity = 0.5;
                     path.refresh(domElement);
-                    equals(domElement.find("fill")[0].opacity, "0.5");
+                    equal(domElement.find("fill")[0].opacity, "0.5");
                 });
 
                 test("refresh updates path stroke opacity", function() {
                     path.options.strokeOpacity = 0.5;
                     path.refresh(domElement);
-                    equals(domElement.find("stroke")[0].opacity, "0.5");
+                    equal(domElement.find("stroke")[0].opacity, "0.5");
                 });
 
                 test("fill opacity is updated before rendering", function() {
@@ -764,7 +764,7 @@
                 test("refresh updates path display", function() {
                     path.options.visible = true;
                     path.refresh(domElement);
-                    equals(domElement.css("display"), "block");
+                    equal(domElement.css("display"), "block");
                 });
             })();
 
@@ -854,7 +854,7 @@
                     var domElement = $("<div />");
                     stroke.options.strokeOpacity = 0.4;
                     stroke.refresh(domElement[0]);
-                    equals(domElement[0].opacity, "0.4");
+                    equal(domElement[0].opacity, "0.4");
                 });
 
             })();
@@ -907,7 +907,7 @@
                     var domElement = $("<div />");
                     fill.options.fillOpacity = 0.4;
                     fill.refresh(domElement[0]);
-                    equals(domElement[0].opacity, "0.4");
+                    equal(domElement[0].opacity, "0.4");
                 });
 
             })();
@@ -1012,12 +1012,12 @@
 
                 test("sets fill color", function() {
                     createCircle({ fill: "#f00" });
-                    equals(circle.fill.options.fill, "#f00");
+                    equal(circle.fill.options.fill, "#f00");
                 });
 
                 test("sets fill opacity", function() {
                     createCircle({ opacity: 0.5 });
-                    equals(circle.fill.options.opacity, 0.5);
+                    equal(circle.fill.options.opacity, 0.5);
                 });
 
                 test("renders fill", function() {
@@ -1030,22 +1030,22 @@
 
                 test("sets stroke color", function() {
                     createCircle({ stroke: "#cf0" });
-                    same(circle.stroke.options.stroke, "#cf0");
+                    deepEqual(circle.stroke.options.stroke, "#cf0");
                 });
 
                 test("sets stroke width", function() {
                     createCircle({ strokeWidth: 2 });
-                    same(circle.stroke.options.strokeWidth, 2);
+                    deepEqual(circle.stroke.options.strokeWidth, 2);
                 });
 
                 test("sets stroke dash type", function() {
                     createCircle({ dashType: "dot" });
-                    same(circle.stroke.options.dashType, "dot");
+                    deepEqual(circle.stroke.options.dashType, "dot");
                 });
 
                 test("sets stroke opacity", function() {
                     createCircle({ opacity: 0.5 });
-                    same(circle.stroke.options.opacity, 0.5);
+                    deepEqual(circle.stroke.options.opacity, 0.5);
                 });
 
                 test("renders stroke", function() {
@@ -1067,17 +1067,17 @@
                     circle.r = 4;
                     circle.c = new Point2D(10, 20);
                     circle.refresh(domElement);
-                    equals(domElement.css("width"), "8px");
-                    equals(domElement.css("height"), "8px");
-                    equals(domElement.css("left"), "6px");
-                    equals(domElement.css("top"), "16px");
+                    equal(domElement.css("width"), "8px");
+                    equal(domElement.css("height"), "8px");
+                    equal(domElement.css("left"), "6px");
+                    equal(domElement.css("top"), "16px");
                 });
 
                 test("refresh updates fill opacity", function() {
                     var domElement = $("<div><fill /></div>");
                     circle.options.fillOpacity = 0.4;
                     circle.refresh(domElement);
-                    equals(domElement.find("fill")[0].opacity, "0.4");
+                    equal(domElement.find("fill")[0].opacity, "0.4");
                 });
 
             })();
@@ -1151,18 +1151,18 @@
                 });
 
                 test("clone copies box", function() {
-                    equals(clipRect.clone().box, clipRect.box);
+                    equal(clipRect.clone().box, clipRect.box);
                 });
 
                 test("clone copies options", function() {
                     clipRect.options.id = "id";
-                    equals(clipRect.clone().options.id, clipRect.options.id);
+                    equal(clipRect.clone().options.id, clipRect.options.id);
                 });
 
                 test("refresh updates clip attribute", function() {
                     var domElement = $("<div />")[0];
                     clipRect.refresh(domElement);
-                    equals(domElement.style.clip.replace(/,/g, " ").replace(/\s+/g," "),
+                    equal(domElement.style.clip.replace(/,/g, " ").replace(/\s+/g," "),
                            "rect(20px 110px 220px 10px)");
                 });
 
@@ -1231,12 +1231,12 @@
 
                 test("sets fill color", function() {
                     createSector({ fill: "#f00" });
-                    equals(sector.fill.options.fill, "#f00");
+                    equal(sector.fill.options.fill, "#f00");
                 });
 
                 test("sets fill opacity", function() {
                     createSector({ opacity: 0.5 });
-                    equals(sector.fill.options.opacity, 0.5);
+                    equal(sector.fill.options.opacity, 0.5);
                 });
 
                 test("renders fill", function() {
@@ -1249,22 +1249,22 @@
 
                 test("sets stroke color", function() {
                     createSector({ stroke: "#cf0" });
-                    same(sector.stroke.options.stroke, "#cf0");
+                    deepEqual(sector.stroke.options.stroke, "#cf0");
                 });
 
                 test("sets stroke width", function() {
                     createSector({ strokeWidth: 2 });
-                    same(sector.stroke.options.strokeWidth, 2);
+                    deepEqual(sector.stroke.options.strokeWidth, 2);
                 });
 
                 test("sets stroke dash type", function() {
                     createSector({ dashType: "dot" });
-                    same(sector.stroke.options.dashType, "dot");
+                    deepEqual(sector.stroke.options.dashType, "dot");
                 });
 
                 test("sets stroke opacity", function() {
                     createSector({ opacity: 0.5 });
-                    same(sector.stroke.options.opacity, 0.5);
+                    deepEqual(sector.stroke.options.opacity, 0.5);
                 });
 
                 test("renders stroke", function() {
@@ -1400,17 +1400,17 @@
                     gradient.cx = gradient.cy = gradient.bbox = undefined;
 
                     var path = view.createRect(new Box2D(), { fill: gradient });
-                    equals(path.fill, "#000");
+                    equal(path.fill, "#000");
                 });
 
                 test("applies gradient fill by name", function() {
                     var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    equals(path.fill.options.stops.length, 2);
+                    equal(path.fill.options.stops.length, 2);
                 });
 
                 test("preserves solid fill", function() {
                     var path = view.createRect(new Box2D(), { fill: "#f00" });
-                    equals(path.options.fill, "#f00");
+                    equal(path.options.fill, "#f00");
                 });
 
             })();
@@ -1438,20 +1438,20 @@
                 });
 
                 test("sets rotation to fill gradient", function() {
-                    equals(glassyRect.options.fill.rotation, 90);
+                    equal(glassyRect.options.fill.rotation, 90);
                 });
 
                 test("sets opacity to fill gradient", function() {
-                    equals(glassyRect.options.fill.opacity, 0.5);
+                    equal(glassyRect.options.fill.opacity, 0.5);
                 });
 
                 test("does not decorate element if no overlay specified", function() {
                     var rect = view.createRect(new Box2D());
-                    equals(rect.options.fill, "");
+                    equal(rect.options.fill, "");
                 });
 
                 test("adds fill color to make overlay definition unique", function() {
-                    equals(rect.options.fill._overlayFill, "#fff");
+                    equal(rect.options.fill._overlayFill, "#fff");
                 });
 
                 test("adds bounding box has to make overlay definition unique", function() {
@@ -1463,7 +1463,7 @@
                     });
 
                     decorator.decorate(rect);
-                    equals(rect.options.fill._bboxHash, "0,0,1,1");
+                    equal(rect.options.fill._bboxHash, "0,0,1,1");
 
                     dataviz.Gradients.test = null;
                 });
@@ -1490,7 +1490,7 @@
                 test("does not decorate when view.options.transitions is false", function() {
                     view.options.transitions = false;
                     decorator.decorate(rect);
-                    equals(decorator.decorate(rect), rect);
+                    equal(decorator.decorate(rect), rect);
                 });
 
                 test("wraps element in VMLClipRect", function() {
@@ -1503,11 +1503,11 @@
                 });
 
                 test("sets clip rect width", function() {
-                    equals(decorator.decorate(rect).box.width(), 100);
+                    equal(decorator.decorate(rect).box.width(), 100);
                 });
 
                 test("sets clip rect height", function() {
-                    equals(decorator.decorate(rect).box.height(), 50);
+                    equal(decorator.decorate(rect).box.height(), 50);
                 });
 
                 test("sets inline option", function() {

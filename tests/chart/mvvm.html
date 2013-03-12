@@ -60,7 +60,7 @@
 
                 equal(chart.dataSource.data().length, 2);
                 equal(chart.options.series.length, 1);
-                same(chart.options.series[0].data.length, 2);
+                deepEqual(chart.options.series[0].data.length, 2);
             });
 
             test("binding chart initialized after binding", function() {

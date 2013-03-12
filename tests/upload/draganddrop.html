@@ -120,7 +120,7 @@
 
             test("files in select event arguments are wrapped", 1, function() {
                 uploadInstance = createUpload({ "select" : (function(e) {
-                        equals(e.files[0].rawFile.name, "first.txt");
+                        equal(e.files[0].rawFile.name, "first.txt");
                     })
                 });
 

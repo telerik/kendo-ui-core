@@ -349,8 +349,8 @@
                 dataSource.remove(dataSource.get(1));
 
                 dataSource.bind("requestEnd", function(e) {
-                    same(e.response, { foo: "bar" });
-                    same(e.type, "destroy");
+                    deepEqual(e.response, { foo: "bar" });
+                    deepEqual(e.type, "destroy");
                 });
 
                 dataSource.sync();

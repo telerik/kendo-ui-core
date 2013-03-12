@@ -129,10 +129,10 @@
                 var element = $("<div />").appendTo(document.body).kendoTreeView([{ text: "foo" }]);
 
                 ok(element.is(".k-treeview.k-widget"));
-                equals(element.children("ul.k-treeview-lines.k-group").length, 1);
-                equals(element.find("li").length, 1);
+                equal(element.children("ul.k-treeview-lines.k-group").length, 1);
+                equal(element.find("li").length, 1);
                 ok(element.find("li").is(".k-item"));
-                equals(element.find("li").text(), "foo");
+                equal(element.find("li").text(), "foo");
             });
 
             var treeview, treeviewObject;

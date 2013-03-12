@@ -120,7 +120,7 @@
                     });
 
                     chart.redraw("top");
-                    equals(chart._model._plotArea.categoryAxis.options.categories[0], "alpha");
+                    equal(chart._model._plotArea.categoryAxis.options.categories[0], "alpha");
                 });
 
                 test("removes value axis alias after init", 1, function() {
@@ -176,7 +176,7 @@
                     chart.element.append("<div id='extra' />");
                     chart.redraw();
 
-                    equals(chart.element.find("#extra").length, 0);
+                    equal(chart.element.find("#extra").length, 0);
                 });
 
                 test("refresh applies changes to data-bound series", function() {
@@ -188,7 +188,7 @@
                     chart.options.series = [];
                     chart.refresh();
 
-                    equals(chart.options.series.length, 0);
+                    equal(chart.options.series.length, 0);
                 });
 
                 test("refresh cleans up generated cateories", function() {
@@ -201,7 +201,7 @@
                     chart.options.series = [];
                     chart.refresh();
 
-                    equals(chart.options.categoryAxis.categories.length, 0);
+                    equal(chart.options.categoryAxis.categories.length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -228,7 +228,7 @@
 
                 test("unbinds DataSource change handler", function() {
                     chart.destroy();
-                    equals(chart.dataSource._events["change"].length, 0);
+                    equal(chart.dataSource._events["change"].length, 0);
                 });
 
                 test("releases IDs to pool", function() {

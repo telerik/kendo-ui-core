@@ -46,7 +46,7 @@
                 linearScale.getViewElements(view);
                 var rect = view.log.rect[0];
 
-                same([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238.1, 44, 313.4], TOLERANCE);
+                deepEqual([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238.1, 44, 313.4], TOLERANCE);
             });
 
             test("render range from 10 to 15 and from 15 to 20", function() {
@@ -63,10 +63,10 @@
                 linearScale.getViewElements(view);
 
                 var rect = view.log.rect[0];
-                same([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 276, 44, 313.4], TOLERANCE);
+                deepEqual([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 276, 44, 313.4], TOLERANCE);
 
                 rect = view.log.rect[1];
-                same([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238, 44, 276], TOLERANCE);
+                deepEqual([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238, 44, 276], TOLERANCE);
             });
 
             module("RadialScale / Configuration");
@@ -74,9 +74,9 @@
             test("render scale with default min, max and step", function() {
                 createScale({ });
                 var options = linearScale.options;
-                equals(options.min, 0);
-                equals(options.max, 50);
-                equals(options.majorUnit, 10);
+                equal(options.min, 0);
+                equal(options.max, 50);
+                equal(options.majorUnit, 10);
             });
 
             test("render scale with min=0 max=12 step=2", function() {
@@ -84,7 +84,7 @@
                     min: 0,
                     max: 12
                 });
-                equals(linearScale.options.majorUnit, 2);
+                equal(linearScale.options.majorUnit, 2);
             });
 
             test("sets auto majorUnit", function() {
@@ -92,7 +92,7 @@
                     min: 0,
                     max: 1000
                 });
-                equals(linearScale.options.majorUnit, 200);
+                equal(linearScale.options.majorUnit, 200);
             });
 
             test("sets auto minorUnit", function() {
@@ -100,7 +100,7 @@
                     min: 0,
                     max: 1000
                 });
-                equals(linearScale.options.minorUnit, 20);
+                equal(linearScale.options.minorUnit, 20);
             });
 
             test("sets majorUnit", function() {
@@ -109,7 +109,7 @@
                     max: 1000,
                     majorUnit: 10
                 });
-                equals(linearScale.options.majorUnit, 10);
+                equal(linearScale.options.majorUnit, 10);
             });
 
             test("sets auto minorUnit", function() {
@@ -118,7 +118,7 @@
                     max: 1000,
                     minorUnit: 10
                 });
-                equals(linearScale.options.minorUnit, 10);
+                equal(linearScale.options.minorUnit, 10);
             });
 
             module("Linear Scale/ Ranges/ Configuration");

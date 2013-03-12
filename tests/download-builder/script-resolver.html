@@ -27,7 +27,7 @@
 
                 resolver.addComponent("a");
 
-                same(resolver.scripts, [ "a.js" ]);
+                deepEqual(resolver.scripts, [ "a.js" ]);
             });
 
             test("component with single dependency", function() {
@@ -42,7 +42,7 @@
 
                 resolver.addComponent("b");
 
-                same(resolver.scripts, [ "a.js", "b.js" ]);
+                deepEqual(resolver.scripts, [ "a.js", "b.js" ]);
             });
 
             test("includes common dependency only once", function() {
@@ -62,7 +62,7 @@
                 resolver.addComponent("b");
                 resolver.addComponent("c");
 
-                same(resolver.scripts, [ "a.js", "b.js", "c.js" ]);
+                deepEqual(resolver.scripts, [ "a.js", "b.js", "c.js" ]);
             });
 
             test("depending features", function() {
@@ -80,7 +80,7 @@
 
                 resolver.addComponent("a", [ "a-1" ]);
 
-                same(resolver.scripts, [ "b.js", "a.js" ]);
+                deepEqual(resolver.scripts, [ "b.js", "a.js" ]);
             });
 
             test("signals missing components", function() {
@@ -150,7 +150,7 @@
 
                 resolver.addComponent("a");
 
-                same(resolver.resolved, ["a"]);
+                deepEqual(resolver.resolved, ["a"]);
             });
 
             test("does not register resolved component twice", function() {
@@ -162,7 +162,7 @@
                 resolver.addComponent("a");
                 resolver.addComponent("a");
 
-                same(resolver.resolved, ["a"]);
+                deepEqual(resolver.resolved, ["a"]);
             });
 
         </script>

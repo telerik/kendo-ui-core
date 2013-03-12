@@ -338,7 +338,7 @@
 
                 multiselect._select(0);
 
-                equals(multiselect.calls("_height"), 1);
+                equal(multiselect.calls("_height"), 1);
             });
 
             test("MultiSelect sets height on unselect", function() {
@@ -353,7 +353,7 @@
 
                 multiselect._unselect(multiselect.tagList.children(":first"));
 
-                equals(multiselect.calls("_height"), 1);
+                equal(multiselect.calls("_height"), 1);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -133,7 +133,7 @@
                 stub(calendar, {navigate: calendar.navigate});
                 div.find("tbody").find("td.k-other-month").click(); //click "Nov" cell
 
-                equals(calendar.calls("navigate"), 1);
+                equal(calendar.calls("navigate"), 1);
             });
         </script>
 

@@ -1114,7 +1114,7 @@
                 kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
-                           same(element[0], container[0]);
+                           deepEqual(element[0], container[0]);
                         }
                     }
                 }
@@ -1156,12 +1156,12 @@
                 kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
-                           same(element[0], container[0]);
+                           deepEqual(element[0], container[0]);
                         }
                     },
                     bar: {
                         resolve: function(element) {
-                           same(element[0], container[0]);
+                           deepEqual(element[0], container[0]);
                         }
                     }
                 }

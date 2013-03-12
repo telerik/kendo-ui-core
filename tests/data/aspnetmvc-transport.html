@@ -69,7 +69,7 @@
                 transport.read({
                     success: function(e) {
                        start();
-                       same(e.Data, data);
+                       deepEqual(e.Data, data);
                     }
                 });
             });
@@ -85,7 +85,7 @@
 
                 transport.read({
                     success: function(e) {
-                       same(e.Data, data);
+                       deepEqual(e.Data, data);
                     }
                 });
             });
@@ -114,7 +114,7 @@
                     transport.read({
                         success: function(e) {
                            start();
-                           same(e.Data, data);
+                           deepEqual(e.Data, data);
                         }
                     });
                     stop();

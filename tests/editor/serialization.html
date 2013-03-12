@@ -438,8 +438,8 @@
     editor.value('<p> </p>');
 
     if (kendo.support.browser.mozilla) {
-    equals(editor.body.firstChild.childNodes.length, 1);
-    equals(editor.body.firstChild.firstChild.nodeName.toLowerCase(), 'br');
+    equal(editor.body.firstChild.childNodes.length, 1);
+    equal(editor.body.firstChild.firstChild.nodeName.toLowerCase(), 'br');
     }
     });
 

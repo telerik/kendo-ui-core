@@ -77,7 +77,7 @@
                 test("Sets fill on overlay element", 1, function() {
                     highlight.show({
                         highlightOverlay: function(definition, options) {
-                            equals(options.fill, "#cf0");
+                            equal(options.fill, "#cf0");
                         }
                     });
                 });
@@ -85,25 +85,25 @@
                 test("Sets fill opacity on overlay element", 1, function() {
                     highlight.show({
                         highlightOverlay: function(definition, options) {
-                            equals(options.fillOpacity, 0.5);
+                            equal(options.fillOpacity, 0.5);
                         }
                     });
                 });
 
                 test("Renders overlay element", function() {
                     highlight.show(ElementStub);
-                    equals($(".overlay").length, 1);
+                    equal($(".overlay").length, 1);
                 });
 
                 test("Does not render overlay if no overlay element exists", function() {
                     highlight.show({ highlightOverlay: function() { } });
-                    equals($(".overlay").length, 0);
+                    equal($(".overlay").length, 0);
                 });
 
                 test("Removes overlay element", function() {
                     highlight.show(ElementStub);
                     highlight.hide();
-                    equals($(".overlay").length, 0);
+                    equal($(".overlay").length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -130,13 +130,13 @@
 
                 test("Renders overlay elements", function() {
                     highlight.show([ElementStub, ElementStub]);
-                    equals($(".overlay").length, 2);
+                    equal($(".overlay").length, 2);
                 });
 
                 test("Removes overlay elements", function() {
                     highlight.show([ElementStub, ElementStub]);
                     highlight.hide();
-                    equals($(".overlay").length, 0);
+                    equal($(".overlay").length, 0);
                 });
 
             })();

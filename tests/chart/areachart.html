@@ -106,11 +106,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -123,7 +123,7 @@
                         return point.box.x1;
                     });
 
-                    same(pointsX, [0, 1]);
+                    deepEqual(pointsX, [0, 1]);
                 });
 
                 test("points are aligned to category axis", function() {
@@ -131,13 +131,13 @@
                         return point.box.y2;
                     });
 
-                    same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                    deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 test("segments are clipped to category axis", function() {
                     setupAreaChart(plotArea, { series: [ positiveSeries ]});
 
-                    equals(areaChart._segments[0].points()[0].y, CATEGORY_AXIS_Y);
+                    equal(areaChart._segments[0].points()[0].y, CATEGORY_AXIS_Y);
                 });
 
                 test("segments are clipped to secondary category axis", function() {
@@ -161,7 +161,7 @@
                         labels: {}
                     }]});
 
-                    equals(areaChart._segments[0].points()[0].y, 0);
+                    equal(areaChart._segments[0].points()[0].y, 0);
                 });
 
                 test("points have set width", function() {
@@ -175,7 +175,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 2]);
+                    deepEqual(pointHeights, [1, 2]);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
@@ -222,11 +222,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
@@ -234,7 +234,7 @@
                         return point.box.y1;
                     });
 
-                    same(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                    deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 test("points have set height according to value", function() {
@@ -242,7 +242,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 2]);
+                    deepEqual(pointHeights, [1, 2]);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
@@ -266,19 +266,19 @@
                 });
 
                 test("Reports minimum series value for primary axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for primary axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports minimum series value for secondary axis", function() {
-                    same(areaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for secondary axis", function() {
-                    same(areaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
                 });
 
                 test("Reports number of categories for two series", function() {
@@ -305,11 +305,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].max, 3);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -333,15 +333,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].max, 2);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equals(areaChart.points[2].value, 0);
+                    equal(areaChart.points[2].value, 0);
                 });
 
                 test("omits missing points", function() {
@@ -351,7 +351,7 @@
                         ]
                     });
 
-                    equals(areaChart.points[2], null);
+                    equal(areaChart.points[2], null);
                 });
 
                 test("omits missing points when interpolating", function() {
@@ -361,7 +361,7 @@
                         ]
                     });
 
-                    equals(areaChart.points[2], null);
+                    equal(areaChart.points[2], null);
                 });
 
                 test("getNearestPoint returns nearest series point (left)", function() {
@@ -414,7 +414,7 @@
 
                     var plotArea = chart._model._plotArea;
                     var areaChart = plotArea.charts[0];
-                    equals(areaChart._segments[0].points()[0].y,
+                    equal(areaChart._segments[0].points()[0].y,
                            plotArea.panes[0].axes[0].lineBox().y2);
                 });
 
@@ -437,7 +437,7 @@
                 });
 
                 test("point plot values are stacked", function() {
-                    same(
+                    deepEqual(
                         $.map(areaChart.points, function(point) { return point.plotValue }),
                         [1, 2, 3, 2, 4, 6]
                     );
@@ -462,7 +462,7 @@
                 });
 
                 test("point plot values are stacked", function() {
-                    same(
+                    deepEqual(
                         $.map(areaChart.points, function(point) { return point.plotValue }),
                         [-1, -2, -3, -2, -4, -6]
                     );
@@ -497,7 +497,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [2, 1, 2, 1]);
+                    deepEqual(pointHeights, [2, 1, 2, 1]);
                 });
 
                 // ------------------------------------------------------------
@@ -538,15 +538,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.valueAxisRanges[undefined].max, 4);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equals(areaChart.points[4].value, 0);
+                    equal(areaChart.points[4].value, 0);
                 });
 
                 test("omits missing points", function() {
@@ -557,7 +557,7 @@
                         isStacked: true
                     });
 
-                    equals(areaChart.points[4], null);
+                    equal(areaChart.points[4], null);
                 });
 
                 test("line is drawn between existing points when interpolating", function() {
@@ -568,7 +568,7 @@
                         isStacked: true
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 2 ], [ 0.5, 1 ], [ 1.5, 0 ], [ 3.5, 0 ], [ 3.5, 2 ]
                     ]);
                 });
@@ -603,8 +603,8 @@
                     });
 
                     var areaCharts = chart._model._plotArea.charts;
-                    equals(areaCharts[0].points[0].plotValue, undefined);
-                    equals(areaCharts[1].points[0].plotValue, undefined);
+                    equal(areaCharts[0].points[0].plotValue, undefined);
+                    equal(areaCharts[1].points[0].plotValue, undefined);
                 });
 
                 // ------------------------------------------------------------
@@ -635,43 +635,43 @@
                 });
 
                 test("sets area line width", function() {
-                    equals(view.log.path[1].style.strokeWidth, 2);
+                    equal(view.log.path[1].style.strokeWidth, 2);
                 });
 
                 test("sets area line color", function() {
-                    equals(view.log.path[1].style.stroke, "lineColor");
+                    equal(view.log.path[1].style.stroke, "lineColor");
                 });
 
                 test("sets area line opacity", function() {
-                    equals(view.log.path[1].style.strokeOpacity, 0.5);
+                    equal(view.log.path[1].style.strokeOpacity, 0.5);
                 });
 
                 test("sets area line opacity", function() {
-                    equals(view.log.path[1].style.dashType, "dot");
+                    equal(view.log.path[1].style.dashType, "dot");
                 });
 
                 test("sets area fill color", function() {
-                    equals(polyline.style.fill, "areaColor");
+                    equal(polyline.style.fill, "areaColor");
                 });
 
                 test("sets area opacity", function() {
-                    equals(polyline.style.fillOpacity, 0.1);
+                    equal(polyline.style.fillOpacity, 0.1);
                 });
 
                 test("area has same model id as its segment", function() {
-                    equals(polyline.style.data.modelId, areaChart._segments[0].options.modelId);
+                    equal(polyline.style.data.modelId, areaChart._segments[0].options.modelId);
                 });
 
                 test("renders area chart group", function() {
-                    equals(view.log.group.length, 1);
+                    equal(view.log.group.length, 1);
                 });
 
                 test("sets group animation", function() {
-                    equals(view.log.group[0].options.animation.type, "clip");
+                    equal(view.log.group[0].options.animation.type, "clip");
                 });
 
                 test("area shape is open", function() {
-                    equals(polyline.closed, false);
+                    equal(polyline.closed, false);
                 });
 
                 // ------------------------------------------------------------
@@ -688,7 +688,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 2 ], [ 0.5, 1 ],
                         [ 1.5, 0 ], [ 1.5, 2 ]
                     ]);
@@ -701,7 +701,7 @@
                         ]
                     });
 
-                    equals(view.log.path.length, 2);
+                    equal(view.log.path.length, 2);
                 });
 
                 test("area continues after missing value", function() {
@@ -713,7 +713,7 @@
                         }]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 1.5, 2 ], [ 1.5, 1 ],
                         [ 2.5, 0 ], [ 2.5, 2 ]
                     ]);
@@ -726,7 +726,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 2 ], [ 0.5, 1 ], [ 1.5, 0 ],
                         [ 3.5, 0 ], [ 3.5, 2 ]
                     ]);
@@ -739,7 +739,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 0.5, 2 ], [ 0.5, 1 ], [ 1.5, 0 ],
                         [ 2.5, 2 ], [ 3.5, 0 ], [ 3.5, 2 ]
                     ]);
@@ -916,36 +916,36 @@
 
                 test("sets marker width", function() {
                     createPoint({ markers: { size: 10 } });
-                    equals(marker.options.width, 10);
+                    equal(marker.options.width, 10);
                 });
 
                 test("sets marker height", function() {
                     createPoint({ markers: { size: 10 } });
-                    equals(marker.options.height, 10);
+                    equal(marker.options.height, 10);
                 });
 
                 test("sets marker background color", function() {
-                    same(marker.options.background, point.options.markers.background);
+                    deepEqual(marker.options.background, point.options.markers.background);
                 });
 
                 test("sets default marker border color based on background", function() {
                     createPoint({ markers: { background: "#cf0" } });
-                    equals(marker.options.border.color, "#a3cc00");
+                    equal(marker.options.border.color, "#a3cc00");
                 });
 
                 test("does not change marker border color if set", function() {
                     createPoint({ markers: { border: { color: "" } } });
-                    equals(marker.options.border.color, "");
+                    equal(marker.options.border.color, "");
                 });
 
                 test("sets marker border width", function() {
                     createPoint({ markers: { border: { width: 4 } } });
-                    equals(marker.options.border.width, 4);
+                    equal(marker.options.border.width, 4);
                 });
 
                 test("sets marker visibility", function() {
                     createPoint({ markers: { visible: false }});
-                    equals(marker.options.visible, false);
+                    equal(marker.options.visible, false);
                 });
 
                 test("sets marker shape type", function() {
@@ -975,7 +975,7 @@
 
                 test("sets marker opacity", function() {
                     createPoint({ markers: { opacity: 0.5 }});
-                    same(marker.options.opacity, point.options.markers.opacity);
+                    deepEqual(marker.options.opacity, point.options.markers.opacity);
                 });
 
                 test("sets marker id", function() {
@@ -986,7 +986,7 @@
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equals(marker.options.modelId, point.options.modelId);
+                    equal(marker.options.modelId, point.options.modelId);
                 });
 
                 test("highlightOverlay returns marker outline", function() {
@@ -994,7 +994,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view);
-                    equals(view.log.circle.length, 1);
+                    equal(view.log.circle.length, 1);
                 });
 
                 test("outline element has same model id", function() {
@@ -1002,7 +1002,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view);
-                    equals(view.log.circle[0].style.data.modelId, point.options.modelId);
+                    equal(view.log.circle[0].style.data.modelId, point.options.modelId);
                 });
 
                 test("highlightOverlay applies render options for square markers", function() {
@@ -1032,14 +1032,14 @@
                 test("tooltipAnchor is at top right of marker / above axis", function() {
                     createPoint({ aboveAxis: true });
                     var anchor = point.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y],
+                    deepEqual([anchor.x, anchor.y],
                          [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y1 - 10])
                 });
 
                 test("tooltipAnchor is at bottom right of marker / below axis", function() {
                     createPoint({ aboveAxis: false });
                     var anchor = point.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y],
+                    deepEqual([anchor.x, anchor.y],
                          [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y2])
                 });
 
@@ -1051,59 +1051,59 @@
                 });
 
                 test("sets label text", function() {
-                    equals(label.children[0].content, VALUE);
+                    equal(label.children[0].content, VALUE);
                 });
 
                 test("applies full label format", function() {
                     createPoint({ labels: { visible: true, format: "{0}%" }});
-                    equals(label.children[0].content, VALUE + "%");
+                    equal(label.children[0].content, VALUE + "%");
                 });
 
                 test("applies simple label format", function() {
                     createPoint({ labels: { visible: true, format: "p0" }});
-                    equals(label.children[0].content, VALUE * 100 + " %");
+                    equal(label.children[0].content, VALUE * 100 + " %");
                 });
 
                 test("sets label color", function() {
                     createPoint({ labels: { visible: true, color: "#cf0" }});
-                    same(label.options.color, "#cf0");
+                    deepEqual(label.options.color, "#cf0");
                 });
 
                 test("sets label background", function() {
                     createPoint({ labels: { visible: true, background: "#cf0" }});
-                    same(label.options.background, "#cf0");
+                    deepEqual(label.options.background, "#cf0");
                 });
 
                 test("sets label border color", function() {
                     createPoint({ labels: { visible: true, border: { color: "#cf0" } }});
-                    same(label.options.border.color, "#cf0");
+                    deepEqual(label.options.border.color, "#cf0");
                 });
 
                 test("sets label border width", function() {
                     createPoint({ labels: { visible: true, border: { width: 4 } }});
-                    same(label.options.border.width, 4);
+                    deepEqual(label.options.border.width, 4);
                 });
 
                 test("sets label font", function() {
                     createPoint({ labels: { visible: true, font: "12px comic-sans" }});
-                    same(label.options.font, "12px comic-sans");
+                    deepEqual(label.options.font, "12px comic-sans");
                 });
 
                 test("sets default left margin", function() {
-                    same(label.options.margin.left, 3);
+                    deepEqual(label.options.margin.left, 3);
                 });
 
                 test("sets default right margin", function() {
-                    same(label.options.margin.right, 3);
+                    deepEqual(label.options.margin.right, 3);
                 });
 
                 test("labels are not visible by default", function() {
                     createPoint();
-                    equals(typeof label, "undefined");
+                    equal(typeof label, "undefined");
                 });
 
                 test("sets label visibility", function() {
-                    equals(label.options.visible, true);
+                    equal(label.options.visible, true);
                 });
 
                 test("label is positioned above marker", function() {
@@ -1131,27 +1131,27 @@
 
                 test("renders template", function() {
                     createPoint({ labels: { visible: true, template: "${value}%" } });
-                    equals(label.children[0].content, VALUE + "%");
+                    equal(label.children[0].content, VALUE + "%");
                 });
 
                 test("renders template even when format is set", function() {
                     createPoint({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
-                    equals(label.children[0].content, VALUE + "%");
+                    equal(label.children[0].content, VALUE + "%");
                 });
 
                 test("template has category", function() {
                     createPoint({ labels: { visible: true, template: "${category}" } });
-                    equals(point.children[1].children[0].content, CATEGORY);
+                    equal(point.children[1].children[0].content, CATEGORY);
                 });
 
                 test("template has dataItem", function() {
                     createPoint({ labels: { visible: true, template: "${dataItem.value}" } });
-                    equals(point.children[1].children[0].content, VALUE);
+                    equal(point.children[1].children[0].content, VALUE);
                 });
 
                 test("template has series", function() {
                     createPoint({ labels: { visible: true, template: "${series.name}" } });
-                    equals(point.children[1].children[0].content, SERIES_NAME);
+                    equal(point.children[1].children[0].content, SERIES_NAME);
                 });
             })();
 
@@ -1254,11 +1254,11 @@
                 });
 
                 test("fires for closest point when clicking segment (1)", 1, function() {
-                    areaClick(function(e) { equals(e.value, 1); }, 0, 0);
+                    areaClick(function(e) { equal(e.value, 1); }, 0, 0);
                 });
 
                 test("fires for closest point when clicking segment (2)", 1, function() {
-                    areaClick(function(e) { equals(e.value, 2); }, 1000, 0);
+                    areaClick(function(e) { equal(e.value, 2); }, 1000, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -1271,11 +1271,11 @@
                 });
 
                 test("fires for closest point when hovering segment (1)", 1, function() {
-                    areaHover(function(e) { equals(e.value, 1); }, 0, 0);
+                    areaHover(function(e) { equal(e.value, 1); }, 0, 0);
                 });
 
                 test("fires for closest point when hovering segment (2)", 1, function() {
-                    areaHover(function(e) { equals(e.value, 2); }, 1000, 0);
+                    areaHover(function(e) { equal(e.value, 2); }, 1000, 0);
                 });
 
             })();

@@ -596,7 +596,7 @@
                 var dataSource = remoteDataSource();
                 dataSource.read();
                 dataSource.range(30,16);
-                same(dataSource.data(), dataSource.view());
+                deepEqual(dataSource.data(), dataSource.view());
             });
 
             test("getByUid returns the item after remote range from a diffrent page is retrieved", function() {

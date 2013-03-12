@@ -41,91 +41,91 @@
                 test("fit plot area box in gauge with 0:90", function() {
                     createPlotArea({ scale: { startAngle: 0, endAngle: 90 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 0, 1.5, 200, 198.5 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 0, 1.5, 200, 198.5 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 0:45", function() {
                     createPlotArea({ scale: { startAngle: 0, endAngle: 45 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 28, 200, 172 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 28, 200, 172 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 45:90", function() {
                     createPlotArea({ scale: { startAngle: 45, endAngle: 90 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 27, 1, 173, 200], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 27, 1, 173, 200], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 90:180", function() {
                     createPlotArea({ scale: { startAngle: 90, endAngle: 180 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 1, 200, 200], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 1, 200, 200], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 90:135", function() {
                     createPlotArea({ scale: { startAngle: 90, endAngle: 135 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 29, 1, 172, 200], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 29, 1, 172, 200], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 135:180", function() {
                     createPlotArea({ scale: { startAngle: 135, endAngle: 180 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 28, 200, 172], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 28, 200, 172], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 180:270", function() {
                     createPlotArea({ scale: { startAngle: 180, endAngle: 270 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 0, 1.5, 200, 198.5 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 0, 1.5, 200, 198.5 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 180:225", function() {
                     createPlotArea({ scale: { startAngle: 180, endAngle: 225 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 225:270", function() {
                     createPlotArea({ scale: { startAngle: 225, endAngle: 270 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 27, 1, 173, 200 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 27, 1, 173, 200 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 270:360", function() {
                     createPlotArea({ scale: { startAngle: 270, endAngle: 360 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 1, 200, 200 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 1, 200, 200 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 270:315", function() {
                     createPlotArea({ scale: { startAngle: 270, endAngle: 315 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 29, 1, 172, 200 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 29, 1, 172, 200 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 315:360", function() {
                     createPlotArea({ scale: { startAngle: 315, endAngle: 360 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 0:180", function() {
                     createPlotArea({ scale: { startAngle: 0, endAngle: 180 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 0, 45, 200, 155 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 0, 45, 200, 155 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 90:270", function() {
                     createPlotArea({ scale: { startAngle: 315, endAngle: 360 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
                 });
 
                 test("fit plot area box in gauge with 180:360", function() {
                     createPlotArea({ scale: { startAngle: 315, endAngle: 360 }});
 
-                    same([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
+                    deepEqual([ box.x1, box.y1, box.x2, box.y2 ], [ 1, 29, 200, 172 ], TOLERANCE);
                 });
             })();
 

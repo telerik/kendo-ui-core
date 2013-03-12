@@ -86,19 +86,19 @@
                 });
 
                 test("Reports minimum series value for primary X axis", function() {
-                    same(scatterLineChart.xAxisRanges[undefined].min, series.data[0][0]);
+                    deepEqual(scatterLineChart.xAxisRanges[undefined].min, series.data[0][0]);
                 });
 
                 test("Reports minimum series value for primary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges[undefined].min, series.data[0][1]);
+                    deepEqual(scatterLineChart.yAxisRanges[undefined].min, series.data[0][1]);
                 });
 
                 test("Reports maximum series value for primary X axis", function() {
-                    same(scatterLineChart.xAxisRanges[undefined].max, series.data[1][0]);
+                    deepEqual(scatterLineChart.xAxisRanges[undefined].max, series.data[1][0]);
                 });
 
                 test("Reports maximum series value for primary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges[undefined].max, series.data[1][1]);
+                    deepEqual(scatterLineChart.yAxisRanges[undefined].max, series.data[1][1]);
                 });
 
                 test("points have set width", function() {
@@ -112,7 +112,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 2]);
+                    deepEqual(pointHeights, [1, 2]);
                 });
 
                 test("sets point owner", function() {
@@ -156,35 +156,35 @@
                 });
 
                 test("Reports minimum value for primary X axis", function() {
-                    same(scatterLineChart.xAxisRanges[undefined].min, 1);
+                    deepEqual(scatterLineChart.xAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports minimum value for primary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges[undefined].min, 10);
+                    deepEqual(scatterLineChart.yAxisRanges[undefined].min, 10);
                 });
 
                 test("Reports maximum value for primary X axis", function() {
-                    same(scatterLineChart.xAxisRanges[undefined].max, 2);
+                    deepEqual(scatterLineChart.xAxisRanges[undefined].max, 2);
                 });
 
                 test("Reports maximum value for primary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges[undefined].max, 20);
+                    deepEqual(scatterLineChart.yAxisRanges[undefined].max, 20);
                 });
 
                 test("Reports minimum value for secondary X axis", function() {
-                    same(scatterLineChart.xAxisRanges.secondary.min, 3);
+                    deepEqual(scatterLineChart.xAxisRanges.secondary.min, 3);
                 });
 
                 test("Reports minimum value for secondary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges.secondary.min, 30);
+                    deepEqual(scatterLineChart.yAxisRanges.secondary.min, 30);
                 });
 
                 test("Reports maximum value for secondary X axis", function() {
-                    same(scatterLineChart.xAxisRanges.secondary.max, 4);
+                    deepEqual(scatterLineChart.xAxisRanges.secondary.max, 4);
                 });
 
                 test("Reports maximum value for secondary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges.secondary.max, 40);
+                    deepEqual(scatterLineChart.yAxisRanges.secondary.max, 40);
                 });
 
                 test("Throws error when unable to locate X axis", function() {
@@ -220,23 +220,23 @@
                 });
 
                 test("Reports minimum series value for primary X axis", function() {
-                    same(scatterLineChart.xAxisRanges[undefined].min, 1);
+                    deepEqual(scatterLineChart.xAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports minimum series value for primary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges[undefined].min, 1);
+                    deepEqual(scatterLineChart.yAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for primary X axis", function() {
-                    same(scatterLineChart.xAxisRanges[undefined].max, 2);
+                    deepEqual(scatterLineChart.xAxisRanges[undefined].max, 2);
                 });
 
                 test("Reports maximum series value for primary Y axis", function() {
-                    same(scatterLineChart.yAxisRanges[undefined].max, 2);
+                    deepEqual(scatterLineChart.yAxisRanges[undefined].max, 2);
                 });
 
                 test("omits null points by default", function() {
-                    equals(scatterLineChart.points[2], null);
+                    equal(scatterLineChart.points[2], null);
                 });
 
                 test("omits null points when interpolating", function() {
@@ -246,15 +246,15 @@
                         ]
                     });
 
-                    equals(scatterLineChart.points[2], null);
+                    equal(scatterLineChart.points[2], null);
                 });
 
                 test("point with missing X value is omitted", function() {
-                    equals(scatterLineChart.points[5], null);
+                    equal(scatterLineChart.points[5], null);
                 });
 
                 test("point with missing Y value is omitted", function() {
-                    equals(scatterLineChart.points[6], null);
+                    equal(scatterLineChart.points[6], null);
                 });
 
                 // ------------------------------------------------------------
@@ -278,31 +278,31 @@
                 });
 
                 test("sets line width", function() {
-                    equals(view.log.path[0].style.strokeWidth, 4);
+                    equal(view.log.path[0].style.strokeWidth, 4);
                 });
 
                 test("sets line color", function() {
-                    equals(view.log.path[0].style.stroke, "#cf0");
+                    equal(view.log.path[0].style.stroke, "#cf0");
                 });
 
                 test("sets line opacity", function() {
-                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                    equal(view.log.path[0].style.strokeOpacity, 0.5);
                 });
 
                 test("sets line dashType", function() {
-                    equals(view.log.path[0].style.dashType, "dot");
+                    equal(view.log.path[0].style.dashType, "dot");
                 });
 
                 test("line has same model id as its segment", function() {
-                    equals(view.log.path[0].style.data.modelId, scatterLineChart._segments[0].options.modelId);
+                    equal(view.log.path[0].style.data.modelId, scatterLineChart._segments[0].options.modelId);
                 });
 
                 test("renders line chart group", function() {
-                    equals(view.log.group.length, 1);
+                    equal(view.log.group.length, 1);
                 });
 
                 test("sets group animation", function() {
-                    equals(view.log.group[0].options.animation.type, "clip");
+                    equal(view.log.group[0].options.animation.type, "clip");
                 });
 
                 // ------------------------------------------------------------
@@ -319,7 +319,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 1.5, 1 ], [ 2.5, 0 ]
                     ]);
                 });
@@ -331,7 +331,7 @@
                         ]
                     });
 
-                    equals(view.log.path.length, 1);
+                    equal(view.log.path.length, 1);
                 });
 
                 test("line continues after missing value", function() {
@@ -342,7 +342,7 @@
                         }]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 1.5, 1 ], [ 2.5, 0 ]
                     ]);
                 });
@@ -354,7 +354,7 @@
                         ]
                     });
 
-                    same(pointCoordinates, [
+                    deepEqual(pointCoordinates, [
                         [ 1.5, 1 ], [ 2.5, 0 ], [ 2.5, 0 ]
                     ]);
                 });
@@ -375,7 +375,7 @@
                         }]
                     });
 
-                    equals(view.log.text[0].content, "$1.00 $10.00");
+                    equal(view.log.text[0].content, "$1.00 $10.00");
                 });
 
             })();

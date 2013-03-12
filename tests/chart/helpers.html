@@ -37,25 +37,25 @@
             test("clone copies coordinates", function() {
                 var clone = box.clone();
 
-                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                deepEqual([clone.x1, clone.y1, clone.x2, clone.y2],
                      [box.x1, box.y1, box.x2, box.y2]);
             });
 
             test("getHash returns hash code", function() {
-                equals(box.getHash(), "0,0,20,20");
+                equal(box.getHash(), "0,0,20,20");
             });
 
             test("translate on x-axis", function() {
                 var clone = box.clone().translate(10, 0);
 
-                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                deepEqual([clone.x1, clone.y1, clone.x2, clone.y2],
                      [box.x1 + 10, box.y1, box.x2 + 10, box.y2]);
             });
 
             test("translate y-axis", function() {
                 var clone = box.clone().translate(0, 10);
 
-                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                deepEqual([clone.x1, clone.y1, clone.x2, clone.y2],
                      [box.x1, box.y1 + 10, box.x2, box.y2 + 10]);
             });
 
@@ -65,7 +65,7 @@
 
             test("wrap increases box size to fit target box", function() {
                 box.wrap(targetBox);
-                same([box.x1, box.y1, box.x2, box.y2], [0, 0, 40, 40]);
+                deepEqual([box.x1, box.y1, box.x2, box.y2], [0, 0, 40, 40]);
             });
 
             test("wrap returns box instance", function() {
@@ -74,7 +74,7 @@
 
             test("wrapPoint increases box size to fit point", function() {
                 box.wrapPoint(new Point2D(40, 40));
-                same([box.x1, box.y1, box.x2, box.y2], [0, 0, 40, 40]);
+                deepEqual([box.x1, box.y1, box.x2, box.y2], [0, 0, 40, 40]);
             });
 
             test("wrapPoint returns box instance", function() {
@@ -84,26 +84,26 @@
             test("snapTo moves box to target location", function() {
                 box.snapTo(targetBox);
 
-                same([box.x1, box.y1], [targetBox.x1, targetBox.y1]);
+                deepEqual([box.x1, box.y1], [targetBox.x1, targetBox.y1]);
             });
 
             test("snapTo updates dimensions to match target", function() {
                 box.snapTo(targetBox);
 
-                same([box.width(), box.height()], [targetBox.width(), targetBox.height()]);
+                deepEqual([box.width(), box.height()], [targetBox.width(), targetBox.height()]);
             });
 
             test("snapTo on x-axis updates only x coordinates", function() {
                 var clone = box.clone().snapTo(targetBox, "x");
 
-                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                deepEqual([clone.x1, clone.y1, clone.x2, clone.y2],
                      [targetBox.x1, box.y1, targetBox.x2, box.y2]);
             });
 
             test("snapTo on y-axis updates only y coordinates", function() {
                 var clone = box.clone().snapTo(targetBox, "y");
 
-                same([clone.x1, clone.y1, clone.x2, clone.y2],
+                deepEqual([clone.x1, clone.y1, clone.x2, clone.y2],
                      [box.x1, targetBox.y1, box.x2, targetBox.y2]);
             });
 
@@ -264,15 +264,15 @@
             });
 
             test("center returns x center", function() {
-                equals(box.center().x, 10);
+                equal(box.center().x, 10);
             });
 
             test("center returns y center", function() {
-                equals(box.center().y, 10);
+                equal(box.center().y, 10);
             });
 
             test("points returns box points", function() {
-                same($.map(box.points(), function(point) {
+                deepEqual($.map(box.points(), function(point) {
                     return [[point.x, point.y]];
                 }), [
                     [0, 0], [20, 0], [20, 20], [0, 20]
@@ -289,19 +289,19 @@
             });
 
             test("constructor sets x", function() {
-                equals(point.x, 10);
+                equal(point.x, 10);
             });
 
             test("constructor sets y", function() {
-                equals(point.y, 20);
+                equal(point.y, 20);
             });
 
             test("x defaults to 0", function() {
-                equals(new Point2D().x, 0);
+                equal(new Point2D().x, 0);
             });
 
             test("y defaults to 0", function() {
-                equals(new Point2D().y, 0);
+                equal(new Point2D().y, 0);
             });
 
             (function() {
@@ -314,19 +314,19 @@
                 });
 
                 test("constructor sets center", function() {
-                    same([sector.c.x, sector.c.y], [10, 20]);
+                    deepEqual([sector.c.x, sector.c.y], [10, 20]);
                 });
 
                 test("constructor sets radius", function() {
-                    equals(sector.r, 30);
+                    equal(sector.r, 30);
                 });
 
                 test("constructor sets start angle", function() {
-                    equals(sector.startAngle, 90);
+                    equal(sector.startAngle, 90);
                 });
 
                 test("constructor sets angle", function() {
-                    equals(sector.angle, 180);
+                    equal(sector.angle, 180);
                 });
 
                 test("clone returns new sector instance", function() {
@@ -335,16 +335,16 @@
                 });
 
                 test("expand returns same instance", function() {
-                    equals(sector.expand(100), sector);
+                    equal(sector.expand(100), sector);
                 });
 
                 test("expand increases radius", function() {
-                    equals(sector.expand(100).r, 130);
+                    equal(sector.expand(100).r, 130);
                 });
 
                 test("point returns intersection point for angle", function() {
                     var point = sector.point(180);
-                    same([point.x, point.y], [40, 20])
+                    deepEqual([point.x, point.y], [40, 20])
                 });
             })();
 
@@ -358,20 +358,20 @@
                 });
 
                 test("constructor sets center", function() {
-                    same([ring.c.x, ring.c.y], [100, 200]);
+                    deepEqual([ring.c.x, ring.c.y], [100, 200]);
                 });
 
                 test("constructor sets radii", function() {
-                    equals(ring.ir, 20);
-                    equals(ring.r, 30);
+                    equal(ring.ir, 20);
+                    equal(ring.r, 30);
                 });
 
                 test("constructor sets start angle", function() {
-                    equals(ring.startAngle, 90);
+                    equal(ring.startAngle, 90);
                 });
 
                 test("constructor sets angle", function() {
-                    equals(ring.angle, 180);
+                    equal(ring.angle, 180);
                 });
 
                 test("clone returns new ring instance", function() {
@@ -379,12 +379,12 @@
                 });
 
                 test("middle returns middle angle", function() {
-                    equals(ring.middle(), 180);
+                    equal(ring.middle(), 180);
                 });
 
                 test("point returns intersection point for angle", function() {
                     var point = ring.point(180);
-                    same([point.x, point.y], [130, 200])
+                    deepEqual([point.x, point.y], [130, 200])
                 });
 
                 test("calculates inner point correctly", function() {
@@ -407,7 +407,7 @@
                 });
 
                 test("constructor sets origin", function() {
-                    same([pin.origin.x, pin.origin.y], [100, 200]);
+                    deepEqual([pin.origin.x, pin.origin.y], [100, 200]);
                 });
             })();
 
@@ -418,54 +418,54 @@
 
             test("assumes black when parsing undefined", function() {
                 var c = new Color(undefined);
-                equals(c.toHex(), "#000000");
+                equal(c.toHex(), "#000000");
             });
 
             test("parses #xxyyzz", function() {
                 var c = new Color("#aabbcc");
-                equals(c.toHex(), "#aabbcc");
+                equal(c.toHex(), "#aabbcc");
             });
 
             test("parses #xyz", function() {
                 var c = new Color("#abc");
-                equals(c.toHex(), "#aabbcc");
+                equal(c.toHex(), "#aabbcc");
             });
 
             test("parses rgb(x, y, z)", function() {
                 var c = new Color("rgb(170, 187, 204)");
-                equals(c.toHex(), "#aabbcc");
+                equal(c.toHex(), "#aabbcc");
             });
 
             test("normalizes rgb(x, y, z)", function() {
                 var c = new Color("rgb(0, 400, 500)");
-                equals(c.toHex(), "#00ffff");
+                equal(c.toHex(), "#00ffff");
             });
 
             test("parses named color", function() {
                 var c = new Color("tomato");
-                equals(c.toHex(), "#ff6347");
+                equal(c.toHex(), "#ff6347");
             });
 
             test("accepts rgb values", function() {
                 var c = new Color(0, 255, 255);
-                equals(c.toHex(), "#00ffff");
+                equal(c.toHex(), "#00ffff");
             });
 
             test("brightness lightens colors", function() {
                 var c = new Color(100, 100, 240).brightness(1.2);
-                equals(c.toHex(), "#7878ff");
+                equal(c.toHex(), "#7878ff");
             });
 
             test("brightness darkens colors", function() {
                 var c = new Color(100, 100, 0).brightness(0.2);
-                equals(c.toHex(), "#141400");
+                equal(c.toHex(), "#141400");
             });
 
             // ------------------------------------------------------------
             module("blendColors");
 
             test("#fff, #99c62a with alpha 0.2 => #add155", function() {
-                equals(dataviz.blendColors("#99c62a", "#fff", 0.2), "#add155");
+                equal(dataviz.blendColors("#99c62a", "#fff", 0.2), "#add155");
             });
 
             // ------------------------------------------------------------
@@ -487,7 +487,7 @@
             test("blend over #99c62a with alpha 0.2", function() {
                 var result = blendGradient("#99c62a", gradient);
 
-                same(result.stops[0], {
+                deepEqual(result.stops[0], {
                     offset: 0.05,
                     color: "#add155",
                     opacity: 0
@@ -506,39 +506,39 @@
             });
 
             test("floorDate rounds date down to years", function() {
-                same(floorDate(date, "years"), new Date("2012/01/01 00:00"));
+                deepEqual(floorDate(date, "years"), new Date("2012/01/01 00:00"));
             });
 
             test("floorDate rounds date down to months", function() {
-                same(floorDate(date, "months"), new Date("2012/03/01 00:00"));
+                deepEqual(floorDate(date, "months"), new Date("2012/03/01 00:00"));
             });
 
             test("floorDate rounds date down to weeks", function() {
-                same(floorDate(date, "weeks"), new Date("2012/03/25 00:00"));
+                deepEqual(floorDate(date, "weeks"), new Date("2012/03/25 00:00"));
             });
 
             test("floorDate rounds date down to weeks with custom week start", function() {
-                same(floorDate(date, "weeks", kendo.days.Monday), new Date("2012/03/26 00:00"));
+                deepEqual(floorDate(date, "weeks", kendo.days.Monday), new Date("2012/03/26 00:00"));
             });
 
             test("floorDate rounds date down to days", function() {
-                same(floorDate(date, "days"), new Date("2012/03/29 00:00"));
+                deepEqual(floorDate(date, "days"), new Date("2012/03/29 00:00"));
             });
 
             test("floorDate rounds date down to hours", function() {
-                same(floorDate(date, "hours"), new Date("2012/03/29 17:00"));
+                deepEqual(floorDate(date, "hours"), new Date("2012/03/29 17:00"));
             });
 
             test("floorDate rounds date down to minutes", function() {
-                same(floorDate(date, "minutes"), new Date("2012/03/29 17:40"));
+                deepEqual(floorDate(date, "minutes"), new Date("2012/03/29 17:40"));
             });
 
             test("floorDate returns undefined when no date is specified", function() {
-                equals(floorDate(), undefined);
+                equal(floorDate(), undefined);
             });
 
             test("floorDate returns date when no unit is specified", function() {
-                same(floorDate(date), date);
+                deepEqual(floorDate(date), date);
             });
 
             // ------------------------------------------------------------
@@ -549,81 +549,81 @@
             });
 
             test("ceilDate rounds date up to years", function() {
-                same(ceilDate(date, "years"), new Date("2013/01/01 00:00"));
+                deepEqual(ceilDate(date, "years"), new Date("2013/01/01 00:00"));
             });
 
             test("ceilDate does not increment year for dates divisable by the baseUnit", function() {
-                same(
+                deepEqual(
                     ceilDate(new Date("2013/01/01 00:00"), "years"),
                     new Date("2013/01/01 00:00")
                 );
             });
 
             test("ceilDate rounds date up to months", function() {
-                same(ceilDate(date, "months"), new Date("2012/04/01 00:00"));
+                deepEqual(ceilDate(date, "months"), new Date("2012/04/01 00:00"));
             });
 
             test("ceilDate does not increment month for dates divisable by the baseUnit", function() {
-                same(
+                deepEqual(
                     ceilDate(new Date("2013/01/01 00:00"), "months"),
                     new Date("2013/01/01 00:00")
                 );
             });
 
             test("ceilDate rounds date up to weeks", function() {
-                same(ceilDate(date, "weeks"), new Date("2012/04/01 00:00"));
+                deepEqual(ceilDate(date, "weeks"), new Date("2012/04/01 00:00"));
             });
 
             test("ceilDate rounds date up to weeks with custom week start day", function() {
-                same(ceilDate(date, "weeks", kendo.days.Monday), new Date("2012/04/02 00:00"));
+                deepEqual(ceilDate(date, "weeks", kendo.days.Monday), new Date("2012/04/02 00:00"));
             });
 
             test("ceilDate does not increment weeks for dates divisable by the baseUnit", function() {
-                same(
+                deepEqual(
                     ceilDate(new Date("2012/03/25 00:00"), "weeks"),
                     new Date("2012/03/25 00:00")
                 );
             });
 
             test("ceilDate rounds date up to days", function() {
-                same(ceilDate(date, "days"), new Date("2012/03/30 00:00"));
+                deepEqual(ceilDate(date, "days"), new Date("2012/03/30 00:00"));
             });
 
             test("ceilDate does not increment day for dates divisable by the baseUnit", function() {
-                same(
+                deepEqual(
                     ceilDate(new Date("2013/01/01 00:00"), "days"),
                     new Date("2013/01/01 00:00")
                 );
             });
 
             test("ceilDate rounds date up to hours", function() {
-                same(ceilDate(date, "hours"), new Date("2012/03/29 18:00"));
+                deepEqual(ceilDate(date, "hours"), new Date("2012/03/29 18:00"));
             });
 
             test("ceilDate does not increment hour for dates divisable by the baseUnit", function() {
-                same(
+                deepEqual(
                     ceilDate(new Date("2013/01/01 00:00"), "hours"),
                     new Date("2013/01/01 00:00")
                 );
             });
 
             test("ceilDate rounds date up to minutes", function() {
-                same(ceilDate(date, "minutes"), new Date("2012/03/29 17:41"));
+                deepEqual(ceilDate(date, "minutes"), new Date("2012/03/29 17:41"));
             });
 
             test("ceilDate does not increment minute for dates divisable by the baseUnit", function() {
-                same(
+                deepEqual(
                     ceilDate(new Date("2013/01/01 00:00"), "minutes"),
                     new Date("2013/01/01 00:00")
                 );
             });
 
             test("ceilDate returns undefined when no date is specified", function() {
-                equals(ceilDate(), undefined);
+                equal(ceilDate(), undefined);
             });
 
             test("ceilDate returns date when no unit is specified", function() {
-                same(ceilDate(date), date);
+                deepEqual(ceilDate(date), date);
             });
 
             // ------------------------------------------------------------
@@ -634,19 +634,19 @@
             module("Date helpers / duration");
 
             test("calculates duration in years", function() {
-                equals(duration(dateA, dateB, "years"), 1);
+                equal(duration(dateA, dateB, "years"), 1);
             });
 
             test("calculates duration in months", function() {
-                equals(duration(dateA, dateB, "months"), 14);
+                equal(duration(dateA, dateB, "months"), 14);
             });
 
             test("calculates duration in days", function() {
-                equals(duration(dateA, dateB, "days"), 424);
+                equal(duration(dateA, dateB, "days"), 424);
             });
 
             test("calculates duration in days during DST transition", function() {
-                equals(duration(
+                equal(duration(
                     new Date("2012/03/24 GMT+0200 (FLE Standard Time)"),
                     new Date("2012/03/26 GMT+0300 (FLE Daylight Time)"),
                     "days"
@@ -655,11 +655,11 @@
             });
 
             test("calculates duration in hours", function() {
-                equals(duration(dateA, dateB, "hours"), 10181);
+                equal(duration(dateA, dateB, "hours"), 10181);
             });
 
             test("calculates duration in hours during DST transition", function() {
-                equals(duration(
+                equal(duration(
                     new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
                     new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)"),
                     "hours"
@@ -668,7 +668,7 @@
             });
 
             test("calculates duration in minutes", function() {
-                equals(duration(dateA, dateB, "minutes"), 610860);
+                equal(duration(dateA, dateB, "minutes"), 610860);
             });
 
             // ------------------------------------------------------------
@@ -677,35 +677,35 @@
             module("Date helpers / addDuration");
 
             test("rounds date to years", function() {
-                same(addDuration(dateA, 10, "years"), new Date("2020/01/01"));
+                deepEqual(addDuration(dateA, 10, "years"), new Date("2020/01/01"));
             });
 
             test("rounds date to months", function() {
-                same(addDuration(dateA, 15, "months"), new Date("2011/04/01"));
+                deepEqual(addDuration(dateA, 15, "months"), new Date("2011/04/01"));
             });
 
             test("rounds date to default week start (Sunday)", function() {
-                same(addDuration(dateA, 1, "weeks", 0), new Date("2010/01/03"));
+                deepEqual(addDuration(dateA, 1, "weeks", 0), new Date("2010/01/03"));
             });
 
             test("rounds date to default week start (Sunday) after adding 5 weeks", function() {
-                same(addDuration(dateA, 5, "weeks", 0), new Date("2010/01/31"));
+                deepEqual(addDuration(dateA, 5, "weeks", 0), new Date("2010/01/31"));
             });
 
             test("rounds date to custom week start", function() {
-                same(addDuration(dateA, 1, "weeks", 1), new Date("2010/01/04"));
+                deepEqual(addDuration(dateA, 1, "weeks", 1), new Date("2010/01/04"));
             });
 
             test("rounds date to custom week start after adding 5 weeks", function() {
-                same(addDuration(dateA, 5, "weeks", 1), new Date("2010/02/01"));
+                deepEqual(addDuration(dateA, 5, "weeks", 1), new Date("2010/02/01"));
             });
 
             test("rounds date to days", function() {
-                same(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
+                deepEqual(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
             });
 
             test("rounds to days during DST transition", function() {
-                same(addDuration(
+                deepEqual(addDuration(
                         new Date("2012/03/25 GMT+0200 (FLE Standard Time)"),
                         2,
                         "days"
@@ -714,11 +714,11 @@
             });
 
             test("rounds date to hours", function() {
-                same(addDuration(dateA, 24, "hours"), new Date("2010/01/02 10:00"));
+                deepEqual(addDuration(dateA, 24, "hours"), new Date("2010/01/02 10:00"));
             });
 
             test("rounds to hours during DST transition", function() {
-                same(addDuration(
+                deepEqual(addDuration(
                         new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
                         6,
                         "hours"
@@ -727,31 +727,31 @@
             });
 
             test("Adding hours skips DST start", function() {
-                same(addDuration(new Date("2012/03/25 02:00"), 1, "hours"),
+                deepEqual(addDuration(new Date("2012/03/25 02:00"), 1, "hours"),
                      new Date("2012/03/25 04:00:00")
                 );
             });
 
             test("Adding minutes skips DST start", function() {
-                same(addDuration(new Date("2012/03/25 02:00"), 60, "minutes"),
+                deepEqual(addDuration(new Date("2012/03/25 02:00"), 60, "minutes"),
                      new Date("2012/03/25 04:00:00")
                 );
             });
 
             test("Adding hours skips DST end", function() {
-                same(addDuration(new Date("2012/10/28 03:00"), 1, "hours"),
+                deepEqual(addDuration(new Date("2012/10/28 03:00"), 1, "hours"),
                      new Date("2012/10/28 04:00:00")
                 );
             });
 
             test("Adding minutes repeats DST end", function() {
-                same(addDuration(new Date("2012/10/28 02:00"), 150, "minutes"),
+                deepEqual(addDuration(new Date("2012/10/28 02:00"), 150, "minutes"),
                      new Date("2012/10/28 03:30:00")
                 );
             });
 
             test("rounds date to minutes", function() {
-                same(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
+                deepEqual(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
             });
 
             // ------------------------------------------------------------
@@ -762,49 +762,49 @@
             test("Returns date unchanged", function() {
                 var date = new Date();
 
-                same(date, toDate(date));
+                deepEqual(date, toDate(date));
             });
 
             test("Returns array of dates unchanged", function() {
                 var dates = [new Date(), new Date()];
 
-                same(dates, toDate(dates));
+                deepEqual(dates, toDate(dates));
             });
 
             test("Converts string to date", function() {
                 var date = "2012/01/01 00:00";
 
-                same(new Date(date), toDate(date));
+                deepEqual(new Date(date), toDate(date));
             });
 
             test("Converts array of strings to dates", function() {
                 var dates = ["2012/01/01 00:00", "2012/01/02 00:00"];
 
-                same([new Date(dates[0]), new Date(dates[1])], toDate(dates));
+                deepEqual([new Date(dates[0]), new Date(dates[1])], toDate(dates));
             });
 
             test("Converts time to date", function() {
                 var time = 1325368800000;
 
-                same(new Date(time), toDate(time));
+                deepEqual(new Date(time), toDate(time));
             });
 
             test("Converts array of times to dates", function() {
                 var times = [1325368800000, 1325455200000];
 
-                same([new Date(times[0]), new Date(times[1])], toDate(times));
+                deepEqual([new Date(times[0]), new Date(times[1])], toDate(times));
             });
 
             test("Converts MS JSON string to date", function() {
                 var jsonDate = "/Date(1325368800000)/";
 
-                same(new Date("2012/01/01 00:00"), toDate(jsonDate));
+                deepEqual(new Date("2012/01/01 00:00"), toDate(jsonDate));
             });
 
             test("Converts array of MS JSON strings to dates", function() {
                 var jsonDates = ["/Date(1325368800000)/", "/Date(1325455200000)/"];
 
-                same([new Date("2012/01/01 00:00"), new Date("2012/01/02 00:00")], toDate(jsonDates));
+                deepEqual([new Date("2012/01/01 00:00"), new Date("2012/01/02 00:00")], toDate(jsonDates));
             });
 
             // ------------------------------------------------------------
@@ -813,15 +813,15 @@
             module("autoFormat");
 
             test("Applies standard format with one argument", function() {
-                equals(autoFormat("{0:N2}", 1), "1.00");
+                equal(autoFormat("{0:N2}", 1), "1.00");
             });
 
             test("Applies standard format with one argument", function() {
-                equals(autoFormat("{0:N2} {1:N2}", 1, 2), "1.00 2.00");
+                equal(autoFormat("{0:N2} {1:N2}", 1, 2), "1.00 2.00");
             });
 
             test("Applies simple format", function() {
-                equals(autoFormat("N2", 1), "1.00");
+                equal(autoFormat("N2", 1), "1.00");
             });
 
             (function() {
@@ -832,23 +832,23 @@
                 module("Aggregates");
 
                 test("min", function() {
-                    equals(Aggregates.min(values), 1);
+                    equal(Aggregates.min(values), 1);
                 });
 
                 test("max", function() {
-                    equals(Aggregates.max(values), 3);
+                    equal(Aggregates.max(values), 3);
                 });
 
                 test("sum", function() {
-                    equals(Aggregates.sum(values), 6);
+                    equal(Aggregates.sum(values), 6);
                 });
 
                 test("avg", function() {
-                    equals(Aggregates.avg(values), 2);
+                    equal(Aggregates.avg(values), 2);
                 });
 
                 test("count", function() {
-                    equals(Aggregates.count(values), 3);
+                    equal(Aggregates.count(values), 3);
                 });
             })();
 
@@ -876,14 +876,14 @@
 
                 test("sparseArrayLimits ignores undefined values", function() {
                     var l = dataviz.sparseArrayLimits([1, undefined, 2]);
-                    equals(l.min, 1);
-                    equals(l.max, 2);
+                    equal(l.min, 1);
+                    equal(l.max, 2);
                 });
 
                 test("sparseArrayLimits returns undefined for empty array", function() {
                     var l = dataviz.sparseArrayLimits([]);
-                    equals(l.min, undefined);
-                    equals(l.max, undefined)
+                    equal(l.min, undefined);
+                    equal(l.max, undefined)
                 });
 
             })();
@@ -902,68 +902,68 @@
                 });
 
                 test("put sets head", function() {
-                    same(lru._head.value, 1);
+                    deepEqual(lru._head.value, 1);
                 });
 
                 test("put sets tail", function() {
-                    same(lru._tail.value, 3);
+                    deepEqual(lru._tail.value, 3);
                 });
 
                 test("put sets newer ref", function() {
-                    equals(lru._head.newer.value, 2);
+                    equal(lru._head.newer.value, 2);
                 });
 
                 test("put sets older ref", function() {
-                    equals(lru._tail.older.value, 2);
+                    equal(lru._tail.older.value, 2);
                 });
 
                 test("put does not clean last element if within size", function() {
                     lru.put("d", 4);
-                    equals(lru._head.value, 1);
+                    equal(lru._head.value, 1);
                 });
 
                 test("put cleans last element if exceeding size", function() {
                     lru.put("d", 4);
                     lru.put("e", 5);
-                    equals(lru._head.value, 2);
-                    same(lru._head.older, null);
-                    same(lru._map["a"], null);
+                    equal(lru._head.value, 2);
+                    deepEqual(lru._head.older, null);
+                    deepEqual(lru._map["a"], null);
                 });
 
                 test("get retrieves value by key", function() {
-                    equals(lru.get("a"), 1);
+                    equal(lru.get("a"), 1);
                 });
 
                 test("get retrieves single value", function() {
                     lru = new dataviz.LRUCache(1);
                     lru.put("a", 1);
-                    equals(lru.get("a"), 1);
+                    equal(lru.get("a"), 1);
                 });
 
                 test("get moves head to tail", function() {
-                    equals(lru.get("a"), 1);
-                    equals(lru._tail.value, 1);
+                    equal(lru.get("a"), 1);
+                    equal(lru._tail.value, 1);
                 });
 
                 test("get patches head reference", function() {
-                    equals(lru.get("a"), 1);
-                    equals(lru._head.value, 2);
-                    equals(lru._head.older, null);
+                    equal(lru.get("a"), 1);
+                    equal(lru._head.value, 2);
+                    equal(lru._head.older, null);
                 });
 
                 test("get moves middle to tail", function() {
-                    equals(lru.get("b"), 2);
-                    equals(lru._tail.value, 2);
+                    equal(lru.get("b"), 2);
+                    equal(lru._tail.value, 2);
                 });
 
                 test("get patches middle references", function() {
-                    equals(lru.get("b"), 2);
-                    same(lru._head.newer.older, lru._head);
+                    equal(lru.get("b"), 2);
+                    deepEqual(lru._head.newer.older, lru._head);
                 });
 
                 test("get keeps tail in place", function() {
-                    equals(lru.get("c"), 3);
-                    equals(lru._tail.value, 3);
+                    equal(lru.get("c"), 3);
+                    equal(lru._tail.value, 3);
                 });
             })();
 
@@ -978,14 +978,14 @@
                 });
 
                 test("returns ascending IDs", function() {
-                    equals(pool.alloc(), "k100");
-                    equals(pool.alloc(), "k101");
+                    equal(pool.alloc(), "k100");
+                    equal(pool.alloc(), "k101");
                 });
 
                 test("reuses IDs", function() {
                     var id = pool.alloc();
                     pool.free(id);
-                    equals(pool.alloc(), id);
+                    equal(pool.alloc(), id);
                 });
 
                 test("pool does not grow beyond max size", function() {
@@ -993,7 +993,7 @@
                         pool.free("id" + i);
                     }
 
-                    equals(pool._pool.length, 3);
+                    equal(pool._pool.length, 3);
                 });
 
                 test("pool does not accept duplicates", function() {

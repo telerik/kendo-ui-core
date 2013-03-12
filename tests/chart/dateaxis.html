@@ -62,7 +62,7 @@
                         baseUnit: "days"
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Default base unit is days", function() {
@@ -72,7 +72,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Setting base unit to 'default' selects one based on minimum difference", function() {
@@ -83,7 +83,7 @@
                         baseUnit: "default"
                     });
 
-                    equals(dateAxis.options.baseUnit, "minutes");
+                    equal(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("Empty base unit interpreted as 'default'", function() {
@@ -94,7 +94,7 @@
                         baseUnit: ""
                     });
 
-                    equals(dateAxis.options.baseUnit, "months");
+                    equal(dateAxis.options.baseUnit, "months");
                 });
 
                 test("Invalid base unit interpreted as 'default'", function() {
@@ -105,7 +105,7 @@
                         baseUnit: "fortnight"
                     });
 
-                    equals(dateAxis.options.baseUnit, "minutes");
+                    equal(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("Min date can be parsed from string", function() {
@@ -116,7 +116,7 @@
                         min: "2012/02/01"
                     });
 
-                    same(dateAxis.options.min, new Date("2012/02/01 00:00"));
+                    deepEqual(dateAxis.options.min, new Date("2012/02/01 00:00"));
                 });
 
                 test("Max date can be parsed from string", function() {
@@ -127,7 +127,7 @@
                         max: "2012/02/15"
                     });
 
-                    same(dateAxis.options.max, new Date("2012/02/15 00:00"));
+                    deepEqual(dateAxis.options.max, new Date("2012/02/15 00:00"));
                 });
 
                 test("No categories", function() {
@@ -143,7 +143,7 @@
                         baseUnitStep: 3
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/01"), new Date("2012/02/04"),
                         new Date("2012/02/07")
                     ]);
@@ -158,7 +158,7 @@
                         baseUnitStep: 3
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/01"), new Date("2012/02/04")
                     ]);
                 });
@@ -173,7 +173,7 @@
                         baseUnitStep: 3
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/01"), new Date("2012/02/04"),
                         new Date("2012/02/07")
                     ]);
@@ -188,7 +188,7 @@
                         maxDateGroups: 3
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/01"), new Date("2012/02/04"),
                         new Date("2012/02/07")
                     ]);
@@ -203,7 +203,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "minutes");
+                    equal(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("maxDateGroups defaults to 10", function() {
@@ -214,7 +214,7 @@
                         baseUnit: "fit"
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 1);
+                    equal(dateAxis.options.baseUnitStep, 1);
 
                     createDateCategoryAxis({
                         categories: [
@@ -223,7 +223,7 @@
                         baseUnit: "fit"
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -240,7 +240,7 @@
                         ]
                     });
 
-                    same(dateAxis.categoryMap, [[0, 1]]);
+                    deepEqual(dateAxis.categoryMap, [[0, 1]]);
                 });
 
                 test("categoryMap for sparse categories", function() {
@@ -250,7 +250,7 @@
                         ]
                     });
 
-                    same(dateAxis.categoryMap, [[0], [], [1]]);
+                    deepEqual(dateAxis.categoryMap, [[0], [], [1]]);
                 });
 
                 test("categoryMap when rounding is disabled", function() {
@@ -261,7 +261,7 @@
                         roundToBaseUnit: false
                     });
 
-                    same(dateAxis.categoryMap, [[0], [], [], [], [1]]);
+                    deepEqual(dateAxis.categoryMap, [[0], [], [], [], [1]]);
                 });
 
                 test("categoryMap when rounding is disabled (justified)", function() {
@@ -273,7 +273,7 @@
                         justified: true
                     });
 
-                    same(dateAxis.categoryMap, [[0], [], [], [], [], [1]]);
+                    deepEqual(dateAxis.categoryMap, [[0], [], [], [], [], [1]]);
                 });
 
                 // ------------------------------------------------------------
@@ -288,11 +288,11 @@
                 });
 
                 test("Min equals first category by default", function() {
-                    same(dateAxis.options.min, categories[0]);
+                    deepEqual(dateAxis.options.min, categories[0]);
                 });
 
                 test("Max equals last category by default", function() {
-                    same(dateAxis.options.max, categories[categories.length - 1]);
+                    deepEqual(dateAxis.options.max, categories[categories.length - 1]);
                 });
 
                 test("User set min value is trimmed to base unit", function() {
@@ -303,7 +303,7 @@
                         min: new Date("2012/02/01 14:00")
                     });
 
-                    same(dateAxis.options.min, new Date("2012/02/01"));
+                    deepEqual(dateAxis.options.min, new Date("2012/02/01"));
                 });
 
                 test("User set max value is trimmed to base unit", function() {
@@ -314,7 +314,7 @@
                         max: new Date("2012/02/15 14:00")
                     });
 
-                    same(dateAxis.options.max, new Date("2012/02/15"));
+                    deepEqual(dateAxis.options.max, new Date("2012/02/15"));
                 });
 
                 test("User set min value smaller than first category is applied", function() {
@@ -325,7 +325,7 @@
                         min: new Date("2012/02/04")
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/04"), new Date("2012/02/05"),
                         new Date("2012/02/06")
                     ]);
@@ -339,7 +339,7 @@
                         min: new Date("2012/02/06")
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/06")
                     ]);
                 });
@@ -352,7 +352,7 @@
                         max: new Date("2012/02/05")
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/05")
                     ]);
                 });
@@ -366,7 +366,7 @@
                         roundToBaseUnit: false
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/05")
                     ]);
                 });
@@ -379,7 +379,7 @@
                         max: new Date("2012/02/07")
                     });
 
-                    same(categories, [
+                    deepEqual(categories, [
                         new Date("2012/02/05"), new Date("2012/02/06"),
                         new Date("2012/02/07")
                     ]);
@@ -395,7 +395,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "minutes");
+                    equal(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("creates labels with default format", function() {
@@ -405,7 +405,7 @@
                         ]
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["10:00", "10:01", "10:02"]);
                 });
 
@@ -418,7 +418,7 @@
                         maxDateGroups: 6
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit step is calculated when outside of preset values", function() {
@@ -431,7 +431,7 @@
                         maxDateGroups: 6
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit (hours) is chosen according to maxDateGroups", function() {
@@ -444,7 +444,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "hours");
+                    equal(dateAxis.options.baseUnit, "hours");
                 });
 
                 test("maxDateGroups keeps user set base unit", function() {
@@ -457,7 +457,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "minutes");
+                    equal(dateAxis.options.baseUnit, "minutes");
                 });
 
                 test("maxDateGroups constraint has lower priority than base unit step", function() {
@@ -469,7 +469,7 @@
                         baseUnitStep: 1
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 1);
+                    equal(dateAxis.options.baseUnitStep, 1);
                 });
 
                 // ------------------------------------------------------------
@@ -483,7 +483,7 @@
                         roundToBaseUnit: false
                     });
 
-                    same(dateAxis.getMajorTickPositions(),
+                    deepEqual(dateAxis.getMajorTickPositions(),
                         [0, 88, 321, 555, 789, 799], 1);
                 });
 
@@ -495,7 +495,7 @@
                         roundToBaseUnit: false
                     });
 
-                    same(dateAxis.getMajorTickPositions(),
+                    deepEqual(dateAxis.getMajorTickPositions(),
                         [0, 200, 400, 600, 800], 1);
                 });
 
@@ -514,7 +514,7 @@
                         roundToBaseUnit: false
                     });
 
-                    same(dataviz.last(dateAxis.options.categories), new Date("2012/03/01"));
+                    deepEqual(dataviz.last(dateAxis.options.categories), new Date("2012/03/01"));
                 });
 
                 // ------------------------------------------------------------
@@ -529,7 +529,7 @@
                         justified: true
                     });
 
-                    equals(dateAxis.labels[0].options.visible, false);
+                    equal(dateAxis.labels[0].options.visible, false);
                 });
 
                 // ------------------------------------------------------------
@@ -544,7 +544,7 @@
                         reverse: true
                     });
 
-                    same(dateAxis.getMajorTickPositions(),
+                    deepEqual(dateAxis.getMajorTickPositions(),
                         [799, 711, 477, 243, 10, 0], 1);
                 });
 
@@ -558,7 +558,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "hours");
+                    equal(dateAxis.options.baseUnit, "hours");
                 });
 
                 test("automatic base unit step is chosen according to maxDateGroups", function() {
@@ -570,7 +570,7 @@
                         maxDateGroups: 10
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit step is calculated when outside of preset values", function() {
@@ -583,7 +583,7 @@
                         maxDateGroups: 10
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit (days) is chosen according to maxDateGroups", function() {
@@ -596,7 +596,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 // ------------------------------------------------------------
@@ -609,7 +609,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Base unit is determined by series delta (DST boundary)", function() {
@@ -619,7 +619,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Base unit is determined by series delta (month boundary)", function() {
@@ -629,7 +629,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Base unit is determined by series delta (year boundary)", function() {
@@ -639,7 +639,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Base unit is determined by minimum series delta", function() {
@@ -649,7 +649,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Base unit calculation ignores repeating categories", function() {
@@ -659,7 +659,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("creates labels with default format", function() {
@@ -669,7 +669,7 @@
                         ]
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2/1", "2/2", "2/3"]);
                 });
 
@@ -681,7 +681,7 @@
                         ]
                     });
 
-                    same(dateAxis.labels[0].dataItem, "a");
+                    deepEqual(dateAxis.labels[0].dataItem, "a");
                 });
 
                 test("creates labels with custom date format", function() {
@@ -696,7 +696,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2/1/12", "2/2/12", "2/3/12"]);
                 });
 
@@ -710,7 +710,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2/1/12", "2/2/12", "2/3/12"]);
                 });
 
@@ -725,7 +725,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1.feb", "2.feb", "3.feb"]);
                 });
 
@@ -739,7 +739,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2012", "2012", "2012"]);
                 });
 
@@ -752,7 +752,7 @@
                         maxDateGroups: 3
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit step is calculated when outside of preset values", function() {
@@ -765,7 +765,7 @@
                         maxDateGroups: 3
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit (weeks) is chosen according to maxDateGroups", function() {
@@ -778,7 +778,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "weeks");
+                    equal(dateAxis.options.baseUnit, "weeks");
                 });
 
                 // ------------------------------------------------------------
@@ -791,7 +791,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "weeks");
+                    equal(dateAxis.options.baseUnit, "weeks");
                 });
 
                 test("creates labels with default format", function() {
@@ -801,7 +801,7 @@
                         ]
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/1", "1/8", "1/15"]);
                 });
 
@@ -817,7 +817,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/12", "1/8/12", "1/15/12"]);
                 });
 
@@ -829,7 +829,7 @@
                         weekStartDay: kendo.days.Monday
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["12/26", "1/2", "1/9"]);
                 });
 
@@ -842,7 +842,7 @@
                         maxDateGroups: 2
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit step is calculated when outside of preset values", function() {
@@ -855,7 +855,7 @@
                         maxDateGroups: 2
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit (months) is chosen according to maxDateGroups", function() {
@@ -868,7 +868,7 @@
                         maxDateGroups: 2
                     });
 
-                    equals(dateAxis.options.baseUnit, "months");
+                    equal(dateAxis.options.baseUnit, "months");
                 });
 
                 // ------------------------------------------------------------
@@ -881,7 +881,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "months");
+                    equal(dateAxis.options.baseUnit, "months");
                 });
 
                 test("Base unit is set to months when range extends to next month end", function() {
@@ -891,7 +891,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "months");
+                    equal(dateAxis.options.baseUnit, "months");
                 });
 
                 test("Base unit is set to months when series delta is 1 month - 3 days", function() {
@@ -901,7 +901,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "months");
+                    equal(dateAxis.options.baseUnit, "months");
                 });
 
                 test("creates labels with default format", function() {
@@ -911,7 +911,7 @@
                         ]
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Jan '12", "Feb '12"]);
                 });
 
@@ -927,7 +927,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/12", "2/1/12"]);
                 });
 
@@ -940,7 +940,7 @@
                         maxDateGroups: 3
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit step is calculated when outside of preset values", function() {
@@ -953,7 +953,7 @@
                         maxDateGroups: 3
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit (years) is chosen according to maxDateGroups", function() {
@@ -966,7 +966,7 @@
                         maxDateGroups: 5
                     });
 
-                    equals(dateAxis.options.baseUnit, "years");
+                    equal(dateAxis.options.baseUnit, "years");
                 });
 
                 // ------------------------------------------------------------
@@ -979,7 +979,7 @@
                         ]
                     });
 
-                    equals(dateAxis.options.baseUnit, "years");
+                    equal(dateAxis.options.baseUnit, "years");
                 });
 
                 test("creates labels with default format", function() {
@@ -989,7 +989,7 @@
                         ]
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2012", "2013"]);
                 });
 
@@ -1005,7 +1005,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/12", "1/1/13"]);
                 });
 
@@ -1018,7 +1018,7 @@
                         maxDateGroups: 3
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 test("automatic base unit step is calculated when outside of preset values", function() {
@@ -1031,7 +1031,7 @@
                         maxDateGroups: 3
                     });
 
-                    equals(dateAxis.options.baseUnitStep, 2);
+                    equal(dateAxis.options.baseUnitStep, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -1120,42 +1120,42 @@
                 });
 
                 test("Returns correct first partial category (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(0, 0)),
+                    deepEqual(dateAxis.getCategory(new Point2D(0, 0)),
                            new Date("2012/02/01 15:00:00"));
                 });
 
                 test("Returns correct first partial category (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(87, 0)),
+                    deepEqual(dateAxis.getCategory(new Point2D(87, 0)),
                            new Date("2012/02/01 15:00:00"));
                 });
 
                 test("Returns correct first full slot (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(89, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(89, 0)).toString(),
                          new Date("2012/02/02 00:00:00").toString());
                 });
 
                 test("Returns correct first full slot (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(321, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(321, 0)).toString(),
                          new Date("2012/02/02 00:00:00").toString());
                 });
 
                 test("Returns correct last full slot (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(556, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(556, 0)).toString(),
                          new Date("2012/02/04 00:00:00").toString());
                 });
 
                 test("Returns correct last full slot (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(788, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(788, 0)).toString(),
                          new Date("2012/02/04 00:00:00").toString());
                 });
 
                 test("Returns correct last partial slot (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(790, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(790, 0)).toString(),
                          new Date("2012/02/05 00:00:00").toString());
                 });
 
                 test("Returns correct last partial slot (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(799, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(799, 0)).toString(),
                          new Date("2012/02/05 00:00:00").toString());
                 });
 
@@ -1173,42 +1173,42 @@
                 });
 
                 test("Returns correct first partial category (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(14, 0)),
+                    deepEqual(dateAxis.getCategory(new Point2D(14, 0)),
                            new Date("2012/02/01 15:00:00"));
                 });
 
                 test("Returns correct first partial category (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(14, 0)),
+                    deepEqual(dateAxis.getCategory(new Point2D(14, 0)),
                            new Date("2012/02/01 15:00:00"));
                 });
 
                 test("Returns correct first full slot (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(99, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(99, 0)).toString(),
                          new Date("2012/02/02 00:00:00").toString());
                 });
 
                 test("Returns correct first full slot (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(324, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(324, 0)).toString(),
                          new Date("2012/02/03 00:00:00").toString());
                 });
 
                 test("Returns correct last full slot (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(551, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(551, 0)).toString(),
                          new Date("2012/02/04 00:00:00").toString());
                 });
 
                 test("Returns correct last full slot (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(776, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(776, 0)).toString(),
                          new Date("2012/02/05 00:00:00").toString());
                 });
 
                 test("Returns correct last partial slot (left edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(778, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(778, 0)).toString(),
                          new Date("2012/02/05 00:00:00").toString());
                 });
 
                 test("Returns correct last partial slot (right edge)", function() {
-                    same(dateAxis.getCategory(new Point2D(785, 0)).toString(),
+                    deepEqual(dateAxis.getCategory(new Point2D(785, 0)).toString(),
                          new Date("2012/02/05 01:00:00").toString());
                 });
 
@@ -1231,7 +1231,7 @@
                 });
 
                 test("returns date", function() {
-                    same(categoryAxis.getCategory(new Point2D(0, 0)), new Date("2012/01/01"));
+                    deepEqual(categoryAxis.getCategory(new Point2D(0, 0)), new Date("2012/01/01"));
                 });
 
             })();
@@ -1256,7 +1256,7 @@
                             min: "2012/02/01"
                     });
 
-                    same(new Date(dateAxis.options.min), new Date("2012/02/01"));
+                    deepEqual(new Date(dateAxis.options.min), new Date("2012/02/01"));
                 });
 
                 test("Max date can be parsed from string", function() {
@@ -1265,7 +1265,7 @@
                             max: "2012/02/29"
                     });
 
-                    same(new Date(dateAxis.options.max), new Date("2012/02/29"));
+                    deepEqual(new Date(dateAxis.options.max), new Date("2012/02/29"));
                 });
 
                 test("Axis crossing value can be parsed from string", function() {
@@ -1274,7 +1274,7 @@
                             axisCrossingValue: "2012/02/29"
                     });
 
-                    same(new Date(dateAxis.options.axisCrossingValue), new Date("2012/02/29"));
+                    deepEqual(new Date(dateAxis.options.axisCrossingValue), new Date("2012/02/29"));
                 });
 
                 test("Axis crossing values can be parsed from string array", function() {
@@ -1283,7 +1283,7 @@
                             axisCrossingValue: ["2012/02/28", "2012/02/29"]
                     });
 
-                    same(dateAxis.options.axisCrossingValue,
+                    deepEqual(dateAxis.options.axisCrossingValue,
                         [new Date("2012/02/28"), new Date("2012/02/29")]
                     );
                 });
@@ -1294,19 +1294,19 @@
                             axisCrossingValues: ["2012/02/28", "2012/02/29"]
                     });
 
-                    same(dateAxis.options.axisCrossingValue,
+                    deepEqual(dateAxis.options.axisCrossingValue,
                         [new Date("2012/02/28"), new Date("2012/02/29")]
                     );
                 });
 
                 test("Major ticks count is correct", function() {
                     createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"));
-                    equals(dateAxis.getMajorTickPositions().length, 5);
+                    equal(dateAxis.getMajorTickPositions().length, 5);
                 });
 
                 test("Minor ticks count is correct", function() {
                     createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/06"));
-                    equals(dateAxis.getMinorTickPositions().length, 21);
+                    equal(dateAxis.getMinorTickPositions().length, 21);
                 });
 
                 test("User set empty base unit defaults to automatic", function() {
@@ -1314,7 +1314,7 @@
                         baseUnit: ""
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 // ------------------------------------------------------------
@@ -1323,7 +1323,7 @@
                 test("Returns slot from date string", function() {
                     createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
 
-                    same(dateAxis.getSlot("2012/02/01", "2012/02/02"),
+                    deepEqual(dateAxis.getSlot("2012/02/01", "2012/02/02"),
                          dateAxis.getSlot(new Date("2012/02/01"), new Date("2012/02/02")));
                 });
 
@@ -1336,26 +1336,26 @@
 
                 test("translateRange with negative delta", function() {
                     var range = dateAxis.translateRange(-2);
-                    same(range.min, new Date("2012/01/22"));
-                    same(range.max, new Date("2012/02/05"));
+                    deepEqual(range.min, new Date("2012/01/22"));
+                    deepEqual(range.max, new Date("2012/02/05"));
                 });
 
                 test("translateRange with positive delta", function() {
                     var range = dateAxis.translateRange(2);
-                    same(range.min, new Date("2012/01/29"));
-                    same(range.max, new Date("2012/02/12"));
+                    deepEqual(range.min, new Date("2012/01/29"));
+                    deepEqual(range.max, new Date("2012/02/12"));
                 });
 
                 test("scaleRange with negative delta shrinks range", function() {
                     var range = dateAxis.scaleRange(-2);
-                    same(range.min, new Date("2012/01/15"));
-                    same(range.max, new Date("2012/02/26"));
+                    deepEqual(range.min, new Date("2012/01/15"));
+                    deepEqual(range.max, new Date("2012/02/26"));
                 });
 
                 test("scaleRange with positive delta expands range", function() {
                     var range = dateAxis.scaleRange(2);
-                    same(range.min, new Date("2012/01/29"));
-                    same(range.max, new Date("2012/02/12"));
+                    deepEqual(range.min, new Date("2012/01/29"));
+                    deepEqual(range.max, new Date("2012/02/12"));
                 });
 
                 // ------------------------------------------------------------
@@ -1366,7 +1366,7 @@
                         new Date("2012/02/01"), new Date("2012/02/06")
                     );
 
-                    equals("days", dateAxis.options.baseUnit);
+                    equal("days", dateAxis.options.baseUnit);
                 });
 
                 test("Base unit is inferred from user set min/max", function() {
@@ -1376,7 +1376,7 @@
                             max: new Date("2012/02/06")
                     });
 
-                    equals(dateAxis.options.baseUnit, "days");
+                    equal(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Base unit can be overriden", function() {
@@ -1387,7 +1387,7 @@
                             baseUnit: "days"
                     });
 
-                    equals("days", dateAxis.options.baseUnit);
+                    equal("days", dateAxis.options.baseUnit);
                 });
 
                 test("Major unit is calculated for user set min/max", function() {
@@ -1397,7 +1397,7 @@
                             max: new Date("2012/02/06")
                     });
 
-                    equals(dateAxis.options.majorUnit, 2);
+                    equal(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Major unit is calculated for user set min/max and base unit", function() {
@@ -1408,7 +1408,7 @@
                             baseUnit: "days"
                     });
 
-                    equals(dateAxis.options.majorUnit, 12);
+                    equal(dateAxis.options.majorUnit, 12);
                 });
 
                 test("Major unit is calculated for user set min and automatic max", function() {
@@ -1418,7 +1418,7 @@
                             baseUnit: "days"
                     });
 
-                    equals(dateAxis.options.majorUnit, 6);
+                    equal(dateAxis.options.majorUnit, 6);
                 });
 
                 test("Major unit is calculated for user set max and automatic min", function() {
@@ -1428,7 +1428,7 @@
                             baseUnit: "days"
                     });
 
-                    equals(dateAxis.options.majorUnit, 2);
+                    equal(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Major unit is calculated for series when user min/max are not set", function() {
@@ -1448,14 +1448,14 @@
                             majorUnit: 4
                     });
 
-                    same(dateAxis.options.max, new Date("2012/02/12"));
+                    deepEqual(dateAxis.options.max, new Date("2012/02/12"));
                 });
 
                 test("Automatic maximum is rounded to auto major unit", function() {
                     createDateValueAxis(
                         new Date("2012/02/01"), new Date("2012/02/10"));
 
-                    same(dateAxis.options.max, new Date("2012/02/12"));
+                    deepEqual(dateAxis.options.max, new Date("2012/02/12"));
                 });
 
                 test("Automatic minimum is rounded to set major unit", function() {
@@ -1465,14 +1465,14 @@
                             majorUnit: 4
                     });
 
-                    same(dateAxis.options.min, new Date("2012/01/31"));
+                    deepEqual(dateAxis.options.min, new Date("2012/01/31"));
                 });
 
                 test("Automatic minimum is rounded to auto major unit", function() {
                     createDateValueAxis(
                         new Date("2012/02/01"), new Date("2012/02/06"));
 
-                    same(dateAxis.options.min, new Date("2012/01/31"));
+                    deepEqual(dateAxis.options.min, new Date("2012/01/31"));
                 });
 
                 test("Reports range minimum equal to options.min", function() {
@@ -1481,7 +1481,7 @@
                             min: new Date("2012/02/05")
                     });
 
-                    same(dateAxis.range().min, new Date("2012/02/05"));
+                    deepEqual(dateAxis.range().min, new Date("2012/02/05"));
                 });
 
                 test("Reports range maximum equal to options.max", function() {
@@ -1490,13 +1490,13 @@
                             max: new Date("2012/02/05")
                     });
 
-                    same(dateAxis.range().max, new Date("2012/02/05"));
+                    deepEqual(dateAxis.range().max, new Date("2012/02/05"));
                 });
 
                 test("creates labels with default format", function() {
                     createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"));
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/31", "2/1", "2/2", "2/3"]);
                 });
 
@@ -1509,7 +1509,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
                 });
 
@@ -1520,7 +1520,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
                 });
 
@@ -1532,7 +1532,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["31.ene", "1.feb", "2.feb", "3.feb"]);
                 });
 
@@ -1546,7 +1546,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2012", "2012", "2012", "2012"]);
                 });
 
@@ -1561,7 +1561,7 @@
                             baseUnit: "weeks"
                     });
 
-                    equals(dateAxis.options.majorUnit, 1);
+                    equal(dateAxis.options.majorUnit, 1);
                 });
 
                 test("creates labels with default format", function() {
@@ -1569,7 +1569,7 @@
                         new Date("2012/01/01"), new Date("2012/01/15")
                     );
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["12/25", "1/1", "1/8", "1/15", "1/22"]);
                 });
 
@@ -1582,7 +1582,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["12/25/11", "1/1/12", "1/8/12", "1/15/12", "1/22/12"]);
                 });
 
@@ -1597,7 +1597,7 @@
                             baseUnit: "weeks"
                     });
 
-                    equals(dateAxis.options.majorUnit, 1);
+                    equal(dateAxis.options.majorUnit, 1);
                 });
 
                 test("creates labels with default format", function() {
@@ -1605,7 +1605,7 @@
                         new Date("2012/01/01"), new Date("2012/01/14")
                     );
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["12/25", "1/1", "1/8", "1/15"]);
                 });
 
@@ -1618,7 +1618,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["12/25/11", "1/1/12", "1/8/12", "1/15/12"]);
                 });
 
@@ -1633,7 +1633,7 @@
                             baseUnit: "months"
                     });
 
-                    equals(dateAxis.options.majorUnit, 1);
+                    equal(dateAxis.options.majorUnit, 1);
                 });
 
                 test("creates labels with default format", function() {
@@ -1641,7 +1641,7 @@
                         new Date("2012/01/01"), new Date("2012/02/01")
                     );
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Dec '11", "Jan '12", "Feb '12", "Mar '12"]);
                 });
 
@@ -1654,7 +1654,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["12/1/11", "1/1/12", "2/1/12", "3/1/12"]);
                 });
 
@@ -1669,7 +1669,7 @@
                             baseUnit: "years"
                     });
 
-                    equals(dateAxis.options.majorUnit, 1);
+                    equal(dateAxis.options.majorUnit, 1);
                 });
 
                 test("creates labels with default format", function() {
@@ -1677,7 +1677,7 @@
                         new Date("2012/01/01"), new Date("2013/02/01")
                     );
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["2011", "2012", "2013", "2014"]);
                 });
 
@@ -1690,7 +1690,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/1/11", "1/1/12", "1/1/13", "1/1/14"]);
                 });
 
@@ -1705,7 +1705,7 @@
                             baseUnit: "hours"
                     });
 
-                    equals(dateAxis.options.majorUnit, 1);
+                    equal(dateAxis.options.majorUnit, 1);
                 });
 
                 test("creates labels with default format", function() {
@@ -1713,7 +1713,7 @@
                         new Date("2012/01/01 15:00"), new Date("2012/01/01 16:00")
                     );
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["14:00", "15:00", "16:00", "17:00"]);
                 });
 
@@ -1727,7 +1727,7 @@
                         }
                     });
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["1/1 14:00", "1/1 15:00", "1/1 16:00", "1/1 17:00"]);
                 });
 
@@ -1751,23 +1751,23 @@
                 });
 
                 test("returns null for coordinates left of axis", function() {
-                    same(dateAxis.getValue(new Point2D(-1, 0)), null);
+                    deepEqual(dateAxis.getValue(new Point2D(-1, 0)), null);
                 });
 
                 test("returns null for coordinates right of axis", function() {
-                    same(dateAxis.getValue(new Point2D(1000, 0)), null);
+                    deepEqual(dateAxis.getValue(new Point2D(1000, 0)), null);
                 });
 
                 test("returns minimum value for leftmost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/01/31"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/01/31"));
                 });
 
                 test("returns maximum value for righttmost point", function() {
-                    same(dateAxis.getValue(new Point2D(799, 0)), new Date("2012/02/12"));
+                    deepEqual(dateAxis.getValue(new Point2D(799, 0)), new Date("2012/02/12"));
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(399.5, 0)), new Date("2012/02/06 00:00:00"));
+                    deepEqual(dateAxis.getValue(new Point2D(399.5, 0)), new Date("2012/02/06 00:00:00"));
                 });
 
                 // ------------------------------------------------------------
@@ -1786,15 +1786,15 @@
                 });
 
                 test("returns minimum value for righttmost point", function() {
-                    same(dateAxis.getValue(new Point2D(799, 0)), new Date("2012/01/31"));
+                    deepEqual(dateAxis.getValue(new Point2D(799, 0)), new Date("2012/01/31"));
                 });
 
                 test("returns maximum value for leftmost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/02/12"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/02/12"));
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(399.5, 0)), new Date("2012/02/06 00:00:00"));
+                    deepEqual(dateAxis.getValue(new Point2D(399.5, 0)), new Date("2012/02/06 00:00:00"));
                 });
 
                 // ------------------------------------------------------------
@@ -1811,23 +1811,23 @@
                 });
 
                 test("returns null for coordinates above the axis", function() {
-                    same(dateAxis.getValue(new Point2D(0, -1)), null);
+                    deepEqual(dateAxis.getValue(new Point2D(0, -1)), null);
                 });
 
                 test("returns null for coordinates below the axis", function() {
-                    same(dateAxis.getValue(new Point2D(0, 1000)), null);
+                    deepEqual(dateAxis.getValue(new Point2D(0, 1000)), null);
                 });
 
                 test("returns minimum value for bottommost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 599)), new Date("2012/01/31"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 599)), new Date("2012/01/31"));
                 });
 
                 test("returns maximum value for topmost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/02/12"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/02/12"));
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 299.5)), new Date("2012/02/06"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 299.5)), new Date("2012/02/06"));
                 });
 
                 // ------------------------------------------------------------
@@ -1846,15 +1846,15 @@
                 });
 
                 test("returns minimum value for topmost  point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/01/31"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/01/31"));
                 });
 
                 test("returns maximum value for bottommost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 599)), new Date("2012/02/12"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 599)), new Date("2012/02/12"));
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 299.5)), new Date("2012/02/06"));
+                    deepEqual(dateAxis.getValue(new Point2D(0, 299.5)), new Date("2012/02/06"));
                 });
             })();
 
@@ -1865,19 +1865,19 @@
                 module("lteDateIndex");
 
                 test("returns -1 if the only item is greater", function() {
-                    equals(lteDateIndex([new Date("2012/01/01")], new Date("2011/12/31")), -1);
+                    equal(lteDateIndex([new Date("2012/01/01")], new Date("2011/12/31")), -1);
                 });
 
                 test("returns the only item index if equals", function() {
-                    equals(lteDateIndex([new Date("2012/01/01")], new Date("2012/01/01")), 0);
+                    equal(lteDateIndex([new Date("2012/01/01")], new Date("2012/01/01")), 0);
                 });
 
                 test("returns the only item index if less than", function() {
-                    equals(lteDateIndex([new Date("2012/01/01")], new Date("2012/02/01")), 0);
+                    equal(lteDateIndex([new Date("2012/01/01")], new Date("2012/02/01")), 0);
                 });
 
                 test("returns nearest item index (1)", function() {
-                    equals(lteDateIndex([
+                    equal(lteDateIndex([
                             new Date("2012/01/01"),
                             new Date("2012/01/03"),
                             new Date("2012/01/05")
@@ -1887,7 +1887,7 @@
                 });
 
                 test("returns nearest item index (2)", function() {
-                    equals(lteDateIndex([
+                    equal(lteDateIndex([
                             new Date("2012/01/01"),
                             new Date("2012/01/03"),
                             new Date("2012/01/05")
@@ -1897,7 +1897,7 @@
                 });
 
                 test("returns nearest item index (3)", function() {
-                    equals(lteDateIndex([
+                    equal(lteDateIndex([
                             new Date("2012/01/01"),
                             new Date("2012/01/03"),
                             new Date("2012/01/05")

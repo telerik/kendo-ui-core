@@ -157,15 +157,15 @@
                 });
 
                 test("return legend item for each segment", function() {
-                    equals(pieChart.legendItems.length, 2);
+                    equal(pieChart.legendItems.length, 2);
                 });
 
                 test("set legend item name to category", function() {
-                    equals(pieChart.legendItems[0].name, "A");
+                    equal(pieChart.legendItems[0].name, "A");
                 });
 
                 test("set legend item color", function() {
-                    equals(pieChart.legendItems[0].color, "red");
+                    equal(pieChart.legendItems[0].color, "red");
                 });
 
                 test("skip points with visibleInLegend set to false", function() {
@@ -179,7 +179,7 @@
                         }];
 
                     setupPieChart(plotArea, { series: [ { data: data } ] });
-                    equals(pieChart.legendItems.length, 1);
+                    equal(pieChart.legendItems.length, 1);
                 });
 
                 test("set legend item name with template", function() {
@@ -192,7 +192,7 @@
                         }
                     });
 
-                    equals(pieChart.legendItems[0].name, "test");
+                    equal(pieChart.legendItems[0].name, "test");
                     setupPieChart(plotArea, { series: [ {
                         data: dataValues.data,
                         legend: {
@@ -201,7 +201,7 @@
                             }
                         }
                     } ] });
-                    equals(pieChart.legendItems[0].name, "A");
+                    equal(pieChart.legendItems[0].name, "A");
                 });
 
             })();
@@ -294,7 +294,7 @@
                             }
                         }
                     });
-                    equals($("#container").data("kendoChart")._plotArea.charts[0].legendItems[0].name, "test");
+                    equal($("#container").data("kendoChart")._plotArea.charts[0].legendItems[0].name, "test");
                 });
 
             })();
@@ -349,34 +349,34 @@
 
                 test("sets border color", function() {
                     createSegment({ border: { color: "red" } });
-                    equals(sector.style.stroke, "red");
+                    equal(sector.style.stroke, "red");
                 });
 
                 test("sets pie border width", function() {
                     createSegment({ border: { width: 4 } });
-                    equals(sector.style.strokeWidth, 4);
+                    equal(sector.style.strokeWidth, 4);
                 });
 
                 test("sets pie border opacity", function() {
                     createSegment({ border: { width: 4, opacity: 0.5 } });
-                    equals(sector.style.strokeOpacity, 0.5);
+                    equal(sector.style.strokeOpacity, 0.5);
                 });
 
                 test("tooltipAnchor is set distance from segment", function() {
                     var anchor = segment.tooltipAnchor(10, 10);
-                    same([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
+                    deepEqual([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
                 });
 
                 test("sets overlay radius", function() {
-                    equals(sector.style.overlay.r, segment.sector.r);
+                    equal(sector.style.overlay.r, segment.sector.r);
                 });
 
                 test("sets overlay cx", function() {
-                    equals(sector.style.overlay.cx, segment.sector.c.x);
+                    equal(sector.style.overlay.cx, segment.sector.c.x);
                 });
 
                 test("sets overlay cy", function() {
-                    equals(sector.style.overlay.cy, segment.sector.c.y);
+                    equal(sector.style.overlay.cy, segment.sector.c.y);
                 });
 
                 test("does not set overlay options when no overlay is defined", function() {
@@ -385,12 +385,12 @@
                 });
 
                 test("sector has same model id", function() {
-                    equals(sector.style.data.modelId, segment.options.modelId);
+                    equal(sector.style.data.modelId, segment.options.modelId);
                 });
 
                 test("label has same model id", function() {
                     createSegment({ labels: { visible: true } });
-                    equals(segment.label.options.modelId, segment.options.modelId);
+                    equal(segment.label.options.modelId, segment.options.modelId);
                 });
 
                 // ------------------------------------------------------------
@@ -403,46 +403,46 @@
 
                 test("highlightOverlay renders a sector", function() {
                     segment.highlightOverlay(view);
-                    equals(view.log.sector.length, 1);
+                    equal(view.log.sector.length, 1);
                 });
 
                 test("highlightOverlay element has same model id", function() {
                     segment.highlightOverlay(view);
-                    equals(view.log.sector[0].style.data.modelId, segment.options.modelId);
+                    equal(view.log.sector[0].style.data.modelId, segment.options.modelId);
                 });
 
                 test("highlightOverlay renders default border width", function() {
                     var outline = segment.highlightOverlay(view);
 
-                    equals(outline.options.strokeWidth, 1);
+                    equal(outline.options.strokeWidth, 1);
                 });
 
                 test("highlightOverlay renders custom border width", function() {
                     segment.options.highlight.border.width = 2;
                     var outline = segment.highlightOverlay(view);
 
-                    equals(outline.options.strokeWidth, 2);
+                    equal(outline.options.strokeWidth, 2);
                 });
 
                 test("highlightOverlay renders custom highlight color", function() {
                     segment.options.highlight.color = "red";
                     var outline = segment.highlightOverlay(view);
 
-                    equals(outline.options.fill, "red");
+                    equal(outline.options.fill, "red");
                 });
 
                 test("highlightOverlay renders custom border color", function() {
                     segment.options.highlight.border.color = "red";
                     var outline = segment.highlightOverlay(view);
 
-                    equals(outline.options.stroke, "red");
+                    equal(outline.options.stroke, "red");
                 });
 
                 test("highlightOverlay renders custom border opacity", function() {
                     segment.options.highlight.border.opacity = 0.5;
                     var outline = segment.highlightOverlay(view);
 
-                    equals(outline.options.strokeOpacity, 0.5);
+                    equal(outline.options.strokeOpacity, 0.5);
                 });
 
             })();
@@ -624,7 +624,7 @@
                         }]
                     });
 
-                    equals(view.log.text[0].content, "$1.00");
+                    equal(view.log.text[0].content, "$1.00");
                 });
 
                 test("applies simple label format", function() {
@@ -635,7 +635,7 @@
                         }]
                     });
 
-                    equals(view.log.text[0].content, "$1.00");
+                    equal(view.log.text[0].content, "$1.00");
                 });
 
                 // ------------------------------------------------------------
@@ -726,7 +726,7 @@
                 });
 
                 test("connector has same model id", function() {
-                    equals(view.log.path[0].style.data.modelId, firstSegment.options.modelId);
+                    equal(view.log.path[0].style.data.modelId, firstSegment.options.modelId);
                 });
 
                 test("start point", function() {
@@ -735,7 +735,7 @@
                         points.push([ this.points[0].x, this.points[0].y ]);
                     });
 
-                    same(points, [ [ 438.17, 59.004 ], [ 543.42, 102.6 ],
+                    deepEqual(points, [ [ 438.17, 59.004 ], [ 543.42, 102.6 ],
                                    [ 640.996, 261.83 ], [ 543.42, 497.4 ],
                                    [ 256.58, 497.4 ], [ 159.004, 261.83 ],
                                    [ 256.58, 102.6 ], [ 361.83, 59.004 ] ]);
@@ -747,7 +747,7 @@
                         points.push([ this.points[1].x, this.points[1].y ]);
                     });
 
-                    same(points, [ [ 440.467, 44.5 ], [ 552.211, 90.5 ],
+                    deepEqual(points, [ [ 440.467, 44.5 ], [ 552.211, 90.5 ],
                                    [ 649.393, 260.5 ], [ 553.196, 511.5 ],
                                    [ 246.804, 511.5 ], [ 150.607, 260.5 ],
                                    [ 247.789, 90.5 ], [ 359.533, 44.5 ] ]);
@@ -759,7 +759,7 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points, [ [ 477.185, 44.5 ], [ 560.921, 90.5 ],
+                    deepEqual(points, [ [ 477.185, 44.5 ], [ 560.921, 90.5 ],
                                    [ 654.145, 260.5 ], [ 557.196, 511.5 ],
                                    [ 242.804, 511.5 ], [ 145.855, 260.5 ],
                                    [ 239.079, 90.5 ], [ 322.815, 44.5 ] ]);
@@ -797,7 +797,7 @@
                         points.push([ this.points[0].x, this.points[0].y ]);
                     });
 
-                    same(points, [ [ 418.234, 56.682 ], [ 471.92, 66.84 ],
+                    deepEqual(points, [ [ 418.234, 56.682 ], [ 471.92, 66.84 ],
                                    [ 552.132, 109.233 ], [ 627.133, 210.857 ],
                                    [ 633.16, 371.92 ], [ 505.868, 519.836 ],
                                    [ 294.132, 519.836 ], [ 166.84, 371.92 ],
@@ -811,7 +811,7 @@
                         points.push([ this.points[1].x, this.points[1].y ]);
                     });
 
-                    same(points, [ [ 419.746, 36.5 ], [ 476.343, 52.5 ],
+                    deepEqual(points, [ [ 419.746, 36.5 ], [ 476.343, 52.5 ],
                                    [ 561.489, 97.5 ], [ 637.365, 205.5 ],
                                    [ 642.4, 377.5 ], [ 513.411, 535.5 ],
                                    [ 286.589, 535.5 ], [ 157.6, 377.5 ],
@@ -825,7 +825,7 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points, [ [ 446.744, 36.5 ], [ 498.367, 52.5 ],
+                    deepEqual(points, [ [ 446.744, 36.5 ], [ 498.367, 52.5 ],
                                    [ 569.101, 97.5 ], [ 641.365, 205.5 ],
                                    [ 646.4, 377.5 ], [ 520.964, 535.5 ],
                                    [ 279.036, 535.5 ], [ 153.6, 377.5 ],
@@ -865,7 +865,7 @@
                         points.push([ this.points[0].x, this.points[0].y ]);
                     });
 
-                    same(points, [ [ 544.67, 103.514 ], [ 634.116, 231.257 ],
+                    deepEqual(points, [ [ 544.67, 103.514 ], [ 634.116, 231.257 ],
                                    [ 636.179, 238.72 ], [ 638.005, 246.244 ],
                                    [ 639.591, 253.823 ], [ 640.935, 261.448 ],
                                    [ 642.037, 269.111 ], [ 642.895, 276.806 ],
@@ -883,7 +883,7 @@
                         points.push([ this.points[1].x, this.points[1].y ]);
                     });
 
-                    same(points, [ [ 553.516, 91.5 ], [ 613.594, 155.5 ],
+                    deepEqual(points, [ [ 553.516, 91.5 ], [ 613.594, 155.5 ],
                                    [ 622.651, 171.5 ], [ 630.294, 187.5 ],
                                    [ 636.655, 203.5 ], [ 641.832, 219.5 ],
                                    [ 645.898, 235.5 ], [ 648.905, 251.5 ],
@@ -901,7 +901,7 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points, [ [ 562.132, 91.5 ], [ 617.594, 155.5 ],
+                    deepEqual(points, [ [ 562.132, 91.5 ], [ 617.594, 155.5 ],
                                    [ 626.651, 171.5 ], [ 634.294, 187.5 ],
                                    [ 640.655, 203.5 ], [ 645.832, 219.5 ],
                                    [ 649.898, 235.5 ], [ 652.905, 251.5 ],
@@ -945,7 +945,7 @@
                         points.push([ this.points[0].x, this.points[0].y ]);
                     });
 
-                    same(points, [ [ 622.251, 199.299 ], [ 580.792, 463.86 ],
+                    deepEqual(points, [ [ 622.251, 199.299 ], [ 580.792, 463.86 ],
                                    [ 575.334, 469.688 ], [ 569.688, 475.334 ],
                                    [ 563.86, 480.792 ], [ 557.857, 486.057 ],
                                    [ 551.685, 491.122 ], [ 545.351, 495.983 ],
@@ -966,7 +966,7 @@
                         points.push([ this.points[1].x, this.points[1].y ]);
                     });
 
-                    same(points, [ [ 632.824, 193.5 ], [ 588.792, 463.86 ],
+                    deepEqual(points, [ [ 632.824, 193.5 ], [ 588.792, 463.86 ],
                                    [ 583.334, 469.688 ], [ 577.688, 475.334 ],
                                    [ 571.86, 480.792 ], [ 565.857, 486.057 ],
                                    [ 559.685, 491.122 ], [ 551.668, 504.5 ],
@@ -987,7 +987,7 @@
                         points.push([ this.points[2].x, this.points[2].y ]);
                     });
 
-                    same(points, [ [ 636.824, 193.5 ], [ 631.581, 408.5 ],
+                    deepEqual(points, [ [ 636.824, 193.5 ], [ 631.581, 408.5 ],
                                    [ 624.187, 424.5 ], [ 615.408, 440.5 ],
                                    [ 605.07, 456.5 ], [ 592.935, 472.5 ],
                                    [ 578.652, 488.5 ], [ 565.679, 504.5 ],
@@ -1045,7 +1045,7 @@
                         points.push([ style.x, style.y ]);
                     });
 
-                    same(points, [
+                    deepEqual(points, [
                         [ 474.898, 193.63 ],
                         [ 522.764, 270.99 ],
                         [ 305.907, 388.934 ] ], TOLERANCE);
@@ -1068,7 +1068,7 @@
                         points.push([ style.x, style.y ]);
                     });
 
-                    same(points, [
+                    deepEqual(points, [
                         [ 541.44, 113.704 ],
                         [ 625.353, 253.918 ],
                         [ 237.988, 467.693 ] ], TOLERANCE);
@@ -1081,7 +1081,7 @@
                         points.push([ style.x, style.y ]);
                     });
 
-                    same(points, [
+                    deepEqual(points, [
                         [ 587.103, 82 ],
                         [ 673.133, 248 ],
                         [ 191.896, 502 ] ], TOLERANCE );

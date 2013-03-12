@@ -36,7 +36,7 @@
                     servicePack: 1
                 });
 
-                same(milestones, [ milestone(2012, 1, 1) ]);
+                deepEqual(milestones, [ milestone(2012, 1, 1) ]);
             });
 
             test("filterMilestones for SP.next release returns SP.next milestone", function() {
@@ -46,7 +46,7 @@
                     servicePack: "next"
                 });
 
-                same(milestones, [ milestone(2012, 2, "next") ]);
+                deepEqual(milestones, [ milestone(2012, 2, "next") ]);
             });
 
             test("filterMilestones for Q release includes previous SP.next and Q release", function() {
@@ -56,7 +56,7 @@
                     servicePack: 0
                 });
 
-                same(milestones, [ milestone(2012, 1, "next"), milestone(2012, 2) ]);
+                deepEqual(milestones, [ milestone(2012, 1, "next"), milestone(2012, 2) ]);
             });
 
             test("filterMilestones for first Q release includes SP milestone from previous year", function() {
@@ -66,13 +66,13 @@
                     servicePack: 0
                 });
 
-                same(milestones, [ milestone(2011, 3, "next"), milestone(2012, 1) ]);
+                deepEqual(milestones, [ milestone(2011, 3, "next"), milestone(2012, 1) ]);
             });
 
             test("filterLabels filters by prefix", function() {
                 var filteredLabels = changelog.filterLabels(["F: DataSource", "Bug"], "f");
 
-                same(filteredLabels, ["DataSource"]);
+                deepEqual(filteredLabels, ["DataSource"]);
             });
         </script>
 

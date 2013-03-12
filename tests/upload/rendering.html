@@ -164,19 +164,19 @@
             });
 
             test("should render wrapper div", function() {
-                equals($("#cc > div.k-widget.k-upload").length, 1);
+                equal($("#cc > div.k-widget.k-upload").length, 1);
             });
 
             test("should render upload button", function() {
-                equals($("#cc > .k-upload > div.k-button.k-upload-button").length, 1);
+                equal($("#cc > .k-upload > div.k-button.k-upload-button").length, 1);
             });
 
             test("should render upload button text", function() {
-                equals($("#cc > .k-upload > .k-button span").text(), "Select...");
+                equal($("#cc > .k-upload > .k-button span").text(), "Select...");
             });
 
             test("should wrap input", function() {
-                equals($("#cc > .k-upload > .k-button > input").length, 1);
+                equal($("#cc > .k-upload > .k-button > input").length, 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

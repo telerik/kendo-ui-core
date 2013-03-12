@@ -59,7 +59,7 @@
 
                 test("setup shrinks rectangle", function() {
                     anim.setup();
-                    same([rect.points[1].x, rect.points[2].x], [0, 0]);
+                    deepEqual([rect.points[1].x, rect.points[2].x], [0, 0]);
                 });
 
                 asyncTest("expands rectangle right", function() {
@@ -67,8 +67,8 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.points[1].x, SIZE);
-                        equals(rect.points[2].x, SIZE);
+                        equal(rect.points[1].x, SIZE);
+                        equal(rect.points[2].x, SIZE);
                         start();
                     }, 100);
                 });
@@ -132,7 +132,7 @@
                 test("does not decorate when view.options.transitions is false", function() {
                     view.options.transitions = false;
                     decorator.decorate(rect);
-                    equals(view.animations.length, 0);
+                    equal(view.animations.length, 0);
                 });
 
             })();
@@ -175,52 +175,52 @@
                     createAnim({ stackBase: 10 });
                     anim.setup();
 
-                    equals(rect.points[0].y, 10);
-                    equals(rect.points[1].y, 10);
-                    equals(rect.points[2].y, 10);
-                    equals(rect.points[3].y, 10);
+                    equal(rect.points[0].y, 10);
+                    equal(rect.points[1].y, 10);
+                    equal(rect.points[2].y, 10);
+                    equal(rect.points[3].y, 10);
                 });
 
                 test("setup collapses rect onto stackBase (horizontal bars)", function() {
                     createAnim({ stackBase: 10, vertical: false });
                     anim.setup();
 
-                    equals(rect.points[0].x, 10);
-                    equals(rect.points[1].x, 10);
-                    equals(rect.points[2].x, 10);
-                    equals(rect.points[3].x, 10);
+                    equal(rect.points[0].x, 10);
+                    equal(rect.points[1].x, 10);
+                    equal(rect.points[2].x, 10);
+                    equal(rect.points[3].x, 10);
                 });
 
                 test("setup shrinks rect onto base (horizontal bars above axis)", function() {
                     createAnim({ vertical: false });
                     anim.setup();
 
-                    equals(rect.points[1].x, 0);
-                    equals(rect.points[2].x, 0);
+                    equal(rect.points[1].x, 0);
+                    equal(rect.points[2].x, 0);
                 });
 
                 test("setup shrinks rect onto base (horizontal bars below axis)", function() {
                     createAnim({ vertical: false, aboveAxis: false });
                     anim.setup();
 
-                    equals(rect.points[0].x, 10);
-                    equals(rect.points[3].x, 10);
+                    equal(rect.points[0].x, 10);
+                    equal(rect.points[3].x, 10);
                 });
 
                 test("setup shrinks rect onto base (vertical bars above axis)", function() {
                     createAnim();
                     anim.setup();
 
-                    equals(rect.points[0].y, 10);
-                    equals(rect.points[1].y, 10);
+                    equal(rect.points[0].y, 10);
+                    equal(rect.points[1].y, 10);
                 });
 
                 test("setup shrinks rect onto base (vertical bars below axis)", function() {
                     createAnim({ aboveAxis: false });
                     anim.setup();
 
-                    equals(rect.points[2].y, 0);
-                    equals(rect.points[3].y, 0);
+                    equal(rect.points[2].y, 0);
+                    equal(rect.points[3].y, 0);
                 });
 
                 asyncTest("animates top edge to final position", function() {
@@ -229,8 +229,8 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.points[0].y, 0);
-                        equals(rect.points[1].y, 0);
+                        equal(rect.points[0].y, 0);
+                        equal(rect.points[1].y, 0);
 
                         start();
                     }, 100);
@@ -242,8 +242,8 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.points[1].x, 10);
-                        equals(rect.points[2].x, 10);
+                        equal(rect.points[1].x, 10);
+                        equal(rect.points[2].x, 10);
 
                         start();
                     }, 100);
@@ -255,8 +255,8 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.points[2].y, 10);
-                        equals(rect.points[3].y, 10);
+                        equal(rect.points[2].y, 10);
+                        equal(rect.points[3].y, 10);
 
                         start();
                     }, 100);
@@ -268,8 +268,8 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.points[0].x, 0);
-                        equals(rect.points[3].x, 0);
+                        equal(rect.points[0].x, 0);
+                        equal(rect.points[3].x, 0);
 
                         start();
                     }, 100);
@@ -312,7 +312,7 @@
                 test("deos not registers pie animation when transitions are disabled", function() {
                     view.options.transitions = false;
                     decorator.decorate(sector);
-                    equals(view.animations.length, 0);
+                    equal(view.animations.length, 0);
                 });
 
             })();
@@ -349,7 +349,7 @@
 
                 test("setup sets radius 0", function() {
                     anim.setup();
-                    equals(sector.config.r, 0);
+                    equal(sector.config.r, 0);
                 });
 
                 asyncTest("animates radius to final size", function() {
@@ -357,7 +357,7 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(sector.config.r, SIZE);
+                        equal(sector.config.r, SIZE);
 
                         start();
                     }, 100);
@@ -399,7 +399,7 @@
                 test("deos not registers fade animation when transitions are disabled", function() {
                     view.options.transitions = false;
                     decorator.decorate(rect);
-                    equals(view.animations.length, 0);
+                    equal(view.animations.length, 0);
                 });
 
             })();
@@ -438,12 +438,12 @@
 
                 test("setup sets fillOpacity to 0", function() {
                     anim.setup();
-                    equals(rect.options.fillOpacity, 0);
+                    equal(rect.options.fillOpacity, 0);
                 });
 
                 test("setup sets strokeOpacity to 0", function() {
                     anim.setup();
-                    equals(rect.options.strokeOpacity, 0);
+                    equal(rect.options.strokeOpacity, 0);
                 });
 
                 asyncTest("animates fillOpacity", function() {
@@ -451,7 +451,7 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.options.fillOpacity, OPACITY);
+                        equal(rect.options.fillOpacity, OPACITY);
 
                         start();
                     }, 100);
@@ -462,7 +462,7 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(rect.options.strokeOpacity, OPACITY);
+                        equal(rect.options.strokeOpacity, OPACITY);
 
                         start();
                     }, 100);

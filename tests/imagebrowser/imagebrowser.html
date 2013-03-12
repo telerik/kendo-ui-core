@@ -647,7 +647,7 @@
 
                 var model = browser.dataSource.get("foo");
 
-                same(browser._createFile("foo"), model);
+                deepEqual(browser._createFile("foo"), model);
             });
 
             test("value custom formating is applied", function() {
