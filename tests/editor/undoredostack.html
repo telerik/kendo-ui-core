@@ -1,126 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <script>
 
-<script>
+        var undoRedoStack;
 
-$("#Editor1").kendoEditor();
+        module("Editor / UndoRedoStack", {
+            setup: function() {
+                undoRedoStack = new kendo.ui.editor.UndoRedoStack();
+            }
+        });
 
-function getUndoRedoStack() {
-    return new kendo.ui.editor.UndoRedoStack();
-}
+        test("stack is initially empty", function() {
+            ok(!undoRedoStack.canUndo());
+            ok(!undoRedoStack.canRedo());
+        });
 
-test('stack is initially empty', function() {
-    var undoRedoStack = getUndoRedoStack();
+        test("canUndo returns true after command is pushed in stack", function() {
+            undoRedoStack.push({});
 
-    ok(!undoRedoStack.canUndo());
-    ok(!undoRedoStack.canRedo());
-});
+            ok(undoRedoStack.canUndo());
+            ok(!undoRedoStack.canRedo());
+        });
 
-test('canUndo returns true after command is pushed in stack', function() {
-    var undoRedoStack = getUndoRedoStack();
+        test("canRedo returns true after undo", function() {
+            undoRedoStack.push({ undo: function() {} });
+            undoRedoStack.undo();
 
-    undoRedoStack.push({});
+            ok(undoRedoStack.canRedo());
+        });
 
-    ok(undoRedoStack.canUndo());
-    ok(!undoRedoStack.canRedo());
-});
+        test("canUndo returns false when at the bottom of the stack", function() {
+            undoRedoStack.push({ undo: function() {} });
+            undoRedoStack.undo();
 
-test('canRedo returns true after undo', function() {
-    var undoRedoStack = getUndoRedoStack();
+            ok(!undoRedoStack.canUndo());
+        });
 
-    undoRedoStack.push({ undo: function() {} });
-    undoRedoStack.undo();
+        test("canRedo returns false when a new command is pushed", function() {
+            undoRedoStack.push({ undo: function() {} });
+            undoRedoStack.undo();
+            undoRedoStack.push({ undo: function() {} });
 
-    ok(undoRedoStack.canRedo());
-});
+            ok(!undoRedoStack.canRedo());
+            ok(undoRedoStack.canUndo());
+        });
 
-test('canUndo returns false when at the bottom of the stack', function() {
-    var undoRedoStack = getUndoRedoStack();
+        test("undo delegates undo to current command", function() {
+            var called = false;
 
-    undoRedoStack.push({ undo: function() {} });
-    undoRedoStack.undo();
+            undoRedoStack.push({ undo: function() { called = true; } });
+            undoRedoStack.undo();
 
-    ok(!undoRedoStack.canUndo());
-});
+            ok(called);
+        });
 
-test('canRedo returns false when a new command is pushed', function() {
-    var undoRedoStack = getUndoRedoStack();
+        test("redo delegates to exec to current command", function() {
+            var called = false;
 
-    undoRedoStack.push({ undo: function() {} });
-    undoRedoStack.undo();
-    undoRedoStack.push({ undo: function() {} });
+            undoRedoStack.push({ undo: function() { }, redo: function() { called = true; } });
+            undoRedoStack.undo();
+            undoRedoStack.redo();
 
-    ok(!undoRedoStack.canRedo());
-    ok(undoRedoStack.canUndo());
-});
+            ok(called);
+            ok(!undoRedoStack.canRedo());
+            ok(undoRedoStack.canUndo());
+        });
 
-test('undo delegates undo to current command', function() {
-    var undoRedoStack = getUndoRedoStack();
+        test("redo does not delegate to exec when at top of stack", function() {
+            var called = false;
 
-    var called = false;
+            undoRedoStack.push({ undo: function() { }, redo: function() { called = true; } });
+            undoRedoStack.redo();
 
-    undoRedoStack.push({ undo: function() { called = true; } });
-    undoRedoStack.undo();
+            ok(!called);
+        });
 
-    ok(called);
-});
+        test("canUndo is true after undoing the second command", function() {
+            undoRedoStack.push({ undo: function() { } });
+            undoRedoStack.push({ undo: function() { } });
+            undoRedoStack.undo();
 
-test('redo delegates to exec to current command', function() {
-    var undoRedoStack = getUndoRedoStack();
+            ok(undoRedoStack.canUndo());
 
-    var called = false;
+        });
 
-    undoRedoStack.push({ undo: function() { }, redo: function() { called = true; } });
-    undoRedoStack.undo();
-    undoRedoStack.redo();
+    </script>
 
-    ok(called);
-    ok(!undoRedoStack.canRedo());
-    ok(undoRedoStack.canUndo());
-});
-
-test('redo does not delegate to exec when at top of stack', function() {
-    var undoRedoStack = getUndoRedoStack();
-
-    var called = false;
-
-    undoRedoStack.push({ undo: function() { }, redo: function() { called = true; } });
-    undoRedoStack.redo();
-
-    ok(!called);
-});
-
-test('canUndo is true after undoing the second command', function() {
-    var undoRedoStack = getUndoRedoStack();
-
-    undoRedoStack.push({ undo: function() { } });
-    undoRedoStack.push({ undo: function() { } });
-    undoRedoStack.undo();
-
-    ok(undoRedoStack.canUndo());
-
-});
-
-</script>
-
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>

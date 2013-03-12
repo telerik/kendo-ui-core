@@ -14,23 +14,17 @@
 
         <script>
 
-            $("#Editor1").kendoEditor({
+            var editor = $("#Editor1").kendoEditor({
                 messages: {
                     unlink: "unlink foo"
                 }
-            });
+            }).data("kendoEditor");
 
             var componentType = kendo.support.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
 
             function value($ui) {
                 return kendo.support.browser.msie ? $.trim($ui.text()) : $ui.val();
             }
-
-            module("Editor / Toolbar", {
-                setup: function() {
-                    window.editor = getEditor();
-                }
-            });
 
             test('initially fontName should have "inherit" value', function () {
                 editor.value("foo");
@@ -41,8 +35,6 @@
             });
 
             test('exec with node parameter calls exec', function() {
-                var editor = getEditor();
-
                 var execArgs = [];
 
                 editor.exec = function() { execArgs = arguments; };

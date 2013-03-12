@@ -1,186 +1,184 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+    <script>
 
-var TypingHandler,
-    oldEditorKeyboard;
+        var TypingHandler = kendo.ui.editor.TypingHandler,
+            oldEditorKeyboard;
 
-$("#Editor1").kendoEditor();
+        var editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
-module("Editor / TypingHandler", {
-    setup: function() {
-        TypingHandler = kendo.ui.editor.TypingHandler;
-        editor = getEditor();
-        editor.focus();
+        module("Editor / TypingHandler", {
+            setup: function() {
+                editor.focus();
 
-        oldEditorKeyboard = editor.keyboard;
-    },
-    teardown: function() {
-        editor.keyboard = oldEditorKeyboard;
-    }
-});
+                oldEditorKeyboard = editor.keyboard;
+            },
+            teardown: function() {
+                editor.keyboard = oldEditorKeyboard;
+            }
+        });
 
-test('typing handler keydown creates start restore point if typing', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function () {},
-        isTypingInProgress: function() { return false}
-    };
+        test('typing handler keydown creates start restore point if typing', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function () {},
+                isTypingInProgress: function() { return false}
+            };
 
-    var handler = new TypingHandler(editor);
+            var handler = new TypingHandler(editor);
 
-    handler.keydown();
+            handler.keydown();
 
-    ok(undefined !== handler.startRestorePoint);
-});
+            ok(undefined !== handler.startRestorePoint);
+        });
 
-test('typing handler keydown calls startTyping', function() {
-    var callback;
+        test('typing handler keydown calls startTyping', function() {
+            var callback;
 
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function () { callback = arguments[0] },
-        isTypingInProgress: function() { return false}
-    };
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function () { callback = arguments[0] },
+                isTypingInProgress: function() { return false}
+            };
 
-    var handler = new TypingHandler(editor);
-    handler.keydown();
-    ok(undefined !== callback);
-});
+            var handler = new TypingHandler(editor);
+            handler.keydown();
+            ok(undefined !== callback);
+        });
 
-test('typing handler keydown returns true', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function () {},
-        isTypingInProgress: function() { return false}
-    };
+        test('typing handler keydown returns true', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function () {},
+                isTypingInProgress: function() { return false}
+            };
 
-    var handler = new TypingHandler(editor);
-    ok(handler.keydown())
-});
+            var handler = new TypingHandler(editor);
+            ok(handler.keydown())
+        });
 
-test('typing handler keydown returns false if typing is in progress', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function () {},
-        isTypingInProgress: function() { return true}
-    };
+        test('typing handler keydown returns false if typing is in progress', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function () {},
+                isTypingInProgress: function() { return true}
+            };
 
-    var handler = new TypingHandler(editor);
-    ok(!handler.keydown())
-});
+            var handler = new TypingHandler(editor);
+            ok(!handler.keydown())
+        });
 
-test('typing handler keydown returns false if not typing', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return false; },
-        startTyping: function () {},
-        isTypingInProgress: function() { return true}
-    };
+        test('typing handler keydown returns false if not typing', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return false; },
+                startTyping: function () {},
+                isTypingInProgress: function() { return true}
+            };
 
-    var handler = new TypingHandler(editor);
-    ok(!handler.keydown())
-});
+            var handler = new TypingHandler(editor);
+            ok(!handler.keydown())
+        });
 
-test('typing handler keyup creates end restore point if typing', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
-    };
+        test('typing handler keyup creates end restore point if typing', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function (callback) {this.callback = callback},
+                isTypingInProgress: function() { return false},
+                endTyping: function () {this.callback()}
+            };
 
-    var handler = new TypingHandler(editor);
+            var handler = new TypingHandler(editor);
 
-    handler.keydown();
+            handler.keydown();
 
-    editor.keyboard.isTypingInProgress = function() { return true};
+            editor.keyboard.isTypingInProgress = function() { return true};
 
-    handler.keyup();
+            handler.keyup();
 
-    ok(undefined !== handler.endRestorePoint);
-});
+            ok(undefined !== handler.endRestorePoint);
+        });
 
-test('typing handler keyup creates undo command', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
-    };
+        test('typing handler keyup creates undo command', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function (callback) {this.callback = callback},
+                isTypingInProgress: function() { return false},
+                endTyping: function () {this.callback()}
+            };
 
-    var command;
-    editor.undoRedoStack.push = function(){ command = arguments[0] };
+            var command;
+            editor.undoRedoStack.push = function(){ command = arguments[0] };
 
-    var handler = new TypingHandler(editor);
+            var handler = new TypingHandler(editor);
 
-    handler.keydown();
+            handler.keydown();
 
-    editor.keyboard.isTypingInProgress = function() { return true};
+            editor.keyboard.isTypingInProgress = function() { return true};
 
-    handler.keyup();
+            handler.keyup();
 
-    ok(undefined !== command);
-});
+            ok(undefined !== command);
+        });
 
-test('typing handler keyup returns true when typing', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
-    };
+        test('typing handler keyup returns true when typing', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function (callback) {this.callback = callback},
+                isTypingInProgress: function() { return false},
+                endTyping: function () {this.callback()}
+            };
 
-    var command;
-    editor.undoRedoStack.push = function(){ command = arguments[0] };
+            var command;
+            editor.undoRedoStack.push = function(){ command = arguments[0] };
 
-    var handler = new TypingHandler(editor);
+            var handler = new TypingHandler(editor);
 
-    handler.keydown();
+            handler.keydown();
 
-    editor.keyboard.isTypingInProgress = function() { return true};
+            editor.keyboard.isTypingInProgress = function() { return true};
 
-    ok(handler.keyup())
-});
+            ok(handler.keyup())
+        });
 
-test('typing handler keyup returns false when not typing', function() {
-    editor.keyboard = {
-        isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
-    };
+        test('typing handler keyup returns false when not typing', function() {
+            editor.keyboard = {
+                isTypingKey: function () { return true; },
+                startTyping: function (callback) {this.callback = callback},
+                isTypingInProgress: function() { return false},
+                endTyping: function () {this.callback()}
+            };
 
-    var command;
-    editor.undoRedoStack.push = function(){ command = arguments[0] };
+            var command;
+            editor.undoRedoStack.push = function(){ command = arguments[0] };
 
-    var handler = new TypingHandler(editor);
+            var handler = new TypingHandler(editor);
 
-    handler.keydown();
+            handler.keydown();
 
-    ok(!handler.keyup())
-});
+            ok(!handler.keyup())
+        });
 
-</script>
+    </script>
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>

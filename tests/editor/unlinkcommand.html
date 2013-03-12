@@ -1,100 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+    <script>
+        var UnlinkCommand = kendo.ui.editor.UnlinkCommand;
 
-var UnlinkCommand;
+        var editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
-$("#Editor1").kendoEditor();
+        test('exec removes link', function() {
+            var range = createRangeFromText(editor, '<a>|foo|</a>');
+            var command = new UnlinkCommand({range:range});
+            command.exec();
+            equal(editor.value(), 'foo');
+        });
 
-module("Editor / UnlinkCommand", {
-    setup: function() {
-        editor = getEditor();
-        UnlinkCommand = kendo.ui.editor.UnlinkCommand;
-    }
-});
+        test('exec removes link with mixed selection', function() {
+            var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
+            var command = new UnlinkCommand({range:range});
+            command.exec();
+            equal(editor.value(), 'foobarbaz');
+        });
 
-test('exec removes link', function() {
-    var range = createRangeFromText(editor, '<a>|foo|</a>');
-    var command = new UnlinkCommand({range:range});
-    command.exec();
-    equal(editor.value(), 'foo');
-});
+        test('exec maintains selection', function() {
+            var range = createRangeFromText(editor, '<a>|foo|</a>');
+            var command = new UnlinkCommand({range:range});
+            command.exec();
+            range = editor.getRange();
+            equal(range.startOffset, 0);
+            equal(range.endOffset, 3);
+        });
 
-test('exec removes link with mixed selection', function() {
-    var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
-    var command = new UnlinkCommand({range:range});
-    command.exec();
-    equal(editor.value(), 'foobarbaz');
-});
+        test('exec from cursor', function() {
+            editor.value('<a>foo</a>');
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild.firstChild, 1);
+            range.collapse(true);
 
-test('exec maintains selection', function() {
-    var range = createRangeFromText(editor, '<a>|foo|</a>');
-    var command = new UnlinkCommand({range:range});
-    command.exec();
-    range = editor.getRange();
-    equal(range.startOffset, 0);
-    equal(range.endOffset, 3);
-});
+            var command = new UnlinkCommand({range:range});
+            command.exec();
 
-test('exec from cursor', function() {
-    editor.value('<a>foo</a>');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild, 1);
-    range.collapse(true);
+            equal(editor.value(), 'foo');
+        });
 
-    var command = new UnlinkCommand({range:range});
-    command.exec();
+        test('unlink tool is initially disabled', function() {
+            editor.focus();
+            var range = createRangeFromText(editor, '|foo|');
+            editor.selectRange(range);
+            editor.trigger('select');
+            ok($('.k-unlink').hasClass('k-state-disabled'));
+        });
 
-    equal(editor.value(), 'foo');
-});
+        test('unlink tool is enabled when cursor is inside a link', function() {
+            editor.focus();
+            var range = createRangeFromText(editor, '<a>|foo|</a>');
+            editor.selectRange(range);
 
-test('unlink tool is initially disabled', function() {
-    editor.focus();
-    var range = createRangeFromText(editor, '|foo|');
-    editor.selectRange(range);
-    editor.trigger('select');
-    ok($('.k-unlink').hasClass('k-state-disabled'));
-});
+            editor.trigger('select');
+            ok(!$('.k-unlink').hasClass('k-state-disabled'));
+        });
 
-test('unlink tool is enabled when cursor is inside a link', function() {
-    editor.focus();
-    var range = createRangeFromText(editor, '<a>|foo|</a>');
-    editor.selectRange(range);
+        test('unlink tool is enabled when there is a link in the selection', function() {
+            editor.focus();
+            var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
+            editor.selectRange(range);
 
-    editor.trigger('select');
-    ok(!$('.k-unlink').hasClass('k-state-disabled'));
-});
+            editor.trigger('select');
+            ok(!$('.k-unlink').hasClass('k-state-disabled'));
+        });
 
-test('unlink tool is enabled when there is a link in the selection', function() {
-    editor.focus();
-    var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
-    editor.selectRange(range);
+    </script>
 
-    editor.trigger('select');
-    ok(!$('.k-unlink').hasClass('k-state-disabled'));
-});
-
-</script>
-
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>
