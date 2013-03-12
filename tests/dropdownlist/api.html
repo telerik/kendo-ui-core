@@ -108,7 +108,7 @@
                 equal(dropdownlist.text(), "foo");
             });
 
-            test("select(li) should prevent raising of change event", function() {
+            test("select(li) should prevent raising of change event", 0, function() {
                 dropdownlist.bind("change", function() {
                     ok(false);
                 });

@@ -465,7 +465,7 @@
                 });
             });
 
-            test("DropDownList does not raise change if options.value and autoBind:false", function() {
+            test("DropDownList does not raise change if options.value and autoBind:false", 0, function() {
                 var ddl = input.kendoDropDownList({
                     autoBind: false,
                     dataSource: ["foo", "bar"],
@@ -478,7 +478,7 @@
                 ddl._change();
             });
 
-            test("DropDownList from empty SELECT with autoBind:false does not raise change event", function() {
+            test("DropDownList from empty SELECT with autoBind:false does not raise change event", 0, function() {
                 var select = $("<select/>"),
                     dropdownlist = new DropDownList(select, {
                         autoBind: false,
