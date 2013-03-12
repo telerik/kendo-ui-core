@@ -1025,20 +1025,19 @@ kendo_module({
             Widget.fn.destroy.call(chart);
         },
 
-        // TODO: Think of a better name
         _destroyView: function() {
             var chart = this,
                 pool = dataviz.IDPool.current,
-                view = chart._view,
                 model = chart._model,
+                view = chart._view,
                 viewElement = chart._viewElement;
-
-            if (view) {
-                view.destroy();
-            }
 
             if (model) {
                 model.destroy();
+            }
+
+            if (view) {
+                view.destroy();
             }
 
             if (viewElement) {

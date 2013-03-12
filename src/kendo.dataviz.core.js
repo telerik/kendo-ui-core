@@ -1783,8 +1783,7 @@ kendo_module({
         },
 
         destroy: function() {
-            var animations = this.animations,
-                current;
+            var animations = this.animations;
 
             while (animations.length > 0) {
                 animations.shift().destroy();
@@ -1832,24 +1831,15 @@ kendo_module({
             }
         },
 
-        // TODO: Refactor almost identical methods
         setupAnimations: function() {
-            var animations = this.animations,
-                i,
-                count = animations.length;
-
-            for (i = 0; i < count; i++) {
-                animations[i].setup();
+            for (var i = 0; i < this.animations.length; i++) {
+                this.animations[i].setup();
             }
         },
 
         playAnimations: function() {
-            var animations = this.animations,
-                i,
-                count = animations.length;
-
-            for (i = 0; i < count; i++) {
-                animations[i].play();
+            for (var i = 0; i < this.animations.length; i++) {
+                this.animations[i].play();
             }
         },
 
