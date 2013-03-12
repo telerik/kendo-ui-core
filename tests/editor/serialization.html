@@ -93,12 +93,6 @@
                         equal(editor.value(), '<strong><span></span></strong>');
                     });
 
-                    test('fixes improperly nested inline and block tags', function() {
-                        //How to fix this without string parsing ???
-                        //            editor.value('<strong><div></strong></div>');
-                        //            equal(editor.value(), '<strong></strong><div></div>');
-                    });
-
                     test('handles style attribute values', function() {
                         editor.value('<div style="text-align:left"></div>');
 
@@ -430,17 +424,15 @@
     });
 
     test('nbsp escaped', function() {
-    editor.value('&nbsp;');
-    equal(editor.encodedValue(), '&amp;nbsp;');
+        editor.value('&nbsp;');
+        equal(editor.encodedValue(), '&amp;nbsp;');
     });
 
     test('setting empty paragraphs adds line breaks in mozilla', function() {
-    editor.value('<p> </p>');
+        editor.value('<p> </p>');
 
-    if (kendo.support.browser.mozilla) {
-    equal(editor.body.firstChild.childNodes.length, 1);
-    equal(editor.body.firstChild.firstChild.nodeName.toLowerCase(), 'br');
-    }
+        equal(editor.body.firstChild.childNodes.length, 1);
+        equal(editor.body.firstChild.firstChild.nodeName.toLowerCase(), 'br');
     });
 
     test('setting value removes pending formats', function() {
