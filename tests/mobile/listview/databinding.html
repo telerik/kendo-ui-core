@@ -734,12 +734,12 @@
                         dataSource: ds,
                         endlessScroll: true,
                         endlessScrollParameters: function (first, last) {
-
                             if (calls === 1) {
                                 equal(first, "foo");
                                 equal(last, "bar");
                                 calls ++;
                             } else {
+                                console.log("starting");
                                 start();
                                 equal(first, "foo");
                                 equal(last, "bar1");
@@ -754,24 +754,19 @@
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo1", "bar1"] });
 
-                function secondAssert() {
+                function scrollToNextPage() {
                     scroller.trigger("scroll", {
                         scrollTop: scroller.scrollHeight() - scroller.element.height()
                     });
                 }
 
-                function firstAssert() {
-                    ds.unbind("change", firstAssert);
-                    ds.bind("change", secondAssert);
+                ds.one("change", function() {
+                    ds.one("change", scrollToNextPage);
 
-                    scroller.trigger("scroll", {
-                        scrollTop: scroller.scrollHeight() - scroller.element.height()
-                    });
-                }
+                    scrollToNextPage();
+                });
 
                 scroller.trigger("resize");
-
-                ds.bind("change", firstAssert);
             });
 
             test("Endless scroll calls endless callback", 1, function(){
