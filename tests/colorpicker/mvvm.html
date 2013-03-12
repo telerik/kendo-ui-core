@@ -23,7 +23,7 @@
         test("Initialize value from view model", function(){
             var dom = $("<input data-role='colorpicker' data-bind='value:value' />");
             kendo.bind(dom, { value: "rgb(255,0,0)" });
-            ok(dom.data("kendoColorPicker").color().equal("#f00"));
+            ok(dom.data("kendoColorPicker").color().equals("#f00"));
         });
 
         test("Changing a value updates the model", function(){

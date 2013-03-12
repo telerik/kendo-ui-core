@@ -30,7 +30,7 @@
                 var bg = $(this).find("div");
                 var color = kendo.parseColor(label);
                 bg = kendo.parseColor(bg.css("background-color"));
-                ok(color && bg && color.equal(bg), "aria-label is same as background color");
+                ok(color && bg && color.equals(bg), "aria-label is same as background color");
             });
         });
 
