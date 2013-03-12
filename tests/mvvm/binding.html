@@ -174,7 +174,6 @@
                 var dom = $('<span data-bind="click:foo"/>');
                 var viewModel = kendo.observable( {
                     foo: function() {
-                        start();
                         strictEqual(this, viewModel);
                     }
                 });
@@ -815,7 +814,7 @@
                 ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
-            test("child widget is initialized only once", function() {
+            test("child widget is initialized only once", 0, function() {
                 var ParentWidget = kendo.ui.Widget.extend({
                     options: {
                         name: "ParentWidget"
