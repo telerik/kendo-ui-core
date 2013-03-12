@@ -135,7 +135,7 @@
                     });
                 });
 
-                test("refresh does not invoke read", function() {
+                test("refresh does not invoke read", 0, function() {
                     chart = createChart({
                         dataSource: [{
                             period: "Jan",
@@ -154,7 +154,7 @@
                     );
                 });
 
-                test("redraw does not invoke read", function() {
+                test("redraw does not invoke read", 0, function() {
                     chart = createChart({
                         dataSource: [{
                             period: "Jan",

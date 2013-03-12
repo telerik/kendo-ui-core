@@ -4,6 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -128,11 +129,11 @@
                     equal(typeof scatterChart.points[0].dataItem, "object");
                 });
 
-                test("renders empty scatter line series", function() {
+                test("renders empty scatter line series", 0, function() {
                     setupScatterChart(plotArea, { series: [ { data: [] } ] });
                 });
 
-                test("renders empty and non-empty scatter line series", function() {
+                test("renders empty and non-empty scatter line series", 0, function() {
                     setupScatterChart(plotArea, { series: [ { data: [] }, series ] });
                 });
 

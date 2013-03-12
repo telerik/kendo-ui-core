@@ -4,6 +4,7 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
         <link rel="shortcut icon" href="../qunit.ico" />
     </head>
@@ -2923,7 +2924,7 @@
 
                 test("event arguments contain value", 1, function() {
                     createBarChart({
-                        plotAreaClick: function(e) { equal(e.value, 0.4, TOLERANCE); }
+                        plotAreaClick: function(e) { close(e.value, 0.4, TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -2931,10 +2932,10 @@
                     });
                 });
 
-                test("event arguments contain multiple values", 1, function() {
+                test("event arguments contain multiple values", 2, function() {
                     createBarChart({
                         valueAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { deepEqual(e.value, [1, 255], TOLERANCE); }
+                        plotAreaClick: function(e) { arrayClose(e.value, [1, 255], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -3070,7 +3071,7 @@
                 test("values are scoped to pane", 1, function() {
                     createChartWithPanes(
                         function(e) {
-                            deepEqual(e.value, 9, TOLERANCE);
+                            close(e.value, 9, TOLERANCE);
                         }
                     );
 
@@ -4047,7 +4048,7 @@
 
                 test("event arguments contain x axis value", 1, function() {
                     createScatterChart({
-                        plotAreaClick: function(e) { equal(e.x, 12, TOLERANCE); }
+                        plotAreaClick: function(e) { close(e.x, 12, TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4055,10 +4056,10 @@
                     });
                 });
 
-                test("event arguments contain multiple x axis values", 1, function() {
+                test("event arguments contain multiple x axis values", 2, function() {
                     createScatterChart({
                         xAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { deepEqual(e.x, [12, 193], TOLERANCE); }
+                        plotAreaClick: function(e) { arrayClose(e.x, [12, 193], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4068,7 +4069,7 @@
 
                 test("event arguments contain y axis value", 1, function() {
                     createScatterChart({
-                        plotAreaClick: function(e) { equal(e.y, 24, TOLERANCE); }
+                        plotAreaClick: function(e) { close(e.y, 24, TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({
@@ -4076,10 +4077,10 @@
                     });
                 });
 
-                test("event arguments contain multiple y axis values", 1, function() {
+                test("event arguments contain multiple y axis values", 2, function() {
                     createScatterChart({
                         yAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { deepEqual(e.y, [24, 278], TOLERANCE); }
+                        plotAreaClick: function(e) { arrayClose(e.y, [24, 278], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({

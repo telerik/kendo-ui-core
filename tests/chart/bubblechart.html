@@ -4,6 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -93,11 +94,11 @@
                 });
 
                 test("Maximum bubble diameter is set to maxSize", function() {
-                    equal(firstPoint.options.markers.size, 110, TOLERANCE);
+                    close(firstPoint.options.markers.size, 110, TOLERANCE);
                 });
 
                 test("Minimum bubble diameter is set to minSize", function() {
-                    equal(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
+                    close(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
                 });
 
                 test("Default maximum bubble diameter is proportional to box size", function() {
@@ -107,7 +108,7 @@
                         }]
                     });
 
-                    equal(firstPoint.options.markers.size, 120, TOLERANCE);
+                    close(firstPoint.options.markers.size, 120, TOLERANCE);
                 });
 
                 test("Default minimum bubble diameter is proportional to box size", function() {
@@ -117,7 +118,7 @@
                         }]
                     });
 
-                    equal(firstPoint.options.markers.size, 40, TOLERANCE);
+                    close(firstPoint.options.markers.size, 40, TOLERANCE);
                 });
 
                 test("Default minimum bubble diameter is floored to 10", function() {
@@ -128,11 +129,11 @@
                     });
 
                     bubbleChart.reflow(new Box2D());
-                    equal(firstPoint.options.markers.size, 10, TOLERANCE);
+                    close(firstPoint.options.markers.size, 10, TOLERANCE);
                 });
 
                 test("Bubble diameter is proportional to size value", function() {
-                    equal(bubbleChart.points[2].options.markers.size, 50, TOLERANCE);
+                    close(bubbleChart.points[2].options.markers.size, 50, TOLERANCE);
                 });
 
                 test("zIndex is higher for smaller bubbles", function() {

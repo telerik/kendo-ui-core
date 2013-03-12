@@ -3,6 +3,9 @@ var SANS = "Arial,Helvetica,sans-serif",
     SANS12 = "12px " + SANS,
     SANS16 = "16px " + SANS;
 
+var close = QUnit.close,
+    notClose = QUnit.notClose;
+
 function ViewStub() {
     var view = this,
         log = view.log = { };

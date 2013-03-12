@@ -4,6 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -60,7 +61,7 @@
                     });
                 });
 
-                test("Does not retrieve overlay element when highlight is disabled", function() {
+                test("Does not retrieve overlay element when highlight is disabled", 0, function() {
                     highlight.show({
                         options: {
                             highlight: {
@@ -167,7 +168,7 @@
                     });
                 });
 
-                test("Does not call toggleHighlight on show (highlight disabled)", function() {
+                test("Does not call toggleHighlight on show (highlight disabled)", 0, function() {
                     highlight.show({
                         options: {
                             highlight: {
@@ -189,7 +190,7 @@
                     highlight.hide();
                 });
 
-                test("Does not call toggleHighlight on hide (highlight disabled)", function() {
+                test("Does not call toggleHighlight on hide (highlight disabled)", 0, function() {
                     highlight.show({
                         options: {
                             highlight: {

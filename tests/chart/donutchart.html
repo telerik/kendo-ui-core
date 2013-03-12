@@ -4,6 +4,7 @@
         <title>Donut chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -133,7 +134,7 @@
                 });
 
                 test("sets segment dataItem", function() {
-                    equal(firstSegment.percentage, 0.333, TOLERANCE);
+                    close(firstSegment.percentage, 0.333, TOLERANCE);
                 });
 
                 test("sets segment explode", function() {
@@ -262,7 +263,7 @@
 
                 test("tooltipAnchor is set distance from segment", function() {
                     var anchor = segment.tooltipAnchor(10, 10);
-                    deepEqual([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
+                    arrayClose([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
                 });
 
                 test("sets overlay radius", function() {

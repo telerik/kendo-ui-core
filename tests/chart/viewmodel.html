@@ -4,6 +4,7 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -906,7 +907,7 @@
 
                 test("text is positioned at top", function() {
                     equal(titleText.box.y1 - MARGIN - PADDING, chartBox.y1);
-                    equal(titleText.box.y2 - MARGIN - PADDING,
+                    close(titleText.box.y2 - MARGIN - PADDING,
                            chartBox.y1 + TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
@@ -916,13 +917,13 @@
                     });
 
                     title.reflow(chartBox);
-                    equal(titleText.box.y1 + MARGIN + PADDING,
+                    close(titleText.box.y1 + MARGIN + PADDING,
                            chartBox.y2 - TITLE_TEXT_HEIGHT, TOLERANCE);
                     equal(titleText.box.y2 + MARGIN + PADDING, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
-                    equal(titleText.box.x1,
+                    close(titleText.box.x1,
                            chartBox.x1 + (chartBox.width() - TITLE_TEXT_WIDTH) / 2, TOLERANCE);
                 });
 
@@ -931,7 +932,7 @@
                 });
 
                 test("box height is equal to text height", function() {
-                    equal(title.box.height() - MARGIN * 2 - PADDING * 2,
+                    close(title.box.height() - MARGIN * 2 - PADDING * 2,
                            TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
@@ -1110,7 +1111,7 @@
                     text.reflow(new Box2D());
                     text.getViewElements(view);
 
-                    equal(view.log.text[0].style.baseline, 13, TOLERANCE);
+                    close(view.log.text[0].style.baseline, 13, TOLERANCE);
                 });
 
             })();
@@ -1323,7 +1324,7 @@
                         position: "bottom"
                     });
 
-                    equal(legend.box.y1, chartBox.y2 - legend.box.height(), TOLERANCE);
+                    close(legend.box.y1, chartBox.y2 - legend.box.height(), TOLERANCE);
                 });
 
                 test("applies left and right margin when positioned to the right", function() {
@@ -1391,19 +1392,19 @@
                 });
 
                 test("markers have margin on the left", function() {
-                    equal(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
+                    close(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
                 });
 
                 test("markers have set width", function() {
-                    equal(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
+                    close(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
                 });
 
                 test("markers have margin on the right", function() {
-                    equal(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
+                    close(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
                 });
 
                 test("markers are aligned to text center", function() {
-                    equal(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
+                    close(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
                 });
 
                 test("markers are 1/2 of label size", function() {
@@ -1485,23 +1486,14 @@
                     equal(order, "12");
                 });
 
-                test("destroy clears animations", function() {
+                test("playAnimations clears animations", function() {
                     var order;
                     view.animations = [
-                        { destroy: function() { } },
+                        { play: function() { } },
                     ];
 
-                    view.destroy();
+                    view.playAnimations();
                     equal(view.animations.length, 0);
-                });
-
-                test("destroy destroys animations", 1, function() {
-                    var order;
-                    view.animations = [
-                        { destroy: function() { ok(true); } },
-                    ];
-
-                    view.destroy();
                 });
 
                 test("decorate applies decorators in order", function() {
@@ -1578,47 +1570,47 @@
 
                 test("get box with startAngle 10 and endAngle 190", function() {
                     createRing(10, 190);
-                    deepEqual(ringBox, [1, 0, 200, 117], TOLERANCE);
+                    arrayClose(ringBox, [1, 0, 200, 117], TOLERANCE);
                 });
 
                 test("get box with startAngle 10 and endAngle 30", function() {
                     createRing(10, 30);
-                    deepEqual(ringBox, [1, 50, 100, 100], TOLERANCE);
+                    arrayClose(ringBox, [1, 50, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 90", function() {
                     createRing(0, 90);
-                    deepEqual(ringBox, [0, 0, 100, 100], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 30 and endAngle 170", function() {
                     createRing(30, 170);
-                    deepEqual(ringBox, [13, 0, 198, 100], TOLERANCE);
+                    arrayClose(ringBox, [13, 0, 198, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 360", function() {
                     createRing(0, 360);
-                    deepEqual(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 280", function() {
                     createRing(0, 280);
-                    deepEqual(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 90 and endAngle 90 (full circle)", function() {
                     createRing(90, 90);
-                    deepEqual(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 180 and endAngle 0", function() {
                     createRing(180, 0);
-                    deepEqual(ringBox, [0, 100, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 100, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 180.1 and endAngle 0", function() {
                     createRing(180.1, 0);
-                    deepEqual(ringBox, [0, 100, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 100, 200, 200], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
@@ -1626,42 +1618,42 @@
 
                 test("get box with startAngle 10 and endAngle 190", function() {
                     createRing(10, 190, 50);
-                    deepEqual(ringBox, [1, 0, 200, 117], TOLERANCE);
+                    arrayClose(ringBox, [1, 0, 200, 117], TOLERANCE);
                 });
 
                 test("get box with startAngle 10 and endAngle 30", function() {
                     createRing(10, 30, 50);
-                    deepEqual(ringBox, [1, 50, 13, 83], TOLERANCE);
+                    arrayClose(ringBox, [1, 50, 13, 83], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 90", function() {
                     createRing(0, 90, 50);
-                    deepEqual(ringBox, [0, 0, 100, 100], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 30 and endAngle 170", function() {
                     createRing(30, 170, 50);
-                    deepEqual(ringBox, [13, 0, 198, 83], TOLERANCE);
+                    arrayClose(ringBox, [13, 0, 198, 83], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 360", function() {
                     createRing(0, 360, 50);
-                    deepEqual(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 280", function() {
                     createRing(0, 280, 50);
-                    deepEqual(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 90 and endAngle 450", function() {
                     createRing(90, 450, 50);
-                    deepEqual(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 410 and endAngle 450", function() {
                     createRing(410, 450, 50);
-                    deepEqual(ringBox, [35, 0, 100, 23], TOLERANCE);
+                    arrayClose(ringBox, [35, 0, 100, 23], TOLERANCE);
                 });
 
             })();

@@ -4,6 +4,7 @@
         <title>Pie chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -136,7 +137,7 @@
                 });
 
                 test("sets segment dataItem", function() {
-                    equal(firstSegment.percentage, 0.333, TOLERANCE);
+                    close(firstSegment.percentage, 0.333, TOLERANCE);
                 });
 
                 test("sets segment explode", function() {
@@ -363,7 +364,7 @@
 
                 test("tooltipAnchor is set distance from segment", function() {
                     var anchor = segment.tooltipAnchor(10, 10);
-                    deepEqual([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
+                    arrayClose([Math.round(anchor.x), Math.round(anchor.y)], [80, -77], TOLERANCE);
                 });
 
                 test("sets overlay radius", function() {
@@ -1044,7 +1045,7 @@
                         points.push([ style.x, style.y ]);
                     });
 
-                    deepEqual(points, [
+                    arrayClose(points, [
                         [ 474.898, 193.63 ],
                         [ 522.764, 270.99 ],
                         [ 305.907, 388.934 ] ], TOLERANCE);
@@ -1067,7 +1068,7 @@
                         points.push([ style.x, style.y ]);
                     });
 
-                    deepEqual(points, [
+                    arrayClose(points, [
                         [ 541.44, 113.704 ],
                         [ 625.353, 253.918 ],
                         [ 237.988, 467.693 ] ], TOLERANCE);
@@ -1080,7 +1081,7 @@
                         points.push([ style.x, style.y ]);
                     });
 
-                    deepEqual(points, [
+                    arrayClose(points, [
                         [ 587.103, 82 ],
                         [ 673.133, 248 ],
                         [ 191.896, 502 ] ], TOLERANCE );

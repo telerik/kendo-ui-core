@@ -4,6 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -129,7 +130,7 @@
                     deepEqual(dateAxis.options.max, new Date("2012/02/15 00:00"));
                 });
 
-                test("No categories", function() {
+                test("No categories", 0, function() {
                     createDateCategoryAxis();
                 });
 
@@ -482,7 +483,7 @@
                         roundToBaseUnit: false
                     });
 
-                    deepEqual(dateAxis.getMajorTickPositions(),
+                    arrayClose(dateAxis.getMajorTickPositions(),
                         [0, 88, 321, 555, 789, 799], 1);
                 });
 
@@ -494,11 +495,11 @@
                         roundToBaseUnit: false
                     });
 
-                    deepEqual(dateAxis.getMajorTickPositions(),
+                    arrayClose(dateAxis.getMajorTickPositions(),
                         [0, 200, 400, 600, 800], 1);
                 });
 
-                test("Does not fail with no categories", function() {
+                test("Does not fail with no categories", 0, function() {
                     createDateCategoryAxis({
                         categories: [],
                         roundToBaseUnit: false
@@ -543,7 +544,7 @@
                         reverse: true
                     });
 
-                    deepEqual(dateAxis.getMajorTickPositions(),
+                    arrayClose(dateAxis.getMajorTickPositions(),
                         [799, 711, 477, 243, 10, 0], 1);
                 });
 

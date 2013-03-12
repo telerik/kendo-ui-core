@@ -4,6 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -190,7 +191,7 @@
                 test("labels are distributed horizontally", function() {
                     categoryAxis.getViewElements(view);
 
-                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [185.5, 586.5], TOLERANCE);
                 });
 
@@ -198,7 +199,7 @@
                     createCategoryAxis({ justified: true });
                     categoryAxis.getViewElements(view);
 
-                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [0, 773], TOLERANCE);
                 });
 
@@ -206,7 +207,7 @@
                     createCategoryAxis({ reverse: true });
                     categoryAxis.getViewElements(view);
 
-                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [586.5, 185.5], TOLERANCE);
                 });
 
@@ -214,7 +215,7 @@
                     createCategoryAxis({ justified: true, reverse: true });
                     categoryAxis.getViewElements(view);
 
-                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [773, 0], TOLERANCE);
                 });
 
@@ -228,7 +229,7 @@
                 test("major ticks are distributed horizontally", function() {
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 400, 800], TOLERANCE);
                 });
 
@@ -236,7 +237,7 @@
                     createCategoryAxis({ justified: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [14.5, 786.5], TOLERANCE);
                 });
 
@@ -244,7 +245,7 @@
                     createCategoryAxis({ reverse: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [800, 400, 0], TOLERANCE);
                 });
 
@@ -252,7 +253,7 @@
                     createCategoryAxis({ justified: true, reverse: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [786.5, 14.5], TOLERANCE);
                 });
 
@@ -270,7 +271,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 200, 400, 600, 800], TOLERANCE);
                 });
 
@@ -282,7 +283,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [14.5, 272, 529, 786], TOLERANCE);
                 });
 
@@ -294,7 +295,7 @@
                      });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [800, 600, 400, 200, 0], TOLERANCE);
                 });
 
@@ -307,7 +308,7 @@
                      });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [786, 529, 271, 14.5], TOLERANCE);
                 });
 
@@ -362,7 +363,7 @@
                 });
 
                 test("labels are distributed horizontally", function() {
-                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [119, 652], TOLERANCE);
                 });
 
@@ -386,7 +387,7 @@
                 });
 
                 test("labels are distributed horizontally, starting from the third", function() {
-                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [652], TOLERANCE);
                 });
 
@@ -493,7 +494,7 @@
                 test("labels are distributed vertically", function() {
                     categoryAxis.getViewElements(view);
 
-                    deepEqual($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [141, 441], TOLERANCE);
                 });
 
@@ -501,7 +502,7 @@
                     createCategoryAxis({ vertical: true, justified: true });
                     categoryAxis.getViewElements(view);
 
-                    deepEqual($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [0, 582], TOLERANCE);
                 });
 
@@ -515,7 +516,7 @@
                 test("major ticks are distributed vertically", function() {
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                          [0, 300, 600], TOLERANCE);
                 });
 
@@ -523,7 +524,7 @@
                     createCategoryAxis({ vertical: true, justified: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                          [9, 591], TOLERANCE);
                 });
 
@@ -535,7 +536,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                         [0, 150, 300, 450, 600], TOLERANCE);
                 });
 
@@ -548,7 +549,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    deepEqual($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                         [9, 203, 397, 591], TOLERANCE);
                 });
 
@@ -629,7 +630,7 @@
                 });
 
                 test("labels are distributed vertically", function() {
-                    deepEqual($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [91, 491], TOLERANCE);
                 });
 
@@ -654,7 +655,7 @@
                 });
 
                 test("labels are distributed vertically, starting from the third", function() {
-                    deepEqual($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [491], TOLERANCE);
                 });
 
@@ -721,7 +722,7 @@
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    deepEqual([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for first category (justified)", function() {
@@ -733,7 +734,7 @@
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    deepEqual([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for first category in reverse (justified)", function() {
@@ -745,65 +746,65 @@
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
-                    deepEqual([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for second category (justified)", function() {
                     createCategoryAxis({ justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.x1, slot.x2], [399, 399], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [399, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse (justified)", function() {
                     createCategoryAxis({ reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.x1, slot.x2], [399, 399], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [399, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for third category", function() {
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for third category (justified)", function() {
                     createCategoryAxis({ justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse (justified)", function() {
                     createCategoryAxis({ reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.x1, slot.x2], [lineBox.x1, lineBox.x1], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, lineBox.x1], TOLERANCE);
                 });
 
                 test("positions slot for third category w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("slot height is 0", function() {
@@ -857,7 +858,7 @@
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    deepEqual([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for first category (justified)", function() {
@@ -869,7 +870,7 @@
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    deepEqual([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for first category in reverse (justified)", function() {
@@ -881,65 +882,65 @@
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ vertical: true, labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
-                    deepEqual([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [200, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category (justified)", function() {
                     createCategoryAxis({ vertical: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.y1, slot.y2], [300, 300], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [300, 300], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [200, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse (justified)", function() {
                     createCategoryAxis({ vertical: true, reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.y1, slot.y2], [300, 300], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [300, 300], TOLERANCE);
                 });
 
                 test("positions slot for second category w/o labels", function() {
                     createCategoryAxis({ vertical: true, labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
-                    deepEqual([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [200, 399], TOLERANCE);
                 });
 
                 test("positions slot for third category", function() {
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for third category (justified)", function() {
                     createCategoryAxis({ vertical: true, justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.y1, slot.y2], [lineBox.y2, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y2, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse (justified)", function() {
                     createCategoryAxis({ vertical: true, reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.y1, slot.y2], [lineBox.y1, lineBox.y1], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, lineBox.y1], TOLERANCE);
                 });
 
                 test("positions slot for third category w/o labels", function() {
                     createCategoryAxis({ vertical: true, labels: { visible: false } });
                     var slot = categoryAxis.getSlot(2);
-                    deepEqual([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("slot width is 0", function() {
@@ -1159,7 +1160,7 @@
                 });
 
                 test("renders box", function() {
-                    deepEqual([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                    arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
                          [ 39, 9, 292.666, 573 ], TOLERANCE);
                 });
 
@@ -1183,7 +1184,7 @@
                 });
 
                 test("renders box", function() {
-                    deepEqual([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                    arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
                          [ 20, 0, 785, 191 ], TOLERANCE);
                 });
 
@@ -1248,7 +1249,7 @@
                 });
 
                 test("positioned at center", function() {
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 403, 582, 436, 600 ], TOLERANCE);
                 });
 
@@ -1256,7 +1257,7 @@
                     createPlotArea(lineSeriesData, { categoryAxis: { title: { position: "left" }}});
                     titleBox = plotArea.axisX.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 39, 582, 72, 600 ], TOLERANCE);
                 });
 
@@ -1264,7 +1265,7 @@
                     createPlotArea(lineSeriesData, { categoryAxis: { title: { position: "right" }}});
                     titleBox = plotArea.axisX.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 767, 582, 800, 600 ], TOLERANCE);
                 });
 
@@ -1294,7 +1295,7 @@
                 });
 
                 test("positioned at center", function() {
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 403, 546, 436, 564 ], TOLERANCE);
                 });
 
@@ -1305,7 +1306,7 @@
 
                     titleBox = plotArea.axisX.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 39, 546, 72, 564 ], TOLERANCE);
                 });
 
@@ -1316,7 +1317,7 @@
 
                     titleBox = plotArea.axisX.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 767, 546, 800, 564 ], TOLERANCE);
                 });
 
@@ -1329,7 +1330,7 @@
                 });
 
                 test("applied position center", function() {
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 0, 270, 18, 303 ], TOLERANCE);
                 });
 
@@ -1337,7 +1338,7 @@
                     createPlotArea(barSeriesData, { categoryAxis: { title: { position: "bottom" }}});
                     titleBox = plotArea.axisY.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 0, 540, 18, 573 ], TOLERANCE);
                 });
 
@@ -1345,7 +1346,7 @@
                     createPlotArea(barSeriesData, { categoryAxis: { title: { position: "top" }}});
                     titleBox = plotArea.axisY.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 0, 0, 18, 33 ], TOLERANCE);
                 });
 
@@ -1370,7 +1371,7 @@
                 });
 
                 test("applied position center", function() {
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 25, 270, 43, 303 ], TOLERANCE);
                 });
 
@@ -1381,7 +1382,7 @@
 
                     titleBox = plotArea.axisY.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 25, 540, 43, 573 ], TOLERANCE);
                 });
 
@@ -1392,7 +1393,7 @@
 
                     titleBox = plotArea.axisY.title.box;
 
-                    deepEqual([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 25, 0, 43, 33 ], TOLERANCE);
                 });
 
