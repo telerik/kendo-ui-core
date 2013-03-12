@@ -168,7 +168,7 @@
                 input.next().click();
             });
 
-            test("clicking on the button without changing the value does not trigger the change event", function() {
+            test("clicking on the button without changing the value does not trigger the change event", 0, function() {
                 input.kendoSearchBox({
                     change: function() {
                         ok(false);

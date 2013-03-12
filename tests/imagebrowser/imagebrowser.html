@@ -676,7 +676,7 @@
                 equal(browser.value(), "foo?path=File1");
             });
 
-            test("listView is not rebuild when item is deleted", function() {
+            test("listView is not rebuild when item is deleted", 0, function() {
                 var browser = setup();
 
                 browser.listView.bind("dataBound", function() {

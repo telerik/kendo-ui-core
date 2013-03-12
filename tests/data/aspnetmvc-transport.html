@@ -65,7 +65,9 @@
                         ok(false);
                     }
                 });
+
                 stop();
+
                 transport.read({
                     success: function(e) {
                        start();
@@ -113,11 +115,12 @@
 
                     transport.read({
                         success: function(e) {
-                           start();
                            deepEqual(e.Data, data);
                         }
                     });
+
                     stop();
+
                     transport.read({
                         success: function(e) {
                         }

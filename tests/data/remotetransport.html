@@ -140,7 +140,7 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
-            test("read constructor data function is persisted on multiple requests", function() {
+            test("read constructor data function is persisted on multiple requests", 2, function() {
                 var data,
                     called = 0,
                     transport = new RemoteTransport({
@@ -163,23 +163,25 @@
                     url: "foo",
                     response: function() {
                         if(called == 2) {
+                            ok(true);
                             start();
                         }
                     }
                 });
-                stop(1);
+                stop();
                 transport.read({ url: "foo", data: { baz: "moo" } });
                 $.mockjaxClear();
                 $.mockjax({
                     url: "foo",
                     response: function() {
                         if(called == 2) {
+                            ok(true);
                             start();
                         }
                     }
                 });
 
-                stop(1);
+                stop();
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
