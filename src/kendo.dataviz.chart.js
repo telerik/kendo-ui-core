@@ -415,8 +415,8 @@ kendo_module({
             var chart = this,
                 options = chart.options,
                 element = chart.element,
-                height = math.floor(element.innerHeight()),
-                width = math.floor(element.innerWidth());
+                height = math.floor(element.height()),
+                width = math.floor(element.width());
 
             return deepExtend({
                 width: width || DEFAULT_WIDTH,
