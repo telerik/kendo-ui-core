@@ -45,7 +45,8 @@
 }
 
 .k-chart .k-tooltip {
-  background-image: url('textures/highlight.png');
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAABkCAYAAACGqxDMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGRJREFUeNrs19EJgDAMQMFG3X9bf01xBvMRzGWA46UUSiMzYxXOsYoHCAQCgUDgj8GrGn3BaF94ti8ETriHAQQ2eAIUfi+8q8GsBp/24MCVB57hsEL/FCAQCAQCgUAgsDm4BRgAO7ERCNGW1L4AAAAASUVORK5CYII=);
+  background-position: 0 -37px;
 }
 
 .k-chart .k-navigator-hint .k-scroll {

@@ -28,10 +28,13 @@ div.k-sparkline
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    padding: 2px 6px;
+    padding: 6px;
     white-space: nowrap;
     z-index: 1000;
     line-height: normal;
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNJREFUeNpi/P//vwMDFQELEP8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);
 }
 
 .k-chart .k-tooltip table,

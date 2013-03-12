@@ -7342,10 +7342,8 @@ kendo_module({
         },
 
         options: {
-            background: BLACK,
-            color: WHITE,
             border: {
-                width: 3
+                width: 1
             },
             opacity: 1,
             animation: {
@@ -7388,7 +7386,7 @@ kendo_module({
             this.element
                     .css({
                         backgroundColor: options.background,
-                        borderColor: options.border.color,
+                        borderColor: options.border.color || options.background,
                         font: options.font,
                         color: options.color,
                         opacity: options.opacity,
@@ -7464,6 +7462,16 @@ kendo_module({
             }
 
             return output;
+        },
+
+        _updateStyle: function(options, pointOptions) {
+            if (!defined(options.background)) {
+                options.background = pointOptions.color;
+            }
+
+            if (!defined(options.color)) {
+                options.color = new Color(options.background).percBrightness();
+            }
         }
     });
 
@@ -7476,12 +7484,9 @@ kendo_module({
                 return;
             }
 
-            if (!(options.border || {}).color) {
-                options.border.color = point.options.color;
-            }
-
             tooltip.element.html(tooltip._pointContent(point));
             tooltip.anchor = tooltip._pointAnchor(point);
+            tooltip._updateStyle(options, point.options);
             tooltip.setStyle(options);
 
             BaseTooltip.fn.show.call(tooltip, point);
@@ -7522,14 +7527,10 @@ kendo_module({
                 slot = axis.getSlot(index),
                 content;
 
-            if (!(options.border || {}).color) {
-                options.border.color = points[0].options.color;
-            }
-
             content = tooltip._content(points, category);
             tooltip.element.html(content);
             tooltip.anchor = tooltip._slotAnchor(coords, slot);
-
+            tooltip._updateStyle(points[0].options);
             tooltip.setStyle(options);
 
             BaseTooltip.fn.show.call(tooltip);

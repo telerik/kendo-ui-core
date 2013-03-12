@@ -271,18 +271,8 @@ kendo_module({
                     color: WHITE
                 },
                 crosshair: {
-                    color: "#8e8e8e",
-                    tooltip: {
-                        background: "#3d3d3d",
-                        color: WHITE,
-                        opacity: 0.8
-                    }
+                    color: "#8e8e8e"
                 }
-            },
-            tooltip: {
-                background: "#3d3d3d",
-                color: WHITE,
-                opacity: 0.8
             }
         },
         gauge: {
@@ -356,18 +346,8 @@ kendo_module({
                     color: "#293135"
                 },
                 crosshair: {
-                    color: "#9aabb2",
-                    tooltip: {
-                        background: WHITE,
-                        color: BLACK,
-                        opacity: 0.8
-                    }
+                    color: "#9aabb2"
                 }
-            },
-            tooltip: {
-                background: WHITE,
-                color: BLACK,
-                opacity: 0.8
             }
         },
         gauge: {
@@ -482,18 +462,8 @@ kendo_module({
                     color: "#ffffff"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: "#1b141a",
-                        color: "#ffffff",
-                        opacity: 1
-                    },
                     color: "#ffffff"
                 }
-            },
-            tooltip: {
-                background: "#1b141a",
-                color: "#ffffff",
-                opacity: 1
             }
         },
         gauge: {
@@ -567,18 +537,8 @@ kendo_module({
                     color: "#232323"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: WHITE,
-                        color: BLACK,
-                        opacity: 0.8
-                    },
                     color: "#8e8e8e"
                 }
-            },
-            tooltip: {
-                background: WHITE,
-                color: BLACK,
-                opacity: 0.8
             }
         },
         gauge: {
@@ -677,18 +637,8 @@ kendo_module({
                     color: "#4e5968"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: WHITE,
-                        color: "#4e5968",
-                        opacity: 0.8
-                    },
                     color: "#a6b1c0"
                 }
-            },
-            tooltip: {
-                background: WHITE,
-                color: "#4e5968",
-                opacity: 0.8
             }
         },
         gauge: {
@@ -766,16 +716,8 @@ kendo_module({
                     color: "#777777"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: WHITE,
-                        color: BLACK
-                    },
                     color: "#c7c7c7"
                 }
-            },
-            tooltip: {
-                background: WHITE,
-                color: BLACK
             }
         },
         gauge: {
@@ -874,16 +816,8 @@ kendo_module({
                     color: "#ffffff"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: "#0e0e0e",
-                        color: "#ffffff"
-                    },
                     color: "#cecece"
                 }
-            },
-            tooltip: {
-                background: "#0e0e0e",
-                color: "#ffffff"
             }
         },
         gauge: {
@@ -1007,18 +941,8 @@ kendo_module({
                     color: "#ffffff"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: "#212a33",
-                        color: "#ffffff",
-                        opacity: 1
-                    },
                     color: "#8c909e"
                 }
-            },
-            tooltip: {
-                background: "#212a33",
-                color: "#ffffff",
-                opacity: 1
             }
         },
         gauge: {
@@ -1141,18 +1065,8 @@ kendo_module({
                     color: "#686868"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: "#ffffff",
-                        color: "#686868",
-                        opacity: 0.8
-                    },
                     color: "#9e9e9e"
                 }
-            },
-            tooltip: {
-                background: "#ffffff",
-                color: "#686868",
-                opacity: 0.8
             }
         },
         gauge: {
@@ -1276,18 +1190,8 @@ kendo_module({
                     color: "#343434"
                 },
                 crosshair: {
-                    tooltip: {
-                        background: "#ffffff",
-                        color: "#343434",
-                        opacity: 0.8
-                    },
                     color: "#b8b8b8"
                 }
-            },
-            tooltip: {
-                background: "#ffffff",
-                color: "#343434",
-                opacity: 0.8
             }
         },
         gauge: {

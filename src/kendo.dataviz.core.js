@@ -2423,6 +2423,18 @@ kendo_module({
             color.b = round(color.normalizeByte(color.b * value));
 
             return color;
+        },
+
+        percBrightness: function() {
+            var color = this,
+                value = math.sqrt(.241 * color.r * color.r + .691 * color.g * color.g + .068 * color.b * color.b),
+                result = WHITE;
+
+            if (value > 180) {
+                result = BLACK;
+            }
+
+            return result;
         }
     };
 
