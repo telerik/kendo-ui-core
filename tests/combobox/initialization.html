@@ -347,8 +347,10 @@
                combobox = new ComboBox(select, {
                    dataTextField: "text",
                    dataValueField: "value",
-                   dataSource: [{text: "Foo", value: 0}, {text: 0, value:5}]
+                   dataSource: [{text: "Foo&", value: 0}, {text: 0, value:5}]
                });
+
+               equal(select.find("option:first").html(), "Foo&amp;");
            });
 
            test("value with space should be added to option", 1, function() {
@@ -478,7 +480,7 @@
                 equal(document.activeElement, combobox.input[0]);
             });
 
-            test("resetting dataSource detaches the previouse events", function() {
+            test("resetting dataSource detaches the previouse events", 0, function() {
                 var combobox = new ComboBox($("<input/>"));
 
                 var dataSource = combobox.dataSource;

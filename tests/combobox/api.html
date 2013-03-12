@@ -179,7 +179,7 @@
                 equal(combobox.select(), 1);
             });
 
-            test("select() returns selectedIndex", function() {
+            test("select method does not trigger change event", 0, function() {
                 combobox.bind("change", function() {
                     ok(false);
                 });

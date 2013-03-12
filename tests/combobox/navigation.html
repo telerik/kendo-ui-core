@@ -146,11 +146,8 @@
 
                 combobox.select(1);
 
-                setTimeout(function() {
-                    equal(combobox.text(), data[1].text);
-                    equal(combobox.value(), data[1].text);
-                    start();
-                }, 100);
+                equal(combobox.text(), data[1].text);
+                equal(combobox.value(), data[1].text);
             });
 
             test("select li should update text and value", function() {
