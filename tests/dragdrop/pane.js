@@ -88,14 +88,14 @@ test("zooms content", function() {
 })
 
 
-test("zooms to a given point", function() {
+test("zooms to a given point", 2, function() {
     press(10, 10);
     press(13, 14, 2);
     move(9, 6);
     move(14, 18, 2);
 
-    equal(movable.x, -18.4, 0.1);
-    equal(movable.y, -19.2, 0.1);
+    QUnit.close(movable.x, -18.4, 0.1);
+    QUnit.close(movable.y, -19.2, 0.1);
 })
 
 test("offsets zoom point", function() {
@@ -105,8 +105,8 @@ test("offsets zoom point", function() {
     move(8, 9, 2);
 
     equal(movable.scale, 1);
-    equal(movable.x, -5, 0.1);
-    equal(movable.y, -5, 0.1);
+    QUnit.close(movable.x, -5, 0.1);
+    QUnit.close(movable.y, -5, 0.1);
 })
 
 test("zooms to a given point after being offset", function() {
@@ -121,8 +121,8 @@ test("zooms to a given point after being offset", function() {
     move(9, 6);
     move(14, 18, 2);
 
-    equal(movable.x, -70.4, 0.1);
-    equal(movable.y, -19.2, 0.1);
+    QUnit.close(movable.x, -70.4, 0.1);
+    QUnit.close(movable.y, -19.2, 0.1);
 })
 
 test("zooming out causes friction", function() {
@@ -130,7 +130,7 @@ test("zooming out causes friction", function() {
     press(14, 18, 2);
     move(10, 10);
     move(13, 14, 2);
-    equal(movable.scale, 0.92 / 2, 0.1);
+    QUnit.close(movable.scale, 0.92 / 2, 0.1);
 });
 
 

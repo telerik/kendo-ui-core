@@ -99,7 +99,7 @@
                 trigger("mouseup", { pageX: offset.left, pageY: offset.top });
             });
 
-            test("dragenter is not raised for draggable from a different group", function() {
+            test("dragenter is not raised for draggable from a different group", 0, function() {
                 setup({
                         filter: ".test1",
                         dragenter: function() {
