@@ -274,7 +274,7 @@ var tests = [
     "mobile/shim.html",
     "mobile/splitview.html",
     "mobile/swipe.html",
-    "mobile/switch/index.html",
+    "mobile/switch/switch.html",
     "mobile/switch/mvvm.html",
     "mobile/tabstrip.html",
     "mobile/view/view.html",

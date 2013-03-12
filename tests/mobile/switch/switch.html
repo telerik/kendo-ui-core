@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.MobileSwitch Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.mobile.switch.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.Switch Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var Switch = kendo.mobile.ui.Switch,
+                MOUSEDOWN = kendo.support.mousedown,
+                MOUSEMOVE = kendo.support.mousemove,
+                MOUSEUP = kendo.support.mouseup,
+                dom;
+
+            QUnit.config.reorder = false;
+
+            var mouseDownEvent,
+                mouseMoveEvent;
+
+            if (kendo.support.touch) {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+                mouseMoveEvent = new $.Event(null, {type: MOUSEMOVE, changedTouches: [{identifier: 1, pageX: 110, pageY: 102}] });
+            } else {
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, pageX: 100, pageY: 100 });
+                mouseMoveEvent = new $.Event(null, {type: MOUSEMOVE, pageX: 110, pageY: 102 });
+            }
+
+            module("switch", {
+                setup: function() {
+                    dom = $("<input type='checkbox'/>");
+                }
+            });
+
+            test("Switch can be initialized from input type='checkbox'", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                ok(theSwitch.wrapper.hasClass("km-switch"), "Should have specified CSS class");
+            });
+
+            test("Switch change the input type to checkbox", function() {
+                expect(1);
+
+                dom[0].type = "text";
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom[0].type, "checkbox");
+            });
+
+            test("Switch does not wraps the input twice", function() {
+                expect(1);
+                dom.wrap("<span />");
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom.parent("span").length, 1);
+            });
+
+            test("Switch creates a toggle handle", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom.parent().find(".km-switch-handle").length, 1);
+            });
+
+            test("Switch creates on/off labels", function() {
+
+                var theSwitch = new Switch(dom);
+
+                equal(theSwitch.handle.children().length, 2);
+                //on label
+                ok(theSwitch.handle.children().eq(0).hasClass("km-switch-label-on"));
+                ok(theSwitch.handle.children().eq(0).html(), "on");
+
+                //off label
+                ok(theSwitch.handle.children().eq(1).hasClass("km-switch-label-off"));
+                ok(theSwitch.handle.children().eq(1).html(), "off");
+            });
+
+            test("Switch creates a container", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom.parent().find(".km-switch-container").length, 1);
+            });
+
+            test("Switch creates a wrapper and background", function() {
+                expect(2);
+
+                var theSwitch = new Switch(dom);
+
+                equal(dom.parent().find(".km-switch-wrapper").length, 1);
+                equal(dom.parent().find(".km-switch-background").length, 1);
+            });
+
+            test("Switch raises change event when changed", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.bind("change", function() {
+                    ok(true);
+                });
+
+                theSwitch._toggle(true);
+            });
+
+            test("Switch does not raise change event when no value changes", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.bind("change", function() {
+                    ok(true);
+                });
+
+                theSwitch._toggle(true);
+                theSwitch._toggle(true);
+            });
+
+            test("Switch applies active state when pressed", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(mouseMoveEvent);
+                ok(theSwitch.handle.hasClass("km-state-active"), "has active css class");
+            });
+
+            test("Switch removes active state when depressed", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(mouseMoveEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+                ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
+            });
+
+            test("Tapping checks the switch", function() {
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+                ok(theSwitch.element[0].checked);
+            });
+
+            test("Switch check the input depending on the checked option", function() {
+                var theSwitch = new Switch(dom, {
+                    checked: true
+                });
+
+                ok(theSwitch.wrapper.hasClass("km-switch-on"));
+                ok(theSwitch.element[0].checked);
+            });
+
+            test("Switch returns current checked state", function() {
+                var theSwitch = new Switch(dom, {
+                    checked: true
+                });
+
+                ok(theSwitch.check());
+            });
+
+            test("Switch checks the input when check(true)", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.check(true);
+
+                ok(theSwitch.wrapper.hasClass("km-switch-on"));
+                ok(theSwitch.element[0].checked);
+            });
+
+            test("Switch unchecks the input when check(false)", function() {
+                var theSwitch = new Switch(dom, {
+                    checked: true
+                });
+
+                theSwitch.check(false);
+
+                ok(!theSwitch.wrapper.hasClass("km-switch-on"));
+                ok(!theSwitch.element[0].checked);
+            });
+
+            test("Switch toggles to checked when toggle()", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.toggle();
+
+                ok(theSwitch.wrapper.hasClass("km-switch-on"));
+                ok(theSwitch.element[0].checked);
+            });
+
+            test("Switch toggles to unchecked when toggle()", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.check(true);
+                theSwitch.toggle();
+
+                ok(!theSwitch.wrapper.hasClass("km-switch-on"));
+            });
+
+            test("Destroying removes event handling", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.destroy();
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+                ok(!theSwitch.element[0].checked);
+            });
+
+        </script>
+    </body>
+</html>
