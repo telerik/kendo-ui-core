@@ -22,6 +22,7 @@ kendo_module({
         CLICK = "click" + ns,
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
+        READONLY = "readonly",
         LI = "li",
         SPAN = "<span/>",
         FOCUSED = "k-state-focused",
@@ -35,6 +36,8 @@ kendo_module({
         ARIA_SELECTED = "aria-selected",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ID = "id",
         isArray = $.isArray,
@@ -469,7 +472,7 @@ kendo_module({
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, ul, timeView;
+            var that = this, ul, timeView, disabled;
 
             Widget.fn.init.call(that, element, options);
 
@@ -535,7 +538,13 @@ kendo_module({
                     "aria-owns": timeView._timeViewID
                 });
 
-            that.enable(!element.is('[disabled]'));
+            disabled = element.is("[disabled]");
+            if (disabled) {
+                that.enable(false);
+            } else {
+                that.readonly(element.is("[readonly]"));
+            }
+
             that.value(options.value || element.val());
 
             kendo.notify(that);
@@ -585,30 +594,51 @@ kendo_module({
             }
         },
 
-        enable: function(enable) {
+        _editable: function(options) {
             var that = this,
                 element = that.element,
                 arrow = that._arrow.off(ns),
-                wrapper = that._inputWrapper.off(HOVEREVENTS);
+                wrapper = that._inputWrapper.off(ns),
+                readonly = options.readonly,
+                disable = options.disable;
 
-            if (enable === false) {
+            if (!readonly && !disable) {
                 wrapper
-                    .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED);
-
-                element.attr(DISABLED, DISABLED);
-            } else {
-                wrapper
-                    .removeClass(STATEDISABLED)
                     .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element
-                    .removeAttr(DISABLED);
+                element.removeAttr(DISABLED)
+                       .removeAttr(READONLY)
+                       .attr(ARIA_DISABLED, false)
+                       .attr(ARIA_READONLY, false);
 
-                arrow.on(CLICK, proxy(that._click, that))
-                     .on(MOUSEDOWN, preventDefault);
+               arrow.on(CLICK, proxy(that._click, that))
+                   .on(MOUSEDOWN, preventDefault);
+            } else {
+                wrapper
+                    .addClass(disable ? STATEDISABLED : DEFAULT)
+                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+
+                element.attr(DISABLED, disable)
+                       .attr(READONLY, readonly)
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
+        },
+
+        readonly: function(readonly) {
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
+        },
+
+        enable: function(enable) {
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
         },
 
         destroy: function() {
