@@ -88,8 +88,24 @@ function ViewElementStub() {
     this.children = [];
 }
 
+function arrayClose(a, b, tolerance) {
+    if (a.length != b.length) {
+        ok(false, "Arrays differ in size");
+    } else if (a.length) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i].length) {
+                arrayClose(a[i], b[i], tolerance, "Arrays differ at index " + i);
+            } else {
+                QUnit.close(a[i], b[i], tolerance, "Arrays differ at index " + i);
+            }
+        }
+    } else {
+        ok(true);
+    }
+}
+
 function sameBox(a, b, tolerance) {
-    deepEqual([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2], tolerance);
+    arrayClose([a.x1, a.y1, a.x2, a.y2], [b.x1, b.y1, b.x2, b.y2], tolerance);
 }
 
 function stubMethod(fn, methodName, stub, callback) {
