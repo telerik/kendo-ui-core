@@ -769,12 +769,11 @@ table tbody td img{
     display: inline-block;
 }
 
-table tbody td span{
+table tbody td span.product-name {
     display: inline-block;
     max-width: 250px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    height: 100px;
+    line-height: 100px;
 }
 
 table tbody td:first-child + td + td {
@@ -815,12 +814,7 @@ table tbody td:first-child + td + td p{
 }
 
 #total-checkout span{
-    font-size: 10px;
-    color: #787878;
     display:inline-block;
-    font-size: 14px;
-    display: inline-block;
-    vertical-align: text-top;
     color: #2e2e2e;
 }
 

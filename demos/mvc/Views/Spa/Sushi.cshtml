@@ -134,7 +134,7 @@
 
         <script type="text/x-kendo-template" id="large-cart-item">
             <tr>
-                <td> <div class="cart-image-wrapper"><img src="@Url.Content("~/content/spa/websushi/images/200/#= item.image #")" /></div> <span data-bind="text: item.name"></span></td>
+                <td> <div class="cart-image-wrapper"><img src="@Url.Content("~/content/spa/websushi/images/200/#= item.image #")" /></div> <span class="product-name" data-bind="text: item.name"></span></td>
                 <td><input type="text" data-role="numerictextbox" data-bind="value: quantity"></td>
                 <td><p class="table-price" data-bind="text: itemPrice"><p></td>
             </tr>
