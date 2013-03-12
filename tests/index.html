@@ -3,87 +3,68 @@
     <head>
         <script src="../src/jquery.js"></script>
         <link rel="stylesheet" href="qunit/qunit/qunit.css" media="screen" />
-        <link rel="stylesheet" href="qunit-runner.css" media="screen" />
+        <link rel="stylesheet" href="qunit/addons/composite/qunit-composite.css" media="screen" />
         <script src="qunit/qunit/qunit.js"></script>
-        <script src="qunit-runner.js"></script>
+        <script src="qunit/addons/composite/qunit-composite.js"></script>
+        <script src="tests-list.js"></script>
         <script>
-            var tests = [];
-        </script>
-        <script src="autocomplete/tests.js"></script>
-        <script src="calendar/tests.js"></script>
-        <script src="chart/tests.js"></script>
-        <script src="stock/tests.js"></script>
-        <script src="columnmenu/tests.js"></script>
-        <script src="combobox/tests.js"></script>
-        <script src="core/tests.js"></script>
-        <script src="data/tests.js"></script>
-        <script src="datepicker/tests.js"></script>
-        <script src="demos/tests.js"></script>
-        <script src="download-builder/tests.js"></script>
-        <script src="dragdrop/tests.js"></script>
-        <script src="userevents/tests.js"></script>
-        <script src="dropdownlist/tests.js"></script>
-        <script src="editable/tests.js"></script>
-        <script src="editor/tests.js"></script>
-        <script src="imagebrowser/tests.js"></script>
-        <script src="breadcrumbs/tests.js"></script>
-        <script src="searchbox/tests.js"></script>
-        <script src="filtermenu/tests.js"></script>
-        <script src="fx/tests.js"></script>
-        <script src="grid/tests.js"></script>
-        <script src="groupable/tests.js"></script>
-        <script src="gauge/tests.js"></script>
-        <script src="listview/tests.js"></script>
-        <script src="menu/tests.js"></script>
-        <script src="mobile/tests.js"></script>
-        <script src="model/tests.js"></script>
-        <script src="mvvm/tests.js"></script>
-        <script src="pager/tests.js"></script>
-        <script src="panelbar/tests.js"></script>
-        <script src="popup/tests.js"></script>
-        <script src="router/tests.js"></script>
-        <script src="reorderable/tests.js"></script>
-        <script src="resizable/tests.js"></script>
-        <script src="selectable/tests.js"></script>
-        <script src="slider/tests.js"></script>
-        <script src="sortable/tests.js"></script>
-        <script src="sparkline/tests.js"></script>
-        <script src="splitter/tests.js"></script>
-        <script src="tabstrip/tests.js"></script>
-        <script src="textbox/tests.js"></script>
-        <script src="treeview/tests.js"></script>
-        <script src="colorpicker/tests.js"></script>
-        <script src="tooltip/tests.js"></script>
-        <script src="upload/tests.js"></script>
-        <script src="validation/tests.js"></script>
-        <script src="view/tests.js"></script>
-        <script src="window/tests.js"></script>
-        <script src="themebuilder/tests.js"></script>
-        <script>
-            var sequential = true;
 
-            var runnerDone = function (failures, total) {
-                $('<p id="qunit-testresult" class="result" />')
-                .html([
-                    "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
-                    "<span class='passed'>", total - failures, "</span> tests of <span class='total'>", total,
-                        "</span> passed, <span class='failed'>", failures, "</span> failed."
-                ].join(''))
-                .appendTo("body > div");
-            };
+            var filter = location.href.split("?")[1],
+                grepCallback = function(test) {
+                    return test.indexOf(filter) === 0;
+                }
 
-            var start = +new Date();
+            if (filter) {
+                tests = $.grep(tests, grepCallback);
+            }
 
-            QUnit.run(tests, sequential, runnerDone);
+            QUnit.testSuites(tests);
+
+            var client = top.client;
+
+            if (client) {
+                QUnit.begin(function() {
+                    var suite;
+
+                    QUnit.testStart(function(data) {
+                        suite = data.name.replace('.html', '').replace('/', ' ');
+                    });
+
+                    QUnit.addEvent(QUnit.iframe, "load", function() {
+                        var win = QUnit.iframe.contentWindow,
+                        startDate,
+                        knownFails = win.$();
+
+                        win.QUnit.testStart(function (state) {
+                            startDate = +new Date();
+                        });
+
+                        win.QUnit.testDone(function(state) {
+                            var newFails = win.$('li.fail li.fail').not(knownFails);
+
+                            $.extend(state, {
+                                failures: $.map(newFails.contents(), function(err) { return $(err).text() }),
+                                suite: suite,
+                                duration: ((+new Date()) - startDate) / 1000,
+                                agent: navigator.userAgent
+                            });
+
+                            client.publish("/testDone", state);
+
+                            knownFails = knownFails.add(newFails);
+                        });
+                    });
+
+                    QUnit.done(function(state) {
+                        client.publish("/done", state);
+                    });
+                });
+            }
+
         </script>
     </head>
     <body>
-        <div>
-            <h1 id="qunit-header">TEST RUNNER</h1>
-            <h2 id="qunit-banner"></h2>
-            <h2 id="qunit-runner-userAgent"></h2>
-            <div id="runner-test-page-container">
-            </div>
-        </div>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
     </body>
 </html>
