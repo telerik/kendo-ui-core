@@ -817,19 +817,27 @@ kendo_module({
             Widget.fn.destroy.call(this);
         },
         enable: function(enable) {
+            var that = this,
+                wrapper = that.wrapper,
+                innerWrapper = wrapper.children(".k-picker-wrap"),
+                icon = innerWrapper.find(".k-select");
+
             if (arguments.length === 0) {
                 enable = true;
             }
-            var that = this, wrapper = that.wrapper, innerWraper = wrapper.children(".k-picker-wrap");
+
             that.element.attr("disabled", !enable);
             wrapper.attr("disabled", !enable);
+
+            icon.off(NS).on("mousedown" + NS, preventDefault);
+
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", 0)
-                    .on("mouseenter" + NS, function() { innerWraper.addClass("k-state-hover"); })
-                    .on("mouseleave" + NS, function() { innerWraper.removeClass("k-state-hover"); })
-                    .on("focus" + NS, function () { innerWraper.addClass("k-state-focused"); })
-                    .on("blur" + NS, function () { innerWraper.removeClass("k-state-focused"); })
+                    .on("mouseenter" + NS, function() { innerWrapper.addClass("k-state-hover"); })
+                    .on("mouseleave" + NS, function() { innerWrapper.removeClass("k-state-hover"); })
+                    .on("focus" + NS, function () { innerWrapper.addClass("k-state-focused"); })
+                    .on("blur" + NS, function () { innerWrapper.removeClass("k-state-focused"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(CLICK_NS, ".k-icon", bind(that.toggle, that))
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
@@ -852,8 +860,8 @@ kendo_module({
                     '# } else { #' +
                         '<span class="k-selected-color"></span>' +
                     '# } #' +
-                    '<span class="k-select">' +
-                        '<span class="k-icon k-i-arrow-s"></span>' +
+                    '<span class="k-select" unselectable="on">' +
+                        '<span class="k-icon k-i-arrow-s" unselectable="on"></span>' +
                     '</span>' +
                 '</span>' +
             '</span>'
