@@ -1486,14 +1486,23 @@
                     equals(order, "12");
                 });
 
-                test("playAnimations clears animations", function() {
+                test("destroy clears animations", function() {
                     var order;
                     view.animations = [
-                        { play: function() { } },
+                        { destroy: function() { } },
                     ];
 
-                    view.playAnimations();
+                    view.destroy();
                     equals(view.animations.length, 0);
+                });
+
+                test("destroy destroys animations", 1, function() {
+                    var order;
+                    view.animations = [
+                        { destroy: function() { ok(true); } },
+                    ];
+
+                    view.destroy();
                 });
 
                 test("decorate applies decorators in order", function() {

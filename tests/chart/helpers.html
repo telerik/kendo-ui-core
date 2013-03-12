@@ -996,6 +996,20 @@
                     equals(pool._pool.length, 3);
                 });
 
+                test("pool does not accept duplicates", function() {
+                    pool.free("foo");
+                    pool.free("foo");
+
+                    equals(pool._pool.length, 1);
+                });
+
+                test("pool clears duplicates after alloc", function() {
+                    pool.free("foo");
+                    pool.alloc();
+                    pool.free("foo");
+
+                    equals(pool._pool.length, 1);
+                });
             })();
 
         </script>

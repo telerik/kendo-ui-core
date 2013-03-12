@@ -1014,6 +1014,7 @@ kendo_module({
 
             chart.element.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
+            $(document).off(MOUSEMOVE_TRACKING);
 
             if (chart._userEvents) {
                 chart._userEvents.destroy();
@@ -1028,10 +1029,15 @@ kendo_module({
             var chart = this,
                 pool = dataviz.IDPool.current,
                 model = chart._model,
+                view = chart._view,
                 viewElement = chart._viewElement;
 
             if (model) {
                 model.destroy();
+            }
+
+            if (view) {
+                view.destroy();
             }
 
             if (viewElement) {
@@ -2384,6 +2390,7 @@ kendo_module({
                 box = bar.box;
 
             options = deepExtend({ data: { modelId: bar.options.modelId } }, options);
+            options.id = null;
 
             return view.createRect(box, options);
         },
@@ -3161,6 +3168,7 @@ kendo_module({
                 box = bullet.box;
 
             options = deepExtend({ data: { modelId: bullet.options.modelId } }, options);
+            options.id = null;
 
             return view.createRect(box, options);
         },
@@ -3373,6 +3381,7 @@ kendo_module({
             options = deepExtend({ data: { modelId: element.options.modelId } }, options);
 
             return marker.getViewElements(view, deepExtend(options, {
+                id: null,
                 fill: marker.options.border.color,
                 fillOpacity: 1,
                 strokeOpacity: 0
@@ -3433,6 +3442,7 @@ kendo_module({
                     new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
 
             return view.createCircle(center, radius, {
+                id: null,
                 data: { modelId: element.options.modelId },
                 stroke: borderColor,
                 strokeWidth: borderWidth,
@@ -3800,7 +3810,6 @@ kendo_module({
                     zIndex: -1
                 }),
                 view.createPolyline(linePoints, false, {
-                    id: segment.options.id,
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
@@ -4301,12 +4310,10 @@ kendo_module({
                     strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity
                 } : {},
                 rectStyle = deepExtend({
-                    id: options.id,
                     fill: point.color,
                     fillOpacity: options.opacity
                 }, border),
                 lineStyle = {
-                    id: options.id,
                     strokeOpacity: defined(options.line.opacity) ? options.line.opacity : options.opacity,
                     strokeWidth: options.line.width,
                     stroke: options.line.color || point.color,
@@ -4356,7 +4363,6 @@ kendo_module({
 
         createOverlayRect: function(view, options) {
             return view.createRect(this.box, {
-                id: options.id,
                 data: { modelId: options.modelId },
                 fill: "#fff",
                 fillOpacity: 0
@@ -4547,7 +4553,6 @@ kendo_module({
                 options = point.options,
                 elements = [],
                 lineStyle = {
-                    id: options.id,
                     strokeOpacity: options.opacity,
                     zIndex: -1,
                     strokeWidth: options.width,
@@ -4798,6 +4803,7 @@ kendo_module({
                     strokeOpacity: border.opacity,
                     strokeWidth: border.width,
                     stroke: border.color,
+                    id: null,
                     data: { modelId: segment.options.modelId }
                 }));
             }

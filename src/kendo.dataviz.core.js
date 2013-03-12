@@ -1741,8 +1741,14 @@ kendo_module({
         },
 
         renderId: function() {
-            var element = this;
-            return element.renderAttr("id", element.options.id);
+            var element = this,
+                result = "";
+
+            if (element.options.id) {
+                result = element.renderAttr("id", element.options.id);
+            }
+
+            return result;
         },
 
         renderAttr: function (name, value) {
@@ -1774,6 +1780,14 @@ kendo_module({
             view.definitions = {};
             view.decorators = [];
             view.animations = [];
+        },
+
+        destroy: function() {
+            var animations = this.animations;
+
+            while (animations.length > 0) {
+                animations.shift().destroy();
+            }
         },
 
         renderDefinitions: function() {
@@ -1818,20 +1832,14 @@ kendo_module({
         },
 
         setupAnimations: function() {
-            var animations = this.animations,
-                i,
-                count = animations.length;
-
-            for (i = 0; i < count; i++) {
-                animations[i].setup();
+            for (var i = 0; i < this.animations.length; i++) {
+                this.animations[i].setup();
             }
         },
 
         playAnimations: function() {
-            var animations = this.animations;
-
-            while (animations.length > 0) {
-                animations.shift().play();
+            for (var i = 0; i < this.animations.length; i++) {
+                this.animations[i].play();
             }
         },
 
@@ -2036,10 +2044,11 @@ kendo_module({
 
         abort: function() {
             this._stopped = true;
-            this.destroy();
         },
 
-        destroy: noop,
+        destroy: function() {
+            this.abort();
+        },
 
         setup: noop,
 
@@ -2092,6 +2101,8 @@ kendo_module({
         },
 
         destroy: function() {
+            ElementAnimation.fn.destroy.call(this);
+
             // Unwrap all child elements
             this.element.destroy();
         }
@@ -2491,6 +2502,7 @@ kendo_module({
     var IDPool = Class.extend({
         init: function(size, prefix, start) {
             this._pool = [];
+            this._freed = {};
             this._size = size;
             this._id = start;
             this._prefix = prefix;
@@ -2498,21 +2510,27 @@ kendo_module({
 
         alloc: function() {
             var that = this,
-                pool = that._pool;
+                pool = that._pool,
+                id;
 
             if (pool.length > 0) {
-                return pool.pop();
+                id = pool.pop();
+                that._freed[id] = false;
+            } else {
+                id = that._prefix + that._id++;
             }
 
-            return that._prefix + that._id++;
+            return id;
         },
 
         free: function(id) {
             var that = this,
-                pool = that._pool;
+                pool = that._pool,
+                freed = that._freed;
 
-            if (pool.length < that._size) {
+            if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
+                freed[id] = true;
             }
         }
     });
