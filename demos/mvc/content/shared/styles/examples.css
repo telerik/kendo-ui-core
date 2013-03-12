@@ -52,7 +52,7 @@ html
 .overview,
 #footer
 {
-    font-size:13px;
+    font-size:12px;
 }
 
 .overview #header,
@@ -884,37 +884,44 @@ div.submenu-box ol {
     margin-top:3em;
 }
 
-#footer,
-#footer a
+#footer
 {
-    color:#7f7f7f;
+    color:#727272;
 }
 
-#footer .active a,
-#footer .bottom-nav a:hover
+#footer a
+{
+    color:#959595;
+}
+
+#footer .active a
 {
     color:#fff;
 }
 
 #footer .bottom-nav
 {
+    display:block;
     margin-bottom:1em;
-    line-height:52px;
+    height: 50px;
+    line-height:50px;
 }
 
 .bottom-nav li
 {
-    display:inline;
-    font-size:.9em;
-    margin-right:10px;
+    display:block;
+    float:left;
+    margin-right:18px;
 }
 
 #footer p
 {
-    line-height:1.5;
+    font-size:.9em;
+    line-height:1.65;
 }
 
-#footer p a
+#footer p a,
+#footer .bottom-nav a:hover
 {
     color:#e26b1d;
 }
@@ -928,12 +935,12 @@ div.submenu-box ol {
 {
     position:absolute;
     top:64px;
-    right:0;
+    right:3px;
 }
 
 #social h2
 {
-    width:109px;
+    width:115px;
     height:24px;
     margin:0;
     text-indent:-4444px;
@@ -941,10 +948,15 @@ div.submenu-box ol {
     background:-224px -51px url(sprite.misc.png);
 }
 
+#social ul
+{
+    margin: 9px 0 0 14px;
+}
+
 #social li
 {
     float:left;
-    margin-left:10px;
+    margin-left:9px;
 }
 
 #social .icon
@@ -967,6 +979,7 @@ p#copy
 {
     margin-top:30px;
     font-size:.9em;
+    color:#7f7f7f;
 }
 
 /*inner pages*/
