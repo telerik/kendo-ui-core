@@ -13,6 +13,8 @@
         <script src="helper.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>\
     </head>
     <body>
         <h1 id="qunit-header">Splitter client creation</h1>
@@ -349,8 +351,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
-                close(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5, 1);
-                close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
+                QUnit.close(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5, 1);
+                QUnit.close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
             });
 
             test("resizing.stop for middle panes", function() {
@@ -365,8 +367,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
-                close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5, 1);
-                close(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5, 1);
+                QUnit.close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5, 1);
+                QUnit.close(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5, 1);
             });
 
             test("resizing.stop fires splitter resize", function() {
