@@ -204,8 +204,8 @@ kendo_module({
             } else if (action === "add") {
                 length = items.length;
 
-                for (; idx < length; idx) {
-                    element.append(that.template(items[0]));
+                for (; idx < length; idx++) {
+                    element.append(that.template(items[idx]));
                 }
 
                 that._style();
@@ -213,8 +213,8 @@ kendo_module({
             } else if (action === "remove") {
                 length = items.length;
 
-                for (; idx < length; idx) {
-                    element.find("[data-" + kendo.ns + "uid=" + item.uid + "]").remove();
+                for (; idx < length; idx++) {
+                    element.find("[data-" + kendo.ns + "uid=" + items[idx].uid + "]").remove();
                 }
 
                 return;
