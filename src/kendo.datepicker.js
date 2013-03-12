@@ -23,6 +23,7 @@ kendo_module({
     CHANGE = "change",
     DATEVIEW = "dateView",
     DISABLED = "disabled",
+    READONLY = "readonly",
     DEFAULT = "k-state-default",
     FOCUSED = "k-state-focused",
     SELECTED = "k-state-selected",
@@ -38,6 +39,7 @@ kendo_module({
     ARIA_DISABLED = "aria-disabled",
     ARIA_EXPANDED = "aria-expanded",
     ARIA_HIDDEN = "aria-hidden",
+    ARIA_READONLY = "aria-readonly",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -390,52 +392,51 @@ kendo_module({
             });
         },
 
-        _editable: function(readonly, disable) {
+        _editable: function(options) {
             var that = this,
+                element = that.element,
                 icon = that._dateIcon.off(ns),
                 wrapper = that._inputWrapper.off(ns),
-                element = that.element;
+                readonly = options.readonly,
+                disable = options.disable;
 
-            if (readonly === false && disable === false) {
+            if (!readonly && !disable) {
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
                 element.removeAttr(DISABLED)
-                       .removeAttr("readonly")
+                       .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr("aria-readonly", false);
+                       .attr(ARIA_READONLY, false);
 
                icon.on(CLICK, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
-
             } else {
-                if (disable) {
-                    wrapper
-                        .removeClass(DEFAULT)
-                        .addClass(STATEDISABLED);
-                } else {
-                    wrapper
-                        .addClass(DEFAULT)
-                        .removeClass(STATEDISABLED);
-                }
+                wrapper
+                    .addClass(disable ? STATEDISABLED : DEFAULT)
+                    .removeClass(disable ? DEFAULT : STATEDISABLED);
 
                 element.attr(DISABLED, disable)
-                       .attr("readonly", readonly)
+                       .attr(READONLY, readonly)
                        .attr(ARIA_DISABLED, disable)
-                       .attr("aria-readonly", readonly);
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 
         readonly: function(readonly) {
-            readonly = readonly === undefined ? true : readonly;
-            this._editable(readonly, false);
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
         },
 
         enable: function(enable) {
-            enable = enable === undefined ? true : enable;
-            this._editable(false, !enable);
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
         },
 
         destroy: function() {
