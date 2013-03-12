@@ -7293,10 +7293,7 @@ kendo_module({
             var highlight = this,
                 points = highlight._points,
                 overlays = highlight._overlays,
-                overlay,
-                i,
-                point,
-                pointOptions;
+                overlay, i, point, pointOptions;
 
             while (overlays.length) {
                 overlay = highlight._overlays.pop();
@@ -7471,11 +7468,11 @@ kendo_module({
             var output = 0;
 
             if (offset + size > viewPortSize) {
-                output -= size;
+                output = viewPortSize - (offset + size);
             }
 
-            if (offset + output < 0) {
-                output += size;
+            if (offset < 0) {
+                output = -offset;
             }
 
             return output;
