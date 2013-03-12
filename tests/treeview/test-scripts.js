@@ -7,7 +7,6 @@ document.write('\
     <script src="../../src/kendo.binder.js"></script>\
     <script src="../../src/kendo.treeview.js"></script>\
     <script src="../qunit/qunit/qunit.js"></script>\
-    <script src="../qunit-runner.js"></script>\
     <script src="test-helper.js"></script>\
     <link rel="stylesheet" href="../qunit/qunit/qunit.css" />\
     <link rel="stylesheet/less" href="../../styles/web/kendo.common.less">\

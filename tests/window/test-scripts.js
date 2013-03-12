@@ -9,7 +9,6 @@ document.write('\
     <script src="../../src/kendo.draganddrop.js"></script>\
     <script src="../../src/kendo.window.js"></script>\
     <script src="../qunit/qunit/qunit.js"></script>\
-    <script src="../qunit-runner.js"></script>\
     <link rel="stylesheet" href="../qunit/qunit/qunit.css" />\
     <link rel="stylesheet/less" href="../../styles/web/kendo.common.less">\
     <link rel="stylesheet/less" href="../../styles/web/kendo.default.less">\
