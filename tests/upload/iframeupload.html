@@ -96,6 +96,7 @@
 
             function moduleTeardown() {
                 Upload.prototype._supportsFormData = _supportsFormData;
+                kendo.destroy($("#testbed_container"));
                 $("iframe[name^='uploadInstance'], form[target^='uploadInstance']").remove();
                 $.mockjaxClear();
                 removeHTML();
