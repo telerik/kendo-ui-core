@@ -272,6 +272,22 @@
                     equal(datetimepicker.element[0].type, "text");
                 });
             }
+
+            test("DateTimePicker honors readonly attribute", function() {
+                var datetimepicker = input.attr("readonly", true).kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker._timeIcon.click();
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker uses disabled attr over the readonly", function() {
+                input.attr("readonly", true).attr("disabled", true).kendoDateTimePicker();
+
+                equal(input.attr("readonly"), undefined);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

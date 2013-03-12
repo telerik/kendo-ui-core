@@ -260,6 +260,79 @@
                 ok(!datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
             });
 
+            test("readonly() makes  input element readonly", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.readonly();
+
+                equal(datetimepicker.element.attr("readonly"), "readonly");
+            });
+
+            test("readonly() unbinds date icon click", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.readonly();
+
+                datetimepicker._dateIcon.click();
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("readonly() unbinds time icon click", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.readonly();
+
+                datetimepicker._timeIcon.click();
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.readonly();
+                datetimepicker.readonly(false);
+
+                equal(datetimepicker.element.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.enable(false);
+                datetimepicker.readonly();
+
+                equal(datetimepicker.element.attr("readonly"), "readonly");
+                equal(datetimepicker.element.attr("disabled"), undefined);
+                ok(datetimepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!datetimepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.readonly();
+                datetimepicker.enable(false);
+
+                equal(datetimepicker.element.attr("readonly"), undefined);
+                equal(datetimepicker.element.attr("disabled"), "disabled");
+                ok(!datetimepicker._inputWrapper.hasClass("k-state-default"));
+                ok(datetimepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.readonly();
+                datetimepicker.enable();
+
+                equal(datetimepicker.element.attr("readonly"), undefined);
+                equal(datetimepicker.element.attr("disabled"), undefined);
+                ok(datetimepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!datetimepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
             test("min method returns min value", function() {
                 var value = new Date("10/22/2000"),
                 datetimepicker = input.kendoDateTimePicker({min: value}).data("kendoDateTimePicker");

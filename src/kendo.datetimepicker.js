@@ -26,6 +26,7 @@ kendo_module({
         ns = ".kendoDateTimePicker",
         CLICK = "click" + ns,
         DISABLED = "disabled",
+        READONLY = "readonly",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
@@ -38,6 +39,8 @@ kendo_module({
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
         ARIA_OWNS = "aria-owns",
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         DATE = Date,
         MIN = new DATE(1900, 0, 1),
         MAX = new DATE(2099, 11, 31),
@@ -47,7 +50,7 @@ kendo_module({
 
     var DateTimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, disabled;
 
             Widget.fn.init.call(that, element, options);
 
@@ -87,7 +90,12 @@ kendo_module({
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
 
-            that.enable(!element.is('[disabled]'));
+            disabled = element.is("[disabled]");
+            if (disabled) {
+                that.enable(false);
+            } else {
+                that.readonly(element.is("[readonly]"));
+            }
             that.value(options.value || element.val());
 
             kendo.notify(that);
@@ -144,29 +152,27 @@ kendo_module({
             that.timeView.ul[0].innerHTML = "";
         },
 
-        enable: function(enable) {
+        _editable: function(options) {
             var that = this,
                 element = that.element,
                 dateIcon = that._dateIcon.off(ns),
                 timeIcon = that._timeIcon.off(ns),
-                wrapper = that._inputWrapper.off(HOVEREVENTS);
+                wrapper = that._inputWrapper.off(ns),
+                readonly = options.readonly,
+                disable = options.disable;
 
-            if (enable === false) {
-                wrapper
-                    .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED);
-
-                element.attr(DISABLED, DISABLED);
-            } else {
+            if (!readonly && !disable) {
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element
-                    .removeAttr(DISABLED);
+                element.removeAttr(DISABLED)
+                       .removeAttr(READONLY)
+                       .attr(ARIA_DISABLED, false)
+                       .attr(ARIA_READONLY, false);
 
-                dateIcon.on(MOUSEDOWN, preventDefault)
+               dateIcon.on(MOUSEDOWN, preventDefault)
                         .on(CLICK, function() {
                             that.toggle("date");
 
@@ -176,7 +182,7 @@ kendo_module({
                         });
 
 
-                timeIcon.on(MOUSEDOWN, preventDefault)
+               timeIcon.on(MOUSEDOWN, preventDefault)
                         .on(CLICK, function() {
                             that.toggle("time");
 
@@ -184,7 +190,31 @@ kendo_module({
                                 element.focus();
                             }
                         });
+
+            } else {
+                wrapper
+                    .addClass(disable ? STATEDISABLED : DEFAULT)
+                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+
+                element.attr(DISABLED, disable)
+                       .attr(READONLY, readonly)
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
+        },
+
+        readonly: function(readonly) {
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
+        },
+
+        enable: function(enable) {
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
         },
 
         destroy: function() {
