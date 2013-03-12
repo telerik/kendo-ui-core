@@ -274,6 +274,9 @@
                     ]);
 
                 tree2.data("kendoTreeView").append(tree2.find(".k-item"), tree1.find(".k-item"));
+
+                equal(tree1.find(".k-item").length, 2);
+                equal(tree2.find(".k-item").length, 0);
             });
 
             test("moving of parent nodes", function() {
