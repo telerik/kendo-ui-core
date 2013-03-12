@@ -718,6 +718,31 @@
                 ok(!treeview.find(".k-item .k-group").attr("marked"));
             });
 
+            test("collapse method does not fetch data from server", function() {
+                var calls = 0;
+
+                var dataFor = {
+                    "root": [ { id: 1, text: "foo", hasChildren: true } ],
+                    1: [ { id: 2, text: "bar", hasChildren: false } ]
+                };
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                calls++;
+                                options.success(dataFor[options.data.id || "root"]);
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.expand(".k-item");
+                treeviewObject.collapse(".k-item");
+
+                equal(calls, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

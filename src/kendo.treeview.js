@@ -1353,7 +1353,7 @@
                             }
                         }
                     }));
-                } else if (dataItem) {
+                } else if (!loaded || (loaded && expand)) {
                     if (options.loadOnDemand) {
                         that._progress(node, true);
                     }
