@@ -196,63 +196,61 @@
                 ddl2.value("item4");
             });
 
-            if (!kendo.support.browser.mozilla) {
-                asyncTest("DropDownList does not clear value if parent has value", function() {
-                    $.mockjaxSettings.responseTime = 0;
-                    $.mockjaxSettings.contentType = "application/json";
-                    $.mockjax({ url: "fake.json", responseText: '[{"text": "item1", "id": 1}, {"text": "item2", "id": 1}, {"text": "item3", "id": 2}, {"text": "item4", "id": 2} ]'});
+            asyncTest("DropDownList does not clear value if parent has value", function() {
+                $.mockjaxSettings.responseTime = 0;
+                $.mockjaxSettings.contentType = "application/json";
+                $.mockjax({ url: "fake.json", responseText: '[{"text": "item1", "id": 1}, {"text": "item2", "id": 1}, {"text": "item3", "id": 2}, {"text": "item4", "id": 2} ]'});
 
-                    var ddl = new DropDownList(parent, {
-                        optionLabel: "Select",
-                        dataValueField: "id",
-                        dataTextField: "id",
-                        dataSource: {
-                            transport: {
-                                read: { url: "fake.json", type: "json" }
-                            }
-                        },
-                        autoBind: false
-                    });
-
-                    var ddl2 = new DropDownList(child.attr("id", "child"), {
-                        optionLabel: "Select",
-                        dataValueField: "text",
-                        dataTextField: "text",
-                        dataSource: {
-                            transport: {
-                                read: { url: "fake.json", type: "json" }
-                            }
-                        },
-                        cascadeFrom: "parent",
-                        autoBind: false
-                    });
-
-                    var ddl3 = new DropDownList($("<input />"), {
-                        optionLabel: "Select",
-                        dataValueField: "text",
-                        dataTextField: "text",
-                        dataSource: {
-                            transport: {
-                                read: { url: "fake.json", type: "json" }
-                            }
-                        },
-                        cascadeFrom: "child",
-                        autoBind: false,
-                        cascade: function() {
-                            start();
-                            $.mockjaxClear();
-
-                            equal(ddl.value(), "2");
-                            equal(ddl2.value(), "item4");
-                            equal(ddl3.value(), "item4");
+                var ddl = new DropDownList(parent, {
+                    optionLabel: "Select",
+                    dataValueField: "id",
+                    dataTextField: "id",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
                         }
-                    });
-
-                    ddl.value("2");
-                    ddl2.value("item4");
-                    ddl3.value("item4");
+                    },
+                    autoBind: false
                 });
-            }
+
+                var ddl2 = new DropDownList(child.attr("id", "child"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    cascadeFrom: "parent",
+                    autoBind: false
+                });
+
+                var ddl3 = new DropDownList($("<input />"), {
+                    optionLabel: "Select",
+                    dataValueField: "text",
+                    dataTextField: "text",
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    },
+                    cascadeFrom: "child",
+                    autoBind: false,
+                    cascade: function() {
+                        start();
+                        $.mockjaxClear();
+
+                        equal(ddl.value(), "2");
+                        equal(ddl2.value(), "item4");
+                        equal(ddl3.value(), "item4");
+                    }
+                });
+
+                ddl.value("2");
+                ddl2.value("item4");
+                ddl3.value("item4");
+            });
 
             test("DropDownList clears value if parent has no value", function() {
                 var ddl = new DropDownList(parent, {

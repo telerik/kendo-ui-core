@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <script src="../../src/jquery.js"></script>
-    <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script src="../kendo-test-helpers.js"></script>
-    <script type="text/javascript" src="../jquery.mockjax.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <script src="../jquery.mockjax.js"></script>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.data.js"></script>
     <script src="../../src/aspnetmvc/kendo.data.aspnetmvc.js"></script>
@@ -92,41 +92,39 @@
                 });
             });
 
-            if (!kendo.support.browser.mozilla) {
-                test("data is loaded from the url if both data and url are set on the second request", 2, function() {
-                    var data = [{foo: "bar" }],
-                        transport = new Transport({
-                            data: {
-                                Data: data,
-                                Total: 10
-                            },
-                            read: {
-                                url: "foo"
-                            }
-                        });
-
-                    $.mockjax({
-                        url: "foo",
-                        response: function() {
-                            start();
-                            ok(true);
+            test("data is loaded from the url if both data and url are set on the second request", 2, function() {
+                var data = [{foo: "bar" }],
+                    transport = new Transport({
+                        data: {
+                            Data: data,
+                            Total: 10
+                        },
+                        read: {
+                            url: "foo"
                         }
                     });
 
-                    transport.read({
-                        success: function(e) {
-                           deepEqual(e.Data, data);
-                        }
-                    });
-
-                    stop();
-
-                    transport.read({
-                        success: function(e) {
-                        }
-                    });
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        start();
+                        ok(true);
+                    }
                 });
-            }
+
+                transport.read({
+                    success: function(e) {
+                       deepEqual(e.Data, data);
+                    }
+                });
+
+                stop();
+
+                transport.read({
+                    success: function(e) {
+                    }
+                });
+            });
 
             test("parameterMap transforms single string filter", function() {
                 var transport = new Transport({
