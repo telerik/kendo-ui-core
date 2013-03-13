@@ -36,7 +36,7 @@ kendo_module({
 
     var ComboBox = Select.extend({
         init: function(element, options) {
-            var that = this, wrapper, text;
+            var that = this, text;
 
             that.ns = ns;
 
@@ -71,32 +71,6 @@ kendo_module({
             that._enable();
 
             that._cascade();
-
-            wrapper = that._inputWrapper;
-
-            that.input
-                .on("keydown" + ns, proxy(that._keydown, that))
-                .on("focus" + ns, function() {
-                    wrapper.addClass(FOCUSED);
-                    that._placeholder(false);
-                })
-                .on("blur" + ns, function() {
-                    wrapper.removeClass(FOCUSED);
-                    clearTimeout(that._typing);
-
-                    if (that.options.text !== that.input.val()) {
-                        that.text(that.text());
-                    }
-
-                    that._placeholder();
-                    that._blur();
-
-                    element.blur();
-                })
-                .attr({
-                    "role": "combobox",
-                    "aria-expanded": false
-                });
 
             that._aria();
 
@@ -191,8 +165,8 @@ kendo_module({
             var that = this,
                 disable = options.disable,
                 readonly = options.readonly,
-                input = that.input.add(that.element),
                 wrapper = that._inputWrapper.off(ns),
+                input = that.element.add(that.input.off(ns)),
                 arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
 
             if (!readonly && !disable) {
@@ -208,6 +182,27 @@ kendo_module({
 
                 arrow.on(CLICK, function() { that.toggle(); })
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+
+                that.input
+                    .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("focus" + ns, function() {
+                        wrapper.addClass(FOCUSED);
+                        that._placeholder(false);
+                    })
+                    .on("blur" + ns, function() {
+                        wrapper.removeClass(FOCUSED);
+                        clearTimeout(that._typing);
+
+                        if (that.options.text !== that.input.val()) {
+                            that.text(that.text());
+                        }
+
+                        that._placeholder();
+                        that._blur();
+
+                        that.element.blur();
+                    });
+
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
@@ -596,6 +591,10 @@ kendo_module({
                  .css({
                     width: "100%",
                     height: element.style.height
+                 })
+                 .attr({
+                     "role": "combobox",
+                     "aria-expanded": false
                  })
                  .show();
 
