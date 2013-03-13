@@ -68,6 +68,12 @@
                 ok(validator.validate());
             });
 
+            test("validate returns false if checkbox with special character marked as required is not checked", function() {
+                container.append($('<input type="checkbox" data-val="true" data-val-required="foo" name="foo.bar" />'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
             test("validate returns false if checkbox marked as required is not checked", function() {
                 container.append($('<input type="checkbox" data-val="true" data-val-required="foo" />'));
                 var validator = setup(container);
