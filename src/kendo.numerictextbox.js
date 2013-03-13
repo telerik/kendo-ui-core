@@ -388,11 +388,9 @@ kendo_module({
                 text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
             }
 
-            text[0].style.cssText = element.style.cssText;
-            text[0].tabIndex = element.tabIndex;
-
-            element.tabIndex = 0;
             element.type = "text";
+            text[0].tabIndex = element.tabIndex;
+            text[0].style.cssText = element.style.cssText;
             text.prop("placeholder", that.options.placeholder);
 
             if (accessKey) {

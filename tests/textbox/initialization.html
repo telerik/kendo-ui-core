@@ -87,7 +87,7 @@
                 var textbox = new NumericTextBox(input);
 
                 equal(textbox._text.prop("tabindex"), 3);
-                equal(textbox.element.prop("tabindex"), 0);
+                equal(textbox.element.prop("tabindex"), 3);
             });
 
             test("Change type of the element", function() {
