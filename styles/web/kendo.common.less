@@ -2063,8 +2063,7 @@ span.k-dropdown
     border-color: inherit; /* skin-related, inherit does not work in ie7- */
 }
 
-.k-picker-wrap .k-select,
-.k-numeric-wrap .k-select
+.k-picker-wrap .k-select
 {
     padding: 0 2px;
 }
@@ -2142,6 +2141,11 @@ span.k-datetimepicker .k-select+.k-select
     line-height: 1.56em;
     vertical-align: middle;
     padding: 3px;
+}
+
+.k-numeric-wrap .k-select
+{
+	padding: 0;
 }
 
 body .k-datetimepicker .k-select
@@ -2550,19 +2554,13 @@ span.k-numerictextbox
     margin: 0;
 }
 
-.k-numerictextbox .k-select
-{
-    padding-top: 1px;
-    padding-bottom: 1px;
-}
-
 .k-numerictextbox .k-link
 {
     display: block;
     height: 11px;
     line-height: 11px;
     border-width: 0;
-    padding: 0;
+    padding: 1px 3px 0;
 }
 
 .k-numerictextbox .k-icon

@@ -436,7 +436,7 @@ textarea.k-textbox:hover,
 
 .k-state-highlight
 {
-    background-color: @active-background-color;
+    background: @active-background-color;
     color: @active-text-color;
 }
 
@@ -856,6 +856,20 @@ div.k-imagebrowser-dropzone em
     .border-radius(0 0 @main-border-radius @main-border-radius);
 }
 
+.k-autocomplete.k-state-border-up .k-input,
+.k-dropdown-wrap.k-state-border-up .k-input,
+.k-picker-wrap.k-state-border-up .k-input,
+.k-picker-wrap.k-state-border-up .k-selected-color,
+.k-numeric-wrap.k-state-border-up .k-input
+{
+	.border-radius(0 0 0 @inner-border-radius);
+}
+
+.k-multiselect.k-state-border-up .k-multiselect-wrap,
+{
+	.border-radius(0 0 @inner-border-radius @inner-border-radius);
+}
+
 .k-window-titlebar,
 .k-block > .k-header,
 .k-tabstrip-items .k-item,
@@ -870,6 +884,47 @@ div.k-imagebrowser-dropzone em
 .k-numeric-wrap.k-state-border-down
 {
     .border-radius(@main-border-radius @main-border-radius 0 0);
+}
+
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input
+{
+    .border-radius(@inner-border-radius 0 0 @inner-border-radius);
+}
+
+.k-numeric-wrap .k-link
+{
+    .border-radius(0 @inner-border-radius 0 0);
+}
+
+.k-numeric-wrap .k-link + .k-link
+{
+    .border-radius(0 0 @inner-border-radius 0);
+}
+
+.k-colorpicker .k-selected-color
+{
+	.border-radius(@inner-border-radius 0 0 @inner-border-radius);
+}
+
+.k-rtl .k-colorpicker .k-selected-color
+{
+	.border-radius(0 @inner-border-radius @inner-border-radius 0);
+}
+
+.k-autocomplete.k-state-border-down .k-input,
+.k-dropdown-wrap.k-state-border-down .k-input,
+.k-picker-wrap.k-state-border-down .k-input,
+.k-picker-wrap.k-state-border-down .k-selected-color,
+.k-numeric-wrap.k-state-border-down .k-input
+{
+	.border-radius(@inner-border-radius 0 0 0);
+}
+
+.k-multiselect.k-state-border-down .k-multiselect-wrap,
+{
+	.border-radius(@inner-border-radius @inner-border-radius 0 0);
 }
 
 .k-dropdown-wrap .k-select,
@@ -894,20 +949,12 @@ div.k-imagebrowser-dropzone em
 
 .k-textbox > input,
 .k-autocomplete .k-input,
-.k-colorpicker .k-selected-color,
 .k-progress,
 .k-progress-status,
-.k-numeric-wrap.k-expand-padding .k-input
+.k-numeric-wrap.k-expand-padding .k-input,
+.k-multiselect-wrap
 {
     .guarded-border-radius(@inner-border-radius);
-}
-
-.k-dropdown-wrap .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-numeric-wrap .k-link
-{
-    .border-radius(@inner-border-radius 0 0 @inner-border-radius);
 }
 
 .k-list .k-state-hover,
