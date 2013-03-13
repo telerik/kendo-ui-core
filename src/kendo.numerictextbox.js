@@ -52,8 +52,6 @@ kendo_module({
 
              options = that.options;
              element = that.element
-                           .on("keydown" + ns, proxy(that._keydown, that))
-                           .on("paste" + ns, proxy(that._paste, that))
                            .on("blur" + ns, proxy(that._focusout, that))
                            .attr("role", "spinbutton");
 
@@ -130,15 +128,17 @@ kendo_module({
 
         _editable: function(options) {
             var that = this,
+                element = that.element,
                 disable = options.disable,
                 readonly = options.readonly,
-                text = that._text.add(that.element),
+                text = that._text.add(element),
                 wrapper = that._inputWrapper.off(HOVEREVENTS);
+
+            that._toggleText(true);
 
             that._upArrowEventHandler.unbind("press");
             that._downArrowEventHandler.unbind("press");
-
-            that._toggleText(true);
+            element.off("keydown" + ns).off("paste" + ns);
 
             if (!readonly && !disable) {
                 wrapper
@@ -162,6 +162,11 @@ kendo_module({
                     that._spin(-1);
                     that._downArrow.addClass(SELECTED);
                 });
+
+                that.element
+                    .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("paste" + ns, proxy(that._paste, that));
+
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
