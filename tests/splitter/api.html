@@ -28,54 +28,48 @@
             });
 
             test("toggle(false) toggles pane state", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true }, {} ]
-                        }),
-                    pane = splitter.find(".k-pane:first");
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(pane, false);
+                var pane = splitter.find(".k-pane:first");
+
+                splitterObject.toggle(pane, false);
 
                 ok(pane.data("pane").collapsed);
 
-                splitter = $(getSplitterHtml())
-                    .appendTo(document.body)
-                    .kendoSplitter({
-                        panes: [ {}, { collapsible: true } ]
-                    });
+                createSplitter({
+                    panes: [ {}, { collapsible: true } ]
+                });
 
                 pane = splitter.find(".k-pane:last")
 
-                splitter.data("kendoSplitter").toggle(pane, false);
+                splitterObject.toggle(pane, false);
 
                 ok(pane.data("pane").collapsed);
             });
 
             test("toggle(false) triggers resize", function() {
-                var triggered = false,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true }, {} ],
-                            resize: function() {
-                                triggered = true;
-                            }
-                        });
+                var triggered = false;
 
-                splitter.data("kendoSplitter").toggle(".k-pane:last", false);
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ],
+                    resize: function() {
+                        triggered = true;
+                    }
+                });
+
+                splitterObject.toggle(".k-pane:last", false);
 
                 ok(triggered);
             });
 
             test("toggle(false) converts associated arrow to expand arrow", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", false);
+                splitterObject.toggle(".k-pane:first", false);
 
                 var previousArrow = splitter.find(".k-expand-prev");
 
@@ -84,80 +78,70 @@
             });
 
             test("toggle(false) disables splitbar resize", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", false);
+                splitterObject.toggle(".k-pane:first", false);
 
                 ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
             });
 
             test("toggle(true) removes splibar hover style", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true, collapsed: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true, collapsed: true }, {} ]
+                });
 
                 splitter.find(".k-splitbar").addClass("k-splitbar-horizontal-hover");
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", false);
+                splitterObject.toggle(".k-pane:first", false);
 
                 ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
             });
 
             test("toggle(true) toggles pane state", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true, collapsed: true }, {} ]
-                        }),
-                    pane = splitter.find(".k-pane:first");
+                createSplitter({
+                    panes: [ { collapsible: true, collapsed: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(pane, true);
+                var pane = splitter.find(".k-pane:first");
+
+                splitterObject.toggle(pane, true);
 
                 ok(!pane.data("pane").collapsed);
 
-                splitter = $(getSplitterHtml())
-                    .appendTo(document.body)
-                    .kendoSplitter({
-                        panes: [ {}, { collapsible: true, collapsed: true } ]
-                    });
+                createSplitter({
+                    panes: [ {}, { collapsible: true, collapsed: true } ]
+                });
 
                 pane = splitter.find(".k-pane:last")
 
-                splitter.data("kendoSplitter").toggle(pane, true);
+                splitterObject.toggle(pane, true);
 
                 ok(!pane.data("pane").collapsed);
             });
 
             test("toggle(true) triggers resize", function() {
-                var triggered = false,
-                splitter = $(getSplitterHtml())
-                .appendTo(document.body)
-                .kendoSplitter({
+                var triggered = false;
+
+                createSplitter({
                     panes: [ { collapsible: true, collapsed: true }, {} ],
                     resize: function() {
                         triggered = true;
                     }
                 });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
+                splitterObject.toggle(".k-pane:first", true);
 
                 ok(triggered);
             });
 
             test("toggle(true) converts associated arrow to collapse arrow", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true, collapsed: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true, collapsed: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
+                splitterObject.toggle(".k-pane:first", true);
 
                 var previousArrow = splitter.find(".k-collapse-prev");
 
@@ -166,69 +150,60 @@
             });
 
             test("toggle(true) enables splitbar resize", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true, collapsed: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true, collapsed: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
+                splitterObject.toggle(".k-pane:first", true);
 
                 ok(splitter.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
             });
 
             test("toggle(true) does not add splibar hover style", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true, collapsed: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true, collapsed: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first", true);
+                splitterObject.toggle(".k-pane:first", true);
 
                 ok(!splitter.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
             });
 
             test("toggle() without arguments toggles pane collapsed state", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true, collapsed: true }, {} ]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: true, collapsed: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                splitterObject.toggle(".k-pane:first");
                 ok(!splitter.find(".k-pane:first").data("pane").collapsed);
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                splitterObject.toggle(".k-pane:first");
                 ok(splitter.find(".k-pane:first").data("pane").collapsed);
 
                 splitter.remove();
-                splitter = $(getSplitterHtml())
-                    .appendTo(document.body)
-                    .kendoSplitter({
-                        panes: [ { collapsible: true }, {} ]
-                    });
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ]
+                });
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                splitterObject.toggle(".k-pane:first");
                 ok(splitter.find(".k-pane:first").data("pane").collapsed);
 
-                splitter.data("kendoSplitter").toggle(".k-pane:first");
+                splitterObject.toggle(".k-pane:first");
                 ok(!splitter.find(".k-pane:first").data("pane").collapsed);
             });
 
             test("collapse() calls toggle(false)", function() {
-                var args,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true }, {} ]
-                        }).data("kendoSplitter");
+                var args;
 
-                splitter.toggle = function() {
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ]
+                });
+
+                splitterObject.toggle = function() {
                     args = arguments;
                 };
 
-                splitter.collapse(".k-pane:last");
+                splitterObject.collapse(".k-pane:last");
 
                 ok(args);
                 equal(args.length, 2);
@@ -237,18 +212,17 @@
             });
 
             test("expand() calls toggle(true)", function() {
-                var args,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: true }, {} ]
-                        }).data("kendoSplitter");
+                var args;
 
-                splitter.toggle = function() {
+                createSplitter({
+                    panes: [ { collapsible: true }, {} ]
+                });
+
+                splitterObject.toggle = function() {
                     args = arguments;
                 };
 
-                splitter.expand(".k-pane:last");
+                splitterObject.expand(".k-pane:last");
 
                 ok(args);
                 equal(args.length, 2);
@@ -257,76 +231,71 @@
             });
 
             test("size() gets/sets pane size", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { size: "110px" }, {} ]
-                        }).data("kendoSplitter"),
-                    firstPane = $(".k-pane:first", splitter.element);
+                createSplitter({
+                    panes: [ { size: "110px" }, {} ]
+                });
 
-                equals(splitter.size(firstPane), "110px");
+                var firstPane = splitter.find(".k-pane:first");
 
-                splitter.size(firstPane, "120px");
+                equals(splitterObject.size(firstPane), "110px");
 
-                equals(splitter.size(firstPane), "120px");
+                splitterObject.size(firstPane, "120px");
+
+                equals(splitterObject.size(firstPane), "120px");
             });
 
             test("min() gets/sets pane min", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { min: "110px", size: "200px" }, {} ]
-                        }).data("kendoSplitter"),
-                    firstPane = $(".k-pane:first", splitter.element);
+                createSplitter({
+                    panes: [ { min: "110px", size: "200px" }, {} ]
+                });
 
-                equals(splitter.min(firstPane), "110px");
+                var firstPane = splitter.find(".k-pane:first");
 
-                splitter.min(firstPane, "120px");
+                equals(splitterObject.min(firstPane), "110px");
 
-                equals(splitter.min(firstPane), "120px");
+                splitterObject.min(firstPane, "120px");
+
+                equals(splitterObject.min(firstPane), "120px");
             });
 
             test("max() gets/sets pane max", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { max: "200px", size: "110px" }, {} ]
-                        }).data("kendoSplitter"),
-                    firstPane = $(".k-pane:first", splitter.element);
+                createSplitter({
+                    panes: [ { max: "200px", size: "110px" }, {} ]
+                });
 
-                equals(splitter.max(firstPane), "200px");
+                var firstPane = splitter.find(".k-pane:first");
 
-                splitter.max(firstPane, "120px");
+                equals(splitterObject.max(firstPane), "200px");
 
-                equals(splitter.max(firstPane), "120px");
+                splitterObject.max(firstPane, "120px");
+
+                equals(splitterObject.max(firstPane), "120px");
             });
 
             test("size(value) triggers resize", function() {
-                var triggered = false,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { size: "110px" }, {} ]
-                        })
-                        .data("kendoSplitter")
-                        .bind("resize", function() {
-                            triggered = true;
-                        });
+                var triggered = false;
 
-                splitter.size(".k-pane:first", "120px");
+                createSplitter({
+                    panes: [ { size: "110px" }, {} ]
+                });
+
+                splitterObject.bind("resize", function() {
+                    triggered = true;
+                });
+
+                splitterObject.size(".k-pane:first", "120px");
 
                 ok(triggered);
             });
 
             test("ajaxRequest() with remote URL", function() {
-                var splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ {}, {} ]
-                        }),
-                    url = "http://google.com";
+                createSplitter({
+                    panes: [ {}, {} ]
+                });
 
-                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
+                var url = "http://google.com";
+
+                splitterObject.ajaxRequest(".k-pane:first", url);
 
                 var pane = splitter.find(".k-pane:first"),
                     iframe = pane.find("> iframe");
@@ -337,13 +306,11 @@
             });
 
             test("Splitter does not collapse uncollapsable pane", function() {
-                var splitter = $(getSplitterHtml(2))
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ { collapsible: false }, { collapsible: false }]
-                        });
+                createSplitter({
+                    panes: [ { collapsible: false }, { collapsible: false }]
+                });
 
-                splitter.data("kendoSplitter").toggle(splitter.find(".k-scrollable:first"), false);
+                splitterObject.toggle(splitter.find(".k-scrollable:first"), false);
 
                 equal(splitter.find(".k-pane:first").data("pane").collapsed, undefined);
             });
