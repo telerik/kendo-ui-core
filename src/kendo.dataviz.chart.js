@@ -7387,8 +7387,11 @@ kendo_module({
                 offsetTop = window.pageYOffset || document.documentElement.scrollTop || 0,
                 offsetLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
 
-            top += tooltip._currentPosition(top - offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
-            left += tooltip._currentPosition(left - offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+            offsetTop = tooltip.chartElement.offset().top - offsetTop;
+            offsetLeft = tooltip.chartElement.offset().left - offsetLeft;
+
+            top += tooltip._currentPosition(top + offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
+            left += tooltip._currentPosition(left + offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
 
             return {
                 top: top,

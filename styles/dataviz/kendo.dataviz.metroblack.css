@@ -59,5 +59,8 @@
 }
 
 .k-chart .k-tooltip {
-  background-image: none;
+  	background-image: none;
+	-moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
 }
