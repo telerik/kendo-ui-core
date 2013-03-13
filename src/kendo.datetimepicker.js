@@ -70,23 +70,12 @@ kendo_module({
 
             element[0].type = "text";
             element.addClass("k-input")
-                   .on("keydown" + ns, $.proxy(that._keydown, that))
-                   .on("focus" + ns, function() {
-                            that._inputWrapper.addClass(FOCUSED);
-                   })
-                   .on("blur" + ns, function() {
-                        that._inputWrapper.removeClass(FOCUSED);
-                        if (element.val() !== that._oldText) {
-                            that._change(element.val());
-                        }
-                        that.close("date");
-                        that.close("time");
-                    })
                    .attr({
-                        "role": "textbox",
-                        "aria-haspopup": true,
-                        "aria-expanded": false
+                       "role": "textbox",
+                       "aria-haspopup": true,
+                       "aria-expanded": false
                    });
+
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
 
@@ -154,7 +143,7 @@ kendo_module({
 
         _editable: function(options) {
             var that = this,
-                element = that.element,
+                element = that.element.off(ns),
                 dateIcon = that._dateIcon.off(ns),
                 timeIcon = that._timeIcon.off(ns),
                 wrapper = that._inputWrapper.off(ns),
@@ -170,7 +159,19 @@ kendo_module({
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr(ARIA_READONLY, false);
+                       .attr(ARIA_READONLY, false)
+                       .on("keydown" + ns, $.proxy(that._keydown, that))
+                       .on("focus" + ns, function() {
+                           that._inputWrapper.addClass(FOCUSED);
+                       })
+                       .on("blur" + ns, function() {
+                           that._inputWrapper.removeClass(FOCUSED);
+                           if (element.val() !== that._oldText) {
+                               that._change(element.val());
+                           }
+                           that.close("date");
+                           that.close("time");
+                       });
 
                dateIcon.on(MOUSEDOWN, preventDefault)
                         .on(CLICK, function() {
