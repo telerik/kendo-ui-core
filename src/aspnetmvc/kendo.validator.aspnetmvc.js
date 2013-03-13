@@ -113,10 +113,12 @@
     var validationRules = {
         required: function (input) {
             var value = input.val(),
-                checkbox = input.filter("[type=checkbox]");
+                checkbox = input.filter("[type=checkbox]"),
+                name;
 
             if (checkbox.length) {
-                var hidden = checkbox.next("input:hidden[name=" + checkbox[0].name + "]");
+                name = checkbox[0].name.replace(nameSpecialCharRegExp, "\\$1");
+                var hidden = checkbox.next("input:hidden[name=" + name + "]");
                 if (hidden.length) {
                     value = hidden.val();
                 } else {
