@@ -1,4 +1,23 @@
 /*reset*/
+@font-face
+{
+    font-family:"Roboto-LightWeb";
+    src:url("fonts/Roboto-LightWeb.eot");
+    src:url("fonts/Roboto-LightWeb.eot?#iefix") format("embedded-opentype"),
+    url("fonts/Roboto-LightWeb.woff") format("woff"),
+    url("fonts/Roboto-LightWeb.ttf") format("truetype"),
+    url("fonts/Roboto-LightWeb.svg#Roboto-Light") format("svg")
+}
+
+@font-face
+{
+    font-family:"DroidSansWeb";
+    src:url("fonts/DroidSansWeb.eot");
+    src:url("fonts/DroidSansWeb.eot?#iefix") format("embedded-opentype"),
+    url("fonts/DroidSansWeb.woff") format("woff"),
+    url("fonts/DroidSansWeb.ttf") format("truetype"),
+    url("fonts/DroidSansWeb.svg#DroidSansWeb") format("svg")
+}
 
 body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#footer p,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
 {
@@ -39,21 +58,41 @@ html
     font:75% Arial,Helvetica,sans-serif;
 }
 
-#header, #banner, .suite-demos-nav, .demos-nav,
-.flowers-left, #footer, .centerWrap
+#header, .suite-demos-nav, .demos-nav,
+.flowers-left, #footer, .centerWrap, .submenu-box a
 {
-    font-family: 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
+    font-family: "Droid Sans", DroidSansWeb, "Segoe UI", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 }
 
-.widgetGrid .centerWrap, #example {
+.centerWrap h1,
+.overview h2,
+.overview h3,
+.overview h3 a
+{
+    font-family: "Roboto Light", Roboto-LightWeb, "Segoe UI Light", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.kendo-nav
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+#example {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.overview,
+.overview
+{
+    font-size:13px;
+}
+
 #footer
 {
     font-size:12px;
 }
+
 
 .overview #header,
 .overview #banner,
@@ -101,9 +140,9 @@ html
 
 .overview #header h1
 {
-    width:223px;
-    height:73px;
-    margin:16px 0 0;
+    width:224px;
+    height:74px;
+    margin:20px 0 0;
 }
 
 #logo
@@ -118,7 +157,7 @@ html
 
 .overview #logo
 {
-    background-position:0 0;
+    background-position:1px 1px;
 }
 
 #header ul
@@ -129,7 +168,7 @@ html
 
 .main-nav
 {
-    margin:22px -8px 0 0;
+    margin:25px -8px 0 0;
 }
 
 *+html .kendo-nav
@@ -147,8 +186,7 @@ html
 
 .main-nav>li
 {
-    border-left:1px solid #dcdcdc;
-    padding:0 8px;
+    padding:0 15px;
 }
 
 .main-nav li:first-child
@@ -176,13 +214,21 @@ html
 .suite-demos-nav .active a,
 .demos-nav .active a,
 .kendo-nav a:hover,
-.main-nav a:hover,
 .suite-demos-nav a:hover
 {
     color:#e26b1d;
 }
 
-.main-nav a,
+.main-nav a
+{
+    color:#737373;
+}
+
+.main-nav a:hover
+{
+    color:#010101;
+}
+
 .demos-nav .dashboards .active a
 {
     color:#2e2e2e;
@@ -195,25 +241,34 @@ html
 
 .overview .kendo-nav
 {
-    margin:22px 0;
+    margin:22px 0 17px;
 }
 
 .kendo-nav>li
 {
-    margin-left:48px;
+    margin-left:40px;
 }
 
 .kendo-nav a
 {
     display:block;
-    font:21px/1.6 Lucida Sans, Tahoma, Arial, Sans-serif;
+    font-size:21px;
+    line-height: 1.6;
     color:#2e2e2e;
 }
 
-.main-nav a>span,
+.main-nav a>span
+{
+    font-size:8px;
+    line-height:1.4;
+    position:relative;
+    top:-.1em;
+}
+
 .kendo-nav a>span
 {
-    font:.55em/1 sans-serif;
+    font-size:10px;
+    line-height:1.4;
     position:relative;
     top:-.2em;
 }
@@ -222,7 +277,6 @@ html
 {
     padding:0 16px;
     color:#fff;
-
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
@@ -244,8 +298,13 @@ html
 
 .kendo-nav .get-kendoui
 {
-    font-size:17px;
-    line-height:34px;
+    line-height:1.4;
+    padding: 6px 19px 8px;
+    border: 2px solid #ccc;
+    background-clip: padding-box;
+    font-size: 17px;
+    position: relative;
+    top: -3px;
 }
 
 .get-kendoui:hover,
@@ -263,26 +322,6 @@ html
     position:relative;
 }
 
-.kendo-nav .active:after
-{
-    content:" ";
-    display:block;
-    border-color: #eb6f18 transparent;
-    border-style: solid;
-    border-width: 0 7px 7px;
-    left: 50%;
-    margin: 0 0 0 -7px;
-    position: absolute;
-    top: 37px;
-    width: 0;
-    height:0;
-}
-
-.overview .kendo-nav .active:after
-{
-    top: 49px;
-}
-
 /*popup submenus*/
 
 .submenu-box {
@@ -294,11 +333,11 @@ html
     border: 1px solid #22252D;
     display: none;
     left: 50%;
-    margin-left: -144px;
-    min-width: 240px;
-    padding: 20px;
+    margin-left: -155px;
+    min-width: 270px;
+    padding: 15px 20px 10px;
     position: absolute;
-    top: 34px;
+    top: 28px;
     z-index: 100;
 
 	background:#22252d url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIyMjUyZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzOTNlNGEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -333,29 +372,35 @@ html
 }
 
 .kendo-nav .submenu-box {
-    min-width: 175px;
-    margin-left: -115px;
+    min-width: 170px;
+    margin-left: -105px;
     padding-bottom: 13px;
     padding-top: 13px;
-    top: 40px;
+    top: 43px;
 }
 
 .submenu-box ol,
 .submenu-box li {
-    clear: both;
-    float: none;
+    clear:both;
+    float:none;
     list-style: none;
     padding: 0;
 }
 
 .main-nav .submenu-box a {
-    font: 400 14px/22px Segoe UI,Tahoma,Arial,sans-serif;
+    font-size:14px;
+    line-height:22px;
 }
 
-.main-nav div.submenu-box h3 a,
+.main-nav div.submenu-box h3 a {
+    color:#C1C1C1;
+    font-size:20px;
+    line-height:1.4;
+}
 .submenu-box a {
-    color: #C1C1C1;
-    font: 18px/30px Segoe UI,Tahoma,Arial,Sans-serif;
+    color:#C1C1C1;
+    font-size:16px;
+    line-height:28px;
 }
 
 .submenu-box a:hover,
@@ -365,16 +410,11 @@ html
 
 div.submenu-box h4 {
     color: #787A7F;
-    font: 400 9px/1.4 Segoe UI Semibold,Segoe UI,Tahoma,Arial,Sans-serif;
+    font-weight: normal;
+    font-size:10px;
+    line-height:1.4;
     margin: 0;
     text-transform: uppercase;
-}
-
-div.submenu-box h3,
-div.submenu-box h3 a {
-    color: #D1D1D1;
-    font: 400 20px/1.4 Segoe UI,Tahoma,Arial,Sans-serif;
-    margin: 0;
 }
 
 .submenu-box hr {
@@ -387,9 +427,15 @@ div.submenu-box h3 a {
 
 div.submenu-box ol {
     clear: none;
-    float: right;
+    float: left;
     margin: 0;
     min-width: 95px;
+}
+
+
+.submenu-box.support-menu {
+    min-width: 170px;
+    margin-left: -105px;
 }
 
 #resources-first {
@@ -579,7 +625,7 @@ div.submenu-box ol {
     min-height:340px;
     margin-right:18px;
     padding:10px 0 0;
-    color:#6f6f6f;
+    color:#565656;
 }
 
 .overview .box
@@ -588,8 +634,13 @@ div.submenu-box ol {
     margin-right:0;
     padding:60px 0px 30px 17px;
     min-height:0;
-    font-size:12px;
+    font-size:13px;
     line-height:1.4;
+}
+
+.box .launchButton
+{
+    display: block;
 }
 
 .overview .box,
@@ -616,23 +667,22 @@ div.submenu-box ol {
     padding-left:14px;
     padding-right:14px;
     margin:0;
-    min-height:470px;
+    min-height:490px;
     position:relative;
 }
 
 .narrowbox .launchButton
 {
+    display: block;
     position:absolute;
-    bottom:30px;
+    bottom:40px;
     left:56px;
 }
 
 .overview > .centerWrap > h2
 {
     margin:1.2em 0 0;
-    font-size:42px;
-    font-family: "Segoe UI Light","Segoe UI",arial,sans-serif;
-    font-weight: lighter;
+    font-size:40px;
     color:#333;
     text-align:center;
 }
@@ -643,17 +693,12 @@ div.submenu-box ol {
 .column23 h3
 {
     margin-top:.8em;
-    font:23px "segoe ui",arial,sans-serif;
+    font-size:22px;
 }
 
 .overview .box p
 {
     text-align:left;
-}
-
-.overview .widebox h3
-{
-    margin-top:0;
 }
 
 .column13 h3,
@@ -697,8 +742,8 @@ div.submenu-box ol {
     margin-top:1em;
 }
 
-.widebox h2,
-.widebox h3
+.overview .widebox h2,
+.overview .widebox h3
 {
     margin-top:0;
 }
@@ -735,9 +780,8 @@ div.submenu-box ol {
 {
     float:left;
     margin-right:35px;
-    width:394px;
-    height:auto;
-
+    width:380px;
+    height:286px;
     -moz-box-shadow: 0 0 7px rgba(0,0,0,.15);
     -webkit-box-shadow: 0 0 7px rgba(0,0,0,.15);
     box-shadow: 0 0 7px rgba(0,0,0,.15);
@@ -745,7 +789,8 @@ div.submenu-box ol {
 
 .widebox .launchButton
 {
-    margin: 0;
+    display:inline-block;
+    margin-top:10px;
 }
 
 .new .imgPlate:after
@@ -768,7 +813,7 @@ div.submenu-box ol {
 {
     display: inline-block;
     width: 100px;
-    padding: 5px 10px 6px 10px;
+    padding: 6px 10px;
     margin: 20px auto 0 auto;
     text-decoration: none;
     color: #fff;
@@ -803,13 +848,22 @@ div.submenu-box ol {
 .column13 em,
 .column23 em
 {
-    font-family:arial,helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .column23 p,
-.mobileOSs
+.column13 em,
+.column23 em,
+.mobileOSs,
+.browsers
 {
-    color:#3c3c3c;
+    color:#565656;
+}
+
+.column23 p
+{
+    max-width: 430px;
+    line-height:1.4;
 }
 
 .mobileOSs+p
@@ -822,7 +876,6 @@ div.submenu-box ol {
     margin:12px 0 0;
     font-size:1.1em;
     line-height:32px;
-    color:#3c3c3c;
 }
 
 .browser
@@ -1482,6 +1535,7 @@ p#copy
     line-height:1.5;
     text-transform:uppercase;
     font-weight: normal;
+    letter-spacing: 1px;
 }
 
 .widgetGrid ul
