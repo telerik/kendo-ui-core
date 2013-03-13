@@ -30,9 +30,10 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    var ul = $(document.body).children(":last");
-                    if(!ul[0].id) {
-                        ul.remove();
+                    var cb = input.data("kendoComboBox");
+
+                    if (cb) {
+                        cb.destroy();
                     }
 
                     var parent = input.parent();

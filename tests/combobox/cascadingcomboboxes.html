@@ -27,11 +27,7 @@
                 var cb = input.data("kendoComboBox");
 
                 if (cb) {
-                    if (cb.popup.element.parent().hasClass("k-animation-container")) {
-                        cb.popup.element.parent().remove();
-                    } else {
-                        cb.popup.element.remove();
-                    }
+                    cb.destroy();
                 }
 
                 input.closest(".k-widget").remove();

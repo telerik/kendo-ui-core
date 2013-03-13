@@ -47,26 +47,33 @@
                     }).data("kendoComboBox");
                 },
                 teardown: function() {
-                    var ul = $(document.body).children(":last");
-                    if(!ul[0].id) {
-                        ul.remove();
-                    }
+                    if (combobox) {
+                        var element = combobox.element;
+                        
+                        combobox.destroy();
 
-                    var parent = input.parent();
-                    if (parent.is("span")) {
-                        parent.remove();
+                        var parent = element.parent();
+                        if (parent.is("span")) {
+                            parent.remove();
+                            } else {
+                            element.remove();
+                        }
                     } else {
-                        input.remove();
-                    }
+                        var cb = input.data("kendoComboBox");
+                        if (cb) { cb.destroy(); };
 
-                    var element = combobox.element;
-                    var parent = element.parent();
-                    if (parent.is("span")) {
-                        parent.remove();
-                    } else {
-                        element.remove();
+                        var ul = $(document.body).children(":last");
+                        if(!ul[0].id) {
+                            ul.remove();
+                        }
+                        
+                        var parent = input.parent();
+                        if (parent.is("span")) {
+                            parent.remove();
+                            } else {
+                            input.remove();
+                        }
                     }
-
                     combobox = null;
                 }
             });

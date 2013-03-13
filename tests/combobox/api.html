@@ -41,6 +41,9 @@
                     });
                 },
                 teardown: function() {
+                    var cb = input.data("kendoComboBox");
+                    cb.destroy();
+
                     input.append($("ul")).parent(".k-widget").remove();
                 }
             });
@@ -73,7 +76,7 @@
                     autoBind: false,
                     dataSource: {
                         transport: {
-                            read: { url: "fake.json", type: "json" }
+                            read: { url: "fake.json", dataType: "json" }
                         }
                     }
                 });
@@ -465,7 +468,7 @@
                     autoBind: false,
                     dataSource: {
                         transport: {
-                            read: { url: "fake.json", type: "json" }
+                            read: { url: "fake.json", dataType: "json" }
                         }
                     }
                 });

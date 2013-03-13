@@ -34,6 +34,10 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
+                    var cb = input.data("kendoComboBox");
+                    if (cb) {
+                        cb.destroy();
+                    }
                     input.add($("ul")).parent(".k-widget").remove();
                 }
             });

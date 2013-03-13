@@ -82,6 +82,8 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
+                    var cb = input.data("kendoComboBox");
+                    if (cb) { cb.destroy(); }
                     $(".k-combobox").add($("ul")).remove();
                 }
             });
