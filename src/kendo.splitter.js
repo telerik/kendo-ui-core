@@ -45,7 +45,7 @@ kendo_module({
 
     function panePropertyAccessor(propertyName, triggersResize) {
         return function(pane, value) {
-            var paneConfig = $(pane).data(PANE);
+            var paneConfig = this.element.find(pane).data(PANE);
 
             if (arguments.length == 1) {
                 return paneConfig[propertyName];
@@ -230,10 +230,11 @@ kendo_module({
         },
 
         ajaxRequest: function(pane, url, data) {
-            pane = $(pane);
-
             var that = this,
-                paneConfig = pane.data(PANE);
+                paneConfig;
+
+            pane = that.element.find(pane);
+            paneConfig = pane.data(PANE);
 
             url = url || paneConfig.contentUrl;
 
@@ -448,7 +449,7 @@ kendo_module({
         toggle: function(pane, expand) {
             var paneConfig;
 
-            pane = $(pane);
+            pane = this.element.find(pane);
             paneConfig = pane.data(PANE);
 
             if (!expand && !paneConfig.collapsible) {
@@ -474,7 +475,6 @@ kendo_module({
         },
 
         collapse: function(pane) {
-
             this.toggle(pane, false);
         },
 
