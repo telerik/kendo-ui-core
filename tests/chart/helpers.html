@@ -1000,7 +1000,7 @@
                     pool.free("foo");
                     pool.free("foo");
 
-                    equals(pool._pool.length, 1);
+                    equal(pool._pool.length, 1);
                 });
 
                 test("pool clears duplicates after alloc", function() {
@@ -1008,7 +1008,7 @@
                     pool.alloc();
                     pool.free("foo");
 
-                    equals(pool._pool.length, 1);
+                    equal(pool._pool.length, 1);
                 });
             })();
 

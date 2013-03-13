@@ -255,19 +255,19 @@
                 test("returns 0 if the tooltip fit in the window", function() {
                     var result = tooltip._currentPosition(200, 100, 400);
 
-                    equals(result, 0);
+                    equal(result, 0);
                 });
 
                 test("if element does not fit right should be position left", function() {
                     var result = tooltip._currentPosition(82, 42, 100);
 
-                    equals(result, -24);
+                    equal(result, -24);
                 });
 
                 test("if element does not fit right and does not fit left should be position right", function() {
                     var result = tooltip._currentPosition(42, 42, 100);
 
-                    equals(result, 0);
+                    equal(result, 0);
                 });
 
             })();

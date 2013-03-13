@@ -61,7 +61,7 @@
             // ------------------------------------------------------------
             module("Kendo configuration");
 
-            if (!$.browser.msie) {
+            if (!/msie/.test(navigator.userAgent)) {
                 asyncTest("component scripts", function() {
                     loadConfig(function(resolver, components) {
                         $.each(components, function(i, c) {
