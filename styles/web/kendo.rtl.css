@@ -173,16 +173,17 @@
 
 /* Pager */
 
-/*.k-rtl .k-pager-info
+.k-rtl .k-pager-info
 {
     float: left;
 }
 
 .k-rtl .k-pager-wrap > .k-link,
-.k-rtl .k-pager-numbers
+.k-rtl .k-pager-wrap .k-pager-numbers,
+.k-rtl .k-pager-numbers li
 {
     float: right;
-}*/
+}
 
 /* Menu */
 

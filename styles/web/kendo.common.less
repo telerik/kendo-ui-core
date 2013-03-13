@@ -264,6 +264,22 @@ html body .k-button-bare
     }
 }
 
+// outputs background-position and hover state background position
+.sprite-hoverable-rtl(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
+    
+	.k-rtl & {
+		.sprite-position(@row, @column);
+	}
+
+    .k-rtl .k-link:not(.k-state-disabled):hover > &,
+    .k-rtl .k-state-hover &,
+    .k-rtl .k-button:hover &,
+    .k-rtl .k-textbox:hover &,
+    .k-rtl .k-button:active & {
+        .sprite-position(@row - @grid-size, @column);
+    }
+}
+
 // outputs background-position and hover state background position, aligned in a grid
 .sprite-hoverable(@row, @column) when not (ispixel(@column)) {
     .sprite-position(@row, @column);
@@ -273,6 +289,21 @@ html body .k-button-bare
     .k-button:hover &,
     .k-textbox:hover &,
     .k-button:active & {
+        .sprite-position(@row + 1, @column);
+    }
+}
+
+// outputs background-position and hover state background position, aligned in a grid
+.sprite-hoverable-rtl(@row, @column) when not (ispixel(@column)) {
+    .k-rtl & {
+		.sprite-position(@row, @column);
+	}
+
+    .k-rtl .k-link:not(.k-state-disabled):hover > &,
+    .k-rtl .k-state-hover &,
+    .k-rtl .k-button:hover &,
+    .k-rtl .k-textbox:hover &,
+    .k-rtl .k-button:active & {
         .sprite-position(@row + 1, @column);
     }
 }
@@ -308,13 +339,17 @@ html body .k-button-bare
 
 .k-i-arrow-n { .sprite-hoverable(0, 0); }
 .k-i-arrow-e { .sprite-hoverable(0, 1); }
+.k-i-arrow-w { .sprite-hoverable-rtl(0, 1); }
 .k-i-arrow-s { .sprite-hoverable(0, 2); }
 .k-i-arrow-w { .sprite-hoverable(0, 3); }
+.k-i-arrow-e { .sprite-hoverable-rtl(0, 3); }
 
 .k-i-seek-n { .sprite-hoverable(0, 4); }
 .k-i-seek-e { .sprite-hoverable(0, 5); }
+.k-i-seek-w { .sprite-hoverable-rtl(0, 5); }
 .k-i-seek-s { .sprite-hoverable(0, 6); }
 .k-i-seek-w { .sprite-hoverable(0, 7); }
+.k-i-seek-e { .sprite-hoverable-rtl(0, 7); }
 
 .k-si-arrow-n { .sprite-hoverable(0, -129px); }
 .k-si-arrow-e { .sprite-hoverable(0, 9); }
