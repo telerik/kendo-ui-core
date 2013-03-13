@@ -74,12 +74,6 @@
                 equal(text.next()[0].nodeName, "INPUT");
             });
 
-            test("Fake input should be readonly", function() {
-                var textbox = new NumericTextBox(input);
-
-                ok(textbox._text.attr("readonly"));
-            });
-
             test("Move accesskey to the visible input", function() {
                 input.attr("accesskey", "w");
                 var textbox = new NumericTextBox(input);
@@ -88,7 +82,7 @@
                 equal(textbox.element.attr("accesskey"), "");
             });
 
-            test("Move tabindex to the visible input", function() {
+            test("Copy tabindex to the visible input", function() {
                 input.attr("tabindex", 3);
                 var textbox = new NumericTextBox(input);
 
@@ -217,6 +211,22 @@
                     start();
                 }, 200);
             });
+
+            test("NumericTextBox honors readonly attribute", function() {
+                var numerictextbox = input.attr("readonly", true).kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox._upArrowEventHandler.notify("press");
+
+                equal(numerictextbox.value(), null);
+            });
+
+            test("NumericTextBox uses disabled attr over the readonly", function() {
+                var numerictextbox = input.attr("readonly", true).attr("disabled", true)
+                                      .kendoNumericTextBox().data("kendoNumericTextBox");
+
+                equal(input.attr("readonly"), undefined);
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
