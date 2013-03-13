@@ -1487,13 +1487,13 @@
                     equal(order, "12");
                 });
 
-                test("playAnimations clears animations", function() {
+                test("destroy clears animations", function() {
                     var order;
                     view.animations = [
-                        { play: function() { } },
+                        { destroy: function() { } },
                     ];
 
-                    view.playAnimations();
+                    view.destroy();
                     equal(view.animations.length, 0);
                 });
 
