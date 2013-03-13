@@ -504,7 +504,8 @@
             checkboxes: false,
             autoBind: true,
             loadOnDemand: true,
-            template: ""
+            template: "",
+            dataTextField: null
         },
 
         _accessors: function() {
@@ -517,7 +518,7 @@
                 field = options[bindings[i]];
                 textField = element.attr(kendo.attr(i + "-field"));
 
-                if (textField) {
+                if (!field && textField) {
                     field = textField;
                 }
 
