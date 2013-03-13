@@ -526,17 +526,12 @@ kendo_module({
 
             element[0].type = "text";
             element.addClass("k-input")
-                .on("keydown" + ns, proxy(that._keydown, that))
-                .on("blur" + ns, proxy(that._blur, that))
-                .on("focus" + ns, function() {
-                    that._inputWrapper.addClass(FOCUSED);
-                })
-                .attr({
-                    "role": "textbox",
-                    "aria-haspopup": true,
-                    "aria-expanded": false,
-                    "aria-owns": timeView._timeViewID
-                });
+                   .attr({
+                        "role": "textbox",
+                        "aria-haspopup": true,
+                        "aria-expanded": false,
+                        "aria-owns": timeView._timeViewID
+                   });
 
             disabled = element.is("[disabled]");
             if (disabled) {
@@ -596,11 +591,11 @@ kendo_module({
 
         _editable: function(options) {
             var that = this,
-                element = that.element,
-                arrow = that._arrow.off(ns),
-                wrapper = that._inputWrapper.off(ns),
+                disable = options.disable,
                 readonly = options.readonly,
-                disable = options.disable;
+                arrow = that._arrow.off(ns),
+                element = that.element.off(ns),
+                wrapper = that._inputWrapper.off(ns);
 
             if (!readonly && !disable) {
                 wrapper
@@ -611,7 +606,12 @@ kendo_module({
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr(ARIA_READONLY, false);
+                       .attr(ARIA_READONLY, false)
+                       .on("keydown" + ns, proxy(that._keydown, that))
+                       .on("blur" + ns, proxy(that._blur, that))
+                       .on("focus" + ns, function() {
+                           that._inputWrapper.addClass(FOCUSED);
+                       });
 
                arrow.on(CLICK, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
