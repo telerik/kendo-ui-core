@@ -8049,6 +8049,7 @@ kendo_module({
         ],
 
         options: {
+            visible: true,
             min: MIN_VALUE,
             max: MAX_VALUE
         },

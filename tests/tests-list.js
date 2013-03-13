@@ -44,6 +44,7 @@ var tests = [
     "chart/bubblechart.html",
     "chart/candlestickchart.html",
     "chart/ohlcchart.html",
+    "chart/selection.html",
     "chart/mvvm.html",
     "chart/api.html",
     "chart/lint.html",
