@@ -269,6 +269,77 @@
                 equal(text.attr("disabled"), undefined);
             });
 
+            test("readonly() makes  input element readonly", function() {
+                var numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox.readonly();
+
+                equal(numerictextbox.element.attr("readonly"), "readonly");
+                equal(numerictextbox._text.attr("readonly"), "readonly");
+            });
+
+            test("readonly() unbinds icon click", function() {
+                var numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox.readonly();
+
+                numerictextbox._upArrowEventHandler.notify("press");
+
+                equal(numerictextbox.value(), null);
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox.readonly();
+                numerictextbox.readonly(false);
+
+                equal(numerictextbox.element.attr("readonly"), undefined);
+                equal(numerictextbox._text.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox.enable(false);
+                numerictextbox.readonly();
+
+                equal(numerictextbox.element.attr("readonly"), "readonly");
+                equal(numerictextbox.element.attr("disabled"), undefined);
+                equal(numerictextbox._text.attr("readonly"), "readonly");
+                equal(numerictextbox._text.attr("disabled"), undefined);
+                ok(numerictextbox._inputWrapper.hasClass("k-state-default"));
+                ok(!numerictextbox._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox.readonly();
+                numerictextbox.enable(false);
+
+                equal(numerictextbox.element.attr("readonly"), undefined);
+                equal(numerictextbox.element.attr("disabled"), "disabled");
+                equal(numerictextbox._text.attr("readonly"), undefined);
+                equal(numerictextbox._text.attr("disabled"), "disabled");
+                ok(!numerictextbox._inputWrapper.hasClass("k-state-default"));
+                ok(numerictextbox._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
+
+                numerictextbox.readonly();
+                numerictextbox.enable();
+
+                equal(numerictextbox.element.attr("readonly"), undefined);
+                equal(numerictextbox.element.attr("disabled"), undefined);
+                equal(numerictextbox._text.attr("readonly"), undefined);
+                equal(numerictextbox._text.attr("disabled"), undefined);
+                ok(numerictextbox._inputWrapper.hasClass("k-state-default"));
+                ok(!numerictextbox._inputWrapper.hasClass("k-state-disabled"));
+            });
+
             test("_blur should hide the input text and show the _text", function() {
                 var textbox = new NumericTextBox(input);
 

@@ -807,6 +807,23 @@
 
                 equal(dropdownlist.popup.element.height(), 200);
             });
+
+            test("DropDownList honors readonly attribute", function() {
+                var dropdownlist = input.attr("readonly", true).kendoDropDownList().data("kendoDropDownList");
+
+                stub(dropdownlist, {toggle: dropdownlist.toggle});
+
+                dropdownlist.wrapper.click();
+
+                ok(!dropdownlist.popup.visible());
+            });
+
+            test("DropDownList uses disabled attr over the readonly", function() {
+                var dropdownlist = input.attr("readonly", true).attr("disabled", true)
+                                        .kendoDropDownList().data("kendoDropDownList");
+
+                equal(input.attr("readonly"), undefined);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

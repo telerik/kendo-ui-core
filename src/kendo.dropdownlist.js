@@ -12,12 +12,15 @@ kendo_module({
         Select = ui.Select,
         os = kendo.support.mobileOS,
         ns = ".kendoDropDownList",
-        ATTRIBUTE = "disabled",
+        DISABLED = "disabled",
+        READONLY = "readonly",
         CHANGE = "change",
         SELECT = "select",
         FOCUSED = "k-state-focused",
         DEFAULT = "k-state-default",
-        DISABLED = "k-state-disabled",
+        STATEDISABLED = "k-state-disabled",
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         SELECTED = "k-state-selected",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         TABINDEX = "tabindex",
@@ -142,54 +145,6 @@ kendo_module({
             Select.fn.destroy.call(that);
         },
 
-        enable: function(enable) {
-            var that = this,
-                element = that.element,
-                wrapper = that.wrapper.off(ns),
-                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
-
-            if (enable === false) {
-                wrapper.removeAttr(TABINDEX);
-                element.attr(ATTRIBUTE, ATTRIBUTE);
-
-                dropDownWrapper
-                    .removeClass(DEFAULT)
-                    .addClass(DISABLED);
-
-            } else {
-                element.removeAttr(ATTRIBUTE, ATTRIBUTE);
-
-                dropDownWrapper
-                    .addClass(DEFAULT)
-                    .removeClass(DISABLED)
-                    .on(HOVEREVENTS, that._toggleHover);
-
-                wrapper
-                    .attr(TABINDEX, wrapper.data(TABINDEX))
-                    .on("click" + ns, function(e) {
-                            that._blured = false;
-                            e.preventDefault();
-                            that.toggle();
-                    })
-                    .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("keypress" + ns, proxy(that._keypress, that))
-                    .on("focusin" + ns, function() {
-                        dropDownWrapper.addClass(FOCUSED);
-                        that._blured = false;
-                    })
-                    .on("focusout" + ns, function() {
-                        if (!that._blured) {
-                            that._triggerCascade();
-                            that._blur();
-                            dropDownWrapper.removeClass(FOCUSED);
-
-                            that._blured = true;
-                            element.blur();
-                        }
-                    });
-            }
-        },
-
         open: function() {
             var that = this;
 
@@ -308,6 +263,68 @@ kendo_module({
                 that.select(idx > -1 ? idx : 0);
             } else {
                 return that._accessor();
+            }
+        },
+
+        _editable: function(options) {
+            var that = this,
+                element = that.element,
+                disable = options.disable,
+                readonly = options.readonly,
+                wrapper = that.wrapper.off(ns),
+                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
+
+            if (!readonly && !disable) {
+                element.removeAttr(DISABLED).removeAttr(READONLY);
+
+                dropDownWrapper
+                    .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
+                    .on(HOVEREVENTS, that._toggleHover);
+
+                wrapper
+                    .attr(TABINDEX, wrapper.data(TABINDEX))
+                    .attr(ARIA_DISABLED, false)
+                    .attr(ARIA_READONLY, false)
+                    .on("click" + ns, function(e) {
+                            that._blured = false;
+                            e.preventDefault();
+                            that.toggle();
+                    })
+                    .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("keypress" + ns, proxy(that._keypress, that))
+                    .on("focusin" + ns, function() {
+                        dropDownWrapper.addClass(FOCUSED);
+                        that._blured = false;
+                    })
+                    .on("focusout" + ns, function() {
+                        if (!that._blured) {
+                            that._triggerCascade();
+                            that._blur();
+                            dropDownWrapper.removeClass(FOCUSED);
+
+                            that._blured = true;
+                            element.blur();
+                        }
+                    });
+
+            } else {
+                if (disable) {
+                    wrapper.removeAttr(TABINDEX);
+                    dropDownWrapper
+                        .addClass(STATEDISABLED)
+                        .removeClass(DEFAULT);
+                } else {
+                    dropDownWrapper
+                        .addClass(DEFAULT)
+                        .removeClass(STATEDISABLED);
+                }
+
+                element.attr(DISABLED, disable)
+                       .attr(READONLY, readonly);
+
+                wrapper.attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 

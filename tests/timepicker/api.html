@@ -289,6 +289,72 @@
                 ok(timepicker.timeView.popup.visible());
             });
 
+            test("readonly() makes  input element readonly", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.readonly();
+
+                equal(timepicker.element.attr("readonly"), "readonly");
+            });
+
+            test("readonly() unbinds icon click", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.readonly();
+
+                stub(timepicker.timeView, {toggle: timepicker.timeView.toggle});
+
+                timepicker.wrapper.find(".k-select").click();
+
+                ok(!timepicker.timeView.popup.visible());
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.readonly();
+                timepicker.readonly(false);
+
+                equal(timepicker.element.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.enable(false);
+                timepicker.readonly();
+
+                equal(timepicker.element.attr("readonly"), "readonly");
+                equal(timepicker.element.attr("disabled"), undefined);
+                ok(timepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!timepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.readonly();
+                timepicker.enable(false);
+
+                equal(timepicker.element.attr("readonly"), undefined);
+                equal(timepicker.element.attr("disabled"), "disabled");
+                ok(!timepicker._inputWrapper.hasClass("k-state-default"));
+                ok(timepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.readonly();
+                timepicker.enable();
+
+                equal(timepicker.element.attr("readonly"), undefined);
+                equal(timepicker.element.attr("disabled"), undefined);
+                ok(timepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!timepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+
             test("open() should open timeview", function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
                 timepicker.open();

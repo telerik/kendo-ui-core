@@ -344,6 +344,23 @@
                 ok(datepicker.dateView.calendar.options.dates[0]);
             });
 
+            test("DatePicker honors readonly attribute", function() {
+                var datepicker = input.attr("readonly", true).kendoDatePicker().data("kendoDatePicker");
+
+                stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+
+                datepicker.wrapper.find(".k-select").click();
+
+                ok(!datepicker.dateView.popup.visible());
+            });
+
+            test("DatePicker uses disabled attr over the readonly", function() {
+                var datepicker = input.attr("readonly", true).attr("disabled", true)
+                                      .kendoDatePicker().data("kendoDatePicker");
+
+                equal(input.attr("readonly"), undefined);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

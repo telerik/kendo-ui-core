@@ -344,6 +344,79 @@
                 ok(!combobox.input.attr("disabled"));
             });
 
+            test("readonly() makes  input element readonly", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.readonly();
+
+                equal(combobox.element.attr("readonly"), "readonly");
+                equal(combobox.input.attr("readonly"), "readonly");
+            });
+
+            test("readonly() unbinds icon click", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.readonly();
+
+                stub(combobox, {toggle: combobox.toggle});
+
+                combobox._arrow.click();
+
+                ok(!combobox.popup.visible());
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.readonly();
+                combobox.readonly(false);
+
+                equal(combobox.element.attr("readonly"), undefined);
+                equal(combobox.input.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.enable(false);
+                combobox.readonly();
+
+                equal(combobox.element.attr("readonly"), "readonly");
+                equal(combobox.element.attr("disabled"), undefined);
+                equal(combobox.input.attr("readonly"), "readonly");
+                equal(combobox.input.attr("disabled"), undefined);
+                ok(combobox._inputWrapper.hasClass("k-state-default"));
+                ok(!combobox._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.readonly();
+                combobox.enable(false);
+
+                equal(combobox.element.attr("readonly"), undefined);
+                equal(combobox.element.attr("disabled"), "disabled");
+                equal(combobox.input.attr("readonly"), undefined);
+                equal(combobox.input.attr("disabled"), "disabled");
+                ok(!combobox._inputWrapper.hasClass("k-state-default"));
+                ok(combobox._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.readonly();
+                combobox.enable();
+
+                equal(combobox.input.attr("readonly"), undefined);
+                equal(combobox.input.attr("disabled"), undefined);
+                equal(combobox.element.attr("readonly"), undefined);
+                equal(combobox.element.attr("disabled"), undefined);
+                ok(combobox._inputWrapper.hasClass("k-state-default"));
+                ok(!combobox._inputWrapper.hasClass("k-state-disabled"));
+            });
+
             test("dataItem() returns null if no item is selected", function() {
                 equal(combobox.selectedIndex, -1);
                 equal(combobox.dataItem(), null);

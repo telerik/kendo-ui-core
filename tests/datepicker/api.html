@@ -352,6 +352,71 @@
                 equal(datepicker.element.attr("disabled"), undefined);
             });
 
+            test("readonly() makes  input element readonly", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.readonly();
+
+                equal(datepicker.element.attr("readonly"), "readonly");
+            });
+
+            test("readonly() unbinds icon click", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.readonly();
+
+                stub(datepicker.dateView, {toggle: datepicker.dateView.toggle});
+
+                datepicker.wrapper.find(".k-select").click();
+
+                ok(!datepicker.dateView.popup.visible());
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.readonly();
+                datepicker.readonly(false);
+
+                equal(datepicker.element.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.enable(false);
+                datepicker.readonly();
+
+                equal(datepicker.element.attr("readonly"), "readonly");
+                equal(datepicker.element.attr("disabled"), undefined);
+                ok(datepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.readonly();
+                datepicker.enable(false);
+
+                equal(datepicker.element.attr("readonly"), undefined);
+                equal(datepicker.element.attr("disabled"), "disabled");
+                ok(!datepicker._inputWrapper.hasClass("k-state-default"));
+                ok(datepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.readonly();
+                datepicker.enable();
+
+                equal(datepicker.element.attr("readonly"), undefined);
+                equal(datepicker.element.attr("disabled"), undefined);
+                ok(datepicker._inputWrapper.hasClass("k-state-default"));
+                ok(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+            });
+
             test("value method honors options.culture", function() {
                 var datepicker = input.kendoDatePicker({
                         culture: "bg-BG",

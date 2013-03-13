@@ -18,6 +18,7 @@ kendo_module({
         getCulture = kendo.getCulture,
         CHANGE = "change",
         DISABLED = "disabled",
+        READONLY = "readonly",
         INPUT = "k-input",
         SPIN = "spin",
         ns = ".kendoNumericTextBox",
@@ -28,9 +29,12 @@ kendo_module({
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
+        FOCUS = "focus",
         POINT = ".",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         NULL = null,
         proxy = $.proxy,
         decimals = {
@@ -42,7 +46,7 @@ kendo_module({
          init: function(element, options) {
              var that = this,
              isStep = options && options.step !== undefined,
-             min, max, step, value;
+             min, max, step, value, disabled;
 
              Widget.fn.init.call(that, element, options);
 
@@ -60,12 +64,15 @@ kendo_module({
              that._arrows();
              that._input();
 
-            that._text.on(TOUCHEND + ns, function() {
-                that._toggleText(false);
-            });
-
              if (!kendo.support.mobileOS) {
-                 that._text.on("focus" + ns, proxy(that._click, that));
+                 that._text.on(FOCUS + ns, proxy(that._click, that));
+             } else {
+                 that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function(e) {
+                    that._toggleText(false);
+                    if (e.type === FOCUS) {
+                        element.focus();
+                    }
+                 });
              }
 
              min = that.min(element.attr("min"));
@@ -92,7 +99,12 @@ kendo_module({
              value = options.value;
              that.value(value !== NULL ? value : element.val());
 
-             that.enable(!element.is('[disabled]'));
+             disabled = element.is("[disabled]");
+             if (disabled) {
+                 that.enable(false);
+             } else {
+                 that.readonly(element.is("[readonly]"));
+             }
 
              kendo.notify(that);
          },
@@ -116,8 +128,10 @@ kendo_module({
             SPIN
         ],
 
-        enable: function(enable) {
+        _editable: function(options) {
             var that = this,
+                disable = options.disable,
+                readonly = options.readonly,
                 text = that._text.add(that.element),
                 wrapper = that._inputWrapper.off(HOVEREVENTS);
 
@@ -126,19 +140,16 @@ kendo_module({
 
             that._toggleText(true);
 
-            if (enable === false) {
-                wrapper
-                    .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED);
-
-                text.attr(DISABLED, DISABLED);
-            } else {
+            if (!readonly && !disable) {
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                text.removeAttr(DISABLED);
+                text.removeAttr(DISABLED)
+                    .removeAttr(READONLY)
+                    .attr(ARIA_DISABLED, false)
+                    .attr(ARIA_READONLY, false);
 
                 that._upArrowEventHandler.bind("press", function(e) {
                     e.preventDefault();
@@ -151,7 +162,30 @@ kendo_module({
                     that._spin(-1);
                     that._downArrow.addClass(SELECTED);
                 });
+            } else {
+                wrapper
+                    .addClass(disable ? STATEDISABLED : DEFAULT)
+                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+
+                text.attr(DISABLED, disable)
+                    .attr(READONLY, readonly)
+                    .attr(ARIA_DISABLED, disable)
+                    .attr(ARIA_READONLY, readonly);
             }
+        },
+
+        readonly: function(readonly) {
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
+        },
+
+        enable: function(enable) {
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
         },
 
         destroy: function() {
@@ -322,7 +356,7 @@ kendo_module({
             var that = this;
 
             clearTimeout(that._focusing);
-            that._inputWrapper.removeClass(FOCUSED);
+            that._inputWrapper.removeClass(FOCUSED).removeClass(HOVER);
             that._blur();
         },
 
@@ -348,18 +382,15 @@ kendo_module({
                 wrapper = that.wrapper,
                 text;
 
-
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
                 text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
             }
 
-            text[0].style.cssText = element.style.cssText;
-            text[0].tabIndex = element.tabIndex;
-
-            element.tabIndex = 0;
             element.type = "text";
+            text[0].tabIndex = element.tabIndex;
+            text[0].style.cssText = element.style.cssText;
             text.prop("placeholder", that.options.placeholder);
 
             if (accessKey) {
@@ -367,8 +398,7 @@ kendo_module({
                 element.accessKey = "";
             }
 
-            that._text = text.attr("readonly", true)
-                             .addClass(element.className);
+            that._text = text.addClass(element.className);
         },
 
         _keydown: function(e) {

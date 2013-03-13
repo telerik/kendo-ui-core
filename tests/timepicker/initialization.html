@@ -247,6 +247,24 @@
                 equal(timepicker.timeView.list.width(), 400);
             });
 
+
+            test("TimePicker honors readonly attribute", function() {
+                var timepicker = input.attr("readonly", true).kendoTimePicker().data("kendoTimePicker");
+
+                stub(timepicker.timeView, {toggle: timepicker.timeView.toggle});
+
+                timepicker.wrapper.find(".k-select").click();
+
+                ok(!timepicker.timeView.popup.visible());
+            });
+
+            test("TimePicker uses disabled attr over the readonly", function() {
+                var timepicker = input.attr("readonly", true).attr("disabled", true)
+                                      .kendoTimePicker().data("kendoTimePicker");
+
+                equal(input.attr("readonly"), undefined);
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

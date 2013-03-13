@@ -285,7 +285,7 @@
                 select[0].children[1].setAttribute("selected", "selected");
                 select[0].children[2].setAttribute("selected", "selected");
 
-                var form = $("<form/>").appendTo(document).append(select),
+                var form = $("<form/>").appendTo(document.documentElement).append(select),
                     multiselect = new MultiSelect(select);
 
                 multiselect.value(["3","4"]);
@@ -342,6 +342,18 @@
                 ok(multiselect.input.width() > 50);
             });
 
+            test("MultiSelect honors readonly attribute", function() {
+                var multiselect = new MultiSelect(select.attr("readonly", true));
+
+                equal(multiselect.element.attr("readonly"), "readonly");
+                equal(multiselect.element.attr("disabled"), undefined);
+            });
+
+            test("MultiSelect uses disabled attr over the readonly", function() {
+                var multiselect = new MultiSelect(select.attr("readonly", true).attr("disabled", true));
+
+                equal(select.attr("readonly"), undefined);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
