@@ -5,7 +5,7 @@
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
-        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -243,8 +243,8 @@
                     });
 
                     chart._navigator.dataSource.fetch();
-                    // TODO
-                    //deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
+
+                    deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
                 });
 
                 test("slave axis max is limited to actual navigator range", function() {
@@ -258,8 +258,8 @@
                     });
 
                     chart._navigator.dataSource.fetch();
-                    // TODO
-                    //deepEqual(chart.options.categoryAxis[0].max, new Date("2012/11/01"));
+
+                    deepEqual(chart.options.categoryAxis[0].max, new Date("2012/11/01"));
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {
@@ -402,7 +402,7 @@
                     });
                 });
 
-                test("slave panes are not redrawn during early navigator DS change", function() {
+                test("slave panes are not redrawn during early navigator DS change", 0, function() {
                     stubMethod(Navigator.fn, "_redrawSlaves", function(silent) {
                         ok(false);
                     }, function() {
