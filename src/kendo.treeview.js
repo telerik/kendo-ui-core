@@ -513,7 +513,8 @@ kendo_module({
             checkboxes: false,
             autoBind: true,
             loadOnDemand: true,
-            template: ""
+            template: "",
+            dataTextField: null
         },
 
         _accessors: function() {
@@ -526,7 +527,7 @@ kendo_module({
                 field = options[bindings[i]];
                 textField = element.attr(kendo.attr(i + "-field"));
 
-                if (textField) {
+                if (!field && textField) {
                     field = textField;
                 }
 

@@ -150,6 +150,21 @@
                 equal(dom.text(), "bar foo");
             });
 
+            test("set multi-level dataTextField through data attribute", function() {
+                var dom = $('<div data-text-field="[\'foo\',\'bar\']" data-bind="source: src" data-role="treeview" />');
+
+                kendo.bind(dom, kendo.observable({
+                    src: new kendo.data.HierarchicalDataSource({
+                        data: [
+                            { foo: "foo" }
+                        ]
+                    })
+                }));
+
+                equal(dom.find(".k-in:contains('undefined')").length, 0);
+            });
+
+
 
             (function() {
                 module("MVVM : observableHierarchy", {
@@ -296,7 +311,6 @@
 
                     ok(dom.data("kendoTreeView").options.checkboxes);
                 });
-
             })();
 
         </script>
