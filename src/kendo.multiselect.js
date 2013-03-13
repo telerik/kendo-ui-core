@@ -35,6 +35,7 @@ kendo_module({
         READONLY = "readonly",
         ns = ".kendoMultiSelect",
         CLICK = "click" + ns,
+        KEYDOWN = "keydown" + ns,
         MOUSEENTER = "mouseenter" + ns,
         MOUSELEAVE = "mouseleave" + ns,
         HOVEREVENTS = MOUSEENTER + " " + MOUSELEAVE,
@@ -69,20 +70,6 @@ kendo_module({
             if (!options.placeholder) {
                 options.placeholder = element.data("placeholder");
             }
-
-            that.input
-                .on("keydown" + ns, proxy(that._keydown, that))
-                .on("paste" + ns, proxy(that._search, that))
-                .on("focus" + ns, function() { that._placeholder(false); })
-                .on("blur" + ns, function() {
-                    clearTimeout(that._typing);
-                    that._placeholder();
-                    that.close();
-
-                    if (that._state === FILTER) {
-                        that._state = ACCEPT;
-                    }
-                });
 
             id = element.attr(ID);
 
@@ -211,7 +198,7 @@ kendo_module({
                 readonly = options.readonly,
                 wrapper = that.wrapper.off(ns),
                 tagList = that.tagList.off(ns),
-                input = that.input.add(that.element);
+                input = that.element.add(that.input.off(ns));
 
             if (!readonly && !disable) {
                 wrapper
@@ -226,6 +213,19 @@ kendo_module({
 
                         if (that.input[0] !== activeElement()) {
                             that.input.focus();
+                        }
+                    });
+
+                that.input.on(KEYDOWN, proxy(that._keydown, that))
+                    .on("paste" + ns, proxy(that._search, that))
+                    .on("focus" + ns, function() { that._placeholder(false); })
+                    .on("blur" + ns, function() {
+                        clearTimeout(that._typing);
+                        that._placeholder();
+                        that.close();
+
+                        if (that._state === FILTER) {
+                            that._state = ACCEPT;
                         }
                     });
 
