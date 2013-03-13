@@ -157,8 +157,6 @@ var tests = [
     "editor/events.html",
     "editor/exec.html",
     "editor/expand-range.html",
-    "editor/fileinforeader.html",
-    "editor/filelistview.html",
     "editor/formatblock.html",
     "editor/formatcommand.html",
     "editor/genericcommand.html",
