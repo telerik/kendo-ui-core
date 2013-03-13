@@ -329,11 +329,6 @@ kendo_module({
             element[0].type = "text";
             element
                 .addClass("k-input")
-                .on("keydown" + ns, proxy(that._keydown, that))
-                .on("blur" + ns, proxy(that._blur, that))
-                .on("focus" + ns, function() {
-                    that._inputWrapper.addClass(FOCUSED);
-                })
                 .attr({
                     role: "textbox",
                     "aria-haspopup": true,
@@ -394,8 +389,8 @@ kendo_module({
 
         _editable: function(options) {
             var that = this,
-                element = that.element,
                 icon = that._dateIcon.off(ns),
+                element = that.element.off(ns),
                 wrapper = that._inputWrapper.off(ns),
                 readonly = options.readonly,
                 disable = options.disable;
@@ -409,7 +404,12 @@ kendo_module({
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr(ARIA_READONLY, false);
+                       .attr(ARIA_READONLY, false)
+                       .on("keydown" + ns, proxy(that._keydown, that))
+                       .on("blur" + ns, proxy(that._blur, that))
+                       .on("focus" + ns, function() {
+                           that._inputWrapper.addClass(FOCUSED);
+                       });
 
                icon.on(CLICK, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
