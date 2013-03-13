@@ -200,6 +200,8 @@
                 el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
                 el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
                 el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
+
+                application.scroller().unbind("scroll");
             });
 
             function success() {
