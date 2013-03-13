@@ -89,6 +89,30 @@ module kendo {
         trigger(eventName: string, e?: any): bool;
         unbind(eventName: string, handler?: any): Observable;
     }
+
+    class View {
+        constructor(contents: string);
+        render(container?: JQuery): JQuery;
+        destroy(): void;
+    }
+
+    class Layout extends View {
+        showIn(selector: string, view: View);
+    }
+
+    interface RouterOptions {
+        init?: Function;
+        routeMissing?: Function;
+        change?: Function;
+    }
+
+    class Router {
+        constructor(options?: RouterOptions);
+        start(): void;
+        destroy(): void;
+        route(route: string, callback: Function): void;
+        navigate(location: string);
+    }
 }
 
 module kendo.data {

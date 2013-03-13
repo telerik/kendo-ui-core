@@ -9,6 +9,9 @@ module CodeGen::TypeScript
     EXCLUDE = [
         'docs/api/framework/kendo.md',
         'docs/api/framework/class.md',
+        'docs/api/framework/router.md',
+        'docs/api/framework/view.md',
+        'docs/api/framework/layout.md',
         'docs/api/framework/hierarchicaldatasource.md',
         'docs/api/framework/datasource.md',
         'docs/api/framework/model.md',
