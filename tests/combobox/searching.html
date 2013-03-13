@@ -4,7 +4,7 @@
         <title>ComboBox Searching</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -193,7 +193,7 @@
                 combobox.search("fooooo");
             });
 
-            test("search with no filter indicates that the filtering is started", 0, function() {
+            test("search with no filter indicates that the filtering is started", 1, function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -205,7 +205,7 @@
                 equal(combobox._state, "filter");
             });
 
-            test("ComboBox announces end of filtration on item selection", 0, function() {
+            test("ComboBox announces end of filtration on item selection", 1, function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -220,7 +220,7 @@
                 equal(combobox._state, "accept");
             });
 
-            test("ComboBox announces end of filtration custom value", 0, function() {
+            test("ComboBox announces end of filtration custom value", 1, function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",

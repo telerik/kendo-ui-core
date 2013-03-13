@@ -4,7 +4,7 @@
         <title>Splitter client creation</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -32,10 +32,10 @@
                 var splitter = $(getSplitterHtml()).width(307).appendTo(document.body).kendoSplitter(),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).width(), 150);
-                equals(panes.eq(1).width(), 150);
-                equals(panes.eq(1).offset().left - panes.offset().left, 157);
-                equals(splitter.find(".k-splitbar").offset().left - panes.offset().left, 150);
+                equal(panes.eq(0).width(), 150);
+                equal(panes.eq(1).width(), 150);
+                equal(panes.eq(1).offset().left - panes.offset().left, 157);
+                equal(splitter.find(".k-splitbar").offset().left - panes.offset().left, 150);
             });
 
             test("fluid panes get their size after allocating space for fixed panes", function() {
@@ -47,8 +47,8 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).width(), 100);
-                equals(panes.eq(1).width(), 200);
+                equal(panes.eq(0).width(), 100);
+                equal(panes.eq(1).width(), 200);
             });
 
             test("fluid panes get their size after allocating space for percentage panes", function() {
@@ -61,9 +61,9 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).width(), 30);
-                equals(panes.eq(1).width(), 180);
-                equals(panes.eq(2).width(), 90);
+                equal(panes.eq(0).width(), 30);
+                equal(panes.eq(1).width(), 180);
+                equal(panes.eq(2).width(), 90);
             });
 
             test("sizes of percentage panes get properly rounded", function() {
@@ -75,15 +75,15 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes[0].style.width, "20px");
+                equal(panes[0].style.width, "20px");
             });
 
             test("sizes of fluid panes get properly rounded", function() {
                 var splitter = $(getSplitterHtml()).width(208).appendTo(document.body).kendoSplitter(),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).width(), 100);
-                equals(panes.eq(1).width(), 101);
+                equal(panes.eq(0).width(), 100);
+                equal(panes.eq(1).width(), 101);
             });
 
             module("Vertical sizing", {
@@ -96,10 +96,10 @@
                 var splitter = $(getSplitterHtml()).height(307).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
                     panes = splitter.find(".k-pane");
 
-                equals(Math.round(panes.eq(0).height()), 150);
-                equals(Math.round(panes.eq(1).height()), 150);
-                equals(Math.round(panes.eq(1).offset().top - panes.offset().top), 157);
-                equals(Math.round(splitter.find(".k-splitbar").offset().top - panes.offset().top), 150);
+                equal(Math.round(panes.eq(0).height()), 150);
+                equal(Math.round(panes.eq(1).height()), 150);
+                equal(Math.round(panes.eq(1).offset().top - panes.offset().top), 157);
+                equal(Math.round(splitter.find(".k-splitbar").offset().top - panes.offset().top), 150);
             });
 
             test("fluid panes get their size after allocating space for fixed panes", function() {
@@ -112,8 +112,8 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).height(), 100);
-                equals(panes.eq(1).height(), 200);
+                equal(panes.eq(0).height(), 100);
+                equal(panes.eq(1).height(), 200);
             });
 
             test("fluid panes get their size after allocating space for percentage panes", function() {
@@ -127,9 +127,9 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).height(), 30);
-                equals(panes.eq(1).height(), 180);
-                equals(panes.eq(2).height(), 90);
+                equal(panes.eq(0).height(), 30);
+                equal(panes.eq(1).height(), 180);
+                equal(panes.eq(2).height(), 90);
             });
 
             test("sizes of percentage panes get properly rounded", function() {
@@ -142,15 +142,15 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes[0].style.height, "20px");
+                equal(panes[0].style.height, "20px");
             });
 
             test("sizes of fluid panes get properly rounded", function() {
                 var splitter = $(getSplitterHtml()).height(208).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).height(), 100);
-                equals(panes.eq(1).height(), 101);
+                equal(panes.eq(0).height(), 100);
+                equal(panes.eq(1).height(), 101);
             });
 
             test("sub-pixel pane sizes", function() {
@@ -163,7 +163,7 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes[0].style.height, "20px");
+                equal(panes[0].style.height, "20px");
             });
 
             module("Sizing with collapsing", {
@@ -178,8 +178,8 @@
                     }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).width(), 0);
-                equals(panes.eq(1).width(), 200);
+                equal(panes.eq(0).width(), 0);
+                equal(panes.eq(1).width(), 200);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

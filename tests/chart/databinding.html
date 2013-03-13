@@ -4,7 +4,7 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -95,7 +95,7 @@
                             field: "period"
                         },
                         dataBound: function() {
-                            same(this.options.categoryAxis.categories, ["Jan", "Feb"]);
+                            deepEqual(this.options.categoryAxis.categories, ["Jan", "Feb"]);
                             start();
                         }
                     });
@@ -114,7 +114,7 @@
                             field: "period"
                         },
                         dataBound: function() {
-                            equals(this.options.categoryAxis.dataItems[1].sales, 110);
+                            equal(this.options.categoryAxis.dataItems[1].sales, 110);
                             start();
                         }
                     });
@@ -136,7 +136,7 @@
                     });
                 });
 
-                test("refresh does not invoke read", function() {
+                test("refresh does not invoke read", 0, function() {
                     chart = createChart({
                         dataSource: [{
                             period: "Jan",
@@ -155,7 +155,7 @@
                     );
                 });
 
-                test("redraw does not invoke read", function() {
+                test("redraw does not invoke read", 0, function() {
                     chart = createChart({
                         dataSource: [{
                             period: "Jan",
@@ -309,7 +309,7 @@
                             field: "period"
                         },
                         dataBound: function() {
-                            same(this.options.categoryAxis.categories, ["Jan", null]);
+                            deepEqual(this.options.categoryAxis.categories, ["Jan", null]);
                             start();
                         }
                     });
@@ -394,7 +394,7 @@
 
                 asyncTest("creates series for each group bound to field", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series.length, 2);
+                        equal(this.options.series.length, 2);
                         start();
                     });
                 });
@@ -406,7 +406,7 @@
                             firstCall = false;
                             this.dataSource.read();
                         } else {
-                            equals(this.options.series.length, 2);
+                            equal(this.options.series.length, 2);
                             start();
                         }
                     });
@@ -423,8 +423,8 @@
                                 sales: 120
                             });
                         } else {
-                            equals(this.options.series.length, 3);
-                            equals(this.options.series[1].name, "Baz: Sales");
+                            equal(this.options.series.length, 3);
+                            equal(this.options.series[1].name, "Baz: Sales");
                             start();
                         }
                     });
@@ -437,8 +437,8 @@
                             firstCall = false;
                             this.dataSource.remove(this.dataSource.at(1));
                         } else {
-                            equals(this.options.series.length, 1);
-                            equals(this.options.series[0].name, "Foo: Sales");
+                            equal(this.options.series.length, 1);
+                            equal(this.options.series[0].name, "Foo: Sales");
                             start();
                         }
                     });
@@ -446,7 +446,7 @@
 
                 asyncTest("assigns grouped points to first series", 1, function() {
                     createGroupedChart(function() {
-                        same(getSales(this.options.series[0].data),
+                        deepEqual(getSales(this.options.series[0].data),
                              getSales(this.dataSource.view()[0].items));
                         start();
                     });
@@ -454,7 +454,7 @@
 
                 asyncTest("assigns grouped points to second series", 1, function() {
                     createGroupedChart(function() {
-                        same(getSales(this.options.series[1].data),
+                        deepEqual(getSales(this.options.series[1].data),
                              getSales(this.dataSource.view()[1].items));
                         start();
                     });
@@ -463,14 +463,14 @@
                 asyncTest("copies field to group series", 1, function() {
                     createGroupedChart(function() {
                         var series = this.options.series;
-                        equals(series[1].field, series[0].field);
+                        equal(series[1].field, series[0].field);
                         start();
                     });
                 });
 
                 asyncTest("creates series for each group bound to x/yField", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series.length, 2);
+                        equal(this.options.series.length, 2);
                         start();
                     }, [{
                         xField: "sales",
@@ -482,8 +482,8 @@
                 asyncTest("copies x/yField to group series", 2, function() {
                     createGroupedChart(function() {
                         var series = this.options.series;
-                        equals(series[1].xField, series[0].xField);
-                        equals(series[1].yField, series[0].yField);
+                        equal(series[1].xField, series[0].xField);
+                        equal(series[1].yField, series[0].yField);
                         start();
                     }, [{
                         xField: "sales",
@@ -494,42 +494,42 @@
 
                 asyncTest("populates categories once", 1, function() {
                     createGroupedChart(function() {
-                        same(this.options.categoryAxis.categories, ["Jan", "Feb"]);
+                        deepEqual(this.options.categoryAxis.categories, ["Jan", "Feb"]);
                         start();
                     });
                 });
 
                 asyncTest("sets source series name to default groupNameTemplate", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series[0].name, "Foo: Sales");
+                        equal(this.options.series[0].name, "Foo: Sales");
                         start();
                     });
                 });
 
                 asyncTest("default groupNameTemplate renders only group name when no series name is defined", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series[0].name, "Foo");
+                        equal(this.options.series[0].name, "Foo");
                         start();
                     }, [{ field: "sales" }]);
                 });
 
                 asyncTest("sets cloned series name to default groupNameTemplate", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series[1].name, "Bar: Sales");
+                        equal(this.options.series[1].name, "Bar: Sales");
                         start();
                     });
                 });
 
                 asyncTest("sets cloned series color to next in palette", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series[1].color, "#a0a700");
+                        equal(this.options.series[1].color, "#a0a700");
                         start();
                     });
                 });
 
                 asyncTest("sets cloned series name to groupNameTemplate", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series[1].name, "Sales for product Bar");
+                        equal(this.options.series[1].name, "Sales for product Bar");
                         start();
                     }, [{
                         name: "Sales",
@@ -540,7 +540,7 @@
 
                 asyncTest("does not overwrite name with empty groupNameTemplate", 1, function() {
                     createGroupedChart(function() {
-                        equals(this.options.series[1].name, "Sales");
+                        equal(this.options.series[1].name, "Sales");
                         start();
                     }, [{
                         name: "Sales",
@@ -564,14 +564,14 @@
 
                 test("sets value field from string", function() {
                     series.data = ["abc"];
-                    same(bindPoint(series, 0, ["value"]),
+                    deepEqual(bindPoint(series, 0, ["value"]),
                         { value: "abc", fields: {} }
                     );
                 });
 
                 test("sets value field from number", function() {
                     series.data = [1];
-                    same(bindPoint(series, 0, ["value"]),
+                    deepEqual(bindPoint(series, 0, ["value"]),
                         { value: 1, fields: {} }
                     );
                 });
@@ -580,7 +580,7 @@
                     series.data = [undefined];
                     series.type = "bar";
 
-                    same(bindPoint(series, 0, ["value"]),
+                    deepEqual(bindPoint(series, 0, ["value"]),
                         { value: undefined, fields: {} }
                     );
                 });
@@ -589,7 +589,7 @@
                     series.data = [null];
                     series.type = "bar";
 
-                    same(bindPoint(series, 0),
+                    deepEqual(bindPoint(series, 0),
                         { value: null, fields: {} }
                     );
                 });
@@ -598,7 +598,7 @@
                     series.data = [[1, 2]];
                     series.type = "scatter";
 
-                    same(bindPoint(series, 0),
+                    deepEqual(bindPoint(series, 0),
                         { value: { x: 1, y: 2 }, fields: {} }
                     );
                 });
@@ -608,7 +608,7 @@
                     series.data = [{ aValue: 1 }];
                     series.type = "pie";
 
-                    same(bindPoint(series, 0),
+                    deepEqual(bindPoint(series, 0),
                         { value: 1, fields: {} }
                     );
                 });

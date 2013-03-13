@@ -4,7 +4,7 @@
         <title>DropDownList Initialization</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
@@ -661,7 +661,7 @@
                 ok(animationContainer.hasClass("km-popup"));
             });
 
-            test("resetting dataSource detaches the previouse events", function() {
+            test("resetting dataSource detaches the previouse events", 0, function() {
                 var dropdownlist = new DropDownList($("<input/>"));
 
                 var dataSource = dropdownlist.dataSource;

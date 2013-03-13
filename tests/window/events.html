@@ -3,6 +3,7 @@
     <head>
         <title>kendo.ui.window Tests</title>
         <script src="test-scripts.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>\
     </head>
     <body>
         <script>
@@ -178,7 +179,7 @@
 
                 dialog.press(keys.UP);
 
-                close(dialogObject.wrapper.offset().top, offset.top - 10, .1);
+                QUnit.close(dialogObject.wrapper.offset().top, offset.top - 10, .1);
             });
 
             test("down arrow moves window down", function() {
@@ -188,7 +189,7 @@
 
                 dialog.press(keys.DOWN);
 
-                close(dialogObject.wrapper.offset().top, offset.top + 10, .1);
+                QUnit.close(dialogObject.wrapper.offset().top, offset.top + 10, .1);
             });
 
             test("left arrow moves window left", function() {

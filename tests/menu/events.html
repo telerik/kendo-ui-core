@@ -4,7 +4,7 @@
         <title>kendo.ui.menu Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -122,7 +122,7 @@
         }
 
         function getRootItem(index) {
-			return $('> .k-item', menu.element).eq(index);
+  	return $('> .k-item', menu.element).eq(index);
         }
 
         $("#Menu2").kendoMenu({ animation: false, select: onSelect });

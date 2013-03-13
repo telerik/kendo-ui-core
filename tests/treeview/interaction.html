@@ -192,8 +192,8 @@
 
                 moveNode(treeviewObject, "bar", "baz");
 
-                equals(treeviewObject.findByText("foo").find(".k-item").length, 0);
-                equals(treeviewObject.findByText("baz").find(".k-item").length, 1);
+                equal(treeviewObject.findByText("foo").find(".k-item").length, 0);
+                equal(treeviewObject.findByText("baz").find(".k-item").length, 1);
             });
 
             test("moving parent to child item does not move it", function () {

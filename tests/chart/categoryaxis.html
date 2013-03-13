@@ -4,7 +4,8 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -85,7 +86,7 @@
                 test("creates labels", 1, function() {
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Bar"]);
                 });
 
@@ -93,7 +94,7 @@
                     createCategoryAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["$1.00", "$2.00"]);
                 });
 
@@ -101,7 +102,7 @@
                     createCategoryAxis({ categories: [1, 2], labels: { format: "C"} });
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["$1.00", "$2.00"]);
                 });
 
@@ -112,7 +113,7 @@
                         }
                     });
 
-                    equals(categoryAxis.labels.length, 0);
+                    equal(categoryAxis.labels.length, 0);
                 });
 
                 test("labels have set template", 1, function() {
@@ -124,7 +125,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].content, "|Foo|");
+                    equal(view.log.text[0].content, "|Foo|");
                 });
 
                 test("labels have set color", 1, function() {
@@ -136,7 +137,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].style.color, "#f00");
+                    equal(view.log.text[0].style.color, "#f00");
                 });
 
                 test("labels have rotation angle", 1, function() {
@@ -148,7 +149,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].style.rotation, 42.5);
+                    equal(view.log.text[0].style.rotation, 42.5);
                 });
 
                 test("labels have set background", 1, function() {
@@ -160,7 +161,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.rect[0].style.fill, "#f0f");
+                    equal(view.log.rect[0].style.fill, "#f0f");
                 });
 
                 test("labels have set zIndex", 1, function() {
@@ -170,7 +171,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].style.zIndex, 2);
+                    equal(view.log.text[0].style.zIndex, 2);
                 });
 
                 test("labels are positioned below axis line with margin and padding", 2, function() {
@@ -191,7 +192,7 @@
                 test("labels are distributed horizontally", function() {
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [185.5, 586.5], TOLERANCE);
                 });
 
@@ -199,7 +200,7 @@
                     createCategoryAxis({ justified: true });
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [0, 773], TOLERANCE);
                 });
 
@@ -207,7 +208,7 @@
                     createCategoryAxis({ reverse: true });
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [586.5, 185.5], TOLERANCE);
                 });
 
@@ -215,7 +216,7 @@
                     createCategoryAxis({ justified: true, reverse: true });
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [773, 0], TOLERANCE);
                 });
 
@@ -229,7 +230,7 @@
                 test("major ticks are distributed horizontally", function() {
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 400, 800], TOLERANCE);
                 });
 
@@ -237,7 +238,7 @@
                     createCategoryAxis({ justified: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [14.5, 786.5], TOLERANCE);
                 });
 
@@ -245,7 +246,7 @@
                     createCategoryAxis({ reverse: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [800, 400, 0], TOLERANCE);
                 });
 
@@ -253,7 +254,7 @@
                     createCategoryAxis({ justified: true, reverse: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [786.5, 14.5], TOLERANCE);
                 });
 
@@ -271,7 +272,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 200, 400, 600, 800], TOLERANCE);
                 });
 
@@ -283,7 +284,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [14.5, 272, 529, 786], TOLERANCE);
                 });
 
@@ -295,7 +296,7 @@
                      });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [800, 600, 400, 200, 0], TOLERANCE);
                 });
 
@@ -308,7 +309,7 @@
                      });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.x1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
                          [786, 529, 271, 14.5], TOLERANCE);
                 });
 
@@ -358,12 +359,12 @@
                 });
 
                 test("renders every second label", function() {
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Baz"]);
                 });
 
                 test("labels are distributed horizontally", function() {
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [119, 652], TOLERANCE);
                 });
 
@@ -382,12 +383,12 @@
                 });
 
                 test("renders every second label, starting from the third", function() {
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Baz"]);
                 });
 
                 test("labels are distributed horizontally, starting from the third", function() {
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
                          [652], TOLERANCE);
                 });
 
@@ -475,7 +476,7 @@
                 test("creates labels", 1, function() {
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Bar"]);
                 });
 
@@ -488,13 +489,13 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.text[0].style.rotation, 42.5);
+                    equal(view.log.text[0].style.rotation, 42.5);
                 });
 
                 test("labels are distributed vertically", function() {
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [141, 441], TOLERANCE);
                 });
 
@@ -502,21 +503,21 @@
                     createCategoryAxis({ vertical: true, justified: true });
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [0, 582], TOLERANCE);
                 });
 
                 test("labels are positioned to the left of the axis line", function() {
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
                          [0, 2]);
                 });
 
                 test("major ticks are distributed vertically", function() {
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                          [0, 300, 600], TOLERANCE);
                 });
 
@@ -524,7 +525,7 @@
                     createCategoryAxis({ vertical: true, justified: true });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                          [9, 591], TOLERANCE);
                 });
 
@@ -536,7 +537,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                         [0, 150, 300, 450, 600], TOLERANCE);
                 });
 
@@ -549,7 +550,7 @@
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
-                    same($.map(view.log.line, function(line) { return line.y1; }),
+                    arrayClose($.map(view.log.line, function(line) { return line.y1; }),
                         [9, 203, 397, 591], TOLERANCE);
                 });
 
@@ -570,7 +571,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    equals(view.log.rect[0].style.fill, "#f0f");
+                    equal(view.log.rect[0].style.fill, "#f0f");
                 });
 
                 test("labels are positioned to the left of the axis line with margin and padding", function() {
@@ -584,7 +585,7 @@
 
                     categoryAxis.getViewElements(view);
 
-                    same($.map(view.log.text, function(text) { return text.style.x }),
+                    deepEqual($.map(view.log.text, function(text) { return text.style.x }),
                          [0 + MARGIN + PADDING, 2 + MARGIN + PADDING]);
                 });
 
@@ -625,12 +626,12 @@
                 });
 
                 test("renders every second label", function() {
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Foo", "Baz"]);
                 });
 
                 test("labels are distributed vertically", function() {
-                    same($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [91, 491], TOLERANCE);
                 });
 
@@ -650,12 +651,12 @@
                 });
 
                 test("renders every second label, starting from the third", function() {
-                    same($.map(view.log.text, function(text) { return text.content }),
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
                          ["Baz"]);
                 });
 
                 test("labels are distributed vertically, starting from the third", function() {
-                    same($.map(view.log.text, function(text) { return text.style.y }),
+                    arrayClose($.map(view.log.text, function(text) { return text.style.y }),
                          [491], TOLERANCE);
                 });
 
@@ -671,7 +672,7 @@
                 test("labels are aligned left", function() {
                     categoryAxis.getViewElements(view);
 
-                    $.each(view.log.text, function() { equals(this.style.x, 9); });
+                    $.each(view.log.text, function() { equal(this.style.x, 9); });
                 });
 
                 test("major ticks are aligned to axis", 3, function() {
@@ -722,94 +723,94 @@
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for first category (justified)", function() {
                     createCategoryAxis({ justified: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x1]);
+                    deepEqual([slot.x1, slot.x2], [lineBox.x1, lineBox.x1]);
                 });
 
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for first category in reverse (justified)", function() {
                     createCategoryAxis({ reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x2, lineBox.x2]);
+                    deepEqual([slot.x1, slot.x2], [lineBox.x2, lineBox.x2]);
                 });
 
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for second category (justified)", function() {
                     createCategoryAxis({ justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [399, 399], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [399, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse (justified)", function() {
                     createCategoryAxis({ reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [399, 399], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [399, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
                 });
 
                 test("positions slot for third category", function() {
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for third category (justified)", function() {
                     createCategoryAxis({ justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse (justified)", function() {
                     createCategoryAxis({ reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x1], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, lineBox.x1], TOLERANCE);
                 });
 
                 test("positions slot for third category w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
                 });
 
                 test("slot height is 0", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same(slot.height(), 0);
+                    deepEqual(slot.height(), 0);
                 });
 
                 test("assumes 1 category when no categories are defined", function() {
@@ -817,35 +818,35 @@
                     categoryAxis.reflow(chartBox);
 
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x2]);
+                    deepEqual([slot.x1, slot.x2], [lineBox.x1, lineBox.x2]);
                 });
 
                 test("reports range minimum of 0", function() {
-                    equals(categoryAxis.range().min, 0);
+                    equal(categoryAxis.range().min, 0);
                 });
 
                 test("reports range maximum equal to category count", function() {
-                    equals(categoryAxis.range().max, 3);
+                    equal(categoryAxis.range().max, 3);
                 });
 
                 test("from value can't be lower than 0", function() {
                     var slot = categoryAxis.getSlot(-1);
-                    equals(slot.x1, 0);
+                    equal(slot.x1, 0);
                 });
 
                 test("caps from value to categories count", function() {
                     var slot = categoryAxis.getSlot(1000);
-                    equals(slot.x1, lineBox.x2);
+                    equal(slot.x1, lineBox.x2);
                 });
 
                 test("to value equals from value when not set", function() {
                     var slot = categoryAxis.getSlot(1000);
-                    equals(slot.x2, lineBox.x2);
+                    equal(slot.x2, lineBox.x2);
                 });
 
                 test("value equals from value when smaller", function() {
                     var slot = categoryAxis.getSlot(2, 1);
-                    equals(slot.x2, lineBox.x2);
+                    equal(slot.x2, lineBox.x2);
                 });
 
                 // ------------------------------------------------------------
@@ -858,94 +859,94 @@
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for first category (justified)", function() {
                     createCategoryAxis({ vertical: true, justified: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [lineBox.y1, lineBox.y1]);
+                    deepEqual([slot.y1, slot.y2], [lineBox.y1, lineBox.y1]);
                 });
 
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for first category in reverse (justified)", function() {
                     createCategoryAxis({ vertical: true, reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [lineBox.y2, lineBox.y2]);
+                    deepEqual([slot.y1, slot.y2], [lineBox.y2, lineBox.y2]);
                 });
 
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ vertical: true, labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [200, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category (justified)", function() {
                     createCategoryAxis({ vertical: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [300, 300], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [300, 300], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [200, 399], TOLERANCE);
                 });
 
                 test("positions slot for second category in reverse (justified)", function() {
                     createCategoryAxis({ vertical: true, reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [300, 300], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [300, 300], TOLERANCE);
                 });
 
                 test("positions slot for second category w/o labels", function() {
                     createCategoryAxis({ vertical: true, labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [200, 399], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [200, 399], TOLERANCE);
                 });
 
                 test("positions slot for third category", function() {
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for third category (justified)", function() {
                     createCategoryAxis({ vertical: true, justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.y1, slot.y2], [lineBox.y2, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y2, lineBox.y2], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, 200], TOLERANCE);
                 });
 
                 test("positions slot for third category in reverse (justified)", function() {
                     createCategoryAxis({ vertical: true, reverse: true, justified: true });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.y1, slot.y2], [lineBox.y1, lineBox.y1], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y1, lineBox.y1], TOLERANCE);
                 });
 
                 test("positions slot for third category w/o labels", function() {
                     createCategoryAxis({ vertical: true, labels: { visible: false } });
                     var slot = categoryAxis.getSlot(2);
-                    same([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
+                    arrayClose([slot.y1, slot.y2], [399, lineBox.y2], TOLERANCE);
                 });
 
                 test("slot width is 0", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same(slot.width(), 0);
+                    deepEqual(slot.width(), 0);
                 });
 
             })();
@@ -968,23 +969,23 @@
                 });
 
                 test("returns null for coordinates left of axis", function() {
-                    same(categoryAxis.getCategory(new Point2D(-1, 0)), null);
+                    deepEqual(categoryAxis.getCategory(new Point2D(-1, 0)), null);
                 });
 
                 test("returns null for coordinates right of axis", function() {
-                    same(categoryAxis.getCategory(new Point2D(1000, 0)), null);
+                    deepEqual(categoryAxis.getCategory(new Point2D(1000, 0)), null);
                 });
 
                 test("returns first category for leftmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
                 });
 
                 test("returns last category for righttmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(799, 0)), "Baz");
+                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Baz");
                 });
 
                 test("returns category for middle point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(334, 0)), "Bar");
+                    equal(categoryAxis.getCategory(new Point2D(334, 0)), "Bar");
                 });
 
                 test("returns single category for leftmost point", function() {
@@ -995,7 +996,7 @@
                     });
 
                     categoryAxis.reflow(chartBox);
-                    equals(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
                 });
 
                 test("returns single category for righttmost point", function() {
@@ -1006,7 +1007,7 @@
                     });
 
                     categoryAxis.reflow(chartBox);
-                    equals(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
                 });
 
                 // ------------------------------------------------------------
@@ -1024,15 +1025,15 @@
                 });
 
                 test("returns first category for righttmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
                 });
 
                 test("returns last category for leftmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                    equal(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
                 });
 
                 test("returns category for middle point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(464, 0)), "Bar");
+                    equal(categoryAxis.getCategory(new Point2D(464, 0)), "Bar");
                 });
 
                 // ------------------------------------------------------------
@@ -1049,23 +1050,23 @@
                 });
 
                 test("returns null for coordinates above the axis", function() {
-                    same(categoryAxis.getCategory(new Point2D(0, -1)), null);
+                    deepEqual(categoryAxis.getCategory(new Point2D(0, -1)), null);
                 });
 
                 test("returns null for coordinates below the axis", function() {
-                    same(categoryAxis.getCategory(new Point2D(0, 1000)), null);
+                    deepEqual(categoryAxis.getCategory(new Point2D(0, 1000)), null);
                 });
 
                 test("returns first category for bottommost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Baz");
+                    equal(categoryAxis.getCategory(new Point2D(0, 599)), "Baz");
                 });
 
                 test("returns last category for topmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
                 });
 
                 test("returns category for middle point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 350)), "Bar");
+                    equal(categoryAxis.getCategory(new Point2D(0, 350)), "Bar");
                 });
 
                 test("returns single category for topmost point", function() {
@@ -1076,7 +1077,7 @@
                     });
 
                     categoryAxis.reflow(chartBox);
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
                 });
 
                 test("returns single category for bottommost point", function() {
@@ -1087,7 +1088,7 @@
                     });
 
                     categoryAxis.reflow(chartBox);
-                    equals(categoryAxis.getCategory(new Point2D(0, 350)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(0, 350)), "Foo");
                 });
 
                 // ------------------------------------------------------------
@@ -1105,15 +1106,15 @@
                 });
 
                 test("returns first category for topmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                    equal(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
                 });
 
                 test("returns last category for bottommost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Foo");
+                    equal(categoryAxis.getCategory(new Point2D(0, 599)), "Foo");
                 });
 
                 test("returns category for middle point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 250)), "Bar");
+                    equal(categoryAxis.getCategory(new Point2D(0, 250)), "Bar");
                 });
 
             })();
@@ -1160,7 +1161,7 @@
                 });
 
                 test("renders box", function() {
-                    same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                    arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
                          [ 39, 9, 292.666, 573 ], TOLERANCE);
                 });
 
@@ -1184,7 +1185,7 @@
                 });
 
                 test("renders box", function() {
-                    same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                    arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
                          [ 20, 0, 785, 191 ], TOLERANCE);
                 });
 
@@ -1249,7 +1250,7 @@
                 });
 
                 test("positioned at center", function() {
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 403, 582, 436, 600 ], TOLERANCE);
                 });
 
@@ -1257,7 +1258,7 @@
                     createPlotArea(lineSeriesData, { categoryAxis: { title: { position: "left" }}});
                     titleBox = plotArea.axisX.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 39, 582, 72, 600 ], TOLERANCE);
                 });
 
@@ -1265,7 +1266,7 @@
                     createPlotArea(lineSeriesData, { categoryAxis: { title: { position: "right" }}});
                     titleBox = plotArea.axisX.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 767, 582, 800, 600 ], TOLERANCE);
                 });
 
@@ -1283,7 +1284,7 @@
 
                 test("hidden when visible is false", function() {
                     createPlotArea(lineSeriesData, { categoryAxis: { title: { visible: false }}});
-                    equals(plotArea.axisX.title, null);
+                    equal(plotArea.axisX.title, null);
                 });
 
                 // ------------------------------------------------------------
@@ -1295,7 +1296,7 @@
                 });
 
                 test("positioned at center", function() {
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 403, 546, 436, 564 ], TOLERANCE);
                 });
 
@@ -1306,7 +1307,7 @@
 
                     titleBox = plotArea.axisX.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 39, 546, 72, 564 ], TOLERANCE);
                 });
 
@@ -1317,7 +1318,7 @@
 
                     titleBox = plotArea.axisX.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 767, 546, 800, 564 ], TOLERANCE);
                 });
 
@@ -1330,7 +1331,7 @@
                 });
 
                 test("applied position center", function() {
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 0, 270, 18, 303 ], TOLERANCE);
                 });
 
@@ -1338,7 +1339,7 @@
                     createPlotArea(barSeriesData, { categoryAxis: { title: { position: "bottom" }}});
                     titleBox = plotArea.axisY.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 0, 540, 18, 573 ], TOLERANCE);
                 });
 
@@ -1346,7 +1347,7 @@
                     createPlotArea(barSeriesData, { categoryAxis: { title: { position: "top" }}});
                     titleBox = plotArea.axisY.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 0, 0, 18, 33 ], TOLERANCE);
                 });
 
@@ -1371,7 +1372,7 @@
                 });
 
                 test("applied position center", function() {
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 25, 270, 43, 303 ], TOLERANCE);
                 });
 
@@ -1382,7 +1383,7 @@
 
                     titleBox = plotArea.axisY.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 25, 540, 43, 573 ], TOLERANCE);
                 });
 
@@ -1393,7 +1394,7 @@
 
                     titleBox = plotArea.axisY.title.box;
 
-                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                    arrayClose([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 25, 0, 43, 33 ], TOLERANCE);
                 });
 
@@ -1443,25 +1444,25 @@
 
                 test("event arguments contain axis options", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.axis.type, "category");
+                        equal(e.axis.type, "category");
                     });
                 });
 
                 test("event arguments contain DOM element", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.element.length, 1);
+                        equal(e.element.length, 1);
                     });
                 });
 
                 test("event arguments contain category index", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.index, 1);
+                        equal(e.index, 1);
                     });
                 });
 
                 test("category index is correct when step is defined", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.index, 2);
+                        equal(e.index, 2);
                     }, {
                         categoryAxis: {
                             labels: {
@@ -1473,19 +1474,19 @@
 
                 test("event arguments contain category name as text", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.text, "B");
+                        equal(e.text, "B");
                     });
                 });
 
                 test("event arguments contain category name as value", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.value, "B");
+                        equal(e.value, "B");
                     });
                 });
 
                 test("event arguments contain category data item", 1, function() {
                     axisLabelClick(function(e) {
-                        equals(e.dataItem.value, 2);
+                        equal(e.dataItem.value, 2);
                     });
                 });
 
@@ -1530,7 +1531,7 @@
 
                 test("categories are data bound", function() {
                     createBoundChart();
-                    equals(plotArea.categoryAxis.labels.length, 3);
+                    equal(plotArea.categoryAxis.labels.length, 3);
                 });
 
                 test("template has access to data item", function() {
@@ -1554,7 +1555,7 @@
                         }]
                     });
 
-                    equals(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
+                    equal(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
                 });
 
                 test("categories are bound when using categoryAxes alias", function() {
@@ -1568,8 +1569,8 @@
                         }]
                     });
 
-                    equals(plotArea.namedCategoryAxes["Axis A"].labels.length, 3);
-                    equals(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
+                    equal(plotArea.namedCategoryAxes["Axis A"].labels.length, 3);
+                    equal(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
                 });
 
             })();

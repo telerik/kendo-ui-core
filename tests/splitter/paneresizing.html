@@ -4,7 +4,7 @@
         <title>Splitter client creation</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -13,6 +13,8 @@
         <script src="helper.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">Splitter client creation</h1>
@@ -42,7 +44,7 @@
                     resizingHandler = splitter.data("kendoSplitter").resizing;
 
                 ok(resizingHandler);
-                equals(resizingHandler.owner.element[0], splitter[0]);
+                equal(resizingHandler.owner.element[0], splitter[0]);
             });
 
             test("resizing.start creates splitbar ghost", function() {
@@ -52,7 +54,7 @@
 
                 var ghost = splitter.find(".k-ghost-splitbar");
 
-                equals(ghost.length, 1);
+                equal(ghost.length, 1);
             });
 
             test("resizing constraints calculated from previous pane", function() {
@@ -63,8 +65,8 @@
 
                 startResizing(splitter);
 
-                equals(resizingHandler._min(), 35);
-                equals(resizingHandler._max(), 150);
+                equal(resizingHandler._min(), 35);
+                equal(resizingHandler._max(), 150);
             });
 
             test("resizing constraints calculated from next pane", function() {
@@ -76,8 +78,8 @@
                 startResizing(splitter);
 
                 // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
-                equals(resizingHandler._min(), 50);
-                equals(resizingHandler._max(), 165);
+                equal(resizingHandler._min(), 50);
+                equal(resizingHandler._max(), 165);
             });
 
             test("resizing constraints calculated from splitbar width", function() {
@@ -93,8 +95,8 @@
                 startResizing(splitter);
 
                 // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
-                equals(resizingHandler._min(), 0);
-                equals(resizingHandler._max(), splitter.width() - splitbar.outerWidth());
+                equal(resizingHandler._min(), 0);
+                equal(resizingHandler._max(), splitter.width() - splitbar.outerWidth());
             });
 
             test("resizing constraints calculated from splitbar width and pane extremes", function() {
@@ -110,8 +112,8 @@
                 startResizing(splitter);
 
                 // min and max will be calculated with the previous pane as the origin, taking splitbar width into account
-                equals(resizingHandler._min(), 50);
-                equals(resizingHandler._max(), 165);
+                equal(resizingHandler._min(), 50);
+                equal(resizingHandler._max(), 165);
             });
 
             test("resizing constraints calculated from pane extremes", function() {
@@ -122,8 +124,8 @@
 
                 startResizing(splitter);
 
-                equals(resizingHandler._min(), 60);
-                equals(resizingHandler._max(), 165);
+                equal(resizingHandler._min(), 60);
+                equal(resizingHandler._max(), 165);
             });
 
             test("resizing constraints for middle panes", function() {
@@ -132,8 +134,8 @@
 
                 startResizing(splitter, { currentTarget: splitter.find(".k-splitbar").eq(1) });
 
-                equals(resizingHandler._min(), 107);
-                equals(resizingHandler._max(), 307);
+                equal(resizingHandler._min(), 107);
+                equal(resizingHandler._max(), 307);
             });
 
             test("resizing.stop modifies pane sizes", function() {
@@ -148,8 +150,8 @@
                 resizingHandler._resizable._resize({ x: { location : initialSplitBarPosition + 5} });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
 
-                equals(parseInt(panes[0].offsetWidth), (initialPaneSizes[0] + 5));
-                equals(parseInt(panes[1].offsetWidth), (initialPaneSizes[1] - 5));
+                equal(parseInt(panes[0].offsetWidth), (initialPaneSizes[0] + 5));
+                equal(parseInt(panes[1].offsetWidth), (initialPaneSizes[1] - 5));
             });
 
             test("resizing.stop for middle panes", function() {
@@ -164,8 +166,8 @@
                 resizingHandler._resizable._resize({ x: { location : initialSplitBarPosition + 5} });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
 
-                equals(panes[1].offsetWidth, initialPaneSizes[1] + 5);
-                equals(panes[2].offsetWidth, initialPaneSizes[2] - 5);
+                equal(panes[1].offsetWidth, initialPaneSizes[1] + 5);
+                equal(panes[2].offsetWidth, initialPaneSizes[2] - 5);
             });
 
             test("resizing.stop with variable splitbar widths", function() {
@@ -184,8 +186,8 @@
                 resizingHandler._resizable._resize({ x: { location : initialSplitBarPosition + 5} });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, x: { location: initialSplitBarPosition + 5 } });
 
-                equals(panes[1].offsetWidth, initialPaneSizes[1] + 5);
-                equals(panes[2].offsetWidth, initialPaneSizes[2] - 5);
+                equal(panes[1].offsetWidth, initialPaneSizes[1] + 5);
+                equal(panes[2].offsetWidth, initialPaneSizes[2] - 5);
             });
 
             test("resizing.stop fires splitter resize", function() {
@@ -214,8 +216,8 @@
                 resizingHandler._resizable._resize({ x : {location: 0} });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, x: {location: 0} });
 
-                equals(panes[0].offsetWidth, 50);
-                equals(panes[1].offsetWidth, 150);
+                equal(panes[0].offsetWidth, 50);
+                equal(panes[1].offsetWidth, 150);
             });
 
             function isPercentageSize(size) {
@@ -271,7 +273,7 @@
                     resizingHandler = splitter.data("kendoSplitter").resizing;
 
                 ok(resizingHandler);
-                equals(resizingHandler.owner.element[0], splitter[0]);
+                equal(resizingHandler.owner.element[0], splitter[0]);
             });
 
             test("resizing.start creates splitbar ghost", function() {
@@ -283,7 +285,7 @@
 
                 var ghost = splitter.find(".k-ghost-splitbar");
 
-                equals(ghost.length, 1);
+                equal(ghost.length, 1);
             });
 
             test("resizing constraints calculated from previous pane", function() {
@@ -295,8 +297,8 @@
 
                 startResizing(splitter);
 
-                equals(resizingHandler._min(), 35);
-                equals(resizingHandler._max(), 150);
+                equal(resizingHandler._min(), 35);
+                equal(resizingHandler._max(), 150);
             });
 
             test("resizing constraints calculated from next pane", function() {
@@ -310,8 +312,8 @@
 
 
                 // min and max will be calculated with the previous pane as the origin, taking splitbar height into account
-                equals(resizingHandler._min(), 50);
-                equals(resizingHandler._max(), 165);
+                equal(resizingHandler._min(), 50);
+                equal(resizingHandler._max(), 165);
             });
 
             test("resizing constraints calculated from pane extremes", function() {
@@ -323,8 +325,8 @@
 
                 startResizing(splitter);
 
-                equals(resizingHandler._min(), 60);
-                equals(resizingHandler._max(), 165);
+                equal(resizingHandler._min(), 60);
+                equal(resizingHandler._max(), 165);
             });
 
             test("resizing constraints for middle panes", function() {
@@ -333,8 +335,8 @@
 
                 startResizing(splitter, { currentTarget: splitter.find(".k-splitbar").eq(1) });
 
-                equals(resizingHandler._min(), 107);
-                equals(resizingHandler._max(), 307);
+                equal(resizingHandler._min(), 107);
+                equal(resizingHandler._max(), 307);
             });
 
             test("resizing.stop modifies pane sizes", function() {
@@ -349,8 +351,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
-                close(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5, 1);
-                close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
+                QUnit.close(parseInt(panes[0].offsetHeight), initialPaneSizes[0] + 5, 1);
+                QUnit.close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] - 5, 1);
             });
 
             test("resizing.stop for middle panes", function() {
@@ -365,8 +367,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ currentTarget: splitBar, y: { location: initialSplitBarPosition + 5 } });
 
-                close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5, 1);
-                close(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5, 1);
+                QUnit.close(parseInt(panes[1].offsetHeight), initialPaneSizes[1] + 5, 1);
+                QUnit.close(parseInt(panes[2].offsetHeight), initialPaneSizes[2] - 5, 1);
             });
 
             test("resizing.stop fires splitter resize", function() {
@@ -394,8 +396,8 @@
                 resizingHandler._resizable._resize({ y: {location: initialSplitBarPosition + 5 } });
                 resizingHandler._resizable._stop({ keyCode: 27, currentTarget: splitBar });
 
-                equals(parseInt(panes[0].offsetHeight), initialPaneSizes[0]);
-                equals(parseInt(panes[1].offsetHeight), initialPaneSizes[1]);
+                equal(parseInt(panes[0].offsetHeight), initialPaneSizes[0]);
+                equal(parseInt(panes[1].offsetHeight), initialPaneSizes[1]);
             });
 
             test("resizing.stop does not fire resize when cancelling drag with Esc", function() {

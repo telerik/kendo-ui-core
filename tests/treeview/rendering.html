@@ -49,7 +49,7 @@
             test("collapsed groups", function() {
                 var element = treeviewFromHtml("<ul><li data-kendo-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
 
-                equals(element.find("ul:last").css("display"), "none");
+                equal(element.find("ul:last").css("display"), "none");
             });
 
             test("node wrappers", function() {
@@ -57,20 +57,20 @@
                     outerWrapper = element.find("li"),
                     wrapper = element.find("div:first");
 
-                equals(wrapper.length, 1);
+                equal(wrapper.length, 1);
                 ok(outerWrapper.hasClass("k-first"));
                 ok(outerWrapper.hasClass("k-last"));
                 ok(wrapper.hasClass("k-top"));
-                equals(wrapper.find("span.k-in").length, 1);
-                equals(wrapper.find("span.k-in").text(), "item");
+                equal(wrapper.find("span.k-in").length, 1);
+                equal(wrapper.find("span.k-in").text(), "item");
             });
 
             test("moves arbitrary content in the text wrapper", function() {
                 var element = treeviewFromHtml("<ul><li>item<span class='status'></span></li></ul>"),
                     wrapper = element.find("div:first");
 
-                equals(wrapper.find("span.k-in").text(), "item");
-                equals(wrapper.find("span.status").length, 1);
+                equal(wrapper.find("span.k-in").text(), "item");
+                equal(wrapper.find("span.status").length, 1);
                 ok(wrapper.find("span.status").parent().hasClass("k-in"));
             });
 
@@ -78,16 +78,16 @@
                 var element = treeviewFromHtml("<ul><li><div class='k-bot'><span class='k-in'>text</span></div></li></ul>"),
                     wrapper = element.find("div:first");
 
-                equals(element.find("div.k-bot").length, 1);
-                equals(element.find("span.k-in").length, 1);
+                equal(element.find("div.k-bot").length, 1);
+                equal(element.find("span.k-in").length, 1);
             });
 
             test("creates toggle buttons", function() {
                 var element = treeviewFromHtml("<ul><li data-kendo-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
                     wrapper = element.find("div:first");
 
-                equals(wrapper.find("span.k-icon.k-minus").length, 1);
-                equals(element.find(".k-group:not(.k-treeview-lines)").length, 1);
+                equal(wrapper.find("span.k-icon.k-minus").length, 1);
+                equal(element.find(".k-group:not(.k-treeview-lines)").length, 1);
             });
 
             module("groups", moduleOptions);

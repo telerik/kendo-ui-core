@@ -2,7 +2,7 @@
 <html>
     <script src="../../../src/jquery.js"></script>
     <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
-    <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.model.js"></script>
     <script src="../../../src/kendo.data.js"></script>
@@ -596,7 +596,7 @@
                 var dataSource = remoteDataSource();
                 dataSource.read();
                 dataSource.range(30,16);
-                same(dataSource.data(), dataSource.view());
+                deepEqual(dataSource.data(), dataSource.view());
             });
 
             test("getByUid returns the item after remote range from a diffrent page is retrieved", function() {

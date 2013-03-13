@@ -4,7 +4,7 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -62,12 +62,12 @@
                 });
 
                 test("default categoryAxis field is 'date'", function() {
-                    equals(chart.options.categoryAxis[0].field, "date");
+                    equal(chart.options.categoryAxis[0].field, "date");
                 });
 
                 test("dateField is applied as default categoryAxis field", function() {
                     createStockChart({ dateField: "d" });
-                    equals(chart.options.categoryAxis[0].field, "d");
+                    equal(chart.options.categoryAxis[0].field, "d");
                 });
 
                 test("default axis field is applied", function() {
@@ -76,7 +76,7 @@
                             field: "d"
                         }
                     });
-                    equals(chart.options.categoryAxis[0].field, "d");
+                    equal(chart.options.categoryAxis[0].field, "d");
                 });
 
                 test("default categoryAxis field is applied", function() {
@@ -87,7 +87,7 @@
                             }
                         }
                     });
-                    equals(chart.options.categoryAxis[0].field, "d");
+                    equal(chart.options.categoryAxis[0].field, "d");
                 });
 
                 asyncTest("navigator date field is inherited from the chart", function() {

@@ -4,7 +4,8 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -84,19 +85,19 @@
                 });
 
                 test("Reports minimum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges[undefined].min, series.data[0][0]);
+                    deepEqual(scatterChart.xAxisRanges[undefined].min, series.data[0][0]);
                 });
 
                 test("Reports minimum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges[undefined].min, series.data[0][1]);
+                    deepEqual(scatterChart.yAxisRanges[undefined].min, series.data[0][1]);
                 });
 
                 test("Reports maximum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges[undefined].max, series.data[1][0]);
+                    deepEqual(scatterChart.xAxisRanges[undefined].max, series.data[1][0]);
                 });
 
                 test("Reports maximum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges[undefined].max, series.data[1][1]);
+                    deepEqual(scatterChart.yAxisRanges[undefined].max, series.data[1][1]);
                 });
 
                 test("points have set width", function() {
@@ -110,7 +111,7 @@
                         return point.box.height();
                     });
 
-                    same(pointHeights, [1, 2]);
+                    deepEqual(pointHeights, [1, 2]);
                 });
 
                 test("sets point owner", function() {
@@ -129,11 +130,11 @@
                     equal(typeof scatterChart.points[0].dataItem, "object");
                 });
 
-                test("renders empty scatter line series", function() {
+                test("renders empty scatter line series", 0, function() {
                     setupScatterChart(plotArea, { series: [ { data: [] } ] });
                 });
 
-                test("renders empty and non-empty scatter line series", function() {
+                test("renders empty and non-empty scatter line series", 0, function() {
                     setupScatterChart(plotArea, { series: [ { data: [] }, series ] });
                 });
 
@@ -154,35 +155,35 @@
                 });
 
                 test("Reports minimum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges[undefined].min, 1);
+                    deepEqual(scatterChart.xAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports minimum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges[undefined].min, 10);
+                    deepEqual(scatterChart.yAxisRanges[undefined].min, 10);
                 });
 
                 test("Reports maximum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges[undefined].max, 2);
+                    deepEqual(scatterChart.xAxisRanges[undefined].max, 2);
                 });
 
                 test("Reports maximum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges[undefined].max, 20);
+                    deepEqual(scatterChart.yAxisRanges[undefined].max, 20);
                 });
 
                 test("Reports minimum value for secondary X axis", function() {
-                    same(scatterChart.xAxisRanges.secondary.min, 3);
+                    deepEqual(scatterChart.xAxisRanges.secondary.min, 3);
                 });
 
                 test("Reports minimum value for secondary Y axis", function() {
-                    same(scatterChart.yAxisRanges.secondary.min, 30);
+                    deepEqual(scatterChart.yAxisRanges.secondary.min, 30);
                 });
 
                 test("Reports maximum value for secondary X axis", function() {
-                    same(scatterChart.xAxisRanges.secondary.max, 4);
+                    deepEqual(scatterChart.xAxisRanges.secondary.max, 4);
                 });
 
                 test("Reports maximum value for secondary Y axis", function() {
-                    same(scatterChart.yAxisRanges.secondary.max, 40);
+                    deepEqual(scatterChart.yAxisRanges.secondary.max, 40);
                 });
 
                 test("Throws error when unable to locate X axis", function() {
@@ -218,23 +219,23 @@
                 });
 
                 test("Reports minimum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges[undefined].min, 1);
+                    deepEqual(scatterChart.xAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports minimum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges[undefined].min, 1);
+                    deepEqual(scatterChart.yAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges[undefined].max, 2);
+                    deepEqual(scatterChart.xAxisRanges[undefined].max, 2);
                 });
 
                 test("Reports maximum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges[undefined].max, 2);
+                    deepEqual(scatterChart.yAxisRanges[undefined].max, 2);
                 });
 
                 test("omits null points by default", function() {
-                    equals(scatterChart.points[2], null);
+                    equal(scatterChart.points[2], null);
                 });
 
                 test("omits null points when interpolating", function() {
@@ -244,15 +245,15 @@
                         ]
                     });
 
-                    equals(scatterChart.points[2], null);
+                    equal(scatterChart.points[2], null);
                 });
 
                 test("point with missing X value is omitted", function() {
-                    equals(scatterChart.points[5], null);
+                    equal(scatterChart.points[5], null);
                 });
 
                 test("point with missing Y value is omitted", function() {
-                    equals(scatterChart.points[6], null);
+                    equal(scatterChart.points[6], null);
                 });
 
                 // ------------------------------------------------------------
@@ -264,7 +265,7 @@
                 });
 
                 test("sets group animation", function() {
-                    equals(view.log.group[0].options.animation.type, "clip");
+                    equal(view.log.group[0].options.animation.type, "clip");
                 });
 
                 // ------------------------------------------------------------
@@ -283,7 +284,7 @@
                         }]
                     });
 
-                    equals(view.log.text[0].content, "$1.00 $10.00");
+                    equal(view.log.text[0].content, "$1.00 $10.00");
                 });
 
             })();

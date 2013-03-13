@@ -4,7 +4,7 @@
         <title>TabStrip DataBinding</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.tabstrip.js"></script>
@@ -140,20 +140,24 @@
             ok(tabstrip.tabGroup.find("span.k-sprite").hasClass("foo"));
         });
 
-        test("resetting dataSource detaches the previouse events", function() {
+        test("resetting dataSource detaches the previous events", function() {
             var dom = $("<ul/>");
 
             var tabstrip = new kendo.ui.TabStrip(dom);
 
             var dataSource = tabstrip.dataSource;
 
+            var called = false;
+
             tabstrip._dataSource();
 
             tabstrip.bind("dataBound", function() {
-                ok(false, "Change event is not detached");
+                called = true;
             });
 
             dataSource.read();
+
+            ok(!called, "Change event is not detached");
         });
 
         test("resetting DataSource rebinds the widget and refreshes content elements", 2, function() {

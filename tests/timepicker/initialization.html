@@ -4,7 +4,7 @@
         <title>TimePicker Initialization</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.fx.js"></script>
@@ -164,8 +164,9 @@
                 equal(timepicker.timeView.popup.options.appendTo[0], $(appendTo)[0]);
             });
 
-            test("timpicker initializes a touch scroller when in mobile", function() {
+            test("timepicker initializes a touch scroller when in mobile", 1, function() {
                 kendo.support.touch = true;
+                kendo.support.kineticScrollNeeded = true;
                 kendo.support.mobileOS = kendo.support.detectOS("iPhone OS 4_3");
 
                 var timepicker = new kendo.ui.TimePicker(input);

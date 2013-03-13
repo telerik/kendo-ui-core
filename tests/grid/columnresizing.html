@@ -4,7 +4,7 @@
         <title>Grid Column Resize</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
@@ -486,6 +486,7 @@
                 initialWidth = firstColumn[0].offsetWidth;
 
                 resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth);
+                expect(0);
             });
 
             test("column footer cell width is persisted is grid is paged", function() {

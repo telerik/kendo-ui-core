@@ -4,7 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -55,22 +55,22 @@
 
                 test("sets width", function() {
                     createCrosshair({ width: 2 });
-                    equals(element.options.strokeWidth, 2);
+                    equal(element.options.strokeWidth, 2);
                 });
 
                 test("sets opacity", function() {
                     createCrosshair({ opacity: 0.5 });
-                    equals(element.options.strokeOpacity, 0.5);
+                    equal(element.options.strokeOpacity, 0.5);
                 });
 
                 test("sets color", function() {
                     createCrosshair({ color: "color" });
-                    equals(element.options.stroke, "color");
+                    equal(element.options.stroke, "color");
                 });
 
                 test("sets dashType", function() {
                     createCrosshair({ dashType: "dashType" });
-                    equals(element.options.dashType, "dashType");
+                    equal(element.options.dashType, "dashType");
                 });
 
                 // ------------------------------------------------------------
@@ -83,15 +83,15 @@
                 test("returns vertical points", function() {
                     createCrosshair();
                     points = crosshair.linePoints();
-                    same([points[0].x, points[0].y], [0,0]);
-                    same([points[1].x, points[1].y], [200,0]);
+                    deepEqual([points[0].x, points[0].y], [0,0]);
+                    deepEqual([points[1].x, points[1].y], [200,0]);
                 });
 
                 test("returns horizontal points", function() {
                 createCrosshair({}, { vertical: false });
                     points = crosshair.linePoints();
-                    same([points[0].x, points[0].y], [0,0]);
-                    same([points[1].x, points[1].y], [0,200]);
+                    deepEqual([points[0].x, points[0].y], [0,0]);
+                    deepEqual([points[1].x, points[1].y], [0,200]);
                 });
 
             })();

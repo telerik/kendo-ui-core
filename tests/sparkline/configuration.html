@@ -4,9 +4,10 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
         <link href="../../styles/dataviz/kendo.dataviz.css" type="text/css" rel="stylesheet"/>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -60,7 +61,7 @@
                 });
 
                 test("chartArea has 2px margin", function() {
-                    equals(sparkline.options.chartArea.margin, 2);
+                    equal(sparkline.options.chartArea.margin, 2);
                 });
 
                 test("transitions are disabled", function() {
@@ -81,44 +82,44 @@
                 });
 
                 test("auto height equals line height of empty container", function() {
-                    equals(sparkline.stage.height(), 19, TOLERANCE);
+                    QUnit.close(sparkline.stage.height(), 19, TOLERANCE);
                 });
 
                 test("custom height is preserved", function() {
                     $("#sparkline").css("height", "30");
                     createSparkline();
-                    equals(sparkline.element.innerHeight(), 30);
+                    equal(sparkline.element.innerHeight(), 30);
                 });
 
                 test("sets default container width for 2 points", function() {
                     createSparkline([1, 2]);
-                    equals(sparkline.element.width(), 14);
+                    equal(sparkline.element.width(), 14);
                 });
 
                 test("sets default container width for 4 points", function() {
                     createSparkline([1, 2, 3, 4]);
-                    equals(sparkline.element.width(), 24);
+                    equal(sparkline.element.width(), 24);
                 });
 
                 test("sets container width based on custom pointWidth", function() {
                     createSparkline({ dataSource: [1, 2], pointWidth: 10 });
-                    equals(sparkline.element.width(), 24);
+                    equal(sparkline.element.width(), 24);
                 });
 
                 test("sets default container width for bullet series", function() {
                     createSparkline({ data: [[1, 2]], type: "bullet" });
-                    equals(sparkline.element.width(), 150);
+                    equal(sparkline.element.width(), 150);
                 });
 
                 test("sets default container width for bar series", function() {
                     createSparkline({ data: [1], type: "bar" });
-                    equals(sparkline.element.width(), 150);
+                    equal(sparkline.element.width(), 150);
                 });
 
                 test("sets default container width after replacing existing widget", function() {
                     createSparkline([1, 2]);
                     createSparkline([1, 2, 3, 4]);
-                    equals(sparkline.element.width(), 24);
+                    equal(sparkline.element.width(), 24);
                 });
 
                 test("sets default container width when binding to inline data", function() {
@@ -127,25 +128,25 @@
                             data: [1, 2]
                         }]
                     });
-                    equals(sparkline.element.width(), 14);
+                    equal(sparkline.element.width(), 14);
                 });
 
                 test("custom width is preserved", function() {
                     $("#sparkline").css("width", "30");
                     createSparkline();
-                    equals(sparkline.element.innerWidth(), 30);
+                    equal(sparkline.element.innerWidth(), 30);
                 });
 
                 test("custom width is preserved for bullet series", function() {
                     $("#sparkline").css("width", "30");
                     createSparkline({ type: "bullet" });
-                    equals(sparkline.element.innerWidth(), 30);
+                    equal(sparkline.element.innerWidth(), 30);
                 });
 
                 test("custom width is preserved for bar series", function() {
                     $("#sparkline").css("width", "30");
                     createSparkline({ type: "bar" });
-                    equals(sparkline.element.innerWidth(), 30);
+                    equal(sparkline.element.innerWidth(), 30);
                 });
 
                 // ------------------------------------------------------------
@@ -157,22 +158,22 @@
                 test("bullet wrap the options data array", function() {
                     var data = [1,2];
                     createSparkline({ data: data, type: "bullet" });
-                    same(sparkline._plotArea.series[0].data[0], data);
+                    deepEqual(sparkline._plotArea.series[0].data[0], data);
                 });
 
                 test("bar is stacked by default", function() {
                     createSparkline({ data: [1], type: "bar" });
-                    same(sparkline._plotArea.series[0].stack, true);
+                    deepEqual(sparkline._plotArea.series[0].stack, true);
                 });
 
                 test("crosshair is disabled for bullet sparkline", function() {
                     createSparkline({ data: [1], type: "bullet" });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 test("crosshair is disabled for bullet seriesDefaults", function() {
                     createSparkline({ data: [1], seriesDefaults: { type: "bullet" } });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 test("crosshair can be enabled for bullet sparkline", function() {
@@ -183,7 +184,7 @@
                             }
                         }
                     });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, true);
                 });
 
                 test("crosshair can be enabled for bullet sparkline", function() {
@@ -195,17 +196,17 @@
                             }
                         }
                     });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, true);
                 });
 
                 test("crosshair is disabled for bullet series", function() {
                     createSparkline({ series: [{ data: [1], type: "bullet" }] });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 test("crosshair is disabled for bar sparkline", function() {
                     createSparkline({ data: [1], type: "bar" });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 test("crosshair can be enabled for bar sparkline", function() {
@@ -216,17 +217,17 @@
                             }
                         }
                     });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, true);
                 });
 
                 test("crosshair is disabled for bar seriesDefaults", function() {
                     createSparkline({ data: [1], seriesDefaults: { type: "bar" } });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 test("crosshair is disabled for bar series", function() {
                     createSparkline({ series: [{ data: [1], type: "bar" }] });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, false);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 test("crosshair can be enabled for bar sparkline", function() {
@@ -238,7 +239,7 @@
                             }
                         }
                     });
-                    equals(sparkline.options.categoryAxis.crosshair.visible, true);
+                    equal(sparkline.options.categoryAxis.crosshair.visible, true);
                 });
             })();
         </script>

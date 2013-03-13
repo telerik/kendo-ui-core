@@ -4,7 +4,7 @@
         <title>DataSource model handling</title>
         <script src="../../../src/jquery.js"></script>
         <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.model.js"></script>
@@ -238,7 +238,7 @@
                 var model = dataSource.get(0);
                 var removedModel = dataSource.remove(model);
 
-                same(removedModel, model);
+                deepEqual(removedModel, model);
                 equal(removedModel.foo, 1);
                 equal(removedModel.id, 0);
                 equal(dataSource.data()[0].items.length, 1);
@@ -272,7 +272,7 @@
                 var model = dataSource.get(1);
                 var removedModel = dataSource.remove(model);
 
-                same(removedModel, model);
+                deepEqual(removedModel, model);
                 equal(removedModel.foo, 1);
                 equal(removedModel.id, 1);
                 equal(dataSource.data()[0].items[0].items.length, 1);

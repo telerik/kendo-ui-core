@@ -5,7 +5,7 @@
 
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -54,7 +54,7 @@
                 colorPickerControl.value(color);
                 colorPickerControl.trigger("change");
 
-                equals(ColorEngine.css2hex(colorIndicator.css("backgroundColor")), color);
+                equal(ColorEngine.css2hex(colorIndicator.css("backgroundColor")), color);
             });
 
             test("changing input value to friendly name converts it to hex", function() {
@@ -64,7 +64,7 @@
                 colorPickerControl.value(color);
                 colorPickerControl.trigger("change");
 
-                equals(colorPickerControl.value(), "#ff0000");
+                equal(colorPickerControl.value(), "#ff0000");
             });
 
             test("clearing the input restores previous value", function() {
@@ -77,7 +77,7 @@
 
                 var litmus = $("<div />").appendTo(document.body);
 
-                equals(colorPickerControl.value(), litmus.css("backgroundColor"));
+                equal(colorPickerControl.value(), litmus.css("backgroundColor"));
 
                 litmus.remove();
             });
@@ -85,7 +85,7 @@
             test("preview bgcolor is changed upon init", function() {
                 colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker();
 
-                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-i-arrow-s").css("backgroundColor")), "#ff0000");
+                equal(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-i-arrow-s").css("backgroundColor")), "#ff0000");
             });
 
             test("change handler is called only once on change", function() {
@@ -100,13 +100,13 @@
 
                 colorPicker.data("kendoColorPicker").trigger("change");
 
-                equals(called, 1);
+                equal(called, 1);
             });
 
             test("accepts rgba values", function() {
                 colorPicker = $("<input value='rgba(0,0,0,.25)' />").appendTo(document.body).kendoColorPicker();
 
-                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-input").val()), "rgba(0,0,0,.25)");
+                equal(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-input").val()), "rgba(0,0,0,.25)");
             });
 
             test("value() updates color preview", function() {
@@ -114,7 +114,7 @@
 
                 colorPicker.data("kendoColorPicker").value("#000");
 
-                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-icon").css("backgroundColor")), "#000000");
+                equal(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-icon").css("backgroundColor")), "#000000");
             });
 
         </script>

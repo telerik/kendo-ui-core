@@ -4,7 +4,8 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -146,8 +147,8 @@
                     chartElement.enableDiscovery();
                     chartElement.getViewElements(view);
 
-                    equals(chartElement.options.modelId, child1.options.modelId);
-                    equals(chartElement.options.modelId, child2.options.modelId);
+                    equal(chartElement.options.modelId, child1.options.modelId);
+                    equal(chartElement.options.modelId, child2.options.modelId);
                 });
 
                 test("getViewElements does not register associated elements", function() {
@@ -238,9 +239,9 @@
                     renderRoot();
 
                     sameBox(rootRect, new Box2D(1, 1, 599, 399));
-                    equals(rootRect.style.strokeWidth, 1);
-                    equals(rootRect.style.stroke, "red");
-                    equals(rootRect.style.dashType, "dot");
+                    equal(rootRect.style.strokeWidth, 1);
+                    equal(rootRect.style.stroke, "red");
+                    equal(rootRect.style.dashType, "dot");
                 });
 
                 test("sets background to rootElement", function() {
@@ -249,7 +250,7 @@
                     });
                     renderRoot();
 
-                    equals(rootRect.style.fill, "red");
+                    equal(rootRect.style.fill, "red");
                 });
 
                 test("sets background opacity to rootElement", function() {
@@ -258,7 +259,7 @@
                     });
                     renderRoot();
 
-                    equals(rootRect.style.fillOpacity, 0.1);
+                    equal(rootRect.style.fillOpacity, 0.1);
                 });
 
                 test("applies top margin", function() {
@@ -269,7 +270,7 @@
                     });
                     renderRoot();
 
-                    equals(rootElement.box.y1, rootRect.y1 + MARGIN);
+                    equal(rootElement.box.y1, rootRect.y1 + MARGIN);
                 });
 
                 test("applies right margin", function() {
@@ -280,7 +281,7 @@
                     });
                     renderRoot();
 
-                    equals(rootElement.box.x2, rootRect.x2 - MARGIN);
+                    equal(rootElement.box.x2, rootRect.x2 - MARGIN);
                 });
 
                 test("applies bottom margin", function() {
@@ -291,7 +292,7 @@
                     });
                     renderRoot();
 
-                    equals(rootElement.box.y2, rootRect.y2 - MARGIN);
+                    equal(rootElement.box.y2, rootRect.y2 - MARGIN);
                 });
 
                 test("applies left margin", function() {
@@ -302,7 +303,7 @@
                     });
                     renderRoot();
 
-                    equals(rootElement.box.x1, rootRect.x1 + MARGIN);
+                    equal(rootElement.box.x1, rootRect.x1 + MARGIN);
                 });
 
                 test("getRoot returns self", function() {
@@ -351,7 +352,7 @@
                     boxElement.options.margin.top = MARGIN;
                     boxElement.reflow(targetBox);
 
-                    same([boxElement.box.y1, boxElement.box.y2],
+                    deepEqual([boxElement.box.y1, boxElement.box.y2],
                          [targetBox.y1, targetBox.y1 + HEIGHT + MARGIN]);
                 });
 
@@ -359,7 +360,7 @@
                     boxElement.options.margin.right = MARGIN;
                     boxElement.reflow(targetBox);
 
-                    same([boxElement.box.x1, boxElement.box.x2],
+                    deepEqual([boxElement.box.x1, boxElement.box.x2],
                          [targetBox.x1, targetBox.x1 + WIDTH + MARGIN]);
                 });
 
@@ -367,7 +368,7 @@
                     boxElement.options.margin.bottom = MARGIN;
                     boxElement.reflow(targetBox);
 
-                    same([boxElement.box.y1, boxElement.box.y2],
+                    deepEqual([boxElement.box.y1, boxElement.box.y2],
                          [targetBox.y1, targetBox.y1 + HEIGHT + MARGIN]);
                 });
 
@@ -375,7 +376,7 @@
                     boxElement.options.margin.left = MARGIN;
                     boxElement.reflow(targetBox);
 
-                    same([boxElement.box.x1, boxElement.box.x2],
+                    deepEqual([boxElement.box.x1, boxElement.box.x2],
                          [targetBox.x1, targetBox.x1 + WIDTH + MARGIN]);
                 });
 
@@ -383,7 +384,7 @@
                     boxElement.options.margin = MARGIN;
                     boxElement.reflow(targetBox);
 
-                    same([boxElement.box.x1, boxElement.box.y1,
+                    deepEqual([boxElement.box.x1, boxElement.box.y1,
                           boxElement.box.x2, boxElement.box.y2],
                          [targetBox.x1, targetBox.y1,
                           targetBox.x1 + WIDTH + 2 * MARGIN,
@@ -619,7 +620,7 @@
                     boxElement.reflow(targetBox);
 
                     $.each(childElements, function() {
-                        same([this.box.x1, this.box.y1],
+                        deepEqual([this.box.x1, this.box.y1],
                              [targetBox.x1 + 1, targetBox.y1 + 2]);
                     });
                 });
@@ -632,7 +633,7 @@
                     boxElement.reflow(targetBox);
 
                     $.each(childElements, function() {
-                        same([this.box.x1, this.box.y1],
+                        deepEqual([this.box.x1, this.box.y1],
                              [targetBox.x1 + 1, targetBox.y1 + 2]);
                     });
                 });
@@ -703,7 +704,7 @@
                     boxElement = new dataviz.BoxElement();
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
-                    equals(view.log.rect.length, 0);
+                    equal(view.log.rect.length, 0);
                 });
 
                 test("renders border width", function() {
@@ -800,7 +801,7 @@
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
 
-                    equals(view.log.rect.length, 0);
+                    equal(view.log.rect.length, 0);
                 });
 
                 test("renders id", function() {
@@ -808,7 +809,7 @@
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
 
-                    equals(view.log.rect[0].style.id, "id");
+                    equal(view.log.rect[0].style.id, "id");
                 });
 
                 test("renders model id as data", function() {
@@ -816,7 +817,7 @@
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
 
-                    equals(view.log.rect[0].style.data.modelId, "id");
+                    equal(view.log.rect[0].style.data.modelId, "id");
                 });
 
                 test("renders zIndex", function() {
@@ -824,7 +825,7 @@
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
 
-                    equals(view.log.rect[0].style.zIndex, 100);
+                    equal(view.log.rect[0].style.zIndex, 100);
                 });
 
             })();
@@ -864,7 +865,7 @@
                 });
 
                 test("text element has set content", function() {
-                    equals(titleText.content, "Title");
+                    equal(titleText.content, "Title");
                 });
 
                 test("text element has set font", function() {
@@ -906,8 +907,8 @@
                 });
 
                 test("text is positioned at top", function() {
-                    equals(titleText.box.y1 - MARGIN - PADDING, chartBox.y1);
-                    equals(titleText.box.y2 - MARGIN - PADDING,
+                    equal(titleText.box.y1 - MARGIN - PADDING, chartBox.y1);
+                    close(titleText.box.y2 - MARGIN - PADDING,
                            chartBox.y1 + TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
@@ -917,22 +918,22 @@
                     });
 
                     title.reflow(chartBox);
-                    equals(titleText.box.y1 + MARGIN + PADDING,
+                    close(titleText.box.y1 + MARGIN + PADDING,
                            chartBox.y2 - TITLE_TEXT_HEIGHT, TOLERANCE);
-                    equals(titleText.box.y2 + MARGIN + PADDING, chartBox.y2);
+                    equal(titleText.box.y2 + MARGIN + PADDING, chartBox.y2);
                 });
 
                 test("text is aligned at center", function() {
-                    equals(titleText.box.x1,
+                    close(titleText.box.x1,
                            chartBox.x1 + (chartBox.width() - TITLE_TEXT_WIDTH) / 2, TOLERANCE);
                 });
 
                 test("box width is equal to container width", function() {
-                    equals(title.box.width(), chartBox.width());
+                    equal(title.box.width(), chartBox.width());
                 });
 
                 test("box height is equal to text height", function() {
-                    equals(title.box.height() - MARGIN * 2 - PADDING * 2,
+                    close(title.box.height() - MARGIN * 2 - PADDING * 2,
                            TITLE_TEXT_HEIGHT, TOLERANCE);
                 });
 
@@ -992,27 +993,27 @@
 
                 test("creates a title from string", function() {
                     title = Title.buildTitle("Title", parent);
-                    equals(title.options.text, "Title");
+                    equal(title.options.text, "Title");
                 });
 
                 test("creates a title from options with text", function() {
                     title = Title.buildTitle({ text: "Title" }, parent);
-                    equals(title.options.text, "Title");
+                    equal(title.options.text, "Title");
                 });
 
                 test("does not create title when not visible", function() {
                     title = Title.buildTitle({ text: "Title", visible: false }, parent);
-                    equals(title, undefined);
+                    equal(title, undefined);
                 });
 
                 test("does not create title without text", function() {
                     title = Title.buildTitle({ text: "" }, parent);
-                    equals(title, undefined);
+                    equal(title, undefined);
                 });
 
                 test("applies default options", function() {
                     title = Title.buildTitle("Title", parent, { flag: true });
-                    equals(title.options.flag, true);
+                    equal(title.options.flag, true);
                 });
 
             })();
@@ -1088,7 +1089,7 @@
                     text.reflow(new Box2D());
                     text.getViewElements(view);
 
-                    equals(view.log.text[0].style.id, "id");
+                    equal(view.log.text[0].style.id, "id");
                 });
 
                 test("renders model id as data", function() {
@@ -1096,7 +1097,7 @@
                     text.reflow(new Box2D());
                     text.getViewElements(view);
 
-                    equals(view.log.text[0].style.data.modelId, "id");
+                    equal(view.log.text[0].style.data.modelId, "id");
                 });
 
                 test("renders zIndex", function() {
@@ -1104,14 +1105,14 @@
                     text.reflow(new Box2D());
                     text.getViewElements(view);
 
-                    equals(view.log.text[0].style.zIndex, 100);
+                    equal(view.log.text[0].style.zIndex, 100);
                 });
 
                 test("renders baseline", function() {
                     text.reflow(new Box2D());
                     text.getViewElements(view);
 
-                    equals(view.log.text[0].style.baseline, 13, TOLERANCE);
+                    close(view.log.text[0].style.baseline, 13, TOLERANCE);
                 });
 
             })();
@@ -1217,7 +1218,7 @@
                     var label1 = legend.children[0],
                         label2 = legend.children[1];
 
-                    equals(label2.box.y1, label1.box.y2);
+                    equal(label2.box.y1, label1.box.y2);
                 });
 
                 test("labels have set font", function() {
@@ -1324,7 +1325,7 @@
                         position: "bottom"
                     });
 
-                    equal(legend.box.y1, chartBox.y2 - legend.box.height(), TOLERANCE);
+                    close(legend.box.y1, chartBox.y2 - legend.box.height(), TOLERANCE);
                 });
 
                 test("applies left and right margin when positioned to the right", function() {
@@ -1342,7 +1343,7 @@
                         margin: MARGIN
                     });
 
-                    equals(legend.box.x2, chartBox.x1 + baseWidth + 2 * MARGIN);
+                    equal(legend.box.x2, chartBox.x1 + baseWidth + 2 * MARGIN);
                 });
 
                 test("applies top and bottom margin when positioned to the top", function() {
@@ -1392,19 +1393,19 @@
                 });
 
                 test("markers have margin on the left", function() {
-                    equal(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
+                    close(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
                 });
 
                 test("markers have set width", function() {
-                    equal(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
+                    close(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
                 });
 
                 test("markers have margin on the right", function() {
-                    equal(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
+                    close(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
                 });
 
                 test("markers are aligned to text center", function() {
-                    equal(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
+                    close(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
                 });
 
                 test("markers are 1/2 of label size", function() {
@@ -1449,19 +1450,19 @@
                 });
 
                 test("renders border width", function() {
-                    same(legendBox.style.strokeWidth, BORDER_WIDTH);
+                    deepEqual(legendBox.style.strokeWidth, BORDER_WIDTH);
                 });
 
                 test("renders border color", function() {
-                    same(legendBox.style.stroke, BORDER_COLOR);
+                    deepEqual(legendBox.style.stroke, BORDER_COLOR);
                 });
 
                 test("renders border dashType", function() {
-                    same(legendBox.style.dashType, BORDER_DASH_TYPE);
+                    deepEqual(legendBox.style.dashType, BORDER_DASH_TYPE);
                 });
 
                 test("renders background color", function() {
-                    same(legendBox.style.fill, BACKGROUND);
+                    deepEqual(legendBox.style.fill, BACKGROUND);
                 });
             })();
 
@@ -1483,7 +1484,7 @@
                     ];
 
                     view.playAnimations();
-                    equals(order, "12");
+                    equal(order, "12");
                 });
 
                 test("destroy clears animations", function() {
@@ -1493,16 +1494,7 @@
                     ];
 
                     view.destroy();
-                    equals(view.animations.length, 0);
-                });
-
-                test("destroy destroys animations", 1, function() {
-                    var order;
-                    view.animations = [
-                        { destroy: function() { ok(true); } },
-                    ];
-
-                    view.destroy();
+                    equal(view.animations.length, 0);
                 });
 
                 test("decorate applies decorators in order", function() {
@@ -1513,7 +1505,7 @@
                     ];
 
                     view.decorate({ children: [] });
-                    equals(order, "12");
+                    equal(order, "12");
                 });
 
                 test("decorate processes elements recursively", function() {
@@ -1533,7 +1525,7 @@
                         }]
                     });
 
-                    equals(order, "321");
+                    equal(order, "321");
                 });
 
                 // ------------------------------------------------------------
@@ -1544,19 +1536,19 @@
                 });
 
                 test("builds gradient from name", function() {
-                    equals(view.buildGradient({ gradient: "glass" }).type, "linear");
+                    equal(view.buildGradient({ gradient: "glass" }).type, "linear");
                 });
 
                 test("returns undefined when no gradient exists", function() {
-                    equals(typeof view.buildGradient("x"), "undefined");
+                    equal(typeof view.buildGradient("x"), "undefined");
                 });
 
                 test("applies options", function() {
-                    equals(view.buildGradient({ gradient: "glass", rotation: 90 }).rotation, 90);
+                    equal(view.buildGradient({ gradient: "glass", rotation: 90 }).rotation, 90);
                 });
 
                 test("returns same gradient for same options", function() {
-                    equals(view.buildGradient({ gradient: "glass", rotation: 90 }).id,
+                    equal(view.buildGradient({ gradient: "glass", rotation: 90 }).id,
                            view.buildGradient({ gradient: "glass", rotation: 90 }).id);
                 });
 
@@ -1579,47 +1571,47 @@
 
                 test("get box with startAngle 10 and endAngle 190", function() {
                     createRing(10, 190);
-                    same(ringBox, [1, 0, 200, 117], TOLERANCE);
+                    arrayClose(ringBox, [1, 0, 200, 117], TOLERANCE);
                 });
 
                 test("get box with startAngle 10 and endAngle 30", function() {
                     createRing(10, 30);
-                    same(ringBox, [1, 50, 100, 100], TOLERANCE);
+                    arrayClose(ringBox, [1, 50, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 90", function() {
                     createRing(0, 90);
-                    same(ringBox, [0, 0, 100, 100], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 30 and endAngle 170", function() {
                     createRing(30, 170);
-                    same(ringBox, [13, 0, 198, 100], TOLERANCE);
+                    arrayClose(ringBox, [13, 0, 198, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 360", function() {
                     createRing(0, 360);
-                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 280", function() {
                     createRing(0, 280);
-                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 90 and endAngle 90 (full circle)", function() {
                     createRing(90, 90);
-                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 180 and endAngle 0", function() {
                     createRing(180, 0);
-                    same(ringBox, [0, 100, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 100, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 180.1 and endAngle 0", function() {
                     createRing(180.1, 0);
-                    same(ringBox, [0, 100, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 100, 200, 200], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
@@ -1627,42 +1619,42 @@
 
                 test("get box with startAngle 10 and endAngle 190", function() {
                     createRing(10, 190, 50);
-                    same(ringBox, [1, 0, 200, 117], TOLERANCE);
+                    arrayClose(ringBox, [1, 0, 200, 117], TOLERANCE);
                 });
 
                 test("get box with startAngle 10 and endAngle 30", function() {
                     createRing(10, 30, 50);
-                    same(ringBox, [1, 50, 13, 83], TOLERANCE);
+                    arrayClose(ringBox, [1, 50, 13, 83], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 90", function() {
                     createRing(0, 90, 50);
-                    same(ringBox, [0, 0, 100, 100], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 30 and endAngle 170", function() {
                     createRing(30, 170, 50);
-                    same(ringBox, [13, 0, 198, 83], TOLERANCE);
+                    arrayClose(ringBox, [13, 0, 198, 83], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 360", function() {
                     createRing(0, 360, 50);
-                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 280", function() {
                     createRing(0, 280, 50);
-                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 90 and endAngle 450", function() {
                     createRing(90, 450, 50);
-                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                    arrayClose(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 410 and endAngle 450", function() {
                     createRing(410, 450, 50);
-                    same(ringBox, [35, 0, 100, 23], TOLERANCE);
+                    arrayClose(ringBox, [35, 0, 100, 23], TOLERANCE);
                 });
 
             })();
@@ -1683,7 +1675,7 @@
                     pane = new Pane( { title: "Title", width: 600, height: 400 } );
                     pane.reflow(chartBox);
 
-                    equals(pane.contentBox.height(), 365);
+                    equal(pane.contentBox.height(), 365);
                 });
             })();
         </script>

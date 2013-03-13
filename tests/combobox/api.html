@@ -4,7 +4,7 @@
         <title>ComboBox Client API</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -179,7 +179,7 @@
                 equal(combobox.select(), 1);
             });
 
-            test("select() returns selectedIndex", function() {
+            test("select method does not trigger change event", 0, function() {
                 combobox.bind("change", function() {
                     ok(false);
                 });

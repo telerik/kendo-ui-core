@@ -5,7 +5,7 @@
 
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
 
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
@@ -68,8 +68,8 @@
 
                 var element = $("<span class='foo' />").appendTo(document.body);
 
-                equals(element.css("font-size"), "8px");
-                equals($("style[title]").length, 1);
+                equal(element.css("font-size"), "8px");
+                equal($("style[title]").length, 1);
             });
 
             test("updateStyleSheet() updates existing stylesheet", function() {
@@ -79,8 +79,8 @@
 
                 var element = $("<span class='foo' />").appendTo(document.body);
 
-                equals($("style[title]").length, 1);
-                equals($(".foo").css("font-size"), "10px");
+                equal($("style[title]").length, 1);
+                equal($(".foo").css("font-size"), "10px");
             });
 
             test("render() renders color picker for box-shadow-color properties", function() {
@@ -98,7 +98,7 @@
                         }
                     }, document);
 
-                equals(themeBuilder.element.find("span.ktb-colorpicker").length, 1)
+                equal(themeBuilder.element.find("span.ktb-colorpicker").length, 1)
             });
 
             test("value of box-shadow color picker gets processed as color", function() {
@@ -113,7 +113,7 @@
 
                 constants.infer(document);
 
-                equals(constants.serialize(), "@foo-color: #b4d455;");
+                equal(constants.serialize(), "@foo-color: #b4d455;");
             });
 
             test("value of box-shadow color picker with inset shadow", function() {
@@ -128,7 +128,7 @@
 
                 constants.infer(document);
 
-                equals(constants.serialize(), "@foo-color: #b4d455;");
+                equal(constants.serialize(), "@foo-color: #b4d455;");
             });
 
             test("LessTheme are inferred on init", function() {
@@ -160,7 +160,7 @@
                     name: "@foo"
                 });
 
-                equals(constants.constants["@foo"].value, color)
+                equal(constants.constants["@foo"].value, color)
             });
 
             test("changing input value triggers _propertyChange", function() {
@@ -180,8 +180,8 @@
                     });
 
                 themebuilder._propertyChange = function(e) {
-                    equals(e.name, "@foo");
-                    equals(e.value, color);
+                    equal(e.name, "@foo");
+                    equal(e.value, color);
                 };
 
                 var colorPicker = themebuilder.element.find("[id='@foo']").data("kendoColorPicker");
@@ -208,7 +208,7 @@
                     name: "title.color"
                 });
 
-                equals(constants.constants["title.color"].value, color)
+                equal(constants.constants["title.color"].value, color)
             });
 
         </script>

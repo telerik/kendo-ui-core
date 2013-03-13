@@ -4,7 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -109,36 +109,36 @@
                     setupOHLCChart(plotArea, { series: [{
                         data: [[2,4,1,3], null], type: "ohlc"
                     }]});
-                    equals(ohlcChart.points[1], undefined);
+                    equal(ohlcChart.points[1], undefined);
                 });
 
                 test("creates empty points for undefined values", function() {
                     setupOHLCChart(plotArea, { series: [{
                         data: [[2,4,1,3], undefined], type: "ohlc"
                     }]});
-                    equals(ohlcChart.points[1], undefined);
+                    equal(ohlcChart.points[1], undefined);
                 });
 
                 test("creates empty points for partially undefined values", function() {
                     setupOHLCChart(plotArea, { series: [{
                         data: [[2,4,1,3], [0, 1, undefined, 2]], type: "ohlc"
                     }]});
-                    equals(ohlcChart.points[1], undefined);
+                    equal(ohlcChart.points[1], undefined);
                 });
 
                 test("empty points are not collapsed", function() {
                     setupOHLCChart(plotArea, { series: [{
                         data: [[2,4,1,3], null, [2, 4, 1, 3]], type: "ohlc"
                     }]});
-                    equals(ohlcChart.points[2].box.x1, 2);
+                    equal(ohlcChart.points[2].box.x1, 2);
                 });
 
                 test("reports minimum series value for default axis", function() {
-                    same(ohlcChart.valueAxisRanges[undefined].min, series.data[0][2]);
+                    deepEqual(ohlcChart.valueAxisRanges[undefined].min, series.data[0][2]);
                 });
 
                 test("reports maximum series value for default axis", function() {
-                    same(ohlcChart.valueAxisRanges[undefined].max, series.data[0][1]);
+                    deepEqual(ohlcChart.valueAxisRanges[undefined].max, series.data[0][1]);
                 });
 
                 test("reports number of categories", function() {
@@ -182,31 +182,31 @@
                 });
 
                 test("sets line width", function() {
-                    equals(view.log.path[0].style.strokeWidth, 4);
+                    equal(view.log.path[0].style.strokeWidth, 4);
                 });
 
                 test("sets line color", function() {
-                    equals(view.log.path[0].style.stroke, "lineColor");
+                    equal(view.log.path[0].style.stroke, "lineColor");
                 });
 
                 test("sets line opacity", function() {
-                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                    equal(view.log.path[0].style.strokeOpacity, 0.5);
                 });
 
                 test("sets line dashType", function() {
-                    equals(view.log.path[0].style.dashType, "dot");
+                    equal(view.log.path[0].style.dashType, "dot");
                 });
 
                 test("overlay rect has same model id as its segment", function() {
-                    equals(view.log.rect[0].style.data.modelId, ohlcChart.points[0].options.modelId);
+                    equal(view.log.rect[0].style.data.modelId, ohlcChart.points[0].options.modelId);
                 });
 
                 test("renders chart group", function() {
-                    equals(view.log.group.length, 1);
+                    equal(view.log.group.length, 1);
                 });
 
                 test("sets group animation", function() {
-                    equals(view.log.group[0].options.animation.type, "clip");
+                    equal(view.log.group[0].options.animation.type, "clip");
                 });
 
                 // ------------------------------------------------------------
@@ -221,41 +221,41 @@
                 test("highlightOverlay renders default line width", function() {
                     var line = firstPoint.highlightOverlay(view).children[0];
 
-                    equals(line.options.strokeWidth, 1);
+                    equal(line.options.strokeWidth, 1);
                 });
 
                 test("highlightOverlay renders custom line width", function() {
                     firstPoint.options.highlight.line.width = 2;
                     var line = firstPoint.highlightOverlay(view).children[0];
 
-                    equals(line.options.strokeWidth, 2);
+                    equal(line.options.strokeWidth, 2);
                 });
 
                 test("highlightOverlay renders default line color", function() {
                     firstPoint.color = "#ffffff";
                     var line = firstPoint.highlightOverlay(view).children[0];
 
-                    equals(line.options.stroke, "#ffffff");
+                    equal(line.options.stroke, "#ffffff");
                 });
 
                 test("highlightOverlay renders custom line color", function() {
                     firstPoint.options.highlight.line.color = "red";
                     var line = firstPoint.highlightOverlay(view).children[0];
 
-                    equals(line.options.stroke, "red");
+                    equal(line.options.stroke, "red");
                 });
 
                 test("highlightOverlay renders default line opacity", function() {
                     var line = firstPoint.highlightOverlay(view).children[0];
 
-                    equals(line.options.strokeOpacity, 1);
+                    equal(line.options.strokeOpacity, 1);
                 });
 
                 test("highlightOverlay renders custom line opacity", function() {
                     firstPoint.options.highlight.line.opacity = 0.5;
                     var line = firstPoint.highlightOverlay(view).children[0];
 
-                    equals(line.options.strokeOpacity, 0.5);
+                    equal(line.options.strokeOpacity, 0.5);
                 });
 
             })();
@@ -377,12 +377,12 @@
 
                 test("sets point border width", function() {
                     createPoint({ border: { width: 4 } });
-                    equals(point.options.border.width, 4);
+                    equal(point.options.border.width, 4);
                 });
 
                 test("sets point opacity", function() {
                     createPoint({ opacity: 0.5 });
-                    same(point.options.opacity, 0.5);
+                    deepEqual(point.options.opacity, 0.5);
                 });
 
                 test("sets point id", function() {
@@ -393,12 +393,12 @@
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equals(view.log.rect[0].style.data.modelId, point.options.modelId);
+                    equal(view.log.rect[0].style.data.modelId, point.options.modelId);
                 });
 
                 test("tooltipAnchor is at top right of point", function() {
                     var anchor = point.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y],
+                    deepEqual([anchor.x, anchor.y],
                          [point.box.x2 + TOOLTIP_OFFSET, point.box.y1 + TOOLTIP_OFFSET], TOLERANCE)
                 });
 
@@ -440,7 +440,7 @@
                         data: [[2, 4, 0, 3]]
                     });
 
-                    same(point.value, { open: 2, high: 4, low: 0, close: 3 });
+                    deepEqual(point.value, { open: 2, high: 4, low: 0, close: 3 });
                 });
 
                 test("binds open, high, low and close field", function() {
@@ -451,7 +451,7 @@
                         closeField: "close"
                     });
 
-                    same(point.value, { open: 2, high: 4, low: 1, close: 3 });
+                    deepEqual(point.value, { open: 2, high: 4, low: 1, close: 3 });
                 });
 
                 test("binds color field", function() {
@@ -463,7 +463,7 @@
                         colorField: "color"
                     });
 
-                    same(point.color, "color");
+                    deepEqual(point.color, "color");
                 });
 
             })();

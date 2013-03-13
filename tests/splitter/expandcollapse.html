@@ -4,7 +4,7 @@
         <title>Splitter collapse</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -43,7 +43,7 @@
                 splitter.find(".k-collapse-prev").trigger("click");
 
                 ok(triggered);
-                equals(triggered.pane, splitter.find(".k-pane:first")[0]);
+                equal(triggered.pane, splitter.find(".k-pane:first")[0]);
             });
 
             test("collapse event can be prevented", function() {
@@ -75,7 +75,7 @@
 
                 splitter.find(".k-collapse-prev").trigger("click");
 
-                equals(called, splitter.find(".k-pane:first")[0]);
+                equal(called, splitter.find(".k-pane:first")[0]);
             });
 
             test("double-clicking splitbar next to an expanded collapsible pane should call splitter.collapse", function() {
@@ -92,7 +92,7 @@
 
                 splitter.find(".k-splitbar").trigger("dblclick");
 
-                equals(called, splitter.find(".k-pane:first")[0]);
+                equal(called, splitter.find(".k-pane:first")[0]);
             });
 
             test("double-clicking splitbar prev to an expanded collapsible pane should call splitter.collapse", function() {
@@ -109,7 +109,7 @@
 
                 splitter.find(".k-splitbar").trigger("dblclick");
 
-                equals(called, splitter.find(".k-pane:last")[0]);
+                equal(called, splitter.find(".k-pane:last")[0]);
             });
 
 
@@ -133,7 +133,7 @@
                 splitter.find(".k-expand-prev").trigger("click");
 
                 ok(triggered);
-                equals(triggered.pane, splitter.find(".k-pane:first")[0]);
+                equal(triggered.pane, splitter.find(".k-pane:first")[0]);
             });
 
             test("expand event can be prevented", function() {
@@ -165,7 +165,7 @@
 
                 splitter.find(".k-expand-prev").trigger("click");
 
-                equals(called, splitter.find(".k-pane:first")[0]);
+                equal(called, splitter.find(".k-pane:first")[0]);
             });
 
             test("double-clicking splitbar next to an collapsed collapsible pane should call splitter.collapse", function() {
@@ -182,7 +182,7 @@
 
                 splitter.find(".k-splitbar").trigger("dblclick");
 
-                equals(called, splitter.find(".k-pane:first")[0]);
+                equal(called, splitter.find(".k-pane:first")[0]);
             });
 
             test("double-clicking splitbar prev to an collapsed collapsible pane should call splitter.collapse", function() {
@@ -199,7 +199,7 @@
 
                 splitter.find(".k-splitbar").trigger("dblclick");
 
-                equals(called, splitter.find(".k-pane:last")[0]);
+                equal(called, splitter.find(".k-pane:last")[0]);
             });
 
             test("double-clicking splitbar between two collapsible panes does not trigger collapse", function() {

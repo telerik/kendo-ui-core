@@ -4,7 +4,8 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -113,11 +114,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(series.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(series.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -130,7 +131,7 @@
                         return bar.box.x1;
                     });
 
-                    same(barsX, [0.3, 1.3], TOLERANCE);
+                    arrayClose(barsX, [0.3, 1.3], TOLERANCE);
                 });
 
                 test("bar bottoms are aligned to category axis", function() {
@@ -138,12 +139,12 @@
                         return bar.box.y2;
                     });
 
-                    same(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                    deepEqual(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 test("bars have set width", function() {
                     $.each(series.points, function() {
-                        equal(this.box.width(), 0.4, TOLERANCE);
+                        close(this.box.width(), 0.4, TOLERANCE);
                     });
                 });
 
@@ -152,7 +153,7 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 2]);
+                    deepEqual(barHeights, [1, 2]);
                 });
 
                 test("sets bar owner", function() {
@@ -205,11 +206,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("bar tops are aligned to category axis", function() {
@@ -217,7 +218,7 @@
                         return bar.box.y1;
                     });
 
-                    same(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
+                    deepEqual(barsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
                 test("bars have set height according to value", function() {
@@ -225,7 +226,7 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 2]);
+                    deepEqual(barHeights, [1, 2]);
                 });
 
                 test("sets bar aboveAxis", function() {
@@ -255,19 +256,19 @@
                 });
 
                 test("Reports minimum value for primary axis", function() {
-                    same(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for primary axis", function() {
-                    same(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("Reports minimum value for secondary axis", function() {
-                    same(series.valueAxisRanges.secondary.min, positiveSeries.data[0]);
+                    deepEqual(series.valueAxisRanges.secondary.min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum value for secondary axis", function() {
-                    same(series.valueAxisRanges.secondary.max, positiveSeries.data[1]);
+                    deepEqual(series.valueAxisRanges.secondary.max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories for two series", function() {
@@ -300,15 +301,15 @@
                 });
 
                 test("sets category axis to first series category axis", function() {
-                    equals(series.categoryAxis.options.name, "secondary");
+                    equal(series.categoryAxis.options.name, "secondary");
                 });
 
                 test("bar is marked as above axis with respect to its category axis", function() {
-                    equals(series.points[0].options.aboveAxis, true);
+                    equal(series.points[0].options.aboveAxis, true);
                 });
 
                 test("bar is rendered from its category axis", function() {
-                    equals(series.points[0].box.x1, series.categoryAxis.lineBox().x1);
+                    equal(series.points[0].box.x1, series.categoryAxis.lineBox().x1);
                 });
 
                 test("axis crossing value is assumed to be 0", function() {
@@ -316,7 +317,7 @@
                     chart.refresh();
                     series = chart._model._plotArea.charts[0];
 
-                    equals(series.points[0].options.aboveAxis, true);
+                    equal(series.points[0].options.aboveAxis, true);
                 });
 
                 test("axisCrossingValues alias is accepted with precedence", function() {
@@ -324,7 +325,7 @@
                     chart.refresh();
                     series = chart._model._plotArea.charts[0];
 
-                    equals(series.points[0].options.aboveAxis, false);
+                    equal(series.points[0].options.aboveAxis, false);
                 });
 
                 // ------------------------------------------------------------
@@ -339,11 +340,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].min, 1);
+                    deepEqual(series.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].max, 3);
+                    deepEqual(series.valueAxisRanges[undefined].max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -355,7 +356,7 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 1, 2, 2, 3, 0]);
+                    deepEqual(barHeights, [1, 1, 2, 2, 3, 0]);
                 });
 
                 test("bar bottoms are aligned to category axis", 6, function() {
@@ -401,7 +402,7 @@
                     });
 
                     var barCharts = chart._model._plotArea.charts;
-                    equal(barCharts[0].points[0].box.x1, barCharts[1].points[0].box.x1, TOLERANCE);
+                    close(barCharts[0].points[0].box.x1, barCharts[1].points[0].box.x1, TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
@@ -444,7 +445,7 @@
                 });
 
                 test("series have 75% margin", function() {
-                    equal(series.points[0].box.x1, 0.3, TOLERANCE);
+                    close(series.points[0].box.x1, 0.3, TOLERANCE);
                 });
 
                 test("bars have set height according to value", function() {
@@ -452,11 +453,11 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 1, 2, 2]);
+                    deepEqual(barHeights, [1, 1, 2, 2]);
                 });
 
                 test("stack base is set to zero value slot", function() {
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
                 });
 
                 test("stack base is set to zero value slot when category axis is moved to top", function() {
@@ -467,7 +468,7 @@
                         isStacked: true }
                     );
 
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
 
                     CATEGORY_AXIS_Y = 2;
                 });
@@ -495,7 +496,7 @@
                 });
 
                 test("stack tops are aligned to category axis", function() {
-                    same([series.points[0].box.y1, series.points[2].box.y1],
+                    deepEqual([series.points[0].box.y1, series.points[2].box.y1],
                          [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
                 });
 
@@ -504,7 +505,7 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 1, 2, 2]);
+                    deepEqual(barHeights, [1, 1, 2, 2]);
                 });
 
                 test("stack tops are aligned to 0 line when category axis crossing value is changed", function() {
@@ -515,14 +516,14 @@
                         isStacked: true
                     });
 
-                    same([series.points[0].box.y1, series.points[2].box.y1],
+                    deepEqual([series.points[0].box.y1, series.points[2].box.y1],
                          [2, 2]);
 
                     CATEGORY_AXIS_Y = 2;
                 });
 
                 test("stack base is set to zero value slot", function() {
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
                 });
 
                 test("stack base is set to zero value slot when category axis is moved to bottom", function() {
@@ -533,7 +534,7 @@
                         isStacked: true }
                     );
 
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
 
                     CATEGORY_AXIS_Y = 2;
                 });
@@ -581,11 +582,11 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 1]);
+                    deepEqual(barHeights, [1, 1]);
                 });
 
                 test("stack base is set to zero value slot", function() {
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
                 });
 
                 test("stack base is set to zero value slot when category axis is moved to bottom (negative series first)", function() {
@@ -596,7 +597,7 @@
                         isStacked: true }
                     );
 
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
 
                     CATEGORY_AXIS_Y = 2;
                 });
@@ -609,7 +610,7 @@
                         isStacked: true }
                     );
 
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
 
                     CATEGORY_AXIS_Y = 2;
                 });
@@ -622,7 +623,7 @@
                         isStacked: true }
                     );
 
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
 
                     CATEGORY_AXIS_Y = 2;
                 });
@@ -635,7 +636,7 @@
                         isStacked: true }
                     );
 
-                    equals(series.points[0].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
 
                     CATEGORY_AXIS_Y = 2;
                 });
@@ -671,7 +672,7 @@
                         return bar.box.height();
                     });
 
-                    same(barHeights, [1, 1, 2, 2]);
+                    deepEqual(barHeights, [1, 1, 2, 2]);
                 });
 
                 // ------------------------------------------------------------
@@ -710,8 +711,8 @@
                 });
 
                 test("stack base is set to zero value slot", function() {
-                    equals(series.points[0].options.stackBase, 2);
-                    equals(series.points[2].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
+                    equal(series.points[2].options.stackBase, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -750,8 +751,8 @@
                 });
 
                 test("stack base is set to zero value slot", function() {
-                    equals(series.points[0].options.stackBase, 2);
-                    equals(series.points[2].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
+                    equal(series.points[2].options.stackBase, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -798,8 +799,8 @@
                 });
 
                 test("stack base is set to zero value slot", function() {
-                    equals(series.points[0].options.stackBase, 2);
-                    equals(series.points[2].options.stackBase, 2);
+                    equal(series.points[0].options.stackBase, 2);
+                    equal(series.points[2].options.stackBase, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -865,7 +866,7 @@
                     });
 
                     var barCharts = chart._model._plotArea.charts;
-                    notEqual(barCharts[0].points[0].box.y1, barCharts[1].points[0].box.y2, TOLERANCE);
+                    notClose(barCharts[0].points[0].box.y1, barCharts[1].points[0].box.y2, TOLERANCE);
                 });
 
             })();
@@ -977,7 +978,7 @@
                         }
                     }] });
 
-                    same($.map(series.points, function(bar) {
+                    deepEqual($.map(series.points, function(bar) {
                         return bar.children[0].children[0].children[0].content }
                     ), ["$100.00", "$150.00"]);
                 });
@@ -991,7 +992,7 @@
                         }
                     }] });
 
-                    same($.map(series.points, function(bar) {
+                    deepEqual($.map(series.points, function(bar) {
                         return bar.children[0].children[0].children[0].content }
                     ), ["$100.00", "$150.00"]);
                 });
@@ -1004,7 +1005,7 @@
                 });
 
                 test("labels have zIndex", function() {
-                    equals(series.points[0].children[0].children[0].options.zIndex, 1);
+                    equal(series.points[0].children[0].children[0].options.zIndex, 1);
                 });
 
                 // ------------------------------------------------------------
@@ -1080,7 +1081,7 @@
                         }
                     }] });
 
-                    same($.map(series.points, function(bar) {
+                    deepEqual($.map(series.points, function(bar) {
                         return bar.children[0].children[0].children[0].content }
                     ), ["$100.00", "$150.00"]);
                 });
@@ -1250,7 +1251,7 @@
                 test("height equals bar height", function() {
                     $.each(series.points, function() {
                         var label = this.children[0].children[0];
-                        equal(label.paddingBox.height(), this.box.height(), 0.1);
+                        close(label.paddingBox.height(), this.box.height(), 0.1);
                     });
                 });
 
@@ -1358,7 +1359,7 @@
                         return bar.box.y1;
                     });
 
-                    same(barsY, [0.3, 1.3], TOLERANCE);
+                    arrayClose(barsY, [0.3, 1.3], TOLERANCE);
                 });
 
                 test("bar sides are aligned to category axis", function() {
@@ -1366,12 +1367,12 @@
                         return bar.box.x1;
                     });
 
-                    same(barsX, [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
+                    deepEqual(barsX, [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
                 });
 
                 test("bars have set height", function() {
                     $.each(series.points, function() {
-                        equal(this.box.height(), 0.4, TOLERANCE);
+                        close(this.box.height(), 0.4, TOLERANCE);
                     });
                 });
 
@@ -1380,7 +1381,7 @@
                         return bar.box.width();
                     });
 
-                    same(barWidths, [1, 2]);
+                    deepEqual(barWidths, [1, 2]);
                 });
 
                 // ------------------------------------------------------------
@@ -1391,11 +1392,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(series.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("bar sides are aligned to category axis", function() {
@@ -1403,7 +1404,7 @@
                         return bar.box.x2;
                     });
 
-                    same(barsX, [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
+                    deepEqual(barsX, [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
                 });
 
                 test("bars have set width according to value", function() {
@@ -1411,7 +1412,7 @@
                         return bar.box.width();
                     });
 
-                    same(barWidths, [1, 2]);
+                    deepEqual(barWidths, [1, 2]);
                 });
 
                 // ------------------------------------------------------------
@@ -1431,7 +1432,7 @@
                         return bar.box.width();
                     });
 
-                    same(barWidths, [1, 1, 2, 2, 3, 0]);
+                    deepEqual(barWidths, [1, 1, 2, 2, 3, 0]);
                 });
 
                 // ------------------------------------------------------------
@@ -1477,11 +1478,11 @@
                         return bar.box.width();
                     });
 
-                    same(barWidths, [1, 1, 2, 2]);
+                    deepEqual(barWidths, [1, 1, 2, 2]);
                 });
 
                 test("series have 75% margin", function() {
-                    equal(series.points[0].box.y1, 0.3, TOLERANCE);
+                    close(series.points[0].box.y1, 0.3, TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
@@ -1508,7 +1509,7 @@
                 });
 
                 test("stack sides are aligned to category axis", function() {
-                    same([series.points[0].box.x2, series.points[2].box.x2],
+                    deepEqual([series.points[0].box.x2, series.points[2].box.x2],
                          [CATEGORY_AXIS_X, CATEGORY_AXIS_X]);
                 });
 
@@ -1517,7 +1518,7 @@
                         return bar.box.width();
                     });
 
-                    same(barWidths, [1, 1, 2, 2]);
+                    deepEqual(barWidths, [1, 1, 2, 2]);
                 });
 
                 // ------------------------------------------------------------
@@ -1544,7 +1545,7 @@
                         return bar.box.width();
                     });
 
-                    same(barWidths, [1, 1, 2, 2]);
+                    deepEqual(barWidths, [1, 1, 2, 2]);
                 });
 
             })();
@@ -1640,7 +1641,7 @@
                 test("positions children next to each other with spacing", function() {
                     createCluster({ gap: 0, spacing: 1 });
                     $.each(bars, function(index) {
-                        equal(this.box.x1, (this.box.width() * 2) * index, TOLERANCE)
+                        close(this.box.x1, (this.box.width() * 2) * index, TOLERANCE)
                     });
                 });
 
@@ -1666,7 +1667,7 @@
                 test("positions children next to each other with spacing", function() {
                     createCluster({ vertical: true, gap: 0, spacing: 1 });
                     $.each(bars, function(index) {
-                        equal(this.box.y1, (this.box.height() * 2) * index, TOLERANCE)
+                        close(this.box.y1, (this.box.height() * 2) * index, TOLERANCE)
                     });
                 });
             })();
@@ -1715,7 +1716,7 @@
                 });
 
                 test("reports final box after layout", function() {
-                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                    deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
                          [50, 40, 100, 100]);
                 });
 
@@ -1769,7 +1770,7 @@
                 });
 
                 test("reports final box after layout", function() {
-                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                    deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
                          [50, 90, 100, 150]);
                 });
 
@@ -1822,7 +1823,7 @@
                 });
 
                 test("reports final box after layout", function() {
-                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                    deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
                          [0, 50, 90, 100]);
                 });
 
@@ -1875,7 +1876,7 @@
                 });
 
                 test("reports final box after layout", function() {
-                    same([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
+                    deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
                          [30, 50, 120, 100]);
                 });
 
@@ -1930,7 +1931,7 @@
                 });
 
                 test("sets value", function() {
-                    equals(bar.value, VALUE);
+                    equal(bar.value, VALUE);
                 });
 
                 test("fills target box", function() {
@@ -1947,7 +1948,7 @@
                     view = new ViewStub();
                     bar.getViewElements(view);
 
-                    equals(view.log.rect.length, 0);
+                    equal(view.log.rect.length, 0);
                 });
 
                 test("does not render rectangle when box width is zero", function() {
@@ -1956,28 +1957,28 @@
                     view = new ViewStub();
                     bar.getViewElements(view);
 
-                    equals(view.log.rect.length, 0);
+                    equal(view.log.rect.length, 0);
                 });
 
                 test("sets fill color", function() {
-                    same(rect.style.fill, bar.options.color);
+                    deepEqual(rect.style.fill, bar.options.color);
                 });
 
                 test("sets vertical", function() {
-                    same(rect.style.vertical, true);
+                    deepEqual(rect.style.vertical, true);
                 });
 
                 test("sets aboveAxis", function() {
-                    same(rect.style.aboveAxis, true);
+                    deepEqual(rect.style.aboveAxis, true);
                 });
 
                 test("sets overlay rotation for vertical bars", function() {
-                    same(rect.style.overlay.rotation, 0);
+                    deepEqual(rect.style.overlay.rotation, 0);
                 });
 
                 test("sets same overlay rotation for vertical bars below axis", function() {
                     createBar({ aboveAxis: false });
-                    same(rect.style.overlay.rotation, 0);
+                    deepEqual(rect.style.overlay.rotation, 0);
                 });
 
                 test("does not set overlay options when no overlay is defined", function() {
@@ -1987,32 +1988,32 @@
 
                 test("sets default border color based on color", function() {
                     createBar({ color: "#cf0" });
-                    equals(rect.style.stroke, "#a3cc00");
+                    equal(rect.style.stroke, "#a3cc00");
                 });
 
                 test("does not change border color if set", function() {
                     createBar({ border: { color: "" } });
-                    equals(view.log.rect[0].style.stroke, "");
+                    equal(view.log.rect[0].style.stroke, "");
                 });
 
                 test("sets overlay rotation for horizontal bars", function() {
                     createBar({ vertical: false });
-                    same(rect.style.overlay.rotation, 90);
+                    deepEqual(rect.style.overlay.rotation, 90);
                 });
 
                 test("sets same overlay rotation for horizontal bars below axis", function() {
                     createBar({ vertical: false, aboveAxis: false });
-                    same(rect.style.overlay.rotation, 90);
+                    deepEqual(rect.style.overlay.rotation, 90);
                 });
 
                 test("sets stroke color", function() {
                     createBar({ border: { color: "red", width: 1 } });
-                    same(rect.style.stroke, bar.options.border.color);
+                    deepEqual(rect.style.stroke, bar.options.border.color);
                 });
 
                 test("sets stroke width", function() {
                     createBar({ border: { color: "red", width: 1 } });
-                    same(rect.style.strokeWidth, bar.options.border.width);
+                    deepEqual(rect.style.strokeWidth, bar.options.border.width);
                 });
 
                 test("sets stroke dash type", function() {
@@ -2027,12 +2028,12 @@
 
                 test("sets fill opacity", function() {
                     createBar({ opacity: 0.5 });
-                    same(rect.style.fillOpacity, bar.options.opacity);
+                    deepEqual(rect.style.fillOpacity, bar.options.opacity);
                 });
 
                 test("sets stroke opacity", function() {
                     createBar({ opacity: 0.5 });
-                    same(rect.style.strokeOpacity, bar.options.opacity);
+                    deepEqual(rect.style.strokeOpacity, bar.options.opacity);
                 });
 
                 test("is discoverable", function() {
@@ -2047,75 +2048,75 @@
                     view = new ViewStub();
 
                     bar.highlightOverlay(view);
-                    equals(view.log.rect.length, 1);
+                    equal(view.log.rect.length, 1);
                 });
 
                 test("outline element has same model id", function() {
                     view = new ViewStub();
 
                     bar.highlightOverlay(view);
-                    equals(view.log.rect[0].style.data.modelId, bar.options.modelId);
+                    equal(view.log.rect[0].style.data.modelId, bar.options.modelId);
                 });
 
                 test("label has same model id", function() {
                     createBar({ labels: { visible: true } });
-                    equals(label.options.modelId, bar.options.modelId);
+                    equal(label.options.modelId, bar.options.modelId);
                 });
 
                 test("tooltipAnchor is top right corner / vertical / above axis",
                 function() {
                     createBar({ vertical: true, aboveAxis: true, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is top right corner / vertical / above axis / stacked",
                 function() {
                     createBar({ vertical: true, aboveAxis: true, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is bottom right corner / vertical / below axis",
                 function() {
                     createBar({ vertical: true, aboveAxis: false, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y2 - 10])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y2 - 10])
                 });
 
                 test("tooltipAnchor is bottom right corner / vertical / below axis / stacked",
                 function() {
                     createBar({ vertical: true, aboveAxis: false, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y2 - 10])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y2 - 10])
                 });
 
                 test("tooltipAnchor is top right corner / horizontal / above axis",
                 function() {
                     createBar({ vertical: false, aboveAxis: true, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is above top right corner / horizontal / above axis / stacked",
                 function() {
                     createBar({ vertical: false, aboveAxis: true, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x2 - 10, bar.box.y1 - 10 - TOOLTIP_OFFSET])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x2 - 10, bar.box.y1 - 10 - TOOLTIP_OFFSET])
                 });
 
                 test("tooltipAnchor is top left corner / horizontal / below axis",
                 function() {
                     createBar({ vertical: false, aboveAxis: false, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x1 - 10 - TOOLTIP_OFFSET, bar.box.y1])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x1 - 10 - TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is above top left corner / horizontal / below axis / stacked",
                 function() {
                     createBar({ vertical: false, aboveAxis: false, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
-                    same([anchor.x, anchor.y], [bar.box.x1, bar.box.y1 - 10 - TOOLTIP_OFFSET])
+                    deepEqual([anchor.x, anchor.y], [bar.box.x1, bar.box.y1 - 10 - TOOLTIP_OFFSET])
                 });
 
                 // ------------------------------------------------------------
@@ -2123,27 +2124,27 @@
 
                 test("renders template", function() {
                     createBar({ labels: { visible: true, template: "${value}%" } });
-                    equals(label.children[0].children[0].content, VALUE + "%");
+                    equal(label.children[0].children[0].content, VALUE + "%");
                 });
 
                 test("renders template even when format is set", function() {
                     createBar({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
-                    equals(label.children[0].children[0].content, VALUE + "%");
+                    equal(label.children[0].children[0].content, VALUE + "%");
                 });
 
                 test("template has category", function() {
                     createBar({ labels: { visible: true, template: "${category}" } });
-                    equals(label.children[0].children[0].content, CATEGORY);
+                    equal(label.children[0].children[0].content, CATEGORY);
                 });
 
                 test("template has dataItem", function() {
                     createBar({ labels: { visible: true, template: "${dataItem.value}" } });
-                    equals(label.children[0].children[0].content, VALUE);
+                    equal(label.children[0].children[0].content, VALUE);
                 });
 
                 test("template has series", function() {
                     createBar({ labels: { visible: true, template: "${series.name}" } });
-                    equals(label.children[0].children[0].content, SERIES_NAME);
+                    equal(label.children[0].children[0].content, SERIES_NAME);
                 });
 
             })();
@@ -2290,22 +2291,22 @@
                 });
 
                 test("event arguments contain value", 1, function() {
-                    barClick(function(e) { equals(e.value, 1); });
+                    barClick(function(e) { equal(e.value, 1); });
                 });
 
                 test("event arguments contain category", 1, function() {
-                    barClick(function(e) { equals(e.category, "A"); });
+                    barClick(function(e) { equal(e.category, "A"); });
                 });
 
                 test("event arguments contain series", 1, function() {
                     barClick(function(e) {
-                        same(e.series, chart.options.series[0]);
+                        deepEqual(e.series, chart.options.series[0]);
                     });
                 });
 
                 test("event arguments contain jQuery element", 1, function() {
                     barClick(function(e) {
-                        equals(e.element[0], getElement(bar.options.id));
+                        equal(e.element[0], getElement(bar.options.id));
                     });
                 });
 
@@ -2346,22 +2347,22 @@
                 });
 
                 test("event arguments contain value", 1, function() {
-                    barHover(function(e) { equals(e.value, 1); });
+                    barHover(function(e) { equal(e.value, 1); });
                 });
 
                 test("event arguments contain category", 1, function() {
-                    barHover(function(e) { equals(e.category, "A"); });
+                    barHover(function(e) { equal(e.category, "A"); });
                 });
 
                 test("event arguments contain series", 1, function() {
                     barHover(function(e) {
-                        same(e.series, chart.options.series[0]);
+                        deepEqual(e.series, chart.options.series[0]);
                     });
                 });
 
                 test("event arguments contain jQuery element", 1, function() {
                     barHover(function(e) {
-                        equals(e.element[0], getElement(bar.options.id));
+                        equal(e.element[0], getElement(bar.options.id));
                     });
                 });
 

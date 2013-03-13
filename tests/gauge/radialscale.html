@@ -4,7 +4,7 @@
         <title>Radial Scale</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
     <body>
@@ -49,10 +49,10 @@
             });
 
             test("reflow calculates scale ring position", function() {
-                equals(ring.c.x, 200);
-                equals(ring.c.y, 150);
-                equals(ring.r, 150);
-                equals(ring.ir, 140);
+                equal(ring.c.x, 200);
+                equal(ring.c.y, 150);
+                equal(ring.r, 150);
+                equal(ring.ir, 140);
             });
 
             test("tickAngles returns array", function() {
@@ -240,9 +240,9 @@
             test("render scale with default min, max and majorUnit", function() {
                 createScale({ });
                 var options = radialScale.options;
-                equals(options.min, 0);
-                equals(options.max, 100);
-                equals(options.majorUnit, 20);
+                equal(options.min, 0);
+                equal(options.max, 100);
+                equal(options.majorUnit, 20);
             });
 
             test("render scale with min=0 max=12 majorUnit=2", function() {
@@ -250,7 +250,7 @@
                     min: 0,
                     max: 12
                 });
-                equals(radialScale.options.majorUnit, 2);
+                equal(radialScale.options.majorUnit, 2);
             });
 
             test("sets auto majorUnit", function() {
@@ -258,7 +258,7 @@
                     min: 0,
                     max: 1000
                 });
-                equals(radialScale.options.majorUnit, 200);
+                equal(radialScale.options.majorUnit, 200);
             });
 
             test("sets auto minorUnit", function() {
@@ -266,7 +266,7 @@
                     min: 0,
                     max: 1000
                 });
-                equals(radialScale.options.minorUnit, 20);
+                equal(radialScale.options.minorUnit, 20);
             });
 
             test("sets majorUnit", function() {
@@ -275,7 +275,7 @@
                     max: 1000,
                     majorUnit: 10
                 });
-                equals(radialScale.options.majorUnit, 10);
+                equal(radialScale.options.majorUnit, 10);
             });
 
             test("sets auto minorUnit", function() {
@@ -284,7 +284,7 @@
                     max: 1000,
                     minorUnit: 10
                 });
-                equals(radialScale.options.minorUnit, 10);
+                equal(radialScale.options.minorUnit, 10);
             });
 
         </script>

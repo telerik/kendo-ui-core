@@ -4,7 +4,7 @@
         <title>kendo.breadcrumbs tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -142,7 +142,7 @@
                 equal(input.val(), "");
             });
 
-            test("change event is not trigger if same value is set", function() {
+            test("change event is not trigger if same value is set", 0, function() {
                 var breadcrumbs = setup({
                     value: "/foo",
                     change: function() {
@@ -155,7 +155,7 @@
                 input.blur();
             });
 
-            test("change event is not trigger if same value but with multiple slashes is set", function() {
+            test("change event is not trigger if same value but with multiple slashes is set", 0, function() {
                 var breadcrumbs = setup({
                     value: "/foo/bar",
                     change: function() {

@@ -4,7 +4,7 @@
         <title>kendo.ui.Resizable Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -132,7 +132,7 @@
                 resizable._start(dragEvent(0, 0, handle));
                 resizable._resize(dragEvent(10, 0, handle));
 
-                equals(parseInt(div.find(".hint").offset().left), 10);
+                equal(parseInt(div.find(".hint").offset().left), 10);
             });
 
             test("hint is not moved during horizontal dragging with vertical orientation", function() {
@@ -171,7 +171,7 @@
                 resizable._start(dragEvent(0, 0, handle));
                 resizable._resize(dragEvent(0, 10, handle));
 
-                equals(parseInt(div.find(".hint").offset().top), 10);
+                equal(parseInt(div.find(".hint").offset().top), 10);
             });
 
             test("hint is removed", function() {
@@ -184,7 +184,7 @@
                 resizable._resize(dragEvent(10, 0, handle));
                 resizable._stop(dragEvent(10, 0, handle));
 
-                equals(div.find(".hint").length, 0);
+                equal(div.find(".hint").length, 0);
             });
 
             test("hint is create if function", function() {
@@ -210,7 +210,7 @@
                 resizable._start(dragEvent(0, 0, handle));
                 resizable._resize(dragEvent(60, 0, handle));
 
-                equals(parseInt(div.find(".hint").offset().left), 30);
+                equal(parseInt(div.find(".hint").offset().left), 30);
             });
 
             test("hint is not moved out of the min value", function() {
@@ -222,7 +222,7 @@
                 resizable._start(dragEvent(60, 0, handle));
                 resizable._resize(dragEvent(20, 0, handle));
 
-                equals(parseInt(div.find(".hint").offset().left), 30);
+                equal(parseInt(div.find(".hint").offset().left), 30);
             });
 
             test("hint is not moved out of the min value if min is function", function() {
@@ -238,7 +238,7 @@
                 resizable._start(dragEvent(60, 0, handle));
                 resizable._resize(dragEvent(20, 0, handle));
 
-                equals(parseInt(div.find(".hint").offset().left), 30);
+                equal(parseInt(div.find(".hint").offset().left), 30);
                 ok(el);
             });
 
@@ -255,7 +255,7 @@
                 resizable._start(dragEvent(0, 0, handle));
                 resizable._resize(dragEvent(40, 0, handle));
 
-                equals(parseInt(div.find(".hint").offset().left), 30);
+                equal(parseInt(div.find(".hint").offset().left), 30);
                 ok(el);
             });
 

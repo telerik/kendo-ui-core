@@ -4,7 +4,7 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -105,8 +105,8 @@
 
                 test("sets dimensions on view element", 2, function() {
                     var view = chart._view;
-                    equals(view.options.width, 600);
-                    equals(view.options.height, 400);
+                    equal(view.options.width, 600);
+                    equal(view.options.height, 400);
                 });
 
                 // ------------------------------------------------------------
@@ -121,7 +121,7 @@
                         }
                     });
 
-                    same(plotArea.categoryAxis.options.categories,
+                    deepEqual(plotArea.categoryAxis.options.categories,
                          chart.options.categoryAxis.categories);
                 });
 
@@ -143,7 +143,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.line.color, "#f00");
+                    equal(plotArea.categoryAxis.options.line.color, "#f00");
                 });
 
                 test("line color overrides global color", function() {
@@ -153,7 +153,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.line.color, "#f00");
+                    equal(plotArea.categoryAxis.options.line.color, "#f00");
                 });
 
                 test("global color is applied to labels", function() {
@@ -163,7 +163,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.labels.color, "#f00");
+                    equal(plotArea.categoryAxis.options.labels.color, "#f00");
                 });
 
                 test("labels color overrides global color", function() {
@@ -173,7 +173,7 @@
                         }
                     });
 
-                    equals(plotArea.categoryAxis.options.labels.color, "#f00");
+                    equal(plotArea.categoryAxis.options.labels.color, "#f00");
                 });
 
                 test("categoryAxes alias overrides categoryAxis", function() {
@@ -244,7 +244,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.options.line.color, "#f00");
+                    equal(plotArea.valueAxis.options.line.color, "#f00");
                 });
 
                 test("line color overrides global color", function() {
@@ -254,7 +254,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.options.line.color, "#f00");
+                    equal(plotArea.valueAxis.options.line.color, "#f00");
                 });
 
                 test("global color is applied to labels", function() {
@@ -264,7 +264,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.options.labels.color, "#f00");
+                    equal(plotArea.valueAxis.options.labels.color, "#f00");
                 });
 
                 test("labels color overrides global color", function() {
@@ -274,7 +274,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.options.labels.color, "#f00");
+                    equal(plotArea.valueAxis.options.labels.color, "#f00");
                 });
 
                 test("global color is applied to title", function() {
@@ -284,7 +284,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.options.title.color, "#f00");
+                    equal(plotArea.valueAxis.options.title.color, "#f00");
                 });
 
                 test("title color overrides global color", function() {
@@ -294,7 +294,7 @@
                         }
                     });
 
-                    equals(plotArea.valueAxis.options.title.color, "#f00");
+                    equal(plotArea.valueAxis.options.title.color, "#f00");
                 });
 
                 // ------------------------------------------------------------
@@ -304,22 +304,22 @@
 
                 test("xAxis settings are applied to primary X Axis", function() {
                     createScatterChart({ xAxis: { min: 100 } });
-                    same(plotArea.axisX.options.min, 100);
+                    deepEqual(plotArea.axisX.options.min, 100);
                 });
 
                 test("xAxis can't be set to vertical", function() {
                     createScatterChart({ xAxis: { vertical: true } });
-                    same(plotArea.axisX.options.vertical, false);
+                    deepEqual(plotArea.axisX.options.vertical, false);
                 });
 
                 test("yAxis settings are applied to primary Y Axis", function() {
                     createScatterChart({ yAxis: { min: 100 } });
-                    same(plotArea.axisY.options.min, 100);
+                    deepEqual(plotArea.axisY.options.min, 100);
                 });
 
                 test("yAxis can't be set to horizontal", function() {
                     createScatterChart({ yAxis: { vertical: false } });
-                    same(plotArea.axisY.options.vertical, true);
+                    deepEqual(plotArea.axisY.options.vertical, true);
                 });
 
                 // ------------------------------------------------------------
@@ -1244,12 +1244,12 @@
 
                 test("applies default theme when not set by user", function() {
                     createChart();
-                    equals(chart.options.theme, "default");
+                    equal(chart.options.theme, "default");
                 });
 
                 test("default theme can be disabled", function() {
                     createChart({ theme: "" });
-                    equals(chart.options.theme, "");
+                    equal(chart.options.theme, "");
                 });
 
                 test("overrides series colors", function() {
@@ -1405,7 +1405,7 @@
                         }
                     });
 
-                    equals(chart._tooltip.options.format, "{0}%");
+                    equal(chart._tooltip.options.format, "{0}%");
                 });
 
                 test("sets font", function() {
@@ -1415,7 +1415,7 @@
                         }
                     });
 
-                    equals(chart._tooltip.options.font, "100px Verdana");
+                    equal(chart._tooltip.options.font, "100px Verdana");
                 });
 
                 test("sets background", function() {
@@ -1426,7 +1426,7 @@
                         }
                     });
 
-                    equals(chart._tooltip.options.background, "red");
+                    equal(chart._tooltip.options.background, "red");
                 });
 
                 // ------------------------------------------------------------
@@ -1462,7 +1462,7 @@
                                 transitions: false
                             });
 
-                            equals(animations.length, 0);
+                            equal(animations.length, 0);
                         }
                     );
                 });

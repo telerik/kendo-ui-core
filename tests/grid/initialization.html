@@ -4,7 +4,7 @@
         <title>Grid Initialization</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -928,7 +928,7 @@
                         command: [{
                             name: "bar",
                             click: function(e) {
-                                same(this, grid);
+                                deepEqual(this, grid);
                             }
                         }]
                     }]

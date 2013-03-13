@@ -4,7 +4,7 @@
         <title>AutoComplete Events</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -52,7 +52,7 @@
                 ok(changeWasCalled);
             });
 
-            test("value set with value method does not trigger change event", function() {
+            test("value set with value method does not trigger change event", 0, function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar"],
                     change: function() {
@@ -162,7 +162,6 @@
                 autocomplete.search();
                 input.change(function() {
                     ok(true);
-                    start();
                 });
                 autocomplete.ul.children().first().trigger(CLICK);
             });

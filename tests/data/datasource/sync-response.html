@@ -4,7 +4,7 @@
         <title>sync response</title>
         <script src="../../../src/jquery.js"></script>
         <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../../qunit-runner.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../../jquery.mockjax.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
@@ -349,8 +349,8 @@
                 dataSource.remove(dataSource.get(1));
 
                 dataSource.bind("requestEnd", function(e) {
-                    same(e.response, { foo: "bar" });
-                    same(e.type, "destroy");
+                    deepEqual(e.response, { foo: "bar" });
+                    deepEqual(e.type, "destroy");
                 });
 
                 dataSource.sync();

@@ -4,7 +4,7 @@
         <title>kendo.imagebrowser tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
@@ -647,7 +647,7 @@
 
                 var model = browser.dataSource.get("foo");
 
-                same(browser._createFile("foo"), model);
+                deepEqual(browser._createFile("foo"), model);
             });
 
             test("value custom formating is applied", function() {
@@ -676,7 +676,7 @@
                 equal(browser.value(), "foo?path=File1");
             });
 
-            test("listView is not rebuild when item is deleted", function() {
+            test("listView is not rebuild when item is deleted", 0, function() {
                 var browser = setup();
 
                 browser.listView.bind("dataBound", function() {

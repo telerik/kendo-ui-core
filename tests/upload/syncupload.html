@@ -4,7 +4,7 @@
         <title>Upload sync</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.upload.js"></script>
@@ -140,7 +140,7 @@
 
             test("remove event contains list of files", 1, function() {
                 uploadInstance = createUpload({ "remove" :
-                    (function(e) { equals(e.files.length, 1); })
+                    (function(e) { equal(e.files.length, 1); })
                 });
 
                 simulateFileSelect();

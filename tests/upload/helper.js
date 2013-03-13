@@ -14,7 +14,7 @@ function createHTML() {
            '</div>' +
         '</div>' +
     '</div>' +
-    '<form id="parentForm" action="javascript:return \'\';" method="post">' +
+    '<form id="parentForm" action="javascript:return \'\';" onsubmit="return false;" method="post">' +
     '<div id="testbed">' +
         '</div>' +
     '</form></div>'

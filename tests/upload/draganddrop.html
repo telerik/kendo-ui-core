@@ -4,7 +4,7 @@
         <title>Upload rendering</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.upload.js"></script>
@@ -120,7 +120,7 @@
 
             test("files in select event arguments are wrapped", 1, function() {
                 uploadInstance = createUpload({ "select" : (function(e) {
-                        equals(e.files[0].rawFile.name, "first.txt");
+                        equal(e.files[0].rawFile.name, "first.txt");
                     })
                 });
 

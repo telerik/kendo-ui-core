@@ -4,7 +4,7 @@
         <title>Splitter client initialization</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -51,17 +51,17 @@
             test("init adds classes to child elements", function() {
                 var splitter = $(getSplitterHtml(1)).kendoSplitter();
 
-                equals(splitter.find(".k-pane").length, 1);
+                equal(splitter.find(".k-pane").length, 1);
             });
 
             test("init adds splitbars between panes", function() {
                 var splitter = $(getSplitterHtml(3)).kendoSplitter(),
                 splitbars = splitter.find(".k-splitbar");
 
-                equals(splitbars.length, 2);
-                equals(splitbars.eq(0).index(), 1);
-                equals(splitbars.eq(1).index(), 3);
-                equals(splitbars.attr("tabindex"), 0);
+                equal(splitbars.length, 2);
+                equal(splitbars.eq(0).index(), 1);
+                equal(splitbars.eq(1).index(), 3);
+                equal(splitbars.attr("tabindex"), 0);
             });
 
             test("splitbars have collapse button for collapsible panes", function() {
@@ -74,8 +74,8 @@
                 }),
                 splitbars = splitter.find(".k-splitbar");
 
-                equals(splitbars.eq(0).find(".k-icon.k-collapse-prev").length, 1);
-                equals(splitbars.eq(1).find(".k-icon.k-collapse-next").length, 1);
+                equal(splitbars.eq(0).find(".k-icon.k-collapse-prev").length, 1);
+                equal(splitbars.eq(1).find(".k-icon.k-collapse-next").length, 1);
             });
 
             test("splitbars have resize handle between resizable panes", function() {
@@ -89,8 +89,8 @@
                 }),
                 splitbars = splitter.find(".k-splitbar");
 
-                equals(splitbars.eq(0).find(".k-icon.k-resize-handle").length, 0);
-                equals(splitbars.eq(1).find(".k-icon.k-resize-handle").length, 1);
+                equal(splitbars.eq(0).find(".k-icon.k-resize-handle").length, 0);
+                equal(splitbars.eq(1).find(".k-icon.k-resize-handle").length, 1);
             });
 
             test("collapsed panes render expand arrow beside them", function() {
@@ -102,7 +102,7 @@
                     ]
                 });
 
-                equals(splitter.find(".k-expand-prev").length, 1);
+                equal(splitter.find(".k-expand-prev").length, 1);
             });
 
             test("splibars next to initially collapsed panes are not draggable", function() {

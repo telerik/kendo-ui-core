@@ -53,7 +53,7 @@ client.subscribe('/testDone', function(message) {
 });
 
 client.subscribe('/done', function(message) {
-    failures += message.failures;
+    failures += message.failed;
     total += message.total;
 
     if (!--runningAgents) {

@@ -4,8 +4,8 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
-        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
@@ -121,7 +121,7 @@
                         }
                     });
 
-                    same(chart.options.categoryAxis[0].min, new Date("2012/09/04"));
+                    deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/04"));
                 });
 
                 test("slave axis min is limited to navigator range", function() {
@@ -134,7 +134,7 @@
                         }
                     });
 
-                    same(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
+                    deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
                 });
 
                 test("slave axis max is set to selected range end", function() {
@@ -147,7 +147,7 @@
                         }
                     });
 
-                    same(chart.options.categoryAxis[0].max, new Date("2012/09/04"));
+                    deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/04"));
                 });
 
                 test("slave axis max is limited to navigator range", function() {
@@ -160,7 +160,7 @@
                         }
                     });
 
-                    same(chart.options.categoryAxis[0].max, new Date("2012/09/06"));
+                    deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/06"));
                 });
 
                 test("navigator redrawn on main DS change", 2, function() {
@@ -243,8 +243,8 @@
                     });
 
                     chart._navigator.dataSource.fetch();
-                    // TODO
-                    //same(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
+
+                    deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
                 });
 
                 test("slave axis max is limited to actual navigator range", function() {
@@ -258,8 +258,8 @@
                     });
 
                     chart._navigator.dataSource.fetch();
-                    // TODO
-                    //same(chart.options.categoryAxis[0].max, new Date("2012/11/01"));
+
+                    deepEqual(chart.options.categoryAxis[0].max, new Date("2012/11/01"));
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {
@@ -285,7 +285,7 @@
                         }
                     });
 
-                    same(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
+                    deepEqual(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
                 });
 
                 test("navigator filters main data source (to)", function() {
@@ -298,7 +298,7 @@
                         }
                     });
 
-                    same(chart.dataSource._filter.filters[0].value, new Date("2012/01/02"));
+                    deepEqual(chart.dataSource._filter.filters[0].value, new Date("2012/01/02"));
                 });
 
                 test("navigator does not filter main data source when from is missing", function() {
@@ -358,9 +358,9 @@
                         }
                     });
 
-                    same(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
-                    same(chart.dataSource._filter.filters[1].value, new Date("2012/01/02"));
-                    same(chart.dataSource._filter.filters[2].value, 100);
+                    deepEqual(chart.dataSource._filter.filters[0].value, new Date("2012/01/01"));
+                    deepEqual(chart.dataSource._filter.filters[1].value, new Date("2012/01/02"));
+                    deepEqual(chart.dataSource._filter.filters[2].value, 100);
                 });
 
                 test("slave panes are redrawn on main DS change", 1, function() {
@@ -402,7 +402,7 @@
                     });
                 });
 
-                test("slave panes are not redrawn during early navigator DS change", function() {
+                test("slave panes are not redrawn during early navigator DS change", 0, function() {
                     stubMethod(Navigator.fn, "_redrawSlaves", function(silent) {
                         ok(false);
                     }, function() {
@@ -441,8 +441,8 @@
                     });
 
                     chart.trigger("zoomEnd");
-                    same(chart.dataSource._filter.filters[0].value, new Date("2012/08/30"));
-                    same(chart.dataSource._filter.filters[1].value, new Date("2012/11/04"));
+                    deepEqual(chart.dataSource._filter.filters[0].value, new Date("2012/08/30"));
+                    deepEqual(chart.dataSource._filter.filters[1].value, new Date("2012/11/04"));
                 });
 
                 test("main DS is not filtered during zoom", function() {
@@ -453,7 +453,7 @@
                         delta: -1
                     });
 
-                    same(chart.dataSource._filter, undefined);
+                    deepEqual(chart.dataSource._filter, undefined);
                 });
             })();
 

@@ -4,7 +4,7 @@
         <title>ComboBox Navigation</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -146,11 +146,8 @@
 
                 combobox.select(1);
 
-                setTimeout(function() {
-                    equal(combobox.text(), data[1].text);
-                    equal(combobox.value(), data[1].text);
-                    start();
-                }, 100);
+                equal(combobox.text(), data[1].text);
+                equal(combobox.value(), data[1].text);
             });
 
             test("select li should update text and value", function() {

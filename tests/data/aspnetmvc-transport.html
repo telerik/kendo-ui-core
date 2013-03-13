@@ -2,7 +2,7 @@
 <html>
     <script src="../../src/jquery.js"></script>
     <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-    <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
     <script type="text/javascript" src="../jquery.mockjax.js"></script>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.data.js"></script>
@@ -65,11 +65,13 @@
                         ok(false);
                     }
                 });
+
                 stop();
+
                 transport.read({
                     success: function(e) {
                        start();
-                       same(e.Data, data);
+                       deepEqual(e.Data, data);
                     }
                 });
             });
@@ -85,7 +87,7 @@
 
                 transport.read({
                     success: function(e) {
-                       same(e.Data, data);
+                       deepEqual(e.Data, data);
                     }
                 });
             });
@@ -113,11 +115,12 @@
 
                     transport.read({
                         success: function(e) {
-                           start();
-                           same(e.Data, data);
+                           deepEqual(e.Data, data);
                         }
                     });
+
                     stop();
+
                     transport.read({
                         success: function(e) {
                         }

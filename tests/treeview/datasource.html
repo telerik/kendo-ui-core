@@ -274,6 +274,9 @@
                     ]);
 
                 tree2.data("kendoTreeView").append(tree2.find(".k-item"), tree1.find(".k-item"));
+
+                equal(tree1.find(".k-item").length, 2);
+                equal(tree2.find(".k-item").length, 0);
             });
 
             test("moving of parent nodes", function() {
@@ -580,7 +583,7 @@
                     ]
                 }));
 
-                equals(treeview.find(".k-item").text(), "bar");
+                equal(treeview.find(".k-item").text(), "bar");
             });
 
             var Node = kendo.data.Node;
@@ -598,7 +601,7 @@
                     }
                 });
 
-                equals(treeview.find(".k-item").text(), "foo");
+                equal(treeview.find(".k-item").text(), "foo");
             });
 
             test("binding to hierarchy of derived nodes", function() {
@@ -618,7 +621,7 @@
                     loadOnDemand: false
                 });
 
-                equals(treeview.find(".k-item:last").text(), "bar");
+                equal(treeview.find(".k-item:last").text(), "bar");
             });
 
             test("appending through node api does not expand item and group", function() {
@@ -657,7 +660,7 @@
                     loadOnDemand: false
                 });
 
-                equals(treeview.find(".k-item").length, 2);
+                equal(treeview.find(".k-item").length, 2);
             });
 
             test("items without children do not initialize empty datasource", function() {

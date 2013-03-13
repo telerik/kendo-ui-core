@@ -4,7 +4,7 @@
         <title>Splitter client API</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -251,11 +251,11 @@
 
                 var firstPane = splitter.find(".k-pane:first");
 
-                equals(splitterObject.size(firstPane), "110px");
+                equal(splitterObject.size(firstPane), "110px");
 
                 splitterObject.size(firstPane, "120px");
 
-                equals(splitterObject.size(firstPane), "120px");
+                equal(splitterObject.size(firstPane), "120px");
             });
 
             test("size() applies selector context", function() {
@@ -267,7 +267,7 @@
                     panes: [ { size: "110px" }, {} ]
                 });
 
-                equals(splitterObject.size(".k-pane:first"), "110px");
+                equal(splitterObject.size(".k-pane:first"), "110px");
             });
 
             test("min() gets/sets pane min", function() {
@@ -277,11 +277,11 @@
 
                 var firstPane = splitter.find(".k-pane:first");
 
-                equals(splitterObject.min(firstPane), "110px");
+                equal(splitterObject.min(firstPane), "110px");
 
                 splitterObject.min(firstPane, "120px");
 
-                equals(splitterObject.min(firstPane), "120px");
+                equal(splitterObject.min(firstPane), "120px");
             });
 
             test("max() gets/sets pane max", function() {
@@ -291,11 +291,11 @@
 
                 var firstPane = splitter.find(".k-pane:first");
 
-                equals(splitterObject.max(firstPane), "200px");
+                equal(splitterObject.max(firstPane), "200px");
 
                 splitterObject.max(firstPane, "120px");
 
-                equals(splitterObject.max(firstPane), "120px");
+                equal(splitterObject.max(firstPane), "120px");
             });
 
             test("size(value) triggers resize", function() {
@@ -326,8 +326,8 @@
                 var pane = splitter.find(".k-pane:first"),
                     iframe = pane.find("> iframe");
 
-                equals(iframe.length, 1);
-                equals(iframe.attr("src"), url);
+                equal(iframe.length, 1);
+                equal(iframe.attr("src"), url);
                 ok(!pane.hasClass("k-scrollable"));
             });
 

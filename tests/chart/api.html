@@ -5,7 +5,8 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -120,7 +121,7 @@
                     });
 
                     chart.redraw("top");
-                    equals(chart._model._plotArea.categoryAxis.options.categories[0], "alpha");
+                    equal(chart._model._plotArea.categoryAxis.options.categories[0], "alpha");
                 });
 
                 test("removes value axis alias after init", 1, function() {
@@ -176,7 +177,7 @@
                     chart.element.append("<div id='extra' />");
                     chart.redraw();
 
-                    equals(chart.element.find("#extra").length, 0);
+                    equal(chart.element.find("#extra").length, 0);
                 });
 
                 test("refresh applies changes to data-bound series", function() {
@@ -188,7 +189,7 @@
                     chart.options.series = [];
                     chart.refresh();
 
-                    equals(chart.options.series.length, 0);
+                    equal(chart.options.series.length, 0);
                 });
 
                 test("refresh cleans up generated cateories", function() {
@@ -201,7 +202,7 @@
                     chart.options.series = [];
                     chart.refresh();
 
-                    equals(chart.options.categoryAxis.categories.length, 0);
+                    equal(chart.options.categoryAxis.categories.length, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -228,7 +229,7 @@
 
                 test("unbinds DataSource change handler", function() {
                     chart.destroy();
-                    equals(chart.dataSource._events["change"].length, 0);
+                    equal(chart.dataSource._events["change"].length, 0);
                 });
 
                 test("releases IDs to pool", function() {
@@ -243,7 +244,7 @@
                     }
                 });
 
-                test("navigation does not start if no handlers are attached", function() {
+                test("navigation does not start if no handlers are attached", 0, function() {
                     stubMethod(Chart.fn, "_startNavigation", function() {
                         ok(false);
                     }, function() {

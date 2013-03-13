@@ -167,7 +167,7 @@
                 expect(1);
 
                 $.mockjax(function(settings) {
-                    equals(settings.url, url);
+                    equal(settings.url, url);
                     return {};
                 });
 
@@ -186,7 +186,7 @@
 
                 $.mockjaxClear();
                 $.mockjax(function(settings) {
-                    equals(settings.url, url);
+                    equal(settings.url, url);
                     return {};
                 });
 
@@ -200,7 +200,7 @@
                 expect(1);
 
                 $.mockjax(function(settings) {
-                    same(settings.data, data);
+                    deepEqual(settings.data, data);
                     return {};
                 });
 
@@ -223,8 +223,8 @@
 
                 $.mockjaxClear();
                 $.mockjax(function(settings) {
-                    equals(settings.url, url);
-                    equals(settings.type, contentObject.type);
+                    equal(settings.url, url);
+                    equal(settings.type, contentObject.type);
                     return {};
                 });
 
@@ -464,6 +464,8 @@
                 myWindow.open().close();
 
                 myWindow.destroy();
+
+                ok(true);
             });
         </script>
 

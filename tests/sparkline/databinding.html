@@ -4,7 +4,7 @@
         <title>UI5.Chart Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
         <link href="../../styles/dataviz/kendo.dataviz.css" type="text/css" rel="stylesheet"/>
     </head>
@@ -49,25 +49,25 @@
                 });
 
                 test("array is used to initialize series data", function() {
-                    equals(sparkline.options.seriesDefaults.data.length, 2);
+                    equal(sparkline.options.seriesDefaults.data.length, 2);
                 });
 
                 test("observable array is used to initialize series data", function() {
                     createSparkline(new kendo.data.ObservableArray([1, 2]));
-                    equals(sparkline.options.seriesDefaults.data.length, 2);
+                    equal(sparkline.options.seriesDefaults.data.length, 2);
                 });
 
                 test("default series are created", function() {
-                    equals(sparkline.options.series.length, 1);
+                    equal(sparkline.options.series.length, 1);
                 });
 
                 test("default series are bound to array items", function() {
-                    equals(liveSeries[0].data.length, 2);
+                    equal(liveSeries[0].data.length, 2);
                 });
 
                 test("number is encapsulated in array", function() {
                     createSparkline(1);
-                    equals(liveSeries[0].data[0], 1);
+                    equal(liveSeries[0].data[0], 1);
                 });
 
                 // ------------------------------------------------------------
@@ -81,11 +81,11 @@
                 });
 
                 test("default series are created", function() {
-                    equals(sparkline.options.series.length, 1);
+                    equal(sparkline.options.series.length, 1);
                 });
 
                 test("default series are bound to array items", function() {
-                    equals(liveSeries[0].data.length, 2);
+                    equal(liveSeries[0].data.length, 2);
                 });
 
                 test("default series inherit seriesDefaults options", function() {
@@ -95,14 +95,14 @@
                         }
                     });
 
-                    equals(sparkline.options.series[0].field, "value");
+                    equal(sparkline.options.series[0].field, "value");
                 });
 
                 test("number is encapsulated in array", function() {
                     createSparkline({
                         data: 1
                     });
-                    equals(liveSeries[0].data[0], 1);
+                    equal(liveSeries[0].data[0], 1);
                 });
 
                 // ------------------------------------------------------------
@@ -121,11 +121,11 @@
                 });
 
                 test("default series are created", function() {
-                    equals(sparkline.options.series.length, 1);
+                    equal(sparkline.options.series.length, 1);
                 });
 
                 test("default series are bound to existing data source", function() {
-                    equals(sparkline.options.series[0].data.length, 2);
+                    equal(sparkline.options.series[0].data.length, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -142,11 +142,11 @@
                 });
 
                 test("default series are not created", function() {
-                    equals(sparkline.options.series.length, 1);
+                    equal(sparkline.options.series.length, 1);
                 });
 
                 test("series are data bound", function() {
-                    equals(sparkline.options.series[0].data.length, 2);
+                    equal(sparkline.options.series[0].data.length, 2);
                 });
 
                 test("series are bound to existing data source", function() {
@@ -159,7 +159,7 @@
                         }]
                     });
 
-                    equals(sparkline.options.series[0].data.length, 2);
+                    equal(sparkline.options.series[0].data.length, 2);
                 });
 
             })();

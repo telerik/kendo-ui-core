@@ -4,7 +4,8 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -90,15 +91,15 @@
                         }]
                     });
 
-                    equals(bubbleChart.points.length, 0);
+                    equal(bubbleChart.points.length, 0);
                 });
 
                 test("Maximum bubble diameter is set to maxSize", function() {
-                    equals(firstPoint.options.markers.size, 110, TOLERANCE);
+                    close(firstPoint.options.markers.size, 110, TOLERANCE);
                 });
 
                 test("Minimum bubble diameter is set to minSize", function() {
-                    equals(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
+                    close(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
                 });
 
                 test("Default maximum bubble diameter is proportional to box size", function() {
@@ -108,7 +109,7 @@
                         }]
                     });
 
-                    equals(firstPoint.options.markers.size, 120, TOLERANCE);
+                    close(firstPoint.options.markers.size, 120, TOLERANCE);
                 });
 
                 test("Default minimum bubble diameter is proportional to box size", function() {
@@ -118,7 +119,7 @@
                         }]
                     });
 
-                    equals(firstPoint.options.markers.size, 40, TOLERANCE);
+                    close(firstPoint.options.markers.size, 40, TOLERANCE);
                 });
 
                 test("Default minimum bubble diameter is floored to 10", function() {
@@ -129,11 +130,11 @@
                     });
 
                     bubbleChart.reflow(new Box2D());
-                    equals(firstPoint.options.markers.size, 10, TOLERANCE);
+                    close(firstPoint.options.markers.size, 10, TOLERANCE);
                 });
 
                 test("Bubble diameter is proportional to size value", function() {
-                    equals(bubbleChart.points[2].options.markers.size, 50, TOLERANCE);
+                    close(bubbleChart.points[2].options.markers.size, 50, TOLERANCE);
                 });
 
                 test("zIndex is higher for smaller bubbles", function() {
@@ -149,27 +150,27 @@
                         }]
                     });
 
-                    equals(firstPoint.color, "red");
+                    equal(firstPoint.color, "red");
                 });
 
                 test("Color is set in options", function() {
-                    equals(firstPoint.options.color, "red");
+                    equal(firstPoint.options.color, "red");
                 });
 
                 test("format variable {0} returns x", function() {
-                    equals(firstPoint.formatValue("{0}"), 1);
+                    equal(firstPoint.formatValue("{0}"), 1);
                 });
 
                 test("format variable {1} returns y", function() {
-                    equals(firstPoint.formatValue("{1}"), 10);
+                    equal(firstPoint.formatValue("{1}"), 10);
                 });
 
                 test("format variable {2} returns size", function() {
-                    equals(firstPoint.formatValue("{2}"), 100);
+                    equal(firstPoint.formatValue("{2}"), 100);
                 });
 
                 test("format variable {3} returns category", function() {
-                    equals(firstPoint.formatValue("{3}"), "a");
+                    equal(firstPoint.formatValue("{3}"), "a");
                 });
 
                 // ------------------------------------------------------------
@@ -185,7 +186,7 @@
                 });
 
                 test("renders top-level group", function() {
-                    equals(view.log.group.length, 1);
+                    equal(view.log.group.length, 1);
                 });
 
                 // ------------------------------------------------------------
@@ -197,54 +198,54 @@
                 });
 
                 test("highlightOverlay renders a transparent circle", function() {
-                    equals(firstPoint.highlightOverlay(view).options.fill, undefined);
+                    equal(firstPoint.highlightOverlay(view).options.fill, undefined);
                 });
 
                 test("highlightOverlay renders a circle with 1 border smaller diameter", function() {
                     firstPoint.options.highlight.border.width = 2;
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.r, firstPoint.options.markers.size / 2 - 1);
+                    equal(outline.r, firstPoint.options.markers.size / 2 - 1);
                 });
 
                 test("highlightOverlay renders default border width", function() {
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.options.strokeWidth, 1);
+                    equal(outline.options.strokeWidth, 1);
                 });
 
                 test("highlightOverlay renders custom border width", function() {
                     firstPoint.options.highlight.border.width = 2;
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.options.strokeWidth, 2);
+                    equal(outline.options.strokeWidth, 2);
                 });
 
                 test("highlightOverlay renders default border color (computed)", function() {
                     firstPoint.options.markers.background = "#ffffff";
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.options.stroke, "#cccccc");
+                    equal(outline.options.stroke, "#cccccc");
                 });
 
                 test("highlightOverlay renders custom border color", function() {
                     firstPoint.options.highlight.border.color = "red";
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.options.stroke, "red");
+                    equal(outline.options.stroke, "red");
                 });
 
                 test("highlightOverlay renders default border opacity", function() {
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.options.strokeOpacity, 1);
+                    equal(outline.options.strokeOpacity, 1);
                 });
 
                 test("highlightOverlay renders custom border opacity", function() {
                     firstPoint.options.highlight.border.opacity = 0.5;
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.options.strokeOpacity, 0.5);
+                    equal(outline.options.strokeOpacity, 0.5);
                 });
             })();
 
@@ -288,7 +289,7 @@
                         data: [[1, 10, 100], [2, 20, 200]]
                     });
 
-                    same(points[1].value, { x: 2, y: 20, size: 200 });
+                    deepEqual(points[1].value, { x: 2, y: 20, size: 200 });
                 });
 
                 test("binds x, y and size field", function() {
@@ -298,7 +299,7 @@
                         sizeField: "sizeValue"
                     });
 
-                    same(points[1].value, { x: 2, y: 20, size: 200 });
+                    deepEqual(points[1].value, { x: 2, y: 20, size: 200 });
                 });
 
                 test("binds color field", function() {
@@ -309,7 +310,7 @@
                         colorField: "pointColor"
                     });
 
-                    same(points[1].color, "blue");
+                    deepEqual(points[1].color, "blue");
                 });
 
                 test("binds category field", function() {
@@ -320,7 +321,7 @@
                         categoryField: "pointColor"
                     });
 
-                    same(points[1].category, "blue");
+                    deepEqual(points[1].category, "blue");
                 });
 
                 test("binds to object with x, y and size fields", function() {
@@ -328,7 +329,7 @@
                         data: [{x: 1, y: 10, size: 100}, {x: 2, y: 20, size: 200}]
                     });
 
-                    same(points[1].value, { x: 2, y: 20, size: 200 });
+                    deepEqual(points[1].value, { x: 2, y: 20, size: 200 });
                 });
 
                 test("binds color to object field", function() {
@@ -336,7 +337,7 @@
                         data: [{ x: 1, y: 10, size: 100, color: "red" }]
                     });
 
-                    same(points[0].color, "red");
+                    deepEqual(points[0].color, "red");
                 });
 
                 test("binds category to object field", function() {
@@ -344,7 +345,7 @@
                         data: [{ x: 1, y: 10, size: 100, category: "UK" }]
                     });
 
-                    same(points[0].category, "UK");
+                    deepEqual(points[0].category, "UK");
                 });
 
             })();
@@ -400,7 +401,7 @@
                         }
                     });
 
-                    same(points[0].options.tooltip.format, "a");
+                    deepEqual(points[0].options.tooltip.format, "a");
                 });
 
                 test("sets legend item name from dataItem", function() {
@@ -412,7 +413,7 @@
                         }
                     });
 
-                    equals(legend.options.items[0].name, "A-test");
+                    equal(legend.options.items[0].name, "A-test");
                 });
 
             })();

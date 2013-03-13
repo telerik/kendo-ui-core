@@ -4,7 +4,7 @@
         <title>kendo.ui.Slider Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -96,21 +96,27 @@
             });
 
             test("value should not trigger change event", function() {
+                var result = true;
                 var change = function (e) {
-                    ok(false);
+                    result = false;
                 };
 
                 var slider = newSlider({ "change": change });
 
                 slider.value(5);
+
+                ok(result);
             });
 
             test("slider init should not trigger change event", function() {
+                var result = true;
                 var change = function (e) {
-                    ok(false);
+                    result = false;
                 };
 
                 newSlider({ "change": change, min: 2 });
+
+                ok(result);
             });
 
             test("value should set value to the input", function() {
@@ -203,10 +209,11 @@
 
             test('slider should not trigger change if we decrease value with 1 step and value is equal to min value', function () {
                 var downArrow = kendo.keys.DOWN,
-                    leftArrow = kendo.keys.LEFT;
+                    leftArrow = kendo.keys.LEFT,
+                    result = true;
 
                 var change = function (e) {
-                    ok(false);
+                    result = false;
                 };
 
                 var slider = newSlider({ "change": change, value: 0 }),
@@ -214,6 +221,8 @@
 
                 dragHandle.trigger({ type: "keydown", keyCode: downArrow });
                 dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
+
+                ok(result);
             });
 
             // ------------------------------------------------------------
@@ -317,21 +326,25 @@
             });
 
             test("values should not trigger change event", function () {
+                var result = true;
                 var change = function (e) {
-                    ok(false);
+                    result = false;
                 };
 
                 var rangeSlider = newRangeSlider({ "change": change });
 
                 rangeSlider.values(1, 3);
+                ok(result);
             });
 
             test("init should not trigger change event", function () {
+                var result = true;
                 var change = function (e) {
-                    ok(false);
+                    result = false;
                 };
 
                 newRangeSlider({ "change": change, min: -1, max: 20 });
+                ok(result);
             });
 
             test("values should set values to the inputs", function () {
@@ -439,10 +452,11 @@
 
             test('range slider should not trigger change if we decrease selectionStart with 1 step and selectionStart is equal to min value', function () {
                 var downArrow = kendo.keys.down,
-                    leftArrow = kendo.keys.left;
+                    leftArrow = kendo.keys.left,
+                    result = true;
 
                 var change = function (e) {
-                    ok(false);
+                    result = false;
                 };
 
                 var rangeSlider = newRangeSlider({ change: change, selectionStart: 10, selectionEnd: 10 }),
@@ -450,6 +464,8 @@
 
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: downArrow });
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: leftArrow });
+
+                ok(result);
             });
 
 

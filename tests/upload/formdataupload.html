@@ -4,7 +4,7 @@
         <title>Upload rendering</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.upload.js"></script>
@@ -118,6 +118,7 @@
             }
 
             function moduleTeardown() {
+                kendo.destroy($("#testbed_container"));
                 removeHTML();
                 Upload.prototype._supportsFormData = _supportsFormData;
                 $.mockjaxClear();
@@ -721,8 +722,8 @@
 
             test("files are passed to createFormData", 2, function() {
                 uploadInstance._module.createFormData = function(sourceFiles) {
-                    equals(sourceFiles[0].name, "first.txt");
-                    equals(sourceFiles[1].name, "second.txt");
+                    equal(sourceFiles[0].name, "first.txt");
+                    equal(sourceFiles[1].name, "second.txt");
                 };
 
                 uploadInstance._module.inputFiles = function () { return getFileListMock() };

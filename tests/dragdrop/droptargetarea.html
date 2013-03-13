@@ -4,7 +4,7 @@
         <title>kendo.ui.DropTargetArea Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -99,7 +99,7 @@
                 trigger("mouseup", { pageX: offset.left, pageY: offset.top });
             });
 
-            test("dragenter is not raised for draggable from a different group", function() {
+            test("dragenter is not raised for draggable from a different group", 0, function() {
                 setup({
                         filter: ".test1",
                         dragenter: function() {

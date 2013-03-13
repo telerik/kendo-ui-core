@@ -37,7 +37,7 @@
         simulateUpload();
 
         $.mockjax(function(s) {
-            equals(s.data.id, 1);
+            equal(s.data.id, 1);
             return {
                 url: "/removeAction",
                 responseTime: 0,
@@ -55,7 +55,7 @@
         simulateUpload();
 
         $.mockjax(function(s) {
-            equals(s.type, "DELETE");
+            equal(s.type, "DELETE");
             return {
                 url: "/removeAction",
                 responseTime: 0,
@@ -72,7 +72,7 @@
         simulateUpload();
 
         $.mockjax(function(s) {
-            same(s.data["fileNames"], [ "first.txt" ]);
+            deepEqual(s.data["fileNames"], [ "first.txt" ]);
             return {
                 url: "/removeAction",
                 responseTime: 0,
@@ -90,7 +90,7 @@
         simulateUpload();
 
         $.mockjax(function(s) {
-            same(s.data["fileNames[]"], [ "first.txt" ]);
+            deepEqual(s.data["fileNames[]"], [ "first.txt" ]);
             return {
                 url: "/removeAction",
                 responseTime: 0,

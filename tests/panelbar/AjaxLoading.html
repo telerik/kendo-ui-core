@@ -5,7 +5,7 @@
 
     <script src="../../src/jquery.js"></script>
     <script src="../qunit/qunit/qunit.js"></script>
-    <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.fx.js"></script>
     <script src="../../src/kendo.panelbar.js"></script>
@@ -48,6 +48,8 @@
                 ]
             }).data("kendoPanelBar");
 
+        QUnit.config.reorder = false;
+
         function getRootItem(index) {
             return panelbar.element.find(".k-header").parent().eq(index).children(".k-link");
         }
@@ -61,13 +63,13 @@
             equal(children.filter("span").length, 0)
         });
 
-        asyncTest("clicking collapsed content items should expand them", function() {
+        asyncTest("clicking collapsed content items should expand them", 1, function() {
             var item = getRootItem(0);
 
             panelbar.bind("contentLoad", function() {
+                start();
                 equal($(arguments[0].contentElement).css("display"), "block");
                 panelbar.unbind("contentLoad");
-                start();
             });
 
             item.trigger("click");
@@ -81,19 +83,19 @@
             equal(item.parent().find(".k-content").css("display"), "none");
         });
 
-        asyncTest("clicking collapsed content items should toggle arrow", function() {
+        asyncTest("clicking collapsed content items should toggle arrow", 1, function() {
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
+                start();
                 ok($(arguments[0].item).find(".k-icon").hasClass("k-i-arrow-n"));
                 panelbar.unbind("contentLoad");
-                start();
             });
 
             item.trigger("click");
         });
 
-        test("clicking expanded content items should toggle arrow", function() {
+        test("clicking expanded content items should toggle arrow", 1, function() {
             var item = getRootItem(1);
 
             item.trigger("click");
@@ -101,19 +103,19 @@
             ok(item.find(".k-icon").hasClass("k-i-arrow-s"));
         });
 
-        test("clicking should make item active", function() {
+        asyncTest("clicking should make item active", 1, function() {
             var item = getRootItem(2);
 
             panelbar.bind("contentLoad", function() {
+                start();
                 ok(item.parent().hasClass("k-state-active"));
                 panelbar.unbind("contentLoad");
-                start();
             });
 
             item.trigger("click");
         });
 
-        test("initially expanded items fetch their AJAX content", function() {
+        test("initially expanded items fetch their AJAX content", 1, function() {
             var item = getRootItem(4);
 
             equal(item.parent().find(".k-content").css("display"), "block");

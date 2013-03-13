@@ -4,7 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -93,8 +93,8 @@
 
                 test("sets font", function() {
                     createTooltip({ font: "16px Tahoma" });
-                    equals(element.css("fontSize"), "16px");
-                    equals(element.css("fontFamily"), "Tahoma");
+                    equal(element.css("fontSize"), "16px");
+                    equal(element.css("fontFamily"), "Tahoma");
                 });
 
                 test("sets series tooltip font", function() {
@@ -106,25 +106,25 @@
                             }
                         }
                     }));
-                    equals(element.css("fontSize"), "16px");
-                    equals(element.css("fontFamily"), "Tahoma");
+                    equal(element.css("fontSize"), "16px");
+                    equal(element.css("fontFamily"), "Tahoma");
                 });
 
                 test("sets border width", function() {
                     createTooltip({ border: { width: 1 } });
-                    equals(element.css("border-top-width"), "1px");
+                    equal(element.css("border-top-width"), "1px");
                 });
 
                 test("sets opacity", function() {
                     createTooltip({ opacity: 0.5 });
-                    equals(element.css("opacity"), 0.5);
+                    equal(element.css("opacity"), 0.5);
                 });
 
                 asyncTest("show displays tooltip for last point with a delay", function() {
                     tooltip.show(dataPointMock);
 
                     setTimeout(function() {
-                        equals(element.text(), "1");
+                        equal(element.text(), "1");
                         start();
                     }, 120);
                 });
@@ -132,72 +132,72 @@
                 test("can override border color", function() {
                     createTooltip({ border: { color: RED } });
                     showNow(dataPointMock);
-                    equals(element.css("border-top-color").replace(/\s/g, ''), RED);
+                    equal(element.css("border-top-color").replace(/\s/g, ''), RED);
                 });
 
                 test("sets border color to current point color", function() {
                     showNow(dataPointMock);
-                    equals(element.css("border-top-color").replace(/\s/g, ''), RED);
+                    equal(element.css("border-top-color").replace(/\s/g, ''), RED);
                 });
 
                 test("sets div background", function() {
                     tooltip.options.background = BLUE;
                     showNow(dataPointMock);
-                    equals(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
+                    equal(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
                 });
 
                 test("sets text color", function() {
                     createTooltip({ color: GREEN });
                     showNow(dataPointMock);
-                    equals(element.css("color").replace(/\s/g, ''), GREEN);
+                    equal(element.css("color").replace(/\s/g, ''), GREEN);
                 });
 
                 test("applies full label format", function() {
                     createTooltip({ format: "{0}%" });
                     showNow(dataPointMock);
-                    equals(element.text(), "1%");
+                    equal(element.text(), "1%");
                 });
 
                 test("applies simple label format", function() {
                     createTooltip({ format: "p0" });
                     showNow(dataPointMock);
-                    equals(element.text(), "100 %");
+                    equal(element.text(), "100 %");
                 });
 
                 test("renders template", function() {
                     createTooltip({ template: "${value}%" });
                     showNow(dataPointMock);
-                    equals(element.text(), "1%");
+                    equal(element.text(), "1%");
                 });
 
                 test("renders compiled template", function() {
                     createTooltip({ template: kendo.template("${value}%") });
                     showNow(dataPointMock);
-                    equals(element.text(), "1%");
+                    equal(element.text(), "1%");
                 });
 
                 test("renders template when format is set", function() {
                     createTooltip({ format: "{0} percent", template: "${value}%" });
                     showNow(dataPointMock);
-                    equals(element.text(), "1%");
+                    equal(element.text(), "1%");
                 });
 
                 test("template context has category", function() {
                     createTooltip({ template: "${category}" });
                     showNow(dataPointMock);
-                    equals(element.text(), "category");
+                    equal(element.text(), "category");
                 });
 
                 test("template context has series", function() {
                     createTooltip({ template: "${series.name}" });
                     showNow(dataPointMock);
-                    equals(element.text(), "series");
+                    equal(element.text(), "series");
                 });
 
                 test("template context has dataItem", function() {
                     createTooltip({ template: "${dataItem.field}" });
                     showNow(dataPointMock);
-                    equals(element.text(), "value");
+                    equal(element.text(), "value");
                 });
 
                 test("positions tooltip on anchor", function() {
@@ -207,7 +207,7 @@
                     tooltip.options.offsetY = 0;
                     tooltip.move();
 
-                    same([parseInt(tooltip.element.css("left"), 10),
+                    deepEqual([parseInt(tooltip.element.css("left"), 10),
                           parseInt(tooltip.element.css("top"), 10)],
                           [10, 20]);
                 });
@@ -225,7 +225,7 @@
                     tooltip.options.animation.duration = 0;
                     tooltip.move();
 
-                    same([parseInt(tooltip.element.css("left"), 10),
+                    deepEqual([parseInt(tooltip.element.css("left"), 10),
                           parseInt(tooltip.element.css("top"), 10)],
                           [20, 40]);
 
@@ -238,7 +238,7 @@
                 test("applies format from the series", function() {
                     createPoint({ options: { tooltip: { format: "{0:C}" } }});
                     showNow(dataPointMock);
-                    equals(element.text(), "$1.00");
+                    equal(element.text(), "$1.00");
                 });
 
                 // ------------------------------------------------------------
@@ -255,19 +255,19 @@
                 test("returns 0 if the tooltip fit in the window", function() {
                     var result = tooltip._currentPosition(200, 100, 400);
 
-                    equals(result, 0);
+                    equal(result, 0);
                 });
 
                 test("if element does not fit right should be position left", function() {
                     var result = tooltip._currentPosition(82, 42, 100);
 
-                    equals(result, -24);
+                    equal(result, -24);
                 });
 
                 test("if element does not fit right and does not fit left should be position right", function() {
                     var result = tooltip._currentPosition(42, 42, 100);
 
-                    equals(result, 0);
+                    equal(result, 0);
                 });
 
             })();
@@ -350,12 +350,12 @@
 
                 test("sets border width", function() {
                     showNow(dataPointMock);
-                    equals(element.css("border-top-width"), "2px");
+                    equal(element.css("border-top-width"), "2px");
                 });
 
                 test("sets opacity", function() {
                     showNow(dataPointMock);
-                    equals(element.css("opacity"), 1);
+                    equal(element.css("opacity"), 1);
                 });
 
             })();

@@ -39,7 +39,7 @@
         </script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <style>
             #qunit-fixture {
@@ -200,6 +200,8 @@
                 el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
                 el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
                 el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
+
+                application.scroller().unbind("scroll");
             });
 
             function success() {

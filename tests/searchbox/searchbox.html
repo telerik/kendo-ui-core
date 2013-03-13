@@ -4,7 +4,7 @@
         <title>kendo.searchbox tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -168,7 +168,7 @@
                 input.next().click();
             });
 
-            test("clicking on the button without changing the value does not trigger the change event", function() {
+            test("clicking on the button without changing the value does not trigger the change event", 0, function() {
                 input.kendoSearchBox({
                     change: function() {
                         ok(false);

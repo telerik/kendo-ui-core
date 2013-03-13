@@ -4,7 +4,7 @@
         <title>Pointer</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
     <body>
@@ -13,6 +13,7 @@
         <script src="../../src/kendo.dataviz.gauge.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../chart/util.js"></script>
         <script>
             var dataviz = kendo.dataviz,
@@ -147,13 +148,13 @@
                         var point = points[i];
                         result.push([point.x, point.y]);
                     }
-                    same(result, [ [46.5, 284.5], [37.5, 289], [46.5, 293.5] ], TOLERANCE);
+                    arrayClose(result, [ [46.5, 284.5], [37.5, 289], [46.5, 293.5] ], TOLERANCE);
                 });
 
                 test("renders bar indicator shape", function() {
                     createPointer({ vertical: true });
                     var shape = view.log.rect[0];
-                    same(
+                    arrayClose(
                         [shape.x1, shape.y1, shape.x2, shape.y2],
                         [46.5, 289, 51.5, 289], TOLERANCE
                     );
@@ -169,13 +170,13 @@
                         var point = points[i];
                         result.push([point.x, point.y]);
                     }
-                    same(result, [ [2.5, -2.5], [7, 6.5], [11.5, -2.5] ], TOLERANCE);
+                    arrayClose(result, [ [2.5, -2.5], [7, 6.5], [11.5, -2.5] ], TOLERANCE);
                 });
 
                 test("renders bar indicator shape", function() {
                     createPointer({ vertical: false });
                     var shape = view.log.rect[0];
-                    same(
+                    arrayClose(
                         [shape.x1, shape.y1, shape.x2, shape.y2],
                         [7, -7.5, 7, -2.5], TOLERANCE
                     );

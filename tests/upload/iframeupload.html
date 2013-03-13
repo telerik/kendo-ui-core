@@ -4,7 +4,7 @@
         <title>Upload iframe</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.upload.js"></script>
@@ -96,6 +96,7 @@
 
             function moduleTeardown() {
                 Upload.prototype._supportsFormData = _supportsFormData;
+                kendo.destroy($("#testbed_container"));
                 $("iframe[name^='uploadInstance'], form[target^='uploadInstance']").remove();
                 $.mockjaxClear();
                 removeHTML();

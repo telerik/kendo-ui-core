@@ -4,7 +4,7 @@
         <title>kendo.tooltip tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.tooltip.js"></script>
@@ -189,7 +189,7 @@
 
                 tooltip.show(container.find("span:last"));
 
-                same(popup, tooltip.popup);
+                deepEqual(popup, tooltip.popup);
             });
 
             test("popup is hidden when mouse leave the element", function() {

@@ -4,7 +4,7 @@
         <title>Calendar Events</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
-        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -133,7 +133,7 @@
                 stub(calendar, {navigate: calendar.navigate});
                 div.find("tbody").find("td.k-other-month").click(); //click "Nov" cell
 
-                equals(calendar.calls("navigate"), 1);
+                equal(calendar.calls("navigate"), 1);
             });
         </script>
 
