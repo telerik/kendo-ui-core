@@ -192,6 +192,20 @@
                 ok(!splitter.find(".k-pane:first").data("pane").collapsed);
             });
 
+            test("toggle() applies selector context", function() {
+                createSplitter({
+                    panes: [{ collapsible: true }, {}]
+                });
+
+                createSplitter({
+                    panes: [{ collapsible: true }, {}]
+                });
+
+                splitterObject.toggle(".k-pane:first", false);
+
+                ok(splitter.find(".k-pane:first").data("pane").collapsed);
+            });
+
             test("collapse() calls toggle(false)", function() {
                 var args;
 
@@ -242,6 +256,18 @@
                 splitterObject.size(firstPane, "120px");
 
                 equals(splitterObject.size(firstPane), "120px");
+            });
+
+            test("size() applies selector context", function() {
+                createSplitter({
+                    panes: [ { size: "125px" }, {} ]
+                });
+
+                createSplitter({
+                    panes: [ { size: "110px" }, {} ]
+                });
+
+                equals(splitterObject.size(".k-pane:first"), "110px");
             });
 
             test("min() gets/sets pane min", function() {
@@ -305,7 +331,7 @@
                 ok(!pane.hasClass("k-scrollable"));
             });
 
-            test("Splitter does not collapse uncollapsable pane", function() {
+            test("collapsing uncollapsible panes is not permitted", function() {
                 createSplitter({
                     panes: [ { collapsible: false }, { collapsible: false }]
                 });
@@ -313,6 +339,20 @@
                 splitterObject.toggle(splitter.find(".k-scrollable:first"), false);
 
                 equal(splitter.find(".k-pane:first").data("pane").collapsed, undefined);
+            });
+
+            test("ajaxRequest() applies selector context", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                splitterObject.ajaxRequest(".k-pane:first", "http://google.com");
+
+                equal(splitter.find("iframe").length, 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
