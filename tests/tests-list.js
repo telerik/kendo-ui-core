@@ -19,7 +19,6 @@ var tests = [
     "calendar/lint.html",
     "calendar/navigation.html",
     "calendar/aria.html",
-    "changelog/api.html",
     "chart/configuration.html",
     "chart/databinding.html",
     "chart/helpers.html",
