@@ -89,6 +89,20 @@ kendo_module({
             this._focused.focus();
         },
 
+        readonly: function(readonly) {
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
+        },
+
+        enable: function(enable) {
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
+        },
+
         _filterSource: function(filter) {
             var that = this,
                 options = that.options,
@@ -279,17 +293,18 @@ kendo_module({
 
         _enable: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                disabled = that.element.is("[disabled]");
 
             if (options.enable !== undefined) {
                 options.enabled = options.enable;
             }
 
-            if (that.element.prop("disabled")) {
-                options.enabled = false;
+            if (!options.enabled || disabled) {
+                that.enable(false);
+            } else {
+                that.readonly(that.element.is("[readonly]"));
             }
-
-            that.enable(options.enabled);
         },
 
         _focus: function(li) {

@@ -17,13 +17,15 @@ kendo_module({
         keys = kendo.keys,
         ns = ".kendoComboBox",
         CLICK = "click" + ns,
-        ATTRIBUTE = "disabled",
+        MOUSEDOWN = "mousedown" + ns,
+        DISABLED = "disabled",
+        READONLY = "readonly",
         CHANGE = "change",
         DEFAULT = "k-state-default",
-        DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
-        MOUSEDOWN = "mousedown" + ns,
+        STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
@@ -185,30 +187,36 @@ kendo_module({
             Select.fn.destroy.call(that);
         },
 
-        enable: function(enable) {
+        _editable: function(options) {
             var that = this,
+                disable = options.disable,
+                readonly = options.readonly,
                 input = that.input.add(that.element),
-                wrapper = that._inputWrapper.off(HOVEREVENTS),
+                wrapper = that._inputWrapper.off(ns),
                 arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
 
-            if (enable === false) {
+            if (!readonly && !disable) {
                 wrapper
-                    .removeClass(DEFAULT)
-                    .addClass(DISABLED);
-
-                input.attr(ATTRIBUTE, ATTRIBUTE)
-                     .attr(ARIA_DISABLED, true);
-            } else {
-                wrapper
-                    .removeClass(DISABLED)
                     .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                input.removeAttr(ATTRIBUTE)
-                     .attr(ARIA_DISABLED, false);
+                input.removeAttr(DISABLED)
+                     .removeAttr(READONLY)
+                     .attr(ARIA_DISABLED, false)
+                     .attr(ARIA_READONLY, false);
 
                 arrow.on(CLICK, function() { that.toggle(); })
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+            } else {
+                wrapper
+                    .addClass(disable ? STATEDISABLED : DEFAULT)
+                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+
+                input.attr(DISABLED, disable)
+                     .attr(READONLY, readonly)
+                     .attr(ARIA_DISABLED, disable)
+                     .attr(ARIA_READONLY, readonly);
             }
         },
 

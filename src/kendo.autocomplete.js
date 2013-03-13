@@ -16,8 +16,10 @@ kendo_module({
         DataSource = kendo.data.DataSource,
         List = ui.List,
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
+        READONLY = "readonly",
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
@@ -174,28 +176,32 @@ kendo_module({
             this._aria();
         },
 
-
-        enable: function(enable) {
+        _editable: function(options) {
             var that = this,
                 element = that.element,
-                wrapper = that.wrapper.off(HOVEREVENTS);
+                wrapper = that.wrapper.off(ns),
+                readonly = options.readonly,
+                disable = options.disable;
 
-            if (enable === false) {
+            if (!readonly && !disable) {
                 wrapper
-                    .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED);
-
-                element.attr(DISABLED, DISABLED)
-                       .attr(ARIA_DISABLED, true);
-            } else {
-                wrapper
-                    .removeClass(STATEDISABLED)
                     .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element
-                    .removeAttr(DISABLED)
-                    .attr(ARIA_DISABLED, false);
+                element.removeAttr(DISABLED)
+                       .removeAttr(READONLY)
+                       .attr(ARIA_DISABLED, false)
+                       .attr(ARIA_READONLY, false);
+            } else {
+                wrapper
+                    .addClass(disable ? STATEDISABLED : DEFAULT)
+                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+
+                element.attr(DISABLED, disable)
+                       .attr(READONLY, readonly)
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 

@@ -278,6 +278,71 @@
                 ok(!dropdownlist.element.attr("disabled"));
             });
 
+            test("readonly() makes  input element readonly", function() {
+                var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdownlist.readonly();
+
+                equal(dropdownlist.element.attr("readonly"), "readonly");
+            });
+
+            test("readonly() unbinds icon click", function() {
+                var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdownlist.readonly();
+
+                stub(dropdownlist, {toggle: dropdownlist.toggle});
+
+                dropdownlist.wrapper.click();
+
+                ok(!dropdownlist.popup.visible());
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdownlist.readonly();
+                dropdownlist.readonly(false);
+
+                equal(dropdownlist.element.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdownlist.enable(false);
+                dropdownlist.readonly();
+
+                equal(dropdownlist.element.attr("readonly"), "readonly");
+                equal(dropdownlist.element.attr("disabled"), undefined);
+                ok(dropdownlist._inputWrapper.hasClass("k-state-default"));
+                ok(!dropdownlist._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdownlist.readonly();
+                dropdownlist.enable(false);
+
+                equal(dropdownlist.element.attr("readonly"), undefined);
+                equal(dropdownlist.element.attr("disabled"), "disabled");
+                ok(!dropdownlist._inputWrapper.hasClass("k-state-default"));
+                ok(dropdownlist._inputWrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var dropdownlist = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdownlist.readonly();
+                dropdownlist.enable();
+
+                equal(dropdownlist.element.attr("readonly"), undefined);
+                equal(dropdownlist.element.attr("disabled"), undefined);
+                ok(dropdownlist._inputWrapper.hasClass("k-state-default"));
+                ok(!dropdownlist._inputWrapper.hasClass("k-state-disabled"));
+            });
+
             test("_accessor should return value of the INPUT", function() {
                 equal(dropdownlist.value(), input.val());
             });

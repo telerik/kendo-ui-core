@@ -358,6 +358,72 @@
                 equal(autocomplete.options.ignoreCase, false);
             });
 
+            test("readonly() makes input element readonly", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete.readonly();
+
+                equal(autocomplete.element.attr("readonly"), "readonly");
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete.readonly();
+                autocomplete.readonly(false);
+
+                equal(autocomplete.element.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete.enable(false);
+                autocomplete.readonly();
+
+                equal(autocomplete.element.attr("readonly"), "readonly");
+                equal(autocomplete.element.attr("disabled"), undefined);
+                ok(autocomplete.wrapper.hasClass("k-state-default"));
+                ok(!autocomplete.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete.readonly();
+                autocomplete.enable(false);
+
+                equal(autocomplete.element.attr("readonly"), undefined);
+                equal(autocomplete.element.attr("disabled"), "disabled");
+                ok(!autocomplete.wrapper.hasClass("k-state-default"));
+                ok(autocomplete.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var autocomplete = new AutoComplete(input);
+
+                autocomplete.readonly();
+                autocomplete.enable();
+
+                equal(autocomplete.element.attr("readonly"), undefined);
+                equal(autocomplete.element.attr("disabled"), undefined);
+                ok(autocomplete.wrapper.hasClass("k-state-default"));
+                ok(!autocomplete.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("AutoComplete honors readonly attribute", function() {
+                var autocomplete = new AutoComplete(input.attr("readonly", true));
+
+                equal(autocomplete.element.attr("readonly"), "readonly");
+                equal(autocomplete.element.attr("disabled"), undefined);
+            });
+
+            test("AutoComplete uses disabled attr over the readonly", function() {
+                var autocomplete = new AutoComplete(input.attr("readonly", true).attr("disabled", true));
+
+                equal(input.attr("readonly"), undefined);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

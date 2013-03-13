@@ -630,6 +630,20 @@
                 }, 150);
             });
 
+            test("ComboBox honors readonly attribute", function() {
+                var combobox = input.attr("readonly", true).kendoComboBox().data("kendoComboBox");
+
+                combobox._arrow.click();
+
+                ok(!combobox.popup.visible());
+            });
+
+            test("ComboBox uses disabled attr over the readonly", function() {
+                var combobox = input.attr("readonly", true).attr("disabled", true)
+                                    .kendoComboBox().data("kendoComboBox");
+
+                equal(input.attr("readonly"), undefined);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

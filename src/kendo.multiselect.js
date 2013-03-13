@@ -26,11 +26,13 @@ kendo_module({
         PREV = "previousSibling",
         HIDE = ' style="display:none"',
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         FOCUSEDCLASS = "k-state-focused",
         HIDDENCLASS = "k-loading-hidden",
         HOVERCLASS = "k-state-hover",
-        DISABLEDCLASS = "k-state-disabled",
-        DISABLEDATTR = "disabled",
+        STATEDISABLED = "k-state-disabled",
+        DISABLED = "disabled",
+        READONLY = "readonly",
         ns = ".kendoMultiSelect",
         CLICK = "click" + ns,
         MOUSEENTER = "mouseenter" + ns,
@@ -203,22 +205,17 @@ kendo_module({
             List.fn.destroy.call(that);
         },
 
-        enable: function(enable) {
+        _editable: function(options) {
             var that = this,
+                disable = options.disable,
+                readonly = options.readonly,
                 wrapper = that.wrapper.off(ns),
                 tagList = that.tagList.off(ns),
                 input = that.input.add(that.element);
 
-            if (enable === false) {
-                wrapper.addClass(DISABLEDCLASS);
-                input.attr(DISABLEDATTR, DISABLEDATTR)
-                     .attr(ARIA_DISABLED, true);
-            } else {
-                input.removeAttr(DISABLEDATTR)
-                     .attr(ARIA_DISABLED, false);
-
+            if (!readonly && !disable) {
                 wrapper
-                    .removeClass(DISABLEDCLASS)
+                    .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover)
                     .on("mousedown" + ns, function(e) {
                         e.preventDefault();
@@ -232,6 +229,11 @@ kendo_module({
                         }
                     });
 
+                input.removeAttr(DISABLED)
+                     .removeAttr(READONLY)
+                     .attr(ARIA_DISABLED, false)
+                     .attr(ARIA_READONLY, false);
+
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
@@ -240,6 +242,18 @@ kendo_module({
                         that._change();
                         that.close();
                     });
+
+            } else {
+                if (disable) {
+                    wrapper.addClass(STATEDISABLED);
+                } else {
+                    wrapper.removeClass(STATEDISABLED);
+                }
+
+                input.attr(DISABLED, disable)
+                     .attr(READONLY, readonly)
+                     .attr(ARIA_DISABLED, disable)
+                     .attr(ARIA_READONLY, readonly);
             }
         },
 

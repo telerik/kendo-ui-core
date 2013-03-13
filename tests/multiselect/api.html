@@ -296,6 +296,66 @@
 
                 ok(!multiselect.popup.visible());
             });
+
+            test("readonly method makes input element readonly", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.readonly();
+
+                equal(multiselect.element.attr("readonly"), "readonly");
+            });
+
+            test("readonly method unbinds input click", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.readonly();
+                multiselect.input.click();
+
+                ok(!multiselect.popup.visible());
+            });
+
+            test("readonly(false) removes readonly attribute", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.readonly();
+                multiselect.readonly(false);
+
+                equal(multiselect.element.attr("readonly"), undefined);
+            });
+
+            test("readonly() removes disabled attribute and disabled class", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.enable(false);
+                multiselect.readonly();
+
+                equal(multiselect.element.attr("readonly"), "readonly");
+                equal(multiselect.element.attr("disabled"), undefined);
+                ok(!multiselect.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable(false) removes readonly attribute and default class", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.readonly();
+                multiselect.enable(false);
+
+                equal(multiselect.element.attr("readonly"), undefined);
+                equal(multiselect.element.attr("disabled"), "disabled");
+                ok(multiselect.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable() enables widget after readonly()", function() {
+                var multiselect = new MultiSelect(select);
+
+                multiselect.readonly();
+                multiselect.enable();
+
+                equal(multiselect.element.attr("readonly"), undefined);
+                equal(multiselect.element.attr("disabled"), undefined);
+                ok(!multiselect.wrapper.hasClass("k-state-disabled"));
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
