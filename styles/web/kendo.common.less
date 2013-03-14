@@ -2600,8 +2600,9 @@ span.k-numerictextbox
             height: 3px;
             width: @grid-size;
             position: absolute;
-            left: 1px;
+            left: 3px;
             bottom: -3px;
+			border-radius: 0 !important;
         }
     }
     .k-icon {
@@ -2946,24 +2947,43 @@ span.k-numerictextbox
 }
 
 .k-bold { background-position: -64px 0; }
+.k-bold.k-state-hover { background-position: -90px 0; }
 .k-italic { background-position: -64px -22px; }
+.k-italic.k-state-hover { background-position: -90px -22px; }
 .k-underline { background-position: -64px -44px; }
+.k-underline.k-state-hover { background-position: -90px -44px; }
 .k-strikethrough { background-position: -64px -66px; }
+.k-strikethrough.k-state-hover { background-position: -90px -66px; }
 .k-foreColor { background-position: -64px -88px; }
+.k-state-hover > .k-foreColor { background-position: -90px -88px; }
 .k-backColor { background-position: -64px -110px; }
+.k-state-hover > .k-backColor { background-position: -90px -110px; }
 .k-justifyLeft { background-position: -64px -132px; }
+.k-justifyLeft.k-state-hover { background-position: -90px -132px; }
 .k-justifyCenter { background-position: -64px -154px; }
+.k-justifyCenter.k-state-hover { background-position: -90px -154px; }
 .k-justifyRight { background-position: -64px -176px; }
+.k-justifyRight.k-state-hover { background-position: -90px -176px; }
 .k-justifyFull { background-position: -64px -198px; }
+.k-justifyFull.k-state-hover { background-position: -90px -198px; }
 .k-insertUnorderedList { background-position: -64px -242px; }
+.k-insertUnorderedList.k-state-hover { background-position: -90px -242px; }
 .k-insertOrderedList { background-position: -64px -264px; }
+.k-insertOrderedList.k-state-hover { background-position: -90px -264px; }
 .k-indent, .k-rtl .k-outdent { background-position: -112px 0; }
+.k-indent.k-state-hover, .k-rtl .k-outdent.k-state-hover { background-position: -138px 0; }
 .k-outdent, .k-rtl .k-indent { background-position: -112px -22px; }
+.k-outdent.k-state-hover, .k-rtl .k-indent.k-state-hover { background-position: -138px -22px; }
 .k-createLink { background-position: -112px -44px; }
+.k-createLink.k-state-hover { background-position: -138px -44px; }
 .k-unlink { background-position: -112px -66px; }
+.k-unlink.k-state-hover { background-position: -138px -66px; }
 .k-insertImage { background-position: -112px -88px; }
+.k-insertImage.k-state-hover { background-position: -138px -88px; }
 .k-subscript { background-position: -112px -154px; }
+.k-subscript.k-state-hover { background-position: -138px -154px; }
 .k-superscript { background-position: -112px -176px; }
+.k-superscript.k-state-hover { background-position: -138px -176px; }
 
 /* default tool widths */
 .k-fontName { width: 110px; }
@@ -3158,7 +3178,7 @@ div.k-slider
 
 .k-slider .k-button .k-icon
 {
-    margin-top: 4px;
+    margin-top: 3px;
     vertical-align: top;
 }
 
@@ -3644,16 +3664,26 @@ span.k-tooltip
 }
 
 .k-splitbar-horizontal .k-resize-handle { background-position: -165px -6px; }
+.k-splitbar-horizontal-hover > .k-resize-handle { background-position: -181px -6px; }
 .k-splitbar-horizontal .k-collapse-prev,
 .k-splitbar-horizontal .k-expand-next { background-position: -6px -174px; }
+.k-splitbar-horizontal-hover > .k-collapse-prev,
+.k-splitbar-horizontal-hover > .k-expand-next { background-position: -22px -174px; }
 .k-splitbar-horizontal .k-collapse-next,
 .k-splitbar-horizontal .k-expand-prev { background-position: -5px -142px; }
+.k-splitbar-horizontal-hover > .k-collapse-next,
+.k-splitbar-horizontal-hover > .k-expand-prev { background-position: -21px -142px; }
 
 .k-splitbar-vertical .k-resize-handle { background-position: -38px -309px; }
+.k-splitbar-vertical-hover > .k-resize-handle { background-position: -70px -309px; }
 .k-splitbar-vertical .k-collapse-prev,
 .k-splitbar-vertical .k-expand-next { background-position: 2px -134px; }
+.k-splitbar-vertical-hover > .k-collapse-prev,
+.k-splitbar-vertical-hover > .k-expand-next { background-position: -14px -134px; }
 .k-splitbar-vertical .k-collapse-next,
 .k-splitbar-vertical .k-expand-prev { background-position: 2px -165px; }
+.k-splitbar-vertical-hover > .k-collapse-next,
+.k-splitbar-vertical-hover > .k-expand-prev { background-position: -14px -165px; }
 
 /* Upload */
 
