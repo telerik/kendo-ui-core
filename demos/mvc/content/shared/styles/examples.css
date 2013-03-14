@@ -59,7 +59,7 @@ html
 }
 
 #header, .suite-demos-nav, .demos-nav,
-.flowers-left, #footer, .centerWrap, .submenu-box a
+.flowers-left, #footer, .centerWrap, .submenu-box a 
 {
     font-family: "Droid Sans", DroidSansWeb, "Segoe UI", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 }
@@ -73,14 +73,12 @@ html
     font-weight: normal;
 }
 
-.kendo-nav
+.kendo-nav,
+#example,
+#exampleTitle
 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
-}
-
-#example {
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .overview
@@ -1068,8 +1066,8 @@ p#copy
     position:absolute;
     top:23px;
     left:0;
-    font:23px/1.6 arial,helvetica,sans-serif;
-    font-weight:normal;
+    font-size:23px;
+    line-height:1.6;
     color:#4e4e4e;
 }
 
@@ -1184,6 +1182,7 @@ p#copy
     float: right;
     margin-top: -35px;
     font-size: .9em;
+    line-height: 26px;
 }
 
 .k-theme-chooser,
@@ -1207,7 +1206,8 @@ p#copy
 
 .k-theme-chooser .tc-link
 {
-    line-height: 24px;
+    vertical-align: middle;
+    line-height: 26px;
     padding: 0 4px 0 8px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -1216,6 +1216,7 @@ p#copy
 
 .tc-choose-theme
 {
+    vertical-align: middle;
     color: #939393;
     margin: 0 10px 0 0;
 }
@@ -1297,8 +1298,11 @@ p#copy
 #nav-pager a
 {
     text-transform:uppercase;
+    display: inline-block;
     position:relative;
     color:#4e4e4e;
+    line-height:1.5;
+    vertical-align: top;
 }
 
 #nav-pager .prev
@@ -1312,7 +1316,7 @@ p#copy
     width:0;
     height:0;
     position:absolute;
-    top:5px;
+    top:4px;
     left:0;
     border:solid 3px;
     border-color:transparent #888 transparent transparent;
@@ -1329,7 +1333,7 @@ p#copy
     width:0;
     height:0;
     position:absolute;
-    top:5px;
+    top:4px;
     right:0;
     border:solid 3px;
     border-color:transparent transparent transparent #888;
@@ -1343,8 +1347,9 @@ p#copy
 #examples-list a
 {
     display:inline-block;
-    padding:4px 14px 5px 8px;
+    padding:3px 14px 3px 8px;
     color:#4e4e4e;
+    line-height:1.5;
 
     -moz-border-radius:3px 0 0 3px;
     -webkit-border-radius:3px 0 0 3px;
