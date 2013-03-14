@@ -17,23 +17,21 @@ def output(title, issues)
     out
 end
 
-ICON_MAP = {
-    'DropDownList' => 'DropDown',
-    'DateTimePicker' => 'DatePicker',
-    'Linear Gauge' => 'Gauge',
-    'Radial Gauge' => 'Gauge',
-    'Sparkline' => 'Sparklines',
-    'StockChart' => 'ChartStock'
-}
+def component_icon(component)
+    map = {
+        'DropDownList' => 'DropDown',
+        'DateTimePicker' => 'DatePicker',
+        'Linear Gauge' => 'Gauge',
+        'Radial Gauge' => 'Gauge',
+        'Sparkline' => 'Sparklines',
+        'StockChart' => 'ChartStock'
+    }
+
+    encode(map[component] || component)
+end
 
 def icon_for(component)
-    if (ICON_MAP[component]) then
-        component = ICON_MAP[component]
-    end
-
-    component = encode(component)
-
-    return "<img src='/libraries/Kendo_UI_Icons_32x32/#{component}_kendoui.sflb' class='poBoxIcon' width='32' height='32' alt='Kendo UI #{component} Icon'>"
+    "<img src='/libraries/Kendo_UI_Icons_32x32/#{component_icon(component)}_kendoui.sflb' class='poBoxIcon' width='32' height='32' alt='Kendo UI #{component} Icon'>"
 end
 %>
 
