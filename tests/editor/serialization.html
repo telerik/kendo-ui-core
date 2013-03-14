@@ -481,6 +481,18 @@
         editor.value('<div style="background-image:url(http://example.com/foo.gif);">foo</div>');
         equal(editor.value(), '<div style="background-image:url(http://example.com/foo.gif);">foo</div>');
     });
+
+    var glob = false;
+
+    asyncTest("onerror image attribute is not serialized to prevent XSS", function() {
+        editor.value("<img src='x' onerror='window.parent.glob = true' />");
+
+        setTimeout(function() {
+            start();
+            ok(!glob, "onError handler is executed");
+            ok(editor.value(), "<img src='x' />");
+        }, 500);
+    });
 </script>
 
 <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
