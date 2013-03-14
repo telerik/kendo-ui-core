@@ -949,13 +949,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Returns the initialization scripts for widgets set as deferred
         /// </summary>
+        /// <param name="renderScriptTags">Determines if the script should be rendered within a script tag</param>
         /// <returns></returns>
-        public virtual MvcHtmlString DeferredScripts()
+        public virtual MvcHtmlString DeferredScripts(bool renderScriptTags = true)
         {
             var items = ViewContext.HttpContext.Items;
             if (items.Contains(WidgetBase.DeferredScriptsKey))
             {
-                return new MvcHtmlString(string.Format("<script>{0}</script>", items[WidgetBase.DeferredScriptsKey]));
+                var format = renderScriptTags ? "<script>{0}</script>" : "{0}";
+                return new MvcHtmlString(string.Format(format, items[WidgetBase.DeferredScriptsKey]));
             }
             return MvcHtmlString.Empty;
         }
