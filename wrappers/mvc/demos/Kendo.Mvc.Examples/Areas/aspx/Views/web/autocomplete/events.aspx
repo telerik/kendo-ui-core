@@ -4,11 +4,6 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-
-<div class="configuration k-widget k-header" style="width: 200px">
-    <span class="configHead">Events log</span>
-    <div class="console"></div>
-</div>
 <div id="taxi">
     <label for="states">Select a state in USA:</label>
     <%=Html.Kendo().AutoComplete()
@@ -78,7 +73,10 @@
         })
     %>
 </div>
-
+<div class="demo-section">                
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
 <script>
     function onOpen() {
         if ("kendoConsole" in window) {
@@ -118,7 +116,7 @@
 		height: 160px;
 		padding: 80px 0 0 200px;
 		background: url('<%=Url.Content("~/content/web/autocomplete/taxi.png")%>') transparent no-repeat 0 0;
-		margin: 40px 0 30px 40px;
+        margin: 20px auto;
 	}
 	#taxi label {
 		display: block;
@@ -131,16 +129,13 @@
 		width: 200px;
 		vertical-align: middle;
 	}
-	.configuration {
-		height: 360px;
-		margin-bottom: -21px;
-	}
-	.configuration .console {
-		background-color: transparent;
-		border: 0;
-		height: 320px;
-		overflow: auto;
-	}
+	.demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
+    }
 </style>
 
 </asp:Content>

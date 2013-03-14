@@ -5,12 +5,12 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
-    <label for="countries">Choose country: </label>   
+    <h2>Choose country: </h2>
     <%= Html.Kendo().AutoComplete()
           .Name("countries")
           .Filter("startswith")
           .Placeholder("Select country...")
-          .HtmlAttributes(new { accesskey = "w", style="width: 200px" })
+          .HtmlAttributes(new { accesskey = "w", style="width: 250px" })
           .BindTo(new string[] {
             "Albania",
             "Andorra",
@@ -116,10 +116,15 @@
 </ul>
 
 <style scoped>
-    div.demo-section
-    {
-        width: 300px;
-        margin: 0px auto 25px auto;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 </asp:Content>

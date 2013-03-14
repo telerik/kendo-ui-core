@@ -1,11 +1,12 @@
 <div class="demo-section">
-    <label for="products">Select product:</label>
+    <h2>Products</h2>
 
     @(Html.Kendo().AutoComplete()
           .Name("products")
           .DataTextField("ProductName")
           .Filter("contains")
           .MinLength(3)
+          .HtmlAttributes(new { style = "width:250px" })
           .DataSource(source => {
               source.Read(read =>
               {
@@ -23,8 +24,15 @@
         };
     }
 </script>
-<style scoped>                
-	.demo-section {
-		width: 250px;
-	}
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
 </style>

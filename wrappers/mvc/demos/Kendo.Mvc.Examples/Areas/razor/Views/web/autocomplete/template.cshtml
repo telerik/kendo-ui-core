@@ -1,66 +1,57 @@
 
-<div class="configuration k-widget k-header">
-    <span class="infoHead">Information</span>
+<div class="demo-section">
+    <h2>Customers</h2>
+    @(Html.Kendo().AutoComplete()
+          .Name("customers")
+          .DataTextField("ContactName")
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("GetCustomers", "Home");
+              });
+          })
+          .HtmlAttributes(new { style="width:400px" })
+          .Filter("startswith")
+          .MinLength(1)
+          .Height(370)
+          .Template("<img src=\"" + Url.Content("~/Content/web/Customers/") + "${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
+                            "<dl>" +
+                                "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
+                                "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
+                            "</dl>")
+    )
     <p>
-        Open the AutoComplete to see the customized appearance of the items.
+        Start typing to find a customer.
     </p>
 </div>
 
-@(Html.Kendo().AutoComplete()
-      .Name("customers")
-      .DataTextField("ContactName")
-      .DataSource(source =>
-      {
-          source.Read(read =>
-          {
-              read.Action("GetCustomers", "Home");
-          });
-      })
-      .Filter("startswith")
-      .Height(300)
-      .Template("<img src=\"" + Url.Content("~/Content/web/Customers/") + "${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
-                        "<dl>" +
-                            "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
-                            "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
-                        "</dl>")
-)
-
-<script>
-    $(document).ready(function() {
-        var autocomplete = $("#customers").data("kendoAutoComplete");
-
-        // set width of the drop-down list
-        autocomplete.list.width(400);
-    });
-</script>
-
 <style scoped>
+    .demo-section {
+        width: 400px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
     #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
-
     #customers-list img {
-        box-shadow: 0 0 4px rgba(255,255,255,.7);
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
-        margin: 5px;
+        margin: 5px 20px 5px 0px;
     }
-
-    #customers-list dl {
-        margin-left: 85px;
+    #customers-list h3 {
+        margin: 30px 0 10px 0;
+        font-size: 2em;
     }
-
-    #customers-list dt,
-    #customers-list dd {
+    #customers-list p {
         margin: 0;
-        padding: 0;
-    }
-
-    #customers-list dt {
-        font-weight: bold;
-        padding-top: .5em;
-    }
-
-    #customers-list dd {
-        padding-bottom: .3em;
     }
 </style>

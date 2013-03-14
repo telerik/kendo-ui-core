@@ -4,10 +4,9 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="demo-section">
+<div class="demo-section">            
     <div class="k-rtl">
-        <label for="states">Select a state in USA:</label>
-    
+        <h2>USA STATES:</h2>   
         <%= Html.Kendo().AutoComplete()
               .Name("states")
               .Placeholder("Select state...")
@@ -70,7 +69,18 @@
                     "Wyoming"
               })              
         %>
-
     </div>
 </div>
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+</style>
 </asp:Content>
