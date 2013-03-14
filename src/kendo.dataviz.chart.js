@@ -65,6 +65,7 @@ kendo_module({
         BAR_BORDER_BRIGHTNESS = 0.8,
         BELOW = "below",
         BLACK = "#000",
+        BOTH = "both",
         BOTTOM = "bottom",
         BUBBLE = "bubble",
         BULLET = "bullet",
@@ -8054,6 +8055,7 @@ kendo_module({
 
         options: {
             visible: true,
+            zoomDirection: BOTH,
             min: MIN_VALUE,
             max: MAX_VALUE
         },
@@ -8220,6 +8222,7 @@ kendo_module({
         _mousewheel: function(e) {
             var selection = this,
                 options = selection.options,
+                zDir = options.zoomDirection,
                 origEvent = e.originalEvent,
                 prevented,
                 delta = 0;
@@ -8236,6 +8239,7 @@ kendo_module({
             /* --- */
 
 
+            // TODO: Refactor
             e.event = { target: null,  };
             e.x = { location: 0 };
             selection._start(e);
@@ -8245,7 +8249,14 @@ kendo_module({
                     delta *= ZOOM_ACCELERATION;
                 }
 
-                selection.expandLeft(delta);
+                if (zDir !== RIGHT) {
+                    selection.expandLeft(delta);
+                }
+
+                if (zDir !== LEFT) {
+                    selection.expandRight(delta);
+                }
+
                 selection.trigger(SELECT, {
                     delta: delta,
                     originalEvent: e,
@@ -8330,6 +8341,16 @@ kendo_module({
             selection.set(
                 math.min(options.from - delta, options.to - 1),
                 options.to
+            );
+        },
+
+        expandRight: function(delta) {
+            var selection = this,
+                options = selection.options;
+
+            selection.set(
+                options.from,
+                math.max(options.to + delta, options.from + 1)
             );
         },
 

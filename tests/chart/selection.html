@@ -101,9 +101,12 @@
                                 }
                             }
                         });
-                    }
+                    },
+                    teardown: destroyChart
                 });
+
                 test("selection shrinks left on mousewheel up", function() {
+                    selection.options.zoomDirection = "left";
                     selection._mousewheel({
                         originalEvent: {
                             detail: -3
@@ -112,6 +115,29 @@
 
                     equal(selection.options.from, 41);
                     equal(selection.options.to, 60);
+                });
+
+                test("selection shrinks right on mousewheel up", function() {
+                    selection.options.zoomDirection = "right";
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: -3
+                        }
+                    });
+
+                    equal(selection.options.from, 40);
+                    equal(selection.options.to, 59);
+                });
+
+                test("selection shrinks both sides on mousewheel up", function() {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: -3
+                        }
+                    });
+
+                    equal(selection.options.from, 41);
+                    equal(selection.options.to, 59);
                 });
 
                 test("selection shrinking accelerates", function() {
@@ -125,6 +151,7 @@
                 });
 
                 test("selection expands left on mousewheel down", function() {
+                    selection.options.zoomDirection = "left";
                     selection._mousewheel({
                         originalEvent: {
                             detail: 3
@@ -133,6 +160,29 @@
 
                     equal(selection.options.from, 39);
                     equal(selection.options.to, 60);
+                });
+
+                test("selection expands right on mousewheel up", function() {
+                    selection.options.zoomDirection = "right";
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 3
+                        }
+                    });
+
+                    equal(selection.options.from, 40);
+                    equal(selection.options.to, 61);
+                });
+
+                test("selection expands both on mousewheel up", function() {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 3
+                        }
+                    });
+
+                    equal(selection.options.from, 39);
+                    equal(selection.options.to, 61);
                 });
 
                 test("selection expansion accelerates", function() {
