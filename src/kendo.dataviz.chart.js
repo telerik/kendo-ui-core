@@ -475,7 +475,9 @@ kendo_module({
         _setupSelection: function() {
             var chart = this,
                 plotArea = chart._plotArea,
-                axes = plotArea.axes;
+                axes = plotArea.axes,
+                selections = chart._selections = [],
+                selection;
 
             for (var i = 0; i < axes.length; i++) {
                 var axis = axes[i];
@@ -489,26 +491,28 @@ kendo_module({
                         max = options.categories[max];
                     }
 
-                    axis.selection = new Selection(chart, axis,
+                    selection = new Selection(chart, axis,
                         deepExtend({
                             min: min,
                             max: max
                         }, options.select)
                     );
 
-                    axis.selection.bind(SELECT_START, function(e) {
+                    selections.push(selection);
+
+                    selection.bind(SELECT_START, function(e) {
                         // TODO: Reference chart axis options?
                         e.axis = this.categoryAxis.options;
                         return chart.trigger(SELECT_START, e);
                     });
 
-                    axis.selection.bind(SELECT, function(e) {
+                    selection.bind(SELECT, function(e) {
                         // TODO: Reference chart axis options?
                         e.axis = this.categoryAxis.options;
                         return chart.trigger(SELECT, e);
                     });
 
-                    axis.selection.bind(SELECT_END, function(e) {
+                    selection.bind(SELECT_END, function(e) {
                         // TODO: Reference chart axis options?
                         e.axis = this.categoryAxis.options;
                         return chart.trigger(SELECT_END, e);
@@ -1061,7 +1065,8 @@ kendo_module({
 
         destroy: function() {
             var chart = this,
-                dataSource = chart.dataSource;
+                dataSource = chart.dataSource,
+                selections = chart._selections;
 
             chart.element.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
@@ -1069,6 +1074,12 @@ kendo_module({
 
             if (chart._userEvents) {
                 chart._userEvents.destroy();
+            }
+
+            if (selections) {
+                while (selections.length > 0) {
+                    selections.shift().destroy();
+                }
             }
 
             chart._destroyView();
