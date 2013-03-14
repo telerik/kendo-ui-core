@@ -1,9 +1,8 @@
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <demo:header />
-    <div class="demo-section">   
-        <label for="countries">Choose country: </label>
-        
+    <div class="demo-section">
+        <h2>Choose country: </h2>
 	    <%
 	    String[] countries = {
 	        "Albania",
@@ -58,12 +57,12 @@
 	        "Vatican City"
 	    };
 	    %>
-	    <kendo:autoComplete name="countries" filter="startswith" placeholder="Select country..." separator=", " accesskey="w">
+	    <kendo:autoComplete name="countries" filter="startswith" placeholder="Select country..." separator=", " accesskey="w" style="width:250px">
 	        <kendo:dataSource data="<%=countries%>">
 	        </kendo:dataSource>
 	    </kendo:autoComplete>
     </div>
-    
+
     <ul class="keyboard-legend">
          <li>
              <span class="button-preview">
@@ -111,17 +110,17 @@
              </span>
          </li>
      </ul>
-    
-    <style scoped="scoped">
-        .k-autocomplete
-        {
-            width: 200px;
+
+    <style scoped>
+        .demo-section {
+            width: 250px;
+            margin: 35px auto 50px;
+            padding: 30px;
         }
-        
-        div.demo-section
-        {
-            width: 300px;
-            margin: 0px auto 25px auto;
+        .demo-section h2 {
+            text-transform: uppercase;
+            font-size: 1.2em;
+            margin-bottom: 10px;
         }
     </style>
 <demo:footer />
