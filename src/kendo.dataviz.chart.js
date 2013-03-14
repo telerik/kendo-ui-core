@@ -150,6 +150,7 @@ kendo_module({
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
         TOOLTIP_HIDE_DELAY = 100,
+        TOOLTIP_INVERSE = "tooltip-inverse",
         TOUCH_START_NS = "touchstart" + NS,
         TRIANGLE = "triangle",
         VALUE = "value",
@@ -7457,8 +7458,7 @@ kendo_module({
                 content = point.formatValue(options.format);
             }
 
-            return content;
-        },
+            return content; },
 
         _pointAnchor: function(point) {
             var tooltip = this,
@@ -7487,7 +7487,15 @@ kendo_module({
             }
 
             if (!defined(options.color)) {
-                options.color = new Color(options.background).percBrightness();
+                var tooltip = this,
+                    element = tooltip.element,
+                    brightnessValue = new Color(options.background).percBrightness();
+
+                if (brightnessValue > 180) {
+                    element.addClass(CSS_PREFIX + TOOLTIP_INVERSE);
+                } else {
+                    element.removeClass(CSS_PREFIX + TOOLTIP_INVERSE);
+                }
             }
         }
     });

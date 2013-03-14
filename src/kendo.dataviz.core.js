@@ -2437,15 +2437,9 @@ kendo_module({
         },
 
         percBrightness: function() {
-            var color = this,
-                value = math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b),
-                result = WHITE;
+            var color = this;
 
-            if (value > 180) {
-                result = BLACK;
-            }
-
-            return result;
+            return math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b);
         }
     };
 

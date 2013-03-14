@@ -270,6 +270,29 @@
                     equal(result, 0);
                 });
 
+                // ------------------------------------------------------------
+                module("Tooltip / _updateStyle", {
+                    setup: function() {
+                        createTooltip();
+                        createPoint();
+                    },
+                    teardown: function() {
+                        element.remove();
+                    }
+                });
+
+                test("removes inverse css class if backgorund is bright", function() {
+                    tooltip._updateStyle({ background: "#000" }, {});
+
+                    ok(!tooltip.element.hasClass("k-tooltip-inverse"));
+                });
+
+                test("sets inverse css class if backgorund is dark", function() {
+                    tooltip._updateStyle({ background: "#fff" }, {});
+
+                    ok(tooltip.element.hasClass("k-tooltip-inverse"));
+                });
+
             })();
 
 
