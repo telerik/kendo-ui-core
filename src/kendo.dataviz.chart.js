@@ -162,6 +162,7 @@ kendo_module({
         Y = "y",
         YEARS = "years",
         ZERO = "zero",
+        ZOOM_ACCELERATION = 3,
         ZOOM_START = "zoomStart",
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
@@ -477,7 +478,8 @@ kendo_module({
 
             for (var i = 0; i < axes.length; i++) {
                 var axis = axes[i];
-                if (axis instanceof CategoryAxis) {
+                var options = axis.options;
+                if (axis instanceof CategoryAxis && options.select && !options.vertical) {
                     axis.selection = new Selection(chart, axis,
                         deepExtend({
                             min: 0,
@@ -8023,6 +8025,8 @@ kendo_module({
                 that.bind(that.events, that.options);
                 that.wrapper[0].style.cssText = that.wrapper[0].style.cssText;
 
+                that.wrapper.on(MOUSEWHEEL_NS, proxy(that._mousewheel, that));
+
                 if (kendo.UserEvents) {
                     that.userEvents = new kendo.UserEvents(that.wrapper, {
                         global: true,
@@ -8099,6 +8103,7 @@ kendo_module({
                 fullSpan = options.max - options.min,
                 delta = state.startLocation - e.x.location,
                 range = state.range,
+                oldRange = { from: range.from, to: range.to },
                 span = range.to - range.from,
                 target = state.moveTarget,
                 scale = that.wrapper.width() / fullSpan,
@@ -8133,9 +8138,10 @@ kendo_module({
                 range.from = math.min(range.to - 1, range.from);
             }
 
-            that.move(range.from, range.to);
-
-            that.trigger(SELECT, range);
+            if (range.from !== oldRange.from || range.to !== oldRange.to) {
+                that.move(range.from, range.to);
+                that.trigger(SELECT, range);
+            }
         },
 
         _end: function() {
@@ -8211,6 +8217,52 @@ kendo_module({
             that.trigger(SELECT_END);
         },
 
+        _mousewheel: function(e) {
+            var selection = this,
+                options = selection.options,
+                origEvent = e.originalEvent,
+                prevented,
+                delta = 0;
+
+            /* Reusable */
+            if (origEvent.wheelDelta) {
+                delta = -origEvent.wheelDelta / 120;
+                delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
+            }
+
+            if (origEvent.detail) {
+                delta = round(origEvent.detail / 3);
+            }
+            /* --- */
+
+
+            e.event = { target: null,  };
+            e.x = { location: 0 };
+            selection._start(e);
+
+            if (selection._state) {
+                if (math.abs(delta) > 1) {
+                    delta *= ZOOM_ACCELERATION;
+                }
+
+                selection.expandLeft(delta);
+                selection.trigger(SELECT, {
+                    delta: delta,
+                    originalEvent: e,
+                    from: options.from,
+                    to: options.to
+                });
+
+                if (selection._mwTimeout) {
+                    clearTimeout(selection._mwTimeout);
+                }
+
+                selection._mwTimeout = setTimeout(function() {
+                    selection._end();
+                }, MOUSEWHEEL_DELAY);
+            }
+        },
+
         move: function(from, to) {
             var that = this,
                 options = that.options,
@@ -8253,6 +8305,19 @@ kendo_module({
             if (options.visible) {
                 that.move(from, to);
             }
+
+            // TODO: Add rounding for date axes
+            /*
+            selection.set(
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.from
+                ),
+                lteDateIndex(
+                    navigatorAxis.options.categories,
+                    navi.options.select.to
+            ));
+            */
 
             options.from = from;
             options.to = to;

@@ -15,6 +15,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
@@ -23,81 +24,234 @@
 
             (function() {
                 var chart,
+                    categoryAxis,
                     selection;
 
-                function createSelection(options) {
+                function setup(options) {
                     chart = createChart(deepExtend({
                         series: [{
-                            data: [1, 2, 3],
+                            data: new Array(100),
                         }],
                         categoryAxis: {
-                            name: "main",
-                            categories: ["A", "B", "C"]
+                            name: "main"
                         }
                     }, options));
 
                     categoryAxis = chart._plotArea.categoryAxis;
-                    selection = new Selection(chart, categoryAxis);
+                    selection = categoryAxis.selection;
                 }
+
+                function stubArgs(x, y, options) {
+                    return deepExtend({
+                        event: { target: $("<div class='k-rightHandle' />") },
+                        x: { location: x || 0 },
+                        y: { location: y || 0 },
+                        preventDefault: function() {}
+                    }, options);
+                }
+
+                // ------------------------------------------------------------
+                module("Selection / Configuration", {
+                    teardown: destroyChart
+                });
+
+                test("Selection is created for categoryAxis", function() {
+                    setup({
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 1
+                            }
+                        }
+                    });
+
+                    ok(categoryAxis.selection instanceof Selection);
+                });
+
+                test("Selection is not created if not configured", function() {
+                    setup();
+
+                    ok(!categoryAxis.selection);
+                });
+
+                test("Selection is not created for vertical categoryAxis", function() {
+                    setup({
+                        seriesDefaults: {
+                            type: "bar"
+                        },
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 1
+                            }
+                        }
+                    });
+
+                    ok(!categoryAxis.selection);
+                });
+
+                // ------------------------------------------------------------
+                module("Selection / Mousewheel", {
+                    setup: function() {
+                        setup({
+                            categoryAxis: {
+                                select: {
+                                    from: 40,
+                                    to: 60
+                                }
+                            }
+                        });
+                    }
+                });
+                test("selection shrinks left on mousewheel up", function() {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: -3
+                        }
+                    });
+
+                    equal(selection.options.from, 41);
+                    equal(selection.options.to, 60);
+                });
+
+                test("selection shrinking accelerates", function() {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: -30
+                        }
+                    });
+
+                    equal(selection.options.from, 59);
+                });
+
+                test("selection expands left on mousewheel down", function() {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 3
+                        }
+                    });
+
+                    equal(selection.options.from, 39);
+                    equal(selection.options.to, 60);
+                });
+
+                test("selection expansion accelerates", function() {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 30
+                        }
+                    });
+
+                    equal(selection.options.from, 10);
+                });
 
                 // ------------------------------------------------------------
                 module("Selection / Events", {
                     setup: function() {
-                        createSelection();
+                        setup({
+                            categoryAxis: {
+                                select: {
+                                    from: 0,
+                                    to: 2
+                                }
+                            }
+                        });
                     },
                     teardown: destroyChart
                 });
 
-                test("selectStart fires on start", function() {
-                    selection.bind("selectStart", function() {
+                test("selectStart fires on UserEvents start", function() {
+                    chart.bind("selectStart", function() {
                         ok(true);
                     });
 
-                    selection._start({
-                        event: { target: {} },
-                        x: { location: 0 }
+                    selection._start(stubArgs());
+                });
+
+                test("selectStart fires on mousewheel", function() {
+                    chart.bind("selectStart", function() {
+                        ok(true);
                     });
+
+                    selection._mousewheel({ originalEvent: { detail: 3 } });
                 });
 
                 test("selectStart args contain range (from and to)", function() {
-                    selection.bind("selectStart", function(e) {
+                    chart.bind("selectStart", function(e) {
                         equal(e.from, 0);
-                        equal(e.to, 1);
+                        equal(e.to, 2);
                     });
 
-                    selection.move(0, 1);
-                    selection._start({
-                        event: { target: {} },
-                        x: { location: 0 }
-                    });
+                    selection._start(stubArgs());
                 });
 
                 test("selectStart args contain axis options", function() {
-                    selection.bind("selectStart", function(e) {
+                    chart.bind("selectStart", function(e) {
                         equal(e.axis.name, "main");
                     });
 
-                    selection._start({
-                        event: { target: {} },
-                        x: { location: 0 }
+                    selection._start(stubArgs());
+                });
+
+                test("selectStart can be cancelled", 0, function() {
+                    chart.bind("select", function(e) {
+                        ok(false);
                     });
+
+                    selection.bind("selectStart", function(e) {
+                        e.preventDefault();
+                    });
+
+                    selection._start(stubArgs());
+
+                    selection._move(stubArgs(100, 0));
                 });
 
-                test("selectStart can be cancelled", function() {
-                    
+                test("select fires on UserEvents move", 1, function() {
+                    chart.bind("select", function(e) {
+                        ok(true);
+                    });
+
+                    selection._start(stubArgs());
+                    selection._move(stubArgs(100, 0));
                 });
 
-                test("select does not fire if range is not changed", function() {
-                    
+                test("select fires on mousewheel", 1, function() {
+                    chart.bind("select", function(e) {
+                        ok(true);
+                    });
+
+                    selection._mousewheel({ originalEvent: { detail: 3 } });
                 });
 
-                test("selection shrinks on mousewheel up", function() {
-                    
+                test("select does not fire if range is not changed", 1, function() {
+                    chart.bind("select", function(e) {
+                        ok(true);
+                    });
+
+                    selection._start(stubArgs());
+                    selection._move(stubArgs(100, 0));
+                    selection._move(stubArgs(100, 0));
                 });
 
-                test("selection expands on mousewheel down", function() {
-                    
+                test("selectEnd fires on UserEvents end", 1, function() {
+                    chart.bind("selectEnd", function(e) {
+                        ok(true);
+                    });
+
+                    selection._start(stubArgs());
+                    selection._end();
                 });
+
+                asyncTest("selectEnd fires after mousewheel", function() {
+                    chart.bind("selectEnd", function(e) {
+                        ok(true);
+                        start();
+                    });
+
+                    selection._mousewheel({ originalEvent: { detail: 3 } });
+                });
+
             })();
         </script>
 
