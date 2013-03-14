@@ -95,6 +95,40 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Selection / Date axis", {
+                    setup: function() {
+                        setup({
+                            series: [{
+                                data: [1, 2, 3, 4]
+                            }],
+                            categoryAxis: {
+                                categories: [
+                                    new Date("2012-01-01 00:00"),
+                                    new Date("2012-01-02 00:00"),
+                                    new Date("2012-01-03 00:00"),
+                                    new Date("2012-01-04 00:00")
+                                ],
+                                select: {
+                                    from: new Date("2012-01-02 00:00"),
+                                    to: new Date("2012-01-03 00:00")
+                                }
+                            }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("range start is rounded down to prev date", function() {
+                    selection.set(new Date("2012-01-01 15:00"), new Date("2012-01-03 00:00"));
+                    deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
+                });
+
+                test("range start is rounded up to prev date", function() {
+                    selection.set(new Date("2012-01-01 00:00"), new Date("2012-01-03 15:00"));
+                    deepEqual(sOpts.to, new Date("2012-01-03 00:00"));
+                });
+
+                // ------------------------------------------------------------
                 module("Selection / Mousewheel", {
                     setup: function() {
                         setup({

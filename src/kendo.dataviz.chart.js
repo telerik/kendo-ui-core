@@ -481,13 +481,20 @@ kendo_module({
                 var axis = axes[i];
                 var options = axis.options;
                 if (axis instanceof CategoryAxis && options.select && !options.vertical) {
+                    var min = 0;
+                    var max = options.categories.length - 1;
+
+                    if (axis instanceof DateCategoryAxis) {
+                        min = options.categories[min];
+                        max = options.categories[max];
+                    }
+
                     axis.selection = new Selection(chart, axis,
                         deepExtend({
-                            min: 0,
-                            max: axis.options.categories.length
-                        },
-                        axis.options.select
-                    ));
+                            min: min,
+                            max: max
+                        }, options.select)
+                    );
 
                     axis.selection.bind(SELECT_START, function(e) {
                         // TODO: Reference chart axis options?
@@ -8318,6 +8325,8 @@ kendo_module({
 
         set: function(from, to) {
             var that = this,
+                categoryAxis = that.categoryAxis,
+                categories = categoryAxis.options.categories,
                 options = that.options;
 
             from = clipValue(from, options.min, options.max);
@@ -8327,18 +8336,10 @@ kendo_module({
                 that.move(from, to);
             }
 
-            // TODO: Add rounding for date axes
-            /*
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.to
-            ));
-            */
+            if (that.categoryAxis instanceof DateCategoryAxis) {
+                from = categories[lteDateIndex(categories, toDate(from))];
+                to = categories[lteDateIndex(categories, to)];
+            }
 
             options.from = from;
             options.to = to;
