@@ -312,7 +312,7 @@
                 ok(autocomplete._loading);
             });
 
-            asyncTest("AutoComplete shows loading icon on progress", function() {
+            asyncTest("AutoComplete shows loading icon on progress", 1, function() {
                 var autocomplete = new AutoComplete(input);
 
                 autocomplete.dataSource.trigger("progress");
@@ -323,7 +323,7 @@
                 }, 200);
             });
 
-            asyncTest("AutoComplete hides loading icon on dataSource change", function() {
+            asyncTest("AutoComplete hides loading icon on dataSource change", 1, function() {
                 var autocomplete = new AutoComplete(input);
 
                 autocomplete._showBusy();

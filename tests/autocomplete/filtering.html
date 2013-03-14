@@ -35,7 +35,7 @@
                 }
             });
 
-            test("typing minLenght number of characters filters the datasource", function() {
+            asyncTest("typing minLenght number of characters filters the datasource", 2, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar"]
                 });
@@ -47,10 +47,9 @@
                 });
 
                 input.val("f").press("f".charCodeAt(0));
-                stop(1);
             });
 
-            test("popup is opened if there are results returned from the filter", function() {
+            asyncTest("popup is opened if there are results returned from the filter", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar"]
                 });
@@ -61,10 +60,9 @@
                 });
 
                 input.focus().val("f").press("f".charCodeAt(0));
-                stop(1);
             });
 
-            test("popup should close if input is empty", function() {
+            asyncTest("popup should close if input is empty", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar"]
                 });
@@ -74,7 +72,6 @@
                     start();
                 });
                 input.val("").press(8/*backspace*/);
-                stop(1);
             });
 
             test("search method supports case sensitive filtering", function() {

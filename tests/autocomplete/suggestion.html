@@ -354,13 +354,12 @@
                 }
             });
 
-            test("search should filter items using filter property", function() {
+            asyncTest("search should filter items using filter property", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar", "bafoo"],
                     filter: "contains"
                 });
 
-                stop(1);
 
                 autocomplete.dataSource.bind("change", function() {
                     equal(autocomplete.dataSource.view().length, 2);
@@ -371,13 +370,11 @@
                 autocomplete.search("foo");
             });
 
-            test("filtering honers dataTextField", function() {
+            asyncTest("filtering honors dataTextField", 2, function() {
                 var data = [{text: "foo"}, {text: "2"}], autocomplete = new AutoComplete(input, {
                     dataSource: data,
                     dataTextField: "text"
                 });
-
-                stop(1);
 
                 autocomplete.dataSource.bind("change", function() {
                     equal(autocomplete.dataSource.view().length, 1);
