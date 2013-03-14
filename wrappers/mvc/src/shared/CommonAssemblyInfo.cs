@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Telerik")]
+[assembly: AssemblyCompany("Telerik AD")]
 [assembly: AssemblyCopyright("Copyright © 2012-2013 Telerik AD")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
