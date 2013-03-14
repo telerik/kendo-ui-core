@@ -12,55 +12,41 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.fx.js"></script>
         <script src="../src/kendo.treeview.js"></script>
     </head>
     <body>
-        <div id='foo' style="height:125px; width: 300px; overflow-y:scroll; border-width:5px; border-style:solid;">
-            <div>Other stuff and fancy things</div>
-            <div id="treeview-left"> </div>
-        </div>
+        <div id="treeview"></div>
 
         <script>
-            $("#treeview-left").kendoTreeView({
-                dataSource: [
-                    { text: "Furniture", items: [
-                        { text: "Tables & Chairs"},
-                        { text: "Sofas"},
-                        { text: "Occasional Furniture"}
-                    ]},
-                    { text: "Decor", items: [
-                        { text: "Bed Linen"},
-                        { text: "Curtains & Blinds"},
-                        { text: "Carpets"}
-                    ]},
-                    { text: "Decor1", items: [
-                        { text: "Bed Linen1"},
-                        { text: "Curtains & Blinds1"},
-                        { text: "Carpets1"}
-                    ]},
-                    { text: "Decor2", items: [
-                        { text: "Bed Linen2"},
-                        { text: "Curtains & Blinds2"},
-                        { text: "Carpets2"}
-                    ]},
-                    { text: "Decor3", items: [
-                        { text: "Bed Linen3"},
-                        { text: "Curtains & Blinds3"},
-                        { text: "Carpets3"}
-                    ]},
-                    { text: "Decor4", items: [
-                        { text: "Bed Linen4"},
-                        { text: "Curtains & Blinds4"},
-                        { text: "Carpets4"}
-                    ]},
-                    { text: "Decor5", items: [
-                        { text: "Bed Linen5"},
-                        { text: "Curtains & Blinds5"},
-                        { text: "Carpets5"}
-                    ]}
-                ]
+            $(function () {
+                $("#treeview").kendoTreeView({
+                    dataSource: {
+                        data: [{
+                            hasChildren: false,
+                            Children: [],
+                            text: "foo"
+                        }],
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren",
+                                children: "Children"
+                            }
+                        }
+                    }
+                });
+
+                var treeview = $("#treeview").data('kendoTreeView');
+
+                treeview.append({
+                    hasChildren: true,
+                    Children: [ { text: "baz", hasChildren: false }],
+                    text: "bar"
+                });
+
+                treeview.append(treeview.findByText("foo"), treeview.findByText("bar"));
             });
         </script>
     </body>

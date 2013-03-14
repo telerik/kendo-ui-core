@@ -824,6 +824,34 @@
 
                 equal(treeview.find(".k-group:last").css("display"), "none");
             });
+
+            test("appending of items with children set", function() {
+                createTreeView({
+                    dataSource: {
+                        data: [{
+                            hasChildren: false,
+                            children: [],
+                            text: "foo"
+                        }],
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren",
+                                children: "children"
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.append({
+                    hasChildren: false,
+                    children: [],
+                    text: "bar"
+                });
+
+                treeviewObject.append(treeviewObject.findByText("foo"), treeviewObject.findByText("bar"));
+
+                equal(treeview.find(".k-item .k-item").length, 1);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

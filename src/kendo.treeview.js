@@ -1468,6 +1468,11 @@
 
                 if (parentNode != this.root) {
                     destDataSource = referenceDataItem.children;
+
+                    if (!destDataSource || $.isPlainObject(destDataSource) || destDataSource instanceof kendo.data.ObservableArray) {
+                        referenceDataItem._initChildren();
+                        destDataSource = referenceDataItem.children;
+                    }
                 }
             }
 
