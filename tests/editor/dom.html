@@ -14,17 +14,9 @@
 
         <script>
 
-            $("#Editor1").kendoEditor();
-
-            var Dom;
-            var enumerator;
-
-            module("DOM", {
-                setup: function() {
-                    editor = getEditor();
-                    Dom = kendo.ui.editor.Dom;
-                }
-            });
+            var editor = $("#Editor1").kendoEditor().data("kendoEditor");
+            var iframe = $(editor.wrapper).find("iframe");
+            var Dom = kendo.ui.editor.Dom;
 
             test('commonAncestor returns common ancestor for root nodes returns body', function() {
                 editor.value('<span>foo</span><span>bar</span>');
@@ -183,6 +175,23 @@
                 Dom.normalize(node);
                 equal(node.childNodes.length, 3);
                 equal(node.innerHTML.toLowerCase(), "foobar<span></span>foobar");
+            });
+
+            function scrollTop(editor) {
+                return editor.body.scrollTop || editor.document.documentElement.scrollTop;
+            }
+
+            test("scrollTo does not scroll if element is in view", function() {
+                editor.value("<div style='height: 24px'>foo</div><div style='height:24px'>bar</div>");
+                Dom.scrollTo(editor.body.firstChild);
+                equal(scrollTop(editor), 0);
+            });
+
+            test("scrollTo scrolls to last element", function() {
+                editor.value("<div style='height: 1000px'>foo</div><div style='height:24px'>bar</div>");
+                var bar = editor.body.lastChild;
+                Dom.scrollTo(bar);
+                equal(scrollTop(editor), 1024 - iframe.height());
             });
 
         </script>

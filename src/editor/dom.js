@@ -259,10 +259,17 @@ var Dom = {
     },
 
     scrollTo: function (node) {
-        var body = node.ownerDocument.body,
-            element = $(Dom.isDataNode(node) ? node.parentNode : node),
-            windowHeight = Dom.windowFromDocument(node.ownerDocument).innerHeight,
-            elementTop, elementHeight;
+        var element = $(Dom.isDataNode(node) ? node.parentNode : node),
+            wnd = Dom.windowFromDocument(node.ownerDocument),
+            windowHeight = wnd.innerHeight,
+            elementTop, elementHeight,
+            scrollContainer = (wnd.contentWindow || wnd).document || wnd.ownerDocument || wnd;
+
+        if (kendo.support.browser.webkit || scrollContainer.compatMode == 'BackCompat') {
+            scrollContainer = scrollContainer.body;
+        } else {
+            scrollContainer = scrollContainer.documentElement;
+        }
 
         if (Dom.name(element[0]) == "br") {
             element = element.parent();
@@ -271,8 +278,8 @@ var Dom = {
         elementTop = element.offset().top;
         elementHeight = element[0].offsetHeight;
 
-        if (elementHeight + elementTop > body.scrollTop + windowHeight) {
-            body.scrollTop = elementHeight + elementTop - windowHeight;
+        if (elementHeight + elementTop > scrollContainer.scrollTop + windowHeight) {
+            scrollContainer.scrollTop = elementHeight + elementTop - windowHeight;
         }
     },
 
