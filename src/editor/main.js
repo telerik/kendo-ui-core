@@ -774,12 +774,17 @@
 
             this.pendingFormats.clear();
 
+            var onerrorRe = /onerror\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/i;
+
             // handle null value passed as a parameter
             html = (html || "")
                 // Some browsers do not allow setting CDATA sections through innerHTML so we encode them
                 .replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->")
                 // Encode script tags to avoid execution and lost content (IE)
                 .replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script $1>$2<\/telerik:script>")
+                .replace(/<img([^>]*)>/ig, function(match) {
+                    return match.replace(onerrorRe, "");
+                })
                 // <img>\s+\w+ creates invalid nodes after cut in IE
                 .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
 
