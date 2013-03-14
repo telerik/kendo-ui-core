@@ -44,19 +44,26 @@ $autoComplete = new \Kendo\UI\AutoComplete('products');
 
 $autoComplete->dataSource($dataSource)
              ->dataTextField('ProductName')
-             ->ignoreCase(false);
+             ->ignoreCase(false)
+             ->attr('style', 'width:250px');
 
 ?>
-<div>
-    <label for="products">Choose product:</label>
+<div class="demo-section">
+    <h2>Products</h2>
 <?php
 echo $autoComplete->render();
 ?>
 </div>
-<style scoped="scoped">
-    .k-autocomplete
-    {
+<style scoped>
+    .demo-section {
         width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

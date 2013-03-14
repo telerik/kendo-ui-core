@@ -3,7 +3,7 @@ require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
 ?>
 <div class="demo-section">
-    <label for="countries">Choose country: </label>
+    <h2>Choose country: </h2>
 <?php
 
 $countries = array('Albania', 'Andorra', 'Armenia', 'Austria', 'Azerbaijan', 'Belarus', 'Belgium',
@@ -21,6 +21,8 @@ $autoComplete = new \Kendo\UI\AutoComplete('country');
 $autoComplete->dataSource($dataSource)
              ->filter('startswith')
              ->placeholder('Select country...')
+             ->attr('style', 'width: 250px')
+             ->attr('accesskey', 'w')
              ->separator(', ');
 
 echo $autoComplete->render();
@@ -74,4 +76,16 @@ echo $autoComplete->render();
         </span>
     </li>
 </ul>
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

@@ -25,8 +25,18 @@ $autoComplete->dataSource($dataSource)
     ->close('close')
     ->dataBound('dataBound');
 
+?>
+<div id="taxi">
+    <label for="states">Select a state in USA:</label>
+<?php
 echo $autoComplete->render();
 ?>
+</div>
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
+
 <script>
     function open() {
         kendoConsole.log("event: open");
@@ -51,5 +61,31 @@ echo $autoComplete->render();
         }
     };
 </script>
-<div class="console"></div>
+<style scoped>
+    #taxi {
+        width: 240px;
+        height: 160px;
+        padding: 80px 0 0 200px;
+        background: url('../../content/web/autocomplete/taxi.png') transparent no-repeat 0 0;
+        margin: 20px auto;
+    }
+    #taxi label {
+        display: block;
+        color: #333;
+        padding-bottom: 5px;
+    }
+    .k-autocomplete {
+        display: block;
+        clear: left;
+        width: 200px;
+        vertical-align: middle;
+    }
+    .demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>
