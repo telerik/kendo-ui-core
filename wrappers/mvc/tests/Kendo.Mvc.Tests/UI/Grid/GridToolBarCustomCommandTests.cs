@@ -43,6 +43,28 @@ namespace Kendo.Mvc.UI.Html.Tests
             button.HtmlAttributes.ShouldBeSameAs(command.HtmlAttributes);
         }
 
+        [Fact]
+        public void Should_set_url()
+        {
+            command.Action("foo", "bar", new { id = 1 });
+            urlBuilder.Setup(u => u.Url(It.IsAny<INavigatable>())).Returns("bar/foo/1");
+
+            var button = command.CreateDisplayButtons(urlBuilder.Object, htmlHelper.Object).First();
+
+            button.Url(null).ShouldEqual("bar/foo/1");
+        }
+
+        [Fact]
+        public void Should_set_url_with_template_code_expression()
+        {
+            command.Action("foo", "bar", new { id = "#=foo#" });
+
+            urlBuilder.Setup(u => u.Url(It.IsAny<INavigatable>())).Returns("bar/foo/%23%3Dfoo%23");
+            var button = command.CreateDisplayButtons(urlBuilder.Object, htmlHelper.Object).First();
+
+            button.Url(null).ShouldEqual("bar/foo/#=foo#");
+        }
+
         //TODO: Implement command button image html attributes
         //[Fact]
         //public void Should_set_image_html_attributes()
