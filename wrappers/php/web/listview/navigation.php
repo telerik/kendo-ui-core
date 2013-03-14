@@ -38,57 +38,58 @@ require_once '../../include/header.php';
 
 ?>
 
-<script type="text/x-kendo-tmpl" id="template">
-    <div class="product-view">
-        <dl>
-            <dt>Product Name</dt>
-            <dd>#:ProductName#</dd>
-            <dt>Unit Price</dt>
-            <dd>#:kendo.toString(UnitPrice, "c")#</dd>
-            <dt>Units In Stock</dt>
-            <dd>#:UnitsInStock#</dd>
-            <dt>Discontinued</dt>
-            <dd>#:Discontinued#</dd>
-        </dl>
-        <div class="edit-buttons">
-            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>
-            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span>Delete</a>
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="product-view k-widget">
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span></a>
+                <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span></a>
+            </div>
+            <dl>
+                <dt>Product Name</dt>
+                <dd>#:ProductName#</dd>
+                <dt>Unit Price</dt>
+                <dd>#:kendo.toString(UnitPrice, "c")#</dd>
+                <dt>Units In Stock</dt>
+                <dd>#:UnitsInStock#</dd>
+                <dt>Discontinued</dt>
+                <dd>#:Discontinued#</dd>
+            </dl>
         </div>
-    </div>
-</script>
+    </script>
 
-<script type="text/x-kendo-tmpl" id="editTemplate">
-    <div class="product-view">
-        <dl>
-            <dt>Product Name</dt>
-            <dd>
-                <input type="text" data-bind="value:ProductName" name="ProductName" required="required" validationMessage="required" />
-                <span data-for="ProductName" class="k-invalid-msg"></span>
-            </dd>
-            <dt>Unit Price</dt>
-            <dd>
-                <input type="text" data-bind="value:UnitPrice" data-role="numerictextbox" data-type="number" name="UnitPrice" required="required" min="1" validationMessage="required" />
-                <span data-for="UnitPrice" class="k-invalid-msg"></span>
-            </dd>
-            <dt>Units In Stock</dt>
-            <dd>
-                <input type="text" data-bind="value:UnitsInStock" data-role="numerictextbox" name="UnitsInStock" required="required" data-type="number" min="0" validationMessage="required" />
-                <span data-for="UnitsInStock" class="k-invalid-msg"></span>
-            </dd>
-            <dt>Discontinued</dt>
-            <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
-        </dl>
-        <div class="edit-buttons">
-            <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span>Save</a>
-            <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span>Cancel</a>
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+        <div class="product-view k-widget">
+            <div class="edit-buttons">
+                <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
+                <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
+            </div>
+            <dl>
+                <dt>Product Name</dt>
+                <dd>
+                    <input type="text" class="k-textbox" data-bind="value:ProductName" name="ProductName" required="required" validationMessage="required" />
+                    <span data-for="ProductName" class="k-invalid-msg"></span>
+                </dd>
+                <dt>Unit Price</dt>
+                <dd>
+                    <input type="text" data-bind="value:UnitPrice" data-role="numerictextbox" data-type="number" name="UnitPrice" required="required" min="1" validationMessage="required" />
+                    <span data-for="UnitPrice" class="k-invalid-msg"></span>
+                </dd>
+                <dt>Units In Stock</dt>
+                <dd>
+                    <input type="text" data-bind="value:UnitsInStock" data-role="numerictextbox" name="UnitsInStock" required="required" data-type="number" min="0" validationMessage="required" />
+                    <span data-for="UnitsInStock" class="k-invalid-msg"></span>
+                </dd>
+                <dt>Discontinued</dt>
+                <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
+            </dl>
         </div>
-    </div>
-</script>
+    </script>
 
-<div class="k-toolbar k-grid-toolbar">
+<div class="demo-section">
     <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
 </div>
 
+<div class="demo-section">
 <?php
 
     $transport = new \Kendo\Data\DataSourceTransport();
@@ -174,6 +175,7 @@ require_once '../../include/header.php';
 
     echo $listview->render();
 ?>
+</div>
 
 <script>
     $(function() {
@@ -284,87 +286,81 @@ require_once '../../include/header.php';
 </ul>
 
 
-<style scoped>
-    .product-view
-    {
-        float: left;
-        width: 320px;
-        margin: 5px;
-        padding: 3px;
-        -moz-box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        -webkit-box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        border-top: 1px solid rgba(0,0,0,0.1);
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        border-radius: 8px;
-    }
+ <style scoped>
+.demo-section {
+    width: 605px;
+}
+.product-view
+{
+    float: left;
+    position: relative;
+    width: 301px;
+    margin: -1px -1px 0 0;
+}
 
-    .product-view dl
-    {
-        margin: 10px 0;
-        padding: 0;
-        min-width: 0;
-    }
-    .product-view dt, dd
-    {
-        float: left;
-        margin: 0;
-        padding: 0;
-        height: 30px;
-        line-height: 30px;
-    }
-    .product-view dt
-    {
-        clear: left;
-        padding: 0 5px 0 15px;
-        text-align: right;
-        opacity: 0.6;
-        width: 100px;
-    }
-    .k-listview
-    {
-        border: 0;
-        padding: 0;
-        min-width: 0;
-    }
-    .k-listview:after, .product-view dl:after
-    {
-        content: ".";
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
-    }
-    .edit-buttons
-    {
-        text-align: right;
-        padding: 5px;
-        min-width: 100px;
-        border-top: 1px solid rgba(0,0,0,0.1);
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        border-radius: 8px;
-    }
-
-    .k-toolbar, #listView, .k-pager-wrap
-    {
-        width: 660px;
-        margin: 0 auto;
-        -webkit-border-radius: 11px;
-        -moz-border-radius: 11px;
-        border-radius: 11px;
-    }
-    #listView
-    {
-        width: 674px;
-    }
-    span.k-invalid-msg
-    {
-        position: absolute;
-        margin-left: 160px;
-        margin-top: -26px;
-    }
+.product-view dl
+{
+    margin: 10px 0;
+    padding: 0;
+    min-width: 0;
+}
+.product-view dt, dd
+{
+    float: left;
+    margin: 0;
+    padding: 3px;
+    height: 26px;
+    width: 160px;
+    line-height: 26px;
+    overflow: hidden;
+}
+.product-view dt
+{
+    clear: left;
+    padding: 3px 5px 3px 0;
+    text-align: right;
+    opacity: 0.6;
+    width: 100px;
+}
+.k-listview
+{
+    border: 0;
+    padding: 0;
+    min-width: 605px;
+    min-height: 298px;
+}
+.k-listview:after, .product-view dl:after
+{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.edit-buttons
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 26px;
+    height: 146px;
+    padding: 2px 2px 0 3px;
+    background-color: rgba(0,0,0,0.1);
+}
+.edit-buttons .k-button
+{
+    width: 26px;
+    margin-bottom: 1px;
+}
+.k-pager-wrap
+{
+    border-top: 0;
+}
+span.k-invalid-msg
+{
+    position: absolute;
+    margin-left: 6px;
+}
 </style>
 
 <?php require_once '../../include/footer.php'; ?>

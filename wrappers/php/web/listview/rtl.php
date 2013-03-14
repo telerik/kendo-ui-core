@@ -26,7 +26,7 @@ require_once '../../include/header.php';
     </div>
 </script>
 
-<div class="k-rtl">
+<div class="demo-section k-rtl">
 
 <?php
 
@@ -79,22 +79,26 @@ require_once '../../include/header.php';
 
 </div>
 
-
 <style scoped>
+    .demo-section {
+        padding: 15px;
+        width: 692px;
+    }
+    .demo-section h2 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    .demo-section .console {
+        margin: 0;
+    }
     .product
     {
         float: right;
-        width: 270px;
+        width: 220px;
         height: 110px;
-        margin: 5px;
+        margin: 0;
         padding: 5px;
-        -moz-box-shadow: inset 0 0 30px rgba(0,0,0,0.15);
-        -webkit-box-shadow: inset 0 0 30px rgba(0,0,0,0.15);
-        box-shadow: inset 0 0 30px rgba(0,0,0,0.15);
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        background-image: none;
         cursor: pointer;
     }
     .product img
@@ -102,32 +106,21 @@ require_once '../../include/header.php';
         float: right;
         width: 110px;
         height: 110px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
     }
     .product h3
     {
-        margin: 10px 0 0 0;
-        padding: 10px 20px 10px 10px;
-        font-size: 1em;
+        margin: 0;
+        padding: 10px 10px 0 0;
+        font-size: .9em;
+        overflow: hidden;
+        font-weight: normal;
         float: right;
-        max-width: 120px;
+        max-width: 100px;
         text-transform: uppercase;
     }
-    .k-state-selected h3
+	.k-pager-wrap
     {
-        color: #fff;
-        background-color: rgba(0,0,0,0.4);
-        -moz-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
-        -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
-        box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
-        -moz-border-radius-topright: 5px;
-        -moz-border-radius-bottomright: 5px;
-        -webkit-border-top-right-radius: 5px;
-        -webkit-border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        border-top: 0;
     }
     .k-listview:after
     {
@@ -137,11 +130,11 @@ require_once '../../include/header.php';
         clear: both;
         visibility: hidden;
     }
-    .k-listview
+	.k-listview
     {
-        border: 0;
-        padding: 0 0 20px 0;
-        min-width: 0;
+        padding: 0;
+        min-width: 690px;
+        min-height: 360px;
     }
 </style>
 
