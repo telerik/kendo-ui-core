@@ -402,6 +402,8 @@ var Clipboard = Class.extend({
             startRestorePoint = new RestorePoint(range),
             clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: bom });
 
+        dom.persistScrollTop(editor.document);
+
         editor.body.appendChild(clipboardNode);
 
         if (editor.body.createTextRange) {
@@ -447,6 +449,7 @@ var Clipboard = Class.extend({
             editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
+
             Editor.EditorUtils.select(editor);
         });
     },
@@ -535,6 +538,7 @@ var Clipboard = Class.extend({
 
         dom.normalize(range.commonAncestorContainer);
         caret.style.display = 'inline';
+        dom.restoreScrollTop(editor.document);
         dom.scrollTo(caret);
         marker.removeCaret(range);
         selectRange(range);

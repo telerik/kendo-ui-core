@@ -64,7 +64,8 @@ var whitespace = /^\s+$/,
     openTag = /</g,
     closeTag = />/g,
     nbsp = /\u00a0/g,
-    bom = /\ufeff/g;
+    bom = /\ufeff/g,
+    persistedScrollTop;
     var cssAttributes =
            ("color,padding-left,padding-right,padding-top,padding-bottom," +
             "background-color,background-attachment,background-image,background-position,background-repeat," +
@@ -258,11 +259,8 @@ var Dom = {
         return inline[Dom.name(node)];
     },
 
-    scrollTo: function (node) {
-        var element = $(Dom.isDataNode(node) ? node.parentNode : node),
-            wnd = Dom.windowFromDocument(node.ownerDocument),
-            windowHeight = wnd.innerHeight,
-            elementTop, elementHeight,
+    scrollContainer: function(doc) {
+        var wnd = Dom.windowFromDocument(doc),
             scrollContainer = (wnd.contentWindow || wnd).document || wnd.ownerDocument || wnd;
 
         if (kendo.support.browser.webkit || scrollContainer.compatMode == 'BackCompat') {
@@ -270,6 +268,16 @@ var Dom = {
         } else {
             scrollContainer = scrollContainer.documentElement;
         }
+
+        return scrollContainer;
+    },
+
+    scrollTo: function (node) {
+        var element = $(Dom.isDataNode(node) ? node.parentNode : node),
+            wnd = Dom.windowFromDocument(node.ownerDocument),
+            windowHeight = wnd.innerHeight,
+            elementTop, elementHeight,
+            scrollContainer = Dom.scrollContainer(node.ownerDocument);
 
         if (Dom.name(element[0]) == "br") {
             element = element.parent();
@@ -281,6 +289,14 @@ var Dom = {
         if (elementHeight + elementTop > scrollContainer.scrollTop + windowHeight) {
             scrollContainer.scrollTop = elementHeight + elementTop - windowHeight;
         }
+    },
+
+    persistScrollTop: function(doc) {
+        persistedScrollTop = Dom.scrollContainer(doc).scrollTop;
+    },
+
+    restoreScrollTop: function(doc) {
+        Dom.scrollContainer(doc).scrollTop = persistedScrollTop;
     },
 
     insertAt: function (parent, newElement, position) {
