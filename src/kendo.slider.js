@@ -1103,7 +1103,7 @@ kendo_module({
                 positionTop = 0,
                 positionLeft = 0,
                 dragHandleOffset = kendo.getOffset(that.dragHandle),
-                margin = 4,
+                margin = 8,
                 callout = that.tooltipDiv.find(".k-callout"),
                 dragHandles,
                 firstDragHandleOffset,
