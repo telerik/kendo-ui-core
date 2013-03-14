@@ -250,20 +250,20 @@ kendo_module({
 
             that.title(options.title);
 
-            if (options.width) {
-                wrapper.width(options.width);
-            }
-
-            if (options.height) {
-                wrapper.height(options.height);
-            }
-
             each(["minWidth","minHeight","maxWidth","maxHeight"], function(_, prop) {
                 var value = options[prop];
                 if (value && value != Infinity) {
                     element.css(prop, value);
                 }
             });
+
+            if (options.width) {
+                wrapper.width(constrain(options.width, options.minWidth, options.maxWidth));
+            }
+
+            if (options.height) {
+                wrapper.height(constrain(options.height, options.minHeight, options.maxHeight));
+            }
 
             if (!options.visible) {
                 wrapper.hide();
