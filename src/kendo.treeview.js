@@ -1480,7 +1480,7 @@ kendo_module({
                 if (parentNode != this.root) {
                     destDataSource = referenceDataItem.children;
 
-                    if (!destDataSource || $.isPlainObject(destDataSource) || destDataSource instanceof kendo.data.ObservableArray) {
+                    if (!destDataSource || !(destDataSource instanceof HierarchicalDataSource)) {
                         referenceDataItem._initChildren();
                         destDataSource = referenceDataItem.children;
                     }
