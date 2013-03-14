@@ -18,6 +18,7 @@
 </head>
 <body>
 
+<script type="text/x-kendo-template" id="panelbarHTML">
     <ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; visibility: hidden; position: absolute;">
         <li><a>Pure ASP.NET MVC components</a>
             <div></div>
@@ -35,9 +36,16 @@
             <div></div>
         </li>
     </ul>
+</script>
 
     <script>
-        var panelbar = $("#PanelBar1").kendoPanelBar({
+        QUnit.config.reorder = false;
+
+        var panelbar;
+
+        function createPanelBar() {
+            $(document.body).append($("#panelbarHTML").html());
+            panelbar = $("#PanelBar1").kendoPanelBar({
                 animation: false,
                 contentUrls: [
                     "AjaxView1.html",
@@ -47,14 +55,26 @@
                     "AjaxView1.html"
                 ]
             }).data("kendoPanelBar");
+        }
 
-        QUnit.config.reorder = false;
-
+        function destroyPanelBar() {
+            panelbar.destroy();
+            panelbar = null;
+            $("#PanelBar1").remove();
+        }
+        
         function getRootItem(index) {
             return panelbar.element.find(".k-header").parent().eq(index).children(".k-link");
         }
 
-        module("AjaxLoading");
+        module("AjaxLoading", {
+            setup: function() {
+                createPanelBar();
+            },
+            teardown: function() {
+                destroyPanelBar();
+            }
+        });
 
         test("PanelBar renders anchor instead of span if contentUrl", function() {
             var children = $("#PanelBar1").find("li:last").children();
@@ -106,19 +126,22 @@
         asyncTest("clicking should make item active", 1, function() {
             var item = getRootItem(2);
 
-            panelbar.bind("contentLoad", function() {
+            setTimeout(function() {
                 start();
                 ok(item.parent().hasClass("k-state-active"));
                 panelbar.unbind("contentLoad");
-            });
+            }, 300);
 
             item.trigger("click");
         });
 
-        test("initially expanded items fetch their AJAX content", 1, function() {
+        asyncTest("initially expanded items fetch their AJAX content", 1, function() {
             var item = getRootItem(4);
 
-            equal(item.parent().find(".k-content").css("display"), "block");
+            setTimeout(function() {
+                start();
+                equal(item.parent().find(".k-content").css("display"), "block");
+            }, 300);
         });
     </script>
 
