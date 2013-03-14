@@ -8245,23 +8245,27 @@ kendo_module({
             selection._start(e);
 
             if (selection._state) {
+                range = selection._state.range;
+
                 if (math.abs(delta) > 1) {
                     delta *= ZOOM_ACCELERATION;
                 }
 
                 if (zDir !== RIGHT) {
-                    selection.expandLeft(delta);
+                    range.from = math.min(options.from - delta, options.to - 1);
                 }
 
                 if (zDir !== LEFT) {
-                    selection.expandRight(delta);
+                    range.to = math.max(options.to + delta, options.from + 1);
                 }
+
+                selection.set(range.from, range.to);
 
                 selection.trigger(SELECT, {
                     delta: delta,
                     originalEvent: e,
-                    from: options.from,
-                    to: options.to
+                    from: range.from,
+                    to: range.to
                 });
 
                 if (selection._mwTimeout) {
@@ -8332,26 +8336,6 @@ kendo_module({
 
             options.from = from;
             options.to = to;
-        },
-
-        expandLeft: function(delta) {
-            var selection = this,
-                options = selection.options;
-
-            selection.set(
-                math.min(options.from - delta, options.to - 1),
-                options.to
-            );
-        },
-
-        expandRight: function(delta) {
-            var selection = this,
-                options = selection.options;
-
-            selection.set(
-                options.from,
-                math.max(options.to + delta, options.from + 1)
-            );
         },
 
         getValueAxis: function(categoryAxis) {

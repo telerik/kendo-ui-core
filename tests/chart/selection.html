@@ -43,7 +43,7 @@
 
                 function stubArgs(x, y, options) {
                     return deepExtend({
-                        event: { target: $("<div class='k-rightHandle' />") },
+                        event: { target: $("<div class='k-leftHandle' />") },
                         x: { location: x || 0 },
                         y: { location: y || 0 },
                         preventDefault: function() {}
@@ -293,6 +293,16 @@
                     selection._end();
                 });
 
+                test("selectEnd updates final range on UserEvents end", 1, function() {
+                    chart.bind("selectEnd", function(e) {
+                        equal(selection.options.from, 2);
+                    });
+
+                    selection._start(stubArgs());
+                    selection._move(stubArgs(10, 0));
+                    selection._end();
+                });
+
                 asyncTest("selectEnd fires after mousewheel", function() {
                     chart.bind("selectEnd", function(e) {
                         ok(true);
@@ -300,6 +310,16 @@
                     });
 
                     selection._mousewheel({ originalEvent: { detail: 3 } });
+                });
+
+                asyncTest("selectEnd updates final after mousewheel", function() {
+                    chart.bind("selectEnd", function(e) {
+                        equal(selection.options.from, 1);
+                        equal(selection.options.to, 2);
+                        start();
+                    });
+
+                    selection._mousewheel({ originalEvent: { detail: -3 } });
                 });
 
             })();
