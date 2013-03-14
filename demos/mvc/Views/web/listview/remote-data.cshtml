@@ -1,6 +1,7 @@
 <div id="example" class="k-content">    
     <div class="demo-section">    
-        <div class="twit-reader">
+        <h2>Results for #kendoui</h2>
+	<div class="twit-reader">
             <div id="listView"></div>
         </div>
     </div>
@@ -43,57 +44,68 @@
     </script>
 
     <style scoped>
-        .twit-reader 
+        .demo-section {
+	    width: 410px;
+	    padding: 30px;
+	}
+	.demo-section h2 {
+	    font-size: 1.2em;
+	    margin-bottom: 10px;
+	    text-transform: uppercase;
+	}
+	.twit-reader 
         {
-        	width: 340px;
-        	margin: 0 auto;
-        	padding: 0;
-        	border: 0;
-        	border: 1px solid rgba(0,0,0,0.1);
-        	height: 400px;
-        	overflow: auto;
+            width: 410px;
+            margin: 0 auto;
+            padding: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+            height: 400px;
+            overflow: auto;
             -webkit-transform: translatez(0);
             position:relative; /*IE7*/
         }
         .k-listview 
         {
-        	padding: 0;
-        	border: 0;
+            padding: 0;
+            border: 0;
         }
         .twit 
         {
-        	width: 300px;
-        	height: 80px;
-        	margin: 0;
-        	padding: 10px;
-        	border-top: 1px solid rgba(255,255,255,0.1);
-        	border-right: 1px solid rgba(0,0,0,0.1);
-        	border-bottom: 1px solid rgba(0,0,0,0.1);
-        	border-left: 1px solid rgba(255,255,255,0.1);
-
+            width: 370px;
+            height: 54px;
+            margin: 0;
+            padding: 10px;
+            border-top: 1px solid rgba(255,255,255,1);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-left: 1px solid rgba(255,255,255,0.1);
+	    
+	    background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.10) 100%);
+	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.10)));
+	    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+	    background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+	    background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+	    background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
         }
         .twit img 
         {
-        	border: 3px solid rgba(0,0,0,0.1);
-        	-webkit-border-radius: 27px;
-            -moz-border-radius: 27px;
-            border-radius: 27px;
+            border: 3px solid rgba(0,0,0,0.1);
             float: left;
         }
         .twit a:hover img 
         {
-        	border: 3px solid rgba(150,150,150,0.7);
+            border: 3px solid #00acec;
         }
         .twit p
         {
-        	float: left;
-        	margin: 0;
-        	padding: 0 0 0 10px;
-        	width: 230px;
+            float: left;
+            margin: 0;
+            padding: 0 0 0 10px;
+            width: 300px;
         }
         .twit:after
         {
-        	content: ".";
+            scontent: ".";
             display: block;
             height: 0;
             clear: both;
