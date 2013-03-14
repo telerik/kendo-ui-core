@@ -375,6 +375,26 @@
                 equal($("#kendo-template").length, 1);
             });
 
+            test("width is constrained by minWidth", function() {
+                var dialog = createWindow({ minWidth: 100, width: 90 });
+                equal(dialog.wrapper.width(), 100);
+            });
+
+            test("width is constrained by maxWidth", function() {
+                var dialog = createWindow({ maxWidth: 100, width: 190 });
+                equal(dialog.wrapper.width(), 100);
+            });
+
+            test("height is constrained by minHeight", function() {
+                var dialog = createWindow({ minHeight: 100, height: 90 });
+                equal(dialog.wrapper.height(), 100);
+            });
+
+            test("height is constrained by maxHeight", function() {
+                var dialog = createWindow({ maxHeight: 100, height: 190 });
+                equal(dialog.wrapper.height(), 100);
+            });
+
             var form;
 
             module("appendTo option", {
