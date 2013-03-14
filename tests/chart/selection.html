@@ -25,7 +25,8 @@
             (function() {
                 var chart,
                     categoryAxis,
-                    selection;
+                    selection,
+                    sOpts;
 
                 function setup(options) {
                     chart = createChart(deepExtend({
@@ -39,6 +40,9 @@
 
                     categoryAxis = chart._plotArea.categoryAxis;
                     selection = categoryAxis.selection;
+                    if (selection) {
+                        sOpts = selection.options;
+                    }
                 }
 
                 function stubArgs(x, y, options) {
@@ -106,27 +110,40 @@
                 });
 
                 test("selection shrinks left on mousewheel up", function() {
-                    selection.options.zoomDirection = "left";
+                    sOpts.mousewheel.zoom = "left";
                     selection._mousewheel({
                         originalEvent: {
                             detail: -3
                         }
                     });
 
-                    equal(selection.options.from, 41);
-                    equal(selection.options.to, 60);
+                    equal(sOpts.from, 41);
+                    equal(sOpts.to, 60);
+                });
+
+                test("selection shrinks left on mousewheel down", function() {
+                    sOpts.mousewheel.zoom = "left";
+                    sOpts.mousewheel.reverse = true;
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 3
+                        }
+                    });
+
+                    equal(sOpts.from, 41);
+                    equal(sOpts.to, 60);
                 });
 
                 test("selection shrinks right on mousewheel up", function() {
-                    selection.options.zoomDirection = "right";
+                    sOpts.mousewheel.zoom = "right";
                     selection._mousewheel({
                         originalEvent: {
                             detail: -3
                         }
                     });
 
-                    equal(selection.options.from, 40);
-                    equal(selection.options.to, 59);
+                    equal(sOpts.from, 40);
+                    equal(sOpts.to, 59);
                 });
 
                 test("selection shrinks both sides on mousewheel up", function() {
@@ -136,8 +153,8 @@
                         }
                     });
 
-                    equal(selection.options.from, 41);
-                    equal(selection.options.to, 59);
+                    equal(sOpts.from, 41);
+                    equal(sOpts.to, 59);
                 });
 
                 test("selection shrinking accelerates", function() {
@@ -147,31 +164,44 @@
                         }
                     });
 
-                    equal(selection.options.from, 59);
+                    equal(sOpts.from, 59);
                 });
 
                 test("selection expands left on mousewheel down", function() {
-                    selection.options.zoomDirection = "left";
+                    sOpts.mousewheel.zoom = "left";
                     selection._mousewheel({
                         originalEvent: {
                             detail: 3
                         }
                     });
 
-                    equal(selection.options.from, 39);
-                    equal(selection.options.to, 60);
+                    equal(sOpts.from, 39);
+                    equal(sOpts.to, 60);
+                });
+
+                test("selection expands left on mousewheel up", function() {
+                    sOpts.mousewheel.zoom = "left";
+                    sOpts.mousewheel.reverse = true;
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: -3
+                        }
+                    });
+
+                    equal(sOpts.from, 39);
+                    equal(sOpts.to, 60);
                 });
 
                 test("selection expands right on mousewheel up", function() {
-                    selection.options.zoomDirection = "right";
+                    sOpts.mousewheel.zoom = "right";
                     selection._mousewheel({
                         originalEvent: {
                             detail: 3
                         }
                     });
 
-                    equal(selection.options.from, 40);
-                    equal(selection.options.to, 61);
+                    equal(sOpts.from, 40);
+                    equal(sOpts.to, 61);
                 });
 
                 test("selection expands both on mousewheel up", function() {
@@ -181,8 +211,8 @@
                         }
                     });
 
-                    equal(selection.options.from, 39);
-                    equal(selection.options.to, 61);
+                    equal(sOpts.from, 39);
+                    equal(sOpts.to, 61);
                 });
 
                 test("selection expansion accelerates", function() {
@@ -192,7 +222,7 @@
                         }
                     });
 
-                    equal(selection.options.from, 10);
+                    equal(sOpts.from, 10);
                 });
 
                 // ------------------------------------------------------------
@@ -295,7 +325,7 @@
 
                 test("selectEnd updates final range on UserEvents end", 1, function() {
                     chart.bind("selectEnd", function(e) {
-                        equal(selection.options.from, 2);
+                        equal(sOpts.from, 2);
                     });
 
                     selection._start(stubArgs());
@@ -314,8 +344,8 @@
 
                 asyncTest("selectEnd updates final after mousewheel", function() {
                     chart.bind("selectEnd", function(e) {
-                        equal(selection.options.from, 1);
-                        equal(selection.options.to, 2);
+                        equal(sOpts.from, 1);
+                        equal(sOpts.to, 2);
                         start();
                     });
 

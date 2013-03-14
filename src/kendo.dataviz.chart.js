@@ -8055,7 +8055,9 @@ kendo_module({
 
         options: {
             visible: true,
-            zoomDirection: BOTH,
+            mousewheel: {
+                zoom: BOTH
+            },
             min: MIN_VALUE,
             max: MAX_VALUE
         },
@@ -8222,7 +8224,7 @@ kendo_module({
         _mousewheel: function(e) {
             var selection = this,
                 options = selection.options,
-                zDir = options.zoomDirection,
+                zDir = options.mousewheel.zoom,
                 origEvent = e.originalEvent,
                 prevented,
                 delta = 0;
@@ -8249,6 +8251,10 @@ kendo_module({
 
                 if (math.abs(delta) > 1) {
                     delta *= ZOOM_ACCELERATION;
+                }
+
+                if (options.mousewheel.reverse) {
+                    delta *= -1;
                 }
 
                 if (zDir !== RIGHT) {
