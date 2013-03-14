@@ -501,19 +501,16 @@ kendo_module({
                     selections.push(selection);
 
                     selection.bind(SELECT_START, function(e) {
-                        // TODO: Reference chart axis options?
                         e.axis = this.categoryAxis.options;
                         return chart.trigger(SELECT_START, e);
                     });
 
                     selection.bind(SELECT, function(e) {
-                        // TODO: Reference chart axis options?
                         e.axis = this.categoryAxis.options;
                         return chart.trigger(SELECT, e);
                     });
 
                     selection.bind(SELECT_END, function(e) {
-                        // TODO: Reference chart axis options?
                         e.axis = this.categoryAxis.options;
                         return chart.trigger(SELECT_END, e);
                     });
@@ -1065,8 +1062,7 @@ kendo_module({
 
         destroy: function() {
             var chart = this,
-                dataSource = chart.dataSource,
-                selections = chart._selections;
+                dataSource = chart.dataSource;
 
             chart.element.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
@@ -1074,12 +1070,6 @@ kendo_module({
 
             if (chart._userEvents) {
                 chart._userEvents.destroy();
-            }
-
-            if (selections) {
-                while (selections.length > 0) {
-                    selections.shift().destroy();
-                }
             }
 
             chart._destroyView();
@@ -1092,7 +1082,8 @@ kendo_module({
                 pool = dataviz.IDPool.current,
                 model = chart._model,
                 view = chart._view,
-                viewElement = chart._viewElement;
+                viewElement = chart._viewElement,
+                selections = chart._selections;
 
             if (model) {
                 model.destroy();
@@ -1106,6 +1097,12 @@ kendo_module({
                 $("[id]", viewElement).each(function() {
                     pool.free($(this).attr("id"));
                 });
+            }
+
+            if (selections) {
+                while (selections.length > 0) {
+                    selections.shift().destroy();
+                }
             }
         }
     });
@@ -7987,6 +7984,7 @@ kendo_module({
             that.chart = chart;
             that.chartElement = chartElement;
             that.categoryAxis = categoryAxis;
+            that._dateAxis = that.categoryAxis instanceof DateCategoryAxis,
             that.valueAxis = valueAxis;
 
             that.template = Selection.template;
@@ -8122,6 +8120,7 @@ kendo_module({
             var that = this,
                 state = that._state,
                 options = that.options,
+                categories = that.categoryAxis.options.categories,
                 fullSpan = options.max - options.min,
                 delta = state.startLocation - e.x.location,
                 range = state.range,
@@ -8158,6 +8157,11 @@ kendo_module({
                     options.max
                 );
                 range.from = math.min(range.to - 1, range.from);
+            }
+
+            if (that._dateAxis) {
+                range.from = categories[lteDateIndex(categories, toDate(range.from))];
+                range.to = categories[lteDateIndex(categories, toDate(range.to))];
             }
 
             if (range.from !== oldRange.from || range.to !== oldRange.to) {
@@ -8240,8 +8244,9 @@ kendo_module({
         },
 
         _mousewheel: function(e) {
-            var selection = this,
-                options = selection.options,
+            var that = this,
+                options = that.options,
+                categories = that.categoryAxis.options.categories,
                 zDir = options.mousewheel.zoom,
                 origEvent = e.originalEvent,
                 prevented,
@@ -8262,10 +8267,10 @@ kendo_module({
             // TODO: Refactor
             e.event = { target: null,  };
             e.x = { location: 0 };
-            selection._start(e);
+            that._start(e);
 
-            if (selection._state) {
-                range = selection._state.range;
+            if (that._state) {
+                range = that._state.range;
 
                 if (math.abs(delta) > 1) {
                     delta *= ZOOM_ACCELERATION;
@@ -8276,30 +8281,58 @@ kendo_module({
                 }
 
                 if (zDir !== RIGHT) {
-                    range.from = math.min(options.from - delta, options.to - 1);
+                    if (that._dateAxis) {
+                        var fromIndex = math.min(
+                            lteDateIndex(categories, options.from) - delta,
+                            lteDateIndex(categories, options.to) - 1
+                        );
+                        range.from = categories[fromIndex];
+                    } else {
+                        range.from = math.min(options.from - delta, options.to - 1);
+                    }
                 }
 
                 if (zDir !== LEFT) {
-                    range.to = math.max(options.to + delta, options.from + 1);
+                    if (that._dateAxis) {
+                        var toIndex = math.min(
+                            lteDateIndex(categories, options.to) + delta,
+                            lteDateIndex(categories, options.from) + 1
+                        );
+                        range.to = categories[toIndex];
+                    } else {
+                        range.to = math.max(options.to + delta, options.from + 1);
+                    }
                 }
 
-                selection.set(range.from, range.to);
+                that.set(range.from, range.to);
 
-                selection.trigger(SELECT, {
+                that.trigger(SELECT, {
                     delta: delta,
                     originalEvent: e,
                     from: range.from,
                     to: range.to
                 });
 
-                if (selection._mwTimeout) {
-                    clearTimeout(selection._mwTimeout);
+                if (that._mwTimeout) {
+                    clearTimeout(that._mwTimeout);
                 }
 
-                selection._mwTimeout = setTimeout(function() {
-                    selection._end();
+                that._mwTimeout = setTimeout(function() {
+                    that._end();
                 }, MOUSEWHEEL_DELAY);
             }
+        },
+
+        _categorySlot: function(value) {
+            var that = this,
+                categoryAxis = this.categoryAxis,
+                categories = categoryAxis.options.categories;
+
+            if (that._dateAxis) {
+                value = lteDateIndex(categories, value);
+            }
+
+            return categoryAxis.getSlot(value);
         },
 
         move: function(from, to) {
@@ -8314,12 +8347,12 @@ kendo_module({
                 box,
                 distance;
 
-            box = categoryAxis.getSlot(from);
+            box = that._categorySlot(from);
             leftMaskWidth = round(box.x1 - offset.left + padding.left);
             that.leftMask.width(leftMaskWidth);
             that.selection.css("left", leftMaskWidth);
 
-            box = categoryAxis.getSlot(to);
+            box = that._categorySlot(to);
             rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
             that.rightMask.width(rightMaskWidth);
             distance = options.width - rightMaskWidth;
@@ -8347,7 +8380,7 @@ kendo_module({
                 that.move(from, to);
             }
 
-            if (that.categoryAxis instanceof DateCategoryAxis) {
+            if (that._dateAxis) {
                 from = categories[lteDateIndex(categories, toDate(from))];
                 to = categories[lteDateIndex(categories, to)];
             }
