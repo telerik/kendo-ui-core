@@ -211,7 +211,9 @@
 
                 var parentNode = treeview.find(".k-item:first");
 
-                var appendedNode = treeviewObject.append({ text: "bar" }, parentNode);
+                var appendedNode = treeviewObject.append({ text: "baz" }, parentNode);
+
+                console.log(treeviewObject.dataItem(parentNode).children.data());
 
                 equal(parentNode.find(".k-group").length, 1);
                 equal(parentNode.find(".k-group").css("display"), "block");
@@ -478,6 +480,20 @@
                 equal(rootGroup.find("> .k-item").length, 3);
                 equal(rootGroup.find("> .k-item:contains('bar')").index(), 1);
                 equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
+            });
+
+            test("inserBefore() of array of items", function() {
+                createTreeView([
+                    { text: "baz" }
+                ]);
+
+                var appendedNodes = treeviewObject.insertBefore([
+                    { text: "foo" },
+                    { text: "bar" }
+                ], treeviewObject.findByText("baz"));
+
+                equal(treeview.find(".k-group").length, 1);
+                equal(treeview.find(".k-group").children().length, 3);
             });
 
             test("insertBefore(nodeData, element) updates item classes", function() {
@@ -840,6 +856,28 @@
                 treeviewObject.append(treeviewObject.findByText("foo"), treeviewObject.findByText("bar"));
 
                 equal(treeview.find(".k-item .k-item").length, 1);
+            });
+
+            test("appending array of items adds them to the datasource in one pass", function() {
+                var calls = 0;
+
+                createTreeView({
+                    dataSource: {
+                        data: [],
+                        change: function() {
+                            calls++;
+                        }
+                    }
+                });
+
+                equal(calls, 1);
+
+                treeviewObject.append([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                equal(calls, 2);
             });
         </script>
 

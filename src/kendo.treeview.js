@@ -1464,8 +1464,7 @@ kendo_module({
         },
 
         _dataSourceMove: function(nodeData, group, parentNode, callback) {
-            var dataItem,
-                referenceDataItem, i,
+            var referenceDataItem,
                 destTreeview = this._objectOrSelf(parentNode || group),
                 destDataSource = destTreeview.dataSource;
 
@@ -1489,17 +1488,7 @@ kendo_module({
 
             nodeData = this._toObservableData(nodeData);
 
-            if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
-                // insert array of nodes
-                for (i = 0; i < nodeData.length; i++) {
-                    dataItem = callback(destDataSource, nodeData[i]);
-                }
-            } else {
-                // insert single node from data
-                dataItem = callback(destDataSource, nodeData);
-            }
-
-            return dataItem && this.findByUid(dataItem.uid);
+            return callback.call(this, destDataSource, nodeData);
         },
 
         _toObservableData: function(node) {
@@ -1519,6 +1508,21 @@ kendo_module({
             return dataItem;
         },
 
+        _insert: function(data, model, index) {
+            if (!(model instanceof kendo.data.ObservableArray)) {
+                if (!isArray(model)) {
+                    model = [model];
+                }
+            } else {
+                // items will be converted to new Node instances
+                model = model.toJSON();
+            }
+
+            data.splice.apply(data, [ index, 0 ].concat(model));
+
+            return this.findByUid(data[index].uid);
+        },
+
         insertAfter: function (nodeData, referenceNode) {
             var group = referenceNode.parent(),
                 parentNode;
@@ -1528,7 +1532,7 @@ kendo_module({
             }
 
             return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
-                return dataSource.insert(referenceNode.index() + 1, model);
+                return this._insert(dataSource.data(), model, referenceNode.index() + 1);
             });
         },
 
@@ -1541,7 +1545,7 @@ kendo_module({
             }
 
             return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
-                return dataSource.insert(referenceNode.index(), model);
+                return this._insert(dataSource.data(), model, referenceNode.index());
             });
         },
 
@@ -1555,11 +1559,14 @@ kendo_module({
 
             return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
                 function add() {
+                    var data = dataSource.data(),
+                        index = Math.max(data.length, 0);
+
                     if (parentNode) {
                         that._expanded(parentNode, true);
                     }
 
-                    return dataSource.add(model);
+                    return that._insert(data, model, index);
                 }
 
                 if (!dataSource.data()) {
