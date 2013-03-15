@@ -11,10 +11,10 @@
                 <p>
                     <label for="orders">Orders:</label><input id="orders" disabled="disabled" style="width: 300px" />
                 </p>
-                
+
                 <button class="k-button" id="get">View Order</button>
             </div>
-            
+
             <style scoped>
                 .demo-section {
                     width: 460px;
@@ -42,7 +42,7 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#categories").kendoDropDownList({
+                    var categories = $("#categories").kendoDropDownList({
                         optionLabel: "Select category...",
                         dataTextField: "CategoryName",
                         dataValueField: "CategoryID",
@@ -53,7 +53,7 @@
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
                             }
                         }
-                    });
+                    }).data("kendoDropDownList");
 
                     var products = $("#products").kendoDropDownList({
                         autoBind: false,
@@ -84,6 +84,14 @@
                             }
                         }
                     }).data("kendoDropDownList");
+
+                    $("#get").click(function() {
+                        var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
+                            productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
+                            orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
+
+                        alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
+                    });
                 });
             </script>
         </div>
