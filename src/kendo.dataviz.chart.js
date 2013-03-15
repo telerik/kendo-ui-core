@@ -8110,8 +8110,8 @@ kendo_module({
                 moveTarget: target.parents(".k-handle").add(target).first(),
                 startLocation: e.x.location,
                 range: {
-                    from: options.from,
-                    to: options.to
+                    from: that._index(options.from),
+                    to: that._index(options.to)
                 }
             };
 
@@ -8130,13 +8130,16 @@ kendo_module({
                 state = that._state,
                 options = that.options,
                 categories = that.categoryAxis.options.categories,
-                fullSpan = options.max - options.min,
+                from = that._index(options.from),
+                to = that._index(options.to),
+                min = that._index(options.min),
+                max = that._index(options.max),
                 delta = state.startLocation - e.x.location,
                 range = state.range,
                 oldRange = { from: range.from, to: range.to },
                 span = range.to - range.from,
                 target = state.moveTarget,
-                scale = that.wrapper.width() / fullSpan,
+                scale = that.wrapper.width() / categories.length - 1,
                 offset = math.round(delta / scale);
 
             if (!target) {
@@ -8147,30 +8150,25 @@ kendo_module({
 
             if (target.is(".k-selection")) {
                 range.from = math.min(
-                    math.max(options.min, options.from - offset),
-                    options.max - span
+                    math.max(min, from - offset),
+                    max - span
                 );
                 range.to = math.min(
                     range.from + span,
-                    options.max
+                    max
                 );
             } else if (target.is(".k-leftHandle")) {
                 range.from = math.min(
-                    math.max(options.min, options.from - offset),
-                    options.max - 1
+                    math.max(min, from - offset),
+                    max - 1
                 );
                 range.to = math.max(range.from + 1, range.to);
             } else if (target.is(".k-rightHandle")) {
                 range.to = math.min(
-                    math.max(options.min + 1, options.to - offset),
-                    options.max
+                    math.max(min + 1, to - offset),
+                    max
                 );
                 range.from = math.min(range.to - 1, range.from);
-            }
-
-            if (that._dateAxis) {
-                range.from = categories[lteDateIndex(categories, toDate(range.from))];
-                range.to = categories[lteDateIndex(categories, toDate(range.to))];
             }
 
             if (range.from !== oldRange.from || range.to !== oldRange.to) {
@@ -8289,32 +8287,17 @@ kendo_module({
                     delta *= -1;
                 }
 
+                var from = that._index(options.from);
+                var to = that._index(options.to);
+
                 if (zDir !== RIGHT) {
-                    if (that._dateAxis) {
-                        var fromIndex = clipValue(
-                            lteDateIndex(categories, options.from) - delta,
-                            0,
-                            lteDateIndex(categories, options.to) - 1
-                        );
-                        range.from = categories[fromIndex];
-                    } else {
-                        range.from = clipValue(options.from - delta, 0, options.to - 1);
-                    }
+                    range.from = clipValue(from - delta, 0, to - 1);
                 }
 
                 if (zDir !== LEFT) {
-                    if (that._dateAxis) {
-                        var toIndex = clipValue(
-                            lteDateIndex(categories, options.to) + delta,
-                            lteDateIndex(categories, range.from) + 1,
-                            categories.length - 1
-                        );
-                        range.to = categories[toIndex];
-                    } else {
-                        range.to = clipValue(
-                            options.to + delta, range.from + 1, categories.length - 1
-                        );
-                    }
+                    range.to = clipValue(
+                        to + delta, range.from + 1, categories.length - 1
+                    );
                 }
 
                 that.set(range.from, range.to);
@@ -8336,16 +8319,37 @@ kendo_module({
             }
         },
 
-        _categorySlot: function(value) {
+        _index: function(value) {
             var that = this,
                 categoryAxis = this.categoryAxis,
-                categories = categoryAxis.options.categories;
+                categories = categoryAxis.options.categories,
+                index = value;
 
-            if (that._dateAxis) {
-                value = lteDateIndex(categories, value);
+            if (value instanceof Date) {
+                index = lteDateIndex(categories, value);
             }
 
-            return categoryAxis.getSlot(value);
+            return index;
+        },
+
+        _value: function(index) {
+            var that = this,
+                categoryAxis = this.categoryAxis,
+                categories = categoryAxis.options.categories,
+                value = index;
+
+            if (that._dateAxis) {
+                index = categories[index];
+            }
+
+            return index;
+        },
+
+        _slot: function(value) {
+            var that = this,
+                categoryAxis = this.categoryAxis;
+
+            return categoryAxis.getSlot(that._index(value));
         },
 
         move: function(from, to) {
@@ -8360,12 +8364,12 @@ kendo_module({
                 box,
                 distance;
 
-            box = that._categorySlot(from);
+            box = that._slot(from);
             leftMaskWidth = round(box.x1 - offset.left + padding.left);
             that.leftMask.width(leftMaskWidth);
             that.selection.css("left", leftMaskWidth);
 
-            box = that._categorySlot(to);
+            box = that._slot(to);
             rightMaskWidth = round(options.width - (box.x1 - offset.left + padding.left));
             that.rightMask.width(rightMaskWidth);
             distance = options.width - rightMaskWidth;
@@ -8384,22 +8388,19 @@ kendo_module({
             var that = this,
                 categoryAxis = that.categoryAxis,
                 categories = categoryAxis.options.categories,
-                options = that.options;
+                options = that.options,
+                min = that._index(options.min),
+                max = that._index(options.max);
 
-            from = clipValue(from, options.min, options.max);
-            to = clipValue(to, from + 1, options.max);
+            from = clipValue(from, min, max);
+            to = clipValue(to, from + 1, max);
 
             if (options.visible) {
                 that.move(from, to);
             }
 
-            if (that._dateAxis) {
-                from = categories[lteDateIndex(categories, toDate(from))];
-                to = categories[lteDateIndex(categories, toDate(to))];
-            }
-
-            options.from = from;
-            options.to = to;
+            options.from = that._value(from);
+            options.to = that._value(to);
         },
 
         getValueAxis: function(categoryAxis) {
