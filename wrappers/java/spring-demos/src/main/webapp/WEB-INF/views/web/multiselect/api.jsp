@@ -4,37 +4,54 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
-    <div class="configuration k-widget k-header" style="width: 210px">
-         <span class="configHead">API Functions</span>
-         <ul class="options">
-             <li>
-                 <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
-             </li>
-             <li>
-                 <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the drop-down
-             </li>
-             <li>
-                 <button id="getValue" class="k-button">Get values</button>
-             </li>
-             <li>
-                 <label for="filter" style="display: block; ">Filter type:</label>
-                 <select id="filter" style="width: 120px; float: right; margin-bottom: 3px; margin-top: -3px;">
-                     <option value="startswith">Starts with</option>
-                     <option value="contains">Contains</option>
-                     <option value="eq">Equal</option>
-                 </select>
-             </li>
-             <li>
-                 <input id="word" value="The" class="k-textbox" /> <button id="find" class="k-button">Find item</button>
-             </li>
-             <li>
-                <input id="value" value="1,2" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
-             </li>
-         </ul>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+        <span class="configHead">API Functions</span>
+        <ul class="options">
+            <li>
+                <button id="enable" class="k-button">Enable</button> <button id="disable" class="k-button">Disable</button>
+            </li>
+            <li>
+                <button id="readonly" class="k-button">Readonly</button>
+            </li>
+            <li>
+                <button id="open" class="k-button">Open</button> <button id="close" class="k-button">Close</button>
+            </li>
+            <li>
+                <button id="getValue" class="k-button">Get values</button>
+            </li>
+        </ul>
+        </div>
+        <div class="config-section">
+        <span class="configHead">Filter</span>
+        <ul class="options">
+            <li>
+                <select id="filter">
+                    <option value="startswith">Starts with</option>
+                    <option value="contains">Contains</option>
+                    <option value="eq">Equal</option>
+                </select>
+            </li>
+            <li>
+                <input id="word" value="The" class="k-textbox" style="width: 149px; margin: 0;" />
+            </li>
+            <li>
+                <button id="find" class="k-button">Find item</button>
+            </li>
+        </ul>
+        </div>
+        <div class="config-section">
+        <span class="configHead">Select</span>
+        <ul class="options">
+            <li>
+                <input id="value" value="1,2" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="setValue" class="k-button">Select by value</button>
+            </li>
+        </ul>
+        </div>
     </div>
 
     <div class="demo-section">
-        <kendo:multiSelect name="movies" dataTextField="text" dataValueField="value">
+        <kendo:multiSelect name="movies" dataTextField="text" dataValueField="value" placeholder="Select movie...">
             <kendo:dataSource data="${movies}"></kendo:dataSource>
         </kendo:multiSelect>
     </div>
@@ -64,6 +81,10 @@
 	             multiselect.enable(false);
 	         });
 
+             $("#readonly").click(function() {
+	             multiselect.readonly();
+	         });
+
 	         $("#open").click(function() {
 	             multiselect.open();
 	         });
@@ -87,14 +108,21 @@
 	         }
 	     });
 	</script>
-	<style scoped>
-	   .configuration .k-textbox {
-	       width: 40px;
-	   }
-       .demo-section {
-           float: left;
-           width: 450px;
-           margin-left: 0;
-       }
-	</style>
+    <style scoped>
+        .configuration .k-textbox {
+            width: 40px;
+        }
+        .demo-section {
+            width: 660px;
+            padding: 30px;
+            text-align: center;
+        }
+        .k-button {
+            min-width: 80px;
+        }
+        .configuration-horizontal .options li {
+            padding: 3px 0;
+        }
+    </style>
+
 <demo:footer />

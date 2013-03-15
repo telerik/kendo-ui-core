@@ -7,8 +7,7 @@
 
 <demo:header />
     <div class="demo-section">
-        <h3 class="title">Select Products</h3>
-        
+        <h2>Products</h2>
         <kendo:multiSelect name="products" dataTextField="productName" dataValueField="productId" filter="startswith">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
@@ -16,7 +15,7 @@
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
 		                	function parameterMap(options) {
-		                		return JSON.stringify(options);		                		
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -26,10 +25,16 @@
             </kendo:dataSource>
         </kendo:multiSelect>
     </div>
-    <style scoped>
-        .demo-section {
-            width: 450px;
-            margin-top: 40px;
-        }
-    </style>
+<style scoped>
+    .demo-section {
+        width: 300px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+</style>
 <demo:footer />

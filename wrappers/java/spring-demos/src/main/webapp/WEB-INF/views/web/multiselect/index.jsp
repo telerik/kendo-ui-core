@@ -9,7 +9,7 @@
 	%>
     <div class="demo-section">
         <h2>Invite Attendees</h2>
-        <label for="required">Required</label> 
+        <label for="required">Required</label>
 	    <kendo:multiSelect name="required" placeholder="Select attendees..." value="values">
 	        <kendo:dataSource data="${attendees}"></kendo:dataSource>
 	    </kendo:multiSelect>
@@ -19,6 +19,16 @@
 	    </kendo:multiSelect>
 	    <button class="k-button" id="get">Send Invitation</button>
 	</div>
+    <script>
+        $(document).ready(function() {
+            var required = $("#required").data("kendoMultiSelect");
+            var optional = $("#optional").data("kendoMultiSelect");
+
+            $("#get").click(function() {
+                alert("Attendees:\n\nRequired: " + required.value() + "\nOptional: " + optional.value());
+            });
+        });
+    </script>
 	<style scoped>
         .demo-section {
             width: 350px;
