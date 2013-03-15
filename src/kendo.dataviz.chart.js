@@ -56,7 +56,6 @@ kendo_module({
 
     // Constants ==============================================================
     var NS = ".kendoChart",
-
         ABOVE = "above",
         AREA = "area",
         AUTO = "auto",
@@ -166,7 +165,6 @@ kendo_module({
         ZOOM_START = "zoomStart",
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
-
         CATEGORICAL_CHARTS = [
             BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
         ],
@@ -193,8 +191,9 @@ kendo_module({
                 options,
                 themeOptions,
                 themes = dataviz.ui.themes || {},
-                theme,
-                themeName;
+                theme, themeName;
+
+            kendo.destroy(element);
 
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
@@ -7458,7 +7457,8 @@ kendo_module({
                 content = point.formatValue(options.format);
             }
 
-            return content; },
+            return content;
+        },
 
         _pointAnchor: function(point) {
             var tooltip = this,

@@ -2731,21 +2731,21 @@ kendo_module({
         // . a b c d
 
         // we'll always have rectangles 1, 3, 4 and 6
-        result[0] = new Box2D(b, e, c, f);
-        result[1] = new Box2D(a, f, b, g);
-        result[2] = new Box2D(c, f, d, g);
-        result[3] = new Box2D(b, g, c, h);
+        result[0] = Box2D(b, e, c, f);
+        result[1] = Box2D(a, f, b, g);
+        result[2] = Box2D(c, f, d, g);
+        result[3] = Box2D(b, g, c, h);
 
         // decide which corners
-        if( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
+        if ( r.x1 == a && r.y1 == e || s.x1 == a && s.y1 == e )
         { // corners 0 and 7
-            result[4] = new Box2D(a, e, b, f);
-            result[5] = new Box2D(c, g, d, h);
+            result[4] = Box2D(a, e, b, f);
+            result[5] = Box2D(c, g, d, h);
         }
         else
         { // corners 2 and 5
-            result[4] = new Box2D(c, e, d, f);
-            result[5] = new Box2D(a, g, b, h);
+            result[4] = Box2D(c, e, d, f);
+            result[5] = Box2D(a, g, b, h);
         }
 
         return $.grep(result, function(box) {
