@@ -7,70 +7,69 @@
         <c:url value="/web/combobox/template/read" var="readUrl" />
 
         <%
-        String template = "<img src='/spring-demos/resources/web/Customers/#:data.customerId#.jpg' alt='#:data.customerId#' />" +
+        String template = "<img src='<c:url value=\"/resources/web/Customers/\"/>/#:data.customerId#.jpg' alt='#:data.customerId#' />" +
                 "<dl>" +
                 "<dt>Contact:</dt><dd>#:data.contactName#</dd>" +
                 "<dt>Company:</dt><dd>#:data.companyName#</dd>" +
             "</dl>";
         %>
-        
-        <label for="customers">Select customer:</label>
-        
-        <kendo:comboBox name="customers" template="<%=template%>" height="300"
-            dataTextField="contactName" dataValueField="customerID">
-            <kendo:dataSource serverFiltering="true">
-                <kendo:dataSource-transport>
-                   <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>
-                   <kendo:dataSource-transport-parameterMap>
-	                	<script>
-		                	function parameterMap(options) {
-		                		return JSON.stringify(options);		                		
-		                	}
-	                	</script>
-	                </kendo:dataSource-transport-parameterMap>
-                </kendo:dataSource-transport>
-                <kendo:dataSource-schema data="data" total="total">
-                </kendo:dataSource-schema>
-            </kendo:dataSource>
-        </kendo:comboBox>
-        
-        <script>
-	    $(document).ready(function() {
-	        var combobox = $("#customers").data("kendoComboBox");
-	
-	        // set width of the drop-down list
-	        combobox.list.width(400);
-	    });
-	    </script>
+
+        <div class="demo-section">
+            <h2>Customers</h2>
+
+            <kendo:comboBox name="customers" template="<%=template%>" height="300"
+                dataTextField="contactName" dataValueField="customerID" style="width:400px">
+                <kendo:dataSource serverFiltering="true">
+                    <kendo:dataSource-transport>
+                       <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>
+                       <kendo:dataSource-transport-parameterMap>
+                            <script>
+                                function parameterMap(options) {
+                                    return JSON.stringify(options);
+                                }
+                            </script>
+                        </kendo:dataSource-transport-parameterMap>
+                    </kendo:dataSource-transport>
+                    <kendo:dataSource-schema data="data" total="total">
+                    </kendo:dataSource-schema>
+                </kendo:dataSource>
+            </kendo:comboBox>
+        </div>
+
+        <div class="demo-section">
+            <h2>Information</h2>
+            <p>
+                Open the ComboBox to see the customized appearance of the items.
+            </p>
+        </div>
     </div>
+
     <style scoped>
-	    #customers-list .k-item {
-	        overflow: hidden; /* clear floated images */
-	    }
-	
-	    #customers-list img {
-	        box-shadow: 0 0 4px rgba(255,255,255,.7);
-	        float: left;
-	        margin: 5px;
-	    }
-	
-	    #customers-list dl {
-	        margin-left: 85px;
-	    }
-	
-	    #customers-list dt,
-	    #customers-list dd {
-	        margin: 0;
-	        padding: 0;
-	    }
-	
-	    #customers-list dt {
-	        font-weight: bold;
-	        padding-top: .5em;
-	    }
-	
-	    #customers-list dd {
-	        padding-bottom: .3em;
-	    }
-	</style>
+        .demo-section {
+            width: 400px;
+            padding: 30px;
+        }
+        .demo-section h2 {
+            text-transform: uppercase;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        #customers-list .k-item {
+            overflow: hidden; /* clear floated images */
+        }
+        #customers-list img {
+            -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+            -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+            box-shadow: 0 0 2px rgba(0,0,0,.4);
+            float: left;
+            margin: 5px 20px 5px 0px;
+        }
+        #customers-list h3 {
+            margin: 30px 0 10px 0;
+            font-size: 2em;
+        }
+        #customers-list p {
+            margin: 0;
+        }
+    </style>
 <demo:footer />

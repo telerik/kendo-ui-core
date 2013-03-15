@@ -8,19 +8,20 @@
 <c:url value="/web/combobox/cascadingcombobox/orders" var="ordersUrl" />
 
 <demo:header />
-    <div>
+<div class="demo-section">
+    <h2>View Order Details</h2>
     <p>
         <label for="categories">Categories:</label>
-        
+
         <kendo:comboBox name="categories" dataTextField="categoryName" dataValueField="categoryId"
-                        placeholder="Select category...">
+                        placeholder="Select category..." style="width:300px">
             <kendo:dataSource>
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${categoriesUrl}" type="POST" contentType="application/json"/>
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
-		                	function parameterMap(options,type) { 		                		
-		                		return JSON.stringify(options);		                		
+		                	function parameterMap(options,type) {
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -30,18 +31,18 @@
             </kendo:dataSource>
         </kendo:comboBox>
     </p>
-    <p> 
+    <p>
         <label for="products">Products:</label>
-        
+
         <kendo:comboBox name="products" dataTextField="productName" dataValueField="productId"
-                        placeholder="Select product..." cascadeFrom="categories" autoBind="false">
+                        placeholder="Select product..." cascadeFrom="categories" autoBind="false" style="width:300px">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${productsUrl}" type="POST" contentType="application/json"/>
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
-		                	function parameterMap(options,type) { 		                		
-		                		return JSON.stringify(options);		                		
+		                	function parameterMap(options,type) {
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -51,18 +52,18 @@
             </kendo:dataSource>
         </kendo:comboBox>
     </p>
-    <p> 
+    <p>
         <label for="orders">Orders:</label>
-        
+
         <kendo:comboBox name="orders" dataTextField="shipCity" dataValueField="orderId"
-                        placeholder="Select order..." cascadeFrom="products" autoBind="false">
+                        placeholder="Select order..." cascadeFrom="products" autoBind="false" style="width:300px">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${ordersUrl}" type="POST" contentType="application/json"/>
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
-		                	function parameterMap(options,type) { 		                		
-		                		return JSON.stringify(options);		                		
+		                	function parameterMap(options,type) {
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -70,5 +71,44 @@
             </kendo:dataSource>
         </kendo:comboBox>
     </p>
-    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var categories = $("#categories").data("kendoComboBox"),
+            products = $("#products").data("kendoComboBox"),
+            orders = $("#orders").data("kendoComboBox");
+
+        $("#get").click(function () {
+            var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
+                productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
+                orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
+
+            alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
+        });
+    });
+</script>
+<style scoped>
+    .demo-section {
+        width: 460px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+    .demo-section label {
+        display: inline-block;
+        width: 120px;
+        padding-right: 5px;
+        text-align: right;
+    }
+    .demo-section .k-button {
+        margin: 20px 0 0 125px;
+    }
+    .k-readonly
+    {
+        color: gray;
+    }
+</style>
 <demo:footer />

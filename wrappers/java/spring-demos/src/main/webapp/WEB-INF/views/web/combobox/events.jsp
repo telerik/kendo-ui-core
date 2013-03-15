@@ -21,25 +21,25 @@
                 kendoConsole.log("event :: open");
             }
         }
-    
+
         function onClose() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: close");
             }
         }
-    
+
         function onChange() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: change");
             }
         }
-        
+
         function onDataBound() {
             if ("kendoConsole" in window) {
                 kendoConsole.log("event :: dataBound");
             }
         }
-    
+
         function onSelect(e) {
             if ("kendoConsole" in window) {
                 var dataItem = this.dataItem(e.item.index());
@@ -48,9 +48,12 @@
         }
     </script>
     <style scoped>
-	    .demo-section
-	    {
-	        text-align:center;
-	    }
-	</style>  
+	    .demo-section {
+            width: 500px;
+            text-align: center;
+        }
+        .console {
+            margin: 0;
+        }
+	</style>
 <demo:footer />
