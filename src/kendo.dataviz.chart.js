@@ -8046,7 +8046,7 @@ kendo_module({
                 that.leftHandle.css("top", (that.selection.height() - that.leftHandle.height()) / 2);
                 that.rightHandle.css("top", (that.selection.height() - that.rightHandle.height()) / 2);
 
-                that.move(options.from, options.to);
+                that.set(that._index(options.from), that._index(options.to));
 
                 that.bind(that.events, that.options);
                 that.wrapper[0].style.cssText = that.wrapper[0].style.cssText;

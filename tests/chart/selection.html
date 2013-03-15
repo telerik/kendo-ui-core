@@ -206,7 +206,7 @@
                     });
 
                     selection._start(stubArgs());
-                    selection._move(stubArgs(100, 0));
+                    selection._move(stubArgs(80, 0));
                 });
 
                 test("select fires on mousewheel", 1, function() {
@@ -440,9 +440,10 @@
                                     new Date("2012/01/01 00:00"),
                                     new Date("2012/01/30 00:00")
                                 ],
+                                baseUnit: "days",
                                 select: {
-                                    from: "2012/01/10 00:00",
-                                    to: "2012/01/15 00:00",
+                                    from: "2012/01/10 15:00",
+                                    to: "2012/01/15 15:00",
                                     min: "2012/01/05 00:00",
                                     max: "2012/01/15 00:00"
                                 }
@@ -466,6 +467,14 @@
 
                 test("max can be parsed from string", function() {
                     ok(sOpts.max instanceof Date);
+                });
+
+                test("from is rounded down to prev date", function() {
+                    deepEqual(sOpts.from, new Date("2012/01/10 00:00"));
+                });
+
+                test("to is rounded down to prev date", function() {
+                    deepEqual(sOpts.to, new Date("2012/01/15 00:00"));
                 });
 
                 // ------------------------------------------------------------
@@ -497,16 +506,6 @@
                     equal(selection.selection.width(), 135);
                 });
 
-                test("range start is rounded down to prev date", function() {
-                    selection.set(new Date("2012/01/01 15:00"), new Date("2012/01/03 00:00"));
-                    deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
-                });
-
-                test("range start is rounded up to prev date", function() {
-                    selection.set(new Date("2012/01/01 00:00"), new Date("2012/01/03 15:00"));
-                    deepEqual(sOpts.to, new Date("2012/01/03 00:00"));
-                });
-
                 test("selectStart args contain date range", function() {
                     chart.bind("selectStart", function(e) {
                         deepEqual(e.from, new Date("2012/01/02 00:00"));
@@ -523,7 +522,7 @@
                     });
 
                     selection._start(stubArgs());
-                    selection._move(stubArgs(-10, 0));
+                    selection._move(stubArgs(-100, 0));
                 });
 
                 test("selectEnd updates date range", 1, function() {
@@ -532,7 +531,7 @@
                     });
 
                     selection._start(stubArgs());
-                    selection._move(stubArgs(-10, 0));
+                    selection._move(stubArgs(-100, 0));
                     selection._end();
                 });
 
