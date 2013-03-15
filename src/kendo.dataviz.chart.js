@@ -818,8 +818,7 @@ kendo_module({
                 tooltip = chart._tooltip,
                 tooltipOptions = options.tooltip,
                 highlight = chart._highlight,
-                index,
-                points;
+                index, points;
 
             index = categoryAxis.getCategoryIndex(coords);
             if (index !== chart._tooltipCategoryIx) {
@@ -844,6 +843,7 @@ kendo_module({
                 plotArea = chart._plotArea,
                 crosshairs = plotArea.crosshairs,
                 tooltip = chart._tooltip,
+                highlight = chart._highlight,
                 i;
 
             for (i = 0; i < crosshairs.length; i++) {
@@ -851,6 +851,8 @@ kendo_module({
             }
 
             setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
+            highlight.hide();
+            chart._tooltipCategoryIx = null;
         },
 
         _unsetActivePoint: function() {
