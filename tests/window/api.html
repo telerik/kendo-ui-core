@@ -3,6 +3,9 @@
     <head>
         <title>Window API Tests</title>
         <script src="test-scripts.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
     </head>
     <body>
         <script>
@@ -466,6 +469,20 @@
                 myWindow.destroy();
 
                 ok(true);
+            });
+
+            test("destroying a window destroys nested components", function() {
+                var html = "<div id='dialog'><select><option>foo</option></select></div>";
+
+                var dialog = $(html).appendTo("body")
+                    .find("select").kendoDropDownList().end()
+                    .kendoWindow().data("kendoWindow");
+
+                dialog.element.find("select").data("kendoDropDownList").open();
+
+                dialog.destroy();
+
+                equal($("body > .k-animation-container").length, 0);
             });
         </script>
 
