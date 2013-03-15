@@ -13,30 +13,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ContentInitializerDaoImpl implements ContentInitializerDao {    
-    private File userFolder;
-    private File copyFolder;    
     private final int BufferSize = 4096;
 
     @Override
-    public String getUserFolder() {
-        if(!userFolder.exists()){            
-            userFolder.mkdir();
-            CopyFolder(copyFolder, userFolder);
-        }  
-
-        return userFolder.getPath();
+    public void Initialize(File source, File destination) {
+        if (!destination.exists()) {
+            destination.mkdir();
+            CopyFolder(source, destination);
+        }        
     }
-
-    @Override
-    public void setFolderOptions(File rootFolder, File copyFolder,
-            String prettyName) {        
-        if(!rootFolder.exists()){
-            rootFolder.mkdir();
-        }
-        this.userFolder = new File(rootFolder, prettyName);    
-        this.copyFolder =  copyFolder;
-    }    
-    
+        
     private void CopyFolder(File source, File destination){
         if(source.isDirectory()){
             if(!destination.exists()){               
@@ -82,6 +68,6 @@ public class ContentInitializerDaoImpl implements ContentInitializerDao {
         } 
         catch(IOException e){            
         }
-    }
+    }   
     
 }

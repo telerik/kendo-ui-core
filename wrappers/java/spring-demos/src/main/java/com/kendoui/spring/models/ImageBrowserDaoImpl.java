@@ -28,27 +28,21 @@ public class ImageBrowserDaoImpl implements ImageBrowserDao {
     private @Autowired ResourceLoader loader;
     private @Autowired ServletContext context;    
     private @Autowired ContentInitializerDao contentInitializer;
-    private final String RootFolder = "/resources/web/editor/UserFiles";
-    private final String CopyFolder = "/resources/shared/images"; 
-    private final String PrettyName = "Images";
-    
-    private String NormalizePath(String path){
-        return "file:" + new File(getContentPath(), path).getPath();
-    }
-    
-    private String getContentPath(){
-        return contentInitializer.getUserFolder();
-    }
+    private final String ContentPath = "/resources/shared/imagebrowser/";
+    private final String SourceFolder = "/resources/shared/images/photos";
     
     @PostConstruct
-    void Init(){           
-        contentInitializer.setFolderOptions(new File(context.getRealPath(RootFolder)), 
-                new File(context.getRealPath(CopyFolder)), PrettyName);
-    }     
+    void Init() {          
+        contentInitializer.Initialize(new File(context.getRealPath(SourceFolder)), new File(context.getRealPath(ContentPath)));
+    } 
+    
+    private String NormalizePath(String path){
+        return new File(ContentPath, path).getPath();
+    }
     
     private Boolean CanAccess(String path){                
         try {
-            return new File(getContentPath(), path).getCanonicalPath().startsWith(new File(getContentPath()).getCanonicalPath());
+            return new File(ContentPath, path).getCanonicalPath().startsWith(new File(ContentPath).getCanonicalPath());
         } catch (IOException e) {            
         }
         return false;
@@ -85,7 +79,7 @@ public class ImageBrowserDaoImpl implements ImageBrowserDao {
                 entry.setName(fileEntry.getName());                
                 result.add(entry);
             }
-        } catch (IOException e) { 
+        } catch (IOException e) {            
         }
         return result;
     }
@@ -103,6 +97,11 @@ public class ImageBrowserDaoImpl implements ImageBrowserDao {
         }};        
     }
     
+    private String getExtension(File file){
+        String name = file.getName();        
+        return name.substring(name.lastIndexOf('.') + 1);
+    }
+    
     @Override
     public byte[] getThumbnail(String path) {
         if (!CanAccess(path)){
@@ -112,7 +111,7 @@ public class ImageBrowserDaoImpl implements ImageBrowserDao {
         try {
             File file = loader.getResource(NormalizePath(path)).getFile();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            try {
+            try {                
                 ImageIO.write(scaleImage(ImageIO.read(file), 80), getExtension(file), stream);
                 return stream.toByteArray();
             } finally {
@@ -123,11 +122,6 @@ public class ImageBrowserDaoImpl implements ImageBrowserDao {
             e.printStackTrace();
         }
         return null;
-    }
-    
-    private String getExtension(File file){
-        String name = file.getName();
-        return name.substring(name.lastIndexOf('.') + 1);
     }
     
     private BufferedImage scaleImage(final BufferedImage bufferedImage, final int size) {
@@ -142,7 +136,10 @@ public class ImageBrowserDaoImpl implements ImageBrowserDao {
             }
             else {
                 scale = boundSize / origWidth;
-            }          
+            }
+            
+            if (scale > 1.0)
+                return (null);
 
             final int scaledWidth = (int) (scale * origWidth);
             final int scaledHeight = (int) (scale * origHeight);

@@ -2,7 +2,6 @@ package com.kendoui.spring.models;
 
 import java.io.File;
 
-public interface ContentInitializerDao {
-    public String getUserFolder();
-    public void setFolderOptions(File rootFolder, File copyFolder, String prettyName);
+public interface ContentInitializerDao {    
+    public void Initialize(File source, File destination);
 }
