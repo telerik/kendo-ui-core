@@ -6,17 +6,17 @@
 <c:url value="/web/dropdownlist/remote-data/read" var="readUrl" />
 
 <demo:header />
-    <div class="demo-section" style="width: 250px;">
-        <label for="products">Select product:</label>
-        
-        <kendo:dropDownList name="products" dataTextField="productName" dataValueField="productId">
+    <div class="demo-section">
+        <h2>Products</h2>
+
+        <kendo:dropDownList name="products" dataTextField="productName" dataValueField="productId" style="width:250px">
             <kendo:dataSource>
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>
                    <kendo:dataSource-transport-parameterMap>
 	                	<script>
-		                	function parameterMap(options) { 		                		
-		                		return JSON.stringify(options);		                		
+		                	function parameterMap(options) {
+		                		return JSON.stringify(options);
 		                	}
 	                	</script>
 	                </kendo:dataSource-transport-parameterMap>
@@ -26,4 +26,16 @@
             </kendo:dataSource>
         </kendo:dropDownList>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 250px;
+            margin: 35px auto 50px;
+            padding: 30px;
+        }
+        .demo-section h2 {
+            text-transform: uppercase;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+    </style>
 <demo:footer />

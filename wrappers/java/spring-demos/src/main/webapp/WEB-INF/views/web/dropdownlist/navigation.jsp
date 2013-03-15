@@ -4,12 +4,12 @@
 <demo:header />
 	<div class="demo-section">
 		<h3>T-shirt Size</h3>
-		<kendo:dropDownList name="sizes" filter="contains" accesskey="w" 
+		<kendo:dropDownList name="sizes" filter="contains" accesskey="w"
 					dataTextField="text" dataValueField="value">
 	        <kendo:dataSource data="${sizes}"></kendo:dataSource>
 		</kendo:dropDownList>
 	</div>
-	
+
 	<ul class="keyboard-legend">
 	    <li>
 	        <span class="button-preview">
@@ -22,7 +22,7 @@
 	        </span>
 	    </li>
 	</ul>
-	
+
 	<ul class="keyboard-legend">
 	    <li>
 	        <span class="button-preview">
@@ -108,11 +108,16 @@
 	    </li>
 	</ul>
 
-	<style scoped>
-		div.demo-section
-		{
-		    width: 204px;
-		    margin: 0px auto 25px auto;
-		}
-	</style>
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+</style>
 <demo:footer />
