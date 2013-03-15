@@ -73,9 +73,13 @@
     <div class="console"></div>
 </div>
 
-<style scoped="scoped">
+<style scoped>
     .demo-section {
-        width: 600px;
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
     }
 </style>
 </asp:Content>

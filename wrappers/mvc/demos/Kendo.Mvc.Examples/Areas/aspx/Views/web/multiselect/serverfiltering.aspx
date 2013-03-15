@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
-    <h3 class="title">Select Products</h3>
+    <h2>Products</h2>
     <%= Html.Kendo().MultiSelect()
           .Name("products")
           .DataTextField("ProductName")
@@ -22,8 +22,14 @@
 </div>
 <style scoped>
     .demo-section {
-        width: 450px;
-        margin-top: 40px;
+        width: 300px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 </asp:Content>

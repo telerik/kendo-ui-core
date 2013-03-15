@@ -5,11 +5,11 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
-    <h3>T-shirt Size</h3>
+   <h2>T-shirt Sizes</h2>
    <%= Html.Kendo().MultiSelect()
           .Name("size")
           .Placeholder("Select size...")
-          .HtmlAttributes(new { accesskey = "w" })
+          .HtmlAttributes(new { accesskey = "w", style = "width: 250px" })
           .BindTo(new List<string>() {
               "X-Small",
               "Small",
@@ -167,10 +167,15 @@
 </ul>
 
 <style scoped>
-    div.demo-section
-    {
-        width: 204px;
-        margin: 0px auto 25px auto;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 </asp:Content>
