@@ -47,6 +47,7 @@
                                 name: (state.module || "") + " " + state.name,
                                 suite: suite,
                                 duration: ((+new Date()) - startDate) / 1000,
+                                timestamp: $.now(),
                                 agent: navigator.userAgent
                             });
 

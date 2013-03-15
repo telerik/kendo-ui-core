@@ -43,12 +43,12 @@ client.subscribe('/testDone', function(message) {
 
   if (message.failed > 0) {
     process.stderr.write("*********************************************************************************************\n");
-    process.stderr.write("FAIL: " + agent + " -- " + message.suite + " : " + message.name + "(" + message.duration + "ms)" + "\n");
+    process.stderr.write(message.timestamp + " FAIL: " + agent + " -- " + message.suite + " : " + message.name + "(" + message.duration + "ms)" + "\n");
     process.stderr.write(message.failures.join("\n") + "\n");
     process.stderr.write("*********************************************************************************************\n");
     testCase.ele('failure').txt(message.failures.join("\n"));
   } else {
-    process.stderr.write("pass: " + agent + " -- " + message.suite + " : " + message.name + "(" + message.duration + "ms)" + "\n");
+    process.stderr.write(message.timestamp + " pass: " + agent + " -- " + message.suite + " : " + message.name + "(" + message.duration + "ms)" + "\n");
   }
 });
 
