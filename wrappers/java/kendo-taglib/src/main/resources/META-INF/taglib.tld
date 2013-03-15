@@ -17769,7 +17769,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <name>tabStrip-item</name>
         <tag-class>com.kendoui.taglib.tabstrip.ItemTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
         <attribute>
             <description>Specifies the url from which the item content will be loaded</description>
             <name>contentUrl</name>

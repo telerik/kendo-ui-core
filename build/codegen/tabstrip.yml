@@ -1,7 +1,7 @@
 :options:
     - :name: items
       :type: Array
-      :recursive: false
+      :recursive: true
       :content: true
       :description: Contains the items of the tabstrip widget
 
