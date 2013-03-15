@@ -13,6 +13,12 @@ CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
 STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
+ARCHIVE_ROOT = "/kendo-builds"
+
+ADMIN_URL = 'http://integrationadmin.telerik.com/'
+ADMIN_LOGIN = 'petyo.ivanov@telerik.local'
+ADMIN_PASS = 'ultra'
+
 require 'version'
 require 'zip'
 require 'js'
@@ -29,6 +35,7 @@ require 'bundle'
 require 'theme_builder'
 require 'demos'
 require 'download_builder'
+require 'internal_build_upload'
 require 'cdn'
 require 'tests'
 require 'codegen'
@@ -104,6 +111,8 @@ bundle :name => 'complete.commercial',
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :changelog => %w(web mobile dataviz framework),
        :demos => %w(web dataviz mobile),
+       :product => 'Kendo UI Complete',
+       :upload_as_internal_build => true,
        :contents => {
             'js' => COMPLETE_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -144,6 +153,8 @@ bundle :name => 'web.commercial',
        :type_script => { %w(web framework) => 'web' },
        :changelog => %w(web framework),
        :demos => %w(web),
+       :product => 'Kendo UI Web',
+       :upload_as_internal_build => true,
        :contents => {
             'js' => WEB_MIN_JS,
             'styles' => WEB_MIN_CSS,
@@ -173,6 +184,8 @@ bundle :name => 'mobile.commercial',
        :type_script => { %w(mobile framework) => 'mobile' },
        :changelog => %w(mobile framework),
        :demos => %w(mobile),
+       :product => 'Kendo UI Mobile',
+       :upload_as_internal_build => true,
        :eula => 'mobile',
        :contents => {
             'js' => MOBILE_MIN_JS,
@@ -190,6 +203,8 @@ bundle :name => 'dataviz.commercial',
        :changelog => %w(dataviz framework),
        :eula => 'dataviz',
        :demos => %w(dataviz),
+       :product => 'Kendo UI DataViz',
+       :upload_as_internal_build => true,
        :contents => {
             'js' => DATAVIZ_MIN_JS,
             'styles' => DATAVIZ_MIN_CSS,
@@ -272,6 +287,8 @@ bundle :name => 'aspnetmvc.commercial',
        },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :product => 'Kendo UI Complete for ASP.NET MVC',
+       :upload_as_internal_build => true,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -307,6 +324,9 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :product => 'Kendo UI Complete for ASP.NET MVC',
+       :upload_as_internal_build => true,
+       :vs_extension => true,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -367,6 +387,8 @@ bundle :name => 'jsp.commercial',
        :license => 'src-license-complete',
        :eula => 'jsp',
        :changelog => %w(web mobile dataviz framework jsp),
+       :product => 'Kendo UI Complete for JSP',
+       :upload_as_internal_build => false,
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
             'js' => COMPLETE_MIN_JS,
@@ -401,6 +423,8 @@ bundle :name => 'php.commercial',
        :license => 'src-license-complete',
        :eula => 'php',
        :changelog => %w(web mobile dataviz framework php),
+       :product => 'Kendo UI Complete for PHP',
+       :upload_as_internal_build => false,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,
@@ -434,20 +458,19 @@ BUNDLES = [
 namespace :build do
     WEB_ROOT = "/var/www"
     TOMCAT_ROOT = "/var/lib/tomcat7/webapps"
-    ARCHIVE_ROOT = "/kendo-builds"
 
     def zip_targets(destination)
         zip_bundles = []
 
         BUNDLES.each do |bundle|
-            latest_zip_filename = "#{ARCHIVE_ROOT}/#{destination}/#{('kendoui.' + bundle).sub(/\.[^\.]+$/, ".latest\\0.zip")}"
+            latest_zip_filename = File.join(ARCHIVE_ROOT, destination, latest_bundle_name(bundle) + ".zip")
 
             file_copy :to => latest_zip_filename,
                       :from => "dist/bundles/#{bundle}.zip"
 
             zip_bundles.push(latest_zip_filename)
 
-            versioned_zip_filename = "#{ARCHIVE_ROOT}/#{destination}/#{('kendoui.' + bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0.zip")}"
+            versioned_zip_filename = File.join(ARCHIVE_ROOT, destination, versioned_bundle_name(bundle) + ".zip")
 
             file_copy :to => versioned_zip_filename,
                       :from => "dist/bundles/#{bundle}.zip"

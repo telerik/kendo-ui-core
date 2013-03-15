@@ -108,5 +108,24 @@ def bundle(options)
 
     desc description(name)
     task "bundles:#{name}" => "#{path}.zip"
+
+    if options[:upload_as_internal_build]
+        versioned_bundle_archive_path = "dist/bundles/#{versioned_bundle_name(name)}.zip"
+
+        file_copy :to => versioned_bundle_archive_path, :from => "#{path}.zip"
+
+        desc "Upload #{name} as an internal build on kendoui.com"
+        task "internal_builds:bundles:#{name}" => versioned_bundle_archive_path do
+            upload_internal_build \
+                :title => versioned_bundle_name(name),
+                :product => options[:product],
+                :changelog_path => changelog_path,
+                :vs_extension => !!options[:vs_extension],
+                :archive_path => versioned_bundle_archive_path
+        end
+
+        desc "Upload all internal builds on kendoui.com"
+        task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
+    end
 end
 

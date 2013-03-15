@@ -2,6 +2,8 @@ GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.3.2)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.8)
     columnize (0.3.6)
     debugger (1.2.0)
@@ -61,8 +63,14 @@ GEM
     rb-inotify (0.8.8)
       ffi (>= 0.5.0)
     rubyzip (0.9.9)
+    selenium-webdriver (2.31.0)
+      childprocess (>= 0.2.5)
+      multi_json (~> 1.0)
+      rubyzip
+      websocket (~> 1.0.4)
     slop (3.3.3)
     thor (0.16.0)
+    websocket (1.0.7)
 
 PLATFORMS
   ruby
@@ -78,3 +86,4 @@ DEPENDENCIES
   rake
   rb-inotify (~> 0.8.8)
   rubyzip
+  selenium-webdriver
