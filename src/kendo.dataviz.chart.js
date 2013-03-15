@@ -8115,7 +8115,7 @@ kendo_module({
                 }
             };
 
-            if (that.trigger(SELECT_START, that._state.range)) {
+            if (that.trigger(SELECT_START, { from: options.from, to: options.to })) {
                 that.userEvents.cancel();
                 that._state = null;
             }
@@ -8173,7 +8173,7 @@ kendo_module({
 
             if (range.from !== oldRange.from || range.to !== oldRange.to) {
                 that.move(range.from, range.to);
-                that.trigger(SELECT, range);
+                that.trigger(SELECT, that._rangeValue(range));
             }
         },
 
@@ -8183,7 +8183,7 @@ kendo_module({
 
             delete that._state;
             that.set(range.from, range.to);
-            that.trigger(SELECT_END, range);
+            that.trigger(SELECT_END, that._rangeValue(range));
         },
 
         _gesturechange: function(e) {
@@ -8224,11 +8224,14 @@ kendo_module({
                 categoryIx = categoryAxis.getCategoryIndex(
                     new dataviz.Point2D(coords.x, categoryAxis.box.y1)
                 ),
-                span = options.to - options.from,
-                mid = options.from + span / 2,
+                from = that._index(options.from),
+                to = that._index(options.to),
+                min = that._index(options.min),
+                max = that._index(options.max),
+                span = to - from,
+                mid = from + span / 2,
                 offset = math.round(mid - categoryIx),
-                from,
-                to;
+                range = {};
 
             if (that._state) {
                 return;
@@ -8237,23 +8240,23 @@ kendo_module({
             e.preventDefault();
             that.chart._unsetActivePoint();
 
-            from = math.min(
-                math.max(options.min, options.from - offset),
-                options.max - span
-            );
-            to = math.min(
-                from + span,
-                options.max
+            range.from = math.min(
+                math.max(min, from - offset),
+                max - span
             );
 
-            that.set(from, to);
-            that.trigger(SELECT_END);
+            range.to = math.min(range.from + span, max);
+
+            that.set(range.from, range.to);
+            that.trigger(SELECT_END, that._rangeValue(range));
         },
 
         _mousewheel: function(e) {
             var that = this,
                 options = that.options,
                 categories = that.categoryAxis.options.categories,
+                min = that._index(options.min),
+                max = that._index(options.max),
                 zDir = options.mousewheel.zoom,
                 origEvent = e.originalEvent,
                 prevented,
@@ -8291,13 +8294,18 @@ kendo_module({
                 var to = that._index(options.to);
 
                 if (zDir !== RIGHT) {
-                    range.from = clipValue(from - delta, 0, to - 1);
+                    range.from = clipValue(
+                        clipValue(from - delta, 0, to - 1),
+                        min, max
+                    );
                 }
 
                 if (zDir !== LEFT) {
                     range.to = clipValue(
-                        to + delta, range.from + 1, categories.length - 1
-                    );
+                        clipValue(to + delta, range.from + 1, categories.length - 1),
+                        min,
+                        max
+                     );
                 }
 
                 that.set(range.from, range.to);
@@ -8305,8 +8313,8 @@ kendo_module({
                 that.trigger(SELECT, {
                     delta: delta,
                     originalEvent: e,
-                    from: range.from,
-                    to: range.to
+                    from: that._value(range.from),
+                    to: that._value(range.to)
                 });
 
                 if (that._mwTimeout) {
@@ -8343,6 +8351,15 @@ kendo_module({
             }
 
             return index;
+        },
+
+        _rangeValue: function(range) {
+            var that = this;
+
+            return {
+                from: that._value(range.from),
+                to: that._value(range.to)
+            };
         },
 
         _slot: function(value) {
