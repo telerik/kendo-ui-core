@@ -74,9 +74,17 @@ var LinkCommand = Command.extend({
         var cmd = this;
         cmd.options = options;
         Command.fn.init.call(cmd, options);
-        cmd.attributes = null;
-        cmd.async = true;
         cmd.formatter = new LinkFormatter();
+        if (!options.url) {
+            cmd.attributes = null;
+            cmd.async = true;
+        } else {
+            cmd.formatter.apply(options.range, {
+                href: options.url,
+                innerHTML: options.text || options.url,
+                target: options.target
+            });
+        }
     },
 
     _dialogTemplate: function(showText) {

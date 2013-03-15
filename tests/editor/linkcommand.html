@@ -405,6 +405,28 @@
                 equal(editor.value(), '<a href="foo">foo</a>');
             });
 
+            test("creating links through exec", function() {
+                editor.value("");
+
+                editor.exec("createLink", {
+                    text: "foo",
+                    url: "bar",
+                    target: "_blank"
+                });
+
+                equal(editor.value(), '<a href="bar" target="_blank">foo</a>');
+            });
+
+            test("creating links through exec without text", function() {
+                editor.value("");
+
+                editor.exec("createLink", {
+                    url: "bar"
+                });
+
+                equal(editor.value(), '<a href="bar">bar</a>');
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
