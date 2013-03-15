@@ -6298,6 +6298,12 @@ the minimum and maximum values.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>Defines text for search box pleaceholder.</description>
+            <name>search</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>Defines text for upload button.</description>
             <name>uploadFile</name>
             <rtexprvalue>true</rtexprvalue>

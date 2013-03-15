@@ -115,6 +115,14 @@ public class ImageBrowserMessagesTag extends  BaseTag  /* interfaces */ /* inter
         setProperty("overwriteFile", value);
     }
 
+    public String getSearch() {
+        return (String)getProperty("search");
+    }
+
+    public void setSearch(String value) {
+        setProperty("search", value);
+    }
+
     public String getUploadFile() {
         return (String)getProperty("uploadFile");
     }
