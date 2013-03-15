@@ -112,8 +112,7 @@ kendo_module({
         _attachEvents: function() {
             var that = this,
                 orientation = that.options.orientation,
-                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation,
-                expandCollapseSelector = "> .k-splitbar .k-icon:not(.k-resize-handle)";
+                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation;
 
             // do not use delegated events to increase performance of nested elements
             that.element
