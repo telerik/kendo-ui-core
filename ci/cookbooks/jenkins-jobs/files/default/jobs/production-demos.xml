@@ -62,7 +62,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>bundle --without development --path ~/gems &amp;&amp; npm install &amp;&amp; bundle exec rake build:production:demos;</command>
+      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; npm install &amp;&amp; bundle exec rake build:production:demos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

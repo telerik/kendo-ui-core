@@ -74,17 +74,12 @@ PHP_CONTENT = {
     'wrappers/php' => PHP_DEMOS_SRC
 }
 
-task :npm do
-    dir = Rake.application.original_dir
-    sh "cd #{dir} && npm install", :verbose => VERBOSE
-end
-
 # Rake tasks
 desc('JavaScript')
-task :js => [:npm, MIN_JS, JS_BUNDLES, KENDO_CONFIG_FILE].flatten
+task :js => [MIN_JS, JS_BUNDLES, KENDO_CONFIG_FILE].flatten
 
 desc('Less')
-multitask :less => [:npm, MIN_CSS].flatten
+multitask :less => [MIN_CSS].flatten
 
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
