@@ -409,6 +409,65 @@
                     equal(sOpts.to, 99);
                 });
 
+                test("selection does not expand beyond min/max range", function() {
+                    setup({
+                        categoryAxis: {
+                            select: {
+                                from: 40,
+                                to: 60,
+                                min: 30,
+                                max: 70
+                            }
+                        }
+                    });
+
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 300
+                        }
+                    });
+
+                    equal(sOpts.from, 30);
+                    equal(sOpts.to, 70);
+                });
+
+                // ------------------------------------------------------------
+                module("Selection / Date axis / Configuration", {
+                    setup: function() {
+                        setup({
+                            categoryAxis: {
+                                categories: [
+                                    new Date("2012/01/01 00:00"),
+                                    new Date("2012/01/30 00:00")
+                                ],
+                                select: {
+                                    from: "2012/01/10 00:00",
+                                    to: "2012/01/15 00:00",
+                                    min: "2012/01/05 00:00",
+                                    max: "2012/01/15 00:00"
+                                }
+                            }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("from can be parsed from string", function() {
+                    ok(sOpts.from instanceof Date);
+                });
+
+                test("to can be parsed from string", function() {
+                    ok(sOpts.to instanceof Date);
+                });
+
+                test("min can be parsed from string", function() {
+                    ok(sOpts.min instanceof Date);
+                });
+
+                test("max can be parsed from string", function() {
+                    ok(sOpts.max instanceof Date);
+                });
+
                 // ------------------------------------------------------------
                 module("Selection / Date axis", {
                     setup: function() {
@@ -418,14 +477,14 @@
                             }],
                             categoryAxis: {
                                 categories: [
-                                    new Date("2012-01-01 00:00"),
-                                    new Date("2012-01-02 00:00"),
-                                    new Date("2012-01-03 00:00"),
-                                    new Date("2012-01-04 00:00")
+                                    new Date("2012/01/01 00:00"),
+                                    new Date("2012/01/02 00:00"),
+                                    new Date("2012/01/03 00:00"),
+                                    new Date("2012/01/04 00:00")
                                 ],
                                 select: {
-                                    from: new Date("2012-01-02 00:00"),
-                                    to: new Date("2012-01-03 00:00")
+                                    from: new Date("2012/01/02 00:00"),
+                                    to: new Date("2012/01/03 00:00")
                                 }
                             }
                         });
@@ -439,19 +498,19 @@
                 });
 
                 test("range start is rounded down to prev date", function() {
-                    selection.set(new Date("2012-01-01 15:00"), new Date("2012-01-03 00:00"));
-                    deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
+                    selection.set(new Date("2012/01/01 15:00"), new Date("2012/01/03 00:00"));
+                    deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
                 });
 
                 test("range start is rounded up to prev date", function() {
-                    selection.set(new Date("2012-01-01 00:00"), new Date("2012-01-03 15:00"));
-                    deepEqual(sOpts.to, new Date("2012-01-03 00:00"));
+                    selection.set(new Date("2012/01/01 00:00"), new Date("2012/01/03 15:00"));
+                    deepEqual(sOpts.to, new Date("2012/01/03 00:00"));
                 });
 
                 test("selectStart args contain date range", function() {
                     chart.bind("selectStart", function(e) {
-                        deepEqual(e.from, new Date("2012-01-02 00:00"));
-                        deepEqual(e.to, new Date("2012-01-03 00:00"));
+                        deepEqual(e.from, new Date("2012/01/02 00:00"));
+                        deepEqual(e.to, new Date("2012/01/03 00:00"));
                     });
 
                     selection._start(stubArgs());
@@ -459,8 +518,8 @@
 
                 test("select args contain date range", function() {
                     chart.bind("select", function(e) {
-                        deepEqual(e.from, new Date("2012-01-01 00:00"));
-                        deepEqual(e.to, new Date("2012-01-03 00:00"));
+                        deepEqual(e.from, new Date("2012/01/01 00:00"));
+                        deepEqual(e.to, new Date("2012/01/03 00:00"));
                     });
 
                     selection._start(stubArgs());
@@ -469,7 +528,7 @@
 
                 test("selectEnd updates date range", 1, function() {
                     chart.bind("selectEnd", function(e) {
-                        deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
+                        deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
                     });
 
                     selection._start(stubArgs());
@@ -479,8 +538,8 @@
 
                 asyncTest("selectEnd updates date range after mousewheel", function() {
                     chart.bind("selectEnd", function(e) {
-                        deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
-                        deepEqual(sOpts.to, new Date("2012-01-04 00:00"));
+                        deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
+                        deepEqual(sOpts.to, new Date("2012/01/04 00:00"));
                         start();
                     });
 
@@ -496,8 +555,35 @@
                         });
                     }
 
-                    deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
-                    deepEqual(sOpts.to, new Date("2012-01-04 00:00"));
+                    deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
+                    deepEqual(sOpts.to, new Date("2012/01/04 00:00"));
+                });
+
+                test("selection does not expand beyond min/max range", function() {
+                    setup({
+                        categoryAxis: {
+                            categories: [
+                                new Date("2012/01/01 00:00"),
+                                new Date("2012/01/30 00:00")
+                            ],
+                            baseUnit: "days",
+                            select: {
+                                from: new Date("2012/01/10 00:00"),
+                                to: new Date("2012/01/11 00:00"),
+                                min: new Date("2012/01/05 00:00"),
+                                max: new Date("2012/01/15 00:00")
+                            }
+                        }
+                    });
+
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: 3000
+                        }
+                    });
+
+                    deepEqual(sOpts.from, new Date("2012/01/05 00:00"));
+                    deepEqual(sOpts.to, new Date("2012/01/15 00:00"));
                 });
 
             })();

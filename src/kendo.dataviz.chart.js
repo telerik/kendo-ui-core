@@ -7987,6 +7987,15 @@ kendo_module({
             that._dateAxis = that.categoryAxis instanceof DateCategoryAxis,
             that.valueAxis = valueAxis;
 
+            if (that._dateAxis) {
+                deepExtend(options, {
+                    min: toDate(options.min),
+                    max: toDate(options.max),
+                    from: toDate(options.from),
+                    to: toDate(options.to)
+                });
+            }
+
             that.template = Selection.template;
             if (!that.template) {
                 that.template = Selection.template = renderTemplate(
