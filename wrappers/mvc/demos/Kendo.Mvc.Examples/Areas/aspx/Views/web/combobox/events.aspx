@@ -25,7 +25,7 @@
             })
             .Events(e =>
             {
-                e.Change("change").Select("select").Open("open").Close("close").DataBound("dataBound");
+                e.Change("onChange").Select("onSelect").Open("onOpen").Close("onClose").DataBound("onDataBound");
             })
     %>
 </div>
@@ -35,33 +35,36 @@
     <div class="console"></div>
 </div>
 <script>
-    function open() {
+    function onOpen() {
         kendoConsole.log("event: open");
     };
 
-    function close() {
+    function onClose() {
         kendoConsole.log("event: close");
     };
 
-    function change() {
+    function onChange() {
         kendoConsole.log("event: change");
     };
 
-    function dataBound() {
+    function onDataBound() {
         kendoConsole.log("event: dataBound");
     };
 
-    function select(e) {
+    function onSelect(e) {
         if ("kendoConsole" in window) {
             var dataItem = this.dataItem(e.item.index());
-            kendoConsole.log("event :: select (" + dataItem.Text + " : " + dataItem.Value + ")" );
+            kendoConsole.log("event :: select (" + dataItem.Text + " : " + dataItem.Value + ")");
         }
     };
 </script>
 <style scoped>
-    .demo-section
-    {
-        text-align:center;
+    .demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
     }
 </style>  
 </asp:Content>

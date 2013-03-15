@@ -89,17 +89,16 @@
     </li>
 </ul>
 
-<script>
-    $(document).ready(function () {
-        $("#select").kendoComboBox();
-    });
-</script>
-
 <style scoped>
-    div.demo-section
-    {
-        width: 204px;
-        margin: 0px auto 25px auto;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 </asp:Content>
