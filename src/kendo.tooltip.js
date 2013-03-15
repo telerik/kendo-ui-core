@@ -121,7 +121,7 @@ kendo_module({
 
             that.dimensions = DIMENSIONS[axis];
 
-            that._documentKeyDownHandler = proxy(that.hide, that);
+            that._documentKeyDownHandler = proxy(that._documentKeyDownHandler, that);
 
             that.element
                 .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
@@ -243,12 +243,15 @@ kendo_module({
             }, options));
         },
 
-        hide: function(e) {
+        _documentKeyDownHandler: function(e) {
+            if (e.keyCode === kendo.keys.ESC) {
+                this.hide();
+            }
+        },
+
+        hide: function() {
             if (this.popup) {
                 this.popup.close();
-                if (e) {
-                    e.preventDefault();
-                }
             }
         },
 
@@ -272,17 +275,16 @@ kendo_module({
 
             if (!current || current[0] != target[0]) {
                 that._appendContent(target);
-
                 that.popup.options.anchor = target;
-
             }
 
             that.popup.one("deactivate", function() {
                 restoreTitle(target);
                 target.removeAttr(DESCRIBEDBY);
 
-                this.element.removeAttr("id")
-                .attr("aria-hidden", true);
+                this.element
+                    .removeAttr("id")
+                    .attr("aria-hidden", true);
 
                 DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
@@ -337,8 +339,13 @@ kendo_module({
             if (options.autoHide) {
                 wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
             } else {
-                wrapper.on("click" + NS, ".k-tooltip-button", proxy(that.hide, that));
+                wrapper.on("click" + NS, ".k-tooltip-button", proxy(that._closeButtonClick, that));
             }
+        },
+
+        _closeButtonClick: function(e) {
+            e.preventDefault();
+            this.hide();
         },
 
         _mouseleave: function(e) {
