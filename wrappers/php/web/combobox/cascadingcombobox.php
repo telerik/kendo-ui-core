@@ -49,20 +49,23 @@ $schema->data('data')
        ->total('total');
 
 ?>
-<p>
-    <label for="categories">Categories:</label>
+<div class="demo-section">
+    <h2>View Order Details</h2>
+    <p>
+        <label for="categories">Categories:</label>
 <?php
 $categories = new \Kendo\UI\ComboBox('categories');
 $categories->dataSource(array('transport' => $transport, 'schema' => $schema, 'serverFiltering' => true))
            ->dataTextField('CategoryName')
            ->dataValueField('CategoryID')
+           ->attr('style', 'width:300px')
            ->placeholder('Select category ...');
 
 echo $categories->render();
 ?>
-</p>
-<p>
-    <label for="products">Products:</label>
+    </p>
+    <p>
+        <label for="products">Products:</label>
 <?php
 
 $read->url('cascadingcombobox.php?type=products');
@@ -74,13 +77,14 @@ $products->dataSource(array('transport' => $transport, 'schema' => $schema, 'ser
          ->cascadeFrom('categories')
          ->dataTextField('ProductName')
          ->dataValueField('ProductID')
+         ->attr('style', 'width:300px')
          ->placeholder('Select product ...');
 
 echo $products->render();
 ?>
-</p>
-<p>
-    <label for="orders">Orders:</label>
+    </p>
+    <p>
+        <label for="orders">Orders:</label>
 <?php
 
 $read->url('cascadingcombobox.php?type=orders');
@@ -92,9 +96,51 @@ $products->dataSource(array('transport' => $transport, 'schema' => $schema, 'ser
          ->cascadeFrom('products')
          ->dataTextField('OrderID')
          ->dataValueField('OrderID')
+         ->attr('style', 'width:300px')
          ->placeholder('Select order ...');
 
 echo $products->render();
 ?>
-</p>
+    </p>
+    <button class="k-button" id="get">View Order</button>
+</div>
+<script>
+    $(document).ready(function () {
+        var categories = $("#categories").data("kendoComboBox"),
+            products = $("#products").data("kendoComboBox"),
+            orders = $("#orders").data("kendoComboBox");
+
+        $("#get").click(function () {
+            var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
+                productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
+                orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
+
+            alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
+        });
+    });
+</script>
+<style scoped>
+    .demo-section {
+        width: 460px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+    .demo-section label {
+        display: inline-block;
+        width: 120px;
+        padding-right: 5px;
+        text-align: right;
+    }
+    .demo-section .k-button {
+        margin: 20px 0 0 125px;
+    }
+    .k-readonly
+    {
+        color: gray;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

@@ -6,22 +6,29 @@ require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
 
 ?>
-
-<div class="configuration k-widget k-header" style="width: 210px">
+<div class="configuration-horizontal">
+    <div class="config-section">
     <span class="configHead">API Functions</span>
     <ul class="options">
         <li>
-            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+            <button id="enable" class="k-button">Enable</button> <button id="disable" class="k-button">Disable</button>
         </li>
         <li>
-            <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the drop-down
+            <button id="readonly" class="k-button">Readonly</button>
         </li>
         <li>
-            <button id="getValue" class="k-button">Get value</button> or <button id="getText" class="k-button">Get text</button>
+            <button id="open" class="k-button">Open</button> <button id="close" class="k-button">Close</button>
         </li>
         <li>
-            <label for="filter" style="display: block; ">Filter type:</label>
-            <select id="filter" style="width: 120px; float: right; margin-bottom: 3px; margin-top: -3px;">
+            <button id="getValue" class="k-button">Get value</button> <button id="getText" class="k-button">Get text</button>
+        </li>
+    </ul>
+    </div>
+    <div class="config-section">
+    <span class="configHead">Filter</span>
+    <ul class="options">
+        <li>
+            <select id="filter">
                 <option value="none">None</option>
                 <option value="startswith">Starts with</option>
                 <option value="contains">Contains</option>
@@ -29,15 +36,24 @@ require_once '../../include/header.php';
             </select>
         </li>
         <li>
-            <input id="word" value="The" class="k-textbox" /> <button id="find" class="k-button">Find item</button>
+            <input id="word" value="The" class="k-textbox" style="width: 149px; margin: 0;" />
         </li>
         <li>
-            <input id="index" value="0" class="k-textbox" /> <button id="select" class="k-button">Select by index</button>
-        </li>
-        <li>
-            <input id="value" value="1" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
+            <button id="find" class="k-button">Find item</button>
         </li>
     </ul>
+    </div>
+    <div class="config-section">
+    <span class="configHead">Select</span>
+    <ul class="options">
+        <li>
+            <input id="index" value="0" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="select" class="k-button">Select by index</button>
+        </li>
+        <li>
+            <input id="value" value="1" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="setValue" class="k-button">Select by value</button>
+        </li>
+    </ul>
+    </div>
 </div>
 <?php
 $comboBox = new \Kendo\UI\ComboBox('products');
@@ -90,6 +106,10 @@ $(function() {
         combobox.enable(false);
     });
 
+    $("#readonly").click(function () {
+        combobox.readonly();
+    });
+
     $("#open").click(function() {
         combobox.open();
     });
@@ -123,6 +143,17 @@ $(function() {
 <style scoped>
     .configuration .k-textbox {
         width: 40px;
+    }
+    .demo-section {
+        width: 660px;
+        padding: 30px;
+        text-align: center;
+    }
+    .k-button {
+        min-width: 80px;
+    }
+    .configuration-horizontal .options li {
+        padding: 3px 0;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

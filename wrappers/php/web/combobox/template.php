@@ -14,12 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 require_once '../../include/header.php';
 ?>
-<div class="configuration k-widget k-header">
-    <span class="infoHead">Information</span>
-    <p>
-        Open the ComboBox to see the customized appearance of the items.
-    </p>
-</div>
+<div class="demo-section">
+    <h2>Customers</h2>
 <?php
 $read = new \Kendo\Data\DataSourceTransportRead();
 $read->url('template.php')
@@ -40,6 +36,7 @@ $comboBox = new \Kendo\UI\ComboBox('customers');
 $comboBox->minLength(1)
          ->dataTextField('ContactName')
          ->dataSource($dataSource)
+         ->attr("style", "width:400px")
          ->template(<<<TEMPLATE
             <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
             <dl>
@@ -50,43 +47,43 @@ TEMPLATE
             );
 
 echo $comboBox->render();
-
 ?>
+</div>
 
-<script>
-    $(function() {
-        $("#customers").data("kendoComboBox").list.width(400);
-    });
-</script>
+<div class="demo-section">
+    <h2>Information</h2>
+    <p>
+        Open the ComboBox to see the customized appearance of the items.
+    </p>
+</div>
 
 <style scoped>
+    .demo-section {
+        width: 400px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
     #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
-
     #customers-list img {
-        box-shadow: 0 0 4px rgba(255,255,255,.7);
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
-        margin: 5px;
+        margin: 5px 20px 5px 0px;
     }
-
-    #customers-list dl {
-        margin-left: 85px;
+    #customers-list h3 {
+        margin: 30px 0 10px 0;
+        font-size: 2em;
     }
-
-    #customers-list dt,
-    #customers-list dd {
+    #customers-list p {
         margin: 0;
-        padding: 0;
-    }
-
-    #customers-list dt {
-        font-weight: bold;
-        padding-top: .5em;
-    }
-
-    #customers-list dd {
-        padding-bottom: .3em;
     }
 </style>
+
 <?php require_once '../../include/footer.php'; ?>
