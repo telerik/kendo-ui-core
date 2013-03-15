@@ -32,8 +32,14 @@
 
                     QUnit.addEvent(QUnit.iframe, "load", function() {
                         var win = QUnit.iframe.contentWindow,
-                        startDate,
-                        knownFails = win.$();
+                            startDate;
+
+                        if (!win.$) {
+                            client.publish("/log", { message: "iFrame has no jQuery, skipping", location: win.location.href });
+                            return;
+                        }
+                        var knownFails = win.$();
+
 
                         win.QUnit.testStart(function (state) {
                             startDate = +new Date();

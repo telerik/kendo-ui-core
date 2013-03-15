@@ -32,6 +32,12 @@ client.subscribe("/ready", function(agent) {
 var doc = builder.create();
 var root = doc.begin('testsuite');
 
+client.subscribe('/log', function(message) {
+    process.stderr.write("*********************************************************************************************\n");
+    process.stderr.write( JSON.stringify(message) + "\n");
+    process.stderr.write("*********************************************************************************************\n");
+}
+
 client.subscribe('/testDone', function(message) {
   var agent = message.agent.match(/(Firefox|Chrome)\/(\d+)/);
   agent = agent[1] + agent[2];
