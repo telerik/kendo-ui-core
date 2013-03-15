@@ -326,6 +326,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :product => 'Kendo UI Complete for ASP.NET MVC',
        :upload_as_internal_build => true,
+       :vs_extension => true,
        :contents => {
             'js' => MVC_MIN_JS,
             'styles' => MIN_CSS_RESOURCES,

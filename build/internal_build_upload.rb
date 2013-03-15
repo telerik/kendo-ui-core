@@ -63,6 +63,7 @@ def upload_internal_build(options)
     Thread.current.send :sleep, 3
 
     changelog_contents = File.read(options[:changelog_path])
+
     bot.driver.execute_script "$telerik.$(document.body).append('<textarea id=\"tmp_editor\" />')"
 
     changelog_contents.each_line do |line|
@@ -73,7 +74,11 @@ def upload_internal_build(options)
 
     bot.fill_in('File type:', 'Paid Files')
 
-    bot.find('#fileVersionField input').send_keys "#{VERSION}.0"
+    unless options[:vs_extension]
+        bot.driver.execute_script "$telerik.$('#ctl18_attachmentEdit_cbIsHotfix').click()"
+    else
+        bot.find('#fileVersionField input').send_keys "#{VERSION}.0"
+    end
 
     full_path = File.expand_path(options[:archive_path], File.join(File.dirname(__FILE__), ".."))
     bot.find('.RadUpload input[type=file]').send_keys(full_path)
@@ -82,27 +87,29 @@ def upload_internal_build(options)
     Thread.current.send :sleep, 6
 end
 
-# driver.quit
+desc "Hide all current internal builds"
 
-=begin
-def unmark_previous_builds
-    $driver.execute_script <<-SCRIPT
+task "internal_builds:bundles:all"
+
+task "internal_builds:uncheck_previous" do
+    bot = TelerikAdminBot.instance
+
+    bot.go_to_internal_buids
+
+    bot.driver.execute_script <<-SCRIPT
          var masterTable = $find("ctl18_rgNightBuilds").get_masterTableView();
          masterTable.filter("Title", "kendoui", Telerik.Web.UI.GridFilterFunction.Contains);
     SCRIPT
 
     Thread.current.send :sleep, 3
 
-    rows_length = $driver.find_elements(:css, ".rgMasterTable tbody tr").length
-
-    p rows_length
+    rows_length = bot.driver.find_elements(:css, ".rgMasterTable tbody tr").length
 
     1.upto(rows_length) do |index|
-        checkbox = $driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(2) input[type=checkbox]")
-        $driver.execute_script 'arguments[0].click()', checkbox if checkbox.selected?
+        checkbox = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(2) input[type=checkbox]")
+        bot.driver.execute_script 'arguments[0].click()', checkbox if checkbox.selected?
         Thread.current.send :sleep, 1
     end
-    Thread.current.send :sleep, 7
 end
-=end
 
+task "internal_builds:upload" => [ "internal_builds:uncheck_previous", "internal_builds:bundles:all" ]

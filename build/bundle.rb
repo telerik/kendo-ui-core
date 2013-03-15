@@ -120,6 +120,7 @@ def bundle(options)
                 :title => versioned_bundle_name(name),
                 :product => options[:product],
                 :changelog_path => changelog_path,
+                :vs_extension => !!options[:vs_extension],
                 :archive_path => versioned_bundle_archive_path
         end
 
