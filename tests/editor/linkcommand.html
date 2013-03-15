@@ -427,6 +427,17 @@
                 equal(editor.value(), '<a href="bar">bar</a>');
             });
 
+            test("creating links through exec does not open popup", function() {
+                editor.value("");
+
+                editor.exec("createLink", {
+                    text: "foo",
+                    url: "bar"
+                });
+
+                equal($(".k-window").length, 0);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

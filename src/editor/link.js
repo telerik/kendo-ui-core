@@ -79,11 +79,13 @@ var LinkCommand = Command.extend({
             cmd.attributes = null;
             cmd.async = true;
         } else {
-            cmd.formatter.apply(options.range, {
-                href: options.url,
-                innerHTML: options.text || options.url,
-                target: options.target
-            });
+            this.exec = function() {
+                this.formatter.apply(options.range, {
+                    href: options.url,
+                    innerHTML: options.text || options.url,
+                    target: options.target
+                });
+            };
         }
     },
 
