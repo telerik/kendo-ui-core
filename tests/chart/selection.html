@@ -480,7 +480,7 @@
                 asyncTest("selectEnd updates date range after mousewheel", function() {
                     chart.bind("selectEnd", function(e) {
                         deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
-                        deepEqual(sOpts.to, new Date("2012-01-03 00:00"));
+                        deepEqual(sOpts.to, new Date("2012-01-04 00:00"));
                         start();
                     });
 
