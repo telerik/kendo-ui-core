@@ -63,11 +63,7 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
 //<< destroy
         items = null;
         super.destroy();
-    }
-    
-    public void setItems(ItemsTag value) {
-        items = value.items();
-    }
+    }       
 
 //>> Attributes
     public void setItems(ItemsTag value) {
