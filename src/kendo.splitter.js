@@ -127,11 +127,6 @@ kendo_module({
                     .on("mousedown" + NS, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
                     .on("mouseup" + NS, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .end()
-                .find(expandCollapseSelector)
-                    .off(NS)
-                    .on(MOUSEENTER + NS, function() { $(this).addClass("k-state-hover"); })
-                    .on(MOUSELEAVE + NS, function() { $(this).removeClass('k-state-hover'); })
-                .end()
                 .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
                 .on(CLICK + NS, ".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", that._arrowClick(EXPAND))
                 .on("dblclick" + NS, ".k-splitbar", proxy(that._togglePane, that))
@@ -159,14 +154,12 @@ kendo_module({
         destroy: function() {
             var that = this,
                 orientation = that.options.orientation,
-                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation,
-                expandCollapseSelector = "> .k-splitbar .k-icon:not(.k-resize-handle)";
+                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation;
 
             Widget.fn.destroy.call(that);
 
             that.element.off(NS)
-                .find(splitbarDraggableSelector).off(NS).end()
-                .find(expandCollapseSelector).off(NS).end();
+                .find(splitbarDraggableSelector).off(NS);
 
             that.resizing.destroy();
 
