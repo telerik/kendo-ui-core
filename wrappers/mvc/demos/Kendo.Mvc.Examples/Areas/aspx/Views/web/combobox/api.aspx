@@ -55,7 +55,6 @@
 </div>
 
 <div class="demo-section">
-    <label for="movies">Select movie: </label>
     <%= Html.Kendo().ComboBox()
         .Name("movies")
         .DataTextField("Text")

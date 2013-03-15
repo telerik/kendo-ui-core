@@ -637,6 +637,7 @@
     <Content Include="Areas\razor\Views\web\grid\toolbar_template.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\sorting.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\navigation.cshtml" />
     <None Include="Areas\razor\Views\web\listview\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\tooltip\template.cshtml" />
     <Content Include="Global.asax" />

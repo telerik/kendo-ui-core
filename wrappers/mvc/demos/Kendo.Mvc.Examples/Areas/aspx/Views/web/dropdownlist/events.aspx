@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="demo-section">
-    <h3 class="title">Select item</h3>
+    <h3 class="title">DropDownList</h3>
     <%= Html.Kendo().DropDownList()
             .Name("dropdownlist")
             .DataTextField("Text")
@@ -57,9 +57,15 @@
     };
 </script>
 <style scoped>
-    .demo-section
-    {
-        text-align:center;
+    .demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .demo-section .k-dropdown {
+        text-align: left;
+    }
+    .console {
+        margin: 0;
     }
 </style>
 </asp:Content>

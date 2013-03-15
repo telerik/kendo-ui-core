@@ -5,69 +5,62 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="configuration k-widget k-header">
-    <span class="infoHead">Information</span>
+<div class="demo-section">
+    <h2>Customers</h2>
+    <%= Html.Kendo().DropDownList()
+          .Name("customers")
+          .HtmlAttributes(new { style = "width: 400px" })
+          .DataTextField("ContactName")
+          .DataValueField("CustomerID")
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("GetCustomers", "Home");
+              });
+          })
+          .Height(300)
+              .Template("<img src=\"" + Url.Content("~/Content/web/Customers/") + "${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
+                            "<dl>" +
+                                "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
+                                "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
+                            "</dl>")
+%>
+</div>
+            
+<div class="demo-section">
+    <h2>Information</h2>
     <p>
         Open the DropDownList to see the customized appearance of the items.
     </p>
 </div>
 
-<%= Html.Kendo().DropDownList()
-      .Name("customers")
-      .DataTextField("ContactName")
-      .DataValueField("CustomerID")
-      .DataSource(source =>
-      {
-          source.Read(read =>
-          {
-              read.Action("GetCustomers", "Home");
-          });
-      })
-      .Height(300)
-          .Template("<img src=\"" + Url.Content("~/Content/web/Customers/") + "${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
-                        "<dl>" +
-                            "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
-                            "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
-                        "</dl>")
-%>
-
-<script>
-    $(document).ready(function() {
-        var dropdownlist = $("#customers").data("kendoDropDownList");
-
-        // set width of the drop-down list
-        dropdownlist.list.width(400);
-    });
-</script>
-
 <style scoped>
-    #customers-list .k-item {
+    .demo-section {
+        width: 400px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    #titles-list .k-item {
         overflow: hidden; /* clear floated images */
     }
-
-    #customers-list img {
-        box-shadow: 0 0 4px rgba(255,255,255,.7);
+    #titles-list img {
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
-        margin: 5px;
+        margin: 5px 20px 5px 0;
     }
-
-    #customers-list dl {
-        margin-left: 85px;
+    #titles-list h3 {
+        margin: 30px 0 10px 0;
+        font-size: 2em;
     }
-
-    #customers-list dt,
-    #customers-list dd {
+    #titles-list p {
         margin: 0;
-        padding: 0;
-    }
-
-    #customers-list dt {
-        font-weight: bold;
-        padding-top: .5em;
-    }
-
-    #customers-list dd {
-        padding-bottom: .3em;
     }
 </style>
 </asp:Content>
