@@ -36,7 +36,7 @@ namespace :tests do
         end
 
         desc "Run #{env} tests"
-        task env => [:npm, output, :java, :aspnetmvc] do
+        task env => [output, :java, :aspnetmvc] do
             sh "touch #{output}"
         end
     end
