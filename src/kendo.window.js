@@ -258,11 +258,11 @@ kendo_module({
             });
 
             if (options.width) {
-                wrapper.width(constrain(options.width, options.minWidth, options.maxWidth));
+                wrapper.width(constrain(parseInt(options.width, 10), options.minWidth, options.maxWidth));
             }
 
             if (options.height) {
-                wrapper.height(constrain(options.height, options.minHeight, options.maxHeight));
+                wrapper.height(constrain(parseInt(options.height, 10), options.minHeight, options.maxHeight));
             }
 
             if (!options.visible) {
