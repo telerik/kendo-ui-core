@@ -1,20 +1,20 @@
 <div id="example" class="k-content">
 
     <div class="demo-section">
-	<h2>Products</h2>
-	<div id="listView"></div>
-	<div id="pager" class="k-pager-wrap">
-	</div>
+        <h2>Products</h2>
+        <div id="listView"></div>
+        <div id="pager" class="k-pager-wrap"> </div>
     </div>
 
     <div class="demo-section">
-	<h2>Console Log</h2>
-	<div class="console"></div>
+        <h2>Console Log</h2>
+        <div class="console"></div>
     </div>
+
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
-            <img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
-            <h3>${ProductName}</h3>
+            <img src="../../content/web/foods/#:ProductID#.jpg" alt="#:ProductName# image" />
+            <h3>#:ProductName#</h3>
         </div>
     </script>
 
@@ -59,18 +59,18 @@
 
     <style scoped>
         .demo-section {
-	    padding: 15px;
-	    width: 692px;
-	}
-	.demo-section h2 {
-	    font-size: 1.2em;
-	    margin-bottom: 10px;
-	    text-transform: uppercase;
-	}
-	.demo-section .console {
-	    margin: 0;
-	}
-	.product
+            padding: 15px;
+            width: 692px;
+        }
+        .demo-section h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .demo-section .console {
+            margin: 0;
+        }
+        .product
         {
             float: left;
             width: 220px;
@@ -90,13 +90,13 @@
             margin: 0;
             padding: 10px 0 0 10px;
             font-size: .9em;
-	    overflow: hidden;
-	    font-weight: normal;
+            overflow: hidden;
+            font-weight: normal;
             float: left;
             max-width: 100px;
             text-transform: uppercase;
         }
-	.k-pager-wrap
+        .k-pager-wrap
         {
             border-top: 0;
         }
@@ -108,11 +108,11 @@
             clear: both;
             visibility: hidden;
         }
-	.k-listview
+        .k-listview
         {
             padding: 0;
             min-width: 690px;
-	    min-height: 360px;
+            min-height: 360px;
         }
     </style>
 </div>

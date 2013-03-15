@@ -1,14 +1,16 @@
-<div id="example" class="k-content">    
-    <div class="demo-section">    
+<div id="example" class="k-content">
+
+    <div class="demo-section">
         <h2>Results for #kendoui</h2>
-	<div class="twit-reader">
+        <div class="twit-reader">
             <div id="listView"></div>
         </div>
     </div>
+
     <script type="text/x-kendo-tmpl" id="template">
         <div class="twit">
-            <a class="t-link" href="http://www.twitter.com/${from_user}" title="${from_user}"><img width="48" height="48" src="${profile_image_url}" alt="${from_user}" /></a>
-            <p>${text}</p>
+            <a class="t-link" href="http://www.twitter.com/#:from_user#" title="#:from_user#"><img width="48" height="48" src="#:profile_image_url#" alt="#:from_user#" /></a>
+            <p>#:text#</p>
         </div>
     </script>
 
@@ -45,15 +47,15 @@
 
     <style scoped>
         .demo-section {
-	    width: 410px;
-	    padding: 30px;
-	}
-	.demo-section h2 {
-	    font-size: 1.2em;
-	    margin-bottom: 10px;
-	    text-transform: uppercase;
-	}
-	.twit-reader 
+            width: 410px;
+            padding: 30px;
+        }
+        .demo-section h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .twit-reader
         {
             width: 410px;
             margin: 0 auto;
@@ -64,12 +66,12 @@
             -webkit-transform: translatez(0);
             position:relative; /*IE7*/
         }
-        .k-listview 
+        .k-listview
         {
             padding: 0;
             border: 0;
         }
-        .twit 
+        .twit
         {
             width: 370px;
             height: 54px;
@@ -79,20 +81,20 @@
             border-right: 1px solid rgba(0,0,0,0.1);
             border-bottom: 1px solid rgba(0,0,0,0.1);
             border-left: 1px solid rgba(255,255,255,0.1);
-	    
-	    background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.10) 100%);
-	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.10)));
-	    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
-	    background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
-	    background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
-	    background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+
+            background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.10) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.10)));
+            background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+            background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+            background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+            background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
         }
-        .twit img 
+        .twit img
         {
             border: 3px solid transparent;
             float: left;
         }
-        .twit a:hover img 
+        .twit a:hover img
         {
             border: 3px solid #00acec;
         }
@@ -112,5 +114,4 @@
             visibility: hidden;
         }
     </style>
-
 </div>
