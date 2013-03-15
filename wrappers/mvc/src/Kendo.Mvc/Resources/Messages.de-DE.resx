@@ -228,6 +228,9 @@
   <data name="Editor_OverwriteFile" xml:space="preserve">
     <value>A file with name "{0}" already exists in the current directory. Do you want to overwrite it?</value>
   </data>
+  <data name="Editor_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="Editor_Strikethrough" xml:space="preserve">
     <value>Durchgestrichen</value>
   </data>

@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
             OverwriteFile = Messages.Editor_OverwriteFile;
             UploadFile = Messages.Editor_UploadFile;
             DropFilesHere = Messages.Editor_DropFilesHere;
+            Search = Messages.Editor_Search;
         }
 
         public string DeleteFile { get; set; }
@@ -28,6 +29,7 @@ namespace Kendo.Mvc.UI
         public string OverwriteFile { get; set; }
         public string UploadFile { get; set; }
         public string DropFilesHere { get; set; }
+        public string Search { get; set; }
 
         private const string DefaultDeleteFile = "Are you sure you want to delete \"{0}\"?";
         private const string DefaultDirectoryNotFound = "A directory with this name was not found.";
@@ -39,6 +41,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultOverwriteFile = "'A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?";
         private const string DefaultUploadFile = "Upload";
         private const string DefaultDropFilesHere = "drop files here to upload";
+        private const string DefaultSearch = "Search";
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
@@ -90,6 +93,11 @@ namespace Kendo.Mvc.UI
             if (DropFilesHere != DefaultDropFilesHere)
             {
                 json["dropFilesHere"] = DropFilesHere;
+            }
+
+            if (Search != DefaultSearch)
+            {
+                json["search"] = Search;
             }
         }        
     }

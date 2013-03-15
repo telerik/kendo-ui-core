@@ -767,7 +767,7 @@
                 ok(destroy.calls("destroy"));
             });
 
-            test("search label message is read from the options", function() {
+            test("search label message default value", function() {
                 var browser = setup({ })
                 equal(browser.searchBox.options.label, "Search");
             });

@@ -429,4 +429,7 @@
   <data name="Editor_LinkWebAddress" xml:space="preserve">
     <value>Web address</value>
   </data>
+  <data name="Editor_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

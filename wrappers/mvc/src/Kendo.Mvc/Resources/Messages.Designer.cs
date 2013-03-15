@@ -403,6 +403,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Editor_Search {
+            get {
+                return ResourceManager.GetString("Editor_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Strikethrough.
         /// </summary>
         public static string Editor_Strikethrough {

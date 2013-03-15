@@ -21,6 +21,12 @@
             return this;
         }
 
+        public EditorImageBrowserMessagesBuilder Search(string message)
+        {
+            messages.Search = message;
+            return this;
+        }
+
         public EditorImageBrowserMessagesBuilder EmptyFolder(string message)
         {
             messages.EmptyFolder = message;

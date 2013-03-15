@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
             messages.Superscript = message;
             return this;
         }
-
+        
         public EditorMessagesBuilder Subscript(string message)
         {
             messages.Subscript = message;
