@@ -8386,7 +8386,7 @@ kendo_module({
 
             if (that._dateAxis) {
                 from = categories[lteDateIndex(categories, toDate(from))];
-                to = categories[lteDateIndex(categories, to)];
+                to = categories[lteDateIndex(categories, toDate(to))];
             }
 
             options.from = from;

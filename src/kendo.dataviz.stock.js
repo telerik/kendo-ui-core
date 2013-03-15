@@ -305,20 +305,12 @@ kendo_module({
                 groups = axis.options.categories,
                 select = navi.options.select || {},
                 selection = navi.selection,
-                min = 0,
-                max = groups.length - 1,
-                from = min,
-                to = max;
+                min = groups[0],
+                max = last(groups),
+                from = select.from || min,
+                to = select.to || max;
 
             if (groups.length > 0) {
-                if (select.from) {
-                    from = lteDateIndex(groups, toDate(select.from));
-                }
-
-                if (select.to) {
-                    to = lteDateIndex(groups, toDate(select.to));
-                }
-
                 if (selection) {
                     selection.destroy();
                     selection.wrapper.remove();
@@ -335,13 +327,15 @@ kendo_module({
                     selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi),
-                    visible: options.visible
+                    mousewheel: {
+                        zoom: "left"
+                    }
                 });
 
                 if (options.hint.visible) {
                     navi.hint = new NavigatorHint(chart.element, {
                         min: groups[0],
-                        max: dataviz.last(groups),
+                        max: last(groups),
                         template: options.hint.template,
                         format: options.hint.format
                     });
@@ -444,8 +438,8 @@ kendo_module({
                 src = selection.options,
                 dst = navi.options.select;
 
-            dst.from = groups[src.from];
-            dst.to = groups[src.to];
+            dst.from = src.from;
+            dst.to = src.to;
         },
 
         indexToDate: function(index) {
