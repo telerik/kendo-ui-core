@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" 
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master"
 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
@@ -10,6 +10,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
     </div>
 </script>
 
+<div class="demo-section">
 <%: Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
     .Name("listView")
     .TagName("div")
@@ -23,8 +24,12 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
     .Selectable(selectable => selectable.Mode(ListViewSelectionMode.Multiple))
     .Events(events => events.Change("onChange").DataBound("onDataBound"))
 %>
+</div>
 
-<div class="console"></div>
+<div class="demo-section">
+    <div class="console"></div>
+</div>
+
 <script>
     function onChange(arg) {
         var selected = $.map(this.select(), function(item) {
@@ -40,20 +45,25 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
 </script>
 
 <style scoped>
+    .demo-section {
+	    padding: 15px;
+	    width: 692px;
+	}
+	.demo-section h2 {
+	    font-size: 1.2em;
+	    margin-bottom: 10px;
+	    text-transform: uppercase;
+	}
+	.demo-section .console {
+	    margin: 0;
+	}
     .product
     {
         float: left;
-        width: 270px;
+        width: 220px;
         height: 110px;
-        margin: 5px;
+        margin: 0;
         padding: 5px;
-        -moz-box-shadow: inset 0 0 30px rgba(0,0,0,0.15);
-        -webkit-box-shadow: inset 0 0 30px rgba(0,0,0,0.15);
-        box-shadow: inner 0 0 30px rgba(0,0,0,0.15);
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        background-image: none;
         cursor: pointer;
     }
     .product img
@@ -61,32 +71,21 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
         float: left;
         width: 110px;
         height: 110px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
     }
     .product h3
     {
-        margin: 10px 0 0 0;
-        padding: 10px 10px 10px 20px;
-        font-size: 1em;
+        margin: 0;
+        padding: 10px 0 0 10px;
+        font-size: .9em;
+        overflow: hidden;
+        font-weight: normal;
         float: left;
-        max-width: 120px;
+        max-width: 100px;
         text-transform: uppercase;
     }
-    .k-state-selected h3
+    .k-pager-wrap
     {
-        color: #fff;
-        background-color: rgba(0,0,0,0.4);
-        -moz-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
-        -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
-        box-shadow: inner 0 0 20px rgba(0,0,0,0.2);
-        -moz-border-radius-topright: 5px;
-        -moz-border-radius-bottomright: 5px;
-        -webkit-border-top-right-radius: 5px;
-        -webkit-border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        border-top: 0;
     }
     .k-listview:after
     {
@@ -98,9 +97,10 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
     }
     .k-listview
     {
-        border: 0;
-        padding: 0 0 20px 0;
-        min-width: 0;
+        padding: 0;
+        min-width: 690px;
+        min-height: 360px;
     }
 </style>
+
 </asp:Content>

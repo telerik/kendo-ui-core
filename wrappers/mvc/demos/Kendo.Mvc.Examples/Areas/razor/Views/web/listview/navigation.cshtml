@@ -1,11 +1,15 @@
 @model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
 
-<div class="k-toolbar k-grid-toolbar">
+<div class="demo-section">
     <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
 </div>
 
-<script id="list-view-template" type="text/x-kendo-template">
-    <div class="product-view">
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product-view k-widget">
+        <div class="edit-buttons">
+            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span></a>
+            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span></a>
+        </div>
         <dl>
             <dt>Product Name</dt>
             <dd>#:ProductName#</dd>
@@ -16,30 +20,28 @@
             <dt>Discontinued</dt>
             <dd>#:Discontinued#</dd>
         </dl>
-        <div class="edit-buttons">
-            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>
-            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span>Delete</a>
-        </div>
     </div>
 </script>
 
+<div class="demo-section">
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
     .Name("listView")
     .TagName("div")
-    .ClientTemplateId("list-view-template")
+    .ClientTemplateId("template")
     .DataSource(dataSource => dataSource
         .Model(model => model.Id("ProductID"))
-        .PageSize(6)
+        .PageSize(4)
         .Create(create => create.Action("Editing_Create", "ListView"))
         .Read(read => read.Action("Editing_Read", "ListView"))
         .Update(update => update.Action("Editing_Update", "ListView"))
         .Destroy(destroy => destroy.Action("Editing_Destroy", "ListView"))
     )
-    .Pageable()    
+    .Pageable()
     .Editable()
     .Navigatable()
     .Selectable()
 )
+</div>
 
 <script>
     $(function() {
@@ -149,21 +151,16 @@
     </li>
 </ul>
 
-
 <style scoped>
+    .demo-section {
+        width: 605px;
+    }
     .product-view
     {
         float: left;
-        width: 320px;
-        margin: 5px;
-        padding: 3px;
-        -moz-box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        -webkit-box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
-        border-top: 1px solid rgba(0,0,0,0.1);
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        border-radius: 8px;
+        position: relative;
+        width: 301px;
+        margin: -1px -1px 0 0;
     }
 
     .product-view dl
@@ -176,14 +173,16 @@
     {
         float: left;
         margin: 0;
-        padding: 0;
-        height: 30px;
-        line-height: 30px;
+        padding: 3px;
+        height: 26px;
+        width: 160px;
+        line-height: 26px;
+        overflow: hidden;
     }
     .product-view dt
     {
         clear: left;
-        padding: 0 5px 0 15px;
+        padding: 3px 5px 3px 0;
         text-align: right;
         opacity: 0.6;
         width: 100px;
@@ -192,7 +191,8 @@
     {
         border: 0;
         padding: 0;
-        min-width: 0;
+        min-width: 605px;
+        min-height: 298px;
     }
     .k-listview:after, .product-view dl:after
     {
@@ -204,31 +204,26 @@
     }
     .edit-buttons
     {
-        text-align: right;
-        padding: 5px;
-        min-width: 100px;
-        border-top: 1px solid rgba(0,0,0,0.1);
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        border-radius: 8px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 26px;
+        height: 146px;
+        padding: 2px 2px 0 3px;
+        background-color: rgba(0,0,0,0.1);
     }
-
-    .k-toolbar, #listView, .k-pager-wrap
+    .edit-buttons .k-button
     {
-        width: 660px;
-        margin: 0 auto;
-        -webkit-border-radius: 11px;
-        -moz-border-radius: 11px;
-        border-radius: 11px;
+        width: 26px;
+        margin-bottom: 1px;
     }
-    #listView
+    .k-pager-wrap
     {
-        width: 674px;
+        border-top: 0;
     }
     span.k-invalid-msg
     {
         position: absolute;
-        margin-left: 160px;
-        margin-top: -26px;
+        margin-left: 6px;
     }
 </style>

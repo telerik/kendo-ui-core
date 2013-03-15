@@ -1,6 +1,10 @@
 @model Kendo.Mvc.Examples.Models.ProductViewModel
 
-<div class="product-view">
+<div class="product-view k-widget">
+    <div class="edit-buttons">
+        <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
+        <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
+    </div>
     <dl>
         <dt>Product Name</dt>
         <dd>
@@ -20,8 +24,4 @@
         <dt>Discontinued</dt>
         <dd>@(Html.EditorFor(p=>p.Discontinued))</dd>
     </dl>
-    <div class="edit-buttons">
-        <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span>Save</a>
-        <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span>Cancel</a>
-    </div>
 </div>
