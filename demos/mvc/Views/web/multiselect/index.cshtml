@@ -73,8 +73,12 @@
     <script>
         $(document).ready(function() {
             // create MultiSelect from select HTML element
-            $("#required").kendoMultiSelect();
-            $("#optional").kendoMultiSelect();
+            var required = $("#required").kendoMultiSelect().data("kendoMultiSelect");
+            var optional = $("#optional").kendoMultiSelect().data("kendoMultiSelect");
+
+            $("#get").click(function() {
+                alert("Attendees:\n\nRequired: " + required.value() + "\nOptional: " + optional.value());
+            });
         });
     </script>
 </div>
