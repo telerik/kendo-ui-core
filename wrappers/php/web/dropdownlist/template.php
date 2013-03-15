@@ -14,12 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 require_once '../../include/header.php';
 ?>
-<div class="configuration k-widget k-header">
-    <span class="infoHead">Information</span>
-    <p>
-        Open the DropDownList to see the customized appearance of the items.
-    </p>
-</div>
+<div class="demo-section">
+    <h2>Customers</h2>
 <?php
 $read = new \Kendo\Data\DataSourceTransportRead();
 $read->url('template.php')
@@ -39,6 +35,7 @@ $dataSource->transport($transport)
 $dropDownList = new \Kendo\UI\DropDownList('customers');
 $dropDownList->dataTextField('ContactName')
              ->dataSource($dataSource)
+             ->attr('style', 'width:400px')
              ->template(<<<TEMPLATE
             <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
             <dl>
@@ -51,41 +48,40 @@ TEMPLATE
 echo $dropDownList->render();
 
 ?>
-
-<script>
-    $(function() {
-        $("#customers").data("kendoDropDownList").list.width(400);
-    });
-</script>
+</div>
+<div class="demo-section">
+    <h2>Information</h2>
+    <p>
+        Open the DropDownList to see the customized appearance of the items.
+    </p>
+</div>
 
 <style scoped>
-    #customers-list .k-item {
+    .demo-section {
+        width: 400px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    #titles-list .k-item {
         overflow: hidden; /* clear floated images */
     }
-
-    #customers-list img {
-        box-shadow: 0 0 4px rgba(255,255,255,.7);
+    #titles-list img {
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+        box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
-        margin: 5px;
+        margin: 5px 20px 5px 0;
     }
-
-    #customers-list dl {
-        margin-left: 85px;
+    #titles-list h3 {
+        margin: 30px 0 10px 0;
+        font-size: 2em;
     }
-
-    #customers-list dt,
-    #customers-list dd {
+    #titles-list p {
         margin: 0;
-        padding: 0;
-    }
-
-    #customers-list dt {
-        font-weight: bold;
-        padding-top: .5em;
-    }
-
-    #customers-list dd {
-        padding-bottom: .3em;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

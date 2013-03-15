@@ -43,14 +43,26 @@ $dropDownList = new \Kendo\UI\DropDownList('products');
 
 $dropDownList->dataSource($dataSource)
          ->dataTextField('ProductName')
-         ->dataValueField('ProductID');
+         ->dataValueField('ProductID')
+         ->attr('style', 'width: 250px');
 
 ?>
-<div class="demo-section" style="width: 250px;">
-    <label for="products">Select product:</label>
-
+<div class="demo-section">
+    <h2>Products</h2>
 <?php
 echo $dropDownList->render();
 ?>
 </div>
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

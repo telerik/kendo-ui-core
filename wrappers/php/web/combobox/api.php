@@ -55,11 +55,13 @@ require_once '../../include/header.php';
     </ul>
     </div>
 </div>
+<div class="demo-section">
 <?php
 $comboBox = new \Kendo\UI\ComboBox('products');
 
 $comboBox->dataTextField('text')
          ->dataValueField('value')
+         ->attr('style', 'width: 250px')
          ->dataSource(array(
             array('text' => '12 Angry Men', 'value' => 1),
             array('text' => 'Il buono, il brutto, il cattivo.', 'value' => 2),
@@ -76,6 +78,7 @@ $comboBox->dataTextField('text')
 
 echo $comboBox->render();
 ?>
+</div>
 <script>
 $(function() {
     $("#filter").kendoDropDownList({

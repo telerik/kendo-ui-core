@@ -49,6 +49,8 @@ $schema->data('data')
        ->total('total');
 
 ?>
+<div class="demo-section">
+<h2>View Order Details</h2>
 <p>
     <label for="categories">Categories:</label>
 <?php
@@ -56,6 +58,7 @@ $categories = new \Kendo\UI\DropDownList('categories');
 $categories->dataSource(array('transport' => $transport, 'schema' => $schema, 'serverFiltering' => true))
            ->dataTextField('CategoryName')
            ->dataValueField('CategoryID')
+           ->attr('style', 'width: 300px')
            ->optionLabel('Select category ...');
 
 echo $categories->render();
@@ -74,6 +77,7 @@ $products->dataSource(array('transport' => $transport, 'schema' => $schema, 'ser
          ->cascadeFrom('categories')
          ->dataTextField('ProductName')
          ->dataValueField('ProductID')
+         ->attr('style', 'width: 300px')
          ->optionLabel('Select product ...');
 
 echo $products->render();
@@ -92,9 +96,51 @@ $products->dataSource(array('transport' => $transport, 'schema' => $schema, 'ser
          ->cascadeFrom('products')
          ->dataTextField('OrderID')
          ->dataValueField('OrderID')
+         ->attr('style', 'width: 300px')
          ->optionLabel('Select order ...');
 
 echo $products->render();
 ?>
 </p>
+<button class="k-button" id="get">View Order</button>
+</div>
+<script>
+    $(document).ready(function () {
+        var categories = $("#categories").data("kendoDropDownList"),
+            products = $("#products").data("kendoDropDownList"),
+            orders = $("#orders").data("kendoDropDownList");
+
+        $("#get").click(function () {
+            var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
+                productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
+                orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
+
+            alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
+        });
+    });
+</script>
+<style scoped>
+    .demo-section {
+        width: 460px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+    .demo-section label {
+        display: inline-block;
+        width: 120px;
+        padding-right: 5px;
+        text-align: right;
+    }
+    .demo-section .k-button {
+        margin: 20px 0 0 125px;
+    }
+    .k-readonly
+    {
+        color: gray;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

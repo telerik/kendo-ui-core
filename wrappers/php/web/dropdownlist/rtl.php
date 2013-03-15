@@ -3,7 +3,9 @@
 require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
 ?>
-<div class="k-rtl">
+<div class="demo-section">
+    <div class="k-rtl">
+        <h2>RTL DropDownList</h2>
 <?php
 $dropDownList = new \Kendo\UI\DropDownList('input');
 
@@ -16,5 +18,18 @@ $dropDownList->dataTextField('text')
              ));
 echo $dropDownList->render();
 ?>
+    </div>
 </div>
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>
