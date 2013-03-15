@@ -283,7 +283,7 @@ kendo_module({
             currentContent.kendoAnimateTo(nextContent, transition);
 
             if (!that.back()) {
-                current.nextView = next;
+                current.nextViewID = next.id;
                 current.backTransition = transition.transition;
             }
         },
@@ -323,7 +323,7 @@ kendo_module({
             var next = this.next,
                 current = this.current;
 
-            return next.nextView === current && JSON.stringify(next.params) === JSON.stringify(next.lastParams);
+            return next.nextViewID && next.nextViewID === current.id && JSON.stringify(next.params) === JSON.stringify(next.lastParams);
         }
     });
 
