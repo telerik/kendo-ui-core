@@ -395,6 +395,16 @@
                 equal(dialog.wrapper.height(), 100);
             });
 
+            test("creating window with string width", function() {
+                var dialog = createWindow({ width: "190px" });
+                equal(dialog.wrapper.width(), 190);
+            });
+
+            test("creating window with string height", function() {
+                var dialog = createWindow({ height: "190px" });
+                equal(dialog.wrapper.height(), 190);
+            });
+
             var form;
 
             module("appendTo option", {
