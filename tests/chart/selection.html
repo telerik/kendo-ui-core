@@ -396,6 +396,19 @@
                     equal(sOpts.from, 10);
                 });
 
+                test("selection does not expand beyond axis bounds", function() {
+                    for (var i = 0; i < 50; i++) {
+                        selection._mousewheel({
+                            originalEvent: {
+                                detail: 3
+                            }
+                        });
+                    }
+
+                    equal(sOpts.from, 0);
+                    equal(sOpts.to, 99);
+                });
+
                 // ------------------------------------------------------------
                 module("Selection / Date axis", {
                     setup: function() {
@@ -472,6 +485,19 @@
                     });
 
                     selection._mousewheel({ originalEvent: { detail: 3 } });
+                });
+
+                test("selection does not expand beyond axis bounds", function() {
+                    for (var i = 0; i < 20; i++) {
+                        selection._mousewheel({
+                            originalEvent: {
+                                detail: 3
+                            }
+                        });
+                    }
+
+                    deepEqual(sOpts.from, new Date("2012-01-01 00:00"));
+                    deepEqual(sOpts.to, new Date("2012-01-04 00:00"));
                 });
 
             })();

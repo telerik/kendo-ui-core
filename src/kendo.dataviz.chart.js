@@ -8282,25 +8282,29 @@ kendo_module({
 
                 if (zDir !== RIGHT) {
                     if (that._dateAxis) {
-                        var fromIndex = math.min(
+                        var fromIndex = clipValue(
                             lteDateIndex(categories, options.from) - delta,
+                            0,
                             lteDateIndex(categories, options.to) - 1
                         );
                         range.from = categories[fromIndex];
                     } else {
-                        range.from = math.min(options.from - delta, options.to - 1);
+                        range.from = clipValue(options.from - delta, 0, options.to - 1);
                     }
                 }
 
                 if (zDir !== LEFT) {
                     if (that._dateAxis) {
-                        var toIndex = math.min(
+                        var toIndex = clipValue(
                             lteDateIndex(categories, options.to) + delta,
-                            lteDateIndex(categories, options.from) + 1
+                            lteDateIndex(categories, range.from) + 1,
+                            categories.length - 1
                         );
                         range.to = categories[toIndex];
                     } else {
-                        range.to = math.max(options.to + delta, options.from + 1);
+                        range.to = clipValue(
+                            options.to + delta, range.from + 1, categories.length - 1
+                        );
                     }
                 }
 
