@@ -16,8 +16,12 @@
         <script src="../src/jquery.js"></script>
         <script>
             window.client = new Faye.Client('/faye', {timeout: 600});
+            var loaded = false;
             client.subscribe('/load', function(path) {
-                $("iframe").attr("src", path);
+                if (!loaded) {
+                    $("iframe").attr("src", path);
+                }
+                loaded = true;
             });
 
             client.publish('/ready', navigator.userAgent);
