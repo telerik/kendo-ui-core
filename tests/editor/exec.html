@@ -22,7 +22,7 @@
                 var original = editor.undoRedoStack.push
                 try {
                     var command;
-                    editor.value('foo');
+                    editor.value("foo");
                     var range = editor.createRange();
                     range.selectNodeContents(editor.body);
                     editor.getSelection().removeAllRanges();
@@ -45,8 +45,8 @@
                 }
             });
 
-            test('exec pushes command to undo stack', function() {
-                editor.value('foo');
+            test("exec pushes command to undo stack", function() {
+                editor.value("foo");
                 var range = editor.createRange();
                 range.selectNodeContents(editor.body.firstChild);
                 editor.getSelection().removeAllRanges();
@@ -56,17 +56,17 @@
 
                 editor.undoRedoStack.push = function() { pushArgument = arguments[0] }
 
-                editor.exec('bold');
+                editor.exec("bold");
 
                 ok(undefined !== pushArgument);
             });
 
-            test('exec undo performs undo', function() {
+            test("exec undo performs undo", function() {
                 var original = editor.undoRedoStack.undo;
                 try {
                     var undoIsCalled = false;
                     editor.undoRedoStack.undo = function() { undoIsCalled = true; }
-                    editor.exec('undo');
+                    editor.exec("undo");
 
                     ok(undoIsCalled);
                     } finally {
@@ -74,12 +74,12 @@
                 }
             });
 
-            test('exec redo performs redo', function() {
+            test("exec redo performs redo", function() {
                 var original = editor.undoRedoStack.redo;
                 try {
                     var redoIsCalled = false;
                     editor.undoRedoStack.redo = function () { redoIsCalled = true; }
-                    editor.exec('redo');
+                    editor.exec("redo");
 
                     ok(redoIsCalled);
                     } finally {
@@ -87,52 +87,52 @@
                 }
             });
 
-            test('exec inline command', function() {
-                $.each(['bold', 'italic', 'underline', 'strikethrough'], function() {
+            test("exec inline command", function() {
+                $.each(["bold", "italic", "underline", "strikethrough"], function() {
                     assertCommand(kendo.ui.editor.FormatCommand, this);
                 });
             });
 
-            test('exec unordered list', function() {
-                assertCommand(kendo.ui.editor.ListCommand, 'insertUnorderedList');
+            test("exec unordered list", function() {
+                assertCommand(kendo.ui.editor.ListCommand, "insertUnorderedList");
             });
 
-            test('exec ordered list', function() {
-                assertCommand(kendo.ui.editor.ListCommand, 'insertOrderedList');
+            test("exec ordered list", function() {
+                assertCommand(kendo.ui.editor.ListCommand, "insertOrderedList");
             });
 
-            test('exec block command', function() {
-                $.each(['justifyCenter', 'justifyLeft', 'justifyRight', 'justifyFull'], function() {
+            test("exec block command", function() {
+                $.each(["justifyCenter", "justifyLeft", "justifyRight", "justifyFull"], function() {
                     assertCommand(kendo.ui.editor.FormatCommand, this);
                 });
             });
 
-            test('exec insertLineBreak creates newLineCommand', function() {
-                assertCommand(kendo.ui.editor.NewLineCommand, 'insertLineBreak');
+            test("exec insertLineBreak creates newLineCommand", function() {
+                assertCommand(kendo.ui.editor.NewLineCommand, "insertLineBreak");
             });
 
-            test('exec insertParagraph creates paragraph command', function() {
-                assertCommand(kendo.ui.editor.ParagraphCommand, 'insertParagraph');
+            test("exec insertParagraph creates paragraph command", function() {
+                assertCommand(kendo.ui.editor.ParagraphCommand, "insertParagraph");
             });
 
-            test('exec createLink creates LinkCommand', function() {
-                assertCommand(kendo.ui.editor.LinkCommand, 'createLink');
+            test("exec createLink creates LinkCommand", function() {
+                assertCommand(kendo.ui.editor.LinkCommand, "createLink");
             });
 
-            test('exec unlink creates UnlinkCommand', function() {
-                assertCommand(kendo.ui.editor.UnlinkCommand, 'unlink');
+            test("exec unlink creates UnlinkCommand", function() {
+                assertCommand(kendo.ui.editor.UnlinkCommand, "unlink");
             });
 
-            test('exec insertImage creates image command', function() {
-                assertCommand(kendo.ui.editor.ImageCommand, 'insertImage');
+            test("exec insertImage creates image command", function() {
+                assertCommand(kendo.ui.editor.ImageCommand, "insertImage");
             });
 
-            test('exec indent creates indent command', function() {
-                assertCommand(kendo.ui.editor.IndentCommand, 'indent');
+            test("exec indent creates indent command", function() {
+                assertCommand(kendo.ui.editor.IndentCommand, "indent");
             });
 
-            test('exec outdent creates indent command', function() {
-                assertCommand(kendo.ui.editor.OutdentCommand, 'outdent');
+            test("exec outdent creates indent command", function() {
+                assertCommand(kendo.ui.editor.OutdentCommand, "outdent");
             });
 
         </script>
