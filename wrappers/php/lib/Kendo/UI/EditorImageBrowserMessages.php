@@ -86,6 +86,15 @@ class EditorImageBrowserMessages extends \Kendo\SerializableObject {
         return $this->setProperty('overwriteFile', $value);
     }
 
+    /**
+    * Defines text for search box pleaceholder.
+    * @param string $value
+    * @return \Kendo\UI\EditorImageBrowserMessages
+    */
+    public function search($value) {
+        return $this->setProperty('search', $value);
+    }
+
 //<< Properties
 }
 
