@@ -1,15 +1,15 @@
 [submodule "build/less-js"]
     path = build/less-js
-    url = https://github.com/telerik/less.js.git
+    url = git@github.com:telerik/less.js.git
 [submodule "tests/qunit"]
     path = tests/qunit
-    url = https://github.com/jquery/qunit.git
+    url = git@github.com:jquery/qunit.git
 [submodule "docs"]
     path = docs
     url = git@github.com:telerik/kendo-docs.git
 [submodule "ci/cookbooks/yum"]
     path = ci/cookbooks/yum
-    url = https://github.com/cookbooks/yum.git
+    url = git@github.com:cookbooks/yum.git
 [submodule "ci/cookbooks/apt"]
     path = ci/cookbooks/apt
-    url = https://github.com/opscode-cookbooks/apt.git
+    url = git@github.com:opscode-cookbooks/apt.git
