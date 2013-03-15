@@ -9,6 +9,9 @@
                         <button id="enable" class="k-button">Enable</button> <button id="disable" class="k-button">Disable</button>
                     </li>
                     <li>
+                        <button id="readonly" class="k-button">Readonly</button>
+                    </li>
+                    <li>
                         <button id="open" class="k-button">Open</button> <button id="close" class="k-button">Close</button>
                     </li>
                     <li>
@@ -102,6 +105,10 @@
 
                     $("#disable").click(function() {
                         combobox.enable(false);
+                    });
+
+                    $("#readonly").click(function() {
+                        combobox.readonly();
                     });
 
                     $("#open").click(function() {

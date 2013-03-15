@@ -1,6 +1,6 @@
 <div id="example" class="k-content">
 
-            
+
             <div class="demo-section">
                 <h2>View Order Details</h2>
                 <p>
@@ -12,7 +12,7 @@
                 <p>
                     <label for="orders">Orders:</label><input id="orders" disabled="disabled" style="width: 300px" />
                 </p>
-                
+
                 <button class="k-button" id="get">View Order</button>
             </div>
 
@@ -43,7 +43,7 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#categories").kendoComboBox({
+                    var categories = $("#categories").kendoComboBox({
                         placeholder: "Select category...",
                         dataTextField: "CategoryName",
                         dataValueField: "CategoryID",
@@ -54,7 +54,7 @@
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
                             }
                         }
-                    });
+                    }).data("kendoComboBox");
 
                     var products = $("#products").kendoComboBox({
                         autoBind: false,
@@ -85,6 +85,14 @@
                             }
                         }
                     }).data("kendoComboBox");
+
+                    $("#get").click(function() {
+                        var categoryInfo = "\nCategory: { id: " + categories.value() + ", name: " + categories.text() + " }",
+                            productInfo = "\nProduct: { id: " + products.value() + ", name: " + products.text() + " }",
+                            orderInfo = "\nOrder: { id: " + orders.value() + ", name: " + orders.text() + " }";
+
+                        alert("Order details:\n" + categoryInfo + productInfo + orderInfo);
+                    });
                 });
             </script>
         </div>
