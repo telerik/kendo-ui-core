@@ -60,6 +60,16 @@ echo $select->render();
 ?>
 <button class="k-button" id="get">Send Invitation</button>
 </div>
+<script>
+    $(document).ready(function() {
+        var required = $("#required").data("kendoMultiSelect");
+        var optional = $("#optional").data("kendoMultiSelect");
+
+        $("#get").click(function() {
+            alert("Attendees:\n\nRequired: " + required.value() + "\nOptional: " + optional.value());
+        });
+    });
+</script>
 <style scoped>
     .demo-section {
         width: 350px;

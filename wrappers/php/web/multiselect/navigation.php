@@ -5,12 +5,12 @@ require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
 ?>
 <div class="demo-section">
-    <h3>T-shirt Size</h3>
+    <h2>T-shirt Sizes</h2>
 <?php
 $multiselect = new \Kendo\UI\MultiSelect('select');
 
 $multiselect->placeholder('Select size ...')
-         ->attr('style', 'width: 200px')
+         ->attr('style', 'width: 250px')
          ->attr('accesskey', 'w')
          ->value('Large')
          ->dataSource(array('X-Small', 'Small', 'Medium', 'Large', 'X-Large', '2X-Large'));
@@ -165,10 +165,15 @@ echo $multiselect->render();
 </ul>
 
 <style scoped>
-    div.demo-section
-    {
-        width: 204px;
-        margin: 0px auto 25px auto;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

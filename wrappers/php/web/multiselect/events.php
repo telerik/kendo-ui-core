@@ -59,9 +59,13 @@ echo $multiselect->render();
     <h3 class="title">Console log</h3>
     <div class="console"></div>
 </div>
-<style scoped="scoped">
+<style scoped>
     .demo-section {
-        width: 600px;
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

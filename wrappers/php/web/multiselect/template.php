@@ -14,14 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 require_once '../../include/header.php';
 ?>
-<div class="configuration k-widget k-header">
-    <span class="infoHead">Information</span>
-    <p>
-        Open the ComboBox to see the customized appearance of the items.
-    </p>
-</div>
 <div class="demo-section">
-    <h3 class="title">Select customers</h3>
+    <h2>Select Customers</h2>
 <?php
 $read = new \Kendo\Data\DataSourceTransportRead();
 $read->url('template.php')
@@ -56,8 +50,13 @@ TEMPLATE
 );
 
 echo $multiselect->render();
-
 ?>
+</div>
+<div class="demo-section">
+    <h2>Information</h2>
+    <p>
+        Click the MultiSelect to see the customized appearance of the items.
+    </p>
 </div>
 <script>
     $(function() {
@@ -67,31 +66,30 @@ echo $multiselect->render();
 </script>
 <style scoped>
     .demo-section {
-        width: 450px;
-        margin-top: 40px;
+        width: 400px;
+        margin: 30px auto 50px;
+        padding: 30px;
     }
-
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
     .tag-image {
         width: auto;
-        height: 1.4em;
-        margin-right: 3px;
+        height: 18px;
+        margin-right: 5px;
+        vertical-align: top;
     }
-
-    #customers-wrapper .k-multiselect-wrap .k-input {
-        height: 1.8em;
-        line-height: 1.8em;
-    }
-
     #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
-
     #customers-list img {
         -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
         -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
         box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
-        margin: 5px 20px 5px 5px;
+        margin: 5px 20px 5px 0;
     }
     #customers-list h3 {
         margin: 30px 0 10px 0;
