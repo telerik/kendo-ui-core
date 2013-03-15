@@ -1,5 +1,3 @@
-require 'fileutils'
-
 def description(name)
     name = name.split(/\W/).map { |c| c.capitalize }.join(' ')
 
@@ -22,8 +20,6 @@ def bundle(options)
     license = nil
 
     prerequisites = [:js, :less] + options[:prerequisites].to_a
-
-    FileUtils.rm_rf path
 
     if options[:license]
         license = "#{path}.license"
