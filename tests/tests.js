@@ -56,6 +56,10 @@ client.subscribe('/done', function(message) {
     failures += message.failed;
     total += message.total;
 
+    process.stderr.write("*********************************************************************************************\n");
+    process.stderr.write("browser done: " + message.agent + " -- total: " + message.total + " failed: " + message.failed + "\n");
+    process.stderr.write("*********************************************************************************************\n");
+
     if (!--runningAgents) {
         outputAndExit();
     }

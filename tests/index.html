@@ -44,6 +44,7 @@
 
                             $.extend(state, {
                                 failures: $.map(newFails.contents(), function(err) { return $(err).text() }),
+                                name: (state.module || "") + " " + state.name,
                                 suite: suite,
                                 duration: ((+new Date()) - startDate) / 1000,
                                 agent: navigator.userAgent
@@ -56,7 +57,7 @@
                     });
 
                     QUnit.done(function(state) {
-                        client.publish("/done", state);
+                        client.publish("/done", $.extend(state, { agent: navigator.userAgent }));
                     });
                 });
             }
