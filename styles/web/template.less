@@ -222,18 +222,11 @@ td.k-group-cell,
     background-color: @alt-background-color;
 }
 
-.k-widget .k-dropdown-wrap,
-.k-widget .k-picker-wrap,
-.k-widget .k-numeric-wrap,
 .k-textbox,
 .k-autocomplete.k-header,
-.k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-active,
-.k-dropdown-wrap.k-state-focused.k-state-active,
 .k-picker-wrap.k-state-active,
-.k-picker-wrap.k-state-focused,
-.k-numeric-wrap.k-state-active,
-.k-numeric-wrap.k-state-focused
+.k-numeric-wrap.k-state-active
 {
     border-color: @widget-border-color;
     background-color: @select-background-color;
@@ -500,7 +493,8 @@ textarea.k-textbox:hover,
     border-color: @hover-border-color;
 }
 
-.k-state-hover > .k-select
+.k-state-hover > .k-select,
+.k-state-focused > .k-select
 {
     border-color: @hover-border-color;
 }
@@ -548,10 +542,13 @@ div.k-imagebrowser-dropzone em
 }
 
 .k-autocomplete.k-state-hover,
+.k-autocomplete.k-state-focused,
 .k-picker-wrap.k-state-hover,
+.k-picker-wrap.k-state-focused,
 .k-numeric-wrap.k-state-hover,
+.k-numeric-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-hover,
-.k-dropdown-wrap.k-state-hover.k-state-focused
+.k-dropdown-wrap.k-state-focused
 {
     background-color: @select-hover-background-color;
     .composite-background(@hover-gradient);

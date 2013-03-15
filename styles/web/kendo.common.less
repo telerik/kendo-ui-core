@@ -368,6 +368,8 @@ html body .k-button-bare
 
 .k-i-pencil, .k-edit { .sprite-hoverable(2, 0); }
 .k-i-close, .k-delete, .k-group-delete { .sprite-hoverable(2, 1); }
+.k-multiselect .k-delete { .sprite-position(10, 5); }
+.k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
 .k-i-tick, .k-insert, .k-update { .sprite-hoverable(2, 2); }
 .k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3); }
 .k-i-plus, .k-add { .sprite-hoverable(2, 4); }
@@ -2223,7 +2225,7 @@ body .k-datetimepicker .k-select
 
 .k-multiselect-wrap li
 {
-    margin: 1px;
+    margin: 1px 0 1px 1px;
     padding: .1em .15em .1em .4em;
     line-height: 1.5em;
     float: left;
@@ -2679,7 +2681,6 @@ span.k-numerictextbox
     div& {
         background-color: transparent;
         background-image: none;
-        border-width: 0;
     }
 
     .k-selected-color {

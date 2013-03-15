@@ -852,7 +852,7 @@ kendo_module({
 
         _template: kendo.template(
             '<span class="k-widget k-colorpicker k-header">' +
-                '<span class="k-picker-wrap">' +
+                '<span class="k-picker-wrap k-state-default">' +
                     '# if (toolIcon) { #' +
                         '<span class="k-tool-icon #= toolIcon #">' +
                             '<span class="k-selected-color"></span>' +
