@@ -6384,9 +6384,7 @@ kendo_module({
         createCharts: function(panes) {
             var plotArea = this,
                 seriesByPane = plotArea.groupSeriesByPane(),
-                i,
-                pane,
-                paneSeries;
+                i, pane, paneSeries;
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
