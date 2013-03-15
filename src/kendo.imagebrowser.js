@@ -217,7 +217,8 @@ kendo_module({
                 deleteFile: 'Are you sure you want to delete "{0}"?',
                 invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
                 overwriteFile: "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
-                dropFilesHere: "drop files here to upload"
+                dropFilesHere: "drop files here to upload",
+                search: "Search"
             },
             transport: {},
             path: "/",
@@ -705,6 +706,7 @@ kendo_module({
 
             that.searchBox = navigation.parent().find("input:last")
                     .kendoSearchBox({
+                        label: that.options.messages.search,
                         change: function() {
                             that.search(this.value());
                         }

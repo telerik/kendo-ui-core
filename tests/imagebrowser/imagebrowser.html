@@ -766,6 +766,20 @@
                 browser.destroy();
                 ok(destroy.calls("destroy"));
             });
+
+            test("search label message is read from the options", function() {
+                var browser = setup({ })
+                equal(browser.searchBox.options.label, "Search");
+            });
+
+            test("search label message is read from the options", function() {
+                var browser = setup({
+                    messages: {
+                        search: "foo"
+                    }
+                })
+                equal(browser.searchBox.options.label, "foo");
+            });
         </script>
     </body>
 </html>
