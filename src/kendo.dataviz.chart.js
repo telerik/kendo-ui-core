@@ -8139,7 +8139,7 @@ kendo_module({
                 oldRange = { from: range.from, to: range.to },
                 span = range.to - range.from,
                 target = state.moveTarget,
-                scale = that.wrapper.width() / categories.length - 1,
+                scale = that.wrapper.width() / (categories.length - 1),
                 offset = math.round(delta / scale);
 
             if (!target) {
