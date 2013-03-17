@@ -401,9 +401,7 @@ kendo_module({
 
             selection.set(
                 from,
-                to
-                //TODO Why the + 1?
-                //lteDateIndex(groups, to) + 1
+                addDuration(from, selectionDuration + 1, baseUnit)
             );
 
             navi.showHint(from, to);
