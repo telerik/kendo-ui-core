@@ -54,6 +54,16 @@
                     }, options);
                 }
 
+                function triggerMousewheel(delta) {
+                    selection._mousewheel({
+                        originalEvent: {
+                            detail: delta * 3
+                        },
+                        preventDefault: function() {},
+                        stopPropagation: function() {}
+                    });
+                }
+
                 // ------------------------------------------------------------
                 module("Selection / Configuration", {
                     teardown: destroyChart
@@ -156,7 +166,7 @@
                         ok(true);
                     });
 
-                    selection._mousewheel({ originalEvent: { detail: 3 } });
+                    triggerMousewheel(1);
                 });
 
                 test("selectStart args contain range (from and to)", function() {
@@ -201,8 +211,8 @@
 
                 test("select args contain range (from and to)", function() {
                     chart.bind("select", function(e) {
-                        equal(e.from, 18);
-                        equal(e.to, 19);
+                        equal(e.from, 15);
+                        equal(e.to, 16);
                     });
 
                     selection._start(stubArgs());
@@ -214,7 +224,7 @@
                         ok(true);
                     });
 
-                    selection._mousewheel({ originalEvent: { detail: 3 } });
+                    triggerMousewheel(1);
                 });
 
                 test("select does not fire if range is not changed", 1, function() {
@@ -252,7 +262,7 @@
                         start();
                     });
 
-                    selection._mousewheel({ originalEvent: { detail: 3 } });
+                    triggerMousewheel(1);
                 });
 
                 asyncTest("selectEnd updates final after mousewheel", function() {
@@ -262,7 +272,7 @@
                         start();
                     });
 
-                    selection._mousewheel({ originalEvent: { detail: -3 } });
+                    triggerMousewheel(-1);
                 });
 
                 // ------------------------------------------------------------
@@ -282,11 +292,7 @@
 
                 test("selection shrinks left on mousewheel up", function() {
                     sOpts.mousewheel.zoom = "left";
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: -3
-                        }
-                    });
+                    triggerMousewheel(-1);
 
                     equal(sOpts.from, 41);
                     equal(sOpts.to, 60);
@@ -295,11 +301,7 @@
                 test("selection shrinks left on mousewheel down", function() {
                     sOpts.mousewheel.zoom = "left";
                     sOpts.mousewheel.reverse = true;
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 3
-                        }
-                    });
+                    triggerMousewheel(1);
 
                     equal(sOpts.from, 41);
                     equal(sOpts.to, 60);
@@ -307,44 +309,28 @@
 
                 test("selection shrinks right on mousewheel up", function() {
                     sOpts.mousewheel.zoom = "right";
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: -3
-                        }
-                    });
+                    triggerMousewheel(-1);
 
                     equal(sOpts.from, 40);
                     equal(sOpts.to, 59);
                 });
 
                 test("selection shrinks both sides on mousewheel up", function() {
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: -3
-                        }
-                    });
+                    triggerMousewheel(-1);
 
                     equal(sOpts.from, 41);
                     equal(sOpts.to, 59);
                 });
 
                 test("selection shrinking accelerates", function() {
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: -30
-                        }
-                    });
+                    triggerMousewheel(-10);
 
                     equal(sOpts.from, 59);
                 });
 
                 test("selection expands left on mousewheel down", function() {
                     sOpts.mousewheel.zoom = "left";
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 3
-                        }
-                    });
+                    triggerMousewheel(1);
 
                     equal(sOpts.from, 39);
                     equal(sOpts.to, 60);
@@ -353,11 +339,7 @@
                 test("selection expands left on mousewheel up", function() {
                     sOpts.mousewheel.zoom = "left";
                     sOpts.mousewheel.reverse = true;
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: -3
-                        }
-                    });
+                    triggerMousewheel(-1);
 
                     equal(sOpts.from, 39);
                     equal(sOpts.to, 60);
@@ -365,44 +347,28 @@
 
                 test("selection expands right on mousewheel up", function() {
                     sOpts.mousewheel.zoom = "right";
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 3
-                        }
-                    });
+                    triggerMousewheel(1);
 
                     equal(sOpts.from, 40);
                     equal(sOpts.to, 61);
                 });
 
                 test("selection expands both on mousewheel up", function() {
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 3
-                        }
-                    });
+                    triggerMousewheel(1);
 
                     equal(sOpts.from, 39);
                     equal(sOpts.to, 61);
                 });
 
                 test("selection expansion accelerates", function() {
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 30
-                        }
-                    });
+                    triggerMousewheel(10);
 
                     equal(sOpts.from, 10);
                 });
 
                 test("selection does not expand beyond axis bounds", function() {
                     for (var i = 0; i < 50; i++) {
-                        selection._mousewheel({
-                            originalEvent: {
-                                detail: 3
-                            }
-                        });
+                        triggerMousewheel(1);
                     }
 
                     equal(sOpts.from, 0);
@@ -421,11 +387,7 @@
                         }
                     });
 
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 300
-                        }
-                    });
+                    triggerMousewheel(100);
 
                     equal(sOpts.from, 30);
                     equal(sOpts.to, 70);
@@ -542,16 +504,12 @@
                         start();
                     });
 
-                    selection._mousewheel({ originalEvent: { detail: 3 } });
+                    triggerMousewheel(1);
                 });
 
                 test("selection does not expand beyond axis bounds", function() {
                     for (var i = 0; i < 20; i++) {
-                        selection._mousewheel({
-                            originalEvent: {
-                                detail: 3
-                            }
-                        });
+                        triggerMousewheel(1);
                     }
 
                     deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
@@ -575,11 +533,7 @@
                         }
                     });
 
-                    selection._mousewheel({
-                        originalEvent: {
-                            detail: 3000
-                        }
-                    });
+                    triggerMousewheel(1000);
 
                     deepEqual(sOpts.from, new Date("2012/01/05 00:00"));
                     deepEqual(sOpts.to, new Date("2012/01/15 00:00"));
