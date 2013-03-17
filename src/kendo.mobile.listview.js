@@ -416,16 +416,16 @@ kendo_module({
         },
 
         _fixHeader: function(e) {
-            var i = 0,
-                that = this,
-                scroller = that._scroller(),
-                scrollTop = e.scrollTop,
-                headers = that.headers,
-                headerPair,
-                offset,
-                header;
+            if (this.fixedHeaders) {
+                var i = 0,
+                    that = this,
+                    scroller = that._scroller(),
+                    scrollTop = e.scrollTop,
+                    headers = that.headers,
+                    headerPair,
+                    offset,
+                    header;
 
-            if (that.fixedHeaders) {
                 do {
                     headerPair = headers[i++];
                     if (!headerPair) {

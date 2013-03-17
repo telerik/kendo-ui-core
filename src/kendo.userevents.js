@@ -14,7 +14,7 @@ kendo_module({
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
         Observable = kendo.Observable,
-        now = $.now,
+        now = Date.now,
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
@@ -375,7 +375,7 @@ kendo_module({
                         break;
                 }
 
-                $.extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
+                extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
             }
 
             return this.trigger(eventName, data);
