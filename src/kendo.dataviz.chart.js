@@ -8255,7 +8255,6 @@ kendo_module({
             var that = this,
                 options = that.options,
                 origEvent = e.originalEvent,
-                prevented,
                 delta = 0;
 
             /* Reusable */
@@ -8270,12 +8269,12 @@ kendo_module({
             /* --- */
 
             // TODO: Refactor
-            e.event = { target: null,  };
+            e.event = { target: null };
             e.x = { location: 0 };
             that._start(e);
 
             if (that._state) {
-                range = that._state.range;
+                var range = that._state.range;
 
                 e.preventDefault();
                 e.stopPropagation();
@@ -8308,8 +8307,7 @@ kendo_module({
         },
 
         _index: function(value) {
-            var that = this,
-                categoryAxis = this.categoryAxis,
+            var categoryAxis = this.categoryAxis,
                 categories = categoryAxis.options.categories,
                 index = value;
 
@@ -8323,8 +8321,7 @@ kendo_module({
         _value: function(index) {
             var that = this,
                 categoryAxis = this.categoryAxis,
-                categories = categoryAxis.options.categories,
-                value = index;
+                categories = categoryAxis.options.categories;
 
             if (that._dateAxis) {
                 index = categories[index];
@@ -8355,7 +8352,6 @@ kendo_module({
                 offset = options.offset,
                 padding = options.padding,
                 border = options.selection.border,
-                categoryAxis = that.categoryAxis,
                 leftMaskWidth,
                 rightMaskWidth,
                 box,
@@ -8383,16 +8379,12 @@ kendo_module({
 
         set: function(from, to) {
             var that = this,
-                categoryAxis = that.categoryAxis,
-                categories = categoryAxis.options.categories,
                 options = that.options,
-                from = that._index(from),
-                to = that._index(to),
                 min = that._index(options.min),
                 max = that._index(options.max);
 
-            from = clipValue(from, min, max);
-            to = clipValue(to, from + 1, max);
+            from = clipValue(that._index(from), min, max);
+            to = clipValue(that._index(to), from + 1, max);
 
             if (options.visible) {
                 that.move(from, to);
