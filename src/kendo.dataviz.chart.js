@@ -8254,10 +8254,6 @@ kendo_module({
         _mousewheel: function(e) {
             var that = this,
                 options = that.options,
-                categories = that.categoryAxis.options.categories,
-                min = that._index(options.min),
-                max = that._index(options.max),
-                zDir = options.mousewheel.zoom,
                 origEvent = e.originalEvent,
                 prevented,
                 delta = 0;
@@ -8273,7 +8269,6 @@ kendo_module({
             }
             /* --- */
 
-
             // TODO: Refactor
             e.event = { target: null,  };
             e.x = { location: 0 };
@@ -8281,6 +8276,9 @@ kendo_module({
 
             if (that._state) {
                 range = that._state.range;
+
+                e.preventDefault();
+                e.stopPropagation();
 
                 if (math.abs(delta) > 1) {
                     delta *= ZOOM_ACCELERATION;
@@ -8290,25 +8288,7 @@ kendo_module({
                     delta *= -1;
                 }
 
-                var from = that._index(options.from);
-                var to = that._index(options.to);
-
-                if (zDir !== RIGHT) {
-                    range.from = clipValue(
-                        clipValue(from - delta, 0, to - 1),
-                        min, max
-                    );
-                }
-
-                if (zDir !== LEFT) {
-                    range.to = clipValue(
-                        clipValue(to + delta, range.from + 1, categories.length - 1),
-                        min,
-                        max
-                     );
-                }
-
-                that.set(range.from, range.to);
+                that.expand(delta);
 
                 that.trigger(SELECT, {
                     delta: delta,
@@ -8406,6 +8386,8 @@ kendo_module({
                 categoryAxis = that.categoryAxis,
                 categories = categoryAxis.options.categories,
                 options = that.options,
+                from = that._index(from),
+                to = that._index(to),
                 min = that._index(options.min),
                 max = that._index(options.max);
 
@@ -8418,6 +8400,39 @@ kendo_module({
 
             options.from = that._value(from);
             options.to = that._value(to);
+        },
+
+        expand: function(delta) {
+            var that = this,
+                options = that.options,
+                categories = that.categoryAxis.options.categories,
+                min = that._index(options.min),
+                max = that._index(options.max),
+                zDir = options.mousewheel.zoom,
+                from = that._index(options.from),
+                to = that._index(options.to),
+                range = { from: from, to: to };
+
+            if (that._state) {
+                range = that._state.range;
+            }
+
+            if (zDir !== RIGHT) {
+                range.from = clipValue(
+                    clipValue(from - delta, 0, to - 1),
+                    min, max
+                );
+            }
+
+            if (zDir !== LEFT) {
+                range.to = clipValue(
+                    clipValue(to + delta, range.from + 1, categories.length - 1),
+                    min,
+                    max
+                 );
+            }
+
+            that.set(range.from, range.to);
         },
 
         getValueAxis: function(categoryAxis) {

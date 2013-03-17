@@ -324,7 +324,6 @@ kendo_module({
                     max: max,
                     from: from,
                     to: to,
-                    selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi),
                     mousewheel: {
@@ -401,8 +400,10 @@ kendo_module({
             }
 
             selection.set(
-                lteDateIndex(groups, from),
-                lteDateIndex(groups, to) + 1
+                from,
+                to
+                //TODO Why the + 1?
+                //lteDateIndex(groups, to) + 1
             );
 
             navi.showHint(from, to);
@@ -440,14 +441,6 @@ kendo_module({
 
             dst.from = src.from;
             dst.to = src.to;
-        },
-
-        indexToDate: function(index) {
-            var navi = this,
-                axis = navi.mainAxis(),
-                groups = axis.options.categories;
-
-            return groups[index];
         },
 
         filterAxes: function() {
@@ -535,7 +528,7 @@ kendo_module({
             }
 
             if (selection.options.to - selection.options.from > 1) {
-                selection.expandLeft(delta);
+                selection.expand(delta);
                 navi.readSelection();
             } else {
                 axis.options.min = select.from;
@@ -547,15 +540,7 @@ kendo_module({
                 navi.redrawSlaves();
             }
 
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.to
-            ));
+            selection.set(select.from, select.to);
 
             navi.showHint(navi.options.select.from, navi.options.select.to);
         },
@@ -578,24 +563,10 @@ kendo_module({
             }
         },
 
-        _selectStart: function(e) {
-            if (this.chart.trigger(SELECT_START, { from: e.from, to: e.to })) {
-                e.preventDefault();
-            }
-        },
-
         _select: function(e) {
             var navi = this;
 
-            navi.showHint(
-                navi.indexToDate(e.from),
-                navi.indexToDate(e.to)
-            );
-
-            navi.chart.trigger(SELECT, {
-                from: e.from,
-                to: e.to
-            });
+            navi.showHint(e.from, e.to);
         },
 
         _selectEnd: function(e) {
@@ -604,15 +575,11 @@ kendo_module({
             if (navi.hint) {
                 navi.hint.hide();
             }
+
             navi.readSelection();
             navi.filterAxes();
             navi.filterDataSource();
             navi.redrawSlaves();
-
-            navi.chart.trigger(SELECT_END, {
-                from: e.from,
-                to: e.to
-            });
         },
 
         mainAxis: function() {
