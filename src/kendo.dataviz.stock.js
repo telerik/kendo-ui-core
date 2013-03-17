@@ -23,7 +23,6 @@ kendo_module({
         addDuration = dataviz.addDuration,
         duration = dataviz.duration,
         last = dataviz.last,
-        lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
         toTime = dataviz.toTime;
@@ -36,9 +35,6 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
-        SELECT_START = "selectStart",
-        SELECT = "select",
-        SELECT_END = "selectEnd",
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -431,8 +427,6 @@ kendo_module({
 
         readSelection: function() {
             var navi = this,
-                axis = navi.mainAxis(),
-                groups = axis.options.categories,
                 selection = navi.selection,
                 src = selection.options,
                 dst = navi.options.select;
@@ -514,7 +508,6 @@ kendo_module({
             var navi = this,
                 chart = navi.chart,
                 delta = e.delta,
-                navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
                 selection = navi.selection;
@@ -567,7 +560,7 @@ kendo_module({
             navi.showHint(e.from, e.to);
         },
 
-        _selectEnd: function(e) {
+        _selectEnd: function() {
             var navi = this;
 
             if (navi.hint) {
