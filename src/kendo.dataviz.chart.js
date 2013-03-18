@@ -6437,7 +6437,7 @@ kendo_module({
                 categoryAxis, axisPane, categories, categoryMap,
                 groupIx, categoryIndicies, seriesIx, currentSeries,
                 seriesClone, srcData, data, srcValues, i,
-                categoryIx, pointData, value;
+                categoryIx, pointData, value, srcDataItems;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -6455,6 +6455,7 @@ kendo_module({
                     for (groupIx = 0; groupIx < categories.length; groupIx++) {
                         categoryIndicies = categoryMap[groupIx];
                         srcValues = [];
+                        srcDataItems = [];
 
                         for (i = 0; i < categoryIndicies.length; i++) {
                             categoryIx = categoryIndicies[i];
@@ -6464,10 +6465,11 @@ kendo_module({
                             if (defined(value)) {
                                 srcValues.push(pointData.value);
                             }
+                            srcDataItems.push(currentSeries.data[categoryIx]);
                         }
 
                         if (srcValues.length > 1) {
-                            data[groupIx] = calculateAggregates(srcValues, currentSeries);
+                            data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
                         } else {
                             data[groupIx] = srcData[categoryIndicies[0]];
                         }
@@ -8241,7 +8243,7 @@ kendo_module({
         }
     });
 
-    function calculateAggregates(values, series) {
+    function calculateAggregates(values, series, dataItems) {
         var aggregate = series.aggregate,
             result;
 
@@ -8252,7 +8254,7 @@ kendo_module({
             if (aggregateType === STRING) {
                 result = Aggregates[aggregate](values);
             } else if (aggregateType === "function") {
-                result = aggregate(values, series);
+                result = aggregate(values, series, dataItems);
             } else {
                 result = Aggregates.max(values);
             }
