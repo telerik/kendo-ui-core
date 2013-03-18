@@ -214,8 +214,16 @@ kendo_module({
             element = that.element;
 
             if (that.options.useNative) {
-                element.addClass("km-native-scroller");
+                element.addClass("km-native-scroller")
+                    .prepend('<div class="km-scroll-header"/>');
+
+                extend(that, {
+                    scrollElement: element,
+                    fixedContainer: element.children().first()
+                });
+
                 return;
+
             }
 
             element

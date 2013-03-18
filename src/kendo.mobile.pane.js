@@ -37,12 +37,6 @@ kendo_module({
         }
     }
 
-    function captureGhostClick(e) {
-        if (attrValue($(e.currentTarget), "rel") !== EXTERNAL) {
-            e.preventDefault();
-        }
-    }
-
     var Pane = Widget.extend({
         init: function(element, options) {
             var that = this, initial;
@@ -136,7 +130,6 @@ kendo_module({
                 .on("down", roleSelector(linkRoles), "_mouseup")
                 .on("up", roleSelector(buttonRoles), "_mouseup")
                 .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
-                .on("touchstart", roleSelector(buttonRoles), captureGhostClick);
         },
 
         _mouseup: function(e) {

@@ -90,9 +90,13 @@ kendo_module({
                 options.scrollThreshold = options.scrollTreshold;
             }
 
+            that._dragged = false;
+
             element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
+                .on("down", ITEM_SELECTOR, function() { that._dragged = false; })
+                .on("move", ITEM_SELECTOR, function() { that._dragged = true; })
                 .on("up", ITEM_SELECTOR, "_click");
 
             element.wrap(WRAPPER);
@@ -582,6 +586,11 @@ kendo_module({
 
         _click: function(e) {
             if (e.which > 1 || e.isDefaultPrevented()) {
+                return;
+            }
+
+            if (this._dragged) {
+                e.preventDefault();
                 return;
             }
 
