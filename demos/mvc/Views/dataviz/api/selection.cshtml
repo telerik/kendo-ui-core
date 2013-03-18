@@ -2,6 +2,29 @@
             <div class="chart-wrapper">
                 <div id="chart"></div>
             </div>
+            <div class="configuration-horizontal">
+                <span class="configHead">Mousewheel</span>
+                <div class="config-section">
+                    <ul class="options">
+                        <li>
+                            <input id="reverse" type="checkbox" />
+                            <label for="reverse">Reverse</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="config-section">
+                    <ul class="options">
+                        <li>
+                            <label for="zoom">Zoom direction</label>
+                            <select id="zoom">
+                                <option value="both">Both</option>
+                                <option value="left">Left</option>
+                                <option value="right">Right</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
@@ -57,8 +80,27 @@
                     kendoConsole.log(kendo.format("Select end :: {0} - {1}", e.from, e.to));
                 }
 
+                function setOptions() {
+                    var chart = $("#chart").data("kendoChart");
+
+                    $.extend(true /* deep */, chart.options, {
+                        categoryAxis: {
+                            select: {
+                                mousewheel: {
+                                    reverse: $("#reverse").prop("checked"),
+                                    zoom: $("#zoom").val()
+                                }
+                            }
+                        }
+                    });
+
+                    chart.refresh();
+                }
+
                 $(document).ready(createChart);
                 $("#example").bind("kendo:skinChange", createChart);
+                $("#reverse, #zoom").click(setOptions);
+
             </script>
             <div class="demo-section">
                 <h3 class="title">Console log</h3>
