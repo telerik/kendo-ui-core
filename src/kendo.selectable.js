@@ -27,7 +27,9 @@ kendo_module({
                     supportEventDelegation = true;
                 })
                 .find("span")
-                .click();
+                .click()
+                .end()
+                .off();
             })();
         })($);
 
