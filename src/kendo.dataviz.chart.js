@@ -8257,9 +8257,10 @@ kendo_module({
                 span = to - from,
                 mid = from + span / 2,
                 offset = math.round(mid - categoryIx),
-                range = {};
+                range = {},
+                rightClick = e.event.which === 3;
 
-            if (that._state) {
+            if (that._state || rightClick) {
                 return;
             }
 

@@ -169,6 +169,14 @@
                     selection._tap(stubArgs());
                 });
 
+                test("selectStart does not fire on right click", 0, function() {
+                    chart.bind("selectStart", function() {
+                        ok(false);
+                    });
+
+                    selection._tap(stubArgs(0, 0, { event: { which: 3 } }));
+                });
+
                 test("selectStart fires on mousewheel", function() {
                     chart.bind("selectStart", function() {
                         ok(true);
