@@ -277,9 +277,16 @@ public class DataSourceRequest {
         Map<String, Object> groupItem = new HashMap<String, Object>();
         List<Object> groupItems = new ArrayList<Object>();
         
-        result.add(groupItem);
+        result.add(groupItem);        
         
-        groupItem.put("value", groupValue);
+        if (groupValue instanceof Date) { // format date
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(((Date)groupValue).getTime());
+            groupItem.put("value", formattedDate);
+        } else {
+            groupItem.put("value", groupValue);
+        }
+        
         groupItem.put("field", field);
         groupItem.put("hasSubgroups", hasSubgroups);
          
