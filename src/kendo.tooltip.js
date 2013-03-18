@@ -121,7 +121,7 @@ kendo_module({
 
             that.dimensions = DIMENSIONS[axis];
 
-            that._documentKeyDownHandler = proxy(that._documentKeyDownHandler, that);
+            that._documentKeyDownHandler = proxy(that._documentKeyDown, that);
 
             that.element
                 .on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that))
@@ -243,7 +243,7 @@ kendo_module({
             }, options));
         },
 
-        _documentKeyDownHandler: function(e) {
+        _documentKeyDown: function(e) {
             if (e.keyCode === kendo.keys.ESC) {
                 this.hide();
             }
