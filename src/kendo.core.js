@@ -1658,7 +1658,6 @@ function pad(number, digits, end) {
             elementProto = "HTMLElement" in window ? HTMLElement.prototype : [];
 
         support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.style;
-        support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
             var prefix = this.toString(),
@@ -1755,9 +1754,15 @@ function pad(number, digits, end) {
             return os;
         };
 
-        support.mobileOS = support.detectOS(navigator.userAgent);
+        var mobileOS = support.mobileOS = support.detectOS(navigator.userAgent);
 
-        support.kineticScrollNeeded = support.mobileOS && (support.touch || support.pointers);
+        support.kineticScrollNeeded = mobileOS && (support.touch || support.pointers);
+
+        support.hasNativeScrolling = false;
+
+        if ((mobileOS.ios && mobileOS.majorVersion > 4) || (mobileOS.android && mobileOS.majorVersion > 2) || mobileOS.wp) {
+            support.hasNativeScrolling = mobileOS;
+        }
 
         support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
 

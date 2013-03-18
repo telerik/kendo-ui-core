@@ -64,6 +64,7 @@ kendo_module({
             title: "",
             reload: false,
             defaultTransition: "",
+            useNativeScrolling: false,
             stretch: false,
             zoom: false,
             model: null
@@ -185,10 +186,15 @@ kendo_module({
             if (that.options.stretch) {
                 that.content.addClass("km-stretched-view");
             } else {
-                that.content.kendoMobileScroller({zoom: that.options.zoom});
+                that.content.kendoMobileScroller({ zoom: that.options.zoom, useNative: that.options.useNativeScrolling });
 
                 that.scroller = that.content.data("kendoMobileScroller");
                 that.scrollerContent = that.scroller.scrollElement;
+            }
+
+            // prevent accidental address bar display when pulling the header
+            if (kendo.support.kineticScrollNeeded) {
+                $(that.element).on("touchmove", ".km-header", kendo.preventDefault);
             }
         },
 

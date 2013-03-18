@@ -108,7 +108,6 @@ kendo_module({
                 }
 
                 that._startHistory();
-                that._preventDefaultScrolling();
             });
         },
 
@@ -128,20 +127,8 @@ kendo_module({
             this.pane.showLoading();
         },
 
-        captureTouchMove: function(e) {
-            if (e.target.tagName !== "TEXTAREA") {
-                e.preventDefault();
-            }
-        },
-
         view: function() {
             return this.pane.view();
-        },
-
-        _preventDefaultScrolling: function() {
-            if (support.kineticScrollNeeded) {
-                $(document.documentElement).on("touchmove", $.proxy(this, "captureTouchMove"));
-            }
         },
 
         _setupPlatform: function() {
