@@ -189,7 +189,13 @@ body .k-button-icon
 html body .k-button-bare
 {
     background: none !important; /*spares long selectors*/
+	color: inherit;
     border-width: 0;
+}
+
+html body .k-button-bare.k-upload-button:hover
+{
+	color: inherit;
 }
 
 /* link */
@@ -3870,6 +3876,11 @@ html .k-upload
     filter: alpha(opacity=40);
     opacity: .4;
     position: fixed;
+}
+
+.k-imagebrowser .k-upload-button .k-add
+{
+	background-position:-32px -64px;
 }
 
 .k-search-wrap
