@@ -8328,7 +8328,6 @@ kendo_module({
 
         _index: function(value) {
             var that = this,
-                options = that.options,
                 categoryAxis = that.categoryAxis,
                 categories = categoryAxis.options.categories,
                 index = value;
@@ -8418,7 +8417,6 @@ kendo_module({
         expand: function(delta) {
             var that = this,
                 options = that.options,
-                categories = that.categoryAxis.options.categories,
                 min = that._index(options.min),
                 max = that._index(options.max),
                 zDir = options.mousewheel.zoom,
