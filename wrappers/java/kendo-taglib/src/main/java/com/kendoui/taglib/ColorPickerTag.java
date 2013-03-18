@@ -5,6 +5,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.colorpicker.*;
 
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
 
 
@@ -15,6 +17,11 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public ColorPickerTag() {
         super("ColorPicker");
+    }
+
+    @Override
+    protected Element<?> createElement() {
+        return new Input().attr("name", getName());
     }
     
     @Override
