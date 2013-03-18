@@ -35,6 +35,9 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
+        SELECT_START = "selectStart",
+        SELECT = "select",
+        SELECT_END = "selectEnd",
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -321,6 +324,7 @@ kendo_module({
                     max: max,
                     from: from,
                     to: to,
+                    selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi),
                     mousewheel: {
@@ -555,14 +559,23 @@ kendo_module({
             }
         },
 
-        _select: function(e) {
-            var navi = this;
-
-            navi.showHint(e.from, e.to);
+        _selectStart: function(e) {
+            var chart = this.chart;
+            chart._selectStart.call(chart, e);
         },
 
-        _selectEnd: function() {
-            var navi = this;
+        _select: function(e) {
+            var navi = this,
+                chart = navi.chart;
+
+            navi.showHint(e.from, e.to);
+
+            chart._select.call(chart, e);
+        },
+
+        _selectEnd: function(e) {
+            var navi = this,
+                chart = navi.chart;
 
             if (navi.hint) {
                 navi.hint.hide();
@@ -572,6 +585,8 @@ kendo_module({
             navi.filterAxes();
             navi.filterDataSource();
             navi.redrawSlaves();
+
+            chart._selectEnd.call(chart, e);
         },
 
         mainAxis: function() {

@@ -350,6 +350,7 @@ var tests = [
     "splitter/aria.html",
     "stock/configuration.html",
     "stock/databinding.html",
+    "stock/selection.html",
     "stock/lint.html",
     "tabstrip/api.html",
     "tabstrip/initialization.html",
