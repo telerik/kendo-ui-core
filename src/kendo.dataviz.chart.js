@@ -604,7 +604,7 @@ kendo_module({
             var chart = this,
                 origEvent = e.originalEvent,
                 prevented,
-                delta = 0,
+                delta = mwDelta(e),
                 totalDelta,
                 state = chart._navState,
                 axes,
@@ -612,15 +612,6 @@ kendo_module({
                 currentAxis,
                 axisName,
                 ranges = {};
-
-            if (origEvent.wheelDelta) {
-                delta = -origEvent.wheelDelta / 120;
-                delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
-            }
-
-            if (origEvent.detail) {
-                delta = round(origEvent.detail / 3);
-            }
 
             if (!state) {
                 prevented = chart._startNavigation(origEvent, ZOOM_START);
@@ -8285,19 +8276,7 @@ kendo_module({
         _mousewheel: function(e) {
             var that = this,
                 options = that.options,
-                origEvent = e.originalEvent,
-                delta = 0;
-
-            /* Reusable */
-            if (origEvent.wheelDelta) {
-                delta = -origEvent.wheelDelta / 120;
-                delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
-            }
-
-            if (origEvent.detail) {
-                delta = round(origEvent.detail / 3);
-            }
-            /* --- */
+                delta = mwDelta(e);
 
             // TODO: Refactor
             e.event = { target: null };
@@ -9084,6 +9063,22 @@ kendo_module({
         }
 
         return ranges;
+    }
+
+    function mwDelta(e) {
+        var origEvent = e.originalEvent,
+            delta = 0;
+
+        if (origEvent.wheelDelta) {
+            delta = -origEvent.wheelDelta / 120;
+            delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
+        }
+
+        if (origEvent.detail) {
+            delta = round(origEvent.detail / 3);
+        }
+
+        return delta;
     }
 
     // Exports ================================================================
