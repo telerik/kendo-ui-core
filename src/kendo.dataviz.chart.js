@@ -8104,19 +8104,15 @@ kendo_module({
             }
         },
 
-        _eventArgs: function(fields) {
-            return deepExtend({
-                axis: this.categoryAxis.options
-            }, fields);
-        },
-
         _rangeEventArgs: function(range) {
-            var that = this;
+            var that = this,
+                categories = that.categoryAxis.options.categories;
 
-            return that._eventArgs({
+            return {
+                axis: that.categoryAxis.options,
                 from: that._value(range.from),
                 to: that._value(range.to)
-            });
+            };
         },
 
         _start: function(e) {
@@ -8139,7 +8135,11 @@ kendo_module({
                 }
             };
 
-            args = that._eventArgs({ from: options.from, to: options.to });
+            args = that._rangeEventArgs({
+                from: that._index(options.from),
+                to: that._index(options.to)
+            });
+
             if (that.trigger(SELECT_START, args)) {
                 that.userEvents.cancel();
                 that._state = null;
