@@ -8306,15 +8306,15 @@ kendo_module({
                     delta *= -1;
                 }
 
-                that.expand(delta);
-
-                that.trigger(SELECT, {
-                    axis: that.categoryAxis.options,
-                    delta: delta,
-                    originalEvent: e,
-                    from: that._value(range.from),
-                    to: that._value(range.to)
-                });
+                if (that.expand(delta)) {
+                    that.trigger(SELECT, {
+                        axis: that.categoryAxis.options,
+                        delta: delta,
+                        originalEvent: e,
+                        from: that._value(range.from),
+                        to: that._value(range.to)
+                    });
+                }
 
                 if (that._mwTimeout) {
                     clearTimeout(that._mwTimeout);
@@ -8422,7 +8422,8 @@ kendo_module({
                 zDir = options.mousewheel.zoom,
                 from = that._index(options.from),
                 to = that._index(options.to),
-                range = { from: from, to: to };
+                range = { from: from, to: to },
+                oldRange = deepExtend({}, range);
 
             if (that._state) {
                 range = that._state.range;
@@ -8443,7 +8444,10 @@ kendo_module({
                  );
             }
 
-            that.set(range.from, range.to);
+            if (range.from !== oldRange.from || range.to !== oldRange.to) {
+                that.set(range.from, range.to);
+                return true;
+            }
         },
 
         getValueAxis: function(categoryAxis) {

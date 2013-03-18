@@ -331,6 +331,15 @@
                     triggerMousewheel(1);
                 });
 
+                test("select does not fire twice with the same range", 1, function() {
+                    chart.bind("select", function(e) {
+                        ok(true);
+                    });
+
+                    triggerMousewheel(100);
+                    triggerMousewheel(100);
+                });
+
                 test("select args contain axis options on mousewheel", function() {
                     chart.bind("select", function(e) {
                         equal(e.axis.name, "main");
