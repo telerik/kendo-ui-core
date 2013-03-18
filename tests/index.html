@@ -17,6 +17,11 @@
             if (filter) {
                 filter = filter.replace("?", "").replace(/&?jquery=[^&#]*/, "");
                 tests = $.grep(tests, grepCallback);
+                if (!tests.length) {
+                    QUnit.test("no tests found", function() {
+                        QUnit.pushFailure("No tests found!");
+                    });
+                }
             }
 
             QUnit.testSuites(tests);
