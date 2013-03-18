@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../src/jquery.js"></script>
+        <script src="jquery-loader.js"></script>
         <link rel="stylesheet" href="qunit/qunit/qunit.css" media="screen" />
         <link rel="stylesheet" href="qunit/addons/composite/qunit-composite.css" media="screen" />
         <script src="qunit/qunit/qunit.js"></script>
@@ -9,12 +9,13 @@
         <script src="tests-list.js"></script>
         <script>
 
-            var filter = location.href.split("?")[1],
+            var filter = location.search,
                 grepCallback = function(test) {
                     return test.indexOf(filter) === 0;
                 }
 
             if (filter) {
+                filter = filter.replace("?", "").replace(/&?jquery=[^&#]*/, "");
                 tests = $.grep(tests, grepCallback);
             }
 
