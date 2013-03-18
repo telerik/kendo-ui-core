@@ -791,6 +791,10 @@ kendo_module({
             var content = that.wrapper = $(that._template(options));
             element.hide().after(content);
 
+            if (element.is("input")) {
+                element.appendTo(content);
+            }
+
             that.enable(!element.attr("disabled"));
 
             var accesskey = element.attr("accesskey");
