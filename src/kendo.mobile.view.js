@@ -190,6 +190,11 @@ kendo_module({
                 that.scroller = that.content.data("kendoMobileScroller");
                 that.scrollerContent = that.scroller.scrollElement;
             }
+
+            // prevent accidental address bar display when pulling the header
+            if (kendo.support.kineticScrollNeeded) {
+                $(that.element).on("touchmove", ".km-header", kendo.preventDefault);
+            }
         },
 
         _model: function() {

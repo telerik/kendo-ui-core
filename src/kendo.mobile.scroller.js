@@ -213,6 +213,11 @@ kendo_module({
 
             element = that.element;
 
+            if (that.options.useNative) {
+                element.addClass("km-native-scroller");
+                return;
+            }
+
             element
                 .css("overflow", "hidden")
                 .addClass("km-scroll-wrapper")
@@ -314,6 +319,7 @@ kendo_module({
             zoom: false,
             pullOffset: 140,
             elastic: true,
+            useNative: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing"
