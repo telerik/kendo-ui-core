@@ -4876,7 +4876,6 @@ kendo_module({
             var chart = this,
                 options = chart.options,
                 colors = chart.plotArea.options.seriesColors || [],
-                startAngle = options.startAngle,
                 colorsCount = colors.length,
                 series = options.series,
                 seriesCount = series.length,
@@ -4891,7 +4890,13 @@ kendo_module({
                 data = currentSeries.data;
                 total = chart.pointsTotal(currentSeries);
                 anglePerValue = 360 / total;
-                currentAngle = startAngle;
+
+                if (defined(currentSeries.startAngle)) {
+                    currentAngle = currentSeries.startAngle;
+                } else {
+                    currentAngle = options.startAngle;
+                }
+
                 if (seriesIx != seriesCount - 1) {
                     if (currentSeries.labels.position == OUTSIDE_END) {
                         currentSeries.labels.position = CENTER;
@@ -5392,11 +5397,8 @@ kendo_module({
                 currentSeries,
                 seriesCount = series.length,
                 seriesWithoutSize = 0,
-                holeSize,
-                totalSize,
-                size,
-                margin = 0,
-                i, r, ir = 0,
+                holeSize, totalSize, size,
+                margin = 0, i, r, ir = 0,
                 currentSize = 0;
 
             chart.seriesConfigs = [];
@@ -7165,7 +7167,6 @@ kendo_module({
                 donutChart = new DonutChart(plotArea, {
                     series: series,
                     padding: firstSeries.padding,
-                    startAngle: firstSeries.startAngle,
                     connectors: firstSeries.connectors,
                     legend: plotArea.options.legend
                 });

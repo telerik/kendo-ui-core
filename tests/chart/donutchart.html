@@ -379,7 +379,7 @@
             (function() {
                 var segments,
                     chartBox = new Box2D(0,0,400,400),
-                    plotArea;
+                    plotArea, donutChart;
 
                 function PlotAreaStub() { }
 
@@ -390,18 +390,20 @@
                 function createDonutChart(plotArea, options) {
                     view = new ViewStub();
 
-                    var donutChart = new dataviz.DonutChart(plotArea, $.extend({}, {
+                    donutChart = new dataviz.DonutChart(plotArea, $.extend({}, {
                         series: [{
                             type: "donut",
                             data: [1, 1],
                             labels: {},
                             margin: 20,
-                            holeSize: 40
+                            holeSize: 40,
+                            startAngle: 20
                         }, {
                             type: "donut",
                             data: [1, 2],
                             labels: {},
-                            margin: 20
+                            margin: 20,
+                            startAngle: 100
                         }]}, options));
 
                     donutChart.reflow(chartBox);
@@ -432,6 +434,11 @@
                             ok(this.sector.ir == 40);
                         }
                     });
+                });
+
+                test("should apply start angle to all series", function() {
+                    ok(segments[0].options.startAngle === 20 &&
+                       segments[2].options.startAngle === 100);
                 });
             })();
 
