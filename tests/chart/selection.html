@@ -161,6 +161,14 @@
                     selection._start(stubArgs());
                 });
 
+                test("selectStart fires on tap", function() {
+                    chart.bind("selectStart", function() {
+                        ok(true);
+                    });
+
+                    selection._tap(stubArgs());
+                });
+
                 test("selectStart fires on mousewheel", function() {
                     chart.bind("selectStart", function() {
                         ok(true);
@@ -200,18 +208,46 @@
                     selection._move(stubArgs(100, 0));
                 });
 
-                test("select args contain axis options", function() {
+                test("selectStart on tap can be cancelled", 0, function() {
                     chart.bind("select", function(e) {
-                        equal(e.axis.name, "main");
+                        ok(false);
+                    });
+
+                    selection.bind("selectStart", function(e) {
+                        e.preventDefault();
+                    });
+
+                    selection._tap(stubArgs());
+                });
+
+                test("select fires on UserEvents move", 1, function() {
+                    chart.bind("select", function(e) {
+                        ok(true);
                     });
 
                     selection._start(stubArgs());
                     selection._move(stubArgs(100, 0));
                 });
 
-                test("select fires on UserEvents move", 1, function() {
+                test("select fires on tap", 1, function() {
                     chart.bind("select", function(e) {
                         ok(true);
+                    });
+
+                    selection._tap(stubArgs());
+                });
+
+                test("select fires on mousewheel", 1, function() {
+                    chart.bind("select", function(e) {
+                        ok(true);
+                    });
+
+                    triggerMousewheel(1);
+                });
+
+                test("select args contain axis options", function() {
+                    chart.bind("select", function(e) {
+                        equal(e.axis.name, "main");
                     });
 
                     selection._start(stubArgs());
@@ -228,14 +264,6 @@
                     selection._move(stubArgs(80, 0));
                 });
 
-                test("select fires on mousewheel", 1, function() {
-                    chart.bind("select", function(e) {
-                        ok(true);
-                    });
-
-                    triggerMousewheel(1);
-                });
-
                 test("select does not fire if range is not changed", 1, function() {
                     chart.bind("select", function(e) {
                         ok(true);
@@ -246,18 +274,35 @@
                     selection._move(stubArgs(100, 0));
                 });
 
-                test("selectEnd args contain axis options", function() {
+                test("selectEnd fires on UserEvents end", 1, function() {
                     chart.bind("selectEnd", function(e) {
-                        equal(e.axis.name, "main");
+                        ok(true);
                     });
 
                     selection._start(stubArgs());
                     selection._end();
                 });
 
-                test("selectEnd fires on UserEvents end", 1, function() {
+                test("selectEnd fires on tap", 1, function() {
                     chart.bind("selectEnd", function(e) {
                         ok(true);
+                    });
+
+                    selection._tap(stubArgs());
+                });
+
+                asyncTest("selectEnd fires after mousewheel", function() {
+                    chart.bind("selectEnd", function(e) {
+                        ok(true);
+                        start();
+                    });
+
+                    triggerMousewheel(1);
+                });
+
+                test("selectEnd args contain axis options", function() {
+                    chart.bind("selectEnd", function(e) {
+                        equal(e.axis.name, "main");
                     });
 
                     selection._start(stubArgs());
@@ -272,15 +317,6 @@
                     selection._start(stubArgs());
                     selection._move(stubArgs(10, 0));
                     selection._end();
-                });
-
-                asyncTest("selectEnd fires after mousewheel", function() {
-                    chart.bind("selectEnd", function(e) {
-                        ok(true);
-                        start();
-                    });
-
-                    triggerMousewheel(1);
                 });
 
                 asyncTest("selectEnd updates final after mousewheel", function() {

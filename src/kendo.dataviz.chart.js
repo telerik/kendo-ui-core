@@ -8273,8 +8273,12 @@ kendo_module({
 
             range.to = math.min(range.from + span, max);
 
-            that.set(range.from, range.to);
-            that.trigger(SELECT_END, that._rangeEventArgs(range));
+            that._start(e);
+            if (that._state) {
+                that._state.range = range;
+                that.trigger(SELECT, that._rangeEventArgs(range));
+                that._end();
+            }
         },
 
         _mousewheel: function(e) {
