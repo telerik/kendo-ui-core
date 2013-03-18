@@ -502,6 +502,14 @@ kendo_module({
                         max = options.categories[max];
                     }
 
+                    if (!options.justified) {
+                        if (axis instanceof DateCategoryAxis) {
+                            max = addDuration(max, 1, options.baseUnit, options.weekStartDay);
+                        } else {
+                            max++;
+                        }
+                    }
+
                     selection = new Selection(chart, axis,
                         deepExtend({ min: min, max: max }, options.select)
                     );
@@ -8258,6 +8266,10 @@ kendo_module({
             e.preventDefault();
             that.chart._unsetActivePoint();
 
+            if (!categoryAxis.options.justified) {
+                offset--;
+            }
+
             range.from = math.min(
                 math.max(min, from - offset),
                 max - span
@@ -8315,12 +8327,17 @@ kendo_module({
         },
 
         _index: function(value) {
-            var categoryAxis = this.categoryAxis,
+            var that = this,
+                options = that.options,
+                categoryAxis = that.categoryAxis,
                 categories = categoryAxis.options.categories,
                 index = value;
 
             if (value instanceof Date) {
                 index = lteDateIndex(categories, value);
+                if (!categoryAxis.options.justified && value > last(categories)) {
+                    index += 1;
+                }
             }
 
             return index;
@@ -8329,13 +8346,18 @@ kendo_module({
         _value: function(index) {
             var that = this,
                 categoryAxis = this.categoryAxis,
-                categories = categoryAxis.options.categories;
+                categories = categoryAxis.options.categories,
+                value = index;
 
             if (that._dateAxis) {
-                index = categories[index];
+                if (index > categories.length - 1) {
+                    value = that.options.max;
+                } else {
+                    value = categories[index];
+                }
             }
 
-            return index;
+            return value;
         },
 
         _slot: function(value) {
@@ -8417,7 +8439,7 @@ kendo_module({
 
             if (zDir !== LEFT) {
                 range.to = clipValue(
-                    clipValue(to + delta, range.from + 1, categories.length - 1),
+                    clipValue(to + delta, range.from + 1, max),
                     min,
                     max
                  );

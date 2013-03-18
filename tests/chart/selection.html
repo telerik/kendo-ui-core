@@ -4,6 +4,7 @@
         <title>kendo.chart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
@@ -48,8 +49,8 @@
                 function stubArgs(x, y, options) {
                     return deepExtend({
                         event: { target: $("<div class='k-leftHandle' />") },
-                        x: { location: x || 0 },
-                        y: { location: y || 0 },
+                        x: { location: x || 0, client: x || 0 },
+                        y: { location: y || 0, client: x || 0 },
                         preventDefault: function() {}
                     }, options);
                 }
@@ -136,6 +137,40 @@
 
                         chart.redraw();
                     });
+                });
+
+                test("selection can reach last category for non-justified charts", function() {
+                    setup({
+                        series: [{
+                            type: "column",
+                            data: new Array(10)
+                        }],
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 10
+                            }
+                        }
+                    });
+
+                    equal(selection.selection.width(), selection.categoryAxis.lineBox().width());
+                });
+
+                test("selection can reach last category for justified charts", function() {
+                    setup({
+                        series: [{
+                            type: "area",
+                            data: new Array(10)
+                        }],
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 10
+                            }
+                        }
+                    });
+
+                    equal(selection.selection.width(), selection.categoryAxis.lineBox().width());
                 });
 
                 // ------------------------------------------------------------
@@ -243,6 +278,49 @@
                     });
 
                     selection._tap(stubArgs());
+                });
+
+                test("select contains correct category on tap", 2, function() {
+                    setup({
+                        series: [{
+                            data: new Array(10),
+                        }],
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 1
+                            }
+                        }
+                    });
+
+                    chart.bind("select", function(e) {
+                        equal(e.from, 9);
+                        equal(e.to, 10);
+                    });
+
+                    selection._tap(stubArgs(550));
+                });
+
+                test("select contains correct category on tap for justified charts", 2, function() {
+                    setup({
+                        series: [{
+                            type: "area",
+                            data: new Array(10),
+                        }],
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 1
+                            }
+                        }
+                    });
+
+                    chart.bind("select", function(e) {
+                        equal(e.from, 8);
+                        equal(e.to, 9);
+                    });
+
+                    selection._tap(stubArgs(580));
                 });
 
                 test("select fires on mousewheel", 1, function() {
@@ -437,9 +515,27 @@
                 });
 
                 test("selection does not expand beyond axis bounds", function() {
-                    for (var i = 0; i < 50; i++) {
-                        triggerMousewheel(1);
-                    }
+                    triggerMousewheel(50);
+
+                    equal(sOpts.from, 0);
+                    equal(sOpts.to, 100);
+                });
+
+                test("selection does not expand beyond axis bounds for justified charts", function() {
+                    setup({
+                        series: [{
+                            type: "area",
+                            data: new Array(100)
+                        }],
+                        categoryAxis: {
+                            select: {
+                                from: 0,
+                                to: 10
+                            }
+                        }
+                    });
+
+                    triggerMousewheel(100);
 
                     equal(sOpts.from, 0);
                     equal(sOpts.to, 99);
@@ -507,6 +603,50 @@
 
                 test("to is rounded down to prev date", function() {
                     deepEqual(sOpts.to, new Date("2012/01/15 00:00"));
+                });
+
+                test("selection can reach last category", function() {
+                    setup({
+                        series: [{
+                            type: "column",
+                            data: new Array(10)
+                        }],
+                            categoryAxis: {
+                                categories: [
+                                    new Date("2012/01/01 00:00"),
+                                    new Date("2012/01/10 00:00")
+                                ],
+                                baseUnit: "days",
+                                select: {
+                                    from: "2012/01/01 00:00",
+                                    to: "2012/01/11 00:00"
+                                }
+                            }
+                    });
+
+                    close(selection.selection.width(), selection.categoryAxis.lineBox().width(), 1);
+                });
+
+                test("selection can reach last category for justified charts", function() {
+                    setup({
+                        series: [{
+                            type: "area",
+                            data: new Array(10)
+                        }],
+                            categoryAxis: {
+                                categories: [
+                                    new Date("2012/01/01 00:00"),
+                                    new Date("2012/01/10 00:00")
+                                ],
+                                baseUnit: "days",
+                                select: {
+                                    from: "2012/01/01 00:00",
+                                    to: "2012/01/10 00:00"
+                                }
+                            }
+                    });
+
+                    close(selection.selection.width(), selection.categoryAxis.lineBox().width(), 1);
                 });
 
                 // ------------------------------------------------------------
@@ -578,12 +718,35 @@
                 });
 
                 test("selection does not expand beyond axis bounds", function() {
-                    for (var i = 0; i < 20; i++) {
-                        triggerMousewheel(1);
-                    }
+                    triggerMousewheel(20);
 
                     deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
-                    deepEqual(sOpts.to, new Date("2012/01/04 00:00"));
+                    deepEqual(sOpts.to, new Date("2012/01/05 00:00"));
+                });
+
+                test("selection does not expand beyond axis bounds for justified charts", function() {
+                    setup({
+                        series: [{
+                            type: "area",
+                            data: new Array(10)
+                        }],
+                            categoryAxis: {
+                                categories: [
+                                    new Date("2012/01/01 00:00"),
+                                    new Date("2012/01/10 00:00")
+                                ],
+                                baseUnit: "days",
+                                select: {
+                                    from: "2012/01/01 00:00",
+                                    to: "2012/01/02 00:00"
+                                }
+                            }
+                    });
+
+                    triggerMousewheel(20);
+
+                    deepEqual(sOpts.from, new Date("2012/01/01 00:00"));
+                    deepEqual(sOpts.to, new Date("2012/01/10 00:00"));
                 });
 
                 test("selection does not expand beyond min/max range", function() {
