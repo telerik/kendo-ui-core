@@ -12,6 +12,7 @@ kendo_module({
         List = ui.List,
         keys = kendo.keys,
         activeElement = kendo._activeElement,
+        ObservableArray = kendo.data.ObservableArray,
         proxy = $.proxy,
         ID = "id",
         LI = "li",
@@ -362,7 +363,7 @@ kendo_module({
             }
 
             if (value !== null) {
-                value = $.isArray(value) ? value : [value];
+                value = $.isArray(value) || value instanceof ObservableArray ? value : [value];
 
                 for (idx = 0, length = value.length; idx < length; idx++) {
                     dataItemIndex = that._index(value[idx]);

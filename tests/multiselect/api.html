@@ -140,6 +140,18 @@
                 ok(multiselect.element[0].children[1].selected);
             });
 
+            test("MultiSelect supports ObservableArray value", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select),
+                    value = new kendo.data.ObservableArray(["0"]);
+
+                multiselect.value(value);
+
+                equal(multiselect.tagList.children().length, 1);
+                equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+                ok(multiselect.element[0].children[0].selected);
+            });
+
             test("MultiSelect hides corresponding LI elements when set value", function() {
                 popuplateSelect();
                 var multiselect = new MultiSelect(select);
