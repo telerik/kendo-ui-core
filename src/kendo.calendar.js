@@ -368,6 +368,7 @@ kendo_module({
                 view = that._view,
                 index = that._index,
                 currentValue = new DATE(+that._current),
+                isRtl = kendo.support.isRtl(that.wrapper),
                 value, prevent, method, temp;
 
             if (e.target === that._table[0]) {
@@ -375,10 +376,10 @@ kendo_module({
             }
 
             if (e.ctrlKey) {
-                if (key == keys.RIGHT) {
+                if (key == keys.RIGHT && !isRtl || key == keys.LEFT && isRtl) {
                     that.navigateToFuture();
                     prevent = true;
-                } else if (key == keys.LEFT) {
+                } else if (key == keys.LEFT && !isRtl || key == keys.RIGHT && isRtl) {
                     that.navigateToPast();
                     prevent = true;
                 } else if (key == keys.UP) {
@@ -389,10 +390,10 @@ kendo_module({
                     prevent = true;
                 }
             } else {
-                if (key == keys.RIGHT) {
+                if (key == keys.RIGHT && !isRtl || key == keys.LEFT && isRtl) {
                     value = 1;
                     prevent = true;
-                } else if (key == keys.LEFT) {
+                } else if (key == keys.LEFT && !isRtl || key == keys.RIGHT && isRtl) {
                     value = -1;
                     prevent = true;
                 } else if (key == keys.UP) {
