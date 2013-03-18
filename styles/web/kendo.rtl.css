@@ -49,6 +49,11 @@
     margin: 0 2px 0 0;
 }
 
+/* Calendar */
+
+.k-rtl .k-widget.k-calendar .k-nav-prev { left: auto; right: 1%; }
+.k-rtl .k-widget.k-calendar .k-nav-next { right: auto; left: 1%; }
+
 /* Editor */
 
 .k-rtl .k-form-text-row input

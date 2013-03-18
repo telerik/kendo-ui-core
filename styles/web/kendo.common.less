@@ -1830,7 +1830,7 @@ span.k-numerictextbox,
 span.k-combobox,
 span.k-dropdown
 {
-    background: none;
+    background-image: none;
 }
 
 .k-autocomplete,
@@ -2365,13 +2365,6 @@ body .k-datetimepicker .k-select
 
 /* Date/Time Pickers */
 
-span.k-timepicker,
-span.k-datetimepicker,
-span.k-datepicker
-{
-    background-color: transparent; /* due to k-widget */
-}
-
 .k-datetimepicker .k-picker-wrap
 {
     padding-right: 42px;
@@ -2735,8 +2728,7 @@ span.k-numerictextbox
         width: 90%;
         margin: 0 5%;
         .k-slider-track {
-            border: 1px solid;
-            border-color: #999 #fff #fff #999;
+            .box-shadow(~"0 1px 0 #fff, 0 -1px 0 #999");
         }
     }
 
