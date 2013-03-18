@@ -113,6 +113,13 @@ class TabStripItem extends \Kendo\SerializableObject {
     public function endContent() {
         $this->content(ob_get_clean());
     }
+    /**
+    * Adds one or more \Kendo\UI\TabStripItem.
+    * @param \Kendo\UI\TabStripItem|array,... $value
+    * @return \Kendo\UI\TabStrip    */
+    public function addItem($value) {
+        return $this->add('items', func_get_args());
+    }
 //<< Properties
 }
 
