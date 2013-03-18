@@ -68,6 +68,9 @@
     <hudson.tasks.Shell>
       <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; bundle exec rake build:master:tests</command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>git push --force origin HEAD:stable</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
@@ -78,17 +81,6 @@
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.plugins.git.GitPublisher plugin="git@1.3.0">
-      <configVersion>2</configVersion>
-      <pushMerge>false</pushMerge>
-      <pushOnlyIfSuccess>true</pushOnlyIfSuccess>
-      <branchesToPush>
-        <hudson.plugins.git.GitPublisher_-BranchToPush>
-          <targetRepoName>origin</targetRepoName>
-          <branchName>stable</branchName>
-        </hudson.plugins.git.GitPublisher_-BranchToPush>
-      </branchesToPush>
-    </hudson.plugins.git.GitPublisher>
     <hudson.plugins.campfire.CampfireNotifier plugin="campfire@2.6">
       <campfire>
         <subdomain>kendoui</subdomain>
