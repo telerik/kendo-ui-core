@@ -23,6 +23,7 @@ public class ToolItemsTag extends ContentTag /* interfaces */ /* interfaces */ {
         ToolTag parent = (ToolTag)findParentWithClass(ToolTag.class);
 
         parent.setItems(this);
+        parent.setProperty("items", this.items);
         return super.doEndTag();
     }
 
