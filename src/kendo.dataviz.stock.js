@@ -35,9 +35,6 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
-        SELECT_START = "selectStart",
-        SELECT = "select",
-        SELECT_END = "selectEnd",
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";

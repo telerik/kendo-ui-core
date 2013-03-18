@@ -8634,7 +8634,7 @@ kendo_module({
 
             axes = $.map(axes, function(axisOptions) {
                 var axisColor = (axisOptions || {}).color;
-                return deepExtend({},
+                var result = deepExtend({},
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
                     axisDefaults,
@@ -8646,6 +8646,10 @@ kendo_module({
                     },
                     axisOptions
                 );
+
+                delete result[axisName];
+
+                return result;
             });
 
             options[axisName] = axes.length > 1 ? axes : axes[0];
