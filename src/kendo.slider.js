@@ -952,7 +952,7 @@ kendo_module({
                 owner = that.owner,
                 tooltip = that.options.tooltip,
                 html = '',
-                tooltipTemplate;
+                tooltipTemplate, colloutCssClass;
 
             if (!tooltip.enabled) {
                 return;
@@ -968,7 +968,8 @@ kendo_module({
             html = owner._getFormattedValue(that.val || owner.value(), that);
 
             if (!that.type) {
-                that.tooltipInnerDiv = "<div class='k-callout k-callout-" + (owner._isHorizontal ? 's' : 'e') + "'><!-- --></div>";
+                colloutCssClass = "k-callout-" + (owner._isHorizontal ? 's' : 'e');
+                that.tooltipInnerDiv = "<div class='k-callout " + colloutCssClass + "'><!-- --></div>";
                 html += that.tooltipInnerDiv;
             }
 
@@ -1105,40 +1106,89 @@ kendo_module({
         moveTooltip: function () {
             var that = this,
                 owner = that.owner,
-                positionTop = 0,
-                positionLeft = 0,
-                dragHandleOffset = kendo.getOffset(that.dragHandle),
+                top = 0,
+                left = 0,
+                dragHandle = that.dragHandle,
+                offset = kendo.getOffset(dragHandle),
                 margin = 8,
+                viewport = $(window),
                 callout = that.tooltipDiv.find(".k-callout"),
-                dragHandles,
-                firstDragHandleOffset,
-                secondDragHandleOffset;
+                width = that.tooltipDiv.outerWidth(),
+                height = that.tooltipDiv.outerHeight(),
+                dragHandles, sdhOffset, diff, anchorSize;
 
             if (that.type) {
                 dragHandles = owner.wrapper.find(DRAG_HANDLE);
-                firstDragHandleOffset = kendo.getOffset(dragHandles.eq(0));
-                secondDragHandleOffset = kendo.getOffset(dragHandles.eq(1));
+                offset = kendo.getOffset(dragHandles.eq(0));
+                sdhOffset = kendo.getOffset(dragHandles.eq(1));
 
                 if (owner._isHorizontal) {
-                    positionTop = secondDragHandleOffset.top;
-                    positionLeft = firstDragHandleOffset.left + ((secondDragHandleOffset.left - firstDragHandleOffset.left) / 2);
+                    top = sdhOffset.top;
+                    left = offset.left + ((sdhOffset.left - offset.left) / 2);
                 } else {
-                    positionTop = firstDragHandleOffset.top + ((secondDragHandleOffset.top - firstDragHandleOffset.top) / 2);
-                    positionLeft = secondDragHandleOffset.left;
+                    top = offset.top + ((sdhOffset.top - offset.top) / 2);
+                    left = sdhOffset.left;
                 }
+
+                anchorSize = dragHandles.eq(0).outerWidth() + 2 * margin;
             } else {
-                positionTop = dragHandleOffset.top;
-                positionLeft = dragHandleOffset.left;
-            }
-            if (owner._isHorizontal) {
-                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2, 10);
-                positionTop -= that.tooltipDiv.outerHeight() + (callout.height() || 0) + margin;
-            } else {
-                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2, 10);
-                positionLeft -= that.tooltipDiv.outerWidth() + (callout.width() || 0) + margin;
+                top = offset.top;
+                left = offset.left;
+                anchorSize = dragHandle.outerWidth() + 2 * margin;
             }
 
-            that.tooltipDiv.css({ top: positionTop, left: positionLeft });
+            if (owner._isHorizontal) {
+                left -= parseInt((width - dragHandle[owner._outerSize]()) / 2, 10);
+                top -= height + callout.height() + margin;
+            } else {
+                top -= parseInt((height - dragHandle[owner._outerSize]()) / 2, 10);
+                left -= width + callout.width() + margin;
+            }
+
+            if (owner._isHorizontal) {
+                diff = that._flip(top, height, anchorSize, viewport.outerHeight());
+                top += diff;
+                left += that._fit(left, width, viewport.outerWidth());
+            } else {
+                diff = that._flip(left, width, anchorSize, viewport.outerWidth());
+                top += that._fit(top, height, viewport.outerHeight());
+                left += diff;
+            }
+
+            if (diff > 0 && callout) {
+                callout.removeClass();
+                callout.addClass("k-callout k-callout-" + (owner._isHorizontal ? "n" : "w"));
+            }
+
+            that.tooltipDiv.css({ top: top, left: left });
+        },
+
+        _fit: function(position, size, viewPortSize) {
+            var output = 0;
+
+            if (position + size > viewPortSize) {
+                output = viewPortSize - (position + size);
+            }
+
+            if (position < 0) {
+                output = -position;
+            }
+
+            return output;
+        },
+
+        _flip: function(offset, size, anchorSize, viewPortSize) {
+            var output = 0;
+
+            if (offset + size > viewPortSize) {
+                output += -(anchorSize + size);
+            }
+
+            if (offset + output < 0) {
+                output += anchorSize + size;
+            }
+
+            return output;
         },
 
         constrainValue: function (position, min, max, maxOverflow) {
