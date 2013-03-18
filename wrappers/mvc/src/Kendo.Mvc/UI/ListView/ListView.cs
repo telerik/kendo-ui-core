@@ -8,7 +8,8 @@
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Resources;    
+    using Kendo.Mvc.Resources;
+    using System.Text.RegularExpressions;    
 
     public class ListView<T> : WidgetBase, IListView where T : class
     {
@@ -192,6 +193,7 @@
         {
             if (Editable.Enabled)
             {
+                var popupSlashes = new Regex("(?<=data-val-regex-pattern=\")([^\"]*)", RegexOptions.Multiline);
                 var helper = new HtmlHelper<T>(ViewContext, new ListViewViewDataContainer<T>(Editable.DefaultDataItem(), ViewData));
 
                 if (Editable.TemplateName.HasValue())
@@ -202,6 +204,11 @@
                 {
                     EditorHtml = helper.EditorForModel().ToHtmlString();
                 }
+
+                EditorHtml = popupSlashes.Replace(EditorHtml, match =>
+                {
+                    return match.Groups[0].Value.Replace("\\", IsInClientTemplate ? "\\\\\\\\" : "\\\\");
+                });
             }
         }
     }
