@@ -22,13 +22,21 @@ end
 cookbook_file "/var/lib/tomcat7/conf/tomcat-users.xml" do
     source "tomcat-users.xml"
     owner "root"
-    group "tomcat7"
+    group "nogroup"
     mode "0640"
     notifies :restart, resources(:service => "tomcat7")
 end
 
 cookbook_file "/etc/tomcat7/server.xml" do
     source "server.xml"
+    owner "root"
+    group "root"
+    mode "0644"
+    notifies :restart, resources(:service => "tomcat7")
+end
+
+cookbook_file "/etc/default/tomcat7" do
+    source "tomcat7"
     owner "root"
     group "root"
     mode "0644"
