@@ -92,7 +92,7 @@ module kendo {
 
     class View {
         constructor(contents: string);
-        render(container?: JQuery): JQuery;
+        render(container?: any): JQuery;
         destroy(): void;
     }
 
@@ -111,7 +111,7 @@ module kendo {
         start(): void;
         destroy(): void;
         route(route: string, callback: Function): void;
-        navigate(location: string);
+        navigate(location: string, silent: bool);
     }
 }
 
