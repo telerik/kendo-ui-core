@@ -253,6 +253,14 @@
                     triggerMousewheel(1);
                 });
 
+                test("select args contain axis options on mousewheel", function() {
+                    chart.bind("select", function(e) {
+                        equal(e.axis.name, "main");
+                    });
+
+                    triggerMousewheel(1);
+                });
+
                 test("select args contain axis options", function() {
                     chart.bind("select", function(e) {
                         equal(e.axis.name, "main");

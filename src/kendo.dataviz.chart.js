@@ -8300,6 +8300,7 @@ kendo_module({
                 that.expand(delta);
 
                 that.trigger(SELECT, {
+                    axis: that.categoryAxis.options,
                     delta: delta,
                     originalEvent: e,
                     from: that._value(range.from),
