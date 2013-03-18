@@ -1755,9 +1755,15 @@ function pad(number, digits, end) {
             return os;
         };
 
-        support.mobileOS = support.detectOS(navigator.userAgent);
+        var mobileOS = support.mobileOS = support.detectOS(navigator.userAgent);
 
-        support.kineticScrollNeeded = support.mobileOS && (support.touch || support.pointers);
+        support.kineticScrollNeeded = mobileOS && (support.touch || support.pointers);
+
+        support.hasNativeScrolling = mobileOS;
+
+        if ((mobileOS.ios && mobileOS.majorVersion < 5) || (mobileOS.android && mobileOS.majorVersion < 3)) {
+            support.hasNativeScrolling = false;
+        }
 
         support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
 

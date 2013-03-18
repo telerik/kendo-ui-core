@@ -213,7 +213,7 @@ kendo_module({
 
             element = that.element;
 
-            if (that.options.useNative) {
+            if (that.options.useNative && kendo.support.hasNativeScrolling) {
                 element.addClass("km-native-scroller")
                     .prepend('<div class="km-scroll-header"/>');
 
@@ -223,7 +223,6 @@ kendo_module({
                 });
 
                 return;
-
             }
 
             element
