@@ -129,7 +129,7 @@ kendo_module({
             this.element.handler(this)
                 .on("down", roleSelector(linkRoles), "_mouseup")
                 .on("up", roleSelector(buttonRoles), "_mouseup")
-                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
+                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick);
         },
 
         _mouseup: function(e) {
