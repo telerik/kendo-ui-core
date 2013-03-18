@@ -1,10 +1,10 @@
 # Run Tomcat as this user ID. Not setting this or leaving it blank will use the
 # default of tomcat7.
-TOMCAT7_USER=jenkins
+TOMCAT7_USER=tomcat7
 
 # Run Tomcat as this group ID. Not setting this or leaving it blank will use
 # the default of tomcat7.
-TOMCAT7_GROUP=nogroup
+TOMCAT7_GROUP=tomcat7
 
 # The home directory of the Java development kit (JDK). You need at least
 # JDK version 1.5. If JAVA_HOME is not set, some common directories for
