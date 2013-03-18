@@ -1041,6 +1041,44 @@ on the chart.</description>
 
 
     <tag>
+        <description>The selected axis range. If configured, axis selection will be enabled.** Available only for vertical axes **The range units are:</description>
+        <name>chart-categoryAxisItem-select</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemSelectTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The lower boundary of the selected range.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The maximum value that is selectable by the user.Note: The specified index (date) is not included in the selected range
+unless the axis is justified. In order to select all categories specify
+a value larger than the last index (date).</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The minimum value that is selectable by the user.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The upper boundary of the selected range.Note: The specified index (date) is not included in the selected range
+unless the axis is justified. In order to select all categories specify
+a value larger than the last index (date).</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The title of the category axis.</description>
         <name>chart-categoryAxisItem-title</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisItemTitleTag</tag-class>

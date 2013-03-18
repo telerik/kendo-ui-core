@@ -83,6 +83,10 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
 
     }
 
+    public void setSelect(com.kendoui.taglib.chart.CategoryAxisItemSelectTag value) {
+        setProperty("select", value);
+    }
+
     public void setTitle(com.kendoui.taglib.chart.CategoryAxisItemTitleTag value) {
         setProperty("title", value);
     }
