@@ -200,6 +200,15 @@
                     selection._move(stubArgs(100, 0));
                 });
 
+                test("select args contain axis options", function() {
+                    chart.bind("select", function(e) {
+                        equal(e.axis.name, "main");
+                    });
+
+                    selection._start(stubArgs());
+                    selection._move(stubArgs(100, 0));
+                });
+
                 test("select fires on UserEvents move", 1, function() {
                     chart.bind("select", function(e) {
                         ok(true);
@@ -235,6 +244,15 @@
                     selection._start(stubArgs());
                     selection._move(stubArgs(100, 0));
                     selection._move(stubArgs(100, 0));
+                });
+
+                test("selectEnd args contain axis options", function() {
+                    chart.bind("selectEnd", function(e) {
+                        equal(e.axis.name, "main");
+                    });
+
+                    selection._start(stubArgs());
+                    selection._end();
                 });
 
                 test("selectEnd fires on UserEvents end", 1, function() {

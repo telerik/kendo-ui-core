@@ -477,14 +477,25 @@ kendo_module({
                 plotArea = chart._plotArea,
                 axes = plotArea.axes,
                 selections = chart._selections = [],
-                selection;
+                selection,
+                i,
+                axis,
+                min,
+                max,
+                options;
 
-            for (var i = 0; i < axes.length; i++) {
-                var axis = axes[i];
-                var options = axis.options;
+            if (!chart._selectStartHandler) {
+                chart._selectStartHandler = proxy(chart._selectStart, chart);
+                chart._selectHandler = proxy(chart._select, chart);
+                chart._selectEndHandler = proxy(chart._selectEnd, chart);
+            }
+
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+                options = axis.options;
                 if (axis instanceof CategoryAxis && options.select && !options.vertical) {
-                    var min = 0;
-                    var max = options.categories.length - 1;
+                    min = 0;
+                    max = options.categories.length - 1;
 
                     if (axis instanceof DateCategoryAxis) {
                         min = options.categories[min];
@@ -492,30 +503,28 @@ kendo_module({
                     }
 
                     selection = new Selection(chart, axis,
-                        deepExtend({
-                            min: min,
-                            max: max
-                        }, options.select)
+                        deepExtend({ min: min, max: max }, options.select)
                     );
 
+                    selection.bind(SELECT_START, chart._selectStartHandler);
+                    selection.bind(SELECT, chart._selectHandler);
+                    selection.bind(SELECT_END, chart._selectEndHandler);
+
                     selections.push(selection);
-
-                    selection.bind(SELECT_START, function(e) {
-                        e.axis = this.categoryAxis.options;
-                        return chart.trigger(SELECT_START, e);
-                    });
-
-                    selection.bind(SELECT, function(e) {
-                        e.axis = this.categoryAxis.options;
-                        return chart.trigger(SELECT, e);
-                    });
-
-                    selection.bind(SELECT_END, function(e) {
-                        e.axis = this.categoryAxis.options;
-                        return chart.trigger(SELECT_END, e);
-                    });
                 }
             }
+        },
+
+        _selectStart: function(e) {
+            return this.trigger(SELECT_START, e);
+        },
+
+        _select: function(e) {
+            return this.trigger(SELECT, e);
+        },
+
+        _selectEnd: function(e) {
+            return this.trigger(SELECT_END, e);
         },
 
         _attachEvents: function() {
@@ -8096,10 +8105,26 @@ kendo_module({
             }
         },
 
+        _eventArgs: function(fields) {
+            return deepExtend({
+                axis: this.categoryAxis.options
+            }, fields);
+        },
+
+        _rangeEventArgs: function(range) {
+            var that = this;
+
+            return that._eventArgs({
+                from: that._value(range.from),
+                to: that._value(range.to)
+            });
+        },
+
         _start: function(e) {
             var that = this,
                 options = that.options,
-                target = $(e.event.target);
+                target = $(e.event.target),
+                args;
 
             if (that._state || !target) {
                 return;
@@ -8115,7 +8140,8 @@ kendo_module({
                 }
             };
 
-            if (that.trigger(SELECT_START, { from: options.from, to: options.to })) {
+            args = that._eventArgs({ from: options.from, to: options.to });
+            if (that.trigger(SELECT_START, args)) {
                 that.userEvents.cancel();
                 that._state = null;
             }
@@ -8173,7 +8199,7 @@ kendo_module({
 
             if (range.from !== oldRange.from || range.to !== oldRange.to) {
                 that.move(range.from, range.to);
-                that.trigger(SELECT, that._rangeValue(range));
+                that.trigger(SELECT, that._rangeEventArgs(range));
             }
         },
 
@@ -8183,7 +8209,7 @@ kendo_module({
 
             delete that._state;
             that.set(range.from, range.to);
-            that.trigger(SELECT_END, that._rangeValue(range));
+            that.trigger(SELECT_END, that._rangeEventArgs(range));
         },
 
         _gesturechange: function(e) {
@@ -8248,7 +8274,7 @@ kendo_module({
             range.to = math.min(range.from + span, max);
 
             that.set(range.from, range.to);
-            that.trigger(SELECT_END, that._rangeValue(range));
+            that.trigger(SELECT_END, that._rangeEventArgs(range));
         },
 
         _mousewheel: function(e) {
@@ -8328,15 +8354,6 @@ kendo_module({
             }
 
             return index;
-        },
-
-        _rangeValue: function(range) {
-            var that = this;
-
-            return {
-                from: that._value(range.from),
-                to: that._value(range.to)
-            };
         },
 
         _slot: function(value) {

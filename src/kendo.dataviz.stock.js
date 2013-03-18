@@ -315,6 +315,7 @@ kendo_module({
                 // "Freeze" the selection axis position until the next redraw
                 axisClone.box = axis.box;
 
+                // TODO: Move selection initialization to PlotArea.redraw
                 selection = navi.selection = new Selection(chart, axisClone, {
                     min: min,
                     max: max,
