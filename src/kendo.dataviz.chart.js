@@ -8124,7 +8124,7 @@ kendo_module({
             that.chart._unsetActivePoint();
             that._state = {
                 moveTarget: target.parents(".k-handle").add(target).first(),
-                startLocation: e.x.location,
+                startLocation: e.x ? e.x.location : 0,
                 range: {
                     from: that._index(options.from),
                     to: that._index(options.to)
@@ -8278,10 +8278,7 @@ kendo_module({
                 options = that.options,
                 delta = mwDelta(e);
 
-            // TODO: Refactor
-            e.event = { target: null };
-            e.x = { location: 0 };
-            that._start(e);
+            that._start({ event: { target: that.selection } });
 
             if (that._state) {
                 var range = that._state.range;
