@@ -51,12 +51,13 @@
                             color: "#bb6e36"
                         }],
                         categoryAxis: {
-                            labels: {
-                                rotation: -90
+                            categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
+                            majorGridLines: {
+                                visible: false
                             },
                             select: {
-                                from: 5,
-                                to: 10
+                                from: 2,
+                                to: 5
                             }
                         },
                         tooltip: {
@@ -68,16 +69,27 @@
                     });
                 }
 
+                function formatRange(e) {
+                    var categories = e.axis.categories;
+
+                    return kendo.format("{0} - {1} ({2} - {3})",
+                        e.from, e.to,
+                        categories[e.from],
+                        // The last category included in the selection is at (to - 1)
+                        categories[e.to - 1]
+                    );
+                }
+
                 function onSelectStart(e) {
-                    kendoConsole.log(kendo.format("Select start :: {0} - {1}", e.from, e.to));
+                    kendoConsole.log(kendo.format("Select start :: {0}", formatRange(e)));
                 }
 
                 function onSelect(e) {
-                    kendoConsole.log(kendo.format("Select :: {0} - {1}", e.from, e.to));
+                    kendoConsole.log(kendo.format("Select :: {0}", formatRange(e)));
                 }
 
                 function onSelectEnd(e) {
-                    kendoConsole.log(kendo.format("Select end :: {0} - {1}", e.from, e.to));
+                    kendoConsole.log(kendo.format("Select end :: {0}", formatRange(e)));
                 }
 
                 function setOptions() {
