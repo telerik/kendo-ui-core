@@ -6,7 +6,7 @@ class AutoCompleteAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Animation to be used for closing of the popup.
+    * The animation played when the suggestion popup is closed.
     * @param \Kendo\UI\AutoCompleteAnimationClose|array $value
     * @return \Kendo\UI\AutoCompleteAnimation
     */
@@ -15,7 +15,7 @@ class AutoCompleteAnimation extends \Kendo\SerializableObject {
     }
 
     /**
-    * Animation to be used for opening of the popup.
+    * The animation played when the suggestion popup is opened.
     * @param \Kendo\UI\AutoCompleteAnimationOpen|array $value
     * @return \Kendo\UI\AutoCompleteAnimation
     */

@@ -13,7 +13,8 @@ class AutoComplete extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+    * Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the
+suggestion popup will open and close instantly.
     * @param \Kendo\UI\AutoCompleteAnimation|array $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -31,7 +32,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Sets the field of the data item that provides the text content of the list items.
+    * The field of the data item used when searching for suggestions.
     * @param string $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -40,7 +41,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.
+    * The delay in milliseconds between a keystroke and when the widget displays the suggestion popup.
     * @param float $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -49,7 +50,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Controls whether the AutoComplete should be initially enabled.
+    * If set to false the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.
     * @param boolean $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -58,7 +59,8 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Defines the type of filtration. This value is handled by the remote data source.
+    * The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
+all data items which begin with the current widget value are displayed in the suggestion popup. The supported filter values are startswith, endswith and contains.
     * @param string $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -67,7 +69,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Sets the height of the drop-down list in pixels.
+    * The height of the suggestion popup in pixels. The default value is 200 pixels.
     * @param float $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -76,7 +78,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Controls whether the first item will be automatically highlighted.
+    * If set to true the first suggestion will be automatically highlighted.
     * @param boolean $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -85,7 +87,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Defines whether the filtration should be case sensitive.
+    * If set to false case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
     * @param boolean $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -94,8 +96,7 @@ class AutoComplete extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the minimum number of characters that should be typed before the AutoComplete queries
-the dataSource.
+    * The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.
     * @param float $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -104,7 +105,7 @@ the dataSource.
     }
 
     /**
-    * A string that appears in the textbox when it has no value.
+    * The hint displayed by the widget when it is empty. Not set by default.
     * @param string $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -113,7 +114,7 @@ the dataSource.
     }
 
     /**
-    * Sets the separator for completion. Empty by default, allowing for only one completion.
+    * The character used to separate multiple values. Empty by default.
     * @param string $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -122,7 +123,7 @@ the dataSource.
     }
 
     /**
-    * Controls whether the AutoComplete should automatically auto-type the rest of text.
+    * If set to true the widget will automatically use the first suggestion as its value.
     * @param boolean $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -132,7 +133,7 @@ the dataSource.
 
     /**
     * Sets the template option of the AutoComplete.
-    * Template to be used for rendering the items in the list.
+    * The template used to render the suggestions. By default the widget displays only the text of the suggestion (configured via dataTextField).
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\AutoComplete
     */
@@ -144,7 +145,7 @@ the dataSource.
 
     /**
     * Sets the template option of the AutoComplete.
-    * Template to be used for rendering the items in the list.
+    * The template used to render the suggestions. By default the widget displays only the text of the suggestion (configured via dataTextField).
     * @param string $value The template content.
     * @return \Kendo\UI\AutoComplete
     */
@@ -154,7 +155,7 @@ the dataSource.
 
     /**
     * Sets the change event of the AutoComplete.
-    * Fires when the value has been changed.
+    * Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\AutoComplete
     */
@@ -168,7 +169,7 @@ the dataSource.
 
     /**
     * Sets the close event of the AutoComplete.
-    * Fires when the drop-down list is closed
+    * Fired when the suggestion popup of the widget is closed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\AutoComplete
     */
@@ -182,7 +183,7 @@ the dataSource.
 
     /**
     * Sets the dataBound event of the AutoComplete.
-    * Fires when the AutoComplete has received data from the data source.
+    * Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\AutoComplete
     */
@@ -196,7 +197,7 @@ the dataSource.
 
     /**
     * Sets the open event of the AutoComplete.
-    * Fires when the drop-down list is opened
+    * Fired when the suggestion popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\AutoComplete
     */
@@ -210,7 +211,7 @@ the dataSource.
 
     /**
     * Sets the select event of the AutoComplete.
-    * Triggered when a Li element is selected.
+    * Fired when an item from the suggestion popup is selected by the user.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\AutoComplete
     */

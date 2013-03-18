@@ -6,7 +6,7 @@ class AutoCompleteAnimationClose extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Effect to be used for closing of the popup.
+    * The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
     * @param string $value
     * @return \Kendo\UI\AutoCompleteAnimationClose
     */
@@ -15,7 +15,7 @@ class AutoCompleteAnimationClose extends \Kendo\SerializableObject {
     }
 
     /**
-    * Difines the animation duration.
+    * The duration of the close animation in milliseconds.
     * @param float $value
     * @return \Kendo\UI\AutoCompleteAnimationClose
     */

@@ -25,107 +25,107 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The set of data that the AutoComplete will be bound to.
- Either a local JavaScript object, or an instance of the Kendo UI DataSource.</description>
+            <description>The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <description>The field of the data item used when searching for suggestions.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the delay in ms after which the AutoComplete will start filtering the dataSource.</description>
+            <description>The delay in milliseconds between a keystroke and when the widget displays the suggestion popup.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the AutoComplete should be initially enabled.</description>
+            <description>If set to false the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.</description>
             <name>enable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines the type of filtration. This value is handled by the remote data source.</description>
+            <description>The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
+all data items which begin with the current widget value are displayed in the suggestion popup. The supported filter values are startswith, endswith and contains.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Sets the height of the drop-down list in pixels.</description>
+            <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the first item will be automatically highlighted.</description>
+            <description>If set to true the first suggestion will be automatically highlighted.</description>
             <name>highlightFirst</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines whether the filtration should be case sensitive.</description>
+            <description>If set to false case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.</description>
             <name>ignoreCase</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the minimum number of characters that should be typed before the AutoComplete queries
-the dataSource.</description>
+            <description>The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A string that appears in the textbox when it has no value.</description>
+            <description>The hint displayed by the widget when it is empty. Not set by default.</description>
             <name>placeholder</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Sets the separator for completion. Empty by default, allowing for only one completion.</description>
+            <description>The character used to separate multiple values. Empty by default.</description>
             <name>separator</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Controls whether the AutoComplete should automatically auto-type the rest of text.</description>
+            <description>If set to true the widget will automatically use the first suggestion as its value.</description>
             <name>suggest</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the items in the list.</description>
+            <description>The template used to render the suggestions. By default the widget displays only the text of the suggestion (configured via dataTextField).</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Fires when the value has been changed.</description>
+            <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is closed</description>
+            <description>Fired when the suggestion popup of the widget is closed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>close</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the AutoComplete has received data from the data source.</description>
+            <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is opened</description>
+            <description>Fired when the suggestion popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when a Li element is selected.</description>
+            <description>Fired when an item from the suggestion popup is selected by the user.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -133,7 +133,8 @@ the dataSource.</description>
     </tag>
 
     <tag>
-        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <description>Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the
+suggestion popup will open and close instantly.</description>
         <name>autoComplete-animation</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -142,19 +143,19 @@ the dataSource.</description>
     </tag>
 
     <tag>
-        <description>Animation to be used for closing of the popup.</description>
+        <description>The animation played when the suggestion popup is closed.</description>
         <name>autoComplete-animation-close</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -164,19 +165,19 @@ the dataSource.</description>
 
 
     <tag>
-        <description>Animation to be used for opening of the popup.</description>
+        <description>The animation played when the suggestion popup is opened.</description>
         <name>autoComplete-animation-open</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -188,31 +189,31 @@ the dataSource.</description>
 
 
     <tag>
-        <description>Fires when the value has been changed.</description>
+        <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>autoComplete-change</name>
         <tag-class>com.kendoui.taglib.autocomplete.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is closed</description>
+        <description>Fired when the suggestion popup of the widget is closed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>autoComplete-close</name>
         <tag-class>com.kendoui.taglib.autocomplete.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the AutoComplete has received data from the data source.</description>
+        <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>autoComplete-dataBound</name>
         <tag-class>com.kendoui.taglib.autocomplete.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is opened</description>
+        <description>Fired when the suggestion popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>autoComplete-open</name>
         <tag-class>com.kendoui.taglib.autocomplete.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when a Li element is selected.</description>
+        <description>Fired when an item from the suggestion popup is selected by the user.</description>
         <name>autoComplete-select</name>
         <tag-class>com.kendoui.taglib.autocomplete.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
