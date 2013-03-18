@@ -60,9 +60,6 @@
                                 to: 5
                             }
                         },
-                        tooltip: {
-                            visible: true
-                        },
                         selectStart: onSelectStart,
                         select: onSelect,
                         selectEnd: onSelectEnd
@@ -109,9 +106,10 @@
                     chart.refresh();
                 }
 
+                $("#reverse, #zoom").click(setOptions);
+
                 $(document).ready(createChart);
                 $("#example").bind("kendo:skinChange", createChart);
-                $("#reverse, #zoom").click(setOptions);
 
             </script>
             <div class="demo-section">
