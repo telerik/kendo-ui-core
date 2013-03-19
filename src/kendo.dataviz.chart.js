@@ -405,7 +405,6 @@ kendo_module({
             Title.buildTitle(options.title, model);
 
             plotArea = model._plotArea = chart._createPlotArea();
-            model._plotArea.parent = model;
             if (options.legend.visible) {
                 model.append(new Legend(plotArea.options.legend));
             }
