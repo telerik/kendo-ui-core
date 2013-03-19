@@ -623,7 +623,7 @@ kendo_module({
                     platform = attrValue(layout,  "platform");
 
                 if (platform === undefined || platform === mobile.application.os.name) {
-                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, ui.roles);
+                    that.layouts[kendo.attrValue(layout, "id")] = kendo.initWidget(layout, {}, ui.roles);
                 }
             });
         }
