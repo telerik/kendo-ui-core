@@ -58,7 +58,8 @@
     border-radius: 0;
 }
 
-.k-chart .k-tooltip {
+.k-chart .k-tooltip,
+.k-sparkline .k-tooltip {
   	background-image: none;
 	-moz-border-radius: 0;
     -webkit-border-radius: 0;

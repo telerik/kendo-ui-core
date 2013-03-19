@@ -60,6 +60,7 @@
     height: 4px;
 }
 
-.k-chart .k-tooltip {
+.k-chart .k-tooltip,
+.k-sparkline .k-tooltip {
   background-image: none;
 }
