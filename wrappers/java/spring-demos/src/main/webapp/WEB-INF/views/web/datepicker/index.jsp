@@ -6,10 +6,10 @@
 
 <div id="email-settings">
     <div style="margin-top: -6px; margin-left: 180px">
-        <kendo:datePicker name="datepicker" value="${today}"></kendo:datePicker>
+        <kendo:datePicker name="datepicker" value="${date}"></kendo:datePicker>
     </div>
     <div style="margin-top: 59px; margin-left: 180px">
-        <kendo:datePicker name="monthpicker" value="${today}" start="year" depth="year" format="MMMM yyyy">
+        <kendo:datePicker name="monthpicker" value="${month}" start="year" depth="year" format="MMMM yyyy">
         </kendo:datePicker>
     </div>
 </div>

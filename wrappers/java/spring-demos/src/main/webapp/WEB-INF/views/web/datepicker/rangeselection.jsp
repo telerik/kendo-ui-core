@@ -5,10 +5,10 @@
 <demo:header />
 <div class="demo-section" style="width:470px">
     <label for="start">Start date:</label>
-	<kendo:datePicker name="start" value="${today}" max="${today}" change="startChange"></kendo:datePicker>
+	<kendo:datePicker name="start" value="${start}" max="${end}" change="startChange"></kendo:datePicker>
 	
 	<label for="end" style="margin-left:3em">End date:</label>
-	<kendo:datePicker name="end" value="${today}" min="${today}" change="endChange"></kendo:datePicker>
+	<kendo:datePicker name="end" value="${end}" min="${start}" change="endChange"></kendo:datePicker>
 </div>
 
 <script>

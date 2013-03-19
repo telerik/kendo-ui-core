@@ -13,12 +13,10 @@ public class RangeSelectionController {
     @RequestMapping(value = {"/rangeselection"}, method = RequestMethod.GET)
     public String index(Model model) {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        
-        model.addAttribute("today", cal.getTime());
+        cal.set(2011,9,10);
+        model.addAttribute("start", cal.getTime());
+        cal.set(2012,9,10);
+        model.addAttribute("end", cal.getTime());        
         
         return "web/datepicker/rangeselection";
     }

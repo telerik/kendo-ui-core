@@ -1,5 +1,6 @@
 package com.kendoui.spring.controllers.datepicker;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,11 @@ public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("today", new Date());
-        
+        Calendar cal = Calendar.getInstance();
+        cal.set(2011,10,10);
+        model.addAttribute("date", cal.getTime());
+        cal.set(2011,10,1);
+        model.addAttribute("month", cal.getTime());
         return "web/datepicker/index";
     }
 }

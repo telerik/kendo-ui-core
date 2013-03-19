@@ -8,16 +8,16 @@
 <label for="start">Start date:</label>
 <%= Html.Kendo().DatePicker()
       .Name("start")
-      .Value(DateTime.Today)
-      .Max(DateTime.Today)
+      .Value("10/10/2011")
+      .Max("10/10/2012")
       .Events(e => e.Change("startChange"))
 %>
 
 <label for="end" style="margin-left:3em">End date:</label>
 <%= Html.Kendo().DatePicker()
       .Name("end")
-      .Value(DateTime.Today)
-      .Min(DateTime.Today)
+      .Value("10/10/2012")
+      .Min("10/10/2011")
       .Events(e => e.Change("endChange"))
 %>
 </div>
