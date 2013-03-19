@@ -399,3 +399,35 @@ ul.keyboard-legend li {
     width: 700px;
     height: 430px;
 }
+
+#page > h2 {
+    float: none;
+    text-align: center;
+    width: auto;
+    padding: 5em 0 1em;
+    font-size: 3em;
+}
+
+#suites .imgPlate,
+#suites .box {
+    border-width: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#suites {
+    text-align: center;
+}
+
+#suites .box {
+    float: none;
+    clear: none;
+    display: inline-block;
+    width: auto;
+    min-width: auto;
+}
+
+#suites .box h2 {
+    margin-top: 1em;
+}
