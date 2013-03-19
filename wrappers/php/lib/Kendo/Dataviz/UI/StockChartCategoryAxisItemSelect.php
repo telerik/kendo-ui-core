@@ -15,9 +15,9 @@ class StockChartCategoryAxisItemSelect extends \kendo\SerializableObject {
     }
 
     /**
-    * The upper boundary of the selected range.Note: The specified index (date) is not included in the selected range
+    * The upper boundary of the selected range.Note: The category with the specified index (date) is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last index (date).
+a value larger than the last category index (date).
     * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemSelect
     */
@@ -35,9 +35,9 @@ a value larger than the last index (date).
     }
 
     /**
-    * The maximum value that is selectable by the user.Note: The specified index (date) is not included in the selected range
+    * The maximum value that is selectable by the user.Note: The category with the specified index (date) is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last index (date).
+a value larger than the last category index (date).
     * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemSelect
     */

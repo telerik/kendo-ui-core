@@ -1053,9 +1053,9 @@ on the chart.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The maximum value that is selectable by the user.Note: The specified index (date) is not included in the selected range
+            <description>The maximum value that is selectable by the user.Note: The category with the specified index (date) is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last index (date).</description>
+a value larger than the last category index (date).</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -1067,9 +1067,9 @@ a value larger than the last index (date).</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The upper boundary of the selected range.Note: The specified index (date) is not included in the selected range
+            <description>The upper boundary of the selected range.Note: The category with the specified index (date) is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last index (date).</description>
+a value larger than the last category index (date).</description>
             <name>to</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -13870,9 +13870,9 @@ on the chart.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The maximum value that is selectable by the user.Note: The specified index (date) is not included in the selected range
+            <description>The maximum value that is selectable by the user.Note: The category with the specified index (date) is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last index (date).</description>
+a value larger than the last category index (date).</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -13884,9 +13884,9 @@ a value larger than the last index (date).</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The upper boundary of the selected range.Note: The specified index (date) is not included in the selected range
+            <description>The upper boundary of the selected range.Note: The category with the specified index (date) is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last index (date).</description>
+a value larger than the last category index (date).</description>
             <name>to</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
