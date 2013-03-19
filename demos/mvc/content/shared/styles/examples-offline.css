@@ -93,19 +93,25 @@ html
 
 /*configurator*/
 
-.configuration
+.centerWrap .configuration,
+.configuration-horizontal
 {
     float: right;
     margin: 0 0 0 15px;
-    padding: 10px;
-    border: 1px solid inherit;
-    background-image: none;
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
+    padding: 0 10px 10px 10px;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.07) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.01)), color-stop(100%,rgba(0,0,0,0.07)));
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
     min-width: 170px;
     max-width: 300px;
 }
@@ -122,22 +128,17 @@ html
 
 .configuration-horizontal
 {
-    -webkit-border-radius: 5px 5px 0 0;
-    -moz-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
     position: static;
     height: auto;
     min-height: 0;
-    width: auto;
-    margin-bottom: 20px;
+    max-width: 700px;
+    margin: 0 auto 15px auto;
     float:none;
+    zoom: 1;
 }
 
 .configuration-horizontal-bottom
 {
-    -webkit-border-radius: 0 0 5px 5px;
-    -moz-border-radius: 0 0 5px 5px;
-    border-radius: 0 0 5px 5px;
     margin: 20px -21px -21px;
     position: static;
     height: auto;
@@ -147,59 +148,67 @@ html
 }
 
 .configuration .configHead,
-.configuration .infoHead
+.configuration .infoHead,
+.configuration-horizontal .configHead,
+.configuration-horizontal .infoHead
 {
     display: block;
-    font-size: 14px;
-    margin-top: 0;
+    font-size: 13px;
+    font-weight: bold;
     text-indent: 0;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #999;
-    background-position: 0 -178px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
-.configuration .infoHead
-{
-    background-position: -107px -722px;
-}
 
-.configuration .configTitle
+.configuration .configTitle,
+.configuration-horizontal .configTitle
 {
     font-size: 12px;
     display: block;
     line-height: 22px;
-    background-position: 0 21px;
-    margin-bottom: 10px;
 }
 
-.configuration .options
+.configuration .options,
+.configuration-horizontal .options
 {
     list-style:none;
     margin: 0;
     padding: 0;
 }
 
-.configuration button
+.configuration button,
+.configuration-horizontal button
 {
     margin: 0;
     vertical-align: middle;
 }
 
-.configuration .k-textbox
+.configuration .k-textbox,
+.configuration-horizontal .k-textbox
 {
     margin-left: 7px;
     width: 30px;
 }
 
-.configuration .options li { display: block; margin: 0; padding: 0.2em 0;}
+.configuration .options li { display: block; margin: 0; padding: 0.2em 0; zoom: 1; }
 
-.configuration .options li:after
+.configuration .options li:after,
+.configuration-horizontal:after
 {
     content: "";
     display: block;
     clear: both;
     height: 0;
+}
+
+.configuration-horizontal .config-section
+{
+    display: block;
+    float: left;
+    min-width: 200px;
+    margin: 0;
+    padding: 10px 20px 10px 10px;
 }
 
 .configuration label,
@@ -221,9 +230,15 @@ html
 }
 
 .configuration input,
-.configuration select
+.configuration select,
+.configuration .k-numerictextbox
 {
     float: right;
+}
+
+.configuration input.k-input
+{
+    float: none;
 }
 
 .configuration .k-button,
