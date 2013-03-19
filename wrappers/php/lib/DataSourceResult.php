@@ -483,8 +483,8 @@ class DataSourceResult {
         }
 
         if (isset($request->skip) && isset($request->take)) {
-            $statement->bindValue(':skip', (int)$request->skip);
-            $statement->bindValue(':take', (int)$request->take);
+            $statement->bindValue(':skip', (int)$request->skip, PDO::PARAM_INT);
+            $statement->bindValue(':take', (int)$request->take, PDO::PARAM_INT);
         }
 
         $statement->execute();
