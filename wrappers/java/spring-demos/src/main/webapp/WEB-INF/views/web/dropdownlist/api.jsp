@@ -31,6 +31,9 @@
             <li>
                 <input id="value" value="1" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="setValue" class="k-button">Select by value</button>
             </li>
+            <li>
+                <input id="word" value="Pulp" class="k-textbox" style="width: 100px; margin: 0;" /> <button id="find" class="k-button">Select item starting with</button>
+            </li>
         </ul>
         </div>
     </div>
