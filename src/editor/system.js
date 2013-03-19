@@ -665,7 +665,8 @@ var WebkitFormatCleaner = Class.extend({
     init: function() {
         this.replacements = [
             /\s+class="Apple-style-span[^"]*"/gi, '',
-            /\s+style="[^"]*"/gi, ''
+            /<(div|p|h[1-6])\s+style="[^"]*"/gi, '<$1',
+            /^<div>(.*)<\/div>$/, '$1'
         ];
     },
 
