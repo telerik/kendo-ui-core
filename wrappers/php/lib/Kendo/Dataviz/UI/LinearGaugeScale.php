@@ -97,6 +97,15 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
     }
 
     /**
+    * The default color for the ranges.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
+    */
+    public function rangePlaceholderColor($value) {
+        return $this->setProperty('rangePlaceholderColor', $value);
+    }
+
+    /**
     * Reverses the axis direction - values increase from right to left and from top to bottom.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale

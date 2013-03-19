@@ -273,7 +273,7 @@ Available for column series.
     }
 
     /**
-    * The line width.** Applicable for area and line series. **
+    * The line width.** Applicable for line series. **
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */

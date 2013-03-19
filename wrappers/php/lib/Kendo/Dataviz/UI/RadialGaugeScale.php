@@ -88,6 +88,15 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     }
 
     /**
+    * The default color for the ranges.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
+    */
+    public function rangePlaceholderColor($value) {
+        return $this->setProperty('rangePlaceholderColor', $value);
+    }
+
+    /**
     * Reverses the scale direction - values are increase anticlockwise.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale

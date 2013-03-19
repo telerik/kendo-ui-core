@@ -108,6 +108,14 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("minorUnit", value);
     }
 
+    public String getRangePlaceholderColor() {
+        return (String)getProperty("rangePlaceholderColor");
+    }
+
+    public void setRangePlaceholderColor(String value) {
+        setProperty("rangePlaceholderColor", value);
+    }
+
     public boolean getReverse() {
         return (boolean)getProperty("reverse");
     }

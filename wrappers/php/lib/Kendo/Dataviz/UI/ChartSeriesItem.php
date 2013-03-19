@@ -400,7 +400,7 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * The line width.** Available for area, line and scatterLine series **
+    * The line width.** Available for line and scatterLine series **
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
