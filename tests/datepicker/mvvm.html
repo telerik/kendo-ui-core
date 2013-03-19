@@ -117,6 +117,18 @@
                 equal(observable.value.getTime(), value.getTime());
             });
 
+            test("changing to invalid value does not clear widget", function() {
+                var dom = $('<input data-role="datepicker" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: new Date() });
+
+                kendo.bind(dom, observable);
+                dom.val("10/10/0099").focus().blur();
+
+                equal(observable.value, null);
+                equal(dom.val(), "10/10/0099");
+            });
+
             test("binding datepicker initialized before binding", function() {
                 var dom = $('<input data-bind="value:value" />');
 

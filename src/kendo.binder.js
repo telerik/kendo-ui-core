@@ -908,6 +908,7 @@ kendo_module({
 
                 this._valueIsObservableObject = value == null || value instanceof ObservableObject;
                 this._valueIsObservableArray = value instanceof ObservableArray;
+                this._initChange = false;
             },
 
             change: function() {
@@ -918,6 +919,8 @@ kendo_module({
                     valueIndex, valueLength, values = [],
                     sourceItem, sourceValue,
                     idx, length, source;
+
+                this._initChange = true;
 
                 if (field) {
 
@@ -967,26 +970,31 @@ kendo_module({
                 }
 
                 this.bindings.value.set(value);
+                this._initChange = false;
             },
 
             refresh: function() {
-                var field = this.options.dataValueField || this.options.dataTextField,
-                    value = this.bindings.value.get(),
-                    idx = 0, length,
-                    values = [];
 
-                if (field) {
-                    if (value instanceof ObservableArray) {
-                        for (length = value.length; idx < length; idx++) {
-                            values[idx] = value[idx].get(field);
+                if (!this._initChange) {
+                    var field = this.options.dataValueField || this.options.dataTextField,
+                        value = this.bindings.value.get(),
+                              idx = 0, length,
+                              values = [];
+
+                    if (field) {
+                        if (value instanceof ObservableArray) {
+                            for (length = value.length; idx < length; idx++) {
+                                values[idx] = value[idx].get(field);
+                            }
+                            value = values;
+                        } else if (value instanceof ObservableObject) {
+                            value = value.get(field);
                         }
-                        value = values;
-                    } else if (value instanceof ObservableObject) {
-                        value = value.get(field);
                     }
+                    this.widget.value(value);
                 }
 
-                this.widget.value(value);
+                this._initChange = false;
             },
 
             destroy: function() {
