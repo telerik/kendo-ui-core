@@ -3,9 +3,11 @@ require_once '../../include/header.php';
 require_once '../../lib/Kendo/Autoload.php';
 ?>
 <div class="demo-section">
+    <h2>Set Value</h2>
 <?php
 $numeric = new \Kendo\UI\NumericTextBox('numerictextbox');
 
+$numeric->attr('style', 'width: 250px');
 $numeric->attr('accesskey', 'w');
 
 echo $numeric->render();
@@ -41,10 +43,17 @@ echo $numeric->render();
         </span>
     </li>
 </ul>
+
 <style scoped>
-    div.demo-section
-    {
-        width: 150px;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 <?php require_once '../../include/footer.php'; ?>

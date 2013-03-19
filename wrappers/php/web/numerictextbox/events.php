@@ -7,9 +7,17 @@ $numeric = new \Kendo\UI\NumericTextBox('numerictextbox');
 $numeric->change('onChange')
         ->spin('onSpin');
 
-echo $numeric->render();
-
 ?>
+
+<div class="demo-section">
+<?php
+echo $numeric->render();
+?>
+</div>
+<div class="demo-section">
+    <h3 class="title">Console log</h3>
+    <div class="console"></div>
+</div>
 
 <script>
     function onChange() {
@@ -20,6 +28,13 @@ echo $numeric->render();
         kendoConsole.log("Spin :: " + this.value());
     }
 </script>
-
-<div class="console"></div>
+<style scoped>
+    .demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

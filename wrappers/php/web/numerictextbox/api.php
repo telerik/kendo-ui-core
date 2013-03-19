@@ -3,9 +3,13 @@ require_once '../../include/header.php';
 require_once '../../lib/Kendo/Autoload.php';
 
 $numeric = new \Kendo\UI\NumericTextBox('numerictextbox');
-
+?>
+<div class="demo-section">
+<?php
 echo $numeric->render();
 ?>
+</div>
+
 <script>
     $(document).ready(function() {
         var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
@@ -20,6 +24,10 @@ echo $numeric->render();
 
         $("#disable").click(function() {
             numerictextbox.enable(false);
+        });
+
+        $("#readonly").click(function() {
+            numerictextbox.readonly();
         });
 
         $("#focus").click(function() {
@@ -48,8 +56,14 @@ echo $numeric->render();
            <button id="set" class="k-button">Set value</button>
        </li>
         <li>
-            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
         </li>
     </ul>
 </div>
+<style scoped>
+    .demo-section{
+        width:150px;
+        margin-right: 360px;
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>
