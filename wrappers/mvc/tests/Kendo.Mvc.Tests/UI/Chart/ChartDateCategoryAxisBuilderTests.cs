@@ -364,6 +364,30 @@ namespace Kendo.Mvc.UI.Tests.Chart
             axis.PlotBands[0].Opacity.ShouldEqual(0.5);
         }
 
+        [Fact]
+        public void Select_should_set_from_and_to_dates()
+        {
+            var from = new DateTime(2012, 1, 1);
+            var to = new DateTime(2012, 1, 2);
+
+            builder.Select(from, to);
+
+            axis.Select.From.ShouldEqual(from);
+            axis.Select.To.ShouldEqual(to);
+        }
+
+        [Fact]
+        public void Select_should_return_builder()
+        {
+            builder.Select(new DateTime(2012, 1, 1), new DateTime(2012, 1, 2)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Select_builder_should_return_builder()
+        {
+            builder.Select(select => { }).ShouldBeSameAs(builder);
+        }
+
         private void AssertCategories<T>(IEnumerable<T> categories)
         {
             var expectedCategories = new Queue<T>();

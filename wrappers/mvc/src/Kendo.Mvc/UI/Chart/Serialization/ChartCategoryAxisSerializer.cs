@@ -59,6 +59,12 @@ namespace Kendo.Mvc.UI
                 result.Add("autoBaseUnitSteps", autoBaseUnits);
             }
 
+            var selectData = axis.Select.CreateSerializer().Serialize();
+            if (selectData.Count > 0)
+            {
+                result.Add("select", selectData);
+            }
+
             return result;
         }
 
