@@ -116,5 +116,14 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the axis selection.
+        /// </summary>
+        ChartAxisSelection Select
+        {
+            get;
+            set;
+        }
     }
 }

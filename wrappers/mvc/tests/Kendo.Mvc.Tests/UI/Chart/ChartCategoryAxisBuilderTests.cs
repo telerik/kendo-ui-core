@@ -308,6 +308,27 @@ namespace Kendo.Mvc.UI.Tests.Chart
             builder.AxisCrossingValue(new double[] { 42, 43 }).ShouldBeSameAs(builder);
         }
 
+        [Fact]
+        public void Select_should_set_from_and_to_dates()
+        {
+            builder.Select(0.0, 1.0);
+
+            axis.Select.From.ShouldEqual(0.0);
+            axis.Select.To.ShouldEqual(1.0);
+        }
+
+        [Fact]
+        public void Select_should_return_builder()
+        {
+            builder.Select(0, 1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Select_builder_should_return_builder()
+        {
+            builder.Select(select => { }).ShouldBeSameAs(builder);
+        }
+
         private void AssertCategories<T>(IEnumerable<T> categories)
         {
             var expectedCategories = new Queue<T>();

@@ -187,5 +187,51 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the selection range
+        /// </summary>
+        /// <param name="from">The selection range start.</param>
+        /// <param name="to">The selection range end.
+        /// *Note*: The category with the specified index is not included in the selected range
+        /// unless the axis is justified. In order to select all categories specify
+        /// a value larger than the last category index.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart(Model)
+        ///           .Name("StockChart")
+        ///           .CategoryAxis(axis => axis.Select(0, 3))
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartCategoryAxisBuilder<TModel> Select(double from, double to)
+        {
+            Axis.Select.From = from;
+            Axis.Select.To = to;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the selection
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().StockChart(Model)
+        ///           .Name("StockChart")
+        ///           .CategoryAxis(axis => axis.Select(select =>
+        ///               select.Mousewheel(mw => mw.Reverse())
+        ///           )
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartCategoryAxisBuilder<TModel> Select(Action<ChartAxisSelectionBuilder> configurator)
+        {
+            configurator(new ChartAxisSelectionBuilder(Axis.Select));
+
+            return this;
+        }
     }
 }

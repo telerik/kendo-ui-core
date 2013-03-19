@@ -26,6 +26,7 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle());
             axisMock.SetupGet(a => a.AutoBaseUnitSteps).Returns(new ChartAxisBaseUnitSteps());
             axisMock.SetupGet(a => a.Crosshair).Returns(new ChartAxisCrosshair());
+            axisMock.SetupGet(a => a.Select).Returns(new ChartAxisSelection());
         }
 
         [Fact]
@@ -306,6 +307,20 @@ namespace Kendo.Mvc.UI.Tests
         {
             axisMock.SetupGet(a => a.AxisCrossingValues).Returns(new double[] { });
             serializer.Serialize().ContainsKey("axisCrossingValues").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_not_serialize_Select_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("select").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_Select_if_set()
+        {
+            axisMock.SetupGet(a => a.Select).Returns(new ChartAxisSelection() { From = 0, To = 1 });
+
+            serializer.Serialize().ContainsKey("select").ShouldBeTrue();
         }
 
         private void AssertCategories(params string[] categories)

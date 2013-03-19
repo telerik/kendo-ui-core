@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\DataViz\Api\SelectionController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Multiple_AxesController.cs" />
@@ -415,6 +416,7 @@
     <Content Include="App_Data\Sample_log.ldf">
       <DependentUpon>Sample.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\aspx\Views\dataviz\api\selection.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
@@ -593,6 +595,7 @@
     <Content Include="Areas\aspx\Views\web\window\animation.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bullet_charts\remote_data.aspx" />
     <Content Include="Areas\razor\Views\dataviz\bar_charts\gap_spacing.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\api\selection.cshtml" />
     <None Include="Areas\razor\Views\dataviz\bullet_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
     <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />

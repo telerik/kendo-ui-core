@@ -232,6 +232,8 @@
     <Compile Include="UI\Chart\Axes\ChartAxisBaseUnitSteps.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisCrosshair.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisCrosshairTooltip.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisSelection.cs" />
+    <Compile Include="UI\Chart\Axes\ChartSelectionMousewheel.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartDateAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
@@ -250,6 +252,7 @@
     <Compile Include="UI\Chart\ChartPane.cs" />
     <Compile Include="UI\Chart\ChartTooltipBase.cs" />
     <Compile Include="UI\Chart\ChartLineBase.cs" />
+    <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
@@ -262,6 +265,8 @@
     <Compile Include="UI\Chart\Fluent\ChartBulletSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBulletTargetBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartSeriesHighlightBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisSelectionBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartSelectionMousewheelBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -311,6 +316,7 @@
     <Compile Include="UI\Chart\Fluent\ChartCandlestickSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsSerializer.cs" />
@@ -341,6 +347,7 @@
     <Compile Include="UI\Chart\Serialization\ChartAxisCrosshairSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBulletSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBulletTargetSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSelectionMousewheelSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />

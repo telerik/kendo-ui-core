@@ -18,6 +18,7 @@ namespace Kendo.Mvc.UI
             MinorGridLines = new ChartLine();
             AxisCrossingValues = new List<double>();
             AutoBaseUnitSteps = new ChartAxisBaseUnitSteps();
+            Select = new ChartAxisSelection();
         }
 
         /// <summary>
@@ -135,6 +136,15 @@ namespace Kendo.Mvc.UI
         /// Specifies the date category axis maximum (end) date.
         /// </summary>
         public DateTime? Max
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the axis selection.
+        /// </summary>
+        public ChartAxisSelection Select
         {
             get;
             set;
