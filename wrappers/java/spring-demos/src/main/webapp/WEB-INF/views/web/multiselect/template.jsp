@@ -6,19 +6,19 @@
     <c:url value="/web/multiselect/template/read" var="readUrl" />
 
     <%
-    String itemTemplate = "<img src=\"<c:url value=\"/resources/web/Customers/\"/>/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
+    String itemTemplate = "<img src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
                           "<h3>#: data.ContactName #</h3>" +
                           "<p>#: data.CompanyName #</p>";
 
-    String tagTemplate = "<img class=\"tag-image\" src=\"<c:url value=\"/resources/web/Customers/\"/>/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
+    String tagTemplate = "<img class=\"tag-image\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
                           "#: data.ContactName #";
     %>
 
     <div class="demo-section">
         <h2>Select Customers</h2>
 
-        <kendo:multiSelect name="customers" placeholder="type 'John' ..." itenTemplate="<%=itemTemplate%>" height="300"
-            dataTextField="contactName" dataValueField="customerID">
+        <kendo:multiSelect name="customers" placeholder="type 'John' ..." itemTemplate="<%=itemTemplate%>" tagTemplate="<%=tagTemplate%>"
+            height="300" dataTextField="contactName" dataValueField="customerID">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>

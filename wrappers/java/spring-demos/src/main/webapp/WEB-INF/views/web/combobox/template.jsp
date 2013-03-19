@@ -7,7 +7,7 @@
         <c:url value="/web/combobox/template/read" var="readUrl" />
 
         <%
-        String template = "<img src='<c:url value=\"/resources/web/Customers/\"/>/#:data.customerId#.jpg' alt='#:data.customerId#' />" +
+        String template = "<img src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
                 "<dl>" +
                 "<dt>Contact:</dt><dd>#:data.contactName#</dd>" +
                 "<dt>Company:</dt><dd>#:data.companyName#</dd>" +
