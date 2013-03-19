@@ -18,19 +18,19 @@
     <script>
         function onOpen() {
             if ("kendoConsole" in window) {
-                kendoConsole.log("event :: open");
+                kendoConsole.log("event : open");
             }
         }
 
         function onClose() {
             if ("kendoConsole" in window) {
-                kendoConsole.log("event :: close");
+                kendoConsole.log("event : close");
             }
         }
 
         function onChange() {
             if ("kendoConsole" in window) {
-                kendoConsole.log("event :: change");
+                kendoConsole.log("event : change");
             }
         }
 
