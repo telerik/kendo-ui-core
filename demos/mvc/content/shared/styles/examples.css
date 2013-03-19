@@ -922,7 +922,7 @@ div.submenu-box ol {
 .mobileOSs .blackberry{background-position:-182px -109px;}
 .mobileOSs .webOS{background-position:-273px -109px;}
 
-.mobileOSs + p a,
+.mobileOSs ~ p a,
 .overview .column13 a
 {
     text-decoration:none;
