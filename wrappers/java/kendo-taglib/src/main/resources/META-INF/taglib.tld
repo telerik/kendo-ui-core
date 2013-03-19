@@ -13225,17 +13225,17 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user start to dragging the drag handle.</description>
+            <description>Fires when the user starts modifying the axis selection.The range units are:</description>
             <name>selectStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user drags the drag handle to a new position.</description>
+            <description>Fires when the user modifies the selection.The range units are:</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user stops dragging the drag handle.</description>
+            <description>Fires when the user completes modifying the selection.</description>
             <name>selectEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -13831,6 +13831,44 @@ on the chart.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
+    </tag>
+
+
+    <tag>
+        <description>The selected axis range. If configured, axis selection will be enabled.** Available only for vertical axes **The range units are:</description>
+        <name>stockChart-categoryAxisItem-select</name>
+        <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemSelectTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The lower boundary of the selected range.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The maximum value that is selectable by the user.Note: The specified index (date) is not included in the selected range
+unless the axis is justified. In order to select all categories specify
+a value larger than the last index (date).</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The minimum value that is selectable by the user.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The upper boundary of the selected range.Note: The specified index (date) is not included in the selected range
+unless the axis is justified. In order to select all categories specify
+a value larger than the last index (date).</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
     </tag>
 
 
@@ -17633,19 +17671,19 @@ and is about to render it.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user start to dragging the drag handle.</description>
+        <description>Fires when the user starts modifying the axis selection.The range units are:</description>
         <name>stockChart-selectStart</name>
         <tag-class>com.kendoui.taglib.stockchart.SelectStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user drags the drag handle to a new position.</description>
+        <description>Fires when the user modifies the selection.The range units are:</description>
         <name>stockChart-select</name>
         <tag-class>com.kendoui.taglib.stockchart.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user stops dragging the drag handle.</description>
+        <description>Fires when the user completes modifying the selection.</description>
         <name>stockChart-selectEnd</name>
         <tag-class>com.kendoui.taglib.stockchart.SelectEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
