@@ -1,5 +1,3 @@
-<div class="demo-section">
-<h3 class="title">Select Continents</h3>
 <?php
 
 require_once '../../lib/DataSourceResult.php';
@@ -24,7 +22,11 @@ $multiselect->dataTextField('text')
          ->change('onChange')
          ->close('onClose')
          ->open('onOpen');
+?>
 
+<div class="demo-section">
+    <h3 class="title">Select Continents</h3>
+<?php
 echo $multiselect->render();
 ?>
 </div>
