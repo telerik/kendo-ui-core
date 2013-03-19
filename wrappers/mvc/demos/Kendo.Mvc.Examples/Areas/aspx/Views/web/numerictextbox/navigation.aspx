@@ -6,9 +6,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <div class="demo-section">
+    <h2>Set Value</h2>
     <%= Html.Kendo().NumericTextBox()
           .Name("numerictextbox")
-          .HtmlAttributes(new { accesskey = "w" })
+          .HtmlAttributes(new { accesskey = "w", style = "width: 250px" })
     %>
 </div>
 
@@ -45,9 +46,15 @@
 </ul>
 
 <style scoped>
-    div.demo-section
-    {
-        width: 150px;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
 

@@ -5,54 +5,23 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="k-rtl">
-
-<p><label for="currency">Price:</label>
-<%= Html.Kendo().NumericTextBox<decimal>()
-    .Name("currency")
-    .Format("c")
-    .Min(0)
-    .Max(100)
-    .Value(30)
-%>
-</p>
-<p>
-<label for="percentage">Discount:</label>
-<%= Html.Kendo().NumericTextBox<double>()
-    .Name("percentage")
-    .Format("p0")
-    .Min(0)
-    .Max(0.9)
-    .Step(0.01)
-    .Value(0.05)
-%>
-</p>
-<p>
-<label for="custom">Weight:</label>
-<%= Html.Kendo().NumericTextBox<double>()
-    .Name("custom")
-    .Format("#.00 kg")
-    .Value(10)
-%>
-</p>
-<p>
-<label for="numeric">In stock:</label>
-<%= Html.Kendo().NumericTextBox<double>()
-    .Name("numeric")
-    .Placeholder("Enter numeric value")
-%>
-</p>
-
+<div class="demo-section k-rtl">
+    <h2>Set Value</h2>
+    <%= Html.Kendo().NumericTextBox<decimal>()
+        .Name("numerictextbox")
+    %>
 </div>
 
-<style scoped="scoped">
-
-label
-{
-    display:inline-block;
-    width:7em;
-}
-
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
 </style>
-
 </asp:Content>

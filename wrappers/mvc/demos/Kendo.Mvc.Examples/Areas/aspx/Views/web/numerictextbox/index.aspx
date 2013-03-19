@@ -4,51 +4,48 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-
-<p><label for="currency">Price:</label>
-<%= Html.Kendo().NumericTextBox<decimal>()
-    .Name("currency")
-    .Format("c")
-    .Min(0)
-    .Max(100)
-    .Value(30)
-%>
-</p>
-<p>
-<label for="percentage">Discount:</label>
-<%= Html.Kendo().NumericTextBox<double>()
-    .Name("percentage")
-    .Format("p0")
-    .Min(0)
-    .Max(0.9)
-    .Step(0.01)
-    .Value(0.05)
-%>
-</p>
-<p>
-<label for="custom">Weight:</label>
-<%= Html.Kendo().NumericTextBox<double>()
-    .Name("custom")
-    .Format("#.00 kg")
-    .Value(10)
-%>
-</p>
-<p>
-<label for="numeric">In stock:</label>
-<%= Html.Kendo().NumericTextBox<double>()
-    .Name("numeric")
-    .Placeholder("Enter numeric value")
-%>
-</p>
-
-<style scoped="scoped">
-
-label
-{
-    display:inline-block;
-    width:7em;
-}
-
-</style>
+<div id="add-product">
+    <div>
+        <%= Html.Kendo().NumericTextBox<decimal>()
+            .Name("currency")
+            .Format("c")
+            .Min(0)
+            .Max(100)
+            .Value(30)
+        %>
+    </div>
+    <div>
+        <%= Html.Kendo().NumericTextBox<double>()
+            .Name("percentage")
+            .Format("p0")
+            .Min(0)
+            .Max(0.9)
+            .Step(0.01)
+            .Value(0.05)
+        %>
+    </div>
+    <div>
+        <%= Html.Kendo().NumericTextBox<double>()
+            .Name("custom")
+            .Format("#.00 kg")
+            .Value(10)
+        %>
+    </div>
+    <div>
+        <%= Html.Kendo().NumericTextBox<double>()
+            .Name("numeric")
+            .Placeholder("Enter numeric value")
+        %>
+    </div>
+</div>
+<style scoped>
+    #add-product {
+        height: 181px;
+        width: 252px;
+        margin: 30px auto;
+        padding: 64px 0 0 143px;
+        background: url('/Content/web/numerictextbox/addProduct.png') transparent no-repeat 0 0;
+    }
+</style>   
 
 </asp:Content>

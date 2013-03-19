@@ -26,4 +26,13 @@
         kendoConsole.log("Spin :: " + this.value());
     }
 </script>
+<style scoped>
+    .demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
+    }
+</style> 
 </asp:Content>

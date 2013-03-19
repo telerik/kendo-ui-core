@@ -15,7 +15,7 @@
             <button id="set" class="k-button">Set value</button>
         </li>
         <li>
-            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
         </li>
     </ul>
 </div>
@@ -39,6 +39,10 @@
 
         $("#disable").click(function () {
             numerictextbox.enable(false);
+        });
+
+        $("#readonly").click(function () {
+            numerictextbox.readonly();
         });
 
         $("#value").kendoNumericTextBox({
