@@ -952,6 +952,7 @@ kendo_module({
                 owner = that.owner,
                 tooltip = that.options.tooltip,
                 html = '',
+                wnd = $(window),
                 tooltipTemplate, colloutCssClass;
 
             if (!tooltip.enabled) {
@@ -974,6 +975,11 @@ kendo_module({
             }
 
             that.tooltipDiv.html(html);
+
+            that._scrollOffset = {
+                top: wnd.scrollTop(),
+                left: wnd.scrollLeft()
+            };
 
             that.moveTooltip();
         },
@@ -1146,12 +1152,12 @@ kendo_module({
             }
 
             if (owner._isHorizontal) {
-                diff = that._flip(top, height, anchorSize, viewport.outerHeight());
+                diff = that._flip(top, height, anchorSize, viewport.outerHeight() + that._scrollOffset.top);
                 top += diff;
-                left += that._fit(left, width, viewport.outerWidth());
+                left += that._fit(left, width, viewport.outerWidth() + that._scrollOffset.left);
             } else {
-                diff = that._flip(left, width, anchorSize, viewport.outerWidth());
-                top += that._fit(top, height, viewport.outerHeight());
+                diff = that._flip(left, width, anchorSize, viewport.outerWidth() + that._scrollOffset.left);
+                top += that._fit(top, height, viewport.outerHeight() + that._scrollOffset.top);
                 left += diff;
             }
 
@@ -1163,11 +1169,11 @@ kendo_module({
             that.tooltipDiv.css({ top: top, left: left });
         },
 
-        _fit: function(position, size, viewPortSize) {
+        _fit: function(position, size, viewPortEnd) {
             var output = 0;
 
-            if (position + size > viewPortSize) {
-                output = viewPortSize - (position + size);
+            if (position + size > viewPortEnd) {
+                output = viewPortEnd - (position + size);
             }
 
             if (position < 0) {
@@ -1177,10 +1183,10 @@ kendo_module({
             return output;
         },
 
-        _flip: function(offset, size, anchorSize, viewPortSize) {
+        _flip: function(offset, size, anchorSize, viewPortEnd) {
             var output = 0;
 
-            if (offset + size > viewPortSize) {
+            if (offset + size > viewPortEnd) {
                 output += -(anchorSize + size);
             }
 
