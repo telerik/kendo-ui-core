@@ -79,13 +79,6 @@
                 }
             },
 
-            "@focused-shadow": {
-                readonly: true,
-                infer: function() {
-                    return cssPropertyFrom("k-picker-wrap k-state-focused", "box-shadow");
-                }
-            },
-
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
             "@widget-gradient":                 { readonly: true, value: "none" },
             "@widget-border-color":             constant(BORDERCOLOR, ".k-widget"),
@@ -125,6 +118,20 @@
             "@active-text-color":               constant(COLOR, ".k-state-active"),
             "@active-gradient":                 { readonly: true, value: "none" },
             "@active-shadow":                   { readonly: true, value: "none" },
+
+            "@focused-border-color":            constant(BORDERCOLOR, ".k-state-focused"),
+            "@focused-item-shadow":             {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom("k-state-focused", "box-shadow");
+                }
+            },
+            "@focused-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom("k-picker-wrap k-state-focused", "box-shadow");
+                }
+            },
 
             "@error-background-color":          constant(BGCOLOR, ".k-state-error"),
             "@error-border-color":              constant(BORDERCOLOR, ".k-state-error"),
