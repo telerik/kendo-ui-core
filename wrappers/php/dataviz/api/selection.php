@@ -33,6 +33,29 @@ $chart->title(array('text' => 'Olympic Medals won by USA'))
 
 echo $chart->render();
 ?>
+<div class="configuration-horizontal">
+    <span class="configHead">Mousewheel</span>
+    <div class="config-section">
+        <ul class="options">
+            <li>
+                <input id="reverse" type="checkbox" />
+                <label for="reverse">Reverse</label>
+            </li>
+        </ul>
+    </div>
+    <div class="config-section">
+        <ul class="options">
+            <li>
+                <label for="zoom">Zoom direction</label>
+                <select id="zoom">
+                    <option value="both">Both</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                </select>
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="demo-section">
     <h3 class="title">Console log</h3>
     <div class="console"></div>
