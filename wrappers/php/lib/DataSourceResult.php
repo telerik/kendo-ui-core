@@ -29,8 +29,8 @@ class DataSourceResult {
         'sum' => 'SUM'
     );
 
-    function __construct($dsn) {
-        $this->db = new PDO($dsn);
+    function __construct($dsn, $username=null, $password=null, $driver_options=null) {
+        $this->db = new PDO($dsn, $username, $password, $driver_options);
     }
 
     private function total($tableName, $properties, $request) {
