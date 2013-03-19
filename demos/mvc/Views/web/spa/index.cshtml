@@ -1,25 +1,55 @@
 @{
     ViewBag.ShowCodeStrip = false;
 }
-<div id="example" class="k-content k-web absConf" style="background-color: #fff;">
-            <div class="box">
-                <a class="imgPlate" href="../../websushi/"><img alt="Sushi" src="../../content/web/overview/websushi.png"></a>
-                <h3><a href="../../websushi/">Sushi</a></h3>
+<div id="example" class="k-content k-web overview absConf">
+            <div id="websushi" class="wide-box">
+                <h2>Sushi</h2>
                 <p>This single-page imaginary sushi online ordering app reuses the popular <a href="http://demos.kendoui.com/sushi/" title="Kendo UI Mobile demo">Kendo UI Mobile demo</a>, applying a desktop optimized interface.</p>
+                <a class="launchButton" target="_blank" href="../../websushi/">Launch Sushi</a>
             </div>
-            <div class="box">
-                <a class="imgPlate" href="../../aeroviewr/"><img alt="AeroViewr" src="../../content/web/overview/aeroviewr.png"></a>
-                <h3><a href="../../aeroviewr/">AeroViewr</a></h3>
+            <div id="aeroviewr" class="wide-box">
+                <h2>AeroViewr</h2>
                 <p>A sleek lightbox interface for browsing <a href="http://500px.com/" title="500px" target="_blank">500px</a> content, including bookmarkable search results.</p>
+                <a class="launchButton large" target="_blank" href="../../aeroviewr/">Launch AeroViewr</a>
             </div>
     <style scoped>
         #main {
             border-left: 0;
             width: 940px;
         }
-
         #example {
             background-color: #fff;
+        }
+        #websushi {
+            background: url('../../content/shared/images/websushi.jpg') no-repeat center bottom transparent;
+            height: 360px;
+            padding: 80px 80px 0 520px;
+        }
+        #aeroviewr {
+            background: url('../../content/shared/images/aeroviewr.jpg') no-repeat center bottom transparent;
+            height: 335px;
+            padding: 30px 570px 0 50px;
+        }
+        .wide-box {
+            color: #565656;
+            font-size: 13px;
+            line-height: 1.4;
+            font-family: "Droid Sans",DroidSansWeb,"Segoe UI","Lucida Sans Unicode",Arial,Helvetica,sans-serif;
+        }
+        .wide-box h2 {
+            color: #333;
+            font-size: 40px;
+            margin: 0;
+        }
+        .wide-box p a {
+            color: #E26B1D;
+            text-decoration: none;
+        }
+        .wide-box p a:hover {
+            text-decoration: underline;
+        }
+        .large {
+            width: 130px;
         }
     </style>
 </div>
