@@ -789,6 +789,36 @@
                     equal(linePoint.options.dashType, "dot");
                 });
 
+                test("applies color function", function() {
+                    createLineChart({
+                        color: function(point) { return "#f00" }
+                    });
+
+                    equal(linePoint.options.markers.border.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createLineChart({
+                        data: [1],
+                        color: function(point) { equal(point.value, 1); }
+                    });
+                });
+
+                test("color fn argument contains category", 1, function() {
+                    createLineChart({
+                        data: [1],
+                        color: function(point) { equal(point.category, "A"); }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createLineChart({
+                        name: "series 1",
+                        data: [1],
+                        color: function(point) { equal(point.series.name, "series 1"); }
+                    });
+                });
+
             })();
 
             (function() {

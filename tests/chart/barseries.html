@@ -1587,7 +1587,9 @@
                         return new Box2D();
                     },
                     {
-                        categoryAxis: {}
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
                     }
                 );
 
@@ -1620,6 +1622,36 @@
 
                 test("applies series overlay to bars", function() {
                     equal(barChart.points[0].options.overlay, "none");
+                });
+
+                test("applies color function", function() {
+                    barChart = new dataviz.BarChart(plotArea, {
+                        series: [{
+                            data: [0, 1],
+                            color: function(bar) { return "#f00" }
+                        }]
+                    });
+
+                    equal(barChart.points[0].options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    new dataviz.BarChart(plotArea, {
+                        series: [{
+                            data: [1],
+                            color: function(bar) { equal(bar.value, 1); }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    new dataviz.BarChart(plotArea, {
+                        series: [{
+                            name: "series 1",
+                            data: [1],
+                            color: function(bar) { equal(bar.series.name, "series 1"); }
+                        }]
+                    });
                 });
 
             })();

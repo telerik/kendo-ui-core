@@ -2375,10 +2375,6 @@ kendo_module({
             ChartElement.fn.init.call(bar, options);
 
             bar.value = value;
-            if (value < 0 && options.negativeColor) {
-                bar.options.color = options.negativeColor;
-            }
-
             bar.options.id = uniqueId();
             bar.enableDiscovery();
         },
@@ -2585,6 +2581,33 @@ kendo_module({
             var chart = this;
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
+
+            chart.resolvePointColor();
+        },
+
+        resolvePointColor: function() {
+            var chart = this,
+                points = chart.points,
+                i,
+                point,
+                options;
+
+            for (i = 0; i < points.length; i++) {
+                point = points[i];
+                if (point) {
+                    options = point.options;
+
+                    if (point.value < 0 && options.negativeColor) {
+                        options.color = options.negativeColor;
+                    }
+
+                    resolveFnOptions(options, {
+                        value: point.value,
+                        series: point.series,
+                        dataItem: point.dataItem
+                    }, ["data"]);
+                }
+            }
         },
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
@@ -9155,6 +9178,23 @@ kendo_module({
         }
 
         return delta;
+    }
+
+    function resolveFnOptions(options, context, excluded) {
+        var property,
+            propValue;
+
+        for (property in options) {
+            propValue = options[property];
+
+            if (!inArray(property, excluded)) {
+                if ($.isFunction(propValue)) {
+                    options[property] = propValue(context);
+                } else if (typeof propValue === "object") {
+                    resolveFnOptions(propValue, context, excluded);
+                }
+            }
+        }
     }
 
     // Exports ================================================================
