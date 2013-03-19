@@ -23,7 +23,6 @@ kendo_module({
         addDuration = dataviz.addDuration,
         duration = dataviz.duration,
         last = dataviz.last,
-        lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
         toTime = dataviz.toTime;
@@ -36,9 +35,6 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
-        SELECT_START = "selectStart",
-        SELECT = "select",
-        SELECT_END = "selectEnd",
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -305,20 +301,12 @@ kendo_module({
                 groups = axis.options.categories,
                 select = navi.options.select || {},
                 selection = navi.selection,
-                min = 0,
-                max = groups.length - 1,
-                from = min,
-                to = max;
+                min = groups[0],
+                max = last(groups),
+                from = select.from || min,
+                to = select.to || max;
 
             if (groups.length > 0) {
-                if (select.from) {
-                    from = lteDateIndex(groups, toDate(select.from));
-                }
-
-                if (select.to) {
-                    to = lteDateIndex(groups, toDate(select.to));
-                }
-
                 if (selection) {
                     selection.destroy();
                     selection.wrapper.remove();
@@ -327,6 +315,7 @@ kendo_module({
                 // "Freeze" the selection axis position until the next redraw
                 axisClone.box = axis.box;
 
+                // TODO: Move selection initialization to PlotArea.redraw
                 selection = navi.selection = new Selection(chart, axisClone, {
                     min: min,
                     max: max,
@@ -335,13 +324,15 @@ kendo_module({
                     selectStart: $.proxy(navi._selectStart, navi),
                     select: $.proxy(navi._select, navi),
                     selectEnd: $.proxy(navi._selectEnd, navi),
-                    visible: options.visible
+                    mousewheel: {
+                        zoom: "left"
+                    }
                 });
 
                 if (options.hint.visible) {
                     navi.hint = new NavigatorHint(chart.element, {
                         min: groups[0],
-                        max: dataviz.last(groups),
+                        max: last(groups),
                         template: options.hint.template,
                         format: options.hint.format
                     });
@@ -407,8 +398,8 @@ kendo_module({
             }
 
             selection.set(
-                lteDateIndex(groups, from),
-                lteDateIndex(groups, to) + 1
+                from,
+                addDuration(from, selectionDuration + 1, baseUnit)
             );
 
             navi.showHint(from, to);
@@ -438,22 +429,12 @@ kendo_module({
 
         readSelection: function() {
             var navi = this,
-                axis = navi.mainAxis(),
-                groups = axis.options.categories,
                 selection = navi.selection,
                 src = selection.options,
                 dst = navi.options.select;
 
-            dst.from = groups[src.from];
-            dst.to = groups[src.to];
-        },
-
-        indexToDate: function(index) {
-            var navi = this,
-                axis = navi.mainAxis(),
-                groups = axis.options.categories;
-
-            return groups[index];
+            dst.from = src.from;
+            dst.to = src.to;
         },
 
         filterAxes: function() {
@@ -529,7 +510,6 @@ kendo_module({
             var navi = this,
                 chart = navi.chart,
                 delta = e.delta,
-                navigatorAxis = navi.mainAxis(),
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
                 selection = navi.selection;
@@ -541,7 +521,7 @@ kendo_module({
             }
 
             if (selection.options.to - selection.options.from > 1) {
-                selection.expandLeft(delta);
+                selection.expand(delta);
                 navi.readSelection();
             } else {
                 axis.options.min = select.from;
@@ -553,15 +533,7 @@ kendo_module({
                 navi.redrawSlaves();
             }
 
-            selection.set(
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.from
-                ),
-                lteDateIndex(
-                    navigatorAxis.options.categories,
-                    navi.options.select.to
-            ));
+            selection.set(select.from, select.to);
 
             navi.showHint(navi.options.select.from, navi.options.select.to);
         },
@@ -585,40 +557,33 @@ kendo_module({
         },
 
         _selectStart: function(e) {
-            if (this.chart.trigger(SELECT_START, { from: e.from, to: e.to })) {
-                e.preventDefault();
-            }
+            var chart = this.chart;
+            chart._selectStart.call(chart, e);
         },
 
         _select: function(e) {
-            var navi = this;
+            var navi = this,
+                chart = navi.chart;
 
-            navi.showHint(
-                navi.indexToDate(e.from),
-                navi.indexToDate(e.to)
-            );
+            navi.showHint(e.from, e.to);
 
-            navi.chart.trigger(SELECT, {
-                from: e.from,
-                to: e.to
-            });
+            chart._select.call(chart, e);
         },
 
         _selectEnd: function(e) {
-            var navi = this;
+            var navi = this,
+                chart = navi.chart;
 
             if (navi.hint) {
                 navi.hint.hide();
             }
+
             navi.readSelection();
             navi.filterAxes();
             navi.filterDataSource();
             navi.redrawSlaves();
 
-            navi.chart.trigger(SELECT_END, {
-                from: e.from,
-                to: e.to
-            });
+            chart._selectEnd.call(chart, e);
         },
 
         mainAxis: function() {

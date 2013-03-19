@@ -101,17 +101,17 @@
                     "url": "bar-charts/grouped-data.html",
                     "title": "Grouped data binding demo for Kendo UI HTML5 Bar Charts",
                     "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group."
-				}, {
+                }, {
                     "text": "Plot bands",
                     "url": "bar-charts/plotbands.html",
                     "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Plot Bands Example",
                     "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders."
-				}, {
+                }, {
                     "text": "Gap and spacing",
                     "url": "bar-charts/gap-spacing.html",
                     "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Gap and Spacing Example",
                     "meta": "This sample demonstrates how to control the appearance of your Kendo UI jQuery bar charts."
-				}, {
+                }, {
                     "text": "Pan and zoom",
                     "url": "bar-charts/pan-and-zoom.html",
                     "title": "Pan and zoom example | Kendo UI Bar Charts",
@@ -149,17 +149,17 @@
             "text": "Bullet Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBulletIcon",
-			"new": true,
+            "new": true,
             "items": [{
                     "text": "Basic usage",
                     "url": "bullet-charts/index.html"
-			}, {
+            }, {
                     "text": "Binding to local data",
                     "url": "bullet-charts/local-data.html"
-			}, {
+            }, {
                     "text": "Binding to remote data",
                     "url": "bullet-charts/remote-data.html"
-			}]
+            }]
         }, {
             "text": "Line Charts",
             "documentation": "dataviz/chart",
@@ -292,7 +292,7 @@
                     "url": "scatter-charts/grouped-data.html",
                     "title": "Example of Kendo UI Scatter Charts bound to grouped data",
                     "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component."
-				}, {
+                }, {
                     "text": "Pan and zoom",
                     "url": "scatter-charts/pan-and-zoom.html",
                     "title": "Pan and zoom example | Kendo UI DataViz Demos",
@@ -304,7 +304,7 @@
             "text": "Sparklines",
             "documentation": "dataviz/sparklines",
             "spriteCssClass": "sparklineIcon",
-			"new": true,
+            "new": true,
             "items": [{
                 "text": "Basic usage",
                 "url": "sparklines/index.html"
@@ -330,10 +330,15 @@
                     "url": "api/events.html",
                     "title": "Events API for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
                     "meta": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components."
-				}, {
-					"text": "Benchmark",
-					"packages": [ "!mvc" ],
-					"url": "api/benchmark.html"
+                }, {
+                    "text": "Selection",
+                    "url": "api/selection.html",
+                    "title": "Axis selection for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
+                    "meta": "This sample demonstrates how to configure axis selection."
+            }, {
+                    "text": "Benchmark",
+                    "packages": [ "!mvc" ],
+                    "url": "api/benchmark.html"
             }],
             "name": "api"
         }
@@ -384,9 +389,9 @@
                 "text": "Multiple panes",
                 "url": "financial/panes.html"
             }, {
-				"text": "Virtualization",
-				"url": "financial/virtualization.html"
-			}],
+                "text": "Virtualization",
+                "url": "financial/virtualization.html"
+            }],
             "name": "stock-chart"
         }
     ],

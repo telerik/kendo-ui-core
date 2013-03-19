@@ -347,7 +347,7 @@ and is about to render it.
 
     /**
     * Sets the selectStart event of the StockChart.
-    * Fires when the user start to dragging the drag handle.
+    * Fires when the user starts modifying the axis selection.The range units are:
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\StockChart
     */
@@ -361,7 +361,7 @@ and is about to render it.
 
     /**
     * Sets the select event of the StockChart.
-    * Fires when the user drags the drag handle to a new position.
+    * Fires when the user modifies the selection.The range units are:
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\StockChart
     */
@@ -375,7 +375,7 @@ and is about to render it.
 
     /**
     * Sets the selectEnd event of the StockChart.
-    * Fires when the user stops dragging the drag handle.
+    * Fires when the user completes modifying the selection.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\StockChart
     */
