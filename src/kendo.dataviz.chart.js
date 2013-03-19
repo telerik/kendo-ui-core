@@ -8105,8 +8105,7 @@ kendo_module({
         },
 
         _rangeEventArgs: function(range) {
-            var that = this,
-                categories = that.categoryAxis.options.categories;
+            var that = this;
 
             return {
                 axis: that.categoryAxis.options,
