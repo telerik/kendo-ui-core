@@ -21,6 +21,13 @@
     }
 </script>
 
-<div class="console"></div>
-
+<style scoped>
+    .demo-section {
+        width: 500px;
+        text-align: center;
+    }
+    .console {
+        margin: 0;
+    }
+</style>
 <demo:footer />

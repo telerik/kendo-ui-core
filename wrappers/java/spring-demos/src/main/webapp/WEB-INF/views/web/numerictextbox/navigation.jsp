@@ -4,7 +4,8 @@
 <demo:header />
 
 <div class="demo-section">
-    <kendo:numericTextBox name="numerictextbox" accesskey="w"></kendo:numericTextBox>
+    <h2>Set Value</h2>
+    <kendo:numericTextBox name="numerictextbox" accesskey="w" style="width: 250px"></kendo:numericTextBox>
 </div>
 
 <ul class="keyboard-legend">
@@ -38,12 +39,16 @@
         </span>
     </li>
 </ul>
-
 <style scoped>
-    div.demo-section
-    {
-        width: 150px;
+    .demo-section {
+        width: 250px;
+        margin: 35px auto 50px;
+        padding: 30px;
+    }
+    .demo-section h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 10px;
     }
 </style>
-
 <demo:footer />
