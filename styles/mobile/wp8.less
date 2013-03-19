@@ -468,17 +468,20 @@
 	color: @accent-text;
 }
 
+.km-wp-dark .km-scroller-pull .km-icon,
 .km-wp-dark .km-tabstrip .km-state-active .km-icon
 {
 	border-color: @main-text-dark;
 }
 
+.km-wp-light .km-scroller-pull .km-icon,
 .km-wp-light .km-tabstrip .km-state-active .km-icon
 {
 	border-color: @main-text-light;
 }
 
-.km-wp .km-tabstrip .km-icon
+.km-wp .km-tabstrip .km-icon,
+.km-wp .km-scroller-pull .km-icon
 {
     width: 2.4rem;
     height: 2.4rem;
@@ -488,6 +491,13 @@
 	.border-radius(5em);
 	margin-bottom: .2em;
 	padding: .1em;
+}
+
+.km-wp .km-scroller-pull .km-icon
+{
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .km-wp .km-icon:before
@@ -770,7 +780,8 @@
 
 /* Loader */
 
-.km-wp .km-loader
+.km-wp .km-loader,
+.km-wp .km-scroller-refresh
 {
     width: 100%;
     height: 100px;
@@ -784,6 +795,16 @@
     vertical-align: bottom;
 }
 
+.km-wp .km-scroller-refresh
+{
+    line-height: normal;
+    background: transparent;
+    height: 3em;
+    margin: 0;
+    width: 100%;
+    position: relative;
+}
+
 .km-wp-dark .km-loader
 {
     background: @second-background-dark;
@@ -794,7 +815,8 @@
     background: @second-background-light;
 }
 
-.km-wp .km-loader h1
+.km-wp .km-loader h1,
+.km-wp .km-scroller-refresh .km-template
 {
     position: absolute;
     display: none;
@@ -806,20 +828,35 @@
     margin-bottom: 20px;
 }
 
-.km-wp .km-loader .km-loading
+.km-wp .km-scroller-refresh .km-template
+{
+    left: 0;
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.km-wp .km-loader .km-loading,
+.km-wp .km-scroller-refresh .km-icon
 {
     .animation(none);
     margin: 0;
     position: absolute;
     top: 0;
     left: 0;
+    .border-radius(0);
 }
 
 .km-wp .km-loader:before,
 .km-wp .km-loader:after,
 .km-wp .km-loader .km-loading,
 .km-wp .km-loader .km-loading:after,
-.km-wp .km-loader .km-loading:before
+.km-wp .km-loader .km-loading:before,
+.km-wp .km-scroller-refresh:after,
+.km-wp .km-scroller-refresh:before,
+.km-wp .km-scroller-refresh .km-icon,
+.km-wp .km-scroller-refresh .km-icon:after,
+.km-wp .km-scroller-refresh .km-icon:before
 {
     position: absolute;
     display: inline-block;
@@ -837,6 +874,22 @@
     font-family: "Kendo UI";
 }
 
+.km-wp .km-scroller-refresh:after,
+.km-wp .km-scroller-refresh:before,
+.km-wp .km-scroller-refresh .km-icon,
+.km-wp .km-scroller-refresh .km-icon:after,
+.km-wp .km-scroller-refresh .km-icon:before
+{
+    width: 100%;
+}
+
+.km-wp .km-scroller-refresh:after,
+.km-wp .km-scroller-refresh:before,
+.km-wp .km-scroller-refresh .km-icon
+{
+    top: 46%;
+}
+
 .km-wp .km-loader:before,
 .km-wp .km-loader:after,
 .km-wp .km-loader .km-loading
@@ -850,7 +903,12 @@
 .km-wp-light .km-loader:after,
 .km-wp-light .km-loader .km-loading,
 .km-wp-light .km-loader .km-loading:after,
-.km-wp-light .km-loader .km-loading:before
+.km-wp-light .km-loader .km-loading:before,
+.km-wp-light .km-scroller-refresh:after,
+.km-wp-light .km-scroller-refresh:before,
+.km-wp-light .km-scroller-refresh .km-icon,
+.km-wp-light .km-scroller-refresh .km-icon:after,
+.km-wp-light .km-scroller-refresh .km-icon:before
 {
     color: @main-text-light;
 }
@@ -858,28 +916,36 @@
 .km-wp .km-loader:before,
 .km-wp .km-loader:after,
 .km-wp .km-loader .km-loading:after,
-.km-wp .km-loader .km-loading:before
+.km-wp .km-loader .km-loading:before,
+.km-wp .km-scroller-refresh:after,
+.km-wp .km-scroller-refresh:before,
+.km-wp .km-scroller-refresh .km-icon:after,
+.km-wp .km-scroller-refresh .km-icon:before
 {
     opacity: 0;
     .animation(km-wpload 2s infinite linear);
 }
 
-.km-wp .km-loader .km-loading:after
+.km-wp .km-loader .km-loading:after,
+.km-wp .km-scroller-refresh .km-icon:after
 {
     .animation-delay(0);
 }
 
-.km-wp .km-loader .km-loading:before
+.km-wp .km-loader .km-loading:before,
+.km-wp .km-scroller-refresh .km-icon:before
 {
     .animation-delay(.3s);
 }
 
-.km-wp .km-loader:before
+.km-wp .km-loader:before,
+.km-wp .km-scroller-refresh:before
 {
     .animation-delay(.6s);
 }
 
-.km-wp .km-loader:after
+.km-wp .km-loader:after,
+.km-wp .km-scroller-refresh:after
 {
     .animation-delay(.9s);
 }

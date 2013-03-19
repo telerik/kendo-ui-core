@@ -704,9 +704,11 @@ kendo_module({
             }
 
             if (toggle) {
+                icon.parent().addClass("km-scroller-refresh");
                 icon.css("display", "block");
             } else {
                 icon.hide();
+                icon.parent().removeClass("km-scroller-refresh");
             }
         },
 
