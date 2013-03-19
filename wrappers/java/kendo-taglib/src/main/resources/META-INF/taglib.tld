@@ -1044,7 +1044,7 @@ on the chart.</description>
         <description>The selected axis range. If configured, axis selection will be enabled.** Available only for vertical axes **The range units are:</description>
         <name>chart-categoryAxisItem-select</name>
         <tag-class>com.kendoui.taglib.chart.CategoryAxisItemSelectTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The lower boundary of the selected range.</description>
@@ -1076,6 +1076,29 @@ a value larger than the last index (date).</description>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Mousewheel zoom settings for the selection.</description>
+        <name>chart-categoryAxisItem-select-mousewheel</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemSelectMousewheelTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Reverses the mousewheel zoom direction.
+Normal direction is down for "zoom out", up for "zoom in".</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The zoom direction. Possible values:</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -13838,7 +13861,7 @@ on the chart.</description>
         <description>The selected axis range. If configured, axis selection will be enabled.** Available only for vertical axes **The range units are:</description>
         <name>stockChart-categoryAxisItem-select</name>
         <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemSelectTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The lower boundary of the selected range.</description>
@@ -13870,6 +13893,29 @@ a value larger than the last index (date).</description>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Mousewheel zoom settings for the selection.</description>
+        <name>stockChart-categoryAxisItem-select-mousewheel</name>
+        <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemSelectMousewheelTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Reverses the mousewheel zoom direction.
+Normal direction is down for "zoom out", up for "zoom in".</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The zoom direction. Possible values:</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>

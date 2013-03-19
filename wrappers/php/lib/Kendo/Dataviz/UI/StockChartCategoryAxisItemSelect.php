@@ -45,6 +45,15 @@ a value larger than the last index (date).
         return $this->setProperty('max', $value);
     }
 
+    /**
+    * Mousewheel zoom settings for the selection.
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemSelectMousewheel|array $value
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemSelect
+    */
+    public function mousewheel($value) {
+        return $this->setProperty('mousewheel', $value);
+    }
+
 //<< Properties
 }
 

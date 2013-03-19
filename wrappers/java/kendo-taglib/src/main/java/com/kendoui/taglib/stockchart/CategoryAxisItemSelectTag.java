@@ -51,6 +51,10 @@ public class CategoryAxisItemSelectTag extends  BaseTag  /* interfaces */ /* int
         return "stockChart-categoryAxisItem-select";
     }
 
+    public void setMousewheel(com.kendoui.taglib.stockchart.CategoryAxisItemSelectMousewheelTag value) {
+        setProperty("mousewheel", value);
+    }
+
     public Object getFrom() {
         return (Object)getProperty("from");
     }
