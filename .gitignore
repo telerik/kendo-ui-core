@@ -12,12 +12,13 @@ bin/
 .DS_Store
 .JustCode
 .livereload
-app.js
 deploy/
 dist/
-dist/ demos/examples/shared/js/kendo.examples.js
+demos/examples/shared/js/kendo.examples.js
 demos/mvc/content/docs/
 demos/mvc/sources
+demos/mvc/src
+demos/KendoCRUDService/KendoCRUDService/Content/UserFiles
 !src/docs
 !src/jquery.min.js
 src/**/*.min.js
@@ -32,23 +33,8 @@ src/kendo.aspnetmvc.js
 styles/**/*.css
 !styles/web/kendo.rtl.css
 !styles/dataviz/kendo.dataviz.css
-ive/
 node_modules
-release/
-sitefinity-docs/
 ./tags
-functional-tests/Results/
-functional-tests/**/**/Profiler Configurations/
-functional-tests/**/Backup/
-functional-tests/**/Profiler Configurations/
-functional-tests/**/Results/
-functional-tests/**/TestLists/
-functional-tests/**/TestResults/
-functional-tests/KendoCustom/**/Backup/
-functional-tests/KendoCustom/**/Results/
-functional-tests/KendoCustom/**/TestLists/
-functional-tests/KendoCustom/**/TestResults/
-functional-tests/KendoDemosTests/bin
 styles/*.css
 themebuilder/scripts/template.js
 themebuilder/**/themebuilder.all*
@@ -57,6 +43,7 @@ themebuilder/styles/kendo.black.css
 themebuilder/styles/Black/
 themebuilder/styles/textures/
 demos/mvc/bin/Kendo.*
+download-builder/config/kendo-config.json
 download-builder/service/bin/Download.*
 download-builder/service/App_Data
 wrappers/mvc/demos/**/Scripts
@@ -68,8 +55,6 @@ wrappers/java/**/target
 wrappers/java/spring-demos/src/main/webapp/resources
 wrappers/java/target
 wrappers/php/content
-demos/KendoCRUDService/KendoCRUDService/Content/UserFiles
-demos/mvc/src
 *-test-results.xml
 .listen_test
 kendo-cdn
