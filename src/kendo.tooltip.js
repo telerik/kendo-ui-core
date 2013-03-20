@@ -2,7 +2,7 @@ kendo_module({
     id: "tooltip",
     name: "Tooltip",
     category: "web",
-    description: "",
+    description: "The Tooltip widget displays a popup hint for a given html element.",
     depends: [ "core", "popup" ]
 });
 
