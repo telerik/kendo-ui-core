@@ -93,8 +93,6 @@
             }
         }
 
-        $(document).ready(createSparklines);
-        $("#example").bind("kendo:skinChange", createSparklines);
         var data = [{
             year: "2011",
             hourly: 46.29,
@@ -276,6 +274,9 @@
                 value: 1.84
             }]
         }];
+
+        $(document).ready(createSparklines);
+        $("#example").bind("kendo:skinChange", createSparklines);
     </script>
 
     <style scoped>
