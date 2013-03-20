@@ -8012,6 +8012,7 @@ kendo_module({
                     "<div class='" + CSS_PREFIX + "mask'></div>" +
                     "<div class='" + CSS_PREFIX + "mask'></div>" +
                     "<div class='" + CSS_PREFIX + "selection'>" +
+                    "<div class='" + CSS_PREFIX + "selection-bg'></div>" +
                     "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "leftHandle'><div></div></div>" +
                     "<div class='" + CSS_PREFIX + "handle " + CSS_PREFIX + "rightHandle'><div></div></div>" +
                     "</div></div>"
@@ -8171,7 +8172,7 @@ kendo_module({
 
             e.preventDefault();
 
-            if (target.is(".k-selection")) {
+            if (target.is(".k-selection, .k-selection-bg")) {
                 range.from = math.min(
                     math.max(min, from - offset),
                     max - span
