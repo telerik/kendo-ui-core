@@ -78,6 +78,10 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                         .reject { |f| File.directory? f }
                         .sub(DEMO_SHARED_ROOT + 'shared/icons', MVC_DEMOS_ROOT + 'Content/shared/icons')
                 )
+                .include(
+                    FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
+                        .sub('demos/mvc/App_Data', MVC_DEMOS_ROOT + 'App_Data')
+                )
                 .include(MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/*.winjs.*')
                 .exclude('**/System*.dll')
