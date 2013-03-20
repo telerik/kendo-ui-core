@@ -12,10 +12,18 @@ JSP_TAGLIB_SRC = FileList[JSP_TAGLIB_SRC_ROOT + '**/*'].exclude('**/target/*')
 SPRING_DEMOS_ROOT = JAVA_WRAPPERS_ROOT + 'spring-demos/'
 SPRING_DEMOS_WAR = "#{SPRING_DEMOS_ROOT}target/spring-demos-#{VERSION}.war"
 SPRING_DEMOS_SRC_ROOT = SPRING_DEMOS_ROOT + 'src/'
-SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
 SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*'].exclude('**/globalization/**/*')
 SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources/'
+
+SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
+                    .include(FileList[SPRING_DEMOS_SHARED_CONTENT]
+                        .reject { |f| File.directory? f }
+                        .sub('demos/mvc/content/', SPRING_DEMOS_RESOURCES)
+                    )
+                    .include(FileList[SPRING_DEMOS_NAVIGATION]
+                         .sub('demos/mvc/App_Data/', SPRING_DEMOS_RESOURCES)
+                    )
 
 JSP_BUNDLES = ['jsp.trial', 'jsp.commercial']
 
