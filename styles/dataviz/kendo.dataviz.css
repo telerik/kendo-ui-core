@@ -35,16 +35,16 @@ div.k-sparkline,
     white-space: nowrap;
     z-index: 1000;
     line-height: normal;
-	background-repeat: repeat-x;
-	background-position: 0 0;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNJREFUeNpi/P//vwMDFQELEP8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);
-	color: #fff;
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNJREFUeNpi/P//vwMDFQELEP8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);
+    color: #fff;
 }
 
 .k-chart .k-tooltip-inverse,
 .k-sparkline .k-tooltip-inverse,
 .k-stockchart .k-tooltip-inverse {
-	color: #000;
+    color: #000;
 }
 
 .k-chart .k-tooltip table,
@@ -87,8 +87,15 @@ div.k-sparkline,
     border-color: #d2d2d2;
     border-bottom: 0;
     height: 100%;
-    background-color: transparent;
+}
+
+.k-selection-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
     background-color: rgba(255, 255, 255, 0.01);
+    filter: alpha(opacity=1);
 }
 
 .k-handle {
