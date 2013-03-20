@@ -2,7 +2,7 @@ kendo_module({
     id: "router",
     name: "history",
     category: "framework",
-    description: "Kendo Router",
+    description: "The Router class is responsible for tracking the application state and navigating between the application states.",
     depends: [ "core" ],
     hidden: false
 });
