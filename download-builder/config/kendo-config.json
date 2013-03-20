@@ -802,6 +802,7 @@
             "category": "mobile",
             "description": "The Kendo Mobile ListView widget is used to display flat or grouped list of items.",
             "depends": [
+                "data",
                 "mobile.application"
             ],
             "source": "kendo.mobile.listview.min.js",
@@ -839,6 +840,7 @@
             "category": "mobile",
             "description": "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
             "depends": [
+                "mobile.shim",
                 "mobile.application"
             ],
             "source": "kendo.mobile.modalview.min.js",
@@ -895,6 +897,7 @@
             "category": "mobile",
             "description": "The mobile PopOver widget represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. ",
             "depends": [
+                "popup",
                 "mobile.application"
             ],
             "source": "kendo.mobile.popover.min.js",
@@ -971,7 +974,7 @@
             ]
         },
         {
-            "id": "mobile.spitview",
+            "id": "mobile.splitview",
             "name": "SplitView",
             "category": "mobile",
             "description": "The mobile SplitView is a tablet-specific view that consists of two or more mobile Pane widgets.",
@@ -1012,7 +1015,8 @@
             "category": "mobile",
             "description": "The mobile TabStrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.",
             "depends": [
-                "core"
+                "core",
+                "mobile.application"
             ],
             "source": "kendo.mobile.tabstrip.min.js",
             "widgets": [
