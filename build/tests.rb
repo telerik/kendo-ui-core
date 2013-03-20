@@ -22,7 +22,7 @@ namespace :tests do
     { CI: 8884, Production: 8885 }.each do |env, port|
         output = "#{env}-test-results.xml"
 
-        file output => [MIN_JS, MIN_CSS, tests].flatten do |t|
+        file output => [MIN_JS, MIN_CSS, KENDO_CONFIG_FILE, tests].flatten do |t|
             run_tests(t.name, port)
         end
 

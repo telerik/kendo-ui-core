@@ -28,7 +28,8 @@ rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
 end
 
 #Rebuild kendo-config.json based on data present in the source code
-KENDO_CONFIG_FILE = File.join(Rake.application.original_dir, "download-builder", "config", "kendo-config.json")
+KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
+
 file KENDO_CONFIG_FILE => SRC_JS do |t|
     sh "node #{COMPILEJS} --kendo-config --overwrite", :verbose => VERBOSE
 end
