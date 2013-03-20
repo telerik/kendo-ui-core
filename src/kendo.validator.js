@@ -113,7 +113,7 @@ kendo_module({
             },
             rules: {
                 required: function(input) {
-                    var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked",
+                    var checkbox = input.filter("[type=checkbox]").length && !input.is(":checked"),
                         value = input.val();
 
                     return !(hasAttribute(input, "required") && (value === "" || !value  || checkbox));
