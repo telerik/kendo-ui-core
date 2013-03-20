@@ -16,11 +16,6 @@ namespace Kendo.Mvc.Examples.Controllers
             return View(GetProducts());
         }
 
-        public ActionResult Remote_Data()
-        {
-            return View("AjaxBinding");
-        }
-
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetProducts().ToDataSourceResult(request));

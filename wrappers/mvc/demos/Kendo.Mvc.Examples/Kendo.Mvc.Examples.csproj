@@ -203,7 +203,7 @@
     <Compile Include="Controllers\Web\Editor\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
-    <Compile Include="Controllers\Web\Grid\AjaxBindingController.cs" />
+    <Compile Include="Controllers\Web\Grid\Remote_DataController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
@@ -502,7 +502,7 @@
     <Content Include="Areas\aspx\Views\web\editor\snippets.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\styles.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\aggregates.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\ajaxbinding.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
@@ -948,7 +948,7 @@
     <Content Include="Areas\aspx\Views\web\treeview\events.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\images.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\index.aspx" />
-    <Content Include="Areas\razor\Views\web\grid\ajaxbinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\events.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\api.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\detailtemplate.cshtml" />
