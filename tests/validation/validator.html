@@ -729,15 +729,19 @@
                     validator = setup(input);
 
                 input.trigger("click");
+                input.trigger("click");
+
                 ok(input.hasClass("k-invalid"));
             });
 
-            test("checkbox field is revalidated on click", function() {
+            test("checkbox field is revalidated on click when validation is attached to the container", function() {
                 var container = $('<div><input type="checkbox" required /></div>'),
                     validator = setup(container),
                     input = container.find("input");
 
                 input.trigger("click");
+                input.trigger("click");
+
                 ok(input.hasClass("k-invalid"));
             });
 
