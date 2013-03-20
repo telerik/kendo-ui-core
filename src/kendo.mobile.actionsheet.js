@@ -8,6 +8,7 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         ui = kendo.mobile.ui,
         Shim = ui.Shim,
         Popup = ui.Popup,
@@ -21,7 +22,7 @@ kendo_module({
     var ActionSheet = Widget.extend({
         init: function(element, options) {
             var that = this,
-                os = kendo.support.mobileOS,
+                os = support.mobileOS,
                 ShimClass = os.tablet ? Popup : Shim;
 
             Widget.fn.init.call(that, element, options);
@@ -40,15 +41,7 @@ kendo_module({
 
             kendo.notify(that, ui);
 
-            kendo.onResize(function() {
-                var positionedElement = that.wrapper.parent(),
-                    viewPort = positionedElement.parent();
-
-                positionedElement.css({
-                    top: (viewPort.height() - positionedElement.height()) + "px",
-                    width: viewPort.width() + "px"
-                });
-            });
+            kendo.onResize($.proxy(this, "_resize"));
         },
 
         events: [
@@ -102,6 +95,20 @@ kendo_module({
 
             e.preventDefault();
             this.close();
+        },
+
+        _resize: function() {
+            if (support.mobileOS.tablet) {
+                this.shim.hide();
+            } else { // phone
+                var positionedElement = this.wrapper.parent(),
+                    viewPort = positionedElement.parent();
+
+                positionedElement.css({
+                    top: (viewPort.height() - positionedElement.height()) + "px",
+                    width: viewPort.width() + "px"
+                });
+            }
         }
     });
 
