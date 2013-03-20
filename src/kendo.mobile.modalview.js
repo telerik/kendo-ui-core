@@ -3,7 +3,7 @@ kendo_module({
     name: "ModalView",
     category: "mobile",
     description: "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
-    depends: [ "mobile.application" ]
+    depends: [ "mobile.shim", "mobile.application" ]
 });
 
 (function($, undefined) {

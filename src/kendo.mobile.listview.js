@@ -3,7 +3,7 @@ kendo_module({
     name: "ListView",
     category: "mobile",
     description: "The Kendo Mobile ListView widget is used to display flat or grouped list of items.",
-    depends: [ "mobile.application" ]
+    depends: [ "data", "mobile.application" ]
 });
 
 (function($, undefined) {

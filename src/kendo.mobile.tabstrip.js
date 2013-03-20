@@ -3,7 +3,7 @@ kendo_module({
     name: "TabStrip",
     category: "mobile",
     description: "The mobile TabStrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.",
-    depends: [ "core" ]
+    depends: [ "core", "mobile.application" ]
 });
 
 (function($, undefined) {
