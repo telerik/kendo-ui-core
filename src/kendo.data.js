@@ -457,7 +457,7 @@ kendo_module({
             var that = this,
                 type = toString.call(object);
 
-            if (object !== null && (type === "[object Object]" || type === "[object Array]")) {
+            if (object != null && (type === "[object Object]" || type === "[object Array]")) {
                 var isObservableArray = object instanceof ObservableArray;
                 var isDataSource = object instanceof DataSource;
 

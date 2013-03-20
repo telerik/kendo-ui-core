@@ -164,12 +164,11 @@ kendo_module({
        return value;
     }
 
-
     function translateGroup(group) {
        return {
            value: typeof group.Key !== "undefined" ? group.Key : group.value,
            field: group.Member || group.field,
-           hasSubgroups: group.HasSubgroups || group.hasSubgroups,
+           hasSubgroups: group.HasSubgroups || group.hasSubgroups || false,
            aggregates: translateAggregate(group.Aggregates || group.aggregates),
            items: group.HasSubgroups ? $.map(group.Items || group.items, translateGroup) : (group.Items || group.items)
        };

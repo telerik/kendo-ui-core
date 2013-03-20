@@ -359,6 +359,13 @@
                 observable.dataSource.add({});
             });
 
+            test("undefined is not wrapped", function() {
+                var observable = new kendo.observable( {
+                    empty: undefined
+                });
+
+                ok(!(observable.get("empty") instanceof kendo.data.ObservableObject));
+            });
         </script>
     </head>
 </html>
