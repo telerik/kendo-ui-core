@@ -2820,13 +2820,14 @@ kendo_module({
         updateRange: function(value, categoryIx, series) {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                totals = chart.groupTotals(series.stack),
-                positive = totals.positive,
-                negative = totals.negative;
+                totals;
 
             if (defined(value)) {
                 if (isStacked) {
-                    incrementSlot(value > 0 ? positive : negative, categoryIx, value);
+                    totals = chart.groupTotals(series.stack);
+                    incrementSlot(value > 0 ? totals.positive : totals.negative,
+                        categoryIx, value
+                    );
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
@@ -2931,9 +2932,16 @@ kendo_module({
 
         groupTotals: function(stackGroup) {
             var chart = this,
-                groupName = typeof stackGroup === STRING ? stackGroup : "default",
-                totals = chart._groupTotals[groupName];
+                groupName,
+                totals;
 
+            if (typeof stackGroup === STRING) {
+                groupName = stackGroup;
+            } else {
+                groupName = chart._groups[0] || "default";
+            }
+
+            totals = chart._groupTotals[groupName];
             if (!totals) {
                 totals = chart._groupTotals[groupName] = {
                     positive: [],

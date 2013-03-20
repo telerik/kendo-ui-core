@@ -715,6 +715,18 @@
                     equal(series.points[2].options.stackBase, 2);
                 });
 
+                test("groups with no stack are assigned to first stack", function() {
+                    setupBarChart(plotArea, {
+                        series: [
+                            $.extend({ stack: "a" }, positiveSeries),
+                            positiveSeries,
+                        ],
+                        isStacked: true
+                    });
+
+                    equal(series.valueAxisRanges[undefined].max, 4);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Grouped Stack / Negative Values", {
                     setup: function() {
