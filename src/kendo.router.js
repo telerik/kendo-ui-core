@@ -1,6 +1,6 @@
 kendo_module({
     id: "router",
-    name: "history",
+    name: "History",
     category: "framework",
     description: "Kendo Router",
     depends: [ "core" ],
