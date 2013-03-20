@@ -5,17 +5,22 @@
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.history.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
-        <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.mobile.scroller.js"></script>
-        <script src="../../src/kendo.mobile.navbar.js"></script>
-        <script src="../../src/kendo.mobile.view.js"></script>
-        <script src="../../src/kendo.mobile.button.js"></script>
-        <script src="../../src/kendo.mobile.application.js"></script>
-        <script src="../../src/kendo.mobile.listview.js"></script>
+        <!--<script src="../../src/kendo.core.js"></script>-->
+        <!--<script src="../../src/kendo.router.js"></script>-->
+        <!--<script src="../../src/kendo.data.js"></script>-->
+        <!--<script src="../../src/kendo.fx.js"></script>-->
+        <!--<script src="../../src/kendo.draganddrop.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.scroller.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.navbar.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.view.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.button.js"></script>-->
+        <!--<script src="../../src/kendo.userevents.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.loader.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.pane.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.application.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.listview.js"></script>-->
+        <!--<script src="../../src/kendo.mobile.modalview.js"></script>-->
+        <script src="kendo.custom.min.js"></script>
         <script>
 
             $(function() {
@@ -26,21 +31,54 @@
     <body>
         <div data-role="view">
             <ul data-role="listview" data-style="inset">
-                <li><a class="km-listview-link" href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
-                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose">More</a></li>
+                <li><a class="km-listview-link" href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
+                <li><a href="#next">Wireless networks</a><a data-role="detailbutton" data-style="detaildisclose"></a></li>
             </ul>
+            <div data-role="popover" id="popover-people" data-popup='{"height": 230, "width": 350}'>
+                <div data-role="view" data-title="People">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                            <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                        </div>
+                    </div>
+                    <ul data-role="listview">
+                        <li><label>Isabella Anderson<input type="checkbox"></label></li>
+                        <li><label>Josh Anderson<input type="checkbox"></label></li>
+                        <li><label>Linda Anderson<input type="checkbox"></label></li>
+                        <li><label>Oliver Anderson<input type="checkbox"></label></li>
+                        <li><label>James Williams<input type="checkbox"></label></li>
+                        <li><label>Barbara Williams<input type="checkbox"></label></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-role="modalview" id="modalview-login" style="width: 95%; height: 18em;">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>Login</span>
+                    <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a>
+                </div>
+            </div>
+
+            <ul data-role="listview" data-style="inset">
+                <li><label for="username">Username:</label> <input type="text" id="username" /></li>
+                <li><label for="password">Password:</label> <input type="password" id="password" /></li>
+            </ul>
+            <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
+            <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
         </div>
 
         <div data-role="view" id="next">
