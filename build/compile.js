@@ -28,8 +28,7 @@ var ARGV = OPT
 var KENDO_SRCDIR = path.join(path.dirname(fs.realpathSync(__filename)), "..");
 
 var deps_file_name = path.join(KENDO_SRCDIR, "download-builder/config/kendo-config.json");
-var deps_file = fs.readFileSync(deps_file_name, "utf8");
-deps_file = JSON.parse(deps_file);
+var template = JSON.parse(fs.readFileSync("download-builder/config/categories.json", "utf8"));
 
 var files = ARGV._.slice();
 
@@ -81,11 +80,12 @@ if (ARGV["kendo-config"]) {
             components.push(c);
         }
     });
-    deps_file.components = components;
+
+    template.components = components;
     if (ARGV.overwrite) {
-        fs.writeFileSync(deps_file_name, JSON.stringify(deps_file, null, 4));
+        fs.writeFileSync(deps_file_name, JSON.stringify(template, null, 4));
     } else {
-        sys.puts(JSON.stringify(deps_file, null, 4));
+        sys.puts(JSON.stringify(template, null, 4));
     }
     process.exit(0);
 }
@@ -120,54 +120,6 @@ var get_wrapper = (function(wrapper){
         return wrapper;
     };
 })();
-
-if (ARGV.decl) {
-    throw new Error("Don't run this.");
-    deps_file.components.forEach(function(c){
-        if (!c.source) {
-            sys.error("No source declaration for component " + c.id);
-            return;
-        }
-        var orig = c.source.replace(/\.min/, "");
-        var orig_full = path.join(KENDO_SRCDIR, "src", orig);
-        sys.error(c.id + ": " + orig);
-        if (!fs.existsSync(orig_full)) {
-            sys.error("File " + orig + " not found for component " + c.id);
-            return;
-        }
-        var orig_code = fs.readFileSync(orig_full, "utf8");
-        var ast = u2.parse(orig_code, {
-            filename: orig
-        });
-        var component_stat = null;
-        try {
-            ast.walk(new u2.TreeWalker(function(node){
-                if (node instanceof u2.AST_Lambda) return true;
-                if (node instanceof u2.AST_SimpleStatement
-                    && node.body instanceof u2.AST_Call
-                    && node.body.expression instanceof u2.AST_SymbolRef
-                    && node.body.expression.name == "kendo_module") {
-                    component_stat = node;
-                    throw "ok";
-                }
-            }));
-        } catch(ex) {
-            if (ex !== "ok") throw ex;
-        }
-        delete c.source;        // no point keeping that in the file itself
-        var comp = u2.parse("kendo_module(" + JSON.stringify(c) + ")"), code;
-        if (component_stat) {
-            code = orig_code.substring(0, component_stat.start.pos) +
-                comp.body[0].print_to_string({ beautify: true }) +
-                orig_code.substr(component_stat.end.endpos).replace(/^[\n\t\s;]*/, "\n\n");
-        } else {
-            code = comp.body[0].print_to_string({ beautify: true }) +
-                orig_code.replace(/^[\n\t\s;]*/, "\n\n");
-        }
-        fs.writeFileSync(orig_full, code);
-    });
-    process.exit(0);
-}
 
 function compile_one_file(file) {
     var code = fs.readFileSync(file, "utf8");
@@ -345,19 +297,4 @@ function extract_deps(ast, comp_filename) {
         ast.component = component;
     }
     return ast;
-};
-
-function find_component(id) {
-    return deps_file.components.filter(function(c){ return c.id == id })[0];
-};
-
-function find_component_by_source(source) {
-    source = path.basename(source);
-    return deps_file.components.filter(function(c){
-        var src = c.source;
-        if (src) {
-            src = src.toLowerCase().replace(/\.min/g, "");
-            return src == source;
-        }
-    });
 };

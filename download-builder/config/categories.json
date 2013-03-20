@@ -1,0 +1,23 @@
+{"categories": {
+        "framework": {
+            "name": "Framework",
+            "description": "Shared components providing behaviors, data access and other services"
+        },
+        "web": {
+            "name": "Web",
+            "description": "Desktop UI Widgets for mobile-ready Web Sites and Applications"
+        },
+        "dataviz": {
+            "name": "DataViz",
+            "description": "Data Visualization Widgets for Desktop and Mobile web apps"
+        },
+        "mobile": {
+            "name": "Mobile",
+            "description": "Framework and Widgets for Mobile Applications"
+        },
+        "wrappers": {
+            "name": "Server Wrappers",
+            "description": "Supplementary scripts for integration with server-side technologies"
+        }
+    }
+}
