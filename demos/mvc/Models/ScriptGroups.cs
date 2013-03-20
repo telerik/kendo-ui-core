@@ -66,7 +66,7 @@ namespace Kendo.Models
             "kendo.editor.js",
             "kendo.multiselect.js"
 #else
-            "http://code.jquery.com/jquery-1.8.2.min.js",
+            "http://code.jquery.com/jquery-1.9.1.min.js",
             "kendo.all.min.js"
 #endif
         };
@@ -111,7 +111,7 @@ namespace Kendo.Models
             "kendo.mobile.tabstrip.js",
             "kendo.mobile.modalview.js"
 #else
-            "http://code.jquery.com/jquery-1.8.2.min.js",
+            "http://code.jquery.com/jquery-1.9.1.min.js",
             "kendo.all.min.js"
 #endif
             };
