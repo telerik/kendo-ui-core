@@ -3,6 +3,7 @@ kendo_module({
     name: "ImageBrowser",
     category: "web",
     description: "",
+    hidden: true,
     depends: [ "listview", "upload" ]
 });
 

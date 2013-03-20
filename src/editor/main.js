@@ -3,7 +3,13 @@ kendo_module({
     name: "Editor",
     category: "web",
     description: "Rich text editor component",
-    depends: [ "combobox", "dropdownlist", "window", "colorpicker" ]
+    depends: [ "combobox", "dropdownlist", "window", "colorpicker" ],
+    features: [ {
+        id: "editor-imagebrowser",
+        name: "Image Browser",
+        description: "Support for uploading and inserting images",
+        depends: [ "imagebrowser" ]
+    } ]
 });
 
 (function($,undefined) {
