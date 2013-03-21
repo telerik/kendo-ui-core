@@ -1095,10 +1095,15 @@ kendo_module({
         _updateNode: function(field, items) {
             var that = this, i, node, item,
                 isChecked, isCollapsed,
-                context = { treeview: that.options, item: item };
+                context = { treeview: that.options, item: item },
+                shouldUpdate = false;
 
             function setChecked() {
                 that.dataItem(this).set(CHECKED, isChecked);
+            }
+
+            function access() {
+                shouldUpdate = true;
             }
 
             if (field == "selected") {
@@ -1116,11 +1121,19 @@ kendo_module({
                     node.attr(ARIASELECTED, false);
                 }
             } else {
+                if ($.inArray(field, that.options.dataTextField) >= 0) {
+                    shouldUpdate = true;
+                } else {
+                    context.item = items[0];
+                    context.item.bind("get", access);
+                    that.templates.itemContent(context);
+                    context.item.unbind("set", access);
+                }
+
                 for (i = 0; i < items.length; i++) {
                     context.item = item = items[i];
 
-                    if (field == "spriteCssClass" || field == "imageUrl" ||
-                        $.inArray(field, that.options.dataTextField) >= 0) {
+                    if (field == "spriteCssClass" || field == "imageUrl" || shouldUpdate) {
                         that.findByUid(item.uid).find(">div>.k-in").html(that.templates.itemContent(context));
                     } else if (field == CHECKED) {
                         node = that.findByUid(item.uid);
