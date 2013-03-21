@@ -953,7 +953,7 @@ kendo_module({
                         [ currentSeries ]
                     );
                 } else {
-                    processedSeries.push(currentSeries);
+                    processedSeries.push(currentSeries || []);
                 }
             }
 
@@ -962,7 +962,7 @@ kendo_module({
 
             applySeriesColors(chart.options);
 
-            chart._bindCategories(categoriesData);
+            chart._bindCategories(categoriesData || []);
 
             chart.trigger(DATABOUND);
             chart._redraw();
