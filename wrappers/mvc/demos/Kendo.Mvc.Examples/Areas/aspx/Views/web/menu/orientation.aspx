@@ -34,7 +34,7 @@
       .Items(items =>
       {
           items.Add()
-              .Text("Mens")
+              .Text("Men's")
               .Items(children =>
                {
                    children.Add().Text("Footwear")
@@ -70,7 +70,7 @@
                    children.Add().Text("Accessories");
                });
 
-          items.Add().Text("Womens")
+          items.Add().Text("Women's")
                .Items(children =>
                {
                    children.Add().Text("Footwear")
@@ -103,7 +103,7 @@
                });
 
           items.Add()
-              .Text("Boys")
+              .Text("Boy's")
               .Items(children =>
               {
                   children.Add().Text("Footwear")
@@ -139,7 +139,7 @@
                   children.Add().Text("Accessories");
               });
 
-          items.Add().Text("Girls")
+          items.Add().Text("Girl's")
                .Items(children =>
                {
                    children.Add().Text("Footwear")
