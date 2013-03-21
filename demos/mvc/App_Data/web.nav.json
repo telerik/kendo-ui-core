@@ -115,7 +115,7 @@
             "name": "colorpicker",
             "documentation": "web/colorpicker",
             "spriteCssClass": "colorPickerIcon",
-			"new": true,
+            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -476,8 +476,8 @@
                     "text": "Binding to remote data",
                     "url": "grid/remote-data.html",
                     "title": "Remote data binding example in KendoGrid",
-                    "meta": "This example and demo source code illustrate how KendoGrid component can be bound to remote data by using the DataSource component."                    
-                },                
+                    "meta": "This example and demo source code illustrate how KendoGrid component can be bound to remote data by using the DataSource component."
+                },
                 {
                     "text": "Custom ajax binding",
                     "url": "grid/customajaxbinding.html",
@@ -753,9 +753,9 @@
                 },
                 {
                     "text": "Orientation",
-					"title": "Kendo UI Menu direction demo",
+                    "title": "Kendo UI Menu direction demo",
                     "url": "menu/orientation.html",
-					"meta": "This demo shows how the orientation of the Kendo UI Menu can be changed through the configuration."
+                    "meta": "This demo shows how the orientation of the Kendo UI Menu can be changed through the configuration."
                 },
                 {
                     "packages": [ "mvc" ],
@@ -802,7 +802,7 @@
             "name": "multiselect",
             "documentation": "web/multiselect",
             "spriteCssClass": "multiselectIcon",
-			"new": true,
+            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -1131,7 +1131,7 @@
             "name": "tooltip",
             "documentation": "web/tooltip",
             "spriteCssClass": "tooltipIcon",
-			"new": true,
+            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -1485,7 +1485,7 @@
             "name": "spa",
             "documentation": "framework/kendo",
             "spriteCssClass": "spaIcon",
-			"new": true,
+            "new": true,
             "items": [
                 {
                     "text": "Launch",
@@ -1655,7 +1655,7 @@
             "text": "Sushi",
             "thumbnailUrl": "content/web/overview/websushi-dash.gif",
             "expanded": "true",
-			"packages": [ "online" ],
+            "packages": [ "online" ],
             "items": [{
                 "url": "../websushi/"
             }],
@@ -1665,7 +1665,7 @@
             "text": "AeroViewr",
             "thumbnailUrl": "content/web/overview/aeroviewr-dash.gif",
             "expanded": "true",
-			"packages": [ "online" ],
+            "packages": [ "online" ],
             "items": [{
                 "url": "../aeroviewr/"
             }],
