@@ -7,6 +7,33 @@ DEMOS_CS = FileList['demos/mvc/**/*.cs']
 SUITE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/suite-index.html.erb'))
 BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
 
+OFFLINE_DEMO_TEMPLATE_OPTIONS = {
+    "/web/spa/Sushi.html" => {
+        skip_back_button: true,
+        additional_code: <<-SCRIPT,
+            window.sushiMenuPath = "../../content/spa/websushi/menu.json";
+        SCRIPT
+        additional_scripts: %W(
+            ../../content/spa/websushi/js/sushi.js
+        ),
+        additional_stylesheets: %W(
+            ../../content/spa/websushi/css/style.css
+        )
+    },
+    "/web/spa/Aeroviewr.html" => {
+        skip_back_button: true,
+        additional_scripts: %W(
+            ../../content/spa/aeroviewr/js/500px.js
+            ../../content/spa/aeroviewr/js/aeroviewr.js
+        ),
+        additional_stylesheets: %W(
+            ../../content/spa/aeroviewr/css/aeroviewr.css
+        )
+    }
+}
+
+OFFLINE_DEMO_TEMPLATE_OPTIONS.default = { skip_back_button: false, additional_scripts: [], additional_stylesheets: [] }
+
 def include_item?(item)
     packages = item['packages']
 
@@ -130,7 +157,13 @@ def demos(options)
             body = File.read(find_demo_src(t.name, path))
             body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
             body.gsub!(/@{(.|\n|\r)+?}/, '')
-            body.gsub!(/@@/, '');
+            body.gsub!(/@@/, '')
+
+            # if the example is an entire document, take only the body parts
+            body_contents = body.match(/<body>(.+)<\/body>/m)
+            body = body_contents[1] if body_contents
+
+            options = OFFLINE_DEMO_TEMPLATE_OPTIONS[t.name.sub(path, '')]
 
             ensure_path(t.name)
 

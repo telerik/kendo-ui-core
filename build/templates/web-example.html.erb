@@ -10,9 +10,17 @@
     <script src="../../../js/jquery.min.js"></script>
     <script src="../../../js/kendo.web.min.js"></script>
     <script src="../../content/shared/js/console.js"></script>
+    <% options[:additional_scripts].each do |script| %><script src="<%= script %>"></script><% end %>
+    <% options[:additional_stylesheets].each do |stylesheet| %><link href="<%= stylesheet %>" rel="stylesheet"><% end %>
+
+    <script>
+        <%= options[:additional_code] %>
+    </script>
 </head>
 <body>
-    <a class="offline-button" href="../index.html">Back</a>
+    <% unless options[:skip_back_button] %>
+        <a class="offline-button" href="../index.html">Back</a>
+    <% end %>
     <%= body %>
 </body>
 </html>
