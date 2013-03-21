@@ -80,6 +80,8 @@
         var multiSelect = $("#products").data("kendoMultiSelect"),
             setValue = function(e) {
                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                    multiSelect.dataSource.filter({}); //clear applied filter before setting value
+
                     multiSelect.value($("#value").val().split(","));
                 }
             },
