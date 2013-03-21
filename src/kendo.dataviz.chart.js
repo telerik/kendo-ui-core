@@ -4978,6 +4978,9 @@ kendo_module({
                 for (i = 0; i < data.length; i++) {
                     pointData = bindPoint(currentSeries, i, bindableFields);
                     value = pointData.value;
+                    if (!value) {
+                        continue;
+                    }
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!fields.explode;
@@ -5015,9 +5018,6 @@ kendo_module({
 
             chart.createLegendItem(value, fields);
 
-            if (!value) {
-                return;
-            }
             segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
@@ -5053,11 +5053,13 @@ kendo_module({
         pointsTotal: function(series) {
             var data = series.data,
                 length = data.length,
-                sum = 0,
-                i;
+                sum = 0, i, value;
 
             for(i = 0; i < length; i++) {
-                sum += bindPoint(series, i).value;
+                value = bindPoint(series, i).value;
+                if (value) {
+                    sum += value;
+                }
             }
 
             return sum;
