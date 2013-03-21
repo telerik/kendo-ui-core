@@ -1670,6 +1670,30 @@
                 "url": "../aeroviewr/"
             }],
             "name": "aeroviewr"
+        },
+        {
+            "text": "Sushi",
+            "packages": [ "offline" ],
+            "items": [{
+                "url": "spa/Sushi.html"
+            }],
+            "name": "websushi"
+        },
+        {
+            "text": "Aeroviewr",
+            "packages": [ "offline" ],
+            "items": [{
+                "url": "spa/Aeroviewr.html"
+            }],
+            "name": "aeroviewr"
+        },
+        {
+            "text": "Aeroviewr Callback Receiver",
+            "packages": [ "offline" ],
+            "items": [{
+                "url": "spa/AeroviewrCallback.html"
+            }],
+            "name": "aeroviewrcallback"
         }
     ]
 }

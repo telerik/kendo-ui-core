@@ -5,6 +5,17 @@ using System.Web.Routing;
 
 namespace Kendo
 {
+    public class SpaViewEngine : RazorViewEngine
+    {
+        public SpaViewEngine()
+        {
+            var viewLocations =  new[] { "~/Views/web/spa/{0}.cshtml" };
+
+            this.PartialViewLocationFormats = viewLocations;
+            this.ViewLocationFormats = viewLocations;
+        }
+    }
+
     public class MvcApplication : System.Web.HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -136,6 +147,7 @@ namespace Kendo
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            ViewEngines.Engines.Add(new SpaViewEngine());
         }
     }
 }
