@@ -23,7 +23,7 @@
 
 <kendo:menu name="menu" direction="${direction}">
     <kendo:menu-items>
-        <kendo:menu-item text="Mens">
+        <kendo:menu-item text="Men's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -55,7 +55,7 @@
                 <kendo:menu-item text="Accessories"></kendo:menu-item>
             </kendo:menu-items>        
         </kendo:menu-item>
-        <kendo:menu-item text="Womens">
+        <kendo:menu-item text="Women's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -83,7 +83,7 @@
                 <kendo:menu-item text="Accessories"></kendo:menu-item>
             </kendo:menu-items>  
         </kendo:menu-item>
-        <kendo:menu-item text="Boys">
+        <kendo:menu-item text="Boy's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -115,7 +115,7 @@
                 <kendo:menu-item text="Accessories"></kendo:menu-item>
             </kendo:menu-items>  
         </kendo:menu-item>
-        <kendo:menu-item text="Girls">
+        <kendo:menu-item text="Girl's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -147,10 +147,10 @@
         </kendo:menu-item>
         <kendo:menu-item text="Footwear">
             <kendo:menu-items>
-                <kendo:menu-item text="Mens"></kendo:menu-item>
-                <kendo:menu-item text="Womens"></kendo:menu-item>
-                <kendo:menu-item text="Juniors"></kendo:menu-item>
-                <kendo:menu-item text="Childrens"></kendo:menu-item>
+                <kendo:menu-item text="Men's"></kendo:menu-item>
+                <kendo:menu-item text="Women's"></kendo:menu-item>
+                <kendo:menu-item text="Junior's"></kendo:menu-item>
+                <kendo:menu-item text="Children's"></kendo:menu-item>
             </kendo:menu-items>
         </kendo:menu-item>
     </kendo:menu-items>

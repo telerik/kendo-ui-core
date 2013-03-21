@@ -23,7 +23,7 @@
 
 <kendo:menu name="menu" style="margin-right: 220px;width:300px;" orientation="${orientation}">
     <kendo:menu-items>
-        <kendo:menu-item text="Mens">
+        <kendo:menu-item text="Men's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -55,7 +55,7 @@
                 <kendo:menu-item text="Accessories"></kendo:menu-item>
             </kendo:menu-items>        
         </kendo:menu-item>
-        <kendo:menu-item text="Womens">
+        <kendo:menu-item text="Women's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -83,7 +83,7 @@
                 <kendo:menu-item text="Accessories"></kendo:menu-item>
             </kendo:menu-items>  
         </kendo:menu-item>
-        <kendo:menu-item text="Boys">
+        <kendo:menu-item text="Boy's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>
@@ -115,7 +115,7 @@
                 <kendo:menu-item text="Accessories"></kendo:menu-item>
             </kendo:menu-items>  
         </kendo:menu-item>
-        <kendo:menu-item text="Girls">
+        <kendo:menu-item text="Girl's">
             <kendo:menu-items>
                 <kendo:menu-item text="Footwear">
                     <kendo:menu-items>

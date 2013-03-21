@@ -67,10 +67,10 @@ require_once '../../lib/Kendo/Autoload.php';
         $item->addItem($footwear, $leisure, $sports, $accessories);
     }
 
-    $mens = new \Kendo\UI\MenuItem('Mens');
-    $womens = new \Kendo\UI\MenuItem('Womens');
-    $boys = new \Kendo\UI\MenuItem('Boys');
-    $girls = new \Kendo\UI\MenuItem('Girls');
+    $mens = new \Kendo\UI\MenuItem('Men\'s');
+    $womens = new \Kendo\UI\MenuItem('Women\'s');
+    $boys = new \Kendo\UI\MenuItem('Boy\'s');
+    $girls = new \Kendo\UI\MenuItem('Girl\'s');
 
     addSubCategories($mens);
     addSubCategories($womens);
@@ -79,10 +79,10 @@ require_once '../../lib/Kendo/Autoload.php';
 
     $footwear = new \Kendo\UI\MenuItem('Footwear');
     $footwear->addItem(
-        new \Kendo\UI\MenuItem('Mens'),
-        new \Kendo\UI\MenuItem('Womens'),
-        new \Kendo\UI\MenuItem('Juniors'),
-        new \Kendo\UI\MenuItem('Childrens')
+        new \Kendo\UI\MenuItem('Men\'s'),
+        new \Kendo\UI\MenuItem('Women\'s'),
+        new \Kendo\UI\MenuItem('Junior\'s'),
+        new \Kendo\UI\MenuItem('Children\'s')
     );
 
     $menu->addItem($mens, $womens, $boys, $girls, $footwear);
