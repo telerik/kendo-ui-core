@@ -481,6 +481,21 @@
 
                 ok(!tooltip.popup.visible());
             });
+
+            test("element without title clear the tooltip", function() {
+                container.append('<span id="first" title="foo"/><span id="second"/>');
+
+                var tooltip = new Tooltip(container, {
+                    filter: "span"
+                });
+
+                tooltip.show(container.find("[title]"));
+                tooltip.show(container.find("#second"));
+
+                equal(tooltip.content.html(), "");
+            });
+
+
         </script>
     </body>
 </html>
