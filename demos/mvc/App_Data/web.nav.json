@@ -1480,7 +1480,7 @@
             ]
         },
         {
-            "packages": ["!mvc"],
+            "packages": ["!mvc", "!offline"],
             "text": "Single-Page App",
             "name": "spa",
             "documentation": "framework/kendo",
@@ -1675,6 +1675,7 @@
             "text": "Sushi",
             "packages": [ "offline" ],
             "items": [{
+                "text": "Launch Sushi Sample Application",
                 "url": "spa/Sushi.html"
             }],
             "name": "websushi"
@@ -1683,17 +1684,10 @@
             "text": "Aeroviewr",
             "packages": [ "offline" ],
             "items": [{
+                "text": "Launch Aeroviewr Sample Application",
                 "url": "spa/Aeroviewr.html"
             }],
             "name": "aeroviewr"
-        },
-        {
-            "text": "Aeroviewr Callback Receiver",
-            "packages": [ "offline" ],
-            "items": [{
-                "url": "spa/AeroviewrCallback.html"
-            }],
-            "name": "aeroviewrcallback"
         }
     ]
 }
