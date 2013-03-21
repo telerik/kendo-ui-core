@@ -65,6 +65,8 @@
 	         var multiselect = $("#movies").data("kendoMultiSelect"),
 	             setValue = function(e) {
 	                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                        multiselect.dataSource.filter({}); //clear applied filter before setting value
+
 	                    multiselect.value($("#value").val().split(","));
 	                }
 	             },
