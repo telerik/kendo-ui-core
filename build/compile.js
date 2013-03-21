@@ -133,7 +133,9 @@ function compile_one_file(file) {
             return;
         }
         deps = deps.map(function(dep){
-            return "./kendo." + dep + ".min";
+            var dir = path.dirname(dep);
+            dep = "kendo." + path.basename(dep) + ".min";
+            return dir != "." ? path.join(dir, dep) : "./" + dep;
         });
         if (ARGV.amd) {
             ast = get_wrapper().wrap(id, deps, ast);
@@ -246,6 +248,18 @@ function extract_widget_info(ast) {
 }
 
 function extract_deps(ast, comp_filename) {
+    // HACK: need to add "core" dependency to each culture file, so
+    // that cultures can be loaded with RequireJS.  Rather than adding
+    // it to the original sources, I think it's preferable that the
+    // build script handles this as a special case.
+    var m = /^src\/cultures\/kendo\.(.*)\.js$/.exec(comp_filename);
+    if (m) {
+        ast.deps = [ "../core" ];
+        ast.component = {
+            id: m[1]
+        };
+        return ast;
+    }
     var component, is_bundle = false;
     var tt = new u2.TreeTransformer(function before(node, descend){
         if (node !== ast) {
