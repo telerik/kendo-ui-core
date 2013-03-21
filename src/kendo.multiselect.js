@@ -634,14 +634,15 @@ kendo_module({
 
         _scale: function() {
             var that = this,
-                wrapperWidth = that.wrapper.width(),
+                wrapper = that.wrapper,
+                wrapperWidth = wrapper.width(),
                 span = that._span.text(that.input.val()),
                 textWidth;
 
-            if (!wrapperWidth) {
+            if (!wrapper.is(":visible")) {
                 span.appendTo(document.documentElement);
                 wrapperWidth = textWidth = span.width() + 25;
-                span.appendTo(this.wrapper);
+                span.appendTo(wrapper);
             } else {
                 textWidth = span.width() + 25;
             }
