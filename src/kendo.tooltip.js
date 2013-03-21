@@ -215,7 +215,7 @@ kendo_module({
                 }
             } else if (contentOptions && isFunction(contentOptions)) {
                 contentOptions = contentOptions({ target: target });
-                that.content.html(contentOptions);
+                that.content.html(contentOptions || "");
             } else {
                 that.content.html(contentOptions);
             }
