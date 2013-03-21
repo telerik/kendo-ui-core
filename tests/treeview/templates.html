@@ -66,6 +66,21 @@
                 equal(items.eq(1).text(), "foo baz");
             });
 
+            test("update rendering when template-accessed property is changed", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", x: true }
+                    ],
+                    template: kendo.template("#= item.text # #= item.get('x') ? 'bar' : 'baz' #")
+                });
+
+                equal(treeview.find(".k-in").text(), "foo bar");
+
+                treeviewObject.dataSource.data()[0].set("x", false);
+
+                equal(treeview.find(".k-in").text(), "foo baz");
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
