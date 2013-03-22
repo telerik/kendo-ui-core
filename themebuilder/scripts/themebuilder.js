@@ -21,8 +21,12 @@
         whitespaceRe = /\s/g,
         processors = {
             "box-shadow": function(value) {
-                if (value && value != "none") {
-                    return value.replace(/((\d+(px|em))|inset)/g,"").replace(whitespaceRe, "");
+                if (value) {
+                    if (value != "none") {
+                        return value.replace(/((\d+(px|em))|inset)/g,"").replace(whitespaceRe, "");
+                    } else {
+                        return "transparent";
+                    }
                 } else {
                     return "#000000";
                 }
