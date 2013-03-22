@@ -1756,6 +1756,7 @@ function pad(number, digits, end) {
 
         var mobileOS = support.mobileOS = support.detectOS(navigator.userAgent);
 
+        support.wpDevicePixelRatio = mobileOS.wp ? screen.width / 320 : 0;
         support.kineticScrollNeeded = mobileOS && (support.touch || support.pointers);
 
         support.hasNativeScrolling = false;

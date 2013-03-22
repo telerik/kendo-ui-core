@@ -212,6 +212,10 @@ kendo_module({
             element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
             element.addClass(that.osCssClass + " " + getOrientationClass(element));
 
+            if (support.wpDevicePixelRatio) {
+                element.css("font-size", support.wpDevicePixelRatio + "em");
+            }
+
             if (BERRYPHONEGAP) {
                 applyViewportHeight();
             }

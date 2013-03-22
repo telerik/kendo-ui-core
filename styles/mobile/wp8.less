@@ -1,5 +1,5 @@
 .km-wp {
-    font-size: 1.6em;
+    font-size: 1em;
     font-family: 'Segoe WP', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
 }
 
@@ -263,7 +263,7 @@
 {
     margin-top: -1px;
     font-size: 1.2em;
-    padding-left: 1.8em;
+    padding-left: 1.6em;
     padding-right: 1.8em;
 }
 
@@ -272,16 +272,17 @@
     display: none;
 }
 
-.km-wp .km-filter-wrap:before
-{
-    margin: 0 -1.6em 0 0.1em;
-}
-
 .km-wp .km-filter-wrap:before,
 .km-wp .km-filter-reset .km-clear
 {
     font-size: 1em;
 	color: #adadad;
+}
+
+.km-wp .km-filter-wrap:before
+{
+    font-size: .8em;
+    margin: .05em -1.3em 0 .3em;
 }
 
 .km-wp .km-filter-reset .km-clear:after
@@ -359,12 +360,15 @@
 
 .km-wp .km-switch
 {
-    height: 2.4rem;
+    font-size: .7em;
+    width: 6.4em;
+    height: 2.4em;
+    line-height: 2.4em;
 }
 
 .km-wp .km-list .km-switch
 {
-    margin-top: -1.2rem;
+    margin-top: -1.2em;
 }
 
 .km-wp .km-switch-wrapper,
@@ -377,7 +381,7 @@
 .km-wp .km-switch-wrapper
 {
 	border-style: solid;
-	border-width: 3px;
+	border-width: .2em;
 	.box-sizing(border-box);
 }
 
@@ -393,10 +397,10 @@
 
 .km-wp .km-switch-container
 {
-    left: 3px;
-    top: 3px;
-    right: 3px;
-    bottom: 3px;
+    left: .2em;
+    top: .2em;
+    right: .2em;
+    bottom: .2em;
     width: auto;
     height: auto;
     overflow: visible;
@@ -404,31 +408,31 @@
 
 .km-wp-light .km-switch-container
 {
-    .box-shadow(inset 0 0 0 3px @main-text-dark);
+    .box-shadow(inset 0 0 0 .2em @main-text-dark);
 }
 
 .km-wp-dark .km-switch-container
 {
-    .box-shadow(inset 0 0 0 3px @main-text-light);
+    .box-shadow(inset 0 0 0 .2em @main-text-light);
 }
 
 .km-wp .km-switch-handle
 {
 	width: 1.4em;
-	margin-top: -3px;
-    padding-bottom: 6px;
+	margin-top: -.2em;
+    padding-bottom: .4em;
     z-index: 1;
 }
 
 .km-wp-dark .km-switch-handle
 {
-    .box-shadow(0 0 0 4px @main-text-light);
+    .box-shadow(0 0 0 .3em @main-text-light);
 	background: @main-text-dark;
 }
 
 .km-wp-light .km-switch-handle
 {
-    .box-shadow(0 0 0 4px @main-text-dark);
+    .box-shadow(0 0 0 .3em @main-text-dark);
 	background: @main-text-light;
 }
 
@@ -452,7 +456,7 @@
 
 .km-wp.km-horizontal .km-tabstrip
 {
-	padding: .1em 0;
+	padding: .4em 0 .2em;
 }
 
 .km-wp .km-tabstrip .km-button
@@ -481,12 +485,12 @@
 	border-color: @main-text-light;
 }
 
-.km-wp .km-tabstrip .km-icon,
+.km-root .km-wp .km-tabstrip .km-icon,
 .km-wp .km-scroller-pull .km-icon
 {
-    width: 2.4rem;
-    height: 2.4rem;
-    font-size: 2.4rem;
+    width: 1em;
+    height: 1em;
+    font-size: 3.2em;
 	border-width: .08em;
 	border-style: solid;
 	.border-radius(5em);
@@ -496,29 +500,19 @@
 
 .km-wp .km-scroller-pull .km-icon
 {
-    width: 1.5rem;
-    height: 1.5rem;
-    font-size: 1.5rem;
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
 }
 
 .km-wp .km-icon:before
 {
-    margin-top: 2px;
+    margin-top: .08em;
 }
 
 .km-wp .km-icon:after
 {
-    margin-top: 1px;
-}
-
-.km-wp.km-horizontal .km-icon:before
-{
-    margin-top: 1px;
-}
-
-.km-wp.km-horizontal .km-icon:after
-{
-    margin-top: 0;
+    margin-top: .04em;
 }
 
 /* Checkboxes and Radios */
@@ -751,7 +745,7 @@
 .km-wp .km-load-more,
 .km-wp .km-scroller-pull
 {
-    font-size: 2rem;
+    font-size: 1.2em;
 }
 
 /* ListView */
@@ -783,7 +777,7 @@
     height: 1.2em;
     width: 1.3em;
     right: .4em;
-    font-size: 1.8rem;
+    font-size: 1.5em;
     margin-top: -.6em;
     border: none;
     background: @main-background;
@@ -861,13 +855,13 @@
 .km-wp .km-scroller-refresh
 {
     width: 100%;
-    height: 100px;
+    height: 4em;
     padding: 0;
     left: 0;
     .border-radius(0);
     border: 0;
-    margin: -50px 0 0;
-    font-size: 1.2rem;
+    margin: -2em 0 0;
+    font-size: 1.2em;
     text-align: center;
     vertical-align: middle;
     line-height: .65rem;
@@ -879,6 +873,11 @@
     height: 3em;
     margin: 0;
     width: 100%;
+    font-size: 1.2rem;
+}
+
+.km-load-more.km-scroller-refresh
+{
     position: relative;
 }
 
@@ -898,11 +897,11 @@
     position: absolute;
     display: none;
     font-size: 1em;
-    width: 200px;
-    left: 50%;
-    margin-left: -100px;
+    width: 100%;
+    left: 0;
+    margin-left: 0;
     bottom: 0;
-    margin-bottom: 20px;
+    margin-bottom: .8em;
 }
 
 .km-wp .km-scroller-refresh .km-template
@@ -942,13 +941,18 @@
     left: 0;
     border: 0;
     color: @main-text-dark;
-    width: 100px;
-    height: 8px;
-    font-size: 8px;
+    width: 12em;
+    height: 0;
     margin: 0;
     padding: 0;
     text-align: left;
     font-family: "Kendo UI";
+}
+
+.km-wp .km-loader .km-loading:after,
+.km-wp .km-scroller-refresh .km-icon:after
+{
+    margin-top: -.52em;
 }
 
 .km-wp .km-scroller-refresh:after,
@@ -965,6 +969,7 @@
 .km-wp .km-scroller-refresh .km-icon
 {
     top: 46%;
+    font-size: .3em;
 }
 
 .km-wp .km-loader:before,
@@ -972,8 +977,10 @@
 .km-wp .km-loader .km-loading
 {
     left: 50%;
-    margin-left: -50px;
+    margin-left: -6em;
     top: 46%;
+    font-size: .3em;
+    line-height: 0;
 }
 
 .km-wp-light .km-loader:before,
