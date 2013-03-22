@@ -39,6 +39,7 @@ require 'internal_build_upload'
 require 'cdn'
 require 'tests'
 require 'codegen'
+require 'nuget'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,
