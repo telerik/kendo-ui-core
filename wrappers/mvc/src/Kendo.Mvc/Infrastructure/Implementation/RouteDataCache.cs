@@ -46,6 +46,14 @@
     {
         private readonly string appCurrentUrl;
 
+        public override string HttpMethod
+        {
+            get
+            {
+                return "GET";
+            }
+        }
+
         public InternalHttpRequestBase(string appCurrentUrl)
         {
             this.appCurrentUrl = appCurrentUrl;
