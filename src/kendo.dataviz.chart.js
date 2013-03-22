@@ -104,6 +104,7 @@ kendo_module({
         LEGEND_ITEM_CLICK = "legendItemClick",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
+        MAX_EXPAND_DEPTH = 8,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         MINUTES = "minutes",
@@ -9180,9 +9181,14 @@ kendo_module({
         return delta;
     }
 
-    function resolveFnOptions(options, context, excluded) {
+    function expandOptions(options, context, excluded, depth) {
         var property,
             propValue;
+
+        depth = defined(depth) ? depth + 1 : 0;
+        if (depth > MAX_EXPAND_DEPTH) {
+            return;
+        }
 
         for (property in options) {
             propValue = options[property];
@@ -9191,7 +9197,7 @@ kendo_module({
                 if ($.isFunction(propValue)) {
                     options[property] = propValue(context);
                 } else if (typeof propValue === "object") {
-                    resolveFnOptions(propValue, context, excluded);
+                    expandOptions(propValue, context, excluded, depth);
                 }
             }
         }
@@ -9251,6 +9257,7 @@ kendo_module({
         duration: duration,
         floorDate: floorDate,
         lteDateIndex: lteDateIndex,
+        expandOptions: expandOptions,
         sparseArrayLimits: sparseArrayLimits,
         toDate: toDate,
         toTime: toTime

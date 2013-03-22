@@ -1012,6 +1012,57 @@
                 });
             })();
 
+            (function() {
+                var expandOptions = dataviz.expandOptions;
+
+                // ------------------------------------------------------------
+                module("Functional options");
+
+                test("replaces function with its result", function() {
+                    var opts = { foo: function() { return "bar" } };
+                    expandOptions(opts);
+
+                    equal(opts.foo, "bar");
+                });
+
+                test("executes functions with context", function() {
+                    var opts = { foo: function(context) { return context; } };
+                    expandOptions(opts, "baz");
+
+                    equal(opts.foo, "baz");
+                });
+
+                test("replaces function in nested object with its result", function() {
+                    var opts = { baz: { foo: function() { return "bar" } } };
+                    expandOptions(opts);
+
+                    equal(opts.baz.foo, "bar");
+                })
+
+                test("expands functions up to 8 levels deep", function() {
+                    var opts = {};
+
+                    for (var i = 0, root = opts; i < 9; i++) {
+                        var child = root["n" + i] = {};
+                        child.foo = function() { return "bar" };
+
+                        root = root["n" + i];
+                    }
+
+                    expandOptions(opts);
+
+                    equal(opts.n0.n1.n2.n3.n4.n5.n6.n7.foo, "bar");
+                    ok($.isFunction(opts.n0.n1.n2.n3.n4.n5.n6.n7.n8.foo));
+                });
+
+                test("excluded options are ignored", function() {
+                    var opts = { bar: function() { } };
+                    expandOptions(opts, {}, ["bar"]);
+
+                    ok($.isFunction(opts.bar));
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
