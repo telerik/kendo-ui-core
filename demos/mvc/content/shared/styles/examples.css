@@ -2520,7 +2520,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 }
 
 .tablet .android #mobile-application-container,
-.tablet .blackberry #mobile-application-container
+.tablet .blackberry #mobile-application-container,
+.tablet .wp #mobile-application-container
 {
     height: 358px;
 }
@@ -2535,6 +2536,12 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     height: 362px;
     padding: 73px 77px 73px 77px;
     background-image: url("playbook.png");
+}
+
+.tablet #device-wrapper.wp {
+    height: 358px;
+    padding: 60px 60px 54px 59px;
+    background-image: url("w8.png");
 }
 
 #device-wrapper,
