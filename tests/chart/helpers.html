@@ -1062,6 +1062,13 @@
                     ok($.isFunction(opts.bar));
                 });
 
+                test("excluded options children are ignored", function() {
+                    var opts = { bar: { baz: function() { } } };
+                    expandOptions(opts, {}, ["bar"]);
+
+                    ok($.isFunction(opts.bar.baz));
+                });
+
             })();
         </script>
 

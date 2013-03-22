@@ -2602,11 +2602,11 @@ kendo_module({
                         options.color = options.negativeColor;
                     }
 
-                    resolveFnOptions(options, {
+                    expandOptions(options, {
                         value: point.value,
                         series: point.series,
                         dataItem: point.dataItem
-                    }, ["data"]);
+                    }, ["data", "aggregate"]);
                 }
             }
         },
