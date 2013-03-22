@@ -27,6 +27,7 @@ kendo_module({
         END = "end",
         CANCEL = "cancel",
         TAP = "tap",
+        RELEASE = "release",
         GESTURESTART = "gesturestart",
         GESTURECHANGE = "gesturechange",
         GESTUREEND = "gestureend",
@@ -202,6 +203,8 @@ kendo_module({
                 that._trigger(TAP, touchInfo);
             }
 
+            that._trigger(RELEASE, touchInfo);
+
             that.dispose();
         },
 
@@ -332,6 +335,7 @@ kendo_module({
             START,
             MOVE,
             END,
+            RELEASE,
             CANCEL,
             GESTURESTART,
             GESTURECHANGE,

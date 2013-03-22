@@ -24,7 +24,6 @@ kendo_module({
         ns = ".kendoNumericTextBox",
         TOUCHEND = "touchend",
         MOUSELEAVE = "mouseleave" + ns,
-        MOUSEUP = "touchcancel" + ns + " " + "touchend" + ns + " mouseup" + ns + " " + MOUSELEAVE,
         HOVEREVENTS = "mouseenter" + ns + " " + MOUSELEAVE,
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
@@ -266,6 +265,10 @@ kendo_module({
         _arrows: function() {
             var that = this,
             arrows,
+            _release = function() {
+                clearTimeout( that._spinning );
+                arrows.removeClass(SELECTED);
+            },
             options = that.options,
             spinners = options.spinners,
             element = that.element;
@@ -279,20 +282,15 @@ kendo_module({
                 arrows.wrapAll('<span class="k-select"/>');
             }
 
-            arrows.on(MOUSEUP, function() {
-                clearTimeout( that._spinning );
-                arrows.removeClass(SELECTED);
-            });
-
             if (!spinners) {
                 arrows.parent().toggle(spinners);
                 that._inputWrapper.addClass("k-expand-padding");
             }
 
             that._upArrow = arrows.eq(0);
-            that._upArrowEventHandler = new kendo.UserEvents(that._upArrow);
+            that._upArrowEventHandler = new kendo.UserEvents(that._upArrow, { release: _release });
             that._downArrow = arrows.eq(1);
-            that._downArrowEventHandler = new kendo.UserEvents(that._downArrow);
+            that._downArrowEventHandler = new kendo.UserEvents(that._downArrow, { release: _release });
         },
 
         _blur: function() {
