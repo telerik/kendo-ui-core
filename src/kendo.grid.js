@@ -938,7 +938,7 @@ kendo_module({
 
                 that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
-                    filter: that.content ? ">.k-grid-header " + HEADERCELLS : ">table>.k-grid-header " + HEADERCELLS,
+                    filter: that.content ? ".k-grid-header:first " + HEADERCELLS : "table:first>.k-grid-header " + HEADERCELLS,
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
@@ -1731,8 +1731,8 @@ kendo_module({
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
-                    draggableElements: that.content ? ">.k-grid-header " + GROUPINGDRAGGABLES : ">table>.k-grid-header " + GROUPINGDRAGGABLES,
-                    filter: that.content ? ">.k-grid-header " + GROUPINGFILTER : ">table>.k-grid-header " + GROUPINGFILTER,
+                    draggableElements: that.content ? ".k-grid-header:first " + GROUPINGDRAGGABLES : "table:first>.k-grid-header " + GROUPINGDRAGGABLES,
+                    filter: that.content ? ".k-grid-header:first " + GROUPINGFILTER : "table:first>.k-grid-header " + GROUPINGFILTER,
                     allowDrag: that.options.reorderable
                 }));
             }
