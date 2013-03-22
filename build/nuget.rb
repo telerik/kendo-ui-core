@@ -37,5 +37,6 @@ task :nuget => [NUGET_CSS, NUGET_JS] do
 </package>
     })
 
-    sh "mono --runtime=v4.0 build/lib/NuGet.exe pack #{NUGET_SPEC} -OutputDirectory dist/nuget/ && mono --runtime=v4.0 build/lib/NuGet.exe push dist/nuget/KendoUIWeb.#{VERSION}.nupkg"
+    sh "mono --runtime=v4.0 build/lib/NuGet.exe pack #{NUGET_SPEC} -OutputDirectory dist/nuget/"
+    #sh"mono --runtime=v4.0 build/lib/NuGet.exe push dist/nuget/KendoUIWeb.#{VERSION}.nupkg"
 end
