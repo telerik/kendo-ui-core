@@ -15,8 +15,8 @@ STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
 ARCHIVE_ROOT = "/kendo-builds"
 
-ADMIN_URL = 'http://integrationadmin.telerik.com/'
-ADMIN_LOGIN = 'petyo.ivanov@telerik.local'
+ADMIN_URL = 'http://admin.telerik.com/'
+ADMIN_LOGIN = 'petyo.ivanov@telerik.com'
 ADMIN_PASS = 'ultra'
 
 require 'version'
