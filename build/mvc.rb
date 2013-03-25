@@ -21,8 +21,6 @@ MVC_DLL = FileList['Kendo.Mvc.dll']
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
             .include(MVC_RESOURCES)
 
-p MVC_DLL
-
 # Delete all Kendo*.dll files when `rake clean`
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
