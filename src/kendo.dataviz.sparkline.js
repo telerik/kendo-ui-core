@@ -1,9 +1,9 @@
 kendo_module({
-    id: "sparkline",
+    id: "dataviz.sparkline",
     name: "Sparkline",
     category: "dataviz",
     description: "Sparkline widgets.",
-    depends: [ "dataviz-chart" ]
+    depends: [ "dataviz.chart" ]
 });
 
 (function ($, undefined) {

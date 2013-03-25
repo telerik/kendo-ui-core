@@ -1,9 +1,9 @@
 kendo_module({
-    id: "dataviz-svg",
+    id: "dataviz.svg",
     name: "Output: SVG",
     description: "Support for SVG rendering",
     category: "dataviz",
-    depends: [ "dataviz-core" ]
+    depends: [ "dataviz.core" ]
 });
 
 (function () {

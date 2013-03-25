@@ -1,9 +1,9 @@
 kendo_module({
-    id: "themes",
+    id: "dataviz.themes",
     name: "Themes",
     description: "Built-in themes for the DataViz widgets",
     category: "dataviz",
-    depends: [ "dataviz-core" ]
+    depends: [ "dataviz.core" ]
 });
 
 (function () {

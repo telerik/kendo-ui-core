@@ -1,9 +1,9 @@
 kendo_module({
-    id: "gauge",
+    id: "dataviz.gauge",
     name: "Gauge",
     category: "dataviz",
     description: "Radial gauge.",
-    depends: [ "dataviz-core", "dataviz-svg" ]
+    depends: [ "dataviz.core", "dataviz.svg" ]
 });
 
 (function ($, undefined) {

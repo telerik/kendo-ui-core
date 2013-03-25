@@ -1,9 +1,9 @@
 kendo_module({
-    id: "stock-chart",
+    id: "dataviz.stockchart",
     name: "StockChart",
     category: "dataviz",
     description: "StockChart widget and associated financial series.",
-    depends: [ "dataviz-chart" ]
+    depends: [ "dataviz.chart" ]
 });
 
 (function ($, undefined) {
