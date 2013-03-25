@@ -9,7 +9,7 @@
 
 div.k-chart,
 div.k-gauge,
-div.k-sparkline,
+span.k-sparkline,
 .k-stockchart
 {
     background-color: transparent;
@@ -180,9 +180,14 @@ div.k-sparkline,
 /* Sparklines */
 
 .k-sparkline,
-.k-sparkline span{
+.k-sparkline span {
     display: inline-block;
     *display: inline;
     zoom: 1;
     vertical-align: top;
+}
+
+.k-sparkline span {
+    height: 100%;
+    width: 100%;
 }
