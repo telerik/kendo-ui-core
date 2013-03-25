@@ -537,16 +537,18 @@ kendo_module({
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
-            } else if (key === keys.ENTER) {
-                if (visible) {
-                    if (current) {
-                        that._select(current);
+            } else if (key === keys.ENTER && visible) {
+                if (current) {
+                    if (that.trigger(SELECT, {item: current})) {
+                        that.close();
+                        return;
                     }
-
-                    that._change();
-                    that.close();
-                    e.preventDefault();
+                    that._select(current);
                 }
+
+                that._change();
+                that.close();
+                e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
                     e.preventDefault();
