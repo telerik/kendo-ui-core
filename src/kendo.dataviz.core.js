@@ -1,5 +1,5 @@
 kendo_module({
-    id: "dataviz-core",
+    id: "dataviz.core",
     name: "Core",
     description: "The DataViz core functions",
     category: "dataviz",
