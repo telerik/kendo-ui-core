@@ -19,6 +19,8 @@
         <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.modalview.js"></script>
         <script src="../../src/kendo.mobile.popover.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
@@ -35,6 +37,18 @@
         <script type="text/fixture" id="fixture">
             <div data-role="view">
                 <a href="#foo" data-rel="popover" data-role="button" id="fooAnchor">Open foo</a>
+                <div data-role="popover" id="foo">
+                    <div data-role="view">
+                        Foo
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/fixture" id="fixture2">
+            <div data-role="view"></div>
+            <div data-role="modalview" id="modalview">
+                <a href="#foo" data-rel="popover" data-role="button" id="fooAnchor2">Open foo</a>
                 <div data-role="popover" id="foo">
                     <div data-role="view">
                         Foo
@@ -87,6 +101,16 @@
             test("is visible when open", 1, function(){
                 popOver.openFor(root.find("#fooAnchor"));
                 visible("#foo");
+            });
+
+            test("when in ModalView, its popup is used as parent", 1, function(){
+                root.empty();
+
+                setup("#fixture2");
+                popOver.openFor(root.find("#fooAnchor2"));
+
+                ok(popOver.popup.overlay.parent()[0] == $("#modalview").data("kendoMobileModalView").wrapper[0]);
+                teardown();
             });
 
             asyncTest("provides target in event handler", 1, function(){
