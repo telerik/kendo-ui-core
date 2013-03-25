@@ -102,10 +102,6 @@ kendo_module({
         },
 
         hideStart: function() {
-            var that = this;
-            if (that.layout) {
-                that.layout.detach(that);
-            }
         },
 
         hideComplete: function() {
@@ -361,12 +357,12 @@ kendo_module({
             HIDE
         ],
 
-        setup: function (view) {
+        setup: function(view) {
             if (!view.header[0]) { view.header = this.header; }
             if (!view.footer[0]) { view.footer = this.footer; }
         },
 
-        detach: function (view) {
+        detach: function(view) {
             var that = this;
             if (view.header === that.header) {
                 view.element.prepend(that.header.detach().clone(true));
@@ -380,7 +376,13 @@ kendo_module({
         },
 
         attach: function(view) {
-            var that = this;
+            var that = this,
+                previousView = that.currentView;
+
+            if (previousView) {
+                that.detach(previousView);
+            }
+
             if (view.header === that.header) {
                 that.header.detach();
                 view.element.children(roleSelector("header")).remove();
@@ -394,6 +396,7 @@ kendo_module({
             }
 
             that.trigger(SHOW, {layout: that, view: view});
+            that.currentView = view;
         }
     });
 
