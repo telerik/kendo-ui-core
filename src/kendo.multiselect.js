@@ -208,12 +208,12 @@ kendo_module({
                     .on("mousedown" + ns, function(e) {
                         e.preventDefault();
 
-                        if (e.target.className.indexOf("k-delete") == -1) {
-                            that.open();
-                        }
-
                         if (that.input[0] !== activeElement()) {
                             that.input.focus();
+                        }
+
+                        if (e.target.className.indexOf("k-delete") == -1 && that.options.minLength === 0) {
+                            that.open();
                         }
                     });
 
