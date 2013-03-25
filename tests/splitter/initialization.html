@@ -146,6 +146,14 @@
 
                 equal(innerSplitter.find(">div:first").height(), 50)
             });
+
+            test("initialization filters out script blocks", function() {
+                var dom = $("<div><div></div><div></div><script><\/script></div>");
+
+                dom.kendoSplitter();
+
+                equal(dom.find(".k-pane").length, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

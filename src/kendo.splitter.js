@@ -206,7 +206,7 @@ kendo_module({
 
             that.element
                 .addClass("k-widget").addClass("k-splitter")
-                .children()
+                .children(":not(script)")
                 .each(function (index, pane) {
                     var config = panesConfig && panesConfig[index];
 
