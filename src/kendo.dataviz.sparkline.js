@@ -3,7 +3,7 @@ kendo_module({
     name: "Sparkline",
     category: "dataviz",
     description: "Sparkline widgets.",
-    depends: [ "chart" ]
+    depends: [ "dataviz-chart" ]
 });
 
 (function ($, undefined) {
