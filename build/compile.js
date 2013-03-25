@@ -37,11 +37,13 @@ if (ARGV.bundle) {
     var destination = files.shift();
     var destination_min = destination.replace(/\.js$/i, ".min.js");
     var toplevel = new u2.AST_Toplevel({ body: [] });
+    var orig_data = [];
     files.forEach(function(file){
+        orig_data.push(fs.readFileSync(file, "utf8"));
         var ast = compile_one_file(file, ast);
         toplevel.body = toplevel.body.concat(ast.body);
     });
-    fs.writeFileSync(destination, toplevel.print_to_string({ beautify: true, comments: true }));
+    fs.writeFileSync(destination, orig_data.join("\n"));
     toplevel = squeeze(toplevel);
     if (!ARGV["nomangle"]) {
         toplevel.figure_out_scope();
