@@ -3,7 +3,7 @@ kendo_module({
     name: "StockChart",
     category: "dataviz",
     description: "StockChart widget and associated financial series.",
-    depends: [ "chart" ]
+    depends: [ "dataviz-chart" ]
 });
 
 (function ($, undefined) {
