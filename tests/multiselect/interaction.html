@@ -355,6 +355,20 @@
 
                 equal(multiselect.calls("_height"), 1);
             });
+
+            test("MultiSelect honours minLength on click", function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select, {
+                    minLength: 1,
+                    autoBind: false
+                });
+
+                multiselect.wrapper.mousedown();
+
+                equal(multiselect.input[0], document.activeElement);
+                equal(multiselect.ul.children().length, 0);
+                ok(!multiselect.popup.visible());
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
