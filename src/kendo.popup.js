@@ -344,9 +344,11 @@ kendo_module({
                 anchor = $(options.anchor)[0],
                 toggleTarget = options.toggleTarget,
                 target = kendo.eventTarget(e),
-                popup = $(target).closest(".k-popup")[0];
+                popup = $(target).closest(".k-popup"),
+                mobile = popup.parent().parent(".km-shim").length;
 
-            if (popup && popup !== that.element[0] ){
+            popup = popup[0];
+            if (!mobile && popup && popup !== that.element[0]){
                 return;
             }
 

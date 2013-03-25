@@ -67,9 +67,10 @@ kendo_module({
     var Popup = Widget.extend({
         init: function(element, options) {
             var that = this,
-                container = mobile.application.element,
+                containerPopup = element.closest(".km-modalview-wrapper"),
+                container = containerPopup[0] ? containerPopup : mobile.application.element,
                 popupOptions = {
-                    viewport: kendo.mobile.application.element,
+                    viewport: mobile.application.element,
                     open: function() {
                         that.overlay.show();
                     },
