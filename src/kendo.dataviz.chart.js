@@ -2606,7 +2606,7 @@ kendo_module({
                         value: point.value,
                         series: point.series,
                         dataItem: point.dataItem
-                    }, ["data", "aggregate"]);
+                    }, { defaults: point.series._defaults, excluded: ["data", "aggregate"] });
                 }
             }
         },
@@ -8656,14 +8656,17 @@ kendo_module({
         for (i = 0; i < seriesLength; i++) {
             seriesType = series[i].type || options.seriesDefaults.type;
 
-            series[i] = deepExtend(
+            var baseOptions = deepExtend(
                 {},
                 commonThemeDefaults,
                 themeSeriesDefaults[seriesType],
                 { tooltip: options.tooltip },
                 commonDefaults,
-                seriesDefaults[seriesType],
-                series[i]);
+                seriesDefaults[seriesType]
+            );
+
+            series[i]._defaults = baseOptions;
+            series[i] = deepExtend({}, baseOptions, series[i]);
         }
     }
 
@@ -8693,6 +8696,7 @@ kendo_module({
 
         for (i = 0; i < seriesLength; i++) {
             series[i].color = series[i].color || colors[i % colors.length];
+            series[i]._defaults.color = series[i]._defaults.color || colors[i % colors.length];
         }
     }
 
@@ -9181,23 +9185,30 @@ kendo_module({
         return delta;
     }
 
-    function expandOptions(options, context, excluded, depth) {
+    function expandOptions(options, context, state) {
         var property,
-            propValue;
+            propValue,
+            excluded,
+            defaults,
+            depth;
 
-        depth = defined(depth) ? depth + 1 : 0;
+        state = state || {};
+        excluded = state.excluded = state.excluded || [];
+        defaults = state.defaults = state.defaults || {};
+        depth = state.depth = defined(state.depth) ? state.depth + 1 : 0;
+
         if (depth > MAX_EXPAND_DEPTH) {
             return;
         }
 
         for (property in options) {
-            propValue = options[property];
-
-            if (!inArray(property, excluded)) {
+            if (!inArray(property, state.excluded)) {
+                propValue = options[property];
                 if ($.isFunction(propValue)) {
-                    options[property] = propValue(context);
+                    options[property] = propValue(context) || defaults[property];
                 } else if (typeof propValue === "object") {
-                    expandOptions(propValue, context, excluded, depth);
+                    state.defaults = defaults[property];
+                    expandOptions(propValue, context, state);
                 }
             }
         }

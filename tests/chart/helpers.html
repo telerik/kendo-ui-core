@@ -1057,16 +1057,23 @@
 
                 test("excluded options are ignored", function() {
                     var opts = { bar: function() { } };
-                    expandOptions(opts, {}, ["bar"]);
+                    expandOptions(opts, {}, { excluded: ["bar"] });
 
                     ok($.isFunction(opts.bar));
                 });
 
                 test("excluded options children are ignored", function() {
                     var opts = { bar: { baz: function() { } } };
-                    expandOptions(opts, {}, ["bar"]);
+                    expandOptions(opts, {}, { excluded: ["bar"] });
 
                     ok($.isFunction(opts.bar.baz));
+                });
+
+                test("undefined result is replaced by default value", function() {
+                    var opts = { bar: function() {} };
+                    expandOptions(opts, {}, { defaults: { bar: "foo" } });
+
+                    equal(opts.bar, "foo");
                 });
 
             })();
