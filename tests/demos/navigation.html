@@ -25,6 +25,7 @@
 
                 $.ajax({
                     url: file,
+                    dataType: "text",
                     success: function(content) {
                         try {
                             var result = JSON.parse(content);
@@ -39,7 +40,7 @@
                 });
             }
 
-            test("suite.nav.json files are valid JSON", function() {
+            test("suite.nav.json files are valid JSON", 3, function() {
                 isValidJSON("../../demos/mvc/App_Data/web.nav.json");
                 isValidJSON("../../demos/mvc/App_Data/dataviz.nav.json");
                 isValidJSON("../../demos/mvc/App_Data/mobile.nav.json");
