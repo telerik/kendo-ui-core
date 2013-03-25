@@ -2,9 +2,8 @@
 {
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
-    using System.Collections.Generic;
+    using System.Collections;
     using System.IO;
-    using System.Linq;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
@@ -78,7 +77,7 @@
             set;
         }
 
-        public IEnumerable<string> Value
+        public IEnumerable Value
         {
             get;
             set;
@@ -168,18 +167,17 @@
             base.WriteHtml(writer);
         }
 
-        private IEnumerable<string> GetValue()
+        private IEnumerable GetValue()
         {
             ModelState state;
             if (ViewData.ModelState.TryGetValue(Name, out state) && (state.Value != null))
             {
                 //if (ViewData.ModelState.IsValidField(Name)) TODO: Do I need this ?
-                return state.Value.ConvertTo(typeof(string[]), null) as IEnumerable<string>;
+                return state.Value.ConvertTo(typeof(string[]), null) as IEnumerable;
             }
             else if (Value == null)
             {
-                //if (Name.HasValue())   
-                return ViewData.Eval(Name) as IEnumerable<string>;
+                return ViewData.Eval(Name) as IEnumerable;
             }
 
             return Value;

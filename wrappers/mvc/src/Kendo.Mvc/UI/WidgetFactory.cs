@@ -1608,9 +1608,9 @@ namespace Kendo.Mvc.UI.Fluent
             return model != null && model.GetType().IsPredefinedType() ? Convert.ToString(model) : string.Empty;
         }
 
-        private IEnumerable<string> GetIEnumerableValues<TValue>(Expression<Func<TModel, TValue>> expression)
+        private IEnumerable GetIEnumerableValues<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            return ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as IEnumerable<string>;
+            return ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as IEnumerable;
         }
 
         private Nullable<TValue> GetRangeValidationParameter<TValue>(IEnumerable<ModelValidator> validators, string parameter) where TValue : struct

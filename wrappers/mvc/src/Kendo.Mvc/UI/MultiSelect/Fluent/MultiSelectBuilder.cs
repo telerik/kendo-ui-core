@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using Kendo.Mvc.UI;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -347,7 +348,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public MultiSelectBuilder Value(IEnumerable<string> value)
+        public MultiSelectBuilder Value(IEnumerable value)
         {
             Component.Value = value;
 
