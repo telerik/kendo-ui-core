@@ -1240,7 +1240,11 @@ kendo_module({
                 if (node) {
                     subGroup(parentNode).empty();
 
-                    append(items, parentNode);
+                    if (!items.length) {
+                        updateNodeHtml(parentNode);
+                    } else {
+                        append(items, parentNode);
+                    }
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
                         items: items,

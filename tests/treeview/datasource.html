@@ -760,6 +760,27 @@
                 equal(calls, 2);
             });
 
+            test("returning an empty response from the server removes the expand icon", function() {
+                var dataFor = {
+                    "root": [ { id: 1, text: "foo", hasChildren: true } ],
+                    1: []
+                };
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success(dataFor[options.data.id || "root"]);
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.expand(".k-item");
+
+                equal(treeview.find(".k-icon").length, 0);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
