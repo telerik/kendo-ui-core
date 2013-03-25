@@ -10,12 +10,18 @@ MVC_WRAPPERS_SRC = FileList[MVC_SRC_ROOT + '**/*.cs']
             .include(MVC_SRC_ROOT + '**/*.dll')
             .exclude(MVC_SRC_ROOT + '**/Kendo*.dll')
 
-# The list of assemblies produced when building the wrappers - Kendo.Mvc.dll and satellite assemblies
-MVC_DLL = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
-            .include('Kendo.Mvc.dll')
-            .include('Kendo.Mvc.xml')
+MVC_RESOURCES = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
             .sub(/Messages\.(.+).resx/, '\1/Kendo.Mvc.resources.dll')
+
+
+# The list of assemblies produced when building the wrappers - Kendo.Mvc.dll and satellite assemblies
+MVC_DLL = FileList['Kendo.Mvc.dll']
+            .include('Kendo.Mvc.xml')
+            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
+            .include(MVC_RESOURCES)
+
+p MVC_DLL
 
 # Delete all Kendo*.dll files when `rake clean`
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
@@ -30,18 +36,7 @@ MVC_RAZOR_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTempl
 MVC_ASCX_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.ascx']
 
 # Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
-rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' do |t|
-    platform = RbConfig::CONFIG['host_os']
-
-    # xbuild can't set the version of satellite assemblies so we build them using `al`
-    if platform =~ /linux|darwin/
-        culture = t.name.pathmap("%-1d")
-        obj = "wrappers/mvc/src/Kendo.Mvc/obj/Release/Kendo.Mvc.Resources.Messages.#{culture}.resources";
-        key = 'wrappers/mvc/src/shared/Kendo.snk'
-
-        sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{t.name} /template:#{t.prerequisites[0]} /keyfile:#{key}", :verbose => VERBOSE
-    end
-end
+rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 # XML API documentation depends on Kendo.Mvc.Dll
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
@@ -172,6 +167,19 @@ end
 # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
 file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_WRAPPERS_SRC do |t|
     msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
+
+    MVC_RESOURCES.each do |resource|
+        platform = RbConfig::CONFIG['host_os']
+
+        # xbuild can't set the version of satellite assemblies so we build them using `al`
+        if platform =~ /linux|darwin/
+            culture = resource.pathmap("%-1d")
+            obj = "wrappers/mvc/src/Kendo.Mvc/obj/Release/Kendo.Mvc.Resources.Messages.#{culture}.resources";
+            key = 'wrappers/mvc/src/shared/Kendo.snk'
+
+            sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{resource} /template:#{t.name} /keyfile:#{key}", :verbose => VERBOSE
+        end
+    end
 end
 
 # Produce Kendo.Mvc.Examples.dll by building Kendo.Mvc.Examples.csproj
