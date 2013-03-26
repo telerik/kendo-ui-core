@@ -298,7 +298,10 @@ kendo_module({
                         saveUrl: that.options.transport.uploadUrl,
                         autoUpload: true
                     },
-                    upload: proxy(that._fileUpload, that)
+                    upload: proxy(that._fileUpload, that),
+                    error: function(e) {
+                        that._error({ xhr: e.XMLHttpRequest, status: "error" });
+                    }
                 }).end();
 
             that.upload = that.toolbar
