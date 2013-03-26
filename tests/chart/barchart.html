@@ -83,10 +83,10 @@
                 });
 
                 test("legend series are populated", function() {
-                    equal(legend.options.items[0].name, "Value");
+                    equal(legend.options.items[0].text, "Value");
                 });
 
-                test("series can be excluded from leged", function() {
+                test("series can be excluded from legend", function() {
                     createChart([{
                         name: "Value",
                         type: "bar",
@@ -111,7 +111,7 @@
                         }
                     });
 
-                    equal(legend.options.items[0].name, "Value-test");
+                    equal(legend.options.items[0].text, "Value-test");
                 });
 
                 test("legend is positioned at right", function() {

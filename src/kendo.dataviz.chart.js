@@ -101,6 +101,7 @@ kendo_module({
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
         LEFT = "left",
+        LEGEND_LABEL_CLICK = "legendLabelClick",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
         MAX_VALUE = Number.MAX_VALUE,
@@ -263,6 +264,7 @@ kendo_module({
             SERIES_CLICK,
             SERIES_HOVER,
             AXIS_LABEL_CLICK,
+            LEGEND_LABEL_CLICK,
             PLOT_AREA_CLICK,
             DRAG_START,
             DRAG,
@@ -1214,6 +1216,31 @@ kendo_module({
         }
     });
 
+    var LegendLabel = Text.extend({
+        init: function(item, options) {
+            var label = this;
+
+            label.item = item;
+
+            Text.fn.init.call(label, item.text,
+                deepExtend({ id: uniqueId() }, options)
+            );
+
+            label.enableDiscovery();
+        },
+
+        click: function(widget, e) {
+            var item = this.item;
+
+            widget.trigger(LEGEND_LABEL_CLICK, {
+                element: $(e.target),
+                text: item.text,
+                color: item.color,
+                series: item.series
+            });
+        }
+    });
+
     var Legend = ChartElement.extend({
         init: function(options) {
             var legend = this;
@@ -1243,15 +1270,10 @@ kendo_module({
             var legend = this,
                 items = legend.options.items,
                 count = items.length,
-                label,
-                name,
                 i;
 
             for (i = 0; i < count; i++) {
-                name = items[i].name;
-                    label = new Text(name, legend.options.labels);
-
-                legend.append(label);
+                legend.append(new LegendLabel(items[i], legend.options.labels));
             }
         },
 
@@ -1286,20 +1308,15 @@ kendo_module({
                 markerSize = legend.markerSize(),
                 group = view.createGroup({ zIndex: options.zIndex }),
                 border = options.border || {},
-                padding,
-                markerBox,
-                labelBox,
-                color,
-                label,
-                box,
-                i;
+                padding, markerBox, labelBox, color,
+                label, box, i;
 
             append(group.children, ChartElement.fn.getViewElements.call(legend, view));
 
             for (i = 0; i < count; i++) {
                 color = items[i].color;
                 label = children[i];
-                markerBox = new Box2D();
+                markerBox = Box2D();
                 box = label.box;
 
                 labelBox = labelBox ? labelBox.wrap(box) : box.clone();
@@ -1339,12 +1356,9 @@ kendo_module({
                 children = legend.children,
                 childrenCount = children.length,
                 labelBox = children[0].box.clone(),
-                offsetX,
-                offsetY,
                 margin = getSpacing(options.margin),
                 markerSpace = legend.markerSize() * 2,
-                label,
-                i;
+                offsetX, offsetY, label, i;
 
             // Position labels below each other
             for (i = 1; i < childrenCount; i++) {
@@ -1400,7 +1414,7 @@ kendo_module({
 
                 boxWidth += label.box.width() + markerWidth;
                 if (boxWidth > plotAreaWidth - markerWidth) {
-                    label.box = new Box2D(box.x1, box.y2,
+                    label.box = Box2D(box.x1, box.y2,
                         box.x1 + label.box.width(), box.y2 + label.box.height());
                     boxWidth = label.box.width() + markerWidth;
                     labelY = label.box.y1;
@@ -5044,8 +5058,9 @@ kendo_module({
                 }
 
                 chart.legendItems.push({
-                    name: text,
-                    color: point.series.color
+                    text: text,
+                    color: point.series.color,
+                    series: point.series
                 });
             }
         },
@@ -5867,7 +5882,11 @@ kendo_module({
                                 series: currentSeries
                             });
                         }
-                        data.push({ name: text, color: currentSeries.color });
+                        data.push({
+                            text: text,
+                            color: currentSeries.color,
+                            series: currentSeries
+                        });
                     }
                 }
             }
