@@ -732,16 +732,16 @@ kendo_module({
                 a = selector(a);
                 b = selector(b);
 
-                if (a == null && b ==null) {
+                if (a == null && b == null) {
                     return 0;
                 }
 
-                if ((a && !b && a > 0) || b == null) {
-                    return 1;
+                if (a == null) {
+                    return -1;
                 }
 
-                if (b && !a && b > 0) {
-                    return -1;
+                if (b == null) {
+                    return 1;
                 }
 
                 return a > b ? 1 : (a < b ? -1 : 0);
@@ -758,11 +758,11 @@ kendo_module({
                     return 0;
                 }
 
-                if ((a && !b && a > 0) || b == null) {
+                if (b == null) {
                     return -1;
                 }
 
-                if ((b && !a && b > 0) || a == null) {
+                if (a == null) {
                     return 1;
                 }
 

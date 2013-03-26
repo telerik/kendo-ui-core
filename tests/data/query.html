@@ -1531,6 +1531,110 @@
                 equal(result[0].items[1].foo, 2);
             });
 
+            test("sort asc by nullable string with more than 10 items", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: "foo" },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: "foo" },
+                    { foo: 5, bar: "foo" },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: "foo" },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: "foo" },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: undefined },
+                    { foo: 12, bar: "foo" },
+                    { foo: 13, bar: "foo" }
+                ];
+                var result = new Query(data).sort({ field: "bar", dir: "asc" }).toArray();
+
+                equal(result[0].bar, null);
+                equal(result[1].bar, null);
+                equal(result[2].bar, null);
+                equal(result[3].bar, null);
+                equal(result[4].bar, null);
+                equal(result[5].bar, null);
+                equal(result[6].bar, "foo");
+                equal(result[7].bar, "foo");
+                equal(result[8].bar, "foo");
+                equal(result[9].bar, "foo");
+                equal(result[10].bar, "foo");
+                equal(result[11].bar, "foo");
+                equal(result[12].bar, "foo");
+            });
+
+            test("sort desc by nullable string with more than 10 items", function() {
+                var data = [
+                    { foo: 1, bar: "foo" },
+                    { foo: 2, bar: null },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: "foo" },
+                    { foo: 5, bar: "foo" },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: "foo" },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: "foo" },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: "foo" },
+                    { foo: 13, bar: "foo" }
+                ];
+
+                var result = new Query(data).sort({ field: "bar", dir: "desc" }).toArray();
+
+                equal(result[0].bar, "foo");
+                equal(result[1].bar, "foo");
+                equal(result[2].bar, "foo");
+                equal(result[3].bar, "foo");
+                equal(result[4].bar, "foo");
+                equal(result[5].bar, "foo");
+                equal(result[6].bar, "foo");
+
+                equal(result[7].bar, null);
+                equal(result[8].bar, null);
+                equal(result[9].bar, null);
+                equal(result[10].bar, null);
+                equal(result[11].bar, null);
+                equal(result[12].bar, null);
+            });
+
+            test("sort desc by nullable string with more than 10 items", function() {
+                var data = [
+                    { foo: 1, bar: "foo" },
+                    { foo: 2, bar: null },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: "foo" },
+                    { foo: 5, bar: "foo" },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: "foo" },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: "foo" },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: "foo" },
+                    { foo: 13, bar: "foo" }
+                ];
+
+                var result = new Query(data).sort({ field: "bar", dir: "desc" }).toArray();
+
+                equal(result[0].bar, "foo");
+                equal(result[1].bar, "foo");
+                equal(result[2].bar, "foo");
+                equal(result[3].bar, "foo");
+                equal(result[4].bar, "foo");
+                equal(result[5].bar, "foo");
+                equal(result[6].bar, "foo");
+
+                equal(result[7].bar, null);
+                equal(result[8].bar, null);
+                equal(result[9].bar, null);
+                equal(result[10].bar, null);
+                equal(result[11].bar, null);
+                equal(result[12].bar, null);
+            });
+
+
             test("group aggregates are calculated if provided", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
