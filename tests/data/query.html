@@ -1204,7 +1204,204 @@
                 equal(secondGroup.items[1].items.length, 1);
             });
 
-            test("groupby groups data by multiple fields with 3 levels", function() {
+            test("group by nullable string with more than 10 items", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: "foo" },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: "foo" },
+                    { foo: 5, bar: "foo" },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: "foo" },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: "foo" },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: "foo" },
+                    { foo: 13, bar: "foo" }
+                ];
+
+                var result = new Query(data).group({ field: "bar" }).toArray();
+
+                equal(result.length, 2);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, null);
+                equal(result[0].items.length, 6);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, "foo");
+                equal(result[1].items.length, 7);
+            });
+
+            test("group by nullable string with more than 10 items descending", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: "foo" },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: "foo" },
+                    { foo: 5, bar: "foo" },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: "foo" },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: "foo" },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: "foo" },
+                    { foo: 13, bar: "foo" }
+                ];
+
+                var result = new Query(data).group({ field: "bar", dir: "desc" }).toArray();
+
+                equal(result.length, 2);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, "foo");
+                equal(result[0].items.length, 7);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, null);
+                equal(result[1].items.length, 6);
+            });
+
+            test("group by nullable boolean with more than 10 items", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: true },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: false },
+                    { foo: 5, bar: true },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: true },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: false },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: false },
+                    { foo: 13, bar: true }
+                ];
+
+                var result = new Query(data).group({ field: "bar" }).toArray();
+
+                equal(result.length, 3);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, null);
+                equal(result[0].items.length, 6);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, false);
+                equal(result[1].items.length, 3);
+
+                equal(result[2].field, "bar");
+                equal(result[2].value, true);
+                equal(result[2].items.length, 4);
+            });
+
+            test("group by nullable boolean with more than 10 items descending", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: true },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: false },
+                    { foo: 5, bar: true },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: true },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: false },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: false },
+                    { foo: 13, bar: true }
+                ];
+
+                var result = new Query(data).group({ field: "bar", dir: "desc" }).toArray();
+
+                equal(result.length, 3);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, true);
+                equal(result[0].items.length, 4);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, false);
+                equal(result[1].items.length, 3);
+
+                equal(result[2].field, "bar");
+                equal(result[2].value, null);
+                equal(result[2].items.length, 6);
+            });
+
+            test("group by nullable int with more than 10 items", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: 1 },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: 0 },
+                    { foo: 5, bar: 1 },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: 1 },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: 0 },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: 0 },
+                    { foo: 13, bar: 1 }
+                ];
+
+                var result = new Query(data).group({ field: "bar" }).toArray();
+
+                equal(result.length, 3);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, null);
+                equal(result[0].items.length, 6);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, 0);
+                equal(result[1].items.length, 3);
+
+                equal(result[2].field, "bar");
+                equal(result[2].value, 1);
+                equal(result[2].items.length, 4);
+            });
+
+            test("group by nullable int with more than 10 items descending", function() {
+                var data = [
+                    { foo: 1, bar: null },
+                    { foo: 2, bar: 1 },
+                    { foo: 3, bar: null },
+                    { foo: 4, bar: 0 },
+                    { foo: 5, bar: 1 },
+                    { foo: 6, bar: null },
+                    { foo: 7, bar: 1 },
+                    { foo: 8, bar: null },
+                    { foo: 9, bar: 0 },
+                    { foo: 10, bar: null },
+                    { foo: 11, bar: null },
+                    { foo: 12, bar: 0 },
+                    { foo: 13, bar: 1 }
+                ];
+
+                var result = new Query(data).group({ field: "bar", dir: "desc" }).toArray();
+
+                equal(result.length, 3);
+
+                equal(result[0].field, "bar");
+                equal(result[0].value, 1);
+                equal(result[0].items.length, 4);
+
+                equal(result[1].field, "bar");
+                equal(result[1].value, 0);
+                equal(result[1].items.length, 3);
+
+                equal(result[2].field, "bar");
+                equal(result[2].value, null);
+                equal(result[2].items.length, 6);
+           });
+
+
+           test("groupby groups data by multiple fields with 3 levels", function() {
                 var data = [ {foo: 100, bar: "baz", baz: "baz"} , {foo: 100, bar: "bar", baz: "baz"} , {foo: 1, bar: "baz", baz: "baz"} ],
                     firstGroup,
                     secondGroup;
