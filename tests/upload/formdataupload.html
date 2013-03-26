@@ -54,7 +54,7 @@
 
             function simulateRequestSuccess(fileIndex, response) {
                 uploadInstance._module.onRequestSuccess(
-                    { target: { responseText: response || "null", statusText: "OK", status: 200 } },
+                    { target: { responseText: response || "", statusText: "OK", status: 200 } },
                     $(".k-file", uploadInstance.wrapper).eq(fileIndex)
                 );
             }
