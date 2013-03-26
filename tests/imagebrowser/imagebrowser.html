@@ -124,6 +124,19 @@
                 equal(upload.options.async.saveUrl, "foo");
             });
 
+            test("error event is raised if upload fails", 1, function() {
+                var browser = setup({
+                        transport: { uploadUrl: "foo" },
+                        error: function(e) {
+                            e.preventDefault(); // prevent showing the alert
+                            ok(true);
+                        }
+                    }),
+                    upload = browser.toolbar.find("div.k-upload input").data("kendoUpload");
+
+                    upload.trigger("error", { XMLHttpRequest: { } });
+            });
+
             test("selecting item from arrangeby popup change the text", function() {
                 var browser = setup(),
                     toolbar = browser.toolbar;
