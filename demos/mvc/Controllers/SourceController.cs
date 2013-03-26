@@ -42,6 +42,13 @@ namespace Kendo.Controllers
             {
                 source = IOFile.ReadAllText(mappedPath);
 
+                if (mappedPath.EndsWith(".php"))
+                {
+                    ViewData["source"] = source;
+
+                    source = RenderView("SourceCode");
+                }
+
                 foreach (var filter in Filters)
                 {
                     source = filter.Key.Replace(source, filter.Value);
