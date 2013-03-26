@@ -115,34 +115,26 @@
                 equal(observable.selectedItem[1], observable.items[1]);
             });
 
-            test("changing a value updates ObservableObject property", function() {
-                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
+            test("changing a value updates ObservableArray property when multiselect is filtered", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-text-field="name" data-value-field="name" data-bind="source:items, value:selectedItem"/>'),
+                    items = [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    multiselect;
 
                 var observable = kendo.observable({
-                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
-                    value: null
+                    selectedItem: []
                 });
 
                 kendo.bind(dom, observable);
-                dom.data("kendoMultiSelect").value(["foo", "bar"]);
-                dom.data("kendoMultiSelect").trigger("change");
+                multiselect = dom.data("kendoMultiSelect");
+                multiselect.dataSource.data(items);
+                items = multiselect.dataSource.data();
 
-                equal(observable.value, observable.items[0]);
-            });
+                multiselect.value(["foo"]);
+                multiselect.search("bar");
+                multiselect.ul.children().first().click(); //select "bar"
 
-            test("changing a value updates value property of ViewModel", function() {
-                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
-
-                var observable = kendo.observable({
-                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
-                    value: ""
-                });
-
-                kendo.bind(dom, observable);
-                dom.data("kendoMultiSelect").value(["foo", "bar"]);
-                dom.data("kendoMultiSelect").trigger("change");
-
-                equal(observable.value, observable.items[0].name);
+                equal(observable.selectedItem[0], items[0]);
+                equal(observable.selectedItem[1], items[1]);
             });
 
             test("clearing value of the widget sets model property to empty array", function() {
