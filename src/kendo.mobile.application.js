@@ -63,6 +63,10 @@ kendo_module({
         return classes.join(" ");
     }
 
+    function wp8Background() {
+        return parseInt($("<div style='background: Background' />").css("background-color").split(",")[1], 10) === 0 ? 'dark' : 'light';
+    }
+
     function isOrientationHorizontal(element) {
         return OS.wp ? element.css("animation-name") == "-kendo-landscape" : (Math.abs(window.orientation) / 90 == 1);
     }
@@ -132,7 +136,7 @@ kendo_module({
         },
 
         _setupPlatform: function() {
-            var that = this, wpThemeProxy,
+            var that = this,
                 platform = that.options.platform,
                 os = OS || MOBILE_PLATFORMS[DEFAULT_OS];
 
@@ -149,33 +153,17 @@ kendo_module({
             that.osCssClass = osCssClass(that.os);
 
             if (os.name == "wp") {
-                wpThemeProxy = proxy(that._setupWP8Theme, that);
+                that.element.parent().css("overflow", "hidden");
 
-                $(window).on("focusin", wpThemeProxy); // Restore theme on browser focus (requires click).
-                document.addEventListener("resume", wpThemeProxy); // PhoneGap fires resume.
+                var refreshBackgroundColor = function() {
+                    that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
+                }
 
-                that._setupWP8Theme();
+                $(window).on("focusin", refreshBackgroundColor); // Restore theme on browser focus (requires click).
+                document.addEventListener("resume", refreshBackgroundColor); // PhoneGap fires resume.
+
+                refreshBackgroundColor();
             }
-        },
-
-        _setupWP8Theme: function() {
-            var that = this,
-                element = $(that.element),
-                bgColor;
-
-            if (!that._bgColorDiv) {
-                that._bgColorDiv = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
-            }
-
-            bgColor = parseInt(that._bgColorDiv.css("background-color").split(",")[1], 10);
-            element.removeClass("km-wp-dark km-wp-light");
-            if (bgColor === 0) {
-                element.addClass("km-wp-dark");
-            } else {
-                element.addClass("km-wp-light");
-            }
-
-            element.parent().css("overflow", "hidden");
         },
 
         _startHistory: function() {
