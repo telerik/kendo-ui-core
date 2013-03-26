@@ -465,14 +465,30 @@
                 equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
             });
 
+            test("insertAfter() works with referenceNode as div", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "baz" }
+                ]);
+
+                var rootItem = treeview.find(".k-item:first > div"),
+                    rootGroup = treeview.find(".k-group");
+
+                var insertedNode = treeviewObject.insertAfter({ text: "bar" }, rootItem);
+
+                equal(rootGroup.find("> .k-item").length, 3);
+                equal(rootGroup.find("> .k-item:contains('bar')").index(), 1);
+                equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
+            });
+
+
             test("insertBefore(nodeData, element) inserts new node before element", function() {
                 createTreeView([
                     { text: "foo" },
                     { text: "baz" }
                 ]);
 
-                var treeviewObject = treeview.data("kendoTreeView"),
-                    rootItem = treeview.find(".k-item:last"),
+                var rootItem = treeview.find(".k-item:last"),
                     rootGroup = treeview.find(".k-group");
 
                 var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
@@ -482,7 +498,23 @@
                 equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
             });
 
-            test("inserBefore() of array of items", function() {
+            test("insertBefore() works with referenceNode as div", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "baz" }
+                ]);
+
+                var rootItem = treeview.find(".k-item:last > div"),
+                    rootGroup = treeview.find(".k-group");
+
+                var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
+
+                equal(rootGroup.find("> .k-item").length, 3);
+                equal(rootGroup.find("> .k-item:contains('bar')").index(), 1);
+                equal(insertedNode[0], rootGroup.find("> .k-item")[1]);
+            });
+
+            test("insertBefore() of array of items", function() {
                 createTreeView([
                     { text: "baz" }
                 ]);
@@ -501,8 +533,7 @@
                     { text: "foo" }
                 ]);
 
-                var treeviewObject = treeview.data("kendoTreeView"),
-                    rootItem = treeview.find(".k-item");
+                var rootItem = treeview.find(".k-item");
 
                 var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
 

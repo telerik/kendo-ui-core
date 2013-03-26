@@ -76,6 +76,23 @@ kendo_module({
         return node.children("div").find(".k-checkbox:first :checkbox");
     }
 
+    function insertAction(indexOffset) {
+        return function (nodeData, referenceNode) {
+            referenceNode = referenceNode.closest(NODE);
+
+            var group = referenceNode.parent(),
+                parentNode;
+
+            if (group.parent().is("li")) {
+                parentNode = group.parent();
+            }
+
+            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+                return this._insert(dataSource.data(), model, referenceNode.index() + indexOffset);
+            });
+        };
+    }
+
     function updateNodeHtml(node) {
         var wrapper = node.children("div"),
             group = node.children("ul"),
@@ -1540,31 +1557,9 @@ kendo_module({
             return this.findByUid(data[index].uid);
         },
 
-        insertAfter: function (nodeData, referenceNode) {
-            var group = referenceNode.parent(),
-                parentNode;
+        insertAfter: insertAction(1),
 
-            if (group.parent().is("li")) {
-                parentNode = group.parent();
-            }
-
-            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
-                return this._insert(dataSource.data(), model, referenceNode.index() + 1);
-            });
-        },
-
-        insertBefore: function (nodeData, referenceNode) {
-            var group = referenceNode.parent(),
-                parentNode;
-
-            if (group.parent().is("li")) {
-                parentNode = group.parent();
-            }
-
-            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
-                return this._insert(dataSource.data(), model, referenceNode.index());
-            });
-        },
+        insertBefore: insertAction(0),
 
         append: function (nodeData, parentNode) {
             var that = this,
