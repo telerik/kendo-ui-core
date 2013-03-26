@@ -669,7 +669,6 @@ kendo_module({
                 fakeXHR = {
                     responseText: responseText
                 };
-            responseText = responseText || "null";
             tryParseJSON(responseText,
                 function(jsonResult) {
                     $.extend(fakeXHR, { statusText: "OK", status: "200" });
@@ -1095,7 +1094,9 @@ kendo_module({
             json = "";
 
         try {
-            json = $.parseJSON(input);
+            if (typeof input !== "undefined" && input !== "") {
+                json = $.parseJSON(input);
+            }
             success = true;
         } catch (e) {
             onError();

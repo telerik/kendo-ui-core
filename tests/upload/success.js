@@ -1,16 +1,23 @@
     // -----------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------
-    test("success is fired when upload action succeeds", function() {
-        var successFired = false;
+    test("success is fired when upload action succeeds", 1, function() {
         uploadInstance = createUpload({ success:
             function() {
-                successFired = true;
+                ok(true);
             }
         });
 
         simulateUpload();
+    });
 
-        ok(successFired);
+    test("success is fired when the upload action returns empty response", 1, function() {
+        uploadInstance = createUpload({ success:
+            function(e) {
+                ok(true);
+            }
+        });
+
+        simulateUploadWithResponse("");
     });
 
     test("success is fired on a subsequent upload after cancelling the upload event", function() {
