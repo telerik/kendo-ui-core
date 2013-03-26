@@ -1000,7 +1000,57 @@ kendo_module({
             destroy: function() {
                 this.widget.unbind(CHANGE, this._change);
             }
-        })
+        }),
+
+        multiselect: {
+            value: Binder.extend({
+                init: function(widget, bindings, options) {
+                    Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                    this.widget = widget;
+                    this._change = $.proxy(this.change, this);
+                    this.widget.first(CHANGE, this._change);
+                    this._initChange = false;
+                },
+
+                change: function() {
+                    this._initChange = true;
+
+                    this.bindings.value.set(this.widget.dataItems());
+
+                    this._initChange = false;
+                },
+
+                refresh: function() {
+                    if (!this._initChange) {
+                        var field = this.options.dataValueField || this.options.dataTextField,
+                            value = this.bindings.value.get(),
+                            idx = 0, length,
+                            values = [];
+
+                        if (field) {
+                            if (value instanceof ObservableArray) {
+                                for (length = value.length; idx < length; idx++) {
+                                    values[idx] = value[idx].get(field);
+                                }
+                                value = values;
+                            } else if (value instanceof ObservableObject) {
+                                value = value.get(field);
+                            }
+                        }
+
+                        this.widget.value(value);
+                    }
+
+                    this._initChange = false;
+                },
+
+                destroy: function() {
+                    this.widget.unbind(CHANGE, this._change);
+                }
+
+            })
+        }
     };
 
     var BindingTarget = Class.extend( {
@@ -1084,7 +1134,8 @@ kendo_module({
             var that = this,
                 binding,
                 hasValue = false,
-                hasSource = false;
+                hasSource = false,
+                specificBinders = binders.widget[that.target.options.name.toLowerCase()] || {};
 
             for (binding in bindings) {
                 if (binding == VALUE) {
@@ -1101,12 +1152,12 @@ kendo_module({
             }
 
             if (hasValue) {
-                that.applyBinding(VALUE, bindings);
+                that.applyBinding(VALUE, bindings, specificBinders[VALUE]);
             }
         },
 
-        applyBinding: function(name, bindings) {
-            var binder = binders.widget[name],
+        applyBinding: function(name, bindings, specificBinder) {
+            var binder = specificBinder || binders.widget[name],
                 toDestroy = this.toDestroy,
                 attribute,
                 binding = bindings[name];
