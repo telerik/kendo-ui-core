@@ -805,11 +805,15 @@ kendo_module({
                     return a.__position - b.__position;
                 }
 
+                if (valueA == null) {
+                    return -1;
+                }
+
                 if (valueB == null) {
                     return 1;
                 }
 
-                return valueA > valueB ? 1 : (valueA < valueB ? -1 : 0);
+                return valueA > valueB ? 1 : (valueA < valueB ? -1 : a.__position - b.__position);
             };
         },
 
@@ -828,7 +832,15 @@ kendo_module({
                     return a.__position - b.__position;
                 }
 
-                return valueA < valueB ? 1 : (valueA > valueB ? -1 : 0);
+                if (valueA == null) {
+                    return 1;
+                }
+
+                if (valueB == null) {
+                    return -1;
+                }
+
+                return valueA < valueB ? 1 : (valueA > valueB ? -1 : a.__position - b.__position);
             };
         }
     });
