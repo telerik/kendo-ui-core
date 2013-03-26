@@ -8696,7 +8696,11 @@ kendo_module({
 
         for (i = 0; i < seriesLength; i++) {
             series[i].color = series[i].color || colors[i % colors.length];
-            series[i]._defaults.color = series[i]._defaults.color || colors[i % colors.length];
+
+            // TODO: Refactor
+            if (series[i]._defaults) {
+                series[i]._defaults.color = series[i]._defaults.color || colors[i % colors.length];
+            }
         }
     }
 
