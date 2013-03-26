@@ -270,10 +270,10 @@
             test("triggering multiple handlers attached with the one method", function() {
                 var observable = new Observable();
 
-                var handler1Called = false;
+                var handlerCalled = false;
 
                 var handler1 = function() {
-                    handler1Called = true;
+                    handlerCalled = true;
                 };
 
                 var handler2Called = false;
@@ -286,17 +286,17 @@
                           .one("event", handler2)
                           .trigger("event");
 
-                ok(handler1Called, "First handler should be called");
+                ok(handlerCalled, "First handler should be called");
                 ok(handler2Called, "Second handler should be called");
             });
 
             test("can reatach a handler during event invocation", function() {
                 var observable = new Observable();
 
-                var handler1Called = false;
+                var handlerCalled = false;
 
                 var handler1 = function() {
-                    handler1Called = true;
+                    handlerCalled = true;
                     observable.unbind("event", handler1)
                               .bind("event", handler1);
                 };
@@ -314,8 +314,26 @@
                           .bind("event", handler2)
                           .trigger("event");
 
-                ok(handler1Called, "First handler should be called");
+                ok(handlerCalled, "First handler should be called");
                 ok(handler2Called, "Second handler should be called");
+            });
+
+            test("unbind detaches all instances of the event handler", function() {
+                var handlerCalled = false;
+
+                var handler = function() {
+                    handlerCalled = true;
+                };
+
+                var observable = new Observable();
+
+                observable.bind("event", handler).bind("event", handler);
+
+                observable.unbind("event", handler);
+
+                observable.trigger("event");
+
+                equal(handlerCalled, false);
             });
         </script>
     </body>

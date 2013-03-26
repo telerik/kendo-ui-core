@@ -164,14 +164,13 @@
         unbind: function(eventName, handler) {
             var that = this,
                 events = that._events[eventName],
-                idx,
-                length;
+                idx;
 
             if (eventName === undefined) {
                 that._events = {};
             } else if (events) {
                 if (handler) {
-                    for (idx = 0, length = events.length; idx < length; idx++) {
+                    for (idx = events.length - 1; idx >= 0; idx--) {
                         if (events[idx] === handler) {
                             events.splice(idx, 1);
                         }
