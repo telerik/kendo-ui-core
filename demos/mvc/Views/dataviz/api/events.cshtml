@@ -58,6 +58,7 @@
                         seriesHover: onSeriesHover,
                         dataBound: onDataBound,
                         axisLabelClick: onAxisLabelClick,
+                        legendLabelClick: onLegendLabelClick,
                         plotAreaClick: onPlotAreaClick,
                         dragStart: onDragStart,
                         drag: onDrag,
@@ -85,6 +86,10 @@
                 function onAxisLabelClick(e) {
                     kendoConsole.log(kendo.format("Axis label click :: {0} axis : {1}",
                         e.axis.type, e.text));
+                }
+
+                function onLegendLabelClick(e) {
+                    kendoConsole.log(kendo.format("Axis label click :: {0}", e.text));
                 }
 
                 function onPlotAreaClick(e) {
