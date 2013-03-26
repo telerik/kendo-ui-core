@@ -2605,7 +2605,8 @@ kendo_module({
                     expandOptions(options, {
                         value: point.value,
                         series: point.series,
-                        dataItem: point.dataItem
+                        dataItem: point.dataItem,
+                        category: point.category,
                     }, { defaults: point.series._defaults, excluded: ["data", "aggregate"] });
                 }
             }
@@ -3372,12 +3373,20 @@ kendo_module({
 
     var LinePoint = ChartElement.extend({
         init: function(value, options) {
-            var point = this;
-
-            ChartElement.fn.init.call(point, options);
+            var point = this,
+                border;
 
             point.value = value;
-            point.options.id = uniqueId();
+            ChartElement.fn.init.call(point, options);
+
+            options = point.options;
+            options.id = uniqueId();
+
+            border = options.markers.border;
+            if (!defined(border.color)) {
+               border.color =  options.color;
+            }
+
             point.enableDiscovery();
         },
 
@@ -3792,7 +3801,9 @@ kendo_module({
                 missingValues = chart.seriesMissingValues(series),
                 stackPoint,
                 plotValue = 0,
-                fields = data.fields;
+                fields = data.fields,
+                point,
+                pointOptions;
 
             if (!defined(value) || value === null) {
                 if (missingValues === ZERO) {
@@ -3802,23 +3813,21 @@ kendo_module({
                 }
             }
 
-            var point = new LinePoint(value,
-                deepExtend({
-                    vertical: !options.invertAxes,
-                    markers: {
-                        border: {
-                            color: series.color
-                        }
-                    }
-                }, series, {
-                    color: fields.color,
-                    markers: {
-                        border: {
-                            color: fields.color
-                        }
-                    }
-                })
-            );
+            pointOptions = deepExtend({
+                vertical: !options.invertAxes
+            }, series, {
+                color: fields.color
+            });
+
+            // TODO: Extract
+            expandOptions(pointOptions, {
+                value: value,
+                series: series,
+                dataItem: series.data[categoryIx],
+                category: category,
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            point = new LinePoint(value, pointOptions);
 
             if (isStacked) {
                 stackPoint = lastValue(categoryPoints);
