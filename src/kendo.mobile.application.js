@@ -36,7 +36,6 @@ kendo_module({
 
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
         BARCOMPENSATION = 60,
-
         WINDOW = $(window),
         HEAD = $("head"),
         proxy = $.proxy;
@@ -44,15 +43,18 @@ kendo_module({
     function osCssClass(os) {
         var classes = [];
 
-        classes.push("km-" + os.name);
-
         if (OS) {
             classes.push("km-on-" + OS.name);
         }
 
-        classes.push("km-" + os.name + os.majorVersion);
-        classes.push("km-" + os.majorVersion);
-        classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
+        if (os.skin) {
+            classes.push("km-" + os.skin);
+        } else {
+            classes.push("km-" + os.name);
+            classes.push("km-" + os.name + os.majorVersion);
+            classes.push("km-" + os.majorVersion);
+            classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
+        }
 
         if (os.appMode) {
             classes.push("km-app");
@@ -138,6 +140,7 @@ kendo_module({
         _setupPlatform: function() {
             var that = this,
                 platform = that.options.platform,
+                skin = that.options.skin,
                 os = OS || MOBILE_PLATFORMS[DEFAULT_OS];
 
             if (platform) {
@@ -147,12 +150,15 @@ kendo_module({
                     os = platform;
                 }
             }
+            if (skin) {
+                os = $.extend({}, os, {skin: skin});
+            }
 
             that.os = os;
 
             that.osCssClass = osCssClass(that.os);
 
-            if (os.name == "wp") {
+            if (!os.skin && os.name == "wp") {
                 that.element.parent().css("overflow", "hidden");
 
                 var refreshBackgroundColor = function() {
