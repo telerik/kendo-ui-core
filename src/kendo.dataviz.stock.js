@@ -23,6 +23,7 @@ kendo_module({
         addDuration = dataviz.addDuration,
         duration = dataviz.duration,
         last = dataviz.last,
+        lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
         toTime = dataviz.toTime;
@@ -512,7 +513,10 @@ kendo_module({
                 delta = e.delta,
                 axis = chart._plotArea.categoryAxis,
                 select = navi.options.select,
-                selection = navi.selection;
+                selection = navi.selection,
+                categories = navi.mainAxis().options.categories,
+                fromIx = lteDateIndex(categories, selection.options.from),
+                toIx = lteDateIndex(categories, selection.options.to);
 
             e.originalEvent.preventDefault();
 
@@ -520,7 +524,7 @@ kendo_module({
                 delta *= ZOOM_ACCELERATION;
             }
 
-            if (selection.options.to - selection.options.from > 1) {
+            if (toIx - fromIx > 1) {
                 selection.expand(delta);
                 navi.readSelection();
             } else {
