@@ -13,7 +13,7 @@
             {
                 return new { Errors = modelState.SerializeErrors() };
             }
-            return null;
+            return new object();
         }
 
         public static object SerializeErrors(this ModelStateDictionary modelState)
