@@ -2582,34 +2582,6 @@ kendo_module({
             var chart = this;
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
-
-            chart.resolvePointColor();
-        },
-
-        resolvePointColor: function() {
-            var chart = this,
-                points = chart.points,
-                i,
-                point,
-                options;
-
-            for (i = 0; i < points.length; i++) {
-                point = points[i];
-                if (point) {
-                    options = point.options;
-
-                    if (point.value < 0 && options.negativeColor) {
-                        options.color = options.negativeColor;
-                    }
-
-                    expandOptions(options, {
-                        value: point.value,
-                        series: point.series,
-                        dataItem: point.dataItem,
-                        category: point.category,
-                    }, { defaults: point.series._defaults, excluded: ["data", "aggregate"] });
-                }
-            }
         },
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
@@ -2805,7 +2777,9 @@ kendo_module({
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
                 labelOptions = deepExtend({}, series.labels),
-                bar, cluster;
+                bar,
+                barOptions,
+                cluster;
 
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
@@ -2813,15 +2787,28 @@ kendo_module({
                 }
             }
 
-            bar = new Bar(value,
-                deepExtend({}, {
-                    vertical: !options.invertAxes,
-                    overlay: series.overlay,
-                    labels: labelOptions,
-                    isStacked: isStacked
-                }, series, {
-                    color: data.fields.color || undefined
-                }));
+            barOptions = deepExtend({
+                vertical: !options.invertAxes,
+                overlay: series.overlay,
+                labels: labelOptions,
+                isStacked: isStacked
+            }, series, {
+                color: data.fields.color || undefined
+            });
+
+            if (value < 0 && barOptions.negativeColor) {
+                barOptions.color = barOptions.negativeColor;
+            }
+
+            // TODO: Extract
+            expandOptions(barOptions, {
+                value: value,
+                series: series,
+                dataItem: series.data[categoryIx],
+                category: category
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            bar = new Bar(value, barOptions);
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -3824,7 +3811,7 @@ kendo_module({
                 value: value,
                 series: series,
                 dataItem: series.data[categoryIx],
-                category: category,
+                category: category
             }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
 
             point = new LinePoint(value, pointOptions);
