@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
         <script src="../../src/kendo.dataviz.themes.js"></script>
@@ -20,6 +21,7 @@
 
             var dataviz = kendo.dataviz,
                 Box2D = dataviz.Box2D,
+                getElement = dataviz.getElement,
                 chartBox = new Box2D(5, 5, 1000, 1000),
                 view,
                 TOLERANCE = 2;
@@ -1166,7 +1168,7 @@
 
                 function createLegend(options) {
                     legend = new dataviz.Legend($.extend(true,{
-                        items: [ { name: "Series 1" } ],
+                        items: [ { text: "Series 1" } ],
                         labels: {
                             font: SANS12
                         }
@@ -1191,7 +1193,7 @@
 
                 test("sets zIndex on group", function() {
                     createLegend({
-                            zIndex: 10
+                        zIndex: 10
                     });
 
                     legend.getViewElements(view);
@@ -1210,8 +1212,8 @@
                 test("second label is below the first", function() {
                     createLegend({
                         items: [
-                            { name: "Series 1" },
-                            { name: "Series 2" }
+                            { text: "Series 1" },
+                            { text: "Series 2" }
                         ]
                     });
 
@@ -1243,7 +1245,7 @@
 
                 test("positions legend to absolute vertical center (relative to y=0)", function() {
                     legend = new dataviz.Legend({
-                        items: [ { name: "Series 1" } ]
+                        items: [ { text: "Series 1" } ]
                     });
 
                     var legendBox = chartBox.clone().translate(100, 100);
@@ -1363,6 +1365,7 @@
                     equal(legend.box.y1, chartBox.y2 - baseHeight - 2 * MARGIN);
                 });
 
+
                 //--------------------------------------------------------------
                 var marker, label;
                 module("Legend / Markers", {
@@ -1370,7 +1373,7 @@
                         moduleSetup();
 
                         legend = new dataviz.Legend({
-                            items: [ { name: "Series 1", color: "#f00" } ],
+                            items: [ { text: "Series 1", color: "#f00" } ],
                             labels: {
                                 font: SANS12
                             }
@@ -1425,7 +1428,7 @@
                         moduleSetup();
 
                         legend = new dataviz.Legend({
-                            items: [ { name: "Series 1", color: "#f00" } ],
+                            items: [ { text: "Series 1", color: "#f00" } ],
                             labels: {
                                 font: SANS12
                             },
@@ -1464,6 +1467,60 @@
                 test("renders background color", function() {
                     deepEqual(legendBox.style.fill, BACKGROUND);
                 });
+
+                var chart,s
+                    label,
+                    legend;
+
+                function legendLabelClick(clickHandler, options) {
+                    chart = createChart($.extend(true, {
+                        series: [{
+                            type: "line",
+                            data: [1,2,3],
+                            name: "test",
+                            color: "color"
+                        }],
+                        legendLabelClick: clickHandler
+                    }, options));
+
+                    legend = chart._model.children[0];
+                    label = legend.children[0];
+                    $(getElement(label.options.id)).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Legend / Events / legendLabelClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking axis labels", 1, function() {
+                    legendLabelClick(function() { ok(true); });
+                });
+
+                test("event arguments contain DOM element", 1, function() {
+                    legendLabelClick(function(e) {
+                        equal(e.element.length, 1);
+                    });
+                });
+
+                test("event arguments contain series name as text", 1, function() {
+                    legendLabelClick(function(e) {
+                        equal(e.text, "test");
+                    });
+                });
+
+                test("event arguments contain color of the series", 1, function() {
+                    legendLabelClick(function(e) {
+                        equal(e.color, "color");
+                    });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    legendLabelClick(function(e) {
+                        equal(e.series.type, "line");
+                    });
+                });
+
             })();
 
             (function() {
@@ -1688,5 +1745,7 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <div id="container">
+        </div>
     </body>
 </html>

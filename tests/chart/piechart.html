@@ -162,7 +162,7 @@
                 });
 
                 test("set legend item name to category", function() {
-                    equal(pieChart.legendItems[0].name, "A");
+                    equal(pieChart.legendItems[0].text, "A");
                 });
 
                 test("set legend item color", function() {
@@ -193,7 +193,7 @@
                         }
                     });
 
-                    equal(pieChart.legendItems[0].name, "test");
+                    equal(pieChart.legendItems[0].text, "test");
                     setupPieChart(plotArea, { series: [ {
                         data: dataValues.data,
                         legend: {
@@ -202,7 +202,7 @@
                             }
                         }
                     } ] });
-                    equal(pieChart.legendItems[0].name, "A");
+                    equal(pieChart.legendItems[0].text, "A");
                 });
 
             })();
@@ -295,7 +295,7 @@
                             }
                         }
                     });
-                    equal($("#container").data("kendoChart")._plotArea.charts[0].legendItems[0].name, "test");
+                    equal($("#container").data("kendoChart")._plotArea.charts[0].legendItems[0].text, "test");
                 });
 
             })();
@@ -519,7 +519,7 @@
                 });
 
                 test("legend series are populated", function() {
-                    equal(legend.options.items[0].name, "Value A");
+                    equal(legend.options.items[0].text, "Value A");
                 });
 
                 test("segments can be excluded from legend", function() {
