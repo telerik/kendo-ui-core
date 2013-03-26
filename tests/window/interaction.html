@@ -37,6 +37,21 @@
                 ok(!dialog.options.isMaximized);
             });
 
+            test("resizing window out of viewport", function() {
+                var dialog = createWindow({});
+                var userEvents = dialog.resizing._draggable.userEvents;
+
+                var handle = dialog.wrapper.find(".k-resize-nw");
+                var start = handle.offset();
+
+                userEvents.press(start.left, start.top, handle[0]);
+                userEvents.move(-10, -10, handle[0]);
+                userEvents.end(-10, -10, handle[0]);
+
+                equal(parseInt(dialog.wrapper.css("top"), 10), 0);
+                equal(parseInt(dialog.wrapper.css("left"), 10), 0);
+            });
+
         </script>
     </body>
 </html>

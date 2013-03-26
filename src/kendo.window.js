@@ -984,8 +984,8 @@ kendo_module({
                 initialSize = that.initialSize,
                 newWidth, newHeight,
                 windowBottom, windowRight,
-                x = e.x.location,
-                y = e.y.location;
+                x = Math.max(e.x.location, containerOffset.left),
+                y = Math.max(e.y.location, containerOffset.top);
 
             if (direction.indexOf("e") >= 0) {
                 newWidth = x - initialPosition.left;
