@@ -233,7 +233,7 @@ kendo_module({
 
     binders.style = Binder.extend({
         refresh: function(key) {
-            this.element.style[key] = this.bindings.style[key].get();
+            this.element.style[key] = this.bindings.style[key].get() || "";
         }
     });
 
