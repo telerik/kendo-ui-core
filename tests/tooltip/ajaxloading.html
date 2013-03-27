@@ -239,6 +239,51 @@
                 stop();
                 tooltip.show(container);
             });
+
+            test("refresh issue an ajax request", 1, function() {
+                $.mockjax({
+                    url: "foo/baz"
+                });
+
+                var tooltip = new Tooltip(container, {
+                    content: {
+                        url: "foo/baz"
+                    }
+                });
+
+                tooltip.show(container);
+
+                tooltip.bind("requestStart", function() {
+                    ok(true);
+                    start();
+                });
+
+                stop();
+                tooltip.refresh();
+            });
+
+            test("refresh the content", 2, function() {
+                var tooltip = new Tooltip(container, {
+                    content: function() {
+                        ok(true);
+                    }
+                });
+
+                tooltip.show(container);
+
+                tooltip.refresh();
+            });
+
+            test("refresh does not refresh the content if popup is not created", 0, function() {
+                var tooltip = new Tooltip(container, {
+                    content: function() {
+                        ok(true);
+                    }
+                });
+
+                tooltip.refresh();
+            });
+
         </script>
     </body>
 </html>

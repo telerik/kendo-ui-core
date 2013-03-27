@@ -249,6 +249,15 @@ kendo_module({
             }
         },
 
+        refresh: function() {
+            var that = this,
+                popup = that.popup;
+
+            if (popup && popup.options.anchor) {
+                that._appendContent(popup.options.anchor);
+            }
+        },
+
         hide: function() {
             if (this.popup) {
                 this.popup.close();
