@@ -8,7 +8,6 @@ var OPT = require("optimist");
 var ARGV = OPT
     .describe("amd", "Wrap for RequireJS")
     .describe("deps", "List dependencies")
-    .describe("decl", "Add the component declarations in the source code")
     .describe("bundle", "Create a bundle")
     .describe("kendo-config", "Generate download-builder/kendo-config.json (to STDOUT)")
     .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
@@ -16,7 +15,6 @@ var ARGV = OPT
     .describe("nomangle", "Don't mangle names (helps debugging)")
     .boolean("amd")
     .boolean("deps")
-    .boolean("decl")
     .boolean("bundle")
     .boolean("kendo-config")
     .boolean("overwrite")
