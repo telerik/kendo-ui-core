@@ -1846,6 +1846,12 @@ function pad(number, digits, end) {
 
               return false;
           };
+
+        support.pushState = window.history && window.history.pushState;
+
+        var documentMode = document.documentMode;
+
+        support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
     })();
 
 

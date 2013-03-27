@@ -4,7 +4,7 @@ var win,
     initial,
     win,
     loc,
-    pushStateSupported = window.history.pushState,
+    pushStateSupported = kendo.support.pushState,
     root = location.pathname.replace(/\/(router\.html)?$/, "/sandbox/");
 
 module("History", {
@@ -20,11 +20,15 @@ module("History", {
             _history = win.history;
             QUnit.start();
         });
+    },
+
+    teardown: function() {
+        win.kendo.support.pushState = pushStateSupported;
     }
 });
 
 function url(expected) {
-    equal(expected, loc.href.replace(/#$/, ''));
+    equal(loc.href.replace(/#$/, ''), expected);
 }
 
 function startWithHash() {
@@ -60,9 +64,7 @@ test("does not pushState if identical", function() {
     equal(history.length, length);
 });
 
-asyncTest("transforms pushState to non-push state when needed", function() {
-    expect(1);
-
+asyncTest("transforms pushState to non-push state when needed", 1, function() {
     if (!pushStateSupported) {
         start();
         ok(true);
@@ -85,7 +87,7 @@ asyncTest("transforms pushState to non-push state when needed", function() {
         }
     }
 
-    kendoHistory._pushStateSupported = function() { return false; }
+    win.kendo.support.pushState = false;
     startWithPushState();
     check();
 });
@@ -138,8 +140,7 @@ test("triggers events when history changed", function() {
     kendoHistory.navigate("/new-location");
 });
 
-test("alllows prevention of hash change if preventDefault called", function() {
-    expect(1);
+test("Allows prevention of hash change if preventDefault called", 1, function() {
     startWithHash();
 
     kendoHistory.change(function(e) {
@@ -148,6 +149,21 @@ test("alllows prevention of hash change if preventDefault called", function() {
 
     kendoHistory.navigate("/new-location");
     url(initial);
+});
+
+asyncTest("Allows prevention of hash change by clicked link if preventDefault called", 1, function() {
+    startWithHash();
+
+    kendoHistory.change(function(e) {
+        e.preventDefault();
+    });
+
+    loc.href = loc.href + "#foo";
+
+    setTimeout(function() {
+        start();
+        url(initial);
+    }, 300);
 });
 
 test("strips hash from passed urls", function() {
@@ -203,4 +219,3 @@ asyncTest("supports #:back pseudo url for going back", 1, function() {
         equal(loc.hash, '');
     }, 300);
 });
-

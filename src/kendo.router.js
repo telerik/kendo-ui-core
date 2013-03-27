@@ -9,13 +9,11 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         location = window.location,
         history = window.history,
         _checkUrlInterval = 50,
         hashStrip = /^#*/,
-        documentMode = window.document.documentMode,
-        oldIE = kendo.support.browser.msie && (!documentMode || documentMode <= 8),
-        hashChangeSupported = ("onhashchange" in window) && !oldIE,
         document = window.document;
 
     var History = kendo.Observable.extend({
@@ -25,7 +23,7 @@ kendo_module({
             var that = this;
 
             that._pushStateRequested = !!options.pushState;
-            that._pushState = that._pushStateRequested && that._pushStateSupported();
+            that._pushState = support.pushState && that._pushStateRequested;
             that.root = options.root || "/";
             that._interval = 0;
 
@@ -46,11 +44,43 @@ kendo_module({
             clearInterval(this._interval);
         },
 
+        change: function(callback) {
+            this.bind('change', callback);
+        },
+
+        navigate: function(to, silent) {
+            var that = this;
+
+            if (to === '#:back') {
+                history.back();
+                return;
+            }
+
+            to = to.replace(hashStrip, '');
+
+            if (that.current === to || that.current === decodeURIComponent(to)) {
+                return;
+            }
+
+            if (!silent) {
+                if (that.trigger("change", { url: to })) {
+                    return;
+                }
+            }
+
+            if (that._pushState) {
+                history.pushState({}, document.title, that._makePushStateUrl(to));
+                that.current = to;
+            } else {
+                location.hash = that.current = to;
+            }
+        },
+
         _normalizeUrl: function() {
             var that = this,
                 pushStateUrl,
                 atRoot = that.root == location.pathname,
-                pushStateUrlNeedsTransform = that._pushStateRequested && !that._pushStateSupported() && !atRoot,
+                pushStateUrlNeedsTransform = that._pushStateRequested && !support.pushState && !atRoot,
                 hashUrlNeedsTransform = that._pushState && atRoot && location.hash;
 
             if (pushStateUrlNeedsTransform) {
@@ -69,23 +99,26 @@ kendo_module({
 
             if (this._pushState) {
                 $(window).bind("popstate.kendo", _checkUrlProxy);
-            } else if (hashChangeSupported) {
+            } else if (support.hashChange) {
                 $(window).bind("hashchange.kendo", _checkUrlProxy);
             } else {
                 that._interval = setInterval(_checkUrlProxy, _checkUrlInterval);
             }
         },
 
-        _pushStateSupported: function() {
-            return window.history && window.history.pushState;
-        },
-
         _checkUrl: function() {
-            var that = this, current = that._currentLocation();
+            var that = this, current = that._currentLocation().replace(hashStrip, '');
 
-            if (current != that.current) {
-                that.navigate(current);
+            if (that.current === current || that.current === decodeURIComponent(current)) {
+                return;
             }
+
+            if (that.trigger("change", { url: current })) {
+                history.back();
+                return;
+            }
+
+            that.current = current;
         },
 
         _stripRoot: function(url) {
@@ -121,38 +154,6 @@ kendo_module({
                 return that._stripRoot(current);
             } else {
                 return location.hash.replace(hashStrip, '');
-            }
-        },
-
-        change: function(callback) {
-            this.bind('change', callback);
-        },
-
-        navigate: function(to, silent) {
-            var that = this;
-
-            if (to === '#:back') {
-                history.back();
-                return;
-            }
-
-            to = to.replace(hashStrip, '');
-
-            if (that.current === to || that.current === decodeURIComponent(to)) {
-                return;
-            }
-
-            if (!silent) {
-                if (that.trigger("change", { url: to })) {
-                    to = that.current; // revert to current,
-                }
-            }
-
-            if (that._pushState) {
-                history.pushState({}, document.title, that._makePushStateUrl(to));
-                that.current = to;
-            } else {
-                location.hash = that.current = to;
             }
         }
     });
@@ -288,7 +289,9 @@ kendo_module({
                  }
             }
 
-            this.trigger(ROUTE_MISSING, { url: url });
+            if (this.trigger(ROUTE_MISSING, { url: url })) {
+                e.preventDefault();
+            }
         }
     });
 
