@@ -17,5 +17,6 @@
     "recipe[monit]",
     "recipe[screenshot]",
     "recipe[php]",
-    "recipe[tomcat]"
+    "recipe[tomcat]",
+    "recipe[lftp]"
 ]}
