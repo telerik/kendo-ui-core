@@ -685,6 +685,10 @@ kendo_module({
                 that.groupable.destroy();
             }
 
+            if (that.options.reorderable) {
+                that.wrapper.data("kendoReorderable").destroy();
+            }
+
             if (that.virtualScrollable) {
                 that.virtualScrollable.destroy();
             }

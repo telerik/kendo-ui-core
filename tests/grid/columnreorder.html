@@ -395,6 +395,15 @@
                 equal(col[1].style.width, "20px");
             });
 
+            test("Reorderable destroy is called on grid destroy", function() {
+                var grid = new Grid(table, { reorderable: true }),
+                    reorderable = stub(grid.wrapper.data("kendoReorderable"), "destroy");
+
+                grid.destroy();
+
+                equal(reorderable.calls("destroy"), 1);
+            });
+
             function moveOverDropTarget(draggable, dropTarget) {
                 var position = dropTarget.position();
 
