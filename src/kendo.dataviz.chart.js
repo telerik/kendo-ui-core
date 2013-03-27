@@ -4591,14 +4591,16 @@ kendo_module({
                 valueParts = this.splitValue(value),
                 hasValue = validNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
-                point, cluster;
+                point,
+                cluster,
+                dataItem = series.data[categoryIx];
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
             }
 
             if (hasValue) {
-                point = chart.createPoint(value, series);
+                point = chart.createPoint(value, series, dataItem);
             }
 
             cluster = children[categoryIx];
@@ -4628,15 +4630,24 @@ kendo_module({
                 point.series = series;
                 point.seriesIx = seriesIx;
                 point.owner = chart;
-                point.dataItem = series.data[categoryIx];
+                point.dataItem = dataItem;
             }
 
             chart.points.push(point);
             categoryPoints.push(point);
         },
 
-        createPoint: function(value, series) {
-            return new Candlestick(value, series);
+        createPoint: function(value, series, dataItem) {
+            var pointOptions = deepExtend({}, series);
+
+            // TODO: Extract
+            expandOptions(pointOptions, {
+                value: value,
+                series: series,
+                dataItem: dataItem
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            return new Candlestick(value, pointOptions);
         },
 
         splitValue: function(value) {
@@ -4753,8 +4764,17 @@ kendo_module({
     });
 
     var OHLCChart = CandlestickChart.extend({
-        createPoint: function(value, series) {
-            return new OHLCPoint(value, series);
+        createPoint: function(value, series, dataItem) {
+            var pointOptions = deepExtend({}, series);
+
+            // TODO: Extract
+            expandOptions(pointOptions, {
+                value: value,
+                series: series,
+                dataItem: dataItem
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            return new OHLCPoint(value, pointOptions);
         },
 
         bindableFields: function() {
