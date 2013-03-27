@@ -3077,7 +3077,7 @@ kendo_module({
 
             chart.updateRange(data.value, categoryIx, series);
 
-            point = chart.createPoint(data.value, categoryIx, series);
+            point = chart.createPoint(data.value, category, categoryIx, series);
             if (point) {
                 point.category = category;
                 point.series = series;
@@ -3102,19 +3102,30 @@ kendo_module({
             }
         },
 
-        createPoint: function(data, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series) {
             var chart = this,
                 options = chart.options,
                 children = chart.children,
-                bullet, cluster;
+                bullet,
+                bulletOptions,
+                cluster;
 
-            bullet = new Bullet(data,
-                deepExtend({}, {
-                    vertical: !options.invertAxes,
-                    overlay: series.overlay,
-                    categoryIx: categoryIx,
-                    invertAxes: options.invertAxes
-                }, series));
+            bulletOptions = deepExtend({}, {
+                vertical: !options.invertAxes,
+                overlay: series.overlay,
+                categoryIx: categoryIx,
+                invertAxes: options.invertAxes
+            }, series);
+
+            // TODO: Extract
+            expandOptions(bulletOptions, {
+                value: data,
+                series: series,
+                dataItem: series.data[categoryIx],
+                category: category
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            bullet = new Bullet(data, bulletOptions);
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -4259,6 +4270,7 @@ kendo_module({
         createPoint: function(value, series, seriesIx, fields) {
             var chart = this,
                 point,
+                pointOptions,
                 pointsCount = series.data.length,
                 delay = fields.pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
@@ -4267,26 +4279,34 @@ kendo_module({
                     type: BUBBLE
                 };
 
-            point = new Bubble(value, deepExtend({
-                    tooltip: {
-                        format: chart.options.tooltip.format
-                    },
-                    labels: {
-                        format: chart.options.labels.format,
-                        animation: animationOptions
-                    }
+            pointOptions = deepExtend({
+                tooltip: {
+                    format: chart.options.tooltip.format
                 },
-                series, {
-                    color: fields.color,
-                    markers: {
-                        type: CIRCLE,
-                        background: fields.color,
-                        border: series.border,
-                        opacity: series.opacity,
-                        animation: animationOptions
-                    }
-                })
-            );
+                labels: {
+                    format: chart.options.labels.format,
+                    animation: animationOptions
+                }
+            },
+            series, {
+                color: fields.color,
+                markers: {
+                    type: CIRCLE,
+                    background: fields.color,
+                    border: series.border,
+                    opacity: series.opacity,
+                    animation: animationOptions
+                }
+            });
+
+            // TODO: Extract
+            expandOptions(pointOptions, {
+                value: value,
+                series: series,
+                dataItem: fields.dataItem
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            point = new Bubble(value, pointOptions);
 
             chart.append(point);
 
@@ -9226,6 +9246,7 @@ kendo_module({
         BarLabel: BarLabel,
         BubbleAnimationDecorator: BubbleAnimationDecorator,
         BubbleChart: BubbleChart,
+        BulletChart: BulletChart,
         CandlestickChart: CandlestickChart,
         Candlestick: Candlestick,
         CategoricalPlotArea: CategoricalPlotArea,
