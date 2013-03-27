@@ -380,6 +380,11 @@ suggestion popup will open and close instantly.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when an legend label is clicked.</description>
+            <name>legendLabelClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the chart has received data from the data source
 and is about to render it.</description>
             <name>dataBound</name>
@@ -4348,6 +4353,12 @@ hex and rgb.</description>
         <description>Fires when an axis label is clicked.</description>
         <name>chart-axisLabelClick</name>
         <tag-class>com.kendoui.taglib.chart.AxisLabelClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when an legend label is clicked.</description>
+        <name>chart-legendLabelClick</name>
+        <tag-class>com.kendoui.taglib.chart.LegendLabelClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -10478,6 +10489,11 @@ tick labels.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fires when an legend label is clicked.</description>
+            <name>legendLabelClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when the chart has received data from the data source
 and is about to render it.</description>
             <name>dataBound</name>
@@ -12952,6 +12968,12 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Fires when an legend label is clicked.</description>
+        <name>sparkline-legendLabelClick</name>
+        <tag-class>com.kendoui.taglib.sparkline.LegendLabelClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Fires when the chart has received data from the data source
 and is about to render it.</description>
         <name>sparkline-dataBound</name>
@@ -13206,6 +13228,11 @@ It is used as a default field for all date axes, including the navigator pane.Th
         <attribute>
             <description>Fires when an axis label is clicked.</description>
             <name>axisLabelClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when an legend label is clicked.</description>
+            <name>legendLabelClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -17665,6 +17692,12 @@ hex and rgb.</description>
         <description>Fires when an axis label is clicked.</description>
         <name>stockChart-axisLabelClick</name>
         <tag-class>com.kendoui.taglib.stockchart.AxisLabelClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when an legend label is clicked.</description>
+        <name>stockChart-legendLabelClick</name>
+        <tag-class>com.kendoui.taglib.stockchart.LegendLabelClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
