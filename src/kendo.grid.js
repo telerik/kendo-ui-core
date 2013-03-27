@@ -111,7 +111,9 @@ kendo_module({
         whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
         nonDataCellsRegExp = new RegExp("(^|" + whitespaceRegExp + ")" + "(k-group-cell|k-hierarchy-cell)" + "(" + whitespaceRegExp + "|$)"),
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
-        isRtl = false;
+        isRtl = false,
+        browser = kendo.support.browser,
+        isIE7 = browser.msie && browser.version == 7;
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -484,7 +486,6 @@ kendo_module({
     function normalizeCols(table, visibleColumns, hasDetails, groups) {
         var colgroup = table.find(">colgroup"),
             width,
-            browser = kendo.support.browser,
             cols = map(visibleColumns, function(column) {
                     width = column.width;
                     if (width && parseInt(width, 10) !== 0) {
@@ -793,7 +794,11 @@ kendo_module({
                 }
             }
 
-            that.table = table.attr("cellspacing", 0).attr("role", that._hasDetails() ? "treegrid" : "grid");
+            if (isIE7) {
+                table.attr("cellspacing", 0);
+            }
+
+            that.table = table.attr("role", that._hasDetails() ? "treegrid" : "grid");
 
             that._wrapper();
         },
@@ -824,9 +829,9 @@ kendo_module({
                         });
                     } else {
                         var headerWrap = th.closest(".k-grid-header-wrap"),
-                            ieCorrection = kendo.support.browser.msie ? headerWrap.scrollLeft() : 0,
-                            webkitCorrection = kendo.support.browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
-                            firefoxCorrection = kendo.support.browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+                            ieCorrection = browser.msie ? headerWrap.scrollLeft() : 0,
+                            webkitCorrection = browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
+                            firefoxCorrection = browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
                         left = th.position().left - webkitCorrection + firefoxCorrection - ieCorrection;
                     }
 
@@ -1953,7 +1958,6 @@ kendo_module({
                     index,
                     tableToFocus,
                     shiftKey = e.shiftKey,
-                    browser = kendo.support.browser,
                     current = currentProxy();
 
                 if (current && current.is("th")) {
@@ -2111,7 +2115,7 @@ kendo_module({
             if (that.editable) {
                 if ($.contains(editContainer[0], active[0])) {
                     active.blur();
-                    if (kendo.support.browser.opera) {
+                    if (browser.opera) {
                         active.change();
                     }
                 }
@@ -2210,7 +2214,10 @@ kendo_module({
 
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
                 header.css((isRtl ? "padding-left" : "padding-right"), scrollable.virtual ? scrollbar + 1 : scrollbar);
-                table = $('<table role="grid" cellspacing="0" />');
+                table = $('<table role="grid" />');
+                if (isIE7) {
+                    table.attr("cellspacing", 0);
+                }
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
 
@@ -2234,7 +2241,7 @@ kendo_module({
 
                 // the footer may exists if rendered from the server
                 var footer = that.wrapper.find(".k-grid-footer"),
-                    webKitRtlCorrection = (isRtl && kendo.support.browser.webkit) ? scrollbar : 0;
+                    webKitRtlCorrection = (isRtl && browser.webkit) ? scrollbar : 0;
 
                 if (footer.length) {
                     that.scrollables = that.scrollables.add(footer.children(".k-grid-footer-wrap"));
@@ -2500,7 +2507,7 @@ kendo_module({
                 scrollbar = !kendo.support.mobileOS ? kendo.support.scrollbar() : 0;
 
             if (that.options.scrollable) {
-                html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
+                html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><tbody>' + footerRow + '</tbody></table></div></div>');
                 that._appendCols(html.find("table"));
                 html.css((isRtl ? "padding-left" : "padding-right"), scrollbar); // Update inner fix.
 
@@ -3289,8 +3296,7 @@ kendo_module({
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
-                columnIndex,
-                browser = kendo.support.browser;
+                columnIndex;
 
             if (typeof column == "number") {
                 column = columns[column];
@@ -3583,7 +3589,7 @@ kendo_module({
    }
 
     function focusTable(table, direct) {
-        var msie = kendo.support.browser.msie;
+        var msie = browser.msie;
         if (direct === true) {
             table = $(table);
             var condition = msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),

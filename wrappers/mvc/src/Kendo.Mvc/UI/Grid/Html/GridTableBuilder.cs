@@ -17,8 +17,7 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateTable()
         {
-            var table = new HtmlElement("table")
-                            .Attribute("cellspacing", "0");
+            var table = new HtmlElement("table");
 
             var colgroup = new HtmlElement("colgroup");
             colgroup.AppendTo(table);
