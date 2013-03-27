@@ -1515,6 +1515,7 @@ kendo_module({
 
                     if (!destDataSource || !(destDataSource instanceof HierarchicalDataSource)) {
                         referenceDataItem._initChildren();
+                        referenceDataItem.loaded(true);
                         destDataSource = referenceDataItem.children;
                     }
                 }

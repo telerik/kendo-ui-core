@@ -77,6 +77,19 @@
                 equal(item.find(".k-group").css("display"), "none");
             });
 
+            test("appending items dynamically allows parent to be collapsed", function() {
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                var parentNode = treeview.find(".k-item:first");
+
+                treeviewObject.append({ text: "bar" }, parentNode);
+                treeviewObject.collapse(parentNode);
+
+                equal(treeview.find(".k-icon.k-plus").length, 1);
+            });
+
             module("selection", {
                 teardown: cleanArtifacts
             });
