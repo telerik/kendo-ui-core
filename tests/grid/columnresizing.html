@@ -525,6 +525,30 @@
                 equal(grid.content.scrollLeft(), grid.footer.find(".k-grid-footer-wrap").scrollLeft());
             });
 
+            test("columnresize after dataSource is changed", 1, function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = firstColumn[0].offsetWidth;
+
+                resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data: [ { foo: "foo", bar: "bar" } ]
+                }));
+
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = firstColumn[0].offsetWidth;
+
+                resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 20);
+
+                equal(firstColumn[0].offsetWidth, initialWidth + 20);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -690,6 +690,10 @@ kendo_module({
                 that.wrapper.data("kendoReorderable").destroy();
             }
 
+            if (that.resizable) {
+                that.resizable.destroy();
+            }
+
             if (that.virtualScrollable) {
                 that.virtualScrollable.destroy();
             }
@@ -733,6 +737,8 @@ kendo_module({
 
         _destroyColumnAttachments: function() {
             var that = this;
+
+            that.resizeHandle = null;
 
             that.thead.find("th").each(function(){
                 var th = $(this),
@@ -869,7 +875,7 @@ kendo_module({
 
                 that._positionColumnResizeHandle(container);
 
-                container.kendoResizable({
+                that.resizable = container.kendoResizable({
                     handle: ".k-resize-handle",
                     hint: function(handle) {
                         return $('<div class="k-grid-resize-indicator" />').css({
