@@ -4,6 +4,7 @@
         <title>Grid Column Resize</title>
         <script src="../jquery-loader.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -362,8 +363,8 @@
                 var firstColumn = grid.thead.find("th:first");
                 $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
 
-                equal(grid.wrapper.children(".k-resize-handle").first().position().top, firstColumn.position().top);
-                equal(grid.wrapper.children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+                QUnit.close(grid.wrapper.children(".k-resize-handle").first().position().top, firstColumn.position().top, 1);
+                QUnit.close(grid.wrapper.children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth, 1);
             });
 
             test("resizable is attached to the header", function() {
