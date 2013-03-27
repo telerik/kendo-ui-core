@@ -23,7 +23,9 @@ module("History", {
     },
 
     teardown: function() {
-        win.kendo.support.pushState = pushStateSupported;
+        if (win.kendo) {
+            win.kendo.support.pushState = pushStateSupported;
+        }
     }
 });
 
