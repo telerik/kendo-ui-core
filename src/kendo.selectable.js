@@ -72,7 +72,7 @@ kendo_module({
         _tap: function(e) {
             var target = $(e.target),
                 that = this,
-                ctrlKey = e.event.ctrlKey,
+                ctrlKey = e.event.ctrlKey || e.event.metaKey,
                 multiple = that.options.multiple,
                 shiftKey = multiple && e.event.shiftKey,
                 selected,
@@ -107,7 +107,7 @@ kendo_module({
             var that = this,
                 target = $(e.target),
                 selected = target.hasClass(SELECTED),
-                ctrlKey = e.event.ctrlKey;
+                ctrlKey = e.event.ctrlKey || e.event.metaKey;
 
             that._downTarget = target;
 
@@ -151,7 +151,7 @@ kendo_module({
 
             that._marquee.css(position);
 
-            invalidateSelectables(items, that._downTarget[0], position, e.event.ctrlKey);
+            invalidateSelectables(items, that._downTarget[0], position, (e.event.ctrlKey || e.event.metaKey));
 
             e.preventDefault();
         },

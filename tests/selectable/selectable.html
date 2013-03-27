@@ -34,6 +34,7 @@
                 teardown: function() {
                     ul.kendoSelectable("destroy");
                     ul.remove();
+                    $(".k-marquee").remove();
                 }
             });
 
@@ -43,19 +44,21 @@
                 return element;
             };
 
-            $.fn.press = function(x, y, ctrlKey) {
+            $.fn.press = function(x, y, ctrlKey, metaKey) {
                 return triggerEvent(this, "mousedown", {
                     pageX: x,
                     pageY: y,
-                    ctrlKey: ctrlKey
+                    ctrlKey: ctrlKey,
+                    metaKey: metaKey
                 });
             }
 
-            $.fn.move = function(x, y, ctrlKey) {
+            $.fn.move = function(x, y, ctrlKey, metaKey) {
                 return triggerEvent(this, "mousemove", {
                     pageX: x,
                     pageY: y,
-                    ctrlKey: ctrlKey
+                    ctrlKey: ctrlKey,
+                    metaKey: metaKey
                 });
             }
 
@@ -162,12 +165,34 @@
                 ok(selectees.eq(1).hasClass(SELECTED));
             });
 
+            test("multiple selection metaKey click on selected items does not unselects it", function() {
+                var selectable = new Selectable(ul, { multiple: true });
+                var selectees = ul.find(">li");
+
+                selectees.eq(0).tap();
+                selectees.eq(1).tap({ metaKey: true });
+
+                ok(selectees.eq(0).hasClass(SELECTED));
+                ok(selectees.eq(1).hasClass(SELECTED));
+            });
+
             test("single selection ctrlKey click on item when another is selected", function() {
                 var selectable = new Selectable(ul);
                 var selectees = ul.find(">li");
 
                 selectees.eq(0).tap();
                 selectees.eq(1).tap({ ctrlKey: true });
+
+                ok(!selectees.eq(0).hasClass(SELECTED));
+                ok(selectees.eq(1).hasClass(SELECTED));
+            });
+
+            test("single selection metaKey click on item when another is selected", function() {
+                var selectable = new Selectable(ul);
+                var selectees = ul.find(">li");
+
+                selectees.eq(0).tap();
+                selectees.eq(1).tap({ metaKey: true });
 
                 ok(!selectees.eq(0).hasClass(SELECTED));
                 ok(selectees.eq(1).hasClass(SELECTED));
@@ -184,6 +209,17 @@
                 ok(!selectee.hasClass(ACTIVE));
             });
 
+            test("single selection metaKey click on selected item unselects it", function() {
+                var selectable = new Selectable(ul);
+                var selectee = $(ul.find(">li")[0]);
+
+                selectee.tap();
+                selectee.tap({ metaKey: true });
+
+                ok(!selectee.hasClass(SELECTED));
+                ok(!selectee.hasClass(ACTIVE));
+            });
+
             test("multiple selection mousedown with ctrlKey on selected item persist selection", function() {
                 var selectable = new Selectable(ul, { multiple: true });
                 var selectee = $(ul.find(">li")[0]);
@@ -195,12 +231,34 @@
                 ok(!selectee.hasClass(ACTIVE));
             });
 
-            test("multiple selection click on selected item with ctrl key pressed unselect it", function() {
+            test("multiple selection mousedown with metaKey on selected item persist selection", function() {
+                var selectable = new Selectable(ul, { multiple: true });
+                var selectee = $(ul.find(">li")[0]);
+
+                selectee.tap();
+                selectee.press(0, 0, false, true);
+
+                ok(selectee.hasClass(SELECTED));
+                ok(!selectee.hasClass(ACTIVE));
+            });
+
+            test("multiple selection click on selected item with ctrlKey pressed unselect it", function() {
                 var selectable = new Selectable(ul, { multiple: true });
                 var selectee = $(ul.find(">li")[0]);
 
                 selectee.addClass(SELECTED);
                 selectee.tap({ ctrlKey: true });
+
+                ok(!selectee.hasClass(SELECTED));
+                ok(!selectee.hasClass(ACTIVE));
+            });
+
+            test("multiple selection click on selected item with metaKey pressed unselect it", function() {
+                var selectable = new Selectable(ul, { multiple: true });
+                var selectee = $(ul.find(">li")[0]);
+
+                selectee.addClass(SELECTED);
+                selectee.tap({ metaKey: true });
 
                 ok(!selectee.hasClass(SELECTED));
                 ok(!selectee.hasClass(ACTIVE));
@@ -222,6 +280,22 @@
                 ok(!secondSelectee.hasClass(SELECTED));
             });
 
+            test("moving after selected item with metaKey pressed", function() {
+                var selectable = new Selectable(ul, { multiple: true }),
+                    firstSelectee = $(ul.find(">li")[0]),
+                    secondSelectee = $(ul.find(">li")[1]),
+                    position = secondSelectee.offset();
+
+                firstSelectee.addClass(SELECTED);
+                secondSelectee.addClass(SELECTED);
+
+                firstSelectee.press(0, 0, false, true).move(position.left, position.top, false, true).move(position.left, position.top + 1, false, true);
+
+                ok(firstSelectee.hasClass(SELECTED));
+                ok(!secondSelectee.hasClass(ACTIVE));
+                ok(!secondSelectee.hasClass(SELECTED));
+            });
+
             test("moving back from selected item with ctrlKey pressed", function() {
                 var selectable = new Selectable(ul, {multiple: true}),
                     firstSelectee = $(ul.find(">li")[0]),
@@ -233,6 +307,25 @@
 
 
                 firstSelectee.press(0, 0, true).move(position.left, position.top, true).move(position.left, position.top - 1, true);
+
+
+                ok(firstSelectee.hasClass(SELECTED));
+                ok(!secondSelectee.hasClass(ACTIVE));
+                ok(secondSelectee.hasClass(SELECTED));
+                ok(!secondSelectee.hasClass(UNSELECTING));
+            });
+
+            test("moving back from selected item with metaKey pressed", function() {
+                var selectable = new Selectable(ul, {multiple: true}),
+                    firstSelectee = $(ul.find(">li")[0]),
+                    secondSelectee = $(ul.find(">li")[1]),
+                    position = secondSelectee.offset();
+
+                firstSelectee.addClass(SELECTED);
+                secondSelectee.addClass(SELECTED);
+
+
+                firstSelectee.press(0, 0, false, true).move(position.left, position.top, false, true).move(position.left, position.top - 1, false, true);
 
 
                 ok(firstSelectee.hasClass(SELECTED));
@@ -359,6 +452,20 @@
                     });
 
                 ul.children().first().addClass(SELECTED).tap({ ctrlKey: true });
+
+                ok(wasCalled);
+                ok(!ul.children().first().hasClass(SELECTED));
+            });
+
+            test("metaKey click on selected triggers change event", function() {
+                var wasCalled = false,
+                    selectable = new Selectable(ul, {
+                        change: function() {
+                            wasCalled = true;
+                        }
+                    });
+
+                ul.children().first().addClass(SELECTED).tap({ metaKey: true });
 
                 ok(wasCalled);
                 ok(!ul.children().first().hasClass(SELECTED));
