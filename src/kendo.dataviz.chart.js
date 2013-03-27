@@ -4066,31 +4066,31 @@ kendo_module({
 
         createPoint: function(value, series, seriesIx, fields) {
             var chart = this,
-                point;
+                point,
+                pointOptions;
 
-            point = new LinePoint(value,
-                deepExtend({
-                    markers: {
-                        border: {
-                            color: series.color
-                        },
-                        opacity: series.opacity
-                    },
-                    tooltip: {
-                        format: chart.options.tooltip.format
-                    },
-                    labels: {
-                        format: chart.options.labels.format
-                    }
-                }, series, {
-                    color: fields.color,
-                    markers: {
-                        border: {
-                            color: fields.color
-                        }
-                    }
-                })
-            );
+            pointOptions = deepExtend({
+                markers: {
+                    opacity: series.opacity
+                },
+                tooltip: {
+                    format: chart.options.tooltip.format
+                },
+                labels: {
+                    format: chart.options.labels.format
+                }
+            }, series, {
+                color: fields.color
+            });
+
+            // TODO: Extract
+            expandOptions(pointOptions, {
+                value: value,
+                series: series,
+                dataItem: fields.dataItem
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+
+            point = new LinePoint(value, pointOptions);
 
             chart.append(point);
 

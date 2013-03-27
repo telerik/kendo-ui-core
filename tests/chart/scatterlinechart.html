@@ -525,6 +525,38 @@
                     equal(scatterLinePoint.options.labels.format, FORMAT);
                 });
 
+                test("applies color function", function() {
+                    createScatterLineChart({
+                        color: function(point) { return "#f00" }
+                    });
+
+                    equal(scatterLinePoint.options.markers.border.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createScatterLineChart({
+                        data: [[1, 1]],
+                        color: function(point) {
+                            deepEqual(point.value, { x: 1, y: 1});
+                        }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createScatterLineChart({
+                        name: "series 1",
+                        data: [[1, 1]],
+                        color: function(point) { equal(point.series.name, "series 1"); }
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createScatterLineChart({
+                        data: [[1, 1]],
+                        color: function(point) { equal(point.dataItem[0], 1); }
+                    });
+                });
+
             })();
 
             (function() {
