@@ -22,10 +22,10 @@
             .PageSize(20)
             .Events(events => events.Error("error_handler"))
             .Model(model => model.Id(p => p.ProductID))
-            .Create(update => update.Action("EditingInline_Create", "Grid"))
-            .Read(read => read.Action("EditingInline_Read", "Grid"))
-            .Update(update => update.Action("EditingInline_Update", "Grid"))
-            .Destroy(update => update.Action("EditingInline_Destroy", "Grid"))
+            .Create(update => update.Action("EditingPopup_Create", "Grid"))
+            .Read(read => read.Action("EditingPopup_Read", "Grid"))
+            .Update(update => update.Action("EditingPopup_Update", "Grid"))
+            .Destroy(update => update.Action("EditingPopup_Destroy", "Grid"))
         )
     %>
     <script type="text/javascript">
