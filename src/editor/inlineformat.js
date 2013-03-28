@@ -427,12 +427,14 @@ var ColorTool = Tool.extend({
 
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
-            toolName = this.name;
+            toolName = this.name,
+            options = this.options,
+            palette = options.palette;
 
         ui = this._widget = new kendo.ui.ColorPicker(ui, {
-            value: "#000",
-            toolIcon: "k-" + this.options.name,
-            palette: "websafe",
+            value: $.isArray(palette) ? palette[0] : "#000",
+            toolIcon: "k-" + options.name,
+            palette: palette || "websafe",
             change: function() {
                 var color = ui.value();
                 if (color) {
