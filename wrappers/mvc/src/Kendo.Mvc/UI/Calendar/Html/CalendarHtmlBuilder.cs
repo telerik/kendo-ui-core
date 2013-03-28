@@ -18,8 +18,8 @@ namespace Kendo.Mvc.UI
         public IHtmlNode Build()
         {
             return new HtmlElement("div")
-                            .Attributes(Calendar.HtmlAttributes)
                             .Attribute("id", Calendar.Id)
+                            .Attributes(Calendar.HtmlAttributes)
                             .PrependClass(UIPrimitives.Widget, "k-calendar");
         }
     }
