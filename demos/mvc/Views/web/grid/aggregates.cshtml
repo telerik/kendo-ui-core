@@ -9,6 +9,17 @@
                             transport: {
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Products"
                             },
+                            schema:{
+                                model: {
+                                    fields: {
+                                        UnitsInStock: { type: "number" },
+                                        ProductName: { type: "string" },
+                                        UnitPrice: { type: "number" },
+                                        UnitsOnOrder: { type: "number" },
+                                        UnitsInStock: { type: "number" }
+                                    }
+                                }
+                            },
                             pageSize: 7,
                             group: {
                                      field: "UnitsInStock", aggregates: [
