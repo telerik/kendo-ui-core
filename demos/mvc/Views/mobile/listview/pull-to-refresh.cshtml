@@ -27,14 +27,14 @@
                 pageSize: 10,
                 transport: {
                     read: {
-                        url: "http://search.twitter.com/search.json", // the remove service url
+                        url: "http://demos.kendoui.com/service/Twitter/Search", // the remove service url
                         dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
                     },
                     parameterMap: function(options) {
                         return {
                             q: "javascript",
                             page: options.page,
-                            rpp: options.pageSize,
+                            count: options.pageSize,
                             since_id: options.since_id //additional parameters sent to the remote service
                         };
                     }
@@ -49,7 +49,6 @@
             pullToRefresh: true,
             appendOnRefresh: true,
             template: $("#pull-to-refresh-template").text(),
-            endlessScroll: true,
             pullParameters: function(item) {
                 return {
                     since_id: item.id_str,
