@@ -28,14 +28,14 @@
                 serverFiltering: true,
                 transport: {
                     read: {
-                        url: "http://search.twitter.com/search.json", // the remove service url
+                        url: "http://demos.kendoui.com/service/Twitter/Search", // the remove service url
                         dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
                     },
                     parameterMap: function(options) {
                         var filter = options.filter ? options.filter.filters[0].value : "javascript";
                         var parameters = {
                             q: filter, //additional parameters sent to the remote service
-                            rpp: options.pageSize,
+                            count: options.pageSize,
                             page: options.page //next page
                         }
 
