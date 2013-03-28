@@ -65,7 +65,7 @@
       <screenDensity>160</screenDensity>
       <screenResolution>HVGA</screenResolution>
       <deviceLocale>en_US</deviceLocale>
-      <targetAbi>armeabi-v7a</targetAbi>
+      <targetAbi>x86</targetAbi>
       <hardwareProperties/>
       <wipeData>true</wipeData>
       <showWindow>false</showWindow>
