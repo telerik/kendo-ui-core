@@ -16,18 +16,34 @@
                     textarea = $("<textarea />").appendTo(document.body);
                 },
                 teardown: function() {
+                    $(".k-widget").remove();
                     textarea.remove();
                 }
             });
 
-            function setup(content) {
-                editor = textarea.val(content).kendoEditor().data("kendoEditor");
+            function setup(content, options) {
+                editor = textarea.val(content).kendoEditor(options).data("kendoEditor");
             }
 
             test("editor value is get from textarea", function() {
                 setup("foo");
 
                 equal(editor.value(), "foo");
+            });
+
+            test("color tools react to palette definition", function() {
+                var customColor = "#ff1ff1"
+                setup("", {
+                    tools: [
+                        { name: "foreColor", palette: [customColor] }
+                    ]
+                });
+
+                var colorpicker = $("[data-role=colorpicker]");
+
+                equal(colorpicker.length, 1);
+                deepEqual(colorpicker.data("kendoColorPicker").options.palette, [customColor]);
+                equal(colorpicker.data("kendoColorPicker").value(), customColor);
             });
         </script>
 
