@@ -719,21 +719,32 @@ kendo_module({
                 methodName = that.popup.visible() ? "_select" : "_accept",
                 current = that._current,
                 down = key === keys.DOWN,
+                firstChild,
                 pressed;
 
             if (key === keys.UP || down) {
                 if (e.altKey) {
                     that.toggle(down);
                 } else if (down) {
-                    if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === ul.firstChild)) {
-                        current = ul.firstChild;
+                    firstChild = ul.firstChild;
+
+                    if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === firstChild)) {
+                        current = firstChild;
                     } else {
                         current = current[0].nextSibling;
+                        if (!current && firstChild === ul.lastChild) {
+                            current = firstChild;
+                        }
                     }
 
                     that[methodName](current);
                 } else {
-                    that[methodName](current ? current[0].previousSibling : ul.lastChild);
+                    current = current ? current[0].previousSibling : ul.lastChild;
+                    if (!current && firstChild === ul.lastChild) {
+                        current = firstChild;
+                    }
+
+                    that[methodName](current);
                 }
                 e.preventDefault();
                 pressed = true;
