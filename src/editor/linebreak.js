@@ -168,10 +168,11 @@ var NewLineCommand = Command.extend({
             filler.setAttribute('_moz_dirty', '');
             dom.insertAfter(filler, br);
         }
+
         range.setStartAfter(br);
         range.collapse(true);
 
-        dom.scrollTo(br.nextSibling);
+        dom.scrollTo(br.nextSibling || br);
 
         RangeUtils.selectRange(range);
     }

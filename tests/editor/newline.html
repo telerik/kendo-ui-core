@@ -75,6 +75,18 @@
             equal(editor.value(), 'f<br />o');
         });
 
+        test("exec on end of line", function() {
+            editor.value("foo");
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild, 3);
+            range.collapse(true);
+
+            var command = new NewLineCommand({range:range});
+
+            command.exec();
+            equal(editor.value(), "foo<br />");
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
