@@ -628,6 +628,7 @@ kendo_module({
                 that.wrapper.addClass(FOCUSEDCLASS);
             }
 
+            that._prev = "";
             input.toggleClass("k-readonly", show)
                  .val(show ? that.options.placeholder : "");
 
