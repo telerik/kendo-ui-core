@@ -104,7 +104,7 @@ kendo_module({
     }
 
     function saveTitleAttributes(element) {
-        while(element.length) {
+        while(element.length && !element.is("body")) {
             saveTitleAttributeForElement(element);
             element = element.parent();
         }
