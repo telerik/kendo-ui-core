@@ -25,7 +25,7 @@ class Issue
         @labels.grep(/#{prefix}:/i) { |l| l.split(":")[1].strip }
     end
 
-    def framework_construct?()
+    def framework_construct?
         @labels.join(" ") =~ /\b(NavBar|ScrollView|ModalView|View|ButtonGroup|Application|ActionSheet|Popup|FX)\b/
     end
 end
@@ -85,8 +85,9 @@ class ChangeLog
             Suite.new("Web", "web"),
             Suite.new("DataViz", "dataviz"),
             Suite.new("Mobile", "mobile"),
-            Suite.new("ASP.NET MVC Wrappers" , "aspnetmvc"),
-            Suite.new("JSP Wrappers" , "jsp")
+            Suite.new("ASP.NET MVC Wrappers", "aspnetmvc"),
+            Suite.new("JSP Wrappers", "jsp"),
+            Suite.new("PHP Wrappers", "php")
         ]
 
         fetch_issues
