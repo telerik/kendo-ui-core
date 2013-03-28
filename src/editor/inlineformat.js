@@ -447,7 +447,9 @@ var ColorTool = Tool.extend({
             ui.trigger("change");
             editor.focus();
         });
-        ui.element.attr("title", initOptions.title);
+        ui.wrapper
+            .attr({ title: initOptions.title, unselectable: "on" })
+            .find("*").attr("unselectable", "on");
     }
 });
 
