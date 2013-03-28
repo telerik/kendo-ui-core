@@ -1,9 +1,5 @@
-﻿using KendoCRUDService.Common;
-using System.Configuration;
-using System.IO;
-using System.Text;
+﻿using System.Configuration;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using Twitterizer;
 
 namespace KendoCRUDService.Controllers
@@ -12,9 +8,10 @@ namespace KendoCRUDService.Controllers
     {
         //
         // GET: /Twitter/
-        public ActionResult Search(string q, decimal? since_id, decimal? max_id, int? count, string callback)
+        public ActionResult Search(string q, decimal? since_id, decimal? max_id, int? count, int? page, string callback)
         {
             string data = "{}";
+            string contentType = "application/json";
 
             if (!string.IsNullOrWhiteSpace(q))
             {
@@ -26,16 +23,23 @@ namespace KendoCRUDService.Controllers
                 {
                     MaxId = max_id ?? 0,
                     SinceId = since_id ?? 0,
-                    NumberPerPage = count ?? 15
+                    NumberPerPage = count ?? 15,
+                    PageNumber = page ?? 1
                 });
 
                 data = searchResult.Content;
             }
 
+            if (!string.IsNullOrWhiteSpace(callback))
+            {
+                data = string.Format("{0}({1})", callback, data);
+                contentType = "application/javascript";
+            }
+
             return new ContentResult
             {
-                Content = string.IsNullOrWhiteSpace(callback) ? data : string.Format("{0}({1})", callback, data),
-                ContentType = "application/json"
+                Content = data,
+                ContentType = contentType
             };
         }
     }
