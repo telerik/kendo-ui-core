@@ -244,6 +244,17 @@
                 equal(combobox.value(), data[0].value);
             });
 
+            test("press down selects only LI which is focused", function() {
+                combobox.options.filter = "startswith";
+                combobox.dataSource.read();
+
+                combobox.value("1");
+                combobox.search("F");
+                combobox.input.focus().press(keys.DOWN);
+
+                ok(combobox.ul.children().eq(0).hasClass(SELECTED));
+            });
+
             test("press enter should close popup when no change in selection", function() {
                 combobox.popup.bind("close", function(){
                     ok(true);
