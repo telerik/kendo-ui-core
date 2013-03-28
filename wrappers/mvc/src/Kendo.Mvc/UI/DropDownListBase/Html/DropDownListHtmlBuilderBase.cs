@@ -23,9 +23,9 @@ namespace Kendo.Mvc.UI.Html
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new { name = Component.Name, id = Component.Id, type = "text" })
+                   .ToggleAttribute("value", value, value.HasValue())
                    .Attributes(Component.HtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
-                   .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", Component.Enabled == false)
                    .ToggleClass("input-validation-error", !Component.IsValid());
         }

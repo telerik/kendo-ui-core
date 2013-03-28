@@ -45,9 +45,9 @@ namespace Kendo.Mvc.UI.Html
             
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new { name = Component.Name, id = Component.Id, type = "number" })
+                   .ToggleAttribute("value", value, value.HasValue())
                    .Attributes(Component.HtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
-                   .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("min", "{0}".FormatWith(Component.Min), Component.Min.HasValue)
                    .ToggleAttribute("max", "{0}".FormatWith(Component.Max), Component.Max.HasValue)
                    .ToggleAttribute("step", "{0}".FormatWith(Component.Step), Component.Step.HasValue)
