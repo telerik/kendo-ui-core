@@ -49,11 +49,16 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>$ANDROID_HOME/tools/android update sdk --no-ui  -t 37
-./run-android.sh $ANDROID_SERIAL</command>
+      <command>./run-android.sh $ANDROID_SERIAL</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>results/test-results.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+  </publishers>
   <buildWrappers>
     <hudson.plugins.android__emulator.AndroidEmulator plugin="android-emulator@2.8.1">
       <osVersion>4.1</osVersion>
