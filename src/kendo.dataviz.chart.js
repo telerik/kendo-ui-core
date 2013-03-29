@@ -548,6 +548,7 @@ kendo_module({
             if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip())) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
+            chart.bind(LEGEND_LABEL_CLICK, proxy(chart._legendLabelClick, chart));
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -1069,6 +1070,17 @@ kendo_module({
             chart._click(e);
         },
 
+        _legendLabelClick: function(e) {
+            var chart = this,
+                plotArea = chart._plotArea,
+                currentSeries = plotArea.srcSeries[e.seriesIndex],
+                paneName;
+
+            currentSeries.visible = !currentSeries.visible;
+            paneName = plotArea.seriesPaneName(currentSeries);
+            chart.redraw(paneName);
+        },
+
         destroy: function() {
             var chart = this,
                 dataSource = chart.dataSource;
@@ -1236,7 +1248,8 @@ kendo_module({
                 element: $(e.target),
                 text: item.text,
                 color: item.color,
-                series: item.series
+                series: item.series,
+                seriesIndex: item.series.index
             });
         }
     });
@@ -2628,6 +2641,9 @@ kendo_module({
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
+                if (currentSeries.visible === false) {
+                    return;
+                }
                 var value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
@@ -2697,8 +2713,11 @@ kendo_module({
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
-                    currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
+                    if (currentSeries.visible === false) {
+                        continue;
+                    }
+                    currentCategory = categories[categoryIx];
                     pointData = bindPoint(currentSeries, categoryIx, bindableFields);
 
                     callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
@@ -2743,8 +2762,7 @@ kendo_module({
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
                 labelOptions = deepExtend({}, series.labels),
-                bar,
-                cluster;
+                bar, cluster;
 
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
@@ -2774,8 +2792,7 @@ kendo_module({
 
             if (isStacked) {
                 var stackWrap = barChart.getStackWrap(series, cluster),
-                    positiveStack,
-                    negativeStack;
+                    positiveStack, negativeStack;
 
                 if (stackWrap.children.length === 0) {
                     positiveStack = new StackLayout({
@@ -2851,8 +2868,7 @@ kendo_module({
         computeAxisRanges: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                axisName,
-                categoryTotals;
+                axisName, categoryTotals;
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis;
@@ -2882,8 +2898,7 @@ kendo_module({
             var chart = this,
                 options = chart.options,
                 categorySlot = categoryAxis.getSlot(categoryIx),
-                stackAxis,
-                zeroSlot;
+                stackAxis, zeroSlot;
 
             if (options.isStacked) {
                 zeroSlot = valueAxis.getSlot(0, 0);
@@ -2908,14 +2923,15 @@ kendo_module({
                 series = options.series,
                 count = categoriesCount(series),
                 clusters = chart.children,
-                categoryIx,
-                seriesIx,
-                currentSeries,
-                valueAxis,
+                categoryIx, seriesIx,
+                currentSeries, valueAxis,
                 seriesCount = series.length;
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
+                if (currentSeries.visible === false) {
+                    continue;
+                }
                 valueAxis = chart.seriesValueAxis(currentSeries);
 
                 for (categoryIx = 0; categoryIx < count; categoryIx++) {
@@ -3618,20 +3634,19 @@ kendo_module({
                 options = chart.options,
                 series = options.series,
                 seriesPoints = chart.seriesPoints,
-                currentSeries,
-                seriesIx,
+                currentSeries, seriesIx,
                 seriesCount = seriesPoints.length,
-                currentSeriesPoints,
-                linePoints,
-                point,
-                pointIx,
-                pointCount,
+                currentSeriesPoints, linePoints,
+                point, pointIx, pointCount,
                 segments = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeries = series[seriesIx];
+                if (currentSeries.visible === false) {
+                    continue;
+                }
                 currentSeriesPoints = seriesPoints[seriesIx];
                 pointCount = currentSeriesPoints.length;
-                currentSeries = series[seriesIx];
                 linePoints = [];
 
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
@@ -3839,7 +3854,6 @@ kendo_module({
         points: function() {
             var segment = this,
                 chart = segment.parent,
-                stack = chart.options.isStacked && segment.seriesIx > 0,
                 plotArea = chart.plotArea,
                 invertAxes = chart.options.invertAxes,
                 valueAxis = chart.seriesValueAxis(segment.series),
@@ -3849,25 +3863,20 @@ kendo_module({
                 end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints),
-                firstPoint,
-                lastPoint;
+                pos = invertAxes ? X : Y,
+                firstPoint, lastPoint;
 
-            if (invertAxes) {
-                end = clipValue(end, valueAxisLineBox.x1, valueAxisLineBox.x2);
-            } else {
-                end = clipValue(end, valueAxisLineBox.y1, valueAxisLineBox.y2);
-            }
-
-            if (!stack && points.length > 1) {
+            end = clipValue(end, valueAxisLineBox[pos + 1], valueAxisLineBox[pos + 2]);
+            if (!segment.stackPoints && points.length > 1) {
                 firstPoint = points[0];
                 lastPoint = last(points);
 
                 if (invertAxes) {
-                    points.unshift(new Point2D(end, firstPoint.y));
-                    points.push(new Point2D(end, lastPoint.y));
+                    points.unshift(Point2D(end, firstPoint.y));
+                    points.push(Point2D(end, lastPoint.y));
                 } else {
-                    points.unshift(new Point2D(firstPoint.x, end));
-                    points.push(new Point2D(lastPoint.x, end));
+                    points.unshift(Point2D(firstPoint.x, end));
+                    points.push(Point2D(lastPoint.x, end));
                 }
             }
 
@@ -4117,16 +4126,15 @@ kendo_module({
                 series = options.series,
                 seriesPoints = chart.seriesPoints,
                 bindableFields = chart.bindableFields(),
-                pointIx,
-                seriesIx,
-                currentSeries,
-                currentSeriesPoints,
-                pointData,
-                value,
-                fields;
+                pointIx, seriesIx, currentSeries,
+                currentSeriesPoints, pointData,
+                value, fields;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
+                if (currentSeries.visible === false) {
+                    continue;
+                }
 
                 currentSeriesPoints = seriesPoints[seriesIx];
                 if (!currentSeriesPoints) {
@@ -4972,6 +4980,9 @@ kendo_module({
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
+                if (currentSeries.visible) {
+                    continue;
+                }
                 data = currentSeries.data;
                 total = chart.pointsTotal(currentSeries);
                 anglePerValue = 360 / total;
@@ -5694,6 +5705,7 @@ kendo_module({
             ChartElement.fn.init.call(plotArea, options);
 
             plotArea.series = series;
+            plotArea.setSeriesIndexes();
             plotArea.charts = [];
             plotArea.options.legend.items = [];
             plotArea.axes = [];
@@ -5718,6 +5730,16 @@ kendo_module({
                 width: 0
             },
             legend: {}
+        },
+
+        setSeriesIndexes: function() {
+            var series = this.series,
+                i, currentSeries;
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                currentSeries.index = i;
+            }
         },
 
         createPanes: function() {
@@ -5778,8 +5800,7 @@ kendo_module({
         findPane: function(name) {
             var plotArea = this,
                 panes = plotArea.panes,
-                i,
-                matchingPane;
+                i, matchingPane;
 
             for (i = 0; i < panes.length; i++) {
                 if (panes[i].options.name === name) {
@@ -5794,8 +5815,7 @@ kendo_module({
         findPointPane: function(point) {
             var plotArea = this,
                 panes = plotArea.panes,
-                i,
-                matchingPane;
+                i, matchingPane;
 
             for (i = 0; i < panes.length; i++) {
                 if (panes[i].box.containsPoint(point)) {
@@ -5818,8 +5838,7 @@ kendo_module({
 
         removeAxis: function(axisToRemove) {
             var plotArea = this,
-                i,
-                axis,
+                i, axis,
                 filteredAxes = [];
 
             for (i = 0; i < plotArea.axes.length; i++) {
@@ -5846,8 +5865,7 @@ kendo_module({
 
         removeChart: function(chartToRemove) {
             var plotArea = this,
-                i,
-                chart,
+                i, chart,
                 filteredCharts = [];
 
             for (i = 0; i < plotArea.charts.length; i++) {
@@ -5896,10 +5914,7 @@ kendo_module({
         groupAxes: function(panes) {
             var xAxes = [],
                 yAxes = [],
-                paneAxes,
-                axis,
-                paneIx,
-                axisIx;
+                paneAxes, axis, paneIx, axisIx;
 
             for (paneIx = 0; paneIx < panes.length; paneIx++) {
                 paneAxes = panes[paneIx].axes;
@@ -5920,9 +5935,7 @@ kendo_module({
             var plotArea = this,
                 series = plotArea.series,
                 seriesByPane = {},
-                i,
-                pane,
-                currentSeries;
+                i, pane, currentSeries;
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
@@ -5939,14 +5952,27 @@ kendo_module({
         },
 
         filterSeriesByType: function(series, types) {
-            var i,
-                currentSeries,
+            var i, currentSeries,
                 result = [];
 
             types = [].concat(types);
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 if (inArray(currentSeries.type, types)) {
+                    result.push(currentSeries);
+                }
+            }
+
+            return result;
+        },
+
+        filterSeriesByVisibility: function(series) {
+            var i, currentSeries,
+                result = [];
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                if (currentSeries.visible !== false) {
                     result.push(currentSeries);
                 }
             }
@@ -6029,10 +6055,7 @@ kendo_module({
                 rightAnchors = {},
                 topAnchors = {},
                 bottomAnchors = {},
-                pane,
-                paneId,
-                axis,
-                i;
+                pane, paneId, axis, i;
 
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
@@ -6126,9 +6149,7 @@ kendo_module({
                 axes = plotArea.groupAxes(panes).any,
                 axisBox = axisGroupBox(axes),
                 overflowX = 0,
-                i,
-                currentPane,
-                currentAxis;
+                i, currentPane, currentAxis;
 
             for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
@@ -6151,12 +6172,8 @@ kendo_module({
         },
 
         shrinkAxisHeight: function(panes) {
-            var i,
-                currentPane,
-                axes,
-                overflowY,
-                j,
-                currentAxis;
+            var i, currentPane, axes,
+                overflowY, j, currentAxis;
 
             for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
@@ -6254,8 +6271,7 @@ kendo_module({
                 charts = plotArea.charts,
                 count = charts.length,
                 box = plotArea.box,
-                chartPane,
-                i;
+                chartPane, i;
 
             for (i = 0; i < count; i++) {
                 chartPane = charts[i].pane;
@@ -6269,16 +6285,13 @@ kendo_module({
             var plotArea = this,
                 box = plotArea.box,
                 panes = plotArea.panes,
-                i,
                 panesLength = panes.length,
-                currentPane,
-                paneBox,
+                i, currentPane, paneBox,
                 remainingHeight = box.height(),
                 remainingPanes = panesLength,
                 autoHeightPanes = 0,
                 top = box.y1,
-                height,
-                percents;
+                height, percents;
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
@@ -6661,9 +6674,10 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
+                filteredSeries = plotArea.filterSeriesByVisibility(series),
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
+                    isStacked: firstSeries.stack && filteredSeries.length > 1,
                     series: series
                 });
 
@@ -6677,9 +6691,10 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
+                filteredSeries = plotArea.filterSeriesByVisibility(series),
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
+                    isStacked: firstSeries.stack && filteredSeries.length > 1,
                     series: series
                 });
 
@@ -6740,15 +6755,9 @@ kendo_module({
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 definitions = [].concat(plotArea.options.categoryAxis),
-                i,
-                axisOptions,
-                axisPane,
-                categories,
-                type,
-                name,
-                dateCategory,
-                categoryAxis,
-                axes = [],
+                i, axisOptions, axisPane,
+                categories, type, name,
+                dateCategory, categoryAxis, axes = [],
                 primaryAxis;
 
             for (i = 0; i < definitions.length; i++) {
@@ -6827,14 +6836,9 @@ kendo_module({
                 definitions = [].concat(plotArea.options.valueAxis),
                 invertAxes = plotArea.invertAxes,
                 baseOptions = { vertical: !invertAxes },
-                axisOptions,
-                axisPane,
-                valueAxis,
-                primaryAxis,
-                axes = [],
-                range,
-                name,
-                i;
+                axisOptions, axisPane, valueAxis,
+                primaryAxis, axes = [], range,
+                name, i;
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];

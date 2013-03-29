@@ -222,7 +222,7 @@ kendo_module({
                 autoBind = options.autoBind,
                 dsOptions = options.dataSource;
 
-            if(!defined(autoBind)) {
+            if (!defined(autoBind)) {
                autoBind = navi.chart.options.autoBind;
             }
 
