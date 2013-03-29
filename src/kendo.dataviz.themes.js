@@ -33,6 +33,7 @@ kendo_module({
                 }
             },
             seriesDefaults: {
+                visible: true,
                 labels: {
                     font: SANS11
                 },

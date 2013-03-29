@@ -15,42 +15,35 @@
         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart" style="width: 800px; height: 100px;"></div>
-        <textArea id="log" rows="20" cols="40"></textArea>
+        <div id="chart"></div>
         <script>
             $(function() {
-                function log(message) {
-                    var area = $("#log");
-                    area.val(area.val() + message + "\n");
-                    area[0].scrollTop = area[0].scrollHeight;
-                }
-
                 $("#chart").kendoChart({
-                    series: [{
-                        type: "area",
-                        data: [1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1,
-                               1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1, 1, 2, 3, 4, 1]
-                    }],
-                    categoryAxis: {
-                        name: "main",
-                        select: {
-                            visible: true,
-                            from: 0,
-                            to: 5
-                        }
-                    },
-                    valueAxis: {
+                    seriesDefaults: {
+                        stack: true,
+                        type: "line",
                         visible: false
                     },
-                    selectStart: function(e) {
-                        log("selectStart - " + e.axis.name + ": " + e.from + " - " + e.to);
+                    series: [{
+                        data: [1,2,3],
+                        name: "1"
+                    },{
+                        data: [1,2,3],
+                        name: "2"
+                    },{
+                        data: [1,2,3],
+                        name: "3"
+                    }],
+                    legend: {
+                        visible: true
                     },
-                    select: function(e) {
-                        log("select - " + e.axis.name + ": " + e.from + " - " + e.to);
+                    plotArea: {
+                        background: "blue"
                     },
-                    selectEnd: function(e) {
-                        log("selectEnd - " + e.axis.name + ": " + e.from + " - " + e.to);
-                    }
+                    categoryAxis: {
+                        categories: [1,2,3]
+                    },
+                    transitions: false
                 });
             });
         </script>
