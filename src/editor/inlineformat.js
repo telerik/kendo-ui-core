@@ -401,8 +401,11 @@ var ColorTool = Tool.extend({
     init: function(options) {
         Tool.fn.init.call(this, options);
 
-        this.options = options;
         this.format = [{ tags: ["span"] }];
+    },
+
+    options: {
+        palette: "websafe"
     },
 
     update: function() {
@@ -428,13 +431,13 @@ var ColorTool = Tool.extend({
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
             toolName = this.name,
-            options = this.options,
+            options =  extend({}, ColorTool.fn.options, this.options),
             palette = options.palette;
 
         ui = this._widget = new kendo.ui.ColorPicker(ui, {
             value: $.isArray(palette) ? palette[0] : "#000",
             toolIcon: "k-" + options.name,
-            palette: palette || "websafe",
+            palette: palette,
             change: function() {
                 var color = ui.value();
                 if (color) {
