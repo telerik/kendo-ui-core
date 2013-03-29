@@ -624,8 +624,8 @@ kendo_module({
 
         _footer: function(template) {
             var that = this,
+                today = getToday(),
                 element = that.element,
-                today = new DATE(),
                 footer = element.find(".k-footer");
 
             if (!template) {
@@ -736,7 +736,7 @@ kendo_module({
                 link = that._today;
 
             if (toggle === undefined) {
-                toggle = isInRange(new DATE(), options.min, options.max);
+                toggle = isInRange(getToday(), options.min, options.max);
             }
 
             if (link) {
@@ -757,7 +757,7 @@ kendo_module({
         _todayClick: function(e) {
             var that = this,
                 depth = views[that.options.depth],
-                today = new DATE();
+                today = getToday();
 
             e.preventDefault();
 
@@ -1192,10 +1192,13 @@ kendo_module({
         return result;
     }
 
-    function restrictValue (value, min, max) {
+    function getToday() {
         var today = new DATE();
+        return new DATE(today.getFullYear(), today.getMonth(), today.getDate());
+    }
 
-        today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
+    function restrictValue (value, min, max) {
+        var today = getToday();
 
         if (value) {
             today = new DATE(+value);

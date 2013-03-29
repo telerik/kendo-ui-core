@@ -221,6 +221,19 @@
                 equal(cal.calls("_todayClick"), 0);
             });
 
+            test("today link sets today not now", function() {
+                var today = new Date(),
+                    cal = new Calendar(div, {
+                        max: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 12, 12)
+                    });
+
+                stub(cal, "_todayClick");
+
+                cal._today.click();
+
+                equal(+cal.value(), +new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+            });
+
             test("footer:false should not render footer", function() {
                 var cal = new Calendar(div, {
                     footer: false
