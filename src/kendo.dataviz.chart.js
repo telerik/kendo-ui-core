@@ -3172,7 +3172,6 @@ kendo_module({
                 target = bullet.target,
                 invertAxes = options.invertAxes,
                 valueAxis = chart.seriesValueAxis(bullet.options),
-                axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis),
                 categorySlot = chart.categorySlot(chart.categoryAxis, options.categoryIx, valueAxis),
                 targetValueSlot = chart.valueSlot(valueAxis, bullet.value.target, bullet.value.target),
                 targetSlotX = invertAxes ? targetValueSlot : categorySlot,
