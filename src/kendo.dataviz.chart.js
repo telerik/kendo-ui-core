@@ -5570,7 +5570,16 @@ kendo_module({
                 return;
             }
 
-            segment = new DonutSegment(value, sector, fields.series);
+            var segmentOptions = deepExtend({}, fields.series);
+            expandOptions(segmentOptions, {
+                value: value,
+                series: fields.series,
+                dataItem: fields.dataItem,
+                category: fields.category,
+                percentage: fields.percentage
+            }, { defaults: fields.series._defaults, excluded: ["data", "aggregate"] });
+
+            segment = new DonutSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);

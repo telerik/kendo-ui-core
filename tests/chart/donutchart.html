@@ -445,29 +445,50 @@
                     view = new ViewStub();
                     plotArea = new PlotAreaStub();
 
-                    donutChart = new dataviz.DonutChart(plotArea, {
+                    equal(segments[0].options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createDonutChart({
                         series: [{
                             type: "donut",
-                            data: [{
-                                value: 100,
-                                category: "Value A"
-                            }, {
-                                value: 200,
-                                category: "Value B",
-                                visible: false
-                            }, {
-                                value: 300,
-                                category: "Value C",
-                                visible: false
-                            }]
-                        }]});
+                            data: [1],
+                            color: function(p) { equal(p.value, 1); }
+                        }]
+                    });
+                });
 
-                    donutChart.reflow(chartBox);
-                    donutChart.getViewElements(view);
+                test("color fn argument contains percentage", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            color: function(p) { equal(p.percentage, 1); }
+                        }]
+                    });
+                });
 
-                    segments = donutChart.segments;
+                test("color fn argument contains dataItem", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            color: function(p) {
+                                deepEqual(p.dataItem, 1);
+                            }
+                        }]
+                    });
+                });
 
-                    equal(segments.length, 1);
+                test("color fn argument contains series", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            name: "donutSeries",
+                            color: function(p) { equal(p.series.name, "donutSeries"); }
+                        }]
+                    });
                 });
             })();
 
