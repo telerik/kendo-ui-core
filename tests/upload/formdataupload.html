@@ -473,6 +473,16 @@
                     equal(lastFormData.myId, 42);
                 });
 
+                test("upload event contains XHR reference", 1, function() {
+                    uploadInstance = createUpload({ upload:
+                        function(e) {
+                            ok(e.XMLHttpRequest);
+                        }
+                    });
+
+                    simulateFileSelect();
+                });
+
                 test("user data can be updated on retry", function() {
                     var id = 1;
 
