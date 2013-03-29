@@ -3174,7 +3174,7 @@ kendo_module({
                 valueAxis = chart.seriesValueAxis(bullet.options),
                 axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis),
                 categorySlot = chart.categorySlot(chart.categoryAxis, options.categoryIx, valueAxis),
-                targetValueSlot = chart.valueSlot(valueAxis, bullet.value.target, axisCrossingValue),
+                targetValueSlot = chart.valueSlot(valueAxis, bullet.value.target, bullet.value.target),
                 targetSlotX = invertAxes ? targetValueSlot : categorySlot,
                 targetSlotY = invertAxes ? categorySlot : targetValueSlot,
                 targetSlot = new Box2D(
