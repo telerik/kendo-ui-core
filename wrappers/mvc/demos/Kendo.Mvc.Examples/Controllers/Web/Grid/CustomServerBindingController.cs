@@ -165,14 +165,14 @@ namespace Kendo.Mvc.Examples.Controllers
                     case "OrderID":
                         data = data.OrderBy(order => order.OrderID);
                         break;
-                    case "Customer.ContactName":
-                        data = data.OrderBy(order => order.Customer.ContactName);
+                    case "ShipCity":
+                        data = data.OrderBy(order => order.ShipCity);
                         break;
-                    case "ShipAddress":
-                        data = data.OrderBy(order => order.ShipAddress);
+                    case "ShipCountry":
+                        data = data.OrderBy(order => order.ShipCountry);
                         break;
-                    case "OrderDate":
-                        data = data.OrderBy(order => order.OrderDate);
+                    case "ShipName":
+                        data = data.OrderBy(order => order.ShipName);
                         break;
                 }
             }
@@ -183,14 +183,14 @@ namespace Kendo.Mvc.Examples.Controllers
                     case "OrderID":
                         data = data.OrderByDescending(order => order.OrderID);
                         break;
-                    case "Customer.ContactName":
-                        data = data.OrderByDescending(order => order.Customer.ContactName);
+                    case "ShipCity":
+                        data = data.OrderByDescending(order => order.ShipCity);
                         break;
-                    case "ShipAddress":
-                        data = data.OrderByDescending(order => order.ShipAddress);
+                    case "ShipCountry":
+                        data = data.OrderByDescending(order => order.ShipCountry);
                         break;
-                    case "OrderDate":
-                        data = data.OrderByDescending(order => order.OrderDate);
+                    case "ShipName":
+                        data = data.OrderByDescending(order => order.ShipName);
                         break;
                 }
             }
