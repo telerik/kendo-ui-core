@@ -19,31 +19,10 @@
         <script>
             $(function() {
                 $("#chart").kendoChart({
-                    seriesDefaults: {
-                        stack: true,
-                        type: "line",
-                        visible: false
-                    },
                     series: [{
-                        data: [1,2,3],
-                        name: "1"
-                    },{
-                        data: [1,2,3],
-                        name: "2"
-                    },{
-                        data: [1,2,3],
-                        name: "3"
-                    }],
-                    legend: {
-                        visible: true
-                    },
-                    plotArea: {
-                        background: "blue"
-                    },
-                    categoryAxis: {
-                        categories: [1,2,3]
-                    },
-                    transitions: false
+                        type: "pie",
+                        data: [1,2,3]
+                    }]
                 });
             });
         </script>

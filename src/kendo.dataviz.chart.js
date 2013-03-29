@@ -1073,7 +1073,7 @@ kendo_module({
         _legendLabelClick: function(e) {
             var chart = this,
                 plotArea = chart._plotArea,
-                currentSeries = plotArea.srcSeries[e.seriesIndex],
+                currentSeries = (plotArea.srcSeries || plotArea.series)[e.seriesIndex],
                 paneName;
 
             currentSeries.visible = !currentSeries.visible;
@@ -4980,9 +4980,6 @@ kendo_module({
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
-                if (currentSeries.visible) {
-                    continue;
-                }
                 data = currentSeries.data;
                 total = chart.pointsTotal(currentSeries);
                 anglePerValue = 360 / total;
