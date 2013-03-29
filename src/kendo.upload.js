@@ -860,7 +860,11 @@ kendo_module({
         performUpload: function(fileEntry) {
             var upload = this.upload,
                 formData = this.createFormData(fileEntry.data("files")),
-                e = { files: fileEntry.data("fileNames") };
+                xhr = new XMLHttpRequest(),
+                e = {
+                    files: fileEntry.data("fileNames"),
+                    XMLHttpRequest: xhr
+                };
 
             if (!upload.trigger(UPLOAD, e)) {
                 upload._fileAction(fileEntry, CANCEL);
@@ -873,7 +877,7 @@ kendo_module({
 
                 upload._fileState(fileEntry, "uploading");
 
-                this.postFormData(this.upload.options.async.saveUrl, formData, fileEntry);
+                this.postFormData(upload.options.async.saveUrl, formData, fileEntry, xhr);
             } else {
                 this.removeFileEntry(fileEntry);
             }
@@ -913,9 +917,8 @@ kendo_module({
             }
         },
 
-        postFormData: function(url, data, fileEntry) {
-            var xhr = new XMLHttpRequest(),
-                module = this;
+        postFormData: function(url, data, fileEntry, xhr) {
+            var module = this;
 
             fileEntry.data("request", xhr);
 
