@@ -859,6 +859,38 @@
                     equal(areaPoint.options.labels.margin, MARGIN);
                 });
 
+                test("applies color function", function() {
+                    createAreaChart({
+                        color: function(p) { return "#f00" }
+                    });
+
+                    equal(areaPoint.options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createAreaChart({
+                        data: [1],
+                        color: function(p) { equal(p.value, 1); }
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createAreaChart({
+                        data: [1],
+                        color: function(p) {
+                            deepEqual(p.dataItem, 1);
+                        }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createAreaChart({
+                        name: "areaSeries",
+                        data: [1],
+                        color: function(p) { equal(p.series.name, "areaSeries"); }
+                    });
+                });
+
             })();
 
             (function() {
