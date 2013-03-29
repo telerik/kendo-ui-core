@@ -3,7 +3,7 @@ kendo_module({
     name: "ActionSheet",
     category: "mobile",
     description: "The mobile ActionSheet widget displays a set of choices related to a task the user initiates.",
-    depends: [ "mobile.popover" ]
+    depends: [ "mobile.popover", "mobile.shim" ]
 });
 
 (function($, undefined) {
