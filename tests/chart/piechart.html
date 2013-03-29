@@ -19,6 +19,7 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
@@ -585,17 +586,25 @@
                     options: { }
                 });
 
+                function createPieChart(seriesOptions, options) {
+                    plotArea = new PlotAreaStub();
+                    setupPieChart(plotArea, deepExtend({
+                        series: [
+                            deepExtend({
+                                data: [{ value: 1, explode: true }]
+                            }, seriesOptions)
+                        ],
+                        padding: PADDING,
+                        startAngle: START_ANGLE,
+                        connectors: { width: 2, color: "blue", padding: 4 }
+                    }, options));
+                    pieSegment = firstSegment;
+                }
+
                 // ------------------------------------------------------------
                 module("Pie Chart / Configuration", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
-                        setupPieChart(plotArea, {
-                            series: [ { data: [{ value: 1, explode: true }] } ],
-                            padding: PADDING,
-                            startAngle: START_ANGLE,
-                            connectors: { width: 2, color: "blue", padding: 4 }
-                        });
-                        pieSegment = firstSegment;
+                        createPieChart();
                     }
                 });
 
@@ -618,14 +627,46 @@
                 });
 
                 test("sets default radius to 5 pixels", function() {
-                    plotArea = new PlotAreaStub();
-                    setupPieChart(plotArea, {
-                        series: [ { data: [{ value: 1 }] } ],
-                        padding: 500
-                    });
-                    pieSegment = firstSegment;
-
+                    createPieChart({}, { padding: 500 });
                     equal(pieSegment.sector.r, 5);
+                });
+
+                test("applies color function", function() {
+                    createPieChart({
+                        color: function(p) { return "#f00" }
+                    });
+
+                    equal(pieSegment.options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createPieChart({
+                        color: function(p) { equal(p.value, 1); }
+                    });
+                });
+
+                test("color fn argument contains percentage", 1, function() {
+                    createPieChart({
+                        color: function(p) { equal(p.percentage, 1); }
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createPieChart({
+                        color: function(p) {
+                            deepEqual(p.dataItem, {
+                                "explode": true,
+                                "value": 1
+                            });
+                        }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createPieChart({
+                        name: "pieSeries",
+                        color: function(p) { equal(p.series.name, "pieSeries"); }
+                    });
                 });
 
                 // ------------------------------------------------------------

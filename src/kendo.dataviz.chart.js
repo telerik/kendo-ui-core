@@ -5081,7 +5081,9 @@ kendo_module({
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!fields.explode;
-                    currentSeries.color = fields.color || colors[i % colorsCount];
+                    if (!$.isFunction(currentSeries.color)) {
+                        currentSeries.color = fields.color || colors[i % colorsCount];
+                    }
 
                     callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
@@ -5124,7 +5126,16 @@ kendo_module({
                 return;
             }
 
-            segment = new PieSegment(value, sector, fields.series);
+            var segmentOptions = deepExtend({}, fields.series);
+            expandOptions(segmentOptions, {
+                value: value,
+                series: fields.series,
+                dataItem: fields.dataItem,
+                category: fields.category,
+                percentage: fields.percentage
+            }, { defaults: fields.series._defaults, excluded: ["data", "aggregate"] });
+
+            segment = new PieSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
