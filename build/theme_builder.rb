@@ -27,55 +27,55 @@ file 'themebuilder/scripts/template.js' => [ 'styles/web/template.less',
 end
 
 def live_cdn_version
-    if BETA
-        demo_html = `curl http://demos.kendoui.com/beta/web/overview/index.html`
-    else
-        demo_html = `curl http://demos.kendoui.com/web/overview/index.html`
-    end
+    demo_html = `curl -sS http://demos.kendoui.com/#{BETA ? 'beta/' : ''}web/overview/index.html`
 
     /cdn\.kendostatic\.com\/(\d+\.\d+\.\d+)\//.match(demo_html)[1]
 end
 
-file 'dist/themebuilder/production/bootstrap.js' => [
-    'themebuilder/bootstrap.js',
-    THEME_BUILDER_BUILDFILE
-] do |t|
+class PatchedBoostrapScriptTask < Rake::FileTask
+    attr_accessor :cdn_root
 
-    version = live_cdn_version
+    include Rake::DSL
 
-    patch_bootstrap(t.name, t.prerequisites[0], "#{CDN_ROOT}#{version}")
+    def execute(args=nil)
+        ensure_path(name)
 
-end
+        File.open(name, "w") do |file|
+            bootstrap = File.read(prerequisites[0])
 
-file 'dist/themebuilder/staging/bootstrap.js' => 'themebuilder/bootstrap.js' do |t|
+            {
+                "requiredJs" => '["scripts/themebuilder.all.min.js"]',
+                "requiredCss" => '["styles/themebuilder.all.min.css"]',
+                "bootstrapCss" => '"styles/bootstrap.min.css"',
+                "JQUERY_LOCATION" => '"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"',
+                "KENDO_LOCATION" => "\"#{cdn_root}/\""
+            }.map { |variable, value|
+                bootstrap = replace_variable(bootstrap, variable, value)
+            }
 
-    patch_bootstrap(t.name, t.prerequisites[0], STAGING_CDN_ROOT + CURRENT_COMMIT)
+            file.write bootstrap
+        end
 
-end
-
-def patch_bootstrap(to, from, cdn)
-
-    bootstrap = File.read(from)
-
-    bootstrap = replace_variable(bootstrap, "requiredJs", '["scripts/themebuilder.all.min.js"]');
-    bootstrap = replace_variable(bootstrap, "requiredCss", '["styles/themebuilder.all.min.css"]');
-    bootstrap = replace_variable(bootstrap, "bootstrapCss", '"styles/bootstrap.min.css"');
-    bootstrap = replace_variable(bootstrap, "JQUERY_LOCATION", '"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"');
-    bootstrap = replace_variable(bootstrap, "KENDO_LOCATION", "\"#{cdn}/\"");
-
-    File.open(to, 'w') do |file|
-        file.write(bootstrap)
+        min_filename = "#{File.basename(name)}.min.js"
+        uglifyjs name, min_filename
+        mv min_filename, name
     end
 
-    uglifyjs(to, File.basename(to) + '.min.js')
+    def needed?
+        return true if super
+        contents = File.read(name)
+        !contents.include?(cdn_root)
+    end
+end
 
-    mv "#{File.basename(to)}.min.js", to
+def patched_bootstrap(name, source, cdn_root)
+    task = PatchedBoostrapScriptTask.define_task(name => source)
+    task.cdn_root = cdn_root
+    task
 end
 
 def replace_variable(source, name, value)
-
     source.gsub(/#{name}\s*=\s*.*(,|;)\s*$/, "#{name}=" + value + '\1')
-
 end
 
 file_merge 'themebuilder/scripts/themebuilder.all.js' => [
@@ -123,7 +123,7 @@ namespace :themebuilder do
     desc('Build the ThemeBuilder for live deployment')
     task :production => [
         'dist/themebuilder/production',
-        'dist/themebuilder/production/bootstrap.js'
+        patched_bootstrap('dist/themebuilder/production/bootstrap.js', 'themebuilder/bootstrap.js', CDN_ROOT + live_cdn_version)
     ]
 
     desc('Build the ThemeBuilder for staging')
@@ -138,7 +138,7 @@ namespace :themebuilder do
 
     zip 'dist/themebuilder/staging.zip' => [
         'dist/themebuilder/staging',
-        'dist/themebuilder/staging/bootstrap.js'
+        patched_bootstrap('dist/themebuilder/staging/bootstrap.js', 'themebuilder/bootstrap.js', STAGING_CDN_ROOT + CURRENT_COMMIT)
     ]
 
 end
