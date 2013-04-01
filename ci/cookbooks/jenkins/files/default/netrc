@@ -1,1 +1,2 @@
 machine localhost login jenkins password j3nk1ns
+machine 172.16.80.87 login gyoshev password 4ig6xgC5Te
