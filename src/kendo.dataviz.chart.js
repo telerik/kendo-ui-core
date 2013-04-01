@@ -5978,29 +5978,39 @@ kendo_module({
             var series = chart.options.series,
                 count = series.length,
                 data = [],
-                i, currentSeries, text, labelTemplate,
-                labels = this.options.legend.labels || {};
+                i, currentSeries, text,
+                labels = this.options.legend.labels || {},
+                color,
+                defaults;
 
             if (chart.legendItems) {
                 data = chart.legendItems;
             } else {
                 for (i = 0; i < count; i++) {
                     currentSeries = series[i];
-                    if (currentSeries.visibleInLegend !== false) {
-                        text = currentSeries.name || "";
-                        if (labels.template) {
-                            labelTemplate = template(labels.template);
-                            text = labelTemplate({
-                                text: text,
-                                series: currentSeries
-                            });
-                        }
-                        data.push({
+                    if (currentSeries.visibleInLegend === false) {
+                        continue;
+                    }
+
+                    text = currentSeries.name || "";
+                    if (labels.template) {
+                        text = template(labels.template)({
                             text: text,
-                            color: currentSeries.color,
                             series: currentSeries
                         });
                     }
+
+                    color = currentSeries.color;
+                    defaults = currentSeries._defaults;
+                    if ($.isFunction(color) && defaults) {
+                        color = defaults.color;
+                    }
+
+                    data.push({
+                        text: text,
+                        color: color,
+                        series: currentSeries
+                    });
                 }
             }
 
