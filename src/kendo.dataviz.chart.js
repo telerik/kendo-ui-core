@@ -8749,16 +8749,20 @@ kendo_module({
 
     function applySeriesColors(options) {
         var series = options.series,
+            colors = options.seriesColors || [],
             i,
-            seriesLength = series.length,
-            colors = options.seriesColors || [];
+            currentSeries,
+            seriesColor,
+            defaults;
 
-        for (i = 0; i < seriesLength; i++) {
-            series[i].color = series[i].color || colors[i % colors.length];
+        for (i = 0; i < series.length; i++) {
+            currentSeries = series[i];
+            seriesColor = colors[i % colors.length];
+            currentSeries.color = currentSeries.color || seriesColor;
 
-            // TODO: Refactor
-            if (series[i]._defaults) {
-                series[i]._defaults.color = series[i]._defaults.color || colors[i % colors.length];
+            defaults = currentSeries._defaults;
+            if (defaults) {
+                defaults.color = defaults.color || seriesColor;
             }
         }
     }
