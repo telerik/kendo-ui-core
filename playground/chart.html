@@ -19,9 +19,34 @@
         <script>
             $(function() {
                 $("#chart").kendoChart({
+                    seriesDefaults: {
+                        type: "donut"
+                    },
                     series: [{
-                        type: "pie",
-                        data: [1,2,3]
+                        data: [{
+                            value: 1,
+                            category: "text 1"
+                        },{
+                            value: 2,
+                            category: "text 2",
+                            visible: false
+                        },{
+                            value: 3,
+                            category: "text 3"
+                        }],
+                        visible: true
+                    },{
+                        data: [{
+                            value: 1,
+                            category: "text 1"
+                        },{
+                            value: 2,
+                            category: "text 2",
+                            visible: false
+                        },{
+                            value: 3,
+                            category: "text 3"
+                        }]
                     }]
                 });
             });

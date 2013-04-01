@@ -1074,10 +1074,20 @@ kendo_module({
             var chart = this,
                 plotArea = chart._plotArea,
                 currentSeries = (plotArea.srcSeries || plotArea.series)[e.seriesIndex],
-                paneName;
+                paneName, point;
 
-            currentSeries.visible = !currentSeries.visible;
-            paneName = plotArea.seriesPaneName(currentSeries);
+            if (inArray(currentSeries.type, [PIE, DONUT])) {
+                point = currentSeries.data[e.pointIndex];
+                if (!defined(point.visible)) {
+                    point.visible = false;
+                } else {
+                    point.visible = !point.visible;
+                }
+            } else {
+                currentSeries.visible = !currentSeries.visible;
+                paneName = plotArea.seriesPaneName(currentSeries);
+            }
+
             chart.redraw(paneName);
         },
 
@@ -1127,7 +1137,6 @@ kendo_module({
             }
         }
     });
-
 
     var BarLabel = ChartElement.extend({
         init: function(content, options) {
@@ -1249,7 +1258,8 @@ kendo_module({
                 text: item.text,
                 color: item.color,
                 series: item.series,
-                seriesIndex: item.series.index
+                seriesIndex: item.series.index,
+                pointIndex: item.pointIndex
             });
         }
     });
@@ -4740,7 +4750,8 @@ kendo_module({
                 border: {
                     width: 1
                 }
-            }
+            },
+            visible: true
         },
 
         render: function() {
@@ -4851,7 +4862,7 @@ kendo_module({
                 });
             }
 
-            if (segment.value) {
+            if (segment.value && segment.visible !== false) {
                 elements.push(segment.createSegment(view, sector, deepExtend({
                     id: options.id,
                     fill: options.color,
@@ -4976,12 +4987,12 @@ kendo_module({
                 bindableFields = chart.bindableFields(),
                 currentSeries, pointData, fields, seriesIx,
                 angle, data, anglePerValue, value, explode,
-                total, currentAngle, i;
+                total, currentAngle, i, pointIx = 0;
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
-                total = chart.pointsTotal(currentSeries);
+                total = chart.pointsTotal(currentSeries, bindableFields);
                 anglePerValue = 360 / total;
 
                 if (defined(currentSeries.startAngle)) {
@@ -4999,9 +5010,6 @@ kendo_module({
                 for (i = 0; i < data.length; i++) {
                     pointData = bindPoint(currentSeries, i, bindableFields);
                     value = pointData.value;
-                    if (!value) {
-                        continue;
-                    }
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!fields.explode;
@@ -5010,13 +5018,14 @@ kendo_module({
                     callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
                         category: fields.category || "",
-                        categoryIx: i,
+                        index: pointIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
                         dataItem: data[i],
                         percentage: value / total,
                         explode: explode,
                         visibleInLegend: fields.visibleInLegend,
+                        visible: fields.visible,
                         overlay: {
                             id: overlayId + seriesIx
                         },
@@ -5024,13 +5033,17 @@ kendo_module({
                         animationDelay: chart.animationDelay(i, seriesIx, seriesCount)
                     });
 
-                    currentAngle += angle;
+                    if (pointData.fields.visible !== false) {
+                        currentAngle += angle;
+                    }
+                    pointIx++;
                 }
+                pointIx = 0;
             }
         },
 
         bindableFields: function() {
-            return ["category", "color", "explode", "visibleInLegend"];
+            return ["category", "color", "explode", "visibleInLegend", "visible"];
         },
 
         addValue: function(value, sector, fields) {
@@ -5065,6 +5078,7 @@ kendo_module({
                 }
 
                 chart.legendItems.push({
+                    pointIndex: point.index,
                     text: text,
                     color: point.series.color,
                     series: point.series
@@ -5072,14 +5086,16 @@ kendo_module({
             }
         },
 
-        pointsTotal: function(series) {
+        pointsTotal: function(series, bindableFields) {
             var data = series.data,
                 length = data.length,
-                sum = 0, i, value;
+                sum = 0,
+                value, i, pointData;
 
-            for(i = 0; i < length; i++) {
-                value = bindPoint(series, i).value;
-                if (value) {
+            for (i = 0; i < length; i++) {
+                pointData = bindPoint(series, i, bindableFields);
+                value = pointData.value;
+                if (value && pointData.fields.visible !== false) {
                     sum += value;
                 }
             }
@@ -5096,7 +5112,7 @@ kendo_module({
                 halfMinWidth = minWidth / 2,
                 defaultPadding = minWidth - minWidth * 0.85,
                 padding = defined(options.padding) ? options.padding : defaultPadding,
-                newBox = new Box2D(box.x1, box.y1,
+                newBox = Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
                 seriesConfigs = chart.seriesConfigs || [],
@@ -5112,7 +5128,7 @@ kendo_module({
             padding = padding > halfMinWidth - space ? halfMinWidth - space : padding;
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
             r = halfMinWidth - padding;
-            c = new Point2D(
+            c = Point2D(
                 r + newBox.x1 + padding,
                 r + newBox.y1 + padding
             );
