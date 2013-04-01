@@ -4634,15 +4634,20 @@ kendo_module({
             categoryPoints.push(point);
         },
 
+        pointType: function() {
+            return Candlestick;
+        },
+
         createPoint: function(value, category, categoryIx, series) {
             var chart = this,
-                pointOptions = deepExtend({}, series);
+                pointOptions = deepExtend({}, series),
+                pointType = chart.pointType();
 
             chart.expandPointOptions(
                 pointOptions, value, category, categoryIx, series
             );
 
-            return new Candlestick(value, pointOptions);
+            return new pointType(value, pointOptions);
         },
 
         splitValue: function(value) {
@@ -4759,15 +4764,8 @@ kendo_module({
     });
 
     var OHLCChart = CandlestickChart.extend({
-        createPoint: function(value, category, categoryIx, series) {
-            var chart = this,
-                pointOptions = deepExtend({}, series);
-
-            chart.expandPointOptions(
-                pointOptions, value, category, categoryIx, series
-            );
-
-            return new OHLCPoint(value, pointOptions);
+        pointType: function() {
+            return OHLCPoint;
         },
 
         bindableFields: function() {
