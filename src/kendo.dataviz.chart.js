@@ -2615,6 +2615,15 @@ kendo_module({
             categoryPoints.push(point);
         },
 
+        expandPointOptions: function(options, value, category, categoryIx, series) {
+            expandOptions(options, {
+                value: value,
+                series: series,
+                dataItem: series.data[categoryIx],
+                category: category
+            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+        },
+
         updateRange: function(value, categoryIx, series) {
             var chart = this,
                 axisName = series.axis,
@@ -2771,11 +2780,11 @@ kendo_module({
         },
 
         createPoint: function(data, category, categoryIx, series) {
-            var barChart = this,
+            var chart = this,
                 value = data.value,
-                options = barChart.options,
-                children = barChart.children,
-                isStacked = barChart.options.isStacked,
+                options = chart.options,
+                children = chart.children,
+                isStacked = chart.options.isStacked,
                 labelOptions = deepExtend({}, series.labels),
                 bar,
                 barOptions,
@@ -2800,13 +2809,9 @@ kendo_module({
                 barOptions.color = barOptions.negativeColor;
             }
 
-            // TODO: Extract
-            expandOptions(barOptions, {
-                value: value,
-                series: series,
-                dataItem: series.data[categoryIx],
-                category: category
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(
+                barOptions, value, category, categoryIx, series
+            );
 
             bar = new Bar(value, barOptions);
 
@@ -2817,11 +2822,11 @@ kendo_module({
                     gap: options.gap,
                     spacing: options.spacing
                 });
-                barChart.append(cluster);
+                chart.append(cluster);
             }
 
             if (isStacked) {
-                var stackWrap = barChart.getStackWrap(series, cluster),
+                var stackWrap = chart.getStackWrap(series, cluster),
                     positiveStack, negativeStack;
 
                 if (stackWrap.children.length === 0) {
@@ -3117,13 +3122,9 @@ kendo_module({
                 invertAxes: options.invertAxes
             }, series);
 
-            // TODO: Extract
-            expandOptions(bulletOptions, {
-                value: data,
-                series: series,
-                dataItem: series.data[categoryIx],
-                category: category
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(
+                bulletOptions, data, category, categoryIx, series
+            );
 
             bullet = new Bullet(data, bulletOptions);
 
@@ -3817,13 +3818,9 @@ kendo_module({
                 color: fields.color
             });
 
-            // TODO: Extract
-            expandOptions(pointOptions, {
-                value: value,
-                series: series,
-                dataItem: series.data[categoryIx],
-                category: category
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(
+                pointOptions, value, category, categoryIx, series
+            );
 
             point = new LinePoint(value, pointOptions);
 
@@ -4600,7 +4597,7 @@ kendo_module({
             }
 
             if (hasValue) {
-                point = chart.createPoint(value, series, dataItem);
+                point = chart.createPoint(value, category, categoryIx, series);
             }
 
             cluster = children[categoryIx];
@@ -4637,15 +4634,13 @@ kendo_module({
             categoryPoints.push(point);
         },
 
-        createPoint: function(value, series, dataItem) {
-            var pointOptions = deepExtend({}, series);
+        createPoint: function(value, category, categoryIx, series) {
+            var chart = this,
+                pointOptions = deepExtend({}, series);
 
-            // TODO: Extract
-            expandOptions(pointOptions, {
-                value: value,
-                series: series,
-                dataItem: dataItem
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(
+                pointOptions, value, category, categoryIx, series
+            );
 
             return new Candlestick(value, pointOptions);
         },
@@ -4764,15 +4759,13 @@ kendo_module({
     });
 
     var OHLCChart = CandlestickChart.extend({
-        createPoint: function(value, series, dataItem) {
-            var pointOptions = deepExtend({}, series);
+        createPoint: function(value, category, categoryIx, series) {
+            var chart = this,
+                pointOptions = deepExtend({}, series);
 
-            // TODO: Extract
-            expandOptions(pointOptions, {
-                value: value,
-                series: series,
-                dataItem: dataItem
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(
+                pointOptions, value, category, categoryIx, series
+            );
 
             return new OHLCPoint(value, pointOptions);
         },
