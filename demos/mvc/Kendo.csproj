@@ -749,6 +749,8 @@
     <Content Include="Views\dataviz\bullet-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\sparklines\local-data.cshtml" />
     <Content Include="Views\Shared\SourceCode.cshtml" />
+    <Content Include="Views\dataviz\api\fn-options.cshtml" />
+    <Content Include="Views\dataviz\api\selection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
