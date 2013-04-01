@@ -5109,6 +5109,18 @@ kendo_module({
             return ["category", "color", "explode", "visibleInLegend", "visible"];
         },
 
+        expandSegmentOptions: function(options, value, fields) {
+            var series = fields.series;
+
+            expandOptions(options, {
+                value: value,
+                series: series,
+                dataItem: fields.dataItem,
+                category: fields.category,
+                percentage: fields.percentage
+            }, { defaults: series._defaults, excluded: ["data"] });
+        },
+
         addValue: function(value, sector, fields) {
             var chart = this,
                 segment;
@@ -5120,13 +5132,7 @@ kendo_module({
             }
 
             var segmentOptions = deepExtend({}, fields.series);
-            expandOptions(segmentOptions, {
-                value: value,
-                series: fields.series,
-                dataItem: fields.dataItem,
-                category: fields.category,
-                percentage: fields.percentage
-            }, { defaults: fields.series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandSegmentOptions(segmentOptions, value, fields);
 
             segment = new PieSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
@@ -5564,13 +5570,7 @@ kendo_module({
             }
 
             var segmentOptions = deepExtend({}, fields.series);
-            expandOptions(segmentOptions, {
-                value: value,
-                series: fields.series,
-                dataItem: fields.dataItem,
-                category: fields.category,
-                percentage: fields.percentage
-            }, { defaults: fields.series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandSegmentOptions(segmentOptions, value, fields);
 
             segment = new DonutSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
