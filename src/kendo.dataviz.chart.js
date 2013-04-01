@@ -4028,7 +4028,7 @@ kendo_module({
             chart.updateRange(value, fields.series);
 
             if (defined(x) && x !== null && defined(y) && y !== null) {
-                point = chart.createPoint(value, fields.series, seriesIx, fields);
+                point = chart.createPoint(value, fields);
                 if (point) {
                     extend(point, fields);
                 }
@@ -4072,8 +4072,19 @@ kendo_module({
             }
         },
 
-        createPoint: function(value, series, seriesIx, fields) {
+        expandPointOptions: function(options, value, fields) {
+            var series = fields.series;
+
+            expandOptions(options, {
+                value: value,
+                series: series,
+                dataItem: fields.dataItem
+            }, { defaults: series._defaults, excluded: ["data"] });
+        },
+
+        createPoint: function(value, fields) {
             var chart = this,
+                series = fields.series,
                 point,
                 pointOptions;
 
@@ -4091,12 +4102,7 @@ kendo_module({
                 color: fields.color
             });
 
-            // TODO: Extract
-            expandOptions(pointOptions, {
-                value: value,
-                series: series,
-                dataItem: fields.dataItem
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(pointOptions, value, fields);
 
             point = new LinePoint(value, pointOptions);
 
@@ -4264,10 +4270,11 @@ kendo_module({
             ScatterChart.fn.reflow.call(chart, box);
         },
 
-        createPoint: function(value, series, seriesIx, fields) {
+        createPoint: function(value, fields) {
             var chart = this,
                 point,
                 pointOptions,
+                series = fields.series,
                 pointsCount = series.data.length,
                 delay = fields.pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
@@ -4296,12 +4303,7 @@ kendo_module({
                 }
             });
 
-            // TODO: Extract
-            expandOptions(pointOptions, {
-                value: value,
-                series: series,
-                dataItem: fields.dataItem
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+            chart.expandPointOptions(pointOptions, value, fields);
 
             point = new Bubble(value, pointOptions);
 
