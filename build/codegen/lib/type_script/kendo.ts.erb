@@ -84,7 +84,12 @@ module kendo {
         useWithBlock?: bool;
     }
 
-    class Observable {
+    class Class {
+        static fn: Object;
+        static extend(prototype: Object): Object;
+    }
+
+    class Observable extends Class {
         bind(eventName: string, handler: Function): Observable;
         one(eventName: string, handler: Function): Observable;
         trigger(eventName: string, e?: any): bool;
