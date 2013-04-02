@@ -19,7 +19,7 @@ var ViewHtmlCommand = Command.extend({
         cmd.async = true;
     },
 
-    exec: function () {
+    exec: function() {
         var that = this,
             editor = that.editor,
             range = editor.getRange(),
@@ -45,7 +45,10 @@ var ViewHtmlCommand = Command.extend({
 
             dialog.data("kendoWindow").destroy();
 
-            dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
+            try {
+                // focusing a hidden textarea in IE causes unspecified error
+                dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
+            } catch (ex) {}
         }
 
         dialog.kendoWindow(extend({}, editor.options.dialogOptions, {

@@ -22,8 +22,31 @@
 
             var componentType = kendo.support.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
 
+            module("Toolbar", {
+                teardown: function() {
+                    editor.pendingFormats.clear();
+                    editor.trigger("select");
+                }
+            });
+
             function value($ui) {
-                return kendo.support.browser.msie ? $.trim($ui.text()) : $ui.val();
+                if (kendo.support.browser.msie) {
+                    return $.trim($ui.parent().find("span.k-input").text());
+                } else {
+                    return $ui.val();
+                }
+            }
+
+            function withMock(context, method, mock, callback) {
+                var originalMethod = context[method];
+
+                try {
+                    context[method] = mock;
+
+                    callback();
+                } finally {
+                    context[method] = originalMethod;
+                }
             }
 
             test('initially fontName should have "inherit" value', function () {
@@ -37,12 +60,12 @@
             test('exec with node parameter calls exec', function() {
                 var execArgs = [];
 
-                editor.exec = function() { execArgs = arguments; };
+                withMock(editor, "exec", function() { execArgs = arguments; }, function() {
+                    $('.k-bold', editor.wrapper).click();
 
-                $('.k-bold', editor.wrapper).click();
-
-                equal(execArgs.length, 1);
-                equal(execArgs[0], 'bold');
+                    equal(execArgs.length, 1);
+                    equal(execArgs[0], 'bold');
+                });
             });
 
             test('handle carret selection', function() {
@@ -99,21 +122,25 @@
                 ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-active'));
             });
 
-            test('font size combobox on mixed content', function() {
-                editor.selectRange(createRangeFromText(editor, '|foo<span style="font-size:8px;">bar|</span>'));
+            if (!kendo.support.browser.msie) {
+                // select box does not show custom values
 
-                editor.trigger('select');
+                test('font size combobox on mixed content', function() {
+                    editor.selectRange(createRangeFromText(editor, '|foo<span style="font-size:8px;">bar|</span>'));
 
-                equal(value($('.k-fontSize', editor.wrapper)), '');
-            });
+                    editor.trigger('select');
 
-            test('font size combobox on custom font size', function() {
-                editor.selectRange(createRangeFromText(editor, '<span style="font-size:8px;">f|o|o</span>'));
+                    equal(value($('.k-fontSize', editor.wrapper)), '');
+                });
 
-                editor.trigger('select');
+                test('font size combobox on custom font size', function() {
+                    editor.selectRange(createRangeFromText(editor, '<span style="font-size:8px;">f|o|o</span>'));
 
-                equal(value($('.k-fontSize', editor.wrapper)), '8px');
-            });
+                    editor.trigger('select');
+
+                    equal(value($('.k-fontSize', editor.wrapper)), '8px');
+                });
+            }
 
             test('inherited font size', function() {
                 editor.selectRange(createRangeFromText(editor, '<span>f|o|o</span>'));

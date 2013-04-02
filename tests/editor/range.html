@@ -233,20 +233,6 @@
             equal(contents.lastChild.firstChild.nodeValue, 'frincham');
         });
 
-        test('extractContents updates original range when container is text node', function() {
-            var range = createRangeFromText(editor, "<strong>f|oo|</strong>");
-
-            var leftRange = range.cloneRange();
-            leftRange.collapse(true);
-            leftRange.setStartBefore(editor.body.lastChild);
-            leftRange.extractContents();
-
-            equal(range.startContainer, editor.body.lastChild.firstChild);
-            equal(range.endContainer, editor.body.lastChild.firstChild);
-            equal(range.startOffset, 0);
-            equal(range.endOffset, 2);
-        });
-
         test('extractContents updates original range when container is element node', function() {
             var range = createRangeFromText(editor, '<strong>|fo|o</strong>');
 

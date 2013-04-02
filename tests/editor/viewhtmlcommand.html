@@ -13,8 +13,7 @@
         <div><textarea cols="20" rows="4" id="editor" name="EditorEncodeFalse"></textarea></div>
 
         <script>
-            var editor,
-                command;
+            var editor;
 
             $("#editor").kendoEditor();
 
@@ -24,11 +23,12 @@
                 },
                 teardown: function() {
                     $(".k-window,.k-overlay").remove()
+                    editor.unbind("change");
                 }
             });
 
             function createViewHtmlCommand() {
-                command = new kendo.ui.editor.ViewHtmlCommand({ range: editor.getRange() });
+                var command = new kendo.ui.editor.ViewHtmlCommand({ range: editor.getRange() });
 
                 command.editor = editor;
 
