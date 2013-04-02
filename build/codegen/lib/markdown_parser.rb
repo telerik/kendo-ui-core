@@ -92,6 +92,10 @@ class MarkdownParser
 
             if element.type == :header && level == 5
 
+                name = section_name(element)
+
+                break if name.start_with?('Example')
+
                 method.add_parameter(:name => section_name(element),
                                      :type => option_type(element),
                                      :optional => optional(element),
