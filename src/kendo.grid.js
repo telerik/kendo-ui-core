@@ -1123,10 +1123,11 @@ kendo_module({
         },
 
         editCell: function(cell) {
+            cell = $(cell);
+
             var that = this,
                 column = that.columns[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
-
 
             if (model && (!model.editable || model.editable(column.field)) && !column.command && column.field) {
 
@@ -1275,6 +1276,8 @@ kendo_module({
         },
 
         editRow: function(row) {
+            row = $(row);
+
             var that = this,
                 model = that._modelForContainer(row),
                 mode = that._editMode(),
