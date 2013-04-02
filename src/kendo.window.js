@@ -245,24 +245,33 @@ kendo_module({
         _dimensions: function() {
             var that = this,
                 wrapper = that.wrapper,
-                element = that.element,
-                options = that.options;
+                options = that.options,
+                w = options.width,
+                h = options.height;
 
             that.title(options.title);
 
             each(["minWidth","minHeight","maxWidth","maxHeight"], function(_, prop) {
                 var value = options[prop];
                 if (value && value != Infinity) {
-                    element.css(prop, value);
+                    wrapper.css(prop, value);
                 }
             });
 
-            if (options.width) {
-                wrapper.width(constrain(parseInt(options.width, 10), options.minWidth, options.maxWidth));
+            if (w) {
+                if (w.toString().indexOf("%") > 0) {
+                    wrapper.width(w);
+                } else {
+                    wrapper.width(constrain(parseInt(options.width, 10), options.minWidth, options.maxWidth));
+                }
             }
 
-            if (options.height) {
-                wrapper.height(constrain(parseInt(options.height, 10), options.minHeight, options.maxHeight));
+            if (h) {
+                if (h.toString().indexOf("%") > 0) {
+                    wrapper.height(h);
+                } else {
+                    wrapper.height(constrain(parseInt(options.height, 10), options.minHeight, options.maxHeight));
+                }
             }
 
             if (!options.visible) {
