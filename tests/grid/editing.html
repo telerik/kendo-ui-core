@@ -236,6 +236,13 @@
                 equal(dataSource.at(0)._events["change"].length, 1);
             });
 
+            test("editCell with selector", 1, function() {
+                var grid = setup();
+
+                grid.editCell("table td:first");
+                ok(grid.table.find("td:first").hasClass("k-edit-cell"));
+            });
+
             test("clicking on k-hierarchy-cell does not edit the cell", function() {
                 setup({ detailTemplate: "" });
 

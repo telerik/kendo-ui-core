@@ -108,6 +108,13 @@
                 ok(tr.data("kendoEditable").options.fields[0].editor);
             });
 
+            test("editRow with selector", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.editRow("table>tbody tr:first");
+                ok(grid.table.find("tr:first").hasClass("k-grid-edit-row"));
+            });
+
             test("column editor is not pass to the Editable if not set", function() {
                 var grid = setup({ columns: [{ field: "foo"}, "name"] });
                 var tr = table.find("tr:first")
