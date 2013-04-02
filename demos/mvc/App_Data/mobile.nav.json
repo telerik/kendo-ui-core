@@ -67,6 +67,12 @@
                     "meta": "This demo shows the core functionality of Kendo UI Mobile Button Group. When the horizontal group button is active, its corresponding items are visualized on the screen."
                 },
                 {
+                    "text": "NavBar usage",
+                    "url": "buttongroup/navbar.html",
+                    "title": "Example of Kendo UI Mobile Button Group in a NavBar",
+                    "meta": "This demo shows the core functionality of Kendo UI Mobile Button Group when placed in a NavBar."
+                },
+                {
                     "text": "Events",
                     "url": "buttongroup/events.html",
                     "title": "Events in Kendo UI Mobile Button Group | Kendo ButtonGroup Demo",
