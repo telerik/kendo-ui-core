@@ -36,6 +36,13 @@
                 ok(bar.element.hasClass("km-navbar"), "has specified CSS class");
             });
 
+            test("view-title with ul adds km-absolute to left element", function() {
+                var dom = $("<div><a data-kendo-align='left'></a><ul></ul></div>");
+                var bar = new NavBar(dom);
+                bar.title();
+                ok(bar.leftElement.hasClass("km-absolute"), "has specified CSS class");
+            });
+
             test("moves items based on data-kendo-align attributes", function() {
                 var dom = $('<div><div data-kendo-align="left" id="foo"/><div data-kendo-align="right" id="bar" /></div>');
 
