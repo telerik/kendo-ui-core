@@ -328,6 +328,20 @@
                     equal(series.points[0].options.aboveAxis, false);
                 });
 
+                test("hides the series if the visible is set to false", function() {
+                    chart = createChart({
+                        series: [{
+                            type: "bar",
+                            data: [1],
+                            visible: false
+                        }]
+                    });
+
+                    points = chart._model._plotArea.charts[0].points;
+
+                    ok(points.length === 0);
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Mismatched series", {
                     setup: function() {

@@ -226,7 +226,8 @@ kendo_module({
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
                     "font: #= d.options.font #; color: #= d.options.color #; " +
-                    "visibility: #= d.renderVisibility() #; white-space: nowrap;'>" +
+                    "visibility: #= d.renderVisibility() #; white-space: nowrap;'" +
+                    "#= d.renderCursor() #>" +
                     "#= d.content #</kvml:textbox>"
                 );
             }
@@ -237,7 +238,8 @@ kendo_module({
             y: 0,
             font: DEFAULT_FONT,
             color: BLACK,
-            fillOpacity: 1
+            fillOpacity: 1,
+            cursor: {}
         },
 
         refresh: function(domElement) {
@@ -251,6 +253,17 @@ kendo_module({
 
         renderVisibility: function() {
             return this.options.fillOpacity > 0 ? "visible" : "hidden";
+        },
+
+        renderCursor: function() {
+            var options = this.options,
+                result = "";
+
+            if (defined(options.cursor.style)) {
+                result += "cursor: " + options.cursor.style + ";";
+            }
+
+            return result;
         }
     });
 
@@ -371,7 +384,8 @@ kendo_module({
                     "<kvml:shape #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
                     "style='position:absolute; #= d.renderSize() # display:#= d.renderDisplay() #;' " +
-                    "coordorigin='0 0' #= d.renderCoordsize() #>" +
+                    "coordorigin='0 0' #= d.renderCoordsize() #" +
+                    "#= d.renderCursor() #>" +
                         "<kvml:path v='#= d.renderPoints() # e' />" +
                         "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:shape>"
@@ -387,7 +401,8 @@ kendo_module({
             fillOpacity: 1,
             strokeOpacity: 1,
             rotation: [0,0,0],
-            visible: true
+            visible: true,
+            cursor: {}
         },
 
         renderCoordsize: function() {
@@ -439,6 +454,17 @@ kendo_module({
                 // Force redraw in order to remove artifacts in IE < 7
                 parentNode.style.cssText = parentNode.style.cssText;
             }
+        },
+
+        renderCursor: function() {
+            var options = this.options,
+                result = "";
+
+            if (defined(options.cursor.style)) {
+                result += "cursor: " + options.cursor.style + ";";
+            }
+
+            return result;
         }
     });
 

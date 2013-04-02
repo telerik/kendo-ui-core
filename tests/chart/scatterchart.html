@@ -130,6 +130,17 @@
                     equal(typeof scatterChart.points[0].dataItem, "object");
                 });
 
+                test("removes the series points if the visible is set to false", function() {
+                    plotArea = new PlotAreaStub();
+                    setupScatterChart(plotArea, { series: [{
+                        data: [[1,2]],
+                        visible: false,
+                        type: "scatter"
+                    }] });
+
+                    equal(scatterChart.points.length, 0);
+                });
+
                 test("renders empty scatter line series", 0, function() {
                     setupScatterChart(plotArea, { series: [ { data: [] } ] });
                 });
