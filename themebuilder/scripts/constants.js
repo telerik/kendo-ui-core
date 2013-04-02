@@ -57,8 +57,12 @@
                 }
             },
 
-            "@fallback-texture": constant("background-image", ".k-header",
-                [ { text: "flat", value: "none" } ].concat(
+            "@fallback-texture":                { readonly: true, value: "none" },
+
+            "@texture":                         {
+                property: "background-image",
+                target: ".k-header",
+                values: [ { text: "flat", value: "none" } ].concat(
                     [
                         "highlight", "glass", "brushed-metal", "noise",
                         "dots1", "dots2", "dots3", "dots4", "dots5",
@@ -68,10 +72,14 @@
                     ].map(function(x) {
                         return { text: x, value: "url('" + cdnRoot + "styles/textures/" + x + ".png')" };
                     }
-                )
-            )),
+                )),
+                infer: function() {
+                    var background = cssPropertyFrom("k-header", "background-image"),
+                        match = /^(.*),\s*[\-\w]*linear-gradient\(/i.exec(background);
 
-            "@texture":                         { readonly: true, value: "none" },
+                    return match ? match[1] : "none";
+                }
+            },
             "@tooltip-texture":                 {
                 readonly: true,
                 infer: function() {
@@ -80,7 +88,15 @@
             },
 
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
-            "@widget-gradient":                 { readonly: true, value: "none" },
+            "@widget-gradient":                 {
+                readonly: true,
+                infer: function() {
+                    var background = cssPropertyFrom("k-header", "background-image"),
+                        match = /linear-gradient\((.*)\)$/i.exec(background);
+
+                    return match ? match[1] : "none";
+                }
+            },
             "@widget-border-color":             constant(BORDERCOLOR, ".k-widget"),
             "@widget-text-color":               constant(COLOR, ".k-widget"),
             "@widget-shadow":                   { readonly: true, value: "none" },
