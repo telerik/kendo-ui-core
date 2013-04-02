@@ -200,6 +200,7 @@
                 });
 
                 console.log(dom.html());
+                item.trigger("mousedown");
                 item.trigger("mouseup");
             });
 
@@ -218,6 +219,7 @@
                     ok(e.isDefaultPrevented());
                 });
 
+                link.trigger("mousedown");
                 link.trigger("mouseup");
             });
 

@@ -3,7 +3,7 @@ kendo_module({
     name: "ListView",
     category: "mobile",
     description: "The Kendo Mobile ListView widget is used to display flat or grouped list of items.",
-    depends: [ "data", "mobile.application" ]
+    depends: [ "data", "mobile.application", "userevents" ]
 });
 
 (function($, undefined) {
@@ -90,14 +90,16 @@ kendo_module({
                 options.scrollThreshold = options.scrollTreshold;
             }
 
-            that._dragged = false;
-
             element
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
-                .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim")
-                .on("down", ITEM_SELECTOR, function() { that._dragged = false; })
-                .on("move", ITEM_SELECTOR, function() { that._dragged = true; })
-                .on("up", ITEM_SELECTOR, "_click");
+                .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim");
+
+            that._userEvents = new kendo.UserEvents(element, {
+                filter: ITEM_SELECTOR,
+                tap: function(e) {
+                    that._click(e);
+                }
+            });
 
             element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
@@ -170,6 +172,7 @@ kendo_module({
             that.stopLoadMore();
 
             kendo.destroy(that.element);
+            that._userEvents.destroy();
         },
 
         refresh: function(e) {
@@ -585,19 +588,14 @@ kendo_module({
         },
 
         _click: function(e) {
-            if (e.which > 1 || e.isDefaultPrevented()) {
-                return;
-            }
-
-            if (this._dragged) {
-                e.preventDefault();
+            if (e.event.which > 1 || e.isDefaultPrevented()) {
                 return;
             }
 
             var that = this,
                 dataItem,
-                item = $(e.currentTarget),
-                target = $(e.target),
+                item = e.target,
+                target = $(e.event.target),
                 buttonElement = target.closest(kendo.roleSelector("button", "detailbutton", "backbutton")),
                 button = kendo.widgetInstance(buttonElement, ui),
                 id = item.attr(kendo.attr("uid"));
