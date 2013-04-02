@@ -60,10 +60,13 @@ kendo_module({
         _parents: function() {
             var parents = this.parents;
             var value = this.get();
-            var parent = value.parent();
 
-            if (parents.indexOf(parent) < 0) {
-                parents = [parent].concat(parents);
+            if (value) {
+                var parent = value.parent();
+
+                if (parents.indexOf(parent) < 0) {
+                    parents = [parent].concat(parents);
+                }
             }
 
             return parents;
