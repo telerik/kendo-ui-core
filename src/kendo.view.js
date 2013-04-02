@@ -25,6 +25,7 @@ kendo_module({
             that.content = content;
             that.tagName = options.tagName || "div";
             that.model = options.model;
+            that._wrap = options.wrap !== false;
 
             that.bind([ INIT, SHOW, HIDE ], options);
         },
@@ -35,9 +36,18 @@ kendo_module({
                 content;
 
             if (!that.element) {
-                element = $("<" + that.tagName + " />");
                 content = $(document.getElementById(that.content) || that.content); // support passing id without #
-                element.append(content[0].tagName === SCRIPT ? content.html() : content);
+                element = $("<" + that.tagName + " />").append(content[0].tagName === SCRIPT ? content.html() : content);
+
+                // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
+                // <script id="my-template">
+                // fooo
+                // <span> Span </span>
+                // </script>
+                if (!that._wrap) {
+                   element = element.contents();
+                }
+
                 that.element = element;
                 kendo.bind(that.element, that.model);
                 this.trigger(INIT);
