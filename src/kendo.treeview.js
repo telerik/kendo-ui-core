@@ -715,18 +715,25 @@ kendo_module({
         focus: function() {
             var wrapper = this.wrapper,
                 scrollContainer = wrapper[0],
-                scrollTop,
-                body = document.body;
+                containers = [],
+                offsets = [],
+                documentElement = document.documentElement,
+                i;
 
             do {
                 scrollContainer = scrollContainer.parentNode;
-            } while (scrollContainer.scrollHeight <= scrollContainer.clientHeight && scrollContainer != body);
 
-            scrollTop = scrollContainer.scrollTop;
+                if (scrollContainer.scrollHeight > scrollContainer.clientHeight) {
+                    containers.push(scrollContainer);
+                    offsets.push(scrollContainer.scrollTop);
+                }
+            } while (scrollContainer != documentElement);
 
             wrapper.focus();
 
-            scrollContainer.scrollTop = scrollTop;
+            for (i = 0; i < containers.length; i++) {
+                containers[i].scrollTop = offsets[i];
+            }
         },
 
         _blur: function() {
