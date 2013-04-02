@@ -8,24 +8,26 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.mobile.ui,
+        mobile = kendo.mobile,
+        ui = mobile.ui,
         roleSelector = kendo.roleSelector,
         Widget = ui.Widget;
 
     function createContainer(align, element) {
-
         var items = element.find("[" + kendo.attr("align") + "=" + align + "]");
 
         if (items[0]) {
-            element.prepend($('<div class="km-' + align + 'item" />').append(items));
+            return $('<div class="km-' + align + 'item" />').append(items).prependTo(element);
         }
     }
 
     function toggleTitle(centerElement) {
-        var siblings = centerElement.siblings();
+        var siblings = centerElement.siblings(),
+            noTitle = !!centerElement.children("ul")[0];
 
+        centerElement.prevAll().toggleClass("km-absolute", noTitle);
         centerElement.toggleClass("km-show-title", (!!siblings[0] && $.trim(centerElement.text()) === ""));
-        centerElement.toggleClass("km-no-title", !!centerElement.children("ul")[0]);
+        centerElement.toggleClass("km-no-title", noTitle);
         centerElement.toggleClass("km-hide-title", centerElement.css("visibility") == "hidden" && !siblings.children().is(":visible"));
     }
 
@@ -40,8 +42,8 @@ kendo_module({
             that.container().bind("show", $.proxy(this, "refresh"));
 
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
-            createContainer("left", element);
-            createContainer("right", element);
+            that.leftElement = createContainer("left", element);
+            that.rightElement = createContainer("right", element);
             that.centerElement = element.find(".km-view-title");
         },
 

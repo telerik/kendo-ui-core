@@ -125,8 +125,7 @@
 	.border-radius(0);
 	display: inline-block;
 	margin-left: 1px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    .box-sizing(border-box);
     height: 100%;
 }
 
@@ -229,11 +228,6 @@
     display: none;
 }
 
-.km-wp .km-view-title
-{
-    margin-left: .5em;
-}
-
 .km-wp .km-group-title
 {
 	text-transform: uppercase;
@@ -319,6 +313,9 @@
 	visibility: visible;
 	font-size: 1.6em;
     line-height: 2.6rem;
+    text-align: left;
+    margin-left: .5em;
+    .box-sizing(border-box);
 }
 
 .km-wp .km-button
