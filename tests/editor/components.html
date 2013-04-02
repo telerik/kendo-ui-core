@@ -55,9 +55,11 @@
                 equal(colorpicker.value(), '#000000');
             });
 
+            var componentType = kendo.support.browser.msie ? "kendoDropDownList" : "kendoComboBox";
+
             test('FontName combobox accepts custom item collections and preserves the default value item', function() {
 
-                var fontNameCombo = editor2.wrapper.find("select.k-fontName").data("kendoComboBox");
+                var fontNameCombo = editor2.wrapper.find("select.k-fontName").data(componentType);
 
                 var popupItems = fontNameCombo.popup.element.find("li");
                 equal(popupItems.length, 3);
@@ -81,7 +83,7 @@
 
             test('FontSize combobox accepts custom item collections and preserves the default value item', function() {
 
-                var fontSizeCombo = editor2.wrapper.find("select.k-fontSize").data("kendoComboBox");
+                var fontSizeCombo = editor2.wrapper.find("select.k-fontSize").data(componentType);
 
                 var popupItems = fontSizeCombo.popup.element.find("li");
                 equal(popupItems.length, 3);

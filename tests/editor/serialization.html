@@ -428,48 +428,50 @@
         equal(editor.encodedValue(), '&amp;nbsp;');
     });
 
-    test('setting empty paragraphs adds line breaks in mozilla', function() {
-        editor.value('<p> </p>');
+    if (!kendo.support.browser.msie) {
+        test('setting empty paragraphs adds line breaks in mozilla', function() {
+            editor.value('<p> </p>');
 
-        equal(editor.body.firstChild.childNodes.length, 1);
-        equal(editor.body.firstChild.firstChild.nodeName.toLowerCase(), 'br');
-    });
+            equal(editor.body.firstChild.childNodes.length, 1);
+            equal(editor.body.firstChild.firstChild.nodeName.toLowerCase(), 'br');
+        });
+    }
 
     test('setting value removes pending formats', function() {
-    editor.value('foo');
+        editor.value('foo');
 
-    editor.pendingFormats.toggle({ format: editor.options.formats.bold, values: undefined });
+        editor.pendingFormats.toggle({ format: editor.options.formats.bold, values: undefined });
 
-    ok(editor.pendingFormats.hasPending());
+        ok(editor.pendingFormats.hasPending());
 
-    editor.value('bar');
+        editor.value('bar');
 
-    ok(!editor.pendingFormats.hasPending());
+        ok(!editor.pendingFormats.hasPending());
     });
 
     test("single quotes in style attribute", function() {
-    editor.value('<span style="font-family:\'Verdana\';">foo</span>');
-    equal(editor.value(), '<span style="font-family:\'Verdana\';">foo</span>');
+        editor.value('<span style="font-family:\'Verdana\';">foo</span>');
+        equal(editor.value(), '<span style="font-family:\'Verdana\';">foo</span>');
     });
 
     test('single brs are considered no value (to enable required field validation)', function() {
-    editor.value('<br>');
-    equal(editor.value(), '');
+        editor.value('<br>');
+        equal(editor.value(), '');
     });
 
     test('single empty paragraph is considered no value (to enable required field validation)', function() {
-    editor.value('<p></p>');
-    equal(editor.value(), '');
+        editor.value('<p></p>');
+        equal(editor.value(), '');
     });
 
     test('strips font-size-adjust and font-stretch properties', function() {
-    editor.value('<span style="font:12px/normal Verdana;">foo</span>');
-    equal(editor.value(), '<span style="font:12px/normal Verdana;">foo</span>');
+        editor.value('<span style="font:12px/normal Verdana;">foo</span>');
+        equal(editor.value(), '<span style="font:12px/normal Verdana;">foo</span>');
     });
 
     test('reversing quotes in style attribute', function() {
-    editor.body.innerHTML = '<span style=\'font:12px/normal "Times New Roman";\'>foo</span>';
-    equal(editor.value(), '<span style="font:12px/normal \'Times New Roman\';">foo</span>');
+        editor.body.innerHTML = '<span style=\'font:12px/normal "Times New Roman";\'>foo</span>';
+        equal(editor.value(), '<span style="font:12px/normal \'Times New Roman\';">foo</span>');
     });
 
     test("markers are not serialized", function() {

@@ -122,10 +122,10 @@ var Serializer = {
 
                             if (property.indexOf('color') >= 0) {
                                 value = dom.toHex(value);
-                            }
-
-                            if (property.indexOf('font') >= 0) {
+                            } else if (property.indexOf('font') >= 0) {
                                 value = value.replace(quoteRe, "'");
+                            } else if (/\burl\(/g.test(value)) {
+                                value = value.replace(quoteRe, "");
                             }
 
                             result.push(property);
