@@ -338,24 +338,27 @@ test('exec in list before image', function() {
     equal(editor.value(), '<ul><li></li><li><a></a><img src="foo" /></li></ul>');
 });
 
-test('paragraph in formatted text', function() {
-    editor.value('<p><strong>foo</strong></p>');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild.firstChild, 0);
-    range.collapse(true);
-    var command = new ParagraphCommand({range:range});
+if (!kendo.support.browser.msie) {
+    test('paragraph in formatted text', function() {
+        editor.value('<p><strong>foo</strong></p>');
 
-    command.exec();
+        var range = editor.createRange();
+        range.setStart(editor.body.firstChild.firstChild.firstChild, 0);
+        range.collapse(true);
 
-    insertCaretAnchor();
+        var command = new ParagraphCommand({range:range});
+        command.exec();
 
-    var br = editor.body.firstChild.firstChild.firstChild;
+        insertCaretAnchor();
 
-    ok(br);
-    equal(br.nodeName.toLowerCase(), 'br');
+        var br = editor.body.firstChild.firstChild.firstChild;
 
-    equal(editor.value(), '<p><strong></strong></p><p><strong><a></a>foo</strong></p>');
-});
+        ok(br);
+        equal(br.nodeName.toLowerCase(), 'br');
+
+        equal(editor.value(), '<p><strong></strong></p><p><strong><a></a>foo</strong></p>');
+    });
+}
 
 </script>
 
