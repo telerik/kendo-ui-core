@@ -90,12 +90,21 @@
 	background-color: @second-background-light;
 }
 
+.km-wp .km-view .km-buttongroup
+{
+    top: 0;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
 .km-wp .km-button,
 .km-root .km-wp .km-view .km-buttongroup .km-button
 {
 	border-style: solid;
 	border-width: .1em;
 	.border-radius(0);
+    line-height: 1em;
 	padding: .04em .5em .16em;
 }
 
@@ -116,6 +125,9 @@
 	.border-radius(0);
 	display: inline-block;
 	margin-left: 1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 100%;
 }
 
 .km-root .km-wp .km-view .km-buttongroup .km-button:first-child

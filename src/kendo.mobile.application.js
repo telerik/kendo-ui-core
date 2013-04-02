@@ -213,7 +213,7 @@ kendo_module({
             element.addClass(that.osCssClass + " " + getOrientationClass(element));
 
             if (support.wpDevicePixelRatio) {
-                element.css("font-size", support.wpDevicePixelRatio + "em");
+                element.parent().css("font-size", support.wpDevicePixelRatio + "em");
             }
 
             if (BERRYPHONEGAP) {
