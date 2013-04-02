@@ -858,9 +858,49 @@
                 equal(viewModel.calls("clickHandler"), 1);
             });
 
+            test("binding events in template to the child view model", function() {
+                var viewModel = {
+                    foo: {
+                        items: [{}]
+                    }
+                };
+
+                stub(viewModel.foo, "clickHandler");
+
+                var dom = $('<ul data-bind="source: foo.items" data-template="event-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("li").click();
+
+                equal(viewModel.foo.calls("clickHandler"), 1);
+            });
+
+            test("binding events in template to the grand child view model", function() {
+                var viewModel = {
+                    foo: {
+                        bar: {
+                            items: [{}]
+                        }
+                    }
+                };
+
+                stub(viewModel.foo.bar, "clickHandler");
+
+                var dom = $('<ul data-bind="source: foo.bar.items" data-template="event-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("li").click();
+
+                equal(viewModel.foo.bar.calls("clickHandler"), 1);
+            });
+
             test("bound events in template receive the current item in the event argument", function() {
                 var viewModel = kendo.observable({
-                    items: [ {} ]
+                    items: [
+                        { foo: "foo" }
+                    ]
                 });
 
                 stub(viewModel, "clickHandler");

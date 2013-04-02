@@ -57,6 +57,18 @@ kendo_module({
             }
         },
 
+        _parents: function() {
+            var parents = this.parents;
+            var value = this.get();
+            var parent = value.parent();
+
+            if (parents.indexOf(parent) < 0) {
+                parents = [parent].concat(parents);
+            }
+
+            return parents;
+        },
+
         change: function(e) {
             var dependency,
                 ch,
@@ -444,6 +456,7 @@ kendo_module({
 
         add: function(index, items) {
             var element = this.container(),
+                parents,
                 idx,
                 length,
                 child,
@@ -453,10 +466,12 @@ kendo_module({
             $(clone).html(kendo.render(this.template(), items));
 
             if (clone.children.length) {
+                parents = this.bindings.source._parents();
+
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
-                    bindElement(child, items[idx], this.options.roles, [items[idx]].concat(this.bindings.source.parents));
+                    bindElement(child, items[idx], this.options.roles, [items[idx]].concat(parents));
                 }
             }
         },
@@ -472,11 +487,12 @@ kendo_module({
 
         render: function() {
             var source = this.bindings.source.get(),
-                 idx,
-                 length,
-                 element = this.container(),
-                 template = this.template(),
-                 parent;
+                parents,
+                idx,
+                length,
+                element = this.container(),
+                template = this.template(),
+                parent;
 
             if (!(source instanceof ObservableArray) && toString.call(source) !== "[object Array]") {
                 if (source.parent) {
@@ -494,8 +510,10 @@ kendo_module({
                 $(element).html(this.bindings.template.render(source));
 
                 if (element.children.length) {
+                    parents = this.bindings.source._parents();
+
                     for (idx = 0, length = source.length; idx < length; idx++) {
-                        bindElement(element.children[idx], source[idx], this.options.roles, [source[idx]].concat(this.bindings.source.parents) );
+                        bindElement(element.children[idx], source[idx], this.options.roles, [source[idx]].concat(parents));
                     }
                 }
             }
@@ -816,7 +834,7 @@ kendo_module({
             },
 
             itemChange: function(e) {
-                bindElement(e.item[0], e.data, this._ns(e.ns), [e.data].concat(this.bindings.source.parents));
+                bindElement(e.item[0], e.data, this._ns(e.ns), [e.data].concat(this.bindings.source._parents()));
             },
 
             dataBinding: function() {
@@ -846,6 +864,7 @@ kendo_module({
                     items = widget.items(),
                     dataSource = widget.dataSource,
                     view = dataSource.view(),
+                    parents,
                     groups = dataSource.group() || [];
 
                 if (items.length) {
@@ -853,8 +872,10 @@ kendo_module({
                         view = flattenGroups(view);
                     }
 
+                    parents = this.bindings.source._parents();
+
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], view[idx], this._ns(e.ns), [view[idx]].concat(this.bindings.source.parents));
+                        bindElement(items[idx], view[idx], this._ns(e.ns), [view[idx]].concat(parents));
                     }
                 }
             },
