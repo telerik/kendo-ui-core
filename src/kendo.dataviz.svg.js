@@ -267,7 +267,9 @@ kendo_module({
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
                     "#= d.options.rotation ? d.renderRotation() : '' # " +
-                    "style='font: #= d.options.font #' fill='#= d.options.color #'>" +
+                    "style='font: #= d.options.font #; " +
+                    "#= d.renderCursor() #' " +
+                    "fill='#= d.options.color #'>" +
                     "#= d.content #</text>"
                 );
             }
@@ -282,7 +284,8 @@ kendo_module({
                 width: 0,
                 height: 0
             },
-            fillOpacity: 1
+            fillOpacity: 1,
+            cursor: {}
         },
 
         refresh: function(domElement) {
@@ -296,6 +299,17 @@ kendo_module({
         clone: function() {
             var text = this;
             return new SVGText(text.content, deepExtend({}, text.options));
+        },
+
+        renderCursor: function() {
+            var options = this.options,
+                result = "";
+
+            if (defined(options.cursor.style)) {
+                result += "cursor: " + options.cursor.style + ";";
+            }
+
+            return result;
         },
 
         renderRotation: function() {
@@ -323,7 +337,8 @@ kendo_module({
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
                     "<path #= d.renderId() #" +
-                    "style='display: #= d.renderDisplay() #' " +
+                    "style='display: #= d.renderDisplay() #; " +
+                    "#= d.renderCursor() #' " +
                     "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
@@ -344,7 +359,8 @@ kendo_module({
             strokeOpacity: 1,
             rotation: [0,0,0],
             strokeLineCap: SQUARE,
-            visible: true
+            visible: true,
+            cursor: {}
         },
 
         refresh: function(domElement) {
@@ -363,6 +379,17 @@ kendo_module({
 
         renderPoints: function() {
             // Overriden by inheritors
+        },
+
+        renderCursor: function() {
+            var options = this.options,
+                result = "";
+
+            if (defined(options.cursor.style)) {
+                result += "cursor: " + options.cursor.style + ";";
+            }
+
+            return result;
         },
 
         renderDashType: function () {

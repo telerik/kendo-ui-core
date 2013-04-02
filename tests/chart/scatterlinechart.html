@@ -82,6 +82,17 @@
                     }
                 });
 
+                test("removes the series points if the visible is set to false", function() {
+                    plotArea = new PlotAreaStub();
+                    setupScatterLineChart(plotArea, { series: [{
+                        data: [[1,2]],
+                        visible: false,
+                        type: "scatterLine"
+                    }] });
+
+                    equal(scatterLineChart.points.length, 0);
+                });
+
                 test("Creates points for scatterLineChart data points", function() {
                     equal(scatterLineChart.points.length, series.data.length);
                 });

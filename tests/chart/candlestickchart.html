@@ -105,6 +105,16 @@
                     equal(candlestickChart.points.length, series.data.length);
                 });
 
+                test("removes the series points if the visible is set to false", function() {
+                    setupCandlestickChart(plotArea, { series: [{
+                        data: [[2,4,1,3]],
+                        visible: false,
+                        type: "candlestick"
+                    }] });
+
+                    equal(candlestickChart.points.length, 0);
+                });
+
                 test("creates empty points for null values", function() {
                     setupCandlestickChart(plotArea, { series: [{
                         data: [[2,4,1,3], null], type: "candlestick"

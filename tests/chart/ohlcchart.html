@@ -101,6 +101,16 @@
                     }
                 });
 
+                test("removes the series points if the visible is set to false", function() {
+                    setupOHLCChart(plotArea, { series: [{
+                        data: [[2,4,1,3]],
+                        visible: false,
+                        type: "ohlc"
+                    }] });
+
+                    equal(ohlcChart.points.length, 0);
+                });
+
                 test("creates points for ohlcChart data points", function() {
                     equal(ohlcChart.points.length, series.data.length);
                 });

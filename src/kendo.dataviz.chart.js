@@ -121,6 +121,7 @@ kendo_module({
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
+        POINTER = "pointer",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -1244,7 +1245,7 @@ kendo_module({
             label.item = item;
 
             Text.fn.init.call(label, item.text,
-                deepExtend({ id: uniqueId() }, options)
+                deepExtend({ id: uniqueId(), cursor: { style: POINTER } }, options)
             );
 
             label.enableDiscovery();
@@ -1355,7 +1356,14 @@ kendo_module({
 
                 markerBox.y2 = markerBox.y1 + markerSize;
 
-                group.children.push(view.createRect(markerBox, { fill: color, stroke: color }));
+                group.children.push(view.createRect(markerBox, {
+                    fill: color,
+                    stroke: color,
+                    data: { modelId: label.options.modelId },
+                    cursor: {
+                        style: POINTER
+                    }
+                }));
             }
 
             if (children.length > 0) {
@@ -1366,8 +1374,8 @@ kendo_module({
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     dashType: border.dashType,
-                    fill: options.background })
-                );
+                    fill: options.background
+                }));
             }
 
             return [ group ];
@@ -4761,7 +4769,7 @@ kendo_module({
                 labelText = segment.value,
                 labelTemplate;
 
-            if (segment._rendered) {
+            if (segment._rendered || segment.visible === false) {
                 return;
             } else {
                 segment._rendered = true;
@@ -4819,11 +4827,11 @@ kendo_module({
                 if (labelsOptions.position == CENTER) {
                     sector.r = math.abs((sector.r - labelHeight) / 2) + labelHeight;
                     lp = sector.point(angle);
-                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
+                    label.reflow(Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
                 } else if (labelsOptions.position == INSIDE_END) {
                     sector.r = sector.r - labelHeight / 2;
                     lp = sector.point(angle);
-                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
+                    label.reflow(Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
                 } else {
                     lp = sector.clone().expand(labelsDistance).point(angle);
                     if (lp.x >= sector.c.x) {
@@ -4833,7 +4841,7 @@ kendo_module({
                         x1 = lp.x - labelWidth;
                         label.orientation = LEFT;
                     }
-                    label.reflow(new Box2D(x1, lp.y - labelHeight, lp.x, lp.y));
+                    label.reflow(Box2D(x1, lp.y - labelHeight, lp.x, lp.y));
                 }
             }
         },
@@ -4862,7 +4870,7 @@ kendo_module({
                 });
             }
 
-            if (segment.value && segment.visible !== false) {
+            if (segment.value) {
                 elements.push(segment.createSegment(view, sector, deepExtend({
                     id: options.id,
                     fill: options.color,
@@ -5051,6 +5059,10 @@ kendo_module({
                 segment;
 
             chart.createLegendItem(value, fields);
+
+            if (fields.visible === false) {
+                return;
+            }
 
             segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
@@ -5312,17 +5324,15 @@ kendo_module({
                         var box = label.box,
                             centerPoint = sector.c,
                             start = sector.point(angle),
-                            middle = new Point2D(box.x1, box.center().y),
-                            sr,
-                            end,
-                            crossing;
+                            middle = Point2D(box.x1, box.center().y),
+                            sr, end, crossing;
 
                         start = sector.clone().expand(connectors.padding).point(angle);
                         points.push(start);
                         if (label.orientation == RIGHT) {
-                            end = new Point2D(box.x1 - connectors.padding, box.center().y);
+                            end = Point2D(box.x1 - connectors.padding, box.center().y);
                             crossing = intersection(centerPoint, start, middle, end);
-                            middle = new Point2D(end.x - space, end.y);
+                            middle = Point2D(end.x - space, end.y);
                             crossing = crossing || middle;
                             crossing.x = math.min(crossing.x, middle.x);
 
@@ -5331,22 +5341,22 @@ kendo_module({
                                 sr = sector.c.x + sector.r + space;
                                 if (segment.options.labels.align !== COLUMN) {
                                     if (sr < middle.x) {
-                                        points.push(new Point2D(sr, start.y));
+                                        points.push(Point2D(sr, start.y));
                                     } else {
-                                        points.push(new Point2D(start.x + space * 2, start.y));
+                                        points.push(Point2D(start.x + space * 2, start.y));
                                     }
                                 } else {
-                                    points.push(new Point2D(sr, start.y));
+                                    points.push(Point2D(sr, start.y));
                                 }
-                                points.push(new Point2D(middle.x, end.y));
+                                points.push(Point2D(middle.x, end.y));
                             } else {
                                 crossing.y = end.y;
                                 points.push(crossing);
                             }
                         } else {
-                            end = new Point2D(box.x2 + connectors.padding, box.center().y);
+                            end = Point2D(box.x2 + connectors.padding, box.center().y);
                             crossing = intersection(centerPoint, start, middle, end);
-                            middle = new Point2D(end.x + space, end.y);
+                            middle = Point2D(end.x + space, end.y);
                             crossing = crossing || middle;
                             crossing.x = math.max(crossing.x, middle.x);
 
@@ -5355,14 +5365,14 @@ kendo_module({
                                 sr = sector.c.x - sector.r - space;
                                 if (segment.options.labels.align !== COLUMN) {
                                     if (sr > middle.x) {
-                                        points.push(new Point2D(sr, start.y));
+                                        points.push(Point2D(sr, start.y));
                                     } else {
-                                        points.push(new Point2D(start.x - space * 2, start.y));
+                                        points.push(Point2D(start.x - space * 2, start.y));
                                     }
                                 } else {
-                                    points.push(new Point2D(sr, start.y));
+                                    points.push(Point2D(sr, start.y));
                                 }
-                                points.push(new Point2D(middle.x, end.y));
+                                points.push(Point2D(middle.x, end.y));
                             } else {
                                 crossing.y = end.y;
                                 points.push(crossing);
@@ -5485,7 +5495,7 @@ kendo_module({
 
             chart.createLegendItem(value, fields);
 
-            if (!value) {
+            if (!value || fields.visible === false) {
                 return;
             }
 

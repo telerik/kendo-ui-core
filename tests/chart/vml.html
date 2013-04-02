@@ -428,6 +428,11 @@
                     ok(text.render().indexOf("font: " + text.options.font) > -1);
                 });
 
+                test("sets cursor style", function() {
+                    text.options.cursor.style = "pointer";
+                    ok(text.render().indexOf("cursor: " + text.options.cursor.style) > -1);
+                });
+
                 test("sets color", function() {
                     text.options.color = "#cf0";
                     ok(text.render().indexOf("color: " + text.options.color) > -1);
