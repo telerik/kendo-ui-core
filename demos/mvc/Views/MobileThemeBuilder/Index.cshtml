@@ -138,7 +138,19 @@
                     </div>
                 </div>
 
-                <div data-role="view" data-layout="overview-layout" id="overview-contacts" data-title="My Contacts">
+                <div data-role="view" data-layout="overview-layout" id="overview-contacts">
+                    <header data-role="header">
+                        <div data-role="navbar">
+                            <ul data-role="buttongroup" data-index="0">
+                                <li>
+                                    By Name
+                                </li>
+                                <li>
+                                    By Family Name
+                                </li>
+                            </ul>
+                        </div>
+                    </header>
                     <ul data-role="listview" data-type="group">
                         <li>
                             A
