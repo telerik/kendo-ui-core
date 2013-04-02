@@ -4,6 +4,7 @@
         <title>Chart helpers</title>
         <script src="../jquery-loader.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
@@ -14,6 +15,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
         <script>
             var dataviz = kendo.dataviz,
                 Chart = dataviz.ui.Chart,
@@ -302,6 +304,28 @@
 
             test("y defaults to 0", function() {
                 equal(new Point2D().y, 0);
+            });
+
+            test("clone returns new point instance", function() {
+                var clone = point.clone();
+                notEqual(clone, point);
+                ok(clone instanceof Point2D);
+            });
+
+            test("clone copies x and y", function() {
+                var clone = point.clone();
+                equal(clone.x, point.x);
+                equal(clone.y, point.y);
+            });
+
+            test("rotate rotates x and y around center", function() {
+                point.rotate(new Point2D(0, 0), 90);
+                equal(point.x, 20, 1);
+                equal(point.y, -10, 1);
+            });
+
+            test("rotate returns point", function() {
+                deepEqual(point.rotate(new Point2D(0, 0), 90), point);
             });
 
             (function() {

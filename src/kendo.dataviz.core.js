@@ -97,6 +97,27 @@ kendo_module({
             var point = this;
 
             return new Point2D(point.x, point.y);
+        },
+
+        rotate: function(center, degrees) {
+            var point = this,
+                theta = degrees * DEGREE,
+                cx = center.x,
+                cy = center.y,
+                x = point.x,
+                y = point.y;
+
+            point.x = round(
+                cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
+                COORD_PRECISION
+            );
+
+            point.y = round(
+                cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta),
+                COORD_PRECISION
+            );
+
+            return point;
         }
     };
 
