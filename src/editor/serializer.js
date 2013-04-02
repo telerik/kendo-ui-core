@@ -222,6 +222,10 @@ var Serializer = {
             }
         }
 
+        if (root.childNodes.length == 1 && root.firstChild.nodeType == 3) {
+            return dom.encode(root.firstChild.textContent.replace(/[\r\n\v\f\t ]+/, ' '));
+        }
+
         children(root);
 
         result = result.join('');

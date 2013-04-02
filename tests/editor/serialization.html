@@ -396,7 +396,7 @@
 
     test('nbsp and whitespace', function() {
         editor.value('            &nbsp;&nbsp;&nbsp;');
-        equal(editor.value(), '&nbsp;&nbsp;&nbsp;');
+        equal(editor.value(), ' &nbsp;&nbsp;&nbsp;');
     });
     test('amp', function() {
         editor.value('&amp;');
