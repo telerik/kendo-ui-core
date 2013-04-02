@@ -45,6 +45,13 @@ test("can render as any tag", 1, function() {
     ok(view.render().is("span"));
 });
 
+test("can skip wrapping", 2, function() {
+    var view = new kendo.View("<span id='foo'>Foo</span>", { wrap: false });
+
+    ok(view.render().is("span"));
+    equal(view.render().attr("id"), 'foo');
+});
+
 test("binds to a given model", 1, function() {
     var view = new kendo.View( "<i><a data-bind='click: foo'>Foo</a></i>", { model: kendo.observable({ foo: function() { ok(true); } }) });
 
