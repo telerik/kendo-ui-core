@@ -2620,7 +2620,8 @@ kendo_module({
                 value: value,
                 series: series,
                 dataItem: series.data[categoryIx],
-                category: category
+                category: category,
+                index: categoryIx,
             }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
         },
 

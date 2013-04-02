@@ -1654,6 +1654,16 @@
                     });
                 });
 
+                test("color fn argument contains index", 1, function() {
+                    new dataviz.BarChart(plotArea, {
+                        series: [{
+                            name: "series 1",
+                            data: [1],
+                            color: function(bar) { equal(bar.index, 0); }
+                        }]
+                    });
+                });
+
             })();
 
             (function() {
