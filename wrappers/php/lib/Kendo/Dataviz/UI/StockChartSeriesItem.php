@@ -147,7 +147,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The series base color.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
     public function color($value) {
@@ -165,7 +165,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The series color when open value is smoller then close value.** Available for candlestick series only **
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */
     public function downColor($value) {

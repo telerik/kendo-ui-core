@@ -7,7 +7,7 @@ class StockChartSeriesItemMarkersBorder extends \Kendo\SerializableObject {
 
     /**
     * The color of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkersBorder
     */
     public function color($value) {
@@ -16,7 +16,7 @@ class StockChartSeriesItemMarkersBorder extends \Kendo\SerializableObject {
 
     /**
     * The width of the border.
-    * @param float $value
+    * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkersBorder
     */
     public function width($value) {

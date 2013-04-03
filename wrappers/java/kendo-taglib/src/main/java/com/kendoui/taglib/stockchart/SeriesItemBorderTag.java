@@ -51,6 +51,22 @@ public class SeriesItemBorderTag extends  BaseTag  /* interfaces *//* interfaces
         return "stockChart-seriesItem-border";
     }
 
+    public void setColor(SeriesItemBorderColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setDashType(SeriesItemBorderDashTypeFunctionTag value) {
+        setEvent("dashType", value.getBody());
+    }
+
+    public void setOpacity(SeriesItemBorderOpacityFunctionTag value) {
+        setEvent("opacity", value.getBody());
+    }
+
+    public void setWidth(SeriesItemBorderWidthFunctionTag value) {
+        setEvent("width", value.getBody());
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -65,6 +81,14 @@ public class SeriesItemBorderTag extends  BaseTag  /* interfaces *//* interfaces
 
     public void setDashType(String value) {
         setProperty("dashType", value);
+    }
+
+    public float getOpacity() {
+        return (float)getProperty("opacity");
+    }
+
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
     public float getWidth() {

@@ -16,7 +16,7 @@ class StockChartSeriesItemTarget extends \kendo\SerializableObject {
 
     /**
     * The target color.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemTarget
     */
     public function color($value) {
@@ -25,7 +25,7 @@ class StockChartSeriesItemTarget extends \kendo\SerializableObject {
 
     /**
     * The border of the target.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemTargetBorder|array $value
+    * @param \Kendo\JavaScriptFunction|\Kendo\Dataviz\UI\StockChartSeriesItemTargetBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemTarget
     */
     public function border($value) {

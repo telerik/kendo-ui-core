@@ -7,7 +7,7 @@ class StockChartSeriesItemTargetBorder extends \kendo\SerializableObject {
 
     /**
     * The color of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemTargetBorder
     */
     public function color($value) {
@@ -16,7 +16,7 @@ class StockChartSeriesItemTargetBorder extends \kendo\SerializableObject {
 
     /**
     * The dash type of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemTargetBorder
     */
     public function dashType($value) {
@@ -25,7 +25,7 @@ class StockChartSeriesItemTargetBorder extends \kendo\SerializableObject {
 
     /**
     * The width of the border.
-    * @param float $value
+    * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemTargetBorder
     */
     public function width($value) {

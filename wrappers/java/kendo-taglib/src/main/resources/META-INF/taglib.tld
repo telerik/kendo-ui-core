@@ -1643,7 +1643,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The series base color.</description>
+            <description>The series base color. Accepts CSS color syntax, including hex and rgb.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1872,7 +1872,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the points.** Applicable to bar, column, bubble, donut, pie, ohlc and candlestick series **</description>
         <name>chart-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -1902,6 +1902,30 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>chart-seriesItem-border-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>chart-seriesItem-border-dashType</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The border opacity.</description>
+        <name>chart-seriesItem-border-opacity</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemBorderOpacityFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>chart-seriesItem-border-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The label connectors options.** Applicable to donut and pie series. **</description>
         <name>chart-seriesItem-connectors</name>
@@ -2093,7 +2117,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the labels.</description>
         <name>chart-seriesItem-labels-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -2117,11 +2141,65 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>chart-seriesItem-labels-border-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>chart-seriesItem-labels-border-dashType</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>chart-seriesItem-labels-border-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The background color of the labels.</description>
+        <name>chart-seriesItem-labels-background</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The text color of the labels.</description>
+        <name>chart-seriesItem-labels-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The font style of the labels.</description>
+        <name>chart-seriesItem-labels-font</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsFontFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The format of the labels.</description>
+        <name>chart-seriesItem-labels-format</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsFormatFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Defines the position of the labels.</description>
+        <name>chart-seriesItem-labels-position</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsPositionFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The label template. Template variables:</description>
         <name>chart-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The visibility of the labels.</description>
+        <name>chart-seriesItem-labels-visible</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemLabelsVisibleFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -2165,6 +2243,18 @@ If not specified, the available space is split evenly between the series.Availab
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The border of the markers.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the markers.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The marker size.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2189,7 +2279,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the markers.</description>
         <name>chart-seriesItem-markers-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -2207,7 +2297,49 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>chart-seriesItem-markers-border-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>chart-seriesItem-markers-border-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The background color of the current series markers.</description>
+        <name>chart-seriesItem-markers-background</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The marker size.</description>
+        <name>chart-seriesItem-markers-size</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersSizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Configures the markers shape type.</description>
+        <name>chart-seriesItem-markers-type</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The markers visibility.</description>
+        <name>chart-seriesItem-markers-visible</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersVisibleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The rotation angle of the markers.</description>
+        <name>chart-seriesItem-markers-rotation</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The settings for negative values.** Applicable only to bubble series. **</description>
         <name>chart-seriesItem-negativeValues</name>
@@ -2253,6 +2385,12 @@ If not specified, the available space is split evenly between the series.Availab
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>The border of the target.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The target color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2265,7 +2403,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the target.</description>
         <name>chart-seriesItem-target-border</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTargetBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -2290,10 +2428,28 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
+        <description>The color of the border.</description>
+        <name>chart-seriesItem-target-border-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>chart-seriesItem-target-border-dashType</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>chart-seriesItem-target-border-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The target line.</description>
         <name>chart-seriesItem-target-line</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemTargetLineTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The width of the line.</description>
@@ -2305,7 +2461,19 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The width of the line.</description>
+        <name>chart-seriesItem-target-line-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetLineWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The target color.</description>
+        <name>chart-seriesItem-target-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemTargetColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The data point tooltip configuration options.</description>
         <name>chart-seriesItem-tooltip</name>
@@ -2389,6 +2557,18 @@ Template variables:</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>The series base color. Accepts CSS color syntax, including hex and rgb.</description>
+        <name>chart-seriesItem-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The series color when open value is smoller then close value.** Available for candlestick series only **</description>
+        <name>chart-seriesItem-downColor</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemDownColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>The chart title configuration options or text.</description>
@@ -11589,7 +11769,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the points.** Applicable to bar, column and pie series **</description>
         <name>sparkline-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -11604,6 +11784,12 @@ If not specified, the available space is split evenly between the series.Availab
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11613,6 +11799,30 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>sparkline-seriesItem-border-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>sparkline-seriesItem-border-dashType</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The border opacity.</description>
+        <name>sparkline-seriesItem-border-opacity</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemBorderOpacityFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>sparkline-seriesItem-border-width</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The label connectors options.** Applicable to pie series. **</description>
         <name>sparkline-seriesItem-connectors</name>
@@ -11776,7 +11986,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the labels.</description>
         <name>sparkline-seriesItem-labels-border</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -11800,11 +12010,65 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>sparkline-seriesItem-labels-border-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>sparkline-seriesItem-labels-border-dashType</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>sparkline-seriesItem-labels-border-width</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The background color of the labels.</description>
+        <name>sparkline-seriesItem-labels-background</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The text color of the labels.</description>
+        <name>sparkline-seriesItem-labels-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The font style of the labels.</description>
+        <name>sparkline-seriesItem-labels-font</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsFontFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The format of the labels.</description>
+        <name>sparkline-seriesItem-labels-format</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsFormatFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Defines the position of the labels.</description>
+        <name>sparkline-seriesItem-labels-position</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsPositionFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The label template. Template variables:</description>
         <name>sparkline-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The visibility of the labels.</description>
+        <name>sparkline-seriesItem-labels-visible</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsVisibleFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -11848,6 +12112,18 @@ If not specified, the available space is split evenly between the series.Availab
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The border of the markers.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the markers.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The marker size.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11872,7 +12148,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the markers.</description>
         <name>sparkline-seriesItem-markers-border</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -11890,7 +12166,49 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>sparkline-seriesItem-markers-border-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>sparkline-seriesItem-markers-border-width</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The background color of the current series markers.</description>
+        <name>sparkline-seriesItem-markers-background</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The marker size.</description>
+        <name>sparkline-seriesItem-markers-size</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersSizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Configures the markers shape type.</description>
+        <name>sparkline-seriesItem-markers-type</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The markers visibility.</description>
+        <name>sparkline-seriesItem-markers-visible</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersVisibleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The rotation angle of the markers.</description>
+        <name>sparkline-seriesItem-markers-rotation</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemMarkersRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The effects overlay.</description>
         <name>sparkline-seriesItem-overlay</name>
@@ -11914,6 +12232,12 @@ If not specified, the available space is split evenly between the series.Availab
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>The border of the target.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The target color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11926,7 +12250,7 @@ If not specified, the available space is split evenly between the series.Availab
         <description>The border of the target.</description>
         <name>sparkline-seriesItem-target-border</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -11951,10 +12275,22 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
+        <description>The color of the border.</description>
+        <name>sparkline-seriesItem-target-border-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>sparkline-seriesItem-target-border-dashType</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The target line.</description>
         <name>sparkline-seriesItem-target-line</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetLineTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The width of the line.</description>
@@ -11966,7 +12302,19 @@ If not specified, the available space is split evenly between the series.Availab
     </tag>
 
 
+    <tag>
+        <description>The width of the line.</description>
+        <name>sparkline-seriesItem-target-line-width</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetLineWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The target color.</description>
+        <name>sparkline-seriesItem-target-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The data point tooltip configuration options.</description>
         <name>sparkline-seriesItem-tooltip</name>
@@ -12050,6 +12398,12 @@ Template variables:</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>The series base color.</description>
+        <name>sparkline-seriesItem-color</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>Default values for each series.</description>
@@ -15346,7 +15700,7 @@ Available for column series.</description>
         <description>The border of the points.** Applicable to column, ohlc and candlestick series **</description>
         <name>stockChart-seriesItem-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -15361,6 +15715,12 @@ Available for column series.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The border opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The width of the border.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15370,6 +15730,30 @@ Available for column series.</description>
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>stockChart-seriesItem-border-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>stockChart-seriesItem-border-dashType</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The border opacity.</description>
+        <name>stockChart-seriesItem-border-opacity</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderOpacityFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>stockChart-seriesItem-border-width</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Configures the appearance of highlighted points.</description>
         <name>stockChart-seriesItem-highlight</name>
@@ -15521,7 +15905,7 @@ Available for column series.</description>
         <description>The border of the labels.</description>
         <name>stockChart-seriesItem-labels-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -15545,11 +15929,65 @@ Available for column series.</description>
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>stockChart-seriesItem-labels-border-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>stockChart-seriesItem-labels-border-dashType</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>stockChart-seriesItem-labels-border-width</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The background color of the labels.</description>
+        <name>stockChart-seriesItem-labels-background</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The text color of the labels.</description>
+        <name>stockChart-seriesItem-labels-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The font style of the labels.</description>
+        <name>stockChart-seriesItem-labels-font</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsFontFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The format of the labels.</description>
+        <name>stockChart-seriesItem-labels-format</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsFormatFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Defines the position of the labels.</description>
+        <name>stockChart-seriesItem-labels-position</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsPositionFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The label template. Template variables:</description>
         <name>stockChart-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The visibility of the labels.</description>
+        <name>stockChart-seriesItem-labels-visible</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsVisibleFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -15593,6 +16031,18 @@ Available for column series.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The border of the markers.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the markers.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The marker size.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15617,7 +16067,7 @@ Available for column series.</description>
         <description>The border of the markers.</description>
         <name>stockChart-seriesItem-markers-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -15635,7 +16085,49 @@ Available for column series.</description>
     </tag>
 
 
+    <tag>
+        <description>The color of the border.</description>
+        <name>stockChart-seriesItem-markers-border-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>stockChart-seriesItem-markers-border-width</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The background color of the current series markers.</description>
+        <name>stockChart-seriesItem-markers-background</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The marker size.</description>
+        <name>stockChart-seriesItem-markers-size</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersSizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Configures the markers shape type.</description>
+        <name>stockChart-seriesItem-markers-type</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The markers visibility.</description>
+        <name>stockChart-seriesItem-markers-visible</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersVisibleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The rotation angle of the markers.</description>
+        <name>stockChart-seriesItem-markers-rotation</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The effects overlay.</description>
         <name>stockChart-seriesItem-overlay</name>
@@ -15659,6 +16151,12 @@ Available for column series.</description>
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>The border of the target.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The target color.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15671,7 +16169,7 @@ Available for column series.</description>
         <description>The border of the target.</description>
         <name>stockChart-seriesItem-target-border</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetBorderTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The color of the border.</description>
@@ -15696,10 +16194,28 @@ Available for column series.</description>
 
 
     <tag>
+        <description>The color of the border.</description>
+        <name>stockChart-seriesItem-target-border-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The dash type of the border.</description>
+        <name>stockChart-seriesItem-target-border-dashType</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetBorderDashTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border.</description>
+        <name>stockChart-seriesItem-target-border-width</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The target line.</description>
         <name>stockChart-seriesItem-target-line</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetLineTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The width of the line.</description>
@@ -15711,7 +16227,19 @@ Available for column series.</description>
     </tag>
 
 
+    <tag>
+        <description>The width of the line.</description>
+        <name>stockChart-seriesItem-target-line-width</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetLineWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>The target color.</description>
+        <name>stockChart-seriesItem-target-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemTargetColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The data point tooltip configuration options.</description>
         <name>stockChart-seriesItem-tooltip</name>
@@ -15795,6 +16323,18 @@ Template variables:</description>
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>The series base color.</description>
+        <name>stockChart-seriesItem-color</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The series color when open value is smoller then close value.** Available for candlestick series only **</description>
+        <name>stockChart-seriesItem-downColor</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemDownColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>The chart title configuration options or text.</description>

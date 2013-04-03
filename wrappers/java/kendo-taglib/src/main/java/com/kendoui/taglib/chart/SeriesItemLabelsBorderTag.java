@@ -51,6 +51,18 @@ public class SeriesItemLabelsBorderTag extends  BaseTag  /* interfaces *//* inte
         return "chart-seriesItem-labels-border";
     }
 
+    public void setColor(SeriesItemLabelsBorderColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setDashType(SeriesItemLabelsBorderDashTypeFunctionTag value) {
+        setEvent("dashType", value.getBody());
+    }
+
+    public void setWidth(SeriesItemLabelsBorderWidthFunctionTag value) {
+        setEvent("width", value.getBody());
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

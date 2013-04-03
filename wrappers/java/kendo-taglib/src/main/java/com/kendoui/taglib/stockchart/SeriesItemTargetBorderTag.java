@@ -51,6 +51,18 @@ public class SeriesItemTargetBorderTag extends  BaseTag  /* interfaces */ /* int
         return "stockChart-seriesItem-target-border";
     }
 
+    public void setColor(SeriesItemTargetBorderColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setDashType(SeriesItemTargetBorderDashTypeFunctionTag value) {
+        setEvent("dashType", value.getBody());
+    }
+
+    public void setWidth(SeriesItemTargetBorderWidthFunctionTag value) {
+        setEvent("width", value.getBody());
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

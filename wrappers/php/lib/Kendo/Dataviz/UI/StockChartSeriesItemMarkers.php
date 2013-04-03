@@ -7,7 +7,7 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * The background color of the current series markers.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
     */
     public function background($value) {
@@ -16,7 +16,7 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * The border of the markers.
-    * @param \Kendo\Dataviz\UI\StockChartSeriesItemMarkersBorder|array $value
+    * @param \Kendo\JavaScriptFunction|\Kendo\Dataviz\UI\StockChartSeriesItemMarkersBorder|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
     */
     public function border($value) {
@@ -25,7 +25,7 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * The marker size.
-    * @param float $value
+    * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
     */
     public function size($value) {
@@ -34,7 +34,7 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * Configures the markers shape type.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
     */
     public function type($value) {
@@ -43,11 +43,20 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
 
     /**
     * The markers visibility.
-    * @param boolean $value
+    * @param boolean|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
+    }
+
+    /**
+    * The rotation angle of the markers.
+    * @param float|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
+    */
+    public function rotation($value) {
+        return $this->setProperty('rotation', $value);
     }
 
 //<< Properties

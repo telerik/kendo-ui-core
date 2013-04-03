@@ -55,8 +55,32 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces */ /* interface
         setProperty("border", value);
     }
 
+    public void setBackground(SeriesItemLabelsBackgroundFunctionTag value) {
+        setEvent("background", value.getBody());
+    }
+
+    public void setColor(SeriesItemLabelsColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setFont(SeriesItemLabelsFontFunctionTag value) {
+        setEvent("font", value.getBody());
+    }
+
+    public void setFormat(SeriesItemLabelsFormatFunctionTag value) {
+        setEvent("format", value.getBody());
+    }
+
+    public void setPosition(SeriesItemLabelsPositionFunctionTag value) {
+        setEvent("position", value.getBody());
+    }
+
     public void setTemplate(SeriesItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
+    }
+
+    public void setVisible(SeriesItemLabelsVisibleFunctionTag value) {
+        setEvent("visible", value.getBody());
     }
 
     public String getAlign() {
