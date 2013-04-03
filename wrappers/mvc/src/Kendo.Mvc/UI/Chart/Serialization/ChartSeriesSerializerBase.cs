@@ -1,7 +1,9 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     internal abstract class ChartSeriesSerializerBase : IChartSerializer
     {
@@ -30,6 +32,15 @@ namespace Kendo.Mvc.UI
             if (highlightData.Count > 0)
             {
                 result.Add("highlight", highlightData);
+            }
+
+            if (series.ColorHandler != null)
+            {
+                result.Add("color", series.ColorHandler);
+            }
+            else if (series.Color.HasValue())
+            {
+                result.Add("color", series.Color);
             }
 
             return result;

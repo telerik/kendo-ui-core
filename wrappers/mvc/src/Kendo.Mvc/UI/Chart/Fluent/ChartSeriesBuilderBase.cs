@@ -123,6 +123,38 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the function used to retrieve point color.
+        /// </summary>
+        /// <param name="colorFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the color of each point.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Bar(s => s.Sales)
+        ///                .Color(
+        ///                    @&lt;text&gt;
+        ///                    function(point) {
+        ///                        return point.value > 5 ? "red" : "green";
+        ///                    }
+        ///                    &lt;/text&gt;
+        ///                )
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TSeriesBuilder Color(Func<object, object> colorFunction)
+        {
+            Series.ColorHandler = new ClientHandlerDescriptor { TemplateDelegate = colorFunction };
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
         /// Configure the data point tooltip for the series.
         /// </summary>
         /// <param name="configurator">Use the configurator to set data tooltip options.</param>
