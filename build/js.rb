@@ -203,6 +203,7 @@ WIN_JS = FileList[
     "src/kendo.pager.js",
     "src/kendo.popup.js",
     "src/kendo.list.js",
+    "src/kendo.multiselect.js",
     "src/kendo.calendar.js",
     "src/kendo.datepicker.js",
     "src/kendo.autocomplete.js",
