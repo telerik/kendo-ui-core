@@ -55,7 +55,7 @@ kendo_module({
     }
 
     function constrain(value, low, high) {
-        return Math.max(Math.min(parseInt(value, 10), parseInt(high, 10)), parseInt(low, 10));
+        return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), parseInt(low, 10));
     }
 
     function windowObject(element, name) {
