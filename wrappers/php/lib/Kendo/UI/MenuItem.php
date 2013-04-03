@@ -46,6 +46,15 @@ class MenuItem extends \Kendo\UI\NavigationalItem {
     }
 
     /**
+    * Specifies the URL that the item links to
+    * @param string $value
+    * @return \Kendo\UI\MenuItem
+    */
+    public function url($value) {
+        return $this->setProperty('url', $value);
+    }
+
+    /**
     * Specifies the URL of the image displayed by the item
     * @param string $value
     * @return \Kendo\UI\MenuItem
