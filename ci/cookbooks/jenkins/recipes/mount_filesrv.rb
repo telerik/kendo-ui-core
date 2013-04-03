@@ -9,6 +9,7 @@ mount "/mnt/Resources" do
     fstype "cifs"
     options access_options
     pass 0
+    action [:mount, :enable]
 end
 
 link "/kendo-builds" do
@@ -22,5 +23,6 @@ mount "/mnt/kendo-iis" do
     fstype "cifs"
     options access_options
     pass 0
+    action [:mount, :enable]
 end
 
