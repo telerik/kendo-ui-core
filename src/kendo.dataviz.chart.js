@@ -2616,8 +2616,8 @@ kendo_module({
             categoryPoints.push(point);
         },
 
-        expandPointOptions: function(options, value, category, categoryIx, series) {
-            expandOptions(options, {
+        evalPointOptions: function(options, value, category, categoryIx, series) {
+            evalOptions(options, {
                 value: value,
                 series: series,
                 dataItem: series.data[categoryIx],
@@ -2811,7 +2811,7 @@ kendo_module({
                 barOptions.color = barOptions.negativeColor;
             }
 
-            chart.expandPointOptions(
+            chart.evalPointOptions(
                 barOptions, value, category, categoryIx, series
             );
 
@@ -3124,7 +3124,7 @@ kendo_module({
                 invertAxes: options.invertAxes
             }, series);
 
-            chart.expandPointOptions(
+            chart.evalPointOptions(
                 bulletOptions, data, category, categoryIx, series
             );
 
@@ -3843,7 +3843,7 @@ kendo_module({
                 color: fields.color
             });
 
-            chart.expandPointOptions(
+            chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series
             );
 
@@ -4105,10 +4105,10 @@ kendo_module({
             }
         },
 
-        expandPointOptions: function(options, value, fields) {
+        evalPointOptions: function(options, value, fields) {
             var series = fields.series;
 
-            expandOptions(options, {
+            evalOptions(options, {
                 value: value,
                 series: series,
                 dataItem: fields.dataItem
@@ -4135,7 +4135,7 @@ kendo_module({
                 color: fields.color
             });
 
-            chart.expandPointOptions(pointOptions, value, fields);
+            chart.evalPointOptions(pointOptions, value, fields);
 
             point = new LinePoint(value, pointOptions);
 
@@ -4336,7 +4336,7 @@ kendo_module({
                 }
             });
 
-            chart.expandPointOptions(pointOptions, value, fields);
+            chart.evalPointOptions(pointOptions, value, fields);
 
             point = new Bubble(value, pointOptions);
 
@@ -4678,7 +4678,7 @@ kendo_module({
                 pointOptions = deepExtend({}, series),
                 pointType = chart.pointType();
 
-            chart.expandPointOptions(
+            chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series
             );
 
@@ -5142,10 +5142,10 @@ kendo_module({
             return ["category", "color", "explode", "visibleInLegend", "visible"];
         },
 
-        expandSegmentOptions: function(options, value, fields) {
+        evalSegmentOptions: function(options, value, fields) {
             var series = fields.series;
 
-            expandOptions(options, {
+            evalOptions(options, {
                 value: value,
                 series: series,
                 dataItem: fields.dataItem,
@@ -5165,7 +5165,7 @@ kendo_module({
             }
 
             var segmentOptions = deepExtend({}, fields.series);
-            chart.expandSegmentOptions(segmentOptions, value, fields);
+            chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new PieSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
@@ -5603,7 +5603,7 @@ kendo_module({
             }
 
             var segmentOptions = deepExtend({}, fields.series);
-            chart.expandSegmentOptions(segmentOptions, value, fields);
+            chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new DonutSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
@@ -9285,7 +9285,7 @@ kendo_module({
         return delta;
     }
 
-    function expandOptions(options, context, state) {
+    function evalOptions(options, context, state) {
         var property,
             propValue,
             excluded,
@@ -9308,7 +9308,7 @@ kendo_module({
                     options[property] = propValue(context) || defaults[property];
                 } else if (typeof propValue === "object") {
                     state.defaults = defaults[property];
-                    expandOptions(propValue, context, state);
+                    evalOptions(propValue, context, state);
                 }
             }
         }
@@ -9369,7 +9369,7 @@ kendo_module({
         duration: duration,
         floorDate: floorDate,
         lteDateIndex: lteDateIndex,
-        expandOptions: expandOptions,
+        evalOptions: evalOptions,
         sparseArrayLimits: sparseArrayLimits,
         toDate: toDate,
         toTime: toTime

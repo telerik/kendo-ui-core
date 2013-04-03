@@ -1037,33 +1037,33 @@
             })();
 
             (function() {
-                var expandOptions = dataviz.expandOptions;
+                var evalOptions = dataviz.evalOptions;
 
                 // ------------------------------------------------------------
                 module("Functional options");
 
                 test("replaces function with its result", function() {
                     var opts = { foo: function() { return "bar" } };
-                    expandOptions(opts);
+                    evalOptions(opts);
 
                     equal(opts.foo, "bar");
                 });
 
                 test("executes functions with context", function() {
                     var opts = { foo: function(context) { return context; } };
-                    expandOptions(opts, "baz");
+                    evalOptions(opts, "baz");
 
                     equal(opts.foo, "baz");
                 });
 
                 test("replaces function in nested object with its result", function() {
                     var opts = { baz: { foo: function() { return "bar" } } };
-                    expandOptions(opts);
+                    evalOptions(opts);
 
                     equal(opts.baz.foo, "bar");
                 })
 
-                test("expands functions up to 8 levels deep", function() {
+                test("evals functions up to 8 levels deep", function() {
                     var opts = {};
 
                     for (var i = 0, root = opts; i < 9; i++) {
@@ -1073,7 +1073,7 @@
                         root = root["n" + i];
                     }
 
-                    expandOptions(opts);
+                    evalOptions(opts);
 
                     equal(opts.n0.n1.n2.n3.n4.n5.n6.n7.foo, "bar");
                     ok($.isFunction(opts.n0.n1.n2.n3.n4.n5.n6.n7.n8.foo));
@@ -1081,21 +1081,21 @@
 
                 test("excluded options are ignored", function() {
                     var opts = { bar: function() { } };
-                    expandOptions(opts, {}, { excluded: ["bar"] });
+                    evalOptions(opts, {}, { excluded: ["bar"] });
 
                     ok($.isFunction(opts.bar));
                 });
 
                 test("excluded options children are ignored", function() {
                     var opts = { bar: { baz: function() { } } };
-                    expandOptions(opts, {}, { excluded: ["bar"] });
+                    evalOptions(opts, {}, { excluded: ["bar"] });
 
                     ok($.isFunction(opts.bar.baz));
                 });
 
                 test("undefined result is replaced by default value", function() {
                     var opts = { bar: function() {} };
-                    expandOptions(opts, {}, { defaults: { bar: "foo" } });
+                    evalOptions(opts, {}, { defaults: { bar: "foo" } });
 
                     equal(opts.bar, "foo");
                 });
