@@ -445,7 +445,29 @@
                     view = new ViewStub();
                     plotArea = new PlotAreaStub();
 
-                    equal(segments[0].options.color, "#f00");
+                    donutChart = new dataviz.DonutChart(plotArea, {
+                        series: [{
+                            type: "donut",
+                            data: [{
+                                value: 100,
+                                category: "Value A"
+                            }, {
+                                value: 200,
+                                category: "Value B",
+                                visible: false
+                            }, {
+                                value: 300,
+                                category: "Value C",
+                                visible: false
+                            }]
+                        }]});
+
+                    donutChart.reflow(chartBox);
+                    donutChart.getViewElements(view);
+
+                    segments = donutChart.segments;
+
+                    equal(segments.length, 1);
                 });
 
                 test("color fn argument contains value", 1, function() {
