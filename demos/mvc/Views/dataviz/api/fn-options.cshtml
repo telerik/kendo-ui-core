@@ -3,53 +3,81 @@
             <div id="chart"></div>
         </div>
         <script>
-            function lessThanPrev(point) {
-                var prevValue = point.series.data[point.index - 1];
-                return prevValue && prevValue > point.value;
-            }
-
             function createChart() {
                 $("#chart").kendoChart({
                     title: {
-                        text: "Site Visitors Stats /thousands/"
+                        text: "Wind speed and direction"
                     },
-                    legend: {
-                        position: "bottom"
+                    dataSource: {
+                        data: [{
+                            date: "2013-03-03",
+                            speed: 2,
+                            dir: 180
+                        }, {
+                            date: "2013-03-04",
+                            speed: 4.6,
+                            dir: 225
+                        }, {
+                            date: "2013-03-05",
+                            speed: 2.5,
+                            dir: 45
+                        }, {
+                            date: "2013-03-06",
+                            speed: 3.3,
+                            dir: 225
+                        }, {
+                            date: "2013-03-07",
+                            speed: 3.0,
+                            dir: 135
+                        }, {
+                            date: "2013-03-08",
+                            speed: 3.0,
+                            dir: 90
+                        }, {
+                            date: "2013-03-09",
+                            speed: 2.5,
+                            dir: 45
+                        }, {
+                            date: "2013-03-10",
+                            speed: 2.8,
+                            dir: 45
+                        }, {
+                            date: "2013-03-11",
+                            speed: 3.5,
+                            dir: 0
+                        }, {
+                            date: "2013-03-12",
+                            speed: 3.5,
+                            dir: 270
+                        }],
                     },
                     series: [{
                         type: "line",
-                        name: "Total Visits",
-                        data: [70495, 54769, 60770, 28961, 69819, 78730,
-                               71134, 68400, 49805, 54329, 36025, 13655],
-                        width: 0.5,
-                        color: "#aaa",
+                        field: "speed",
+                        width: 0, // Hides the line, leaving only markers
+                        labels: {
+                            format: "{0} m/s",
+                            position: "bottom",
+                            visible: true
+                        },
                         markers: {
-                            border: {
-                                color: function(point) {
-                                    if (lessThanPrev(point)) {
-                                        return "#f00";
-                                    } else {
-                                        return "#0f0";
-                                    }
-                                }
-                            },
+                            type: "triangle",
+                            size: 10,
                             rotation: function(point) {
-                                if (lessThanPrev(point)) {
-                                    return 180;
-                                } else {
-                                    return 0;
-                                }
-                            },
-                            type: "triangle"
+                                // Evaluated for each point
+                                return point.dataItem.dir;
+                            }
                         }
                     }],
                     categoryAxis: {
-                        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                        type: "date",
+                        field: "date"
+                    },
+                    legend: {
+                        visible: false
                     },
                     tooltip: {
-                        visible: true,
-                        format: "{0}"
+                        visible: true
                     }
                 });
             }
