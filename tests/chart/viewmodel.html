@@ -1472,7 +1472,7 @@
                     label,
                     legend;
 
-                function legendLabelClick(clickHandler, options) {
+                function legendItemClick(clickHandler, options) {
                     chart = createChart($.extend(true, {
                         series: [{
                             type: "line",
@@ -1480,7 +1480,7 @@
                             name: "test",
                             color: "color"
                         }],
-                        legendLabelClick: clickHandler
+                        legendItemClick: clickHandler
                     }, options));
 
                     legend = chart._model.children[0];
@@ -1489,34 +1489,34 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Legend / Events / legendLabelClick", {
+                module("Legend / Events / legendItemClick", {
                     teardown: destroyChart
                 });
 
                 test("fires when clicking axis labels", 1, function() {
-                    legendLabelClick(function() { ok(true); });
+                    legendItemClick(function() { ok(true); });
                 });
 
                 test("event arguments contain DOM element", 1, function() {
-                    legendLabelClick(function(e) {
+                    legendItemClick(function(e) {
                         equal(e.element.length, 1);
                     });
                 });
 
                 test("event arguments contain series name as text", 1, function() {
-                    legendLabelClick(function(e) {
+                    legendItemClick(function(e) {
                         equal(e.text, "test");
                     });
                 });
 
                 test("event arguments contain color of the series", 1, function() {
-                    legendLabelClick(function(e) {
+                    legendItemClick(function(e) {
                         equal(e.color, "color");
                     });
                 });
 
                 test("event arguments contain series", 1, function() {
-                    legendLabelClick(function(e) {
+                    legendItemClick(function(e) {
                         equal(e.series.type, "line");
                     });
                 });

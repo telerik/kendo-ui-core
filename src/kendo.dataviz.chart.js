@@ -101,7 +101,7 @@ kendo_module({
         INSIDE_END = "insideEnd",
         INTERPOLATE = "interpolate",
         LEFT = "left",
-        LEGEND_LABEL_CLICK = "legendLabelClick",
+        LEGEND_ITEM_CLICK = "legendItemClick",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
         MAX_VALUE = Number.MAX_VALUE,
@@ -265,7 +265,7 @@ kendo_module({
             SERIES_CLICK,
             SERIES_HOVER,
             AXIS_LABEL_CLICK,
-            LEGEND_LABEL_CLICK,
+            LEGEND_ITEM_CLICK,
             PLOT_AREA_CLICK,
             DRAG_START,
             DRAG,
@@ -549,7 +549,7 @@ kendo_module({
             if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip())) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
-            chart.bind(LEGEND_LABEL_CLICK, proxy(chart._legendLabelClick, chart));
+            chart.bind(LEGEND_ITEM_CLICK, proxy(chart._legendLabelClick, chart));
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -1254,7 +1254,7 @@ kendo_module({
         click: function(widget, e) {
             var item = this.item;
 
-            widget.trigger(LEGEND_LABEL_CLICK, {
+            widget.trigger(LEGEND_ITEM_CLICK, {
                 element: $(e.target),
                 text: item.text,
                 color: item.color,
