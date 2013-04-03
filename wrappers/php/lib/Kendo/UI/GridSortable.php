@@ -6,7 +6,7 @@ class GridSortable extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Defines whether column can have unsorted state.
+    * If set to true the user can get the grid in unsorted state by clicking the sorted column header.
     * @param boolean $value
     * @return \Kendo\UI\GridSortable
     */
@@ -15,7 +15,7 @@ class GridSortable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines sorting mode. Possible values:
+    * The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by one column.
     * @param string $value
     * @return \Kendo\UI\GridSortable
     */

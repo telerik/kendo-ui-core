@@ -108,8 +108,8 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("dragStart", value.getBody());
     }
 
-    public void setLegendLabelClick(LegendLabelClickFunctionTag value) {
-        setEvent("legendLabelClick", value.getBody());
+    public void setLegendItemClick(LegendItemClickFunctionTag value) {
+        setEvent("legendItemClick", value.getBody());
     }
 
     public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
@@ -265,16 +265,16 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("dragStart", new Function(value));
     }
 
-    public String getLegendLabelClick() {
-        Function property = ((Function)getProperty("legendLabelClick"));
+    public String getLegendItemClick() {
+        Function property = ((Function)getProperty("legendItemClick"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setLegendLabelClick(String value) {
-        setProperty("legendLabelClick", new Function(value));
+    public void setLegendItemClick(String value) {
+        setProperty("legendItemClick", new Function(value));
     }
 
     public String getPlotAreaClick() {

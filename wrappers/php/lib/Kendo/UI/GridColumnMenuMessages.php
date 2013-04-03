@@ -6,7 +6,7 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Set the text of the columns section in column header menu.
+    * The text message displayed for the column selection menu item.
     * @param string $value
     * @return \Kendo\UI\GridColumnMenuMessages
     */
@@ -15,7 +15,7 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the filter section in column header menu.
+    * The text message displayed for the filter menu item.
     * @param string $value
     * @return \Kendo\UI\GridColumnMenuMessages
     */
@@ -24,7 +24,7 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the sortAscending section in column header menu.
+    * The text message displayed for the menu item which performs ascending sort.
     * @param string $value
     * @return \Kendo\UI\GridColumnMenuMessages
     */
@@ -33,7 +33,7 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the sortDescending section in column header menu.
+    * The text message displayed for the menu item which performs descending sort.
     * @param string $value
     * @return \Kendo\UI\GridColumnMenuMessages
     */

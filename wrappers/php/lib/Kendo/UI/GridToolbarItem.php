@@ -9,7 +9,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The name of the command. One of the predefined or a custom.
+    * The name of the toolbar command. Either a built-in ("cancel", "create" and "save") or custom.
     * @param string $value
     * @return \Kendo\UI\GridToolbarItem
     */
@@ -19,7 +19,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the GridToolbarItem.
-    * The template for the command button.
+    * The template which is used to render the command. Be default renders a button.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridToolbarItem
     */
@@ -31,7 +31,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the GridToolbarItem.
-    * The template for the command button.
+    * The template which is used to render the command. Be default renders a button.
     * @param string $value The template content.
     * @return \Kendo\UI\GridToolbarItem
     */
@@ -40,7 +40,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text of the command that will be set on the button.
+    * The text displayed by the command button. If not set the name` option would be used as the button text instead.
     * @param string $value
     * @return \Kendo\UI\GridToolbarItem
     */

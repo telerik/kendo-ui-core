@@ -6,7 +6,7 @@ class AutoCompleteAnimationOpen extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
+    * The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations
     * @param string $value
     * @return \Kendo\UI\AutoCompleteAnimationOpen
     */

@@ -32,7 +32,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The field of the data item used when searching for suggestions.</description>
+            <description>The field of the data item used when searching for suggestions.  This is the text that will be displayed in the list of matched results.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -133,8 +133,7 @@ all data items which begin with the current widget value are displayed in the su
     </tag>
 
     <tag>
-        <description>Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the
-suggestion popup will open and close instantly.</description>
+        <description>Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.</description>
         <name>autoComplete-animation</name>
         <tag-class>com.kendoui.taglib.autocomplete.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -155,7 +154,7 @@ suggestion popup will open and close instantly.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -177,7 +176,7 @@ suggestion popup will open and close instantly.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -380,8 +379,8 @@ suggestion popup will open and close instantly.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an legend label is clicked.</description>
-            <name>legendLabelClick</name>
+            <description>Fires when an legend item is clicked.</description>
+            <name>legendItemClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -4356,9 +4355,9 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when an legend label is clicked.</description>
-        <name>chart-legendLabelClick</name>
-        <tag-class>com.kendoui.taglib.chart.LegendLabelClickFunctionTag</tag-class>
+        <description>Fires when an legend item is clicked.</description>
+        <name>chart-legendItemClick</name>
+        <tag-class>com.kendoui.taglib.chart.LegendItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -6948,19 +6947,22 @@ current color and the input field.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the grid will call read on the DataSource initially.</description>
+            <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired.By default this option is set to true which means that the widget will bind to the data source specified in the configuration.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Enables column header menu</description>
+            <description>If set to true the grid will display the column menu when the user clicks the chevron icon in the column headers. The column menu allows the user to show and hide columns, filter and sort (if filtering and sorting are enabled).
+By default the column menu is not enabled.Can be set to a JavaScript object which represents the column menu configuration.</description>
             <name>columnMenu</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Instance of DataSource or Object with DataSource configuration.</description>
+            <description>The data source of the widget which is used display table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -6972,49 +6974,49 @@ current color and the input field.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Indicates whether editing is enabled/disabled.</description>
+            <description>If set to true the user would be able to edit the data to which the grid is bound to. By default editing is disabled.Can be set to a string ("inline", "incell" or "popup") to specify the editing mode. The default editing mode is "incell".Can be set to a JavaScript object which represents the editing configuration.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether filtering is enabled/disabled.</description>
+            <description>If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether grouping is enabled/disabled.</description>
+            <description>If set to true the user could group the grid by dragging the column header cells. By default grouping is disabled.Can be set to a JavaScript object which represents the grouping configuration.</description>
             <name>groupable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Sets the height of the grid.</description>
+            <description>The height of the grid. Numeric values are treated as pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Indicates whether keyboard navigation is enabled/disabled.</description>
+            <description>If set to true the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether paging is enabled/disabled.</description>
+            <description>If set to true the grid will display a pager. By default paging is disabled.Can be set to a JavaScript object which represents the pager configuration.</description>
             <name>pageable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether column reordering is enabled/disable.</description>
+            <description>If set to true the user could reorder the columns by dragging their header cells. By default reordering is disabled.</description>
             <name>reorderable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether column resizing is enabled/disable.</description>
+            <description>If set to true the user could resize the columns by dragging the edges of their header cells. By default resizing is disabled.</description>
             <name>resizable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7026,80 +7028,80 @@ current color and the input field.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/disable grid scrolling.</description>
+            <description>If set to true the grid will display a scrollbar when the total row height (or width) exceeds the grid height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.</description>
             <name>scrollable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether selection is enabled/disabled. Possible values:</description>
+            <description>If set to true the user would be able to select grid rows. By default selection is disabled.Can also be set to the following string values:</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>Object</type>
         </attribute>
         <attribute>
-            <description>Defines whether grid columns are sortable.</description>
+            <description>If set to true the user could sort the grid by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Raised when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window (popup editing mode).</description>
+            <description>Fired when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>cancel</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid selection has changed.</description>
+            <description>Fired when the user selects a table row or cell in the grid.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user hides a column.</description>
+            <description>Fired when the user hides a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>columnHide</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user changes the order of a column.</description>
+            <description>Fired when the user changes the order of a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>columnReorder</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user resizes a column.</description>
+            <description>Fired when the user resizes a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>columnResize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when a column is shown.</description>
+            <description>Fired when the user shows a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>columnShow</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid has received data from the data source.</description>
-            <name>dataBound</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fires when the grid is about to be rendered.</description>
+            <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBinding</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid detail row is collapsed.</description>
+            <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user collapses a detail table row.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>detailCollapse</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid detail row is expanded.</description>
+            <description>Fired when the user expands a detail table row.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>detailExpand</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid detail is initialized.</description>
+            <description>Fired when a detail table row is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>detailInit</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid enters edit mode.</description>
+            <description>Fired when the user edits or creates a data item.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>edit</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -7132,25 +7134,26 @@ current color and the input field.</description>
     </tag>
 
     <tag>
-        <description>Enables column header menu</description>
+        <description>If set to true the grid will display the column menu when the user clicks the chevron icon in the column headers. The column menu allows the user to show and hide columns, filter and sort (if filtering and sorting are enabled).
+By default the column menu is not enabled.Can be set to a JavaScript object which represents the column menu configuration.</description>
         <name>grid-columnMenu</name>
         <tag-class>com.kendoui.taglib.grid.ColumnMenuTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Enable/disable columns section in column header menu.</description>
+            <description>If set to true the column menu would allow the user to select (show and hide) grid columns. By default the column menu allows column selection.</description>
             <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Enable/disable filter section in column header menu.</description>
+            <description>If set to true the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if grid filtering is enabled.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Enable/disable sorting section in column header menu.</description>
+            <description>If set to true the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if grid sorting is enabled.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7159,31 +7162,31 @@ current color and the input field.</description>
     </tag>
 
     <tag>
-        <description>Sets the columnMenu messages.</description>
+        <description>The text messages displayed in the column menu. Use it to customize or localize the column menu messages.</description>
         <name>grid-columnMenu-messages</name>
         <tag-class>com.kendoui.taglib.grid.ColumnMenuMessagesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Set the text of the columns section in column header menu.</description>
+            <description>The text message displayed for the column selection menu item.</description>
             <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the filter section in column header menu.</description>
+            <description>The text message displayed for the filter menu item.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the sortAscending section in column header menu.</description>
+            <description>The text message displayed for the menu item which performs ascending sort.</description>
             <name>sortAscending</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the sortDescending section in column header menu.</description>
+            <description>The text message displayed for the menu item which performs descending sort.</description>
             <name>sortDescending</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7195,168 +7198,177 @@ current color and the input field.</description>
 
 
     <tag>
-        <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
+        <description>The configuration of the grid columns. Set to array of JavaScript objects or strings. A JavaScript object is interpreted as column configuration. A string is interpreted as the
+field to which the column is bound to. The grid will create a column for every item of the array.</description>
         <name>grid-columns</name>
         <tag-class>com.kendoui.taglib.grid.ColumnsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>A collection of column objects or collection of strings that represents the name of the fields.</description>
+        <description>The configuration of the grid columns. Set to array of JavaScript objects or strings. A JavaScript object is interpreted as column configuration. A string is interpreted as the
+field to which the column is bound to. The grid will create a column for every item of the array.</description>
         <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The aggregates to be used when grouping is applied</description>
+            <description>The aggregate(s) to be calculated for this column when the grid is grouped by its field.
+The supported aggregates are "average", "count", "max", "min" and "sum".</description>
             <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Definition of column cells' HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.</description>
+            <description>HTML attributes of the table cell (&lt;td&gt;) rendered for the column.</description>
             <name>attributes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+            <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command will put the current row in edit mode.The "destroy" built-in command will delete the current row.Custom commands are supported via the click option.</description>
             <name>command</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Provides a way to specify custom editor for this column.</description>
+            <description>Provides a way to specify a custom editing UI for the column. Use the container parameter to create the editing UI.</description>
             <name>editor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specified whether the column content is escaped. Disable encoding if the data contains HTML markup.</description>
+            <description>If set to true the column value will be HTML-encoded before it is displayed. If set to false the column value will be displayed as is. By default the column value is HTML-encoded.</description>
             <name>encoded</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The field from the datasource that will be displayed in the column.</description>
+            <description>The field to which the column is bound. The value of this field is displayed by the column during data binding.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies whether given column is filterable.</description>
+            <description>If set to true a filter menu will be displayed for this column when filtering is enabled for the grid. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template for column's cell in footer item.</description>
+            <description>The template which is used to render the footer table cell for the column.The fields which can be used in the template are:</description>
             <name>footerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The format that will be applied on the column cells.</description>
+            <description>The format that is applied to the value before it is displayed. Must be in the form "{0:format}" where "format" is a standard number format,
+custom number format, standard date format or a custom date format.</description>
             <name>format</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template for column's cell in group footer item.</description>
+            <description>The template which is used to render the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:</description>
             <name>groupFooterTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template for group header item.</description>
+            <description>The template which is used to render the group header when the grid is grouped by the column field. By default the name of the field
+and the current group value is displayed.The fields which can be used in the template are:</description>
             <name>groupHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Definition of column header cell's HTML attributes. Reserved words in Javascript should be enclosed in quotation marks.</description>
+            <description>HTML attributes of the column header. The grid renders a table header cell (&lt;th&gt;) for every column. The headerAttributes option can be used to set the HTML attributes of that th.</description>
             <name>headerAttributes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The template for column's header cell. If sorting is enabled, it will be wrapped in a &lt;a class="k-link"&gt; element, so the template should consist of only inline elements
-in order to have valid HTML markup in the Grid.</description>
+            <description>The template which is used to render the column header content. By default the value of the title column option
+is displayed in the column header cell.</description>
             <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies whether given column is hidden.</description>
+            <description>If set to true the column will not be displayed in the grid. By default all columns are displayed in the grid.</description>
             <name>hidden</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the column should be visible in column menu.</description>
+            <description>If set to true the column will be visible in the grid column menu. By default the column menu includes all data-bound columns (ones that have their field set).</description>
             <name>menu</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies whether given column is sortable.</description>
+            <description>If set to true the user can click the column header and sort the grid by the column field (when sorting is enabled for the grid). If set to false sorting will
+be disabled for this column. By default all columns are sortable.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template for column's cells.</description>
+            <description>The template which is used to render the column content. The Kendo UI Grid widget renders table rows (&lt;tr&gt;) which represent the data source items.
+Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The text that will be displayed in the column header.</description>
+            <description>The text that is displayed in the column header cell. If not set the field will be used.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The width of the column.</description>
+            <description>The width of the column. Numeric values are treated as pixels.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>Object</type>
         </attribute>
     </tag>
 
     <tag>
-        <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command will put the current row in edit mode.The "destroy" built-in command will delete the current row.Custom commands are supported via the click option.</description>
         <name>grid-column-command</name>
         <tag-class>com.kendoui.taglib.grid.ColumnCommandTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Definition of command column. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command will put the current row in edit mode.The "destroy" built-in command will delete the current row.Custom commands are supported via the click option.</description>
         <name>grid-column-commandItem</name>
         <tag-class>com.kendoui.taglib.grid.ColumnCommandItemTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The CSS class of the command.</description>
+            <description>The CSS class applied to the command button.</description>
             <name>className</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The JavaScript function executed when the user clicks the command button.</description>
+            <description>The JavaScript function executed when the user clicks the command button. The single parameter of the function is a jQuery Event.
+The function context (available via the this keyword) will be set to the grid instance.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The unique name of the command. The supported built-in commands are: "create", "cancel", "save", "destroy".</description>
+            <description>The name of the command. The supported built-in commands are "edit" and "destroy". Can be set to a custom value.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The text displayed by the command.</description>
+            <description>The text displayed by the command button. If not set the name option would be used as the button text.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7365,19 +7377,21 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>The JavaScript function executed when the user clicks the command button.</description>
+        <description>The JavaScript function executed when the user clicks the command button. The single parameter of the function is a jQuery Event.
+The function context (available via the this keyword) will be set to the grid instance.</description>
         <name>grid-column-commandItem-click</name>
         <tag-class>com.kendoui.taglib.grid.ColumnCommandItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Specifies whether given column is filterable.</description>
+        <description>If set to true a filter menu will be displayed for this column when filtering is enabled for the grid. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.</description>
         <name>grid-column-filterable</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Role of the widget shown as column filter menu input element.</description>
+            <description>The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.</description>
             <name>ui</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7387,57 +7401,91 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Role of the widget shown as column filter menu input element.</description>
+        <description>The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.</description>
         <name>grid-column-filterable-ui</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableUiFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Provides a way to specify custom editor for this column.</description>
+        <description>Provides a way to specify a custom editing UI for the column. Use the container parameter to create the editing UI.</description>
         <name>grid-column-editor</name>
         <tag-class>com.kendoui.taglib.grid.ColumnEditorFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+    <tag>
+        <description>The template which is used to render the footer table cell for the column.The fields which can be used in the template are:</description>
+        <name>grid-column-footerTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnFooterTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template which is used to render the group header when the grid is grouped by the column field. By default the name of the field
+and the current group value is displayed.The fields which can be used in the template are:</description>
+        <name>grid-column-groupHeaderTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnGroupHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template which is used to render the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:</description>
+        <name>grid-column-groupFooterTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnGroupFooterTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template which is used to render the column header content. By default the value of the title column option
+is displayed in the column header cell.</description>
+        <name>grid-column-headerTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template which is used to render the column content. The Kendo UI Grid widget renders table rows (<tr>) which represent the data source items.
+Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.</description>
+        <name>grid-column-template</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
-        <description>Indicates whether editing is enabled/disabled.</description>
+        <description>If set to true the user would be able to edit the data to which the grid is bound to. By default editing is disabled.Can be set to a string ("inline", "incell" or "popup") to specify the editing mode. The default editing mode is "incell".Can be set to a JavaScript object which represents the editing configuration.</description>
         <name>grid-editable</name>
         <tag-class>com.kendoui.taglib.grid.EditableTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
-            <description>Defines the text that will be used in confirmation box when delete an item.</description>
+            <description>If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.</description>
             <name>confirmation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the created record should be inserted at the top or at the bottom of the current page. Available values are "top" and "bottom".</description>
+            <description>The positon at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.</description>
             <name>createAt</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Indicates whether item should be deleted when click on delete button.</description>
+            <description>If set to true the user can delete data items from the grid by clicking the "destroy" command button. Deleting is enabled by default.</description>
             <name>destroy</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates which of the available edit modes(incell(default)/inline/popup) will be used</description>
+            <description>The editing mode to use. The supported editing modes are "incell", "inline" and "popup".</description>
             <name>mode</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Template which will be use during popup editing</description>
+            <description>The template which is used to render popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Indicates whether item should be switched to edit mode on click.</description>
+            <description>If set to true the user can edit data items when editing is enabled.</description>
             <name>update</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7446,15 +7494,22 @@ in order to have valid HTML markup in the Grid.</description>
     </tag>
 
 
+    <tag>
+        <description>The template which is used to render popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
+        <name>grid-editable-template</name>
+        <tag-class>com.kendoui.taglib.grid.EditableTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
-        <description>Indicates whether filtering is enabled/disabled.</description>
+        <description>If set to true the user can filter the data source using the grid filter menu. Filtering is disabled by default.Can be set to a JavaScript object which represents the filter menu configuration.</description>
         <name>grid-filterable</name>
         <tag-class>com.kendoui.taglib.grid.FilterableTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Indicates whether second filter input is enabled/disabled.</description>
+            <description>If set to true the filter menu allows the user to input a second criteria.</description>
             <name>extra</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7463,55 +7518,55 @@ in order to have valid HTML markup in the Grid.</description>
     </tag>
 
     <tag>
-        <description>Sets the filter menu messages.</description>
+        <description>The text messages displayed in the filter menu. Use it to customize or localize the filter menu messages.</description>
         <name>grid-filterable-messages</name>
         <tag-class>com.kendoui.taglib.grid.FilterableMessagesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Set the text of the "and" option from logic drop down list.</description>
+            <description>The text of the option which represents the "and" logical operation.</description>
             <name>and</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the clear button of the filter menu.</description>
+            <description>The text of the button which clears the filter.</description>
             <name>clear</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the filter button of the filter menu.</description>
+            <description>The text of the button which applies the filter.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the information message on top of the filter menu.</description>
+            <description>The text of the information message on the top of the filter menu.</description>
             <name>info</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the isFalse radio button of the filter menu for boolean values.</description>
+            <description>The text of the radio button for false values. Displayed when filtering Boolean fields.</description>
             <name>isFalse</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the isTrue radio button of the filter menu for boolean values.</description>
+            <description>The text of the radio button for true values. Displayed when filtering Boolean fields.</description>
             <name>isTrue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the "or" option from logic drop down list.</description>
+            <description>The text of the option which represents the "or" logical operation.</description>
             <name>or</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Set the text of the option label for foreign key drop down list.</description>
+            <description>The text of the dropdownlist displayed in the filter menu for columns whose values option is set.</description>
             <name>selectValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7521,7 +7576,7 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Enable/Disable and set the text of filter operators.</description>
+        <description>The text of the filter operators displayed in the filter menu.</description>
         <name>grid-filterable-operators</name>
         <tag-class>com.kendoui.taglib.grid.FilterableOperatorsTag</tag-class>
         <body-content>JSP</body-content>
@@ -7530,43 +7585,43 @@ in order to have valid HTML markup in the Grid.</description>
     </tag>
 
     <tag>
-        <description>Enable/Disable and set the text of filter operators for fields of type date.</description>
+        <description>The texts of the filter operators displayed for columns bound to date fields.</description>
         <name>grid-filterable-operators-date</name>
         <tag-class>com.kendoui.taglib.grid.FilterableOperatorsDateTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with date values.</description>
+            <description>The text of the "equal" filter operator.</description>
             <name>eq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is after" filter option for columns with date values.</description>
+            <description>The text of the "greater than" filter operator.</description>
             <name>gt</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is after or equal to" filter option for columns with date values.</description>
+            <description>The text of the "greater than or equal" filter operator.</description>
             <name>gte</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is before" filter option for columns with date values.</description>
+            <description>The text of the "less than" filter operator.</description>
             <name>lt</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is before or equal to" filter option for columns with date values.</description>
+            <description>The text of the "less than or equal" filter operator.</description>
             <name>lte</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with date values.</description>
+            <description>The text of the "not equal" filter operator.</description>
             <name>neq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7576,19 +7631,19 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Enable/Disable and set the text of filter operators for foreign key columns.</description>
+        <description>The texts of the filter operators displayed for columns which have their values option set.</description>
         <name>grid-filterable-operators-enums</name>
         <tag-class>com.kendoui.taglib.grid.FilterableOperatorsEnumsTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Enable/Disable and set the text of the "Is equal to" filter option for foreign key columns.</description>
+            <description>The text of the "equal" filter operator.</description>
             <name>eq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is not equal to" filter option for foreign key columns.</description>
+            <description>The text of the "not equal" filter operator.</description>
             <name>neq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7598,43 +7653,43 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Enable/Disable and set the text of filter operators for fields of type number.</description>
+        <description>The texts of the filter operators displayed for columns bound to number fields.</description>
         <name>grid-filterable-operators-number</name>
         <tag-class>com.kendoui.taglib.grid.FilterableOperatorsNumberTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with number values.</description>
+            <description>The text of the "equal" filter operator.</description>
             <name>eq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is greater than" filter option for columns with number values.</description>
+            <description>The text of the "greater than" filter operator.</description>
             <name>gt</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is greater than or equal to" filter option for columns with number values.</description>
+            <description>The text of the "greater than or equal" filter operator.</description>
             <name>gte</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is less than" filter option for columns with number values.</description>
+            <description>The text of the "less than" filter operator.</description>
             <name>lt</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is less than or equal to" filter option for columns with number values.</description>
+            <description>The text of the "less than or equal" filter operator.</description>
             <name>lte</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with number values.</description>
+            <description>The text of the "not equal" filter operator.</description>
             <name>neq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7644,43 +7699,43 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Enable/Disable and set the text of filter operators for fields of type string.</description>
+        <description>The texts of the filter operators displayed for columns bound to string fields.</description>
         <name>grid-filterable-operators-string</name>
         <tag-class>com.kendoui.taglib.grid.FilterableOperatorsStringTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Enable/Disable and set the text of the "Contains" filter option for columns with string values.</description>
+            <description>The text of the "contains" filter operator.</description>
             <name>contains</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Does not contain" filter option for columns with string values.</description>
+            <description>The text of the "does not contain" filter operator.</description>
             <name>doesnotcontain</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Ends with" filter option for columns with string values.</description>
+            <description>The text of the "ends with" filter operator.</description>
             <name>endswith</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is equal to" filter option for columns with string values.</description>
+            <description>The text of the "equal" filter operator.</description>
             <name>eq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Is not equal to" filter option for columns with string values.</description>
+            <description>The text of the "not equal" filter operator.</description>
             <name>neq</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Enable/Disable and set the text of the "Starts with" filter option for columns with string values.</description>
+            <description>The text of the "starts with" filter operator.</description>
             <name>startswith</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7693,7 +7748,7 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Indicates whether grouping is enabled/disabled.</description>
+        <description>If set to true the user could group the grid by dragging the column header cells. By default grouping is disabled.Can be set to a JavaScript object which represents the grouping configuration.</description>
         <name>grid-groupable</name>
         <tag-class>com.kendoui.taglib.grid.GroupableTag</tag-class>
         <body-content>JSP</body-content>
@@ -7702,13 +7757,13 @@ in order to have valid HTML markup in the Grid.</description>
     </tag>
 
     <tag>
-        <description>Sets the messages displayed during grouping.</description>
+        <description>The text messages displayed during grouping.</description>
         <name>grid-groupable-messages</name>
         <tag-class>com.kendoui.taglib.grid.GroupableMessagesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Sets the text of the empty grouping area message</description>
+            <description>The text displayed in the grouping drop area.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7720,55 +7775,55 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Indicates whether paging is enabled/disabled.</description>
+        <description>If set to true the grid will display a pager. By default paging is disabled.Can be set to a JavaScript object which represents the pager configuration.</description>
         <name>grid-pageable</name>
         <tag-class>com.kendoui.taglib.grid.PageableTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Defines the number of buttons displayed in the numeric pager.</description>
+            <description>The maximum number of buttons displayed in the numeric pager. The pager will display ellipsis (...) if there are more pages than the specified number.</description>
             <name>buttonCount</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Defines if a label showing current paging information will be displayed.</description>
+            <description>If set to true the pager will display information about the current page and total number of data items. By default the paging information is displayed.</description>
             <name>info</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines if an input element which allows the user to navigate to given page will be displayed.</description>
+            <description>If set to true the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.</description>
             <name>input</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines if numeric portion of the pager will be shown.</description>
+            <description>If set to true the pager will display buttons for navigating to specific pages. By default those buttons are displayed.</description>
             <name>numeric</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines the number of records which will be displyed.</description>
+            <description>The number of data items which will be displayed in the grid.</description>
             <name>pageSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Displayes a list with predefined page sizes. An array of values to be displayed can be provided.</description>
+            <description>If set to true the pager will display a dropdown list which allows the user to pick a page size. By default the page size dropdown list is not displayed.Can be set to an array with the available page sizes.</description>
             <name>pageSizes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</description>
+            <description>If set to true the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.</description>
             <name>previousNext</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines if a refresh button will be displayed.</description>
+            <description>If set to true the pager will display the refresh button. Clicking the refresh button will refresh the grid. By default the refresh button is not displayed.</description>
             <name>refresh</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7777,67 +7832,70 @@ in order to have valid HTML markup in the Grid.</description>
     </tag>
 
     <tag>
-        <description>Defines texts shown within the pager.</description>
+        <description>The text messages displayed in pager. Use this option to customize or localize the pager messages.</description>
         <name>grid-pageable-messages</name>
         <tag-class>com.kendoui.taglib.grid.PageableMessagesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines the info text.</description>
+            <description>The pager info text. Uses kendo.format.Contains three placeholders:
+- {0} - the first data item index
+- {1} - the last data item index
+- {2} - the total number of data items</description>
             <name>display</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the info text shown when there are no records to be displayed.</description>
+            <description>The text displayed when the grid is empty.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the first page button tooltip.</description>
+            <description>The tooltip of the button which goes to the first page.</description>
             <name>first</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text displayed after the select element of the pageSizes mode.</description>
+            <description>The label displayed after the page size dropdown list.</description>
             <name>itemsPerPage</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the last page button tooltip.</description>
+            <description>The tooltip of the button which goes to the last page.</description>
             <name>last</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the next page button tooltip.</description>
+            <description>The tooltip of the button which goes to the next page.</description>
             <name>next</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the last part of the text of the input option.</description>
+            <description>The label displayed before the pager input. Uses kendo.format. Contains one optional placeholder {0} which represents the total number of pages.</description>
             <name>of</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the first part of the text of the input option.</description>
+            <description>The label displayed before the pager input.</description>
             <name>page</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the previous page button tooltip.</description>
+            <description>The tooltip of the button which goes to the previous page.</description>
             <name>previous</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the refresh button tooltip.</description>
+            <description>The tooltip of the refresh button.</description>
             <name>refresh</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7849,13 +7907,13 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Enable/disable grid scrolling.</description>
+        <description>If set to true the grid will display a scrollbar when the total row height (or width) exceeds the grid height (or width). By default scrolling is enabled.Can be set to a JavaScript object which represents the scrolling configuration.</description>
         <name>grid-scrollable</name>
         <tag-class>com.kendoui.taglib.grid.ScrollableTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Enable/disable virtual scrolling. When enabled the grid will display only a single page of data (configured via dataSource.pageSize).</description>
+            <description>If set to true the grid will always display a single page of data. Scrolling would just change the data which is currently displayed.</description>
             <name>virtual</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7866,19 +7924,19 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>Defines whether grid columns are sortable.</description>
+        <description>If set to true the user could sort the grid by clicking the column header cells. By default sorting is disabled.Can be set to a JavaScript object which represents the sorting configuration.</description>
         <name>grid-sortable</name>
         <tag-class>com.kendoui.taglib.grid.SortableTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines whether column can have unsorted state.</description>
+            <description>If set to true the user can get the grid in unsorted state by clicking the sorted column header.</description>
             <name>allowUnsort</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines sorting mode. Possible values:</description>
+            <description>The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by one column.</description>
             <name>mode</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7889,36 +7947,32 @@ in order to have valid HTML markup in the Grid.</description>
 
 
     <tag>
-        <description>This is a list of commands for which the corresponding buttons will be rendered.
-The supported built-in commands are: "create", "cancel", "save", "destroy".
-Or template to be used for rendering the toolbar content.</description>
+        <description>The list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
         <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>This is a list of commands for which the corresponding buttons will be rendered.
-The supported built-in commands are: "create", "cancel", "save", "destroy".
-Or template to be used for rendering the toolbar content.</description>
+        <description>The list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
         <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
         <attribute>
-            <description>The name of the command. One of the predefined or a custom.</description>
+            <description>The name of the toolbar command. Either a built-in ("cancel", "create" and "save") or custom.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template for the command button.</description>
+            <description>The template which is used to render the command. Be default renders a button.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The text of the command that will be set on the button.</description>
+            <description>The text displayed by the command button. If not set the name` option would be used as the button text instead.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7926,75 +7980,81 @@ Or template to be used for rendering the toolbar content.</description>
     </tag>
 
 
+    <tag>
+        <description>The template which is used to render the command. Be default renders a button.</description>
+        <name>grid-toolbarItem-template</name>
+        <tag-class>com.kendoui.taglib.grid.ToolbarItemTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
-        <description>Raised when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window (popup editing mode).</description>
+        <description>Fired when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-cancel</name>
         <tag-class>com.kendoui.taglib.grid.CancelFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid selection has changed.</description>
+        <description>Fired when the user selects a table row or cell in the grid.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-change</name>
         <tag-class>com.kendoui.taglib.grid.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user hides a column.</description>
+        <description>Fired when the user hides a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-columnHide</name>
         <tag-class>com.kendoui.taglib.grid.ColumnHideFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user changes the order of a column.</description>
+        <description>Fired when the user changes the order of a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-columnReorder</name>
         <tag-class>com.kendoui.taglib.grid.ColumnReorderFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user resizes a column.</description>
+        <description>Fired when the user resizes a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-columnResize</name>
         <tag-class>com.kendoui.taglib.grid.ColumnResizeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when a column is shown.</description>
+        <description>Fired when the user shows a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-columnShow</name>
         <tag-class>com.kendoui.taglib.grid.ColumnShowFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid has received data from the data source.</description>
-        <name>grid-dataBound</name>
-        <tag-class>com.kendoui.taglib.grid.DataBoundFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>Fires when the grid is about to be rendered.</description>
+        <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-dataBinding</name>
         <tag-class>com.kendoui.taglib.grid.DataBindingFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid detail row is collapsed.</description>
+        <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>grid-dataBound</name>
+        <tag-class>com.kendoui.taglib.grid.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user collapses a detail table row.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-detailCollapse</name>
         <tag-class>com.kendoui.taglib.grid.DetailCollapseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid detail row is expanded.</description>
+        <description>Fired when the user expands a detail table row.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-detailExpand</name>
         <tag-class>com.kendoui.taglib.grid.DetailExpandFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid detail is initialized.</description>
+        <description>Fired when a detail table row is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-detailInit</name>
         <tag-class>com.kendoui.taglib.grid.DetailInitFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid enters edit mode.</description>
+        <description>Fired when the user edits or creates a data item.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-edit</name>
         <tag-class>com.kendoui.taglib.grid.EditFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -10495,8 +10555,8 @@ tick labels.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an legend label is clicked.</description>
-            <name>legendLabelClick</name>
+            <description>Fires when an legend item is clicked.</description>
+            <name>legendItemClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -12974,9 +13034,9 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when an legend label is clicked.</description>
-        <name>sparkline-legendLabelClick</name>
-        <tag-class>com.kendoui.taglib.sparkline.LegendLabelClickFunctionTag</tag-class>
+        <description>Fires when an legend item is clicked.</description>
+        <name>sparkline-legendItemClick</name>
+        <tag-class>com.kendoui.taglib.sparkline.LegendItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -13237,8 +13297,8 @@ It is used as a default field for all date axes, including the navigator pane.Th
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an legend label is clicked.</description>
-            <name>legendLabelClick</name>
+            <description>Fires when an legend item is clicked.</description>
+            <name>legendItemClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -17701,9 +17761,9 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when an legend label is clicked.</description>
-        <name>stockChart-legendLabelClick</name>
-        <tag-class>com.kendoui.taglib.stockchart.LegendLabelClickFunctionTag</tag-class>
+        <description>Fires when an legend item is clicked.</description>
+        <name>stockChart-legendItemClick</name>
+        <tag-class>com.kendoui.taglib.stockchart.LegendItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

@@ -289,11 +289,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("scrollable", value);
     }
 
-    public String getSelectable() {
-        return (String)getProperty("selectable");
+    public Object getSelectable() {
+        return (Object)getProperty("selectable");
     }
 
-    public void setSelectable(String value) {
+    public void setSelectable(Object value) {
         setProperty("selectable", value);
     }
 

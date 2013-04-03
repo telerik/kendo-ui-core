@@ -6,7 +6,7 @@ class GridPageable extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Defines the number of records which will be displyed.
+    * The number of data items which will be displayed in the grid.
     * @param float $value
     * @return \Kendo\UI\GridPageable
     */
@@ -15,7 +15,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines if buttons for navigating to the first, last, previous and next pages will be shown.
+    * If set to true the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.
     * @param boolean $value
     * @return \Kendo\UI\GridPageable
     */
@@ -24,7 +24,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines if numeric portion of the pager will be shown.
+    * If set to true the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
     * @param boolean $value
     * @return \Kendo\UI\GridPageable
     */
@@ -33,7 +33,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines the number of buttons displayed in the numeric pager.
+    * The maximum number of buttons displayed in the numeric pager. The pager will display ellipsis (...) if there are more pages than the specified number.
     * @param float $value
     * @return \Kendo\UI\GridPageable
     */
@@ -42,7 +42,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines if an input element which allows the user to navigate to given page will be displayed.
+    * If set to true the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.
     * @param boolean $value
     * @return \Kendo\UI\GridPageable
     */
@@ -51,7 +51,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Displayes a list with predefined page sizes. An array of values to be displayed can be provided.
+    * If set to true the pager will display a dropdown list which allows the user to pick a page size. By default the page size dropdown list is not displayed.Can be set to an array with the available page sizes.
     * @param boolean|array $value
     * @return \Kendo\UI\GridPageable
     */
@@ -60,7 +60,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines if a refresh button will be displayed.
+    * If set to true the pager will display the refresh button. Clicking the refresh button will refresh the grid. By default the refresh button is not displayed.
     * @param boolean $value
     * @return \Kendo\UI\GridPageable
     */
@@ -69,7 +69,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines if a label showing current paging information will be displayed.
+    * If set to true the pager will display information about the current page and total number of data items. By default the paging information is displayed.
     * @param boolean $value
     * @return \Kendo\UI\GridPageable
     */
@@ -78,7 +78,7 @@ class GridPageable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines texts shown within the pager.
+    * The text messages displayed in pager. Use this option to customize or localize the pager messages.
     * @param \Kendo\UI\GridPageableMessages|array $value
     * @return \Kendo\UI\GridPageable
     */

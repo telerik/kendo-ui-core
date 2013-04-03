@@ -6,7 +6,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Enable/Disable and set the text of the "Is equal to" filter option for columns with string values.
+    * The text of the "equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsString
     */
@@ -15,7 +15,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is not equal to" filter option for columns with string values.
+    * The text of the "not equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsString
     */
@@ -24,7 +24,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Starts with" filter option for columns with string values.
+    * The text of the "starts with" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsString
     */
@@ -33,7 +33,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Contains" filter option for columns with string values.
+    * The text of the "contains" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsString
     */
@@ -42,7 +42,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Does not contain" filter option for columns with string values.
+    * The text of the "does not contain" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsString
     */
@@ -51,7 +51,7 @@ class GridFilterableOperatorsString extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Ends with" filter option for columns with string values.
+    * The text of the "ends with" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsString
     */

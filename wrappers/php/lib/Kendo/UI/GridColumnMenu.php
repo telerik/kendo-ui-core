@@ -6,7 +6,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Enable/disable columns section in column header menu.
+    * If set to true the column menu would allow the user to select (show and hide) grid columns. By default the column menu allows column selection.
     * @param boolean $value
     * @return \Kendo\UI\GridColumnMenu
     */
@@ -15,7 +15,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/disable filter section in column header menu.
+    * If set to true the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if grid filtering is enabled.
     * @param boolean $value
     * @return \Kendo\UI\GridColumnMenu
     */
@@ -24,7 +24,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/disable sorting section in column header menu.
+    * If set to true the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if grid sorting is enabled.
     * @param boolean $value
     * @return \Kendo\UI\GridColumnMenu
     */
@@ -33,7 +33,7 @@ class GridColumnMenu extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the columnMenu messages.
+    * The text messages displayed in the column menu. Use it to customize or localize the column menu messages.
     * @param \Kendo\UI\GridColumnMenuMessages|array $value
     * @return \Kendo\UI\GridColumnMenu
     */

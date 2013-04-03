@@ -6,7 +6,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Set the text of the "and" option from logic drop down list.
+    * The text of the option which represents the "and" logical operation.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -15,7 +15,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the clear button of the filter menu.
+    * The text of the button which clears the filter.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -24,7 +24,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the filter button of the filter menu.
+    * The text of the button which applies the filter.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -33,7 +33,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the information message on top of the filter menu.
+    * The text of the information message on the top of the filter menu.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -42,7 +42,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the isFalse radio button of the filter menu for boolean values.
+    * The text of the radio button for false values. Displayed when filtering Boolean fields.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -51,7 +51,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the isTrue radio button of the filter menu for boolean values.
+    * The text of the radio button for true values. Displayed when filtering Boolean fields.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -60,7 +60,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the "or" option from logic drop down list.
+    * The text of the option which represents the "or" logical operation.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */
@@ -69,7 +69,7 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the text of the option label for foreign key drop down list.
+    * The text of the dropdownlist displayed in the filter menu for columns whose values option is set.
     * @param string $value
     * @return \Kendo\UI\GridFilterableMessages
     */

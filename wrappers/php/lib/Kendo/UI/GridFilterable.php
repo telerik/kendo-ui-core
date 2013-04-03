@@ -6,7 +6,7 @@ class GridFilterable extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Indicates whether second filter input is enabled/disabled.
+    * If set to true the filter menu allows the user to input a second criteria.
     * @param boolean $value
     * @return \Kendo\UI\GridFilterable
     */
@@ -15,7 +15,7 @@ class GridFilterable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the filter menu messages.
+    * The text messages displayed in the filter menu. Use it to customize or localize the filter menu messages.
     * @param \Kendo\UI\GridFilterableMessages|array $value
     * @return \Kendo\UI\GridFilterable
     */
@@ -24,7 +24,7 @@ class GridFilterable extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of filter operators.
+    * The text of the filter operators displayed in the filter menu.
     * @param \Kendo\UI\GridFilterableOperators|array $value
     * @return \Kendo\UI\GridFilterable
     */

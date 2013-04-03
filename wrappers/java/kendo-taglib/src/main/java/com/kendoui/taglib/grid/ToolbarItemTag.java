@@ -49,6 +49,10 @@ public class ToolbarItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "grid-toolbarItem";
     }
 
+    public void setTemplate(ToolbarItemTemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public String getName() {
         return (String)getProperty("name");
     }

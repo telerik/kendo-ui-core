@@ -6,7 +6,7 @@ class AutoCompleteAnimationClose extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
+    * The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations
     * @param string $value
     * @return \Kendo\UI\AutoCompleteAnimationClose
     */
