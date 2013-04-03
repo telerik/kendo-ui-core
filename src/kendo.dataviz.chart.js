@@ -15,6 +15,7 @@ kendo_module({
         math = Math,
         extend = $.extend,
         proxy = $.proxy,
+        isFn = $.isFunction,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -2621,7 +2622,7 @@ kendo_module({
                 series: series,
                 dataItem: series.data[categoryIx],
                 category: category,
-                index: categoryIx,
+                index: categoryIx
             }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
         },
 
@@ -3338,10 +3339,14 @@ kendo_module({
             var marker = this,
                 options = marker.options,
                 type = options.type,
+                rotation = options.rotation,
                 box = marker.paddingBox,
                 element,
                 elementOptions,
-                halfWidth = box.width() / 2;
+                center = box.center(),
+                halfWidth = box.width() / 2,
+                points,
+                i;
 
             if (!options.visible || !marker.hasBox()) {
                 return [];
@@ -3349,19 +3354,31 @@ kendo_module({
 
             elementOptions = deepExtend(marker.elementStyle(), renderOptions);
 
-            if (type === TRIANGLE) {
-                element = view.createPolyline([
-                    new Point2D(box.x1 + halfWidth, box.y1),
-                    new Point2D(box.x1, box.y2),
-                    new Point2D(box.x2, box.y2)
-                ], true, elementOptions);
-            } else if (type === CIRCLE) {
+            if (type === CIRCLE) {
                 element = view.createCircle(new Point2D(
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
                 ), halfWidth, elementOptions);
+            } else if (type === TRIANGLE) {
+                points = [
+                    new Point2D(box.x1 + halfWidth, box.y1),
+                    new Point2D(box.x1, box.y2),
+                    new Point2D(box.x2, box.y2)
+                ];
             } else {
-                element = view.createRect(box, elementOptions);
+                points = box.points();
+            }
+
+            if (points) {
+                if (rotation) {
+                    for (i = 0; i < points.length; i++) {
+                        points[i].rotate(center, rotation);
+                    }
+                }
+
+                element = view.createPolyline(
+                    points, true, elementOptions
+                );
             }
 
             return [ element ];
@@ -3441,6 +3458,7 @@ kendo_module({
                 type: markers.type,
                 width: markers.size,
                 height: markers.size,
+                rotation: markers.rotation,
                 background: markerBackground,
                 border: markerBorder,
                 opacity: markers.opacity,
@@ -3653,14 +3671,20 @@ kendo_module({
 
         getViewElements: function(view) {
             var segment = this,
-                series = segment.series;
+                series = segment.series,
+                defaults = series._defaults,
+                color = series.color;
 
             ChartElement.fn.getViewElements.call(segment, view);
+
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
 
             return [
                 view.createPolyline(segment.points(), false, {
                     id: segment.options.id,
-                    stroke: series.color,
+                    stroke: color,
                     strokeWidth: series.width,
                     strokeOpacity: series.opacity,
                     fill: "",
@@ -3933,21 +3957,29 @@ kendo_module({
         getViewElements: function(view) {
             var segment = this,
                 series = segment.series,
-                lineOptions = deepExtend({
-                        color: series.color,
-                        opacity: series.opacity
-                    }, series.line
-                ),
+                defaults = series._defaults,
+                color = series.color,
+                lineOptions,
                 linePoints = LineSegment.fn.points.call(segment),
                 areaPoints = segment.points();
 
             ChartElement.fn.getViewElements.call(segment, view);
 
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
+
+            lineOptions = deepExtend({
+                    color: color,
+                    opacity: series.opacity
+                }, series.line
+            );
+
             return [
                 view.createPolyline(areaPoints, false, {
                     id: segment.options.id,
                     fillOpacity: series.opacity,
-                    fill: series.color,
+                    fill: color,
                     stack: series.stack,
                     data: { modelId: segment.options.modelId },
                     zIndex: -1
@@ -5075,7 +5107,7 @@ kendo_module({
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!fields.explode;
-                    if (!$.isFunction(currentSeries.color)) {
+                    if (!isFn(currentSeries.color)) {
                         currentSeries.color = fields.color || colors[i % colorsCount];
                     }
 
@@ -6003,7 +6035,7 @@ kendo_module({
 
                     color = currentSeries.color;
                     defaults = currentSeries._defaults;
-                    if ($.isFunction(color) && defaults) {
+                    if (isFn(color) && defaults) {
                         color = defaults.color;
                     }
 
@@ -9272,7 +9304,7 @@ kendo_module({
         for (property in options) {
             if (!inArray(property, state.excluded)) {
                 propValue = options[property];
-                if ($.isFunction(propValue)) {
+                if (isFn(propValue)) {
                     options[property] = propValue(context) || defaults[property];
                 } else if (typeof propValue === "object") {
                     state.defaults = defaults[property];

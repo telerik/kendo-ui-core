@@ -3,6 +3,11 @@
             <div id="chart"></div>
         </div>
         <script>
+            function lessThanPrev(point) {
+                var prevValue = point.series.data[point.index - 1];
+                return prevValue && prevValue > point.value;
+            }
+
             function createChart() {
                 $("#chart").kendoChart({
                     title: {
@@ -11,33 +16,36 @@
                     legend: {
                         position: "bottom"
                     },
-                    seriesDefaults: {
-                        type: "line"  
-                    },
                     series: [{
+                        type: "line",
                         name: "Total Visits",
                         data: [70495, 54769, 60770, 28961, 69819, 78730,
                                71134, 68400, 49805, 54329, 36025, 13655],
-                        color: function(point) {
-                            if (point.value > 60000) {
-                                // Colorize matching points
-                                return "#0b0";
-                            }
-
-                            // The color does not change if no value is returned
+                        width: 0.5,
+                        color: "#aaa",
+                        markers: {
+                            border: {
+                                color: function(point) {
+                                    if (lessThanPrev(point)) {
+                                        return "#f00";
+                                    } else {
+                                        return "#0f0";
+                                    }
+                                }
+                            },
+                            rotation: function(point) {
+                                if (lessThanPrev(point)) {
+                                    return 180;
+                                } else {
+                                    return 0;
+                                }
+                            },
+                            type: "triangle"
                         }
                     }],
                     categoryAxis: {
                         categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-                    },
-                    valueAxis: {
-                        plotBands: [{
-                            from: 59000,
-                            to: 60000,
-                            color: "#f00",
-                            opacity: 0.5
-                        }]
                     },
                     tooltip: {
                         visible: true,

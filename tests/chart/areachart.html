@@ -655,6 +655,20 @@
                     equal(polyline.style.fill, "areaColor");
                 });
 
+                test("sets area fill color to default if series color is fn", function() {
+                    setupAreaChart(plotArea, {
+                        series: [
+                            $.extend({
+                                    _defaults: { color: "areaColor" },
+                                    color: function() { }
+                                },
+                                positiveSeries
+                            )
+                        ]
+                    });
+                    equal(view.log.path[0].style.fill, "areaColor");
+                });
+
                 test("sets area opacity", function() {
                     equal(polyline.style.fillOpacity, 0.1);
                 });
@@ -1043,7 +1057,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view, { flag: true });
-                    ok(view.log.rect[0].style.flag);
+                    ok(view.log.path[0].style.flag);
                 });
 
                 test("highlightOverlay applies render options for circle markers", function() {
