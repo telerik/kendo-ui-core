@@ -788,14 +788,6 @@ div.k-imagebrowser-dropzone em
     background-color: @widget-background-color;
 }
 
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-combobox .k-input,
-.k-picker-wrap .k-input
-{
-    /*.box-shadow(inset 0 0 1px 1px @shadow-inset-color);*/
-}
-
 .k-shadow
 {
     .box-shadow(0 1px 2px 0 @shadow-color);
@@ -865,12 +857,12 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap.k-state-border-up .k-selected-color,
 .k-numeric-wrap.k-state-border-up .k-input
 {
-    .border-radius(0 0 0 @inner-border-radius);
+    .border-radius(0 0 0 @main-border-radius);
 }
 
 .k-multiselect.k-state-border-up .k-multiselect-wrap,
 {
-    .border-radius(0 0 @inner-border-radius @inner-border-radius);
+    .border-radius(0 0 @main-border-radius @main-border-radius);
 }
 
 .k-window-titlebar,
@@ -893,7 +885,7 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input
 {
-    .border-radius(@inner-border-radius 0 0 @inner-border-radius);
+    .border-radius(@main-border-radius 0 0 @main-border-radius);
 }
 
 .k-numeric-wrap .k-link
@@ -922,12 +914,12 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap.k-state-border-down .k-selected-color,
 .k-numeric-wrap.k-state-border-down .k-input
 {
-    .border-radius(@inner-border-radius 0 0 0);
+    .border-radius(@main-border-radius 0 0 0);
 }
 
 .k-multiselect.k-state-border-down .k-multiselect-wrap,
 {
-    .border-radius(@inner-border-radius @inner-border-radius 0 0);
+    .border-radius(@main-border-radius @main-border-radius 0 0);
 }
 
 .k-dropdown-wrap .k-select,
@@ -957,7 +949,7 @@ div.k-imagebrowser-dropzone em
 .k-numeric-wrap.k-expand-padding .k-input,
 .k-multiselect-wrap
 {
-    .guarded-border-radius(@inner-border-radius);
+    .guarded-border-radius(@main-border-radius);
 }
 
 .k-list .k-state-hover,
