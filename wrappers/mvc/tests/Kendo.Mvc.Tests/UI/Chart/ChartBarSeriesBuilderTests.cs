@@ -2,18 +2,21 @@ namespace Kendo.Mvc.UI.Tests.Chart
 {
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
+    using System;
     using Xunit;
 
     public class ChartBarSeriesBuilderTests
     {
         protected IChartBarSeries series;
         protected ChartBarSeriesBuilder<SalesData> builder;
+        private readonly Func<object, object> nullFunc;
 
         public ChartBarSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             series = new ChartBarSeries<SalesData, decimal>(s => s.RepSales, null);
             builder = new ChartBarSeriesBuilder<SalesData>(series);
+            nullFunc = (o) => null;
         }
 
         [Fact]
@@ -60,6 +63,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void Color_should_return_builder()
         {
             builder.Color("Blue").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Color_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.Color(nullFunc);
+            series.ColorHandler.TemplateDelegate.ShouldBeSameAs(nullFunc);
+        }
+
+        [Fact]
+        public void Color_with_Func_should_return_builder()
+        {
+            builder.Color(nullFunc).ShouldBeSameAs(builder);
         }
 
         [Fact]
@@ -213,5 +229,32 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Overlay(ChartBarSeriesOverlay.None).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Highlight_should_configure_Highlight()
+        {
+            builder.Highlight(highlight => highlight.Visible(false));
+            series.Highlight.Visible.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Highlight_should_return_builder()
+        {
+            builder.Highlight(highlight => highlight.Visible(false)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Highlight_should_set_visible()
+        {
+            builder.Highlight(false);
+            series.Highlight.Visible.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Highlight_with_bool_should_return_builder()
+        {
+            builder.Highlight(false).ShouldBeSameAs(builder);
+        }
+
     }
 }

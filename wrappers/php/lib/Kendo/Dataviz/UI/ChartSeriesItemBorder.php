@@ -7,7 +7,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
 
     /**
     * The color of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
     public function color($value) {
@@ -16,7 +16,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
 
     /**
     * The dash type of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
     public function dashType($value) {
@@ -25,7 +25,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
 
     /**
     * The border opacity.
-    * @param float $value
+    * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
     public function opacity($value) {
@@ -34,7 +34,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
 
     /**
     * The width of the border.
-    * @param float $value
+    * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
     public function width($value) {

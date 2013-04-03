@@ -469,6 +469,49 @@
 
                     equal(segments.length, 1);
                 });
+
+                test("color fn argument contains value", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            color: function(p) { equal(p.value, 1); }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains percentage", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            color: function(p) { equal(p.percentage, 1); }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            color: function(p) {
+                                deepEqual(p.dataItem, 1);
+                            }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createDonutChart({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            name: "donutSeries",
+                            color: function(p) { equal(p.series.name, "donutSeries"); }
+                        }]
+                    });
+                });
             })();
 
         </script>

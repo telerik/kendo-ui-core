@@ -51,6 +51,14 @@ public class SeriesItemTargetBorderTag extends  BaseTag  /* interfaces */ /* int
         return "sparkline-seriesItem-target-border";
     }
 
+    public void setColor(SeriesItemTargetBorderColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setDashType(SeriesItemTargetBorderDashTypeFunctionTag value) {
+        setEvent("dashType", value.getBody());
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

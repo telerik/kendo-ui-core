@@ -580,6 +580,22 @@
                     equal(view.log.path[0].style.stroke, "#cf0");
                 });
 
+                test("sets line color to default if series color is fn", function() {
+                    setupLineChart(plotArea, {
+                        series: [
+                            $.extend({
+                                    _defaults: { color: "#cf0" },
+                                    width: 4,
+                                    color: function() { },
+                                    opacity: 0.5
+                                },
+                                positiveSeries
+                            )
+                        ]
+                    });
+                    equal(view.log.path[0].style.stroke, "#cf0");
+                });
+
                 test("sets line opacity", function() {
                     equal(view.log.path[0].style.strokeOpacity, 0.5);
                 });
@@ -789,6 +805,36 @@
                     equal(linePoint.options.dashType, "dot");
                 });
 
+                test("applies color function", function() {
+                    createLineChart({
+                        color: function(point) { return "#f00" }
+                    });
+
+                    equal(linePoint.options.markers.border.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createLineChart({
+                        data: [1],
+                        color: function(point) { equal(point.value, 1); }
+                    });
+                });
+
+                test("color fn argument contains category", 1, function() {
+                    createLineChart({
+                        data: [1],
+                        color: function(point) { equal(point.category, "A"); }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createLineChart({
+                        name: "series 1",
+                        data: [1],
+                        color: function(point) { equal(point.series.name, "series 1"); }
+                    });
+                });
+
             })();
 
             (function() {
@@ -857,6 +903,11 @@
                 test("sets marker height", function() {
                     createPoint({ markers: { size: 10 } });
                     equal(marker.options.height, 10);
+                });
+
+                test("sets marker rotation", function() {
+                    createPoint({ markers: { rotation: 90 } });
+                    equal(marker.options.rotation, 90);
                 });
 
                 test("hides marker if size is 0", function() {
@@ -950,7 +1001,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view, { flag: true });
-                    ok(view.log.rect[0].style.flag);
+                    ok(view.log.path[0].style.flag);
                 });
 
                 test("highlightOverlay applies render options for circle markers", function() {
@@ -1137,85 +1188,6 @@
 
                 test("dataItem sent to label template", function() {
                     equal(label.children[0].content, "Alpha");
-                });
-
-            })();
-
-            (function() {
-                var ShapeElement = dataviz.ShapeElement,
-                    SIZE = 5,
-                    BORDER = 2,
-                    BORDER_COLOR = "#cf0",
-                    BACKGROUND = "#f00",
-                    shape,
-                    box,
-                    view;
-
-                function createShape(options) {
-                    shape = new ShapeElement(
-                        $.extend({
-                            width: SIZE,
-                            height: SIZE,
-                            border: { width: BORDER },
-                            background: "#f00"
-                        }, options)
-                    );
-
-                    box = new Box2D(0, 0, SIZE, SIZE);
-                    shape.reflow(box);
-
-                    view = new ViewStub();
-                    shape.getViewElements(view);
-                }
-
-                // ------------------------------------------------------------
-                module("ShapeElement", {
-                    setup: function() {
-                        createShape({ type: "square" });
-                    }
-                });
-
-                test("renders square", function() {
-                    var square = view.log.rect[0];
-                    deepEqual([square.x1, square.y1, square.x2, square.y2],
-                         [0, 0, SIZE, SIZE]);
-                });
-
-                test("renders triangle", function() {
-                    createShape({ type: "triangle" });
-                    var path = view.log.path[0];
-                    deepEqual(mapPoints(path.points), [
-                        [SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]
-                    ]);
-                    ok(path.closed);
-                });
-
-                test("renders circle", function() {
-                    createShape({ type: "circle" });
-                    var circle = view.log.circle[0];
-                    deepEqual(circle.c.x, SIZE / 2);
-                    deepEqual(circle.c.y, SIZE / 2);
-                    deepEqual(circle.r, SIZE / 2);
-                });
-
-                test("renders id", function() {
-                    createShape({ id: "id" });
-                    equal(view.log.circle[0].style.id, "id");
-                });
-
-                test("does not render element when hidden", function() {
-                    createShape({ visible: false });
-                    equal(view.log.rect.length, 0);
-                });
-
-                test("does not render element when hidden (triangle)", function() {
-                    createShape({ visible: false,  type: "triangle"});
-                    equal(view.log.path.length, 0);
-                });
-
-                test("does not render element when hidden (circle)", function() {
-                    createShape({ visible: false,  type: "circle"});
-                    equal(view.log.circle.length, 0);
                 });
 
             })();

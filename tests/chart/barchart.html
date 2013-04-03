@@ -29,7 +29,7 @@
                     MARGIN = 10;
 
                 function createChart(series, options) {
-                    $("#container").kendoChart($.extend({}, {
+                    $("#container").kendoChart($.extend({
                         title: {
                             text: "Chart Title"
                         },
@@ -84,6 +84,11 @@
 
                 test("legend series are populated", function() {
                     equal(legend.options.items[0].text, "Value");
+                });
+
+                test("default legend color is used when color is fn", function() {
+                    createChart([{ color: function() { return "#foo"; } }]);
+                    equal(legend.options.items[0].color, "#ff6800");
                 });
 
                 test("series can be excluded from legend", function() {

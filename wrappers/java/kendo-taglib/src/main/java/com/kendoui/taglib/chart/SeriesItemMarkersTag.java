@@ -3,6 +3,7 @@ package com.kendoui.taglib.chart;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.json.Function;
 
 
 
@@ -55,12 +56,52 @@ public class SeriesItemMarkersTag extends  BaseTag  /* interfaces *//* interface
         setProperty("border", value);
     }
 
+    public void setBackground(SeriesItemMarkersBackgroundFunctionTag value) {
+        setEvent("background", value.getBody());
+    }
+
+    public void setSize(SeriesItemMarkersSizeFunctionTag value) {
+        setEvent("size", value.getBody());
+    }
+
+    public void setType(SeriesItemMarkersTypeFunctionTag value) {
+        setEvent("type", value.getBody());
+    }
+
+    public void setVisible(SeriesItemMarkersVisibleFunctionTag value) {
+        setEvent("visible", value.getBody());
+    }
+
+    public void setRotation(SeriesItemMarkersRotationFunctionTag value) {
+        setEvent("rotation", value.getBody());
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
 
     public void setBackground(String value) {
         setProperty("background", value);
+    }
+
+    public String getBorder() {
+        Function property = ((Function)getProperty("border"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setBorder(String value) {
+        setProperty("border", new Function(value));
+    }
+
+    public float getRotation() {
+        return (float)getProperty("rotation");
+    }
+
+    public void setRotation(float value) {
+        setProperty("rotation", value);
     }
 
     public float getSize() {

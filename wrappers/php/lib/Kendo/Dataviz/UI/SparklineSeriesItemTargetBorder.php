@@ -7,7 +7,7 @@ class SparklineSeriesItemTargetBorder extends \kendo\SerializableObject {
 
     /**
     * The color of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemTargetBorder
     */
     public function color($value) {
@@ -16,7 +16,7 @@ class SparklineSeriesItemTargetBorder extends \kendo\SerializableObject {
 
     /**
     * The dash type of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemTargetBorder
     */
     public function dashType($value) {

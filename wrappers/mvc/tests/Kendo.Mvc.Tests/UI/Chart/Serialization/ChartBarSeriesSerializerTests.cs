@@ -232,6 +232,21 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_color_delegate()
+        {
+            series.ColorHandler = new ClientHandlerDescriptor { TemplateDelegate = (o) => "function() {}" };
+            GetJson(series)["color"].ShouldEqual(series.ColorHandler);
+        }
+
+        [Fact]
+        public void Serializes_color_delegate_when_color_is_also_set()
+        {
+            series.Color = "Blue";
+            series.ColorHandler = new ClientHandlerDescriptor { TemplateDelegate = (o) => "function() {}" };
+            GetJson(series)["color"].ShouldEqual(series.ColorHandler);
+        }
+
+        [Fact]
         public void Serializes_negative_color()
         {
             series.NegativeColor = "Blue";

@@ -7,7 +7,7 @@ class SparklineSeriesItemBorder extends \kendo\SerializableObject {
 
     /**
     * The color of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemBorder
     */
     public function color($value) {
@@ -16,7 +16,7 @@ class SparklineSeriesItemBorder extends \kendo\SerializableObject {
 
     /**
     * The dash type of the border.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemBorder
     */
     public function dashType($value) {
@@ -24,8 +24,17 @@ class SparklineSeriesItemBorder extends \kendo\SerializableObject {
     }
 
     /**
+    * The border opacity.
+    * @param float|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItemBorder
+    */
+    public function opacity($value) {
+        return $this->setProperty('opacity', $value);
+    }
+
+    /**
     * The width of the border.
-    * @param float $value
+    * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemBorder
     */
     public function width($value) {

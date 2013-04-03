@@ -150,5 +150,30 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the markers rotation angle.
+        /// </summary>
+        /// <param name="size">The markers rotation angle.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series
+        ///               .Line(s => s.Sales)
+        ///               .Markers(markers => markers
+        ///                   .Type(ChartMarkerShape.Triangle)
+        ///                   .Rotation(10)
+        ///               );
+        ///            )
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartMarkersBuilder Rotation(int rotation)
+        {
+            lineMarkers.Rotation = rotation;
+            return this;
+        }
     }
 }

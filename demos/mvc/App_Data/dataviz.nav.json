@@ -335,10 +335,10 @@
                     "url": "api/selection.html",
                     "title": "Axis selection for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
                     "meta": "This sample demonstrates how to configure axis selection."
-            }, {
-                    "text": "Benchmark",
-                    "packages": [ "!mvc" ],
-                    "url": "api/benchmark.html"
+				}, {
+					"text": "Benchmark",
+					"packages": [ "!mvc" ],
+					"url": "api/benchmark.html"
             }],
             "name": "api"
         }

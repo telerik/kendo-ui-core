@@ -97,6 +97,29 @@ kendo_module({
             var point = this;
 
             return new Point2D(point.x, point.y);
+        },
+
+        rotate: function(center, degrees) {
+            var point = this,
+                theta = degrees * DEGREE,
+                cosT = math.cos(theta),
+                sinT = math.sin(theta),
+                cx = center.x,
+                cy = center.y,
+                x = point.x,
+                y = point.y;
+
+            point.x = round(
+                cx + (x - cx) * cosT + (y - cy) * sinT,
+                COORD_PRECISION
+            );
+
+            point.y = round(
+                cy + (y - cy) * cosT - (x - cx) * sinT,
+                COORD_PRECISION
+            );
+
+            return point;
         }
     };
 
@@ -2696,6 +2719,7 @@ kendo_module({
         return IDPool.current.alloc();
     }
 
+    // TODO: Replace with Point2D.rotate
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEGREE;
 

@@ -51,6 +51,14 @@ public class SeriesItemMarkersBorderTag extends  BaseTag  /* interfaces */ /* in
         return "sparkline-seriesItem-markers-border";
     }
 
+    public void setColor(SeriesItemMarkersBorderColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setWidth(SeriesItemMarkersBorderWidthFunctionTag value) {
+        setEvent("width", value.getBody());
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }

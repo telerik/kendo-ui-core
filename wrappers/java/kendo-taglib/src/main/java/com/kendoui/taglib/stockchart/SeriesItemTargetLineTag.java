@@ -51,6 +51,10 @@ public class SeriesItemTargetLineTag extends  BaseTag  /* interfaces */ /* inter
         return "stockChart-seriesItem-target-line";
     }
 
+    public void setWidth(SeriesItemTargetLineWidthFunctionTag value) {
+        setEvent("width", value.getBody());
+    }
+
     public Object getWidth() {
         return (Object)getProperty("width");
     }

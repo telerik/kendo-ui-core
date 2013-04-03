@@ -1735,6 +1735,106 @@
                     equal(pane.contentBox.height(), 365);
                 });
             })();
+
+            (function() {
+                var ShapeElement = dataviz.ShapeElement,
+                    SIZE = 5,
+                    BORDER = 2,
+                    BORDER_COLOR = "#cf0",
+                    BACKGROUND = "#f00",
+                    shape,
+                    box,
+                    view;
+
+                function createShape(options) {
+                    shape = new ShapeElement(
+                        $.extend({
+                            width: SIZE,
+                            height: SIZE,
+                            border: { width: BORDER },
+                            background: "#f00"
+                        }, options)
+                    );
+
+                    box = new Box2D(0, 0, SIZE, SIZE);
+                    shape.reflow(box);
+
+                    view = new ViewStub();
+                    shape.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("ShapeElement", {
+                    setup: function() {
+                        createShape({ type: "square" });
+                    }
+                });
+
+                test("renders square", function() {
+                    var path = view.log.path[0];
+                    arrayClose(mapPoints(path.points), [
+                        [ 0, 0 ], [ SIZE, 0 ],
+                        [ SIZE, SIZE ], [ 0, SIZE ]
+                    ], 1);
+                });
+
+                test("renders rotated square", function() {
+                    createShape({ type: "square", rotation: 45 });
+                    var path = view.log.path[0];
+                    arrayClose(mapPoints(path.points), [
+                        [ -1.036, SIZE / 2 ], [ SIZE / 2, -1.036 ],
+                        [ 6.036, SIZE / 2 ], [ SIZE / 2, 6.036 ]
+                    ], 1);
+                    ok(path.closed);
+                });
+
+                test("renders triangle", function() {
+                    createShape({ type: "triangle" });
+                    var path = view.log.path[0];
+                    deepEqual(mapPoints(path.points), [
+                        [SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]
+                    ]);
+                    ok(path.closed);
+                });
+
+                test("renders rotated triangle", function() {
+                    createShape({ type: "triangle", rotation: 180 });
+                    var path = view.log.path[0];
+                    deepEqual(mapPoints(path.points), [
+                        [SIZE / 2, SIZE], [SIZE, 0], [0, 0]
+                    ]);
+                    ok(path.closed);
+                });
+
+                test("renders circle", function() {
+                    createShape({ type: "circle" });
+                    var circle = view.log.circle[0];
+                    deepEqual(circle.c.x, SIZE / 2);
+                    deepEqual(circle.c.y, SIZE / 2);
+                    deepEqual(circle.r, SIZE / 2);
+                });
+
+                test("renders id", function() {
+                    createShape({ id: "id" });
+                    equal(view.log.circle[0].style.id, "id");
+                });
+
+                test("does not render element when hidden", function() {
+                    createShape({ visible: false });
+                    equal(view.log.rect.length, 0);
+                });
+
+                test("does not render element when hidden (triangle)", function() {
+                    createShape({ visible: false,  type: "triangle"});
+                    equal(view.log.path.length, 0);
+                });
+
+                test("does not render element when hidden (circle)", function() {
+                    createShape({ visible: false,  type: "circle"});
+                    equal(view.log.circle.length, 0);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

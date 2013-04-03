@@ -86,7 +86,6 @@
     <Compile Include="Infrastructure\Implementation\DependencyInjectionContainerTests.cs" />
     <Compile Include="Infrastructure\Implementation\NoCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
-    <Compile Include="UI\Chart\ChartSeriesBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
@@ -109,7 +108,7 @@
     <Compile Include="UI\Chart\ChartSeriesDefaultsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartLineLabelsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartLineSeriesBuilderTests.cs" />
-    <Compile Include="UI\Chart\ChartLineMarkersBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartMarkersBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisLabelsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartTooltipBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartPieSeriesBuilderTests.cs" />
@@ -153,7 +152,7 @@
     <Compile Include="UI\Chart\Serialization\ChartSeriesDefaultsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineLabelSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializerTests.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartLineMarkerSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartMarkerSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartTooltipSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPieSeriesSerializerTests.cs" />

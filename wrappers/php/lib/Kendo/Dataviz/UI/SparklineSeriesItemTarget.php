@@ -16,7 +16,7 @@ class SparklineSeriesItemTarget extends \kendo\SerializableObject {
 
     /**
     * The target color.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemTarget
     */
     public function color($value) {
@@ -25,7 +25,7 @@ class SparklineSeriesItemTarget extends \kendo\SerializableObject {
 
     /**
     * The border of the target.
-    * @param \Kendo\Dataviz\UI\SparklineSeriesItemTargetBorder|array $value
+    * @param \Kendo\JavaScriptFunction|\Kendo\Dataviz\UI\SparklineSeriesItemTargetBorder|array $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemTarget
     */
     public function border($value) {

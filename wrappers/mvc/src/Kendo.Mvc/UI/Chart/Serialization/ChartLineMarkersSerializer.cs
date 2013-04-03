@@ -22,7 +22,8 @@ namespace Kendo.Mvc.UI
                 .Add("border", lineMarker.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
                 .Add("type", lineMarker.Type.ToString().ToLowerInvariant(), () => lineMarker.Type.HasValue)
                 .Add("background", lineMarker.Background, () => lineMarker.Background.HasValue())
-                .Add("size", lineMarker.Size, () => lineMarker.Size.HasValue);
+                .Add("size", lineMarker.Size, () => lineMarker.Size.HasValue)
+                .Add("rotation", lineMarker.Rotation, () => lineMarker.Rotation.HasValue);
 
             return result;
         }

@@ -16,7 +16,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The background color of the labels.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function background($value) {
@@ -34,7 +34,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The text color of the labels.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function color($value) {
@@ -52,7 +52,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The font style of the labels.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function font($value) {
@@ -61,7 +61,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The format of the labels.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function format($value) {
@@ -88,7 +88,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * Defines the position of the labels.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function position($value) {
@@ -119,7 +119,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * The visibility of the labels.
-    * @param boolean $value
+    * @param boolean|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function visible($value) {

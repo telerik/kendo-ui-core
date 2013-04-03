@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                getElement = dataviz.getElement,
+                Box2D = dataviz.Box2D,
+                categoriesCount = dataviz.categoriesCount,
+                chartBox = new Box2D(0, 0, 800, 600),
+                series,
+                view;
+
+            function stubPlotArea(getCategorySlot, getValueSlot, options) {
+                return new function() {
+                    this.categoryAxis = this.primaryCategoryAxis = {
+                        getSlot: getCategorySlot,
+                        options: {
+                            axisCrossingValue: 0,
+                            categories: options.categoryAxis.categories
+                        }
+                    };
+
+                    this.valueAxis = {
+                        getSlot: getValueSlot,
+                        options: {
+                            axisCrossingValue: 0
+                        }
+                    };
+
+                    this.namedCategoryAxes = { };
+                    this.namedValueAxes = {};
+
+                    this.seriesCategoryAxis = function(series) {
+                        return series.categoryAxis ?
+                            this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
+                    };
+
+                    this.options = options;
+                };
+            }
+
+            (function() {
+                var bulletChart;
+
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D();
+                    },
+                    function(value) {
+                        return new Box2D();
+                    },
+                    {
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }
+                );
+
+                // ------------------------------------------------------------
+                module("Bullet Chart / Configuration", {
+                    setup: function() {
+                        bulletChart = new dataviz.BulletChart(plotArea, {
+                            series: [{
+                                data: [[0, 0]],
+                                color: "#f00",
+                                opacity: 0.5,
+                                overlay: "none"
+                            }]
+                        });
+                    }
+                });
+
+                test("applies series fill color to bars", function() {
+                    equal(bulletChart.points[0].options.color, "#f00");
+                });
+
+                test("applies series opacity color to bullets", function() {
+                    equal(bulletChart.points[0].options.opacity, 0.5);
+                });
+
+                test("applies series overlay to bullets", function() {
+                    equal(bulletChart.points[0].options.overlay, "none");
+                });
+
+                test("applies color function", function() {
+                    bulletChart = new dataviz.BulletChart(plotArea, {
+                        series: [{
+                            type: "bullet",
+                            data: [[0, 0]],
+                            color: function(bullet) { return "#f00" }
+                        }]
+                    });
+
+                    equal(bulletChart.points[0].options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 2, function() {
+                    new dataviz.BulletChart(plotArea, {
+                        series: [{
+                            type: "bullet",
+                            data: [[0, 1]],
+                            color: function(bullet) {
+                                equal(bullet.value.current, 0);
+                                equal(bullet.value.target, 1);
+                            }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    new dataviz.BulletChart(plotArea, {
+                        series: [{
+                            type: "bullet",
+                            name: "series 1",
+                            data: [[0, 0]],
+                            color: function(bubble) { equal(bubble.series.name, "series 1"); }
+                        }]
+                    });
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

@@ -28,7 +28,6 @@ namespace Kendo.Mvc.UI
                 .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
-                .Add("color", series.Color, () => series.Color.HasValue())
                 .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue())
                 .Add("negativeColor", series.NegativeColor, () => series.NegativeColor.HasValue());
 

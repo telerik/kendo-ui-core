@@ -290,6 +290,7 @@
                 function createOHLCChart(options) {
                     ohlcChart = new dataviz.OHLCChart(plotArea, {
                         series: [$.extend({
+                            name: "ohlcSeries",
                             data: [[3,4,2,1]],
                             dashType: "dashType",
                             color: "lineColor",
@@ -322,6 +323,34 @@
 
                 test("applies line width", function() {
                     equal(ohlcPoint.options.width, 0.2);
+                });
+
+                test("applies color function", function() {
+                    createOHLCChart({
+                        color: function(p) { return "#f00" }
+                    });
+
+                    equal(ohlcPoint.options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createOHLCChart({
+                        color: function(p) { equal(p.value.open, 3); }
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createOHLCChart({
+                        color: function(p) {
+                            deepEqual(p.dataItem, [3,4,2,1]);
+                        }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createOHLCChart({
+                        color: function(p) { equal(p.series.name, "ohlcSeries"); }
+                    });
                 });
 
             })();

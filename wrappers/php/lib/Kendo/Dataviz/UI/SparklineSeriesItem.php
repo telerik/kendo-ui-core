@@ -147,7 +147,7 @@ The function return value is displayed instead of the individual points.
 
     /**
     * The series base color.
-    * @param string $value
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem
     */
     public function color($value) {

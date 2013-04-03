@@ -23,8 +23,7 @@ namespace Kendo.Mvc.UI
                 .Add("yField", series.YMember, () => { return series.Data == null && series.YMember != null; })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("xAxis", series.XAxis, () => !string.IsNullOrEmpty(series.XAxis))
-                .Add("yAxis", series.YAxis, () => !string.IsNullOrEmpty(series.YAxis))
-                .Add("color", series.Color, string.Empty);
+                .Add("yAxis", series.YAxis, () => !string.IsNullOrEmpty(series.YAxis));
 
             var labelsData = series.Labels.CreateSerializer().Serialize();
             if (labelsData.Count > 0)

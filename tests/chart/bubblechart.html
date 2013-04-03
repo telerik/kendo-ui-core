@@ -416,6 +416,55 @@
                     equal(legend.options.items[0].text, "A-test");
                 });
 
+                test("applies color function", function() {
+                    createBubbleChart({
+                        dataSource: null,
+                        series: [{
+                            type: "bubble",
+                            data: [[1, 10, 100]],
+                            color: function(bubble) { return "#f00" }
+                        }]
+                    });
+
+                    equal(points[0].options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createBubbleChart({
+                        dataSource: null,
+                        series: [{
+                            type: "bubble",
+                            data: [[1, 10, 100]],
+                            color: function(bubble) { equal(bubble.value.size, 100); }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createBubbleChart({
+                        dataSource: null,
+                        series: [{
+                            type: "bubble",
+                            data: [[1, 10, 100]],
+                            color: function(bubble) {
+                                deepEqual(bubble.dataItem, [1, 10, 100]);
+                            }
+                        }]
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createBubbleChart({
+                        dataSource: null,
+                        series: [{
+                            type: "bubble",
+                            name: "series 1",
+                            data: [[1, 10, 100]],
+                            color: function(bubble) { equal(bubble.series.name, "series 1"); }
+                        }]
+                    });
+                });
+
             })();
 
         </script>

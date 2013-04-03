@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
+
     public interface IChartSeries
     {
         /// <summary>
@@ -24,6 +26,15 @@ namespace Kendo.Mvc.UI
         /// The series base color
         /// </summary>
         string Color
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the series color function
+        /// </summary>
+        ClientHandlerDescriptor ColorHandler
         {
             get;
             set;

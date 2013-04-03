@@ -362,6 +362,7 @@
                 function createCandlestickChart(options) {
                     candlestickChart = new dataviz.CandlestickChart(plotArea, {
                         series: [$.extend({
+                            name: "candlestickSeries",
                             data: [[1,4,2,3]],
                             border: {
                                 opacity: 0.5,
@@ -419,6 +420,34 @@
 
                 test("applies line opacity", function() {
                     equal(candlestick.options.line.opacity, 0.7);
+                });
+
+                test("applies color function", function() {
+                    createCandlestickChart({
+                        color: function(bubble) { return "#f00" }
+                    });
+
+                    equal(candlestick.options.color, "#f00");
+                });
+
+                test("color fn argument contains value", 1, function() {
+                    createCandlestickChart({
+                        color: function(c) { equal(c.value.open, 1); }
+                    });
+                });
+
+                test("color fn argument contains dataItem", 1, function() {
+                    createCandlestickChart({
+                        color: function(c) {
+                            deepEqual(c.dataItem, [1,4,2,3]);
+                        }
+                    });
+                });
+
+                test("color fn argument contains series", 1, function() {
+                    createCandlestickChart({
+                        color: function(c) { equal(c.series.name, "candlestickSeries"); }
+                    });
                 });
 
             })();

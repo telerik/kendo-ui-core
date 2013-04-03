@@ -3,6 +3,7 @@ package com.kendoui.taglib.sparkline;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.json.Function;
 
 
 
@@ -57,6 +58,22 @@ public class SeriesItemTargetTag extends  BaseTag  /* interfaces */ /* interface
 
     public void setLine(com.kendoui.taglib.sparkline.SeriesItemTargetLineTag value) {
         setProperty("line", value);
+    }
+
+    public void setColor(SeriesItemTargetColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public String getBorder() {
+        Function property = ((Function)getProperty("border"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setBorder(String value) {
+        setProperty("border", new Function(value));
     }
 
     public String getColor() {

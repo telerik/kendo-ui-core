@@ -4,6 +4,7 @@
         <title>Chart helpers</title>
         <script src="../jquery-loader.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
@@ -14,6 +15,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
         <script>
             var dataviz = kendo.dataviz,
                 Chart = dataviz.ui.Chart,
@@ -302,6 +304,28 @@
 
             test("y defaults to 0", function() {
                 equal(new Point2D().y, 0);
+            });
+
+            test("clone returns new point instance", function() {
+                var clone = point.clone();
+                notEqual(clone, point);
+                ok(clone instanceof Point2D);
+            });
+
+            test("clone copies x and y", function() {
+                var clone = point.clone();
+                equal(clone.x, point.x);
+                equal(clone.y, point.y);
+            });
+
+            test("rotate rotates x and y around center", function() {
+                point.rotate(new Point2D(0, 0), 90);
+                equal(point.x, 20, 1);
+                equal(point.y, -10, 1);
+            });
+
+            test("rotate returns point", function() {
+                deepEqual(point.rotate(new Point2D(0, 0), 90), point);
             });
 
             (function() {
@@ -1012,6 +1036,71 @@
                 });
             })();
 
+            (function() {
+                var evalOptions = dataviz.evalOptions;
+
+                // ------------------------------------------------------------
+                module("Functional options");
+
+                test("replaces function with its result", function() {
+                    var opts = { foo: function() { return "bar" } };
+                    evalOptions(opts);
+
+                    equal(opts.foo, "bar");
+                });
+
+                test("executes functions with context", function() {
+                    var opts = { foo: function(context) { return context; } };
+                    evalOptions(opts, "baz");
+
+                    equal(opts.foo, "baz");
+                });
+
+                test("replaces function in nested object with its result", function() {
+                    var opts = { baz: { foo: function() { return "bar" } } };
+                    evalOptions(opts);
+
+                    equal(opts.baz.foo, "bar");
+                })
+
+                test("evals functions up to 8 levels deep", function() {
+                    var opts = {};
+
+                    for (var i = 0, root = opts; i < 9; i++) {
+                        var child = root["n" + i] = {};
+                        child.foo = function() { return "bar" };
+
+                        root = root["n" + i];
+                    }
+
+                    evalOptions(opts);
+
+                    equal(opts.n0.n1.n2.n3.n4.n5.n6.n7.foo, "bar");
+                    ok($.isFunction(opts.n0.n1.n2.n3.n4.n5.n6.n7.n8.foo));
+                });
+
+                test("excluded options are ignored", function() {
+                    var opts = { bar: function() { } };
+                    evalOptions(opts, {}, { excluded: ["bar"] });
+
+                    ok($.isFunction(opts.bar));
+                });
+
+                test("excluded options children are ignored", function() {
+                    var opts = { bar: { baz: function() { } } };
+                    evalOptions(opts, {}, { excluded: ["bar"] });
+
+                    ok($.isFunction(opts.bar.baz));
+                });
+
+                test("undefined result is replaced by default value", function() {
+                    var opts = { bar: function() {} };
+                    evalOptions(opts, {}, { defaults: { bar: "foo" } });
+
+                    equal(opts.bar, "foo");
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

@@ -24,7 +24,6 @@ namespace Kendo.Mvc.UI
                 .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
                 .Add("data", series.Data, () => { return series.Data != null; })
-                .Add("color", series.Color, () => series.Color.HasValue())
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
                                       () => series.MissingValues.HasValue);
 
