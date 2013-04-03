@@ -20,7 +20,7 @@ MOBILE_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/mobile\// }
 DATAVIZ_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/dataviz\// }
 DATAVIZ_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/dataviz\// }
 
-WIN_SRC_CSS = FileList['styles/web/kendo.common.css'].include('styles/dataviz/kendo.dataviz.css')
+WIN_SRC_CSS = FileList['styles/web/kendo.common.css'].include('styles/dataviz/kendo.dataviz.css').include('styles/web/kendo.rtl.css')
 WIN_MIN_CSS = FileList['styles/web/kendo.winjs.min.css']
 
 file_merge 'styles/web/kendo.winjs.css' => [
