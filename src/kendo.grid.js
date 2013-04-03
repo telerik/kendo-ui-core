@@ -900,7 +900,7 @@ kendo_module({
 
                         columnStart = e.x.location;
                         columnWidth = th.outerWidth();
-                        gridWidth = that.tbody.outerWidth();
+                        gridWidth = that.tbody.outerWidth(); // IE returns 0 if grid is empty and scrolling is enabled
                     },
                     resize: function(e) {
 
@@ -911,7 +911,7 @@ kendo_module({
                         if (width > 10) {
                             col.css('width', width);
 
-                            if (options.scrollable) {
+                            if (options.scrollable && gridWidth) {
                                 that._footerWidth = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
                                 that.tbody.parent()
                                     .add(that.thead.parent())
