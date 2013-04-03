@@ -1,0 +1,35 @@
+<div data-role="view" id="button-badge" data-title="Button Badges">
+    <br />
+    <a class="button" data-role="button" data-badge="9" data-click="changeBadge">Mail</a>
+    <br /><br />
+    <a class="button" data-role="button" data-badge="3" data-click="changeBadge">Twitter Mentions</a>
+    <br /><br />
+    <a class="button" data-role="button" data-badge="33" data-click="changeBadge">Facebook Page Likes</a>
+</div>
+
+<style scoped>
+.button {
+    margin: 0 0 0 .5em;
+    text-align: center;
+}
+#button-home .head,
+#facility .head,
+#sports .head {
+	display: block;
+	margin: 1em;
+	height: 120px;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+}
+.km-ios .head,
+.km-blackberry .head {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+</style>
+
+<script>
+    function changeBadge() {
+        this.badge(Math.floor(Math.random()*150));
+    }
+</script>

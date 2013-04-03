@@ -342,17 +342,9 @@
 {
     .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
-    padding: 0;
     background-color: #bc0404;
     .border-radius(3em);
     .box-shadow(@ios-detail-shadow);
-    background-clip: content-box;
-}
-
-.km-ios .km-badge
-{
-    font-size: .82rem;
-    line-height: 1rem;
 }
 
 .km-ios .km-detail
@@ -626,7 +618,6 @@
 .km-ios6 .km-tabstrip .km-button
 {
     margin: 0;
-    overflow: hidden;
     padding: .1em .3em .4em;
     color: #d1d1d1;
     .border-radius(0);
@@ -636,11 +627,6 @@
 .km-ios6 .km-tabstrip .km-button:last-child
 {
     .box-shadow(none);
-}
-
-.km-ios .km-tabstrip .km-badge
-{
-    font-size: 1.1em;
 }
 
 .km-ios .km-tabstrip .km-button:active,

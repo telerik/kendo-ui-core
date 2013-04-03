@@ -13,6 +13,10 @@ kendo_module({
         ACTIVE_STATE_CLASS = "km-state-active",
         SELECT = "select";
 
+    function createBadge(value) {
+        return $('<span class="km-badge">' + value + '</span>');
+    }
+
     var TabStrip = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -58,6 +62,29 @@ kendo_module({
             return this.element.children("." + ACTIVE_STATE_CLASS);
         },
 
+        badge: function(item, value) {
+            var tabstrip = this.element, badge;
+
+            if (!isNaN(item)) {
+                item = tabstrip.children().get(item);
+            }
+
+            item = tabstrip.find(item);
+            badge = $(item.find(".km-badge")[0] || createBadge(value).appendTo(item.children(".km-icon")));
+
+            if (value) {
+                badge.html(value);
+                return this;
+            }
+
+            if (value === false) {
+                badge.empty().remove();
+                return this;
+            }
+
+            return badge.html();
+        },
+
         _release: function(e) {
             if (e.which > 1) {
                 return;
@@ -88,6 +115,7 @@ kendo_module({
         _buildButton: function() {
             var button = $(this),
                 icon = kendo.attrValue(button, "icon"),
+                badge = kendo.attrValue(button, "badge"),
                 image = button.find("img"),
                 iconSpan = $('<span class="km-icon"/>');
 
@@ -103,6 +131,9 @@ kendo_module({
                 button.prepend(iconSpan);
                 if (icon) {
                     iconSpan.addClass("km-" + icon);
+                    if (badge) {
+                        createBadge(badge).appendTo(iconSpan);
+                    }
                 }
             }
         },
