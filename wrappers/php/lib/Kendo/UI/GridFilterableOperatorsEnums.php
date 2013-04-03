@@ -6,7 +6,7 @@ class GridFilterableOperatorsEnums extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Enable/Disable and set the text of the "Is equal to" filter option for foreign key columns.
+    * The text of the "equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsEnums
     */
@@ -15,7 +15,7 @@ class GridFilterableOperatorsEnums extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is not equal to" filter option for foreign key columns.
+    * The text of the "not equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsEnums
     */

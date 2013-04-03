@@ -6,7 +6,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Enable/Disable and set the text of filter operators for fields of type string.
+    * The texts of the filter operators displayed for columns bound to string fields.
     * @param \Kendo\UI\GridFilterableOperatorsString|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
@@ -15,7 +15,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of filter operators for fields of type number.
+    * The texts of the filter operators displayed for columns bound to number fields.
     * @param \Kendo\UI\GridFilterableOperatorsNumber|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
@@ -24,7 +24,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of filter operators for fields of type date.
+    * The texts of the filter operators displayed for columns bound to date fields.
     * @param \Kendo\UI\GridFilterableOperatorsDate|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */
@@ -33,7 +33,7 @@ class GridFilterableOperators extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of filter operators for foreign key columns.
+    * The texts of the filter operators displayed for columns which have their values option set.
     * @param \Kendo\UI\GridFilterableOperatorsEnums|array $value
     * @return \Kendo\UI\GridFilterableOperators
     */

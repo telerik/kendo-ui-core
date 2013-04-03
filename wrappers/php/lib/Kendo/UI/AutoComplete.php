@@ -13,8 +13,7 @@ class AutoComplete extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the
-suggestion popup will open and close instantly.
+    * Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
     * @param \Kendo\UI\AutoCompleteAnimation|array $value
     * @return \Kendo\UI\AutoComplete
     */
@@ -32,7 +31,7 @@ suggestion popup will open and close instantly.
     }
 
     /**
-    * The field of the data item used when searching for suggestions.
+    * The field of the data item used when searching for suggestions.  This is the text that will be displayed in the list of matched results.
     * @param string $value
     * @return \Kendo\UI\AutoComplete
     */

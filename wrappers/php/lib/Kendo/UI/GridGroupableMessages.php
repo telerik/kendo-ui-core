@@ -6,7 +6,7 @@ class GridGroupableMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Sets the text of the empty grouping area message
+    * The text displayed in the grouping drop area.
     * @param string $value
     * @return \Kendo\UI\GridGroupableMessages
     */

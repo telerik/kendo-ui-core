@@ -50,6 +50,10 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-editable";
     }
 
+    public void setTemplate(EditableTemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public Object getConfirmation() {
         return (Object)getProperty("confirmation");
     }

@@ -61,6 +61,26 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("editor", value.getBody());
     }
 
+    public void setFooterTemplate(ColumnFooterTemplateFunctionTag value) {
+        setEvent("footerTemplate", value.getBody());
+    }
+
+    public void setGroupHeaderTemplate(ColumnGroupHeaderTemplateFunctionTag value) {
+        setEvent("groupHeaderTemplate", value.getBody());
+    }
+
+    public void setGroupFooterTemplate(ColumnGroupFooterTemplateFunctionTag value) {
+        setEvent("groupFooterTemplate", value.getBody());
+    }
+
+    public void setHeaderTemplate(ColumnHeaderTemplateFunctionTag value) {
+        setEvent("headerTemplate", value.getBody());
+    }
+
+    public void setTemplate(ColumnTemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public Object getAggregates() {
         return (Object)getProperty("aggregates");
     }
@@ -209,11 +229,11 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("title", value);
     }
 
-    public String getWidth() {
-        return (String)getProperty("width");
+    public Object getWidth() {
+        return (Object)getProperty("width");
     }
 
-    public void setWidth(String value) {
+    public void setWidth(Object value) {
         setProperty("width", value);
     }
 

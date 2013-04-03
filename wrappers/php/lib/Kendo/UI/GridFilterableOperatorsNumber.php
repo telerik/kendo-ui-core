@@ -6,7 +6,7 @@ class GridFilterableOperatorsNumber extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Enable/Disable and set the text of the "Is equal to" filter option for columns with number values.
+    * The text of the "equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsNumber
     */
@@ -15,7 +15,7 @@ class GridFilterableOperatorsNumber extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is not equal to" filter option for columns with number values.
+    * The text of the "not equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsNumber
     */
@@ -24,7 +24,7 @@ class GridFilterableOperatorsNumber extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is greater than or equal to" filter option for columns with number values.
+    * The text of the "greater than or equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsNumber
     */
@@ -33,7 +33,7 @@ class GridFilterableOperatorsNumber extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is greater than" filter option for columns with number values.
+    * The text of the "greater than" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsNumber
     */
@@ -42,7 +42,7 @@ class GridFilterableOperatorsNumber extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is less than or equal to" filter option for columns with number values.
+    * The text of the "less than or equal" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsNumber
     */
@@ -51,7 +51,7 @@ class GridFilterableOperatorsNumber extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enable/Disable and set the text of the "Is less than" filter option for columns with number values.
+    * The text of the "less than" filter operator.
     * @param string $value
     * @return \Kendo\UI\GridFilterableOperatorsNumber
     */
