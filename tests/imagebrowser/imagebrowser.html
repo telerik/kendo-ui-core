@@ -677,6 +677,18 @@
                 equal(browser.value(), "foo/File1");
             });
 
+            test("value special chars are encoded", function() {
+                var browser = setup({
+                    transport: {
+                        imageUrl: "foo/{0}"
+                    }
+                },[{ name: "fileName#.jpg", type: "f" }]);
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                equal(browser.value(), "foo/fileName%23.jpg");
+            });
+
             test("value custom formating as string is applied", function() {
                 var browser = setup({
                     transport: {

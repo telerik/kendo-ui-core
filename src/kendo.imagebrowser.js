@@ -257,7 +257,7 @@ kendo_module({
             if (selected && selected.get(that._getFieldName(TYPEFIELD)) === "f") {
                 path = concatPaths(that.path(), selected.get(that._getFieldName(NAMEFIELD))).replace(trimSlashesRegExp, "");
                 if (imageUrl) {
-                    path = isFunction(imageUrl) ? imageUrl(path) : kendo.format(imageUrl, path);
+                    path = isFunction(imageUrl) ? imageUrl(path) : kendo.format(imageUrl, encodeURIComponent(path));
                 }
                 return path;
             }
