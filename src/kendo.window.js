@@ -55,7 +55,7 @@ kendo_module({
     }
 
     function constrain(value, low, high) {
-        return Math.max(Math.min(value, high), low);
+        return Math.max(Math.min(parseInt(value, 10), parseInt(high, 10)), parseInt(low, 10));
     }
 
     function windowObject(element, name) {
@@ -262,7 +262,7 @@ kendo_module({
                 if (w.toString().indexOf("%") > 0) {
                     wrapper.width(w);
                 } else {
-                    wrapper.width(constrain(parseInt(options.width, 10), options.minWidth, options.maxWidth));
+                    wrapper.width(constrain(w, options.minWidth, options.maxWidth));
                 }
             }
 
@@ -270,7 +270,7 @@ kendo_module({
                 if (h.toString().indexOf("%") > 0) {
                     wrapper.height(h);
                 } else {
-                    wrapper.height(constrain(parseInt(options.height, 10), options.minHeight, options.maxHeight));
+                    wrapper.height(constrain(h, options.minHeight, options.maxHeight));
                 }
             }
 
