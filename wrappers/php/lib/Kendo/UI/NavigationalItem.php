@@ -6,9 +6,19 @@ abstract class NavigationalItem extends \Kendo\SerializableObject {
 
     public function renderText($element) {
         $text = $this->getProperty('text');
+        $url = $this->getProperty('url');
 
         if ($text) {
-            $element->append(new \Kendo\Html\Text($text));
+            $container = $element;
+            $textElement = new \Kendo\Html\Text($text);
+
+            if ($url) {
+                $container = new \Kendo\Html\Element('a');
+                $container->attr('href', $url);
+                $element->append($container);
+            }
+
+            $container->append($textElement);
         }
     }
 
