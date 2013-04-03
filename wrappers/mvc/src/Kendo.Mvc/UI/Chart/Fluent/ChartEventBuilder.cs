@@ -242,14 +242,14 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the AxisLabelClick client-side event
+        /// Defines the inline handler of the LegendItemClick client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .Events(events => events.LegendLabelClick(
+        ///           .Events(events => events.LegendItemClick(
         ///                @&lt;text&gt;
         ///                function(e) {
         ///                    //event handling code
@@ -260,28 +260,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartEventBuilder LegendLabelClick(Func<object, object> inlineCodeBlock)
+        public ChartEventBuilder LegendItemClick(Func<object, object> inlineCodeBlock)
         {
-            Handler("legendLabelClick", inlineCodeBlock);
+            Handler("legendItemClick", inlineCodeBlock);
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the LegendLabelClick client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the LegendItemClick client-side event.
         /// </summary>
         /// <param name="onLegendLabelClickHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
-        ///            .Events(events => events.LegendLabelClick("onLegendLabelClick"))
+        ///            .Events(events => events.LegendItemClick("onLegendItemClick"))
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartEventBuilder LegendLabelClick(string onLegendLabelClickHandlerName)
+        public ChartEventBuilder LegendItemClick(string onLegendItemClickHandlerName)
         {
-            Handler("legendLabelClick", onLegendLabelClickHandlerName);
+            Handler("legendItemClick", onLegendItemClickHandlerName);
 
             return this;
         }
