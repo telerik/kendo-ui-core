@@ -25,6 +25,10 @@ kendo_module({
         }
     }
 
+    function createBadge(value) {
+        return $('<span class="km-badge">' + value + '</span>');
+    }
+
     var Button = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -51,7 +55,24 @@ kendo_module({
         options: {
             name: "Button",
             icon: "",
-            style: ""
+            style: "",
+            badge: ""
+        },
+
+        badge: function (value) {
+            var badge = this.badgeElement = this.badgeElement || createBadge(value).appendTo(this.element);
+
+            if (value) {
+                badge.html(value);
+                return this;
+            }
+
+            if (value === false) {
+                badge.empty().remove();
+                return this;
+            }
+
+            return badge.html();
         },
 
         _timeoutDeactivate: function(e) {
@@ -102,6 +123,7 @@ kendo_module({
         _wrap: function() {
             var that = this,
                 icon = that.options.icon,
+                badge = that.options.badge,
                 iconSpan = '<span class="km-icon km-' + icon,
                 element = that.element.addClass("km-button"),
                 span = element.children("span:not(.km-icon)").addClass("km-text"),
@@ -115,7 +137,11 @@ kendo_module({
                 if (!span[0]) {
                     iconSpan += " km-notext";
                 }
-                element.prepend($(iconSpan + '" />'));
+                that.iconElement = element.prepend($(iconSpan + '" />'));
+            }
+
+            if (badge) {
+                that.badgeElement = createBadge(badge).appendTo(element);
             }
         }
     });

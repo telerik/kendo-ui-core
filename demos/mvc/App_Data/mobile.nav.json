@@ -41,6 +41,12 @@
                     "meta": "This example shows the core functionality of the flexible Kendo UI jQuery-based mobile button which would perfectly blend into any app and on any mobile device."
                 },
                 {
+                    "text": "Badges",
+                    "url": "button/badges.html",
+                    "title": "jQuery-based Kendo UI Mobile Button Badges demo",
+                    "meta": "This example shows how Kendo UI jQuery-based mobile button supports Badges."
+                },
+                {
                     "text": "Events",
                     "url": "button/events.html",
                     "title": "Events in Kendo UI Mobile Button",
@@ -274,6 +280,12 @@
                     "url": "tabstrip/index.html",
                     "title": "Kendo UI Mobile TabStrip Demo",
                     "meta": "This sample demonstrates how Kendo UI Mobile TabStrip widget is used inside a mobile view to show an application-wide group of navigation buttons."
+                },
+                {
+                    "text": "Badges",
+                    "url": "tabstrip/badges.html",
+                    "title": "Kendo UI Mobile TabStrip Badge Demo",
+                    "meta": "This sample demonstrates how Kendo UI Mobile TabStrip widget can show badges on its buttons."
                 },
                 {
                     "text": "Customizing Appearance",
