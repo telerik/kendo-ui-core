@@ -9,6 +9,10 @@
       :type: String
       :description: Specifies the text displayed by the item
 
+    - :name: items.url
+      :type: String
+      :description: Specifies the URL that the item links to
+
     - :name: items.imageUrl
       :type: String
       :description: Specifies the URL of the image displayed by the item

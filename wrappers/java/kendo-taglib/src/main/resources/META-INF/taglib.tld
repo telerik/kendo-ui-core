@@ -9063,6 +9063,12 @@ by setting the close animation.  Each animation also has a direction which can b
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
+        <attribute>
+            <description>Specifies the URL that the item links to</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
     </tag>
 
 
