@@ -285,6 +285,8 @@ tree :to => "dist/demos/staging-php/",
      :from => FileList[PHP_WRAPPERS_ROOT + '**/*'],
      :root => PHP_WRAPPERS_ROOT
 
+directory 'dist/demos'
+
 namespace :demos do
 
     desc('Build debug demo site')
@@ -354,6 +356,14 @@ namespace :demos do
         PHP_DEMOS_RESOURCES,
         "dist/demos/staging-php/"
     ]
+
+    desc('Build mvc demos for staging')
+    task :staging_mvc => [
+        'bundles:aspnetmvc.commercial',
+        'dist/demos'
+    ] do
+        cp_r 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples', 'dist/demos/staging-mvc'
+    end
 
     task :production_site => [:release,
         'dist/demos/production',
