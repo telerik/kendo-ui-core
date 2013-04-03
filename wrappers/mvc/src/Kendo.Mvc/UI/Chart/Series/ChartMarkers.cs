@@ -55,6 +55,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the markers rotation angle.
+        /// </summary>
+        public int? Rotation
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartLineMarkersSerializer(this);

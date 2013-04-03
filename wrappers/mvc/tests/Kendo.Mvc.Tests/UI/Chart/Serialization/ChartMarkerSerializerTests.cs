@@ -4,11 +4,11 @@ namespace Kendo.Mvc.UI.Tests
     using Kendo.Mvc.UI;
     using Xunit;
 
-    public class ChartLineMarkerSerializerTests
+    public class ChartMarkerSerializerTests
     {
         private readonly ChartMarkers lineMarkers;
 
-        public ChartLineMarkerSerializerTests()
+        public ChartMarkerSerializerTests()
         {
             lineMarkers = new ChartMarkers();
         }
@@ -80,6 +80,19 @@ namespace Kendo.Mvc.UI.Tests
         public void Does_not_serialize_default_size()
         {
             GetJson().ContainsKey("size").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_rotation()
+        {
+            lineMarkers.Rotation = 45;
+            GetJson()["rotation"].ShouldEqual(45);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_rotation()
+        {
+            GetJson().ContainsKey("rotation").ShouldBeFalse();
         }
 
         private IDictionary<string, object> GetJson()

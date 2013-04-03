@@ -4,12 +4,12 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class ChartLineMarkersBuilderTests
+    public class ChartMarkersBuilderTests
     {
         private readonly ChartMarkers markers;
         private readonly ChartMarkersBuilder builder;
 
-        public ChartLineMarkersBuilderTests()
+        public ChartMarkersBuilderTests()
         {
             markers = new ChartMarkers();
             builder = new ChartMarkersBuilder(markers);
@@ -63,6 +63,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void Border_builder_should_return_builder()
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Rotation_sets_rotation()
+        {
+            builder.Rotation(45);
+            markers.Rotation.ShouldEqual(45);
+        }
+
+        [Fact]
+        public void Rotation_should_return_builder()
+        {
+            builder.Rotation(45).ShouldBeSameAs(builder);
         }
     }
 }
