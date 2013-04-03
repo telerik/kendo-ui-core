@@ -110,7 +110,7 @@ def bundle(options)
     task "bundles:#{name}" => "#{path}.zip"
 
     if options[:upload_as_internal_build]
-        versioned_bundle_archive_path = "dist/bundles/#{versioned_bundle_name(name)}.zip"
+        versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, 'LIB Archive', VERSION, versioned_bundle_name(name) + ".zip")
 
         file_copy :to => versioned_bundle_archive_path, :from => "#{path}.zip"
 
