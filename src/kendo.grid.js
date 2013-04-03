@@ -2111,6 +2111,7 @@ kendo_module({
             var that = this,
                 active = $(activeElement()),
                 mode = that._editMode(),
+                oldIE = browser.msie && browser.version < 9,
                 editContainer = that._editContainer,
                 focusable,
                 isEdited;
@@ -2123,9 +2124,10 @@ kendo_module({
 
             if (that.editable) {
                 if ($.contains(editContainer[0], active[0])) {
-                    active.blur();
-                    if (browser.opera) {
+                    if (browser.opera || oldIE) {
                         active.change();
+                    } else {
+                        active.blur();
                     }
                 }
 
