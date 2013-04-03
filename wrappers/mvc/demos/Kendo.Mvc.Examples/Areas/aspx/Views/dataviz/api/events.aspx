@@ -37,7 +37,7 @@
             .DataBound("onDataBound")
             .AxisLabelClick("onAxisLabelClick")
             .PlotAreaClick("onPlotAreaClick")
-            .LegendLabelClick("onLegendLabelClick")
+            .LegendItemClick("onLegendItemClick")
             .DragStart("onDragStart")
             .Drag("onDrag")
             .DragEnd("onDragEnd")
@@ -73,8 +73,8 @@
             e.category, e.value));
     }
 
-    function onLegendLabelClick(e) {
-        kendoConsole.log(kendo.format("Legend click :: {0}",
+    function onLegendItemClick(e) {
+        kendoConsole.log(kendo.format("Legend item click :: {0}",
             e.text));
     }
 
