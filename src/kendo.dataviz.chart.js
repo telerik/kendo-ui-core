@@ -1521,6 +1521,8 @@ kendo_module({
 
             options = axis.options;
             options.categories = options.categories.slice(0);
+
+            axis._ticks = {};
         },
 
         options: {
@@ -1567,15 +1569,31 @@ kendo_module({
         },
 
         getMajorTickPositions: function() {
-            var axis = this;
-
-            return axis.getTickPositions(axis.options.categories.length);
+            return this.getTicks().majorTicks;
         },
 
         getMinorTickPositions: function() {
-            var axis = this;
+            return this.getTicks().minorTicks;
+        },
 
-            return axis.getTickPositions(axis.options.categories.length * 2);
+        getTicks: function() {
+            var axis = this,
+                cache = axis._ticks,
+                options = axis.options,
+                count = options.categories.length,
+                reverse = options.reverse,
+                justified = options.justified,
+                lineBox = axis.lineBox(),
+                hash;
+
+            hash = lineBox.getHash() + count + reverse + justified;
+            if (cache._hash !== hash) {
+                cache._hash = hash;
+                cache.majorTicks = axis.getTickPositions(count);
+                cache.minorTicks = axis.getTickPositions(count * 2);
+            }
+
+            return cache;
         },
 
         getSlot: function(from, to) {
