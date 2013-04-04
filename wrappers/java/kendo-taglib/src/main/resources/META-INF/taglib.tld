@@ -7241,6 +7241,11 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the column menu is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>columnMenuInit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user changes the order of a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>columnReorder</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7286,27 +7291,22 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid column filter menu is initialized.</description>
+            <description>Fired when the grid filter menu is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>filterMenuInit</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid column menu is initialized.</description>
-            <name>columnMenuInit</name>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>Fires before the grid item is removed.</description>
+            <description>Fired when the user clicks the "destroy" command button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires before the grid item is changed.</description>
+            <description>Fired when a data item is saved.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>save</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires before the grid calls DataSource sync.</description>
+            <description>Fired when the user clicks the "save" command button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>saveChanges</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -7495,7 +7495,7 @@ be disabled for this column. By default all columns are sortable.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the column content. The Kendo UI Grid widget renders table rows (&amp;lt;tr&gt;) which represent the data source items.
+            <description>The template which is used to render the column content. The Kendo UI Grid widget renders table rows (&amp;lt;tr&amp;gt;) which represent the data source items.
 Each table row consists of table cells ($lt;td$gt;) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
@@ -8186,6 +8186,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Fired when the column menu is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>grid-columnMenuInit</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnMenuInitFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Fired when the user changes the order of a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-columnReorder</name>
         <tag-class>com.kendoui.taglib.grid.ColumnReorderFunctionTag</tag-class>
@@ -8240,31 +8246,25 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid column filter menu is initialized.</description>
+        <description>Fired when the grid filter menu is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-filterMenuInit</name>
         <tag-class>com.kendoui.taglib.grid.FilterMenuInitFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid column menu is initialized.</description>
-        <name>grid-columnMenuInit</name>
-        <tag-class>com.kendoui.taglib.grid.ColumnMenuInitFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>Fires before the grid item is removed.</description>
+        <description>Fired when the user clicks the "destroy" command button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-remove</name>
         <tag-class>com.kendoui.taglib.grid.RemoveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires before the grid item is changed.</description>
+        <description>Fired when a data item is saved.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-save</name>
         <tag-class>com.kendoui.taglib.grid.SaveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires before the grid calls DataSource sync.</description>
+        <description>Fired when the user clicks the "save" command button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-saveChanges</name>
         <tag-class>com.kendoui.taglib.grid.SaveChangesFunctionTag</tag-class>
         <body-content>JSP</body-content>
