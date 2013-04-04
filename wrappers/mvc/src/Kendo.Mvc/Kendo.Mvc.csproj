@@ -198,6 +198,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.pt-PT.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.ro-RO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.ro-RO.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.ru-RU.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1224,6 +1229,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.ro-RO.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.ro-RO.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.ru-RU.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
