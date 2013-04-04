@@ -528,13 +528,15 @@ namespace :build do
             'demos:staging',
             'download_builder:staging',
             'demos:staging_java',
-            'demos:staging_php'
+            'demos:staging_php',
+            'demos:staging_mvc'
         ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/staging/"
             sh "rsync -avc dist/download-builder-staging/ #{WEB_ROOT}/download-builder-staging/"
             sh "rsync -avc --del dist/demos/staging-java/ #{TOMCAT_ROOT}/staging-java/"
             sh "curl -s --netrc \"http://localhost:8081/manager/text/reload?path=/staging-java\""
             sh "rsync -avc --del dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
+            sh "rsync -avc --del dist/demos/staging-mvc/ /mnt/kendo-iis/staging-mvc/"
         end
 
         desc 'Package and publish bundles to the Stable directory'
