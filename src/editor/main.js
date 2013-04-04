@@ -601,6 +601,7 @@ kendo_module({
                 .on("click" + NS, enabledButtons, function(e) {
                     e.preventDefault();
                     e.stopPropagation();
+                    $(this).removeClass("k-state-hover");
                     that.exec(toolFromClassName(this));
                 })
                 .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); })
