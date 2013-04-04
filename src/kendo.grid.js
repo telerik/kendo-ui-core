@@ -2111,7 +2111,8 @@ kendo_module({
             var that = this,
                 active = $(activeElement()),
                 mode = that._editMode(),
-                oldIE = browser.msie && browser.version < 9,
+                isIE = browser.msie,
+                oldIE = isIE && browser.version < 9,
                 editContainer = that._editContainer,
                 focusable,
                 isEdited;
@@ -2128,6 +2129,11 @@ kendo_module({
                         active.change();
                     } else {
                         active.blur();
+                        if (isIE) {
+                            //IE10 with jQuery 1.9.x does not trigger blur handler
+                            //numeric textbox does trigger change
+                            active.blur();
+                        }
                     }
                 }
 
