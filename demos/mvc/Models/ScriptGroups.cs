@@ -1,11 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 namespace Kendo.Models
 {
     public static class ScriptGroups
     {
+        private static readonly string jQueryPath = string.Format(
+            "http://code.jquery.com/jquery-{0}.min.js",
+            ConfigurationManager.AppSettings["JQUERY_VERSION"]
+        );
+
         public static readonly IList<string> All = new string[]
         {
 #if DEBUG
@@ -66,7 +72,7 @@ namespace Kendo.Models
             "kendo.editor.js",
             "kendo.multiselect.js"
 #else
-            "http://code.jquery.com/jquery-1.9.1.min.js",
+            jQueryPath,
             "kendo.all.min.js"
 #endif
         };
@@ -111,7 +117,7 @@ namespace Kendo.Models
             "kendo.mobile.tabstrip.js",
             "kendo.mobile.modalview.js"
 #else
-            "http://code.jquery.com/jquery-1.9.1.min.js",
+            jQueryPath,
             "kendo.all.min.js"
 #endif
             };
