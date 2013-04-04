@@ -219,7 +219,7 @@ kendo_module({
                     $.map(stylesheets, function(href){
                         return "<link rel='stylesheet' href='" + href + "'>";
                     }).join("") +
-                    "</head><body contenteditable='true'></body></html>"
+                    "</head><body autocorrect='off' contenteditable='true'></body></html>"
                 );
 
             doc.close();
