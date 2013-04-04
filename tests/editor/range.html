@@ -34,7 +34,7 @@
             return range;
         }
 
-        test('range creation', function() {
+        test("range creation", function() {
             var range = editor.createRange();
 
             equal(range.startContainer, editor.document);
@@ -45,8 +45,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setStart setEnd within the same text node', function() {
-            editor.value('this is only a test of the <span>emergency</span> <em>broadcast</em> system');
+        test("setStart setEnd within the same text node", function() {
+            editor.value("this is only a test of the <span>emergency</span> <em>broadcast</em> system");
 
             var range = editor.createRange();
 
@@ -61,8 +61,8 @@
             equal(range.collapsed, false);
         });
 
-        test('setStart setEnd collapsing', function() {
-            editor.value('this is only a test of the <span>emergency</span> <em>broadcast</em> system');
+        test("setStart setEnd collapsing", function() {
+            editor.value("this is only a test of the <span>emergency</span> <em>broadcast</em> system");
 
             var range = editor.createRange();
 
@@ -72,8 +72,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setStart setEnd in different containers', function() {
-            editor.value('this is only a test of the <span>emergency</span> <em>broadcast</em> system');
+        test("setStart setEnd in different containers", function() {
+            editor.value("this is only a test of the <span>emergency</span> <em>broadcast</em> system");
 
             var range = editor.createRange();
 
@@ -83,8 +83,8 @@
             equal(range.commonAncestorContainer, editor.body);
         });
 
-        test('setStart setEnd in nested containers', function() {
-            editor.value('this is only a test of the <span>emergency</span> <em>broadcast</em> system');
+        test("setStart setEnd in nested containers", function() {
+            editor.value("this is only a test of the <span>emergency</span> <em>broadcast</em> system");
 
             var range = editor.createRange();
 
@@ -94,8 +94,8 @@
             equal(range.commonAncestorContainer, editor.body);
         });
 
-        test('selectNode selects node', function() {
-            editor.value('<strong>golga</strong>');
+        test("selectNode selects node", function() {
+            editor.value("<strong>foo</strong>");
 
             var range = editor.createRange();
 
@@ -109,8 +109,8 @@
             equal(range.endOffset, 1);
         });
 
-        test('selectNodeContents selects node contents', function() {
-            editor.value('<strong>golga</strong>');
+        test("selectNodeContents selects node contents", function() {
+            editor.value("<strong>foo</strong>");
 
             var range = editor.createRange();
 
@@ -124,8 +124,8 @@
             equal(range.endOffset, 1);
         });
 
-        test('selectNodeContents on img', function() {
-            editor.value('<img src="foo" />');
+        test("selectNodeContents on img", function() {
+            editor.value("<img src='foo' />");
 
             var range = editor.createRange();
 
@@ -146,79 +146,79 @@
             equal(range.endOffset, 0);
         });
 
-        test('insertNode on expanded range in text element', function() {
-            editor.value('golgafrincham');
+        test("insertNode on expanded range in text element", function() {
+            editor.value("foo");
 
             var range = editor.createRange();
-            range.setStart(editor.body.firstChild, 5);
-            range.setEnd(editor.body.firstChild, 10);
+            range.setStart(editor.body.firstChild, 1);
+            range.setEnd(editor.body.firstChild, 2);
 
-            range.insertNode(editor.document.createElement('span'));
+            range.insertNode(editor.document.createElement("span"));
 
-            equal(editor.value(), 'golga<span></span>frincham');
+            equal(editor.value(), "f<span></span>oo");
         });
 
-        test('insertNode on expanded range inserts node at start', function() {
-            editor.value('<p>foo</p>');
+        test("insertNode on expanded range inserts node at start", function() {
+            editor.value("<p>foo</p>");
 
             var range = editor.createRange();
             range.selectNode(editor.body.firstChild);
 
-            range.insertNode(editor.document.createElement('span'));
+            range.insertNode(editor.document.createElement("span"));
 
-            equal(editor.value(), '<span></span><p>foo</p>');
+            equal(editor.value(), "<span></span><p>foo</p>");
         });
 
-        test('insertNode on collapsed range at end of text element', function() {
+        test("insertNode on collapsed range at end of text element", function() {
 
-            editor.value('golgafrincham<br />');
+            editor.value("foo<br />");
 
             var range = editor.createRange();
-            range.setStart(editor.body.firstChild, 13);
-            range.setEnd(editor.body.firstChild, 13);
+            range.setStart(editor.body.firstChild, 3);
+            range.setEnd(editor.body.firstChild, 3);
 
-            range.insertNode(editor.document.createElement('span'));
+            range.insertNode(editor.document.createElement("span"));
 
-            equal(editor.value(), 'golgafrincham<span></span><br />');
+            equal(editor.value(), "foo<span></span><br />");
         });
 
-        test('extractContents on text node', function() {
-            editor.value('golgafrincham');
+        test("extractContents on text node", function() {
+            editor.value("foobar");
 
             var range = editor.createRange();
 
-            range.setStart(editor.body.firstChild, 5);
-            range.setEnd(editor.body.firstChild, 9);
+            range.setStart(editor.body.firstChild, 3);
+            range.setEnd(editor.body.firstChild, 5);
 
             var contents = range.extractContents();
 
-            equal(contents.firstChild.nodeValue, 'frin');
-            equal(editor.value(), 'golgacham');
+            equal(contents.firstChild.nodeValue, "ba");
+            equal(editor.value(), "foor");
         });
 
-        test('extractContents extracts tags', function() {
-            editor.value('golga<strong>frincham</strong>');
+        test("extractContents extracts tags", function() {
+            editor.value("foo<strong>bar</strong>");
 
             var range = editor.createRange();
 
-            range.setStart(editor.body.lastChild.firstChild, 4);
+            range.setStart(editor.body.lastChild.firstChild, 1);
             range.setEndAfter(editor.body.lastChild);
 
             var contents = range.extractContents();
 
             equal(contents.childNodes.length, 1);
-            equal(contents.firstChild.tagName.toLowerCase(), 'strong');
-            equal(contents.firstChild.innerHTML.toLowerCase(), 'cham');
-            equal(editor.value(), 'golga<strong>frin</strong>');
+            equal(contents.firstChild.tagName.toLowerCase(), "strong");
+            equal(contents.firstChild.innerHTML.toLowerCase(), "ar");
+            equal(editor.value(), "foo<strong>b</strong>");
         });
 
-        test('extractContents after range manipulation', function() {
-            editor.value('golga<strong>frincham</strong>');
+        test("extractContents after range manipulation", function() {
+            editor.value("foo<strong>bar</strong>");
 
             var range = editor.createRange();
 
             range.setStart(editor.body.firstChild, 0);
-            range.setEnd(editor.body.firstChild, 4);
+            range.setEnd(editor.body.firstChild, 2);
 
             range = range.cloneRange();
             range.collapse(false);
@@ -226,15 +226,15 @@
 
             var contents = range.extractContents();
 
-            equal(editor.value(), 'golg');
+            equal(editor.value(), "fo");
             equal(contents.childNodes.length, 2);
-            equal(contents.firstChild.nodeValue, 'a');
-            equal(contents.lastChild.tagName.toLowerCase(), 'strong');
-            equal(contents.lastChild.firstChild.nodeValue, 'frincham');
+            equal(contents.firstChild.nodeValue, "o");
+            equal(contents.lastChild.tagName.toLowerCase(), "strong");
+            equal(contents.lastChild.firstChild.nodeValue, "bar");
         });
 
-        test('extractContents updates original range when container is element node', function() {
-            var range = createRangeFromText(editor, '<strong>|fo|o</strong>');
+        test("extractContents updates original range when container is element node", function() {
+            var range = createRangeFromText(editor, "<strong>|fo|o</strong>");
 
             var marker = new kendo.ui.editor.Marker();
             marker.add(range);
@@ -250,8 +250,8 @@
             equal(range.endOffset, 3);
         });
 
-        test('extractContents updates original range when whole text element is removed', function() {
-            editor.value('<p>foo</p><p>bar<a></a>baz</p>')
+        test("extractContents updates original range when whole text element is removed", function() {
+            editor.value("<p>foo</p><p>bar<a></a>baz</p>")
             var range = editor.createRange();
             var anchor = editor.body.lastChild.childNodes[1];
             range.selectNode(anchor);
@@ -268,8 +268,8 @@
             equal(range.endOffset, 1);
         });
 
-        test('extractContents does not update original range when outside range', function() {
-            editor.value('<p>foo</p><p>bar<strong>baz</strong>foo</p>')
+        test("extractContents does not update original range when outside range", function() {
+            editor.value("<p>foo</p><p>bar<strong>baz</strong>foo</p>")
             var range = editor.createRange();
             var anchor = editor.body.lastChild.childNodes[1];
             range.selectNode(anchor);
@@ -285,8 +285,8 @@
             equal(range.endOffset, 2);
         });
 
-        test('setStart to marker after end collapses range to new start', function() {
-            var range = createRangeFromText(editor, '|f|oo');
+        test("setStart to marker after end collapses range to new start", function() {
+            var range = createRangeFromText(editor, "|f|oo");
 
             range.setStart(editor.body.firstChild, 2);
 
@@ -298,8 +298,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setEnd to marker before start collapses range to new end', function() {
-            var range = createRangeFromText(editor, 'fo|o|');
+        test("setEnd to marker before start collapses range to new end", function() {
+            var range = createRangeFromText(editor, "fo|o|");
 
             range.setEnd(editor.body.firstChild, 1);
 
@@ -311,8 +311,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setStart validation across nested containers', function() {
-            var range = createRangeFromText(editor, '<div><span>f|oo</span><span>ba|r</span></div>');
+        test("setStart validation across nested containers", function() {
+            var range = createRangeFromText(editor, "<div><span>f|oo</span><span>ba|r</span></div>");
 
             range.setStart(editor.body.firstChild, 2);
 
@@ -324,8 +324,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setStart validation across sibling containers', function() {
-            var range = createRangeFromText(editor, '<span>f|oo</span><span>ba|r</span><span>baz</span');
+        test("setStart validation across sibling containers", function() {
+            var range = createRangeFromText(editor, "<span>f|oo</span><span>ba|r</span><span>baz</span");
 
             range.setStart(editor.body.lastChild.firstChild, 2);
 
@@ -337,8 +337,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setEnd validation across nested containers', function() {
-            var range = createRangeFromText(editor, '<div><span>f|oo</span><span>ba|r</span></div>');
+        test("setEnd validation across nested containers", function() {
+            var range = createRangeFromText(editor, "<div><span>f|oo</span><span>ba|r</span></div>");
 
             range.setEnd(editor.body.firstChild, 0);
 
@@ -350,8 +350,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setEnd validation across sibling containers', function() {
-            var range = createRangeFromText(editor, '<span>foo</span><span>ba|r</span><span>ba|z</span');
+        test("setEnd validation across sibling containers", function() {
+            var range = createRangeFromText(editor, "<span>foo</span><span>ba|r</span><span>ba|z</span");
 
             range.setEnd(editor.body.firstChild.firstChild, 2);
 
@@ -363,8 +363,8 @@
             equal(range.collapsed, true);
         });
 
-        test('setEndAfter validation across sibling containers', function() {
-            editor.value('<p>foo<strong>bar</strong>baz<br />foo<em>bar</em>baz<br />foo</p>');
+        test("setEndAfter validation across sibling containers", function() {
+            editor.value("<p>foo<strong>bar</strong>baz<br />foo<em>bar</em>baz<br />foo</p>");
 
             var range = editor.createRange();
 
@@ -382,8 +382,8 @@
             equal(range.collapsed, true);
         });
 
-        test('getRange returns body when editor is empty', function() {
-            editor.value('');
+        test("getRange returns body when editor is empty", function() {
+            editor.value("");
             editor.focus();
 
             var range = editor.getRange();
