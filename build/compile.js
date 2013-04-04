@@ -226,6 +226,14 @@ function extract_widget_info(ast) {
             var options = def.properties.filter(function(prop){
                 return prop.key == "options";
             })[0];
+            var events = def.properties.filter(function(prop){
+                return prop.key == "events";
+            })[0];
+            if (events && events.value instanceof u2.AST_Array) {
+                events = events.value.elements.map(function(el){
+                    return dumb_eval(el);
+                });
+            }
             if (options) {
                 var name = options.value.properties.filter(function(prop){
                     return prop.key == "name";
@@ -235,6 +243,7 @@ function extract_widget_info(ast) {
                     widgets.push({
                         name     : name,
                         options  : options.value.properties.map(function(prop){ return prop.key }),
+                        events   : events,
                         inherits : node.expression.expression.print_to_string({ beautify: true }),
                         file     : node.start.file,
                         line     : node.start.line,
