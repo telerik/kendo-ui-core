@@ -875,7 +875,7 @@ kendo_module({
 
                 that._positionColumnResizeHandle(container);
 
-                that.resizable = container.kendoResizable({
+                that.resizable = new ui.Resizable(container, {
                     handle: ".k-resize-handle",
                     hint: function(handle) {
                         return $('<div class="k-grid-resize-indicator" />').css({
