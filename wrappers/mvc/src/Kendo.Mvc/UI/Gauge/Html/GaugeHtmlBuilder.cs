@@ -20,8 +20,7 @@ namespace Kendo.Mvc.UI.Html
         public IHtmlNode CreateGauge()
         {
             return new HtmlElement("div")
-                .Attributes(gauge.HtmlAttributes)
-                .PrependClass(UIPrimitives.Widget, "k-chart");
+                .Attributes(gauge.HtmlAttributes);
         }
 
         /// <summary>
