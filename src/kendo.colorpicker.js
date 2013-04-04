@@ -50,6 +50,7 @@ kendo_module({
             }
         },
         options: {
+            name: "ColorSelector",
             value: null,
             _standalone: true
         },

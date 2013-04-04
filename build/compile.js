@@ -227,17 +227,18 @@ function extract_widget_info(ast) {
                 return prop.key == "options";
             })[0];
             if (options) {
-                options = options.value;
-                var name = options.properties.filter(function(prop){
+                var name = options.value.properties.filter(function(prop){
                     return prop.key == "name";
                 })[0];
                 if (name && name.value) {
                     name = name.value.value;
                     widgets.push({
-                        name : name,
-                        file : node.start.file,
-                        line : node.start.line,
-                        col  : node.start.col
+                        name     : name,
+                        options  : options.value.properties.map(function(prop){ return prop.key }),
+                        inherits : node.expression.expression.print_to_string({ beautify: true }),
+                        file     : node.start.file,
+                        line     : node.start.line,
+                        col      : node.start.col
                     });
                 }
             }
