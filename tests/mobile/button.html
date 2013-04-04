@@ -121,11 +121,19 @@
                 ok(dom.find("span.km-badge").html() == "5");
             });
 
-            test("badge attrbute init and badge method gets the badge value if no arguments", function() {
+            test("badge attribute init and badge method gets the badge value if no arguments", function() {
                 var dom = $('<button data-role="button" data-badge="6"></button>');
                 kendo.mobile.init(dom);
 
                 ok(dom.data("kendoMobileButton").badge() == "6");
+            });
+
+            test("badge method removes the badge if passed false", function() {
+                var dom = $('<button data-role="button" data-badge="6"></button>');
+                kendo.mobile.init(dom);
+                dom.data("kendoMobileButton").badge(false);
+
+                ok(!dom.find(".km-badge")[0]);
             });
 
             test("binding visible to false hides the widget", function() {

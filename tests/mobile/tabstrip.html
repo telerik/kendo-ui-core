@@ -144,12 +144,21 @@
                 ok(dom.find("a:first span.km-badge").html() == "5");
             });
 
-            test("badge attrbute init and badge method gets a badge by tab number or tab selector", function() {
+            test("badge attribute init and badge method gets a badge by tab number or tab selector", function() {
                 var dom = $('<nav data-role="tabstrip"><a href="foo" id="foo" data-badge="3">foo</a><a href="bar" id="bar">bar</a></nav>');
                 kendo.mobile.init(dom);
                 var tabstrip = dom.data("kendoMobileTabStrip");
 
                 ok(tabstrip.badge(0) == tabstrip.badge("a:first"));
+            });
+
+            test("badge method removes the badge if passed false", function() {
+                var dom = $('<nav data-role="tabstrip"><a href="foo" id="foo" data-badge="3">foo</a><a href="bar" id="bar">bar</a></nav>');
+                kendo.mobile.init(dom);
+                var tabstrip = dom.data("kendoMobileTabStrip");
+
+                tabstrip.badge(0, false);
+                ok(!dom.find(".km-badge")[0]);
             });
 
             test("badge method gets the badge value if no arguments", function() {

@@ -286,6 +286,42 @@
 
                 ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") != "none", "display is not 'none'");
             });
+
+            test("badge method sets a badge where there is none", function() {
+                var dom = $('<ul data-role="buttongroup"><li id="foo">foo</li><li id="bar">bar</li></ul>');
+                kendo.mobile.init(dom);
+
+                dom.data("kendoMobileButtonGroup").badge("li:first", 5);
+
+                ok(dom.find("li:first span.km-badge").html() == "5");
+            });
+
+            test("badge attribute init and badge method gets a badge by tab number or tab selector", function() {
+                var dom = $('<ul data-role="buttongroup"><li id="foo" data-badge="3">foo</li><li id="bar">bar</li></ul>');
+                kendo.mobile.init(dom);
+                var buttongroup = dom.data("kendoMobileButtonGroup");
+
+                ok(buttongroup.badge(0) == buttongroup.badge("li:first"));
+            });
+
+            test("badge method removes the badge if passed false", function() {
+                var dom = $('<ul data-role="buttongroup"><li id="foo" data-badge="3">foo</li><li id="bar">bar</li></ul>');
+                kendo.mobile.init(dom);
+                var buttongroup = dom.data("kendoMobileButtonGroup");
+
+                buttongroup.badge(0, false);
+                ok(!dom.find(".km-badge")[0]);
+            });
+
+            test("badge method gets the badge value if no arguments", function() {
+                var dom = $('<ul data-role="buttongroup"><li id="foo">foo</li><li id="bar">bar</li></ul>');
+                kendo.mobile.init(dom);
+                var buttongroup = dom.data("kendoMobileButtonGroup");
+
+                buttongroup.badge("li:last", 6);
+
+                ok(buttongroup.badge("li:last") == "6");
+            });
         </script>
     </body>
 </html>
