@@ -79,6 +79,12 @@
                     "meta": "This demo shows the core functionality of Kendo UI Mobile Button Group when placed in a NavBar."
                 },
                 {
+                    "text": "Badges",
+                    "url": "buttongroup/badges.html",
+                    "title": "Example of Kendo UI Mobile Button Group used with badges",
+                    "meta": "This demo shows the core functionality of Kendo UI Mobile Button Group when used with badges."
+                },
+                {
                     "text": "Events",
                     "url": "buttongroup/events.html",
                     "title": "Events in Kendo UI Mobile Button Group | Kendo ButtonGroup Demo",
