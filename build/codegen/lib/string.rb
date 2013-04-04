@@ -18,7 +18,7 @@ class String
     end
 
     def html_encode
-        return self.sub('&', '&amp;').sub('<', '&lt;').sub('>', '&gt;')
+        return self.gsub('&', '&amp;').gsub('<', '&lt;').gsub('>', '&gt;')
     end
 
     def dos
