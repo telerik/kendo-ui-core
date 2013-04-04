@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Culoare fundal</value>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>Inserează hyperlink</value>
+  </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Sigur doriți să ștergeți " {0} " ?</value>
+  </data>
+  <data name="Editor_DialogButtonSeparator" xml:space="preserve">
+    <value>sau</value>
+  </data>
+  <data name="Editor_DialogCancel" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="Editor_DialogInsert" xml:space="preserve">
+    <value>Inserează</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>Nu a fost găsit un director cu acest nume.</value>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>plasați fișierele aici pentru încărcare</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Dosar gol</value>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>Selectează familia de fonturi</value>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>(font moștenit)</value>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>Selectează dimensiunea fontului</value>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>(dimensiune moștenită)</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Culoare</value>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Editor_ImageAltText" xml:space="preserve">
+    <value>Text alternativ</value>
+  </data>
+  <data name="Editor_ImageWebAddress" xml:space="preserve">
+    <value>Adresă Web</value>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>Indentare</value>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>Inserează HTML</value>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>Inserează imagine</value>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>Inserează listă ordonată</value>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>Inserează listă neordonată</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>Fișierul selectat "{0}" nu este valid. Tipurile de fișiere acceptate sunt {1}.</value>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>Cursiv</value>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>Centrează textul</value>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>Aliniază textul</value>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>Aliniază textul la stânga</value>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>Aliniază textul la dreapta</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
+    <value>Deschide link-ul într-o fereastră nouă</value>
+  </data>
+  <data name="Editor_LinkText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Editor_LinkToolTip" xml:space="preserve">
+    <value>Indiciu</value>
+  </data>
+  <data name="Editor_LinkWebAddress" xml:space="preserve">
+    <value>Adresă Web</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Ordonare după:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Dimensiune</value>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>Anulare indentare</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>Există deja un fișier cu numele " {0} " în directorul curent. Doriți să-l suprascrieți ?</value>
+  </data>
+  <data name="Editor_Search" xml:space="preserve">
+    <value>Caută</value>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>Tăiat</value>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>Stiluri</value>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>Indice</value>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>Exponent</value>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>Subliniat</value>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>Elimină hyperlink</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Upload fișier</value>
+  </data>
+  <data name="Filter_And" xml:space="preserve">
+    <value>Și</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Șterge</value>
+  </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>Egal cu</value>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>După</value>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>După sau egal cu</value>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>Inainte de</value>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Inainte sau egal cu</value>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>Diferit de</value>
+  </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>Egal cu</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>Diferit de</value>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>Filtrează</value>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Criterii filtrare:</value>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>este fals</value>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>este adevărat</value>
+  </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>Egal cu</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>Mai mare decât</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Mai mare sau egal cu</value>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>Mai mic decât</value>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Mai mic sau egal cu</value>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>Diferit de</value>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Sau</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>- Selectează valoare -</value>
+  </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>Conține</value>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Nu conține</value>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Se termină cu</value>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>Egal cu</value>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>Diferit de</value>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Incepe cu</value>
+  </data>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>Anulează modificările</value>
+  </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Coloane</value>
+  </data>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>Sigur doriți să ștergeți acest element ?</value>
+  </data>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>Adaugă element nou</value>
+  </data>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>Șterge</value>
+  </data>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>Modifică</value>
+  </data>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>Salvează modificările</value>
+  </data>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>Selectează</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Sortare ascendentă</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Sortare descendentă</value>
+  </data>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>Actualizează</value>
+  </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Trageți un antet de coloană și plasați-l aici pentru a grupa după acea coloană</value>
+  </data>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>{0} - {1} din {2} elemente</value>
+  </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>Nu există elemente pentru afișare</value>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Prima pagină</value>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>elemente per pagină</value>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Ultima pagină</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Pagina următoare</value>
+  </data>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>din {0}</value>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Pagina</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Pagina precedentă</value>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Actualizează</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>plasați fișierele aici pentru încărcare</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Elimină</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Incearcă din nou</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Selectează...</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>eșuat</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>încărcat</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>încarcă</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Încărcă fișierele</value>
+  </data>
+</root>
