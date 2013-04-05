@@ -6,9 +6,11 @@
 
     public class TreeViewCheckboxesSettings : JsonObject
     {
+        public const string DefaultTemplate = "<input type='checkbox' name='checkedNodes' #= item.checked ? 'checked' : '' # value='#= item.id #' />";
+
         public TreeViewCheckboxesSettings()
         {
-            Template = "<input type='checkbox' name='checkedNodes' #= item.checked ? 'checked' : '' # value='#= item.id #' />";
+            Template = DefaultTemplate;
         }
 
         public bool Enabled { get; set; }

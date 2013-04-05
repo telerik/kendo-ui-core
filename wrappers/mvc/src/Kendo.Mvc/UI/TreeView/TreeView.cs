@@ -1,11 +1,13 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Fluent;
     using Extensions;
     using Infrastructure;
     using Kendo.Mvc.Resources;
@@ -175,9 +177,21 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        internal bool UsesTemplates()
+        {
+            return !string.IsNullOrEmpty(TemplateId) || !string.IsNullOrEmpty(Template) || (string)Checkboxes.Template != TreeViewCheckboxesSettings.DefaultTemplate;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
+
+            // use client-side rendering if templates are set
+            if (this.UsesTemplates())
+            {
+                this.DataSource.Data = SerializeItems(Items);
+                this.LoadOnDemand = false;
+            }
             
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
@@ -256,6 +270,11 @@ namespace Kendo.Mvc.UI
 
             base.WriteInitializationScript(writer);
         }
+  
+        private IEnumerable SerializeItems(IList<TreeViewItem> items)
+        {
+            return from item in items select item.Serialize();
+        }
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
@@ -264,7 +283,7 @@ namespace Kendo.Mvc.UI
 
             IHtmlNode treeViewTag = builder.TreeViewTag();
 
-            if (Items.Any())
+            if (Items.Any() && !this.UsesTemplates())
             {
                 if (SelectedIndex != -1 && Items.Count < SelectedIndex)
                 {
