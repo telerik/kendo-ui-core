@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.popover.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
+        <style>
+            .virtual-cell {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .box {
+                margin: 0px 20px 10px 20px;
+                border-bottom: 1px solid black;
+                width: 200px;
+            }
+
+            .box img {
+                height: 70px;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="view" data-init="buildVirtual">
+        </div>
+        <script>
+            var ds = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: 'http://www.reddit.com/r/reactiongifs.json',
+                        dataType: 'jsonp',
+                        jsonp: 'jsonp',
+                        cache: true,
+                    },
+                    parameterMap: function(data, type) {
+                        data.limit = 100;
+                        return data;
+                    }
+                },
+
+                serverPaging: true,
+                pageSize: 100,
+                schema: {
+                    data: "data.children"
+                }
+            });
+
+            ds.fetch(function() {
+                new kendo.mobile.Application();
+            });
+
+            var template = kendo.template("<div class='box'><img src='#: data.thumbnail #' /><h3>#: data.title #</h3></div>");
+
+            var CellList = kendo.Class.extend({
+                init: function(view) {
+                    var that = this;
+
+                    this.cells = [];
+                    this.top = 0;
+                    this.bottom = 0;
+                    var container = view.contentElement(),
+                        targetHeight = view.element.height() * 2,
+                        cell,
+                        prevCell,
+                        itemCount = 0;
+
+                    while(this.bottom < targetHeight) {
+                        cell = new Cell(container);
+                        cell.content(this.cellContent(itemCount ++));
+                        cell.below(prevCell);
+                        prevCell = cell;
+                        this.cells.push(cell);
+                        this.bottom = cell.bottom;
+                    }
+
+                    var bottomContentIndex = itemCount;
+
+                    view.scroller.bind("scroll", function(e) {
+                        if (e.scrollTop < 0) {
+                            return;
+                        }
+
+                        bottom = e.scrollTop + view.element.height();
+
+                        while (that.bottom < bottom) {
+                            if (!ds.at(bottomContentIndex + 1)) {
+                                view.scroller.virtualHeight(that.bottom);
+                                break;
+                            }
+
+                            bottomContentIndex++;
+                            var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
+                            topCell.content(that.cellContent(bottomContentIndex));
+                            topCell.below(bottomCell);
+                            that.cells.push(topCell);
+                            that.bottom = topCell.bottom;
+                            that.top = that.cells[0].top;
+                        }
+
+                        while (that.top > e.scrollTop) {
+                            var topCell = that.cells[0], bottomCell = that.cells.pop();
+                            bottomCell.content(that.cellContent(--bottomContentIndex - itemCount));
+                            bottomCell.above(topCell);
+                            that.bottom = that.cells[that.cells.length - 1].bottom;
+                            that.top = bottomCell.top;
+                            that.cells.unshift(bottomCell);
+                        }
+                    });
+                },
+
+                cellContent: function(i) {
+                    return template(ds.at(i));
+                }
+            });
+
+            var Cell = kendo.Class.extend({
+                init: function(container) {
+                    this.element = $("<div class='virtual-cell' />");
+                    container.append(this.element);
+                    this.top = 0;
+                },
+
+                content: function(theContent) {
+                    this.element.html(theContent);
+                    this.height = this.element.outerHeight(true);
+                    this.bottom = this.height + this.top;
+                },
+
+                above: function(cell) {
+                    if (cell) {
+                        this.top = cell.top - this.height;
+                        this.bottom = cell.top;
+                        this.element.css("transform", "translate3d(0, " + this.top + "px, 0)");
+                    }
+                },
+
+                below: function(cell) {
+                    if (cell) {
+                        this.top = cell.bottom;
+                        this.bottom = this.height + this.top;
+                        this.element.css("transform", "translate3d(0, " + this.top + "px, 0)");
+                    }
+                }
+            });
+
+
+            function buildVirtual(e) {
+                new CellList(e.view);
+            }
+
+        </script>
+    </body>
+</html>

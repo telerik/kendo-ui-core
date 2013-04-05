@@ -241,6 +241,7 @@ kendo_module({
                     element: inner,
                     container: element,
                     forcedEnabled: that.options.zoom,
+                    virtual: that.options.virtual,
                     change: function() {
                         that.trigger(RESIZE);
                     }
@@ -313,6 +314,10 @@ kendo_module({
             kendo.onResize($.proxy(that.reset, that));
         },
 
+        virtualHeight: function(height) {
+            this.dimensions.y.virtualSize(height);
+        },
+
         scrollHeight: function() {
             return this.scrollElement[0].scrollHeight;
         },
@@ -326,6 +331,7 @@ kendo_module({
             zoom: false,
             pullOffset: 140,
             elastic: true,
+            virtual: true,
             useNative: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
@@ -418,28 +424,35 @@ kendo_module({
             movable = that.movable,
             dimension = that.dimensions[axis],
             tapCapture = that.tapCapture,
+            scrollBar,
+            end = $.noop;
 
-            scrollBar = new ScrollBar({
-                axis: axis,
-                movable: movable,
-                dimension: dimension,
-                container: that.element
-            }),
 
-            inertia = new DragInertia({
+            if (!that.options.virtual) {
+                scrollBar = new ScrollBar({
+                    axis: axis,
+                    movable: movable,
+                    dimension: dimension,
+                    container: that.element
+                });
+
+                end = function() {
+                    scrollBar.hide();
+                }
+
+                that.pane[axis].bind(CHANGE, function() {
+                    scrollBar.show();
+                });
+            }
+
+            that[axis + "inertia"] = new DragInertia({
                 axis: axis,
                 movable: movable,
                 tapCapture: tapCapture,
                 userEvents: that.userEvents,
                 dimension: dimension,
                 elastic: that.options.elastic,
-                end: function() { scrollBar.hide(); }
-            });
-
-            that[axis + "inertia"] = inertia;
-
-            that.pane[axis].bind(CHANGE, function() {
-                scrollBar.show();
+                end: end
             });
         }
     });

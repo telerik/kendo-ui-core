@@ -25,6 +25,7 @@ kendo_module({
         invalidZeroEvents = OS && OS.android,
         mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
         KEYUP = "keyup",
+        VIRTUAL_SIZE = 1000000,
         CHANGE = "change",
 
         // Draggable events
@@ -155,6 +156,11 @@ kendo_module({
 
             $.extend(that, options);
 
+            if (!this.horizontal && this.virtual) {
+                this.forcedEnabled = true;
+                this._virtualSize = VIRTUAL_SIZE;
+            }
+
             that.scale = 1;
             that.max = 0;
 
@@ -166,6 +172,13 @@ kendo_module({
                 that.measure = "height";
                 that.scrollSize = "scrollHeight";
                 that.axis = "y";
+            }
+        },
+
+        virtualSize: function(size) {
+            if (!this._virtualSize !== size) {
+                this._virtualSize = size;
+                this.update();
             }
         },
 
@@ -191,7 +204,7 @@ kendo_module({
 
         update: function(silent) {
             var that = this,
-                total = that.getTotal(),
+                total = (!this.horizontal && that.virtual) ? that._virtualSize : that.getTotal(),
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
