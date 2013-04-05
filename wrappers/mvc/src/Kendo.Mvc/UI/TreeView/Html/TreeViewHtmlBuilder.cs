@@ -1,6 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
     using System.Web.Mvc;
     using Extensions;
 
@@ -13,12 +12,16 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode TreeViewTag()
         {
-            IHtmlNode div = ComponentTag("div")
-                .PrependClass(UIPrimitives.Widget, "k-treeview", UIPrimitives.ResetStyle);
+            IHtmlNode div = ComponentTag("div");
 
-            if (Component.Items.Count > 0)
+            if (!Component.UsesTemplates())
             {
-                ListTag().AppendTo(div);
+                div.PrependClass(UIPrimitives.Widget, "k-treeview", UIPrimitives.ResetStyle);
+
+                if (Component.Items.Count > 0)
+                {
+                    ListTag().AppendTo(div);
+                }
             }
 
             return div;
