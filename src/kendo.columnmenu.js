@@ -112,7 +112,9 @@ kendo_module({
                 that.filterMenu.destroy();
             }
 
-            that.dataSource.unbind("refresh", that._refreshHandler);
+            if (that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
+            }
 
             if (that.options.columns) {
                 that.owner.unbind("columnShow", that._updateColumnsMenuHandler);
