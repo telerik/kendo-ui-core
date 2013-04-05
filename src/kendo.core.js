@@ -2502,14 +2502,23 @@ function pad(number, digits, end) {
         Widget: Widget,
         roles: {},
         progress: function(container, toggle) {
-            var mask = container.find(".k-loading-mask");
+            var mask = container.find(".k-loading-mask"),
+                support = kendo.support,
+                browser = support.browser,
+                isRtl, leftRight, webkitCorrection, containerScrollLeft;
 
             if (toggle) {
                 if (!mask.length) {
+                    isRtl = support.isRtl(container);
+                    leftRight = isRtl ? "right" : "left";
+                    containerScrollLeft = container.scrollLeft();
+                    webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
+
                     mask = $("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
                         .width("100%").height("100%")
-                        .prependTo(container)
-                        .css({ top: container.scrollTop(), left: container.scrollLeft() });
+                        .css("top", container.scrollTop())
+                        .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
+                        .prependTo(container);
                 }
             } else if (mask) {
                 mask.remove();
