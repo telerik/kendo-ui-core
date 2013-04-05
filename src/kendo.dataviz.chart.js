@@ -5951,7 +5951,7 @@ kendo_module({
                 legend = this.options.legend,
                 labels = legend.labels || {},
                 inactiveItems = legend.inactiveItems || {},
-                labelTemplate, labelColor, markerColor;
+                color, labelColor, markerColor, defaults;
 
             if (chart.legendItems) {
                 data = chart.legendItems;
@@ -5967,23 +5967,23 @@ kendo_module({
                                 series: currentSeries
                             });
                         }
-
-                        if (currentSeries.visible === false) {
-                            labelColor = inactiveItems.labels.color;
-                            markerColor = inactiveItems.markers.color;
-                        } else {
-                            labelColor = labels.color;
-                            markerColor = currentSeries.color;
-                        }
-
-                        data.push({
-                            text: text,
-                            labelColor: labelColor,
-                            markerColor: markerColor,
-                            series: currentSeries,
-                            active: currentSeries.visible
-                        });
                     }
+
+                    if (currentSeries.visible === false) {
+                        labelColor = inactiveItems.labels.color;
+                        markerColor = inactiveItems.markers.color;
+                    } else {
+                        labelColor = labels.color;
+                        markerColor = color;
+                    }
+
+                    data.push({
+                        text: text,
+                        labelColor: labelColor,
+                        markerColor: markerColor,
+                        series: currentSeries,
+                        active: currentSeries.visible
+                    });
                 }
             }
 
