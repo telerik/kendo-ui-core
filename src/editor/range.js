@@ -537,6 +537,7 @@ function adoptContainer(textRange, range, start) {
 
 function adoptEndPoint(textRange, range, start) {
     var cursorNode = dom.create(range.ownerDocument, 'a'), cursor = textRange.duplicate();
+    cursorNode.innerHTML = "&#feff;";
     cursor.collapse(start);
     var parent = cursor.parentElement();
     do {
