@@ -283,7 +283,9 @@ kendo_module({
 
             that.link.unbind(NS);
 
-            that.dataSource.unbind("change", that._refreshHandler);
+            if (that._refreshHandler) {
+                that.dataSource.unbind("change", that._refreshHandler);
+            }
         },
 
         _bind: function(expression) {
