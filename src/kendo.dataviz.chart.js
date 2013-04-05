@@ -1921,6 +1921,9 @@ kendo_module({
                 if (nextStep) {
                     step = nextStep;
                     units = totalUnits / step;
+                } else if (baseUnit === last(BASE_UNITS)) {
+                    step = math.ceil(totalUnits / maxDateGroups);
+                    break;
                 } else if (autoUnit) {
                     baseUnit = BASE_UNITS[autoUnitIx++] || last(BASE_UNITS);
                     totalUnits = span / TIME_PER_UNIT[baseUnit];
