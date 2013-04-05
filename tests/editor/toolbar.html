@@ -20,7 +20,7 @@
                 }
             }).data("kendoEditor");
 
-            var componentType = kendo.support.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
+            var componentType = kendo.support.browser.msie || kendo.support.touch ? 'kendoDropDownList' : 'kendoComboBox';
 
             module("Toolbar", {
                 teardown: function() {
