@@ -551,7 +551,7 @@ kendo_module({
             if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip())) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
-            chart.bind(LEGEND_ITEM_CLICK, proxy(chart._legendLabelClick, chart));
+            chart.bind(LEGEND_ITEM_CLICK, proxy(chart.legendItemClick, chart));
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -1073,11 +1073,11 @@ kendo_module({
             chart._click(e);
         },
 
-        _legendLabelClick: function(e) {
+        legendItemClick: function(e) {
             var chart = this,
                 plotArea = chart._plotArea,
                 currentSeries = (plotArea.srcSeries || plotArea.series)[e.seriesIndex],
-                paneName, point;
+                point, transitionsState;
 
             if (inArray(currentSeries.type, [PIE, DONUT])) {
                 point = currentSeries.data[e.pointIndex];
@@ -1088,10 +1088,16 @@ kendo_module({
                 }
             } else {
                 currentSeries.visible = !currentSeries.visible;
-                paneName = plotArea.seriesPaneName(currentSeries);
             }
 
-            chart.redraw(paneName);
+            if (chart.options.transitions) {
+                chart.options.transitions = false;
+                transitionsState = true;
+            }
+            chart.redraw();
+            if (transitionsState) {
+                chart.options.transitions = true;
+            }
         },
 
         destroy: function() {
@@ -1259,7 +1265,6 @@ kendo_module({
             widget.trigger(LEGEND_ITEM_CLICK, {
                 element: $(e.target),
                 text: item.text,
-                color: item.color,
                 series: item.series,
                 seriesIndex: item.series.index,
                 pointIndex: item.pointIndex
@@ -1296,10 +1301,12 @@ kendo_module({
             var legend = this,
                 items = legend.options.items,
                 count = items.length,
-                i;
+                i, item;
 
             for (i = 0; i < count; i++) {
-                legend.append(new LegendLabel(items[i], legend.options.labels));
+                item = items[i];
+                legend.append(new LegendLabel(item, deepExtend({},
+                    legend.options.labels, { color: item.labelColor } )));
             }
         },
 
@@ -1340,7 +1347,7 @@ kendo_module({
             append(group.children, ChartElement.fn.getViewElements.call(legend, view));
 
             for (i = 0; i < count; i++) {
-                color = items[i].color;
+                color = items[i].markerColor;
                 label = children[i];
                 markerBox = Box2D();
                 box = label.box;
@@ -5082,6 +5089,10 @@ kendo_module({
                 width: 1,
                 color: "#939393",
                 padding: 4
+            },
+            inactiveItems: {
+                markers: {},
+                labels: {}
             }
         },
 
@@ -5197,13 +5208,14 @@ kendo_module({
 
         createLegendItem: function(value, point) {
             var chart = this,
-                options = (chart.options.legend || {}).labels || {},
-                text, labelTemplate;
+                labelsOptions = (chart.options.legend || {}).labels || {},
+                inactiveItems = (chart.options.legend || {}).inactiveItems || {},
+                text, labelTemplate, markerColor, labelColor;
 
             if (point && point.visibleInLegend !== false) {
                 text = point.category || "";
-                if ((options || {}).template) {
-                    labelTemplate = template(options.template);
+                if ((labelsOptions || {}).template) {
+                    labelTemplate = template(labelsOptions.template);
                     text = labelTemplate({
                         text: text,
                         series: point.series,
@@ -5213,11 +5225,20 @@ kendo_module({
                     });
                 }
 
+                if (point.visible === false) {
+                    markerColor = (inactiveItems.markers || {}).color;
+                    labelColor = (inactiveItems.labels || {}).color;
+                } else {
+                    markerColor = (point.series || {}).color;
+                    labelColor = labelsOptions.color;
+                }
+
                 chart.legendItems.push({
                     pointIndex: point.index,
                     text: text,
-                    color: point.series.color,
-                    series: point.series
+                    series: point.series,
+                    markerColor: markerColor,
+                    labelColor: labelColor
                 });
             }
         },
@@ -6033,9 +6054,10 @@ kendo_module({
                 count = series.length,
                 data = [],
                 i, currentSeries, text,
-                labels = this.options.legend.labels || {},
-                color,
-                defaults;
+                legend = this.options.legend,
+                labels = legend.labels || {},
+                inactiveItems = legend.inactiveItems || {},
+                color, labelColor, markerColor, defaults;
 
             if (chart.legendItems) {
                 data = chart.legendItems;
@@ -6060,10 +6082,20 @@ kendo_module({
                         color = defaults.color;
                     }
 
+                    if (currentSeries.visible === false) {
+                        labelColor = inactiveItems.labels.color;
+                        markerColor = inactiveItems.markers.color;
+                    } else {
+                        labelColor = labels.color;
+                        markerColor = color;
+                    }
+
                     data.push({
                         text: text,
-                        color: color,
-                        series: currentSeries
+                        labelColor: labelColor,
+                        markerColor: markerColor,
+                        series: currentSeries,
+                        active: currentSeries.visible
                     });
                 }
             }

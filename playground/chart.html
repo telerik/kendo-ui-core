@@ -16,9 +16,23 @@
     </head>
     <body>
         <div id="chart"></div>
+        <div id="chart1"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
+                    series: [{
+                        data: [1,2,3],
+                        name: "first series"
+                    },{
+                        data: [1,2,3],
+                        name: "second series"
+                    },{
+                        data: [1,2,3],
+                        name: "third series"
+                    }]
+                });
+
+                $("#chart1").kendoChart({
                     seriesDefaults: {
                         type: "pie",
                         labels: {

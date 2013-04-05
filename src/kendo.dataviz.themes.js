@@ -191,6 +191,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: WHITE
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#919191"
+                    },
+                    markers: {
+                        color: "#919191"
+                    }
                 }
             },
             seriesDefaults: {
@@ -307,6 +315,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#293135"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#27A5BA"
+                    },
+                    markers: {
+                        color: "#27A5BA"
+                    }
                 }
             },
             seriesDefaults: {
@@ -382,6 +398,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#ffffff"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#66465B"
+                    },
+                    markers: {
+                        color: "#66465B"
+                    }
                 }
             },
             seriesDefaults: {
@@ -498,6 +522,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#232323"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#919191"
+                    },
+                    markers: {
+                        color: "#919191"
+                    }
                 }
             },
             seriesDefaults: {
@@ -573,6 +605,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#4e5968"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#B1BCC8"
+                    },
+                    markers: {
+                        color: "#B1BCC8"
+                    }
                 }
             },
             seriesDefaults: {
@@ -673,6 +713,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#777777"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#CBCBCB"
+                    },
+                    markers: {
+                        color: "#CBCBCB"
+                    }
                 }
             },
             seriesDefaults: {
@@ -752,6 +800,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#ffffff"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#797979"
+                    },
+                    markers: {
+                        color: "#797979"
+                    }
                 }
             },
             seriesDefaults: {
@@ -852,6 +908,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#ffffff"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#A1A7AB"
+                    },
+                    markers: {
+                        color: "#A1A7AB"
+                    }
                 }
             },
             seriesDefaults: {
@@ -976,6 +1040,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#686868"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#B6B6B6"
+                    },
+                    markers: {
+                        color: "#B6B6B6"
+                    }
                 }
             },
             seriesDefaults: {
@@ -1101,6 +1173,14 @@ kendo_module({
             legend: {
                 labels: {
                     color: "#343434"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#9A9A9A"
+                    },
+                    markers: {
+                        color: "#9A9A9A"
+                    }
                 }
             },
             seriesDefaults: {
@@ -1201,7 +1281,6 @@ kendo_module({
             },
             scale: {
                 rangePlaceholderColor: "#b8b8b8",
-
                 labels: {
                     color: "#343434"
                 },

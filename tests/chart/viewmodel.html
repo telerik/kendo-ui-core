@@ -1373,7 +1373,7 @@
                         moduleSetup();
 
                         legend = new dataviz.Legend({
-                            items: [ { text: "Series 1", color: "#f00" } ],
+                            items: [ { text: "Series 1", markerColor: "#f00", labelColor: "#f00" } ],
                             labels: {
                                 font: SANS12
                             }
@@ -1506,12 +1506,6 @@
                 test("event arguments contain series name as text", 1, function() {
                     legendItemClick(function(e) {
                         equal(e.text, "test");
-                    });
-                });
-
-                test("event arguments contain color of the series", 1, function() {
-                    legendItemClick(function(e) {
-                        equal(e.color, "color");
                     });
                 });
 
