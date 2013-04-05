@@ -9,7 +9,6 @@ kendo_module({
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
-        pointers = support.pointers,
         document = window.document,
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
@@ -303,7 +302,7 @@ kendo_module({
 
             element.on(kendo.applyEventMap("down", ns), filter, "_start");
 
-            if (pointers) {
+            if (support.pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
