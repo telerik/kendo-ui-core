@@ -47,6 +47,7 @@
         <div data-role="view" data-init="buildVirtual">
         </div>
         <script>
+            var PAGE_SIZE = 100;
             var ds = new kendo.data.DataSource({
                 transport: {
                     read: {
@@ -55,16 +56,26 @@
                         jsonp: 'jsonp',
                         cache: true,
                     },
+
                     parameterMap: function(data, type) {
-                        data.limit = 100;
+                        console.log(data);
+
+                        var items = ds.data();
+                        if (items.length) {
+                            data.after = items[items.length - 1].data.name;
+                            console.log(data.after);
+                        }
+
+                        data.limit = PAGE_SIZE;
                         return data;
                     }
                 },
 
                 serverPaging: true,
-                pageSize: 100,
+                pageSize: PAGE_SIZE,
                 schema: {
-                    data: "data.children"
+                    data: "data.children",
+                    total: function() { return 100000; }
                 }
             });
 
@@ -82,7 +93,8 @@
                     this.top = 0;
                     this.bottom = 0;
                     var container = view.contentElement(),
-                        targetHeight = view.element.height() * 2,
+                        height = view.content.height(),
+                        targetHeight = height * 5,
                         cell,
                         prevCell,
                         itemCount = 0;
@@ -96,43 +108,63 @@
                         this.bottom = cell.bottom;
                     }
 
-                    var bottomContentIndex = itemCount;
+                    var dataOffset = 0;
+                    var prefetching = false;
 
                     view.scroller.bind("scroll", function(e) {
+
                         if (e.scrollTop < 0) {
                             return;
                         }
 
-                        bottom = e.scrollTop + view.element.height();
+                        var bottom = e.scrollTop + height;
 
-                        while (that.bottom < bottom) {
-                            if (!ds.at(bottomContentIndex + 1)) {
-                                view.scroller.virtualHeight(that.bottom);
-                                break;
+                        if (that.bottom < bottom + height / 2) {
+                            while (that.bottom < bottom + height * 3) {
+
+                                if (!ds.at(dataOffset + itemCount + 20 - ds.skip())) {
+                                    if (!prefetching) {
+                                        console.log('prefetching');
+
+                                        prefetching = true;
+                                        ds.prefetch(dataOffset + itemCount, PAGE_SIZE, function() {
+                                            console.log('prefetch done');
+                                            prefetching  = false;
+                                        });
+                                    }
+                                }
+
+                                dataOffset++;
+                                var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
+                                topCell.content(that.cellContent(dataOffset + itemCount));
+                                topCell.below(bottomCell);
+                                that.cells.push(topCell);
+                                that.bottom = topCell.bottom;
+                                that.top = that.cells[0].top;
                             }
 
-                            bottomContentIndex++;
-                            var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
-                            topCell.content(that.cellContent(bottomContentIndex));
-                            topCell.below(bottomCell);
-                            that.cells.push(topCell);
-                            that.bottom = topCell.bottom;
-                            that.top = that.cells[0].top;
+                            console.log('setting range', dataOffset, itemCount);
+                            ds.range(dataOffset, itemCount);
                         }
 
-                        while (that.top > e.scrollTop) {
-                            var topCell = that.cells[0], bottomCell = that.cells.pop();
-                            bottomCell.content(that.cellContent(--bottomContentIndex - itemCount));
-                            bottomCell.above(topCell);
-                            that.bottom = that.cells[that.cells.length - 1].bottom;
-                            that.top = bottomCell.top;
-                            that.cells.unshift(bottomCell);
+                        if (that.top > e.scrollTop - height / 2 && dataOffset > 0) {
+                            while (that.top > e.scrollTop - height * 3 && dataOffset > 0) {
+                                dataOffset --;
+                                var topCell = that.cells[0], bottomCell = that.cells.pop();
+                                bottomCell.content(that.cellContent(dataOffset));
+                                bottomCell.above(topCell);
+                                that.bottom = that.cells[that.cells.length - 1].bottom;
+                                that.top = bottomCell.top;
+                                that.cells.unshift(bottomCell);
+                            }
+                            ds.range(dataOffset, itemCount);
                         }
+
                     });
                 },
 
                 cellContent: function(i) {
-                    return template(ds.at(i));
+                    return template(ds.at(i - ds.skip()));
                 }
             });
 
