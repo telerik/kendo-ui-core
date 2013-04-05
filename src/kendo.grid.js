@@ -1933,6 +1933,10 @@ kendo_module({
             dataTable
             .on((kendo.support.touch ? "touchstart" + NS : "mousedown" + NS), NAVROW + ">" + NAVCELL, proxy(tableClick, that))
             .on("focus" + NS, function() {
+                if (kendo.support.touch) {
+                    return;
+                }
+
                 var current = currentProxy();
                 if (current && current.is(":visible")) {
                     current.addClass(FOCUSED);
@@ -3641,6 +3645,10 @@ kendo_module({
        var currentTarget = $(e.currentTarget),
            isHeader = currentTarget.is("th"),
            currentTable = currentTarget.closest("table")[0];
+
+       if (kendo.support.touch) {
+           return;
+       }
 
        if (currentTable !== this.table[0] && currentTable !== this.thead.parent()[0]) {
            return;
