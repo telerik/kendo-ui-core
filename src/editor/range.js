@@ -453,7 +453,10 @@ var W3CSelection = Class.extend({
     },
 
     getRangeAt: function () {
-        var textRange, range = new W3CRange(this.ownerDocument), selection = this.ownerDocument.selection, element;
+        var textRange,
+            range = new W3CRange(this.ownerDocument),
+            selection = this.ownerDocument.selection,
+            element, commonAncestor;
 
         try {
             textRange = selection.createRange();
@@ -465,11 +468,12 @@ var W3CSelection = Class.extend({
             return range;
         }
 
-        if (selection.type == 'Control') {
+        if (selection.type == "Control") {
             range.selectNode(textRange.item(0));
         } else {
-            adoptEndPoint(textRange, range, true);
-            adoptEndPoint(textRange, range, false);
+            commonAncestor = textRangeContainer(textRange);
+            adoptEndPoint(textRange, range, commonAncestor, true);
+            adoptEndPoint(textRange, range, commonAncestor, false);
 
             if (range.startContainer.nodeType == 9) {
                 range.setStart(range.endContainer, range.startOffset);
@@ -479,7 +483,7 @@ var W3CSelection = Class.extend({
                 range.setEnd(range.startContainer, range.endOffset);
             }
 
-            if (textRange.compareEndPoints('StartToEnd', textRange) === 0) {
+            if (textRange.compareEndPoints("StartToEnd", textRange) === 0) {
                 range.collapse(false);
             }
 
@@ -513,65 +517,96 @@ var W3CSelection = Class.extend({
     }
 });
 
+function textRangeContainer(textRange) {
+    var left = textRange.duplicate(),
+        right = textRange.duplicate();
+
+    left.collapse(true);
+    right.collapse(false);
+
+    return dom.commonAncestor(textRange.parentElement(), left.parentElement(), right.parentElement());
+}
+
 function adoptContainer(textRange, range, start) {
     // find anchor node and offset
-    var container = range[start ? 'startContainer' : 'endContainer'];
-    var offset = range[start ? 'startOffset' : 'endOffset'], textOffset = 0;
-    var anchorNode = isDataNode(container) ? container : container.childNodes[offset] || null;
-    var anchorParent = isDataNode(container) ? container.parentNode : container;
+    var container = range[start ? "startContainer" : "endContainer"],
+        offset = range[start ? "startOffset" : "endOffset"],
+        textOffset = 0,
+        isData = isDataNode(container),
+        anchorNode = isData ? container : container.childNodes[offset] || null,
+        anchorParent = isData ? container.parentNode : container,
+        cursor, cursorNode;
+
     // visible data nodes need a text offset
     if (container.nodeType == 3 || container.nodeType == 4) {
         textOffset = offset;
     }
 
-    // create a cursor element node to position range (since we can't select text nodes)
-    var cursorNode = anchorParent.insertBefore(dom.create(range.ownerDocument, 'a'), anchorNode);
+    // create a cursor element node to position range (since we can"t select text nodes)
+    cursorNode = anchorParent.insertBefore(dom.create(range.ownerDocument, "a"), anchorNode);
 
-    var cursor = range.ownerDocument.body.createTextRange();
+    cursor = range.ownerDocument.body.createTextRange();
     cursor.moveToElementText(cursorNode);
     dom.remove(cursorNode);
-    cursor[start ? 'moveStart' : 'moveEnd']('character', textOffset);
+    cursor[start ? "moveStart" : "moveEnd"]("character", textOffset);
     cursor.collapse(false);
-    textRange.setEndPoint(start ? 'StartToStart' : 'EndToStart', cursor);
+    textRange.setEndPoint(start ? "StartToStart" : "EndToStart", cursor);
 }
 
-function adoptEndPoint(textRange, range, start) {
-    var cursorNode = dom.create(range.ownerDocument, 'a'), cursor = textRange.duplicate();
-    cursorNode.innerHTML = "&#feff;";
+function adoptEndPoint(textRange, range, commonAncestor, start) {
+    var cursorNode = dom.create(range.ownerDocument, "a"),
+        cursor = textRange.duplicate(),
+        comparison = start ? "StartToStart" : "StartToEnd",
+        result, parent, target,
+        previous, next,
+        args, index;
+
+    cursorNode.innerHTML = "\ufeff";
     cursor.collapse(start);
-    var parent = cursor.parentElement();
+
+    parent = cursor.parentElement();
+
+    if (!dom.isAncestorOrSelf(commonAncestor, parent)) {
+        parent = commonAncestor;
+    }
+
+    // detect range end points
+    // insert cursorNode within the textRange parent and move the cursor until it gets outside of the textRange
     do {
         parent.insertBefore(cursorNode, cursorNode.previousSibling);
         cursor.moveToElementText(cursorNode);
-    } while (cursor.compareEndPoints(start ? 'StartToStart' : 'StartToEnd', textRange) > 0 && cursorNode.previousSibling);
+    } while ((result = cursor.compareEndPoints(comparison, textRange)) > 0 && cursorNode.previousSibling);
 
-    cursor.setEndPoint(start ? 'EndToStart' : 'EndToEnd', textRange);
+    target = cursorNode.nextSibling;
 
-    var target = cursorNode.nextSibling;
+    if (result == -1 && isDataNode(target)) {
+        cursor.setEndPoint(start ? "EndToStart" : "EndToEnd", textRange);
 
-    if (!target) {
-        // at end of text node
-        target = cursorNode.previousSibling;
+        dom.remove(cursorNode);
 
-        if (target && isDataNode(target)) { // in case of collapsed range in empty tag
-            range.setEnd(target, target.nodeValue.length);
-            dom.remove(cursorNode);
+        args = [target, cursor.text.length];
+    } else {
+        previous = !start && cursorNode.previousSibling;
+        next = start && cursorNode.nextSibling;
+
+        if (isDataNode(next)) {
+            args = [next, 0];
+        } else if (isDataNode(previous)) {
+            args = [previous, previous.length];
         } else {
-            range.selectNodeContents(parent);
-            dom.remove(cursorNode);
-            range.endOffset -= 1; // cursorNode was in parent
+            index = findNodeIndex(cursorNode);
+
+            if (parent.nextSibling && index == parent.childNodes.length - 1) {
+                args = [parent.nextSibling, 0];
+            } else {
+                args = [parent, index];
+            }
         }
 
-        return;
+        dom.remove(cursorNode);
     }
 
-    dom.remove(cursorNode);
-
-    if (isDataNode(target)) {
-        range[start ? 'setStart' : 'setEnd'](target, cursor.text.length);
-    } else {
-        range[start ? 'setStartBefore' : 'setEndBefore'](target);
-    }
+    range[start ? "setStart" : "setEnd"].apply(range, args);
 }
 
 var RangeEnumerator = Class.extend({
@@ -580,7 +615,7 @@ var RangeEnumerator = Class.extend({
             var nodes = [];
 
             function visit(node) {
-                if (dom.is(node, 'img') || (node.nodeType == 3 && !dom.isWhitespace(node))) {
+                if (dom.is(node, "img") || (node.nodeType == 3 && !dom.isWhitespace(node))) {
                     nodes.push(node);
                 } else {
                     node = node.firstChild;

@@ -87,6 +87,14 @@
             ok(undefined !== selection.addRange);
         });
 
+        function selectAndGet(range) {
+            var selection = editor.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            return selection.getRangeAt(0);
+        }
+
         test('addRange with text range', function() {
             editor.value('foo');
 
@@ -94,75 +102,57 @@
             range.setStart(editor.body.firstChild, 1);
             range.setEnd(editor.body.firstChild, 2);
 
-            var selection = editor.getSelection();
+            range = selectAndGet(range);
 
-            selection.removeAllRanges();
-            selection.addRange(range);
-
-            range = editor.getSelection().getRangeAt(0);
-
-            equal(range.startOffset, 1);
-            equal(range.endOffset, 2);
             equal(range.startContainer, editor.body.firstChild);
+            equal(range.startOffset, 1);
             equal(range.endContainer, editor.body.firstChild);
+            equal(range.endOffset, 2);
         });
 
         test('addRange with collapsed range', function() {
-            editor.value('<strong>golga</strong>frin');
+            editor.value('<strong>foo</strong>bar');
 
             var range = editor.createRange();
             range.setStart(editor.body.lastChild, 2);
             range.setEnd(editor.body.lastChild, 2);
 
-            var selection = editor.getSelection();
-
-            selection.removeAllRanges();
-            selection.addRange(range);
-
-            range = editor.getSelection().getRangeAt(0);
+            range = selectAndGet(range);
 
             equal(range.startContainer, editor.body.lastChild);
-            equal(range.endContainer, editor.body.lastChild);
             equal(range.startOffset, 2);
+            equal(range.endContainer, editor.body.lastChild);
             equal(range.endOffset, 2);
         });
 
         test('addRange with text to element range', function() {
-            editor.value('<strong>Haifisch</strong>, der hat Tr�nen');
+            editor.value('<strong>foo</strong>bar baz');
 
-            var selection = editor.getSelection();
             var range = editor.createRange();
             range.setStart(editor.body.lastChild, 0);
             range.setEnd(editor.body.lastChild, 5);
 
-            selection.removeAllRanges();
-            selection.addRange(range);
+            range = selectAndGet(range);
 
-            range = selection.getRangeAt(0);
-
-            equal(range.startOffset, 0);
-            equal(range.endOffset, 5);
             equal(range.startContainer, editor.body.lastChild);
+            equal(range.startOffset, 0);
             equal(range.endContainer, editor.body.lastChild);
+            equal(range.endOffset, 5);
         });
 
         test('addRange with collapsed range at start of element', function() {
             editor.value('<p>foo</p><p>bar</p>');
 
-            var selection = editor.getSelection();
             var range = editor.createRange();
             range.setStart(editor.body.lastChild.firstChild, 0);
             range.setEnd(editor.body.lastChild.firstChild, 0);
 
-            selection.removeAllRanges();
-            selection.addRange(range);
+            range = selectAndGet(range);
 
-            range = selection.getRangeAt(0);
-
-            equal(range.startOffset, 0);
-            equal(range.endOffset, 0);
             equal(range.startContainer, editor.body.lastChild.firstChild);
+            equal(range.startOffset, 0);
             equal(range.endContainer, editor.body.lastChild.firstChild);
+            equal(range.endOffset, 0);
         });
 
         test('getRangeAt on selection of single text node', function() {
@@ -173,10 +163,10 @@
 
             var range = editor.getSelection().getRangeAt(0);
 
-            equal(range.startOffset, 0);
-            equal(range.endOffset, 3);
             equal(range.startContainer, textNode);
+            equal(range.startOffset, 0);
             equal(range.endContainer, textNode);
+            equal(range.endOffset, 3);
         });
 
         test('getRangeAt on selection of part of text node', function() {
@@ -187,10 +177,10 @@
 
             var range = editor.getSelection().getRangeAt(0);
 
-            equal(range.startOffset, 1);
-            equal(range.endOffset, 2);
             equal(range.startContainer, textNode);
+            equal(range.startOffset, 1);
             equal(range.endContainer, textNode);
+            equal(range.endOffset, 2);
         });
 
         test('getRangeAt on selection with end points in text node and tag', function() {
@@ -200,10 +190,10 @@
 
             var range = editor.getSelection().getRangeAt(0);
 
-            equal(range.startOffset, 1);
-            equal(range.endOffset, 2);
             equal(range.startContainer, editor.body.firstChild);
+            equal(range.startOffset, 1);
             equal(range.endContainer, editor.body.lastChild.firstChild);
+            equal(range.endOffset, 2);
         });
 
         test('getRangeAt on selection with end points in tag and text node', function() {
@@ -213,10 +203,10 @@
 
             var range = editor.getSelection().getRangeAt(0);
 
-            equal(range.startOffset, 2);
-            equal(range.endOffset, 1);
             equal(range.startContainer, editor.body.firstChild.firstChild);
+            equal(range.startOffset, 2);
             equal(range.endContainer, editor.body.lastChild);
+            equal(range.endOffset, 1);
         });
 
         test('getRangeAt on selection with end points in the middle of different tags', function() {
@@ -226,10 +216,10 @@
 
             var range = editor.getSelection().getRangeAt(0);
 
-            equal(range.startOffset, 1);
-            equal(range.endOffset, 2);
             equal(range.startContainer, editor.body.firstChild.firstChild);
+            equal(range.startOffset, 1);
             equal(range.endContainer, editor.body.lastChild.firstChild);
+            equal(range.endOffset, 2);
         });
 
         test('getRangeAt on selection with end points in the middle of different text nodes', function() {
@@ -239,25 +229,21 @@
 
             var range = editor.getSelection().getRangeAt(0);
 
-            equal(range.startOffset, 1);
-            equal(range.endOffset, 1);
             equal(range.startContainer, editor.body.firstChild);
+            equal(range.startOffset, 1);
             equal(range.endContainer, editor.body.lastChild);
+            equal(range.endOffset, 1);
         });
 
         test('getRangeAt on collapsed selection at end of paragraph', function() {
             editor.value('<p>foo</p>');
 
-            var selection = editor.getSelection(),
-                range = editor.createRange();
+            var range = editor.createRange();
 
             range.setStart(editor.body.firstChild.firstChild, 3);
             range.collapse(true);
 
-            selection.removeAllRanges();
-            selection.addRange(range);
-
-            range = selection.getRangeAt(0);
+            range = selectAndGet(range);
 
             ok(range.collapsed);
             equal(range.startOffset, 3);
