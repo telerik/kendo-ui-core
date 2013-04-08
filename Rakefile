@@ -372,6 +372,12 @@ bundle :name => 'winjs.commercial',
             '.' => WIN_JS_RESOURCES
        }
 
+bundle :name => 'icenium',
+       :contents => {
+            'styles' => ICENIUM_MIN_CSS,
+            'js' => ICENIUM_MIN_JS
+       }
+
 # Kendo UI Complete for JSP
 bundle :name => 'jsp.trial',
        :license => 'src-license-complete',
@@ -459,7 +465,8 @@ BUNDLES = [
     'php.trial',
     'web.commercial',
     'web.open-source',
-    'winjs.commercial'
+    'winjs.commercial',
+    'icenium'
 ]
 
 namespace :build do
@@ -492,11 +499,23 @@ namespace :build do
 
         zip_bundles.push(zip_demos)
 
-        tree :to => "/kendo-builds/WinJS/#{destination}",
+        tree :to => "#{ARCHIVE_ROOT}/WinJS/#{destination}",
              :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
              :root => 'dist/bundles/winjs.commercial/'
 
         zip_bundles.push("#{ARCHIVE_ROOT}/WinJS/#{destination}")
+
+        tree :to => "#{ARCHIVE_ROOT}/Icenium/#{destination}/js",
+             :from => FileList[ICENIUM_MIN_JS].pathmap('dist/bundles/icenium/js/%f'),
+             :root => 'dist/bundles/icenium/js'
+
+        zip_bundles.push("#{ARCHIVE_ROOT}/Icenium/#{destination}/js")
+
+        tree :to => "#{ARCHIVE_ROOT}/Icenium/#{destination}/styles",
+             :from => FileList[ICENIUM_MIN_CSS].pathmap('dist/bundles/icenium/styles/%f'),
+             :root => 'dist/bundles/icenium/styles'
+
+        zip_bundles.push("#{ARCHIVE_ROOT}/Icenium/#{destination}/styles")
 
         clean_task = "#{ARCHIVE_ROOT}/#{destination}"
 

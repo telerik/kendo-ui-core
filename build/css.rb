@@ -23,14 +23,25 @@ DATAVIZ_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/dataviz\// }
 WIN_SRC_CSS = FileList['styles/web/kendo.common.css'].include('styles/dataviz/kendo.dataviz.css').include('styles/web/kendo.rtl.css')
 WIN_MIN_CSS = FileList['styles/web/kendo.winjs.min.css']
 
+ICENIUM_MIN_CSS = FileList['styles/mobile/kendo.icenium.min.css']
+
 file_merge 'styles/web/kendo.winjs.css' => [
     'styles/web/kendo.common.css',
     'styles/dataviz/kendo.dataviz.css',
 ]
+
 file 'styles/web/kendo.winjs.css' => 'build/css.rb'
 
+file_merge 'styles/mobile/kendo.icenium.css' => [
+    'styles/mobile/kendo.mobile.all.css',
+    'styles/dataviz/kendo.dataviz.css',
+]
+
+file 'styles/mobile/kendo.icenium.css' => 'build/css.rb'
+
 CLEAN.include(MIN_CSS)
-    .include('styles/winjs/kendo.winjs.css')
+    .include('styles/web/kendo.winjs.css')
+    .include('styles/mobile/kendo.icenium.css')
     .include(LESS.ext('css'))
     .include(LEGACY_MIN_CSS)
 

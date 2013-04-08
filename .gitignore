@@ -30,6 +30,7 @@ src/kendo.mobile.js
 src/kendo.web.js
 src/kendo.editor.js
 src/kendo.aspnetmvc.js
+src/kendo.icenium.js
 styles/**/*.css
 !styles/web/kendo.rtl.css
 !styles/dataviz/kendo.dataviz.css
