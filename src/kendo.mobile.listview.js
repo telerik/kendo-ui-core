@@ -96,6 +96,7 @@ kendo_module({
 
             that._userEvents = new kendo.UserEvents(element, {
                 filter: ITEM_SELECTOR,
+                allowSelection: true,
                 tap: function(e) {
                     that._click(e);
                 }
