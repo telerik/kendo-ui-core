@@ -485,6 +485,7 @@ kendo_module({
             jQuery.ajax({
                   type: this.options.async.removeVerb,
                   dataType: "json",
+                  dataFilter: normalizeJSON,
                   url: this.options.async.removeUrl,
                   traditional: true,
                   data: params,
@@ -1097,9 +1098,7 @@ kendo_module({
             json = "";
 
         try {
-            if (typeof input !== "undefined" && input !== "") {
-                json = $.parseJSON(input);
-            }
+            json = $.parseJSON(normalizeJSON(input));
             success = true;
         } catch (e) {
             onError();
@@ -1108,6 +1107,14 @@ kendo_module({
         if (success) {
             onSuccess(json);
         }
+    }
+
+    function normalizeJSON(input) {
+        if (typeof input === "undefined" || input === "") {
+            input = "{}";
+        }
+
+        return input;
     }
 
     function stopEvent(e) {
