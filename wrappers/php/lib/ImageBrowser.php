@@ -40,7 +40,8 @@ class ImageBrowserEntry {
 }
 
 function getImageType($filename) {
-    $type = getimagesize($filename)[2];
+    $info = getimagesize($filename);
+    $type = $info[2];
 
     if ($type == IMAGETYPE_JPEG) {
         $type = 'jpeg';
