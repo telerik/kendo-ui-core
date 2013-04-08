@@ -1830,17 +1830,17 @@ kendo_module({
         options: {
             type: CATEGORY,
             categories: [],
+            startAngle: 270,
             labels: {
                 visible: true,
                 step: 1,
                 skip: 0,
                 margin: getSpacing(5)
             },
-            minorGridLines: {
+            majorGridLines: {
                 visible: true,
                 width: 1,
-                color: BLACK,
-                reverse: false
+                color: BLACK
             }
             // TODO: Required?
             //zIndex: 1,
@@ -1860,20 +1860,88 @@ kendo_module({
             // Axis.fn.destroy.call(this);
         },
 
-        renderGridLines: function() {
-            // TODO: Grid circles, lines
+        // TODO: Grid circles, lines
+        renderGridLines: function(view) {
+            var axis = this,
+                options = axis.options,
+                majorDivisions = axis.getMajorDivisions(),
+                gridLines = [];
+
+            if (options.majorGridLines.visible) {
+                gridLines = axis.getGridLines(
+                    view, majorDivisions, options.majorGridLines
+                );
+            }
+
+            return gridLines;
+        },
+
+        // TODO: Sane naming
+        getGridLines: function(view, angles, options) {
+            var axis = this,
+                center = axis.box.center(),
+                radius = axis.box.width() / 2,
+                modelId = axis.plotArea.options.modelId,
+                i,
+                outerPt,
+                elements = [],
+                lineOptions;
+
+            lineOptions = {
+                data: { modelId: modelId },
+                zIndex: -1,
+                strokeWidth: options.width,
+                stroke: options.color,
+                dashType: options.dashType,
+            };
+
+            for (i = 0; i < angles.length; i++) {
+                outerPt = Point2D.onCircle(center, angles[i], radius);
+
+                // TODO: Inner radius support
+                elements.push(view.createLine(
+                    center.x, center.y, outerPt.x, outerPt.y,
+                    lineOptions
+                ));
+            }
+
+            return elements;
         },
 
         renderPlotBands: function() {
             // TODO: Filled circles, polygons
         },
 
-        reflow: function() {
-            // TODO: Implement
+        getViewElements: function(view) {
+            return this.renderGridLines(view);;
         },
 
-        getViewElements: function(view) {
-            // TODO: Implement
+        getDivisions: function(count) {
+            var axis = this,
+                options = axis.options,
+                step = 360 / count,
+                a = options.startAngle,
+                angles = [],
+                i;
+
+            for (i = 0; i < count; i++) {
+                angles.push(round(a, COORD_PRECISION));
+                a += step;
+            }
+
+            return options.reverse ? angles.reverse() : angles;
+        },
+
+        getMajorDivisions: function() {
+            var axis = this;
+
+            return axis.getDivisions(axis.options.categories.length);
+        },
+
+        getMinorDivisions: function() {
+            var axis = this;
+
+            return axis.getDivisions(axis.options.categories.length * 2);
         },
 
         getSlot: function(from, to) {
@@ -1889,8 +1957,7 @@ kendo_module({
             // CategoryAxis.fn.getCategory(this, point);
         },
 
-        createAxisLabel: function(index, labelOptions) {
-            // TODO: Extract
+        createAxisLabel: function(index, labelOptions) { // TODO: Extract
             // CategoryAxis.fn.createAxisLabel(this, index, labelOptions);
         }
     });
@@ -7612,8 +7679,8 @@ kendo_module({
     });
 
     var PolarPlotArea = PlotAreaBase.extend({
-        init: function(options) {
-            PlotAreaBase.fn.init.call(this, options);
+        init: function(series, options) {
+            PlotAreaBase.fn.init.call(this, series, options);
         },
 
         options: {
@@ -7632,7 +7699,21 @@ kendo_module({
             // plotArea.createValueAxis();
         },
 
+        reflow: function(box) {
+            var plotArea = this,
+                size = math.min(box.width(), box.height()),
+                square = new Box2D(box.x1, box.y1, box.x1 + size, box.y1 + size);
+
+            PlotAreaBase.fn.reflow.call(this, square);
+        },
+
         createCategoryAxis: function() {
+            var plotArea = this,
+                categoryAxis;
+
+            categoryAxis = new PolarCategoryAxis(plotArea.options.categoryAxis);
+
+            plotArea.appendAxis(categoryAxis);
         },
 
         reflowAxes: function (panes){

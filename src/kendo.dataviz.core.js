@@ -123,6 +123,15 @@ kendo_module({
         }
     };
 
+    Point2D.onCircle = function(c, a, r) {
+        a *= DEGREE;
+
+        return new Point2D(
+            c.x + r * math.cos(a),
+            c.y + r * math.sin(a)
+        );
+    };
+
     var Box2D = function(x1, y1, x2, y2) {
         var box = this;
 

@@ -171,6 +171,7 @@ kendo_module({
             );
         },
 
+        // TODO: Refactor to (p1, p2, options)
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
                 new SVGLine([new Point2D(x1, y1),
