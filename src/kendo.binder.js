@@ -64,7 +64,7 @@ kendo_module({
             if (value) {
                 var parent = value.parent();
 
-                if (parents.indexOf(parent) < 0) {
+                if ($.inArray(parent, parents) < 0) {
                     parents = [parent].concat(parents);
                 }
             }
