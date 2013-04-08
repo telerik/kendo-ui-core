@@ -507,8 +507,10 @@ kendo_module({
                 return;
             }
 
-            options[option] = that._parse(value);
-            that.element.attr("aria-value" + option, options[option]);
+            options[option] = value;
+            that.element
+                .attr("aria-value" + option, value)
+                .attr(option, value);
         },
 
         _spin: function(step, timeout) {
