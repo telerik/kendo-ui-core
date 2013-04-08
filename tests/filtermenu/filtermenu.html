@@ -72,9 +72,11 @@
                 }
             });
 
-            function setup(dom, options) {
+            function setup(dom, options, init) {
                 var menu = new FilterMenu(dom, options);
-                menu._init();
+                if (init !== false) {
+                    menu._init();
+                }
                 return menu;
             }
 
@@ -517,6 +519,26 @@
                 });
 
                 ok(filterMenu.link.hasClass("k-state-active"));
+            });
+
+            test("applies active state before is opened", function() {
+                var filterMenu = setup(dom, {
+                    dataSource: dataSource
+                }, false);
+
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                ok(filterMenu.link.hasClass("k-state-active"), "The link is not marked as active");
+            });
+
+            test("applies active state when filtered before is created", function() {
+                dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = setup(dom, {
+                    dataSource: dataSource
+                }, false);
+
+                ok(filterMenu.link.hasClass("k-state-active"), "The link is not marked as active");
             });
 
             test("applies active state on nested expressions", function() {
