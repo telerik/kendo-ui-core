@@ -103,7 +103,7 @@ namespace :intellisense do
 
                 File.open("dist/kendo.intellisense-#{branch}.js", "w") do |f|
                     f.write get_intellisense(INTELLISENSEDOC_SOURCES)
-                    sh "node_modules/jshint/bin/hint #{f.path}"
+                    sh "node_modules/jshint/bin/jshint #{f.path}"
                 end
             end
         end
