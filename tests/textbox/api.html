@@ -404,6 +404,20 @@
                 equal(textbox.options.max, 0);
             });
 
+            test("min method changes min attribute", function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox.min(-10.12);
+                equal(textbox.element.attr("min"), -10.12);
+            });
+
+            test("max method changes max attribute", function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox.max(10.12);
+                equal(textbox.element.attr("max"), 10.12);
+            });
+
             test("step method sets step value", function() {
                 var textbox = new NumericTextBox(input, {
                     culture: "bg-BG"
@@ -422,6 +436,14 @@
                 textbox.step(0);
 
                 equal(textbox.options.step, 1);
+            });
+
+            test("step method sets step attribute", function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox.step("0.1");
+
+                equal(textbox.element.attr("step"), 0.1);
             });
 
             test("focusing text input should call _focus", 2, function() {
