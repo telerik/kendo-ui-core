@@ -851,7 +851,7 @@ kendo_module({
             }
 
             element.html(options);
-            element[0].selectedIndex = selectedIndex;
+            element[0].selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
         },
 
         _reset: function() {

@@ -56,6 +56,14 @@
                 equal(dom.data("kendoDropDownList").value(), "bar");
             });
 
+            test("selects first item on source binding", function() {
+                var dom = $('<select data-role="dropdownlist" data-bind="source:items" />');
+
+                kendo.bind(dom, { items: ["foo", "bar"] } );
+
+                equal(dom.data("kendoDropDownList").value(), "foo");
+            });
+
             test("initializes complex value from view model", function() {
                 var dom = $('<select data-value-field="text" data-role="dropdownlist" data-bind="value:value,source:items" />');
 

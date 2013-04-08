@@ -15,7 +15,6 @@ kendo_module({
         DISABLED = "disabled",
         READONLY = "readonly",
         CHANGE = "change",
-        SELECT = "select",
         FOCUSED = "k-state-focused",
         DEFAULT = "k-state-default",
         STATEDISABLED = "k-state-disabled",
@@ -83,7 +82,7 @@ kendo_module({
                     optionLabel = that._optionLabelText(options.optionLabel),
                     useOptionLabel = optionLabel && options.index === 0;
 
-                    if (element.is(SELECT)) {
+                    if (that._isSelect) {
                         if (useOptionLabel) {
                             text = optionLabel;
                         } else {
@@ -182,7 +181,7 @@ kendo_module({
                 that.popup._position();
             }
 
-            if (that.element.is(SELECT)) {
+            if (that._isSelect) {
                 if (optionLabel && length) {
                     optionLabel = that._optionLabelText(optionLabel);
                     optionLabel = '<option value="">' + optionLabel + "</option>";
