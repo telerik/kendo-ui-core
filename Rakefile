@@ -23,7 +23,6 @@ else
     ADMIN_LOGIN = 'petyo.ivanov@telerik.com'
 end
 
->>>>>>> 3ea1587... Copy internal builds in LiB Archive directory
 ADMIN_PASS = 'ultra'
 
 require 'version'
