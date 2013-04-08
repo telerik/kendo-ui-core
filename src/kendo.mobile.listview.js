@@ -101,6 +101,8 @@ kendo_module({
                 }
             });
 
+            element.css("-ms-touch-action", "auto");
+
             element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
 
