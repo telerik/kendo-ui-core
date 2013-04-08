@@ -88,7 +88,7 @@ namespace :vsdoc do
 
                 File.open("dist/kendo.vsdoc-#{branch}.js", "w") do |f|
                     f.write get_vsdoc(VSDOC_SOURCES)
-                    sh "node_modules/jshint/bin/hint #{f.path}"
+                    sh "node_modules/jshint/bin/jshint #{f.path}"
                 end
             end
         end
