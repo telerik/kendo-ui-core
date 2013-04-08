@@ -642,6 +642,13 @@
     padding: 0 .3em;
 }
 
+.km-wp input::selection,
+.km-wp textarea::selection
+{
+    color: @accent-text;
+    background: @accent-background;
+}
+
 .km-wp-light input[type=password],
 .km-wp-light input[type=search],
 .km-wp-light input[type=number],
@@ -963,23 +970,17 @@
 {
     position: absolute;
     display: inline-block;
-    content: "\e0ea";
+    content: "\a0";
     top: 0;
     left: 0;
     border: 0;
-    color: @main-text-dark;
     width: 12em;
-    height: 0;
     margin: 0;
     padding: 0;
+    height: 0;
     text-align: left;
     font-family: "Kendo UI";
-}
-
-.km-wp .km-loader .km-loading:after,
-.km-wp .km-scroller-refresh .km-icon:after
-{
-    margin-top: -.52em;
+    vertical-align: top;
 }
 
 .km-wp .km-scroller-refresh:after,
@@ -1004,7 +1005,7 @@
 .km-wp .km-loader .km-loading
 {
     left: 50%;
-    margin-left: -6em;
+    margin-left: -7em;
     top: 46%;
     font-size: .3em;
     line-height: 0;
@@ -1034,6 +1035,8 @@
 .km-wp .km-scroller-refresh .km-icon:before
 {
     opacity: 0;
+    height: .6em;
+    border-left: .7em solid;
     .animation(km-wpload 2s infinite linear);
 }
 
