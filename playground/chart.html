@@ -21,10 +21,29 @@
             $(function() {
                 $("#chart").kendoChart({
                     series: [{
-                        data: [1,2,3]
+                        data: [1,2,3],
+                        name: "first series"
                     },{
-                        data: [1,2,3]
+                        data: [1,2,3],
+                        name: "second series"
+                    },{
+                        data: [1,2,3],
+                        name: "third series"
                     }]
+                });
+
+                $("#chart1").kendoChart({
+                    seriesDefaults: {
+                        // TODO: Finalize naming
+                        // polarLine, polarArea, polarBar
+                        type: "polarLine"
+                    },
+                    series: [{
+                        data: [1, 2, 3]
+                    }],
+                    categoryAxis: {
+                        categories: ["A", "B", "C"]
+                    }
                 });
             });
         </script>

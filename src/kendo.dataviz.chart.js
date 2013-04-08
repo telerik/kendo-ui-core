@@ -126,6 +126,9 @@ kendo_module({
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
+        POLAR_AREA = "polarArea",
+        POLAR_BAR = "polarBar",
+        POLAR_LINE = "polarLine",
         POINTER = "pointer",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -176,6 +179,9 @@ kendo_module({
         ZOOM_END = "zoomEnd",
         CATEGORICAL_CHARTS = [
             BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
+        ],
+        POLAR_CHARTS = [
+            POLAR_LINE, POLAR_AREA, POLAR_BAR
         ],
         XY_CHARTS = [
             SCATTER, SCATTER_LINE, BUBBLE
@@ -454,8 +460,10 @@ kendo_module({
                 pieSeries = [],
                 donutSeries = [],
                 bulletSeries = [],
+                polarSeries = [],
                 plotArea;
 
+            // TODO: Extract into a classier function
             for (i = 0; i < length; i++) {
                 currentSeries = series[i];
 
@@ -463,6 +471,8 @@ kendo_module({
                     categoricalSeries.push(currentSeries);
                 } else if (inArray(currentSeries.type, XY_CHARTS)) {
                     xySeries.push(currentSeries);
+                } else if (inArray(currentSeries.type, POLAR_CHARTS)) {
+                    polarSeries.push(currentSeries);
                 } else if (currentSeries.type === PIE) {
                     pieSeries.push(currentSeries);
                 } else if (currentSeries.type === DONUT) {
@@ -478,6 +488,8 @@ kendo_module({
                 plotArea = new DonutPlotArea(donutSeries, options);
             } else if (xySeries.length > 0) {
                 plotArea = new XYPlotArea(xySeries, options);
+            } else if (polarSeries.length > 0) {
+                plotArea = new PolarPlotArea(polarSeries, options);
             } else {
                 plotArea = new CategoricalPlotArea(categoricalSeries, options);
             }
@@ -1803,6 +1815,83 @@ kendo_module({
                 category = valueOrDefault(options.categories[index], "");
 
             return new AxisLabel(category, index, dataItem, labelOptions);
+        }
+    });
+
+    var PolarCategoryAxis = ChartElement.extend({
+        init: function(options) {
+            var axis = this;
+
+            ChartElement.fn.init.call(axis, options);
+
+            axis.createLabels();
+        },
+
+        options: {
+            type: CATEGORY,
+            categories: [],
+            labels: {
+                visible: true,
+                step: 1,
+                skip: 0,
+                margin: getSpacing(5)
+            },
+            minorGridLines: {
+                visible: true,
+                width: 1,
+                color: BLACK,
+                reverse: false
+            }
+            // TODO: Required?
+            //zIndex: 1,
+        },
+
+        range: function() {
+            return { min: 0, max: this.options.categories.length };
+        },
+
+        createLabels: function() {
+            // TODO: Extract
+            // Axis.fn.createLabels.call(this);
+        },
+
+        destroy: function() {
+            // TODO: Extract
+            // Axis.fn.destroy.call(this);
+        },
+
+        renderGridLines: function() {
+            // TODO: Grid circles, lines
+        },
+
+        renderPlotBands: function() {
+            // TODO: Filled circles, polygons
+        },
+
+        reflow: function() {
+            // TODO: Implement
+        },
+
+        getViewElements: function(view) {
+            // TODO: Implement
+        },
+
+        getSlot: function(from, to) {
+            // TODO: Implement
+        },
+
+        getCategoryIndex: function(point) {
+            // TODO: Implement
+        },
+
+        getCategory: function(point) {
+            // TODO: Extract
+            // CategoryAxis.fn.getCategory(this, point);
+        },
+
+        createAxisLabel: function(index, labelOptions) {
+            // TODO: Extract
+            // CategoryAxis.fn.createAxisLabel(this, index, labelOptions);
         }
     });
 
@@ -7519,6 +7608,35 @@ kendo_module({
                 });
 
             plotArea.appendChart(donutChart);
+        }
+    });
+
+    var PolarPlotArea = PlotAreaBase.extend({
+        init: function(options) {
+            PlotAreaBase.fn.init.call(this, options);
+        },
+
+        options: {
+            categoryAxis: {
+                categories: []
+            },
+            valueAxis: {}
+        },
+
+        render: function() {
+            var plotArea = this;
+
+            plotArea.createCategoryAxis();
+            // plotArea.aggregateDateSeries();
+            // plotArea.createCharts();
+            // plotArea.createValueAxis();
+        },
+
+        createCategoryAxis: function() {
+        },
+
+        reflowAxes: function (panes){
+            this.reflowPaneAxes(panes[0]);
         }
     });
 
