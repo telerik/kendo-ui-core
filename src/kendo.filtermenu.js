@@ -114,12 +114,14 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 type = "string",
+                operators,
+                initial,
                 link,
                 field;
 
             Widget.fn.init.call(that, element, options);
 
-            that.operators = options.operators || {};
+            operators = that.operators = options.operators || {};
 
             element = that.element;
             options = that.options;
@@ -163,25 +165,6 @@ kendo_module({
 
             that.type = type;
 
-            if (options.appendToElement) { // force creation if used in column menu
-                that._init();
-            }
-        },
-
-        _init: function() {
-            var that = this,
-                options = that.options,
-                operators = that.operators || {},
-                initial,
-                ui = options.ui,
-                setUI = isFunction(ui),
-                role,
-                type = that.type;
-
-            that._refreshHandler = proxy(that.refresh, that);
-
-            that.dataSource.bind("change", that._refreshHandler);
-
             operators = operators[type] || options.operators[type];
 
             for (initial in operators) { // get the first operator
@@ -191,6 +174,28 @@ kendo_module({
             that._defaultFilter = function() {
                 return { field: that.field, operator: initial || "eq", value: "" };
             };
+
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource.bind("change", that._refreshHandler);
+
+            if (options.appendToElement) { // force creation if used in column menu
+                that._init();
+            } else {
+                that.refresh(); //refresh if DataSource is fitered before menu is created
+            }
+        },
+
+        _init: function() {
+            var that = this,
+                options = that.options,
+                operators = that.operators || {},
+                ui = options.ui,
+                setUI = isFunction(ui),
+                role,
+                type = that.type;
+
+            operators = operators[type] || options.operators[type];
 
             if (!setUI) {
                 role = ui || roles[type];
@@ -259,8 +264,10 @@ kendo_module({
                 filters: [ that._defaultFilter(), that._defaultFilter()]
             });
 
-            //NOTE: binding the form element directly causes weird error in IE when grid is bound through MVVM and column is sorted
-            kendo.bind(that.form.children().first(), that.filterModel);
+            if (that.form) {
+                //NOTE: binding the form element directly causes weird error in IE when grid is bound through MVVM and column is sorted
+                kendo.bind(that.form.children().first(), that.filterModel);
+            }
 
             if (that._bind(expression)) {
                 that.link.addClass("k-state-active");
