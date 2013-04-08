@@ -227,6 +227,9 @@ WIN_JS = FileList[
 WIN_MIN_JS = FileList['src/kendo.winjs.min.js']
 WIN_SRC_JS = FileList['src/kendo.winjs.js']
 
+ICENIUM_JS = (DATAVIZ_JS + MOBILE_JS).uniq
+ICENIUM_MIN_JS  = FileList['src/kendo.icenium.min.js'].include('src/jquery.min.js')
+
 # file_merge "src/kendo.web.js" => WEB_JS
 # file "src/kendo.web.js" => JS_BUILDFILE
 
@@ -259,5 +262,9 @@ file "src/kendo.all.js" => (WEB_JS + DATAVIZ_JS + MOBILE_JS).uniq do |t|
 end
 
 file "src/kendo.winjs.js" => WIN_JS do |t|
+    compilejs_bundle(t)
+end
+
+file "src/kendo.icenium.js" => ICENIUM_JS do |t|
     compilejs_bundle(t)
 end
