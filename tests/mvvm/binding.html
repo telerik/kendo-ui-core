@@ -1293,6 +1293,25 @@
                 kendo.bind(dom, kendo.observable({foo: ["bar"]}), kendo.mobile.ui, kendo.ui);
                 ok(dom.find("span").data("kendoMobileTestWidget"));
             });
+
+            test("bind to parent property with nested kendo.bind", function() {
+                var viewModel = kendo.observable({
+                    foo: {
+                        bar: "baz"
+                    },
+                    items: [1,2,3,4]
+                });
+
+                var dom = $("<div></div>");
+
+                kendo.bind(dom, viewModel);
+
+                dom.append($('<div class="nested"><select data-bind="source:items"></select></div>'));
+
+                kendo.bind(dom.find("div.nested"), viewModel.foo);
+
+                equal(dom.find("select")[0].options.length, 4);
+            });
         </script>
 
         <script id="mobile-widget-template" type="text/x-kendo-template">
