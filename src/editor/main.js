@@ -677,17 +677,22 @@ kendo_module({
         },
 
         _DOMNodeInserted: function(e) {
-            var that = this,
-                wrapper = that.wrapper;
+            var wrapper = this.wrapper;
 
             if ($.contains(e.target, wrapper[0]) || wrapper[0] == e.target) {
-                // preserve updated value before re-initializing
-                // don't use update() to prevent the editor from encoding the content too early
-                that.textarea.value = that.value();
-                wrapper.find("iframe").remove();
-                initializeContentElement(that);
-                that.value(that.textarea.value);
+                this.refresh();
             }
+        },
+
+        refresh: function() {
+            var that = this;
+
+            // preserve updated value before re-initializing
+            // don't use update() to prevent the editor from encoding the content too early
+            that.textarea.value = that.value();
+            that.wrapper.find("iframe").remove();
+            initializeContentElement(that);
+            that.value(that.textarea.value);
         },
 
         events: [
