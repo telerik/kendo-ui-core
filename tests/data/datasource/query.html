@@ -3,7 +3,7 @@
     <script src="../../jquery-loader.js"></script>
     <script type="text/javascript" src="../../jquery.mockjax.js"></script>
     <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
-        <script src="../../kendo-test-helpers.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.data.js"></script>
     <link rel="stylesheet" href="../../qunit/qunit/qunit.css" type="text/css" />
@@ -1277,6 +1277,45 @@
 
                 equal(dataSource.view().length, 3);
                 equal(dataSource.total(), 3);
+            });
+
+            test("pushing multiple records to the observable array updates the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }]
+                });
+
+                dataSource.read();
+
+                dataSource.data().push({ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" });
+
+                equal(dataSource.view().length, 4);
+                equal(dataSource.total(), 4);
+            });
+
+            test("adding multiple records to the observable array updates the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }]
+                });
+
+                dataSource.read();
+
+                dataSource.data().splice(0, 0, { foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" });
+
+                equal(dataSource.view().length, 4);
+                equal(dataSource.total(), 4);
+            });
+
+            test("removing multiple records from the observable array updates the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }]
+                });
+
+                dataSource.read();
+
+                dataSource.data().splice(0, 2);
+
+                equal(dataSource.view().length, 0);
+                equal(dataSource.total(), 0);
             });
 
             test("total is calculated on initially empty DataSource", function() {
