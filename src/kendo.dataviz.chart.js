@@ -1864,27 +1864,28 @@ kendo_module({
             return this.box;
         },
 
-        // TODO: Grid circles, lines
-        renderGridLines: function(view) {
+        renderGridLines: function(view, altAxis) {
             var axis = this,
                 options = axis.options,
+                radius = axis.box.center().y - altAxis.getSlot(MAX_VALUE).y1,
                 majorDivisions = axis.getMajorDivisions(),
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
                 gridLines = axis.getGridLines(
-                    view, majorDivisions, options.majorGridLines
+                    view, majorDivisions, radius, options.majorGridLines
                 );
             }
+
+            // TODO: Minor gridlines
 
             return gridLines;
         },
 
         // TODO: Sane naming
-        getGridLines: function(view, angles, options) {
+        getGridLines: function(view, angles, radius, options) {
             var axis = this,
                 center = axis.box.center(),
-                radius = axis.box.width() / 2,
                 modelId = axis.plotArea.options.modelId,
                 i,
                 outerPt,
@@ -1914,10 +1915,6 @@ kendo_module({
 
         renderPlotBands: function() {
             // TODO: Filled circles, polygons
-        },
-
-        getViewElements: function(view) {
-            return this.renderGridLines(view);;
         },
 
         getDivisions: function(count) {
@@ -1978,8 +1975,60 @@ kendo_module({
     });
 
     var PolarNumericAxis = NumericAxis.extend({
-        renderGridLines: function() {
-            return [];
+        options: {
+            majorGridLines: {
+                visible: true
+            }
+        },
+
+        // TODO: Grid circles, lines
+        renderGridLines: function(view, altAxis) {
+            var axis = this,
+                options = axis.options,
+                majorTicks = axis.getTickPositions(options.majorUnit),
+                majorAngles = altAxis.getMajorDivisions(),
+                center = altAxis.box.center(),
+                gridLines = [];
+
+            if (options.majorGridLines.visible) {
+                gridLines = axis.getGridLines(
+                    view, center, majorTicks, majorAngles, options.majorGridLines
+                );
+            }
+
+            return gridLines;
+        },
+
+        // TODO: Sane naming
+        getGridLines: function(view, center, ticks, angles, options) {
+            var axis = this,
+                modelId = axis.plotArea.options.modelId,
+                i,
+                elements = [],
+                lineOptions,
+                points;
+
+            lineOptions = {
+                data: { modelId: modelId },
+                zIndex: -1,
+                strokeWidth: options.width,
+                stroke: options.color,
+                dashType: options.dashType,
+            };
+
+            for (tickIx = 0; tickIx < ticks.length; tickIx++) {
+                points = [];
+                for (angleIx = 0; angleIx < angles.length; angleIx++) {
+                    console.log(angles[angleIx], ticks[tickIx]);
+                    points.push(
+                        Point2D.onCircle(center, angles[angleIx], center.y - ticks[tickIx])
+                    );
+                }
+
+                elements.push(view.createPolyline(points, true, lineOptions));
+            }
+
+            return elements;
         }
     });
 
