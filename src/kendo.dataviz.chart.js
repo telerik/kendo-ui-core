@@ -5951,22 +5951,23 @@ kendo_module({
                 legend = this.options.legend,
                 labels = legend.labels || {},
                 inactiveItems = legend.inactiveItems || {},
-                color, labelColor, markerColor, defaults;
+                labelColor, markerColor;
 
             if (chart.legendItems) {
                 data = chart.legendItems;
             } else {
                 for (i = 0; i < count; i++) {
                     currentSeries = series[i];
-                    if (currentSeries.visibleInLegend !== false) {
-                        text = currentSeries.name || "";
-                        if (labels.template) {
-                            labelTemplate = template(labels.template);
-                            text = labelTemplate({
-                                text: text,
-                                series: currentSeries
-                            });
-                        }
+                    if (currentSeries.visibleInLegend === false) {
+                        continue;
+                    }
+
+                    text = currentSeries.name || "";
+                    if (labels.template) {
+                        text = template(labels.template)({
+                            text: text,
+                            series: currentSeries
+                        });
                     }
 
                     if (currentSeries.visible === false) {
@@ -5974,7 +5975,7 @@ kendo_module({
                         markerColor = inactiveItems.markers.color;
                     } else {
                         labelColor = labels.color;
-                        markerColor = color;
+                        markerColor = currentSeries.color;
                     }
 
                     data.push({
