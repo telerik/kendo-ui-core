@@ -1860,6 +1860,10 @@ kendo_module({
             // Axis.fn.destroy.call(this);
         },
 
+        lineBox: function() {
+            return this.box;
+        },
+
         // TODO: Grid circles, lines
         renderGridLines: function(view) {
             var axis = this,
@@ -1959,6 +1963,12 @@ kendo_module({
 
         createAxisLabel: function(index, labelOptions) { // TODO: Extract
             // CategoryAxis.fn.createAxisLabel(this, index, labelOptions);
+        }
+    });
+
+    var PolarNumericAxis = NumericAxis.extend({
+        renderGridLines: function() {
+            return [];
         }
     });
 
@@ -7696,7 +7706,7 @@ kendo_module({
             plotArea.createCategoryAxis();
             // plotArea.aggregateDateSeries();
             // plotArea.createCharts();
-            // plotArea.createValueAxis();
+            plotArea.createValueAxis();
         },
 
         reflow: function(box) {
@@ -7713,11 +7723,36 @@ kendo_module({
 
             categoryAxis = new PolarCategoryAxis(plotArea.options.categoryAxis);
 
+            plotArea.categoryAxis = categoryAxis;
             plotArea.appendAxis(categoryAxis);
         },
 
+        createValueAxis: function() {
+            var plotArea = this,
+                valueAxis;
+
+            valueAxis = new PolarNumericAxis(0, 1, plotArea.options.valueAxis);
+
+            plotArea.valueAxis = valueAxis;
+            plotArea.appendAxis(valueAxis);
+        },
+
         reflowAxes: function (panes){
-            this.reflowPaneAxes(panes[0]);
+            var plotArea = this,
+                axis = plotArea.valueAxis;
+
+            plotArea.reflowPaneAxes(panes[0]);
+
+            var slot = axis.getSlot(0, 0),
+                slotEdge = axis.options.reverse ? 2 : 1,
+                center = plotArea.box.center(),
+                axisBox = axis.box.translate(
+                    center.x - slot[X + slotEdge],
+                    center.y - slot[Y + slotEdge]
+                );
+
+            axisBox.y1 = plotArea.box.y1;
+            axis.reflow(axisBox);
         }
     });
 
