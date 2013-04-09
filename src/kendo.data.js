@@ -2383,9 +2383,9 @@ kendo_module({
             } else {
                 var total = that._total || that.reader.total(that._pristine);
                 if (action === "add") {
-                    total++;
+                    total += e.items.length;
                 } else if (action === "remove") {
-                    total--;
+                    total -= e.items.length;
                 } else if (action !== "itemchange" && action !== "sync" && !that.options.serverPaging) {
                     total = that.reader.total(that._pristine);
                 }
