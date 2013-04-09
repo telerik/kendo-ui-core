@@ -2,27 +2,30 @@
     <form action="./index.html">
         <ul data-role="listview" data-style="inset">
             <li>
-                <label>
-                Select element
-                <select>
-                    <option value="First Option">First Option</option>
-                    <option value="Second Option">Second Option</option>
-                    <option value="Third Option">Third Option</option>
-                    <option value="Fourth Option">Fourth Option</option>
-                </select>
+                <label>Select element
+                    <select>
+                        <option value="First Option">First Option</option>
+                        <option value="Second Option">Second Option</option>
+                        <option value="Third Option">Third Option</option>
+                        <option value="Fourth Option">Fourth Option</option>
+                    </select>
                 </label>
             </li>
             <li>
-                <label>
-                DropDownList
-                <select id="dropdown">
-                    <option value="First Option">First Option</option>
-                    <option value="Second Option">Second Option</option>
-                    <option value="Third Option">Third Option</option>
-                    <option value="Fourth Option">Fourth Option</option>
-                    <option value="First Option">Fifth Option</option>
-                    <option value="Sixth Option">Sixth Option</option>
-                </select>
+                <label>DropDownList
+                    <select id="dropdown">
+                        <option value="First Option">First Option</option>
+                        <option value="Second Option">Second Option</option>
+                        <option value="Third Option">Third Option</option>
+                        <option value="Fourth Option">Fourth Option</option>
+                        <option value="First Option">Fifth Option</option>
+                        <option value="Sixth Option">Sixth Option</option>
+                    </select>
+                </label>
+            </li>
+            <li>
+                <label>Slider
+                    <input id="slider" type="range" max="100" />
                 </label>
             </li>
             <li>
@@ -116,6 +119,10 @@ Text</textarea>
                 popup: { appendTo: body },
                 animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") || body.hasClass("km-wp") ? "slideIn:up" : "slideIn:down" } }
             });
+        }
+
+        if (kendo.ui.Slider) {
+            $("#slider").kendoSlider({ tooltip: { enabled: false } });
         }
     }
 </script>

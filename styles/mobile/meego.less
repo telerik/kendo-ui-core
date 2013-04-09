@@ -780,18 +780,36 @@
 
 /* Slider */
 
-.km-meego .km-slider-handle
+.km-meego .k-slider
 {
-    .linear-gradient-image(top, #ccc, #fff);
-    border: 1px solid #eee;
+    height: .4em;
 }
 
-.km-meego .km-slider-background
+.km-meego .k-slider .k-draghandle,
+.km-meego .k-slider .k-draghandle:hover
 {
-    background: 0 0 no-repeat, 12rem 0 no-repeat, 0 0 no-repeat;
-    .linear-gradient-image(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
-                     top, rgb(219,219,219), rgb(255,255,255),
-                     top, rgb(42,93,178), rgb(109,169,247));
+    top: -.42em;
+    border: 0;
+    background-color: #eee;
+    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
+    .box-shadow(~"inset 0 0 0 1px #ddd, 0 1px 1px rgba(0,0,0,.3)");
+}
+
+.km-meego .k-slider-selection
+{
+    background: 0 0 no-repeat;
+    .linear-gradient-image(top,  rgb(109,169,247), rgb(42,93,178));
+}
+
+.km-meego .k-slider-track
+{
+    .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
+                           top, rgb(219,219,219), rgb(255,255,255));
+}
+
+.km-meego .k-slider-selection
+{
+    margin-left: 0;
 }
 
 /* Scroller */
@@ -911,8 +929,9 @@
 .km-meego .km-list input[type=datetime-local],
 .km-meego .km-list input[type=text]:not(.k-input),
 .km-meego .km-list select:not([multiple]),
+.km-meego .km-list textarea,
 .km-meego .k-dropdown,
-.km-meego .km-list textarea
+.km-meego .k-slider
 {
     right: .4em;
     margin-top: -1em;
@@ -925,10 +944,20 @@
     .border-radius(0);
 }
 
+.km-meego .k-slider
+{
+    margin-top: -.35em;
+}
+
+.km-meego .km-list textarea
+{
+    margin-top: 0;
+}
+
 .km-meego .k-dropdown .k-dropdown-wrap
 {
     display: block;
-    padding: .2em 2em .2em .4em;
+    padding: 0 2em 0 .4em;
     .border-radius(~".8em");
 }
 
@@ -947,7 +976,7 @@
     .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2)");
 }
 
-.km-meego input:not(.k-input):not(.k-button),
+.km-meego input:not(.k-input):not(.k-button):focus,
 .km-meego select:not([multiple]):focus,
 .km-meego .k-dropdown .k-state-focused,
 .km-meego textarea:focus

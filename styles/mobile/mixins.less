@@ -133,6 +133,7 @@
 .user-select(...) {
     -moz-user-select: @arguments;
     -webkit-user-select: @arguments;
+    -ms-user-select: @arguments;
     user-select: @arguments;
 }
 
@@ -163,15 +164,15 @@
 .linear-gradient(...) {
     background: linear-gradient("webkit", @arguments);
     background: linear-gradient("moz", @arguments);
-    background: linear-gradient("ms", @arguments);
     background: linear-gradient("o", @arguments);
     background: linear-gradient("", @arguments);
+    background: linear-gradient("ms", @arguments);
 }
 
 .linear-gradient-image(...) {
     background-image: linear-gradient("webkit", @arguments);
     background-image: linear-gradient("moz", @arguments);
+    background-image: linear-gradient("", @arguments);
     background-image: linear-gradient("ms", @arguments);
     background-image: linear-gradient("o", @arguments);
-    background-image: linear-gradient("", @arguments);
 }

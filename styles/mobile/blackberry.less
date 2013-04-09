@@ -579,6 +579,39 @@
     background: rgba(150,150,150,.7);
 }
 
+/* Slider */
+
+.km-blackberry .k-slider .k-draghandle,
+.km-blackberry .k-slider .k-draghandle:hover
+{
+    top: -.32em;
+    border: 0;
+    background-color: #eee;
+    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
+    .border-radius(5em);
+    .box-shadow(~"inset 0 0 0 1px #fff, 0 0 1px 1px rgba(0,0,0,.3)");
+}
+
+.km-blackberry .k-slider .k-draghandle:active
+{
+    background-color: #00aae7;
+    .box-shadow(~"0 0 1px 1px rgba(0,0,0,.3), 0 0 0 .5em rgba(0,170,231,.2), 0 0 .5em rgba(0,170,231,.6)");
+}
+
+.km-blackberry .k-slider-selection
+{
+    top: 0;
+    height: 100%;
+    background: #0879c6;
+    .box-shadow(~"inset 0 4px 8px rgba(255,255,255,.3), inset 0 0 0 1px #005d9c");
+}
+
+.km-blackberry .k-slider-track
+{
+    background: #e7e3e7;
+    .box-shadow(inset 0 2px 4px rgba(0,0,0,.3));
+}
+
 /* Scroller */
 
 .km-blackberry .km-touch-scrollbar
@@ -661,7 +694,7 @@
 .km-phone .km-blackberry .km-list input[type=datetime-local],
 .km-phone .km-blackberry .km-list input[type=text]:not(.k-input),
 .km-phone .km-blackberry .km-list select:not([multiple]),
-.km-phone .km-blackberry .km-list .k-dropdown
+.km-blackberry .k-dropdown
 {
     margin-top: -1.1em;
 }
@@ -682,7 +715,8 @@
 .km-blackberry .km-list input[type=text]:not(.k-input),
 .km-blackberry .km-list select:not([multiple]),
 .km-blackberry .km-list .k-dropdown,
-.km-blackberry .km-list textarea
+.km-blackberry .km-list textarea,
+.km-blackberry .km-list .k-slider
 {
     right: .8em;
 }
@@ -706,7 +740,7 @@
 .km-blackberry .k-dropdown .k-dropdown-wrap
 {
     display: block;
-    padding: .2em 2em .2em .4em;
+    padding: .05em 2em .05em .4em;
     border: 1px solid rgba(0,0,0,.5);
     .border-radius(~".3em");
 }
