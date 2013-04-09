@@ -186,7 +186,7 @@
 }
 
 .km-ios .km-switch-background,
-.km-ios .km-slider-background
+.km-ios .k-slider-selection
 {
     background: 4.25em 0 no-repeat #007EE9;
     .linear-gradient-image(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%);
@@ -906,18 +906,32 @@
 
 /* Slider */
 
-.km-ios .km-slider-handle
+.km-ios .k-slider .k-draghandle,
+.km-ios .k-slider .k-draghandle:hover
 {
+    border: 0;
+    .border-radius(5em);
+    background-color: #fff;
     .linear-gradient-image(top, #ccc, #fff);
-    border: 1px solid #eee;
+    .box-shadow(~"inset 0 0 0 1px #f9f9f9, 1px 1px 3px rgba(0,0,0,.3)");
 }
 
-.km-ios .km-slider-background
+.km-ios .k-slider-selection
 {
-    background: 0 0 no-repeat, 12em 0 no-repeat, 0 0 no-repeat;
+    background: 0 0 no-repeat;
     .linear-gradient-image(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
-                     top, rgb(219,219,219), rgb(255,255,255),
-                     top, rgb(42,93,178), rgb(109,169,247));
+                           top, rgb(42,93,178), rgb(109,169,247));
+}
+
+.km-ios .k-slider-track
+{
+    .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
+                           top, rgb(219,219,219), rgb(255,255,255));
+}
+
+.km-ios .k-slider-selection
+{
+    margin-left: 0;
 }
 
 /* Dialog */
