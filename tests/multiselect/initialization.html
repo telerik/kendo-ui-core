@@ -354,6 +354,49 @@
 
                 equal(select.attr("readonly"), undefined);
             });
+
+            test("MultiSelect binds to simple data passed to value option if autoBind is false", function() {
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false,
+                    value: [
+                        "Item1",
+                        "Item3"
+                    ]
+                });
+
+                equal(multiselect.element.children().length, 2);
+                equal(multiselect.dataItems().length, 2);
+            });
+
+            test("MultiSelect binds to complex data passed to value option if autoBind is false", function() {
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false,
+                    dataValueField: "optionID",
+                    dataTextField: "optionText",
+                    value: [
+                        { optionID: "1", optionText: "Item1" },
+                        { optionID: "2", optionText: "Item2" }
+                    ]
+                });
+
+                equal(multiselect.element.children().length, 2);
+                equal(multiselect.dataItems().length, 2);
+                equal(multiselect.value()[0], "1");
+                equal(multiselect.value()[1], "2");
+            });
+
+            test("MultiSelect binds to complex object passed to value option if autoBind is false", function() {
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false,
+                    dataValueField: "optionID",
+                    dataTextField: "optionText",
+                    value: { optionID: "2", optionText: "Item2" }
+                });
+
+                equal(multiselect.element.children().length, 1);
+                equal(multiselect.dataItems().length, 1);
+                equal(multiselect.value()[0], "2");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

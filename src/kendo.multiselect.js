@@ -52,7 +52,7 @@ kendo_module({
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id;
+            var that = this, id, value;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -65,8 +65,9 @@ kendo_module({
 
             that._tabindex(that.input);
 
-            options = that.options;
             element = that.element.attr("multiple", "multiple").hide();
+            options = that.options;
+            value = options.value;
 
             if (!options.placeholder) {
                 options.placeholder = element.data("placeholder");
@@ -96,6 +97,20 @@ kendo_module({
 
             if (options.autoBind) {
                 that.dataSource.fetch();
+            } else if (value) {
+                if (!$.isArray(value)) {
+                    value = [value];
+                }
+
+                that.dataSource.data(value);
+
+                if (options.dataValueField) {
+                    value = $.map(value, function(dataItem) {
+                        return that._value(dataItem);
+                    });
+                }
+
+                that.value(value);
             }
 
             kendo.notify(that);
