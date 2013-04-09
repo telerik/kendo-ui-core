@@ -1078,8 +1078,6 @@ kendo_module({
 
                         this.widget.value(value);
                     }
-
-                    this._initChange = false;
                 },
 
                 destroy: function() {

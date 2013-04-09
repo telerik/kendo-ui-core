@@ -137,6 +137,27 @@
                 equal(observable.selectedItem[1], items[1]);
             });
 
+            test("changing a value does not re-set widget if value binding points to a nested property", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-text-field="name" data-value-field="name" data-bind="source:items, value: nested.selectedItem"/>'),
+                    multiselect;
+
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    nested: {
+                        selectedItem: [{ name: "foo" }]
+                    }
+                });
+
+                kendo.bind(dom, observable);
+
+                multiselect = dom.data("kendoMultiSelect");
+                multiselect.search("bar");
+                multiselect.ul.children().first().click(); //select "bar"
+
+                equal(observable.nested.selectedItem.length, 2);
+                equal(multiselect.dataItems().length, 2);
+            });
+
             test("clearing value of the widget sets model property to empty array", function() {
                 var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
 
