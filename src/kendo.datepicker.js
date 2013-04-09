@@ -128,6 +128,7 @@ kendo_module({
                 calendar.min(options.min);
                 calendar.max(options.max);
 
+                calendar._value = null;
                 calendar.navigate(that._value || that._current, options.start);
                 that.value(that._value);
             }
