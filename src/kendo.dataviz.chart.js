@@ -4274,7 +4274,7 @@ kendo_module({
         pointSlot: function(categorySlot, valueSlot) {
             var chart = this,
                 options = chart.options,
-                valueRadius = valueSlot.y1 - categorySlot.c.y;
+                valueRadius = categorySlot.c.y - valueSlot.y1,
                 slot = Point2D.onCircle(categorySlot.c, categorySlot.middle(), valueRadius);
 
             return new Box2D(slot.x, slot.y, slot.x, slot.y);

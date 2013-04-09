@@ -123,12 +123,13 @@ kendo_module({
         }
     };
 
+    // Clock-wise, 0 points left
     Point2D.onCircle = function(c, a, r) {
         a *= DEGREE;
 
         return new Point2D(
-            c.x + r * math.cos(a),
-            c.y + r * math.sin(a)
+            c.x - r * math.cos(a),
+            c.y - r * math.sin(a)
         );
     };
 
