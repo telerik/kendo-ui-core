@@ -128,6 +128,19 @@ kendo_module({
                 }
             }
 
+            // second pass try to get the parent from the object hierarchy
+            if (result === undefined) {
+                source = that.source; //get the initial source
+
+                while (result === undefined && source) {
+                    source = source.parent();
+
+                    if (source instanceof ObservableObject) {
+                        result = source.get(path);
+                    }
+                }
+            }
+
             // If the result is a function - invoke it
             if (typeof result === "function") {
                 index = path.lastIndexOf(".");
