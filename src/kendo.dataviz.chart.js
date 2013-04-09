@@ -1830,7 +1830,7 @@ kendo_module({
         options: {
             type: CATEGORY,
             categories: [],
-            startAngle: 270,
+            startAngle: 90,
             labels: {
                 visible: true,
                 step: 1,
