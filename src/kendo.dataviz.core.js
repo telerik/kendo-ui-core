@@ -330,10 +330,12 @@ kendo_module({
             return new Ring(r.c, r.ir, r.r, r.startAngle, r.angle);
         },
 
+        // TODO: Rename to median
         middle: function() {
             return this.startAngle + this.angle / 2;
         },
 
+        // TODO: Sounds like a getter
         radius: function(newRadius, innerRadius) {
             var that = this;
 
@@ -346,6 +348,7 @@ kendo_module({
             return that;
         },
 
+        // TODO: Remove and replace with Point2D.onCircle
         point: function(angle, innerRadius) {
             var ring = this,
                 radianAngle = angle * DEGREE,

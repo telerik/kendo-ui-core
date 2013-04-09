@@ -1949,7 +1949,18 @@ kendo_module({
         },
 
         getSlot: function(from, to) {
-            // TODO: Implement
+            var axis = this,
+                divs = axis.getMajorDivisions(),
+                box = axis.box;
+
+            from = clipValue(from, 0, divs.length - 1);
+            to = to || from;
+            to = clipValue(to, from, divs.length - 1);
+
+            return new Ring(
+                box.center(), 0, box.height() / 2,
+                divs[from], divs[to] - divs[from]
+            );
         },
 
         getCategoryIndex: function(point) {
@@ -2927,9 +2938,7 @@ kendo_module({
 
                 var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
                     valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue),
-                    slotX = invertAxes ? valueSlot : categorySlot,
-                    slotY = invertAxes ? categorySlot : valueSlot,
-                    pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
+                    pointSlot = chart.pointSlot(categorySlot, valueSlot),
                     aboveAxis = valueAxis.options.reverse ?
                                     value < axisCrossingValue : value >= axisCrossingValue;
 
@@ -2959,6 +2968,16 @@ kendo_module({
         },
 
         reflowCategories: function() { },
+
+        pointSlot: function(categorySlot, valueSlot) {
+            var chart = this,
+                options = chart.options,
+                invertAxes = options.invertAxes,
+                slotX = invertAxes ? valueSlot : categorySlot,
+                slotY = invertAxes ? categorySlot : valueSlot;
+
+            return new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+        },
 
         valueSlot: function(valueAxis, value, axisCrossingValue) {
             return valueAxis.getSlot(value, axisCrossingValue);
@@ -4249,6 +4268,17 @@ kendo_module({
         seriesMissingValues: function(series) {
             return series.missingValues || ZERO;
         }
+    });
+
+    var PolarLineChart = LineChart.extend({
+        pointSlot: function(categorySlot, valueSlot) {
+            var chart = this,
+                options = chart.options,
+                valueRadius = valueSlot.y1 - categorySlot.c.y;
+                slot = Point2D.onCircle(categorySlot.c, categorySlot.middle(), valueRadius);
+
+            return new Box2D(slot.x, slot.y, slot.x, slot.y);
+        },
     });
 
     var ScatterChart = ChartElement.extend({
@@ -7690,7 +7720,11 @@ kendo_module({
 
     var PolarPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            PlotAreaBase.fn.init.call(this, series, options);
+            var plotArea = this;
+
+            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker();
+
+            PlotAreaBase.fn.init.call(plotArea, series, options);
         },
 
         options: {
@@ -7705,7 +7739,7 @@ kendo_module({
 
             plotArea.createCategoryAxis();
             // plotArea.aggregateDateSeries();
-            // plotArea.createCharts();
+            plotArea.createCharts();
             plotArea.createValueAxis();
         },
 
@@ -7729,12 +7763,58 @@ kendo_module({
 
         createValueAxis: function() {
             var plotArea = this,
+                tracker = plotArea.valueAxisRangeTracker,
+                defaultRange = tracker.query(),
                 valueAxis;
 
-            valueAxis = new PolarNumericAxis(0, 1, plotArea.options.valueAxis);
+            // TODO: Should we support multiple axes?
+            range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
+
+            if (range && defaultRange) {
+                range.min = math.min(range.min, defaultRange.min);
+                range.max = math.max(range.max, defaultRange.max);
+            }
+
+            valueAxis = new PolarNumericAxis(
+                range.min, range.max,
+                deepExtend({ max: range.max }, plotArea.options.valueAxis)
+            );
 
             plotArea.valueAxis = valueAxis;
             plotArea.appendAxis(valueAxis);
+        },
+
+        appendChart: function(chart, pane) {
+            CategoricalPlotArea.fn.appendChart.call(this, chart);
+        },
+
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createLineChart(
+                plotArea.filterSeriesByType(series, [POLAR_LINE])
+            );
+        },
+
+        createLineChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                filteredSeries = plotArea.filterVisibleSeries(series),
+                lineChart = new PolarLineChart(plotArea, {
+                    isStacked: firstSeries.stack && filteredSeries.length > 1,
+                    series: series
+                });
+
+            plotArea.appendChart(lineChart);
+        },
+
+        seriesCategoryAxis: function() {
+            return this.categoryAxis;
         },
 
         reflowAxes: function (panes){
@@ -9502,6 +9582,7 @@ kendo_module({
         return array.length === 1 ? array[0] : array;
     }
 
+    // TODO: Rename to limitValue
     function clipValue(value, min, max) {
         return math.max(math.min(value, max), min);
     }
