@@ -195,6 +195,18 @@
                 equal(dataSource.filter().filters[0].operator, "eq");
             });
 
+            test("submitting the form does not send filters with null value", function() {
+                filterMenu = setup(dom.attr("data-kendo-field", "bar"), {
+                    dataSource: dataSource
+                });
+                filterMenu.form.find("[data-kendo-role=numerictextbox]:first")
+                    .val("").change();
+
+                filterMenu.form.submit();
+
+                ok(dataSource.filter() == null);
+            });
+
             test("submitting the form does not send the extra filterMenu if it is empty", function() {
                 filterMenu = setup(dom, {
                     dataSource: dataSource

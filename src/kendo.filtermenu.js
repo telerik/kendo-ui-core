@@ -341,7 +341,7 @@ kendo_module({
             removeFiltersForField(result, that.field);
 
             filters = $.grep(filters, function(filter) {
-                return filter.value !== "";
+                return filter.value !== "" && filter.value != null;
             });
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
