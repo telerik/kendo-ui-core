@@ -14,9 +14,10 @@
 
     <script>
 
-        var Marker;
-
         $("#Editor1").kendoEditor();
+
+        var Marker = kendo.ui.editor.Marker;
+        var editor = getEditor();
 
         /* helpers */
 
@@ -36,10 +37,9 @@
             return range;
         }
 
-        QUnit.config.testStart.push(function() {
-            editor = getEditor();
-            Marker = kendo.ui.editor.Marker;
-        });
+        function clean(html) {
+            return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"');
+        }
 
         test('addMarker inserts markers', function() {
             editor.value('foo');
@@ -49,7 +49,7 @@
             var marker = new Marker();
             marker.add(range);
 
-            equal(editor.body.innerHTML.toLowerCase(), 'f<span class="k-marker"></span>o<span class="k-marker"></span>o');
+            equal(clean(editor.body.innerHTML), 'f<span class="k-marker"></span>o<span class="k-marker"></span>o');
 
         });
         test('addMarker normalizes', function() {
@@ -82,7 +82,7 @@
             var marker = new Marker();
             marker.add(range);
 
-            equal(editor.body.innerHTML.toLowerCase(), 'b<span class="k-marker"></span><span class="k-marker"></span>az');
+            equal(clean(editor.body.innerHTML), 'b<span class="k-marker"></span><span class="k-marker"></span>az');
         });
 
         test('removeMarker removes markers', function() {
@@ -159,7 +159,7 @@
             var marker = new Marker();
             marker.addCaret(range);
 
-            equal(editor.body.innerHTML.toLowerCase(), 'fo<span class="k-marker"></span>o');
+            equal(clean(editor.body.innerHTML), 'fo<span class="k-marker"></span>o');
         });
 
         test('addCaretMarker updates range to include caret marker', function() {
