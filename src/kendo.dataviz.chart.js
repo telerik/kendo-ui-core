@@ -2695,9 +2695,6 @@ kendo_module({
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
-                if (currentSeries.visible === false) {
-                    return;
-                }
                 var value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
@@ -6158,7 +6155,7 @@ kendo_module({
             return result;
         },
 
-        filterSeriesByVisibility: function(series) {
+        filterVisibleSeries: function(series) {
             var i, currentSeries,
                 result = [];
 
@@ -6866,7 +6863,7 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
-                filteredSeries = plotArea.filterSeriesByVisibility(series),
+                filteredSeries = plotArea.filterVisibleSeries(series),
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
@@ -6883,7 +6880,7 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
-                filteredSeries = plotArea.filterSeriesByVisibility(series),
+                filteredSeries = plotArea.filterVisibleSeries(series),
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
