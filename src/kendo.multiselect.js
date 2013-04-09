@@ -98,12 +98,19 @@ kendo_module({
             if (options.autoBind) {
                 that.dataSource.fetch();
             } else if (value) {
-                value = $.isArray(value) ? value : [value];
+                if (!$.isArray(value)) {
+                    value = [value];
+                }
 
                 that.dataSource.data(value);
-                that.value($.map(value, function(dataItem) {
-                    return that._value(dataItem);
-                }));
+
+                if (options.dataValueField) {
+                    value = $.map(value, function(dataItem) {
+                        return that._value(dataItem);
+                    });
+                }
+
+                that.value(value);
             }
 
             kendo.notify(that);
