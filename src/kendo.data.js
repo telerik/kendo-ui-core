@@ -3517,6 +3517,70 @@ kendo_module({
         return dataSource instanceof HierarchicalDataSource ? dataSource : new HierarchicalDataSource(dataSource);
     };
 
+    var Buffer = kendo.Class.extend({
+        init: function(dataSource, itemCount) {
+            this.dataSource = dataSource;
+            this.pageSize = dataSource.pageSize(),
+            this.itemCount = itemCount;
+            this.step = this.itemCount + 2, // buffer
+            this.offset = 0;
+            this._recalculate();
+        },
+
+        at: function(index)  {
+            var ds = this.dataSource,
+                pageSize = this.pageSize,
+                skip = this.skip,
+                offset = this.offset,
+                step = this.step;
+
+            // prefetch
+            if (index === this.prefetchThreshold && !ds.inRange(skip + pageSize, pageSize)) {
+                ds.prefetch(skip + pageSize, pageSize);
+            }
+
+            // mid-range jump
+            if (index === this.midPageThreshold) {
+                this.range(this.prefetchThreshold + 1);
+            }
+
+            // pull-back
+            else if (index === this.pullBackThreshold) {
+                if (offset === skip) {
+                    this.range(offset - step); // from full range to mid range
+                } else {
+                    this.range(offset + step - pageSize); // from mid range to full range
+                }
+            }
+
+            // next range jump
+            else if (index === this.nextPageThreshold) {
+                this.range(skip);
+            }
+
+            return this.dataSource.at(index - this.offset);
+        },
+
+        range: function(offset) {
+            ds.range(offset, this.pageSize);
+            this.offset = offset;
+            this._recalculate();
+        },
+
+        _recalculate: function() {
+            var skip = this.dataSource.skip(),
+                step = this.step,
+                pageSize = this.pageSize;
+
+            this.skip = skip;
+            this.midPageThreshold = skip + pageSize - 1,
+            this.nextPageThreshold = skip + this.step - 1,
+            this.prefetchThreshold = this.midPageThreshold - step,
+            this.pullBackThreshold = this.offset - 1;
+        }
+    });
+
+
     extend(true, kendo.data, {
         readers: {
             json: DataReader
@@ -3531,6 +3595,7 @@ kendo_module({
         RemoteTransport: RemoteTransport,
         Cache: Cache,
         DataReader: DataReader,
-        Model: Model
+        Model: Model,
+        Buffer: Buffer
     });
 })(window.kendo.jQuery);

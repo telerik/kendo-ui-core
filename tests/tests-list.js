@@ -104,6 +104,7 @@ var tests = [
     "data/query-expr.html",
     "data/datasource/sync.html",
     "data/datasource/range.html",
+    "data/datasource/buffer.html",
     "data/hierarchy.html",
     "data/datasource/observable-array.html",
     "data/query.html",

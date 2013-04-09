@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <script src="../../jquery-loader.js"></script>
+    <script type="text/javascript" src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.model.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <link rel="stylesheet" href="../../qunit/qunit/qunit.css" type="text/css" />
+
+    <body>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var ds, buffer;
+
+            module('data buffer', {
+                setup: function() {
+                    timeout = window.setTimeout;
+                    window.setTimeout = function(callback) {
+                        callback();
+                    }
+
+                    ds = new kendo.data.DataSource({
+                        transport: {
+                            read: function(options) {
+
+                                var results = [], data = options.data;
+                                for (var i = data.skip; i < data.skip + data.take; i ++) {
+                                    results.push(i);
+                                }
+
+                                options.success(results);
+                            }
+                        },
+                        pageSize: 20,
+                        serverPaging: true,
+                        schema: {
+                            total: function() { return 100000; }
+                        }
+                    });
+
+                    buffer = new kendo.data.Buffer(ds, 5);
+                },
+
+                teardown: function() {
+                    window.setTimeout = timeout;
+                }
+            });
+
+            test('returns correct dataSource item', 1, function() {
+                ds.fetch(function() {
+                    equal(buffer.at(2), 2);
+                });
+            });
+
+            test('approaching the end of the range prefetches data', 2, function() {
+                ds.fetch();
+                buffer.at(11);
+                ok(!ds.inRange(20, 20));
+                buffer.at(12);
+                ok(ds.inRange(20, 20));
+            });
+
+            test('reaching the end of the range shifts range to mid state', 4, function() {
+                ds.fetch();
+                equal(buffer.at(19), 19); // trigger the range change
+                equal(ds.view()[0], 13);
+                equal(ds.view()[19], 32);
+                equal(buffer.at(25), 25);
+            });
+
+            test('pulling back from the mid range shifts range back to initial page', 4, function() {
+                ds.fetch();
+                equal(buffer.at(19), 19); // trigger the range change
+                equal(buffer.at(12), 12); // pull back
+                equal(ds.view()[0], 0);
+                equal(buffer.at(2), 2);
+            });
+
+            test('reaching the offset of the next range shifts to match the server-side paging', 3, function() {
+                ds.fetch();
+                equal(buffer.at(19), 19); // fist re-range
+                equal(buffer.at(26), 26); // second re-range
+                equal(ds.view()[0], 20);
+            });
+
+            test('pulling back from next page restores the mid-range', 5, function() {
+                ds.fetch();
+                equal(buffer.at(19), 19); // go to mid range
+                equal(ds.view()[0], 13);
+                equal(buffer.at(26), 26); // go to second range
+                equal(buffer.at(19), 19); // pull back to mid range
+                equal(ds.view()[0], 13);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
