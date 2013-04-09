@@ -84,22 +84,24 @@
                 textbox._blur();
             });
 
-            test("raise spin event", 2, function() {
+            asyncTest("raise spin event", 2, function() {
                 var textbox = new NumericTextBox(input, {
                         value: 10,
                         spin: function() {
+                            start();
                             ok(true);
                             equal(textbox.value(), 11);
                         }
                     });
 
-                textbox._upArrow.mousedown();
+                textbox._step(1);
             });
 
-            test("raise spin event on up arrrow", 2, function() {
+            asyncTest("raise spin event on up arrrow", 2, function() {
                 var textbox = new NumericTextBox(input, {
                         value: 10,
                         spin: function() {
+                            start();
                             ok(true);
                             equal(textbox.value(), 11);
                         }
