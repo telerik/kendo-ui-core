@@ -3524,23 +3524,38 @@ kendo_module({
             this.itemCount = itemCount;
             this.step = this.itemCount + 2, // buffer
             this.offset = 0;
+            this._prefetching = false;
             this._recalculate();
+            var that = this;
+            dataSource.bind('change', function() {
+                console.log('datasource state changed to', dataSource.skip(), dataSource.take());
+                that._recalculate();
+            });
         },
 
         at: function(index)  {
-            var ds = this.dataSource,
+            console.log('requesting item at', index);
+
+            var buffer = this,
+                ds = this.dataSource,
                 pageSize = this.pageSize,
                 skip = this.skip,
                 offset = this.offset,
                 step = this.step;
 
             // prefetch
-            if (index === this.prefetchThreshold && !ds.inRange(skip + pageSize, pageSize)) {
-                ds.prefetch(skip + pageSize, pageSize);
+            if (index === this.prefetchThreshold && !ds.inRange(skip + pageSize, pageSize) && !this._prefetching) {
+                console.log('prefetching');
+                this._prefetching = true;
+                ds.prefetch(skip + pageSize, pageSize, function() {
+                    console.log('prefetch done');
+                    buffer._prefetching = false;
+                });
             }
 
             // mid-range jump
             if (index === this.midPageThreshold) {
+                console.log('midrange')
                 this.range(this.prefetchThreshold + 1);
             }
 
@@ -3555,6 +3570,7 @@ kendo_module({
 
             // next range jump
             else if (index === this.nextPageThreshold) {
+                console.log('next range')
                 this.range(skip);
             }
 
@@ -3562,9 +3578,12 @@ kendo_module({
         },
 
         range: function(offset) {
-            ds.range(offset, this.pageSize);
-            this.offset = offset;
-            this._recalculate();
+            if (this.offset !== offset) {
+                console.log('changing range to', offset);
+                ds.range(offset, this.pageSize);
+                this.offset = offset;
+                this._recalculate();
+            }
         },
 
         _recalculate: function() {

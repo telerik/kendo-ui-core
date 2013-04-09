@@ -26,10 +26,14 @@
         <script src="../../src/kendo.mobile.actionsheet.js"></script>
         <script src="../../src/kendo.mobile.tabstrip.js"></script>
         <style>
-            .virtual-cell {
+            .virtual-cell, .loading {
                 position: absolute;
                 top: 0;
                 left: 0;
+            }
+
+            .loading {
+                color: gray;
             }
 
             .box {
@@ -47,7 +51,8 @@
         <div data-role="view" data-init="buildVirtual">
         </div>
         <script>
-            var PAGE_SIZE = 100;
+            var PAGE_SIZE = 25;
+
             var ds = new kendo.data.DataSource({
                 transport: {
                     read: {
@@ -58,12 +63,9 @@
                     },
 
                     parameterMap: function(data, type) {
-                        console.log(data);
-
                         var items = ds.data();
                         if (items.length) {
                             data.after = items[items.length - 1].data.name;
-                            console.log(data.after);
                         }
 
                         data.limit = PAGE_SIZE;
@@ -87,84 +89,74 @@
 
             var CellList = kendo.Class.extend({
                 init: function(view) {
-                    var that = this;
-
-                    this.cells = [];
-                    this.top = 0;
-                    this.bottom = 0;
-                    var container = view.contentElement(),
+                    var that = this,
+                        container = view.contentElement(),
                         height = view.content.height(),
-                        targetHeight = height * 5,
+                        targetHeight = height * 3,
                         cell,
                         prevCell,
                         itemCount = 0;
 
+                    this.cells = [];
+                    this.top = 0;
+                    this.bottom = 0;
+
+                    this.loading = $("<div class='loading'>Loading</div>").hide().appendTo(container);
+
+
                     while(this.bottom < targetHeight) {
+                        console.log(this.bottom);
                         cell = new Cell(container);
-                        cell.content(this.cellContent(itemCount ++));
+                        cell.content(template(ds.at(itemCount ++)));
                         cell.below(prevCell);
                         prevCell = cell;
                         this.cells.push(cell);
                         this.bottom = cell.bottom;
                     }
 
-                    var dataOffset = 0;
-                    var prefetching = false;
+                    this.buffer = new kendo.data.Buffer(ds, itemCount);
 
+                    ds.bind('change', function() {
+                        view.scroller.virtualHeight(10000000);
+                    });
+
+                    var offset = 0;
                     view.scroller.bind("scroll", function(e) {
-
                         if (e.scrollTop < 0) {
                             return;
                         }
 
-                        var bottom = e.scrollTop + height;
+                        var bottom = e.scrollTop + view.element.height();
 
-                        if (that.bottom < bottom + height / 2) {
-                            while (that.bottom < bottom + height * 3) {
-
-                                if (!ds.at(dataOffset + itemCount + 20 - ds.skip())) {
-                                    if (!prefetching) {
-                                        console.log('prefetching');
-
-                                        prefetching = true;
-                                        ds.prefetch(dataOffset + itemCount, PAGE_SIZE, function() {
-                                            console.log('prefetch done');
-                                            prefetching  = false;
-                                        });
-                                    }
-                                }
-
-                                dataOffset++;
-                                var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
-                                topCell.content(that.cellContent(dataOffset + itemCount));
-                                topCell.below(bottomCell);
-                                that.cells.push(topCell);
-                                that.bottom = topCell.bottom;
-                                that.top = that.cells[0].top;
+                        while (that.bottom < bottom) {
+                            if (!that.buffer.at(offset + itemCount + 1)) {
+                                view.scroller.virtualHeight(that.bottom);
+                                break;
                             }
 
-                            console.log('setting range', dataOffset, itemCount);
-                            ds.range(dataOffset, itemCount);
+                            offset++;
+                            var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
+                            topCell.content(that.cellContent(offset + itemCount));
+                            topCell.below(bottomCell);
+                            that.cells.push(topCell);
+                            that.bottom = topCell.bottom;
+                            that.top = that.cells[0].top;
                         }
 
-                        if (that.top > e.scrollTop - height / 2 && dataOffset > 0) {
-                            while (that.top > e.scrollTop - height * 3 && dataOffset > 0) {
-                                dataOffset --;
-                                var topCell = that.cells[0], bottomCell = that.cells.pop();
-                                bottomCell.content(that.cellContent(dataOffset));
-                                bottomCell.above(topCell);
-                                that.bottom = that.cells[that.cells.length - 1].bottom;
-                                that.top = bottomCell.top;
-                                that.cells.unshift(bottomCell);
-                            }
-                            ds.range(dataOffset, itemCount);
+                        while (that.top > e.scrollTop) {
+                            offset --;
+                            var topCell = that.cells[0], bottomCell = that.cells.pop();
+                            bottomCell.content(that.cellContent(offset));
+                            bottomCell.above(topCell);
+                            that.bottom = that.cells[that.cells.length - 1].bottom;
+                            that.top = bottomCell.top;
+                            that.cells.unshift(bottomCell);
                         }
-
                     });
                 },
 
                 cellContent: function(i) {
-                    return template(ds.at(i - ds.skip()));
+                    return template(this.buffer.at(i));
                 }
             });
 
