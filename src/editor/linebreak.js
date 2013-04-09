@@ -18,11 +18,27 @@ var ParagraphCommand = Command.extend({
         Command.fn.init.call(this, options);
     },
 
+    _insertMarker: function(doc, range) {
+        var marker = dom.create(doc, 'a'), container;
+
+        range.insertNode(marker);
+
+        if (!marker.parentNode) {
+            // inserting paragraph in Firefox full body range
+            container = range.commonAncestorContainer;
+            container.innerHTML = "";
+            container.appendChild(marker);
+        }
+
+        normalize(marker.parentNode);
+
+        return marker;
+    },
+
     exec: function () {
         var range = this.getRange(),
             doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
-            container,
             emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
             paragraph, marker, li, heading, rng,
             // necessary while the emptyParagraphContent is empty under IE
@@ -53,17 +69,7 @@ var ParagraphCommand = Command.extend({
 
         range.deleteContents();
 
-        marker = dom.create(doc, 'a');
-        range.insertNode(marker);
-
-        if (!marker.parentNode) {
-            // inserting paragraph in Firefox full body range
-            container = range.commonAncestorContainer;
-            container.innerHTML = "";
-            container.appendChild(marker);
-        }
-
-        normalize(marker.parentNode);
+        marker = this._insertMarker(doc, range);
 
         li = dom.parentOfType(marker, ['li']);
         heading = dom.parentOfType(marker, 'h1,h2,h3,h4,h5,h6'.split(','));
@@ -146,7 +152,6 @@ var ParagraphCommand = Command.extend({
 
         RangeUtils.selectRange(range);
     }
-
 });
 
 var NewLineCommand = Command.extend({
@@ -156,15 +161,18 @@ var NewLineCommand = Command.extend({
     },
 
     exec: function () {
-        var range = this.getRange();
+        var range = this.getRange(),
+            br = dom.create(RangeUtils.documentFromRange(range), 'br'),
+            filler;
+
         range.deleteContents();
-        var br = dom.create(RangeUtils.documentFromRange(range), 'br');
         range.insertNode(br);
+
         normalize(br.parentNode);
 
         if (!kendo.support.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
-            //Gecko and WebKit cannot put the caret after only one br.
-            var filler = br.cloneNode(true);
+            // Gecko and WebKit cannot put the caret after only one br.
+            filler = br.cloneNode(true);
             filler.setAttribute('_moz_dirty', '');
             dom.insertAfter(filler, br);
         }

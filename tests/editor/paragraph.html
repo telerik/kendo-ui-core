@@ -192,6 +192,12 @@ test('exec caret at end of content', function() {
     range.setEnd(editor.body.firstChild, 3);
     var command = new ParagraphCommand({range:range});
     command.exec();
+
+    if (!kendo.support.browser.msie) {
+        var br = editor.body.lastChild.firstChild;
+        equal(br.nodeName.toLowerCase(), "br", "bogus br is present in non-ie browsers");
+    }
+
     equal(editor.value(), '<p>foo</p><p></p>');
 });
 
@@ -338,27 +344,25 @@ test('exec in list before image', function() {
     equal(editor.value(), '<ul><li></li><li><a></a><img src="foo" /></li></ul>');
 });
 
-if (!kendo.support.browser.msie) {
-    test('paragraph in formatted text', function() {
-        editor.value('<p><strong>foo</strong></p>');
+test('paragraph at start of formatted text', function() {
+    editor.value('<p><strong>foo</strong></p>');
 
-        var range = editor.createRange();
-        range.setStart(editor.body.firstChild.firstChild.firstChild, 0);
-        range.collapse(true);
+    var range = editor.createRange();
+    range.setStart(editor.body.firstChild.firstChild.firstChild, 0);
+    range.collapse(true);
 
-        var command = new ParagraphCommand({range:range});
-        command.exec();
+    var command = new ParagraphCommand({range:range});
+    command.exec();
 
-        insertCaretAnchor();
-
+    if (!kendo.support.browser.msie) {
         var br = editor.body.firstChild.firstChild.firstChild;
+        equal(br.nodeName.toLowerCase(), "br", "bogus br is present in non-ie browsers");
+    }
 
-        ok(br);
-        equal(br.nodeName.toLowerCase(), 'br');
+    insertCaretAnchor();
 
-        equal(editor.value(), '<p><strong></strong></p><p><strong><a></a>foo</strong></p>');
-    });
-}
+    equal(editor.value(), '<p><strong></strong></p><p><strong><a></a>foo</strong></p>');
+});
 
 </script>
 
