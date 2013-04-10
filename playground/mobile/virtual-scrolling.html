@@ -30,33 +30,68 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                width: 100%;
             }
 
             .loading {
                 color: gray;
             }
 
-            .box {
-                margin: 0px 20px 10px 20px;
-                border-bottom: 1px solid black;
-                width: 200px;
+            .item {
+                display: table;
             }
 
-            .box img {
-                height: 70px;
+            .item-thumb, .item-summary, .item-comments {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+            .thumb {
+                width: 50px;
+                height: 50px;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 100% 100%;
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+                overflow: hidden;
+                margin-top: 1em;
+            }
+
+            .item-summary li {
+                float: left;
+                margin-left: 1em;
             }
         </style>
     </head>
     <body>
         <div data-role="view" data-init="buildVirtual">
         </div>
+
+        <script type="text/x-kendo-template" id="item-template">
+            <div class="item">
+                <div class="item-thumb">
+                    <div class='thumb' style="background-image: url(#: data.thumbnail #)"></div>
+                </div>
+                <div class="item-summary">
+                   <h3>#: data.title #</h3>
+                   <ul>
+                       <li>#: data.subreddit #</li>
+                       <li>#: data.ups - data.downs #</li>
+                       <li>#: data.ups - data.downs #</li>
+                       <li>#: data.domain #</li>
+                   </ul>
+                </div>
+                <div class="item-comments">
+                </div>
+        </script>
         <script>
-            var PAGE_SIZE = 25;
+            var PAGE_SIZE = 100;
 
             var ds = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: 'http://www.reddit.com/r/reactiongifs.json',
+                        url: 'http://www.reddit.com/r/aww.json',
                         dataType: 'jsonp',
                         jsonp: 'jsonp',
                         cache: true,
@@ -85,7 +120,7 @@
                 new kendo.mobile.Application();
             });
 
-            var template = kendo.template("<div class='box'><img src='#: data.thumbnail #' /><h3>#: data.title #</h3></div>");
+            var template = kendo.template($("#item-template").html());
 
             var CellList = kendo.Class.extend({
                 init: function(view) {
