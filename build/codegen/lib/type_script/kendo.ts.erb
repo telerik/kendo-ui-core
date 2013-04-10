@@ -99,8 +99,18 @@ module kendo {
         unbind(eventName: string, handler?: any): Observable;
     }
 
+    interface ViewOptions {
+        title?: string;
+        reload?: bool;
+        defaultTransition?: string;
+        useNativeScrolling?: bool;
+        stretch?: bool;
+        zoom?: bool;
+        model?: Object;
+    }
+
     class View {
-        constructor(contents: string);
+        constructor(element: Element, options?: ViewOptions);
         render(container?: any): JQuery;
         destroy(): void;
     }
