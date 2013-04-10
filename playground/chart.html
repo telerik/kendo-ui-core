@@ -21,36 +21,10 @@
             $(function() {
                 $("#chart").kendoChart({
                     series: [{
-                        data: [1,2,3],
-                        name: "first series"
-                    },{
-                        data: [1,2,3],
-                        name: "second series"
-                    },{
-                        data: [1,2,3],
-                        name: "third series"
-                    }]
-                });
-
-                $("#chart1").kendoChart({
-                    seriesDefaults: {
-                        type: "pie",
-                        labels: {
-                            visible: true
-                        }
-                    },
-                    series: [{
-                        data: [{
-                            value: 1,
-                            category: "text 1"
-                        },{
-                            value: 2,
-                            category: "text 2",
-                            visible: false
-                        },{
-                            value: 3,
-                            category: "text 3"
-                        }]
+                        type: "scatterLine",
+                        data: [[1,1]],
+                        name: "second series",
+                        visible: false
                     }]
                 });
             });

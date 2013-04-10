@@ -2682,15 +2682,14 @@ kendo_module({
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 categoryAxis = chart.categoryAxis,
-                valueAxis,
-                axisCrossingValue,
+                value, valueAxis, axisCrossingValue,
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
                 if (currentSeries.visible === false) {
                     return;
                 }
-                var value = chart.pointValue(data);
+                value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
                 axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis);
@@ -2760,9 +2759,6 @@ kendo_module({
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentSeries = series[seriesIx];
-                    if (currentSeries.visible === false) {
-                        continue;
-                    }
                     currentCategory = categories[categoryIx];
                     pointData = bindPoint(currentSeries, categoryIx, bindableFields);
 
@@ -2975,9 +2971,6 @@ kendo_module({
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
-                if (currentSeries.visible === false) {
-                    continue;
-                }
                 valueAxis = chart.seriesValueAxis(currentSeries);
 
                 for (categoryIx = 0; categoryIx < count; categoryIx++) {
@@ -3688,9 +3681,6 @@ kendo_module({
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
-                if (currentSeries.visible === false) {
-                    continue;
-                }
                 currentSeriesPoints = seriesPoints[seriesIx];
                 pointCount = currentSeriesPoints.length;
                 linePoints = [];
@@ -4178,10 +4168,6 @@ kendo_module({
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
-                if (currentSeries.visible === false) {
-                    continue;
-                }
-
                 currentSeriesPoints = seriesPoints[seriesIx];
                 if (!currentSeriesPoints) {
                     seriesPoints[seriesIx] = [];
@@ -6577,7 +6563,9 @@ kendo_module({
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                paneSeries = seriesByPane[pane.options.name || "default"];
+                paneSeries = plotArea.filterSeriesByVisibility(
+                    seriesByPane[pane.options.name || "default"] || []
+                );
 
                 if (!paneSeries) {
                     continue;
@@ -6754,10 +6742,9 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
-                filteredSeries = plotArea.filterSeriesByVisibility(series),
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && filteredSeries.length > 1,
+                    isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
@@ -6771,10 +6758,9 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
-                filteredSeries = plotArea.filterSeriesByVisibility(series),
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && filteredSeries.length > 1,
+                    isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
@@ -7080,7 +7066,9 @@ kendo_module({
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                paneSeries = seriesByPane[pane.options.name || "default"];
+                paneSeries = plotArea.filterSeriesByVisibility(
+                    seriesByPane[pane.options.name || "default"] || []
+                );
 
                 if (!paneSeries) {
                     continue;
