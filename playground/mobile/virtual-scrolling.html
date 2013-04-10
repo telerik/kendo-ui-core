@@ -39,11 +39,35 @@
 
             .item {
                 display: table;
+                width: 100%;
+                background: #f0f0f0;
+                color: #808080;
+                border-top: 1px solid #fafafa;
+                border-bottom: 1px solid #e3e3e3;
+                font-weight: normal;
+            }
+
+            .item h3 {
+                font-weight: normal;
+                color: #181818;
             }
 
             .item-thumb, .item-summary, .item-comments {
                 display: table-cell;
                 vertical-align: top;
+                padding-bottom: .5em;
+            }
+
+            .item-thumb {
+                width: 50px;
+                padding-left: 1em;
+            }
+
+            .item-comments {
+                width: 50px;
+                text-align: center;
+                color: #af5555;
+                vertical-align: middle;
             }
 
             .thumb {
@@ -53,6 +77,8 @@
                 background-position: center center;
                 background-size: 100% 100%;
                 -webkit-border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 10px #000000;
+                box-shadow:         inset 0 0 10px #000000;
                 border-radius: 10px;
                 overflow: hidden;
                 margin-top: 1em;
@@ -60,7 +86,7 @@
 
             .item-summary li {
                 float: left;
-                margin-left: 1em;
+                margin-right: 15px;
             }
         </style>
     </head>
@@ -75,14 +101,10 @@
                 </div>
                 <div class="item-summary">
                    <h3>#: data.title #</h3>
-                   <ul>
-                       <li>#: data.subreddit #</li>
-                       <li>#: data.ups - data.downs #</li>
-                       <li>#: data.ups - data.downs #</li>
-                       <li>#: data.domain #</li>
-                   </ul>
+                   <p> #: data.subreddit # | #: data.ups - data.downs # | #: kendo.toString(new Date(data.created_utc * 1000), 'HH:mm') # </p>
                 </div>
                 <div class="item-comments">
+                    #: data.num_comments #
                 </div>
         </script>
         <script>
@@ -152,6 +174,7 @@
 
                     ds.bind('change', function() {
                         view.scroller.virtualHeight(10000000);
+                        that.loading.hide();
                     });
 
                     var offset = 0;
@@ -160,11 +183,16 @@
                             return;
                         }
 
-                        var bottom = e.scrollTop + view.element.height();
+                        var height = view.element.height();
 
-                        while (that.bottom < bottom) {
+                        var bottom = e.scrollTop + height;
+
+                        if (that.bottom < bottom)
+                        while (that.bottom < bottom + height) {
+                            console.log("snap to bottom");
                             if (!that.buffer.at(offset + itemCount + 1)) {
-                                view.scroller.virtualHeight(that.bottom);
+                                that.loading.show().css("transform", "translate3d(0, " + this.bottom + "px, 0)");
+                                view.scroller.virtualHeight(that.bottom + that.loading.height());
                                 break;
                             }
 
@@ -178,6 +206,7 @@
                         }
 
                         while (that.top > e.scrollTop) {
+                            console.log("snap to top");
                             offset --;
                             var topCell = that.cells[0], bottomCell = that.cells.pop();
                             bottomCell.content(that.cellContent(offset));
