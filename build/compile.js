@@ -174,6 +174,34 @@ files.forEach(function (file){
     }
     code = ast.print_to_string(codegen_options);
     fs.writeFileSync(output, code);
+    if (ARGV.amd) {
+        // save the non-RequireJS version for the download builder
+        ast = ast.transform(new u2.TreeTransformer(function(node){
+            if (node === ast) {
+                return undefined;
+            }
+            if (!(this.parent() instanceof u2.AST_Toplevel)) {
+                return node;
+            }
+            // discard RequireJS boilerplate
+            if (node instanceof u2.AST_SimpleStatement
+                && node.body instanceof u2.AST_Call
+                && node.body.expression instanceof u2.AST_Conditional
+                && node.body.expression.consequent instanceof u2.AST_SymbolRef
+                && node.body.expression.consequent.name == "define")
+            {
+                // so if that's the case, we want to replace the whole
+                // simple statement with the *body* of the function
+                // that gets passed to `define`.
+                var f = node.body.args[1]; // args[0] is the dependency list
+                return u2.MAP.splice(f.body);
+            }
+
+            return node;
+        }));
+        code = ast.print_to_string(codegen_options);
+        fs.writeFileSync(output + ".no-amd", code);
+    }
 });
 
 function extract_widget_info(ast) {
