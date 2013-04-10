@@ -6672,7 +6672,7 @@ kendo_module({
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                paneSeries = plotArea.filterSeriesByVisibility(
+                paneSeries = plotArea.filterVisibleSeries(
                     seriesByPane[pane.options.name || "default"] || []
                 );
 
@@ -7175,7 +7175,7 @@ kendo_module({
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                paneSeries = plotArea.filterSeriesByVisibility(
+                paneSeries = plotArea.filterVisibleSeries(
                     seriesByPane[pane.options.name || "default"] || []
                 );
 
