@@ -146,6 +146,12 @@
                 equal(editor.value(), 'fbar<br />bazoo');
             });
 
+            test("paste of special characters", function() {
+                editor.value("");
+                clipboard.paste("π");
+                equal(editor.value(), '&pi;');
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
