@@ -1,5 +1,8 @@
     class <%= type_script_type %> <%= 'extends ' + type_script_base_class if type_script_base_class %> {
 % if widget?
+        static fn: <%= type_script_type %>;
+        static extend(proto: Object): <%= type_script_type %>;
+
         element: JQuery;
         wrapper: JQuery;
         constructor(element: Element, options?: <%= type_script_options_type %>);
