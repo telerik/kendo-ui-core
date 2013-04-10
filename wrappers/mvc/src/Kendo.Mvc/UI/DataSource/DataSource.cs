@@ -113,6 +113,11 @@ namespace Kendo.Mvc.UI
                 json["batch"] = Batch;
             }
 
+            if (AutoSync)
+            {
+                json["autoSync"] = AutoSync;
+            }
+
             if (IsClientOperationMode && RawData != null)
             {
                 json["data"] = new Dictionary<string, object>()
@@ -241,6 +246,12 @@ namespace Kendo.Mvc.UI
         }
 
         public IEnumerable Data
+        {
+            get;
+            set;
+        }
+
+        public bool AutoSync
         {
             get;
             set;
