@@ -545,7 +545,21 @@ var Clipboard = Class.extend({
     }
 });
 
-var MSWordFormatCleaner = Class.extend({
+var Cleaner = Class.extend({
+    clean: function(html) {
+        var that = this,
+            replacements = that.replacements,
+            i, l;
+
+        for (i = 0, l = replacements.length; i < l; i += 2) {
+            html = html.replace(replacements[i], replacements[i+1]);
+        }
+
+        return html;
+    }
+});
+
+var MSWordFormatCleaner = Cleaner.extend({
     init: function() {
         this.replacements = [
             /<\?xml[^>]*>/gi, '',
@@ -651,14 +665,9 @@ var MSWordFormatCleaner = Class.extend({
     },
 
     clean: function(html) {
-        var that = this,
-            replacements = that.replacements,
-            i, l;
+        var that = this;
 
-        for (i = 0, l = replacements.length; i < l; i += 2) {
-            html = html.replace(replacements[i], replacements[i+1]);
-        }
-
+        html = Cleaner.fn.clean.call(that, html);
         html = that.stripEmptyAnchors(html);
         html = that.lists(html);
         html = html.replace(/\s+class="?[^"\s>]*"?/ig, '');
@@ -667,7 +676,7 @@ var MSWordFormatCleaner = Class.extend({
     }
 });
 
-var WebkitFormatCleaner = Class.extend({
+var WebkitFormatCleaner = Cleaner.extend({
     init: function() {
         this.replacements = [
             /\s+class="Apple-style-span[^"]*"/gi, '',
@@ -678,18 +687,6 @@ var WebkitFormatCleaner = Class.extend({
 
     applicable: function(html) {
         return (/class="?Apple-style-span|style="[^"]*-webkit-nbsp-mode/i).test(html);
-    },
-
-    clean: function(html) {
-        var that = this,
-            replacements = that.replacements,
-            i, l;
-
-        for (i = 0, l = replacements.length; i < l; i += 2) {
-            html = html.replace(replacements[i], replacements[i+1]);
-        }
-
-        return html;
     }
 });
 
@@ -703,6 +700,7 @@ extend(Editor, {
     SystemHandler: SystemHandler,
     Keyboard: Keyboard,
     Clipboard: Clipboard,
+    Cleaner: Cleaner,
     MSWordFormatCleaner: MSWordFormatCleaner,
     WebkitFormatCleaner: WebkitFormatCleaner
 });
