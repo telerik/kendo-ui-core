@@ -368,11 +368,13 @@ kendo_module({
         },
 
         registerTool: function(toolName, tool) {
-            if (tool.options && tool.options.template) {
-                tool.options.template.options.cssClass = "k-" + toolName;
+            var toolOptions = tool.options;
+
+            if (toolOptions && toolOptions.template) {
+                toolOptions.template.options.cssClass = "k-" + toolName;
             }
 
-            Editor.fn._tools[toolName] = tool;
+            Editor.defaultTools[toolName] = tool;
         },
 
         registerFormat: function(formatName, format) {
@@ -461,7 +463,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that.tools = deepExtend({}, kendo.ui.Editor.fn._tools);
+            that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
 
             that.options = deepExtend({}, that.options, options);
 
@@ -797,12 +799,7 @@ kendo_module({
             "insertHtml"
         ],
 
-        _tools: {
-            undo: { options: { key: "Z", ctrl: true } },
-            redo: { options: { key: "Y", ctrl: true } }
-        },
-
-        tools: {}, // tools collection is copied from _tools during initialization
+        tools: {}, // tools collection is copied from defaultTools during initialization
 
         value: function (html) {
             var body = this.body,
@@ -1001,6 +998,11 @@ kendo_module({
             }
         }
     });
+
+    Editor.defaultTools = {
+        undo: { options: { key: "Z", ctrl: true } },
+        redo: { options: { key: "Y", ctrl: true } }
+    };
 
     kendo.ui.plugin(Editor);
 
