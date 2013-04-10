@@ -24,7 +24,7 @@ JS_BUILDFILE = 'build/js.rb'
 
 #Build src/*.min.js files by running uglifyjs over src/*.js
 rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
-    compilejs(t.source, t.name)
+    compilejs(t.source)
 end
 
 #Rebuild kendo-config.json based on data present in the source code

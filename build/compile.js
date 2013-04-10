@@ -13,7 +13,7 @@ var ARGV = OPT
     .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
     .describe("beautify", "Output indented code (helps debugging)")
     .describe("nomangle", "Don't mangle names (helps debugging)")
-    .boolean("amd")
+    .boolean("amd").default("amd", true)
     .boolean("deps")
     .boolean("bundle")
     .boolean("kendo-config")
@@ -29,6 +29,37 @@ var deps_file_name = path.join(KENDO_SRCDIR, "download-builder/config/kendo-conf
 var template = JSON.parse(fs.readFileSync("download-builder/config/categories.json", "utf8"));
 
 var files = ARGV._.slice();
+
+var get_wrapper = (function(wrapper){
+    var code = '((typeof define == "function" && define.amd) ? define : function(deps, body){ return body() })($DEPS, $CONT)';
+    return function() {
+        if (wrapper) return wrapper;
+        wrapper = u2.parse(code);
+        wrapper.wrap = function(id, deps, cont) {
+            return wrapper.transform(new u2.TreeTransformer(
+                null,           // need no 'before'
+                function after(node){
+                    if (node instanceof u2.AST_SymbolRef) switch (node.name) {
+                      case "$ID":
+                        return new u2.AST_String({ value: id });
+                      case "$DEPS":
+                        return new u2.AST_Array({
+                            elements: deps.map(function(x){
+                                return new u2.AST_String({ value: x });
+                            })
+                        });
+                      case "$CONT":
+                        cont = cont.clone();
+                        cont.argnames = [];
+                        return new u2.AST_Function(cont);
+                        break;
+                    }
+                }
+            ));
+        };
+        return wrapper;
+    };
+})();
 
 if (ARGV.bundle) {
     var files = ARGV._.slice();
@@ -90,37 +121,6 @@ if (ARGV["kendo-config"]) {
     process.exit(0);
 }
 
-var get_wrapper = (function(wrapper){
-    var code = '((typeof define == "function" && define.amd) ? define : function(deps, body){ return body() })($DEPS, $CONT)';
-    return function() {
-        if (wrapper) return wrapper;
-        wrapper = u2.parse(code);
-        wrapper.wrap = function(id, deps, cont) {
-            return wrapper.transform(new u2.TreeTransformer(
-                null,           // need no 'before'
-                function after(node){
-                    if (node instanceof u2.AST_SymbolRef) switch (node.name) {
-                      case "$ID":
-                        return new u2.AST_String({ value: id });
-                      case "$DEPS":
-                        return new u2.AST_Array({
-                            elements: deps.map(function(x){
-                                return new u2.AST_String({ value: x });
-                            })
-                        });
-                      case "$CONT":
-                        cont = cont.clone();
-                        cont.argnames = [];
-                        return new u2.AST_Function(cont);
-                        break;
-                    }
-                }
-            ));
-        };
-        return wrapper;
-    };
-})();
-
 function compile_one_file(file) {
     var code = fs.readFileSync(file, "utf8");
     var ast = u2.parse(code, { filename: file });
@@ -158,9 +158,11 @@ function squeeze(ast) {
 }
 
 files.forEach(function (file){
-    var output = file.replace(/\.js$/i, ".min.js");
-    if (output == file)
-        throw new Error("Won't overwrite " + file);
+    output = file;
+    if (!file.match(/\.min\.js$/)) {
+        output = file.replace(/\.js$/i, ".min.js");
+    }
+
     var ast = compile_one_file(file);
     ast = squeeze(ast);
     if (!ARGV["nomangle"]) {
@@ -168,13 +170,13 @@ files.forEach(function (file){
         ast.compute_char_frequency();
         ast.mangle_names();
     }
+
     var codegen_options = {};
     if (ARGV["beautify"]) {
         codegen_options.beautify = true;
     }
-    code = ast.print_to_string(codegen_options);
-    fs.writeFileSync(output, code);
-    if (ARGV.amd) {
+
+    if (!ARGV["amd"]) {
         // save the non-RequireJS version for the download builder
         ast = ast.transform(new u2.TreeTransformer(function(node){
             if (node === ast) {
@@ -199,9 +201,10 @@ files.forEach(function (file){
 
             return node;
         }));
-        code = ast.print_to_string(codegen_options);
-        fs.writeFileSync(output + ".no-amd", code);
     }
+
+    code = ast.print_to_string(codegen_options);
+    fs.writeFileSync(output, code);
 });
 
 function extract_widget_info(ast) {

@@ -8,6 +8,16 @@ BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.json')
 
 BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html.erb')))
 
+#Build minified version with no AMD headers for use by the download builder
+rule /^dist\/download-builder.+\.min\.js$/ =>
+    lambda { |t| t.sub(/^dist\/download-builder.+\/js/, 'src').sub('.min.js', '.js') } do |t|
+        FileUtils.mkdir_p File.dirname(t.name)
+        File.open t.name, 'w' do |f|
+            f.write File.read(t.source);
+        end
+        compilejs(t.name, "--no-amd")
+    end
+
 namespace :download_builder do
 
     def download_builder_prerequisites(path, service_url)
@@ -17,11 +27,8 @@ namespace :download_builder do
             :root => BUILDER_SOURCE_PATH
 
         assets_path = File.join(dist_path, 'service', 'App_Data', VERSION)
-
         js_assets_path = File.join(assets_path, 'js')
-        tree :to => js_assets_path,
-            :from => CDN_MIN_JS,
-            :root => 'src'
+        task js_assets_path => MIN_JS.sub('src', js_assets_path)
 
         styles_assets_path = File.join(assets_path, 'styles')
         tree :to => styles_assets_path,
