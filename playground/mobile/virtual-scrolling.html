@@ -105,7 +105,6 @@
 
 
                     while(this.bottom < targetHeight) {
-                        console.log(this.bottom);
                         cell = new Cell(container);
                         cell.content(template(ds.at(itemCount ++)));
                         cell.below(prevCell);
@@ -114,7 +113,7 @@
                         this.bottom = cell.bottom;
                     }
 
-                    this.buffer = new kendo.data.Buffer(ds, itemCount);
+                    window.buffer = this.buffer = new kendo.data.Buffer(ds, itemCount);
 
                     ds.bind('change', function() {
                         view.scroller.virtualHeight(10000000);

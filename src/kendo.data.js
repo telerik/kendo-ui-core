@@ -3527,15 +3527,9 @@ kendo_module({
             this._prefetching = false;
             this._recalculate();
             var that = this;
-            dataSource.bind('change', function() {
-                console.log('datasource state changed to', dataSource.skip(), dataSource.take());
-                that._recalculate();
-            });
         },
 
         at: function(index)  {
-            console.log('requesting item at', index);
-
             var buffer = this,
                 ds = this.dataSource,
                 pageSize = this.pageSize,
@@ -3545,17 +3539,14 @@ kendo_module({
 
             // prefetch
             if (index === this.prefetchThreshold && !ds.inRange(skip + pageSize, pageSize) && !this._prefetching) {
-                console.log('prefetching');
                 this._prefetching = true;
                 ds.prefetch(skip + pageSize, pageSize, function() {
-                    console.log('prefetch done');
                     buffer._prefetching = false;
                 });
             }
 
             // mid-range jump
             if (index === this.midPageThreshold) {
-                console.log('midrange')
                 this.range(this.prefetchThreshold + 1);
             }
 
@@ -3570,7 +3561,6 @@ kendo_module({
 
             // next range jump
             else if (index === this.nextPageThreshold) {
-                console.log('next range')
                 this.range(skip);
             }
 
@@ -3579,7 +3569,6 @@ kendo_module({
 
         range: function(offset) {
             if (this.offset !== offset) {
-                console.log('changing range to', offset);
                 ds.range(offset, this.pageSize);
                 this.offset = offset;
                 this._recalculate();
@@ -3587,9 +3576,9 @@ kendo_module({
         },
 
         _recalculate: function() {
-            var skip = this.dataSource.skip(),
-                step = this.step,
-                pageSize = this.pageSize;
+            var pageSize = this.pageSize,
+                skip = Math.ceil(this.offset / pageSize) * pageSize,
+                step = this.step;
 
             this.skip = skip;
             this.midPageThreshold = skip + pageSize - 1,
