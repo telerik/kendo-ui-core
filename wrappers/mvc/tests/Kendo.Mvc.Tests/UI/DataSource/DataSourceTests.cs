@@ -33,6 +33,24 @@
         }
 
         [Fact]
+        public void ToJson_autoSync_is_not_serialized_if_not_set()
+        {
+            dataSource.AutoSync = false;
+
+            var result = dataSource.ToJson();
+            result.ContainsKey("autoSync").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void ToJson_autoSync_is_serialized_when_set()
+        {
+            dataSource.AutoSync = true;
+
+            var result = dataSource.ToJson();
+            result.ContainsKey("autoSync").ShouldBeTrue();
+        }
+
+        [Fact]
         public void ToJson_serverSorting_is_serialized_if_set()
         {
             dataSource.ServerSorting = true;

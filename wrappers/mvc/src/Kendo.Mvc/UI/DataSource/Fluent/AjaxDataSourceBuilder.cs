@@ -130,5 +130,16 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Determines if data source would automatically sync any changes to its data items. By default changes are not automatically sync-ed.
+        /// </summary>
+        /// <param name="enabled">If true changes will be automatically synced, otherwise false.</param>        
+        public virtual AjaxDataSourceBuilder<TModel> AutoSync(bool enabled)
+        {
+            dataSource.AutoSync= enabled;
+
+            return this;
+        }
     }
 }
