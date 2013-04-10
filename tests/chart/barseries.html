@@ -334,12 +334,13 @@
                             type: "bar",
                             data: [1],
                             visible: false
+                        },{
+                            type: "bar",
+                            data: [1]
                         }]
                     });
 
-                    points = chart._model._plotArea.charts[0].points;
-
-                    ok(points.length === 0);
+                    ok(series.points.length === 1);
                 });
 
                 // ------------------------------------------------------------
@@ -2223,14 +2224,14 @@
                         text: "Alpha",
                         value: 10,
                         color: "red"
-                    }, {
+                    },{
                         name: "Category B",
                         text: "Alpha",
                         value: 10,
                         color: null
                     }],
-                    chart,
                     points,
+                    chart,
                     label;
 
                 function createChart(options) {

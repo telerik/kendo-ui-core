@@ -131,14 +131,22 @@
                 });
 
                 test("removes the series points if the visible is set to false", function() {
-                    plotArea = new PlotAreaStub();
-                    setupScatterChart(plotArea, { series: [{
-                        data: [[1,2]],
-                        visible: false,
-                        type: "scatter"
-                    }] });
+                    $("#container").kendoChart({
+                        seriesDefaults: {
+                            type: "scatterLine"
+                        },
+                        series: [{
+                            data: [[1,2]],
+                            visible: false
+                        },{
+                            data: [[1,2]]
+                        }]
+                    });
 
-                    equal(scatterChart.points.length, 0);
+                    var chart = $("#container").data("kendoChart");
+                    var points = chart._plotArea.charts[0].points;
+
+                    ok(points.length === 1);
                 });
 
                 test("renders empty scatter line series", 0, function() {

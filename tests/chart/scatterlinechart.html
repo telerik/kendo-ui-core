@@ -83,14 +83,22 @@
                 });
 
                 test("removes the series points if the visible is set to false", function() {
-                    plotArea = new PlotAreaStub();
-                    setupScatterLineChart(plotArea, { series: [{
-                        data: [[1,2]],
-                        visible: false,
-                        type: "scatterLine"
-                    }] });
+                    $("#container").kendoChart({
+                        seriesDefaults: {
+                            type: "scatterLine"
+                        },
+                        series: [{
+                            data: [[1,2]],
+                            visible: false
+                        },{
+                            data: [[1,2]]
+                        }]
+                    });
 
-                    equal(scatterLineChart.points.length, 0);
+                    var chart = $("#container").data("kendoChart");
+                    var points = chart._plotArea.charts[0].points;
+
+                    ok(points.length === 1);
                 });
 
                 test("Creates points for scatterLineChart data points", function() {

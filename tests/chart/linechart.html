@@ -733,15 +733,22 @@
                 });
 
                 test("remove series if visible is set to false", function() {
-                    lineChart = new dataviz.LineChart(plotArea, {
+                    $("#container").kendoChart({
+                        seriesDefaults: {
+                            type: "line"
+                        },
                         series: [{
-                            type: "line",
-                            data: [0, 1],
+                            data: [1],
                             visible: false
+                        },{
+                            data: [1]
                         }]
                     });
 
-                    equal(lineChart.categoryPoints.length, 0);
+                    var chart = $("#container").data("kendoChart");
+                    var points = chart._model._plotArea.charts[0].points;
+
+                    ok(points.length === 1);
                 });
 
                 test("applies visible to point markers", function() {
