@@ -109,12 +109,17 @@ kendo_module({
                 isVisible = false,
                 content,
                 windowContent,
+                suppressActions = options && options.actions && !options.actions.length,
                 id;
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
             element = that.element;
             content = options.content;
+
+            if (suppressActions) {
+                options.actions = [];
+            }
 
             that.appendTo = $(options.appendTo || document.body);
 

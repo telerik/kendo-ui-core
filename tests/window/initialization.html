@@ -405,6 +405,12 @@
                 equal(dialog.wrapper.height(), 190);
             });
 
+            test("passing empty actions array does not show any buttons in title bar", function() {
+                var dialog = createWindow({ actions: [] });
+
+                equal(dialog.wrapper.find(".k-window.action").length, 0);
+            });
+
             var form;
 
             module("appendTo option", {
