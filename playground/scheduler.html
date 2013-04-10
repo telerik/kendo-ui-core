@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>editable</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.default.min.css" rel="stylesheet" />
+
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+
+        <style>
+            td, th {
+                border: gray solid;
+                border-collapse: separate;
+                border-width: 0px 0px 1px 1px;
+            }
+
+            table {
+                border: gray solid;
+                border-width: 1px 1px 0px 0px;
+                width: 100%;
+            }
+            .event {
+                background-color: red;
+                position: absolute;
+                border: 1px solid;
+               /* background-image: url('https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c28.28.348.348/s160x160/526597_203777816431659_493913204_n.jpg');*/
+                background-repeat:no-repeat;
+                background-position:center;
+            }
+
+            .event input {
+                width: 100%;
+                height: 100%;
+            }
+
+            .k-today {
+                background-color: #eee;
+            },
+            .k-resize-handle {
+                position: absolute;
+            }
+            .time {
+                width: 60px;
+                text-align: center;
+                border-top-width: 0px;
+            }
+       </style>
+   </head>
+    <body>
+        <input id="datepicker" />
+
+        <a href="#" id="dayView" class="k-button">Day</a>
+        <a href="#" id="weekView" class="k-button">Week</a>
+        <a href="#" id="sixDayView" class="k-button">6 days</a>
+
+        <div id="container"></div>
+        <script>
+            var data = [{
+                startDate: new Date("4/1/2013 13:30"),
+                endDate: new Date("4/1/2013 16:00"),
+                name: "foo",
+                calendar: 1,
+                color: "yellow"
+            },{
+                startDate: new Date("4/1/2013 13:30"),
+                endDate: new Date("4/1/2013 17:30"),
+                name: "foo duplicate",
+                color: "green",
+                calendar: 9
+            },{
+                startDate: new Date("4/1/2013 13:30"),
+                endDate: new Date("4/1/2013 17:30"),
+                name: "foo duplicate",
+                color: "green",
+                calendar: 4
+            },{
+                startDate: new Date("4/1/2013 13:30"),
+                endDate: new Date("4/3/2013 17:30"),
+                name: "my long event",
+                color: "grey",
+                calendar: 2
+            },{
+                startDate: new Date("4/2/2013 13:30"),
+                endDate: new Date("4/3/2013 17:30"),
+                name: "my other long event",
+                color: "blue",
+                calendar: 3
+            },
+            {
+                startDate: new Date("3/30/2013 21:30"),
+                endDate: new Date("3/30/2013 23:00"),
+                name: "bar",
+                color: "blue",
+                calendar: 1
+            },/*{
+                startDate: new Date("4/1/2012 10:30"),
+                endDate: new Date("4/1/2014 12:00"),
+                name: "an old one and into the feature",
+                color: "pink"
+            },*/
+            {
+                startDate: new Date("4/1/2013 10:30"),
+                endDate: new Date("4/1/2013 12:00"),
+                name: "baz",
+                color: "red",
+                calendar: 1
+            }];
+
+            var dataSource = new kendo.data.DataSource({
+                data: data,
+                change: function() {
+                    currentRenderer.position(this.view(), container);
+                }
+            });
+
+            var startDate,
+                endDate,
+                totalDays,
+                container = $("#container"),
+                numberOfDays = 6;
+
+            var datePicker = $("#datepicker").kendoDatePicker({
+                value: new Date(),
+                change: function() {
+                    var selected = new Date(this.value().toDateString());
+                    render(selected);
+                }
+            }).data("kendoDatePicker");
+
+            $(".k-button").click(function() {
+               currentRenderer = new renderers[this.id]();
+               render(new Date(datePicker.value().toDateString()));
+            });
+
+            $("#container").on("click", "th:not(.time)", function() {
+                var slot = $(this).index() - 1,
+                    date = new Date(startDate);
+
+               date.setDate(date.getDate() + slot);
+               currentRenderer = new renderers["dayView"]();
+
+               datePicker.value(date);
+               datePicker.trigger("change");
+            });
+
+            var DaysViewRenderer = kendo.Class.extend({
+                render: function(selectedDate, container) {
+                },
+                renderSlots: function(start, end, container){
+                    var html = "<table cellspacing=\"0\"><thead><tr>",
+                        hours = 24,
+                        idx,
+                        days,
+                        today,
+                        length;
+
+                    if (dataSource.group().length) {
+
+                        html += "<tr></tr>";
+                    }
+
+                    this.startDate = new Date(start.toDateString());
+                    this.endDate = new Date(end.toDateString());
+
+                    days = totalDays = getDay(start, end);
+                    today = getDay(start, new Date());
+                    html += "<th class=\"time\"/>" + headerCells(start, days);
+                        html += "</tr></thead><tbody>";
+
+                    for (idx = 0, length = hours; idx < length; idx++) {
+                        html += "<tr>";
+                            html += "<td class=\"time\">" + (idx%2 !== 0 ? idx + ":00" : "") + "</td>";
+
+                            for (var j = 0, length1 = days; j < length1; j++) {
+                                html += "<td " + (j == today ? "class=\"k-today\"" : "") + ">&nbsp;</td>";
+                            }
+
+                            html += "</tr>";
+                    }
+
+                    html += "</tbody></table>";
+
+                    container.html(html);
+                },
+                positionEvent: function(event) {
+                    var cell,
+                        offset,
+                        hourIndex,
+                        slotIndex;
+
+                    if (event.startDate.getTime() >= this.startDate.getTime() || (event.endDate.getTime() >= this.startDate.getTime() && event.startDate.getTime() <= this.endDate.getTime())) {
+                        slotIndex = Math.max(getDay(this.startDate, new Date(event.startDate.toDateString())) + 1, 0);
+
+                        hourIndex = Math.max(event.startDate.getHours() - 1, 0);
+
+                        if (event.startDate.getTime() <= this.startDate.getTime()) {
+                            hourIndex = 0;
+                        }
+
+                        cell = this.table.find("tr")
+                            .eq(hourIndex)
+                            .find("td:not(.time)")
+                            .eq(slotIndex);
+
+                        offset = cell[0].offsetHeight * getOffset(event, this.startDate, this.endDate);
+
+                        $(eventTemplate(event))
+                            .css({
+                                backgroundColor: event.color,
+                                height: offset,
+                                width: cell[0].clientWidth - 5
+                            })
+                            .appendTo(cell);
+
+                        var events = this.table.find("td:nth-child(" + (slotIndex + 1) + ")").find(".event");
+
+                        if (events.length > 1) {
+                            var width = cell[0].clientWidth / events.length,
+                            left = events.first().offset().left;
+
+                            events.each(function() {
+                                $(this).css({
+                                    width: width - 5,
+                                    left: left
+                                });
+                                left += width;
+                            });
+                        }
+                    }
+                },
+                position: function(data, container) {
+                    var idx,
+                        length,
+                        event;
+
+                    this.table = container.find("table tbody");
+
+                    //data = new kendo.data.Query(data).sort([ { field: "endDate", dir: "desc" }, { field: "startDate", dir: "asc" } ]).toArray();
+
+                    for (idx = 0, length = data.length; idx < length; idx++) {
+                        event = data[idx];
+                        this.positionEvent(event);
+
+                        event = $.extend(true, { }, event, { startDate: new Date(event.startDate), endDate: new Date(event.endDate) });
+
+                        if (event.startDate.getTime() < this.startDate.getTime()) {
+                            event.startDate = new Date(this.startDate);
+                        }
+                        while (getDay(event.startDate, event.endDate) && getDay(event.startDate, this.endDate)) {
+                            event.startDate.setMinutes(0);
+                            event.startDate.setHours(0);
+                            addDays(event.startDate, 1);
+                            this.positionEvent(event);
+                        }
+                    }
+                }
+            });
+
+            function getOffset(event, start, end) {
+                var eventStart = event.startDate,
+                    eventEnd = event.endDate;
+
+                if (eventStart.getTime() < start.getTime()) {
+                    return 24;
+                }
+
+                if (getDay(eventStart, eventEnd)) {
+                    return 24 - eventStart.getHours();
+                }
+                return eventEnd.getHours() - eventStart.getHours();
+            }
+
+            var renderers = {
+                "dayView": DaysViewRenderer.extend({
+                    render: function(selectedDate, container) {
+                        var start = new Date(selectedDate),
+                            end = new Date(start);
+
+                        end.setDate(end.getDate() + 1);
+
+                        this.renderSlots(start, end, container);
+                    }
+                }),
+                "weekView": DaysViewRenderer.extend({
+                    render: function(selectedDate, container) {
+                        var start = new Date(selectedDate),
+                            end,
+                            weekDay = selectedDate.getDay();
+
+                        start.setDate(start.getDate() - weekDay);
+                        end = new Date(start);
+                        addDays(end, 8);
+
+                        this.renderSlots(start, end, container);
+                    }
+                }),
+                "sixDayView": DaysViewRenderer.extend({
+                    render: function(selectedDate, container) {
+                        var start = new Date(selectedDate),
+                            end;
+
+                        end = new Date(start);
+                        end.setDate(end.getDate() + 6);
+
+                        this.renderSlots(start, end, container);
+                    }
+                })
+            }
+
+            var currentRenderer = new renderers["weekView"]();
+
+            function render(selectedDate) {
+                currentRenderer.render(selectedDate, container);
+
+                startDate = currentRenderer.startDate;
+                endDate = currentRenderer.endDate;
+
+                var table = container.find("table");
+/*
+                table.on("mousedown", "td:not(.time)", function() {
+                   var slotIdx = $(this).index() + 1;
+                   table.find("td:nth-child(" + slotIdx + ")").addClass("k-current-slot");
+                   table.one("mouseup", function() {
+                        //$(".k-current-slot").removeClass("k-current-slot");
+                   });
+                });
+
+                var selectable = new kendo.ui.Selectable(table, {
+                    filter: "td:not(.time)",
+                    multiple: true,
+                    change: function() {
+                    }
+                });
+
+*/
+/*
+                container.on("click", "div.event", function() {
+                    var eventContainer = $(this),
+                        model = dataSource.getByUid(eventContainer.data("uid"));
+
+                    var editable = eventContainer.kendoEditable({ model: model, fields: "name" }).data("kendoEditable");
+
+                    model.one("change", function() {
+                        editable.end();
+                        editable.destroy();
+                        eventContainer.replaceWith(eventTemplate(model));
+                    });
+
+                    eventContainer.on("blur", "input", function() {
+                        editable.end();
+                        editable.destroy();
+                        eventContainer.replaceWith(eventTemplate(model));
+                    });
+                });
+*/
+                /*
+                var eventStart,
+                    eventHeight,
+                    element;
+
+                container.find("table").kendoResizable({
+                    handle: ".k-resize-handle",
+                    orientation: "vertical",
+                    start: function(e) {
+                        element = $(e.currentTarget).closest("div.event");
+
+                        eventStart = e.y.location;
+                        eventHeight = element.outerHeight();
+                    },
+                    resize: function(e) {
+                        element.css("height", eventHeight + e.y.location - eventStart);
+                    },
+                    resizeend: function() {
+                        var model = dataSource.getByUid(element.data("uid"));
+                        element = null;
+                    }
+                });
+                */
+
+                dataSource.filter({
+                    logic: "or",
+                    filters: [
+                    {
+                        logic: "and",
+                        filters: [
+                            {
+                                field: "startDate",
+                                operator: "gte",
+                                value: startDate
+                            }
+                        ]
+                    },{
+                        logic: "and",
+                        filters: [
+                            {
+                                field: "startDate",
+                                operator: "lte",
+                                value: selectedDate
+                            },
+                            {
+                                field: "endDate",
+                                operator: "gt",
+                                value: selectedDate
+                            }
+                        ]
+                    },{
+                        logic: "and",
+                        filters: [
+                            {
+                                field: "endDate",
+                                operator: "gte",
+                                value: startDate
+                            },{
+                                field: "endDate",
+                                operator: "lte",
+                                value: endDate
+                            }
+
+                        ]
+                    }
+                    ]
+                });
+            }
+
+            function headerCells(start, days) {
+                var html = "",
+                idx,
+                length;
+
+                for (idx = 0, length = days; idx < days; idx++) {
+                    html += "<th>" + kendo.format("{0:d}", start) + "</th>";
+                    start.setDate(start.getDate() + 1);
+                }
+
+                return html;
+            }
+
+            function getDay(start, end) {
+                return Math.floor((end - start) / 86400000);
+            }
+
+            function addDays(date, days) {
+                date.setDate(date.getDate() + days);
+            }
+
+            var eventTemplate = kendo.template('<div class="event" data-uid="#=uid#">#:name#</div>');
+
+            datePicker.trigger("change");
+
+        </script>
+    </body>
+</html>
