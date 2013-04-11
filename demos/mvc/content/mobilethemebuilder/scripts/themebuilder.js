@@ -1325,7 +1325,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
 
         exportWindow = $("#exportWindow");
 
-        exportWindow.append('<br /><br /><a class="k-button" target="_blank" download="kendo.mobile.exported.css">Download file (Chrome only)</a>');
+        exportWindow.append('<br /><br /><a class="k-button" target="_blank" download="kendo.mobile.exported.css">Download CSS</a>');
 
         exportWindow = exportWindow.kendoWindow({
             width: "400px",
@@ -1355,7 +1355,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
         });
 
         $("#exportStyles").on(click, function () {
-            var output = "",
+            var output = "", blob = "", BlobBuilder,
                 textarea = exportWindow.element.find("textarea"),
                 anchor = exportWindow.element.find("a");
 
@@ -1367,11 +1367,21 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             });
 
             textarea.text(output);
-            if (window.BlobBuilder) {
-                var bb = new BlobBuilder();
-                bb.append(output);
+            try {
+                blob = new Blob([output], {type: "text/plain"});
+            } catch (e) {
+                BlobBuilder = window.WebKitBlobBuilder || window.MozBlobBuilder;
 
-                anchor.attr("href", window.URL.createObjectURL(bb.getBlob("text/plain")));
+                if (BlobBuilder) {
+                    var bb = new BlobBuilder();
+                    bb.append(output);
+
+                    blob = bb.getBlob("text/plain");
+                }
+            }
+
+            if (anchor[0].download) {
+                anchor.attr("href", window.URL.createObjectURL(blob));
             } else {
                 anchor.remove();
                 textarea.css("height", "365px");
