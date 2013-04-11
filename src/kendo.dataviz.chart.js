@@ -127,9 +127,12 @@ kendo_module({
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
-        POLAR_BAR = "polarBar",
         POLAR_LINE = "polarLine",
+        POLAR_BUBBLE = "polarBubble",
         POINTER = "pointer",
+        RADAR_AREA = "radarArea",
+        RADAR_COLUMN = "radarColumn",
+        RADAR_LINE = "radarLine",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -177,11 +180,15 @@ kendo_module({
         ZOOM_START = "zoomStart",
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
+        // Register charts dynamically as plugins
         CATEGORICAL_CHARTS = [
             BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
         ],
         POLAR_CHARTS = [
-            POLAR_LINE, POLAR_AREA, POLAR_BAR
+            POLAR_AREA, POLAR_LINE, POLAR_BUBBLE
+        ],
+        RADAR_CHARTS = [
+            RADAR_AREA, RADAR_LINE, RADAR_COLUMN
         ],
         XY_CHARTS = [
             SCATTER, SCATTER_LINE, BUBBLE
@@ -461,9 +468,10 @@ kendo_module({
                 donutSeries = [],
                 bulletSeries = [],
                 polarSeries = [],
+                radarSeries = [],
                 plotArea;
 
-            // TODO: Extract into a classier function
+            // TODO: Try to convert into a plugin-based registration
             for (i = 0; i < length; i++) {
                 currentSeries = series[i];
 
@@ -473,6 +481,8 @@ kendo_module({
                     xySeries.push(currentSeries);
                 } else if (inArray(currentSeries.type, POLAR_CHARTS)) {
                     polarSeries.push(currentSeries);
+                } else if (inArray(currentSeries.type, RADAR_CHARTS)) {
+                    radarSeries.push(currentSeries);
                 } else if (currentSeries.type === PIE) {
                     pieSeries.push(currentSeries);
                 } else if (currentSeries.type === DONUT) {
@@ -490,6 +500,8 @@ kendo_module({
                 plotArea = new XYPlotArea(xySeries, options);
             } else if (polarSeries.length > 0) {
                 plotArea = new PolarPlotArea(polarSeries, options);
+            } else if (radarSeries.length > 0) {
+                plotArea = new RadarPlotArea(radarSeries, options);
             } else {
                 plotArea = new CategoricalPlotArea(categoricalSeries, options);
             }
@@ -1818,7 +1830,7 @@ kendo_module({
         }
     });
 
-    var PolarCategoryAxis = ChartElement.extend({
+    var RadarCategoryAxis = ChartElement.extend({
         init: function(options) {
             var axis = this;
 
@@ -4328,7 +4340,7 @@ kendo_module({
         }
     });
 
-    var PolarLineChart = LineChart.extend({
+    var RadarLineChart = LineChart.extend({
         pointSlot: function(categorySlot, valueSlot) {
             var chart = this,
                 options = chart.options,
@@ -4339,7 +4351,7 @@ kendo_module({
         }
     });
 
-    var PolarAreaSegment = AreaSegment.extend({
+    var RadarAreaSegment = AreaSegment.extend({
         points: function() {
             var segment = this,
                 chart = segment.parent,
@@ -4357,7 +4369,7 @@ kendo_module({
         }
     });
 
-    var PolarAreaChart = PolarLineChart.extend({
+    var RadarAreaChart = RadarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
             var chart = this,
                 options = chart.options,
@@ -4367,7 +4379,7 @@ kendo_module({
                 stackPoints = prevSegment.linePoints.slice(0).reverse();
             }
 
-            return new PolarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
+            return new RadarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
         },
 
         seriesMissingValues: function(series) {
@@ -7812,7 +7824,7 @@ kendo_module({
         }
     });
 
-    var PolarPlotArea = PlotAreaBase.extend({
+    var RadarPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
             var plotArea = this;
 
@@ -7849,7 +7861,7 @@ kendo_module({
             var plotArea = this,
                 categoryAxis;
 
-            categoryAxis = new PolarCategoryAxis(plotArea.options.categoryAxis);
+            categoryAxis = new RadarCategoryAxis(plotArea.options.categoryAxis);
 
             plotArea.categoryAxis = categoryAxis;
             plotArea.appendAxis(categoryAxis);
@@ -7886,12 +7898,12 @@ kendo_module({
             var plotArea = this,
                 series = plotArea.series;
 
-            plotArea.createLineChart(
-                plotArea.filterSeriesByType(series, [POLAR_LINE])
+            plotArea.createAreaChart(
+                plotArea.filterSeriesByType(series, [RADAR_AREA])
             );
 
-            plotArea.createAreaChart(
-                plotArea.filterSeriesByType(series, [POLAR_AREA])
+            plotArea.createLineChart(
+                plotArea.filterSeriesByType(series, [RADAR_LINE])
             );
         },
 
@@ -7903,7 +7915,7 @@ kendo_module({
             var plotArea = this,
                 firstSeries = series[0],
                 filteredSeries = plotArea.filterVisibleSeries(series),
-                lineChart = new PolarLineChart(plotArea, {
+                lineChart = new RadarLineChart(plotArea, {
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
                     series: series
                 });
@@ -7919,7 +7931,7 @@ kendo_module({
             var plotArea = this,
                 firstSeries = series[0],
                 filteredSeries = plotArea.filterVisibleSeries(series),
-                areaChart = new PolarAreaChart(plotArea, {
+                areaChart = new RadarAreaChart(plotArea, {
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
                     series: series
                 });
