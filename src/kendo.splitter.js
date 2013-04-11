@@ -93,7 +93,9 @@ kendo_module({
 
             $(window).on("resize", that._resizeHandler);
 
-            that.resizing = new PaneResizing(that);
+            if (that.element.children(".k-splitbar-draggable-" + that.orientation).length) {
+                that.resizing = new PaneResizing(that);
+            }
 
             that.element.triggerHandler("init.kendoSplitter");
         },
@@ -111,24 +113,29 @@ kendo_module({
 
         _attachEvents: function() {
             var that = this,
-                orientation = that.options.orientation,
-                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation;
+                orientation = that.options.orientation;
 
             // do not use delegated events to increase performance of nested elements
             that.element
-                .find(splitbarDraggableSelector)
+                .children(".k-splitbar-draggable-" + orientation)
                     .on("keydown" + NS, $.proxy(that._keydown, that))
                     .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
                     .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
-                    .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED); that.resizing.end(); })
+                    .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED);
+                        if (that.resizing) {
+                            that.resizing.end();
+                        }
+                    })
                     .on(MOUSEENTER + NS, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                     .on(MOUSELEAVE + NS, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
                     .on("mousedown" + NS, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
                     .on("mouseup" + NS, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .end()
-                .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
-                .on(CLICK + NS, ".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", that._arrowClick(EXPAND))
-                .on("dblclick" + NS, ".k-splitbar", proxy(that._togglePane, that))
+                .children(".k-splitbar")
+                    .on("dblclick" + NS, proxy(that._togglePane, that))
+                    .children(".k-collapse-next, .k-collapse-prev").on(CLICK + NS, that._arrowClick(COLLAPSE)).end()
+                    .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
+                .end()
                 .parent().closest(".k-splitter").each(function() {
                     var parentSplitter = $(this),
                         splitter = parentSplitter.data("kendoSplitter");
@@ -152,15 +159,18 @@ kendo_module({
 
         destroy: function() {
             var that = this,
-                orientation = that.options.orientation,
-                splitbarDraggableSelector = "> .k-splitbar-draggable-" + orientation;
+                orientation = that.options.orientation;
 
             Widget.fn.destroy.call(that);
 
             that.element.off(NS)
-                .find(splitbarDraggableSelector).off(NS);
+                .children(".k-splitbar-draggable-" + orientation).off(NS).end()
+                .children(".k-splitbar").off(NS)
+                    .children(".k-collapse-next, .k-collapse-prev, .k-expand-next, .k-expand-prev").off(NS);
 
-            that.resizing.destroy();
+            if (that.resizing) {
+                that.resizing.destroy();
+            }
 
             $(window).off("resize", that._resizeHandler);
 
@@ -181,7 +191,7 @@ kendo_module({
                 if (e.ctrlKey) {
                     pane = target[decrease ? "next" : "prev"]();
 
-                    if (resizing.isResizing()) {
+                    if (resizing && resizing.isResizing()) {
                         resizing.end();
                     }
 
@@ -190,11 +200,11 @@ kendo_module({
                     } else {
                         that._triggerAction(COLLAPSE, target[decrease ? "prev" : "next"]());
                     }
-                } else {
+                } else if (resizing) {
                     resizing.move((decrease ? -1 : 1) * that._resizeStep, target);
                 }
                 e.preventDefault();
-            } else if (key === keys.ENTER) {
+            } else if (key === keys.ENTER && resizing) {
                 resizing.end();
                 e.preventDefault();
             }
@@ -462,8 +472,13 @@ kendo_module({
 
             this.trigger(RESIZE);
 
-            this.resizing.destroy();
-            this.resizing = new PaneResizing(this);
+            if (this.resizing) {
+                this.resizing.destroy();
+            }
+
+            if (this.element.children(".k-splitbar-draggable-" + this.orientation).length) {
+                this.resizing = new PaneResizing(this);
+            }
         },
 
         collapse: function(pane) {

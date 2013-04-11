@@ -4,15 +4,40 @@
         <title>splitter</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.resizable.js"></script>
         <script src="../src/kendo.splitter.js"></script>
 
-        <link rel="stylesheet" href="../styles/kendo.common.css" />
-        <link rel="stylesheet" href="../styles/kendo.default.css" />
+        <link rel="stylesheet" href="../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../styles/web/kendo.default.css" />
+
+        <style>
+            .k-splitter .k-splitbar-horizontal { width: 15px; }
+        </style>
     </head>
     <body>
-        <div id="splitter" style='width:300px;height:100px'><div style="background: red">1</div><div style="background: green">2</div></div>
+        <div id="splitter" style='width:300px;height:100px'><div>
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+            foo bar baz
+        </div><div>
+            baz qux cat
+        </div></div>
 
         <script>
             $(document).ready(function() {
