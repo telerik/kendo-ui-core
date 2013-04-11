@@ -1044,6 +1044,7 @@ kendo_module({
             }
         },
 
+        // TODO: Redundant - labels are child elements
         destroy: function() {
             var axis = this,
                 labels = axis.labels,

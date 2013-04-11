@@ -22,13 +22,19 @@
                     seriesDefaults: {
                         // TODO: Finalize naming
                         // polarLine, polarArea, polarBar
-                        type: "polarLine"
+                        type: "polarArea"
                     },
                     series: [{
-                        data: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        data: [1, 2, 3, 4, 5, 6, 7, 7, 5],
+                        color: "red",
+                        opacity: 0.5,
+                        markers: {
+                            visible: false
+                        }
                     }],
                     categoryAxis: {
-                        categories: ["A", "B", "C", "D", "E", "F"]
+                        categories: ["A", "B", "C", "D", "E", "F"],
+                        startAngle: 300
                     },
                     valueAxis: {
                         majorGridLines: {
