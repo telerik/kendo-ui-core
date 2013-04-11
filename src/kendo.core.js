@@ -539,37 +539,12 @@ function pad(number, digits, end) {
         numberFormat.currency.groupSizes = numberFormat.currency.groupSize;
     }
 
-    function lowerArray(data) {
-        var idx = 0,
-            length = data.length,
-            array = [];
-
-        for (; idx < length; idx++) {
-            array[idx] = (data[idx] + "").toLowerCase();
-        }
-
-        return array;
-    }
-
-    function lowerLocalInfo(localInfo) {
-        var newLocalInfo = {}, property;
-
-        for (property in localInfo) {
-            newLocalInfo[property] = lowerArray(localInfo[property]);
-        }
-
-        return newLocalInfo;
-    }
-
     kendo.culture = function(cultureName) {
-        var cultures = kendo.cultures, culture, calendar;
+        var cultures = kendo.cultures, culture;
 
         if (cultureName !== undefined) {
             culture = findCulture(cultureName) || cultures[EN];
-            culture.calendar = calendar = culture.calendars.standard;
-            calendar._lowerDays = lowerLocalInfo(calendar.days);
-            calendar._lowerMonths = lowerLocalInfo(calendar.months);
-
+            culture.calendar = culture.calendars.standard;
             cultures.current = culture;
 
             if (globalize) {
@@ -1080,6 +1055,28 @@ function pad(number, digits, end) {
         }
     }
 
+    function lowerArray(data) {
+        var idx = 0,
+            length = data.length,
+            array = [];
+
+        for (; idx < length; idx++) {
+            array[idx] = (data[idx] + "").toLowerCase();
+        }
+
+        return array;
+    }
+
+    function lowerLocalInfo(localInfo) {
+        var newLocalInfo = {}, property;
+
+        for (property in localInfo) {
+            newLocalInfo[property] = lowerArray(localInfo[property]);
+        }
+
+        return newLocalInfo;
+    }
+
     function parseExact(value, format, culture) {
         if (!value) {
             return null;
@@ -1181,6 +1178,10 @@ function pad(number, digits, end) {
             } else {
                 if (ch === "d") {
                     count = lookAhead("d");
+                    if (!calendar._lowerDays) {
+                        calendar._lowerDays = lowerLocalInfo(calendar.days);
+                    }
+
                     day = count < 3 ? getNumber(2) : getIndexByName(calendar._lowerDays[count == 3 ? "namesAbbr" : "names"], true);
 
                     if (day === null || outOfRange(day, 1, 31)) {
@@ -1188,6 +1189,9 @@ function pad(number, digits, end) {
                     }
                 } else if (ch === "M") {
                     count = lookAhead("M");
+                    if (!calendar._lowerMonths) {
+                        calendar._lowerMonths = lowerLocalInfo(calendar.months);
+                    }
                     month = count < 3 ? getNumber(2) : getIndexByName(calendar._lowerMonths[count == 3 ? 'namesAbbr' : 'names'], true);
 
                     if (month === null || outOfRange(month, 1, 12)) {
