@@ -2,7 +2,7 @@
 
 .k-colorpick .km-slider-background
 {
-    background: linear-gradient(top,#dbdbdb,#eee 50%) 6em 0 no-repeat #3074e7;
+    background: linear-gradient(to bottom,#dbdbdb,#eee 50%) 6em 0 no-repeat #3074e7;
     background: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0,#dbdbdb),color-stop(0.5,#eee)) 6em 0 no-repeat #3074e7;
     background: -moz-linear-gradient(top,#dbdbdb,#eee 50%) 6em 0 no-repeat #3074e7;
     background: -ms-linear-gradient(top,#dbdbdb,#eee 50%) 6em 0 no-repeat #3074e7;
@@ -19,7 +19,7 @@
     width: 1.4em;
     height: 1.4em;
     border: 1px solid #eee;
-    background: linear-gradient(top,#ccc,#fff);
+    background: linear-gradient(to bottom,#ccc,#fff);
     background: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0,#ccc),color-stop(1,#fff));
     background: -moz-linear-gradient(top,#ccc,#fff);
     background: -ms-linear-gradient(top,#ccc,#fff);
@@ -28,7 +28,7 @@
 
 .k-colorpick .km-slider-background
 {
-    background: linear-gradient(top,rgba(0,0,0,0.5),rgba(0,0,0,0) 15%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.4)) 0 0 no-repeat,linear-gradient(top,#dbdbdb,#fff) 12em 0 no-repeat,linear-gradient(top,#2a5db2,#6da9f7) 0 0 no-repeat;
+    background: linear-gradient(to bottom,rgba(0,0,0,0.5),rgba(0,0,0,0) 15%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.4)) 0 0 no-repeat,linear-gradient(to bottom,#dbdbdb,#fff) 12em 0 no-repeat,linear-gradient(to bottom,#2a5db2,#6da9f7) 0 0 no-repeat;
     background: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0,rgba(0,0,0,0.5)),color-stop(0.15,rgba(0,0,0,0)),color-stop(0.9,rgba(0,0,0,0)),color-stop(1,rgba(0,0,0,0.4))) 0 0 no-repeat,-webkit-gradient(linear,50% 0,50% 100%,color-stop(0,#dbdbdb),color-stop(1,#fff)) 12em 0 no-repeat,-webkit-gradient(linear,50% 0,50% 100%,color-stop(0,#2a5db2),color-stop(1,#6da9f7)) 0 0 no-repeat;
     background: -moz-linear-gradient(top,rgba(0,0,0,0.5),rgba(0,0,0,0) 15%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.4)) 0 0 no-repeat,-moz-linear-gradient(top,#dbdbdb,#fff) 12em 0 no-repeat,-moz-linear-gradient(top,#2a5db2,#6da9f7) 0 0 no-repeat;
     background: -ms-linear-gradient(top,rgba(0,0,0,0.5),rgba(0,0,0,0) 15%,rgba(0,0,0,0) 90%,rgba(0,0,0,0.4)) 0 0 no-repeat,-ms-linear-gradient(top,#dbdbdb,#fff) 12em 0 no-repeat,-ms-linear-gradient(top,#2a5db2,#6da9f7) 0 0 no-repeat;
