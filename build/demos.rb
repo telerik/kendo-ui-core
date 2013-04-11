@@ -281,11 +281,8 @@ def patched_web_config(name, source, cdn_root, themebuilder_root)
     task
 end
 
-tree :to => "dist/demos/staging-php/",
-     :from => FileList[PHP_WRAPPERS_ROOT + '**/*'],
-     :root => PHP_WRAPPERS_ROOT
-
 directory 'dist/demos/staging-mvc'
+directory 'dist/demos/staging-php'
 
 namespace :demos do
 
@@ -349,13 +346,12 @@ namespace :demos do
 
     desc('Build php demos for staging')
     task :staging_php => [
-        :js,
-        :less,
-        PHP_DEMOS_RESOURCES + "js",
-        PHP_DEMOS_RESOURCES + "css",
-        PHP_DEMOS_RESOURCES,
-        "dist/demos/staging-php/"
-    ]
+        'bundles:php.commercial',
+        'dist/demos/staging-php'
+    ] do
+        sh 'cp -a dist/bundles/php.commercial/wrappers/php/* dist/demos/staging-php'
+    end
+
 
     desc('Build mvc demos for staging')
     task :staging_mvc => [
