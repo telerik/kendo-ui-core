@@ -6032,7 +6032,7 @@ kendo_module({
             return result;
         },
 
-        filterSeriesByVisibility: function(series) {
+        filterVisibleSeries: function(series) {
             var i, currentSeries,
                 result = [];
 
