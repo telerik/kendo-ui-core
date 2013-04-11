@@ -400,6 +400,7 @@ body:before
 }
 
 .km-on-wp.km-app .km-icon:after,
+.km-on-wp.km-app .km-filter-wrap:before,
 .km-on-wp.km-app .km-state-active .km-icon:after
 {
     color: transparent;
@@ -410,7 +411,8 @@ body:before
     vertical-align: middle;
 }
 
-.km-wp-light.km-app .km-icon:after
+.km-wp-light.km-app .km-icon:after,
+.km-wp-light.km-app .km-filter-wrap:before
 {
     background-image: url("images/wp8_inverseicons.png");
 }
@@ -430,7 +432,8 @@ body:before
     background-position-x: 20%;
 }
 
-.km-on-wp.km-app .km-add:after
+.km-on-wp.km-app .km-add:after,
+.km-on-wp.km-app .km-filter-reset .km-clear:after
 {
     background-position-x: 22%;
 }
@@ -570,7 +573,8 @@ body:before
     background-position-x: 74%;
 }
 
-.km-on-wp.km-app .km-search:after
+.km-on-wp.km-app .km-search:after,
+.km-on-wp.km-app .km-filter-wrap:before
 {
     background-position-x: 76%;
 }
@@ -637,3 +641,13 @@ body:before
     background-position-x: 100%;
 }
 
+.km-on-wp.km-app .km-filter-wrap:before
+{
+    display: inline-block;
+    content: "\a0"
+}
+
+.km-on-wp.km-app .km-filter-reset .km-clear:after
+{
+    transform: rotate(45deg);
+}
