@@ -22,8 +22,9 @@ kendo_module({
         SLIDE = "slide",
         NS = ".slider",
         MOUSE_DOWN = "touchstart" + NS + " mousedown" + NS,
-        TRACK_MOUSE_DOWN = pointers ? "MSPointerDown" + NS : "mousedown" + NS + " touchstart" + NS,
+        TRACK_MOUSE_DOWN = pointers ? "MSPointerDown" + NS : MOUSE_DOWN,
         MOUSE_UP = "touchend" + NS + " mouseup" + NS,
+        TRACK_MOUSE_UP = pointers ? "MSPointerUp" + NS : MOUSE_UP,
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown" + NS,
         CLICK = "click" + NS,
@@ -668,6 +669,9 @@ kendo_module({
                     .end()
                     .on(TRACK_MOUSE_DOWN, function() {
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    })
+                    .on(TRACK_MOUSE_UP, function() {
+                        that._drag._end();
                     });
 
             that.wrapper
@@ -757,7 +761,7 @@ kendo_module({
                 .on(MOUSE_OVER, kendo.preventDefault);
 
             that.wrapper
-                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN).off(TRACK_MOUSE_UP);
 
             that.wrapper
                 .find(DRAG_HANDLE)
@@ -1334,6 +1338,9 @@ kendo_module({
                     .end()
                     .on(TRACK_MOUSE_DOWN, function() {
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    })
+                    .on(TRACK_MOUSE_UP, function() {
+                        that._drag._end();
                     });
 
             that.wrapper
@@ -1376,7 +1383,7 @@ kendo_module({
             that.wrapper.find("input").prop(DISABLED, DISABLED);
 
             that.wrapper
-                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN).off(TRACK_MOUSE_UP);
 
             that.wrapper
                 .find(DRAG_HANDLE)
