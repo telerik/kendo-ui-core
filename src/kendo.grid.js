@@ -1715,18 +1715,24 @@ kendo_module({
         _groupable: function() {
             var that = this;
 
-            that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", function(e) {
-                var element = $(this),
-                group = element.closest("tr");
+            if (that._groupableClickHandler) {
+                that.table.off(CLICK + NS, that._groupableClickHandler);
+            } else {
+                that._groupableClickHandler = function(e) {
+                    var element = $(this),
+                    group = element.closest("tr");
 
-                if(element.hasClass('k-i-collapse')) {
-                    that.collapseGroup(group);
-                } else {
-                    that.expandGroup(group);
-                }
-                e.preventDefault();
-                e.stopPropagation();
-            });
+                    if(element.hasClass('k-i-collapse')) {
+                        that.collapseGroup(group);
+                    } else {
+                        that.expandGroup(group);
+                    }
+                    e.preventDefault();
+                    e.stopPropagation();
+                };
+            }
+
+            that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
 
             that._attachGroupable();
         },
