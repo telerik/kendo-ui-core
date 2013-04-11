@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bar Chart</title>
+        <title>Radar Chart</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.userevents.js"></script>
@@ -29,6 +29,12 @@
                     }],
                     categoryAxis: {
                         categories: ["A", "B", "C", "D", "E", "F"]
+                    },
+                    valueAxis: {
+                        majorGridLines: {
+                            //type: "line" // default
+                            //type: "arc"
+                        }
                     },
                     // TODO: Choppiness, perhaps an old prolbem?
                     transitions: false

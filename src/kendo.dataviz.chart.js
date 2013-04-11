@@ -1945,6 +1945,7 @@ kendo_module({
             return axis.getDivisions(axis.options.categories.length * 2);
         },
 
+        // TODO: Support custom startAngle
         getSlot: function(from, to) {
             var axis = this,
                 divs = axis.getMajorDivisions(),
@@ -2005,10 +2006,11 @@ kendo_module({
                 modelId = axis.plotArea.options.modelId,
                 i,
                 elements = [],
-                lineOptions,
-                points;
+                elementOptions,
+                points,
+                tickRadius;
 
-            lineOptions = {
+            elementOptions = {
                 data: { modelId: modelId },
                 zIndex: -1,
                 strokeWidth: options.width,
@@ -2017,15 +2019,22 @@ kendo_module({
             };
 
             for (tickIx = 0; tickIx < ticks.length; tickIx++) {
-                points = [];
-                for (angleIx = 0; angleIx < angles.length; angleIx++) {
-                    console.log(angles[angleIx], ticks[tickIx]);
-                    points.push(
-                        Point2D.onCircle(center, angles[angleIx], center.y - ticks[tickIx])
-                    );
-                }
+                tickRadius = center.y - ticks[tickIx];
 
-                elements.push(view.createPolyline(points, true, lineOptions));
+                if (options.type === "arc") {
+                    elements.push(view.createCircle(
+                        center, tickRadius, elementOptions
+                    ));
+                } else {
+                    points = [];
+                    for (angleIx = 0; angleIx < angles.length; angleIx++) {
+                        points.push(
+                            Point2D.onCircle(center, angles[angleIx], tickRadius)
+                        );
+                    }
+
+                    elements.push(view.createPolyline(points, true, elementOptions));
+                }
             }
 
             return elements;
