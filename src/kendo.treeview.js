@@ -1560,6 +1560,13 @@ kendo_module({
                 model = model.toJSON();
             }
 
+            var parentNode = data.parent();
+
+            if (parentNode) {
+                parentNode.hasChildren = true;
+                parentNode._initChildren();
+            }
+
             data.splice.apply(data, [ index, 0 ].concat(model));
 
             return this.findByUid(data[index].uid);
