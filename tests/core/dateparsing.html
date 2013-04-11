@@ -782,6 +782,18 @@
 
                 equal(+result, +new Date("2013-01-17T22:00:00Z"));
             });
+
+            test("parseDate parses month names case insensitive", function() {
+                var format = "MMMM, dd-MMM-yyyy",
+                    controlDate = new Date(2000, 2, 10),
+                    result1 = parse("march, 10-mar-2000", format),
+                    result2 = parse("MARCH, 10-MAR-2000", format),
+                    result3 = parse("March, 10-Mar-2000", format);
+
+                equal(+controlDate, +result1);
+                equal(+controlDate, +result2);
+                equal(+controlDate, +result3);
+            });
         </script>
     </body>
 </html>

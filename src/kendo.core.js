@@ -539,12 +539,37 @@ function pad(number, digits, end) {
         numberFormat.currency.groupSizes = numberFormat.currency.groupSize;
     }
 
+    function lowerArray(data) {
+        var idx = 0,
+            length = data.length,
+            array = [];
+
+        for (; idx < length; idx++) {
+            array[idx] = (data[idx] + "").toLowerCase();
+        }
+
+        return array;
+    }
+
+    function lowerLocalInfo(localInfo) {
+        var newLocalInfo = {}, property;
+
+        for (property in localInfo) {
+            newLocalInfo[property] = lowerArray(localInfo[property]);
+        }
+
+        return newLocalInfo;
+    }
+
     kendo.culture = function(cultureName) {
-        var cultures = kendo.cultures, culture;
+        var cultures = kendo.cultures, culture, calendar;
 
         if (cultureName !== undefined) {
             culture = findCulture(cultureName) || cultures[EN];
-            culture.calendar = culture.calendars.standard;
+            culture.calendar = calendar = culture.calendars.standard;
+            calendar._lowerDays = lowerLocalInfo(calendar.days);
+            calendar._lowerMonths = lowerLocalInfo(calendar.months);
+
             cultures.current = culture;
 
             if (globalize) {
@@ -1082,16 +1107,22 @@ function pad(number, digits, end) {
                 }
                 return null;
             },
-            getIndexByName = function (names) {
+            getIndexByName = function (names, lower) {
                 var i = 0,
                     length = names.length,
-                    name, nameLength;
+                    name, nameLength,
+                    subValue;
 
                 for (; i < length; i++) {
                     name = names[i];
                     nameLength = name.length;
+                    subValue = value.substr(valueIdx, nameLength);
 
-                    if (value.substr(valueIdx, nameLength) == name) {
+                    if (lower) {
+                        subValue = subValue.toLowerCase();
+                    }
+
+                    if (subValue == name) {
                         valueIdx += nameLength;
                         return i + 1;
                     }
@@ -1150,14 +1181,14 @@ function pad(number, digits, end) {
             } else {
                 if (ch === "d") {
                     count = lookAhead("d");
-                    day = count < 3 ? getNumber(2) : getIndexByName(calendar.days[count == 3 ? "namesAbbr" : "names"]);
+                    day = count < 3 ? getNumber(2) : getIndexByName(calendar._lowerDays[count == 3 ? "namesAbbr" : "names"], true);
 
                     if (day === null || outOfRange(day, 1, 31)) {
                         return null;
                     }
                 } else if (ch === "M") {
                     count = lookAhead("M");
-                    month = count < 3 ? getNumber(2) : getIndexByName(calendar.months[count == 3 ? 'namesAbbr' : 'names']);
+                    month = count < 3 ? getNumber(2) : getIndexByName(calendar._lowerMonths[count == 3 ? 'namesAbbr' : 'names'], true);
 
                     if (month === null || outOfRange(month, 1, 12)) {
                         return null;
