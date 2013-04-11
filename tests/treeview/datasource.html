@@ -781,6 +781,18 @@
                 equal(treeview.find(".k-icon").length, 0);
             });
 
+            test("append sets hasChildren flag", function() {
+                createTreeView([
+                    { text: "foo", hasChildren: false }
+                ]);
+
+                var foo = $(".k-item");
+
+                treeviewObject.append({ text: "bar" }, foo);
+
+                ok(treeviewObject.dataItem(foo).hasChildren);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
