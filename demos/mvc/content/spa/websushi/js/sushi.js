@@ -2,7 +2,7 @@
 
 var items = new kendo.data.DataSource({
     schema: { model: {} },
-    transport: { read: { url: window.sushiMenuPath, dataType: "json" } }
+    transport: { read: { url: window.contentPath + "/menu.json", dataType: "json" } }
 });
 
 var cart = kendo.observable({
@@ -111,7 +111,7 @@ var indexModel = kendo.observable({
 
 var detailModel = kendo.observable({
     imgUrl: function() {
-        return "http://demos.kendoui.com/sushi/content/images/200/" + this.get("current").image
+        return window.contentPath + "/images/200/" + this.get("current").image
     },
 
     price: function() {

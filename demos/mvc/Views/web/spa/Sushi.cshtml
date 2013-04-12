@@ -17,13 +17,13 @@
             <script src="@Url.Content("~/content/shared/js/less.js")"></script>
         }
 
+        <script>
+            window.contentPath = '@Url.Content("~/content/spa/websushi")';
+        </script>
+
         @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
             <script src="@Url.Script(scriptName)"></script>
         }
-
-        <script>
-            window.sushiMenuPath = '@Url.Content("~/content/spa/websushi/menu.json")';
-        </script>
 
         <script src="@Url.Content("~/content/spa/websushi/js/sushi.js")"></script>
     </head>
@@ -134,7 +134,7 @@
 
         <script type="text/x-kendo-template" id="large-cart-item">
             <tr>
-                <td> <div class="cart-image-wrapper"><img src="@Url.Content("~/content/spa/websushi/images/200/#= item.image #")" /></div> <span class="product-name" data-bind="text: item.name"></span></td>
+                <td> <div class="cart-image-wrapper"><img src="#= window.contentPath #/images/200/#= item.image #" /></div> <span class="product-name" data-bind="text: item.name"></span></td>
                 <td><input type="text" data-role="numerictextbox" data-min="0" data-max="10" data-bind="value: quantity"></td>
                 <td><p class="table-price" data-bind="text: itemPrice"><p></td>
             </tr>
@@ -144,7 +144,7 @@
             <li class="selected-products-list">
                 <a data-bind="click: removeFromCart" class="view-selected-items"><img
                     width="100" height="100"
-                    src="@Url.Content("~/content/spa/websushi/images/200/#= item.image #")"  /></a>
+                    src="#= window.contentPath #/images/200/#= item.image #"  /></a>
                 <span class="selected-image-price"><span data-bind="text: quantity"></span>x<span data-bind="text: itemPrice"></span></span>
             </li>
         </script>
@@ -152,7 +152,7 @@
         <script type="text/x-kendo-template" id="item">
             <li class="products">
                 <a class="view-details" href="\#/menu/#: id #">
-                    <img class="main-image" src="@Url.Content("~/content/spa/websushi/images/200/#= image #")"  alt="#: name#" title="#: name #" />
+                    <img class="main-image" src="#= window.contentPath #/images/200/#= image #"  alt="#: name#" title="#: name #" />
                     <strong data-bind="text: name"></strong>
                     <span class="price"><span>$</span><span data-bind="text: price"></span></span>
                 </a>
