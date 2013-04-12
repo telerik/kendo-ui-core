@@ -635,6 +635,31 @@ module kendo.mobile {
     declare function init(selector: string): void;
     declare function init(element: JQuery): void;
     declare function init(element: Element): void;
+
+    class Application extends Observable {
+        constructor(element: any, options?: ApplicationOptions);
+        options: ApplicationOptions;
+        hideLoading(): void;
+        navigate(url: string, transition: string): void;
+        scroller(): kendo.mobile.ui.Scroller;
+        showLoading(): void;
+        view(): kendo.mobile.ui.View;
+    }
+
+    interface ApplicationOptions {
+        hideAddressBar?: bool;
+        updateDocumentTitle?: bool;
+        initial?: string;
+        layout?: string;
+        loading?: string;
+        platform?: string;
+        serverNavigation?: bool;
+        transition?: string;
+    }
+
+    interface ApplicationEvent {
+        sender: Application;
+    }
 }
 
 module kendo.mobile.ui {
