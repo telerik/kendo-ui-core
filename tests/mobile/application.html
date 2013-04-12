@@ -77,6 +77,7 @@
                     $.mockjaxClear();
                     kendo.history.stop();
                     $("#qunit-fixture").empty();
+                    kendo.mobile.application = null;
                 }
             });
 
@@ -271,6 +272,18 @@
                     equal(e.message, 'Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
                 }
             });
-        </script>
+
+            test("Only one mobile applicaiton can be initialized", 3, function() {
+                var dom = $('<div><div data-role="view"></div></div>');
+
+                var first_instance = new kendo.mobile.Application(dom);
+                var second_instance = new kendo.mobile.Application(dom);
+
+                equal(first_instance , kendo.mobile.application);
+                equal(second_instance, first_instance);
+                ok(first_instance instanceof kendo.mobile.Application);
+            });
+
+       </script>
     </body>
 </html>

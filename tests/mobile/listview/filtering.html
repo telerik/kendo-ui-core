@@ -42,6 +42,7 @@
                 },
                 teardown: function() {
                     kendo.destroy($("#qunit-fixture"));
+                    kendo.mobile.application = null;
                     $("#qunit-fixture").empty();
                 }
             });

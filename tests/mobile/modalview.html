@@ -56,6 +56,9 @@
                     element = root.find("[data-role=modalview]");
                     source = root.find("#source");
                     modalView = element.data("kendoMobileModalView");
+                },
+                teardown: function() {
+                    kendo.mobile.application = null;
                 }
             });
 

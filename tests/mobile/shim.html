@@ -46,6 +46,7 @@
                     app = root.children().first();
                 },
                 teardown: function () {
+                    kendo.mobile.application = null;
                     root.empty();
                 }
             });
