@@ -1458,7 +1458,7 @@ function pad(number, digits, end) {
                 return value;
             }
 
-            if (value === undefined) {
+            if (value === undefined || value === null) {
                return null;
             }
 

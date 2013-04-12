@@ -5,7 +5,7 @@
         <script src="../jquery-loader.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
-        <script src="globalize/globalize.js"></script>
+        <script src="https://raw.github.com/jquery/globalize/master/lib/globalize.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -86,6 +86,24 @@
 
             test("kendo.toString returns null if value is undefined", function() {
                 var result = kendo.toString(undefined, "n");
+
+                equal(result, null);
+            });
+
+            test("kendo.parseFloat returns null if value is null", function() {
+                var result = kendo.parseFloat(null);
+
+                equal(result, null);
+            });
+
+            test("kendo.parseDate returns null if value is null", function() {
+                var result = kendo.parseDate(null);
+
+                equal(result, null);
+            });
+
+            test("kendo.toString returns null if value is null", function() {
+                var result = kendo.toString(null, "n");
 
                 equal(result, null);
             });
