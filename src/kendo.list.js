@@ -907,6 +907,7 @@ kendo_module({
                     }
 
                     that.enable();
+                    that._triggerCascade();
                 };
                 select = function() {
                     var dataItem = parent.dataItem(),
@@ -931,9 +932,8 @@ kendo_module({
                     } else {
                         that.enable(false);
                         that._clearSelection(parent);
+                        that._triggerCascade();
                     }
-
-                    that._triggerCascade();
                 };
 
                 parent.bind("cascade", function() { select(); });
