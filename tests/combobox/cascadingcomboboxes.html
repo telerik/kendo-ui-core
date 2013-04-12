@@ -44,6 +44,33 @@
                }
             });
 
+            test("Set autoBind option to false", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var childCB = child.data("kendoComboBox");
+
+                ok(!childCB.options.autoBind);
+            });
+
             test("Parent filter child on change", function() {
                 parent.kendoComboBox({
                     dataTextField: "parentID",

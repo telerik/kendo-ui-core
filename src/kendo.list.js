@@ -892,7 +892,9 @@ kendo_module({
                     return;
                 }
 
+                options.autoBind = false;
                 valueField = parent.options.dataValueField;
+
                 change = function() {
                     var value = that._selectedValue || that.value();
                     if (value) {
