@@ -598,15 +598,18 @@ var MSWordFormatCleaner = Cleaner.extend({
     },
 
     lists: function(html) {
-        var placeholder = dom.create(document, 'div', {innerHTML: html});
-        var blockChildren = $(dom.blockElements.join(','), placeholder);
+        var placeholder = dom.create(document, 'div', {innerHTML: html}),
+            blockChildren = $(dom.blockElements.join(','), placeholder),
+            lastMargin = -1,
+            lastType,
+            levels = {'ul':{}, 'ol':{}},
+            li = placeholder,
+            i, p, type, margin, list, key, child;
 
-        var lastMargin = -1, lastType, levels = {'ul':{}, 'ol':{}}, li = placeholder;
-
-        for (var i = 0; i < blockChildren.length; i++) {
-            var p = blockChildren[i];
+        for (i = 0; i < blockChildren.length; i++) {
+            p = blockChildren[i];
             html = p.innerHTML.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');
-            var type = this.listType(html);
+            type = this.listType(html);
 
             if (!type || dom.name(p) != 'p') {
                 if (!p.innerHTML) {
@@ -619,8 +622,8 @@ var MSWordFormatCleaner = Cleaner.extend({
                 continue;
             }
 
-            var margin = parseFloat(p.style.marginLeft || 0);
-            var list = levels[type][margin];
+            margin = parseFloat(p.style.marginLeft || 0);
+            list = levels[type][margin];
 
             if (margin > lastMargin || !list) {
                 list = dom.create(document, type);
@@ -635,8 +638,8 @@ var MSWordFormatCleaner = Cleaner.extend({
             }
 
             if (lastType != type) {
-                for (var key in levels) {
-                    for (var child in levels[key]) {
+                for (key in levels) {
+                    for (child in levels[key]) {
                         if ($.contains(list, levels[key][child])) {
                             delete levels[key][child];
                         }
@@ -651,6 +654,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             lastMargin = margin;
             lastType = type;
         }
+
         return placeholder.innerHTML;
     },
 
