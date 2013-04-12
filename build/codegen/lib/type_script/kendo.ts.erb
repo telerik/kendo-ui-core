@@ -637,7 +637,7 @@ module kendo.mobile {
     declare function init(element: Element): void;
 
     class Application extends Observable {
-        constructor(element: any, options?: ApplicationOptions);
+        constructor(element?: any, options?: ApplicationOptions);
         options: ApplicationOptions;
         hideLoading(): void;
         navigate(url: string, transition: string): void;
