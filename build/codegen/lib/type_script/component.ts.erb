@@ -44,6 +44,8 @@
 
     interface <%= type_script_type %>Event {
         sender: <%= type_script_type %>;
+        isDefaultPrevented(): bool;
+        preventDefault: Function;
     }
 
 % events.each do |event|

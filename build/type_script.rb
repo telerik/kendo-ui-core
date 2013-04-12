@@ -24,6 +24,7 @@ module CodeGen::TypeScript
         'docs/api/framework/draggable.md',
         'docs/api/framework/droptarget.md',
         'docs/api/framework/droptargetarea.md',
+        'docs/api/mobile/application.md',
         'docs/api/web/ui.md'
     ]
 
