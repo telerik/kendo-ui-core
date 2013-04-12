@@ -11,7 +11,7 @@ OFFLINE_DEMO_TEMPLATE_OPTIONS = {
     "/web/spa/Sushi.html" => {
         skip_back_button: true,
         additional_code: <<-SCRIPT,
-            window.contentPath = "../../content";
+            window.contentPath = "../../content/spa/websushi";
         SCRIPT
         additional_scripts: %W(
             ../../content/spa/websushi/js/sushi.js
