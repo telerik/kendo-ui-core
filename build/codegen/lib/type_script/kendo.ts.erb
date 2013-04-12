@@ -100,17 +100,14 @@ module kendo {
     }
 
     interface ViewOptions {
-        title?: string;
-        reload?: bool;
-        defaultTransition?: string;
-        useNativeScrolling?: bool;
-        stretch?: bool;
-        zoom?: bool;
+        tagName?: string;
+        wrap?: bool;
         model?: Object;
     }
 
     class View {
         constructor(element: Element, options?: ViewOptions);
+        constructor(element: string, options?: ViewOptions);
         render(container?: any): JQuery;
         destroy(): void;
     }
@@ -526,14 +523,18 @@ module kendo.data {
 
 module kendo.ui {
     declare function progress(container: JQuery, toggle: bool);
-    declare function plugin(widget: Function, register?: Object, prefix?: String);
 
     class Widget extends Observable {
         static fn: Widget;
         static extend(prototype: Object): Widget;
 
+        init(element: Element, options: Object): void;
+        init(selector: String, options: Object): void;
+        init(object: JQuery, options: Object): void;
         destroy(): void;
     }
+
+    declare function plugin(widget: kendo.ui.Widget, register?: Object, prefix?: String);
 
     class Draggable extends kendo.ui.Widget{
         element: JQuery;
