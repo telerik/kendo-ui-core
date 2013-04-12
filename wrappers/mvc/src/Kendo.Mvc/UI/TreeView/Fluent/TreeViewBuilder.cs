@@ -265,6 +265,14 @@ namespace Kendo.Mvc.UI.Fluent
 
                         item.Url = node.Url;
                         item.ImageUrl = node.ImageUrl;
+                        foreach (var key in node.ImageHtmlAttributes.Keys)
+                        {
+                            item.ImageHtmlAttributes[key] = node.ImageHtmlAttributes[key];
+                        }
+                        foreach (var key in node.HtmlAttributes.Keys)
+                        {
+                            item.HtmlAttributes[key] = node.HtmlAttributes[key];
+                        }
                     })
                     .Children(item => item.Items)
                 )
