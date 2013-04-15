@@ -105,7 +105,8 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 wrapper,
-                offset, visibility, display,
+                offset = {},
+                visibility, display,
                 isVisible = false,
                 content,
                 windowContent,
@@ -134,7 +135,7 @@ kendo_module({
                 return !this.type || this.type.toLowerCase().indexOf("script") >= 0;
             }).remove();
 
-            if (!element.parent().is(that.appendTo)) {
+            if (!element.parent().is(that.appendTo) && (options.position.top === undefined || options.position.left === undefined)) {
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
@@ -162,11 +163,13 @@ kendo_module({
                 that._dimensions();
             }
 
-            if (offset) {
-                wrapper.css({
-                    top: offset.top,
-                    left: offset.left
-                });
+            wrapper.css({
+                top: options.position.top || offset.top || "",
+                left: options.position.left || offset.left || ""
+            });
+
+            if (options.pinned) {
+                that.pin();
             }
 
             if (content) {
@@ -332,6 +335,8 @@ kendo_module({
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity,
+            pinned: false,
+            position: {},
             visible: null,
             height: null,
             width: null
@@ -433,7 +438,9 @@ kendo_module({
                 "k-i-maximize": that.maximize,
                 "k-i-minimize": that.minimize,
                 "k-i-restore": that.restore,
-                "k-i-refresh": that.refresh
+                "k-i-refresh": that.refresh,
+                "k-i-pin": that.pin,
+                "k-i-unpin": that.unpin
             }, function (commandName, handler) {
                 if (target.hasClass(commandName)) {
                     e.preventDefault();
@@ -738,6 +745,36 @@ kendo_module({
 
             that.options.isMinimized = true;
         }),
+
+        pin: function() {
+            var that = this,
+                win = $(window),
+                scrollLeft = win.scrollLeft(),
+                scrollTop = win.scrollTop(),
+                wrapper = that.wrapper,
+                top = parseInt(wrapper.css("top"), 10),
+                left = parseInt(wrapper.css("left"), 10);
+
+            wrapper.css({position: "fixed", top: top - scrollTop, left: left - scrollLeft});
+            wrapper.find(KWINDOWTITLEBAR).find(".k-i-pin").addClass("k-i-unpin").removeClass("k-i-pin");
+
+            that.options.pinned = true;
+        },
+
+        unpin: function() {
+            var that = this,
+                win = $(window),
+                scrollLeft = win.scrollLeft(),
+                scrollTop = win.scrollTop(),
+                wrapper = that.wrapper,
+                top = parseInt(wrapper.css("top"), 10),
+                left = parseInt(wrapper.css("left"), 10);
+
+            wrapper.css({position: "", top: top + scrollTop, left: left + scrollLeft});
+            wrapper.find(KWINDOWTITLEBAR).find(".k-i-unpin").addClass("k-i-pin").removeClass("k-i-unpin");
+
+            that.options.pinned = false;
+        },
 
         _onDocumentResize: function () {
             var that = this,
