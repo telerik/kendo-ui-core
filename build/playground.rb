@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'debugger'
 
 PLAYGROUND_SCRIPTS = %w(
     js/jquery.min.js
