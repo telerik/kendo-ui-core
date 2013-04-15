@@ -214,6 +214,14 @@
             equal(clean('<table cellPadding="0"><tbody><tr>&nbsp;  &nbsp;</tr></tbody></table>'), '');
         });
 
+        test("graphic lists", function() {
+            equal(clean('<p class="MsoListParagraph" style="text-indent:-.25in;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><span style="font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family: Wingdings">ü<span style="font-size: 7pt; line-height: normal; font-family: \'Times New Roman\';">&nbsp; </span></span><!--[endif]-->foo<o:p></o:p></p>'), '<ul><li>foo</li></ul>');
+        });
+
+        test("does not interpret all graphic chars as lists", function() {
+            equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>').replace(/(;|:)\s*/g, "$1"), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
