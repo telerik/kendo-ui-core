@@ -5951,18 +5951,12 @@ kendo_module({
                     });
                 }
 
-                color = currentSeries.color;
-                defaults = currentSeries._defaults;
-                if (isFn(color) && defaults) {
-                    color = defaults.color;
-                }
-
                 if (currentSeries.visible === false) {
                     labelColor = inactiveItems.labels.color;
                     markerColor = inactiveItems.markers.color;
                 } else {
                     labelColor = labels.color;
-                    markerColor = color;
+                    markerColor = currentSeries.color;
                 }
 
                 data.push({
