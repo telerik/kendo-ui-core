@@ -5906,7 +5906,6 @@ kendo_module({
             var plotArea = this;
 
             plotArea.charts.push(chart);
-            plotArea.addToLegend(chart);
             if (pane) {
                 pane.appendChart(chart);
             } else {
@@ -5929,9 +5928,8 @@ kendo_module({
             plotArea.charts = filteredCharts;
         },
 
-        addToLegend: function(chart) {
-            var series = chart.options.series,
-                count = series.length,
+        addToLegend: function(series) {
+            var count = series.length,
                 data = [],
                 i, currentSeries, text,
                 legend = this.options.legend,
@@ -5939,42 +5937,44 @@ kendo_module({
                 inactiveItems = legend.inactiveItems || {},
                 labelColor, markerColor;
 
-            if (chart.legendItems) {
-                data = chart.legendItems;
-            } else {
-                for (i = 0; i < count; i++) {
-                    currentSeries = series[i];
-                    if (currentSeries.visibleInLegend === false) {
-                        continue;
-                    }
+            for (i = 0; i < count; i++) {
+                currentSeries = series[i];
+                if (currentSeries.visibleInLegend === false) {
+                    continue;
+                }
 
-                    text = currentSeries.name || "";
-                    if (labels.template) {
-                        text = template(labels.template)({
-                            text: text,
-                            series: currentSeries
-                        });
-                    }
-
-                    if (currentSeries.visible === false) {
-                        labelColor = inactiveItems.labels.color;
-                        markerColor = inactiveItems.markers.color;
-                    } else {
-                        labelColor = labels.color;
-                        markerColor = currentSeries.color;
-                    }
-
-                    data.push({
+                text = currentSeries.name || "";
+                if (labels.template) {
+                    text = template(labels.template)({
                         text: text,
-                        labelColor: labelColor,
-                        markerColor: markerColor,
-                        series: currentSeries,
-                        active: currentSeries.visible
+                        series: currentSeries
                     });
                 }
+
+                color = currentSeries.color;
+                defaults = currentSeries._defaults;
+                if (isFn(color) && defaults) {
+                    color = defaults.color;
+                }
+
+                if (currentSeries.visible === false) {
+                    labelColor = inactiveItems.labels.color;
+                    markerColor = inactiveItems.markers.color;
+                } else {
+                    labelColor = labels.color;
+                    markerColor = color;
+                }
+
+                data.push({
+                    text: text,
+                    labelColor: labelColor,
+                    markerColor: markerColor,
+                    series: currentSeries,
+                    active: currentSeries.visible
+                });
             }
 
-            append(this.options.legend.items, data);
+            append(legend.items, data);
         },
 
         groupAxes: function(panes) {
@@ -6559,45 +6559,45 @@ kendo_module({
         createCharts: function(panes) {
             var plotArea = this,
                 seriesByPane = plotArea.groupSeriesByPane(),
-                i, pane, paneSeries;
+                i, pane, paneSeries, filteredSeries;
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                paneSeries = plotArea.filterVisibleSeries(
-                    seriesByPane[pane.options.name || "default"] || []
-                );
+                paneSeries = seriesByPane[pane.options.name || "default"] || [];
+                plotArea.addToLegend(paneSeries);
+                filteredSeries = plotArea.filterVisibleSeries(paneSeries);
 
-                if (!paneSeries) {
+                if (!filteredSeries) {
                     continue;
                 }
 
                 plotArea.createAreaChart(
-                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA]),
+                    plotArea.filterSeriesByType(filteredSeries, [AREA, VERTICAL_AREA]),
                     pane
                 );
 
                 plotArea.createBarChart(
-                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR]),
+                    plotArea.filterSeriesByType(filteredSeries, [COLUMN, BAR]),
                     pane
                 );
 
                 plotArea.createLineChart(
-                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE]),
+                    plotArea.filterSeriesByType(filteredSeries, [LINE, VERTICAL_LINE]),
                     pane
                 );
 
                 plotArea.createCandlestickChart(
-                    plotArea.filterSeriesByType(paneSeries, CANDLESTICK),
+                    plotArea.filterSeriesByType(filteredSeries, CANDLESTICK),
                     pane
                 );
 
                 plotArea.createOHLCChart(
-                    plotArea.filterSeriesByType(paneSeries, OHLC),
+                    plotArea.filterSeriesByType(filteredSeries, OHLC),
                     pane
                 );
 
                 plotArea.createBulletChart(
-                    plotArea.filterSeriesByType(paneSeries, [BULLET, VERTICAL_BULLET]),
+                    plotArea.filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
                     pane
                 );
             }
@@ -7058,34 +7058,32 @@ kendo_module({
         render: function(panes) {
             var plotArea = this,
                 seriesByPane = plotArea.groupSeriesByPane(),
-                i,
-                pane,
-                paneSeries;
+                i, pane, paneSeries, filteredSeries;
 
             panes = panes || plotArea.panes;
 
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
-                paneSeries = plotArea.filterVisibleSeries(
-                    seriesByPane[pane.options.name || "default"] || []
-                );
+                paneSeries = seriesByPane[pane.options.name || "default"] || [];
+                plotArea.addToLegend(paneSeries);
+                filteredSeries = plotArea.filterVisibleSeries(paneSeries);
 
-                if (!paneSeries) {
+                if (!filteredSeries) {
                     continue;
                 }
 
                 plotArea.createScatterChart(
-                    plotArea.filterSeriesByType(paneSeries, SCATTER),
+                    plotArea.filterSeriesByType(filteredSeries, SCATTER),
                     pane
                 );
 
                 plotArea.createScatterLineChart(
-                    plotArea.filterSeriesByType(paneSeries, SCATTER_LINE),
+                    plotArea.filterSeriesByType(filteredSeries, SCATTER_LINE),
                     pane
                 );
 
                 plotArea.createBubbleChart(
-                    plotArea.filterSeriesByType(paneSeries, BUBBLE),
+                    plotArea.filterSeriesByType(filteredSeries, BUBBLE),
                     pane
                 );
             }
@@ -7316,6 +7314,11 @@ kendo_module({
                 });
 
             plotArea.appendChart(pieChart);
+        },
+
+        appendChart: function(chart, pane) {
+            PlotAreaBase.fn.appendChart.call(this, chart, pane);
+            append(this.options.legend.items, chart.legendItems);
         }
     });
 
