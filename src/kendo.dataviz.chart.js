@@ -499,7 +499,7 @@ kendo_module({
             } else if (xySeries.length > 0) {
                 plotArea = new XYPlotArea(xySeries, options);
             } else if (polarSeries.length > 0) {
-                plotArea = new PolarPlotArea(polarSeries, options);
+                //plotArea = new PolarPlotArea(polarSeries, options);
             } else if (radarSeries.length > 0) {
                 plotArea = new RadarPlotArea(radarSeries, options);
             } else {
@@ -1914,7 +1914,7 @@ kendo_module({
                 zIndex: -1,
                 strokeWidth: options.width,
                 stroke: options.color,
-                dashType: options.dashType,
+                dashType: options.dashType
             };
 
             for (i = 0; i < angles.length; i++) {
@@ -2023,18 +2023,19 @@ kendo_module({
         getGridLines: function(view, center, ticks, angles, options) {
             var axis = this,
                 modelId = axis.plotArea.options.modelId,
-                i,
                 elements = [],
                 elementOptions,
                 points,
-                tickRadius;
+                tickRadius,
+                tickIx,
+                angleIx;
 
             elementOptions = {
                 data: { modelId: modelId },
                 zIndex: -1,
                 strokeWidth: options.width,
                 stroke: options.color,
-                dashType: options.dashType,
+                dashType: options.dashType
             };
 
             for (tickIx = 0; tickIx < ticks.length; tickIx++) {
@@ -2983,8 +2984,6 @@ kendo_module({
 
         reflow: function(targetBox) {
             var chart = this,
-                options = chart.options,
-                invertAxes = options.invertAxes,
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
@@ -3422,7 +3421,7 @@ kendo_module({
 
                 if (!stack) {
                     stack = new RadarStackLayout();
-                    stackWrap.append(stack, negativeStack);
+                    stackWrap.append(stack, stack);
                 }
 
                 stack.append(segment);
@@ -3434,9 +3433,7 @@ kendo_module({
         },
 
         pointSlot: function(categorySlot, valueSlot) {
-            var chart = this,
-                options = chart.options,
-                slot = categorySlot.clone(),
+            var slot = categorySlot.clone(),
                 valueRadius = categorySlot.c.y - valueSlot.y1;
 
             slot.r = valueRadius;
@@ -3444,10 +3441,9 @@ kendo_module({
             return slot;
         },
 
-        categorySlot: function(categoryAxis, categoryIx, valueAxis) {
+        categorySlot: function(categoryAxis, categoryIx) {
             var slot = categoryAxis.getSlot(categoryIx, categoryIx + 1);
             slot.startAngle -= slot.angle / 2;
-            slot.startAngle = slot.startAngle % 360;
 
             return slot;
         },
@@ -3494,10 +3490,10 @@ kendo_module({
     var RadarStackLayout = ChartElement.extend({
         reflow: function() {
             var stack = this,
-                options = stack.options,
                 children = stack.children,
                 childrenCount = children.length,
                 sector,
+                prevSector,
                 i;
 
             for (i = 1; i < childrenCount; i++) {
@@ -4478,9 +4474,7 @@ kendo_module({
 
     var RadarLineChart = LineChart.extend({
         pointSlot: function(categorySlot, valueSlot) {
-            var chart = this,
-                options = chart.options,
-                valueRadius = categorySlot.c.y - valueSlot.y1,
+            var valueRadius = categorySlot.c.y - valueSlot.y1,
                 slot = Point2D.onCircle(categorySlot.c, categorySlot.middle(), valueRadius);
 
             return new Box2D(slot.x, slot.y, slot.x, slot.y);
@@ -7988,8 +7982,7 @@ kendo_module({
         },
 
         reflow: function(box) {
-            var plotArea = this,
-                size = math.min(box.width(), box.height()),
+            var size = math.min(box.width(), box.height()),
                 square = new Box2D(box.x1, box.y1, box.x1 + size, box.y1 + size);
 
             PlotAreaBase.fn.reflow.call(this, square);
@@ -8009,6 +8002,7 @@ kendo_module({
             var plotArea = this,
                 tracker = plotArea.valueAxisRangeTracker,
                 defaultRange = tracker.query(),
+                range,
                 valueAxis;
 
             // TODO: Should we support multiple axes?
@@ -8028,9 +8022,7 @@ kendo_module({
             plotArea.appendAxis(valueAxis);
         },
 
-        appendChart: function(chart, pane) {
-            CategoricalPlotArea.fn.appendChart.call(this, chart);
-        },
+        appendChart: CategoricalPlotArea.fn.appendChart,
 
         createCharts: function() {
             var plotArea = this,
