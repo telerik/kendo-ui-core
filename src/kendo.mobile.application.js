@@ -163,7 +163,7 @@ kendo_module({
 
                 var refreshBackgroundColor = function() {
                     that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
-                }
+                };
 
                 $(window).on("focusin", refreshBackgroundColor); // Restore theme on browser focus (requires click).
                 document.addEventListener("resume", refreshBackgroundColor); // PhoneGap fires resume.
