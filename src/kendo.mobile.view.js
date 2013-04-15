@@ -16,6 +16,7 @@ kendo_module({
         Widget = ui.Widget,
         INIT = "init",
         SHOW = "show",
+        TRANSITION_DURATION = 320,
         BEFORE_SHOW = "beforeShow",
         AFTER_SHOW = "afterShow",
         HIDE = "hide",
@@ -244,7 +245,7 @@ kendo_module({
 
     function fade(source, destination) {
         if (source[0] && destination[0] && source[0] != destination[0]) {
-            source.kendoAnimateTo(destination, {effects: "fade"});
+            source.kendoAnimateTo(destination, {effects: "fade", duration: TRANSITION_DURATION });
         }
     }
 
@@ -316,8 +317,8 @@ kendo_module({
                 reverse: reverse,
                 parallax: parallax,
                 complete: complete,
-                transition: transition
-                // ,duration: 1000
+                transition: transition,
+                duration: TRANSITION_DURATION
             };
         },
 

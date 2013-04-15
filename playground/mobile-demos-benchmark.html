@@ -1,0 +1,134 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Mobile demos benchmark</title>
+        <link rel="stylesheet/less" href="../styles/mobile/kendo.mobile.flat.less">
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.router.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.mobile.loader.js"></script>
+        <script src="../src/kendo.mobile.view.js"></script>
+        <script src="../src/kendo.mobile.pane.js"></script>
+        <script src="../src/kendo.mobile.scroller.js"></script>
+        <script src="../src/kendo.mobile.navbar.js"></script>
+        <script src="../src/kendo.mobile.button.js"></script>
+        <script src="../src/kendo.mobile.application.js"></script>
+        <script src="../src/kendo.mobile.listview.js"></script>
+        <script src="../src/kendo.mobile.shim.js"></script>
+        <script src="../src/kendo.mobile.tabstrip.js"></script>
+        <script src="../src/kendo.mobile.modalview.js"></script>
+        <script src="../src/kendo.mobile.switch.js"></script>
+    </head>
+    <body>
+        <div data-role="view" data-title="Kendo UI Demos" id="index" data-use-native-scrolling="true">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+            <ul data-role="listview" data-source="ds" data-template="item-template" data-style="inset">
+                <li>Foo</li>
+                <li>Foo</li>
+            </ul>
+        </div>
+
+        <div data-role="view" id="detail" data-transition="slide" data-title="Favourite Cities" data-stretch="true">
+
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                </div>
+            </header>
+
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    Africa
+                    <ul>
+                        <li><h2>Nairobi</h2></li>
+                    </ul>
+                </li>
+                <li>
+                    America
+                    <ul>
+                        <li><h2>Boston</h2></li>
+                        <li><h2>Ottawa</h2></li>
+                        <li><h2>San Francisco</h2></li>
+                    </ul>
+                </li>
+                <li>
+                    Asia
+                    <ul>
+                        <li><h2>Bombay</h2></li>
+                    </ul>
+                </li>
+                <li>
+                    Australia
+                    <ul>
+                        <li><h2>Melbourne</h2></li>
+                        <li><h2>Sydney</h2></li>
+                    </ul>
+                </li>
+                <li>
+                    Europe
+                    <ul>
+                        <li><h2>Cannes</h2></li>
+                        <li><h2>Liverpool</h2></li>
+                        <li><h2>London</h2></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <footer data-role="footer">
+                <div data-role="tabstrip">
+                    <a data-icon="globe" href="#detail">Cities</a>
+                    <a data-icon="organize">Gallery</a>
+                    <a data-icon="contacts">Contacts</a>
+                    <a data-icon="settings">Account</a>
+                </div>
+            </footer>
+        </div>
+
+        <script id="item-template" type="text/x-kendo-template"><a href="\#detail">#:name#</a></script>
+
+        <script>
+            var groupedData = [
+            {name: "Sashimi salad", letter: "S" },
+            {name: "Chirashi sushi", letter: "C" },
+            {name: "Seaweed salad", letter: "S" },
+            {name: "Edamame", letter: "E" },
+            {name: "Miso soup", letter: "M" },
+            {name: "Maguro", letter: "M" },
+            {name: "Shake", letter: "S" },
+            {name: "Shiromi", letter: "S" },
+            {name: "Tekka maki", letter: "T" },
+            {name: "Hosomaki Mix", letter: "H" },
+            {name: "California rolls", letter: "C" },
+            {name: "Seattle rolls", letter: "S" },
+            {name: "Spicy Tuna rolls", letter: "S" },
+            {name: "Ebi rolls", letter: "E" },
+            {name: "Chicken Teriyaki", letter: "C" },
+            {name: "Salmon Teriyaki", letter: "S" },
+            {name: "Gohan", letter: "G" },
+            {name: "Tori Katsu", letter: "T" },
+            {name: "Yaki Udon", letter: "Y" }
+            ];
+
+            /*
+            groupedData = groupedData.concat(groupedData);
+            groupedData = groupedData.concat(groupedData);
+            */
+
+            var ds = kendo.data.DataSource.create({data: groupedData, group: "letter"});
+
+            new kendo.mobile.Application(document.body, { skin: "flat" });
+        </script>
+    </body>
+</html>

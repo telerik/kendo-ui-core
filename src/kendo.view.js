@@ -50,11 +50,11 @@ kendo_module({
 
                 that.element = element;
                 kendo.bind(that.element, that.model);
-                this.trigger(INIT);
+                that.trigger(INIT);
             }
 
             if (container) {
-                this.trigger(SHOW);
+                that.trigger(SHOW);
                 $(container).append(that.element);
             }
 

@@ -1,0 +1,44 @@
+.km-flat
+{
+    font: bold 1.2em HelveticaNeue, sans-serif;
+}
+
+.km-flat .km-view-title,
+.km-flat .km-dialog-title
+{
+    position: relative;
+    visibility: visible;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 2.3em;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* override transform options for performance */
+.km-root .km-flat.km-pane,
+.km-root .km-flat .km-view,
+.km-root .km-flat .km-slider,
+.km-root .km-flat .km-switch,
+.km-root .km-flat .km-group-title,
+.km-root .km-flat .km-list > li,
+.km-root .km-flat .km-filter-reset,
+.km-root .km-flat .km-shim .k-animation-container,
+.km-root .km-flat .km-scroll-container
+{
+    -webkit-transform: none;
+}
+
+.km-flat .km-navbar {
+    background: white;
+}
+
+.km-flat .km-listview .km-state-active,
+.km-flat .km-listview .km-listview-link:active {
+    background: #e5e5e5 !important;
+}
+
+.km-flat .km-tabstrip .km-button {
+    font-size: .7em;
+}

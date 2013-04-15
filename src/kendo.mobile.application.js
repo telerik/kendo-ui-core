@@ -36,7 +36,6 @@ kendo_module({
 
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
         BARCOMPENSATION = 60,
-
         WINDOW = $(window),
         HEAD = $("head"),
         proxy = $.proxy;
@@ -44,15 +43,18 @@ kendo_module({
     function osCssClass(os) {
         var classes = [];
 
-        classes.push("km-" + os.name);
-
         if (OS) {
             classes.push("km-on-" + OS.name);
         }
 
-        classes.push("km-" + os.name + os.majorVersion);
-        classes.push("km-" + os.majorVersion);
-        classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
+        if (os.skin) {
+            classes.push("km-" + os.skin);
+        } else {
+            classes.push("km-" + os.name);
+            classes.push("km-" + os.name + os.majorVersion);
+            classes.push("km-" + os.majorVersion);
+            classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
+        }
 
         if (os.appMode) {
             classes.push("km-app");
@@ -61,6 +63,10 @@ kendo_module({
         }
 
         return classes.join(" ");
+    }
+
+    function wp8Background() {
+        return parseInt($("<div style='background: Background' />").css("background-color").split(",")[1], 10) === 0 ? 'dark' : 'light';
     }
 
     function isOrientationHorizontal(element) {
@@ -132,8 +138,9 @@ kendo_module({
         },
 
         _setupPlatform: function() {
-            var that = this, wpThemeProxy,
+            var that = this,
                 platform = that.options.platform,
+                skin = that.options.skin,
                 os = OS || MOBILE_PLATFORMS[DEFAULT_OS];
 
             if (platform) {
@@ -143,39 +150,26 @@ kendo_module({
                     os = platform;
                 }
             }
+            if (skin) {
+                os = $.extend({}, os, {skin: skin});
+            }
 
             that.os = os;
 
             that.osCssClass = osCssClass(that.os);
 
-            if (os.name == "wp") {
-                wpThemeProxy = proxy(that._setupWP8Theme, that);
+            if (!os.skin && os.name == "wp") {
+                that.element.parent().css("overflow", "hidden");
 
-                $(window).on("focusin", wpThemeProxy); // Restore theme on browser focus (requires click).
-                document.addEventListener("resume", wpThemeProxy); // PhoneGap fires resume.
+                var refreshBackgroundColor = function() {
+                    that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
+                }
 
-                that._setupWP8Theme();
+                $(window).on("focusin", refreshBackgroundColor); // Restore theme on browser focus (requires click).
+                document.addEventListener("resume", refreshBackgroundColor); // PhoneGap fires resume.
+
+                refreshBackgroundColor();
             }
-        },
-
-        _setupWP8Theme: function() {
-            var that = this,
-                element = $(that.element),
-                bgColor;
-
-            if (!that._bgColorDiv) {
-                that._bgColorDiv = $("<div />").css({background: "Background", visibility: "hidden", position: "absolute", top: "-3333px" }).appendTo(document.body);
-            }
-
-            bgColor = parseInt(that._bgColorDiv.css("background-color").split(",")[1], 10);
-            element.removeClass("km-wp-dark km-wp-light");
-            if (bgColor === 0) {
-                element.addClass("km-wp-dark");
-            } else {
-                element.addClass("km-wp-light");
-            }
-
-            element.parent().css("overflow", "hidden");
         },
 
         _startHistory: function() {

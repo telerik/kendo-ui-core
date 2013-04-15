@@ -46,6 +46,7 @@ require 'cdn'
 require 'tests'
 require 'codegen'
 require 'nuget'
+require 'playground'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,
