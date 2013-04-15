@@ -3405,7 +3405,7 @@ kendo_module({
                 segmentOptions, value, category, categoryIx, series
             );
 
-            segment = new PieSegment(value, segmentOptions);
+            segment = new PieSegment(value, null, segmentOptions);
 
             cluster = children[categoryIx];
             if (!cluster) {
