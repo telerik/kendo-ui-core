@@ -588,13 +588,16 @@ var MSWordFormatCleaner = Cleaner.extend({
     },
 
     listType: function(html) {
-        if (/^(<span [^>]*texhtml[^>]*>)?<span [^>]*(Symbol|Wingdings)[^>]*>.</i.test(html)) {
-            return 'ul';
+        var startingSymbol;
+
+        if (/^(<span [^>]*texhtml[^>]*>)?<span [^>]*(Symbol|Wingdings)[^>]*>/i.test(html)) {
+            startingSymbol = true;
         }
 
         html = html.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');
 
-        if (/^[\u2022\u00b7\u00a7\u00d8o]\u00a0+/.test(html)) {
+        if ((!startingSymbol && /^[\u2022\u00b7\u00a7\u00d8o]\u00a0+/.test(html)) ||
+            (startingSymbol && /^.\u00a0+/.test(html))) {
             return 'ul';
         }
 
