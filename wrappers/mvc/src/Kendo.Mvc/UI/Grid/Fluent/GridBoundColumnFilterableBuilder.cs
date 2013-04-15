@@ -39,13 +39,13 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets JavaScript function which to return additional parameters which to be sent the server.
+        /// Sets JavaScript function which to modify the UI of the filter input.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderDate).Filterable(filterable => filterable.UI(GridFilterUIRole.DatePicker))
+        ///             .Columns(columns => columns.Bound(o => o.OrderDate).Filterable(filterable => filterable.UI(@&lt;text&gt; JavaScript function goes here &lt;/text&gt;))
         /// %&gt;
         /// </code>
         /// </example>        
@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets JavaScript function which to return additional parameters which to be sent the server.
+        /// Sets JavaScript function which to modify the UI of the filter input.
         /// </summary>
         /// <param name="handler">JavaScript function name</param>        
         public GridBoundColumnFilterableBuilder UI(string handler)
