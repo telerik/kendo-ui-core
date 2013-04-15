@@ -21,10 +21,14 @@
             $(function() {
                 $("#chart").kendoChart({
                     series: [{
-                        type: "scatterLine",
-                        data: [[1,1]],
-                        name: "second series",
-                        visible: false
+                        type: "pie",
+                        data: [{
+                            value: 1,
+                            category: "Aaaaa"
+                        },{
+                            value: 2,
+                            category: "aaaaa"
+                        }]
                     }]
                 });
             });
