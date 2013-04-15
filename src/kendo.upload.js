@@ -1046,7 +1046,7 @@ kendo_module({
         // Older Firefox versions (before 3.6) use fileName and fileSize
         var fileName = rawFile.name || rawFile.fileName;
         return {
-            name: fileName,
+            name: kendo.htmlEncode(fileName),
             extension: getFileExtension(fileName),
             size: rawFile.size || rawFile.fileSize,
             rawFile: rawFile
