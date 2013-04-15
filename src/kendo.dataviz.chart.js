@@ -1965,15 +1965,22 @@ kendo_module({
         getSlot: function(from, to) {
             var axis = this,
                 divs = axis.getMajorDivisions(),
-                box = axis.box;
+                box = axis.box,
+                angle;
 
             from = clipValue(from, 0, divs.length - 1);
             to = to || from;
-            to = clipValue(to, from, divs.length - 1);
+            to = to % divs.length;
+
+            angle = divs[to] - divs[from];
+
+            if (angle < 0) {
+                angle = 360 + angle;
+            }
 
             return new Ring(
                 box.center(), 0, box.height() / 2,
-                divs[from], divs[to] - divs[from]
+                divs[from], angle
             );
         },
 
@@ -2580,11 +2587,6 @@ kendo_module({
     });
 
     var ClusterLayout = ChartElement.extend({
-        init: function(options) {
-            var cluster = this;
-            ChartElement.fn.init.call(cluster, options);
-        },
-
         options: {
             vertical: false,
             gap: 0,
@@ -2623,11 +2625,6 @@ kendo_module({
     });
 
     var StackLayout = ChartElement.extend({
-        init: function(options) {
-            var stack = this;
-            ChartElement.fn.init.call(stack, options);
-        },
-
         options: {
             vertical: true,
             isReversed: false
@@ -3014,7 +3011,7 @@ kendo_module({
 
                 if (point) {
                     point.options.aboveAxis = aboveAxis;
-                    point.reflow(pointSlot);
+                    chart.reflowPoint(point, pointSlot);
                 }
 
                 if (!categorySlots[categoryIx]) {
@@ -3035,6 +3032,10 @@ kendo_module({
                 );
 
             return crossingValues[categoryAxis.axisIndex || 0] || 0;
+        },
+
+        reflowPoint: function(point, pointSlot) {
+            point.reflow(pointSlot);
         },
 
         reflowCategories: function() { },
@@ -3371,6 +3372,141 @@ kendo_module({
 
         bindableFields: function() {
             return ["color"];
+        }
+    });
+
+    var RadarBarChart = BarChart.extend({
+        createPoint: function(data, category, categoryIx, series) {
+            var chart = this,
+                value = data.value,
+                options = chart.options,
+                children = chart.children,
+                isStacked = chart.options.isStacked,
+                labelOptions = deepExtend({}, series.labels),
+                segment,
+                segmentOptions,
+                cluster;
+
+            if (isStacked) {
+                if (labelOptions.position == OUTSIDE_END) {
+                    labelOptions.position = INSIDE_END;
+                }
+            }
+
+            segmentOptions = deepExtend({
+                overlay: series.overlay,
+                labels: labelOptions,
+                isStacked: isStacked
+            }, series, {
+                color: data.fields.color || undefined
+            });
+
+            chart.evalPointOptions(
+                segmentOptions, value, category, categoryIx, series
+            );
+
+            segment = new PieSegment(value, segmentOptions);
+
+            cluster = children[categoryIx];
+            if (!cluster) {
+                cluster = new RadarClusterLayout({
+                    gap: options.gap,
+                    spacing: options.spacing
+                });
+                chart.append(cluster);
+            }
+
+            if (isStacked) {
+                var stackWrap = chart.getStackWrap(series, cluster),
+                    stack = stackWrap.children[0];
+
+                if (!stack) {
+                    stack = new RadarStackLayout();
+                    stackWrap.append(stack, negativeStack);
+                }
+
+                stack.append(segment);
+            } else {
+                cluster.append(segment);
+            }
+
+            return segment;
+        },
+
+        pointSlot: function(categorySlot, valueSlot) {
+            var chart = this,
+                options = chart.options,
+                slot = categorySlot.clone(),
+                valueRadius = categorySlot.c.y - valueSlot.y1;
+
+            slot.r = valueRadius;
+
+            return slot;
+        },
+
+        categorySlot: function(categoryAxis, categoryIx, valueAxis) {
+            var slot = categoryAxis.getSlot(categoryIx, categoryIx + 1);
+            slot.startAngle -= slot.angle / 2;
+            slot.startAngle = slot.startAngle % 360;
+
+            return slot;
+        },
+
+        reflowPoint: function(point, pointSlot) {
+            point.sector = pointSlot;
+            point.reflow();
+        },
+
+        reflow: CategoricalChart.fn.reflow,
+        reflowCategories: $.noop
+    });
+
+    var RadarClusterLayout = ChartElement.extend({
+        options: {
+            gap: 0,
+            spacing: 0
+        },
+
+        reflow: function() {
+            var cluster = this,
+                options = cluster.options,
+                sector = cluster.sector,
+                children = cluster.children,
+                gap = options.gap,
+                spacing = options.spacing,
+                count = children.length,
+                slots = count + gap + (spacing * (count - 1)),
+                slotAngle = sector.angle / slots,
+                slotSector,
+                angle = sector.startAngle,
+                i;
+
+            for (i = 0; i < count; i++) {
+                slotSector = sector.clone();
+                slotSector.startAngle = angle;
+                slotSector.angle = slotAngle;
+                children[i].sector = slotSector;
+                angle += slotAngle;
+            }
+        }
+    });
+
+    var RadarStackLayout = ChartElement.extend({
+        reflow: function() {
+            var stack = this,
+                options = stack.options,
+                children = stack.children,
+                childrenCount = children.length,
+                sector,
+                i;
+
+            for (i = 1; i < childrenCount; i++) {
+                sector = children[i].sector;
+                prevSector = children[i - 1].sector;
+
+                sector.ir += prevSector.r;
+                sector.r += prevSector.r;
+            }
         }
     });
 
@@ -5177,6 +5313,7 @@ kendo_module({
         }
     });
 
+    // TODO: Rename to Segment?
     var PieSegment = ChartElement.extend({
         init: function(value, sector, options) {
             var segment = this;
@@ -5817,6 +5954,7 @@ kendo_module({
 
                         start = sector.clone().expand(connectors.padding).point(angle);
                         points.push(start);
+                        // TODO: Extract into a method to remove duplication
                         if (label.orientation == RIGHT) {
                             end = Point2D(box.x1 - connectors.padding, box.center().y);
                             crossing = intersection(centerPoint, start, middle, end);
@@ -7905,6 +8043,26 @@ kendo_module({
             plotArea.createLineChart(
                 plotArea.filterSeriesByType(series, [RADAR_LINE])
             );
+
+            plotArea.createBarChart(
+                plotArea.filterSeriesByType(series, [RADAR_COLUMN])
+            );
+        },
+
+        createAreaChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                filteredSeries = plotArea.filterVisibleSeries(series),
+                areaChart = new RadarAreaChart(plotArea, {
+                    isStacked: firstSeries.stack && filteredSeries.length > 1,
+                    series: series
+                });
+
+            plotArea.appendChart(areaChart);
         },
 
         createLineChart: function(series) {
@@ -7923,7 +8081,7 @@ kendo_module({
             plotArea.appendChart(lineChart);
         },
 
-        createAreaChart: function(series) {
+        createBarChart: function(series) {
             if (series.length === 0) {
                 return;
             }
@@ -7931,12 +8089,12 @@ kendo_module({
             var plotArea = this,
                 firstSeries = series[0],
                 filteredSeries = plotArea.filterVisibleSeries(series),
-                areaChart = new RadarAreaChart(plotArea, {
+                lineChart = new RadarBarChart(plotArea, {
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
                     series: series
                 });
 
-            plotArea.appendChart(areaChart);
+            plotArea.appendChart(lineChart);
         },
 
         seriesCategoryAxis: function() {

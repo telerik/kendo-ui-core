@@ -407,6 +407,7 @@ kendo_module({
         }
     });
 
+    // TODO: Remove, looks like an alias
     var Sector = Ring.extend({
         init: function(center, radius, startAngle, angle) {
             Ring.fn.init.call(this, center, 0, radius, startAngle, angle);

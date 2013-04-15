@@ -20,12 +20,10 @@
             $(function() {
                 $("#chart").kendoChart({
                     seriesDefaults: {
-                        // TODO: Finalize naming
-                        // polarLine, polarArea, polarBar
-                        type: "radarArea"
+                        type: "radarColumn"
                     },
                     series: [{
-                        data: [1, 2, 3, 4, 5, 6, 7, 7, 5],
+                        data: [1, 2, 3, 4, 5, 6, 7, 8],
                         color: "red",
                         opacity: 0.5,
                         markers: {
@@ -34,12 +32,12 @@
                     }],
                     categoryAxis: {
                         categories: ["A", "B", "C", "D", "E", "F"],
-                        startAngle: 300
+                        //startAngle: 90 // default
                     },
                     valueAxis: {
                         majorGridLines: {
                             //type: "line" // default
-                            //type: "arc"
+                            type: "arc"
                         }
                     },
                     // TODO: Choppiness, perhaps an old prolbem?
