@@ -82,6 +82,7 @@
                 border-radius: 10px;
                 overflow: hidden;
                 margin-top: 1em;
+                display: inline-block;
             }
 
             .item-summary li {
@@ -94,10 +95,16 @@
         <div data-role="view" data-init="buildVirtual">
         </div>
 
+        <div data-role="view" id="foo" data-transition="slide">
+            Foo
+        </div>
+
         <script type="text/x-kendo-template" id="item-template">
             <div class="item">
                 <div class="item-thumb">
-                    <div class='thumb' style="background-image: url(#: data.thumbnail #)"></div>
+                    <a data-role="listview-link" href="\#foo">
+                        <span class='thumb' style="background-image: url(#: data.thumbnail #)"></span>
+                    </a>
                 </div>
                 <div class="item-summary">
                    <h3>#: data.title #</h3>
