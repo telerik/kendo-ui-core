@@ -549,7 +549,6 @@ kendo_module({
             if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip())) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
-            chart.bind(LEGEND_ITEM_CLICK, proxy(chart.legendItemClick, chart));
 
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
@@ -1071,14 +1070,14 @@ kendo_module({
             chart._click(e);
         },
 
-        legendItemClick: function(e) {
+        _legendItemClick: function(seriesIndex, pointIndex) {
             var chart = this,
                 plotArea = chart._plotArea,
-                currentSeries = (plotArea.srcSeries || plotArea.series)[e.seriesIndex],
+                currentSeries = (plotArea.srcSeries || plotArea.series)[seriesIndex],
                 point, transitionsState;
 
             if (inArray(currentSeries.type, [PIE, DONUT])) {
-                point = currentSeries.data[e.pointIndex];
+                point = currentSeries.data[pointIndex];
                 if (!defined(point.visible)) {
                     point.visible = false;
                 } else {
@@ -1260,6 +1259,8 @@ kendo_module({
         click: function(widget, e) {
             var item = this.item;
 
+            e.preventDefault();
+
             widget.trigger(LEGEND_ITEM_CLICK, {
                 element: $(e.target),
                 text: item.text,
@@ -1267,6 +1268,8 @@ kendo_module({
                 seriesIndex: item.series.index,
                 pointIndex: item.pointIndex
             });
+
+            widget._legendItemClick(item.series.index, item.pointIndex);
         }
     });
 
