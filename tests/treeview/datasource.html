@@ -793,6 +793,26 @@
                 ok(treeviewObject.dataItem(foo).hasChildren);
             });
 
+            test("appending to non-expanded items creates item appropriately", function() {
+                createTreeView({
+                    dataSource: new HierarchicalDataSource({
+                        data: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    })
+                });
+
+                var foo = $(".k-item:first");
+
+                treeviewObject.append({ text: "baz" }, foo);
+
+                equal(foo.find(".k-item").length, 2);
+                equal(treeviewObject.dataItem(foo.find(".k-item:first")).text, "bar");
+                equal(treeviewObject.dataItem(foo.find(".k-item:last")).text, "baz");
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

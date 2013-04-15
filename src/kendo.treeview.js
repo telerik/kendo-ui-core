@@ -1586,12 +1586,12 @@ kendo_module({
 
             return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
                 function add() {
-                    var data = dataSource.data(),
-                        index = Math.max(data.length, 0);
-
                     if (parentNode) {
                         that._expanded(parentNode, true);
                     }
+
+                    var data = dataSource.data(),
+                        index = Math.max(data.length, 0);
 
                     return that._insert(data, model, index);
                 }
