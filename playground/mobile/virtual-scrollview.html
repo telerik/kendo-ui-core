@@ -48,7 +48,9 @@
             PAGE_SIZE = 100;
 
         function onInit(e) {
-            pageView = $("#virtual").kendoMobilePageView().data("kendoMobilePageView");
+            pageView = $("#virtual").kendoMobilePageView({
+                contentHeight: "300px"
+            }).data("kendoMobilePageView");
         }
 
         (function($, undefined) {
@@ -87,7 +89,7 @@
                     that.inner = element.children().first();
                     that.pages = [];
 
-                    that.inner.css("height", "300px"); // <<< hardcoded for testing
+                    that.inner.css("height", that.options.contentHeight);
 
                     var movable,
                         transition,
@@ -111,6 +113,7 @@
                     });
 
                     dimension = dimensions.x;
+                    dimension.bind(CHANGE, proxy(that.refresh, that));
                     dimension.forceEnabled();
 
                     userEvents = new kendo.UserEvents(element, {
@@ -157,28 +160,48 @@
                     bounceVelocityThreshold: 1.6
                 },
 
+                refresh: function () {
+                    var that = this,
+                        dimension = that.dimension,
+                        pages = that.pages,
+                        width = dimension.getSize();
+
+                    for(var i = 0; i < pages.length; i++) {
+                        pages[i].width = width;
+                        pages[i].element.width(width);
+                    }
+
+                    pages[0].first();
+                    pages[1].center();
+                    pages[2].last();
+
+                    that.width = width;
+                    that.dimension.update(true);
+                },
+
                 _initPages: function () {
                     var that = this,
+                        dimension = that.dimension,
                         pages = that.pages,
-                        wrapper = that.inner,
+                        inner = that.inner,
                         page;
-
-                    page = new Page(wrapper);
+                    
+                    page = new Page(inner);
                     page.element.css({"height": "300px", "background-color": "red" });
                     page.first();
                     pages.push(page);
 
-                    page = new Page(wrapper);
+                    page = new Page(inner);
                     page.element.css({"height": "300px", "background-color": "green" });
                     page.center();
                     pages.push(page);
 
-                    page = new Page(wrapper);
+                    page = new Page(inner);
                     page.element.css({"height": "300px", "background-color": "blue" });
                     page.last();
                     pages.push(page);
 
-                    that.dimension.update();
+                    that.dimension.update(true);
                 },
 
                 _moveTo: function (location, ease, instant) {
@@ -270,9 +293,6 @@
                 },
                 last: function () {
                     this.element.css("transform", "translate3d(" + this.width + "px, 0, 0)"); 
-                },
-                setContent: function (i) {
-                    this.element.html(template(ds.at(i)));
                 }
             });
 
