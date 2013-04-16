@@ -425,6 +425,165 @@
                 ok(!dialog.options.visible);
             });
 
+            test("pin() sets position:fixed style to wrapper", function() {
+                var dialog = createWindow({
+                    visible: true,
+                    animation: false
+                });
+
+                dialog.pin();
+
+                equal(dialog.wrapper.css("position"), "fixed");
+            });
+
+            test("pin() toggles button class to k-i-unpin", function() {
+                var dialog = createWindow({
+                    visible: true,
+                    animation: false,
+                    actions: ["Pin"]
+                });
+
+                equal(dialog.wrapper.find(".k-i-pin").length, 1);
+                equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+
+                dialog.pin();
+
+                equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+                equal(dialog.wrapper.find(".k-i-pin").length, 0);
+            });
+
+            test("pin() substracts the browser scroll position from the wrapper's top and left styles", function() {
+                
+                var spacerDiv = $("<div style='width:6000px;height:3000px'>&nbsp;</div>").appendTo(document.body);
+
+                $(window).scrollLeft(2000);
+                $(window).scrollTop(1000);
+
+                var initialTop,
+                    initialLeft,
+                    dialog = createWindow({
+                        visible: true,
+                        animation: false
+                    });
+
+                dialog.center();
+
+                initialTop = parseInt(dialog.wrapper.css("top"), 10);
+                initialLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+                dialog.pin();
+
+                finalTop = parseInt(dialog.wrapper.css("top"), 10);
+                finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+                equal(finalTop, initialTop - $(window).scrollTop());
+                equal(finalLeft, initialLeft - $(window).scrollLeft());
+
+                spacerDiv.remove();
+            });
+
+            test("unpin() removes position:fixed style from wrapper", function() {
+                var dialog = createWindow({
+                    visible: true,
+                    animation: false,
+                    pinned: true
+                });
+
+                dialog.unpin();
+
+                equal(dialog.wrapper.css("position"), "absolute");
+            });
+
+            test("unpin() toggles button class to k-i-pin", function() {
+                var dialog = createWindow({
+                    visible: true,
+                    animation: false,
+                    actions: ["Pin"],
+                    pinned: true
+                });
+
+                equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+                equal(dialog.wrapper.find(".k-i-pin").length, 0);
+
+                dialog.unpin();
+
+                equal(dialog.wrapper.find(".k-i-pin").length, 1);
+                equal(dialog.wrapper.find(".k-i-unpin").length, 0);
+            });
+
+            test("unpin() adds the browser scroll position to the wrapper's top and left styles", function() {
+                
+                var spacerDiv = $("<div style='width:6000px;height:3000px'>&nbsp;</div>").appendTo(document.body);
+
+                $(window).scrollLeft(2000);
+                $(window).scrollTop(1000);
+
+                var initialTop,
+                    initialLeft,
+                    dialog = createWindow({
+                        visible: true,
+                        animation: false,
+                        pinned: true
+                    });
+
+                dialog.center();
+
+                initialTop = parseInt(dialog.wrapper.css("top"), 10);
+                initialLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+                dialog.unpin();
+
+                finalTop = parseInt(dialog.wrapper.css("top"), 10);
+                finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+                equal(finalTop, initialTop + $(window).scrollTop());
+                equal(finalLeft, initialLeft + $(window).scrollLeft());
+
+                spacerDiv.remove();
+            });
+
+            test("restoring a pinned Window preserves the pinned state", function() {
+                
+                var dialog = createWindow({
+                        visible: true,
+                        animation: false
+                    });
+
+                dialog.center();
+                dialog.minimize();
+                dialog.pin();
+                dialog.restore();
+
+                equal(dialog.wrapper.css("position"), "fixed");
+            });
+
+            test("maximize() hides the pin/unpin icon", function() {
+                
+                var dialog = createWindow({
+                        visible: true,
+                        actions: ["Pin"],
+                        animation: false
+                    });
+
+                dialog.maximize();
+
+                equal(dialog.wrapper.find(".k-i-pin:visible").length, 0);
+            });
+
+            test("restore() shows the pin/unpin icon", function() {
+                
+                var dialog = createWindow({
+                        visible: true,
+                        actions: ["Pin"],
+                        animation: false
+                    });
+
+                dialog.maximize();
+                dialog.restore();
+
+                equal(dialog.wrapper.find(".k-i-pin:visible").length, 1);
+            });
+
             test("title() on titleless window does not fail", function() {
                 var dialog = createWindow({ title: false });
 

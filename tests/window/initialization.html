@@ -411,6 +411,56 @@
                 equal(dialog.wrapper.find(".k-window.action").length, 0);
             });
 
+            test("creating pinned window applies a position:fixed style", function() {
+                var dialog = createWindow({ pinned: true });
+                equal(dialog.wrapper.css("position"), "fixed");
+            });
+
+            test("creating pinned window with a Pin command adds an Unpin button", function() {
+                var dialog = createWindow({ pinned: true, actions: ["Pin"] });
+                equal(dialog.wrapper.find(".k-i-unpin").length, 1);
+            });
+
+            test("creating window with an int top position applies a top style", function() {
+                var dialog = createWindow({
+                    position: {
+                        top: 1
+                    }
+                });
+
+                equal(dialog.wrapper.css("top"), "1px");
+            });
+
+            test("creating window with a string top position applies a top style", function() {
+                var dialog = createWindow({
+                    position: {
+                        top: "1px"
+                    }
+                });
+
+                equal(dialog.wrapper.css("top"), "1px");
+            });
+
+            test("creating window with an int left position applies a left style", function() {
+                var dialog = createWindow({
+                    position: {
+                        left: 1
+                    }
+                });
+
+                equal(dialog.wrapper.css("left"), "1px");
+            });
+
+            test("creating window with a string left position applies a left style", function() {
+                var dialog = createWindow({
+                    position: {
+                        left: "1px"
+                    }
+                });
+
+                equal(dialog.wrapper.css("left"), "1px");
+            });
+
             var form;
 
             module("appendTo option", {

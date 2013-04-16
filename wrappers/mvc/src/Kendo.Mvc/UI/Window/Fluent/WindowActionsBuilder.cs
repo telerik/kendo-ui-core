@@ -84,6 +84,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the window to show a pin button.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Window()
+        ///             .Name("Window")
+        ///             .Actions(actions => actions.Pin())
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public WindowActionsBuilder Pin()
+        {
+            return AddButton("Pin", UIPrimitives.Icons.Pin);
+        }
+
+        /// <summary>
         /// Configures the window to show a refresh button.
         /// </summary>
         /// <example>

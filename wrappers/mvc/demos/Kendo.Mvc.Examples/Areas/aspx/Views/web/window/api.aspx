@@ -13,6 +13,15 @@
         <li>
             <button id="refresh" class="k-button">Refresh</button>
         </li>
+        <li>
+            <button id="center" class="k-button">Center</button>
+        </li>
+        <li>
+            <button id="pin" class="k-button">Pin</button>
+        </li>
+        <li>
+            <button id="unpin" class="k-button">Unpin</button>
+        </li>
     </ul>
 </div>
     
@@ -21,24 +30,36 @@
         .Width(630)
         .Height(315)
         .Title("Rams's Ten Principles of Good Design")
-        .Actions(actions => actions.Refresh().Maximize().Close())
+        .Actions(actions => actions.Pin().Refresh().Maximize().Close())
         .LoadContentFrom("ajaxcontent1", "window")
 %>
 
 <script>
-    $(function () {
+    $(document).ready(function() {
         var window = $("#window");
 
-        $("#open").click(function (e) {
+        $("#open").click( function (e) {
             window.data("kendoWindow").open();
         });
 
-        $("#close").click(function (e) {
+        $("#close").click( function (e) {
             window.data("kendoWindow").close();
         });
 
-        $("#refresh").click(function (e) {
+        $("#refresh").click( function (e) {
             window.data("kendoWindow").refresh();
+        });
+
+        $("#center").click( function (e) {
+            window.data("kendoWindow").center();
+        });
+
+        $("#pin").click( function (e) {
+            window.data("kendoWindow").pin();
+        });
+
+        $("#unpin").click( function (e) {
+            window.data("kendoWindow").unpin();
         });
     });
 </script>

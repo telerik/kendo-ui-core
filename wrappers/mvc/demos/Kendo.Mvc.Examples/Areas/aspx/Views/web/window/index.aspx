@@ -47,6 +47,7 @@
     .Draggable()
     .Resizable()
     .Width(600)
+    .Actions(actions => actions.Pin().Minimize().Maximize().Close())
     .Events(ev => ev.Close("onClose"))
     .Render();
 %>
