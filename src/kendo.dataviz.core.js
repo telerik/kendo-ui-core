@@ -363,6 +363,28 @@ kendo_module({
             return new Point2D(x, y);
         },
 
+        adjacentBox: function(distance, width, height) {
+            var sector = this.clone().expand(distance),
+                midAndle = sector.middle(),
+                midPoint = sector.point(midAndle),
+                hw = width / 2,
+                hh = height / 2,
+                x = midPoint.x - hw,
+                y = midPoint.y - hh,
+                sa = math.sin(midAndle * DEGREE),
+                ca = math.cos(midAndle * DEGREE);
+
+            if (math.abs(sa) < 0.9) {
+                x += hw * -ca / math.abs(ca);
+            }
+
+            if (math.abs(ca) < 0.9) {
+                y += hh * -sa / math.abs(sa);
+            }
+
+            return new Box2D(x, y, x + width, y + height);
+        },
+
         getBBox: function() {
             var ring = this,
                 box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),

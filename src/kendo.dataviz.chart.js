@@ -89,7 +89,6 @@ kendo_module({
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
-        DEGREE = math.PI / 180,
         DONUT = "donut",
         DONUT_SECTOR_ANIM_DELAY = 50,
         DRAG = "drag",
@@ -1869,39 +1868,20 @@ kendo_module({
 
         reflowLabels: function() {
             var axis = this,
-                box = axis.box,
                 labels = axis.labels,
                 // TODO: Options
                 labelDistance = 5,
-                origin,
                 labelBox,
                 i;
 
             for (i = 0; i < labels.length; i++) {
                 // Measure text
-                labels[i].reflow(box);
+                labels[i].reflow(new Box2D());
                 labelBox = labels[i].box;
 
-                var sector = axis.getSlot(i).expand(labelDistance),
-                    w = labelBox.width() / 2,
-                    h = labelBox.height() / 2,
-                    midAndle = sector.middle(),
-                    pointAngle = midAndle * DEGREE,
-                    lp = sector.point(midAndle),
-                    cx = lp.x - w,
-                    cy = lp.y - h,
-                    sa = math.sin(pointAngle),
-                    ca = math.cos(pointAngle);
-
-                if (math.abs(sa) < 0.9) {
-                    cx += w * -ca / math.abs(ca);
-                }
-
-                if (math.abs(ca) < 0.9) {
-                    cy += h * -sa / math.abs(sa);
-                }
-
-                labels[i].reflow(labelBox.clone().move(cx,cy));
+                labels[i].reflow(
+                    axis.getSlot(i).adjacentBox(labelDistance, labelBox.width(), labelBox.height())
+                );
             }
         },
 
@@ -5544,28 +5524,11 @@ kendo_module({
             return element;
         },
 
-        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+        tooltipAnchor: function(width, height) {
             var point = this,
-                sector = point.sector.clone().expand(TOOLTIP_OFFSET),
-                w = tooltipWidth / 2,
-                h = tooltipHeight / 2,
-                midAndle = sector.middle(),
-                pointAngle = midAndle * DEGREE,
-                lp = sector.point(midAndle),
-                cx = lp.x - w,
-                cy = lp.y - h,
-                sa = math.sin(pointAngle),
-                ca = math.cos(pointAngle);
+                box = point.sector.adjacentBox(TOOLTIP_OFFSET, width, height);
 
-            if (math.abs(sa) < 0.9) {
-                cx += w * -ca / math.abs(ca);
-            }
-
-            if (math.abs(ca) < 0.9) {
-                cy += h * -sa / math.abs(sa);
-            }
-
-            return new Point2D(cx, cy);
+            return new Point2D(box.x1, box.y1);
         },
 
         formatValue: function(format) {
