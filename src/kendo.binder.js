@@ -1063,12 +1063,14 @@ kendo_module({
                         var field = this.options.dataValueField || this.options.dataTextField,
                             value = this.bindings.value.get(),
                             idx = 0, length,
-                            values = [];
+                            values = [],
+                            selectedValue;
 
                         if (field) {
                             if (value instanceof ObservableArray) {
                                 for (length = value.length; idx < length; idx++) {
-                                    values[idx] = value[idx].get(field);
+                                    selectedValue = value[idx];
+                                    values[idx] = selectedValue.get ? selectedValue.get(field) : selectedValue;
                                 }
                                 value = values;
                             } else if (value instanceof ObservableObject) {
