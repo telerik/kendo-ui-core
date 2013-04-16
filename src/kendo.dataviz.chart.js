@@ -1864,18 +1864,51 @@ kendo_module({
 
         reflow: function(box) {
             this.box = box;
-            // TODO: Apply padding, reflow labels
+            this.reflowLabels();
+        },
+
+        reflowLabels: function() {
+            var axis = this,
+                box = axis.box,
+                labels = axis.labels,
+                // TODO: Options
+                labelDistance = 5,
+                origin,
+                labelBox,
+                i;
+
+            for (i = 0; i < labels.length; i++) {
+                // Measure text
+                labels[i].reflow(box);
+                labelBox = labels[i].box;
+
+                var sector = axis.getSlot(i).expand(labelDistance),
+                    w = labelBox.width() / 2,
+                    h = labelBox.height() / 2,
+                    midAndle = sector.middle(),
+                    pointAngle = midAndle * DEGREE,
+                    lp = sector.point(midAndle),
+                    cx = lp.x - w,
+                    cy = lp.y - h,
+                    sa = math.sin(pointAngle),
+                    ca = math.cos(pointAngle);
+
+                if (math.abs(sa) < 0.9) {
+                    cx += w * -ca / math.abs(ca);
+                }
+
+                if (math.abs(ca) < 0.9) {
+                    cy += h * -sa / math.abs(sa);
+                }
+
+                labels[i].reflow(labelBox.clone().move(cx,cy));
+            }
         },
 
         // TODO: Extract
         createLabels: Axis.fn.createLabels,
         labelsCount: CategoryAxis.fn.labelsCount,
         createAxisLabel: CategoryAxis.fn.createAxisLabel,
-
-        destroy: function() {
-            // TODO: Extract
-            // Axis.fn.destroy.call(this);
-        },
 
         lineBox: function() {
             return this.box;
@@ -7981,11 +8014,43 @@ kendo_module({
             plotArea.createValueAxis();
         },
 
-        reflow: function(box) {
-            var size = math.min(box.width(), box.height()),
-                square = new Box2D(box.x1, box.y1, box.x1 + size, box.y1 + size);
+        reflow: PlotAreaBase.fn.reflow,
+        //    var size = math.min(box.width(), box.height()),
+        //        square = new Box2D(box.x1, box.y1, box.x1 + size, box.y1 + size);
 
-            PlotAreaBase.fn.reflow.call(this, square);
+        reflowAxes: function () {
+            var plotArea = this,
+                valueAxis = plotArea.valueAxis,
+                categoryAxis = plotArea.categoryAxis,
+                box = plotArea.box,
+                // TODO: Percents
+                axisBox = box.clone().unpad(35),
+                valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
+
+            categoryAxis.reflow(axisBox);
+            valueAxis.reflow(valueAxisBox);
+            var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
+            valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
+
+            plotArea.alignAxes(axisBox);
+        },
+
+        alignAxes: function() {
+            var plotArea = this,
+                valueAxis = plotArea.valueAxis,
+                slot = valueAxis.getSlot(valueAxis.options.min),
+                slotEdge = valueAxis.options.reverse ? 2 : 1,
+                center = plotArea.categoryAxis.getSlot(0).c,
+                box = valueAxis.box.translate(
+                    center.x - slot[X + slotEdge],
+                    center.y - slot[Y + slotEdge]
+                );
+
+            valueAxis.reflow(box);
+        },
+
+        backgroundBox: function() {
+            return this.box;
         },
 
         createCategoryAxis: function() {
@@ -8091,24 +8156,6 @@ kendo_module({
 
         seriesCategoryAxis: function() {
             return this.categoryAxis;
-        },
-
-        reflowAxes: function (panes){
-            var plotArea = this,
-                axis = plotArea.valueAxis;
-
-            plotArea.reflowPaneAxes(panes[0]);
-
-            var slot = axis.getSlot(0, 0),
-                slotEdge = axis.options.reverse ? 2 : 1,
-                center = plotArea.box.center(),
-                axisBox = axis.box.translate(
-                    center.x - slot[X + slotEdge],
-                    center.y - slot[Y + slotEdge]
-                );
-
-            axisBox.y1 = plotArea.box.y1;
-            axis.reflow(axisBox);
         }
     });
 
@@ -10092,6 +10139,7 @@ kendo_module({
         PieChart: PieChart,
         PiePlotArea: PiePlotArea,
         PieSegment: PieSegment,
+        RadarCategoryAxis: RadarCategoryAxis,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                getElement = dataviz.getElement,
+                Box2D = dataviz.Box2D,
+                chartBox = new Box2D(0, 0, 800, 600),
+                view,
+                TOLERANCE = 1;
+
+            (function() {
+                var axis;
+
+                function createAxis(options) {
+                    axis = new dataviz.RadarCategoryAxis(
+                        deepExtend({
+                            categories: ["Foo", "Bar", "Baz"]
+                        }, options)
+                    );
+                    axis.reflow(chartBox);
+
+                    view = new ViewStub();
+                    axis.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("Polar Category Axis / Rendering", {
+                    setup: function() {
+                        createAxis();
+                    }
+                });
+
+                test("line box equals box", function() {
+                    deepEqual(axis.lineBox(), axis.box);
+                });
+
+                test("creates labels", 1, function() {
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
+                         ["Foo", "Bar", "Baz"]);
+                });
+
+                test("creates labels with full format", 1, function() {
+                    createAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
+
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
+                         ["$1.00", "$2.00"]);
+                });
+
+                test("creates labels with simple format", 1, function() {
+                    createAxis({ categories: [1, 2], labels: { format: "C"} });
+
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
+                         ["$1.00", "$2.00"]);
+                });
+
+                test("labels can be hidden", function() {
+                    createAxis({
+                        labels: {
+                            visible: false
+                        }
+                    });
+
+                    equal(axis.labels.length, 0);
+                });
+
+                test("labels have set template", 1, function() {
+                    createAxis({
+                        labels: {
+                            template: "|${ data.value }|"
+                        }
+                    });
+
+                    equal(view.log.text[0].content, "|Foo|");
+                });
+
+                test("labels have set color", 1, function() {
+                    createAxis({
+                        labels: {
+                            color: "#f00"
+                        }
+                    });
+
+                    equal(view.log.text[0].style.color, "#f00");
+                });
+
+                test("labels have set background", 1, function() {
+                    createAxis({
+                        labels: {
+                            background: "#f0f"
+                        }
+                    });
+
+                    equal(view.log.rect[0].style.fill, "#f0f");
+                });
+
+                test("labels have set zIndex", 1, function() {
+                    createAxis({
+                        zIndex: 2
+                    });
+
+                    equal(view.log.text[0].style.zIndex, 2);
+                });
+
+                test("labels are distributed around axis", function() {
+                    arrayClose(
+                        $.map(view.log.text, function(text) {
+                            return [text.style.x, text.style.y]
+                        }),
+                        [[0, 0], [0, 0], [0, 0]],
+                        TOLERANCE
+                    );
+                });
+
+                test("labels are distributed around axis (justified)", function() {
+                    createAxis({ justified: true });
+
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+                         [0, 773], TOLERANCE);
+                });
+
+                test("labels are distributed horizontally in reverse", function() {
+                    createAxis({ reverse: true });
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+                         [586.5, 185.5], TOLERANCE);
+                });
+
+                test("labels are distributed horizontally in reverse (justified)", function() {
+                    createAxis({ justified: true, reverse: true });
+                    arrayClose($.map(view.log.text, function(text) { return text.style.x }),
+                         [773, 0], TOLERANCE);
+                });
+
+                test("major ticks are around the circle", function() {
+                    view.log.line.shift();
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+                         [0, 400, 800], TOLERANCE);
+                });
+
+                test("major ticks are distributed horizontally in reverse", function() {
+                    createAxis({ reverse: true });
+                    view.log.line.shift();
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+                         [800, 400, 0], TOLERANCE);
+                });
+
+                test("major ticks can be disabled", function() {
+                    createAxis({ majorTicks: { visible: false }});
+                    view.log.line.shift();
+                    equal(view.log.line.length, 0);
+                });
+
+                test("minor ticks are distributed horizontally", function() {
+                    createAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
+                    view.log.line.shift();
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+                         [0, 200, 400, 600, 800], TOLERANCE);
+                });
+
+                test("minor ticks are distributed horizontally (justified)", function() {
+                    createAxis({
+                        justified: true,
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+                         [14.5, 272, 529, 786], TOLERANCE);
+                });
+
+                test("minor ticks are distributed horizontally in reverse", function() {
+                    createAxis({
+                        reverse: true,
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                     });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+                         [800, 600, 400, 200, 0], TOLERANCE);
+                });
+
+                test("minor ticks are distributed horizontally in reverse (justified)", function() {
+                    createAxis({
+                        justified: true,
+                        reverse: true,
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                     });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    arrayClose($.map(view.log.line, function(line) { return line.x1; }),
+                         [786, 529, 271, 14.5], TOLERANCE);
+                });
+
+                test("minor ticks can be disabled", function() {
+                    view.log.line.shift();
+                    equal(view.log.line.length, 0);
+                });
+
+                test("line width 0 remove all ticks", function() {
+                    categoryAxis.options.line.width = 0;
+                    categoryAxis.getViewElements(view);
+                    equal(view.log.line.length, 0);
+                });
+
+                test("major ticks are aligned to axis", 3, function() {
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 0);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 5, function() {
+                    createAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 0);
+                    });
+                });
+
+            })();
+
+            (function() {
+                var categoryAxis,
+                    lineBox;
+
+                function createAxis(options) {
+                    categoryAxis = new dataviz.CategoryAxis(
+                        $.extend({
+                            categories: ["Foo", "Bar", "Baz"]
+                        }, options)
+                    );
+                    categoryAxis.reflow(chartBox);
+                    lineBox = categoryAxis.lineBox();
+                }
+
+                // ------------------------------------------------------------
+                module("Radar Category Axis / Slots", {
+                    setup: function() {
+                        moduleSetup();
+                        createAxis();
+                    }
+                });
+
+                test("positions slot for first category", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                });
+
+                test("positions slot for first category (justified)", function() {
+                    createAxis({ justified: true });
+                    var slot = categoryAxis.getSlot(0);
+                    deepEqual([slot.x1, slot.x2], [lineBox.x1, lineBox.x1]);
+                });
+
+                test("positions slot for first category in reverse", function() {
+                    createAxis({ reverse: true });
+                    var slot = categoryAxis.getSlot(0);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                });
+
+                test("positions slot for first category in reverse (justified)", function() {
+                    createAxis({ reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(0);
+                    deepEqual([slot.x1, slot.x2], [lineBox.x2, lineBox.x2]);
+                });
+
+                test("positions slot for first w/o labels", function() {
+                    createAxis({ labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(0);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                });
+
+                test("positions slot for second category", function() {
+                    var slot = categoryAxis.getSlot(1);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                });
+
+                test("positions slot for second category (justified)", function() {
+                    createAxis({ justified: true });
+                    var slot = categoryAxis.getSlot(1);
+                    arrayClose([slot.x1, slot.x2], [399, 399], TOLERANCE);
+                });
+
+                test("positions slot for second category in reverse", function() {
+                    createAxis({ reverse: true });
+                    var slot = categoryAxis.getSlot(1);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                });
+
+                test("positions slot for second category in reverse (justified)", function() {
+                    createAxis({ reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(1);
+                    arrayClose([slot.x1, slot.x2], [399, 399], TOLERANCE);
+                });
+
+                test("positions slot for second category w/o labels", function() {
+                    createAxis({ labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(1);
+                    arrayClose([slot.x1, slot.x2], [266, 533], TOLERANCE);
+                });
+
+                test("positions slot for third category", function() {
+                    var slot = categoryAxis.getSlot(2);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                });
+
+                test("positions slot for third category (justified)", function() {
+                    createAxis({ justified: true });
+                    var slot = categoryAxis.getSlot(2);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
+                });
+
+                test("positions slot for third category in reverse", function() {
+                    createAxis({ reverse: true });
+                    var slot = categoryAxis.getSlot(2);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, 266], TOLERANCE);
+                });
+
+                test("positions slot for third category in reverse (justified)", function() {
+                    createAxis({ reverse: true, justified: true });
+                    var slot = categoryAxis.getSlot(2);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x1, lineBox.x1], TOLERANCE);
+                });
+
+                test("positions slot for third category w/o labels", function() {
+                    createAxis({ labels: { visible: false } });
+                    var slot = categoryAxis.getSlot(2);
+                    arrayClose([slot.x1, slot.x2], [533, lineBox.x2], TOLERANCE);
+                });
+
+                test("slot height is 0", function() {
+                    var slot = categoryAxis.getSlot(0);
+                    deepEqual(slot.height(), 0);
+                });
+
+                test("assumes 1 category when no categories are defined", function() {
+                    categoryAxis = new dataviz.CategoryAxis();
+                    categoryAxis.reflow(chartBox);
+
+                    var slot = categoryAxis.getSlot(0);
+                    deepEqual([slot.x1, slot.x2], [lineBox.x1, lineBox.x2]);
+                });
+
+                test("reports range minimum of 0", function() {
+                    equal(categoryAxis.range().min, 0);
+                });
+
+                test("reports range maximum equal to category count", function() {
+                    equal(categoryAxis.range().max, 3);
+                });
+
+                test("from value can't be lower than 0", function() {
+                    var slot = categoryAxis.getSlot(-1);
+                    equal(slot.x1, 0);
+                });
+
+                test("caps from value to categories count", function() {
+                    var slot = categoryAxis.getSlot(1000);
+                    equal(slot.x1, lineBox.x2);
+                });
+
+                test("to value equals from value when not set", function() {
+                    var slot = categoryAxis.getSlot(1000);
+                    equal(slot.x2, lineBox.x2);
+                });
+
+                test("value equals from value when smaller", function() {
+                    var slot = categoryAxis.getSlot(2, 1);
+                    equal(slot.x2, lineBox.x2);
+                });
+
+            })();
+
+            (function() {
+                var Point2D = kendo.dataviz.Point2D;
+                var categoryAxis;
+
+                // ------------------------------------------------------------
+                module("CategoryAxis / getCategory / Horizontal ", {
+                    setup: function() {
+                        categoryAxis = new dataviz.CategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            vertical: false,
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates left of axis", function() {
+                    deepEqual(categoryAxis.getCategory(new Point2D(-1, 0)), null);
+                });
+
+                test("returns null for coordinates right of axis", function() {
+                    deepEqual(categoryAxis.getCategory(new Point2D(1000, 0)), null);
+                });
+
+                test("returns first category for leftmost point", function() {
+                    equal(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
+                });
+
+                test("returns last category for righttmost point", function() {
+                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Baz");
+                });
+
+                test("returns category for middle point", function() {
+                    equal(categoryAxis.getCategory(new Point2D(334, 0)), "Bar");
+                });
+
+                test("returns single category for leftmost point", function() {
+                    categoryAxis = new dataviz.CategoryAxis({
+                        categories: ["Foo"],
+                        vertical: false,
+                        labels: { visible: false }
+                    });
+
+                    categoryAxis.reflow(chartBox);
+                    equal(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
+                });
+
+                test("returns single category for righttmost point", function() {
+                    categoryAxis = new dataviz.CategoryAxis({
+                        categories: ["Foo"],
+                        vertical: false,
+                        labels: { visible: false }
+                    });
+
+                    categoryAxis.reflow(chartBox);
+                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                });
+
+                // ------------------------------------------------------------
+                module("CategoryAxis / getCategory / Horizontal / Reverse", {
+                    setup: function() {
+                        categoryAxis = new dataviz.CategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            vertical: false,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns first category for righttmost point", function() {
+                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                });
+
+                test("returns last category for leftmost point", function() {
+                    equal(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                });
+
+                test("returns category for middle point", function() {
+                    equal(categoryAxis.getCategory(new Point2D(464, 0)), "Bar");
+                });
+
+            })();
+
+            (function() {
+                var plotArea,
+                    plotBands,
+                    lineSeriesData = [{
+                        name: "Value A",
+                        type: "line",
+                        data: [100, 200, 300]
+                    }],
+                    barSeriesData =  [{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100, 20, 30]
+                    }];
+
+                function createPlotArea(series, chartOptions) {
+                    plotArea = new dataviz.CategoricalPlotArea(series, {
+                        categoryAxis: {
+                            categories: ["A"],
+                            plotBands: [{
+                                from: 0,
+                                to: 1,
+                                color: "red",
+                                opacity: 0.5
+                            }]
+                        }
+                    });
+
+                    view = new ViewStub();
+
+                    plotArea.reflow(chartBox);
+                    plotArea.getViewElements(view);
+                    plotBands = view.log.rect[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Plot Bands", {
+                    setup: function() {
+                        createPlotArea(lineSeriesData);
+                    }
+                });
+
+                test("renders box", function() {
+                    arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                         [ 39, 9, 292.666, 573 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(plotBands.style.fill, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(plotBands.style.fillOpacity, 0.5);
+                });
+
+                test("renders z index", function() {
+                    equal(plotBands.style.zIndex, -1);
+                });
+
+            })();
+
+            (function() {
+                var chart,
+                    label,
+                    plotArea;
+
+                function axisLabelClick(clickHandler, options) {
+                    chart = createChart($.extend(true, {
+                        dataSource: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B"
+                        }, {
+                            value: 3,
+                            category: "C"
+                        }],
+                        series: [{
+                            type: "line",
+                            field: "value"
+                        }],
+                        categoryAxis: {
+                            name: "Axis A",
+                            field: "category"
+                        },
+                        axisLabelClick: clickHandler
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    label = plotArea.categoryAxis.labels[1];
+                    $(getElement(label.options.id)).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Events / axisLabelClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking axis labels", 1, function() {
+                    axisLabelClick(function() { ok(true); });
+                });
+
+                test("event arguments contain axis options", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.axis.type, "category");
+                    });
+                });
+
+                test("event arguments contain DOM element", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.element.length, 1);
+                    });
+                });
+
+                test("event arguments contain category index", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.index, 1);
+                    });
+                });
+
+                test("category index is correct when step is defined", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.index, 2);
+                    }, {
+                        categoryAxis: {
+                            labels: {
+                                step: 2
+                            }
+                        }
+                    });
+                });
+
+                test("event arguments contain category name as text", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.text, "B");
+                    });
+                });
+
+                test("event arguments contain category name as value", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.value, "B");
+                    });
+                });
+
+                test("event arguments contain category data item", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.dataItem.value, 2);
+                    });
+                });
+
+            })();
+
+            (function() {
+                var chart,
+                    label,
+                    plotArea;
+
+                function createBoundChart(options) {
+                    chart = createChart($.extend(true, {
+                        dataSource: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B"
+                        }, {
+                            value: 3,
+                            category: "C"
+                        }],
+                        series: [{
+                            type: "line",
+                            field: "value"
+                        }],
+                        categoryAxis: {
+                            name: "Axis A",
+                            field: "category"
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    label = plotArea.categoryAxis.labels[1];
+                    $(getElement(label.options.id)).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Data Binding", {
+                    teardown: destroyChart
+                });
+
+                test("categories are data bound", function() {
+                    createBoundChart();
+                    equal(plotArea.categoryAxis.labels.length, 3);
+                });
+
+                test("template has access to data item", function() {
+                    createBoundChart({
+                        categoryAxis: {
+                            labels: {
+                                template: "#= ok(typeof dataItem.value == 'number') #"
+                            }
+                        }
+                    });
+                });
+
+                test("categories are bound for secondary axis", function() {
+                    createBoundChart({
+                        categoryAxis: [{
+                            name: "Axis A",
+                            field: "category"
+                        }, {
+                            name: "Axis B",
+                            field: "category"
+                        }]
+                    });
+
+                    equal(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
+                });
+
+                test("categories are bound when using categoryAxes alias", function() {
+                    createBoundChart({
+                        categoryAxes: [{
+                            name: "Axis A",
+                            field: "category"
+                        }, {
+                            name: "Axis B",
+                            field: "category"
+                        }]
+                    });
+
+                    equal(plotArea.namedCategoryAxes["Axis A"].labels.length, 3);
+                    equal(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

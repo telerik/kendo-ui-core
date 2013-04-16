@@ -15,13 +15,14 @@
         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart"></div>
+        <div id="chart" style="width: 600px; height: 300px;"></div>
+        <div id="pie" style="width: 600px; height: 300px;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
                     series: [{
                         type: "radarColumn",
-                        data: [1, 2, 3, 4, 5, 6, 7, 8],
+                        data: [1, 2, 3, 4, 5],
                         color: "red",
                         opacity: 0.5,
                         markers: {
@@ -29,23 +30,41 @@
                         }
                     }, {
                         type: "radarLine",
-                        data: [1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5]
+                        data: [1.5, 2.5, 3.5, 4.5, 5.5]
                     }],
                     categoryAxis: {
-                        categories: ["A", "B", "C", "D", "E", "F"],
+                        categories: ["Foo", "Bar", "Baz", "Boo", "Faz"],
+                        labels: {
+                            background: "red"
+                        }
                         //startAngle: 90 // default
                     },
                     valueAxis: {
                         majorGridLines: {
                             //type: "line" // default
-                            //type: "arc"
+                            type: "arc"
                         },
                         // TODO: Negative values
                         // TODO: Round to major unit
                         max: 9
                     },
-                    // TODO: Choppiness, perhaps an old prolbem?
+                    plotArea: {
+                        background: "green",
+                        opacity: 0.1
+                    },
+                    // TODO: Implement
                     transitions: false
+                });
+
+                $("#pie").kendoChart({
+                    series: [{
+                        type: "pie",
+                        data: [1, 2, 3]
+                    }],
+                    plotArea: {
+                        background: "green",
+                        opacity: 0.1
+                    }
                 });
             });
         </script>

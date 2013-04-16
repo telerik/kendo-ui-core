@@ -166,6 +166,7 @@ kendo_module({
             return box;
         },
 
+        // TODO: Accept point!
         move: function(x, y) {
             var box = this,
                 height = box.height(),
