@@ -597,7 +597,7 @@ kendo_module({
             }
             return this.toCssRgba();
         },
-        equals: function(c) { return c === this || c !== null && this.toHex() == parse(c).toHex(); },
+        equals: function(c) { return c === this || c !== null && this.toCssRgba() == parse(c).toCssRgba(); },
         diff: function(c2) {
             if (c2 == null) {
                 return NaN;
