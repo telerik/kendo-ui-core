@@ -685,6 +685,16 @@
                 ok(!calendar._prevArrow.hasClass("k-state-disabled"));
             });
 
+            test("min method navigates if selected date is null and current date is equal to min", 1, function() {
+                var calendar = new Calendar(div);
+
+                calendar.bind("navigate", function() {
+                    ok(true);
+                });
+
+                calendar.min(new Date());
+            });
+
             test("max method enables prev link", 1, function() {
                 var calendar = new Calendar(div, {
                     max: new Date(2000, 10, 10),

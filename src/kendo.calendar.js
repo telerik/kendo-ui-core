@@ -708,7 +708,9 @@ kendo_module({
 
             navigate = that._view.compare(value, that._current);
 
-            if (option === MIN) {
+            if (!selectedValue) {
+                navigate = isEqualDatePart(that._current, value);
+            } else if (option === MIN) {
                 bigger = +value > selectedValue;
                 navigate = navigate > -1;
                 arrow = PREVARROW;
