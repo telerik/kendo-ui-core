@@ -62,6 +62,10 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("animation", value);
     }
 
+    public void setPosition(com.kendoui.taglib.window.PositionTag value) {
+        setProperty("position", value);
+    }
+
     public void setActivate(ActivateFunctionTag value) {
         setEvent("activate", value.getBody());
     }
@@ -184,6 +188,14 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setModal(boolean value) {
         setProperty("modal", value);
+    }
+
+    public boolean getPinned() {
+        return (boolean)getProperty("pinned");
+    }
+
+    public void setPinned(boolean value) {
+        setProperty("pinned", value);
     }
 
     public boolean getResizable() {

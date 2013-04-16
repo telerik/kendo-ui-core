@@ -6,7 +6,7 @@ class DataSourceSortItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Sets the field to sort on.
+    * The field by which the data items are sorted.
     * @param string $value
     * @return \Kendo\Data\DataSourceSortItem
     */
@@ -15,7 +15,7 @@ class DataSourceSortItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the sort direction. Possible values are: "asc", "desc", null. If null is set, the sort expression is removed.
+    * The sort order (direction). The supported values are "asc" (ascending order) and "desc" (descending order).
     * @param string $value
     * @return \Kendo\Data\DataSourceSortItem
     */

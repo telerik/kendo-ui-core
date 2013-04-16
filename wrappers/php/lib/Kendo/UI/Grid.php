@@ -10,7 +10,7 @@ class Grid extends \Kendo\UI\Widget {
 
     /**
     * If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
-data source is fired.By default this option is set to true which means that the widget will bind to the data source specified in the configuration.
+data source is fired. By default the widget will bind to the data source specified in the configuration.
     * @param boolean $value
     * @return \Kendo\UI\Grid
     */
@@ -263,6 +263,20 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
+    * Sets the columnMenuInit event of the Grid.
+    * Fired when the column menu is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function columnMenuInit($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('columnMenuInit', $value);
+    }
+
+    /**
     * Sets the columnReorder event of the Grid.
     * Fired when the user changes the order of a column.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
@@ -390,7 +404,7 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
 
     /**
     * Sets the filterMenuInit event of the Grid.
-    * Fires when the grid column filter menu is initialized.
+    * Fired when the grid filter menu is initialized.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Grid
     */
@@ -403,22 +417,8 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
-    * Sets the columnMenuInit event of the Grid.
-    * Fires when the grid column menu is initialized.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\UI\Grid
-    */
-    public function columnMenuInit($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('columnMenuInit', $value);
-    }
-
-    /**
     * Sets the remove event of the Grid.
-    * Fires before the grid item is removed.
+    * Fired when the user clicks the "destroy" command button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Grid
     */
@@ -432,7 +432,7 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
 
     /**
     * Sets the save event of the Grid.
-    * Fires before the grid item is changed.
+    * Fired when a data item is saved.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Grid
     */
@@ -446,7 +446,7 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
 
     /**
     * Sets the saveChanges event of the Grid.
-    * Fires before the grid calls DataSource sync.
+    * Fired when the user clicks the "save" command button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Grid
     */

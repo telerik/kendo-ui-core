@@ -142,6 +142,7 @@ Every n-th label is rendered where n is the step
 
     /**
     * Culture to use for formatting the dates. See Globalization for more information.
+Uses the global culture by default.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLabels
     */

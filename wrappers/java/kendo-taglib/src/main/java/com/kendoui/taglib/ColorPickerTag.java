@@ -106,11 +106,11 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("opacity", value);
     }
 
-    public String getPalette() {
-        return (String)getProperty("palette");
+    public Object getPalette() {
+        return (Object)getProperty("palette");
     }
 
-    public void setPalette(String value) {
+    public void setPalette(Object value) {
         setProperty("palette", value);
     }
 

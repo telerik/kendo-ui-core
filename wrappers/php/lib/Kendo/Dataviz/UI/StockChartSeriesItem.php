@@ -300,6 +300,15 @@ Available for column series.
     }
 
     /**
+    * A value indicating whether to show the series name in the legend.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function visibleInLegend($value) {
+        return $this->setProperty('visibleInLegend', $value);
+    }
+
+    /**
     * The line width.** Applicable for area and line series. **
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem

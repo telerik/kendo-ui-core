@@ -143,6 +143,7 @@ Template variables:
 
     /**
     * Culture to use for formatting the dates. See Globalization for more information.
+It defaults to the global culture.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemLabels
     */

@@ -142,6 +142,7 @@ Every n-th label is rendered where n is the step
 
     /**
     * Culture to use for formatting the dates. See Globalization for more information.
+It defaults to the global culture.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartYAxisItemLabels
     */

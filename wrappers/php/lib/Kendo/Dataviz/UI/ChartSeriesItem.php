@@ -391,7 +391,16 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * A boolean value indicating whether to show the point category name in the legend.** Available for bubble and pie series. **
+    * A value indicating whether to show the point category name (for bubble, donut and pie series) and series name (for other available series types) in the legend.** Available for all series. **
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function visibleInLegend($value) {
+        return $this->setProperty('visibleInLegend', $value);
+    }
+
+    /**
+    * A data field containing a boolean value which indicates whether to show the point category name in the legend.** Available for bubble, donut and pie series. **
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

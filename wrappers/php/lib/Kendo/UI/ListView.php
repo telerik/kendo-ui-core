@@ -81,7 +81,7 @@ class ListView extends \Kendo\UI\Widget {
 
     /**
     * Indicates whether selection is enabled/disabled. Possible values:
-    * @param string $value
+    * @param boolean|string $value
     * @return \Kendo\UI\ListView
     */
     public function selectable($value) {

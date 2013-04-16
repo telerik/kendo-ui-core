@@ -377,6 +377,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("type", value);
     }
 
+    public boolean getVisibleInLegend() {
+        return (boolean)getProperty("visibleInLegend");
+    }
+
+    public void setVisibleInLegend(boolean value) {
+        setProperty("visibleInLegend", value);
+    }
+
     public String getVisibleInLegendField() {
         return (String)getProperty("visibleInLegendField");
     }

@@ -19,7 +19,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the GridToolbarItem.
-    * The template which is used to render the command. Be default renders a button.
+    * The template which renders the command. Be default renders a button.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridToolbarItem
     */
@@ -31,7 +31,7 @@ class GridToolbarItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the GridToolbarItem.
-    * The template which is used to render the command. Be default renders a button.
+    * The template which renders the command. Be default renders a button.
     * @param string $value The template content.
     * @return \Kendo\UI\GridToolbarItem
     */

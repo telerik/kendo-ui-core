@@ -67,7 +67,7 @@ makes sense for your colors.
     * When a non-null palette argument is supplied, the drop-down will be
 a simple color picker.  The following are supported:If palette is missing or null, the widget will display the HSV
 selector.
-    * @param string $value
+    * @param string|array $value
     * @return \Kendo\UI\ColorPicker
     */
     public function palette($value) {

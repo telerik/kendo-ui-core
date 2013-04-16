@@ -6,21 +6,21 @@ class DataSourceGroupItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies the field to group by.
-    * @param string $value
-    * @return \Kendo\Data\DataSourceGroupItem
-    */
-    public function field($value) {
-        return $this->setProperty('field', $value);
-    }
-
-    /**
-    * Specifies the order of the groupped items.
+    * The sort order of the group. The supported values are "asc" (ascending order) and "desc" (descending order). The default sort order is ascending.
     * @param string $value
     * @return \Kendo\Data\DataSourceGroupItem
     */
     public function dir($value) {
         return $this->setProperty('dir', $value);
+    }
+
+    /**
+    * The data item field to group by.
+    * @param string $value
+    * @return \Kendo\Data\DataSourceGroupItem
+    */
+    public function field($value) {
+        return $this->setProperty('field', $value);
     }
 
     /**

@@ -120,6 +120,24 @@ Window.
     }
 
     /**
+    * Specifies whether the window should be pinned, i.e. it will not move together with the page content during scrolling.
+    * @param boolean $value
+    * @return \Kendo\UI\Window
+    */
+    public function pinned($value) {
+        return $this->setProperty('pinned', $value);
+    }
+
+    /**
+    * A collection of one or two members, which define the initial Window's top and/or left position on the page.
+    * @param \Kendo\UI\WindowPosition|array $value
+    * @return \Kendo\UI\Window
+    */
+    public function position($value) {
+        return $this->setProperty('position', $value);
+    }
+
+    /**
     * Enables (true) or disables (false) the ability for users to resize a
 Window.
     * @param boolean $value

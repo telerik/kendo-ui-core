@@ -735,7 +735,8 @@ Template variables:</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+Uses the global culture by default.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1831,7 +1832,13 @@ If not specified, the available space is split evenly between the series.Availab
             <type>String</type>
         </attribute>
         <attribute>
-            <description>A boolean value indicating whether to show the point category name in the legend.** Available for bubble and pie series. **</description>
+            <description>A value indicating whether to show the point category name (for bubble, donut and pie series) and series name (for other available series types) in the legend.** Available for all series. **</description>
+            <name>visibleInLegend</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>A data field containing a boolean value which indicates whether to show the point category name in the legend.** Available for bubble, donut and pie series. **</description>
             <name>visibleInLegendField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1875,7 +1882,7 @@ If not specified, the available space is split evenly between the series.Availab
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The color of the border.</description>
+            <description>The color of the border.  It defaults to the color of the current series.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -1903,7 +1910,7 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
-        <description>The color of the border.</description>
+        <description>The color of the border.  It defaults to the color of the current series.</description>
         <name>chart-seriesItem-border-color</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemBorderColorFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -3610,7 +3617,8 @@ hex and rgb</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+Uses the global culture by default.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -4192,7 +4200,8 @@ hex and rgb</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+Uses the global culture by default.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -4746,7 +4755,7 @@ a simple color picker.  The following are supported:If palette is missing or nul
 selector.</description>
             <name>palette</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>Object</type>
         </attribute>
         <attribute>
             <description>Only for the HSV selector.  Displays the color preview element, along
@@ -5110,120 +5119,120 @@ original value.</description>
         <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>Enables (true) or disables (false) the automatic invocation of the sync() method for each change made.</description>
+            <description>If set to true the data source would automatically save any changed data items by calling the sync method. By default changes are not automatically saved.</description>
             <name>autoSync</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Enables (true) or disables (false) batch mode.</description>
+            <description>If set to true the data source will batch CRUD operation requests. For example updating two data items would cause one HTTP request instead of two. By default the data source
+makes a HTTP request for every CRUD operation.</description>
             <name>batch</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the local JavaScript object to use for the data source.</description>
+            <description>The array of data items which the data source contains. The data source will wrap those items as kendo.data.ObservableObject or kendo.data.Model (if schema.model is set).Can be set to a string value if the schema.type option is set to "xml".</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Sets the index of the displayed page of data.</description>
+            <description>The page of data which the data source will return when the view method is invoked or request from the remote service.</description>
             <name>page</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Sets the number of records which contains a given page of data.</description>
+            <description>The number of data items per page.</description>
             <name>pageSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Determines if aggregates are calculated on the server or not. By default aggregates are calculated client-side.</description>
+            <description>If set to true the data source will leave the aggregate calculation to the remote service. By default the data source calculates aggregates client-side.</description>
             <name>serverAggregates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Determines if filtering of the data is handled on the server. By default filtering is performed client-side.By default, a filter object is sent to the server with the query string in the following form:Possible values for operator include:</description>
+            <description>If set to true the data source will leave the filtering implementation to the remote service. By default the data source performs filtering client-side.By default the filter is sent to the server following jQuery's conventions.For example the filter { logic: "and", filters: [ { field: "name", operator: "startswith", value: "Jane" } ] } is sent as:Use the parameterMap option to send the filter option in a different format.</description>
             <name>serverFiltering</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Determines if grouping of the data is handled on the server. By default grouping is performed client-side.By default, a group object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.</description>
+            <description>If set to true the data source will leave the grouping implementation to the remote service. By default the data source performs grouping client-side.By default the group is sent to the server following jQuery's conventions.For example the group { field: "category", dir: "desc" } is sent as:Use the parameterMap option to send the group option in a different format.</description>
             <name>serverGrouping</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Determines if paging of the data is on the server. By default paging is performed client-side. If serverPaging is enabled the
-total number of data items should also be returned in the response. Use the schema.total setting to customize that.The following options are sent to the server as part of the query string by default:</description>
+            <description>If set to true the data source will leave the data item paging implementation to the remote service. By default the data source performs paging client-side.The following options are sent to the server when server paging is enabled:Use the parameterMap option to send the paging options in a different format.</description>
             <name>serverPaging</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.By default, a sort object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.</description>
+            <description>If set to true the data source will leave the data item sorting implementation to the remote service. By default the data source performs sorting client-side.By default the sort is sent to the server following jQuery's conventions.For example the sort { field: "age", dir: "desc" } is sent as:Use the parameterMap option to send the paging options in a different format.</description>
             <name>serverSorting</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Loads transport with preconfigured settings. Currently supports only "odata" (Requires kendo.data.odata.js to be included).</description>
+            <description>If set the data source will use a predefined transport and/or schema. The only supported value is "odata" which supports the OData v.2 protocol.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Fires when data is changed or read from the transport.</description>
+            <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when an error occurs during data read or sync.</description>
+            <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
             <name>error</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires after changes are synced.</description>
-            <name>sync</name>
+            <description>Fired when a remote service request is finished.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+            <name>requestEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when data request is to be made.</description>
+            <description>Fired when the data source makes a remote service request.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
             <name>requestStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when a data request is received. Raised after a Create, Read, Update or Destroy request is performed.</description>
-            <name>requestEnd</name>
+            <description>Fired after the data source saves data item changes. The data source saves the data item changes when the sync method is called.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+            <name>sync</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 
     <tag>
-        <description>Sets fields on which initial aggregates should be calculated</description>
+        <description>The aggregate(s) which are calculated when the data source populates with data. The supported aggregates are "average", "count", "max", "min" and "sum".</description>
         <name>dataSource-aggregate</name>
         <tag-class>com.kendoui.taglib.datasource.AggregateTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Sets fields on which initial aggregates should be calculated</description>
+        <description>The aggregate(s) which are calculated when the data source populates with data. The supported aggregates are "average", "count", "max", "min" and "sum".</description>
         <name>dataSource-aggregateItem</name>
         <tag-class>com.kendoui.taglib.datasource.AggregateItemTag</tag-class>
 
         <body-content>empty</body-content>
         <attribute>
-            <description>Specifies the aggregate function. Possible values are: "min", "max", "count", "sum", "average"</description>
+            <description>The name of the aggregate function. The supported aggregates are "average", "count", "max", "min" and "sum".</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field on which the aggregate will be calculated.</description>
+            <description>The data item field which will be used to calculate the aggregates.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5233,32 +5242,33 @@ total number of data items should also be returned in the response. Use the sche
 
 
     <tag>
-        <description>Sets the initial filter.</description>
+        <description>The filter(s) which is (are) applied over the data items. By default no filter is applied.</description>
         <name>dataSource-filter</name>
         <tag-class>com.kendoui.taglib.datasource.FilterTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Sets the initial filter.</description>
+        <description>The filter(s) which is (are) applied over the data items. By default no filter is applied.</description>
         <name>dataSource-filterItem</name>
         <tag-class>com.kendoui.taglib.datasource.FilterItemTag</tag-class>
 
         <body-content>empty</body-content>
         <attribute>
-            <description>Specifies the field to filter by.</description>
+            <description>The data item field to which the filter operator is applied.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the filter operator. One of the following values "eq", "neq", "lt", "lte", "gt", "gte", "startswith", "endswith", "contains".</description>
+            <description>The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
+"startswith", "endswith", "contains". The last three are supported only for string fields.</description>
             <name>operator</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the value to filter for.</description>
+            <description>The value to which the field is compared. The value must be from the same type as the field.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
@@ -5268,26 +5278,26 @@ total number of data items should also be returned in the response. Use the sche
 
 
     <tag>
-        <description>Sets initial grouping</description>
+        <description>The grouping configuration of the data source. If set the data items will be grouped when the data source is populated. By default grouping is not applied.</description>
         <name>dataSource-group</name>
         <tag-class>com.kendoui.taglib.datasource.GroupTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Sets initial grouping</description>
+        <description>The grouping configuration of the data source. If set the data items will be grouped when the data source is populated. By default grouping is not applied.</description>
         <name>dataSource-groupItem</name>
         <tag-class>com.kendoui.taglib.datasource.GroupItemTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies the order of the groupped items.</description>
+            <description>The sort order of the group. The supported values are "asc" (ascending order) and "desc" (descending order). The default sort order is ascending.</description>
             <name>dir</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field to group by.</description>
+            <description>The data item field to group by.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5295,26 +5305,26 @@ total number of data items should also be returned in the response. Use the sche
     </tag>
 
     <tag>
-        <description>Specifies the aggregate function for this group.</description>
+        <description>The aggregate(s) which are calculated during grouping. The supported aggregates are "average", "count", "max", "min" and "sum".</description>
         <name>dataSource-groupItem-aggregates</name>
         <tag-class>com.kendoui.taglib.datasource.GroupItemAggregatesTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Specifies the aggregate function for this group.</description>
+        <description>The aggregate(s) which are calculated during grouping. The supported aggregates are "average", "count", "max", "min" and "sum".</description>
         <name>dataSource-groupItem-aggregate</name>
         <tag-class>com.kendoui.taglib.datasource.GroupItemAggregateTag</tag-class>
 
         <body-content>empty</body-content>
         <attribute>
-            <description>Specifies the aggregate function. Possible values are: "min", "max", "count", "sum", "average"</description>
+            <description>The name of the aggregate function. Specifies the aggregate function. The supported aggregates are "average", "count", "max", "min" and "sum".</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field on which the aggregate will be calculated.</description>
+            <description>The data item field which will be used to calculate the aggregates.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5325,61 +5335,60 @@ total number of data items should also be returned in the response. Use the sche
 
 
     <tag>
-        <description>Set the object responsible for describing the raw data format.</description>
+        <description>The configuration used to parse the remote sevice response.</description>
         <name>dataSource-schema</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
-return the aggregate results for the current response.Result should have the following format:i.e.</description>
+            <description>The field from the response which contains the aggregate results. Can be set to a function which is called to
+return the aggregate results from the response.The result of the function should be a JavaScript object which contains the aggregate results for every fields in the following format:For example if the data source is configured like this:The aggregate results should have the following format:</description>
             <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field from the response which contains the data items. If set to a function - the function will be called to
-return the data items for the current response.</description>
+            <description>The field from the server response which contains the data items. Can be set to a functin which is called to
+return the data items for the response.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
-return the errors for the current response (if present). If there are any errors the error event of the DataSource will be raised.</description>
+            <description>The field from the server response which contains server-side errors. Can be set to a function which is called to
+return the errors for response. If there are any errors the error event will be fired.</description>
             <name>errors</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
-return the groups for the current response.Used instead of the schema.data setting if remote grouping operation is executed.The result should have the following format:</description>
+            <description>The field from the server response which contains the groups. Can be set to a function which is called to
+return the groups from the response.The result should have the following format:</description>
             <name>groups</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Describes the Model of the DataSource. If set to Object the Model.define method will be used to create the model. Check the documentation of
- Model.define for the available configuration options.</description>
+            <description>The data item (model) configuration.If set to an object the Model.define method will be used to initialize the data source model.If set to an existing kendo.data.Model instance the data source will use that instance and will not initialize a new one.</description>
             <name>model</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
+            <description>Executed before the server response is used. Use it to preprocess or parse the server response.</description>
             <name>parse</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
-return the total number of data items for the current response.</description>
+            <description>The field from the server response which contains the total number of data items. Can be set to a function which is called to
+return the total number of data items for the response.</description>
             <name>total</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Specify the type of the response - XML or JSON. The only supported values are "xml" and "json".</description>
+            <description>The type of the response. The supported values are "xml" and "json". By default the schema interprets the server response as JSON.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5389,68 +5398,68 @@ return the total number of data items for the current response.</description>
 
 
     <tag>
-        <description>Specifies the field from the response which contains the aggregate results. If set to a function - the function will be called to
-return the aggregate results for the current response.Result should have the following format:i.e.</description>
+        <description>The field from the response which contains the aggregate results. Can be set to a function which is called to
+return the aggregate results from the response.The result of the function should be a JavaScript object which contains the aggregate results for every fields in the following format:For example if the data source is configured like this:The aggregate results should have the following format:</description>
         <name>dataSource-schema-aggregates</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaAggregatesFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Specifies the field from the response which contains the data items. If set to a function - the function will be called to
-return the data items for the current response.</description>
+        <description>The field from the server response which contains the data items. Can be set to a functin which is called to
+return the data items for the response.</description>
         <name>dataSource-schema-data</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaDataFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Specifies the field from the response which contains any errors. If set to a function - the function will be called to
-return the errors for the current response (if present). If there are any errors the error event of the DataSource will be raised.</description>
+        <description>The field from the server response which contains server-side errors. Can be set to a function which is called to
+return the errors for response. If there are any errors the error event will be fired.</description>
         <name>dataSource-schema-errors</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaErrorsFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Specifies the field from the response which contains the groups. If set to a function - the function will be called to
-return the groups for the current response.Used instead of the schema.data setting if remote grouping operation is executed.The result should have the following format:</description>
+        <description>The field from the server response which contains the groups. Can be set to a function which is called to
+return the groups from the response.The result should have the following format:</description>
         <name>dataSource-schema-groups</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaGroupsFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Executed before the server response is used. Appropriate for preprocessing or parsing of the server response.</description>
+        <description>Executed before the server response is used. Use it to preprocess or parse the server response.</description>
         <name>dataSource-schema-parse</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaParseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Specifies the field from the response which contains the total number of data items. If set to a function - the function will be called to
-return the total number of data items for the current response.</description>
+        <description>The field from the server response which contains the total number of data items. Can be set to a function which is called to
+return the total number of data items for the response.</description>
         <name>dataSource-schema-total</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaTotalFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Sets initial sort order</description>
+        <description>The sort order which will be applied over the data items. By default the data items are not sorted.</description>
         <name>dataSource-sort</name>
         <tag-class>com.kendoui.taglib.datasource.SortTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Sets initial sort order</description>
+        <description>The sort order which will be applied over the data items. By default the data items are not sorted.</description>
         <name>dataSource-sortItem</name>
         <tag-class>com.kendoui.taglib.datasource.SortItemTag</tag-class>
 
         <body-content>empty</body-content>
         <attribute>
-            <description>Sets the sort direction. Possible values are: "asc", "desc", null. If null is set, the sort expression is removed.</description>
+            <description>The sort order (direction). The supported values are "asc" (ascending order) and "desc" (descending order).</description>
             <name>dir</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Sets the field to sort on.</description>
+            <description>The field by which the data items are sorted.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5460,37 +5469,39 @@ return the total number of data items for the current response.</description>
 
 
     <tag>
-        <description>Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.</description>
+        <description>The configuration used to load and save the data items. A data source is remote or local based on the way of it retrieves data items.Remote data sources load and save data items from and to a remote end-point (a.k.a. remote service or server). The transport option describes the remote service configuration - URL, HTTP verb, HTTP headers etc.
+The transport option can also be used to implement custom data loading and saving.Local data sources are bound to a JavaScript array via the data option.</description>
         <name>dataSource-transport</name>
         <tag-class>com.kendoui.taglib.datasource.TransportTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Options for remote create data operation, or the URL of the remote service.</description>
+            <description>The configuration used when the data source saves newly created data items. Those are items added to the data source via the add or insert methods.If the value of transport.create is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.create is a string the data source uses this string as the URL of the remote service.</description>
             <name>create</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Options for remote destroy data operation, or the URL of the remote service.</description>
+            <description>The configuration used when the data source destroys data items. Those are items removed from the data source via the remove method.If the value of transport.destroy is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.destroy is a string the data source uses this string as the URL of the remote service.</description>
             <name>destroy</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Converts the request parameters and data from the internal format to a format suitable for the remote service.</description>
+            <description>The function which converts the request parameters to a format suitable for the remote service. By default
+the data source sends the parameters using jQuery's conventions.</description>
             <name>parameterMap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Options for remote read data operation, or the URL of the remote service.</description>
+            <description>The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.</description>
             <name>read</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Options for remote update data operation, or the URL of the remote service.</description>
+            <description>The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.If the value of transport.update is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.update is a string the data source uses this string as the URL of the remote service.</description>
             <name>update</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5499,14 +5510,14 @@ return the total number of data items for the current response.</description>
     </tag>
 
     <tag>
-        <description>Options for remote create data operation, or the URL of the remote service.</description>
+        <description>The configuration used when the data source saves newly created data items. Those are items added to the data source via the add or insert methods.If the value of transport.create is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.create is a string the data source uses this string as the URL of the remote service.</description>
         <name>dataSource-transport-create</name>
         <tag-class>com.kendoui.taglib.datasource.TransportCreateTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>If set to false the request result will not be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters.
+By default "jsonp" requests are not cached.Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -5519,28 +5530,25 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of result expected from the server. Commonly used values are "json" and "jsonp".Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The remote url to call when creating a new record.</description>
+            <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5550,27 +5558,26 @@ Refer to the jQuery.ajax documentation for further info.</description>
 
 
     <tag>
-        <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+        <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-create-data</name>
         <tag-class>com.kendoui.taglib.datasource.TransportCreateDataFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The remote url to call when creating a new record.</description>
+        <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
         <name>dataSource-transport-create-url</name>
         <tag-class>com.kendoui.taglib.datasource.TransportCreateUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Options for remote destroy data operation, or the URL of the remote service.</description>
+        <description>The configuration used when the data source destroys data items. Those are items removed from the data source via the remove method.If the value of transport.destroy is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.destroy is a string the data source uses this string as the URL of the remote service.</description>
         <name>dataSource-transport-destroy</name>
         <tag-class>com.kendoui.taglib.datasource.TransportDestroyTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>If set to false the request result will not be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters.
+By default "jsonp" requests are not cached.Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -5583,28 +5590,25 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of result expected from the server. Commonly used values are "json" and "jsonp".Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The remote url to call when creating a new record.</description>
+            <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5614,27 +5618,26 @@ Refer to the jQuery.ajax documentation for further info.</description>
 
 
     <tag>
-        <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+        <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-destroy-data</name>
         <tag-class>com.kendoui.taglib.datasource.TransportDestroyDataFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The remote url to call when creating a new record.</description>
+        <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
         <name>dataSource-transport-destroy-url</name>
         <tag-class>com.kendoui.taglib.datasource.TransportDestroyUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Options for remote read data operation, or the URL of the remote service.</description>
+        <description>The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.</description>
         <name>dataSource-transport-read</name>
         <tag-class>com.kendoui.taglib.datasource.TransportReadTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>If set to false the request result will not be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters.
+By default "jsonp" requests are not cached.Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -5647,28 +5650,25 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of result expected from the server. Commonly used values are "json" and "jsonp".Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The remote url to call when creating a new record.</description>
+            <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5678,27 +5678,26 @@ Refer to the jQuery.ajax documentation for further info.</description>
 
 
     <tag>
-        <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+        <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-read-data</name>
         <tag-class>com.kendoui.taglib.datasource.TransportReadDataFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The remote url to call when creating a new record.</description>
+        <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
         <name>dataSource-transport-read-url</name>
         <tag-class>com.kendoui.taglib.datasource.TransportReadUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Options for remote update data operation, or the URL of the remote service.</description>
+        <description>The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.If the value of transport.update is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.update is a string the data source uses this string as the URL of the remote service.</description>
         <name>dataSource-transport-update</name>
         <tag-class>com.kendoui.taglib.datasource.TransportUpdateTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>If set to false the request result will not be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters.
+By default "jsonp" requests are not cached.Refer to the jQuery.ajax documentation for further info.</description>
             <name>cache</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -5711,28 +5710,25 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of result expected from the server. Commonly used values are "json" and "jsonp".Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
-Refer to the jQuery.ajax documentation for further info.</description>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The remote url to call when creating a new record.</description>
+            <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -5742,54 +5738,54 @@ Refer to the jQuery.ajax documentation for further info.</description>
 
 
     <tag>
-        <description>Data to be send to the server.
-Refer to the jQuery.ajax documentation for further info.</description>
+        <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
         <name>dataSource-transport-update-data</name>
         <tag-class>com.kendoui.taglib.datasource.TransportUpdateDataFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The remote url to call when creating a new record.</description>
+        <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
         <name>dataSource-transport-update-url</name>
         <tag-class>com.kendoui.taglib.datasource.TransportUpdateUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Converts the request parameters and data from the internal format to a format suitable for the remote service.</description>
+        <description>The function which converts the request parameters to a format suitable for the remote service. By default
+the data source sends the parameters using jQuery's conventions.</description>
         <name>dataSource-transport-parameterMap</name>
         <tag-class>com.kendoui.taglib.datasource.TransportParameterMapFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Fires when data is changed or read from the transport.</description>
+        <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
         <name>dataSource-change</name>
         <tag-class>com.kendoui.taglib.datasource.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when an error occurs during data read or sync.</description>
+        <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
         <name>dataSource-error</name>
         <tag-class>com.kendoui.taglib.datasource.ErrorFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires after changes are synced.</description>
-        <name>dataSource-sync</name>
-        <tag-class>com.kendoui.taglib.datasource.SyncFunctionTag</tag-class>
+        <description>Fired when a remote service request is finished.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+        <name>dataSource-requestEnd</name>
+        <tag-class>com.kendoui.taglib.datasource.RequestEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when data request is to be made.</description>
+        <description>Fired when the data source makes a remote service request.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
         <name>dataSource-requestStart</name>
         <tag-class>com.kendoui.taglib.datasource.RequestStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when a data request is received. Raised after a Create, Read, Update or Destroy request is performed.</description>
-        <name>dataSource-requestEnd</name>
-        <tag-class>com.kendoui.taglib.datasource.RequestEndFunctionTag</tag-class>
+        <description>Fired after the data source saves data item changes. The data source saves the data item changes when the sync method is called.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+        <name>dataSource-sync</name>
+        <tag-class>com.kendoui.taglib.datasource.SyncFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -7128,7 +7124,7 @@ current color and the input field.</description>
         </attribute>
         <attribute>
             <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
-data source is fired.By default this option is set to true which means that the widget will bind to the data source specified in the configuration.</description>
+data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7141,7 +7137,7 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The data source of the widget which is used display table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+            <description>The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
 instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7327,13 +7323,13 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if grid filtering is enabled.</description>
+            <description>If set to true the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the filterable.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if grid sorting is enabled.</description>
+            <description>If set to true the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the sortable option.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7378,22 +7374,22 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
 
 
     <tag>
-        <description>The configuration of the grid columns. Set to array of JavaScript objects or strings. A JavaScript object is interpreted as column configuration. A string is interpreted as the
-field to which the column is bound to. The grid will create a column for every item of the array.</description>
+        <description>The configuration of the grid columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The grid will create a column for every item of the array.</description>
         <name>grid-columns</name>
         <tag-class>com.kendoui.taglib.grid.ColumnsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The configuration of the grid columns. Set to array of JavaScript objects or strings. A JavaScript object is interpreted as column configuration. A string is interpreted as the
-field to which the column is bound to. The grid will create a column for every item of the array.</description>
+        <description>The configuration of the grid columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The grid will create a column for every item of the array.</description>
         <name>grid-column</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The aggregate(s) to be calculated for this column when the grid is grouped by its field.
+            <description>The aggregate(s) which are calculated when the grid is grouped by the columns field.
 The supported aggregates are "average", "count", "max", "min" and "sum".</description>
             <name>aggregates</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7406,7 +7402,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".</descri
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command will put the current row in edit mode.The "destroy" built-in command will delete the current row.Custom commands are supported via the click option.</description>
+            <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command switches the current table row in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
             <name>command</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7430,33 +7426,33 @@ The supported aggregates are "average", "count", "max", "min" and "sum".</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>If set to true a filter menu will be displayed for this column when filtering is enabled for the grid. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+            <description>If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
 for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.</description>
             <name>filterable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the footer table cell for the column.The fields which can be used in the template are:</description>
+            <description>The template which renders the footer table cell for the column.The fields which can be used in the template are:</description>
             <name>footerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The format that is applied to the value before it is displayed. Must be in the form "{0:format}" where "format" is a standard number format,
+            <description>The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a standard number format,
 custom number format, standard date format or a custom date format.</description>
             <name>format</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:</description>
+            <description>The template which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:</description>
             <name>groupFooterTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the group header when the grid is grouped by the column field. By default the name of the field
+            <description>The template which renders the group header when the grid is grouped by the column field. By default the name of the field
 and the current group value is displayed.The fields which can be used in the template are:</description>
             <name>groupHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7469,14 +7465,14 @@ and the current group value is displayed.The fields which can be used in the tem
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the column header content. By default the value of the title column option
+            <description>The template which renders the column header content. By default the value of the title column option
 is displayed in the column header cell.</description>
             <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>If set to true the column will not be displayed in the grid. By default all columns are displayed in the grid.</description>
+            <description>If set to true the column will not be displayed in the grid. By default all columns are displayed.</description>
             <name>hidden</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -7488,21 +7484,21 @@ is displayed in the column header cell.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the user can click the column header and sort the grid by the column field (when sorting is enabled for the grid). If set to false sorting will
-be disabled for this column. By default all columns are sortable.</description>
+            <description>If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the column content. The Kendo UI Grid widget renders table rows (&amp;lt;tr&amp;gt;) which represent the data source items.
-Each table row consists of table cells ($lt;td$gt;) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.</description>
+            <description>The template which renders the column content. The grid renders table rows (&lt;tr&gt;) which represent the data source items.
+Each table row consists of table cells (&lt;td&gt;) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The text that is displayed in the column header cell. If not set the field will be used.</description>
+            <description>The text that is displayed in the column header cell. If not set the field is used.</description>
             <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7516,14 +7512,14 @@ Each table row consists of table cells ($lt;td$gt;) which represent the grid col
     </tag>
 
     <tag>
-        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command will put the current row in edit mode.The "destroy" built-in command will delete the current row.Custom commands are supported via the click option.</description>
+        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command switches the current table row in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
         <name>grid-column-command</name>
         <tag-class>com.kendoui.taglib.grid.ColumnCommandTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command will put the current row in edit mode.The "destroy" built-in command will delete the current row.Custom commands are supported via the click option.</description>
+        <description>The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit" or "destroy").The "edit" built-in command switches the current table row in edit mode.The "destroy" built-in command removes the data item to which the current table row is bound.Custom commands are supported by specifying the click option.</description>
         <name>grid-column-commandItem</name>
         <tag-class>com.kendoui.taglib.grid.ColumnCommandItemTag</tag-class>
 
@@ -7535,20 +7531,19 @@ Each table row consists of table cells ($lt;td$gt;) which represent the grid col
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The JavaScript function executed when the user clicks the command button. The single parameter of the function is a jQuery Event.
-The function context (available via the this keyword) will be set to the grid instance.</description>
+            <description>The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The name of the command. The supported built-in commands are "edit" and "destroy". Can be set to a custom value.</description>
+            <description>The name of the command. The built-in commands are "edit" and "destroy". Can be set to a custom value.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The text displayed by the command button. If not set the name option would be used as the button text.</description>
+            <description>The text displayed by the command button. If not set the name option is used as the button text.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -7557,14 +7552,13 @@ The function context (available via the this keyword) will be set to the grid in
 
 
     <tag>
-        <description>The JavaScript function executed when the user clicks the command button. The single parameter of the function is a jQuery Event.
-The function context (available via the this keyword) will be set to the grid instance.</description>
+        <description>The JavaScript function executed when the user clicks the command button. The function receives a jQuery Event as an argument.The function context (available via the this keyword) will be set to the grid instance.</description>
         <name>grid-column-commandItem-click</name>
         <tag-class>com.kendoui.taglib.grid.ColumnCommandItemClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>If set to true a filter menu will be displayed for this column when filtering is enabled for the grid. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+        <description>If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
 for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.</description>
         <name>grid-column-filterable</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableTag</tag-class>
@@ -7594,34 +7588,34 @@ for all columns when filtering is enabled via the filterable option.Can be set t
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template which is used to render the footer table cell for the column.The fields which can be used in the template are:</description>
+        <description>The template which renders the footer table cell for the column.The fields which can be used in the template are:</description>
         <name>grid-column-footerTemplate</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFooterTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template which is used to render the group header when the grid is grouped by the column field. By default the name of the field
+        <description>The template which renders the group header when the grid is grouped by the column field. By default the name of the field
 and the current group value is displayed.The fields which can be used in the template are:</description>
         <name>grid-column-groupHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.grid.ColumnGroupHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template which is used to render the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:</description>
+        <description>The template which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:</description>
         <name>grid-column-groupFooterTemplate</name>
         <tag-class>com.kendoui.taglib.grid.ColumnGroupFooterTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template which is used to render the column header content. By default the value of the title column option
+        <description>The template which renders the column header content. By default the value of the title column option
 is displayed in the column header cell.</description>
         <name>grid-column-headerTemplate</name>
         <tag-class>com.kendoui.taglib.grid.ColumnHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template which is used to render the column content. The Kendo UI Grid widget renders table rows (&lt;tr&gt;) which represent the data source items.
-Each table row consists of table cells ($lt;td$gt;) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.</description>
+        <description>The template which renders the column content. The grid renders table rows (<tr>) which represent the data source items.
+Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.</description>
         <name>grid-column-template</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -7658,7 +7652,7 @@ Each table row consists of table cells ($lt;td$gt;) which represent the grid col
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+            <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7675,7 +7669,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The template which is used to render popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+        <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
         <name>grid-editable-template</name>
         <tag-class>com.kendoui.taglib.grid.EditableTemplateFunctionTag</tag-class>
@@ -8146,7 +8140,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The template which is used to render the command. Be default renders a button.</description>
+            <description>The template which renders the command. Be default renders a button.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -8161,7 +8155,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The template which is used to render the command. Be default renders a button.</description>
+        <description>The template which renders the command. Be default renders a button.</description>
         <name>grid-toolbarItem-template</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -8305,7 +8299,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The height of the gauge area.</description>
+            <description>The height of the gauge area.  By default, the vertical gauge is 200px and
+the horizontal one is 60px.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -8317,7 +8312,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The width of the gauge area.</description>
+            <description>The width of the gauge area.  By default the vertical gauge is 60px and
+horizontal gauge is 200px.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -8850,7 +8846,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <description>Indicates whether selection is enabled/disabled. Possible values:</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>Object</type>
         </attribute>
         <attribute>
             <description>Specifies ListView wrapper element tag name.</description>
@@ -10037,7 +10033,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The height of the gauge area.</description>
+            <description>The height of the gauge area.  By default, the vertical gauge is 200px and
+the horizontal one is 60px.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10049,7 +10046,8 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>The width of the gauge area.</description>
+            <description>The width of the gauge area.  By default the vertical gauge is 60px
+and horizontal gauge is 200px.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -11069,7 +11067,8 @@ Template variables:</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+It uses the global culture by default.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11772,7 +11771,7 @@ If not specified, the available space is split evenly between the series.Availab
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The color of the border.</description>
+            <description>The color of the border.  It defaults to the color of the current series.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -11800,7 +11799,7 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
-        <description>The color of the border.</description>
+        <description>The color of the border.  It defaults to the color of the current series.</description>
         <name>sparkline-seriesItem-border-color</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemBorderColorFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -14007,7 +14006,8 @@ Template variables:</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+It defaults to the global culture.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -14911,7 +14911,7 @@ Available for column series.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The color of the border.</description>
+            <description>The color of the border.  It defaults to the color of the current series.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -15689,6 +15689,12 @@ Available for column series.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>A value indicating whether to show the series name in the legend.</description>
+            <name>visibleInLegend</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The line width.** Applicable for area and line series. **</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15703,7 +15709,7 @@ Available for column series.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The color of the border.</description>
+            <description>The color of the border.  It defaults to the color of the current series.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -15731,7 +15737,7 @@ Available for column series.</description>
 
 
     <tag>
-        <description>The color of the border.</description>
+        <description>The color of the border.  It defaults to the color of the current series.</description>
         <name>stockChart-seriesItem-border-color</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemBorderColorFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -17376,7 +17382,8 @@ hex and rgb</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+By default it uses the global culture.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -17958,7 +17965,8 @@ hex and rgb</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.</description>
+            <description>Culture to use for formatting the dates. See Globalization for more information.
+It defaults to the global culture.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -19629,6 +19637,12 @@ Window.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Specifies whether the window should be pinned, i.e. it will not move together with the page content during scrolling.</description>
+            <name>pinned</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Enables (true) or disables (false) the ability for users to resize a
 Window.</description>
             <name>resizable</name>
@@ -19756,6 +19770,29 @@ will disable all animations in the widget.</description>
 
     </tag>
 
+
+
+
+    <tag>
+        <description>A collection of one or two members, which define the initial Window's top and/or left position on the page.</description>
+        <name>window-position</name>
+        <tag-class>com.kendoui.taglib.window.PositionTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the initial left position of the window.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the initial top position of the window.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
 
 
 

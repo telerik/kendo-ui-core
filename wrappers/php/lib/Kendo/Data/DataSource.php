@@ -15,7 +15,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enables (true) or disables (false) the automatic invocation of the sync() method for each change made.
+    * If set to true the data source would automatically save any changed data items by calling the sync method. By default changes are not automatically saved.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -24,7 +24,8 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enables (true) or disables (false) batch mode.
+    * If set to true the data source will batch CRUD operation requests. For example updating two data items would cause one HTTP request instead of two. By default the data source
+makes a HTTP request for every CRUD operation.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -33,8 +34,8 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies the local JavaScript object to use for the data source.
-    * @param array $value
+    * The array of data items which the data source contains. The data source will wrap those items as kendo.data.ObservableObject or kendo.data.Model (if schema.model is set).Can be set to a string value if the schema.type option is set to "xml".
+    * @param array|string $value
     * @return \Kendo\Data\DataSource
     */
     public function data($value) {
@@ -60,7 +61,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the index of the displayed page of data.
+    * The page of data which the data source will return when the view method is invoked or request from the remote service.
     * @param float $value
     * @return \Kendo\Data\DataSource
     */
@@ -69,7 +70,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the number of records which contains a given page of data.
+    * The number of data items per page.
     * @param float $value
     * @return \Kendo\Data\DataSource
     */
@@ -78,7 +79,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Set the object responsible for describing the raw data format.
+    * The configuration used to parse the remote sevice response.
     * @param \Kendo\Data\DataSourceSchema|array $value
     * @return \Kendo\Data\DataSource
     */
@@ -87,7 +88,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Determines if aggregates are calculated on the server or not. By default aggregates are calculated client-side.
+    * If set to true the data source will leave the aggregate calculation to the remote service. By default the data source calculates aggregates client-side.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -96,7 +97,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Determines if filtering of the data is handled on the server. By default filtering is performed client-side.By default, a filter object is sent to the server with the query string in the following form:Possible values for operator include:
+    * If set to true the data source will leave the filtering implementation to the remote service. By default the data source performs filtering client-side.By default the filter is sent to the server following jQuery's conventions.For example the filter { logic: "and", filters: [ { field: "name", operator: "startswith", value: "Jane" } ] } is sent as:Use the parameterMap option to send the filter option in a different format.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -105,7 +106,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Determines if grouping of the data is handled on the server. By default grouping is performed client-side.By default, a group object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.
+    * If set to true the data source will leave the grouping implementation to the remote service. By default the data source performs grouping client-side.By default the group is sent to the server following jQuery's conventions.For example the group { field: "category", dir: "desc" } is sent as:Use the parameterMap option to send the group option in a different format.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -114,8 +115,7 @@ class DataSource extends \Kendo\SerializableObject {
     }
 
     /**
-    * Determines if paging of the data is on the server. By default paging is performed client-side. If serverPaging is enabled the
-total number of data items should also be returned in the response. Use the schema.total setting to customize that.The following options are sent to the server as part of the query string by default:
+    * If set to true the data source will leave the data item paging implementation to the remote service. By default the data source performs paging client-side.The following options are sent to the server when server paging is enabled:Use the parameterMap option to send the paging options in a different format.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -124,7 +124,7 @@ total number of data items should also be returned in the response. Use the sche
     }
 
     /**
-    * Determines if sorting of the data should is handled on the server. By default sorting is performed client-side.By default, a sort object is sent to the server with the query string in the following form:It is possible to modify these parameters by using the parameterMap function found on the transport.
+    * If set to true the data source will leave the data item sorting implementation to the remote service. By default the data source performs sorting client-side.By default the sort is sent to the server following jQuery's conventions.For example the sort { field: "age", dir: "desc" } is sent as:Use the parameterMap option to send the paging options in a different format.
     * @param boolean $value
     * @return \Kendo\Data\DataSource
     */
@@ -142,7 +142,8 @@ total number of data items should also be returned in the response. Use the sche
     }
 
     /**
-    * Specifies the settings for loading and saving data. This can be a remote or local/in-memory data.
+    * The configuration used to load and save the data items. A data source is remote or local based on the way of it retrieves data items.Remote data sources load and save data items from and to a remote end-point (a.k.a. remote service or server). The transport option describes the remote service configuration - URL, HTTP verb, HTTP headers etc.
+The transport option can also be used to implement custom data loading and saving.Local data sources are bound to a JavaScript array via the data option.
     * @param \Kendo\Data\DataSourceTransport|array $value
     * @return \Kendo\Data\DataSource
     */
@@ -151,7 +152,7 @@ total number of data items should also be returned in the response. Use the sche
     }
 
     /**
-    * Loads transport with preconfigured settings. Currently supports only "odata" (Requires kendo.data.odata.js to be included).
+    * If set the data source will use a predefined transport and/or schema. The only supported value is "odata" which supports the OData v.2 protocol.
     * @param string $value
     * @return \Kendo\Data\DataSource
     */
@@ -161,7 +162,7 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Sets the change event of the DataSource.
-    * Fires when data is changed or read from the transport.
+    * Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Data\DataSource
     */
@@ -175,7 +176,7 @@ total number of data items should also be returned in the response. Use the sche
 
     /**
     * Sets the error event of the DataSource.
-    * Fires when an error occurs during data read or sync.
+    * Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Data\DataSource
     */
@@ -188,22 +189,22 @@ total number of data items should also be returned in the response. Use the sche
     }
 
     /**
-    * Sets the sync event of the DataSource.
-    * Fires after changes are synced.
+    * Sets the requestEnd event of the DataSource.
+    * Fired when a remote service request is finished.The event handler function context (available via the this keyword) will be set to the data source instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Data\DataSource
     */
-    public function sync($value) {
+    public function requestEnd($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('sync', $value);
+        return $this->setProperty('requestEnd', $value);
     }
 
     /**
     * Sets the requestStart event of the DataSource.
-    * Fires when data request is to be made.
+    * Fired when the data source makes a remote service request.The event handler function context (available via the this keyword) will be set to the data source instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Data\DataSource
     */
@@ -216,17 +217,17 @@ total number of data items should also be returned in the response. Use the sche
     }
 
     /**
-    * Sets the requestEnd event of the DataSource.
-    * Fires when a data request is received. Raised after a Create, Read, Update or Destroy request is performed.
+    * Sets the sync event of the DataSource.
+    * Fired after the data source saves data item changes. The data source saves the data item changes when the sync method is called.The event handler function context (available via the this keyword) will be set to the data source instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Data\DataSource
     */
-    public function requestEnd($value) {
+    public function sync($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('requestEnd', $value);
+        return $this->setProperty('sync', $value);
     }
 
 

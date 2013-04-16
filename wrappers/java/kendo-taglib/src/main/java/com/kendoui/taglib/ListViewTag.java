@@ -190,11 +190,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("pageable", value);
     }
 
-    public String getSelectable() {
-        return (String)getProperty("selectable");
+    public Object getSelectable() {
+        return (Object)getProperty("selectable");
     }
 
-    public void setSelectable(String value) {
+    public void setSelectable(Object value) {
         setProperty("selectable", value);
     }
 

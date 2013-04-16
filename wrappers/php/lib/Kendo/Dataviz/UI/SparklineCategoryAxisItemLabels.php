@@ -143,6 +143,7 @@ Template variables:
 
     /**
     * Culture to use for formatting the dates. See Globalization for more information.
+It uses the global culture by default.
     * @param string $value
     * @return \Kendo\Dataviz\UI\SparklineCategoryAxisItemLabels
     */

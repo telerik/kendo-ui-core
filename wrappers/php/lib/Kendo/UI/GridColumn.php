@@ -6,7 +6,7 @@ class GridColumn extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The aggregate(s) to be calculated for this column when the grid is grouped by its field.
+    * The aggregate(s) which are calculated when the grid is grouped by the columns field.
 The supported aggregates are "average", "count", "max", "min" and "sum".
     * @param array $value
     * @return \Kendo\UI\GridColumn
@@ -66,7 +66,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
     }
 
     /**
-    * If set to true a filter menu will be displayed for this column when filtering is enabled for the grid. If set to false the filter menu will not be displayed. By default a filter menu is displayed
+    * If set to true a filter menu will be displayed for this column when filtering is enabled. If set to false the filter menu will not be displayed. By default a filter menu is displayed
 for all columns when filtering is enabled via the filterable option.Can be set to a JavaScript object which represents the filter menu configuration.
     * @param boolean|\Kendo\UI\GridColumnFilterable|array $value
     * @return \Kendo\UI\GridColumn
@@ -77,7 +77,7 @@ for all columns when filtering is enabled via the filterable option.Can be set t
 
     /**
     * Sets the footerTemplate option of the GridColumn.
-    * The template which is used to render the footer table cell for the column.The fields which can be used in the template are:
+    * The template which renders the footer table cell for the column.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumn
     */
@@ -89,7 +89,7 @@ for all columns when filtering is enabled via the filterable option.Can be set t
 
     /**
     * Sets the footerTemplate option of the GridColumn.
-    * The template which is used to render the footer table cell for the column.The fields which can be used in the template are:
+    * The template which renders the footer table cell for the column.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\UI\GridColumn
     */
@@ -98,7 +98,7 @@ for all columns when filtering is enabled via the filterable option.Can be set t
     }
 
     /**
-    * The format that is applied to the value before it is displayed. Must be in the form "{0:format}" where "format" is a standard number format,
+    * The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a standard number format,
 custom number format, standard date format or a custom date format.
     * @param string $value
     * @return \Kendo\UI\GridColumn
@@ -109,7 +109,7 @@ custom number format, standard date format or a custom date format.
 
     /**
     * Sets the groupHeaderTemplate option of the GridColumn.
-    * The template which is used to render the group header when the grid is grouped by the column field. By default the name of the field
+    * The template which renders the group header when the grid is grouped by the column field. By default the name of the field
 and the current group value is displayed.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumn
@@ -122,7 +122,7 @@ and the current group value is displayed.The fields which can be used in the tem
 
     /**
     * Sets the groupHeaderTemplate option of the GridColumn.
-    * The template which is used to render the group header when the grid is grouped by the column field. By default the name of the field
+    * The template which renders the group header when the grid is grouped by the column field. By default the name of the field
 and the current group value is displayed.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\UI\GridColumn
@@ -133,7 +133,7 @@ and the current group value is displayed.The fields which can be used in the tem
 
     /**
     * Sets the groupFooterTemplate option of the GridColumn.
-    * The template which is used to render the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:
+    * The template which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumn
     */
@@ -145,7 +145,7 @@ and the current group value is displayed.The fields which can be used in the tem
 
     /**
     * Sets the groupFooterTemplate option of the GridColumn.
-    * The template which is used to render the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:
+    * The template which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\UI\GridColumn
     */
@@ -164,7 +164,7 @@ and the current group value is displayed.The fields which can be used in the tem
 
     /**
     * Sets the headerTemplate option of the GridColumn.
-    * The template which is used to render the column header content. By default the value of the title column option
+    * The template which renders the column header content. By default the value of the title column option
 is displayed in the column header cell.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumn
@@ -177,7 +177,7 @@ is displayed in the column header cell.
 
     /**
     * Sets the headerTemplate option of the GridColumn.
-    * The template which is used to render the column header content. By default the value of the title column option
+    * The template which renders the column header content. By default the value of the title column option
 is displayed in the column header cell.
     * @param string $value The template content.
     * @return \Kendo\UI\GridColumn
@@ -187,7 +187,7 @@ is displayed in the column header cell.
     }
 
     /**
-    * If set to true the column will not be displayed in the grid. By default all columns are displayed in the grid.
+    * If set to true the column will not be displayed in the grid. By default all columns are displayed.
     * @param boolean $value
     * @return \Kendo\UI\GridColumn
     */
@@ -196,8 +196,8 @@ is displayed in the column header cell.
     }
 
     /**
-    * If set to true the user can click the column header and sort the grid by the column field (when sorting is enabled for the grid). If set to false sorting will
-be disabled for this column. By default all columns are sortable.
+    * If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.
     * @param boolean $value
     * @return \Kendo\UI\GridColumn
     */
@@ -207,8 +207,8 @@ be disabled for this column. By default all columns are sortable.
 
     /**
     * Sets the template option of the GridColumn.
-    * The template which is used to render the column content. The Kendo UI Grid widget renders table rows (<tr>) which represent the data source items.
-Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.
+    * The template which renders the column content. The grid renders table rows (<tr>) which represent the data source items.
+Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumn
     */
@@ -220,8 +220,8 @@ Each table row consists of table cells (<td>) which represent the grid columns. 
 
     /**
     * Sets the template option of the GridColumn.
-    * The template which is used to render the column content. The Kendo UI Grid widget renders table rows (<tr>) which represent the data source items.
-Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.Use the template to customize the way the column displays its value.
+    * The template which renders the column content. The grid renders table rows (<tr>) which represent the data source items.
+Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.
     * @param string $value The template content.
     * @return \Kendo\UI\GridColumn
     */
@@ -230,7 +230,7 @@ Each table row consists of table cells (<td>) which represent the grid columns. 
     }
 
     /**
-    * The text that is displayed in the column header cell. If not set the field will be used.
+    * The text that is displayed in the column header cell. If not set the field is used.
     * @param string $value
     * @return \Kendo\UI\GridColumn
     */
@@ -248,7 +248,7 @@ Each table row consists of table cells (<td>) which represent the grid columns. 
     }
 
     /**
-    * An array of values that will be displayed instead of the bound value. Each item in the array must have a text and value fields.Useful to display user-friendly text instead of database values.
+    * An array of values that will be displayed instead of the bound value. Each item in the array must have a text and value fields.
     * @param array $value
     * @return \Kendo\UI\GridColumn
     */
