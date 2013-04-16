@@ -74,11 +74,12 @@ kendo_module({
     function applyViewportHeight() {
         $("meta[name=viewport]").remove();
         HEAD.append(viewportTemplate({
-            height: isOrientationHorizontal() ?
-                        ", height=" + window.innerHeight + "px"  :
-                        (support.mobileOS.flatVersion >= 600 && support.mobileOS.flatVersion < 700) ?
-                            ", height=" + window.innerWidth + "px" :
-                            ", height=device-height"
+            height: ", width=device-width" +  // width=device-width was removed for iOS6, but this should stay for BB PhoneGap.
+                        (isOrientationHorizontal() ?
+                            ", height=" + window.innerHeight + "px"  :
+                            (support.mobileOS.flatVersion >= 600 && support.mobileOS.flatVersion < 700) ?
+                                ", height=" + window.innerWidth + "px" :
+                                ", height=device-height")
         }));
     }
 
