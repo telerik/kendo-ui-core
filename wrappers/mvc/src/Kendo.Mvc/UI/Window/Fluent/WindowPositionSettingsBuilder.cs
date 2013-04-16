@@ -1,7 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent API for configuring the Kendo Window resizing settings
+    /// Defines the fluent API for configuring the Kendo Window position settings
     /// </summary>
     public class WindowPositionSettingsBuilder
     {
