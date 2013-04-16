@@ -183,6 +183,11 @@ namespace Kendo.Mvc.UI
             public const string Minimize = "k-i-minimize";
 
             /// <summary>
+            /// "Pin" icon
+            /// </summary>
+            public const string Pin = "k-i-pin";
+
+            /// <summary>
             /// "Close" icon
             /// </summary>
             public const string Close = "k-i-close";

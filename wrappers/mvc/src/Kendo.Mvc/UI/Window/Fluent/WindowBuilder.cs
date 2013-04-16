@@ -31,7 +31,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Title(string title)
         {
-
             Component.Title = title;
 
             return this;
@@ -56,7 +55,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Content(Action value)
         {
-
             Component.Template.Content = value;
 
             return this;
@@ -76,7 +74,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public WindowBuilder Content(Func<object, object> value)
         {
-
             Component.Template.InlineTemplate = value;
 
             return this;
@@ -94,7 +91,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public WindowBuilder Content(string value)
         {
-
             Component.Template.Html = value;
 
             return this;
@@ -196,7 +192,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Events(Action<WindowEventBuilder> clientEventsAction)
         {
-
             clientEventsAction(new WindowEventBuilder(Component.Events));
 
             return this;
@@ -236,7 +231,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Resizable(Action<WindowResizingSettingsBuilder> resizingSettingsAction)
         {
-
             Component.ResizingSettings.Enabled = true;
 
             resizingSettingsAction(new WindowResizingSettingsBuilder(Component.ResizingSettings));
@@ -260,7 +254,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Actions(Action<WindowActionsBuilder> actionsBuilderAction)
         {
-
             Component.Actions.Container.Clear();
 
             actionsBuilderAction(new WindowActionsBuilder(Component.Actions));
@@ -273,7 +266,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Width(int width)
         {
-
             Component.Width = width;
 
             return this;
@@ -285,8 +277,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Height(int height)
         {
-
             Component.Height = height;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the position of the window.
+        /// </summary>
+        /// <param name="positionSettingsAction">Position settings action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Window()
+        ///             .Name("Window")
+        ///             .Position(settings =>
+        ///                 settings.Top(100).Left(100)
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public WindowBuilder Position(Action<WindowPositionSettingsBuilder> positionSettingsAction)
+        {
+            positionSettingsAction(new WindowPositionSettingsBuilder(Component.PositionSettings));
 
             return this;
         }
@@ -309,7 +321,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Scrollable(bool scrollable)
         {
-
             Component.Scrollable = scrollable;
 
             return this;
@@ -346,7 +357,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-
             animationAction(new PopupAnimationBuilder(Component.Animation));
 
             return this;
@@ -357,7 +367,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Modal(bool modal)
         {
-
             Component.Modal = modal;
 
             return this;
@@ -376,8 +385,25 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Draggable(bool value)
         {
-
             Component.Draggable = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets whether the window is pinned.
+        /// </summary>
+        public WindowBuilder Pinned()
+        {
+            return Pinned(true);
+        }
+
+        /// <summary>
+        /// Sets whether the window is pinned.
+        /// </summary>
+        public WindowBuilder Pinned(bool value)
+        {
+            Component.Pinned = value;
 
             return this;
         }

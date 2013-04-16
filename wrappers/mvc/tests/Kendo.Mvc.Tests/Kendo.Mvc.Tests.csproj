@@ -384,6 +384,7 @@
     <Compile Include="UI\TreeView\TreeViewItemFactoryTests.cs" />
     <Compile Include="UI\TreeView\TreeViewTestHelper.cs" />
     <Compile Include="UI\TreeView\TreeViewRendererTests.cs" />
+    <Compile Include="UI\Window\WindowPositionSettingsBuilderTests.cs" />
     <Compile Include="UI\Window\WindowRenderingTests.cs" />
     <Compile Include="UI\Window\WindowHtmlBuilderTests.cs" />
     <Compile Include="UI\Window\WindowActionsBuilderTests.cs" />

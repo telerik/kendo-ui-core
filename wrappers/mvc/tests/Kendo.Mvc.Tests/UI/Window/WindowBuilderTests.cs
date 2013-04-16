@@ -208,5 +208,22 @@ namespace Kendo.Mvc.UI.Tests
         {
             builder.Actions(b => { b.Close(); }).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Pinned_sets_Pinned_property()
+        {
+            const bool pinned = true;
+
+            builder.Pinned(pinned);
+
+            component.Pinned.ShouldEqual(pinned);
+        }
+
+        [Fact]
+        public void Pinned_returns_builder()
+        {
+            builder.Pinned(true).ShouldBeSameAs(builder);
+        }
+
     }
 }
