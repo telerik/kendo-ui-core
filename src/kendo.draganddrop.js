@@ -155,10 +155,13 @@ kendo_module({
             that.forcedEnabled = false;
 
             $.extend(that, options);
+            // enable virtual only for vertical dimensions
+            that.virtual = !that.horizontal && that.virtual;
 
-            if (!this.horizontal && this.virtual) {
-                this.forcedEnabled = true;
-                this._virtualSize = VIRTUAL_SIZE;
+            if (that.virtual) {
+                that.forcedEnabled = true;
+                that._virtualSize = VIRTUAL_SIZE;
+                that._virtualOffset = VIRTUAL_SIZE;
             }
 
             that.scale = 1;
@@ -180,6 +183,19 @@ kendo_module({
                 this._virtualSize = size;
                 this.update();
             }
+        },
+
+        virtualOffset: function(offset) {
+            if (!this._virtualOffset !== offset) {
+                this._virtualOffset = offset;
+                this.update();
+            }
+        },
+
+        resetVirtual: function() {
+            this._virtualSize = VIRTUAL_SIZE;
+            this._virtualOffset = VIRTUAL_SIZE;
+            this.update();
         },
 
         outOfBounds: function(offset) {
@@ -204,10 +220,11 @@ kendo_module({
 
         update: function(silent) {
             var that = this,
-                total = (!this.horizontal && that.virtual) ? that._virtualSize : that.getTotal(),
+                total = that.virtual ? that._virtualSize : that.getTotal(),
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
+            that.max = that.virtual ? that._virtualOffset : 0;
             that.size = size;
             that.total = scaledTotal;
             that.min = Math.min(that.max, that.size - scaledTotal);

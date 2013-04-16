@@ -438,7 +438,7 @@ kendo_module({
 
                 end = function() {
                     scrollBar.hide();
-                }
+                };
 
                 that.pane[axis].bind(CHANGE, function() {
                     scrollBar.show();

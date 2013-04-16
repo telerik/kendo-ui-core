@@ -113,6 +113,7 @@
                 <div class="item-comments">
                     #: data.num_comments #
                 </div>
+            </div>
         </script>
         <script>
             var PAGE_SIZE = 100;
@@ -196,7 +197,7 @@
 
                         if (that.bottom < bottom)
                         while (that.bottom < bottom + height) {
-                            console.log("snap to bottom");
+                            console.log("snap to bottom", offset, that.bottom);
                             if (!that.buffer.at(offset + itemCount + 1)) {
                                 that.loading.show().css("transform", "translate3d(0, " + this.bottom + "px, 0)");
                                 view.scroller.virtualHeight(that.bottom + that.loading.height());
@@ -213,6 +214,9 @@
                         }
 
                         while (that.top > e.scrollTop) {
+                            if (offset === 0) {
+                                return;
+                            }
                             console.log("snap to top");
                             offset --;
                             var topCell = that.cells[0], bottomCell = that.cells.pop();
