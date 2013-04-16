@@ -1364,13 +1364,17 @@ kendo_module({
     function bind(dom, object) {
         var idx,
             length,
+            node,
             roles = kendo.rolesFromNamespaces([].slice.call(arguments, 2));
 
         object = kendo.observable(object);
         dom = $(dom);
 
-        for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object, roles);
+        for (idx = 0, length = dom.length; idx < length; idx++) {
+            node = dom[idx];
+            if (node.nodeType === 1) {
+                bindElement(node, object, roles);
+            }
         }
     }
 

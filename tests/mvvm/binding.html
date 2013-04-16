@@ -1312,6 +1312,13 @@
 
                 equal(dom.find("select")[0].options.length, 4);
             });
+
+            test("binding ignores text nodes", 1, function() {
+                var dom = $('<span>Foo</span> <span>Bar</span>');
+
+                kendo.bind(dom);
+                ok(true);
+            });
         </script>
 
         <script id="mobile-widget-template" type="text/x-kendo-template">
