@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+    <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+    <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+    <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../../src/jquery.js"></script>
+    
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.router.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.mobile.view.js"></script>
+    <script src="../../src/kendo.mobile.loader.js"></script>
+    <script src="../../src/kendo.mobile.pane.js"></script>
+    <script src="../../src/kendo.mobile.application.js"></script>
+    <script src="../../src/kendo.mobile.scrollview.js"></script>
+
+    <style>
+        #virtual {
+            padding: 5em 0;
+        }
+        .km-pageview {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            position: relative;
+        }
+        .virtual-page {
+            min-height: 1px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="home" data-role="view" data-init="onInit">
+        <div id="virtual"></div>
+    </div>
+
+    <script>
+        var app = new kendo.mobile.Application(),
+            pageView,
+            PAGE_SIZE = 100;
+
+        function onInit(e) {
+            pageView = $("#virtual").kendoMobilePageView().data("kendoMobilePageView");
+        }
+
+        (function($, undefined) {
+            var kendo = window.kendo,
+                mobile = kendo.mobile,
+                ui = mobile.ui,
+                proxy = $.proxy,
+                Transition = kendo.fx.Transition,
+                Pane = kendo.ui.Pane,
+                PaneDimensions = kendo.ui.PaneDimensions,
+                Widget = ui.Widget,
+
+                // Math
+                math = Math,
+                abs  = math.abs,
+                ceil = math.ceil,
+                round = math.round,
+                max = math.max,
+                min = math.min,
+                floor = math.floor,
+                CHANGE = "change",
+                CURRENT_PAGE_CLASS = "km-current-page";
+
+            var PageView = Widget.extend({
+                init: function(element, options) {
+                    var that = this;
+
+                    Widget.fn.init.call(that, element, options);
+
+                    element = that.element;
+
+                    element
+                        .append("<div/>")
+                        .addClass("km-pageview");
+
+                    that.inner = element.children().first();
+                    that.pages = [];
+
+                    that.inner.css("height", "300px"); // <<< hardcoded for testing
+
+                    var movable,
+                        transition,
+                        dimensions,
+                        dimension,
+                        userEvents,
+                        pane,
+                        width = element.width();
+
+                    movable = new kendo.ui.Movable(that.inner);
+
+                    transition = new Transition({
+                        axis: "x",
+                        movable: movable,
+                        onEnd: proxy(that._transitionEnd, that)
+                    });
+
+                    dimensions = new PaneDimensions({
+                        element: that.inner,
+                        container: that.element
+                    });
+
+                    dimension = dimensions.x;
+                    dimension.forceEnabled();
+
+                    userEvents = new kendo.UserEvents(element, {
+                        start: function(e) {
+                            if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
+                                userEvents.capture();
+                            } else {
+                                userEvents.cancel();
+                            }
+
+                            transition.cancel();
+                        },
+                        allowSelection: true,
+                        end: proxy(that._dragEnd, that)
+                    });
+
+                    pane = new Pane({
+                        dimensions: dimensions,
+                        movable: movable,
+                        userEvents: userEvents,
+                        elastic: true
+                    });
+
+                    $.extend(that, {
+                        movable: movable,
+                        transition: transition,
+                        userEvents: userEvents,
+                        dimensions: dimensions,
+                        dimension: dimension,
+                        pane: pane,
+                        width: width
+                    });
+
+                    that._initPages();
+                },
+
+                options: {
+                    name: "PageView",
+                    page: 0,
+                    duration: 300,
+                    velocityThreshold: 0.8,
+                    contentHeight: "auto",
+                    pageSize: 1,
+                    bounceVelocityThreshold: 1.6
+                },
+
+                _initPages: function () {
+                    var that = this,
+                        pages = that.pages,
+                        wrapper = that.inner,
+                        page;
+
+                    page = new Page(wrapper);
+                    page.element.css({"height": "300px", "background-color": "red" });
+                    page.first();
+                    pages.push(page);
+
+                    page = new Page(wrapper);
+                    page.element.css({"height": "300px", "background-color": "green" });
+                    page.center();
+                    pages.push(page);
+
+                    page = new Page(wrapper);
+                    page.element.css({"height": "300px", "background-color": "blue" });
+                    page.last();
+                    pages.push(page);
+
+                    that.dimension.update();
+                },
+
+                _moveTo: function (location, ease, instant) {
+                    this.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
+                },
+
+                _resetMovable: function () {
+                    this.movable.moveTo({ x: 0 });
+                },
+
+                forward: function (instant) {
+                    this._moveTo(-this.width, Transition.easeOutExpo, instant);
+                },
+
+                backward: function (instant) {
+                    this._moveTo(this.width, Transition.easeOutBack, instant);
+                },
+
+                reset: function (ease) {
+                    this._moveTo(0, ease, false);   
+                },
+
+                _dragEnd: function (e) {
+                    var that = this,
+                        velocity = e.x.velocity,
+                        width = that.width,
+                        velocityThreshold = that.options.velocityThreshold,
+                        ease = Transition.easeOutExpo;
+
+                    if (velocity > velocityThreshold) {
+                        that.backward();
+                        return;
+                    } else if(velocity < -velocityThreshold) {
+                        that.forward();
+                        return;
+                    }
+
+                    if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3)) {
+                        that.forward();
+                        return;
+                    } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
+                        that.backward();
+                        return;
+                    } else {
+                        that.reset(ease);
+                    }
+                },
+
+                _transitionEnd: function (e) {
+                    var that = this,
+                        pages = that.pages;
+
+                    if(that.movable.x === 0) {
+                        return;
+                    }
+
+                    if(that.movable.x < 0) { 
+                        pages.push(that.pages.shift()); //forward
+                    } else {
+                        pages.unshift(that.pages.pop()); //back
+                    }
+
+                    pages[0].first();
+                    pages[1].center();
+                    pages[2].last();
+
+                    that._resetMovable();
+                }
+
+            });
+
+            ui.plugin(PageView);
+
+            var Page = kendo.Class.extend({
+                init: function (container) {
+                    this.element = $("<div class='virtual-page'></div>");
+                    this.width = container.width();
+                    this.element.width(this.width);
+                    container.append(this.element);
+                },
+                content: function (theContent) {
+                    this.element.html(theContent);
+                },
+                center: function () {
+                    this.element.css("transform", "translate3d(0, 0, 0)");
+                },
+                first: function () {
+                    this.element.css("transform", "translate3d(-" + this.width + "px, 0, 0)");
+                },
+                last: function () {
+                    this.element.css("transform", "translate3d(" + this.width + "px, 0, 0)"); 
+                },
+                setContent: function (i) {
+                    this.element.html(template(ds.at(i)));
+                }
+            });
+
+        })(window.kendo.jQuery);
+    </script>
+</body>
+</html>
