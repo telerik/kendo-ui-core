@@ -519,6 +519,17 @@
                 equal($.trim(multiselect.ul.children().eq(0).text()), "foo");
                 equal($.trim(multiselect.ul.children().eq(1).text()), "bar");
             });
+
+            test("Support for binding to ObservableArray of not ObservableObjects", 1, function() {
+                var dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-bind="value: data,source: multiselectData"></select>');
+                var observable = kendo.observable({
+                    data: [1,2],
+                    multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+                });
+
+                kendo.bind(dom, observable);
+                ok(true);
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">
