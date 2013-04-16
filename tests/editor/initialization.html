@@ -63,6 +63,19 @@
 
                 kendo.ui.editor.ColorTool.fn.options.palette = defaultPalette;
             });
+
+            module("initialization from div[contentEditable]", {
+                teardown: function() {
+                    $(".k-widget").remove();
+                }
+            });
+
+            test("returns proper initial content", function() {
+                var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+                dom.kendoEditor();
+
+                equal(dom.data("kendoEditor").value(), "<p>foo</p>");
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
