@@ -35,6 +35,16 @@
             min-height: 1px;
             position: absolute;
         }
+
+        .item-image {
+            height: 200px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 50px 50px;
+            -webkit-box-shadow: inset 0 0 10px #000000;
+            box-shadow:         inset 0 0 10px #000000;
+        }
+
     </style>
 </head>
 <body>
@@ -42,14 +52,52 @@
         <div id="virtual"></div>
     </div>
 
+    <script type="text/x-kendo-template" id="item-template">
+        <div class="item-image" style="background-image: url(#: data.thumbnail #)">
+        </div>
+    </script>
+
     <script>
-        var app = new kendo.mobile.Application(),
+        var app,
             pageView,
-            PAGE_SIZE = 100;
+            PAGE_SIZE = 10,
+            ds = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: 'http://www.reddit.com/r/aww.json',
+                        dataType: 'jsonp',
+                        jsonp: 'jsonp',
+                        cache: true,
+                    },
+
+                    parameterMap: function(data, type) {
+                        var items = ds.data();
+                        if (items.length) {
+                            data.after = items[items.length - 1].data.name;
+                        }
+
+                        data.limit = PAGE_SIZE;
+                        return data;
+                    }
+                },
+
+                serverPaging: true,
+                pageSize: PAGE_SIZE,
+                schema: {
+                    data: "data.children",
+                    total: function() { return 100000; }
+                }
+            });
+
+        ds.fetch(function() {
+            app = new kendo.mobile.Application();
+        });
 
         function onInit(e) {
             pageView = $("#virtual").kendoMobilePageView({
-                contentHeight: "300px"
+                contentHeight: "300px",
+                dataSource: ds,
+                template: kendo.template($("#item-template").html())
             }).data("kendoMobilePageView");
         }
 
@@ -62,6 +110,7 @@
                 Pane = kendo.ui.Pane,
                 PaneDimensions = kendo.ui.PaneDimensions,
                 Widget = ui.Widget,
+                DataSource = kendo.data.DataSource,
 
                 // Math
                 math = Math,
@@ -88,6 +137,7 @@
 
                     that.inner = element.children().first();
                     that.pages = [];
+                    that.itemCount = 0;
 
                     that.inner.css("height", that.options.contentHeight);
 
@@ -147,6 +197,7 @@
                         width: width
                     });
 
+                    that.buffer = new kendo.data.Buffer(that.options.dataSource, that.itemCount);
                     that._initPages();
                 },
 
@@ -157,7 +208,9 @@
                     velocityThreshold: 0.8,
                     contentHeight: "auto",
                     pageSize: 1,
-                    bounceVelocityThreshold: 1.6
+                    bounceVelocityThreshold: 1.6,
+                    dataSource: new DataSource({ data: [] }),
+                    template: kendo.template("")
                 },
 
                 refresh: function () {
@@ -185,19 +238,19 @@
                         pages = that.pages,
                         inner = that.inner,
                         page;
-                    
+
                     page = new Page(inner);
-                    page.element.css({"height": "300px", "background-color": "red" });
+                    page.content("empty");
                     page.first();
                     pages.push(page);
 
                     page = new Page(inner);
-                    page.element.css({"height": "300px", "background-color": "green" });
+                    that.setPageContent(page, that.itemCount ++);
                     page.center();
                     pages.push(page);
 
                     page = new Page(inner);
-                    page.element.css({"height": "300px", "background-color": "blue" });
+                    that.setPageContent(page, that.itemCount ++);
                     page.last();
                     pages.push(page);
 
@@ -252,7 +305,8 @@
 
                 _transitionEnd: function (e) {
                     var that = this,
-                        pages = that.pages;
+                        pages = that.pages,
+                        pageToBeUpdated;
 
                     if(that.movable.x === 0) {
                         return;
@@ -260,15 +314,28 @@
 
                     if(that.movable.x < 0) { 
                         pages.push(that.pages.shift()); //forward
+                        that.setPageContent(pages[2], that.itemCount ++);
                     } else {
                         pages.unshift(that.pages.pop()); //back
+                        that.itemCount--;
+                        that.setPageContent(pages[0], that.itemCount - 3);
                     }
-
                     pages[0].first();
                     pages[1].center();
                     pages[2].last();
-
+                    
                     that._resetMovable();
+                },
+
+                setPageContent: function (page, index) {
+                    var buffer = this.buffer,
+                        template = this.options.template;
+
+                    console.log(index, buffer.at(index));
+
+                    page.content(
+                        template(buffer.at(index))
+                    );
                 }
 
             });
