@@ -47,6 +47,9 @@ kendo_module({
         OVERFLOW = "overflow",
         ZINDEX = "zIndex",
         MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-minimize,.k-window-actions .k-i-maximize",
+        KPIN = ".k-i-pin",
+        KUNPIN = ".k-i-unpin",
+        PIN_UNPIN = KPIN + "," + KUNPIN,
         TITLEBAR_BUTTONS = ".k-window-titlebar .k-window-action",
         isLocalUrl = kendo.isLocalUrl;
 
@@ -96,6 +99,12 @@ kendo_module({
                     .eq(0).before(templates.action({ name: "Restore" }));
 
             callback.call(that);
+
+            if (actionId == "maximize") {
+                that.wrapper.find(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().hide();
+            } else {
+                that.wrapper.find(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().show();
+            }
 
             return that;
         };
@@ -169,7 +178,7 @@ kendo_module({
             });
 
             if (options.pinned) {
-                that.pin();
+                that.pin(true);
             }
 
             if (content) {
@@ -691,7 +700,7 @@ kendo_module({
 
             that.wrapper
                 .css({
-                    position: "absolute",
+                    position: that.options.pinned ? "fixed" : "absolute",
                     left: restoreOptions.left,
                     top: restoreOptions.top,
                     width: restoreOptions.width,
@@ -699,7 +708,8 @@ kendo_module({
                 })
                 .find(".k-window-content,.k-resize-handle").show().end()
                 .find(".k-window-titlebar .k-i-restore").parent().remove().end().end()
-                .find(MINIMIZE_MAXIMIZE).parent().show();
+                .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
+                .find(PIN_UNPIN).parent().show();
 
             $("html, body").css(OVERFLOW, "");
             if (this._documentScrollTop && this._documentScrollTop > 0) {
@@ -746,34 +756,34 @@ kendo_module({
             that.options.isMinimized = true;
         }),
 
-        pin: function() {
+        pin: function(force) {
             var that = this,
                 win = $(window),
-                scrollLeft = win.scrollLeft(),
-                scrollTop = win.scrollTop(),
                 wrapper = that.wrapper,
                 top = parseInt(wrapper.css("top"), 10),
                 left = parseInt(wrapper.css("left"), 10);
 
-            wrapper.css({position: "fixed", top: top - scrollTop, left: left - scrollLeft});
-            wrapper.find(KWINDOWTITLEBAR).find(".k-i-pin").addClass("k-i-unpin").removeClass("k-i-pin");
+            if (force || !that.options.pinned && !that.options.isMaximized) {
+                wrapper.css({position: "fixed", top: top - win.scrollTop(), left: left - win.scrollLeft()});
+                wrapper.find(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
 
-            that.options.pinned = true;
+                that.options.pinned = true;
+            }
         },
 
         unpin: function() {
             var that = this,
                 win = $(window),
-                scrollLeft = win.scrollLeft(),
-                scrollTop = win.scrollTop(),
                 wrapper = that.wrapper,
                 top = parseInt(wrapper.css("top"), 10),
                 left = parseInt(wrapper.css("left"), 10);
 
-            wrapper.css({position: "", top: top + scrollTop, left: left + scrollLeft});
-            wrapper.find(KWINDOWTITLEBAR).find(".k-i-unpin").addClass("k-i-pin").removeClass("k-i-unpin");
+            if (that.options.pinned && !that.options.isMaximized) {
+                wrapper.css({position: "", top: top + win.scrollTop(), left: left + win.scrollLeft()});
+                wrapper.find(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
 
-            that.options.pinned = false;
+                that.options.pinned = false;
+            }
         },
 
         _onDocumentResize: function () {

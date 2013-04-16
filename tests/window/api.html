@@ -542,6 +542,48 @@
                 spacerDiv.remove();
             });
 
+            test("restoring a pinned Window preserves the pinned state", function() {
+                
+                var dialog = createWindow({
+                        visible: true,
+                        animation: false
+                    });
+
+                dialog.center();
+                dialog.minimize();
+                dialog.pin();
+                dialog.restore();
+
+                equal(dialog.wrapper.css("position"), "fixed");
+            });
+
+            test("maximize() hides the pin/unpin icon", function() {
+                
+                var dialog = createWindow({
+                        visible: true,
+                        actions: ["Pin"],
+                        animation: false
+                    });
+
+                dialog.maximize();
+
+                equal(dialog.wrapper.find(".k-i-pin:visible").length, 0);
+            });
+
+            test("restore() shows the pin/unpin icon", function() {
+                
+                var dialog = createWindow({
+                        visible: true,
+                        actions: ["Pin"],
+                        animation: false
+                    });
+
+                dialog.maximize();
+                dialog.restore();
+
+                equal(dialog.wrapper.find(".k-i-pin:visible").length, 1);
+            });
+
             test("title() on titleless window does not fail", function() {
                 var dialog = createWindow({ title: false });
 
