@@ -236,14 +236,6 @@ kendo_module({
                 })
                 .attr("role", "menu");
 
-            /*if (options.contentUrls) {
-                element.find("> .k-item")
-                    .each(function(index, item) {
-                        var span = $(item).find(LINKSELECTOR);
-                        span.replaceWith('<a class="k-link k-header" href="' + options.contentUrls[index] + '">' + span.html() + '</a>');
-                    });
-            }*/
-
             content = element.find("li." + ACTIVECLASS + " > ." + CONTENT);
 
             if (content[0]) {
@@ -726,6 +718,11 @@ kendo_module({
                 wrapElement, link;
 
             item = $(item).addClass("k-item").attr("role", "menuitem");
+
+            if (kendo.support.browser.msie) {  // IE10 doesn't apply list-style: none on invisible items otherwise.
+                item.css("list-style-position", "inside")
+                    .css("list-style-position", "");
+            }
 
             item
                 .children(IMG)
