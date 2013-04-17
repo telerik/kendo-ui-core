@@ -123,6 +123,7 @@ kendo_module({
         toggle: function(enable) {
             enable = typeof (enable) === "undefined" ? enable : !enable;
             this.wrapper.toggleClass("k-state-disabled", enable);
+            this.element.prop("disabled", enable);
         },
 
         destroy: function() {
