@@ -442,6 +442,7 @@ kendo_module({
         linkText: "Text",
         linkToolTip: "ToolTip",
         linkOpenInNewWindow: "Open link in new window",
+        dialogUpdate: "Update",
         dialogInsert: "Insert",
         dialogButtonSeparator: "or",
         dialogCancel: "Cancel"
