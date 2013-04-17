@@ -1944,18 +1944,19 @@ kendo_module({
         },
 
         renderPlotBands: function() {
-            // TODO: Filled circles, polygons
+            // TODO: Filled sectors, polygons (yikes!)
         },
 
         getDivisions: function(count) {
             var axis = this,
                 options = axis.options,
                 a = options.startAngle,
-                step = 360 / count,
+                divCount = count || 1,
+                step = 360 / divCount,
                 angles = [],
                 i;
 
-            for (i = 0; i < count; i++) {
+            for (i = 0; i < divCount; i++) {
                 angles.push(round(a % 360, COORD_PRECISION));
 
                 if (options.reverse) {
@@ -1995,7 +1996,6 @@ kendo_module({
             from = clipValue(from, 0, divs.length - 1);
             angle = justified ? 0 : 360 / divs.length;
 
-            console.log(justified, divs[from], divs[to], angle)
             return new Ring(
                 box.center(), 0, box.height() / 2,
                 divs[from], angle
