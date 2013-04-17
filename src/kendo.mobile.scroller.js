@@ -135,6 +135,7 @@ kendo_module({
 
         _end: function() {
             this.tapCapture.cancelCapture();
+            console.log(this.end);
             this.end();
         },
 
@@ -316,6 +317,10 @@ kendo_module({
 
         virtualHeight: function(height) {
             this.dimensions.y.virtualSize(height);
+        },
+
+        virtualOffset: function(offset) {
+            this.dimensions.y.virtualOffset(offset);
         },
 
         scrollHeight: function() {

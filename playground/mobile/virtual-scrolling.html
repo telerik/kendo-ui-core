@@ -180,44 +180,45 @@
 
                     window.buffer = this.buffer = new kendo.data.Buffer(ds, itemCount);
 
+                    var offset = 0,
+                        scroller = view.scroller;
+
                     ds.bind('change', function() {
-                        view.scroller.virtualHeight(10000000);
+                        scroller.resetVirtual();
                         that.loading.hide();
                     });
 
-                    var offset = 0;
-                    view.scroller.bind("scroll", function(e) {
-                        if (e.scrollTop < 0) {
-                            return;
-                        }
 
-                        var height = view.element.height();
+                    scroller.bind("scroll", function(e) {
+                        var height = view.element.height(),
+                            bottom = e.scrollTop + height;
 
-                        var bottom = e.scrollTop + height;
+                        if (that.bottom < bottom) {
+                            while (that.bottom < bottom + height) {
+                                console.log("snap to bottom", offset, that.bottom);
 
-                        if (that.bottom < bottom)
-                        while (that.bottom < bottom + height) {
-                            console.log("snap to bottom", offset, that.bottom);
-                            if (!that.buffer.at(offset + itemCount + 1)) {
-                                that.loading.show().css("transform", "translate3d(0, " + this.bottom + "px, 0)");
-                                view.scroller.virtualHeight(that.bottom + that.loading.height());
-                                break;
+                                if (!that.buffer.at(offset + itemCount + 1)) {
+                                    that.loading.show().css("transform", "translate3d(0, " + this.bottom + "px, 0)");
+                                    scroller.virtualHeight(that.bottom + that.loading.height());
+                                    break;
+                                }
+
+                                offset++;
+                                var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
+                                topCell.content(that.cellContent(offset + itemCount));
+                                topCell.below(bottomCell);
+                                that.cells.push(topCell);
+                                that.bottom = topCell.bottom;
+                                that.top = that.cells[0].top;
                             }
-
-                            offset++;
-                            var topCell = that.cells.shift(), bottomCell = that.cells[that.cells.length - 1];
-                            topCell.content(that.cellContent(offset + itemCount));
-                            topCell.below(bottomCell);
-                            that.cells.push(topCell);
-                            that.bottom = topCell.bottom;
-                            that.top = that.cells[0].top;
                         }
 
                         while (that.top > e.scrollTop) {
                             if (offset === 0) {
-                                return;
+                                scroller.virtualOffset(that.top);
+                                break;
                             }
-                            console.log("snap to top");
+
                             offset --;
                             var topCell = that.cells[0], bottomCell = that.cells.pop();
                             bottomCell.content(that.cellContent(offset));

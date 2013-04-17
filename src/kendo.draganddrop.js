@@ -161,11 +161,10 @@ kendo_module({
             if (that.virtual) {
                 that.forcedEnabled = true;
                 that._virtualSize = VIRTUAL_SIZE;
-                that._virtualOffset = VIRTUAL_SIZE;
+                that._virtualOffset = -VIRTUAL_SIZE;
             }
 
             that.scale = 1;
-            that.max = 0;
 
             if (that.horizontal) {
                 that.measure = "width";
@@ -194,7 +193,7 @@ kendo_module({
 
         resetVirtual: function() {
             this._virtualSize = VIRTUAL_SIZE;
-            this._virtualOffset = VIRTUAL_SIZE;
+            this._virtualOffset = -VIRTUAL_SIZE;
             this.update();
         },
 
@@ -224,7 +223,7 @@ kendo_module({
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
-            that.max = that.virtual ? that._virtualOffset : 0;
+            that.max = that.virtual ? -that._virtualOffset : 0;
             that.size = size;
             that.total = scaledTotal;
             that.min = Math.min(that.max, that.size - scaledTotal);
