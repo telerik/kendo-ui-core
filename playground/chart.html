@@ -22,7 +22,7 @@
                 $("#chart").kendoChart({
                     series: [{
                         type: "radarColumn",
-                        data: [1, 2, 3, 4, 5],
+                        data: [1, 2, 3],
                         color: "red",
                         opacity: 0.5,
                         markers: {
@@ -30,13 +30,15 @@
                         }
                     }, {
                         type: "radarLine",
-                        data: [1.5, 2.5, 3.5, 4.5, 5.5]
+                        data: [1.5, 2.5, 3.5]
                     }],
                     categoryAxis: {
-                        categories: ["Foo", "Bar", "Baz", "Boo", "Faz"],
+                        categories: ["Foo", "Bar", "Baz"],
                         labels: {
                             background: "red"
-                        }
+                        },
+                        //justified: false,
+                        //reverse: true
                         //startAngle: 90 // default
                     },
                     valueAxis: {

@@ -1846,13 +1846,15 @@ kendo_module({
                 visible: true,
                 step: 1,
                 skip: 0,
-                margin: getSpacing(5)
+                margin: getSpacing(10)
             },
             majorGridLines: {
                 visible: true,
                 width: 1,
                 color: BLACK
-            }
+            },
+            // TODO: Document
+            justified: true
             // TODO: Required?
             //zIndex: 1,
         },
@@ -1868,20 +1870,18 @@ kendo_module({
 
         reflowLabels: function() {
             var axis = this,
+                measureBox = new Box2D(),
                 labels = axis.labels,
-                // TODO: Options
-                labelDistance = 5,
                 labelBox,
                 i;
 
             for (i = 0; i < labels.length; i++) {
-                // Measure text
-                labels[i].reflow(new Box2D());
+                labels[i].reflow(measureBox);
                 labelBox = labels[i].box;
 
-                labels[i].reflow(
-                    axis.getSlot(i).adjacentBox(labelDistance, labelBox.width(), labelBox.height())
-                );
+                labels[i].reflow(axis.getSlot(i).adjacentBox(
+                    0, labelBox.width(), labelBox.height()
+                ));
             }
         },
 
@@ -1950,17 +1950,22 @@ kendo_module({
         getDivisions: function(count) {
             var axis = this,
                 options = axis.options,
-                step = 360 / count,
                 a = options.startAngle,
+                step = 360 / count,
                 angles = [],
                 i;
 
             for (i = 0; i < count; i++) {
-                angles.push(round(a, COORD_PRECISION));
-                a += step;
+                angles.push(round(a % 360, COORD_PRECISION));
+
+                if (options.reverse) {
+                    a = 360 + a - step;
+                } else {
+                    a += step;
+                }
             }
 
-            return options.reverse ? angles.reverse() : angles;
+            return angles;
         },
 
         getMajorDivisions: function() {
@@ -1977,20 +1982,20 @@ kendo_module({
 
         getSlot: function(from, to) {
             var axis = this,
+                options = axis.options,
+                justified = options.justified,
                 divs = axis.getMajorDivisions(),
                 box = axis.box,
                 angle;
 
-            from = clipValue(from, 0, divs.length - 1);
-            to = to || from;
-            to = to % divs.length;
-
-            angle = divs[to] - divs[from];
-
-            if (angle < 0) {
-                angle = 360 + angle;
+            if (options.reverse && !justified) {
+                from = (from + 1) % divs.length;
             }
 
+            from = clipValue(from, 0, divs.length - 1);
+            angle = justified ? 0 : 360 / divs.length;
+
+            console.log(justified, divs[from], divs[to], angle)
             return new Ring(
                 box.center(), 0, box.height() / 2,
                 divs[from], angle
