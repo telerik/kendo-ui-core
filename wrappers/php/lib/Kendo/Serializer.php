@@ -71,7 +71,7 @@ class Serializer {
                 $this->serializeArray($out, $value);
             }
         } else {
-            $out[] = json_encode($value);
+            $out[] = json_encode($value, JSON_NUMERIC_CHECK);
         }
     }
 }
