@@ -2650,30 +2650,23 @@ span.k-numerictextbox
     .k-item {
         display: block;
         float: left;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -ms-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
         overflow: hidden;
         font-size: 0;
-        padding: 0;
+        padding: 1px;
         z-index: 0;
         position: relative;     // what do you know, the drop-shadow
                                 // is not properly visible without
                                 // this.  both chrome and FF exhibit
                                 // this bug, I suppose it's "essential
                                 // complexity"
-        div {
-            height: 100%;
-            width: 100%;
-        }
         &.k-state-selected {
             z-index: 100;
             background: transparent;
             .box-shadow(0 1px 4px #000);
             border: 1px solid #fff;
+            padding: 0;
         }
     }
 }
