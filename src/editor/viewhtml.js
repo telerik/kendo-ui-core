@@ -23,10 +23,10 @@ var ViewHtmlCommand = Command.extend({
         var that = this,
             editor = that.editor,
             range = editor.getRange(),
-            dialog = $(ViewHtmlCommand.template).appendTo(document.body),
+            messages = editor.options.messages,
+            dialog = $(kendo.template(ViewHtmlCommand.template)(messages)).appendTo(document.body),
             content = ViewHtmlCommand.indent(editor.value()),
-            textarea = ".k-editor-textarea",
-            messages = editor.options.messages;
+            textarea = ".k-editor-textarea";
 
         function apply(e) {
             editor.value(dialog.find(textarea).val());
@@ -71,9 +71,9 @@ extend(ViewHtmlCommand, {
     template: "<div class='k-editor-dialog'>" +
                 "<textarea class='k-editor-textarea k-input'></textarea>" +
                 "<div class='k-button-wrapper'>" +
-                    "<button class='k-dialog-update k-button'>Update</button>" +
-                    "&nbsp;or&nbsp;" +
-                    "<a href='#' class='k-dialog-close k-link'>Close</a>" +
+                    "<button class='k-dialog-update k-button'>#: dialogUpdate #</button>" +
+                    "&nbsp;#: dialogButtonSeparator #&nbsp;" +
+                    "<a href='\\#' class='k-dialog-close k-link'>#: dialogCancel #</a>" +
                 "</div>" +
             "</div>",
     indent: function(content) {
