@@ -39,7 +39,7 @@ kendo_module({
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
-        DEGREE = math.PI / 180,
+        DEG_TO_RAD = math.PI / 180,
         FADEIN = "fadeIn",
         FORMAT_REGEX = /\{\d+:?/,
         HEIGHT = "height",
@@ -101,7 +101,7 @@ kendo_module({
 
         rotate: function(center, degrees) {
             var point = this,
-                theta = degrees * DEGREE,
+                theta = degrees * DEG_TO_RAD,
                 cosT = math.cos(theta),
                 sinT = math.sin(theta),
                 cx = center.x,
@@ -125,7 +125,7 @@ kendo_module({
 
     // Clock-wise, 0 points left
     Point2D.onCircle = function(c, a, r) {
-        a *= DEGREE;
+        a *= DEG_TO_RAD;
 
         return new Point2D(
             c.x - r * math.cos(a),
@@ -353,7 +353,7 @@ kendo_module({
         // TODO: Remove and replace with Point2D.onCircle
         point: function(angle, innerRadius) {
             var ring = this,
-                radianAngle = angle * DEGREE,
+                radianAngle = angle * DEG_TO_RAD,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
                 radius = innerRadius ? ring.ir : ring.r,
@@ -371,8 +371,8 @@ kendo_module({
                 hh = height / 2,
                 x = midPoint.x - hw,
                 y = midPoint.y - hh,
-                sa = math.sin(midAndle * DEGREE),
-                ca = math.cos(midAndle * DEGREE);
+                sa = math.sin(midAndle * DEG_TO_RAD),
+                ca = math.cos(midAndle * DEG_TO_RAD);
 
             if (math.abs(sa) < 0.9) {
                 x += hw * -ca / math.abs(ca);
@@ -2757,7 +2757,7 @@ kendo_module({
 
     // TODO: Replace with Point2D.rotate
     function rotatePoint(x, y, cx, cy, angle) {
-        var theta = angle * DEGREE;
+        var theta = angle * DEG_TO_RAD;
 
         return {
             x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
