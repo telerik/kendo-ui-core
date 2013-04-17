@@ -93,6 +93,8 @@
     </head>
     <body>
         <div data-role="view" data-init="buildVirtual">
+            <div data-role="virtuallist" data-template="item-template" data-source="ds" style="-webkit-transform:translatez(0)">
+            </div>
         </div>
 
         <div data-role="view" id="foo" data-transition="slide">
@@ -150,12 +152,16 @@
                 new kendo.mobile.Application();
             });
 
-            var template = kendo.template($("#item-template").html());
+            var VirtualList = kendo.mobile.ui.Widget.extend({
+                init: function(element, options) {
 
-            var CellList = kendo.Class.extend({
-                init: function(view) {
+                    kendo.mobile.ui.Widget.fn.init.call(this, element, options);
+
                     var that = this,
-                        container = view.contentElement(),
+                        view = that.view(),
+                        dataSource = that.options.dataSource,
+                        template = that.options.template,
+                        element = that.element,
                         height = view.content.height(),
                         targetHeight = height * 3,
                         cell,
@@ -166,28 +172,26 @@
                     this.top = 0;
                     this.bottom = 0;
 
-                    this.loading = $("<div class='loading'>Loading</div>").hide().appendTo(container);
-
+                    this.loading = $("<div class='loading'>Loading</div>").hide().appendTo(element);
 
                     while(this.bottom < targetHeight) {
-                        cell = new Cell(container);
-                        cell.content(template(ds.at(itemCount ++)));
+                        cell = new Cell(element);
+                        cell.content(template(dataSource.at(itemCount ++)));
                         cell.below(prevCell);
                         prevCell = cell;
                         this.cells.push(cell);
                         this.bottom = cell.bottom;
                     }
 
-                    window.buffer = this.buffer = new kendo.data.Buffer(ds, itemCount);
+                    window.buffer = this.buffer = new kendo.data.Buffer(dataSource, itemCount);
 
                     var offset = 0,
                         scroller = view.scroller;
 
-                    ds.bind('change', function() {
+                    dataSource.bind('change', function() {
                         scroller.resetVirtual();
                         that.loading.hide();
                     });
-
 
                     scroller.bind("scroll", function(e) {
                         var height = view.element.height(),
@@ -230,10 +234,18 @@
                     });
                 },
 
+                options: {
+                    name: "VirtualList",
+                    template: "#: data #",
+                    dataSource: null
+                },
+
                 cellContent: function(i) {
-                    return template(this.buffer.at(i));
+                    return this.options.template(this.buffer.at(i));
                 }
             });
+
+            kendo.mobile.ui.plugin(VirtualList);
 
             var Cell = kendo.Class.extend({
                 init: function(container) {
@@ -264,12 +276,6 @@
                     }
                 }
             });
-
-
-            function buildVirtual(e) {
-                new CellList(e.view);
-            }
-
         </script>
     </body>
 </html>

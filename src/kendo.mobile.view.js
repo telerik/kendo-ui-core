@@ -221,11 +221,13 @@ kendo_module({
 
             initPopOvers(element);
 
+            that.element.css("display", "");
             if (model) {
                 kendo.bind(element.children(), model, ui, kendo.ui, kendo.dataviz.ui);
             } else {
                 mobile.init(element.children());
             }
+            that.element.css("display", "none");
         },
 
         _layout: function() {
