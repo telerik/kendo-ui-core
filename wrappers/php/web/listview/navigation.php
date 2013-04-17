@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
     }
 
-    echo json_encode($result);
+    echo json_encode($result, JSON_NUMERIC_CHECK);
 
     exit;
 }

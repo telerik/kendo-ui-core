@@ -171,7 +171,7 @@ kendo_module({
                     id: options.ariaId
                 })))
                 .on(CLICK_NS, ".k-item", function(ev){
-                    that._select($(ev.currentTarget).find("div").css(BACKGROUNDCOLOR));
+                    that._select($(ev.currentTarget).css(BACKGROUNDCOLOR));
                 })
                 .find("*").attr(UNSELECTABLE, "on").end()
                 .attr("tabIndex", 0)
@@ -187,7 +187,7 @@ kendo_module({
                 } else {
                     throw new Error("Unsupported value for the 'tileSize' argument");
                 }
-                element.find(".k-item").css({ width: width, height: height });
+                element.find(".k-item").css({ width: width - 1, height: height - 1 });
             }
 
             if (options.columns) {
@@ -229,7 +229,7 @@ kendo_module({
             } else if (keyCode == KEYS.ENTER) {
                 preventDefault(e);
                 if (current) {
-                    this._select($("div", current).css(BACKGROUNDCOLOR));
+                    this._select($(current).css(BACKGROUNDCOLOR));
                 }
             } else if (keyCode == KEYS.ESC) {
                 this._cancel();
@@ -245,7 +245,7 @@ kendo_module({
                 selected.addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
 
                 try {
-                    var color = parse(selected.find("div").css(BACKGROUNDCOLOR));
+                    var color = parse(selected.css(BACKGROUNDCOLOR));
                     that._triggerSelect(color);
                 } catch(ex) {}
             }
@@ -258,11 +258,11 @@ kendo_module({
                 .removeClass(ITEMSELECTEDCLASS)
                 .removeAttr("aria-selected");
 
-            that.wrapper.find(".k-item div").each(function(){
+            that.wrapper.find(".k-item").each(function(){
                 var c = parse($(this).css(BACKGROUNDCOLOR));
 
                 if (c && c.equals(color)) {
-                    el = this.parentNode;
+                    el = this;
                 }
             });
 
@@ -271,8 +271,7 @@ kendo_module({
         _template: kendo.template(
             '<ul class="k-palette k-reset">'+
             '# for (var i = 0; i < colors.length; i++) { #' +
-                '<li #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
-                    '<div style="background-color:#= colors[i].toCss() #"></div>' +
+                '<li style="background-color:#= colors[i].toCss() #" #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
                 '</li>' +
             '# } #' +
             '</ul>'
@@ -289,11 +288,6 @@ kendo_module({
             that.wrapper = element.addClass("k-widget k-flatcolorpicker")
                 .append(that._template(options))
                 .find("*").attr(UNSELECTABLE, "on").end();
-
-            if (isIE8) {
-                // IE filters require absolute URLs
-                that._applyIEFilter();
-            }
 
             that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", element);
 
@@ -331,6 +325,11 @@ kendo_module({
                     that._updateUI(that.color());
                     that._cancel();
                 });
+
+            if (isIE8) {
+                // IE filters require absolute URLs
+                that._applyIEFilter();
+            }
         },
         destroy: function() {
             this._hueSlider.destroy();
