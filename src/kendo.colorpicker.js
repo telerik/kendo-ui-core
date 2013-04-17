@@ -289,11 +289,6 @@ kendo_module({
                 .append(that._template(options))
                 .find("*").attr(UNSELECTABLE, "on").end();
 
-            if (isIE8) {
-                // IE filters require absolute URLs
-                that._applyIEFilter();
-            }
-
             that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", element);
 
             that._selectedColor = $(".k-selected-color-display", element);
@@ -330,6 +325,11 @@ kendo_module({
                     that._updateUI(that.color());
                     that._cancel();
                 });
+
+            if (isIE8) {
+                // IE filters require absolute URLs
+                that._applyIEFilter();
+            }
         },
         destroy: function() {
             this._hueSlider.destroy();
