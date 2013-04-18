@@ -144,7 +144,7 @@ a.k-button
 
 .k-ie7 .k-button { overflow: visible; margin-right: 4px; }
 .k-ie7 a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
-.k-ie7 .k-slider a.k-button { height: 22px; line-height: 22px; padding: 0; } 
+.k-ie7 .k-slider a.k-button { height: 22px; line-height: 22px; padding: 0; }
 .k-ie7 .k-button-expand { margin-left: 0; margin-right: 0; }
 
 button.k-button::-moz-focus-inner,
@@ -273,7 +273,7 @@ html body .k-button-bare.k-upload-button:hover
 
 // outputs background-position and hover state background position
 .sprite-hoverable-rtl(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
-    
+
 	.k-rtl & {
 		.sprite-position(@row, @column);
 	}
@@ -2676,7 +2676,6 @@ span.k-numerictextbox
     display: inline-block;
     width: 250px;
     padding-bottom: 5px;
-    position: relative;
 
     div& {
         background-color: transparent;
@@ -2686,18 +2685,14 @@ span.k-numerictextbox
     .k-selected-color {
         background-image: url("textures/transtexture.png");
         background-position: 50% 50%;
-
-        .k-selected-color-display {
-            overflow: hidden;
-        }
+        text-align: right;
 
         input.k-color-value {
-            float: right;
             font-family: Consolas,"Ubuntu Mono","Lucida Console","Courier New",monospace;
             padding: .75em .3em .65em 1em;
             border: 0;
+            margin: 0;
             width: 70%;
-            height: 100%;
         }
     }
 
