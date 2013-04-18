@@ -1210,7 +1210,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrenceRule: "FREQ=WEEKLY;BYDAY=5FR,-3TU"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=5FR,-3TU;WKST=SU"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 11, 1));
@@ -1445,6 +1445,57 @@
 
                 equal(events[9].start.getTime(), +new Date(2013, 6, 10, 16, 30));
                 equal(events[9].end.getTime(), +new Date(2013, 6, 10, 17, 0));
+            });
+
+            test("MONTHLY method expands by BYDAY and offset", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 6, 7, 16, 30),
+                    end: new Date(2013, 6, 7, 17, 0),
+                    recurrenceRule: "FREQ=MONTHLY;BYDAY=2SU;WKST=SU"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 6, 1), new Date(2013, 6, 31));
+
+                equal(events.length, 1);
+
+                equal(events[0].start.getTime(), +new Date(2013, 6, 14, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 6, 14, 17, 0));
+            });
+
+            test("MONTHLY method expands by BYDAY and offset (WKST=MO)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 6, 7, 16, 30),
+                    end: new Date(2013, 6, 7, 17, 0),
+                    recurrenceRule: "FREQ=MONTHLY;BYDAY=2SU;WKST=MO"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 6, 1), new Date(2013, 6, 31));
+
+                equal(events.length, 1);
+
+                deepEqual(events[0].start, new Date(2013, 6, 14, 16, 30));
+                deepEqual(events[0].end, new Date(2013, 6, 14, 17, 0));
+            });
+
+            test("MONTHLY method expands by BYDAY and offset (WKST=SA)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 6, 7, 16, 30),
+                    end: new Date(2013, 6, 7, 17, 0),
+                    recurrenceRule: "FREQ=MONTHLY;BYDAY=2SU;WKST=SA"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 6, 1), new Date(2013, 6, 31));
+
+                equal(events.length, 1);
+
+                deepEqual(events[0].start, new Date(2013, 6, 14, 16, 30));
+                deepEqual(events[0].end, new Date(2013, 6, 14, 17, 0));
             });
 
             test("MONTHLY expand by BYMONTHDAY and limit by BYDAY", function() {
@@ -1973,7 +2024,6 @@
                     }];
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
-                console.log(events);
 
                 equal(events.length, 4);
                 deepEqual(events[0].start, new Date(2013, 0, 1, 16, 30));

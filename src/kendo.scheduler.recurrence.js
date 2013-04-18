@@ -16,6 +16,7 @@ kendo_module({
         setTime = date.setTime,
         setDayOfWeek = date.setDayOfWeek,
         adjustDST = date.adjustDST,
+        firstDayOfMonth = date.firstDayOfMonth,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -566,15 +567,10 @@ kendo_module({
     }
 
     function weekInMonth(date, weekStart) {
-        var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        var firstWeekday = firstDayOfMonth(date).getDay(),
+            firstWeekLength = Math.abs(7 - (firstWeekday + 7 - (weekStart || 7))) || 7;
 
-        if (weekStart > firstWeekday) {
-            weekStart *= -1;
-        }
-
-        firstWeekday = firstWeekday - weekStart;
-
-        return Math.floor((date.getDate() + firstWeekday - 1) / 7) + 1;
+        return Math.ceil((date.getDate() - firstWeekLength) / 7) + 1;
     }
 
     function offsetWeek(date, offset, weekStart) {
@@ -594,6 +590,7 @@ kendo_module({
 
     function ruleWeekValues(weekDays, date, weekStart) {
         var currentDay = date.getDay(),
+            firstDay = firstDayOfMonth(date).getDay(),
             length = weekDays.length,
             weekDay, day, offset,
             weekNumber,
@@ -602,6 +599,10 @@ kendo_module({
 
         if (currentDay < weekStart) {
             currentDay += weekStart;
+        }
+
+        if (firstDay < weekStart) {
+            firstDay += weekStart;
         }
 
         for (;idx < length; idx++) {
@@ -614,6 +615,10 @@ kendo_module({
             }
 
             weekNumber = weekInMonth(date, weekStart);
+            if (offset > 0 && day < firstDay) {
+                weekNumber -= 1;
+            }
+
             offset = offset ? offsetWeek(date, offset, weekStart) : weekNumber;
 
             if (weekNumber < offset) {
