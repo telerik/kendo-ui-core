@@ -1758,9 +1758,7 @@ kendo_module({
         renderDataAttributes: function() {
             var element = this,
                 data = element.options.data,
-                key,
-                attr,
-                output = "";
+                key, attr, output = "";
 
             for (key in data) {
                 attr = "data-" + key.replace(UPPERCASE_REGEX, "-$1").toLowerCase();

@@ -102,6 +102,7 @@ kendo_module({
         INTERPOLATE = "interpolate",
         LEFT = "left",
         LEGEND_ITEM_CLICK = "legendItemClick",
+        LEGEND_ITEM_HOVER = "legendItemHover",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
         MAX_VALUE = Number.MAX_VALUE,
@@ -111,6 +112,7 @@ kendo_module({
         MOUSELEAVE_NS = "mouseleave" + NS,
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER_NS = "mouseover" + NS,
+        MOUSEOUT_NS = "mouseout" + NS,
         MOUSEMOVE_NS = "mousemove" + NS,
         MOUSEMOVE_THROTTLE = 20,
         MOUSEWHEEL_DELAY = 150,
@@ -266,6 +268,7 @@ kendo_module({
             SERIES_HOVER,
             AXIS_LABEL_CLICK,
             LEGEND_ITEM_CLICK,
+            LEGEND_ITEM_HOVER,
             PLOT_AREA_CLICK,
             DRAG_START,
             DRAG,
@@ -543,6 +546,7 @@ kendo_module({
 
             element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
+            element.on(MOUSEOUT_NS, proxy(chart._mouseout, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(TOUCH_START_NS, proxy(chart._tap, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
@@ -560,6 +564,15 @@ kendo_module({
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
                 });
+            }
+        },
+
+        _mouseout: function(e) {
+            var chart = this,
+                element = chart._model.modelMap[e.target.getAttribute("data-model-id")];
+
+            if (element && element.leave) {
+                element.leave(chart, e);
             }
         },
 
@@ -782,16 +795,18 @@ kendo_module({
             point = chart._getChartElement(e);
             if (point && point.hover) {
                 point.hover(chart, e);
-                chart._activePoint = point;
+                if (!e.isDefaultPrevented()) {
+                    chart._activePoint = point;
 
-                tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
-                if (tooltipOptions.visible) {
-                    tooltip.show(point);
+                    tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
+                    if (tooltipOptions.visible) {
+                        tooltip.show(point);
+                    }
+
+                    highlight.show(point);
+
+                    return true;
                 }
-
-                highlight.show(point);
-
-                return true;
             }
         },
 
@@ -810,9 +825,7 @@ kendo_module({
                 highlight = chart._highlight,
                 coords = chart._eventCoordinates(e),
                 point = chart._activePoint,
-                tooltipOptions,
-                owner,
-                seriesPoint;
+                tooltipOptions, owner, seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords)) {
                 if (point && point.series && (point.series.type === LINE || point.series.type === AREA)) {
@@ -1097,6 +1110,21 @@ kendo_module({
             }
         },
 
+        _legendItemHover: function(seriesIndex, pointIndex) {
+            var chart = this,
+                plotArea = chart._plotArea,
+                highlight = chart._highlight,
+                currentSeries = (plotArea.srcSeries || plotArea.series)[seriesIndex],
+                items;
+
+            if (inArray(currentSeries.type, [PIE, DONUT])) {
+                items = plotArea.charts[0].segments[pointIndex];
+            } else {
+                items = plotArea.pointsBySeriesIndex(seriesIndex);
+            }
+            highlight.show(items);
+        },
+
         destroy: function() {
             var chart = this,
                 dataSource = chart.dataSource;
@@ -1270,6 +1298,26 @@ kendo_module({
             });
 
             widget._legendItemClick(item.series.index, item.pointIndex);
+        },
+
+        hover: function(widget, e) {
+            var item = this.item;
+
+            e.preventDefault();
+
+            widget.trigger(LEGEND_ITEM_HOVER, {
+                element: $(e.target),
+                text: item.text,
+                series: item.series,
+                seriesIndex: item.series.index,
+                pointIndex: item.pointIndex
+            });
+
+            widget._legendItemHover(item.series.index, item.pointIndex);
+        },
+
+        leave: function(widget) {
+            widget._unsetActivePoint();
         }
     });
 
@@ -6482,6 +6530,25 @@ kendo_module({
             return result;
         },
 
+        pointsBySeriesIndex: function(seriesIndex) {
+            var charts = this.charts,
+                result = [],
+                points, point, i, j, chart;
+
+            for (i = 0; i < charts.length; i++) {
+                chart = charts[i];
+                points = chart.points;
+                for (j = 0; j < points.length; j++) {
+                    point = points[j];
+                    if (point.options.index === seriesIndex) {
+                        result.push(point);
+                    }
+                }
+            }
+
+            return result;
+        },
+
         paneByPoint: function(point) {
             var plotArea = this,
                 panes = plotArea.panes,
@@ -7426,9 +7493,7 @@ kendo_module({
                 viewElement = highlight.viewElement,
                 overlay,
                 overlays = highlight._overlays,
-                overlayElement,
-                i,
-                point,
+                overlayElement, i, point,
                 pointOptions;
 
             highlight.hide();
@@ -7436,21 +7501,23 @@ kendo_module({
 
             for (i = 0; i < points.length; i++) {
                 point = points[i];
-                pointOptions = point.options;
+                if (point) {
+                    pointOptions = point.options;
 
-                if (!pointOptions || pointOptions.highlight.visible) {
-                    if (point.highlightOverlay) {
-                        overlay = point.highlightOverlay(view, highlight.options);
+                    if (!pointOptions || (pointOptions.highlight || {}).visible) {
+                        if (point.highlightOverlay) {
+                            overlay = point.highlightOverlay(view, highlight.options);
 
-                        if (overlay) {
-                            overlayElement = view.renderElement(overlay);
-                            viewElement.appendChild(overlayElement);
-                            overlays.push(overlayElement);
+                            if (overlay) {
+                                overlayElement = view.renderElement(overlay);
+                                viewElement.appendChild(overlayElement);
+                                overlays.push(overlayElement);
+                            }
                         }
-                    }
 
-                    if (point.toggleHighlight) {
-                        point.toggleHighlight(view);
+                        if (point.toggleHighlight) {
+                            point.toggleHighlight(view);
+                        }
                     }
                 }
             }
@@ -7470,11 +7537,13 @@ kendo_module({
             if (points) {
                 for (i = 0; i < points.length; i++) {
                     point = points[i];
-                    pointOptions = point.options;
+                    if (point) {
+                        pointOptions = point.options;
 
-                    if (!pointOptions || pointOptions.highlight.visible) {
-                        if (point.toggleHighlight) {
-                            point.toggleHighlight(highlight.view);
+                        if (!pointOptions || (pointOptions.highlight || {}).visible) {
+                            if (point.toggleHighlight) {
+                                point.toggleHighlight(highlight.view);
+                            }
                         }
                     }
                 }
