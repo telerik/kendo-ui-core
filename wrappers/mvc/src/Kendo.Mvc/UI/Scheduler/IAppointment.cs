@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Kendo.Mvc.UI
 {
@@ -14,10 +11,10 @@ namespace Kendo.Mvc.UI
         string Description { get; set; }
 
         //duration
+        bool AllDayEvent { get; set; }
         DateTime Start { get; set; }
         DateTime End { get; set; }
         TimeZoneInfo TimeZoneInfo { get; set; }
-        bool AllDayEvent { get; set; }
 
         //importance or color
         int Importance { get; set; }
