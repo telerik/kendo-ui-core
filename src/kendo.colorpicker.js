@@ -307,7 +307,7 @@ kendo_module({
                             var color = parse(this.value);
                             var val = that.color();
                             $(this).removeClass("k-state-error");
-                            that._select(color, !color.equals(val));
+                            that._select(color, color.equals(val));
                         } catch(ex) {
                             $(this).addClass("k-state-error");
                         }
