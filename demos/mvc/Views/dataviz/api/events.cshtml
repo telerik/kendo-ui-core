@@ -59,6 +59,7 @@
                         dataBound: onDataBound,
                         axisLabelClick: onAxisLabelClick,
                         legendItemClick: onLegendItemClick,
+                        legendItemHover: onLegendItemHover,
                         plotAreaClick: onPlotAreaClick,
                         dragStart: onDragStart,
                         drag: onDrag,
@@ -90,6 +91,10 @@
 
                 function onLegendItemClick(e) {
                     kendoConsole.log(kendo.format("Legend item click :: {0}", e.text));
+                }
+
+                function onLegendItemHover(e) {
+                    kendoConsole.log(kendo.format("Legend item hover :: {0}", e.text));
                 }
 
                 function onPlotAreaClick(e) {
