@@ -389,29 +389,22 @@
                     deepEqual(axis.getCategory(new Point2D(0, 0)), null);
                 });
 
-                test("returns first category for leftmost point", function() {
-                    equal(axis.getCategory(new Point2D(1, 0)), "Foo");
+                test("returns first category for innermost point", function() {
+                    equal(axis.getCategory(new Point2D(300, 299)), "Foo");
                 });
 
-                test("returns last category for righttmost point", function() {
-                    equal(axis.getCategory(new Point2D(799, 0)), "Baz");
+                test("returns second category for innermost point", function() {
+                    equal(axis.getCategory(new Point2D(301, 300)), "Bar");
                 });
 
-                test("returns category for middle point", function() {
-                    equal(axis.getCategory(new Point2D(334, 0)), "Bar");
+                test("returns third category for innermost point", function() {
+                    equal(axis.getCategory(new Point2D(299, 300)), "Baz");
                 });
 
                 // ------------------------------------------------------------
-                module("CategoryAxis / getCategory / Horizontal / Reverse", {
+                module("CategoryAxis / getCategory / Reverse", {
                     setup: function() {
-                        categoryAxis = new dataviz.CategoryAxis({
-                            categories: ["Foo", "Bar", "Baz"],
-                            vertical: false,
-                            reverse: true,
-                            labels: { visible: false }
-                        });
-
-                        categoryAxis.reflow(chartBox);
+                        createAxis({ reverse: true });
                     }
                 });
 

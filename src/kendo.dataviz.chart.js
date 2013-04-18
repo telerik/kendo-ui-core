@@ -2019,11 +2019,25 @@ kendo_module({
         },
 
         getCategoryIndex: function(point) {
+            var axis = this,
+                index = null,
+                i,
+                length = axis.options.categories.length,
+                slot;
+
+            for (i = 0; i < length; i++) {
+                slot = axis.getSlot(i);
+                if (slot.containsPoint(point)) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
         },
 
-        getCategory: function(point) {
-            return null;
-        }
+        // TODO: Extract?
+        getCategory: CategoryAxis.fn.getCategory
     });
 
     var PolarNumericAxis = NumericAxis.extend({
@@ -8135,6 +8149,26 @@ kendo_module({
 
         seriesCategoryAxis: function() {
             return this.categoryAxis;
+        },
+
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                category,
+                value;
+
+            category = plotArea.categoryAxis.getCategory(point);
+            console.log(category);
+
+            // TODO: Test
+            if (defined(category) && defined(value)) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    category: singleItemOrArray(categories),
+                    value: singleItemOrArray(values)
+                });
+            }
         }
     });
 

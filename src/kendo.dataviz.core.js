@@ -385,6 +385,33 @@ kendo_module({
             return new Box2D(x, y, x + width, y + height);
         },
 
+        containsPoint: function(p) {
+            var ring = this,
+                c = ring.c,
+                ir = ring.ir,
+                r = ring.r,
+                startAngle = ring.startAngle,
+                endAngle = ring.startAngle + ring.angle,
+                dx = p.x - c.x,
+                dy = p.y - c.y,
+                relPoint = new Point2D(dx, dy),
+                startPoint = ring.point(startAngle),
+                relStartPoint = new Point2D(startPoint.x - c.x, startPoint.y - c.y),
+                endPoint = ring.point(endAngle),
+                relEndPoint = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
+                angle = (270 - (math.atan2(dx, dy) / DEG_TO_RAD)) % 360,
+                dist = dx * dx + dy *dy;
+
+            function clockwise(v1, v2) {
+                // Note that this is checking for counter-clockwise vectors in geometric terms.
+                // Ring rotation direction is reversed.
+                return -v1.x * v2.y + v1.y * v2.x < 0;
+            }
+
+            return clockwise(relStartPoint, relPoint) && !clockwise(relEndPoint, relPoint) &&
+                   dist >= ir * ir && dist <= r * r;
+        },
+
         getBBox: function() {
             var ring = this,
                 box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),

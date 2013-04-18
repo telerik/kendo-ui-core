@@ -373,7 +373,8 @@
             })();
 
             (function() {
-                var ring;
+                var ring,
+                    point;
 
                 module("Ring", {
                     setup: function() {
@@ -416,6 +417,76 @@
 
                     equal(innerPoint.x, 100);
                     equal(innerPoint.y, 180);
+                });
+
+                // ------------------------------------------------------------
+                var outerRing;
+
+                module("Ring / containsPoint", {
+                    setup: function() {
+                        ring = new dataviz.Ring(new Point2D(100, 200), 20, 30, 90, 180);
+                        outerRing = new dataviz.Ring(new Point2D(100, 200), 19, 31, 89, 181);
+                    }
+                });
+
+                test("containsPoint for inner start point", function() {
+                    point = ring.point(90, true);
+                    ok(ring.containsPoint(point));
+                });
+
+                test("containsPoint for inner mid-point", function() {
+                    point = ring.point(ring.middle(), true);
+                    ok(ring.containsPoint(point));
+                });
+
+                test("containsPoint for inner end point", function() {
+                    point = ring.point(180, true);
+                    ok(ring.containsPoint(point));
+                });
+
+                test("containsPoint for outer start point", function() {
+                    point = ring.point(90);
+                    ok(ring.containsPoint(point));
+                });
+
+                test("containsPoint for outer mid-point", function() {
+                    point = ring.point(ring.middle());
+                    ok(ring.containsPoint(point));
+                });
+
+                test("containsPoint for inner end point", function() {
+                    point = ring.point(180);
+                    ok(ring.containsPoint(point));
+                });
+
+                test("containsPoint for point next to inner start point", function() {
+                    point = outerRing.point(outerRing.startAngle, true);
+                    ok(!ring.containsPoint(point));
+                });
+
+                test("containsPoint for point next to inner mid-point", function() {
+                    point = outerRing.point(outerRing.middle(), true);
+                    ok(!ring.containsPoint(point));
+                });
+
+                test("containsPoint for point next to inner end point", function() {
+                    point = outerRing.point(outerRing.startAngle + outerRing.angle, true);
+                    ok(!ring.containsPoint(point));
+                });
+
+                test("containsPoint for point next to outer start point", function() {
+                    point = outerRing.point(outerRing.startAngle);
+                    ok(!ring.containsPoint(point));
+                });
+
+                test("containsPoint for point next to outer mid-point", function() {
+                    point = outerRing.point(outerRing.middle());
+                    ok(!ring.containsPoint(point));
+                });
+
+                test("containsPoint for point next to inner end point", function() {
+                    point = outerRing.point(outerRing.startAngle + outerRing.angle);
+                    ok(!ring.containsPoint(point));
                 });
             })();
 
