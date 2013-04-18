@@ -69,6 +69,7 @@ kendo_module({
 
             if (value === false) {
                 badge.empty().remove();
+                this.badgeElement = false;
                 return this;
             }
 
