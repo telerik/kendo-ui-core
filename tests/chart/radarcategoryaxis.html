@@ -319,6 +319,26 @@
                     equal(slot.angle, 120);
                 });
 
+                test("slot for two categories (justified)", function() {
+                    slot = axis.getSlot(0, 1);
+                    equal(slot.startAngle, 90);
+                    equal(slot.angle, 120);
+                });
+
+                test("slot for last full category (justified)", function() {
+                    slot = axis.getSlot(2, 3);
+                    equal(slot.startAngle, 330);
+                    equal(slot.angle, 120);
+                });
+
+                test("slot for two categories (non-justified)", function() {
+                    createAxis({ justified: false });
+
+                    slot = axis.getSlot(0, 1);
+                    equal(slot.startAngle, 90);
+                    equal(slot.angle, 240);
+                });
+
                 test("assumes 1 category when no categories are defined (justified)", function() {
                     createAxis({ categories: [] });
 
@@ -336,31 +356,31 @@
                 });
 
                 test("reports range minimum of 0", function() {
-                    equal(categoryAxis.range().min, 0);
+                    equal(axis.range().min, 0);
                 });
 
                 test("reports range maximum equal to category count", function() {
-                    equal(categoryAxis.range().max, 3);
+                    equal(axis.range().max, 3);
                 });
 
                 test("from value can't be lower than 0", function() {
-                    var slot = categoryAxis.getSlot(-1);
-                    equal(slot.x1, 0);
+                    slot = axis.getSlot(-1);
+                    equal(slot.startAngle, 90);
                 });
 
                 test("caps from value to categories count", function() {
-                    var slot = categoryAxis.getSlot(1000);
-                    equal(slot.x1, lineBox.x2);
+                    slot = axis.getSlot(1000);
+                    equal(slot.startAngle, 330);
                 });
 
                 test("to value equals from value when not set", function() {
-                    var slot = categoryAxis.getSlot(1000);
-                    equal(slot.x2, lineBox.x2);
+                    slot = axis.getSlot(1000);
+                    equal(slot.angle, 0);
                 });
 
-                test("value equals from value when smaller", function() {
-                    var slot = categoryAxis.getSlot(2, 1);
-                    equal(slot.x2, lineBox.x2);
+                test("to value equals from value when smaller", function() {
+                    slot = axis.getSlot(2, 1);
+                    equal(slot.startAngle, 330);
                 });
 
             })();

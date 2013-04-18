@@ -1985,16 +1985,20 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 justified = options.justified,
-                divs = axis.getMajorDivisions(),
                 box = axis.box,
+                divs = axis.getMajorDivisions(),
+                totalDivs = divs.length,
+                slots,
                 angle;
 
             if (options.reverse && !justified) {
-                from = (from + 1) % divs.length;
+                from = (from + 1) % totalDivs;
             }
 
-            from = clipValue(from, 0, divs.length - 1);
-            angle = justified ? 0 : 360 / divs.length;
+            from = clipValue(from, 0, totalDivs - 1);
+            to = clipValue(to || from, from, totalDivs);
+            slots = to - from + (justified ? 0 : 1);
+            angle = (360 / totalDivs) * slots;
 
             return new Ring(
                 box.center(), 0, box.height() / 2,
