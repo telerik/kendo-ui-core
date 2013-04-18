@@ -114,6 +114,10 @@
 
     <input id="numerictextbox" type="number" min="0" max="10" value="5" />
 
+    <select id="multiselect" multiple="multiple"></select>
+
+    <input id="colorpicker" />
+
     <h3>Slider</h3>
     <input id="slider" type="number" min="0" max="10" value="5" />
 
@@ -144,6 +148,8 @@
     <h3>Button</h3>
     <button class="k-button">A button</button>
     <button class="k-button">Another one</button>
+
+    <h3 title="Kendo UI Tooltip" id="tooltip">Tooltip (hover me)</h3>
 
     <h3>Upload</h3>
     <input id="upload" type="file" />
@@ -183,8 +189,11 @@
         float: left;
     }
 
-    .column .k-widget {
+    .column .k-widget:not(.k-colorpicker) {
         display: block;
+    }
+
+    .column .k-widget {
         margin-bottom: 14px;
     }
 
@@ -252,7 +261,21 @@
         $("#datepicker").kendoDatePicker(datetimePickerOptions);
         $("#timepicker").kendoTimePicker(datetimePickerOptions);
 
+        $("#multiselect").kendoMultiSelect({
+            dataSource: countriesDataSource,
+            dataTextField: "value",
+            dataValueField: "value",
+            value: [ "Finland", "Estonia" ]
+        });
+
+        $("#colorpicker").kendoColorPicker();
+
         $("#numerictextbox").kendoNumericTextBox();
+
+        $("#tooltip").kendoTooltip({
+            autoHide: false,
+            position: "top"
+        });
 
         $("#upload").kendoUpload();
 
