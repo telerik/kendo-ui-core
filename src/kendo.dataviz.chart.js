@@ -1989,6 +1989,8 @@ kendo_module({
                 divs = axis.getMajorDivisions(),
                 totalDivs = divs.length,
                 slots,
+                slotAngle = 360 / totalDivs,
+                startAngle,
                 angle;
 
             if (options.reverse && !justified) {
@@ -1996,23 +1998,31 @@ kendo_module({
             }
 
             from = clipValue(from, 0, totalDivs - 1);
-            to = clipValue(to || from, from, totalDivs);
-            slots = to - from + (justified ? 0 : 1);
-            angle = (360 / totalDivs) * slots;
+            startAngle = divs[from];
+
+            if (justified) {
+                startAngle = startAngle - slotAngle / 2;
+
+                if (startAngle < 0) {
+                    startAngle += 360;
+                }
+            }
+
+            to = clipValue(to || from, from, totalDivs - 1);
+            slots = to - from + 1;
+            angle = slotAngle * slots;
 
             return new Ring(
                 box.center(), 0, box.height() / 2,
-                divs[from], angle
+                startAngle, angle
             );
         },
 
         getCategoryIndex: function(point) {
-            // TODO: Implement
         },
 
         getCategory: function(point) {
-            // TODO: Extract
-            // CategoryAxis.fn.getCategory(this, point);
+            return null;
         }
     });
 
@@ -3464,10 +3474,7 @@ kendo_module({
         },
 
         categorySlot: function(categoryAxis, categoryIx) {
-            var slot = categoryAxis.getSlot(categoryIx, categoryIx + 1);
-            slot.startAngle -= slot.angle / 2;
-
-            return slot;
+            return categoryAxis.getSlot(categoryIx);
         },
 
         reflowPoint: function(point, pointSlot) {

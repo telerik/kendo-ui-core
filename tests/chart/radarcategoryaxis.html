@@ -21,6 +21,7 @@
             var dataviz = kendo.dataviz,
                 deepExtend = kendo.deepExtend,
                 getElement = dataviz.getElement,
+                Point2D = dataviz.Point2D,
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 500, 500),
                 view,
@@ -231,8 +232,8 @@
                 });
 
                 test("slot angle for first category (justified)", function() {
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 30);
+                    equal(slot.angle, 120);
                 });
 
                 test("slot angle for first category (non-justified)", function() {
@@ -247,8 +248,8 @@
                     createAxis({ reverse: true });
 
                     slot = axis.getSlot(0);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 30);
+                    equal(slot.angle, 120);
                 });
 
                 test("slot for first category in reverse (non-justified)", function() {
@@ -261,8 +262,8 @@
 
                 test("slot angle for second category (justified)", function() {
                     slot = axis.getSlot(1);
-                    equal(slot.startAngle, 210);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 150);
+                    equal(slot.angle, 120);
                 });
 
                 test("slot angle for second category (non-justified)", function() {
@@ -277,8 +278,8 @@
                     createAxis({ reverse: true });
 
                     slot = axis.getSlot(1);
-                    equal(slot.startAngle, 330);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 270);
+                    equal(slot.angle, 120);
                 });
 
                 test("slot for second category in reverse (non-justified)", function() {
@@ -291,8 +292,8 @@
 
                 test("slot angle for last category (justified)", function() {
                     slot = axis.getSlot(2);
-                    equal(slot.startAngle, 330);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 270);
+                    equal(slot.angle, 120);
                 });
 
                 test("slot angle for last category (non-justified)", function() {
@@ -307,8 +308,8 @@
                     createAxis({ reverse: true });
 
                     slot = axis.getSlot(2);
-                    equal(slot.startAngle, 210);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 150);
+                    equal(slot.angle, 120);
                 });
 
                 test("slot for last category in reverse (non-justified)", function() {
@@ -321,14 +322,8 @@
 
                 test("slot for two categories (justified)", function() {
                     slot = axis.getSlot(0, 1);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for last full category (justified)", function() {
-                    slot = axis.getSlot(2, 3);
-                    equal(slot.startAngle, 330);
-                    equal(slot.angle, 120);
+                    equal(slot.startAngle, 30);
+                    equal(slot.angle, 240);
                 });
 
                 test("slot for two categories (non-justified)", function() {
@@ -343,8 +338,8 @@
                     createAxis({ categories: [] });
 
                     slot = axis.getSlot(0);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 0);
+                    equal(slot.startAngle, 270);
+                    equal(slot.angle, 360);
                 })
 
                 test("assumes 1 category when no categories are defined (non-justified)", function() {
@@ -365,83 +360,45 @@
 
                 test("from value can't be lower than 0", function() {
                     slot = axis.getSlot(-1);
-                    equal(slot.startAngle, 90);
+                    equal(slot.startAngle, 30);
                 });
 
                 test("caps from value to categories count", function() {
                     slot = axis.getSlot(1000);
-                    equal(slot.startAngle, 330);
+                    equal(slot.startAngle, 270);
                 });
 
                 test("to value equals from value when not set", function() {
                     slot = axis.getSlot(1000);
-                    equal(slot.angle, 0);
+                    equal(slot.angle, 120);
                 });
 
                 test("to value equals from value when smaller", function() {
                     slot = axis.getSlot(2, 1);
-                    equal(slot.startAngle, 330);
+                    equal(slot.startAngle, 270);
                 });
 
-            })();
-
-            (function() {
-                var Point2D = kendo.dataviz.Point2D;
-                var categoryAxis;
-
                 // ------------------------------------------------------------
-                module("CategoryAxis / getCategory / Horizontal ", {
+                module("CategoryAxis / getCategory ", {
                     setup: function() {
-                        categoryAxis = new dataviz.CategoryAxis({
-                            categories: ["Foo", "Bar", "Baz"],
-                            vertical: false,
-                            labels: { visible: false }
-                        });
-
-                        categoryAxis.reflow(chartBox);
+                        createAxis();
                     }
                 });
 
-                test("returns null for coordinates left of axis", function() {
-                    deepEqual(categoryAxis.getCategory(new Point2D(-1, 0)), null);
-                });
-
-                test("returns null for coordinates right of axis", function() {
-                    deepEqual(categoryAxis.getCategory(new Point2D(1000, 0)), null);
+                test("returns null for coordinates outside of circle", function() {
+                    deepEqual(axis.getCategory(new Point2D(0, 0)), null);
                 });
 
                 test("returns first category for leftmost point", function() {
-                    equal(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
+                    equal(axis.getCategory(new Point2D(1, 0)), "Foo");
                 });
 
                 test("returns last category for righttmost point", function() {
-                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Baz");
+                    equal(axis.getCategory(new Point2D(799, 0)), "Baz");
                 });
 
                 test("returns category for middle point", function() {
-                    equal(categoryAxis.getCategory(new Point2D(334, 0)), "Bar");
-                });
-
-                test("returns single category for leftmost point", function() {
-                    categoryAxis = new dataviz.CategoryAxis({
-                        categories: ["Foo"],
-                        vertical: false,
-                        labels: { visible: false }
-                    });
-
-                    categoryAxis.reflow(chartBox);
-                    equal(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
-                });
-
-                test("returns single category for righttmost point", function() {
-                    categoryAxis = new dataviz.CategoryAxis({
-                        categories: ["Foo"],
-                        vertical: false,
-                        labels: { visible: false }
-                    });
-
-                    categoryAxis.reflow(chartBox);
-                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                    equal(axis.getCategory(new Point2D(334, 0)), "Bar");
                 });
 
                 // ------------------------------------------------------------
