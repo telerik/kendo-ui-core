@@ -287,6 +287,51 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the inline handler of the LegendItemHover client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.LegendItemHover(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder LegendItemHover(Func<object, object> inlineCodeBlock)
+        {
+            Handler("legendItemHover", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the LegendItemHover client-side event.
+        /// </summary>
+        /// <param name="onLegendItemHoverHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.LegendItemHover("onLegendItemHover"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder LegendItemHover(string onLegendItemHoverHandlerName)
+        {
+            Handler("legendItemHover", onLegendItemHoverHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the DragStart client-side event.
         /// </summary>
         /// <param name="onDragStartHandlerName">The name of the JavaScript function that will handle the event.</param>

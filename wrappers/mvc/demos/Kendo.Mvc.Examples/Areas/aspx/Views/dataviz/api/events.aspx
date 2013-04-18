@@ -38,6 +38,7 @@
             .AxisLabelClick("onAxisLabelClick")
             .PlotAreaClick("onPlotAreaClick")
             .LegendItemClick("onLegendItemClick")
+            .LegendItemHover("onLegendItemHover")
             .DragStart("onDragStart")
             .Drag("onDrag")
             .DragEnd("onDragEnd")
@@ -75,6 +76,11 @@
 
     function onLegendItemClick(e) {
         kendoConsole.log(kendo.format("Legend item click :: {0}",
+            e.text));
+    }
+
+    function onLegendItemHover(e) {
+        kendoConsole.log(kendo.format("Legend item hover :: {0}",
             e.text));
     }
 
