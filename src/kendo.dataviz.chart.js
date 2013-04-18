@@ -1345,7 +1345,12 @@ kendo_module({
                 width: 0
             },
             background: "",
-            zIndex: 1
+            zIndex: 1,
+            markers: {
+                border: {
+                    width: 1
+                }
+            }
         },
 
         createLabels: function() {
@@ -1419,6 +1424,7 @@ kendo_module({
                 group.children.push(view.createRect(markerBox, {
                     fill: color,
                     stroke: color,
+                    strokeWidth: options.markers.border.width,
                     data: { modelId: label.options.modelId },
                     cursor: {
                         style: POINTER
