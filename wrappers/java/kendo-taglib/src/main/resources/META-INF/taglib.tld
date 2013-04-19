@@ -7614,8 +7614,8 @@ is displayed in the column header cell.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template which renders the column content. The grid renders table rows (<tr>) which represent the data source items.
-Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.</description>
+        <description>The template which renders the column content. The grid renders table rows (&lt;tr&gt;) which represent the data source items.
+Each table row consists of table cells (&lt;td&gt;) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.</description>
         <name>grid-column-template</name>
         <tag-class>com.kendoui.taglib.grid.ColumnTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
