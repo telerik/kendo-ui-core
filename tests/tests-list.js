@@ -9,6 +9,7 @@ var tests = [
     "autocomplete/mvvm.html",
     "autocomplete/lint.html",
     "autocomplete/aria.html",
+	"barcode/encoding-ean8.html",
     "breadcrumbs/breadcrumbs.html",
     "breadcrumbs/lint.html",
     "calendar/initialization.html",
