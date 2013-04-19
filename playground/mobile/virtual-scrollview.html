@@ -285,6 +285,10 @@
                         ease = Transition.easeOutExpo;
 
                     if (velocity > velocityThreshold) {
+                        if(that.itemCount === 2) {
+                            that.reset(ease);
+                            return;
+                        }
                         that.backward();
                         return;
                     } else if(velocity < -velocityThreshold) {
@@ -296,6 +300,10 @@
                         that.forward();
                         return;
                     } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
+                        if(that.itemCount === 2) {
+                            that.reset(ease);
+                            return;           
+                        }
                         that.backward();
                         return;
                     } else {
@@ -320,6 +328,7 @@
                         that.itemCount--;
                         that.setPageContent(pages[0], that.itemCount - 3);
                     }
+
                     pages[0].first();
                     pages[1].center();
                     pages[2].last();
@@ -331,11 +340,11 @@
                     var buffer = this.buffer,
                         template = this.options.template;
 
-                    console.log(index, buffer.at(index));
-
-                    page.content(
-                        template(buffer.at(index))
-                    );
+                    if(index >= 0) {
+                        page.content(template(buffer.at(index)));
+                    } else {
+                        page.content("<span>empty</span>");
+                    }
                 }
 
             });
