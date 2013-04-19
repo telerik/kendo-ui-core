@@ -1,12 +1,12 @@
     <tag>
-        <description><%= description %></description>
+        <description><%= description.html_encode %></description>
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= tag_class %></tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description><%= item.description %></description>
+        <description><%= item.description.html_encode %></description>
         <name><%= item.tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= namespace %>.<%= item.tag_class %></tag-class>
 
@@ -32,7 +32,7 @@
 
 % item.events.each do |event|
     <tag>
-        <description><%= event.description %></description>
+        <description><%= event.description.html_encode %></description>
         <name><%= event.tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= event.namespace %>.<%= event.tag_class %></tag-class>
         <body-content>JSP</body-content>

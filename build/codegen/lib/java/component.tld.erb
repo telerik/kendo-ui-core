@@ -1,5 +1,5 @@
     <tag>
-        <description><%= name %></description>
+        <description><%= name.html_encode %></description>
         <name><%= tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= tag_class %></tag-class>
         <body-content>JSP</body-content>
@@ -22,7 +22,7 @@
 % end
 % events.each do |event|
         <attribute>
-            <description><%= event.description %></description>
+            <description><%= event.description.html_encode %></description>
             <name><%= event.name %></name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -36,7 +36,7 @@
 
 % events.each do |event|
     <tag>
-        <description><%= event.description %></description>
+        <description><%= event.description.html_encode %></description>
         <name><%= event.tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= event.namespace %>.<%= event.tag_class %></tag-class>
         <body-content>JSP</body-content>
