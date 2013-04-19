@@ -303,7 +303,6 @@ kendo_module({
                         try {
                             var color = parse(this.value);
                             var val = that.color();
-                            $(this).removeClass("k-state-error");
                             that._select(color, color.equals(val));
                         } catch(ex) {
                             $(this).addClass("k-state-error");
@@ -526,6 +525,8 @@ kendo_module({
             if (!color) {
                 return;
             }
+
+            this._colorAsText.removeClass("k-state-error");
 
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
             that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
