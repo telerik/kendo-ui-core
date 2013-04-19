@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI
         public virtual IDictionary<string, object> Serialize()
         {
             var result = new Dictionary<string, object>();
-            var legendLabelOptions = new Dictionary<string, object>();
+            var legendLabelOptions = legend.Labels.CreateSerializer().Serialize();
 
             FluentDictionary.For(legendLabelOptions)
                 .Add("font", legend.Font, () => legend.Font.HasValue())

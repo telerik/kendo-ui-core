@@ -252,5 +252,15 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartBorderBuilder(legend.Border));
             return this;
         }
+
+        /// <summary>
+        /// Configures the legend labels
+        /// </summary>
+        /// <param name="configurator">The labels configuration action</param>
+        public ChartLegendBuilder Labels(Action<ChartLegendLabelsBuilder> configurator)
+        {
+            configurator(new ChartLegendLabelsBuilder(legend.Labels));
+            return this;
+        }
     }
 }

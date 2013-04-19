@@ -10,6 +10,7 @@ namespace Kendo.Mvc.UI
             Margin = new ChartSpacing();
             Padding = new ChartSpacing();
             Border = new ChartElementBorder();
+            Labels = new ChartLegendLabels();
         }
 
         /// <summary>
@@ -106,6 +107,15 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the legend border
         /// </summary>
         public ChartElementBorder Border
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the legend labels
+        /// </summary>
+        public ChartLegendLabels Labels
         {
             get;
             set;
