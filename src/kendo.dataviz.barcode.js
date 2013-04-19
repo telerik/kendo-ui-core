@@ -1,5 +1,5 @@
 ﻿kendo_module({  
-    id: "barcode",
+    id: "dataviz.barcode",
     name: "Barcode",
     category: "dataviz",
     description: "Barcode widget.",
