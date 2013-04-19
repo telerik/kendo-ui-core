@@ -71,7 +71,10 @@ namespace Kendo.Mvc.UI.Fluent
             }
 
             Component.DataSource.Data = dataSource;
-            Component.Value = dataSource.SelectedValue();
+            if (Component.Value == null)
+            {
+                Component.Value = dataSource.SelectedValue();
+            }
 
             return this;
         }
