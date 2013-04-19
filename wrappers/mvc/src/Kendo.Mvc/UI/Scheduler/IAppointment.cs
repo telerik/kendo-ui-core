@@ -19,9 +19,10 @@ namespace Kendo.Mvc.UI
         //importance or color
         int Importance { get; set; }
 
-        bool Transparent { get; set; }
+        //resources
 
         //recurrence
-        //resources
+        RecurrenceRule RecurrenceRule { get; set; } //deserialize RRULE and create RecurrenceRule
+        DateTime? RecurrenceEnd { get; set; } // calculated by recurrence pattern ???
     }
 }
