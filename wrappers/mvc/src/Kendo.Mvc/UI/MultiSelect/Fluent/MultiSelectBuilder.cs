@@ -71,8 +71,11 @@ namespace Kendo.Mvc.UI.Fluent
             }
 
             Component.DataSource.Data = dataSource;
-            Component.Value = dataSource.Where(item => item.Selected == true)
-                                        .Select(item => item.Value ?? item.Text);
+            if (Component.Value == null)
+            {
+                Component.Value = dataSource.Where(item => item.Selected == true)
+                                            .Select(item => item.Value ?? item.Text);
+            }
 
             return this;
         }
