@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Barcode</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/kendo.dataviz.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.barcode.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="ean8"></div> 
+		<div class="splitter"></div>
+		<div id="code39"></div>
+		<div class="splitter"></div>
+		<div id="code128"></div>
+        <script>
+                $('#ean8').kendoBarcode({
+					value: "1234567",
+				    encoding: {
+						name: "ean8"
+					}
+                });
+				$('#code39').kendoBarcode({
+					value: "KUR",
+				    encoding: {
+						name: "code39"
+					}
+                })
+				
+				$('#code128').kendoBarcode({
+					value: "KUR",
+				    encoding: {
+						name: "code128"
+					}
+                })
+        </script>
+		<style>
+			.splitter{
+			     height:150px;
+			}
+		</style>
+    </body>
+</html>

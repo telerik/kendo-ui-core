@@ -31,12 +31,15 @@
                 baseUnit: this.baseUnit,
                 pattern: this.pattern
             };
-        },      
+        },  
+		options: {
+			quietZoneLength: 10
+		},		
         initValue: function (value, width, height) {
            
         },
         addQuietZone: function () { 
-            this.pattern.push([0, DEFAULT_QUIETZONE_LENGTH]);
+            this.pattern.push([0, this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH]);
         },
         addData: function () {
     
@@ -49,7 +52,7 @@
     encodings.code39 =  Encoding.extend({
         initValue: function (value, width, height) {
             this.baseUnit = this.getBaseUnit(value, width, height);
-            this.quietZoneLength = DEFAULT_QUIETZONE_LENGTH;
+            this.quietZoneLength = this.options.quietZoneLength;
             var minHeight = Math.max(0.15 * width, 24);
             if (height < minHeight) {
                 throw new Error("The specified height is not sufficient");
@@ -214,6 +217,86 @@
             
         }    
     });
+	
+	encodings.ean8 = Encoding.extend({
+		initValue: function(value, width, height){
+			this.pattern = [];
+			this.baseUnit = width /(67 + 2 * this.options.quietZoneLength);
+			this.value = value;
+		},
+		addData:  function(){
+			var checksum = this.calculateChecksum(this.value),
+				firstPart  = this.value.substr(0,4),
+				secondPart = this.value.substr(4) + checksum;
+				
+			this.addPattern("start");
+			for(var i = 0; i < firstPart.length; i++){
+				this.addPattern(firstPart.charAt(i), 0);
+			}
+			this.addPattern("middle");
+			 for(var i = 0; i < secondPart.length; i++){
+				 this.addPattern(secondPart[i], 1);
+			 }
+			this.addPattern("start");
+		},
+
+		addPattern: function(character, fromTable){
+			
+			var arrToAdd = fromTable !== undefined ? 
+				this.characterMap.characters[fromTable][character]: 
+				this.characterMap[character];
+				
+			for(var i=0;i<arrToAdd.length;i++){
+				this.pattern.push(arrToAdd[i]);
+			}	
+		},
+		calculateChecksum: function (){			
+			var odd = 0,
+				even = 0,
+				value = this.value;
+			
+			for(var i = 0;i < value.length;i++){
+				if(i%2){ 
+					even += parseInt(value[i]);
+				}
+				else{
+					odd += parseInt(value[i]);
+				}
+			}
+			var checksum = (10 - ((3*odd + even)%10))%10;
+			return checksum;    
+		},
+		characterMap: {
+			characters: [
+				[
+					[[SPACE,3],[BAR, 2],[SPACE,1], [BAR, 1]],
+					[[SPACE,2],[BAR, 2],[SPACE,2], [BAR, 1]],
+					[[SPACE,2],[BAR, 1],[SPACE,2], [BAR, 2]],
+					[[SPACE,1],[BAR, 4],[SPACE,1], [BAR, 1]],
+					[[SPACE,1],[BAR, 1],[SPACE,3], [BAR, 2]],
+					[[SPACE,1],[BAR, 2],[SPACE,3], [BAR, 1]],
+					[[SPACE,1],[BAR, 1],[SPACE,1], [BAR, 4]],
+					[[SPACE,1],[BAR, 3],[SPACE,1], [BAR, 2]],
+					[[SPACE,1],[BAR, 2],[SPACE,1], [BAR, 3]],
+					[[SPACE,3],[BAR, 1],[SPACE,1], [BAR, 2]]
+				],
+				[	
+					[[BAR,3],[SPACE, 2],[BAR,1], [SPACE, 1]],
+					[[BAR,2],[SPACE, 2],[BAR,2], [SPACE, 1]],
+					[[BAR,2],[SPACE, 1],[BAR,2], [SPACE, 2]],
+					[[BAR,1],[SPACE, 4],[BAR,1], [SPACE, 1]],
+					[[BAR,1],[SPACE, 1],[BAR,3], [SPACE, 2]],
+					[[BAR,1],[SPACE, 2],[BAR,3], [SPACE, 1]],
+					[[BAR,1],[SPACE, 1],[BAR,1], [SPACE, 4]],
+					[[BAR,1],[SPACE, 3],[BAR,1], [SPACE, 2]],
+					[[BAR,1],[SPACE, 2],[BAR,1], [SPACE, 3]],
+					[[BAR,3],[SPACE, 1],[BAR,1], [SPACE, 2]]
+				]
+			],
+			start: [[BAR,1],[SPACE, 1], [BAR, 1]],
+			middle: [[SPACE,1],[BAR, 1], [SPACE, 1],[BAR, 1],[SPACE, 1]]
+		}
+	});
 
     var Barcode = Widget.extend({
         init: function (element, options) {                                     
@@ -224,8 +307,8 @@
         },
         setOptions: function (options) {           
             if (!this.enocoding || ( options.encoding.name && this.options.encoding.name !== 
-                    options.encoding.name.toLowerCase())){
-                 this.encoding = new encodings[this.options.encoding.name.toLowerCase()](options.encoding);
+                options.encoding.name.toLowerCase())){
+                this.encoding = new encodings[this.options.encoding.name.toLowerCase()](options.encoding);
             }
             this.options = $.extend(this.options, options);           
             this.value(this.options.value);
