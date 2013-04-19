@@ -287,8 +287,7 @@
                 equal(dom.find("li").data("uid"), listView.dataSource.view()[0].uid);
             });
 
-            test("databound item passes the dataitem in the event when clicked", function() {
-                expect(1);
+            test("databound item passes the dataitem in the event when clicked", 1, function() {
                 var model = {foo: "bar"},
                     link,
                         dataSource = { data: [model]};

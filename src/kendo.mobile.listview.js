@@ -160,6 +160,56 @@ kendo_module({
         },
     });
 
+    var DEFAULT_PULL_PARAMETERS = function() {
+        return { page: 1 };
+    };
+
+    var RefreshHandler = kendo.Class.extend({
+        init: function(listView) {
+            var that = this,
+                scroller = listView.scroller(),
+                options = listView.options,
+                dataSource = listView.dataSource,
+                pullParameters = options.pullParameters || DEFAULT_PULL_PARAMETERS;
+
+            scroller.setOptions({
+                pullToRefresh: true,
+                pull: function() {
+                    that._pulled = true;
+                    dataSource.read(pullParameters.call(listView, that._first));
+                },
+                pullTemplate: options.pullTemplate,
+                releaseTemplate: options.releaseTemplate,
+                refreshTemplate: options.refreshTemplate
+            });
+
+            var element = listView.element[0];
+
+            listView.bind("dataBinding", function(e) {
+                var view = e.view,
+                    item;
+
+                if (!element.firstChild) {
+                    that._first = view[0];
+                }
+
+                if (that._pulled) {
+                    that._pulled = false;
+
+                    item = view[0];
+
+                    if (item) {
+                        that._first = item;
+                    }
+                }
+            });
+
+            listView.bind("dataBound", function() {
+                scroller.pullHandled();
+            });
+        }
+    });
+
 
     var ListView = Widget.extend({
         init: function(element, options) {
@@ -198,7 +248,12 @@ kendo_module({
 
             that._bindScroller();
 
+            if (that.options.pullToRefresh) {
+                that._refreshHandler = new RefreshHandler(this);
+            }
+
             that._headerFixer = new HeaderFixer(this);
+
 
             that._filterable();
 
@@ -333,7 +388,7 @@ kendo_module({
 
             that._cacheDataItems(view);
 
-            that.trigger("dataBinding");
+            that.trigger("dataBinding", { view: view });
 
             groups = dataSource.group();
 
@@ -366,10 +421,6 @@ kendo_module({
                 that._toggleLoader(false);
             }
 
-            if (options.pullToRefresh) {
-                that.scroller().pullHandled();
-            }
-
             that._hideLoading();
 
             that._style();
@@ -400,17 +451,8 @@ kendo_module({
             var that = this, item;
 
             if (!that.element[0].firstChild) {
-                that._firstOrigin = that._first = view[0];
+                that._firstOrigin = view[0];
                 that._last = view[view.length - 1];
-            }
-
-            if (that._pulled) {
-                item = view[0];
-                that._pulled = false;
-
-                if (item) {
-                    that._first = item;
-                }
             }
 
             if (that.loading) {
@@ -532,26 +574,6 @@ kendo_module({
 
             if (!scroller) {
                 return;
-            }
-
-            if (options.pullToRefresh) {
-                scroller.setOptions({
-                    pullToRefresh: true,
-                    pull: function() {
-                        var callback = options.pullParameters,
-                            params = { page: 1 };
-
-                        if (callback) {
-                            params = callback.call(that, that._first);
-                        }
-
-                        that._pulled = true;
-                        that.dataSource.read(params);
-                    },
-                    pullTemplate: options.pullTemplate,
-                    releaseTemplate: options.releaseTemplate,
-                    refreshTemplate: options.refreshTemplate
-                });
             }
 
             if (options.endlessScroll) {

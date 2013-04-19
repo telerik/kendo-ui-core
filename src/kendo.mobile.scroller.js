@@ -135,7 +135,6 @@ kendo_module({
 
         _end: function() {
             this.tapCapture.cancelCapture();
-            console.log(this.end);
             this.end();
         },
 
@@ -336,7 +335,7 @@ kendo_module({
             zoom: false,
             pullOffset: 140,
             elastic: true,
-            virtual: true,
+            virtual: false,
             useNative: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
