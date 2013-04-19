@@ -847,7 +847,7 @@
 
                     listview.data("kendoMobileListView").stopEndlessScrolling();
 
-                    var scroller = listview.data("kendoMobileListView")._scroller();
+                    var scroller = listview.data("kendoMobileListView").scroller();
 
                     equal(scroller._events["resize"][0], undefined);
                     ok(scroller._events["scroll"].length < 2);

@@ -25,6 +25,7 @@ kendo_module({
         SEARCH_TEMPLATE = kendo.template('<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
         NS = ".kendoMobileListView",
         LAST_PAGE_REACHED = "lastPageReached",
+        STYLED = "styled",
         CLICK = "click",
         CHANGE = "change",
         PROGRESS = "progress",
@@ -76,6 +77,90 @@ kendo_module({
         label.addClass("km-listview-label");
     }
 
+    var HeaderFixer = kendo.Class.extend({
+        init: function(listView) {
+            var that = this,
+                scroller = listView.scroller();
+
+            if (!scroller) {
+                return;
+            }
+
+            that.options = listView.options;
+            that.element = listView.element;
+            that.scroller = listView.scroller();
+            that._shouldFixHeaders();
+
+            var cacheHeaders = function() {
+                that._cacheHeaders();
+            };
+
+            kendo.onResize(cacheHeaders);
+
+            listView.bind(STYLED, cacheHeaders)
+
+            scroller.bind("scroll", function(e) {
+                that._fixHeader(e);
+            });
+        },
+
+        _fixHeader: function(e) {
+            if (!this.fixedHeaders) {
+                return;
+            }
+
+            var i = 0,
+                that = this,
+                scroller = that.scroller,
+                scrollTop = e.scrollTop,
+                headers = that.headers,
+                headerPair,
+                offset,
+                header;
+
+            do {
+                headerPair = headers[i++];
+                if (!headerPair) {
+                    header = $("<div />");
+                    break;
+                }
+                offset = headerPair.offset;
+                header = headerPair.header;
+            } while (offset > scrollTop);
+
+            if (that.currentHeader != i) {
+                scroller.fixedContainer.html(header.clone());
+                that.currentHeader = i;
+            }
+        },
+
+        _shouldFixHeaders: function() {
+            this.fixedHeaders = this.options.type === "group" && this.options.fixedHeaders;
+        },
+
+        _cacheHeaders: function() {
+            this._shouldFixHeaders();
+
+            if (!this.fixedHeaders) {
+                return;
+            }
+
+            var headers = [];
+
+            this.element.find("." + GROUP_CLASS).each(function(_, header) {
+                header = $(header);
+                headers.unshift({
+                    offset: header.position().top,
+                    header: header
+                });
+            });
+
+            this.headers = headers;
+            this._fixHeader({scrollTop: 0});
+        },
+    });
+
+
     var ListView = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -113,7 +198,7 @@ kendo_module({
 
             that._bindScroller();
 
-            that._fixHeaders();
+            that._headerFixer = new HeaderFixer(this);
 
             that._filterable();
 
@@ -129,6 +214,7 @@ kendo_module({
         events: [
             CLICK,
             "dataBound",
+            STYLED,
             LAST_PAGE_REACHED
         ],
 
@@ -281,12 +367,11 @@ kendo_module({
             }
 
             if (options.pullToRefresh) {
-                that._scroller().pullHandled();
+                that.scroller().pullHandled();
             }
 
             that._hideLoading();
 
-            that._shouldFixHeaders();
             that._style();
 
             that._invalidateLoadMore();
@@ -347,7 +432,7 @@ kendo_module({
 
         initEndlessScrolling: function() {
             this._stopLoadMore = false;
-            this._scroller().setOptions({
+            this.scroller().setOptions({
                 resize: this._scrollerResize,
                 scroll: this._scrollerScroll
             });
@@ -355,7 +440,7 @@ kendo_module({
 
         stopEndlessScrolling: function() {
             var that = this,
-                scroller = that._scroller();
+                scroller = that.scroller();
 
            if (scroller && that._loadIcon) {
                that.loading = false;
@@ -440,80 +525,10 @@ kendo_module({
             }
         },
 
-        _fixHeader: function(e) {
-            if (this.fixedHeaders) {
-                var i = 0,
-                    that = this,
-                    scroller = that._scroller(),
-                    scrollTop = e.scrollTop,
-                    headers = that.headers,
-                    headerPair,
-                    offset,
-                    header;
-
-                do {
-                    headerPair = headers[i++];
-                    if (!headerPair) {
-                        header = $("<div />");
-                        break;
-                    }
-                    offset = headerPair.offset;
-                    header = headerPair.header;
-                } while (offset > scrollTop);
-
-                if (that.currentHeader != i) {
-                    scroller.fixedContainer.html(header.clone());
-                    that.currentHeader = i;
-                }
-            }
-        },
-
-        _shouldFixHeaders: function() {
-            this.fixedHeaders = this.options.type === "group" && this.options.fixedHeaders;
-        },
-
-        _cacheHeaders: function() {
-            var that = this,
-                headers = [];
-
-            if (that.fixedHeaders) {
-                that.element.find("." + GROUP_CLASS).each(function(_, header) {
-                    header = $(header);
-                    headers.unshift({
-                        offset: header.position().top,
-                        header: header
-                    });
-                });
-
-                that.headers = headers;
-                that._fixHeader({scrollTop: 0});
-            }
-        },
-
-        _fixHeaders: function() {
-            var that = this,
-                scroller = that._scroller(),
-                cacheHeadersProxy = function() {
-                    that._cacheHeaders();
-                };
-
-            that._shouldFixHeaders();
-
-            that.container().bind("show", cacheHeadersProxy);
-
-            if (scroller) {
-                kendo.onResize(cacheHeadersProxy);
-
-                scroller.bind("scroll", function(e) {
-                    that._fixHeader(e);
-                });
-            }
-        },
-
         _bindScroller: function() {
             var that = this,
                 options = that.options,
-                scroller = that._scroller();
+                scroller = that.scroller();
 
             if (!scroller) {
                 return;
@@ -557,7 +572,7 @@ kendo_module({
 
         _calcThreshold: function() {
             var that = this,
-                scroller = that._scroller();
+                scroller = that.scroller();
 
             if (scroller) {
                 that._threshold = scroller.scrollHeight() - that.options.scrollThreshold;
@@ -665,7 +680,7 @@ kendo_module({
                 element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
             }
 
-            that._cacheHeaders();
+            that.trigger(STYLED);
         },
 
         _enhanceItems: function() {
@@ -731,7 +746,7 @@ kendo_module({
             }
         },
 
-        _scroller: function() {
+        scroller: function() {
             var that = this, view;
 
             if (!that._scrollerInstance) {

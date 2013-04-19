@@ -31,6 +31,9 @@
                 top: 0;
                 left: 0;
                 width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
             }
 
             .loading {
@@ -93,8 +96,8 @@
     </head>
     <body>
         <div data-role="view" data-init="buildVirtual">
-            <div data-role="virtuallist" data-template="item-template" data-source="ds" style="-webkit-transform:translatez(0)">
-            </div>
+            <ul data-role="virtuallist" data-template="item-template" data-source="ds" style="-webkit-transform:translatez(0)">
+            </ul>
         </div>
 
         <div data-role="view" id="foo" data-transition="slide">
@@ -249,7 +252,7 @@
 
             var Cell = kendo.Class.extend({
                 init: function(container) {
-                    this.element = $("<div class='virtual-cell' />");
+                    this.element = $("<li class='virtual-cell' />");
                     container.append(this.element);
                     this.top = 0;
                 },
