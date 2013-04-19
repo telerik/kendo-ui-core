@@ -3496,20 +3496,18 @@ kendo_module({
             point.reflow();
         },
 
-        reflow: CategoricalChart.fn.reflow,
-        reflowCategories: $.noop
+        reflow: CategoricalChart.fn.reflow
     });
 
     var RadarClusterLayout = ChartElement.extend({
         options: {
-            gap: 0,
+            gap: 1,
             spacing: 0
         },
 
-        reflow: function() {
+        reflow: function(sector) {
             var cluster = this,
                 options = cluster.options,
-                sector = cluster.sector,
                 children = cluster.children,
                 gap = options.gap,
                 spacing = options.spacing,
@@ -3517,15 +3515,18 @@ kendo_module({
                 slots = count + gap + (spacing * (count - 1)),
                 slotAngle = sector.angle / slots,
                 slotSector,
-                angle = sector.startAngle,
+                angle = sector.startAngle + slotAngle * (gap / 2),
                 i;
 
             for (i = 0; i < count; i++) {
                 slotSector = sector.clone();
                 slotSector.startAngle = angle;
                 slotSector.angle = slotAngle;
+
+                children[i].reflow(slotSector);
                 children[i].sector = slotSector;
-                angle += slotAngle;
+
+                angle += slotAngle + (slotAngle * spacing);
             }
         }
     });
@@ -10152,7 +10153,9 @@ kendo_module({
         PieChart: PieChart,
         PiePlotArea: PiePlotArea,
         PieSegment: PieSegment,
+        RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
+        RadarClusterLayout: RadarClusterLayout,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,

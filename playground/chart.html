@@ -20,6 +20,11 @@
         <script>
             $(function() {
                 $("#chart").kendoChart({
+                    seriesDefaults: {
+                        // TODO: Apply
+                        gap: 0,
+                        spacing: 0
+                    },
                     series: [{
                         type: "radarColumn",
                         data: [1, 2, 3],
@@ -29,7 +34,7 @@
                             visible: false
                         }
                     }, {
-                        type: "radarLine",
+                        type: "radarColumn",
                         data: [1.5, 2.5, 3.5]
                     }],
                     categoryAxis: {
