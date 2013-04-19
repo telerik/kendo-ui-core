@@ -19,7 +19,7 @@
 
 % events.each do |event|
     <tag>
-        <description><%= event.description %></description>
+        <description><%= event.description.html_encode %></description>
         <name><%= event.tag_name %></name>
         <tag-class>com.kendoui.taglib.<%= event.namespace %>.<%= event.tag_class %></tag-class>
         <body-content>JSP</body-content>
