@@ -11,6 +11,7 @@ kendo_module({
         ui = kendo.ui,
         Widget = ui.Widget,
         extend = $.extend,
+        oldIE = kendo.support.browser.msie && kendo.support.browser.version < 9,
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
@@ -272,7 +273,10 @@ kendo_module({
                 errorTemplate: that.options.errorTemplate || undefined,
                 rules: rules }).data("kendoValidator");
 
-            container.find(":focusable:first").focus();
+            var focusable = container.find(":focusable:first").focus();
+            if (oldIE) {
+                focusable.focus();
+            }
         }
    });
 

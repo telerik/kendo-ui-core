@@ -2136,7 +2136,7 @@ kendo_module({
             if (that.editable) {
                 if ($.contains(editContainer[0], active[0])) {
                     if (browser.opera || oldIE) {
-                        active.change();
+                        active.change().triggerHandler("blur");
                     } else {
                         active.blur();
                         if (isIE) {
@@ -2177,6 +2177,9 @@ kendo_module({
                 that.current(next);
             }
 
+            if (oldIE) {
+                document.body.focus();
+            }
             focusTable(that.table, true);
             if ((!isEdited && !next) || next) {
                 if (mode == "incell") {
