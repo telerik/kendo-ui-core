@@ -22,9 +22,6 @@
     <script src="../../src/kendo.mobile.scrollview.js"></script>
 
     <style>
-        #virtual {
-            padding: 5em 0;
-        }
         .km-pageview {
             overflow: hidden;
             white-space: nowrap;
@@ -33,16 +30,13 @@
         }
         .virtual-page {
             min-height: 1px;
+            height: 100%;
             position: absolute;
+            overflow: hidden;
         }
 
         .item-image {
-            height: 200px;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: 50px 50px;
-            -webkit-box-shadow: inset 0 0 10px #000000;
-            box-shadow:         inset 0 0 10px #000000;
+            min-width:100%;
         }
 
     </style>
@@ -53,7 +47,8 @@
     </div>
 
     <script type="text/x-kendo-template" id="item-template">
-        <div class="item-image" style="background-image: url(#: data.thumbnail #)">
+        <div>
+            #= buildUrl(data.url) #
         </div>
     </script>
 
@@ -61,10 +56,14 @@
         var app,
             pageView,
             PAGE_SIZE = 10,
+            imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
+            imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
+            imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
+            imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
             ds = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: 'http://www.reddit.com/r/aww.json',
+                        url: 'http://www.reddit.com/r/pics/.json',
                         dataType: 'jsonp',
                         jsonp: 'jsonp',
                         cache: true,
@@ -95,10 +94,28 @@
 
         function onInit(e) {
             pageView = $("#virtual").kendoMobilePageView({
-                contentHeight: "300px",
+                contentHeight: e.view.content.height(),
                 dataSource: ds,
                 template: kendo.template($("#item-template").html())
             }).data("kendoMobilePageView");
+        }
+
+        function buildUrl(url) {
+            var link = url;
+
+            if(!link.match(imgExtensionRegex)) {
+                link = link.concat(".jpg");
+            }
+
+            if(link.match(imgurAlbumRegex)) {
+                return '<span style="color: red">Imgur Album...</span>'
+            }
+
+            if(link.match(imgurGalleryRegex)) {
+                return '<span style="color: red">Imgur Gallery...</span>'
+            }
+
+            return '<img class="item-image" src="' + link + '" />';
         }
 
         (function($, undefined) {
