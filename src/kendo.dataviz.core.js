@@ -394,21 +394,16 @@ kendo_module({
                 endAngle = ring.startAngle + ring.angle,
                 dx = p.x - c.x,
                 dy = p.y - c.y,
-                relPoint = new Point2D(dx, dy),
+                vector = new Point2D(dx, dy),
                 startPoint = ring.point(startAngle),
-                relStartPoint = new Point2D(startPoint.x - c.x, startPoint.y - c.y),
+                startVector = new Point2D(startPoint.x - c.x, startPoint.y - c.y),
                 endPoint = ring.point(endAngle),
-                relEndPoint = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
+                endVector = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
+                // Reverse direction and move origin to 9 o'clock
                 angle = (270 - (math.atan2(dx, dy) / DEG_TO_RAD)) % 360,
                 dist = dx * dx + dy *dy;
 
-            function clockwise(v1, v2) {
-                // Note that this is checking for counter-clockwise vectors in geometric terms.
-                // Ring rotation direction is reversed.
-                return -v1.x * v2.y + v1.y * v2.x < 0;
-            }
-
-            return clockwise(relStartPoint, relPoint) && !clockwise(relEndPoint, relPoint) &&
+            return clockwise(startVector, vector) && !clockwise(endVector, vector) &&
                    dist >= ir * ir && dist <= r * r;
         },
 
@@ -2929,6 +2924,13 @@ kendo_module({
         }
 
         return parent !== doc;
+    }
+
+    function clockwise(v1, v2) {
+        // True if v2 is clockwise of v1
+        // assuming angles grow in clock-wise direction
+        // (as in the pie and radar charts)
+        return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
     // Exports ================================================================

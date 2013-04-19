@@ -408,16 +408,16 @@
                     }
                 });
 
-                test("returns first category for righttmost point", function() {
-                    equal(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
+                test("returns first category for innermost point", function() {
+                    equal(axis.getCategory(new Point2D(300, 299)), "Foo");
                 });
 
-                test("returns last category for leftmost point", function() {
-                    equal(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                test("returns second category for innermost point", function() {
+                    equal(axis.getCategory(new Point2D(299, 300)), "Bar");
                 });
 
-                test("returns category for middle point", function() {
-                    equal(categoryAxis.getCategory(new Point2D(464, 0)), "Bar");
+                test("returns third category for innermost point", function() {
+                    equal(axis.getCategory(new Point2D(301, 300)), "Baz");
                 });
 
             })();
