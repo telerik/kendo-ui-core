@@ -3,7 +3,7 @@ kendo_module({
     name: "ASP.NET MVC",
     category: "wrappers",
     description: "Scripts required by Kendo UI for ASP.NET MVC",
-    depends: [ "data" ]
+    depends: [ "data, combobox, multiselect, validator" ] //define all dependencies here because all files are combined in kendo.aspnetmvc.js
 });
 
 (function ($, undefined) {
