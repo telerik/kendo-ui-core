@@ -479,6 +479,7 @@ kendo_module({
     var SVGRing = SVGPath.extend({
         init: function(config, options) {
             var ring = this;
+
             SVGPath.fn.init.call(ring, options);
 
             ring.pathTemplate = SVGRing.pathTemplate;
@@ -512,7 +513,9 @@ kendo_module({
                 secondOuterPoint,
                 secondInnerPoint;
 
-            endAngle = (endAngle - startAngle) === 360 ? endAngle - 0.002 : endAngle;
+            if (round(startAngle) % 360 === round(endAngle) % 360) {
+                endAngle -= 0.05;
+            }
             secondOuterPoint = ringConfig.point(endAngle);
             secondInnerPoint = ringConfig.point(endAngle, true);
 
