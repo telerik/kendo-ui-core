@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
-  <description/>
+  <description></description>
   <logRotator>
     <daysToKeep>2</daysToKeep>
     <numToKeep>10</numToKeep>
@@ -9,16 +10,16 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.4">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.5">
       <projectUrl>https://github.com/telerik/kendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.3.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name/>
-        <refspec/>
+        <name></name>
+        <refspec></refspec>
         <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -43,29 +44,29 @@
       <url>https://github.com/telerik/kendo/</url>
     </browser>
     <submoduleCfg class="list"/>
-    <relativeTargetDir/>
-    <reference/>
-    <excludedRegions/>
-    <excludedUsers/>
-    <gitConfigName/>
-    <gitConfigEmail/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
     <skipTag>false</skipTag>
-    <includedRegions/>
-    <scmName/>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-        <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; bundle exec rake cdn:deploy</command>
+      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; bundle exec rake cdn:deploy</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.4">
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.plugins.campfire.CampfireNotifier plugin="campfire@2.6">

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
   <description>Runs mobile selenium tests on android device</description>
   <logRotator>
@@ -14,8 +13,8 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name></name>
-        <refspec></refspec>
+        <name/>
+        <refspec/>
         <url>git@github.com:telerik/kendo-selenium.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -37,15 +36,15 @@
     <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
     <gitTool>Default</gitTool>
     <submoduleCfg class="list"/>
-    <relativeTargetDir></relativeTargetDir>
-    <reference></reference>
-    <excludedRegions></excludedRegions>
-    <excludedUsers></excludedUsers>
-    <gitConfigName></gitConfigName>
-    <gitConfigEmail></gitConfigEmail>
+    <relativeTargetDir/>
+    <reference/>
+    <excludedRegions/>
+    <excludedUsers/>
+    <gitConfigName/>
+    <gitConfigEmail/>
     <skipTag>false</skipTag>
-    <includedRegions></includedRegions>
-    <scmName></scmName>
+    <includedRegions/>
+    <scmName/>
   </scm>
   <assignedNode>master</assignedNode>
   <canRoam>false</canRoam>
@@ -79,8 +78,8 @@
       <useSnapshots>false</useSnapshots>
       <deleteAfterBuild>false</deleteAfterBuild>
       <startupDelay>0</startupDelay>
-      <commandLineOptions></commandLineOptions>
-      <executable></executable>
+      <commandLineOptions/>
+      <executable/>
     </hudson.plugins.android__emulator.AndroidEmulator>
   </buildWrappers>
 </project>

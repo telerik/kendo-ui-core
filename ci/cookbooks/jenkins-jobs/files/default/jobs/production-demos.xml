@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
   <description>Update the demos on http://mvc-kendobuild/production/ </description>
   <logRotator>
@@ -9,16 +10,16 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.4">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.5">
       <projectUrl>https://github.com/telerik/kendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.3.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name/>
-        <refspec/>
+        <name></name>
+        <refspec></refspec>
         <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -43,15 +44,15 @@
       <url>https://github.com/telerik/kendo/</url>
     </browser>
     <submoduleCfg class="list"/>
-    <relativeTargetDir/>
-    <reference/>
-    <excludedRegions/>
-    <excludedUsers/>
-    <gitConfigName/>
-    <gitConfigEmail/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
     <skipTag>false</skipTag>
-    <includedRegions/>
-    <scmName/>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
   </scm>
   <assignedNode>master</assignedNode>
   <canRoam>false</canRoam>
@@ -63,6 +64,9 @@
   <builders>
     <hudson.tasks.Shell>
       <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; bundle exec rake build:production:demos;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>git reset --hard</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
