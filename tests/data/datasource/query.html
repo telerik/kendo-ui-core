@@ -226,6 +226,210 @@
                 stop(1);
             });
 
+            test("group original field name is used if projection is set", 2, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.group[0].field, "foo");
+                        equal(options.group[1].field, "baz");
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo",
+                                boo: "baz"
+                            }
+                        }
+                    },
+                    serverGrouping: true,
+                });
+
+                dataSource.group([{ field: "bar" }, { field: "boo" }]);
+            });
+
+            test("group with aggregates original field name is used if projection is set", 2, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.group[0].aggregates[0].field, "foo");
+                        equal(options.group[0].aggregates[1].field, "baz");
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo",
+                                boo: "baz"
+                            }
+                        }
+                    },
+                    serverGrouping: true,
+                });
+
+                dataSource.group({
+                    field: "bar",
+                    aggregates: [{
+                        field: "bar",
+                        aggregate: "count"
+                    },{
+                        field: "boo",
+                        aggregate: "count"
+                    }]
+                });
+            });
+
+            test("aggregates original field name is used if projection is set", 2, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.aggregate[0].field, "foo");
+                        equal(options.aggregate[1].field, "baz");
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo",
+                                boo: "baz"
+                            }
+                        }
+                    },
+                    serverAggregates: true,
+                });
+
+                dataSource.aggregate(
+                    [{
+                        field: "bar",
+                        aggregate: "count"
+                    },{
+                        field: "boo",
+                        aggregate: "count"
+                    }]);
+            });
+
+            test("filter original field name is used if projection is set", 2, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        console.log(options);
+                        equal(options.filter.filters[0].field, "foo");
+                        equal(options.filter.filters[1].field, "baz");
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo",
+                                boo: "baz"
+                            }
+                        }
+                    },
+                    serverFiltering: true
+                });
+
+                dataSource.filter({
+                    logic: "and",
+                    filters: [
+                        { field: "bar", operator: "eq", value: 1 },
+                        { field: "boo", operator: "eq", value: 1 },
+                        ]
+                    });
+            });
+
+            test("sort original field name is used if projection is set", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.sort[0].field, "foo");
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo"
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                });
+
+                dataSource.sort({ field: "bar", dir: "asc" });
+            });
+
+            test("sort original field name is used if projection is set via field definition", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.sort[0].field, "foo");
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: { field: "foo" }
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                });
+
+                dataSource.sort({ field: "bar", dir: "asc" });
+            });
+
+            test("sort original field name is used if projection is set field definiton without a field options", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.sort[0].field, "bar");
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: { type: "number" }
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                });
+
+                dataSource.sort({ field: "bar", dir: "asc" });
+            });
+
+
             test("next method gets the subsequent page", function() {
                 var dataSource = new DataSource({
                     data: [1,2,3],

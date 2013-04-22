@@ -1572,9 +1572,30 @@ kendo_module({
         return store[options]();
     };
 
-    function convertRecords(data, getters, modelInstance) {
+    function serializeRecords(data, getters, modelInstance, originalFieldNames, fieldNames) {
         var record,
             getter,
+            originalName,
+            idx,
+            length;
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            record = data[idx];
+            for (getter in getters) {
+                originalName = fieldNames[getter];
+
+                if (originalName && originalName !== getter) {
+                    record[originalName] = getters[getter](record);
+                    delete record[getter];
+                }
+            }
+        }
+    }
+
+    function convertRecords(data, getters, modelInstance, originalFieldNames, fieldNames) {
+        var record,
+            getter,
+            originalName,
             idx,
             length;
 
@@ -1582,28 +1603,40 @@ kendo_module({
             record = data[idx];
             for (getter in getters) {
                 record[getter] = modelInstance._parse(getter, getters[getter](record));
+
+                originalName = fieldNames[getter];
+                if (originalName && originalName !== getter) {
+                    delete record[originalName];
+                }
             }
         }
     }
 
-    function convertGroup(data, getters, modelInstance) {
+    function convertGroup(data, getters, modelInstance, originalFieldNames, fieldNames) {
         var record,
             idx,
+            fieldName,
             length;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             record = data[idx];
+
+            fieldName = originalFieldNames[record.field];
+            if (fieldName && fieldName != record.field) {
+                record.field = fieldName;
+            }
+
             record.value = modelInstance._parse(record.field, record.value);
 
             if (record.hasSubgroups) {
-                convertGroup(record.items, getters, modelInstance);
+                convertGroup(record.items, getters, modelInstance, originalFieldNames, fieldNames);
             } else {
-                convertRecords(record.items, getters, modelInstance);
+                convertRecords(record.items, getters, modelInstance, originalFieldNames, fieldNames);
             }
         }
     }
 
-    function wrapDataAccess(originalFunction, model, converter, getters) {
+    function wrapDataAccess(originalFunction, model, converter, getters, originalFieldNames, fieldNames) {
         return function(data) {
             data = originalFunction(data);
 
@@ -1612,7 +1645,7 @@ kendo_module({
                     data = [data];
                 }
 
-                converter(data, getters, new model());
+                converter(data, getters, new model(), originalFieldNames, fieldNames);
             }
 
             return data || [];
@@ -1640,22 +1673,41 @@ kendo_module({
             if (that.model) {
                 var dataFunction = proxy(that.data, that),
                     groupsFunction = proxy(that.groups, that),
-                    getters = {};
+                    serializeFunction = proxy(that.serialize, that),
+                    originalFieldNames = {},
+                    getters = {},
+                    serializeGetters = {},
+                    fieldNames = {},
+                    shouldSerialize = false,
+                    fieldName;
 
                 model = that.model;
 
                 if (model.fields) {
                     each(model.fields, function(field, value) {
+                        fieldName = field;
+
                         if (isPlainObject(value) && value.field) {
-                            getters[value.field] = getter(value.field);
-                        } else {
-                            getters[field] = getter(field);
+                            fieldName = value.field;
+                        } else if (typeof value === STRING) {
+                            fieldName = value;
                         }
+
+                        shouldSerialize = shouldSerialize || fieldName !== field;
+
+                        getters[field] = getter(fieldName);
+                        serializeGetters[field] = getter(field);
+                        originalFieldNames[fieldName] = field;
+                        fieldNames[field] = fieldName;
                     });
+
+                    if (!schema.serialize && shouldSerialize) {
+                        that.serialize = wrapDataAccess(serializeFunction, model, serializeRecords, serializeGetters, originalFieldNames, fieldNames);
+                    }
                 }
 
-                that.data = wrapDataAccess(dataFunction, model, convertRecords, getters);
-                that.groups = wrapDataAccess(groupsFunction, model, convertGroup, getters);
+                that.data = wrapDataAccess(dataFunction, model, convertRecords, getters, originalFieldNames, fieldNames);
+                that.groups = wrapDataAccess(groupsFunction, model, convertGroup, getters, originalFieldNames, fieldNames);
             }
         },
         errors: function(data) {
@@ -1667,11 +1719,11 @@ kendo_module({
             return data.length;
         },
         groups: identity,
-        status: function(data) {
-            return data.status;
-        },
         aggregates: function() {
             return {};
+        },
+        serialize: function(data) {
+            return data;
         }
     });
 
@@ -1813,6 +1865,45 @@ kendo_module({
         }
 
         return -1;
+    }
+
+    function fieldNameFromModel(fields, name) {
+        if (fields) {
+            var descriptor = fields[name];
+            if (isPlainObject(descriptor)) {
+                return descriptor.field || name;
+            }
+            return fields[name];
+        }
+        return name;
+    }
+
+    function convertFilterDescriptorsField(descriptor, model) {
+        if (descriptor.filters && descriptor.filters.length) {
+            var idx,
+                length;
+
+            for (idx = 0, length = descriptor.filters.length; idx < length; idx++) {
+                convertFilterDescriptorsField(descriptor.filters[idx], model);
+            }
+        } else {
+            descriptor.field = fieldNameFromModel(model.fields, descriptor.field);
+        }
+    }
+
+    function convertDescriptorsField(descriptors, model) {
+        var idx,
+            length,
+            descriptor;
+
+        for (idx = 0, length = descriptors.length; idx < length; idx ++) {
+            descriptor = descriptors[idx];
+            descriptor.field = fieldNameFromModel(model.fields, descriptor.field);
+
+            if (descriptor.aggregates && isArray(descriptor.aggregates)) {
+                convertDescriptorsField(descriptor.aggregates, model);
+            }
+        }
     }
 
     var DataSource = Observable.extend({
@@ -2200,6 +2291,8 @@ kendo_module({
                 length,
                 promises = [];
 
+            data = that.reader.serialize(data);
+
             if (that.options.batch) {
                 if (data.length) {
                     promises.push(that._promise( { data: { models: toJSON(data) } }, data , method));
@@ -2297,18 +2390,31 @@ kendo_module({
                 delete options.page;
                 delete options.pageSize;
             }
+
             if (!that.options.serverGrouping) {
                 delete options.group;
+            } else if (that.reader.model) {
+                convertDescriptorsField(options.group, that.reader.model);
             }
+
             if (!that.options.serverFiltering) {
                 delete options.filter;
+            } else if (that.reader.model) {
+                convertFilterDescriptorsField(options.filter, that.reader.model);
             }
+
             if (!that.options.serverSorting) {
                 delete options.sort;
+            } else if (that.reader.model) {
+                convertDescriptorsField(options.sort, that.reader.model);
             }
+
             if (!that.options.serverAggregates) {
                 delete options.aggregate;
+            } else if (that.reader.model) {
+                convertDescriptorsField(options.aggregate, that.reader.model);
             }
+
             return options;
         },
 
