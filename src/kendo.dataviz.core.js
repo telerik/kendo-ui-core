@@ -399,8 +399,6 @@ kendo_module({
                 startVector = new Point2D(startPoint.x - c.x, startPoint.y - c.y),
                 endPoint = ring.point(endAngle),
                 endVector = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
-                // Reverse direction and move origin to 9 o'clock
-                angle = (270 - (math.atan2(dx, dy) / DEG_TO_RAD)) % 360,
                 dist = dx * dx + dy *dy;
 
             return clockwise(startVector, vector) && !clockwise(endVector, vector) &&

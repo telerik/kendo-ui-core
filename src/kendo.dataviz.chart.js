@@ -3450,7 +3450,7 @@ kendo_module({
                 segmentOptions, value, category, categoryIx, series
             );
 
-            segment = new PieSegment(value, null, segmentOptions);
+            segment = new RadarSegment(value, null, segmentOptions);
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -3523,6 +3523,10 @@ kendo_module({
                 slotSector.startAngle = angle;
                 slotSector.angle = slotAngle;
 
+                if (children[i].sector) {
+                    slotSector.r = children[i].sector.r;
+                }
+
                 children[i].reflow(slotSector);
                 children[i].sector = slotSector;
 
@@ -3532,20 +3536,25 @@ kendo_module({
     });
 
     var RadarStackLayout = ChartElement.extend({
-        reflow: function() {
+        reflow: function(sector) {
             var stack = this,
                 children = stack.children,
                 childrenCount = children.length,
-                sector,
+                childSector,
                 prevSector,
                 i;
 
-            for (i = 1; i < childrenCount; i++) {
-                sector = children[i].sector;
-                prevSector = children[i - 1].sector;
+            stack.box = new Box2D();
 
-                sector.ir += prevSector.r;
-                sector.r += prevSector.r;
+            for (i = 0; i < childrenCount; i++) {
+                childSector = children[i].sector;
+                childSector.startAngle = sector.startAngle;
+                childSector.angle = sector.angle;
+
+                if (i > 0) {
+                    prevSector = children[i - 1].sector;
+                    childSector.ir = prevSector.ir + prevSector.r;
+                }
             }
         }
     });
@@ -6126,6 +6135,14 @@ kendo_module({
     });
     deepExtend(DonutSegment.fn, PointEventsMixin);
 
+    var RadarSegment = DonutSegment.extend({
+        options: {
+            overlay: {
+                gradient: null
+            }
+        }
+    });
+
     var DonutChart = PieChart.extend({
         options: {
             startAngle: 90,
@@ -8160,7 +8177,6 @@ kendo_module({
                 value;
 
             category = plotArea.categoryAxis.getCategory(point);
-            console.log(category);
 
             // TODO: Test
             if (defined(category) && defined(value)) {
@@ -10156,6 +10172,7 @@ kendo_module({
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,
+        RadarStackLayout: RadarStackLayout,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,

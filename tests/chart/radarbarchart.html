@@ -41,18 +41,16 @@
 
             (function() {
                 var cluster,
-                    segments,
-                    clusterSector = new Ring(new Point2D(0, 0), 100, 0, 90, 90),
-                    segmentSector = new Ring(new Point2D(0, 0), 10, 0, 90, 90),
                     s1,
                     s2;
 
                 function createCluster(options) {
-                    cluster = new dataviz.RadarClusterLayout(options);
+                    var segmentSector = new Ring(new Point2D(0, 0), 0, 10, 90, 90),
                     segments = [ new SegmentStub(segmentSector), new SegmentStub(segmentSector) ];
 
+                    cluster = new dataviz.RadarClusterLayout(options);
                     [].push.apply(cluster.children, segments);
-                    cluster.reflow(clusterSector);
+                    cluster.reflow(new Ring(new Point2D(0, 0), 0, 100, 90, 90));
 
                     s1 = segments[0].sector;
                     s2 = segments[1].sector;
@@ -63,6 +61,11 @@
                     setup: function() {
                         createCluster({ gap: 0 });
                     }
+                });
+
+                test("retains children radius", function() {
+                    equal(s1.r, 10);
+                    equal(s2.r, 10);
                 });
 
                 test("distributes width evenly", function() {
@@ -91,121 +94,56 @@
 
             })();
 
-            /*
             (function() {
                 var stack,
-                    stackBox = new Box2D(50, 50, 100, 100);
+                    segments,
+                    s1,
+                    s2;
+
+                function createStack(options) {
+                    var segmentSector = new Ring(new Point2D(0, 0), 0, 10, 90, 90);
+                    segments = [ new SegmentStub(segmentSector), new SegmentStub(segmentSector) ];
+
+                    stack = new dataviz.RadarStackLayout(options);
+                    [].push.apply(stack.children, segments);
+
+                    stack.reflow(new Ring(new Point2D(0, 0), 0, 100, 110, 70));
+
+                    s1 = segments[0].sector;
+                    s2 = segments[1].sector;
+                }
 
                 // ------------------------------------------------------------
-                module("Stack Layout / Vertical", {
+                module("Stack Layout", {
                     setup: function() {
-                        stack = new dataviz.StackLayout();
-
-                        stack.children.push(
-                            new BarStub(new Box2D(0, 90, 100, 100)),
-                            new BarStub(new Box2D(0, 80, 100, 100)),
-                            new BarStub(new Box2D(0, 70, 100, 100))
-                        );
-
-                        stack.reflow(stackBox);
+                        createStack();
                     }
                 });
 
-                test("first bar remains at its position", function() {
-                    equal(stack.children[0].box.y1, 90);
+                test("first sector radius is not changed", function() {
+                    equal(s1.r, 10);
                 });
 
-                test("first bar height is not changed", function() {
-                    equal(stack.children[0].box.height(), 10);
+                test("first sector is fitted in sector segment", function() {
+                    equal(s1.startAngle, 110);
+                    equal(s1.angle, 70);
                 });
 
-                test("second bar is placed on top of the first", function() {
-                    equal(stack.children[1].box.y2, stack.children[0].box.y1);
+                test("second sector radius is not changed", function() {
+                    equal(s2.r, 10);
                 });
 
-                test("second bar height is not changed", function() {
-                    equal(stack.children[1].box.height(), 20);
+                test("second sector is fitted in sector segment", function() {
+                    equal(s1.startAngle, 110);
+                    equal(s1.angle, 70);
                 });
 
-                test("third bar is placed on top of the second", function() {
-                    equal(stack.children[2].box.y2, stack.children[1].box.y1);
+                test("second sector inner radius equals first sector radius", function() {
+                    equal(s2.ir, 10);
                 });
-
-                test("third bar height is not changed", function() {
-                    equal(stack.children[2].box.height(), 30);
-                });
-
-                test("reports final box after layout", function() {
-                    deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                         [50, 40, 100, 100]);
-                });
-
-                test("updates children width to fit box", function() {
-                    equal(stack.children[0].box.width(), stackBox.width());
-                    equal(stack.children[1].box.width(), stackBox.width());
-                });
-
-                test("updates children X position to match targetBox", function() {
-                    equal(stack.children[0].box.x1, stackBox.x1);
-                    equal(stack.children[1].box.x1, stackBox.x1);
-                });
-
-                // ------------------------------------------------------------
-                module("Stack Layout / Vertical / Reversed", {
-                    setup: function() {
-                        stack = new dataviz.StackLayout({ isReversed: true });
-
-                        stack.children.push(
-                            new BarStub(new Box2D(0, 90, 100, 100)),
-                            new BarStub(new Box2D(0, 80, 100, 100)),
-                            new BarStub(new Box2D(0, 70, 100, 100))
-                        );
-
-                        stack.reflow(stackBox);
-                    }
-                });
-
-                test("first bar remains at its position", function() {
-                    equal(stack.children[0].box.y1, 90);
-                });
-
-                test("first bar height is not changed", function() {
-                    equal(stack.children[0].box.height(), 10);
-                });
-
-                test("second bar is placed below the first", function() {
-                    equal(stack.children[1].box.y1, stack.children[0].box.y2);
-                });
-
-                test("second bar height is not changed", function() {
-                    equal(stack.children[1].box.height(), 20);
-                });
-
-                test("third bar is placed below the second", function() {
-                    equal(stack.children[2].box.y1, stack.children[1].box.y2);
-                });
-
-                test("third bar height is not changed", function() {
-                    equal(stack.children[2].box.height(), 30);
-                });
-
-                test("reports final box after layout", function() {
-                    deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                         [50, 90, 100, 150]);
-                });
-
-                test("updates children width to fit box", function() {
-                    equal(stack.children[0].box.width(), stackBox.width());
-                    equal(stack.children[1].box.width(), stackBox.width());
-                });
-
-                test("updates children X position to match targetBox", function() {
-                    equal(stack.children[0].box.x1, stackBox.x1);
-                    equal(stack.children[1].box.x1, stackBox.x1);
-                });
-
             })();
 
+            /*
             function setupBarChart(plotArea, options) {
                 view = new ViewStub();
 
