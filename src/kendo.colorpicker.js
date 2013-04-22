@@ -184,7 +184,7 @@ kendo_module({
                 } else {
                     throw new Error("Unsupported value for the 'tileSize' argument");
                 }
-                element.find(".k-item").css({ width: width - 1, height: height - 1 });
+                element.find(".k-item").css({ width: width - 2, height: height - 2 });
             }
 
             if (options.columns) {
