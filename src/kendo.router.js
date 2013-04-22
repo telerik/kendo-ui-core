@@ -226,6 +226,7 @@ kendo_module({
         init: function(options) {
             Observable.fn.init.call(this);
             this.routes = [];
+            this.pushState = options.pushState;
             this.bind([INIT, ROUTE_MISSING, CHANGE], options);
         },
 
@@ -240,7 +241,11 @@ kendo_module({
                     that._urlChanged(e);
                 };
 
-            history.start({ change: urlChangedProxy });
+            history.start({
+                change: urlChangedProxy,
+                pushState: that.pushState
+            });
+
             var initEventObject = { url: history.current || "/" };
 
             if (!that.trigger(INIT, initEventObject)) {

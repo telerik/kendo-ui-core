@@ -181,6 +181,7 @@ kendo_module({
             var that = this,
                 initial = that.options.initial,
                 router = new kendo.Router({
+                    pushState: that.options.pushState,
                     init: function(e) {
                         var url = e.url;
 
