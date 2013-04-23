@@ -328,6 +328,22 @@
                 deepEqual(point.rotate(new Point2D(0, 0), 90), point);
             });
 
+            test("equals is true for same coordinates", function() {
+                ok(new Point2D(1, 1).equals(new Point2D(1, 1)));
+            });
+
+            test("equals is false for different x coordinates", function() {
+                ok(!new Point2D(1, 1).equals(new Point2D(2, 1)));
+            });
+
+            test("equals is false for different y coordinates", function() {
+                ok(!new Point2D(1, 1).equals(new Point2D(1, 2)));
+            });
+
+            test("equals is false for undefined point", function() {
+                ok(!new Point2D(1, 1).equals());
+            });
+
             (function() {
                 var sector;
 
@@ -430,7 +446,7 @@
                 });
 
                 test("containsPoint for inner start point", function() {
-                    point = ring.point(90, true);
+                    point = ring.point(90.01, true);
                     ok(ring.containsPoint(point));
                 });
 

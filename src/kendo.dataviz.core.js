@@ -82,6 +82,7 @@ kendo_module({
 
     // Geometric primitives ===================================================
 
+    // TODO: Rename to Point?
     var Point2D = function(x, y) {
         var point = this;
         if (!(point instanceof Point2D)) {
@@ -97,6 +98,10 @@ kendo_module({
             var point = this;
 
             return new Point2D(point.x, point.y);
+        },
+
+        equals: function(point) {
+            return point && point.x === this.x && point.y === this.y;
         },
 
         rotate: function(center, degrees) {
@@ -401,7 +406,8 @@ kendo_module({
                 endVector = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
                 dist = dx * dx + dy *dy;
 
-            return clockwise(startVector, vector) && !clockwise(endVector, vector) &&
+            return (startVector.equals(vector) || clockwise(startVector, vector)) &&
+                   !clockwise(endVector, vector) &&
                    dist >= ir * ir && dist <= r * r;
         },
 
