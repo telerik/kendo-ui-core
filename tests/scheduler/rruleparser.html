@@ -21,10 +21,213 @@
             var parser = kendo.rrule_parser;
 
             test("Parse FREQ property", function() {
-                var rrule = parser("FREQ=DAILY");
+                var rrule = parser("FREQ=daily");
 
                 equal(rrule.freq, "DAILY");
             });
+
+            test("Parse UNTIL property", function() {
+                var rrule = parser("FREQ=DaILY;UNTIL=19730429T070000Z");
+
+                equal(+rrule.until, new Date("1973-04-29T07:00:00Z").getTime());
+            });
+
+            test("Parse COUNT property", function() {
+                var rrule = parser("FREQ=DaILY;COUNT=10");
+
+                equal(rrule.count, 10);
+            });
+
+            test("Parse INTERVAL property", function() {
+                var rrule = parser("FREQ=DAILY;INTERVAL=3");
+
+                equal(rrule.interval, 3);
+            });
+
+            test("Parse BYSECOND property when value is single number", function() {
+                var rrule = parser("FREQ=SECONDLY;bysecond=1");
+
+                equal(rrule.seconds.length, 1);
+                equal(rrule.seconds[0], 1);
+            });
+
+            test("Parse BYSECOND property when value is a list of numbers", function() {
+                var rrule = parser("FREQ=SECONDLY;bysecond=1, 2, 3, 4");
+
+                equal(rrule.seconds.length, 4);
+                equal(rrule.seconds[0], 1);
+                equal(rrule.seconds[1], 2);
+                equal(rrule.seconds[2], 3);
+                equal(rrule.seconds[3], 4);
+            });
+
+            test("Parse BYSECOND validates if values are not correct", function() {
+                var rrule = parser("FREQ=SECONDLY;bysecond=1, 61, 3, 4");
+
+                ok(rrule.seconds === null);
+            });
+
+            test("Parse BYMINUTE property when value is single number", function() {
+                var rrule = parser("FREQ=MINUTELY;byminute=1");
+
+                equal(rrule.minutes.length, 1);
+                equal(rrule.minutes[0], 1);
+            });
+
+            test("Parse BYMINUTE property when value is a list of numbers", function() {
+                var rrule = parser("FREQ=MINUTELY;byminute=1, 2, 3, 4");
+
+                equal(rrule.minutes.length, 4);
+                equal(rrule.minutes[0], 1);
+                equal(rrule.minutes[1], 2);
+                equal(rrule.minutes[2], 3);
+                equal(rrule.minutes[3], 4);
+            });
+
+            test("Parse BYMINUTE validates if values are not correct", function() {
+                var rrule = parser("FREQ=MINUTELY;byminute=1, 61, 3, 4");
+
+                ok(rrule.minutes === null);
+            });
+
+            test("Parse BYHOUR property when value is single number", function() {
+                var rrule = parser("FREQ=HOURLY;BYHOUR=1");
+
+                equal(rrule.hours.length, 1);
+                equal(rrule.hours[0], 1);
+            });
+
+            test("Parse BYHOUR property when value is a list of numbers", function() {
+                var rrule = parser("FREQ=HOURLY;BYHOUR=1, 2, 3, 4");
+
+                equal(rrule.hours.length, 4);
+                equal(rrule.hours[0], 1);
+                equal(rrule.hours[1], 2);
+                equal(rrule.hours[2], 3);
+                equal(rrule.hours[3], 4);
+            });
+
+            test("Parse BYHOUR validates if values are not correct", function() {
+                var rrule = parser("FREQ=HOURLY;BYHOUR=1, 61, 3, 4");
+
+                ok(rrule.hours === null);
+            });
+
+            test("Parse BYMONTHDAY property when value is single number", function() {
+                var rrule = parser("FREQ=MONTHLY;BYMONTHDAY=1");
+
+                equal(rrule.monthDays.length, 1);
+                equal(rrule.monthDays[0], 1);
+            });
+
+            test("Parse BYMONTHDAY property when value is a list of numbers", function() {
+                var rrule = parser("FREQ=MONTHLY;BYMONTHDAY=1, 2, 3, 4");
+
+                equal(rrule.monthDays.length, 4);
+                equal(rrule.monthDays[0], 1);
+                equal(rrule.monthDays[1], 2);
+                equal(rrule.monthDays[2], 3);
+                equal(rrule.monthDays[3], 4);
+            });
+
+            test("Parse BYMONTHDAY validates if values are not correct", function() {
+                var rrule = parser("FREQ=MONTHLY;BYMONTHDAY=1, 32, 3, 4");
+
+                ok(rrule.monthDays === null);
+            });
+
+            test("Parse BYYEARDAY property when value is single number", function() {
+                var rrule = parser("FREQ=MONTHLY;BYYEARDAY=1");
+
+                equal(rrule.yearDays.length, 1);
+                equal(rrule.yearDays[0], 1);
+            });
+
+            test("Parse BYYEARDAY property when value is a list of numbers", function() {
+                var rrule = parser("FREQ=MONTHLY;BYYEARDAY=1, 2, 3, 4");
+
+                equal(rrule.yearDays.length, 4);
+                equal(rrule.yearDays[0], 1);
+                equal(rrule.yearDays[1], 2);
+                equal(rrule.yearDays[2], 3);
+                equal(rrule.yearDays[3], 4);
+            });
+
+            test("Parse BYYEARDAY validates if values are not correct", function() {
+                var rrule = parser("FREQ=MONTHLY;BYYEARDAY=1, 367, 3, 4");
+
+                ok(rrule.yearDays === null);
+            });
+
+            test("Parse BYMONTH property when value is single number", function() {
+                var rrule = parser("FREQ=YEARLY;BYMONTH=1");
+
+                equal(rrule.months.length, 1);
+                equal(rrule.months[0], 1);
+            });
+
+            test("Parse BYMONTH property when value is a list of numbers", function() {
+                var rrule = parser("FREQ=YEARLY;BYMONTH=1, 2, 3, 4");
+
+                equal(rrule.months.length, 4);
+                equal(rrule.months[0], 1);
+                equal(rrule.months[1], 2);
+                equal(rrule.months[2], 3);
+                equal(rrule.months[3], 4);
+            });
+
+            test("Parse BYMONTH validates if values are not correct", function() {
+                var rrule = parser("FREQ=YEARLY;BYMONTH=1, 13, 3, 4");
+
+                ok(rrule.months === null);
+            });
+
+            test("Parse BYDAY property when value is week day name", function() {
+                var rrule = parser("FREQ=WEEKLY;BYDAY=SU");
+
+                equal(rrule.weekDays.length, 1);
+                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].offset, 1);
+            });
+
+            test("Parse BYDAY property when value is week day name with offset", function() {
+                var rrule = parser("FREQ=WEEKLY;BYDAY=-1SU");
+
+                equal(rrule.weekDays.length, 1);
+                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].offset, -1);
+            });
+
+            test("Parse BYDAY property when value is a list of week day names", function() {
+                var rrule = parser("FREQ=WEEKLY;BYDAY=SU, MO, TH");
+
+                equal(rrule.weekDays.length, 3);
+                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].offset, 1);
+                equal(rrule.weekDays[1].day, "MO");
+                equal(rrule.weekDays[1].offset, 1);
+                equal(rrule.weekDays[2].day, "TH");
+                equal(rrule.weekDays[2].offset, 1);
+            });
+
+            test("Parse BYDAY property when value is a list of week day names with offsets", function() {
+                var rrule = parser("FREQ=WEEKLY;BYDAY=su, -2 MO, 2TH");
+
+                equal(rrule.weekDays.length, 3);
+                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].offset, 1);
+                equal(rrule.weekDays[1].day, "MO");
+                equal(rrule.weekDays[1].offset, -2);
+                equal(rrule.weekDays[2].day, "TH");
+                equal(rrule.weekDays[2].offset, 2);
+            });
+
+            test("Validate week day of BYDAY property", function() {
+                var rrule = parser("FREQ=WEEKLY;BYDAY=SU, -2 TT, 2TH");
+
+                ok(rrule.weekDays === null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
