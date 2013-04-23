@@ -2100,7 +2100,7 @@ kendo_module({
 
         _updatePristineForModel: function(model, values) {
             this._executeOnPristineForModel(model, function(index, items) {
-                extend(true, items[index], values);
+                kendo.deepExtend(items[index], values);
             });
         },
 
