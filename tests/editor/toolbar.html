@@ -22,6 +22,8 @@
 
             var componentType = kendo.support.browser.msie || kendo.support.touch ? 'kendoDropDownList' : 'kendoComboBox';
 
+            var Editor = kendo.ui.Editor;
+
             module("Toolbar", {
                 teardown: function() {
                     editor.pendingFormats.clear();
@@ -181,7 +183,7 @@
 
                 editor.selectRange(range);
 
-                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
+                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: Editor.defaultTools.bold.command });
 
                 editor.trigger('select');
 
@@ -196,7 +198,7 @@
 
                 editor.selectRange(range);
 
-                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
+                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: Editor.defaultTools.bold.command });
 
                 editor.trigger('select');
 
@@ -211,7 +213,7 @@
 
                 editor.selectRange(range);
 
-                editor.pendingFormats.toggle({ name: 'fontsize', options: { params: { value: 'xx-large' } }, command: editor.options.tools.fontSize.command });
+                editor.pendingFormats.toggle({ name: 'fontsize', options: { params: { value: 'xx-large' } }, command: Editor.defaultTools.fontSize.command });
 
                 editor.trigger('select');
 

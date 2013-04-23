@@ -25,12 +25,14 @@
                 }
             });
 
+            var boldTool = kendo.ui.Editor.defaultTools.bold;
+
             test('undo restores original content', function() {
                 editor.value('foo');
                 var range = editor.createRange();
                 range.selectNode(editor.body.firstChild);
 
-                var command = editor.options.tools['bold'].command({range:range});
+                var command = boldTool.command({range:range});
                 command.exec();
                 equal(editor.value(), '<strong>foo</strong>');
                 command.undo();
@@ -43,7 +45,7 @@
                 range.setStart(editor.body.firstChild, 1);
                 range.setEnd(editor.body.firstChild, 2);
 
-                var command = editor.options.tools['bold'].command({range:range});
+                var command = boldTool.command({range:range});
                 command.exec();
                 command.undo();
 
@@ -59,7 +61,7 @@
                 var range = editor.createRange();
                 range.selectNode(editor.body.firstChild);
 
-                var command = editor.options.tools['bold'].command({range:range});
+                var command = boldTool.command({range:range});
                 command.exec();
                 equal(editor.value(), '<strong>foo</strong>');
                 command.undo();

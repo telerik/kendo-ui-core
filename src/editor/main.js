@@ -73,99 +73,6 @@ kendo_module({
         separatorTemplate:
             '<li class="k-separator"></li>',
 
-        focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
-
-        wrapTextarea: function(textarea) {
-
-            var w = textarea[0].style.width,
-                h = textarea[0].style.height,
-                template = EditorUtils.editorWrapperTemplate,
-                editorWrap = $(template).insertBefore(textarea).width(w).height(h),
-                editArea = editorWrap.find(".k-editable-area");
-
-            textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
-
-            return textarea.closest(".k-editor");
-        },
-
-        renderTools: function(editor, tools) {
-            var editorTools = {},
-                currentTool, tool, i,
-                nativeTools = editor._nativeTools,
-                template,
-                options,
-                toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
-
-            if (tools) {
-                for (i = 0; i < tools.length; i++) {
-                    currentTool = tools[i];
-                    options = null;
-
-                    if ($.isPlainObject(currentTool)) {
-
-                        if (currentTool.name && editor.tools[currentTool.name]) {
-                            $.extend(editor.tools[currentTool.name].options, currentTool);
-
-                            editorTools[currentTool.name] = editor.tools[currentTool.name];
-                            options = editorTools[currentTool.name].options;
-                        } else {
-                            options = extend({ cssClass: "k-i-custom", type: "button", tooltip: "" }, currentTool);
-
-                            if (options.name) {
-                                options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
-                            }
-
-                            if (!options.template) {
-                                if (options.type == "button") {
-                                    options.template = EditorUtils.buttonTemplate;
-                                }
-                            }
-                        }
-                    } else if (editor.tools[currentTool]) {
-                        editorTools[currentTool] = editor.tools[currentTool];
-                        options = editorTools[currentTool].options;
-                    }
-
-                    if (!options) {
-                        continue;
-                    }
-
-                    template = options.template;
-
-                    if (template) {
-
-                        if (template.getHtml) {
-                            template = template.getHtml();
-                        } else {
-                            if (!$.isFunction(template)) {
-                                template = kendo.template(template);
-                            }
-
-                            template = template(options);
-                        }
-
-                        if (template.indexOf('<li') !== 0) {
-                            template = "<li class='k-editor-template'>" + template + "</li>";
-                        }
-
-                        tool = $(template).appendTo(toolsArea);
-
-                        if (options.type == "button" && options.exec) {
-                            tool.find(".k-tool-icon").click($.proxy(options.exec, editor.element[0]));
-                        }
-                    }
-                }
-            }
-
-            for (i = 0; i < nativeTools.length; i++) {
-                if (!editorTools[nativeTools[i]]) {
-                    editorTools[nativeTools[i]] = editor.tools[nativeTools[i]];
-                }
-            }
-
-            editor.options.tools = editorTools;
-        },
-
         decorateStyleToolItems: function(textarea) {
             var selectBox = textarea.data.closest(".k-editor").find(".k-style").data("kendoSelectBox");
 
@@ -184,182 +91,6 @@ kendo_module({
             });
         },
 
-        createContentElement: function(textarea, stylesheets) {
-            var iframe, wnd, doc,
-                rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
-
-            textarea.hide();
-            iframe = $("<iframe />", { src: 'javascript:""', frameBorder: "0" })
-                            .css("display", "")
-                            .addClass("k-content")
-                            .insertBefore(textarea)[0];
-
-            wnd = iframe.contentWindow || iframe;
-            if (stylesheets.length > 0) {
-                $(iframe).one("load", textarea, EditorUtils.decorateStyleToolItems);
-            }
-            doc = wnd.document || iframe.contentDocument;
-
-            doc.open();
-            doc.write(
-                    "<!DOCTYPE html><html><head>" +
-                    "<meta charset='utf-8' />" +
-                    "<style>" +
-                        "html,body{padding:0;margin:0;background:#fff;height:100%;min-height:100%;}" +
-                        "body{font-size:13px;font-family:Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
-                        "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
-                        rtlStyle +
-                        "}" +
-                        "h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}" +
-                        "p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container,.Apple-style-span{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}" +
-                        "ul,ol{padding-left:2.5em}" +
-                        "a{color:#00a}" +
-                        "code{font-size:1.23em}" +
-                    "</style>" +
-                    $.map(stylesheets, function(href){
-                        return "<link rel='stylesheet' href='" + href + "'>";
-                    }).join("") +
-                    "</head><body autocorrect='off' contenteditable='true'></body></html>"
-                );
-
-            doc.close();
-
-            return wnd;
-        },
-
-        initializeContentElement: function(editor) {
-            var isFirstKeyDown = true;
-
-            editor.window = EditorUtils.createContentElement($(editor.textarea), editor.options.stylesheets);
-            editor.document = editor.window.contentDocument || editor.window.document;
-            editor.body = editor.document.body;
-
-            $(editor.document)
-                .on("keydown" + NS, function (e) {
-                    var range;
-
-                    if (e.keyCode === keys.F10) {
-                        // Handling with timeout to avoid the default IE menu
-                        setTimeout(function() {
-                            var TABINDEX = "tabIndex",
-                                element = editor.wrapper,
-                                tabIndex = element.attr(TABINDEX);
-
-                            // Chrome can't focus something which has already been focused
-                            element.attr(TABINDEX, tabIndex || 0).focus().find("li:has(" + focusable + ")").first().focus();
-
-                            if (!tabIndex && tabIndex !== 0) {
-                               element.removeAttr(TABINDEX);
-                            }
-
-                        }, 100);
-
-                        e.preventDefault();
-                        return;
-                    } else if (e.keyCode === keys.BACKSPACE) {
-                        range = editor.getRange();
-
-                        var ancestor,
-                            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
-                            dom = kendo.ui.editor.Dom;
-
-                        range.deleteContents();
-
-                        ancestor = range.commonAncestorContainer;
-
-                        if (dom.name(ancestor) === "p" && ancestor.innerHTML === "") {
-                            ancestor.innerHTML = emptyParagraphContent;
-                            range.setStart(ancestor, 0);
-                            range.collapse(true);
-                            editor.selectRange(range);
-                        }
-                    }
-
-                    var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
-
-                    if (toolName) {
-                        e.preventDefault();
-                        if (!/undo|redo/.test(toolName)) {
-                            editor.keyboard.endTyping(true);
-                        }
-                        editor.trigger("keydown", e);
-                        editor.exec(toolName);
-                        return false;
-                    }
-
-                    if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
-                        if (isFirstKeyDown) {
-                            isFirstKeyDown = false;
-                        } else {
-                            range = editor.getRange();
-                            editor.pendingFormats.apply(range);
-                            editor.selectRange(range);
-                        }
-                    }
-
-                    editor.keyboard.clearTimeout();
-
-                    editor.keyboard.keydown(e);
-                })
-                .on("keyup" + NS, function (e) {
-                    var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
-
-                    if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
-                        editor.pendingFormats.clear();
-                        select(editor);
-                    }
-
-                    if (editor.keyboard.isTypingKey(e)) {
-                        if (editor.pendingFormats.hasPending()) {
-                            var range = editor.getRange();
-                            editor.pendingFormats.apply(range);
-                            editor.selectRange(range);
-                        }
-                    } else {
-                        isFirstKeyDown = true;
-                    }
-
-                    editor.keyboard.keyup(e);
-                })
-                .on("mousedown" + NS, function(e) {
-                    editor.pendingFormats.clear();
-
-                    var target = $(e.target);
-
-                    if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
-                        window.open(target.attr("href"), "_new");
-                    }
-                })
-                .on("mouseup" + NS, function() {
-                    select(editor);
-                })
-                .on("click" + NS, function(e) {
-                    var dom = kendo.ui.editor.Dom, range;
-
-                    if (dom.name(e.target) === "img") {
-                        range = editor.createRange();
-                        range.selectNode(e.target);
-                        editor.selectRange(range);
-                    }
-                });
-
-            $(editor.window)
-                .on("blur" + NS, function () {
-                    var old = editor.textarea.value,
-                        value = editor.encodedValue();
-
-                    editor.update();
-
-                    if (value != old) {
-                        editor.trigger("change");
-                    }
-                });
-
-            $(editor.body).on("cut" + NS + " paste" + NS, function (e) {
-                  editor.clipboard["on" + e.type](e);
-            });
-        },
-
         formatByName: function(name, format) {
             for (var i = 0; i < format.length; i++) {
                 if ($.inArray(name, format[i].tags) >= 0) {
@@ -373,6 +104,10 @@ kendo_module({
 
             if (toolOptions && toolOptions.template) {
                 toolOptions.template.options.cssClass = "k-" + toolName;
+            }
+
+            if (!tool.name) {
+                tool.name = toolName.toLowerCase();
             }
 
             Editor.defaultTools[toolName] = tool;
@@ -395,10 +130,7 @@ kendo_module({
     };
 
     var select = EditorUtils.select,
-        focusable = EditorUtils.focusable,
-        wrapTextarea = EditorUtils.wrapTextarea,
-        renderTools = EditorUtils.renderTools,
-        initializeContentElement = EditorUtils.initializeContentElement;
+        focusable = ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input";
 
     var messages = {
         bold: "Bold",
@@ -451,103 +183,20 @@ kendo_module({
 
     var supportedBrowser = !os || (os.ios && os.flatVersion >= 500) || (!os.ios && typeof(document.documentElement.contentEditable) != 'undefined');
 
-    var Editor = Widget.extend({
-        init: function (element, options) {
-            /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
-            if (!supportedBrowser) {
-                return;
-            }
-
-            var that = this,
-                wrapper,
-                value,
-                editorNS = kendo.ui.editor;
+    var Toolbar = Widget.extend({
+        init: function(element, options) {
+            var buttons = ".k-editor-button .k-tool-icon",
+                enabledButtons = buttons + ":not(.k-state-disabled)",
+                disabledButtons = buttons + ".k-state-disabled",
+                that = this;
 
             Widget.fn.init.call(that, element, options);
 
             that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
 
-            that.options = deepExtend({}, that.options, options);
+            that._renderTools();
 
-            element = $(element);
-
-            element.closest("form").on("submit" + NS, function () {
-                that.update();
-            });
-
-            for (var id in that.tools) {
-                that.tools[id].name = id.toLowerCase();
-            }
-
-            that.textarea = element.attr("autocomplete", "off")[0];
-
-            wrapper = that.wrapper = wrapTextarea(element);
-
-            if (that.textarea.id) {
-                wrapper.find(".k-editor-toolbar").attr("aria-controls", that.textarea.id);
-            }
-
-            renderTools(that, that.options.tools);
-
-            initializeContentElement(that);
-
-            that.keyboard = new editorNS.Keyboard([
-                new editorNS.TypingHandler(that),
-                new editorNS.SystemHandler(that)
-            ]);
-
-            that.clipboard = new editorNS.Clipboard(this);
-
-            that.pendingFormats = new editorNS.PendingFormats(this);
-
-            that.undoRedoStack = new editorNS.UndoRedoStack();
-
-            if (options && options.value) {
-                value = options.value;
-            } else {
-                // indented HTML introduces problematic ranges in IE
-                value = element.val().replace(/[\r\n\v\f\t ]+/ig, " ");
-            }
-
-            that.value(value);
-
-            function toolFromClassName(element) {
-                var tool = $.grep(element.className.split(" "), function (x) {
-                    return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
-                });
-                return tool[0] ? tool[0].substring(tool[0].lastIndexOf("-") + 1) : "custom";
-            }
-
-            function appendShortcutSequence(localizedText, tool) {
-                if (!tool.key) {
-                    return localizedText;
-                }
-
-                var res = localizedText + " (";
-
-                if (tool.ctrl) {
-                    res += "Ctrl + ";
-                }
-
-                if (tool.shift) {
-                    res += "Shift + ";
-                }
-
-                if (tool.alt) {
-                    res += "Alt + ";
-                }
-
-                res += tool.key + ")";
-
-                return res;
-            }
-
-            var toolbarItems = ".k-editor-toolbar > li > *, .k-editor-toolbar > li select",
-                buttons = ".k-editor-button .k-tool-icon",
-                enabledButtons = buttons + ":not(.k-state-disabled)",
-                disabledButtons = buttons + ".k-state-disabled";
-
-             wrapper.find(".k-combobox .k-input").keydown(function(e) {
+            that.element.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
                     key = e.keyCode;
 
@@ -561,7 +210,7 @@ kendo_module({
                 }
             });
 
-            wrapper
+            that.element
                 .on("mouseenter" + NS, enabledButtons, function() { $(this).addClass("k-state-hover"); })
                 .on("mouseleave" + NS, enabledButtons, function() { $(this).removeClass("k-state-hover"); })
                 .on("mousedown" + NS, buttons, false)
@@ -606,62 +255,256 @@ kendo_module({
                     e.preventDefault();
                     e.stopPropagation();
                     $(this).removeClass("k-state-hover");
-                    that.exec(toolFromClassName(this));
+                    that.options.editor.exec(that._toolFromClassName(this));
                 })
-                .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); })
-                .find(toolbarItems)
-                    .each(function () {
-                        var toolName = toolFromClassName(this),
-                            options = that.options,
-                            tool = options.tools[toolName],
-                            description = options.messages[toolName],
-                            $this = $(this);
+                .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
 
-                        if (!tool) {
-                            return;
+            this.items().each(function () {
+                var toolName = that._toolFromClassName(this),
+                    options = that.options,
+                    tool = options.tools[toolName],
+                    description = options.messages[toolName],
+                    $this = $(this);
+
+                if (!tool) {
+                    return;
+                }
+
+                if (toolName == "fontSize" || toolName == "fontName") {
+                    var inheritText = options.messages[toolName + "Inherit"] || messages[toolName + "Inherit"];
+                    $this.find("input").val(inheritText).end()
+                         .find("span.k-input").text(inheritText).end();
+                }
+
+                tool.initialize($this, {
+                    title: that._appendShortcutSequence(description, tool),
+                    // TODO: delegate current editor to tools or proxy messages through toolbar
+                    editor: that.options.editor
+                });
+            });
+        },
+
+        events: [
+            "execute"
+        ],
+
+        items: function() {
+            return this.element.children().find("> *, select");
+        },
+
+        // show proper tools based on editor options
+        setOptions: function() {},
+
+        _appendShortcutSequence: function(localizedText, tool) {
+            if (!tool.key) {
+                return localizedText;
+            }
+
+            var res = localizedText + " (";
+
+            if (tool.ctrl) {
+                res += "Ctrl + ";
+            }
+
+            if (tool.shift) {
+                res += "Shift + ";
+            }
+
+            if (tool.alt) {
+                res += "Alt + ";
+            }
+
+            res += tool.key + ")";
+
+            return res;
+        },
+
+        _nativeTools: [
+            "insertLineBreak",
+            "insertParagraph",
+            "redo",
+            "undo",
+            "insertHtml"
+        ],
+
+        tools: {}, // tools collection is copied from defaultTools during initialization
+
+        _renderTools: function() {
+            var tools = this.options.tools,
+                editorTools = {},
+                currentTool, tool, i,
+                nativeTools = this._nativeTools,
+                template,
+                options;
+
+            if (tools) {
+                for (i = 0; i < tools.length; i++) {
+                    currentTool = tools[i];
+                    options = null;
+
+                    if ($.isPlainObject(currentTool)) {
+
+                        if (currentTool.name && this.tools[currentTool.name]) {
+                            extend(this.tools[currentTool.name].options, currentTool);
+
+                            editorTools[currentTool.name] = this.tools[currentTool.name];
+                            options = editorTools[currentTool.name].options;
+                        } else {
+                            options = extend({ cssClass: "k-i-custom", type: "button", tooltip: "" }, currentTool);
+
+                            if (options.name) {
+                                options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
+                            }
+
+                            if (!options.template) {
+                                if (options.type == "button") {
+                                    options.template = EditorUtils.buttonTemplate;
+                                }
+                            }
                         }
-
-                        if (toolName == "fontSize" || toolName == "fontName") {
-                            var inheritText = options.messages[toolName + "Inherit"] || messages[toolName + "Inherit"];
-                            $this.find("input").val(inheritText).end()
-                                 .find("span.k-input").text(inheritText).end();
-                        }
-
-                        tool.initialize($this, {
-                            title: appendShortcutSequence(description, tool),
-                            editor: that
-                        });
-
-                    });
-
-                that.bind("select", function() {
-                    var range = that.getRange();
-
-                    var nodes = editorNS.RangeUtils.textNodes(range);
-
-                    if (!nodes.length) {
-                        nodes = [range.startContainer];
+                    } else if (this.tools[currentTool]) {
+                        editorTools[currentTool] = this.tools[currentTool];
+                        options = editorTools[currentTool].options;
                     }
 
-                    wrapper.find(toolbarItems)
-                        .each(function () {
-                            var tool = that.options.tools[toolFromClassName(this)];
-                            if (tool) {
-                                tool.update($(this), nodes, that.pendingFormats);
-                            }
-                        });
-                });
+                    if (!options) {
+                        continue;
+                    }
 
-            that._DOMNodeInsertedHandler = function(e) {
-                that._DOMNodeInserted(e);
-            };
+                    template = options.template;
+
+                    if (template) {
+
+                        if (template.getHtml) {
+                            template = template.getHtml();
+                        } else {
+                            if (!$.isFunction(template)) {
+                                template = kendo.template(template);
+                            }
+
+                            template = template(options);
+                        }
+
+                        if (template.indexOf('<li') !== 0) {
+                            template = "<li class='k-editor-template'>" + template + "</li>";
+                        }
+
+                        tool = $(template).appendTo(this.element);
+
+                        if (options.type == "button" && options.exec) {
+                            tool.find(".k-tool-icon").click($.proxy(options.exec, this.element[0]));
+                        }
+                    }
+                }
+            }
+
+            for (i = 0; i < nativeTools.length; i++) {
+                if (!editorTools[nativeTools[i]]) {
+                    editorTools[nativeTools[i]] = this.tools[nativeTools[i]];
+                }
+            }
+
+            this.options.tools = editorTools;
+        },
+
+
+        _toolFromClassName: function (element) {
+            var tool = $.grep(element.className.split(" "), function (x) {
+                return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
+            });
+
+            return tool[0] ? tool[0].substring(tool[0].lastIndexOf("-") + 1) : "custom";
+        },
+
+        // update tool state
+        update: function(range) {
+            var nodes = kendo.ui.editor.RangeUtils.textNodes(range),
+                that = this;
+
+            if (!nodes.length) {
+                nodes = [range.startContainer];
+            }
+
+            that.items().each(function () {
+                var tool = that.options.tools[that._toolFromClassName(this)];
+                if (tool) {
+                    tool.update($(this), nodes, that.options.editor.pendingFormats);
+                }
+            });
+        }
+    });
+
+    var Editor = Widget.extend({
+        init: function (element, options) {
+            /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
+            if (!supportedBrowser) {
+                return;
+            }
+
+            var that = this,
+                value,
+                editorNS = kendo.ui.editor,
+                toolbarContainer;
+
+            Widget.fn.init.call(that, element, options);
+
+            that.options = deepExtend({}, that.options, options);
+
+            element = that.element;
+
+            element.closest("form").on("submit" + NS, function () {
+                that.update();
+            });
+
+            if (element.is("textarea")) {
+                that._wrapTextarea();
+
+                toolbarContainer = that.wrapper.find(".k-editor-toolbar");
+
+                // hacked separation of toolbar. this should be changed once toolbar becomes singleton
+                var toolbarOptions = extend({}, that.options);
+
+                toolbarOptions.editor = that;
+
+                that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
+
+                if (element[0].id) {
+                    toolbarContainer.attr("aria-controls", element[0].id);
+                }
+            }
+
+            that._initializeContentElement(that);
+
+            that.keyboard = new editorNS.Keyboard([
+                new editorNS.TypingHandler(that),
+                new editorNS.SystemHandler(that)
+            ]);
+
+            that.clipboard = new editorNS.Clipboard(this);
+
+            that.pendingFormats = new editorNS.PendingFormats(this);
+
+            that.undoRedoStack = new editorNS.UndoRedoStack();
+
+            if (options && options.value) {
+                value = options.value;
+            } else {
+                // indented HTML introduces problematic ranges in IE
+                value = element.val().replace(/[\r\n\v\f\t ]+/ig, " ");
+            }
+
+            that.value(value);
+
+            that.bind("select", function() {
+                // update toolbar tools with their status
+                this.toolbar.update(that.getRange());
+            });
 
             that._endTypingHandler = function() {
                 that._endTyping();
             };
 
-            $(document).on("DOMNodeInserted", that._DOMNodeInsertedHandler)
-                       .on("mousedown", that._endTypingHandler);
+            $(document).on("mousedown", that._endTypingHandler);
 
             kendo.notify(that);
         },
@@ -688,15 +531,216 @@ kendo_module({
             }
         },
 
+        _wrapTextarea: function() {
+            var that = this,
+                textarea = that.element,
+                w = textarea[0].style.width,
+                h = textarea[0].style.height,
+                template = EditorUtils.editorWrapperTemplate,
+                editorWrap = $(template).insertBefore(textarea).width(w).height(h),
+                editArea = editorWrap.find(".k-editable-area");
+
+            textarea.attr("autocomplete", "off")
+                .appendTo(editArea).addClass("k-content k-raw-content").hide();
+
+            that._DOMNodeInsertedHandler = function(e) {
+                that._DOMNodeInserted(e);
+            };
+
+            $(document).on("DOMNodeInserted", that._DOMNodeInsertedHandler);
+
+            that.textarea = textarea;
+            that.wrapper = editorWrap;
+        },
+
+        _createContentElement: function(stylesheets) {
+            var iframe, wnd, doc,
+                textarea = this.textarea,
+                rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
+
+            textarea.hide();
+            iframe = $("<iframe />", { src: 'javascript:""', frameBorder: "0" })
+                            .css("display", "")
+                            .addClass("k-content")
+                            .insertBefore(textarea)[0];
+
+            wnd = iframe.contentWindow || iframe;
+            if (stylesheets.length > 0) {
+                $(iframe).one("load", textarea, EditorUtils.decorateStyleToolItems);
+            }
+            doc = wnd.document || iframe.contentDocument;
+
+            doc.open();
+            doc.write(
+                    "<!DOCTYPE html><html><head>" +
+                    "<meta charset='utf-8' />" +
+                    "<style>" +
+                        "html,body{padding:0;margin:0;background:#fff;height:100%;min-height:100%;}" +
+                        "body{font-size:12px;font-family:Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
+                        "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
+                        rtlStyle +
+                        "}" +
+                        "h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}" +
+                        "p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container,.Apple-style-span{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}" +
+                        "ul,ol{padding-left:2.5em}" +
+                        "a{color:#00a}" +
+                        "code{font-size:1.23em}" +
+                    "</style>" +
+                    $.map(stylesheets, function(href){
+                        return "<link rel='stylesheet' href='" + href + "'>";
+                    }).join("") +
+                    "</head><body autocorrect='off' contenteditable='true'></body></html>"
+                );
+
+            doc.close();
+
+            return wnd;
+        },
+
+        _initializeContentElement: function() {
+            var isFirstKeyDown = true,
+                editor = this;
+
+            if (editor.textarea.length) {
+                editor.window = editor._createContentElement(editor.options.stylesheets);
+                editor.document = editor.window.contentDocument || editor.window.document;
+                editor.body = editor.document.body;
+
+                $(editor.window)
+                    .on("blur" + NS, function () {
+                        var old = editor.textarea.val(),
+                        value = editor.encodedValue();
+
+                        editor.update();
+
+                        if (value != old) {
+                            editor.trigger("change");
+                        }
+                    });
+            } else {
+                editor.window = window;
+                editor.document = document;
+                editor.body = editor.element[0];
+            }
+
+            $(editor.document)
+                .on("keydown" + NS, function (e) {
+                    var range;
+
+                    if (e.keyCode === keys.F10) {
+                        // Handling with timeout to avoid the default IE menu
+                        setTimeout(function() {
+                            var TABINDEX = "tabIndex",
+                                element = editor.wrapper,
+                                tabIndex = element.attr(TABINDEX);
+
+                            // Chrome can't focus something which has already been focused
+                            element.attr(TABINDEX, tabIndex || 0).focus().find("li:has(" + focusable + ")").first().focus();
+
+                            if (!tabIndex && tabIndex !== 0) {
+                               element.removeAttr(TABINDEX);
+                            }
+
+                        }, 100);
+
+                        e.preventDefault();
+                        return;
+                    } else if (e.keyCode === keys.BACKSPACE) {
+                        range = editor.getRange();
+
+                        var ancestor,
+                            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
+                            dom = kendo.ui.editor.Dom;
+
+                        range.deleteContents();
+
+                        ancestor = range.commonAncestorContainer;
+
+                        if (dom.name(ancestor) === "p" && ancestor.innerHTML === "") {
+                            ancestor.innerHTML = emptyParagraphContent;
+                            range.setStart(ancestor, 0);
+                            range.collapse(true);
+                            editor.selectRange(range);
+                        }
+                    }
+
+                    var toolName = editor.keyboard.toolFromShortcut(editor.toolbar.options.tools, e);
+
+                    if (toolName) {
+                        e.preventDefault();
+                        if (!/undo|redo/.test(toolName)) {
+                            editor.keyboard.endTyping(true);
+                        }
+                        editor.trigger("keydown", e);
+                        editor.exec(toolName);
+                        return false;
+                    }
+
+                    if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
+                        if (isFirstKeyDown) {
+                            isFirstKeyDown = false;
+                        } else {
+                            editor.pendingFormats.apply(editor);
+                        }
+                    }
+
+                    editor.keyboard.clearTimeout();
+
+                    editor.keyboard.keydown(e);
+                })
+                .on("keyup" + NS, function (e) {
+                    var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
+
+                    if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
+                        editor.pendingFormats.clear();
+                        select(editor);
+                    }
+
+                    if (editor.keyboard.isTypingKey(e)) {
+                        editor.pendingFormats.apply(editor);
+                    } else {
+                        isFirstKeyDown = true;
+                    }
+
+                    editor.keyboard.keyup(e);
+                })
+                .on("mousedown" + NS, function(e) {
+                    editor.pendingFormats.clear();
+
+                    var target = $(e.target);
+
+                    if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
+                        window.open(target.attr("href"), "_new");
+                    }
+                })
+                .on("mouseup" + NS, function() {
+                    select(editor);
+                })
+                .on("click" + NS, function(e) {
+                    var dom = kendo.ui.editor.Dom, range;
+
+                    if (dom.name(e.target) === "img") {
+                        range = editor.createRange();
+                        range.selectNode(e.target);
+                        editor.selectRange(range);
+                    }
+                });
+
+            $(editor.body).on("cut" + NS + " paste" + NS, function (e) {
+                editor.clipboard["on" + e.type](e);
+            });
+        },
+
+
         refresh: function() {
             var that = this;
 
             // preserve updated value before re-initializing
             // don't use update() to prevent the editor from encoding the content too early
-            that.textarea.value = that.value();
+            that.textarea.val(that.value());
             that.wrapper.find("iframe").remove();
-            initializeContentElement(that);
-            that.value(that.textarea.value);
+            that._initializeContentElement(that);
+            that.value(that.textarea.val());
         },
 
         events: [
@@ -793,16 +837,6 @@ kendo_module({
             kendo.destroy(that.wrapper);
         },
 
-        _nativeTools: [
-            "insertLineBreak",
-            "insertParagraph",
-            "redo",
-            "undo",
-            "insertHtml"
-        ],
-
-        tools: {}, // tools collection is copied from defaultTools during initialization
-
         value: function (html) {
             var body = this.body,
                 dom = kendo.ui.editor.Dom,
@@ -898,7 +932,9 @@ kendo_module({
         },
 
         update: function (value) {
-            this.textarea.value = value || this.options.encoded ? this.encodedValue() : this.value();
+            if (this.textarea) {
+                this.textarea.val(value || this.options.encoded ? this.encodedValue() : this.value());
+            }
         },
 
         encodedValue: function () {
@@ -944,7 +980,8 @@ kendo_module({
         exec: function (name, params) {
             var that = this,
                 range, body, id,
-                tool = "", pendingTool;
+                tool = "", pendingTool,
+                tools = that.toolbar.options.tools;
 
             name = name.toLowerCase();
 
@@ -957,9 +994,9 @@ kendo_module({
             }
 
             // exec tool
-            for (id in that.options.tools) {
+            for (id in tools) {
                 if (id.toLowerCase() == name) {
-                    tool = that.options.tools[id];
+                    tool = tools[id];
                     break;
                 }
             }
@@ -1021,8 +1058,7 @@ kendo_module({
             return new this.options.command(commandArguments);
         },
 
-        update: function() {
-        },
+        update: $.noop,
 
         willDelayExecution: function() {
             return false;

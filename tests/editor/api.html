@@ -35,7 +35,7 @@
 
                 editorEncodeFalse.update();
 
-                equal(editorEncodeFalse.textarea.value, "<p>foo</p>");
+                equal(editorEncodeFalse.textarea.val(), "<p>foo</p>");
             });
 
             test("editor default Encode value must be true", function() {
