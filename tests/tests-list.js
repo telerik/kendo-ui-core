@@ -263,6 +263,7 @@ var tests = [
     "mobile/listview/initialization.html",
     "mobile/listview/databinding.html",
     "mobile/listview/filtering.html",
+    "mobile/listview/manipulation.html",
     "mobile/listview/mvvm.html",
     "mobile/actionsheet.html",
     "mobile/application.html",
