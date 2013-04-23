@@ -1879,31 +1879,51 @@ kendo_module({
     }
 
     function convertFilterDescriptorsField(descriptor, model) {
-        if (descriptor.filters && descriptor.filters.length) {
-            var idx,
-                length;
+        var idx,
+            length,
+            target = {};
 
+        for (var field in descriptor) {
+            if (field !== "filters") {
+                target[field] = descriptor[field];
+            }
+        }
+
+        if (descriptor.filters && descriptor.filters.length) {
+            target.filters = [];
             for (idx = 0, length = descriptor.filters.length; idx < length; idx++) {
-                convertFilterDescriptorsField(descriptor.filters[idx], model);
+                target.filters[idx] = convertFilterDescriptorsField(descriptor.filters[idx], model);
             }
         } else {
-            descriptor.field = fieldNameFromModel(model.fields, descriptor.field);
+            target.field = fieldNameFromModel(model.fields, target.field);
         }
+        return target;
     }
 
     function convertDescriptorsField(descriptors, model) {
         var idx,
             length,
+            result = [],
+            target,
             descriptor;
 
         for (idx = 0, length = descriptors.length; idx < length; idx ++) {
-            descriptor = descriptors[idx];
-            descriptor.field = fieldNameFromModel(model.fields, descriptor.field);
+            target = {};
 
-            if (descriptor.aggregates && isArray(descriptor.aggregates)) {
-                convertDescriptorsField(descriptor.aggregates, model);
+            descriptor = descriptors[idx];
+
+            for (var field in descriptor) {
+                target[field] = descriptor[field];
             }
+
+            target.field = fieldNameFromModel(model.fields, target.field);
+
+            if (target.aggregates && isArray(target.aggregates)) {
+                target.aggregates = convertDescriptorsField(target.aggregates, model);
+            }
+            result.push(target);
         }
+        return result;
     }
 
     var DataSource = Observable.extend({
@@ -2393,26 +2413,26 @@ kendo_module({
 
             if (!that.options.serverGrouping) {
                 delete options.group;
-            } else if (that.reader.model) {
-                convertDescriptorsField(options.group, that.reader.model);
+            } else if (that.reader.model && options.group) {
+                options.group = convertDescriptorsField(options.group, that.reader.model);
             }
 
             if (!that.options.serverFiltering) {
                 delete options.filter;
-            } else if (that.reader.model) {
-                convertFilterDescriptorsField(options.filter, that.reader.model);
+            } else if (that.reader.model && options.filter) {
+               options.filter = convertFilterDescriptorsField(options.filter, that.reader.model);
             }
 
             if (!that.options.serverSorting) {
                 delete options.sort;
-            } else if (that.reader.model) {
-                convertDescriptorsField(options.sort, that.reader.model);
+            } else if (that.reader.model && options.sort) {
+                options.sort = convertDescriptorsField(options.sort, that.reader.model);
             }
 
             if (!that.options.serverAggregates) {
                 delete options.aggregate;
-            } else if (that.reader.model) {
-                convertDescriptorsField(options.aggregate, that.reader.model);
+            } else if (that.reader.model && options.aggregate) {
+                options.aggregate = convertDescriptorsField(options.aggregate, that.reader.model);
             }
 
             return options;

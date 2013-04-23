@@ -357,6 +357,48 @@
                     });
             });
 
+            test("sort datasource state is not modified after original field is restored", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo"
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo"
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                });
+
+                dataSource.sort({ field: "bar", dir: "asc" });
+                equal(dataSource.sort()[0].field, "bar");
+            });
+
+            test("filter datasource state is not modified after original field is restored", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo"
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: "foo"
+                            }
+                        }
+                    },
+                    serverFiltering: true,
+                });
+
+                dataSource.filter({ field: "bar", operator: "eq", value: "42" });
+                equal(dataSource.filter().filters[0].field, "bar");
+            });
+
             test("sort original field name is used if projection is set", 1, function() {
                 var transport = new RemoteTransport({
                     read: "foo",
