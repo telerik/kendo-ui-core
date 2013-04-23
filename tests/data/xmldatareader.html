@@ -182,6 +182,18 @@
                 ok(reader.total(result) === 1);
             });
 
+            test("serialize as function", 1, function() {
+                var reader = new XmlDataReader({
+                    serialize: function() {
+                        ok(true);
+                    }
+                });
+
+                var result = reader.parse("<foo>1</foo>");
+
+                reader.serialize(result);
+            });
+
             test("data returns the records", function() {
                 var reader = new XmlDataReader({ data: "/foo/bar"});
 

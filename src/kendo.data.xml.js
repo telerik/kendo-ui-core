@@ -23,6 +23,7 @@ kendo_module({
                 model = options.model,
                 parse = options.parse,
                 errors = options.errors,
+                serialize = options.serialize,
                 data = options.data;
 
             if (model) {
@@ -113,12 +114,19 @@ kendo_module({
                     return xmlParse.call(that, xml);
                 };
             }
+
+            if (typeof serialize == "function") {
+                that.serialize = serialize;
+            }
         },
         total: function(result) {
             return this.data(result).length;
         },
         errors: function(data) {
             return data ? data.errors : null;
+        },
+        serialize: function(data) {
+            return data;
         },
         parseDOM: function(element) {
             var result = {},
