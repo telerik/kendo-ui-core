@@ -181,9 +181,9 @@
                 var sortDescriptors = browser.dataSource.sort();
 
                 equal(sortDescriptors.length, 2);
-                equal(sortDescriptors[0].field, "Kind");
+                equal(sortDescriptors[0].field, "type");
                 equal(sortDescriptors[0].dir, "asc");
-                equal(sortDescriptors[1].field, "FileName");
+                equal(sortDescriptors[1].field, "name");
                 equal(sortDescriptors[1].dir, "asc");
             });
 
@@ -217,9 +217,9 @@
                 var sortDescriptors = browser.dataSource.sort();
 
                 equal(sortDescriptors.length, 2);
-                equal(sortDescriptors[0].field, "Kind");
+                equal(sortDescriptors[0].field, "type");
                 equal(sortDescriptors[0].dir, "asc");
-                equal(sortDescriptors[1].field, "FileName");
+                equal(sortDescriptors[1].field, "name");
                 equal(sortDescriptors[1].dir, "asc");
             });
 
