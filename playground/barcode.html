@@ -3,15 +3,17 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Barcode</title>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../src/kendo.dataviz.js" type="text/javascript" charset="utf-8"></script>		
-		<script src="../src/kendo.barcode.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/kendo.dataviz.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>	
+		<script src="../src/kendo.dataviz.barcode.js" type="text/javascript" charset="utf-8"></script>	
     </head>
-    <body>
+    <body style="background:#aaa">
         <div id="ean8"></div> 
 		<div class="splitter"></div>
 		<div id="code39"></div>
 		<div class="splitter"></div>
-		<div id="code128"></div>
+		<div id="ean13"></div>
         <script>
                 $('#ean8').kendoBarcode({
 					value: "1234567",
@@ -25,11 +27,10 @@
 						name: "code39"
 					}
                 })
-				
-				$('#code128').kendoBarcode({
-					value: "KUR",
+				$('#ean13').kendoBarcode({
+					value: "210987654321",
 				    encoding: {
-						name: "code128"
+						name: "ean13"
 					}
                 })
         </script>

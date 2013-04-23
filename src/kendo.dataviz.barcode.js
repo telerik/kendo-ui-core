@@ -25,8 +25,8 @@
             this.initValue(value, width, height);            
             this.addQuietZone();            
             this.addData();            
-            this.addQuietZone();     
-                
+            this.addQuietZone(); 
+			
             return {
                 baseUnit: this.baseUnit,
                 pattern: this.pattern
@@ -41,6 +41,11 @@
         addQuietZone: function () { 
             this.pattern.push([0, this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH]);
         },
+		addArrayToPattern:function(arr){
+			for(var i=0;i<arr.length;i++){
+				this.pattern.push(arr[i]);
+			}	
+		},
         addData: function () {
     
         }
@@ -229,26 +234,24 @@
 				firstPart  = this.value.substr(0,4),
 				secondPart = this.value.substr(4) + checksum;
 				
-			this.addPattern("start");
+			this.addPiece("start");
 			for(var i = 0; i < firstPart.length; i++){
-				this.addPattern(firstPart.charAt(i), 0);
+				this.addPiece(firstPart.charAt(i), 0);
 			}
-			this.addPattern("middle");
+			this.addPiece("middle");
 			 for(var i = 0; i < secondPart.length; i++){
-				 this.addPattern(secondPart[i], 1);
+				 this.addPiece(secondPart[i], 1);
 			 }
-			this.addPattern("start");
+			this.addPiece("start");
 		},
 
-		addPattern: function(character, fromTable){
+		addPiece: function(character, fromTable){
 			
 			var arrToAdd = fromTable !== undefined ? 
 				this.characterMap.characters[fromTable][character]: 
 				this.characterMap[character];
 				
-			for(var i=0;i<arrToAdd.length;i++){
-				this.pattern.push(arrToAdd[i]);
-			}	
+			this.addArrayToPattern(arrToAdd);
 		},
 		calculateChecksum: function (){			
 			var odd = 0,
@@ -297,7 +300,113 @@
 			middle: [[SPACE,1],[BAR, 1], [SPACE, 1],[BAR, 1],[SPACE, 1]]
 		}
 	});
-
+	
+	encodings.ean13 = Encoding.extend({
+		initValue: function(value, width, height){
+			this.pattern = [];
+			this.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
+			this.value = value;
+		},
+		addData:  function(){			
+			var checksum = this.calculateChecksum(),
+				leftKey = this.value[0],
+				leftPart = this.value.substr(1,6),
+				rightPart = this.value.substr(7)+checksum;			
+			
+			this.addArrayToPattern(this.characterMap["start"]);
+			this.addLeftSide(leftPart,leftKey);
+			this.addArrayToPattern(this.characterMap["middle"]);
+			this.addRightSide(rightPart);
+			this.addArrayToPattern(this.characterMap["start"]);
+			
+		},
+		addLeftSide:function(leftPart,key){
+			for(var i = 0; i < leftPart.length; i++){
+				this.addArrayToPattern(this.getLeftPattern(leftPart[i],this.keyTable[key][i]));					
+			}
+		},
+		getLeftPattern:function(character,side){
+			return this.characterMap['leftTable'][side][character];
+		},
+		addRightSide:function(rightPart){
+			for(var i = 0; i < rightPart.length; i++){
+				this.addArrayToPattern(this.characterMap['rightTable'][rightPart[i]]);					
+			}
+		},
+		calculateChecksum: function (){		
+			var odd = 0,
+				even = 0,
+				value = this.value;
+			
+			for(var i = value.length-1;i >= 0;i--){
+				if(i%2){ 
+					odd += parseInt(value[i]);
+				}
+				else{
+					even += parseInt(value[i]);
+				}
+			}			
+			var checksum = (10 - ((3*odd + even)%10))%10;
+			return checksum; 
+		},
+		keyTable:[
+			'000000',
+			'001011',
+			'001101',
+			'001110',
+			'010011',
+			'011001',
+			'011100',
+			'010101',
+			'010110',
+			'011010'
+		]
+		,
+		characterMap: {
+			leftTable:[
+				[
+					[[SPACE,3],[BAR,2],[SPACE,1],[BAR,1]],
+					[[SPACE,2],[BAR,2],[SPACE,2],[BAR,1]],
+					[[SPACE,2],[BAR,1],[SPACE,2],[BAR,2]],
+					[[SPACE,1],[BAR,4],[SPACE,1],[BAR,1]],
+					[[SPACE,1],[BAR,1],[SPACE,3],[BAR,2]],
+					[[SPACE,1],[BAR,2],[SPACE,3],[BAR,1]],
+					[[SPACE,1],[BAR,1],[SPACE,1],[BAR,4]],
+					[[SPACE,1],[BAR,3],[SPACE,1],[BAR,2]],
+					[[SPACE,1],[BAR,2],[SPACE,1],[BAR,3]],
+					[[SPACE,3],[BAR,1],[SPACE,1],[BAR,2]]
+				]
+				,
+				[
+					[[SPACE,1],[BAR,1],[SPACE,2],[BAR,3]],
+					[[SPACE,1],[BAR,2],[SPACE,2],[BAR,2]],
+					[[SPACE,2],[BAR,2],[SPACE,1],[BAR,2]],
+					[[SPACE,1],[BAR,1],[SPACE,4],[BAR,1]],
+					[[SPACE,2],[BAR,3],[SPACE,1],[BAR,1]],
+					[[SPACE,1],[BAR,3],[SPACE,1],[BAR,1]],
+					[[SPACE,4],[BAR,1],[SPACE,1],[BAR,1]],
+					[[SPACE,2],[BAR,1],[SPACE,3],[BAR,1]],
+					[[SPACE,3],[BAR,1],[SPACE,2],[BAR,1]],
+					[[SPACE,2],[BAR,1],[SPACE,1],[BAR,3]]
+				]
+			],
+			rightTable:[
+				[[BAR,3],[SPACE,2],[BAR,1],[SPACE,1]],
+				[[BAR,2],[SPACE,2],[BAR,2],[SPACE,1]],
+				[[BAR,2],[SPACE,1],[BAR,2],[SPACE,2]],
+				[[BAR,1],[SPACE,4],[BAR,1],[SPACE,1]],
+				[[BAR,1],[SPACE,1],[BAR,3],[SPACE,2]],
+				[[BAR,1],[SPACE,2],[BAR,3],[SPACE,1]],
+				[[BAR,1],[SPACE,1],[BAR,1],[SPACE,4]],
+				[[BAR,1],[SPACE,3],[BAR,1],[SPACE,2]],
+				[[BAR,1],[SPACE,2],[BAR,1],[SPACE,3]],
+				[[BAR,3],[SPACE,1],[BAR,1],[SPACE,2]],
+			],
+			start: [[BAR,1],[SPACE, 1], [BAR, 1]],
+			middle: [[SPACE,1],[BAR, 1], [SPACE, 1],[BAR, 1],[SPACE, 1]]
+		}		
+	});
+	
     var Barcode = Widget.extend({
         init: function (element, options) {                                     
              Widget.fn.init.call(this, element, options);
@@ -305,7 +414,7 @@
              this.view = new (dataviz.ui.defaultView())(); 
              this.setOptions(options);                                
         },
-        setOptions: function (options) {           
+        setOptions: function (options) { 		
             if (!this.enocoding || ( options.encoding.name && this.options.encoding.name !== 
                 options.encoding.name.toLowerCase())){
                 this.encoding = new encodings[this.options.encoding.name.toLowerCase()](options.encoding);
@@ -384,6 +493,4 @@
     });
 
    dataviz.ui.plugin(Barcode);
-})(window.kendo.jQuery);
-
-               
+})(window.kendo.jQuery);             
