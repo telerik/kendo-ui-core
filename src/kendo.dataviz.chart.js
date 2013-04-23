@@ -4494,13 +4494,13 @@ kendo_module({
                     strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity
                 } : {},
                 rectStyle = deepExtend({
-                    fill: point.color,
+                    fill: options.color,
                     fillOpacity: options.opacity
                 }, border),
                 lineStyle = {
                     strokeOpacity: defined(options.line.opacity) ? options.line.opacity : options.opacity,
                     strokeWidth: options.line.width,
-                    stroke: options.line.color || point.color,
+                    stroke: options.line.color || options.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt"
                 },
@@ -4629,7 +4629,13 @@ kendo_module({
             }
 
             if (hasValue) {
-                point = chart.createPoint(value, series);
+                if (series.type == CANDLESTICK) {
+                    if (value.open > value.close) {
+                        pointColor = data.fields.downColor || series.downColor;
+                    }
+                }
+
+                point = chart.createPoint(value, deepExtend({}, series, { color: pointColor }));
             }
 
             cluster = children[categoryIx];
@@ -4647,13 +4653,6 @@ kendo_module({
 
                 cluster.append(point);
 
-                if (series.type == CANDLESTICK) {
-                    if (value.open > value.close) {
-                        pointColor = data.fields.downColor || series.downColor;
-                    }
-                }
-
-                point.color = pointColor;
                 point.categoryIx = categoryIx;
                 point.category = category;
                 point.series = series;
@@ -4740,7 +4739,7 @@ kendo_module({
                     strokeOpacity: options.opacity,
                     zIndex: -1,
                     strokeWidth: options.width,
-                    stroke: point.color,
+                    stroke: options.color,
                     dashType: options.dashType
                 },
                 group = view.createGroup({
