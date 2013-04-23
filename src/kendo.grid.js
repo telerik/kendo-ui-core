@@ -3348,10 +3348,10 @@ kendo_module({
             that._templates();
 
             that._updateCols();
-            that.thead.find(">tr>th:not(.k-hierarchy-cell,.k-group-cell):visible").eq(columnIndex).hide();
-            if (footer) {
+            setCellVisibility(that.thead.find(">tr")[0].cells, columnIndex, false);
+            if (footer[0]) {
                 that._appendCols(footer.find("table:first"));
-                footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell):visible").eq(columnIndex).hide();
+                setCellVisibility(footer.find(".k-footer-template")[0].cells, columnIndex, false);
             }
 
             rows = that.tbody.children();
@@ -3437,10 +3437,10 @@ kendo_module({
             that._templates();
 
             that._updateCols();
-            that.thead.find(">tr>th:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
-            if (footer) {
+            setCellVisibility(that.thead.find(">tr")[0].cells, columnIndex, true);
+            if (footer[0]) {
                 that._appendCols(footer.find("table:first"));
-                footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
+                setCellVisibility(footer.find(".k-footer-template")[0].cells, columnIndex, true);
             }
 
             rows = that.tbody.children();
