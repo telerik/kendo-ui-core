@@ -609,7 +609,7 @@
                         colorField: "color"
                     });
 
-                    deepEqual(point.color, "color");
+                    deepEqual(point.options.color, "color");
                 });
 
                 test("binds downColor field", function() {
@@ -630,7 +630,7 @@
                     var chart = $("#container").data("kendoChart");
                     point = chart._plotArea.charts[0].points[0];
 
-                    deepEqual(point.color, "downColor");
+                    deepEqual(point.options.color, "downColor");
                 });
 
             })();
