@@ -28,6 +28,7 @@
             width: 100%;
             position: relative;
         }
+
         .virtual-page {
             min-height: 1px;
             height: 100%;
@@ -39,6 +40,14 @@
             min-width:100%;
         }
 
+        .tile {
+            height: 50px;
+            padding: 10px 0;
+            line-height: 50px;
+            text-align: center;
+            font-size: 3em;
+            border: 1px solid yellow;
+        }
     </style>
 </head>
 <body>
@@ -47,9 +56,16 @@
     </div>
 
     <script type="text/x-kendo-template" id="item-template">
-        <div>
-            #= buildUrl(data.url) #
-        </div>
+        <div class="tile">#= data[0].foo #</div>
+        <div class="tile">#= data[1].foo #</div>
+        <div class="tile">#= data[2].foo #</div>
+        <div class="tile">#= data[3].foo #</div>
+        <div class="tile">#= data[4].foo #</div>
+        <div class="tile">#= data[5].foo #</div>
+    </script>
+
+    <script type="text/x-kendo-template" id="empty-template">
+        <div>empty</div>
     </script>
 
     <script>
@@ -61,7 +77,7 @@
             imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
             imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
             ds = new kendo.data.DataSource({
-                transport: {
+                /*transport: {
                     read: {
                         url: 'http://www.reddit.com/r/pics/.json',
                         dataType: 'jsonp',
@@ -79,13 +95,13 @@
                         return data;
                     }
                 },
-
                 serverPaging: true,
                 pageSize: PAGE_SIZE,
                 schema: {
                     data: "data.children",
                     total: function() { return 100000; }
-                }
+                }*/
+                data: generateData(100)
             });
 
         ds.fetch(function() {
@@ -96,7 +112,9 @@
             pageView = $("#virtual").kendoMobilePageView({
                 contentHeight: e.view.content.height(),
                 dataSource: ds,
-                template: kendo.template($("#item-template").html())
+                batchSize: 6,
+                template: kendo.template($("#item-template").html()),
+                emptyTemplate: kendo.template($("#empty-template").html())
             }).data("kendoMobilePageView");
         }
 
@@ -116,6 +134,18 @@
             }
 
             return '<img class="item-image" src="' + link + '" />';
+        }
+
+        function generateData(n) {
+            var data = [],
+                obj = {};
+
+            for (var i = 1; i < n+1; i++) {
+                obj = { id: i, foo: i };
+                data.push(obj);
+            }
+
+            return data;
         }
 
         (function($, undefined) {
@@ -214,20 +244,25 @@
                         width: width
                     });
 
-                    that.buffer = new kendo.data.Buffer(that.options.dataSource, that.itemCount);
+                    if(that.options.batchSize > 1) {
+                        that.batchBuffer = new BatchBuffer(that.options.dataSource, that.options.batchSize);
+                    } else {
+                        that.batchBuffer = new kendo.data.Buffer(that.options.dataSource, that.itemCount);
+                    }
+
                     that._initPages();
                 },
 
                 options: {
                     name: "PageView",
-                    page: 0,
                     duration: 300,
                     velocityThreshold: 0.8,
                     contentHeight: "auto",
-                    pageSize: 1,
                     bounceVelocityThreshold: 1.6,
                     dataSource: new DataSource({ data: [] }),
-                    template: kendo.template("")
+                    batchSize: 1,
+                    template: kendo.template(""),
+                    emptyTemplate: kendo.template("empty")
                 },
 
                 refresh: function () {
@@ -257,7 +292,7 @@
                         page;
 
                     page = new Page(inner);
-                    page.content("empty");
+                    page.content(that.options.emptyTemplate({}));
                     page.first();
                     pages.push(page);
 
@@ -354,13 +389,14 @@
                 },
 
                 setPageContent: function (page, index) {
-                    var buffer = this.buffer,
-                        template = this.options.template;
+                    var batchBuffer = this.batchBuffer,
+                        template = this.options.template,
+                        emptyTemplate = this.options.emptyTemplate;
 
                     if(index >= 0) {
-                        page.content(template(buffer.at(index)));
+                        page.content(template(batchBuffer.at(index)));
                     } else {
-                        page.content("<span>empty</span>");
+                        page.content(emptyTemplate({}));
                     }
                 }
 
@@ -388,6 +424,26 @@
                     this.element.css("transform", "translate3d(" + this.width + "px, 0, 0)"); 
                 }
             });
+
+            var BatchBuffer = kendo.Class.extend({
+                init: function (dataSource, batchSize) {
+                    this.dataSource = dataSource;
+                    this.batchSize = batchSize;
+                    this.buffer = new kendo.data.Buffer(dataSource, 0);
+                },
+                at: function (index) {
+                    var buffer = this.buffer,
+                        skip = index * this.batchSize,
+                        take = this.batchSize,
+                        view = [];
+
+                    for (var i = 0; i < take; i++) {
+                        view.push(buffer.at(skip + i));
+                    }
+
+                    return view;
+                }
+            })
 
         })(window.kendo.jQuery);
     </script>
