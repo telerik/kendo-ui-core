@@ -21,14 +21,14 @@
             $(function() {
                 $("#chart").kendoChart({
                     seriesDefaults: {
-                        // TODO: Apply
+                        // TODO: Document for radarColumn series
                         //gap: 0,
                         //spacing: 0
                     },
                     series: [{
                         type: "radarColumn",
                         stack: true,
-                        data: [1, 2, 3],
+                        data: [-1, -2, -3],
                         color: "red",
                         opacity: 0.5,
                         markers: {
@@ -36,7 +36,7 @@
                         }
                     }, {
                         type: "radarColumn",
-                        data: [2, 4, 6]
+                        data: [-2, -4, -6]
                     }],
                     categoryAxis: {
                         categories: ["Foo", "Bar", "Baz"],
@@ -52,16 +52,22 @@
                             //type: "line" // default
                             type: "arc"
                         },
-                        // TODO: Negative values
+
+                        // TODO: Support
+                        //reverse: true
+
                         // TODO: Round to major unit
-                        max: 9
+                        // max: 9
                     },
                     plotArea: {
                         background: "green",
                         opacity: 0.1
                     },
                     // TODO: Implement
-                    transitions: false
+                    transitions: false,
+                    tooltip: {
+                        visible: true
+                    }
                 });
 
                 $("#pie").kendoChart({

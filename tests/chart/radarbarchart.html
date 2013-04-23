@@ -34,7 +34,7 @@
 
             SegmentStub.prototype = {
                 reflow: function(sector) {
-                    this.sector = sector;
+                    this.sector = sector.clone();
                 }
             };
 
@@ -141,6 +141,36 @@
                 test("second sector inner radius equals first sector radius", function() {
                     equal(s2.ir, 10);
                 });
+
+                // ------------------------------------------------------------
+                module("Stack Layout / Inverted", {
+                    setup: function() {
+                        createStack({ isReversed: true });
+                    }
+                });
+
+                test("first sector radius is not changed", function() {
+                    equal(s1.r, 10);
+                });
+
+                test("first sector is fitted in sector segment", function() {
+                    equal(s1.startAngle, 110);
+                    equal(s1.angle, 70);
+                });
+
+                test("second sector radius is not changed", function() {
+                    equal(s2.r, 10);
+                });
+
+                test("second sector is fitted in sector segment", function() {
+                    equal(s1.startAngle, 110);
+                    equal(s1.angle, 70);
+                });
+
+                test("first sector inner radius equals first sector radius", function() {
+                    equal(s1.ir, 10);
+                });
+
             })();
 
             /*
