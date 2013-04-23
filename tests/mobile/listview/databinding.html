@@ -460,7 +460,9 @@
             asyncTest("Pull to refresh passes first item to the callback", 2, function(){
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
 
-                var listview, calls = 1;
+                var listview,
+                    calls = 1;
+
                 var ds = kendo.data.DataSource.create({
                     transport: {
                         read: { url: "foo.json", dataType: "json" },
@@ -498,18 +500,9 @@
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo1"] });
 
-                function secondAssert() {
+                ds.bind("change", function() {
                     scroller.trigger("pull");
-                }
-
-                function firstAssert() {
-                    ds.unbind("change", firstAssert);
-                    ds.bind("change", secondAssert);
-
-                    scroller.trigger("pull");
-                }
-
-                ds.bind("change", firstAssert);
+                });
             });
 
             module("press to load more", {

@@ -172,6 +172,8 @@ kendo_module({
                 dataSource = listView.dataSource,
                 pullParameters = options.pullParameters || DEFAULT_PULL_PARAMETERS;
 
+            that._first = dataSource.view()[0];
+
             scroller.setOptions({
                 pullToRefresh: true,
                 pull: function() {
@@ -183,29 +185,20 @@ kendo_module({
                 refreshTemplate: options.refreshTemplate
             });
 
-            var element = listView.element[0];
-
-            listView.bind("dataBinding", function(e) {
-                var view = e.view,
-                    item;
-
-                if (!element.firstChild) {
-                    that._first = view[0];
+            dataSource.bind("change", function() {
+                if (that._pulled) {
+                    scroller.pullHandled();
                 }
 
-                if (that._pulled) {
-                    that._pulled = false;
+                if (that._pulled || !that._first) {
+                    var view = dataSource.view();
 
-                    item = view[0];
-
-                    if (item) {
-                        that._first = item;
+                    if (view[0]) {
+                        that._first = view[0];
                     }
                 }
-            });
 
-            listView.bind("dataBound", function() {
-                scroller.pullHandled();
+                that._pulled = false;
             });
         }
     });
@@ -242,18 +235,13 @@ kendo_module({
             element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
 
-            that._footer();
-
             that._dataSource();
-
-            that._bindScroller();
 
             if (that.options.pullToRefresh) {
                 that._refreshHandler = new RefreshHandler(this);
             }
 
             that._headerFixer = new HeaderFixer(this);
-
 
             that._filterable();
 
@@ -310,10 +298,6 @@ kendo_module({
             var that = this;
 
             Widget.fn.destroy.call(that);
-
-            that._unbindDataSource();
-            that.stopEndlessScrolling();
-            that.stopLoadMore();
 
             kendo.destroy(that.element);
             that._userEvents.destroy();
@@ -386,8 +370,6 @@ kendo_module({
                 that._templates();
             }
 
-            that._cacheDataItems(view);
-
             that.trigger("dataBinding", { view: view });
 
             groups = dataSource.group();
@@ -415,53 +397,11 @@ kendo_module({
             element[appendMethod](contents);
             mobile.init(contents);
 
-            if (loading) {
-                that.loading = false;
-                that._calcThreshold();
-                that._toggleLoader(false);
-            }
-
             that._hideLoading();
 
             that._style();
 
-            that._invalidateLoadMore();
-
             that.trigger("dataBound", { ns: ui });
-        },
-
-        _invalidateLoadMore: function() {
-            var that = this,
-                options = that.options,
-                dataSource = that.dataSource,
-                shouldInit = that._stopLoadMore && (!dataSource.total() || dataSource.page() < dataSource.totalPages());
-
-            if (shouldInit) {
-                if (options.endlessScroll) {
-                    that.initEndlessScrolling();
-                }
-
-                if (options.loadMore) {
-                    that.initLoadMore();
-                }
-            }
-        },
-
-        _cacheDataItems: function(view) {
-            var that = this, item;
-
-            if (!that.element[0].firstChild) {
-                that._firstOrigin = view[0];
-                that._last = view[view.length - 1];
-            }
-
-            if (that.loading) {
-                item = view[view.length - 1];
-
-                if (item) {
-                    that._last = item;
-                }
-            }
         },
 
         items: function() {
@@ -470,51 +410,6 @@ kendo_module({
             } else {
                 return this.element.children();
             }
-        },
-
-        initEndlessScrolling: function() {
-            this._stopLoadMore = false;
-            this.scroller().setOptions({
-                resize: this._scrollerResize,
-                scroll: this._scrollerScroll
-            });
-        },
-
-        stopEndlessScrolling: function() {
-            var that = this,
-                scroller = that.scroller();
-
-           if (scroller && that._loadIcon) {
-               that.loading = false;
-               that._stopLoadMore = true;
-               that._loadIcon.parent().hide();
-
-               scroller.unbind("resize", that._scrollerResize)
-                       .unbind("scroll", that._scrollerScroll);
-
-               that.trigger(LAST_PAGE_REACHED);
-           }
-        },
-
-        initLoadMore: function() {
-            var that = this;
-
-            that._stopLoadMore = false;
-            that._loadButton.autoApplyNS().on("up", proxy(that._nextPage, that));
-        },
-
-        stopLoadMore: function() {
-           var that = this;
-
-           if (that._loadButton) {
-               that._stopLoadMore = true;
-               that.loading = false;
-               that._loadButton
-                   .kendoDestroy()
-                   .parent().hide();
-
-               that.trigger(LAST_PAGE_REACHED);
-           }
         },
 
         _dim: function(e) {
@@ -564,59 +459,6 @@ kendo_module({
 
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
                 that.dataSource.bind(PROGRESS, that._progressHandler);
-            }
-        },
-
-        _bindScroller: function() {
-            var that = this,
-                options = that.options,
-                scroller = that.scroller();
-
-            if (!scroller) {
-                return;
-            }
-
-            if (options.endlessScroll) {
-                that._scrollHeight = scroller.element.height();
-                that._scrollerResize = function() {
-                    that._scrollHeight = scroller.element.height();
-                    that._calcThreshold();
-                },
-                that._scrollerScroll = function(e) {
-                    if (!that.loading && e.scrollTop + that._scrollHeight > that._threshold) {
-                        that._nextPage();
-                    }
-                };
-
-                that.initEndlessScrolling();
-            }
-        },
-
-        _calcThreshold: function() {
-            var that = this,
-                scroller = that.scroller();
-
-            if (scroller) {
-                that._threshold = scroller.scrollHeight() - that.options.scrollThreshold;
-            }
-        },
-
-        _nextPage: function() {
-            var that = this,
-                options = that.options,
-                callback = options.endlessScrollParameters || options.loadMoreParameters,
-                params;
-
-            that.loading = true;
-            that._toggleLoader(true);
-
-            if (callback) {
-                params = callback.call(that, that._firstOrigin, that._last);
-            }
-
-            if (!that.dataSource.next(params)) {
-                that.stopLoadMore();
-                that.stopEndlessScrolling();
             }
         },
 
@@ -726,46 +568,6 @@ kendo_module({
                     enhanceItem(item);
                 }
             });
-        },
-
-        _footer: function() {
-            var that = this,
-                options = that.options,
-                loadMore = options.loadMore,
-                loadWrapper;
-
-            if (loadMore || options.endlessScroll) {
-                that._loadIcon = $('<span style="display:none" class="km-icon"></span>');
-                loadWrapper = $('<span class="km-load-more"></span>').append(that._loadIcon);
-
-                if (loadMore) {
-                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>');
-
-                    that.initLoadMore();
-
-                    loadWrapper.append(that._loadButton);
-                }
-
-                that.wrapper.append(loadWrapper);
-            }
-        },
-
-        _toggleLoader: function(toggle) {
-            var that = this,
-                icon = that._loadIcon,
-                button = that._loadButton;
-
-            if (button) {
-                button.toggle(!toggle);
-            }
-
-            if (toggle) {
-                icon.parent().addClass("km-scroller-refresh");
-                icon.css("display", "block");
-            } else {
-                icon.hide();
-                icon.parent().removeClass("km-scroller-refresh");
-            }
         },
 
         scroller: function() {
