@@ -1497,6 +1497,27 @@
                 equal(dataSource.total(), 1);
             });
 
+            test("query does not call transport if all items are deleted and server operations are disabled", function() {
+                var dataSource = new DataSource({
+                    data: [{ id: 1, foo: "bar" }]
+                });
+                dataSource.read();
+                dataSource.remove(dataSource.at(0));
+                dataSource.fetch();
+                equal(dataSource.view().length, 0);
+            });
+
+            test("query calls transport if all items are deleted and server operations are enabled", function() {
+                var dataSource = new DataSource({
+                    data: [{ id: 1, foo: "bar" }],
+                    serverPaging: true
+                });
+                dataSource.read();
+                dataSource.remove(dataSource.at(0));
+                dataSource.fetch();
+                equal(dataSource.view().length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -2488,7 +2488,7 @@ kendo_module({
                 result,
                 remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
 
-            if (remote || (that._data === undefined || that._data.length === 0)) {
+            if (remote || ((that._data === undefined || that._data.length === 0) && !that._destroyed.length)) {
                 that.read(that._mergeState(options));
             } else {
                 if (!that.trigger(REQUESTSTART)) {
