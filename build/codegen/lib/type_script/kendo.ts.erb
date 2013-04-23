@@ -20,6 +20,7 @@ module kendo {
     declare function parseFloat(value: any, culture?: string): number;
     declare function parseInt(value: any, culture?: string): number;
     declare function render(template:(data: any) => string, data: any[]): string;
+    declare function stringify(value: Object): string;
     declare function template(template: string, options?: TemplateOptions): (data: any) => string;
     declare function touchScroller(selector: string): void;
     declare function touchScroller(element: Element): void;
@@ -496,7 +497,7 @@ module kendo.data {
         transport?: DataSourceTransport;
         type?: string;
         change? (e: DataSourceChangeEvent): void;
-        error?(e: DataSourceEvent): void;
+        error?(e: DataSourceErrorEvent): void;
         sync?(e: DataSourceEvent): void;
         requestStart?(e: DataSourceRequestStartEvent): void;
         requestEnd?(e: DataSourceRequestEndEvent): void;
@@ -512,6 +513,13 @@ module kendo.data {
         action?: string;
         index?: number;
         items?: Model[];
+    }
+
+    interface DataSourceErrorEvent extends DataSourceEvent {
+        xhr: JQueryXHR;
+        status: string;
+        errorThrown: any;
+        errors?: any;
     }
 
     interface DataSourceRequestStartEvent extends DataSourceEvent {
