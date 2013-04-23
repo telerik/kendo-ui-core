@@ -203,6 +203,63 @@ kendo_module({
         }
     });
 
+    var ListViewItemBinder = kendo.Class.extend({
+        init: function(listView) {
+            var that = this;
+
+            that.listView = listView;
+            that.options = listView.options;
+
+            that._refreshHandler = function(e) {
+                that.refresh(e);
+            }
+
+            that._progressHandler = function(e) {
+                // TODO:
+            }
+
+            that.configure();
+        },
+
+        refresh: function(e) {
+            var action = e.action,
+                dataItems = e.items,
+                listView = this.listView;
+
+            if (action === "itemchange") {
+               var items = listView.findByDataItem(dataItems);
+               listView.setDataItem(items[0], dataItems[0]);
+            } else {
+                listView.replace(this.dataSource.view());
+            }
+        },
+
+        configure: function() {
+            var that = this,
+                options = that.options;
+
+            if (that.dataSource) {
+                that._unbindDataSource();
+            }
+
+            that.dataSource = DataSource.create(options.dataSource).bind(CHANGE, that._refreshHandler);
+
+            if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
+                that.dataSource.bind(PROGRESS, that._progressHandler);
+            }
+
+            if (options.autoBind) {
+                that.dataSource.fetch();
+            }
+
+            // legacy support
+            that.listView.dataSource = that.dataSource;
+        },
+
+        _unbindDataSource: function() {
+            this.dataSource.unbind(CHANGE, this._refreshHandler).unbind(PROGRESS, this._progressHandler);
+        }
+    });
 
     var ListView = Widget.extend({
         init: function(element, options) {
@@ -242,6 +299,8 @@ kendo_module({
 
             that._templates();
 
+            this._itemBinder = new ListViewItemBinder(this);
+
             that._style();
 
             that._enhanceItems(that.items());
@@ -277,6 +336,11 @@ kendo_module({
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
+        },
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+            this._itemBinder.configure();
         },
 
         destroy: function() {
@@ -351,7 +415,7 @@ kendo_module({
 
         setDataItem: function(item, dataItem) {
             return this._renderItems([dataItem], function(items) {
-                item.replaceWith(items);
+                $(item).replaceWith(items);
             });
         },
 
