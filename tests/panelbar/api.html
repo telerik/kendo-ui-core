@@ -6,11 +6,12 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.panelbar.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet/less"/>
+        <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+        <script type="text/javascript" src="../../demos/mvc/content/shared/js/less.js"></script>
 
    <script type="text/javascript">
 
@@ -19,7 +20,7 @@
        var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
 
         function getRootItem(index) {
-  	return $('#PanelBar1').find('.k-header').parent().eq(index)
+  	        return $('#PanelBar1').children().eq(index);
         }
 
         function getPanelBar() {
@@ -159,7 +160,7 @@
 
     <script type="text/javascript">
 
-        $("#PanelBar1").kendoPanelBar({ animation: false, expand: Expand, collapse: Collapse, select: Select, activate: Activate });
+        $("#PanelBar1").kendoPanelBar({ expand: Expand, collapse: Collapse, select: Select, activate: Activate });
 
         module("api", {
             teardown: function() {
@@ -168,10 +169,9 @@
         });
 
         test('trigger input select should not bubble', function() {
-
             isRaised = false;
 
-            var item = getRootItem(6);
+            var item = getRootItem(4);
 
             $(item).find('input').first().trigger('select');
 
@@ -179,7 +179,6 @@
         });
 
         test('clicking should raise onSelect event', function() {
-
             var item = getRootItem(0);
 
             isSelectRaised = false;
@@ -190,22 +189,16 @@
         });
 
         test('collapse should raise onCollapse event', function() {
-
-            var panel = getPanelBar();
-
             isCollapseRaised = false;
 
             var item = getRootItem(3);
 
-            item.find('> .k-link').trigger('click');
+            item.find('> .k-link').click();
 
             ok(isCollapseRaised);
         });
 
         test('expand should raise onExpand event', function() {
-
-            var panel = getPanelBar();
-
             isExpandRaised = false;
 
             var item = getRootItem(2);
@@ -216,9 +209,6 @@
         });
 
         asyncTest('expand should raise onActivate event after duration', function() {
-
-            var panel = getPanelBar();
-
             isActivateRaised = false;
 
             var item = getRootItem(4);
@@ -244,7 +234,7 @@
         test('enable method should enable disabled item', function() {
             var panel = getPanelBar();
 
-            var item = getRootItem(3);
+            var item = getRootItem(2);
 
             panel.enable(item);
 

@@ -10,6 +10,9 @@
         <script src="../../src/kendo.panelbar.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link type="text/css" href="../../styles/web/kendo.common.less" rel="stylesheet/less"/>
+        <link type="text/css" href="../../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+        <script type="text/javascript" src="../../demos/mvc/content/shared/js/less.js"></script>
         <style>
             html
             {
@@ -30,7 +33,7 @@
    <script type="text/javascript">
 
         function getRootItem(index) {
-            return $('#PanelBar1').find('.k-header').parent().eq(index)
+            return $('#PanelBar1').children().eq(index)
         }
 
         function getPanelBar() {
@@ -46,8 +49,8 @@
 </head>
 <body>
 
-<ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; position: absolute; visibility: hidden;">
-    <li class="k-item k-state-default"><span class="k-link k-header"><img alt="Mail Icon" class="k-image"
+<ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px; z-index: 100; position: relative; visibility: visible;">
+    <li class="k-item k-state-default k-state-selected"><span class="k-link k-header"><img alt="Mail Icon" class="k-image"
                                                                           src="../../playground/Icons/mail.gif">Mail<span
             class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>
         <ul style="display: none;" class="k-group">
@@ -151,6 +154,15 @@
 
     <script type="text/javascript">
 
+        test('clicking not expandable item should not collapse expanded item', function() {
+            var item = getRootItem(3);
+            var item2 = getRootItem(1);
+
+            item2.find('> .k-link').click();
+
+            equal(item.find('.k-group').css("display"), "block");
+        });
+
         test('clicking item should collapse other and fire collapse on it', function() {
 
             var panelbar = getPanelBar(),
@@ -169,7 +181,6 @@
         });
 
         test('clicking item twice should not collapse it', function() {
-
             var item = getRootItem(0);
 
             item.find('> .k-link').trigger('click');
@@ -179,21 +190,10 @@
         });
 
         test('clicking subItem should not collapse headerItem', function() {
-
             var item = getRootItem(0);
             var subItem = item.find('> .k-group').children()[0];
 
             $(subItem).find('> .k-link').trigger('click');
-
-            equal(item.find('.k-group').css("display"), "block");
-        });
-
-        test('clicking not expandable item should not collapse expanded item', function() {
-
-            var item = getRootItem(0);
-            var item2 = getRootItem(1);
-
-            item2.find('> .k-link').trigger('click');
 
             equal(item.find('.k-group').css("display"), "block");
         });
