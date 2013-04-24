@@ -1898,70 +1898,6 @@ kendo_module({
             return this.box;
         },
 
-        renderGridLines: function(view, altAxis) {
-            var axis = this,
-                options = axis.options,
-                radius = math.abs(axis.box.center().y - altAxis.lineBox().y1),
-                majorDivisions,
-                minorDivisions,
-                minorSkipStep = 0,
-                gridLines = [];
-
-            if (options.majorGridLines.visible) {
-                majorDivisions = axis.gridLineDivisions(altAxis, 1);
-                minorSkipStep = 1;
-
-                gridLines = axis.getGridLines(
-                    view, majorDivisions, radius, options.majorGridLines
-                );
-            }
-
-            if (options.minorGridLines.visible) {
-                minorDivisions = axis.gridLineDivisions(altAxis, 0.5, minorSkipStep),
-
-                gridLines.push.apply(gridLines, axis.getGridLines(
-                    view, minorDivisions, radius, options.minorGridLines
-                ));
-            }
-
-            return gridLines;
-        },
-
-        // TODO: Sane naming
-        getGridLines: function(view, angles, radius, options) {
-            var axis = this,
-                center = axis.box.center(),
-                modelId = axis.plotArea.options.modelId,
-                i,
-                outerPt,
-                elements = [],
-                lineOptions;
-
-            lineOptions = {
-                data: { modelId: modelId },
-                zIndex: -1,
-                strokeWidth: options.width,
-                stroke: options.color,
-                dashType: options.dashType
-            };
-
-            for (i = 0; i < angles.length; i++) {
-                outerPt = Point2D.onCircle(center, angles[i], radius);
-
-                // TODO: Inner radius support
-                elements.push(view.createLine(
-                    center.x, center.y, outerPt.x, outerPt.y,
-                    lineOptions
-                ));
-            }
-
-            return elements;
-        },
-
-        renderPlotBands: function() {
-            // TODO: Filled sectors, polygons (yikes!)
-        },
-
         divisions: function(step, skipStep) {
             var axis = this,
                 options = axis.options,
@@ -2003,6 +1939,65 @@ kendo_module({
             return this.divisions(0.5);
         },
 
+        renderGridLines: function(view, altAxis) {
+            var axis = this,
+                options = axis.options,
+                radius = math.abs(axis.box.center().y - altAxis.lineBox().y1),
+                majorDivisions,
+                minorDivisions,
+                minorSkipStep = 0,
+                gridLines = [];
+
+            if (options.majorGridLines.visible) {
+                majorDivisions = axis.gridLineDivisions(altAxis, 1);
+                minorSkipStep = 1;
+
+                gridLines = axis.gridLineElements(
+                    view, majorDivisions, radius, options.majorGridLines
+                );
+            }
+
+            if (options.minorGridLines.visible) {
+                minorDivisions = axis.gridLineDivisions(altAxis, 0.5, minorSkipStep),
+
+                gridLines.push.apply(gridLines, axis.gridLineElements(
+                    view, minorDivisions, radius, options.minorGridLines
+                ));
+            }
+
+            return gridLines;
+        },
+
+        gridLineElements: function(view, angles, radius, options) {
+            var axis = this,
+                center = axis.box.center(),
+                modelId = axis.plotArea.options.modelId,
+                i,
+                outerPt,
+                elements = [],
+                lineOptions;
+
+            lineOptions = {
+                data: { modelId: modelId },
+                zIndex: -1,
+                strokeWidth: options.width,
+                stroke: options.color,
+                dashType: options.dashType
+            };
+
+            for (i = 0; i < angles.length; i++) {
+                outerPt = Point2D.onCircle(center, angles[i], radius);
+
+                // TODO: Inner radius support
+                elements.push(view.createLine(
+                    center.x, center.y, outerPt.x, outerPt.y,
+                    lineOptions
+                ));
+            }
+
+            return elements;
+        },
+
         gridLineDivisions: function(altAxis, step, skipStep) {
             var result = this.divisions(step, skipStep);
 
@@ -2011,6 +2006,10 @@ kendo_module({
             }
 
             return result;
+        },
+
+        renderPlotBands: function() {
+            // TODO: Filled sectors, polygons (yikes!)
         },
 
         getSlot: function(from, to) {
@@ -2090,7 +2089,7 @@ kendo_module({
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
-                gridLines = axis.getGridLines(
+                gridLines = axis.gridLineElements(
                     view, center, majorTicks, majorAngles, options.majorGridLines
                 );
             }
@@ -2098,8 +2097,7 @@ kendo_module({
             return gridLines;
         },
 
-        // TODO: Sane naming
-        getGridLines: function(view, center, ticks, angles, options) {
+        gridLineElements: function(view, center, ticks, angles, options) {
             var axis = this,
                 modelId = axis.plotArea.options.modelId,
                 elements = [],
