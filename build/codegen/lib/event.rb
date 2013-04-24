@@ -56,6 +56,12 @@ module CodeGen
             @options = [];
         end
 
+        def suite
+            return 'web' if owner.full_name.include?('kendo.ui')
+            return 'web' if owner.full_name.include?('kendo.dataviz')
+            return 'mobile' if owner.full_name.include?('kendo.mobile')
+            'framework'
+        end
     end
 
     class EventOption
