@@ -1986,8 +1986,33 @@ kendo_module({
             return result;
         },
 
-        renderPlotBands: function() {
-            // TODO: Filled sectors, polygons (yikes!)
+        renderPlotBands: function(view) {
+            var axis = this,
+                options = axis.options,
+                plotBands = options.plotBands || [],
+                valueAxis = axis.plotArea.valueAxis,
+                radius = math.abs(axis.box.center().y - valueAxis.lineBox().y1),
+                divs = axis.majorDivisions(),
+                elements = [];
+
+            for (var i = 0; i < plotBands.length; i++) {
+                var band = plotBands[i];
+                var slot = axis.getSlot(band.from, band.to - 1);
+
+                var tail = band.to - math.floor(band.to);
+                if (tail) {
+                    slot.angle = tail * slot.angle;
+                }
+
+                elements.push(view.createSector(slot, {
+                    fill: band.color,
+                    fillOpacity: band.opacity,
+                    strokeOpacity: band.opacity,
+                    zIndex: -1
+                }));
+            }
+
+            return elements;
         },
 
         getSlot: function(from, to) {
@@ -1995,8 +2020,8 @@ kendo_module({
                 options = axis.options,
                 justified = options.justified,
                 box = axis.box,
-                dics = axis.majorDivisions(),
-                totalDivs = dics.length,
+                divs = axis.majorDivisions(),
+                totalDivs = divs.length,
                 slots,
                 slotAngle = 360 / totalDivs,
                 startAngle,
@@ -2007,7 +2032,7 @@ kendo_module({
             }
 
             from = clipValue(from, 0, totalDivs - 1);
-            startAngle = dics[from];
+            startAngle = divs[from];
 
             if (justified) {
                 startAngle = startAngle - slotAngle / 2;

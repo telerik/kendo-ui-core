@@ -26,16 +26,25 @@
                 chartBox = new Box2D(100, 100, 500, 500),
                 view,
                 axis,
+                altAxis,
                 TOLERANCE = 1;
 
             function createAxis(options) {
+                altAxis = {
+                    options: { visible: true },
+                    lineBox: function() { return new Box2D(300, 100, 300, 300); }
+                };
+
                 axis = new dataviz.RadarCategoryAxis(
                     deepExtend({
                         categories: ["Foo", "Bar", "Baz"]
                     }, options)
                 );
                 axis.reflow(chartBox);
-                axis.plotArea = { options: {} };
+                axis.plotArea = {
+                    options: {},
+                    valueAxis: altAxis
+                };
 
                 view = new ViewStub();
                 axis.getViewElements(view);
@@ -419,11 +428,6 @@
             });
 
             // ------------------------------------------------------------
-            var altAxis = {
-                options: { visible: true },
-                lineBox: function() { return new Box2D(300, 100, 300, 300); }
-            };
-
             module("Radar Category Axis / Grid lines", {
                 setup: function() {
                     createAxis();
@@ -526,7 +530,7 @@
                             color: "red"
                         }, {
                             from: 1,
-                            to: 1.5,
+                            to: 1.25,
                             color: "green"
                         }]
                     });
@@ -537,12 +541,12 @@
                 equal(view.log.sector.length, 2);
             });
 
-            test("renders sector for full slot", function() {
-                equal(view.log.sector[0].angle, 120);
+            test("sets sector angle for full slot", function() {
+                equal(view.log.sector[0].sector.angle, 120);
             });
 
-            test("renders sector for partial slot", function() {
-                equal(view.log.sector[1].angle, 60);
+            test("sets sector angle for partial slot", function() {
+                equal(view.log.sector[1].sector.angle, 30);
             });
 
             test("renders color", function() {
@@ -550,11 +554,11 @@
             });
 
             test("renders opacity", function() {
-                equal(view.log.sector.style.fillOpacity, 0.5);
+                equal(view.log.sector[0].style.fillOpacity, 0.5);
             });
 
             test("renders z index", function() {
-                equal(plotBands.style.zIndex, -1);
+                equal(view.log.sector[0].style.zIndex, -1);
             });
 
             (function() {

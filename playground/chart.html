@@ -41,17 +41,15 @@
                     }],
                     categoryAxis: {
                         categories: ["Foo", "Bar", "Baz"],
-                        labels: {
-                            background: "red"
-                        },
-                        minorGridLines: {
-                            visible: true,
-                            color: "red"
-                        },
                         majorGridLines: {
-                            visible: true,
-                            color: "blue"
-                        }
+                            // TODO: Document
+                            // visible: true
+                        },
+                        plotBands: [{
+                            from: 0, to: 0.25,
+                            color: "red",
+                            opacity: 0.5
+                        }]
                         //justified: false,
                         //reverse: true
                         //startAngle: 90 // default
