@@ -1829,35 +1829,16 @@ kendo_module({
         }
     });
 
-    var RadarCategoryAxis = ChartElement.extend({
-        init: function(options) {
-            var axis = this;
-
-            ChartElement.fn.init.call(axis, options);
-
-            axis.createLabels();
-        },
-
+    var RadarCategoryAxis = CategoryAxis.extend({
         options: {
-            type: CATEGORY,
-            categories: [],
-            // TODO: New property
+            // TODO: Document
             startAngle: 90,
             labels: {
-                visible: true,
-                step: 1,
-                skip: 0,
+                // TODO: Document
                 margin: getSpacing(10)
             },
             majorGridLines: {
-                visible: true,
-                width: 1,
-                color: BLACK
-            },
-            minorGridLines: {
-                visible: false,
-                width: 1,
-                color: BLACK
+                visible: true
             },
             // TODO: Document for radar charts
             justified: true
@@ -1870,6 +1851,10 @@ kendo_module({
         reflow: function(box) {
             this.box = box;
             this.reflowLabels();
+        },
+
+        lineBox: function() {
+            return this.box;
         },
 
         reflowLabels: function() {
@@ -1887,15 +1872,6 @@ kendo_module({
                     0, labelBox.width(), labelBox.height()
                 ));
             }
-        },
-
-        // TODO: Extract
-        createLabels: Axis.fn.createLabels,
-        labelsCount: CategoryAxis.fn.labelsCount,
-        createAxisLabel: CategoryAxis.fn.createAxisLabel,
-
-        lineBox: function() {
-            return this.box;
         },
 
         divisions: function(step, skipStep) {
@@ -1938,6 +1914,8 @@ kendo_module({
         minorDivisions: function() {
             return this.divisions(0.5);
         },
+
+        renderLine: $.noop,
 
         renderGridLines: function(view, altAxis) {
             var axis = this,
@@ -2065,10 +2043,7 @@ kendo_module({
             }
 
             return index;
-        },
-
-        // TODO: Extract?
-        getCategory: CategoryAxis.fn.getCategory
+        }
     });
 
     var PolarNumericAxis = NumericAxis.extend({

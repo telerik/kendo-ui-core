@@ -1201,13 +1201,13 @@ kendo_module({
             return ticks;
         },
 
-        getViewElements: function(view) {
+        renderLine: function(view) {
             var axis = this,
                 options = axis.options,
                 line = options.line,
                 lineBox = axis.lineBox(),
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                lineOptions;
+                lineOptions,
+                elements = [];
 
             if (line.width > 0 && line.visible) {
                 lineOptions = {
@@ -1218,16 +1218,24 @@ kendo_module({
                     align: options._alignLines
                 };
 
-                childElements.push(view.createLine(
+                elements.push(view.createLine(
                     lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
                     lineOptions));
 
-                append(childElements, axis.renderTicks(view));
+                append(elements, axis.renderTicks(view));
             }
 
-            append(childElements, axis.renderPlotBands(view));
+            return elements;
+        },
 
-            return childElements;
+        getViewElements: function(view) {
+            var axis = this,
+                elements = ChartElement.fn.getViewElements.call(axis, view);
+
+            append(elements, axis.renderLine(view));
+            append(elements, axis.renderPlotBands(view));
+
+            return elements;
         },
 
         getActualTickSize: function () {
@@ -1384,7 +1392,7 @@ kendo_module({
             }
 
             axis.arrangeTitle();
-            axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
+            axis.arrangeLabels();
         },
 
         arrangeLabels: function() {
