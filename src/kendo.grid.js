@@ -503,7 +503,10 @@ kendo_module({
             colgroup.remove();
         }
 
-        colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="k-group-col">') + cols.join("")));
+        colgroup = $(new Array(groups + 1).join('<col class="k-group-col">') + cols.join(""));
+        if (!colgroup.is("colgroup")) {
+            colgroup = $("<colgroup/>").append(colgroup);
+        }
 
         table.prepend(colgroup);
 
