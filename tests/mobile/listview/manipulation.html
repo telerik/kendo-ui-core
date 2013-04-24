@@ -116,6 +116,22 @@
                 equal(listView.element.children().html(), "2");
             });
 
+            test("grouped replace renders grouped items", 3, function() {
+                listView = new ListView("<ul />", { template: "#: data.value #" });
+                var foo = { value: "foo", uid: "foo" },
+                    bar = { value: "bar", uid: "bar" },
+                    view = { value: "A", items: [foo, bar] };
+
+                listView.replaceGrouped([view]);
+
+                var subList = listView.element.find("li>ul");
+                console.log(listView.element.children());
+
+                equal(subList.find("li").length, 2);
+                equal(subList.find("li").eq(0).text(), "foo");
+                equal(subList.find("li").eq(1).text(), "bar");
+            });
+
             test("setDataItem re-renders the item template", 1, function() {
                 listView = new ListView("<ul />", { template: "#: data.value #" });
                 var dataItem = { value: 1, uid: "foo" };

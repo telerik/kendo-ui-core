@@ -201,6 +201,29 @@
                 kendo.initWidget = originInit;
             });
 
+            test("append on refresh prepends items", function() {
+                var dom = $("<ul/>"),
+                    originInit = kendo.initWidget;
+
+                var listView = new ListView(dom, {
+                    dataSource: [ { text: "foo" }, { text: "bar" } ],
+                    appendOnRefresh: true,
+                    template: "#= text #"
+                });
+
+                stub(kendo, {
+                    initWidget: originInit
+                });
+
+                listView.dataSource.data([ { text: "baz" } ]);
+
+                equal(listView.element.children().length, 3);
+
+                equal($(listView.element.children()[0]).html(), 'baz');
+
+                kendo.initWidget = originInit;
+            });
+
             var dom, dataSource, listView, subList, data;
 
             module("grouped datasource", {
@@ -313,7 +336,7 @@
 
                 var dataSource = listView.dataSource;
 
-                listView._dataSource();
+                listView.setDataSource(new kendo.data.DataSource({ data:[{text: 1, value: 1}, {text:2, value:2}] }));
 
                 listView.bind("dataBound", function() {
                     ok(false, "Change event is not detached");

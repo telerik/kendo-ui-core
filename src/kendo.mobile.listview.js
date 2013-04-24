@@ -224,13 +224,25 @@ kendo_module({
         refresh: function(e) {
             var action = e.action,
                 dataItems = e.items,
-                listView = this.listView;
+                listView = this.listView,
+                dataSource = this.dataSource,
+                prependOnRefresh = this.options.appendOnRefresh,
+                view = dataSource.view(),
+                groups = dataSource.group(),
+                groupedMode = groups && groups[0];
 
             if (action === "itemchange") {
-               var items = listView.findByDataItem(dataItems);
-               listView.setDataItem(items[0], dataItems[0]);
-            } else {
-                listView.replace(this.dataSource.view());
+                var items = listView.findByDataItem(dataItems);
+                listView.setDataItem(items[0], dataItems[0]);
+            }
+            else if (groupedMode) {
+                listView.replaceGrouped(view);
+            }
+            else if (prependOnRefresh) {
+                listView.prepend(view);
+            }
+            else {
+                listView.replace(view);
             }
         },
 
@@ -300,6 +312,10 @@ kendo_module({
             that._templates();
 
             this._itemBinder = new ListViewItemBinder(this);
+
+            if (this.options.pullToRefresh) {
+                this._pullToRefreshHandler = new RefreshHandler(this);
+            }
 
             that._style();
 
@@ -397,6 +413,18 @@ kendo_module({
         replace: function(dataItems) {
             this.element.empty();
             return this._insert(dataItems, 'append');
+        },
+
+        replaceGrouped: function(groups) {
+            this.options.type = "group";
+            this.element.empty();
+            var items = $(kendo.render(this.groupTemplate, groups));
+
+            this._enhanceItems(items);
+            mobile.init(items);
+
+            this.element.append(items);
+            this._style();
         },
 
         remove: function(dataItems) {
