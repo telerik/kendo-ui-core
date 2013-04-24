@@ -557,7 +557,6 @@
                 equal(plotBands.style.zIndex, -1);
             });
 
-            /*
             (function() {
                 var chart,
                     label,
@@ -576,7 +575,7 @@
                             category: "C"
                         }],
                         series: [{
-                            type: "line",
+                            type: "radarColumn",
                             field: "value"
                         }],
                         categoryAxis: {
@@ -668,7 +667,7 @@
                             category: "C"
                         }],
                         series: [{
-                            type: "line",
+                            type: "radarColumn",
                             field: "value"
                         }],
                         categoryAxis: {
@@ -702,37 +701,7 @@
                     });
                 });
 
-                test("categories are bound for secondary axis", function() {
-                    createBoundChart({
-                        categoryAxis: [{
-                            name: "Axis A",
-                            field: "category"
-                        }, {
-                            name: "Axis B",
-                            field: "category"
-                        }]
-                    });
-
-                    equal(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
-                });
-
-                test("categories are bound when using categoryAxes alias", function() {
-                    createBoundChart({
-                        categoryAxes: [{
-                            name: "Axis A",
-                            field: "category"
-                        }, {
-                            name: "Axis B",
-                            field: "category"
-                        }]
-                    });
-
-                    equal(plotArea.namedCategoryAxes["Axis A"].labels.length, 3);
-                    equal(plotArea.namedCategoryAxes["Axis B"].labels.length, 3);
-                });
-
             })();
-           */
 
         </script>
 
