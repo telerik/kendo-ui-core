@@ -87,6 +87,9 @@ EVENT = ERB.new(%{
 
 <%= description %>
 
+<% if owner.instance_of? Component %>
+For additional information check the [<%= name %>](/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
+<% end %>
 #### Example
     <kendo:<%= owner.tag_name %>>
         <kendo:<%= tag_name%>>
@@ -104,6 +107,9 @@ EVENT_SECTION = ERB.new(%{
 
 <%= description %>
 
+<% if owner.instance_of? Component %>
+For additional information check the [<%= name %>](/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
+<% end %>
 #### Example
     <kendo:<%= owner.tag_name %> <%= name %>="handle_<%= name %>">
     </kendo:<%= owner.tag_name %>>
