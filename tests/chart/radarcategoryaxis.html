@@ -25,462 +25,539 @@
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 500, 500),
                 view,
+                axis,
                 TOLERANCE = 1;
 
-            (function() {
-                var axis;
+            function createAxis(options) {
+                axis = new dataviz.RadarCategoryAxis(
+                    deepExtend({
+                        categories: ["Foo", "Bar", "Baz"]
+                    }, options)
+                );
+                axis.reflow(chartBox);
+                axis.plotArea = { options: {} };
 
-                function createAxis(options) {
-                    axis = new dataviz.RadarCategoryAxis(
-                        deepExtend({
-                            categories: ["Foo", "Bar", "Baz"]
-                        }, options)
-                    );
-                    axis.reflow(chartBox);
+                view = new ViewStub();
+                axis.getViewElements(view);
+            }
 
-                    view = new ViewStub();
-                    axis.getViewElements(view);
+            // ------------------------------------------------------------
+            module("Radar Category Axis / Rendering", {
+                setup: function() {
+                    createAxis();
                 }
+            });
 
-                // ------------------------------------------------------------
-                module("Polar Category Axis / Rendering", {
-                    setup: function() {
-                        createAxis();
+            test("line box equals box", function() {
+                deepEqual(axis.lineBox(), axis.box);
+            });
+
+            test("line box equals box", function() {
+                deepEqual(axis.lineBox(), axis.box);
+            });
+
+            test("creates labels", 1, function() {
+                deepEqual($.map(view.log.text, function(text) { return text.content }),
+                     ["Foo", "Bar", "Baz"]);
+            });
+
+            test("creates labels with full format", 1, function() {
+                createAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
+
+                deepEqual($.map(view.log.text, function(text) { return text.content }),
+                     ["$1.00", "$2.00"]);
+            });
+
+            test("creates labels with simple format", 1, function() {
+                createAxis({ categories: [1, 2], labels: { format: "C"} });
+
+                deepEqual($.map(view.log.text, function(text) { return text.content }),
+                     ["$1.00", "$2.00"]);
+            });
+
+            test("labels can be hidden", function() {
+                createAxis({
+                    labels: {
+                        visible: false
                     }
                 });
 
-                test("line box equals box", function() {
-                    deepEqual(axis.lineBox(), axis.box);
-                });
+                equal(axis.labels.length, 0);
+            });
 
-                test("line box equals box", function() {
-                    deepEqual(axis.lineBox(), axis.box);
-                });
-
-                test("creates labels", 1, function() {
-                    deepEqual($.map(view.log.text, function(text) { return text.content }),
-                         ["Foo", "Bar", "Baz"]);
-                });
-
-                test("creates labels with full format", 1, function() {
-                    createAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
-
-                    deepEqual($.map(view.log.text, function(text) { return text.content }),
-                         ["$1.00", "$2.00"]);
-                });
-
-                test("creates labels with simple format", 1, function() {
-                    createAxis({ categories: [1, 2], labels: { format: "C"} });
-
-                    deepEqual($.map(view.log.text, function(text) { return text.content }),
-                         ["$1.00", "$2.00"]);
-                });
-
-                test("labels can be hidden", function() {
-                    createAxis({
-                        labels: {
-                            visible: false
-                        }
-                    });
-
-                    equal(axis.labels.length, 0);
-                });
-
-                test("labels have set template", 1, function() {
-                    createAxis({
-                        labels: {
-                            template: "|${ data.value }|"
-                        }
-                    });
-
-                    equal(view.log.text[0].content, "|Foo|");
-                });
-
-                test("labels have set color", 1, function() {
-                    createAxis({
-                        labels: {
-                            color: "#f00"
-                        }
-                    });
-
-                    equal(view.log.text[0].style.color, "#f00");
-                });
-
-                test("labels have set background", 1, function() {
-                    createAxis({
-                        labels: {
-                            background: "#f0f"
-                        }
-                    });
-
-                    equal(view.log.rect[0].style.fill, "#f0f");
-                });
-
-                test("labels have set zIndex", 1, function() {
-                    createAxis({
-                        zIndex: 2
-                    });
-
-                    equal(view.log.text[0].style.zIndex, 2);
-                });
-
-                test("labels are distributed around axis (justified)", function() {
-                    arrayClose(
-                        $.map(view.log.text, function(text) {
-                            return [text.style.x, text.style.y]
-                        }),
-                        [289.5, 75, 482.535, 410, 97.465, 410],
-                        TOLERANCE
-                    );
-                });
-
-                test("labels are distributed around axis (non-justified)", function() {
-                    createAxis({ justified: false });
-
-                    arrayClose(
-                        $.map(view.log.text, function(text) {
-                            return [text.style.x, text.style.y]
-                        }),
-                        [483, 175, 290.5, 510, 97, 175],
-                        TOLERANCE
-                    );
-                });
-
-                test("labels margin is applied", function() {
-                    createAxis({ labels: { margin: 5 } });
-
-                    arrayClose(
-                        $.map(view.log.text, function(text) {
-                            return [text.style.x, text.style.y]
-                        }),
-                        [289.5, 80, 478, 405, 102, 405],
-                        TOLERANCE
-                    );
-                });
-
-                test("labels are distributed in reverse (justified)", function() {
-                    createAxis({ reverse: true });
-
-                    arrayClose(
-                        $.map(view.log.text, function(text) {
-                            return [text.style.x, text.style.y]
-                        }),
-                        [289.5, 75, 97.465, 410, 482.535, 410],
-                        TOLERANCE
-                    );
-                });
-
-                test("labels are distributed in reverse (non-justified)", function() {
-                    createAxis({ justified: false, reverse: true });
-
-                    arrayClose(
-                        $.map(view.log.text, function(text) {
-                            return [text.style.x, text.style.y]
-                        }),
-                        [96, 175, 290.5, 510, 483, 175],
-                        TOLERANCE
-                    );
-                });
-
-                // ------------------------------------------------------------
-                module("Radar Category Axis / Divisions", {
-                    setup: function() {
-                        createAxis();
+            test("labels have set template", 1, function() {
+                createAxis({
+                    labels: {
+                        template: "|${ data.value }|"
                     }
                 });
 
-                test("divisions in normal order", function() {
-                    deepEqual(axis.getDivisions(3), [ 90, 210, 330 ]);
-                });
+                equal(view.log.text[0].content, "|Foo|");
+            });
 
-                test("divisions in reverse order", function() {
-                    createAxis({ reverse: true });
-                    deepEqual(axis.getDivisions(3), [ 90, 330, 210 ]);
-                });
-
-                test("divisions in normal order with custom startAngle", function() {
-                    createAxis({ startAngle: 0 });
-                    deepEqual(axis.getDivisions(3), [ 0, 120, 240 ]);
-                });
-
-                test("divisions in reverse order with custom startAngle", function() {
-                    createAxis({ reverse: true, startAngle: 0 });
-                    deepEqual(axis.getDivisions(3), [ 0, 240, 120 ]);
-                });
-
-                // ------------------------------------------------------------
-                var slot;
-
-                module("Radar Category Axis / Slots", {
-                    setup: function() {
-                        createAxis();
-                        slot = axis.getSlot(0);
+            test("labels have set color", 1, function() {
+                createAxis({
+                    labels: {
+                        color: "#f00"
                     }
                 });
 
-                test("slot center matches box center", function() {
-                    equal(slot.c.x, 300);
-                    equal(slot.c.y, 300);
-                });
+                equal(view.log.text[0].style.color, "#f00");
+            });
 
-                test("slot inner radius is 0", function() {
-                    equal(slot.ir, 0);
-                });
-
-                test("slot radius is half box height", function() {
-                    equal(slot.r, 200);
-                });
-
-                test("slot angle for first category (justified)", function() {
-                    equal(slot.startAngle, 30);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot angle for first category (non-justified)", function() {
-                    createAxis({ justified: false });
-
-                    slot = axis.getSlot(0);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for first category in reverse (justified)", function() {
-                    createAxis({ reverse: true });
-
-                    slot = axis.getSlot(0);
-                    equal(slot.startAngle, 30);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for first category in reverse (non-justified)", function() {
-                    createAxis({ reverse: true, justified: false });
-
-                    slot = axis.getSlot(0);
-                    equal(slot.startAngle, 330);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot angle for second category (justified)", function() {
-                    slot = axis.getSlot(1);
-                    equal(slot.startAngle, 150);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot angle for second category (non-justified)", function() {
-                    createAxis({ justified: false });
-
-                    slot = axis.getSlot(1);
-                    equal(slot.startAngle, 210);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for second category in reverse (justified)", function() {
-                    createAxis({ reverse: true });
-
-                    slot = axis.getSlot(1);
-                    equal(slot.startAngle, 270);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for second category in reverse (non-justified)", function() {
-                    createAxis({ reverse: true, justified: false });
-
-                    slot = axis.getSlot(1);
-                    equal(slot.startAngle, 210);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot angle for last category (justified)", function() {
-                    slot = axis.getSlot(2);
-                    equal(slot.startAngle, 270);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot angle for last category (non-justified)", function() {
-                    createAxis({ justified: false });
-
-                    slot = axis.getSlot(2);
-                    equal(slot.startAngle, 330);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for last category in reverse (justified)", function() {
-                    createAxis({ reverse: true });
-
-                    slot = axis.getSlot(2);
-                    equal(slot.startAngle, 150);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for last category in reverse (non-justified)", function() {
-                    createAxis({ reverse: true, justified: false });
-
-                    slot = axis.getSlot(2);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 120);
-                });
-
-                test("slot for two categories (justified)", function() {
-                    slot = axis.getSlot(0, 1);
-                    equal(slot.startAngle, 30);
-                    equal(slot.angle, 240);
-                });
-
-                test("slot for two categories (non-justified)", function() {
-                    createAxis({ justified: false });
-
-                    slot = axis.getSlot(0, 1);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 240);
-                });
-
-                test("assumes 1 category when no categories are defined (justified)", function() {
-                    createAxis({ categories: [] });
-
-                    slot = axis.getSlot(0);
-                    equal(slot.startAngle, 270);
-                    equal(slot.angle, 360);
-                })
-
-                test("assumes 1 category when no categories are defined (non-justified)", function() {
-                    createAxis({ categories: [], justified: false });
-
-                    slot = axis.getSlot(0);
-                    equal(slot.startAngle, 90);
-                    equal(slot.angle, 360);
-                });
-
-                test("reports range minimum of 0", function() {
-                    equal(axis.range().min, 0);
-                });
-
-                test("reports range maximum equal to category count", function() {
-                    equal(axis.range().max, 3);
-                });
-
-                test("from value can't be lower than 0", function() {
-                    slot = axis.getSlot(-1);
-                    equal(slot.startAngle, 30);
-                });
-
-                test("caps from value to categories count", function() {
-                    slot = axis.getSlot(1000);
-                    equal(slot.startAngle, 270);
-                });
-
-                test("to value equals from value when not set", function() {
-                    slot = axis.getSlot(1000);
-                    equal(slot.angle, 120);
-                });
-
-                test("to value equals from value when smaller", function() {
-                    slot = axis.getSlot(2, 1);
-                    equal(slot.startAngle, 270);
-                });
-
-                // ------------------------------------------------------------
-                module("CategoryAxis / getCategory ", {
-                    setup: function() {
-                        createAxis();
+            test("labels have set background", 1, function() {
+                createAxis({
+                    labels: {
+                        background: "#f0f"
                     }
                 });
 
-                test("returns null for coordinates outside of circle", function() {
-                    deepEqual(axis.getCategory(new Point2D(0, 0)), null);
+                equal(view.log.rect[0].style.fill, "#f0f");
+            });
+
+            test("labels have set zIndex", 1, function() {
+                createAxis({
+                    zIndex: 2
                 });
 
-                test("returns first category for innermost point", function() {
-                    equal(axis.getCategory(new Point2D(300, 299)), "Foo");
-                });
+                equal(view.log.text[0].style.zIndex, 2);
+            });
 
-                test("returns second category for innermost point", function() {
-                    equal(axis.getCategory(new Point2D(301, 300)), "Bar");
-                });
+            test("labels are distributed around axis (justified)", function() {
+                arrayClose(
+                    $.map(view.log.text, function(text) {
+                        return [text.style.x, text.style.y]
+                    }),
+                    [289.5, 75, 482.535, 410, 97.465, 410],
+                    TOLERANCE
+                );
+            });
 
-                test("returns third category for innermost point", function() {
-                    equal(axis.getCategory(new Point2D(299, 300)), "Baz");
-                });
+            test("labels are distributed around axis (non-justified)", function() {
+                createAxis({ justified: false });
 
-                // ------------------------------------------------------------
-                module("CategoryAxis / getCategory / Reverse", {
-                    setup: function() {
-                        createAxis({ reverse: true });
-                    }
-                });
+                arrayClose(
+                    $.map(view.log.text, function(text) {
+                        return [text.style.x, text.style.y]
+                    }),
+                    [483, 175, 290.5, 510, 97, 175],
+                    TOLERANCE
+                );
+            });
 
-                test("returns first category for innermost point", function() {
-                    equal(axis.getCategory(new Point2D(300, 299)), "Foo");
-                });
+            test("labels margin is applied", function() {
+                createAxis({ labels: { margin: 5 } });
 
-                test("returns second category for innermost point", function() {
-                    equal(axis.getCategory(new Point2D(299, 300)), "Bar");
-                });
+                arrayClose(
+                    $.map(view.log.text, function(text) {
+                        return [text.style.x, text.style.y]
+                    }),
+                    [289.5, 80, 478, 405, 102, 405],
+                    TOLERANCE
+                );
+            });
 
-                test("returns third category for innermost point", function() {
-                    equal(axis.getCategory(new Point2D(301, 300)), "Baz");
-                });
+            test("labels are distributed in reverse (justified)", function() {
+                createAxis({ reverse: true });
 
-            })();
+                arrayClose(
+                    $.map(view.log.text, function(text) {
+                        return [text.style.x, text.style.y]
+                    }),
+                    [289.5, 75, 97.465, 410, 482.535, 410],
+                    TOLERANCE
+                );
+            });
 
-            (function() {
-                var plotArea,
-                    plotBands,
-                    lineSeriesData = [{
-                        name: "Value A",
-                        type: "line",
-                        data: [100, 200, 300]
-                    }],
-                    barSeriesData =  [{
-                        name: "Value A",
-                        type: "bar",
-                        data: [100, 20, 30]
-                    }];
+            test("labels are distributed in reverse (non-justified)", function() {
+                createAxis({ justified: false, reverse: true });
 
-                function createPlotArea(series, chartOptions) {
-                    plotArea = new dataviz.CategoricalPlotArea(series, {
-                        categoryAxis: {
-                            categories: ["A"],
-                            plotBands: [{
-                                from: 0,
-                                to: 1,
-                                color: "red",
-                                opacity: 0.5
-                            }]
-                        }
-                    });
+                arrayClose(
+                    $.map(view.log.text, function(text) {
+                        return [text.style.x, text.style.y]
+                    }),
+                    [96, 175, 290.5, 510, 483, 175],
+                    TOLERANCE
+                );
+            });
 
-                    view = new ViewStub();
-
-                    plotArea.reflow(chartBox);
-                    plotArea.getViewElements(view);
-                    plotBands = view.log.rect[0];
+            // ------------------------------------------------------------
+            module("Radar Category Axis / Divisions", {
+                setup: function() {
+                    createAxis();
                 }
+            });
 
-                // ------------------------------------------------------------
-                module("Category Axis / Plot Bands", {
-                    setup: function() {
-                        createPlotArea(lineSeriesData);
+            test("major divisions in normal order", function() {
+                deepEqual(axis.majorDivisions(), [ 90, 210, 330 ]);
+            });
+
+            test("major divisions in reverse order", function() {
+                createAxis({ reverse: true });
+                deepEqual(axis.majorDivisions(), [ 90, 330, 210 ]);
+            });
+
+            test("minor divisions in normal order", function() {
+                deepEqual(axis.minorDivisions(), [ 90, 150, 210, 270, 330, 30 ]);
+            });
+
+            test("minor divisions in reverse order", function() {
+                createAxis({ reverse: true });
+                deepEqual(axis.minorDivisions(), [ 90, 30, 330, 270, 210, 150 ]);
+            });
+
+            // ------------------------------------------------------------
+            var slot;
+
+            module("Radar Category Axis / Slots", {
+                setup: function() {
+                    createAxis();
+                    slot = axis.getSlot(0);
+                }
+            });
+
+            test("slot center matches box center", function() {
+                equal(slot.c.x, 300);
+                equal(slot.c.y, 300);
+            });
+
+            test("slot inner radius is 0", function() {
+                equal(slot.ir, 0);
+            });
+
+            test("slot radius is half box height", function() {
+                equal(slot.r, 200);
+            });
+
+            test("slot angle for first category (justified)", function() {
+                equal(slot.startAngle, 30);
+                equal(slot.angle, 120);
+            });
+
+            test("slot angle for first category (non-justified)", function() {
+                createAxis({ justified: false });
+
+                slot = axis.getSlot(0);
+                equal(slot.startAngle, 90);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for first category in reverse (justified)", function() {
+                createAxis({ reverse: true });
+
+                slot = axis.getSlot(0);
+                equal(slot.startAngle, 30);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for first category in reverse (non-justified)", function() {
+                createAxis({ reverse: true, justified: false });
+
+                slot = axis.getSlot(0);
+                equal(slot.startAngle, 330);
+                equal(slot.angle, 120);
+            });
+
+            test("slot angle for second category (justified)", function() {
+                slot = axis.getSlot(1);
+                equal(slot.startAngle, 150);
+                equal(slot.angle, 120);
+            });
+
+            test("slot angle for second category (non-justified)", function() {
+                createAxis({ justified: false });
+
+                slot = axis.getSlot(1);
+                equal(slot.startAngle, 210);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for second category in reverse (justified)", function() {
+                createAxis({ reverse: true });
+
+                slot = axis.getSlot(1);
+                equal(slot.startAngle, 270);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for second category in reverse (non-justified)", function() {
+                createAxis({ reverse: true, justified: false });
+
+                slot = axis.getSlot(1);
+                equal(slot.startAngle, 210);
+                equal(slot.angle, 120);
+            });
+
+            test("slot angle for last category (justified)", function() {
+                slot = axis.getSlot(2);
+                equal(slot.startAngle, 270);
+                equal(slot.angle, 120);
+            });
+
+            test("slot angle for last category (non-justified)", function() {
+                createAxis({ justified: false });
+
+                slot = axis.getSlot(2);
+                equal(slot.startAngle, 330);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for last category in reverse (justified)", function() {
+                createAxis({ reverse: true });
+
+                slot = axis.getSlot(2);
+                equal(slot.startAngle, 150);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for last category in reverse (non-justified)", function() {
+                createAxis({ reverse: true, justified: false });
+
+                slot = axis.getSlot(2);
+                equal(slot.startAngle, 90);
+                equal(slot.angle, 120);
+            });
+
+            test("slot for two categories (justified)", function() {
+                slot = axis.getSlot(0, 1);
+                equal(slot.startAngle, 30);
+                equal(slot.angle, 240);
+            });
+
+            test("slot for two categories (non-justified)", function() {
+                createAxis({ justified: false });
+
+                slot = axis.getSlot(0, 1);
+                equal(slot.startAngle, 90);
+                equal(slot.angle, 240);
+            });
+
+            test("assumes 1 category when no categories are defined (justified)", function() {
+                createAxis({ categories: [] });
+
+                slot = axis.getSlot(0);
+                equal(slot.startAngle, 270);
+                equal(slot.angle, 360);
+            })
+
+            test("assumes 1 category when no categories are defined (non-justified)", function() {
+                createAxis({ categories: [], justified: false });
+
+                slot = axis.getSlot(0);
+                equal(slot.startAngle, 90);
+                equal(slot.angle, 360);
+            });
+
+            test("reports range minimum of 0", function() {
+                equal(axis.range().min, 0);
+            });
+
+            test("reports range maximum equal to category count", function() {
+                equal(axis.range().max, 3);
+            });
+
+            test("from value can't be lower than 0", function() {
+                slot = axis.getSlot(-1);
+                equal(slot.startAngle, 30);
+            });
+
+            test("caps from value to categories count", function() {
+                slot = axis.getSlot(1000);
+                equal(slot.startAngle, 270);
+            });
+
+            test("to value equals from value when not set", function() {
+                slot = axis.getSlot(1000);
+                equal(slot.angle, 120);
+            });
+
+            test("to value equals from value when smaller", function() {
+                slot = axis.getSlot(2, 1);
+                equal(slot.startAngle, 270);
+            });
+
+            // ------------------------------------------------------------
+            module("Radar CategoryAxis / getCategory ", {
+                setup: function() {
+                    createAxis();
+                }
+            });
+
+            test("returns null for coordinates outside of circle", function() {
+                deepEqual(axis.getCategory(new Point2D(0, 0)), null);
+            });
+
+            test("returns first category for innermost point", function() {
+                equal(axis.getCategory(new Point2D(300, 299)), "Foo");
+            });
+
+            test("returns second category for innermost point", function() {
+                equal(axis.getCategory(new Point2D(301, 300)), "Bar");
+            });
+
+            test("returns third category for innermost point", function() {
+                equal(axis.getCategory(new Point2D(299, 300)), "Baz");
+            });
+
+            // ------------------------------------------------------------
+            module("Radar CategoryAxis / getCategory / Reverse", {
+                setup: function() {
+                    createAxis({ reverse: true });
+                }
+            });
+
+            test("returns first category for innermost point", function() {
+                equal(axis.getCategory(new Point2D(300, 299)), "Foo");
+            });
+
+            test("returns second category for innermost point", function() {
+                equal(axis.getCategory(new Point2D(299, 300)), "Bar");
+            });
+
+            test("returns third category for innermost point", function() {
+                equal(axis.getCategory(new Point2D(301, 300)), "Baz");
+            });
+
+            // ------------------------------------------------------------
+            var altAxis = {
+                options: { visible: true },
+                lineBox: function() { return new Box2D(300, 100, 300, 300); }
+            };
+
+            module("Radar Category Axis / Grid lines", {
+                setup: function() {
+                    createAxis();
+                    axis.renderGridLines(view, altAxis);
+                }
+            });
+
+            test("renders major grid lines by default", function() {
+                equal(view.log.line.length, 2);
+            });
+
+            test("major grid lines extend from axis center", function() {
+                equal(view.log.line[0].x1, 300);
+                equal(view.log.line[0].y1, 300);
+            });
+
+            test("major grid lines extend to value axis end", function() {
+                close(view.log.line[0].x2, 473, TOLERANCE);
+                equal(view.log.line[0].y2, 400);
+            });
+
+            test("renders 90 degree grid line when value axis is not visible", function() {
+                createAxis();
+                axis.renderGridLines(view, {
+                    options: { visible: false },
+                    lineBox: altAxis.lineBox
+                });
+
+                equal(view.log.line[0].x2, 300);
+                equal(view.log.line[0].y2, 100);
+            });
+
+            test("applies major grid line color", function() {
+                createAxis({ majorGridLines: { color: "red" } });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.line[0].options.stroke, "red");
+            });
+
+            test("applies major grid line width", function() {
+                createAxis({ majorGridLines: { width: 2 } });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.line[0].options.strokeWidth, 2);
+
+            });
+
+            test("renders minor grid lines", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
                     }
                 });
+                axis.renderGridLines(view, altAxis);
 
-                test("renders sector", function() {
-                    ok(false);
+                equal(view.log.line.length, 5);
+            });
+
+            test("applies minor grid line color", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true,
+                        color: "red"
+                    }
                 });
+                axis.renderGridLines(view, altAxis);
 
-                test("renders color", function() {
-                    equal(plotBands.style.fill, "red");
+                equal(view.log.line[0].options.stroke, "red");
+            });
+
+            test("applies minor grid line width", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true,
+                        width: 4
+                    }
                 });
+                axis.renderGridLines(view, altAxis);
 
-                test("renders opacity", function() {
-                    equal(plotBands.style.fillOpacity, 0.5);
-                });
+                equal(view.log.line[0].options.strokeWidth, 4);
+            });
 
-                test("renders z index", function() {
-                    equal(plotBands.style.zIndex, -1);
-                });
+            // ------------------------------------------------------------
+            module("Radar Category Axis / Plot Bands", {
+                setup: function() {
+                    createAxis({
+                        plotBands: [{
+                            from: 0,
+                            to: 1,
+                            opacity: 0.5,
+                            color: "red"
+                        }, {
+                            from: 1,
+                            to: 1.5,
+                            color: "green"
+                        }]
+                    });
+                }
+            });
 
-            })();
+            test("renders sectors", function() {
+                equal(view.log.sector.length, 2);
+            });
 
+            test("renders sector for full slot", function() {
+                equal(view.log.sector[0].angle, 120);
+            });
+
+            test("renders sector for partial slot", function() {
+                equal(view.log.sector[1].angle, 60);
+            });
+
+            test("renders color", function() {
+                equal(view.log.sector[0].style.fill, "red");
+            });
+
+            test("renders opacity", function() {
+                equal(view.log.sector.style.fillOpacity, 0.5);
+            });
+
+            test("renders z index", function() {
+                equal(plotBands.style.zIndex, -1);
+            });
+
+            /*
             (function() {
                 var chart,
                     label,
@@ -655,6 +732,8 @@
                 });
 
             })();
+           */
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

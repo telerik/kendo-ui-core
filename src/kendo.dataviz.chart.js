@@ -1850,8 +1850,12 @@ kendo_module({
                 margin: getSpacing(10)
             },
             majorGridLines: {
-                // TODO: New property - type[line*, arc]
                 visible: true,
+                width: 1,
+                color: BLACK
+            },
+            minorGridLines: {
+                visible: false,
                 width: 1,
                 color: BLACK
             },
@@ -1897,17 +1901,28 @@ kendo_module({
         renderGridLines: function(view, altAxis) {
             var axis = this,
                 options = axis.options,
-                radius = axis.box.center().y - altAxis.getSlot(MAX_VALUE).y1,
-                majorDivisions = axis.getMajorDivisions(),
+                radius = math.abs(axis.box.center().y - altAxis.lineBox().y1),
+                majorDivisions,
+                minorDivisions,
+                minorSkipStep = 0,
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
+                majorDivisions = axis.gridLineDivisions(altAxis, 1);
+                minorSkipStep = 1;
+
                 gridLines = axis.getGridLines(
                     view, majorDivisions, radius, options.majorGridLines
                 );
             }
 
-            // TODO: Minor gridlines
+            if (options.minorGridLines.visible) {
+                minorDivisions = axis.gridLineDivisions(altAxis, 0.5, minorSkipStep),
+
+                gridLines.push.apply(gridLines, axis.getGridLines(
+                    view, minorDivisions, radius, options.minorGridLines
+                ));
+            }
 
             return gridLines;
         },
@@ -1947,38 +1962,55 @@ kendo_module({
             // TODO: Filled sectors, polygons (yikes!)
         },
 
-        getDivisions: function(count) {
+        divisions: function(step, skipStep) {
             var axis = this,
                 options = axis.options,
-                a = options.startAngle,
-                divCount = count || 1,
-                step = 360 / divCount,
-                angles = [],
+                categories = options.categories.length,
+                startAngle = options.startAngle,
+                angle = startAngle,
+                skipAngle = 0,
+                divCount = categories / step || 1,
+                divAngle = 360 / divCount,
+                divs = [],
                 i;
 
+            if (skipStep) {
+                skipAngle = 360 / (categories / skipStep);
+            }
+
             for (i = 0; i < divCount; i++) {
-                angles.push(round(a % 360, COORD_PRECISION));
+                angle = round(angle, COORD_PRECISION);
+
+                if ((angle - startAngle) % skipAngle !== 0) {
+                    divs.push(angle % 360);
+                }
 
                 if (options.reverse) {
-                    a = 360 + a - step;
+                    angle = 360 + angle - divAngle;
                 } else {
-                    a += step;
+                    angle += divAngle;
                 }
             }
 
-            return angles;
+            return divs;
         },
 
-        getMajorDivisions: function() {
-            var axis = this;
-
-            return axis.getDivisions(axis.options.categories.length);
+        majorDivisions: function() {
+            return this.divisions(1);
         },
 
-        getMinorDivisions: function() {
-            var axis = this;
+        minorDivisions: function() {
+            return this.divisions(0.5);
+        },
 
-            return axis.getDivisions(axis.options.categories.length * 2);
+        gridLineDivisions: function(altAxis, step, skipStep) {
+            var result = this.divisions(step, skipStep);
+
+            if (altAxis.options.visible) {
+                result = $.grep(result, function(d) { return d !== 90; });
+            }
+
+            return result;
         },
 
         getSlot: function(from, to) {
@@ -1986,8 +2018,8 @@ kendo_module({
                 options = axis.options,
                 justified = options.justified,
                 box = axis.box,
-                divs = axis.getMajorDivisions(),
-                totalDivs = divs.length,
+                dics = axis.majorDivisions(),
+                totalDivs = dics.length,
                 slots,
                 slotAngle = 360 / totalDivs,
                 startAngle,
@@ -1998,7 +2030,7 @@ kendo_module({
             }
 
             from = clipValue(from, 0, totalDivs - 1);
-            startAngle = divs[from];
+            startAngle = dics[from];
 
             if (justified) {
                 startAngle = startAngle - slotAngle / 2;
@@ -2043,6 +2075,7 @@ kendo_module({
     var PolarNumericAxis = NumericAxis.extend({
         options: {
             majorGridLines: {
+                // TODO: New property - type[line*, arc]
                 visible: true
             }
         },
@@ -2052,7 +2085,7 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 majorTicks = axis.getTickPositions(options.majorUnit),
-                majorAngles = altAxis.getMajorDivisions(),
+                majorAngles = altAxis.majorDivisions(),
                 center = altAxis.box.center(),
                 gridLines = [];
 
