@@ -95,7 +95,7 @@
         }
         
         function getRootItem(index) {
-            return panelbar.element.find(".k-header").parent().eq(index).children(".k-link");
+            return panelbar.element.children().eq(index).children(".k-link");
         }
 
         module("AjaxLoading", {
