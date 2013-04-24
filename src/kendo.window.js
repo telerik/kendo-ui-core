@@ -663,7 +663,7 @@ kendo_module({
             that.element.find("> .k-overlay").remove();
 
             if (!$(active).is(winElement) &&
-                !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input") &&
+                !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input,a") &&
                 (!winElement.find(active).length || !winElement.find(target).length)) {
                 winElement.focus();
 
