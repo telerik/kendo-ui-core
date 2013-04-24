@@ -74,7 +74,7 @@ kendo_module({
 
         for (; idx < length; idx++) {
             value = parseInt(list[idx], 10);
-            if (isNaN(value) || value < range.start || value > range.end) {
+            if (isNaN(value) || value < range.start || value > range.end || (value === 0 && range.start < 0)) {
                 return null;
             }
 
@@ -86,29 +86,35 @@ kendo_module({
 
     function parseWeekDayList(list) {
         var idx = 0, length = list.length,
-            value, valueLength;
+            value, valueLength, day;
 
         for (; idx < length; idx++) {
             value = list[idx];
             valueLength = value.length;
+            day = value.substring(valueLength - 2).toUpperCase();
+
+            if (WEEK_DAYS[day] === undefined) {
+                return null;
+            }
 
             list[idx] = {
                 offset: parseInt(value.substring(0, valueLength - 2), 10) || 1,
-                day: value.substring(valueLength - 2, valueLength).toUpperCase()
+                day: day
             };
-
-            if (WEEK_DAYS[list[idx].day] === undefined) {
-                return null;
-            }
         }
         return list;
     }
 
-    var rrule_parser = function(rrule) {
+    var rrule_parse = function(rrule) {
         var result = {},
             property,
             splits, value,
-            idx = 0, length;
+            idx = 0, length,
+            weekStart;
+
+        if (rrule.substring(0, 6) === "RRULE:") {
+            rrule = rrule.substring(6);
+        }
 
         rrule = rrule.split(";");
         length = rrule.length;
@@ -118,7 +124,7 @@ kendo_module({
             splits = property.split("=");
             value = $.trim(splits[1]).split(",");
 
-            switch (splits[0].toUpperCase()) {
+            switch ($.trim(splits[0]).toUpperCase()) {
                 case "FREQ" : {
                     result.freq = value[0].toUpperCase();
                     break;
@@ -148,11 +154,11 @@ kendo_module({
                     break;
                 }
                 case "BYMONTHDAY" : {
-                    result.monthDays = parseArray(value, { start: 1, end: 31 });
+                    result.monthDays = parseArray(value, { start: -31, end: 31 });
                     break;
                 }
                 case "BYYEARDAY" : {
-                    result.yearDays = parseArray(value, { start: 1, end: 366 });
+                    result.yearDays = parseArray(value, { start: -366, end: 366 });
                     break;
                 }
                 case "BYMONTH" : {
@@ -163,16 +169,30 @@ kendo_module({
                     result.weekDays = parseWeekDayList(value);
                     break;
                 }
-                //parse bysetpos
-                //parse wkst
-                //by week number
+                case "BYSETPOS" : {
+                    result.setPositions = parseArray(value, { start: 1, end: 366 });
+                    break;
+                }
+                case "BYWEEKNO" : {
+                    result.weekNumber = parseArray(value, { start: 1, end: 53 });
+                    break;
+                }
+                case "WKST" : {
+                    weekStart = value[0];
+                    if (WEEK_DAYS[weekStart] === undefined) {
+                        weekStart = null;
+                    }
+
+                    result.weekStart = weekStart;
+                    break;
+                }
             }
         }
 
         return result;
     }
 
-    kendo.rrule_parser = rrule_parser;
+    kendo.rrule_parse = rrule_parse;
 
     ui.plugin(Scheduler);
 
