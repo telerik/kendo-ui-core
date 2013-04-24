@@ -32,30 +32,25 @@ kendo_module({
 
         render: function(container) {
             var that = this,
-                element,
-                content;
+                notInitialized = !that.element;
 
-            if (!that.element) {
-                content = $(document.getElementById(that.content) || that.content); // support passing id without #
-                element = $("<" + that.tagName + " />").append(content[0].tagName === SCRIPT ? content.html() : content);
+            // The order below matters - kendo.bind should be happen when the element is in the DOM, and SHOW should be triggered after INIT.
 
-                // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
-                // <script id="my-template">
-                // fooo
-                // <span> Span </span>
-                // </script>
-                if (!that._wrap) {
-                   element = element.contents();
-                }
+            if (notInitialized) {
+                that.element = that._createElement();
+            }
 
-                that.element = element;
+            if (container) {
+                $(container).append(that.element);
+            }
+
+            if (notInitialized) {
                 kendo.bind(that.element, that.model);
                 this.trigger(INIT);
             }
 
             if (container) {
-                this.trigger(SHOW);
-                $(container).append(that.element);
+                that.trigger(SHOW);
             }
 
             return that.element;
@@ -71,6 +66,26 @@ kendo_module({
                 kendo.unbind(this.element);
                 this.element.remove();
             }
+        },
+
+        _createElement: function() {
+            var that = this,
+                element,
+                content;
+
+            content = $(document.getElementById(that.content) || that.content); // support passing id without #
+            element = $("<" + that.tagName + " />").append(content[0].tagName === SCRIPT ? content.html() : content);
+
+            // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
+            // <script id="my-template">
+            // foo
+            // <span> Span </span>
+            // </script>
+            if (!that._wrap) {
+               element = element.contents();
+            }
+
+            return element;
         }
     });
 
