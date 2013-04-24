@@ -232,10 +232,22 @@ kendo_module({
                 groupedMode = groups && groups[0];
 
             if (action === "itemchange") {
-                var items = listView.findByDataItem(dataItems);
-                listView.setDataItem(items[0], dataItems[0]);
+                var items = listView.findByDataItem(dataItems),
+                    dataItem = dataItems[0],
+                    newItem = $(listView.setDataItem(items[0], dataItem));
+
+                listView.trigger("itemChange", {
+                    item: newItem,
+                    data: dataItems[0],
+                    ns: ui
+                });
+
+                return;
             }
-            else if (groupedMode) {
+
+            listView.trigger('dataBinding');
+
+            if (groupedMode) {
                 listView.replaceGrouped(view);
             }
             else if (prependOnRefresh) {
@@ -244,6 +256,8 @@ kendo_module({
             else {
                 listView.replace(view);
             }
+
+            listView.trigger('dataBound', { ns: ui });
         },
 
         configure: function() {
@@ -254,7 +268,7 @@ kendo_module({
                 that._unbindDataSource();
             }
 
-            that.dataSource = DataSource.create(options.dataSource).bind(CHANGE, that._refreshHandler);
+            that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource).bind(CHANGE, that._refreshHandler);
 
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
                 that.dataSource.bind(PROGRESS, that._progressHandler);
@@ -263,9 +277,6 @@ kendo_module({
             if (options.autoBind) {
                 that.dataSource.fetch();
             }
-
-            // legacy support
-            that.listView.dataSource = that.dataSource;
         },
 
         _unbindDataSource: function() {
@@ -444,7 +455,7 @@ kendo_module({
         setDataItem: function(item, dataItem) {
             return this._renderItems([dataItem], function(items) {
                 $(item).replaceWith(items);
-            });
+            })[0];
         },
 
         _insert: function(dataItems, method) {
