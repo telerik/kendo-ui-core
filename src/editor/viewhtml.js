@@ -51,17 +51,17 @@ var ViewHtmlCommand = Command.extend({
             } catch (ex) {}
         }
 
-        dialog.kendoWindow(extend({}, editor.options.dialogOptions, {
+        EditorUtils.createDialog(dialog, editor, extend({}, editor.options.dialogOptions, {
             title: messages.viewHtml,
-            close: close
+            close: close,
+            visible: false
         }))
-            .hide()
             .find(textarea).val(content).end()
             .find(".k-dialog-update").click(apply).end()
             .find(".k-dialog-close").click(close).end()
-            .show()
             .data("kendoWindow")
-            .center();
+            .center()
+            .open();
 
         dialog.find(textarea).focus();
     }
