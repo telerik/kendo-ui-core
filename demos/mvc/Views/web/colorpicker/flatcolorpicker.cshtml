@@ -15,25 +15,6 @@
         </div>
     </div>
 
-    <script>
-
-        function select(e) {
-            $("#bike-" + this.element.attr("id")).css("background-color", e.value);
-        }
-
-        $("#tail").kendoFlatColorPicker({
-            preview: false,
-            value: "#000",
-            change: select
-        });
-
-        $("#head").kendoFlatColorPicker({
-            preview: false,
-            value: "#e15613",
-            change: select
-        });
-    </script>
-
     <style scoped>
         .demo-section {
             text-align: center;
@@ -91,5 +72,23 @@
             zoom: 1;
         }
     </style>
+
+    <script>
+        function select(e) {
+            $("#bike-" + this.element.attr("id")).css("background-color", e.value);
+        }
+
+        $("#tail").kendoFlatColorPicker({
+            preview: false,
+            value: "#000",
+            change: select
+        });
+
+        $("#head").kendoFlatColorPicker({
+            preview: false,
+            value: "#e15613",
+            change: select
+        });
+    </script>
 
 </div>
