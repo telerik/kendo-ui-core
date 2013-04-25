@@ -1380,80 +1380,95 @@ kendo_module({
         return list;
     }
 
-    var rrule_parse = function(rrule) {
-        var result = {},
-            property,
-            splits, value,
-            idx = 0, length,
-            weekStart;
+    var recurrence = {
+        expandEvent: function(e) {
+            var instance = e.ruleInstance;
 
-        if (rrule.substring(0, 6) === "RRULE:") {
-            rrule = rrule.substring(6);
-        }
-
-        rrule = rrule.split(";");
-        length = rrule.length;
-
-        for (; idx < length; idx++) {
-            property = rrule[idx];
-            splits = property.split("=");
-            value = $.trim(splits[1]).split(",");
-
-            switch ($.trim(splits[0]).toUpperCase()) {
-                case "FREQ":
-                    result.freq = value[0].toUpperCase();
-                    break;
-                case "UNTIL":
-                    result.until = kendo.parseDate(value[0], DATE_FORMATS);
-                    break;
-                case "COUNT":
-                    result.count = parseInt(value[0], 10);
-                    break;
-                case "INTERVAL":
-                    result.interval = parseInt(value[0], 10);
-                    break;
-                case "BYSECOND":
-                    result.seconds = parseArray(value, { start: 0, end: 60 });
-                    break;
-                case "BYMINUTE":
-                    result.minutes = parseArray(value, { start: 0, end: 59 });
-                    break;
-                case "BYHOUR":
-                    result.hours = parseArray(value, { start: 0, end: 23 });
-                    break;
-                case "BYMONTHDAY":
-                    result.monthDays = parseArray(value, { start: -31, end: 31 });
-                    break;
-                case "BYYEARDAY":
-                    result.yearDays = parseArray(value, { start: -366, end: 366 });
-                    break;
-                case "BYMONTH":
-                    result.months = parseArray(value, { start: 1, end: 12 });
-                    break;
-                case "BYDAY":
-                    result.weekDays = parseWeekDayList(value);
-                    break;
-                case "BYSETPOS":
-                    result.setPositions = parseArray(value, { start: 1, end: 366 });
-                    break;
-                case "BYWEEKNO":
-                    result.weekNumber = parseArray(value, { start: 1, end: 53 });
-                    break;
-                case "WKST":
-                    weekStart = value[0];
-                    if (WEEK_DAYS[weekStart] === undefined) {
-                        weekStart = null;
-                    }
-
-                    result.weekStart = weekStart;
-                    break;
+            if (!instance && e.rule) {
+                e.ruleInstance = instance = recurrence.parseRule(e.rule);
             }
-        }
 
-        return result;
+            return instance;
+        },
+        occurrences: function(period, eventInstance) {
+            var result = [],
+                ruleInstance = recurrence.expandEvent(eventInstance);
+        },
+        parseRule: function (rule) {
+            var result = {},
+                property,
+                splits, value,
+                idx = 0, length,
+                weekStart;
+
+            if (rule.substring(0, 6) === "RRULE:") {
+                rule = rule.substring(6);
+            }
+
+            rule = rule.split(";");
+            length = rule.length;
+
+            for (; idx < length; idx++) {
+                property = rule[idx];
+                splits = property.split("=");
+                value = $.trim(splits[1]).split(",");
+
+                switch ($.trim(splits[0]).toUpperCase()) {
+                    case "FREQ":
+                        result.freq = value[0].toUpperCase();
+                        break;
+                    case "UNTIL":
+                        result.until = kendo.parseDate(value[0], DATE_FORMATS);
+                        break;
+                    case "COUNT":
+                        result.count = parseInt(value[0], 10);
+                        break;
+                    case "INTERVAL":
+                        result.interval = parseInt(value[0], 10);
+                        break;
+                    case "BYSECOND":
+                        result.seconds = parseArray(value, { start: 0, end: 60 });
+                        break;
+                    case "BYMINUTE":
+                        result.minutes = parseArray(value, { start: 0, end: 59 });
+                        break;
+                    case "BYHOUR":
+                        result.hours = parseArray(value, { start: 0, end: 23 });
+                        break;
+                    case "BYMONTHDAY":
+                        result.monthDays = parseArray(value, { start: -31, end: 31 });
+                        break;
+                    case "BYYEARDAY":
+                        result.yearDays = parseArray(value, { start: -366, end: 366 });
+                        break;
+                    case "BYMONTH":
+                        result.months = parseArray(value, { start: 1, end: 12 });
+                        break;
+                    case "BYDAY":
+                        result.weekDays = parseWeekDayList(value);
+                        break;
+                    case "BYSETPOS":
+                        result.setPositions = parseArray(value, { start: 1, end: 366 });
+                        break;
+                    case "BYWEEKNO":
+                        result.weekNumber = parseArray(value, { start: 1, end: 53 });
+                        break;
+                    case "WKST":
+                        weekStart = value[0];
+                        if (WEEK_DAYS[weekStart] === undefined) {
+                            weekStart = null;
+                        }
+
+                        result.weekStart = weekStart;
+                        break;
+                }
+            }
+
+            return result;
+        }
     };
 
-    kendo.rrule_parse = rrule_parse;
+    kendo.recurrence = recurrence;
 
     ui.plugin(Scheduler);
 

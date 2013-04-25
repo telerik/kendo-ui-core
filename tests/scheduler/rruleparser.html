@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">Scheduler initialization</h1>
+        <h1 id="qunit-header">Recurrence rule parser</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -18,7 +18,7 @@
         <script>
             module("RRule parser");
 
-            var parse = kendo.rrule_parse;
+            var parse = kendo.recurrence.parseRule;
 
             test("Remove RRULE if present", function() {
                 var rrule = parse("RRULE:FREQ=DaILY;UNTIL=19730429T070000Z");
