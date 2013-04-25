@@ -696,7 +696,7 @@ kendo_module({
                         if (isFirstKeyDown) {
                             isFirstKeyDown = false;
                         } else {
-                            editor.pendingFormats.apply(editor);
+                            editor.pendingFormats.apply(editor.getRange());
                         }
                     }
 
@@ -713,7 +713,7 @@ kendo_module({
                     }
 
                     if (editor.keyboard.isTypingKey(e)) {
-                        editor.pendingFormats.apply(editor);
+                        editor.pendingFormats.apply(editor.getRange());
                     } else {
                         isFirstKeyDown = true;
                     }
