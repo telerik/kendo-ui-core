@@ -2836,6 +2836,9 @@ kendo_module({
                     that._ranges.push(range);
                 }
 
+
+                that.trigger(REQUESTEND, { response: data, type: "read" });
+
                 data = that.reader.parse(data);
                 range.data = that._observe(that._readData(data));
                 range.end = range.start + that._flatData(range.data).length;
@@ -2866,10 +2869,14 @@ kendo_module({
 
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
-                        that.transport.read({
-                            data: options,
-                            success: that._prefetchSuccessHandler(skip, size, callback)
-                        });
+                        if (!that.trigger(REQUESTSTART)) {
+                            that.transport.read({
+                                data: options,
+                                success: that._prefetchSuccessHandler(skip, size, callback)
+                            });
+                        } else {
+                            that._dequeueRequest();
+                        }
                     });
                 }, 100);
             } else if (callback) {
