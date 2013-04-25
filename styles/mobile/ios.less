@@ -148,6 +148,18 @@
     display: block;
 }
 
+.km-ios.km-on-android :-webkit-any(.km-back)
+{
+    -webkit-mask-image: none;
+    padding-left: .8em;
+    margin-left: 0;
+}
+
+.km-ios.km-on-android :-webkit-any(.km-back):after
+{
+    display: none;
+}
+
 .km-ios :-moz-any(.km-back)
 {
     overflow: hidden;
