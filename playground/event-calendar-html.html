@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Scheduler</title>
+<link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.silver.min.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.web.min.js"></script>
+
+<style>
+
+html
+{
+	font:12px sans-serif;
+}
+
+/* common.less */
+
+.k-eventcal-toolbar,
+.k-eventcal-footer
+{
+	border-style:solid;
+}
+
+.k-eventcal-toolbar,
+.k-eventcal-footer
+{
+	line-height:28px;
+	padding:6px;
+}
+
+.k-eventcal-toolbar
+{
+	border-width:0 0 1px;
+}
+
+.k-eventcal-header
+{
+	text-align:center;
+	padding-right:17px;
+}
+
+.k-eventcal-footer
+{
+	border-width:1px 0 0;
+}
+
+.k-eventcal > div > ul
+{
+	float:right;
+}
+
+.k-eventcal > div > ul:first-child
+{
+	float:left;
+}
+
+.k-eventcal > div > ul li
+{
+	display:inline-block;
+	border-style:solid;
+	border-width:1px 1px 1px 0;
+}
+
+.k-eventcal .k-nav-current
+{
+	border-width:0;
+}
+
+.k-eventcal > div > ul li:first-child
+{
+	border-left-width:1px;
+}
+
+.k-eventcal-toolbar > ul li:first-child,
+.k-eventcal-toolbar > ul li:first-child .k-link
+{
+	border-radius:5px 0 0 5px;
+}
+
+.k-eventcal-toolbar .k-nav-next,
+.k-eventcal-toolbar .k-view-agenda,
+.k-eventcal-toolbar .k-nav-next .k-link,
+.k-eventcal-toolbar .k-view-agenda .k-link
+{
+	border-radius:0 5px 5px 0;
+}
+
+.k-eventcal div.k-eventcal-footer ul li
+{
+	margin-right:.6em;
+	border-width:1px;
+}
+
+.k-eventcal div.k-eventcal-footer ul li,
+.k-eventcal div.k-eventcal-footer .k-link
+{
+	border-radius:5px;
+}
+
+.k-eventcal-toolbar .k-link,
+.k-eventcal-footer .k-link
+{
+	display:inline-block;
+	padding:0 1.1em;
+}
+
+.k-eventcal-toolbar .k-nav-prev .k-link,
+.k-eventcal-toolbar .k-nav-next .k-link
+{
+	padding-left:.6em;
+	padding-right:.6em;
+}
+
+.k-eventcal-toolbar .k-nav-current .k-link
+{
+	padding:0;
+	margin:0 1.1em;
+}
+
+.k-eventcal-toolbar .k-i-calendar,
+.k-eventcal-footer .k-icon
+{
+	margin:-2px 6px 0 0;
+}
+
+.k-eventcal-header,
+.k-eventcal-header-wrap
+{
+	overflow:hidden;
+}
+
+.k-eventcal-times,
+.k-eventcal-content
+{
+	position:relative;
+}
+
+.k-eventcal-times
+{
+	float:left;
+	width:60px;
+	overflow:hidden;
+}
+
+.k-eventcal-content
+{
+	overflow:scroll;
+}
+
+.k-eventcal-table
+{
+	border-spacing:0;
+	table-layout:fixed;
+	width:100%;
+	margin:1em 0;
+}
+
+.k-eventcal-toolbar + .k-eventcal-times > table
+{
+	margin:0;
+}
+
+.k-eventcal-toolbar + .k-eventcal-times > table th
+{
+	vertical-align:middle;
+}
+
+.k-eventcal-header .k-eventcal-table
+{
+	margin:0;
+}
+
+.k-eventcal-table td,
+.k-eventcal-table th
+{
+	height:27px;
+	padding:0;
+}
+
+.k-eventcal-table td
+{
+	vertical-align:top;
+}
+
+.k-eventcal-table td,
+.k-eventcal-header th
+{
+	border-style:solid;
+	border-width:0 1px 1px 0;
+}
+
+.k-eventcal-content tr:first-child td,
+.k-eventcal-header + .k-eventcal-times tr:first-child th
+{
+	border-top-width:1px;
+}
+
+.k-eventcal-table tr td:first-child,
+.k-eventcal-header tr th:first-child
+{
+	border-left-width:1px;
+}
+
+.k-eventcal-times th
+{
+	text-align:right;
+	vertical-align:top;
+	padding:0 .6em 0 0;
+	border-style:solid;
+	border-width:0 0 1px 0;
+	border-top-color:transparent;
+	border-bottom-color:transparent;
+}
+
+.k-eventcal-times th em
+{
+	font-style:normal;
+	position:relative;
+	top:-.7em;
+}
+
+.k-eventcal .k-middle-row td
+{
+	border-bottom-style:dotted;
+}
+
+.k-eventcal table tr.k-last th
+{
+	border-width:0;
+	height:0;
+}
+
+.k-eventcal table tr.k-last td
+{
+	height:0;
+	border-width:0;
+	font-size:0;
+	line-height:0;
+}
+
+.k-eventcal-now-arrow,
+.k-eventcal-now-line
+{
+	position:absolute;
+}
+
+.k-eventcal-now-arrow
+{
+	width:0;
+	height:0;
+	border:solid 5px transparent;
+	left:0;
+}
+
+.k-eventcal-now-line
+{
+	left:5px;
+	right:0;
+	height:1px;
+}
+
+.k-appointment
+{
+	position:absolute;
+	border-style:solid;
+	border-width:1px;
+	text-align:left;
+}
+
+td > .k-appointment
+{
+	position:relative;
+}
+
+.k-appointment,
+.k-appointment .k-link
+{
+	border-radius:4px;
+}
+
+.k-appointment dl,
+.k-appointment dt,
+.k-appointment dd
+{
+	margin:0;
+	padding:0;
+}
+
+.k-appointment dl
+{
+	padding:.6em 1.8em 1em .6em;
+}
+
+td > .k-appointment dl
+{
+	padding-top:.4em;
+	padding-bottom:.4em;
+}
+
+.k-appointment dt
+{
+	font-size:.9em;
+}
+
+.k-appointment > .k-link
+{
+	position: absolute;
+	top: 4px;
+	right:4px;
+}
+
+.k-appointment .k-resize-handle
+{
+	position:absolute;
+	bottom:0;
+	left:50%;
+	margin-left:-10px;
+	width:20px;
+	height:5px;
+	background-position: -70px -309px;
+	cursor: n-resize;
+	visibility:hidden;
+}
+
+.k-appointment:hover .k-resize-handle
+{
+	visibility:visible;
+}
+
+
+/* template.less */
+
+.k-eventcal
+{
+	background-color:#fff;
+}
+
+.k-eventcal-table td,
+.k-eventcal-header th
+{
+	border-color:#ccc;
+}
+
+.k-eventcal-toolbar + .k-eventcal-times tr:first-child th
+{
+	border-bottom-color:#ccc;
+}
+
+.k-eventcal-table .k-today
+{
+	background-color:#f6f6f6;
+}
+
+.k-eventcal-now-arrow
+{
+	border-left-color:#f00;
+}
+
+.k-eventcal-now-line
+{
+	background-color:#f00;
+}
+
+.k-eventcal-header-wrap .k-eventcal-table,
+.k-eventcal-content .k-eventcal-table
+{
+	width:140%;
+}
+
+.k-appointment
+{
+	border-color:#8bf;
+	background-color: #def;
+	cursor:move;
+}
+
+.k-appointment:hover
+{
+	border-color:#69f;
+}
+
+/*
+*{border-color:red !important;}
+*/
+
+</style>
+</head>
+<body>
+
+<div id="scheduler" class="k-widget k-eventcal k-floatwrap">
+	<div class="k-floatwrap k-header k-eventcal-toolbar">
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-default k-nav-today"><a href="#" class="k-link">Today</a></li><li
+			class="k-state-default k-nav-prev"><a href="#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li><li
+			class="k-state-default k-nav-next"><a href="#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li><li
+			class="k-state-default k-nav-current"><a href="#" class="k-link"><span class="k-icon k-i-calendar"></span>Wednesday, Apr 17 2013</a></li></ul>
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-selected k-view-day"><a href="#" class="k-link">Day</a></li><li
+			class="k-state-default k-view-week"><a href="#" class="k-link">Week</a></li><li
+			class="k-state-default k-view-month"><a href="#" class="k-link">Month</a></li><li
+			class="k-state-default k-view-agenda"><a href="#" class="k-link">Agenda</a></li></ul>
+	</div>
+
+	<div class="k-eventcal-times">
+		<table class="k-eventcal-table">
+			<colgroup>
+				<col />
+			</colgroup>
+			<tbody>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th>all day</th></tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="k-eventcal-header k-state-default">
+		<div class="k-eventcal-header-wrap">
+			<table class="k-eventcal-table">
+				<colgroup>
+					<col />
+					<col />
+					<col />
+					<col />
+					<col />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>Mon 4/22</th>
+						<th class="k-today">Mon 4/23</th>
+						<th>Mon 4/24</th>
+						<th>Mon 4/25</th>
+						<th>Mon 4/26</th>
+					</tr>
+				</tbody>
+			</table>
+			<table class="k-eventcal-table">
+				<colgroup>
+					<col />
+					<col />
+					<col />
+					<col />
+					<col />
+				</colgroup>
+				<tbody>
+					<tr>
+						<td>&nbsp;</td>
+						<td class="k-today">&nbsp;</td>
+						<td>
+							<div class="k-appointment">
+								<dl>
+									<dd>Day off</dd>
+								</dl>
+								<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
+							</div>
+						</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="k-eventcal-times">
+		<table class="k-eventcal-table">
+			<colgroup>
+				<col />
+			</colgroup>
+			<tbody>
+				<tr><th><em>6:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>7:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>8:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>9:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>10:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>11:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>12:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr><th><em>13:00</em></th></tr>
+				<tr><th>&nbsp;</th></tr>
+				<tr class="k-last"><th><em>24:00</em></th></tr>
+			</tbody>
+		</table>
+		<div class="k-eventcal-now-arrow" style="top:95px"></div>
+		<div class="k-eventcal-now-line" style="top:100px"></div>
+	</div>
+	
+	<div class="k-eventcal-content" style="height:300px">
+		<table class="k-eventcal-table">
+			<colgroup>
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+			</colgroup>
+			<tbody>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<div class="k-appointment" style="top:12px;left:510px;">
+			<dl>
+				<dt><span class="k-icon k-i-refresh"></span> 11:30 - 12:30</dt>
+				<dd>Business Lunch</dd>
+			</dl>
+			<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
+			<span class="k-icon k-resize-handle"></span>
+		</div>
+	</div>
+	<div class="k-floatwrap k-header k-eventcal-footer">
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>Show 24 hours</a></li><li
+			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-columns"></span>Show all weekdays</a></li></ul>
+	</div>
+</div>
+
+<script>
+
+$("a").click(false);
+
+var kendo = window.kendo,
+	scrollbar = kendo.support.scrollbar(),
+	sc = $(".k-eventcal-content"),
+	st = $(".k-eventcal-header + .k-eventcal-times"),
+	sh = $(".k-eventcal-header");
+
+st.height(sc.height() - scrollbar);
+
+sh.css("padding-right", scrollbar);
+
+sc.on("scroll", function(e){
+	st.scrollTop(sc.scrollTop());
+	$(".k-eventcal-header-wrap").scrollLeft(sc.scrollLeft());
+});
+
+$(".k-appointment > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
+	.on("mouseover", function(e){$(this).addClass("k-state-hover");})
+	.on("mouseout", function(e){$(this).removeClass("k-state-hover");});
+
+</script>
+
+</body>
+</html>
