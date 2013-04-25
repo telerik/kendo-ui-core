@@ -21,6 +21,7 @@ kendo_module({
         os = kendo.support.mobileOS,
         browser = kendo.support.browser,
         extend = $.extend,
+        proxy = $.proxy,
         deepExtend = kendo.deepExtend,
         NS = ".kendoEditor",
         keys = kendo.keys;
@@ -185,14 +186,33 @@ kendo_module({
 
     var Toolbar = Widget.extend({
         init: function(element, options) {
-            var buttons = ".k-editor-button .k-tool-icon",
-                enabledButtons = buttons + ":not(.k-state-disabled)",
-                disabledButtons = buttons + ".k-state-disabled",
-                that = this;
+            Widget.fn.init.call(this, element, options);
 
-            Widget.fn.init.call(that, element, options);
+            this.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
 
-            that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
+            this.bindTo(options.editor);
+        },
+
+        events: [
+            "execute"
+        ],
+
+        items: function() {
+            return this.element.children().find("> *, select");
+        },
+
+        bindTo: function(editor) {
+            var that = this;
+
+            // detach from editor that was previously listened to
+            if (that._editor) {
+                that._editor.unbind("select", proxy(that._update, that));
+            }
+
+            that._editor = editor;
+
+            // re-initialize the tools
+            that.element.empty();
 
             that._renderTools();
 
@@ -210,54 +230,7 @@ kendo_module({
                 }
             });
 
-            that.element
-                .on("mouseenter" + NS, enabledButtons, function() { $(this).addClass("k-state-hover"); })
-                .on("mouseleave" + NS, enabledButtons, function() { $(this).removeClass("k-state-hover"); })
-                .on("mousedown" + NS, buttons, false)
-                .on("keydown" + NS, focusable, function(e) {
-                    var closestLi = $(this).closest("li"),
-                        focusableTool = "li:has(" + focusable + ")",
-                        focusElement,
-                        keyCode = e.keyCode;
-
-                    if (keyCode == keys.RIGHT) {
-                        focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
-                    } else if (keyCode == keys.LEFT) {
-                        focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
-                    } else if (keyCode == keys.ESC) {
-                        focusElement = that;
-                    } else if (keyCode == keys.TAB && !(e.ctrlKey || e.altKey)) {
-                        // skip tabbing to disabled tools, and focus the editing area when running out of tools
-                        if (e.shiftKey) {
-                            focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
-
-                            if (focusElement.length) {
-                                e.preventDefault();
-                            } else {
-                                return;
-                            }
-                        } else {
-                            e.preventDefault();
-
-                            focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
-
-                            if (!focusElement.length) {
-                                focusElement = that;
-                            }
-                        }
-                    }
-
-                    if (focusElement) {
-                        focusElement.focus();
-                    }
-                })
-                .on("click" + NS, enabledButtons, function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    $(this).removeClass("k-state-hover");
-                    that.options.editor.exec(that._toolFromClassName(this));
-                })
-                .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
+            that._attachEvents();
 
             this.items().each(function () {
                 var toolName = that._toolFromClassName(this),
@@ -278,22 +251,12 @@ kendo_module({
 
                 tool.initialize($this, {
                     title: that._appendShortcutSequence(description, tool),
-                    // TODO: delegate current editor to tools or proxy messages through toolbar
-                    editor: that.options.editor
+                    editor: that._editor
                 });
             });
+
+            editor.bind("select", proxy(that._update, that));
         },
-
-        events: [
-            "execute"
-        ],
-
-        items: function() {
-            return this.element.children().find("> *, select");
-        },
-
-        // show proper tools based on editor options
-        setOptions: function() {},
 
         _appendShortcutSequence: function(localizedText, tool) {
             if (!tool.key) {
@@ -407,6 +370,64 @@ kendo_module({
             this.options.tools = editorTools;
         },
 
+        _attachEvents: function() {
+            var that = this,
+                buttons = ".k-editor-button .k-tool-icon",
+                enabledButtons = buttons + ":not(.k-state-disabled)",
+                disabledButtons = buttons + ".k-state-disabled";
+
+            that.element
+                .off(NS)
+                .on("mouseenter" + NS, enabledButtons, function() { $(this).addClass("k-state-hover"); })
+                .on("mouseleave" + NS, enabledButtons, function() { $(this).removeClass("k-state-hover"); })
+                .on("mousedown" + NS, buttons, false)
+                .on("keydown" + NS, focusable, function(e) {
+                    var closestLi = $(this).closest("li"),
+                        focusableTool = "li:has(" + focusable + ")",
+                        focusElement,
+                        keyCode = e.keyCode;
+
+                    if (keyCode == keys.RIGHT) {
+                        focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
+                    } else if (keyCode == keys.LEFT) {
+                        focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
+                    } else if (keyCode == keys.ESC) {
+                        focusElement = that;
+                    } else if (keyCode == keys.TAB && !(e.ctrlKey || e.altKey)) {
+                        // skip tabbing to disabled tools, and focus the editing area when running out of tools
+                        if (e.shiftKey) {
+                            focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
+
+                            if (focusElement.length) {
+                                e.preventDefault();
+                            } else {
+                                return;
+                            }
+                        } else {
+                            e.preventDefault();
+
+                            focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
+
+                            if (!focusElement.length) {
+                                focusElement = that;
+                            }
+                        }
+                    }
+
+                    if (focusElement) {
+                        focusElement.focus();
+                    }
+                })
+                .on("click" + NS, enabledButtons, function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(this).removeClass("k-state-hover");
+                    that.options.editor.exec(that._toolFromClassName(this));
+                })
+                .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
+
+        },
+
 
         _toolFromClassName: function (element) {
             var tool = $.grep(element.className.split(" "), function (x) {
@@ -417,8 +438,9 @@ kendo_module({
         },
 
         // update tool state
-        update: function(range) {
-            var nodes = kendo.ui.editor.RangeUtils.textNodes(range),
+        _update: function() {
+            var range = this._editor.getRange(),
+                nodes = kendo.ui.editor.RangeUtils.textNodes(range),
                 that = this;
 
             if (!nodes.length) {
@@ -444,7 +466,8 @@ kendo_module({
             var that = this,
                 value,
                 editorNS = kendo.ui.editor,
-                toolbarContainer;
+                toolbarContainer,
+                toolbarOptions;
 
             Widget.fn.init.call(that, element, options);
 
@@ -461,16 +484,20 @@ kendo_module({
 
                 toolbarContainer = that.wrapper.find(".k-editor-toolbar");
 
-                // hacked separation of toolbar. this should be changed once toolbar becomes singleton
-                var toolbarOptions = extend({}, that.options);
-
+                toolbarOptions = extend({}, that.options);
                 toolbarOptions.editor = that;
-
                 that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
 
                 if (element[0].id) {
                     toolbarContainer.attr("aria-controls", element[0].id);
                 }
+            } else {
+                toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
+
+                // TODO: this should create global toolbar, if it does not exist, and call its bindTo(this);
+                toolbarOptions = extend({}, that.options);
+                toolbarOptions.editor = that;
+                that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
             }
 
             that._initializeContentElement(that);
@@ -497,16 +524,7 @@ kendo_module({
 
             that.value(value);
 
-            that.bind("select", function() {
-                // update toolbar tools with their status
-                this.toolbar.update(that.getRange());
-            });
-
-            that._endTypingHandler = function() {
-                that._endTyping();
-            };
-
-            $(document).on("mousedown", that._endTypingHandler);
+            $(document).on("mousedown", proxy(that._endTyping, that));
 
             kendo.notify(that);
         },
@@ -545,11 +563,7 @@ kendo_module({
             textarea.attr("autocomplete", "off")
                 .appendTo(editArea).addClass("k-content k-raw-content").hide();
 
-            that._DOMNodeInsertedHandler = function(e) {
-                that._DOMNodeInserted(e);
-            };
-
-            $(document).on("DOMNodeInserted", that._DOMNodeInsertedHandler);
+            $(document).on("DOMNodeInserted", proxy(that._DOMNodeInserted, that));
 
             that.textarea = textarea;
             that.wrapper = editorWrap;
@@ -829,12 +843,13 @@ kendo_module({
 
             $(that.window)
                 .add(that.document)
+                .add(that.body)
                 .add(that.wrapper)
                 .add(that.element.closest("form"))
                 .off(NS);
 
-            $(document).off("DOMNodeInserted", that._DOMNodeInsertedHandler)
-                       .off("mousedown", that._endTypingHandler);
+            $(document).off("DOMNodeInserted", proxy(that._DOMNodeInserted, that))
+                       .off("mousedown", proxy(that._endTyping, that));
 
             kendo.destroy(that.wrapper);
         },
