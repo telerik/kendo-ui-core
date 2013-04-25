@@ -775,7 +775,7 @@ kendo_module({
         }
     };
 
-    var PositionComparer = extend({}, Comparer, {
+    var StableComparer = extend({}, Comparer, {
         asc: function(field) {
             var selector = this.selector(field);
             return function (a, b) {
@@ -1267,7 +1267,7 @@ kendo_module({
                     data[idx].__position = idx;
                 }
 
-                data = new Query(data).sort(field, dir, PositionComparer).toArray();
+                data = new Query(data).sort(field, dir, StableComparer).toArray();
 
                 for (idx = 0, length = data.length; idx < length; idx++) {
                     delete data[idx].__position;
