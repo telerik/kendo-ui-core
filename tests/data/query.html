@@ -482,6 +482,38 @@
                 equal(result[1].name, "foo");
                 equal(result[2].name, "foo");
             });
+
+            test("ascending sort using custom comparer", function() {
+                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).sort({
+                    compare: function(a, b){
+                        return a.name > b.name ? 1 : (a.name < b.name ? -1 : 0);
+                    }
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0].name, "bar");
+                equal(result[1].name, "foo");
+                equal(result[2].name, "foo");
+            });
+
+            test("descending sort using custom comparer", function() {
+                var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).sort({
+                    dir: "desc",
+                    compare: function(a, b){
+                        return a.name > b.name ? 1 : (a.name < b.name ? -1 : 0);
+                    }
+                }).toArray();
+
+                equal(result.length, 3);
+                equal(result[0].name, "foo");
+                equal(result[1].name, "foo");
+                equal(result[2].name, "bar");
+            });
+
             test("sort using multiple descriptors", function () {
                 var data = [{ name: "foo", age: 42 }, { name: "bar", age: 36 }, { name: "foo", age: 15 }];
 
@@ -1097,6 +1129,22 @@
                 equal(result[0].items.length, 11);
                 equal(result[0].items[0].foo, 0);
                 equal(result[0].items[1].foo, 1);
+            });
+
+            test("descending groupby should be stable", function() {
+                var data = [{foo:1, bar:1},{foo:2, bar:1},{foo:3, bar:1},{foo:4, bar:1},{foo:5, bar:1},
+                    {foo:6, bar:1},{foo:7, bar:1},{foo:8, bar:1},{foo:9, bar:1},{foo:0, bar:1},{foo:11, bar:1}];
+
+                var result = new Query(data)
+                    .sort([ { field: "foo", dir: "desc" }, {field:"bar", dir:"desc" }])
+                    .groupBy( {
+                        field: "bar", dir: "desc"
+                    }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].items.length, 11);
+                equal(result[0].items[0].foo, 11);
+                equal(result[0].items[1].foo, 9);
             });
 
             test("groupby on dates should be stable", function() {
