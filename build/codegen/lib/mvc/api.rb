@@ -47,6 +47,10 @@ publish:true
             @methods.empty? && @fields.empty? && @properties.empty? && @summary
         end
 
+        def js_name
+            name.sub('EventBuilder', '').downcase
+        end
+
         def to_markdown
             COMPONENT.result(binding)
         end
@@ -55,6 +59,9 @@ publish:true
 METHOD = ERB.new(%{
 ### <%= name.gsub('<', '\\<').gsub('>', '\\>').gsub('|', ',') %>
 <%= summary %>
+<% if owner.name.include?('EventBuilder') %>
+For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
+<% end %>
 <% if !examples.empty? %>
 #### Example
 <%= examples.map { |example| example.to_markdown }.join %>
@@ -68,11 +75,21 @@ METHOD = ERB.new(%{
 <%= returns %>
 <% end %>
 })
-    class Method < Struct.new(:name, :summary, :parameters, :examples, :returns)
+    class Method < Struct.new(:name, :summary, :parameters, :examples, :returns, :owner)
         def to_markdown
             parameterTypes = /\(([^\)]*)\)$/.match(name)[1].split('|') if parameters.any?
 
             METHOD.result(binding)
+        end
+
+        def js_name
+            name.gsub(/\(.*\)/, '').camelize
+        end
+
+        def suite
+            return 'dataviz' if owner.name =~ /Chart|Gauge|Sparkline/i
+            return 'framework' if owner.name.include?('DataSource')
+            'web'
         end
     end
 
@@ -169,7 +186,7 @@ PARAMETER = ERB.new(%{
 
                     prefix = component.type + '.'
 
-                    parse_methods(prefix, document) do |method|
+                    parse_methods(prefix, document, component) do |method|
                         component.methods.push(method)
                     end
 
@@ -186,7 +203,7 @@ PARAMETER = ERB.new(%{
 
             end
 
-            def parse_methods(prefix, document)
+            def parse_methods(prefix, document, component)
                 document.xpath("member[starts-with(@name,'M:#{prefix}')]").each do |method|
                     name = method['name']
 
@@ -202,7 +219,7 @@ PARAMETER = ERB.new(%{
 
                     returns = parse_returns(method)
 
-                    yield Method.new(name, summary, parameters, examples, returns) if block_given?
+                    yield Method.new(name, summary, parameters, examples, returns, component) if block_given?
                 end
             end
 
