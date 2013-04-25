@@ -124,23 +124,97 @@
                 }
             });
 
-            asyncTest('requesting an item from outside of the range triggers end reached event', 4, function() {
+            asyncTest('requesting the last item in the range triggers resize event', 1, function() {
                 ds.fetch();
-
-                equal(buffer.at(19), 19);
 
                 buffer.bind('resize', function(e) {
                     start();
-                    equal(e.skip, 20);
+                    equal(e.limit, 40);
                 });
+
+                buffer.at(12);
+                buffer.at(19);
+            });
+
+            test('requesting an item from outside of the range triggers endreached event', 2, function() {
+                ds.fetch();
 
                 buffer.bind('endreached', function(e) {
                     equal(e.index, 20);
                 });
-
+                buffer.at(19);
                 equal(buffer.at(20), null);
             });
 
+            module('buffer reset event', {
+                setup: function() {
+                    timeout = window.setTimeout;
+                    window.setTimeout = function(callback) {
+                        callback();
+                    }
+                    ds = new kendo.data.DataSource({
+                        transport: {
+                            read: function(options) {
+
+                                var results = [], data = options.data;
+                                for (var i = data.skip; i < data.skip + data.take; i ++) {
+                                    results.push({ value: i });
+                                }
+
+                                options.success(results);
+                            }
+                        },
+                        pageSize: 20,
+                        serverPaging: true,
+                        schema: {
+                            total: function() { return 100000; }
+                        }
+                    });
+
+                    buffer = new kendo.data.Buffer(ds, 5);
+                },
+
+                teardown: function() {
+                    window.setTimeout = timeout;
+                }
+            });
+
+            test('re-reading the datasource causes reset', 3, function() {
+                ds.fetch();
+
+                buffer.bind('resize', function(e) {
+                    equal(e.limit, 40);
+                });
+
+                buffer.at(12);
+                buffer.at(19);
+
+                buffer.unbind('resize');
+
+                buffer.bind('reset', function(e) {
+                    ok(true);
+                });
+
+                buffer.bind('resize', function(e) {
+                    equal(e.limit, 20);
+                });
+
+                ds.query({ page: 1, skip: 0, take: 20 });
+            });
+
+            test('re-reading the datasource causes reset, even on the same page', 3, function() {
+                buffer.bind('resize', function(e) {
+                    equal(e.limit, 20);
+                });
+
+                ds.fetch();
+
+                buffer.bind('reset', function(e) {
+                    ok(true);
+                });
+
+                ds.query({ page: 1, skip: 0, take: 20 });
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

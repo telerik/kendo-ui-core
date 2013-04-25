@@ -2813,6 +2813,11 @@ kendo_module({
             return that._findRange(skip, end).length > 0;
         },
 
+        lastRange: function() {
+            var ranges = this._ranges;
+            return ranges[ranges.length - 1];
+        },
+
         range: function(skip, take) {
             skip = math.min(skip || 0, this.total());
             var that = this,
@@ -3530,8 +3535,20 @@ kendo_module({
             buffer._prefetching = false;
             buffer._recalculate();
 
-            dataSource.bind('change', function() {
-                buffer.trigger('resize', { skip: dataSource.skip(), take: buffer.pageSize });
+            buffer._marks = [];
+
+            dataSource.bind("change", function() {
+                var skip = dataSource.skip(),
+                    item = dataSource.at(0),
+                    mark = buffer._marks[skip];
+
+                if (mark && mark !== item) {
+                    buffer.trigger("reset");
+                }
+
+                buffer._marks[skip] = item;
+
+                buffer.trigger("resize", { limit: dataSource.lastRange().end });
             })
         },
 
@@ -3577,7 +3594,7 @@ kendo_module({
             var item = this.dataSource.at(index - this.offset);
 
             if (item === undefined) {
-                this.trigger('endreached', {index: index});
+                this.trigger("endreached", {index: index});
             }
 
             return item;
@@ -3586,7 +3603,7 @@ kendo_module({
         range: function(offset) {
             var buffer = this;
             if (buffer.offset !== offset) {
-                buffer.dataSource.one('change', function() {
+                buffer.dataSource.one("change", function() {
                     buffer.offset = offset;
                     buffer._recalculate();
                 });
