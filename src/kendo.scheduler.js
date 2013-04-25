@@ -27,6 +27,38 @@ kendo_module({
         ADD = "add",
         EDIT = "edit",
         DELETECONFIRM = "Are you sure you want to delete this event?",
+        FREQUENCY = {
+            "SECONDLY": 0,
+            "MINUTELY": 1,
+            "HOURLY": 2,
+            "DAILY": 3,
+            "WEEKLY": 4,
+            "MONTHLY": 5,
+            "YEARLY": 6
+        },
+        WEEK_DAYS = {
+            "SU": 0,
+            "MO": 1,
+            "TU": 2,
+            "WE": 3,
+            "TH": 4,
+            "FR": 5,
+            "SA": 6
+        },
+        DATE_FORMATS = [
+            "yyyy-MM-ddTHH:mm:ss.fffzzz",
+            "yyyy-MM-ddTHH:mm:sszzz",
+            "yyyy-MM-ddTHH:mm:ss",
+            "yyyy-MM-ddTHH:mm",
+            "yyyy-MM-ddTHH",
+            "yyyy-MM-dd",
+            "yyyyMMddTHHmmssfffzzz",
+            "yyyyMMddTHHmmsszzz",
+            "yyyyMMddTHHmmss",
+            "yyyyMMddTHHmm",
+            "yyyyMMddTHH",
+            "yyyyMMdd"
+        ],
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -1307,41 +1339,6 @@ kendo_module({
         }
     });
 
-    var FREQUENCY = {
-        "SECONDLY": 0,
-        "MINUTELY": 1,
-        "HOURLY": 2,
-        "DAILY": 3,
-        "WEEKLY": 4,
-        "MONTHLY": 5,
-        "YEARLY": 6
-    };
-
-    var WEEK_DAYS = {
-        "SU": 0,
-        "MO": 1,
-        "TU": 2,
-        "WE": 3,
-        "TH": 4,
-        "FR": 5,
-        "SA": 6
-    };
-
-    var DATE_FORMATS = [
-        "yyyy-MM-ddTHH:mm:ss.fffzzz",
-        "yyyy-MM-ddTHH:mm:sszzz",
-        "yyyy-MM-ddTHH:mm:ss",
-        "yyyy-MM-ddTHH:mm",
-        "yyyy-MM-ddTHH",
-        "yyyy-MM-dd",
-        "yyyyMMddTHHmmssfffzzz",
-        "yyyyMMddTHHmmsszzz",
-        "yyyyMMddTHHmmss",
-        "yyyyMMddTHHmm",
-        "yyyyMMddTHH",
-        "yyyyMMdd"
-    ];
-
     function parseArray(list, range) {
         var idx = 0,
             length = list.length,
@@ -1390,11 +1387,57 @@ kendo_module({
 
             return instance;
         },
-        occurrences: function(period, eventInstance) {
+        occurrences: function(event, period) {
             var result = [],
-                ruleInstance = recurrence.expandEvent(eventInstance);
+                rule = recurrence.expandEvent(event),
+                start = new Date(period.start),
+                end = new Date(period.end);
+
+            if (!rule) {
+                return result;
+            }
+
+            var freq = recurrence.frequency[rule.freq],
+                start = freq.next(start, end, rule.interval);
+
+            while (start) {
+                result.push(freq.event(start, event));
+                start = freq.next(start, end, rule.interval);
+            }
+
+            return result;
+        },
+        frequency: {
+            //TODO: FREQ: SECONDLY
+            //TODO: FREQ: MINUTELY
+            //TODO: FREQ: HOURLY
+            DAILY: {
+                next: function(start, end, interval) {
+                    var start = new Date(start.getFullYear(), start.getMonth(), start.getDate() + interval, start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
+                    if (+start > +end) {
+                        start = null;
+                    }
+                    return start;
+                },
+                event: function(date, event) {
+                    return {
+                        recurrenceID: event.uid,
+                        start: this.setDate(date, event.start),
+                        end: this.setDate(date, event.end)
+                    }
+                },
+                setDate: function(currentDate, eventDate) {
+                    currentDate = new Date(currentDate);
+                    currentDate.setHours(eventDate.getHours());
+                    currentDate.setMinutes(eventDate.getMinutes());
+                    currentDate.setSeconds(eventDate.getSeconds());
+                    currentDate.setMilliseconds(eventDate.getMilliseconds());
+                    return currentDate;
+                }
+            }
         },
         parseRule: function (rule) {
+            //TODO: rename result to instance
             var result = {},
                 property,
                 splits, value,
@@ -1462,11 +1505,57 @@ kendo_module({
                         result.weekStart = weekStart;
                         break;
                 }
+
+                //TODO: set default WKST
+                //TODO: Validate whether the FREQ, UNTIL, COUNT
+
+                //TODO: Set default INTERVAL if not set
+                if (!result.interval) {
+                    result.interval = 1;
+                }
             }
 
             return result;
         }
     };
+
+    function parseArray(list, range) {
+        var idx = 0,
+            length = list.length,
+            value;
+
+        for (; idx < length; idx++) {
+            value = parseInt(list[idx], 10);
+            if (isNaN(value) || value < range.start || value > range.end || (value === 0 && range.start < 0)) {
+                return null;
+            }
+
+            list[idx] = value;
+        }
+
+        return list;
+    }
+
+    function parseWeekDayList(list) {
+        var idx = 0, length = list.length,
+            value, valueLength, day;
+
+        for (; idx < length; idx++) {
+            value = list[idx];
+            valueLength = value.length;
+            day = value.substring(valueLength - 2).toUpperCase();
+
+            if (WEEK_DAYS[day] === undefined) {
+                return null;
+            }
+
+            list[idx] = {
+                offset: parseInt(value.substring(0, valueLength - 2), 10) || 1,
+                day: day
+            };
+        }
+        return list;
+    }
 
     kendo.recurrence = recurrence;
 

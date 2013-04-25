@@ -19,7 +19,7 @@
             var recurrence = kendo.recurrence,
                 occurrences = recurrence.occurrences;
 
-            module("Recurring events");
+            module("Recurring helper methods");
 
             test("expandEvent method expand original method with rrule object", function() {
                 var schedulerEvent = {
@@ -33,21 +33,35 @@
                 ok(schedulerEvent.ruleInstance);
             });
 
-            /*test("week method retrieves a multi-day period from simple Date object", function() {
+            test("DAILY frequency next method gets next day (interval:1)", function() {
+                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), 1);
+                equal(+next, +new Date(2000, 10, 11, 18, 18, 18))
+            });
 
-            });*/
+            test("DAILY frequency next method gets the day after tomorrow (interval:2)", function() {
+                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), 2);
+                equal(+next, +new Date(2000, 10, 12, 18, 18, 18));
+            });
 
-            /*test("Occurrence method finds first occurrence in required period", function() {
+
+            module("Recurring events");
+
+            test("Occurrences method returns one occurrence (Day view)", function() {
                 var schedulerEvent = {
+                    uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
-                    rrule: "FREQ:DAILY"
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY"
                 }
 
-                getOccurs(schedulerEvent, { start: new Date(2000, 10, );
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 11) } );
 
-                ok(schedulerEvent.rruleInstance);
-            });*/
+                equal(events.length, 1);
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+            });
 
         </script>
     </body>
