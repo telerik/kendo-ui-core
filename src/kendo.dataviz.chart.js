@@ -1990,19 +1990,24 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                valueAxis = axis.plotArea.valueAxis,
-                radius = math.abs(axis.box.center().y - valueAxis.lineBox().y1),
-                divs = axis.majorDivisions(),
-                elements = [];
+                elements = [],
+                i,
+                band,
+                slot,
+                singleSlot,
+                head,
+                tail;
 
-            for (var i = 0; i < plotBands.length; i++) {
-                var band = plotBands[i];
-                var slot = axis.getSlot(band.from, band.to - 1);
+            for (i = 0; i < plotBands.length; i++) {
+                band = plotBands[i];
+                slot = axis.getSlot(band.from, band.to - 1);
+                singleSlot = axis.getSlot(band.from);
 
-                var tail = band.to - math.floor(band.to);
-                if (tail) {
-                    slot.angle = tail * slot.angle;
-                }
+                head = band.from - math.floor(band.from);
+                slot.startAngle += head * singleSlot.angle;
+
+                tail = math.ceil(band.to) - band.to;
+                slot.angle -= (tail + head) * singleSlot.angle;
 
                 elements.push(view.createSector(slot, {
                     fill: band.color,
@@ -2031,7 +2036,7 @@ kendo_module({
                 from = (from + 1) % totalDivs;
             }
 
-            from = clipValue(from, 0, totalDivs - 1);
+            from = clipValue(math.floor(from), 0, totalDivs - 1);
             startAngle = divs[from];
 
             if (justified) {
@@ -2042,7 +2047,7 @@ kendo_module({
                 }
             }
 
-            to = clipValue(to || from, from, totalDivs - 1);
+            to = clipValue(math.ceil(to || from), from, totalDivs - 1);
             slots = to - from + 1;
             angle = slotAngle * slots;
 
