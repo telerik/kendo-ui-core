@@ -28,7 +28,7 @@
                     },
                     series: [{
                         type: "radarColumn",
-                        stack: true,
+                        //stack: true,
                         data: [1, 2, 3],
                         color: "red",
                         opacity: 0.5,
@@ -44,25 +44,27 @@
                         majorGridLines: {
                             // TODO: Document
                             // visible: true
-                        },
-                        plotBands: [{
-                            from: 0, to: 1,
-                            color: "red",
-                            opacity: 0.5
-                        },{
-                            from: 1, to: 2.5,
-                            color: "green",
-                            opacity: 0.5
-                        }]
+                        }
                         //justified: false,
                         //reverse: true
                         //startAngle: 90 // default
                     },
                     valueAxis: {
+                        majorTicks: {
+                            visible: false
+                        },
                         majorGridLines: {
+                            // TODO: Default to "arc"?
+                            // TODO: "arc" or "circle"?
+
                             //type: "line" // default
                             type: "arc"
                         },
+                        __plotBands: [{
+                            from: 0, to: 1,
+                            color: "red",
+                            opacity: 0.5
+                        }]
 
                         // TODO: Support
                         //reverse: true

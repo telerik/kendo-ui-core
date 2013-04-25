@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
+                getElement = dataviz.getElement,
+                Point2D = dataviz.Point2D,
+                Box2D = dataviz.Box2D,
+                chartBox = new Box2D(100, 100, 500, 500),
+                view,
+                axis,
+                altAxis,
+                TOLERANCE = 1;
+
+            function createAxis(options) {
+                altAxis = {
+                    box: chartBox,
+                    majorDivisions: function() {
+                        return [90, 210, 330];
+                    }
+                };
+
+                axis = new dataviz.RadarNumericAxis(1, 3,
+                    deepExtend({
+                        min: 0,
+                        max: 3,
+                        majorUnit: 1
+                    }, options)
+                );
+
+                axis.reflow(new Box2D(300, 0, 310, 310));
+                axis.plotArea = {
+                    options: {},
+                    categoryAxis: altAxis
+                };
+
+                view = new ViewStub();
+                axis.getViewElements(view);
+            }
+
+            // ------------------------------------------------------------
+            module("Radar Numeric Axis / Grid lines", {
+                setup: function() {
+                    createAxis();
+                    axis.renderGridLines(view, altAxis);
+                }
+            });
+
+            test("renders major grid lines by default", function() {
+                equal(view.log.path.length, 3);
+            });
+
+            test("points are placed on alt axis divisions", function() {
+                var points = view.log.path[0].points;
+
+                close(points[0].x, 300, TOLERANCE);
+                close(points[0].y, 204, TOLERANCE);
+
+                close(points[1].x, 383, TOLERANCE);
+                close(points[1].y, 348, TOLERANCE);
+
+                close(points[2].x, 217, TOLERANCE);
+                close(points[2].y, 348, TOLERANCE);
+            });
+
+            test("applies major grid line color", function() {
+                createAxis({ majorGridLines: { color: "red" } });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.path[0].style.stroke, "red");
+            });
+
+            test("applies major grid line width", function() {
+                createAxis({ majorGridLines: { width: 2 } });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.path[0].style.strokeWidth, 2);
+
+            });
+
+            test("renders minor grid lines", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.path.length, 6);
+            });
+
+            test("applies minor grid line color", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true,
+                        color: "red"
+                    }
+                });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.path[0].style.stroke, "red");
+            });
+
+            test("applies minor grid line width", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true,
+                        width: 4
+                    }
+                });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.path[0].style.strokeWidth, 4);
+            });
+
+            // ------------------------------------------------------------
+            module("Radar Numeric Axis / Grid arcs", {
+                setup: function() {
+                    createAxis({
+                        majorGridLines: {
+                            type: "arc"
+                        }
+                    });
+                    axis.renderGridLines(view, altAxis);
+                }
+            });
+
+            test("renders major grid arcs", function() {
+                equal(view.log.circle.length, 3);
+            });
+
+            test("renders minor grid arcs", function() {
+                createAxis({
+                    majorGridLines: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        type: "arc",
+                        visible: true
+                    }
+                });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.path.length, 6);
+            });
+
+            /*
+            var plotArea,
+                plotBands,
+                lineSeriesData = [{
+                    name: "Value A",
+                    type: "line",
+                    data: [0, 1]
+                }],
+                barSeriesData =  [{
+                    name: "Value A",
+                    type: "bar",
+                    data: [0, 1]
+                }];
+
+            function createPlotArea(series, chartOptions) {
+                plotArea = new dataviz.CategoricalPlotArea(series, {
+                    valueAxis: {
+                        plotBands: [{
+                            from: 0.2,
+                            to: 0.3,
+                            color: "red",
+                            opacity: 0.5
+                        }]
+                    },
+                    categoryAxis: {
+                        categories: ["A"]
+                    }
+                });
+
+                view = new ViewStub();
+
+                plotArea.reflow(chartBox);
+                plotArea.getViewElements(view);
+            }
+
+            // ------------------------------------------------------------
+            module("Numeric Axis / Plot Bands / Horizontal", {
+                setup: function() {
+                    createPlotArea(lineSeriesData);
+                    plotBands = view.log.rect[0];
+                }
+            });
+
+            test("renders box", function() {
+                arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                     [35, 432, 799, 479], TOLERANCE);
+            });
+
+            test("renders color", function() {
+                equal(plotBands.style.fill, "red");
+            });
+
+            test("renders opacity", function() {
+                equal(plotBands.style.fillOpacity, 0.5);
+            });
+
+            test("renders z index", function() {
+                equal(plotBands.style.zIndex, -1);
+            });
+
+            // ------------------------------------------------------------
+            module("Numeric Axis / Plot Bands / Vertical", {
+                setup: function() {
+                    createPlotArea(barSeriesData);
+                    plotBands = view.log.rect[1];
+                }
+            });
+
+            test("renders box", function() {
+                arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                     [147, 0, 211, 573], TOLERANCE);
+            });
+
+            test("renders color", function() {
+                equal(plotBands.style.fill, "red");
+            });
+
+            test("renders opacity", function() {
+                equal(plotBands.style.fillOpacity, 0.5);
+            });
+
+            test("renders z index", function() {
+                equal(plotBands.style.zIndex, -1);
+            });
+           */
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

@@ -2076,15 +2076,16 @@ kendo_module({
         }
     });
 
-    var PolarNumericAxis = NumericAxis.extend({
+    var RadarNumericAxis = NumericAxis.extend({
         options: {
             majorGridLines: {
-                // TODO: New property - type[line*, arc]
+                // TODO: Document type[line*, arc]
                 visible: true
             }
         },
 
-        // TODO: Grid circles, lines
+        // TODO: Plot bands (circles, polygons)
+
         renderGridLines: function(view, altAxis) {
             var axis = this,
                 options = axis.options,
@@ -2098,6 +2099,8 @@ kendo_module({
                     view, center, majorTicks, majorAngles, options.majorGridLines
                 );
             }
+
+            // TODO: Minor grid lines
 
             return gridLines;
         },
@@ -2122,20 +2125,21 @@ kendo_module({
 
             for (tickIx = 0; tickIx < ticks.length; tickIx++) {
                 tickRadius = center.y - ticks[tickIx];
+                if(tickRadius > 0) {
+                    if (options.type === "arc") {
+                        elements.push(view.createCircle(
+                            center, tickRadius, elementOptions
+                        ));
+                    } else {
+                        points = [];
+                        for (angleIx = 0; angleIx < angles.length; angleIx++) {
+                            points.push(
+                                Point2D.onCircle(center, angles[angleIx], tickRadius)
+                            );
+                        }
 
-                if (options.type === "arc") {
-                    elements.push(view.createCircle(
-                        center, tickRadius, elementOptions
-                    ));
-                } else {
-                    points = [];
-                    for (angleIx = 0; angleIx < angles.length; angleIx++) {
-                        points.push(
-                            Point2D.onCircle(center, angles[angleIx], tickRadius)
-                        );
+                        elements.push(view.createPolyline(points, true, elementOptions));
                     }
-
-                    elements.push(view.createPolyline(points, true, elementOptions));
                 }
             }
 
@@ -8106,7 +8110,7 @@ kendo_module({
                 range.max = math.max(range.max, defaultRange.max);
             }
 
-            valueAxis = new PolarNumericAxis(
+            valueAxis = new RadarNumericAxis(
                 range.min, range.max,
                 deepExtend({ max: range.max }, plotArea.options.valueAxis)
             );
@@ -10193,6 +10197,7 @@ kendo_module({
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,
+        RadarNumericAxis: RadarNumericAxis,
         RadarStackLayout: RadarStackLayout,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
