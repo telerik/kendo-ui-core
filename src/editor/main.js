@@ -488,9 +488,11 @@ kendo_module({
 
             if (options && options.value) {
                 value = options.value;
-            } else {
+            } else if (that.textarea) {
                 // indented HTML introduces problematic ranges in IE
                 value = element.val().replace(/[\r\n\v\f\t ]+/ig, " ");
+            } else {
+                value = element.innerHTML;
             }
 
             that.value(value);
@@ -601,7 +603,7 @@ kendo_module({
             var isFirstKeyDown = true,
                 editor = this;
 
-            if (editor.textarea.length) {
+            if (editor.textarea) {
                 editor.window = editor._createContentElement(editor.options.stylesheets);
                 editor.document = editor.window.contentDocument || editor.window.document;
                 editor.body = editor.document.body;
