@@ -6,7 +6,6 @@ kendo_module({
     depends: [ "core" ]
 });
 
-
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -15,16 +14,21 @@ kendo_module({
 
     var Scheduler = Widget.extend({
         init: function(element, options) {
-            var that = this, value, id;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
+
+            that.wrapper = that.element;
         },
 
         options: {
-            name: "Scheduler",
+            name: "Scheduler"
         },
 
-        events: []
+        events: [],
+
+        refresh: function() {
+        }
     });
 
     var RRule = Class.extend({
