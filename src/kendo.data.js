@@ -3517,30 +3517,40 @@ kendo_module({
         return dataSource instanceof HierarchicalDataSource ? dataSource : new HierarchicalDataSource(dataSource);
     };
 
-    var Buffer = kendo.Class.extend({
+    var Buffer = kendo.Observable.extend({
         init: function(dataSource, itemCount) {
-            this.dataSource = dataSource;
-            this.pageSize = dataSource.pageSize(),
-            this.itemCount = itemCount;
-            this.step = this.itemCount + 2, // buffer
-            this.offset = 0;
-            this._prefetching = false;
-            this._recalculate();
-            var that = this;
+            var buffer = this;
+
+            kendo.Observable.fn.init.call(buffer);
+            buffer.dataSource = dataSource;
+            buffer.pageSize = dataSource.pageSize(),
+            buffer.itemCount = itemCount;
+            buffer.step = buffer.itemCount + 2, // buffer
+            buffer.offset = 0;
+            buffer._prefetching = false;
+            buffer._recalculate();
+
+            dataSource.bind('change', function() {
+                buffer.trigger('resize', { skip: dataSource.skip(), take: buffer.pageSize });
+            })
         },
 
         at: function(index)  {
             var buffer = this,
-                ds = this.dataSource,
+                dataSource = this.dataSource,
                 pageSize = this.pageSize,
                 skip = this.skip,
                 offset = this.offset,
-                step = this.step;
+                step = this.step,
+                prefetchOffset = skip + pageSize;
 
             // prefetch
-            if (index === this.prefetchThreshold && !ds.inRange(skip + pageSize, pageSize) && !this._prefetching) {
+            if (index === this.prefetchThreshold && !dataSource.inRange(prefetchOffset, pageSize) && !this._prefetching) {
                 this._prefetching = true;
-                ds.prefetch(skip + pageSize, pageSize, function() {
+                this.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
+
+                dataSource.prefetch(prefetchOffset, pageSize, function() {
+                    buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
                     buffer._prefetching = false;
                 });
             }
@@ -3564,14 +3574,23 @@ kendo_module({
                 this.range(skip);
             }
 
-            return this.dataSource.at(index - this.offset);
+            var item = this.dataSource.at(index - this.offset);
+
+            if (item === undefined) {
+                this.trigger('endreached', {index: index});
+            }
+
+            return item;
         },
 
         range: function(offset) {
-            if (this.offset !== offset) {
-                ds.range(offset, this.pageSize);
-                this.offset = offset;
-                this._recalculate();
+            var buffer = this;
+            if (buffer.offset !== offset) {
+                buffer.dataSource.one('change', function() {
+                    buffer.offset = offset;
+                    buffer._recalculate();
+                });
+                buffer.dataSource.range(offset, buffer.pageSize);
             }
         },
 

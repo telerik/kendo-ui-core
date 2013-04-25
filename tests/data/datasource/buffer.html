@@ -57,10 +57,12 @@
                 });
             });
 
-            test('approaching the end of the range prefetches data', 2, function() {
+            test('approaching the end of the range prefetches data', 4, function() {
                 ds.fetch();
                 buffer.at(11);
                 ok(!ds.inRange(20, 20));
+                buffer.bind('prefetching', function(e) { equal(e.skip, 20); });
+                buffer.bind('prefetched', function(e) { equal(e.skip, 20); });
                 buffer.at(12);
                 ok(ds.inRange(20, 20));
             });
@@ -95,6 +97,48 @@
                 equal(buffer.at(26), 26); // go to second range
                 equal(buffer.at(19), 19); // pull back to mid range
                 equal(ds.view()[0], 13);
+            });
+
+            module('buffer end/resize events ', {
+                setup: function() {
+                    ds = new kendo.data.DataSource({
+                        transport: {
+                            read: function(options) {
+
+                                var results = [], data = options.data;
+                                for (var i = data.skip; i < data.skip + data.take; i ++) {
+                                    results.push(i);
+                                }
+
+                                options.success(results);
+                            }
+                        },
+                        pageSize: 20,
+                        serverPaging: true,
+                        schema: {
+                            total: function() { return 100000; }
+                        }
+                    });
+
+                    buffer = new kendo.data.Buffer(ds, 5);
+                }
+            });
+
+            asyncTest('requesting an item from outside of the range triggers end reached event', 4, function() {
+                ds.fetch();
+
+                equal(buffer.at(19), 19);
+
+                buffer.bind('resize', function(e) {
+                    start();
+                    equal(e.skip, 20);
+                });
+
+                buffer.bind('endreached', function(e) {
+                    equal(e.index, 20);
+                });
+
+                equal(buffer.at(20), null);
             });
 
         </script>
