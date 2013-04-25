@@ -123,6 +123,46 @@
                 equal(ranges.length, 2);
             });
 
+            test("prefetch raises requestEnd", 2, function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.bind("requestEnd", function(e) {
+                    ok(e.response);
+                    equal(e.type, "read");
+                });
+
+                dataSource.prefetch(1, 1);
+            });
+
+
+            test("prefetch raises requestStart", 1, function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.bind("requestStart", function() {
+                    ok(true);
+                });
+
+                dataSource.prefetch(1, 1);
+            });
+
+            test("prefetch cancelling requestStart does not block subsequent requests", 1, function() {
+                var dataSource = remoteDataSource(),
+                    counter = 0;
+
+                dataSource.one("requestStart", function(e) {
+                    e.preventDefault();
+                });
+
+                dataSource.prefetch(1, 1);
+
+                dataSource.one("requestStart", function(e) {
+                    ok(true);
+                });
+
+                dataSource.prefetch(1, 1);
+            });
+
+
             test("inRange returns true if skip is within range", function() {
                 var dataSource = remoteDataSource();
 
