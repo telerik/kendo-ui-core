@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+    </head>
+    <body>
+    <script>
+        for (var i = 0; i < 10000; i ++) {
+            var div = $("<div>Me is a drop target</div>").appendTo($(document.body));
+            div.kendoDropTarget({ group: "one" });
+            // div.data("kendoDropTarget").destroy();
+            div.remove();
+        }
+    </script>
+    </body>
+</html>
