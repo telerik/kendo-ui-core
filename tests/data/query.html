@@ -487,6 +487,7 @@
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 
                 var result = new Query(data).sort({
+                    dir: "asc",
                     compare: function(a, b){
                         return a.name > b.name ? 1 : (a.name < b.name ? -1 : 0);
                     }

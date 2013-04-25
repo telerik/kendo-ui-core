@@ -88,7 +88,7 @@
                 });
 
                 var comparer = function() {};
-                dataSource.query({ sort: { compare: comparer }});
+                dataSource.query({ sort: { dir: "asc", compare: comparer }});
                 equal(dataSource.sort()[0].compare, comparer);
             });
 

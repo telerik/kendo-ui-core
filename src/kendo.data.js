@@ -1019,7 +1019,7 @@ kendo_module({
             var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
             descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-            return grep(descriptors, function(d) { return !!d.dir || !!d.compare; });
+            return grep(descriptors, function(d) { return !!d.dir; });
         }
     }
 
