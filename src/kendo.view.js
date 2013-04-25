@@ -3,7 +3,7 @@ kendo_module({
     name: "View",
     category: "framework",
     description: "The View class instantiates and handles the events of a certain screen from the application.",
-    depends: [ "core" ],
+    depends: [ "core", "binder" ],
     hidden: false
 });
 
