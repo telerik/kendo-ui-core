@@ -61,7 +61,6 @@
         test('toggle() replaces format values, if any', function() {
             var pendingFormats = new PendingFormats(editor);
 
-            console.log(Editor.defaultTools);
             pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: Editor.defaultTools.fontSize.command });
 
             ok(pendingFormats.hasPending());
