@@ -754,7 +754,7 @@ kendo_module({
             if (sort.dir == "desc") {
                 return function(a, b) {
                     return compare(b, a);
-                }
+                };
             }
 
             return compare;

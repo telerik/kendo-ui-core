@@ -72,6 +72,20 @@
                 equal(sortable.options.allowUnsort, false);
             });
 
+            test("column sortable options are passed to the sorters", function() {
+                var element = $("<table><thead><tr><th/><tr></thead></table>"),
+                    grid = new Grid(element, {
+                    data: [],
+                    columns: [ { field: "foo", sortable: { compare: $.noop } } ],
+                    sortable: {
+                        allowUnsort: false,
+                        mode: "multiple"
+                    }
+                });
+                var sortable = grid.wrapper.find("th").data("kendoSortable");
+                equal(sortable.options.compare, $.noop);
+            });
+
             test("sortable is properly attached when there is no table header initially", function() {
                 var element = $("<table />"),
                     grid = new Grid(element, {
