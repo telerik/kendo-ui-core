@@ -1,8 +1,8 @@
 kendo_module({
-    id: "eventcalendar",
-    name: "EventCalendar",
+    id: "scheduler",
+    name: "Scheduler",
     category: "web",
-    description: "The Event Calendar is event management widget with multiple views ",
+    description: "The Scheduler is a event calendar.",
     depends: [ "core" ]
 });
 
@@ -12,7 +12,7 @@ kendo_module({
         Class = kendo.Class,
         Widget = ui.Widget;
 
-    var EventCalendar = Widget.extend({
+    var Scheduler = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -22,7 +22,7 @@ kendo_module({
         },
 
         options: {
-            name: "EventCalendar"
+            name: "Scheduler"
         },
 
         events: [],
@@ -198,6 +198,6 @@ kendo_module({
 
     kendo.rrule_parse = rrule_parse;
 
-    ui.plugin(EventCalendar);
+    ui.plugin(Scheduler);
 
 })(window.kendo.jQuery);
