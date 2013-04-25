@@ -43,7 +43,8 @@ kendo_module({
         options: {
             name: "Sortable",
             mode: SINGLE,
-            allowUnsort: true
+            allowUnsort: true,
+            compare: null
         },
 
         destroy: function() {
@@ -96,6 +97,7 @@ kendo_module({
                 field = element.attr(kendo.attr(FIELD)),
                 dir = element.attr(kendo.attr(DIR)),
                 options = that.options,
+                compare = that.options.compare,
                 sort = that.dataSource.sort() || [],
                 idx,
                 length;
@@ -109,7 +111,7 @@ kendo_module({
             }
 
             if (options.mode === SINGLE) {
-                sort = [ { field: field, dir: dir } ];
+                sort = [ { field: field, dir: dir, compare: compare } ];
             } else if (options.mode === "multiple") {
                 for (idx = 0, length = sort.length; idx < length; idx++) {
                     if (sort[idx].field === field) {
@@ -117,7 +119,7 @@ kendo_module({
                         break;
                     }
                 }
-                sort.push({ field: field, dir: dir });
+                sort.push({ field: field, dir: dir, compare: compare });
             }
 
             e.preventDefault();

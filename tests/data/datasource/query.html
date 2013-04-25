@@ -82,6 +82,16 @@
                 equal(dataSource.sort()[0].dir, "asc");
             });
 
+            test("query sets custom comparer", function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                var comparer = function() {};
+                dataSource.query({ sort: { compare: comparer }});
+                equal(dataSource.sort()[0].compare, comparer);
+            });
+
             test("query sets sort when array is passed", function() {
                 var dataSource = new DataSource({
                     data: data

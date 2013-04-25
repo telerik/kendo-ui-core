@@ -726,7 +726,7 @@ kendo_module({
             return isFunction(field) ? field : getter(field);
         },
 
-        asc: function(field) {
+        compare: function(field) {
             var selector = this.selector(field);
             return function (a, b) {
                 a = selector(a);
@@ -748,30 +748,16 @@ kendo_module({
             };
         },
 
-        desc: function(field) {
-            var selector = this.selector(field);
-            return function (a, b) {
-                a = selector(a);
-                b = selector(b);
+        create: function(sort) {
+            var compare = sort.compare || this.compare(sort.field);
 
-                if (a == null && b == null) {
-                    return 0;
-                }
+            if (sort.dir == "desc") {
+                return function(a, b) {
+                    return compare(b, a);
+                };
+            }
 
-                if (b == null) {
-                    return -1;
-                }
-
-                if (a == null) {
-                    return 1;
-                }
-
-                return a < b ? 1 : (a > b ? -1 : 0);
-            };
-        },
-
-        create: function(descriptor) {
-            return this[descriptor.dir.toLowerCase()](descriptor.field);
+            return compare;
         },
 
         combine: function(comparers) {
@@ -789,7 +775,7 @@ kendo_module({
         }
     };
 
-    var PositionComparer = extend({}, Comparer, {
+    var StableComparer = extend({}, Comparer, {
         asc: function(field) {
             var selector = this.selector(field);
             return function (a, b) {
@@ -813,7 +799,7 @@ kendo_module({
                     return 1;
                 }
 
-                return valueA > valueB ? 1 : (valueA < valueB ? -1 : a.__position - b.__position);
+                return valueA > valueB ? 1 : -1;
             };
         },
 
@@ -840,8 +826,11 @@ kendo_module({
                     return -1;
                 }
 
-                return valueA < valueB ? 1 : (valueA > valueB ? -1 : a.__position - b.__position);
+                return valueA < valueB ? 1 : -1;
             };
+        },
+        create: function(sort) {
+           return this[sort.dir](sort.field);
         }
     });
 
@@ -1030,7 +1019,7 @@ kendo_module({
             var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
             descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-            return grep(descriptors, function(d) { return !!d.dir; });
+            return grep(descriptors, function(d) { return !!d.dir || !!d.compare; });
         }
     }
 
@@ -1130,14 +1119,24 @@ kendo_module({
         select: function (selector) {
             return new Query(map(this.data, selector));
         },
-        orderBy: function (selector) {
-            var result = this.data.slice(0),
-            comparer = isFunction(selector) || !selector ? Comparer.asc(selector) : selector.compare;
+        order: function(selector, dir) {
+            var sort = { dir: dir };
 
-            return new Query(result.sort(comparer));
+            if (selector) {
+                if (selector.compare) {
+                    sort.compare = selector.compare;
+                } else {
+                    sort.field = selector;
+                }
+            }
+
+            return new Query(this.data.slice(0).sort(Comparer.create(sort)));
         },
-        orderByDescending: function (selector) {
-            return new Query(this.data.slice(0).sort(Comparer.desc(selector)));
+        orderBy: function(selector) {
+            return this.order(selector, "asc");
+        },
+        orderByDescending: function(selector) {
+            return this.order(selector, "desc");
         },
         sort: function(field, dir, comparer) {
             var idx,
@@ -1268,7 +1267,7 @@ kendo_module({
                     data[idx].__position = idx;
                 }
 
-                data = new Query(data).sort(field, dir, PositionComparer).toArray();
+                data = new Query(data).sort(field, dir, StableComparer).toArray();
 
                 for (idx = 0, length = data.length; idx < length; idx++) {
                     delete data[idx].__position;

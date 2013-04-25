@@ -2660,7 +2660,7 @@ kendo_module({
                             }
 
                             cell.attr("data-" + kendo.ns +"field", column.field)
-                                .kendoSortable(extend({}, sortable, { dataSource: that.dataSource, aria: true }));
+                                .kendoSortable(extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true }));
                         }
                     });
             }
