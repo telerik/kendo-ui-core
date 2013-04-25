@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EventCalendar initialization</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.eventcalendar.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">EventCalendar initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var EventCalendar = kendo.ui.EventCalendar,
+                container;
+
+            module("Initialization", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    $(container).closest(".k-scheduler").remove();
+                }
+            });
+
+            test("kendoEventCalendar attaches a eventcalendar object to target", function() {
+                var div = $("<div />").kendoEventCalendar({});
+
+                ok(div.data("kendoEventCalendar") instanceof EventCalendar);
+            });
+
+            test("wrapper field is initialized", function() {
+               var eventCalendar = new EventCalendar(container);
+
+               equal(eventCalendar.wrapper[0], container);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
