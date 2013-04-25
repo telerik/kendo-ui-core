@@ -109,6 +109,16 @@
                 equal(sort[0].field, "bar");
             });
 
+            test("compare option propagates to data source", function() {
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, compare: $.noop } );
+
+                button.click();
+
+                var sort = dataSource.sort();
+
+                equal(sort[0].compare, $.noop);
+            });
+
             test("dir changes to asc when allowUnsort is false", function() {
                 var sorter = setup(button.attr("data-field", "foo").data("dir", "desc"), { dataSource: dataSource, allowUnsort: false } );
 
