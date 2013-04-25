@@ -185,6 +185,7 @@
                     that.inner = element.children().first();
                     that.pages = [];
                     that.itemCount = 0;
+                    that._endReached = false;
 
                     that.inner.css("height", that.options.contentHeight);
 
@@ -249,6 +250,11 @@
                     } else {
                         that.batchBuffer = new kendo.data.Buffer(that.options.dataSource, that.itemCount);
                     }
+
+                    that.batchBuffer.bind({
+                        "endreached": proxy(that._onEndReached, that),
+                        "reset": proxy(that._onReset, that)
+                    });
 
                     that._initPages();
                 },
@@ -343,12 +349,12 @@
                         }
                         that.backward();
                         return;
-                    } else if(velocity < -velocityThreshold) {
+                    } else if(velocity < -velocityThreshold && !that._endReached) {
                         that.forward();
                         return;
                     }
 
-                    if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3)) {
+                    if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3 && !that._endReached)) {
                         that.forward();
                         return;
                     } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
@@ -388,6 +394,15 @@
                     that._resetMovable();
                 },
 
+                _onEndReached: function (e) {
+                    console.log("end reached");
+                    this._endReached = true;
+                },
+
+                _onReset: function (e) {
+                    console.log("reset");   
+                },
+
                 setPageContent: function (page, index) {
                     var batchBuffer = this.batchBuffer,
                         template = this.options.template,
@@ -425,11 +440,30 @@
                 }
             });
 
-            var BatchBuffer = kendo.Class.extend({
+            var BatchBuffer = kendo.Observable.extend({
                 init: function (dataSource, batchSize) {
+                    var batchBuffer = this;
+
+                    kendo.Observable.fn.init.call(batchBuffer);
+
                     this.dataSource = dataSource;
                     this.batchSize = batchSize;
-                    this.buffer = new kendo.data.Buffer(dataSource, 0);
+                    this.buffer = new kendo.data.Buffer(dataSource, batchSize*2);
+
+                    this.buffer.bind({
+                        "endreached": function (e) {
+                            batchBuffer.trigger("endreached", { index: e.index });
+                        },
+                        "prefetching": function (e) {
+                            batchBuffer.trigger("prefetching", { skip: e.skip, take: e.take });
+                        },
+                        "prefetched": function (e) {
+                            batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
+                        },
+                        "reset": function (e) {
+                            batchBuffer.trigger("reset");
+                        }
+                    });
                 },
                 at: function (index) {
                     var buffer = this.buffer,
