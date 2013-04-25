@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recurrence dates</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var recurrence = kendo.recurrence,
+                occurrences = recurrence.occurrences;
+
+            module("Recurring events");
+
+            test("expandEvent method expand original method with rrule object", function() {
+                var schedulerEvent = {
+                    title: "Title",
+                    start: new Date(),
+                    rule: "FREQ:DAILY"
+                }
+
+                recurrence.expandEvent(schedulerEvent);
+
+                ok(schedulerEvent.ruleInstance);
+            });
+
+            /*test("week method retrieves a multi-day period from simple Date object", function() {
+
+            });*/
+
+            /*test("Occurrence method finds first occurrence in required period", function() {
+                var schedulerEvent = {
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    rrule: "FREQ:DAILY"
+                }
+
+                getOccurs(schedulerEvent, { start: new Date(2000, 10, );
+
+                ok(schedulerEvent.rruleInstance);
+            });*/
+
+        </script>
+    </body>
+</html>
