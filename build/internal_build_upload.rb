@@ -112,4 +112,4 @@ task "internal_builds:uncheck_previous" do
     end
 end
 
-task "internal_builds:upload" => [ "internal_builds:uncheck_previous", "internal_builds:bundles:all" ]
+task "internal_builds:upload" => [ "internal_builds:bundles:all" ]
