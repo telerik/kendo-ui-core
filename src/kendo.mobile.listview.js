@@ -231,23 +231,15 @@ kendo_module({
                 groups = dataSource.group(),
                 groupedMode = groups && groups[0];
 
-            if (action === "itemchange") {
-                var items = listView.findByDataItem(dataItems),
-                    dataItem = dataItems[0],
-                    newItem = $(listView.setDataItem(items[0], dataItem));
-
-                listView.trigger("itemChange", {
-                    item: newItem,
-                    data: dataItems[0],
-                    ns: ui
-                });
-
-                return;
-            }
-
             listView.trigger('dataBinding');
 
-            if (groupedMode) {
+            if (action === "itemchange") {
+                listView.setDataItem(listView.findByDataItem(dataItems)[0], dataItems[0]);
+            } else if (action === "add") {
+                listView.append(dataItems);
+            } else if (action === "remove") {
+                listView.remove(dataItems);
+            } else if (groupedMode) {
                 listView.replaceGrouped(view);
             }
             else if (prependOnRefresh) {
@@ -453,8 +445,13 @@ kendo_module({
         },
 
         setDataItem: function(item, dataItem) {
+            var that = this;
+
             return this._renderItems([dataItem], function(items) {
-                $(item).replaceWith(items);
+                var newItem = $(items[0]);
+                $(item).replaceWith(newItem);
+
+                that.trigger("itemChange", { item: dataItem, data: newItem, ns: ui });
             })[0];
         },
 

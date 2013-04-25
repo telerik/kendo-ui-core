@@ -123,6 +123,38 @@
                 equal(dom.find("li:first").text(), "baz");
             });
 
+            test("adding item does not rebind the whole widget", 2, function() {
+                var dom = $("<ul/>"),
+                    dataSource = new kendo.data.DataSource({ data: [ { text: "foo" },  ] });
+
+                var listView = new ListView(dom, {
+                    dataSource: dataSource,
+                    template: "#= text #"
+                });
+
+                var originalItem = dom.children()[0];
+
+                dataSource.add({ text: "bar" });
+                equal(dom.children().length, 2);
+                equal(dom.children()[0], originalItem);
+            });
+
+            test("removing item does not rebind the whole widget", 2, function() {
+                var dom = $("<ul/>"),
+                    dataSource = new kendo.data.DataSource({ data: [ { text: "foo" }, { text: "bar" } ] });
+
+                var listView = new ListView(dom, {
+                    dataSource: dataSource,
+                    template: "#= text #"
+                });
+
+                var originalItem = dom.children()[1];
+
+                dataSource.remove(dataSource.at(0));
+                equal(dom.children().length, 1);
+                equal(dom.children()[0], originalItem);
+            });
+
             test("default template escapes html entities", function() {
                 var dom = $("<ul/>");
 
