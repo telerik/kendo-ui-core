@@ -22,6 +22,7 @@
         <script src="../../../src/kendo.mobile.loader.js"></script>
         <script src="../../../src/kendo.mobile.pane.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.button.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
         <style>
             #qunit-fixture {
@@ -161,6 +162,22 @@
                 equal(kendo.mobile.calls("init"), 1);
 
                 kendo.mobile.init = originInit;
+            });
+
+            test("instantiates widgets in added items", 2, function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: [ { text: "foo" }],
+                    template: "<span><a data-role='button'>#= text #</a></span>"
+                });
+
+                ok(listView.element.find('span a').data('kendoMobileButton'));
+
+                listView.dataSource.add({ text: "bar" });
+                var newA = $(listView.element.find('span a')[1]);
+                console.log(newA);
+                ok(newA.data('kendoMobileButton'));
             });
 
             test("ListView does not init elements twice", function() {
