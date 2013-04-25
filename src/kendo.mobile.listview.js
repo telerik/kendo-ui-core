@@ -215,7 +215,9 @@ kendo_module({
                 length = items.length;
 
                 for (; idx < length; idx++) {
-                    element.append(that.template(items[idx]));
+                    var item = $(that.template(items[idx]));
+                    item.appendTo(element);
+                    mobile.init(item);
                 }
 
                 that._style();
