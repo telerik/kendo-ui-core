@@ -131,6 +131,11 @@ html
 	overflow:hidden;
 }
 
+.k-eventcal-header-wrap
+{
+	position:relative;
+}
+
 .k-eventcal-times,
 .k-eventcal-content
 {
@@ -269,11 +274,6 @@ html
 	text-align:left;
 }
 
-td > .k-appointment
-{
-	position:relative;
-}
-
 .k-appointment,
 .k-appointment .k-link
 {
@@ -293,7 +293,7 @@ td > .k-appointment
 	padding:.6em 1.8em 1em .6em;
 }
 
-td > .k-appointment dl
+.k-eventcal-header .k-appointment dl
 {
 	padding-top:.4em;
 	padding-bottom:.4em;
@@ -447,19 +447,18 @@ td > .k-appointment dl
 					<tr>
 						<td>&nbsp;</td>
 						<td class="k-today">&nbsp;</td>
-						<td>
-							<div class="k-appointment">
-								<dl>
-									<dd>Day off</dd>
-								</dl>
-								<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
-							</div>
-						</td>
+						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
 				</tbody>
 			</table>
+			<div class="k-appointment" style="top:27px;left:510px;width:1020px">
+				<dl>
+					<dd>Days off</dd>
+				</dl>
+				<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
+			</div>
 		</div>
 	</div>
 	
