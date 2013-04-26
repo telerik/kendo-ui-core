@@ -1,18 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
+
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
-    </head>
-    <body>
-    <script>
-        for (var i = 0; i < 10000; i ++) {
-            var div = $("<div>Me is a drop target</div>").appendTo($(document.body));
-            div.kendoDropTarget({ group: "one" });
-            // div.data("kendoDropTarget").destroy();
-            div.remove();
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+<title>Kendo UI JsBin</title>
+</head>
+<body>
+  <script>
+        var someValues = [{ num: "one", test: "test" },
+        { num: "two", test: "test" },
+        { num: "three", test: "test" },
+        { num: "four", test: "test" },
+        { num: "five", test: "test" }];
+
+    var div = $("<div id='grid'></div>").appendTo($(document.body));
+
+    var newGrid = $(div).kendoGrid({
+        dataSource: {
+            transport: {
+                read: function (options) {
+                    options.success(someValues);
+                }
+            }
         }
+    }).data("kendoGrid");
+
+    var ds = newGrid.dataSource;
+    ds.read();
+
+    var maxCounter = 10000;
+    var curCounter = 0;
+    var intervalId = setInterval(cycleGrid, 1000);
+
+    function cycleGrid() {
+        curCounter++;
+        $("#grid tbody tr").kendoDropTarget({
+            group: "testGroup"
+        });
+
+        $("#grid tbody tr").each(function(_, element) {
+            $(element).data("kendoDropTarget").destroy();
+        });
+
+        ds.read();
+
+        if (curCounter > maxCounter) {
+            clearInterval(intervalId);
+        }
+    }
     </script>
-    </body>
+</body>
 </html>

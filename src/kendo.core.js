@@ -2365,6 +2365,7 @@ function pad(number, digits, end) {
             var that = this;
 
             that.element.removeData("kendo" + that.options.prefix + that.options.name);
+            that.element.removeData("handler");
 
             that.unbind();
         }

@@ -348,6 +348,8 @@ kendo_module({
             var that = this;
             that.element.kendoDestroy(that.eventNS);
             that.surface.kendoDestroy(that.eventNS);
+            that.element.removeData("handler");
+            that.surface.removeData("handler");
             that._disposeAll();
             that.unbind();
         },
