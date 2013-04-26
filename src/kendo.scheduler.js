@@ -145,7 +145,8 @@ kendo_module({
         events: [],
 
         destroy: function() {
-            var that = this;
+            var that = this,
+                element;
 
             Widget.fn.destroy.call(that);
 
@@ -153,6 +154,15 @@ kendo_module({
                 that.calendar.destroy();
                 that.popup.destroy();
             }
+
+            element = that.element
+                .add(that.wrapper)
+                .add(that.toolbar)
+                .add(that.popup);
+
+            element.off(NS);
+
+            kendo.destroy(that.wrapper);
         },
 
         refresh: function() {
