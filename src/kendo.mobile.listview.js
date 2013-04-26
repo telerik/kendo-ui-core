@@ -215,7 +215,7 @@ kendo_module({
             }
 
             that._progressHandler = function(e) {
-                // TODO:
+                listView.showLoading();
             }
 
             that.configure();
@@ -249,6 +249,10 @@ kendo_module({
                 listView.replace(view);
             }
 
+            if (this._shouldShowLoading()) {
+                listView.hideLoading();
+            }
+
             listView.trigger('dataBound', { ns: ui });
         },
 
@@ -262,7 +266,7 @@ kendo_module({
 
             that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource).bind(CHANGE, that._refreshHandler);
 
-            if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
+            if (that._shouldShowLoading()) {
                 that.dataSource.bind(PROGRESS, that._progressHandler);
             }
 
@@ -273,6 +277,11 @@ kendo_module({
 
         _unbindDataSource: function() {
             this.dataSource.unbind(CHANGE, this._refreshHandler).unbind(PROGRESS, this._progressHandler);
+        },
+
+        _shouldShowLoading: function() {
+            var options = this.options;
+            return !options.pullToRefresh && !options.loadMore && !options.endlessScroll;
         }
     });
 
