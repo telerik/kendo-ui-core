@@ -242,7 +242,7 @@ kendo_module({
             } else if (groupedMode) {
                 listView.replaceGrouped(view);
             }
-            else if (prependOnRefresh) {
+            else if (prependOnRefresh && !listView._filter) {
                 listView.prepend(view);
             }
             else {
@@ -282,6 +282,81 @@ kendo_module({
         _shouldShowLoading: function() {
             var options = this.options;
             return !options.pullToRefresh && !options.loadMore && !options.endlessScroll;
+        }
+    });
+
+    var ListViewFilter = kendo.Class.extend({
+        init: function(listView) {
+            var that = this,
+                filterable = listView.options.filterable,
+                events = "change paste";
+
+            that.listView = listView;
+            that.options = filterable;
+
+            listView.element.before(SEARCH_TEMPLATE({ placeholder: filterable.placeholder || "Search..." }));
+
+            if (filterable.autoFilter !== false) {
+                events += " keyup";
+            }
+
+            that.searchInput = listView.wrapper.find("input[type=search]")
+                .closest("form").on("submit" + NS, function(e) {
+                    e.preventDefault();
+                })
+                .end()
+                .on("focus" + NS, function() {
+                    that._oldFilter = that.searchInput.val();
+                })
+                .on(events.split(" ").join(NS + " ") + NS, proxy(that._filterChange, that));
+
+            that.clearButton = listView.wrapper.find(".km-filter-reset")
+                .on(CLICK, proxy(that._clearFilter, that))
+                .hide();
+
+        },
+
+        _search: function(expr) {
+            this._filter = true;
+            this.clearButton[expr ? "show" : "hide"]();
+            this.listView.dataSource.filter(expr);
+        },
+
+        _filterChange: function(e) {
+            var that = this;
+            if (e.type == "paste" && that.options.autoFilter !== false) {
+                setTimeout(function() {
+                    that._applyFilter();
+                }, 1);
+            } else {
+                that._applyFilter();
+            }
+        },
+
+        _applyFilter: function() {
+            var that = this,
+                options = that.options,
+                value = that.searchInput.val(),
+                expr = value.length ? {
+                    field: options.field,
+                    operator: options.operator || "startsWith",
+                    ignoreCase: options.ignoreCase,
+                    value: value
+                } : null;
+
+            if (value === that._oldFilter) {
+                return;
+            }
+
+            that._oldFilter = value;
+            that._search(expr);
+        },
+
+        _clearFilter: function(e) {
+            this.searchInput.val("");
+            this._search(null);
+
+            e.preventDefault();
         }
     });
 
@@ -327,6 +402,10 @@ kendo_module({
 
             if (this.options.pullToRefresh) {
                 this._pullToRefreshHandler = new RefreshHandler(this);
+            }
+
+            if (this.options.filterable) {
+                this._filter = new ListViewFilter(this);
             }
 
             that._style();
