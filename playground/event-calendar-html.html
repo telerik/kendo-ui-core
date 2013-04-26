@@ -359,6 +359,27 @@ html
 	visibility:visible;
 }
 
+.k-scheduler-quickedit .k-textbox
+{
+	width:200px;
+}
+
+.k-tooltip-bottom
+{
+	text-align: left;
+}
+
+.k-tooltip-bottom .k-button
+{
+	float: left;
+	margin-right: .3em;
+}
+
+.k-tooltip-bottom .k-quickedit-details
+{
+	float: right;
+	margin-right:0;
+}
 
 /* template.less */
 
@@ -644,6 +665,19 @@ html
 </div>
 
 
+<script type="text/x-kendo-template" id="tooltipTemplate">
+
+<div class="k-scheduler-quickedit">
+	<textarea class="k-textbox" cols="30" rows="4"></textarea>
+	<div class="k-tooltip-bottom k-floatwrap">
+		<button class="k-button k-quickedit-save k-state-selected" type="button">Save</button>
+		<button class="k-button k-quickedit-cancel" type="button">Cancel</button>
+		<button class="k-button k-quickedit-details" type="button">Details...</button>
+	</div>
+</div>
+
+</script>
+
 <script>
 
 $("a").click(false);
@@ -677,6 +711,14 @@ $(".k-appointment > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
 	.on("mouseover", function(e){$(this).addClass("k-state-hover");})
 	.on("mouseout", function(e){$(this).removeClass("k-state-hover");});
 
+$(document).ready(function(){
+	$(".k-appointment").kendoTooltip({
+		position:"bottom",
+		autoHide: false,
+		content: kendo.template($("#tooltipTemplate").html())
+	});
+});
+	
 </script>
 
 </body>
