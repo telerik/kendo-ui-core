@@ -272,6 +272,16 @@ kendo_module({
         parent.trigger($.Event(e.type, { target: target[0] }));
     }
 
+    function withEachDownEvent(callback) {
+        var downEvents = kendo.eventMap.up.split(" "),
+            idx = 0,
+            length = downEvents.length;
+
+        for(; idx < length; idx ++) {
+            callback(downEvents[idx]);
+        }
+    }
+
     var UserEvents = Observable.extend({
         init: function(element, options) {
             var that = this,
@@ -313,19 +323,17 @@ kendo_module({
             element.on(kendo.applyEventMap("mousedown selectstart", ns), filter, { root: element }, "_select");
 
             if (support.eventCapture) {
-                var downEvents = kendo.eventMap.up.split(" "),
-                    idx = 0,
-                    length = downEvents.length,
-                    surfaceElement = that.surface[0],
-                    preventIfMoving = function(e) {
-                        if (that._isMoved()) {
-                            e.preventDefault();
-                        }
-                    };
+                var surfaceElement = that.surface[0];
 
-                for(; idx < length; idx ++) {
-                    surfaceElement.addEventListener(downEvents[idx], preventIfMoving, true);
-                }
+                that.preventIfMoving = function(e) {
+                    if (that._isMoved()) {
+                        e.preventDefault();
+                    }
+                };
+
+                withEachDownEvent(function(eventName) {
+                    surfaceElement.addEventListener(eventName, that.preventIfMoving, true);
+                });
             }
 
             that.bind([
@@ -346,6 +354,14 @@ kendo_module({
 
         destroy: function() {
             var that = this;
+
+            if (support.eventCapture) {
+                var surfaceElement = that.surface[0];
+                withEachDownEvent(function(eventName) {
+                    surfaceElement.removeEventListener(eventName, that.preventIfMoving);
+                });
+            }
+
             that.element.kendoDestroy(that.eventNS);
             that.surface.kendoDestroy(that.eventNS);
             that.element.removeData("handler");
