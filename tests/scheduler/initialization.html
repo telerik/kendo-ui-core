@@ -6,6 +6,8 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -18,6 +20,10 @@
         <script>
             var Scheduler = kendo.ui.Scheduler,
                 container;
+
+            function getDate(date) {
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+            }
 
             module("Initialization", {
                 setup: function() {
@@ -39,7 +45,116 @@
                var scheduler = new Scheduler(container);
 
                equal(scheduler.wrapper[0], container);
+           });
+
+           test("css classes are added to the wrapper", function() {
+               var scheduler = new Scheduler(container);
+
+               ok(scheduler.wrapper.hasClass("k-widget"));
+               ok(scheduler.wrapper.hasClass("k-scheduler"));
             });
+
+            test("toolbar is created", function() {
+                var scheduler = new Scheduler(container);
+
+                ok(scheduler.wrapper.find(".k-scheduler-toolbar").length);
+                equal(scheduler.wrapper.find(".k-scheduler-toolbar")[0], scheduler.toolbar[0]);
+            });
+
+            test("navigation button are added to the toolbar", function() {
+                var scheduler = new Scheduler(container);
+                equal(scheduler.wrapper.find("ul.k-scheduler-navigation li").length, 4);
+            });
+
+            test("today button text is read from messages", function() {
+                var scheduler = new Scheduler(container, {
+                    messages: {
+                        today: "foo"
+                    }
+                });
+
+                equal(scheduler.wrapper.find("li.k-nav-today").text(), "foo");
+            });
+
+            test("today is selected by default", function() {
+                var scheduler = new Scheduler(container),
+                    today = new Date();
+
+                equal(scheduler.selectedDate().getTime(), getDate(today).getTime());
+            });
+
+            test("selected date is read from the options", function() {
+                var date = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        selectedDate: date
+                    });
+
+                equal(scheduler.selectedDate().getTime(), date.getTime());
+            });
+
+            test("selected date is displayed", function() {
+                var scheduler = new Scheduler(container, {
+                    selectedDate: new Date("1/2/2013")
+                });
+
+                equal(scheduler.wrapper.find("li.k-nav-current").text(), "Wednesday, January 02, 2013");
+            });
+
+            test("custom format is applied to the selected date", function() {
+                var scheduler = new Scheduler(container, {
+                    selectedDate: new Date("1/2/2013"),
+                    selectedDateFormat: "d"
+                });
+
+                equal(scheduler.wrapper.find("li.k-nav-current").text(), "1/2/2013");
+            });
+
+            test("changing selected date updates the label", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.selectedDate(new Date("2/2/2013"));
+
+                equal(scheduler.wrapper.find("li.k-nav-current").text(), "Saturday, February 02, 2013");
+            });
+
+            test("clicking on the today selects today's date", function() {
+                var scheduler = new Scheduler(container, {
+                    selectedDate: new Date("1/2/2013")
+                });
+
+                scheduler.toolbar.find(".k-nav-today").click();
+
+                equal(scheduler.selectedDate().getTime(), getDate(new Date()).getTime());
+            });
+
+            test("clicking on the next date selects next date", function() {
+                var selectedDate = new Date("1/2/2013"),
+                    nextDate = new Date(selectedDate),
+                    scheduler = new Scheduler(container, {
+                        selectedDate: selectedDate
+                    });
+
+                nextDate.setDate(nextDate.getDate() + 1);
+
+                scheduler.toolbar.find(".k-nav-next").click();
+
+                equal(scheduler.selectedDate().getTime(), getDate(nextDate).getTime());
+            });
+
+            test("clicking on the prev date selects prev date", function() {
+                var selectedDate = new Date("1/2/2013"),
+                    nextDate = new Date(selectedDate),
+                    scheduler = new Scheduler(container, {
+                        selectedDate: selectedDate
+                    });
+
+                nextDate.setDate(nextDate.getDate() - 1);
+
+                scheduler.toolbar.find(".k-nav-prev").click();
+
+                equal(scheduler.selectedDate().getTime(), getDate(nextDate).getTime());
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

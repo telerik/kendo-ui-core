@@ -2,7 +2,7 @@ kendo_module({
     id: "scheduler",
     name: "Scheduler",
     category: "web",
-    description: "The Scheduler is a event calendar.",
+    description: "The Scheduler is an event calendar.",
     depends: [ "core" ]
 });
 
@@ -10,7 +10,27 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         Class = kendo.Class,
-        Widget = ui.Widget;
+        Widget = ui.Widget,
+        TODAY = new Date(),
+        TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
+            '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
+               '<li class="k-state-default k-nav-today"><a href="\\#" class="k-link">${messages.today}</a></li>' +
+               '<li class="k-state-default k-nav-prev"><a href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
+               '<li class="k-state-default k-nav-next"><a href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
+               '<li class="k-state-default k-nav-current"><a href="\\#" class="k-link"><span class="k-icon k-i-calendar"></span><span data-bind="text: formattedDate"></span></a></li>' +
+            '</ul>' +
+            '<ul class="k-reset k-header k-toolbar">' +
+              //  '<li class="k-state-selected k-view-day"><a href="\\#" class="k-link">Day</a></li>' +
+              //  '<li class="k-state-default k-view-week"><a href="\\#" class="k-link">Week</a></li>' +
+              //  '<li class="k-state-default k-view-month"><a href="\\#" class="k-link">Month</a></li>' +
+              //  '<li class="k-state-default k-view-agenda"><a href="\\#" class="k-link">Agenda</a></li>' +
+            '</ul>' +
+        '</div>');
+    function getDate(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+    }
+
+    TODAY = getDate(new Date());
 
     var Scheduler = Widget.extend({
         init: function(element, options) {
@@ -18,11 +38,73 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that._initModel();
+
+            that._wrapper();
+            that._toolbar();
+        },
+
+        _initModel: function() {
+            var that = this;
+            that._model = kendo.observable({
+               selectedDate: this.options.selectedDate,
+               formattedDate: function() {
+                   return kendo.toString(this.get("selectedDate"), that.options.selectedDateFormat);
+               }
+           });
+        },
+
+        _wrapper: function() {
+            var that = this;
+
             that.wrapper = that.element;
+            that.wrapper.addClass("k-widget k-scheduler k-floatwrap");
+        },
+
+        selectedDate: function(value) {
+            if (value != null) {
+                this._model.set("selectedDate", value);
+            }
+            return getDate(this._model.get("selectedDate"));
+        },
+
+        _toolbar: function() {
+            var that = this,
+                options = that.options,
+                toolbar = $(TOOLBARTEMPLATE({
+                    messages: options.messages
+                }));
+
+            that.wrapper.append(toolbar);
+            that.toolbar = toolbar;
+
+            kendo.bind(that.toolbar, that._model);
+
+            that.toolbar = toolbar.on("click", ".k-scheduler-navigation li:not(.k-nav-current)", function(e) {
+                var li = $(this),
+                    date = new Date(that.selectedDate());
+
+                if (li.hasClass("k-nav-today")) {
+                    date = new Date();
+                } else if (li.hasClass("k-nav-next")) {
+                    date.setDate(date.getDate() + 1);
+                } else if (li.hasClass("k-nav-prev")) {
+                    date.setDate(date.getDate() - 1);
+                }
+
+                that.selectedDate(date);
+
+                e.preventDefault();
+            });
         },
 
         options: {
-            name: "Scheduler"
+            name: "Scheduler",
+            selectedDate: TODAY,
+            selectedDateFormat: "D",
+            messages: {
+                today: "Today"
+            }
         },
 
         events: [],
@@ -44,7 +126,7 @@ kendo_module({
         "WEEKLY": 4,
         "MONTHLY": 5,
         "YEARLY": 6
-    }
+    };
 
     var WEEK_DAYS = {
         "SU": 0,
@@ -54,7 +136,7 @@ kendo_module({
         "TH": 4,
         "FR": 5,
         "SA": 6
-    }
+    };
 
     var DATE_FORMATS = [
         "yyyy-MM-ddTHH:mm:ss.fffzzz",
@@ -129,59 +211,46 @@ kendo_module({
             value = $.trim(splits[1]).split(",");
 
             switch ($.trim(splits[0]).toUpperCase()) {
-                case "FREQ" : {
+                case "FREQ":
                     result.freq = value[0].toUpperCase();
                     break;
-                }
-                case "UNTIL" : {
+                case "UNTIL":
                     result.until = kendo.parseDate(value[0], DATE_FORMATS);
                     break;
-                }
-                case "COUNT" : {
+                case "COUNT":
                     result.count = parseInt(value[0], 10);
                     break;
-                }
-                case "INTERVAL" : {
+                case "INTERVAL":
                     result.interval = parseInt(value[0], 10);
                     break;
-                }
-                case "BYSECOND" : {
+                case "BYSECOND":
                     result.seconds = parseArray(value, { start: 0, end: 60 });
                     break;
-                }
-                case "BYMINUTE" : {
+                case "BYMINUTE":
                     result.minutes = parseArray(value, { start: 0, end: 59 });
                     break;
-                }
-                case "BYHOUR" : {
+                case "BYHOUR":
                     result.hours = parseArray(value, { start: 0, end: 23 });
                     break;
-                }
-                case "BYMONTHDAY" : {
+                case "BYMONTHDAY":
                     result.monthDays = parseArray(value, { start: -31, end: 31 });
                     break;
-                }
-                case "BYYEARDAY" : {
+                case "BYYEARDAY":
                     result.yearDays = parseArray(value, { start: -366, end: 366 });
                     break;
-                }
-                case "BYMONTH" : {
+                case "BYMONTH":
                     result.months = parseArray(value, { start: 1, end: 12 });
                     break;
-                }
-                case "BYDAY" : {
+                case "BYDAY":
                     result.weekDays = parseWeekDayList(value);
                     break;
-                }
-                case "BYSETPOS" : {
+                case "BYSETPOS":
                     result.setPositions = parseArray(value, { start: 1, end: 366 });
                     break;
-                }
-                case "BYWEEKNO" : {
+                case "BYWEEKNO":
                     result.weekNumber = parseArray(value, { start: 1, end: 53 });
                     break;
-                }
-                case "WKST" : {
+                case "WKST":
                     weekStart = value[0];
                     if (WEEK_DAYS[weekStart] === undefined) {
                         weekStart = null;
@@ -189,12 +258,11 @@ kendo_module({
 
                     result.weekStart = weekStart;
                     break;
-                }
             }
         }
 
         return result;
-    }
+    };
 
     kendo.rrule_parse = rrule_parse;
 

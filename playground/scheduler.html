@@ -329,66 +329,6 @@
                 endDate = currentRenderer.endDate;
 
                 var table = container.find("table");
-/*
-                table.on("mousedown", "td:not(.time)", function() {
-                   var slotIdx = $(this).index() + 1;
-                   table.find("td:nth-child(" + slotIdx + ")").addClass("k-current-slot");
-                   table.one("mouseup", function() {
-                        //$(".k-current-slot").removeClass("k-current-slot");
-                   });
-                });
-
-                var selectable = new kendo.ui.Selectable(table, {
-                    filter: "td:not(.time)",
-                    multiple: true,
-                    change: function() {
-                    }
-                });
-
-*/
-/*
-                container.on("click", "div.event", function() {
-                    var eventContainer = $(this),
-                        model = dataSource.getByUid(eventContainer.data("uid"));
-
-                    var editable = eventContainer.kendoEditable({ model: model, fields: "name" }).data("kendoEditable");
-
-                    model.one("change", function() {
-                        editable.end();
-                        editable.destroy();
-                        eventContainer.replaceWith(eventTemplate(model));
-                    });
-
-                    eventContainer.on("blur", "input", function() {
-                        editable.end();
-                        editable.destroy();
-                        eventContainer.replaceWith(eventTemplate(model));
-                    });
-                });
-*/
-                /*
-                var eventStart,
-                    eventHeight,
-                    element;
-
-                container.find("table").kendoResizable({
-                    handle: ".k-resize-handle",
-                    orientation: "vertical",
-                    start: function(e) {
-                        element = $(e.currentTarget).closest("div.event");
-
-                        eventStart = e.y.location;
-                        eventHeight = element.outerHeight();
-                    },
-                    resize: function(e) {
-                        element.css("height", eventHeight + e.y.location - eventStart);
-                    },
-                    resizeend: function() {
-                        var model = dataSource.getByUid(element.data("uid"));
-                        element = null;
-                    }
-                });
-                */
 
                 dataSource.filter({
                     logic: "or",
