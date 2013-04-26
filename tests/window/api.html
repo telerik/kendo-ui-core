@@ -308,6 +308,20 @@
                 return windowObject.element.closest(".k-window");
             }
 
+            test("content() destroys nested widgets", function() {
+                var dialog = createWindow();
+
+                var ddl = $("<input />").appendTo(dialog.element);
+
+                ddl.kendoDropDownList({ dataSource: [ "foo" ] });
+
+                ddl.data("kendoDropDownList").open();
+
+                dialog.content("bar");
+
+                equal($(".k-popup").length, 0);
+            });
+
             test("toFront() raises window z-index above other windows", function() {
                 var firstWindow = createWindow(),
                     secondWindow = createWindow();
