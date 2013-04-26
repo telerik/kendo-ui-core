@@ -50,22 +50,27 @@
                         //startAngle: 90 // default
                     },
                     valueAxis: {
-                        majorTicks: {
-                            visible: false
-                        },
                         majorGridLines: {
                             // TODO: Default to "arc"?
                             // TODO: "arc" or "circle"?
 
                             //type: "line" // default
-                            type: "arc"
+                            type: "arc",
+                            color: "red",
+                            width: 0.5
+                        },
+                        minorGridLines: {
+                            type: "arc",
+                            visible: true,
+                            color: "blue",
+                            width: 0.5
                         },
                         __plotBands: [{
                             from: 0, to: 1,
                             color: "red",
                             opacity: 0.5
-                        }]
-
+                        }],
+                        minorUnit: 1
                         // TODO: Support
                         //reverse: true
 

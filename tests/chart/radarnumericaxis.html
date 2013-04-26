@@ -92,7 +92,6 @@
                 axis.renderGridLines(view, altAxis);
 
                 equal(view.log.path[0].style.strokeWidth, 2);
-
             });
 
             test("renders minor grid lines", function() {
@@ -106,7 +105,7 @@
                 });
                 axis.renderGridLines(view, altAxis);
 
-                equal(view.log.path.length, 6);
+                equal(view.log.path.length, 15);
             });
 
             test("applies minor grid line color", function() {
@@ -155,6 +154,33 @@
                 equal(view.log.circle.length, 3);
             });
 
+            test("circle center is on alt axis center", function() {
+                var c = view.log.circle[0].c;
+
+                close(c.x, 300, TOLERANCE);
+                close(c.y, 300, TOLERANCE);
+            });
+
+            test("circle radius matches value", function() {
+                close(view.log.circle[0].r, 96, TOLERANCE);
+                close(view.log.circle[1].r, 194, TOLERANCE);
+                close(view.log.circle[2].r, 292, TOLERANCE);
+            });
+
+            test("applies major grid line color", function() {
+                createAxis({ majorGridLines: { type: "arc", color: "red" } });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.circle[0].style.stroke, "red");
+            });
+
+            test("applies major grid line width", function() {
+                createAxis({ majorGridLines: { type: "arc", width: 2 } });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.circle[0].style.strokeWidth, 2);
+            });
+
             test("renders minor grid arcs", function() {
                 createAxis({
                     majorGridLines: {
@@ -167,7 +193,29 @@
                 });
                 axis.renderGridLines(view, altAxis);
 
-                equal(view.log.path.length, 6);
+                equal(view.log.circle.length, 15);
+            });
+
+            test("applies minor grid line color", function() {
+                createAxis({
+                    majorGridLines: { visible: false },
+                    minorGridLines: { visible: true, type: "arc", color: "red" }
+                });
+
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.circle[0].style.stroke, "red");
+            });
+
+            test("applies minor grid line width", function() {
+                createAxis({
+                    majorGridLines: { visible: false },
+                    minorGridLines: { visible: true, type: "arc", width: 2 }
+                });
+
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.circle[0].style.strokeWidth, 2);
             });
 
             /*

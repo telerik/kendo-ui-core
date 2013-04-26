@@ -1938,7 +1938,7 @@ kendo_module({
             if (options.minorGridLines.visible) {
                 minorDivisions = axis.gridLineDivisions(altAxis, 0.5, minorSkipStep),
 
-                gridLines.push.apply(gridLines, axis.gridLineElements(
+                append(gridLines, axis.gridLineElements(
                     view, minorDivisions, radius, options.minorGridLines
                 ));
             }
@@ -2091,16 +2091,24 @@ kendo_module({
                 options = axis.options,
                 majorTicks = axis.getTickPositions(options.majorUnit),
                 majorAngles = altAxis.majorDivisions(),
+                minorTicks,
+                minorSkipStep = 0,
                 center = altAxis.box.center(),
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
+                minorSkipStep = options.majorUnit;
                 gridLines = axis.gridLineElements(
                     view, center, majorTicks, majorAngles, options.majorGridLines
                 );
             }
 
-            // TODO: Minor grid lines
+            if (options.minorGridLines.visible) {
+                minorTicks = axis.getTickPositions(options.minorUnit, minorSkipStep);
+                append(gridLines, axis.gridLineElements(
+                    view, center, minorTicks, majorAngles, options.minorGridLines
+                ));
+            }
 
             return gridLines;
         },
@@ -2544,7 +2552,7 @@ kendo_module({
             );
         },
 
-        getTickPositions: function(stepValue) {
+        getTickPositions: function(step) {
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
@@ -2553,8 +2561,8 @@ kendo_module({
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 timeRange = duration(options.min, options.max, options.baseUnit),
                 scale = lineSize / timeRange,
-                step = stepValue * scale,
-                divisions = axis.getDivisions(stepValue),
+                scaleStep = step * scale,
+                divisions = axis.getDivisions(step),
                 dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                 startEdge = dir === 1 ? 1 : 2,
                 pos = lineBox[(vertical ? Y : X) + startEdge],
@@ -2563,7 +2571,7 @@ kendo_module({
 
             for (i = 0; i < divisions; i++) {
                 positions.push(round(pos, COORD_PRECISION));
-                pos = pos + step * dir;
+                pos = pos + scaleStep * dir;
             }
 
             return positions;

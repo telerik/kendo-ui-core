@@ -1633,7 +1633,7 @@ kendo_module({
             return math.floor(round(range / stepValue, COORD_PRECISION)) + 1;
         },
 
-        getTickPositions: function(stepValue) {
+        getTickPositions: function(unit, skipUnit) {
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
@@ -1642,16 +1642,24 @@ kendo_module({
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
-                step = stepValue * scale,
-                divisions = axis.getDivisions(stepValue),
+                step = unit * scale,
+                skipStep = 0,
+                divisions = axis.getDivisions(unit),
                 dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                 startEdge = dir === 1 ? 1 : 2,
                 pos = lineBox[(vertical ? Y : X) + startEdge],
                 positions = [],
                 i;
 
+            if (skipUnit) {
+                skipStep = skipUnit / unit;
+            }
+
             for (i = 0; i < divisions; i++) {
-                positions.push(round(pos, COORD_PRECISION));
+                if (i % skipStep !== 0) {
+                    positions.push(round(pos, COORD_PRECISION));
+                }
+
                 pos = pos + step * dir;
             }
 
