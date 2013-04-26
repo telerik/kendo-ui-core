@@ -439,9 +439,10 @@ kendo_module({
 
         // update tool state
         _update: function() {
-            var range = this._editor.getRange(),
-                nodes = kendo.ui.editor.RangeUtils.textNodes(range),
-                that = this;
+            var that = this,
+                editor = that._editor,
+                range = editor.getRange(),
+                nodes = kendo.ui.editor.RangeUtils.textNodes(range);
 
             if (!nodes.length) {
                 nodes = [range.startContainer];
@@ -450,7 +451,7 @@ kendo_module({
             that.items().each(function () {
                 var tool = that.options.tools[that._toolFromClassName(this)];
                 if (tool) {
-                    tool.update($(this), nodes, that.options.editor.pendingFormats);
+                    tool.update($(this), nodes, editor.pendingFormats);
                 }
             });
         }
