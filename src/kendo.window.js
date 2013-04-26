@@ -510,6 +510,8 @@ kendo_module({
                 return content.html();
             }
 
+            kendo.destroy(this.element.children());
+
             content.html(html);
             return this;
         },
