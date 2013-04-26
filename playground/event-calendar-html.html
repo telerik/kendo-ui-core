@@ -13,148 +13,149 @@
 html
 {
 	font:12px sans-serif;
+	overflow-y:scroll;
 }
 
 /* common.less */
 
-.k-eventcal-toolbar,
-.k-eventcal-footer
+.k-scheduler-toolbar,
+.k-scheduler-footer
 {
 	border-style:solid;
 }
 
-.k-eventcal-toolbar,
-.k-eventcal-footer
+.k-scheduler-toolbar,
+.k-scheduler-footer
 {
 	line-height:28px;
 	padding:6px;
 }
 
-.k-eventcal-toolbar
+.k-scheduler-toolbar
 {
 	border-width:0 0 1px;
 }
 
-.k-eventcal-header
+.k-scheduler-header
 {
 	text-align:center;
 	padding-right:17px;
 }
 
-.k-eventcal-footer
+.k-scheduler-footer
 {
 	border-width:1px 0 0;
 }
 
-.k-eventcal > div > ul
+.k-scheduler > div > ul
 {
 	float:right;
 }
 
-.k-eventcal > div > ul:first-child
+.k-scheduler > div > ul:first-child
 {
 	float:left;
 }
 
-.k-eventcal > div > ul li
+.k-scheduler > div > ul li
 {
 	display:inline-block;
 	border-style:solid;
 	border-width:1px 1px 1px 0;
 }
 
-.k-eventcal .k-nav-current
+.k-scheduler .k-nav-current
 {
 	border-width:0;
 }
 
-.k-eventcal > div > ul li:first-child
+.k-scheduler > div > ul li:first-child
 {
 	border-left-width:1px;
 }
 
-.k-eventcal-toolbar > ul li:first-child,
-.k-eventcal-toolbar > ul li:first-child .k-link
+.k-scheduler-toolbar > ul li:first-child,
+.k-scheduler-toolbar > ul li:first-child .k-link
 {
 	border-radius:5px 0 0 5px;
 }
 
-.k-eventcal-toolbar .k-nav-next,
-.k-eventcal-toolbar .k-view-agenda,
-.k-eventcal-toolbar .k-nav-next .k-link,
-.k-eventcal-toolbar .k-view-agenda .k-link
+.k-scheduler-toolbar .k-nav-next,
+.k-scheduler-toolbar .k-view-agenda,
+.k-scheduler-toolbar .k-nav-next .k-link,
+.k-scheduler-toolbar .k-view-agenda .k-link
 {
 	border-radius:0 5px 5px 0;
 }
 
-.k-eventcal div.k-eventcal-footer ul li
+.k-scheduler div.k-scheduler-footer ul li
 {
 	margin-right:.6em;
 	border-width:1px;
 }
 
-.k-eventcal div.k-eventcal-footer ul li,
-.k-eventcal div.k-eventcal-footer .k-link
+.k-scheduler div.k-scheduler-footer ul li,
+.k-scheduler div.k-scheduler-footer .k-link
 {
 	border-radius:5px;
 }
 
-.k-eventcal-toolbar .k-link,
-.k-eventcal-footer .k-link
+.k-scheduler-toolbar .k-link,
+.k-scheduler-footer .k-link
 {
 	display:inline-block;
 	padding:0 1.1em;
 }
 
-.k-eventcal-toolbar .k-nav-prev .k-link,
-.k-eventcal-toolbar .k-nav-next .k-link
+.k-scheduler-toolbar .k-nav-prev .k-link,
+.k-scheduler-toolbar .k-nav-next .k-link
 {
 	padding-left:.6em;
 	padding-right:.6em;
 }
 
-.k-eventcal-toolbar .k-nav-current .k-link
+.k-scheduler-toolbar .k-nav-current .k-link
 {
 	padding:0;
 	margin:0 1.1em;
 }
 
-.k-eventcal-toolbar .k-i-calendar,
-.k-eventcal-footer .k-icon
+.k-scheduler-toolbar .k-i-calendar,
+.k-scheduler-footer .k-icon
 {
 	margin:-2px 6px 0 0;
 }
 
-.k-eventcal-header,
-.k-eventcal-header-wrap
+.k-scheduler-header,
+.k-scheduler-header-wrap
 {
 	overflow:hidden;
 }
 
-.k-eventcal-header-wrap
+.k-scheduler-header-wrap
 {
 	position:relative;
 }
 
-.k-eventcal-times,
-.k-eventcal-content
+.k-scheduler-times,
+.k-scheduler-content
 {
 	position:relative;
 }
 
-.k-eventcal-times
+.k-scheduler-times
 {
 	float:left;
 	width:60px;
 	overflow:hidden;
 }
 
-.k-eventcal-content
+.k-scheduler-content
 {
 	overflow:scroll;
 }
 
-.k-eventcal-table
+.k-scheduler-table
 {
 	border-spacing:0;
 	table-layout:fixed;
@@ -162,53 +163,82 @@ html
 	margin:1em 0;
 }
 
-.k-eventcal-toolbar + .k-eventcal-times > table
+.k-scheduler-monthview .k-scheduler-table
 {
 	margin:0;
 }
 
-.k-eventcal-toolbar + .k-eventcal-times > table th
+.k-scheduler-toolbar + .k-scheduler-times > table
+{
+	margin:0;
+}
+
+.k-scheduler-toolbar + .k-scheduler-times > table th
 {
 	vertical-align:middle;
 }
 
-.k-eventcal-header .k-eventcal-table
+.k-scheduler-header .k-scheduler-table
 {
 	margin:0;
 }
 
-.k-eventcal-table td,
-.k-eventcal-table th
+.k-scheduler-table td,
+.k-scheduler-table th
 {
 	height:27px;
 	padding:0;
 }
 
-.k-eventcal-table td
+.k-scheduler-monthview .k-scheduler-table td
+{
+	height: 100px;
+	text-align:right;
+}
+
+.k-scheduler-monthview .k-scheduler-table td .k-link
+{
+	display:inline-block;
+	padding:.2em .3em;
+}
+
+.k-scheduler-table td
 {
 	vertical-align:top;
 }
 
-.k-eventcal-table td,
-.k-eventcal-header th
+.k-scheduler-table td,
+.k-scheduler-header th
 {
 	border-style:solid;
 	border-width:0 1px 1px 0;
 }
 
-.k-eventcal-content tr:first-child td,
-.k-eventcal-header + .k-eventcal-times tr:first-child th
+.k-scheduler-content tr:first-child td,
+.k-scheduler-header + .k-scheduler-times tr:first-child th
 {
 	border-top-width:1px;
 }
 
-.k-eventcal-table tr td:first-child,
-.k-eventcal-header tr th:first-child
+.k-scheduler-monthview .k-scheduler-content tr:first-child td
+{
+	border-top-width:0;
+}
+
+.k-scheduler-table tr td:first-child,
+.k-scheduler-header tr th:first-child
 {
 	border-left-width:1px;
 }
 
-.k-eventcal-times th
+.k-scheduler-monthview .k-scheduler-table tr td:first-child,
+.k-scheduler-monthview .k-scheduler-header tr th:first-child
+{
+	border-left-width:0;
+}
+
+
+.k-scheduler-times th
 {
 	text-align:right;
 	vertical-align:top;
@@ -219,25 +249,25 @@ html
 	border-bottom-color:transparent;
 }
 
-.k-eventcal-times th em
+.k-scheduler-times th em
 {
 	font-style:normal;
 	position:relative;
 	top:-.7em;
 }
 
-.k-eventcal .k-middle-row td
+.k-scheduler .k-middle-row td
 {
 	border-bottom-style:dotted;
 }
 
-.k-eventcal table tr.k-last th
+.k-scheduler table tr.k-last th
 {
 	border-width:0;
 	height:0;
 }
 
-.k-eventcal table tr.k-last td
+.k-scheduler table tr.k-last td
 {
 	height:0;
 	border-width:0;
@@ -245,13 +275,13 @@ html
 	line-height:0;
 }
 
-.k-eventcal-now-arrow,
-.k-eventcal-now-line
+.k-scheduler-now-arrow,
+.k-scheduler-now-line
 {
 	position:absolute;
 }
 
-.k-eventcal-now-arrow
+.k-scheduler-now-arrow
 {
 	width:0;
 	height:0;
@@ -259,7 +289,7 @@ html
 	left:0;
 }
 
-.k-eventcal-now-line
+.k-scheduler-now-line
 {
 	left:5px;
 	right:0;
@@ -293,7 +323,7 @@ html
 	padding:.6em 1.8em 1em .6em;
 }
 
-.k-eventcal-header .k-appointment dl
+.k-scheduler-header .k-appointment dl
 {
 	padding-top:.4em;
 	padding-bottom:.4em;
@@ -332,39 +362,39 @@ html
 
 /* template.less */
 
-.k-eventcal
+.k-scheduler
 {
 	background-color:#fff;
 }
 
-.k-eventcal-table td,
-.k-eventcal-header th
+.k-scheduler-table td,
+.k-scheduler-header th
 {
 	border-color:#ccc;
 }
 
-.k-eventcal-toolbar + .k-eventcal-times tr:first-child th
+.k-scheduler-toolbar + .k-scheduler-times tr:first-child th
 {
 	border-bottom-color:#ccc;
 }
 
-.k-eventcal-table .k-today
+.k-scheduler-table .k-today
 {
 	background-color:#f6f6f6;
 }
 
-.k-eventcal-now-arrow
+.k-scheduler-now-arrow
 {
 	border-left-color:#f00;
 }
 
-.k-eventcal-now-line
+.k-scheduler-now-line
 {
 	background-color:#f00;
 }
 
-.k-eventcal-header-wrap .k-eventcal-table,
-.k-eventcal-content .k-eventcal-table
+.k-scheduler-header-wrap .k-scheduler-table,
+.k-scheduler-content .k-scheduler-table
 {
 	width:140%;
 }
@@ -389,22 +419,22 @@ html
 </head>
 <body>
 
-<div id="scheduler" class="k-widget k-eventcal k-floatwrap">
-	<div class="k-floatwrap k-header k-eventcal-toolbar">
+<div id="scheduler1" class="k-widget k-scheduler k-floatwrap">
+	<div class="k-floatwrap k-header k-scheduler-toolbar">
 		<ul class="k-reset k-header k-toolbar"><li
 			class="k-state-default k-nav-today"><a href="#" class="k-link">Today</a></li><li
 			class="k-state-default k-nav-prev"><a href="#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li><li
 			class="k-state-default k-nav-next"><a href="#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li><li
 			class="k-state-default k-nav-current"><a href="#" class="k-link"><span class="k-icon k-i-calendar"></span>Wednesday, Apr 17 2013</a></li></ul>
 		<ul class="k-reset k-header k-toolbar"><li
-			class="k-state-selected k-view-day"><a href="#" class="k-link">Day</a></li><li
-			class="k-state-default k-view-week"><a href="#" class="k-link">Week</a></li><li
+			class="k-state-default k-view-day"><a href="#" class="k-link">Day</a></li><li
+			class="k-state-selected k-view-week"><a href="#" class="k-link">Week</a></li><li
 			class="k-state-default k-view-month"><a href="#" class="k-link">Month</a></li><li
 			class="k-state-default k-view-agenda"><a href="#" class="k-link">Agenda</a></li></ul>
 	</div>
 
-	<div class="k-eventcal-times">
-		<table class="k-eventcal-table">
+	<div class="k-scheduler-times">
+		<table class="k-scheduler-table">
 			<colgroup>
 				<col />
 			</colgroup>
@@ -415,9 +445,9 @@ html
 		</table>
 	</div>
 
-	<div class="k-eventcal-header k-state-default">
-		<div class="k-eventcal-header-wrap">
-			<table class="k-eventcal-table">
+	<div class="k-scheduler-header k-state-default">
+		<div class="k-scheduler-header-wrap">
+			<table class="k-scheduler-table">
 				<colgroup>
 					<col />
 					<col />
@@ -435,7 +465,7 @@ html
 					</tr>
 				</tbody>
 			</table>
-			<table class="k-eventcal-table">
+			<table class="k-scheduler-table">
 				<colgroup>
 					<col />
 					<col />
@@ -453,7 +483,7 @@ html
 					</tr>
 				</tbody>
 			</table>
-			<div class="k-appointment" style="top:27px;left:510px;width:1020px">
+			<div class="k-appointment" style="top:28px;left:506px;width:1009px">
 				<dl>
 					<dd>Days off</dd>
 				</dl>
@@ -462,8 +492,8 @@ html
 		</div>
 	</div>
 	
-	<div class="k-eventcal-times">
-		<table class="k-eventcal-table">
+	<div class="k-scheduler-times">
+		<table class="k-scheduler-table">
 			<colgroup>
 				<col />
 			</colgroup>
@@ -488,12 +518,12 @@ html
 				<tr class="k-last"><th><em>24:00</em></th></tr>
 			</tbody>
 		</table>
-		<div class="k-eventcal-now-arrow" style="top:95px"></div>
-		<div class="k-eventcal-now-line" style="top:100px"></div>
+		<div class="k-scheduler-now-arrow" style="top:95px"></div>
+		<div class="k-scheduler-now-line" style="top:100px"></div>
 	</div>
 	
-	<div class="k-eventcal-content" style="height:300px">
-		<table class="k-eventcal-table">
+	<div class="k-scheduler-content" style="height:300px">
+		<table class="k-scheduler-table">
 			<colgroup>
 				<col />
 				<col />
@@ -521,7 +551,7 @@ html
 				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 			</tbody>
 		</table>
-		<div class="k-appointment" style="top:12px;left:510px;">
+		<div class="k-appointment" style="top:13px;left:506px;">
 			<dl>
 				<dt><span class="k-icon k-i-refresh"></span> 11:30 - 12:30</dt>
 				<dd>Business Lunch</dd>
@@ -530,31 +560,118 @@ html
 			<span class="k-icon k-resize-handle"></span>
 		</div>
 	</div>
-	<div class="k-floatwrap k-header k-eventcal-footer">
+	<div class="k-floatwrap k-header k-scheduler-footer">
 		<ul class="k-reset k-header k-toolbar"><li
 			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>Show 24 hours</a></li><li
 			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-columns"></span>Show all weekdays</a></li></ul>
 	</div>
 </div>
 
+<br /><br /><br />
+<!-- #################################################################################################################################################### -->
+
+<div id="scheduler2" class="k-widget k-scheduler k-floatwrap k-scheduler-monthview">
+	<div class="k-floatwrap k-header k-scheduler-toolbar">
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-default k-nav-today"><a href="#" class="k-link">Today</a></li><li
+			class="k-state-default k-nav-prev"><a href="#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li><li
+			class="k-state-default k-nav-next"><a href="#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li><li
+			class="k-state-default k-nav-current"><a href="#" class="k-link"><span class="k-icon k-i-calendar"></span>April 2013</a></li></ul>
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-default k-view-day"><a href="#" class="k-link">Day</a></li><li
+			class="k-state-default k-view-week"><a href="#" class="k-link">Week</a></li><li
+			class="k-state-selected k-view-month"><a href="#" class="k-link">Month</a></li><li
+			class="k-state-default k-view-agenda"><a href="#" class="k-link">Agenda</a></li></ul>
+	</div>
+
+	<div class="k-scheduler-header k-state-default">
+		<div class="k-scheduler-header-wrap">
+			<table class="k-scheduler-table">
+				<colgroup>
+					<col />
+					<col />
+					<col />
+					<col />
+					<col />
+					<col />
+					<col />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>Monday</th>
+						<th>Tuesday</th>
+						<th>Wednesday</th>
+						<th>Thursday</th>
+						<th>Friday</th>
+						<th>Saturday</th>
+						<th>Sunday</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="k-scheduler-content" style="height:300px">
+		<table class="k-scheduler-table">
+			<colgroup>
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+			</colgroup>
+			<tbody>
+				<tr><td><span class="k-link">17</span></td><td><span class="k-link">17</span></td><td><span class="k-link">17</span></td><td><span class="k-link">17</span></td><td><span class="k-link">17</span></td><td><span class="k-link">17</span></td><td><span class="k-link">17</span></td></tr>
+				<tr><td>&nbsp;</td><td class="k-today"><span class="k-link">25</span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<div class="k-appointment" style="top:18px;left:373px;">
+			<dl>
+				<dt><span class="k-icon k-i-refresh"></span> 11:30 - 12:30</dt>
+				<dd>Business Lunch</dd>
+			</dl>
+			<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
+			<span class="k-icon k-resize-handle"></span>
+		</div>
+	</div>
+</div>
+
+
 <script>
 
 $("a").click(false);
 
 var kendo = window.kendo,
-	scrollbar = kendo.support.scrollbar(),
-	sc = $(".k-eventcal-content"),
-	st = $(".k-eventcal-header + .k-eventcal-times"),
-	sh = $(".k-eventcal-header");
+	scrollbar = kendo.support.scrollbar();
 
-st.height(sc.height() - scrollbar);
+function scInit(id) {
 
-sh.css("padding-right", scrollbar);
+	id = "#" + id;
 
-sc.on("scroll", function(e){
-	st.scrollTop(sc.scrollTop());
-	$(".k-eventcal-header-wrap").scrollLeft(sc.scrollLeft());
-});
+	var scheduler = $(id),
+		sc = scheduler.find(".k-scheduler-content"),
+		st = scheduler.find(".k-scheduler-header + .k-scheduler-times"),
+		sh = scheduler.find(".k-scheduler-header");
+
+	st.height(sc.height() - scrollbar);
+
+	sh.css("padding-right", scrollbar);
+
+	sc.on("scroll", function(e){
+		st.scrollTop(sc.scrollTop());
+		scheduler.find(".k-scheduler-header-wrap").scrollLeft(sc.scrollLeft());
+	});
+}
+
+scInit("scheduler1");
+scInit("scheduler2");
 
 $(".k-appointment > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
 	.on("mouseover", function(e){$(this).addClass("k-state-hover");})
