@@ -456,18 +456,25 @@ kendo_module({
         }
     });
 
+    var supportedElements = "textarea,div".split(",");
+
     var Editor = Widget.extend({
         init: function (element, options) {
+            var that = this,
+                value,
+                editorNS = kendo.ui.editor,
+                toolbarContainer,
+                toolbarOptions,
+                type = editorNS.Dom.name(element);
+
             /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
             if (!supportedBrowser) {
                 return;
             }
 
-            var that = this,
-                value,
-                editorNS = kendo.ui.editor,
-                toolbarContainer,
-                toolbarOptions;
+            if (!$.inArray(supportedElements, type)) {
+                return;
+            }
 
             Widget.fn.init.call(that, element, options);
 
@@ -479,7 +486,7 @@ kendo_module({
                 that.update();
             });
 
-            if (element.is("textarea")) {
+            if (type == "textarea") {
                 that._wrapTextarea();
 
                 toolbarContainer = that.wrapper.find(".k-editor-toolbar");
@@ -492,9 +499,10 @@ kendo_module({
                     toolbarContainer.attr("aria-controls", element[0].id);
                 }
             } else {
-                toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
+                that.element.addClass("k-widget k-editor k-editor-inline");
 
                 // TODO: this should create global toolbar, if it does not exist, and call its bindTo(this);
+                toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
                 toolbarOptions = extend({}, that.options);
                 toolbarOptions.editor = that;
                 that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
@@ -742,9 +750,16 @@ kendo_module({
                     }
                 });
 
-            $(editor.body).on("cut" + NS + " paste" + NS, function (e) {
-                editor.clipboard["on" + e.type](e);
-            });
+            $(editor.body)
+                .on("cut" + NS + " paste" + NS, function (e) {
+                    editor.clipboard["on" + e.type](e);
+                })
+                .on("focus" + NS, function() {
+                    $(this).addClass("k-state-active");
+                })
+                .on("blur" + NS, function() {
+                    $(this).removeClass("k-state-active");
+                });
         },
 
 

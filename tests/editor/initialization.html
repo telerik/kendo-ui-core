@@ -66,7 +66,7 @@
 
             module("initialization from div[contentEditable]", {
                 teardown: function() {
-                    $(".k-widget").remove();
+                    $(".k-widget, .k-editor-toolbar").remove();
                 }
             });
 
@@ -75,6 +75,26 @@
                 dom.kendoEditor();
 
                 equal(dom.data("kendoEditor").value(), "<p>foo</p>");
+            });
+
+            test("adds k-editor class to contentEditable", function() {
+                var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+
+                dom.kendoEditor();
+
+                ok(dom.hasClass("k-editor"));
+                ok(dom.hasClass("k-editor-inline"));
+                ok(dom.hasClass("k-widget"));
+            });
+
+            test("focusing adds k-state-active", function() {
+                var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+
+                dom.kendoEditor();
+
+                dom.focus();
+
+                ok(dom.hasClass("k-state-active"));
             });
         </script>
 
