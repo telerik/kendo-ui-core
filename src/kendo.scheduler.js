@@ -3,7 +3,7 @@ kendo_module({
     name: "Scheduler",
     category: "web",
     description: "The Scheduler is an event calendar.",
-    depends: [ "core" ]
+    depends: [ "core", "binder", "popup", "calendar" ]
 });
 
 (function($, undefined) {
@@ -11,13 +11,16 @@ kendo_module({
         ui = kendo.ui,
         Class = kendo.Class,
         Widget = ui.Widget,
+        Popup = ui.Popup,
+        Calendar = ui.Calendar,
+        NS = ".kendoScheduler",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a href="\\#" class="k-link">${messages.today}</a></li>' +
                '<li class="k-state-default k-nav-prev"><a href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
                '<li class="k-state-default k-nav-next"><a href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
-               '<li class="k-state-default k-nav-current"><a href="\\#" class="k-link"><span class="k-icon k-i-calendar"></span><span data-bind="text: formattedDate"></span></a></li>' +
+               '<li class="k-state-default k-nav-current"><a href="\\#" class="k-link"><span class="k-icon k-i-calendar"></span><span data-#=ns#bind="text: formattedDate"></span></a></li>' +
             '</ul>' +
             '<ul class="k-reset k-header k-toolbar">' +
               //  '<li class="k-state-selected k-view-day"><a href="\\#" class="k-link">Day</a></li>' +
@@ -72,7 +75,8 @@ kendo_module({
             var that = this,
                 options = that.options,
                 toolbar = $(TOOLBARTEMPLATE({
-                    messages: options.messages
+                    messages: options.messages,
+                    ns: kendo.ns
                 }));
 
             that.wrapper.append(toolbar);
@@ -80,9 +84,11 @@ kendo_module({
 
             kendo.bind(that.toolbar, that._model);
 
-            that.toolbar = toolbar.on("click", ".k-scheduler-navigation li:not(.k-nav-current)", function(e) {
+            toolbar.on("click" + NS, ".k-scheduler-navigation li", function(e) {
                 var li = $(this),
                     date = new Date(that.selectedDate());
+
+                e.preventDefault();
 
                 if (li.hasClass("k-nav-today")) {
                     date = new Date();
@@ -90,12 +96,41 @@ kendo_module({
                     date.setDate(date.getDate() + 1);
                 } else if (li.hasClass("k-nav-prev")) {
                     date.setDate(date.getDate() - 1);
+                } else if (li.hasClass("k-nav-current")) {
+                    that._showCalendar();
+                    return; // TODO: Not good - refactor
                 }
 
                 that.selectedDate(date);
 
-                e.preventDefault();
             });
+        },
+
+        _showCalendar: function() {
+            var that = this,
+                target = that.toolbar.find(".k-nav-current"),
+                html = $('<div><div class="k-scheduler-calendar"/></div>');
+
+            if (!that.popup) {
+                that.popup = new Popup(html, {
+                    anchor: target,
+                    activate: function() {
+                        if (!that.calendar) {
+                            that.calendar = new Calendar(this.element.find(".k-scheduler-calendar"),
+                            {
+                                change: function() {
+                                    that.selectedDate(this.value());
+                                    that.popup.close();
+                                }
+                            });
+                        }
+                        that.calendar.value(that.selectedDate());
+                    },
+                    copyAnchorStyles: false
+                });
+            }
+
+            that.popup.open();
         },
 
         options: {
@@ -108,6 +143,17 @@ kendo_module({
         },
 
         events: [],
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            if (that.calendar) {
+                that.calendar.destroy();
+                that.popup.destroy();
+            }
+        },
 
         refresh: function() {
         }

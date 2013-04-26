@@ -8,6 +8,8 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -31,7 +33,7 @@
                     document.body.appendChild(container);
                 },
                 teardown: function() {
-                    $(container).closest(".k-scheduler").remove();
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
                 }
             });
 
@@ -153,6 +155,26 @@
                 scheduler.toolbar.find(".k-nav-prev").click();
 
                 equal(scheduler.selectedDate().getTime(), getDate(nextDate).getTime());
+            });
+
+            test("clicking on the current time opens a calendar", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                ok(scheduler.calendar);
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectedDate().getTime());
+            });
+
+            test("selecting date via the calendar updates the selectedDate value", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                scheduler.calendar.value(new Date("4/4/2013"));
+                scheduler.calendar.trigger("change");
+
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectedDate().getTime());
             });
 
         </script>
