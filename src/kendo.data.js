@@ -744,6 +744,10 @@ kendo_module({
                     return 1;
                 }
 
+                if (a.localeCompare) {
+                    return a.localeCompare(b);
+                }
+
                 return a > b ? 1 : (a < b ? -1 : 0);
             };
         },
@@ -799,6 +803,10 @@ kendo_module({
                     return 1;
                 }
 
+                if (valueA.localeCompare) {
+                    return valueA.localeCompare(valueB);
+                }
+
                 return valueA > valueB ? 1 : -1;
             };
         },
@@ -824,6 +832,10 @@ kendo_module({
 
                 if (valueB == null) {
                     return -1;
+                }
+
+                if (valueB.localeCompare) {
+                    return valueB.localeCompare(valueA);
                 }
 
                 return valueA < valueB ? 1 : -1;

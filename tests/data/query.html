@@ -80,6 +80,44 @@
                 equal(result[2], "foo");
             });
 
+            test("orderBy ignores string casing", function() {
+                var data = ["A", "z", "Z", "a"];
+
+                var result = new Query(data).orderBy(function (item) {
+                    return item;
+                }).toArray();
+
+                equal(result.length, 4);
+                equal(result[0], "a");
+                equal(result[1], "A");
+                equal(result[2], "z");
+                equal(result[3], "Z");
+            });
+
+            test("ascending sort for grouping ignores string case", function() {
+                var data = [{ text: "A" },{ text:  "z" },{ text:  "Z" }, { text: "a" }];
+
+                var result = new Query(data)._sortForGrouping("text", "asc");
+
+                equal(result.length, 4);
+                equal(result[0].text, "a");
+                equal(result[1].text, "A");
+                equal(result[2].text, "z");
+                equal(result[3].text, "Z");
+            });
+
+            test("descending sort for grouping ignores string case", function() {
+                var data = [{ text: "A" },{ text:  "z" },{ text:  "Z" }, { text: "a" }];
+
+                var result = new Query(data)._sortForGrouping("text", "desc");
+
+                equal(result.length, 4);
+                equal(result[0].text, "Z");
+                equal(result[1].text, "z");
+                equal(result[2].text, "A");
+                equal(result[3].text, "a");
+            });
+
             test("orderBy sorts dates in ascending order", function () {
                 var data = [new Date(2011, 1, 1), new Date(2008, 1, 1), new Date(2009, 1, 1)];
 
@@ -92,6 +130,7 @@
                 equal(result[1].getFullYear(), 2009);
                 equal(result[2].getFullYear(), 2011);
             });
+
 
             test("orderBy sorts dates earlier then 1970 and nulls", function () {
                 var data = [new Date(1955, 1, 1), null, new Date(2009, 1, 1)];
