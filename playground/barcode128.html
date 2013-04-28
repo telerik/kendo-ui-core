@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Barcode</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.dataviz.core.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.dataviz.barcode.js" type="text/javascript" charset="utf-8"></script>		
+    </head>
+    <body style="background-color: red;">		
+		<h3>code39</h3>
+		<div id="code39"></div>
+		<h3>code39extended</h3>
+		<div id="code39extended"></div>
+		<h3>code93</h3>
+		<div id="code93"></div>
+		<h3>code93extended</h3>
+		<div id="code93extended"></div>
+		<h3>code128</h3>
+		<div id="code128"></div>
+
+	
+        <script>
+			var value = "";
+			for(var i = 220; i< 242; i++){
+				value+= "T"
+			}
+			
+			$('#code39').kendoBarcode({
+				value: "TEST8052",
+				encoding: {
+					name: "code39"
+				},
+				width: 300,
+				height: 100
+			});
+			
+			$('#code39extended').kendoBarcode({
+				value: ">a12Asdas;" + String.fromCharCode(127),
+				encoding: {
+					name: "code39extended"
+				},
+				width: 300,
+				height: 100
+			});
+			
+			$('#code93').kendoBarcode({
+				value: "TEST93",
+				encoding: {
+					name: "code93"
+				},
+				width: 300,
+				height: 100
+			});
+			
+			$('#code93extended').kendoBarcode({
+				value: ">a12Asdas;" + String.fromCharCode(127),
+				encoding: {
+					name: "code93extended"
+				},
+				width: 300,
+				height: 100
+			});
+			
+			$('#code128').kendoBarcode({
+				value: "dassmk;qk33k1;k",
+				encoding: {
+					name: "code128"
+				},
+				width: 300,
+				height: 100
+			});								
+			
+			
+        </script>
+    </body>
+</html>
