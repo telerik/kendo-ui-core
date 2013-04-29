@@ -487,6 +487,23 @@
                 equal(treeview.find(":checkbox[disabled]").length, 1);
             });
 
+            test("checkChildren sets state of child dataItems", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                treeviewObject.dataItem(".k-item:first").set("checked", true);
+
+                ok(treeviewObject.dataItem(".k-item:last").checked);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
