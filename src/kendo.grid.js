@@ -1198,24 +1198,19 @@ kendo_module({
 
         closeCell: function() {
             var that = this,
-                cell = that._editContainer,
+                cell,
                 id,
                 column,
                 model;
 
-            if (!cell) {
+            if (!that._editContainer) {
                 return;
             }
 
+            cell = that._editContainer.removeClass("k-edit-cell");
             id = cell.closest("tr").attr(kendo.attr("uid"));
-            model = that.dataSource.getByUid(id);
-
-            if (that.trigger("cancel", { container: cell, model: model })) {
-                return;
-            }
-
-            cell.removeClass("k-edit-cell");
             column = that.columns[that.cellIndex(cell)];
+            model = that.dataSource.getByUid(id);
 
             cell.parent().removeClass("k-grid-edit-row");
 
