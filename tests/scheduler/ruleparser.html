@@ -215,7 +215,7 @@
                 var rrule = parse("FREQ=WEEKLY;BYDAY=SU");
 
                 equal(rrule.weekDays.length, 1);
-                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].day, 0);
                 equal(rrule.weekDays[0].offset, 1);
             });
 
@@ -223,7 +223,7 @@
                 var rrule = parse("FREQ=WEEKLY;BYDAY=-1SU");
 
                 equal(rrule.weekDays.length, 1);
-                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].day, 0);
                 equal(rrule.weekDays[0].offset, -1);
             });
 
@@ -231,11 +231,11 @@
                 var rrule = parse("FREQ=WEEKLY;BYDAY=SU, MO, TH");
 
                 equal(rrule.weekDays.length, 3);
-                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].day, 0);
                 equal(rrule.weekDays[0].offset, 1);
-                equal(rrule.weekDays[1].day, "MO");
+                equal(rrule.weekDays[1].day, 1);
                 equal(rrule.weekDays[1].offset, 1);
-                equal(rrule.weekDays[2].day, "TH");
+                equal(rrule.weekDays[2].day, 4);
                 equal(rrule.weekDays[2].offset, 1);
             });
 
@@ -243,11 +243,23 @@
                 var rrule = parse("FREQ=WEEKLY;BYDAY=su, -2 MO, 2TH");
 
                 equal(rrule.weekDays.length, 3);
-                equal(rrule.weekDays[0].day, "SU");
+                equal(rrule.weekDays[0].day, 0);
                 equal(rrule.weekDays[0].offset, 1);
-                equal(rrule.weekDays[1].day, "MO");
+                equal(rrule.weekDays[1].day, 1);
                 equal(rrule.weekDays[1].offset, -2);
-                equal(rrule.weekDays[2].day, "TH");
+                equal(rrule.weekDays[2].day, 4);
+                equal(rrule.weekDays[2].offset, 2);
+            });
+
+            test("Parse method sorts BYDAY values", function() {
+                var rrule = parse("FREQ=WEEKLY;BYDAY=su, -2 MO, 2TH");
+
+                equal(rrule.weekDays.length, 3);
+                equal(rrule.weekDays[0].day, 0);
+                equal(rrule.weekDays[0].offset, 1);
+                equal(rrule.weekDays[1].day, 1);
+                equal(rrule.weekDays[1].offset, -2);
+                equal(rrule.weekDays[2].day, 4);
                 equal(rrule.weekDays[2].offset, 2);
             });
 
@@ -255,6 +267,29 @@
                 var rrule = parse("FREQ=WEEKLY;BYDAY=SU, -2 TT, 2TH");
 
                 ok(rrule.weekDays === null);
+            });
+
+            test("Parse method sorts days in BYDAY (WKST=TH)", function() {
+                var rrule = parse("FREQ=WEEKLY;BYDAY=TU, MO, TH;WKST=TH");
+
+                equal(rrule.weekDays.length, 3);
+                equal(rrule.weekDays[0].day, 4);
+                equal(rrule.weekDays[1].day, 1);
+                equal(rrule.weekDays[2].day, 2);
+            });
+
+            test("Parse method sorts days in BYDAY (WKST=SU)", function() {
+                var rrule = parse("FREQ=WEEKLY;BYDAY=TU, SU, TH;WKST=SU");
+
+                equal(rrule.weekDays[0].day, 0);
+                equal(rrule.weekDays[1].day, 2);
+            });
+
+            test("Parse method sorts days in BYDAY (WKST=SA)", function() {
+                var rrule = parse("FREQ=WEEKLY;BYDAY=TU, SA, TH;WKST=SA");
+
+                equal(rrule.weekDays[0].day, 6);
+                equal(rrule.weekDays[1].day, 2);
             });
 
             test("Parse BYSETPOS property when value is single number", function() {
@@ -265,7 +300,7 @@
             });
 
             test("Parse BYYEARDAY property when value is a list of numbers", function() {
-                var rrule = parse("FREQ=MONTHLY;BYSETPOS =1, 2, 3, 4");
+                var rrule = parse("FREQ=MONTHLY;BYSETPOS =1, 2, 4, 3");
 
                 equal(rrule.setPositions.length, 4);
                 equal(rrule.setPositions[0], 1);
@@ -306,13 +341,37 @@
             test("Parse WKST property", function() {
                 var rrule = parse("FREQ=YEARLY;WKST= WE");
 
-                equal(rrule.weekStart, "WE");
+                equal(rrule.weekStart, 3);
             });
 
             test("Parse WKST validates if value is not correct", function() {
                 var rrule = parse("FREQ=YEARLY;WKST=TT");
 
-                ok(rrule.weekStart === null);
+                equal(rrule.weekStart, kendo.culture().calendar.firstDay);
+            });
+
+            test("parseRule method sets default weekStart if not defined", function() {
+                var rule = parse("FREQ=YEARLY");
+
+                equal(rule.weekStart, kendo.culture().calendar.firstDay);
+            });
+
+            test("parseRule method sets interval", function() {
+                var rule = parse("FREQ=YEARLY");
+
+                equal(rule.interval, 1);
+            });
+
+            test("parseRule method returns null if FREQ is not defined", function() {
+                var rule = parse("BYDAY=SU");
+
+                equal(rule, null);
+            });
+
+            test("parseRule method returns null COUNT and UNTIL are defined together", function() {
+                var rule = parse("FREQ=WEEKLY;UNTIL=20001020T100000Z;COUNT=10");
+
+                equal(rule, null);
             });
 
         </script>
