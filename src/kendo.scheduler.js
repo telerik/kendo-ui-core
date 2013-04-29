@@ -1365,7 +1365,8 @@ kendo_module({
             valueLength = value.length;
             day = value.substring(valueLength - 2).toUpperCase();
 
-            if (WEEK_DAYS[day] === undefined) {
+            day = WEEK_DAYS[day];
+            if (day === undefined) {
                 return null;
             }
 
@@ -1378,6 +1379,14 @@ kendo_module({
     }
 
     var recurrence = {
+        nextWeekDay: function(date, weekDay) {
+            date = new Date(date);
+            while(date.getDay() !== weekDay) {
+                date.setDate(date.getDate() + 1); //increase/decrease... if we need -1MO and so on
+            }
+
+            return date;
+        },
         expandEvent: function(e) {
             var instance = e.ruleInstance;
 
@@ -1388,43 +1397,45 @@ kendo_module({
             return instance;
         },
         occurrences: function(event, period) {
-            var result = [],
-                rule = recurrence.expandEvent(event),
-                start = new Date(period.start),
-                end = new Date(period.end);
+            var rule = recurrence.expandEvent(event);
 
             if (!rule) {
-                return result;
+                return [];
             }
 
-            var freq = recurrence.frequency[rule.freq],
-                start = freq.next(start, end, rule.interval);
-
-            while (start) {
-                result.push(freq.event(start, event));
-                start = freq.next(start, end, rule.interval);
-            }
-
-            return result;
+            return recurrence.frequency[rule.freq].occurrences(event, period);
         },
         frequency: {
             //TODO: FREQ: SECONDLY
             //TODO: FREQ: MINUTELY
             //TODO: FREQ: HOURLY
             DAILY: {
-                next: function(start, end, interval) {
-                    var start = new Date(start.getFullYear(), start.getMonth(), start.getDate() + interval, start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
+                occurrences: function(event, period) {
+                    var events = [],
+                        rule = recurrence.expandEvent(event),
+                        start = new Date(period.start),
+                        end = new Date(period.end);
+                        start = this.next(start, end, rule);
+
+                    while (start) {
+                        events.push({
+                            recurrenceID: event.uid,
+                            start: this.setDate(start, event.start),
+                            end: this.setDate(start, event.end)
+                        });
+                        start = this.next(start, end, rule);
+                    }
+
+                    return events;
+                },
+                next: function(start, end, rule) {
+                    start = new Date(start);
+                    start.setDate(start.getDate() + rule.interval);
+
                     if (+start > +end) {
                         start = null;
                     }
                     return start;
-                },
-                event: function(date, event) {
-                    return {
-                        recurrenceID: event.uid,
-                        start: this.setDate(date, event.start),
-                        end: this.setDate(date, event.end)
-                    }
                 },
                 setDate: function(currentDate, eventDate) {
                     currentDate = new Date(currentDate);
@@ -1434,6 +1445,74 @@ kendo_module({
                     currentDate.setMilliseconds(eventDate.getMilliseconds());
                     return currentDate;
                 }
+            },
+            WEEKLY: {
+                occurrences: function(event, period) {
+                    var events = [],
+                        rule = recurrence.expandEvent(event),
+                        start = new Date(period.start),
+                        end = new Date(period.end),
+                        weekDays;
+
+                    if (!rule) {
+                        return result;
+                    }
+
+                    weekDays = rule.weekDays;
+
+                    if (!weekDays) {
+                        while (start) {
+                            start = this.next(start, end, rule);
+                            if (start) {
+                                events.push({
+                                    recurrenceID: event.uid,
+                                    start: this.setDate(start, event.start),
+                                    end: this.setDate(start, event.end)
+                                });
+                            }
+                        }
+                    } else {
+                        start = recurrence.nextWeekDay(start, 0) //rule.weekStart);
+                        while(start) {
+                            for (var idx = 0, length = weekDays.length; idx < length; idx++) {
+                                start = recurrence.nextWeekDay(start, weekDays[idx].day);
+                                events.push({
+                                    recurrenceID: event.uid,
+                                    start: this.setDate(start, event.start),
+                                    end: this.setDate(start, event.end)
+                                });
+                            }
+
+                            start = recurrence.nextWeekDay(start, 0) //rule.weekStart);
+                            if (+start > +end) {
+                                start = null;
+                            }
+                        }
+                    }
+
+                    return events;
+                },
+
+                next: function(start, end, rule) {
+                    start = new Date(start);
+                    start.setDate(start.getDate() + (rule.interval * 7));
+
+                    if (+start > +end) {
+                        start = null;
+                    }
+
+                    return start;
+                },
+                setDate: function(currentDate, eventDate) {
+                    //same as DAILY.setDate
+                    currentDate = new Date(currentDate);
+                    currentDate.setHours(eventDate.getHours());
+                    currentDate.setMinutes(eventDate.getMinutes());
+                    currentDate.setSeconds(eventDate.getSeconds());
+                    currentDate.setMilliseconds(eventDate.getMilliseconds());
+                    return currentDate;
+                }
+
             }
         },
         parseRule: function (rule) {
@@ -1496,17 +1575,16 @@ kendo_module({
                     case "BYWEEKNO":
                         result.weekNumber = parseArray(value, { start: 1, end: 53 });
                         break;
-                    case "WKST":
-                        weekStart = value[0];
-                        if (WEEK_DAYS[weekStart] === undefined) {
-                            weekStart = null;
-                        }
-
-                        result.weekStart = weekStart;
+                    case "WKST": {
+                        result.weekStart = WEEK_DAYS[value[0]];
                         break;
                 }
 
                 //TODO: set default WKST
+                if (rule.weekStart === undefined) {
+                    rule.weekStart = kendo.culture().calendar.firstDay;
+                }
+
                 //TODO: Validate whether the FREQ, UNTIL, COUNT
 
                 //TODO: Set default INTERVAL if not set

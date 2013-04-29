@@ -34,19 +34,18 @@
             });
 
             test("DAILY frequency next method gets next day (interval:1)", function() {
-                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), 1);
+                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:1 });
                 equal(+next, +new Date(2000, 10, 11, 18, 18, 18))
             });
 
             test("DAILY frequency next method gets the day after tomorrow (interval:2)", function() {
-                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), 2);
+                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:2 });
                 equal(+next, +new Date(2000, 10, 12, 18, 18, 18));
             });
 
+            module("DAILY Occurrences");
 
-            module("Recurring events");
-
-            test("Occurrences method returns one occurrence (Day view)", function() {
+            test("Occurrences method returns one occurrence (FREQ: DAILY)", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
@@ -63,6 +62,111 @@
                 equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
 
+            test("Occurrences method returns multiple occurrences (FREQ: DAILY)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+
+                equal(events.length, 6);
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+
+                equal(events[5].recurrenceID, schedulerEvent.uid);
+                equal(events[5].start.getTime(), +new Date(2000, 10, 16, 16, 30));
+                equal(events[5].end.getTime(), +new Date(2000, 10, 16, 17, 0));
+            });
+
+            test("Occurrences method honours interval rule (FREQ: DAILY)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY;INTERVAL=2"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+
+                equal(events.length, 3);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 12, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 12, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2000, 10, 16, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 10, 16, 17, 0));
+            });
+
+            //TODO: test COUNT AND UNTIL
+
+            module("WEEKLY Occurrences");
+
+            test("Occurrences method returns one event for each new week", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=WEEKLY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 11, 10) } );
+
+                equal(events.length, 4);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 17, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 17, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 24, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 24, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2000, 11, 1, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 11, 1, 17, 0));
+
+                equal(events[3].recurrenceID, schedulerEvent.uid);
+                equal(events[3].start.getTime(), +new Date(2000, 11, 8, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2000, 11, 8, 17, 0));
+            });
+
+            test("Occurrences method honours BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=WEEKLY;BYDAY=SU,MO"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 25) } );
+
+                equal(events.length, 4);
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 12, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 12, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 13, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 13, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2000, 10, 19, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 10, 19, 17, 0));
+
+                equal(events[3].recurrenceID, schedulerEvent.uid);
+                equal(events[3].start.getTime(), +new Date(2000, 10, 20, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2000, 10, 20, 17, 0));
+            });
         </script>
     </body>
 </html>
