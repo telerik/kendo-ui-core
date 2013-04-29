@@ -1196,21 +1196,26 @@ kendo_module({
             }
         },
 
-        closeCell: function() {
+        closeCell: function(isCancel) {
             var that = this,
-                cell,
+                cell = that._editContainer,
                 id,
                 column,
                 model;
 
-            if (!that._editContainer) {
+            if (!cell) {
                 return;
             }
 
-            cell = that._editContainer.removeClass("k-edit-cell");
             id = cell.closest("tr").attr(kendo.attr("uid"));
-            column = that.columns[that.cellIndex(cell)];
             model = that.dataSource.getByUid(id);
+
+            if (isCancel && that.trigger("cancel", { container: cell, model: model })) {
+                return;
+            }
+
+            cell.removeClass("k-edit-cell");
+            column = that.columns[that.cellIndex(cell)];
 
             cell.parent().removeClass("k-grid-edit-row");
 
@@ -2069,7 +2074,7 @@ kendo_module({
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
                         if (isInCell) {
-                            that.closeCell();
+                            that.closeCell(true);
                         } else {
                             currentIndex = that.items().index($(current).parent());
                             if (active) {
