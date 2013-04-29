@@ -215,6 +215,17 @@
 
                 ds.query({ page: 1, skip: 0, take: 20 });
             });
+
+            test('re-reading the datasource at a distant location triggers reset while maintaining correct index', 2, function() {
+                ds.fetch();
+
+                buffer.bind('reset', function(e) {
+                    ok(true);
+                });
+
+                ds.query({ page: 10, skip: 200, take: 20 });
+                equal(buffer.at(210).value, 210);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

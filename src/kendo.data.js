@@ -3531,22 +3531,21 @@ kendo_module({
             buffer.pageSize = dataSource.pageSize(),
             buffer.itemCount = itemCount;
             buffer.step = buffer.itemCount + 2, // buffer
-            buffer.offset = 0;
+            buffer.offset = dataSource.skip();
             buffer._prefetching = false;
             buffer._recalculate();
 
-            buffer._marks = [];
-
             dataSource.bind("change", function() {
-                var skip = dataSource.skip(),
-                    item = dataSource.at(0),
-                    mark = buffer._marks[skip];
-
-                if (mark && mark !== item) {
+                if (buffer._targetOffset !== undefined) { // the change was caused by the buffer itself... hopefully.
+                    buffer.offset = buffer._targetOffset;
+                    buffer._recalculate();
+                    delete buffer._targetOffset;
+                } else { // caused by external factors. Reset the buffer state.
+                    buffer.offset = dataSource.skip();
+                    buffer.pageSize = dataSource.pageSize(),
+                    buffer._recalculate();
                     buffer.trigger("reset");
                 }
-
-                buffer._marks[skip] = item;
 
                 buffer.trigger("resize", { limit: dataSource.lastRange().end });
             })
@@ -3594,7 +3593,7 @@ kendo_module({
             var item = this.dataSource.at(index - this.offset);
 
             if (item === undefined) {
-                this.trigger("endreached", {index: index});
+                this.trigger("endreached", { index: index });
             }
 
             return item;
@@ -3603,10 +3602,7 @@ kendo_module({
         range: function(offset) {
             var buffer = this;
             if (buffer.offset !== offset) {
-                buffer.dataSource.one("change", function() {
-                    buffer.offset = offset;
-                    buffer._recalculate();
-                });
+                buffer._targetOffset = offset;
                 buffer.dataSource.range(offset, buffer.pageSize);
             }
         },
