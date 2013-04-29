@@ -263,6 +263,67 @@ kendo_module({
         }
     });
 
+    var MultiDayView = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+        },
+
+        options: {
+            name: "MultiDayView",
+            headerDateFormat: "ddd M/dd"
+        },
+
+        _renderHeader: function(dates) {
+            dates = dates || [];
+
+            this.timesHeader = $('<div class="k-scheduler-times">' +
+                    '<table class="k-scheduler-table">' +
+                    '<colgroup> <col /> </colgroup>' +
+                    '<tbody>' +
+                        '<tr><th>&nbsp;</th></tr>' +
+                        //<tr><th>all day</th></tr>
+                    '</tbody>' +
+                '</table>' +
+            '</div>');
+
+            this._renderDatesHeader(dates);
+
+            this.element.append(this.timesHeader.add(this.datesHeader));
+        },
+
+        _renderDatesHeader: function(dates) {
+            var idx,
+                length,
+                html = '<div class="k-scheduler-header k-state-default">' +
+                    '<div class="k-scheduler-header-wrap"><table class="k-scheduler-table">';
+
+            html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
+            html += '<tbody><tr>';
+
+            for (idx = 0, length = dates.length; idx < length; idx++) {
+                html += '<th ' + (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? 'class="k-today"' : "") + '>' + kendo.toString(dates[idx], this.options.headerDateFormat) + '</th>';
+            }
+
+            html += '</tr></tbody></table></div></div>';
+
+            this.datesHeader = $(html);
+        },
+
+        _render: function(dates) {
+            this._renderHeader(dates);
+        },
+
+        render: function(selectedDate) {
+            this._render([]);
+        }
+    });
+
+    extend(true, kendo.ui, {
+       MultiDayView: MultiDayView
+    });
+
     var RRule = Class.extend({
         init: function(options) {
         }

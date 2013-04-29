@@ -16,17 +16,83 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var Scheduler = kendo.ui.Scheduler;
+            var MultiDayView = kendo.ui.MultiDayView,
+                container;
 
-            module("Day View rendering", {
-                setup: function() {
+            var MyDayView = MultiDayView.extend({
+                init: function(element, options) {
+                    var that = this;
 
+                    MultiDayView.fn.init.call(that, element, options);
                 },
-                teardown: function() {
-
+                render: function() {
+                    this._render(this.options.dates);
                 }
             });
 
+            function setup(options) {
+                return new MyDayView(container, options);
+            }
+
+            module("Multi Day View rendering", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container);
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("renders times header slots", function() {
+                var view = setup();
+                view.render();
+
+                ok(container.find(".k-scheduler-times").length);
+                equal(view.timesHeader[0], container.find(".k-scheduler-times")[0]);
+            });
+
+            test("renders headers for selected dates", function() {
+                var view = setup({ dates: [new Date("1/2/2013"), new Date("2/1/2013")] });
+                view.render();
+
+                ok(view.datesHeader.hasClass("k-scheduler-header"));
+                equal(view.datesHeader.find("col").length, 2);
+                equal(view.datesHeader.find("th").length, 2);
+            });
+
+            test("k-today is render if date is today", function() {
+                var view = setup({ dates: [new Date()] });
+
+                view.render();
+
+                equal(view.datesHeader.find("th.k-today").length, 1);
+            });
+
+            test("k-today is not render if date is not today", function() {
+                var view = setup({ dates: [new Date("1/2/2013")] });
+
+                view.render();
+
+                ok(!view.datesHeader.find("th.k-today").length);
+            });
+
+            test("dates are formatted", function() {
+                var view = setup({ dates: [new Date("1/26/2013")] });
+
+                view.render();
+
+                equal(view.datesHeader.find("th").text(), "Sat 1/26");
+            });
+
+            test("dates are formatted with custom format", function() {
+                var view = setup({ headerDateFormat: "d", dates: [new Date("1/26/2013")] });
+
+                view.render();
+
+                equal(view.datesHeader.find("th").text(), "1/26/2013");
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
