@@ -62,9 +62,9 @@ METHOD = ERB.new(%{
 <% if owner.name.include?('EventBuilder') %>
 For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
 <% end %>
-<% if !examples.empty? %>
-#### Example
-<%= examples.map { |example| example.to_markdown }.join %>
+<% examples.each do |example| %>
+#### Example (<%= example.lang %>)
+<%= example.to_markdown %>
 <% end %>
 <% if !parameters.empty? %>
 #### Parameters
@@ -121,9 +121,55 @@ PARAMETER = ERB.new(%{
 
     end
 
-    class Example < Struct.new(:code)
+    class Example < Struct.new(:code, :lang)
         def to_markdown
-            code.gsub(/^[ ]{4}/, '').sub(/^[ ]{4}/, '').sub(/^[ ]{8}%/, '    %').gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/&quot;/, '"');
+            result = ''
+
+            lines = code.strip.split("\n")
+
+            source = lines.map { |line| line.strip }.join("\n")
+
+            length = source.size
+            idx = 0
+            indent = 1
+            ch = "\n"
+            current_line = 0
+
+            while idx < length
+                if ch == "\n"
+                    if current_line == 1 && lang != 'Razor'
+                        indent += 1
+                    end
+
+                    if current_line == lines.size - 1 && lang != 'Razor'
+                        indent -= 1
+                    end
+
+                    current_line += 1
+
+                    indent.times do
+                        result += '    '
+                    end
+                end
+
+                ch = source[idx]
+                idx += 1
+
+                if ch == '('
+                    indent += 1
+                end
+
+                if ch == ')'
+                    indent -= 1
+                    if result =~ /\n +$/
+                        result = result.chomp('    ')
+                    end
+                end
+
+                result += ch
+            end
+
+            result
         end
     end
 
@@ -257,10 +303,11 @@ PARAMETER = ERB.new(%{
             end
 
             def parse_examples(method)
-                method.xpath('example').map do |example|
-                    code = example.xpath('code').first.text
-
-                    Example.new(code)
+                method.xpath('example/code').map do |code|
+                    lang = code['lang']
+                    lang = 'ASPX' unless lang
+                    lang = 'ASPX' if lang == 'CS'
+                    Example.new(code.text, lang)
                 end
             end
 
