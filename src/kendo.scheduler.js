@@ -1379,9 +1379,10 @@ kendo_module({
     }
 
     var recurrence = {
-        nextWeekDay: function(date, weekDay) {
+        //TODO: optimize! Set year and month before looping days
+        nextWeekDay: function(date, dayOfWeek) {
             date = new Date(date);
-            while(date.getDay() !== weekDay) {
+            while(date.getDay() !== dayOfWeek) {
                 date.setDate(date.getDate() + 1); //increase/decrease... if we need -1MO and so on
             }
 
@@ -1415,7 +1416,6 @@ kendo_module({
                         rule = recurrence.expandEvent(event),
                         start = new Date(period.start),
                         end = new Date(period.end);
-                        start = this.next(start, end, rule);
 
                     while (start) {
                         events.push({
@@ -1452,46 +1452,53 @@ kendo_module({
                         rule = recurrence.expandEvent(event),
                         start = new Date(period.start),
                         end = new Date(period.end),
+                        interval = 1,
+                        count = 1,
                         weekDays;
 
                     if (!rule) {
                         return result;
                     }
 
-                    weekDays = rule.weekDays;
-
-                    //TODO: if no weekDays... just build (get day of the event and create BYDAY rule)
-                    if (!weekDays) {
-                        while (start) {
-                            start = this.next(start, end, rule);
-                            if (start) {
-                                events.push({
-                                    recurrenceID: event.uid,
-                                    start: this.setDate(start, event.start),
-                                    end: this.setDate(start, event.end)
-                                });
-                            }
-                        }
-                    } else {
-                        start = recurrence.nextWeekDay(start, rule.weekStart);
-                        while(start) {
-                            for (var idx = 0, length = weekDays.length; idx < length; idx++) {
-                                start = recurrence.nextWeekDay(start, weekDays[idx].day);
-                                events.push({
-                                    recurrenceID: event.uid,
-                                    start: this.setDate(start, event.start),
-                                    end: this.setDate(start, event.end)
-                                });
-                            }
-
-                            start = recurrence.nextWeekDay(start, rule.weekStart);
-                            if (+start > +end) {
-                                start = null;
-                            }
-                        }
+                    if (rule.until && +rule.until < +end) {
+                        end = new Date(rule.until);
                     }
 
-                    return events;
+                    weekDays = rule.weekDays;
+                    if (!weekDays) {
+                        weekDays = [{
+                            day: start.getDay(),
+                            offset: 1
+                        }]
+                    }
+
+                    while(start) {
+                        for (var idx = 0, length = weekDays.length; idx < length; idx++) {
+                            start = recurrence.nextWeekDay(start, weekDays[idx].day);
+                            if (+start >= +end) {
+                                return events;
+                            } else {
+                                events.push({
+                                    recurrenceID: event.uid,
+                                    start: this.setDate(start, event.start),
+                                    end: this.setDate(start, event.end)
+                                });
+                            }
+
+                            if (rule.count && count === rule.count) {
+                                return events;
+                            }
+                            count++;
+                        }
+
+                        start = recurrence.nextWeekDay(start, rule.weekStart);
+
+                        interval++;
+                        if (interval === rule.interval && rule.interval > 1) {
+                            start.setDate(start.getDate() + 7);
+                            interval = 1;
+                        }
+                    }
                 },
 
                 next: function(start, end, rule) {
