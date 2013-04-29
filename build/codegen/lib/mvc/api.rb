@@ -57,7 +57,7 @@ publish:true
     end
 
 METHOD = ERB.new(%{
-### <%= name.gsub('<', '\\<').gsub('>', '\\>').gsub('|', ',') %>
+### <%= method_name%>
 <%= summary %>
 <% if owner.name.include?('EventBuilder') %>
 For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
@@ -84,6 +84,10 @@ For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owne
 
         def js_name
             name.gsub(/\(.*\)/, '').camelize
+        end
+
+        def method_name
+            name.gsub('|', ',').gsub(/\((.*)\)/, '(`\1`)')
         end
 
         def suite
