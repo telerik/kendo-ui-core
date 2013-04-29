@@ -1456,8 +1456,9 @@ kendo_module({
                         count = 1,
                         weekDays;
 
-                    if (!rule) {
-                        return result;
+                    //TODO: should I expand in past ???
+                    if (!rule || +event.start > +end) {
+                        return events;
                     }
 
                     if (rule.until && +rule.until < +end) {
