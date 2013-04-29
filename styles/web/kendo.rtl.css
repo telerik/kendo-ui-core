@@ -147,6 +147,18 @@
     border-width: 0;
 }
 
+.k-rtl .k-header > .k-grid-filter,
+.k-rtl .k-header > .k-header-column-menu
+{
+    float: left;
+}
+
+.k-rtl .k-grid-header .k-filterable .k-link
+{
+    padding-left: 2.4em;
+    padding-right: .6em;
+}
+
 .k-rtl .k-grid-header .k-header:first-child,
 .k-rtl .k-grid tbody td:first-child,
 .k-rtl .k-grid tfoot td:first-child
