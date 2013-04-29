@@ -13,7 +13,10 @@ kendo_module({
         Widget = ui.Widget,
         Popup = ui.Popup,
         Calendar = ui.Calendar,
+        isPlainObject = $.isPlainObject,
+        extend = $.extend,
         NS = ".kendoScheduler",
+        STRING = "string",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -22,18 +25,31 @@ kendo_module({
                '<li class="k-state-default k-nav-next"><a href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
                '<li class="k-state-default k-nav-current"><a href="\\#" class="k-link"><span class="k-icon k-i-calendar"></span><span data-#=ns#bind="text: formattedDate"></span></a></li>' +
             '</ul>' +
-            '<ul class="k-reset k-header k-toolbar">' +
-              //  '<li class="k-state-selected k-view-day"><a href="\\#" class="k-link">Day</a></li>' +
-              //  '<li class="k-state-default k-view-week"><a href="\\#" class="k-link">Week</a></li>' +
-              //  '<li class="k-state-default k-view-month"><a href="\\#" class="k-link">Month</a></li>' +
-              //  '<li class="k-state-default k-view-agenda"><a href="\\#" class="k-link">Agenda</a></li>' +
+            '<ul class="k-reset k-header k-toolbar k-scheduler-views">' +
+                '#for(var view in views){#' +
+                    '<li class="k-state-default k-view-#=view#" data-#=ns#name="#=view#"><a href="\\#" class="k-link">${views[view].title}</a></li>' +
+                '#}#'  +
             '</ul>' +
         '</div>');
+
     function getDate(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
     }
 
     TODAY = getDate(new Date());
+
+    var defaultViews = {
+        day: {
+            title: "Day",
+            name: "day",
+            render: $.noop
+        },
+        week: {
+            title: "Week",
+            name: "week",
+            render: $.noop
+        }
+    }
 
     var Scheduler = Widget.extend({
         init: function(element, options) {
@@ -41,10 +57,115 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            if (!that.options.views || !that.options.views.length) {
+                that.options.views = ["day", "week"];
+            }
+
             that._initModel();
 
+            that._views();
+
             that._wrapper();
+
             that._toolbar();
+
+            that.selectView(that._selectedViewName);
+        },
+
+        options: {
+            name: "Scheduler",
+            selectedDate: TODAY,
+            selectedDateFormat: "D",
+            messages: {
+                today: "Today"
+            },
+            views: []
+        },
+
+        events: [],
+
+        destroy: function() {
+            var that = this,
+                element;
+
+            Widget.fn.destroy.call(that);
+
+            if (that.calendar) {
+                that.calendar.destroy();
+                that.popup.destroy();
+            }
+
+            element = that.element
+                .add(that.wrapper)
+                .add(that.toolbar)
+                .add(that.popup);
+
+            element.off(NS);
+
+            kendo.destroy(that.wrapper);
+        },
+
+        selectView: function(name) {
+            var that = this;
+
+            if (name) {
+                that._renderView(name);
+                that._selectedViewName = name;
+
+                that.toolbar
+                    .find(".k-scheduler-views li")
+                    .removeClass("k-state-selected")
+                    .end()
+                    .find(".k-view-" + name)
+                    .addClass("k-state-selected");
+
+                return;
+            }
+            return that.views[that._selectedViewName];
+        },
+
+        _renderView: function(name) {
+            this.views[name].render();
+        },
+
+        _views: function() {
+            var views = this.options.views,
+                view,
+                defaultView,
+                selected,
+                idx,
+                length;
+
+            this.views = {};
+
+            for (idx = 0, length = views.length; idx < length; idx++) {
+                view = views[idx];
+
+                if (isPlainObject(view) && view.name) {
+                   defaultView = defaultViews[view.name];
+                   if (defaultView) {
+                       view = extend({}, defaultView, view);
+                   }
+
+                   view.title = view.title || view.name;
+                } else {
+                   view = defaultViews[view];
+                }
+
+                if (view) {
+                    this.views[view.name] = view;
+
+                    if (!selected || view.selected) {
+                        selected = view.name;
+                    }
+                } else {
+                    throw new Error("There is no such view");
+                }
+            }
+
+            if (selected) {
+                this._selectedViewName = selected; // toobar is not rendered yet
+            }
         },
 
         _initModel: function() {
@@ -76,7 +197,8 @@ kendo_module({
                 options = that.options,
                 toolbar = $(TOOLBARTEMPLATE({
                     messages: options.messages,
-                    ns: kendo.ns
+                    ns: kendo.ns,
+                    views: that.views
                 }));
 
             that.wrapper.append(toolbar);
@@ -103,6 +225,10 @@ kendo_module({
 
                 that.selectedDate(date);
 
+            });
+
+            toolbar.on("click" + NS, ".k-scheduler-views li", function(e) {
+                that.selectView($(this).attr(kendo.attr("name")));
             });
         },
 
@@ -131,38 +257,6 @@ kendo_module({
             }
 
             that.popup.open();
-        },
-
-        options: {
-            name: "Scheduler",
-            selectedDate: TODAY,
-            selectedDateFormat: "D",
-            messages: {
-                today: "Today"
-            }
-        },
-
-        events: [],
-
-        destroy: function() {
-            var that = this,
-                element;
-
-            Widget.fn.destroy.call(that);
-
-            if (that.calendar) {
-                that.calendar.destroy();
-                that.popup.destroy();
-            }
-
-            element = that.element
-                .add(that.wrapper)
-                .add(that.toolbar)
-                .add(that.popup);
-
-            element.off(NS);
-
-            kendo.destroy(that.wrapper);
         },
 
         refresh: function() {
