@@ -21,32 +21,37 @@
         <div id="treeview"></div>
 
         <script>
-            $(function () {
-                $("#treeview").kendoTreeView({
-                    dataSource: {
-                        data: [{
-                            hasChildren: false,
-                            Children: [],
-                            text: "foo"
-                        }],
-                        schema: {
-                            model: {
-                                hasChildren: "hasChildren",
-                                children: "Children"
-                            }
+            $(document).ready(function() {
+
+                var data = [];
+
+                function populate(data, depth) {
+                    for (var i = 0; i < 10; i++) {
+                        data.push({ text: "Node " + i });
+
+                        if (depth > 1) {
+                            data[i].items = [];
+                            populate(data[i].items, depth - 1);
                         }
                     }
+                }
+
+                populate(data, 3);
+
+                $("#treeview").kendoTreeView({
+                    checkboxes: { checkChildren: true },
+                    dataSource: data
                 });
 
-                var treeview = $("#treeview").data('kendoTreeView');
+                var checkbox = $("#treeview :checkbox:first");
 
-                treeview.append({
-                    hasChildren: true,
-                    Children: [ { text: "baz", hasChildren: false }],
-                    text: "bar"
-                });
+                var start = new Date();
 
-                treeview.append(treeview.findByText("foo"), treeview.findByText("bar"));
+                checkbox
+                    .prop("checked", true).trigger("change")
+                    .prop("checked", false).trigger("change");
+
+                console.log("elapsed: ", new Date() - start);
             });
         </script>
     </body>

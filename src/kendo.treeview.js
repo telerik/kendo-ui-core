@@ -603,6 +603,20 @@ kendo_module({
             });
         },
 
+        _setChecked: function(datasource, value) {
+            if (!datasource || !$.isFunction(datasource.view)) {
+                return;
+            }
+
+            for (var i = 0, nodes = datasource.view(); i < nodes.length; i++) {
+                nodes[i][CHECKED] = value;
+
+                if (nodes[i].children) {
+                    this._setChecked(nodes[i].children, value);
+                }
+            }
+        },
+
         _setIndeterminate: function(node) {
             var group = subGroup(node),
                 siblings, length,
@@ -652,7 +666,7 @@ kendo_module({
 
             if (parentNode.length) {
                 this._setIndeterminate(parentNode);
-                checkbox = parentNode.children("div").find(".k-checkbox > :checkbox");
+                checkbox = parentNode.children("div").find(".k-checkbox :checkbox");
 
                 if (checkbox.prop("indeterminate") === false) {
                     this.dataItem(parentNode).set(CHECKED, checkbox.prop(CHECKED));
@@ -1122,12 +1136,15 @@ kendo_module({
                 context = { treeview: that.options, item: item },
                 shouldUpdate = false;
 
-            function setChecked() {
-                that.dataItem(this).set(CHECKED, isChecked);
-            }
-
             function access() {
                 shouldUpdate = true;
+            }
+
+            function setCheckedState(root, state) {
+                root.find(".k-checkbox :checkbox")
+                    .prop(CHECKED, state)
+                    .data("indeterminate", false)
+                    .prop("indeterminate", false);
             }
 
             if (field == "selected") {
@@ -1164,13 +1181,12 @@ kendo_module({
 
                         isChecked = item[field];
 
-                        node.children("div").find(".k-checkbox :checkbox")
-                            .prop(CHECKED, item[field])
-                            .data("indeterminate", false)
-                            .prop("indeterminate", false);
+                        setCheckedState(node.children("div"), isChecked);
 
                         if (that.options.checkboxes.checkChildren) {
-                            node.find(".k-checkbox :checkbox").each(setChecked);
+                            setCheckedState(node.children(".k-group"), isChecked);
+
+                            that._setChecked(item.children, isChecked);
 
                             that._updateIndeterminate(node);
                         }
