@@ -187,7 +187,7 @@ namespace Kendo.Mvc.UI
             var options = new Dictionary<string, object>(Events);
 
             // use client-side rendering if templates are set
-            if (this.UsesTemplates())
+            if (Items.Any() && this.UsesTemplates())
             {
                 this.DataSource.Data = SerializeItems(Items);
                 this.LoadOnDemand = false;
