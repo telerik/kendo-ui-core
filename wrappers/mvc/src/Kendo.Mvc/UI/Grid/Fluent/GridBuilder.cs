@@ -9,13 +9,13 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.UI;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Grid{T}"/> component.
+    /// The fluent API for configuring Kendo UI Grid for ASP.NET MVC.
     /// </summary>
     public class GridBuilder<T> : WidgetBuilderBase<Grid<T>, GridBuilder<T>> where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBuilder{T}"/> class.
-        /// </summary> 
+        /// </summary>
         /// <param name="component">The component.</param>
         public GridBuilder(Grid<T> component)
             : base(component)
@@ -37,10 +37,35 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the grid DataSource
-        /// </summary>        
+        /// Sets the data source configuration of the grid.
+        /// </summary>
+        /// <param name="configurator">The data source configuration</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Grid&lt;Product&gt;()
+        ///     .Name(&quot;grid&quot;)
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///             .Ajax()
+        ///             .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
+        ///     )
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().Grid&lt;Product&gt;()
+        ///     .Name(&quot;grid&quot;)
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///             .Ajax()
+        ///             .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
+        ///     )
+        /// %&gt;
+        /// </code>
+        /// </example>
         public GridBuilder<T> DataSource(Action<DataSourceBuilder<T>> configurator)
-        {            
+        {
             configurator(new DataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
@@ -60,7 +85,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the detail template of the grid using Razor syntax
         /// </summary>
-        /// <param name="inlineTemplate">The template</param>        
+        /// <param name="inlineTemplate">The template</param>
         public GridBuilder<T> DetailTemplate(Func<T, object> inlineTemplate)
         {
             Component.DetailTemplate.InlineTemplate = inlineTemplate;
@@ -90,16 +115,16 @@ namespace Kendo.Mvc.UI.Fluent
         ///        &lt;%
         ///     })
         ///  %&gt;
-        /// </code> 
+        /// </code>
         /// </example>
         public GridBuilder<T> RowTemplate(Action<T, Grid<T>> codeBlockTemplate)
         {
 
             Component.RowTemplate.CodeBlockTemplate = (dataItem) => codeBlockTemplate(dataItem, Component);
-            
+
             return this;
         }
-       
+
         /// <summary>
         /// Sets the row template of the grid
         /// </summary>
@@ -115,7 +140,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///        &lt;%
         ///     })
         ///  %&gt;
-        /// </code> 
+        /// </code>
         /// </example>
         public GridBuilder<T> RowTemplate(Action<T> codeBlockTemplate)
         {
@@ -137,7 +162,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           @item.Age
         ///     &lt;/text&gt;)
         ///  %&gt;
-        /// </code> 
+        /// </code>
         /// </example>
         public GridBuilder<T> RowTemplate(Func<T, object> inlineTemplate)
         {
@@ -158,7 +183,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the client row template
         /// </summary>
-        /// <param name="template">The template</param>        
+        /// <param name="template">The template</param>
         public GridBuilder<T> ClientRowTemplate(string template)
         {
             Component.ClientRowTemplate = template;
@@ -177,10 +202,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Specifies if the Grid should be automatically bound on initial load. 
+        /// Specifies if the Grid should be automatically bound on initial load.
         /// This is only possible if AJAX binding is used, and widget is not initialy populated on the server.
         /// </summary>
-        /// <param name="value">If true Grid will be automatically data bound, otherwise false</param>        
+        /// <param name="value">If true Grid will be automatically data bound, otherwise false</param>
         public GridBuilder<T> AutoBind(bool value)
         {
             Component.AutoBind = value;
@@ -248,10 +273,10 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Enables the grid editing.
-        /// </summary>        
+        /// </summary>
         public GridBuilder<T> Editable()
         {
-            Component.Editable.Enabled = true;            
+            Component.Editable.Enabled = true;
             return this;
         }
 
@@ -276,7 +301,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Binds the grid to a list of objects
-        /// </summary>        
+        /// </summary>
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
@@ -301,10 +326,10 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         public GridBuilder<T> BindTo(IEnumerable dataSource)
-        {           
+        {
             Component.DataSource.Data = new CustomGroupingWrapper<T>(dataSource);
             return this;
-        }        
+        }
 
         /// <summary>
         /// Callback for each row.
@@ -385,7 +410,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -406,14 +431,14 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
         /// <summary>
         /// Allows sorting of the columns.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -440,7 +465,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -519,7 +544,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -544,7 +569,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -554,19 +579,19 @@ namespace Kendo.Mvc.UI.Fluent
         ///             })
         ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
         ///             .Pageable(paging =>
-        ///                        paging.Refresh(true)        
+        ///                        paging.Refresh(true)
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
         public GridBuilder<T> Pageable(Action<PageableBuilder> pagerAction)
         {
-            Component.Pageable.Enabled = true;            
+            Component.Pageable.Enabled = true;
 
             pagerAction(new PageableBuilder(Component.Pageable));
 
             return this;
-        }        
+        }
 
         /// <summary>
         /// Allows filtering of the columns.
@@ -574,7 +599,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -600,7 +625,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -628,7 +653,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -654,7 +679,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -682,7 +707,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -709,7 +734,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -738,7 +763,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -765,7 +790,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -787,7 +812,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-      
+
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
@@ -816,7 +841,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -844,7 +869,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")        
+        ///             .Name("Grid")
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
