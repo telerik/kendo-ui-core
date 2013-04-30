@@ -155,14 +155,6 @@ kendo_module({
             that.forcedEnabled = false;
 
             $.extend(that, options);
-            // enable virtual only for vertical dimensions
-            that.virtual = !that.horizontal && that.virtual;
-
-            if (that.virtual) {
-                that.forcedEnabled = true;
-                that._virtualSize = VIRTUAL_SIZE;
-                that._virtualOffset = -VIRTUAL_SIZE;
-            }
 
             that.scale = 1;
 
@@ -175,6 +167,15 @@ kendo_module({
                 that.scrollSize = "scrollHeight";
                 that.axis = "y";
             }
+        },
+
+        makeVirtual: function() {
+            $.extend(this, {
+                virtual: true,
+                forcedEnabled: true,
+                _virtualSize: VIRTUAL_SIZE,
+                _virtualOffset: -VIRTUAL_SIZE
+            });
         },
 
         virtualSize: function(size) {

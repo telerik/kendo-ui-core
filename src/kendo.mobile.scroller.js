@@ -241,7 +241,6 @@ kendo_module({
                     element: inner,
                     container: element,
                     forcedEnabled: that.options.zoom,
-                    virtual: that.options.virtual,
                     change: function() {
                         that.trigger(RESIZE);
                     }
@@ -335,7 +334,6 @@ kendo_module({
             zoom: false,
             pullOffset: 140,
             elastic: true,
-            virtual: false,
             useNative: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
@@ -431,23 +429,20 @@ kendo_module({
             scrollBar,
             end = $.noop;
 
+            scrollBar = new ScrollBar({
+                axis: axis,
+                movable: movable,
+                dimension: dimension,
+                container: that.element
+            });
 
-            if (!that.options.virtual) {
-                scrollBar = new ScrollBar({
-                    axis: axis,
-                    movable: movable,
-                    dimension: dimension,
-                    container: that.element
-                });
+            end = function() {
+                scrollBar.hide();
+            };
 
-                end = function() {
-                    scrollBar.hide();
-                };
-
-                that.pane[axis].bind(CHANGE, function() {
-                    scrollBar.show();
-                });
-            }
+            that.pane[axis].bind(CHANGE, function() {
+                scrollBar.show();
+            });
 
             that[axis + "inertia"] = new DragInertia({
                 axis: axis,

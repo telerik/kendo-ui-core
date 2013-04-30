@@ -398,7 +398,11 @@ kendo_module({
 
             that._templates();
 
-            this._itemBinder = new ListViewItemBinder(this);
+            if (this.options.endlessScroll) {
+                this._itemBinder = new ListViewItemBinder(this);
+            } else {
+                this._itemBinder = new ListViewItemBinder(this);
+            }
 
             if (this.options.pullToRefresh) {
                 this._pullToRefreshHandler = new RefreshHandler(this);

@@ -3548,7 +3548,7 @@ kendo_module({
                 }
 
                 buffer.trigger("resize", { limit: dataSource.lastRange().end });
-            })
+            });
         },
 
         at: function(index)  {
