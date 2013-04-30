@@ -140,6 +140,20 @@
             ok(finder.isFormatted([editor.body.firstChild]));
         });
 
+        test("isFormatted() returns true for legacy styles", function() {
+            editor.value("");
+            $(editor.body).html("<b><i><u>foo</u></i></b>");
+
+            var foo = editor.body.firstChild.firstChild.firstChild.firstChild;
+
+            var finder = new InlineFormatFinder(editor.options.formats.bold);
+            ok(finder.isFormatted([foo]));
+            var finder = new InlineFormatFinder(editor.options.formats.italic);
+            ok(finder.isFormatted([foo]));
+            var finder = new InlineFormatFinder(editor.options.formats.underline);
+            ok(finder.isFormatted([foo]));
+        });
+
 </script>
 
 <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
