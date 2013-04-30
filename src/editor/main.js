@@ -118,15 +118,11 @@ kendo_module({
             Editor.fn.options.formats[formatName] = format;
         },
 
-        createDialog: function (windowContent, editor, initOptions) {
-            var isRtl = kendo.support.isRtl(editor.wrapper),
-                win = $(windowContent).appendTo(document.body).kendoWindow(initOptions);
-
-            if (isRtl) {
-                win.closest(".k-window").addClass("k-rtl");
-            }
-
-            return win;
+        createDialog: function (content, editor, options) {
+            return $(content)
+                .appendTo(document.body)
+                .kendoWindow(options)
+                .closest(".k-window").toggleClass("k-rtl", kendo.support.isRtl(editor.wrapper)).end();
         }
     };
 
