@@ -509,10 +509,26 @@
             test("filter on null string", function() {
                 var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
 
-                var result = new Query(data).filter({ field: "name", op: "eq", value: "foo" }).toArray();
+                var result = new Query(data).filter({ field: "name", operator: "eq", value: "foo" }).toArray();
 
                 equal(result.length, 1);
             });
+
+            test("filter on null string with startwith", function() {
+                var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
+                var result = new Query(data).filter({ field: "name", operator: "startswith", value: "foo", ignoreCase: true }).toArray();
+
+                equal(result.length, 1);
+            });
+
+            test("filter on null string with endswith", function() {
+                var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
+                debugger;
+                var result = new Query(data).filter({ field: "name", operator: "endswith", value: "foo", ignoreCase: true }).toArray();
+
+                equal(result.length, 1);
+            });
+
 
             test("filter with empty expression", function() {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
