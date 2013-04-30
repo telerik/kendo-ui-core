@@ -166,6 +166,34 @@
                 ok(view.times.find("tr:last").hasClass("k-last"));
             });
 
+            test("render day slots", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013"),
+                        new Date("1/27/2013")
+                    ]
+                });
+
+                view.render();
+
+                equal(view.content.find("tr").length, 24);
+                equal(view.content.find("col").length, 2);
+                equal(view.content.find("td").length, 48);
+            });
+
+            test("apply css to day slot", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+
+                equal(view.content.find("tr.k-middle-row").length, 12);
+                equal(view.content.find("tr:not(.k-middle-row)").length, 12);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

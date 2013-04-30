@@ -65,28 +65,6 @@ kendo_module({
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
-    function isInRange(value, min, max) {
-        var msMin = getMilliseconds(min),
-            msMax = getMilliseconds(max),
-            msValue;
-
-        if (!value || msMin == msMax) {
-            return true;
-        }
-
-        msValue = getMilliseconds(value);
-
-        if (msMin > msValue) {
-            msValue += MS_PER_DAY;
-        }
-
-        if (msMax < msMin) {
-            msMax += MS_PER_DAY;
-        }
-
-        return msValue >= msMin && msValue <= msMax;
-    }
-
     var defaultViews = {
         day: {
             title: "Day",
@@ -347,8 +325,7 @@ kendo_module({
             minorTickTimeTemplate: "&nbsp;"
         },
 
-        _renderHeader: function(dates) {
-            dates = dates || [];
+        _header: function(dates) {
 
             this.timesHeader = $('<div class="k-scheduler-times">' +
                     '<table class="k-scheduler-table">' +
@@ -385,27 +362,19 @@ kendo_module({
             this.datesHeader = $(html);
         },
 
-        _renderTimes: function() {
+        _forTimeRange: function(min, max, action, after) {
             var that = this,
-                options = that.options,
-                majorTickTimeTemplate = options.majorTickTimeTemplate,
-                minorTickTimeTemplate = options.minorTickTimeTemplate,
                 offset = dst(),
-                min = options.startTime,
-                max = options.endTime,
                 ignoreDST = offset < 0,
                 msMin = getMilliseconds(min),
                 msMax = getMilliseconds(max),
-                msInterval = options.minorTick * MS_PER_MINUTE,
-                msMajorInterval = options.majorTick * MS_PER_MINUTE,
-                toString = kendo.toString,
+                msInterval = that.options.minorTick * MS_PER_MINUTE,
+                msMajorInterval = that.options.majorTick * MS_PER_MINUTE,
                 start = new Date(+min),
                 startDay = start.getDate(),
-                template,
                 msStart,
-                format = options.timeFormat,
                 idx = 0, length,
-                html = '<div class="k-scheduler-times"><table class="k-scheduler-table"><colgroup><col /></colgroup><tbody>';
+                html = "";
 
             if (ignoreDST) {
                 length = (MS_PER_DAY + (offset * MS_PER_MINUTE)) / msInterval;
@@ -426,16 +395,7 @@ kendo_module({
                     setTime(start, msInterval, ignoreDST);
                 }
 
-                html += "<tr><th>";
-
-                if (getMilliseconds(start) % msMajorInterval === 0) {
-                   template = majorTickTimeTemplate;
-                } else {
-                   template = minorTickTimeTemplate;
-                }
-
-                html += executeTemplate(template, options, { format: format, date: start });
-                html += "</th></tr>";
+                html += action(start, getMilliseconds(start) % msMajorInterval === 0);
             }
 
             setTime(start, msInterval, ignoreDST);
@@ -451,7 +411,40 @@ kendo_module({
                 }
             }
 
-            html += '<tr class="k-last"><th>' + executeTemplate(majorTickTimeTemplate, options, { format: format, date: start }) + '</th></tr>';
+            if (after) {
+                html += after(start);
+            }
+
+            return html;
+        },
+
+        _times: function() {
+            var that = this,
+                options = that.options,
+                start = options.startTime,
+                end = options.endTime,
+                majorTickTimeTemplate = options.majorTickTimeTemplate,
+                minorTickTimeTemplate = options.minorTickTimeTemplate,
+                template,
+                format = options.timeFormat,
+                html = '<div class="k-scheduler-times"><table class="k-scheduler-table"><colgroup><col /></colgroup><tbody>';
+
+            html += this._forTimeRange(start, end, function(date, majorTick) {
+                var content = "<tr><th>";
+
+                if (majorTick) {
+                   template = majorTickTimeTemplate;
+                } else {
+                   template = minorTickTimeTemplate;
+                }
+
+                content += executeTemplate(template, options, { format: format, date: date });
+                content += "</th></tr>";
+
+                return content;
+            }, function(date) {
+                return '<tr class="k-last"><th>' + executeTemplate(majorTickTimeTemplate, options, { format: format, date: date }) + '</th></tr>';
+            });
 
             html += '</tbody></table></div>';
 
@@ -459,9 +452,44 @@ kendo_module({
             this.element.append(this.times);
         },
 
+        _content: function(dates) {
+            var that = this,
+                options = that.options,
+                start = options.startTime,
+                end = options.endTime,
+                html = '<div class="k-scheduler-content"><table class="k-scheduler-table">';
+
+            html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
+            html += '<tbody>';
+
+            html += this._forTimeRange(start, end, function(date, majorTick) {
+                var content = "",
+                    idx,
+                    length;
+
+                content = '<tr' + (!majorTick ? ' class="k-middle-row"' : "") + '>';
+
+                for (idx = 0, length = dates.length; idx < length; idx++) {
+                    content += "<td" + (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "") + ">";
+                    content += "&nbps;</td>";
+                }
+
+                content += "</tr>";
+                return content;
+            });
+            html += '</tbody>';
+            html += '</table></div>';
+
+            this.content = $(html);
+            this.element.append(this.content);
+        },
+
         _render: function(dates) {
-            this._renderHeader(dates);
-            this._renderTimes();
+            dates = dates || [];
+
+            this._header(dates);
+            this._times();
+            this._content(dates);
         },
 
         render: function(selectedDate) {
