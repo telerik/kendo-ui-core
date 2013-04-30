@@ -1452,11 +1452,10 @@ kendo_module({
                         rule = recurrence.expandEvent(event),
                         start = new Date(period.start),
                         end = new Date(period.end),
-                        interval = 1,
                         count = 1,
-                        weekDays;
+                        weekDays,
+                        visibleWeekDays;
 
-                    //TODO: should I expand in past ???
                     if (!rule || +event.start > +end) {
                         return events;
                     }
@@ -1474,32 +1473,45 @@ kendo_module({
                     }
 
                     while(start) {
-                        for (var idx = 0, length = weekDays.length; idx < length; idx++) {
-                            start = recurrence.nextWeekDay(start, weekDays[idx].day);
+                        visibleWeekDays = filterWeekDays(weekDays, start.getDay());
+                        for (var idx = 0, length = visibleWeekDays.length; idx < length; idx++) {
+                            start = this.limit(start, rule);
+                            start = recurrence.nextWeekDay(start, visibleWeekDays[idx].day);
                             if (+start >= +end) {
                                 return events;
-                            } else {
-                                events.push({
-                                    recurrenceID: event.uid,
-                                    start: this.setDate(start, event.start),
-                                    end: this.setDate(start, event.end)
-                                });
                             }
+
+                            events.push({
+                                recurrenceID: event.uid,
+                                start: this.setDate(start, event.start),
+                                end: this.setDate(start, event.end)
+                            });
 
                             if (rule.count && count === rule.count) {
                                 return events;
                             }
+
                             count++;
                         }
 
                         start = recurrence.nextWeekDay(start, rule.weekStart);
 
-                        interval++;
-                        if (interval === rule.interval && rule.interval > 1) {
-                            start.setDate(start.getDate() + 7);
-                            interval = 1;
+                        if (rule.interval > 1) {
+                            start.setDate(start.getDate() + ((rule.interval - 1) * 7));
                         }
                     }
+                },
+
+                limit: function(date, rule) {
+                    var months = rule.months,
+                        monthNumber = date.getMonth() + 1;
+
+                    if ($.inArray(monthNumber, months) === -1) {
+                        return date;
+                    }
+
+                    date.setFullYear(date.getFullYear(), date.getMonth() + 1, date.getDate());
+                    return this.limit(date, rule);
                 },
 
                 next: function(start, end, rule) {
@@ -1661,6 +1673,32 @@ kendo_module({
             };
         }
         return list;
+    }
+
+    function filterWeekDays(weekDays, currentDay, weekStart) {
+        var idx = 0,
+            length = weekDays.length,
+            result = [],
+            weekDay, day;
+
+        if (currentDay < weekStart) {
+            currentDay += weekStart;
+        }
+
+        for (;idx < length; idx++) {
+            weekDay = weekDays[idx];
+            day = weekDay.day;
+
+            if (day < weekStart) {
+                day += weekStart;
+            }
+
+            if (currentDay <= day) {
+                result.push(weekDay);
+            }
+        }
+
+        return result[0] ? result : weekDays;
     }
 
     kendo.recurrence = recurrence;
