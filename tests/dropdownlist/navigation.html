@@ -337,6 +337,17 @@
                     }
                 });
             });
+
+            test("add focused class on focus when widget is in readonly state", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist.readonly();
+                dropdownlist.wrapper.focusin();
+
+                ok(dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

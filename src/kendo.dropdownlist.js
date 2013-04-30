@@ -271,7 +271,21 @@ kendo_module({
                 disable = options.disable,
                 readonly = options.readonly,
                 wrapper = that.wrapper.off(ns),
-                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
+                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS),
+                focusin = function() {
+                    dropDownWrapper.addClass(FOCUSED);
+                    that._blured = false;
+                },
+                focusout = function() {
+                    if (!that._blured) {
+                        that._triggerCascade();
+                        that._blur();
+                        dropDownWrapper.removeClass(FOCUSED);
+
+                        that._blured = true;
+                        element.blur();
+                    }
+                };
 
             if (!readonly && !disable) {
                 element.removeAttr(DISABLED).removeAttr(READONLY);
@@ -292,20 +306,8 @@ kendo_module({
                     })
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("keypress" + ns, proxy(that._keypress, that))
-                    .on("focusin" + ns, function() {
-                        dropDownWrapper.addClass(FOCUSED);
-                        that._blured = false;
-                    })
-                    .on("focusout" + ns, function() {
-                        if (!that._blured) {
-                            that._triggerCascade();
-                            that._blur();
-                            dropDownWrapper.removeClass(FOCUSED);
-
-                            that._blured = true;
-                            element.blur();
-                        }
-                    });
+                    .on("focusin" + ns, focusin)
+                    .on("focusout" + ns, focusout);
 
             } else {
                 if (disable) {
@@ -317,6 +319,10 @@ kendo_module({
                     dropDownWrapper
                         .addClass(DEFAULT)
                         .removeClass(STATEDISABLED);
+
+                    wrapper
+                        .on("focusin" + ns, focusin)
+                        .on("focusout" + ns, focusout);
                 }
 
                 element.attr(DISABLED, disable)
