@@ -369,6 +369,21 @@
                 equal(multiselect.ul.children().length, 0);
                 ok(!multiselect.popup.visible());
             });
+
+            test("MultiSelect triggers blur event of the hidden element", 1, function() {
+                populateSelect();
+                var multiselect = new MultiSelect(select, {
+                    minLength: 1,
+                    autoBind: false
+                });
+
+                select.blur(function() {
+                    ok(true);
+                });
+
+                multiselect.input.focus().blur();
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

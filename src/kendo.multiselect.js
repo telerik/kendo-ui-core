@@ -243,6 +243,8 @@ kendo_module({
                         if (that._state === FILTER) {
                             that._state = ACCEPT;
                         }
+
+                        that.element.blur();
                     });
 
                 input.removeAttr(DISABLED)
