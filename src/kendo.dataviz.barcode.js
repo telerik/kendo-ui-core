@@ -150,7 +150,7 @@
 			"0": ["U"],
 			"64": ["V"],
 			"96": ["W"],
-			"127": ["T","X","Y","Z"]
+			"127": ["T","X","Y","Z"]            
 		}
 	};
 	
@@ -666,7 +666,9 @@
 	states128.FNC1 = state128.extend({
 		key: "FNC1",
 		startState: "C",
-		dependentStates: ["C"],
+		dependentStates: ["C","B"],
+        startAI: "(",
+        endAI: ")",
 		init: function(encoding, states){
 			this.encoding = encoding;
 			this.states = states;			
@@ -675,12 +677,23 @@
 			this.encoding[this.startState].addStart();
 		},
 		is: function(value, index){
-			return this.states.indexOf(this.key) >= 0 || $.isArray(value);
+			return this.states.indexOf(this.key) >= 0;
 		},		
 		pushState: function(encodingState){
 			var encoding = this.encoding,
-				value = $.isArray(encodingState.value) ? encodingState.value : [encodingState.value],
-				subState;				
+                value = encodingState.value,
+                index = encodingState.index,
+                current = this.getNextAI(value, index),
+                end,
+				subState;         
+                
+            while(index >=0 && index < value.length){
+                end = current.length ? current.length : value.indexOf(startAI, index + current.min);
+                
+                subState = {
+                    value: getNext(value, index, index + end).replace(/[)(]/g,"")
+                };
+            }
 			for(var i = 0; i < value.length;i++){
 				encoding.addPattern(this.START);
 				subState = {
@@ -688,13 +701,26 @@
 					index: 0,
 					state: "C"
 				};
-				encoding.pushData(subState, this.states);
-				encodingState.index++;
-			}
-			
+				encoding.pushData(subState, this.states);                                    
+				encodingState.index+= isArray ? 1 : subState.value.length
+			}		
 		},
+        getNextAI: function(value, index){
+            var start = value.indexOf(startAI, index),
+                end = value.indexOf(endAI, start),
+                id = value.substring(start + 1,end);
+            if(!this.AI[id] && !this.AI[id.substr(id.length - 1)]){
+                throw new Error("Unsupported Application Identifier");
+            }
+            
+            return this.AI[id];
+        },
 		AI: {
-			
+			"00": { length: 18, type: "numeric"},
+            "00": { length: 18, type: "numeric"},
+            "329": {length: 6 },
+            "12": {length: 6},
+            "421": { min: 4, max: 12, type: "alphanumeric"}            
 		},
 		START: 102
 	});
@@ -711,7 +737,7 @@
 			if(!$.isArray(this.states)){
 				this.states = [this.states];
 			}
-			
+			debugger;
 			for(var i = 0; i < this.states.length; i++){
 				if(states128[this.states[i]].prototype.dependentStates){
 					var dependentState,
@@ -719,7 +745,7 @@
 					for(var j = 0; j < dependentStates.length; j++){
 						dependentState = dependentStates[j];
 						if(this.states.indexOf(dependentState) < 0){
-							this.sates.push(dependentState);
+							this.states.push(dependentState);
 						}
 					}
 				}
@@ -753,8 +779,7 @@
 			}	
 			
 			encodingState.state = 
-				encodingState.previousState = $.isArray(this.value) ? "FNC1" :
-				this.getNextState(encodingState, this.states);	
+				encodingState.previousState = this.getNextState(encodingState, this.states);	
 			
 			this.addStart(encodingState);
 			
@@ -804,7 +829,7 @@
 		},
 		getNextState: function(encodingState, states){				
 			for(var i = 0; i < states.length; i++){
-				if(this[states[i]].is(encodingState.value,encodingState.index)){
+				if(this[states[i]].is(encodingState.value, encodingState.index)){
 					return states[i];
 				}
 			}
