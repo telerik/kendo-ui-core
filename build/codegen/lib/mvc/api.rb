@@ -62,10 +62,6 @@ METHOD = ERB.new(%{
 <% if owner.name.include?('EventBuilder') %>
 For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
 <% end %>
-<% examples.each do |example| %>
-#### Example (<%= example.lang %>)
-<%= example.to_markdown %>
-<% end %>
 <% if !parameters.empty? %>
 #### Parameters
 <%= parameters.each_with_index.map { |parameter, index| parameter.to_markdown(parameterTypes[index])}.join %>
@@ -73,6 +69,10 @@ For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owne
 <% if returns %>
 #### Returns
 <%= returns %>
+<% end %>
+<% examples.each do |example| %>
+#### Example (<%= example.lang %>)
+<%= example.to_markdown %>
 <% end %>
 })
     class Method < Struct.new(:name, :summary, :parameters, :examples, :returns, :owner)
@@ -161,9 +161,10 @@ PARAMETER = ERB.new(%{
 
                 if ch == ')'
                     indent -= 1
-                    if result =~ /\n +$/
-                        result = result.chomp('    ')
-                    end
+                end
+
+                if result =~ /\n +$/ && (ch == ')' || ch == '}' || ch == '{' || source[idx-1..idx+5] == '</text>')
+                    result = result.chomp('    ')
                 end
 
                 result += ch
