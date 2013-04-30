@@ -94,6 +94,78 @@
                 equal(view.datesHeader.find("th").text(), "1/26/2013");
             });
 
+            test("title is read from the options", function() {
+                var view = setup({ title: "the title" });
+
+                equal(view.title, "the title");
+            });
+
+            test("render time slots", function() {
+                var view = setup({
+                    majorTick: 120,
+                    minorTick: 60
+                });
+
+                view.render();
+
+                equal(view.times.find("th").length, 25);
+                equal(view.times.find("th:first").text(), "00:00");
+                equal(view.times.find("th:last").text(), "00:00");
+            });
+
+            test("time is show in major time slots", function() {
+                var view = setup({
+                        startTime: new Date(2000, 0, 1, 10, 0, 0),
+                        endTime: new Date(2000, 0, 1, 11, 0, 0),
+                        minorTick: 15,
+                        majorTick: 30
+                    });
+
+                view.render();
+                var cells = view.times.find("th");
+
+                equal(cells.first().text(), "10:00");
+                equal(cells.eq(1).html(), "&nbsp;");
+                equal(cells.eq(2).text(), "10:30");
+                equal(cells.eq(3).html(), "&nbsp;");
+                equal(cells.eq(4).text(), "11:00");
+            });
+
+            test("time slots does not overflow endTime", function() {
+                var view = setup({
+                        startTime: new Date(2000, 0, 1, 0, 0, 0),
+                        endTime: new Date(2000, 0, 1, 23, 59, 0),
+                        minorTick: 15
+                    });
+
+                view.render();
+
+                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "22:00");
+                equal(view.times.find("tr.k-last").text(), "23:59");
+                equal(view.times.find("th").length, 97);
+            });
+
+            test("start time is later than end time", function() {
+                var view = setup({
+                        startTime: new Date(2000, 0, 1, 13, 0, 0),
+                        endTime: new Date(2000, 0, 1, 10, 0, 0),
+                    });
+
+                view.render();
+
+                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "08:00");
+                equal(view.times.find("tr.k-last").text(), "10:00");
+                equal(view.times.find("th").length, 22);
+            });
+
+            test("last time slot has k-last class applied", function() {
+                 var view = setup({ });
+
+                view.render();
+
+                ok(view.times.find("tr:last").hasClass("k-last"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

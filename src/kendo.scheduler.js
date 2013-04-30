@@ -11,12 +11,15 @@ kendo_module({
         ui = kendo.ui,
         Class = kendo.Class,
         Widget = ui.Widget,
+        FUNCTION = "function",
+        STRING = "string",
         Popup = ui.Popup,
         Calendar = ui.Calendar,
         isPlainObject = $.isPlainObject,
+        MS_PER_MINUTE = 60000,
+        MS_PER_DAY = 86400000,
         extend = $.extend,
         NS = ".kendoScheduler",
-        STRING = "string",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -37,6 +40,52 @@ kendo_module({
     }
 
     TODAY = getDate(new Date());
+
+    function setTime(date, time, ignoreDST) {
+        var offset = date.getTimezoneOffset(),
+            offsetDiff;
+
+        date.setTime(date.getTime() + time);
+
+        if (!ignoreDST) {
+            offsetDiff = date.getTimezoneOffset() - offset;
+            date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
+        }
+    }
+
+    function dst() {
+        var today = new Date(),
+            midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
+            noon = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0, 0);
+
+        return -1 * (midnight.getTimezoneOffset() - noon.getTimezoneOffset());
+    }
+
+    function getMilliseconds(date) {
+        return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
+    }
+
+    function isInRange(value, min, max) {
+        var msMin = getMilliseconds(min),
+            msMax = getMilliseconds(max),
+            msValue;
+
+        if (!value || msMin == msMax) {
+            return true;
+        }
+
+        msValue = getMilliseconds(value);
+
+        if (msMin > msValue) {
+            msValue += MS_PER_DAY;
+        }
+
+        if (msMax < msMin) {
+            msMax += MS_PER_DAY;
+        }
+
+        return msValue >= msMin && msValue <= msMax;
+    }
 
     var defaultViews = {
         day: {
@@ -263,16 +312,39 @@ kendo_module({
         }
     });
 
+    function executeTemplate(template, options, dataItem) {
+        var settings = extend({}, kendo.Template, options.templateSettings),
+            type = typeof(template),
+            text = "";
+
+        if (type === FUNCTION) {
+            text = kendo.template(template, settings)(dataItem || {});
+        } else if (type === STRING) {
+            text = template;
+        }
+        return text;
+    }
+
     var MultiDayView = Widget.extend({
         init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+
+            that.title = that.options.title || that.options.name;
         },
 
         options: {
             name: "MultiDayView",
-            headerDateFormat: "ddd M/dd"
+            headerDateFormat: "ddd M/dd",
+            timeFormat: "HH:mm",
+            title: "",
+            startTime: TODAY,
+            endTime: TODAY,
+            minorTick: 60,
+            majorTick: 120,
+            majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
+            minorTickTimeTemplate: "&nbsp;"
         },
 
         _renderHeader: function(dates) {
@@ -303,7 +375,9 @@ kendo_module({
             html += '<tbody><tr>';
 
             for (idx = 0, length = dates.length; idx < length; idx++) {
-                html += '<th ' + (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? 'class="k-today"' : "") + '>' + kendo.toString(dates[idx], this.options.headerDateFormat) + '</th>';
+                html += '<th';
+                html += (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
+                html += '>' + kendo.toString(dates[idx], this.options.headerDateFormat) + '</th>';
             }
 
             html += '</tr></tbody></table></div></div>';
@@ -311,8 +385,83 @@ kendo_module({
             this.datesHeader = $(html);
         },
 
+        _renderTimes: function() {
+            var that = this,
+                options = that.options,
+                majorTickTimeTemplate = options.majorTickTimeTemplate,
+                minorTickTimeTemplate = options.minorTickTimeTemplate,
+                offset = dst(),
+                min = options.startTime,
+                max = options.endTime,
+                ignoreDST = offset < 0,
+                msMin = getMilliseconds(min),
+                msMax = getMilliseconds(max),
+                msInterval = options.minorTick * MS_PER_MINUTE,
+                msMajorInterval = options.majorTick * MS_PER_MINUTE,
+                toString = kendo.toString,
+                start = new Date(+min),
+                startDay = start.getDate(),
+                template,
+                msStart,
+                format = options.timeFormat,
+                idx = 0, length,
+                html = '<div class="k-scheduler-times"><table class="k-scheduler-table"><colgroup><col /></colgroup><tbody>';
+
+            if (ignoreDST) {
+                length = (MS_PER_DAY + (offset * MS_PER_MINUTE)) / msInterval;
+            } else {
+                length = MS_PER_DAY / msInterval;
+            }
+
+            if (msMin != msMax) {
+                if (msMin > msMax) {
+                    msMax += MS_PER_DAY;
+                }
+
+                length = ((msMax - msMin) / msInterval);
+            }
+
+            for (; idx < length; idx++) {
+                if (idx) {
+                    setTime(start, msInterval, ignoreDST);
+                }
+
+                html += "<tr><th>";
+
+                if (getMilliseconds(start) % msMajorInterval === 0) {
+                   template = majorTickTimeTemplate;
+                } else {
+                   template = minorTickTimeTemplate;
+                }
+
+                html += executeTemplate(template, options, { format: format, date: start });
+                html += "</th></tr>";
+            }
+
+            setTime(start, msInterval, ignoreDST);
+
+            if (msMax) {
+                msStart = getMilliseconds(start);
+                if (startDay < start.getDate()) {
+                    msStart += MS_PER_DAY;
+                }
+
+                if (msStart > msMax) {
+                    start = new Date(+max);
+                }
+            }
+
+            html += '<tr class="k-last"><th>' + executeTemplate(majorTickTimeTemplate, options, { format: format, date: start }) + '</th></tr>';
+
+            html += '</tbody></table></div>';
+
+            this.times = $(html);
+            this.element.append(this.times);
+        },
+
         _render: function(dates) {
             this._renderHeader(dates);
+            this._renderTimes();
         },
 
         render: function(selectedDate) {
