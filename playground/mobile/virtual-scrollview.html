@@ -70,7 +70,7 @@
 
     <script>
         var app,
-            pageView,
+            virtualScrollView,
             PAGE_SIZE = 10,
             imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
             imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
@@ -109,13 +109,13 @@
         });
 
         function onInit(e) {
-            pageView = $("#virtual").kendoMobilePageView({
+            virtualScrollView = $("#virtual").kendoMobileVirtualScrollView({
                 contentHeight: e.view.content.height(),
                 dataSource: ds,
                 batchSize: 6,
                 template: kendo.template($("#item-template").html()),
                 emptyTemplate: kendo.template($("#empty-template").html())
-            }).data("kendoMobilePageView");
+            }).data("kendoMobileVirtualScrollView");
         }
 
         function buildUrl(url) {
@@ -147,7 +147,7 @@
 
             return data;
         }
-
+/*
         (function($, undefined) {
             var kendo = window.kendo,
                 mobile = kendo.mobile,
@@ -480,6 +480,7 @@
             })
 
         })(window.kendo.jQuery);
+        */
     </script>
 </body>
 </html>
