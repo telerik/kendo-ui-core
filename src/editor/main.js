@@ -206,7 +206,7 @@ kendo_module({
                     "<meta charset='utf-8' />" +
                     "<style>" +
                         "html,body{padding:0;margin:0;background:#fff;height:100%;min-height:100%;}" +
-                        "body{font: 12px/1.5 Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
+                        "body{font-size:13px;font-family:Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
                         "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
                         rtlStyle +
                         "}" +
