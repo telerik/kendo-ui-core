@@ -731,8 +731,7 @@ kendo_module({
                 item;
 
             while (list.bottom < targetHeight) {
-                item = itemConstructor();
-                item.content(list.content(list.offset + items.length));
+                item = itemConstructor(list.content(list.offset + items.length));
                 item.below(prevItem);
                 prevItem = item;
                 items.push(item);
@@ -763,7 +762,7 @@ kendo_module({
                 list.offset --;
                 item = items.pop();
 
-                item.content(list.content(list.offset));
+                item.update(list.content(list.offset));
                 item.above(items[0]);
                 items.unshift(item);
                 list.top = items[0].top;
@@ -773,7 +772,7 @@ kendo_module({
                 list.offset ++;
                 item = items.shift();
 
-                item.content(list.content(list.offset + itemCount));
+                item.update(list.content(list.offset + itemCount));
                 item.below(items[items.length - 1]);
                 items.push(item);
                 list.bottom = items[items.length - 1].bottom;

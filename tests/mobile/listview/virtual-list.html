@@ -43,12 +43,14 @@
             });
 
             var MockCell = kendo.Class.extend({
-                init: function() {
+                init: function(content) {
                     this.top = 0;
                     this.height = CellHeight;
+                    this.theContent = content;
+                    this.bottom = this.height + this.top;
                 },
 
-                content: function(content) {
+                update: function(content) {
                     this.theContent = content;
                     this.bottom = this.height + this.top;
                 },
@@ -78,7 +80,7 @@
                 setup: function() {
                     buffer = new MockBuffer();
                     list = new VirtualList({
-                        item: function() { return new MockCell(); },
+                        item: function(content) { return new MockCell(content); },
                         height: function() { return ViewPortHeight; },
                         buffer: buffer
                     });
