@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileListView Tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.router.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.listview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ListView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var CellHeight = 20;
+            var ViewPortHeight = 200;
+            var VirtualList = kendo.mobile.ui.VirtualList;
+
+            var MockBuffer = kendo.Observable.extend({
+                offset: 0,
+                at: function(i) {
+                    return i;
+                }
+            });
+
+            var MockCell = kendo.Class.extend({
+                init: function() {
+                    this.top = 0;
+                    this.height = CellHeight;
+                },
+
+                content: function(content) {
+                    this.theContent = content;
+                    this.bottom = this.height + this.top;
+                },
+
+                above: function(cell) {
+                    if (cell) {
+                        this.top = cell.top - this.height;
+                        this.bottom = cell.top;
+                    }
+                },
+
+                below: function(cell) {
+                    if (cell) {
+                        this.top = cell.bottom;
+                        this.bottom = this.height + this.top;
+                    }
+                },
+
+                destroy: function() {
+                    // kendo.destroy()
+                }
+            });
+
+            var list, buffer;
+
+            module('Virtual list', {
+                setup: function() {
+                    buffer = new MockBuffer();
+                    list = new VirtualList({
+                        item: function() { return new MockCell(); },
+                        height: function() { return ViewPortHeight; },
+                        buffer: buffer
+                    });
+
+                    buffer.trigger("reset");
+                },
+
+                teardown: function()
+                {
+                    CellHeight = 20;
+                    ViewPortHeight = 200;
+                }
+            });
+
+            test('initially builds a list 3 times the given height', 2, function() {
+                equal(list.items.length, 30);
+                equal(list.bottom, 600);
+            });
+
+            test('update at a given offset updates cells as expected', 2, function() {
+                list.update(450); // bottom point of the viewport will be 650
+                equal(list.items[0].theContent, 3);
+                equal(list.items[list.items.length - 1].theContent, 33);
+            });
+
+            test('update at a given offset triggers resize', 2, function() {
+                list.bind('resize', function(e) {
+                    equal(e.top, 60);
+                    equal(e.bottom, 660);
+                });
+
+                list.update(450); // bottom point of the viewport will be 650
+            });
+
+            test('snapping back re-orders the items', 2, function() {
+                list.update(450); // bottom point of the viewport will be 650
+
+                list.bind('resize', function(e) {
+                    equal(e.top, 0);
+                    equal(e.bottom, 600);
+                });
+
+                list.update(0);
+            });
+
+            test('update with a center centers the list', 2, function() {
+                list.bind('resize', function(e) {
+                    equal(e.top, 160);
+                    equal(e.bottom, 760);
+                });
+
+                list.update(350, true); // bottom point of the viewport will be 550
+            });
+
+            test('redrawing re-draws given the new dimensions', 2, function() {
+                ViewPortHeight = 300;
+                CellHeight = 40;
+
+                list.refresh();
+
+                equal(list.items.length, 23);
+                equal(list.bottom, 920);
+            });
+
+            test('resetting the buffer redraws list', 1, function() {
+                buffer.offset = 10;
+                buffer.trigger('reset');
+                equal(list.items[0].theContent, 10);
+            });
+        </script>
+    </body>
+</html>
+

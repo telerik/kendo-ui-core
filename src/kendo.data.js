@@ -3544,7 +3544,7 @@ kendo_module({
                     buffer.offset = dataSource.skip();
                     buffer.pageSize = dataSource.pageSize(),
                     buffer._recalculate();
-                    buffer.trigger("reset");
+                    buffer.trigger("reset", { offset: buffer.offset });
                 }
 
                 buffer.trigger("resize", { limit: dataSource.lastRange().end });

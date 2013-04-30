@@ -695,5 +695,104 @@ kendo_module({
         },
     });
 
+    var VirtualList = kendo.Observable.extend({
+        init: function(options) {
+            var list = this;
+
+            kendo.Observable.fn.init.call(list);
+
+            list.buffer = options.buffer;
+            list.height = options.height;
+            list.item = options.item;
+            list.items = [];
+
+            list.buffer.bind("reset", function() {
+                list.refresh();
+            });
+        },
+
+        refresh: function() {
+            var list = this,
+                buffer = list.buffer;
+                items = list.items;
+
+            while(items.length) {
+                items.pop().destroy();
+            }
+
+            list.bottom = 0;
+            list._height = list.height();
+            list.offset = buffer.offset;
+            list.top = 0;
+
+            var targetHeight = list._height * 3,
+                itemConstructor = list.item,
+                prevItem,
+                item;
+
+            while (list.bottom < targetHeight) {
+                item = itemConstructor();
+                item.content(list.content(list.offset + items.length));
+                item.below(prevItem);
+                prevItem = item;
+                items.push(item);
+                list.bottom = item.bottom;
+            }
+        },
+
+        update: function(top, center) {
+            var list = this,
+                items = list.items,
+                initialOffset = list.offset,
+                targetBottom = top + list._height,
+                targetTop = top,
+                itemCount = items.length,
+                item,
+                bottomItem;
+
+            if (center) {
+                targetBottom += list._height;
+                targetTop -= list._height;
+            }
+
+            while (list.top > targetTop) {
+                if (list.offset === 0) {
+                    break;
+                }
+
+                list.offset --;
+                item = items.pop();
+
+                item.content(list.content(list.offset));
+                item.above(items[0]);
+                items.unshift(item);
+                list.top = items[0].top;
+            }
+
+            while (list.bottom < targetBottom) {
+                list.offset ++;
+                item = items.shift();
+
+                item.content(list.content(list.offset + itemCount));
+                item.below(items[items.length - 1]);
+                items.push(item);
+                list.bottom = items[items.length - 1].bottom;
+            }
+
+
+            if (initialOffset != list.offset) {
+                list.top = items[0].top;
+                list.bottom = items[items.length - 1].bottom;
+
+                list.trigger("resize", { top: list.top, bottom: list.bottom });
+            }
+        },
+
+        content: function(index) {
+            return this.buffer.at(index);
+        }
+    });
+
+    kendo.mobile.ui.VirtualList = VirtualList;
     ui.plugin(ListView);
 })(window.kendo.jQuery);
