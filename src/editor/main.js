@@ -192,6 +192,16 @@ kendo_module({
             return this.element.children().find("> *, select");
         },
 
+        toolById: function(name) {
+            var id, tools = this.options.tools;
+
+            for (id in tools) {
+                if (id.toLowerCase() == name) {
+                    return tools[id];
+                }
+            }
+        },
+
         bindTo: function(editor) {
             var that = this;
 
@@ -1016,9 +1026,9 @@ kendo_module({
 
         exec: function (name, params) {
             var that = this,
-                range, id,
-                tool, pendingTool,
-                tools = that.toolbar.options.tools;
+                range,
+                tool, command = null,
+                pendingTool;
 
             name = name.toLowerCase();
 
@@ -1029,13 +1039,7 @@ kendo_module({
                 that.restoreSelection();
             }
 
-            // exec tool
-            for (id in tools) {
-                if (id.toLowerCase() == name) {
-                    tool = tools[id];
-                    break;
-                }
-            }
+            tool = that.toolbar.toolById(name);
 
             if (tool) {
                 range = that.getRange();
@@ -1049,7 +1053,9 @@ kendo_module({
                     return;
                 }
 
-                var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
+                if (tool.command) {
+                    command = tool.command(extend({ range: range }, params));
+                }
 
                 that.trigger("execute", { name: name, command: command });
 
