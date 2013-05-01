@@ -1427,6 +1427,11 @@ kendo_module({
                     }
 
                     while (start) {
+                        start = this.limit(start, rule);
+                        if (+start > +end) {
+                            break;
+                        }
+
                         events.push({
                             recurrenceID: event.uid,
                             start: this.setDate(start, event.start),
@@ -1448,6 +1453,8 @@ kendo_module({
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
 
+                    start = this.limit(start, rule);
+
                     if (+start > +end) {
                         start = null;
                     }
@@ -1455,7 +1462,36 @@ kendo_module({
                 },
 
                 limit: function(date, rule) {
-                    //
+                    var weekDays = rule.weekDays,
+                        monthDays = rule.monthDays,
+                        months = rule.months,
+                        weekDay = date.getDay(),
+                        day = date.getDate(),
+                        month = date.getMonth() + 1;
+
+                    if (months && $.inArray(month, months) !== -1) {
+                        date.setFullYear(date.getFullYear(), month, 1);
+                        this.limit(date, rule);
+                    }
+
+                    if (monthDays && $.inArray(day, monthDays) !== -1) {
+                        date.setDate(day + 1);
+                        this.limit(date, rule);
+                    }
+
+
+                    if (weekDays) {
+                        weekDays = $.grep(weekDays, function(item) {
+                            return item.day === weekDay;
+                        });
+
+                        if (weekDays[0]) {
+                            date.setDate(day + 1);
+                            this.limit(date, rule);
+                        }
+                    }
+
+                    return date;
                 },
 
                 setDate: function(currentDate, eventDate) {
