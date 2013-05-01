@@ -644,7 +644,7 @@ kendo_module({
                 editor.body = editor.element[0];
             }
 
-            $(editor.document)
+            $(editor.body)
                 .on("keydown" + NS, function (e) {
                     var range;
 

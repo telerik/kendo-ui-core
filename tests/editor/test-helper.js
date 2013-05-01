@@ -21,3 +21,16 @@ function createRangeFromText(editor, html) {
     marker.remove(range);
     return range;
 }
+
+function withMock(context, method, mock, callback) {
+    var originalMethod = context[method];
+
+    try {
+        context[method] = mock;
+
+        callback();
+    } finally {
+        context[method] = originalMethod;
+    }
+}
+

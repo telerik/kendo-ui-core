@@ -47,7 +47,7 @@
                 e.type = type;
 
                 var editor = getEditor();
-                $(editor.document).trigger(e);
+                $(editor.body).trigger(e);
             }
 
             function keydown() {
@@ -111,7 +111,7 @@
             });
 
             test('mouseup raises selection change', function() {
-                $(getEditor().document).mouseup();
+                $(editor.body).mouseup();
                 ok(changeRaised);
             });
 
