@@ -39,7 +39,7 @@ var Command = Class.extend({
 
     undo: function () {
         var point = this.restorePoint;
-        point.body.innerHTML = point.html;
+        point.restoreHtml();
         selectRange(point.toRange());
     },
 

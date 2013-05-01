@@ -10,12 +10,16 @@
 
     <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
+    <div id="inline" contentEditable></div>
+
     <script>
 
         var RestorePoint,
             htmlTagIsFirstChild;
 
         $("#Editor1").kendoEditor();
+
+        $("#inline").kendoEditor();
 
         function crossBrowserOffset(offset) {
             if (htmlTagIsFirstChild)
@@ -31,6 +35,7 @@
             setup: function() {
                 RestorePoint = kendo.ui.editor.RestorePoint;
                 editor = getEditor();
+                inlineEditor = getEditor("#inline");
 
                 htmlTagIsFirstChild = editor.document.firstChild == editor.body.parentNode;
             }
@@ -92,6 +97,21 @@
             equal(restorePoint.startContainer.toString(), crossBrowserOffset('0,0,1,0'));
             equal(restorePoint.startOffset, 1);
             equal(restorePoint.endContainer.toString(), crossBrowserOffset('0,1,1,0'));
+            equal(restorePoint.endOffset, 2);
+        });
+
+        test("restorePoint initializes with specific root node", function() {
+            inlineEditor.value('<p>foo</p><p>bar</p>');
+
+            var range = inlineEditor.createRange();
+            range.setStart(inlineEditor.body.firstChild.firstChild, 1);
+            range.setEnd(inlineEditor.body.lastChild.firstChild, 2);
+
+            var restorePoint = new RestorePoint(range, inlineEditor.body);
+
+            equal(restorePoint.startContainer.toString(), '0,0');
+            equal(restorePoint.startOffset, 1);
+            equal(restorePoint.endContainer.toString(), '0,1');
             equal(restorePoint.endOffset, 2);
         });
 
