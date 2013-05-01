@@ -177,7 +177,7 @@
                 equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectedDate().getTime());
             });
 
-            test("view buttons are added to the tooltip", function() {
+            test("view buttons are added to the toolbar", function() {
                 var scheduler = new Scheduler(container, {
                     views: ["day"]
                 });
@@ -202,31 +202,6 @@
                 ok(scheduler.toolbar.find(".k-view-week").length);
             });
 
-            test("custom view are rendered", function() {
-                var scheduler = new Scheduler(container, {
-                    views: [{
-                        name: "baz",
-                        title: "bar baz",
-                        render: function() { }
-                    }]
-                });
-
-                ok(scheduler.toolbar.find(".k-view-baz").hasClass("k-state-selected"));
-                equal(scheduler.toolbar.find(".k-view-baz").text(), "bar baz");
-                ok(scheduler.views["baz"]);
-            });
-
-            test("custom view name is used as title if not set", function() {
-                var scheduler = new Scheduler(container, {
-                    views: [{
-                        name: "baz",
-                        render: function() { }
-                    }]
-                });
-
-                equal(scheduler.toolbar.find(".k-view-baz").text(), "baz");
-            });
-
             test("default views custom options are merged", function() {
                 var scheduler = new Scheduler(container, {
                     views: [{
@@ -243,18 +218,6 @@
                     var scheduler = new Scheduler(container, {
                         views: [ "NoExistingView" ]
                     })
-                });
-            });
-
-            test("render method of selected view is called", 1, function() {
-                var scheduler = new Scheduler(container, {
-                    views: [{
-                        name: "day",
-                        title: "My Custom Day View Title",
-                        render: function() {
-                            ok(true);
-                        }
-                    }]
                 });
             });
 
@@ -275,19 +238,48 @@
                 equal(scheduler.toolbar.find(".k-state-selected").length, 1);
             });
 
-/*
-             test("correct type is instantiated for default views", function() {
-                var scheduler = new Scheduler(container, { });
-
-            });
-            test("view options are passed to the view instance", function() {
+            test("default view is created its string name", function() {
                 var scheduler = new Scheduler(container, {
-                    views: [
-
-                    ]
+                    views: [ "day" ]
                 });
+
+                ok(scheduler.selectView() instanceof kendo.ui.MultiDayView);
+                equal(scheduler.selectView().element[0], scheduler.wrapper[0]);
             });
-*/
+
+            test("default view is created with provided options", function() {
+                var scheduler = new Scheduler(container, {
+                    views: [ { title: "foo", name: "day" }]
+                });
+
+                ok(scheduler.selectView() instanceof kendo.ui.MultiDayView);
+                equal(scheduler.selectView().title, "foo");
+            });
+
+            test("custom view is instantiated", function() {
+                var MyCustomView = kendo.Class.extend({
+                    name: "foo",
+                    render: $.noop
+                });
+
+                var scheduler = new Scheduler(container, {
+                    views: [MyCustomView]
+                });
+
+                ok(scheduler.selectView() instanceof MyCustomView);
+            });
+
+            test("selected date is passed to view render method", 1, function() {
+                var MyCustomView = kendo.Class.extend({
+                        name: "foo",
+                        render: function(selectedDate) {
+                            ok(selectedDate);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView]
+                    });
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

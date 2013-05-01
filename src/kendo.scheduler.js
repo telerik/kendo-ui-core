@@ -65,19 +65,6 @@ kendo_module({
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
-    var defaultViews = {
-        day: {
-            title: "Day",
-            name: "day",
-            render: $.noop
-        },
-        week: {
-            title: "Week",
-            name: "week",
-            render: $.noop
-        }
-    }
-
     var Scheduler = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -90,9 +77,9 @@ kendo_module({
 
             that._initModel();
 
-            that._views();
-
             that._wrapper();
+
+            that._views();
 
             that._toolbar();
 
@@ -152,7 +139,7 @@ kendo_module({
         },
 
         _renderView: function(name) {
-            this.views[name].render();
+            this.views[name].render(this.selectedDate());
         },
 
         _views: function() {
@@ -160,6 +147,7 @@ kendo_module({
                 view,
                 defaultView,
                 selected,
+                name,
                 idx,
                 length;
 
@@ -168,15 +156,14 @@ kendo_module({
             for (idx = 0, length = views.length; idx < length; idx++) {
                 view = views[idx];
 
-                if (isPlainObject(view) && view.name) {
-                   defaultView = defaultViews[view.name];
-                   if (defaultView) {
-                       view = extend({}, defaultView, view);
-                   }
+                name = isPlainObject(view) && view.name ? view.name : view;
 
-                   view.title = view.title || view.name;
+                defaultView = defaultViews[name];
+
+                if (defaultView) {
+                    view = new defaultView(this.wrapper, view);
                 } else {
-                   view = defaultViews[view];
+                    view = new view(this.wrapper);
                 }
 
                 if (view) {
@@ -467,11 +454,11 @@ kendo_module({
                     idx,
                     length;
 
-                content = '<tr' + (!majorTick ? ' class="k-middle-row"' : "") + '>';
+                content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
 
                 for (idx = 0, length = dates.length; idx < length; idx++) {
                     content += "<td" + (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "") + ">";
-                    content += "&nbps;</td>";
+                    content += "&nbsp;</td>";
                 }
 
                 content += "</tr>";
@@ -493,13 +480,28 @@ kendo_module({
         },
 
         render: function(selectedDate) {
-            this._render([]);
+            this._render([selectedDate]);
         }
     });
 
     extend(true, kendo.ui, {
        MultiDayView: MultiDayView
     });
+
+    var defaultViews = {
+        day: MultiDayView.extend({
+            options: {
+                title: "Day"
+            },
+            name: "day"
+        }),
+        week: MultiDayView.extend({
+            options: {
+                title: "Week"
+            },
+            name: "week"
+        })
+    }
 
     var RRule = Class.extend({
         init: function(options) {
