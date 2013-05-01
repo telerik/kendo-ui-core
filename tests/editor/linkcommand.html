@@ -397,6 +397,16 @@
                 equal($(".k-window").length, 0);
             });
 
+            test("executing command over formatted nodes", function() {
+                var range = createRangeFromText(editor, "|foo <em>bar</em>|");
+                execLinkCommandOnRange(range);
+
+                $("#k-editor-link-url").val("baz");
+                $(".k-dialog-insert").click();
+
+                equal(editor.value(), '<a href="baz">foo </a><em><a href="baz">bar</a></em>');
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

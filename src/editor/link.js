@@ -149,7 +149,7 @@ var LinkCommand = Command.extend({
                 }
 
                 text = $("#k-editor-link-text", element).val();
-                if (text !== initialText) {
+                if (text !== initialText && (text || nodes.length === 0)) {
                     that.attributes.innerHTML = text || href;
                 }
 
