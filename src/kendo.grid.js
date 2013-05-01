@@ -106,7 +106,6 @@ kendo_module({
         STRING = "string",
         DELETECONFIRM = "Are you sure you want to delete this record?",
         formatRegExp = /(\}|\#)/ig,
-        indicatorWidth = 3,
         templateHashRegExp = /#/ig,
         whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
         nonDataCellsRegExp = new RegExp("(^|" + whitespaceRegExp + ")" + "(k-group-cell|k-hierarchy-cell)" + "(" + whitespaceRegExp + "|$)"),
@@ -672,7 +671,8 @@ kendo_module({
             resizable: false,
             reorderable: false,
             columnMenu: false,
-            detailTemplate: null
+            detailTemplate: null,
+            columnResizeHandleWidth: 3
         },
 
         destroy: function() {
@@ -816,6 +816,7 @@ kendo_module({
             var that = this,
                 scrollable = that.options.scrollable,
                 resizeHandle = that.resizeHandle,
+                indicatorWidth = that.options.columnResizeHandleWidth,
                 left;
 
             that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
