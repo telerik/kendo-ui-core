@@ -473,7 +473,7 @@ kendo_module({
                 return;
             }
 
-            if (!$.inArray(supportedElements, type)) {
+            if ($.inArray(type, supportedElements) == -1) {
                 return;
             }
 
