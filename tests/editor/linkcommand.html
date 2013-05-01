@@ -29,50 +29,50 @@
                     editor = getEditor();
                 },
                 teardown: function() {
-                    $('.k-window,.k-overlay').remove()
+                    $(".k-window,.k-overlay").remove()
                 }
             });
 
-            test('exec creates window', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("exec creates window", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                equal($('.k-window').length, 1)
+                equal($(".k-window").length, 1)
             });
 
-            test('clicking close closes the window', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("clicking close closes the window", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('.k-dialog-close').click();
-                equal($('.k-window').length, 0)
+                $(".k-dialog-close").click();
+                equal($(".k-window").length, 0)
             });
 
-            test('clicking insert closes the window', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("clicking insert closes the window", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('.k-dialog-insert').click();
-                equal($('.k-window').length, 0)
+                $(".k-dialog-insert").click();
+                equal($(".k-window").length, 0)
             });
 
-            test('text is filled when only text is selected', function() {
-                var range = createRangeFromText(editor, '|foo bar|');
+            test("text is filled when only text is selected", function() {
+                var range = createRangeFromText(editor, "|foo bar|");
                 execLinkCommandOnRange(range);
 
-                equal($('#k-editor-link-text').val(), 'foo bar')
+                equal($("#k-editor-link-text").val(), "foo bar")
             });
 
-            test('text is removed if more than one text node is selected', function() {
-                var range = createRangeFromText(editor, '|foo <strong>bar</strong>|');
+            test("text is removed if more than one text node is selected", function() {
+                var range = createRangeFromText(editor, "|foo <strong>bar</strong>|");
                 execLinkCommandOnRange(range);
 
-                equal($('label[for=k-editor-link-text]').length, 0)
-                equal($('#k-editor-link-text').length, 0)
+                equal($("label[for=k-editor-link-text]").length, 0)
+                equal($("#k-editor-link-text").length, 0)
             });
 
-            test('collapsed range is expanded', function() {
-                editor.value('foo');
+            test("collapsed range is expanded", function() {
+                editor.value("foo");
                 var range = editor.createRange();
 
                 range.setStart(editor.body.firstChild, 1);
@@ -80,303 +80,262 @@
 
                 execLinkCommandOnRange(range);
 
-                equal($('#k-editor-link-text').val(), 'foo')
+                equal($("#k-editor-link-text").val(), "foo")
             });
 
-            test('clicking insert inserts link if url is set', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("clicking insert inserts link if url is set", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url').val('foo');
-                $('.k-dialog-insert').click();
+                $("#k-editor-link-url").val("foo");
+                $(".k-dialog-insert").click();
                 equal(editor.value(), '<a href="foo">foo</a>')
             });
 
-            test('clicking insert does not inserts link if url is not set', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("clicking insert does not inserts link if url is not set", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url').val('');
-                $('.k-dialog-insert').click();
-                equal(editor.value(), 'foo')
+                $("#k-editor-link-url").val("");
+                $(".k-dialog-insert").click();
+                equal(editor.value(), "foo")
             });
 
-            test('clicking insert updates existing url', function() {
+            test("clicking insert updates existing url", function() {
                 var range = createRangeFromText(editor, '<a href="bar">|foo|</a>');
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url').val('foo');
-                $('.k-dialog-insert').click();
+                $("#k-editor-link-url").val("foo");
+                $(".k-dialog-insert").click();
                 equal(editor.value(), '<a href="foo">foo</a>')
             });
 
-            test('url text is set', function() {
+            test("url text is set", function() {
                 var range = createRangeFromText(editor, '<a href="bar">|foo|</a>');
                 execLinkCommandOnRange(range);
 
                 equal($('#k-editor-link-url').val(), 'bar');
             });
 
-            test('hitting enter in url inserts link', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            function evt(type, keyCode) {
+                var e = new $.Event();
+                e.type = type;
+                e.keyCode = keyCode;
+                return e;
+            }
+
+            test("hitting enter in url inserts link", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                var e = new $.Event();
-                e.type = 'keydown';
-                e.keyCode = 13;
-
-                $('#k-editor-link-url')
-                .val('foo')
-                .trigger(e);
+                $("#k-editor-link-url").val("foo").trigger(evt("keydown", 13));
 
                 equal(editor.value(), '<a href="foo">foo</a>')
-                equal($('.k-window').length, 0);
+                equal($(".k-window").length, 0);
             });
-            test('hitting esc in url cancels', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("hitting esc in url cancels", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                var e = new $.Event();
-                e.type = 'keydown';
-                e.keyCode = 27;
+                $("#k-editor-link-url").val("foo").trigger(evt("keydown", 27));
 
-                $('#k-editor-link-url')
-                .val('foo')
-                .trigger(e);
-
-                equal(editor.value(), 'foo')
-                equal($('.k-window').length, 0);
+                equal(editor.value(), "foo")
+                equal($(".k-window").length, 0);
             });
 
-            test('hitting enter in name field inserts link', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("hitting enter in name field inserts link", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                var e = new $.Event();
-                e.type = 'keydown';
-                e.keyCode = 13;
-
-                $('#k-editor-link-url')
-                .val('foo')
-                $('#k-editor-link-text').trigger(e);
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-text").trigger(evt("keydown", 13));
 
                 equal(editor.value(), '<a href="foo">foo</a>')
-                equal($('.k-window').length, 0);
+                equal($(".k-window").length, 0);
             });
 
-            test('hitting enter in title field inserts link', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("hitting enter in title field inserts link", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                var e = new $.Event();
-                e.type = 'keydown';
-                e.keyCode = 13;
-
-                $('#k-editor-link-url')
-                .val('foo')
-                $('#k-editor-link-title').trigger(e);
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-title").trigger(evt("keydown", 13));
 
                 equal(editor.value(), '<a href="foo">foo</a>')
-                equal($('.k-window').length, 0);
+                equal($(".k-window").length, 0);
             });
 
-            test('hitting esc in text cancels', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("hitting esc in text cancels", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                var e = new $.Event();
-                e.type = 'keydown';
-                e.keyCode = 27;
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-text").trigger(evt("keydown", 27));
 
-                $('#k-editor-link-url')
-                .val('foo')
-
-                $('#k-editor-link-text').trigger(e);
-
-                equal(editor.value(), 'foo')
-                equal($('.k-window').length, 0);
+                equal(editor.value(), "foo")
+                equal($(".k-window").length, 0);
             });
 
-            test('hitting esc in title cancels', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("hitting esc in title cancels", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                var e = new $.Event();
-                e.type = 'keydown';
-                e.keyCode = 27;
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-title").trigger(evt("keydown", 27));
 
-                $('#k-editor-link-url')
-                .val('foo')
-
-                $('#k-editor-link-title').trigger(e);
-
-                equal(editor.value(), 'foo')
-                equal($('.k-window').length, 0);
+                equal(editor.value(), "foo")
+                equal($(".k-window").length, 0);
             });
 
-            test('closing the window restores content', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("closing the window restores content", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('.k-window').css({width:200,height:300}).find('.k-i-close').click();
+                $(".k-window").css({width:200,height:300}).find(".k-i-close").click();
 
-                equal(editor.value(), 'foo')
-                equal($('.k-window').length, 0);
+                equal(editor.value(), "foo")
+                equal($(".k-window").length, 0);
             });
 
-            test('setting title', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("setting title", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url')
-                .val('foo');
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-title").val("bar")
+                $(".k-dialog-insert").click();
 
-                $('#k-editor-link-title')
-                .val('bar')
-
-                $('.k-dialog-insert').click();
                 equal(editor.value(), '<a href="foo" title="bar">foo</a>')
             });
 
-            test('setting opening in new window', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("setting opening in new window", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url').val('foo');
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-target").prop("checked", true);
+                $(".k-dialog-insert").click();
 
-                $('#k-editor-link-target').prop('checked', true);
-
-                $('.k-dialog-insert').click();
                 equal(editor.value(), '<a href="foo" target="_blank">foo</a>');
             });
 
-            test('title text box is updated', function() {
+            test("title text box is updated", function() {
                 var range = createRangeFromText(editor, '<a href="#" title="bar">|foo|</a>');
                 execLinkCommandOnRange(range);
 
                 equal($('#k-editor-link-title').val(), 'bar');
             });
 
-            test('target checkbox is updated', function() {
+            test("target checkbox is updated", function() {
                 var range = createRangeFromText(editor, '<a href="#" target="_blank">|foo|</a>');
                 execLinkCommandOnRange(range);
 
-                ok($('#k-editor-link-target').is(':checked'));
+                ok($("#k-editor-link-target").is(":checked"));
             });
 
-            test('updatung link text', function() {
-                var range = createRangeFromText(editor, '|foo|');
+            test("updatung link text", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url')
-                .val('foo');
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-text").val("bar");
+                $(".k-dialog-insert").click();
 
-                $('#k-editor-link-text')
-                .val('bar')
-
-                $('.k-dialog-insert').click();
                 equal(editor.value(), '<a href="foo">bar</a>')
             });
 
-            test('updating link text from caret', function() {
-                editor.value('foo');
+            test("updating link text from caret", function() {
+                editor.value("foo");
                 var range = editor.getRange();
                 range.setStart(editor.body.firstChild,1);
                 range.setEnd(editor.body.firstChild,1);
 
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url')
-                .val('foo');
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-text").val("bar");
+                $(".k-dialog-insert").click();
 
-                $('#k-editor-link-text')
-                .val('bar')
-
-                $('.k-dialog-insert').click();
                 equal(editor.value(), '<a href="foo">bar</a>')
             });
 
-            test('undo restores content', function() {
-                editor.value('foo');
+            test("undo restores content", function() {
+                editor.value("foo");
                 var range = editor.getRange();
                 range.setStart(editor.body.firstChild,1);
                 range.setEnd(editor.body.firstChild,1);
 
                 var command = execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url')
-                .val('foo');
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-text").val("bar");
+                $(".k-dialog-insert").click();
 
-                $('#k-editor-link-text')
-                .val('bar')
-
-                $('.k-dialog-insert').click();
                 command.undo();
-                equal(editor.value(), 'foo');
+
+                equal(editor.value(), "foo");
             });
 
-            test('redo creates link', function() {
-                editor.value('foo');
+            test("redo creates link", function() {
+                editor.value("foo");
                 var range = editor.getRange();
                 range.setStart(editor.body.firstChild,1);
                 range.setEnd(editor.body.firstChild,1);
 
                 var command = execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url')
-                .val('foo');
+                $("#k-editor-link-url").val("foo");
+                $("#k-editor-link-text").val("bar");
+                $(".k-dialog-insert").click();
 
-                $('#k-editor-link-text')
-                .val('bar')
-
-                $('.k-dialog-insert').click();
                 command.undo();
                 command.redo();
+
                 equal(editor.value(), '<a href="foo">bar</a>')
             });
 
-            test('link is not created if url is http slash slash', function() {
-                var range = createRangeFromText(editor, '|foo|');
-
+            test("link is not created if url is http slash slash", function() {
+                var range = createRangeFromText(editor, "|foo|");
                 execLinkCommandOnRange(range);
+                $(".k-dialog-insert").click();
 
-                $('.k-dialog-insert').click();
-                equal(editor.value(), 'foo')
+                equal(editor.value(), "foo")
             });
 
-            test('exec inserts link with empty range', function() {
-                editor.value('foo ');
+            test("exec inserts link with empty range", function() {
+                editor.value("foo ");
+
                 var range = editor.createRange();
                 range.setStart(editor.body.firstChild, 4);
                 range.setEnd(editor.body.firstChild, 4);
 
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-url').val('bar');
+                $("#k-editor-link-url").val("bar");
+                $(".k-dialog-insert").click();
 
-                $('.k-dialog-insert').click();
                 equal(editor.value(), 'foo <a href="bar">bar</a>')
             });
 
             test("dialog title can be localized", function() {
                 editor.options.messages.createLink = "bar";
-                var range = createRangeFromText(editor, '|foo|');
+                var range = createRangeFromText(editor, "|foo|");
 
                 execLinkCommandOnRange(range);
 
-                equal($('.k-window .k-window-title').text(), "bar");
+                equal($(".k-window .k-window-title").text(), "bar");
             });
 
             function createLink(range, text, url, newWindow) {
                 execLinkCommandOnRange(range);
-                $('#k-editor-link-url').val(url);
-                $('#k-editor-link-text').val(text);
+                $("#k-editor-link-url").val(url);
+                $("#k-editor-link-text").val(text);
 
                 if (newWindow) {
-                    $('#k-editor-link-target').attr('checked', true);
+                    $("#k-editor-link-target").attr("checked", true);
                 }
 
-                $('.k-dialog-insert').click();
+                $(".k-dialog-insert").click();
             }
 
             test("inserting links squentially does not render invalid markup", function() {
@@ -399,8 +358,8 @@
 
                 execLinkCommandOnRange(range);
 
-                $('#k-editor-link-target').attr('checked', false);
-                $('.k-dialog-insert').click();
+                $("#k-editor-link-target").attr("checked", false);
+                $(".k-dialog-insert").click();
 
                 equal(editor.value(), '<a href="foo">foo</a>');
             });
