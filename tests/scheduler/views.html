@@ -194,6 +194,48 @@
                 equal(view.content.find("tr:not(.k-middle-row)").length, 12);
             });
 
+            test("content is update on multiple render calls", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+                view.render();
+                equal(container.find(".k-scheduler-content").length, 1);
+                equal(container.find(".k-scheduler-content > table").length, 1);
+            });
+
+            test("datesHeader is update on multiple render calls", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+                view.render();
+
+                equal(container.find(".k-scheduler-header").length, 1);
+                equal(container.find(".k-scheduler-header-wrap > table").length, 1);
+            });
+
+            test("destroy clears views html", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+                view.destroy();
+
+                ok(!view.content);
+                ok(!view.times);
+                ok(!view.timesHeader);
+                ok(!view.datesHeader);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

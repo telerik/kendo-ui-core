@@ -82,7 +82,7 @@
                 var scheduler = new Scheduler(container),
                     today = new Date();
 
-                equal(scheduler.selectedDate().getTime(), getDate(today).getTime());
+                equal(scheduler.selectDate().getTime(), getDate(today).getTime());
             });
 
             test("selected date is read from the options", function() {
@@ -91,7 +91,7 @@
                         selectedDate: date
                     });
 
-                equal(scheduler.selectedDate().getTime(), date.getTime());
+                equal(scheduler.selectDate().getTime(), date.getTime());
             });
 
             test("selected date is displayed", function() {
@@ -114,7 +114,7 @@
             test("changing selected date updates the label", function() {
                 var scheduler = new Scheduler(container);
 
-                scheduler.selectedDate(new Date("2/2/2013"));
+                scheduler.selectDate(new Date("2/2/2013"));
 
                 equal(scheduler.wrapper.find("li.k-nav-current").text(), "Saturday, February 02, 2013");
             });
@@ -126,7 +126,7 @@
 
                 scheduler.toolbar.find(".k-nav-today").click();
 
-                equal(scheduler.selectedDate().getTime(), getDate(new Date()).getTime());
+                equal(scheduler.selectDate().getTime(), getDate(new Date()).getTime());
             });
 
             test("clicking on the next date selects next date", function() {
@@ -140,7 +140,7 @@
 
                 scheduler.toolbar.find(".k-nav-next").click();
 
-                equal(scheduler.selectedDate().getTime(), getDate(nextDate).getTime());
+                equal(scheduler.selectDate().getTime(), getDate(nextDate).getTime());
             });
 
             test("clicking on the prev date selects prev date", function() {
@@ -154,7 +154,7 @@
 
                 scheduler.toolbar.find(".k-nav-prev").click();
 
-                equal(scheduler.selectedDate().getTime(), getDate(nextDate).getTime());
+                equal(scheduler.selectDate().getTime(), getDate(nextDate).getTime());
             });
 
             test("clicking on the current time opens a calendar", function() {
@@ -163,7 +163,7 @@
                 scheduler.toolbar.find(".k-nav-current").click();
 
                 ok(scheduler.calendar);
-                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectedDate().getTime());
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectDate().getTime());
             });
 
             test("selecting date via the calendar updates the selectedDate value", function() {
@@ -174,7 +174,7 @@
                 scheduler.calendar.value(new Date("4/4/2013"));
                 scheduler.calendar.trigger("change");
 
-                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectedDate().getTime());
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectDate().getTime());
             });
 
             test("view buttons are added to the toolbar", function() {
@@ -280,6 +280,37 @@
                         views: [MyCustomView]
                     });
             });
+
+            test("switching between views destroyes the view", 1, function() {
+                var MyCustomView = kendo.Class.extend({
+                        name: "foo",
+                        render: function(selectedDate) {
+                        },
+                        destroy: function() {
+                            ok(true);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView, "day"]
+                    });
+
+                scheduler.selectView("day");
+            });
+
+            test("changing dates re-renders current view", 2, function() {
+                var MyCustomView = kendo.Class.extend({
+                        name: "foo",
+                        render: function(selectedDate) {
+                            ok(true);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView]
+                    });
+
+                scheduler.selectDate(new Date("1/2/2013"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

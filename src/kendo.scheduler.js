@@ -123,6 +123,10 @@ kendo_module({
             var that = this;
 
             if (name) {
+                if (that._selectedViewName !== name) {
+                    that.views[that._selectedViewName].destroy();
+                }
+
                 that._renderView(name);
                 that._selectedViewName = name;
 
@@ -139,7 +143,7 @@ kendo_module({
         },
 
         _renderView: function(name) {
-            this.views[name].render(this.selectedDate());
+            this.views[name].render(this.selectDate());
         },
 
         _views: function() {
@@ -190,6 +194,12 @@ kendo_module({
                    return kendo.toString(this.get("selectedDate"), that.options.selectedDateFormat);
                }
            });
+
+           that._model.bind("change", function(e) {
+                if (e.field === "selectedDate") {
+                    that._renderView(that.selectView().name);
+                }
+           });
         },
 
         _wrapper: function() {
@@ -199,7 +209,7 @@ kendo_module({
             that.wrapper.addClass("k-widget k-scheduler k-floatwrap");
         },
 
-        selectedDate: function(value) {
+        selectDate: function(value) {
             if (value != null) {
                 this._model.set("selectedDate", value);
             }
@@ -222,7 +232,7 @@ kendo_module({
 
             toolbar.on("click" + NS, ".k-scheduler-navigation li", function(e) {
                 var li = $(this),
-                    date = new Date(that.selectedDate());
+                    date = new Date(that.selectDate());
 
                 e.preventDefault();
 
@@ -237,7 +247,7 @@ kendo_module({
                     return; // TODO: Not good - refactor
                 }
 
-                that.selectedDate(date);
+                that.selectDate(date);
 
             });
 
@@ -259,12 +269,12 @@ kendo_module({
                             that.calendar = new Calendar(this.element.find(".k-scheduler-calendar"),
                             {
                                 change: function() {
-                                    that.selectedDate(this.value());
+                                    that.selectDate(this.value());
                                     that.popup.close();
                                 }
                             });
                         }
-                        that.calendar.value(that.selectedDate());
+                        that.calendar.value(that.selectDate());
                     },
                     copyAnchorStyles: false
                 });
@@ -313,27 +323,38 @@ kendo_module({
         },
 
         _header: function(dates) {
+            if (!this.timesHeader) {
+                this.timesHeader = $('<div class="k-scheduler-times">' +
+                        '<table class="k-scheduler-table">' +
+                        '<colgroup> <col /> </colgroup>' +
+                        '<tbody>' +
+                            '<tr><th>&nbsp;</th></tr>' +
+                            //<tr><th>all day</th></tr>
+                        '</tbody>' +
+                    '</table>' +
+                '</div>');
 
-            this.timesHeader = $('<div class="k-scheduler-times">' +
-                    '<table class="k-scheduler-table">' +
-                    '<colgroup> <col /> </colgroup>' +
-                    '<tbody>' +
-                        '<tr><th>&nbsp;</th></tr>' +
-                        //<tr><th>all day</th></tr>
-                    '</tbody>' +
-                '</table>' +
-            '</div>');
+                this.element.append(this.timesHeader);
+            }
 
             this._renderDatesHeader(dates);
-
-            this.element.append(this.timesHeader.add(this.datesHeader));
         },
 
         _renderDatesHeader: function(dates) {
             var idx,
                 length,
-                html = '<div class="k-scheduler-header k-state-default">' +
-                    '<div class="k-scheduler-header-wrap"><table class="k-scheduler-table">';
+                header = this.element.find(".k-scheduler-header-wrap");
+                html ='<table class="k-scheduler-table">';
+
+            if (!header.length) {
+                header = $('<div class="k-scheduler-header-wrap"/>');
+
+                $('<div class="k-scheduler-header k-state-default"/>')
+                    .append(header)
+                    .appendTo(this.element);
+            } else {
+                header.empty();
+            }
 
             html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
             html += '<tbody><tr>';
@@ -344,9 +365,9 @@ kendo_module({
                 html += '>' + kendo.toString(dates[idx], this.options.headerDateFormat) + '</th>';
             }
 
-            html += '</tr></tbody></table></div></div>';
+            html += '</tr></tbody></table>';
 
-            this.datesHeader = $(html);
+            this.datesHeader = header.append(html).parent();
         },
 
         _forTimeRange: function(min, max, action, after) {
@@ -444,7 +465,14 @@ kendo_module({
                 options = that.options,
                 start = options.startTime,
                 end = options.endTime,
-                html = '<div class="k-scheduler-content"><table class="k-scheduler-table">';
+                wrapper = this.element.find(".k-scheduler-content"),
+                html = '<table class="k-scheduler-table">';
+
+            if (!wrapper.length) {
+                wrapper = $('<div class="k-scheduler-content"/>').appendTo(this.element);
+            } else {
+                wrapper.empty();
+            }
 
             html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
             html += '<tbody>';
@@ -465,22 +493,43 @@ kendo_module({
                 return content;
             });
             html += '</tbody>';
-            html += '</table></div>';
+            html += '</table>';
 
-            this.content = $(html);
-            this.element.append(this.content);
+            this.content = wrapper.append(html);
         },
 
         _render: function(dates) {
             dates = dates || [];
 
             this._header(dates);
-            this._times();
+            if (!(this.times && this.times.length)) {
+                this._times();
+            }
             this._content(dates);
         },
 
         render: function(selectedDate) {
             this._render([selectedDate]);
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(this);
+
+            if (that.content) {
+                that.content
+                    .add(that.times)
+                    .add(that.timesHeader)
+                    .add(that.datesHeader)
+                    .remove()
+                    .empty();
+
+                that.content = null;
+                that.times = null;
+                that.timesHeader = null;
+                that.datesHeader = null;
+            }
         }
     });
 
@@ -499,7 +548,22 @@ kendo_module({
             options: {
                 title: "Week"
             },
-            name: "week"
+            name: "week",
+            render: function(selectedDate) {
+                var start = new Date(selectedDate),
+                    end,
+                    weekDay = selectedDate.getDay(),
+                    dates = [],
+                    idx, length;
+
+                start.setDate(start.getDate() - weekDay);
+
+                for (idx = 0, length = 7; idx < length; idx++) {
+                    dates.push(new Date(start));
+                    setTime(start, MS_PER_DAY, true);
+                }
+                this._render(dates);
+            }
         })
     }
 
