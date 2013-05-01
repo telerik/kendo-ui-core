@@ -450,7 +450,7 @@ var Clipboard = Class.extend({
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
 
-            Editor.EditorUtils.select(editor);
+            editor._selectionChange();
         });
     },
 
