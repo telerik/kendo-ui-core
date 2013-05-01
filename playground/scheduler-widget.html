@@ -155,7 +155,7 @@
 
             .k-scheduler-content
             {
-                overflow:scroll;
+                overflow:auto;
             }
 
             .k-scheduler-table
@@ -369,7 +369,7 @@
             .k-scheduler-header-wrap .k-scheduler-table,
             .k-scheduler-content .k-scheduler-table
             {
-                width:140%;
+               /*width:140%;*/
             }
 
             .k-appointment
@@ -393,7 +393,7 @@
     <body>
         <div id="scheduler"></div>
     <script>
-        $("#scheduler").kendoScheduler();
+        $("#scheduler").kendoScheduler({ height: 300 });
     </script>
     </body>
 </html>

@@ -31,7 +31,7 @@
             });
 
             function setup(options) {
-                return new MyDayView(container, options);
+                return new MyDayView(container, $.extend({ minorTick: 60, majorTick: 120 }, options));
             }
 
             module("Multi Day View rendering", {
@@ -235,6 +235,34 @@
                 ok(!view.times);
                 ok(!view.timesHeader);
                 ok(!view.datesHeader);
+            });
+
+            test("view content height is set", function() {
+                 container.css("height", 500);
+
+                 var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+
+                equal(view.content.height(), 500 - view.datesHeader.height());
+            });
+
+            test("content and times heights are equal", function() {
+                container.css("height", 500);
+
+                 var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+
+                equal(view.content.height(), view.times.height());
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -203,10 +203,15 @@ kendo_module({
         },
 
         _wrapper: function() {
-            var that = this;
+            var that = this,
+                height = that.options.height;
 
             that.wrapper = that.element;
             that.wrapper.addClass("k-widget k-scheduler k-floatwrap");
+
+            if (height) {
+                that.wrapper.css("height", height);
+            }
         },
 
         selectDate: function(value) {
@@ -316,8 +321,8 @@ kendo_module({
             title: "",
             startTime: TODAY,
             endTime: TODAY,
-            minorTick: 60,
-            majorTick: 120,
+            minorTick: 30,
+            majorTick: 60,
             majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
             minorTickTimeTemplate: "&nbsp;"
         },
@@ -470,6 +475,12 @@ kendo_module({
 
             if (!wrapper.length) {
                 wrapper = $('<div class="k-scheduler-content"/>').appendTo(this.element);
+
+                wrapper.bind("scroll" + NS, function () {
+                    that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(this.scrollLeft);
+                    that.times.scrollTop(this.scrollTop);
+                });
+
             } else {
                 wrapper.empty();
             }
@@ -498,14 +509,62 @@ kendo_module({
             this.content = wrapper.append(html);
         },
 
+        _setContentHeight: function() {
+            var that = this,
+                options = that.options,
+                toolbar = that.element.find(">.k-scheduler-toolbar"),
+                height = that.element.innerHeight(),
+                scrollbar = kendo.support.scrollbar();
+
+            if (toolbar.length) {
+                height -= toolbar.outerHeight();
+            }
+
+            if (that.datesHeader) {
+                height -= that.datesHeader.outerHeight();
+            }
+
+            var isSchedulerHeightSet = function(el) {
+                var initialHeight, newHeight;
+                if (el[0].style.height) {
+                    return true;
+                } else {
+                    initialHeight = el.height();
+                }
+
+                el.height("auto");
+                newHeight = el.height();
+
+                if (initialHeight != newHeight) {
+                    el.height("");
+                    return true;
+                }
+                el.height("");
+                return false;
+            };
+
+            if (isSchedulerHeightSet(that.element)) { // set content height only if needed
+                if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
+                    that.content.height(height);
+                } else {
+                    that.content.height(scrollbar * 2 + 1);
+                }
+                that.times.height(that.content.height());
+            }
+        },
+
         _render: function(dates) {
             dates = dates || [];
 
             this._header(dates);
+
             if (!(this.times && this.times.length)) {
                 this._times();
             }
+
             this._content(dates);
+
+            this._setContentHeight();
         },
 
         render: function(selectedDate) {
