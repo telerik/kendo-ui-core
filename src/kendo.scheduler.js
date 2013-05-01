@@ -1415,7 +1415,16 @@ kendo_module({
                     var events = [],
                         rule = recurrence.expandEvent(event),
                         start = new Date(period.start),
-                        end = new Date(period.end);
+                        end = new Date(period.end),
+                        count = 1;
+
+                    if (!rule || +event.start > +end) {
+                        return events;
+                    }
+
+                    if (rule.until && +rule.until < +end) {
+                        end = new Date(rule.until);
+                    }
 
                     while (start) {
                         events.push({
@@ -1424,10 +1433,17 @@ kendo_module({
                             end: this.setDate(start, event.end)
                         });
                         start = this.next(start, end, rule);
+
+                        if (rule.count && rule.count === count) {
+                            return events;
+                        }
+
+                        count++;
                     }
 
                     return events;
                 },
+                //limit
                 next: function(start, end, rule) {
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
@@ -1437,6 +1453,11 @@ kendo_module({
                     }
                     return start;
                 },
+
+                limit: function(date, rule) {
+                    //
+                },
+
                 setDate: function(currentDate, eventDate) {
                     currentDate = new Date(currentDate);
                     currentDate.setHours(eventDate.getHours());
@@ -1464,6 +1485,8 @@ kendo_module({
                         end = new Date(rule.until);
                     }
 
+                    //TODO: put all weekdays stuff in next method
+
                     weekDays = rule.weekDays;
                     if (!weekDays) {
                         weekDays = [{
@@ -1487,7 +1510,7 @@ kendo_module({
                                 end: this.setDate(start, event.end)
                             });
 
-                            if (rule.count && count === rule.count) {
+                            if (rule.count && rule.count === count) {
                                 return events;
                             }
 

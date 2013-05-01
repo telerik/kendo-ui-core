@@ -113,6 +113,78 @@
                 equal(events[3].end.getTime(), +new Date(2000, 10, 16, 17, 0));
             });
 
+            test("Occurrences method honours COUNT", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY;COUNT=2"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+            });
+
+            test("Occurrences method honours UNTIL", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY;UNTIL=20001111T090000"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+            });
+
+            test("Occurrences method returns empty array if not valid rule", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "UNTIL=20001111T090000"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+
+                equal(events.length, 0);
+            });
+
+            test("Occurrences method returns empty array if range is before the event", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY;UNTIL=20001111T090000"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 9, 12), end: new Date(2000, 9, 16) } );
+
+                equal(events.length, 0);
+            });
+
             //TODO: test COUNT AND UNTIL
 
             module("WEEKLY Occurrences");
