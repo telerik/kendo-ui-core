@@ -59,6 +59,7 @@ kendo_module({
             "yyyyMMddTHH",
             "yyyyMMdd"
         ],
+        MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -1448,16 +1449,9 @@ kendo_module({
 
                     return events;
                 },
-                //limit
                 next: function(start, end, rule) {
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
-
-                    start = this.limit(start, rule);
-
-                    if (+start > +end) {
-                        start = null;
-                    }
                     return start;
                 },
 
@@ -1469,12 +1463,12 @@ kendo_module({
                         day = date.getDate(),
                         month = date.getMonth() + 1;
 
-                    if (months && $.inArray(month, months) !== -1) {
+                    if (months && $.inArray(month, months) === -1) {
                         date.setFullYear(date.getFullYear(), month, 1);
                         this.limit(date, rule);
                     }
 
-                    if (monthDays && $.inArray(day, monthDays) !== -1) {
+                    if (monthDays && $.inArray(day, monthDays) === -1) {
                         date.setDate(day + 1);
                         this.limit(date, rule);
                     }
