@@ -151,7 +151,7 @@ var InlineFormatter = Class.extend({
             if (formatNode) {
                 if (that.attributes && that.attributes.style) {
                     dom.unstyle(formatNode, that.attributes.style);
-                    if (!formatNode.style.cssText) {
+                    if (!formatNode.style.cssText && !formatNode.attributes["class"]) {
                         dom.unwrap(formatNode);
                     }
                 } else {

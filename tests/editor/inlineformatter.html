@@ -214,7 +214,7 @@
         equal(editor.value(), 'foo ');
     });
 
-    test('removeing format preserves the format element and removes the format attributes', function () {
+    test('removing format preserves the format element and removes the format attributes', function () {
         var range = createRangeFromText(editor, '<span style="font-size:xx-small;text-decoration:underline;">|foo|</span>');
         var formatter = new InlineFormatter(editor.options.formats.underline);
         var marker = new kendo.ui.editor.Marker();
@@ -223,6 +223,17 @@
         formatter.toggle(range);
         marker.remove(range);
         equal(editor.value(), '<span style="font-size:xx-small;">foo</span>');
+    });
+
+    test("removing format does not remove elements with class attribute", function() {
+        var range = createRangeFromText(editor, '<span class="bar" style="text-decoration:underline;">|foo|</span>');
+        var formatter = new InlineFormatter(editor.options.formats.underline);
+        var marker = new kendo.ui.editor.Marker();
+        marker.add(range);
+
+        formatter.toggle(range);
+        marker.remove(range);
+        equal(editor.value(), '<span class="bar">foo</span>');
     });
 
     test('space before and after content preserved after removing format', function() {
