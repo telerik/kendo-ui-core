@@ -105,7 +105,12 @@
             test("custom format is applied to the selected date", function() {
                 var scheduler = new Scheduler(container, {
                     selectedDate: new Date("1/2/2013"),
-                    selectedDateFormat: "d"
+                    views: [
+                    {
+                        name: "day",
+                        selectedDateFormat: "{0:d}"
+                    }
+                    ]
                 });
 
                 equal(scheduler.wrapper.find("li.k-nav-current").text(), "1/2/2013");
@@ -129,32 +134,30 @@
                 equal(scheduler.selectDate().getTime(), getDate(new Date()).getTime());
             });
 
-            test("clicking on the next date selects next date", function() {
+            test("clicking on the next date calls the view", function() {
                 var selectedDate = new Date("1/2/2013"),
-                    nextDate = new Date(selectedDate),
                     scheduler = new Scheduler(container, {
                         selectedDate: selectedDate
                     });
 
-                nextDate.setDate(nextDate.getDate() + 1);
+                var view = stub(scheduler.selectView(), "nextDate");
 
                 scheduler.toolbar.find(".k-nav-next").click();
 
-                equal(scheduler.selectDate().getTime(), getDate(nextDate).getTime());
+                equal(view.calls("nextDate"), 1);
             });
 
-            test("clicking on the prev date selects prev date", function() {
+            test("clicking on the prev date calls the view", function() {
                 var selectedDate = new Date("1/2/2013"),
-                    nextDate = new Date(selectedDate),
                     scheduler = new Scheduler(container, {
                         selectedDate: selectedDate
                     });
 
-                nextDate.setDate(nextDate.getDate() - 1);
+                var view = stub(scheduler.selectView(), "previousDate");
 
                 scheduler.toolbar.find(".k-nav-prev").click();
 
-                equal(scheduler.selectDate().getTime(), getDate(nextDate).getTime());
+                equal(view.calls("previousDate"), 1);
             });
 
             test("clicking on the current time opens a calendar", function() {
@@ -259,7 +262,8 @@
             test("custom view is instantiated", function() {
                 var MyCustomView = kendo.Class.extend({
                     name: "foo",
-                    render: $.noop
+                    render: $.noop,
+                    dateForTitle: $.noop
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -272,6 +276,7 @@
             test("selected date is passed to view render method", 1, function() {
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
+                        dateForTitle: $.noop,
                         render: function(selectedDate) {
                             ok(selectedDate);
                         }
@@ -284,6 +289,7 @@
             test("switching between views destroyes the view", 1, function() {
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
+                        dateForTitle: $.noop,
                         render: function(selectedDate) {
                         },
                         destroy: function() {
@@ -300,6 +306,7 @@
             test("changing dates re-renders current view", 2, function() {
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
+                        dateForTitle: $.noop,
                         render: function(selectedDate) {
                             ok(true);
                         }

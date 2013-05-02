@@ -89,7 +89,6 @@ kendo_module({
         options: {
             name: "Scheduler",
             selectedDate: TODAY,
-            selectedDateFormat: "D",
             messages: {
                 today: "Today"
             },
@@ -143,7 +142,11 @@ kendo_module({
         },
 
         _renderView: function(name) {
-            this.views[name].render(this.selectDate());
+            var view = this.views[name];
+
+            view.render(this.selectDate());
+
+            this._model.set("formattedDate", view.dateForTitle());
         },
 
         _views: function() {
@@ -190,9 +193,7 @@ kendo_module({
             var that = this;
             that._model = kendo.observable({
                selectedDate: this.options.selectedDate,
-               formattedDate: function() {
-                   return kendo.toString(this.get("selectedDate"), that.options.selectedDateFormat);
-               }
+               formattedDate: ""
            });
 
            that._model.bind("change", function(e) {
@@ -244,9 +245,9 @@ kendo_module({
                 if (li.hasClass("k-nav-today")) {
                     date = new Date();
                 } else if (li.hasClass("k-nav-next")) {
-                    date.setDate(date.getDate() + 1);
+                    date = that.selectView().nextDate();
                 } else if (li.hasClass("k-nav-prev")) {
-                    date.setDate(date.getDate() - 1);
+                    date = that.selectView().previousDate();
                 } else if (li.hasClass("k-nav-current")) {
                     that._showCalendar();
                     return; // TODO: Not good - refactor
@@ -318,6 +319,7 @@ kendo_module({
             name: "MultiDayView",
             headerDateFormat: "ddd M/dd",
             timeFormat: "HH:mm",
+            selectedDateFormat: "{0:D}",
             title: "",
             startTime: TODAY,
             endTime: TODAY,
@@ -325,6 +327,10 @@ kendo_module({
             majorTick: 60,
             majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
             minorTickTimeTemplate: "&nbsp;"
+        },
+
+        dateForTitle: function() {
+            return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
         },
 
         _header: function(dates) {
@@ -556,6 +562,9 @@ kendo_module({
         _render: function(dates) {
             dates = dates || [];
 
+            this.startDate = dates[0];
+            this.endDate = dates[(dates.length - 1) || 0];
+
             this._header(dates);
 
             if (!(this.times && this.times.length)) {
@@ -565,6 +574,18 @@ kendo_module({
             this._content(dates);
 
             this._setContentHeight();
+        },
+
+        nextDate: function() {
+            var end = new Date(this.endDate);
+            setTime(end, MS_PER_DAY);
+            return end;
+        },
+
+        previousDate: function() {
+            var start = new Date(this.startDate);
+            setTime(start, -MS_PER_DAY);
+            return start;
         },
 
         render: function(selectedDate) {
@@ -605,7 +626,8 @@ kendo_module({
         }),
         week: MultiDayView.extend({
             options: {
-                title: "Week"
+                title: "Week",
+                selectedDateFormat: "{0:D} - {1:D}"
             },
             name: "week",
             render: function(selectedDate) {
@@ -621,6 +643,7 @@ kendo_module({
                     dates.push(new Date(start));
                     setTime(start, MS_PER_DAY, true);
                 }
+
                 this._render(dates);
             }
         })
