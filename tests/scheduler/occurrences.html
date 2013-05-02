@@ -33,6 +33,64 @@
                 ok(schedulerEvent.ruleInstance);
             });
 
+            test("Length of first week of 01/05/2013 - weekStart(SU)", function() {
+                var weekStart = 0,
+                    date = new Date(2013, 4, 4);
+
+                equal(recurrence.firstWeekLength(date, weekStart), 4);
+            });
+
+            test("Length of first week of 01/05/2013 - weekStart(MO)", function() {
+                var weekStart = 1,
+                    date = new Date(2013, 4, 4);
+
+                equal(recurrence.firstWeekLength(date, weekStart), 5);
+            });
+
+            test("Length of first week of 01/05/2013 - weekStart(SA)", function() {
+                var weekStart = 6,
+                    date = new Date(2013, 4, 4);
+
+                equal(recurrence.firstWeekLength(date, weekStart), 3);
+            });
+
+            test("Length of first week of 01/06/2013 - weekStart(SU)", function() {
+                var weekStart = 0,
+                    date = new Date(2013, 5, 1);
+
+                equal(recurrence.firstWeekLength(date, weekStart), 1);
+            });
+
+            test("Length of first week of 01/06/2013 - weekStart(MO)", function() {
+                var weekStart = 1,
+                    date = new Date(2013, 5, 1);
+
+                equal(recurrence.firstWeekLength(date, weekStart), 2);
+            });
+
+            test("Numbers of weeks in 01/05/2013", function() {
+                equal(recurrence.numberOfWeeks(new Date(2013, 4, 1), 0), 5);
+            });
+
+            test("Numbers of weeks in 22/06/2013", function() {
+                equal(recurrence.numberOfWeeks(new Date(2013, 5, 22), 0), 6);
+            });
+
+            test("weekNumber method returns number of the week (first week)", function() {
+                var date = new Date(2013, 5, 1);
+                equal(recurrence.weekNumber(date, 0), 1);
+            });
+
+            test("weekNumber method returns number of the week (second week)", function() {
+                var date = new Date(2013, 5, 2);
+                equal(recurrence.weekNumber(date, 0), 2);
+            });
+
+            test("weekNumber method returns number of the week (third week)", function() {
+                var date = new Date(2013, 5, 16);
+                equal(recurrence.weekNumber(date, 0), 3);
+            });
+
             test("DAILY frequency next method gets next day (interval:1)", function() {
                 var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:1 });
                 equal(+next, +new Date(2000, 10, 11, 18, 18, 18))
@@ -202,7 +260,6 @@
                 equal(events[0].end.getTime(), +new Date(2000, 10, 30, 17, 0));
             });
 
-            //TODO: Test for -3 or 22.
             test("DAILY occurrences method limits BYMONTHDAY", function() {
                 var schedulerEvent = {
                     uid: "id",
@@ -229,6 +286,28 @@
                 equal(events[2].end.getTime(), +new Date(2000, 10, 15, 17, 0));
             });
 
+            test("DAILY occurrences method limits BYMONTHDAY (-3, 10)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 16, 30),
+                    end: new Date(2013, 4, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYMONTHDAY=-3,10"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 1), end: new Date(2013, 4, 30) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 4, 27, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 4, 27, 17, 0));
+            });
+
             test("DAILY occurrences method limits BYDAY", function() {
                 var schedulerEvent = {
                     uid: "id",
@@ -251,7 +330,51 @@
                 equal(events[1].end.getTime(), +new Date(2000, 10, 13, 17, 0));
             });
 
-            //TODO: Test for -3FR or 2MO.
+            test("DAILY occurrences method limits BYDAY (2FR)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYDAY=3FR"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 13) } );
+
+                equal(events.length, 0);
+            });
+
+            test("DAILY occurrences method limits BYDAY (-3FR)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 16, 30),
+                    end: new Date(2013, 4, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYDAY=-3FR"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10), end: new Date(2013, 4, 24) } );
+
+                equal(events.length, 1);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 17, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 17, 17, 0));
+            });
+
+            test("DAILY occurrences method returns empty array if no such day", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 16, 30),
+                    end: new Date(2013, 4, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYDAY=5FR"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10), end: new Date(2013, 4, 24) } );
+
+                equal(events.length, 0);
+            });
 
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {

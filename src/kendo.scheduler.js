@@ -1372,7 +1372,7 @@ kendo_module({
             }
 
             list[idx] = {
-                offset: parseInt(value.substring(0, valueLength - 2), 10) || 1,
+                offset: parseInt(value.substring(0, valueLength - 2), 10) || 0,
                 day: day
             };
         }
@@ -1380,6 +1380,50 @@ kendo_module({
     }
 
     var recurrence = {
+        isInWeek: function(date, offset, weekStart) {
+            var weekNumber = recurrence.weekNumber(date, weekStart);
+            if (offset > 0) {
+                if (offset === weekNumber) {
+                    return true;
+                }
+            } else {
+                if ((recurrence.numberOfWeeks(date, weekStart) + offset) === weekNumber) {
+                    return true;
+                }
+            }
+        },
+
+        weekNumber: function(date, weekStart) {
+            var firstWeekLength = recurrence.firstWeekLength(date, weekStart),
+                day = date.getDate(),
+                weekNumber;
+
+            if (day <= firstWeekLength) {
+                weekNumber = 1;
+            } else if (day - 7 < 1) {
+                weekNumber = 2;
+            } else {
+                weekNumber = parseInt((day - firstWeekLength) / 7, 10) + 1;
+            }
+
+            return weekNumber;
+        },
+
+        firstWeekLength: function(date, weekStart) {
+            weekStart = weekStart === 0 ? 7 : weekStart;
+            date = new Date(date.getFullYear(), date.getMonth(), 1);
+
+            var firstWeekLength = weekStart - date.getDay();
+            if (firstWeekLength < 0) {
+                firstWeekLength += 7;
+            }
+
+            return firstWeekLength;
+        },
+        numberOfWeeks: function(date, weekStart) {
+            return Math.ceil((getMonthLength(date) - recurrence.firstWeekLength(date, weekStart)) / 7) + 1;
+        },
+
         //TODO: optimize! Set year and month before looping days
         nextWeekDay: function(date, dayOfWeek) {
             date = new Date(date);
@@ -1428,7 +1472,7 @@ kendo_module({
                     }
 
                     while (start) {
-                        start = this.limit(start, rule);
+                        start = this.limit(start, end, rule);
                         if (+start > +end) {
                             break;
                         }
@@ -1455,7 +1499,7 @@ kendo_module({
                     return start;
                 },
 
-                limit: function(date, rule) {
+                limit: function(date, end, rule) {
                     var weekDays = rule.weekDays,
                         monthDays = rule.monthDays,
                         months = rule.months,
@@ -1463,25 +1507,38 @@ kendo_module({
                         day = date.getDate(),
                         month = date.getMonth() + 1;
 
-                    if (months && $.inArray(month, months) === -1) {
-                        date.setFullYear(date.getFullYear(), month, 1);
-                        this.limit(date, rule);
+                    if (+date > +end) {
+                        return date;
                     }
 
-                    if (monthDays && $.inArray(day, monthDays) === -1) {
+                    if (months && $.inArray(month, months) === -1) {
+                        date.setFullYear(date.getFullYear(), month, 1);
+                        this.limit(date, end, rule);
+                    }
+
+                    if (monthDays && checkMonthDays(monthDays, date)) {
                         date.setDate(day + 1);
-                        this.limit(date, rule);
+                        this.limit(date, end, rule);
                     }
 
 
                     if (weekDays) {
-                        weekDays = $.grep(weekDays, function(item) {
-                            return item.day === weekDay;
-                        });
+                        var allowed = false;
+                        for (var idx = 0, length = weekDays.length; idx < length; idx++) {
+                            if (weekDays[idx].offset) {
+                                if (recurrence.isInWeek(date, weekDays[idx].offset, rule.weekStart) && weekDays[idx].day === weekDay) {
+                                    allowed = true;
+                                    break;
+                                }
+                            } else if (weekDays[idx].day === weekDay) {
+                                allowed = true;
+                                break;
+                            }
+                        }
 
-                        if (weekDays[0]) {
+                        if (!allowed) {
                             date.setDate(day + 1);
-                            this.limit(date, rule);
+                            this.limit(date, end, rule);
                         }
                     }
 
@@ -1516,12 +1573,11 @@ kendo_module({
                     }
 
                     //TODO: put all weekdays stuff in next method
-
                     weekDays = rule.weekDays;
                     if (!weekDays) {
                         weekDays = [{
                             day: start.getDay(),
-                            offset: 1
+                            offset: 0
                         }]
                     }
 
@@ -1752,6 +1808,40 @@ kendo_module({
         }
 
         return result[0] ? result : weekDays;
+    }
+
+    function checkMonthDays(monthDays, date) {
+        var month = getMonthLength(date),
+            day = date.getDate(),
+            length = monthDays.length,
+            idx = 0,
+            monthDay;
+
+        for (; idx < length; idx++) {
+            monthDay = monthDays[idx];
+            if (monthDay < 0) {
+                monthDay = month + monthDay;
+            }
+
+            if (day === monthDay) {
+                return 0;
+            }
+        }
+
+        return -1;
+
+    }
+
+    function getMonthLength(date) {
+        var month = date.getMonth();
+
+        if (month === 1) {
+            if (new Date(date.getFullYear(), 1, 29).getMonth() === 1) {
+                return 29;
+            }
+            return 28;
+        }
+        return MONTHS[month];
     }
 
     kendo.recurrence = recurrence;
