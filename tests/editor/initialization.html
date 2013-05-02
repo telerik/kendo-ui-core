@@ -86,16 +86,6 @@
                 ok(dom.hasClass("k-editor-inline"));
                 ok(dom.hasClass("k-widget"));
             });
-
-            test("focusing adds k-state-active", function() {
-                var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
-
-                dom.kendoEditor();
-
-                dom.focus();
-
-                ok(dom.hasClass("k-state-active"));
-            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
