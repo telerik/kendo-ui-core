@@ -313,12 +313,20 @@ kendo_module({
             kendo.onResize($.proxy(that.reset, that));
         },
 
+        makeVirtual: function() {
+            this.dimensions.y.makeVirtual();
+        },
+
         virtualHeight: function(height) {
             this.dimensions.y.virtualSize(height);
         },
 
         virtualOffset: function(offset) {
             this.dimensions.y.virtualOffset(offset);
+        },
+
+        height: function() {
+            return this.element.height();
         },
 
         scrollHeight: function() {
@@ -423,22 +431,15 @@ kendo_module({
 
         _initAxis: function(axis) {
             var that = this,
-            movable = that.movable,
-            dimension = that.dimensions[axis],
-            tapCapture = that.tapCapture,
-            scrollBar,
-            end = $.noop;
-
-            scrollBar = new ScrollBar({
-                axis: axis,
-                movable: movable,
-                dimension: dimension,
-                container: that.element
-            });
-
-            end = function() {
-                scrollBar.hide();
-            };
+                movable = that.movable,
+                dimension = that.dimensions[axis],
+                tapCapture = that.tapCapture,
+                scrollBar = new ScrollBar({
+                    axis: axis,
+                    movable: movable,
+                    dimension: dimension,
+                    container: that.element
+                });
 
             that.pane[axis].bind(CHANGE, function() {
                 scrollBar.show();
@@ -451,7 +452,14 @@ kendo_module({
                 userEvents: that.userEvents,
                 dimension: dimension,
                 elastic: that.options.elastic,
-                end: end
+                end: function() {
+                    scrollBar.hide();
+                    that.trigger('scrollEnd', {
+                        axis: axis,
+                        scrollTop: that.scrollTop,
+                        scrollLeft: that.scrollLeft
+                    });
+                }
             });
         }
     });

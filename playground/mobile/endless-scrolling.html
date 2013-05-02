@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Endless scrolling listview</title>
-        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -22,10 +22,21 @@
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
+        <style>
+            .km-listview, .km-listview-wrapper {
+                -webkit-transform: translatez(0);
+            }
+
+            .km-listview li {
+                position: absolute;
+                -webkit-transform: translatez(0);
+                height: 50px;
+            }
+        </style>
     </head>
     <body>
         <div data-role="view">
-            <ul data-role="listview" data-endless-scrolling="true" data-source="foo">
+            <ul data-role="listview" data-endless-scroll="true" data-source="foo">
             </ul>
         </div>
 
@@ -48,7 +59,9 @@
                 }
             });
 
-            new kendo.mobile.Application();
+            setTimeout(function() {
+                new kendo.mobile.Application();
+            }, 1000);
         </script>
     </body>
 </html>

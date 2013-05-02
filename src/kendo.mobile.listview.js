@@ -203,6 +203,109 @@ kendo_module({
         }
     });
 
+    var VirtualListViewItem = kendo.Class.extend({
+        init: function(listView, dataItem) {
+            var element = listView.append([dataItem]),
+                height = element.outerHeight(true);
+
+            element.css({position: 'absolute', 'top': 0 });
+            $.extend(this, {
+                top: 0,
+                element: element,
+                listView: listView,
+                height: height,
+                bottom: height
+            });
+        },
+
+        update: function(dataItem) {
+            this.element = this.listView.setDataItem(this.element, dataItem);
+            this.element.css({position: 'absolute', 'top': 0 });
+            this.bottom = this.top + this.element.outerHeight(true);
+        },
+
+        above: function(item) {
+            if (item) {
+                this.top = item.top - this.height;
+                this.bottom = item.top;
+                this.element.css("top", this.top + "px");
+            }
+
+        },
+
+        below: function(item) {
+            if (item) {
+                this.top = item.bottom;
+                this.bottom = this.height + this.top;
+                this.element.css("top", this.top + "px");
+            }
+        },
+
+        destroy: function() {
+            // kendo.destroy()
+        }
+    });
+
+
+    var VirtualListViewItemBinder = kendo.Class.extend({
+        init: function(listView) {
+            var that = this;
+
+            that.listView = listView;
+            that.options = listView.options;
+
+            that.configure();
+        },
+
+        configure: function() {
+            var that = this,
+                options = that.options,
+                scroller = that.listView.scroller();
+
+            if (that.dataSource) {
+                that._unbindDataSource();
+            }
+
+            that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource);
+
+            that.buffer = new kendo.data.Buffer(that.dataSource, 30);
+
+            that.list = new VirtualList({
+                buffer: that.buffer,
+                item: function(dataItem) {
+                    return new VirtualListViewItem(that.listView, dataItem);
+                },
+
+                height: function() {
+                    return scroller.height();
+                }
+            });
+
+            scroller.makeVirtual();
+
+            scroller.bind('scroll', function(e) {
+                that.list.update(e.scrollTop);
+            });
+
+            scroller.bind('scrollEnd', function(e) {
+                console.log('scrollEnd');
+                that.list.update(e.scrollTop, true);
+            });
+
+            that.list.bind('resize', function(e) {
+                scroller.virtualHeight(e.bottom);
+            });
+
+            if (options.autoBind) {
+                that.dataSource.fetch();
+            }
+        },
+
+        _unbindDataSource: function() {
+            // TODO:
+        }
+    });
+
     var ListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
             var that = this;
@@ -398,8 +501,10 @@ kendo_module({
 
             that._templates();
 
+            that._style();
+
             if (this.options.endlessScroll) {
-                this._itemBinder = new ListViewItemBinder(this);
+                this._itemBinder = new VirtualListViewItemBinder(this);
             } else {
                 this._itemBinder = new ListViewItemBinder(this);
             }
@@ -411,8 +516,6 @@ kendo_module({
             if (this.options.filterable) {
                 this._filter = new ListViewFilter(this);
             }
-
-            that._style();
 
             that._enhanceItems(that.items());
 
@@ -523,7 +626,9 @@ kendo_module({
         },
 
         remove: function(dataItems) {
-            this.findByDataItem(dataItems).remove();
+            var items = this.findByDataItem(dataItems);
+            kendo.destroy(items);
+            items.remove();
         },
 
         findByDataItem: function(dataItems) {
@@ -539,12 +644,13 @@ kendo_module({
         setDataItem: function(item, dataItem) {
             var that = this;
 
-            return this._renderItems([dataItem], function(items) {
+            return $(this._renderItems([dataItem], function(items) {
                 var newItem = $(items[0]);
+                kendo.destroy(item);
                 $(item).replaceWith(newItem);
 
                 that.trigger("itemChange", { item: dataItem, data: newItem, ns: ui });
-            })[0];
+            })[0]);
         },
 
         _insert: function(dataItems, method) {
@@ -556,7 +662,6 @@ kendo_module({
 
         _renderItems: function(dataItems, callback) {
             var items = $(kendo.render(this.template, dataItems));
-
             callback(items);
             this._enhanceItems(items);
             mobile.init(items);
@@ -725,11 +830,10 @@ kendo_module({
             }
 
             list.bottom = 0;
-            list._height = list.height();
             list.offset = buffer.offset;
             list.top = 0;
 
-            var targetHeight = list._height * 3,
+            var targetHeight = list.height() * 3,
                 itemConstructor = list.item,
                 prevItem,
                 item;
@@ -745,43 +849,48 @@ kendo_module({
 
         update: function(top, center) {
             var list = this,
+                height = list.height(),
                 items = list.items,
                 initialOffset = list.offset,
-                targetBottom = top + list._height,
-                targetTop = top,
+                topThreshold = top,
+                targetTop = top - height,
+                bottomThreshold = top + height + 20,
+                targetBottom = bottomThreshold + height,
                 itemCount = items.length,
                 item,
                 bottomItem;
 
-            if (center) {
-                targetBottom += list._height;
-                targetTop -= list._height;
-            }
+            if (list.top > topThreshold) {
+                console.log('top threshold reached');
+                while (list.top > targetTop) {
+                    console.log('shifting to', list.offset);
+                    if (list.offset === 0) {
+                        break;
+                    }
 
-            while (list.top > targetTop) {
-                if (list.offset === 0) {
-                    break;
+                    list.offset --;
+                    item = items.pop();
+
+                    item.update(list.content(list.offset));
+                    item.above(items[0]);
+                    items.unshift(item);
+                    list.top = items[0].top;
                 }
-
-                list.offset --;
-                item = items.pop();
-
-                item.update(list.content(list.offset));
-                item.above(items[0]);
-                items.unshift(item);
-                list.top = items[0].top;
             }
 
-            while (list.bottom < targetBottom) {
-                list.offset ++;
-                item = items.shift();
+            if (list.bottom < bottomThreshold) {
+                console.log('bottom threshold reached', list.bottom, bottomThreshold, targetBottom);
+                while (list.bottom < targetBottom) {
+                    console.log('shifting to', list.offset);
+                    list.offset ++;
+                    item = items.shift();
 
-                item.update(list.content(list.offset + itemCount));
-                item.below(items[items.length - 1]);
-                items.push(item);
-                list.bottom = items[items.length - 1].bottom;
+                    item.update(list.content(list.offset + itemCount));
+                    item.below(items[items.length - 1]);
+                    items.push(item);
+                    list.bottom = items[items.length - 1].bottom;
+                }
             }
-
 
             if (initialOffset != list.offset) {
                 list.top = items[0].top;
