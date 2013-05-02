@@ -14,14 +14,13 @@
 
         <script>
 
-            var GreedyInlineFormatter;
+            var GreedyInlineFormatter = kendo.ui.editor.GreedyInlineFormatter;
 
             $("#Editor1").kendoEditor();
 
             module("Editor / GreedyInlineFormatter", {
                 setup: function() {
                     editor = getEditor();
-                    GreedyInlineFormatter = kendo.ui.editor.GreedyInlineFormatter;
                 }
             });
 

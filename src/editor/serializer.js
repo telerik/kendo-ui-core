@@ -113,6 +113,12 @@ var Serializer = {
                         var pair = css[cssIndex];
                         if (pair.length) {
                             var match = cssDeclaration.exec(pair);
+
+                            // IE8 does not provide a value for 'inherit'
+                            if (!match) {
+                                continue;
+                            }
+
                             var property = trim(match[1].toLowerCase()),
                                 value = trim(match[2]);
 
