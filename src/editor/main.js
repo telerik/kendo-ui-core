@@ -974,7 +974,7 @@ kendo_module({
         },
 
         focus: function () {
-            this.window.focus();
+            this.body.focus();
         },
 
         update: function (value) {
