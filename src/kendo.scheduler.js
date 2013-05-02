@@ -9,7 +9,6 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        Class = kendo.Class,
         Widget = ui.Widget,
         FUNCTION = "function",
         STRING = "string",
@@ -27,7 +26,7 @@ kendo_module({
         ADD = "add",
         EDIT = "edit",
         DELETECONFIRM = "Are you sure you want to delete this event?",
-        FREQUENCY = {
+        /*FREQUENCY = {
             "SECONDLY": 0,
             "MINUTELY": 1,
             "HOURLY": 2,
@@ -35,7 +34,7 @@ kendo_module({
             "WEEKLY": 4,
             "MONTHLY": 5,
             "YEARLY": 6
-        },
+        },*/
         WEEK_DAYS = {
             "SU": 0,
             "MO": 1,
@@ -1578,7 +1577,7 @@ kendo_module({
                         weekDays = [{
                             day: start.getDay(),
                             offset: 0
-                        }]
+                        }];
                     }
 
                     while(start) {
@@ -1652,7 +1651,21 @@ kendo_module({
                 splits, value,
                 idx = 0, length,
                 weekStart,
-                weekDays;
+                weekDays,
+                predicate = function(a, b) {
+                    var day1 = a.day,
+                        day2 = b.day;
+
+                    if (day1 < weekStart) {
+                       day1 += weekStart;
+                    }
+
+                    if (day2 < weekStart) {
+                        day2 += weekStart;
+                    }
+
+                    return day1 - day2;
+                };
 
             if (rule.substring(0, 6) === "RRULE:") {
                 rule = rule.substring(6);
@@ -1697,7 +1710,6 @@ kendo_module({
                     case "BYMONTH":
                         result.months = parseArray(value, { start: 1, end: 12 });
                         break;
-                    }
                     case "BYDAY":
                         result.weekDays = weekDays = parseWeekDayList(value);
                         break;
@@ -1707,7 +1719,7 @@ kendo_module({
                     case "BYWEEKNO":
                         result.weekNumber = parseArray(value, { start: 1, end: 53 });
                         break;
-                    case "WKST": {
+                    case "WKST":
                         result.weekStart = weekStart = WEEK_DAYS[value[0]];
                         break;
                 }
@@ -1725,20 +1737,7 @@ kendo_module({
                 }
 
                 if (weekDays) {
-                    result.weekDays = weekDays.sort(function(a, b) {
-                        var day1 = a.day,
-                            day2 = b.day;
-
-                        if (day1 < weekStart) {
-                           day1 += weekStart;
-                        }
-
-                        if (day2 < weekStart) {
-                            day2 += weekStart;
-                        }
-
-                        return day1 - day2;
-                    });
+                    result.weekDays = weekDays.sort(predicate);
                 }
             }
 
