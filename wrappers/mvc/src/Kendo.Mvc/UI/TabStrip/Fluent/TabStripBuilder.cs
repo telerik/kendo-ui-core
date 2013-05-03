@@ -155,7 +155,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
-        ///             .BindTo(new []{"First", "Second"}, (item, value)
+        ///             .BindTo(new []{"First", "Second"}, (item, value) =>
         ///             {
         ///                item.Text = value;
         ///             })

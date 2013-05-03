@@ -145,7 +145,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// If set to false, the min and max dates will not be rounded off to
-        /// the nearest baseUnit. 
+        /// the nearest baseUnit.
         /// This option is most useful in combination with explicit min and max dates.
         /// It will be ignored if either Bar, Column, OHLC or Candlestick series are plotted on the axis.
         /// </summary>
@@ -302,8 +302,8 @@ namespace Kendo.Mvc.UI.Fluent
         ///                .Labels(labels => labels
         ///                    .Culture(new CultureInfo("es-ES")
         ///                    .Visible(true)
-        ///                );
-        ///            )
+        ///                )
+        ///            ))
         /// %&gt;
         /// </code>
         /// </example>
@@ -336,7 +336,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .CategoryAxis(axis => axis.Select(DateTime.Today.AddMonths(-1), DateTime.Today))
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartDateCategoryAxisBuilder<TModel> Select(DateTime? from, DateTime? to)
         {
             Axis.Select.From = from;
@@ -355,10 +355,10 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Name("StockChart")
         ///           .CategoryAxis(axis => axis.Select(select =>
         ///               select.Mousewheel(mw => mw.Reverse())
-        ///           )
+        ///           ))
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartDateCategoryAxisBuilder<TModel> Select(Action<ChartAxisSelectionBuilder> configurator)
         {
             configurator(new ChartAxisSelectionBuilder(Axis.Select));

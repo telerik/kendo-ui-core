@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent
             Column.Title = text;
 
             return this as TColumnBuilder;
-        }        
+        }
 
         /// <summary>
         /// Sets the HTML attributes applied to the header cell of the column.
@@ -68,8 +68,8 @@ namespace Kendo.Mvc.UI.Fluent
         public TColumnBuilder HeaderHtmlAttributes(object attributes)
         {
             return HeaderHtmlAttributes(attributes.ToDictionary());
-        }        
-        
+        }
+
         /// <summary>
         /// Sets the HTML attributes applied to the header cell of the column.
         /// </summary>
@@ -89,8 +89,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
 
-        
-        
+
+
         /// <summary>
         /// Sets the HTML attributes applied to the footer cell of the column.
         /// </summary>
@@ -106,8 +106,8 @@ namespace Kendo.Mvc.UI.Fluent
         public TColumnBuilder FooterHtmlAttributes(object attributes)
         {
             return FooterHtmlAttributes(attributes.ToDictionary());
-        }        
-        
+        }
+
         /// <summary>
         /// Sets the HTML attributes applied to the footer cell of the column.
         /// </summary>
@@ -126,7 +126,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-        
+
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
@@ -142,8 +142,8 @@ namespace Kendo.Mvc.UI.Fluent
         public TColumnBuilder HtmlAttributes(object attributes)
         {
             return HtmlAttributes(attributes.ToDictionary());
-        }       
-        
+        }
+
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
@@ -161,7 +161,7 @@ namespace Kendo.Mvc.UI.Fluent
             MergeAttributes(Column.HtmlAttributes, attributes);
 
             return this as TColumnBuilder;
-        }        
+        }
 
         /// <summary>
         /// Sets the width of the column in pixels.
@@ -190,12 +190,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().Grid(Model)
         ///            .Name("Grid")
-        ///            .Columns(columns => columns.Bound(o => 
+        ///            .Columns(columns => columns.Bound(o =>
         ///            {
         ///                %&gt;
         ///                     &lt;%= Html.ActionLink("Edit", "Home", new { id = o.OrderID}) %&gt;
         ///                &lt;%
-        ///            })
+        ///            }))
         ///            .Width("30px")
         ///            .Render();
         /// %&gt;
@@ -207,8 +207,8 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-        
-        
+
+
         /// <summary>
         /// Makes the column visible or not. By default all columns are visible. Invisible columns are not rendered in the output HTML.
         /// </summary>
@@ -226,7 +226,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-                
+
         /// <summary>
         /// Makes the column hidden or not. By default all columns are not hidden. Hidden columns are rendered in the output HTML but are hidden.
         /// </summary>
@@ -261,10 +261,10 @@ namespace Kendo.Mvc.UI.Fluent
             Column.Hidden = true;
 
             return this as TColumnBuilder;
-        }        
-       
+        }
+
         /// <summary>
-        /// Specifys whether the columns should be included in column header menu. By default all columns are included. 
+        /// Specifys whether the columns should be included in column header menu. By default all columns are included.
         /// The column also need to have a Title set in order to be included in the menu.
         /// </summary>
         /// <example>
@@ -280,8 +280,8 @@ namespace Kendo.Mvc.UI.Fluent
             Column.IncludeInMenu = value;
 
             return this as TColumnBuilder;
-        }           
-        
+        }
+
         /// <summary>
         /// Sets the header template for the column.
         /// </summary>
@@ -291,7 +291,7 @@ namespace Kendo.Mvc.UI.Fluent
             Column.HeaderTemplate.Content = template;
             return this as TColumnBuilder;
         }
-        
+
         /// <summary>
         /// Sets the header template for the column.
         /// </summary>
@@ -310,7 +310,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Column.HeaderTemplate.InlineTemplate = template;
             return this as TColumnBuilder;
-        }        
+        }
 
         /// <summary>
         /// Sets the footer template for the column.
@@ -346,7 +346,7 @@ namespace Kendo.Mvc.UI.Fluent
         public TColumnBuilder ClientFooterTemplate(string template)
         {
             Column.ClientFooterTemplate = template;
-            
+
             return this as TColumnBuilder;
         }
 

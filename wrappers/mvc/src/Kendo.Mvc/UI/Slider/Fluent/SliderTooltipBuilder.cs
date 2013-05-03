@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
-        ///             .Tooltip(tooltip => tooltip.Format("{0:P"))
+        ///             .Tooltip(tooltip => tooltip.Format("{0:P}"))
         /// %&gt;
         /// </code>
         /// </example>

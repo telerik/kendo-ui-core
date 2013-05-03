@@ -780,13 +780,13 @@ namespace Kendo.Mvc.UI.Fluent
         ///         // configure the data source
         ///         dataSource
         ///             .Ajax()
-        ///             .Destroy(destroy =&gt; destroy.Action(&quot;Products_Destroy&quot;, &quot;Home&quot;)
+        ///             .Destroy(destroy =&gt; destroy.Action(&quot;Products_Destroy&quot;, &quot;Home&quot;))
         ///             .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
         ///     )
         /// %&gt;
         /// </code>
         /// <code lang="Razor">
-        /// &lt;%:Html.Kendo().Grid&lt;Product&gt;()
+        /// @(Html.Kendo().Grid&lt;Product&gt;()
         ///     .Name(&quot;grid&quot;)
         ///     .Columns(columns =&gt;
         ///     {
@@ -797,10 +797,10 @@ namespace Kendo.Mvc.UI.Fluent
         ///         // configure the data source
         ///         dataSource
         ///             .Ajax()
-        ///             .Destroy(destroy =&gt; destroy.Action(&quot;Products_Destroy&quot;, &quot;Home&quot;)
+        ///             .Destroy(destroy =&gt; destroy.Action(&quot;Products_Destroy&quot;, &quot;Home&quot;))
         ///             .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
         ///     )
-        /// %&gt;
+        /// )
         /// </code>
         /// </example>
         public GridBuilder<T> Columns(Action<GridColumnFactory<T>> configurator)
@@ -814,7 +814,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Enables grid column filtering.
+        /// Enables grid column sorting.
         /// </summary>
         /// <example>
         /// <code lang="ASPX">
@@ -857,7 +857,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="ASPX">
         /// &lt;%:Html.Kendo().Grid&lt;Product&gt;()
         ///     .Name(&quot;grid&quot;)
-        ///     .Sortable(sorting =&gt; sorting.SortMode(GridSortMode.MultipleColumn)
+        ///     .Sortable(sorting =&gt; sorting.SortMode(GridSortMode.MultipleColumn))
         ///     .DataSource(dataSource =&gt;
         ///         // configure the data source
         ///         dataSource
@@ -869,7 +869,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///<code lang="Razor">
         /// @(Html.Kendo().Grid&lt;Product&gt;()
         ///     .Name(&quot;grid&quot;)
-        ///     .Sortable(sorting =&gt; sorting.SortMode(GridSortMode.MultipleColumn)
+        ///     .Sortable(sorting =&gt; sorting.SortMode(GridSortMode.MultipleColumn))
         ///     .DataSource(dataSource =&gt;
         ///         // configure the data source
         ///         dataSource

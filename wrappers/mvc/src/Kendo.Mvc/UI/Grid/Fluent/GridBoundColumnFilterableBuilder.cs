@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// Defines the fluent interface for configuring bound columns filterable options
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public class GridBoundColumnFilterableBuilder : GridFilterableSettingsBuilderBase<GridBoundColumnFilterableBuilder>      
+    public class GridBoundColumnFilterableBuilder : GridFilterableSettingsBuilderBase<GridBoundColumnFilterableBuilder>
     {
         private readonly GridBoundColumnFilterableSettings settings;
 
@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="GridBoundColumnFilterableBuilder"/> class.
         /// </summary>
         /// <param name="column">The column.</param>
-        public GridBoundColumnFilterableBuilder(GridBoundColumnFilterableSettings settings) : base(settings)       
+        public GridBoundColumnFilterableBuilder(GridBoundColumnFilterableSettings settings) : base(settings)
         {
             this.settings = settings;
         }
@@ -28,10 +28,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderDate).Filterable(filterable => filterable.UI(GridFilterUIRole.DatePicker))
+        ///             .Columns(columns =>
+        ///                 columns.Bound(o => o.OrderDate)
+        ///                        .Filterable(filterable =>
+        ///                             filterable.UI(GridFilterUIRole.DatePicker)
+        ///                        )
+        ///             )
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public GridBoundColumnFilterableBuilder UI(GridFilterUIRole role)
         {
             settings.FilterUIRole = role;
@@ -45,10 +50,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderDate).Filterable(filterable => filterable.UI(@&lt;text&gt; JavaScript function goes here &lt;/text&gt;))
+        ///             .Columns(columns =>
+        ///                 columns.Bound(o => o.OrderDate)
+        ///                        .Filterable(filterable =>
+        ///                             filterable.UI(@&lt;text&gt;
+        ///                                 JavaScript function goes here
+        ///                                 &lt;/text&gt;)
+        ///                         )
+        ///             )
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public GridBoundColumnFilterableBuilder UI(Func<object, object> handler)
         {
             settings.FilterUIHandler.TemplateDelegate = handler;
@@ -58,11 +70,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets JavaScript function which to modify the UI of the filter input.
         /// </summary>
-        /// <param name="handler">JavaScript function name</param>        
+        /// <param name="handler">JavaScript function name</param>
         public GridBoundColumnFilterableBuilder UI(string handler)
         {
             settings.FilterUIHandler.HandlerName = handler;
             return this;
-        }        
+        }
     }
 }

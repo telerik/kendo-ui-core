@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Font(string font)
         {
             tooltip.Font = font;
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>     
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Visible(bool visible)
         {
             tooltip.Visible = visible;
@@ -105,7 +105,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example> 
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Background(string background)
         {
             tooltip.Background = background;
@@ -130,16 +130,17 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .CategoryAxis(axis => axis
         ///                .Categories("2005", "2006", "2007", "2008", "2009")
         ///                .Crosshair(crosshair => crosshair
-        ///                .Visible(true)
-        ///                .Tooltip(tooltip => tooltip
-        ///                     .color("red")
         ///                     .Visible(true)
-        ///                )
+        ///                     .Tooltip(tooltip => tooltip
+        ///                          .color("red")
+        ///                          .Visible(true)
+        ///                     )
+        ///               )
         ///           )
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Color(string color)
         {
             tooltip.Color = color;
@@ -174,7 +175,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Padding(int top, int right, int bottom, int left)
         {
             tooltip.Padding.Top = top;
@@ -209,7 +210,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Padding(int padding)
         {
             tooltip.Padding = new ChartSpacing(padding);
@@ -242,7 +243,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Border(int width, string color)
         {
             tooltip.Border = new ChartElementBorder(width, color, ChartDashType.Solid);
@@ -287,7 +288,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Format(string format)
         {
             tooltip.Format = format;
@@ -331,7 +332,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisCrosshairTooltipBuilder Template(string template)
         {
             tooltip.Template = template;

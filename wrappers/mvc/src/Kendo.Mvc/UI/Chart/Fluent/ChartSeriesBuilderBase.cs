@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Name("Chart")
         ///            .DataSource(dataSource => dataSource
         ///                .Read(read => read.Action("_StockData", "Scatter_Charts"))
-        ///                .Group(group => group.Add(model => model.Symbol)))
+        ///                .Group(group => group.Add(model => model.Symbol))
         ///            )
         ///            .Series(series => series.Bar(s => s.Sales)
         ///                 .Name("Sales")
@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public TSeriesBuilder GroupNameTemplate(string groupNameTemplate)
         {
             Series.GroupNameTemplate = groupNameTemplate;
@@ -114,7 +114,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public TSeriesBuilder Color(string color)
         {
             Series.Color = color;
@@ -194,7 +194,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configures the series highlight
         /// </summary>
-        /// <param name="configurator">The configuration action.</param>        
+        /// <param name="configurator">The configuration action.</param>
         public TSeriesBuilder Highlight(Action<ChartSeriesHighlightBuilder> configurator)
         {
             configurator(new ChartSeriesHighlightBuilder(Series.Highlight));

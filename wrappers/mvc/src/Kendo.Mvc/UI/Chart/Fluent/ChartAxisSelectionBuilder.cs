@@ -26,13 +26,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .CategoryAxis(axis => axis.Select(select =>
-        ///               select.From(fromDate).To(toDate)
+        ///           .CategoryAxis(axis =>
+        ///               axis.Select(select => select.From(from))
         ///           )
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisSelectionBuilder From(DateTime fromDate)
         {
             selection.From = fromDate;
@@ -49,11 +49,11 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis.Select(select =>
         ///               select.From(from).To(to)
-        ///           )
+        ///           ))
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisSelectionBuilder From(double from)
         {
             selection.From = from;
@@ -70,11 +70,11 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis.Select(select =>
         ///               select.To(toDate).To(toDate)
-        ///           )
+        ///           ))
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisSelectionBuilder To(DateTime toDate)
         {
             selection.To = toDate;
@@ -89,13 +89,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .CategoryAxis(axis => axis.Select(select =>
-        ///               select.To(to).To(to)
-        ///           )
+        ///           .CategoryAxis(axis => axis.Select(select => select.To(to).To(to)
+        ///           ))
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartAxisSelectionBuilder To(double to)
         {
             selection.To = to;

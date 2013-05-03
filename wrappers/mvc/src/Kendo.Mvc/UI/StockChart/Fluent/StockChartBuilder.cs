@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 .Series(series =>
         ///                 {
         ///                     series.Line(s => s.Volume);
-        ///                 }
+        ///                 })
         ///             )
         /// %&gt;
         /// </code>
@@ -523,7 +523,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Enables or disabled animated transitions on initial load and refresh. 
+        /// Enables or disabled animated transitions on initial load and refresh.
         /// </summary>
         /// <param name="transitions">
         /// A value indicating if transition animations should be played.
