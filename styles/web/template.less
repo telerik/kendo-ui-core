@@ -381,14 +381,6 @@ textarea.k-textbox:hover,
 .k-button
 {
     color: @button-text-color;
-}
-
-.k-button,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:active,
-.k-state-disabled .k-button:active
-{
     border-color: @widget-border-color;
     background-color: @button-background-color;
 }
@@ -398,6 +390,16 @@ textarea.k-textbox:hover,
     color: @hover-text-color;
     border-color: @hover-border-color;
     background-color: @hover-background-color;
+}
+
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:active,
+.k-state-disabled .k-button:active
+{
+    color: @disabled-text-color;
+    border-color: @widget-border-color;
+    .composite-background(@widget-gradient);
 }
 
 .k-draghandle
@@ -604,7 +606,6 @@ div.k-imagebrowser-dropzone em
 .k-state-disabled,
 .k-state-disabled .k-link,
 .k-state-disabled .k-button,
-.k-button.k-state-disabled:active,
 .k-other-month .k-link,
 .k-dropzone em,
 .k-tile-empty strong,
