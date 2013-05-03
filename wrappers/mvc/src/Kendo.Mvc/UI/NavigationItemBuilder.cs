@@ -64,8 +64,8 @@ namespace Kendo.Mvc.UI.Fluent
         public TBuilder HtmlAttributes(object attributes)
         {
             return HtmlAttributes(attributes.ToDictionary());
-        }        
-        
+        }
+
         /// <summary>
         /// Sets the HTML attributes applied to the outer HTML element rendered for the item
         /// </summary>
@@ -123,7 +123,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
-        ///             .Items(items => items.Add().Text("First Item").Visible((bool)ViewData["visible"])
+        ///             .Items(items => items.Add().Text("First Item").Visible((bool)ViewData["visible"]))
         /// %&gt;
         /// </code>
         /// </example>
@@ -141,7 +141,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
-        ///             .Items(items => items.Add().Text("First Item").Enabled((bool)ViewData["enabled"])
+        ///             .Items(items => items.Add().Text("First Item").Enabled((bool)ViewData["enabled"]))
         /// %&gt;
         /// </code>
         /// </example>
@@ -374,8 +374,8 @@ namespace Kendo.Mvc.UI.Fluent
         public TBuilder ImageHtmlAttributes(object attributes)
         {
             return ImageHtmlAttributes(attributes.ToDictionary());
-        }        
-        
+        }
+
         /// <summary>
         /// Sets the HTML attributes for the item image.
         /// </summary>
@@ -399,7 +399,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             .Name("Menu")
         ///             .Items(items => items
         ///                    .Add().Text("First Item")
-        ///                    .SpriteCssClasses("icon", "first-item")
+        ///                    .SpriteCssClasses("icon", "first-item"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -420,15 +420,15 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Items(items => items
         ///                     .Add()
         ///                     .Text("First Item")
-        ///                     .Content(() => 
-        ///                     { 
+        ///                     .Content(() =>
+        ///                     {
         ///                         %&gt;
         ///                             &lt;strong&gt; First Item Content&lt;/strong&gt;
-        ///                         &lt;% 
-        ///                     });)
+        ///                         &lt;%
+        ///                     }))
         ///            .Render();
         /// %&gt;
-        /// </code>        
+        /// </code>
         public TBuilder Content(Action value)
         {
 
@@ -455,7 +455,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                );
         ///       )
         ///  )
-        /// </code>  
+        /// </code>
         public TBuilder Content(Func<object,object> value)
         {
 
@@ -478,7 +478,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                  )
         ///            .Render();
         /// %&gt;
-        /// </code>        
+        /// </code>
         public TBuilder Content(string value)
         {
 
@@ -486,7 +486,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TBuilder;
         }
-                
+
         /// <summary>
         /// Sets the HTML attributes of the content element of the item.
         /// </summary>
@@ -499,9 +499,10 @@ namespace Kendo.Mvc.UI.Fluent
         ///                    .Add().Text("First Item")
         ///                    .Content(() => { %&gt; &lt;strong&gt;First Item Content&lt;/strong&gt; &lt;% })
         ///                    .ContentHtmlAttributes(new {@class="first-item-content"})
+        ///             )
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public TBuilder ContentHtmlAttributes(object attributes)
         {
             return ContentHtmlAttributes(attributes.ToDictionary());
@@ -510,7 +511,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the HTML attributes of the content element of the item.
         /// </summary>
-        /// <param name="attributes">The attributes.</param>     
+        /// <param name="attributes">The attributes.</param>
         public TBuilder ContentHtmlAttributes(IDictionary<string, object> attributes)
         {
 
@@ -518,7 +519,7 @@ namespace Kendo.Mvc.UI.Fluent
             item.ContentHtmlAttributes.Merge(attributes);
 
             return this as TBuilder;
-        }        
+        }
 
         /// <summary>
         /// Makes the item navigate to the specified controllerAction method.
@@ -532,7 +533,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             .Items(items => items
         ///                    .Add().Text("First Item")
         ///                    .Action&lt;HomeController&gt;(controller => controller.Index()))
-        ///                    
+        ///
         /// %&gt;
         /// </code>
         /// </example>

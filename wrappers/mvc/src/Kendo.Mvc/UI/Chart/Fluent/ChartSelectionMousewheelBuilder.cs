@@ -29,11 +29,11 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .CategoryAxis(axis => axis.Select(select => select
         ///               .From(fromDate).To(toDate)
         ///               .Mousewheel(mw => mw.Reverse())
-        ///           )
+        ///           ))
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartSelectionMousewheelBuilder Reverse()
         {
             mousehweel.Reverse = true;
@@ -54,11 +54,11 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .CategoryAxis(axis => axis.Select(select => select
         ///               .From(fromDate).To(toDate)
         ///               .Mousewheel(mw => mw.Reverse(true))
-        ///           )
+        ///           ))
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartSelectionMousewheelBuilder Reverse(bool reverse)
         {
             mousehweel.Reverse = reverse;
@@ -76,11 +76,11 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .CategoryAxis(axis => axis.Select(select =>
         ///               select.From(from).To(to)
         ///               .Mousewheel(mw => mw.Zoom(ChartZoomDirection.Left))
-        ///           )
+        ///           ))
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartSelectionMousewheelBuilder Zoom(ChartZoomDirection zoom)
         {
             mousehweel.Zoom = zoom;

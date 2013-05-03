@@ -118,7 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .BindTo(new []{"First", "Second"}, (item, value)
+        ///             .BindTo(new []{"First", "Second"}, (item, value) =>
         ///             {
         ///                item.Text = value;
         ///             })
@@ -151,7 +151,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                         .Children(o => null) // "Orders" do not have child objects so return "null"
         ///                         .ItemDataBound((item, o) => item.Text = o.OrderID.ToString()) // Map "Order" properties to PanelBarItem properties
         ///                     )
-        ///             ) 
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -277,7 +277,7 @@ namespace Kendo.Mvc.UI.Fluent
         public PanelBarBuilder ExpandMode(PanelBarExpandMode value)
         {
             Component.ExpandMode = value;
-            
+
             return this;
         }
 

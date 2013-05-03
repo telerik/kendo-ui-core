@@ -204,7 +204,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .CategoryAxis(axis => axis.Select(0, 3))
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartCategoryAxisBuilder<TModel> Select(double from, double to)
         {
             Axis.Select.From = from;
@@ -223,10 +223,10 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Name("StockChart")
         ///           .CategoryAxis(axis => axis.Select(select =>
         ///               select.Mousewheel(mw => mw.Reverse())
-        ///           )
+        ///           ))
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public ChartCategoryAxisBuilder<TModel> Select(Action<ChartAxisSelectionBuilder> configurator)
         {
             configurator(new ChartAxisSelectionBuilder(Axis.Select));

@@ -112,15 +112,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .ColumnMenu(menu => menu.Messages(msg => msg.Filter("Custom filter message"))
+        ///             .ColumnMenu(menu => menu.Messages(msg => msg.Filter("Custom filter message")))
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public GridColumnMenuSettingsBuilder Messages(Action<ColumnMenuMessagesBuilder> configurator)
         {
             configurator(new ColumnMenuMessagesBuilder(settings.Messages));
 
             return this;
-        }        
+        }
     }
 }

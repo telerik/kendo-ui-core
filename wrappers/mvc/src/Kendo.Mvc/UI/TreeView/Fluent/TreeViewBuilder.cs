@@ -282,7 +282,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Binds the TreeView to a list of objects. The TreeView will be "flat" which means a TreeView item will be created for 
+        /// Binds the TreeView to a list of objects. The TreeView will be "flat" which means a TreeView item will be created for
         /// every item in the data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
@@ -292,7 +292,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
-        ///             .BindTo(new []{"First", "Second"}, (item, value)
+        ///             .BindTo(new []{"First", "Second"}, (item, value) =>
         ///             {
         ///                item.Text = value;
         ///             })
@@ -326,7 +326,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                         .Children(o => null) // "Orders" do not have child objects so return "null"
         ///                         .ItemDataBound((item, o) => item.Text = o.OrderID.ToString()) // Map "Order" properties to TreeViewItem properties
         ///                     )
-        ///             ) 
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -414,7 +414,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///		            animation.Expand(open =>
         ///		            {
         ///		                open.SlideIn(SlideDirection.Down);
-        ///		            }
+        ///		            });
         ///	           })
         ///	%&gt;
         /// </code>

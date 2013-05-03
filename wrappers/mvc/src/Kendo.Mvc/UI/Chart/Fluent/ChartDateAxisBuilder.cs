@@ -184,8 +184,8 @@ namespace Kendo.Mvc.UI.Fluent
         ///                .Labels(labels => labels
         ///                    .Culture(new CultureInfo("es-ES")
         ///                    .Visible(true)
-        ///                );
-        ///            )
+        ///                )
+        ///            ))
         /// %&gt;
         /// </code>
         /// </example>

@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///		            animation.Open(open =>
         ///		            {
         ///		                open.SlideIn(SlideDirection.Down);
-        ///		            }
+        ///		            })
         ///	           })
         ///	%&gt;
         /// </code>
