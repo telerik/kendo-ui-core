@@ -64,6 +64,11 @@
                 return element.kendoWindow(options).data("kendoWindow");
             }
 
+            function createHighWindow(options, element, innerHeight) {
+                element = element || $("<div class='wnd'><div style='height:" + innerHeight + "px'></div></div>").appendTo(document.body);
+                return element.kendoWindow(options).data("kendoWindow");
+            }
+
             test("creates default html structure", function() {
                 var dialog = createWindow();
 
@@ -393,6 +398,11 @@
             test("height is constrained by maxHeight", function() {
                 var dialog = createWindow({ maxHeight: 100, height: 190 });
                 equal(dialog.wrapper.height(), 100);
+            });
+
+            test("height is constrained by maxHeight when content is larger", function() {
+                var dialog = createHighWindow({ maxHeight: 100 }, null, 200);
+                ok(dialog.element.height() <= 100);
             });
 
             test("creating window with string width", function() {

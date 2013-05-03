@@ -252,7 +252,8 @@ kendo_module({
                 wrapper = that.wrapper,
                 options = that.options,
                 w = options.width,
-                h = options.height;
+                h = options.height,
+                maxh = options.maxHeight;
 
             that.title(options.title);
 
@@ -262,6 +263,10 @@ kendo_module({
                     wrapper.css(prop, value);
                 }
             });
+
+            if (maxh && maxh != Infinity) {
+                that.element.css("maxHeight", maxh);
+            }
 
             if (w) {
                 if (w.toString().indexOf("%") > 0) {
