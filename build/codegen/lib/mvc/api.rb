@@ -121,53 +121,60 @@ PARAMETER = ERB.new(%{
 
     end
 
-    class Example < Struct.new(:code, :lang)
+    class Example < Struct.new(:code, :lang, :component, :method)
         def to_markdown
-            result = ''
-
-            lines = code.strip.split("\n")
-
-            source = lines.map { |line| line.strip }.join("\n")
+            source = code.strip.split("\n").map { |line| line.strip }.join("\n")
 
             length = source.size
-            idx = 0
+
+            open = source.scan(/\(/).size
+
+            close = source.scan(/\)/).size
+
+            raise "Opening parentheses are more than closing in:\n #{source}\n method: #{component.name}.#{method}" if open > close
+            raise "Closing parentheses are more than opening in:\n #{source}\n method: #{component.name}.#{method}" if open < close
+
+            open = source.scan(/}/).size
+
+            close = source.scan(/{/).size
+
+            raise "Opening braces are more than closing in:\n #{source}\n method: #{component.name}.#{method}" if open > close
+            raise "Closing braces are more than opening in:\n #{source}\n method: #{component.name}.#{method}" if open < close
+
             indent = 1
-            ch = "\n"
-            current_line = 0
+
+            idx = 0
+
+            line = result = ''
 
             while idx < length
-                if ch == "\n"
-                    if current_line == 1 && lang != 'Razor'
-                        indent += 1
+                ch = source[idx]
+
+                line += ch
+
+                idx += 1
+
+                if ch == "\n" || idx == length
+                    if line =~ /^(}|<\/text>)?\)$/ || line =~ /^{$/
+                        indent -=1
                     end
 
-                    if current_line == lines.size - 1 && lang != 'Razor'
+                    if indent == 2 && line =~ /^%>$/
                         indent -= 1
                     end
 
-                    current_line += 1
+                    raise "Indent can't be less than one:\n #{source} when:\n #{result} at:\n #{line} \n method: #{component.name}.#{method}" if indent < 1
 
-                    indent.times do
-                        result += '    '
+                    indent.times { result += '    ' }
+
+                    result += line
+
+                    if line =~ /^(@\(|<%[ :])/ || line =~ /=>.*$/ || line =~ /@<text>$/ || line =~ /^{$/ || line =~ /\($/
+                        indent += 1
                     end
+
+                    line = ''
                 end
-
-                ch = source[idx]
-                idx += 1
-
-                if ch == '('
-                    indent += 1
-                end
-
-                if ch == ')'
-                    indent -= 1
-                end
-
-                if result =~ /\n +$/ && (ch == ')' || ch == '}' || ch == '{' || source[idx-1..idx+5] == '</text>')
-                    result = result.chomp('    ')
-                end
-
-                result += ch
             end
 
             result
@@ -266,7 +273,7 @@ PARAMETER = ERB.new(%{
 
                     parameters = parse_parameterss(method)
 
-                    examples = parse_examples(method)
+                    examples = parse_examples(method, component, name)
 
                     returns = parse_returns(method)
 
@@ -303,12 +310,12 @@ PARAMETER = ERB.new(%{
                 end
             end
 
-            def parse_examples(method)
+            def parse_examples(method, component, name)
                 method.xpath('example/code').map do |code|
                     lang = code['lang']
                     lang = 'ASPX' unless lang
                     lang = 'ASPX' if lang == 'CS'
-                    Example.new(code.text, lang)
+                    Example.new(code.text, lang, component, name)
                 end
             end
 
