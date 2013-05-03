@@ -57,7 +57,7 @@ publish:true
     end
 
 METHOD = ERB.new(%{
-### <%= method_name%>
+### <%= method_name %>
 <%= summary %>
 <% if owner.name.include?('EventBuilder') %>
 For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
@@ -87,7 +87,7 @@ For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owne
         end
 
         def method_name
-            name.gsub('|', ',').gsub(/\((.*)\)/, '(`\1`)')
+            name.gsub('|', ',').gsub(/\((.*)\)/, '(`\1`)').sub(/(.*)T\d\(/, '\1(')
         end
 
         def suite
@@ -169,8 +169,16 @@ PARAMETER = ERB.new(%{
 
                     result += line
 
-                    if line =~ /^(@\(|<%[ :])/ || line =~ /=>.*$/ || line =~ /@<text>$/ || line =~ /^{$/ || line =~ /\($/
+                    if line =~ /^(@\(|<%[ :])/ || line =~ /@<text>$/ || line =~ /^{$/ || line =~ /\($/
                         indent += 1
+                    end
+
+                    if line =~ /=>.*$/
+                        open = line.scan(/\(/).size
+
+                        close = line.scan(/\)/).size
+
+                        indent += 1 if open > close
                     end
 
                     line = ''
