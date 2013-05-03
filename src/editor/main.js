@@ -752,9 +752,7 @@ kendo_module({
                         range.selectNode(e.target);
                         editor.selectRange(range);
                     }
-                });
-
-            $(editor.body)
+                })
                 .on("cut" + NS + " paste" + NS, function (e) {
                     editor.clipboard["on" + e.type](e);
                 })
