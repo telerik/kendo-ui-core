@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>code 128B tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../..//qunit/qunit/qunit.js"></script>
+        <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../../src/kendo.core.js"></script>        
+        <script src="../../../src/kendo.dataviz.core.js"></script>
+        <script src="../../../src/kendo.dataviz.barcode.js"></script> 
+		<script src="constants.js"></script> 
+		<script src="utils.js"></script>  		
+ 		
+        <script type="text/javascript">
+			var dataviz = kendo.dataviz,
+                encodings = dataviz.encodings;
+				
+			(function() {
+				var encoding,
+					characters = {
+						/* A */"65": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 3]],
+						/* B */"66": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3]],
+						/* E */"69": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3]],
+						/* H */"72": [[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3]],
+						/* K */"75": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1]],
+						/* L */"76": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
+						/* Q */"81": [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,3],[SPACE, 1]],
+						/* S */"83": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 3]],
+						/* T */"84": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1]],
+						/* X */"88": [[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 1]],
+						/* Z */"90": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1]],
+						/* < */"60": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2]],
+						/* = */"61": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
+						/* @ */"64": [[BAR,2],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
+						/* 0 */"48": [[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 2]],
+						/* 3 */"51": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 2]],
+						/* 7 */"55": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
+						/* ^ */"94": [[BAR,4],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 1]],
+						/* _ */"95": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 4]],
+						/* - */"45": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 2]],
+						/* ' */"39": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 2]],
+						/* # */"35": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3]],
+						/* SPACE */"32": [[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2]], 
+						/* ` */"96": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2]],
+						/* a */"97": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4]],
+						/* c */"99": [[BAR,1],[SPACE, 4],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 2]],
+						/* f */"102": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2]],
+						/* k */"107": [[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1]],
+						/* z */"122": [[BAR,2],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1]],
+						/* ~ */"126": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1]],
+						/* { */"123": [[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
+						/* DEL */"127": [[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3]],
+							START: [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 4]],
+							STOP: [[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 1],[BAR, 2]]							
+					};
+				
+				function calculateCheckSum(value){
+					var sum = 104;
+					for(var i = 0; i< value.length; i++){
+						ascii = value.charCodeAt(i);
+						sum+= (i+1)*(ascii - 32);
+					}
+					return sum % 103;
+				}
+				
+				function generateResult(value, checkValue, options){										
+					var expectedResult = [];
+					if(options.quietZoneLength){
+						expectedResult.push([SPACE, options.quietZoneLength]);
+					}					
+			
+					expectedResult.pushArray(characters.START);
+				
+					for( var i = 0; i < value.length; i++){										
+						expectedResult.pushArray(characters[value.charCodeAt(i)]);						
+					}
+				
+					expectedResult.pushArray(characters[checkValue.charCodeAt(0)]);			
+					
+										
+					expectedResult.pushArray(characters.STOP);					
+					
+					if(options.quietZoneLength){
+						expectedResult.push([SPACE, options.quietZoneLength]);
+					}
+
+					return expectedResult;
+				}
+				
+				module("128B", {
+                    setup: function() {
+                        encoding = new encodings.code128b();
+                    },
+                    teardown: function(){
+						encoding = null;
+					}
+                });
+	
+				test("test value TESTB", function() {
+					var value = "TESTB",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,"H",
+							{quietZoneLength: encoding.options.quietZoneLength });						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+			
+				test("test value AEXZ<=0 ", function() {
+					var value = "AEXZ<=0",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, "'",
+							{quietZoneLength: encoding.options.quietZoneLength });						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+	
+				test("test value ' a@cz^KL' ", function() {
+					var value = " a@cz^KL",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, "-",
+							{quietZoneLength: encoding.options.quietZoneLength });						
+			
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+			
+				test("test value (_730(DEL)#') ", function() {
+					var value = "_730" + String.fromCharCode(127) + "#'",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, "T",
+							{quietZoneLength: encoding.options.quietZoneLength });						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+			
+				test("test value (0`~k{ ) ", function() {
+					var value = "0`~k{ ",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, "Q",
+							{quietZoneLength: encoding.options.quietZoneLength });						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+				
+			
+				test("test invalid character error", function() {
+					var thrownError = false;
+					try{
+						encoding.encode("AASaT*" + String.fromCharCode(31), 300, 100);
+					}
+					catch (ex){
+						if(getCustomErrorMessage(ex.message)){
+							thrownError = true;
+						}
+					}
+					ok(thrownError);
+                });
+			
+				test("test base unit calculation", function() {
+					var width = 200,
+						height = 100,
+						value = " a@cz^KL" + String.fromCharCode(127),
+						quietZoneLength = encoding.options.quietZoneLength,
+						result,
+						resultWithoutQuietZone,
+						expectedResult = fixed(width / (134 + 2 * quietZoneLength), 2), 
+						expectedResultWithoutQuietZone = 1.49;
+							
+						encoding.options.addQuietZone = true;
+						result = encoding.encode(value, width, height).baseUnit;
+						equal(fixed(result, 2), expectedResult);
+								
+						encoding.options.addQuietZone = false;
+						resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
+						equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);								
+				});	
+				
+			})();
+        </script>
+		
+		<h1 id="qunit-header">encoding 128B</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+	</body>
+</html>	

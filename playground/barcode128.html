@@ -19,60 +19,94 @@
 		<div id="code93"></div>
 		<h3>code93extended</h3>
 		<div id="code93extended"></div>
+		<h3>code128A</h3>
+		<div id="code128A"></div>
+		<h3>code128B</h3>
+		<div id="code128B"></div>
+		<h3>code128C</h3>
+		<div id="code128C"></div>
+		
 		<h3>code128</h3>
 		<div id="code128"></div>
-
-	
         <script>
 			var value = "";
 			for(var i = 220; i< 242; i++){
 				value+= "T"
 			}
 			
-			$('#code39').kendoBarcode({
-				value: "TEST8052",
+			// $('#code39').kendoBarcode({
+				// value: "aTEST8052",
+				// encoding: {
+					// name: "code39",
+					// addCheckSum: true
+				// },
+				// width: 300,
+				// height: 100
+			// });
+			
+			// $('#code39extended').kendoBarcode({
+				// value: ">a12Asdas;" + String.fromCharCode(127),
+				// encoding: {
+					// name: "code39extended"
+				// },
+				// width: 500,
+				// height: 100
+			// });
+			
+			// $('#code93').kendoBarcode({
+				// value: "TEST93",
+				// encoding: {
+					// name: "code93"
+				// },
+				// width: 300,
+				// height: 100
+			// });
+			
+			// $('#code93extended').kendoBarcode({
+				// value: ">a12Asdas;" + String.fromCharCode(127),
+				// encoding: {
+					// name: "code93extended"
+				// },
+				// width: 300,
+				// height: 100
+			// });
+			
+			$('#code128A').kendoBarcode({
+				value: "TESTA",
 				encoding: {
-					name: "code39"
+					name: "code128A"
 				},
 				width: 300,
 				height: 100
-			});
-			
-			$('#code39extended').kendoBarcode({
-				value: ">a12Asdas;" + String.fromCharCode(127),
+			});	
+
+	
+			$('#code128B').kendoBarcode({
+				value: "ABASD",
 				encoding: {
-					name: "code39extended"
+					name: "code128B"
 				},
 				width: 300,
 				height: 100
-			});
-			
-			$('#code93').kendoBarcode({
-				value: "TEST93",
+			});	
+
+			$('#code128C').kendoBarcode({
+				value: "121314",
 				encoding: {
-					name: "code93"
+					name: "code128C"
 				},
 				width: 300,
 				height: 100
-			});
-			
-			$('#code93extended').kendoBarcode({
-				value: ">a12Asdas;" + String.fromCharCode(127),
-				encoding: {
-					name: "code93extended"
-				},
-				width: 300,
-				height: 100
-			});
-			
+			});	
+
 			$('#code128').kendoBarcode({
-				value: "dassmk;qk33k1;k",
+				value: String.fromCharCode(198) +  "Aba1213",
 				encoding: {
 					name: "code128"
 				},
 				width: 300,
 				height: 100
-			});								
+			});				
 			
 			
         </script>

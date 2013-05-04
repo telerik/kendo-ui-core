@@ -9,6 +9,7 @@
 
 (function ($, undefined) {
     var kendo = window.kendo,
+		extend = $.extend,
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
@@ -16,17 +17,31 @@
         BAR = 1,
         SPACE = 0,
         DEFAULT_QUIETZONE_LENGTH = 10,
-		numberRegex = /^\d+$/;
-
+		numberRegex = /^\d+$/,
+		InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}",
+		customErrorMessageStart="customerror:";
+		
+	function getNext(value, index, count){
+		return value.substring(index, index + count);
+	}
+	
+	function throwCustomError(message){
+		throw new Error(customErrorMessageStart + message);
+	}
+	
     var Encoding  = kendo.Class.extend({
-        init: function (options) {
-            this.options = $.extend(this.options, options);         
+        init: function (options) {			
+            this.options = extend({}, this.options, options );    
         },       
         encode: function (value, width, height) {
-            this.initValue(value, width, height);            
-            this.addQuietZone();            
+            this.initValue(value, width, height);
+			if(this.options.addQuietZone){            
+				this.addQuietZone();  
+			}
             this.addData();            
-            this.addQuietZone(); 
+            if(this.options.addQuietZone){            
+				this.addQuietZone();  
+			} 
 			
             return {
                 baseUnit: this.baseUnit,
@@ -34,34 +49,37 @@
             };
         },  
 		options: {
-			quietZoneLength: 10
+			quietZoneLength: DEFAULT_QUIETZONE_LENGTH,
+			addQuietZone: true
 		},		
-        initValue: function (value, width, height) {
-           
+        initValue: function (value, width, height) {           
         },
-        addQuietZone: function () { 
-            this.pattern.push([0, this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH]);
+        addQuietZone: function () { 			
+			this.pattern.push([SPACE, this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH]);
         },
 		addArrayToPattern:function(arr){
 			for(var i=0;i<arr.length;i++){
 				this.pattern.push(arr[i]);
 			}	
 		},
-        addData: function () {
-    
-        }
+        addData: function () {    
+        },
+		invalidCharacterError: function(character){
+			throwCustomError(kendo.format(InvalidCharacterErrorTemplate, character, this.options.name));
+		}
     }); 
 
     var encodings = {};
 
 	var code39Base = Encoding.extend({
+		minBaseUnitLength: 0.7,
 		addData: function(){
 			var value  = this.value;
 		
 			this.addStart();
 			
 			for(var idx = 0; idx < value.length; idx++){
-				this.addCharacter(value, idx);
+				this.addCharacter(value.charAt(idx));
 			}		
 			
 			if(this.options.addCheckSum){
@@ -69,62 +87,68 @@
 			} 
 			
 			this.addStop();
-			this.setBaseUnit();
-			this.validate();
+			this.prepareValues();
+		},
+		addCharacter: function(character){
+			var charData = this.characterMap[character];
+			if(!charData){
+				this.invalidCharacterError(character);				
+			}			
+			this.addBase(charData);
 		},
 		_findCharacterByValue: function (value) {
             for (var character in this.characterMap) {
                 if (this.characterMap[character].value === value) {
-                    return this.characterMap[character];
+                    return character;
                 }
             }
         },
-		addBase: function(character){
+		addBase: function(character){	
 			
 		},
 		options: {
-			addCheckSum: false,
-			showCheckSum: false,
-			addQuietZone: true
+			addCheckSum: false
 		}
 	});
 	
-	var code39ExtendedBase = {
-		addCharacter: function(value, index){
-			var code = value.charAt(index);
-			if(this.characterMap[code]){
-				this.addBase(this.characterMap[code]);
+	var code39ExtendedBase = {	
+		addCharacter: function(character){
+			if(this.characterMap[character]){
+				this.addBase(this.characterMap[character]);
 			}
-			else if(code > 127){
-				throw new Error("Invalid Character");
+			else if(character.charCodeAt(0) > 127){
+				this.invalidCharacterError(character);
 			}
 			else{			
-				var patterns;
-				for(var i = 0; i < this.extendedMappings.length; i++){
-					if(patterns = this.extendedMappings[i].call(this, code.charCodeAt(0))){
-						for(var j = 0; j < patterns.length; j++){							
-							this.addBase(patterns[j]);		
-						}
-						this.dataLength+= patterns.length - 1;
-						break;
-					}
-				}				
+				this.addExtended(character.charCodeAt(0));
 			}
+		},
+		addExtended: function(code){
+			var patterns;
+			for(var i = 0; i < this.extendedMappings.length; i++){
+				if(patterns = this.extendedMappings[i].call(this, code)){
+					for(var j = 0; j < patterns.length; j++){							
+						this.addBase(patterns[j]);		
+					}
+					this.dataLength+= patterns.length - 1;
+					return;
+				}
+			}									
 		},
 		extendedMappings: [
 			function(code){
 				if(97 <= code && code <= 122){
-					return [this.characterMap[this.shift0], this.characterMap[String.fromCharCode(code - 32)]]
+					return [this.characterMap[this.shiftCharacters[0]], this.characterMap[String.fromCharCode(code - 32)]]
 				}
 			},
 			function(code){
 				if(33 <= code && code <= 58){
-					return [this.characterMap[this.shift1], this.characterMap[String.fromCharCode(code + 32)]]
+					return [this.characterMap[this.shiftCharacters[1]], this.characterMap[String.fromCharCode(code + 32)]]
 				}
 			},	
 			function(code){
 				if(1 <= code && code <= 26){
-					return [this.characterMap[this.shift2], this.characterMap[String.fromCharCode(code + 64)]]
+					return [this.characterMap[this.shiftCharacters[2]], this.characterMap[String.fromCharCode(code + 64)]]
 				}
 			},		
 			function(code){
@@ -133,12 +157,12 @@
 					codes;
 				if(!this.specialAsciiCodes[code]){
 					dataCharacter =  Math.floor(code / 32) * 6 + (code - 27) % 32 + 64;
-					result = [this.characterMap[this.shift3], this.characterMap[String.fromCharCode(dataCharacter)]];
+					result = [this.characterMap[this.shiftCharacters[3]], this.characterMap[String.fromCharCode(dataCharacter)]];
 				}
 				else{
 					result = [];
 					for(var i = 0; i < this.specialAsciiCodes[code].length; i++){
-						result.push(this.characterMap[this.shift3]);
+						result.push(this.characterMap[this.shiftCharacters[3]]);
 						result.push(this.characterMap[this.specialAsciiCodes[code][i]]);
 					}
 				}
@@ -151,86 +175,105 @@
 			"64": ["V"],
 			"96": ["W"],
 			"127": ["T","X","Y","Z"]            
-		}
+		},
+		shiftValuesAsciiCodes:{
+			"39": 36,
+			"40": 47,
+			"41": 43,
+			"42": 37
+		},
+		characterMap: {
+			"+": false,
+			"/": false,
+			"$": false,
+			"%": false			
+		},
+		shiftCharacters: ["SHIFT0", "SHIFT1", "SHIFT2", "SHIFT3"]		
 	};
 	
-	//try adjust ratio?
     encodings.code39 =  code39Base.extend({
 		checkSumMod: 43,
-		minBaseUnitLength: 0.7,
 		minRatio: 2.5,
-		maxRatio: 3.4,		
+		maxRatio: 3,	
+		gapWidth: 1,		
+		spaceFormatString: "[SPACE, {0}]",
         initValue: function (value, width, height) {
             this.width = width;
-			this.height = this.height;
-			this.ratio = this.options.ratio;
+			this.height = height;
+			this.ratio = this.options.ratio || this.maxRatio;
             this.quietZoneLength = this.options.quietZoneLength;         
             this.value = value;
 			this.checkSum = 0;
 			this.dataLength = value.length;
             this.pattern = [];
         },
-		validate: function(){
+		addQuietZone: function(){
+			if(this.pattern.length > 0 ){
+				this.pattern.push([SPACE, this.quietZoneLength])
+			}
+			else{
+				this.pattern.push(kendo.format(this.spaceFormatString, this.quietZoneLength));
+			}			
+		},
+		prepareValues: function(){
 		    var minHeight = Math.max(0.15 * this.width, 24);
             if (this.height < minHeight) {
-                throw new Error("Insufficient height");				
+                throwCustomError("Insufficient Height");				
             }
+			this.setBaseUnit();
+			while(this.baseUnit < this.minBaseUnitLength && this.ratio > this.minRatio){
+				this.ratio = this.ratio - 0.1;
+				this.setBaseUnit();
+			}
 			
 			if(this.baseUnit < this.minBaseUnitLength){				
-				throw new Error("Insufficient width");				
+				throwCustomError("Insufficient Width");				
 			}
+
+			this.pattern = new Function("ratio,BAR,SPACE", "return [" +  this.pattern.join(",") + "];")(this.ratio, BAR, SPACE);
 		},
 		setBaseUnit: function(){
-			var checkSumLength = this.options.addCheckSum ? 2 : 0,
-				quietZoneLength = this.options.addQuietZone ? this.options.quietZoneLength : 0;
-			
+			var characterLength = 3 * (this.ratio + 2),
+				checkSumLength = this.options.addCheckSum ? 1 : 0,
+				quietZoneLength = this.options.addQuietZone ? this.options.quietZoneLength : 0;			
+				
 			this.baseUnit =  this.width / 
-				((this.dataLength + 2 + checkSumLength) * (this.ratio + 2) * 3 + this.dataLength + 1 + 2 * quietZoneLength);
+					( 2 * quietZoneLength + characterLength * (this.dataLength + 2 + checkSumLength) + this.gapWidth * (this.dataLength + checkSumLength + 1));
 		},
         addStart: function () {
-             var character =  this.characterMap.START;
-             this.addPattern(character.pattern);
+             this.addPattern(this.characterMap.START.pattern);
              this.addCharacterGap();  
         },    
-		addCharacter: function(value, index){
-			var character = this.characterMap[value.charAt(index)];			
-			this.addBase(character);
-		},
 		addBase: function(character){
-			this.addPattern(character.pattern);
+			this.addPattern(character.pattern);			
 			this.checkSum+= character.value;
 			this.addCharacterGap();
 		},
 		pushCheckSum: function(){
-			var checkValue = this.checkSum % this.checkSumMod,
-				character = this._findCharacterByValue(checkValue);
-	
-			this.addPattern(character.pattern);
-			this.addCharacterGap();
+			var character = this._findCharacterByValue(this._getCheckValue());
+
+			this.addBase(this.characterMap[character]);
+		},
+		_getCheckValue: function(){
+			return this.checkSum % this.checkSumMod;
 		},
         addStop: function () {
-            var character =  this.characterMap.START;
-            this.addPattern(character.pattern);
+            this.addPattern(this.characterMap.START.pattern);
         }, 
         addPattern: function (pattern) {                
             for (var i = 0; i < pattern.length; i++) {
-                if (pattern[i] == "b") {
-                    this.pattern.push([BAR, 1]);
-                }
-                else if(pattern[i] == "B"){
-                    this.pattern.push([BAR, this.ratio]);
-                }
-                else if(pattern[i] == "w"){
-                    this.pattern.push([SPACE, 1]);
-                }
-                else if(pattern[i] == "W"){
-                    this.pattern.push([SPACE, this.ratio]);
-                }  
+				 this.pattern.push(this.patternMappings[pattern.charAt(i)]); 
             }
         },
         addCharacterGap: function () {
-            this.pattern.push([SPACE, 1]);
+            this.pattern.push(kendo.format(this.spaceFormatString, this.gapWidth));
         },
+		patternMappings: {
+			"b": "[BAR, 1]",
+			"w": "[SPACE, 1]",
+			"B": "[BAR, ratio]",
+			"W": "[SPACE, ratio]"
+		},
         characterMap: {           
 			"0":{"pattern":"bwbWBwBwb","value":0},
 			"1":{"pattern":"BwbWbwbwB","value":1},
@@ -276,20 +319,27 @@
 			"+":{"pattern":"bWbwbWbWb","value":41},
 			"%":{"pattern":"bwbWbWbWb","value":42},	     
             START: { pattern: "bWbwBwBwb"}
-        },
-        options: {
-            ratio: 2.5
         }
     });
 	
 	encodings.code39extended = encodings.code39.extend(code39ExtendedBase).extend({
-		shift0: "+",
-		shift1: "/",
-		shift2: "$",
-		shift3: "%"	
+		pushCheckSum: function(){
+			var value = this._getCheckValue();
+			if(this.shiftValuesAsciiCodes[value]){
+				this.addExtended(this.shiftValuesAsciiCodes[value]);						
+			}
+			else{
+				this.addBase(this.characterMap[this._findCharacterByValue(value)]);		
+			}
+		},
+		characterMap: {
+			SHIFT0: {"pattern":"bWbwbWbWb","value":41},
+			SHIFT1: {"pattern":"bWbWbwbWb","value":40},
+			SHIFT2: {"pattern":"bWbWbWbwb","value":39},
+			SHIFT3: {"pattern":"bwbWbWbWb","value":42}
+		}	
 	});
 	
-	//TO DO: validate
     encodings.code93 = code39Base.extend({
 		cCheckSumTotal: 20,
 		kCheckSumTotal: 15,
@@ -299,13 +349,20 @@
 			this.width = width;
 			this.height = height;
 			this.pattern = [];
-			this.cCheckSum = 0;
-			this.kCheckSum = 0;
-			this.dataLength = value.length;
-			this.dataIndex = 0;			
+			this.values = [];	
+		    this.dataLength = value.length;	
 		}, 
-		validate: function(){
+		prepareValues: function(){
+			var minHeight = Math.max(0.15 * this.width, 24);
+            if (this.height < minHeight) {
+                throwCustomError("Insufficient Height");				
+            }
 			
+			this.setBaseUnit();
+			
+			if(this.baseUnit < this.minBaseUnitLength){				
+				throwCustomError("Insufficient Width");				
+			}
 		},
 		setBaseUnit: function(){
 			var checkSumLength = this.options.addCheckSum ? 2 : 0,
@@ -318,28 +375,46 @@
 		},
 		addStop: function(){
 			this.addStart();
-			this.addPattern([1,1]);
-		},
-		addCharacter: function(value, index){
-			var character = value.charAt(index),
-				charData = this.characterMap[character];
-			this.addBase(charData)
+			this.pattern.push(this.characterMap.TERMINATION_BAR);
 		},
 		addBase: function(charData){
 			this.addPattern(charData.pattern);
-			this.addCheckSums(charData.value, this.dataIndex++);
+			this.values.push(charData.value);			
 		},
-		addCheckSums: function(characterValue, index){						
+		addCheckSums: function(characterValue, index){			
 			this.cCheckSum += this.weightedValue(characterValue, this.dataLength, index, this.cCheckSumTotal);					
 			this.kCheckSum += this.weightedValue(characterValue, this.dataLength + 1, index, this.kCheckSumTotal);
 		},
 		pushCheckSum: function(){
-			var cValue = this.cCheckSum % this.checkSumMod,
-				cCharacter = this._findCharacterByValue(cValue),
-				kValue = (this.kCheckSum  + cValue) % this.checkSumMod,
-				kCharacter = this._findCharacterByValue(kValue);	
-			this.addPattern(cCharacter.pattern);
-			this.addPattern(kCharacter.pattern);			
+			var checkValues = this._getCheckValues(),
+				charData;
+			for(var i = 0; i < checkValues.length; i++){
+				charData = this.characterMap[this._findCharacterByValue(checkValues[i])];
+				this.addPattern(charData.pattern);
+			}					
+		},
+		_getCheckValues: function(){
+			var values = this.values.reverse(),
+				wightedSum = 0,
+				cValue,
+				kValue;
+				
+			for(var i = 0; i < values.length; i++){
+				wightedSum += this.weightedValue(values[i], i + 1, this.cCheckSumTotal);
+			}			
+			cValue = wightedSum % this.checkSumMod;
+			
+			values.splice(0, 0, cValue);
+			wightedSum = 0;
+			for(var i = 0; i < values.length; i++){
+				wightedSum += this.weightedValue(values[i], i + 1, this.kCheckSumTotal);
+			}
+			
+			kValue = wightedSum % this.checkSumMod;
+			return [cValue, kValue];				
+		},
+		weightedValue: function(value, index, total){			
+			return (index % total || total) * value;			
 		},
 		addPattern: function(pattern){
 			var symbol,
@@ -350,10 +425,6 @@
 				value = parseInt(pattern[i]);
 				this.pattern.push([symbol, value]);
 			}
-		},
-		weightedValue: function(value, length, index, total){
-			var weightedValue = (length - index) % total;
-			return (weightedValue || total) * value;
 		},
 		options: {
 			addCheckSum: true,
@@ -402,28 +473,33 @@
 			"$":{"pattern":"321111","value":39},
 			"/":{"pattern":"112131","value":40},
 			"+":{"pattern":"113121","value":41},
-			"%":{"pattern":"211131","value":42},			
-			"START": {"pattern":"111141"}
+			"%":{"pattern":"211131","value":42},
+			SHIFT0:{"pattern":"122211","value":46},
+			SHIFT1:{"pattern":"311121","value":45},		
+			SHIFT2:{"pattern":"121221","value":43},
+			SHIFT3:{"pattern":"312111","value":44},				
+			START: {"pattern":"111141"},
+			TERMINATION_BAR: [BAR, 1]
 		}
 	});
 	
 	encodings.code93extended = encodings.code93.extend(code39ExtendedBase).extend({	
-		shift0: "SHIFT0",
-		shift1: "SHIFT1",
-		shift2: "SHIFT2",
-		shift3: "SHIFT3",		
-		characterMap: {
-			SHIFT0:{"pattern":"122211","value":46},
-			SHIFT1:{"pattern":"311121","value":45},		
-			SHIFT2:{"pattern":"121221","value":43},
-			SHIFT3:{"pattern":"312111","value":44}				
+		pushCheckSum: function(){
+			var checkValues = this._getCheckValues(),
+				value;
+
+			for(var i = 0; i < checkValues.length; i++){
+				value = checkValues[i];
+				if(this.shiftValuesAsciiCodes[value]){
+					this.addExtended(this.shiftValuesAsciiCodes[value]);				
+				}
+				else{
+					this.addPattern(this.characterMap[this._findCharacterByValue(value)].pattern);	
+				}				
+			}	
 		}
 	});
-	
-	function getNext(value, index, count){
-		return value.substring(index, index + count);
-	}
-	
+		
 	var state128 = kendo.Class.extend({
 		init: function(encoding, states){
 			this.encoding = encoding;
@@ -443,6 +519,10 @@
 	}); 
 		
 	var state128AB = state128.extend({
+		init: function(encoding, states){
+			this.encoding = encoding;
+			this._initMoves(states);
+		},	
 		addStart: function(){
 			this.encoding.addPattern(this.START);
 		},
@@ -501,11 +581,7 @@
 	
 	states128.A = state128AB.extend({
 		key: "A",
-		shiftKey: "B",
-		init: function(encoding, states){
-			this.encoding = encoding;
-			this._initMoves(states);
-		},		
+		shiftKey: "B",		
 		isCode: function(code){
 			return 0 <= code && code < 96;
 		},
@@ -522,11 +598,7 @@
 	
 	states128.B = state128AB.extend({
 		key: "B",
-		shiftKey: "A",
-		init: function(encoding, states){
-			this.encoding = encoding;
-			this._initMoves(states);
-		},		
+		shiftKey: "A",	
 		isCode: function(code){
 			return 32 <= code && code < 128;
 		},
@@ -534,7 +606,7 @@
 			return code - 32;
 		},
 		MOVE: 100,
-		START: 104,
+		START: 104
 	});
 	
 	states128.C = state128.extend({
@@ -544,15 +616,9 @@
 		},
 		is: function (value, index){
 			var next4 = getNext(value, index, 4);
-			return index + 4 <= value.length && numberRegex.test(next4);
+			return (index + 4 <= value.length || value.length == 2) && numberRegex.test(next4);
 		},
 		move: function (encodingState){
-			if(encodingState.fnc){
-				encodingState.fnc = false;
-				if(encodingState.state == this.key){
-					return;
-				}
-			}
 			this.encoding.addPattern(this.MOVE);
 		},
 		pushState: function(encodingState){
@@ -681,80 +747,100 @@
 		},		
 		pushState: function(encodingState){
 			var encoding = this.encoding,
-                value = encodingState.value,
+                value = encodingState.value.replace(" ", ""),
+				regexSeparator = new RegExp("[" +  this.startAI + this.endAI + "]", "g"),
                 index = encodingState.index,
-                current = this.getNextAI(value, index),
-                end,
-				subState;         
-                
-            while(index >=0 && index < value.length){
-                end = current.length ? current.length : value.indexOf(startAI, index + current.min);
-                
-                subState = {
-                    value: getNext(value, index, index + end).replace(/[)(]/g,"")
-                };
-            }
-			for(var i = 0; i < value.length;i++){
-				encoding.addPattern(this.START);
-				subState = {
-					value: value[i],
+				subState= {
+					value: "",
 					index: 0,
 					state: "C"
-				};
-				encoding.pushData(subState, this.states);                                    
-				encodingState.index+= isArray ? 1 : subState.value.length
-			}		
+				},
+                current,				
+				nextStart,
+				separatorLength,
+				codeLength;
+			encoding.addPattern(this.START);	
+			while(true){				
+				separatorLength = value.charAt(index) === this.startAI ? 2 : 0;
+				current = separatorLength > 0 ? this.getBySeparator(value, index) : this.getByLength(value, index);
+				if(current.ai.length){
+					nextStart = index + separatorLength + current.id.length	+ current.ai.length;
+				}	
+				else{
+					nextStart = value.indexOf(this.startAI, index + 1);
+					if(nextStart < 0){
+						if(index + current.ai.max + current.id.length + separatorLength < value.length){
+							throwCustomError("Separators are required for variable length codes");
+						}
+						nextStart = value.length;
+					}
+					//validate min								
+				}
+				subState.value = value.substring(index, nextStart);
+				encoding.pushData(subState, this.dependentStates);
+				if(nextStart >= value.length){
+					break;
+				}
+				index = nextStart;
+				if(!current.ai.length){
+					encoding.addPattern(this.START);	
+				}
+			}
+			encodingState.index = value.length;			
 		},
-        getNextAI: function(value, index){
-            var start = value.indexOf(startAI, index),
-                end = value.indexOf(endAI, start),
-                id = value.substring(start + 1,end);
-            if(!this.AI[id] && !this.AI[id.substr(id.length - 1)]){
-                throw new Error("Unsupported Application Identifier");
+		getByLength: function(value, index){
+			var idx = 2,
+				id,
+				ai;
+			for(var i = 2; i <= 4; i++){
+				id = getNext(value, index, i);
+				ai = this.AI[id] || this.AI[id.substring(0, id.length - 1)];
+				if(ai){
+					return {
+						id: id,
+						ai: ai
+					};
+				}
+			}
+			this.unsupportedAIError(id);
+		},
+		unsupportedAIError: function(id){
+			throwCustomError(kendo.format("'{0}' is not a supported Application Identifier"),id);
+		},
+        getBySeparator: function(value, index){
+            var start = value.indexOf(this.startAI, index),
+                end = value.indexOf(this.endAI, start),
+                id = value.substring(start + 1,end),
+				ai = this.AI[id] || this.AI[id.substr(id.length - 1)];
+            if(!ai){
+                this.unsupportedAIError(id);
             }
             
-            return this.AI[id];
+            return {
+				ai: ai,
+				id: id
+			}
         },
 		AI: {
 			"00": { length: 18, type: "numeric"},
             "00": { length: 18, type: "numeric"},
-            "329": {length: 6 },
-            "12": {length: 6},
+            "329": { length: 6 },
+            "12": { length: 6, type: "numeric"},
+			"21": { min: 1, max: 20, type: "alphanumeric"},
             "421": { min: 4, max: 12, type: "alphanumeric"}            
 		},
 		START: 102
 	});
 	// TO DO: add support for Application identifiers
 	//validate
-    encodings.code128 = Encoding.extend({
+    var code128Base = Encoding.extend({
         init: function (options) {
-            this.options = $.extend(this.options, options);   
+            Encoding.fn.init.call(this, options);
 			this._initStates();
         },  
-		_initStates: function(){
-			this.states = this.options.states;
-				
-			if(!$.isArray(this.states)){
-				this.states = [this.states];
-			}
-			debugger;
-			for(var i = 0; i < this.states.length; i++){
-				if(states128[this.states[i]].prototype.dependentStates){
-					var dependentState,
-						dependentStates = states128[this.states[i]].prototype.dependentStates;
-					for(var j = 0; j < dependentStates.length; j++){
-						dependentState = dependentStates[j];
-						if(this.states.indexOf(dependentState) < 0){
-							this.states.push(dependentState);
-						}
-					}
-				}
-			}
-			
+		_initStates: function(){						
 			for(var i = 0; i < this.states.length; i++){				
-				if(!this[this.states[i]]){
-					this[this.states[i]]  = new states128[this.states[i]](this, this.states);					
-				}
+				this[this.states[i]]  = new states128[this.states[i]](this, this.states);					
 			}
 		},
         initValue: function (value, width, height) {
@@ -765,8 +851,7 @@
 		   this.checkSum = 0;
 		   this.totalUnits = 0;
 		   this.index = 0;
-		   this.position = 1;
-		   this.printText = this.value;		   
+		   this.position = 1;	   
         },
         addData: function(){
 			var encodingState = {
@@ -805,14 +890,15 @@
 			this.position = 1;
 		},
 		addCheckSum: function(){
-			var code = this.checkSum % 103;
-			this.addPattern(code);
+			var checkValue = this.checkSum % 103;
+			this.addPattern(checkValue);
 		},
 		addStop: function(){
 			this.addPattern(this.STOP);
 		},
 		setBaseUnit: function(){
-			this.baseUnit = this.width / (this.totalUnits + 2 * this.options.quietZoneLength);
+			var quietZoneLength = this.options.addQuietZone ? this.options.quietZoneLength : 0;
+			this.baseUnit = this.width / (this.totalUnits + 2 * quietZoneLength);
 		},
 		addPattern: function(code){	
 			var pattern = this.characterMap[code].toString(),
@@ -833,16 +919,31 @@
 					return states[i];
 				}
 			}
-			throw new Error("Invalid character for encoding 128");
+			throwCustomError("Invalid character for encoding 128");
 		},
 		characterMap: [
 			212222,222122,222221,121223,121322,131222,122213,122312,132212,221213,221312,231212,112232,122132,122231,113222,123122,123221,223211,221132,221231,213212,223112,312131,311222,321122,321221,312212,322112,322211,212123,212321,232121,111323,131123,131321,112313,132113,132311,211313,231113,231311,112133,112331,132131,113123,113321,133121,313121,211331,231131,213113,213311,213131,311123,311321,331121,312113,312311,332111,314111,221411,431111,111224,111422,121124,121421,141122,141221,112214,112412,122114,122411,142112,142211,241211,221114,413111,241112,134111,111242,121142,121241,114212,124112,124211,411212,421112,421211,212141,214121,412121,111143,111341,131141,114113,114311,411113,411311,113141,114131,311141,411131,211412,211214,211232,2331112
 		],
 		STOP: 106,			
-        options: {
-			states: ["C", "B", "A", "FNC4","FNC1"]
+        options: {		
         }    
     });	
+	
+	encodings.code128a = code128Base.extend({
+		states: ["A"]
+	});
+	
+	encodings.code128b = code128Base.extend({
+		states: ["B"]
+	});
+	
+	encodings.code128c = code128Base.extend({
+		states: ["C"]
+	});
+	
+	encodings.code128 = code128Base.extend({
+		states: ["C", "B", "A", "FNC4"]
+	});
 	
 	encodings.ean8 = Encoding.extend({
 		initValue: function(value, width, height){
@@ -1042,10 +1143,21 @@
             }
             this.options = $.extend(this.options, options);           
             this.value(this.options.value);
-        },
+        },		
         redraw: function () {
-            var result = this.encoding.encode(this.value, 
-                this.options.width, this.options.height);
+            var result;
+			try{
+				result = this.encoding.encode(this.value, 
+					this.options.width, this.options.height);
+			}
+			catch(ex){
+				if(ex.message.indexOf(customErrorMessageStart) !== 0){
+					throw ex;
+				}
+				this.showError(ex.message.substr(customErrorMessageStart.length));
+				return;
+			}
+			
             this.view.children = [];
             this.view.options.width = this.options.width;
             this.view.options.height = this.options.height + this.options.fontSize;
@@ -1057,6 +1169,9 @@
             }
             this.view.renderTo(this.element);
         },
+		showError: function(msg){
+			alert(msg);
+		},
         value: function(value){            
             this.value = value;
             this.redraw();            

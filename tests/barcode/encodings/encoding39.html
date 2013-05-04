@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>code 39 tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../..//qunit/qunit/qunit.js"></script>
+        <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../../src/kendo.core.js"></script>        
+        <script src="../../../src/kendo.dataviz.core.js"></script>
+        <script src="../../../src/kendo.dataviz.barcode.js"></script> 
+		<script src="constants.js"></script> 
+		<script src="utils.js"></script>  		
+ 		
+        <script type="text/javascript">
+			var dataviz = kendo.dataviz,
+                encodings = dataviz.encodings;
+			(function() {
+				var encoding,
+					characters = {
+						START: new Function("ratio", "return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						E: new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+						H: new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						I: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						O: new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio]]"),
+						P: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+						S: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),
+						T: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),												
+						"0": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						"1": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),						
+						"2": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+						"3": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+						"4": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+						"5": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+						"6": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+						"7": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
+						"8": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						"-": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
+						".": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						" ": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+						"$": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+						"/": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+						"+": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+						"%": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+						GAP: [SPACE, 1],
+						QUIET_ZONE: new Function("length", "return [SPACE, length];")
+					};
+				
+				function generateResult(value, ratio, options){										
+					var expectedResult = [];
+					if(options.quietZoneLength){
+						expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
+					}					
+					
+					expectedResult.pushArray(characters.START(ratio));
+					expectedResult.push(characters.GAP);
+					
+					for( var i = 0; i < value.length; i++){										
+						expectedResult.pushArray(characters[value.charAt(i)](ratio));
+						expectedResult.push(characters.GAP);
+					}
+					
+					if(options.checkCharacter){
+						expectedResult.pushArray(characters[options.checkCharacter](ratio));
+						expectedResult.push(characters.GAP);
+					}
+										
+					expectedResult.pushArray(characters.START(encoding.ratio));
+					
+					if(options.quietZoneLength){
+						expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
+					}
+
+					return expectedResult;
+				}
+				
+				// charLength = 3 * ratio + 6 * 1; 
+				// 2 * QZL + (length + startStopLength + checkLength)* charLength + gapWidth * (length + checkLength + startLength)
+				function calculateBaseUnit(width, length, ratio, quietZoneLength, checkLength, gapWidth){
+					var characterLength = 3 * (ratio + 2);
+					return width / 
+						( 2 * quietZoneLength + (length + 2 + checkLength) * characterLength + gapWidth * (length + checkLength + 1));
+				}
+				
+				module("code39", {
+                    setup: function() {
+                        encoding = new encodings.code39();
+                    },
+                    teardown: function(){
+						encoding = null;
+					}
+                });
+				
+			    test("test value TEST8052 with quiet zone without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = "TEST8052",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, 
+							{quietZoneLength: encoding.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				test("test value TEST8052 with quiet zone with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = "TEST8052",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, 
+							{quietZoneLength:  encoding.quietZoneLength, checkCharacter: "T"});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+
+				test("test value TEST8052 without quiet zone without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = false;
+
+					var value = "TEST8052",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, {});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+				test("test value TEST8052 without quiet zone with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = false;
+
+					var value = "TEST8052",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, { checkCharacter: "T"});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+
+				//-----------------------------------------------------------------------------------------------------------------
+				
+				test("test value HI345678 with quiet zone without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = "HI345678",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, 
+							{quietZoneLength:  encoding.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				test("test value HI345678 with quiet zone with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = "HI345678",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, 
+							{quietZoneLength:  encoding.quietZoneLength, checkCharacter: "P"});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+				
+				//-----------------------------------------------------------------------------------------------------------------
+				
+				test("test value ' 0.1-2$3/4+%' with quiet zone without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = " 0.1-2$3/4+%",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, 
+							{quietZoneLength:  encoding.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				test("test value ' 0.1-2$3/4+%' with quiet zone with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = " 0.1-2$3/4+%",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, encoding.ratio, 
+							{quietZoneLength:  encoding.quietZoneLength, checkCharacter: "P"});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				//-----------------------------------------------------------------------------------------------------------------
+				
+				test("test find character by value", function() {
+					var result1 = encoding._findCharacterByValue(38),
+						expectedResult1 = " ",
+						result2 = encoding._findCharacterByValue(0),
+						expectedResult2 = "0",
+						result3 = encoding._findCharacterByValue(42),
+						expectedResult3 = "%";
+					equal(result1, expectedResult1);
+					equal(result2, expectedResult2);
+					equal(result3, expectedResult3);
+                });
+				
+				//-----------------------------------------------------------------------------------------------------------------
+				
+				test("test invalid character error", function() {
+					var thrownError = false;
+					try{
+						encoding.encode("aAAST*", 300, 100);
+					}
+					catch (ex){
+						if(getCustomErrorMessage(ex.message)){
+							thrownError = true;
+						}
+					}
+					ok(thrownError);
+                });
+				
+				
+				test("test insufficient width error", function() {
+					var value = "00000",
+						width = 84,
+						thrownError = false;
+
+					try{
+						encoding.encode(value, width, 100);
+					}
+					catch (ex){
+						if(getCustomErrorMessage(ex.message)){
+							thrownError = true;
+						}
+					}
+					ok(thrownError);
+                });
+				
+				test("test insufficient height error", function() {
+					var value = "00000",
+						width = 84,
+						height = 20,
+						thrownError = false;
+
+					try{
+						encoding.encode(value, width, height);
+					}
+					catch (ex){
+						if(getCustomErrorMessage(ex.message)){
+							thrownError = true;
+						}
+					}
+					ok(thrownError);
+                });
+				
+				
+				//-----------------------------------------------------------------------------------------------------------------
+				
+				test("test base unit calculation", function() {
+					var width = 200,
+						height = 100,
+						value = "HI345678",
+						quietZoneLength = encoding.options.quietZoneLength,
+						result,
+						resultWithoutQuietZone,
+						resultWithCheckSum,
+						expectedResult, 
+						expectedResultWithoutQuietZone,
+						expectedResultWithCheckSum;
+							
+						encoding.options.addCheckSum = false;
+						encoding.options.addQuietZone = true;
+						result = encoding.encode(value, width, height).baseUnit;
+						expectedResult = calculateBaseUnit(width, value.length, encoding.ratio, quietZoneLength, 0, encoding.gapWidth);
+						equal(result, expectedResult);
+								
+						encoding.options.addCheckSum = false;
+						encoding.options.addQuietZone = false;
+						resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
+						expectedResultWithoutQuietZone = calculateBaseUnit(width, value.length, encoding.ratio, 0, 0, encoding.gapWidth);
+						equal(resultWithoutQuietZone, expectedResultWithoutQuietZone);
+						
+						encoding.options.addCheckSum = true;
+						encoding.options.addQuietZone = true;
+						resultWithCheckSum = encoding.encode(value, width, height).baseUnit;
+						expectedResultWithCheckSum = calculateBaseUnit(width, value.length, encoding.ratio, quietZoneLength, 1, encoding.gapWidth);
+						equal(resultWithCheckSum, expectedResultWithCheckSum);					
+				});				
+				
+				test("test ratio calculation", function() {
+					var result1,
+						result2,
+						result3,
+						value = "00000",
+						width1 = 92,						
+						width2 = 87.3,
+						width3 = 84.5,
+						expectedResult1 = 3,
+						expectedResult2 = 2.7,
+						expectedResult3 = 2.5;
+					
+						encoding.encode(value, width1, 100);
+						result1 = parseFloat(encoding.ratio.toFixed(1));
+						equal(result1, expectedResult1);
+						
+						encoding.encode(value, width2, 100);
+						result2 = parseFloat(encoding.ratio.toFixed(1));
+						equal(result2, expectedResult2);
+						
+						encoding.encode(value, width3, 100);
+						result3 = parseFloat(encoding.ratio.toFixed(1));
+						equal(result3, expectedResult3);
+				});
+			})();
+        </script>
+		
+		<h1 id="qunit-header">encoding 39</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+	</body>
+</html>		

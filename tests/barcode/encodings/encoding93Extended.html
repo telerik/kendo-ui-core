@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>code 93 extended tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../..//qunit/qunit/qunit.js"></script>
+        <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../../src/kendo.core.js"></script>        
+        <script src="../../../src/kendo.dataviz.core.js"></script>
+        <script src="../../../src/kendo.dataviz.barcode.js"></script> 
+		<script src="constants.js"></script> 
+		<script src="utils.js"></script>  		
+ 		
+        <script type="text/javascript">
+			var dataviz = kendo.dataviz,
+                encodings = dataviz.encodings;
+			(function() {
+				var encoding,
+					characters = {
+						TERMINATION_BAR: [BAR, 1],
+						START: [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 4], [SPACE, 1]],
+						/*A*/"65": [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+						/*B*/"66": [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2]],
+						/*D*/"68": [[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2]],
+						/*E*/"69": [[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
+						/*G*/"71":  [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+						/*H*/"72": [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2]],
+						/*I*/"73": [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 3], [BAR, 1], [SPACE, 1]],
+						/*J*/"74": [[BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2]],
+						/*K*/"75": [[BAR, 1], [SPACE, 3], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+						/*L*/"76": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 3]],	
+						/*M*/"77": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 2]],	
+						/*O*/"79": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2]],
+						/*P*/"80": [[BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1]],	
+						/*Q*/"81": [[BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2]],							
+						/*S*/"83": [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2]],
+						/*T*/"84": [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1]],
+						/*U*/"85": [[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1]],
+						/*V*/"86": [[BAR, 2], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+						/*W*/"87": [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 2]],
+						/*X*/"88": [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 2], [SPACE, 1]],
+						/*Y*/"89": [[BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 1]],
+						/*Z*/"90": [[BAR, 1], [SPACE, 2], [BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+						/*0*/"48": [[BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2]],
+						/*1*/"49": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 3]],
+						/*2*/"50": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 2]],
+						/*3*/"51": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 4], [BAR, 1], [SPACE, 1]],
+						/*4*/"52": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+						/*5*/"53": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2]],
+						/*6*/"54": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 1]],
+						/*7*/"55": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 4]],
+						/*8*/"56": [[BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
+						/*9*/"57": [[BAR, 1], [SPACE, 4], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+						/*-*/"45": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 3], [SPACE, 1]],
+						/*.*/"46": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2]],
+						/* */"32": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
+						/*$*/"36": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2]],
+						/*\/*/"47": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2]],
+						/*+*/"43": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 3], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+						/*%*/"37": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
+						/*(+)*/SHIFT0: [[BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1]],
+						/*(/)*/SHIFT1: [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1]],
+						/*($)*/SHIFT2: [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1]],
+						/*(%)*/SHIFT3: [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+					   /*NULL*/"0": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1]],
+					   /*SOH*/"1": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1],[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+					   /*!*/"33": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1],[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+					   /*@*/"64": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1]],
+					   /*b*/"98": [[BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2]],
+					   /*DEL*/"127": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1],[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1]],						
+					   /*US*/"31": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
+					   /*=*/"61": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2]],
+					   /*'*/"39": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1],[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+					   
+					};
+					// / [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1]
+				function generateResult(value, options){										
+					var expectedResult = [];
+					if(options.quietZoneLength){
+						expectedResult.push([SPACE, options.quietZoneLength]);
+					}					
+			
+					expectedResult.pushArray(characters.START);
+					
+					for( var i = 0; i < value.length; i++){										
+						expectedResult.pushArray(characters[value.charCodeAt(i)]);						
+					}
+					
+					if(options.checkCharacters){		
+						for( var i = 0; i < options.checkCharacters.length; i++){	
+							if(options.checkCharacters[i].length > 1){
+								expectedResult.pushArray(characters[options.checkCharacters[i]]);	
+							}
+							else{
+								expectedResult.pushArray(characters[options.checkCharacters[i].charCodeAt(0)]);						
+							}							
+						}				
+					}
+										
+					expectedResult.pushArray(characters.START);
+					expectedResult.push(characters.TERMINATION_BAR);
+					
+					if(options.quietZoneLength){
+						expectedResult.push([SPACE, options.quietZoneLength]);
+					}
+
+					return expectedResult;
+				}
+				
+				module("code93extended", {
+                    setup: function() {
+                        encoding = new encodings.code93extended();
+                    },
+                    teardown: function(){
+						encoding = null;
+					}
+                });
+				
+				test("test value TEST93 with quiet zone without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+				
+					var value = "TEST93",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, 
+							{quietZoneLength: encoding.options.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				test("test value TEST93 with quiet zone with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+		
+					var value = "TEST93",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, 
+							{quietZoneLength:  encoding.options.quietZoneLength, checkCharacters: ["+","6"]});						
+		
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				
+				test("test value HI345678 with quiet zone without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = "HI345678",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+				
+				test("test value HI345678 with quiet zone with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = "HI345678",										
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value, 
+							{quietZoneLength:  encoding.options.quietZoneLength, checkCharacters: ["V","-"]});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });	
+				
+		
+				test("test value ' 0.1-2$3/4+%' without checksum", function() {		
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = " 0.1-2$3/4+%",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+				});
+
+				test("test value ' 0.1-2$3/4+%' with checksum", function() {		
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = " 0.1-2$3/4+%",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength, checkCharacters: ["SHIFT0", "Z"]});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+				});
+				
+				test("test value ' (NUL)A6bU(SOH)' without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = " " + String.fromCharCode(0) + "A6bU" + String.fromCharCode(1),
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+				});
+				
+				test("test value ' (NUL)A6bU(SOH)' with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = " " + String.fromCharCode(0) + "A6bU" + String.fromCharCode(1),
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength, checkCharacters: ["V", "1"]});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+				});
+				
+				test("test value '@$(DEL)!3/4+%' without checksum", function() {
+					encoding.options.addCheckSum = false;
+					encoding.options.addQuietZone = true;
+					var value = "@$" + String.fromCharCode(127) + "!3/4+%",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+				});
+				
+				test("test value '@$(DEL)!3/4+%' with checksum", function() {
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					var value = "@$" + String.fromCharCode(127) + "!3/4+%",
+						result = encoding.encode(value, 300, 100),
+						expectedResult = generateResult(value,
+							{quietZoneLength:  encoding.options.quietZoneLength, checkCharacters: ["B", "/"]});						
+					
+                    ok(comparePatterns(result.pattern, expectedResult));
+				});
+				
+				test("test invalid character error", function() {
+					var thrownError = false;
+					try{
+						encoding.encode("aAAST*" + String.fromCharCode(128), 300, 100);
+					}
+					catch (ex){
+						if(getCustomErrorMessage(ex.message)){
+							thrownError = true;
+						}
+					}
+					ok(thrownError);
+                });
+				
+				test("test base unit calculation", function() {
+					var width = 200,
+						height = 100,
+						value = "H3%4" + String.fromCharCode(127),
+						quietZoneLength = encoding.options.quietZoneLength,
+						resultWithoutCheckSum,
+						resultWithoutQuietZone,
+						resultWithCheckSum,
+						expectedResultWithoutCheckSum = 1.28, 
+						expectedResultWithoutQuietZone = 1.47,
+						expectedResultWithCheckSum = 1.15;
+						
+						encoding.options.addCheckSum = false;
+						encoding.options.addQuietZone = true;
+						resultWithoutCheckSum = encoding.encode(value, width, height).baseUnit;						
+						equal(fixed(resultWithoutCheckSum, 2), expectedResultWithoutCheckSum);
+								
+						encoding.options.addCheckSum = false;
+						encoding.options.addQuietZone = false;
+						resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
+						equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);
+						
+						encoding.options.addCheckSum = true;
+						encoding.options.addQuietZone = true;
+						resultWithCheckSum = encoding.encode(value, width, height).baseUnit;
+						equal(fixed(resultWithCheckSum, 2), expectedResultWithCheckSum);					
+				});	
+				
+				test("test base unit calculation with special check character", function() {
+					var width = 200,
+						height = 100,
+						value = "V C",
+						quietZoneLength = encoding.options.quietZoneLength,
+						result,
+						expectedResult = 2.15;
+						
+					encoding.options.addCheckSum = true;
+					encoding.options.addQuietZone = true;
+					result = encoding.encode(value, width, height).baseUnit;
+					equal(fixed(result, 2), expectedResult);
+				});
+				
+			})();
+        </script>
+		
+		<h1 id="qunit-header">encoding 93 extended</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+	</body>
+</html>					
