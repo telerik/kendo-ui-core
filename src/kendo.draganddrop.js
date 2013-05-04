@@ -25,7 +25,6 @@ kendo_module({
         invalidZeroEvents = OS && OS.android,
         mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
         KEYUP = "keyup",
-        VIRTUAL_SIZE = 1000000,
         CHANGE = "change",
 
         // Draggable events
@@ -173,29 +172,17 @@ kendo_module({
             $.extend(this, {
                 virtual: true,
                 forcedEnabled: true,
-                _virtualSize: VIRTUAL_SIZE,
-                _virtualOffset: -VIRTUAL_SIZE
+                _virtualMin: 1000,
+                _virtualMax: -1000
             });
         },
 
-        virtualSize: function(size) {
-            if (!this._virtualSize !== size) {
-                this._virtualSize = size;
+        virtualSize: function(min, max) {
+            if (this._virtualMin !== min || this._virtualMax !== max) {
+                this._virtualMin = min;
+                this._virtualMax = max;
                 this.update();
             }
-        },
-
-        virtualOffset: function(offset) {
-            if (!this._virtualOffset !== offset) {
-                this._virtualOffset = offset;
-                this.update();
-            }
-        },
-
-        resetVirtual: function() {
-            this._virtualSize = VIRTUAL_SIZE;
-            this._virtualOffset = -VIRTUAL_SIZE;
-            this.update();
         },
 
         outOfBounds: function(offset) {
@@ -220,11 +207,11 @@ kendo_module({
 
         update: function(silent) {
             var that = this,
-                total = that.virtual ? that._virtualSize : that.getTotal(),
+                total = that.virtual ? that._virtualMax : that.getTotal(),
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
-            that.max = that.virtual ? -that._virtualOffset : 0;
+            that.max = that.virtual ? -that._virtualMin : 0;
             that.size = size;
             that.total = scaledTotal;
             that.min = Math.min(that.max, that.size - scaledTotal);

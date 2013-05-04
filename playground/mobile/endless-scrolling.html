@@ -30,7 +30,7 @@
             .km-listview li {
                 position: absolute;
                 -webkit-transform: translatez(0);
-                height: 50px;
+                height: 120px;
             }
         </style>
     </head>
@@ -52,16 +52,14 @@
                         options.success(results);
                     }
                 },
-                pageSize: 100,
+                pageSize: 25,
                 serverPaging: true,
                 schema: {
                     total: function() { return 100000; }
                 }
             });
 
-            setTimeout(function() {
-                new kendo.mobile.Application();
-            }, 1000);
+            new kendo.mobile.Application();
         </script>
     </body>
 </html>

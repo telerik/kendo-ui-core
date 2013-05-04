@@ -292,8 +292,9 @@ kendo_module({
                 that.list.update(e.scrollTop, true);
             });
 
-            that.list.bind('resize', function(e) {
-                scroller.virtualHeight(e.bottom);
+            that.buffer.bind('resize', function(e) {
+                console.log(0, that.list.itemHeight(), e.total);
+                scroller.virtualSize(0, that.list.itemHeight() * e.total);
             });
 
             if (options.autoBind) {
@@ -845,6 +846,12 @@ kendo_module({
                 items.push(item);
                 list.bottom = item.bottom;
             }
+
+            list.buffer.setItemCount(items.length);
+        },
+
+        itemHeight: function() {
+            return (this.bottom - this.top) / this.items.length;
         },
 
         update: function(top, center) {

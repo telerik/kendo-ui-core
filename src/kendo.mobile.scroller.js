@@ -317,12 +317,8 @@ kendo_module({
             this.dimensions.y.makeVirtual();
         },
 
-        virtualHeight: function(height) {
-            this.dimensions.y.virtualSize(height);
-        },
-
-        virtualOffset: function(offset) {
-            this.dimensions.y.virtualOffset(offset);
+        virtualSize: function(min, max) {
+            this.dimensions.y.virtualSize(min, max);
         },
 
         height: function() {

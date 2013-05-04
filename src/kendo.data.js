@@ -3527,28 +3527,23 @@ kendo_module({
             var buffer = this;
 
             kendo.Observable.fn.init.call(buffer);
-            buffer.dataSource = dataSource;
-            buffer.pageSize = dataSource.pageSize(),
-            buffer.itemCount = itemCount;
-            buffer.step = buffer.itemCount + 2, // buffer
-            buffer.offset = dataSource.skip();
+
             buffer._prefetching = false;
-            buffer._recalculate();
+            buffer.dataSource = dataSource;
 
             dataSource.bind("change", function() {
-                if (buffer._targetOffset !== undefined) { // the change was caused by the buffer itself... hopefully.
-                    buffer.offset = buffer._targetOffset;
-                    buffer._recalculate();
-                    delete buffer._targetOffset;
-                } else { // caused by external factors. Reset the buffer state.
-                    buffer.offset = dataSource.skip();
-                    buffer.pageSize = dataSource.pageSize(),
-                    buffer._recalculate();
-                    buffer.trigger("reset", { offset: buffer.offset });
-                }
-
-                buffer.trigger("resize", { limit: dataSource.lastRange().end });
+                buffer._change();
             });
+
+            buffer._syncWithDataSource();
+
+            buffer.setItemCount(itemCount);
+        },
+
+        setItemCount: function(itemCount) {
+            this.itemCount = itemCount;
+            this.step = itemCount + 2;
+            this._recalculate();
         },
 
         at: function(index)  {
@@ -3605,6 +3600,28 @@ kendo_module({
                 buffer._targetOffset = offset;
                 buffer.dataSource.range(offset, buffer.pageSize);
             }
+        },
+
+        _change: function() {
+            var buffer = this,
+                dataSource = buffer.dataSource;
+
+            if (buffer._targetOffset !== undefined) { // the change was caused by the buffer itself... hopefully.
+                buffer.offset = buffer._targetOffset;
+                buffer._recalculate();
+                delete buffer._targetOffset;
+            } else { // caused by external factors. Reset the buffer state.
+                buffer._syncWithDataSource();
+                buffer._recalculate();
+                buffer.trigger("reset", { offset: buffer.offset });
+            }
+
+            buffer.trigger("resize", { total: dataSource.lastRange().end });
+        },
+
+        _syncWithDataSource: function() {
+            this.offset = this.dataSource.skip();
+            this.pageSize = this.dataSource.pageSize();
         },
 
         _recalculate: function() {
