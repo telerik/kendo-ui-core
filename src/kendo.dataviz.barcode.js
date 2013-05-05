@@ -945,89 +945,18 @@
 		states: ["C", "B", "A", "FNC4"]
 	});
 	
-	encodings.ean8 = Encoding.extend({
-		initValue: function(value, width, height){
-			this.pattern = [];
-			this.baseUnit = width /(67 + 2 * this.options.quietZoneLength);
-			this.value = value;
-		},
-		addData:  function(){
-			var checksum = this.calculateChecksum(this.value),
-				firstPart  = this.value.substr(0,4),
-				secondPart = this.value.substr(4) + checksum;
-				
-			this.addPiece("start");
-			for(var i = 0; i < firstPart.length; i++){
-				this.addPiece(firstPart.charAt(i), 0);
-			}
-			this.addPiece("middle");
-			 for(var i = 0; i < secondPart.length; i++){
-				 this.addPiece(secondPart[i], 1);
-			 }
-			this.addPiece("start");
-		},
-
-		addPiece: function(character, fromTable){
-			
-			var arrToAdd = fromTable !== undefined ? 
-				this.characterMap.characters[fromTable][character]: 
-				this.characterMap[character];
-				
-			this.addArrayToPattern(arrToAdd);
-		},
-		calculateChecksum: function (){			
-			var odd = 0,
-				even = 0,
-				value = this.value;
-			
-			for(var i = 0;i < value.length;i++){
-				if(i%2){ 
-					even += parseInt(value[i]);
-				}
-				else{
-					odd += parseInt(value[i]);
-				}
-			}
-			var checksum = (10 - ((3*odd + even)%10))%10;
-			return checksum;    
-		},
-		characterMap: {
-			characters: [
-				[
-					[[SPACE,3],[BAR, 2],[SPACE,1], [BAR, 1]],
-					[[SPACE,2],[BAR, 2],[SPACE,2], [BAR, 1]],
-					[[SPACE,2],[BAR, 1],[SPACE,2], [BAR, 2]],
-					[[SPACE,1],[BAR, 4],[SPACE,1], [BAR, 1]],
-					[[SPACE,1],[BAR, 1],[SPACE,3], [BAR, 2]],
-					[[SPACE,1],[BAR, 2],[SPACE,3], [BAR, 1]],
-					[[SPACE,1],[BAR, 1],[SPACE,1], [BAR, 4]],
-					[[SPACE,1],[BAR, 3],[SPACE,1], [BAR, 2]],
-					[[SPACE,1],[BAR, 2],[SPACE,1], [BAR, 3]],
-					[[SPACE,3],[BAR, 1],[SPACE,1], [BAR, 2]]
-				],
-				[	
-					[[BAR,3],[SPACE, 2],[BAR,1], [SPACE, 1]],
-					[[BAR,2],[SPACE, 2],[BAR,2], [SPACE, 1]],
-					[[BAR,2],[SPACE, 1],[BAR,2], [SPACE, 2]],
-					[[BAR,1],[SPACE, 4],[BAR,1], [SPACE, 1]],
-					[[BAR,1],[SPACE, 1],[BAR,3], [SPACE, 2]],
-					[[BAR,1],[SPACE, 2],[BAR,3], [SPACE, 1]],
-					[[BAR,1],[SPACE, 1],[BAR,1], [SPACE, 4]],
-					[[BAR,1],[SPACE, 3],[BAR,1], [SPACE, 2]],
-					[[BAR,1],[SPACE, 2],[BAR,1], [SPACE, 3]],
-					[[BAR,3],[SPACE, 1],[BAR,1], [SPACE, 2]]
-				]
-			],
-			start: [[BAR,1],[SPACE, 1], [BAR, 1]],
-			middle: [[SPACE,1],[BAR, 1], [SPACE, 1],[BAR, 1],[SPACE, 1]]
-		}
-	});
-	
 	encodings.ean13 = Encoding.extend({
-		initValue: function(value, width, height){
+		initValue: function(value, width, height){			
 			this.pattern = [];
 			this.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
 			this.value = value;
+		},
+		getInverted:function(arr){		
+			var result = [];
+			$.each(arr,function(){
+				result.push([!this[0],this[1]]);
+			})			
+			return result;
 		},
 		addData:  function(){			
 			var checksum = this.calculateChecksum(),
@@ -1038,38 +967,46 @@
 			this.addArrayToPattern(this.characterMap["start"]);
 			this.addLeftSide(leftPart,leftKey);
 			this.addArrayToPattern(this.characterMap["middle"]);
-			this.addRightSide(rightPart);
+			this.addRightSide(rightPart);			
 			this.addArrayToPattern(this.characterMap["start"]);
 			
 		},
 		addLeftSide:function(leftPart,key){
 			for(var i = 0; i < leftPart.length; i++){
-				this.addArrayToPattern(this.getLeftPattern(leftPart[i],this.keyTable[key][i]));					
+				this.addArrayToPattern(this.characterMap['table'][this.keyTable[key][i]][leftPart[i]]);					
 			}
 		},
-		getLeftPattern:function(character,side){
-			return this.characterMap['leftTable'][side][character];
-		},
 		addRightSide:function(rightPart){
-			for(var i = 0; i < rightPart.length; i++){
-				this.addArrayToPattern(this.characterMap['rightTable'][rightPart[i]]);					
+			for(var i = 0; i < rightPart.length; i++){			
+			    this.addArrayToPattern(this.getInverted(this.characterMap['table'][0][rightPart[i]]));		
 			}
 		},
 		calculateChecksum: function (){		
 			var odd = 0,
 				even = 0,
-				value = this.value;
-			
-			for(var i = value.length-1;i >= 0;i--){
+				value = this.value.split("").reverse().join("");			
+			for(var i = 0;i < value.length;i++){
 				if(i%2){ 
-					odd += parseInt(value[i]);
-				}
-				else{
 					even += parseInt(value[i]);
 				}
-			}			
+				else{
+					odd += parseInt(value[i]);
+				}
+			}		
 			var checksum = (10 - ((3*odd + even)%10))%10;
 			return checksum; 
+		},
+		addArrayToPattern:function(arr){
+			for(var i=0;i<arr.length;i++){
+				var toAdd = arr[i];
+				if(toAdd[0]===true){
+					toAdd[0] = 1;
+				}
+				else if(toAdd[0]===false){
+					toAdd[0] = 0;
+				}
+				this.pattern.push(toAdd);
+			}	
 		},
 		keyTable:[
 			'000000',
@@ -1085,48 +1022,59 @@
 		]
 		,
 		characterMap: {
-			leftTable:[
+			table:[
 				[
-					[[SPACE,3],[BAR,2],[SPACE,1],[BAR,1]],
-					[[SPACE,2],[BAR,2],[SPACE,2],[BAR,1]],
-					[[SPACE,2],[BAR,1],[SPACE,2],[BAR,2]],
-					[[SPACE,1],[BAR,4],[SPACE,1],[BAR,1]],
-					[[SPACE,1],[BAR,1],[SPACE,3],[BAR,2]],
-					[[SPACE,1],[BAR,2],[SPACE,3],[BAR,1]],
-					[[SPACE,1],[BAR,1],[SPACE,1],[BAR,4]],
-					[[SPACE,1],[BAR,3],[SPACE,1],[BAR,2]],
-					[[SPACE,1],[BAR,2],[SPACE,1],[BAR,3]],
-					[[SPACE,3],[BAR,1],[SPACE,1],[BAR,2]]
+					[[false,3],[true,2],[false,1],[true,1]],
+					[[false,2],[true,2],[false,2],[true,1]],
+					[[false,2],[true,1],[false,2],[true,2]],
+					[[false,1],[true,4],[false,1],[true,1]],
+					[[false,1],[true,1],[false,3],[true,2]],
+					[[false,1],[true,2],[false,3],[true,1]],
+					[[false,1],[true,1],[false,1],[true,4]],
+					[[false,1],[true,3],[false,1],[true,2]],
+					[[false,1],[true,2],[false,1],[true,3]],
+					[[false,3],[true,1],[false,1],[true,2]]
 				]
 				,
 				[
-					[[SPACE,1],[BAR,1],[SPACE,2],[BAR,3]],
-					[[SPACE,1],[BAR,2],[SPACE,2],[BAR,2]],
-					[[SPACE,2],[BAR,2],[SPACE,1],[BAR,2]],
-					[[SPACE,1],[BAR,1],[SPACE,4],[BAR,1]],
-					[[SPACE,2],[BAR,3],[SPACE,1],[BAR,1]],
-					[[SPACE,1],[BAR,3],[SPACE,1],[BAR,1]],
-					[[SPACE,4],[BAR,1],[SPACE,1],[BAR,1]],
-					[[SPACE,2],[BAR,1],[SPACE,3],[BAR,1]],
-					[[SPACE,3],[BAR,1],[SPACE,2],[BAR,1]],
-					[[SPACE,2],[BAR,1],[SPACE,1],[BAR,3]]
+					[[false,1],[true,1],[false,2],[true,3]],
+					[[false,1],[true,2],[false,2],[true,2]],
+					[[false,2],[true,2],[false,1],[true,2]],
+					[[false,1],[true,1],[false,4],[true,1]],
+					[[false,2],[true,3],[false,1],[true,1]],
+					[[false,1],[true,3],[false,1],[true,1]],
+					[[false,4],[true,1],[false,1],[true,1]],
+					[[false,2],[true,1],[false,3],[true,1]],
+					[[false,3],[true,1],[false,2],[true,1]],
+					[[false,2],[true,1],[false,1],[true,3]]
 				]
-			],
-			rightTable:[
-				[[BAR,3],[SPACE,2],[BAR,1],[SPACE,1]],
-				[[BAR,2],[SPACE,2],[BAR,2],[SPACE,1]],
-				[[BAR,2],[SPACE,1],[BAR,2],[SPACE,2]],
-				[[BAR,1],[SPACE,4],[BAR,1],[SPACE,1]],
-				[[BAR,1],[SPACE,1],[BAR,3],[SPACE,2]],
-				[[BAR,1],[SPACE,2],[BAR,3],[SPACE,1]],
-				[[BAR,1],[SPACE,1],[BAR,1],[SPACE,4]],
-				[[BAR,1],[SPACE,3],[BAR,1],[SPACE,2]],
-				[[BAR,1],[SPACE,2],[BAR,1],[SPACE,3]],
-				[[BAR,3],[SPACE,1],[BAR,1],[SPACE,2]],
 			],
 			start: [[BAR,1],[SPACE, 1], [BAR, 1]],
 			middle: [[SPACE,1],[BAR, 1], [SPACE, 1],[BAR, 1],[SPACE, 1]]
 		}		
+	});
+	
+	encodings.ean8 = encodings.ean13.extend({
+		initValue: function(value, width, height){
+			this.pattern = [];
+			this.baseUnit = width /(67 + 2 * this.options.quietZoneLength);
+			this.value = value;
+		},
+		addData:  function(){
+			var checksum = this.calculateChecksum(this.value),
+				firstPart  = this.value.substr(0,4),
+				secondPart = this.value.substr(4) + checksum;
+				
+			this.addArrayToPattern(this.characterMap["start"]);
+			for(var i = 0; i < firstPart.length; i++){
+				this.addArrayToPattern(this.characterMap['table'][0][firstPart[i]]);
+			}
+			this.addArrayToPattern(this.characterMap["middle"]);
+			 for(var i = 0; i < secondPart.length; i++){
+				 this.addArrayToPattern(this.getInverted(this.characterMap['table'][0][secondPart[i]]));
+			 }
+			this.addArrayToPattern(this.characterMap["start"]);
+		}
 	});
 	
     var Barcode = Widget.extend({
