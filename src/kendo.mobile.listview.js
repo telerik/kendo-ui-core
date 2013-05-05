@@ -287,14 +287,8 @@ kendo_module({
                 that.list.update(e.scrollTop);
             });
 
-            scroller.bind('scrollEnd', function(e) {
-                console.log('scrollEnd');
-                that.list.update(e.scrollTop, true);
-            });
-
             that.buffer.bind('resize', function(e) {
-                console.log(0, that.list.itemHeight(), e.total);
-                scroller.virtualSize(0, that.list.itemHeight() * e.total);
+                scroller.virtualSize(0, that.list.itemHeight() * that.buffer.length);
             });
 
             if (options.autoBind) {
@@ -888,7 +882,10 @@ kendo_module({
             if (list.bottom < bottomThreshold) {
                 console.log('bottom threshold reached', list.bottom, bottomThreshold, targetBottom);
                 while (list.bottom < targetBottom) {
-                    console.log('shifting to', list.offset);
+                    if (list.offset + itemCount === list.buffer.length - 1) {
+                        break;
+                    }
+
                     list.offset ++;
                     item = items.shift();
 

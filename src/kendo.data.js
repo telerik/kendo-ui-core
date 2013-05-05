@@ -3598,6 +3598,7 @@ kendo_module({
             var buffer = this;
             if (buffer.offset !== offset) {
                 buffer._targetOffset = offset;
+                console.log('range to', offset);
                 buffer.dataSource.range(offset, buffer.pageSize);
             }
         },
@@ -3616,7 +3617,9 @@ kendo_module({
                 buffer.trigger("reset", { offset: buffer.offset });
             }
 
-            buffer.trigger("resize", { total: dataSource.lastRange().end });
+            buffer.length = dataSource.lastRange().end;
+
+            buffer.trigger("resize");
         },
 
         _syncWithDataSource: function() {
@@ -3625,15 +3628,16 @@ kendo_module({
         },
 
         _recalculate: function() {
-            var pageSize = this.pageSize,
-                skip = Math.ceil(this.offset / pageSize) * pageSize,
-                step = this.step;
+            var buffer = this,
+                pageSize = buffer.pageSize,
+                skip = Math.ceil(buffer.offset / pageSize) * pageSize,
+                step = buffer.step;
 
-            this.skip = skip;
-            this.midPageThreshold = skip + pageSize - 1,
-            this.nextPageThreshold = skip + this.step - 1,
-            this.prefetchThreshold = this.midPageThreshold - step,
-            this.pullBackThreshold = this.offset - 1;
+            buffer.skip = skip;
+            buffer.midPageThreshold = skip + pageSize - 1;
+            buffer.nextPageThreshold = skip + buffer.step - 1;
+            buffer.prefetchThreshold = buffer.midPageThreshold - step;
+            buffer.pullBackThreshold = buffer.offset - 1;
         }
     });
 
