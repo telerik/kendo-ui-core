@@ -97,7 +97,7 @@ kendo_module({
                 that.resizing = new PaneResizing(that);
             }
 
-            that.element.triggerHandler("init.kendoSplitter");
+            that.element.triggerHandler("init" + NS);
         },
         events: [
             EXPAND,
@@ -110,6 +110,10 @@ kendo_module({
 
             LAYOUTCHANGE
         ],
+
+        _parentSplitter: function() {
+            return this.element.parent().closest(".k-splitter");
+        },
 
         _attachEvents: function() {
             var that = this,
@@ -135,20 +139,35 @@ kendo_module({
                     .on("dblclick" + NS, proxy(that._togglePane, that))
                     .children(".k-collapse-next, .k-collapse-prev").on(CLICK + NS, that._arrowClick(COLLAPSE)).end()
                     .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
-                .end()
-                .parent().closest(".k-splitter").each(function() {
+                .end();
+
+            that._parentSplitter().each(function() {
                     var parentSplitter = $(this),
                         splitter = parentSplitter.data("kendoSplitter");
 
                     if (splitter) {
                         splitter.bind(RESIZE, that._resizeHandler);
                     } else {
-                        parentSplitter.one("init" + NS, function() {
+                        parentSplitter.off("init" + NS).one("init" + NS, function() {
                             $(this).data("kendoSplitter").bind(RESIZE, that._resizeHandler);
                             that._resizeHandler();
                         });
                     }
                 });
+        },
+
+        _detachEvents: function() {
+            var that = this,
+                parentSplitter = that._parentSplitter().data("kendoSplitter");
+
+            that.element
+                .children(".k-splitbar-draggable-" + that.orientation).off(NS).end()
+                .children(".k-splitbar").off("dblclick" + NS)
+                    .children(".k-collapse-next, .k-collapse-prev, .k-expand-next, .k-expand-prev").off(NS);
+
+            if (parentSplitter) {
+                parentSplitter.unbind(RESIZE, that._resizeHandler);
+            }
         },
 
         options: {
@@ -158,15 +177,11 @@ kendo_module({
         },
 
         destroy: function() {
-            var that = this,
-                orientation = that.options.orientation;
+            var that = this;
 
             Widget.fn.destroy.call(that);
 
-            that.element.off(NS)
-                .children(".k-splitbar-draggable-" + orientation).off(NS).end()
-                .children(".k-splitbar").off(NS)
-                    .children(".k-collapse-next, .k-collapse-prev, .k-expand-next, .k-expand-prev").off(NS);
+            that._detachEvents();
 
             if (that.resizing) {
                 that.resizing.destroy();
@@ -475,6 +490,9 @@ kendo_module({
             if (this.resizing) {
                 this.resizing.destroy();
             }
+
+            this._detachEvents();
+            this._attachEvents();
 
             if (this.element.children(".k-splitbar-draggable-" + this.orientation).length) {
                 this.resizing = new PaneResizing(this);
