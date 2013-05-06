@@ -295,11 +295,11 @@ kendo_module({
                 wrapper = that.window.wrapper,
                 editorElement = that.options.editor.element;
 
-            wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
-
-            wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight());
-
-            that.window.open();
+            if (!wrapper.is(":visible")) {
+                wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
+                wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight());
+                that.window.open();
+            }
         },
 
         hide: function() {
