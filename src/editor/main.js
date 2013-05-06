@@ -291,9 +291,14 @@ kendo_module({
         },
 
         show: function() {
-            var that = this;
+            var that = this,
+                wrapper = that.window.wrapper,
+                editorElement = that.options.editor.element;
 
-            //that.window.wrapper.width = that.options.editor.element.outerWidth();
+            wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
+
+            wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight());
+
             that.window.open();
         },
 
