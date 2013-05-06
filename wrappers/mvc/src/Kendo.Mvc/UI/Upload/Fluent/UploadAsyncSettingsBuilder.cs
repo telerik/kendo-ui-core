@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">true if the upload should start immediately after selecting a file, false otherwise; true by default</param>
         /// <remarks>
-        /// 
+        ///
         /// </remarks>
         public UploadAsyncSettingsBuilder AutoUpload(bool value)
         {
@@ -219,7 +219,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
-        ///                 .Save&lt;HomeController&gt;(controller => controller.Save()));
+        ///                 .Save&lt;HomeController&gt;(controller => controller.Save())
         ///             )
         /// %&gt;
         /// </code>
@@ -436,7 +436,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
-        ///                 .Remove&lt;HomeController&gt;(controller => controller.Remove()));
+        ///                 .Remove&lt;HomeController&gt;(controller => controller.Remove())
         ///             )
         /// %&gt;
         /// </code>
