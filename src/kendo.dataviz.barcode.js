@@ -19,6 +19,7 @@
         SPACE = 0,
         DEFAULT_QUIETZONE_LENGTH = 10,
 		numberRegex = /^\d+$/,
+        alphanumericRegex = /^[a-z0-9]+$/i,
 		InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}";		
 		
 	function getNext(value, index, count){
@@ -516,6 +517,7 @@
 		}
 	}); 
 		
+    //Investigate the options to move to C if it is in the states and there are 4 or more consecutive digits
 	var state128AB = state128.extend({
 		FNC4: "FNC4",
 		init: function(encoding, states){
@@ -534,7 +536,7 @@
 			while(!this._moves[idx].call(this, encodingState) && idx < this._moves.length){
 				idx++;
 			}
-		},
+		},  
 		pushState: function(encodingState){
 			var code;	
 			while( (code = encodingState.value.charCodeAt(encodingState.index)) >= 0 && this.isCode(code)){
@@ -725,7 +727,9 @@
 			return result;
 		}	
 	});
-	
+	 
+
+    //inherit 128 base instead if it is not needed for states A, B
 	states128.FNC1 = state128.extend({
 		key: "FNC1",
 		startState: "C",
@@ -744,21 +748,21 @@
 		},		
 		pushState: function(encodingState){
 			var encoding = this.encoding,
-                value = encodingState.value.replace(" ", ""),
-				regexSeparator = new RegExp("[" +  this.startAI + this.endAI + "]", "g"),
+                value = encodingState.value.replace(/\s/g, ""),
+				regexSeparators = new RegExp("[" +  this.startAI + this.endAI + "]", "g"),
                 index = encodingState.index,
 				subState= {
-					value: "",
-					index: 0,
-					state: "C"
-				},
+                    state: this.startState
+                },
                 current,				
 				nextStart,
 				separatorLength,
 				codeLength;
 			encoding.addPattern(this.START);
-			//!!!moove if has finished with B
-			while(true){				
+           
+			while(true){
+                subState.index = 0;
+                
 				separatorLength = value.charAt(index) === this.startAI ? 2 : 0;
 				current = separatorLength > 0 ? this.getBySeparator(value, index) : this.getByLength(value, index);
 				if(current.ai.length){
@@ -768,31 +772,62 @@
 					nextStart = value.indexOf(this.startAI, index + 1);
 					if(nextStart < 0){
 						if(index + current.ai.max + current.id.length + separatorLength < value.length){
-							throw new Error("Separators are required for variable length codes");
+							throw new Error("Separators are required after variable length identifiers");
 						}
 						nextStart = value.length;
-					}
-					//validate min								
+					}									
 				}
-				subState.value = value.substring(index, nextStart);
+				subState.value = value.substring(index, nextStart).replace(regexSeparators, "");
+                this.validate(current, subState.value);
+                
+                if(subState.state != this.startState){
+                    encoding[this.startState].move(subState);
+                    subState.state = this.startState;
+                }
+                
 				encoding.pushData(subState, this.dependentStates);
+                
 				if(nextStart >= value.length){
 					break;
-				}
+				}                
+                
 				index = nextStart;
 				if(!current.ai.length){
 					encoding.addPattern(this.START);	
 				}
 			}
-			encodingState.index = value.length;			
+			encodingState.index = encodingState.value.length;			
 		},
+        validate: function(current, value){
+            var code = value.substr(current.id.length),
+                ai = current.ai;
+            if(!ai.type && !numberRegex.test(code)){
+                throw new Error("AI " + current.id+ " is numeric only but contains non numeric character(s).");
+            }
+            
+            if(ai.type == "alphanumeric" && !alphanumericRegex.test(code)){
+                 throw new Error("AI " + current.id+ " is alphanumeric only but contains non alphanumeric character(s).");
+            }
+            
+            if(ai.length && ai.length !== code.length){
+                 throw new Error("AI " + current.id + " must be " + ai.length + " characters long.");
+            }
+            
+            if(ai.min && ai.min > code.length){
+                 throw new Error("AI " + current.id + " must be at least " + ai.min + " characters long.");
+            }
+            
+            if(ai.max && ai.max < code.length){
+                 throw new Error("AI " + current.id + " must be at most " + ai.max + " characters long.");
+            }
+        },
 		getByLength: function(value, index){
 			var idx = 2,
 				id,
 				ai;
 			for(var i = 2; i <= 4; i++){
 				id = getNext(value, index, i);
-				ai = this.AI[id] || this.AI[id.substring(0, id.length - 1)];
+				ai = this.getAI(id) || this.getAI(id.substring(0, id.length - 1));
 				if(ai){
 					return {
 						id: id,
@@ -809,7 +844,7 @@
             var start = value.indexOf(this.startAI, index),
                 end = value.indexOf(this.endAI, start),
                 id = value.substring(start + 1,end),
-				ai = this.AI[id] || this.AI[id.substr(id.length - 1)];
+				ai = this.getAI(id) || this.getAI(id.substr(id.length - 1));
             if(!ai){
                 this.unsupportedAIError(id);
             }
@@ -819,18 +854,93 @@
 				id: id
 			}
         },
-		AI: {
-			"00": { length: 18, type: "numeric"},
-            "00": { length: 18, type: "numeric"},
-            "329": { length: 6 },
-            "12": { length: 6, type: "numeric"},
-			"21": { min: 1, max: 20, type: "alphanumeric"},
-            "421": { min: 4, max: 12, type: "alphanumeric"}            
-		},
+         getAI: function(id){         
+            var ai = this.applicationIdentifiers,
+                multiKey = ai.multiKey;
+            if(ai[id]){
+                return ai[id];
+            }
+
+            for(var i = 0; i < multiKey.length; i++){
+                if(multiKey[i].ids && inArray(id, multiKey[i].ids) >= 0){
+                    return multiKey[i].type;
+                }
+                else if(multiKey[i].ranges){
+                    var ranges = multiKey[i].ranges;
+                    for(var j = 0; j < ranges.length; j++){
+                        if(ranges[j][0] <= id && id <= ranges[j][1]){
+                            return multiKey[i].type;
+                        }
+                    }
+                }
+            }
+        },
+        applicationIdentifiers: {
+            "22": {max: 29, type: "alphanumeric"},
+            "402": {length: 17},
+            "7004": {max: 4, type: "alphanumeric"},
+            "242": {max: 6, type: "alphanumeric"},
+            "8020": {max: 25, type: "alphanumeric"},
+            "703": { min: 3, max: 30, type: "alphanumeric"},
+            "8008": { min: 8, max: 12, type: "alphanumeric"},
+            "253": { min: 13, max: 17, type: "alphanumeric"},
+            "8003": { min: 14, max: 30, type: "alphanumeric"},
+            multiKey: [{
+                ids: ["15", "17", "8005", "8100"],
+                ranges: [
+                    [11, 13],
+                    [310, 316],
+                    [320, 336],
+                    [340, 369]
+                ],
+                type: { length: 6}                
+            },{
+                ids: ["240", "241", "250", "251", "400", "401", "403", "7002", "8004", "8007", "8110"],
+                ranges: [[90-99]],
+                type: {max: 30, type: "alphanumeric"}
+            },{
+                ids: ["7001"],
+                ranges: [[410, 414]],
+                type: { length: 13}
+            },{
+                ids: ["10","21", "254", "420", "8002"],
+                type: {max: 20, type: "alphanumeric"}
+            },{
+                ids: ["00", "8006", "8017", "8018"],
+                type: {length: 18}
+            },{
+                ids: ["01", "02", "8001"],
+                type: { length: 14}
+            },{
+                ids: ["422"],
+                ranges: [
+                    [424, 426]
+                ],
+                type: {length: 3}
+            },{
+                ids: ["20", "8102"],
+                type: { length: 2}
+            },{
+                ids: ["30","37"],
+                type: {max: 8, type: "alphanumeric"}
+            },{
+                ids: ["390","392"],
+                type: {max: 15, type: "alphanumeric"}
+            },{
+                ids: ["421", "423"],
+                type: { min: 3, max: 15, type: "alphanumeric"}
+            }, {
+                ids: ["391", "393"],
+                type: { min: 3, max: 18, type: "alphanumeric"}
+            },{
+                ids: ["7003", "8101"],
+                type: {length: 10}
+            }]     
+        },
 		START: 102
 	});
-	// TO DO: add support for Application identifiers
-	//validate
+    
+	// TO DO: validate and add tests	
     var code128Base = Encoding.extend({
         init: function (options) {
             Encoding.fn.init.call(this, options);
@@ -930,6 +1040,7 @@
 	encodings.code128a = code128Base.extend({
 		states: ["A"]
 	});
+    
 	
 	encodings.code128b = code128Base.extend({
 		states: ["B"]
@@ -942,6 +1053,10 @@
 	encodings.code128 = code128Base.extend({
 		states: ["C", "B", "A", "FNC4"]
 	});
+    
+    encodings["gs1-128"] = code128Base.extend({
+       states: ["FNC1", "C", "B"] 
+    });
 		
 	encodings.msi = Encoding.extend({		
 		initValue: function(value, width, height){

@@ -8,13 +8,14 @@
 		<script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>		
 		<script src="../src/kendo.dataviz.core.js" type="text/javascript" charset="utf-8"></script>		
 		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>		
+        <script src="../src/kendo.dataviz.vml.js" type="text/javascript" charset="utf-8"></script>	
 		<script src="../src/kendo.dataviz.barcode.js" type="text/javascript" charset="utf-8"></script>		
     </head>
     <body style="background-color: red;">		
-		<h3>code39</h3>
-		<div id="code39"></div>
-		<h3>code39extended</h3>
-		<div id="code39extended"></div>
+		<h3>postnet</h3>
+		<div id="postnet"></div>
+		<h3>gs1-128</h3>
+		<div id="gs1"></div>
 		<h3>code93</h3>
 		<div id="code93"></div>
 		<h3>code93extended</h3>
@@ -34,7 +35,7 @@
 				value+= "T"
 			}
 			
-			$('#code39').kendoBarcode({
+			$('#postnet').kendoBarcode({
 				value: "01234",
 				encoding: {
 					name: "postnet"
@@ -43,12 +44,12 @@
 				height: 50
 			});
 			
-			$('#code39extended').kendoBarcode({
-				value: ">a12Asdas;" + String.fromCharCode(127),
+			$('#gs1').kendoBarcode({
+				value: "21 a123 (12)121212",
 				encoding: {
-					name: "code39extended"
+					name: "gs1-128"
 				},
-				width: 500,
+				width: 200,
 				height: 100
 			});
 			
