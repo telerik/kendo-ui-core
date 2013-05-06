@@ -223,7 +223,7 @@ kendo_module({
             }
 
             if (options.draggable) {
-                that.dragging = new WindowDragging(that);
+                that.dragging = new WindowDragging(that, options.draggable.dragHandle || KWINDOWTITLEBAR);
             }
 
             id = element.attr("id");
@@ -342,6 +342,7 @@ kendo_module({
             },
             title: "",
             actions: ["Close"],
+            autoFocus: true,
             modal: false,
             resizable: true,
             draggable: true,
@@ -535,7 +536,9 @@ kendo_module({
 
                 that.toFront();
 
-                that.element.focus();
+                if (options.autoFocus) {
+                    that.element.focus();
+                }
 
                 options.visible = true;
 
@@ -555,7 +558,9 @@ kendo_module({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
                         complete: function() {
-                            that.element.focus();
+                            if (options.autoFocus) {
+                                that.element.focus();
+                            }
                             that.trigger(ACTIVATE);
                             contentElement.css(OVERFLOW, initialOverflow);
                         }
@@ -669,7 +674,7 @@ kendo_module({
             }
             that.element.find("> .k-overlay").remove();
 
-            if (!$(active).is(winElement) &&
+            if (that.options.autoFocus && !$(active).is(winElement) &&
                 !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input,a") &&
                 (!winElement.find(active).length || !winElement.find(target).length)) {
                 winElement.focus();
@@ -1111,12 +1116,12 @@ kendo_module({
         }
     };
 
-    function WindowDragging(wnd) {
+    function WindowDragging(wnd, dragHandle) {
         var that = this;
 
         that.owner = wnd;
         that._draggable = new Draggable(wnd.wrapper, {
-            filter: KWINDOWTITLEBAR,
+            filter: dragHandle,
             group: wnd.wrapper.id + "-moving",
             dragstart: proxy(that.dragstart, that),
             drag: proxy(that.drag, that),

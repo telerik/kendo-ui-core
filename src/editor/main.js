@@ -43,6 +43,10 @@ kendo_module({
     });
 
     var EditorUtils = {
+        select: function(editor) {
+            editor.trigger("select", {});
+        },
+
         editorWrapperTemplate:
             '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header" role="presentation"><tbody>' +
                 '<tr role="presentation"><td class="k-editor-toolbar-wrap" role="presentation"><ul class="k-editor-toolbar" role="toolbar"></ul></td></tr>' +
@@ -122,7 +126,8 @@ kendo_module({
         }
     };
 
-    var focusable = ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input";
+    var select = EditorUtils.select,
+        focusable = ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input";
 
     var messages = {
         bold: "Bold",
@@ -177,11 +182,42 @@ kendo_module({
 
     var Toolbar = Widget.extend({
         init: function(element, options) {
-            Widget.fn.init.call(this, element, options);
+            var that = this;
 
-            this.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
+            Widget.fn.init.call(that, element, options);
 
-            this.bindTo(options.editor);
+            that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
+
+            if (kendo.ui.editor.Dom.name(options.editor.element[0]) !== "textarea") {
+                that.window = $(element)
+                    .wrap("<div class='editorToolbarWindow' />")
+                    .parent()
+                    .prepend("<button class='k-button k-button-bare k-editortoolbar-pin'><span class='k-icon k-i-pin'></span></button>" +
+                        "<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-columns'></span></button>")
+                    .kendoWindow({
+                        title: false,
+                        draggable: {
+                            dragHandle: ".k-editortoolbar-dragHandle"
+                        },
+                        visible: false,
+                        autoFocus: false,
+                        actions: []
+                    }).find(".k-editortoolbar-pin").click(function(e){
+                        var btn = $(this),
+                            btnIcon = btn.children("span"),
+                            wnd = btn.closest(".editorToolbarWindow").data("kendoWindow");
+                        if (btnIcon.hasClass("k-i-pin")) {
+                            wnd.pin();
+                            btnIcon.removeClass("k-i-pin").addClass("k-i-unpin");
+                        } else {
+                            wnd.unpin();
+                            btnIcon.removeClass("k-i-unpin").addClass("k-i-pin");
+                        }
+                    }).end()
+                    .data("kendoWindow");
+            }
+
+            that.bindTo(options.editor);
         },
 
         events: [
@@ -190,16 +226,6 @@ kendo_module({
 
         items: function() {
             return this.element.children().find("> *, select");
-        },
-
-        toolById: function(name) {
-            var id, tools = this.options.tools;
-
-            for (id in tools) {
-                if (id.toLowerCase() == name) {
-                    return tools[id];
-                }
-            }
         },
 
         bindTo: function(editor) {
@@ -257,6 +283,17 @@ kendo_module({
             });
 
             editor.bind("select", proxy(that._update, that));
+        },
+
+        show: function() {
+            var that = this;
+
+            //that.window.wrapper.width = that.options.editor.element.outerWidth();
+            that.window.open();
+        },
+
+        hide: function() {
+            this.window.close();
         },
 
         _appendShortcutSequence: function(localizedText, tool) {
@@ -429,6 +466,7 @@ kendo_module({
 
         },
 
+
         _toolFromClassName: function (element) {
             var tool = $.grep(element.className.split(" "), function (x) {
                 return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
@@ -473,7 +511,7 @@ kendo_module({
                 return;
             }
 
-            if ($.inArray(type, supportedElements) == -1) {
+            if (!$.inArray(supportedElements, type)) {
                 return;
             }
 
@@ -539,14 +577,16 @@ kendo_module({
         },
 
         _endTyping: function() {
-            var keyboard = this.keyboard;
+            var that = this;
 
             try {
-                if (keyboard.isTypingInProgress()) {
-                    keyboard.endTyping(true);
+                if (that.keyboard.isTypingInProgress()) {
+                    that.keyboard.endTyping(true);
                 }
 
-                this.saveSelection();
+                if (!that.selectionRestorePoint) {
+                    that.selectionRestorePoint = new kendo.ui.editor.RestorePoint(that.getRange());
+                }
             } catch (e) { }
         },
 
@@ -556,11 +596,6 @@ kendo_module({
             if ($.contains(e.target, wrapper[0]) || wrapper[0] == e.target) {
                 this.refresh();
             }
-        },
-
-        _selectionChange: function() {
-            this.saveSelection();
-            this.trigger("select", {});
         },
 
         _wrapTextarea: function() {
@@ -651,7 +686,7 @@ kendo_module({
                 editor.body = editor.element[0];
             }
 
-            $(editor.body)
+            $(editor.document)
                 .on("keydown" + NS, function (e) {
                     var range;
 
@@ -721,7 +756,7 @@ kendo_module({
 
                     if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
                         editor.pendingFormats.clear();
-                        editor._selectionChange();
+                        select(editor);
                     }
 
                     if (editor.keyboard.isTypingKey(e)) {
@@ -742,7 +777,7 @@ kendo_module({
                     }
                 })
                 .on("mouseup" + NS, function() {
-                    editor._selectionChange();
+                    select(editor);
                 })
                 .on("click" + NS, function(e) {
                     var dom = kendo.ui.editor.Dom, range;
@@ -758,9 +793,15 @@ kendo_module({
                 })
                 .on("focus" + NS, function() {
                     $(this).addClass("k-state-active");
+                    if (kendo.ui.editor.Dom.name(editor.element[0]) !== "textarea") {
+                        editor.toolbar.show();
+                    }
                 })
                 .on("blur" + NS, function() {
                     $(this).removeClass("k-state-active");
+//                    if (!$(document.activeElement).closest(".editorToolbarWindow").length) {
+//                        editor.toolbar.hide();
+//                    }
                 });
         },
 
@@ -961,18 +1002,8 @@ kendo_module({
             this.update();
         },
 
-        saveSelection: function() {
-            this.selectionRestorePoint = new kendo.ui.editor.RestorePoint(this.getRange());
-        },
-
-        restoreSelection: function() {
-            if (this.selectionRestorePoint) {
-                this.selectRange(this.selectionRestorePoint.toRange());
-            }
-        },
-
         focus: function () {
-            this.body.focus();
+            this.window.focus();
         },
 
         update: function (value) {
@@ -998,7 +1029,6 @@ kendo_module({
             var selection = this.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
-            this.saveSelection();
         },
 
         getRange: function () {
@@ -1024,9 +1054,9 @@ kendo_module({
 
         exec: function (name, params) {
             var that = this,
-                range,
-                tool, command = null,
-                pendingTool;
+                range, body, id,
+                tool = "", pendingTool,
+                tools = that.toolbar.options.tools;
 
             name = name.toLowerCase();
 
@@ -1034,10 +1064,17 @@ kendo_module({
             if (!that.keyboard.isTypingInProgress()) {
                 that.focus();
 
-                that.restoreSelection();
+                range = that.getRange();
+                body = that.document.body;
             }
 
-            tool = that.toolbar.toolById(name);
+            // exec tool
+            for (id in tools) {
+                if (id.toLowerCase() == name) {
+                    tool = tools[id];
+                    break;
+                }
+            }
 
             if (tool) {
                 range = that.getRange();
@@ -1047,13 +1084,11 @@ kendo_module({
                     pendingTool = $.extend({}, tool);
                     $.extend(pendingTool.options, { params: params });
                     that.pendingFormats.toggle(pendingTool);
-                    that._selectionChange();
+                    select(that);
                     return;
                 }
 
-                if (tool.command) {
-                    command = tool.command(extend({ range: range }, params));
-                }
+                var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
 
                 that.trigger("execute", { name: name, command: command });
 
@@ -1068,12 +1103,12 @@ kendo_module({
                     command.exec();
 
                     if (command.async) {
-                        command.change = proxy(that._selectionChange, that);
+                        command.change = $.proxy(function () { select(that); }, that);
                         return;
                     }
                 }
 
-                that._selectionChange();
+                select(that);
             }
         }
     });
