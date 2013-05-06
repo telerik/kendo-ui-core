@@ -74,7 +74,7 @@
 					   /*DEL*/"127": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1],[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1]],						
 					   /*US*/"31": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
 					   /*=*/"61": [[BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2]],
-					   /*'*/"39": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1],[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 3]],
+					   /*'*/"39": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1],[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 3]]
 					   
 					};
 					// / [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1]
@@ -239,10 +239,8 @@
 					try{
 						encoding.encode("aAAST*" + String.fromCharCode(128), 300, 100);
 					}
-					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+					catch (ex){						
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });

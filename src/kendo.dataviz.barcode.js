@@ -10,6 +10,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
 		extend = $.extend,
+		inArray = $.inArray,
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
@@ -18,21 +19,20 @@
         SPACE = 0,
         DEFAULT_QUIETZONE_LENGTH = 10,
 		numberRegex = /^\d+$/,
-		InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}",
-		customErrorMessageStart="customerror:";
+		InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}";		
 		
 	function getNext(value, index, count){
 		return value.substring(index, index + count);
 	}
 	
-	function throwCustomError(message){
-		throw new Error(customErrorMessageStart + message);
-	}
-	
     var Encoding  = kendo.Class.extend({
+		varyByHeight: false,
         init: function (options) {			
-            this.options = extend({}, this.options, options );    
-        },       
+            this.setOptions(options);
+        },    
+		setOptions: function(options){
+			this.options = extend({}, this.options, options);    
+		},
         encode: function (value, width, height) {
             this.initValue(value, width, height);
 			if(this.options.addQuietZone){            
@@ -45,12 +45,14 @@
 			
             return {
                 baseUnit: this.baseUnit,
-                pattern: this.pattern
+                pattern: this.pattern,
+				varyByHeight: this.varyByHeight
             };
         },  
 		options: {
 			quietZoneLength: DEFAULT_QUIETZONE_LENGTH,
-			addQuietZone: true
+			addQuietZone: true,
+			addCheckSum: true			
 		},		
         initValue: function (value, width, height) {           
         },
@@ -65,7 +67,7 @@
         addData: function () {    
         },
 		invalidCharacterError: function(character){
-			throwCustomError(kendo.format(InvalidCharacterErrorTemplate, character, this.options.name));
+			throw new Error(kendo.format(InvalidCharacterErrorTemplate, character, this.options.name));
 		}
     }); 
 
@@ -218,7 +220,7 @@
 		prepareValues: function(){
 		    var minHeight = Math.max(0.15 * this.width, 24);
             if (this.height < minHeight) {
-                throwCustomError("Insufficient Height");				
+                throw new Error("Insufficient Height");				
             }
 			this.setBaseUnit();
 			while(this.baseUnit < this.minBaseUnitLength && this.ratio > this.minRatio){
@@ -227,7 +229,7 @@
 			}
 			
 			if(this.baseUnit < this.minBaseUnitLength){				
-				throwCustomError("Insufficient Width");				
+				throw new Error("Insufficient Width");				
 			}
 
 			this.pattern = new Function("ratio,BAR,SPACE", "return [" +  this.pattern.join(",") + "];")(this.ratio, BAR, SPACE);
@@ -355,13 +357,13 @@
 		prepareValues: function(){
 			var minHeight = Math.max(0.15 * this.width, 24);
             if (this.height < minHeight) {
-                throwCustomError("Insufficient Height");				
+                throw new Error("Insufficient Height");				
             }
 			
 			this.setBaseUnit();
 			
 			if(this.baseUnit < this.minBaseUnitLength){				
-				throwCustomError("Insufficient Width");				
+				throw new Error("Insufficient Width");				
 			}
 		},
 		setBaseUnit: function(){
@@ -381,10 +383,6 @@
 			this.addPattern(charData.pattern);
 			this.values.push(charData.value);			
 		},
-		addCheckSums: function(characterValue, index){			
-			this.cCheckSum += this.weightedValue(characterValue, this.dataLength, index, this.cCheckSumTotal);					
-			this.kCheckSum += this.weightedValue(characterValue, this.dataLength + 1, index, this.kCheckSumTotal);
-		},
 		pushCheckSum: function(){
 			var checkValues = this._getCheckValues(),
 				charData;
@@ -398,7 +396,7 @@
 				wightedSum = 0,
 				cValue,
 				kValue;
-				
+			//!!!avoid reverse. get backwards	
 			for(var i = 0; i < values.length; i++){
 				wightedSum += this.weightedValue(values[i], i + 1, this.cCheckSumTotal);
 			}			
@@ -422,7 +420,7 @@
 			
 			for(var i = 0; i < pattern.length; i++){		
 				symbol = i % 2 == 0 ? BAR : SPACE;
-				value = parseInt(pattern[i]);
+				value = parseInt(pattern.charAt(i));
 				this.pattern.push([symbol, value]);
 			}
 		},
@@ -519,6 +517,7 @@
 	}); 
 		
 	var state128AB = state128.extend({
+		FNC4: "FNC4",
 		init: function(encoding, states){
 			this.encoding = encoding;
 			this._initMoves(states);
@@ -546,13 +545,11 @@
 		_initMoves: function(states){
 			this._moves = [];
 			
-			for(var i = 0; i < states.length; i++){
-				if(states[i].indexOf("FNC") >= 0){
-					this._moves.push(this._moveFNC);
-					break;
-				}
-			}	
-			if(states.indexOf(this.shiftKey)){
+			if(inArray(this.FNC4, states) >= 0){
+				this._moves.push(this._moveFNC);
+			}
+
+			if(inArray(this.shiftKey, states) >= 0){
 				this._moves.push(this._shiftState);	
 			}			
 			this._moves.push(this._moveState);
@@ -626,7 +623,7 @@
 			while(( code = getNext(encodingState.value, encodingState.index, 2)) 
 				&& numberRegex.test(code))
 			{				
-				this.encoding.addPattern(parseInt(code));
+				this.encoding.addPattern(parseInt(code, 10));
 				encodingState.index+=2;
 			}				
 		},
@@ -707,7 +704,7 @@
 		_initSubStates: function(states){
 			this.subStates = [];
 			for(var i = 0; i < states.length; i++){
-				if(this.dependentStates.indexOf(states[i]) >= 0){
+				if(inArray(states[i], this.dependentStates) >= 0){
 					this.subStates.push(states[i]);
 				}					
 			}				
@@ -743,7 +740,7 @@
 			this.encoding[this.startState].addStart();
 		},
 		is: function(value, index){
-			return this.states.indexOf(this.key) >= 0;
+			return inArray(this.key, this.states) >= 0;
 		},		
 		pushState: function(encodingState){
 			var encoding = this.encoding,
@@ -759,7 +756,8 @@
 				nextStart,
 				separatorLength,
 				codeLength;
-			encoding.addPattern(this.START);	
+			encoding.addPattern(this.START);
+			//!!!moove if has finished with B
 			while(true){				
 				separatorLength = value.charAt(index) === this.startAI ? 2 : 0;
 				current = separatorLength > 0 ? this.getBySeparator(value, index) : this.getByLength(value, index);
@@ -770,7 +768,7 @@
 					nextStart = value.indexOf(this.startAI, index + 1);
 					if(nextStart < 0){
 						if(index + current.ai.max + current.id.length + separatorLength < value.length){
-							throwCustomError("Separators are required for variable length codes");
+							throw new Error("Separators are required for variable length codes");
 						}
 						nextStart = value.length;
 					}
@@ -805,7 +803,7 @@
 			this.unsupportedAIError(id);
 		},
 		unsupportedAIError: function(id){
-			throwCustomError(kendo.format("'{0}' is not a supported Application Identifier"),id);
+			throw new Error(kendo.format("'{0}' is not a supported Application Identifier"),id);
 		},
         getBySeparator: function(value, index){
             var start = value.indexOf(this.startAI, index),
@@ -907,7 +905,7 @@
 			
 			for(var i = 0; i < pattern.length; i++){		
 				symbol = i % 2 == 0 ? BAR : SPACE;
-				value = parseInt(pattern[i]);
+				value = parseInt(pattern.charAt(i));
 				this.pattern.push([symbol, value]);
 				this.totalUnits += value;			
 			}
@@ -919,7 +917,7 @@
 					return states[i];
 				}
 			}
-			throwCustomError("Invalid character for encoding 128");
+			throw new Error("Invalid character for encoding 128");
 		},
 		characterMap: [
 			212222,222122,222221,121223,121322,131222,122213,122312,132212,221213,221312,231212,112232,122132,122231,113222,123122,123221,223211,221132,221231,213212,223112,312131,311222,321122,321221,312212,322112,322211,212123,212321,232121,111323,131123,131321,112313,132113,132311,211313,231113,231311,112133,112331,132131,113123,113321,133121,313121,211331,231131,213113,213311,213131,311123,311321,331121,312113,312311,332111,314111,221411,431111,111224,111422,121124,121421,141122,141221,112214,112412,122114,122411,142112,142211,241211,221114,413111,241112,134111,111242,121142,121241,114212,124112,124211,411212,421112,421211,212141,214121,412121,111143,111341,131141,114113,114311,411113,411311,113141,114131,311141,411131,211412,211214,211232,2331112
@@ -943,6 +941,280 @@
 	
 	encodings.code128 = code128Base.extend({
 		states: ["C", "B", "A", "FNC4"]
+	});
+		
+	encodings.msi = Encoding.extend({		
+		initValue: function(value, width, height){
+			this.pattern = [];	
+			this.value = value;
+			this.checkSumLength = 0;
+			this.width = width;
+		},
+		setBaseUnit: function(){	
+			var quietZoneLength = this.options.addQuietZone ? 2 * this.options.quietZoneLength : 0,
+				startStopLength = 7;
+				
+			this.baseUnit = this.width / 
+					( 12 * (this.value.length + this.checkSumLength) + quietZoneLength + startStopLength);
+		},
+		addData:  function(){
+			var value = this.value;
+			this.addPattern(this.START);
+			
+			for(var i = 0; i < value.length; i++){
+				this.addCharacter(value.charAt(i));
+			}
+			
+			if(this.options.addCheckSum){
+				this.addCheckSum();
+			}
+			
+			this.addPattern(this.STOP);
+			this.setBaseUnit();
+		},	
+		addCharacter: function(character){
+			var pattern = this.characterMap[character];
+			if(!pattern){
+				this.invalidCharacterError(character);
+			}
+			this.addPattern(pattern);
+		},
+		addPattern: function(pattern){		
+			var symbol;
+			for(var i = 0; i < pattern.length; i++){
+				symbol = i % 2 == 0 ? BAR : SPACE;
+				this.pattern.push([ symbol, parseInt(pattern.charAt(i))]);
+			}
+		},
+		addCheckSum: function(){
+			var checkSumFunction = this.checkSums[this.options.checkSumType],
+				checkValues;
+			if(!checkSumFunction){
+				var errorMessage = "Unsupported checksum type. The supported checksum types are: ";
+				for(var checkSumType in this.checkSums){
+					errorMessage += checkSumType + ", ";
+				}
+				throw new Error(errorMessage.substring(0,errorMessage.length - 2));
+			}
+			checkValues = checkSumFunction.call(this.checkSums, this.value);			
+			for(var i = 0; i < checkValues.length; i++){
+				this.checkSumLength++;
+				this.addPattern(this.characterMap[checkValues[i]]);
+			}			
+		},		
+		checkSums: {
+			Modulo10: function(value){
+				var checkValues = [0, ""],
+				evenSum,
+				oddSum,				
+				odd = value.length % 2;
+				
+				for(var i = 0; i < value.length; i++){
+					checkValues[(i + odd) % 2] += parseInt(value.charAt(i));
+				}
+				
+				oddSum = checkValues[0];
+				evenSum = (checkValues[1] * 2).toString();
+				
+				for(var i = 0; i < evenSum.length; i++){
+					oddSum += parseInt(evenSum.charAt(i));
+				}	
+				
+				return [(10 - (oddSum % 10)) % 10];
+			},
+			Modulo11: function(value){
+				var weightedSum = 0,
+					mod = 11,
+					length = value.length,					
+					weight,
+					checkValue;
+				
+				for(var i = 0; i < length; i++){					
+					weight = ((length - i) % 6 || 6) + 1;
+					weightedSum +=  weight * value.charAt(i);
+				}
+				var checkValue = (mod - weightedSum % mod) % mod;
+				if(checkValue != 10){
+					return [checkValue];
+				}
+				return [1, 0];
+			},
+			Modulo11Modulo10: function(value){
+				var checkValues = this.Modulo11(value),
+					mod11Value;
+				mod11Value = value + checkValues[0];				
+				
+				return checkValues.concat(this.Modulo10(mod11Value));
+			},
+			DoubleModulo10: function(value){
+				var checkValues = this.Modulo10(value),
+					mod10Value;
+				mod10Value = value + checkValues[0];				
+				
+				return checkValues.concat(this.Modulo10(mod10Value));
+			}
+		},
+		characterMap: ["12121212", "12121221","12122112", "12122121", "12211212", "12211221", "12212112", "12212121", "21121212", "21121221"],
+		START: "21",
+		STOP: "121",
+		options: {
+			addCheckSum: true,
+			checkSumType: "Modulo10"
+		}
+	});
+	
+	encodings.code11 = Encoding.extend({
+		cCheckSumTotal: 10,
+		kCheckSumTotal: 9,
+		kCheckSumMinLength: 10,
+		checkSumMod: 11,
+		DASH_VALUE: 10,
+		DASH: "-",
+		START: "112211",
+		STOP: "11221",
+		initValue: function(value, width, height){
+			this.pattern = [];	
+			this.value = value;
+			this.width = width;
+			this.totalUnits = 0;
+		},
+		addData:  function(){
+			var value = this.value;
+			this.addPattern(this.START);
+			
+			for(var i = 0; i < value.length; i++){
+				this.addCharacter(value.charAt(i));
+			}
+			
+			if(this.options.addCheckSum){
+				this.addCheckSum();
+			}
+			
+			this.addPattern(this.STOP);
+			this.setBaseUnit();
+		},
+		setBaseUnit: function(){
+			var quietZoneLength = this.options.addQuietZone ? 2 * this.options.quietZoneLength : 0;			
+			this.baseUnit = this.width / (this.totalUnits + quietZoneLength);
+		},
+		addCheckSum: function(){
+			var value = this.value,
+				length = value.length,			
+				cValue;
+		
+			cValue = this.getWeightedSum(value, length, this.cCheckSumTotal) % this.checkSumMod;
+			this.addPattern(this.characterMap[cValue]);
+			
+			length++;
+			if(length >= this.kCheckSumMinLength){
+				var kValue = (cValue + this.getWeightedSum(value, length, this.kCheckSumTotal)) % this.checkSumMod;
+				this.addPattern(this.characterMap[kValue]);
+			}
+		},
+		getWeightedSum: function(value, length, total){
+			var weightedSum = 0;
+			for(var i = 0; i < value.length; i++){			
+				weightedSum+= this.weightedValue(this.getValue(value.charAt(i)), length, i, total);
+			}
+			
+			return weightedSum;
+		},
+		weightedValue: function(value, length, index, total){
+			var weight = (length - index) % total || total;
+			return weight * value;
+		},
+		getValue: function(character){
+			if(!isNaN(character)){
+				return parseInt(character);
+			}
+			else if(character !== this.DASH){
+				this.invalidCharacterError(character);
+			}			
+			return this.DASH_VALUE;
+		},
+		addCharacter: function(character){
+			var value = this.getValue(character),
+				pattern = this.characterMap[value];
+			this.addPattern(pattern);
+		},
+		addPattern: function(pattern){	
+			var symbol,
+				value;
+			for(var i = 0; i < pattern.length; i++){
+				symbol = i % 2 == 0 ? BAR : SPACE;
+				value = parseInt(pattern.charAt(i));
+				this.pattern.push([symbol, value]);
+				this.totalUnits+=value;
+			}
+		},
+		characterMap: ["111121", "211121", "121121", "221111", "112121", "212111", "122111", "111221", "211211", "211111", "112111"],
+		options: {
+			addCheckSum: true
+		}
+	});
+	
+	encodings.postnet = Encoding.extend({
+		varyByHeight: true,
+		START: "2",
+		VALID_CODE_LENGTHS: [5,9, 11],
+		DIGIT_SEPARATOR: "-",
+		initValue: function(value, width, height){
+			this.height = height;
+			this.width = width;
+			this.baseHeight = height /2;
+			this.value = value.replace(new RegExp(this.DIGIT_SEPARATOR,"g"), "");
+			this.pattern = [];
+			this.validate(this.value);
+			this.checkSum = 0;
+			this.setBaseUnit();
+		},
+		addData:  function(){
+			var value = this.value;
+			this.addPattern(this.START);
+			
+			for(var i = 0; i < value.length; i++){
+				this.addCharacter(value.charAt(i));
+			}
+			
+			if(this.options.addCheckSum){
+				this.addCheckSum();
+			}
+			
+			this.addPattern(this.START);
+			this.pattern.pop();
+		},	
+		addCharacter: function(character){
+			var pattern = this.characterMap[character];
+			this.checkSum+= parseInt(character);
+			this.addPattern(pattern);
+		},
+		addCheckSum: function(){
+			var checkValue = (10 - (this.checkSum % 10)) % 10;
+			this.addCharacter(checkValue);
+		},
+		setBaseUnit: function(){
+			var quietZoneLength = this.options.addQuietZone ? 2 * this.options.quietZoneLength : 0,
+				startStopLength = 3;
+			this.baseUnit = this.width / ((this.value.length + 1) * 10 +  startStopLength + quietZoneLength);
+		},
+		validate: function(value){
+			if(inArray(value.length, this.VALID_CODE_LENGTHS) < 0){
+				throw new Error("Invalid value length.");
+			}
+			
+			if(!numberRegex.test(value)){				
+				this.invalidCharacterError(value.match(/[^0-9]/)[0]);
+			}
+		},
+		addPattern: function(pattern){
+			var y1;
+			for(var i = 0; i < pattern.length; i++){				
+				y1 = this.height - this.baseHeight * pattern.charAt(i);
+				this.pattern.push([BAR, 1, y1, this.height]);
+				this.pattern.push([SPACE, 1]);
+			}			
+		},		
+		characterMap: ["22111", "11122", "11212", "11221", "12112", "12121", "12211", "21112", "21121", "21211"]
 	});
 	
 	encodings.ean13 = Encoding.extend({
@@ -1080,8 +1352,9 @@
     var Barcode = Widget.extend({
         init: function (element, options) {                                     
              Widget.fn.init.call(this, element, options);
-             this.element = element;            
-             this.view = new (dataviz.ui.defaultView())(); 
+             this.element = element;     
+			 var defaultView = dataviz.ui.defaultView();
+             this.view = new defaultView(); 
              this.setOptions(options);                                
         },
         setOptions: function (options) { 		
@@ -1091,47 +1364,50 @@
             }
             this.options = $.extend(this.options, options);           
             this.value(this.options.value);
-        },		
+        },	
         redraw: function () {
-            var result;
-			try{
-				result = this.encoding.encode(this.value, 
-					this.options.width, this.options.height);
-			}
-			catch(ex){
-				if(ex.message.indexOf(customErrorMessageStart) !== 0){
-					throw ex;
-				}
-				this.showError(ex.message.substr(customErrorMessageStart.length));
-				return;
-			}
+            var result = this.encoding.encode(this.value, 
+					this.options.width, this.options.height),
+				yGetter = result.varyByHeight ? this._getYFromPattern : this._getY;
 			
             this.view.children = [];
             this.view.options.width = this.options.width;
             this.view.options.height = this.options.height + this.options.fontSize;
-            this.addBackground();
-            
-            this.addElements(result.pattern, result.baseUnit);
+            this.addBackground();  
+			
+            this.addElements(result.pattern, result.baseUnit, yGetter);
+			
             if (this.options.showText) {
                this.addText(this.value);
             }
             this.view.renderTo(this.element);
         },
-		showError: function(msg){
-			alert(msg);
+		_getY: function(pattern, height){
+				return {
+					y1: 0,
+					y2: height
+				};				
+		},
+		_getYFromPattern: function(pattern, height){			
+			return {
+				y1: pattern[2],
+				y2: pattern[3]
+			};
 		},
         value: function(value){            
             this.value = value;
             this.redraw();            
         },
-        addElements: function (pattern, baseUnit) {
-            var step,
-                position = 0;
-            for (var i = 0; i < pattern.length; i++) {                               
-             
-                step = pattern[i][1] * baseUnit;       
-                if(pattern[i][0] === BAR){
-                     this.view.children.push(this.view.createRect(new Box2D(position, 0, position + step, this.options.height), 
+        addElements: function (pattern, baseUnit, yGetter) {
+            var position = 0,
+				step,				
+				y;
+
+            for (var i = 0; i < pattern.length; i++) {                                           
+                step = pattern[i][1] * baseUnit;     				
+                if(pattern[i][0] === BAR){	
+					 y = yGetter(pattern[i], this.options.height);
+                     this.view.children.push(this.view.createRect(new Box2D(position, y.y1, position + step, y.y2), 
                         { fill: this.options.lineColor}));  
                 }
 
@@ -1182,4 +1458,5 @@
         encodings: encodings,
         Encoding: Encoding
    });
+   
 })(window.kendo.jQuery);             

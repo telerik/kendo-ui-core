@@ -34,42 +34,41 @@
 				value+= "T"
 			}
 			
-			// $('#code39').kendoBarcode({
-				// value: "aTEST8052",
-				// encoding: {
-					// name: "code39",
-					// addCheckSum: true
-				// },
-				// width: 300,
-				// height: 100
-			// });
+			$('#code39').kendoBarcode({
+				value: "01234",
+				encoding: {
+					name: "postnet"
+				},
+				width: 200,
+				height: 50
+			});
 			
-			// $('#code39extended').kendoBarcode({
-				// value: ">a12Asdas;" + String.fromCharCode(127),
-				// encoding: {
-					// name: "code39extended"
-				// },
-				// width: 500,
-				// height: 100
-			// });
+			$('#code39extended').kendoBarcode({
+				value: ">a12Asdas;" + String.fromCharCode(127),
+				encoding: {
+					name: "code39extended"
+				},
+				width: 500,
+				height: 100
+			});
 			
-			// $('#code93').kendoBarcode({
-				// value: "TEST93",
-				// encoding: {
-					// name: "code93"
-				// },
-				// width: 300,
-				// height: 100
-			// });
+			$('#code93').kendoBarcode({
+				value: "TEST93",
+				encoding: {
+					name: "code93"
+				},
+				width: 300,
+				height: 100
+			});
 			
-			// $('#code93extended').kendoBarcode({
-				// value: ">a12Asdas;" + String.fromCharCode(127),
-				// encoding: {
-					// name: "code93extended"
-				// },
-				// width: 300,
-				// height: 100
-			// });
+			$('#code93extended').kendoBarcode({
+				value: ">a12Asdas;" + String.fromCharCode(127),
+				encoding: {
+					name: "code93extended"
+				},
+				width: 300,
+				height: 100
+			});
 			
 			$('#code128A').kendoBarcode({
 				value: "TESTA",

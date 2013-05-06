@@ -173,10 +173,8 @@
 					try{
 						encoding.encode("00a11", 300, 100);
 					}
-					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+					catch (ex){						
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });
@@ -186,10 +184,8 @@
 					try{
 						encoding.encode("001", 300, 100);
 					}
-					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+					catch (ex){						
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });

@@ -15,12 +15,6 @@ function comparePatterns(pattern1, pattern2){
 	return true;
 }
 
-function getCustomErrorMessage(errorMessage){
-	if(errorMessage.indexOf(customErrorMessageStart) === 0){
-		return errorMessage.substr(customErrorMessageStart);
-	}
-}
-
 Array.prototype.pushArray = function(arr){
 	this.push.apply(this, arr);
 }

@@ -209,9 +209,7 @@
 						encoding.encode("aAAST*" + String.fromCharCode(128), 300, 100);
 					}
 					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });				

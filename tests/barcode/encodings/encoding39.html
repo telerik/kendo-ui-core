@@ -207,10 +207,8 @@
 					try{
 						encoding.encode("aAAST*", 300, 100);
 					}
-					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+					catch (ex){						
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });
@@ -224,10 +222,8 @@
 					try{
 						encoding.encode(value, width, 100);
 					}
-					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+					catch (ex){						
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });
@@ -241,10 +237,8 @@
 					try{
 						encoding.encode(value, width, height);
 					}
-					catch (ex){
-						if(getCustomErrorMessage(ex.message)){
-							thrownError = true;
-						}
+					catch (ex){						
+						thrownError = true;						
 					}
 					ok(thrownError);
                 });
