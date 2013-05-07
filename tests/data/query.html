@@ -523,7 +523,6 @@
 
             test("filter on null string with endswith", function() {
                 var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
-                debugger;
                 var result = new Query(data).filter({ field: "name", operator: "endswith", value: "foo", ignoreCase: true }).toArray();
 
                 equal(result.length, 1);
