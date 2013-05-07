@@ -49,11 +49,8 @@
                             results.push(i);
                         }
 
-                        console.log('data requested');
-                        setTimeout(function() {
-                            console.log('data received');
-                            options.success(results);
-                        }, 2000);
+                        options.success(results);
+                        setTimeout(function() { }, 10000);
                     }
                 },
                 pageSize: 25,

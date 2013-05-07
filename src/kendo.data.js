@@ -3598,7 +3598,6 @@ kendo_module({
             var buffer = this;
             if (buffer.offset !== offset) {
                 buffer._targetOffset = offset;
-                console.log('range to', offset);
                 buffer.dataSource.range(offset, buffer.pageSize);
             }
         },

@@ -230,7 +230,6 @@ kendo_module({
                 this.bottom = item.top;
                 this.element.css("top", this.top + "px");
             }
-
         },
 
         below: function(item) {
@@ -841,11 +840,13 @@ kendo_module({
                 list.bottom = item.bottom;
             }
 
+            list.itemCount = items.length;
+
             list.buffer.setItemCount(items.length);
         },
 
         itemHeight: function() {
-            return (this.bottom - this.top) / this.items.length;
+            return (this.bottom - this.top) / this.itemCount;
         },
 
         update: function(top, center) {
@@ -857,14 +858,12 @@ kendo_module({
                 targetTop = top - height,
                 bottomThreshold = top + height + 20,
                 targetBottom = bottomThreshold + height,
-                itemCount = items.length,
+                itemCount = list.itemCount,
                 item,
                 bottomItem;
 
             if (list.top > topThreshold) {
-                console.log('top threshold reached');
                 while (list.top > targetTop) {
-                    console.log('shifting to', list.offset);
                     if (list.offset === 0) {
                         break;
                     }
@@ -875,32 +874,29 @@ kendo_module({
                     item.update(list.content(list.offset));
                     item.above(items[0]);
                     items.unshift(item);
-                    list.top = items[0].top;
-                }
-            }
-
-            if (list.bottom < bottomThreshold) {
-                console.log('bottom threshold reached', list.bottom, bottomThreshold, targetBottom);
-                while (list.bottom < targetBottom) {
-                    if (list.offset + itemCount === list.buffer.length - 1) {
-                        break;
-                    }
-
-                    list.offset ++;
-                    item = items.shift();
-
-                    item.update(list.content(list.offset + itemCount));
-                    item.below(items[items.length - 1]);
-                    items.push(item);
+                    list.top = item.top;
                     list.bottom = items[items.length - 1].bottom;
                 }
             }
 
-            if (initialOffset != list.offset) {
-                list.top = items[0].top;
-                list.bottom = items[items.length - 1].bottom;
+            if (list.bottom < bottomThreshold) {
+                while (list.bottom < targetBottom) {
+                    var nextIndex = list.offset + itemCount; // here, it should be offset + 1 + itemCount - 1.
+                    if (nextIndex === list.buffer.length) {
+                        console.log('reached buffer end', list.buffer.length);
+                        break;
+                    }
 
-                list.trigger("resize", { top: list.top, bottom: list.bottom });
+                    item = items.shift();
+
+                    item.update(list.content(nextIndex));
+                    item.below(items[items.length - 1]);
+                    items.push(item);
+                    list.top = items[0].top;
+                    list.bottom = item.bottom;
+
+                    list.offset ++;
+                }
             }
         },
 
