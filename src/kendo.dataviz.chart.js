@@ -2084,7 +2084,17 @@ kendo_module({
             }
         },
 
-        // TODO: Plot bands (circles, polygons)
+        renderPlotBands: function(view) {
+            var axis = this,
+                options = axis.options,
+                plotBands = options.plotBands,
+                type = options.majorGridLines.type,
+                majorTicks = axis.getTickPositions(options.majorUnit),
+                majorAngles = altAxis.majorDivisions(),
+                center = altAxis.box.center(),
+                elements = [];
+
+        },
 
         renderGridLines: function(view, altAxis) {
             var axis = this,
