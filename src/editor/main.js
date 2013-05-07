@@ -282,6 +282,7 @@ kendo_module({
                         if (!/undo|redo/.test(toolName)) {
                             editor.keyboard.endTyping(true);
                         }
+                        editor.trigger("keydown", e);
                         editor.exec(toolName);
                         return false;
                     }
