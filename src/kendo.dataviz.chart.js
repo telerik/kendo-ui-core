@@ -323,8 +323,13 @@ kendo_module({
 
             chart._applyDefaults(chart.options);
 
-            delete chart._sourceSeries;
-            chart._onDataChanged();
+            applySeriesColors(chart.options);
+
+            chart._bindSeries();
+            chart._bindCategories();
+
+            chart.trigger(DATABOUND);
+            chart._redraw();
         },
 
         redraw: function(paneName) {
@@ -954,22 +959,15 @@ kendo_module({
                 seriesLength = series.length,
                 data = chart.dataSource.view(),
                 grouped = (chart.dataSource.group() || []).length > 0,
-                categoriesData = grouped ? (data[0] || []).items : data,
                 processedSeries = [],
                 currentSeries;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (chart.isBindable(currentSeries)) {
-                    if (currentSeries.autoBind !== false) {
-                        currentSeries.data = data;
-                    }
-
-                    append(processedSeries, grouped ?
-                        chart._createGroupedSeries(currentSeries, data) :
-                        [ currentSeries ]
-                    );
+                if (chart.isBindable(currentSeries) && grouped) {
+                    append(processedSeries,
+                           groupSeries(currentSeries, data));
                 } else {
                     processedSeries.push(currentSeries || []);
                 }
@@ -980,14 +978,42 @@ kendo_module({
 
             applySeriesColors(chart.options);
 
-            chart._bindCategories(categoriesData || []);
+            chart._bindSeries();
+            chart._bindCategories();
 
             chart.trigger(DATABOUND);
             chart._redraw();
         },
 
-        _bindCategories: function(data) {
+        _bindSeries: function() {
             var chart = this,
+                data = chart.dataSource.view(),
+                series = chart.options.series,
+                seriesIx,
+                seriesLength = series.length,
+                currentSeries,
+                groupIx,
+                seriesData;
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
+                if (chart.isBindable(currentSeries)) {
+                    groupIx = currentSeries._groupIx;
+                    seriesData = defined(groupIx) ? data[groupIx].items : data;
+
+                    if (currentSeries.autoBind !== false) {
+                        currentSeries.data = seriesData;
+                    }
+                }
+            }
+        },
+
+        _bindCategories: function() {
+            var chart = this,
+                data = chart.dataSource.view(),
+                grouped = (chart.dataSource.group() || []).length > 0,
+                categoriesData = (grouped ? (data[0]).items : data) || [],
                 options = chart.options,
                 definitions = [].concat(options.categoryAxis),
                 axisIx,
@@ -996,7 +1022,7 @@ kendo_module({
             for (axisIx = 0; axisIx < definitions.length; axisIx++) {
                 axis = definitions[axisIx];
                 if (axis.autoBind !== false) {
-                    chart._bindCategoryAxis(axis, data);
+                    chart._bindCategoryAxis(axis, categoriesData);
                 }
             }
         },
@@ -1023,6 +1049,7 @@ kendo_module({
             }
         },
 
+        // TODO: Make private?
         isBindable: function(series) {
             var valueFields = valueFieldsBySeriesType(series.type),
                 result = true,
@@ -1043,36 +1070,6 @@ kendo_module({
             }
 
             return result;
-        },
-
-        _createGroupedSeries: function(series, data) {
-            var groupSeries = [],
-                nameTemplate,
-                group,
-                groupIx,
-                dataLength = data.length,
-                seriesClone;
-
-            if (series.groupNameTemplate) {
-                nameTemplate = template(series.groupNameTemplate);
-            }
-
-            for (groupIx = 0; groupIx < dataLength; groupIx++) {
-                seriesClone = deepExtend({}, series);
-                seriesClone.color = undefined;
-                groupSeries.push(seriesClone);
-
-                group = data[groupIx];
-                seriesClone.data = group.items;
-
-                if (nameTemplate) {
-                    seriesClone.name = nameTemplate({
-                        series: seriesClone, group: group
-                    });
-                }
-            }
-
-            return groupSeries;
         },
 
         _tap: function(e) {
@@ -9427,6 +9424,33 @@ kendo_module({
                 }
             }
         }
+    }
+
+    function groupSeries(series, data) {
+        var result = [],
+            nameTemplate,
+            groupIx,
+            dataLength = data.length,
+            seriesClone;
+
+        if (series.groupNameTemplate) {
+            nameTemplate = template(series.groupNameTemplate);
+        }
+
+        for (groupIx = 0; groupIx < dataLength; groupIx++) {
+            seriesClone = deepExtend({}, series);
+            seriesClone.color = undefined;
+            seriesClone._groupIx = groupIx;
+            result.push(seriesClone);
+
+            if (nameTemplate) {
+                seriesClone.name = nameTemplate({
+                    series: seriesClone, group: data[groupIx]
+                });
+            }
+        }
+
+        return result;
     }
 
     // Exports ================================================================

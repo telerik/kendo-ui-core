@@ -186,10 +186,22 @@
                         series: [{ field: "value" }]
                     });
 
-                    chart.options.series = [];
+                    chart.options.series[0].flag = true;
                     chart.refresh();
 
-                    equal(chart.options.series.length, 0);
+                    ok(chart.options.series[0].flag);
+                });
+
+                test("refresh applies color to new series", function() {
+                    createChart({
+                        seriesColors: ["red", "blue"],
+                        series: [{}]
+                    });
+
+                    chart.options.series.push({});
+                    chart.refresh();
+
+                    equal(chart.options.series[1].color, "blue");
                 });
 
                 test("refresh cleans up generated cateories", function() {
