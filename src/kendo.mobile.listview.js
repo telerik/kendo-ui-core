@@ -883,7 +883,6 @@ kendo_module({
                 while (list.bottom < targetBottom) {
                     var nextIndex = list.offset + itemCount; // here, it should be offset + 1 + itemCount - 1.
                     if (nextIndex === list.buffer.length) {
-                        console.log('reached buffer end', list.buffer.length);
                         break;
                     }
 

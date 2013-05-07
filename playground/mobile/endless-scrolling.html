@@ -30,17 +30,38 @@
             .km-listview li {
                 position: absolute;
                 -webkit-transform: translatez(0);
-                height: 120px;
+                line-height: 100px;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+                border-top: 1px solid #fff;
+                background: #f4f4f4;
+            }
+
+            #detail .km-content {
+                background: #f4f4f4;
             }
         </style>
     </head>
     <body>
         <div data-role="view">
-            <ul data-role="listview" data-endless-scroll="true" data-source="foo">
+            <ul data-role="listview" data-endless-scroll="true" data-source="foo" data-template="listview-template">
             </ul>
         </div>
 
+        <div data-role="view" data-transition="slide" data-show="showParam" id="detail">
+            <a data-role="backbutton">Back</a>
+            <br />
+            Mambo Number <span id="content"></span>
+        </div>
+
+        <script id="listview-template" type="text/x-kendo-template">
+            <a href="\#detail?id=#: data #">Mambo Number #: data #</a>
+        </script>
+
         <script>
+            function showParam(e) {
+                e.view.element.find('#content').html(e.view.params.id);
+            }
             var foo = new kendo.data.DataSource({
                 transport: {
                     read: function(options) {
@@ -49,8 +70,9 @@
                             results.push(i);
                         }
 
-                        options.success(results);
-                        setTimeout(function() { }, 10000);
+                        setTimeout(function() {
+                            options.success(results);
+                        }, 200);
                     }
                 },
                 pageSize: 25,

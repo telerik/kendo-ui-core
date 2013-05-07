@@ -69,6 +69,7 @@
 
             test('reaching the end of the range shifts range to mid state', 4, function() {
                 ds.fetch();
+                buffer.at(12); // prefetch
                 equal(buffer.at(19), 19); // trigger the range change
                 equal(ds.view()[0], 13);
                 equal(ds.view()[19], 32);
@@ -85,6 +86,7 @@
 
             test('reaching the offset of the next range shifts to match the server-side paging', 3, function() {
                 ds.fetch();
+                buffer.at(12); // prefetch
                 equal(buffer.at(19), 19); // fist re-range
                 equal(buffer.at(26), 26); // second re-range
                 equal(ds.view()[0], 20);
@@ -92,6 +94,7 @@
 
             test('pulling back from next page restores the mid-range', 5, function() {
                 ds.fetch();
+                buffer.at(12); // prefetch
                 equal(buffer.at(19), 19); // go to mid range
                 equal(ds.view()[0], 13);
                 equal(buffer.at(26), 26); // go to second range
@@ -111,6 +114,7 @@
                                 }
 
                                 options.success(results);
+                                console.log('foo');
                             }
                         },
                         pageSize: 20,
@@ -129,11 +133,13 @@
 
                 buffer.bind('resize', function(e) {
                     start();
-                    equal(e.limit, 40);
+                    equal(buffer.length, 40);
                 });
 
                 buffer.at(12);
-                buffer.at(19);
+                setTimeout(function() {
+                    buffer.at(19);
+                }, 100);
             });
 
             test('requesting an item from outside of the range triggers endreached event', 2, function() {
@@ -183,7 +189,7 @@
                 ds.fetch();
 
                 buffer.bind('resize', function(e) {
-                    equal(e.limit, 40);
+                    equal(buffer.length, 40);
                 });
 
                 buffer.at(12);
@@ -196,7 +202,7 @@
                 });
 
                 buffer.bind('resize', function(e) {
-                    equal(e.limit, 20);
+                    equal(buffer.length, 20);
                 });
 
                 ds.query({ page: 1, skip: 0, take: 20 });
@@ -204,7 +210,7 @@
 
             test('re-reading the datasource causes reset, even on the same page', 3, function() {
                 buffer.bind('resize', function(e) {
-                    equal(e.limit, 20);
+                    equal(buffer.length, 20);
                 });
 
                 ds.fetch();
