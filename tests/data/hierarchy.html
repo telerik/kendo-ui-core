@@ -3,12 +3,13 @@
     <head>
         <title>HierarchicalDataSource tests</title>
         <script src="../jquery-loader.js"></script>
-        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
-        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
         <h1 id="qunit-header">HierarchicalDataSource tests</h1>
@@ -39,6 +40,16 @@
                         }]
                 });
             }
+
+            module("HierarchicalDataSource", {
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                },
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
 
             test("Node inherits from Model", function() {
                 var node = new Node({});
@@ -187,6 +198,50 @@
                 });
 
                 parent.children.read();
+            });
+
+            asyncTest("error event bubbles from child datasources", function() {
+                $.mockjax({ url: "bar", dataType: "json", data: { id: 1 }, status: 500, responseText: 'Server response' });
+                $.mockjax({ url: "bar", dataType: "json", responseText: [{ id: 1, hasChildren: true, text: "foo" }] });
+
+                var dataSource = HierarchicalDataSource.create({
+                        transport: {
+                            read: {
+                                url: "bar",
+                                dataType: "json"
+                            }
+                        }
+                    });
+
+                dataSource.bind({
+                    change: function() {
+                        dataSource.data()[0].load();
+                    },
+
+                    error: function(e) {
+                        ok(e);
+                        ok(e.xhr);
+                        ok(e.status);
+                        ok(e.node);
+                        ok("errorThrown" in e);
+                    }
+                });
+
+                dataSource.read();
+
+                setTimeout(function() { start(); }, 300);
+            });
+
+            test("error event bubbles after setting the data through data()", 1, function() {
+                var dataSource = HierarchicalDataSource.create({});
+
+                dataSource.bind("error", function() {
+                    ok(true);
+                });
+
+                dataSource.data([{ id: 1, text: "foo", hasChildren: true }]);
+
+                dataSource.data().trigger("error");
             });
 
             test("load fetches data from the children data source", function() {

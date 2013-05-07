@@ -3238,6 +3238,15 @@ kendo_module({
                     that.trigger(CHANGE, e);
                 });
 
+                that.children.bind(ERROR, function(e){
+                    var collection = that.parent();
+
+                    if (collection) {
+                        e.node = e.node || that;
+                        collection.trigger(ERROR, e);
+                    }
+                });
+
                 that._updateChildrenField();
             }
         },
@@ -3313,6 +3322,19 @@ kendo_module({
         }
     });
 
+    function dataMethod(name) {
+        return function() {
+            var data = this._data,
+                result = DataSource.fn[name].apply(this, slice.call(arguments));
+
+            if (this._data != data) {
+                this._attachBubbleHandlers();
+            }
+
+            return result;
+        };
+    }
+
     var HierarchicalDataSource = DataSource.extend({
         init: function(options) {
             var node = Node.define({
@@ -3320,6 +3342,16 @@ kendo_module({
             });
 
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
+
+            this._attachBubbleHandlers();
+        },
+
+        _attachBubbleHandlers: function() {
+            var that = this;
+
+            that._data.bind(ERROR, function(e) {
+                that.trigger(ERROR, e);
+            });
         },
 
         remove: function(node){
@@ -3339,6 +3371,10 @@ kendo_module({
 
             return result;
         },
+
+        success: dataMethod("success"),
+
+        data: dataMethod("data"),
 
         insert: function(index, model) {
             var parentNode = this.parent();
