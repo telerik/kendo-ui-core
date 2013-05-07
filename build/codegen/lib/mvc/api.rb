@@ -169,8 +169,16 @@ PARAMETER = ERB.new(%{
 
                     result += line
 
-                    if line =~ /^(@\(|<%[ :])/ || line =~ /=>.*$/ || line =~ /@<text>$/ || line =~ /^{$/ || line =~ /\($/
+                    if line =~ /^(@\(|<%[ :])/ || line =~ /@<text>$/ || line =~ /^{$/ || line =~ /\($/
                         indent += 1
+                    end
+
+                    if line =~ /=>.*$/
+                        open = line.scan(/\(/).size
+
+                        close = line.scan(/\)/).size
+
+                        indent += 1 if open > close
                     end
 
                     line = ''
