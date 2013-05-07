@@ -156,9 +156,14 @@ var BlockFormatter = Class.extend({
         var that = this,
             formatNodes = dom.is(nodes[0], "img") ? [nodes[0]] : that.finder.findSuitable(nodes),
             formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), that.format) : that.format[0],
-            tag = formatToApply.tags[0],
-            attributes = extend({}, formatToApply.attr, that.values),
-            i, len;
+            tag, attributes, i, len;
+
+        if (!formatToApply) { // if focus is next to standalone image
+            return;
+        }
+
+        tag = formatToApply.tags[0];
+        attributes = extend({}, formatToApply.attr, that.values);
 
         if (formatNodes.length) {
             for (i = 0, len = formatNodes.length; i < len; i++) {
