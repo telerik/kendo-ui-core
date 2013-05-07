@@ -18,6 +18,7 @@
             })
             .Editable(editable => editable.Mode(GridEditMode.InCell))
             .Pageable()
+            .Navigatable()
             .Sortable()
             .Scrollable()
             .DataSource(dataSource => dataSource
