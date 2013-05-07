@@ -19,7 +19,7 @@ var tests = [
     "barcode/encodings/encoding128C.html",
     "barcode/encodings/encodingMSI.html",
     "barcode/encodings/encodingPOSTNET.html",
-    "barcode/encodings/encoding8.html",
+    "barcode/encodings/encoding-ean8.html",
     "breadcrumbs/breadcrumbs.html",
     "breadcrumbs/lint.html",
     "calendar/initialization.html",
