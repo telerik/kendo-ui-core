@@ -1,7 +1,7 @@
 require 'kramdown'
 
 module CodeGen
-    MARKDOWN = FileList['docs/api/{web,dataviz}/*.md']
+    MARKDOWN = FileList['docs/api/{web,dataviz,mobile}/*.md']
         .exclude('**/ui.md')
         .include('docs/api/framework/datasource.md')
 

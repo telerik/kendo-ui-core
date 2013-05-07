@@ -1,0 +1,24 @@
+namespace Kendo.Mvc.UI.Fluent
+{
+    using System.Collections.Generic;
+    using System.Collections;
+    using System;
+
+    public class <%= csharp_class %>Builder: WidgetBuilderBase<<%= csharp_class %>, <%= csharp_class %>Builder>, IHideObjectMembers
+    {
+        private readonly <%= csharp_class %> container;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%= csharp_class %>"/> class.
+        /// </summary>
+        /// <param name="component">The component.</param>
+        public <%= csharp_class %>Builder(<%= csharp_class %> component)
+            : base(component)
+        {
+            container = component;
+        }
+
+//>> Fields
+//<< Fields
+    }
+}
+

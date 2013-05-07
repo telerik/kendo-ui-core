@@ -4,6 +4,7 @@ require 'codegen/lib/component'
 
 require 'nokogiri'
 require 'codegen/lib/mvc/api'
+require 'codegen/lib/mvc/mobile'
 require 'codegen/lib/java/module'
 require 'codegen/lib/java/composite_option'
 require 'codegen/lib/java/event'
@@ -47,6 +48,32 @@ namespace :generate do
                 generator.component(component)
             end
         end
+
+        namespace :mobile do
+
+            desc 'Generate MVC Mobile wrappers'
+            task :wrappers do
+                #components = CodeGen::MarkdownParser.all(CodeGen::MVC::Mobile::Wrappers::Component)
+
+                MARKDOWN = FileList['docs/api/mobile/{listview,actionsheet}.md']
+                #MARKDOWN = FileList['docs/api/mobile/*.md']
+
+                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Mobile::Wrappers::Component) }
+                    .sort { |a, b| a.name <=> b.name }
+
+                #.select { |component| component.full_name =~ /\.Button|\.ActionSheet$/ }
+                components.each do |component|
+
+                    import_metadata(component)
+
+                    generator = CodeGen::MVC::Mobile::Wrappers::Generator.new('wrappers/mvc_mobile')
+
+                    generator.component(component)
+
+                end
+            end
+        end
+
     end
 
     desc 'Generate PHP wrappers'

@@ -1,0 +1,41 @@
+namespace Kendo.Mvc.UI
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.UI;
+    using Kendo.Mvc.Infrastructure;
+
+    public class <%= csharp_class %> : WidgetBase
+    {
+        public <%= csharp_class %>(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+            : base(viewContext, initializer, viewData)
+        {
+//>> Initialization
+//<< Initialization
+        }
+
+//>> Fields
+//<< Fields
+
+        public override void WriteInitializationScript(TextWriter writer)
+        {
+            var options = new Dictionary<string, object>(Events);
+
+//>> Serialization
+//<< Serialization
+
+            writer.Write(Initializer.Initialize(Selector, "<%= csharp_class %>", options));
+
+            base.WriteInitializationScript(writer);
+        }
+
+        protected override void WriteHtml(HtmlTextWriter writer)
+        {
+            base.WriteHtml(writer);
+        }
+    }
+}
+
