@@ -38,16 +38,24 @@
             onChangeRaised = false,
             onExecuteRaised = false;
 
-            function type(keyCode, ctrl, alt, shift) {
+            function type(type, keyCode, ctrl, alt, shift) {
                 var e = $.Event();
                 e.keyCode = keyCode;
                 e.ctrlKey = !!ctrl;
                 e.altKey = !!alt;
                 e.shiftKey = !!shift;
-                e.type = 'keyup';
+                e.type = type;
 
                 var editor = getEditor();
                 $(editor.document).trigger(e);
+            }
+
+            function keydown() {
+                type.apply(this, ["keydown"].concat([].slice.apply(arguments)));
+            }
+
+            function keyup() {
+                type.apply(this, ["keyup"].concat([].slice.apply(arguments)));
             }
 
             module("Editor / ClientEvents", {
@@ -97,7 +105,7 @@
             });
 
             test('up arrow raises selection change', function() {
-                type(38);
+                keyup(38);
 
                 ok(changeRaised);
             });
@@ -108,69 +116,69 @@
             });
 
             test('down arrow raises selection change', function() {
-                type(40);
+                keyup(40);
 
                 ok(changeRaised);
             });
 
             test('left arrow raises selection change', function() {
-                type(37);
+                keyup(37);
 
                 ok(changeRaised);
             });
 
             test('right arrow raises selection change', function() {
-                type(39);
+                keyup(39);
 
                 ok(changeRaised);
             });
 
             test('home raises selection change', function() {
-                type(36);
+                keyup(36);
 
                 ok(changeRaised);
             });
 
             test('end raises selection change', function() {
-                type(35);
+                keyup(35);
 
                 ok(changeRaised);
             });
 
             test('pgup raises selection change', function() {
-                type(33);
+                keyup(33);
 
                 ok(changeRaised);
             });
 
             test('pgdown raises selection change', function() {
-                type(34);
+                keyup(34);
 
                 ok(changeRaised);
             });
 
             test('insert raises selection change', function() {
-                type(45);
+                keyup(45);
 
                 ok(changeRaised);
             });
 
             test('backspace raises selection change', function() {
-                type(9);
+                keyup(9);
 
                 ok(changeRaised);
             });
 
             test('ctrl+a raises selection change', function() {
-                type(65, true);
+                keyup(65, true);
 
                 ok(changeRaised);
             });
 
             test('ctrl+shift+a, ctrl+alt+a, and ctrl+shift+alt+a do not raise selection change', function() {
-                type(65, true, true);
-                type(65, true, false, true);
-                type(65, true, true, true);
+                keyup(65, true, true);
+                keyup(65, true, false, true);
+                keyup(65, true, true, true);
 
                 ok(!changeRaised);
             });
@@ -243,6 +251,7 @@
 
                 editor.value('foo');
 
+                keyup(69);
                 $(editor.body).trigger({ type: "keyup", keyCode: 69 });
 
                 ok(e);
@@ -260,6 +269,21 @@
                 ok(e.isDefaultPrevented());
 
                 editor.unbind("keydown", preventDefault);
+            });
+
+            test("keydown is triggered even if a command is being executed", function() {
+                var e;
+
+                editor.bind("keydown", function() {
+                    e = arguments[0];
+                });
+
+                editor.value('foo');
+
+                keydown(13);
+
+                ok(e);
+                equal(e.keyCode, 13);
             });
 
         </script>
