@@ -412,6 +412,19 @@
                     });
                 });
 
+                asyncTest("does not duplicate series on refresh", 1, function() {
+                    var firstCall = true;
+                    createGroupedChart(function() {
+                        if (firstCall) {
+                            firstCall = false;
+                            this.refresh();
+                        } else {
+                            equal(this.options.series.length, 2);
+                            start();
+                        }
+                    });
+                });
+
                 asyncTest("creates series on rebind when new group is added", 2, function() {
                     var firstCall = true;
                     createGroupedChart(function() {
