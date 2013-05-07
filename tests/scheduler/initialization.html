@@ -318,6 +318,32 @@
                 scheduler.selectDate(new Date("1/2/2013"));
             });
 
+            test("top level options are propagated to the view", function() {
+                var scheduler = new Scheduler(container, {
+                    views: [ "day" ],
+                    allDaySlot: false
+                });
+
+                equal(scheduler.selectView().options.allDaySlot, false);
+            });
+
+            test("top level options are propageted to the custom views", function() {
+                var MyCustomView = kendo.ui.Widget.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        render: function(selectedDate) {
+                            ok(true);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView],
+                        allDaySlot: false
+                    });
+
+                equal(scheduler.selectView().options.allDaySlot, false);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

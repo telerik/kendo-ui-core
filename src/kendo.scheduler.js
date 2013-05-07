@@ -65,6 +65,13 @@ kendo_module({
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
+    function trimOptions(options) {
+        delete options.name;
+        delete options.prefix;
+
+        return options;
+    }
+
     var Scheduler = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -154,6 +161,7 @@ kendo_module({
                 view,
                 defaultView,
                 selected,
+                isSettings,
                 name,
                 idx,
                 length;
@@ -163,14 +171,15 @@ kendo_module({
             for (idx = 0, length = views.length; idx < length; idx++) {
                 view = views[idx];
 
-                name = isPlainObject(view) && view.name ? view.name : view;
+                isSettings = isPlainObject(view);
+                name = isSettings && view.name ? view.name : view;
 
                 defaultView = defaultViews[name];
 
                 if (defaultView) {
-                    view = new defaultView(this.wrapper, view);
+                    view = new defaultView(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {})));
                 } else {
-                    view = new view(this.wrapper);
+                    view = new view(this.wrapper, trimOptions(extend({}, this.options)));
                 }
 
                 if (view) {
@@ -185,7 +194,7 @@ kendo_module({
             }
 
             if (selected) {
-                this._selectedViewName = selected; // toobar is not rendered yet
+                this._selectedViewName = selected; // toolbar is not rendered yet
             }
         },
 
@@ -373,6 +382,8 @@ kendo_module({
             if (!this.footer) {
                 var html = '<div class="k-floatwrap k-header k-scheduler-footer">&nbsp;';
                 //'<ul class="k-reset k-header k-toolbar"></ul>';
+
+                //TODO: Toolbar command
 
                 html += "</div>";
 
