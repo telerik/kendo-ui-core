@@ -306,6 +306,23 @@ kendo_module({
         return text;
     }
 
+    function createTable(dates, cellAction) {
+        var idx,
+            length,
+            html ='<table class="k-scheduler-table">';
+
+        html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
+        html += '<tbody><tr>';
+
+        for (idx = 0, length = dates.length; idx < length; idx++) {
+            html += cellAction(dates[idx]);
+        }
+
+        html += '</tr></tbody></table>';
+
+        return html;
+    }
+
     var MultiDayView = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -320,6 +337,7 @@ kendo_module({
             headerDateFormat: "ddd M/dd",
             timeFormat: "HH:mm",
             selectedDateFormat: "{0:D}",
+            allDaySlot: true,
             title: "",
             startTime: TODAY,
             endTime: TODAY,
@@ -340,7 +358,7 @@ kendo_module({
                         '<colgroup> <col /> </colgroup>' +
                         '<tbody>' +
                             '<tr><th>&nbsp;</th></tr>' +
-                            //<tr><th>all day</th></tr>
+                            (this.options.allDaySlot ? '<tr><th>all day</th></tr>' : '') +
                         '</tbody>' +
                     '</table>' +
                 '</div>');
@@ -352,33 +370,41 @@ kendo_module({
         },
 
         _renderDatesHeader: function(dates) {
-            var idx,
-                length,
-                header = this.element.find(".k-scheduler-header-wrap");
-                html ='<table class="k-scheduler-table">';
+            var that = this,
+                header = that.element.find(".k-scheduler-header-wrap"),
+                html,
+                allDayHtml;
 
             if (!header.length) {
                 header = $('<div class="k-scheduler-header-wrap"/>');
 
                 $('<div class="k-scheduler-header k-state-default"/>')
                     .append(header)
-                    .appendTo(this.element);
+                    .appendTo(that.element);
             } else {
                 header.empty();
             }
 
-            html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
-            html += '<tbody><tr>';
+            html = createTable(dates, function(date) {
+                var content = '<th';
+                content += (getDate(date).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
+                content += '>' + kendo.toString(date, that.options.headerDateFormat) + '</th>';
+                return content;
+            });
 
-            for (idx = 0, length = dates.length; idx < length; idx++) {
-                html += '<th';
-                html += (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
-                html += '>' + kendo.toString(dates[idx], this.options.headerDateFormat) + '</th>';
+            if (that.options.allDaySlot) {
+                allDayHtml = createTable(dates, function(date) {
+                    var content = '<td';
+                    content += (getDate(date).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
+                    content += '>&nbsp;</td>';
+                    return content;
+                });
+                that.allDayHeader = $(allDayHtml);
             }
 
-            html += '</tr></tbody></table>';
-
-            this.datesHeader = header.append(html).parent();
+            that.datesHeader = header.append(html)
+                                    .append(that.allDayHeader)
+                                    .parent();
         },
 
         _forTimeRange: function(min, max, action, after) {
@@ -486,6 +512,14 @@ kendo_module({
                     that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(this.scrollLeft);
                     that.times.scrollTop(this.scrollTop);
                 });
+
+                var touchScroller = kendo.touchScroller(wrapper);
+                if (touchScroller && touchScroller.movable) {
+                    touchScroller.movable.bind("change", function(e) {
+                        that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(-e.sender.x);
+                        that.times.scrollTop(-e.sender.y);
+                    });
+                }
 
             } else {
                 wrapper.empty();

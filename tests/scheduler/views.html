@@ -54,7 +54,7 @@
             });
 
             test("renders headers for selected dates", function() {
-                var view = setup({ dates: [new Date("1/2/2013"), new Date("2/1/2013")] });
+                var view = setup({ dates: [new Date("1/2/2013"), new Date("2/1/2013")], allDaySlot: false });
                 view.render();
 
                 ok(view.datesHeader.hasClass("k-scheduler-header"));
@@ -211,7 +211,8 @@
                 var view = setup({
                     dates: [
                         new Date("1/26/2013")
-                    ]
+                    ],
+                    allDaySlot: false
                 });
 
                 view.render();
@@ -263,6 +264,34 @@
                 view.render();
 
                 equal(view.content.height(), view.times.height());
+            });
+
+            test("all day slot is rendered", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+
+                equal(view.datesHeader.find(".k-scheduler-table").length, 2);
+                equal(view.allDayHeader[0], view.datesHeader.find(".k-scheduler-table:last")[0]);
+                equal(view.allDayHeader.find("td").length, 1);
+            });
+
+            test("all day slot is not rendered if disabled", function() {
+                var view = setup({
+                    allDaySlot: false,
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.render();
+
+                equal(view.datesHeader.find(".k-scheduler-table").length, 1);
+                ok(!view.allDayHeader);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
