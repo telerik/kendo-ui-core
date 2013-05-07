@@ -369,6 +369,17 @@ kendo_module({
             this._renderDatesHeader(dates);
         },
 
+        _footer: function() {
+            if (!this.footer) {
+                var html = '<div class="k-floatwrap k-header k-scheduler-footer">&nbsp;';
+                //'<ul class="k-reset k-header k-toolbar"></ul>';
+
+                html += "</div>";
+
+                this.footer = $(html).appendTo(this.element);
+            }
+        },
+
         _renderDatesHeader: function(dates) {
             var that = this,
                 header = that.element.find(".k-scheduler-header-wrap"),
@@ -554,6 +565,7 @@ kendo_module({
                 options = that.options,
                 toolbar = that.element.find(">.k-scheduler-toolbar"),
                 height = that.element.innerHeight(),
+                headerHeight = 0,
                 scrollbar = kendo.support.scrollbar();
 
             if (toolbar.length) {
@@ -561,7 +573,19 @@ kendo_module({
             }
 
             if (that.datesHeader) {
-                height -= that.datesHeader.outerHeight();
+                headerHeight = that.datesHeader.outerHeight();
+            }
+
+            if (that.timesHeader && that.timesHeader.outerHeight() > headerHeight) {
+                headerHeight = that.timesHeader.outerHeight();
+            }
+
+            if (headerHeight) {
+                height -= headerHeight;
+            }
+
+            if (that.footer) {
+                height -= that.footer.outerHeight();
             }
 
             var isSchedulerHeightSet = function(el) {
@@ -607,6 +631,8 @@ kendo_module({
 
             this._content(dates);
 
+            this._footer();
+
             this._setContentHeight();
         },
 
@@ -636,6 +662,7 @@ kendo_module({
                     .add(that.times)
                     .add(that.timesHeader)
                     .add(that.datesHeader)
+                    .add(that.footer)
                     .remove()
                     .empty();
 
@@ -643,6 +670,7 @@ kendo_module({
                 that.times = null;
                 that.timesHeader = null;
                 that.datesHeader = null;
+                that.footer = null;
             }
         }
     });

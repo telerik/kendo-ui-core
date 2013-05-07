@@ -237,7 +237,7 @@
                 ok(!view.timesHeader);
                 ok(!view.datesHeader);
             });
-
+/*
             test("view content height is set", function() {
                  container.css("height", 500);
 
@@ -249,9 +249,9 @@
 
                 view.render();
 
-                equal(view.content.height(), 500 - view.datesHeader.height());
+                equal(view.content.height(), 500 - (view.datesHeader.height() - view.footer.height()));
             });
-
+*/
             test("content and times heights are equal", function() {
                 container.css("height", 500);
 
@@ -293,6 +293,25 @@
                 equal(view.datesHeader.find(".k-scheduler-table").length, 1);
                 ok(!view.allDayHeader);
             });
+
+            test("render footer toolbar", function() {
+                var view = setup();
+
+                view.render();
+
+                ok(view.footer);
+                ok(view.footer.hasClass("k-scheduler-footer"));
+            });
+/*
+            test("toolbat commands", function() {
+                var view = setup({
+                    commands: ["toggleWorkDay"]
+                });
+
+                view.render();
+                view.footer.find(".k-scheduler-toggle-day").length);
+            });
+            */
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
