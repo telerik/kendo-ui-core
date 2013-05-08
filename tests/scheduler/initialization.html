@@ -140,7 +140,7 @@
                         selectedDate: selectedDate
                     });
 
-                var view = stub(scheduler.selectView(), "nextDate");
+                var view = stub(scheduler.view(), "nextDate");
 
                 scheduler.toolbar.find(".k-nav-next").click();
 
@@ -153,7 +153,7 @@
                         selectedDate: selectedDate
                     });
 
-                var view = stub(scheduler.selectView(), "previousDate");
+                var view = stub(scheduler.view(), "previousDate");
 
                 scheduler.toolbar.find(".k-nav-prev").click();
 
@@ -195,7 +195,7 @@
                 });
 
                 ok(scheduler.toolbar.find(".k-view-day").hasClass("k-state-selected"));
-                equal(scheduler.selectView().name, "day");
+                equal(scheduler.view().name, "day");
             });
 
             test("day and week view are rendered by default", function() {
@@ -229,7 +229,7 @@
 
                 scheduler.toolbar.find(".k-view-week").click();
 
-                equal(scheduler.selectView().name, "week");
+                equal(scheduler.view().name, "week");
                 ok(scheduler.toolbar.find(".k-view-week").hasClass("k-state-selected"));
             });
 
@@ -246,8 +246,8 @@
                     views: [ "day" ]
                 });
 
-                ok(scheduler.selectView() instanceof kendo.ui.MultiDayView);
-                equal(scheduler.selectView().element[0], scheduler.wrapper[0]);
+                ok(scheduler.view() instanceof kendo.ui.MultiDayView);
+                equal(scheduler.view().element[0], scheduler.wrapper[0]);
             });
 
             test("default view is created with provided options", function() {
@@ -255,8 +255,8 @@
                     views: [ { title: "foo", name: "day" }]
                 });
 
-                ok(scheduler.selectView() instanceof kendo.ui.MultiDayView);
-                equal(scheduler.selectView().title, "foo");
+                ok(scheduler.view() instanceof kendo.ui.MultiDayView);
+                equal(scheduler.view().title, "foo");
             });
 
             test("custom view is instantiated", function() {
@@ -270,7 +270,7 @@
                     views: [MyCustomView]
                 });
 
-                ok(scheduler.selectView() instanceof MyCustomView);
+                ok(scheduler.view() instanceof MyCustomView);
             });
 
             test("selected date is passed to view render method", 1, function() {
@@ -300,7 +300,7 @@
                         views: [MyCustomView, "day"]
                     });
 
-                scheduler.selectView("day");
+                scheduler.view("day");
             });
 
             test("changing dates re-renders current view", 2, function() {
@@ -324,7 +324,7 @@
                     allDaySlot: false
                 });
 
-                equal(scheduler.selectView().options.allDaySlot, false);
+                equal(scheduler.view().options.allDaySlot, false);
             });
 
             test("top level options are propageted to the custom views", function() {
@@ -340,7 +340,7 @@
                         allDaySlot: false
                     });
 
-                equal(scheduler.selectView().options.allDaySlot, false);
+                equal(scheduler.view().options.allDaySlot, false);
             });
 
 

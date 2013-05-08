@@ -90,7 +90,7 @@ kendo_module({
 
             that._toolbar();
 
-            that.selectView(that._selectedViewName);
+            that.view(that._selectedViewName);
         },
 
         options: {
@@ -125,7 +125,7 @@ kendo_module({
             kendo.destroy(that.wrapper);
         },
 
-        selectView: function(name) {
+        view: function(name) {
             var that = this;
 
             if (name) {
@@ -207,7 +207,7 @@ kendo_module({
 
            that._model.bind("change", function(e) {
                 if (e.field === "selectedDate") {
-                    that._renderView(that.selectView().name);
+                    that._renderView(that.view().name);
                 }
            });
         },
@@ -254,9 +254,9 @@ kendo_module({
                 if (li.hasClass("k-nav-today")) {
                     date = new Date();
                 } else if (li.hasClass("k-nav-next")) {
-                    date = that.selectView().nextDate();
+                    date = that.view().nextDate();
                 } else if (li.hasClass("k-nav-prev")) {
-                    date = that.selectView().previousDate();
+                    date = that.view().previousDate();
                 } else if (li.hasClass("k-nav-current")) {
                     that._showCalendar();
                     return; // TODO: Not good - refactor
@@ -267,7 +267,7 @@ kendo_module({
             });
 
             toolbar.on("click" + NS, ".k-scheduler-views li", function(e) {
-                that.selectView($(this).attr(kendo.attr("name")));
+                that.view($(this).attr(kendo.attr("name")));
             });
         },
 
