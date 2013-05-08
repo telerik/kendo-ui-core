@@ -4,7 +4,7 @@
    "dependencies": {
        "optimist": "0.3.7",
        "typescript": "0.8.1",
-       "uglify-js": "2.2.5",
+       "uglify-js": "2.3.1",
        "cssmin": "0.3.2",
        "faye": "0.8.3",
        "xmlbuilder": "0.4.2",

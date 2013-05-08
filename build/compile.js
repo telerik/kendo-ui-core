@@ -149,8 +149,10 @@ function compile_one_file(file) {
 
 function squeeze(ast) {
     var compressor = u2.Compressor({
-        warnings: false,
-        hoist_vars: true,
+        unsafe     : true,
+        hoist_vars : true,
+        warnings   : false,
+        hoist_vars : true,
     });
     ast.figure_out_scope();
     ast = ast.transform(compressor);
