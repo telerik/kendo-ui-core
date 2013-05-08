@@ -244,6 +244,45 @@
                 dataSource.data().trigger("error");
             });
 
+            test("subnodes can be loaded after erroring out", function() {
+                var calls = 0;
+                var dataSource = HierarchicalDataSource.create({
+                        transport: {
+                            read: function(options) {
+                                if (!options.data.id) {
+                                    options.success([
+                                        { id: 1, hasChildren: true, text: "foo" }
+                                    ]);
+                                } else {
+                                    calls++;
+
+                                    if (calls == 1) {
+                                        options.error({});
+                                    } else {
+                                        options.success([{ id: 2, text: "bar" }]);
+                                    }
+                                }
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "id",
+                                hasChildren: "hasChildren"
+                            }
+                        }
+                    });
+
+                dataSource.read();
+
+                var foo = dataSource.data()[0];
+
+                foo.load(); // errors out
+
+                foo.loaded(false);
+                foo.load();
+                equal(foo.children.data().length, 1);
+            });
+
             test("load fetches data from the children data source", function() {
                 var dataSource = categories();
 
