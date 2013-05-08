@@ -3,7 +3,7 @@ kendo_module({
     name: "Button",
     category: "mobile",
     description: "The Button widget navigates between mobile Application views when pressed.",
-    depends: [ "mobile.application" ]
+    depends: [ "mobile.application", "userevents" ]
 });
 
 (function($, undefined) {
@@ -38,14 +38,20 @@ kendo_module({
             that._wrap();
             that._style();
 
-            that.element
-                .on("up", "_release")
-                .on("down", "_activate")
-                .on("up cancel", "_deactivate");
+            that._userEvents = new kendo.UserEvents(that.element, {
+                press: function(e) { that._activate(e); },
+                tap: function(e) { that._release(e); },
+                end: function(e) { highlightButton(that, e, false); }
+            })
 
             if (ANDROID3UP) {
                 that.element.on("move", "_timeoutDeactivate");
             }
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this._userEvents.destroy();
         },
 
         events: [
@@ -93,12 +99,9 @@ kendo_module({
             }
         },
 
-        _deactivate: function(e) {
-            highlightButton(this, e, false);
-        },
-
         _release: function(e) {
             var that = this;
+
             if (e.which > 1) {
                 return;
             }
