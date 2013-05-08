@@ -297,7 +297,7 @@ kendo_module({
 
             if (!wrapper.is(":visible")) {
                 wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
-                wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight());
+                wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(that.window.element.css("padding-bottom"), 10));
                 that.window.open();
             }
         },
