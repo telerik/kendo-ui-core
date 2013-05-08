@@ -324,6 +324,7 @@
 
                 viewEngine.bind("viewShow", function(e) {
                     start();
+                    root.find("#remoteButton").trigger(kendo.support.mousedown);
                     root.find("#remoteButton").trigger(kendo.support.mouseup);
                 });
 
