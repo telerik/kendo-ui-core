@@ -31,7 +31,7 @@
             });
 
             function setup(options) {
-                return new MyDayView(container, $.extend({ minorTick: 60, majorTick: 120 }, options));
+                return new MyDayView(container, $.extend({ majorTick: 120 }, options));
             }
 
             module("Multi Day View rendering", {
@@ -101,10 +101,7 @@
             });
 
             test("render time slots", function() {
-                var view = setup({
-                    majorTick: 120,
-                    minorTick: 60
-                });
+                var view = setup({ });
 
                 view.render();
 
@@ -113,11 +110,21 @@
                 equal(view.times.find("th:last").text(), "00:00");
             });
 
+            test("render time slots with not exact start time", function() {
+                var view = setup({
+                    startTime: new Date(2001, 1, 1, 10, 10, 0)
+                });
+
+                view.render();
+
+                equal(view.times.find("th").length, 15);
+                equal(view.times.find("th:first").text(), "10:10");
+            });
+
             test("time is show in major time slots", function() {
                 var view = setup({
                         startTime: new Date(2000, 0, 1, 10, 0, 0),
                         endTime: new Date(2000, 0, 1, 11, 0, 0),
-                        minorTick: 15,
                         majorTick: 30
                     });
 
@@ -135,7 +142,7 @@
                 var view = setup({
                         startTime: new Date(2000, 0, 1, 0, 0, 0),
                         endTime: new Date(2000, 0, 1, 23, 59, 0),
-                        minorTick: 15
+                        numberOfTimeSlots: 8
                     });
 
                 view.render();
@@ -153,7 +160,7 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "08:00");
+                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "09:00");
                 equal(view.times.find("tr.k-last").text(), "10:00");
                 equal(view.times.find("th").length, 22);
             });

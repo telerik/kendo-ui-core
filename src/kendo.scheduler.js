@@ -350,7 +350,7 @@ kendo_module({
             title: "",
             startTime: TODAY,
             endTime: TODAY,
-            minorTick: 30,
+            numberOfTimeSlots: 2,
             majorTick: 60,
             majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
             minorTickTimeTemplate: "&nbsp;"
@@ -435,8 +435,8 @@ kendo_module({
                 ignoreDST = offset < 0,
                 msMin = getMilliseconds(min),
                 msMax = getMilliseconds(max),
-                msInterval = that.options.minorTick * MS_PER_MINUTE,
                 msMajorInterval = that.options.majorTick * MS_PER_MINUTE,
+                msInterval = msMajorInterval / that.options.numberOfTimeSlots || 1,
                 start = new Date(+min),
                 startDay = start.getDate(),
                 msStart,
@@ -457,15 +457,13 @@ kendo_module({
                 length = ((msMax - msMin) / msInterval);
             }
 
+            length = Math.round(length);
+
             for (; idx < length; idx++) {
-                if (idx) {
-                    setTime(start, msInterval, ignoreDST);
-                }
+                html += action(start, idx % (msMajorInterval/msInterval) === 0);
 
-                html += action(start, getMilliseconds(start) % msMajorInterval === 0);
+                setTime(start, msInterval, ignoreDST);
             }
-
-            setTime(start, msInterval, ignoreDST);
 
             if (msMax) {
                 msStart = getMilliseconds(start);
