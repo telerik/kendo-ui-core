@@ -42,7 +42,7 @@ kendo_module({
                 press: function(e) { that._activate(e); },
                 tap: function(e) { that._release(e); },
                 end: function(e) { highlightButton(that, e, false); }
-            })
+            });
 
             if (ANDROID3UP) {
                 that.element.on("move", "_timeoutDeactivate");
