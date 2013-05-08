@@ -395,6 +395,27 @@
 
                 equal(splitter.find(".k-pane:first").width(), 100);
             });
+
+            test("panes can be collapsed after resizing", function() {
+                var splitter = $(getSplitterHtml()).appendTo(document.body).kendoSplitter({
+                        panes: [ { collapsible: true }, {} ]
+                    }),
+                    keys = kendo.keys,
+                    splitbar = splitter.find(".k-splitbar"),
+                    initialLeft = splitbar.position().left;
+
+                splitbar.focus().press({
+                    keyCode: keys.LEFT
+                });
+
+                splitbar.focus().press({
+                    keyCode: keys.ENTER
+                });
+
+                splitbar.find(".k-collapse-prev").click();
+
+                equal(splitter.find(".k-pane:first").width(), 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -651,6 +651,9 @@ kendo_module({
                 }
 
                 owner.trigger(RESIZE);
+
+                owner._detachEvents();
+                owner._attachEvents();
             }
 
             return false;
