@@ -18,3 +18,15 @@ function createSplitter(options, paneCount) {
     return splitter;
 }
 
+jQuery.fn.press = function(options) {
+    if (!options.type) {
+        options.type = "keydown";
+    }
+
+    if (!options.preventDefault) {
+        options.preventDefault = $.noop;
+    }
+
+    this.trigger(options);
+}
+
