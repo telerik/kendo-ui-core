@@ -69,23 +69,21 @@ function serve_file(pathname, response) {
 exports.make_server = function(webroot, try_minified) {
     return function(request, response) {
         var is_qhint = request.headers["x-qhint"];
-        request.addListener("end", function(){
-            var pathname = request.url.replace(/\?.*$/, "");
-            var filename = path.join(webroot, pathname);
-            fs.exists(filename, function(exists){
-                if (!exists) {
-                    send_404(response, pathname);
-                    return;
-                }
-                var minified = filename.replace(/(js|css)$/, "min.$1");
-                if (minified != filename && try_minified && !is_qhint) {
-                    fs.exists(minified, function(exists){
-                        serve_file(exists ? minified : filename, response);
-                    });
-                } else {
-                    serve_file(filename, response);
-                }
-            });
+        var pathname = request.url.replace(/\?.*$/, "");
+        var filename = path.join(webroot, pathname);
+        fs.exists(filename, function(exists){
+            if (!exists) {
+                send_404(response, pathname);
+                return;
+            }
+            var minified = filename.replace(/(js|css)$/, "min.$1");
+            if (minified != filename && try_minified && !is_qhint) {
+                fs.exists(minified, function(exists){
+                    serve_file(exists ? minified : filename, response);
+                });
+            } else {
+                serve_file(filename, response);
+            }
         });
     };
 };
