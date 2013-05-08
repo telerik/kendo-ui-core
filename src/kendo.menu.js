@@ -274,6 +274,7 @@ kendo_module({
                    .on("focus" + NS, proxy(that._focus, that))
                    .on("focus" + NS, ".k-content", proxy(that._focus, that))
                    .on("blur" + NS, proxy(that._removeHoverItem, that))
+                   .on("blur" + NS, "[tabindex]", proxy(that._checkActiveElement, that))
                    .on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
                    .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
                    .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
@@ -622,6 +623,18 @@ kendo_module({
             this._removeHoverItem();
         },
 
+        _checkActiveElement: function(e) {
+            var that = this,
+                hoverItem = $(this._hoverItem()[0] || (e ? e.currentTarget : {})),
+                target = that._findRootParent(hoverItem)[0];
+
+            setTimeout(function() {
+                if (!document.hasFocus() || !contains(target, kendo._activeElement())) {
+                    that.close(target);
+                }
+            }, 0);
+        },
+
         _removeHoverItem: function() {
             var oldHoverItem = this._hoverItem();
 
@@ -814,9 +827,8 @@ kendo_module({
                 }
             } else if (key == keys.TAB) {
                 target = that._findRootParent(hoverItem);
-                that.close(target);
                 that._moveHover(hoverItem, target);
-
+                that._checkActiveElement();
                 return;
             }
 
