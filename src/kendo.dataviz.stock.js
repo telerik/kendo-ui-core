@@ -255,7 +255,7 @@ kendo_module({
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (currentSeries.axis == NAVIGATOR_AXIS && chart.isBindable(currentSeries)) {
+                if (currentSeries.axis == NAVIGATOR_AXIS && chart._isBindable(currentSeries)) {
                     currentSeries.data = data;
                 }
             }
