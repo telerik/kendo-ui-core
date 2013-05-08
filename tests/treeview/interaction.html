@@ -1142,24 +1142,39 @@
                 equal(treeview.find(".k-state-focused").text(), "bar");
             });
 
-            asyncTest("failed requests replace loading icon with retry template", function() {
-                $.mockjax({ url: "foo", dataType: "json", status: 500, responseText: 'Server response' });
-
+            test("failed requests remove loading icon", function() {
                 createTreeView({
                     dataSource: {
                         transport: {
-                            read: {
-                                url: "foo",
-                                dataType: "json"
+                            read: function(options) {
+                                options.error({});
                             }
                         }
                     }
                 });
 
-                setTimeout(function() {
-                    start();
-                    equal(treeview.find(".k-loading").length, 0);
-                }, 100);
+                equal(treeview.find(".k-loading").length, 0);
+            });
+
+            test("failed subnode requests remove loading icon", function() {
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                if (!options.data.id) {
+                                    options.success([
+                                        { id: 1, hasChildren: true, text: "foo" }
+                                    ]);
+                                } else {
+                                    options.error({});
+                                }
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.expand(".k-item");
+                equal(treeview.find(".k-loading").length, 0);
             });
 
 

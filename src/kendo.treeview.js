@@ -1311,7 +1311,8 @@ kendo_module({
         _error: function(e) {
             if (!e.node) {
                 this._progress(false);
-                this.element.html(this.templates.retry);
+            } else {
+                this._progress(this.findByUid(e.node.uid), false);
             }
         },
 
