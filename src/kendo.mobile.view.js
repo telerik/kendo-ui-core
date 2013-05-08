@@ -71,6 +71,10 @@ kendo_module({
         },
 
         destroy: function() {
+            if (this.layout) {
+                this.layout.detach(this);
+            }
+
             Widget.fn.destroy.call(this);
 
             if (this.scroller) {
@@ -368,12 +372,12 @@ kendo_module({
 
         detach: function (view) {
             var that = this;
-            if (view.header === that.header) {
-                view.element.prepend(that.header.detach().clone(true));
+            if (view.header === that.header && that.header[0]) {
+                view.element.prepend(that.header.detach()[0].cloneNode(true));
             }
 
-            if (view.footer === that.footer) {
-                view.element.append(that.footer.detach().clone(true));
+            if (view.footer === that.footer && that.footer.length) {
+                view.element.append(that.footer.detach()[0].cloneNode(true));
             }
 
             that.trigger(HIDE, {layout: that, view: view});
