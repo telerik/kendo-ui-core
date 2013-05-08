@@ -17,6 +17,7 @@ kendo_module({
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
+        DEFAULT_THRESHOLD = support.browser.ie ? 5 : 0, // WP8 and W8 are very sensitive and always report move.
 
         // UserEvents events
         PRESS = "press",
@@ -290,7 +291,7 @@ kendo_module({
 
             options = options || {};
             filter = that.filter = options.filter;
-            that.threshold = options.threshold || 0;
+            that.threshold = options.threshold || DEFAULT_THRESHOLD;
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
             that.allowSelection = options.allowSelection;
