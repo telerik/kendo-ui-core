@@ -22,6 +22,7 @@ kendo_module({
         NAVIGATE = "navigate",
         EXPAND = "expand",
         CHANGE = "change",
+        ERROR = "error",
         CHECKED = "checked",
         COLLAPSE = "collapse",
         DRAGSTART = "dragstart",
@@ -236,6 +237,7 @@ kendo_module({
                 .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox,.k-plus,.k-minus", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
+                .on("click" + NS, ".k-request-retry", proxy(that._retryRequest, that))
                 .on("click" + NS, function(e) {
                     if (!$(e.target).is(":focusable")) {
                         that.focus();
@@ -387,7 +389,7 @@ kendo_module({
                 },
                 dragClue: template(
                     "<div class='k-header k-drag-clue'>" +
-                        "<span class='k-icon k-drag-status'></span>" +
+                        "<span class='k-icon k-drag-status' />" +
                         "#= treeview.template(data) #" +
                     "</div>"
                 ),
@@ -404,7 +406,7 @@ kendo_module({
                     "# } #" +
 
                     "# if (spriteCssClass) { #" +
-                        "<span class='k-sprite #= spriteCssClass #'></span>" +
+                        "<span class='k-sprite #= spriteCssClass #' />" +
                     "# } #" +
 
                     "#= treeview.template(data) #"
@@ -413,7 +415,7 @@ kendo_module({
                     "# var url = " + fieldAccessor("url") + "(item); #" +
                     "<div class='#= r.cssClass(group, item) #'>" +
                         "# if (item.hasChildren) { #" +
-                            "<span class='#= r.toggleButtonClass(item) #' role='presentation'></span>" +
+                            "<span class='#= r.toggleButtonClass(item) #' role='presentation' />" +
                         "# } #" +
 
                         "# if (treeview.checkboxes) { #" +
@@ -441,6 +443,10 @@ kendo_module({
                 ),
                 loading: template(
                     "<div class='k-icon k-loading' /> Loading..."
+                ),
+                retry: template(
+                    "Request failed. " +
+                    "<button class='k-button k-request-retry'>Retry</button>"
                 )
             };
         },
@@ -474,10 +480,9 @@ kendo_module({
 
             dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
-            if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind(CHANGE, that._refreshHandler);
-            } else {
-                that._refreshHandler = proxy(that.refresh, that);
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, proxy(that.refresh, that));
+                that.dataSource.unbind(ERROR, proxy(that._error, that));
             }
 
             if (!dataSource.fields) {
@@ -489,15 +494,16 @@ kendo_module({
                 ];
             }
 
-            that.dataSource = HierarchicalDataSource.create(dataSource);
+            that.dataSource = dataSource = HierarchicalDataSource.create(dataSource);
 
             if (silentRead) {
-                that.dataSource.fetch();
+                dataSource.fetch();
 
-                recursiveRead(that.dataSource.view());
+                recursiveRead(dataSource.view());
             }
 
-            that.dataSource.bind(CHANGE, that._refreshHandler);
+            dataSource.bind(CHANGE, proxy(that.refresh, that));
+            dataSource.bind(ERROR, proxy(that._error, that));
         },
 
         events: [
@@ -1305,6 +1311,26 @@ kendo_module({
             that.trigger(DATABOUND, {
                 node: node ? parentNode : undefined
             });
+        },
+
+        _error: function(e) {
+            var that = this,
+                node = e.node && that.findByUid(e.node.uid);
+
+            if (node) {
+                this._progress(node, false);
+                nodeIcon(node).addClass("k-i-refresh");
+                e.node.loaded(false);
+            } else {
+                this._progress(false);
+                this.element.html(this.templates.retry);
+            }
+        },
+
+        _retryRequest: function(e) {
+            e.preventDefault();
+
+            this.dataSource.fetch();
         },
 
         expand: function (nodes) {
