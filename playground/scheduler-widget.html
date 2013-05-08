@@ -393,7 +393,16 @@
     <body>
         <div id="scheduler" style="overflow: hidden" ></div>
     <script>
-        $("#scheduler").kendoScheduler({ height: 800, allDaySlot: false });
+        $("#scheduler").kendoScheduler({
+            height: 800,
+            dataSource: {
+                data: [ {
+                    start: new Date(),
+                    end: new Date(),
+                    title: "foo"
+                }]
+            }
+        });
     </script>
     </body>
 </html>

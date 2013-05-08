@@ -19,7 +19,10 @@ kendo_module({
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         extend = $.extend,
+        proxy = $.proxy,
+        isArray = $.isArray,
         NS = ".kendoScheduler",
+        CHANGE = "change",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -90,12 +93,14 @@ kendo_module({
 
             that._toolbar();
 
+            that._dataSource();
+
             that.view(that._selectedViewName);
         },
 
         options: {
             name: "Scheduler",
-            selectedDate: TODAY,
+            selectDate: TODAY,
             messages: {
                 today: "Today"
             },
@@ -109,6 +114,10 @@ kendo_module({
                 element;
 
             Widget.fn.destroy.call(that);
+
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
+            }
 
             if (that.calendar) {
                 that.calendar.destroy();
@@ -142,6 +151,8 @@ kendo_module({
                     .end()
                     .find(".k-view-" + name)
                     .addClass("k-state-selected");
+
+                that.rebind();
 
                 return;
             }
@@ -198,10 +209,45 @@ kendo_module({
             }
         },
 
+        rebind: function() {
+            var view = this.view();
+
+            this.dataSource.filter({
+                logic: "and",
+                filters: [
+                    { field: "start", operator: "gte", value: view.startDate },
+                    //{ field: "end", operator: "lte", value: view.endDate }
+                ]
+            });
+        },
+
+        _dataSource: function() {
+            var that = this,
+                options = that.options,
+                pageable,
+                dataSource = options.dataSource;
+
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource
+                    .unbind(CHANGE, that._refreshHandler);
+                    //.unbind(ERROR, that._errorHandler);
+            } else {
+                //that._errorHandler = proxy(that._error, that);
+                that._refreshHandler = proxy(that.refresh, that);
+            }
+
+            that.dataSource = kendo.data.DataSource.create(dataSource)
+                .bind(CHANGE, that._refreshHandler);
+                //.bind(ERROR, that._errorHandler);
+        },
+
+
         _initModel: function() {
             var that = this;
             that._model = kendo.observable({
-               selectedDate: this.options.selectedDate,
+               selectedDate: this.options.selectDate,
                formattedDate: ""
            });
 
@@ -299,6 +345,7 @@ kendo_module({
         },
 
         refresh: function() {
+            this.view().dataBind(this.dataSource.view());
         }
     });
 
@@ -681,6 +728,25 @@ kendo_module({
                 that.datesHeader = null;
                 that.footer = null;
             }
+        },
+
+        dataBind: function(events) {
+            var template = '<div class="k-appointment">' +
+                '<dl>' +
+                    '<dt><span class="k-icon k-i-refresh"></span>11:30 - 12:30</dt>' +
+                    '<dd>${title}</dd>' +
+                '</dl>' +
+                //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                //'<span class="k-icon k-resize-handle"></span>' +
+            '</div>';
+            var eventTemplate = kendo.template(template);
+
+            if (events.length) {
+                var event = events[0];
+
+                $(eventTemplate(event))
+                    .appendTo(this.content);
+            }
         }
     });
 
@@ -718,7 +784,7 @@ kendo_module({
                 this._render(dates);
             }
         })
-    }
+    };
 
     var RRule = Class.extend({
         init: function(options) {

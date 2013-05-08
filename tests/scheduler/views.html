@@ -309,6 +309,46 @@
                 ok(view.footer);
                 ok(view.footer.hasClass("k-scheduler-footer"));
             });
+
+            test("display basic event", function() {
+                var selectedDate = new Date("1/26/2013"),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.dataBind(events);
+
+                equal(view.content.find("div.k-appointment").length, 1);
+                equal(view.content.find(".k-appointment dd").text(), "my event");
+            });
+/*
+            test("position basic event", function() {
+                var selectedDate = new Date("1/26/2013"),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }],
+                    slotPosition,
+                    eventPosition;
+
+                view.render(selectedDate);
+
+                view.dataBind(events);
+
+                eventPosition = view.content.find("div.k-appointment").position();
+                slotPosition = view.content.find("td").eq(10).position();
+
+                equal(slotPosition.x, eventPosition.x);
+                equal(slotPosition.y, eventPosition.y);
+            });*/
 /*
             test("toolbat commands", function() {
                 var view = setup({

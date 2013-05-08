@@ -88,7 +88,7 @@
             test("selected date is read from the options", function() {
                 var date = new Date("1/2/2013"),
                     scheduler = new Scheduler(container, {
-                        selectedDate: date
+                        selectDate: date
                     });
 
                 equal(scheduler.selectDate().getTime(), date.getTime());
@@ -96,7 +96,7 @@
 
             test("selected date is displayed", function() {
                 var scheduler = new Scheduler(container, {
-                    selectedDate: new Date("1/2/2013")
+                    selectDate: new Date("1/2/2013")
                 });
 
                 equal(scheduler.wrapper.find("li.k-nav-current").text(), "Wednesday, January 02, 2013");
@@ -104,7 +104,7 @@
 
             test("custom format is applied to the selected date", function() {
                 var scheduler = new Scheduler(container, {
-                    selectedDate: new Date("1/2/2013"),
+                    selectDate: new Date("1/2/2013"),
                     views: [
                     {
                         name: "day",
@@ -126,7 +126,7 @@
 
             test("clicking on the today selects today's date", function() {
                 var scheduler = new Scheduler(container, {
-                    selectedDate: new Date("1/2/2013")
+                    selectDate: new Date("1/2/2013")
                 });
 
                 scheduler.toolbar.find(".k-nav-today").click();
@@ -137,7 +137,7 @@
             test("clicking on the next date calls the view", function() {
                 var selectedDate = new Date("1/2/2013"),
                     scheduler = new Scheduler(container, {
-                        selectedDate: selectedDate
+                        selectDate: selectedDate
                     });
 
                 var view = stub(scheduler.view(), "nextDate");
@@ -150,7 +150,7 @@
             test("clicking on the prev date calls the view", function() {
                 var selectedDate = new Date("1/2/2013"),
                     scheduler = new Scheduler(container, {
-                        selectedDate: selectedDate
+                        selectDate: selectedDate
                     });
 
                 var view = stub(scheduler.view(), "previousDate");
@@ -263,7 +263,8 @@
                 var MyCustomView = kendo.Class.extend({
                     name: "foo",
                     render: $.noop,
-                    dateForTitle: $.noop
+                    dateForTitle: $.noop,
+                    dataBind: $.noop
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -277,6 +278,7 @@
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
                         dateForTitle: $.noop,
+                        dataBind: $.noop,
                         render: function(selectedDate) {
                             ok(selectedDate);
                         }
@@ -290,6 +292,7 @@
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
                         dateForTitle: $.noop,
+                        dataBind: $.noop,
                         render: function(selectedDate) {
                         },
                         destroy: function() {
@@ -307,6 +310,7 @@
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
                         dateForTitle: $.noop,
+                        dataBind: $.noop,
                         render: function(selectedDate) {
                             ok(true);
                         }
@@ -331,6 +335,7 @@
                 var MyCustomView = kendo.ui.Widget.extend({
                         name: "foo",
                         dateForTitle: $.noop,
+                        dataBind: $.noop,
                         render: function(selectedDate) {
                             ok(true);
                         }
@@ -342,7 +347,6 @@
 
                 equal(scheduler.view().options.allDaySlot, false);
             });
-
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

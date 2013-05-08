@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler databinding</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler databinding</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Scheduler = kendo.ui.Scheduler,
+                container;
+
+            function getDate(date) {
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+            }
+
+            module("DataBinding", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            test("set filter of the DataSource", function() {
+                var scheduler = new Scheduler(container, {
+                    views: ["day"],
+                    selectDate: new Date(2013, 1, 3, 0, 0, 0),
+                    dataSource: []
+                });
+
+                var filter = scheduler.dataSource.filter();
+                var view = scheduler.view();
+
+                equal(filter.filters.length, 1);
+                equal(filter.filters[0].field, "start");
+                equal(filter.filters[0].operator, "gte");
+                equal(filter.filters[0].value, view.startDate);
+//                equal(filter.filters[1].field, "end");
+ //               equal(filter.filters[1].operator, "lte");
+  //              equal(filter.filters[1].value, view.endDate);
+            });
+
+            test("view is bound to the event data", 1, function() {
+                var scheduler = new Scheduler(container, {
+                    views: [ kendo.ui.MultiDayView.extend({
+                        dataBind: function(events) {
+                            equal(events.length, 2);
+                        },
+                        name: "testView"
+                    })],
+                    selectDate: new Date(2013, 1, 3, 0, 0, 0),
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: function(options) {
+                                options.success([
+                                    {}, {}
+                                ]);
+                            }
+                        }
+                    }
+                });
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
