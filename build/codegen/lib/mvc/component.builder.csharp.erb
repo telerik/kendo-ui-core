@@ -17,8 +17,33 @@ namespace Kendo.Mvc.UI.Fluent
             container = component;
         }
 
-//>> Fields
-//<< Fields
+        //>> Fields
+        //<< Fields
+
+
+        <% unless events.empty? %>
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="configurator">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().<%= csharp_class %>()
+        ///             .Name("<%= csharp_class %>")
+        ///             .Events(events => events
+        ///                 .<%= events[0].csharp_name%>("on<%= events[0].csharp_name%>")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public <%= csharp_class %>Builder Events(Action<<%= csharp_class %>EventBuilder> configurator)
+        {
+
+            configurator(new <%= csharp_class %>EventBuilder(Component.Events));
+
+            return this;
+        }
+        <% end %>
     }
 }
 

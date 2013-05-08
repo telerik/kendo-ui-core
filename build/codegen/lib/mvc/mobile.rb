@@ -15,26 +15,45 @@ module CodeGen::MVC::Mobile
         }
 
         COMPONENT = ERB.new(File.read("build/codegen/lib/mvc/component.csharp.erb"), 0, '%<>')
+        COMPONENT_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/component.builder.csharp.erb"), 0, '%<>')
+        SETTING = ERB.new(File.read("build/codegen/lib/mvc/setting.csharp.erb"), 0, '%<>')
+        SETTING_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/setting.builder.csharp.erb"), 0, '%<>')
+        EVENT = ERB.new(File.read("build/codegen/lib/mvc/event.builder.csharp.erb"), 0, '%<>')
 
-        COMPONENT_FIELDS = ERB.new(%{//>> Fields
+        COMPONENT_FIELDS = ERB.new(%{
+        //>> Fields
         <%= unique_options.map { |option| option.to_declaration }.join %>
         //<< Fields})
 
-        FIELDS_DECLARATION = ERB.new(%{
+        FIELD_DECLARATION = ERB.new(%{
         public <%= csharp_type %> <%= csharp_name %> { get; set; }
         })
 
-        FIELDS_SERIALIZATION = ERB.new(%{//>> Serialization
+        FIELD_SERIALIZATION = ERB.new(%{
+        //>> Serialization
         <%= unique_options.map { |option| option.to_client_option }.join %>
         //<< Serialization})
 
-        COMPONENT_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/component.builder.csharp.erb"), 0, '%<>')
+        COMPOSITE_FIELD_DECLARATION = ERB.new(%{
+        public <%= csharp_class %> <%= csharp_name %>
+        {
+            get;
+            private set;
+        }
+        })
 
-        COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
+        COMPOSITE_FIELD_INITIALIZATION = ERB.new(%{
+        //>> Initialization
+        <%= composite_options.map { |option| option.to_initialization }.join %>
+        //<< Initialization})
+
+
+        COMPONENT_FLUENT_FIELDS = ERB.new(%{
+        //>> Fields
         <%= unique_options.map { |option| option.to_fluent }.join %>
         //<< Fields})
 
-        FLUENT_FIELDS_DECLARATION = ERB.new(%{
+        FLUENT_FIELD_DECLARATION = ERB.new(%{
         public <%= self.owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
@@ -43,30 +62,25 @@ module CodeGen::MVC::Mobile
         }
         })
 
-        COMPOSITE_FIELDS_DECLARATION = ERB.new(%{
-        public <%= csharp_class %> <%= csharp_name %>
-        {
-            get;
-            private set;
-        }
-        })
-
-        COMPOSITE_FIELDS_INITIALIZATION = ERB.new(%{//>> Initialization
-        <%= composite_options.map { |option| option.to_initialization }.join %>
-        //<< Initialization})
-
-        SETTING = ERB.new(File.read("build/codegen/lib/mvc/setting.csharp.erb"), 0, '%<>')
-
-        SETTING_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/setting.builder.csharp.erb"), 0, '%<>')
-
-        SETTING_FLUENT_FIELDS = ERB.new(%{//>> Fields
-        <%= unique_options.map { |option| option.composite? }.join %>
-        //<< Fields})
-
-        FLUENT_COMPOSITE_FIELDS_DECLARATION = ERB.new(%{
+        FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{
         public <%= owner.csharp_class %>Builder <%= csharp_name%>(Action<<%= csharp_class %>Builder> configurator)
         {
             configurator(new <%= csharp_class %>Builder(container.<%= csharp_name%>));
+            return this;
+        }
+        })
+
+        FLUENT_EVENTS = ERB.new(%{
+        //>> Handlers
+        <%= events.map { |event| event.to_fluent }.join %>
+        //<< Handlers
+        })
+
+        FLUENT_EVENT_DECLARATION = ERB.new(%{
+        public <%= owner.csharp_class %>EventBuilder <%= csharp_name %>(string handler)
+        {
+            Handler("<%= name %>", handler);
+
             return this;
         }
         })
@@ -93,11 +107,13 @@ module CodeGen::MVC::Mobile
             end
 
             def unique_options
-                composite = composite_options
+                composite = composite_options.map { |o| o.name }
 
-                options.find_all do |option|
-                    option.composite? || !composite.any? { |composite| composite.name == option.name }
-                end
+                options.find_all { |o| o.composite? || !composite.include?(o.name) }
+            end
+
+            def csharp_name
+                name.slice(0,1).capitalize + name.slice(1..-1)
             end
         end
 
@@ -108,16 +124,12 @@ module CodeGen::MVC::Mobile
                 TYPES[type[0]]
             end
 
-            def csharp_name
-                name.slice(0,1).capitalize + name.slice(1..-1)
-            end
-
             def to_declaration
-                FIELDS_DECLARATION.result(binding)
+                FIELD_DECLARATION.result(binding)
             end
 
             def to_fluent
-                FLUENT_FIELDS_DECLARATION.result(binding)
+                FLUENT_FIELD_DECLARATION.result(binding)
             end
 
             def to_client_option
@@ -130,10 +142,6 @@ module CodeGen::MVC::Mobile
         class CompositeOption < CodeGen::CompositeOption
             include Options
 
-            def csharp_name
-                name.slice(0,1).capitalize + name.slice(1..-1)
-            end
-
             def csharp_class
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}Settings"
             end
@@ -145,11 +153,11 @@ module CodeGen::MVC::Mobile
             end
 
             def to_declaration
-                COMPOSITE_FIELDS_DECLARATION.result(binding)
+                COMPOSITE_FIELD_DECLARATION.result(binding)
             end
 
             def to_fluent
-                FLUENT_COMPOSITE_FIELDS_DECLARATION.result(binding)
+                FLUENT_COMPOSITE_FIELD_DECLARATION.result(binding)
             end
 
             def to_client_option
@@ -161,35 +169,12 @@ module CodeGen::MVC::Mobile
             end
         end
 
-        class ArrayOption < CodeGen::ArrayOption
-            include Options
-
-            def csharp_name
-            end
-
-            def csharp_class
-            end
-
-            def to_initialization
-            end
-
-            def to_declaration
-            end
-
-            def to_fluent
-            end
-
-            def to_client_option
-            end
-
-            def get_binding
-                binding
-            end
-        end
-
         class Event < CodeGen::Event
             include Options
 
+            def to_fluent
+                FLUENT_EVENT_DECLARATION.result(binding)
+            end
         end
 
         class Generator
@@ -203,6 +188,7 @@ module CodeGen::MVC::Mobile
                 write_class(component)
                 write_fluent(component)
                 write_settings(component)
+                write_events(component)
             end
 
             def write_class(component)
@@ -236,28 +222,36 @@ module CodeGen::MVC::Mobile
                 end
             end
 
+            def write_events(component)
+                return if component.events.empty?
+
+                filename = "#{@path}/#{component.path}/Fluent/#{component.csharp_class}EventBuilder.cs"
+
+                write_file(filename, component.to_events(filename))
+            end
+
             def write_file(filename, content)
                 $stderr.puts("Updating #{filename}") if VERBOSE
 
                 ensure_path(filename)
 
-                File.write(filename, content)
+                File.write(filename, content.dos)
             end
         end
 
         class Component < CodeGen::Component
             include Options
 
-            def namespace
-                @full_name.sub('.' + @name, '')
+            def name
+                "Mobile#{@name}"
             end
 
             def path
-                "Mobile#{@name}"
+                @name
             end
 
             def csharp_class
-                "Mobile#{@name}"
+                @name
             end
 
             def to_class(filename)
@@ -265,19 +259,15 @@ module CodeGen::MVC::Mobile
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(binding))
 
-                csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELDS_INITIALIZATION.result(binding))
+                csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(binding))
 
-                #csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELDS_SERIALIZATION.result(binding))
-
-                csharp.dos
+                #csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(binding))
             end
 
             def to_fluent(filename)
                 csharp = File.exists?(filename) ? File.read(filename) : COMPONENT_FLUENT.result(binding)
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(binding))
-
-                csharp.dos
             end
 
             def to_setting(filename, option)
@@ -285,19 +275,20 @@ module CodeGen::MVC::Mobile
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(option.get_binding))
 
-                csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELDS_INITIALIZATION.result(option.get_binding))
-
-                csharp.dos
+                csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(option.get_binding))
             end
 
             def to_fluent_setting(filename, option)
                 csharp = File.exists?(filename) ? File.read(filename) : SETTING_FLUENT.result(option.get_binding)
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(option.get_binding))
-
-                csharp.dos
             end
 
+            def to_events(filename)
+                csharp = File.exists?(filename) ? File.read(filename) : EVENT.result(binding)
+
+                csharp = csharp.sub(/\/\/>> Handlers(.|\n)*\/\/<< Handlers/, FLUENT_EVENTS.result(binding))
+            end
         end
     end
 end

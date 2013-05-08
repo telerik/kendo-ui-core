@@ -55,13 +55,11 @@ namespace :generate do
             task :wrappers do
                 #components = CodeGen::MarkdownParser.all(CodeGen::MVC::Mobile::Wrappers::Component)
 
-                MARKDOWN = FileList['docs/api/mobile/{listview,actionsheet}.md']
-                #MARKDOWN = FileList['docs/api/mobile/*.md']
+                MARKDOWN = FileList['docs/api/mobile/*.md']
 
                 components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Mobile::Wrappers::Component) }
                     .sort { |a, b| a.name <=> b.name }
 
-                #.select { |component| component.full_name =~ /\.Button|\.ActionSheet$/ }
                 components.each do |component|
 
                     import_metadata(component)
