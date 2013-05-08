@@ -18,30 +18,33 @@ kendo_module({
 
     var History = kendo.Observable.extend({
         start: function(options) {
+            var that = this;
             options = options || {};
 
-            var that = this;
+            that.bind(["change"], options);
 
+            if (that._started) {
+                return;
+            }
+            that._started = true;
             that._pushStateRequested = !!options.pushState;
             that._pushState = support.pushState && that._pushStateRequested;
             that.root = options.root || "/";
             that._interval = 0;
 
-            this.bind(["change", "ready"], options);
             if (that._normalizeUrl()) {
                 return true;
             }
 
             that.current = that._currentLocation();
             that._listenToLocationChange();
-            that.trigger("ready", {url: that.current});
         },
 
         stop: function() {
             $(window).unbind(".kendo");
             this.unbind("change");
-            this.unbind("ready");
             clearInterval(this._interval);
+            this._started = false;
         },
 
         change: function(callback) {
@@ -227,34 +230,24 @@ kendo_module({
         },
 
         destroy: function() {
-            history.unbind("ready", this._readyProxy);
             history.unbind("change", this._urlChangedProxy);
             this.unbind();
         },
 
         start: function() {
             var that = this,
-                readyProxy = function(e) {
-                    if (!e.url) {
-                        e.url = "/";
-                    }
-
-                    if (!that.trigger(INIT, e)) {
-                        that._urlChanged(e);
-                    }
-                },
-
                 urlChangedProxy = function(e) {
                     that._urlChanged(e);
                 };
 
-            kendo.history.start({
-                ready: readyProxy,
-                change: urlChangedProxy
-            });
+            history.start({ change: urlChangedProxy });
+            var initEventObject = { url: history.current || "/" };
+
+            if (!that.trigger(INIT, initEventObject)) {
+                that._urlChanged(initEventObject);
+            }
 
             this._urlChangedProxy = urlChangedProxy;
-            this._readyProxy = readyProxy;
         },
 
         route: function(route, callback) {
