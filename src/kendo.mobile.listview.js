@@ -842,7 +842,7 @@ kendo_module({
 
             list.itemCount = items.length;
 
-            list.buffer.setItemCount(items.length);
+            list.buffer.setViewSize(items.length);
         },
 
         itemHeight: function() {

@@ -3523,7 +3523,7 @@ kendo_module({
     };
 
     var Buffer = kendo.Observable.extend({
-        init: function(dataSource, itemCount) {
+        init: function(dataSource, viewSize) {
             var buffer = this;
 
             kendo.Observable.fn.init.call(buffer);
@@ -3537,12 +3537,11 @@ kendo_module({
 
             buffer._syncWithDataSource();
 
-            buffer.setItemCount(itemCount);
+            buffer.setViewSize(viewSize);
         },
 
-        setItemCount: function(itemCount) {
-            this.itemCount = itemCount;
-            this.step = itemCount + 2;
+        setViewSize: function(viewSize) {
+            this.viewSize = viewSize;
             this._recalculate();
         },
 
@@ -3552,7 +3551,7 @@ kendo_module({
                 pageSize = this.pageSize,
                 skip = this.skip,
                 offset = this.offset,
-                step = this.step,
+                viewSize = this.viewSize,
                 prefetchOffset = skip + pageSize;
 
             // prefetch
@@ -3575,9 +3574,9 @@ kendo_module({
             // pull-back
             else if (index === this.pullBackThreshold) {
                 if (offset === skip) {
-                    this.range(offset - step); // from full range to mid range
+                    this.range(offset - viewSize); // from full range to mid range
                 } else {
-                    this.range(offset + step - pageSize); // from mid range to full range
+                    this.range(offset + viewSize - pageSize); // from mid range to full range
                 }
             }
 
@@ -3652,16 +3651,15 @@ kendo_module({
             var buffer = this,
                 pageSize = buffer.pageSize,
                 skip = Math.ceil(buffer.offset / pageSize) * pageSize,
-                step = buffer.step;
+                viewSize = buffer.viewSize;
 
             buffer.skip = skip;
             buffer.midPageThreshold = skip + pageSize - 1;
-            buffer.nextPageThreshold = skip + buffer.step - 1;
-            buffer.prefetchThreshold = buffer.midPageThreshold - step;
+            buffer.nextPageThreshold = skip + buffer.viewSize - 1;
+            buffer.prefetchThreshold = buffer.midPageThreshold - viewSize;
             buffer.pullBackThreshold = buffer.offset - 1;
         }
     });
-
 
     extend(true, kendo.data, {
         readers: {
