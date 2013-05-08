@@ -344,7 +344,6 @@
 
     // TODO: Use mixin instead of subclass
     // $.extend(encoding.code39extended.fn, code39ExtendedMixin);
-
     encodings.code93 = code39Base.extend({
         cCheckSumTotal: 20,
         kCheckSumTotal: 15,
@@ -1474,7 +1473,6 @@
              this.view = new defaultView();
              this.setOptions(options);
         },
-
         setOptions: function (options) {
             if (!this.enocoding || ( options.encoding.name && this.options.encoding.name !==
                 options.encoding.name.toLowerCase())){
@@ -1483,7 +1481,6 @@
             this.options = $.extend(this.options, options);
             this.value(this.options.value);
         },
-
         redraw: function () {
             var result = this.encoding.encode(this.value,
                     this.options.width, this.options.height),
