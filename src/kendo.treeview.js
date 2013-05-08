@@ -237,6 +237,7 @@ kendo_module({
                 .on("mousedown" + NS, ".k-in,.k-checkbox :checkbox,.k-plus,.k-minus", proxy(that._mousedown, that))
                 .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
+                .on("click" + NS, ".k-request-retry", proxy(that._retryRequest, that))
                 .on("click" + NS, function(e) {
                     if (!$(e.target).is(":focusable")) {
                         that.focus();
@@ -442,6 +443,10 @@ kendo_module({
                 ),
                 loading: template(
                     "<div class='k-icon k-loading' /> Loading..."
+                ),
+                retry: template(
+                    "Request failed. " +
+                    "<button class='k-button k-request-retry'>Retry</button>"
                 )
             };
         },
@@ -1309,11 +1314,23 @@ kendo_module({
         },
 
         _error: function(e) {
-            if (!e.node) {
-                this._progress(false);
+            var that = this,
+                node = e.node && that.findByUid(e.node.uid);
+
+            if (node) {
+                this._progress(node, false);
+                nodeIcon(node).addClass("k-i-refresh");
+                e.node.loaded(false);
             } else {
-                this._progress(this.findByUid(e.node.uid), false);
+                this._progress(false);
+                this.element.html(this.templates.retry);
             }
+        },
+
+        _retryRequest: function(e) {
+            e.preventDefault();
+
+            this.dataSource.fetch();
         },
 
         expand: function (nodes) {

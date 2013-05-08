@@ -4,6 +4,7 @@
         <title>TreeView interaction</title>
         <script src="test-scripts.js"></script>
         <script src="../jquery.mockjax.js"></script>
+        <style> body { font: 12px Tahoma } </style>
     </head>
     <body>
         <h1 id="qunit-header">TreeView interaction</h1>
@@ -1175,6 +1176,106 @@
 
                 treeviewObject.expand(".k-item");
                 equal(treeview.find(".k-loading").length, 0);
+            });
+
+            test("failed requests render retry template", function() {
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.error({});
+                            }
+                        }
+                    }
+                });
+
+                equal(treeview.find(".k-request-retry").length, 1);
+            });
+
+            test("failed subnode requests show retry icon", function() {
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                if (!options.data.id) {
+                                    options.success([
+                                        { id: 1, hasChildren: true, text: "foo" }
+                                    ]);
+                                } else {
+                                    options.error({});
+                                }
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.expand(".k-item");
+                equal(treeview.find(".k-icon.k-i-refresh").length, 1);
+            });
+
+            test("failed requests can be retried", function() {
+                var calls = 0;
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                calls++;
+
+                                if (calls == 1) {
+                                    options.error({});
+                                } else {
+                                    options.success([{ id: 1, text: "foo" }]);
+                                }
+                            }
+                        }
+                    }
+                });
+
+                treeview.find(".k-request-retry").click();
+
+                equal(calls, 2);
+                equal(treeview.find(".k-request-retry").length, 0);
+                equal(treeview.find(".k-item").length, 1);
+            });
+
+            test("failed subnode requests can be reloaded", function() {
+                var calls = 0;
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                if (!options.data.id) {
+                                    options.success([
+                                        { id: 1, hasChildren: true, text: "foo" }
+                                    ]);
+                                } else {
+                                    calls++;
+
+                                    if (calls == 1) {
+                                        options.error({});
+                                    } else {
+                                        options.success([{ id: 2, text: "bar" }]);
+                                    }
+                                }
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "id",
+                                hasChildren: "hasChildren"
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.expand(".k-item");
+
+                treeview.find(".k-i-refresh").click();
+
+                equal(calls, 2);
+                equal(treeview.find(".k-item .k-item").length, 1);
             });
 
 
