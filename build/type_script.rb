@@ -41,6 +41,7 @@ module CodeGen::TypeScript
         'Function' => 'Function',
         'Selection' => 'Selection',
         'Element' => 'Element',
+        'HTMLCollection' => 'HTMLCollection',
         'jQuery' => 'JQuery',
         'jqXHR' => 'JQueryXHR',
         'jQueryEvent' => 'JQueryEventObject',
