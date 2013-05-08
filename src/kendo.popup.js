@@ -31,6 +31,7 @@ kendo_module({
         EFFECTS = "effects",
         ACTIVE = "k-state-active",
         ACTIVEBORDER = "k-state-border",
+        ACTIVEBORDERREGEXP = /k-state-border-(\w+)/,
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
         WINDOW = $(window),
@@ -114,7 +115,7 @@ kendo_module({
                     }
 
                     if (options.anchor != BODY) {
-                        direction = anchor.hasClass(ACTIVEBORDER + "-down") ? "down" : "up";
+                        direction = (anchor[0].className.match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
                         dirClass = ACTIVEBORDER + "-" + direction;
 
                         anchor
