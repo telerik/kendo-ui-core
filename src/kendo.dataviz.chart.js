@@ -965,7 +965,7 @@ kendo_module({
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (chart.isBindable(currentSeries) && grouped) {
+                if (chart._isBindable(currentSeries) && grouped) {
                     append(processedSeries,
                            groupSeries(currentSeries, data));
                 } else {
@@ -998,9 +998,9 @@ kendo_module({
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (chart.isBindable(currentSeries)) {
+                if (chart._isBindable(currentSeries)) {
                     groupIx = currentSeries._groupIx;
-                    seriesData = defined(groupIx) ? data[groupIx].items : data;
+                    seriesData = defined(groupIx) ? (data[groupIx] || {}).items : data;
 
                     if (currentSeries.autoBind !== false) {
                         currentSeries.data = seriesData;
@@ -1049,8 +1049,7 @@ kendo_module({
             }
         },
 
-        // TODO: Make private?
-        isBindable: function(series) {
+        _isBindable: function(series) {
             var valueFields = valueFieldsBySeriesType(series.type),
                 result = true,
                 field, i;
