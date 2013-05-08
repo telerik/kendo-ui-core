@@ -226,6 +226,19 @@ module kendo.data {
         preventDefault?: Function;
     }
 
+    class Binding extends Observable {
+        get(): any;
+        set(value: any): void;
+    }
+
+    class Binder {
+        element: Element;
+        bindings: { [key: string]: Binding; };
+        constructor(element: Element, bindings: { [key: string]: Binding; }, options?: any);
+        destroy(): void;
+        refresh(): void;
+    }
+
     class ObservableObject extends Observable{
         constructor(value?: any);
         get(name: string): any;
