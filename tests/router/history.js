@@ -87,6 +87,7 @@ asyncTest("transforms pushState to non-push state when needed", 1, function() {
         }
     }
 
+    kendoHistory.stop();
     win.kendo.support.pushState = false;
     startWithPushState();
     check();
@@ -116,6 +117,7 @@ asyncTest("transforms hash to push state on start", function() {
         }
     }
 
+    kendoHistory.stop();
     startWithPushState();
     check();
 });
@@ -184,7 +186,8 @@ test("triggers ready with the initial location", function() {
     expect(1);
 
     win.location.hash = "/initial-location";
-    kendoHistory.start({root: root, ready: function(e) { equal(e.url, "/initial-location"); }});
+    kendoHistory.start({root: root });
+    equal(kendoHistory.current, "/initial-location");
 });
 
 asyncTest("listens for outside url changes (hashChange)", function() {

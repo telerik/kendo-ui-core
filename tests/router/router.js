@@ -34,6 +34,17 @@ test("navigates to / by default", 1, function(){
     router.start();
 });
 
+test("supports multiple instances", 2, function(){
+    router = new kendo.Router();
+
+    router.route("/", function() { ok(true); });
+
+    router.start();
+
+    router2 = new kendo.Router();
+    router2.route("/", function() { ok(true); });
+    router2.start();
+});
 
 module("Router params", {
     setup: function() {
