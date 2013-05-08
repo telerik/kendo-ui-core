@@ -632,6 +632,9 @@ module kendo.ui {
         static fn: Widget;
         static extend(prototype: Object): Widget;
 
+        constructor(element: Element, options?: any);
+        constructor(element: JQuery, options?: any);
+
         init(element: Element, options: Object): void;
         init(selector: String, options: Object): void;
         init(object: JQuery, options: Object): void;
@@ -790,6 +793,10 @@ module kendo.mobile.ui {
         x?: number;
         y?: number;
     }
+}
+
+module kendo.dataviz.ui {
+    declare function registerTheme(name: string, options: any);
 }
 
 % namespaces.keys.each do |key|
