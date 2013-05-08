@@ -132,6 +132,49 @@
                 return $(this.wrapper).find(".k-i-arrow-s").css("backgroundColor", value || this.value()).css("backgroundColor");
             }
         }),
+
+        GradientEditor = ui.Widget.extend({
+            init: function(element, options) {
+                ui.Widget.fn.init.call(this, element, options);
+
+                this._render();
+            },
+
+            events: [
+                CHANGE
+            ],
+
+            options: {
+                name: "GradientEditor"
+            },
+
+            _template: kendo.template(
+                "<span class='k-widget k-header k-gradient-editor'>" +
+                    "<span class='k-dropdown-wrap k-state-default'>" +
+                        "<span class='k-preview k-select' />" +
+                    "</span>" +
+                "</span>"
+            ),
+
+            _render: function() {
+                var element = this.element,
+                    html = this._template({}),
+                    wrapper = $(html).insertBefore(element),
+                    preview = wrapper.find(".k-preview"),
+                    value = element.val();
+
+                preview.css("background-image", "-webkit-linear-gradient(top, " + value + ")");
+
+                element
+                    .addClass("k-input")
+                    .css("width", "100%")
+                    .attr("autocomplete", "off")
+                    .insertBefore(preview);
+
+                this.wrapper = wrapper;
+            }
+        }),
+
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
         toHex = function(value) {
             return value.replace(rgbValuesRe, function(match, r, g, b) {
@@ -522,6 +565,9 @@
                     .find(".ktb-colorpicker").kendoColorPicker({
                         change: changeHandler
                     }).end()
+                    .find(".ktb-gradient").kendoGradientEditor({
+                        change: changeHandler
+                    }).end()
                     .find(".ktb-combo")
                         .each(function() {
                             var data = themebuilder.themes.valuesFor(this.id);
@@ -686,7 +732,7 @@
                                     "var c = d.constants[name];" +
                                     "if (c.readonly) continue; #" +
                                     "<label for='#= name #'>#= d.section[name] || name #</label>" +
-                                    "<input id='#= name #' class='#= d.editors[c.property] #' " +
+                                    "<input id='#= name #' class='#= c.editor || d.editors[c.property] #' " +
                                            "value='#= d.processors[c.property] ? d.processors[c.property](c.value) : c.value #' />" +
                                 "# } #" +
                             "</div>" +
@@ -799,6 +845,7 @@
     });
 
     kendo.ui.plugin(ColorPicker);
+    kendo.ui.plugin(GradientEditor);
 
     extend(kendo, {
         ThemeCollection: ThemeCollection,

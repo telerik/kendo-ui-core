@@ -89,10 +89,13 @@
 
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
             "@widget-gradient":                 {
-                readonly: true,
+                property: "background-image",
+                editor: "ktb-gradient",
                 infer: function() {
                     var background = cssPropertyFrom("k-header", "background-image"),
                         match = /linear-gradient\((.*)\)$/i.exec(background);
+
+                        console.log((match && match[1]) || "none");
 
                     return match ? match[1] : "none";
                 }
@@ -215,7 +218,8 @@
         },
         webConstantsHierarchy = {
             "Widgets": {
-                "@widget-background-color":       "Background",
+                "@widget-gradient":               "Gradient",
+                "@widget-background-color":       "Background color",
                 "@widget-border-color":           "Border color",
                 "@widget-text-color":             "Text color"
             },
