@@ -3,6 +3,7 @@
     <head>
         <title>TreeView interaction</title>
         <script src="test-scripts.js"></script>
+        <script src="../jquery.mockjax.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">TreeView interaction</h1>
@@ -19,7 +20,14 @@
             var keys = kendo.keys;
 
             module("expand / collapse", {
-                teardown: cleanArtifacts
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                },
+                teardown: function() {
+                    cleanArtifacts();
+                    $.mockjaxClear();
+                }
             });
 
             test("expanding disabled items does not expand them", function() {
@@ -1132,6 +1140,26 @@
                 treeview.find(".k-icon").trigger("mousedown").click();
 
                 equal(treeview.find(".k-state-focused").text(), "bar");
+            });
+
+            asyncTest("failed requests replace loading icon with retry template", function() {
+                $.mockjax({ url: "foo", dataType: "json", status: 500, responseText: 'Server response' });
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "foo",
+                                dataType: "json"
+                            }
+                        }
+                    }
+                });
+
+                setTimeout(function() {
+                    start();
+                    equal(treeview.find(".k-loading").length, 0);
+                }, 100);
             });
 
 
