@@ -881,7 +881,7 @@ kendo_module({
             };
 
             that.tagTemplate = function(data) {
-                return '<li class="k-button"><span>' + tagTemplate(data) + '</span><span class="k-icon k-delete">delete</span></li>';
+                return '<li class="k-button" unselectable="on"><span unselectable="on">' + tagTemplate(data) + '</span><span unselectable="on" class="k-icon k-delete">delete</span></li>';
             };
         },
 
@@ -932,10 +932,10 @@ kendo_module({
                 wrapper = element.parent("span.k-multiselect");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap('<div class="k-widget k-multiselect k-header" />').parent();
+                wrapper = element.wrap('<div class="k-widget k-multiselect k-header" unselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).css("display", "");
