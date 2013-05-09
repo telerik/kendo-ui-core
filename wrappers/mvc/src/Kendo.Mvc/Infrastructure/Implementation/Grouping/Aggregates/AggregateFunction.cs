@@ -2,8 +2,11 @@ namespace Kendo.Mvc
 {
     using System.Globalization;
     using System.Linq.Expressions;
-    using System;    
+    using System;
 
+    ///<summary>
+    /// Represents an aggregate function.
+    ///</summary>
     public abstract class AggregateFunction : JsonObject
     {
         public abstract string AggregateMethodName { get; }
@@ -19,7 +22,7 @@ namespace Kendo.Mvc
             get;
             set;
         }
-        
+
         /// <summary>
         /// Gets or sets the name of the field, of the item from the set of items, which value is used as the argument of the aggregate function.
         /// </summary>
@@ -68,7 +71,7 @@ namespace Kendo.Mvc
         }
 
         /// <summary>
-        /// Creates the aggregate expression that is used for constructing expression 
+        /// Creates the aggregate expression that is used for constructing expression
         /// tree that will calculate the aggregate result.
         /// </summary>
         /// <param name="enumerableExpression">The grouping expression.</param>
@@ -80,7 +83,7 @@ namespace Kendo.Mvc
         /// Generates default name for this function using this type's name.
         /// </summary>
         /// <returns>
-        /// Function name generated with the following pattern: 
+        /// Function name generated with the following pattern:
         /// {<see cref="object.GetType()"/>.<see cref="System.Reflection.MemberInfo.Name"/>}_{<see cref="object.GetHashCode"/>}
         /// </returns>
         protected virtual string GenerateFunctionName()
