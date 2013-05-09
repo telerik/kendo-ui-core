@@ -302,7 +302,7 @@ kendo_module({
 
             extend(that, {
                 element: element,
-                surface: options.global ? SURFACE : options.surface || element,
+                surface: options.global ? SURFACE : $(options.surface || element),
                 stopPropagation: options.stopPropagation,
                 pressed: false
             });

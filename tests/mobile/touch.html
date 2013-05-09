@@ -96,6 +96,11 @@
                 move(18, 18);
             });
 
+            test("supports surface option", 0, function() {
+                var dom = $("<div id='outer'><div id='inner'>Inner</div></div>");
+                dom.find('#inner').kendoTouch({ surface: dom });
+            });
+
             module("tap events", {
                 setup: function() {
                     element = $("<i />");
