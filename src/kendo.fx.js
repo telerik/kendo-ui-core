@@ -1257,7 +1257,7 @@ kendo_module({
             return this;
         },
 
-        temporary: function(value) {
+        temporary: function() {
             this.element.addClass('temp-page');
             return this;
         }
@@ -1326,8 +1326,8 @@ kendo_module({
             return [
                 kendo.fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
                 kendo.fx(options.back).staticPage(reverseDirection, element).setReverse(reverse),
-                kendo.fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary(true).setReverse(reverse),
-                kendo.fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary(true).setReverse(reverse)
+                kendo.fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary().setReverse(reverse),
+                kendo.fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary().setReverse(reverse)
             ];
         },
 
