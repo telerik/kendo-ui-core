@@ -138,6 +138,10 @@
                 ui.Widget.fn.init.call(this, element, options);
 
                 this._render();
+
+                this.element.on("change", proxy(this._change, this));
+
+                this.value(this.element.val());
             },
 
             events: [
@@ -156,26 +160,47 @@
                 "</span>"
             ),
 
+            _change: function() {
+                this.value(this.element.val());
+                this.trigger(CHANGE);
+            },
+
+            _updatePreview: function() {
+                var value = this.value();
+
+                this.wrapper.find(".k-preview")
+                    .css("background-image", "-webkit-linear-gradient(top, " + value + ")")
+                    .css("background-image", "-moz-linear-gradient(top, " + value + ")")
+                    .css("background-image", "linear-gradient(top, " + value + ")");
+            },
+
             _render: function() {
                 var element = this.element,
                     html = this._template({}),
-                    wrapper = $(html).insertBefore(element),
-                    preview = wrapper.find(".k-preview"),
-                    value = element.val();
-
-                preview.css("background-image", "-webkit-linear-gradient(top, " + value + ")");
+                    wrapper = $(html).insertBefore(element);
 
                 element
                     .addClass("k-input")
                     .css("width", "100%")
                     .attr("autocomplete", "off")
-                    .insertBefore(preview);
+                    .insertBefore(wrapper.find(".k-preview"));
 
                 this.wrapper = wrapper;
+
+                this._updatePreview();
+            },
+
+            value: function(value) {
+                if (arguments.length == 0) {
+                    return toHex(this.element.val() || "");
+                }
+
+                this.element.val(toHex(value || ""));
+                this._updatePreview();
             }
         }),
 
-        rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
+        rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
         toHex = function(value) {
             return value.replace(rgbValuesRe, function(match, r, g, b) {
                 function pad(x) {
@@ -552,6 +577,10 @@
 
                     if (/^\d+$/.test(value) && this.element.is(".ktb-numeric")) {
                         value = value + "px";
+                    }
+
+                    if (this.element.is(".ktb-gradient")) {
+                        value = '"' + value + '"';
                     }
 
                     themebuilder._propertyChange({
