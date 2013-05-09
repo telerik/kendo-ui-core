@@ -20,6 +20,7 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "bullet" : "verticalBullet")
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
+                .Add("visible", series.Visible, () => series.Visible.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("targetField", series.TargetMember, () => { return series.Data == null && series.TargetMember != null; })
                 .Add("currentField", series.CurrentMember, () => { return series.Data == null && series.CurrentMember != null; })

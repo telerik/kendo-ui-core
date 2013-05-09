@@ -20,6 +20,7 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                   .Add("name", series.Name, string.Empty)
                   .Add("opacity", series.Opacity, () => series.Opacity.HasValue)
+                  .Add("visible", series.Visible, () => series.Visible.HasValue)
                   .Add("axis", series.Axis, string.Empty)
                   .Add("groupNameTemplate", series.GroupNameTemplate, string.Empty);
 

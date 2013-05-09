@@ -242,5 +242,24 @@ namespace Kendo.Mvc.UI.Fluent
             Series.Highlight.Visible = visible;
             return this as TSeriesBuilder;
         }
+
+        /// <summary>
+        /// Sets the labels visibility
+        /// </summary>
+        /// <param name="visible">The labels visibility.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series.Bar(s => s.Sales).Visible(false))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TSeriesBuilder Visible(bool visible)
+        {
+            Series.Visible = visible;
+            return this as TSeriesBuilder;
+        }
     }
 }
