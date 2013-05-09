@@ -46,7 +46,7 @@ kendo_module({
         TRANSFORM = cssPrefix + "transform",
         BACKFACE = cssPrefix + "backface-visibility",
         PERSPECTIVE = cssPrefix + "perspective",
-        DEFAULT_PERSPECTIVE = "800px",
+        DEFAULT_PERSPECTIVE = "1500px",
         TRANSFORM_PERSPECTIVE = "perspective(" + DEFAULT_PERSPECTIVE + ")",
         directions = {
             left: {
@@ -1258,14 +1258,8 @@ kendo_module({
         },
 
         temporary: function(value) {
-            this._temporary = value;
+            this.element.addClass('temp-page');
             return this;
-        },
-
-        teardown: function() {
-            if (this._temporary) {
-                this.element.remove();
-            }
         }
     });
 
@@ -1279,11 +1273,13 @@ kendo_module({
 
         restore: ["clip"],
 
-        prepare: function(start) {
+        prepare: function(start, end) {
             var that = this,
                 direction = that._reverse ? directions[that._direction].reverse : that._direction;
 
             start.clip = clipInHalf(that._container, direction);
+            start.opacity = 0.999;
+            end.opacity = 1;
         },
 
         shouldHide: function() {
@@ -1335,13 +1331,16 @@ kendo_module({
             ];
         },
 
-        prepare: function(start) {
+        prepare: function(start, end) {
             start[PERSPECTIVE] = DEFAULT_PERSPECTIVE;
             start.transformStyle = "preserve-3d";
+            // hack to trigger transition end.
+            start.opacity = 0.999;
+            end.opacity = 1;
         },
 
         teardown: function() {
-            this.element.find(".temp-pages").remove();
+            this.element.find(".temp-page").remove();
         }
     });
 
