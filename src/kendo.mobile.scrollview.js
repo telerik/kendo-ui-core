@@ -11,7 +11,7 @@ kendo_module({
         mobile = kendo.mobile,
         ui = mobile.ui,
         proxy = $.proxy,
-        Transition = kendo.fx.Transition,
+        Transition = kendo.effects.Transition,
         Pane = kendo.ui.Pane,
         PaneDimensions = kendo.ui.PaneDimensions,
         Widget = ui.Widget,
