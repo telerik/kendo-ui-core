@@ -331,6 +331,10 @@ kendo_module({
                 },
 
                 move: function(e) {
+                    if (e.event.target.tagName.match(/textarea|input/i)) {
+                        return;
+                    }
+
                     if (x.dimension.enabled || y.dimension.enabled) {
                         x.dragMove(e.x.delta);
                         y.dragMove(e.y.delta);
