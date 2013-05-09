@@ -981,7 +981,7 @@ function pad(number, digits, end) {
     var round = function(value, precision) {
         var power = Math.pow(10, precision || 0);
         return (Math.round(value * power) / power).toFixed(precision);
-    }
+    };
 
     var toString = function(value, fmt, culture) {
         if (fmt) {
