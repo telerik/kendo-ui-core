@@ -726,11 +726,18 @@ kendo_module({
                 pressed;
 
             if (key === keys.UP || down) {
+                firstChild = ul.firstChild;
+
+                if (!firstChild) {
+                    that.dataSource.one(CHANGE, function() { that._move(e); });
+                    that._filterSource();
+                    e.preventDefault();
+                    return true; //pressed
+                }
+
                 if (e.altKey) {
                     that.toggle(down);
                 } else if (down) {
-                    firstChild = ul.firstChild;
-
                     if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === firstChild)) {
                         current = firstChild;
                     } else {
@@ -749,6 +756,7 @@ kendo_module({
 
                     that[methodName](current);
                 }
+
                 e.preventDefault();
                 pressed = true;
             } else if (key === keys.ENTER || key === keys.TAB) {

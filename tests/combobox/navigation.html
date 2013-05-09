@@ -377,6 +377,50 @@
                 equal(combobox.value(), "baz");
             });
 
+            test("ComboBox bind widget on DOWN arrow", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo", "bar", "baz"],
+                    autoBind: false,
+                    dataBound: function() {
+                        ok(true);
+                    }
+                }).data("kendoComboBox");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+            });
+
+            test("ComboBox selects first item on DOWN arrow and autoBind: false", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo", "bar", "baz"],
+                    autoBind: false
+                }).data("kendoComboBox");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                equal(combobox.select(), 0);
+            });
+
+            test("ComboBox bind widget on UP arrow", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo", "bar", "baz"],
+                    autoBind: false,
+                    dataBound: function() {
+                        ok(true);
+                    }
+                }).data("kendoComboBox");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP
+                });
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
