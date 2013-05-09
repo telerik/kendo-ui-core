@@ -9,276 +9,276 @@
         <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <script src="../../../src/kendo.core.js"></script>        
+        <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.dataviz.core.js"></script>
-        <script src="../../../src/kendo.dataviz.barcode.js"></script> 
-		<script src="constants.js"></script> 
-		<script src="utils.js"></script>  		
- 		
+        <script src="../../../src/kendo.dataviz.barcode.js"></script>
+        <script src="constants.js"></script>
+        <script src="utils.js"></script>
+
         <script type="text/javascript">
-			var dataviz = kendo.dataviz,
+            var dataviz = kendo.dataviz,
                 encodings = dataviz.encodings;
-			(function() {
-				var encoding,
-					characters = {
-						START: new Function("ratio", "return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /*NULL*/"0": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*SOH*/"1": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*!*/"33": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*@*/"64": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*b*/"98": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),				 
-					   /*DEL*/"127": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*A*/"65": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*B*/"66": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*C*/"67": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*D*/"68": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),				   
-					   /*E*/"69": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*F*/"70": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*H*/"72": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /*I*/"73": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /*K*/"75": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio]]"),
-					   /*O*/"79": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-					   /*P*/"80": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-					   /*S*/"83": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),
-					   /*T*/"84": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),												
-					   /*U*/"85": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*V*/"86": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*W*/"87": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*X*/"88": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*Y*/"89": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*Z*/"90": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*0*/"48": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /*1*/"49": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),						
-					   /*2*/"50": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*3*/"51": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*4*/"52": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*5*/"53": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*6*/"54": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-					   /*7*/"55": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
-					   /*8*/"56": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /*-*/"45": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
-					   /*.*/"46": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /* */"32": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-					   /*$*/"36": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-					   /*\/*/"47": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-					   /*+*/"43": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio]]"),
-					   /*%*/"37": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-						GAP: [SPACE, 1],
-						QUIET_ZONE: new Function("length", "return [SPACE, length];")
-					};
-				
-				function generateResult(value, ratio, options){										
-					var expectedResult = [];
-					if(options.quietZoneLength){
-						expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
-					}					
-					
-					expectedResult.pushArray(characters.START(ratio));
-					expectedResult.push(characters.GAP);
-					
-					for( var i = 0; i < value.length; i++){										
-						expectedResult.pushArray(characters[value.charCodeAt(i)](ratio));
-						expectedResult.push(characters.GAP);
-					}
-					
-					if(options.checkCharacter){
-						expectedResult.pushArray(characters[options.checkCharacter.charCodeAt(0)](ratio));
-						expectedResult.push(characters.GAP);
-					}
-										
-					expectedResult.pushArray(characters.START(encoding.ratio));
-					
-					if(options.quietZoneLength){
-						expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
-					}
+            (function() {
+                var encoding,
+                    characters = {
+                        START: new Function("ratio", "return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /*NULL*/"0": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*SOH*/"1": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*!*/"33": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*@*/"64": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*b*/"98": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*DEL*/"127": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*A*/"65": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*B*/"66": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*C*/"67": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*D*/"68": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*E*/"69": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*F*/"70": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*H*/"72": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /*I*/"73": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /*K*/"75": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio]]"),
+                       /*O*/"79": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+                       /*P*/"80": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+                       /*S*/"83": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),
+                       /*T*/"84": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),
+                       /*U*/"85": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*V*/"86": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*W*/"87": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*X*/"88": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*Y*/"89": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*Z*/"90": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*0*/"48": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /*1*/"49": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*2*/"50": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*3*/"51": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*4*/"52": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*5*/"53": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*6*/"54": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                       /*7*/"55": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
+                       /*8*/"56": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /*-*/"45": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
+                       /*.*/"46": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /* */"32": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
+                       /*$*/"36": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
+                       /*\/*/"47": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
+                       /*+*/"43": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio]]"),
+                       /*%*/"37": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
+                        GAP: [SPACE, 1],
+                        QUIET_ZONE: new Function("length", "return [SPACE, length];")
+                    };
 
-					return expectedResult;
-				}
-				
-				function calculateBaseUnit(width, length, ratio, quietZoneLength, checkLength, gapWidth){
-					var characterLength = 3 * (ratio + 2);
-					return width / 
-						( 2 * quietZoneLength + (length + 2 + checkLength) * characterLength + gapWidth * (length + checkLength + 1));
-				}
+                function generateResult(value, ratio, options){
+                    var expectedResult = [];
+                    if(options.quietZoneLength){
+                        expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
+                    }
 
-				
-				module("code39Extended", {
-					setup: function() {
-						encoding = new encodings.code39extended();
-					},
-					teardown: function(){
-						encoding = null;
-					}
-				});
-				
-				
-			   test("test value TEST8052 without checksum", function() {
-					encoding.options.addCheckSum = false;
-					encoding.options.addQuietZone = true;
-					var value = "TEST8052",
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength: encoding.quietZoneLength});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-				
-				test("test value TEST8052 with checksum", function() {
-					encoding.options.addCheckSum = true;
-					encoding.options.addQuietZone = true;
-					var value = "TEST8052",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength:  encoding.quietZoneLength, checkCharacter: "T"});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });	
-				
-				test("test value ' 0.1-2$3/4+%' without checksum", function() {
-					encoding.options.addCheckSum = false;
-					encoding.options.addQuietZone = true;
-					var value = " 0.1-2$3/4+%",
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength:  encoding.quietZoneLength});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-				
-				test("test value ' 0.1-2$3/4+%' with checksum", function() {
-					encoding.options.addCheckSum = true;
-					encoding.options.addQuietZone = true;
-					var value = " 0.1-2$3/4+%",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength:  encoding.quietZoneLength, checkCharacter: "8"});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });	
-				
-				test("test value ' (NUL)A6bU(SOH)' without checksum", function() {
-					encoding.options.addCheckSum = false;
-					encoding.options.addQuietZone = true;
-					var value = " " + String.fromCharCode(0) + "A6bU" + String.fromCharCode(1),
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength: encoding.quietZoneLength});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-				
-				test("test value ' (NUL)A6bU(SOH)' with checksum", function() {
-					encoding.options.addCheckSum = true;
-					encoding.options.addQuietZone = true;
-					var value = " " + String.fromCharCode(0) + "A6bU" + String.fromCharCode(1),
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength: encoding.quietZoneLength, checkCharacter: "%"});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-					
+                    expectedResult.pushArray(characters.START(ratio));
+                    expectedResult.push(characters.GAP);
 
-				test("test value '@$(DEL)!3/4+%' without checksum", function() {
-					encoding.options.addCheckSum = false;
-					encoding.options.addQuietZone = true;
-					var value = "@$" + String.fromCharCode(127) + "!3/4+%",
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength: encoding.quietZoneLength});						
-					
+                    for( var i = 0; i < value.length; i++){
+                        expectedResult.pushArray(characters[value.charCodeAt(i)](ratio));
+                        expectedResult.push(characters.GAP);
+                    }
+
+                    if(options.checkCharacter){
+                        expectedResult.pushArray(characters[options.checkCharacter.charCodeAt(0)](ratio));
+                        expectedResult.push(characters.GAP);
+                    }
+
+                    expectedResult.pushArray(characters.START(encoding.ratio));
+
+                    if(options.quietZoneLength){
+                        expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
+                    }
+
+                    return expectedResult;
+                }
+
+                function calculateBaseUnit(width, length, ratio, quietZoneLength, checkLength, gapWidth){
+                    var characterLength = 3 * (ratio + 2);
+                    return width /
+                        ( 2 * quietZoneLength + (length + 2 + checkLength) * characterLength + gapWidth * (length + checkLength + 1));
+                }
+
+
+                module("code39Extended", {
+                    setup: function() {
+                        encoding = new encodings.code39extended();
+                    },
+                    teardown: function(){
+                        encoding = null;
+                    }
+                });
+
+
+               test("test value TEST8052 without checksum", function() {
+                    encoding.options.addCheckSum = false;
+                    encoding.options.addQuietZone = true;
+                    var value = "TEST8052",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength: encoding.quietZoneLength});
+
                     ok(comparePatterns(result.pattern, expectedResult));
                 });
-				
-				test("test value '@$(DEL)!3/4+%' with checksum", function() {
-					encoding.options.addCheckSum = true;
-					encoding.options.addQuietZone = true;
-					var value = "@$" + String.fromCharCode(127) + "!3/4+%",
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, encoding.ratio, 
-							{quietZoneLength: encoding.quietZoneLength, checkCharacter: "F"});						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });		
 
-				//-----------------------------------------------------------------------------------------------------------------
-				
-				test("test invalid character error", function() {
-					var thrownError = false;
-					try{
-						encoding.encode("aAAST*" + String.fromCharCode(128), 300, 100);
-					}
-					catch (ex){
-						thrownError = true;						
-					}
-					ok(thrownError);
-                });				
-				
-				
-				//-----------------------------------------------------------------------------------------------------------------
-		
-				test("test base unit calculation", function() {
-					var width = 300,
-						height = 100,
-						value = "@$" + String.fromCharCode(127)+ "!3/4+%",
-						length = 22,
-						quietZoneLength = encoding.options.quietZoneLength,
-						result,
-						resultWithoutQuietZone,
-						resultWithCheckSum,
-						expectedResult, 
-						expectedResultWithoutQuietZone,
-						expectedResultWithCheckSum;
-							
-						encoding.options.addCheckSum = false;
-						encoding.options.addQuietZone = true;
-					
-						result = encoding.encode(value, width, height).baseUnit;
-						expectedResult = calculateBaseUnit(width, length, encoding.ratio, quietZoneLength, 0, encoding.gapWidth);
-						equal(result, expectedResult);
-								
-						encoding.options.addCheckSum = false;
-						encoding.options.addQuietZone = false;
-						resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
-						expectedResultWithoutQuietZone = calculateBaseUnit(width, length, encoding.ratio, 0, 0, encoding.gapWidth);
-						equal(resultWithoutQuietZone, expectedResultWithoutQuietZone);
-						
-						encoding.options.addCheckSum = true;
-						encoding.options.addQuietZone = true;
-						resultWithCheckSum = encoding.encode(value, width, height).baseUnit;
-						expectedResultWithCheckSum = calculateBaseUnit(width, length, encoding.ratio, quietZoneLength, 1, encoding.gapWidth);
-						equal(resultWithCheckSum, expectedResultWithCheckSum);					
-				});							
-				
-				test("test ratio calculation", function() {
-					var result1,
-						result2,
-						result3,
-						value = "A@!",
-						width1 = 92,						
-						width2 = 87.3,
-						width3 = 84.5,
-						expectedResult1 = 3,
-						expectedResult2 = 2.7,
-						expectedResult3 = 2.5;
-					
-						encoding.encode(value, width1, 100);
-						result1 = parseFloat(encoding.ratio.toFixed(1));
-						equal(result1, expectedResult1);
-						
-						encoding.encode(value, width2, 100);
-						result2 = parseFloat(encoding.ratio.toFixed(1));
-						equal(result2, expectedResult2);
-						
-						encoding.encode(value, width3, 100);
-						result3 = parseFloat(encoding.ratio.toFixed(1));
-						equal(result3, expectedResult3);
-				});
-					
-			})();
+                test("test value TEST8052 with checksum", function() {
+                    encoding.options.addCheckSum = true;
+                    encoding.options.addQuietZone = true;
+                    var value = "TEST8052",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength:  encoding.quietZoneLength, checkCharacter: "T"});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value ' 0.1-2$3/4+%' without checksum", function() {
+                    encoding.options.addCheckSum = false;
+                    encoding.options.addQuietZone = true;
+                    var value = " 0.1-2$3/4+%",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength:  encoding.quietZoneLength});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value ' 0.1-2$3/4+%' with checksum", function() {
+                    encoding.options.addCheckSum = true;
+                    encoding.options.addQuietZone = true;
+                    var value = " 0.1-2$3/4+%",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength:  encoding.quietZoneLength, checkCharacter: "8"});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value ' (NUL)A6bU(SOH)' without checksum", function() {
+                    encoding.options.addCheckSum = false;
+                    encoding.options.addQuietZone = true;
+                    var value = " " + String.fromCharCode(0) + "A6bU" + String.fromCharCode(1),
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength: encoding.quietZoneLength});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value ' (NUL)A6bU(SOH)' with checksum", function() {
+                    encoding.options.addCheckSum = true;
+                    encoding.options.addQuietZone = true;
+                    var value = " " + String.fromCharCode(0) + "A6bU" + String.fromCharCode(1),
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength: encoding.quietZoneLength, checkCharacter: "%"});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+
+                test("test value '@$(DEL)!3/4+%' without checksum", function() {
+                    encoding.options.addCheckSum = false;
+                    encoding.options.addQuietZone = true;
+                    var value = "@$" + String.fromCharCode(127) + "!3/4+%",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength: encoding.quietZoneLength});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value '@$(DEL)!3/4+%' with checksum", function() {
+                    encoding.options.addCheckSum = true;
+                    encoding.options.addQuietZone = true;
+                    var value = "@$" + String.fromCharCode(127) + "!3/4+%",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, encoding.ratio,
+                            {quietZoneLength: encoding.quietZoneLength, checkCharacter: "F"});
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                //-----------------------------------------------------------------------------------------------------------------
+
+                test("test invalid character error", function() {
+                    var thrownError = false;
+                    try{
+                        encoding.encode("aAAST*" + String.fromCharCode(128), 300, 100);
+                    }
+                    catch (ex){
+                        thrownError = true;
+                    }
+                    ok(thrownError);
+                });
+
+
+                //-----------------------------------------------------------------------------------------------------------------
+
+                test("test base unit calculation", function() {
+                    var width = 300,
+                        height = 100,
+                        value = "@$" + String.fromCharCode(127)+ "!3/4+%",
+                        length = 22,
+                        quietZoneLength = encoding.options.quietZoneLength,
+                        result,
+                        resultWithoutQuietZone,
+                        resultWithCheckSum,
+                        expectedResult,
+                        expectedResultWithoutQuietZone,
+                        expectedResultWithCheckSum;
+
+                        encoding.options.addCheckSum = false;
+                        encoding.options.addQuietZone = true;
+
+                        result = encoding.encode(value, width, height).baseUnit;
+                        expectedResult = calculateBaseUnit(width, length, encoding.ratio, quietZoneLength, 0, encoding.gapWidth);
+                        equal(result, expectedResult);
+
+                        encoding.options.addCheckSum = false;
+                        encoding.options.addQuietZone = false;
+                        resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
+                        expectedResultWithoutQuietZone = calculateBaseUnit(width, length, encoding.ratio, 0, 0, encoding.gapWidth);
+                        equal(resultWithoutQuietZone, expectedResultWithoutQuietZone);
+
+                        encoding.options.addCheckSum = true;
+                        encoding.options.addQuietZone = true;
+                        resultWithCheckSum = encoding.encode(value, width, height).baseUnit;
+                        expectedResultWithCheckSum = calculateBaseUnit(width, length, encoding.ratio, quietZoneLength, 1, encoding.gapWidth);
+                        equal(resultWithCheckSum, expectedResultWithCheckSum);
+                });
+
+                test("test ratio calculation", function() {
+                    var result1,
+                        result2,
+                        result3,
+                        value = "A@!",
+                        width1 = 92,
+                        width2 = 87.3,
+                        width3 = 84.5,
+                        expectedResult1 = 3,
+                        expectedResult2 = 2.7,
+                        expectedResult3 = 2.5;
+
+                        encoding.encode(value, width1, 100);
+                        result1 = parseFloat(encoding.ratio.toFixed(1));
+                        equal(result1, expectedResult1);
+
+                        encoding.encode(value, width2, 100);
+                        result2 = parseFloat(encoding.ratio.toFixed(1));
+                        equal(result2, expectedResult2);
+
+                        encoding.encode(value, width3, 100);
+                        result3 = parseFloat(encoding.ratio.toFixed(1));
+                        equal(result3, expectedResult3);
+                });
+
+            })();
         </script>
-		
-		<h1 id="qunit-header">encoding 39 extended</h1>
+
+        <h1 id="qunit-header">encoding 39 extended</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -288,5 +288,5 @@
 
         <div id="container" style="width: 600px; height: 400px">
         </div>
-	</body>
-</html>	
+    </body>
+</html>

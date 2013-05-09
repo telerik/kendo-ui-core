@@ -9,210 +9,210 @@
         <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <script src="../../../src/kendo.core.js"></script>        
+        <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.dataviz.core.js"></script>
-        <script src="../../../src/kendo.dataviz.barcode.js"></script> 
-		<script src="constants.js"></script> 
-		<script src="utils.js"></script>  		
- 		
+        <script src="../../../src/kendo.dataviz.barcode.js"></script>
+        <script src="constants.js"></script>
+        <script src="utils.js"></script>
+
         <script type="text/javascript">
-			var dataviz = kendo.dataviz,
+            var dataviz = kendo.dataviz,
                 encodings = dataviz.encodings;
-				
-			(function() {
-				var encoding,
-					characters = {
-							/* A */"33": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 3]],
-							/* B */"34": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3]],
-							/* C */"35": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1]],
-								"36": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 3]],
-							/* E */"37": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3]],
-							/* H */"40": [[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3]],
-							/* K */"43": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1]],
-							/* L */"44": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
-									"45": [[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3]],
-							/* Q */"49": [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,3],[SPACE, 1]],
-							/* S */"51": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 3]],
-							/* T */"52": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1]],
-							/* X */"56": [[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 1]],
-							/* Z */"58": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1]],
-							/* < */"28": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2]],
-							/* = */"29": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
-							/* @ */"32": [[BAR,2],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
-							/* 0 */"16": [[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 2]],
-							/* 3 */"19": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 2]],
-							/* 7 */"23": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
-							/* ^ */"62": [[BAR,4],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 1]],
-							/* _ */"63": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 4]],
-								   "66": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 1]],
-							/* - */"13": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 2]],
-								   "09": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 3]],
-								   "08": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 2]],
-							/* ' */"07": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 2]],
-							/* # */"03": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3]],
-							/* # */"02": [[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 1]],
-							/* SPACE */"00": [[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2]], 
-														
-							/* LF */"74": [[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
-							/* DC1 */"81": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 2]],
-							/* DC4 */"84": [[BAR,1],[SPACE, 2],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 2]],							
-									 "85": [[BAR,1],[SPACE, 2],[BAR,4],[SPACE, 2],[BAR,1],[SPACE, 1]],
-									 "86": [[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2]],
-									 "91": [[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
-							/* ` */"64": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2]],
-							/* a */"65": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4]],
-							/* c */"67": [[BAR,1],[SPACE, 4],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 2]],
-							/* f */"70": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2]],
-							/* k */"75": [[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1]],
-							/* z */"90": [[BAR,2],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1]],
-							/* ~ */"94": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1]],							
-							/* DEL */"95": [[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3]],
-							/* SHIFT_AB */"98": [[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1]],
-							/* Code C */"99": [[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,4],[SPACE, 1]],
-							START: [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 2]],
-							STOP: [[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 1],[BAR, 2]]							
-					};
-				
-				function calculateCheckSum(value){
-					var sum = 105;
 
-					for(var i = 0; i< value.length; i+=2){					
-						sum += (i/2+1) * parseInt(value.substring(i, i + 2));
-					}
-					return sum % 103;
-				}
-				
-				function generateResult(value, checkValue, options){										
-					var expectedResult = [];
-					if(options.quietZoneLength){
-						expectedResult.push([SPACE, options.quietZoneLength]);
-					}					
-				
-					expectedResult.pushArray(characters.START);
-				
-					for( var i = 0; i < value.length; i+=2){					
-						expectedResult.pushArray(characters[value.substring(i, i + 2)]);						
-					}
-				
-					expectedResult.pushArray(characters[checkValue]);			
-					
-										
-					expectedResult.pushArray(characters.STOP);					
-					
-					if(options.quietZoneLength){
-						expectedResult.push([SPACE, options.quietZoneLength]);
-					}
+            (function() {
+                var encoding,
+                    characters = {
+                            /* A */"33": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 3]],
+                            /* B */"34": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3]],
+                            /* C */"35": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1]],
+                                "36": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 3]],
+                            /* E */"37": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3]],
+                            /* H */"40": [[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3]],
+                            /* K */"43": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1]],
+                            /* L */"44": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
+                                    "45": [[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3]],
+                            /* Q */"49": [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,3],[SPACE, 1]],
+                            /* S */"51": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 3]],
+                            /* T */"52": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1]],
+                            /* X */"56": [[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 1]],
+                            /* Z */"58": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1]],
+                            /* < */"28": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2]],
+                            /* = */"29": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
+                            /* @ */"32": [[BAR,2],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
+                            /* 0 */"16": [[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 2]],
+                            /* 3 */"19": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 2]],
+                            /* 7 */"23": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
+                            /* ^ */"62": [[BAR,4],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 1]],
+                            /* _ */"63": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 4]],
+                                   "66": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 1]],
+                            /* - */"13": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 2]],
+                                   "09": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 3]],
+                                   "08": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 2]],
+                            /* ' */"07": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 2]],
+                            /* # */"03": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3]],
+                            /* # */"02": [[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 1]],
+                            /* SPACE */"00": [[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2]],
 
-					return expectedResult;
-				}
-				
-				module("128C", {
+                            /* LF */"74": [[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
+                            /* DC1 */"81": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 2]],
+                            /* DC4 */"84": [[BAR,1],[SPACE, 2],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 2]],
+                                     "85": [[BAR,1],[SPACE, 2],[BAR,4],[SPACE, 2],[BAR,1],[SPACE, 1]],
+                                     "86": [[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2]],
+                                     "91": [[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
+                            /* ` */"64": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2]],
+                            /* a */"65": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4]],
+                            /* c */"67": [[BAR,1],[SPACE, 4],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 2]],
+                            /* f */"70": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2]],
+                            /* k */"75": [[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1]],
+                            /* z */"90": [[BAR,2],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1]],
+                            /* ~ */"94": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1]],
+                            /* DEL */"95": [[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3]],
+                            /* SHIFT_AB */"98": [[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1]],
+                            /* Code C */"99": [[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,4],[SPACE, 1]],
+                            START: [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 2]],
+                            STOP: [[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 1],[BAR, 2]]
+                    };
+
+                function calculateCheckSum(value){
+                    var sum = 105;
+
+                    for(var i = 0; i< value.length; i+=2){
+                        sum += (i/2+1) * parseInt(value.substring(i, i + 2));
+                    }
+                    return sum % 103;
+                }
+
+                function generateResult(value, checkValue, options){
+                    var expectedResult = [];
+                    if(options.quietZoneLength){
+                        expectedResult.push([SPACE, options.quietZoneLength]);
+                    }
+
+                    expectedResult.pushArray(characters.START);
+
+                    for( var i = 0; i < value.length; i+=2){
+                        expectedResult.pushArray(characters[value.substring(i, i + 2)]);
+                    }
+
+                    expectedResult.pushArray(characters[checkValue]);
+
+
+                    expectedResult.pushArray(characters.STOP);
+
+                    if(options.quietZoneLength){
+                        expectedResult.push([SPACE, options.quietZoneLength]);
+                    }
+
+                    return expectedResult;
+                }
+
+                module("128C", {
                     setup: function() {
                         encoding = new encodings.code128c();
                     },
                     teardown: function(){
-						encoding = null;
-					}
+                        encoding = null;
+                    }
                 });
-			
-				test("test value 5237515233", function() {
-					var value = "5237515233",
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value,"36",
-							{quietZoneLength: encoding.options.quietZoneLength });						
-			
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-	
-				test("test value 34375658282916 ", function() {
-					var value = "34375658282916",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, "09",
-							{quietZoneLength: encoding.options.quietZoneLength });						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });	
 
-				test("test value 0064327491624344 ", function() {
-					var value = "0064327491624344",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, "45",
-							{quietZoneLength: encoding.options.quietZoneLength });						
-					
+                test("test value 5237515233", function() {
+                    var value = "5237515233",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value,"36",
+                            {quietZoneLength: encoding.options.quietZoneLength });
+
                     ok(comparePatterns(result.pattern, expectedResult));
-                });	
-			
-				test("test value 63231916810307 ", function() {
-					var value = "63231916810307",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, "86",
-							{quietZoneLength: encoding.options.quietZoneLength });						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });	
-				
-				test("test value 99009598030807 ", function() {
-					var value = "99009598030807",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, "66",
-							{quietZoneLength: encoding.options.quietZoneLength });						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });	
-				
-				test("test value 00 ", function() {
-					var value = "00",										
-						result = encoding.encode(value, 300, 100),
-						expectedResult = generateResult(value, "02",
-							{quietZoneLength: encoding.options.quietZoneLength });						
-					
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });	
-				test("test invalid character error", function() {
-					var thrownError = false;
-					try{
-						encoding.encode("00a11", 300, 100);
-					}
-					catch (ex){						
-						thrownError = true;						
-					}
-					ok(thrownError);
                 });
-				
-				test("test invalid character error odd count", function() {
-					var thrownError = false;
-					try{
-						encoding.encode("001", 300, 100);
-					}
-					catch (ex){						
-						thrownError = true;						
-					}
-					ok(thrownError);
+
+                test("test value 34375658282916 ", function() {
+                    var value = "34375658282916",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, "09",
+                            {quietZoneLength: encoding.options.quietZoneLength });
+
+                    ok(comparePatterns(result.pattern, expectedResult));
                 });
-				
-				test("test base unit calculation", function() {
-					var width = 200,
-						height = 100,
-						value = "63231916810307",
-						quietZoneLength = encoding.options.quietZoneLength,
-						result,
-						resultWithoutQuietZone,
-						expectedResult = fixed(width / (112 + 2 * quietZoneLength), 2), 
-						expectedResultWithoutQuietZone = 1.79;
-							
-						encoding.options.addQuietZone = true;
-						result = encoding.encode(value, width, height).baseUnit;
-						equal(fixed(result, 2), expectedResult);
-								
-						encoding.options.addQuietZone = false;
-						resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
-						equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);								
-				});	
-				
-			})();
+
+                test("test value 0064327491624344 ", function() {
+                    var value = "0064327491624344",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, "45",
+                            {quietZoneLength: encoding.options.quietZoneLength });
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value 63231916810307 ", function() {
+                    var value = "63231916810307",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, "86",
+                            {quietZoneLength: encoding.options.quietZoneLength });
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value 99009598030807 ", function() {
+                    var value = "99009598030807",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, "66",
+                            {quietZoneLength: encoding.options.quietZoneLength });
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+
+                test("test value 00 ", function() {
+                    var value = "00",
+                        result = encoding.encode(value, 300, 100),
+                        expectedResult = generateResult(value, "02",
+                            {quietZoneLength: encoding.options.quietZoneLength });
+
+                    ok(comparePatterns(result.pattern, expectedResult));
+                });
+                test("test invalid character error", function() {
+                    var thrownError = false;
+                    try{
+                        encoding.encode("00a11", 300, 100);
+                    }
+                    catch (ex){
+                        thrownError = true;
+                    }
+                    ok(thrownError);
+                });
+
+                test("test invalid character error odd count", function() {
+                    var thrownError = false;
+                    try{
+                        encoding.encode("001", 300, 100);
+                    }
+                    catch (ex){
+                        thrownError = true;
+                    }
+                    ok(thrownError);
+                });
+
+                test("test base unit calculation", function() {
+                    var width = 200,
+                        height = 100,
+                        value = "63231916810307",
+                        quietZoneLength = encoding.options.quietZoneLength,
+                        result,
+                        resultWithoutQuietZone,
+                        expectedResult = fixed(width / (112 + 2 * quietZoneLength), 2),
+                        expectedResultWithoutQuietZone = 1.79;
+
+                        encoding.options.addQuietZone = true;
+                        result = encoding.encode(value, width, height).baseUnit;
+                        equal(fixed(result, 2), expectedResult);
+
+                        encoding.options.addQuietZone = false;
+                        resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
+                        equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);
+                });
+
+            })();
         </script>
-		
-		<h1 id="qunit-header">encoding 128A</h1>
+
+        <h1 id="qunit-header">encoding 128A</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -222,5 +222,5 @@
 
         <div id="container" style="width: 600px; height: 400px">
         </div>
-	</body>
-</html>	
+    </body>
+</html>

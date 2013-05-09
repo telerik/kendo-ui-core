@@ -9,49 +9,49 @@
         <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
-        <script src="../../../src/kendo.core.js"></script>        
+        <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.dataviz.core.js"></script>
-        <script src="../../../src/kendo.dataviz.barcode.js"></script> 
-		<script src="constants.js"></script> 
-		<script src="utils.js"></script>  		
- 		
+        <script src="../../../src/kendo.dataviz.barcode.js"></script>
+        <script src="constants.js"></script>
+        <script src="utils.js"></script>
+
         <script type="text/javascript">
-			var dataviz = kendo.dataviz,
+            var dataviz = kendo.dataviz,
                 encodings = dataviz.encodings;
-				
-			(function() {
-				var encoding,
-					characters= {
-						START: [[BAR,1],[SPACE,1],[BAR,1]],
-						MIDDLE: [[SPACE,1],[BAR,1],[SPACE,1],[BAR,1],[SPACE,1]],
-					};
-				
-				module("ean8", {
+
+            (function() {
+                var encoding,
+                    characters= {
+                        START: [[BAR,1],[SPACE,1],[BAR,1]],
+                        MIDDLE: [[SPACE,1],[BAR,1],[SPACE,1],[BAR,1],[SPACE,1]],
+                    };
+
+                module("ean8", {
                     setup: function() {
                         encoding = new encodings.ean8();
                     },
                     teardown: function(){
-						encoding = null;
-					}
+                        encoding = null;
+                    }
                 });
-				
-				test("test value 1234567 ", function(){
-					var result,
-						value = "1234567",
-						expectedResult = [],
-						quietZone = [[SPACE, encoding.options.quietZoneLength]],
-						firstPart = [[SPACE,2],[BAR,2],[SPACE,2],[BAR,1], [SPACE,2],[BAR,1],[SPACE,2],[BAR,2], [SPACE,1],[BAR,4],[SPACE,1],[BAR,1], [SPACE,1],[BAR,1],[SPACE,3],[BAR,2]],
-						secondPart = [[BAR,1],[SPACE,2],[BAR,3],[SPACE,1], [BAR,1],[SPACE,1],[BAR,1],[SPACE,4], [BAR,1],[SPACE,3],[BAR,1],[SPACE,2], [BAR,3],[SPACE,2],[BAR,1],[SPACE,1]];
-						
-						expectedResult = expectedResult.concat(quietZone,characters.START, firstPart, characters.MIDDLE, secondPart, characters.START, quietZone);
-						result = encoding.encode(value, 300, 100);
-						ok(comparePatterns(result.pattern,expectedResult ));
-				});
-				
-			})();
+
+                test("test value 1234567 ", function(){
+                    var result,
+                        value = "1234567",
+                        expectedResult = [],
+                        quietZone = [[SPACE, encoding.options.quietZoneLength]],
+                        firstPart = [[SPACE,2],[BAR,2],[SPACE,2],[BAR,1], [SPACE,2],[BAR,1],[SPACE,2],[BAR,2], [SPACE,1],[BAR,4],[SPACE,1],[BAR,1], [SPACE,1],[BAR,1],[SPACE,3],[BAR,2]],
+                        secondPart = [[BAR,1],[SPACE,2],[BAR,3],[SPACE,1], [BAR,1],[SPACE,1],[BAR,1],[SPACE,4], [BAR,1],[SPACE,3],[BAR,1],[SPACE,2], [BAR,3],[SPACE,2],[BAR,1],[SPACE,1]];
+
+                        expectedResult = expectedResult.concat(quietZone,characters.START, firstPart, characters.MIDDLE, secondPart, characters.START, quietZone);
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+
+            })();
         </script>
-		
-		<h1 id="qunit-header">encoding ean8</h1>
+
+        <h1 id="qunit-header">encoding ean8</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -61,5 +61,5 @@
 
         <div id="container" style="width: 600px; height: 400px">
         </div>
-	</body>
-</html>				
+    </body>
+</html>
