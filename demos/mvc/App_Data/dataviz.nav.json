@@ -302,7 +302,7 @@
             "name": "scatter-charts"
         }, {
             "text": "Sparklines",
-            "documentation": "dataviz/sparklines",
+            "documentation": "dataviz/sparkline",
             "spriteCssClass": "sparklineIcon",
             "new": true,
             "items": [{
