@@ -476,6 +476,7 @@
     <Compile Include="UI\DataSource\Transport.cs" />
     <Compile Include="UI\Calendar\CalendarView.cs" />
     <Compile Include="UI\Calendar\Fluent\MonthTemplateBuilder.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\DatePickerEventBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\IPicker.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\ListBuilderBase.cs" />
@@ -536,7 +537,6 @@
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializer.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerBuilderBase.cs" />
-    <Compile Include="UI\DatePickerBase\Fluent\DatePickerEventBuilderBase.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePicker.cs" />
     <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerBuilder.cs" />
     <Compile Include="UI\DropDownListBase\DropDownExtentions.cs" />
@@ -544,7 +544,6 @@
     <Compile Include="UI\DropDownList\DropDownList.cs" />
     <Compile Include="UI\DropDownListBase\Html\DropDownListHtmlBuilderBase.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBuilder.cs" />
-    <Compile Include="UI\DropDownListBase\Fluent\DropDownListEventBuilderBase.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListItemBuilder.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListItemFactory.cs" />
     <Compile Include="UI\Editor\Fluent\EditorCustomToolBuilder.cs" />

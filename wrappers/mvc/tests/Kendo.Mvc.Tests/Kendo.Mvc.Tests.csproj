@@ -91,6 +91,7 @@
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSelectionMousewheelSerializerTests.cs" />
+    <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesFactoryTests.cs" />
     <Compile Include="UI\Sparkline\SparklineBuilderTests.cs" />
@@ -347,7 +348,6 @@
     <Compile Include="UI\DatePicker\DatePickerBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerHtmlBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerTestHelper.cs" />
-    <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridActionCommandFactoryTests.cs" />
     <Compile Include="UI\Grid\GridBoundColumnTests.cs" />
     <Compile Include="UI\Grid\GridBuilderTests.cs" />
