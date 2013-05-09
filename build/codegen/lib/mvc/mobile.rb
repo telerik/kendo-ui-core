@@ -85,6 +85,23 @@ module CodeGen::MVC::Mobile
         }
         })
 
+        COMPONENT_REGISTER = ERB.new(%{
+        /// <summary>
+        /// Creates a <see cref="<%= csharp_class %>"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().<%= csharp_class %>()
+        ///             .Name("<%= csharp_class %>");
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual <%= csharp_class %>Builder <%= csharp_class %>()
+        {
+            return new <%= csharp_class %>Builder(new <%= csharp_class %>(ViewContext, Initializer, UrlGenerator));
+        }
+        })
+
         module Options
             def component_class
                 Component
@@ -247,11 +264,11 @@ module CodeGen::MVC::Mobile
             end
 
             def path
-                @name
+                name
             end
 
             def csharp_class
-                @name
+                name
             end
 
             def to_class(filename)
@@ -288,6 +305,10 @@ module CodeGen::MVC::Mobile
                 csharp = File.exists?(filename) ? File.read(filename) : EVENT.result(binding)
 
                 csharp = csharp.sub(/\/\/>> Handlers(.|\n)*\/\/<< Handlers/, FLUENT_EVENTS.result(binding))
+            end
+
+            def register(container)
+                container << COMPONENT_REGISTER.result(binding)
             end
         end
     end

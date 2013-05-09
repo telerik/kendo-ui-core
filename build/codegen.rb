@@ -60,6 +60,8 @@ namespace :generate do
                 components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Mobile::Wrappers::Component) }
                     .sort { |a, b| a.name <=> b.name }
 
+                component_register = ''
+
                 components.each do |component|
 
                     import_metadata(component)
@@ -68,7 +70,17 @@ namespace :generate do
 
                     generator.component(component)
 
+                    component.register(component_register)
                 end
+
+                factory_file = 'wrappers/mvc/src/Kendo.Mvc/UI/WidgetFactory.cs'
+
+                content = File.read(factory_file)
+
+                content = content.sub(/\/\/>> MobileComponents(.|\n)*\/\/<< MobileComponents/,
+                             "//>> MobileComponents #{component_register}//<< MobileComponents")
+
+                File.write(factory_file, content.dos)
             end
         end
 
