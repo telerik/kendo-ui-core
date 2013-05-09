@@ -115,6 +115,12 @@
                 equal(nFormat.percent.groupSizes, nFormat.percent.groupSize);
                 equal(nFormat.currency.groupSizes, nFormat.currency.groupSize);
             });
+
+            test("kendo.parseFloat return null if not valid number", function() {
+                var result = kendo.parseFloat("invalid");
+
+                equal(result, null);
+            });
         </script>
     </body>
 </html>

@@ -1502,7 +1502,9 @@ function pad(number, digits, end) {
                return null;
             }
 
-            return globalize.parseFloat(value, culture);
+            value = globalize.parseFloat(value, culture);
+
+            return isNaN(value) ? null : value;
         };
     }
 })();
