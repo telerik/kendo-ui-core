@@ -376,7 +376,7 @@
             {
                 border-color:#8bf;
                 background-color: #def;
-                cursor:move;
+               /* cursor:move;*/
             }
 
             .k-appointment:hover
@@ -393,12 +393,19 @@
     <body>
         <div id="scheduler" style="overflow: hidden" ></div>
     <script>
+        var start = new Date();
+        start.setHours(3);
+
+        var end = new Date(start);
+
+        end.setHours(end.getHours() + 3);
+
         $("#scheduler").kendoScheduler({
             height: 800,
             dataSource: {
                 data: [ {
-                    start: new Date(),
-                    end: new Date(),
+                    start: start,
+                    end: end,
                     title: "foo"
                 }]
             }

@@ -36,7 +36,15 @@ kendo_module({
                     '<li class="k-state-default k-view-#=view#" data-#=ns#name="#=view#"><a href="\\#" class="k-link">${views[view].title}</a></li>' +
                 '#}#'  +
             '</ul>' +
-        '</div>');
+            '</div>'),
+        DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment">' +
+                '<dl>' +
+                    '<dt>${formattedTime}</dt>' +
+                    '<dd>${title}</dd>' +
+                '</dl>' +
+                //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                //'<span class="k-icon k-resize-handle"></span>' +
+            '</div>');
 
     function getDate(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
@@ -215,7 +223,7 @@ kendo_module({
             this.dataSource.filter({
                 logic: "and",
                 filters: [
-                    { field: "start", operator: "gte", value: view.startDate },
+                    { field: "start", operator: "gte", value: view.startDate }
                     //{ field: "end", operator: "lte", value: view.endDate }
                 ]
             });
@@ -224,7 +232,6 @@ kendo_module({
         _dataSource: function() {
             var that = this,
                 options = that.options,
-                pageable,
                 dataSource = options.dataSource;
 
             dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
@@ -254,6 +261,7 @@ kendo_module({
            that._model.bind("change", function(e) {
                 if (e.field === "selectedDate") {
                     that._renderView(that.view().name);
+                    that.rebind();
                 }
            });
         },
@@ -314,6 +322,7 @@ kendo_module({
 
             toolbar.on("click" + NS, ".k-scheduler-views li", function(e) {
                 that.view($(this).attr(kendo.attr("name")));
+                e.preventDefault();
             });
         },
 
@@ -391,6 +400,7 @@ kendo_module({
         options: {
             name: "MultiDayView",
             headerDateFormat: "ddd M/dd",
+            eventTimeFormat: "{0:H:mm} - {1:H:mm}",
             timeFormat: "HH:mm",
             selectedDateFormat: "{0:D}",
             allDaySlot: true,
@@ -400,7 +410,8 @@ kendo_module({
             numberOfTimeSlots: 2,
             majorTick: 60,
             majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
-            minorTickTimeTemplate: "&nbsp;"
+            minorTickTimeTemplate: "&nbsp;",
+            eventTemplate: DAY_VIEW_EVENT_TEMPLATE
         },
 
         dateForTitle: function() {
@@ -618,7 +629,6 @@ kendo_module({
 
         _setContentHeight: function() {
             var that = this,
-                options = that.options,
                 toolbar = that.element.find(">.k-scheduler-toolbar"),
                 height = that.element.innerHeight(),
                 headerHeight = 0,
@@ -676,6 +686,8 @@ kendo_module({
         _render: function(dates) {
             dates = dates || [];
 
+            this._dates = dates;
+
             this.startDate = dates[0];
             this.endDate = dates[(dates.length - 1) || 0];
 
@@ -730,22 +742,69 @@ kendo_module({
             }
         },
 
+        _timeSlotIndex: function(date) {
+            var options = this.options,
+                eventStartTime = getMilliseconds(date),
+                startTime = getMilliseconds(options.startTime),
+                timeSlotInterval = ((options.majorTick/options.numberOfTimeSlots) * MS_PER_MINUTE);
+
+            return (eventStartTime - startTime) / (timeSlotInterval);
+        },
+
+        _dateSlotIndex: function(date) {
+            var idx,
+                length,
+                slots = this._dates || [],
+                startTime = getMilliseconds(new Date(+this.options.startTime)),
+                endTime = getMilliseconds(new Date(+this.options.endTime)),
+                slotStart,
+                slotEnd;
+
+            if (startTime >= endTime) {
+                endTime += MS_PER_DAY;
+            }
+
+            for (idx = 0, length = slots.length; idx < length; idx++) {
+                slotStart = new Date(+slots[idx]);
+                setTime(slotStart, startTime);
+                slotEnd = new Date(+slots[idx]);
+                setTime(slotEnd, endTime);
+
+                if (date.getTime() >= slotStart.getTime() && date.getTime() <= slotEnd.getTime()) {
+                    return idx;
+                }
+            }
+            return -1;
+        },
+
         dataBind: function(events) {
-            var template = '<div class="k-appointment">' +
-                '<dl>' +
-                    '<dt><span class="k-icon k-i-refresh"></span>11:30 - 12:30</dt>' +
-                    '<dd>${title}</dd>' +
-                '</dl>' +
-                //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
-                //'<span class="k-icon k-resize-handle"></span>' +
-            '</div>';
-            var eventTemplate = kendo.template(template);
+            var eventTemplate = kendo.template(this.options.eventTemplate),
+                timeSlots = this.content.find("tr"),
+                slotHeight = Math.floor(this.content.find(">table:first").height() / timeSlots.length),
+                eventRightOffset = 30;
 
             if (events.length) {
-                var event = events[0];
+                var event = events[0],
+                    startIndex = this._timeSlotIndex(event.start),
+                    endIndex = Math.ceil(this._timeSlotIndex(event.end)),
+                    timeSlot = timeSlots.eq(Math.floor(startIndex)),
+                    dateSlotIndex = this._dateSlotIndex(event.start),
+                    dateSlot;
 
-                $(eventTemplate(event))
-                    .appendTo(this.content);
+                if (dateSlotIndex > -1) {
+                    dateSlot = timeSlot.children().eq(dateSlotIndex);
+
+                    $(eventTemplate(extend({}, { formattedTime: kendo.format(this.options.eventTimeFormat, event.start, event.end) }, event)))
+                        .appendTo(this.content)
+                        .offset({
+                            top: timeSlot.offset().top,
+                            left: dateSlot.offset().left,
+                        })
+                        .css({
+                            height: slotHeight * (Math.round(endIndex - startIndex) || 1),
+                            width: dateSlot.width() - eventRightOffset
+                        });
+                }
             }
         }
     });
@@ -769,7 +828,6 @@ kendo_module({
             name: "week",
             render: function(selectedDate) {
                 var start = new Date(selectedDate),
-                    end,
                     weekDay = selectedDate.getDay(),
                     dates = [],
                     idx, length;
