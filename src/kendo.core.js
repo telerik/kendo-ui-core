@@ -1955,10 +1955,12 @@ function pad(number, digits, end) {
     }
 
     function fx(element) {
-        return new kendo.fx.Element(element);
+        return new kendo.effects.Element(element);
     }
 
-    $.extend(fx, {
+    var effects = {};
+
+    $.extend(effects, {
         Element: function(element) {
             this.element = $(element);
         },
@@ -2047,7 +2049,7 @@ function pad(number, digits, end) {
         for (; idx < length; idx ++) {
             instance = $(element[idx]);
             instance.queue(function() {
-                fx.promise(instance, prepareAnimationOptions(options, duration, reverse, complete));
+                effects.promise(instance, prepareAnimationOptions(options, duration, reverse, complete));
             });
         }
 
@@ -2055,7 +2057,7 @@ function pad(number, digits, end) {
     }
 
     function animateTo(element, destination, options, duration, reverse, complete) {
-        return fx.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
+        return effects.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
     }
 
     function toggleClass(element, classes, options, add) {
@@ -2190,6 +2192,7 @@ function pad(number, digits, end) {
     extend(kendo, {
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
+        effects: kendo.effects || effects,
         mobile: kendo.mobile || {},
         data: kendo.data || {},
         dataviz: kendo.dataviz || {ui: { roles: {}}},

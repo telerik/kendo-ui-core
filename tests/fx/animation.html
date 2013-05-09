@@ -89,14 +89,14 @@
             asyncTest("animate waits all effects to finish", function() {
                 var fooFinished = false, barFinished = false;
 
-                kendo.fx.createEffect("foo", {
+                kendo.effects.createEffect("foo", {
                     prepare: function() {
                         fooFinished = true;
                         return { start: {}, end: {} };
                     }
                 });
 
-                kendo.fx.createEffect("bar", {
+                kendo.effects.createEffect("bar", {
                    prepare: function() {
                         barFinished = true;
                         return { start: {}, end: {} };
@@ -113,7 +113,7 @@
             asyncTest("animations play in sequence", function() {
                 var firstAnimationFinished = false;
 
-                kendo.fx.createEffect("foo", {
+                kendo.effects.createEffect("foo", {
                    prepare: function() {
                         return { start: {}, end: {} };
                     }
@@ -132,7 +132,7 @@
             test("reverse method of the effect is called if reverse = true", 1, function() {
                 var reverseWasCalled = false;
 
-                kendo.fx.createEffect("foo", {
+                kendo.effects.createEffect("foo", {
                    prepare: function() {
                         equal(this._reverse, true);
                         return { start: {}, end: {} };
@@ -145,7 +145,7 @@
             asyncTest("passing options to animate works", 2, function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
-                kendo.fx.createEffect("foo", {
+                kendo.effects.createEffect("foo", {
                    prepare: function() {
                        equal(this._reverse, true);
                         return { start: {}, end: {} };
@@ -165,7 +165,7 @@
             asyncTest("passing options to animate effects as string", 2, function() {
                 var reverseWasCalled = false, callbackWasCalled = false;
 
-                kendo.fx.createEffect("foo", {
+                kendo.effects.createEffect("foo", {
                    prepare: function() {
                         equal(this._reverse, true);
                         return { start: {}, end: {} };
@@ -186,7 +186,7 @@
             asyncTest("make sure css, setup, teardown and restore are called in sequence", 2, function() {
                 span.css("overflow", "visible");
 
-                kendo.fx.createEffect("foo", {
+                kendo.effects.createEffect("foo", {
                     restore: [ "overflow" ],
 
                    prepare: function() {
@@ -206,7 +206,7 @@
             asyncTest("callback is fired asynchronously after animate", 1, function() {
                 var called = false;
 
-                kendo.fx.createEffect("moo", {
+                kendo.effects.createEffect("moo", {
                    prepare: function() {
                         return { end: { translateX: "10px" } };
                     }
@@ -231,7 +231,7 @@
                 asyncTest("Passing properties to the effect overrides the end state", 2, function() {
                     var height = -1;
 
-                    kendo.fx.createEffect("foo", {
+                    kendo.effects.createEffect("foo", {
                        prepare: function(start, end) {
                             start.height = 0;
                             start.display = "block";
@@ -259,7 +259,7 @@
                 asyncTest("animating height from 0 to 100 results in 100px high element", 2, function() {
                     var height = -1;
 
-                    kendo.fx.createEffect("foo", {
+                    kendo.effects.createEffect("foo", {
                        prepare: function(start, end) {
                             start.height = 0;
                             start.display = "block";
@@ -305,7 +305,7 @@
 
                     var opacity = 5;
 
-                    kendo.fx.effects.Fade.prototype.restore = [];
+                    kendo.effects.Fade.prototype.restore = [];
 
                     span.kendoAnimate({
                         effects: "fadeOut",
@@ -419,7 +419,7 @@
             module("animationFrame Animation", {});
 
             asyncTest("executes callbacks", 1, function() {
-                var animation = kendo.fx.Animation.extend({
+                var animation = kendo.effects.Animation.extend({
                     counter: 0,
                     tick: function() {
                         this.counter ++;
@@ -439,7 +439,7 @@
             });
 
             asyncTest("is cancellable", 1, function() {
-                var animation = kendo.fx.Animation.extend({
+                var animation = kendo.effects.Animation.extend({
                     counter: 0,
                     tick: function() {
                         this.counter ++;

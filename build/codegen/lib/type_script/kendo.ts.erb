@@ -91,6 +91,11 @@ module kendo {
     declare function destroy(element: Element): void;
     declare function destroy(element: JQuery): void;
     declare function format(format: string, ...values: any[]): string;
+
+    declare function fx(selector: string): _fx.Element;
+    declare function fx(element: Element): _fx.Element;
+    declare function fx(element: JQuery): _fx.Element;
+
     declare function htmlEncode(value: string): string;
     declare function init(selector: string, ...namespaces: any[]): void;
     declare function init(element: JQuery, ...namespaces: any[]): void;
@@ -212,6 +217,29 @@ module kendo {
         destroy(): void;
         route(route: string, callback: Function): void;
         navigate(location: string, silent?: bool);
+    }
+
+}
+
+module kendo._fx {
+    interface Element {
+        expand(direction: string): effects.Expand;
+        expandHorizontal(): effects.Expand;
+        expandVertical(): effects.Expand;
+    }
+}
+
+module kendo._fx.effects {
+    interface Effect {
+        play(): JQueryPromise;
+        reverse(): JQueryPromise;
+    }
+
+    interface Expand extends Effect {
+        duration(value: number): Expand;
+        direction(value: string): Expand;
+        stop(): Expand;
+        add(effect: Effect): Expand;
     }
 }
 
@@ -812,6 +840,9 @@ interface JQueryXHR {
 }
 
 interface JQueryEventObject {
+}
+
+interface JQueryPromise {
 }
 
 interface JQuery {
