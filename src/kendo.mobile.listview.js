@@ -479,14 +479,17 @@ kendo_module({
 
         _fixHeaders: function() {
             var that = this,
-                scroller = that._scroller();
+                scroller = that._scroller(),
+                cacheHeadersProxy = function() {
+                    that._cacheHeaders();
+                };
 
             that._shouldFixHeaders();
 
+            that.container().bind("show", cacheHeadersProxy);
+
             if (scroller) {
-                kendo.onResize(function(){
-                    that._cacheHeaders();
-                });
+                kendo.onResize(cacheHeadersProxy);
 
                 scroller.bind("scroll", function(e) {
                     that._fixHeader(e);
