@@ -726,41 +726,41 @@ kendo_module({
                 pressed;
 
             if (key === keys.UP || down) {
-                firstChild = ul.firstChild;
-
-                if (!firstChild) {
-                    that.dataSource.one(CHANGE, function() { that._move(e); });
-                    that._filterSource();
-                    e.preventDefault();
-                    return true; //pressed
-                }
-
                 if (e.altKey) {
                     that.toggle(down);
-                } else if (down) {
-                    if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === firstChild)) {
-                        current = firstChild;
+                } else {
+                    firstChild = ul.firstChild;
+                    if (!firstChild && !that._accessor() && that._state !== "filter") {
+                        that.dataSource.one(CHANGE, function() { that._move(e); });
+                        that._filterSource();
+                        e.preventDefault();
+                        return true; //pressed
+                    }
+
+                    if (down) {
+                        if (!current || (that.selectedIndex === -1 && !that.value() && current[0] === firstChild)) {
+                            current = firstChild;
+                        } else {
+                            current = current[0].nextSibling;
+                            if (!current && firstChild === ul.lastChild) {
+                                current = firstChild;
+                            }
+                        }
+
+                        that[methodName](current);
                     } else {
-                        current = current[0].nextSibling;
+                        current = current ? current[0].previousSibling : ul.lastChild;
                         if (!current && firstChild === ul.lastChild) {
                             current = firstChild;
                         }
-                    }
 
-                    that[methodName](current);
-                } else {
-                    current = current ? current[0].previousSibling : ul.lastChild;
-                    if (!current && firstChild === ul.lastChild) {
-                        current = firstChild;
+                        that[methodName](current);
                     }
-
-                    that[methodName](current);
                 }
 
                 e.preventDefault();
                 pressed = true;
             } else if (key === keys.ENTER || key === keys.TAB) {
-
                 if (that.popup.visible()) {
                     e.preventDefault();
                 }
