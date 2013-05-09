@@ -87,6 +87,9 @@ kendo_module({
 
             that._resizeHandler = function() {
                 that.trigger(RESIZE);
+
+                that._detachEvents();
+                that._attachEvents();
             };
 
             that._attachEvents();
@@ -650,10 +653,7 @@ kendo_module({
                     nextPaneConfig.size = nextPaneNewSize + "px";
                 }
 
-                owner.trigger(RESIZE);
-
-                owner._detachEvents();
-                owner._attachEvents();
+                owner._resizeHandler();
             }
 
             return false;
