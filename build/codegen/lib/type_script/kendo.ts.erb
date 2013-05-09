@@ -92,9 +92,9 @@ module kendo {
     declare function destroy(element: JQuery): void;
     declare function format(format: string, ...values: any[]): string;
 
-    declare function fx(selector: string): _fx.Element;
-    declare function fx(element: Element): _fx.Element;
-    declare function fx(element: JQuery): _fx.Element;
+    declare function fx(selector: string): effects.Element;
+    declare function fx(element: Element): effects.Element;
+    declare function fx(element: JQuery): effects.Element;
 
     declare function htmlEncode(value: string): string;
     declare function init(selector: string, ...namespaces: any[]): void;
@@ -221,18 +221,42 @@ module kendo {
 
 }
 
-module kendo._fx {
+module kendo.effects {
     interface Element {
         expand(direction: string): effects.Expand;
         expandHorizontal(): effects.Expand;
         expandVertical(): effects.Expand;
+        fade(direction: string): effects.Fade;
+        fadeIn(): effects.Fade;
+        fadeOut(): effects.Fade;
+        flip(axis: string, face: JQuery, back: JQuery): effects.Flip;
+        flipHorizontal(face: JQuery, back: JQuery): effects.Flip;
+        flipVertical(face: JQuery, back: JQuery): effects.Flip;
+        pageturn(axis: string, face: JQuery, back: JQuery): effects.PageTurn;
+        pageturnHorizontal(face: JQuery, back: JQuery): effects.PageTurn;
+        pageturnVertical(face: JQuery, back: JQuery): effects.PageTurn;
+        slideIn(direction: string): effects.SlideIn;
+        slideInDown(): effects.SlideIn;
+        slideInLeft(): effects.SlideIn;
+        slideInRight(): effects.SlideIn;
+        slideInUp(): effects.SlideIn;
+        tile(direction: string, previous: JQuery): effects.Tile;
+        tileDown(previous: JQuery): effects.Tile;
+        tileLeft(previous: JQuery): effects.Tile;
+        tileRight(previous: JQuery): effects.Tile;
+        tileUp(previous: JQuery): effects.Tile;
+        transfer(target: JQuery): effects.Transfer;
+        zoom(direction: string): effects.Zoom;
+        zoomIn(): effects.Zoom;
+        zoomOut(): effects.Zoom;
     }
-}
 
-module kendo._fx.effects {
     interface Effect {
         play(): JQueryPromise;
         reverse(): JQueryPromise;
+        duration(value: number): Effect;
+        add(effect: Effect): Effect;
+        stop(): Effect;
     }
 
     interface Expand extends Effect {
@@ -240,6 +264,58 @@ module kendo._fx.effects {
         direction(value: string): Expand;
         stop(): Expand;
         add(effect: Effect): Expand;
+    }
+
+    interface Fade extends Effect {
+        duration(value: number): Fade;
+        direction(value: string): Fade;
+        stop(): Fade;
+        add(effect: Effect): Fade;
+        startValue(value: number): Fade;
+        endValue(value: number): Fade;
+    }
+
+    interface Flip extends Effect {
+        duration(value: number): Flip;
+        direction(value: string): Flip;
+        stop(): Flip;
+        add(effect: Effect): Flip;
+    }
+
+    interface PageTurn extends Effect {
+        duration(value: number): PageTurn;
+        direction(value: string): PageTurn;
+        stop(): PageTurn;
+        add(effect: Effect): PageTurn;
+    }
+
+    interface SlideIn extends Effect {
+        duration(value: number): SlideIn;
+        direction(value: string): SlideIn;
+        stop(): SlideIn;
+        add(effect: Effect): SlideIn;
+    }
+
+    interface Tile extends Effect {
+        duration(value: number): Tile;
+        direction(value: string): Tile;
+        stop(): Tile;
+        add(effect: Effect): Tile;
+    }
+
+    interface Transfer extends Effect {
+        duration(value: number): Transfer;
+        stop(): Transfer;
+        add(effect: Effect): Transfer;
+    }
+
+    interface Zoom extends Effect {
+        duration(value: number): Zoom;
+        direction(value: string): Zoom;
+        stop(): Zoom;
+        add(effect: Effect): Zoom;
+        startValue(value: number): Zoom;
+        endValue(value: number): Zoom;
     }
 }
 
