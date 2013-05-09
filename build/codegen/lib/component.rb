@@ -32,6 +32,15 @@ module CodeGen
             Method
         end
 
+        def api_link
+            directory = 'web';
+
+            directory = 'framework' if @full_name.start_with?('kendo.data.')
+            directory = 'dataviz' if @full_name.start_with?('kendo.dataviz')
+
+            "/api/#{directory}/#{name.downcase}"
+        end
+
         def widget?
             @full_name.include?('.ui.')
         end
