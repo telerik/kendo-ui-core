@@ -55,7 +55,7 @@ publish: true
 
 COMPONENT_DESCRIPTION = ERB.new(%{
 # \\<kendo:<%= tag_name %>\\>
-A JSP tag representing Kendo <%= name %>.
+A JSP wrapper for Kendo UI [<%= name %>](<%= api_link %>).
 })
 
 CONFIGURATION = ERB.new(%{

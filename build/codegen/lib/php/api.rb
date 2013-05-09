@@ -91,7 +91,7 @@ publish: true
 COMPONENT_DESCRIPTION = ERB.new(%{
 # <%= php_type %>
 
-A PHP class representing Kendo [<%= name %>](<%= api_link %>).
+A PHP wrapper for Kendo UI [<%= name %>](<%= api_link %>).
 <% if widget? %>
 Inherits from [\\Kendo\\UI\\Widget\](/api/wrappers/php/Kendo/UI/Widget).
 
@@ -122,15 +122,6 @@ METHODS = ERB.new(%{
 })
     class Component < CodeGen::PHP::Component
         include Options
-
-        def api_link
-            directory = 'web';
-
-            directory = 'framework' if @full_name.start_with?('kendo.data.')
-            directory = 'dataviz' if path.start_with?('kendo.dataviz')
-
-            "/api/#{directory}/#{name.downcase}"
-        end
 
         def value
             "new #{php_type}()" unless widget?
