@@ -250,8 +250,7 @@ kendo_module({
 
             that.inner = element.children().first();
             that.pages = [];
-            that.itemCount = 0;
-            that._endReached = false;
+            that._forRefresh = null;
 
             that.inner.css("height", that.options.contentHeight);
 
@@ -314,15 +313,16 @@ kendo_module({
             if(that.options.batchSize > 1) {
                 that.batchBuffer = new BatchBuffer(that.options.dataSource, that.options.batchSize);
             } else {
-                that.batchBuffer = new kendo.data.Buffer(that.options.dataSource, that.itemCount);
+                that.batchBuffer = new kendo.data.Buffer(that.options.dataSource);
             }
 
             that.batchBuffer.bind({
-                "endreached": proxy(that._onEndReached, that),
+                "resize": proxy(that._onResize, that),
                 "reset": proxy(that._onReset, that)
             });
 
             that._initPages();
+            that.options.dataSource.fetch();
         },
 
         options: {
@@ -347,9 +347,9 @@ kendo_module({
                 pages[i].element.width(width);
             }
 
-            pages[0].first();
-            pages[1].center();
-            pages[2].last();
+            pages[0].position(-1);
+            pages[1].position(0);
+            pages[2].position(1);
 
             that.width = width;
             that.dimension.update(true);
@@ -362,22 +362,24 @@ kendo_module({
                 inner = that.inner,
                 page;
 
-            page = new Page(inner);
-            page.content(that.emptyTemplate({}));
-            page.first();
-            pages.push(page);
-
-            page = new Page(inner);
-            that.setPageContent(page, that.itemCount ++);
-            page.center();
-            pages.push(page);
-
-            page = new Page(inner);
-            that.setPageContent(page, that.itemCount ++);
-            page.last();
-            pages.push(page);
+            for (var i = 0; i < 3; i++) { //widget works with 3 pages
+                page = new Page(inner);
+                pages.push(page);
+            }
 
             that.dimension.update(true);
+        },
+
+        _resetPages: function () {
+            var that = this,
+                pages = that.pages;
+
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].position(i-1);
+                that.setPageContent(pages[i], i-1);
+            }
+            
+            that.itemCount = pages.length - 1;
         },
 
         _moveTo: function (location, ease, instant) {
@@ -405,7 +407,10 @@ kendo_module({
                 velocity = e.x.velocity,
                 width = that.width,
                 velocityThreshold = that.options.velocityThreshold,
-                ease = Transition.easeOutExpo;
+                ease = Transition.easeOutExpo,
+                isEndReached = that.itemCount > that.batchBuffer.total;
+
+            console.log(isEndReached);
 
             if (velocity > velocityThreshold) {
                 if(that.itemCount === 2) {
@@ -414,12 +419,12 @@ kendo_module({
                 }
                 that.backward();
                 return;
-            } else if(velocity < -velocityThreshold && !that._endReached) {
+            } else if(velocity < -velocityThreshold && !isEndReached) {
                 that.forward();
                 return;
             }
 
-            if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3 && !that._endReached)) {
+            if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3 && !isEndReached)) {
                 that.forward();
                 return;
             } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
@@ -452,29 +457,37 @@ kendo_module({
                 that.setPageContent(pages[0], that.itemCount - 3);
             }
 
-            pages[0].first();
-            pages[1].center();
-            pages[2].last();
+            pages[0].position(-1);
+            pages[1].position(0);
+            pages[2].position(1);
 
             that._resetMovable();
         },
 
-        _onEndReached: function (e) {
-            console.log("end reached");
-            this._endReached = true;
+        _onResize: function (e) {
+            console.log("resize");
         },
 
         _onReset: function (e) {
-            console.log("reset");   
+            this._resetPages();
         },
 
         setPageContent: function (page, index) {
             var batchBuffer = this.batchBuffer,
                 template = this.template,
-                emptyTemplate = this.emptyTemplate;
+                emptyTemplate = this.emptyTemplate,
+                view;
 
             if(index >= 0) {
-                page.content(template(batchBuffer.at(index)));
+                view = batchBuffer.at(index);
+                console.log(view);
+                if(view) {
+                    page.content(template(view));
+                } else {
+                    console.log("data is not available");
+                    this._forRefresh = { page: page, index: index };
+                    // batchBuffer.trigger("endreached", { index: index, page: page });
+                }
             } else {
                 page.content(emptyTemplate({}));
             }
@@ -494,15 +507,9 @@ kendo_module({
         content: function (theContent) {
             this.element.html(theContent);
         },
-        center: function () {
-            this.element.css("transform", "translate3d(0, 0, 0)");
-        },
-        first: function () {
-            this.element.css("transform", "translate3d(-" + this.width + "px, 0, 0)");
-        },
-        last: function () {
-            this.element.css("transform", "translate3d(" + this.width + "px, 0, 0)"); 
-        }
+        position: function (index) { //index can be -1, 0, 1
+            this.element.css("transform", "translate3d(" + this.width * index + "px, 0, 0)");
+        } 
     });
 
     var BatchBuffer = kendo.Observable.extend({
@@ -513,31 +520,53 @@ kendo_module({
 
             this.dataSource = dataSource;
             this.batchSize = batchSize;
-            this.buffer = new kendo.data.Buffer(dataSource, batchSize*2);
+            this.total = 0;
+            this.buffer = new kendo.data.Buffer(dataSource, batchSize * 3);
 
             this.buffer.bind({
                 "endreached": function (e) {
+                    console.log("BatchBuffer: endreached");
                     batchBuffer.trigger("endreached", { index: e.index });
                 },
                 "prefetching": function (e) {
+                    console.log("prefetching");
                     batchBuffer.trigger("prefetching", { skip: e.skip, take: e.take });
                 },
                 "prefetched": function (e) {
+                    console.log("prefetched");
                     batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
                 },
                 "reset": function (e) {
+                    console.log("reset");
+                    batchBuffer.total = 0;
                     batchBuffer.trigger("reset");
+                },
+                "resize": function (e) {
+                    batchBuffer.total = this.length / batchBuffer.batchSize;
+                    batchBuffer.trigger("resize", { total: batchBuffer.total, offset: this.offset });
                 }
             });
+
         },
         at: function (index) {
             var buffer = this.buffer,
                 skip = index * this.batchSize,
                 take = this.batchSize,
-                view = [];
+                view = [],
+                item;
+
+            if (buffer.offset > skip) {
+                buffer.at(buffer.offset - 1);
+            }
 
             for (var i = 0; i < take; i++) {
-                view.push(buffer.at(skip + i));
+                item = buffer.at(skip + i);
+
+                if (item === undefined) {
+                    return;
+                }
+
+                view.push(item);
             }
 
             return view;

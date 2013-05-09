@@ -41,27 +41,32 @@
         }
 
         .tile {
-            height: 50px;
             padding: 10px 0;
-            line-height: 50px;
             text-align: center;
-            font-size: 3em;
             border: 1px solid yellow;
         }
+
+
     </style>
 </head>
 <body>
     <div id="home" data-role="view" data-init="onInit">
         <div id="virtual"></div>
     </div>
-
+    <!--
     <script type="text/x-kendo-template" id="item-template">
-        <div class="tile">#= data[0].foo #</div>
-        <div class="tile">#= data[1].foo #</div>
-        <div class="tile">#= data[2].foo #</div>
-        <div class="tile">#= data[3].foo #</div>
-        <div class="tile">#= data[4].foo #</div>
-        <div class="tile">#= data[5].foo #</div>
+        <div class="tile">#= data[0] #</div>
+        <div class="tile">#= data[1] #</div>
+        <div class="tile">#= data[2] #</div>
+        <div class="tile">#= data[3] #</div>
+    </script>
+    -->
+    
+    <script type="text/x-kendo-template" id="item-template">
+        <div data-uid="#: data[0].uid #" class="tile"><p>#: data[0].data.title #</p><img src="#= data[0].data.thumbnail #" /></div>
+        <div data-uid="#: data[1].uid #" class="tile"><p>#: data[1].data.title #</p><img src="#= data[1].data.thumbnail #" /></div>
+        <div data-uid="#: data[2].uid #" class="tile"><p>#: data[2].data.title #</p><img src="#= data[2].data.thumbnail #" /></div>
+        <div data-uid="#: data[3].uid #" class="tile"><p>#: data[3].data.title #</p><img src="#= data[3].data.thumbnail #" /></div>
     </script>
 
     <script type="text/x-kendo-template" id="empty-template">
@@ -71,15 +76,35 @@
     <script>
         var app,
             virtualScrollView,
-            PAGE_SIZE = 10,
+            PAGE_SIZE = 24,
             imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
             imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
             imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
             imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
+            /*
             ds = new kendo.data.DataSource({
-                /*transport: {
+                transport: {
+                    read: function(options) {
+
+                        var results = [], data = options.data;
+                        for (var i = data.skip; i < data.skip + data.take; i ++) {
+                            results.push(i);
+                        }
+
+                        options.success(results);
+                    }
+                },
+                serverPaging: true,
+                pageSize: PAGE_SIZE,
+                schema: {
+                    total: function() { return 100000; }
+                }
+            });
+            */
+            ds = new kendo.data.DataSource({
+                transport: {
                     read: {
-                        url: 'http://www.reddit.com/r/pics/.json',
+                        url: 'http://www.reddit.com/r/aww.json',
                         dataType: 'jsonp',
                         jsonp: 'jsonp',
                         cache: true,
@@ -100,9 +125,9 @@
                 schema: {
                     data: "data.children",
                     total: function() { return 100000; }
-                }*/
-                data: generateData(100)
+                }
             });
+            
 
         ds.fetch(function() {
             app = new kendo.mobile.Application();
@@ -112,7 +137,7 @@
             virtualScrollView = $("#virtual").kendoMobileVirtualScrollView({
                 contentHeight: e.view.content.height(),
                 dataSource: ds,
-                batchSize: 6,
+                batchSize: 4,
                 template: kendo.template($("#item-template").html()),
                 emptyTemplate: kendo.template($("#empty-template").html())
             }).data("kendoMobileVirtualScrollView");
