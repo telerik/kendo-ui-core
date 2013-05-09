@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet/less" href="../../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../../src/jquery.min.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.binder.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.router.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.scrollview.js"></script>
+        <script src="../../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../../src/kendo.mobile.listview.js"></script>
+        <script src="../../../src/kendo.mobile.switch.js"></script>
+        <script src="../../../src/kendo.mobile.button.js"></script>
+        <script src="../../../src/kendo.mobile.navbar.js"></script>
+    </head>
+    <body>
+        <div id="Div1" data-role="view" data-title="Foo">
+            Foo
+        </div>
+
+        <div data-role="layout" data-id="default">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-align="left" data-role="backbutton">Back</a>
+                    <a data-click="al" data-role="button">Alert</a>
+                    <span data-role="view-title"></span>
+                    <a href="foo.html" data-align="right" data-role="button">Foo</a>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function al() {
+                alert(1);
+            }
+
+            var mobileApp = new kendo.mobile.Application($(document.body), { layout: "default" });
+        </script>
+    </body>
+</html>
