@@ -15,7 +15,7 @@ function getTransform(element) {
 }
 
 test("Creating effects registers API constructor", 1, function() {
-    kendo.fx.createEffect("foo", {
+    kendo.effects.createEffect("foo", {
 
     });
 
@@ -25,7 +25,7 @@ test("Creating effects registers API constructor", 1, function() {
 });
 
 test("Creating effects registers API constructor", 2, function() {
-    kendo.fx.createEffect("foo", {
+    kendo.effects.createEffect("foo", {
         directions: ["left", "right"]
     });
 

@@ -7,13 +7,8 @@ kendo_module({
 });
 
 (function($, undefined) {
-    /**
-     * @name kendo.fx
-     * @namespace This object contains the fx library that is used by all widgets using animation.
-     * If this file is not included, all animations will be disabled but the basic functionality preserved.
-     */
     var kendo = window.kendo,
-        fx = kendo.fx,
+        fx = kendo.effects,
         each = $.each,
         extend = $.extend,
         proxy = $.proxy,
@@ -34,7 +29,6 @@ kendo_module({
         transform2d = ["rotate", "scale", "scalex", "scaley", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "matrix"],
         transform2units = { "rotate": "deg", scale: "", skew: "px", translate: "px" },
         cssPrefix = transforms.css,
-        Effects = {},
         round = Math.round,
         BLANK = "",
         PX = "px",
@@ -112,7 +106,7 @@ kendo_module({
     extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {
             if (transitions) {
-                return kendo.fx.stopQueue(this, clearQueue || false, gotoEnd || false);
+                return fx.stopQueue(this, clearQueue || false, gotoEnd || false);
             } else {
                 return this.stop(clearQueue, gotoEnd);
             }
@@ -295,7 +289,7 @@ kendo_module({
     }
 
     if (transitions) {
-        extend(kendo.fx, {
+        extend(fx, {
             transition: function(element, properties, options) {
                 var css,
                     delay = 0,
@@ -503,7 +497,7 @@ kendo_module({
             }
 
             element.data("targetTransform", end);
-            kendo.fx.animate(element, end, extend({}, options, { complete: deferred.resolve }));
+            fx.animate(element, end, extend({}, options, { complete: deferred.resolve }));
 
             return deferred.promise();
         },
@@ -570,7 +564,7 @@ kendo_module({
         }
     });
 
-    kendo.fx.promise = function(element, options) {
+    fx.promise = function(element, options) {
         var effects = [],
             effectClass,
             effectSet = new EffectSet(element, options),
@@ -580,7 +574,7 @@ kendo_module({
         options.effects = parsedEffects;
 
         for (var effectName in parsedEffects) {
-            effectClass = Effects[effectName];
+            effectClass = fx[capitalize(effectName)];
 
             if (effectClass) {
                 effect = new effectClass(element, parsedEffects[effectName].direction);
@@ -604,12 +598,12 @@ kendo_module({
         }
     };
 
-    kendo.fx.transitionPromise = function(element, destination, options) {
-        kendo.fx.animateTo(element, destination, options);
+    fx.transitionPromise = function(element, destination, options) {
+        fx.animateTo(element, destination, options);
         return element;
     };
 
-    extend(kendo.fx, {
+    extend(fx, {
         animate: function(elements, properties, options) {
             var useTransition = options.transition !== false;
             delete options.transition;
@@ -851,7 +845,7 @@ kendo_module({
             that.setup();
 
             element.data("targetTransform", end);
-            kendo.fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
+            fx.animate(element, end, { duration: that._duration, complete: deferred.resolve });
 
             return deferred.promise();
         },
@@ -921,19 +915,15 @@ kendo_module({
         }
     });
 
-    function toUpperCase(letter) {
-        return letter.toUpperCase();
-    }
-
     function capitalize(word) {
-        return word.replace(/^./, toUpperCase);
+        return word.charAt(0).toUpperCase() + word.substring(1);
     }
 
     function createEffect(name, definition) {
         var effectClass = Effect.extend(definition),
             directions = effectClass.prototype.directions;
 
-        Effects[name] = effectClass;
+        fx[capitalize(name)] = effectClass;
 
         fx.Element.prototype[name] = function(direction, opt1, opt2, opt3) {
             return new effectClass(this.element, direction, opt1, opt2, opt3);
@@ -991,10 +981,10 @@ kendo_module({
                 previous = that.options.previous,
                 dir = that._direction;
 
-            var children = [ fx(that.element).slideIn(dir).setReverse(reverse) ];
+            var children = [ kendo.fx(that.element).slideIn(dir).setReverse(reverse) ];
 
             if (previous) {
-                children.push( fx(previous).slideIn(directions[dir].reverse).setReverse(!reverse) );
+                children.push( kendo.fx(previous).slideIn(directions[dir].reverse).setReverse(!reverse) );
             }
 
             return children;
@@ -1338,10 +1328,10 @@ kendo_module({
             }
 
             return [
-                fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
-                fx(options.back).staticPage(reverseDirection, element).setReverse(reverse),
-                fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary(true).setReverse(reverse),
-                fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary(true).setReverse(reverse)
+                kendo.fx(options.face).staticPage(direction, element).face(true).setReverse(reverse),
+                kendo.fx(options.back).staticPage(reverseDirection, element).setReverse(reverse),
+                kendo.fx(faceClone).turningPage(direction, element).face(true).clipInHalf(true).temporary(true).setReverse(reverse),
+                kendo.fx(backClone).turningPage(reverseDirection, element).clipInHalf(true).temporary(true).setReverse(reverse)
             ];
         },
 
@@ -1381,8 +1371,8 @@ kendo_module({
             }
 
             return [
-                fx(options.face).turningPage(direction, element).face(true).setReverse(reverse),
-                fx(options.back).turningPage(reverseDirection, element).setReverse(reverse)
+                kendo.fx(options.face).turningPage(direction, element).face(true).setReverse(reverse),
+                kendo.fx(options.back).turningPage(reverseDirection, element).setReverse(reverse)
             ];
         },
 
@@ -1491,5 +1481,4 @@ kendo_module({
     fx.Animation = Animation;
     fx.Transition = Transition;
     fx.createEffect = createEffect;
-    fx.Effects = Effects;
 })(window.kendo.jQuery);
