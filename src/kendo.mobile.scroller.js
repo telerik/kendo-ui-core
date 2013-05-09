@@ -9,7 +9,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
-        fx = kendo.fx,
+        fx = kendo.effects,
         ui = mobile.ui,
         proxy = $.proxy,
         extend = $.extend,
