@@ -115,10 +115,16 @@ kendo_module({
         },
 
         createDialog: function (content, editor, options) {
-            return $(content)
+            var dialog = $(content)
                 .appendTo(document.body)
                 .kendoWindow(options)
                 .closest(".k-window").toggleClass("k-rtl", kendo.support.isRtl(editor.wrapper)).end();
+
+            dialog.data("kendoWindow").bind("open", function(){
+                editor.toolbar._remainVisible = true;
+            });
+
+            return dialog;
         }
     };
 
@@ -191,13 +197,14 @@ kendo_module({
                         "<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-columns'></span></button>")
                     .kendoWindow({
                         title: false,
+                        resizable: false,
                         draggable: {
                             dragHandle: ".k-editortoolbar-dragHandle"
                         },
                         visible: false,
                         autoFocus: false,
                         actions: []
-                    }).find(".k-editortoolbar-pin").click(function(){
+                    }).find(".k-editortoolbar-pin").on("mousedown", function(e){
                         var btn = $(this),
                             btnIcon = btn.children("span"),
                             wnd = btn.closest(".editorToolbarWindow").data("kendoWindow");
@@ -208,7 +215,13 @@ kendo_module({
                             wnd.unpin();
                             btnIcon.removeClass("k-i-unpin").addClass("k-i-pin");
                         }
+                        e.preventDefault();
                     }).end()
+                    .on("mousedown", function(e){
+                        if (!$(e.target).is(".k-icon")) {
+                            e.preventDefault();
+                        }
+                    })
                     .data("kendoWindow");
             }
 
@@ -292,18 +305,26 @@ kendo_module({
 
         show: function() {
             var that = this,
-                wrapper = that.window.wrapper,
-                editorElement = that.options.editor.element;
+                window = that.window,
+                editorOptions = that.options.editor,
+                wrapper, editorElement;
 
-            if (!wrapper.is(":visible")) {
-                wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
-                wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(that.window.element.css("padding-bottom"), 10));
-                that.window.open();
+            if (window) {
+                wrapper = window.wrapper;
+                editorElement = editorOptions.element;
+
+                if (!wrapper.is(":visible") || !that.window.options.visible) {
+                    wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
+                    wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(window.element.css("padding-bottom"), 10));
+                    window.open();
+                }
             }
         },
 
         hide: function() {
-            this.window.close();
+            if (this.window) {
+                this.window.close();
+            }
         },
 
         _appendShortcutSequence: function(localizedText, tool) {
@@ -806,15 +827,18 @@ kendo_module({
                 })
                 .on("focus" + NS, function() {
                     $(this).addClass("k-state-active");
-                    if (kendo.ui.editor.Dom.name(editor.element[0]) !== "textarea") {
-                        editor.toolbar.show();
-                    }
+                    editor.toolbar.show();
                 })
                 .on("blur" + NS, function() {
-                    $(this).removeClass("k-state-active");
-//                    if (!$(document.activeElement).closest(".editorToolbarWindow").length) {
-//                        editor.toolbar.hide();
-//                    }
+                    var that = this;
+                    setTimeout(function() {
+                        if (editor.toolbar._remainVisible === undefined) {
+                            $(that).removeClass("k-state-active");
+                            editor.toolbar.hide();
+                        } else {
+                            delete editor.toolbar._remainVisible;
+                        }
+                    }, 1);
                 });
         },
 

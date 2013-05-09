@@ -387,6 +387,9 @@ var FontTool = DelayedExecutionTool.extend({
             change: function () {
                 Tool.exec(editor, toolName, this.value());
             },
+            open: function () {
+                editor.toolbar._remainVisible = true;
+            },
             highlightFirst: false
         });
 
@@ -443,6 +446,9 @@ var ColorTool = Tool.extend({
                 if (color) {
                     Tool.exec(editor, toolName, color);
                 }
+            },
+            open: function() {
+                editor.toolbar._remainVisible = true;
             }
         });
         ui.bind("activate", function(ev){
