@@ -1,5 +1,5 @@
 (function ($, undefined) {
-    var nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
+    var nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g;
 
     function generateMessages() {
         var name,

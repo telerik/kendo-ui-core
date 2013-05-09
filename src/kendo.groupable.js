@@ -34,7 +34,7 @@ kendo_module({
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
         dropCue = $('<div class="k-grouping-dropclue"/>'),
-        nameSpecialCharRegExp = /("|'|\[|\]|\$|\.|\:|\+)/g;
+        nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g;
 
     function dropCueOffsetTop(element) {
         return element.position().top + 3;

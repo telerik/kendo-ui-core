@@ -343,7 +343,7 @@
             });
 
             test("message element is hidden if input with special charecters in the name change its state from invalid to valid ", function() {
-                var input = $('<input name="#f_o:o.b-a+r" type="text" required validationMessage="invalid" />');
+                var input = $('<input name="!#$%&()*+,./:;<=>?@[]^`" type="text" required validationMessage="invalid" />');
                 container.append(input);
                 var validator = setup(container);
 
