@@ -329,10 +329,16 @@
                 };
 
                 equal(toString(1110.1, "n", "custom"), "1 110,1000");
+                kendo.culture("en-US");
             });
 
             test("toString removes incorrect decimal separators", function() {
                 equal(toString(10, "# y. test"), "10 y test");
+            });
+
+            test("toString rounds up correctly", function() {
+                kendo.culture("en-US");
+                equal(toString(1.23125, "C4"), "$1.2313");
             });
 
         </script>

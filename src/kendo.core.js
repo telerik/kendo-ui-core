@@ -711,7 +711,7 @@ function pad(number, digits, end) {
                 number *= 100;
             }
 
-            number = number.toFixed(precision);
+            number = round(number, precision);
             number = number.split(POINT);
 
             integer = number[0];
@@ -855,10 +855,10 @@ function pad(number, digits, end) {
             }
 
             if (idx > -1) {
-                number = number.toFixed(idx);
+                number = round(number, idx);
             }
         } else {
-            number = number.toFixed(0);
+            number = round(number);
         }
 
         sharpIndex = format.indexOf(SHARP);
@@ -976,6 +976,11 @@ function pad(number, digits, end) {
         }
 
         return number;
+    }
+
+    var round = function(value, precision) {
+        var power = Math.pow(10, precision || 0);
+        return (Math.round(value * power) / power).toFixed(precision);
     }
 
     var toString = function(value, fmt, culture) {
