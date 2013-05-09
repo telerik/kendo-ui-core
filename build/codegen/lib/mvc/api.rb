@@ -48,7 +48,7 @@ publish:true
         end
 
         def js_name
-            name.sub('EventBuilder', '').downcase
+            name.sub('Simple', '').sub('EventBuilderBase', '').sub('EventBuilder', '').downcase
         end
 
         def to_markdown

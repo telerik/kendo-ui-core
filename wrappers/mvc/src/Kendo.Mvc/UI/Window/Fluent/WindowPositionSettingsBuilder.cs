@@ -12,13 +12,19 @@ namespace Kendo.Mvc.UI.Fluent
             this.settings = settings;
         }
 
-        public WindowPositionSettingsBuilder Top(int top) 
+        ///<summary>
+        /// Sets the top position.
+        ///</summary>
+        public WindowPositionSettingsBuilder Top(int top)
         {
             settings.Top = top;
 
             return this;
         }
 
+        ///<summary>
+        /// Sets the left position.
+        ///</summary>
         public WindowPositionSettingsBuilder Left(int left)
         {
             settings.Left = left;
