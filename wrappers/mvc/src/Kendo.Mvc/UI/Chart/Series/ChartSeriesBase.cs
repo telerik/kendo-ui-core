@@ -77,6 +77,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating if the series is visible
+        /// </summary>
+        public bool? Visible
+        {
+            get;
+            set;
+        }
+
         public abstract IChartSerializer CreateSerializer();
     }
 }

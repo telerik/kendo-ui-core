@@ -88,6 +88,24 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets a value indicating if the series is visible
+        /// </summary>
+        public bool? Visible
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the series color function
+        /// </summary>
+        public ClientHandlerDescriptor ColorHandler
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the data point tooltip options.
         /// </summary>
         public ChartTooltip Tooltip
