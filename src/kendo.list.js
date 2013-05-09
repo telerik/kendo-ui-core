@@ -507,7 +507,8 @@ kendo_module({
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
                            .unbind(PROGRESS, that._progressHandler)
-                           .unbind(REQUESTEND, that._requestEndHandler);
+                           .unbind(REQUESTEND, that._requestEndHandler)
+                           .unbind("error", that._errorHandler);
         }
     });
 
@@ -675,12 +676,14 @@ kendo_module({
                 that._refreshHandler = proxy(that.refresh, that);
                 that._progressHandler = proxy(that._showBusy, that);
                 that._requestEndHandler = proxy(that._requestEnd, that);
+                that._errorHandler = proxy(that._hideBusy, that);
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                    .bind(CHANGE, that._refreshHandler)
                                    .bind(PROGRESS, that._progressHandler)
-                                   .bind(REQUESTEND, that._requestEndHandler);
+                                   .bind(REQUESTEND, that._requestEndHandler)
+                                   .bind("error", that._errorHandler);
         },
 
         _get: function(li) {

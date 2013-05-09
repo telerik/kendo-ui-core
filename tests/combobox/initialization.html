@@ -647,6 +647,22 @@
 
                 equal(input.attr("readonly"), undefined);
             });
+
+            asyncTest("ComboBox hides loading image on error", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                //simulate request start
+                combobox.dataSource.trigger("progress");
+
+                setTimeout(function() {
+                    start();
+
+                    //simulate error
+                    combobox.dataSource.trigger("error");
+
+                    ok(!combobox.wrapper.find(".k-loading").is(":visible"));
+                }, 200);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
