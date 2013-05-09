@@ -198,7 +198,11 @@ kendo_module({
 
             // prevent accidental address bar display when pulling the header
             if (kendo.support.kineticScrollNeeded) {
-                $(that.element).on("touchmove", ".km-header", kendo.preventDefault);
+                $(that.element).on("touchmove", ".km-header, .km-content", function(e) {
+                    if (!e.target.tagName.match(/textarea|input/i)) {
+                        e.preventDefault();
+                    }
+                });
             }
         },
 
