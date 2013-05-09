@@ -580,7 +580,7 @@ kendo_module({
         options.effects = parsedEffects;
 
         for (var effectName in parsedEffects) {
-            effectClass = Effects[effectName];
+            effectClass = Effects[capitalize(effectName)];
 
             if (effectClass) {
                 effect = new effectClass(element, parsedEffects[effectName].direction);
@@ -921,19 +921,15 @@ kendo_module({
         }
     });
 
-    function toUpperCase(letter) {
-        return letter.toUpperCase();
-    }
-
     function capitalize(word) {
-        return word.replace(/^./, toUpperCase);
+        return word.charAt(0).toUpperCase() + word.substring(1);
     }
 
     function createEffect(name, definition) {
         var effectClass = Effect.extend(definition),
             directions = effectClass.prototype.directions;
 
-        Effects[name] = effectClass;
+        Effects[capitalize(name)] = effectClass;
 
         fx.Element.prototype[name] = function(direction, opt1, opt2, opt3) {
             return new effectClass(this.element, direction, opt1, opt2, opt3);
@@ -1491,5 +1487,5 @@ kendo_module({
     fx.Animation = Animation;
     fx.Transition = Transition;
     fx.createEffect = createEffect;
-    fx.Effects = Effects;
+    fx.effects = Effects;
 })(window.kendo.jQuery);
