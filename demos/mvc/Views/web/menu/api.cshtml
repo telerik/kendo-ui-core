@@ -22,58 +22,32 @@
                     <li>
                         <input type="text" value="Item" id="afterText" class="k-textbox"/> <input type="text" value="0" id="afterIndex" class="k-textbox"/> <button class="afterItem k-button">After</button>
                     </li>
+                    <li>
+                        <button class="toggleTextItems k-button">Enable/Disable all Sub Item 3</button>
+                    </li>
+                    <li>
+                        <button class="toggleStrongItems k-button">Enable/Disable <strong>strong</strong> elements</button>
+                    </li>
+                    <li>
+                        <button class="toggleRedTextItems k-button">Enable/Disable <span class="redText">.redText</span> elements</button>
+                    </li>
                 </ul>
             </div>
+            <style scoped>
+                .redText,
+                .redText > .k-link {
+                    color: red;
+                }
 
-            <ul id="menu">
-                <li>
-                    First Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li>
-                    Second Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li>
-                    Third Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li>
-                    Fourth Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li>
-                    Fifth Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-            </ul>
+                .redText.k-state-disabled > .k-link {
+                    color: lightcoral;
+                }
+            </style>
+
+            <ul id="menu"></ul>
             <script>
                 $(document).ready(function() {
+                    // You can also find an item by its cssClass
                     var getItem = function (target) {
                             var itemIndexes = target.val().split(/[.,]/),
                                 item = menu.element;
@@ -129,6 +103,20 @@
                                         text: $("#afterText").val()
                                     }, getItem($("#afterIndex")));
                             }
+                        },
+
+                        toggleText = function () {
+                            var items = $("#menu").find(".k-link:contains(Sub Item 3)").parent();
+                            menu.enable(items, items.hasClass("k-state-disabled"));
+                        },
+
+                        toggleStrong = function () {
+                            var items = $("#menu").find(":has(> strong)").parent();
+                            menu.enable(items, items.hasClass("k-state-disabled"));
+                        },
+
+                        toggleRedText = function () {
+                            menu.enable(".redText", $("#menu").find(".redText").hasClass("k-state-disabled"));
                         };
 
                     $(".toggleItem").click(toggle);
@@ -148,9 +136,64 @@
 
                     $(".afterItem").click(after);
                     $("#afterText,#afterIndex").keypress(after);
+
+                    $(".toggleTextItems").click(toggleText);
+                    $(".toggleStrongItems").click(toggleStrong);
+                    $(".toggleRedTextItems").click(toggleRedText);
                 });
 
-                var menu = $("#menu").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
+                var menu = $("#menu").kendoMenu({
+                    dataSource: [
+                        {
+                            text: "First Item",
+                            items: [
+                                { text: "Sub Item 1" },
+                                { text: "<strong>Sub Item 2</strong>", encoded: false },
+                                { text: "Sub Item 3" },
+                                { text: "Sub Item 4" }
+                            ]
+                        },
+                        {
+                            text: "<strong>Second Item</strong>",
+                            encoded: false,
+                            items: [
+                                { text: "Sub Item 1" },
+                                { text: "Sub Item 2" },
+                                { text: "Sub Item 3" },
+                                { text: "Sub Item 4" }
+                            ]
+                        },
+                        {
+                            text: "<strong>Third Item</strong>",
+                            encoded: false,
+                            items: [
+                                { text: "Sub Item 1" },
+                                { text: "Sub Item 2" },
+                                { text: "Sub Item 3" },
+                                { text: "Sub Item 4" }
+                            ]
+                        },
+                        {
+                            text: "Fourth Item",
+                            cssClass: "redText",
+                            items: [
+                                { text: "Sub Item 1" },
+                                { text: "<strong>Sub Item 2</strong>", encoded: false },
+                                { text: "Sub Item 3" },
+                                { text: "Sub Item 4" }
+                            ]
+                        },
+                        {
+                            text: "Fifth Item",
+                            items: [
+                                { text: "Sub Item 1" },
+                                { text: "Sub Item 2", cssClass: "redText" },
+                                { text: "Sub Item 3" },
+                                { text: "Sub Item 4" }
+                            ]
+                        }
+                    ]
+                }).css({ marginRight: "250px" }).data("kendoMenu");
             </script>
             <style scoped>
                 .configuration .k-textbox {
