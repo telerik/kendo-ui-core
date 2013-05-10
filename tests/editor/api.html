@@ -29,7 +29,7 @@
                 ]
             });
 
-            test("editor value should not be encoded", function() {
+            test("value returns unencoded value if encoded is false", function() {
                 var editorEncodeFalse = getEditor("#EditorEncodeFalse");
                 editorEncodeFalse.value("<p>foo</p>");
 
@@ -38,18 +38,7 @@
                 equal(editorEncodeFalse.textarea.val(), "<p>foo</p>");
             });
 
-            test("editor default Encode value must be true", function() {
-                equal(getEditor().options.encoded, true);
-            });
-
-            test("editor should add stylesheets", function() {
-                var editorWithStyleSheets = getEditor("#EditorWithStyleSheets");
-
-                equal(editorWithStyleSheets.options.stylesheets[0], "kendo.common.css");
-                equal(editorWithStyleSheets.options.stylesheets[1], "kendo.theme.css");
-            });
-
-            test("editor outputs css links in iframe", function() {
+            test("stylesheets config option renders stylesheets in the editing area", function() {
                 var editorWithStyleSheets = getEditor("#EditorWithStyleSheets");
 
                 var links = $("link", editorWithStyleSheets.document);
@@ -58,7 +47,7 @@
                 equal(links.eq(1).attr("href"), "kendo.theme.css");
             });
 
-            test("setting value does not remove selection, if content is the same", function() {
+            test("value method does not remove selection if provided value is the same as the current text", function() {
                 var editor = getEditor();
                 editor.value("<p>foo</p>");
 
@@ -76,7 +65,6 @@
                 equal(range.startOffset, 1);
                 equal(range.endOffset, 2);
             });
-
 
         </script>
 
