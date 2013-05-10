@@ -227,6 +227,17 @@
                 equal(input.attr("readonly"), undefined);
             });
 
+            test("NumericTextBox supports negative exponential numbers", function() {
+                var numerictextbox = input.kendoNumericTextBox({
+                    format: "n7",
+                    decimals: 7
+                }).data("kendoNumericTextBox");
+
+                numerictextbox.value(0.0000001);
+
+                equal(numerictextbox.element.val(), "0.0000001");
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
