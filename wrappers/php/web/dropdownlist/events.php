@@ -9,9 +9,9 @@ $dropDownList = new \Kendo\UI\DropDownList('dropdownlist');
 $dropDownList->dataTextField('text')
              ->dataValueField('value')
              ->dataSource(array(
-                array('text' => 'Item 1', 'value' => '1'),
-                array('text' => 'Item 2', 'value' => '2'),
-                array('text' => 'Item 3', 'value' => '3')
+                array('text' => 'Item1', 'value' => '1'),
+                array('text' => 'Item2', 'value' => '2'),
+                array('text' => 'Item3', 'value' => '3')
              ))
              ->dataBound('onDataBound')
              ->select('onSelect')
