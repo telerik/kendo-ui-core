@@ -1050,7 +1050,11 @@ kendo_module({
         },
 
         saveSelection: function() {
-            this.selectionRestorePoint = new kendo.ui.editor.RestorePoint(this.getRange());
+            var range = this.getRange();
+
+            if ($.contains(this.body, range.commonAncestorContainer)) {
+                this.selectionRestorePoint = new kendo.ui.editor.RestorePoint(range);
+            }
         },
 
         restoreSelection: function() {
