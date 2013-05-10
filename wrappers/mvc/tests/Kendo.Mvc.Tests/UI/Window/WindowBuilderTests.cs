@@ -225,5 +225,21 @@ namespace Kendo.Mvc.UI.Tests
             builder.Pinned(true).ShouldBeSameAs(builder);
         }
 
+        [Fact]
+        public void AppendTo_sets_AppendTo_property()
+        {
+            const string appendTo = "#f00";
+
+            builder.AppendTo(appendTo);
+
+            component.AppendTo.ShouldEqual(appendTo);
+        }
+
+        [Fact]
+        public void AppendTo_returns_builder()
+        {
+            builder.AppendTo("#foo").ShouldBeSameAs(builder);
+        }
+
     }
 }

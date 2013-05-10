@@ -147,6 +147,12 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        public string AppendTo
+        {
+            get;
+            set;
+        }
+
         public Action Content
         {
             get
@@ -205,6 +211,10 @@ namespace Kendo.Mvc.UI
             options.Add("draggable", Draggable);
             options.Add("pinned", Pinned);
             options.Add("title", Title);
+            if (!string.IsNullOrEmpty(AppendTo))
+            {
+                options.Add("appendTo", AppendTo);
+            }
             options.Add("resizable", ResizingSettings.Enabled);
             options.Add("content", ContentUrl);
             if (Width != 0)
