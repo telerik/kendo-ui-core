@@ -61,8 +61,8 @@
                 equal(toString(10.1, "####.####"), "10.1");
             });
 
-            test("replace # from decimal part", function() {
-                equal(toString(10.1, "####.####"), "10.1");
+            test("replace # correctly when exponential number", function() {
+                equal(toString(0.0000001, "#.#######"), "0.0000001");
             });
 
             test("integer if no 0 in decimal part of the toString", function() {
@@ -264,6 +264,10 @@
             test("C3 negative toString", function() {
                 var number = -10.3337;
                 equal(toString(number, "C3"), "($10.334)");
+            });
+
+            test("C7 negative exponential toString", function() {
+                equal(toString(0.0000001, "c7"), "$0.0000001");
             });
 
             test("group separators are not applied to numbers with less digits", function() {

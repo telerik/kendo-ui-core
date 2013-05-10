@@ -832,9 +832,15 @@ function pad(number, digits, end) {
         length = format.length;
 
         if (decimalIndex != -1) {
+            fraction = number.toString().split("e");
+            if (fraction[1]) {
+                fraction = round(number, Math.abs(fraction[1]));
+            } else {
+                fraction = fraction[0];
+            }
+            fraction = fraction.split(POINT)[1] || EMPTY;
             zeroIndex = format.lastIndexOf(ZERO) - decimalIndex;
             sharpIndex = format.lastIndexOf(SHARP) - decimalIndex;
-            fraction = number.toString().split(POINT)[1] || EMPTY;
             hasZero = zeroIndex > -1;
             hasSharp = sharpIndex > -1;
             idx = fraction.length;
@@ -1025,8 +1031,9 @@ function pad(number, digits, end) {
         }
     };
 
+    kendo._round = round;
     kendo.toString = toString;
-    })();
+})();
 
 
 (function() {
