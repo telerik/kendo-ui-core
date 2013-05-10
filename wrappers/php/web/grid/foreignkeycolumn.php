@@ -143,6 +143,7 @@ $grid->addColumn($productName, $categoryID, $unitPrice, $command)
      ->height(400)
      ->navigatable(true)
      ->editable(true)
+     ->groupable(true)
      ->pageable(true);
 
 echo $grid->render();
