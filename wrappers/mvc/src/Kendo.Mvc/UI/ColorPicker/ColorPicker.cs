@@ -67,6 +67,11 @@ namespace Kendo.Mvc.UI
                 options["toolIcon"] = ToolIcon;
             }
 
+            if (!string.IsNullOrEmpty(Value))
+            {
+                options["value"] = Value;
+            }
+
             if (TileSize != null)
             {
                 var tileSize = TileSize as ColorPaletteTileSize;

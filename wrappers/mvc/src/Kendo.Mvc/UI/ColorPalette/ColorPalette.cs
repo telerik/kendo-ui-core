@@ -51,6 +51,11 @@ namespace Kendo.Mvc.UI
                 options["columns"] = Columns;
             }
 
+            if (!string.IsNullOrEmpty(Value))
+            {
+                options["value"] = Value;
+            }
+
             if (TileSize != null)
             {
                 var tileSize = TileSize as ColorPaletteTileSize;
