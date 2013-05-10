@@ -4525,13 +4525,12 @@ kendo_module({
         getBorderColor: function() {
             var point = this,
                 options = point.options,
-                color = point.color,
                 border = options.border,
                 borderColor = border.color;
 
             if (!defined(borderColor)) {
                 borderColor =
-                    new Color(color).brightness(border._brightness).toHex();
+                    new Color(options.color).brightness(border._brightness).toHex();
             }
 
             return borderColor;

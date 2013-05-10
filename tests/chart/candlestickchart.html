@@ -283,7 +283,7 @@
                 });
 
                 test("highlightOverlay renders default border color (computed)", function() {
-                    firstPoint.color = "#ffffff";
+                    firstPoint.options.color = "#ffffff";
                     var rect = firstPoint.highlightOverlay(view).children[0];
 
                     equal(rect.options.stroke, "#cccccc");
@@ -323,7 +323,7 @@
                 });
 
                 test("highlightOverlay renders default line color (computed)", function() {
-                    firstPoint.color = "#ffffff";
+                    firstPoint.options.color = "#ffffff";
                     var line = firstPoint.highlightOverlay(view).children[1];
 
                     equal(line.options.stroke, "#cccccc");
