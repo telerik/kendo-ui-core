@@ -70,7 +70,7 @@ echo $autoComplete->render();
         color: #333;
         padding-bottom: 5px;
     }
-    #products {
+    #input  {
         margin-right: 50px;
     }
     .configuration {
