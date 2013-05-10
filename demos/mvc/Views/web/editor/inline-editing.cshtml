@@ -1,6 +1,6 @@
 
         <div id="example" class="k-content">
-            <div contentEditable id="editor">
+            <div contentEditable>
                 <p><img src="http://www.kendoui.com/Image/kendo-logo.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" /></p>
                 <p>
                     Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />
@@ -8,6 +8,9 @@
                     and image handling. The widget <strong>outputs identical HTML</strong> across all major browsers, follows
                     accessibility standards and provides API for content manipulation.
                 </p>
+            </div>
+
+            <div contentEditable>
                 <p>Features include:</p>
                 <ul>
                     <li>Text formatting &amp; alignment</li>
@@ -23,8 +26,14 @@
                 </p>
             </div>
 
+            <style scoped>
+                #example > div {
+                    margin-bottom: 2em;
+                }
+            </style>
+
             <script>
-                $("#editor").kendoEditor();
+                $("div[contentEditable]").kendoEditor();
             </script>
         </div>
 
