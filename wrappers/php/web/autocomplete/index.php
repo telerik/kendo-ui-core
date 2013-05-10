@@ -3,7 +3,7 @@ require_once '../../include/header.php';
 require_once '../../lib/Kendo/Autoload.php';
 ?>
 <div id="shipping">
-    <label for="country" class="info">Shipping countries:</label>
+    <label for="countries" class="info">Shipping countries:</label>
     <?php
     $countries = array('Albania', 'Andorra', 'Armenia', 'Austria', 'Azerbaijan', 'Belarus', 'Belgium',
         'Bosnia & Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia',
@@ -16,7 +16,7 @@ require_once '../../lib/Kendo/Autoload.php';
     $dataSource = new \Kendo\Data\DataSource();
     $dataSource->data($countries);
 
-    $autoComplete = new \Kendo\UI\AutoComplete('country');
+    $autoComplete = new \Kendo\UI\AutoComplete('countries');
 
     $autoComplete->dataSource($dataSource)
                  ->filter('startswith')
