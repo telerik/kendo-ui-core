@@ -99,9 +99,7 @@
                 var changeHandler = this.options.colorPickerChange,
                     value = this._updateColorPreview();
 
-                if (rgbValuesRe.test(value)) {
-                    value = toHex(value);
-                }
+                value = toHex(value);
 
                 if (!value) {
                     value = "transparent";
@@ -315,9 +313,7 @@
                             value = target.css(property);
                         }
 
-                        if (rgbValuesRe.test(value)) {
-                            value = toHex(value);
-                        }
+                        value = toHex(value);
 
                         if (processors[property]) {
                             value = processors[property](value);
