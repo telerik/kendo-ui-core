@@ -91,7 +91,7 @@ if (ARGV.bundle) {
                 property: "kendo"
             })
         }));
-        toplevel = get_wrapper().wrap("kendo", [ "./jquery.min" ], toplevel);
+        toplevel = get_wrapper().wrap("kendo", [], toplevel);
     }
     fs.writeFileSync(destination_min, toplevel.print_to_string(codegen_options));
     process.exit(0);
