@@ -141,7 +141,7 @@
 
                 this.element.on("change", proxy(this._change, this));
 
-                this.value(this.element.val());
+                this._change();
             },
 
             events: [
