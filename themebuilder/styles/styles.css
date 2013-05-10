@@ -110,6 +110,7 @@ body {
 }
 
 #kendo-themebuilder div.k-colorpicker,
+#kendo-themebuilder .k-gradient-editor,
 #kendo-themebuilder .k-numerictextbox,
 #kendo-themebuilder .k-combobox,
 #kendo-themebuilder .k-shadowinput {
@@ -186,6 +187,19 @@ textarea {
     height: 100%;
     resize: none;
     outline: none;
+}
+
+.k-gradient-editor {
+    display: inline-block;
+    border-width: 0;
+}
+
+.k-gradient-editor .k-preview {
+    width: 15px;
+    height: 21px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 0 3px 3px 0;
 }
 
 #docs-link {
