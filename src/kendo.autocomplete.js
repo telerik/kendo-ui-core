@@ -76,8 +76,6 @@ kendo_module({
             that._wrapper();
             that._loader();
 
-            that._accessors();
-
             that._dataSource();
             that._ignoreCase();
 

@@ -397,6 +397,38 @@
                 equal(multiselect.dataItems().length, 1);
                 equal(multiselect.value()[0], "2");
             });
+
+            test("MultiSelect selects value even when values contains complex objects", function() {
+                var multiselect = new MultiSelect(select, {
+                    dataSource: [
+                        { optionID: "1", optionText: "Item1" },
+                        { optionID: "2", optionText: "Item2" }
+                    ],
+                    dataValueField: "optionID",
+                    dataTextField: "optionText",
+                    value: [
+                        { optionID: "1", optionText: "Item1" },
+                        { optionID: "2", optionText: "Item2" }
+                    ]
+                });
+
+                equal(multiselect.element.children().length, 2);
+                equal(multiselect.dataItems().length, 2);
+                equal(multiselect.value()[0], "1");
+                equal(multiselect.value()[1], "2");
+            });
+
+            test("MultiSelect does nothing if autoBind:false and simple strings is set as value", function() {
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false,
+                    dataValueField: "optionID",
+                    dataTextField: "optionText",
+                    value: ["1", "2"]
+                });
+
+                equal(multiselect.element.children().length, 0);
+                equal(multiselect.dataItems().length, 0);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

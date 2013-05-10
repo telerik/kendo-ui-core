@@ -63,8 +63,6 @@ kendo_module({
 
             that._popup();
 
-            that._accessors();
-
             that._dataSource();
             that._ignoreCase();
 
