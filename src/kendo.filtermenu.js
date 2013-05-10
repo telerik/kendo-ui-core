@@ -110,6 +110,20 @@ kendo_module({
         return result;
     }
 
+
+    function clearFilter(filters, field) {
+        return $.grep(filters, function(expr) {
+            if (expr.filters) {
+                expr.filters = $.grep(expr.filters, function(nested) {
+                    return nested.field != field;
+                });
+
+                return expr.filters.length;
+            }
+            return expr.field != field;
+        });
+    }
+
     var FilterMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -386,9 +400,7 @@ kendo_module({
 
             expression.filters = $.grep(expression.filters, function(filter) {
                 if (filter.filters) {
-                    filter.filters = $.grep(filter.filters, function(expr) {
-                        return expr.field != that.field;
-                    });
+                    filter.filters = clearFilter(filter.filters, that.field);
 
                     return filter.filters.length;
                 }
