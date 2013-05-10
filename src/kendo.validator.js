@@ -38,7 +38,7 @@ kendo_module({
         },
         hasAttribute = function(input, name) {
             if (input.length)  {
-                return input[0].attributes[name] !== undefined;
+                return input[0].attributes[name] != null;
             }
             return false;
         },
