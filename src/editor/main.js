@@ -831,14 +831,16 @@ kendo_module({
                 })
                 .on("blur" + NS, function() {
                     var that = this;
-                    setTimeout(function() {
-                        if (editor.toolbar._remainVisible === undefined) {
-                            $(that).removeClass("k-state-active");
-                            editor.toolbar.hide();
-                        } else {
-                            delete editor.toolbar._remainVisible;
-                        }
-                    }, 1);
+                    if (!$(document.activeElement).is(editor.body)) {
+                        setTimeout(function() {
+                            if (editor.toolbar._remainVisible === undefined) {
+                                $(that).removeClass("k-state-active");
+                                editor.toolbar.hide();
+                            } else {
+                                delete editor.toolbar._remainVisible;
+                            }
+                        }, 1);
+                    }
                 });
         },
 
