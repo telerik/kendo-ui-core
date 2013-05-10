@@ -16,6 +16,7 @@ kendo_module({
         parse = kendo.parseFloat,
         placeholderSupported = kendo.support.placeholder,
         getCulture = kendo.getCulture,
+        round = kendo._round,
         CHANGE = "change",
         DISABLED = "disabled",
         READONLY = "readonly",
@@ -575,13 +576,22 @@ kendo_module({
             isNotNull = value !== NULL;
 
             if (isNotNull) {
-                value = parseFloat(value.toFixed(decimals));
+                value = parseFloat(round(value, decimals));
             }
 
             that._value = value = that._adjust(value);
             that._placeholder(kendo.toString(value, format, culture));
-            that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "")
-                        .attr("aria-valuenow", value);
+
+            if (isNotNull) {
+                value = value.toString();
+                if (value.indexOf("e") !== -1) {
+                    value = round(+value, decimals);
+                }
+            } else {
+                value = "";
+            }
+
+            that.element.val(value).attr("aria-valuenow", value);
         },
 
         _placeholder: function(value) {
