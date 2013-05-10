@@ -8,6 +8,18 @@
                 values: values
             };
         },
+        gradientConstant = function(target) {
+            return {
+                property: "background-image",
+                editor: "ktb-gradient",
+                infer: function() {
+                    var background = cssPropertyFrom(target.slice(1), "background-image"),
+                        match = /linear-gradient\((.*)\)$/i.exec(background);
+
+                    return match ? match[1] : "none";
+                }
+            };
+        },
         toProtocolRelative = function(url) {
             return url.replace(/^http(s?):\/\//i, "//");
         },
@@ -57,8 +69,12 @@
                 }
             },
 
-            "@fallback-texture": constant("background-image", ".k-header",
-                [ { text: "flat", value: "none" } ].concat(
+            "@fallback-texture":                { readonly: true, value: "none" },
+
+            "@texture":                         {
+                property: "background-image",
+                target: ".k-header",
+                values: [ { text: "flat", value: "none" } ].concat(
                     [
                         "highlight", "glass", "brushed-metal", "noise",
                         "dots1", "dots2", "dots3", "dots4", "dots5",
@@ -68,10 +84,14 @@
                     ].map(function(x) {
                         return { text: x, value: "url('" + cdnRoot + "styles/textures/" + x + ".png')" };
                     }
-                )
-            )),
+                )),
+                infer: function() {
+                    var background = cssPropertyFrom("k-header", "background-image"),
+                        match = /^(.*),\s*[\-\w]*linear-gradient\(/i.exec(background);
 
-            "@texture":                         { readonly: true, value: "none" },
+                    return match ? match[1] : "none";
+                }
+            },
             "@tooltip-texture":                 {
                 readonly: true,
                 infer: function() {
@@ -80,7 +100,7 @@
             },
 
             "@widget-background-color":         constant(BGCOLOR, ".k-widget"),
-            "@widget-gradient":                 { readonly: true, value: "none" },
+            "@widget-gradient":                 gradientConstant(".k-header"),
             "@widget-border-color":             constant(BORDERCOLOR, ".k-widget"),
             "@widget-text-color":               constant(COLOR, ".k-widget"),
             "@widget-shadow":                   { readonly: true, value: "none" },
@@ -104,19 +124,19 @@
             "@hover-background-color":          constant(BGCOLOR, ".k-state-hover"),
             "@hover-border-color":              constant(BORDERCOLOR, ".k-state-hover"),
             "@hover-text-color":                constant(COLOR, ".k-state-hover"),
-            "@hover-gradient":                  { readonly: true, value: "none" },
+            "@hover-gradient":                  gradientConstant(".k-state-hover"),
             "@hover-shadow":                    { readonly: true, value: "none" },
 
             "@selected-background-color":       constant(BGCOLOR, ".k-state-selected"),
             "@selected-border-color":           constant(BORDERCOLOR, ".k-state-selected"),
             "@selected-text-color":             constant(COLOR, ".k-state-selected"),
-            "@selected-gradient":               { readonly: true, value: "none" },
+            "@selected-gradient":               gradientConstant(".k-state-selected"),
             "@selected-shadow":                 { readonly: true, value: "none" },
 
             "@active-background-color":         constant(BGCOLOR, ".k-state-active"),
             "@active-border-color":             constant(BORDERCOLOR, ".k-state-active"),
             "@active-text-color":               constant(COLOR, ".k-state-active"),
-            "@active-gradient":                 { readonly: true, value: "none" },
+            "@active-gradient":                 gradientConstant(".k-state-active"),
             "@active-shadow":                   { readonly: true, value: "none" },
 
             "@focused-border-color":            constant(BORDERCOLOR, ".k-state-focused"),
@@ -199,7 +219,8 @@
         },
         webConstantsHierarchy = {
             "Widgets": {
-                "@widget-background-color":       "Background",
+                "@widget-gradient":               "Gradient",
+                "@widget-background-color":       "Background color",
                 "@widget-border-color":           "Border color",
                 "@widget-text-color":             "Text color"
             },
@@ -231,14 +252,17 @@
                 "@input-text-color":              "Text color"
             },
             "Widget states": {
+                "@hover-gradient":                "Hover gradient",
                 "@hover-background-color":        "Hover background",
                 "@hover-border-color":            "Hover border color",
                 "@hover-text-color":              "Hover text color",
 
+                "@selected-gradient":             "Selection gradient",
                 "@selected-background-color":     "Selection background",
                 "@selected-border-color":         "Selection border color",
                 "@selected-text-color":           "Selection text color",
 
+                "@active-gradient":               "Active gradient",
                 "@active-background-color":       "Active background",
                 "@active-border-color":           "Active border color",
                 "@active-text-color":             "Active text color",
