@@ -402,11 +402,16 @@
 
         $("#scheduler").kendoScheduler({
             height: 800,
+            views: ["day", { name: "week", selected: true }],
             dataSource: {
                 data: [ {
                     start: start,
                     end: end,
                     title: "foo"
+                },{
+                    start: new Date(2013, 4, 10, 10, 5,0),
+                    end: new Date(2013, 4, 10, 12, 5,0),
+                    title: "bar"
                 }]
             }
         });

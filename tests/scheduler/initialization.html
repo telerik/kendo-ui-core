@@ -198,6 +198,15 @@
                 equal(scheduler.view().name, "day");
             });
 
+            test("view is selected", function() {
+                var scheduler = new Scheduler(container, {
+                    views: ["day", { name: "week", selected: true }]
+                });
+
+                ok(scheduler.toolbar.find(".k-view-week").hasClass("k-state-selected"));
+                equal(scheduler.view().name, "week");
+            });
+
             test("day and week view are rendered by default", function() {
                 var scheduler = new Scheduler(container, { });
 
@@ -346,6 +355,16 @@
                     });
 
                 equal(scheduler.view().options.allDaySlot, false);
+            });
+
+            test("events are re-position on window resize", function() {
+                var scheduler = new Scheduler(container, { });
+
+                var view = stub(scheduler.view(), "dataBind");
+
+                $(window).trigger("resize");
+
+                equal(view.calls("dataBind"), 1);
             });
 
         </script>

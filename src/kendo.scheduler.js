@@ -104,6 +104,10 @@ kendo_module({
             that._dataSource();
 
             that.view(that._selectedViewName);
+
+            that._resizeHandler = proxy(that._resize, that);
+
+            $(window).on("resize" + NS, that._resizeHandler);
         },
 
         options: {
@@ -138,6 +142,8 @@ kendo_module({
                 .add(that.popup);
 
             element.off(NS);
+
+            $(window).off("resize" + NS, that._resizeHandler);
 
             kendo.destroy(that.wrapper);
         },
@@ -175,6 +181,10 @@ kendo_module({
             this._model.set("formattedDate", view.dateForTitle());
         },
 
+        _resize: function() {
+            this.refresh();
+        },
+
         _views: function() {
             var views = this.options.views,
                 view,
@@ -204,7 +214,7 @@ kendo_module({
                 if (view) {
                     this.views[view.name] = view;
 
-                    if (!selected || view.selected) {
+                    if (!selected || (view.selected || view.options.selected)) {
                         selected = view.name;
                     }
                 } else {
@@ -781,11 +791,17 @@ kendo_module({
             var eventTemplate = kendo.template(this.options.eventTemplate),
                 timeSlots = this.content.find("tr"),
                 slotHeight = Math.floor(this.content.find(">table:first").height() / timeSlots.length),
-                eventRightOffset = 30;
+                eventRightOffset = 30,
+                event,
+                idx,
+                length;
 
-            if (events.length) {
-                var event = events[0],
-                    startIndex = this._timeSlotIndex(event.start),
+            this.content.find(".k-appointment").remove();
+
+            for (idx = 0, length = events.length; idx < length; idx++) {
+                event = events[idx];
+
+                var startIndex = this._timeSlotIndex(event.start),
                     endIndex = Math.ceil(this._timeSlotIndex(event.end)),
                     timeSlot = timeSlots.eq(Math.floor(startIndex)),
                     dateSlotIndex = this._dateSlotIndex(event.start),
@@ -801,10 +817,10 @@ kendo_module({
                             left: dateSlot.offset().left,
                         })
                         .css({
-                            height: slotHeight * (Math.round(endIndex - startIndex) || 1),
+                            height: slotHeight * (Math.ceil(endIndex - startIndex) || 1),
                             width: dateSlot.width() - eventRightOffset
                         });
-                }
+                    }
             }
         }
     });
@@ -820,6 +836,7 @@ kendo_module({
             },
             name: "day"
         }),
+
         week: MultiDayView.extend({
             options: {
                 title: "Week",
@@ -835,7 +852,7 @@ kendo_module({
                 start.setDate(start.getDate() - weekDay);
 
                 for (idx = 0, length = 7; idx < length; idx++) {
-                    dates.push(new Date(start));
+                    dates.push(new Date(+start));
                     setTime(start, MS_PER_DAY, true);
                 }
 
