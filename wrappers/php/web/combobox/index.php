@@ -17,7 +17,7 @@ $fabrics->data(array(
     array('text' => 'Rib Knit', 'value'=> 4)
 ));
 
-$input = new \Kendo\UI\ComboBox('input');
+$input = new \Kendo\UI\ComboBox('fabric');
 $input->dataSource($fabrics)
       ->dataTextField('text')
       ->dataValueField('value')
@@ -31,7 +31,7 @@ echo $input->render();
         <h3>T-shirt Size</h3>
 <?php
 
-$select = new \Kendo\UI\ComboBox('select');
+$select = new \Kendo\UI\ComboBox('size');
 $select->dataSource(array('X-Small', 'Small', 'Medium', 'Large', 'X-Large', '2X-Large'))
        ->placeholder('Select size ...')
        ->index(0);
