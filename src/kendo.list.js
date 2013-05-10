@@ -74,6 +74,7 @@ kendo_module({
                 that._optionID = id + "_option_selected";
             }
 
+            that._accessors();
             that._initValue();
         },
 

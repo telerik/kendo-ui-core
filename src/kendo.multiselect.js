@@ -41,6 +41,7 @@ kendo_module({
         MOUSELEAVE = "mouseleave" + ns,
         HOVEREVENTS = MOUSEENTER + " " + MOUSELEAVE,
         quotRegExp = /"/g,
+        isArray = $.isArray,
         styles = ["font-family",
                   "font-size",
                   "font-stretch",
@@ -52,7 +53,7 @@ kendo_module({
 
     var MultiSelect = List.extend({
         init: function(element, options) {
-            var that = this, id, value;
+            var that = this, id, data;
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
@@ -67,7 +68,7 @@ kendo_module({
 
             element = that.element.attr("multiple", "multiple").hide();
             options = that.options;
-            value = options.value;
+            data = options.value;
 
             if (!options.placeholder) {
                 options.placeholder = element.data("placeholder");
@@ -85,7 +86,6 @@ kendo_module({
             that._aria(id);
             that._dataSource();
             that._ignoreCase();
-            that._accessors();
             that._popup();
 
             that._values = [];
@@ -97,20 +97,15 @@ kendo_module({
 
             if (options.autoBind) {
                 that.dataSource.fetch();
-            } else if (value) {
-                if (!$.isArray(value)) {
-                    value = [value];
+            } else if (data) {
+                if (!isArray(data)) {
+                    data = [data];
                 }
 
-                that.dataSource.data(value);
-
-                if (options.dataValueField) {
-                    value = $.map(value, function(dataItem) {
-                        return that._value(dataItem);
-                    });
+                if ($.isPlainObject(data[0]) || !options.dataValueField) {
+                    that.dataSource.data(data);
+                    that.value(that._initialValues);
                 }
-
-                that.value(value);
             }
 
             kendo.notify(that);
@@ -380,7 +375,7 @@ kendo_module({
             }
 
             if (value !== null) {
-                value = $.isArray(value) || value instanceof ObservableArray ? value : [value];
+                value = isArray(value) || value instanceof ObservableArray ? value : [value];
 
                 for (idx = 0, length = value.length; idx < length; idx++) {
                     dataItemIndex = that._index(value[idx]);
@@ -399,7 +394,7 @@ kendo_module({
                 options = that.options,
                 dataSource = options.dataSource || {};
 
-            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
+            dataSource = isArray(dataSource) ? {data: dataSource} : dataSource;
 
             dataSource.select = element;
             dataSource.fields = [{ field: options.dataTextField },
@@ -455,10 +450,26 @@ kendo_module({
 
             if (value === null) {
                 value = [];
+            } else {
+                if (!isArray(value)) {
+                    value = [value];
+                }
+
+                value = that._mapValues(value);
             }
 
             that._old = that._initialValues = value;
             that._setInitialValues = !!value[0];
+        },
+
+        _mapValues: function(values) {
+            var that = this;
+
+            if (values && $.isPlainObject(values[0])) {
+                values = $.map(values, function(dataItem) { return that._value(dataItem); });
+            }
+
+            return values;
         },
 
         _change: function() {

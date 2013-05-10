@@ -60,8 +60,6 @@ kendo_module({
 
             that._mobile();
 
-            that._accessors();
-
             that._dataSource();
             that._ignoreCase();
 
