@@ -31,29 +31,31 @@ require_once '../../include/header.php';
         <li>
             <input id="value" value="1" class="k-textbox" style="width: 40px; margin: 0;" /> <button id="setValue" class="k-button">Select by value</button>
         </li>
+        <li>
+            <input id="word" value="Pulp" class="k-textbox" style="width: 100px; margin: 0;" /> <button id="find" class="k-button">Select item starting with</button>
+        </li>
     </ul>
     </div>
 </div>
 
 <div class="demo-section">
 <?php
-$dropDownList = new \Kendo\UI\DropDownList('products');
+$dropDownList = new \Kendo\UI\DropDownList('movies');
 
 $dropDownList->dataTextField('text')
              ->dataValueField('value')
              ->attr('style', 'width: 250px')
              ->dataSource(array(
-                array('text' => '12 Angry Men', 'value' => 1),
-                array('text' => 'Il buono, il brutto, il cattivo.', 'value' => 2),
-                array('text' => 'Inception', 'value' => 3),
-                array('text' => "One Flew Over the Cuckoo's Nest", 'value' => 4),
+                array('text' => 'The Shawshank Redemption', 'value' => 1),
+                array('text' => 'The Godfather', 'value' => 2),
+                array('text' => 'The Godfather: Part II', 'value' => 3),
+                array('text' => "Il buono, il brutto, il cattivo.", 'value' => 4),
                 array('text' => 'Pulp Fiction', 'value' => 5),
-                array('text' => "Schindler's List", 'value' => 6),
-                array('text' => 'The Dark Knight', 'value' => 7),
-                array('text' => 'The Godfather', 'value' => 8),
-                array('text' => 'The Godfather: Part II', 'value' => 9),
-                array('text' => 'The Shawshank Redemption', 'value' => 10),
-                array('text' => 'The Shawshank Redemption 2', 'value' => 11)
+                array('text' => "12 Angry Men", 'value' => 6),
+                array('text' => "Schindler's List", 'value' => 7),
+                array('text' => "One Flew Over the Cuckoo's Nest", 'value' => 8),
+                array('text' => 'Inception', 'value' => 9),
+                array('text' => 'The Dark Knight', 'value' => 10)
              ));
 
 echo $dropDownList->render();
@@ -61,7 +63,7 @@ echo $dropDownList->render();
 </div>
 <script>
     $(document).ready(function() {
-        var dropdownlist = $("#products").data("kendoDropDownList"),
+        var dropdownlist = $("#movies").data("kendoDropDownList"),
             setValue = function(e) {
                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                     dropdownlist.value($("#value").val());
