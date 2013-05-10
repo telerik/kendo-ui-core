@@ -183,6 +183,7 @@ kendo_module({
 
             return map(menuColumns, function(col) {
                 return {
+                    originalField: col.field,
                     field: col.field || col.title,
                     title: col.title || col.field,
                     hidden: col.hidden,
@@ -314,12 +315,15 @@ kendo_module({
                 visible = grep(columns, function(field) {
                     return !field.hidden;
                 }),
+                visibleDataFields = grep(visible, function(field) {
+                    return field.originalField;
+                }).length,
                 selector = map(visible, function(col) {
                     return attr + '"' + col.field.replace(nameSpecialCharRegExp, "\\$1") + '"]';
                 }).join(",");
 
             this.wrapper.find(allselector).prop("checked", false);
-            this.wrapper.find(selector).prop("checked", true).prop("disabled", visible.length == 1);
+            this.wrapper.find(selector).prop("checked", true).prop("disabled", visibleDataFields == 1);
         },
 
         _filter: function() {

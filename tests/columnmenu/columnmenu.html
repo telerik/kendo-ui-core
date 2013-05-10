@@ -218,6 +218,23 @@
                 ok(called);
             });
 
+            test("checkboxes are disabled when one column with field left visible", function() {
+                var menu = setup({
+                    owner: {
+                        columns: [
+                            { field: "foo", hidden: true },
+                            { field: "bar", hidden: false },
+                            { template: "template", title: "template", hidden: false }
+                        ]
+                    }
+                });
+
+                var checkboxes = menu.wrapper.find("[type=checkbox]");
+                ok(!checkboxes.eq(0).prop("disabled"));
+                ok(checkboxes.eq(1).prop("disabled"), "column is not disabled");
+                ok(checkboxes.eq(2).prop("disabled"), "column is not disabled");
+            });
+
             test("selecting sort asc item sorts the dataSource", function() {
                 var menu = setup({ field: "foo" });
 
