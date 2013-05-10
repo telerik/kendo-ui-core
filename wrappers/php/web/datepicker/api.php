@@ -25,6 +25,10 @@ echo $datePicker->render();
             datepicker.enable(false);
         });
 
+        $("#readonly").click(function() {
+            datepicker.readonly();
+        });
+
         $("#open").click(function() {
             datepicker.open();
         });
@@ -55,7 +59,7 @@ echo $datePicker->render();
            <button id="set" class="k-button">Set value</button>
        </li>
         <li>
-            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+            <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
         </li>
         <li>
             <button id="open" class="k-button">Open</button> or <button id="close" class="k-button">Close</button> the calendar

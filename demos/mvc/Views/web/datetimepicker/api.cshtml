@@ -1,5 +1,5 @@
 
-        <div id="example" class="k-content">  
+        <div id="example" class="k-content">
             <div class="configuration k-widget k-header" style="width: 220px">
                 <span class="configHead">API Functions</span>
                 <ul class="options">
@@ -11,7 +11,7 @@
                        <button id="set" class="k-button">Set value</button>
                    </li>
                     <li>
-                        <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+						<button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
                     </li>
                     <li>
                         <button id="openDateView" class="k-button">Open</button> or <button id="closeDateView" class="k-button">Close</button> the date view
@@ -23,9 +23,9 @@
            </div>
             <div class="demo-section">
                 <input id="datetimepicker" />
-            </div>          
-            
-            
+            </div>
+
+
             <script>
                 $(document).ready(function() {
                     $("#datetimepicker").kendoDateTimePicker()
@@ -44,6 +44,10 @@
 
                     $("#disable").click(function() {
                         datetimepicker.enable(false);
+                    });
+
+                    $("#readonly").click(function() {
+                        datetimepicker.readonly();
                     });
 
                     $("#openDateView").click(function() {
@@ -72,12 +76,12 @@
                         alert(datetimepicker.value());
                     });
                 });
-           </script>  
-           
+           </script>
+
             <style scoped>
                 .demo-section {
                     margin-right: 375px;
                     width: 185px;
                 }
-            </style>          
+            </style>
         </div>

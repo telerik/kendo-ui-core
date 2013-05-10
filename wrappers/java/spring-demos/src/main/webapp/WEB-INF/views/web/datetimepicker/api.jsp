@@ -14,7 +14,7 @@
             <button id="set" class="k-button">Set value</button>
         </li>
          <li>
-             <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
+             <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
          </li>
          <li>
              <button id="openDateView" class="k-button">Open</button> or <button id="closeDateView" class="k-button">Close</button> the date view
@@ -47,6 +47,10 @@
 		$("#disable").click(function() {
 			datetimepicker.enable(false);
 		});
+
+        $("#readonly").click(function() {
+            datetimepicker.readonly();
+        });
 
 		$("#openDateView").click(function() {
 			datetimepicker.open("date");
