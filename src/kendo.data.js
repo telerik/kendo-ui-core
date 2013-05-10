@@ -3523,13 +3523,14 @@ kendo_module({
     };
 
     var Buffer = kendo.Observable.extend({
-        init: function(dataSource, viewSize) {
+        init: function(dataSource, viewSize, disablePrefetch) {
             var buffer = this;
 
             kendo.Observable.fn.init.call(buffer);
 
             buffer._prefetching = false;
             buffer.dataSource = dataSource;
+            buffer.prefetch = !disablePrefetch;
 
             dataSource.bind("change", function() {
                 buffer._change();
@@ -3555,9 +3556,9 @@ kendo_module({
                 prefetchOffset = skip + pageSize;
 
             // prefetch
-            if (index === this.prefetchThreshold && !dataSource.inRange(prefetchOffset, pageSize) && !this._prefetching) {
-                this._prefetching = true;
-                this.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
+            if (index === buffer.prefetchThreshold && !dataSource.inRange(prefetchOffset, pageSize) && !buffer._prefetching && buffer.prefetch) {
+                buffer._prefetching = true;
+                buffer.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
 
                 dataSource.prefetch(prefetchOffset, pageSize, function() {
                     buffer._prefetching = false;
@@ -3566,31 +3567,43 @@ kendo_module({
             }
 
             // mid-range jump
-            if (index === this.midPageThreshold) {
-                this.range(this.prefetchThreshold + 1);
+            if (index === buffer.midPageThreshold) {
+                buffer.range(buffer.prefetchThreshold + 1);
             }
 
             // pull-back
-            else if (index === this.pullBackThreshold) {
+            else if (index === buffer.pullBackThreshold) {
                 if (offset === skip) {
-                    this.range(offset - viewSize); // from full range to mid range
+                    buffer.range(offset - viewSize); // from full range to mid range
                 } else {
-                    this.range(offset + viewSize - pageSize); // from mid range to full range
+                    buffer.range(offset + viewSize - pageSize); // from mid range to full range
                 }
             }
 
             // next range jump
-            else if (index === this.nextPageThreshold) {
-                this.range(skip);
+            else if (index === buffer.nextPageThreshold) {
+                buffer.range(skip);
             }
 
-            var item = this.dataSource.at(index - this.dataOffset);
+            var item = buffer.dataSource.at(index - buffer.dataOffset);
 
             if (item === undefined) {
-                this.trigger("endreached", { index: index });
+                buffer.trigger("endreached", { index: index });
             }
 
             return item;
+        },
+
+        next: function() {
+            var buffer = this,
+                pageSize = buffer.pageSize,
+                offset = buffer.offset - buffer.viewSize,
+                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize;
+
+            buffer.offset = offset;
+            buffer.dataSource.prefetch(pageSkip, pageSize, function() {
+                buffer._goToRange(offset, true);
+            });
         },
 
         range: function(offset) {
@@ -3604,9 +3617,11 @@ kendo_module({
                 buffer._recalculate();
                 if (dataSource.inRange(offset, pageSize)) {
                     buffer._goToRange(offset);
-                } else {
+                } else if (buffer.prefetch) {
+                    console.log('shifting range', pageSkip);
                     dataSource.prefetch(pageSkip, pageSize, function() {
                         buffer._goToRange(offset, true);
+                        console.log('range shifted', pageSkip);
                     });
                 }
             }
@@ -3661,6 +3676,7 @@ kendo_module({
             buffer.nextPageThreshold = skip + buffer.viewSize - 1;
             buffer.prefetchThreshold = buffer.midPageThreshold - viewSize;
             buffer.pullBackThreshold = buffer.offset - 1;
+            console.log(this);
         }
     });
 

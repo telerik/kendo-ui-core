@@ -220,7 +220,9 @@ kendo_module({
             });
 
             list.bind("resize", function() {
-                list.footer.below(list.items[list.items.length - 1]);
+                if (list.footer) {
+                    list.footer.below(list.items[list.items.length - 1]);
+                }
             });
         },
 
@@ -261,7 +263,7 @@ kendo_module({
                 averageItemHeight = (list.bottom - list.top) / list.itemCount,
                 remainingItemsCount = list.buffer.length - list.offset - list.itemCount;
 
-            return this.footer.height + this.bottom + remainingItemsCount * averageItemHeight;
+            return (this.footer ? this.footer.height : 0) + this.bottom + remainingItemsCount * averageItemHeight;
         },
 
         update: function(top) {
@@ -393,6 +395,7 @@ kendo_module({
         configure: function() {
             var that = this,
                 options = that.options,
+                autoPrefetch = that.options.loadMore,
                 scroller = that.listView.scroller();
 
             if (that.dataSource) {
@@ -638,7 +641,7 @@ kendo_module({
 
             that._style();
 
-            if (this.options.endlessScroll) {
+            if (this.options.endlessScroll || this.options.loadMore) {
                 this._itemBinder = new VirtualListViewItemBinder(this);
             } else {
                 this._itemBinder = new ListViewItemBinder(this);
