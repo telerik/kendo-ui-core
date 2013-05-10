@@ -191,7 +191,7 @@
             },
 
             value: function(value) {
-                if (arguments.length == 0) {
+                if (!arguments.length) {
                     return toHex(this.element.val() || "");
                 }
 
