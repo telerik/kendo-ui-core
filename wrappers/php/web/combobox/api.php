@@ -57,7 +57,7 @@ require_once '../../include/header.php';
 </div>
 <div class="demo-section">
 <?php
-$comboBox = new \Kendo\UI\ComboBox('products');
+$comboBox = new \Kendo\UI\ComboBox('movies');
 
 $comboBox->dataTextField('text')
          ->dataValueField('value')
@@ -85,7 +85,7 @@ $(function() {
         change: filterTypeOnChanged
     });
 
-    var combobox = $("#products").data("kendoComboBox"),
+    var combobox = $("#movies").data("kendoComboBox"),
         setValue = function(e) {
             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                 combobox.value($("#value").val());
