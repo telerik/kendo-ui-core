@@ -201,6 +201,14 @@ kendo_module({
                         draggable: {
                             dragHandle: ".k-editortoolbar-dragHandle"
                         },
+                        animation: {
+                            open: {
+                                effects: "fade:in"
+                            },
+                            close: {
+                                effects: "fade:out"
+                            }
+                        },
                         visible: false,
                         autoFocus: false,
                         actions: []
