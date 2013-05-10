@@ -462,6 +462,29 @@
                 equal(dataSource.filter().filters[0].value, "1");
             });
 
+            test("clear removes third level expressions", function() {
+                var filterMenu = setup(dom, {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter({
+                    logic: "and",
+                    filters: [{
+                        logic: "and",
+                        filters: [{
+                            logic: "and",
+                            filters: [
+                                { value: "1", field: "foo" },
+                                { value: "2", field: "foo" }]
+                            }]
+                        }]
+                });
+
+                filterMenu.clear();
+
+                equal(dataSource.filter(), null);
+            });
+
             test("populates the first field value from the datasource", function() {
                 dataSource.filter( { field: "foo", value: "1" });
 
