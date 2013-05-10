@@ -203,6 +203,124 @@ kendo_module({
         }
     });
 
+    var VirtualList = kendo.Observable.extend({
+        init: function(options) {
+            var list = this;
+
+            kendo.Observable.fn.init.call(list);
+
+            list.buffer = options.buffer;
+            list.height = options.height;
+            list.item = options.item;
+            list.items = [];
+
+            list.buffer.bind("reset", function() {
+                list.refresh();
+            });
+        },
+
+        refresh: function() {
+            var list = this,
+                buffer = list.buffer;
+                items = list.items;
+
+            while(items.length) {
+                items.pop().destroy();
+            }
+
+            list.bottom = 0;
+            list.offset = buffer.offset;
+            list.top = 0;
+
+            var targetHeight = list.height() * 3,
+                itemConstructor = list.item,
+                prevItem,
+                item;
+
+            while (list.bottom < targetHeight) {
+                item = itemConstructor(list.content(list.offset + items.length));
+                item.below(prevItem);
+                prevItem = item;
+                items.push(item);
+                list.bottom = item.bottom;
+            }
+
+            list.itemCount = items.length;
+
+            list.buffer.setViewSize(items.length);
+        },
+
+        itemHeight: function() {
+            return
+        },
+
+        totalHeight: function() {
+            var list = this,
+                averageItemHeight = (list.bottom - list.top) / list.itemCount,
+                remainingItemsCount = list.buffer.length - list.offset - list.itemCount;
+
+            return this.bottom + remainingItemsCount * averageItemHeight;
+        },
+
+        update: function(top) {
+            var list = this,
+                height = list.height(),
+                items = list.items,
+                initialOffset = list.offset,
+                topThreshold = top,
+                targetTop = top - height,
+                bottomThreshold = top + height + 20,
+                targetBottom = bottomThreshold + height,
+                itemCount = list.itemCount,
+                item,
+                bottomItem;
+
+            if (list.top > topThreshold) {
+                while (list.top > targetTop) {
+                    if (list.offset === 0) {
+                        break;
+                    }
+
+                    list.offset --;
+                    item = items.pop();
+
+                    item.update(list.content(list.offset));
+                    item.above(items[0]);
+                    items.unshift(item);
+                    list.top = item.top;
+                    list.bottom = items[items.length - 1].bottom;
+                }
+            }
+
+            if (list.bottom < bottomThreshold) {
+                while (list.bottom < targetBottom) {
+                    var nextIndex = list.offset + itemCount; // here, it should be offset + 1 + itemCount - 1.
+                    if (nextIndex === list.buffer.length) {
+                        break;
+                    }
+
+                    item = items.shift();
+
+                    item.update(list.content(nextIndex));
+                    item.below(items[items.length - 1]);
+                    items.push(item);
+                    list.top = items[0].top;
+                    list.bottom = item.bottom;
+
+                    list.offset ++;
+                }
+            }
+
+            if (initialOffset !== list.offset) {
+                list.trigger("resize", { top: list.top, bottom: list.bottom });
+            }
+        },
+
+        content: function(index) {
+            return this.buffer.at(index);
+        }
+    });
+
     var VirtualListViewItem = kendo.Class.extend({
         init: function(listView, dataItem) {
             var element = listView.append([dataItem]),
@@ -796,112 +914,6 @@ kendo_module({
                 }
             });
         },
-    });
-
-    var VirtualList = kendo.Observable.extend({
-        init: function(options) {
-            var list = this;
-
-            kendo.Observable.fn.init.call(list);
-
-            list.buffer = options.buffer;
-            list.height = options.height;
-            list.item = options.item;
-            list.items = [];
-
-            list.buffer.bind("reset", function() {
-                list.refresh();
-            });
-        },
-
-        refresh: function() {
-            var list = this,
-                buffer = list.buffer;
-                items = list.items;
-
-            while(items.length) {
-                items.pop().destroy();
-            }
-
-            list.bottom = 0;
-            list.offset = buffer.offset;
-            list.top = 0;
-
-            var targetHeight = list.height() * 3,
-                itemConstructor = list.item,
-                prevItem,
-                item;
-
-            while (list.bottom < targetHeight) {
-                item = itemConstructor(list.content(list.offset + items.length));
-                item.below(prevItem);
-                prevItem = item;
-                items.push(item);
-                list.bottom = item.bottom;
-            }
-
-            list.itemCount = items.length;
-
-            list.buffer.setViewSize(items.length);
-        },
-
-        itemHeight: function() {
-            return (this.bottom - this.top) / this.itemCount;
-        },
-
-        update: function(top, center) {
-            var list = this,
-                height = list.height(),
-                items = list.items,
-                initialOffset = list.offset,
-                topThreshold = top,
-                targetTop = top - height,
-                bottomThreshold = top + height + 20,
-                targetBottom = bottomThreshold + height,
-                itemCount = list.itemCount,
-                item,
-                bottomItem;
-
-            if (list.top > topThreshold) {
-                while (list.top > targetTop) {
-                    if (list.offset === 0) {
-                        break;
-                    }
-
-                    list.offset --;
-                    item = items.pop();
-
-                    item.update(list.content(list.offset));
-                    item.above(items[0]);
-                    items.unshift(item);
-                    list.top = item.top;
-                    list.bottom = items[items.length - 1].bottom;
-                }
-            }
-
-            if (list.bottom < bottomThreshold) {
-                while (list.bottom < targetBottom) {
-                    var nextIndex = list.offset + itemCount; // here, it should be offset + 1 + itemCount - 1.
-                    if (nextIndex === list.buffer.length) {
-                        break;
-                    }
-
-                    item = items.shift();
-
-                    item.update(list.content(nextIndex));
-                    item.below(items[items.length - 1]);
-                    items.push(item);
-                    list.top = items[0].top;
-                    list.bottom = item.bottom;
-
-                    list.offset ++;
-                }
-            }
-        },
-
-        content: function(index) {
-            return this.buffer.at(index);
-        }
     });
 
     kendo.mobile.ui.VirtualList = VirtualList;

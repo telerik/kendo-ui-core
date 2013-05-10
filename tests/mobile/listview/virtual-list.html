@@ -37,9 +37,9 @@
 
             var MockBuffer = kendo.Observable.extend({
                 offset: 0,
-                at: function(i) {
-                    return i;
-                }
+                length: 40,
+                at: function(i) { return i; },
+                setViewSize: $.noop
             });
 
             var MockCell = kendo.Class.extend({
@@ -102,14 +102,14 @@
 
             test('update at a given offset updates cells as expected', 2, function() {
                 list.update(450); // bottom point of the viewport will be 650
-                equal(list.items[0].theContent, 3);
-                equal(list.items[list.items.length - 1].theContent, 33);
+                equal(list.items[0].theContent, 10); // end reached of buffer
+                equal(list.items[list.items.length - 1].theContent, 39);
             });
 
             test('update at a given offset triggers resize', 2, function() {
                 list.bind('resize', function(e) {
-                    equal(e.top, 60);
-                    equal(e.bottom, 660);
+                    equal(e.top, 200);
+                    equal(e.bottom, 800);
                 });
 
                 list.update(450); // bottom point of the viewport will be 650
@@ -126,15 +126,6 @@
                 list.update(0);
             });
 
-            test('update with a center centers the list', 2, function() {
-                list.bind('resize', function(e) {
-                    equal(e.top, 160);
-                    equal(e.bottom, 760);
-                });
-
-                list.update(350, true); // bottom point of the viewport will be 550
-            });
-
             test('redrawing re-draws given the new dimensions', 2, function() {
                 ViewPortHeight = 300;
                 CellHeight = 40;
@@ -149,6 +140,14 @@
                 buffer.offset = 10;
                 buffer.trigger('reset');
                 equal(list.items[0].theContent, 10);
+            });
+
+            test('calculates the expected height', 2, function() {
+                equal(list.totalHeight(), 800);
+
+                buffer.length = 80;
+
+                equal(list.totalHeight(), 1600);
             });
         </script>
     </body>
