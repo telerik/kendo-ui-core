@@ -213,9 +213,14 @@ kendo_module({
             list.height = options.height;
             list.item = options.item;
             list.items = [];
+            list.footer = options.footer;
 
             list.buffer.bind("reset", function() {
                 list.refresh();
+            });
+
+            list.bind("resize", function() {
+                list.footer.below(list.items[list.items.length - 1]);
             });
         },
 
@@ -248,10 +253,7 @@ kendo_module({
             list.itemCount = items.length;
 
             list.buffer.setViewSize(items.length);
-        },
-
-        itemHeight: function() {
-            return
+            list.trigger("resize", { top: list.top, bottom: list.bottom });
         },
 
         totalHeight: function() {
@@ -259,7 +261,7 @@ kendo_module({
                 averageItemHeight = (list.bottom - list.top) / list.itemCount,
                 remainingItemsCount = list.buffer.length - list.offset - list.itemCount;
 
-            return this.bottom + remainingItemsCount * averageItemHeight;
+            return this.footer.height + this.bottom + remainingItemsCount * averageItemHeight;
         },
 
         update: function(top) {
@@ -363,6 +365,20 @@ kendo_module({
         }
     });
 
+    var VirtualListViewLoadingIndicator = kendo.Class.extend({
+        init: function(listView) {
+            this.element = $('<li class="endless-scroll-loading" style="position: absolute; top: 0">Loading ... </li>').appendTo(listView.element);
+            this.height = this.element.outerHeight(true);
+        },
+
+        below: function(item) {
+            if (item) {
+                this.top = item.bottom;
+                this.bottom = this.height + this.top;
+                this.element.css("top", this.top + "px");
+            }
+        },
+    });
 
     var VirtualListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
@@ -393,6 +409,8 @@ kendo_module({
                     return new VirtualListViewItem(that.listView, dataItem);
                 },
 
+                footer: new VirtualListViewLoadingIndicator(that.listView),
+
                 height: function() {
                     return scroller.height();
                 }
@@ -404,8 +422,13 @@ kendo_module({
                 that.list.update(e.scrollTop);
             });
 
-            that.buffer.bind('resize', function(e) {
-                scroller.virtualSize(0, that.list.itemHeight() * that.buffer.length);
+            that.list.bind('resize', function() {
+                scroller.virtualSize(0, that.list.totalHeight());
+            });
+
+            that.buffer.bind('expand', function() {
+                console.log('expanding');
+                that.list.update(scroller.scrollTop);
             });
 
             if (options.autoBind) {
