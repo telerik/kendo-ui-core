@@ -13,7 +13,7 @@
     <p>
         <label for="categories">Categories:</label>
 
-        <kendo:comboBox name="categories" dataTextField="categoryName" dataValueField="categoryId"
+        <kendo:comboBox name="categories" dataTextField="categoryName" dataValueField="categoryId" filter="contains"
                         placeholder="Select category..." style="width:300px">
             <kendo:dataSource>
                 <kendo:dataSource-transport>
@@ -34,7 +34,7 @@
     <p>
         <label for="products">Products:</label>
 
-        <kendo:comboBox name="products" dataTextField="productName" dataValueField="productId"
+        <kendo:comboBox name="products" dataTextField="productName" dataValueField="productId" filter="contains"
                         placeholder="Select product..." cascadeFrom="categories" autoBind="false" style="width:300px">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
@@ -55,7 +55,7 @@
     <p>
         <label for="orders">Orders:</label>
 
-        <kendo:comboBox name="orders" dataTextField="shipCity" dataValueField="orderId"
+        <kendo:comboBox name="orders" dataTextField="shipCity" dataValueField="orderId" filter="contains"
                         placeholder="Select order..." cascadeFrom="products" autoBind="false" style="width:300px">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>

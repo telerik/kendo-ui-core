@@ -14,6 +14,7 @@
               .Placeholder("Select category...")
               .DataTextField("CategoryName")
               .DataValueField("CategoryId")
+              .Filter(FilterType.Contains)
               .DataSource(source => {
                    source.Read(read => {
                        read.Action("GetCascadeCategories", "ComboBox");
@@ -29,6 +30,7 @@
               .Placeholder("Select product...")
               .DataTextField("ProductName")
               .DataValueField("ProductID")
+              .Filter(FilterType.Contains)
               .DataSource(source => {
                   source.Read(read =>
                   {
@@ -44,7 +46,8 @@
         <script>
             function filterProducts() {
                 return {
-                    categories: $("#categories").val()
+                    categories: $("#categories").val(),
+                    productFilter: $("#products").data("kendoComboBox").input.val()
                 };
             }
         </script>
@@ -57,6 +60,7 @@
               .Placeholder("Select order...")
               .DataTextField("ShipCity")
               .DataValueField("OrderID")
+              .Filter(FilterType.Contains)
               .DataSource(source => {
                   source.Read(read =>
                   {
@@ -72,7 +76,8 @@
         <script>
             function filterOrders() {
                 return {
-                    products: $("#filterOrders").val()
+                    products: $("#products").val(),
+                    orderFilter: $("#orders").data("kendoComboBox").input.val()
                 };
             }
         </script>

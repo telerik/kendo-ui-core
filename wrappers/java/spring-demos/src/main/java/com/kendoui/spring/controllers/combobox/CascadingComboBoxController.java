@@ -45,8 +45,8 @@ public class CascadingComboBoxController {
     
     @RequestMapping(value = "/cascadingcombobox/orders", method = RequestMethod.POST)
     public @ResponseBody List<?> orders(@RequestBody DataSourceRequest request) {
-        List<?> items = order.getListByProductId(request);
-        
+        List<?> items = order.getListByProductIdAndShipCity(request);
+       
         return items;
     }
 }

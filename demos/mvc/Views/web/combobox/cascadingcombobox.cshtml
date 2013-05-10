@@ -44,6 +44,7 @@
             <script>
                 $(document).ready(function() {
                     var categories = $("#categories").kendoComboBox({
+                        filter: "contains",
                         placeholder: "Select category...",
                         dataTextField: "CategoryName",
                         dataValueField: "CategoryID",
@@ -59,6 +60,7 @@
                     var products = $("#products").kendoComboBox({
                         autoBind: false,
                         cascadeFrom: "categories",
+                        filter: "contains",
                         placeholder: "Select product...",
                         dataTextField: "ProductName",
                         dataValueField: "ProductID",
@@ -74,6 +76,7 @@
                     var orders = $("#orders").kendoComboBox({
                         autoBind: false,
                         cascadeFrom: "products",
+                        filter: "contains",
                         placeholder: "Select order...",
                         dataTextField: "Order.ShipCity",
                         dataValueField: "OrderID",
