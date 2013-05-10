@@ -69,7 +69,7 @@ if (ARGV.bundle) {
     var orig_data = [];
     files.forEach(function(file){
         orig_data.push(fs.readFileSync(file, "utf8"));
-        var ast = compile_one_file(file, ast);
+        var ast = compile_one_file(file, true);
         toplevel.body = toplevel.body.concat(ast.body);
     });
     fs.writeFileSync(destination, orig_data.join("\n"));
@@ -82,6 +82,16 @@ if (ARGV.bundle) {
     var codegen_options = {};
     if (ARGV["beautify"]) {
         codegen_options.beautify = true;
+    }
+    if (ARGV.amd) {
+        // return the global kendo object as being "exported"
+        toplevel.body.push(new u2.AST_Return({
+            value: new u2.AST_Dot({
+                expression: new u2.AST_SymbolRef({ name: "window" }),
+                property: "kendo"
+            })
+        }));
+        toplevel = get_wrapper().wrap("kendo", [ "./jquery.min" ], toplevel);
     }
     fs.writeFileSync(destination_min, toplevel.print_to_string(codegen_options));
     process.exit(0);
@@ -121,11 +131,11 @@ if (ARGV["kendo-config"]) {
     process.exit(0);
 }
 
-function compile_one_file(file) {
+function compile_one_file(file, bundle) {
     var code = fs.readFileSync(file, "utf8");
     var ast = u2.parse(code, { filename: file });
     ast = extract_deps(ast, file);
-    if (!ast.is_bundle) {
+    if (!ast.is_bundle && !bundle) {
         var deps = ast.deps;
         var id = "kendo." + ast.component.id;
         if (ARGV.deps) {
