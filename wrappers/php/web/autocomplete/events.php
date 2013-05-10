@@ -39,25 +39,25 @@ echo $autoComplete->render();
 
 <script>
     function open() {
-        kendoConsole.log("event: open");
+        kendoConsole.log("event :: open");
     };
 
     function close() {
-        kendoConsole.log("event: close");
+        kendoConsole.log("event :: close");
     };
 
     function change() {
-        kendoConsole.log("event: change");
+        kendoConsole.log("event :: change");
     };
 
     function dataBound() {
-        kendoConsole.log("event: dataBound");
+        kendoConsole.log("event :: dataBound");
     };
 
     function select(e) {
         if ("kendoConsole" in window) {
             var dataItem = this.dataItem(e.item.index());
-            kendoConsole.log("event: select (" + dataItem + ")" );
+            kendoConsole.log("event :: select (" + dataItem + ")" );
         }
     };
 </script>
