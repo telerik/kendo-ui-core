@@ -489,12 +489,8 @@ kendo_module({
                 plotArea = chart._plotArea,
                 axes = plotArea.axes,
                 selections = chart._selections = [],
-                selection,
-                i,
-                axis,
-                min,
-                max,
-                options;
+                selection, i, axis,
+                min, max, options;
 
             if (!chart._selectStartHandler) {
                 chart._selectStartHandler = proxy(chart._selectStart, chart);

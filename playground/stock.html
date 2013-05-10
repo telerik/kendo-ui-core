@@ -23,7 +23,17 @@
     <body class="k-default">
         <h3>The Boeing Company (NYSE:BA)</h3>
         <div id="chart" style="width: 900px; height: 500px; border: 1px solid red; background: blue;"></div>
+        <input type="button" onclick="toggleSeries()" />
         <script>
+            function toggleSeries() {
+                var chart = $("#chart").data("kendoStockChart"),
+                    series = chart.options.series;
+
+                series[0].visible = !series[0].visible;
+
+                chart.refresh();
+            }
+
             $(function() {
                 $("#chart").kendoStockChart({
                     dataSource: {

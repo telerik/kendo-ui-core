@@ -355,7 +355,10 @@ kendo_module({
                 plotArea = chart._plotArea,
                 slavePanes = plotArea.panes.slice(0, -1);
 
-            chart._plotArea.redraw(slavePanes);
+            // Update the original series before partial refresh.
+            plotArea.srcSeries = chart.options.series;
+
+            plotArea.redraw(slavePanes);
         },
 
         _drag: function(e) {
