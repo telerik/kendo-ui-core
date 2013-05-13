@@ -95,8 +95,6 @@
 
 <script>
     $(document).ready(function() {
-        $("#movies").closest(".k-widget")
-                    .attr("id", "products_wrapper");
 
         $("#filter").kendoDropDownList({
             change: filterTypeOnChanged

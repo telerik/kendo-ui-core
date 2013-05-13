@@ -46,7 +46,7 @@
     </div>
 
     <div class="demo-section">
-        <select id="products" data-placeholder="Select movie..."></select>
+        <select id="movies" data-placeholder="Select movie..."></select>
     </div>
 
     <script>
@@ -65,19 +65,17 @@
         {text: "The Shawshank Redemption 2", value:"11"}
         ];
 
-        $("#products").kendoMultiSelect({
+        $("#movies").kendoMultiSelect({
             dataTextField: "text",
             dataValueField: "value",
             dataSource: data
-        })
-        .closest(".k-widget")
-        .attr("id", "products_wrapper");
+        });
 
         $("#filter").kendoDropDownList({
             change: filterTypeOnChanged
         });
 
-        var multiSelect = $("#products").data("kendoMultiSelect"),
+        var multiSelect = $("#movies").data("kendoMultiSelect"),
             setValue = function(e) {
                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
                     multiSelect.dataSource.filter({}); //clear applied filter before setting value
