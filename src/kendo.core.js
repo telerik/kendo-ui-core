@@ -443,7 +443,8 @@ function pad(number, digits, end) {
         SHARP = "#",
         ZERO = "0",
         PLACEHOLDER = "??",
-        EN = "en-US";
+        EN = "en-US",
+        objectToString = {}.toString;
 
     //cultures
     kendo.cultures = {"en-US" : {
@@ -991,7 +992,7 @@ function pad(number, digits, end) {
 
     var toString = function(value, fmt, culture) {
         if (fmt) {
-            if (value instanceof Date) {
+            if (objectToString.call(value) === "[object Date]") {
                 return formatDate(value, fmt, culture);
             } else if (typeof value === NUMBER) {
                 return formatNumber(value, fmt, culture);
@@ -1046,7 +1047,8 @@ function pad(number, digits, end) {
         numberRegExp = {
             2: /^\d{1,2}/,
             4: /^\d{4}/
-        };
+        },
+        objectToString = {}.toString;
 
     function outOfRange(value, start, end) {
         return !(value >= start && value <= end);
@@ -1334,7 +1336,7 @@ function pad(number, digits, end) {
     kendo._adjustDate = adjustDate;
 
     kendo.parseDate = function(value, formats, culture) {
-        if (value instanceof Date) {
+        if (objectToString.call(value) === "[object Date]") {
             return value;
         }
 
@@ -1458,7 +1460,7 @@ function pad(number, digits, end) {
 
     if (globalize) {
         kendo.parseDate = function (value, format, culture) {
-            if (value instanceof Date) {
+            if (objectToString.call(value) === "[object Date]") {
                 return value;
             }
 
