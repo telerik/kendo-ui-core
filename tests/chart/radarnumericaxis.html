@@ -306,6 +306,59 @@
                 equal(view.log.ring[0].style.zIndex, -1);
             });
 
+            (function() {
+                var chart,
+                    label,
+                    plotArea;
+
+                function axisLabelClick(clickHandler, options) {
+                    chart = createChart($.extend(true, {
+                        series: [{
+                            type: "radarColumn",
+                            field: "value"
+                        }],
+                        axisLabelClick: clickHandler
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    label = plotArea.valueAxis.labels[1];
+                    $(getElement(label.options.id)).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Radar Numeric Axis / Events / axisLabelClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking axis labels", 1, function() {
+                    axisLabelClick(function() { ok(true); });
+                });
+
+                test("event arguments contain axis options", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.axis.type, "numeric");
+                    });
+                });
+
+                test("event arguments contain DOM element", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.element.length, 1);
+                    });
+                });
+
+                test("event arguments contain index", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.index, 1);
+                    });
+                });
+
+                test("event arguments contain value", 1, function() {
+                    axisLabelClick(function(e) {
+                        equal(e.value, 0.2);
+                    });
+                });
+            })();
+
 
         </script>
 
