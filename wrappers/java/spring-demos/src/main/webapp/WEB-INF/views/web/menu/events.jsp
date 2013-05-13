@@ -3,7 +3,7 @@
 
 <demo:header />
 <div class="demo-section">
-	<kendo:menu name="Menu" open="onOpen" close="onClose" select="onSelect" activate="onActivate" deactivate="onDeactivate">
+	<kendo:menu name="menu" open="onOpen" close="onClose" select="onSelect" activate="onActivate" deactivate="onDeactivate">
 	    <kendo:menu-items>
 		    <kendo:menu-item text="First Item">
 		        <kendo:menu-items>
