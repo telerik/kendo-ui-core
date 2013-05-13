@@ -134,6 +134,8 @@ kendo_module({
                 .add(that.wrapper.closest("form"))
                 .off(that._ns);
 
+            $(that.element).off(NS);
+
             Widget.fn.destroy.call(that);
         },
 
@@ -146,7 +148,8 @@ kendo_module({
 
             $(that.element)
                 .hide()
-                .removeAttr("id");
+                .removeAttr("id")
+                .off(NS);
 
             that._activeInput(input);
         },
@@ -160,12 +163,18 @@ kendo_module({
             input
                 .attr("multiple", that._supportsMultiple() ? that.multiple : false)
                 .attr("autocomplete", "off")
-                .click(function(e) {
+                .on("click" + NS, function(e) {
                     if (wrapper.hasClass("k-state-disabled")) {
                         e.preventDefault();
                     }
                 })
-                .change($.proxy(that._onInputChange, that));
+                .on("focus" + NS, function() {
+                    $(this).parent().addClass("k-state-focused");
+                })
+                .on("blur" + NS, function() {
+                    $(this).parent().removeClass("k-state-focused");
+                })
+                .on("change" + NS, $.proxy(that._onInputChange, that));
         },
 
         _onInputChange: function(e) {
