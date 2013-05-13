@@ -42,7 +42,7 @@ kendo_module({
         DISABLEDCLASS = "k-state-disabled",
         SELECTEDCLASS = "k-state-selected",
         SELECTEDSELECTOR = "." + SELECTEDCLASS,
-        HIGHLIGHTEDCLASS = "k-state-highlighted",
+        HIGHLIGHTCLASS = "k-state-highlight",
         ACTIVEITEMSELECTOR = ITEM + ":not(.k-state-disabled)",
         clickableItems = ACTIVEITEMSELECTOR + " > .k-link",
         disabledItems = ITEM + ".k-state-disabled > .k-link",
@@ -314,8 +314,8 @@ kendo_module({
                         return that;
                     }
 
-                    element.find("." + HIGHLIGHTEDCLASS).removeClass(HIGHLIGHTEDCLASS);
-                    item.addClass(HIGHLIGHTEDCLASS);
+                    element.find("." + HIGHLIGHTCLASS).removeClass(HIGHLIGHTCLASS);
+                    item.addClass(HIGHLIGHTCLASS);
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -346,7 +346,7 @@ kendo_module({
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
                 if (!item.hasClass(DISABLEDCLASS) && groups.is(VISIBLE)) {
-                    item.removeClass(HIGHLIGHTEDCLASS);
+                    item.removeClass(HIGHLIGHTCLASS);
 
                     if (!useAnimation) {
                         animBackup = that.options.animation;
@@ -998,10 +998,10 @@ kendo_module({
             that._selected = item.attr(ARIA_SELECTED, true);
 
             element.find(selectableItems).removeClass(SELECTEDCLASS);
-            element.find("> .k-state-highlighted, .k-panel > .k-state-highlighted").removeClass(HIGHLIGHTEDCLASS);
+            element.find("> ." + HIGHLIGHTCLASS + ", .k-panel > ." + HIGHLIGHTCLASS).removeClass(HIGHLIGHTCLASS);
 
             link.addClass(SELECTEDCLASS);
-            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS);
+            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTCLASS);
             that._current(item);
         },
 
