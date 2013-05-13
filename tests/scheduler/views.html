@@ -701,6 +701,47 @@
                 equal(view.content.find(".k-appointment dd").text(), "my event");
             });
 
+            test("multiple events are displayed", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "event1" },
+                    { start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
+                ];
+
+                view.dataBind(events);
+
+                equal(view.content.find("div.k-appointment").length, 2);
+                equal(view.content.find(".k-appointment:first dd").text(), "event1");
+                equal(view.content.find(".k-appointment:last dd").text(), "event2");
+            });
+
+            test("old events are removed on multiple databind calls", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.dataBind(events);
+                view.dataBind(events);
+
+                equal(view.content.find("div.k-appointment").length, 1);
+                equal(view.content.find(".k-appointment dd").text(), "my event");
+            });
+
             test("format event date", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -854,10 +895,47 @@
                 view.dataBind(events);
 
                 equal(view.content.find("div.k-appointment").width(), view.content.find("td:eq(10)").width() - 30);
+            });
+
+            test("multiple day events are added to all day slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.dataBind(events);
+
+                equal(view.datesHeader.find("div.k-appointment").length, 1);
+                equal(view.datesHeader.find(".k-appointment dd").text(), "my event");
 
             });
 
-/*
+            test("multiple day event position is set to the date slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.dataBind(events);
+                var eventOffset = view.datesHeader.find("div.k-appointment").offset();
+                var slotOffset = view.allDayHeader.find("td").eq(0).offset();
+                equal(eventOffset.top, slotOffset.top);
+                equal(eventOffset.left, slotOffset.left);
+            });
+
+       /*
             test("toolbat commands", function() {
                 var view = setup({
                     commands: ["toggleWorkDay"]

@@ -44,6 +44,11 @@ kendo_module({
                 '</dl>' +
                 //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 //'<span class="k-icon k-resize-handle"></span>' +
+                '</div>'),
+        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment">' +
+                '<dl><dd>${title}</dd></dl>' +
+                //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                //'<span class="k-icon k-resize-handle"></span>' +
             '</div>');
 
     function getDate(date) {
@@ -421,7 +426,8 @@ kendo_module({
             majorTick: 60,
             majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
             minorTickTimeTemplate: "&nbsp;",
-            eventTemplate: DAY_VIEW_EVENT_TEMPLATE
+            eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
+            allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE
         },
 
         dateForTitle: function() {
@@ -787,40 +793,74 @@ kendo_module({
             return -1;
         },
 
+        _positonAllDayEvent: function(element, slots, startIndex, endIndex, slotWidth) {
+            var dateSlot = slots.eq(startIndex);
+                //allDayEventOffset = 10;
+
+                element.offset(dateSlot.offset())
+                    .css({
+                        width: slotWidth * ((Math.ceil(endIndex - startIndex) || 1) + 1),
+                        //height: dateSlot.height() - allDayEventOffset
+                    });
+        },
+
+        _positionEvent: function(event, element, slots, dateSlotIndex, slotHeight) {
+            var startIndex = this._timeSlotIndex(event.start),
+                endIndex = Math.ceil(this._timeSlotIndex(event.end)),
+                eventRightOffset = 30,
+                timeSlot = slots.eq(Math.floor(startIndex)),
+                dateSlot = slots.children().eq(dateSlotIndex);
+
+            element.offset({
+                    top: timeSlot.offset().top,
+                    left: dateSlot.offset().left,
+                })
+                .css({
+                    height: slotHeight * (Math.ceil(endIndex - startIndex) || 1),
+                    width: dateSlot.width() - eventRightOffset
+                });
+        },
+
+        _createEventElement: function(event, template) {
+            return $(template(extend({}, {
+                formattedTime: kendo.format(this.options.eventTimeFormat, event.start, event.end)
+            }, event)));
+        },
+
         dataBind: function(events) {
             var eventTemplate = kendo.template(this.options.eventTemplate),
+                allDayEventTemplate = kendo.template(this.options.allDayEventTemplate),
                 timeSlots = this.content.find("tr"),
+                allDaySlots = this.allDayHeader ? this.allDayHeader.find("td") : $(),
+                allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
                 slotHeight = Math.floor(this.content.find(">table:first").height() / timeSlots.length),
-                eventRightOffset = 30,
+                slotWidth = Math.floor(this.datesHeader.find("table:first").width() / this.datesHeader.find("th").length),
+                eventTimeFormat = this.options.eventTimeFormat,
                 event,
                 idx,
                 length;
 
-            this.content.find(".k-appointment").remove();
+            this.element.find(".k-appointment").remove();
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
 
-                var startIndex = this._timeSlotIndex(event.start),
-                    endIndex = Math.ceil(this._timeSlotIndex(event.end)),
-                    timeSlot = timeSlots.eq(Math.floor(startIndex)),
-                    dateSlotIndex = this._dateSlotIndex(event.start),
-                    dateSlot;
+               var dateSlotIndex = this._dateSlotIndex(event.start),
+                   endDateSlotIndex = this._dateSlotIndex(event.end),
+                   element,
+                   isAllDay = dateSlotIndex !== endDateSlotIndex;
 
                 if (dateSlotIndex > -1) {
-                    dateSlot = timeSlot.children().eq(dateSlotIndex);
+                    element = this._createEventElement(event, isAllDay ? allDayEventTemplate : eventTemplate)
+                                    .appendTo(isAllDay ? allDayEventContainer : this.content);
 
-                    $(eventTemplate(extend({}, { formattedTime: kendo.format(this.options.eventTimeFormat, event.start, event.end) }, event)))
-                        .appendTo(this.content)
-                        .offset({
-                            top: timeSlot.offset().top,
-                            left: dateSlot.offset().left,
-                        })
-                        .css({
-                            height: slotHeight * (Math.ceil(endIndex - startIndex) || 1),
-                            width: dateSlot.width() - eventRightOffset
-                        });
+                    if (isAllDay) {
+                        this._positonAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
+                    } else {
+                        this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
                     }
+
+                }
             }
         }
     });
