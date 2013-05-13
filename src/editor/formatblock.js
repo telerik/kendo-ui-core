@@ -175,21 +175,22 @@ var BlockFormatter = Class.extend({
     },
 
     remove: function (nodes) {
-        var i, l, formatNode, namedFormat;
+        var i, l, formatNode, namedFormat, name;
 
         for (i = 0, l = nodes.length; i < l; i++) {
             formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode) {
-                if (dom.ofType(formatNode, ["p", "img", "li"])) {
-                    namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
+                name = dom.name(formatNode);
+                if (name == "div" && !formatNode.getAttribute("class")) {
+                    dom.unwrap(formatNode);
+                } else {
+                    namedFormat = EditorUtils.formatByName(name, this.format);
                     if (namedFormat.attr.style) {
                         dom.unstyle(formatNode, namedFormat.attr.style);
                     }
                     if (namedFormat.attr.className) {
                         dom.removeClass(formatNode, namedFormat.attr.className);
                     }
-                } else {
-                    dom.unwrap(formatNode);
                 }
             }
         }
