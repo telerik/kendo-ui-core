@@ -35,6 +35,10 @@
 
   <body>
 
+    <p>
+      <input id="testselect" />
+    </p>
+
     <div style="padding: 1em; float: right; width: 50%">
       <div id="flat"></div>
       <table style="margin-top: 1em"><tr>
@@ -67,6 +71,14 @@
     </div>
 
     <script>
+
+      $("#testselect").kendoColorPicker({
+          select: function() {
+              console.log(this);
+              console.log(this.element.attr("id"));
+          }
+      });
+
       window.flat = $("#flat").kendoColorPalette({ size: { width: 24, height: 15 } }).data("kendoColorPalette");
 
       $("#dropdown").kendoColorPicker({ palette: "basic", toolIcon: "k-foreColor" });

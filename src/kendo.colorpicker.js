@@ -948,6 +948,9 @@ kendo_module({
                 }
 
                 options._standalone = false;
+                delete options.select;
+                delete options.change;
+                delete options.cancel;
 
                 var selector = this._selector = new selectorType($("<div />").appendTo(document.body), options);
 
