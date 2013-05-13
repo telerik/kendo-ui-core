@@ -13,10 +13,10 @@
         <kendo:numericTextBox name="percentage" format="p0" min="0" max="0.9" value="0.05" step="0.01"></kendo:numericTextBox>
     </div>
     <div>
-        <kendo:numericTextBox name="custom" format="#.00 kg" value="10"></kendo:numericTextBox>
+        <kendo:numericTextBox name="custom" format="#.00 kg" value="2"></kendo:numericTextBox>
     </div>
     <div>
-        <kendo:numericTextBox name="numeric" placeholder="Enter numeric value"></kendo:numericTextBox>
+        <kendo:numericTextBox name="numeric" placeholder="Enter numeric value" value="17"></kendo:numericTextBox>
     </div>
 </div>
 

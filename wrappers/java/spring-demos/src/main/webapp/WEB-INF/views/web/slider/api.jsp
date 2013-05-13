@@ -41,7 +41,7 @@
     <kendo:slider name="slider" class="temperature" min="0" max="30" smallStep="1" largeStep="10" value="18">
 	</kendo:slider>
 	
-	<kendo:rangeSlider name="rangeSlider" class="humidity" min="0" max="10" smallStep="1" largeStep="2" tickPlacement="both">
+	<kendo:rangeSlider name="rangeslider" class="humidity" min="0" max="10" smallStep="1" largeStep="2" tickPlacement="both">
     </kendo:rangeSlider>
 </div>
 

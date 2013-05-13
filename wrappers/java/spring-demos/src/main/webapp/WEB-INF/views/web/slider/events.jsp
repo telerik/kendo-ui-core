@@ -24,11 +24,11 @@
 	}
 	
 	function rangeSliderOnSlide(e) {
-	    kendoConsole.log("Slide :: new slide value is: " + e.value.toString().replace(",", " - "));
+	    kendoConsole.log("Slide :: new slide value are: " + e.value.toString().replace(",", " - "));
 	}
 	
 	function rangeSliderOnChange(e) {
-	    kendoConsole.log("Change :: new value is: " + e.value.toString().replace(",", " - "));
+	    kendoConsole.log("Change :: new value are: " + e.value.toString().replace(",", " - "));
 	}
 </script>
 
