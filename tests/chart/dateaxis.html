@@ -422,7 +422,7 @@
                     equal(dateAxis.options.baseUnitStep, 2);
                 });
 
-                test("automatic base unit step is calculated when outside of preset values", function() {
+                test("automatic base unit step is increased to satisfy maxDateGroups", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:10:00")
@@ -433,6 +433,31 @@
                     });
 
                     equal(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("base unit step is limited to specified value", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:05:00")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { minutes: [10] }
+                    });
+
+                    equal(dateAxis.options.baseUnitStep, 10);
+                });
+
+                test("base unit is not chosen if it has no valid automatic steps", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:05:00")
+                        ],
+                        baseUnit: "fit",
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { minutes: [] }
+                    });
+
+                    equal(dateAxis.options.baseUnit, "hours");
                 });
 
                 test("automatic base unit (hours) is chosen according to maxDateGroups", function() {
