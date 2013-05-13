@@ -59,6 +59,7 @@ kendo_module({
     // Constants ==============================================================
     var NS = ".kendoChart",
         ABOVE = "above",
+        ARC = "arc",
         AREA = "area",
         AUTO = "auto",
         FIT = "fit",
@@ -2087,13 +2088,57 @@ kendo_module({
         renderPlotBands: function(view) {
             var axis = this,
                 options = axis.options,
-                plotBands = options.plotBands,
+                plotBands = options.plotBands || [],
+                elements = [],
+                // TODO: Lookup from plotArea. Should it be user changable?
                 type = options.majorGridLines.type,
-                majorTicks = axis.getTickPositions(options.majorUnit),
+                altAxis = axis.plotArea.categoryAxis,
                 majorAngles = altAxis.majorDivisions(),
                 center = altAxis.box.center(),
-                elements = [];
+                i,
+                band,
+                bandStyle,
+                slot,
+                ring;
 
+            for (i = 0; i < plotBands.length; i++) {
+                band = plotBands[i];
+                bandStyle = {
+                    fill: band.color,
+                    fillOpacity: band.opacity,
+                    strokeOpacity: band.opacity,
+                    zIndex: -1
+                };
+
+                slot = axis.getSlot(band.from, band.to);
+                ring = new Ring(center, center.y - slot.y2, center.y - slot.y1, 0, 360);
+
+                elements.push(type === ARC ?
+                    view.createRing(ring, bandStyle) :
+                    view.createPolyline(
+                        axis.plotBandPoints(ring, majorAngles), true, bandStyle
+                    )
+                );
+            }
+
+            return elements;
+        },
+
+        plotBandPoints: function(ring, angles) {
+            var innerPoints = [],
+                outerPoints = [],
+                i;
+
+            for (i = 0; i < angles.length; i++) {
+                innerPoints.push(Point2D.onCircle(ring.c, angles[i], ring.ir));
+                outerPoints.push(Point2D.onCircle(ring.c, angles[i], ring.r));
+            }
+
+            innerPoints.reverse();
+            innerPoints.push(innerPoints[0]);
+            outerPoints.push(outerPoints[0]);
+
+            return outerPoints.concat(innerPoints);
         },
 
         renderGridLines: function(view, altAxis) {
@@ -2144,7 +2189,7 @@ kendo_module({
             for (tickIx = 0; tickIx < ticks.length; tickIx++) {
                 tickRadius = center.y - ticks[tickIx];
                 if(tickRadius > 0) {
-                    if (options.type === "arc") {
+                    if (options.type === ARC) {
                         elements.push(view.createCircle(
                             center, tickRadius, elementOptions
                         ));

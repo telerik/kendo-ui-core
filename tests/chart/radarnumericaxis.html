@@ -219,7 +219,7 @@
             });
 
             // ------------------------------------------------------------
-            module("Radar Numeric Axis / Plot Bands", {
+            module("Radar Numeric Axis / Plot Bands / Arcs", {
                 setup: function() {
                     createAxis({
                         line: {
@@ -238,25 +238,74 @@
                 }
             });
 
-            test("renders polygons", function() {
-                equal(view.log.path.length, 5);
+            test("renders polygon", function() {
+                equal(view.log.path[0].points.length, 8);
             });
 
-            test("renders circles", function() {
-                
+            test("polygon is closed", function() {
+                equal(view.log.path[0].closed, true);
+            });
+
+            test("polygon points are on circle", function() {
+                arrayClose(mapPoints(view.log.path[0].points), [
+                    [300, 204], [383, 348], [217, 348], [300, 204],
+                    [302, 299], [298, 299], [300, 302], [302, 298]
+                ], TOLERANCE);
             });
 
             test("renders color", function() {
-                equal(view.log.sector[0].style.fill, "red");
+                equal(view.log.path[0].style.fill, "red");
             });
 
             test("renders opacity", function() {
-                equal(view.log.sector[0].style.fillOpacity, 0.5);
+                equal(view.log.path[0].style.fillOpacity, 0.5);
             });
 
             test("renders z index", function() {
-                equal(view.log.sector[0].style.zIndex, -1);
+                equal(view.log.path[0].style.zIndex, -1);
             });
+
+            // ------------------------------------------------------------
+            module("Radar Numeric Axis / Plot Bands / Arcs", {
+                setup: function() {
+                    createAxis({
+                        majorGridLines: {
+                            type: "arc"
+                        },
+                        plotBands: [{
+                            from: 1,
+                            to: 2,
+                            opacity: 0.5,
+                            color: "red"
+                        }]
+                    });
+                }
+            });
+
+            test("renders ring", function() {
+                equal(view.log.ring.length, 1);
+            });
+
+            test("ring inner radius", function() {
+                close(view.log.ring[0].ring.ir, 96, TOLERANCE);
+            });
+
+            test("ring outer radius", function() {
+                close(view.log.ring[0].ring.r, 194, TOLERANCE);
+            });
+
+            test("renders color", function() {
+                equal(view.log.ring[0].style.fill, "red");
+            });
+
+            test("renders opacity", function() {
+                equal(view.log.ring[0].style.fillOpacity, 0.5);
+            });
+
+            test("renders z index", function() {
+                equal(view.log.ring[0].style.zIndex, -1);
+            });
+
 
         </script>
 
