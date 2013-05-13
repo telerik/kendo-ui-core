@@ -16,19 +16,16 @@
 
             $("#Editor1").kendoEditor();
 
-            var BlockFormatter,
-            TextNodeEnumerator,
-            enumerator;
+            var BlockFormatter = kendo.ui.editor.BlockFormatter;
+            var TextNodeEnumerator = kendo.ui.editor.TextNodeEnumerator;
 
             module("Block formatter", {
                 setup: function() {
                     editor = getEditor();
-                    BlockFormatter = kendo.ui.editor.BlockFormatter;
-                    TextNodeEnumerator = kendo.ui.editor.TextNodeEnumerator;
                 }
             });
 
-            test('apply format on suitable block node', function() {
+            test("apply format on suitable block node", function() {
                 editor.value('<div>foo</div>');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -37,7 +34,7 @@
                 equal(editor.value(), '<div style="text-align:center;">foo</div>');
             });
 
-            test('apply wraps single node', function() {
+            test("apply wraps single node", function() {
                 editor.value('foo');
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
 
@@ -46,7 +43,7 @@
                 equal(editor.value(), '<div style="text-align:center;">foo</div>');
             });
 
-            test('apply wraps all inline nodes', function() {
+            test("apply wraps all inline nodes", function() {
                 editor.value('<span>foo</span><span>bar</span>');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -54,7 +51,7 @@
                 equal(editor.value(), '<div style="text-align:center;"><span>foo</span><span>bar</span></div>');
             });
 
-            test('apply wraps block and inline nodes', function() {
+            test("apply wraps block and inline nodes", function() {
                 editor.value('<div>foo</div><span>bar</span>');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -63,7 +60,7 @@
                 equal(editor.value(), '<div style="text-align:center;">foo</div><div style="text-align:center;"><span>bar</span></div>');
             });
 
-            test('apply for block nodes', function() {
+            test("apply for block nodes", function() {
                 editor.value('<div>foo</div><div>bar</div>');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -72,7 +69,7 @@
                 equal(editor.value(), '<div style="text-align:center;">foo</div><div style="text-align:center;">bar</div>');
             });
 
-            test('apply for text and block', function() {
+            test("apply for text and block", function() {
                 editor.value('foo<div>bar</div>baz');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -80,7 +77,7 @@
                 equal(editor.value(), '<div style="text-align:center;">foo</div><div style="text-align:center;">bar</div><div style="text-align:center;">baz</div>');
             });
 
-            test('apply text node and inline elements', function() {
+            test("apply text node and inline elements", function() {
                 editor.value('foo<span></span>bar<span></span>baz');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -88,29 +85,43 @@
                 equal(editor.value(), '<div style="text-align:center;">foo<span></span>bar<span></span>baz</div>');
             });
 
-            test('remove unwraps text node', function() {
+            test("remove unwraps text node", function() {
                 editor.value('<div style="text-align:center">foo</div>');
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
                 formatter.remove([editor.body.firstChild.firstChild]);
                 equal(editor.value(), 'foo');
             });
 
-            test('remove preserves paragraphs', function() {
+            test("remove preserves paragraphs", function() {
                 editor.value('<p style="text-align:center">foo</p>');
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
                 formatter.remove([editor.body.firstChild.firstChild]);
                 equal(editor.value(), '<p>foo</p>');
             });
 
-            test('remove unwraps block nodes', function() {
+            test("remove unwraps block nodes", function() {
                 editor.value('<div style="text-align:center">foo</div><div style="text-align:center">bar</div>');
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
                 formatter.remove([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
                 equal(editor.value(), 'foobar');
             });
 
+            test("remove preserves headings", function() {
+                editor.value('<h1 style="text-align:center">foo</h1>');
+                var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
+                formatter.remove([editor.body.firstChild.firstChild]);
+                equal(editor.value(), '<h1>foo</h1>');
+            });
 
-            test('toggle applies format if format is not found', function() {
+            test("remove preserves div elements with a class name", function() {
+                editor.value('<div class="bar" style="text-align:center">foo</div>');
+                var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
+                formatter.remove([editor.body.firstChild.firstChild]);
+                equal(editor.value(), '<div class="bar">foo</div>');
+            });
+
+
+            test("toggle applies format if format is not found", function() {
                 var range = createRangeFromText(editor, '|fo|');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -122,7 +133,7 @@
                 ok($.isArray(argument));
             });
 
-            test('toggle removes format if format is found', function() {
+            test("toggle removes format if format is found", function() {
                 var range = createRangeFromText(editor, '<div style="text-align:center">|fo|</div>');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyCenter);
@@ -134,7 +145,7 @@
                 ok($.isArray(argument));
             });
 
-            test('toggle and empty range', function() {
+            test("toggle and empty range", function() {
                 editor.value('foo');
 
                 var range = editor.createRange();
@@ -145,7 +156,7 @@
                 equal(editor.value(), '<div style="text-align:center;">foo</div>');
             });
 
-            test('toggle on image', function() {
+            test("toggle on image", function() {
                 editor.value('<img src="foo" />');
 
                 var range = editor.createRange();
@@ -157,7 +168,7 @@
                 equal(editor.value(), '<img src="foo" style="float:right;" />');
             });
 
-            test('toggle on image in paragarph', function() {
+            test("toggle on image in paragarph", function() {
                 editor.value('<p><img src="foo" /></p>');
 
                 var range = editor.createRange();
@@ -169,7 +180,7 @@
                 equal(editor.value(), '<p><img src="foo" style="float:right;" /></p>');
             });
 
-            test('remove on image', function() {
+            test("remove on image", function() {
                 editor.value('<img style="float:right" src="foo" />');
 
                 var formatter = new BlockFormatter(editor.options.formats.justifyRight);
@@ -179,7 +190,7 @@
                 equal(editor.value(), '<img src="foo" />');
             });
 
-            test('apply attribute on td', function() {
+            test("apply attribute on td", function() {
                 editor.value('<table><tr><td>foo</td></tr></table>');
                 var td = $('td', editor.body)[0];
                 var formatter = new BlockFormatter(editor.options.formats.justifyRight);
@@ -189,7 +200,7 @@
                 equal(editor.value(), '<table><tbody><tr><td style="text-align:right;">foo</td></tr></tbody></table>');
             });
 
-            test('apply wrap in td', function() {
+            test("apply wrap in td", function() {
                 editor.value('<table><tr><td>foo</td></tr></table>');
                 var td = $('td', editor.body)[0];
                 var formatter = new BlockFormatter([{tags:['p']}]);
@@ -199,14 +210,14 @@
                 equal(editor.value(), '<table><tbody><tr><td><p>foo</p></td></tr></tbody></table>');
             });
 
-            test('apply to selection of block elements', function() {
+            test("apply to selection of block elements", function() {
                 editor.value('<div>foo</div><div>bar</div><div>baz</div>');
                 var formatter = new BlockFormatter(editor.options.formats.justifyRight);
                 formatter.apply([editor.body.firstChild.firstChild, editor.body.firstChild.nextSibling.firstChild]);
                 equal(editor.value(), '<div style="text-align:right;">foo</div><div style="text-align:right;">bar</div><div>baz</div>');
             });
 
-            test('apply wraps in div', function() {
+            test("apply wraps in div", function() {
                 editor.value('<div>foo</div>');
                 var formatter = new BlockFormatter([{tags:['p']}]);
 
@@ -215,7 +226,7 @@
                 equal(editor.value(), '<div><p>foo</p></div>');
             });
 
-            test('apply empty container', function() {
+            test("apply empty container", function() {
                 editor.value('');
                 editor.focus();
                 editor.exec('justifyRight');
@@ -225,7 +236,7 @@
             });
 
 
-            test('apply text nodes in inline element', function() {
+            test("apply text nodes in inline element", function() {
                 editor.value('<span>foo<strong>bar</strong></span>');
                 var formatter = new BlockFormatter(editor.options.formats.justifyRight);
 
@@ -234,7 +245,7 @@
                 equal(editor.value(), '<div style="text-align:right;"><span>foo<strong>bar</strong></span></div>');
             });
 
-            test('remove className format', function() {
+            test("remove className format", function() {
                 editor.value("<p class='left'>foo</p>");
 
                 var formatter = new BlockFormatter([{ tags: ["p"], attr: { className: "left" } }]);
