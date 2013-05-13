@@ -49,7 +49,7 @@
                		<kendo:treeView-item text="Item 1.3" />
                	</kendo:treeView-item-items>
             </kendo:treeView-item>
-            <kendo:treeView-item text="Item 2" expanded="true">
+            <kendo:treeView-item text="Item 2">
                	<kendo:treeView-item-items>
                		<kendo:treeView-item text="Item 2.1" />
                		<kendo:treeView-item text="Item 2.2" />
