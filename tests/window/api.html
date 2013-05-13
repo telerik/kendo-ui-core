@@ -103,7 +103,6 @@
             });
 
             test("closing a modal window moves overlay below previous window", function() {
-
                 function resumeTest() {
                     window.setTimeout(function(){
                         start();
@@ -467,7 +466,6 @@
             });
 
             test("pin() substracts the browser scroll position from the wrapper's top and left styles", function() {
-                
                 var spacerDiv = $("<div style='width:6000px;height:3000px'>&nbsp;</div>").appendTo(document.body);
 
                 $(window).scrollLeft(2000);
@@ -526,7 +524,6 @@
             });
 
             test("unpin() adds the browser scroll position to the wrapper's top and left styles", function() {
-                
                 var spacerDiv = $("<div style='width:6000px;height:3000px'>&nbsp;</div>").appendTo(document.body);
 
                 $(window).scrollLeft(2000);
@@ -557,7 +554,6 @@
             });
 
             test("restoring a pinned Window preserves the pinned state", function() {
-                
                 var dialog = createWindow({
                         visible: true,
                         animation: false
@@ -572,7 +568,6 @@
             });
 
             test("maximize() hides the pin/unpin icon", function() {
-                
                 var dialog = createWindow({
                         visible: true,
                         actions: ["Pin"],
@@ -585,7 +580,6 @@
             });
 
             test("restore() shows the pin/unpin icon", function() {
-                
                 var dialog = createWindow({
                         visible: true,
                         actions: ["Pin"],
@@ -656,6 +650,16 @@
                 dialog.destroy();
 
                 equal($("body > .k-animation-container").length, 0);
+            });
+
+            test("async open/close of model windows leaves overlay", function() {
+                var first = $("<div />").appendTo("body").kendoWindow({ modal: true }).data("kendoWindow");
+                var second = $("<div />").appendTo("body").kendoWindow({ modal: true, visible: false }).data("kendoWindow");
+
+                first.close();
+                second.open();
+
+                ok($(".k-overlay").is(":visible"));
             });
         </script>
 
