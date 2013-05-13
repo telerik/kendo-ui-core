@@ -101,6 +101,36 @@
 
                 equal(dataSource.data()[0].foo, "bar");
             });
+				
+			test("sync updates pristine data if server response is empty object", function() {
+                dataSource = new DataSource({
+                    schema: {
+                        model: {
+                            id: "id",
+							fields: {
+								foo: {
+									type: "string"
+								}
+							}
+                        }
+                    },
+                    transport: {
+                        read: function(options) {
+                            options.success([{id: 1, foo: "bar"}]);
+                        },
+                        update: function(options) {
+                            options.success({});
+                        }
+                    }
+                });
+
+                dataSource.read();
+                var model = dataSource.get(1);
+                model.set("foo", "car");
+                dataSource.sync();
+			
+				equal(dataSource._pristine[0].foo, "car");
+            });
 			
 			test("sync updates pristine data for array property", function() {
                 dataSource = new DataSource({

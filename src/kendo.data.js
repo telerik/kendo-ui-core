@@ -2063,7 +2063,7 @@ kendo_module({
 
             that.trigger(REQUESTEND, { response: response, type: type });
 
-            if (response) {
+            if (response && !isEmptyObject(response)) {
                 response = that.reader.parse(response);
 
                 if (that._handleCustomErrors(response)) {
