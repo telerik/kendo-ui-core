@@ -1968,7 +1968,7 @@ kendo_module({
                 step,
                 nextStep;
 
-            while (units > maxDateGroups) {
+            while (!step || units > maxDateGroups) {
                 unitSteps = unitSteps || autoBaseUnitSteps[baseUnit].slice(0);
                 nextStep = unitSteps.shift();
 
