@@ -212,17 +212,19 @@ kendo_module({
                         visible: false,
                         autoFocus: false,
                         actions: []
-                    }).find(".k-editortoolbar-pin").on("mousedown", function(e){
+                    }).find(".k-editortoolbar-pin").on("mousedown", function(e) {
                         var btn = $(this),
-                            btnIcon = btn.children("span"),
-                            wnd = btn.closest(".editorToolbarWindow").data("kendoWindow");
-                        if (btnIcon.hasClass("k-i-pin")) {
+                            icon = btn.children("span"),
+                            wnd = btn.closest(".editorToolbarWindow").data("kendoWindow"),
+                            pinClass = icon.hasClass("k-i-pin");
+
+                        if (pinClass) {
                             wnd.pin();
-                            btnIcon.removeClass("k-i-pin").addClass("k-i-unpin");
                         } else {
                             wnd.unpin();
-                            btnIcon.removeClass("k-i-unpin").addClass("k-i-pin");
                         }
+                        icon.toggleClass("k-i-pin", pinClass).toggleClass("k-i-unpin", !pinClass);
+
                         e.preventDefault();
                     }).end()
                     .on("mousedown", function(e){
