@@ -236,10 +236,10 @@ kendo_module({
             var view = this.view();
 
             this.dataSource.filter({
-                logic: "and",
+                logic: "or",
                 filters: [
                     { field: "start", operator: "gte", value: view.startDate }
-                    //{ field: "end", operator: "lte", value: view.endDate }
+                    //{ field: "start", operator: "lte", value: view.endDate }
                 ]
             });
         },
@@ -794,12 +794,21 @@ kendo_module({
         },
 
         _positonAllDayEvent: function(element, slots, startIndex, endIndex, slotWidth) {
-            var dateSlot = slots.eq(startIndex);
+            if (startIndex < 0) {
+                startIndex = 0;
+            }
+
+            if (endIndex < 0) {
+                endIndex = slots.length - 1;
+            }
+
+            var dateSlot = slots.eq(startIndex),
+                numberOfSlots = Math.ceil(endIndex - startIndex);
                 //allDayEventOffset = 10;
 
                 element.offset(dateSlot.offset())
                     .css({
-                        width: slotWidth * ((Math.ceil(endIndex - startIndex) || 1) + 1),
+                        width: slotWidth * (numberOfSlots + 1)
                         //height: dateSlot.height() - allDayEventOffset
                     });
         },
@@ -834,7 +843,8 @@ kendo_module({
                 allDaySlots = this.allDayHeader ? this.allDayHeader.find("td") : $(),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
                 slotHeight = Math.floor(this.content.find(">table:first").height() / timeSlots.length),
-                slotWidth = Math.floor(this.datesHeader.find("table:first").width() / this.datesHeader.find("th").length),
+                dateSlotLength = this.datesHeader.find("th").length,
+                slotWidth = this.datesHeader.find("table:first th:first").innerWidth(),
                 eventTimeFormat = this.options.eventTimeFormat,
                 event,
                 idx,
@@ -848,9 +858,9 @@ kendo_module({
                var dateSlotIndex = this._dateSlotIndex(event.start),
                    endDateSlotIndex = this._dateSlotIndex(event.end),
                    element,
-                   isAllDay = dateSlotIndex !== endDateSlotIndex;
+                   isAllDay = dateSlotIndex !== endDateSlotIndex || (event.start < this.startDate && event.end > this.endDate);
 
-                if (dateSlotIndex > -1) {
+                if (dateSlotIndex > -1 || isAllDay) {
                     element = this._createEventElement(event, isAllDay ? allDayEventTemplate : eventTemplate)
                                     .appendTo(isAllDay ? allDayEventContainer : this.content);
 
