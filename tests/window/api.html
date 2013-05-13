@@ -103,7 +103,6 @@
             });
 
             test("closing a modal window moves overlay below previous window", function() {
-
                 function resumeTest() {
                     window.setTimeout(function(){
                         start();
@@ -497,6 +496,16 @@
                 dialog.destroy();
 
                 equal($("body > .k-animation-container").length, 0);
+            });
+
+            test("async open/close of model windows leaves overlay", function() {
+                var first = $("<div />").appendTo("body").kendoWindow({ modal: true }).data("kendoWindow");
+                var second = $("<div />").appendTo("body").kendoWindow({ modal: true, visible: false }).data("kendoWindow");
+
+                first.close();
+                second.open();
+
+                ok($(".k-overlay").is(":visible"));
             });
         </script>
 
