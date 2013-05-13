@@ -5,9 +5,11 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
         <script src="../src/kendo.window.js"></script>
@@ -16,59 +18,25 @@
         <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <input type="button" id="button" value="Click me!" onclick="createWindow(event)" />
-        <input type="button" id="mutton" value="Now me!" onclick="expandWindow(event)" />
-
-        <div id="window">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci. Proin sagittis elementum odio, eu vestibulum arcu rhoncus eu. Pellentesque lorem arcu, tempus at dapibus nec, tincidunt a ante. Cras eget arcu id augue sollicitudin fermentum. Quisque ullamcorper ultrices ante, ut mollis neque tincidunt nec. Aenean sollicitudin lobortis nibh, vitae sagittis justo placerat et. Fusce laoreet consequat arcu, quis placerat massa lacinia vel. Etiam fringilla purus ac ipsum euismod nec aliquet lorem aliquet. Aliquam a nunc ac lorem lobortis pulvinar. Integer eleifend lobortis risus vel commodo. Integer nisl turpis, facilisis a porttitor nec, tempus ac enim. Proin pulvinar vestibulum ligula id mattis. Integer posuere faucibus accumsan.
-            <select id="size">
-                <option>S - 6 3/4"</option>
-                <option>M - 7 1/4"</option>
-                <option>L - 7 1/8"</option>
-                <option>XL - 7 5/8"</option>
-            </select>
-            <iframe src="http://demos.kendoui.com/web/window/"></iframe>
-        </div>
-
-        <div id="winAutoSave" data-role="window">
-            <h1>Auto Saved Application</h1>
-            <p>An auto saved application has been found. <span style=" font-weight: bold; font-style:italic; color: Red;">Sample Red Text</span> This probably occured if you broswer hung or was closed without saving. At this point you may either</p>
-            <ol>
-                <li>Option 1</li>
-                <li>Option 2</li>
-                <li>Option 3</li>
-                <li>Option 4</li>
-            </ol>
-            <div style=" text-align: center; margin-top: 10px; padding-left: 35px;">
-                <input type="button" value="Option 1" />
-                <input type="button" value="Option 2" />
-                <input type="button" value="Option 3" />
-                <input type="button" value="Option 4" />
+        <div id="cont">
+            <div id="win1" data-role="window" title="win1" data-modal="true" data-title="modal1">
+                <button data-bind="click: onClick">Click me to close this and open another modal dialog</button>
             </div>
-            <div class="clearAll"></div>
         </div>
 
         <script>
-            var win;
-
-            function createWindow(e) {
-                e.preventDefault();
-                win.open();
-            }
-
-            function expandWindow(e) {
-                e.preventDefault();
-                win.element.append("<div>Test Shmest</div>");
-            }
-
-            $(document).ready(function() {
-                win = $("#window")
-                        .kendoWindow({
-                            width: "500px"
-                        }).data("kendoWindow");
-                $("#size").kendoDropDownList();
+            $(document).ready(function(){
+                kendo.bind($("#cont"), {
+                    onClick: function() {
+                        var dlg = $("<div><b>I should be modal, but am not<br/>Notice the modal layer fading out when you close me.</b></div>").kendoWindow({
+                        title: "Modal 2",
+                        modal: true
+                    }).data("kendoWindow");
+                    $("#win1").data("kendoWindow").close();
+                    dlg.open();
+                }
             });
-            kendo.init(document.body);
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
