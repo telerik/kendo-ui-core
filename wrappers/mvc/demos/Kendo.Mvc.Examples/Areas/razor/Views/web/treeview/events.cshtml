@@ -67,8 +67,7 @@
     }
 
     function onDrag(e) {
-        // omitted event logging in order to prevent console flood
-        // kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
+        kendoConsole.log("Dragging " + this.text(e.sourceNode));
     }
 
     function onDrop(e) {
