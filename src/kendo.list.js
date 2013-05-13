@@ -781,14 +781,19 @@ kendo_module({
 
         _selectItem: function(value) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                index = that.selectedIndex;
 
             value = that._selectedValue || options.value || that._accessor();
 
             if (value) {
                 that.value(value);
-            } else if (!that._bound) {
-                that.select(options.index);
+            } else if (!that._bound || index > -1) {
+                if (!that._bound) {
+                    index = options.index;
+                }
+
+                that.select(index);
             }
         },
 

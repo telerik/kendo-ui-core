@@ -348,6 +348,29 @@
 
                 ok(dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
             });
+
+
+            test("DropDownList selects by index after continues selection", 2, function() {
+                var dropdownlist = input.kendoDropDownList({
+                    optionLabel: "Any",
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [
+                        { text: "item1", value: "item1"},
+                        { text: "item2", value: "item2"}
+                    ],
+                    change: function() {
+                        dropdownlist.dataSource.read();
+                    }
+                }).data("kendoDropDownList");
+
+                dropdownlist.select(1);
+                dropdownlist.select(0);
+                dropdownlist.trigger("change");
+
+                ok(dropdownlist.current());
+                equal(dropdownlist.current().text(), "Any");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
