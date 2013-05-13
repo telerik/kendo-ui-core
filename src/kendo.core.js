@@ -2831,11 +2831,11 @@ function pad(number, digits, end) {
         };
 
         // Create MSPointerEnter/MSPointerLeave events using mouseover/out and event-time checks
-        jQuery.each({
+        $.each({
             MSPointerEnter: "MSPointerOver",
             MSPointerLeave: "MSPointerOut"
         }, function( orig, fix ) {
-            jQuery.event.special[ orig ] = {
+            $.event.special[ orig ] = {
                 delegateType: fix,
                 bindType: fix,
 
@@ -2847,7 +2847,7 @@ function pad(number, digits, end) {
 
                     // For mousenter/leave call the handler if related is outside the target.
                     // NB: No relatedTarget if the mouse left/entered the browser window
-                    if ( !related || (related !== target && !jQuery.contains( target, related )) ) {
+                    if ( !related || (related !== target && !$.contains( target, related )) ) {
                         event.type = handleObj.origType;
                         ret = handleObj.handler.apply( this, arguments );
                         event.type = fix;
