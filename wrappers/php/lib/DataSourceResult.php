@@ -260,10 +260,10 @@ class DataSourceResult {
                 $value = "date($value)";
             }
 
-            if ($this->isString($filter->value)) {
-                $operator = $this->stringOperators[$filter->operator];
-            } else {
+            if (array_key_exists($filter->operator, $this->operators) && !$this->isString($filter->value)) {
                 $operator = $this->operators[$filter->operator];
+            } else {
+                $operator = $this->stringOperators[$filter->operator];
             }
 
             return "$field $operator $value";
