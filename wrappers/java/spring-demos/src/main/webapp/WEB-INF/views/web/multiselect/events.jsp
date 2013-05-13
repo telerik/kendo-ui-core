@@ -3,7 +3,7 @@
 <demo:header />
     <div class="demo-section">
         <h3 class="title">Select Continents</h3>
-        <kendo:multiSelect name="input" open="onOpen" close="onClose" change="onChange" select="onSelect"
+        <kendo:multiSelect name="select" open="onOpen" close="onClose" change="onChange" select="onSelect"
             dataTextField="text" dataValueField="value">
             <kendo:dataSource data="${items}">
             </kendo:dataSource>

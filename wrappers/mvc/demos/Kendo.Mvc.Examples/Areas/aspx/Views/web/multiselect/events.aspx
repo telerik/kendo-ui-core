@@ -33,7 +33,7 @@
 <div class="demo-section">
     <h3 class="title">Select Continents</h3>
     <%= Html.Kendo().MultiSelect()
-            .Name("multiselect")
+            .Name("select")
             .DataTextField("Text")
             .DataValueField("Value")
             .BindTo(continents)
