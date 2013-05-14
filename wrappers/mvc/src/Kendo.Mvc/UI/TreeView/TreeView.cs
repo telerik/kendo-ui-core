@@ -179,7 +179,7 @@ namespace Kendo.Mvc.UI
 
         internal bool UsesTemplates()
         {
-            return !string.IsNullOrEmpty(TemplateId) || !string.IsNullOrEmpty(Template) || (string)Checkboxes.Template != TreeViewCheckboxesSettings.DefaultTemplate;
+            return !string.IsNullOrEmpty(TemplateId) || !string.IsNullOrEmpty(Template) || Checkboxes.Template as string != TreeViewCheckboxesSettings.DefaultTemplate;
         }
 
         public override void WriteInitializationScript(TextWriter writer)
