@@ -87,7 +87,7 @@
                 });
 
                 test("default legend marker color is used when color is fn", function() {
-                    createChart([{ color: function() { return "#foo"; } }]);
+                    createChart([{ color: function() { return "#foo"; }, name: "aaa" }]);
                     equal(legend.options.items[0].markerColor, "#ff6800");
                 });
 

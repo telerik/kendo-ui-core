@@ -5266,13 +5266,15 @@ kendo_module({
                     labelColor = labelsOptions.color;
                 }
 
-                chart.legendItems.push({
-                    pointIndex: point.index,
-                    text: text,
-                    series: point.series,
-                    markerColor: markerColor,
-                    labelColor: labelColor
-                });
+                if (text) {
+                    chart.legendItems.push({
+                        pointIndex: point.index,
+                        text: text,
+                        series: point.series,
+                        markerColor: markerColor,
+                        labelColor: labelColor
+                    });
+                }
             }
         },
 
@@ -6118,13 +6120,15 @@ kendo_module({
                     markerColor = color;
                 }
 
-                data.push({
-                    text: text,
-                    labelColor: labelColor,
-                    markerColor: markerColor,
-                    series: currentSeries,
-                    active: currentSeries.visible
-                });
+                if (text) {
+                    data.push({
+                        text: text,
+                        labelColor: labelColor,
+                        markerColor: markerColor,
+                        series: currentSeries,
+                        active: currentSeries.visible
+                    });
+                }
             }
 
             append(legend.items, data);
