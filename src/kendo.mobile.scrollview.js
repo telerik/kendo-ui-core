@@ -25,6 +25,7 @@ kendo_module({
         min = math.min,
         floor = math.floor,
         CHANGE = "change",
+        CHANGING = "changing",
         CURRENT_PAGE_CLASS = "km-current-page";
 
     var ScrollView = Widget.extend({
@@ -114,6 +115,7 @@ kendo_module({
         },
 
         events: [
+            CHANGING,
             CHANGE
         ],
 
@@ -199,6 +201,10 @@ kendo_module({
             }
 
             snap = max(that.minSnap, min(approx(that.movable.x / width) * width, that.maxSnap));
+
+            if (this.trigger(CHANGING, { currentPage: that.page })) {
+                snap = - that.page * that.dimension.getSize();
+            }
 
             this._moveTo(snap, ease);
         },
