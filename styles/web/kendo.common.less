@@ -328,8 +328,23 @@ html body .k-button-bare.k-upload-button:hover
     line-height: 0;
     text-indent: -3333px;
     text-align: center;
+}
+
+/* In IE7 vertical align: middle can't be overridden */
+.k-ie8 .k-icon,
+.k-ie8 .k-sprite,
+.k-ie8 .k-editor-button .k-tool-icon
+{
     vertical-align: middle;
 }
+
+:root *> .k-icon,
+:root *> .k-sprite,
+:root *> .k-editor-button .k-tool-icon
+{
+    vertical-align: middle;
+}
+
 .k-icon,
 .k-sprite
 {
@@ -2178,6 +2193,14 @@ body .k-datetimepicker .k-select
 .k-picker-wrap .k-icon
 {
 	margin-top: 1px;
+}
+
+.k-ie7 .k-picker-wrap .k-icon,
+.k-ie7 .k-dropdown-wrap .k-icon
+{
+    line-height: 2em;
+    font-size: 1em;
+    color: transparent;
 }
 
 .k-combobox .k-icon,
@@ -4240,7 +4263,7 @@ html .k-upload
 
 .k-ie7 .k-editor-dialog .k-button,
 
-.k-form-text-row label,
+.k-ie7 .k-form-text-row label,
 
 .k-ie7 .k-tabstrip-items .k-item,
 .k-ie7 .k-tabstrip-items .k-link,
