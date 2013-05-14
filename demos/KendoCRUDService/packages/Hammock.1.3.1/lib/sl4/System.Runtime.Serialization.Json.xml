@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Runtime.Serialization.Json</name>
+  </assembly>
+  <members>
+    <member name="T:System.Runtime.Serialization.Json.JsonReaderWriterFactory">
+      <summary>Produces instances of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read data encoded with JavaScript Object Notation (JSON) from a stream or buffer and map it to an XML Infoset, and produces instances of <see cref="T:System.Xml.XmlDictionaryWriter" /> that can map an XML Infoset to JSON and write JSON-encoded data to a stream. </summary>
+    </member>
+    <member name="M:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader(System.Byte[],System.Int32,System.Int32,System.Xml.XmlDictionaryReaderQuotas)">
+      <summary>Creates an <see cref="T:System.Xml.XmlDictionaryReader" /> that can map a buffer encoded with JavaScript Object Notation (JSON), of a specified size and offset, to an XML Infoset.</summary>
+      <returns>An <see cref="T:System.Xml.XmlDictionaryReader" /> that can read JSON.</returns>
+      <param name="buffer">The input <see cref="T:System.Byte" /> buffer array from which to read.</param>
+      <param name="offset">Starting position from which to read in <paramref name="buffer" />.</param>
+      <param name="count">Number of bytes that can be read from <paramref name="buffer" />.</param>
+      <param name="quotas">The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> must be set to <see cref="P:System.Xml.XmlDictionaryReaderQuotas.Max" /> in Silverlight version 4 Release Candidate applications.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> is negative or exceeds the <paramref name="buffer" /> length.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="count" /> is negative or exceeds the <paramref name="buffer" /> length minus the <paramref name="offset" />.</exception>
+    </member>
+    <member name="M:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader(System.Byte[],System.Xml.XmlDictionaryReaderQuotas)">
+      <summary>Creates an <see cref="T:System.Xml.XmlDictionaryReader" /> that can map a specified buffer encoded with JavaScript Object Notation (JSON) to an XML Infoset.</summary>
+      <returns>An <see cref="T:System.Xml.XmlDictionaryReader" /> that can process JavaScript Object Notation (JSON) data from the buffer specified.</returns>
+      <param name="buffer">The input <see cref="T:System.Byte" /> buffer array from which to read.</param>
+      <param name="quotas">The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> must be set to <see cref="P:System.Xml.XmlDictionaryReaderQuotas.Max" /> in Silverlight version 4 Release Candidate applications used to prevent Denial of Service (DoS) attacks when reading untrusted data. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> is null.</exception>
+    </member>
+    <member name="M:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader(System.IO.Stream,System.Xml.XmlDictionaryReaderQuotas)">
+      <summary>Creates an <see cref="T:System.Xml.XmlDictionaryReader" /> that can map a specified stream encoded with JavaScript Object Notation (JSON) to an XML Infoset.</summary>
+      <returns>An <see cref="T:System.Xml.XmlDictionaryReader" /> that can read JSON.</returns>
+      <param name="stream">The input <see cref="T:System.IO.Stream" /> from which to read.</param>
+      <param name="quotas">The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> must be set to <see cref="P:System.Xml.XmlDictionaryReaderQuotas.Max" /> in Silverlight version 4 Release Candidate applications. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> is null.</exception>
+    </member>
+    <member name="M:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter(System.IO.Stream)">
+      <summary>Creates an <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes data encoded with JSON to a stream using a UTF-8 character encoding.</summary>
+      <returns>An <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes data encoded with JSON to the stream from an XML Infoset.</returns>
+      <param name="stream">The output <see cref="T:System.IO.Stream" /> for the JSON writer.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> is null.</exception>
+    </member>
+    <member name="M:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter(System.IO.Stream,System.Text.Encoding)">
+      <summary>Creates an <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes data encoded with JSON to a stream with a specified character encoding.</summary>
+      <returns>An <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes data encoded with JSON to the stream from an XML Infoset.</returns>
+      <param name="stream">The output <see cref="T:System.IO.Stream" /> for the JSON writer.</param>
+      <param name="encoding">The <see cref="T:System.Text.Encoding" /> that specifies the character encoding used by the writer. The default encoding is UTF-8.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> or <paramref name="encoding" /> is null.</exception>
+    </member>
+    <member name="M:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonWriter(System.IO.Stream,System.Text.Encoding,System.Boolean)">
+      <summary>Creates an <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes data encoded with JSON to a stream with a specified character encoding and that specifies whether the output stream is closed by the writer when it is done.</summary>
+      <returns>An <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes data encoded with JSON to the stream from an XML Infoset.</returns>
+      <param name="stream">The output <see cref="T:System.IO.Stream" /> for the JSON writer.</param>
+      <param name="encoding">The <see cref="T:System.Text.Encoding" /> that specifies the character encoding used by the writer. The default encoding is UTF-8.</param>
+      <param name="ownsStream">If true, the output stream is closed by the writer when done; otherwise, false. The default value is true.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> or <paramref name="encoding" /> is null.</exception>
+    </member>
+  </members>
+</doc>

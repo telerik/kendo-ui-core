@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Hammock</id>
+    <version>1.3.1</version>
+    <authors>Daniel Crenna and Jason Diller</authors>
+    <owners>Daniel Crenna and Jason Diller</owners>
+    <licenseUrl>https://github.com/danielcrenna/hammock/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://github.com/danielcrenna/hammock</projectUrl>
+    <iconUrl>http://apitize.com.s3.amazonaws.com/logo_hammock.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Hammock is an HTTP API library for .NET that greatly simplifies consuming and wrapping RESTful services.</description>
+    <summary>REST, easy.</summary>
+    <language>en-US</language>
+    <tags>web api client http rest services wrapper json xml</tags>
+    <references>
+      <reference file="Hammock.dll" />
+      <reference file="LinqBridge.dll" />
+      <reference file="Hammock.ClientProfile.dll" />
+      <reference file="Hammock.WindowsPhone.dll" />
+      <reference file="ICSharpCode.SharpZipLib.WindowsPhone.dll" />
+      <reference file="Hammock.WindowsPhone.Mango.dll" />
+      <reference file="Hammock.Silverlight.dll" />
+      <reference file="ICSharpCode.SharpZipLib.Silverlight.dll" />
+      <reference file="Microsoft.CSharp.dll" />
+      <reference file="System.Json.dll" />
+      <reference file="System.Runtime.Serialization.Json.dll" />
+      <reference file="System.Xml.Linq.dll" />
+    </references>
+  </metadata>
+</package>

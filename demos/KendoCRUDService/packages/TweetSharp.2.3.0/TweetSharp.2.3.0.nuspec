@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TweetSharp</id>
+    <version>2.3.0</version>
+    <authors>Daniel Crenna and Jason Diller</authors>
+    <owners>Daniel Crenna and Jason Diller</owners>
+    <licenseUrl>https://github.com/danielcrenna/tweetsharp/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://github.com/danielcrenna/tweetsharp</projectUrl>
+    <iconUrl>http://apitize.com.s3.amazonaws.com/logo_tweetsharp.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>TweetSharp v2 is a fast, clean wrapper around the Twitter API. It uses T4 templates to make adding new endpoints easy.</description>
+    <summary>TweetSharp v2 is a fast, clean wrapper around the Twitter API. It uses T4 templates to make adding new endpoints easy.</summary>
+    <releaseNotes>New in 2.3
+      ----------
+      - Updated to support Twitter API v1.1
+      - This is a major change and will break many clients that are not ready for v1.1</releaseNotes>
+    <language>en-US</language>
+    <tags>twitter tweetsharp web api http rest wrapper json wp7 mango</tags>
+    <dependencies>
+      <dependency id="Hammock" version="1.3.1" />
+      <dependency id="Newtonsoft.Json" version="4.5.2" />
+    </dependencies>
+    <references>
+      <reference file="Hammock.dll" />
+      <reference file="LinqBridge.dll" />
+      <reference file="Newtonsoft.Json.dll" />
+      <reference file="TweetSharp.dll" />
+      <reference file="Hammock.ClientProfile.dll" />
+      <reference file="Hammock.WindowsPhone.Mango.dll" />
+      <reference file="ICSharpCode.SharpZipLib.WindowsPhone.dll" />
+      <reference file="TweetSharp.WindowsPhone.dll" />
+      <reference file="TweetSharp.WindowsPhone.Mango.dll" />
+      <reference file="Hammock.Silverlight.dll" />
+      <reference file="ICSharpCode.SharpZipLib.Silverlight.dll" />
+      <reference file="Microsoft.CSharp.dll" />
+      <reference file="System.Json.dll" />
+      <reference file="System.Runtime.Serialization.Json.dll" />
+      <reference file="System.Xml.Linq.dll" />
+      <reference file="TweetSharp.Silverlight.dll" />
+    </references>
+  </metadata>
+</package>
