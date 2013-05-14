@@ -430,13 +430,8 @@ kendo_module({
             });
 
             that.buffer.bind('expand', function() {
-                console.log('expanding');
                 that.list.update(scroller.scrollTop);
             });
-
-            if (options.autoBind) {
-                that.dataSource.fetch();
-            }
         },
 
         _unbindDataSource: function() {
@@ -509,10 +504,6 @@ kendo_module({
 
             if (that._shouldShowLoading()) {
                 that.dataSource.bind(PROGRESS, that._progressHandler);
-            }
-
-            if (options.autoBind) {
-                that.dataSource.fetch();
             }
         },
 
@@ -641,10 +632,14 @@ kendo_module({
 
             that._style();
 
-            if (this.options.endlessScroll || this.options.loadMore) {
+            if (options.endlessScroll || options.loadMore) {
                 this._itemBinder = new VirtualListViewItemBinder(this);
             } else {
                 this._itemBinder = new ListViewItemBinder(this);
+            }
+
+            if (options.dataSource && options.autoBind) {
+                that.dataSource.fetch();
             }
 
             if (this.options.pullToRefresh) {
@@ -693,6 +688,10 @@ kendo_module({
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
             this._itemBinder.configure();
+
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
         },
 
         destroy: function() {
