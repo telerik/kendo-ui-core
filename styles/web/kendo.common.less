@@ -337,10 +337,10 @@ html body .k-button-bare.k-upload-button:hover
 }
 .k-ie7 .k-icon, .k-ie7 .k-sprite { text-indent: 0; }
 
-.k-numerictextbox .k-select .k-link span.k-i-arrow-n  { background-position: 0 -2px; }
+.k-numerictextbox .k-select .k-link span.k-i-arrow-n  { background-position: 0 -3px; }
 .k-numerictextbox .k-select .k-link span.k-i-arrow-s { background-position: 0 -35px; }
 .k-state-selected .k-i-arrow-n { .sprite-hoverable(1, 0); }
-.k-numerictextbox .k-link.k-state-selected span.k-i-arrow-n, .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-n  { background-position: -16px -2px; }
+.k-numerictextbox .k-link.k-state-selected span.k-i-arrow-n, .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-n  { background-position: -16px -3px; }
 .k-state-selected .k-i-arrow-s { .sprite-hoverable(1, 2); }
 .k-numerictextbox .k-link.k-state-selected span.k-i-arrow-s, .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-s { background-position: -16px -35px; }
 
@@ -1986,7 +1986,7 @@ span.k-dropdown
 {
     border-width: 1px;
     border-style: solid;
-    padding: 0 22px 0 0;
+    padding: 0 1.9em 0 0;
 }
 
 .k-numeric-wrap.k-expand-padding
@@ -2002,12 +2002,12 @@ span.k-dropdown
 
 .k-textbox.k-space-left
 {
-    padding-left: 22px;
+    padding-left: 1.9em;
 }
 
 .k-textbox.k-space-right
 {
-    padding-right: 22px;
+    padding-right: 1.9em;
 }
 
 .k-textbox .k-icon
@@ -2087,11 +2087,6 @@ span.k-dropdown
     border-color: inherit; /* skin-related, inherit does not work in ie7- */
 }
 
-.k-picker-wrap .k-select
-{
-    padding: 0 2px;
-}
-
 span.k-datetimepicker .k-select,
 span.k-datetimepicker .k-select+.k-select
 {
@@ -2161,10 +2156,13 @@ span.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: 1.52em;
-    line-height: 1.52em;
+    min-height: 1.65em;
+    line-height: 2em;
     vertical-align: middle;
-    padding: 3px;
+    -moz-box-sizing: border-box;
+    text-align: center;
+    width: 1.9em;
+    height: 100%;
 }
 
 .k-numeric-wrap .k-select
@@ -2394,12 +2392,18 @@ body .k-datetimepicker .k-select
 
 .k-datetimepicker .k-picker-wrap
 {
-    padding-right: 42px;
+    padding-right: 3.8em;
+}
+
+.k-datetimepicker .k-select
+{
+    width: 3.8em;
 }
 
 .k-datetimepicker .k-picker-wrap .k-icon
 {
-    margin-left: 2px;
+    margin: 0 .24em;
+    font-size: 1em;
 }
 
 .k-picker-wrap .k-icon
@@ -2584,16 +2588,16 @@ span.k-numerictextbox
 .k-numerictextbox .k-link
 {
     display: block;
-    height: 11px;
-    line-height: 11px;
+    height: 1em;
+    line-height: 1em;
+    vertical-align: middle;
     border-width: 0;
-    padding: 1px 3px 0;
+    padding: 0;
 }
 
 .k-numerictextbox .k-icon
 {
     height: 11px;
-    vertical-align: top;
 }
 
 .k-numeric-wrap .k-input::-webkit-inner-spin-button
@@ -2612,10 +2616,6 @@ span.k-numerictextbox
         height: 2em;
         width: 2em;
     }
-	.k-select {
-		min-height:	18px;
-		line-height: 18px;
-	}
     .k-tool-icon {
         position: relative;
         top: -2px;
@@ -2641,7 +2641,7 @@ span.k-numerictextbox
         }
     }
     .k-icon {
-    cursor: pointer;
+        cursor: pointer;
     }
 }
 
