@@ -53,10 +53,8 @@ namespace :generate do
 
             desc 'Generate MVC Mobile wrappers'
             task :wrappers do
-                #components = CodeGen::MarkdownParser.all(CodeGen::MVC::Mobile::Wrappers::Component)
-
-                MARKDOWN = FileList['docs/api/mobile/*.md']
-
+                MARKDOWN = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader/)
+                #MARKDOWN = FileList['docs/api/mobile/actionsheet.md']
                 components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Mobile::Wrappers::Component) }
                     .sort { |a, b| a.name <=> b.name }
 
@@ -66,9 +64,11 @@ namespace :generate do
 
                     import_metadata(component)
 
-                    generator = CodeGen::MVC::Mobile::Wrappers::Generator.new('wrappers/mvc_mobile')
+                    generator = CodeGen::MVC::Mobile::Wrappers::Generator.new('wrappers/mvc/src/Kendo.Mvc/UI')
 
                     generator.component(component)
+
+                    generator.cs_proj(component)
 
                     component.register(component_register)
                 end

@@ -977,6 +977,9 @@ namespace Kendo.Mvc.UI.Fluent
             }
             return MvcHtmlString.Empty;
         }
+
+        //>> MobileComponents         
+        //<< MobileComponents
     }
 
     public class WidgetFactory<TModel> : WidgetFactory
@@ -1648,9 +1651,6 @@ namespace Kendo.Mvc.UI.Fluent
                 }
             }
             return null;
-        }   
-     
-        //>> MobileComponents         
-        //<< MobileComponents
+        }                
     }
 }

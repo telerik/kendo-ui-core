@@ -10,9 +10,12 @@ namespace Kendo.Mvc.UI
 
     public class <%= csharp_class %> : WidgetBase
     {
-        public <%= csharp_class %>(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
-            : base(viewContext, initializer, viewData)
+        private readonly IUrlGenerator urlGenerator;
+
+        public <%= csharp_class %>(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer)
         {
+            this.urlGenerator = urlGenerator;
 //>> Initialization
 //<< Initialization
         }

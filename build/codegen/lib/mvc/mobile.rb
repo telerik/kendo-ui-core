@@ -14,6 +14,8 @@ module CodeGen::MVC::Mobile
             'Date' => 'DateTime'
         }
 
+        CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
+
         COMPONENT = ERB.new(File.read("build/codegen/lib/mvc/component.csharp.erb"), 0, '%<>')
         COMPONENT_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/component.builder.csharp.erb"), 0, '%<>')
         SETTING = ERB.new(File.read("build/codegen/lib/mvc/setting.csharp.erb"), 0, '%<>')
@@ -247,6 +249,29 @@ module CodeGen::MVC::Mobile
                 write_file(filename, component.to_events(filename))
             end
 
+            def cs_proj(component)
+                return unless File.exists?(CSPROJ)
+
+                proj_content = File.read(CSPROJ)
+
+                includes = ''
+                component.files.each do |filename|
+                    filename.sub!(%r{^#{@path}}, '').gsub!(/\//, "\\")
+
+                    item = "<Compile Include=\"UI#{filename}\" />"
+
+                    if !(proj_content =~ %r{#{Regexp.escape(item)}})
+                        includes << item
+                    end
+                end
+
+                if !includes.empty?
+                    proj_content = proj_content.sub(/<\/Project>/, "<ItemGroup>#{includes}</ItemGroup></Project>")
+
+                    write_file(CSPROJ, proj_content)
+                end
+            end
+
             def write_file(filename, content)
                 $stderr.puts("Updating #{filename}") if VERBOSE
 
@@ -258,6 +283,14 @@ module CodeGen::MVC::Mobile
 
         class Component < CodeGen::Component
             include Options
+
+            attr_reader :files
+
+            def initialize *args
+                super
+
+                @files = []
+            end
 
             def name
                 "Mobile#{@name}"
@@ -272,6 +305,8 @@ module CodeGen::MVC::Mobile
             end
 
             def to_class(filename)
+                @files.push(filename)
+
                 csharp = File.exists?(filename) ? File.read(filename) : COMPONENT.result(binding)
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(binding))
@@ -282,12 +317,16 @@ module CodeGen::MVC::Mobile
             end
 
             def to_fluent(filename)
+                @files.push(filename)
+
                 csharp = File.exists?(filename) ? File.read(filename) : COMPONENT_FLUENT.result(binding)
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(binding))
             end
 
             def to_setting(filename, option)
+                @files.push(filename)
+
                 csharp = File.exists?(filename) ? File.read(filename) : SETTING.result(option.get_binding)
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(option.get_binding))
@@ -296,12 +335,16 @@ module CodeGen::MVC::Mobile
             end
 
             def to_fluent_setting(filename, option)
+                @files.push(filename)
+
                 csharp = File.exists?(filename) ? File.read(filename) : SETTING_FLUENT.result(option.get_binding)
 
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(option.get_binding))
             end
 
             def to_events(filename)
+                @files.push(filename)
+
                 csharp = File.exists?(filename) ? File.read(filename) : EVENT.result(binding)
 
                 csharp = csharp.sub(/\/\/>> Handlers(.|\n)*\/\/<< Handlers/, FLUENT_EVENTS.result(binding))
