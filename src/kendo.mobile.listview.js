@@ -787,7 +787,7 @@ kendo_module({
                 kendo.destroy(item);
                 $(item).replaceWith(newItem);
 
-                that.trigger("itemChange", { item: dataItem, data: newItem, ns: ui });
+                that.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
             })[0]);
         },
 
