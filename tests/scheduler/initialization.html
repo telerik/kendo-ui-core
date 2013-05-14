@@ -271,9 +271,9 @@
             test("custom view is instantiated", function() {
                 var MyCustomView = kendo.Class.extend({
                     name: "foo",
-                    render: $.noop,
+                    renderGrid: $.noop,
                     dateForTitle: $.noop,
-                    dataBind: $.noop
+                    renderEvents: $.noop
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -287,8 +287,8 @@
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        dataBind: $.noop,
-                        render: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderGrid: function(selectedDate) {
                             ok(selectedDate);
                         }
                     }),
@@ -301,8 +301,8 @@
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        dataBind: $.noop,
-                        render: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderGrid: function(selectedDate) {
                         },
                         destroy: function() {
                             ok(true);
@@ -319,8 +319,8 @@
                 var MyCustomView = kendo.Class.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        dataBind: $.noop,
-                        render: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderGrid: function(selectedDate) {
                             ok(true);
                         }
                     }),
@@ -344,8 +344,8 @@
                 var MyCustomView = kendo.ui.Widget.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        dataBind: $.noop,
-                        render: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderGrid: function(selectedDate) {
                             ok(true);
                         }
                     }),
@@ -360,11 +360,11 @@
             test("events are re-position on window resize", function() {
                 var scheduler = new Scheduler(container, { });
 
-                var view = stub(scheduler.view(), "dataBind");
+                var view = stub(scheduler.view(), "renderEvents");
 
                 $(window).trigger("resize");
 
-                equal(view.calls("dataBind"), 1);
+                equal(view.calls("renderEvents"), 1);
             });
 
         </script>

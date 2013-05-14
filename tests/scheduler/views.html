@@ -695,7 +695,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment").length, 1);
                 equal(view.content.find(".k-appointment dd").text(), "my event");
@@ -716,7 +716,7 @@
                     { start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
                 ];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment").length, 2);
                 equal(view.content.find(".k-appointment:first dd").text(), "event1");
@@ -735,8 +735,8 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
-                view.dataBind(events);
+                view.renderEvents(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment").length, 1);
                 equal(view.content.find(".k-appointment dd").text(), "my event");
@@ -754,7 +754,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment dt").text(), "10:00 - 11:00");
             });
@@ -772,7 +772,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment dt").text(), "starts at: 10:00 - ends at: 11:00");
             });
@@ -790,7 +790,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment").text(), "my event");
             });
@@ -820,7 +820,7 @@
 
                 view.render(selectedDate);
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 eventPosition = view.content.find("div.k-appointment").offset();
                 timeSlotPosition = view.content.find("tr").eq(10).offset();
@@ -840,9 +840,9 @@
 
                 view.render(selectedDate);
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").height(), (Math.floor(view.content.find(">table").height()/view.content.find("tr").length)) * 2);
+                equal(view.content.find("div.k-appointment").height(), slotHeight(view.content.find(">table"), 2));
 
             });
 
@@ -857,10 +857,9 @@
 
                 view.render(selectedDate);
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").height(), (Math.floor(view.content.find(">table").height()/view.content.find("tr").length)) * 3);
-
+                equal(view.content.find("div.k-appointment").height(), slotHeight(view.content.find(">table"), 3));
             });
 
 
@@ -875,10 +874,9 @@
 
                 view.render(selectedDate);
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").height(), view.content.find("tr:eq(10)").height());
-
+                equal(view.content.find("div.k-appointment").height(), slotHeight(view.content.find(">table"), 1));
             });
 
             test("the width of single event is the time slot without the offset", function() {
@@ -892,7 +890,7 @@
 
                 view.render(selectedDate);
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment").width(), view.content.find("td:eq(10)").width() - 30);
             });
@@ -909,7 +907,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find(".k-appointment dd").text(), "my event");
@@ -928,7 +926,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
                 var slotOffset = view.allDayHeader.find("td").eq(0).offset();
                 equal(eventOffset.top, slotOffset.top);
@@ -948,7 +946,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
                 var slotOffset = view.allDayHeader.find("td").eq(0).offset();
                 var slotWidth = view.allDayHeader.find("td").innerWidth();
@@ -971,7 +969,7 @@
 
                 var events = [{ start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 var slotWidth = view.allDayHeader.find("td").width();
 
@@ -991,7 +989,7 @@
 
                 var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 var slotWidth = view.allDayHeader.find("td").width();
 
@@ -1011,7 +1009,7 @@
 
                 var events = [{ start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.dataBind(events);
+                view.renderEvents(events);
 
                 var slotWidth = view.allDayHeader.find("td").width();
 
@@ -1019,17 +1017,98 @@
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
             });
 
-       /*
-            test("toolbat commands", function() {
-                var view = setup({
-                    commands: ["toggleWorkDay"]
-                });
+            test("position day event which starts before the slot start time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 10, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
 
-                view.render();
-                view.footer.find(".k-scheduler-toggle-day").length);
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                var eventElement = view.content.find("div.k-appointment");
+                equal(eventElement.length, 1);
+                equal(eventElement.offset().top, view.content.find("tr:first").offset().top);
+                equal(eventElement.offset().left, view.content.find("tr:first").offset().left);
             });
-            */
-        </script>
+
+            test("position day event which ends after the slot end time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        endTime: new Date(2013, 1, 26, 11, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+                var eventElement = view.content.find("div.k-appointment");
+
+                equal(eventElement.length, 1);
+                equal(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
+                equal(eventElement.offset().left, view.content.find("tr").eq(9).offset().left);
+                equal(eventElement.height(), slotHeight(view.content.find("table"), 2));
+            });
+
+            test("does not position day event which is same day but outside of the slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 9, 0, 0),
+                        endTime: new Date(2013, 1, 26, 11, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+                ok(!view.content.find("div.k-appointment").length);
+            });
+
+            test("position day event which start before and ends after the slot end time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 9, 0, 0),
+                        endTime: new Date(2013, 1, 26, 11, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                var eventElement = view.content.find("div.k-appointment");
+                equal(eventElement.length, 1);
+                equal(eventElement.offset().top, view.content.find("tr").eq(0).offset().top);
+                equal(eventElement.height(), slotHeight(view.content.find("table"), 2));
+            });
+
+            function slotHeight(table, slotsCount) {
+                var height = Math.floor(table.height() / table[0].rows.length);
+                return Math.floor((height * slotsCount) - height * 0.10);
+            }
+
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

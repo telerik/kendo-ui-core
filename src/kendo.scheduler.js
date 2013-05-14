@@ -81,6 +81,58 @@ kendo_module({
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
+    function isInTimeRange(value, min, max) {
+        var msMin = getMilliseconds(min),
+            msMax = getMilliseconds(max),
+            msValue;
+
+        if (!value || msMin == msMax) {
+            return true;
+        }
+
+        if (min >= max) {
+            max += MS_PER_DAY;
+        }
+
+        msValue = getMilliseconds(value);
+
+        if (msMin > msValue) {
+            msValue += MS_PER_DAY;
+        }
+
+        if (msMax < msMin) {
+            msMax += MS_PER_DAY;
+        }
+
+        return msValue >= msMin && msValue <= msMax;
+    }
+
+    function isInDateRange(value, min, max) {
+        var msMin = min.getTime(),
+            msMax = max.getTime(),
+            msValue;
+
+        if (!value || msMin == msMax) {
+            return true;
+        }
+
+        if (min >= max) {
+            max += MS_PER_DAY;
+        }
+
+        msValue = value.getTime();
+
+        if (msMin > msValue) {
+            msValue += MS_PER_DAY;
+        }
+
+        if (msMax < msMin) {
+            msMax += MS_PER_DAY;
+        }
+
+        return msValue >= msMin && msValue <= msMax;
+    }
+
     function trimOptions(options) {
         delete options.name;
         delete options.prefix;
@@ -181,7 +233,7 @@ kendo_module({
         _renderView: function(name) {
             var view = this.views[name];
 
-            view.render(this.selectDate());
+            view.renderGrid(this.selectDate());
 
             this._model.set("formattedDate", view.dateForTitle());
         },
@@ -238,8 +290,8 @@ kendo_module({
             this.dataSource.filter({
                 logic: "or",
                 filters: [
-                    { field: "start", operator: "gte", value: view.startDate }
-                    //{ field: "start", operator: "lte", value: view.endDate }
+                    { field: "start", operator: "gte", value: view.startDate },
+                    { field: "start", operator: "lte", value: view.endDate }
                 ]
             });
         },
@@ -369,7 +421,7 @@ kendo_module({
         },
 
         refresh: function() {
-            this.view().dataBind(this.dataSource.view());
+            this.view().renderEvents(this.dataSource.view());
         }
     });
 
@@ -732,7 +784,7 @@ kendo_module({
             return start;
         },
 
-        render: function(selectedDate) {
+        renderGrid: function(selectedDate) {
             this._render([selectedDate]);
         },
 
@@ -814,9 +866,10 @@ kendo_module({
         },
 
         _positionEvent: function(event, element, slots, dateSlotIndex, slotHeight) {
-            var startIndex = this._timeSlotIndex(event.start),
-                endIndex = Math.ceil(this._timeSlotIndex(event.end)),
+            var startIndex = Math.max(this._timeSlotIndex(event.start), 0),
+                endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.end)), slots.length),
                 eventRightOffset = 30,
+                bottomOffset = (slotHeight * 0.10),
                 timeSlot = slots.eq(Math.floor(startIndex)),
                 dateSlot = slots.children().eq(dateSlotIndex);
 
@@ -825,7 +878,7 @@ kendo_module({
                     left: dateSlot.offset().left,
                 })
                 .css({
-                    height: slotHeight * (Math.ceil(endIndex - startIndex) || 1),
+                    height: slotHeight * (Math.ceil(endIndex - startIndex) || 1) - bottomOffset,
                     width: dateSlot.width() - eventRightOffset
                 });
         },
@@ -836,16 +889,37 @@ kendo_module({
             }, event)));
         },
 
-        dataBind: function(events) {
-            var eventTemplate = kendo.template(this.options.eventTemplate),
-                allDayEventTemplate = kendo.template(this.options.allDayEventTemplate),
+        _isInTimeSlot: function(event) {
+            var slotStartTime = this.options.startTime,
+                slotEndTime = this.options.endTime;
+
+            return isInTimeRange(event.start, slotStartTime, slotEndTime) ||
+                isInTimeRange(event.end, slotStartTime, slotEndTime) ||
+                isInTimeRange(slotStartTime, event.start, event.end) ||
+                isInTimeRange(slotEndTime, event.start, event.end);
+        },
+
+        _isInDateSlot: function(event) {
+            var slotStart = this.startDate,
+                slotEnd = this.endDate;
+
+            return isInDateRange(event.start, slotStart, slotEnd) ||
+                isInDateRange(event.end, slotStart, slotEnd) ||
+                isInDateRange(slotStart, event.start, event.end) ||
+                isInDateRange(slotEnd, event.start, event.end);
+        },
+
+        renderEvents: function(events) {
+            var options = this.options,
+                eventTemplate = kendo.template(options.eventTemplate),
+                allDayEventTemplate = kendo.template(options.allDayEventTemplate),
                 timeSlots = this.content.find("tr"),
                 allDaySlots = this.allDayHeader ? this.allDayHeader.find("td") : $(),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
-                slotHeight = Math.floor(this.content.find(">table:first").height() / timeSlots.length),
+                slotHeight = Math.floor(this.content.find(">table:first").innerHeight() / timeSlots.length),
                 dateSlotLength = this.datesHeader.find("th").length,
                 slotWidth = this.datesHeader.find("table:first th:first").innerWidth(),
-                eventTimeFormat = this.options.eventTimeFormat,
+                eventTimeFormat = options.eventTimeFormat,
                 event,
                 idx,
                 length;
@@ -855,21 +929,24 @@ kendo_module({
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
 
-               var dateSlotIndex = this._dateSlotIndex(event.start),
-                   endDateSlotIndex = this._dateSlotIndex(event.end),
-                   element,
-                   isAllDay = dateSlotIndex !== endDateSlotIndex || (event.start < this.startDate && event.end > this.endDate);
+                if (this._isInDateSlot(event)) {
+                   var dateSlotIndex = this._dateSlotIndex(event.start),
+                       endDateSlotIndex = this._dateSlotIndex(event.end),
+                       element,
+                       isSameDayEvent = event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event);
 
-                if (dateSlotIndex > -1 || isAllDay) {
-                    element = this._createEventElement(event, isAllDay ? allDayEventTemplate : eventTemplate)
-                                    .appendTo(isAllDay ? allDayEventContainer : this.content);
+                   if (isSameDayEvent && dateSlotIndex === -1 && endDateSlotIndex > -1) {
+                       dateSlotIndex = endDateSlotIndex;
+                   }
 
-                    if (isAllDay) {
-                        this._positonAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
-                    } else {
-                        this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
-                    }
+                   element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate)
+                       .appendTo(isSameDayEvent ? this.content : allDayEventContainer);
 
+                   if (isSameDayEvent) {
+                       this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
+                   } else {
+                       this._positonAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
+                   }
                 }
             }
         }
@@ -893,7 +970,7 @@ kendo_module({
                 selectedDateFormat: "{0:D} - {1:D}"
             },
             name: "week",
-            render: function(selectedDate) {
+            renderGrid: function(selectedDate) {
                 var start = new Date(selectedDate),
                     weekDay = selectedDate.getDay(),
                     dates = [],
