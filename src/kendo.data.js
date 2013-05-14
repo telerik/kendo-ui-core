@@ -3221,7 +3221,7 @@ kendo_module({
                 that._initChildren();
             }
 
-            that._loaded = !!(value && value[childrenField]);
+            that._loaded = !!(value && (value[childrenField] || value._loaded));
         },
 
         _initChildren: function() {
@@ -3443,7 +3443,7 @@ kendo_module({
             children;
 
         for (idx = 0, length = items.length; idx < length; idx++) {
-            record = {};
+            record = { _loaded: true };
             item = items.eq(idx);
 
             textChild = item[0].firstChild;
