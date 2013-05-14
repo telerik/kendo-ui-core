@@ -2936,7 +2936,7 @@
                 test("event arguments contain multiple values", 2, function() {
                     createBarChart({
                         valueAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { arrayClose(e.value, [1, 255], TOLERANCE); }
+                        plotAreaClick: function(e) { arrayClose(e.value, [1, 250], TOLERANCE); }
                     });
 
                     $(getElement(plotArea.options.id)).trigger({

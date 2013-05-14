@@ -359,8 +359,8 @@
 
                 test("select args contain range (from and to)", function() {
                     chart.bind("select", function(e) {
-                        equal(e.from, 15);
-                        equal(e.to, 16);
+                        equal(e.from, 14);
+                        equal(e.to, 15);
                     });
 
                     selection._start(stubArgs());
@@ -683,8 +683,8 @@
                 });
 
                 test("selection is rendered at chosen location", function() {
-                    equal(selection.leftMask.width(), 136);
-                    equal(selection.selection.width(), 135);
+                    equal(selection.leftMask.width(), 141);
+                    equal(selection.selection.width(), 140);
                 });
 
                 test("selectStart args contain date range", function() {
