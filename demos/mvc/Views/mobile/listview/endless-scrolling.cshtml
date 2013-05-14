@@ -11,7 +11,7 @@
 
 <script id="endless-scrolling-template" type="text/x-kendo-template">
     <div class="tweet">
-        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
+        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" width="64" height="64" />#= text #
         <div class="metadata">
             <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= from_user #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
             |

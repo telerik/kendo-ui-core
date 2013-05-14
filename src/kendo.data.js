@@ -3547,6 +3547,7 @@ kendo_module({
         },
 
         at: function(index)  {
+            console.log('at ', index)
             var buffer = this,
                 dataSource = this.dataSource,
                 pageSize = this.pageSize,
@@ -3558,10 +3559,12 @@ kendo_module({
             // prefetch
             if (index === buffer.prefetchThreshold && !dataSource.inRange(prefetchOffset, pageSize) && !buffer._prefetching && buffer.prefetch) {
                 buffer._prefetching = true;
+                console.log('prefetching');
                 buffer.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
 
                 dataSource.prefetch(prefetchOffset, pageSize, function() {
                     buffer._prefetching = false;
+                    console.log('prefetched');
                     buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
                 });
             }
@@ -3676,7 +3679,6 @@ kendo_module({
             buffer.nextPageThreshold = skip + buffer.viewSize - 1;
             buffer.prefetchThreshold = buffer.midPageThreshold - viewSize;
             buffer.pullBackThreshold = buffer.offset - 1;
-            console.log(this);
         }
     });
 

@@ -24,7 +24,7 @@
     function mobileListViewPullWithEndless() {
             var dataSource = new kendo.data.DataSource({
                 serverPaging: true,
-                pageSize: 10,
+                pageSize: 50,
                 transport: {
                     read: {
                         url: "http://demos.kendoui.com/service/Twitter/Search", // the remove service url
@@ -34,14 +34,13 @@
                         return {
                             q: "javascript",
                             page: options.page,
-                            count: options.pageSize,
-                            since_id: options.since_id, //additional parameters sent to the remote service
-                            max_id: options.max_id //additional parameters sent to the remove service
+                            count: options.pageSize
                         };
                     }
                 },
                 schema: { // describe the result format
-                    data: "results" // the data which the data source will be bound to is in the "results" field
+                    data: "results", // the data which the data source will be bound to is in the "results" field
+                    total: function() { return 100000 }
                 }
             });
 

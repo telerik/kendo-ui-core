@@ -20,6 +20,7 @@
         <script src="../../../src/kendo.mobile.scroller.js"></script>
         <script src="../../../src/kendo.mobile.view.js"></script>
         <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.button.js"></script>
         <script src="../../../src/kendo.mobile.pane.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
         <script src="../../../src/kendo.mobile.button.js"></script>
@@ -578,131 +579,14 @@
                 application = new kendo.mobile.Application($("#qunit-fixture"), options);
             }
 
-            asyncTest("refreshes on press to load more", 3, function(){
-                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
-                var ds = kendo.data.DataSource.create({
-                    transport: {
-                        read: { url: "foo.json", dataType: "json" }
-                    },
-                    serverPaging: true,
-                    pageSize: 1
-                });
-                var listview;
-
-                window.initListView = function(e) {
-                    listview = e.view.element.find("#listview");
-                    listview.kendoMobileListView({
-                        dataSource: ds,
-                        loadMore: true
-                    });
+            function testData(skip, take) {
+                var data = [];
+                for (var i = skip; i < take; i ++) {
+                    data.push(i);
                 }
 
-                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-
-                $.mockjaxClear();
-                $.mockjax({ url: "foo.json", responseText: ["baz"] });
-
-                function secondAssert() {
-                    start();
-                    equal(listview.children().length, 3);
-                    equal(listview.children(":last").text(), "baz");
-                }
-
-                function firstAssert() {
-                    equal(listview.children().length, 2);
-                    ds.unbind("change", firstAssert);
-                    ds.bind("change", secondAssert);
-
-                    listview.parent().find(".km-load").trigger("mouseup");
-                }
-
-                ds.bind("change", firstAssert);
-            });
-
-            asyncTest("ListView calls loadMoreParameters", 2, function(){
-                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
-                var ds = kendo.data.DataSource.create({
-                    transport: {
-                        read: { url: "foo.json", dataType: "json" }
-                    },
-                    serverPaging: true,
-                    pageSize: 1
-                });
-                var listview;
-
-                window.initListView = function(e) {
-                    listview = e.view.element.find("#listview");
-                    listview.kendoMobileListView({
-                        dataSource: ds,
-                        loadMore: true,
-                        loadMoreParameters: function(first, last) {
-                            $.mockjaxClear();
-                            start();
-
-                            equal(first, "foo");
-                            equal(last, "bar");
-                        }
-                    });
-                }
-
-                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-
-                $.mockjaxClear();
-                $.mockjax({ url: "foo.json", responseText: ["baz"] });
-
-                function firstAssert() {
-                    ds.unbind("change", firstAssert);
-
-                    listview.parent().find(".km-load").trigger("mouseup");
-                }
-
-                ds.bind("change", firstAssert);
-            });
-
-            test("ListView hides the load button on click", 4, function() {
-                var dom = $("<ul/>").appendTo("#qunit-fixture");
-
-                new ListView(dom, {
-                    dataSource: [1, 2],
-                    loadMore: true
-                });
-
-                var button = dom.parent().find(".km-load"),
-                    icon = dom.parent().find(".km-icon");
-
-                ok(button.is(":visible"));
-                ok(!icon.is(":visible"));
-
-                button.trigger("mouseup");
-
-                ok(!button.is(":visible"));
-                equal(icon.css("display"), "block");
-
-            });
-
-            asyncTest("ListView shows load button on dataSource change", 2, function() {
-                var dom = $("<ul/>").appendTo("#qunit-fixture");
-
-                var listView = new ListView(dom, {
-                    dataSource: {
-                        data: [1, 2],
-                        pageSize: 1
-                    },
-                    loadMore: true
-                });
-
-                var button = dom.parent().find(".km-load"),
-                    icon = dom.parent().find(".km-icon");
-
-                listView.bind("dataBound", function() {
-                    start();
-
-                    ok(button.is(":visible"));
-                    ok(!icon.is(":visible"));
-                });
-
-                button.trigger("mouseup");
-            });
+                return data;
+            }
 
             module("endless scrolling", {
                 setup: function() {

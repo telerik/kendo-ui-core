@@ -382,6 +382,35 @@ kendo_module({
         },
     });
 
+    var VirtualListViewPressToLoadMore = VirtualListViewLoadingIndicator.extend({
+        init: function(listView, buffer) {
+            var that = this;
+
+            that._loadWrapper = $('<span class="km-load-more"></span>');
+            that._loadIcon = $('<span style="display:none" class="km-icon"></span>');
+            that._loadButton = $('<button class="km-load">' + listView.options.loadMoreText + '</button>');
+
+            that._loadWrapper.append(that._loadIcon).append(that._loadButton);
+
+            that.element = $('<li class="press-to-load-more" style="position: absolute; top: 0"></li>').append(that._loadWrapper).appendTo(listView.element);
+
+            that._loadButton.kendoMobileButton().data('kendoMobileButton').bind('click', function() {
+                that._loadButton.hide();
+                that._loadIcon.css('display', 'block');
+                that.element.find('.km-load-more').addClass('km-scroller-refresh');
+                buffer.next();
+            });
+
+            buffer.bind('resize', function() {
+                that._loadButton.show();
+                that._loadIcon.hide();
+                that.element.find('.km-load-more').removeClass('km-scroller-refresh');
+            });
+
+            that.height = that.element.outerHeight(true);
+        }
+    });
+
     var VirtualListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
             var that = this;
@@ -395,8 +424,9 @@ kendo_module({
         configure: function() {
             var that = this,
                 options = that.options,
-                autoPrefetch = that.options.loadMore,
-                scroller = that.listView.scroller();
+                pressToLoadMore = that.options.loadMore,
+                scroller = that.listView.scroller(),
+                footer;
 
             if (that.dataSource) {
                 that._unbindDataSource();
@@ -404,34 +434,36 @@ kendo_module({
 
             that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource);
 
-            that.buffer = new kendo.data.Buffer(that.dataSource, 30);
+            that.buffer = new kendo.data.Buffer(that.dataSource, 30, pressToLoadMore);
+
+            if (pressToLoadMore) {
+                footer = new VirtualListViewPressToLoadMore(that.listView, that.buffer);
+            } else {
+                footer = new VirtualListViewLoadingIndicator(that.listView);
+            }
 
             that.list = new VirtualList({
                 buffer: that.buffer,
-                item: function(dataItem) {
-                    return new VirtualListViewItem(that.listView, dataItem);
-                },
-
-                footer: new VirtualListViewLoadingIndicator(that.listView),
-
-                height: function() {
-                    return scroller.height();
-                }
+                footer: footer,
+                item: function(dataItem) { return new VirtualListViewItem(that.listView, dataItem); },
+                height: function() { return scroller.height(); }
             });
 
-            scroller.makeVirtual();
+            if (scroller) {
+                scroller.makeVirtual();
 
-            scroller.bind('scroll', function(e) {
-                that.list.update(e.scrollTop);
-            });
+                scroller.bind('scroll', function(e) {
+                    that.list.update(e.scrollTop);
+                });
 
-            that.list.bind('resize', function() {
-                scroller.virtualSize(0, that.list.totalHeight());
-            });
+                that.list.bind('resize', function() {
+                    scroller.virtualSize(0, that.list.totalHeight());
+                });
 
-            that.buffer.bind('expand', function() {
-                that.list.update(scroller.scrollTop);
-            });
+                that.buffer.bind('expand', function() {
+                    that.list.update(scroller.scrollTop);
+                });
+            }
         },
 
         _unbindDataSource: function() {
