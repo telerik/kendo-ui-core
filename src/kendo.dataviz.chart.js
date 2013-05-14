@@ -4243,7 +4243,9 @@ kendo_module({
             segment.enableDiscovery();
         },
 
-        options: {},
+        options: {
+            closed: false
+        },
 
         points: function(visualPoints) {
             var segment = this,
@@ -4264,6 +4266,7 @@ kendo_module({
 
         getViewElements: function(view) {
             var segment = this,
+                options = segment.options,
                 series = segment.series,
                 defaults = series._defaults,
                 color = series.color;
@@ -4275,14 +4278,14 @@ kendo_module({
             }
 
             return [
-                view.createPolyline(segment.points(), false, {
-                    id: segment.options.id,
+                view.createPolyline(segment.points(), options.closed, {
+                    id: options.id,
                     stroke: color,
                     strokeWidth: series.width,
                     strokeOpacity: series.opacity,
                     fill: "",
                     dashType: series.dashType,
-                    data: { modelId: segment.options.modelId },
+                    data: { modelId: options.modelId },
                     zIndex: -1
                 })
             ];
@@ -4611,6 +4614,17 @@ kendo_module({
                 slot = Point2D.onCircle(categorySlot.c, categorySlot.middle(), valueRadius);
 
             return new Box2D(slot.x, slot.y, slot.x, slot.y);
+        },
+
+        createSegment: function(linePoints, currentSeries, seriesIx) {
+            var chart = this,
+                segment = new LineSegment(linePoints, currentSeries, seriesIx);
+
+            if (linePoints.length === currentSeries.data.length) {
+                segment.options.closed = true;
+            }
+
+            return segment;
         }
     });
 
@@ -8110,8 +8124,6 @@ kendo_module({
         },
 
         reflow: PlotAreaBase.fn.reflow,
-        //    var size = math.min(box.width(), box.height()),
-        //        square = new Box2D(box.x1, box.y1, box.x1 + size, box.y1 + size);
 
         reflowAxes: function () {
             var plotArea = this,
@@ -10261,6 +10273,7 @@ kendo_module({
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,
         RadarNumericAxis: RadarNumericAxis,
+        RadarPlotArea: RadarPlotArea,
         RadarStackLayout: RadarStackLayout,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
