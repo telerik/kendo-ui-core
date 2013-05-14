@@ -771,6 +771,7 @@
 
                 equal(children.length, 1);
                 equal(children[0].text, "bar");
+                ok(children[0].loaded(), "inferred child nodes are considered as loaded");
             });
 
             test("infer from nested list with text wrapper elements", function() {
