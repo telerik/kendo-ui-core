@@ -256,8 +256,8 @@
                 equal(events.length, 1);
 
                 equal(events[0].recurrenceID, schedulerEvent.uid);
-                equal(events[0].start.getTime(), +new Date(2000, 10, 30, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 30, 17, 0));
+                equal(events[0].start.getTime(), +new Date(2000, 11, 1, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 11, 1, 17, 0));
             });
 
             test("DAILY occurrences method limits BYMONTHDAY", function() {
