@@ -112,23 +112,11 @@ kendo_module({
             msMax = max.getTime(),
             msValue;
 
-        if (!value || msMin == msMax) {
-            return true;
-        }
-
-        if (min >= max) {
-            max += MS_PER_DAY;
+        if (msMin >= msMax) {
+            msMax += MS_PER_DAY;
         }
 
         msValue = value.getTime();
-
-        if (msMin > msValue) {
-            msValue += MS_PER_DAY;
-        }
-
-        if (msMax < msMin) {
-            msMax += MS_PER_DAY;
-        }
 
         return msValue >= msMin && msValue <= msMax;
     }
