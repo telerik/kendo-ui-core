@@ -2277,7 +2277,11 @@ kendo_module({
 
             a = clipValue(a, options.min, options.max);
             b = clipValue(b || a, a, options.max);
-            console.log(a, b);
+
+            //TODO: Calculate based on reverse, rotation
+            a = 180 - a;
+            b = 180 - b;
+
             return new Ring(
                 box.center(), 0, box.height() / 2,
                 a, b
@@ -4996,14 +5000,15 @@ kendo_module({
     var PolarLineChart = ScatterLineChart.extend({
         pointSlot: function(slotX, slotY) {
             var valueRadius = slotX.c.y - slotY.y1,
-                slot = Point2D.onCircle(slotX.c, slotX.middle(), valueRadius);
+                slot = Point2D.onCircle(slotX.c, slotX.startAngle, valueRadius);
 
             return new Box2D(slot.x, slot.y, slot.x, slot.y);
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
             var segment = new LineSegment(linePoints, currentSeries, seriesIx);
-            segment.options.closed = true;
+            // TODO: User option?
+            //segment.options.closed = true;
 
             return segment;
         }
