@@ -1441,103 +1441,106 @@ kendo_module({
 
             return instance;
         },
-        occurrences: function(event, period) {
-            var rule = recurrence.expandEvent(event);
 
-            if (!rule) {
-                return [];
+        occurrences: function(event, period) {
+            var rule = recurrence.expandEvent(event),
+                start = new Date(period.start),
+                end = new Date(period.end),
+                current = 1,
+                events = [],
+                count,
+                freq;
+
+            if (!rule || +event.start > +end) {
+                return events;
             }
 
-            return recurrence.frequency[rule.freq].occurrences(event, period);
+            freq = recurrence.frequency[rule.freq];
+            count = rule.count;
+
+            if (rule.until && +rule.until < +end) {
+                end = new Date(rule.until);
+            }
+
+            start = freq.limit(start, end, rule);
+
+            while (+start <= end) {
+                events.push({
+                    recurrenceID: event.uid,
+                    start: freq.setDate(start, event.start),
+                    end: freq.setDate(start, event.end)
+                });
+
+                if (count && count === current) {
+                    break;
+                }
+
+                current++;
+
+                start = freq.next(start, end, rule);
+                start = freq.limit(start, end, rule);
+            }
+
+            return events;
         },
+
+        expand: function(event, period) {
+            var rule = recurrence.expandEvent(event),
+                start = new Date(period.start),
+                end = new Date(period.end),
+                current = 1,
+                events = [],
+                count,
+                freq;
+
+            if (!rule || +event.start > +end) {
+                return events;
+            }
+
+            freq = recurrence.frequency[rule.freq];
+            count = rule.count;
+
+            if (rule.until && +rule.until < +end) {
+                end = new Date(rule.until);
+            }
+
+            start = freq.limit(start, end, rule);
+
+            while (+start <= end) {
+                events.push({
+                    recurrenceID: event.uid,
+                    start: freq.setDate(start, event.start),
+                    end: freq.setDate(start, event.end)
+                });
+
+                if (count && count === current) {
+                    break;
+                }
+
+                current++;
+
+                start = freq.next(start, end, rule);
+                start = freq.limit(start, end, rule);
+            }
+
+            return events;
+        },
+
         frequency: {
             //TODO: FREQ: SECONDLY
             //TODO: FREQ: MINUTELY
             //TODO: FREQ: HOURLY
             DAILY: {
-                expand: function(event, start, end) {
-                    var rule = recurrence.expandEvent(event),
-                        start = new Date(start),
-                        end = new Date(end),
-                        count = rule.count,
-                        current = 1,
-                        events = [];
-
-                    start = this.limit(rule, start, end);
-
-                    while (start) {
-                        events.push({
-                            recurrenceID: event.uid,
-                            start: this.setDate(start, event.start),
-                            end: this.setDate(start, event.end)
-                        });
-
-                        if (count && count === current) {
-                            break;
-                        }
-
-                        current++;
-
-                        start = this.expand(rule, start, end); //return null if start > end or start is already null
-                        start = this.limit(rule, start, end); //return null if start > end or start is already null
-
-                        //or
-                        start = this.expand(rule, start, end); //expand calls limit internally
-                    }
-
-                    return events;
-                },
-
-                occurrences: function(event, period) {
-                    var events = [],
-                        rule = recurrence.expandEvent(event),
-                        start = new Date(period.start),
-                        end = new Date(period.end),
-                        count = 1;
-
-                    //verify
-                    if (!rule || +event.start > +end) {
-                        return events;
-                    }
-
-                    //verify
-                    if (rule.until && +rule.until < +end) {
-                        end = new Date(rule.until);
-                    }
-
-                    while (start) {
-                        start = this.limit(start, end, rule);
-                        if (+start > +end) {
-                            break;
-                        }
-
-                        events.push({
-                            recurrenceID: event.uid,
-                            start: this.setDate(start, event.start),
-                            end: this.setDate(start, event.end)
-                        });
-                        start = this.next(start, end, rule);
-
-                        if (rule.count && rule.count === count) {
-                            return events;
-                        }
-
-                        count++;
-                    }
-
-                    return events;
-                },
-                next: function(start, end, rule) {
+                next: function(start, end, rule) { //TODO: remove it; end is not used!!!
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
                     return start;
                 },
 
-                limit: function(date, end, rule) {
+                limit: function(start, end, rule) {
                     var weekDays = rule.weekDays,
                         monthDays = rule.monthDays,
                         months = rule.months,
-                        currentDate = new Date(date),
                         weekDay, idx, length;
 
                     if (weekDays) {
@@ -1546,30 +1549,29 @@ kendo_module({
 
                     end = +end;
 
-                    while (+currentDate <= end) {
-                        if (months && $.inArray(currentDate.getMonth(), months) === -1) {
-                            currentDate.setFullYear(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-                        } else if (monthDays && checkMonthDays(monthDays, currentDate)) {
-                            currentDate.setDate(currentDate.getDate() + 1);
+                    while (+start <= end) {
+                        if (months && $.inArray(start.getMonth(), months) === -1) {
+                            start.setFullYear(start.getFullYear(), start.getMonth() + 1, 1);
+                        } else if (monthDays && checkMonthDays(monthDays, start)) {
+                            start.setDate(start.getDate() + 1);
                         } else if (weekDays) {
-                            weekDay = currentDate.getDay();
+                            weekDay = start.getDay();
                             for (idx = 0; idx < length; idx++) {
                                 if (weekDays[idx].offset) {
-                                    if (recurrence.isInWeek(currentDate, weekDays[idx].offset, rule.weekStart) && weekDays[idx].day === weekDay) {
-                                        return currentDate;
+                                    if (recurrence.isInWeek(start, weekDays[idx].offset, rule.weekStart) && weekDays[idx].day === weekDay) {
+                                        return start;
                                     }
                                 } else if (weekDays[idx].day === weekDay) {
-                                    return currentDate;
+                                    return start;
                                 }
                             }
 
-                            currentDate.setDate(currentDate.getDate() + 1);
+                            start.setDate(start.getDate() + 1);
                         } else {
-                            return currentDate;
+                            return start;
                         }
                     }
-
-                    return currentDate;
+                    return start;
                 },
 
                 setDate: function(currentDate, eventDate) {
@@ -1600,13 +1602,7 @@ kendo_module({
                     }
 
                     //TODO: put all weekdays stuff in next method
-                    weekDays = rule.weekDays;
-                    if (!weekDays) {
-                        weekDays = [{
-                            day: start.getDay(),
-                            offset: 0
-                        }];
-                    }
+
 
                     while(start) {
                         visibleWeekDays = filterWeekDays(weekDays, start.getDay());
@@ -1650,7 +1646,24 @@ kendo_module({
                     return this.limit(date, rule);
                 },
 
+                /*normalize: function(rule) {
+
+                }*/
+
                 next: function(start, end, rule) {
+                    var weekDays = rule.weekDays,
+                        currentWeekDays;
+
+                    //put in rule parser
+                    if (!weekDays) {
+                        rule.weekDays = weekDays = [{
+                            day: start.getDay(),
+                            offset: 0
+                        }];
+                    }
+
+                    currentWeekDays
+
                     start = new Date(start);
                     start.setDate(start.getDate() + (rule.interval * 7));
 
@@ -1660,6 +1673,7 @@ kendo_module({
 
                     return start;
                 },
+
                 setDate: function(currentDate, eventDate) {
                     //same as DAILY.setDate
                     currentDate = new Date(currentDate);
