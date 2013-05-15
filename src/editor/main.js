@@ -193,7 +193,7 @@ kendo_module({
                 that.window = $(element)
                     .wrap("<div class='editorToolbarWindow' />")
                     .parent()
-                    .prepend("<button class='k-button k-button-bare k-editortoolbar-pin'><span class='k-icon k-i-pin'></span></button>" +
+                    .prepend(/*"<button class='k-button k-button-bare k-editortoolbar-pin'><span class='k-icon k-i-pin'></span></button>" + */
                         "<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-columns'></span></button>")
                     .kendoWindow({
                         title: false,
@@ -212,7 +212,8 @@ kendo_module({
                         visible: false,
                         autoFocus: false,
                         actions: []
-                    }).find(".k-editortoolbar-pin").on("mousedown", function(e) {
+                    })
+                    /*.find(".k-editortoolbar-pin").on("mousedown", function(e) {
                         var btn = $(this),
                             icon = btn.children("span"),
                             wnd = btn.closest(".editorToolbarWindow").data("kendoWindow"),
@@ -223,10 +224,10 @@ kendo_module({
                         } else {
                             wnd.unpin();
                         }
-                        icon.toggleClass("k-i-pin", pinClass).toggleClass("k-i-unpin", !pinClass);
+                        icon.toggleClass("k-i-pin", !pinClass).toggleClass("k-i-unpin", pinClass);
 
                         e.preventDefault();
-                    }).end()
+                    }).end()*/
                     .on("mousedown", function(e){
                         if (!$(e.target).is(".k-icon")) {
                             e.preventDefault();
