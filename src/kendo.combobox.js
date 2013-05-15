@@ -85,6 +85,7 @@ kendo_module({
 
                 if (text) {
                     that.input.val(text);
+                    that._prev = text;
                 }
             }
 
@@ -409,6 +410,7 @@ kendo_module({
                     input.value = text;
                 }
 
+                that._prev = input.value;
                 that._triggerCascade();
             } else {
                 return input.value;
@@ -448,7 +450,7 @@ kendo_module({
                     that._placeholder();
                 }
 
-                that._prev = that._old = that._accessor();
+                that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             } else {
                 return that._accessor();
