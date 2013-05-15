@@ -846,8 +846,10 @@ kendo_module({
                 numberOfSlots = Math.ceil(endIndex - startIndex);
                 //allDayEventOffset = 10;
 
-                element.offset(dateSlot.offset())
+                element
                     .css({
+                        left: dateSlot.position().left,
+                        top: dateSlot.position().top,
                         width: slotWidth * (numberOfSlots + 1)
                         //height: dateSlot.height() - allDayEventOffset
                     });
@@ -859,15 +861,13 @@ kendo_module({
                 eventRightOffset = 30,
                 bottomOffset = (slotHeight * 0.10),
                 timeSlot = slots.eq(Math.floor(startIndex)),
-                dateSlot = slots.children().eq(dateSlotIndex);
+                dateSlot = timeSlot.children().eq(dateSlotIndex);
 
-            element.offset({
-                    top: timeSlot.offset().top,
-                    left: dateSlot.offset().left,
-                })
-                .css({
+            element.css({
                     height: slotHeight * (Math.ceil(endIndex - startIndex) || 1) - bottomOffset,
-                    width: dateSlot.width() - eventRightOffset
+                    width: dateSlot.width() - eventRightOffset,
+                    top: timeSlot.position().top + this.content[0].scrollTop,
+                    left: dateSlot[0].offsetLeft
                 });
         },
 
@@ -920,21 +920,22 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                    var dateSlotIndex = this._dateSlotIndex(event.start),
                        endDateSlotIndex = this._dateSlotIndex(event.end),
-                       element,
-                       isSameDayEvent = event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event);
+                       isSameDayEvent = event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event),
+                       element;
 
                    if (isSameDayEvent && dateSlotIndex === -1 && endDateSlotIndex > -1) {
                        dateSlotIndex = endDateSlotIndex;
                    }
 
-                   element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate)
-                       .appendTo(isSameDayEvent ? this.content : allDayEventContainer);
+                   element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate);
 
                    if (isSameDayEvent) {
                        this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
                    } else {
                        this._positonAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
                    }
+
+                   element.appendTo(isSameDayEvent ? this.content : allDayEventContainer);
                 }
             }
         }

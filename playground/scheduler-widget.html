@@ -7,6 +7,9 @@
 
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
@@ -391,8 +394,12 @@
         </style>
     </head>
     <body>
-        <div id="scheduler" style="overflow: hidden;" ></div>
+            <div id="scheduler" style="overflow: hidden;" ></div>
     <script>
+    //    $("#win").kendoWindow({
+     //      visible: true
+      //  });
+
         var start = new Date();
         start.setHours(3);
 
@@ -406,15 +413,19 @@
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
             views: ["day", { name: "week", selected: true }],
             dataSource: {
-                data: [ {
+                data: [ /*{
                     start: start,
                     end: end,
                     title: "foo"
                 },{
+                    start: start,
+                    end: end,
+                    title: "foo event"
+                },{
                     start: new Date(2013, 4, 14, 10, 5,0),
                     end: new Date(2013, 4, 14, 12, 5,0),
                     title: "bar"
-                },{
+                },*/{
                     start: new Date(2013, 4, 10, 10, 5,0),
                     end: new Date(2013, 4, 25, 12, 5,0),
                     title: "multi day"

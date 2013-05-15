@@ -403,6 +403,11 @@
                 }
             });
 
+            function slotHeight(table, slotsCount) {
+                var height = Math.floor(table.height() / table[0].rows.length);
+                return Math.floor((height * slotsCount) - height * 0.10);
+            }
+
             function setup(options) {
                 return new MyDayView(container, $.extend({ majorTick: 120 }, options));
             }
@@ -1103,10 +1108,37 @@
                 equal(eventElement.height(), slotHeight(view.content.find("table"), 2));
             });
 
-            function slotHeight(table, slotsCount) {
-                var height = Math.floor(table.height() / table[0].rows.length);
-                return Math.floor((height * slotsCount) - height * 0.10);
-            }
+            test("positon multiple single day events with same start time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var slot = view.content.find("tr").eq(8).find("td:first");
+
+                equal(eventElements.length, 2);
+
+                equal(eventElements.first().offset().top, slot.offset().top);
+                equal(eventElements.first().offset().left, slot.offset().left);
+                equal(eventElements.first().height(), slotHeight(view.content.find("table"), 2));
+                equal(eventElements.first().width(), (slot.width() - 30) / 2);
+                equal(eventElements.last().offset().top, slot.offset().top);
+                equal(eventElements.last().height(), slotHeight(view.content.find("table"), 2));
+                equal(eventElements.last().width(), (slot.width() - 30) / 2);
+            });
+
 
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
