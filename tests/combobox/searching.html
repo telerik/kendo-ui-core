@@ -711,6 +711,79 @@
 
                 equal(combobox.ul.children().length, 3);
             });
+
+            asyncTest("ComboBox does not trigger search on SHIFT", 0, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    filter: "contains",
+                    autoBind: false,
+                    delay: 0,
+                    value: "1",
+                    text: "Foo",
+                    dataBound: function() {
+                        ok(false);
+                    }
+                });
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    shiftKey: true
+                });
+
+                setTimeout(function() {
+                    start();
+                }, 100);
+            });
+
+            asyncTest("ComboBox does not trigger filtering when value is set with API", 0, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    filter: "contains",
+                    delay: 0,
+                });
+
+                combobox.value("1");
+                combobox.one("dataBound", function() {
+                    ok(false);
+                });
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    shiftKey: true
+                });
+
+                setTimeout(function() {
+                    start();
+                }, 100);
+            });
+
+            asyncTest("ComboBox does not trigger filtering when set custom value", 0, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    filter: "contains",
+                    delay: 0,
+                });
+
+                combobox.value("custom");
+                combobox.one("dataBound", function() {
+                    ok(false);
+                });
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    shiftKey: true
+                });
+
+                setTimeout(function() {
+                    start();
+                }, 100);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
