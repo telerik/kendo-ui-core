@@ -34,7 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\references\mvc3\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -363,6 +368,9 @@
     <Compile Include="Models\BulletChartLocalDataViewModel.cs" />
     <Compile Include="Models\AprilSales.cs" />
     <Compile Include="Models\CompensationStats.cs" />
+    <Compile Include="Models\Mapping\SchedulerEventMap.cs" />
+    <Compile Include="Models\Scheduler\SampleContext.cs" />
+    <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
     <Compile Include="Models\SocialBenefitType.cs" />
     <Compile Include="Models\SocialBenefits.cs" />
     <Compile Include="Models\CrimeData.cs" />

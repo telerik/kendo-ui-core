@@ -6,7 +6,6 @@
 
     public class SchedulerEvent : ISchedulerEvent
     {
-        //[Key]
         public int Id
         {
             get;
@@ -43,6 +42,7 @@
             get;
             set;
         }
+
         public IList<string> RecurrenceRules
         {
             get;

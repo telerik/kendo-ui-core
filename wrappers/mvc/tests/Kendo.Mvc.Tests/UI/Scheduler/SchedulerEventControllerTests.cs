@@ -8,18 +8,6 @@
 
     public class SchedulerEventControllerTests
     {
-        //private readonly SchedulerEventController<SchedulerEvent> controller;
-        //private readonly Mock<SchedulerEventController<SchedulerEvent>> controllerMock;
-        //private readonly SchedulerEventService<SchedulerEvent> schedulerService;
-        //private readonly Mock<SchedulerEventService<SchedulerEvent>> schedulerServiceMock;
-
-        //        mock.Setup(foo => foo.Submit(IsLarge())).Throws<ArgumentException>();
-
-        //public schedulerevent isvalid()
-        //{
-        //    return match<schedulerevent>.create(s => s.title == "error" || s.start == null || s.end == null);
-        //}
-
         public SchedulerEventControllerTests()
         {
         }
