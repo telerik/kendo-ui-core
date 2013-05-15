@@ -750,6 +750,8 @@
     <Content Include="Views\dataviz\sparklines\local-data.cshtml" />
     <Content Include="Views\Shared\SourceCode.cshtml" />
     <Content Include="Views\dataviz\api\selection.cshtml" />
+    <Content Include="Views\web\slider\navigation.cshtml" />
+    <Content Include="Views\web\slider\rtl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
