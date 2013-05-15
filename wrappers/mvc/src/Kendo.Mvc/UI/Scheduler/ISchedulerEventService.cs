@@ -1,13 +1,14 @@
-﻿using System.Linq;
-
-namespace Kendo.Mvc.UI
+﻿namespace Kendo.Mvc.UI
 {
-    public interface ISchedulerEventService
-    {
-        IQueryable<ISchedulerEvent> Read(DateRange period);
+    using System.Linq;
+    using System.Web.Mvc;
 
-        void Create(ISchedulerEvent appointment);
-        void Update(ISchedulerEvent appointment);
-        void Destroy(ISchedulerEvent appointment);
+    public interface ISchedulerEventService<T>
+        where T : class, ISchedulerEvent
+    {
+        IQueryable<T> GetAll();
+        void Insert(T appointment, ModelStateDictionary modelState);
+        void Update(T appointment, ModelStateDictionary modelState);
+        void Delete(T appointment, ModelStateDictionary modelState);
     }
 }

@@ -1,20 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Kendo.Mvc.UI
+﻿namespace Kendo.Mvc.UI
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface ISchedulerEvent
     {
-        //content lines
-        string Title { get; set; }
-        string Description { get; set; }
+        //Content Lines
+        string Title
+        {
+            get;
+            set;
+        }
+        string Description
+        {
+            get;
+            set;
+        }
 
-        //duration
-        bool AllDayEvent { get; set; }
-        DateTime Start { get; set; }
-        DateTime End { get; set; }
-       
-        //recurrence
-        IList<string> RecurrenceRules { get; set; } //RRULE        
+        //Duration
+        bool AllDayEvent
+        {
+            get;
+            set;
+        }
+        DateTime Start
+        {
+            get;
+            set;
+        }
+        DateTime End
+        {
+            get;
+            set;
+        }
+
+
+        //Recurrence
+        IList<string> RecurrenceRules
+        {
+            get;
+            set;
+        }
     }
 }
