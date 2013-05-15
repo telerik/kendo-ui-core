@@ -3597,6 +3597,10 @@ kendo_module({
             return item;
         },
 
+        total: function() {
+            return this.dataSource.total();
+        },
+
         next: function() {
             var buffer = this,
                 pageSize = buffer.pageSize,
@@ -3610,35 +3614,39 @@ kendo_module({
         },
 
         range: function(offset) {
+            if (this.offset === offset) {
+                return;
+            }
+
             var buffer = this,
                 pageSize = buffer.pageSize,
                 pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize,
                 dataSource = buffer.dataSource;
 
-            if (buffer.offset !== offset) {
-                buffer.offset = offset;
-                buffer._recalculate();
-                if (dataSource.inRange(offset, pageSize)) {
-                    buffer._goToRange(offset);
-                } else if (buffer.prefetch) {
-                    console.log('shifting range', pageSkip);
-                    dataSource.prefetch(pageSkip, pageSize, function() {
-                        buffer._goToRange(offset, true);
-                        console.log('range shifted', pageSkip);
-                    });
-                }
+            buffer.offset = offset;
+            buffer._recalculate();
+            if (dataSource.inRange(offset, pageSize)) {
+                buffer._goToRange(offset);
+            } else if (buffer.prefetch) {
+                console.log('shifting range', pageSkip);
+                dataSource.prefetch(pageSkip, pageSize, function() {
+                    buffer._goToRange(offset, true);
+                    console.log('range shifted', pageSkip);
+                });
             }
         },
 
         _goToRange: function(offset, expanding) {
+            if (this.offset !== offset) {
+                return;
+            }
+
             var buffer = this;
 
-            if (buffer.offset === offset) {
-                buffer.dataOffset = offset;
-                buffer._changingRange = true;
-                buffer._expanding = expanding;
-                buffer.dataSource.range(offset, buffer.pageSize);
-            }
+            buffer.dataOffset = offset;
+            buffer._changingRange = true;
+            buffer._expanding = expanding;
+            buffer.dataSource.range(offset, buffer.pageSize);
         },
 
         _change: function() {

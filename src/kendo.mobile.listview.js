@@ -255,6 +255,7 @@ kendo_module({
             list.itemCount = items.length;
 
             list.buffer.setViewSize(items.length);
+            list.trigger("reset");
             list.trigger("resize", { top: list.top, bottom: list.bottom });
         },
 
@@ -299,6 +300,12 @@ kendo_module({
             if (list.bottom < bottomThreshold) {
                 while (list.bottom < targetBottom) {
                     var nextIndex = list.offset + itemCount; // here, it should be offset + 1 + itemCount - 1.
+
+                    if (nextIndex === list.buffer.total()) {
+                        list.trigger("endReached");
+                        break;
+                    }
+
                     if (nextIndex === list.buffer.length) {
                         break;
                     }
@@ -369,8 +376,17 @@ kendo_module({
 
     var VirtualListViewLoadingIndicator = kendo.Class.extend({
         init: function(listView) {
-            this.element = $('<li class="endless-scroll-loading" style="position: absolute; top: 0">Loading ... </li>').appendTo(listView.element);
+            this.element = $('<li class="endless-scroll-loading"></li>').appendTo(listView.element);
+            this._loadIcon = $('<span style="display:none" class="km-icon"></span>').appendTo(this.element);
             this.height = this.element.outerHeight(true);
+        },
+
+        enable: function() {
+            this._loadIcon.show();
+        },
+
+        disable: function() {
+            this._loadIcon.hide();
         },
 
         below: function(item) {
@@ -395,30 +411,45 @@ kendo_module({
             that.element = $('<li class="press-to-load-more" style="position: absolute; top: 0"></li>').append(that._loadWrapper).appendTo(listView.element);
 
             that._loadButton.kendoMobileButton().data('kendoMobileButton').bind('click', function() {
-                that._loadButton.hide();
-                that._loadIcon.css('display', 'block');
-                that.element.find('.km-load-more').addClass('km-scroller-refresh');
+                that._hideShowButton();
                 buffer.next();
             });
 
             buffer.bind('resize', function() {
-                that._loadButton.show();
-                that._loadIcon.hide();
-                that.element.find('.km-load-more').removeClass('km-scroller-refresh');
+                that._showLoadButton();
             });
 
             that.height = that.element.outerHeight(true);
-        }
+        },
+
+        _hideShowButton: function() {
+            this._loadButton.hide();
+            this._loadIcon.css('display', 'block');
+            this.element.find('.km-load-more').addClass('km-scroller-refresh');
+        },
+
+        _showLoadButton: function() {
+            this._loadButton.show();
+            this._loadIcon.hide();
+            this.element.find('.km-load-more').removeClass('km-scroller-refresh');
+        },
+
+        enable: function() {
+            this._showLoadButton();
+        },
+
+        disable: function() {
+            this._loadButton.hide();
+            this._loadIcon.hide();
+            this.element.find('.km-load-more').removeClass('km-scroller-refresh');
+        },
     });
 
     var VirtualListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
-            var that = this;
-
-            that.listView = listView;
-            that.options = listView.options;
-
-            that.configure();
+            this.listView = listView;
+            this.options = listView.options;
+            this.configure();
         },
 
         configure: function() {
@@ -452,12 +483,20 @@ kendo_module({
             if (scroller) {
                 scroller.makeVirtual();
 
-                scroller.bind('scroll', function(e) {
+                scroller.bind("scroll", function(e) {
                     that.list.update(e.scrollTop);
                 });
 
-                that.list.bind('resize', function() {
+                that.list.bind("resize", function() {
                     scroller.virtualSize(0, that.list.totalHeight());
+                });
+
+                that.list.bind("reset", function() {
+                    footer.enable();
+                });
+
+                that.list.bind("endReached", function() {
+                    footer.disable();
                 });
 
                 that.buffer.bind('expand', function() {
@@ -662,9 +701,11 @@ kendo_module({
 
             that._templates();
 
+            that.virtual = options.endlessScroll || options.loadMore;
+
             that._style();
 
-            if (options.endlessScroll || options.loadMore) {
+            if (that.virtual) {
                 this._itemBinder = new VirtualListViewItemBinder(this);
             } else {
                 this._itemBinder = new ListViewItemBinder(this);
@@ -936,6 +977,7 @@ kendo_module({
 
             element.addClass("km-listview")
                 .toggleClass("km-list", !grouped)
+                .toggleClass("km-virtual-list", that.virtual)
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset);
