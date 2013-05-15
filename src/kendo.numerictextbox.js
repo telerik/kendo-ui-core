@@ -587,6 +587,7 @@ kendo_module({
                 if (value.indexOf("e") !== -1) {
                     value = round(+value, decimals);
                 }
+                value = value.replace(POINT, numberFormat[POINT]);
             } else {
                 value = "";
             }

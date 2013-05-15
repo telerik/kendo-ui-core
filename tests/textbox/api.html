@@ -498,6 +498,16 @@
 
                 equal(textbox.value(), 12.44);
             });
+
+            test("value method uses correct number info when parse en-ZA currency number", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "bg-BG",
+                    format: "n2",
+                    value: "12,44"
+                });
+
+                equal(textbox.element.val(), "12,44");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
