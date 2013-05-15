@@ -1007,13 +1007,19 @@ kendo_module({
 
         _bindCategories: function() {
             var chart = this,
-                data = chart.dataSource.view(),
+                data = chart.dataSource.view() || [],
                 grouped = (chart.dataSource.group() || []).length > 0,
-                categoriesData = (grouped ? (data[0]).items : data) || [],
+                categoriesData = data,
                 options = chart.options,
                 definitions = [].concat(options.categoryAxis),
                 axisIx,
                 axis;
+
+            if (grouped) {
+                if (data.length) {
+                    categoriesData = data[0].items;
+                }
+            }
 
             for (axisIx = 0; axisIx < definitions.length; axisIx++) {
                 axis = definitions[axisIx];
@@ -1024,13 +1030,14 @@ kendo_module({
         },
 
         _bindCategoryAxis: function(axis, data) {
-            var categoryIx,
+            var count = (data || []).length,
+                categoryIx,
                 category,
                 row;
 
             if (axis.field) {
                 axis.categories = [];
-                for (categoryIx = 0; categoryIx < data.length; categoryIx++) {
+                for (categoryIx = 0; categoryIx < count; categoryIx++) {
                     row = data[categoryIx];
 
                     category = getField(axis.field, row);
