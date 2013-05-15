@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less" type="text/css" media="screen" charset="utf-8">
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+    <div id='modalWindow'><iframe id='kendoFrame' width="500" height="300"></iframe></div>
+    <script>
+        var win = $("#modalWindow").kendoWindow({
+            width: "500px",
+            height: "300px",
+            title: "Kendo Window",
+            visible: false,
+            iframe: false,
+            modal: true
+        }).data("kendoWindow");
+
+        if (win != null)
+        {
+            win.center();
+            win.open();
+        }
+
+        var ifrm = document.getElementById("kendoFrame");
+        ifrm.src = "iframe10.html";
+    </script>
+</body>
+</html>
