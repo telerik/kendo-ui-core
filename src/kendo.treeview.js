@@ -939,12 +939,12 @@ kendo_module({
                 wrapper, root,
                 wrapperClasses = "k-widget k-treeview";
 
-            if (element.is("div")) {
-                wrapper = element;
-                root = wrapper.children("ul").eq(0);
-            } else { // element is ul
+            if (element.is("ul")) {
                 wrapper = element.wrap('<div />').parent();
                 root = element;
+            } else {
+                wrapper = element;
+                root = wrapper.children("ul").eq(0);
             }
 
             that.wrapper = wrapper.addClass(wrapperClasses);
