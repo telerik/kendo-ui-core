@@ -11,20 +11,30 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var TreeView = kendo.ui.TreeView, dom;
+            var dom;
 
-            module("initialization from div");
+            module("basic initialization", {
+                teardown: function() {
+                    $(".k-treeview").remove();
+                }
+            });
 
             test("adds necessary classes to div", function() {
-                var element = $("<div />").kendoTreeView();
+                dom = $("<div />").appendTo("body").kendoTreeView();
 
-                ok(element.is(".k-widget.k-treeview"));
+                ok(dom.is(".k-widget.k-treeview"));
             });
 
             test("attaches treeview object to div", function() {
-                var element = $("<div />").kendoTreeView();
+                dom = $("<div />").appendTo("body").kendoTreeView();
 
-                ok(element.data("kendoTreeView") instanceof TreeView);
+                ok(dom.data("kendoTreeView") instanceof kendo.ui.TreeView);
+            });
+
+            test("allows init from non-div elements", function() {
+                dom = $("<section id='tree' />").appendTo("body").kendoTreeView();
+
+                ok($.contains(document.body, dom[0]));
             });
 
             module("initialization from ul", {
@@ -39,7 +49,7 @@
             test("attaches treeview object to ul", function() {
                 dom = $("<ul><li>foo</li></ul>").appendTo("body").kendoTreeView();
 
-                ok(dom.data("kendoTreeView") instanceof TreeView);
+                ok(dom.data("kendoTreeView") instanceof kendo.ui.TreeView);
             });
 
             test("toggle buttons work when initializing from ul", function() {
