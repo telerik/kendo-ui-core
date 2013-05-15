@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less" type="text/css" media="screen" charset="utf-8">
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #wrapper {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <select id="mySelectList" name="mySelectList" style="width:300px">
+            <option></option>
+            <option value="a">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</option>
+            <option value="b">BBBBBBBBBBBBBBBBBBBBBBBBBBBBB</option>
+            <option value="c">CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</option>
+        </select>
+    </div>
+    <script type="text/javascript">
+        $("#mySelectList").kendoMultiSelect({});
+    </script>
+</body>
+</html>

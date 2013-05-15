@@ -1835,7 +1835,7 @@ function pad(number, digits, end) {
 
         support.zoomLevel = function() {
             return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
-                   support.pointers ? (window.outerWidth / window.innerWidth) : 1;
+                   support.pointers ? ((top || window).outerWidth / window.innerWidth) : 1;
         };
 
         support.eventCapture = document.documentElement.addEventListener;
