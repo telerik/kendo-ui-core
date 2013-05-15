@@ -325,7 +325,7 @@ kendo_module({
                 editorElement = editorOptions.element;
 
                 if (!wrapper.is(":visible") || !that.window.options.visible) {
-                    wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-width"), 10) * 2);
+                    wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-left-width"), 10) - parseInt(wrapper.css("border-right-width"), 10));
                     wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(window.element.css("padding-bottom"), 10));
                     window.open();
                 }
