@@ -8,11 +8,11 @@
 
     public static class SchedulerEventControllerTestHelper
     {
-        public static SchedulerEventController<SchedulerEvent> CreateController()
+        public static SchedulerEventController<SchedulerEventDouble> CreateController()
         {
-            List<SchedulerEvent> data = new List<SchedulerEvent>() 
+            List<SchedulerEventDouble> data = new List<SchedulerEventDouble>() 
             { 
-                new SchedulerEvent() 
+                new SchedulerEventDouble() 
                 { 
                     Id = 1, 
                     Title = "Meeting",
@@ -20,7 +20,7 @@
                     AllDayEvent = true,
                     Start = new DateTime(2013, 1, 5), End = new DateTime(2013, 1, 5)
                 },
-                new SchedulerEvent() 
+                new SchedulerEventDouble() 
                 {
                     Id = 2,
                     Title = "Trip",
@@ -31,31 +31,31 @@
                 }
             };
 
-            SchedulerEventController<SchedulerEvent> controller;
+            SchedulerEventController<SchedulerEventDouble> controller;
 
             controller = InitializeController(data);
 
             return controller;
         }
 
-        public static SchedulerEventController<SchedulerEvent> CreateController(List<SchedulerEvent> data)
+        public static SchedulerEventController<SchedulerEventDouble> CreateController(List<SchedulerEventDouble> data)
         {
-            SchedulerEventController<SchedulerEvent> controller;
+            SchedulerEventController<SchedulerEventDouble> controller;
 
             controller = InitializeController(data);
 
             return controller;
         }
 
-        private static SchedulerEventController<SchedulerEvent> InitializeController(List<SchedulerEvent> data)
+        private static SchedulerEventController<SchedulerEventDouble> InitializeController(List<SchedulerEventDouble> data)
         {
-            SchedulerEventController<SchedulerEvent> controller;
-            Mock<SchedulerEventController<SchedulerEvent>> controllerMock;
-            SchedulerEventServiceDouble<SchedulerEvent> schedulerService;
+            SchedulerEventController<SchedulerEventDouble> controller;
+            Mock<SchedulerEventController<SchedulerEventDouble>> controllerMock;
+            SchedulerEventServiceDouble<SchedulerEventDouble> schedulerService;
 
-            schedulerService = new SchedulerEventServiceDouble<SchedulerEvent>(data);
+            schedulerService = new SchedulerEventServiceDouble<SchedulerEventDouble>(data);
 
-            controllerMock = new Mock<SchedulerEventController<SchedulerEvent>>(schedulerService) { CallBase = true };
+            controllerMock = new Mock<SchedulerEventController<SchedulerEventDouble>>(schedulerService) { CallBase = true };
 
             var server = new Mock<HttpServerUtilityBase>();
             server.Setup(s => s.MapPath(It.IsAny<string>())).Returns((string path) => path);

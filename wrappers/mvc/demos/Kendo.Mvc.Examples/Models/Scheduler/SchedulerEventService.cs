@@ -3,77 +3,60 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Data.Linq;
     using System.Reflection;
     using System.Web.Mvc;
     using Kendo.Mvc.UI;
+    using System.Data;
 
     public class SchedulerEventService<T> : ISchedulerEventService<T>
-        where T : class, ISchedulerEvent
+        where T : SchedulerEvent
     {
         //TODO: Model validation 
         //TODO: Are the naming conventions are respected ?
         //TODO: make this varaible virtual or just use another interface for the DAL?
-        private SampleContext<T> db;
+        private SampleEntities db;
 
-        public SchedulerEventService(SampleContext<T> context)
+        public SchedulerEventService(SampleEntities context)
         {
             db = context;
         }
 
         public SchedulerEventService()
-            : this(new SampleContext<T>())
+            : this(new SampleEntities())
         {
         }
 
         public virtual IQueryable<T> GetAll()
         {
             //TODO: Dynamic type name - the same way as in the DBContext
-            return (db.SchedulerEvents);
+            return (IQueryable<T>)db.SchedulerEvents;
         }
 
         public virtual void Insert(T appointment, ModelStateDictionary modelState)
         {
             //TODO: Model validation
-            db.SchedulerEvents.Add((T)appointment);
+            db.SchedulerEvents.AddObject((T)appointment);
             db.SaveChanges();
         }
 
         public virtual void Update(T appointment, ModelStateDictionary modelState)
         {
             //TODO: Model validation
-            db.Entry(appointment).State = System.Data.EntityState.Modified;
+            db.SchedulerEvents.Attach(appointment);
+            db.ObjectStateManager.ChangeObjectState(appointment, System.Data.EntityState.Modified);
             db.SaveChanges();
         }
 
         public virtual void Delete(T appointment, ModelStateDictionary modelState)
         {
-            //TODO: Model validation
-            ExecuteFor(appointment, (entity) =>
+            ////TODO: Model validation
+            SchedulerEvent dbAppointment = db.SchedulerEvents.FirstOrDefault(a => a.Id == appointment.Id);
+            if (dbAppointment != null)
             {
-                db.SchedulerEvents.Remove(entity);
+                db.SchedulerEvents.DeleteObject(dbAppointment);
                 db.SaveChanges();
-            });
-        }
-
-        private void ExecuteFor(T entity, Action<T> action)
-        {
-            if (entity != null)
-            {
-
-                PropertyInfo modelKey =
-                    typeof(T)
-                    .GetProperties()
-                    .FirstOrDefault(p => p.GetCustomAttributes(typeof(KeyAttribute), true).Length > 0);
-
-                var value = modelKey != null ? modelKey.GetValue(entity, null) : null;
-
-                if (value != null)
-                {
-                    entity = db.SchedulerEvents.Find(value);
-                    action(entity);
-                }
             }
-
-        }
+        }        
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventControllerTestHelper.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventControllerTests.cs" />
+    <Compile Include="UI\Scheduler\SchedulerEventDouble.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventServiceDouble.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesFactoryTests.cs" />

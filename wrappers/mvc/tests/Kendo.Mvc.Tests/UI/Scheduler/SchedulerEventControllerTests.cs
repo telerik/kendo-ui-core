@@ -15,21 +15,21 @@
         [Fact]
         public void Should_return_all_available_events()
         {
-            SchedulerEventController<SchedulerEvent> controller = SchedulerEventControllerTestHelper.CreateController();
+            SchedulerEventController<SchedulerEventDouble> controller = SchedulerEventControllerTestHelper.CreateController();
 
             var result = controller.Read(new DataSourceRequest());
 
             var dataSourceResult = result.Data as DataSourceResult;
 
-            var browserResult = dataSourceResult.Data as IEnumerable<SchedulerEvent>;
+            var browserResult = dataSourceResult.Data as IEnumerable<SchedulerEventDouble>;
 
-            browserResult.Count<SchedulerEvent>().ShouldEqual(2);
+            browserResult.Count<SchedulerEventDouble>().ShouldEqual(2);
         }
 
         [Fact]
         public void Should_return_events_for_period()
         {
-            SchedulerEventController<SchedulerEvent> controller = SchedulerEventControllerTestHelper.CreateController();
+            SchedulerEventController<SchedulerEventDouble> controller = SchedulerEventControllerTestHelper.CreateController();
 
             //The filter is not correct
             var filters = (IList<IFilterDescriptor>)new List<IFilterDescriptor>()  {
@@ -57,9 +57,9 @@
 
             var dataSourceResult = result.Data as DataSourceResult;
 
-            var browserResult = dataSourceResult.Data as IEnumerable<SchedulerEvent>;
+            var browserResult = dataSourceResult.Data as IEnumerable<SchedulerEventDouble>;
 
-            browserResult.Count<SchedulerEvent>().ShouldEqual(1);
+            browserResult.Count<SchedulerEventDouble>().ShouldEqual(1);
         }
 
         //[Fact]
@@ -69,10 +69,10 @@
         [Fact]
         public void Should_insert_event()
         {
-            SchedulerEventController<SchedulerEvent> controller = SchedulerEventControllerTestHelper.CreateController();
+            SchedulerEventController<SchedulerEventDouble> controller = SchedulerEventControllerTestHelper.CreateController();
 
             var result = controller.Create(
-                new SchedulerEvent()
+                new SchedulerEventDouble()
                 {
                     Id = 0,
                     Title = "Meeting",
@@ -87,21 +87,21 @@
 
             var readResult = controller.Read(new DataSourceRequest());
             var readDataSourceResult = readResult.Data as DataSourceResult;
-            var readBrowserResult = readDataSourceResult.Data as IEnumerable<SchedulerEvent>;
+            var readBrowserResult = readDataSourceResult.Data as IEnumerable<SchedulerEventDouble>;
 
-            readBrowserResult.Count<SchedulerEvent>().ShouldEqual(3);
+            readBrowserResult.Count<SchedulerEventDouble>().ShouldEqual(3);
             browserResult.ShouldBeNull();
         }
 
         [Fact]
         public void Should_not_insert_event_with_invalid_model_state()
         {
-            SchedulerEventController<SchedulerEvent> controller = SchedulerEventControllerTestHelper.CreateController();
+            SchedulerEventController<SchedulerEventDouble> controller = SchedulerEventControllerTestHelper.CreateController();
 
             controller.ModelState.AddModelError("Title", "Title field is required!");
 
             var result = controller.Create(
-                new SchedulerEvent() 
+                new SchedulerEventDouble() 
                 { 
                     Id = 0,
                     Description = "Meeting with friend",
@@ -116,9 +116,9 @@
 
             var readResult = controller.Read(new DataSourceRequest());
             var readDataSourceResult = readResult.Data as DataSourceResult;
-            var readBrowserResult = readDataSourceResult.Data as IEnumerable<SchedulerEvent>;
+            var readBrowserResult = readDataSourceResult.Data as IEnumerable<SchedulerEventDouble>;
 
-            readBrowserResult.Count<SchedulerEvent>().ShouldEqual(2);
+            readBrowserResult.Count<SchedulerEventDouble>().ShouldEqual(2);
             errorsProperty.ShouldNotBeNull();
         }
 

@@ -1,0 +1,166 @@
+﻿<div style="float: left">
+    <div id="dataContainer" style="border: 1px solid red; width: 950px; height: 250px; overflow: scroll; margin-bottom: 10px"></div>
+
+    <fieldset style="width: 916px;">
+        <h3>Select period:</h3>
+        <label for="startDate">Start date:</label>
+        <input id="startDate" type="date" value="2013-03-20"/>
+        <br />
+        <label for="endDate">End date:</label>
+        <input id="endDate" type="date" value="2013-03-25"/>
+    </fieldset>
+
+
+    <button onclick="getEvents()">Get events for period</button>
+</div>
+
+<div style="float: right; width: 400px; height: 500px">
+    <fieldset>
+        <h3>Create event:</h3>
+        <label for="Title">Title:</label>
+        <input id="Title" type="text" />
+        <br />
+        <label for="Description">Description:</label>
+        <input id="Description" type="text" />
+        <br />
+        <label for="Start">Start date:</label>
+        <input id="Start" type="date" value="2013-03-20"/>
+        <br />
+        <label for="End">End date:</label>
+        <input id="End" type="date" value="2013-03-20"/>
+        <br />
+        <label for="AllDayEvent">All Day Event:</label>
+        <input id="AllDayEvent" type="checkbox" />
+    </fieldset>
+   
+    <button class="createEvent">Submit</button>
+</div>
+
+<div style="clear: both;"></div>
+
+<script>    
+    $(function () {
+        $(".createEvent").on("click", function () {
+                 $.ajax({
+                type: "POST",
+                data: {
+                    Id: 0,
+                    Title: $("#Title").val(),
+                    Description: $("#Description").val(),
+                    Start: $("#Start").val(),
+                    End: $("#End").val(),
+                    AllDayEvent: $("#AllDayEvent").is(":checked")
+                },
+                url: "/Scheduler/Create",
+            })
+        });
+    })
+
+    function getEvents() {
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+
+        $.ajax({
+            url: "/Scheduler/Read",
+            type: "POST",
+            data: {filter: "Start~gte~datetime'" + startDate + "T00-00-00'~and~End~lte~datetime'" + endDate + "T00-00-00'" },
+            success: function (data) {
+                var template = kendo.template($("#schedulerEventTemplate").html());
+                var content = "";
+                data = data.Data;
+                for (var i = 0; i < data.length; i++) {
+                    data[i].Start = new Date(kendo.parseDate(data[i].Start).getTime() + 7200000);
+                    data[i].End = new Date(kendo.parseDate(data[i].End).getTime() + 7200000);
+                    content = content + template(data[i]);
+                }
+                $("#dataContainer").html(content);
+            }
+        })
+    }
+
+    function deleteEvent() {
+        var container = $(event.srcElement.parentElement);
+        var id = container.find(":hidden").val();
+
+        $.ajax({
+            type: "POST",
+            data: {
+                Id: id,
+                Title: $("#title_" + id).val(),
+                Description: $("#description_" + id).val(),
+                Start: $("#startDate_" + id).val(),
+                End: $("#endDate_" + id).val(),
+                AllDayEvent: $("#allDayEvent_" + id).is(":checked")
+                //test recurrencry rules later
+            },
+            url: "/Scheduler/Destroy",
+        })
+    }
+
+    function updateEvent(e) {
+        container = $(event.srcElement.parentElement);
+        var id = container.find(":hidden").val();
+
+        $.ajax({
+            type: "POST",
+            data: {
+                Id: id,
+                Title: $("#title_" + id).val(),
+                Description: $("#description_" + id).val(),
+                Start: $("#startDate_" + id).val(),
+                End: $("#endDate_" + id).val(),
+                AllDayEvent: $("#allDayEvent_" + id).is(":checked")
+                //test recurrencry rules later
+            },
+            url: "/Scheduler/Update",
+            success: function () {
+                container.find("input").each(function () {
+                    $(this).attr("disabled", true);
+                });
+                $(".updateEventButton").remove();
+                $(".cancelEventButton").replaceWith("<button class='editEventButton' onclick='editEvent()'>edit event</button>");
+            }
+        })
+    }
+
+    var originalEvent = "";
+    function editEvent() {
+        container = $(event.srcElement.parentElement);
+
+        originalEvent = container.html();
+        container.find("input").each(function () {
+            $(this).removeAttr("disabled");
+        })
+
+        $(".editEventButton").replaceWith("<button class='updateEventButton' onclick='updateEvent()'>update event</button> <button class='cancelEventButton' onclick='cancelEvent()'>cancel</button>");
+    }
+
+    function cancelEvent() {
+        container = $(event.srcElement.parentElement);
+        container.html(originalEvent);
+    }
+</script>
+
+<script id="schedulerEventTemplate" type="text/x-kendo-template">   
+    <div style='display: inline-block; border: 1px solid black; padding: 1px'>
+        <input id='id_#=Id#' type='hidden' value='#=Id#' /> 
+
+        <label for='title_#=Id#'>Title:</label>
+        <input id='title_#=Id#' type='text' value='#=Title#' disabled=disabled /><br />
+
+        <label for='description_#=Id#'>Description:</label>
+        <input id='description_#=Id#' type='text' value='#=Description#' disabled=disabled /><br />
+    
+        <label for='startDate_#=Id#'>Start date:</label>
+        <input id='startDate_#=Id#' type='date' value='#=Start.toJSON().slice(0,10)#' disabled=disabled /><br />
+
+        <label for='endDate_#=Id#'>End date:</label>
+        <input id='endDate_#=Id#' type='date' value='#=End.toJSON().slice(0,10)#' disabled=disabled /><br />
+
+        <label for='allDayEvent_#=Id#'>All day event:</label>
+        <input id='allDayEvent_#=Id#' type='checkbox' #=AllDayEvent ? checked='checked' : ''# disabled=disabled /><br />
+
+        <button onclick='deleteEvent()'>delete event</button>
+        <button class='editEventButton' onclick='editEvent()'>edit event</button>
+    </div>
+</script>

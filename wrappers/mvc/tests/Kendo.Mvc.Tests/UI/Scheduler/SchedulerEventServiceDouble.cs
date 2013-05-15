@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-        
-    public class SchedulerEventServiceDouble<T> : ISchedulerEventService<T>
-        where T : SchedulerEvent
-    {
+    using System.ComponentModel.DataAnnotations;
 
+    public class SchedulerEventServiceDouble<T> : ISchedulerEventService<T>
+        where T : SchedulerEventDouble
+    {
         private List<T> db;
 
         public SchedulerEventServiceDouble(List<T> context)

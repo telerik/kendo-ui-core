@@ -934,7 +934,6 @@
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
-    <Compile Include="UI\Scheduler\SchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventService.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventController.cs" />
