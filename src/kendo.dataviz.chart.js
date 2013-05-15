@@ -128,7 +128,7 @@ kendo_module({
         PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
         POLAR_LINE = "polarLine",
-        POLAR_BUBBLE = "polarBubble",
+        POLAR_SCATTER = "polarScatter",
         POINTER = "pointer",
         RADAR_AREA = "radarArea",
         RADAR_COLUMN = "radarColumn",
@@ -185,7 +185,7 @@ kendo_module({
             BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
         ],
         POLAR_CHARTS = [
-            POLAR_AREA, POLAR_LINE, POLAR_BUBBLE
+            POLAR_AREA, POLAR_LINE, POLAR_SCATTER
         ],
         RADAR_CHARTS = [
             RADAR_AREA, RADAR_LINE, RADAR_COLUMN
@@ -499,7 +499,7 @@ kendo_module({
             } else if (xySeries.length > 0) {
                 plotArea = new XYPlotArea(xySeries, options);
             } else if (polarSeries.length > 0) {
-                //plotArea = new PolarPlotArea(polarSeries, options);
+                plotArea = new PolarPlotArea(polarSeries, options);
             } else if (radarSeries.length > 0) {
                 plotArea = new RadarPlotArea(radarSeries, options);
             } else {
@@ -2092,7 +2092,7 @@ kendo_module({
                 elements = [],
                 // TODO: Lookup from plotArea. Should it be user changable?
                 type = options.majorGridLines.type,
-                altAxis = axis.plotArea.categoryAxis,
+                altAxis = axis.plotArea.polarAxis,
                 majorAngles = altAxis.majorDivisions(),
                 center = altAxis.box.center(),
                 i,
@@ -2208,6 +2208,88 @@ kendo_module({
 
             return elements;
         }
+    });
+
+    var PolarAxis = Axis.extend({
+        init: function(options) {
+            var axis = this;
+
+            Axis.fn.init.call(axis, options);
+            options = axis.options;
+
+            options.minorUnit = options.minorUnit || axis.options.majorUnit / 2;
+        },
+
+        options: {
+            rotation: 0,
+            reverse: false,
+            majorUnit: 60,
+            min: 0,
+            max: 360,
+            labels: {
+                // TODO: Document
+                margin: getSpacing(10)
+            },
+            majorGridLines: {
+                visible: true
+            }
+        },
+
+        getDivisions: NumericAxis.fn.getDivisions,
+
+        reflow: function(box) {
+            this.box = box;
+            //this.reflowLabels();
+        },
+
+        lineBox: function() {
+            return this.box;
+        },
+
+        divisions: function(step, skipStep) {
+            // TODO: Implement
+            return [];
+        },
+
+        majorDivisions: function() {
+            return this.divisions(this.options.majorUnit);
+        },
+
+        minorDivisions: function() {
+            return this.divisions(this.options.minorUnit);
+        },
+
+        renderLine: $.noop,
+
+        renderGridLines: function(view, altAxis) {
+            // TODO: Implement
+            return [];
+        },
+
+        renderPlotBands: function(view) {
+            // TODO: Implement
+        },
+
+        getSlot: function(a, b) {
+            var axis = this,
+                options = axis.options,
+                box = axis.box;
+
+            a = clipValue(a, options.min, options.max);
+            b = clipValue(b || a, a, options.max);
+            console.log(a, b);
+            return new Ring(
+                box.center(), 0, box.height() / 2,
+                a, b
+            );
+        },
+
+        getValue: function(point) {
+            // TODO: Implement
+        },
+
+        labelsCount: NumericAxis.fn.labelsCount,
+        createAxisLabel: NumericAxis.fn.createAxisLabel
     });
 
     var AxisDateLabel = AxisLabel.extend({
@@ -4830,7 +4912,7 @@ kendo_module({
 
                 var slotX = seriesAxes.x.getSlot(value.x, value.x),
                     slotY = seriesAxes.y.getSlot(value.y, value.y),
-                    pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
+                    pointSlot = chart.pointSlot(slotX, slotY);
 
                 if (point) {
                     point.reflow(pointSlot);
@@ -4838,6 +4920,10 @@ kendo_module({
             });
 
             chart.box = targetBox;
+        },
+
+        pointSlot: function(slotX, slotY) {
+            return new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
         },
 
         getViewElements: function(view) {
@@ -4906,6 +4992,22 @@ kendo_module({
         }
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
+
+    var PolarLineChart = ScatterLineChart.extend({
+        pointSlot: function(slotX, slotY) {
+            var valueRadius = slotX.c.y - slotY.y1,
+                slot = Point2D.onCircle(slotX.c, slotX.middle(), valueRadius);
+
+            return new Box2D(slot.x, slot.y, slot.x, slot.y);
+        },
+
+        createSegment: function(linePoints, currentSeries, seriesIx) {
+            var segment = new LineSegment(linePoints, currentSeries, seriesIx);
+            segment.options.closed = true;
+
+            return segment;
+        }
+    });
 
     var BubbleChart = ScatterChart.extend({
         options: {
@@ -8166,6 +8268,7 @@ kendo_module({
             categoryAxis = new RadarCategoryAxis(plotArea.options.categoryAxis);
 
             plotArea.categoryAxis = categoryAxis;
+            plotArea.polarAxis = categoryAxis;
             plotArea.appendAxis(categoryAxis);
         },
 
@@ -8285,6 +8388,139 @@ kendo_module({
                     value: singleItemOrArray(values)
                 });
             }
+        }
+    });
+
+    // TODO: Inherit / mixin from RadarPlotArea
+    var PolarPlotArea = PlotAreaBase.extend({
+        init: function(series, options) {
+            var plotArea = this;
+
+            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker();
+
+            PlotAreaBase.fn.init.call(plotArea, series, options);
+        },
+
+        options: {
+            polarAxis: {},
+            valueAxis: {}
+        },
+
+        render: function() {
+            var plotArea = this;
+
+            plotArea.createPolarAxis();
+            plotArea.createCharts();
+            plotArea.createValueAxis();
+        },
+
+        reflow: PlotAreaBase.fn.reflow,
+
+        reflowAxes: function () {
+            var plotArea = this,
+                valueAxis = plotArea.valueAxis,
+                polarAxis = plotArea.polarAxis,
+                box = plotArea.box,
+                // TODO: Percents
+                axisBox = box.clone().unpad(35),
+                valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
+
+            polarAxis.reflow(axisBox);
+            valueAxis.reflow(valueAxisBox);
+            var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
+            valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
+
+            plotArea.alignAxes(axisBox);
+        },
+
+        alignAxes: function() {
+            var plotArea = this,
+                valueAxis = plotArea.valueAxis,
+                slot = valueAxis.getSlot(valueAxis.options.min),
+                slotEdge = valueAxis.options.reverse ? 2 : 1,
+                center = plotArea.polarAxis.getSlot(0).c,
+                box = valueAxis.box.translate(
+                    center.x - slot[X + slotEdge],
+                    center.y - slot[Y + slotEdge]
+                );
+
+            valueAxis.reflow(box);
+        },
+
+        backgroundBox: function() {
+            return this.box;
+        },
+
+        appendChart: function(chart, pane) {
+            var plotArea = this;
+
+            plotArea.valueAxisRangeTracker.update(chart.yAxisRanges);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
+        },
+
+        createPolarAxis: function() {
+            var plotArea = this,
+                polarAxis;
+
+            polarAxis = new PolarAxis(plotArea.options.polarAxis);
+
+            plotArea.polarAxis = polarAxis;
+            plotArea.axisX = polarAxis;
+            plotArea.appendAxis(polarAxis);
+        },
+
+        createValueAxis: function() {
+            var plotArea = this,
+                tracker = plotArea.valueAxisRangeTracker,
+                defaultRange = tracker.query(),
+                range,
+                valueAxis;
+
+            // TODO: Should we support multiple axes?
+            range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
+
+            if (range && defaultRange) {
+                range.min = math.min(range.min, defaultRange.min);
+                range.max = math.max(range.max, defaultRange.max);
+            }
+
+            valueAxis = new RadarNumericAxis(
+                range.min, range.max,
+                deepExtend({ max: range.max }, plotArea.options.valueAxis)
+            );
+
+            plotArea.valueAxis = valueAxis;
+            plotArea.axisY = valueAxis;
+            plotArea.appendAxis(valueAxis);
+        },
+
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series,
+                pane = plotArea.panes[0];
+
+            plotArea.createLineChart(
+                plotArea.filterSeriesByType(series, [POLAR_LINE]),
+                pane
+            );
+        },
+
+        createLineChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                filteredSeries = plotArea.filterVisibleSeries(series),
+                lineChart = new PolarLineChart(plotArea, { series: series });
+
+            plotArea.appendChart(lineChart, pane);
+        },
+
+        click: function(chart, e) {
+            // TODO: Implement
         }
     });
 
@@ -9922,7 +10158,7 @@ kendo_module({
             result = ["open", "high", "low", "close"];
         } else if (inArray(type, [BULLET, VERTICAL_BULLET])) {
             result = ["current", "target"];
-        } else if (inArray(type, XY_CHARTS)) {
+        } else if (inArray(type, XY_CHARTS) || inArray(type, POLAR_CHARTS)) {
             result = [X, Y];
             if (type === BUBBLE) {
                 result.push("size");
