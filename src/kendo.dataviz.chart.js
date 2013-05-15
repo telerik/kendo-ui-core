@@ -4617,8 +4617,7 @@ kendo_module({
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            var chart = this,
-                segment = new LineSegment(linePoints, currentSeries, seriesIx);
+            var segment = new LineSegment(linePoints, currentSeries, seriesIx);
 
             if (linePoints.length === currentSeries.data.length) {
                 segment.options.closed = true;
