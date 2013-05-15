@@ -1712,7 +1712,18 @@
 
             (function() {
                 var Pane = dataviz.Pane,
-                    pane;
+                    pane, rect;
+
+                function createPaneRect(options) {
+                    pane = new Pane(options);
+                    pane.renderGridLines = function() {};
+                    pane.reflow(chartBox);
+
+                    view = new ViewStub();
+                    pane.getViewElements(view);
+                    rect = view.log.rect[0];
+                }
+
 
                 // ------------------------------------------------------------
                 module("Pane");
@@ -1727,6 +1738,18 @@
                     pane.reflow(chartBox);
 
                     equal(pane.contentBox.height(), 365);
+                });
+
+                test("Sets background color", function() {
+                    createPaneRect({ background: "color", width: 600, height: 400 });
+                    equal(rect.style.fill, "color");
+                });
+
+                test("Sets border", function() {
+                    createPaneRect({ border: { color: "color", width: 1, dashType: "dashType" }, width: 600, height: 400 });
+                    equal(rect.style.stroke, "color");
+                    equal(rect.style.strokeWidth, 1);
+                    equal(rect.style.dashType, "dashType");
                 });
             })();
         </script>

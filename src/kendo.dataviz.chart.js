@@ -5740,7 +5740,7 @@ kendo_module({
 
         getViewElements: function(view) {
             var pane = this,
-                elements = CategoricalChart.fn.getViewElements.call(pane, view),
+                elements = BoxElement.fn.getViewElements.call(pane, view),
                 group = view.createGroup({
                     id: pane.options.id
                 }),
