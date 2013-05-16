@@ -1,0 +1,10 @@
+namespace Kendo.Mvc.UI
+{
+    public enum <%= csharp_type %>
+    {
+        <% values.each_with_index do |item, index| %>
+        <%= item.pascalize %> <%= ',' if index < values.length - 1 %>
+        <% end %>
+    }
+}
+

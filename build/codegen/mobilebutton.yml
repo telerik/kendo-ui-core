@@ -1,0 +1,19 @@
+:options:
+    - :name : href
+      :type : String
+      :description : Specifies the url or id of the view which will be loaded
+
+    - :name : transition
+      :type : String
+      :description : Specifies the Pane transition
+
+    - :name : target
+      :type : String
+      :description : Specifies the id of target Pane or `_top` for application level Pane
+
+    - :name : align
+      :type : Object
+      :values :
+          - left
+          - right
+      :description : Specifies the align direction of the button

@@ -22,8 +22,7 @@ module CodeGen::MVC::Mobile
         SETTING_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/setting.builder.csharp.erb"), 0, '%<>')
         EVENT = ERB.new(File.read("build/codegen/lib/mvc/event.builder.csharp.erb"), 0, '%<>')
 
-        COMPONENT_FIELDS = ERB.new(%{
-        //>> Fields
+        COMPONENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_declaration }.join %>
         //<< Fields})
 
@@ -31,8 +30,7 @@ module CodeGen::MVC::Mobile
         public <%= csharp_type %> <%= csharp_name %> { get; set; }
         })
 
-        FIELD_SERIALIZATION = ERB.new(%{
-        //>> Serialization
+        FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
         <%= unique_options.map { |option| option.to_client_option }.join %>
         //<< Serialization})
 
@@ -44,14 +42,12 @@ module CodeGen::MVC::Mobile
         }
         })
 
-        COMPOSITE_FIELD_INITIALIZATION = ERB.new(%{
-        //>> Initialization
+        COMPOSITE_FIELD_INITIALIZATION = ERB.new(%{//>> Initialization
         <%= composite_options.map { |option| option.to_initialization }.join %>
         //<< Initialization})
 
 
-        COMPONENT_FLUENT_FIELDS = ERB.new(%{
-        //>> Fields
+        COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_fluent }.join %>
         //<< Fields})
 
@@ -72,8 +68,7 @@ module CodeGen::MVC::Mobile
         }
         })
 
-        FLUENT_EVENTS = ERB.new(%{
-        //>> Handlers
+        FLUENT_EVENTS = ERB.new(%{//>> Handlers
         <%= events.map { |event| event.to_fluent }.join %>
         //<< Handlers
         })
@@ -103,6 +98,8 @@ module CodeGen::MVC::Mobile
             return new <%= csharp_class %>Builder(new <%= csharp_class %>(ViewContext, Initializer, UrlGenerator));
         }
         })
+
+        ENUM = ERB.new(File.read("build/codegen/lib/mvc/enum.csharp.erb"), 0, '%<>')
 
         module Options
             def component_class
@@ -140,7 +137,11 @@ module CodeGen::MVC::Mobile
             include Options
 
             def csharp_type
-                TYPES[type[0]]
+                if values
+                    "#{owner.csharp_class}#{csharp_name}"
+                else
+                    TYPES[type[0]]
+                end
             end
 
             def to_declaration
@@ -155,6 +156,10 @@ module CodeGen::MVC::Mobile
                 ERB.new(%{
             options["<%=name.camelize%>"] = <%=csharp_name%>;
                 }).result(binding)
+            end
+
+            def to_enum
+                ENUM.result(binding)
             end
         end
 
@@ -205,6 +210,7 @@ module CodeGen::MVC::Mobile
 
             def component(component)
                 write_class(component)
+                write_enums(component)
                 write_fluent(component)
                 write_settings(component)
                 write_events(component)
@@ -214,6 +220,16 @@ module CodeGen::MVC::Mobile
                 filename = "#{@path}/#{component.path}/#{component.csharp_class}.cs"
 
                 write_file(filename, component.to_class(filename))
+            end
+
+            def write_enums(component)
+                options = component.enum_options
+
+                options.each do |option|
+                    filename = "#{@path}/#{component.path}/#{component.csharp_class}#{option.csharp_name}.cs"
+
+                    write_file(filename, component.to_enum(filename, option))
+                end
             end
 
             def write_fluent(component)
@@ -316,6 +332,12 @@ module CodeGen::MVC::Mobile
                 #csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(binding))
             end
 
+            def to_enum(filename, option)
+                @files.push(filename)
+
+                option.to_enum
+            end
+
             def to_fluent(filename)
                 @files.push(filename)
 
@@ -352,6 +374,19 @@ module CodeGen::MVC::Mobile
 
             def register(container)
                 container << COMPONENT_REGISTER.result(binding)
+            end
+
+            def enum_options
+                enums = simple_options.select{ |o| !o.values.nil? }
+                composite = composite_options.flat_map { |o| o.options }
+
+                composite.each do |item|
+                    composite.push(*item.options) if item.composite?
+
+                    enums.push(item) if !item.values.nil?
+                end
+
+                enums
             end
         end
     end

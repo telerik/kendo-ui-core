@@ -38,6 +38,8 @@ module CodeGen
 
             types = settings[:type]
 
+            values = settings[:values]
+
             return unless types
 
             if types.is_a?(String)
@@ -62,6 +64,7 @@ module CodeGen
                                       :content => content,
                                       :default => default,
                                       :prefix => parent.name + '.',
+                                      :values => values,
                                       :description => description)
                 end
 
@@ -73,6 +76,7 @@ module CodeGen
                                                :content => content,
                                                :type => type,
                                                :default => default,
+                                               :values => values,
                                                :description => description)
 
             end
