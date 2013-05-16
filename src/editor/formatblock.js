@@ -306,9 +306,6 @@ var FormatBlockTool = Tool.extend({
             change: function () {
                 Tool.exec(editor, toolName, this.value());
             },
-            open: function () {
-                editor.toolbar._remainVisible = true;
-            },
             highlightFirst: false
         });
 

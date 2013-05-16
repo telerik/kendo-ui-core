@@ -120,10 +120,6 @@ kendo_module({
                 .kendoWindow(options)
                 .closest(".k-window").toggleClass("k-rtl", kendo.support.isRtl(editor.wrapper)).end();
 
-            dialog.data("kendoWindow").bind("open", function(){
-                editor.toolbar._remainVisible = true;
-            });
-
             return dialog;
         }
     };
@@ -229,6 +225,10 @@ kendo_module({
 
         items: function() {
             return this.element.children().find("> *, select");
+        },
+
+        focused: function() {
+            return this.element.find(".k-state-focused").length > 0;
         },
 
         toolById: function(name) {
@@ -827,17 +827,12 @@ kendo_module({
                     editor.toolbar.show();
                 })
                 .on("blur" + NS, function() {
-                    var that = this;
-                    if (!$(document.activeElement).is(editor.body)) {
-                        setTimeout(function() {
-                            if (editor.toolbar._remainVisible === undefined) {
-                                $(that).removeClass("k-state-active");
-                                editor.toolbar.hide();
-                            } else {
-                                delete editor.toolbar._remainVisible;
-                            }
-                        }, 1);
-                    }
+                    setTimeout(function() {
+                        if (!$(document.activeElement).is(editor.body) && !editor.toolbar.focused()) {
+                            $(this).removeClass("k-state-active");
+                            editor.toolbar.hide();
+                        }
+                    }, 1);
                 });
         },
 
