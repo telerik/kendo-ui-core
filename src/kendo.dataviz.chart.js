@@ -1924,12 +1924,12 @@ kendo_module({
                 radius = math.abs(axis.box.center().y - altAxis.lineBox().y1),
                 majorDivisions,
                 minorDivisions,
-                minorSkipStep = 0,
+                skipMajor = false,
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
-                majorDivisions = axis.gridLineDivisions(altAxis, 1);
-                minorSkipStep = 1;
+                majorDivisions = axis.majorGridLineDivisions(altAxis);
+                skipMajor = true;
 
                 gridLines = axis.gridLineElements(
                     view, majorDivisions, radius, options.majorGridLines
@@ -1937,7 +1937,7 @@ kendo_module({
             }
 
             if (options.minorGridLines.visible) {
-                minorDivisions = axis.gridLineDivisions(altAxis, 0.5, minorSkipStep),
+                minorDivisions = axis.minorGridLineDivisions(altAxis, skipMajor);
 
                 append(gridLines, axis.gridLineElements(
                     view, minorDivisions, radius, options.minorGridLines
@@ -1975,6 +1975,14 @@ kendo_module({
             }
 
             return elements;
+        },
+
+        majorGridLineDivisions: function(altAxis) {
+            return this.gridLineDivisions(altAxis, 1);
+        },
+
+        minorGridLineDivisions: function(altAxis, skipMajor) {
+            return this.gridLineDivisions(altAxis, 0.5, skipMajor ? 1 : 0);
         },
 
         gridLineDivisions: function(altAxis, step, skipStep) {
@@ -2230,16 +2238,46 @@ kendo_module({
                 // TODO: Document
                 margin: getSpacing(10)
             },
+            // TODO: Defaults
             majorGridLines: {
+                width: 0.5,
+                color: BLACK,
+                dashType: "dash",
                 visible: true
+            },
+            minorGridLines: {
+                visible: true,
+                width: 0.5,
+                color: "#aaa",
+                dashType: "dash"
             }
         },
 
-        getDivisions: NumericAxis.fn.getDivisions,
+        getDivisions: function(stepValue) {
+            return NumericAxis.fn.getDivisions.call(this, stepValue) - 1;
+        },
 
         reflow: function(box) {
             this.box = box;
-            //this.reflowLabels();
+            this.reflowLabels();
+        },
+
+        reflowLabels: function() {
+            var axis = this,
+                measureBox = new Box2D(),
+                divs = axis.majorDivisions(),
+                labels = axis.labels,
+                labelBox,
+                i;
+
+            for (i = 0; i < labels.length; i++) {
+                labels[i].reflow(measureBox);
+                labelBox = labels[i].box;
+
+                labels[i].reflow(axis.getSlot(divs[i]).adjacentBox(
+                    0, labelBox.width(), labelBox.height()
+                ));
+            }
         },
 
         lineBox: function() {
@@ -2247,8 +2285,31 @@ kendo_module({
         },
 
         divisions: function(step, skipStep) {
-            // TODO: Implement
-            return [];
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                divisions = axis.getDivisions(step),
+                angle = options.min,
+                divs = [],
+                i;
+
+            if (skipStep) {
+                skipStep = skipStep / step;
+            }
+
+            for (i = 0; i < divisions; i++) {
+                if (i % skipStep !== 0) {
+                    divs.push(angle % 360);
+                }
+
+                if (reverse) {
+                    angle += 360 - step;
+                } else {
+                    angle += step;
+                }
+            }
+
+            return divs;
         },
 
         majorDivisions: function() {
@@ -2261,9 +2322,17 @@ kendo_module({
 
         renderLine: $.noop,
 
-        renderGridLines: function(view, altAxis) {
-            // TODO: Implement
-            return [];
+        renderGridLines: RadarCategoryAxis.fn.renderGridLines,
+        gridLineElements: RadarCategoryAxis.fn.gridLineElements,
+        gridLineDivisions: RadarCategoryAxis.fn.gridLineDivisions,
+
+        majorGridLineDivisions: function(altAxis) {
+            return this.gridLineDivisions(altAxis, this.options.majorUnit);
+        },
+
+        minorGridLineDivisions: function(altAxis, skipMajor) {
+            return this.gridLineDivisions(altAxis, this.options.minorUnit,
+                      skipMajor ? this.options.majorUnit : 0);
         },
 
         renderPlotBands: function(view) {
@@ -2284,7 +2353,7 @@ kendo_module({
 
             return new Ring(
                 box.center(), 0, box.height() / 2,
-                a, b
+                a, b - a
             );
         },
 
@@ -8492,7 +8561,11 @@ kendo_module({
 
             valueAxis = new RadarNumericAxis(
                 range.min, range.max,
-                deepExtend({ max: range.max }, plotArea.options.valueAxis)
+                deepExtend({
+                    max: range.max,
+                    majorGridLines: { type: ARC },
+                    minorGridLines: { type: ARC }
+                }, plotArea.options.valueAxis)
             );
 
             plotArea.valueAxis = valueAxis;
@@ -8517,8 +8590,6 @@ kendo_module({
             }
 
             var plotArea = this,
-                firstSeries = series[0],
-                filteredSeries = plotArea.filterVisibleSeries(series),
                 lineChart = new PolarLineChart(plotArea, { series: series });
 
             plotArea.appendChart(lineChart, pane);
