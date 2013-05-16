@@ -43,20 +43,38 @@
         {
             if (ValidateModel(appointment, modelState))
             {
-                db.SchedulerEvents.Attach(appointment);
-                db.ObjectStateManager.ChangeObjectState(appointment, System.Data.EntityState.Modified);
-                db.SaveChanges();
+                SchedulerEvent dbAppointment;
+                if (TryFindRecord(appointment, modelState, out dbAppointment))
+                {
+                    db.SchedulerEvents.Attach(dbAppointment);
+                    db.SchedulerEvents.ApplyCurrentValues(appointment);
+                    db.SaveChanges();
+                }
             }
         }
 
         public virtual void Delete(T appointment, ModelStateDictionary modelState)
         {
-            SchedulerEvent dbAppointment = db.SchedulerEvents.FirstOrDefault(a => a.Id == appointment.Id);
-
-            if (dbAppointment != null)
+            SchedulerEvent dbAppointment;
+            if (TryFindRecord(appointment, modelState, out dbAppointment))
             {
                 db.SchedulerEvents.DeleteObject(dbAppointment);
                 db.SaveChanges();
+            }
+        }
+
+        //TODO: better naming or refactor
+        private bool TryFindRecord(T appointment, ModelStateDictionary modelState, out SchedulerEvent dbAppointment)
+        {
+            dbAppointment = db.SchedulerEvents.SingleOrDefault(a => a.Id == appointment.Id);
+            if (dbAppointment != null)
+            {
+                return true;
+            }
+            else
+            {
+                modelState.AddModelError("error", "Record was not found.");
+                return false;
             }
         }
 
@@ -65,10 +83,10 @@
         {
             if (appointment.Start > appointment.End)
             {
-                modelState.AddModelError("errors", "End date must be greater or equal to Start date");
+                modelState.AddModelError("errors", "End date must be greater or equal to Start date.");
                 return false;
             }
-
+            
             return true;
         }
     }

@@ -27,37 +27,31 @@
 
         public virtual void Insert(T appointment, ModelStateDictionary modelState)
         {
-            if (appointment.Start >= appointment.End)
+            if (ValidateModel(appointment, modelState))
             {
-                modelState.AddModelError("errors", "Start must be greater than End!");
-                return;
+                db.Add((T)appointment);
             }
-
-            db.Add((T)appointment);
         }
 
         public virtual void Update(T appointment, ModelStateDictionary modelState)
         {
-            if (appointment.Start >= appointment.End)
+            if (ValidateModel(appointment, modelState))
             {
-                modelState.AddModelError("errors", "Start must be greater than End!");
-                return;
-            }
+                T dbRecord = db.Find(a => a.Id == appointment.Id);
 
-            T dbRecord = db.Find(a => a.Id == appointment.Id);
-
-            if (dbRecord != null)
-            {
-                dbRecord.Title = appointment.Title;
-                dbRecord.Description = appointment.Description;
-                dbRecord.Start = appointment.Start;
-                dbRecord.End = appointment.End;
-                dbRecord.AllDayEvent = appointment.AllDayEvent;
-                dbRecord.RecurrenceRules = appointment.RecurrenceRules;
-            }
-            else
-            {
-                modelState.AddModelError("errors", "Record not found!");
+                if (dbRecord != null)
+                {
+                    dbRecord.Title = appointment.Title;
+                    dbRecord.Description = appointment.Description;
+                    dbRecord.Start = appointment.Start;
+                    dbRecord.End = appointment.End;
+                    dbRecord.AllDayEvent = appointment.AllDayEvent;
+                    dbRecord.RecurrenceRules = appointment.RecurrenceRules;
+                }
+                else
+                {
+                    modelState.AddModelError("errors", "Record not found!");
+                }
             }
         }
 
@@ -72,6 +66,17 @@
             {
                 modelState.AddModelError("errors", "Record not found!");
             }
+        }
+
+        private static bool ValidateModel(T appointment, ModelStateDictionary modelState)
+        {
+            if (appointment.Start > appointment.End)
+            {
+                modelState.AddModelError("errors", "Start must be greater than End!");
+                return false;
+            }
+
+            return true;
         }
     }
 }
