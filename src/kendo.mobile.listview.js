@@ -337,7 +337,6 @@ kendo_module({
             var element = listView.append([dataItem]),
                 height = element.outerHeight(true);
 
-            element.css({position: 'absolute', 'top': 0 });
             $.extend(this, {
                 top: 0,
                 element: element,
