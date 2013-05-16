@@ -193,8 +193,7 @@ kendo_module({
                 that.window = $(element)
                     .wrap("<div class='editorToolbarWindow' />")
                     .parent()
-                    .prepend(/*"<button class='k-button k-button-bare k-editortoolbar-pin'><span class='k-icon k-i-pin'></span></button>" + */
-                        "<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-columns'></span></button>")
+                    .prepend("<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-columns'></span></button>")
                     .kendoWindow({
                         title: false,
                         resizable: false,
@@ -213,21 +212,6 @@ kendo_module({
                         autoFocus: false,
                         actions: []
                     })
-                    /*.find(".k-editortoolbar-pin").on("mousedown", function(e) {
-                        var btn = $(this),
-                            icon = btn.children("span"),
-                            wnd = btn.closest(".editorToolbarWindow").data("kendoWindow"),
-                            pinClass = icon.hasClass("k-i-pin");
-
-                        if (pinClass) {
-                            wnd.pin();
-                        } else {
-                            wnd.unpin();
-                        }
-                        icon.toggleClass("k-i-pin", !pinClass).toggleClass("k-i-unpin", pinClass);
-
-                        e.preventDefault();
-                    }).end()*/
                     .on("mousedown", function(e){
                         if (!$(e.target).is(".k-icon")) {
                             e.preventDefault();
@@ -822,7 +806,9 @@ kendo_module({
                     }
                 })
                 .on("mouseup" + NS, function() {
-                    editor._selectionChange();
+                    setTimeout(function() {
+                        editor._selectionChange();
+                    }, 1);
                 })
                 .on("click" + NS, function(e) {
                     var dom = kendo.ui.editor.Dom, range;

@@ -110,9 +110,12 @@
                 ok(changeRaised);
             });
 
-            test('mouseup raises selection change', function() {
+            asyncTest('mouseup raises selection change', function() {
                 $(editor.body).mouseup();
-                ok(changeRaised);
+                setTimeout(function() {
+                    ok(changeRaised);
+                    start();
+                }, 100);
             });
 
             test('down arrow raises selection change', function() {
