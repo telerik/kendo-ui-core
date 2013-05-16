@@ -1424,7 +1424,7 @@ kendo_module({
         },
 
         //TODO: optimize! Set year and month before looping days
-        nextWeekDay: function(date, dayOfWeek) {
+        nextWeekDay: function(date, dayOfWeek) { //rename weekDay... and add nextWeekDay where add one day and call weekDay()
             date = new Date(date);
             while(date.getDay() !== dayOfWeek) {
                 date.setDate(date.getDate() + 1); //increase/decrease... if we need -1MO and so on
@@ -1461,6 +1461,12 @@ kendo_module({
             if (rule.until && +rule.until < +end) {
                 end = new Date(rule.until);
             }
+
+            if (freq.normalize) {
+                freq.normalize(rule, start, end);
+            }
+
+            start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
 
             start = freq.limit(start, end, rule);
 
@@ -1584,94 +1590,59 @@ kendo_module({
                 }
             },
             WEEKLY: {
-                occurrences: function(event, period) {
-                    var events = [],
-                        rule = recurrence.expandEvent(event),
-                        start = new Date(period.start),
-                        end = new Date(period.end),
-                        count = 1,
-                        weekDays,
-                        visibleWeekDays;
-
-                    if (!rule || +event.start > +end) {
-                        return events;
-                    }
-
-                    if (rule.until && +rule.until < +end) {
-                        end = new Date(rule.until);
-                    }
-
-                    //TODO: put all weekdays stuff in next method
-
-
-                    while(start) {
-                        visibleWeekDays = filterWeekDays(weekDays, start.getDay());
-                        for (var idx = 0, length = visibleWeekDays.length; idx < length; idx++) {
-                            start = this.limit(start, rule);
-                            start = recurrence.nextWeekDay(start, visibleWeekDays[idx].day);
-                            if (+start >= +end) {
-                                return events;
-                            }
-
-                            events.push({
-                                recurrenceID: event.uid,
-                                start: this.setDate(start, event.start),
-                                end: this.setDate(start, event.end)
-                            });
-
-                            if (rule.count && rule.count === count) {
-                                return events;
-                            }
-
-                            count++;
-                        }
-
-                        start = recurrence.nextWeekDay(start, rule.weekStart);
-
-                        if (rule.interval > 1) {
-                            start.setDate(start.getDate() + ((rule.interval - 1) * 7));
-                        }
-                    }
+                next: function(start) {
+                    start.setDate(start.getDate() + 1); //check whether we need only to increment
+                    return start;
                 },
 
-                limit: function(date, rule) {
-                    var months = rule.months,
-                        monthNumber = date.getMonth() + 1;
-
-                    if ($.inArray(monthNumber, months) === -1) {
-                        return date;
-                    }
-
-                    date.setFullYear(date.getFullYear(), date.getMonth() + 1, date.getDate());
-                    return this.limit(date, rule);
-                },
-
-                /*normalize: function(rule) {
-
-                }*/
-
-                next: function(start, end, rule) {
-                    var weekDays = rule.weekDays,
-                        currentWeekDays;
-
-                    //put in rule parser
-                    if (!weekDays) {
-                        rule.weekDays = weekDays = [{
+                normalize: function(rule, start, end) {
+                    if (!rule.weekDays) {
+                        rule.weekDays = [{
                             day: start.getDay(),
                             offset: 0
                         }];
                     }
 
-                    currentWeekDays
+                    if (rule.currentWeekDays === undefined) {
+                        rule.currentWeekDays = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+                },
 
-                    start = new Date(start);
-                    start.setDate(start.getDate() + (rule.interval * 7));
+                limit: function(date, end, rule) {
+                    var months = rule.months,
+                        weekDays = rule.weekDays,
+                        monthNumber = date.getMonth() + 1,
+                        currentDay, update;
 
-                    if (+start > +end) {
-                        start = null;
+                    if (months) {
+                        while ($.inArray(monthNumber, months) === -1) {
+                            date.setFullYear(date.getFullYear(), monthNumber, 1);
+                            monthNumber += 1;
+                            update = true;
+                        }
+
+                        if (update) {
+                            rule.currentWeekDays = filterWeekDays(rule.weekDays, date.getDay(), rule.weekStart).slice(0);
+                        }
                     }
 
-                    return start;
+                    currentDay = rule.currentWeekDays.shift();
+                    if (!currentDay) {
+                        date = recurrence.nextWeekDay(date, rule.weekStart);
+                        rule.currentWeekDays = rule.weekDays.slice(0);
+                        currentDay = rule.currentWeekDays.shift();
+
+                        if (rule.interval > 1) {
+                            date.setDate(date.getDate() + ((rule.interval - 1) * 7));
+                        }
+                    }
+
+                    //TODO: calculate **offset**
+                    if (currentDay && currentDay.day !== date.getDay()) {
+                        date = recurrence.nextWeekDay(date, currentDay.day);
+                    }
+
+                    return date;
                 },
 
                 setDate: function(currentDate, eventDate) {

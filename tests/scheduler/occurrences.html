@@ -111,7 +111,7 @@
                     rule: "FREQ=DAILY"
                 }
 
-                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 11) } );
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 11, 17) } );
 
                 equal(events.length, 2);
                 equal(events[0].recurrenceID, schedulerEvent.uid);
@@ -132,7 +132,7 @@
                     rule: "FREQ=DAILY"
                 }
 
-                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16, 17) } );
 
                 equal(events.length, 7);
                 equal(events[0].recurrenceID, schedulerEvent.uid);
@@ -153,7 +153,7 @@
                     rule: "FREQ=DAILY;INTERVAL=2"
                 }
 
-                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16, 17) } );
 
                 equal(events.length, 4);
 
@@ -203,15 +203,11 @@
 
                 var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 16) } );
 
-                equal(events.length, 2);
+                equal(events.length, 1);
 
                 equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
-
-                equal(events[1].recurrenceID, schedulerEvent.uid);
-                equal(events[1].start.getTime(), +new Date(2000, 10, 11, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
 
             test("DAILY occurrences method returns empty array if not valid rule", function() {
@@ -251,7 +247,7 @@
                     rule: "FREQ=DAILY;BYMONTH=11"
                 }
 
-                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 30), end: new Date(2000, 11, 1) } );
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 30), end: new Date(2000, 11, 1, 17) } );
 
                 equal(events.length, 1);
 
@@ -317,7 +313,7 @@
                     rule: "FREQ=DAILY;BYDAY=SU, MO"
                 }
 
-                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 13) } );
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 13, 17) } );
 
                 equal(events.length, 2);
 
@@ -375,8 +371,8 @@
 
                 equal(events.length, 0);
             });
+            ///ADD INTERVAL test for DAILY !!!!!!!!!!
 
-            /*
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
                 var schedulerEvent = {
@@ -524,7 +520,7 @@
                 equal(events.length, 2);
             });
 
-           test("WEEKLY occurrences method returns empty array if no events", function() {
+            test("WEEKLY occurrences method returns empty array if no events", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
@@ -555,21 +551,18 @@
                 equal(events[0].end.getTime(), +new Date(2013, 10, 29, 17, 0));
             });
 
-            test("WEEKLY occurrences method limits by BYMONTH=12", function() {
+            test("WEEKLY occurrences method limits by BYMONTH=12 and INTERVAL=2", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
-                    rule: "FREQ=WEEKLY;BYDAY=TU,FR;BYMONTH=12"
+                    rule: "FREQ=WEEKLY;BYDAY=TU,FR;BYMONTH=12;INTERVAL=2"
                 }
 
                 var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 27), end: new Date(2014, 0, 1) } );
 
-                equal(events.length, 1);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
-                equal(events[0].start.getTime(), +new Date(2013, 10, 29, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 10, 29, 17, 0));
+                equal(events.length, 5);
             });
 
             test("WEEKLY occurrences method limits by BYMONTH=11,12", function() {
@@ -578,14 +571,13 @@
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
-                    rule: "FREQ=WEEKLY;BYDAY=TU,FR;BYMONTH=11, 12"
+                    rule: "FREQ=WEEKLY;BYDAY=FR;BYMONTH=11, 12"
                 }
 
                 var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 27), end: new Date(2014, 0, 1) } );
 
-                equal(events.length, 0);
+                equal(events.length, 5);
             });
-            */
         </script>
     </body>
 </html>
