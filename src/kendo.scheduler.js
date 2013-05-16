@@ -1386,26 +1386,31 @@ kendo_module({
                     return true;
                 }
             } else {
-                if ((recurrence.numberOfWeeks(date, weekStart) + offset) === weekNumber) {
+                if ((recurrence.numberOfWeeks(date, weekStart) + (offset + 1)) === weekNumber) {
                     return true;
                 }
             }
         },
 
         weekNumber: function(date, weekStart) {
-            var firstWeekLength = recurrence.firstWeekLength(date, weekStart),
-                day = date.getDate(),
-                weekNumber;
+            //TODO: take into account weekStart
+            var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay(),
+                offsetDate = date.getDate() + firstWeekday - 1;
 
-            if (day <= firstWeekLength) {
-                weekNumber = 1;
-            } else if (day - 7 < 1) {
-                weekNumber = 2;
-            } else {
-                weekNumber = parseInt((day - firstWeekLength) / 7, 10) + 1;
+            return Math.floor(offsetDate / 7) + 1;
+        },
+
+        numberOfWeeks: function(date, weekStart) {
+            return recurrence.weekNumber(new Date(date.getFullYear(), date.getMonth() + 1, 0), weekStart);
+        },
+
+        nextWeekDay: function(date, dayOfWeek) { //rename weekDay... and add nextWeekDay where add one day and call weekDay()
+            date = new Date(date);
+            while(date.getDay() !== dayOfWeek) {
+                date.setDate(date.getDate() + 1); //increase/decrease... if we need -1MO and so on
             }
 
-            return weekNumber;
+            return date;
         },
 
         firstWeekLength: function(date, weekStart) {
@@ -1419,19 +1424,7 @@ kendo_module({
 
             return firstWeekLength;
         },
-        numberOfWeeks: function(date, weekStart) {
-            return Math.ceil((getMonthLength(date) - recurrence.firstWeekLength(date, weekStart)) / 7) + 1;
-        },
 
-        //TODO: optimize! Set year and month before looping days
-        nextWeekDay: function(date, dayOfWeek) { //rename weekDay... and add nextWeekDay where add one day and call weekDay()
-            date = new Date(date);
-            while(date.getDay() !== dayOfWeek) {
-                date.setDate(date.getDate() + 1); //increase/decrease... if we need -1MO and so on
-            }
-
-            return date;
-        },
         expandEvent: function(e) {
             var instance = e.ruleInstance;
 
@@ -1440,54 +1433,6 @@ kendo_module({
             }
 
             return instance;
-        },
-
-        occurrences: function(event, period) {
-            var rule = recurrence.expandEvent(event),
-                start = new Date(period.start),
-                end = new Date(period.end),
-                current = 1,
-                events = [],
-                count,
-                freq;
-
-            if (!rule || +event.start > +end) {
-                return events;
-            }
-
-            freq = recurrence.frequency[rule.freq];
-            count = rule.count;
-
-            if (rule.until && +rule.until < +end) {
-                end = new Date(rule.until);
-            }
-
-            if (freq.normalize) {
-                freq.normalize(rule, start, end);
-            }
-
-            start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
-
-            start = freq.limit(start, end, rule);
-
-            while (+start <= end) {
-                events.push({
-                    recurrenceID: event.uid,
-                    start: freq.setDate(start, event.start),
-                    end: freq.setDate(start, event.end)
-                });
-
-                if (count && count === current) {
-                    break;
-                }
-
-                current++;
-
-                start = freq.next(start, end, rule);
-                start = freq.limit(start, end, rule);
-            }
-
-            return events;
         },
 
         expand: function(event, period) {
@@ -1510,6 +1455,11 @@ kendo_module({
                 end = new Date(rule.until);
             }
 
+            if (freq.normalize) {
+                freq.normalize(rule, start);
+            }
+
+            start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
             start = freq.limit(start, end, rule);
 
             while (+start <= end) {
@@ -1595,7 +1545,7 @@ kendo_module({
                     return start;
                 },
 
-                normalize: function(rule, start, end) {
+                normalize: function(rule, start) {
                     if (!rule.weekDays) {
                         rule.weekDays = [{
                             day: start.getDay(),
@@ -1610,7 +1560,6 @@ kendo_module({
 
                 limit: function(date, end, rule) {
                     var months = rule.months,
-                        weekDays = rule.weekDays,
                         monthNumber = date.getMonth() + 1,
                         currentDay, update;
 
@@ -1637,8 +1586,18 @@ kendo_module({
                         }
                     }
 
-                    //TODO: calculate **offset**
-                    if (currentDay && currentDay.day !== date.getDay()) {
+                    if (currentDay.offset) {
+                        while (!recurrence.isInWeek(date, currentDay.offset, rule.weekStart)) {
+                            date = recurrence.nextWeekDay(date, rule.weekStart);
+                            date.setDate(date.getDate() + 1);
+
+                            /*if (+date > +end) {
+                                break;
+                            }*/
+                        }
+                    }
+
+                    if (currentDay.day !== date.getDay()) {
                         date = recurrence.nextWeekDay(date, currentDay.day);
                     }
 
