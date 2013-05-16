@@ -86,6 +86,13 @@
                 ok(dom.hasClass("k-editor-inline"));
                 ok(dom.hasClass("k-widget"));
             });
+
+            test("processes value when initializing", function() {
+                var dom = $("<div contentEditable><p></p></div>").appendTo("body");
+                dom.kendoEditor();
+
+                equal(dom.find("br").length, 1);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

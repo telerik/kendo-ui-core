@@ -592,7 +592,7 @@ kendo_module({
                 // indented HTML introduces problematic ranges in IE
                 value = element.val().replace(/[\r\n\v\f\t ]+/ig, " ");
             } else {
-                value = element.innerHTML;
+                value = element[0].innerHTML;
             }
 
             that.value(value);
