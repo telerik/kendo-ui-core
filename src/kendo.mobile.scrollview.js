@@ -205,7 +205,7 @@ kendo_module({
             snap = max(that.minSnap, min(- nextPage * width, that.maxSnap));
 
             if (nextPage != that.page) {
-                if (this.trigger(CHANGING, { currentPage: that.page, nextPage: page })) {
+                if (this.trigger(CHANGING, { currentPage: that.page, nextPage: nextPage })) {
                     snap = - that.page * that.dimension.getSize();
                 }
             }
