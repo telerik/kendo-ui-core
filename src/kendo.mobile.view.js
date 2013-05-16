@@ -33,6 +33,12 @@ kendo_module({
         }
     }
 
+    function preventScrollIfNotInput(e) {
+        if (!e.target.tagName.match(/textarea|input/i)) {
+            e.preventDefault();
+        }
+    }
+
     var View = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -198,11 +204,10 @@ kendo_module({
 
             // prevent accidental address bar display when pulling the header
             if (kendo.support.kineticScrollNeeded) {
-                $(that.element).on("touchmove", ".km-header, .km-content", function(e) {
-                    if (!e.target.tagName.match(/textarea|input/i)) {
-                        e.preventDefault();
-                    }
-                });
+                $(that.element).on("touchmove", ".km-header", preventScrollIfNotInput);
+                if (!that.options.useNativeScrolling) {
+                    $(that.element).on("touchmove", ".km-content", preventScrollIfNotInput);
+                }
             }
         },
 
