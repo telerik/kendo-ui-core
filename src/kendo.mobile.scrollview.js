@@ -186,9 +186,10 @@ kendo_module({
                 width = that.dimension.size * that.options.pageSize,
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
-                snap,
                 approx = round,
-                ease = Transition.easeOutExpo;
+                ease = Transition.easeOutExpo,
+                snap,
+                nextPage;
 
             if (velocity > velocityThreshold) {
                 approx = ceil;
@@ -200,10 +201,13 @@ kendo_module({
                 ease = Transition.easeOutBack;
             }
 
-            snap = max(that.minSnap, min(approx(that.movable.x / width) * width, that.maxSnap));
+            nextPage = - approx(that.movable.x / width);
+            snap = max(that.minSnap, min(- nextPage * width, that.maxSnap));
 
-            if (this.trigger(CHANGING, { currentPage: that.page })) {
-                snap = - that.page * that.dimension.getSize();
+            if (nextPage != that.page) {
+                if (this.trigger(CHANGING, { currentPage: that.page, nextPage: page })) {
+                    snap = - that.page * that.dimension.getSize();
+                }
             }
 
             this._moveTo(snap, ease);
