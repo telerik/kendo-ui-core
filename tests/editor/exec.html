@@ -31,26 +31,29 @@
                 });
             }
 
-            module("Exec", {
+            module("", {
                 setup: function() {
                     editor = getEditor();
-                    editor.focus();
+                },
+                teardown: function() {
+                    $(".k-window, .k-overlay").remove();
                 }
             });
 
             test("exec pushes command to undo stack", function() {
-                editor.value("foo");
-                var range = editor.createRange();
-                range.selectNodeContents(editor.body.firstChild);
-                editor.selectRange(range);
-
                 var pushArgument;
 
-                editor.undoRedoStack.push = function() { pushArgument = arguments[0] }
+                withMock(editor.undoRedoStack, "push", function() { pushArgument = arguments[0] }, function() {
+                    editor.value("foo");
 
-                editor.exec("bold");
+                    var range = editor.createRange();
+                    range.selectNodeContents(editor.body);
+                    editor.selectRange(range);
 
-                ok(undefined !== pushArgument);
+                    editor.exec("bold");
+
+                    ok(undefined !== pushArgument);
+                });
             });
 
             test("exec undo performs undo", function() {
@@ -107,10 +110,6 @@
 
             test("exec unlink creates UnlinkCommand", function() {
                 assertCommand(kendo.ui.editor.UnlinkCommand, "unlink");
-            });
-
-            test("exec insertImage creates image command", function() {
-                assertCommand(kendo.ui.editor.ImageCommand, "insertImage");
             });
 
             test("exec indent creates indent command", function() {

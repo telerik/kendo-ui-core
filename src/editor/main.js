@@ -1052,8 +1052,8 @@ kendo_module({
             this.update();
         },
 
-        saveSelection: function() {
-            var range = this.getRange();
+        saveSelection: function(range) {
+            range = range || this.getRange();
 
             if ($.contains(this.body, range.commonAncestorContainer)) {
                 this.selectionRestorePoint = new kendo.ui.editor.RestorePoint(range);
@@ -1061,13 +1061,15 @@ kendo_module({
         },
 
         restoreSelection: function() {
+            this.body.focus();
+
             if (this.selectionRestorePoint) {
                 this.selectRange(this.selectionRestorePoint.toRange());
             }
         },
 
         focus: function () {
-            this.body.focus();
+            this.restoreSelection();
         },
 
         update: function (value) {
@@ -1089,11 +1091,11 @@ kendo_module({
         },
 
         selectRange: function(range) {
-            this.focus();
+            this.body.focus();
             var selection = this.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
-            this.saveSelection();
+            this.saveSelection(range);
         },
 
         getRange: function () {
@@ -1127,8 +1129,6 @@ kendo_module({
 
             // restore selection
             if (!that.keyboard.isTypingInProgress()) {
-                that.focus();
-
                 that.restoreSelection();
             }
 

@@ -10,9 +10,13 @@
     </head>
     <body>
 
+        <p id="dummy">lorem ipsum</p>
+
         <div><textarea cols="20" rows="4" id="EditorEncodeFalse" name="EditorEncodeFalse"></textarea></div>
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor"></textarea></div>
         <div><textarea cols="20" rows="4" id="EditorWithStyleSheets" name="EditorWithStyleSheets"></textarea></div>
+
+        <div id="inline" contentEditable></div>
 
         <script>
 
@@ -21,6 +25,8 @@
             });
 
             $("#Editor1").kendoEditor();
+
+            $("#inline").kendoEditor();
 
             $("#EditorWithStyleSheets").kendoEditor({
                 stylesheets: [
@@ -64,6 +70,55 @@
 
                 equal(range.startOffset, 1);
                 equal(range.endOffset, 2);
+            });
+
+            test("restoreSelection restores element selection", function() {
+                var inline = getEditor("#inline");
+
+                inline.value("foo bar baz");
+
+                var text = inline.body.firstChild;
+
+                var range = inline.createRange();
+                range.setStart(text, 4);
+                range.setEnd(text, 7);
+                inline.selectRange(range);
+
+                var con = inline.createRange();
+                con.selectNodeContents($("#dummy")[0]);
+                inline.selectRange(con);
+
+                inline.restoreSelection();
+
+                range = inline.getRange();
+
+                equal(range.startContainer, text);
+                equal(range.startOffset, 4);
+                equal(range.endContainer, text);
+                equal(range.endOffset, 7);
+            });
+
+            test("restoreSelection focuses the editor body after value change", function() {
+                var inline = getEditor("#inline");
+
+                inline.value("foo bar baz");
+
+                var text = inline.body.firstChild;
+
+                var range = inline.createRange();
+                range.setStart(text, 4);
+                range.setEnd(text, 7);
+                inline.selectRange(range);
+
+                inline.value("cat qux dog");
+
+                text = inline.body.firstChild;
+
+                range = inline.getRange();
+
+                equal(range.startContainer, text);
+                equal(range.startOffset, 0);
+                ok(range.collapsed);
             });
 
         </script>
