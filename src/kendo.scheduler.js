@@ -1592,12 +1592,15 @@ kendo_module({
 
                     if (currentDay.offset) {
                         while (!recurrence.isInWeek(date, currentDay.offset, rule.weekStart)) {
-                            date = recurrence.nextWeekDay(date, rule.weekStart);
-                            date.setDate(date.getDate() + 1);
+                            if (date.getDay() === rule.weekStart) {
+                                date.setDate(date.getDate() + 1);
+                            }
 
-                            /*if (+date > +end) {
+                            date = recurrence.nextWeekDay(date, rule.weekStart);
+
+                            if (+date > +end) {
                                 break;
-                            }*/
+                            }
                         }
                     }
 
