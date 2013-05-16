@@ -41,7 +41,7 @@ kendo_module({
             that._userEvents = new kendo.UserEvents(that.element, {
                 press: function(e) { that._activate(e); },
                 tap: function(e) { that._release(e); },
-                end: function(e) { highlightButton(that, e, false); }
+                release: function(e) { highlightButton(that, e, false); }
             });
 
             if (ANDROID3UP) {
