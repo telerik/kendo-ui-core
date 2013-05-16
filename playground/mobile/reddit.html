@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="../../styles/mobile/kendo.mobile.flat.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.popover.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <style>
+            .loading {
+                color: gray;
+            }
+
+            .item {
+                display: table;
+                width: 100%;
+                background: #f0f0f0;
+                color: #808080;
+                border-top: 1px solid #fafafa;
+                border-bottom: 1px solid #e3e3e3;
+                font-weight: normal;
+            }
+
+            .item h3 {
+                font-weight: normal;
+                color: #181818;
+            }
+
+            .item-thumb, .item-summary, .item-comments {
+                display: table-cell;
+                vertical-align: top;
+                padding-bottom: .5em;
+            }
+
+            .item-thumb {
+                width: 50px;
+                padding-left: 1em;
+            }
+
+            .item-comments {
+                width: 50px;
+                text-align: center;
+                color: #af5555;
+                vertical-align: middle;
+            }
+
+            .thumb {
+                width: 50px;
+                height: 50px;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 100% 100%;
+                -webkit-border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 10px #000000;
+                box-shadow:         inset 0 0 10px #000000;
+                border-radius: 10px;
+                overflow: hidden;
+                margin-top: 1em;
+                display: inline-block;
+            }
+
+            #aww li {
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="view" data-init="buildVirtual">
+            <ul data-role="listview" data-template="item-template" data-source="ds" data-load-more="true" id="aww">
+            </ul>
+        </div>
+
+        <div data-role="view" id="foo" data-transition="slide">
+            Foo
+        </div>
+
+        <script type="text/x-kendo-template" id="item-template">
+            <div class="item">
+                <div class="item-thumb">
+                    <a data-role="listview-link" href="\#foo">
+                        <span class='thumb' style="background-image: url(#: data.thumbnail #)"></span>
+                    </a>
+                </div>
+                <div class="item-summary">
+                   <h3>#: data.title #</h3>
+                   <p> #: data.subreddit # | #: data.ups - data.downs # | #: kendo.toString(new Date(data.created_utc * 1000), 'HH:mm') # </p>
+                </div>
+                <div class="item-comments">
+                    #: data.num_comments #
+                </div>
+            </div>
+        </script>
+        <script>
+            var ds = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: 'http://www.reddit.com/r/aww.json',
+                        dataType: 'jsonp',
+                        jsonp: 'jsonp',
+                        cache: true,
+                    },
+
+                    parameterMap: function(data, type) {
+                        var items = ds.data();
+                        if (items.length) {
+                            data.after = items[items.length - 1].data.name;
+                        }
+
+                        data.limit = 50;
+                        return data;
+                    }
+                },
+
+                serverPaging: true,
+                pageSize: 50,
+                schema: {
+                    data: "data.children",
+                    total: function() { return 100000; }
+                }
+            });
+
+            new kendo.mobile.Application(document.body, { theme: "flat" });
+        </script>
+    </body>
+</html>

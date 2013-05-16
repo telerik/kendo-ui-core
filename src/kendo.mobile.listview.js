@@ -350,7 +350,8 @@ kendo_module({
         update: function(dataItem) {
             this.element = this.listView.setDataItem(this.element, dataItem);
             this.element.css({position: 'absolute', 'top': 0 });
-            this.bottom = this.top + this.element.outerHeight(true);
+            this.height = this.element.outerHeight(true);
+            this.bottom = this.top + this.height;
         },
 
         above: function(item) {
