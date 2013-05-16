@@ -33,6 +33,7 @@
                 ok(schedulerEvent.ruleInstance);
             });
 
+            /*
             test("Length of first week of 01/05/2013 - weekStart(SU)", function() {
                 var weekStart = 0,
                     date = new Date(2013, 4, 4);
@@ -66,7 +67,7 @@
                     date = new Date(2013, 5, 1);
 
                 equal(recurrence.firstWeekLength(date, weekStart), 2);
-            });
+            });*/
 
             test("Numbers of weeks in 01/05/2013", function() {
                 equal(recurrence.numberOfWeeks(new Date(2013, 4, 1), 0), 5);
@@ -89,6 +90,16 @@
             test("weekNumber method returns number of the week (third week)", function() {
                 var date = new Date(2013, 5, 16);
                 equal(recurrence.weekNumber(date, 0), 4);
+            });
+
+            test("weekNumber method honours weekStart", function() {
+                var date = new Date(2013, 5, 16);
+                equal(recurrence.weekNumber(date, 1), 3);
+            });
+
+            test("weekNumber method honours weekStart ", function() {
+                var date = new Date(2013, 3, 18);
+                equal(recurrence.weekNumber(date, 5), 4);
             });
 
             test("DAILY frequency next method gets next day (interval:1)", function() {

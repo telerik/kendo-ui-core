@@ -1393,11 +1393,15 @@ kendo_module({
         },
 
         weekNumber: function(date, weekStart) {
-            //TODO: take into account weekStart
-            var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay(),
-                offsetDate = date.getDate() + firstWeekday - 1;
+            var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 
-            return Math.floor(offsetDate / 7) + 1;
+            if (weekStart > firstWeekday) {
+                weekStart *= -1;
+            }
+
+            firstWeekday = firstWeekday - weekStart;
+
+            return Math.floor((date.getDate() + firstWeekday - 1) / 7) + 1;
         },
 
         numberOfWeeks: function(date, weekStart) {
@@ -1413,7 +1417,7 @@ kendo_module({
             return date;
         },
 
-        firstWeekLength: function(date, weekStart) {
+        /*firstWeekLength: function(date, weekStart) {
             weekStart = weekStart === 0 ? 7 : weekStart;
             date = new Date(date.getFullYear(), date.getMonth(), 1);
 
@@ -1423,7 +1427,7 @@ kendo_module({
             }
 
             return firstWeekLength;
-        },
+        },*/
 
         expandEvent: function(e) {
             var instance = e.ruleInstance;
