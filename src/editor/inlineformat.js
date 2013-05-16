@@ -446,11 +446,11 @@ var ColorTool = Tool.extend({
                 if (color) {
                     Tool.exec(editor, toolName, color);
                 }
+                editor.focus();
             },
             activate: function(e) {
                 e.preventDefault();
                 ui.trigger("change");
-                editor.focus();
             },
             open: function() {
                 editor.toolbar._remainVisible = true;
