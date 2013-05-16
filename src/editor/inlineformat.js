@@ -447,14 +447,14 @@ var ColorTool = Tool.extend({
                     Tool.exec(editor, toolName, color);
                 }
             },
+            activate: function(e) {
+                e.preventDefault();
+                ui.trigger("change");
+                editor.focus();
+            },
             open: function() {
                 editor.toolbar._remainVisible = true;
             }
-        });
-        ui.bind("activate", function(ev){
-            ev.preventDefault();
-            ui.trigger("change");
-            editor.focus();
         });
         ui.wrapper
             .attr({ title: initOptions.title, unselectable: "on" })
