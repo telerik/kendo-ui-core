@@ -8,7 +8,6 @@ namespace Kendo.Mvc.Examples.Models.Scheduler
 {
     public partial class SchedulerEvent : ISchedulerEvent
     {
-
         public IList<string> RecurrenceRules
         {
             get;
