@@ -1537,7 +1537,7 @@ kendo_module({
             //TODO: FREQ: MINUTELY
             //TODO: FREQ: HOURLY
             DAILY: {
-                next: function(start, end, rule) { //TODO: remove it; end is not used!!!
+                next: function(start, end, rule) { //TODO: remove end if not used !!!
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
                     return start;

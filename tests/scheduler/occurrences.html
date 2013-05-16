@@ -371,7 +371,19 @@
 
                 equal(events.length, 0);
             });
-            ///ADD INTERVAL test for DAILY !!!!!!!!!!
+
+            test("DAILY occurrences method honours INTERVAL=2", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 16, 30),
+                    end: new Date(2013, 4, 10, 17, 0),
+                    rule: "FREQ=DAILY;INTERVAL=2"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10), end: new Date(2013, 4, 17) } );
+                equal(events.length, 4);
+            });
 
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
