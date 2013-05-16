@@ -6659,7 +6659,7 @@ kendo_module({
                 points = chart.points;
                 for (j = 0; j < points.length; j++) {
                     point = points[j];
-                    if (point.options.index === seriesIndex) {
+                    if (point && point.options.index === seriesIndex) {
                         result.push(point);
                     }
                 }
