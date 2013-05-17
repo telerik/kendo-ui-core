@@ -98,29 +98,6 @@
                 equal(range.endOffset, 7);
             });
 
-            test("restoreSelection focuses the editor body after value change", function() {
-                var inline = getEditor("#inline");
-
-                inline.value("foo bar baz");
-
-                var text = inline.body.firstChild;
-
-                var range = inline.createRange();
-                range.setStart(text, 4);
-                range.setEnd(text, 7);
-                inline.selectRange(range);
-
-                inline.value("cat qux dog");
-
-                text = inline.body.firstChild;
-
-                range = inline.getRange();
-
-                equal(range.startContainer, text);
-                equal(range.startOffset, 0);
-                ok(range.collapsed);
-            });
-
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
