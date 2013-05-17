@@ -2282,7 +2282,7 @@ function pad(number, digits, end) {
         },
 
         triggeredByInput: function(e) {
-            return /^(label|input|textarea|select)$/i.test(e.target.tagName);
+            return (/^(label|input|textarea|select)$/i).test(e.target.tagName);
         },
 
         logToConsole: function(message) {
