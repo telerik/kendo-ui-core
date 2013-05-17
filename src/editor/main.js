@@ -829,7 +829,7 @@ kendo_module({
                 .on("blur" + NS, function() {
                     setTimeout(function() {
                         if (!$(document.activeElement).is(editor.body) && !editor.toolbar.focused()) {
-                            $(this).removeClass("k-state-active");
+                            $(editor.body).removeClass("k-state-active");
                             editor.toolbar.hide();
                         }
                     }, 1);
