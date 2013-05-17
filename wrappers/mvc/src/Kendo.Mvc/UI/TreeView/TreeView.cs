@@ -7,7 +7,6 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
-    using Fluent;
     using Extensions;
     using Infrastructure;
     using Kendo.Mvc.Resources;
@@ -36,6 +35,8 @@ namespace Kendo.Mvc.UI
             Checkboxes = new TreeViewCheckboxesSettings();
 
             DataSource = new DataSource();
+
+            AutoBind = true;
         }
 
         public string DataTextField
@@ -207,9 +208,9 @@ namespace Kendo.Mvc.UI
                 options["dragAndDrop"] = true;
             }
 
-            if (AutoBind)
+            if (!AutoBind)
             {
-                options["autoBind"] = true;
+                options["autoBind"] = false;
             }
 
             if (!LoadOnDemand)
