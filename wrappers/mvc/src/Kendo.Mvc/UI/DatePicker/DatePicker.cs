@@ -24,6 +24,12 @@ namespace Kendo.Mvc.UI
             MonthTemplate = new MonthTemplate();
         }
 
+        public string ARIATemplate
+        {
+            get;
+            set;
+        }
+
         public MonthTemplate MonthTemplate
         {
             get;
@@ -69,6 +75,11 @@ namespace Kendo.Mvc.UI
             if (animation.Keys.Any())
             {
                 options["animation"] = animation["animation"];
+            }
+
+            if (ARIATemplate.HasValue())
+            {
+                options["ARIATemplate"] = ARIATemplate;
             }
 
             if (Culture.HasValue())

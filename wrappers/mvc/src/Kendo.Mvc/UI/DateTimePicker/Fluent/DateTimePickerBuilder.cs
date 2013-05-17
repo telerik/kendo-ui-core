@@ -20,6 +20,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies a template used to populate aria-label attribute.
+        /// </summary>
+        /// <param name="template">The string template.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .ARIATemplate("Date: #=kendo.toString(data.current, 'd')#")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DateTimePickerBuilder ARIATemplate(string template)
+        {
+            Component.ARIATemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the interval between hours.
         /// </summary>
         public DateTimePickerBuilder Interval(int interval) 
