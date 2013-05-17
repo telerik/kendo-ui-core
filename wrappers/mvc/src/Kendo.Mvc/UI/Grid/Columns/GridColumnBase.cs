@@ -208,8 +208,14 @@ namespace Kendo.Mvc.UI
 
         public string ClientFooterTemplate
         {
-            get;
-            set;
+            get
+            {
+                return Settings.ClientFooterTemplate;
+            }
+            set
+            {
+                Settings.ClientFooterTemplate = value;
+            }
         }
         
         /// <summary>

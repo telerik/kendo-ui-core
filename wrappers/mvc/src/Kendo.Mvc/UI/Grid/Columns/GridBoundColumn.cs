@@ -133,8 +133,14 @@ namespace Kendo.Mvc.UI
 
         public string ClientGroupFooterTemplate
         {
-            get;
-            set;
+            get
+            {
+                return Settings.ClientGroupFooterTemplate;
+            }
+            set
+            {
+                Settings.ClientGroupFooterTemplate = value;
+            }
         }
 
         /// <summary>

@@ -65,6 +65,18 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string ClientGroupFooterTemplate
+        {
+            get;
+            set;
+        }
+
+        public string ClientFooterTemplate
+        {
+            get;
+            set;
+        }
+
         public bool Encoded
         {
             get;
