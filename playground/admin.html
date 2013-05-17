@@ -26,14 +26,14 @@
             margin-top: 3em;
         }
 
-        section {
+        #main {
             width: 516px;
             margin: 12em auto;
         }
     </style>
 </head>
 <body>
-    <section>
+    <div id="main">
         <div contentEditable id="editor">
             Hello,
             <p></p>
@@ -48,7 +48,7 @@
         </div>
 
         <div id="content"></div>
-    </section>
+    </div>
 
     <script>
         var editor = $("#editor").kendoEditor({
