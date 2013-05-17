@@ -1561,7 +1561,7 @@ kendo_module({
             //TODO: FREQ: SECONDLY
             //TODO: FREQ: MINUTELY
             //TODO: FREQ: HOURLY
-            DAILY: {
+            daily: {
                 next: function(start, end, rule) { //TODO: remove end if not used !!!
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
@@ -1612,7 +1612,7 @@ kendo_module({
                     return currentDate;
                 }
             },
-            WEEKLY: {
+            weekly: {
                 next: function(start) {
                     start.setDate(start.getDate() + 1);
                     return start;
@@ -1656,8 +1656,7 @@ kendo_module({
             }
         },
         parseRule: function (rule) {
-            //TODO: rename result to instance
-            var result = {},
+            var instance = {},
                 property,
                 splits, value,
                 idx = 0, length,
@@ -1692,67 +1691,67 @@ kendo_module({
 
                 switch ($.trim(splits[0]).toUpperCase()) {
                     case "FREQ":
-                        result.freq = value[0].toUpperCase();
+                        instance.freq = value[0].toLowerCase();
                         break;
                     case "UNTIL":
-                        result.until = kendo.parseDate(value[0], DATE_FORMATS);
+                        instance.until = kendo.parseDate(value[0], DATE_FORMATS);
                         break;
                     case "COUNT":
-                        result.count = parseInt(value[0], 10);
+                        instance.count = parseInt(value[0], 10);
                         break;
                     case "INTERVAL":
-                        result.interval = parseInt(value[0], 10);
+                        instance.interval = parseInt(value[0], 10);
                         break;
                     case "BYSECOND":
-                        result.seconds = parseArray(value, { start: 0, end: 60 });
+                        instance.seconds = parseArray(value, { start: 0, end: 60 });
                         break;
                     case "BYMINUTE":
-                        result.minutes = parseArray(value, { start: 0, end: 59 });
+                        instance.minutes = parseArray(value, { start: 0, end: 59 });
                         break;
                     case "BYHOUR":
-                        result.hours = parseArray(value, { start: 0, end: 23 });
+                        instance.hours = parseArray(value, { start: 0, end: 23 });
                         break;
                     case "BYMONTHDAY":
-                        result.monthDays = parseArray(value, { start: -31, end: 31 });
+                        instance.monthDays = parseArray(value, { start: -31, end: 31 });
                         break;
                     case "BYYEARDAY":
-                        result.yearDays = parseArray(value, { start: -366, end: 366 });
+                        instance.yearDays = parseArray(value, { start: -366, end: 366 });
                         break;
                     case "BYMONTH":
-                        result.months = parseArray(value, { start: 1, end: 12 });
+                        instance.months = parseArray(value, { start: 1, end: 12 });
                         break;
                     case "BYDAY":
-                        result.weekDays = weekDays = parseWeekDayList(value);
+                        instance.weekDays = weekDays = parseWeekDayList(value);
                         break;
                     case "BYSETPOS":
-                        result.setPositions = parseArray(value, { start: 1, end: 366 });
+                        instance.setPositions = parseArray(value, { start: 1, end: 366 });
                         break;
                     case "BYWEEKNO":
-                        result.weekNumber = parseArray(value, { start: 1, end: 53 });
+                        instance.weekNumber = parseArray(value, { start: 1, end: 53 });
                         break;
                     case "WKST":
-                        result.weekStart = weekStart = WEEK_DAYS[value[0]];
+                        instance.weekStart = weekStart = WEEK_DAYS[value[0]];
                         break;
                 }
 
-                if (result.freq === undefined || (result.count !== undefined && result.until)) {
+                if (instance.freq === undefined || (instance.count !== undefined && instance.until)) {
                     return null;
                 }
 
-                if (!result.interval) {
-                    result.interval = 1;
+                if (!instance.interval) {
+                    instance.interval = 1;
                 }
 
                 if (weekStart === undefined) {
-                    result.weekStart = weekStart = kendo.culture().calendar.firstDay;
+                    instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
                 }
 
                 if (weekDays) {
-                    result.weekDays = weekDays.sort(predicate);
+                    instance.weekDays = weekDays.sort(predicate);
                 }
             }
 
-            return result;
+            return instance;
         }
     };
 

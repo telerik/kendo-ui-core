@@ -23,14 +23,14 @@
             test("Remove RRULE if present", function() {
                 var rrule = parse("RRULE:FREQ=DaILY;UNTIL=19730429T070000Z");
 
-                equal(rrule.freq, "DAILY");
+                equal(rrule.freq, "daily");
                 equal(+rrule.until, new Date("1973-04-29T07:00:00Z").getTime());
             });
 
             test("Parse FREQ property", function() {
                 var rrule = parse("FREQ=daily");
 
-                equal(rrule.freq, "DAILY");
+                equal(rrule.freq, "daily");
             });
 
             test("Parse UNTIL property", function() {

@@ -67,12 +67,12 @@
             });
 
             test("DAILY frequency next method gets next day (interval:1)", function() {
-                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:1 });
+                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:1 });
                 equal(+next, +new Date(2000, 10, 11, 18, 18, 18))
             });
 
             test("DAILY frequency next method gets the day after tomorrow (interval:2)", function() {
-                var next = recurrence.frequency.DAILY.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:2 });
+                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:2 });
                 equal(+next, +new Date(2000, 10, 12, 18, 18, 18));
             });
 
