@@ -3,14 +3,14 @@
 // Imports ================================================================
 var kendo = window.kendo,
     extend = $.extend,
-    Editor = kendo.ui.editor,
-    dom = Editor.Dom,
-    Command = Editor.Command,
-    Tool = Editor.Tool,
-    BlockFormatter = Editor.BlockFormatter,
+    editorNS = kendo.ui.editor,
+    dom = editorNS.Dom,
+    Command = editorNS.Command,
+    Tool = editorNS.Tool,
+    BlockFormatter = editorNS.BlockFormatter,
     normalize = dom.normalize,
-    RangeUtils = Editor.RangeUtils,
-    registerTool = Editor.EditorUtils.registerTool;
+    RangeUtils = editorNS.RangeUtils,
+    registerTool = editorNS.EditorUtils.registerTool;
 
 var ParagraphCommand = Command.extend({
     init: function(options) {
@@ -186,7 +186,7 @@ var NewLineCommand = Command.extend({
     }
 });
 
-extend(Editor, {
+extend(editorNS, {
     ParagraphCommand: ParagraphCommand,
     NewLineCommand: NewLineCommand
 });
