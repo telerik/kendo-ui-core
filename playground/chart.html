@@ -19,7 +19,7 @@
         <div id="pie" style="width: 600px; height: 300px;"></div>
         <script>
             $(function() {
-                $("#chart").kendoChart({
+                $("#___chart").kendoChart({
                     seriesDefaults: {
                         // TODO: Apply
                         // TODO: Document for radarColumn series
@@ -27,20 +27,22 @@
                         //spacing: 0
                     },
                     series: [{
-                        type: "radarColumn",
+                        type: "radarArea",
                         //stack: true,
-                        data: [1, 2, 3],
-                        color: "red",
-                        opacity: 0.5,
+                        data: [1, 2, 3, 4],
+                        //color: "red",
+                        //opacity: 0.5,
                         markers: {
-                            visible: false
+                            //visible: false
                         }
                     }, {
-                        type: "radarColumn",
-                        data: [2, 4, 13]
+                        type: "radarArea",
+                        // TODO: Theme?
+                        opacity: 0.5,
+                        data: [2, 4, 13, null]
                     }],
                     categoryAxis: {
-                        categories: ["Foo", "Bar", "Baz"],
+                        //categories: ["Foo", "Bar", "Baz", "Boo"],
                         majorGridLines: {
                             // TODO: Document
                             // visible: true
@@ -51,14 +53,14 @@
                     },
                     valueAxis: {
                         majorGridLines: {
-                            // TODO: Default to "arc"?
-                            type: "arc"
+                            // TODO: Default to "arc" for radarColumn charts?
+                            //type: "arc"
                         },
                         minorGridLines: {
-                            type: "arc"
+                            //type: "arc"
                         },
-                        __plotBands: [{
-                            from: 0, to: 1,
+                        _plotBands: [{
+                            from: 4, to: 10,
                             color: "red",
                             opacity: 0.5
                         }],
@@ -72,6 +74,46 @@
                     plotArea: {
                         background: "green",
                         opacity: 0.1
+                    },
+                    // TODO: Implement
+                    transitions: false,
+                    tooltip: {
+                        visible: true
+                    }
+                });
+
+                $("#chart").kendoChart({
+                    series: [{
+                        // polarArea
+                        // polarScatter
+                        // polarLine
+
+                        type: "polarLine",
+                        //stack: true,
+                        data: [[0, 10], [45, 20], [90, 30],
+                               [135, 40], [180, 50], [225, 60],
+                               [270, 70], [315, 80]
+                        ],
+                        //color: "red",
+                        //opacity: 0.5,
+                        markers: {
+                            //visible: false
+                        }
+                    }],
+                    // TODO: Use xAxis to avoid confusion?
+                    polarAxis: {
+                        reverse: true,
+                        // startAngle: 180,
+                        // gridLines
+                        // plotBands
+                        labels: {
+                            margin: 5
+                        }
+                    },
+                    valueAxis: {
+                        minorUnit: 5
+                    },
+                    plotArea: {
                     },
                     // TODO: Implement
                     transitions: false,

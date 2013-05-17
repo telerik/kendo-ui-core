@@ -35,11 +35,7 @@
                     lineBox: function() { return new Box2D(300, 100, 300, 300); }
                 };
 
-                axis = new dataviz.RadarCategoryAxis(
-                    deepExtend({
-                        categories: ["Foo", "Bar", "Baz"]
-                    }, options)
-                );
+                axis = new dataviz.PolarNumericAxis(options);
                 axis.reflow(chartBox);
                 axis.plotArea = {
                     options: {},
@@ -51,7 +47,7 @@
             }
 
             // ------------------------------------------------------------
-            module("Radar Category Axis / Rendering", {
+            module("Polar Numeric Axis / Rendering", {
                 setup: function() {
                     createAxis();
                 }
@@ -63,21 +59,21 @@
 
             test("creates labels", 1, function() {
                 deepEqual($.map(view.log.text, function(text) { return text.content }),
-                     ["Foo", "Bar", "Baz"]);
+                     [0, 60, 120, 180, 240, 300]);
             });
 
             test("creates labels with full format", 1, function() {
-                createAxis({ categories: [1, 2], labels: { format: "{0:C}"} });
+                createAxis({ categories: [1, 2], labels: { format: "{0:N2}"} });
 
                 deepEqual($.map(view.log.text, function(text) { return text.content }),
-                     ["$1.00", "$2.00"]);
+                     ["0.00", "60.00", "120.00", "180.00", "240.00", "300.00"]);
             });
 
             test("creates labels with simple format", 1, function() {
-                createAxis({ categories: [1, 2], labels: { format: "C"} });
+                createAxis({ categories: [1, 2], labels: { format: "N2"} });
 
                 deepEqual($.map(view.log.text, function(text) { return text.content }),
-                     ["$1.00", "$2.00"]);
+                     ["0.00", "60.00", "120.00", "180.00", "240.00", "300.00"]);
             });
 
             test("labels can be hidden", function() {
@@ -97,7 +93,7 @@
                     }
                 });
 
-                equal(view.log.text[0].content, "|Foo|");
+                equal(view.log.text[0].content, "|0|");
             });
 
             test("labels have set color", 1, function() {
@@ -128,24 +124,13 @@
                 equal(view.log.text[0].style.zIndex, 2);
             });
 
-            test("labels are distributed around axis (justified)", function() {
+            test("labels are distributed on major divisions", function() {
                 arrayClose(
                     $.map(view.log.text, function(text) {
-                        return [text.style.x, text.style.y]
+                        return [[text.style.x, text.style.y]]
                     }),
-                    [289.5, 75, 482.535, 410, 97.465, 410],
-                    TOLERANCE
-                );
-            });
-
-            test("labels are distributed around axis (non-justified)", function() {
-                createAxis({ justified: false });
-
-                arrayClose(
-                    $.map(view.log.text, function(text) {
-                        return [text.style.x, text.style.y]
-                    }),
-                    [483, 175, 290.5, 510, 97, 175],
+                    [[510, 293], [410, 102], [169, 102],
+                     [69, 293], [169, 483], [410, 483]],
                     TOLERANCE
                 );
             });
@@ -155,69 +140,50 @@
 
                 arrayClose(
                     $.map(view.log.text, function(text) {
-                        return [text.style.x, text.style.y]
+                        return [[text.style.x, text.style.y]]
                     }),
-                    [289.5, 80, 478, 405, 102, 405],
+                    [[505, 293], [405, 107], [174, 107],
+                     [74, 293], [174, 478], [406, 478]],
                     TOLERANCE
                 );
             });
 
-            test("labels are distributed in reverse (justified)", function() {
+            test("labels are distributed in reverse", function() {
                 createAxis({ reverse: true });
 
                 arrayClose(
                     $.map(view.log.text, function(text) {
-                        return [text.style.x, text.style.y]
+                        return [[text.style.x, text.style.y]]
                     }),
-                    [289.5, 75, 97.465, 410, 482.535, 410],
-                    TOLERANCE
-                );
-            });
-
-            test("labels are distributed in reverse (non-justified)", function() {
-                createAxis({ justified: false, reverse: true });
-
-                arrayClose(
-                    $.map(view.log.text, function(text) {
-                        return [text.style.x, text.style.y]
-                    }),
-                    [96, 175, 290.5, 510, 483, 175],
+                    [[510, 293], [410, 483], [169, 483],
+                     [69, 293], [169, 102], [410, 102]],
                     TOLERANCE
                 );
             });
 
             // ------------------------------------------------------------
-            module("Radar Category Axis / Divisions", {
+            module("Polar Numeric Axis / Divisions", {
                 setup: function() {
                     createAxis();
                 }
             });
 
             test("major divisions in normal order", function() {
-                deepEqual(axis.majorDivisions(), [ 90, 210, 330 ]);
-            });
-
-            test("major divisions in reverse order", function() {
-                createAxis({ reverse: true });
-                deepEqual(axis.majorDivisions(), [ 90, 330, 210 ]);
+                deepEqual(axis.majorDivisions(), [ 0, 60, 120, 180, 240, 300 ]);
             });
 
             test("minor divisions in normal order", function() {
-                deepEqual(axis.minorDivisions(), [ 90, 150, 210, 270, 330, 30 ]);
-            });
-
-            test("minor divisions in reverse order", function() {
-                createAxis({ reverse: true });
-                deepEqual(axis.minorDivisions(), [ 90, 30, 330, 270, 210, 150 ]);
+                deepEqual(axis.minorDivisions(),
+                    [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ]);
             });
 
             // ------------------------------------------------------------
             var slot;
 
-            module("Radar Category Axis / Slots", {
+            module("Polar Numeric Axis / Slots", {
                 setup: function() {
                     createAxis();
-                    slot = axis.getSlot(0);
+                    slot = axis.getSlot(60);
                 }
             });
 
@@ -234,197 +200,67 @@
                 equal(slot.r, 200);
             });
 
-            test("slot angle for first category (justified)", function() {
-                equal(slot.startAngle, 30);
-                equal(slot.angle, 120);
+            test("slot position", function() {
+                equal(slot.startAngle, 120);
+                equal(slot.angle, 0);
             });
 
-            test("slot angle for first category (non-justified)", function() {
-                createAxis({ justified: false });
+            test("slot position with rotation", function() {
+                createAxis({ startAngle: 180 });
 
-                slot = axis.getSlot(0);
-                equal(slot.startAngle, 90);
-                equal(slot.angle, 120);
+                slot = axis.getSlot(60);
+                equal(slot.startAngle, 300);
+                equal(slot.angle, 0);
             });
 
-            test("slot for first category in reverse (justified)", function() {
+            test("slot position in reverse", function() {
                 createAxis({ reverse: true });
 
-                slot = axis.getSlot(0);
-                equal(slot.startAngle, 30);
-                equal(slot.angle, 120);
+                slot = axis.getSlot(60);
+                equal(slot.startAngle, 240);
+                equal(slot.angle, 0);
             });
 
-            test("slot for first category in reverse (non-justified)", function() {
-                createAxis({ reverse: true, justified: false });
+            test("slot position in reverse with rotation", function() {
+                createAxis({ reverse: true, startAngle: 180 });
 
-                slot = axis.getSlot(0);
-                equal(slot.startAngle, 330);
-                equal(slot.angle, 120);
+                slot = axis.getSlot(60);
+                equal(slot.startAngle, 60);
+                equal(slot.angle, 0);
             });
 
-            test("slot angle for second category (justified)", function() {
-                slot = axis.getSlot(1);
-                equal(slot.startAngle, 150);
-                equal(slot.angle, 120);
+            test("slot for range", function() {
+                slot = axis.getSlot(60, 120);
+                equal(slot.startAngle, 120);
+                equal(slot.angle, -60);
             });
 
-            test("slot angle for second category (non-justified)", function() {
-                createAxis({ justified: false });
-
-                slot = axis.getSlot(1);
-                equal(slot.startAngle, 210);
-                equal(slot.angle, 120);
-            });
-
-            test("slot for second category in reverse (justified)", function() {
+            test("slot for range in reverse", function() {
                 createAxis({ reverse: true });
 
-                slot = axis.getSlot(1);
-                equal(slot.startAngle, 270);
-                equal(slot.angle, 120);
-            });
-
-            test("slot for second category in reverse (non-justified)", function() {
-                createAxis({ reverse: true, justified: false });
-
-                slot = axis.getSlot(1);
-                equal(slot.startAngle, 210);
-                equal(slot.angle, 120);
-            });
-
-            test("slot angle for last category (justified)", function() {
-                slot = axis.getSlot(2);
-                equal(slot.startAngle, 270);
-                equal(slot.angle, 120);
-            });
-
-            test("slot angle for last category (non-justified)", function() {
-                createAxis({ justified: false });
-
-                slot = axis.getSlot(2);
-                equal(slot.startAngle, 330);
-                equal(slot.angle, 120);
-            });
-
-            test("slot for last category in reverse (justified)", function() {
-                createAxis({ reverse: true });
-
-                slot = axis.getSlot(2);
-                equal(slot.startAngle, 150);
-                equal(slot.angle, 120);
-            });
-
-            test("slot for last category in reverse (non-justified)", function() {
-                createAxis({ reverse: true, justified: false });
-
-                slot = axis.getSlot(2);
-                equal(slot.startAngle, 90);
-                equal(slot.angle, 120);
-            });
-
-            test("slot for two categories (justified)", function() {
-                slot = axis.getSlot(0, 1);
-                equal(slot.startAngle, 30);
-                equal(slot.angle, 240);
-            });
-
-            test("slot for two categories (non-justified)", function() {
-                createAxis({ justified: false });
-
-                slot = axis.getSlot(0, 1);
-                equal(slot.startAngle, 90);
-                equal(slot.angle, 240);
-            });
-
-            test("assumes 1 category when no categories are defined (justified)", function() {
-                createAxis({ categories: [] });
-
-                slot = axis.getSlot(0);
-                equal(slot.startAngle, 270);
-                equal(slot.angle, 360);
-            })
-
-            test("assumes 1 category when no categories are defined (non-justified)", function() {
-                createAxis({ categories: [], justified: false });
-
-                slot = axis.getSlot(0);
-                equal(slot.startAngle, 90);
-                equal(slot.angle, 360);
-            });
-
-            test("reports range minimum of 0", function() {
-                equal(axis.range().min, 0);
-            });
-
-            test("reports range maximum equal to category count", function() {
-                equal(axis.range().max, 3);
+                slot = axis.getSlot(60, 120);
+                equal(slot.startAngle, 240);
+                equal(slot.angle, 60);
             });
 
             test("from value can't be lower than 0", function() {
                 slot = axis.getSlot(-1);
-                equal(slot.startAngle, 30);
+                equal(slot.startAngle, 180);
             });
 
-            test("caps from value to categories count", function() {
+            test("caps from value to range", function() {
                 slot = axis.getSlot(1000);
-                equal(slot.startAngle, 270);
-            });
-
-            test("to value equals from value when not set", function() {
-                slot = axis.getSlot(1000);
-                equal(slot.angle, 120);
+                equal(slot.startAngle, 180);
             });
 
             test("to value equals from value when smaller", function() {
-                slot = axis.getSlot(2, 1);
-                equal(slot.startAngle, 270);
+                slot = axis.getSlot(60, 30);
+                equal(slot.startAngle, 120);
+                equal(slot.angle, 0);
             });
 
             // ------------------------------------------------------------
-            module("Radar CategoryAxis / getCategory ", {
-                setup: function() {
-                    createAxis();
-                }
-            });
-
-            test("returns null for coordinates outside of circle", function() {
-                deepEqual(axis.getCategory(new Point2D(0, 0)), null);
-            });
-
-            test("returns first category for innermost point", function() {
-                equal(axis.getCategory(new Point2D(300, 299)), "Foo");
-            });
-
-            test("returns second category for innermost point", function() {
-                equal(axis.getCategory(new Point2D(301, 300)), "Bar");
-            });
-
-            test("returns third category for innermost point", function() {
-                equal(axis.getCategory(new Point2D(299, 300)), "Baz");
-            });
-
-            // ------------------------------------------------------------
-            module("Radar CategoryAxis / getCategory / Reverse", {
-                setup: function() {
-                    createAxis({ reverse: true });
-                }
-            });
-
-            test("returns first category for innermost point", function() {
-                equal(axis.getCategory(new Point2D(300, 299)), "Foo");
-            });
-
-            test("returns second category for innermost point", function() {
-                equal(axis.getCategory(new Point2D(299, 300)), "Bar");
-            });
-
-            test("returns third category for innermost point", function() {
-                equal(axis.getCategory(new Point2D(301, 300)), "Baz");
-            });
-
-            // ------------------------------------------------------------
-            module("Radar Category Axis / Grid lines", {
+            module("Polar Numeric Axis / Grid lines", {
                 setup: function() {
                     createAxis();
                     axis.renderGridLines(view, altAxis);
@@ -516,7 +352,7 @@
             });
 
             // ------------------------------------------------------------
-            module("Radar Category Axis / Plot Bands", {
+            module("Polar Numeric Axis / Plot Bands", {
                 setup: function() {
                     createAxis({
                         plotBands: [{
@@ -631,7 +467,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Radar Category Axis / Events / axisLabelClick", {
+                module("Polar Numeric Axis / Events / axisLabelClick", {
                     teardown: destroyChart
                 });
 
@@ -684,60 +520,6 @@
                 test("event arguments contain category data item", 1, function() {
                     axisLabelClick(function(e) {
                         equal(e.dataItem.value, 2);
-                    });
-                });
-
-            })();
-
-            (function() {
-                var chart,
-                    label,
-                    plotArea;
-
-                function createBoundChart(options) {
-                    chart = createChart($.extend(true, {
-                        dataSource: [{
-                            value: 1,
-                            category: "A"
-                        }, {
-                            value: 2,
-                            category: "B"
-                        }, {
-                            value: 3,
-                            category: "C"
-                        }],
-                        series: [{
-                            type: "radarColumn",
-                            field: "value"
-                        }],
-                        categoryAxis: {
-                            name: "Axis A",
-                            field: "category"
-                        }
-                    }, options));
-
-                    plotArea = chart._model.children[1];
-                    label = plotArea.categoryAxis.labels[1];
-                    $(getElement(label.options.id)).click();
-                }
-
-                // ------------------------------------------------------------
-                module("Radar Category Axis / Data Binding", {
-                    teardown: destroyChart
-                });
-
-                test("categories are data bound", function() {
-                    createBoundChart();
-                    equal(plotArea.categoryAxis.labels.length, 3);
-                });
-
-                test("template has access to data item", function() {
-                    createBoundChart({
-                        categoryAxis: {
-                            labels: {
-                                template: "#= ok(typeof dataItem.value == 'number') #"
-                            }
-                        }
                     });
                 });
 

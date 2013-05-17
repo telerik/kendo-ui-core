@@ -2218,7 +2218,7 @@ kendo_module({
         }
     });
 
-    var PolarAxis = Axis.extend({
+    var PolarNumericAxis = Axis.extend({
         init: function(options) {
             var axis = this;
 
@@ -2229,7 +2229,7 @@ kendo_module({
         },
 
         options: {
-            rotation: 0,
+            startAngle: 0,
             reverse: false,
             majorUnit: 60,
             min: 0,
@@ -2267,6 +2267,7 @@ kendo_module({
                 measureBox = new Box2D(),
                 divs = axis.majorDivisions(),
                 labels = axis.labels,
+                reverse = axis.options.reverse,
                 labelBox,
                 i;
 
@@ -2299,14 +2300,10 @@ kendo_module({
 
             for (i = 0; i < divisions; i++) {
                 if (i % skipStep !== 0) {
-                    divs.push(angle % 360);
+                    divs.push((360 + angle) % 360);
                 }
 
-                if (reverse) {
-                    angle += 360 - step;
-                } else {
-                    angle += step;
-                }
+                angle += step;
             }
 
             return divs;
@@ -2342,14 +2339,19 @@ kendo_module({
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
+                start = options.startAngle,
                 box = axis.box;
 
             a = clipValue(a, options.min, options.max);
             b = clipValue(b || a, a, options.max);
 
-            //TODO: Calculate based on reverse, rotation
-            a = 180 - a;
-            b = 180 - b;
+            if (options.reverse) {
+                a *= -1;
+                b *= -1;
+            }
+
+            a = (540 - a - start) % 360;
+            b = (540 - b - start) % 360;
 
             return new Ring(
                 box.center(), 0, box.height() / 2,
@@ -8537,7 +8539,7 @@ kendo_module({
             var plotArea = this,
                 polarAxis;
 
-            polarAxis = new PolarAxis(plotArea.options.polarAxis);
+            polarAxis = new PolarNumericAxis(plotArea.options.polarAxis);
 
             plotArea.polarAxis = polarAxis;
             plotArea.axisX = polarAxis;
@@ -10580,6 +10582,7 @@ kendo_module({
         PieChart: PieChart,
         PiePlotArea: PiePlotArea,
         PieSegment: PieSegment,
+        PolarNumericAxis: PolarNumericAxis,
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,
