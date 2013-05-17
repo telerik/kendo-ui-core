@@ -975,6 +975,7 @@ kendo_module({
                             ev.preventDefault();
                             return;
                         }
+                        that.wrapper.children(".k-picker-wrap").removeClass("k-state-focused");
                         var color = selector._selectOnHide();
                         if (!color) {
                             that.wrapper.focus();
@@ -986,11 +987,14 @@ kendo_module({
                     open: function(ev) {
                         if (that.trigger("open")) {
                             ev.preventDefault();
+                        } else {
+                            that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
                         }
                     },
                     activate: function(){
                         selector._select(that.color(), true);
                         selector.focus();
+                        that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
                     }
                 });
             }
