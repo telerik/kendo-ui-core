@@ -260,7 +260,6 @@ kendo_module({
             kendo.onResize(hideBar);
 
             that.element[0].addEventListener("touchstart", function(e) {
-                console.log(e.target);
                 if (!kendo.triggeredByInput(e)) {
                     that._hideBar();
                 }
