@@ -286,11 +286,9 @@
 
             test('calling next shifts range to mid state', 1, function() {
                 ds.fetch();
-                buffer.at(12); // prefetch
                 buffer.at(19);
                 buffer.next();
-                console.log(ds);
-                equal(buffer.at(25).value, 25);
+                equal(ds.view()[0].value, 13);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

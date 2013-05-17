@@ -360,6 +360,8 @@ kendo_module({
 
         reset: function() {
             this.movable.moveTo({x: 0, y: 0});
+            this.movable.scaleTo(1);
+            this.dimensions.rescale(1);
         },
 
         scrollTo: function(x, y) {
@@ -450,7 +452,7 @@ kendo_module({
                 elastic: that.options.elastic,
                 end: function() {
                     scrollBar.hide();
-                    that.trigger('scrollEnd', {
+                    that.trigger("scrollEnd", {
                         axis: axis,
                         scrollTop: that.scrollTop,
                         scrollLeft: that.scrollLeft

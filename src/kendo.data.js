@@ -3538,6 +3538,7 @@ kendo_module({
 
             buffer._syncWithDataSource();
 
+            viewSize = Math.floor(dataSource.pageSize() / 2);
             buffer.setViewSize(viewSize);
         },
 
@@ -3547,7 +3548,6 @@ kendo_module({
         },
 
         at: function(index)  {
-            console.log('at ', index)
             var buffer = this,
                 dataSource = this.dataSource,
                 pageSize = this.pageSize,
@@ -3559,33 +3559,29 @@ kendo_module({
             // prefetch
             if (index === buffer.prefetchThreshold && !dataSource.inRange(prefetchOffset, pageSize) && !buffer._prefetching && buffer.prefetch) {
                 buffer._prefetching = true;
-                console.log('prefetching');
                 buffer.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
 
                 dataSource.prefetch(prefetchOffset, pageSize, function() {
                     buffer._prefetching = false;
-                    console.log('prefetched');
                     buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
                 });
             }
 
             // mid-range jump
             if (index === buffer.midPageThreshold) {
-                buffer.range(buffer.prefetchThreshold + 1);
+                buffer.range(buffer.nextMidRange);
             }
-
-            // pull-back
-            else if (index === buffer.pullBackThreshold) {
-                if (offset === skip) {
-                    buffer.range(offset - viewSize); // from full range to mid range
-                } else {
-                    buffer.range(offset + viewSize - pageSize); // from mid range to full range
-                }
-            }
-
             // next range jump
             else if (index === buffer.nextPageThreshold) {
-                buffer.range(skip);
+                buffer.range(buffer.nextFullRange);
+            }
+            // pull-back
+            else if (index === buffer.pullBackThreshold) {
+                if (offset === skip) { // from full range to mid range
+                    buffer.range(buffer.previousMidRange);
+                } else { // from mid range to full range
+                    buffer.range(buffer.previousFullRange);
+                }
             }
 
             var item = buffer.dataSource.at(index - buffer.dataOffset);
@@ -3604,7 +3600,7 @@ kendo_module({
         next: function() {
             var buffer = this,
                 pageSize = buffer.pageSize,
-                offset = buffer.offset - buffer.viewSize,
+                offset = buffer.skip - buffer.viewSize, // this calculation relies that the buffer has already jumped into the mid range segment
                 pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize;
 
             buffer.offset = offset;
@@ -3628,10 +3624,8 @@ kendo_module({
             if (dataSource.inRange(offset, pageSize)) {
                 buffer._goToRange(offset);
             } else if (buffer.prefetch) {
-                console.log('shifting range', pageSkip);
                 dataSource.prefetch(pageSkip, pageSize, function() {
                     buffer._goToRange(offset, true);
-                    console.log('range shifted', pageSkip);
                 });
             }
         },
@@ -3679,14 +3673,20 @@ kendo_module({
         _recalculate: function() {
             var buffer = this,
                 pageSize = buffer.pageSize,
-                skip = Math.ceil(buffer.offset / pageSize) * pageSize,
-                viewSize = buffer.viewSize;
+                offset = buffer.offset,
+                viewSize = buffer.viewSize,
+                skip = Math.ceil(offset / pageSize) * pageSize;
 
             buffer.skip = skip;
             buffer.midPageThreshold = skip + pageSize - 1;
-            buffer.nextPageThreshold = skip + buffer.viewSize - 1;
-            buffer.prefetchThreshold = buffer.midPageThreshold - viewSize;
+            buffer.nextPageThreshold = skip + viewSize - 1;
+            buffer.prefetchThreshold = skip + pageSize - 1 - viewSize;
             buffer.pullBackThreshold = buffer.offset - 1;
+
+            buffer.nextMidRange = skip + pageSize - viewSize;
+            buffer.nextFullRange = skip;
+            buffer.previousMidRange = offset - viewSize;
+            buffer.previousFullRange = skip - pageSize;
         }
     });
 

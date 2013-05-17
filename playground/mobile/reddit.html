@@ -83,21 +83,31 @@
         </style>
     </head>
     <body>
-        <div data-role="view" data-init="buildVirtual">
-            <ul data-role="listview" data-template="item-template" data-source="ds" data-load-more="true" id="aww">
+        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="Reddit: The Front Page">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="viewtitle"></span>
+                </div>
+            </header>
+
+            <ul data-role="listview" data-template="item-template" data-source="ds" data-load-more="true" id="aww" data-click="showDetail">
             </ul>
         </div>
 
-        <div data-role="view" id="foo" data-transition="slide">
-            Foo
+        <div data-role="view" id="detail" data-transition="slide" data-show="renderDetail" data-zoom="true" data-title="">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <button data-role="backbutton">Back</button>
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+            <img />
         </div>
 
         <script type="text/x-kendo-template" id="item-template">
             <div class="item">
                 <div class="item-thumb">
-                    <a data-role="listview-link" href="\#foo">
-                        <span class='thumb' style="background-image: url(#: data.thumbnail #)"></span>
-                    </a>
+                    <span class='loading-thumb' data-thumb='#: data.thumbnail #'></span>
                 </div>
                 <div class="item-summary">
                    <h3>#: data.title #</h3>
@@ -137,7 +147,37 @@
                 }
             });
 
-            new kendo.mobile.Application(document.body, { theme: "flat" });
+            function renderThumbs(element) {
+                element.find('.loading-thumb').each(function() {
+                    $(this).removeClass('loading-thumb').addClass('thumb').css('backgroundImage', 'url(' + $(this).data('thumb') + ')');
+                });
+            }
+
+            function showDetail(e) {
+                if (e.dataItem) {
+                    app.navigate("#detail?id=" + e.dataItem.uid);
+                }
+            }
+
+            function renderDetail(e) {
+                var view = e.view,
+                    dataItem = ds.getByUid(view.params.id);
+                    element = view.element;
+
+                view.scroller.reset();
+                element.find('img').attr('src', dataItem.data.url);
+            }
+
+            function showThumbsOnScrollComplete(e) {
+                var view = e.view;
+                view.scroller.bind('scrollEnd', function() {
+                    renderThumbs(view.element);
+                });
+
+                ds.bind('change', function() { renderThumbs(view.element); });
+            }
+
+            var app = new kendo.mobile.Application(document.body, { theme: "flat" });
         </script>
     </body>
 </html>

@@ -345,6 +345,7 @@ kendo_module({
 
                     that.dimensions.rescale(movable.scale);
                     that.gesture = e;
+                    e.preventDefault();
                 },
 
                 move: function(e) {
