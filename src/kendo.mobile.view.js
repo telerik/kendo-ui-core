@@ -34,7 +34,7 @@ kendo_module({
     }
 
     function preventScrollIfNotInput(e) {
-        if (!e.target.tagName.match(/textarea|input/i)) {
+        if (!kendo.triggeredByInput(e)) {
             e.preventDefault();
         }
     }

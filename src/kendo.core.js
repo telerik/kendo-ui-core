@@ -2281,6 +2281,9 @@ function pad(number, digits, end) {
             return role.replace(/(\S+)/g, "[" + kendo.attr("role") + "=$1],").slice(0, -1);
         },
 
+        triggeredByInput: function(e) {
+            return /^(label|input|textarea|select)$/i.test(e.target.tagName);
+        },
 
         logToConsole: function(message) {
             var console = window.console;

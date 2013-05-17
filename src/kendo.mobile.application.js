@@ -253,19 +253,24 @@ kendo_module({
 
         _attachHideBarHandlers: function() {
             var that = this,
-                hideBar = proxy(that._hideBar, that);
+                hideBar = proxy(that, "_hideBar");
 
-            if (support.mobileOS.appMode || !that.options.hideAddressBar) {
+            if (support.mobileOS.appMode || !that.options.hideAddressBar || !HIDEBAR) {
                 return;
             }
 
             that._initialHeight = {};
 
-            if (HIDEBAR) {
-                WINDOW.on("load", hideBar);
-                kendo.onResize(hideBar);
-                that.element[0].addEventListener("touchstart", hideBar, true);
-            }
+            WINDOW.on("load", hideBar);
+
+            kendo.onResize(hideBar);
+
+            that.element[0].addEventListener("touchstart", function(e) {
+                console.log(e.target);
+                if (!kendo.triggeredByInput(e)) {
+                    that._hideBar();
+                }
+            }, true);
         },
 
         _setupDocumentTitle: function() {
