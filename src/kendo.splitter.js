@@ -54,7 +54,7 @@ kendo_module({
             paneConfig[propertyName] = value;
 
             if (triggersResize) {
-                var splitter = this.element.data("kendoSplitter");
+                var splitter = this.element.data("kendo" + this.options.name);
                 splitter.trigger(RESIZE);
             }
         };
@@ -146,13 +146,13 @@ kendo_module({
 
             that._parentSplitter().each(function() {
                     var parentSplitter = $(this),
-                        splitter = parentSplitter.data("kendoSplitter");
+                        splitter = parentSplitter.data("kendo" + that.options.name);
 
                     if (splitter) {
                         splitter.bind(RESIZE, that._resizeHandler);
                     } else {
                         parentSplitter.off("init" + NS).one("init" + NS, function() {
-                            $(this).data("kendoSplitter").bind(RESIZE, that._resizeHandler);
+                            $(this).data("kendo" + that.options.name).bind(RESIZE, that._resizeHandler);
                             that._resizeHandler();
                         });
                     }
@@ -161,7 +161,7 @@ kendo_module({
 
         _detachEvents: function() {
             var that = this,
-                parentSplitter = that._parentSplitter().data("kendoSplitter");
+                parentSplitter = that._parentSplitter().data("kendo" + that.options.name);
 
             that.element
                 .children(".k-splitbar-draggable-" + that.orientation).off(NS).end()
