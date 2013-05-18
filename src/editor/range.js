@@ -764,8 +764,7 @@ var Marker = Class.extend({
 
         if (isDataNode(node)) {
             range.setStart(node, startOffset);
-        }
-        else if (node) {
+        } else if (node) {
             var textNode = dom.lastTextNode(node);
             if (textNode) {
                 range.setStart(textNode, textNode.nodeValue.length);

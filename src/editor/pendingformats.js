@@ -65,6 +65,7 @@ var PendingFormats = Class.extend({
         marker.remove(range);
 
         if (textNode.parentNode) {
+            textNode.nodeValue += Editor._bomFill;
             range.setStart(textNode, 1);
             range.collapse(true);
         }

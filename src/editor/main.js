@@ -742,7 +742,7 @@ kendo_module({
                         range = editor.getRange();
 
                         var ancestor,
-                            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
+                            emptyParagraphContent = browser.msie ? '' : '<br _moz_dirty="" />',
                             dom = kendo.ui.editor.Dom;
 
                         range.deleteContents();
@@ -946,8 +946,9 @@ kendo_module({
 
         value: function (html) {
             var body = this.body,
-                dom = kendo.ui.editor.Dom,
-                currentHtml = kendo.ui.editor.Serializer.domToXhtml(body);
+                editorNS = kendo.ui.editor,
+                dom = editorNS.Dom,
+                currentHtml = editorNS.Serializer.domToXhtml(body);
 
             if (html === undefined) {
                 return currentHtml;
@@ -971,12 +972,9 @@ kendo_module({
                     return match.replace(onerrorRe, "");
                 })
                 // <img>\s+\w+ creates invalid nodes after cut in IE
-                .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
-
-            if (!browser.msie) {
+                .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1")
                 // Add <br/>s to empty paragraphs in mozilla/chrome, to make them focusable
-                html = html.replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p $1><br _moz_dirty="" /><\/p>');
-            }
+                .replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p$1>' + editorNS.emptyElementContent + '<\/p>');
 
             if (browser.msie && browser.version < 9) {
                 // Internet Explorer removes comments from the beginning of the html
@@ -1214,11 +1212,13 @@ kendo_module({
     // Exports ================================================================
 
     extend(kendo.ui, {
-        editor:{
+        editor: {
             ToolTemplate: ToolTemplate,
             EditorUtils: EditorUtils,
             Tool: Tool,
-            FormatTool: FormatTool
+            FormatTool: FormatTool,
+            _bomFill: browser.msie && browser.version < 9 ? '\ufeff' : '',
+            emptyElementContent: !browser.msie ? '<br _moz_dirty="" />' : browser.version < 9 ? '\ufeff' : ''
         }
     });
 

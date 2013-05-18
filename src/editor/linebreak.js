@@ -39,7 +39,7 @@ var ParagraphCommand = Command.extend({
         var range = this.getRange(),
             doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
-            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
+            emptyParagraphContent = editorNS.emptyElementContent,
             paragraph, marker, li, heading, rng,
             // necessary while the emptyParagraphContent is empty under IE
             blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),

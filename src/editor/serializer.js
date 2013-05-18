@@ -156,6 +156,10 @@ var Serializer = {
             }
         }
 
+        function text(node) {
+            return node.nodeValue.replace(/\ufeff/g, "");
+        }
+
         function child(node, skip) {
             var nodeType = node.nodeType,
                 tagName, mapper,
@@ -192,7 +196,7 @@ var Serializer = {
                     result.push('>');
                 }
             } else if (nodeType == 3) {
-                value = node.nodeValue;
+                value = text(node);
 
                 if (!skip && $.support.leadingWhitespace) {
                     parent = node.parentNode;
@@ -229,7 +233,7 @@ var Serializer = {
         }
 
         if (root.childNodes.length == 1 && root.firstChild.nodeType == 3) {
-            return dom.encode(root.firstChild.nodeValue.replace(/[\r\n\v\f\t ]+/, ' '));
+            return dom.encode(text(root.firstChild).replace(/[\r\n\v\f\t ]+/, ' '));
         }
 
         children(root);
