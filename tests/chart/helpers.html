@@ -1049,6 +1049,13 @@
                     equal(opts.foo, "bar");
                 });
 
+                test("replaces function with its result (false)", function() {
+                    var opts = { foo: function() { return false } };
+                    evalOptions(opts);
+
+                    equal(opts.foo, false);
+                });
+
                 test("executes functions with context", function() {
                     var opts = { foo: function(context) { return context; } };
                     evalOptions(opts, "baz");

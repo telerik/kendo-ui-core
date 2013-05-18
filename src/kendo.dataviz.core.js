@@ -2827,6 +2827,10 @@ kendo_module({
         return typeof value !== UNDEFINED;
     }
 
+    function valueOrDefault(value, defaultValue) {
+        return defined(value) ? value : defaultValue;
+    }
+
     function numericComparer(a, b) {
         return a - b;
     }
@@ -2964,7 +2968,8 @@ kendo_module({
         floor: floor,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
-        uniqueId: uniqueId
+        uniqueId: uniqueId,
+        valueOrDefault: valueOrDefault
     });
 
 })(window.kendo.jQuery);

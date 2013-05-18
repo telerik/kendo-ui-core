@@ -53,7 +53,8 @@ kendo_module({
         last = dataviz.last,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
-        uniqueId = dataviz.uniqueId;
+        uniqueId = dataviz.uniqueId,
+        valueOrDefault = dataviz.valueOrDefault;
 
     // Constants ==============================================================
     var NS = ".kendoChart",
@@ -9422,7 +9423,7 @@ kendo_module({
             if (!inArray(property, state.excluded)) {
                 propValue = options[property];
                 if (isFn(propValue)) {
-                    options[property] = propValue(context) || defaults[property];
+                    options[property] = valueOrDefault(propValue(context), defaults[property]);
                 } else if (typeof propValue === "object") {
                     state.defaults = defaults[property];
                     evalOptions(propValue, context, state);
