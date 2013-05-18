@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -390,7 +391,8 @@
 
         <script>
             var MultiDayView = kendo.ui.MultiDayView,
-                container;
+                container,
+                rightOffset = 30;
 
             var MyDayView = MultiDayView.extend({
                 init: function(element, options) {
@@ -897,7 +899,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").width(), view.content.find("td:eq(10)").width() - 30);
+                equal(view.content.find("div.k-appointment").width(), view.content.find("td:eq(10)").width() - rightOffset);
             });
 
             test("multiple day events are added to all day slot", function() {
@@ -1108,6 +1110,27 @@
                 equal(eventElement.height(), slotHeight(view.content.find("table"), 2));
             });
 
+            test("position day event which start in the last slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 27, 9, 0, 0), end: new Date(2013, 1, 27, 10, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                var eventElement = view.content.find("div.k-appointment");
+                equal(eventElement.length, 1);
+                equal(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
+                equal(eventElement.height(), slotHeight(view.content.find("table"), 1));
+            });
+
             test("positon multiple single day events with same start time", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -1132,15 +1155,239 @@
 
                 equal(eventElements.first().offset().top, slot.offset().top);
                 equal(eventElements.first().offset().left, slot.offset().left);
-                equal(eventElements.first().height(), slotHeight(view.content.find("table"), 2));
-                equal(eventElements.first().width(), (slot.width() - 30) / 2);
+                equal(eventElements.first().height(), slotHeight(view.content.find("table"), 4));
+                equal(eventElements.first().width(), Math.round((slot.width() - rightOffset) / 2));
                 equal(eventElements.last().offset().top, slot.offset().top);
-                equal(eventElements.last().height(), slotHeight(view.content.find("table"), 2));
-                equal(eventElements.last().width(), (slot.width() - 30) / 2);
+                equal(eventElements.last().offset().left, slot.offset().left + eventElements.first().width());
+                equal(eventElements.last().height(), slotHeight(view.content.find("table"), 4));
+                equal(eventElements.last().width(), Math.floor((slot.width() - rightOffset) / 2));
+            });
+
+            test("events with same start time - does not move events from other date slots", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    { start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "other slot event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var firstSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondSlot = view.content.find("tr").eq(8).find("td:last");
+
+                equal(eventElements.length, 3);
+
+                equal(eventElements.first().offset().top, firstSlot.offset().top);
+
+                equal(eventElements.eq(1).offset().left, firstSlot.offset().left + eventElements.first().width());
+
+                equal(eventElements.last().offset().top, secondSlot.offset().top);
+            });
+
+            test("events with same start time - does not move events from same date slots with which does not collide", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    { start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "no collision" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(13).find("td:first");
+
+                equal(eventElements.length, 3);
+
+                equal(eventElements.first().offset().top, firstTimeSlot.offset().top);
+
+                equal(eventElements.eq(1).offset().left, firstTimeSlot.offset().left + eventElements.first().width());
+
+                equal(eventElements.last().offset().top, secondTimeSlot.offset().top);
+                equal(eventElements.last().offset().left, secondTimeSlot.offset().left);
+            });
+
+            test("long events reposition other events in the same date slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
+
+                equal(eventElements.first().offset().top, firstTimeSlot.offset().top);
+                equal(eventElements.last().offset().top, secondTimeSlot.offset().top);
+                equal(eventElements.last().offset().left, secondTimeSlot.offset().left + eventElements.first().width());
+            });
+
+            test("long events reposition other events in the same time slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
+                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
+
+                equal(eventElements.first().offset().top, firstTimeSlot.offset().top);
+                equal(eventElements.first().width(), Math.floor((firstTimeSlot.width() - rightOffset) / 3));
+                equal(eventElements.eq(1).offset().left, firstTimeSlot.offset().left + eventElements.first().width());
+                equal(eventElements.last().offset().top, secondTimeSlot.offset().top);
+                equal(eventElements.last().offset().left, secondTimeSlot.offset().left + eventElements.first().width());
+            });
+
+            test("long events reposition other events in the same date slot with multiple long overlapping event", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "another second same slot event" },
+                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 18, 0, 0), title: "another log event which overlaps the second one" },
+                    { start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
+                var thirdTimeSlot = view.content.find("tr").eq(16).find("td:first");
+
+                equal(eventElements.first().offset().top, firstTimeSlot.offset().top);
+                equal(eventElements.first().width(), Math.floor((firstTimeSlot.width() - rightOffset) / 4));
+
+                equal(eventElements.eq(1).offset().left, firstTimeSlot.offset().left + eventElements.first().width());
+
+                equal(eventElements.eq(4).offset().left, secondTimeSlot.offset().left + eventElements.first().width());
+                equal(eventElements.eq(5).offset().left, eventElements.eq(4).offset().left + eventElements.eq(4).width());
+
+                equal(eventElements.eq(6).offset().left, thirdTimeSlot.offset().left);
+            });
+
+            test("same time slot events are sorted by start time and end time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                equal(eventElements.eq(0).find("dd").text(), "second event");
+                equal(eventElements.eq(1).find("dd").text(), "first event");
+                equal(eventElements.eq(2).find("dd").text(), "same as first");
             });
 
 
-       </script>
+            test("slotindex is render as attribute", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                var eventElement = view.content.find("div.k-appointment");
+
+                equal(eventElement.attr("data-slot-idx"), 0);
+            });
+
+            test("start end index is render as attribute", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                var eventElement = view.content.find("div.k-appointment");
+
+                equal(eventElement.attr("data-start-end-idx"), "8-12");
+            });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

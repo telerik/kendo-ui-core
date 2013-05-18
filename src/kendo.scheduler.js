@@ -112,9 +112,9 @@ kendo_module({
             msMax = max.getTime(),
             msValue;
 
-        if (msMin >= msMax) {
+        //if (msMin >= msMax) {
             msMax += MS_PER_DAY;
-        }
+        //}
 
         msValue = value.getTime();
 
@@ -443,6 +443,52 @@ kendo_module({
         return html;
     }
 
+    function rangeIndex(eventElement) {
+        var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
+        return {
+            start: +index[0],
+            end: +index[1]
+        };
+    }
+
+    function eventsForSlot(elements, slotStart, slotEnd) {
+        return elements.filter(function() {
+            var event = rangeIndex(this);
+            return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
+        });
+    }
+
+    function createColumns(eventElements) {
+        var columns = [];
+
+        eventElements.each(function() {
+            var event = this,
+            eventRange = rangeIndex(event),
+            column;
+
+            for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
+                if (!(eventRange.start >= columns[j].start && eventRange.start <= columns[j].end)) {
+                    column = columns[j];
+
+                    if (column.end < eventRange.end) {
+                        column.end = eventRange.end;
+                    }
+
+                    break;
+                }
+            }
+
+            if (!column) {
+                column = { start: eventRange.start, end: eventRange.end, events: [] };
+                columns.push(column);
+            }
+
+            column.events.push(event);
+        });
+
+        return columns;
+    }
+
     var MultiDayView = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -493,6 +539,7 @@ kendo_module({
         },
 
         _footer: function() {
+            return;
             if (!this.footer) {
                 var html = '<div class="k-floatwrap k-header k-scheduler-footer">&nbsp;';
                 //'<ul class="k-reset k-header k-toolbar"></ul>';
@@ -855,21 +902,43 @@ kendo_module({
                     });
         },
 
-        _positionEvent: function(event, element, slots, dateSlotIndex, slotHeight) {
-            var startIndex = Math.max(this._timeSlotIndex(event.start), 0),
-                endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.end)), slots.length),
+        _arrangeColumns: function(element, dateSlotIndex, dateSlot) {
+            var columns,
                 eventRightOffset = 30,
+                blockRange = rangeIndex(element),
+                slotEvents = this._getCollisionEvents(dateSlotIndex, blockRange.start, blockRange.end).add(element);
+
+            columns = createColumns(slotEvents);
+
+            var columnWidth = (dateSlot.width() - eventRightOffset) / columns.length;
+
+            for (var idx = 0, length = columns.length; idx < length; idx++) {
+                $.each(columns[idx].events, function(i) {
+                    $(this).css({
+                        width: columnWidth,
+                        left: dateSlot[0].offsetLeft + idx * columnWidth
+                    });
+                });
+            }
+        },
+
+        _positionEvent: function(event, element, slots, dateSlotIndex, slotHeight) {
+            var startIndex = Math.max(Math.floor(this._timeSlotIndex(event.start)), 0),
+                endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.end)), slots.length),
                 bottomOffset = (slotHeight * 0.10),
                 timeSlot = slots.eq(Math.floor(startIndex)),
                 dateSlot = timeSlot.children().eq(dateSlotIndex);
 
             element.css({
                     height: slotHeight * (Math.ceil(endIndex - startIndex) || 1) - bottomOffset,
-                    width: dateSlot.width() - eventRightOffset,
-                    top: timeSlot.position().top + this.content[0].scrollTop,
-                    left: dateSlot[0].offsetLeft
+                    top: timeSlot.position().top + this.content[0].scrollTop
                 });
-        },
+
+            element.attr(kendo.attr("slot-idx"), dateSlotIndex);
+            element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
+
+            this._arrangeColumns(element, dateSlotIndex, dateSlot);
+       },
 
         _createEventElement: function(event, template) {
             return $(template(extend({}, {
@@ -897,6 +966,31 @@ kendo_module({
                 isInDateRange(slotEnd, event.start, event.end);
         },
 
+        _getCollisionEvents: function(slotIndex, start, end) {
+            var elements = this.content.children(".k-appointment[" + kendo.attr("slot-idx") + "=" + slotIndex + "]"),
+                offset = 0,
+                idx,
+                length,
+                index,
+                startIndex,
+                endIndex;
+
+            for (idx = elements.length-1; idx >= 0; idx--) {
+                index = rangeIndex(elements[idx]);
+                startIndex = index.start;
+                endIndex = index.end;
+
+                if (startIndex <= start && endIndex >= start) {
+                    start = startIndex;
+                    if (endIndex > end) {
+                        end = endIndex;
+                    }
+                }
+            }
+
+            return eventsForSlot(elements, start, end);
+        },
+
         renderEvents: function(events) {
             var options = this.options,
                 eventTemplate = kendo.template(options.eventTemplate),
@@ -914,6 +1008,8 @@ kendo_module({
 
             this.element.find(".k-appointment").remove();
 
+            events = new kendo.data.Query(events).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
+
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
 
@@ -921,21 +1017,20 @@ kendo_module({
                    var dateSlotIndex = this._dateSlotIndex(event.start),
                        endDateSlotIndex = this._dateSlotIndex(event.end),
                        isSameDayEvent = event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event),
-                       element;
-
-                   if (isSameDayEvent && dateSlotIndex === -1 && endDateSlotIndex > -1) {
-                       dateSlotIndex = endDateSlotIndex;
-                   }
-
-                   element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate);
+                       container = isSameDayEvent ? this.content : allDayEventContainer,
+                       element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate);
 
                    if (isSameDayEvent) {
+                       if (dateSlotIndex === -1 && endDateSlotIndex > -1) {
+                           dateSlotIndex = endDateSlotIndex;
+                       }
+
                        this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
                    } else {
                        this._positonAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
                    }
 
-                   element.appendTo(isSameDayEvent ? this.content : allDayEventContainer);
+                   element.appendTo(container);
                 }
             }
         }

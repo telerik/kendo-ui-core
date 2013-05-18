@@ -279,6 +279,7 @@
                 border-style:solid;
                 border-width:1px;
                 text-align:left;
+                overflow: hidden;
             }
 
             .k-appointment,
@@ -413,23 +414,63 @@
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
             views: ["day", { name: "week", selected: true }],
             dataSource: {
-                data: [ /*{
+                data: [ {
                     start: start,
                     end: end,
                     title: "foo"
                 },{
-                    start: start,
-                    end: end,
+                    start: new Date(2013, 4, 16, 3, 5,0),
+                    end: new Date(2013, 4, 16, 6, 5,0),
                     title: "foo event"
+                },{
+                    start: new Date(2013, 4, 16, 3, 5,0),
+                    end: new Date(2013, 4, 16, 6, 5,0),
+                    title: "foo event"
+                },{
+                    start: new Date(2013, 4, 16, 3, 5,0),
+                    end: new Date(2013, 4, 16, 6, 5,0),
+                    title: "foo event"
+                },{
+                    start: new Date(2013, 4, 16, 2, 5,0),
+                    end: new Date(2013, 4, 16, 2, 30,0),
+                    title: "bar"
+                },{
+                    start: new Date(2013, 4, 16, 19, 5,0),
+                    end: new Date(2013, 4, 16, 19, 30,0),
+                    title: "bar"
+                },{
+                    start: new Date(2013, 4, 16, 3, 5,0),
+                    end: new Date(2013, 4, 16, 12, 5,0),
+                    title: "foo"
                 },{
                     start: new Date(2013, 4, 14, 10, 5,0),
                     end: new Date(2013, 4, 14, 12, 5,0),
                     title: "bar"
-                },*/{
+                },{
+                    start: new Date(2013, 4, 16, 10, 5,0),
+                    end: new Date(2013, 4, 16, 12, 5,0),
+                    title: "foo"
+                },{
+                    start: new Date(2013, 4, 16, 13, 5,0),
+                    end: new Date(2013, 4, 16, 17, 5,0),
+                    title: "foo"
+                },{
+                    start: new Date(2013, 4, 16, 10, 5,0),
+                    end: new Date(2013, 4, 16, 16, 5,0),
+                    title: "foo"
+                },{
+                    start: new Date(2013, 4, 16, 16, 5,0),
+                    end: new Date(2013, 4, 16, 20, 5,0),
+                    title: "foo"
+                }/*{
+                    start: new Date(),
+                    end: new Date(),
+                    title: "foo"
+                }*//*{
                     start: new Date(2013, 4, 10, 10, 5,0),
                     end: new Date(2013, 4, 25, 12, 5,0),
                     title: "multi day"
-                }]
+                }*/]
             }
         });
     </script>
