@@ -204,6 +204,7 @@ kendo_module({
                                 effects: "fade:out"
                             }
                         },
+                        minHeight: 42,
                         visible: false,
                         autoFocus: false,
                         actions: []
