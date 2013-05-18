@@ -1196,8 +1196,8 @@ kendo_module({
 
             if (plotBands.length) {
                 result = map(plotBands, function(item) {
-                    from = defined(item.from) ? item.from : MIN_VALUE;
-                    to = defined(item.to) ? item.to : MAX_VALUE;
+                    from = valueOrDefault(item.from, MIN_VALUE);
+                    to = valueOrDefault(item.to, MAX_VALUE);
 
                     if (vertical) {
                         slotX = plotArea.axisX.lineBox();
@@ -2190,11 +2190,11 @@ kendo_module({
                 };
 
             if (axis === Y) {
-                startPosition = defined(stackBase) ? stackBase :
-                    endState[aboveAxis ? BOTTOM : TOP];
+                startPosition = valueOrDefault(stackBase,
+                    endState[aboveAxis ? BOTTOM : TOP]);
             } else {
-                startPosition = defined(stackBase) ? stackBase :
-                    endState[aboveAxis ? LEFT : RIGHT];
+                startPosition = valueOrDefault(stackBase,
+                    endState[aboveAxis ? LEFT : RIGHT]);
             }
 
             anim.startPosition = startPosition;

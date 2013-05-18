@@ -1676,8 +1676,8 @@ kendo_module({
                 p2,
                 slotSize;
 
-            from = defined(from) ? from : 0;
-            to = defined(to) ? to : from;
+            from = valueOrDefault(from, 0);
+            to = valueOrDefault(to, from);
             from = clipValue(from, 0, intervals);
             to = clipValue(to - 1, from, intervals);
             // Fixes transient bug caused by iOS 6.0 JIT
@@ -1802,7 +1802,7 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 dataItem = options.dataItems ? options.dataItems[index] : null,
-                category = defined(options.categories[index]) ? options.categories[index] : "";
+                category = valueOrDefault(options.categories[index], "");
 
             return new AxisLabel(category, index, dataItem, labelOptions);
         }
@@ -4560,14 +4560,14 @@ kendo_module({
                     stroke: point.getBorderColor(),
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType,
-                    strokeOpacity: defined(options.border.opacity) ? options.border.opacity : options.opacity
+                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
                 } : {},
                 rectStyle = deepExtend({
                     fill: options.color,
                     fillOpacity: options.opacity
                 }, border),
                 lineStyle = {
-                    strokeOpacity: defined(options.line.opacity) ? options.line.opacity : options.opacity,
+                    strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
                     dashType: options.line.dashType,
@@ -5311,7 +5311,7 @@ kendo_module({
                 minWidth = math.min(box.width(), box.height()),
                 halfMinWidth = minWidth / 2,
                 defaultPadding = minWidth - minWidth * 0.85,
-                padding = defined(options.padding) ? options.padding : defaultPadding,
+                padding = valueOrDefault(options.padding, defaultPadding),
                 newBox = Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
@@ -5705,7 +5705,7 @@ kendo_module({
                 minWidth = math.min(box.width(), box.height()),
                 halfMinWidth = minWidth / 2,
                 defaultPadding = minWidth - minWidth * 0.85,
-                padding = defined(options.padding) ? options.padding : defaultPadding,
+                padding = valueOrDefault(options.padding, defaultPadding),
                 series = options.series,
                 currentSeries,
                 seriesCount = series.length,
@@ -5748,7 +5748,7 @@ kendo_module({
 
             for (i = 0; i < seriesCount; i++) {
                 currentSeries = series[i];
-                size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
+                size = valueOrDefault(currentSeries.size, totalSize / seriesWithoutSize);
                 ir += margin;
                 r = ir + size;
                 chart.seriesConfigs.push({ ir: ir, r: r });
