@@ -2009,7 +2009,7 @@ kendo_module({
 
             for (i = 0; i < plotBands.length; i++) {
                 band = plotBands[i];
-                slot = axis.getSlot(band.from, band.to - 1);
+                slot = axis.plotBandSlot(band);
                 singleSlot = axis.getSlot(band.from);
 
                 head = band.from - math.floor(band.from);
@@ -2027,6 +2027,10 @@ kendo_module({
             }
 
             return elements;
+        },
+
+        plotBandSlot: function(band) {
+            return this.getSlot(band.from, band.to - 1);
         },
 
         getSlot: function(from, to) {
@@ -2240,16 +2244,11 @@ kendo_module({
             },
             // TODO: Defaults
             majorGridLines: {
-                width: 0.5,
                 color: BLACK,
-                dashType: "dash",
                 visible: true
             },
             minorGridLines: {
-                visible: true,
-                width: 0.5,
-                color: "#aaa",
-                dashType: "dash"
+                color: "#aaa"
             }
         },
 
@@ -2332,15 +2331,18 @@ kendo_module({
                       skipMajor ? this.options.majorUnit : 0);
         },
 
-        renderPlotBands: function(view) {
-            // TODO: Implement
+        renderPlotBands: RadarCategoryAxis.fn.renderPlotBands,
+
+        plotBandSlot: function(band) {
+            return this.getSlot(band.from, band.to);
         },
 
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
                 start = options.startAngle,
-                box = axis.box;
+                box = axis.box,
+                tmp;
 
             a = clipValue(a, options.min, options.max);
             b = clipValue(b || a, a, options.max);
@@ -2352,6 +2354,12 @@ kendo_module({
 
             a = (540 - a - start) % 360;
             b = (540 - b - start) % 360;
+
+            if (b < a) {
+                tmp = a;
+                a = b;
+                b = tmp;
+            }
 
             return new Ring(
                 box.center(), 0, box.height() / 2,

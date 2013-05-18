@@ -102,13 +102,19 @@
                     }],
                     // TODO: Use xAxis to avoid confusion?
                     polarAxis: {
-                        reverse: true,
+                        // reverse: true,
                         // startAngle: 180,
                         // gridLines
                         // plotBands
                         labels: {
                             margin: 5
-                        }
+                        },
+                        plotBands: [{
+                            from: 60,
+                            to: 120,
+                            opacity: 0.5,
+                            color: "red"
+                        }]
                     },
                     valueAxis: {
                         minorUnit: 5
