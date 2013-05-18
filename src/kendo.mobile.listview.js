@@ -238,8 +238,7 @@ kendo_module({
             this.offset = buffer.offset;
             this.top = 0;
 
-            var targetHeight = this.height() * 5,
-                itemConstructor = this.item,
+            var itemConstructor = this.item,
                 prevItem,
                 item;
 
@@ -482,7 +481,7 @@ kendo_module({
 
             that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource);
 
-            that.buffer = new kendo.data.Buffer(that.dataSource, 30, pressToLoadMore);
+            that.buffer = new kendo.data.Buffer(that.dataSource, Math.floor(options.dataSource.pageSize() / 2), pressToLoadMore);
 
             if (pressToLoadMore) {
                 footer = new VirtualListViewPressToLoadMore(that.listView, that.buffer);

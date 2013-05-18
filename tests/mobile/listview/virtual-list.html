@@ -38,6 +38,7 @@
             var MockBuffer = kendo.Observable.extend({
                 offset: 0,
                 length: 40,
+                viewSize: 30,
                 at: function(i) { return i; },
                 total: function() { return 10000 },
                 setViewSize: $.noop
@@ -125,16 +126,6 @@
                 });
 
                 list.update(0);
-            });
-
-            test('redrawing re-draws given the new dimensions', 2, function() {
-                ViewPortHeight = 300;
-                CellHeight = 40;
-
-                list.refresh();
-
-                equal(list.items.length, 23);
-                equal(list.bottom, 920);
             });
 
             test('resetting the buffer redraws list', 1, function() {

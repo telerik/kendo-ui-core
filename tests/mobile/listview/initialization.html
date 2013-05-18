@@ -284,7 +284,7 @@
 
             test("ListView renders button at the bottom of the widget", 4, function() {
                 var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
-                    listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more..." });
+                listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more...", dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ] }) });
 
                 var footer = listView.wrapper.find(".km-load-more").eq(0);
 
@@ -296,7 +296,7 @@
 
             test("ListView renders default text for the load-more button", 2, function() {
                 var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
-                    listView = new ListView(dom, { loadMore: true });
+                    listView = new ListView(dom, { loadMore: true, dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ] }) });
 
                 var footer = listView.wrapper.find(".km-load-more").eq(0);
 

@@ -3538,7 +3538,6 @@ kendo_module({
 
             buffer._syncWithDataSource();
 
-            viewSize = Math.floor(dataSource.pageSize() / 2);
             buffer.setViewSize(viewSize);
         },
 
