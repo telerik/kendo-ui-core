@@ -944,7 +944,7 @@ kendo_module({
                 module.onRequestProgress.call(module, e, fileEntry);
             }, false);
 
-            xhr.open("POST", url);
+            xhr.open("POST", url, true);
             xhr.withCredentials = "true";
             xhr.send(data);
         },
