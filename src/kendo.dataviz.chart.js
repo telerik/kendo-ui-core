@@ -2233,6 +2233,7 @@ kendo_module({
         },
 
         options: {
+            type: "polar",
             startAngle: 0,
             reverse: false,
             majorUnit: 60,

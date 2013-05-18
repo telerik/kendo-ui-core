@@ -396,29 +396,18 @@
 
                 function axisLabelClick(clickHandler, options) {
                     chart = createChart($.extend(true, {
-                        dataSource: [{
-                            value: 1,
-                            category: "A"
-                        }, {
-                            value: 2,
-                            category: "B"
-                        }, {
-                            value: 3,
-                            category: "C"
-                        }],
                         series: [{
-                            type: "radarColumn",
-                            field: "value"
+                            type: "polarLine",
+                            data: [[10, 100], [20, 200]]
                         }],
-                        categoryAxis: {
-                            name: "Axis A",
-                            field: "category"
+                        polarAxis: {
+                            name: "Polar Axis"
                         },
                         axisLabelClick: clickHandler
                     }, options));
 
                     plotArea = chart._model.children[1];
-                    label = plotArea.categoryAxis.labels[1];
+                    label = plotArea.polarAxis.labels[1];
                     $(getElement(label.options.id)).click();
                 }
 
@@ -433,7 +422,7 @@
 
                 test("event arguments contain axis options", 1, function() {
                     axisLabelClick(function(e) {
-                        equal(e.axis.type, "category");
+                        equal(e.axis.type, "polar");
                     });
                 });
 
@@ -443,39 +432,21 @@
                     });
                 });
 
-                test("event arguments contain category index", 1, function() {
+                test("event arguments contain label index", 1, function() {
                     axisLabelClick(function(e) {
                         equal(e.index, 1);
                     });
                 });
 
-                test("category index is correct when step is defined", 1, function() {
+                test("event arguments contain label text", 1, function() {
                     axisLabelClick(function(e) {
-                        equal(e.index, 2);
-                    }, {
-                        categoryAxis: {
-                            labels: {
-                                step: 2
-                            }
-                        }
+                        equal(e.text, 60);
                     });
                 });
 
-                test("event arguments contain category name as text", 1, function() {
+                test("event arguments contain value", 1, function() {
                     axisLabelClick(function(e) {
-                        equal(e.text, "B");
-                    });
-                });
-
-                test("event arguments contain category name as value", 1, function() {
-                    axisLabelClick(function(e) {
-                        equal(e.value, "B");
-                    });
-                });
-
-                test("event arguments contain category data item", 1, function() {
-                    axisLabelClick(function(e) {
-                        equal(e.dataItem.value, 2);
+                        equal(e.value, 60);
                     });
                 });
 
