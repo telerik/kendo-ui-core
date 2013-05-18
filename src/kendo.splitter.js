@@ -56,6 +56,9 @@ kendo_module({
             if (triggersResize) {
                 var splitter = this.element.data("kendo" + this.options.name);
                 splitter.trigger(RESIZE);
+
+                this._detachEvents();
+                this._attachEvents();
             }
         };
     }

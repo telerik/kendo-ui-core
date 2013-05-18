@@ -432,6 +432,25 @@
                 ok(splitBar.is(resizingHandler._resizable.draggable.options.filter));
             });
 
+            test("panes can be collapsed after sizing them through size()", function() {
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [
+                                { collapsible: true, size: "50px" },
+                                { }
+                            ]
+                        }),
+                    splitBar = splitter.find(".k-splitbar"),
+                    panes = splitter.find(".k-pane");
+
+                splitter.data("kendoSplitter").size(".k-pane:first", 60);
+
+                splitter.find(".k-collapse-prev").trigger("click");
+
+                equal(panes.eq(0).width(), 0)
+            });
+
             module("Nested splitters", {
                 teardown: function() {
                     $('.k-splitter').remove();
