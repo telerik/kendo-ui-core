@@ -93,13 +93,13 @@ function ViewElementStub() {
 
 function arrayClose(a, b, tolerance) {
     if (a.length != b.length) {
-        ok(false, "Arrays differ in size");
+        ok(false, "Arrays differ in size " + "(expected " + b.length + ", got " + a.length + " elements)");
     } else if (a.length) {
         for (var i = 0; i < a.length; i++) {
             if (a[i].length) {
-                arrayClose(a[i], b[i], tolerance, "Arrays differ at index " + i);
+                arrayClose(a[i], b[i], tolerance, "Values at index " + i);
             } else {
-                QUnit.close(a[i], b[i], tolerance, "Arrays differ at index " + i);
+                QUnit.close(a[i], b[i], tolerance, "Values at index " + i);
             }
         }
     } else {

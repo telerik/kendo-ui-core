@@ -4471,18 +4471,18 @@ kendo_module({
                 seriesPoints = chart.seriesPoints,
                 currentSeries, seriesIx,
                 seriesCount = seriesPoints.length,
-                currentSeriesPoints, linePoints,
+                sortedPoints, linePoints,
                 point, pointIx, pointCount,
                 segments = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
-                currentSeriesPoints = seriesPoints[seriesIx];
-                pointCount = currentSeriesPoints.length;
+                sortedPoints = chart.sortPoints(seriesPoints[seriesIx]);
+                pointCount = sortedPoints.length;
                 linePoints = [];
 
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
-                    point = currentSeriesPoints[pointIx];
+                    point = sortedPoints[pointIx];
                     if (point) {
                         linePoints.push(point);
                     } else if (chart.seriesMissingValues(currentSeries) !== INTERPOLATE) {
@@ -4508,6 +4508,10 @@ kendo_module({
 
             chart._segments = segments;
             chart.append.apply(chart, segments);
+        },
+
+        sortPoints: function(points) {
+            return points;
         },
 
         seriesMissingValues: function(series) {
@@ -5089,15 +5093,21 @@ kendo_module({
 
     var PolarAreaChart = PolarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            var chart = this;
-
             return new RadarAreaSegment(linePoints, [], currentSeries, seriesIx);
         },
 
         seriesMissingValues: function(series) {
             return series.missingValues || ZERO;
+        },
+
+        sortPoints: function(points) {
+            return points.sort(xComparer);
         }
     });
+
+    function xComparer(a, b) {
+        return a.value.x - b.value.x;
+    }
 
     var BubbleChart = ScatterChart.extend({
         options: {
@@ -8553,7 +8563,7 @@ kendo_module({
             var plotArea = this,
                 polarAxis;
 
-            polarAxis = new PolarNumericAxis(plotArea.options.polarAxis);
+            polarAxis = new PolarNumericAxis(plotArea.options.xAxis);
 
             plotArea.polarAxis = polarAxis;
             plotArea.axisX = polarAxis;
@@ -8581,7 +8591,7 @@ kendo_module({
                     max: range.max,
                     majorGridLines: { type: ARC },
                     minorGridLines: { type: ARC }
-                }, plotArea.options.valueAxis)
+                }, plotArea.options.yAxis)
             );
 
             plotArea.valueAxis = valueAxis;
@@ -10629,6 +10639,7 @@ kendo_module({
         PiePlotArea: PiePlotArea,
         PieSegment: PieSegment,
         PolarNumericAxis: PolarNumericAxis,
+        PolarPlotArea: PolarPlotArea,
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,

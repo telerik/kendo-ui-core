@@ -46,6 +46,7 @@ var tests = [
     "chart/candlestickchart.html",
     "chart/ohlcchart.html",
     "chart/polarnumericaxis.html",
+    "chart/polarareachart.html",
     "chart/radarbarchart.html",
     "chart/radarcategoryaxis.html",
     "chart/radarlinechart.html",
