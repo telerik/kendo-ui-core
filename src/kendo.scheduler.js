@@ -37,7 +37,7 @@ kendo_module({
                 '#}#'  +
             '</ul>' +
             '</div>'),
-        DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}">' +
+        DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}" data-#=ns#uid="#=uid#">' +
                 '<dl>' +
                     '<dt>${formattedTime}</dt>' +
                     '<dd>${title}</dd>' +
@@ -45,7 +45,7 @@ kendo_module({
                 //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 //'<span class="k-icon k-resize-handle"></span>' +
                 '</div>'),
-        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}">' +
+        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}" data-#=ns#uid="#=uid#">' +
                 '<dl><dd>${title}</dd></dl>' +
                 //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 //'<span class="k-icon k-resize-handle"></span>' +
@@ -909,7 +909,7 @@ kendo_module({
             allDayEvents.each(function(idx) {
                 $(this).css({
                     height: eventHeight,
-                    top: top + eventHeight * idx,
+                    top: top + eventHeight * idx
                 });
             });
         },
@@ -917,6 +917,7 @@ kendo_module({
         _arrangeColumns: function(element, dateSlotIndex, dateSlot) {
             var columns,
                 eventRightOffset = 30,
+                colunmEvents,
                 blockRange = rangeIndex(element),
                 eventElements = this.content.children(".k-appointment[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
                 slotEvents = this._getCollisionEvents(eventElements, blockRange.start, blockRange.end).add(element);
@@ -926,12 +927,14 @@ kendo_module({
             var columnWidth = (dateSlot.width() - eventRightOffset) / columns.length;
 
             for (var idx = 0, length = columns.length; idx < length; idx++) {
-                $.each(columns[idx].events, function(i) {
-                    $(this).css({
+                columnEvents = columns[idx].events;
+
+                for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
+                    $(columnEvents[j]).css({
                         width: columnWidth,
                         left: dateSlot[0].offsetLeft + idx * columnWidth
                     });
-                });
+                }
             }
         },
 
@@ -958,7 +961,9 @@ kendo_module({
                 titleAttr = this.options.titleAttrFormat;
 
             return $(template(extend({}, {
-                formattedTime: formattedTime, titleAttr: kendo.format(titleAttr, formattedTime, event.title)
+                ns: kendo.ns,
+                formattedTime: formattedTime,
+                titleAttr: kendo.format(titleAttr, formattedTime, event.title)
             }, event)));
         },
 
@@ -983,9 +988,7 @@ kendo_module({
         },
 
         _getCollisionEvents: function(elements, start, end) {
-            var offset = 0,
-                idx,
-                length,
+            var idx,
                 index,
                 startIndex,
                 endIndex;
@@ -1014,7 +1017,6 @@ kendo_module({
                 allDaySlots = this.allDayHeader ? this.allDayHeader.find("td") : $(),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
                 slotHeight = Math.floor(this.content.find(">table:first").innerHeight() / timeSlots.length),
-                dateSlotLength = this.datesHeader.find("th").length,
                 slotWidth = this.datesHeader.find("table:first th:first").innerWidth(),
                 eventTimeFormat = options.eventTimeFormat,
                 event,

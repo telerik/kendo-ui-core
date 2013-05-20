@@ -700,12 +700,29 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
                 equal(view.content.find("div.k-appointment").length, 1);
                 equal(view.content.find(".k-appointment dd").text(), "my event");
+            });
+
+            test("uid is render", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ uid: "foo", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                equal(view.content.find(".k-appointment").attr("data-uid"), "foo");
             });
 
             test("title attribute is set to the event wrapper element", function() {
@@ -718,7 +735,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -737,8 +754,8 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "event1" },
-                    { start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "event1" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
                 ];
 
                 view.renderEvents(events);
@@ -758,7 +775,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
                 view.renderEvents(events);
@@ -777,7 +794,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -795,7 +812,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -813,7 +830,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -839,7 +856,7 @@
                            selectedDate
                         ]
                     }),
-                    events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }],
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }],
                     timeSlotPosition,
                     eventPosition;
 
@@ -861,7 +878,7 @@
                            selectedDate
                         ]
                     }),
-                    events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.render(selectedDate);
 
@@ -878,7 +895,7 @@
                            selectedDate
                         ]
                     }),
-                    events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 40, 0), title: "my event" }];
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 40, 0), title: "my event" }];
 
                 view.render(selectedDate);
 
@@ -895,7 +912,7 @@
                            selectedDate
                         ]
                     }),
-                    events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
 
                 view.render(selectedDate);
 
@@ -911,7 +928,7 @@
                            selectedDate
                         ]
                     }),
-                    events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
 
                 view.render(selectedDate);
 
@@ -930,7 +947,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -949,7 +966,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), isAllDay: true, title: "all day event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), isAllDay: true, title: "all day event" }];
 
                 view.renderEvents(events);
 
@@ -968,7 +985,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
@@ -988,7 +1005,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
@@ -1011,7 +1028,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1031,7 +1048,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1051,7 +1068,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1073,7 +1090,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1095,7 +1112,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
                 var eventElement = view.content.find("div.k-appointment");
@@ -1118,7 +1135,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
                 ok(!view.content.find("div.k-appointment").length);
@@ -1137,7 +1154,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1158,7 +1175,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 27, 9, 0, 0), end: new Date(2013, 1, 27, 10, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 27, 9, 0, 0), end: new Date(2013, 1, 27, 10, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1179,8 +1196,8 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
                 view.renderEvents(events);
@@ -1212,9 +1229,9 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
-                    { start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "other slot event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "other slot event" }
                 ];
 
                 view.renderEvents(events);
@@ -1244,9 +1261,9 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
-                    { start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "no collision" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "no collision" }
                 ];
 
                 view.renderEvents(events);
@@ -1276,8 +1293,8 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
-                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
                 view.renderEvents(events);
@@ -1302,10 +1319,10 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
-                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
                 view.renderEvents(events);
@@ -1332,13 +1349,13 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "another second same slot event" },
-                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
-                    { start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 18, 0, 0), title: "another log event which overlaps the second one" },
-                    { start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "another second same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 18, 0, 0), title: "another log event which overlaps the second one" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" }
                 ];
 
                 view.renderEvents(events);
@@ -1371,9 +1388,9 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" }
                 ];
 
                 view.renderEvents(events);
@@ -1396,7 +1413,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1416,7 +1433,7 @@
 
                 view.render(selectedDate);
 
-                var events = [{ start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
 
@@ -1437,8 +1454,8 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 13, 0, 0), title: "second event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 13, 0, 0), title: "second event" }
                 ];
 
                 view.renderEvents(events);
@@ -1472,8 +1489,8 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "second event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "second event" }
                 ];
 
                 view.renderEvents(events);
@@ -1509,9 +1526,9 @@
                 view.render(selectedDate);
 
                 var events = [
-                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
-                    { start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 28, 13, 0, 0), title: "second event" },
-                    { start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "third event" }
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 28, 13, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "third event" }
                 ];
 
                 view.renderEvents(events);
