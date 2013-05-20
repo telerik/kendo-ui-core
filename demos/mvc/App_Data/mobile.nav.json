@@ -49,13 +49,13 @@
                 {
                     "text": "Events",
                     "url": "button/events.html",
-                    "title": "Events in Kendo UI Mobile Button",
+                    "title": "Events in Kendo UI mobile button",
                     "meta": "This sample demonstrates which events can be triggered in Kendo UI Mobile Button. The component has events enabled for your ease of use and flexibility."
                 },
                 {
                     "text": "Customizing Appearance",
                     "url": "button/appearance.html",
-                    "title": "Example of Kendo UI Mobile Button Customization ",
+                    "title": "Customizing the appearance of Kendo UI mobile button",
                     "meta": "This demo shows how you can easily customize the appearance and styling of Kendo UI Mobile Button to deliver rich experience for end users of the mobile app."
                 }
             ]
@@ -107,7 +107,7 @@
                 {
                     "text": "Basic usage",
                     "url": "listview/index.html",
-                    "title": "Kendo UI Mobile ListView Demo",
+                    "title": "Features of Kendo UI Mobile ListView widget",
                     "meta": "This demo illustrates the core functionality of Kendo UI jQuery List widget. It allows you to display flat or grouped list of items in your mobile application."
                 },
                 {
@@ -161,14 +161,14 @@
                 {
                     "text": "Editing",
                     "url": "listview/editing.html",
-                    "title": "Kendo UI Mobile List View edit/delete operations",
-                    "meta": "This demo illustrates how implement edit/delete operations in Kendo UI ListView widget."
+                    "title": "Editing operations in Kendo UI Mobile ListView | Kendo UI ListView demo",
+                    "meta": "In this example you will learn how you can easily use editing operations in Kendo UI Mobile ListView."
                 },
                 {
                     "text": "Filtering",
                     "url": "listview/filtering.html",
-                    "title": "Kendo UI Mobile List View filtering",
-                    "meta": "This demo illustrates how implement filtering in Kendo UI ListView widget."
+                    "title": "Filtering in Kendo UI Mobile ListView | Kendo UI ListView demo",
+                    "meta": "Play with Kendo UI Mobile ListView demo to see the filtering capability in action. Keyword-based filtering is perfomed against the content in each list item. "
                 }
             ]
         },
@@ -360,8 +360,8 @@
                 {
                     "text": "Touch Events",
                     "url": "touch/index.html",
-                    "title": "Kendo UI Mobile Touch Events Demo",
-                    "meta": "This example shows the touch events, enabled in Kendo UI mobile framework. Power your mobile application with Kendo UI mobile events such as touch, swipe, tap."
+                    "title": "Touch Events Demo in Kendo UI jQuery-powered mobile framework",
+                    "meta": "Play with this Kendo UI Mobile demo to explore the touch events in Kendo UI Mobile advanced mobile app framework."
                 }
             ]
         },
@@ -380,8 +380,8 @@
                 {
                     "text": "Zoomable View",
                     "url": "view/zoomable.html",
-                    "title": "Zoomable view in Kendo UI Mobile Framework",
-                    "meta": "This demo shows how the contents of the mobile view can be zoomed by simply using pinch/zoom gestures."
+                    "title": "Zoomable View in Kendo UI Mobile App Framework | Kendo UI Mobile Demo",
+                    "meta": "In this Kendo UI Mobile demo you will see how the contents of the mobile view can be zoomed by simply using pinch/zoom gestures."
                 }
             ]
         },
