@@ -73,7 +73,7 @@
                 );
 
                 // ------------------------------------------------------------
-                module("Bullet Chart / Configuration", {
+                module("Bullet Chart / Rendering", {
                     setup: function() {
                         bulletChart = new dataviz.BulletChart(plotArea, {
                             series: [{
@@ -134,6 +134,36 @@
                     });
                 });
 
+            })();
+
+            (function() {
+                var chart;
+
+                function createBulletChart(options) {
+                    chart = createChart(kendo.deepExtend({
+                        series: [{
+                            type: "bullet",
+                            data: [[1,2]]
+                        }]
+                    }, options));
+                }
+
+                // ------------------------------------------------------------
+                module("Bullet Chart / Configuration", {
+                    teardown: function() {
+                        destroyChart();
+                    }
+                });
+
+                test("forces categoryAxis.justified to false", function() {
+                    createBulletChart({
+                        categoryAxis: {
+                            justified: true
+                        }
+                    });
+
+                    ok(!chart._plotArea.categoryAxis.options.justified);
+                });
             })();
 
         </script>
