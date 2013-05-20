@@ -49,7 +49,9 @@
                     "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
                 }, {
                     "text": "Binding to grouped data",
-                    "url": "area-charts/grouped-data.html"
+                    "url": "area-charts/grouped-data.html",
+                    "title": "Kendo UI Area Charts | Example of binding to grouped data",
+                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Area Charts."
             }],
             "name": "area-charts"
         }, {
@@ -59,7 +61,7 @@
             "items": [{
                     "text": "Basic usage",
                     "url": "bar-charts/index.html",
-                    "title": "Kendo UI Bar Chart widget demo",
+                    "title": "Demo for Kendo UI Bar Chart",
                     "meta": "This example illustrates the basic usage of Kendo UI Bar Chart which enables the user to show customized bar charts."
                 }, {
                     "text": "Column chart",
@@ -104,18 +106,18 @@
                 }, {
                     "text": "Plot bands",
                     "url": "bar-charts/plotbands.html",
-                    "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Plot Bands Example",
+                    "title": "Plot Bands example in Kendo UI Bar chart",
                     "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders."
                 }, {
                     "text": "Gap and spacing",
                     "url": "bar-charts/gap-spacing.html",
-                    "title": "Kendo UI jQuery Plotting - Kendo UI jQuery Gap and Spacing Example",
-                    "meta": "This sample demonstrates how to control the appearance of your Kendo UI jQuery bar charts."
+                    "title": "Gap and spacing in Kendo UI Bar Charts | Kendo UI DataViz demo",
+                    "meta": "With this example, you will be able to take a closer look at gap and spacing in Kendo UI Bar Charts. Set gap and spacing values to play with the demo."
                 }, {
                     "text": "Pan and zoom",
                     "url": "bar-charts/pan-and-zoom.html",
-                    "title": "Pan and zoom example | Kendo UI Bar Charts",
-                    "meta": "This demo shows how to implement pan and zoom in Kendo UI Bar Charts by filtering the the DataSource component.",
+                    "title": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo",
+                    "meta": "Achieve pan and zoom effect in Kendo UI Bar charts. This example demonstrates how you can apply pan and zoom to your bar charts.",
                     "packages": [ "!mvc" ]
             }],
             "name": "bar-charts"
@@ -152,13 +154,19 @@
             "new": true,
             "items": [{
                     "text": "Basic usage",
-                    "url": "bullet-charts/index.html"
+                    "url": "bullet-charts/index.html",
+                    "title": "Bullet Charts Example | Kendo UI JavaScript data visualization components",
+                    "meta": "Kendo UI jQuery-based Bullet Charts provide a rich data visualization. In this basic usage demo we will create a horizontal Kendo UI Bullet Chart."
             }, {
                     "text": "Binding to local data",
-                    "url": "bullet-charts/local-data.html"
+                    "url": "bullet-charts/local-data.html",
+                    "title": "Local Data Binding in Bullet Charts | Kendo UI Bullet charts demo",
+                    "meta": "In this example we will bind local data to the Kendo UI Bullet Chart in order to show the behavior of the component."
             }, {
                     "text": "Binding to remote data",
-                    "url": "bullet-charts/remote-data.html"
+                    "url": "bullet-charts/remote-data.html",
+                    "title": "Binding Kendo UI Bullet Chart to remote data",
+                    "meta": "This online demo will show you how to bind a Kendo UI Bullet Chart to remote data."
             }]
         }, {
             "text": "Line Charts",
@@ -208,12 +216,12 @@
             "items": [{
                     "text": "Basic usage",
                     "url": "donut-charts/index.html",
-                    "title": "Kendo UI Donut Charts Example",
+                    "title": "Example of Kendo UI Donut Charts",
                     "meta": "This demo shows the core functionality of Kendo UI jQuery Donut Charts which visualize the breakdown of data into its elements."
                 }, {
                     "text": "Donut labels",
                     "url": "donut-charts/donut-labels.html",
-                    "title": "Donut labels demo | Kendo UI Donut Charts",
+                    "title": "Configuration of donut labels in Kendo UI Donut charts",
                     "meta": "This example shows how to configure the values of Kendo UI jQuery Donut Charts, enable/disable donut labels and specify how they are aligned to the chart."
                 }, {
                     "text": "Binding to remote data",
@@ -223,7 +231,7 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "donut-charts/local-data.html",
-                    "title": "Kendo UI Donut Charts binding to local data example",
+                    "title": "Local data binding in Kendo UI Donut Charts",
                     "meta": "This demo illustrates how Kendo UI Donut Charts widget can be bound to local data to deliver high-performance business application."
             }],
             "name": "donut-charts"
@@ -295,8 +303,8 @@
                 }, {
                     "text": "Pan and zoom",
                     "url": "scatter-charts/pan-and-zoom.html",
-                    "title": "Pan and zoom example | Kendo UI DataViz Demos",
-                    "meta": "This demo shows how to implement pan and zoom in Kendo UI Scatter Charts by filtering the the DataSource component.",
+                    "title": "Pan and zoom in Kendo UI Scatter Charts",
+                    "meta": "In this example we demonstrate pan and zoom effects in Kendo UI Scatter Charts. Look at the source code to learn how to filter the DataSource component.",
                     "packages": [ "!mvc" ]
             }],
             "name": "scatter-charts"
@@ -307,13 +315,19 @@
             "new": true,
             "items": [{
                 "text": "Basic usage",
-                "url": "sparklines/index.html"
+                "url": "sparklines/index.html",
+                "title": "Sparkline Charts | Kendo UI Sparklines demo",
+                "meta": "In this interactive demo, we show the basic usage of Kendo UI Sparkline control which enables end users to identify trends, variations in the data."
             }, {
                 "text": "Binding to remote data",
-                "url": "sparklines/remote-data.html"
+                "url": "sparklines/remote-data.html",
+                "title": "Binding to remote data in Kendo UI Sparkline Chart | Kendo UI Sparklines",
+                "meta": "This Kendo UI Demo shows how to bind to remote data in Kendo UI Sparklines charting control."
             }, {
                 "text": "Binding to local data",
-                "url": "sparklines/local-data.html"
+                "url": "sparklines/local-data.html".
+                "title": "Local data binding in Kendo UI Sparkline Chart | Kendo UI Sparklines",
+                "meta": "Learn how to bind local data to Kendo UI jQuery Sparkline charting component. Try it now!"
             }],
             "name": "sparklines"
         }, {
@@ -333,8 +347,8 @@
                 }, {
                     "text": "Selection",
                     "url": "api/selection.html",
-                    "title": "Axis selection for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
-                    "meta": "This sample demonstrates how to configure axis selection."
+                    "title": "Axis selection in Kendo UI charting components | Kendo UI DataViz demo",
+                    "meta": "Take a look at this example that illustrates how to configure the axis selection in Kendo UI HTML5-powered charting widgets."
 				}, {
 					"text": "Benchmark",
 					"packages": [ "!mvc" ],
@@ -351,7 +365,7 @@
             "items": [{
                 "text": "Basic usage",
                 "url": "radial-gauge/index.html",
-                "title": "Kendo UI Radial Gauge Demo",
+                "title": "Demo for core features in Kendo UI Radial Gauge widget",
                 "meta": "This sample demonstrates the core functionality of Kendo UI Radial Gauge which helps you easily visualize an indicator within a range of values."
             }, {
                 "text": "Scale options",
@@ -384,13 +398,19 @@
             "spriteCssClass": "chartStockIcon",
             "items": [{
                 "text": "Basic usage",
-                "url": "financial/index.html"
+                "url": "financial/index.html",
+                "title": "Example of Kendo UI charts for stock analysis apps",
+                "meta": "With this demo for a stock chart, built with Kendo UI, you will be able to find out how Kendo UI chart widgets can be implemented in a financial app."
             }, {
                 "text": "Multiple panes",
-                "url": "financial/panes.html"
+                "url": "financial/panes.html",
+                "title": "Multiple panes in Kendo UI stock chart",
+                "meta": "This demo illustrates the use of multiple graph panes in Kendo UI Stock chart."
             }, {
                 "text": "Virtualization",
-                "url": "financial/virtualization.html"
+                "url": "financial/virtualization.html",
+                "title": "Virtualization in Kendo UI Stock Chart",
+                "meta": "In this example we show you how the virtualization works in Kendo UI Stock Chart for rich data visualization."
             }],
             "name": "stock-chart"
         }
