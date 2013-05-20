@@ -216,6 +216,7 @@ kendo_module({
             that.total = scaledTotal;
             that.min = Math.min(that.max, that.size - scaledTotal);
             that.minScale = that.size / total;
+            console.log(that.minScale, that.size, total);
 
             that.enabled = that.forcedEnabled || (scaledTotal > size);
 
@@ -252,7 +253,7 @@ kendo_module({
             that.x.update();
             that.y.update();
             that.enabled = that.x.enabled || that.y.enabled;
-            that.minScale = that.forcedMinScale || Math.max(that.x.minScale, that.y.minScale);
+            that.minScale = that.forcedMinScale || Math.min(that.x.minScale, that.y.minScale);
             that.trigger(CHANGE);
         }
     });

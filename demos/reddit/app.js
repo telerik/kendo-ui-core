@@ -1,10 +1,11 @@
 var PAGE_SIZE = 40;
+
 var awwDataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: 'http://www.reddit.com/r/aww.json',
-            dataType: 'jsonp',
-            jsonp: 'jsonp',
+            url: "http://www.reddit.com/r/aww.json",
+            dataType: "jsonp",
+            jsonp: "jsonp",
             cache: true,
         },
 
@@ -28,12 +29,12 @@ var awwDataSource = new kendo.data.DataSource({
 });
 
 function renderThumbs(element) {
-    element.find('.loading-thumb').each(function() {
-        var thumb = $(this).data('thumb');
-        if (thumb === 'default') {
-            thumb = 'missing-thumb.png';
+    element.find(".loading-thumb").each(function() {
+        var thumb = $(this).data("thumb");
+        if (thumb === "default") {
+            thumb = "missing-thumb.png";
         }
-        $(this).removeClass('loading-thumb').addClass('thumb').css('backgroundImage', 'url(' + thumb + ')');
+        $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
     });
 }
 
@@ -43,18 +44,23 @@ function isImage(url) {
 
 function showDetail(e) {
     var dataItem = e.dataItem;
+
     if (dataItem) {
-        var url = dataItem.data.url;
-        if (isImage(url)) {
-            app.navigate("#detail?id=" + dataItem.uid);
-        } else {
-            window.open(url, '_detail');
-        }
+        navigateTo(dataItem);
+    }
+}
+
+function navigateTo(dataItem) {
+    var url = dataItem.data.url;
+    if (isImage(url)) {
+        app.navigate("#detail?id=" + dataItem.uid);
+    } else {
+        window.open(url, "_detail");
     }
 }
 
 function resetDetail(e) {
-    e.view.element.find('img').attr('src', '');
+    e.view.element.find("img").attr("src", '');
     e.view.scroller.reset();
 }
 
@@ -69,6 +75,7 @@ function renderDetail(e) {
         };
 
     element.find('img').attr('src', url);
+    view.scroller.zoomOut();
 }
 
 function showThumbsOnScrollComplete(e) {

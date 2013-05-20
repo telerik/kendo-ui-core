@@ -360,8 +360,12 @@ kendo_module({
 
         reset: function() {
             this.movable.moveTo({x: 0, y: 0});
-            this.movable.scaleTo(1);
-            this.dimensions.rescale(1);
+            this._scale(1);
+        },
+
+
+        zoomOut: function() {
+            this._scale(this.dimensions.minScale);
         },
 
         scrollTo: function(x, y) {
@@ -379,6 +383,12 @@ kendo_module({
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.userEvents.destroy();
+        },
+
+        _scale: function(scale) {
+            console.log('scaling to', scale);
+            this.dimensions.rescale(scale);
+            this.movable.scaleTo(scale);
         },
 
         _initPullToRefresh: function() {
