@@ -1468,12 +1468,21 @@
                 });
 
                 // ------------------------------------------------------------
-                module("CSS Class");
+                module("Misc", {
+                    teardown: destroyChart
+                });
 
                 test("renders k-chart class", function() {
                     createChart({ theme: "test" });
 
                     ok($("#container").hasClass("k-chart"));
+                });
+
+                test("DataSource is not mangled", function() {
+                    var ds = new kendo.data.DataSource();
+
+                    createChart({ dataSource: ds });
+                    ok(chart.options.dataSource instanceof kendo.data.DataSource);
                 });
 
             })();
