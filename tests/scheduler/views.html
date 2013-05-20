@@ -1312,7 +1312,7 @@
                 var thirdTimeSlot = view.content.find("tr").eq(16).find("td:first");
 
                 equal(eventElements.first().offset().top, firstTimeSlot.offset().top);
-                equal(eventElements.first().width(), Math.floor((firstTimeSlot.width() - rightOffset) / 4));
+                equal(eventElements.first().width(), Math.round((firstTimeSlot.width() - rightOffset) / 4));
 
                 equal(eventElements.eq(1).offset().left, firstTimeSlot.offset().left + eventElements.first().width());
 
