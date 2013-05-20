@@ -755,6 +755,23 @@ kendo_module({
                             range.collapse(true);
                             editor.selectRange(range);
                         }
+                    } else if (e.keyCode == keys.LEFT || e.keyCode == keys.RIGHT) {
+                        // skip bom nodes when navigating with arrows (IE 7/8)
+                        range = editor.getRange();
+                        var left = e.keyCode == keys.LEFT;
+                        var container = range[left ? "startContainer" : "endContainer"];
+                        var offset = range[left ? "startOffset" : "endOffset"];
+                        var direction = left ? -1 : 1;
+
+                        if (left) {
+                            offset -= 1;
+                        }
+
+                        if (container.nodeType == 3 && container.nodeValue[offset] == "\ufeff") {
+                            range.setStart(container, offset + direction);
+                            range.collapse(true);
+                            editor.selectRange(range);
+                        }
                     }
 
                     var toolName = editor.keyboard.toolFromShortcut(editor.toolbar.options.tools, e);
