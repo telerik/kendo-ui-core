@@ -37,7 +37,7 @@ kendo_module({
                 '#}#'  +
             '</ul>' +
             '</div>'),
-        DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment">' +
+        DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}">' +
                 '<dl>' +
                     '<dt>${formattedTime}</dt>' +
                     '<dd>${title}</dd>' +
@@ -45,7 +45,7 @@ kendo_module({
                 //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 //'<span class="k-icon k-resize-handle"></span>' +
                 '</div>'),
-        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment">' +
+        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}">' +
                 '<dl><dd>${title}</dd></dl>' +
                 //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 //'<span class="k-icon k-resize-handle"></span>' +
@@ -504,6 +504,7 @@ kendo_module({
             eventTimeFormat: "{0:H:mm} - {1:H:mm}",
             timeFormat: "HH:mm",
             selectedDateFormat: "{0:D}",
+            titleAttrFormat: "({0}): {1}",
             allDaySlot: true,
             title: "",
             startTime: TODAY,
@@ -953,8 +954,11 @@ kendo_module({
        },
 
         _createEventElement: function(event, template) {
+            var formattedTime = kendo.format(this.options.eventTimeFormat, event.start, event.end),
+                titleAttr = this.options.titleAttrFormat;
+
             return $(template(extend({}, {
-                formattedTime: kendo.format(this.options.eventTimeFormat, event.start, event.end)
+                formattedTime: formattedTime, titleAttr: kendo.format(titleAttr, formattedTime, event.title)
             }, event)));
         },
 

@@ -708,6 +708,24 @@
                 equal(view.content.find(".k-appointment dd").text(), "my event");
             });
 
+            test("title attribute is set to the event wrapper element", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.renderEvents(events);
+
+                equal(view.content.find("div.k-appointment").attr("title"), "(10:00 - 11:00): my event");
+            });
+
+
             test("multiple events are displayed", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
