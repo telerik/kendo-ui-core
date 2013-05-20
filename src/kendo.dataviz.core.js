@@ -290,10 +290,10 @@ kendo_module({
         center: function() {
             var box = this;
 
-            return {
-                x: box.x1 + box.width() / 2,
-                y: box.y1 + box.height() / 2
-            };
+            return new Point2D(
+                box.x1 + box.width() / 2,
+                box.y1 + box.height() / 2
+            );
         },
 
         containsPoint: function(point) {

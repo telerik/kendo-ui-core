@@ -2267,7 +2267,6 @@ kendo_module({
                 measureBox = new Box2D(),
                 divs = axis.majorDivisions(),
                 labels = axis.labels,
-                reverse = axis.options.reverse,
                 labelBox,
                 i;
 
@@ -2288,7 +2287,6 @@ kendo_module({
         divisions: function(step, skipStep) {
             var axis = this,
                 options = axis.options,
-                reverse = options.reverse,
                 divisions = axis.getDivisions(step),
                 angle = options.min,
                 divs = [],
@@ -4798,11 +4796,10 @@ kendo_module({
             var segment = this,
                 chart = segment.parent,
                 plotArea = chart.plotArea,
-                categoryAxis = plotArea.categoryAxis,
-                center = categoryAxis.box.center(),
+                polarAxis = plotArea.polarAxis,
+                center = polarAxis.box.center(),
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints);
-
 
             points.unshift(center);
             points.push(center);
@@ -5077,20 +5074,28 @@ kendo_module({
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
 
-    var PolarLineChart = ScatterLineChart.extend({
+    var PolarScatterChart = ScatterChart.extend({
         pointSlot: function(slotX, slotY) {
             var valueRadius = slotX.c.y - slotY.y1,
                 slot = Point2D.onCircle(slotX.c, slotX.startAngle, valueRadius);
 
             return new Box2D(slot.x, slot.y, slot.x, slot.y);
+        }
+    });
+
+    var PolarLineChart = ScatterLineChart.extend({
+        pointSlot: PolarScatterChart.fn.pointSlot
+    });
+
+    var PolarAreaChart = PolarLineChart.extend({
+        createSegment: function(linePoints, currentSeries, seriesIx) {
+            var chart = this;
+
+            return new RadarAreaSegment(linePoints, [], currentSeries, seriesIx);
         },
 
-        createSegment: function(linePoints, currentSeries, seriesIx) {
-            var segment = new LineSegment(linePoints, currentSeries, seriesIx);
-            // TODO: User option?
-            //segment.options.closed = true;
-
-            return segment;
+        seriesMissingValues: function(series) {
+            return series.missingValues || ZERO;
         }
     });
 
@@ -8593,6 +8598,16 @@ kendo_module({
                 plotArea.filterSeriesByType(series, [POLAR_LINE]),
                 pane
             );
+
+            plotArea.createScatterChart(
+                plotArea.filterSeriesByType(series, [POLAR_SCATTER]),
+                pane
+            );
+
+            plotArea.createAreaChart(
+                plotArea.filterSeriesByType(series, [POLAR_AREA]),
+                pane
+            );
         },
 
         createLineChart: function(series, pane) {
@@ -8604,6 +8619,28 @@ kendo_module({
                 lineChart = new PolarLineChart(plotArea, { series: series });
 
             plotArea.appendChart(lineChart, pane);
+        },
+
+        createScatterChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                scatterChart = new PolarScatterChart(plotArea, { series: series });
+
+            plotArea.appendChart(scatterChart, pane);
+        },
+
+        createAreaChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                areaChart = new PolarAreaChart(plotArea, { series: series });
+
+            plotArea.appendChart(areaChart, pane);
         },
 
         click: function(chart, e) {
