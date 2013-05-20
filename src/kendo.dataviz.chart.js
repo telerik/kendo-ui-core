@@ -6875,7 +6875,7 @@ kendo_module({
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
             var plotArea = this,
                 centeredSeries = plotArea.filterSeriesByType(
-                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK]
+                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK, BULLET]
                 ),
                 seriesIx,
                 seriesAxis;
@@ -6912,7 +6912,7 @@ kendo_module({
                     }, axisOptions);
 
                     if (!defined(axisOptions.justified)) {
-                        axisOptions.justified = plotArea.inJustified();
+                        axisOptions.justified = plotArea.isJustified();
                     }
 
                     if (plotArea.axisRequiresRounding(name, i)) {
@@ -6951,7 +6951,7 @@ kendo_module({
             }
         },
 
-        inJustified: function() {
+        isJustified: function() {
             var plotArea = this,
                 series = plotArea.series,
                 i, currentSeries;
