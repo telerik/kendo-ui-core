@@ -712,7 +712,7 @@ kendo_module({
                 link = target.closest("." + LINK),
                 element = target.closest(allItemsSelector),
                 href = link.attr("href"), childGroup, childGroupVisible,
-                isLink = (!!href && href.charAt(href.length - 1) != "#");
+                isLink = (!!href && href !== $("<a href='#' />").attr("href"));
 
             if (element.children(templateSelector)[0]) {
                 return;
