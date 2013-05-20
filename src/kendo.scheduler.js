@@ -880,7 +880,7 @@ kendo_module({
             return -1;
         },
 
-        _positonAllDayEvent: function(element, slots, startIndex, endIndex, slotWidth) {
+        _positionAllDayEvent: function(element, slots, startIndex, endIndex, slotWidth) {
             if (startIndex < 0) {
                 startIndex = 0;
             }
@@ -890,23 +890,35 @@ kendo_module({
             }
 
             var dateSlot = slots.eq(startIndex),
-                numberOfSlots = Math.ceil(endIndex - startIndex);
+                numberOfSlots = Math.ceil(endIndex - startIndex),
+                allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
+                top = dateSlot.position().top,
+                bottomOffset = (dateSlot.height() * 0.10),
+                eventHeight = (dateSlot.height() - bottomOffset) / allDayEvents.length;
                 //allDayEventOffset = 10;
 
-                element
-                    .css({
-                        left: dateSlot.position().left,
-                        top: dateSlot.position().top,
-                        width: slotWidth * (numberOfSlots + 1)
-                        //height: dateSlot.height() - allDayEventOffset
-                    });
+            element
+                .css({
+                    left: dateSlot.position().left,
+                    width: slotWidth * (numberOfSlots + 1)
+                });
+
+            element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
+
+            allDayEvents.each(function(idx) {
+                $(this).css({
+                    height: eventHeight,
+                    top: top + eventHeight * idx,
+                });
+            });
         },
 
         _arrangeColumns: function(element, dateSlotIndex, dateSlot) {
             var columns,
                 eventRightOffset = 30,
                 blockRange = rangeIndex(element),
-                slotEvents = this._getCollisionEvents(dateSlotIndex, blockRange.start, blockRange.end).add(element);
+                eventElements = this.content.children(".k-appointment[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
+                slotEvents = this._getCollisionEvents(eventElements, blockRange.start, blockRange.end).add(element);
 
             columns = createColumns(slotEvents);
 
@@ -966,9 +978,8 @@ kendo_module({
                 isInDateRange(slotEnd, event.start, event.end);
         },
 
-        _getCollisionEvents: function(slotIndex, start, end) {
-            var elements = this.content.children(".k-appointment[" + kendo.attr("slot-idx") + "=" + slotIndex + "]"),
-                offset = 0,
+        _getCollisionEvents: function(elements, start, end) {
+            var offset = 0,
                 idx,
                 length,
                 index,
@@ -1027,7 +1038,7 @@ kendo_module({
 
                        this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
                    } else {
-                       this._positonAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
+                       this._positionAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
                    }
 
                    element.appendTo(container);

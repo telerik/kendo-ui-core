@@ -1387,6 +1387,113 @@
 
                 equal(eventElement.attr("data-start-end-idx"), "8-12");
             });
+
+            test("position multiple overlapping all day events in a single slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 13, 0, 0), title: "second event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.datesHeader.find("div.k-appointment");
+
+                var slotOffset = view.allDayHeader.find("td").eq(0).offset();
+                var slotWidth = view.allDayHeader.find("td").innerWidth();
+
+                equal(eventElements.first().offset().top, slotOffset.top);
+                equal(eventElements.last().offset().top, slotOffset.top + eventElements.first().height());
+
+                equal(eventElements.first().offset().left, slotOffset.left);
+                equal(eventElements.last().offset().left, slotOffset.left);
+
+                equal(eventElements.first().width(), slotWidth * 2);
+                equal(eventElements.first().width(), eventElements.last().width());
+            });
+
+            test("position multiple not overlapping all day events", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0),
+                            new Date(2013, 1, 28, 0, 0, 0),
+                            new Date(2013, 1, 29, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "second event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.datesHeader.find("div.k-appointment");
+
+                var firstEventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
+                var secondEventSlotOffset = view.allDayHeader.find("td").eq(2).offset();
+
+                var slotWidth = view.allDayHeader.find("td").innerWidth();
+
+                equal(eventElements.first().offset().top, firstEventSlotOffset.top);
+                equal(eventElements.last().offset().top, secondEventSlotOffset.top);
+
+                equal(eventElements.first().offset().left, firstEventSlotOffset.left);
+                equal(eventElements.last().offset().left, secondEventSlotOffset.left);
+
+                equal(eventElements.first().width(), slotWidth * 2);
+                equal(eventElements.last().width(), eventElements.first().width());
+            });
+
+            test("set height of multiple overlapping all day events across multiple slots", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0),
+                            new Date(2013, 1, 28, 0, 0, 0),
+                            new Date(2013, 1, 29, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    { start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    { start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 28, 13, 0, 0), title: "second event" },
+                    { start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "third event" }
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.datesHeader.find("div.k-appointment");
+
+                var eventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
+                var eventSlotHeigth = view.allDayHeader.find("td").eq(0).height();
+                var eventHeight = Math.round((eventSlotHeigth - eventSlotHeigth * 0.10) / 3);
+
+                equal(eventElements.eq(0).offset().top, eventSlotOffset.top);
+                equal(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
+
+                equal(eventElements.eq(0).height(), eventHeight);
+                equal(eventElements.eq(1).height(), eventHeight)
+                equal(eventElements.eq(2).height(), eventHeight);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
