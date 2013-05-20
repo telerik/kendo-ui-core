@@ -325,7 +325,7 @@
                 "meta": "This Kendo UI Demo shows how to bind to remote data in Kendo UI Sparklines charting control."
             }, {
                 "text": "Binding to local data",
-                "url": "sparklines/local-data.html".
+                "url": "sparklines/local-data.html",
                 "title": "Local data binding in Kendo UI Sparkline Chart | Kendo UI Sparklines",
                 "meta": "Learn how to bind local data to Kendo UI jQuery Sparkline charting component. Try it now!"
             }],
@@ -349,10 +349,10 @@
                     "url": "api/selection.html",
                     "title": "Axis selection in Kendo UI charting components | Kendo UI DataViz demo",
                     "meta": "Take a look at this example that illustrates how to configure the axis selection in Kendo UI HTML5-powered charting widgets."
-				}, {
-					"text": "Benchmark",
-					"packages": [ "!mvc" ],
-					"url": "api/benchmark.html"
+                }, {
+                    "text": "Benchmark",
+                    "packages": [ "!mvc" ],
+                    "url": "api/benchmark.html"
             }],
             "name": "api"
         }
