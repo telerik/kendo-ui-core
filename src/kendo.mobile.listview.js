@@ -519,6 +519,10 @@ kendo_module({
                     footer.enable();
                 });
 
+                kendo.onResize(function() {
+                    that.list.refresh();
+                })
+
                 that.list.bind("endReached", function() {
                     footer.disable();
                 });
