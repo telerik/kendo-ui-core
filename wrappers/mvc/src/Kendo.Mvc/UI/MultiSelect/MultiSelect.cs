@@ -41,6 +41,12 @@
             set;
         }
 
+        public int? MaxSelectedItems
+        {
+            get;
+            set;
+        }
+
         public int? MinLength
         {
             get;
@@ -136,6 +142,11 @@
             if (HighlightFirst != null)
             {
                 options["highlightFirst"] = HighlightFirst;
+            }
+
+            if (MaxSelectedItems != null)
+            {
+                options["maxSelectedItems"] = MaxSelectedItems;
             }
 
             if (MinLength != null)
