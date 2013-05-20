@@ -250,9 +250,9 @@ kendo_module({
 
             that.inner = element.children().first();
             that.pages = [];
-            that._forRefresh = null;
+            that._needsRefresh = false;
 
-            that.inner.css("height", that.options.contentHeight);
+            //that.inner.css("height", that.options.contentHeight);
 
             var movable,
                 transition,
@@ -318,7 +318,8 @@ kendo_module({
 
             that.batchBuffer.bind({
                 "resize": proxy(that._onResize, that),
-                "reset": proxy(that._onReset, that)
+                "reset": proxy(that._onReset, that),
+                "endreached": proxy(that._onEndReached, that)
             });
 
             that._initPages();
@@ -335,6 +336,10 @@ kendo_module({
             template: "",
             emptyTemplate: ""
         },
+
+        events: [
+            "changed"
+        ],
 
         refresh: function () {
             var that = this,
@@ -441,8 +446,7 @@ kendo_module({
 
         _transitionEnd: function (e) {
             var that = this,
-                pages = that.pages,
-                pageToBeUpdated;
+                pages = that.pages;
 
             if(that.movable.x === 0) {
                 return;
@@ -462,14 +466,29 @@ kendo_module({
             pages[2].position(1);
 
             that._resetMovable();
+            that.trigger("changed", {
+                element: pages[1].element,
+                page: pages[1]
+            });
         },
 
         _onResize: function (e) {
-            console.log("resize");
+            var that = this,
+                page = that.pages[2],
+                idx = that.itemCount - 1;
+
+            if(that._needsRefresh) {
+                that.setPageContent(page, idx);
+                that._needsRefresh = false;
+            }
         },
 
         _onReset: function (e) {
             this._resetPages();
+        },
+
+        _onEndReached: function (e) {
+            this._needsRefresh = true;
         },
 
         setPageContent: function (page, index) {
@@ -480,13 +499,11 @@ kendo_module({
 
             if(index >= 0) {
                 view = batchBuffer.at(index);
-                console.log(view);
+
                 if(view) {
                     page.content(template(view));
                 } else {
-                    console.log("data is not available");
-                    this._forRefresh = { page: page, index: index };
-                    // batchBuffer.trigger("endreached", { index: index, page: page });
+                    page.content(emptyTemplate({}));
                 }
             } else {
                 page.content(emptyTemplate({}));
@@ -521,23 +538,20 @@ kendo_module({
             this.dataSource = dataSource;
             this.batchSize = batchSize;
             this.total = 0;
+
             this.buffer = new kendo.data.Buffer(dataSource, batchSize * 3);
 
             this.buffer.bind({
                 "endreached": function (e) {
-                    console.log("BatchBuffer: endreached");
                     batchBuffer.trigger("endreached", { index: e.index });
                 },
                 "prefetching": function (e) {
-                    console.log("prefetching");
                     batchBuffer.trigger("prefetching", { skip: e.skip, take: e.take });
                 },
                 "prefetched": function (e) {
-                    console.log("prefetched");
                     batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
                 },
                 "reset": function (e) {
-                    console.log("reset");
                     batchBuffer.total = 0;
                     batchBuffer.trigger("reset");
                 },
@@ -546,7 +560,6 @@ kendo_module({
                     batchBuffer.trigger("resize", { total: batchBuffer.total, offset: this.offset });
                 }
             });
-
         },
         at: function (index) {
             var buffer = this.buffer,
