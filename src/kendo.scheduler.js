@@ -112,9 +112,9 @@ kendo_module({
             msMax = max.getTime(),
             msValue;
 
-        //if (msMin >= msMax) {
+        if (msMin >= msMax) {
             msMax += MS_PER_DAY;
-        //}
+        }
 
         msValue = value.getTime();
 
@@ -958,7 +958,7 @@ kendo_module({
 
         _isInDateSlot: function(event) {
             var slotStart = this.startDate,
-                slotEnd = this.endDate;
+                slotEnd = new Date(this.endDate.getTime() + MS_PER_DAY);
 
             return isInDateRange(event.start, slotStart, slotEnd) ||
                 isInDateRange(event.end, slotStart, slotEnd) ||
