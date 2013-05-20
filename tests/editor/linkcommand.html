@@ -29,7 +29,7 @@
                     editor = getEditor();
                 },
                 teardown: function() {
-                    $(".k-window,.k-overlay").remove()
+                    $(".k-window,.k-overlay").remove();
                 }
             });
 
@@ -45,7 +45,7 @@
                 execLinkCommandOnRange(range);
 
                 $(".k-dialog-close").click();
-                equal($(".k-window").length, 0)
+                equal($(".k-window").length, 0);
             });
 
             test("clicking insert closes the window", function() {
@@ -53,14 +53,14 @@
                 execLinkCommandOnRange(range);
 
                 $(".k-dialog-insert").click();
-                equal($(".k-window").length, 0)
+                equal($(".k-window").length, 0);
             });
 
             test("text is filled when only text is selected", function() {
                 var range = createRangeFromText(editor, "|foo bar|");
                 execLinkCommandOnRange(range);
 
-                equal($("#k-editor-link-text").val(), "foo bar")
+                equal($("#k-editor-link-text").val(), "foo bar");
             });
 
             test("text is removed if more than one text node is selected", function() {
@@ -68,7 +68,7 @@
                 execLinkCommandOnRange(range);
 
                 equal($("label[for=k-editor-link-text]").length, 0)
-                equal($("#k-editor-link-text").length, 0)
+                equal($("#k-editor-link-text").length, 0);
             });
 
             test("collapsed range is expanded", function() {
@@ -80,7 +80,7 @@
 
                 execLinkCommandOnRange(range);
 
-                equal($("#k-editor-link-text").val(), "foo")
+                equal($("#k-editor-link-text").val(), "foo");
             });
 
             test("clicking insert inserts link if url is set", function() {
@@ -89,7 +89,7 @@
 
                 $("#k-editor-link-url").val("foo");
                 $(".k-dialog-insert").click();
-                equal(editor.value(), '<a href="foo">foo</a>')
+                equal(editor.value(), '<a href="foo">foo</a>');
             });
 
             test("clicking insert does not inserts link if url is not set", function() {
@@ -98,7 +98,47 @@
 
                 $("#k-editor-link-url").val("");
                 $(".k-dialog-insert").click();
-                equal(editor.value(), "foo")
+                equal(editor.value(), "foo");
+            });
+
+            test("clicking insert inserts mailto if email address is typed", function() {
+                var range = createRangeFromText(editor, "|foo|"),
+                    url = "foo@bar.baz";
+                execLinkCommandOnRange(range);
+
+                $("#k-editor-link-url").val(url);
+                $(".k-dialog-insert").click();
+                equal(editor.value(), '<a href="mailto:'+ url +'">foo</a>');
+            });
+
+            test("clicking insert does not insert mailto if protocol is typed", function() {
+                var range = createRangeFromText(editor, "|foo|"),
+                    url = "ftp://foo@bar.baz";
+                execLinkCommandOnRange(range);
+
+                $("#k-editor-link-url").val(url);
+                $(".k-dialog-insert").click();
+                equal(editor.value(), '<a href="' + url + '">foo</a>');
+            });
+
+            test("clicking insert does not insert mailto if already typed", function() {
+                var range = createRangeFromText(editor, "|foo|"),
+                    url = "mailto:foo@bar.baz";
+                execLinkCommandOnRange(range);
+
+                $("#k-editor-link-url").val(url);
+                $(".k-dialog-insert").click();
+                equal(editor.value(), '<a href="' + url + '">foo</a>');
+            });
+
+            test("clicking insert does not insert mailto if protocol-less url is typed", function() {
+                var range = createRangeFromText(editor, "|foo|"),
+                    url = "//foo.bar";
+                execLinkCommandOnRange(range);
+
+                $("#k-editor-link-url").val(url);
+                $(".k-dialog-insert").click();
+                equal(editor.value(), '<a href="' + url + '">foo</a>');
             });
 
             test("clicking insert updates existing url", function() {
@@ -107,7 +147,7 @@
 
                 $("#k-editor-link-url").val("foo");
                 $(".k-dialog-insert").click();
-                equal(editor.value(), '<a href="foo">foo</a>')
+                equal(editor.value(), '<a href="foo">foo</a>');
             });
 
             test("url text is set", function() {
@@ -130,7 +170,7 @@
 
                 $("#k-editor-link-url").val("foo").trigger(evt("keydown", 13));
 
-                equal(editor.value(), '<a href="foo">foo</a>')
+                equal(editor.value(), '<a href="foo">foo</a>');
                 equal($(".k-window").length, 0);
             });
             test("hitting esc in url cancels", function() {
@@ -139,7 +179,7 @@
 
                 $("#k-editor-link-url").val("foo").trigger(evt("keydown", 27));
 
-                equal(editor.value(), "foo")
+                equal(editor.value(), "foo");
                 equal($(".k-window").length, 0);
             });
 
@@ -172,7 +212,7 @@
                 $("#k-editor-link-url").val("foo");
                 $("#k-editor-link-text").trigger(evt("keydown", 27));
 
-                equal(editor.value(), "foo")
+                equal(editor.value(), "foo");
                 equal($(".k-window").length, 0);
             });
 
@@ -183,7 +223,7 @@
                 $("#k-editor-link-url").val("foo");
                 $("#k-editor-link-title").trigger(evt("keydown", 27));
 
-                equal(editor.value(), "foo")
+                equal(editor.value(), "foo");
                 equal($(".k-window").length, 0);
             });
 
@@ -193,7 +233,7 @@
 
                 $(".k-window").css({width:200,height:300}).find(".k-i-close").click();
 
-                equal(editor.value(), "foo")
+                equal(editor.value(), "foo");
                 equal($(".k-window").length, 0);
             });
 
@@ -202,7 +242,7 @@
                 execLinkCommandOnRange(range);
 
                 $("#k-editor-link-url").val("foo");
-                $("#k-editor-link-title").val("bar")
+                $("#k-editor-link-title").val("bar");
                 $(".k-dialog-insert").click();
 
                 equal(editor.value(), '<a href="foo" title="bar">foo</a>')
@@ -299,7 +339,7 @@
                 execLinkCommandOnRange(range);
                 $(".k-dialog-insert").click();
 
-                equal(editor.value(), "foo")
+                equal(editor.value(), "foo");
             });
 
             test("exec inserts link with empty range", function() {
@@ -314,7 +354,7 @@
                 $("#k-editor-link-url").val("bar");
                 $(".k-dialog-insert").click();
 
-                equal(editor.value(), 'foo <a href="bar">bar</a>')
+                equal(editor.value(), 'foo <a href="bar">bar</a>');
             });
 
             test("dialog title can be localized", function() {

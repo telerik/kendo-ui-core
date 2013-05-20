@@ -141,6 +141,11 @@ var LinkCommand = Command.extend({
                 title, text, target;
 
             if (href && href != "http://") {
+
+                if (href.indexOf("@") > 0 && !/^(\w+:)|(\/\/)/i.test(href)) {
+                    href = "mailto:" + href;
+                }
+
                 that.attributes = { href: href };
 
                 title = $("#k-editor-link-title", element).val();
