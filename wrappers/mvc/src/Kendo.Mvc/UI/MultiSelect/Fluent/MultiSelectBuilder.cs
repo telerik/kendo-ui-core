@@ -232,6 +232,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies the limit of the selected items. If set to null widget will not limit number of the selected items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .MinLength(3)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MultiSelectBuilder MaxSelectedItems(int maxItems)
+        {
+
+            Component.MaxSelectedItems = maxItems;
+
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the minimum number of characters that should be typed before the widget queries the dataSource.
         /// </summary>
         /// <example>
