@@ -1031,11 +1031,11 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                    var dateSlotIndex = this._dateSlotIndex(event.start),
                        endDateSlotIndex = this._dateSlotIndex(event.end),
-                       isSameDayEvent = event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event),
+                       isSameDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event),
                        container = isSameDayEvent ? this.content : allDayEventContainer,
                        element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate);
 
-                   if (isSameDayEvent) {
+                   if (isSameDayEvent && !event.isAllDay) {
                        if (dateSlotIndex === -1 && endDateSlotIndex > -1) {
                            dateSlotIndex = endDateSlotIndex;
                        }

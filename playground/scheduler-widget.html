@@ -294,6 +294,9 @@
             {
                 margin:0;
                 padding:0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .k-appointment dl
@@ -415,7 +418,7 @@
             views: ["day", { name: "week", selected: true }],
             dataSource: {
                 data: [ {
-                    start: start,
+                    Start: start,
                     end: end,
                     title: "foo"
                 },{
@@ -472,8 +475,9 @@
                     title: "multi day"
                 },{
                     start: new Date(2013, 4, 20, 10, 5,0),
-                    end: new Date(2013, 4, 21, 12, 5,0),
-                    title: "second multi day"
+                    end: new Date(2013, 4, 20, 12, 5,0),
+                    isAllDay: true,
+                    title: "this is my all day event"
                 },{
                     start: new Date(2013, 4, 22, 10, 5,0),
                     end: new Date(2013, 4, 23, 12, 5,0),

@@ -939,6 +939,25 @@
 
             });
 
+            test("events set as all day are added to all day slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{ start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), isAllDay: true, title: "all day event" }];
+
+                view.renderEvents(events);
+
+                equal(view.datesHeader.find("div.k-appointment").length, 1);
+                equal(view.datesHeader.find(".k-appointment dd").text(), "all day event");
+
+            });
+
             test("multiple day event position is set to the date slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -1510,7 +1529,6 @@
                 equal(eventElements.eq(1).height(), eventHeight)
                 equal(eventElements.eq(2).height(), eventHeight);
             });
-
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
