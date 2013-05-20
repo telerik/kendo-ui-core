@@ -77,6 +77,10 @@ kendo_module({
         label.addClass("km-listview-label");
     }
 
+    function putAt(element, top) {
+        element.css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
+    }
+
     var HeaderFixer = kendo.Class.extend({
         init: function(listView) {
             var that = this,
@@ -325,7 +329,6 @@ kendo_module({
                             break;
                         }
 
-                        console.log('shifting', list.offset);
                         item = items.shift();
 
                         item.update(list.content(nextIndex));
@@ -367,13 +370,14 @@ kendo_module({
             this.element = this.listView.setDataItem(this.element, dataItem);
             this.height = this.element.outerHeight(true);
             this.bottom = this.top + this.height;
+            putAt(this.element, this.top);
         },
 
         above: function(item) {
             if (item) {
                 this.top = item.top - this.height;
                 this.bottom = item.top;
-                this.element.css("top", this.top + "px");
+                putAt(this.element, this.top);
             }
         },
 
@@ -381,7 +385,7 @@ kendo_module({
             if (item) {
                 this.top = item.bottom;
                 this.bottom = this.top + this.height;
-                this.element.css("top", this.top + "px");
+                putAt(this.element, this.top);
             }
         },
 
@@ -409,7 +413,7 @@ kendo_module({
             if (item) {
                 this.top = item.bottom;
                 this.bottom = this.height + this.top;
-                this.element.css("top", this.top + "px");
+                putAt(this.element, this.top);
             }
         },
     });
@@ -420,11 +424,11 @@ kendo_module({
 
             that._loadWrapper = $('<span class="km-load-more"></span>');
             that._loadIcon = $('<span style="display:none" class="km-icon"></span>');
-            that._loadButton = $('<button class="km-load">' + listView.options.loadMoreText + '</button>');
+            that._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>');
 
             that._loadWrapper.append(that._loadIcon).append(that._loadButton);
 
-            that.element = $('<li class="press-to-load-more" style="position: absolute; top: 0"></li>').append(that._loadWrapper).appendTo(listView.element);
+            that.element = $('<li class="press-to-load-more"></li>').append(that._loadWrapper).appendTo(listView.element);
 
             that._loadButton.kendoMobileButton().data('kendoMobileButton').bind('click', function() {
                 that._hideShowButton();
@@ -438,6 +442,16 @@ kendo_module({
             that.height = that.element.outerHeight(true);
         },
 
+        enable: function() {
+            this._showLoadButton();
+        },
+
+        disable: function() {
+            this._loadButton.hide();
+            this._loadIcon.hide();
+            this.element.find('.km-load-more').removeClass('km-scroller-refresh');
+        },
+
         _hideShowButton: function() {
             this._loadButton.hide();
             this._loadIcon.css('display', 'block');
@@ -448,17 +462,7 @@ kendo_module({
             this._loadButton.show();
             this._loadIcon.hide();
             this.element.find('.km-load-more').removeClass('km-scroller-refresh');
-        },
-
-        enable: function() {
-            this._showLoadButton();
-        },
-
-        disable: function() {
-            this._loadButton.hide();
-            this._loadIcon.hide();
-            this.element.find('.km-load-more').removeClass('km-scroller-refresh');
-        },
+        }
     });
 
     var VirtualListViewItemBinder = kendo.Class.extend({

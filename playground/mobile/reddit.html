@@ -24,6 +24,7 @@
         <script src="../../src/kendo.mobile.actionsheet.js"></script>
         <script src="../../src/kendo.mobile.tabstrip.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
         <style>
             .loading {
                 color: gray;
@@ -37,6 +38,7 @@
                 border-top: 1px solid #fafafa;
                 border-bottom: 1px solid #e3e3e3;
                 font-weight: normal;
+                text-rendering: optimizeLegibility;
             }
 
             .item h3 {
@@ -68,9 +70,6 @@
                 background-repeat: no-repeat;
                 background-position: center center;
                 background-size: 100% 100%;
-                -webkit-border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 10px #000000;
-                box-shadow:         inset 0 0 10px #000000;
                 border-radius: 10px;
                 overflow: hidden;
                 margin-top: 1em;
@@ -86,7 +85,7 @@
         <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="Reddit: The Front Page">
             <header data-role="header">
                 <div data-role="navbar">
-                    <span data-role="viewtitle"></span>
+                    <span data-role="view-title"></span>
                 </div>
             </header>
 
@@ -94,14 +93,13 @@
             </ul>
         </div>
 
-        <div data-role="view" id="detail" data-transition="slide" data-show="renderDetail" data-zoom="true" data-title="">
+        <div data-role="view" id="detail" data-transition="slide" data-stretch="true" data-show="renderDetail" data-zoom="true" data-title="foo" data-hide="resetDetail">
             <header data-role="header">
                 <div data-role="navbar">
-                    <button data-role="backbutton">Back</button>
+                    <button data-role="backbutton" data-align="left">Back</button>
                     <span data-role="view-title"></span>
                 </div>
             </header>
-            <img />
         </div>
 
         <script type="text/x-kendo-template" id="item-template">
@@ -159,13 +157,16 @@
                 }
             }
 
+            function resetDetail(e) {
+                e.view.element.find('img').attr('src', '').hide();
+            }
+
             function renderDetail(e) {
                 var view = e.view,
                     dataItem = ds.getByUid(view.params.id);
                     element = view.element;
 
-                view.scroller.reset();
-                element.find('img').attr('src', dataItem.data.url);
+                element.find('img').attr('src', dataItem.data.url).show();
             }
 
             function showThumbsOnScrollComplete(e) {
@@ -177,7 +178,7 @@
                 ds.bind('change', function() { renderThumbs(view.element); });
             }
 
-            var app = new kendo.mobile.Application(document.body, { theme: "flat" });
+            var app = new kendo.mobile.Application(document.body, { skin: 'flat' });
         </script>
     </body>
 </html>
