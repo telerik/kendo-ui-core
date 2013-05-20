@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System;
 
-    public class <%= csharp_class%>
+    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>
     {
-        public <%= csharp_class%>()
+        public <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>()
         {
 //>> Initialization
 //<< Initialization

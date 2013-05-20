@@ -9,7 +9,6 @@ module CodeGen::MVC::Mobile
             'String' => 'string',
             'Boolean' => 'bool',
             'Object' => 'object',
-            'Array' => 'IEnumerable',
             'Function' => 'string',
             'Date' => 'DateTime'
         }
@@ -21,6 +20,7 @@ module CodeGen::MVC::Mobile
         SETTING = ERB.new(File.read("build/codegen/lib/mvc/setting.csharp.erb"), 0, '%<>')
         SETTING_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/setting.builder.csharp.erb"), 0, '%<>')
         EVENT = ERB.new(File.read("build/codegen/lib/mvc/event.builder.csharp.erb"), 0, '%<>')
+        ITEM_FACTORY = ERB.new(File.read("build/codegen/lib/mvc/item.factory.csharp.erb"), 0, '%<>')
 
         COMPONENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_declaration }.join %>
@@ -52,7 +52,7 @@ module CodeGen::MVC::Mobile
         //<< Fields})
 
         FLUENT_FIELD_DECLARATION = ERB.new(%{
-        public <%= self.owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type %> value)
+        public <%= owner.instance_of?(ArrayOption) ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
@@ -61,9 +61,9 @@ module CodeGen::MVC::Mobile
         })
 
         FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{
-        public <%= owner.csharp_class %>Builder <%= csharp_name%>(Action<<%= csharp_class %>Builder> configurator)
+        public <%= owner.csharp_class %>Builder <%= csharp_name%>(Action<<%= csharp_builder_class %>> configurator)
         {
-            configurator(new <%= csharp_class %>Builder(container.<%= csharp_name%>));
+            configurator(new <%= csharp_builder_class %>(container.<%= csharp_name%>));
             return this;
         }
         })
@@ -170,6 +170,10 @@ module CodeGen::MVC::Mobile
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}Settings"
             end
 
+            def csharp_builder_class
+                "#{csharp_class}Builder"
+            end
+
             def to_initialization
                 ERB.new(%{
             <%=csharp_name%> = new <%=csharp_class%>();
@@ -190,6 +194,20 @@ module CodeGen::MVC::Mobile
 
             def get_binding
                 binding
+            end
+        end
+
+        class ArrayOption < CompositeOption
+            def csharp_class
+                "List<#{csharp_item_class}>"
+            end
+
+            def csharp_builder_class
+                "#{owner.csharp_class}#{csharp_name.chop}Factory"
+            end
+
+            def csharp_item_class
+                "#{owner.csharp_class}#{csharp_name.chop}"
             end
         end
 
@@ -242,19 +260,40 @@ module CodeGen::MVC::Mobile
                 options = component.composite_options
 
                 options.each do |option|
+                    if option.instance_of?(ArrayOption)
+                        write_array(component, option)
+
+                        next
+                    end
+
                     # write *Settings.cs file
                     filename = "#{@path}/#{component.path}/Settings/#{option.csharp_class}.cs"
 
                     write_file(filename, component.to_setting(filename, option))
 
                     # write *SettingsBuilder.cs file
-                    filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_class}Builder.cs"
+                    filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_builder_class}.cs"
 
                     write_file(filename, component.to_fluent_setting(filename, option))
 
                     # nested composite options
                     options.push(*option.composite_options) if option.composite_options
                 end
+            end
+
+            def write_array(component, option)
+                #write *Factory.cs file
+                filename = "#{@path}/#{option.owner.path}/Fluent/#{option.csharp_builder_class}.cs"
+                component.files.push(filename)
+                write_file(filename, ITEM_FACTORY.result(option.get_binding))
+
+                #write *Item.cs file
+                filename = "#{@path}/#{option.owner.path}/#{option.csharp_item_class}.cs"
+                write_file(filename, component.to_setting(filename, option))
+
+                #write *ItemBuilder.cs file
+                filename = "#{@path}/#{option.owner.path}/Fluent/#{option.csharp_item_class}Builder.cs"
+                write_file(filename, component.to_fluent_setting(filename, option))
             end
 
             def write_events(component)
@@ -300,7 +339,7 @@ module CodeGen::MVC::Mobile
         class Component < CodeGen::Component
             include Options
 
-            attr_reader :files
+            attr_accessor :files
 
             def initialize *args
                 super

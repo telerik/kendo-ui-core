@@ -4,11 +4,11 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
-    public class <%= csharp_class %>Builder: IHideObjectMembers
+    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder: IHideObjectMembers
     {
-        private readonly <%= csharp_class %> container;
+        private readonly <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> container;
 
-        public <%= csharp_class %>Builder(<%= csharp_class %> settings)
+        public <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder(<%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> settings)
         {
             container = settings;
         }
