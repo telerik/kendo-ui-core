@@ -18,6 +18,10 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <script id="template" type="text/x-kendo-template">
+            <span>template text</span>
+        </script>
+
         <script>
             kendo.ns = "kendo-";
             var container,
@@ -265,6 +269,14 @@
                 validator.validate();
 
                 equal(container.find("span.k-invalid-msg").length, 1);
+            });
+
+            test("error message as external template", function() {
+                var input = $('<input type="text" required validationMessage="invalid" />'),
+                validator = setup(input, { errorTemplate: $("#template").html() });
+                validator.validate();
+
+                equal(input.next("span").text(), "template text");
             });
 
             test("displayes message next to the validated element", function() {
