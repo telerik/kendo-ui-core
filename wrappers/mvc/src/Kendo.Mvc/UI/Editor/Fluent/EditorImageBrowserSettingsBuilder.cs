@@ -152,9 +152,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public EditorImageBrowserSettingsBuilder Filter(string value)
+        public EditorImageBrowserSettingsBuilder FileTypes(string value)
         {
-            settings.Filter = value;
+            settings.FileTypes = value;
 
             return this;
         }
