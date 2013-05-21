@@ -1,12 +1,17 @@
-var PAGE_SIZE = 40;
+var PAGE_SIZE = 36,
+    imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
+    imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
+    imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
+    imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
+    DEFAULTIMAGEURL = "reddit-default.png";
 
 var awwDataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "http://www.reddit.com/r/aww.json",
-            dataType: "jsonp",
-            jsonp: "jsonp",
-            cache: true,
+            url: 'http://www.reddit.com/r/aww.json',
+            dataType: 'jsonp',
+            jsonp: 'jsonp',
+            cache: true
         },
 
         parameterMap: function(data, type) {
@@ -87,6 +92,69 @@ function showThumbsOnScrollComplete(e) {
     view.scroller.bind('scrollEnd', renderThumbsForView);
     kendo.onResize(renderThumbsForView)
     awwDataSource.bind('change', renderThumbsForView);
+}
+
+function canvasInit(e) {
+    virtualScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
+        contentHeight: 500,
+        dataSource: awwDataSource,
+        batchSize: 6,
+        template: kendo.template($("#canvas-template").html()),
+        emptyTemplate: kendo.template($("#empty-template").html()),
+        changed: updateSrc
+    }).data("kendoMobileVirtualScrollView");
+
+    virtualScrollView.batchBuffer.one("reset", function (e) {
+        virtualScrollView.trigger("changed", { element: virtualScrollView.pages[1].element });
+    });
+
+    virtualScrollView.element.find(".virtual-page").kendoTouch({
+        tap: function (e) {
+            var tile = $(e.event.target).closest("div.tile"),
+                uid = tile.data("uid"),
+                dataItem = awwDataSource.getByUid(uid);
+
+            app.navigate("#canvas-detail");
+        }
+    });
+}
+
+function canvasDetailInit(e) {
+    $("#detail-scrollview").kendoMobileVirtualScrollView({
+        dataSource: awwDataSource,
+        template: "<div data-uid='#:uid#' class='detailed-img'>#= createImage(data) #</div>",
+        changed: updateSrc
+    });
+}
+
+function updateSrc(e) {
+    var element = e.element;
+
+    element.find(".item-img").each(function(idx, item) {
+        $(item).css("background-image", "url(" + $(item).data("url") + ")");
+    });
+}
+
+function createImage(data) {
+    var domain = data.domain,
+        subreddit = data.subreddit,
+        thumbnail = data.thumbnail,
+        url = data.url,
+        imageTemplate = kendo.template('<div class="item-img" style="background-image: url(' + DEFAULTIMAGEURL + ');" data-url="#= data #"></div>');
+
+    if(url.match(imgExtensionRegex)) {
+        return imageTemplate(url);
+    }
+
+    if(url.match(imgurAlbumRegex) || url.match(imgurGalleryRegex)) {
+        return imageTemplate(DEFAULTIMAGEURL);
+    }
+
+    if(url.match(imgurSingleRegex)) {
+        return imageTemplate(url.concat(".jpg"));
+    }
+
+    return imageTemplate(DEFAULTIMAGEURL);
 }
 
 var app = new kendo.mobile.Application(document.body, { skin: 'flat' });
