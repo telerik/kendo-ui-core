@@ -7,12 +7,12 @@ namespace Kendo.Mvc.UI
 {
     public class EditorImageBrowserSettings : JsonObject
     {
-        public const string DefaultFilter = "*.png,*.gif,*.jpg,*.jpeg";
+        public const string DefaultFileTypes = "*.png,*.gif,*.jpg,*.jpeg";
         private readonly EditorImageBrowserMessages messages;
 
         public EditorImageBrowserSettings(EditorImageBrowserMessages messages)
         {
-            Filter = DefaultFilter;
+            FileTypes = DefaultFileTypes;
             this.messages = messages;
 
             Read = new EditorImageBrowserOperation();
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
             Image = new EditorImageBrowserOperation();
         }
 
-        public string Filter
+        public string FileTypes
         {
             get;
             set;
@@ -67,9 +67,9 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
-            if (Filter != DefaultFilter)
+            if (FileTypes != DefaultFileTypes)
             {
-                json["filter"] = Filter;
+                json["fileTypes"] = FileTypes;
             }
 
             var messages = this.messages.ToJson();

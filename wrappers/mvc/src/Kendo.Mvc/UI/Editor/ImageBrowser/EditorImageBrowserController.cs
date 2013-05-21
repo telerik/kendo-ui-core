@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return EditorImageBrowserSettings.DefaultFilter;
+                return EditorImageBrowserSettings.DefaultFileTypes;
             }
         }
 
