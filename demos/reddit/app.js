@@ -2,7 +2,7 @@ var PAGE_SIZE = 36,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
-    imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
+    imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/i,
     DEFAULTIMAGEURL = "reddit-default.png";
 
 var awwDataSource = new kendo.data.DataSource({
@@ -44,7 +44,7 @@ function renderThumbs(element) {
 }
 
 function isImage(url) {
-    return (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
+    return imgExtensionRegex.test(url) || (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
 }
 
 function showDetail(e) {
@@ -66,7 +66,6 @@ function navigateTo(dataItem) {
 
 function resetDetail(e) {
     e.view.element.find("img").attr("src", '');
-    e.view.scroller.reset();
 }
 
 function renderDetail(e) {
@@ -75,12 +74,15 @@ function renderDetail(e) {
         dataItem = awwDataSource.getByUid(view.params.id),
         url = dataItem.data.url;
 
-        if(!/\.(png|jpg|gif|jpeg)$/.test(url)) {
+        if(!imgExtensionRegex.test(url)) {
             url += '.jpg';
         };
 
-    element.find('img').attr('src', url);
-    view.scroller.zoomOut();
+    var img = element.find('img');
+    img.css('visibility', 'hidden').attr('src', url).one('load', function() {
+        img.css('visibility', 'visible');
+        view.scroller.zoomOut();
+    });
 }
 
 function showThumbsOnScrollComplete(e) {
