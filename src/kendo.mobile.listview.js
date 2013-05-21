@@ -24,7 +24,6 @@ kendo_module({
         WRAPPER = '<div class="km-listview-wrapper" />',
         SEARCH_TEMPLATE = kendo.template('<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
         NS = ".kendoMobileListView",
-        LAST_PAGE_REACHED = "lastPageReached",
         STYLED = "styled",
         CLICK = "click",
         CHANGE = "change",
@@ -83,28 +82,29 @@ kendo_module({
 
     var HeaderFixer = kendo.Class.extend({
         init: function(listView) {
-            var that = this,
-                scroller = listView.scroller();
+            var scroller = listView.scroller();
 
             if (!scroller) {
                 return;
             }
 
-            that.options = listView.options;
-            that.element = listView.element;
-            that.scroller = listView.scroller();
-            that._shouldFixHeaders();
+            this.options = listView.options;
+            this.element = listView.element;
+            this.scroller = listView.scroller();
+            this._shouldFixHeaders();
 
             var cacheHeaders = function() {
-                that._cacheHeaders();
+                this._cacheHeaders();
             };
 
             kendo.onResize(cacheHeaders);
 
-            listView.bind(STYLED, cacheHeaders)
+            listView.bind(STYLED, cacheHeaders);
+
+            var headerFixer = this;
 
             scroller.bind("scroll", function(e) {
-                that._fixHeader(e);
+                headerFixer._fixHeader(e);
             });
         },
 
@@ -114,10 +114,9 @@ kendo_module({
             }
 
             var i = 0,
-                that = this,
-                scroller = that.scroller,
+                scroller = this.scroller,
+                headers = this.headers,
                 scrollTop = e.scrollTop,
-                headers = that.headers,
                 headerPair,
                 offset,
                 header;
@@ -132,9 +131,9 @@ kendo_module({
                 header = headerPair.header;
             } while (offset > scrollTop);
 
-            if (that.currentHeader != i) {
+            if (this.currentHeader != i) {
                 scroller.fixedContainer.html(header.clone());
-                that.currentHeader = i;
+                this.currentHeader = i;
             }
         },
 
@@ -161,7 +160,7 @@ kendo_module({
 
             this.headers = headers;
             this._fixHeader({scrollTop: 0});
-        },
+        }
     });
 
     var DEFAULT_PULL_PARAMETERS = function() {
@@ -170,19 +169,21 @@ kendo_module({
 
     var RefreshHandler = kendo.Class.extend({
         init: function(listView) {
-            var that = this,
-                scroller = listView.scroller(),
+            var scroller = listView.scroller(),
                 options = listView.options,
                 dataSource = listView.dataSource,
                 pullParameters = options.pullParameters || DEFAULT_PULL_PARAMETERS;
 
-            that._first = dataSource.view()[0];
+            this._first = dataSource.view()[0];
+            this.scroller = scroller;
+            this.dataSource = dataSource;
 
+            var refreshHandler = this;
             scroller.setOptions({
                 pullToRefresh: true,
                 pull: function() {
-                    that._pulled = true;
-                    dataSource.read(pullParameters.call(listView, that._first));
+                    refreshHandler._pulled = true;
+                    dataSource.read(pullParameters.call(listView, refreshHandler._first));
                 },
                 pullTemplate: options.pullTemplate,
                 releaseTemplate: options.releaseTemplate,
@@ -190,20 +191,27 @@ kendo_module({
             });
 
             dataSource.bind("change", function() {
-                if (that._pulled) {
-                    scroller.pullHandled();
-                }
-
-                if (that._pulled || !that._first) {
-                    var view = dataSource.view();
-
-                    if (view[0]) {
-                        that._first = view[0];
-                    }
-                }
-
-                that._pulled = false;
+                refreshHandler._change();
             });
+        },
+
+        _change: function() {
+            var scroller = this.scroller,
+                dataSource = this.dataSource;
+
+            if (this._pulled) {
+                scroller.pullHandled();
+            }
+
+            if (this._pulled || !this._first) {
+                var view = dataSource.view();
+
+                if (view[0]) {
+                    this._first = view[0];
+                }
+            }
+
+            this._pulled = false;
         }
     });
 
@@ -274,20 +282,11 @@ kendo_module({
                 items = list.items,
 
                 initialOffset = list.offset,
-                initialTop = list.top,
-                initialBottom = list.bottom,
-
-                topThreshold = top,
-                targetTop = top - height * 3,
-
-                bottomThreshold = top + height,
-                targetBottom = bottomThreshold + height * 3,
 
                 itemCount = list.itemCount,
 
                 padding = 200,
                 item,
-                bottomItem,
                 lastTop = this.lastTop || 0,
                 up = force ? this.lastDirection : lastTop > top,
 
@@ -300,7 +299,6 @@ kendo_module({
             if (up) { // scrolling up
                if (this.top > topBorder || force) {
                     while(this.bottom > bottomBorder) {
-                        console.log('popping', list.offset);
                         if (list.offset === 0) {
                             break;
                         }
@@ -415,31 +413,31 @@ kendo_module({
                 this.bottom = this.height + this.top;
                 putAt(this.element, this.top);
             }
-        },
+        }
     });
 
     var VirtualListViewPressToLoadMore = VirtualListViewLoadingIndicator.extend({
         init: function(listView, buffer) {
-            var that = this;
 
-            that._loadWrapper = $('<span class="km-load-more"></span>');
-            that._loadIcon = $('<span style="display:none" class="km-icon"></span>');
-            that._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>');
+            this._loadWrapper = $('<span class="km-load-more"></span>');
+            this._loadIcon = $('<span style="display:none" class="km-icon"></span>');
+            this._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>');
 
-            that._loadWrapper.append(that._loadIcon).append(that._loadButton);
+            this._loadWrapper.append(this._loadIcon).append(this._loadButton);
 
-            that.element = $('<li class="press-to-load-more"></li>').append(that._loadWrapper).appendTo(listView.element);
+            this.element = $('<li class="press-to-load-more"></li>').append(this._loadWrapper).appendTo(listView.element);
 
-            that._loadButton.kendoMobileButton().data('kendoMobileButton').bind('click', function() {
-                that._hideShowButton();
+            var loadMore = this;
+            this._loadButton.kendoMobileButton().data("kendoMobileButton").bind("click", function() {
+                loadMore._hideShowButton();
                 buffer.next();
             });
 
-            buffer.bind('resize', function() {
-                that._showLoadButton();
+            buffer.bind("resize", function() {
+                loadMore._showLoadButton();
             });
 
-            that.height = that.element.outerHeight(true);
+            this.height = this.element.outerHeight(true);
         },
 
         enable: function() {
@@ -449,7 +447,7 @@ kendo_module({
         disable: function() {
             this._loadButton.hide();
             this._loadIcon.hide();
-            this.element.find('.km-load-more').removeClass('km-scroller-refresh');
+            this.element.find(".km-load-more").removeClass("km-scroller-refresh");
         },
 
         _hideShowButton: function() {
@@ -473,30 +471,30 @@ kendo_module({
         },
 
         configure: function() {
-            var that = this,
-                options = that.options,
-                pressToLoadMore = that.options.loadMore,
-                scroller = that.listView.scroller(),
+            var options = this.options,
+                listView = this.listView,
+                scroller = listView.scroller(),
+                pressToLoadMore = options.loadMore,
                 footer;
 
-            if (that.dataSource) {
-                that._unbindDataSource();
+            if (this.dataSource) {
+                this._unbindDataSource();
             }
 
-            that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource);
+            var dataSource = this.listView.dataSource = DataSource.create(options.dataSource);
 
-            that.buffer = new kendo.data.Buffer(that.dataSource, Math.floor(options.dataSource.pageSize() / 2), pressToLoadMore);
+            var buffer = new kendo.data.Buffer(dataSource, Math.floor(dataSource.pageSize() / 2), pressToLoadMore);
 
             if (pressToLoadMore) {
-                footer = new VirtualListViewPressToLoadMore(that.listView, that.buffer);
+                footer = new VirtualListViewPressToLoadMore(listView, buffer);
             } else {
-                footer = new VirtualListViewLoadingIndicator(that.listView);
+                footer = new VirtualListViewLoadingIndicator(listView);
             }
 
-            that.list = new VirtualList({
-                buffer: that.buffer,
+            var list = new VirtualList({
+                buffer: buffer,
                 footer: footer,
-                item: function(dataItem) { return new VirtualListViewItem(that.listView, dataItem); },
+                item: function(dataItem) { return new VirtualListViewItem(listView, dataItem); },
                 height: function() { return scroller.height(); }
             });
 
@@ -504,33 +502,41 @@ kendo_module({
                 scroller.makeVirtual();
 
                 scroller.bind("scroll", function(e) {
-                    that.list.update(e.scrollTop);
+                    list.update(e.scrollTop);
                 });
 
                 scroller.bind("scrollEnd", function(e) {
-                    that.list.update(e.scrollTop, true);
+                    list.update(e.scrollTop, true);
                 });
 
-                that.list.bind("resize", function() {
-                    scroller.virtualSize(0, that.list.totalHeight());
+                list.bind("resize", function() {
+                    scroller.virtualSize(0, list.totalHeight());
                 });
 
-                that.list.bind("reset", function() {
+                list.bind("reset", function() {
                     footer.enable();
                 });
 
                 kendo.onResize(function() {
-                    that.list.refresh();
-                })
+                    if (listView.element.is(":visible")) {
+                        list.refresh();
+                    }
+                });
 
-                that.list.bind("endReached", function() {
+                list.bind("endReached", function() {
                     footer.disable();
                 });
 
-                that.buffer.bind('expand', function() {
-                    that.list.update(scroller.scrollTop);
+                buffer.bind('expand', function() {
+                    list.update(scroller.scrollTop);
                 });
             }
+
+            $.extend(this, {
+                buffer: buffer,
+                list: list,
+                footer: footer
+            });
         },
 
         _unbindDataSource: function() {
@@ -540,20 +546,20 @@ kendo_module({
 
     var ListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
-            var that = this;
+            this.listView = listView;
+            this.options = listView.options;
 
-            that.listView = listView;
-            that.options = listView.options;
+            var itemBinder = this;
 
-            that._refreshHandler = function(e) {
-                that.refresh(e);
-            }
+            this._refreshHandler = function(e) {
+                itemBinder.refresh(e);
+            };
 
-            that._progressHandler = function(e) {
+            this._progressHandler = function() {
                 listView.showLoading();
-            }
+            };
 
-            that.configure();
+            this.configure();
         },
 
         refresh: function(e) {
@@ -592,17 +598,16 @@ kendo_module({
         },
 
         configure: function() {
-            var that = this,
-                options = that.options;
+            var options = this.options;
 
-            if (that.dataSource) {
-                that._unbindDataSource();
+            if (this.dataSource) {
+                this._unbindDataSource();
             }
 
-            that.listView.dataSource = that.dataSource = DataSource.create(options.dataSource).bind(CHANGE, that._refreshHandler);
+            this.listView.dataSource = this.dataSource = DataSource.create(options.dataSource).bind(CHANGE, this._refreshHandler);
 
-            if (that._shouldShowLoading()) {
-                that.dataSource.bind(PROGRESS, that._progressHandler);
+            if (this._shouldShowLoading()) {
+                this.dataSource.bind(PROGRESS, this._progressHandler);
             }
         },
 
@@ -618,12 +623,12 @@ kendo_module({
 
     var ListViewFilter = kendo.Class.extend({
         init: function(listView) {
-            var that = this,
+            var filter = this,
                 filterable = listView.options.filterable,
                 events = "change paste";
 
-            that.listView = listView;
-            that.options = filterable;
+            this.listView = listView;
+            this.options = filterable;
 
             listView.element.before(SEARCH_TEMPLATE({ placeholder: filterable.placeholder || "Search..." }));
 
@@ -631,18 +636,18 @@ kendo_module({
                 events += " keyup";
             }
 
-            that.searchInput = listView.wrapper.find("input[type=search]")
+            this.searchInput = listView.wrapper.find("input[type=search]")
                 .closest("form").on("submit" + NS, function(e) {
                     e.preventDefault();
                 })
                 .end()
                 .on("focus" + NS, function() {
-                    that._oldFilter = that.searchInput.val();
+                    filter._oldFilter = filter.searchInput.val();
                 })
-                .on(events.split(" ").join(NS + " ") + NS, proxy(that._filterChange, that));
+                .on(events.split(" ").join(NS + " ") + NS, proxy(this._filterChange, this));
 
-            that.clearButton = listView.wrapper.find(".km-filter-reset")
-                .on(CLICK, proxy(that._clearFilter, that))
+            this.clearButton = listView.wrapper.find(".km-filter-reset")
+                .on(CLICK, proxy(this, "_clearFilter"))
                 .hide();
 
         },
@@ -654,20 +659,19 @@ kendo_module({
         },
 
         _filterChange: function(e) {
-            var that = this;
-            if (e.type == "paste" && that.options.autoFilter !== false) {
+            var filter = this;
+            if (e.type == "paste" && this.options.autoFilter !== false) {
                 setTimeout(function() {
-                    that._applyFilter();
+                    filter._applyFilter();
                 }, 1);
             } else {
-                that._applyFilter();
+                this._applyFilter();
             }
         },
 
         _applyFilter: function() {
-            var that = this,
-                options = that.options,
-                value = that.searchInput.val(),
+            var options = this.options,
+                value = this.searchInput.val(),
                 expr = value.length ? {
                     field: options.field,
                     operator: options.operator || "startsWith",
@@ -675,12 +679,12 @@ kendo_module({
                     value: value
                 } : null;
 
-            if (value === that._oldFilter) {
+            if (value === this._oldFilter) {
                 return;
             }
 
-            that._oldFilter = value;
-            that._search(expr);
+            this._oldFilter = value;
+            this._search(expr);
         },
 
         _clearFilter: function(e) {
@@ -693,13 +697,13 @@ kendo_module({
 
     var ListView = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var listView = this;
 
-            Widget.fn.init.call(that, element, options);
+            Widget.fn.init.call(this, element, options);
 
-            element = that.element;
+            element = this.element;
 
-            options = that.options;
+            options = this.options;
 
             // support for legacy typo in configuration options: scrollTreshold -> scrollThreshold.
             if (options.scrollTreshold) {
@@ -710,11 +714,11 @@ kendo_module({
                 .on("down", HIGHLIGHT_SELECTOR, "_highlight")
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim");
 
-            that._userEvents = new kendo.UserEvents(element, {
+            this._userEvents = new kendo.UserEvents(element, {
                 filter: ITEM_SELECTOR,
                 allowSelection: true,
                 tap: function(e) {
-                    that._click(e);
+                    listView._click(e);
                 }
             });
 
@@ -723,24 +727,24 @@ kendo_module({
 
             element.wrap(WRAPPER);
 
-            that.wrapper = that.element.parent();
+            this.wrapper = this.element.parent();
 
-            that._headerFixer = new HeaderFixer(this);
+            this._headerFixer = new HeaderFixer(this);
 
-            that._templates();
+            this._templates();
 
-            that.virtual = options.endlessScroll || options.loadMore;
+            this.virtual = options.endlessScroll || options.loadMore;
 
-            that._style();
+            this._style();
 
-            if (that.virtual) {
+            if (this.virtual) {
                 this._itemBinder = new VirtualListViewItemBinder(this);
             } else {
                 this._itemBinder = new ListViewItemBinder(this);
             }
 
             if (options.dataSource && options.autoBind) {
-                that.dataSource.fetch();
+                this.dataSource.fetch();
             }
 
             if (this.options.pullToRefresh) {
@@ -751,9 +755,9 @@ kendo_module({
                 this._filter = new ListViewFilter(this);
             }
 
-            that._enhanceItems(that.items());
+            this._enhanceItems(this.items());
 
-            kendo.notify(that, ui);
+            kendo.notify(this, ui);
         },
 
         events: [
@@ -796,15 +800,13 @@ kendo_module({
         },
 
         destroy: function() {
-            var that = this;
+            Widget.fn.destroy.call(this);
+            kendo.destroy(this.element);
+            this._userEvents.destroy();
 
-            Widget.fn.destroy.call(that);
-
-            kendo.destroy(that.element);
-            that._userEvents.destroy();
-            delete that.element;
-            delete that.wrapper;
-            delete that._userEvents;
+            delete this.element;
+            delete this.wrapper;
+            delete this._userEvents;
         },
 
         items: function() {
@@ -880,21 +882,21 @@ kendo_module({
         },
 
         setDataItem: function(item, dataItem) {
-            var that = this;
+            var listView = this;
 
             return $(this._renderItems([dataItem], function(items) {
                 var newItem = $(items[0]);
                 kendo.destroy(item);
                 $(item).replaceWith(newItem);
 
-                that.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
+                listView.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
             })[0]);
         },
 
         _insert: function(dataItems, method) {
-            var that = this;
-            return that._renderItems(dataItems, function(items) {
-                that.element[method](items);
+            var listView = this;
+            return this._renderItems(dataItems, function(items) {
+                listView.element[method](items);
             });
         },
 
@@ -932,9 +934,8 @@ kendo_module({
         },
 
         _templates: function() {
-            var that = this,
-                template = that.options.template,
-                headerTemplate = that.options.headerTemplate,
+            var template = this.options.template,
+                headerTemplate = this.options.headerTemplate,
                 dataIDAttribute = ' data-uid="#=arguments[0].uid || ""#"',
                 templateProxy = {},
                 groupTemplateProxy = {};
@@ -944,9 +945,9 @@ kendo_module({
                 template = "#=this.template(data)#";
             }
 
-            that.template = proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
+            this.template = proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
 
-            groupTemplateProxy.template = that.template;
+            groupTemplateProxy.template = this.template;
 
             if (typeof headerTemplate === FUNCTION) {
                 groupTemplateProxy._headerTemplate = headerTemplate;
@@ -955,7 +956,7 @@ kendo_module({
 
             groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
 
-            that.groupTemplate = proxy(GROUP_TEMPLATE, groupTemplateProxy);
+            this.groupTemplate = proxy(GROUP_TEMPLATE, groupTemplateProxy);
         },
 
         _click: function(e) {
@@ -963,8 +964,7 @@ kendo_module({
                 return;
             }
 
-            var that = this,
-                dataItem,
+            var dataItem,
                 item = e.target,
                 target = $(e.event.target),
                 buttonElement = target.closest(kendo.roleSelector("button", "detailbutton", "backbutton")),
@@ -972,10 +972,10 @@ kendo_module({
                 id = item.attr(kendo.attr("uid"));
 
             if (id) {
-                dataItem = that.dataSource.getByUid(id);
+                dataItem = this.dataSource.getByUid(id);
             }
 
-            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, button: button})) {
+            if (this.trigger(CLICK, {target: target, item: item, dataItem: dataItem, button: button})) {
                 e.preventDefault();
             }
         },
@@ -997,15 +997,14 @@ kendo_module({
         },
 
         _style: function() {
-            var that = this,
-                options = that.options,
+            var options = this.options,
                 grouped = options.type === "group",
-                element = that.element,
+                element = this.element,
                 inset = options.style === "inset";
 
             element.addClass("km-listview")
                 .toggleClass("km-list", !grouped)
-                .toggleClass("km-virtual-list", that.virtual)
+                .toggleClass("km-virtual-list", this.virtual)
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset);
@@ -1015,7 +1014,7 @@ kendo_module({
             }
 
             if (grouped) {
-                that._styleGroups();
+                this._styleGroups();
             }
         },
 
@@ -1040,7 +1039,7 @@ kendo_module({
                     enhanceItem(item);
                 }
             });
-        },
+        }
     });
 
     kendo.mobile.ui.VirtualList = VirtualList;

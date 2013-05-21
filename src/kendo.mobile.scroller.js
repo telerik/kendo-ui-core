@@ -389,7 +389,6 @@ kendo_module({
         },
 
         _scale: function(scale) {
-            console.log('scaling to', scale);
             this.dimensions.rescale(scale);
             this.movable.scaleTo(scale);
         },
