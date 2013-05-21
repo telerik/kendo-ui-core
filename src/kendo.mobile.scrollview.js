@@ -15,7 +15,6 @@ kendo_module({
         Pane = kendo.ui.Pane,
         PaneDimensions = kendo.ui.PaneDimensions,
         Widget = ui.Widget,
-        DataSource = kendo.data.DataSource,
 
         // Math
         math = Math,
@@ -362,7 +361,6 @@ kendo_module({
 
         _initPages: function () {
             var that = this,
-                dimension = that.dimension,
                 pages = that.pages,
                 inner = that.inner,
                 page;
@@ -404,7 +402,7 @@ kendo_module({
         },
 
         reset: function (ease) {
-            this._moveTo(0, ease, false);   
+            this._moveTo(0, ease, false);
         },
 
         _dragEnd: function (e) {
@@ -414,8 +412,6 @@ kendo_module({
                 velocityThreshold = that.options.velocityThreshold,
                 ease = Transition.easeOutExpo,
                 isEndReached = that.itemCount > that.batchBuffer.total;
-
-            console.log(isEndReached);
 
             if (velocity > velocityThreshold) {
                 if(that.itemCount === 2) {
@@ -435,7 +431,7 @@ kendo_module({
             } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
                 if(that.itemCount === 2) {
                     that.reset(ease);
-                    return;           
+                    return;
                 }
                 that.backward();
                 return;
@@ -444,7 +440,7 @@ kendo_module({
             }
         },
 
-        _transitionEnd: function (e) {
+        _transitionEnd: function () {
             var that = this,
                 pages = that.pages;
 
@@ -452,8 +448,8 @@ kendo_module({
                 return;
             }
 
-            if(that.movable.x < 0) { 
-                pages.push(that.pages.shift()); //forward
+            if(that.movable.x < 0) {
+                pages.push(that.pages.shift());//forward
                 that.setPageContent(pages[2], that.itemCount ++);
             } else {
                 pages.unshift(that.pages.pop()); //back
@@ -472,7 +468,7 @@ kendo_module({
             });
         },
 
-        _onResize: function (e) {
+        _onResize: function () {
             var that = this,
                 page = that.pages[2],
                 idx = that.itemCount - 1;
@@ -483,11 +479,11 @@ kendo_module({
             }
         },
 
-        _onReset: function (e) {
+        _onReset: function () {
             this._resetPages();
         },
 
-        _onEndReached: function (e) {
+        _onEndReached: function () {
             this._needsRefresh = true;
         },
 
@@ -526,7 +522,7 @@ kendo_module({
         },
         position: function (index) { //index can be -1, 0, 1
             this.element.css("transform", "translate3d(" + this.width * index + "px, 0, 0)");
-        } 
+        }
     });
 
     var BatchBuffer = kendo.Observable.extend({
@@ -551,11 +547,11 @@ kendo_module({
                 "prefetched": function (e) {
                     batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
                 },
-                "reset": function (e) {
+                "reset": function () {
                     batchBuffer.total = 0;
                     batchBuffer.trigger("reset");
                 },
-                "resize": function (e) {
+                "resize": function () {
                     batchBuffer.total = this.length / batchBuffer.batchSize;
                     batchBuffer.trigger("resize", { total: batchBuffer.total, offset: this.offset });
                 }
