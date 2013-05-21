@@ -47,6 +47,14 @@ var Command = Class.extend({
         this.exec();
     },
 
+    createDialog: function (content, options) {
+        var editor = this.editor;
+
+        return $(content).appendTo(document.body)
+            .kendoWindow(extend({}, editor.options.dialogOptions, options))
+            .closest(".k-window").toggleClass("k-rtl", kendo.support.isRtl(editor.wrapper)).end();
+    },
+
     exec: function () {
         var that = this,
         range = that.lockRange(true);

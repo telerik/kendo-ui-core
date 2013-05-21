@@ -112,15 +112,6 @@ kendo_module({
 
         registerFormat: function(formatName, format) {
             Editor.fn.options.formats[formatName] = format;
-        },
-
-        createDialog: function (content, editor, options) {
-            var dialog = $(content)
-                .appendTo(document.body)
-                .kendoWindow(options)
-                .closest(".k-window").toggleClass("k-rtl", kendo.support.isRtl(editor.wrapper)).end();
-
-            return dialog;
         }
     };
 
@@ -846,7 +837,7 @@ kendo_module({
                 })
                 .on("blur" + NS, function() {
                     setTimeout(function() {
-                        if (!$(document.activeElement).is(editor.body) && !editor.toolbar.focused()) {
+                        if (!$(kendo._activeElement()).is(editor.body) && !editor.toolbar.focused()) {
                             $(editor.body).removeClass("k-state-active");
                             editor.toolbar.hide();
                         }

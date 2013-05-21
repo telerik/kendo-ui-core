@@ -184,11 +184,11 @@ var LinkCommand = Command.extend({
 
         var showText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var dialog = EditorUtils.createDialog(that._dialogTemplate(showText), that.editor, extend({}, that.editor.options.dialogOptions, {
+        var dialog = this.createDialog(that._dialogTemplate(showText), {
             title: messages.createLink,
             close: close,
             visible: false
-        }))
+        })
             .find(".k-dialog-insert").click(apply).end()
             .find(".k-dialog-close").click(close).end()
             .find(".k-form-text-row input").keydown(function (e) {
