@@ -75,6 +75,13 @@ kendo_module({
         return 0;
     }
 
+    function parseHtml(text) {
+        if ($.parseHTML) {
+            return $($.parseHTML(text));
+        }
+        return $(text);
+    }
+
     var Validator = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -259,7 +266,7 @@ kendo_module({
             if (!valid) {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-                var messageLabel = $(template({ message: decode(messageText) }));
+                var messageLabel = parseHtml(template({ message: decode(messageText) }));
 
                 that._decorateMessageContainer(messageLabel, fieldName);
 
