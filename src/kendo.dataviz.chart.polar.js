@@ -22,6 +22,7 @@ kendo_module({
         CategoryAxis = dataviz.CategoryAxis,
         CategoricalChart = dataviz.CategoricalChart,
         CategoricalPlotArea = dataviz.CategoricalPlotArea,
+        Chart = dataviz.ui.Chart,
         ChartElement = dataviz.ChartElement,
         DonutSegment = dataviz.DonutSegment,
         LineChart = dataviz.LineChart,
@@ -35,6 +36,7 @@ kendo_module({
         append = dataviz.append,
         defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
+        filterSeriesByType = dataviz.filterSeriesByType,
         limitValue = dataviz.limitValue,
         round = dataviz.round,
         singleItemOrArray = dataviz.singleItemOrArray;
@@ -53,8 +55,13 @@ kendo_module({
         POLAR_SCATTER = "polarScatter",
         X = "x",
         Y = "y",
-        ZERO = "zero"
-        ;
+        ZERO = "zero",
+        POLAR_CHARTS = [
+            POLAR_AREA, POLAR_LINE, POLAR_SCATTER
+        ],
+        RADAR_CHARTS = [
+            RADAR_AREA, RADAR_LINE, RADAR_COLUMN
+        ] ;
 
     // Polar and radar charts =================================================
     var RadarCategoryAxis = CategoryAxis.extend({
@@ -900,17 +907,17 @@ kendo_module({
                 pane = plotArea.panes[0];
 
             plotArea.createAreaChart(
-                plotArea.filterSeriesByType(series, [RADAR_AREA]),
+                filterSeriesByType(series, [RADAR_AREA]),
                 pane
             );
 
             plotArea.createLineChart(
-                plotArea.filterSeriesByType(series, [RADAR_LINE]),
+                filterSeriesByType(series, [RADAR_LINE]),
                 pane
             );
 
             plotArea.createBarChart(
-                plotArea.filterSeriesByType(series, [RADAR_COLUMN]),
+                filterSeriesByType(series, [RADAR_COLUMN]),
                 pane
             );
         },
@@ -986,6 +993,7 @@ kendo_module({
             }
         }
     });
+    Chart.registerPlotArea(RadarPlotArea, RADAR_CHARTS);
 
     // TODO: Inherit / mixin from RadarPlotArea
     var PolarPlotArea = PlotAreaBase.extend({
@@ -1101,17 +1109,17 @@ kendo_module({
                 pane = plotArea.panes[0];
 
             plotArea.createLineChart(
-                plotArea.filterSeriesByType(series, [POLAR_LINE]),
+                filterSeriesByType(series, [POLAR_LINE]),
                 pane
             );
 
             plotArea.createScatterChart(
-                plotArea.filterSeriesByType(series, [POLAR_SCATTER]),
+                filterSeriesByType(series, [POLAR_SCATTER]),
                 pane
             );
 
             plotArea.createAreaChart(
-                plotArea.filterSeriesByType(series, [POLAR_AREA]),
+                filterSeriesByType(series, [POLAR_AREA]),
                 pane
             );
         },
@@ -1153,6 +1161,7 @@ kendo_module({
             // TODO: Implement
         }
     });
+    Chart.registerPlotArea(PolarPlotArea, POLAR_CHARTS);
 
     // Helpers ================================================================
     function xComparer(a, b) {

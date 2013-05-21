@@ -135,9 +135,6 @@ kendo_module({
         POLAR_LINE = "polarLine",
         POLAR_SCATTER = "polarScatter",
         POINTER = "pointer",
-        RADAR_AREA = "radarArea",
-        RADAR_COLUMN = "radarColumn",
-        RADAR_LINE = "radarLine",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -185,16 +182,11 @@ kendo_module({
         ZOOM_START = "zoomStart",
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
-        // Register charts dynamically as plugins
-        CATEGORICAL_CHARTS = [
-            BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
-        ],
+        // TODO: Remove after fixing valueFieldsBySeriesType
         POLAR_CHARTS = [
             POLAR_AREA, POLAR_LINE, POLAR_SCATTER
         ],
-        RADAR_CHARTS = [
-            RADAR_AREA, RADAR_LINE, RADAR_COLUMN
-        ],
+        // TODO: Remove after fixing valueFieldsBySeriesType
         XY_CHARTS = [
             SCATTER, SCATTER_LINE, BUBBLE
         ],
@@ -462,54 +454,29 @@ kendo_module({
 
         _createPlotArea: function() {
             var chart = this,
+                plotAreaTypes = Chart.plotAreaTypes,
                 options = chart.options,
-                series = options.series,
+                series,
                 i,
-                length = series.length,
-                currentSeries,
-                categoricalSeries = [],
-                xySeries = [],
-                pieSeries = [],
-                donutSeries = [],
-                bulletSeries = [],
-                polarSeries = [],
-                radarSeries = [],
+                areaType,
                 plotArea;
 
-            // TODO: Try to convert into a plugin-based registration
-            for (i = 0; i < length; i++) {
-                currentSeries = series[i];
+            // TODO: Order by weight?
+            // Pie, Donut, XY, Polar, Radar, Categorical
+            for (i = 0; i < plotAreaTypes.length; i++) {
+                areaType = plotAreaTypes[i];
+                series = filterSeriesByType(options.series, areaType.seriesTypes);
 
-                if (inArray(currentSeries.type, CATEGORICAL_CHARTS)) {
-                    categoricalSeries.push(currentSeries);
-                } else if (inArray(currentSeries.type, XY_CHARTS)) {
-                    xySeries.push(currentSeries);
-                } else if (inArray(currentSeries.type, POLAR_CHARTS)) {
-                    polarSeries.push(currentSeries);
-                } else if (inArray(currentSeries.type, RADAR_CHARTS)) {
-                    radarSeries.push(currentSeries);
-                } else if (currentSeries.type === PIE) {
-                    pieSeries.push(currentSeries);
-                } else if (currentSeries.type === DONUT) {
-                    donutSeries.push(currentSeries);
-                } else if (currentSeries.type === BULLET) {
-                    bulletSeries.push(currentSeries);
+                if (series.length > 0) {
+                    break;
                 }
             }
 
-            if (pieSeries.length > 0) {
-                plotArea = new PiePlotArea(pieSeries, options);
-            } else if (donutSeries.length > 0) {
-                plotArea = new DonutPlotArea(donutSeries, options);
-            } else if (xySeries.length > 0) {
-                plotArea = new XYPlotArea(xySeries, options);
-            } else if (polarSeries.length > 0) {
-                plotArea = new dataviz.PolarPlotArea(polarSeries, options);
-            } else if (radarSeries.length > 0) {
-                plotArea = new dataviz.RadarPlotArea(radarSeries, options);
-            } else {
-                plotArea = new CategoricalPlotArea(categoricalSeries, options);
+            if (series.length === 0) {
+                areaType = plotAreaTypes[0];
             }
+
+            plotArea = new areaType.type(series, options);
 
             return plotArea;
         },
@@ -1202,6 +1169,14 @@ kendo_module({
             }
         }
     });
+
+    Chart.plotAreaTypes = [];
+    Chart.registerPlotArea = function(type, seriesTypes) {
+        Chart.plotAreaTypes.push({
+            type: type,
+            seriesTypes: seriesTypes
+        });
+    };
 
     var BarLabel = ChartElement.extend({
         init: function(content, options) {
@@ -6220,21 +6195,6 @@ kendo_module({
             return seriesByPane;
         },
 
-        filterSeriesByType: function(series, types) {
-            var i, currentSeries,
-                result = [];
-
-            types = [].concat(types);
-            for (i = 0; i < series.length; i++) {
-                currentSeries = series[i];
-                if (inArray(currentSeries.type, types)) {
-                    result.push(currentSeries);
-                }
-            }
-
-            return result;
-        },
-
         filterVisibleSeries: function(series) {
             var i, currentSeries,
                 result = [];
@@ -6794,32 +6754,32 @@ kendo_module({
                 }
 
                 plotArea.createAreaChart(
-                    plotArea.filterSeriesByType(filteredSeries, [AREA, VERTICAL_AREA]),
+                    filterSeriesByType(filteredSeries, [AREA, VERTICAL_AREA]),
                     pane
                 );
 
                 plotArea.createBarChart(
-                    plotArea.filterSeriesByType(filteredSeries, [COLUMN, BAR]),
+                    filterSeriesByType(filteredSeries, [COLUMN, BAR]),
                     pane
                 );
 
                 plotArea.createLineChart(
-                    plotArea.filterSeriesByType(filteredSeries, [LINE, VERTICAL_LINE]),
+                    filterSeriesByType(filteredSeries, [LINE, VERTICAL_LINE]),
                     pane
                 );
 
                 plotArea.createCandlestickChart(
-                    plotArea.filterSeriesByType(filteredSeries, CANDLESTICK),
+                    filterSeriesByType(filteredSeries, CANDLESTICK),
                     pane
                 );
 
                 plotArea.createOHLCChart(
-                    plotArea.filterSeriesByType(filteredSeries, OHLC),
+                    filterSeriesByType(filteredSeries, OHLC),
                     pane
                 );
 
                 plotArea.createBulletChart(
-                    plotArea.filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
+                    filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
                     pane
                 );
             }
@@ -7021,7 +6981,7 @@ kendo_module({
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
             var plotArea = this,
-                centeredSeries = plotArea.filterSeriesByType(
+                centeredSeries = filterSeriesByType(
                     plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK, BULLET]
                 ),
                 seriesIx,
@@ -7220,6 +7180,10 @@ kendo_module({
             }
         }
     });
+    Chart.registerPlotArea(CategoricalPlotArea, [
+        BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
+        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
+    ]);
 
     var AxisGroupRangeTracker = Class.extend({
         init: function() {
@@ -7291,17 +7255,17 @@ kendo_module({
                 }
 
                 plotArea.createScatterChart(
-                    plotArea.filterSeriesByType(filteredSeries, SCATTER),
+                    filterSeriesByType(filteredSeries, SCATTER),
                     pane
                 );
 
                 plotArea.createScatterLineChart(
-                    plotArea.filterSeriesByType(filteredSeries, SCATTER_LINE),
+                    filterSeriesByType(filteredSeries, SCATTER_LINE),
                     pane
                 );
 
                 plotArea.createBubbleChart(
-                    plotArea.filterSeriesByType(filteredSeries, BUBBLE),
+                    filterSeriesByType(filteredSeries, BUBBLE),
                     pane
                 );
             }
@@ -7511,6 +7475,9 @@ kendo_module({
             }
         }
     });
+    Chart.registerPlotArea(XYPlotArea, [
+            SCATTER, SCATTER_LINE, BUBBLE
+    ]);
 
     var PiePlotArea = PlotAreaBase.extend({
         render: function() {
@@ -7539,6 +7506,7 @@ kendo_module({
             append(this.options.legend.items, chart.legendItems);
         }
     });
+    Chart.registerPlotArea(PiePlotArea, [PIE]);
 
     var DonutPlotArea = PiePlotArea.extend({
         render: function() {
@@ -7561,6 +7529,7 @@ kendo_module({
             plotArea.appendChart(donutChart);
         }
     });
+    Chart.registerPlotArea(DonutPlotArea, [DONUT]);
 
     var PieAnimation = ElementAnimation.extend({
         options: {
@@ -9189,6 +9158,7 @@ kendo_module({
         return diff;
     }
 
+    // TODO: Register dynamically
     function valueFieldsBySeriesType(type) {
         var result = [VALUE];
 
@@ -9505,6 +9475,21 @@ kendo_module({
         return result;
     }
 
+     function filterSeriesByType(series, types) {
+         var i, currentSeries,
+             result = [];
+
+         types = [].concat(types);
+         for (i = 0; i < series.length; i++) {
+             currentSeries = series[i];
+             if (inArray(currentSeries.type, types)) {
+                 result.push(currentSeries);
+             }
+         }
+
+         return result;
+     }
+
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
 
@@ -9564,6 +9549,7 @@ kendo_module({
         ceilDate: ceilDate,
         duration: duration,
         floorDate: floorDate,
+        filterSeriesByType: filterSeriesByType,
         limitValue: limitValue,
         lteDateIndex: lteDateIndex,
         evalOptions: evalOptions,
