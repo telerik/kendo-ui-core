@@ -1533,7 +1533,7 @@ kendo_module({
             //rule._currentPos = 1;
 
             //Rename to expand or smth different
-            freq.normalize(rule, start);
+            freq.setup(rule, start, event.start);
             start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
             start = freq.limit(start, end, rule);
 
@@ -1572,7 +1572,7 @@ kendo_module({
                     return start;
                 },
 
-                normalize: function(rule, start) {
+                setup: function(rule, start) {
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
@@ -1630,7 +1630,7 @@ kendo_module({
                     return start;
                 },
 
-                normalize: function(rule, start) {
+                setup: function(rule, start) {
                     if (!rule.weekDays) {
                         rule.weekDays = [{
                             day: start.getDay(),
@@ -1691,18 +1691,16 @@ kendo_module({
             },
             monthly: {
                 next: function(start, rule) {
+                    var day;
+
                     if (rule.monthDays || rule.weekDays) {
                         start.setDate(start.getDate() + 1);
                     } else {
-                        //this logic is implemented in Calendar.js -> views
-                        var month = start.getMonth() + 1;
-                        start.setMonth(month);
+                        day = start.getDate();
+                        start.setMonth(start.getMonth() + 1);
 
-
-                        month = month > 12 ? month - 12 : month;
-
-                        if (start.getMonth() !== month) {
-                            start.setDate(-1);
+                        while(start.getDate() !== day) {
+                            start.setDate(day);
                         }
                     }
                     return start;
@@ -1757,11 +1755,13 @@ kendo_module({
 
                     if (day) {
                         date.setDate(day);
+                    }*/
+                },
+                setup: function(rule, start, eventStart) {
+                    if (!rule.monthDays && !rule.weekDays) {
+                        start.setDate(eventStart.getDate());
                     }
 
-                    return date;*/
-                },
-                normalize: function(rule, start) {
                     if (rule.weekDays && rule._weekDayRules === undefined) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
@@ -1783,7 +1783,7 @@ kendo_module({
                 limit: function() {
 
                 },
-                normalize: function() {
+                setup: function() {
 
                 }
             }

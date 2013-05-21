@@ -701,6 +701,40 @@
                 equal(events[4].end.getTime(), +new Date(2000, 9, 10, 17, 0));
             });
 
+            test("MONTHLY occurrence sets date to event.start if NO BYMONTHDAYS and BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 0, 31, 16, 30),
+                    end: new Date(2000, 0, 31, 17, 0),
+                    rule: "FREQ=MONTHLY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 0, 10), end: new Date(2000, 5, 10, 17) } );
+
+                equal(events.length, 3);
+                equal(events[0].start.getDate(), 31);
+                equal(events[1].start.getDate(), 31);
+                equal(events[2].start.getDate(), 31);
+            });
+
+            test("MONTHLY method returns only if date is available in current month", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 0, 31, 16, 30),
+                    end: new Date(2000, 0, 31, 17, 0),
+                    rule: "FREQ=MONTHLY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 0, 10), end: new Date(2000, 5, 10, 17) } );
+
+                equal(events.length, 3);
+                equal(events[0].start.getMonth(), 0);
+                equal(events[1].start.getMonth(), 2);
+                equal(events[2].start.getMonth(), 4);
+            });
+
             test("MONTHLY method limits by month", function() {
                 var schedulerEvent = {
                     uid: "id",
@@ -840,7 +874,7 @@
 
             module("YEARLY Occurrences");
 
-            /*test("YEARLY method returns one event for each new year", function() {
+            test("YEARLY method returns one event for each new year", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
@@ -864,7 +898,7 @@
                 equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2002, 5, 10, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2002, 5, 10, 17, 0));
-            });*/
+            });
 
         </script>
     </body>
