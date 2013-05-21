@@ -52,6 +52,10 @@ module CodeGen::MVC::Mobile
         //<< Fields})
 
         FLUENT_FIELD_DECLARATION = ERB.new(%{
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
         public <%= owner.instance_of?(ArrayOption) ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
@@ -61,6 +65,10 @@ module CodeGen::MVC::Mobile
         })
 
         FLUENT_COMPOSITE_FIELD_DECLARATION = ERB.new(%{
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        /// <param name="configurator">The action that configures the <%= csharp_name.downcase %>.</param>
         public <%= owner.csharp_class %>Builder <%= csharp_name%>(Action<<%= csharp_builder_class %>> configurator)
         {
             configurator(new <%= csharp_builder_class %>(container.<%= csharp_name%>));
@@ -70,10 +78,13 @@ module CodeGen::MVC::Mobile
 
         FLUENT_EVENTS = ERB.new(%{//>> Handlers
         <%= events.map { |event| event.to_fluent }.join %>
-        //<< Handlers
-        })
+        //<< Handlers})
 
         FLUENT_EVENT_DECLARATION = ERB.new(%{
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the <%= name %> event.</param>
         public <%= owner.csharp_class %>EventBuilder <%= csharp_name %>(string handler)
         {
             Handler("<%= name %>", handler);
