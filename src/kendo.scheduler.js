@@ -23,6 +23,8 @@ kendo_module({
         isArray = $.isArray,
         NS = ".kendoScheduler",
         CHANGE = "change",
+        REMOVE = "remove",
+        DELETECONFIRM = "Are you sure you want to delete this event?",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -157,18 +159,23 @@ kendo_module({
             that._resizeHandler = proxy(that._resize, that);
 
             $(window).on("resize" + NS, that._resizeHandler);
+
+            that._editable();
         },
 
         options: {
             name: "Scheduler",
             selectDate: TODAY,
+            editable: true,
             messages: {
                 today: "Today"
             },
             views: []
         },
 
-        events: [],
+        events: [
+            REMOVE
+        ],
 
         destroy: function() {
             var that = this,
@@ -195,6 +202,51 @@ kendo_module({
             $(window).off("resize" + NS, that._resizeHandler);
 
             kendo.destroy(that.wrapper);
+        },
+
+        _editable: function() {
+            var that = this;
+
+            if (that.options.editable) {
+                that.wrapper.on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
+                    that.removeEvent(this);
+                    e.preventDefault();
+                });
+            }
+        },
+
+        _modelForContainer: function(container) {
+            container = $(container).closest(".k-appointment");
+
+            var id = container.attr(kendo.attr("uid"));
+
+            return this.dataSource.getByUid(id);
+        },
+
+        _showMessage: function(text) {
+            return window.confirm(text);
+        },
+
+        _confirmation: function() {
+            var that = this,
+                editable = that.options.editable,
+                confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
+
+            return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
+        },
+
+        removeEvent: function(element) {
+            var model = this._modelForContainer(element);
+
+            if (!this._confirmation()) {
+                return;
+            }
+
+            if (model && !this.trigger(REMOVE, { element: element, event: model })) {
+                if (this.dataSource.remove(model)) {
+                    this.dataSource.sync();
+                }
+            }
         },
 
         view: function(name) {
