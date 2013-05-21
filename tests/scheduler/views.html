@@ -1547,6 +1547,160 @@
                 equal(eventElements.eq(2).height(), eventHeight);
             });
 
+            test("close button is rendered if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.renderEvents(events);
+
+                equal(view.content.find(".k-appointment a>.k-i-close").length, 1);
+                equal(view.datesHeader.find(".k-appointment a>.k-i-close").length, 1);
+            });
+
+            test("close button is not rendered if editable.destroy is false", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: { destroy: false },
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.renderEvents(events);
+
+                ok(!view.content.find(".k-appointment a>.k-i-close").length);
+                ok(!view.datesHeader.find(".k-appointment a>.k-i-close").length);
+            });
+
+            test("close button is not visible by default if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.renderEvents(events);
+
+                equal(view.content.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+                equal(view.datesHeader.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+            });
+
+            test("close button is shown on all day event hover if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.datesHeader.find(".k-appointment").trigger("mouseover");
+
+                notEqual(view.datesHeader.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+            });
+
+            test("close button is shown on event hover if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.content.find(".k-appointment").trigger("mouseover");
+
+                notEqual(view.content.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+            });
+
+            test("close button is hidden on event mouseleave if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.content.find(".k-appointment").trigger("mouseleave");
+
+                equal(view.content.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+            });
+
+            test("close button is not rendered if set to not editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: false,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.renderEvents(events);
+
+                ok(!view.content.find(".k-appointment a>.k-i-close").length);
+                ok(!view.datesHeader.find(".k-appointment a>.k-i-close").length);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -42,12 +42,16 @@ kendo_module({
                     '<dt>${formattedTime}</dt>' +
                     '<dd>${title}</dd>' +
                 '</dl>' +
-                //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                '#if (showDelete) {#' +
+                    '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
+                '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
                 '</div>'),
         DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}" data-#=ns#uid="#=uid#">' +
                 '<dl><dd>${title}</dd></dl>' +
-                //'<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                '#if (showDelete) {#' +
+                    '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
+                '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
             '</div>');
 
@@ -496,6 +500,7 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
+            this._editable();
         },
 
         options: {
@@ -514,7 +519,18 @@ kendo_module({
             majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
             minorTickTimeTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
-            allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE
+            allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
+            editable: true
+        },
+
+        _editable: function() {
+            if (this.options.editable) {
+                this.element.on("mouseover" + NS, ".k-appointment", function() {
+                    $(this).find("a:has(.k-i-close)").show();
+                }).on("mouseleave" + NS, ".k-appointment", function() {
+                    $(this).find("a:has(.k-i-close)").hide();
+                });
+            }
         },
 
         dateForTitle: function() {
@@ -957,13 +973,16 @@ kendo_module({
        },
 
         _createEventElement: function(event, template) {
-            var formattedTime = kendo.format(this.options.eventTimeFormat, event.start, event.end),
-                titleAttr = this.options.titleAttrFormat;
+            var options = this.options,
+                formattedTime = kendo.format(options.eventTimeFormat, event.start, event.end),
+                titleAttr = options.titleAttrFormat,
+                showDelete = options.editable && options.editable.destroy !== false;
 
             return $(template(extend({}, {
                 ns: kendo.ns,
                 formattedTime: formattedTime,
-                titleAttr: kendo.format(titleAttr, formattedTime, event.title)
+                titleAttr: kendo.format(titleAttr, formattedTime, event.title),
+                showDelete: showDelete
             }, event)));
         },
 
