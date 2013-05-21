@@ -67,12 +67,12 @@
             });
 
             test("DAILY frequency next method gets next day (interval:1)", function() {
-                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:1 });
+                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), { interval:1 });
                 equal(+next, +new Date(2000, 10, 11, 18, 18, 18))
             });
 
             test("DAILY frequency next method gets the day after tomorrow (interval:2)", function() {
-                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), new Date(2000, 10, 12, 18, 18, 18), { interval:2 });
+                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), { interval:2 });
                 equal(+next, +new Date(2000, 10, 12, 18, 18, 18));
             });
 
@@ -613,6 +613,181 @@
                 equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 29, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 29, 17, 0));
+            });
+
+            /*test("WEEKLY occurrences method returns only nth occurrence", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 10, 10, 16, 30),
+                    end: new Date(2013, 10, 10, 17, 0),
+                    rule: "FREQ=WEEKLY;BYDAY=MO,TU,WE;BYSETPOS=1"
+                }
+
+                debugger;
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 10), end: new Date(2013, 11, 1) } );
+
+                equal(events.length, 3);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 10, 11, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 10, 11, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 10, 18, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 10, 18, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 10, 25, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 10, 25, 17, 0));
+            });*/
+
+            module("MONTHLY Occurrences");
+            test("MONTHLY method returns one event for each new month", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 5, 10), end: new Date(2000, 9, 10, 17) } );
+
+                equal(events.length, 5);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 5, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 5, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 6, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 6, 10, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2000, 7, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 7, 10, 17, 0));
+
+                equal(events[3].recurrenceID, schedulerEvent.uid);
+                equal(events[3].start.getTime(), +new Date(2000, 8, 10, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2000, 8, 10, 17, 0));
+
+                equal(events[4].recurrenceID, schedulerEvent.uid);
+                equal(events[4].start.getTime(), +new Date(2000, 9, 10, 16, 30));
+                equal(events[4].end.getTime(), +new Date(2000, 9, 10, 17, 0));
+            });
+
+            test("MONTHLY method limits by month", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY;BYMONTH=6,8,10"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 5, 10), end: new Date(2000, 9, 10, 17) } );
+
+                equal(events.length, 3);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 5, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 5, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 7, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 7, 10, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2000, 9, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 9, 10, 17, 0));
+            });
+
+            test("MONTHLY method limits by month and return empty array", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY;BYMONTH=12"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 5, 10), end: new Date(2000, 9, 10, 17) } );
+                equal(events.length, 0);
+            });
+
+            test("MONTHLY method expands by BYMONTHDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY;BYMONTHDAY=6,10"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 5, 10), end: new Date(2000, 6, 10, 17) } );
+
+                equal(events.length, 3);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 5, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 5, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2000, 6, 6, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 6, 6, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2000, 6, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 6, 10, 17, 0));
+            });
+
+            test("MONTHLY method expands by BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY;BYDAY=MO,WE"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 6, 10, 17) } );
+
+                equal(events.length, 10);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 0));
+
+                equal(events[4].recurrenceID, schedulerEvent.uid);
+                equal(events[4].start.getTime(), +new Date(2013, 5, 24, 16, 30));
+                equal(events[4].end.getTime(), +new Date(2013, 5, 24, 17, 0));
+
+                equal(events[9].recurrenceID, schedulerEvent.uid);
+                equal(events[9].start.getTime(), +new Date(2013, 6, 10, 16, 30));
+                equal(events[9].end.getTime(), +new Date(2013, 6, 10, 17, 0));
+            });
+
+            test("MONTHLY expand by BYMONTHDAY and limit by BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY;BYMONTHDAY=13,23,25;BYDAY=TU,TH"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 6, 10, 17) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 13, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 13, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 25, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 25, 17, 0));
             });
 
         </script>

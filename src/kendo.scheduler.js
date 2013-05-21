@@ -1530,19 +1530,21 @@ kendo_module({
                 end = new Date(rule.until);
             }
 
-            if (freq.normalize) {
-                freq.normalize(rule, start);
-            }
+            //rule._currentPos = 1;
 
+            //Rename to expand or smth different
+            freq.normalize(rule, start);
             start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
             start = freq.limit(start, end, rule);
 
             while (+start <= end) {
-                events.push({
-                    recurrenceID: event.uid,
-                    start: freq.setDate(start, event.start),
-                    end: freq.setDate(start, event.end)
-                });
+                //if (freq.position(rule)) {
+                    events.push({
+                        recurrenceID: event.uid,
+                        start: freq.setDate(start, event.start),
+                        end: freq.setDate(start, event.end)
+                    });
+                //}
 
                 if (count && count === current) {
                     break;
@@ -1550,8 +1552,10 @@ kendo_module({
 
                 current++;
 
-                start = freq.next(start, end, rule);
+                start = freq.next(start, rule);
                 start = freq.limit(start, end, rule);
+
+                //rule._currentPos += 1;
             }
 
             return events;
@@ -1562,7 +1566,7 @@ kendo_module({
             //TODO: FREQ: MINUTELY
             //TODO: FREQ: HOURLY
             daily: {
-                next: function(start, end, rule) { //TODO: remove end if not used !!!
+                next: function(start, rule) {
                     start = new Date(start);
                     start.setDate(start.getDate() + rule.interval);
                     return start;
@@ -1603,6 +1607,10 @@ kendo_module({
                     return date;
                 },
 
+                /*position: function() {
+                    return true;
+                },*/
+
                 setDate: function(currentDate, eventDate) {
                     currentDate = new Date(currentDate);
                     currentDate.setHours(eventDate.getHours());
@@ -1629,6 +1637,10 @@ kendo_module({
                     if (rule._weekDayRules === undefined) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
+
+                   // if (rule._setPositions === undefined) {
+                   //     rule._setPositions = rule.setPositions.slice(0);
+                   // }
                 },
 
                 limit: function(date, end, rule) {
@@ -1643,6 +1655,24 @@ kendo_module({
                     return date;
                 },
 
+                /*position: function(rule) {
+                    var setPositions = rule._setPositions,
+                        position;
+
+                    if (setPositions) {
+                        position = setPositions.shift();
+                        if (!position) {
+                            rule._setPositions = setPositions = rule.setPositions.slice(0);
+                            position = setPositions.shift(0);
+
+                        }
+
+                        return rule._currentPos === position;
+                    }
+
+                    return true;
+                },*/
+
                 setDate: function(currentDate, eventDate) {
                     //same as DAILY.setDate
                     currentDate = new Date(currentDate);
@@ -1653,6 +1683,62 @@ kendo_module({
                     return currentDate;
                 }
 
+            },
+            monthly: {
+                next: function(start, rule) {
+                    if (rule.monthDays || rule.weekDays) {
+                        start.setDate(start.getDate() + 1);
+                    } else {
+                        //this logic is implemented in Calendar.js -> views
+                        var month = start.getMonth() + 1;
+                        start.setMonth(month);
+
+
+                        month = month > 12 ? month - 12 : month;
+
+                        if (start.getMonth() !== month) {
+                            start.setDate(-1);
+                        }
+                    }
+                    return start;
+                },
+                limit: function(date, end, rule) {
+                    var day, limit;
+
+                    if (rule.months) {
+                        day = date.getDate();
+                        date = recurrence._month(date, end, rule);
+                    }
+
+                    if (rule.monthDays) {
+                        day = 0;
+                        date = recurrence._monthDay(date, end, rule);
+                    }
+
+                    if (rule.weekDays) {
+                        date = recurrence._weekDay(date, end, rule);
+                    }
+
+                    if (day) {
+                        date.setDate(day);
+                    }
+
+                    return date;
+                },
+                normalize: function(rule, start) {
+                    if (rule.weekDays && rule._weekDayRules === undefined) {
+                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+                },
+                setDate: function(currentDate, eventDate) {
+                    //same as DAILY.setDate
+                    currentDate = new Date(currentDate);
+                    currentDate.setHours(eventDate.getHours());
+                    currentDate.setMinutes(eventDate.getMinutes());
+                    currentDate.setSeconds(eventDate.getSeconds());
+                    currentDate.setMilliseconds(eventDate.getMilliseconds());
+                    return currentDate;
+                }
             }
         },
         parseRule: function (rule) {
