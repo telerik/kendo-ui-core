@@ -638,7 +638,10 @@ var RestorePoint = Class.extend({
         var that = this;
         that.range = range;
         that.rootNode = RangeUtils.documentFromRange(range);
-        that.body = that.rootNode.body;
+        that.body = that.getEditable(range);
+        if (dom.name(that.body) != "body") {
+            that.rootNode = that.body;
+        }
         that.html = that.body.innerHTML;
 
         that.startContainer = that.nodeToPath(range.startContainer);
@@ -662,6 +665,20 @@ var RestorePoint = Class.extend({
         }
 
         return result;
+    },
+
+    getEditable: function(range) {
+        var root = range.commonAncestorContainer;
+
+        while (root && (root.nodeType == 3 || root.attributes && !root.attributes.contentEditable)) {
+            root = root.parentNode;
+        }
+
+        return root;
+    },
+
+    restoreHtml: function() {
+        this.body.innerHTML = this.html;
     },
 
     offset: function(node, value) {
@@ -747,8 +764,7 @@ var Marker = Class.extend({
 
         if (isDataNode(node)) {
             range.setStart(node, startOffset);
-        }
-        else if (node) {
+        } else if (node) {
             var textNode = dom.lastTextNode(node);
             if (textNode) {
                 range.setStart(textNode, textNode.nodeValue.length);

@@ -364,6 +364,27 @@ test('paragraph at start of formatted text', function() {
     equal(editor.value(), '<p><strong></strong></p><p><strong><a></a>foo</strong></p>');
 });
 
+test("paragraph discards preceding whitespace", function() {
+    editor.value("<p>foo</p><p>    bar</p>");
+
+    var p = editor.body.lastChild;
+    var range = editor.createRange();
+    range.setStart(p.firstChild, 4);
+    range.collapse(true);
+
+    var command = new ParagraphCommand({ range: range });
+    command.exec();
+
+    if (!kendo.support.browser.msie) {
+        var br = editor.body.childNodes[1].lastChild;
+        equal(br.nodeName.toLowerCase(), "br", "bogus br is present in non-ie browsers");
+    }
+
+    insertCaretAnchor();
+
+    equal(editor.value(), '<p>foo</p><p></p><p><a></a>bar</p>');
+});
+
 </script>
 
 <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

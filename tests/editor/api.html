@@ -10,9 +10,13 @@
     </head>
     <body>
 
+        <p id="dummy">lorem ipsum</p>
+
         <div><textarea cols="20" rows="4" id="EditorEncodeFalse" name="EditorEncodeFalse"></textarea></div>
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor"></textarea></div>
         <div><textarea cols="20" rows="4" id="EditorWithStyleSheets" name="EditorWithStyleSheets"></textarea></div>
+
+        <div id="inline" contentEditable></div>
 
         <script>
 
@@ -22,6 +26,8 @@
 
             $("#Editor1").kendoEditor();
 
+            $("#inline").kendoEditor();
+
             $("#EditorWithStyleSheets").kendoEditor({
                 stylesheets: [
                     "kendo.common.css",
@@ -29,27 +35,16 @@
                 ]
             });
 
-            test("editor value should not be encoded", function() {
+            test("value returns unencoded value if encoded is false", function() {
                 var editorEncodeFalse = getEditor("#EditorEncodeFalse");
                 editorEncodeFalse.value("<p>foo</p>");
 
                 editorEncodeFalse.update();
 
-                equal(editorEncodeFalse.textarea.value, "<p>foo</p>");
+                equal(editorEncodeFalse.textarea.val(), "<p>foo</p>");
             });
 
-            test("editor default Encode value must be true", function() {
-                equal(getEditor().options.encoded, true);
-            });
-
-            test("editor should add stylesheets", function() {
-                var editorWithStyleSheets = getEditor("#EditorWithStyleSheets");
-
-                equal(editorWithStyleSheets.options.stylesheets[0], "kendo.common.css");
-                equal(editorWithStyleSheets.options.stylesheets[1], "kendo.theme.css");
-            });
-
-            test("editor outputs css links in iframe", function() {
+            test("stylesheets config option renders stylesheets in the editing area", function() {
                 var editorWithStyleSheets = getEditor("#EditorWithStyleSheets");
 
                 var links = $("link", editorWithStyleSheets.document);
@@ -58,7 +53,7 @@
                 equal(links.eq(1).attr("href"), "kendo.theme.css");
             });
 
-            test("setting value does not remove selection, if content is the same", function() {
+            test("value method does not remove selection if provided value is the same as the current text", function() {
                 var editor = getEditor();
                 editor.value("<p>foo</p>");
 
@@ -77,6 +72,31 @@
                 equal(range.endOffset, 2);
             });
 
+            test("restoreSelection restores element selection", function() {
+                var inline = getEditor("#inline");
+
+                inline.value("foo bar baz");
+
+                var text = inline.body.firstChild;
+
+                var range = inline.createRange();
+                range.setStart(text, 4);
+                range.setEnd(text, 7);
+                inline.selectRange(range);
+
+                var con = inline.createRange();
+                con.selectNodeContents($("#dummy")[0]);
+                inline.selectRange(con);
+
+                inline.restoreSelection();
+
+                range = inline.getRange();
+
+                equal(range.startContainer, text);
+                equal(range.startOffset, 4);
+                equal(range.endContainer, text);
+                equal(range.endOffset, 7);
+            });
 
         </script>
 

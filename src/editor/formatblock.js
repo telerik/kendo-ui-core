@@ -309,7 +309,7 @@ var FormatBlockTool = Tool.extend({
             highlightFirst: false
         });
 
-        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").addBack().attr("unselectable", "on");
     }
 });
 

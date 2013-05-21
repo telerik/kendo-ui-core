@@ -3,14 +3,14 @@
 // Imports ================================================================
 var kendo = window.kendo,
     extend = $.extend,
-    Editor = kendo.ui.editor,
-    dom = Editor.Dom,
-    Command = Editor.Command,
-    Tool = Editor.Tool,
-    BlockFormatter = Editor.BlockFormatter,
+    editorNS = kendo.ui.editor,
+    dom = editorNS.Dom,
+    Command = editorNS.Command,
+    Tool = editorNS.Tool,
+    BlockFormatter = editorNS.BlockFormatter,
     normalize = dom.normalize,
-    RangeUtils = Editor.RangeUtils,
-    registerTool = Editor.EditorUtils.registerTool;
+    RangeUtils = editorNS.RangeUtils,
+    registerTool = editorNS.EditorUtils.registerTool;
 
 var ParagraphCommand = Command.extend({
     init: function(options) {
@@ -39,7 +39,7 @@ var ParagraphCommand = Command.extend({
         var range = this.getRange(),
             doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
-            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
+            emptyParagraphContent = editorNS.emptyElementContent,
             paragraph, marker, li, heading, rng,
             // necessary while the emptyParagraphContent is empty under IE
             blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),
@@ -61,7 +61,7 @@ var ParagraphCommand = Command.extend({
                     node = node.firstChild;
                 }
 
-                if (node.innerHTML === "") {
+                if (/^\s*$/.test(node.innerHTML)) {
                     node.innerHTML = emptyParagraphContent;
                 }
             }
@@ -186,7 +186,7 @@ var NewLineCommand = Command.extend({
     }
 });
 
-extend(Editor, {
+extend(editorNS, {
     ParagraphCommand: ParagraphCommand,
     NewLineCommand: NewLineCommand
 });

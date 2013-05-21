@@ -121,6 +121,12 @@
     background-image: @texture,       ~"linear-gradient(to bottom, @{gradient})";
 }
 
+.selection(@color) {
+    background-color: @color;
+    text-shadow: none;
+    color: #fff;
+}
+
 .k-in,
 .k-item,
 .k-window-action
@@ -819,6 +825,15 @@ div.k-imagebrowser-dropzone em
     .box-shadow(inset 0 1px 1px @shadow-color);
 }
 
+/* Selection */
+.k-editor-inline ::-moz-selection {
+    .selection(@selected-border-color);
+}
+
+.k-editor-inline ::selection {
+    .selection(@selected-border-color);
+}
+
 /* Border radius */
 
 .k-block,
@@ -852,6 +867,7 @@ div.k-imagebrowser-dropzone em
 .k-treeview .k-in,
 .k-editor-button .k-state-hover,
 .k-editor-button .k-state-active,
+.k-editor-inline,
 .k-tooltip,
 .k-tile,
 .k-slider-track,

@@ -47,7 +47,7 @@
                 e.type = type;
 
                 var editor = getEditor();
-                $(editor.document).trigger(e);
+                $(editor.body).trigger(e);
             }
 
             function keydown() {
@@ -66,8 +66,6 @@
                     editor.bind('select', function () {
                         changeRaised = true;
                     });
-
-                    editor.focus();
                 }
             });
 
@@ -110,9 +108,12 @@
                 ok(changeRaised);
             });
 
-            test('mouseup raises selection change', function() {
-                $(getEditor().document).mouseup();
-                ok(changeRaised);
+            asyncTest('mouseup raises selection change', function() {
+                $(editor.body).mouseup();
+                setTimeout(function() {
+                    ok(changeRaised);
+                    start();
+                }, 100);
             });
 
             test('down arrow raises selection change', function() {

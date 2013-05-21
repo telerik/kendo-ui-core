@@ -246,24 +246,22 @@
         equal(editor.value(), 'foo bar<strong> baz</strong>');
     });
 
+    var boldTool = kendo.ui.Editor.defaultTools.bold;
+
     test('InlineFormatTool.willDelayExecution returns false when format will be directly applied', function() {
-        var tool = editor.options.tools.bold, range;
+        var range = createRangeFromText(editor, 'foo|bar|baz');
 
-        range = createRangeFromText(editor, 'foo|bar|baz');
-
-        ok(!tool.willDelayExecution(range));
+        ok(!boldTool.willDelayExecution(range));
 
         range = createRangeFromText(editor, 'foob||arbaz');
 
-        ok(!tool.willDelayExecution(range));
+        ok(!boldTool.willDelayExecution(range));
     });
 
     test('InlineFormatTool.willDelayExecution returns true when format will be added to pending formats', function() {
-        var tool = editor.options.tools.bold;
-
         var range = createRangeFromText(editor, 'foobarbaz||');
 
-        ok(tool.willDelayExecution(range));
+        ok(boldTool.willDelayExecution(range));
     });
 
 </script>

@@ -404,6 +404,12 @@
                     "meta": "This example of Kendo UI WYSIWYG editor component shows how you can implement this easy-to-use and beautiful editor in your web app."
                 },
                 {
+                    "text": "Inline editing",
+                    "url": "editor/inline-editing.html",
+                    "title": "Inline editing functionality of Kendo UI WYSIWYG jQuery Editor",
+                    "meta": "This example shows how to use the Kendo UI Editor to edit parts of the page inline, allowing authors to see the page in its final state."
+                },
+                {
                     "text": "Custom tools",
                     "url": "editor/custom-tools.html",
                     "title": "Custom tools for Kendo UI WYSIWYG jQuery Editor",

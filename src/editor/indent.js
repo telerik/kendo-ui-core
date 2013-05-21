@@ -100,7 +100,7 @@ var IndentFormatter = Class.extend({
                 }
             }
         } else {
-            var formatter = new BlockFormatter([{tags:"p"}], {style:{marginLeft:30}});
+            var formatter = new BlockFormatter([{tags:["p"]}], {style:{marginLeft:30}});
 
             formatter.apply(nodes);
         }

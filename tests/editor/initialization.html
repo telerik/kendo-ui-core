@@ -63,6 +63,38 @@
 
                 kendo.ui.editor.ColorTool.fn.options.palette = defaultPalette;
             });
+
+            module("initialization from div[contentEditable]", {
+                teardown: function() {
+                    $(".k-widget, .k-editor-toolbar").remove();
+                }
+            });
+
+            test("returns proper initial content", function() {
+                var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+                dom.kendoEditor();
+
+                equal(dom.data("kendoEditor").value(), "<p>foo</p>");
+            });
+
+            test("adds k-editor class to contentEditable", function() {
+                var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+
+                dom.kendoEditor();
+
+                ok(dom.hasClass("k-editor"));
+                ok(dom.hasClass("k-editor-inline"));
+                ok(dom.hasClass("k-widget"));
+            });
+
+            if (!kendo.support.browser.msie) {
+                test("processes value when initializing", function() {
+                    var dom = $("<div contentEditable><p></p></div>").appendTo("body");
+                    dom.kendoEditor();
+
+                    equal(dom.find("br").length, 1);
+                });
+            }
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

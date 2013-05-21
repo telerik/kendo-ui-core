@@ -1,202 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+    <script>
 
-$("#Editor1").kendoEditor();
+        $("#Editor1").kendoEditor();
 
-function makeEvent(keyCode) {
-    var e = new $.Event();
-    e.keyCode = keyCode ? keyCode : 'B'.charCodeAt(0);
-    e.shiftKey = false;
-    e.ctrlKey = false;
-    e.altKey = false;
-    return e;
-}
+        function makeEvent(keyCode) {
+            var e = new $.Event();
+            e.keyCode = keyCode ? keyCode : 'B'.charCodeAt(0);
+            e.shiftKey = false;
+            e.ctrlKey = false;
+            e.altKey = false;
+            return e;
+        }
 
-module("Shortcuts", {
-    setup: function() {
-        editor = getEditor();
-    }
-});
+        module("Shortcuts", {
+            setup: function() {
+                editor = getEditor();
+            }
+        });
 
-test('find shorcut by single character', function() {
-    var commands = { bold: { options: { key: 'B'} } }
+        test("find shorcut by single character", function() {
+            var commands = { bold: { options: { key: 'B'} } }
 
-    var e = makeEvent();
+            var e = makeEvent();
 
-    var command = editor.keyboard.toolFromShortcut(commands, e);
+            var command = editor.keyboard.toolFromShortcut(commands, e);
 
-    equal(command, 'bold');
-});
+            equal(command, 'bold');
+        });
 
-test('find shorcut with ctrl', function() {
-    var commands = { bold: { options: { ctrl: true, key: 'B' } } };
+        test("find shorcut with ctrl", function() {
+            var commands = { bold: { options: { ctrl: true, key: 'B' } } };
 
-    var e = makeEvent();
-    e.ctrlKey = true;
+            var e = makeEvent();
+            e.ctrlKey = true;
 
-    var command = editor.keyboard.toolFromShortcut(commands, e);
+            var command = editor.keyboard.toolFromShortcut(commands, e);
 
-    equal(command, 'bold');
-});
+            equal(command, 'bold');
+        });
 
-test('should not find shorcut with ctrl when ctrl is not pressed', function() {
-    var commands = { bold: { options: { ctrl: true, key: 'B'} } };
+        test("should not find shorcut with ctrl when ctrl is not pressed", function() {
+            var commands = { bold: { options: { ctrl: true, key: 'B'} } };
 
-    var e = makeEvent();
+            var e = makeEvent();
 
-    var command = editor.keyboard.toolFromShortcut(commands, e);
+            var command = editor.keyboard.toolFromShortcut(commands, e);
 
-    ok(undefined === command);
-});
+            ok(undefined === command);
+        });
 
-test('should find shortcut with alt', function() {
-    var commands = { bold: { options: { alt: true, key: 'B' } } };
+        test("should find shortcut with alt", function() {
+            var commands = { bold: { options: { alt: true, key: 'B' } } };
 
-    var e = makeEvent();
-    e.altKey = true;
+            var e = makeEvent();
+            e.altKey = true;
 
-    var command = editor.keyboard.toolFromShortcut(commands, e);
+            var command = editor.keyboard.toolFromShortcut(commands, e);
 
-    equal(command, 'bold');
-});
+            equal(command, 'bold');
+        });
 
-test('should find shortcut with shift', function() {
-    var commands = { bold: { options: { shift: true, key: 'B'} } };
+        test("should find shortcut with shift", function() {
+            var commands = { bold: { options: { shift: true, key: 'B'} } };
 
-    var e = makeEvent();
-    e.shiftKey  = true;
+            var e = makeEvent();
+            e.shiftKey  = true;
 
-    var command = editor.keyboard.toolFromShortcut(commands, e);
+            var command = editor.keyboard.toolFromShortcut(commands, e);
 
-    equal(command, 'bold');
-});
+            equal(command, 'bold');
+        });
 
-test('should find shortcut with all modifiers shift', function() {
-    var commands = { bold: { options: { shift: true, alt: true, ctrl: true, key: 'B'} } };
+        test("should find shortcut with all modifiers", function() {
+            var commands = { bold: { options: { shift: true, alt: true, ctrl: true, key: 'B' } } };
 
-    var e = makeEvent();
+            var e = makeEvent();
 
-    e.shiftKey = true;
-    e.altKey = true;
-    e.ctrlKey = true;
+            e.shiftKey = true;
+            e.altKey = true;
+            e.ctrlKey = true;
 
-    var command = editor.keyboard.toolFromShortcut(commands, e);
+            var command = editor.keyboard.toolFromShortcut(commands, e);
 
-    equal(command, 'bold');
-});
+            equal(command, 'bold');
+        });
 
-test('editor dispatches shortcuts to exec', function() {
-    var command = null;
+        test("editor dispatches shortcuts to exec", function() {
+            var command = null;
 
-    editor.exec = function() {
-        command = arguments[0];
-    }
+            editor.exec = function() {
+                command = arguments[0];
+            }
 
-    var e = makeEvent();
-    e.ctrlKey = true;
-    e.type = 'keydown';
+            var e = makeEvent();
+            e.ctrlKey = true;
+            e.type = 'keydown';
 
-    $(editor.document).trigger(e);
+            $(editor.body).trigger(e);
 
-    equal(command, 'bold');
-});
+            equal(command, 'bold');
+        });
 
-test('ctrl z calls undo', function() {
-    var command = null;
+        test("ctrl z calls undo", function() {
+            var command = null;
 
-    editor.exec = function () {
-        command = arguments[0];
-    }
+            editor.exec = function () {
+                command = arguments[0];
+            }
 
-    var e = makeEvent('Z'.charCodeAt(0));
-    e.ctrlKey = true;
-    e.type = 'keydown';
+            var e = makeEvent('Z'.charCodeAt(0));
+            e.ctrlKey = true;
+            e.type = 'keydown';
 
-    $(editor.document).trigger(e);
+            $(editor.body).trigger(e);
 
-    equal(command, 'undo');
-});
+            equal(command, 'undo');
+        });
 
-test('ctrl y calls redo', function() {
-    var command = null;
+        test("ctrl y calls redo", function() {
+            var command = null;
 
-    editor.exec = function() {
-        command = arguments[0];
-    }
+            editor.exec = function() {
+                command = arguments[0];
+            }
 
-    var e = makeEvent('Y'.charCodeAt(0));
-    e.ctrlKey = true;
-    e.type = 'keydown';
+            var e = makeEvent('Y'.charCodeAt(0));
+            e.ctrlKey = true;
+            e.type = 'keydown';
 
-    $(editor.document).trigger(e);
+            $(editor.body).trigger(e);
 
-    equal(command, 'redo');
-});
+            equal(command, 'redo');
+        });
 
-test('shift enter calls new line', function() {
-    var command = null;
+        test("shift enter calls new line", function() {
+            var command = null;
 
-    editor.exec = function () {
-        command = arguments[0];
-    }
+            editor.exec = function () {
+                command = arguments[0];
+            }
 
-    var e = makeEvent(13);
-    e.shiftKey = true;
-    e.type = 'keydown';
+            var e = makeEvent(13);
+            e.shiftKey = true;
+            e.type = 'keydown';
 
-    $(editor.document).trigger(e);
+            $(editor.body).trigger(e);
 
-    equal(command, 'insertLineBreak');
-});
+            equal(command, 'insertLineBreak');
+        });
 
-test('enter calls paragraph', function() {
-    var command = null;
+        test("enter calls paragraph", function() {
+            var command = null;
 
-    editor.exec = function () {
-        command = arguments[0];
-    }
+            editor.exec = function () {
+                command = arguments[0];
+            }
 
-    var e = makeEvent(13);
-    e.type = 'keydown';
+            var e = makeEvent(13);
+            e.type = 'keydown';
 
-    $(editor.document).trigger(e);
+            $(editor.body).trigger(e);
 
-    equal(command, 'insertParagraph');
-});
+            equal(command, 'insertParagraph');
+        });
 
-test('editor prevents default if shortcut is known', function() {
-    editor.exec = function() {};
-    var e = makeEvent();
-    e.ctrlKey = true;
-    e.type = 'keydown';
+        test("editor prevents default if shortcut is known", function() {
+            editor.exec = function() {};
+            var e = makeEvent();
+            e.ctrlKey = true;
+            e.type = 'keydown';
 
-    $(editor.document).trigger(e);
+            $(editor.body).trigger(e);
 
-    ok(e.isDefaultPrevented());
-});
+            ok(e.isDefaultPrevented());
+        });
 
-</script>
+    </script>
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>

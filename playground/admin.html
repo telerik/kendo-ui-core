@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Editor admin playground</title>
+
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+    <link rel="stylesheet" href="http://admin.telerik.com/styles/common.css">
+
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/module.js"></script>
+    <script src="../src/kendo.editor.js"></script>
+
+    <style>
+        html, body {
+            font: 12px/1.5 Tahoma,sans-serif;
+        }
+
+        #content {
+            font-family: Consolas,monospace;
+            word-break: break-all;
+
+            margin-top: 3em;
+        }
+
+        #main {
+            width: 516px;
+            margin: 12em auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div contentEditable id="editor">
+            Hello,
+            <p></p>
+            All the best,<br />
+            <div onselectstart="return false" onresizestart="return false" contenteditable="false" style="border: 1px dotted gray;">Author nickname</div>
+            the Telerik team
+            <div class="forumBaloonTop"></div>
+            <div class="forumBaloon">
+                Join us on our journey to create the world's most complete HTML 5 UI Framework - <a href="http://www.kendoui.com/download.aspx">download Kendo UI</a> now!
+            </div>
+            <div class="forumBaloonBottom"></div>
+        </div>
+
+        <div id="content"></div>
+    </div>
+
+    <script>
+        var editor = $("#editor").kendoEditor({
+            select: function(e) {
+                $("#content").text(this.value());
+            },
+            tools: [
+                "bold", "italic", "underline",
+                "insertUnorderedList", "insertOrderedList",
+                "createLink", "unlink",
+                {
+                    name: "insertHtml",
+                    items: [
+                        { text: "latest internal build", value: "<a href='http://www.telerik.com/account/your-products/internal-builds.aspx'>latest internal build</a>" }
+                    ]
+                },
+                {
+                    name: "style",
+                    items: [
+                        { text: "Code block", value: "frontend_codeinsert" },
+                        { text: "Code comment", value: "frontend_codecomment" }
+                    ]
+                }
+            ]
+        }).data("kendoEditor");
+
+        $("#content").text(editor.value());
+    </script>
+</body>
+</html>

@@ -113,6 +113,12 @@ var Serializer = {
                         var pair = css[cssIndex];
                         if (pair.length) {
                             var match = cssDeclaration.exec(pair);
+
+                            // IE8 does not provide a value for 'inherit'
+                            if (!match) {
+                                continue;
+                            }
+
                             var property = trim(match[1].toLowerCase()),
                                 value = trim(match[2]);
 
@@ -148,6 +154,10 @@ var Serializer = {
             for (var childNode = node.firstChild; childNode; childNode = childNode.nextSibling) {
                 child(childNode, skip);
             }
+        }
+
+        function text(node) {
+            return node.nodeValue.replace(/\ufeff/g, "");
         }
 
         function child(node, skip) {
@@ -186,7 +196,7 @@ var Serializer = {
                     result.push('>');
                 }
             } else if (nodeType == 3) {
-                value = node.nodeValue;
+                value = text(node);
 
                 if (!skip && $.support.leadingWhitespace) {
                     parent = node.parentNode;
@@ -223,7 +233,7 @@ var Serializer = {
         }
 
         if (root.childNodes.length == 1 && root.firstChild.nodeType == 3) {
-            return dom.encode(root.firstChild.nodeValue.replace(/[\r\n\v\f\t ]+/, ' '));
+            return dom.encode(text(root.firstChild).replace(/[\r\n\v\f\t ]+/, ' '));
         }
 
         children(root);

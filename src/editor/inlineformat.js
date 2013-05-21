@@ -243,7 +243,7 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
 
     getFormatInner: function (node) {
         var $node = $(dom.isDataNode(node) ? node.parentNode : node),
-            parents = $node.parents().andSelf(),
+            parents = $node.parentsUntil("[contentEditable]").addBack(),
             i, len, value;
 
         for (i = 0, len = parents.length; i < len; i++) {
@@ -390,7 +390,7 @@ var FontTool = DelayedExecutionTool.extend({
             highlightFirst: false
         });
 
-        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").addBack().attr("unselectable", "on");
 
         ui.data(this.type).value("inherit");
     }
@@ -443,12 +443,12 @@ var ColorTool = Tool.extend({
                 if (color) {
                     Tool.exec(editor, toolName, color);
                 }
+                editor.focus();
+            },
+            activate: function(e) {
+                e.preventDefault();
+                ui.trigger("change");
             }
-        });
-        ui.bind("activate", function(ev){
-            ev.preventDefault();
-            ui.trigger("change");
-            editor.focus();
         });
         ui.wrapper
             .attr({ title: initOptions.title, unselectable: "on" })
@@ -490,7 +490,7 @@ var StyleTool = DelayedExecutionTool.extend({
             highlightFirst: false
         });
 
-        ui.closest(".k-widget").removeClass("k-" + this.name).find("*").andSelf().attr("unselectable", "on");
+        ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
     }
 
 });

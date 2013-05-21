@@ -12,79 +12,68 @@
 
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-        <iframe src="toolbar.html"></iframe>
-
         <script>
 
             $("#Editor1").kendoEditor();
 
             function assertCommand(type, name) {
-                var original = editor.undoRedoStack.push
-                try {
-                    var command;
+                var command;
+
+                withMock(editor.undoRedoStack, "push", function () { command = arguments[0]; }, function() {
                     editor.value("foo");
+
                     var range = editor.createRange();
                     range.selectNodeContents(editor.body);
-                    editor.getSelection().removeAllRanges();
-                    editor.getSelection().addRange(range);
-                    editor.undoRedoStack.push = function () {
-                        command = arguments[0];
-                    }
+                    editor.selectRange(range);
                     editor.exec(name);
 
                     ok(command instanceof type);
-                    } finally {
-                    editor.undoRedoStack.push = original;
-                }
+                });
             }
 
-            module("Exec", {
+            module("", {
                 setup: function() {
                     editor = getEditor();
-                    editor.focus();
+                },
+                teardown: function() {
+                    $(".k-window, .k-overlay").remove();
                 }
             });
 
             test("exec pushes command to undo stack", function() {
-                editor.value("foo");
-                var range = editor.createRange();
-                range.selectNodeContents(editor.body.firstChild);
-                editor.getSelection().removeAllRanges();
-                editor.getSelection().addRange(range);
-
                 var pushArgument;
 
-                editor.undoRedoStack.push = function() { pushArgument = arguments[0] }
+                withMock(editor.undoRedoStack, "push", function() { pushArgument = arguments[0] }, function() {
+                    editor.value("foo");
 
-                editor.exec("bold");
+                    var range = editor.createRange();
+                    range.selectNodeContents(editor.body);
+                    editor.selectRange(range);
 
-                ok(undefined !== pushArgument);
+                    editor.exec("bold");
+
+                    ok(undefined !== pushArgument);
+                });
             });
 
             test("exec undo performs undo", function() {
-                var original = editor.undoRedoStack.undo;
-                try {
-                    var undoIsCalled = false;
-                    editor.undoRedoStack.undo = function() { undoIsCalled = true; }
+                var called = false;
+
+                withMock(editor.undoRedoStack, "undo", function () { called = true; }, function() {
                     editor.exec("undo");
 
-                    ok(undoIsCalled);
-                    } finally {
-                    editor.undoRedoStack.undo = original;
-                }
+                    ok(called);
+                });
             });
 
             test("exec redo performs redo", function() {
-                var original = editor.undoRedoStack.redo;
-                try {
-                    var redoIsCalled = false;
-                    editor.undoRedoStack.redo = function () { redoIsCalled = true; }
+                var called = false;
+
+                withMock(editor.undoRedoStack, "redo", function () { called = true; }, function() {
                     editor.exec("redo");
 
-                    ok(redoIsCalled);
-                    } finally {
-                    editor.undoRedoStack.redo = original;
-                }
+                    ok(called);
+                });
             });
 
             test("exec inline command", function() {
@@ -121,10 +110,6 @@
 
             test("exec unlink creates UnlinkCommand", function() {
                 assertCommand(kendo.ui.editor.UnlinkCommand, "unlink");
-            });
-
-            test("exec insertImage creates image command", function() {
-                assertCommand(kendo.ui.editor.ImageCommand, "insertImage");
             });
 
             test("exec indent creates indent command", function() {

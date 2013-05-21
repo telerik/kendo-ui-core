@@ -2899,7 +2899,7 @@ span.k-numerictextbox
 
 /* Editor */
 
-.k-editor
+table.k-editor
 {
     width: 100%;
     height: 250px;
@@ -2909,6 +2909,17 @@ span.k-numerictextbox
     border-collapse: separate;
     font-size: 100%;
     vertical-align: top;
+}
+
+.k-editor-inline
+{
+    border-width: 2px;
+    padding: .3em .5em;
+}
+
+.k-editortoolbar-dragHandle
+{
+	cursor: move;
 }
 
 .k-editor .k-editor-toolbar-wrap
@@ -3034,6 +3045,12 @@ span.k-numerictextbox
 .k-fontName { width: 110px; }
 .k-fontSize { width: 124px; }
 .k-formatBlock { width: 147px; }
+
+.k-editortoolbar-dragHandle
+{
+	float:left;
+	margin: 1px 0 0;
+}
 
 .k-editor-button .k-state-hover,
 .k-editor-button .k-state-active
