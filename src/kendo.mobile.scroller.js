@@ -365,7 +365,10 @@ kendo_module({
 
 
         zoomOut: function() {
-            this._scale(this.dimensions.minScale);
+            var dimensions = this.dimensions;
+            dimensions.refresh();
+            this._scale(dimensions.fitScale);
+            this.movable.moveTo(dimensions.centerCoordinates());
         },
 
         scrollTo: function(x, y) {

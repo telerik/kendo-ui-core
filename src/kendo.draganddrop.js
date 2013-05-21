@@ -214,9 +214,9 @@ kendo_module({
             that.max = that.virtual ? -that._virtualMin : 0;
             that.size = size;
             that.total = scaledTotal;
-            that.min = Math.min(that.max, that.size - scaledTotal);
-            that.minScale = that.size / total;
-            console.log(that.minScale, that.size, total);
+            that.min = Math.min(that.max, size - scaledTotal);
+            that.minScale = size / total;
+            that.centerOffset = (scaledTotal - size) / 2;
 
             that.enabled = that.forcedEnabled || (scaledTotal > size);
 
@@ -248,12 +248,17 @@ kendo_module({
             this.refresh();
         },
 
+        centerCoordinates: function() {
+            return { x: - this.x.centerOffset, y: - this.y.centerOffset };
+        },
+
         refresh: function() {
             var that = this;
             that.x.update();
             that.y.update();
             that.enabled = that.x.enabled || that.y.enabled;
             that.minScale = that.forcedMinScale || Math.min(that.x.minScale, that.y.minScale);
+            that.fitScale = Math.max(that.x.minScale, that.y.minScale);
             that.trigger(CHANGE);
         }
     });
