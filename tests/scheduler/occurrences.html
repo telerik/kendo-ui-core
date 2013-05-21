@@ -387,6 +387,29 @@
                 equal(events[3].end.getTime(), +new Date(2013, 5, 6, 17, 0));
             });
 
+            test("DAILY limit by BYMONTH and BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYMONTH=6;BYDAY=TU,TH"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 24), end: new Date(2013, 6, 10, 17) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 25, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 25, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 27, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 27, 17, 0));
+            });
+
+
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
                 var schedulerEvent = {
@@ -615,6 +638,7 @@
                 equal(events[1].end.getTime(), +new Date(2013, 10, 29, 17, 0));
             });
 
+            //TODO: Add test for BYSETPOS
             /*test("WEEKLY occurrences method returns only nth occurrence", function() {
                 var schedulerEvent = {
                     uid: "id",
@@ -789,6 +813,58 @@
                 equal(events[1].start.getTime(), +new Date(2013, 5, 25, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 25, 17, 0));
             });
+
+            test("MONTHLY expand by BYMONTH and limit by BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=MONTHLY;BYMONTH=6;BYDAY=TU,TH"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 24), end: new Date(2013, 6, 10, 17) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 25, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 25, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 27, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 27, 17, 0));
+            });
+
+            //TODO: Add test for BYSETPOS
+
+            module("YEARLY Occurrences");
+
+            /*test("YEARLY method returns one event for each new year", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=YEARLY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 5, 10), end: new Date(2002, 9, 10, 17) } );
+
+                equal(events.length, 3);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 5, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 5, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2001, 5, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2001, 5, 10, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2002, 5, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2002, 5, 10, 17, 0));
+            });*/
 
         </script>
     </body>
