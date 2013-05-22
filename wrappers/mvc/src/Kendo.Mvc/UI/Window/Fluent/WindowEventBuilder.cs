@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Open client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Open client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Activate client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Activate client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -91,7 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Deactivate client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -110,7 +110,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Deactivate client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -129,7 +129,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Close client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Close client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -167,7 +167,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the DragStart client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -186,7 +186,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the DragStart client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -205,7 +205,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the DragEnd client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -224,7 +224,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the DragEnd client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -243,7 +243,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Resize client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -261,7 +261,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Resize client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -279,7 +279,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Refresh client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -298,7 +298,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Refresh client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -317,7 +317,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Error client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
@@ -336,7 +336,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Error client-side event.
         /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
