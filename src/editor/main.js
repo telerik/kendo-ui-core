@@ -234,7 +234,8 @@ kendo_module({
         },
 
         bindTo: function(editor) {
-            var that = this;
+            var that = this,
+                window = that.window;
 
             // detach from editor that was previously listened to
             if (that._editor) {
@@ -288,6 +289,10 @@ kendo_module({
             });
 
             editor.bind("select", proxy(that._update, that));
+
+            if (window) {
+                window.wrapper.css({top: "", left: "", width: ""});
+            }
         },
 
         show: function() {
@@ -301,8 +306,13 @@ kendo_module({
                 editorElement = editorOptions.element;
 
                 if (!wrapper.is(":visible") || !that.window.options.visible) {
-                    wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-left-width"), 10) - parseInt(wrapper.css("border-right-width"), 10));
-                    wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(window.element.css("padding-bottom"), 10));
+
+                    if (!wrapper[0].style.width) {
+                        wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-left-width"), 10) - parseInt(wrapper.css("border-right-width"), 10));
+                        wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(that.window.element.css("padding-bottom"), 10));
+                        wrapper.css("left", parseInt(editorElement.offset().left, 10));
+                    }
+
                     window.open();
                 }
             }
