@@ -170,6 +170,29 @@
                 scheduler.removeEvent(scheduler.wrapper.find(".k-appointment"));
             });
 
+            test("switching views does not trigger multiple remove events", 1, function() {
+                var scheduler = setup({ }),
+                    removeEvent = stub(scheduler, "removeEvent");
+
+                scheduler.view("week");
+                scheduler.view("day");
+
+                scheduler.wrapper.find(".k-appointment a:has(.k-i-close)").click();
+
+                equal(removeEvent.calls("removeEvent"), 1);
+            });
+
+            test("multiple calls to same views does not trigger multiple remove events", 1, function() {
+                var scheduler = setup({ }),
+                    removeEvent = stub(scheduler, "removeEvent");
+
+                scheduler.view("day");
+                scheduler.view("day");
+
+                scheduler.wrapper.find(".k-appointment a:has(.k-i-close)").click();
+                equal(removeEvent.calls("removeEvent"), 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

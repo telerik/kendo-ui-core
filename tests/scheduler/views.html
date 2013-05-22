@@ -1701,6 +1701,28 @@
                 ok(!view.datesHeader.find(".k-appointment a>.k-i-close").length);
             });
 
+            test("clicking on close button triggers destroy event", 1, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        remove: function() {
+                            ok(true);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.content.find(".k-appointment a:has(.k-i-close)").click();
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

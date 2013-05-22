@@ -129,6 +129,7 @@ kendo_module({
 
     function trimOptions(options) {
         delete options.name;
+        delete options.remove;
         delete options.prefix;
 
         return options;
@@ -208,10 +209,10 @@ kendo_module({
             var that = this;
 
             if (that.options.editable) {
-                that.wrapper.on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
-                    that.removeEvent(this);
-                    e.preventDefault();
-                });
+                //that.wrapper.on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
+                 //   that.removeEvent(this);
+                  //  e.preventDefault();
+                //});
             }
         },
 
@@ -249,13 +250,35 @@ kendo_module({
             }
         },
 
+        _unbindView: function(view) {
+            view.destroy();
+        },
+
+        _bindView: function(view) {
+            var that = this;
+
+            if (that.options.editable) {
+                if (this._viewRemoveHandler) {
+                    view.unbind(REMOVE, this._viewRemoveHandler);
+                }
+
+                that._viewRemoveHandler = proxy(function(e) {
+                    that.removeEvent(e.container);
+                });
+
+                view.bind(REMOVE, this._viewRemoveHandler);
+            }
+        },
+
         view: function(name) {
             var that = this;
 
             if (name) {
                 if (that._selectedViewName !== name) {
-                    that.views[that._selectedViewName].destroy();
+                    that._unbindView(that.views[that._selectedViewName]);
                 }
+
+                that._bindView(that.views[name]);
 
                 that._renderView(name);
                 that._selectedViewName = name;
@@ -575,13 +598,20 @@ kendo_module({
             editable: true
         },
 
+        events: [REMOVE],
+
         _editable: function() {
-            if (this.options.editable) {
-                this.element.on("mouseover" + NS, ".k-appointment", function() {
+            var that = this;
+            if (that.options.editable) {
+                that.element.on("mouseover" + NS, ".k-appointment", function() {
                     $(this).find("a:has(.k-i-close)").show();
                 }).on("mouseleave" + NS, ".k-appointment", function() {
                     $(this).find("a:has(.k-i-close)").hide();
+                }).on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
+                    that.trigger(REMOVE, { container: $(this).closest(".k-appointment") });
+                    e.preventDefault();
                 });
+
             }
         },
 
