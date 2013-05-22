@@ -1537,7 +1537,7 @@
 
                 var eventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
                 var eventSlotHeigth = view.allDayHeader.find("td").eq(0).height();
-                var eventHeight = Math.round((eventSlotHeigth - eventSlotHeigth * 0.10) / 3);
+                var eventHeight = Math.floor((eventSlotHeigth - eventSlotHeigth * 0.10) / 3);
 
                 equal(eventElements.eq(0).offset().top, eventSlotOffset.top);
                 equal(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);

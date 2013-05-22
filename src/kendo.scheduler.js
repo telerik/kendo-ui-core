@@ -765,6 +765,11 @@ kendo_module({
 
                 var touchScroller = kendo.touchScroller(wrapper);
                 if (touchScroller && touchScroller.movable) {
+
+                    this._touchScroller = touchScroller;
+
+                    wrapper = touchScroller.scrollElement;
+
                     touchScroller.movable.bind("change", function(e) {
                         that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(-e.sender.x);
                         that.times.scrollTop(-e.sender.y);
@@ -772,6 +777,9 @@ kendo_module({
                 }
 
             } else {
+                if (this._touchScroller) {
+                    wrapper = this._touchScroller.scrollElement;
+                }
                 wrapper.empty();
             }
 
@@ -793,6 +801,7 @@ kendo_module({
                 content += "</tr>";
                 return content;
             });
+
             html += '</tbody>';
             html += '</table>';
 
@@ -906,6 +915,11 @@ kendo_module({
                     .remove()
                     .empty();
 
+                if (that._touchScroller) {
+                    that._touchScroller.wrapper.remove();
+                    that._touchScroller.destroy();
+                }
+
                 that.content = null;
                 that.times = null;
                 that.timesHeader = null;
@@ -962,9 +976,8 @@ kendo_module({
                 numberOfSlots = Math.ceil(endIndex - startIndex),
                 allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
-                bottomOffset = (dateSlot.height() * 0.10),
-                eventHeight = (dateSlot.height() - bottomOffset) / allDayEvents.length;
-                //allDayEventOffset = 10;
+                bottomOffset = (dateSlot.height() * 0.20),
+                eventHeight = allDayEvents.length > 1 ? allDayEvents.first().height() : (dateSlot.height() - bottomOffset);
 
             element
                 .css({
@@ -976,10 +989,13 @@ kendo_module({
 
             allDayEvents.each(function(idx) {
                 $(this).css({
-                    height: eventHeight,
                     top: top + eventHeight * idx
                 });
             });
+
+            if (allDayEvents.length > 1) {
+                slots.parent().height((eventHeight * allDayEvents.length) + bottomOffset);
+            }
         },
 
         _arrangeColumns: function(element, dateSlotIndex, dateSlot) {
