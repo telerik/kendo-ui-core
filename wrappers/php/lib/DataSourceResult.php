@@ -52,9 +52,9 @@ class DataSourceResult {
         return ' LIMIT :skip,:take';
     }
 
-    private function group($data, $groups, $table, $request, $properties) {
+    private function group($data, $groups, $table, $request, $propertyNames) {
         if (count($data) > 0) {
-            return $this->groupBy($data, $groups, $table, $request, $properties);
+            return $this->groupBy($data, $groups, $table, $request, $propertyNames);
         }
         return array();
     }
@@ -66,7 +66,7 @@ class DataSourceResult {
         return array_merge($sort, $groups);
     }
 
-    private function groupBy($data, $groups, $table, $request, $properties) {
+    private function groupBy($data, $groups, $table, $request, $propertyNames) {
         if (count($groups) > 0) {
             $field = $groups[0]->field;
             $count = count($data);
@@ -75,25 +75,25 @@ class DataSourceResult {
             $aggregates = isset($groups[0]->aggregates) ? $groups[0]->aggregates : array();
 
             $hasSubgroups = count($groups) > 1;
-            $groupItem = $this->createGroup($field, $value, $hasSubgroups, $aggregates, $table, $request, $properties);
+            $groupItem = $this->createGroup($field, $value, $hasSubgroups, $aggregates, $table, $request, $propertyNames);
 
             for ($index = 0; $index < $count; $index++) {
                 $item = $data[$index];
                 if ($item[$field] != $value) {
                     if (count($groups) > 1) {
-                        $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1), $table, $request, $properties);
+                        $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1), $table, $request, $propertyNames);
                     }
 
                     $result[] = $groupItem;
 
-                    $groupItem = $this->createGroup($field, $data[$index][$field], $hasSubgroups, $aggregates, $table, $request, $properties);
+                    $groupItem = $this->createGroup($field, $data[$index][$field], $hasSubgroups, $aggregates, $table, $request, $propertyNames);
                     $value = $item[$field];
                 }
                 $groupItem["items"][] = $item;
             }
 
             if (count($groups) > 1) {
-                $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1), $table, $request, $properties);
+                $groupItem["items"] = $this->groupBy($groupItem["items"], array_slice($groups, 1), $table, $request, $propertyNames);
             }
 
             $result[] = $groupItem;
@@ -121,22 +121,22 @@ class DataSourceResult {
         return (object) array('filter' => $filter);
     }
 
-    private function addFieldToProperties($field, $properties) {
-        if (!in_array($field, $properties)) {
-            $properties[] = $field;
+    private function addFieldToProperties($field, $propertyNames) {
+        if (!in_array($field, $propertyNames)) {
+            $propertyNames[] = $field;
         }
-        return $properties;
+        return $propertyNames;
     }
 
-    private function createGroup($field, $value, $hasSubgroups, $aggregates, $table, $request, $properties) {
+    private function createGroup($field, $value, $hasSubgroups, $aggregates, $table, $request, $propertyNames) {
         if (count($aggregates) > 0) {
             $request = $this->addFilterToRequest($field, $value, $request);
-            $properties = $this->addFieldToProperties($field, $properties);
+            $propertyNames = $this->addFieldToProperties($field, $propertyNames);
         }
 
         $groupItem = array(
             'field' => $field,
-            'aggregates' => $this->calculateAggregates($table, $aggregates, $request, $properties),
+            'aggregates' => $this->calculateAggregates($table, $aggregates, $request, $propertyNames),
             'hasSubgroups' => $hasSubgroups,
             'value' => $value,
             'items' => array()
@@ -145,7 +145,7 @@ class DataSourceResult {
         return $groupItem;
     }
 
-    private function calculateAggregates($table, $aggregates, $request, $properties) {
+    private function calculateAggregates($table, $aggregates, $request, $propertyNames) {
         $count = count($aggregates);
 
         if (count($aggregates) > 0) {
@@ -160,7 +160,7 @@ class DataSourceResult {
             $sql = sprintf('SELECT %s FROM %s', implode(', ', $functions), $table);
 
             if (isset($request->filter)) {
-                $sql .= $this->filter($properties, $request->filter);
+                $sql .= $this->filter($propertyNames, $request->filter);
             }
 
             $statement = $this->db->prepare($sql);
@@ -178,10 +178,10 @@ class DataSourceResult {
         return (object)array();
     }
 
-    private function convertAggregateResult($properties) {
+    private function convertAggregateResult($propertyNames) {
         $result = array();
 
-        foreach($properties as $property => $value) {
+        foreach($propertyNames as $property => $value) {
             $item = array();
             $split = explode('_', $property);
             $field = $split[0];
@@ -196,7 +196,7 @@ class DataSourceResult {
         return $result;
     }
 
-    private function sort($properties, $sort) {
+    private function sort($propertyNames, $sort) {
         $count = count($sort);
 
         $sql = '';
@@ -209,7 +209,7 @@ class DataSourceResult {
             for ($index = 0; $index < $count; $index ++) {
                 $field = $sort[$index]->field;
 
-                if (in_array($field, $properties)) {
+                if (in_array($field, $propertyNames)) {
                     $dir = 'ASC';
 
                     if ($sort[$index]->dir == 'desc') {
@@ -250,20 +250,32 @@ class DataSourceResult {
 
         $field = $filter->field;
 
-        if (in_array($field, $properties)) {
+        $propertyNames = $this->propertyNames($properties);
+
+        if (in_array($field, $propertyNames)) {
+            $type = "string";
+
             $index = array_search($filter, $all);
 
             $value = ":filter$index";
 
-            if ($this->isDate($filter->value)) {
+            if (isset($properties[$field])) {
+                $type = $properties[$field]['type'];
+            } else if ($this->isDate($filter->value)) {
+                $type = "date";
+            } else if (array_key_exists($filter->operator, $this->operators) && !$this->isString($filter->value)) {
+                $type = "number";
+            }
+
+            if ($type == "date") {
                 $field = "date($field)";
                 $value = "date($value)";
             }
 
-            if (array_key_exists($filter->operator, $this->operators) && !$this->isString($filter->value)) {
-                $operator = $this->operators[$filter->operator];
-            } else {
+            if ($type == "string") {
                 $operator = $this->stringOperators[$filter->operator];
+            } else {
+                $operator = $this->operators[$filter->operator];
             }
 
             return "$field $operator $value";
@@ -301,6 +313,20 @@ class DataSourceResult {
         return !is_bool($value) && !is_numeric($value) && !$this->isDate($value);
     }
 
+    private function propertyNames($properties) {
+        $names = array();
+
+        foreach ($properties as $key => $value) {
+            if (is_string($value)) {
+                $names[] = $value;
+            } else {
+                $names[] = $key;
+            }
+        }
+
+        return $names;
+    }
+
     private function bindFilterValues($statement, $filter) {
         $filters = array();
         $this->flatten($filters, $filter);
@@ -325,6 +351,7 @@ class DataSourceResult {
     public function create($table, $properties, $models, $key) {
         $result = array();
         $data = array();
+        $propertyNames = $this->propertyNames($properties);
 
         if (!is_array($models)) {
             $models = array($models);
@@ -337,7 +364,7 @@ class DataSourceResult {
             $values = array();
             $input_parameters = array();
 
-            foreach ($properties as $property) {
+            foreach ($propertyNames as $property) {
                 if ($property != $key) {
                     $columns[] = $property;
                     $values[] = '?';
@@ -406,7 +433,9 @@ class DataSourceResult {
     public function update($table, $properties, $models, $key) {
         $result = array();
 
-        if (in_array($key, $properties)) {
+        $propertyNames = $this->propertyNames($properties);
+
+        if (in_array($key, $propertyNames)) {
 
             if (!is_array($models)) {
                 $models = array($models);
@@ -419,7 +448,7 @@ class DataSourceResult {
 
                 $input_parameters = array();
 
-                foreach ($properties as $property) {
+                foreach ($propertyNames as $property) {
                     if ($property != $key) {
                         $set[] = "$property=?";
                         $input_parameters[] = $model->$property;
@@ -458,9 +487,11 @@ class DataSourceResult {
     public function read($table, $properties, $request = null) {
         $result = array();
 
+        $propertyNames = $this->propertyNames($properties);
+
         $result['total'] = $this->total($table, $properties, $request);
 
-        $sql = sprintf('SELECT %s FROM %s', implode(', ', $properties), $table);
+        $sql = sprintf('SELECT %s FROM %s', implode(', ', $propertyNames), $table);
 
         if (isset($request->filter)) {
             $sql .= $this->filter($properties, $request->filter);
@@ -469,7 +500,7 @@ class DataSourceResult {
         $sort = $this->mergeSortDescriptors($request);
 
         if (count($sort) > 0) {
-            $sql .= $this->sort($properties, $sort);
+            $sql .= $this->sort($propertyNames, $sort);
         }
 
         if (isset($request->skip) && isset($request->take)) {
@@ -492,14 +523,14 @@ class DataSourceResult {
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         if (isset($request->group) && count($request->group) > 0) {
-            $data = $this->group($data, $request->group, $table, $request, $properties);
+            $data = $this->group($data, $request->group, $table, $request, $propertyNames);
             $result['groups'] = $data;
         } else {
             $result['data'] = $data;
         }
 
         if (isset($request->aggregate)) {
-            $result["aggregates"] = $this->calculateAggregates($table, $request->aggregate, $request, $properties);
+            $result["aggregates"] = $this->calculateAggregates($table, $request->aggregate, $request, $propertyNames);
         }
 
         return $result;
