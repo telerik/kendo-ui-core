@@ -168,6 +168,7 @@ kendo_module({
         destroy: function() {
             var that = this;
 
+            console.log('destroying listview');
             Widget.fn.destroy.call(that);
 
             that._unbindDataSource();
@@ -176,6 +177,9 @@ kendo_module({
 
             kendo.destroy(that.element);
             that._userEvents.destroy();
+            delete that.element;
+            delete that.wrapper;
+            delete that._userEvents;
         },
 
         refresh: function(e) {
@@ -258,6 +262,10 @@ kendo_module({
             that._filter = false;
 
             contents = $(contents);
+
+            if (appendMethod === "html") {
+                kendo.destroy(element.children());
+            }
             element[appendMethod](contents);
             mobile.init(contents);
 
