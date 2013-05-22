@@ -307,7 +307,8 @@ kendo_module({
                 dimensions: dimensions,
                 dimension: dimension,
                 pane: pane,
-                width: width
+                width: width,
+                itemCount: 0
             });
 
             that._dataSource();
@@ -346,8 +347,8 @@ kendo_module({
             var that = this,
                 batchSize = that.options.batchSize;
 
-            if(that.options.batchSize > 1) {
-                that.batchBuffer = new BatchBuffer(that.dataSource, that.options.batchSize);
+            if(batchSize > 1) {
+                that.batchBuffer = new BatchBuffer(that.dataSource, batchSize);
             } else {
                 that.batchBuffer = new kendo.data.Buffer(that.dataSource);
             }
@@ -371,6 +372,7 @@ kendo_module({
             this.options.dataSource = dataSource;
             this._dataSource();
             this._buffer();
+
             if (this.options.autoBind) {
                 dataSource.fetch();
             }
@@ -419,6 +421,11 @@ kendo_module({
             }
 
             that.itemCount = pages.length - 1;
+
+            that.trigger("changed", {
+                element: pages[1].element,
+                page: pages[1]
+            });
         },
 
         _moveTo: function (location, ease, instant) {
@@ -439,6 +446,31 @@ kendo_module({
 
         reset: function (ease) {
             this._moveTo(0, ease, false);
+        },
+
+        scrollTo: function (offset, instant) {
+            var that = this,
+                batchBuffer = that.batchBuffer,
+                pages = that.pages,
+                dataItem;
+
+            dataItem = batchBuffer.at(offset);
+            console.log(dataItem);
+            if(!dataItem) {
+                return;
+            }
+
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].position(i-1);
+                that.setPageContent(pages[i], offset + (i-1));
+            }
+
+            that.itemCount = offset + 2;
+
+            that.trigger("changed", {
+                element: pages[1].element,
+                page: pages[1]
+            });
         },
 
         _dragEnd: function (e) {

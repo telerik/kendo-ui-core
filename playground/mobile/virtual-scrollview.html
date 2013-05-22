@@ -21,6 +21,7 @@
     <script src="../../src/kendo.mobile.application.js"></script>
     <script src="../../src/kendo.mobile.navbar.js"></script>
     <script src="../../src/kendo.mobile.scrollview.js"></script>
+    <script src="../../src/kendo.touch.js"></script>
 
     <style>
         .km-virtual-scrollview {
@@ -81,17 +82,20 @@
         <div id="virtual" class="km-virtual-scrollview">
         </div>
     </div>
-    <!--
+    <div id="detail" data-role="view" data-init="detailInit" data-show="detailShow" data-stretch="true">
+        <div id="album"></div>
+    </div>
+    
     <script type="text/x-kendo-template" id="item-template">
-        <div class="tile">#= data[0] #</div>
-        <div class="tile">#= data[1] #</div>
-        <div class="tile">#= data[2] #</div>
-        <div class="tile">#= data[3] #</div>
-        <div class="tile">#= data[4] #</div>
-        <div class="tile">#= data[5] #</div>
+        <div data-offset="#= getOffset(data[0]) #" class="tile">#= data[0] #</div>
+        <div data-offset="#= getOffset(data[1]) #" class="tile">#= data[1] #</div>
+        <div data-offset="#= getOffset(data[2]) #" class="tile">#= data[2] #</div>
+        <div data-offset="#= getOffset(data[3]) #" class="tile">#= data[3] #</div>
+        <div data-offset="#= getOffset(data[4]) #" class="tile">#= data[4] #</div>
+        <div data-offset="#= getOffset(data[5]) #" class="tile">#= data[5] #</div>
     </script>
-    -->
 
+    <!--
     <script type="text/x-kendo-template" id="item-template">
         <div data-uid="#: data[0].uid #" class="tile">
             #= createImage(data[0].data) #
@@ -112,6 +116,7 @@
             #= createImage(data[5].data) #
         </div>
     </script>
+    -->
 
     <script type="text/x-kendo-template" id="empty-template">
         <div style="background-color: \\#FF0000;">empty</div>
@@ -126,7 +131,6 @@
             imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
             imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
             DEFAULTIMAGEURL = "reddit-default.png",
-            /*
             ds = new kendo.data.DataSource({
                 transport: {
                     read: function(options) {
@@ -146,8 +150,8 @@
                     total: function() { return 100000; }
                 }
             });
-            */
 
+            /*
             ds = new kendo.data.DataSource({
                 transport: {
                     read: {
@@ -177,6 +181,7 @@
                     console.log(this.data());
                 }
             });
+            */
 
 
         function onInit(e) {
@@ -189,9 +194,31 @@
                 changed: updateSrc
             }).data("kendoMobileVirtualScrollView");
 
-            virtualScrollView.batchBuffer.one("reset", function (e) {
-                virtualScrollView.trigger("changed", { element: virtualScrollView.pages[1].element });
+            virtualScrollView.element.find(".virtual-page").kendoTouch({
+                tap: function (e) {
+                    var tile = $(e.event.target).closest("div.tile"),
+                    index = tile.data("offset");
+
+                    app.navigate("#detail?id=" + index);
+                }
             });
+        }
+
+        function detailInit() {
+            $("#album").kendoMobileVirtualScrollView({
+                dataSource: ds,
+                autoBind: false,
+                batchSize: 1,
+                template: kendo.template("<div class='tile'>#= data #</div>")
+            });
+        }
+
+        function detailShow(e) {
+            $("#album").data("kendoMobileVirtualScrollView").scrollTo(parseInt(e.view.params.id));
+        }
+
+        function getOffset(data) {
+            return virtualScrollView.batchBuffer.buffer.indexOf(data);
         }
 
         function buildUrl(url) {
@@ -240,7 +267,7 @@
             }
 
             return imageTemplate(DEFAULTIMAGEURL);
-    }
+        }
     </script>
 </body>
 </html>
