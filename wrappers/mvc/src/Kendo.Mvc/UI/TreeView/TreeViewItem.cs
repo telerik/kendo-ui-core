@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Represents an item from Kendo TreeView for ASP.NET MVC
@@ -37,7 +38,22 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public IDictionary<string, object> Serialize()
+        private string ConvertUrl(string url, UrlHelper urlHelper)
+        {
+            if (urlHelper == null)
+            {
+                return url;
+            }
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                return urlHelper.Content(url);
+            }
+
+            return url;
+        }
+
+        public IDictionary<string, object> Serialize(UrlHelper urlHelper)
         {
             var json = new Dictionary<string, object>();
 
@@ -49,13 +65,13 @@ namespace Kendo.Mvc.UI
             Serialize(json, "expanded", this.Expanded, false);
             Serialize(json, "checked", this.Checked, false);
             Serialize(json, "selected", this.Selected, false);
-            Serialize(json, "imageUrl", this.ImageUrl, null);
-            Serialize(json, "url", this.Url, null);
+            Serialize(json, "imageUrl", ConvertUrl(this.ImageUrl, urlHelper), null);
+            Serialize(json, "url", ConvertUrl(this.Url, urlHelper), null);
             Serialize(json, "spriteCssClass", this.SpriteCssClasses, null);
 
             if (Items.Count > 0)
             {
-                json["items"] = from item in Items select item.Serialize();
+                json["items"] = from item in Items select item.Serialize(urlHelper);
             }
 
             return json;
