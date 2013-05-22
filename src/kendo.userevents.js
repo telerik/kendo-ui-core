@@ -368,6 +368,9 @@ kendo_module({
             that.element.removeData("handler");
             that.surface.removeData("handler");
             that._disposeAll();
+
+            delete that.surface;
+            delete that.element;
             that.unbind();
         },
 
