@@ -3592,6 +3592,10 @@ kendo_module({
             return item;
         },
 
+        indexOf: function(item) {
+            return this.dataSource.data().indexOf(item) + this.offset;
+        },
+
         total: function() {
             return this.dataSource.total();
         },
