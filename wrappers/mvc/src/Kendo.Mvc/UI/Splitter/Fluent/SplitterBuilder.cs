@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configures the client events for the splitter.
         /// </summary>
-        /// <param name="configureClientEvents">The action that configures the client events.</param>
+        /// <param name="configurator">The action that configures the client events.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Splitter()

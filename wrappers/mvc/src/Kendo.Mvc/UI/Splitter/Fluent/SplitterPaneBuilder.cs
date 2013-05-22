@@ -6,7 +6,6 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Web.Mvc;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
 
     public class SplitterPaneBuilder : IHideObjectMembers
@@ -25,7 +24,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the pane size.
         /// </summary>
-        /// <param name="value">The desired size. Only sizes in pixels and percentages are allowed.</param>
+        /// <param name="size">The desired size. Only sizes in pixels and percentages are allowed.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Splitter()
@@ -53,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the minimum pane size.
         /// </summary>
-        /// <param name="value">The desired minimum size. Only sizes in pixels and percentages are allowed.</param>
+        /// <param name="size">The desired minimum size. Only sizes in pixels and percentages are allowed.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Splitter()
@@ -81,7 +80,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the maximum pane size.
         /// </summary>
-        /// <param name="value">The desired maximum size. Only sizes in pixels and percentages are allowed.</param>
+        /// <param name="size">The desired maximum size. Only sizes in pixels and percentages are allowed.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Splitter()
@@ -230,7 +229,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the HTML content of the pane.
         /// </summary>
-        /// <param name="value">The action which renders the HTML content.</param>
+        /// <param name="content">The action which renders the HTML content.</param>
         /// <code lang="CS">
         ///  &lt;%  Html.Kendo().Splitter()
         ///             .Name("Splitter")
@@ -255,7 +254,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the HTML content of the pane.
         /// </summary>
-        /// <param name="value">The Razor template for the HTML content.</param>
+        /// <param name="content">The Razor template for the HTML content.</param>
         /// <code lang="CS">
         ///  @(Html.Kendo().Splitter()
         ///        .Name("Splitter")
@@ -277,7 +276,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the HTML content of the pane.
         /// </summary>
-        /// <param name="value">The HTML content.</param>
+        /// <param name="content">The HTML content.</param>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Splitter()
         ///          .Name("Splitter")

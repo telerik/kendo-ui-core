@@ -252,13 +252,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configures the window buttons.
         /// </summary>
-        /// <param name="clientEventsAction">The buttons configuration action.</param>
+        /// <param name="actionsBuilderAction">The buttons configuration action.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions =>
-        ///                 actions.
+        ///                 actions.Close()
         ///             )
         /// %&gt;
         /// </code>
