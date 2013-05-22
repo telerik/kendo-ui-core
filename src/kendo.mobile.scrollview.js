@@ -15,6 +15,7 @@ kendo_module({
         Pane = kendo.ui.Pane,
         PaneDimensions = kendo.ui.PaneDimensions,
         Widget = ui.Widget,
+        DataSource = kendo.data.DataSource,
 
         // Math
         math = Math,
@@ -309,24 +310,18 @@ kendo_module({
                 width: width
             });
 
-            if(that.options.batchSize > 1) {
-                that.batchBuffer = new BatchBuffer(that.options.dataSource, that.options.batchSize);
-            } else {
-                that.batchBuffer = new kendo.data.Buffer(that.options.dataSource);
-            }
-
-            that.batchBuffer.bind({
-                "resize": proxy(that._onResize, that),
-                "reset": proxy(that._onReset, that),
-                "endreached": proxy(that._onEndReached, that)
-            });
-
+            that._dataSource();
+            that._buffer();
             that._initPages();
-            that.options.dataSource.fetch();
+
+            if(that.options.autoBind) {
+                that.dataSource.fetch();
+            }
         },
 
         options: {
             name: "VirtualScrollView",
+            autoBind: true,
             duration: 300,
             velocityThreshold: 0.8,
             contentHeight: "auto",
@@ -339,6 +334,47 @@ kendo_module({
         events: [
             "changed"
         ],
+
+        _dataSource: function () {
+            var that = this,
+                options = that.options;
+
+            that.dataSource = DataSource.create(options.dataSource);
+        },
+
+        _buffer: function () {
+            var that = this,
+                batchSize = that.options.batchSize;
+
+            if(that.options.batchSize > 1) {
+                that.batchBuffer = new BatchBuffer(that.dataSource, that.options.batchSize);
+            } else {
+                that.batchBuffer = new kendo.data.Buffer(that.dataSource);
+            }
+
+            that.batchBuffer.bind({
+                "resize": proxy(that._onResize, that),
+                "reset": proxy(that._onReset, that),
+                "endreached": proxy(that._onEndReached, that)
+            });
+        },
+
+        _unbindDataSource: function () {
+            var that = this;
+
+            that.batchBuffer.unbind("resize", that._onResize)
+                            .unbind("reset", that._onReset)
+                            .unbind("endreached", that._onEndReached);
+        },
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+            this._dataSource();
+            this._buffer();
+            if (this.options.autoBind) {
+                dataSource.fetch();
+            }
+        },
 
         refresh: function () {
             var that = this,
@@ -381,7 +417,7 @@ kendo_module({
                 pages[i].position(i-1);
                 that.setPageContent(pages[i], i-1);
             }
-            
+
             that.itemCount = pages.length - 1;
         },
 
@@ -504,6 +540,8 @@ kendo_module({
             } else {
                 page.content(emptyTemplate({}));
             }
+
+            mobile.init(page.element);
         }
 
     });
