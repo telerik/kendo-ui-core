@@ -180,7 +180,7 @@ kendo_module({
                 that.window = $(element)
                     .wrap("<div class='editorToolbarWindow' />")
                     .parent()
-                    .prepend("<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-columns'></span></button>")
+                    .prepend("<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-move'></span></button>")
                     .kendoWindow({
                         title: false,
                         resizable: false,
