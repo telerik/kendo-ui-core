@@ -360,8 +360,6 @@ kendo_module({
                 return;
             }
 
-            console.log('destroying');
-
             that._destroyed = true;
 
             if (support.eventCapture) {
