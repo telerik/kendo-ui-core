@@ -93,15 +93,15 @@ kendo_module({
             this.scroller = listView.scroller();
             this._shouldFixHeaders();
 
+            var headerFixer = this;
             var cacheHeaders = function() {
-                this._cacheHeaders();
+                headerFixer._cacheHeaders();
             };
 
             kendo.onResize(cacheHeaders);
 
             listView.bind(STYLED, cacheHeaders);
 
-            var headerFixer = this;
 
             scroller.bind("scroll", function(e) {
                 headerFixer._fixHeader(e);
@@ -241,6 +241,10 @@ kendo_module({
         refresh: function() {
             var buffer = this.buffer,
                 items = this.items;
+
+            if (!buffer.length) {
+                return;
+            }
 
             while(items.length) {
                 items.pop().destroy();
@@ -518,9 +522,15 @@ kendo_module({
                 });
 
                 kendo.onResize(function() {
+                    scroller.reset();
+
                     if (listView.element.is(":visible")) {
                         list.refresh();
                     }
+                });
+
+                listView.view().bind("show", function() {
+                    list.refresh();
                 });
 
                 list.bind("endReached", function() {
