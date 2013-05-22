@@ -274,7 +274,8 @@ namespace Kendo.Mvc.UI
   
         private IEnumerable SerializeItems(IList<TreeViewItem> items)
         {
-            return from item in items select item.Serialize();
+            var urlHelper = new UrlHelper(this.ViewContext.RequestContext);
+            return from item in items select item.Serialize(urlHelper);
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)
