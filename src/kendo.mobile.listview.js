@@ -168,7 +168,6 @@ kendo_module({
         destroy: function() {
             var that = this;
 
-            console.log('destroying listview');
             Widget.fn.destroy.call(that);
 
             that._unbindDataSource();

@@ -356,6 +356,14 @@ kendo_module({
         destroy: function() {
             var that = this;
 
+            if (that._destroyed) {
+                return;
+            }
+
+            console.log('destroying');
+
+            that._destroyed = true;
+
             if (support.eventCapture) {
                 var surfaceElement = that.surface[0];
                 withEachDownEvent(function(eventName) {
@@ -369,9 +377,9 @@ kendo_module({
             that.surface.removeData("handler");
             that._disposeAll();
 
+            that.unbind();
             delete that.surface;
             delete that.element;
-            that.unbind();
         },
 
         capture: function() {
