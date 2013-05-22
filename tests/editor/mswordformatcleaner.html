@@ -222,6 +222,46 @@
             equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>').replace(/(;|:)\s*/g, "$1"), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
         });
 
+        test("cleans word tables", function() {
+            equal(
+                clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+'<tbody><tr>' +
+'<td width="160" valign="top" style="width:119.7pt;border:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;background:#D3DFEE;mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191;mso-bidi-font-weight:bold">cell 1</span></p>' +
+'</td>' +
+'<td width="160" valign="top" style="width:119.7pt;border:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;background:#D3DFEE;mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">cell 2</span></p>' +
+'</td>' +
+'</tr>' +
+'</tbody></table>'),
+
+                '<table><tbody>' +
+                    '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+                    '<tr><td><p>cell 1</p></td><td><p>cell 2</p></td></tr>' +
+                '</tbody></table>'
+            );
+        });
+
+        //test("converts bolded table row to header row", function() {
+            //equal(
+                //clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+//'<tbody><tr>' +
+//'<td width="160" valign="top" style="width:119.7pt;border-top:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt">' +
+//'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">header 1<o:p></o:p></span></b></p>' +
+//'</td>' +
+//'<td width="160" valign="top" style="width:119.7pt;border-top:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt">' +
+//'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">header 2<o:p></o:p></span></b></p>' +
+//'</td>' +
+//'</tr>' +
+//'</tbody></table>'),
+
+                //'<table><tbody>' +
+                    //'<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+                    //'<tr><th><p>header 1</p></th><th><p>header 2</p></th></tr>' +
+                //'</tbody></table>'
+            //);
+        //});
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

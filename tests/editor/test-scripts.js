@@ -1,5 +1,5 @@
 document.write('\
-    <script src="../../src/jquery.js"></script>\
+    <script src="../jquery-loader.js"></script>\
     <script src="../../src/kendo.core.js"></script>\
     <script src="../../src/kendo.fx.js"></script>\
     <script src="../../src/kendo.userevents.js"></script>\

@@ -595,6 +595,16 @@ var MSWordFormatCleaner = Cleaner.extend({
         return (/class="?Mso|style="[^"]*mso-/i).test(html);
     },
 
+    stripEmptyAnchors: function(html) {
+        return html.replace(/<a([^>]*)>\s*<\/a>/ig, function(a, attributes) {
+            if (!attributes || attributes.indexOf("href") < 0) {
+                return "";
+            }
+
+            return a;
+        });
+    },
+
     listType: function(html) {
         var startingSymbol;
 
@@ -614,9 +624,8 @@ var MSWordFormatCleaner = Cleaner.extend({
         }
     },
 
-    lists: function(html) {
-        var placeholder = dom.create(document, 'div', {innerHTML: html}),
-            blockChildren = $(dom.blockElements.join(','), placeholder),
+    lists: function(placeholder) {
+        var blockChildren = $(dom.blockElements.join(','), placeholder),
             lastMargin = -1,
             lastType,
             levels = {'ul':{}, 'ol':{}},
@@ -670,27 +679,77 @@ var MSWordFormatCleaner = Cleaner.extend({
             lastMargin = margin;
             lastType = type;
         }
-
-        return placeholder.innerHTML;
     },
 
-    stripEmptyAnchors: function(html) {
-        return html.replace(/<a([^>]*)>\s*<\/a>/ig, function(a, attributes) {
-            if (!attributes || attributes.indexOf("href") < 0) {
-                return "";
+    removeAttributes: function(element) {
+        var attributes = element.attributes,
+            i = attributes.length;
+
+        while (i--) {
+            element.removeAttributeNode(attributes[i]);
+        }
+    },
+
+    tables: function(placeholder) {
+        var tableElements = $("table", placeholder), i,
+            that = this;
+
+        function createColGroup(row) {
+            var colgroup = $($.map(row.cells, function(cell) {
+                    var width = cell.width;
+                    if (width && parseInt(width, 10) !== 0) {
+                        return kendo.format('<col style="width:{0}px;"/>', width);
+                    }
+
+                    return "<col />";
+                }).join(""));
+
+            // jquery 1.9/2.0 discrepancy
+            if (!colgroup.is("colgroup")) {
+                colgroup = $("<colgroup/>").append(colgroup);
             }
 
-            return a;
+            colgroup.insertBefore(row);
+        }
+
+        function convertHeaders() {
+            
+        }
+
+        tableElements.each(function() {
+            var firstRow = this.rows[0];
+
+            createColGroup(firstRow);
+            convertHeaders(firstRow);
+
+            tableElements.find("td, td>p").each(function(){
+                that.removeAttributes(this);
+            });
+        });
+
+        // process first row
+
+
+        for (i = 0; i < tableElements.length; i++) {
+            this.removeAttributes(tableElements[i]);
+        }
+
+        $("td>p>span", placeholder).replaceWith(function() {
+            return $(this).text();
         });
     },
 
     clean: function(html) {
-        var that = this;
+        var that = this, placeholder;
 
         html = Cleaner.fn.clean.call(that, html);
         html = that.stripEmptyAnchors(html);
-        html = that.lists(html);
-        html = html.replace(/\s+class="?[^"\s>]*"?/ig, '');
+
+        placeholder = dom.create(document, 'div', {innerHTML: html}),
+        that.lists(placeholder);
+        that.tables(placeholder);
+
+        html = placeholder.innerHTML.replace(/\s+class="?[^"\s>]*"?/ig, '');
 
         return html;
     }
