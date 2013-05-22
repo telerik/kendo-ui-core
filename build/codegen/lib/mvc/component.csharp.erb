@@ -25,18 +25,17 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
-
-//>> Serialization
-//<< Serialization
-
-            writer.Write(Initializer.Initialize(Selector, "<%= csharp_class %>", options));
-
-            base.WriteInitializationScript(writer);
+            //no initializtion scripts for mobile widgets
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
+            <% if csharp_class.eql?('MobileApplication') %>
+            var html = new <%= csharp_class %>HtmlBuilder(this).Build();
+
+            html.WriteTo(writer);
+            <% end %>
+
             base.WriteHtml(writer);
         }
     }

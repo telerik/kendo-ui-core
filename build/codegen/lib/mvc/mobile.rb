@@ -21,6 +21,7 @@ module CodeGen::MVC::Mobile
         SETTING_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/setting.builder.csharp.erb"), 0, '%<>')
         EVENT = ERB.new(File.read("build/codegen/lib/mvc/event.builder.csharp.erb"), 0, '%<>')
         ITEM_FACTORY = ERB.new(File.read("build/codegen/lib/mvc/item.factory.csharp.erb"), 0, '%<>')
+        HTML_BUILDER = ERB.new(File.read("build/codegen/lib/mvc/html.builder.csharp.erb"), 0, '%<>')
 
         COMPONENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_declaration }.join %>
@@ -100,7 +101,7 @@ module CodeGen::MVC::Mobile
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().<%= csharp_class %>()
-        ///             .Name("<%= csharp_class %>");
+        ///             .Name("<%= csharp_class %>")
         /// %&gt;
         /// </code>
         /// </example>
@@ -243,12 +244,21 @@ module CodeGen::MVC::Mobile
                 write_fluent(component)
                 write_settings(component)
                 write_events(component)
+                write_html_builder(component)
             end
 
             def write_class(component)
                 filename = "#{@path}/#{component.path}/#{component.csharp_class}.cs"
 
                 write_file(filename, component.to_class(filename))
+            end
+
+            def write_html_builder(component)
+                return if component.csharp_class.eql?('MobileApplication')
+
+                filename = "#{@path}/#{component.path}/Html/#{component.csharp_class}HtmlBuilder.cs"
+
+                write_file(filename, component.to_html_builder(filename)) unless File.exists?(filename)
             end
 
             def write_enums(component)
@@ -380,6 +390,12 @@ module CodeGen::MVC::Mobile
                 csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(binding))
 
                 #csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(binding))
+            end
+
+            def to_html_builder(filename)
+                @files.push(filename)
+
+                HTML_BUILDER.result(binding)
             end
 
             def to_enum(filename, option)

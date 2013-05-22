@@ -1,0 +1,37 @@
+namespace Kendo.Mvc.UI
+{
+    using System;
+
+    public class <%= csharp_class %>HtmlBuilder
+    {
+        private readonly <%= csharp_class %> component;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%= csharp_class %>HtmlBuilder" /> class.
+        /// </summary>
+        /// <param name="component">The <%= csharp_class %> component.</param>
+        public <%= csharp_class %>HtmlBuilder(<%= csharp_class %> component)
+        {
+            this.component = component;
+        }
+
+        /// <summary>
+        /// Builds the <%= csharp_class %> markup.
+        /// </summary>
+        /// <returns></returns>
+        public IHtmlNode Build()
+        {
+            var html = CreateElement();
+            html.Attribute("data-role", "<%= @name.downcase %>")
+                .Attribute("id", component.Id);
+
+            return html;
+        }
+
+        protected virtual IHtmlNode CreateElement()
+        {
+            return new HtmlElement("div");
+        }
+    }
+}
+
