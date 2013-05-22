@@ -344,6 +344,7 @@ var tests = [
     "scheduler/views.html",
     "scheduler/databinding.html",
     "scheduler/editing-destroy.html",
+    "scheduler/editing.html",
     "scheduler/rruleparser.html",
     "scheduler/lint.html",
     "searchbox/searchbox.html",

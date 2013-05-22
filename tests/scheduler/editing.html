@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler editing</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler editing</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Scheduler = kendo.ui.Scheduler,
+                container;
+
+            function getDate(date) {
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+            }
+
+            module("editing", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            function setup(options) {
+                return new Scheduler(container,
+                    $.extend({
+                        dataSource: {
+                            data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                        }
+                    }, options)
+                );
+            }
+
+            test("adding model updates the view", function() {
+                var scheduler = setup(),
+                    dataSource = scheduler.dataSource,
+                    renderEvents = stub(scheduler.view(), "renderEvents");
+
+                dataSource.add({});
+
+                equal(renderEvents.calls("renderEvents"), 1);
+            });
+
+            test("clicking view slot calls addEvent method", function() {
+                var scheduler = setup(),
+                    dataSource = scheduler.dataSource,
+                    addEvent = stub(scheduler, "addEvent");
+
+                scheduler.view().content.find("td").first().dblclick();
+
+                equal(addEvent.calls("addEvent"), 1);
+            });
+
+            test("addEvent calls dataSource add method", function() {
+                var scheduler = setup(),
+                    dataSource = scheduler.dataSource,
+                    add = stub(dataSource, "add");
+
+                scheduler.addEvent();
+
+                equal(add.calls("add"), 1);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

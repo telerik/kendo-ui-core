@@ -24,6 +24,7 @@ kendo_module({
         NS = ".kendoScheduler",
         CHANGE = "change",
         REMOVE = "remove",
+        ADD = "add",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
@@ -160,8 +161,6 @@ kendo_module({
             that._resizeHandler = proxy(that._resize, that);
 
             $(window).on("resize" + NS, that._resizeHandler);
-
-            that._editable();
         },
 
         options: {
@@ -205,17 +204,6 @@ kendo_module({
             kendo.destroy(that.wrapper);
         },
 
-        _editable: function() {
-            var that = this;
-
-            if (that.options.editable) {
-                //that.wrapper.on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
-                 //   that.removeEvent(this);
-                  //  e.preventDefault();
-                //});
-            }
-        },
-
         _modelForContainer: function(container) {
             container = $(container).closest(".k-appointment");
 
@@ -234,6 +222,10 @@ kendo_module({
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
             return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
+        },
+
+        addEvent: function(start, end) {
+            var event = this.dataSource.add({ start: start, end: end, title: "" });
         },
 
         removeEvent: function(element) {
@@ -258,15 +250,26 @@ kendo_module({
             var that = this;
 
             if (that.options.editable) {
-                if (this._viewRemoveHandler) {
-                    view.unbind(REMOVE, this._viewRemoveHandler);
+                if (that._viewRemoveHandler) {
+                    view.unbind(REMOVE, that._viewRemoveHandler);
                 }
 
-                that._viewRemoveHandler = proxy(function(e) {
+                that._viewRemoveHandler = function(e) {
                     that.removeEvent(e.container);
-                });
+                };
 
-                view.bind(REMOVE, this._viewRemoveHandler);
+                view.bind(REMOVE, that._viewRemoveHandler);
+
+                if (that._viewAddHandler) {
+                    view.unbind(ADD, that._viewAddHandler);
+                }
+
+                that._viewAddHandler = function(e) {
+                    that.addEvent(e.start, e.end);
+                };
+
+                view.bind(ADD, this._viewAddHandler);
+
             }
         },
 
@@ -575,6 +578,7 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
+
             this._editable();
         },
 
@@ -598,11 +602,12 @@ kendo_module({
             editable: true
         },
 
-        events: [REMOVE],
+        events: [REMOVE, ADD],
 
         _editable: function() {
             var that = this;
             if (that.options.editable) {
+
                 that.element.on("mouseover" + NS, ".k-appointment", function() {
                     $(this).find("a:has(.k-i-close)").show();
                 }).on("mouseleave" + NS, ".k-appointment", function() {
@@ -612,6 +617,11 @@ kendo_module({
                     e.preventDefault();
                 });
 
+                if (that.options.editable.create !== false) {
+                    that.element.on("dblclick", ".k-scheduler-content td", function() {
+                        that.trigger(ADD, that._rangeToDates($(this)));
+                    });
+                }
             }
         },
 
@@ -958,6 +968,59 @@ kendo_module({
             }
         },
 
+        _rangeToDates: function(cell) {
+            var parentRow = cell.closest("tr"),
+                dateIndex = parentRow.find("td").index(cell),
+                timeIndex = parentRow.closest("table").find("tr").index(parentRow),
+                slotDate = this._slotIndexDate(dateIndex),
+                slotEndDate;
+
+            if (slotDate) {
+                slotEndDate = new Date(slotDate);
+
+                setTime(slotDate, this._slotIndexTime(timeIndex));
+                setTime(slotEndDate, this._slotIndexTime(timeIndex + 1));
+
+                return {
+                    start: slotDate,
+                    end: slotEndDate
+                };
+            }
+            return null;
+        },
+
+        _slotIndexTime: function(index) {
+            var options = this.options,
+                startTime = getMilliseconds(options.startTime),
+                timeSlotInterval = ((options.majorTick/options.numberOfTimeSlots) * MS_PER_MINUTE);
+
+            return startTime + timeSlotInterval * index;
+        },
+
+        _slotIndexDate: function(index) {
+            var idx,
+                length,
+                slots = this._dates || [],
+                startTime = getMilliseconds(new Date(+this.options.startTime)),
+                endTime = getMilliseconds(new Date(+this.options.endTime)),
+                slotStart,
+                slotEnd;
+
+            if (startTime >= endTime) {
+                endTime += MS_PER_DAY;
+            }
+
+            for (idx = 0, length = slots.length; idx < length; idx++) {
+                slotStart = new Date(+slots[idx]);
+                setTime(slotStart, startTime);
+
+                if (index === idx) {
+                    return slotStart;
+                }
+            }
+            return null;
+        },
+
         _timeSlotIndex: function(date) {
             var options = this.options,
                 eventStartTime = getMilliseconds(date),
@@ -977,7 +1040,7 @@ kendo_module({
                 slotEnd;
 
             if (startTime >= endTime) {
-                endTime += MS_PER_DAY;
+                endTime += (MS_PER_DAY - MS_PER_MINUTE);
             }
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
@@ -1031,7 +1094,7 @@ kendo_module({
         _arrangeColumns: function(element, dateSlotIndex, dateSlot) {
             var columns,
                 eventRightOffset = 30,
-                colunmEvents,
+                columnEvents,
                 blockRange = rangeIndex(element),
                 eventElements = this.content.children(".k-appointment[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
                 slotEvents = this._getCollisionEvents(eventElements, blockRange.start, blockRange.end).add(element);

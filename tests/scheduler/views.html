@@ -1723,6 +1723,68 @@
 
                 view.content.find(".k-appointment a:has(.k-i-close)").click();
             });
+
+            test("double clicking a cell triggers add event", 2, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        add: function(e) {
+                            equal(e.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
+                            equal(e.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                view.content.find("td").eq(2).trigger("dblclick");
+            });
+
+            test("_rangeToDates returns date for slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var result = view._rangeToDates(view.content.find("td").eq(2));
+
+                equal(result.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
+                equal(result.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
+            });
+
+            test("_dateSlotIndex returns correct index if date midnight", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+                equal(view._dateSlotIndex(new Date(2013,1,27,0,0,0)), 1);
+            });
+
+            test("_dateSlotIndex returns correct index if date is same as endTime", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                view = setup({
+                        endTime: new Date(2013, 1, 27, 10, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+                equal(view._dateSlotIndex(new Date(2013,1,27,10,0,0)), 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
