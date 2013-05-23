@@ -333,6 +333,36 @@
                 equal(ddl2.value(), "");
                 equal(ddl2.dataItem(), null);
             });
+
+            test("Child cascade when parents value is 0", function() {
+                parent.kendoDropDownList({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 0 },
+                        { parentID: 1 }
+                    ]
+                });
+
+                child.kendoDropDownList({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "id",
+                    optionLabel: "Select",
+                    dataSource:  [
+                        { parentID: 0, childID: "1", id: 1 },
+                        { parentID: 1, childID: "3", id: 2 }
+                    ],
+                    value: 1
+                });
+
+                var parentCB = parent.data("kendoDropDownList"),
+                    childCB = child.data("kendoDropDownList");
+
+                equal(childCB.dataSource.view().length, 1);
+                equal(childCB.value(), 1);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
