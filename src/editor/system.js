@@ -575,7 +575,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             /&quot;/g, "'", /* encoded quotes (in attributes) */
             /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
             /<br><br>/g, '<BR><BR>',
-            /<br>/g, ' ',
+            /<br>(?!\n)/g, ' ',
             /<table([^>]*)>(\s|&nbsp;)+<t/gi, '<table$1><t',
             /<tr[^>]*>(\s|&nbsp;)*<\/tr>/gi, '',
             /<tbody[^>]*>(\s|&nbsp;)*<\/tbody>/gi, '',
