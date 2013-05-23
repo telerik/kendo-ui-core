@@ -17,7 +17,8 @@
         <ol id="qunit-tests"></ol>
         <script>
             var recurrence = kendo.recurrence,
-                weekInYear = recurrence.weekInYear;
+                weekInYear = recurrence.weekInYear,
+                dayInYear = recurrence.dayInYear;
 
             module("Recurring helper methods");
 
@@ -187,9 +188,51 @@
                equal(weekInYear(date, weekStart), 2);
             });
 
-            test("weekInYear returns 3 for (12-01-2013 00:00:00)", function() {
+            test("weekInYear returns  for (12-01-2013 00:00:00)", function() {
                var date = new Date(2013, 0, 12), weekStart = 6;
                equal(weekInYear(date, weekStart), 3);
+            });
+
+            module("Day in year");
+
+            test("dayInYear return 1 for (01-01-2013)", function() {
+               var date = new Date(2013, 0, 1);
+               equal(dayInYear(date), 1);
+            });
+
+            test("dayInYear return 15 for (15-01-2013)", function() {
+               var date = new Date(2013, 0, 15);
+               equal(dayInYear(date), 15);
+            });
+
+            test("dayInYear return 46 for (15-02-2013)", function() {
+               var date = new Date(2013, 1, 15);
+               equal(dayInYear(date), 46);
+            });
+
+            test("dayInYear return 74 for (15-03-2013)", function() {
+               var date = new Date(2013, 2, 15);
+               equal(dayInYear(date), 74);
+            });
+
+            test("dayInYear return 75 for (15-03-2012) Leap Year", function() {
+               var date = new Date(2012, 2, 15);
+               equal(dayInYear(date), 75);
+            });
+
+            test("dayInYear return 143 for (23-05-2013)", function() {
+               var date = new Date(2013, 4, 23);
+               equal(dayInYear(date), 143);
+            });
+
+            test("dayInYear return 365 for (31-12-2013)", function() {
+               var date = new Date(2013, 11, 31);
+               equal(dayInYear(date), 365);
+            });
+
+            test("dayInYear return 366 for (31-12-2012) Leap Year", function() {
+               var date = new Date(2012, 11, 31);
+               equal(dayInYear(date), 366);
             });
 
         </script>

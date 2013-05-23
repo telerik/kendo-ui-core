@@ -17,6 +17,8 @@ kendo_module({
         isPlainObject = $.isPlainObject,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
+        daysInLeapYear = [0,31,60,91,121,152,182,213,244,274,305,335,366],
+        daysInYear = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         extend = $.extend,
         proxy = $.proxy,
         isArray = $.isArray,
@@ -1379,6 +1381,7 @@ kendo_module({
     }
 
     var recurrence = {
+        dayInYear: dayInYear,
         isInWeek: function(date, offset, weekStart) {
             var weekNumber = recurrence.weekNumber(date, weekStart);
             if (offset > 0) {
@@ -2071,6 +2074,18 @@ kendo_module({
             return 28;
         }
         return MONTHS[month];
+    }
+
+    function leapYear(year) {
+        year = year.getFullYear();
+        return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
+    }
+
+    function dayInYear(date) {
+        var month = date.getMonth(),
+            days = leapYear(date) ? daysInLeapYear[month] : daysInYear[month];
+
+        return days + date.getDate();
     }
 
     kendo.recurrence = recurrence;
