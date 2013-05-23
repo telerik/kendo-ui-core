@@ -1718,7 +1718,7 @@ function pad(number, digits, end) {
 
             support.zoomLevel = function() {
                 return 1;
-            }
+            };
         }
 
         support.detectOS = function (ua) {
