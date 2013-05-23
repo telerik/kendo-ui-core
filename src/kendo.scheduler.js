@@ -1801,9 +1801,9 @@ kendo_module({
             },
             yearly: {
                 next: function(start, rule) {
-                    if (!rule.months && !rule.monthDays && !rule.weekDays) {
+                    if (!rule.months && !rule.monthDays && !rule.weekDays && !rule.yearDays) {
                         start.setFullYear(start.getFullYear() + 1);
-                    } else if (rule.monthDays || rule.weekDays) { //like monthly.next
+                    } else if (rule.monthDays || rule.weekDays || rule.yearDays) {
                         start.setDate(start.getDate() + 1);
                     } else {
                         day = start.getDate();
@@ -1840,6 +1840,12 @@ kendo_module({
 
                             //TODO: test this logic when while ends because date > end and we move backward!!!
                             date = recurrence.nextWeekDay(date, weekStart, -1); //TODO: implement prevWeekDay
+                        }
+
+                        if (rule.yearDays && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) { //TODO: Sort yearDays
+                            while ((+date <= end) && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) {
+                                date.setDate(date.getDate() + 1);
+                            }
                         }
 
                         /*if (rule.monthDays) {
