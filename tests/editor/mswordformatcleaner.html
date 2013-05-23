@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>kendo.ui.Editor Tests</title>
 
+    <script src="../jquery-loader.js"></script>
     <script src="test-scripts.js"></script>
 
     <style> html { font-size: 12px; } </style>
@@ -21,9 +22,15 @@
         function clean(html) {
             var value = cleaner.clean(html);
 
-            return value.replace(/(<\/?[^>]*>)/g, function (_, tag) {
-                return tag.toLowerCase();
-            }).replace(/[\r\n]+/g, '');
+            return value
+                // uppercase tags
+                .replace(/(<\/?[^>]*>)/g, function (_, tag) {
+                    return tag.toLowerCase();
+                })
+                // empty lines
+                .replace(/[\r\n]+/g, '')
+                // CSS properties
+                .replace(/(;|:)\s*/g, "$1");
         }
 
         module("Editor / MSWordFormatCleaner", {
@@ -219,7 +226,105 @@
         });
 
         test("does not interpret all graphic chars as lists", function() {
-            equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>').replace(/(;|:)\s*/g, "$1"), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
+            equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>'), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
+        });
+
+        test("cleans word tables", function() {
+            equal(
+                clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+'<tbody><tr>' +
+'<td width="160" valign="top" style="width:119.7pt;border:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;background:#D3DFEE;mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191;mso-bidi-font-weight:bold">cell 1</span></p>' +
+'</td>' +
+'<td width="160" valign="top" style="width:119.7pt;border:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;background:#D3DFEE;mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">cell 2</span></p>' +
+'</td>' +
+'</tr>' +
+'</tbody></table>'),
+
+                '<table>' +
+                    '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+                    '<tbody>' +
+                        '<tr><td>cell 1</td><td>cell 2</td></tr>' +
+                    '</tbody>' +
+                '</table>'
+            );
+        });
+
+        test("converts bolded table row to header row", function() {
+            equal(
+                clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+'<tbody><tr>' +
+'<td width="160" valign="top" style="width:119.7pt;border-top:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">header 1<o:p></o:p></span></b></p>' +
+'</td>' +
+'<td width="160" valign="top" style="width:119.7pt;border-top:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">header 2<o:p></o:p></span></b></p>' +
+'</td>' +
+'</tr>' +
+'</tbody></table>'),
+
+                '<table>' +
+                    '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+                    '<thead>' +
+                        '<tr><th>header 1</th><th>header 2</th></tr>' +
+                    '</thead>' +
+                    '<tbody></tbody>' +
+                '</table>'
+            );
+        });
+
+        test("persists line breaks in header row", function() {
+            equal(
+                clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+'<tbody><tr>' +
+'<td width="160" valign="top" style="width:119.7pt;border-top:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">header 1<o:p></o:p></span></b></p>' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">with rows</span></b></p>' +
+'</td>' +
+'<td width="160" valign="top" style="width:119.7pt;border-top:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">header 2<o:p></o:p></span></b></p>' +
+'</td>' +
+'</tr>' +
+'</tbody></table>'),
+
+                '<table>' +
+                    '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+                    '<thead>' +
+                        '<tr><th>header 1<br><strong>with rows</strong></th><th>header 2</th></tr>' +
+                    '</thead>' +
+                    '<tbody></tbody>' +
+                '</table>'
+            );
+        });
+
+        test("persists HTML in table rows", function() {
+            equal(
+                clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+'<tbody><tr>' +
+'<td width="213" valign="top" style="width:159.6pt;border:none;border-bottom:solid #C0504D 1.0pt;mso-border-bottom-themecolor:accent2;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191;mso-bidi-font-weight:bold">foo </span><span style="background:yellow;mso-highlight:yellow;mso-bidi-font-weight:bold">bar</span><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191;mso-bidi-font-weight:bold"><o:p></o:p></span></p>' +
+'</td>' +
+'<td width="213" valign="top" style="width:159.6pt;border:none;border-bottom:solid #C0504D 1.0pt;mso-border-bottom-themecolor:accent2;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191">bold</span></b></p>' +
+'</td>' +
+'<td width="213" valign="top" style="width:159.6pt;border:none;border-bottom:solid #C0504D 1.0pt;mso-border-bottom-themecolor:accent2;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191">foo<br>\nbar<br>\nbaz<o:p></o:p></span></p>' +
+'</td>' +
+'</tr>' +
+'</tbody></table>'),
+
+                '<table>' +
+                    '<colgroup><col style="width:213px;"><col style="width:213px;"><col style="width:213px;"></colgroup>' +
+                    '<tbody>' +
+                        '<tr>' +
+                            '<td>foo <span style="background:yellow;">bar</span></td>' +
+                            '<td><strong>bold</strong></td>' +
+                            '<td>foo<br>bar<br>baz</td>' +
+                        '</tr>' +
+                    '</tbody>' +
+                '</table>'
+            );
         });
 
     </script>

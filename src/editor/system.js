@@ -575,7 +575,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             /&quot;/g, "'", /* encoded quotes (in attributes) */
             /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
             /<br><br>/g, '<BR><BR>',
-            /<br>/g, ' ',
+            /<br>(?!\n)/g, ' ',
             /<table([^>]*)>(\s|&nbsp;)+<t/gi, '<table$1><t',
             /<tr[^>]*>(\s|&nbsp;)*<\/tr>/gi, '',
             /<tbody[^>]*>(\s|&nbsp;)*<\/tbody>/gi, '',
@@ -593,6 +593,16 @@ var MSWordFormatCleaner = Cleaner.extend({
 
     applicable: function(html) {
         return (/class="?Mso|style="[^"]*mso-/i).test(html);
+    },
+
+    stripEmptyAnchors: function(html) {
+        return html.replace(/<a([^>]*)>\s*<\/a>/ig, function(a, attributes) {
+            if (!attributes || attributes.indexOf("href") < 0) {
+                return "";
+            }
+
+            return a;
+        });
     },
 
     listType: function(html) {
@@ -614,9 +624,8 @@ var MSWordFormatCleaner = Cleaner.extend({
         }
     },
 
-    lists: function(html) {
-        var placeholder = dom.create(document, 'div', {innerHTML: html}),
-            blockChildren = $(dom.blockElements.join(','), placeholder),
+    lists: function(placeholder) {
+        var blockChildren = $(dom.blockElements.join(','), placeholder),
             lastMargin = -1,
             lastType,
             levels = {'ul':{}, 'ol':{}},
@@ -670,27 +679,123 @@ var MSWordFormatCleaner = Cleaner.extend({
             lastMargin = margin;
             lastType = type;
         }
-
-        return placeholder.innerHTML;
     },
 
-    stripEmptyAnchors: function(html) {
-        return html.replace(/<a([^>]*)>\s*<\/a>/ig, function(a, attributes) {
-            if (!attributes || attributes.indexOf("href") < 0) {
-                return "";
+    removeAttributes: function(element) {
+        var attributes = element.attributes,
+            i = attributes.length;
+
+        while (i--) {
+            element.removeAttributeNode(attributes[i]);
+        }
+    },
+
+    createColGroup: function(row) {
+        var cells = row.cells, colgroup;
+
+        if (cells.length < 2) {
+            return;
+        }
+
+        colgroup = $($.map(cells, function(cell) {
+                var width = cell.width;
+                if (width && parseInt(width, 10) !== 0) {
+                    return kendo.format('<col style="width:{0}px;"/>', width);
+                }
+
+                return "<col />";
+            }).join(""));
+
+        // jquery 1.9/2.0 discrepancy
+        if (!colgroup.is("colgroup")) {
+            colgroup = $("<colgroup/>").append(colgroup);
+        }
+
+        colgroup.prependTo($(row).closest("table"));
+    },
+
+    convertHeaders: function(row) {
+        var cells = row.cells,
+            boldedCells = $.map(cells, function(cell) {
+                var child = $(cell).children("p").children("strong")[0];
+
+                if (child && dom.name(child) == "strong") {
+                    return child;
+                }
+            });
+
+        if (boldedCells.length == cells.length) {
+            for (var i = 0; i < boldedCells.length; i++) {
+                dom.unwrap(boldedCells[i]);
             }
 
-            return a;
-        });
+            $(row).closest("table").find("colgroup").after(
+                "<thead><tr>" +
+                $.map(cells, function(cell) {
+                    return "<th>" + $(cell).html() + "</th>";
+                }).join("") +
+                "</tr></thead>"
+            ).end().end().remove();
+        }
+    },
+
+    removeParagraphs: function(cells) {
+        var i, j, len, cell, paragraphs;
+
+        for (i = 0; i < cells.length; i++) {
+            this.removeAttributes(cells[i]);
+
+            // remove paragraphs and insert line breaks between them
+            cell = $(cells[i]);
+            paragraphs = cell.children("p");
+
+            for (j = 0, len = paragraphs.length; j < len; j++) {
+                if (j < len - 1) {
+                    dom.insertAfter(dom.create(document, "br"), paragraphs[j]);
+                }
+
+                dom.unwrap(paragraphs[j]);
+            }
+        }
+    },
+
+    removeDefaultColors: function(spans) {
+        for (var i = 0; i < spans.length; i++) {
+            if (/^\s*color:\s*[^;]*;?$/i.test(spans[i].style.cssText)) {
+                dom.unwrap(spans[i]);
+            }
+        }
+    },
+
+    tables: function(placeholder) {
+        var tables = $(placeholder).find("table"),
+            that = this,
+            firstRow, i;
+
+        for (i = 0; i < tables.length; i++) {
+            firstRow = tables[i].rows[0];
+
+            that.createColGroup(firstRow);
+            that.convertHeaders(firstRow);
+
+            that.removeAttributes(tables[i]);
+
+            that.removeParagraphs(tables.eq(i).find("td,th"));
+            that.removeDefaultColors(tables.eq(i).find("span"));
+        }
     },
 
     clean: function(html) {
-        var that = this;
+        var that = this, placeholder;
 
         html = Cleaner.fn.clean.call(that, html);
         html = that.stripEmptyAnchors(html);
-        html = that.lists(html);
-        html = html.replace(/\s+class="?[^"\s>]*"?/ig, '');
+
+        placeholder = dom.create(document, 'div', {innerHTML: html}),
+        that.lists(placeholder);
+        that.tables(placeholder);
+
+        html = placeholder.innerHTML.replace(/\s+class="?[^"\s>]*"?/ig, '');
 
         return html;
     }
