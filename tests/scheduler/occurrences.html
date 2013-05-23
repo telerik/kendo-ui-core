@@ -1013,6 +1013,95 @@
                 equal(events[4].end.getTime(), +new Date(2013, 4, 30, 17, 0));
             });
 
+            test("YEARLY method expands BYMONTH and limit by BYWEEKNO", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTH=3;BYWEEKNO=10;WKST=MO"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 4, 31, 17) } );
+                equal(events.length, 7); //04 - 10 March
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 2, 4, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 2, 4, 17, 0));
+
+                equal(events[6].recurrenceID, schedulerEvent.uid);
+                equal(events[6].start.getTime(), +new Date(2013, 2, 10, 16, 30));
+                equal(events[6].end.getTime(), +new Date(2013, 2, 10, 17, 0));
+            });
+
+            test("YEARLY method expands BYMONTH and limit by BYYEARDAY (returns 0)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTH=3;BYYEARDAY=200"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 4, 31, 17) } );
+                equal(events.length, 0);
+            });
+
+            test("YEARLY method expands BYMONTH and limit by BYYEARDAY (returns 1)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 0, 1, 16, 30),
+                    end: new Date(2012, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTH=2;BYYEARDAY=60"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2012, 0, 1), end: new Date(2012, 4, 31, 17) } );
+                equal(events.length, 1);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2012, 1, 29, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2012, 1, 29, 17, 0));
+            });
+
+            test("YEARLY method expands BYMONTH and limit by BYMONTHDAY (returns 1)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 0, 1, 16, 30),
+                    end: new Date(2012, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 4, 31, 17) } );
+
+                equal(events.length, 1);
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 17, 0));
+            });
+
+            test("YEARLY method expands BYMONTH and limit by BYDAY (returns 4)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTH=2;BYDAY=WE"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 4, 31, 17) } );
+
+                equal(events.length, 4);
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 1, 6, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 1, 6, 17, 0));
+
+                equal(events[3].recurrenceID, schedulerEvent.uid);
+                equal(events[3].start.getTime(), +new Date(2013, 1, 27, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2013, 1, 27, 17, 0));
+            });
+
         </script>
     </body>
 </html>
