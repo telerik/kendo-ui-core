@@ -225,8 +225,17 @@ kendo_module({
             return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
         },
 
-        addEvent: function(start, end) {
-            var event = this.dataSource.add({ start: start, end: end, title: "" });
+        addEvent: function(eventInfo) {
+            var dataSource = this.dataSource;
+            var event = dataSource._createNewModel();
+
+            if (event instanceof kendo.data.Model) {
+                event.accept(eventInfo);
+            } else {
+                event = extend({ title: "" }, event, eventInfo);
+            }
+
+            this.dataSource.add(event);
         },
 
         removeEvent: function(element) {
@@ -266,7 +275,7 @@ kendo_module({
                 }
 
                 that._viewAddHandler = function(e) {
-                    that.addEvent(e.start, e.end);
+                    that.addEvent(e.eventInfo);
                 };
 
                 view.bind(ADD, this._viewAddHandler);
@@ -620,10 +629,12 @@ kendo_module({
 
                 if (that.options.editable.create !== false) {
                     that.element.on("dblclick", ".k-scheduler-content td", function(e) {
-                        that.trigger(ADD, that._rangeToDates($(this)));
+                        var element = $(this);
+                        that.trigger(ADD, { eventInfo: that._rangeToDates(element) });
                         e.preventDefault();
                     }).on("dblclick", ".k-scheduler-header-all-day td", function(e) {
-                        that.trigger(ADD, extend({ type: "allday" }, that._rangeToDates($(this))));
+                        var element = $(this);
+                        that.trigger(ADD, { eventInfo: extend({ isAllDay: true }, that._rangeToDates(element)) });
                         e.preventDefault();
                     });
                 }

@@ -1356,8 +1356,10 @@
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         add: function(e) {
-                            equal(e.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
-                            equal(e.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
+                            var event = e.eventInfo;
+
+                            equal(event.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
+                            equal(event.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
                         },
                         editable: true,
                         dates: [
@@ -1374,9 +1376,11 @@
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         add: function(e) {
-                            equal(e.start.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
-                            equal(e.end.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
-                            equal(e.type, "allday");
+                            var event = e.eventInfo;
+
+                            equal(event.start.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            equal(event.end.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            equal(event.isAllDay, true);
                         },
                         editable: true,
                         dates: [

@@ -65,6 +65,8 @@
                 scheduler.view().content.find("td").first().dblclick();
 
                 equal(addEvent.calls("addEvent"), 1);
+                ok(addEvent.args("addEvent")[0].start);
+                ok(addEvent.args("addEvent")[0].end);
             });
 
             test("addEvent calls dataSource add method", function() {
@@ -75,6 +77,15 @@
                 scheduler.addEvent();
 
                 equal(add.calls("add"), 1);
+            });
+
+            test("addEvent with type allday creates allday event", function() {
+                var scheduler = setup(),
+                    dataSource = scheduler.dataSource;
+
+                scheduler.addEvent({ isAllDay: true, start: new Date(2013, 1, 13, 0, 0, 0), end: new Date(2013, 1, 13, 0, 0, 0) });
+
+                equal(dataSource.at(0).isAllDay, true);
             });
 
         </script>

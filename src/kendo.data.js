@@ -2071,6 +2071,14 @@ kendo_module({
             return this.insert(this._data.length, model);
         },
 
+        _createNewModel: function(model) {
+            if (this.reader.model) {
+                return  new this.reader.model(model);
+            }
+
+            return new ObservableObject(model);
+        },
+
         insert: function(index, model) {
             if (!model) {
                 model = index;
@@ -2078,11 +2086,7 @@ kendo_module({
             }
 
             if (!(model instanceof Model)) {
-                if (this.reader.model) {
-                    model = new this.reader.model(model);
-                } else {
-                    model = new ObservableObject(model);
-                }
+                model = this._createNewModel(model);
             }
 
             if (this._isServerGrouped()) {
