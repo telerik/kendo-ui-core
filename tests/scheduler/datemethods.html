@@ -160,11 +160,6 @@
                equal(weekInYear(date, weekStart), 2);
             });
 
-            test("weekInYear returns 2 for (06-01-2013 00:00:00)", function() {
-               var date = new Date(2013, 0, 6), weekStart = 0;
-               equal(weekInYear(date, weekStart), 2);
-            });
-
             test("weekInYear returns 2 for (11-01-2013 00:00:00)", function() {
                var date = new Date(2013, 0, 11), weekStart = 0;
                equal(weekInYear(date, weekStart), 2);
@@ -172,6 +167,28 @@
 
             test("weekInYear returns 3 for (13-01-2013 00:00:00)", function() {
                var date = new Date(2013, 0, 13), weekStart = 0;
+               equal(weekInYear(date, weekStart), 3);
+            });
+
+            module("Week in year (week start -> SA)");
+
+            test("weekInYear returns 1 for (04-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 4), weekStart = 6;
+               equal(weekInYear(date, weekStart), 1);
+            });
+
+            test("weekInYear returns 2 for (05-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 5), weekStart = 6;
+               equal(weekInYear(date, weekStart), 2);
+            });
+
+            test("weekInYear returns 2 for (11-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 11), weekStart = 6;
+               equal(weekInYear(date, weekStart), 2);
+            });
+
+            test("weekInYear returns 3 for (12-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 12), weekStart = 6;
                equal(weekInYear(date, weekStart), 3);
             });
 
