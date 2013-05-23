@@ -1737,8 +1737,24 @@ function pad(number, digits, end) {
         support.transitions = transitions;
 
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
-        support.screenWidth = window.outerWidth || window.screen ? window.screen.availWidth : window.innerWidth;
-        support.screenHeight = window.outerHeight || window.screen ? window.screen.availHeight : window.innerHeight;
+
+        try {
+            support.screenWidth = window.outerWidth || window.screen ? window.screen.availWidth : window.innerWidth;
+            support.screenHeight = window.outerHeight || window.screen ? window.screen.availHeight : window.innerHeight;
+
+            support.zoomLevel = function() {
+                return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
+                       support.pointers ? ((top || window).outerWidth / window.innerWidth) : 1;
+            };
+        } catch(e) {
+            //window.outerWidth throws error when in IE showModalDialog.
+            support.screenWidth = window.screen.availWidth;
+            support.screenHeight = window.screen.availHeight;
+
+            support.zoomLevel = function() {
+                return 1;
+            }
+        }
 
         support.detectOS = function (ua) {
             var os = false, minorVersion, match = [],
@@ -1869,11 +1885,6 @@ function pad(number, digits, end) {
                 $(document.documentElement).addClass("k-" + cssClass + " k-" + cssClass + majorVersion);
             }
         })(support.browser);
-
-        support.zoomLevel = function() {
-            return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
-                   support.pointers ? ((top || window).outerWidth / window.innerWidth) : 1;
-        };
 
         support.eventCapture = document.documentElement.addEventListener;
 
