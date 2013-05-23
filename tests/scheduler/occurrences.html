@@ -19,63 +19,6 @@
             var recurrence = kendo.recurrence,
                 occurrences = recurrence.expand;
 
-            module("Recurring helper methods");
-
-            test("expandEvent method expand original method with rrule object", function() {
-                var schedulerEvent = {
-                    title: "Title",
-                    start: new Date(),
-                    rule: "FREQ=DAILY"
-                }
-
-                recurrence.expandEvent(schedulerEvent);
-
-                ok(schedulerEvent.ruleInstance);
-            });
-
-            test("Numbers of weeks in 01/05/2013", function() {
-                equal(recurrence.numberOfWeeks(new Date(2013, 4, 1), 0), 5);
-            });
-
-            test("Numbers of weeks in 22/06/2013", function() {
-                equal(recurrence.numberOfWeeks(new Date(2013, 5, 22), 0), 6);
-            });
-
-            test("weekNumber method returns number of the week (first week)", function() {
-                var date = new Date(2013, 5, 1);
-                equal(recurrence.weekNumber(date, 0), 1);
-            });
-
-            test("weekNumber method returns number of the week (second week)", function() {
-                var date = new Date(2013, 5, 2);
-                equal(recurrence.weekNumber(date, 0), 2);
-            });
-
-            test("weekNumber method returns number of the week (third week)", function() {
-                var date = new Date(2013, 5, 16);
-                equal(recurrence.weekNumber(date, 0), 4);
-            });
-
-            test("weekNumber method honours weekStart", function() {
-                var date = new Date(2013, 5, 16);
-                equal(recurrence.weekNumber(date, 1), 3);
-            });
-
-            test("weekNumber method honours weekStart ", function() {
-                var date = new Date(2013, 3, 18);
-                equal(recurrence.weekNumber(date, 5), 4);
-            });
-
-            test("DAILY frequency next method gets next day (interval:1)", function() {
-                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), { interval:1 });
-                equal(+next, +new Date(2000, 10, 11, 18, 18, 18))
-            });
-
-            test("DAILY frequency next method gets the day after tomorrow (interval:2)", function() {
-                var next = recurrence.frequency.daily.next(new Date(2000, 10, 10, 18, 18, 18), { interval:2 });
-                equal(+next, +new Date(2000, 10, 12, 18, 18, 18));
-            });
-
             module("DAILY Occurrences");
             test("DAILY occurrences method returns one occurrence (FREQ: DAILY)", function() {
                 var schedulerEvent = {

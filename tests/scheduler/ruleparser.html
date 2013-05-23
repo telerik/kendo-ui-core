@@ -318,24 +318,24 @@
             test("Parse BYWEEKNO property when value is single number", function() {
                 var rrule = parse("FREQ=YEARLY;BYWEEKNO=1");
 
-                equal(rrule.weekNumber.length, 1);
-                equal(rrule.weekNumber[0], 1);
+                equal(rrule.weeks.length, 1);
+                equal(rrule.weeks[0], 1);
             });
 
             test("Parse BYWEEKNO property when value is a list of numbers", function() {
                 var rrule = parse("FREQ=YEARLY;BYWEEKNO=1, 2, 3, 4");
 
-                equal(rrule.weekNumber.length, 4);
-                equal(rrule.weekNumber[0], 1);
-                equal(rrule.weekNumber[1], 2);
-                equal(rrule.weekNumber[2], 3);
-                equal(rrule.weekNumber[3], 4);
+                equal(rrule.weeks.length, 4);
+                equal(rrule.weeks[0], 1);
+                equal(rrule.weeks[1], 2);
+                equal(rrule.weeks[2], 3);
+                equal(rrule.weeks[3], 4);
             });
 
             test("Parse BYWEEKNO validates if values are not correct", function() {
                 var rrule = parse("FREQ=YEARLY;BYWEEKNO=1, 54, 3, 4");
 
-                ok(rrule.weekNumber === null);
+                ok(rrule.weeks === null);
             });
 
             test("Parse WKST property", function() {
