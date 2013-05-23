@@ -25,6 +25,7 @@ kendo_module({
         CHANGE = "change",
         REMOVE = "remove",
         ADD = "add",
+        EDIT = "edit",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         TODAY = new Date(),
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
@@ -549,7 +550,7 @@ kendo_module({
             column;
 
             for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
-                if (!(eventRange.start >= columns[j].start && eventRange.start <= columns[j].end)) {
+                if (!(eventRange.start >= columns[j].start && eventRange.start < columns[j].end)) {
                     column = columns[j];
 
                     if (column.end < eventRange.end) {
@@ -602,7 +603,7 @@ kendo_module({
             editable: true
         },
 
-        events: [REMOVE, ADD],
+        events: [REMOVE, ADD, EDIT],
 
         _editable: function() {
             var that = this;
@@ -618,8 +619,19 @@ kendo_module({
                 });
 
                 if (that.options.editable.create !== false) {
-                    that.element.on("dblclick", ".k-scheduler-content td", function() {
+                    that.element.on("dblclick", ".k-scheduler-content td", function(e) {
                         that.trigger(ADD, that._rangeToDates($(this)));
+                        e.preventDefault();
+                    }).on("dblclick", ".k-scheduler-header-all-day td", function(e) {
+                        that.trigger(ADD, extend({ type: "allday" }, that._rangeToDates($(this))));
+                        e.preventDefault();
+                    });
+                }
+
+                if (that.options.editable.update !== false) {
+                    that.element.on("dblclick", ".k-appointment", function(e) {
+                        that.trigger(EDIT, { container: $(this).closest(".k-appointment") });
+                        e.preventDefault();
                     });
                 }
             }
@@ -691,7 +703,8 @@ kendo_module({
                     content += '>&nbsp;</td>';
                     return content;
                 });
-                that.allDayHeader = $(allDayHtml);
+
+                that.allDayHeader = $(allDayHtml).addClass("k-scheduler-header-all-day");
             }
 
             that.datesHeader = header.append(html)
@@ -970,8 +983,10 @@ kendo_module({
 
         _rangeToDates: function(cell) {
             var parentRow = cell.closest("tr"),
+                tableRows = parentRow.closest("table").find("tr"),
+                maxTimeSlotIndex = tableRows.length - 1,
                 dateIndex = parentRow.find("td").index(cell),
-                timeIndex = parentRow.closest("table").find("tr").index(parentRow),
+                timeIndex = tableRows.index(parentRow),
                 slotDate = this._slotIndexDate(dateIndex),
                 slotEndDate;
 
@@ -979,7 +994,7 @@ kendo_module({
                 slotEndDate = new Date(slotDate);
 
                 setTime(slotDate, this._slotIndexTime(timeIndex));
-                setTime(slotEndDate, this._slotIndexTime(timeIndex + 1));
+                setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
 
                 return {
                     start: slotDate,

@@ -1370,6 +1370,117 @@
                 view.content.find("td").eq(2).trigger("dblclick");
             });
 
+            test("double clicking a cell in the datesHeader triggers add event", 3, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        add: function(e) {
+                            equal(e.start.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            equal(e.end.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            equal(e.type, "allday");
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                view.datesHeader.find(".k-scheduler-header-all-day td").trigger("dblclick");
+            });
+
+            test("double clicking an all day event triggers edit event", 1, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        edit: function(e) {
+                            ok(e.container);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true }
+                ];
+
+                view.renderEvents(events);
+
+                view.datesHeader.find(".k-appointment").trigger("dblclick");
+            });
+
+            test("double clicking an event triggers edit event", 1, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        edit: function(e) {
+                            ok(e.container);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.content.find(".k-appointment").trigger("dblclick");
+            });
+
+            test("double clicking an event does not trigger edit event if not editable", 0, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: false,
+                        edit: function(e) {
+                            ok(false);
+                        },
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.content.find(".k-appointment").trigger("dblclick");
+            });
+
+            test("double clicking an event does not trigger edit event if update is false", 0, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: { update: false },
+                        edit: function(e) {
+                            ok(false);
+                        },
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.renderEvents(events);
+
+                view.content.find(".k-appointment").trigger("dblclick");
+            });
+
             test("_rangeToDates returns date for slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
