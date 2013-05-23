@@ -1801,9 +1801,9 @@ kendo_module({
             },
             yearly: {
                 next: function(start, rule) {
-                    if (!rule.months && !rule.monthDays && !rule.weekDays && !rule.yearDays) {
+                    if (!rule.months && !rule.monthDays && !rule.weekDays && !rule.yearDays && !rule.weekNumber) {
                         start.setFullYear(start.getFullYear() + 1);
-                    } else if (rule.monthDays || rule.weekDays || rule.yearDays) {
+                    } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weekNumber) {
                         start.setDate(start.getDate() + 1);
                     } else {
                         day = start.getDate();
@@ -1848,13 +1848,13 @@ kendo_module({
                             }
                         }
 
-                        /*if (rule.monthDays) {
+                        if (rule.monthDays) {
                             date = recurrence._monthDay(date, end, rule);
                         }
 
                         if (rule.weekDays) {
                             date = recurrence._weekDay(date, end, rule);
-                        }*/
+                        }
 
                         if (month !== undefined && month !== date.getMonth()) {
                             date.setDate(date.getDate() + 1);
@@ -1970,10 +1970,6 @@ kendo_module({
 
                 if (weekStart === undefined) {
                     instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
-                }
-
-                if (instance.weekNumber && !weekDays) {
-                    weekDays = parseWeekDayList(["SU","MO","TU","WE","TH","FR","SA"]);
                 }
 
                 if (weekDays) {

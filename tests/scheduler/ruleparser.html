@@ -374,15 +374,6 @@
                 equal(rule, null);
             });
 
-            test("parseRule method expands weekDays if weekNumber is defined", function() {
-                var rule = parse("FREQ=YEARLY;BYWEEKNO=10");
-
-                ok(rule.weekDays);
-                equal(rule.weekDays.length, 7);
-                equal(rule.weekDays[0].day, 0);
-                equal(rule.weekDays[6].day, 6);
-            });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

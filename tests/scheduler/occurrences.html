@@ -970,6 +970,49 @@
                 equal(events[2].start.getTime(), +new Date(2013, 6, 19, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 6, 19, 17, 0));
             });
+
+            test("YEARLY method expands BYMONTHDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTHDAY=31"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 11, 31, 17) } );
+                equal(events.length, 7);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 0, 31, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 31, 17, 0));
+
+                equal(events[6].recurrenceID, schedulerEvent.uid);
+                equal(events[6].start.getTime(), +new Date(2013, 11, 31, 16, 30));
+                equal(events[6].end.getTime(), +new Date(2013, 11, 31, 17, 0));
+            });
+
+            test("YEARLY method expands BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYDAY=TH"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 1), end: new Date(2013, 4, 31, 17) } );
+                equal(events.length, 5);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 2, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 2, 17, 0));
+
+                equal(events[4].recurrenceID, schedulerEvent.uid);
+                equal(events[4].start.getTime(), +new Date(2013, 4, 30, 16, 30));
+                equal(events[4].end.getTime(), +new Date(2013, 4, 30, 17, 0));
+            });
+
         </script>
     </body>
 </html>
