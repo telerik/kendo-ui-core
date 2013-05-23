@@ -1633,6 +1633,23 @@ form.k-filter-menu .k-textbox
 
 /* Grid :: editing */
 
+.k-dirty-cell:before
+{
+    content:"\a0";
+    display: inline-block;
+    width: 0;
+}
+
+.k-ie7 .k-dirty-cell
+{
+    position: relative;
+}
+
+.k-ie7 .k-dirty
+{
+    top: 5px;
+}
+
 .k-dirty
 {
     position: absolute;
