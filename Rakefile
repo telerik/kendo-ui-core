@@ -26,6 +26,7 @@ end
 ADMIN_PASS = 'ultra'
 
 require 'version'
+require 'timezone'
 require 'zip'
 require 'js'
 require 'css'
