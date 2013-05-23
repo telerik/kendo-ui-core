@@ -1938,7 +1938,7 @@ kendo_module({
                         instance.months = parseArray(value, { start: 1, end: 12 });
                         break;
                     case "BYDAY":
-                        weekDays = parseWeekDayList(value);
+                        instance.weekDays = weekDays = parseWeekDayList(value);
                         break;
                     case "BYSETPOS":
                         instance.setPositions = parseArray(value, { start: 1, end: 366 });
