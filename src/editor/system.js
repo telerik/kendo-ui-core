@@ -691,11 +691,17 @@ var MSWordFormatCleaner = Cleaner.extend({
     },
 
     tables: function(placeholder) {
-        var tableElements = $("table", placeholder), i,
+        var tableElements = $("table", placeholder),
             that = this;
 
         function createColGroup(row) {
-            var colgroup = $($.map(row.cells, function(cell) {
+            var cells = row.cells, colgroup;
+
+            if (cells.length < 2) {
+                return;
+            }
+
+            colgroup = $($.map(cells, function(cell) {
                     var width = cell.width;
                     if (width && parseInt(width, 10) !== 0) {
                         return kendo.format('<col style="width:{0}px;"/>', width);
@@ -709,11 +715,34 @@ var MSWordFormatCleaner = Cleaner.extend({
                 colgroup = $("<colgroup/>").append(colgroup);
             }
 
-            colgroup.insertBefore(row);
+            colgroup.prependTo($(row).closest("table"));
         }
 
-        function convertHeaders() {
-            
+        function content() {
+            return this.innerHTML;
+        }
+
+        function convertHeaders(row) {
+            var cells = row.cells,
+                boldedCells = $.map(cells, function(cell) {
+                    var child = $(cell).children("p").children("strong")[0];
+
+                    if (child && dom.name(child) == "strong") {
+                        return child;
+                    }
+                });
+
+            if (boldedCells.length) {
+                $(boldedCells).replaceWith(content);
+
+                $(row).closest("table").find("colgroup").after(
+                    "<thead><tr>" +
+                    $.map(cells, function(cell) {
+                        return "<th>" + $(cell).html() + "</th>";
+                    }).join("") +
+                    "</tr></thead>"
+                ).end().end().remove();
+            }
         }
 
         tableElements.each(function() {
@@ -722,20 +751,21 @@ var MSWordFormatCleaner = Cleaner.extend({
             createColGroup(firstRow);
             convertHeaders(firstRow);
 
-            tableElements.find("td, td>p").each(function(){
+            that.removeAttributes(this);
+
+            $(this).find("td,th").each(function() {
                 that.removeAttributes(this);
+                var cell = $(this),
+                    paragraphs = cell.find("p");
+
+                if (paragraphs.length) {
+                    cell.html(
+                        $.map(paragraphs, function(x) {
+                            return $(x).text();
+                        }).join("<br>")
+                    );
+                }
             });
-        });
-
-        // process first row
-
-
-        for (i = 0; i < tableElements.length; i++) {
-            this.removeAttributes(tableElements[i]);
-        }
-
-        $("td>p>span", placeholder).replaceWith(function() {
-            return $(this).text();
         });
     },
 
