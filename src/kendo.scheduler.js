@@ -1392,6 +1392,24 @@ kendo_module({
             }
         },
 
+        weekInYear: function(date, weekStart){
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            var year = date.getFullYear(),
+                thursday = 4,
+                days;
+
+            if (weekStart !== undefined) {
+                date = recurrence.nextWeekDay(date, weekStart, -1);
+                date.setDate(date.getDate() + 4);
+            } else {
+                date.setDate(date.getDate() + (4 - (date.getDay() || 7)));
+            }
+
+            days = Math.floor((date.getTime() - new Date(year, 0, 1, -6)) / 86400000);
+
+            return 1 + Math.floor(days / 7);
+        },
+
         weekNumber: function(date, weekStart) {
             var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 
@@ -1408,10 +1426,12 @@ kendo_module({
             return recurrence.weekNumber(new Date(date.getFullYear(), date.getMonth() + 1, 0), weekStart);
         },
 
-        nextWeekDay: function(date, dayOfWeek) {
+        nextWeekDay: function(date, dayOfWeek, incrementValue) {
             date = new Date(date);
+            incrementValue = incrementValue || 1;
+
             while(date.getDay() !== dayOfWeek) {
-                date.setDate(date.getDate() + 1);
+                date.setDate(date.getDate() + incrementValue);
             }
 
             return date;
@@ -1777,14 +1797,78 @@ kendo_module({
                 }
             },
             yearly: {
-                next: function() {
+                next: function(start, rule) {
+                    if (!rule.months && !rule.monthDays && !rule.weekDays) {
+                        start.setFullYear(start.getFullYear() + 1);
+                    } else if (rule.monthDays || rule.weekDays) { //like monthly.next
+                        start.setDate(start.getDate() + 1);
+                    } else {
+                        day = start.getDate();
+                        start.setMonth(start.getMonth() + 1);
 
+                        while(start.getDate() !== day) {
+                            start.setDate(day);
+                        }
+                    }
+
+                    return start;
                 },
-                limit: function() {
 
+                limit: function(date, end, rule) {
+                    var day, month,
+                        weekStart = rule.weekStart;
+
+                    end = +end;
+                    while (+date <= end) {
+                        if (rule.months) {
+                            day = date.getDate();
+                            date = recurrence._month(date, end, rule);
+                            month = date.getMonth();
+
+                            if (!rule.monthDays && !rule.weekDays) {
+                                date.setDate(day);
+                            }
+                        }
+
+                        if (rule.weekNumber && $.inArray(recurrence.weekInYear(date, weekStart), rule.weekNumber) === -1) { //TODO: Sort weekNumber
+                            while ((+date <= end) && $.inArray(recurrence.weekInYear(date, weekStart), rule.weekNumber) === -1) {
+                                date.setDate(date.getDate() + 7);
+                            }
+
+                            //TODO: test this logic when while ends because date > end and we move backward!!!
+                            date = recurrence.nextWeekDay(date, weekStart, -1); //TODO: implement prevWeekDay
+                        }
+
+                        /*if (rule.monthDays) {
+                            date = recurrence._monthDay(date, end, rule);
+                        }
+
+                        if (rule.weekDays) {
+                            date = recurrence._weekDay(date, end, rule);
+                        }*/
+
+                        if (month !== undefined && month !== date.getMonth()) {
+                            date.setDate(date.getDate() + 1);
+                        } else if (+date <= end) {
+                            break;
+                        }
+                    }
+
+                    return date;
                 },
-                setup: function() {
-
+                setup: function(rule, start, eventStart) {
+                    if (rule.weekDays && rule._weekDayRules === undefined) {
+                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+                },
+                setDate: function(currentDate, eventDate) {
+                    //same as DAILY.setDate
+                    currentDate = new Date(currentDate);
+                    currentDate.setHours(eventDate.getHours());
+                    currentDate.setMinutes(eventDate.getMinutes());
+                    currentDate.setSeconds(eventDate.getSeconds());
+                    currentDate.setMilliseconds(eventDate.getMilliseconds());
+                    return currentDate;
                 }
             }
         },
@@ -1854,7 +1938,7 @@ kendo_module({
                         instance.months = parseArray(value, { start: 1, end: 12 });
                         break;
                     case "BYDAY":
-                        instance.weekDays = weekDays = parseWeekDayList(value);
+                        weekDays = parseWeekDayList(value);
                         break;
                     case "BYSETPOS":
                         instance.setPositions = parseArray(value, { start: 1, end: 366 });
@@ -1877,6 +1961,10 @@ kendo_module({
 
                 if (weekStart === undefined) {
                     instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
+                }
+
+                if (instance.weekNumber && !weekDays) {
+                    weekDays = parseWeekDayList(["SU","MO","TU","WE","TH","FR","SA"]);
                 }
 
                 if (weekDays) {

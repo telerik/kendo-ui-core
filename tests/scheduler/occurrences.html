@@ -873,7 +873,6 @@
             //TODO: Add test for BYSETPOS
 
             module("YEARLY Occurrences");
-
             test("YEARLY method returns one event for each new year", function() {
                 var schedulerEvent = {
                     uid: "id",
@@ -900,6 +899,44 @@
                 equal(events[2].end.getTime(), +new Date(2002, 5, 10, 17, 0));
             });
 
+            test("YEARLY method expands BYMONTH", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=YEARLY;BYMONTH=12"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 5, 10), end: new Date(2002, 11, 10, 17) } );
+
+                equal(events.length, 3);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 11, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2000, 11, 10, 17, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2001, 11, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2001, 11, 10, 17, 0));
+
+                equal(events[2].recurrenceID, schedulerEvent.uid);
+                equal(events[2].start.getTime(), +new Date(2002, 11, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2002, 11, 10, 17, 0));
+            });
+
+            test("YEARLY method expands BYWEEKNO", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 10, 16, 30),
+                    end: new Date(2013, 0, 10, 17, 0),
+                    rule: "FREQ=YEARLY;BYWEEKNO=10;WKST=1"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 10), end: new Date(2013, 11, 10, 17) } );
+                equal(events.length, 7); //04 - 10 March
+            });
         </script>
     </body>
 </html>

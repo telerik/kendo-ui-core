@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Date methods</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Date methods</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var recurrence = kendo.recurrence,
+                weekInYear = recurrence.weekInYear;
+
+            module("Recurring helper methods");
+
+            test("expandEvent method expand original method with rrule object", function() {
+                var schedulerEvent = {
+                    title: "Title",
+                    start: new Date(),
+                    rule: "FREQ=DAILY"
+                }
+
+                recurrence.expandEvent(schedulerEvent);
+
+                ok(schedulerEvent.ruleInstance);
+            });
+
+            test("Numbers of weeks in 01/05/2013", function() {
+                equal(recurrence.numberOfWeeks(new Date(2013, 4, 1), 0), 5);
+            });
+
+            test("Numbers of weeks in 22/06/2013", function() {
+                equal(recurrence.numberOfWeeks(new Date(2013, 5, 22), 0), 6);
+            });
+
+            test("weekNumber method returns number of the week (first week)", function() {
+                var date = new Date(2013, 5, 1);
+                equal(recurrence.weekNumber(date, 0), 1);
+            });
+
+            test("weekNumber method returns number of the week (second week)", function() {
+                var date = new Date(2013, 5, 2);
+                equal(recurrence.weekNumber(date, 0), 2);
+            });
+
+            test("weekNumber method returns number of the week (third week)", function() {
+                var date = new Date(2013, 5, 16);
+                equal(recurrence.weekNumber(date, 0), 4);
+            });
+
+            test("weekNumber method honours weekStart", function() {
+                var date = new Date(2013, 5, 16);
+                equal(recurrence.weekNumber(date, 1), 3);
+            });
+
+            test("weekNumber method honours weekStart ", function() {
+                var date = new Date(2013, 3, 18);
+                equal(recurrence.weekNumber(date, 5), 4);
+            });
+
+            module("Week in year (ISO8601)");
+
+            test("weekInYear returns 53 for (31-12-2012 00:00:00)", function(){
+               var date = new Date(2012, 11, 31);
+               equal(weekInYear(date), 53);
+            });
+
+            test("weekInYear returns 0 for (1-1-2012 00:00:00), because belongs to last week of previous year", function(){
+               var date = new Date(2012, 0, 1);
+               equal(weekInYear(date), 0);
+            });
+
+            test("weekInYear returns 0 for (1-1-2012 23:59:59), because belongs to last week of previous year", function(){
+               var date = new Date(2012, 0, 1, 23, 59, 59);
+               equal(weekInYear(date), 0);
+            });
+
+            test("weekInYear returns 1 for (2-1-2012 00:00:00)", function(){
+               var date = new Date(2012, 0, 2);
+               equal(weekInYear(date), 1);
+            });
+
+            test("weekInYear returns 3 for (18-1-2012 00:00:00)", function() {
+               var date = new Date(2012, 0, 18);
+               equal(weekInYear(date), 3);
+            });
+
+            test("weekInYear returns 4 for (29-1-2012 23:59:59)", function() {
+               var date = new Date(2012, 0, 29, 23, 59, 59);
+               equal(weekInYear(date), 4);
+            });
+
+            test("weekInYear returns 5 for (31-1-2012 23:59:59)", function() {
+               var date = new Date(2012, 0, 31, 23, 59, 59);
+               equal(weekInYear(date), 5);
+            });
+
+            test("weekInYear returns 7 for (15-2-2012 00:00:00)", function() {
+               var date = new Date(2012, 1, 15);
+               equal(weekInYear(date), 7);
+            });
+
+            test("weekInYear returns 9 for (29-2-2012 23:59:59)", function() {
+               var date = new Date(2012, 1, 29, 23, 59, 59);
+               equal(weekInYear(date), 9);
+            });
+
+            test("weekInYear returns 10 for (5-3-2012 00:00:00)", function() {
+               var date = new Date(2012, 2, 5);
+               equal(weekInYear(date), 10);
+            });
+
+            test("weekInYear returns 10 for (4-3-2013 00:00:00)", function() {
+               var date = new Date(2013, 2, 4);
+               equal(weekInYear(date), 10);
+            });
+
+            test("weekInYear returns 13 for (29-3-2012 00:00:00)", function() {
+               var date = new Date(2012, 2, 29);
+               equal(weekInYear(date), 13);
+            });
+
+            test("weekInYear returns 52 for (30-12-2012 00:00:00)", function() {
+               var date = new Date(2012, 11, 30);
+               equal(weekInYear(date), 52);
+            });
+
+            test("weekInYear returns 52 for (31-12-2012 00:00:00)", function() {
+               var date = new Date(2012, 11, 31);
+               equal(weekInYear(date), 53);
+            });
+
+            test("weekInYear returns 52 for (06-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 6);
+               equal(weekInYear(date), 1);
+            });
+
+            test("weekInYear returns 1 for (07-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 7);
+               equal(weekInYear(date), 2);
+            });
+
+            module("Week in year (week start -> SU)");
+
+            test("weekInYear returns 1 for (05-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 5), weekStart = 0;
+               equal(weekInYear(date, weekStart), 1);
+            });
+
+            test("weekInYear returns 2 for (06-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 6), weekStart = 0;
+               equal(weekInYear(date, weekStart), 2);
+            });
+
+            test("weekInYear returns 2 for (06-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 6), weekStart = 0;
+               equal(weekInYear(date, weekStart), 2);
+            });
+
+            test("weekInYear returns 2 for (11-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 11), weekStart = 0;
+               equal(weekInYear(date, weekStart), 2);
+            });
+
+            test("weekInYear returns 3 for (13-01-2013 00:00:00)", function() {
+               var date = new Date(2013, 0, 13), weekStart = 0;
+               equal(weekInYear(date, weekStart), 3);
+            });
+
+        </script>
+    </body>
+</html>
