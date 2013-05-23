@@ -22,9 +22,15 @@
         function clean(html) {
             var value = cleaner.clean(html);
 
-            return value.replace(/(<\/?[^>]*>)/g, function (_, tag) {
-                return tag.toLowerCase();
-            }).replace(/[\r\n]+/g, '');
+            return value
+                // uppercase tags
+                .replace(/(<\/?[^>]*>)/g, function (_, tag) {
+                    return tag.toLowerCase();
+                })
+                // empty lines
+                .replace(/[\r\n]+/g, '')
+                // CSS properties
+                .replace(/(;|:)\s*/g, "$1");
         }
 
         module("Editor / MSWordFormatCleaner", {
@@ -220,7 +226,7 @@
         });
 
         test("does not interpret all graphic chars as lists", function() {
-            equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>').replace(/(;|:)\s*/g, "$1"), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
+            equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>'), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
         });
 
         test("cleans word tables", function() {
