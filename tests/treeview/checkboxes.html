@@ -504,6 +504,27 @@
                 ok(treeviewObject.dataItem(".k-item:last").checked);
             });
 
+            test("checkChildren with sparse checkboxes", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", expanded: true, items: [
+                            { id: 2, text: "bar", uncheckable: true },
+                            { id: 3, text: "baz", uncheckable: true }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true,
+                        template: "# if (!item.uncheckable) { #" +
+                            "<input type='checkbox' />" +
+                        "# } #"
+                    }
+                });
+
+                treeview.find(":checkbox:first").prop("checked", true).trigger("change");
+
+                ok(treeviewObject.dataItem(".k-item:last").checked);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

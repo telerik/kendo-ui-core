@@ -644,14 +644,14 @@ kendo_module({
                         break;
                     }
                 }
-            } else {
+            } else if (length) {
                 all = !siblings[0].indeterminate;
             }
 
             checkboxes(node)
                 .data("indeterminate", !all)
                 .prop("indeterminate", !all)
-                .prop(CHECKED, all && siblings[0].checked);
+                .prop(CHECKED, all && (!siblings[0] || siblings[0].checked));
         },
 
         _updateIndeterminateInitial: function(node) {
