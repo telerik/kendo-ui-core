@@ -23,8 +23,8 @@ check process mono-fcgi with pidfile /var/run/mono-fcgi.pid
 check process tomcat7 with pidfile /var/run/tomcat7.pid
     start program = "/usr/sbin/service tomcat7 start" with timeout 60 seconds
     stop program = "/usr/sbin/service tomcat7 stop"
-    if failed url http://localhost/staging-java/
-        CONTENT == "Kendo UI for JSP"
+    if failed url http://localhost/staging-java/web/grid/index
+        CONTENT == "Source"
         TIMEOUT 60 SECONDS
         then restart
 
