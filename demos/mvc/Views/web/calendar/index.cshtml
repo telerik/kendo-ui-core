@@ -6,10 +6,7 @@
             <script>
                 $(document).ready(function() {
                     // create Calendar from div HTML element
-                    kendo.culture().calendar.firstDay = 6;
-                    $("#calendar").kendoCalendar({
-                        value: new Date(2013, 0, 6)
-                    });
+                    $("#calendar").kendoCalendar();
                 });
             </script>
             <style scoped>
