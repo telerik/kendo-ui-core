@@ -277,7 +277,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var builder = factory.ComboBoxFor(m => m.ComplexModel);
 
-            builder.ToComponent().Value.ShouldBeEmpty();
+            builder.ToComponent().Value.ShouldBeNull();
         }
 
         [Fact]
@@ -299,7 +299,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var builder = factory.AutoCompleteFor(m => m.NullableInt);
 
-            Assert.Equal(string.Empty, builder.ToComponent().Value);
+            Assert.Equal(null, builder.ToComponent().Value);
         }
 
         [Fact]
@@ -315,7 +315,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var builder = factory.AutoCompleteFor(m => m.ComplexModel);
 
-            builder.ToComponent().Value.ShouldBeEmpty();
+            builder.ToComponent().Value.ShouldBeNull();
         }
 
         public class TestModel

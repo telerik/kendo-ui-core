@@ -1605,7 +1605,7 @@ namespace Kendo.Mvc.UI.Fluent
         private string GetValue<TValue>(Expression<Func<TModel, TValue>> expression) 
         {
             object model = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-            return model != null && model.GetType().IsPredefinedType() ? Convert.ToString(model) : string.Empty;
+            return model != null && model.GetType().IsPredefinedType() ? Convert.ToString(model) : null;
         }
 
         private IEnumerable GetIEnumerableValues<TValue>(Expression<Func<TModel, TValue>> expression)
