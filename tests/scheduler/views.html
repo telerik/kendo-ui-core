@@ -1165,14 +1165,38 @@
 
                 var eventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
                 var eventSlotHeigth = view.allDayHeader.find("td").eq(0).height();
-                var eventHeight = Math.floor((eventSlotHeigth - eventSlotHeigth * 0.10) / 3);
+                var eventHeight = eventElements.eq(0).height();
 
                 equal(eventElements.eq(0).offset().top, eventSlotOffset.top);
                 equal(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
+                equal(eventElements.eq(2).offset().top, eventSlotOffset.top);
+            });
 
-                equal(eventElements.eq(0).height(), eventHeight);
-                equal(eventElements.eq(1).height(), eventHeight)
-                equal(eventElements.eq(2).height(), eventHeight);
+            test("set top of multiple overlapping all day events in same slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event", isAllDay: true },
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.datesHeader.find("div.k-appointment");
+
+                var eventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
+                var eventHeight = eventElements.eq(0).height();
+
+                equal(eventElements.eq(0).offset().top, eventSlotOffset.top);
+                equal(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
             });
 
             test("close button is rendered if set as editable", function() {

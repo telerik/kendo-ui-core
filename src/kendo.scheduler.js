@@ -555,11 +555,13 @@ kendo_module({
 
         eventElements.each(function() {
             var event = this,
-            eventRange = rangeIndex(event),
-            column;
+                eventRange = rangeIndex(event),
+                column;
 
             for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
-                if (!(eventRange.start >= columns[j].start && eventRange.start < columns[j].end)) {
+                if (!(eventRange.start >= columns[j].start && eventRange.start < columns[j].end) &&
+                    !(columns[j].end === eventRange.start && columns[j].end <= eventRange.end)) {
+
                     column = columns[j];
 
                     if (column.end < eventRange.end) {
@@ -1029,8 +1031,7 @@ kendo_module({
                 slots = this._dates || [],
                 startTime = getMilliseconds(new Date(+this.options.startTime)),
                 endTime = getMilliseconds(new Date(+this.options.endTime)),
-                slotStart,
-                slotEnd;
+                slotStart;
 
             if (startTime >= endTime) {
                 endTime += MS_PER_DAY;
@@ -1095,8 +1096,8 @@ kendo_module({
                 numberOfSlots = Math.ceil(endIndex - startIndex),
                 allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
-                bottomOffset = (dateSlot.height() * 0.20),
-                eventHeight = allDayEvents.length > 1 ? allDayEvents.first().height() : (dateSlot.height() - bottomOffset);
+                bottomOffset = 20,//(dateSlot.height() * 0.20),
+                eventHeight = allDayEvents.length > 1 ? allDayEvents.first()[0].clientHeight : (dateSlot.height() - bottomOffset);
 
             element
                 .css({
@@ -1106,14 +1107,20 @@ kendo_module({
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            allDayEvents.each(function(idx) {
-                $(this).css({
-                    top: top + eventHeight * idx
-                });
-            });
+            var columns = createColumns(allDayEvents);
 
-            if (allDayEvents.length > 1) {
-                slots.parent().height((eventHeight * allDayEvents.length) + bottomOffset);
+            for (var idx = 0, length = columns.length; idx < length; idx++) {
+                var columnEvents = columns[idx].events;
+
+                for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
+                    $(columnEvents[j]).css({
+                        top: top + idx * eventHeight
+                    });
+                }
+            }
+
+            if (columns.length > 1) {
+                slots.parent().height((eventHeight * columns.length) + bottomOffset);
             }
         },
 
