@@ -526,11 +526,18 @@ kendo_module({
 
                     if (listView.element.is(":visible")) {
                         list.refresh();
+                    } else {
+                        list._needsRefresh = true;
                     }
                 });
 
                 listView.view().bind("show", function() {
-                    list.refresh();
+                    if (list._needsRefresh) {
+                        setTimeout(function() {
+                            list.refresh();
+                        });
+                        list._needsRefresh = false;
+                    }
                 });
 
                 list.bind("endReached", function() {

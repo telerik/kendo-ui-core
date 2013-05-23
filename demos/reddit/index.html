@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="../../styles/mobile/kendo.mobile.flat.less" rel="stylesheet/less" />
+        <link rel="stylesheet/less" href="../../styles/web/kendo.common.less"/>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less" />
+        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less"/>
+
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
 
         <script src="../../src/jquery.js"></script>
@@ -27,8 +30,30 @@
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.scrollview.js"></script>
         <script src="../../src/kendo.touch.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
         <!-- App stuff -->
         <link rel="stylesheet" href="app.css" />
+        <style>
+            [data-icon=comments] {
+                width: 50px;
+            }
+            [data-icon=comments] span {
+                display: block;
+                text-align: center;
+                margin-top: 3px;
+            }
+
+            [data-icon=comments] .km-icon {
+                margin: 0;
+            }
+
+            .km-comments:after,
+            .km-comments:before
+            {
+                content: "\E091";
+                color: #d4d4d4;
+            }
+        </style>
     </head>
     <body>
 
@@ -44,10 +69,21 @@
             </ul>
         </div>
 
+        <div data-role="view" id="comments" data-transition="slide" data-after-show="renderComments" data-init="initCommentsTreeView">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <button data-role="backbutton" data-align="left">Back</button>
+                    <span data-role="view-title">&nbsp;</span>
+                </div>
+            </header>
+
+            <div id="comments-tree"></div>
+        </div>
+
         <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-zoom="true" data-title="" data-hide="resetDetail">
             <header data-role="header">
                 <div data-role="navbar">
-                    <button data-role="backbutton" data-transition="fade" data-align="left">Back</button>
+                    <button data-role="backbutton" data-align="left">Back</button>
                     <span data-role="view-title">&nbsp;</span>
                 </div>
             </header>
@@ -68,7 +104,7 @@
         <div id="canvas-detail" data-role="view" data-transition="slide:up" data-stretch="true" data-init="canvasDetailInit">
             <div id="detail-scrollview"></div>
         </div>
-        
+
 
         <script type="text/x-kendo-template" id="item-template">
             <div class="item">
@@ -80,7 +116,7 @@
                    <p> #: data.subreddit # | #: data.ups - data.downs # | #: kendo.toString(new Date(data.created_utc * 1000), 'HH:mm') # </p>
                 </div>
                 <div class="item-comments">
-                    #: data.num_comments #
+                    <a data-role="button" data-icon="comments">#: data.num_comments #</a>
                 </div>
             </div>
         </script>

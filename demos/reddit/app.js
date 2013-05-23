@@ -33,6 +33,59 @@ var awwDataSource = new kendo.data.DataSource({
     }
 });
 
+window.commentPermalink = null;
+
+var commentsDataSource = new kendo.data.HierarchicalDataSource({
+    transport: {
+        read: {
+            url: function() { return 'http://reddit.com' + window.commentPermalink + ".json" },
+            dataType: 'jsonp',
+            jsonp: 'jsonp'
+        }
+    },
+
+    schema: {
+        data: "[1].data.children",
+        model: {
+            id: "id",
+            hasChildren: function(item) {
+                return !!item.data.replies;
+            },
+            children: "data.replies.data.children"
+        }
+    }
+});
+
+function renderComments(e) {
+    var view = e.view,
+        element = view.element,
+        dataItem = awwDataSource.getByUid(view.params.id);
+
+    window.commentPermalink = dataItem.data.permalink;
+    commentsDataSource.read();
+}
+
+function initCommentsTreeView(e) {
+    e.view.element.find('#comments-tree').kendoTreeView({
+        autoBind: false,
+        dataSource: commentsDataSource,
+        select: function(e) {
+            var dataItem = this.dataItem(e.node);
+
+            if (dataItem.kind == "more") {
+                return;
+            }
+        },
+
+        template:
+        "# if (item.kind == 'more') { #" +
+            "<a href='/#= item.data.parent_id.substring(3) #' class='load-more'>#= item.data.children.length # more replies on reddit.com</a>" +
+            "# } else { #" +
+                "#= item.data.body #" +
+            "# } #"
+    });
+}
+
 function renderThumbs(element) {
     element.find(".loading-thumb").each(function() {
         var thumb = $(this).data("thumb");
@@ -48,10 +101,15 @@ function isImage(url) {
 }
 
 function showDetail(e) {
-    var dataItem = e.dataItem;
+    var dataItem = e.dataItem,
+        button = e.button;
 
     if (dataItem) {
-        navigateTo(dataItem);
+        if (button && button.element.data("icon") === "comments") {
+            app.navigate("#comments?id=" + dataItem.uid);
+        } else {
+            navigateTo(dataItem);
+        }
     }
 }
 
@@ -91,9 +149,10 @@ function showThumbsOnScrollComplete(e) {
         renderThumbs(view.element);
     };
 
-    view.scroller.bind('scrollEnd', renderThumbsForView);
-    kendo.onResize(renderThumbsForView)
     awwDataSource.bind('change', renderThumbsForView);
+    view.scroller.bind('scrollEnd', renderThumbsForView);
+    view.bind("show", renderThumbsForView);
+    kendo.onResize(renderThumbsForView);
 }
 
 function canvasInit(e) {
