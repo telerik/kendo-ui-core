@@ -1336,51 +1336,7 @@ kendo_module({
         })
     };
 
-    var RRule = Class.extend({
-        init: function(options) {
-        }
-    });
-
-    function parseArray(list, range) {
-        var idx = 0,
-            length = list.length,
-            value;
-
-        for (; idx < length; idx++) {
-            value = parseInt(list[idx], 10);
-            if (isNaN(value) || value < range.start || value > range.end || (value === 0 && range.start < 0)) {
-                return null;
-            }
-
-            list[idx] = value;
-        }
-
-        return list.sort();
-    }
-
-    function parseWeekDayList(list) {
-        var idx = 0, length = list.length,
-            value, valueLength, day;
-
-        for (; idx < length; idx++) {
-            value = list[idx];
-            valueLength = value.length;
-            day = value.substring(valueLength - 2).toUpperCase();
-
-            day = WEEK_DAYS[day];
-            if (day === undefined) {
-                return null;
-            }
-
-            list[idx] = {
-                offset: parseInt(value.substring(0, valueLength - 2), 10) || 0,
-                day: day
-            };
-        }
-        return list;
-    }
-
-    var recurrence = {
+ var recurrence = {
         expand: function(event, period) {
             var rule = recurrence.expandEvent(event),
                 start = new Date(period.start),
@@ -1524,7 +1480,6 @@ kendo_module({
                     }
 
                     if (rule.weekDays) {
-                        day = 0;
                         date = recurrence._weekDay(date, end, rule);
                     }
 
@@ -1607,26 +1562,6 @@ kendo_module({
                     }
 
                     return date;
-
-                    /*var day, limit;
-
-                    if (rule.months) {
-                        day = date.getDate();
-                        date = recurrence._month(date, end, rule);
-                    }
-
-                    if (rule.monthDays) {
-                        day = 0;
-                        date = recurrence._monthDay(date, end, rule);
-                    }
-
-                    if (rule.weekDays) {
-                        date = recurrence._weekDay(date, end, rule);
-                    }
-
-                    if (day) {
-                        date.setDate(day);
-                    }*/
                 },
                 setup: function(rule, start, eventStart) {
                     if (!rule.monthDays && !rule.weekDays) {
@@ -1994,7 +1929,7 @@ kendo_module({
             list[idx] = value;
         }
 
-        return list;
+        return list.sort();
     }
 
     function parseWeekDayList(list) {
@@ -2006,12 +1941,13 @@ kendo_module({
             valueLength = value.length;
             day = value.substring(valueLength - 2).toUpperCase();
 
-            if (WEEK_DAYS[day] === undefined) {
+            day = WEEK_DAYS[day];
+            if (day === undefined) {
                 return null;
             }
 
             list[idx] = {
-                offset: parseInt(value.substring(0, valueLength - 2), 10) || 1,
+                offset: parseInt(value.substring(0, valueLength - 2), 10) || 0,
                 day: day
             };
         }
