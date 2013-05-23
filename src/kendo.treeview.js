@@ -636,7 +636,9 @@ kendo_module({
             siblings = checkboxes(group.children());
             length = siblings.length;
 
-            if (length > 1) {
+            if (!length) {
+                return;
+            } else if (length > 1) {
                 for (i = 1; i < length; i++) {
                     if (siblings[i].checked != siblings[i-1].checked ||
                         siblings[i].indeterminate || siblings[i-1].indeterminate) {
@@ -644,14 +646,14 @@ kendo_module({
                         break;
                     }
                 }
-            } else if (length) {
+            } else {
                 all = !siblings[0].indeterminate;
             }
 
             checkboxes(node)
                 .data("indeterminate", !all)
                 .prop("indeterminate", !all)
-                .prop(CHECKED, all && (!siblings[0] || siblings[0].checked));
+                .prop(CHECKED, all && siblings[0].checked);
         },
 
         _updateIndeterminateInitial: function(node) {
