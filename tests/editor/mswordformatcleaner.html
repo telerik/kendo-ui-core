@@ -291,9 +291,38 @@
                 '<table>' +
                     '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
                     '<thead>' +
-                        '<tr><th>header 1<br>with rows</th><th>header 2</th></tr>' +
+                        '<tr><th>header 1<br><strong>with rows</strong></th><th>header 2</th></tr>' +
                     '</thead>' +
                     '<tbody></tbody>' +
+                '</table>'
+            );
+        });
+
+        test("persists HTML in table rows", function() {
+            equal(
+                clean('<table class="MsoTableLightShadingAccent1" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">' +
+'<tbody><tr>' +
+'<td width="213" valign="top" style="width:159.6pt;border:none;border-bottom:solid #C0504D 1.0pt;mso-border-bottom-themecolor:accent2;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191;mso-bidi-font-weight:bold">foo </span><span style="color:red;background:yellow;mso-highlight:yellow;mso-bidi-font-weight:bold">bar</span><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191;mso-bidi-font-weight:bold"><o:p></o:p></span></p>' +
+'</td>' +
+'<td width="213" valign="top" style="width:159.6pt;border:none;border-bottom:solid #C0504D 1.0pt;mso-border-bottom-themecolor:accent2;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><b><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191">bold</span></b></p>' +
+'</td>' +
+'<td width="213" valign="top" style="width:159.6pt;border:none;border-bottom:solid #C0504D 1.0pt;mso-border-bottom-themecolor:accent2;padding:0in 5.4pt 0in 5.4pt">' +
+'<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color:#943634;mso-themecolor:accent2;mso-themeshade:191">foo<o:p></o:p></span></p>' +
+'</td>' +
+'</tr>' +
+'</tbody></table>'),
+
+                '<table>' +
+                    '<colgroup><col style="width:213px;"><col style="width:213px;"><col style="width:213px;"></colgroup>' +
+                    '<tbody>' +
+                        '<tr>' +
+                            '<td>foo <span style="color:red;background:yellow;">bar</span></td>' +
+                            '<td><strong>bold</strong></td>' +
+                            '<td>foo</td>' +
+                        '</tr>' +
+                    '</tbody>' +
                 '</table>'
             );
         });

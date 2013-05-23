@@ -690,83 +690,99 @@ var MSWordFormatCleaner = Cleaner.extend({
         }
     },
 
-    tables: function(placeholder) {
-        var tableElements = $("table", placeholder),
-            that = this;
+    createColGroup: function(row) {
+        var cells = row.cells, colgroup;
 
-        function createColGroup(row) {
-            var cells = row.cells, colgroup;
-
-            if (cells.length < 2) {
-                return;
-            }
-
-            colgroup = $($.map(cells, function(cell) {
-                    var width = cell.width;
-                    if (width && parseInt(width, 10) !== 0) {
-                        return kendo.format('<col style="width:{0}px;"/>', width);
-                    }
-
-                    return "<col />";
-                }).join(""));
-
-            // jquery 1.9/2.0 discrepancy
-            if (!colgroup.is("colgroup")) {
-                colgroup = $("<colgroup/>").append(colgroup);
-            }
-
-            colgroup.prependTo($(row).closest("table"));
+        if (cells.length < 2) {
+            return;
         }
 
-        function content() {
-            return this.innerHTML;
+        colgroup = $($.map(cells, function(cell) {
+                var width = cell.width;
+                if (width && parseInt(width, 10) !== 0) {
+                    return kendo.format('<col style="width:{0}px;"/>', width);
+                }
+
+                return "<col />";
+            }).join(""));
+
+        // jquery 1.9/2.0 discrepancy
+        if (!colgroup.is("colgroup")) {
+            colgroup = $("<colgroup/>").append(colgroup);
         }
 
-        function convertHeaders(row) {
-            var cells = row.cells,
-                boldedCells = $.map(cells, function(cell) {
-                    var child = $(cell).children("p").children("strong")[0];
+        colgroup.prependTo($(row).closest("table"));
+    },
 
-                    if (child && dom.name(child) == "strong") {
-                        return child;
-                    }
-                });
+    convertHeaders: function(row) {
+        var cells = row.cells,
+            boldedCells = $.map(cells, function(cell) {
+                var child = $(cell).children("p").children("strong")[0];
 
-            if (boldedCells.length) {
-                $(boldedCells).replaceWith(content);
-
-                $(row).closest("table").find("colgroup").after(
-                    "<thead><tr>" +
-                    $.map(cells, function(cell) {
-                        return "<th>" + $(cell).html() + "</th>";
-                    }).join("") +
-                    "</tr></thead>"
-                ).end().end().remove();
-            }
-        }
-
-        tableElements.each(function() {
-            var firstRow = this.rows[0];
-
-            createColGroup(firstRow);
-            convertHeaders(firstRow);
-
-            that.removeAttributes(this);
-
-            $(this).find("td,th").each(function() {
-                that.removeAttributes(this);
-                var cell = $(this),
-                    paragraphs = cell.find("p");
-
-                if (paragraphs.length) {
-                    cell.html(
-                        $.map(paragraphs, function(x) {
-                            return $(x).text();
-                        }).join("<br>")
-                    );
+                if (child && dom.name(child) == "strong") {
+                    return child;
                 }
             });
-        });
+
+        if (boldedCells.length == cells.length) {
+            for (var i = 0; i < boldedCells.length; i++) {
+                dom.unwrap(boldedCells[i]);
+            }
+
+            $(row).closest("table").find("colgroup").after(
+                "<thead><tr>" +
+                $.map(cells, function(cell) {
+                    return "<th>" + $(cell).html() + "</th>";
+                }).join("") +
+                "</tr></thead>"
+            ).end().end().remove();
+        }
+    },
+
+    removeParagraphs: function(cells) {
+        var i, j, len, cell, paragraphs;
+
+        for (i = 0; i < cells.length; i++) {
+            this.removeAttributes(cells[i]);
+
+            // remove paragraphs and insert line breaks between them
+            cell = $(cells[i]);
+            paragraphs = cell.children("p");
+
+            for (j = 0, len = paragraphs.length; j < len; j++) {
+                if (j < len - 1) {
+                    dom.insertAfter(dom.create(document, "br"), paragraphs[j]);
+                }
+
+                dom.unwrap(paragraphs[j]);
+            }
+        }
+    },
+
+    removeDefaultColors: function(spans) {
+        for (var i = 0; i < spans.length; i++) {
+            if (/^\s*color:\s*[^;]*;?$/i.test(spans[i].style.cssText)) {
+                dom.unwrap(spans[i]);
+            }
+        }
+    },
+
+    tables: function(placeholder) {
+        var tables = $(placeholder).find("table"),
+            that = this,
+            firstRow, i;
+
+        for (i = 0; i < tables.length; i++) {
+            firstRow = tables[i].rows[0];
+
+            that.createColGroup(firstRow);
+            that.convertHeaders(firstRow);
+
+            that.removeAttributes(tables[i]);
+
+            that.removeParagraphs(tables.eq(i).find("td,th"));
+            that.removeDefaultColors(tables.eq(i).find("span"));
+        }
     },
 
     clean: function(html) {
