@@ -931,7 +931,7 @@ kendo_module({
                         filterValue = dataItem ? parent._value(dataItem) : null,
                         expressions, filters;
 
-                    if (filterValue) {
+                    if (filterValue || filterValue === 0) {
                         expressions = that.dataSource.filter() || {};
                         removeFiltersForField(expressions, valueField);
                         filters = expressions.filters || [];
