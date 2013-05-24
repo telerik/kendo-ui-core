@@ -1306,4 +1306,16 @@
   <Target Name="BeforeBuild">
     <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />
   </Target>
+  <ItemGroup>
+    <Compile Include="UI\MobileActionSheet\MobileActionSheet.cs" />
+    <Compile Include="UI\MobileActionSheet\MobileActionSheetDirection.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemFactory.cs" />
+    <Compile Include="UI\MobileActionSheet\MobileActionSheetItem.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Settings\MobileActionSheetPopupSettings.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetPopupSettingsBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetEventBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Html\MobileActionSheetHtmlBuilder.cs" />
+  </ItemGroup>
 </Project>

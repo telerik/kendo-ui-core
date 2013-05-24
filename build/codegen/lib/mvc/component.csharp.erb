@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            <% if csharp_class.eql?('MobileApplication') %>
+            <% if !csharp_class.eql?('MobileApplication') %>
             var html = new <%= csharp_class %>HtmlBuilder(this).Build();
 
             html.WriteTo(writer);

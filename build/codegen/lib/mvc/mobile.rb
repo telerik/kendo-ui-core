@@ -13,6 +13,8 @@ module CodeGen::MVC::Mobile
             'Date' => 'DateTime'
         }
 
+        SERIALIZATION_SKIP_LIST = ['actionsheet.items.text']
+
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 
         COMPONENT = ERB.new(File.read("build/codegen/lib/mvc/component.csharp.erb"), 0, '%<>')
@@ -32,7 +34,10 @@ module CodeGen::MVC::Mobile
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
-        <%= unique_options.map { |option| option.to_client_option }.join %>
+        <%= unique_options.map { |option|
+            next if SERIALIZATION_SKIP_LIST.include?(option.full_name)
+            option.to_client_option
+        }.join %>
         //<< Serialization})
 
         COMPOSITE_FIELD_DECLARATION = ERB.new(%{
@@ -143,6 +148,16 @@ module CodeGen::MVC::Mobile
             def csharp_name
                 name.slice(0,1).capitalize + name.slice(1..-1)
             end
+
+            def full_name
+                name = @name
+
+                if !@owner.nil?
+                    name = @owner.full_name + '.' + name
+                end
+
+                name.downcase
+            end
         end
 
         class Option < CodeGen::Option
@@ -150,7 +165,7 @@ module CodeGen::MVC::Mobile
 
             def csharp_type
                 if values
-                    "#{owner.csharp_class}#{csharp_name}"
+                    "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
                 else
                     TYPES[type[0]]
                 end
@@ -165,8 +180,17 @@ module CodeGen::MVC::Mobile
             end
 
             def to_client_option
+                if csharp_type.eql?('string')
+                    return ERB.new(%{
+            if (<%=csharp_name%>.HasValue())
+            {
+                json["<%=name.camelize%>"] = <%=csharp_name%>;
+            }
+            }).result(binding)
+                end
+
                 ERB.new(%{
-            options["<%=name.camelize%>"] = <%=csharp_name%>;
+            json["<%=name.camelize%>"] = <%=csharp_name%>;
                 }).result(binding)
             end
 
@@ -201,7 +225,9 @@ module CodeGen::MVC::Mobile
             end
 
             def to_client_option
-                "Composite client option for #{name}"
+                ERB.new(%{
+            json["<%=name.camelize%>"] = <%=csharp_name%>.ToJson();
+                }).result(binding)
             end
 
             def get_binding
@@ -388,8 +414,6 @@ module CodeGen::MVC::Mobile
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(binding))
 
                 csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(binding))
-
-                #csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(binding))
             end
 
             def to_html_builder(filename)
@@ -420,6 +444,8 @@ module CodeGen::MVC::Mobile
                 csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(option.get_binding))
 
                 csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(option.get_binding))
+
+                csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(option.get_binding))
             end
 
             def to_fluent_setting(filename, option)

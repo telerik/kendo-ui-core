@@ -1,16 +1,24 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Collections.Generic;
+    using Kendo.Mvc.Extensions;
 
-    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>
+    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> : JsonObject
     {
         public <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>()
         {
-//>> Initialization
-//<< Initialization
+            //>> Initialization
+            //<< Initialization
         }
 
-//>> Fields
-//<< Fields
+        //>> Fields
+        //<< Fields
+
+        protected override void Serialize(IDictionary<string, object> json)
+        {
+            //>> Serialization
+            //<< Serialization
+        }
     }
 }

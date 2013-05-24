@@ -978,7 +978,21 @@ namespace Kendo.Mvc.UI.Fluent
             return MvcHtmlString.Empty;
         }
 
-        //>> MobileComponents         
+        //>> MobileComponents 
+        /// <summary>
+        /// Creates a <see cref="MobileActionSheet"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileActionSheet()
+        ///             .Name("MobileActionSheet")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileActionSheetBuilder MobileActionSheet()
+        {
+            return new MobileActionSheetBuilder(new MobileActionSheet(ViewContext, Initializer, UrlGenerator));
+        }
         //<< MobileComponents
     }
 

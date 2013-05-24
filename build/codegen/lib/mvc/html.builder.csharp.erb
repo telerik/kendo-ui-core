@@ -1,6 +1,8 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Collections.Generic;
+    using Kendo.Mvc.Extensions;
 
     public class <%= csharp_class %>HtmlBuilder
     {
@@ -32,6 +34,23 @@ namespace Kendo.Mvc.UI
         {
             return new HtmlElement("div");
         }
+
+        <% unless events.empty? %>
+        protected virtual void AddEventAttributes(IHtmlNode html, IDictionary<string, object> events)
+        {
+            foreach (var keyValuePair in events)
+            {
+                var value = keyValuePair.Value as ClientHandlerDescriptor;
+                var key = "data-" + keyValuePair.Key;
+
+                if (value.HandlerName.HasValue())
+                {
+                    html.Attribute(key, value.HandlerName);
+                }
+
+            }
+        }
+        <% end %>
     }
 }
 
