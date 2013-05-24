@@ -13,3 +13,6 @@
 [submodule "ci/cookbooks/apt"]
     path = ci/cookbooks/apt
     url = git@github.com:opscode-cookbooks/apt.git
+[submodule "build/timezone-js"]
+	path = build/timezone-js
+	url = git://github.com/mde/timezone-js.git
