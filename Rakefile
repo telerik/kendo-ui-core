@@ -3,6 +3,8 @@ require 'rake/testtask'
 
 require 'bundler/setup'
 require 'tempfile'
+require 'erb'
+require 'json'
 
 VERBOSE = verbose == true
 

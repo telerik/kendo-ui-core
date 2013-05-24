@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../build/timezone-js/src/date.js"></script>
+    </head>
+    <body>
+        <script>
+            var tz = timezoneJS.timezone;
+            tz.loadingScheme = tz.loadingSchemes.MANUAL_LOAD;
+            tz.loadZoneJSONData('../build/timezones/timezones.json', true);
+
+            //var dt = new timezoneJS.Date(2006, 9, 29, 1, 59, 'America/Los_Angeles');
+            //alert(dt.getTimezoneOffset());
+            // Post-DST-leap
+//            var dt = new timezoneJS.Date(2006, 9, 29, 2, 0, 'America/Los_Angeles');
+            var dt = new timezoneJS.Date(2006, 9, 29, 2, 0, 'Africa/Algiers');
+
+            alert(dt.getTimezoneOffset());
+        </script>
+    </body>
+</html>
