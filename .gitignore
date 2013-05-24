@@ -35,6 +35,8 @@ styles/**/*.css
 !styles/web/kendo.rtl.css
 !styles/dataviz/kendo.dataviz.css
 node_modules
+build/tz/*
+!build/tz/timezones.json
 ./tags
 styles/*.css
 themebuilder/scripts/template.js
