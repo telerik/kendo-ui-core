@@ -7,7 +7,7 @@ namespace :timezone do
     end
 
 TIMEZONE_TEMPLATE = ERB.new(
-%{kendo.time.zones["<%= city %>"] = <%= zones.to_json %>;
+%{kendo.time.zones["<%= zone_key %>"] = <%= zones.to_json %>;
 <% rules.keys.each do |rule_key| %>
 kendo.time.rules["<%= rule_key %>"] = <%= rules[rule_key].to_json %>;
 <% end %>
@@ -23,21 +23,21 @@ kendo.time.rules["<%= rule_key %>"] = <%= rules[rule_key].to_json %>;
 
         all_rules = timezone_info['rules']
 
-        all_groups = {}
+        grouped_timezones = {}
 
-        all_zones.keys.each do |city|
-            zones = all_zones[city]
+        all_zones.keys.each do |zone_key|
+            zones = all_zones[zone_key]
 
-            group = city.split('/').first
+            group_key = zone_key.split('/').first
 
-            group = zones.split('/').first if zones.is_a? String
+            group_key = zones.split('/').first if zones.is_a? String
 
-            cities = all_groups[group]
+            group = grouped_timezones[group_key]
 
-            all_groups[group] = cities ||= {}
+            grouped_timezones[group_key] = group ||= {}
 
             if zones.is_a? String
-                cities[city] = zones
+                group[zone_key] = zones
                 next
             end
 
@@ -51,16 +51,16 @@ kendo.time.rules["<%= rule_key %>"] = <%= rules[rule_key].to_json %>;
                 rules[rule_key] = rule if rule
             end
 
-            cities[city] = { 'zones' => zones, 'rules' => rules }
+            group[zone_key] = { 'zones' => zones, 'rules' => rules }
 
         end
 
-        all_groups.keys.each do |group|
+        grouped_timezones.keys.each do |group_key|
 
-            cities = all_groups[group];
+            group = grouped_timezones[group_key];
 
-            timezones = cities.keys.map do |city|
-                data = cities[city]
+            timezones = group.keys.map do |zone_key|
+                data = group[zone_key]
 
                 zones = data['zones'] || data
 
@@ -69,7 +69,7 @@ kendo.time.rules["<%= rule_key %>"] = <%= rules[rule_key].to_json %>;
                 TIMEZONE_TEMPLATE.result(binding)
             end
 
-            filename = "src/timezones/kendo.timezone.#{group}.js"
+            filename = "src/timezones/kendo.timezones.#{group_key}.js"
 
             File.write(filename, timezones.join)
         end
