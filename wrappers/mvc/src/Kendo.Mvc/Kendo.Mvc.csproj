@@ -1318,4 +1318,13 @@
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetEventBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Html\MobileActionSheetHtmlBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileButton\MobileButton.cs" />
+    <Compile Include="UI\MobileButton\Fluent\MobileButtonBuilder.cs" />
+    <Compile Include="UI\MobileButton\Fluent\MobileButtonEventBuilder.cs" />
+    <Compile Include="UI\MobileButton\Html\MobileButtonHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileButton\MobileButtonRel.cs" />
+  </ItemGroup>
 </Project>

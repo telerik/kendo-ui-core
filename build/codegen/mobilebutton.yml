@@ -1,7 +1,11 @@
 :options:
     - :name: href
       :type: String
-      :description: Specifies the url or id of the view which will be loaded
+      :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'
+
+    - :name: text
+      :type: String
+      :description: Specifies the text of the button
 
     - :name: transition
       :type: String
@@ -11,9 +15,16 @@
       :type: String
       :description: Specifies the id of target Pane or `_top` for application level Pane
 
-    - :name: align
+    - :name: actionSheetContext
+      :type: String
+      :description: This value will be available when the action callback of ActionSheet item is executed
+
+    - :name: rel
       :type : Object
       :values:
-          - left
-          - right
-      :description: Specifies the align direction of the button
+          - none
+          - actionSheet
+          - popOver
+          - modalView
+          - external
+      :description: Specifies the widget to be open when is tapped (the href must be set too)

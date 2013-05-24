@@ -993,6 +993,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new MobileActionSheetBuilder(new MobileActionSheet(ViewContext, Initializer, UrlGenerator));
         }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileButton"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileButton()
+        ///             .Name("MobileButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileButtonBuilder MobileButton()
+        {
+            return new MobileButtonBuilder(new MobileButton(ViewContext, Initializer, UrlGenerator));
+        }
         //<< MobileComponents
     }
 
