@@ -966,6 +966,32 @@
                 equal(eventElements.last().offset().left, secondTimeSlot.offset().left + eventElements.first().width());
             });
 
+            test("subsequent events have same left position", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "second event" },
+                ];
+
+                view.renderEvents(events);
+
+                var eventElements = view.content.find("div.k-appointment");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(9).find("td:first");
+
+                equal(eventElements.first().offset().left, firstTimeSlot.offset().left);
+                equal(eventElements.last().offset().left, secondTimeSlot.offset().left);
+            });
+
+
             test("long events reposition other events in the same date slot with multiple long overlapping event", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({

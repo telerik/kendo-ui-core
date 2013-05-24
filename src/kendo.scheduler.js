@@ -584,7 +584,7 @@ kendo_module({
         });
     }
 
-    function createColumns(eventElements) {
+    function createColumns(eventElements, isHorizontal) {
         var columns = [];
 
         eventElements.each(function() {
@@ -593,8 +593,9 @@ kendo_module({
                 column;
 
             for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
-                if (!(eventRange.start >= columns[j].start && eventRange.start < columns[j].end) &&
-                    !(columns[j].end === eventRange.start && columns[j].end <= eventRange.end)) {
+                var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
+
+                if (eventRange.start < columns[j].start || endOverlaps) {
 
                     column = columns[j];
 
@@ -1141,7 +1142,7 @@ kendo_module({
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            var columns = createColumns(allDayEvents);
+            var columns = createColumns(allDayEvents, true);
 
             for (var idx = 0, length = columns.length; idx < length; idx++) {
                 var columnEvents = columns[idx].events;
