@@ -244,6 +244,18 @@
                     deepEqual(dateAxis.categoryMap, [[0, 1]]);
                 });
 
+                test("categoryMap for duplicate categories", function() {
+                    createDateCategoryAxis({
+                        baseUnit: "days",
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/01"),
+                            new Date("2012/02/02")
+                        ]
+                    });
+
+                    deepEqual(dateAxis.categoryMap, [[0, 1], [2]]);
+                });
+
                 test("categoryMap for sparse categories", function() {
                     createDateCategoryAxis({
                         categories: [
