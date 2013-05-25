@@ -9343,6 +9343,10 @@ kendo_module({
                 continue;
             }
 
+            while (dateEquals(sortedDates[i - 1], date)) {
+                i--;
+            }
+
             return i;
         }
 
