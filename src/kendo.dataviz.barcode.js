@@ -10,6 +10,7 @@
     var kendo = window.kendo,
         extend = $.extend,
         inArray = $.inArray,
+		isPlainObject = $.isPlainObject,
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
@@ -21,6 +22,10 @@
         alphanumericRegex = /^[a-z0-9]+$/i,
         InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}";
 
+	function addArray(result,target){
+		Array.prototype.push.apply(result,target);
+	}
+		
     function getNext(value, index, count){
         return value.substring(index, index + count);
     }
@@ -57,12 +62,7 @@
         initValue: function (value, width, height) {
         },
         addQuietZone: function () {
-            this.pattern.push([SPACE, this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH]);
-        },
-        addArrayToPattern:function(arr){
-            for(var i=0;i<arr.length;i++){
-                this.pattern.push(arr[i]);
-            }
+            this.pattern.push(this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH);
         },
         addData: function () {
         },
@@ -1335,40 +1335,32 @@
 
     encodings.ean13 = Encoding.extend({
         initValue: function(value, width, height){
-            this.pattern = [];
-            this.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
-            this.value = value;
-        },
-        getInverted:function(arr){
-            var result = [];
-            $.each(arr,function(){
-                result.push([!this[0],this[1]]);
-            })
-            return result;
+			var that = this;
+            that.pattern = [];
+            that.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
+            that.value = value;			
+			that.checksum = that.calculateChecksum();
+			that.leftKey = value[0];
+			that.leftPart = value.substr(1,6);
+			that.rightPart = value.substr(7)+that.checksum;
         },
         addData:  function(){
-            var checksum = this.calculateChecksum(),
-                leftKey = this.value[0],
-                leftPart = this.value.substr(1,6),
-                rightPart = this.value.substr(7)+checksum;
-
-            this.addArrayToPattern(this.characterMap["start"]);
-            this.addLeftSide(leftPart,leftKey);
-            this.addArrayToPattern(this.characterMap["middle"]);
-            this.addRightSide(rightPart);
-            this.addArrayToPattern(this.characterMap["start"]);
-
+            var that = this;
+            addArray(that.pattern,that.characterMap["start"]);
+            that.addSide(that.leftPart,that.leftKey);
+            addArray(that.pattern,that.characterMap["middle"]);
+            that.addSide(that.rightPart);
+            addArray(that.pattern,that.characterMap["start"]);
         },
-        addLeftSide:function(leftPart,key){
+        addSide:function(leftPart,key){
             for(var i = 0; i < leftPart.length; i++){
-                this.addArrayToPattern(this.characterMap['table'][this.keyTable[key][i]][leftPart[i]]);
+				if(key && parseInt(this.keyTable[key][i])){
+					addArray(this.pattern,Array.prototype.slice.call(this.characterMap['digits'][leftPart[i]]).reverse());
+				}else{
+					addArray(this.pattern,this.characterMap['digits'][leftPart[i]]);
+				}          
             }
-        },
-        addRightSide:function(rightPart){
-            for(var i = 0; i < rightPart.length; i++){
-                this.addArrayToPattern(this.getInverted(this.characterMap['table'][0][rightPart[i]]));
-            }
-        },
+        },        
         calculateChecksum: function (){
             var odd = 0,
                 even = 0,
@@ -1384,18 +1376,6 @@
             var checksum = (10 - ((3*odd + even)%10))%10;
             return checksum;
         },
-        addArrayToPattern:function(arr){
-            for(var i=0;i<arr.length;i++){
-                var toAdd = arr[i];
-                if(toAdd[0]===true){
-                    toAdd[0] = 1;
-                }
-                else if(toAdd[0]===false){
-                    toAdd[0] = 0;
-                }
-                this.pattern.push(toAdd);
-            }
-        },
         keyTable:[
             '000000',
             '001011',
@@ -1410,58 +1390,32 @@
         ]
         ,
         characterMap: {
-            table:[
-                [
-                    [[false,3],[true,2],[false,1],[true,1]],
-                    [[false,2],[true,2],[false,2],[true,1]],
-                    [[false,2],[true,1],[false,2],[true,2]],
-                    [[false,1],[true,4],[false,1],[true,1]],
-                    [[false,1],[true,1],[false,3],[true,2]],
-                    [[false,1],[true,2],[false,3],[true,1]],
-                    [[false,1],[true,1],[false,1],[true,4]],
-                    [[false,1],[true,3],[false,1],[true,2]],
-                    [[false,1],[true,2],[false,1],[true,3]],
-                    [[false,3],[true,1],[false,1],[true,2]]
-                ]
-                ,
-                [
-                    [[false,1],[true,1],[false,2],[true,3]],
-                    [[false,1],[true,2],[false,2],[true,2]],
-                    [[false,2],[true,2],[false,1],[true,2]],
-                    [[false,1],[true,1],[false,4],[true,1]],
-                    [[false,2],[true,3],[false,1],[true,1]],
-                    [[false,1],[true,3],[false,1],[true,1]],
-                    [[false,4],[true,1],[false,1],[true,1]],
-                    [[false,2],[true,1],[false,3],[true,1]],
-                    [[false,3],[true,1],[false,2],[true,1]],
-                    [[false,2],[true,1],[false,1],[true,3]]
-                ]
+            digits:[
+				[3,2,1,1],
+				[2,2,2,1],
+				[2,1,2,2],
+				[1,4,1,1],
+				[1,1,3,2],
+				[1,2,3,1],
+				[1,1,1,4],
+				[1,3,1,2],
+				[1,2,1,3],
+				[3,1,1,2]
             ],
-            start: [[BAR,1],[SPACE, 1], [BAR, 1]],
-            middle: [[SPACE,1],[BAR, 1], [SPACE, 1],[BAR, 1],[SPACE, 1]]
+            start: [1,1,1],
+            middle: [1,1,1,1,1]
         }
     });
 
     encodings.ean8 = encodings.ean13.extend({
-        initValue: function(value, width, height){
-            this.pattern = [];
-            this.baseUnit = width /(67 + 2 * this.options.quietZoneLength);
-            this.value = value;
-        },
-        addData:  function(){
-            var checksum = this.calculateChecksum(this.value),
-                firstPart  = this.value.substr(0,4),
-                secondPart = this.value.substr(4) + checksum;
-
-            this.addArrayToPattern(this.characterMap["start"]);
-            for(var i = 0; i < firstPart.length; i++){
-                this.addArrayToPattern(this.characterMap['table'][0][firstPart[i]]);
-            }
-            this.addArrayToPattern(this.characterMap["middle"]);
-             for(var i = 0; i < secondPart.length; i++){
-                 this.addArrayToPattern(this.getInverted(this.characterMap['table'][0][secondPart[i]]));
-             }
-            this.addArrayToPattern(this.characterMap["start"]);
+        initValue: function(value, width, height){		
+            var that = this;
+			that.value = value;
+			that.checksum = that.calculateChecksum(that.value);
+			that.leftPart  = that.value.substr(0,4);
+			that.rightPart = that.value.substr(4) + that.checksum;
+            that.pattern = [];
+            that.baseUnit = width /(67 + 2 * this.options.quietZoneLength);            
         }
     });
 
@@ -1483,47 +1437,38 @@
         },
         redraw: function () {
             var result = this.encoding.encode(this.value,
-                    this.options.width, this.options.height),
-                yGetter = result.varyByHeight ? this._getYFromPattern : this._getY;
+                    this.options.width, this.options.height);                
 
             this.view.children = [];
             this.view.options.width = this.options.width;
             this.view.options.height = this.options.height + this.options.fontSize;
             this.addBackground();
 
-            this.addElements(result.pattern, result.baseUnit, yGetter);
+            this.addElements(result.pattern, result.baseUnit);
 
             if (this.options.showText) {
                this.addText(this.value);
             }
             this.view.renderTo(this.element);
-        },
-        _getY: function(pattern, height){
-                return {
-                    y1: 0,
-                    y2: height
-                };
-        },
-        _getYFromPattern: function(pattern, height){
-            return {
-                y1: pattern[2],
-                y2: pattern[3]
-            };
-        },
+        },        
         value: function(value){
             this.value = value;
             this.redraw();
         },
-        addElements: function (pattern, baseUnit, yGetter) {
+        addElements: function (pattern, baseUnit) {
             var position = 0,
                 step,
-                y;
+                item;
 
             for (var i = 0; i < pattern.length; i++) {
-                step = pattern[i][1] * baseUnit;
-                if(pattern[i][0] === BAR){
-                     y = yGetter(pattern[i], this.options.height);
-                     this.view.children.push(this.view.createRect(new Box2D(position, y.y1, position + step, y.y2),
+				item = isPlainObject(pattern[i]) ? pattern[i] : {
+						width: pattern[i],
+						y1:0,
+						y2: this.options.height
+					}; 
+                step = item.width * baseUnit;
+                if(i%2){				                     
+                     this.view.children.push(this.view.createRect(new Box2D(position, item.y1, position + step, item.y2),
                         { fill: this.options.lineColor}));
                 }
 

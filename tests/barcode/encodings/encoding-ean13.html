@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>code ean13 tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../..//qunit/qunit/qunit.js"></script>
+        <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.dataviz.core.js"></script>
+        <script src="../../../src/kendo.dataviz.barcode.js"></script>
+        <script src="constants.js"></script>
+        <script src="utils.js"></script>
+
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                encodings = dataviz.encodings;
+
+            (function() {
+                var encoding,
+                    characters= {
+                        START: [1,1,1],
+                        MIDDLE: [1,1,1,1,1],
+                    };
+
+                module("ean8", {
+                    setup: function() {
+                        encoding = new encodings.ean13();
+                    },
+                    teardown: function(){
+                        encoding = null;
+                    }
+                });
+
+                test("test value 750103131130", function(){
+                    var result,
+                        value = "750103131130",
+                        expectedResult = [10,1,1,1,1,2,3,1,1,1,2,3,2,2,2,1,1,1,2,3,1,4,1,1,1,2,2,2,1,1,1,1,1,1,4,1,1,2,2,2,1,2,2,2,1,1,4,1,1,3,2,1,1,3,1,1,2,1,1,1,10],
+                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("test value 210987654321", function(){
+                    var result,
+                        value = "210987654321",
+                        expectedResult = [10,1,1,1,2,2,2,1,3,2,1,1,2,1,1,3,3,1,2,1,1,3,1,2,4,1,1,1,1,1,1,1,1,1,2,3,1,1,1,3,2,1,4,1,1,2,1,2,2,2,2,2,1,3,2,1,1,1,1,1,10]
+                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+            })();
+        </script>
+
+        <h1 id="qunit-header">encoding ean13</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>

@@ -1,5 +1,4 @@
 function comparePatterns(pattern1, pattern2){
-</html>
     if(pattern1.length != pattern2.length){
         return false;
     }
