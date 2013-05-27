@@ -1,4 +1,4 @@
-var PAGE_SIZE = 36,
+var PAGE_SIZE = 50,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
@@ -86,16 +86,6 @@ function initCommentsTreeView(e) {
     });
 }
 
-function renderThumbs(element) {
-    element.find(".loading-thumb").each(function() {
-        var thumb = $(this).data("thumb");
-        if (thumb === "default") {
-            thumb = "missing-thumb.png";
-        }
-        $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
-    });
-}
-
 function isImage(url) {
     return imgExtensionRegex.test(url) || (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
 }
@@ -143,6 +133,16 @@ function renderDetail(e) {
     });
 }
 
+function renderThumbs(element) {
+    element.find(".loading-thumb").each(function() {
+        var thumb = $(this).data("thumb");
+        if (thumb === "default") {
+            thumb = "missing-thumb.png";
+        }
+        $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
+    });
+}
+
 function showThumbsOnScrollComplete(e) {
     var view = e.view;
     var renderThumbsForView = function() {
@@ -151,7 +151,7 @@ function showThumbsOnScrollComplete(e) {
 
     awwDataSource.bind('change', renderThumbsForView);
     view.scroller.bind('scrollEnd', renderThumbsForView);
-    view.bind("show", renderThumbsForView);
+    view.bind("afterShow", renderThumbsForView);
     kendo.onResize(renderThumbsForView);
 }
 
