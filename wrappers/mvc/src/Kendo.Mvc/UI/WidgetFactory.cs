@@ -995,6 +995,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileBackButton"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileBackButton()
+        ///             .Name("MobileBackButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileBackButtonBuilder MobileBackButton()
+        {
+            return new MobileBackButtonBuilder(new MobileBackButton(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileButton"/>
         /// </summary>
         /// <example>

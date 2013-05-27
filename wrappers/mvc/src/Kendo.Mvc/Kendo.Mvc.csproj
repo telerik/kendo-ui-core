@@ -1334,4 +1334,4 @@
 	<Compile Include="UI\MobileButtonGroup\MobileButtonGroupItem.cs" />
 	<Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\MobileBackButton\MobileBackButton.cs" /><Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonBuilder.cs" /><Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonEventBuilder.cs" /><Compile Include="UI\MobileBackButton\Html\MobileBackButtonHtmlBuilder.cs" /></ItemGroup></Project>
