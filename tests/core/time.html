@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Time Zone Tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <title>Time Zone Tests</title>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.timezones.js"></script>
+        <script>
+
+            test("offset returns 0 for Etc/UTC", function() {
+                var date = new Date(2013, 4, 27);
+
+                equal(kendo.timezone.offset(date, "Etc/UTC"), 0);
+            });
+
+            test("offset returns 0 for Etc/GMT", function() {
+                var date = new Date(2013, 4, 27);
+
+                equal(kendo.timezone.offset(date, "Etc/GMT"), 0);
+            });
+
+            test("offset adjusts for DST when rule is 'last[day]'", function() {
+                var standard = new Date(2013, 2, 31);
+
+                equal(kendo.timezone.offset(standard, "Europe/Sofia"), -120);
+
+                var daylight = new Date(2013, 2, 31, 4, 0);
+
+                equal(kendo.timezone.offset(daylight, "Europe/Sofia"), -180);
+            });
+
+            test("offset adjusts for DST when rule is '[day]>=[date]'", function() {
+                var standard = new Date(2013, 2, 10, 0, 0, 0);
+
+                equal(kendo.timezone.offset(standard, "America/Chicago"), 360);
+
+                var daylight = new Date(2013, 2, 10, 2, 0, 0);
+
+                equal(kendo.timezone.offset(daylight, "America/Chicago"), 300);
+            });
+
+            test("offset adjusts for DST when rule is a concrete date", function() {
+                var standard = new Date(1974, 0, 6, 0, 0, 0);
+
+                equal(kendo.timezone.offset(standard, "America/Chicago"), 360);
+
+                var daylight = new Date(1974, 0, 6, 2, 0, 0);
+
+                equal(kendo.timezone.offset(daylight, "America/Chicago"), 300);
+            });
+
+            test("convert changes the timezone from UTC to a timezone", function() {
+                var date = new Date(2013, 2, 27, 10, 0, 0);
+
+                equal(kendo.toString(kendo.timezone.convert(date, "Etc/UTC", "Europe/Sofia"), "MMM dd yyyy HH:mm:ss"), "Mar 27 2013 12:00:00");
+            });
+
+            test("convert changes the timezone from a timezone to UTC", function() {
+                var date = new Date(2013, 2, 27, 12, 0, 0);
+
+                equal(kendo.toString(kendo.timezone.convert(date, "Europe/Sofia", "Etc/UTC"), "MMM dd yyyy HH:mm:ss"), "Mar 27 2013 10:00:00");
+            });
+
+            test("convert changes the timezone from a timezone to UTC during DST", function() {
+                var date = new Date(2013, 2, 31, 4, 0, 0);
+
+                equal(kendo.toString(kendo.timezone.convert(date, "Europe/Sofia", "Etc/UTC"), "MMM dd yyyy HH:mm:ss"), "Mar 31 2013 01:00:00");
+            });
+
+            test("convert changes the timezone from one timezone to another", function() {
+                var date = new Date(2013, 4, 27, 0, 0);
+
+                equal(kendo.toString(kendo.timezone.convert(date, "Europe/Sofia", "America/Los_Angeles"), "MMM dd yyyy HH:mm:ss"), "May 26 2013 14:00:00");
+            });
+        </script>
+    </body>
+</html>

@@ -2991,6 +2991,120 @@ function pad(number, digits, end) {
 
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;
+
+    kendo.timezone = (function(){
+        var months =  { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+        var days = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+        function ruleToDate(year, rule) {
+            var date;
+            var targetDay;
+            var ourDay;
+            var month = rule[3];
+            var on = rule[4];
+            var time = rule[5];
+
+            if (!isNaN(on)) {
+                date = new Date(Date.UTC(year, months[month], on, time[0], time[1], time[2], 0));
+            } else if (on.indexOf("last") === 0) {
+                date = new Date(Date.UTC(year, months[month] + 1, 1, time[0] - 24, time[1], time[2], 0));
+
+                targetDay = days[on.substr(4, 3)];
+                ourDay = date.getUTCDay();
+
+                date.setUTCDate(date.getUTCDate() + targetDay - ourDay - (targetDay > ourDay ? 7 : 0));
+            } else if (on.indexOf(">=") >= 0) {
+                date = new Date(Date.UTC(year, months[month], on.substr(5), time[0], time[1], time[2], 0));
+
+                targetDay = days[on.substr(0, 3)];
+                ourDay = date.getUTCDay();
+
+                date.setUTCDate(date.getUTCDate() + targetDay - ourDay + (targetDay < ourDay ? 7 : 0));
+            }
+
+            return date;
+        }
+
+        function offset(utcMilliseconds, timezone) {
+            if (timezone == "Etc/UTC" || timezone == "Etc/GMT") {
+                return 0;
+            }
+
+            var zones = this.zones[timezone];
+
+            if (typeof utcMilliseconds != NUMBER) {
+                utcMilliseconds = Date.UTC(utcMilliseconds.getFullYear(), utcMilliseconds.getMonth(), utcMilliseconds.getDate(), utcMilliseconds.getHours(), utcMilliseconds.getMinutes(), utcMilliseconds.getSeconds(), utcMilliseconds.getMilliseconds());
+            }
+
+            for (var idx = zones.length - 1; idx >= 0; idx--) {
+                var until = zones[idx][3];
+
+                if (until && utcMilliseconds > until) {
+                    break;
+                }
+            }
+
+            var zone = zones[idx + 1];
+
+            var date = new Date(utcMilliseconds);
+
+            var year = date.getUTCFullYear();
+
+            var rules = this.rules[zone[1]];
+
+            rules = jQuery.grep(rules, function(rule) {
+                var from = rule[0];
+                var to = rule[1];
+
+                return from <= year && (to >= year || (from == year && to == "only") || to == "max");
+            });
+
+            rules.push(utcMilliseconds);
+
+            rules.sort(function(a,b) {
+                if (typeof a != "number") {
+                    a = Number(ruleToDate(year, a));
+                }
+
+                if (typeof b != "number") {
+                    b = Number(ruleToDate(year, b));
+                }
+
+                return a - b;
+            });
+
+            var rule = rules[jQuery.inArray(utcMilliseconds, rules) - 1];
+
+            var utcOffset = zone[0];
+
+            if (rule) {
+               utcOffset -= rule[6];
+            }
+
+            return utcOffset;
+        }
+
+        function convert(date, from, to) {
+            var fromOffset = this.offset(date, from);
+
+            var toOffset = this.offset(date, to);
+
+            var fromLocalOffset = date.getTimezoneOffset();
+
+            date = new Date(date.getTime() + (fromOffset - toOffset) * 60000);
+
+            var toLocalOffset = date.getTimezoneOffset();
+
+            return new Date(date.getTime() + (toLocalOffset - fromLocalOffset) * 60000);
+        }
+
+        return {
+           zones: {},
+           rules: {},
+           offset: offset,
+           convert: convert
+        };
+    })();
 })(jQuery, eval);
 
 /*global kendo_module:true */

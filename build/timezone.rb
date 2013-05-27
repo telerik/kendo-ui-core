@@ -7,8 +7,8 @@ namespace :timezone do
     end
 
 TIMEZONE_TEMPLATE = ERB.new(
-%{kendo.time.zones=<%= zones.to_json.gsub(/,null\\]/, '') %>;
-kendo.time.rules=<%= rules.to_json.gsub(/,null\\]/, '') %>;
+%{kendo.timezone.zones=<%= zones.to_json.gsub(/,null\\]/, ']') %>;
+kendo.timezone.rules=<%= rules.to_json.gsub(/,null\\]/, ']') %>;
 }, 0, '<%>')
 
     desc 'Generate timezone JavaScript files'
