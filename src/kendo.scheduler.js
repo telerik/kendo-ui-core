@@ -111,6 +111,12 @@ kendo_module({
         }
     }
 
+    function toInvariantTime(date) {
+        var staticDate = new Date(1980, 1, 1, 0, 0, 0);
+        setTime(staticDate, getMilliseconds(date));
+        return staticDate;
+    }
+
     function dst() {
         var today = new Date(),
             midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
@@ -773,9 +779,10 @@ kendo_module({
         },
 
         _forTimeRange: function(min, max, action, after) {
+            min = toInvariantTime(min); //convert the date to 1/2/1980 and sets the time
+            max = toInvariantTime(max);
+
             var that = this,
-                offset = dst(),
-                ignoreDST = offset < 0,
                 msMin = getMilliseconds(min),
                 msMax = getMilliseconds(max),
                 msMajorInterval = that.options.majorTick * MS_PER_MINUTE,
@@ -786,11 +793,7 @@ kendo_module({
                 idx = 0, length,
                 html = "";
 
-            if (ignoreDST) {
-                length = (MS_PER_DAY + (offset * MS_PER_MINUTE)) / msInterval;
-            } else {
-                length = MS_PER_DAY / msInterval;
-            }
+            length = MS_PER_DAY / msInterval;
 
             if (msMin != msMax) {
                 if (msMin > msMax) {
@@ -805,7 +808,7 @@ kendo_module({
             for (; idx < length; idx++) {
                 html += action(start, idx % (msMajorInterval/msInterval) === 0);
 
-                setTime(start, msInterval, ignoreDST);
+                setTime(start, msInterval, false);
             }
 
             if (msMax) {

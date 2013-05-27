@@ -160,6 +160,19 @@
                 equal(view.times.find("th").length, 97);
             });
 
+            test("start time is a DST date", function() {
+                var view = setup({
+                        majorTick: 60,
+                        startTime: new Date(2013, 2, 31, 0, 0, 0),
+                        endTime: new Date(2013, 2, 31, 0, 0, 0),
+                    });
+
+                view.render();
+
+                ok(view.times.find("th:contains(03:00)").length);
+                equal(view.times.find("th").length, 49);
+            });
+
             test("start time is later than end time", function() {
                 var view = setup({
                         startTime: new Date(2000, 0, 1, 13, 0, 0),
