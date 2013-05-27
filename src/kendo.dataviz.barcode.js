@@ -1415,41 +1415,44 @@
 			that.leftPart  = that.value.substr(0,4);
 			that.rightPart = that.value.substr(4) + that.checksum;
             that.pattern = [];
-            that.baseUnit = width /(67 + 2 * this.options.quietZoneLength);            
+            that.baseUnit = width /(67 + 2 * that.options.quietZoneLength);            
         }
     });
 
     var Barcode = Widget.extend({
         init: function (element, options) {
-             Widget.fn.init.call(this, element, options);
-             this.element = element;
+			var that = this;
+             Widget.fn.init.call(that, element, options);
+             that.element = element;
              var defaultView = dataviz.ui.defaultView();
-             this.view = new defaultView();
-             this.setOptions(options);
+             that.view = new defaultView();
+             that.setOptions(options);
         },
         setOptions: function (options) {
-            if (!this.enocoding || ( options.encoding.name && this.options.encoding.name !==
+			var that = this;
+            if (!that.enocoding || ( options.encoding.name && that.options.encoding.name !==
                 options.encoding.name.toLowerCase())){
-                this.encoding = new encodings[this.options.encoding.name.toLowerCase()](options.encoding);
+                that.encoding = new encodings[that.options.encoding.name.toLowerCase()](options.encoding);
             }
-            this.options = $.extend(this.options, options);
-            this.value(this.options.value);
+            that.options = $.extend(that.options, options);
+            that.value(that.options.value);
         },
         redraw: function () {
-            var result = this.encoding.encode(this.value,
-                    this.options.width, this.options.height);                
+            var that=this,
+				result = that.encoding.encode(that.value,
+                    that.options.width, that.options.height);                
 
-            this.view.children = [];
-            this.view.options.width = this.options.width;
-            this.view.options.height = this.options.height + this.options.fontSize;
-            this.addBackground();
+            that.view.children = [];
+            that.view.options.width = that.options.width;
+            that.view.options.height = that.options.height + that.options.fontSize;
+            that.addBackground();
 
-            this.addElements(result.pattern, result.baseUnit);
+            that.addElements(result.pattern, result.baseUnit);
 
-            if (this.options.showText) {
-               this.addText(this.value);
+            if (that.options.showText) {
+               that.addText(that.value);
             }
-            this.view.renderTo(this.element);
+            that.view.renderTo(that.element);
         },        
         value: function(value){
             this.value = value;
