@@ -54,6 +54,7 @@ namespace Kendo.Mvc.UI
 
             dom.Children.Add(new HtmlElement("a")
                         .Text(item.Text)
+                        .Attributes(item.HtmlAttributes)
                         .Attribute("href", "#")
                         .Attribute("data-action", item.Action));
 
