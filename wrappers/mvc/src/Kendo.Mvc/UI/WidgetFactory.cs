@@ -1038,6 +1038,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new MobileButtonGroupBuilder(new MobileButtonGroup(ViewContext, Initializer, UrlGenerator));
         }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileSwitch"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileSwitch()
+        ///             .Name("MobileSwitch")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileSwitchBuilder MobileSwitch()
+        {
+            return new MobileSwitchBuilder(new MobileSwitch(ViewContext, Initializer, UrlGenerator));
+        }
         //<< MobileComponents
     }
 

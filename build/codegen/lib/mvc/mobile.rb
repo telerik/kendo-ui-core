@@ -13,7 +13,7 @@ module CodeGen::MVC::Mobile
             'Date' => 'DateTime'
         }
 
-        SERIALIZATION_SKIP_LIST = ['actionsheet.items.text', 'buttongroup.items.text']
+        SERIALIZATION_SKIP_LIST = ['actionsheet.items.text', 'buttongroup.items.text', 'tabstrip.items.text']
 
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 

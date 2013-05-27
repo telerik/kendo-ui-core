@@ -1315,23 +1315,35 @@
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetPopupSettingsBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetEventBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Html\MobileActionSheetHtmlBuilder.cs" />
-	<Compile Include="UI\MobileActionSheet\MobileActionSheetItem.cs" />
-	<Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\MobileActionSheetItem.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\MobileButton\MobileButton.cs" />
     <Compile Include="UI\MobileButton\Fluent\MobileButtonBuilder.cs" />
     <Compile Include="UI\MobileButton\Fluent\MobileButtonEventBuilder.cs" />
     <Compile Include="UI\MobileButton\Html\MobileButtonHtmlBuilder.cs" />
-	<Compile Include="UI\MobileButton\MobileButtonRel.cs" />
-  </ItemGroup>  
+    <Compile Include="UI\MobileButton\MobileButtonRel.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\MobileButtonGroup\MobileButtonGroup.cs" />
     <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupBuilder.cs" />
     <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupEventBuilder.cs" />
     <Compile Include="UI\MobileButtonGroup\Html\MobileButtonGroupHtmlBuilder.cs" />
-	<Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemFactory.cs" />
-	<Compile Include="UI\MobileButtonGroup\MobileButtonGroupItem.cs" />
-	<Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemBuilder.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemFactory.cs" />
+    <Compile Include="UI\MobileButtonGroup\MobileButtonGroupItem.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\MobileBackButton\MobileBackButton.cs" /><Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonBuilder.cs" /><Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonEventBuilder.cs" /><Compile Include="UI\MobileBackButton\Html\MobileBackButtonHtmlBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\MobileBackButton\MobileBackButton.cs" />
+    <Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonBuilder.cs" />
+    <Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonEventBuilder.cs" />
+    <Compile Include="UI\MobileBackButton\Html\MobileBackButtonHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileSwitch\MobileSwitch.cs" />
+    <Compile Include="UI\MobileSwitch\Fluent\MobileSwitchBuilder.cs" />
+    <Compile Include="UI\MobileSwitch\Fluent\MobileSwitchEventBuilder.cs" />
+    <Compile Include="UI\MobileSwitch\Html\MobileSwitchHtmlBuilder.cs" />
+  </ItemGroup>
+</Project>
