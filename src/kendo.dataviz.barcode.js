@@ -1459,7 +1459,8 @@
             this.redraw();
         },
         addElements: function (pattern, baseUnit) {
-            var position = 0,
+            var that = this,
+				position = 0,
                 step,
                 item;
 
@@ -1467,12 +1468,12 @@
 				item = isPlainObject(pattern[i]) ? pattern[i] : {
 						width: pattern[i],
 						y1:0,
-						y2: this.options.height
+						y2: that.options.height
 					}; 
                 step = item.width * baseUnit;
                 if(i%2){				                     
-                     this.view.children.push(this.view.createRect(new Box2D(position, item.y1, position + step, item.y2),
-                        { fill: this.options.lineColor}));
+                     that.view.children.push(that.view.createRect(new Box2D(position, item.y1, position + step, item.y2),
+                        { fill: that.options.lineColor}));
                 }
 
                 position+= step;
@@ -1483,19 +1484,20 @@
                 { fill: this.options.backColor }));
         },
         addText: function (value) {
-            var font = this.options.fontSize + "px " + this.options.fontFamily,
+            var that = this,
+				font = that.options.fontSize + "px " + that.options.fontFamily,
                 text = new Text(value, {
                     font: font,
-                    color: this.options.color,
+                    color: that.options.color,
                     align: "center",
                     vAlign: "bottom"
                 });
-            text.reflow(new Box2D(0, 0, this.options.width, this.options.height + this.options.fontSize));
-            this.view.children.push(this.view.createText(value, {
+            text.reflow(new Box2D(0, 0, that.options.width, that.options.height + that.options.fontSize));
+            that.view.children.push(that.view.createText(value, {
                 baseline: text.baseline,
                 x: text.box.x1,
                 y: text.box.y1,
-                color: this.options.color,
+                color: that.options.color,
                 font: font
             }));
         },
