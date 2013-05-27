@@ -5,11 +5,11 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
-    public class MobileActionSheetItemBuilder: IHideObjectMembers
+    public class MobileButtonGroupItemBuilder: IHideObjectMembers
     {
-        private readonly MobileActionSheetItem container;
+        private readonly MobileButtonGroupItem container;
 
-        public MobileActionSheetItemBuilder(MobileActionSheetItem settings)
+        public MobileButtonGroupItemBuilder(MobileButtonGroupItem settings)
         {
             container = settings;
         }
@@ -17,12 +17,12 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the name of the handler that will be executed when the item is clicked
+        /// The icon of the button. It can be either one of the built-in icons, or a custom one
         /// </summary>
-        /// <param name="value">The value that configures the action.</param>
-        public MobileActionSheetItemBuilder Action(string value)
+        /// <param name="value">The value that configures the icon.</param>
+        public MobileButtonGroupItemBuilder Icon(string value)
         {
-            container.Action = value;
+            container.Icon = value;
 
             return this;
         }
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specifies the text of the item
         /// </summary>
         /// <param name="value">The value that configures the text.</param>
-        public MobileActionSheetItemBuilder Text(string value)
+        public MobileButtonGroupItemBuilder Text(string value)
         {
             container.Text = value;
 
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="attributes">The HTML attributes.</param>
         /// <returns></returns>
-        public virtual MobileActionSheetItemBuilder HtmlAttributes(object attributes)
+        public virtual MobileButtonGroupItemBuilder HtmlAttributes(object attributes)
         {
             return HtmlAttributes(attributes.ToDictionary());
         }
@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="attributes">The HTML attributes.</param>
         /// <returns></returns>
-        public virtual MobileActionSheetItemBuilder HtmlAttributes(IDictionary<string, object> attributes)
+        public virtual MobileButtonGroupItemBuilder HtmlAttributes(IDictionary<string, object> attributes)
         {
 
             container.HtmlAttributes.Clear();

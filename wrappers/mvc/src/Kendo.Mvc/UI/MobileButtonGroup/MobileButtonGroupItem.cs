@@ -5,9 +5,9 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MobileActionSheetItem : JsonObject
+    public class MobileButtonGroupItem : JsonObject
     {
-        public MobileActionSheetItem()
+        public MobileButtonGroupItem()
         {
             //>> Initialization
         
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Action { get; set; }
+        public string Icon { get; set; }
         
         public string Text { get; set; }
         
@@ -42,9 +42,9 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Action.HasValue())
+            if (Icon.HasValue())
             {
-                json["action"] = Action;
+                json["icon"] = Icon;
             }
             
         //<< Serialization

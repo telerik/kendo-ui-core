@@ -1311,20 +1311,27 @@
     <Compile Include="UI\MobileActionSheet\MobileActionSheetDirection.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemFactory.cs" />
-    <Compile Include="UI\MobileActionSheet\MobileActionSheetItem.cs" />
-    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Settings\MobileActionSheetPopupSettings.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetPopupSettingsBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetEventBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Html\MobileActionSheetHtmlBuilder.cs" />
+	<Compile Include="UI\MobileActionSheet\MobileActionSheetItem.cs" />
+	<Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\MobileButton\MobileButton.cs" />
     <Compile Include="UI\MobileButton\Fluent\MobileButtonBuilder.cs" />
     <Compile Include="UI\MobileButton\Fluent\MobileButtonEventBuilder.cs" />
     <Compile Include="UI\MobileButton\Html\MobileButtonHtmlBuilder.cs" />
-  </ItemGroup>
+	<Compile Include="UI\MobileButton\MobileButtonRel.cs" />
+  </ItemGroup>  
   <ItemGroup>
-    <Compile Include="UI\MobileButton\MobileButtonRel.cs" />
+    <Compile Include="UI\MobileButtonGroup\MobileButtonGroup.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupBuilder.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupEventBuilder.cs" />
+    <Compile Include="UI\MobileButtonGroup\Html\MobileButtonGroupHtmlBuilder.cs" />
+	<Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemFactory.cs" />
+	<Compile Include="UI\MobileButtonGroup\MobileButtonGroupItem.cs" />
+	<Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemBuilder.cs" />
   </ItemGroup>
 </Project>

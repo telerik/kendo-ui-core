@@ -1008,6 +1008,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new MobileButtonBuilder(new MobileButton(ViewContext, Initializer, UrlGenerator));
         }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileButtonGroup"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileButtonGroup()
+        ///             .Name("MobileButtonGroup")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileButtonGroupBuilder MobileButtonGroup()
+        {
+            return new MobileButtonGroupBuilder(new MobileButtonGroup(ViewContext, Initializer, UrlGenerator));
+        }
         //<< MobileComponents
     }
 

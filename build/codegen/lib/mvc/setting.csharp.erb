@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
+    using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
     public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> : JsonObject
@@ -10,7 +11,23 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
             //<< Initialization
+
+            <% if self.instance_of?(ArrayOption) %>
+            HtmlAttributes = new RouteValueDictionary();
+            <% end %>
         }
+
+        <% if self.instance_of?(ArrayOption) %>
+        /// <summary>
+        /// Gets the HTML attributes.
+        /// </summary>
+        /// <value>The HTML attributes.</value>
+        public IDictionary<string, object> HtmlAttributes
+        {
+            get;
+            private set;
+        }
+        <% end %>
 
         //>> Fields
         //<< Fields
