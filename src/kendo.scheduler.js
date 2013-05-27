@@ -272,6 +272,9 @@ kendo_module({
             this.dataSource.add(event);
         },
 
+        editEvent: function(element) {
+        },
+
         removeEvent: function(element) {
             var model = this._modelForContainer(element);
 
@@ -314,6 +317,15 @@ kendo_module({
 
                 view.bind(ADD, this._viewAddHandler);
 
+                if (that._viewEditHandler) {
+                    view.unbind(EDIT, that._viewEditHandler);
+                }
+
+                that._viewEditHandler = function(e) {
+                    that.editEvent(e.container);
+                };
+
+                view.bind(EDIT, this._viewEditHandler);
             }
         },
 
@@ -1131,7 +1143,7 @@ kendo_module({
                 numberOfSlots = Math.ceil(endIndex - startIndex),
                 allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
-                bottomOffset = 20,//(dateSlot.height() * 0.20),
+                bottomOffset = 20,
                 eventHeight = allDayEvents.length > 1 ? allDayEvents.first()[0].clientHeight : (dateSlot.height() - bottomOffset);
 
             element

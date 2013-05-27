@@ -8,7 +8,9 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -86,6 +88,37 @@
                 scheduler.addEvent({ isAllDay: true, start: new Date(2013, 1, 13, 0, 0, 0), end: new Date(2013, 1, 13, 0, 0, 0) });
 
                 equal(dataSource.at(0).isAllDay, true);
+            });
+
+            test("dblclicking on event calls editEvent", function() {
+                var scheduler = setup({
+                        dataSource: {
+                            data: [ { start: new Date(), end: new Date(), title: "my event" } ]
+                        }
+                    }),
+                    dataSource = scheduler.dataSource,
+                    editEvent = stub(scheduler, "editEvent");
+
+                scheduler.view().content.find(".k-appointment").first().dblclick();
+
+                equal(editEvent.calls("editEvent"), 1);
+            });
+
+            test("dblclicking on allday event calls editEvent", function() {
+                var scheduler = setup(),
+                    dataSource = scheduler.dataSource,
+                    editEvent = stub(scheduler, "editEvent");
+
+                scheduler.view().datesHeader.find(".k-appointment").first().dblclick();
+
+                equal(editEvent.calls("editEvent"), 1);
+            });
+
+            test("correct model is passed to the editable instance", function() {
+                var scheduler = setup();
+                var element = scheduler.element.find(".k-appointment").dblclick();
+
+                equal(element.data("kendoEditable").options.model, dataSource.at(0));
             });
 
         </script>
