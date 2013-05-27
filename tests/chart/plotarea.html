@@ -1411,6 +1411,17 @@
                     deepEqual(plotArea.series[0].data, [300]);
                 });
 
+                test("Aggregates are calculated for single values", 1, function() {
+                    createPlotArea([{
+                        data: [100],
+                        aggregate: function() { ok(true); }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
                 test("max ignores NaN values", function() {
                     createPlotArea([{
                         data: [100, NaN, 300],
