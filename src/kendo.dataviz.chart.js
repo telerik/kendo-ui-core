@@ -6823,10 +6823,11 @@ kendo_module({
                             srcDataItems.push(currentSeries.data[categoryIx]);
                         }
 
-                        if (srcValues.length > 1) {
-                            data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
-                        } else {
+                        var aggregate = calculateAggregates(srcValues, currentSeries, srcDataItems);
+                        if (srcValues.length === 1 && aggregate === srcValues[0]) {
                             data[groupIx] = srcData[categoryIndicies[0]];
+                        } else {
+                            data[groupIx] = aggregate;
                         }
                     }
                 }
@@ -8219,21 +8220,29 @@ kendo_module({
 
     var Aggregates = {
         max: function(values) {
-            var result = math.max.apply(math, values);
-            if (isNaN(result)) {
-                return sparseArrayMax(values);
-            } else {
-                return result;
+            var result = values[0];
+
+            if (values.length > 1) {
+                result = math.max.apply(math, values);
+                if (isNaN(result)) {
+                    result = sparseArrayMax(values);
+                }
             }
+
+            return result;
         },
 
         min: function(values) {
-            var result = math.min.apply(math, values);
-            if (isNaN(result)) {
-                return sparseArrayMin(values);
-            } else {
-                return result;
+            var result = values[0];
+
+            if (values.length > 1) {
+                result = math.min.apply(math, values);
+                if (isNaN(result)) {
+                    result = sparseArrayMin(values);
+                }
             }
+
+            return result;
         },
 
         sum: function(values) {
