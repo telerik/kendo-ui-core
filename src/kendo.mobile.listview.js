@@ -77,7 +77,8 @@ kendo_module({
     }
 
     function putAt(element, top) {
-        element.css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
+        // element.css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
+        element.css('top', top);
     }
 
     var HeaderFixer = kendo.Class.extend({
@@ -289,20 +290,22 @@ kendo_module({
 
                 itemCount = list.itemCount,
 
-                padding = 200,
+                padding = height / 2,
                 item,
                 lastTop = this.lastTop || 0,
                 up = force ? this.lastDirection : lastTop > top,
 
                 topBorder = top - padding,
-                bottomBorder = top + height + padding;
+                bottomBorder = top + height + padding,
+                maximumShifts = force ? 100 : 1,
+                shiftCounter = 0;
 
             this.lastTop = top;
             this.lastDirection = up;
 
             if (up) { // scrolling up
                if (this.top > topBorder || force) {
-                    while(this.bottom > bottomBorder) {
+                    while(this.bottom > bottomBorder + padding && shiftCounter < maximumShifts) {
                         if (list.offset === 0) {
                             break;
                         }
@@ -315,11 +318,12 @@ kendo_module({
                         items.unshift(item);
                         list.top = item.top;
                         list.bottom = items[items.length - 1].bottom;
+                        shiftCounter ++;
                     }
                }
             } else { // scrolling down
                 if (this.bottom < bottomBorder || force) {
-                    while (this.top < topBorder) {
+                    while (this.top < topBorder - padding && shiftCounter < maximumShifts) {
                         var nextIndex = list.offset + itemCount; // here, it should be offset + 1 + itemCount - 1.
 
                         if (nextIndex === list.buffer.total()) {
@@ -340,6 +344,7 @@ kendo_module({
                         list.bottom = item.bottom;
 
                         list.offset ++;
+                        shiftCounter ++;
                     }
                 }
             }
@@ -545,7 +550,8 @@ kendo_module({
                 });
 
                 buffer.bind('expand', function() {
-                    list.update(scroller.scrollTop);
+                    list.lastDirection = false; // expand down
+                    list.update(scroller.scrollTop, true);
                 });
             }
 
@@ -748,6 +754,7 @@ kendo_module({
 
             this._headerFixer = new HeaderFixer(this);
 
+            this._itemsCache = {};
             this._templates();
 
             this.virtual = options.endlessScroll || options.loadMore;
@@ -903,7 +910,6 @@ kendo_module({
 
             return $(this._renderItems([dataItem], function(items) {
                 var newItem = $(items[0]);
-                kendo.destroy(item);
                 $(item).replaceWith(newItem);
 
                 listView.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
@@ -918,10 +924,24 @@ kendo_module({
         },
 
         _renderItems: function(dataItems, callback) {
-            var items = $(kendo.render(this.template, dataItems));
-            callback(items);
-            this._enhanceItems(items);
-            mobile.init(items);
+            var items,
+                singleItem = dataItems.length === 1,
+                uid = dataItems[0].uid;
+
+            if (singleItem && this._itemsCache[uid]) {
+                items = this._itemsCache[uid];
+                callback(items);
+            } else {
+                items = $(kendo.render(this.template, dataItems));
+                callback(items);
+                this._enhanceItems(items);
+                mobile.init(items);
+            }
+
+
+            if (singleItem) {
+                this._itemsCache[uid] = items;
+            }
 
             return items;
         },
