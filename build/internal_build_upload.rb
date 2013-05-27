@@ -56,7 +56,7 @@ def upload_internal_build(options)
 
     Thread.current.send :sleep, 3
 
-    bot.driver.execute_script "$find($telerik.$('[id$=\'_tfTitle_txtFieldText\']').attr('id')).set_value('#{options[:title]}')"
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_tfTitle_txtFieldText\"]').attr('id')).set_value('#{options[:title]}')"
 
     bot.fill_in('Product', options[:product])
 
@@ -70,12 +70,12 @@ def upload_internal_build(options)
         bot.find("#tmp_editor").send_keys(line)
     end
 
-    bot.driver.execute_script "$find($telerik.$('[id$=\'_efReleaseNotes_reFieldText\']').attr('id')).set_html($telerik.$('#tmp_editor').val())"
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_efReleaseNotes_reFieldText\"]').attr('id')).set_html($telerik.$('#tmp_editor').val())"
 
     bot.fill_in('File type:', 'Paid Files')
 
     unless options[:vs_extension]
-        bot.driver.execute_script "$telerik.$('[id$=\'_attachmentEdit_cbIsHotfix\']').click()"
+        bot.driver.execute_script "$telerik.$('[id$=\"_attachmentEdit_cbIsHotfix\"]').click()"
     else
         bot.find('#fileVersionField input').send_keys "#{VERSION}.0"
     end
@@ -97,7 +97,7 @@ task "internal_builds:uncheck_previous" do
     bot.go_to_internal_buids
 
     bot.driver.execute_script <<-SCRIPT
-         var masterTable = $find($telerik.$('[id$=\'_rgNightBuilds\']').attr('id')).get_masterTableView();
+         var masterTable = $find($telerik.$('[id$=\"_rgNightBuilds\"]').attr('id')).get_masterTableView();
          masterTable.filter("Title", "kendoui", Telerik.Web.UI.GridFilterFunction.Contains);
     SCRIPT
 
