@@ -94,6 +94,10 @@
 
     function changeTabBadge() {
         var tabstrip = $("#badges-tabs").data("kendoMobileTabStrip");
+        if (!tabstrip) {
+            removeTimer();
+            return;
+        }
 
         tabstrip.badge("a:last", +tabstrip.badge("a:last") + 5);
     }
