@@ -198,19 +198,24 @@ kendo_module({
                 groups,
                 length,
                 data,
-                item;
+                item,
+                currentItem;
 
             if (action === "itemchange") {
                 data = items[0];
-                item = $(that.template(data));
+                currentItem = element.find("[data-" + kendo.ns + "uid=" + data.uid + "]");
 
-                element.find("[data-" + kendo.ns + "uid=" + data.uid + "]").replaceWith(item);
+                if (currentItem[0]) {
+                    item = $(that.template(data));
 
-                that.trigger("itemChange", {
-                    item: item,
-                    data: data,
-                    ns: ui
-                });
+                    currentItem.replaceWith(item);
+
+                    that.trigger("itemChange", {
+                        item: item,
+                        data: data,
+                        ns: ui
+                    });
+                }
 
                 that._style();
                 return;
