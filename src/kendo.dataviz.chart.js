@@ -1284,39 +1284,37 @@ kendo_module({
         },
 
         click: function(widget, e) {
-            var item = this.item;
+            var args = this.eventArgs(e);
 
-            e.preventDefault();
-
-            widget.trigger(LEGEND_ITEM_CLICK, {
-                element: $(e.target),
-                text: item.text,
-                series: item.series,
-                seriesIndex: item.series.index,
-                pointIndex: item.pointIndex
-            });
-
-            widget._legendItemClick(item.series.index, item.pointIndex);
+            if (!widget.trigger(LEGEND_ITEM_CLICK, args)) {
+                e.preventDefault();
+                widget._legendItemClick(args.seriesIndex, args.pointIndex);
+            }
         },
 
         hover: function(widget, e) {
-            var item = this.item;
+            var args = this.eventArgs(e);
 
-            e.preventDefault();
-
-            widget.trigger(LEGEND_ITEM_HOVER, {
-                element: $(e.target),
-                text: item.text,
-                series: item.series,
-                seriesIndex: item.series.index,
-                pointIndex: item.pointIndex
-            });
-
-            widget._legendItemHover(item.series.index, item.pointIndex);
+            if (!widget.trigger(LEGEND_ITEM_HOVER, args)) {
+                e.preventDefault();
+                widget._legendItemHover(args.seriesIndex, args.pointIndex);
+            }
         },
 
         leave: function(widget) {
             widget._unsetActivePoint();
+        },
+
+        eventArgs: function(e) {
+            var item = this.item;
+
+            return {
+                element: $(e.target),
+                text: item.text,
+                series: item.series,
+                seriesIndex: item.series.index,
+                pointIndex: item.pointIndex
+            };
         }
     });
 
