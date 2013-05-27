@@ -19,6 +19,51 @@
             var recurrence = kendo.recurrence,
                 occurrences = recurrence.expand;
 
+            module("Cloning scheduler event");
+            test("Occurrence clones original event", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=DAILY"
+                }
+
+                var event = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 11, 17) } )[1];
+
+                equal(event.uid, ""); //???
+                equal(event.title, schedulerEvent.title);
+                equal(event.rule, schedulerEvent.rule);
+                equal(event.recurrenceID, schedulerEvent.uid);
+                equal(event.start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(event.end.getTime(), +new Date(2000, 10, 11, 17, 0));
+            });
+
+            /*module("HOURLY Occurrences");
+            test("HOURLY occurrences method repeat event in one hour", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 0),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    rule: "FREQ=HOURLY"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2000, 10, 10), end: new Date(2000, 10, 10, 18) } );
+
+                equal(events.length, 3);
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 0));
+                equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
+
+                equal(events[1].start.getTime(), +new Date(2000, 10, 10, 17, 0));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 10, 18, 0));
+
+                equal(events[2].start.getTime(), +new Date(2000, 10, 10, 18, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 10, 10, 19, 0));
+            });*/
+
+
             module("DAILY Occurrences");
             test("DAILY occurrences method returns one occurrence (FREQ: DAILY)", function() {
                 var schedulerEvent = {
@@ -352,6 +397,27 @@
                 equal(events[1].end.getTime(), +new Date(2013, 5, 27, 17, 0));
             });
 
+            test("DAILY expands BYHOUR", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYHOUR=8,18"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 11, 17) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 18, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 19, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 11, 8, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 11, 9, 0));
+            });
 
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {

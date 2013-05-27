@@ -32,15 +32,6 @@ kendo_module({
         EDIT = "edit",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
-        /*FREQUENCY = {
-            "SECONDLY": 0,
-            "MINUTELY": 1,
-            "HOURLY": 2,
-            "DAILY": 3,
-            "WEEKLY": 4,
-            "MONTHLY": 5,
-            "YEARLY": 6
-        },*/
         WEEK_DAYS = {
             "SU": 0,
             "MO": 1,
@@ -1588,6 +1579,7 @@ kendo_module({
  var recurrence = {
         expand: function(event, period) {
             var rule = recurrence.expandEvent(event),
+                durationMS = event.end - event.start,
                 start = new Date(period.start),
                 end = new Date(period.end),
                 current = 1,
@@ -1608,18 +1600,13 @@ kendo_module({
 
             //rule._currentPos = 1;
 
-            //Rename to expand or smth different
             freq.setup(rule, start, event.start);
             start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
             start = freq.limit(start, end, rule);
 
             while (+start <= end) {
                 //if (freq.position(rule)) {
-                    events.push({
-                        recurrenceID: event.uid,
-                        start: freq.setDate(start, event.start),
-                        end: freq.setDate(start, event.end)
-                    });
+                    events.push(cloneEvent(event, start, durationMS));
                 //}
 
                 if (count && count === current) {
@@ -1643,19 +1630,29 @@ kendo_module({
             //TODO: FREQ: HOURLY
             daily: {
                 next: function(start, rule) {
-                    start = new Date(start);
-                    start.setDate(start.getDate() + rule.interval);
+                    if (!rule.hours) {
+                        start = new Date(start);
+                        start.setDate(start.getDate() + rule.interval);
+                    }
                     return start;
                 },
 
-                setup: function(rule, start) {
+                setup: function(rule, start, eventStart) {
+                    var currentHour = eventStart.getHours();
+
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+
+                    if (rule.hours) {
+                        rule._hourRules = $.grep(rule.hours, function(hour) {
+                            return hour > currentHour;
+                        });
                     }
                 },
 
                 limit: function(date, end, rule) {
-                    var monthDayMS, dateMS, month;
+                    var monthDayMS, weekDayMS, month;
 
                     end = +end;
 
@@ -1674,13 +1671,17 @@ kendo_module({
                             date = recurrence._weekDay(date, end, rule);
                         }
 
-                        dateMS = +date;
+                        weekDayMS = +date;
+
+                        if (rule.hours) {
+                            date = recurrence._hour(date, end, rule);
+                        }
 
                         if ((month !== undefined && month !== date.getMonth()) ||
-                            (monthDayMS && monthDayMS !== dateMS)) {
+                            (monthDayMS && monthDayMS !== weekDayMS)) {
 
                             date.setDate(date.getDate() + 1);
-                        } else if (dateMS <= end) {
+                        } else if (+date <= end) {
                             break;
                         }
                     }
@@ -2161,8 +2162,43 @@ kendo_module({
             }
 
             return date;
+        },
+
+        _hour: function(date, end, rule) {
+            var hourRule = rule._hourRules.shift(),
+                day = date.getDate();
+
+            if (!hourRule) {
+                date.setHours(0); //TODO: DST CHECK
+                date.setDate(date.getDate() + 1);
+
+                rule._hourRules = rule.hours.slice(0);
+                hourRule = rule._hourRules.shift();
+            }
+
+            date.setHours(hourRule);
+
+            //check DST
+            /*if (date.getDate() !== hourRule) {
+
+            }*/
+
+            return date;
         }
     };
+
+    function cloneEvent(event, start, durationMS) {
+        var end = new Date(start.getTime() + durationMS);
+
+        //TODO: DST check
+
+        return extend({}, event, {
+           recurrenceID: event.uid,
+           start: new Date(start),
+           end: end,
+           uid: "" //generate uid ???
+        });
+    }
 
     function parseArray(list, range) {
         var idx = 0,
@@ -2178,7 +2214,7 @@ kendo_module({
             list[idx] = value;
         }
 
-        return list.sort();
+        return list.sort(function(a,b){return a - b});
     }
 
     function parseWeekDayList(list) {
