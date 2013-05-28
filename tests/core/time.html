@@ -20,6 +20,14 @@
         <script src="../../src/kendo.timezones.js"></script>
         <script>
 
+            test("offset throws exception if a timezone with the specified name cannot be found", function() {
+                try {
+                    kendo.timezone.offset(new Date(), "foo");
+                }catch(e) {
+                    equal(e.toString(), 'Error: Timezone "foo" is either incorrect, or kendo.timezones.min.js is not included.');
+                }
+            });
+
             test("offset returns 0 for Etc/UTC", function() {
                 var date = new Date(2013, 4, 27);
 
@@ -62,6 +70,11 @@
                 equal(kendo.timezone.offset(daylight, "America/Chicago"), 300);
             });
 
+            test("offset adjusts for DST in zones like '1:00' instead of DST rule references", function(){
+                var date = new Date(2012, 2, 1, 0, 0, 0, 0)
+                equal(kendo.timezone.offset(date, "Pacific/Apia"), -840);
+            });
+
             test("convert changes the timezone from UTC to a timezone", function() {
                 var date = new Date(2013, 2, 27, 10, 0, 0);
 
@@ -85,6 +98,13 @@
 
                 equal(kendo.toString(kendo.timezone.convert(date, "Europe/Sofia", "America/Los_Angeles"), "MMM dd yyyy HH:mm:ss"), "May 26 2013 14:00:00");
             });
+
+            test("convert assumes browser timezone offset when invoked with two arguments", function() {
+                var date = new Date(Date.UTC(2013, 2, 27, 10, 0, 0));
+
+                equal(kendo.toString(kendo.timezone.convert(date, "Europe/Sofia"), "MMM dd yyyy HH:mm:ss"), "Mar 27 2013 12:00:00");
+            });
+
         </script>
     </body>
 </html>

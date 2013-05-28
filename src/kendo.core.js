@@ -3025,32 +3025,16 @@ function pad(number, digits, end) {
             return date;
         }
 
-        function offset(utcMilliseconds, timezone) {
-            if (timezone == "Etc/UTC" || timezone == "Etc/GMT") {
-                return 0;
+        function ruleOffset(utcTime, allRules, zone) {
+            var year = new Date(utcTime).getUTCFullYear();
+
+            var rules = allRules[zone];
+
+            if (!rules) {
+                var time = zone.split(":");
+
+                return time[0] * 60 + Number(time[1]);
             }
-
-            var zones = this.zones[timezone];
-
-            if (typeof utcMilliseconds != NUMBER) {
-                utcMilliseconds = Date.UTC(utcMilliseconds.getFullYear(), utcMilliseconds.getMonth(), utcMilliseconds.getDate(), utcMilliseconds.getHours(), utcMilliseconds.getMinutes(), utcMilliseconds.getSeconds(), utcMilliseconds.getMilliseconds());
-            }
-
-            for (var idx = zones.length - 1; idx >= 0; idx--) {
-                var until = zones[idx][3];
-
-                if (until && utcMilliseconds > until) {
-                    break;
-                }
-            }
-
-            var zone = zones[idx + 1];
-
-            var date = new Date(utcMilliseconds);
-
-            var year = date.getUTCFullYear();
-
-            var rules = this.rules[zone[1]];
 
             rules = jQuery.grep(rules, function(rule) {
                 var from = rule[0];
@@ -3059,9 +3043,9 @@ function pad(number, digits, end) {
                 return from <= year && (to >= year || (from == year && to == "only") || to == "max");
             });
 
-            rules.push(utcMilliseconds);
+            rules.push(utcTime);
 
-            rules.sort(function(a,b) {
+            rules.sort(function(a, b) {
                 if (typeof a != "number") {
                     a = Number(ruleToDate(year, a));
                 }
@@ -3073,19 +3057,52 @@ function pad(number, digits, end) {
                 return a - b;
             });
 
-            var rule = rules[jQuery.inArray(utcMilliseconds, rules) - 1];
+            var rule = rules[jQuery.inArray(utcTime, rules) - 1];
 
-            var utcOffset = zone[0];
+            return rule ? rule[6] : 0;
+        }
 
-            if (rule) {
-               utcOffset -= rule[6];
+        function offset(utcTime, timezone) {
+            if (timezone == "Etc/UTC" || timezone == "Etc/GMT") {
+                return 0;
             }
 
-            return utcOffset;
+            var zones = this.zones[timezone];
+
+            if (!zones) {
+                throw new Error('Timezone "' + timezone + '" is either incorrect, or kendo.timezones.min.js is not included.');
+            }
+
+            if (typeof utcTime != NUMBER) {
+                utcTime = Date.UTC(utcTime.getFullYear(), utcTime.getMonth(),
+                    utcTime.getDate(), utcTime.getHours(), utcTime.getMinutes(),
+                    utcTime.getSeconds(), utcTime.getMilliseconds());
+            }
+
+            for (var idx = zones.length - 1; idx >= 0; idx--) {
+                var until = zones[idx][3];
+
+                if (until && utcTime > until) {
+                    break;
+                }
+            }
+
+            var zone = zones[idx + 1];
+
+            if (!zone) {
+                throw new Error('Timezone "' + timezone + '" not found on ' + utcTime + ".");
+            }
+
+            return zone[0] - ruleOffset(utcTime, this.rules, zone[1]);
         }
 
         function convert(date, from, to) {
-            var fromOffset = this.offset(date, from);
+            if (!to) {
+                to = from;
+                from = null;
+            }
+
+            var fromOffset = from ? this.offset(date, from) : date.getTimezoneOffset();
 
             var toOffset = this.offset(date, to);
 
