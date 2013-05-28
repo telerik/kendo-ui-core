@@ -419,6 +419,170 @@
                 equal(events[1].end.getTime(), +new Date(2013, 5, 11, 9, 0));
             });
 
+            test("DAILY expands BYHOUR and BYMINUTE", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYHOUR=8;BYMINUTE=15,45"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 11, 17) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 11, 8, 15));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 11, 8, 45));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 11, 8, 45));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 11, 9, 15));
+            });
+
+            test("DAILY expands BYHOUR and BYMINUTE (honours start hours and minutes)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15,45"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 10, 17) } );
+
+                equal(events.length, 1);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 45));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 15));
+            });
+
+            test("DAILY expands BYHOUR and BYMINUTE (BYHOUR === current hour and minute < current minute)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 11, 17) } );
+
+                equal(events.length, 1);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 11, 16, 15));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 11, 16, 45));
+            });
+
+            test("DAILY expands BYMINUTE", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYMINUTE=15"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 10, 19) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 17, 15));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 45));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 10, 18, 15));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 10, 18, 45));
+            });
+
+            test("DAILY expands BYHOUR and BYMINUTE (two minute rules)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYHOUR=17;BYMINUTE=20,40"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 10, 17, 50) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 17, 20));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 50));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 10, 17, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 10, 18, 10));
+            });
+
+            test("DAILY expands BYSECONDS", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYSECOND=20,40"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 10, 16, 31) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 30, 20));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 0, 20));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 10, 16, 30, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17, 0, 40));
+            });
+
+            test("DAILY expands BYMINUTE and BYSECOND", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30, 40),
+                    end: new Date(2000, 5, 10, 17, 0, 40),
+                    rule: "FREQ=DAILY;BYMINUTE=40;BYSECOND=40"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 10, 16, 50) } );
+
+                equal(events.length, 1);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 40, 40));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 10, 40));
+            });
+
+            test("DAILY expands BYMINUTE and BYSECOND (two second rules)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30, 40),
+                    end: new Date(2000, 5, 10, 17, 0, 40),
+                    rule: "FREQ=DAILY;BYMINUTE=40;BYSECOND=20,40"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 10, 16, 50) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 40, 20));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 10, 20));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 10, 16, 40, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17, 10, 40));
+            });
+
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
                 var schedulerEvent = {

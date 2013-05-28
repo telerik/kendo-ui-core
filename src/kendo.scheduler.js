@@ -1630,7 +1630,7 @@ kendo_module({
             //TODO: FREQ: HOURLY
             daily: {
                 next: function(start, rule) {
-                    if (!rule.hours) {
+                    if (!rule.hours && !rule.minutes && !rule.seconds) {
                         start = new Date(start);
                         start.setDate(start.getDate() + rule.interval);
                     }
@@ -1645,9 +1645,15 @@ kendo_module({
                     }
 
                     if (rule.hours) {
-                        rule._hourRules = $.grep(rule.hours, function(hour) {
-                            return hour > currentHour;
-                        });
+                        rule._hourRules = rule.hours.slice();
+                    }
+
+                    if (rule.minutes) {
+                        rule._minuteRules = rule.minutes.slice();
+                    }
+
+                    if (rule.seconds) {
+                        rule._secondRules = rule.seconds.slice();
                     }
                 },
 
@@ -1673,8 +1679,8 @@ kendo_module({
 
                         weekDayMS = +date;
 
-                        if (rule.hours) {
-                            date = recurrence._hour(date, end, rule);
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            date = recurrence._time(date, end, rule);
                         }
 
                         if ((month !== undefined && month !== date.getMonth()) ||
@@ -2164,28 +2170,107 @@ kendo_module({
             return date;
         },
 
-        _hour: function(date, end, rule) {
-            var hourRule = rule._hourRules.shift(),
-                day = date.getDate();
+        _time: function(date, end, rule) {
+            var hours = date.getHours(),
+                minutes, seconds,
+                hourRules = rule._hourRules,
+                minuteRules = rule._minuteRules,
+                secondRules = rule._secondRules,
+                hourRule, minuteRule, secondRule,
+                ruleChanged,
+                modified;
 
-            if (!hourRule) {
-                date.setHours(0); //TODO: DST CHECK
-                date.setDate(date.getDate() + 1);
+            while (+date < +end) {
+                modified = false;
 
-                rule._hourRules = rule.hours.slice(0);
-                hourRule = rule._hourRules.shift();
+                if (hourRules && allowTimeExpand(minuteRules, rule.minutes)) {
+                    hourRule = hourRules.shift();
+
+                    while (hourRule && hourRule < hours) {
+                        hourRule = rule._hourRules.shift();
+                    };
+
+                    if (!hourRule) {
+                        rule._hourRules = rule.hours.slice(0);
+                        hourRule = rule._hourRules.shift();
+
+                        date.setDate(date.getDate() + 1);
+                        date.setHours(0); //TODO: DST CHECK
+                    }
+
+                    if (minuteRules && hourRule !== hours) {
+                        date.setMinutes(0);
+                    }
+
+                    date.setHours(hourRule);
+                }
+
+                if (minuteRules && allowTimeExpand(secondRules, rule.seconds)) {
+                    minutes = date.getMinutes();
+                    minuteRule = minuteRules.shift();
+
+                    while (minuteRule && minuteRule < minutes) {
+                        minuteRule = rule._minuteRules.shift();
+                        ruleChanged = true;
+                    };
+
+                    if (!minuteRule) {
+                        if (!hourRule || ruleChanged) {
+                            date.setHours(date.getHours() + 1); //TODO: DST CHECK
+                            ruleChanged = false;
+                            modified = !!hourRule;
+                        }
+
+                        date.setMinutes(0);
+
+                        rule._minuteRules = rule.minutes.slice(0);
+                        minuteRule = rule._minuteRules.shift();
+                    }
+
+                    if (secondRules && minuteRule !== minutes) {
+                        date.setSeconds(0);
+                    }
+
+                    date.setMinutes(minuteRule);
+                }
+
+                if (secondRules) {
+                    seconds = date.getSeconds();
+                    secondRule = secondRules.shift();
+
+                    while (secondRule && secondRule < seconds) {
+                        secondRule = secondRules.shift();
+                        ruleChanged = true;
+                    };
+
+                    if (!secondRule) {
+                        if (!minuteRule || ruleChanged) {
+                            date.setMinutes(date.getMinutes() + 1); //TODO: DST CHECK
+                            ruleChanged = false;
+                            modified = !!minuteRule;
+                        }
+
+                        date.setSeconds(0);
+
+                        rule._secondRules = rule.seconds.slice(0);
+                        secondRule = rule._secondRules.shift();
+                    }
+
+                    date.setSeconds(secondRule);
+                }
+
+                if (!modified) {
+                    break;
+                }
             }
-
-            date.setHours(hourRule);
-
-            //check DST
-            /*if (date.getDate() !== hourRule) {
-
-            }*/
 
             return date;
         }
     };
+
+    function allowTimeExpand(currentRules, timeRules) {
+        return !currentRules || currentRules.length === 0 || currentRules.length === timeRules.length;
+    }
 
     function cloneEvent(event, start, durationMS) {
         var end = new Date(start.getTime() + durationMS);
