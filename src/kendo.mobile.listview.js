@@ -534,6 +534,10 @@ kendo_module({
                     footer.enable();
                 });
 
+                list.bind("endReached", function() {
+                    footer.disable();
+                });
+
                 kendo.onResize(function() {
                     scroller.reset();
 
@@ -551,10 +555,6 @@ kendo_module({
                         });
                         list._needsRefresh = false;
                     }
-                });
-
-                list.bind("endReached", function() {
-                    footer.disable();
                 });
 
                 buffer.bind('expand', function() {
