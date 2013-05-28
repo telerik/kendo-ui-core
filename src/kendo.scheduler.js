@@ -1604,7 +1604,13 @@ kendo_module({
             }
 
             freq.setup(rule, start, event.start);
-            start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
+
+            //TODO: if event.start is in the same day as start then set hour
+            start.setHours(event.start.getHours());
+            start.setMinutes(event.start.getMinutes());
+            start.setSeconds(event.start.getSeconds());
+            start.setMilliseconds(event.start.getMilliseconds());
+
             start = freq.limit(start, end, rule);
 
             while (+start <= end) {
@@ -1707,15 +1713,6 @@ kendo_module({
                         }
                     }
                     return date;
-                },
-
-                setDate: function(currentDate, eventDate) {
-                    currentDate = new Date(currentDate);
-                    currentDate.setHours(eventDate.getHours());
-                    currentDate.setMinutes(eventDate.getMinutes());
-                    currentDate.setSeconds(eventDate.getSeconds());
-                    currentDate.setMilliseconds(eventDate.getMilliseconds());
-                    return currentDate;
                 }
             },
             weekly: {
@@ -1779,18 +1776,7 @@ kendo_module({
                     }
 
                     return date;
-                },
-
-                setDate: function(currentDate, eventDate) {
-                    //same as DAILY.setDate
-                    currentDate = new Date(currentDate);
-                    currentDate.setHours(eventDate.getHours());
-                    currentDate.setMinutes(eventDate.getMinutes());
-                    currentDate.setSeconds(eventDate.getSeconds());
-                    currentDate.setMilliseconds(eventDate.getMilliseconds());
-                    return currentDate;
                 }
-
             },
             monthly: {
                 next: function(start, rule) {
@@ -1877,15 +1863,6 @@ kendo_module({
                     if (rule.seconds) {
                         rule._secondRules = rule.seconds.slice();
                     }
-                },
-                setDate: function(currentDate, eventDate) {
-                    //same as DAILY.setDate
-                    currentDate = new Date(currentDate);
-                    currentDate.setHours(eventDate.getHours());
-                    currentDate.setMinutes(eventDate.getMinutes());
-                    currentDate.setSeconds(eventDate.getSeconds());
-                    currentDate.setMilliseconds(eventDate.getMilliseconds());
-                    return currentDate;
                 }
             },
             yearly: {
@@ -1998,15 +1975,6 @@ kendo_module({
                     if (rule.seconds) {
                         rule._secondRules = rule.seconds.slice();
                     }
-                },
-                setDate: function(currentDate, eventDate) {
-                    //same as DAILY.setDate
-                    currentDate = new Date(currentDate);
-                    currentDate.setHours(eventDate.getHours());
-                    currentDate.setMinutes(eventDate.getMinutes());
-                    currentDate.setSeconds(eventDate.getSeconds());
-                    currentDate.setMilliseconds(eventDate.getMilliseconds());
-                    return currentDate;
                 }
             }
         },
