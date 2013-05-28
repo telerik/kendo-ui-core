@@ -758,7 +758,37 @@ kendo_module({
         frequency: {
             //TODO: FREQ: SECONDLY
             //TODO: FREQ: MINUTELY
-            //TODO: FREQ: HOURLY
+            hourly: {
+                next: function(start, rule) {
+                    //if (!rule.hours && !rule.minutes && !rule.seconds) {
+                        start = new Date(start);
+                        start.setHours(start.getHours() + rule.interval);
+                    //}
+                    return start;
+                },
+
+                setup: function(rule, start, eventStart) {
+                    /*
+                    if (rule.weekDays) {
+                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+
+                    if (rule.hours) {
+                        rule._hourRules = rule.hours.slice();
+                    }
+
+                    if (rule.minutes) {
+                        rule._minuteRules = rule.minutes.slice();
+                    }
+
+                    if (rule.seconds) {
+                        rule._secondRules = rule.seconds.slice();
+                    }*/
+                },
+                limit: function(date, end, rule) {
+                    return date;
+                }
+            },
             daily: {
                 next: function(start, rule) {
                     if (!rule.hours && !rule.minutes && !rule.seconds) {
@@ -769,8 +799,6 @@ kendo_module({
                 },
 
                 setup: function(rule, start, eventStart) {
-                    var currentHour = eventStart.getHours();
-
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
