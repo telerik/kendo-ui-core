@@ -760,10 +760,10 @@ kendo_module({
             //TODO: FREQ: MINUTELY
             hourly: {
                 next: function(start, rule) {
-                    //if (!rule.hours && !rule.minutes && !rule.seconds) {
+                    if (!rule.hours && !rule.minutes && !rule.seconds) {
                         start = new Date(start);
                         start.setHours(start.getHours() + rule.interval);
-                    //}
+                    }
                     return start;
                 },
 
@@ -1262,12 +1262,14 @@ kendo_module({
 
             return instance;
         },
+
         dayInYear: function(date) {
             var month = date.getMonth(),
             days = leapYear(date) ? daysInLeapYear[month] : daysInYear[month];
 
             return days + date.getDate();
         },
+
         weekInYear: function(date, weekStart){
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
             var year = date.getFullYear(),
@@ -1284,6 +1286,7 @@ kendo_module({
 
             return 1 + Math.floor(days / 7);
         },
+
         weekInMonth: function(date, weekStart) {
             var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 
@@ -1295,9 +1298,11 @@ kendo_module({
 
             return Math.floor((date.getDate() + firstWeekday - 1) / 7) + 1;
         },
+
         numberOfWeeks: function(date, weekStart) {
             return recurrence.weekInMonth(new Date(date.getFullYear(), date.getMonth() + 1, 0), weekStart);
         },
+
         isInWeek: function(date, offset, weekStart) {
             var weekInMonth = recurrence.weekInMonth(date, weekStart);
             if (offset > 0) {
@@ -1310,6 +1315,7 @@ kendo_module({
                 }
             }
         },
+
         weekDay: function(date, dayOfWeek, offset) {
             date = new Date(date);
             offset = offset || 1;
@@ -1320,6 +1326,7 @@ kendo_module({
 
             return date;
         },
+
         _month: function(date, end, rule) {
             var monthNumber = date.getMonth() + 1,
                 weekDays = rule.weekDays,
