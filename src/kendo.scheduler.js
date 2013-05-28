@@ -1658,13 +1658,13 @@ kendo_module({
                 },
 
                 limit: function(date, end, rule) {
-                    var dateMS = +date,
-                        monthDayMS, weekDayMS, month,
+                    var monthDayMS, weekDayMS, month, dateMS,
                         allow = allowExpand(rule);
 
                     end = +end;
 
                     while (+date <= end) {
+                        dateMS = +date;
                         if (rule.months && allow) {
                             date = recurrence._month(date, end, rule);
                             month = date.getMonth();
@@ -1820,24 +1820,26 @@ kendo_module({
                 next: function(start, rule) {
                     var day;
 
-                    if (rule.monthDays || rule.weekDays) {
-                        start.setDate(start.getDate() + 1);
-                    } else {
+                    if (!rule.monthDays && !rule.weekDays) {
                         day = start.getDate();
                         start.setMonth(start.getMonth() + 1);
 
                         while(start.getDate() !== day) {
                             start.setDate(day);
                         }
+                    } else if (!rule.hours && !rule.minutes && !rule.seconds) {
+                        start.setDate(start.getDate() + 1);
                     }
                     return start;
                 },
                 limit: function(date, end, rule) {
-                    var day, month;
+                    var day, month, dateMS,
+                        allow = allowExpand(rule);
 
                     end = +end;
                     while (+date <= end) {
-                        if (rule.months) {
+                        dateMS = +date;
+                        if (rule.months && allow) {
                             day = date.getDate();
                             date = recurrence._month(date, end, rule);
                             month = date.getMonth();
@@ -1847,12 +1849,27 @@ kendo_module({
                             }
                         }
 
-                        if (rule.monthDays) {
+                        if (rule.monthDays && allow) {
                             date = recurrence._monthDay(date, end, rule);
                         }
 
-                        if (rule.weekDays) {
+                        if (rule.weekDays && allow) {
                             date = recurrence._weekDay(date, end, rule);
+                        }
+
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+                            date = recurrence._time(date, end, rule);
                         }
 
                         if (month !== undefined && month !== date.getMonth()) {
@@ -1871,6 +1888,18 @@ kendo_module({
 
                     if (rule.weekDays && rule._weekDayRules === undefined) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+
+                    if (rule.hours) {
+                        rule._hourRules = rule.hours.slice();
+                    }
+
+                    if (rule.minutes) {
+                        rule._minuteRules = rule.minutes.slice();
+                    }
+
+                    if (rule.seconds) {
+                        rule._secondRules = rule.seconds.slice();
                     }
                 },
                 setDate: function(currentDate, eventDate) {
