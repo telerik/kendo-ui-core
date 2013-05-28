@@ -158,11 +158,11 @@ kendo_module({
             that.scale = 1;
 
             if (that.horizontal) {
-                that.measure = "width";
+                that.measure = "offsetWidth";
                 that.scrollSize = "scrollWidth";
                 that.axis = "x";
             } else {
-                that.measure = "height";
+                that.measure = "offsetHeight";
                 that.scrollSize = "scrollHeight";
                 that.axis = "y";
             }
@@ -194,7 +194,7 @@ kendo_module({
         },
 
         getSize: function() {
-            return this.container[this.measure]();
+            return this.container[0][this.measure];
         },
 
         getTotal: function() {
