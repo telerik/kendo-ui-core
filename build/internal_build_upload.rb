@@ -75,7 +75,7 @@ def upload_internal_build(options)
     bot.fill_in('File type:', 'Paid Files')
 
     unless options[:vs_extension]
-        bot.driver.execute_script "$telerik.$('[id$=\"_attachmentEdit_cbIsHotfix\"]').click()"
+        bot.driver.execute_script "$telerik.$('input[id$=\"_attachmentEdit_cbIsHotfix\"]').click()"
     else
         bot.find('#fileVersionField input').send_keys "#{VERSION}.0"
     end
