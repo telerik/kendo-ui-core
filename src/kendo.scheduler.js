@@ -780,7 +780,11 @@ kendo_module({
             that.popup.open();
         },
 
-        refresh: function() {
+        refresh: function(e) {
+            if (e && e.action === "itemchange" && this.editable) { // skip rebinding if editing is in progress
+                return;
+            }
+
             this._destroyEditable();
 
             this.view().renderEvents(this.dataSource.view());
@@ -956,10 +960,9 @@ kendo_module({
         },
 
         _footer: function() {
-            return;
             if (!this.footer) {
-                var html = '<div class="k-floatwrap k-header k-scheduler-footer">&nbsp;';
-                //'<ul class="k-reset k-header k-toolbar"></ul>';
+                var html = '<div class="k-header k-scheduler-footer">&nbsp;';
+                   // '<ul class="k-reset k-header k-toolbar"> <li>aaa</li></ul>';
 
                 //TODO: Toolbar command
 

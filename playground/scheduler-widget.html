@@ -12,13 +12,16 @@
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
@@ -84,10 +87,17 @@
             *{border-color:red !important;}
             */
 
+
         </style>
     </head>
     <body>
-            <div id="scheduler" style="overflow: hidden;" ></div>
+        <div id="scheduler" style="overflow: hidden;" ></div>
+
+        <script id="template" type="text/x-kendo-template">
+            Title: <input name="title"/> <br />
+            Start: <input name="start" data-role="datetimepicker"/><br />
+            End: <input name="end" data-role="datetimepicker"/><br />
+        </script>
     <script>
     //    $("#win").kendoWindow({
      //      visible: true
@@ -102,7 +112,7 @@
 
         $("#scheduler").kendoScheduler({
             editable: {
-                template: "#=title#"
+                template: kendo.template($("#template").html())
             },
             height: 800,
             // numberOfTimeSlots: 4,
