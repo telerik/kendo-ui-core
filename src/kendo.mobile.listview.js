@@ -77,8 +77,7 @@ kendo_module({
     }
 
     function putAt(element, top) {
-        // element.css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
-        element.css('top', top);
+        element.css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
     }
 
     var HeaderFixer = kendo.Class.extend({
