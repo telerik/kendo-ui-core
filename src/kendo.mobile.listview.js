@@ -280,17 +280,39 @@ kendo_module({
             return (this.footer ? this.footer.height : 0) + this.bottom + remainingItemsCount * averageItemHeight;
         },
 
+        shiftUp: function() {
+            this.offset --;
+
+            var items = this.items,
+                item = items.pop();
+
+            item.update(this.content(this.offset));
+            item.above(items[0]);
+            items.unshift(item);
+            this.top = item.top;
+            this.bottom = items[items.length - 1].bottom;
+        },
+
+        shiftDown: function() {
+            var items = this.items,
+                index = this.offset + this.itemCount,
+                item = items.shift();
+
+            item.update(this.content(index));
+            item.below(items[items.length - 1]);
+            items.push(item);
+            this.top = items[0].top;
+            this.bottom = item.bottom;
+
+            this.offset ++;
+        },
+
         update: function(top, force) {
             var list = this,
                 height = list.height(),
-                items = list.items,
-
                 initialOffset = list.offset,
-
                 itemCount = list.itemCount,
-
                 padding = height / 2,
-                item,
                 lastTop = this.lastTop || 0,
                 up = force ? this.lastDirection : lastTop > top,
 
@@ -309,14 +331,8 @@ kendo_module({
                             break;
                         }
 
-                        list.offset --;
-                        item = items.pop();
+                        this.shiftUp();
 
-                        item.update(list.content(list.offset));
-                        item.above(items[0]);
-                        items.unshift(item);
-                        list.top = item.top;
-                        list.bottom = items[items.length - 1].bottom;
                         shiftCounter ++;
                     }
                }
@@ -334,15 +350,8 @@ kendo_module({
                             break;
                         }
 
-                        item = items.shift();
+                        this.shiftDown();
 
-                        item.update(list.content(nextIndex));
-                        item.below(items[items.length - 1]);
-                        items.push(item);
-                        list.top = items[0].top;
-                        list.bottom = item.bottom;
-
-                        list.offset ++;
                         shiftCounter ++;
                     }
                 }
