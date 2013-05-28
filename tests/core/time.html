@@ -75,6 +75,73 @@
                 equal(kendo.timezone.offset(date, "Pacific/Apia"), -840);
             });
 
+            test("offset detects new DST rules for America/Chicago", function() {
+                function testDst(dates) {
+                    var expected = [360, 300, 300, 360];
+
+                    for (var idx = 0; idx < dates.length; idx++) {
+                        equal(kendo.timezone.offset(new Date(dates[idx]), "America/Chicago"), expected[idx]);
+                    }
+                }
+
+                testDst(["2004/04/04 00:00", "2004/04/05 00:00", "2004/10/31 00:00", "2004/11/01 00:00"]);
+                testDst(["2005/04/03 00:00", "2005/04/04 00:00", "2005/10/30 00:00", "2005/10/31 00:00"]);
+                testDst(["2006/04/02 00:00", "2006/04/03 00:00", "2006/10/29 00:00", "2006/10/30 00:00"]);
+
+                testDst(["2007/03/11 00:00", "2007/03/12 00:00", "2007/11/04 00:00", "2007/11/05 00:00"]);
+                testDst(["2008/03/09 00:00", "2008/03/10 00:00", "2008/11/02 00:00", "2008/11/03 00:00"]);
+                testDst(["2009/03/08 00:00", "2009/03/09 00:00", "2009/11/01 00:00", "2009/11/02 00:00"]);
+                testDst(["2010/03/14 00:00", "2010/03/15 00:00", "2010/11/07 00:00", "2010/11/08 00:00"]);
+                testDst(["2011/03/13 00:00", "2011/03/14 00:00", "2011/11/06 00:00", "2011/11/07 00:00"]);
+            });
+
+            test("offset detects DST for America/Sao_Paulo", function () {
+                // http://www.timeanddate.com/worldclock/clockchange.html?n=233
+                // Standard: GMT-3 from Feb 16 - Nov 1
+                // Daylight: GMT-2 from Nov 2 - Feb 16
+
+                equal(kendo.timezone.offset(new Date("2008/02/17 00:00"), "America/Sao_Paulo"), 180);
+                equal(kendo.timezone.offset(new Date("2008/10/11 00:00"), "America/Sao_Paulo"), 180);
+                equal(kendo.timezone.offset(new Date("2008/10/19 00:00"), "America/Sao_Paulo"), 120);
+            });
+
+            test("offset detects DST for America/New_York", function () {
+                // http://www.timeanddate.com/worldclock/city.html?n=179
+
+                // 2006
+                equal(kendo.timezone.offset(new Date('2006/04/02 01:59:59'), 'America/New_York'),300);
+                equal(kendo.timezone.offset(new Date('2006/04/02 03:00:01'), 'America/New_York'),240);
+                equal(kendo.timezone.offset(new Date('2006/10/29 00:59:59'), 'America/New_York'),240);
+                equal(kendo.timezone.offset(new Date('2006/10/29 03:00:01'), 'America/New_York'),300);
+
+                // 2009
+                equal(kendo.timezone.offset(new Date('2009/03/08 01:59:59'), 'America/New_York'),300);
+                equal(kendo.timezone.offset(new Date('2009/03/08 03:00:01'), 'America/New_York'),240);
+                equal(kendo.timezone.offset(new Date('2009/11/01 00:59:59'), 'America/New_York'),240);
+                equal(kendo.timezone.offset(new Date('2009/11/01 03:00:01'), 'America/New_York'),300);
+            });
+
+            test("offset detects DST for Asia/Jerusalem", function () {
+                // http://www.timeanddate.com/worldclock/city.html?n=110
+
+                // 2008
+                equal(kendo.timezone.offset(new Date('2008/03/28 01:59:59'), 'Asia/Jerusalem'),-120);
+                equal(kendo.timezone.offset(new Date('2008/03/28 03:00:01'), 'Asia/Jerusalem'),-180);
+                equal(kendo.timezone.offset(new Date('2008/10/05 00:59:59'), 'Asia/Jerusalem'),-180);
+                equal(kendo.timezone.offset(new Date('2008/10/05 03:00:01'), 'Asia/Jerusalem'),-120);
+
+                // 2009
+                equal(kendo.timezone.offset(new Date('2009/03/27 01:59:59'), 'Asia/Jerusalem'),-120);
+                equal(kendo.timezone.offset(new Date('2009/03/27 03:00:01'), 'Asia/Jerusalem'),-180);
+                equal(kendo.timezone.offset(new Date('2009/09/27 00:59:59'), 'Asia/Jerusalem'),-180);
+                equal(kendo.timezone.offset(new Date('2009/09/27 03:00:01'), 'Asia/Jerusalem'),-120);
+            });
+
+            test("convert with fractional offset", function() {
+                // http://www.wolframalpha.com/input/?i=convert+1912%2F02%2F12+00%3A00+VET+to+GMT
+                equal(kendo.toString(kendo.timezone.convert(new Date(1912, 1, 12, 0, 0), "America/Caracas", "Etc/UTC"), "MMM dd yyyy HH:mm:ss"), "Feb 12 1912 04:27:40");
+            });
+
             test("convert changes the timezone from UTC to a timezone", function() {
                 var date = new Date(2013, 2, 27, 10, 0, 0);
 

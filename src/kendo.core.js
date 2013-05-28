@@ -3033,6 +3033,10 @@ function pad(number, digits, end) {
             if (!rules) {
                 var time = zone.split(":");
 
+                if (time.length < 2) {
+                    return 0;
+                }
+
                 return time[0] * 60 + Number(time[1]);
             }
 

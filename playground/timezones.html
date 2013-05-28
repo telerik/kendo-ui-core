@@ -8,15 +8,13 @@
         <script>
             var tz = timezoneJS.timezone;
             tz.loadingScheme = tz.loadingSchemes.MANUAL_LOAD;
-            tz.loadZoneJSONData('../build/timezones/timezones.json', true);
+            tz.loadZoneJSONData('timezones.json', true);
 
-            //var dt = new timezoneJS.Date(2006, 9, 29, 1, 59, 'America/Los_Angeles');
-            //alert(dt.getTimezoneOffset());
-            // Post-DST-leap
-//            var dt = new timezoneJS.Date(2006, 9, 29, 2, 0, 'America/Los_Angeles');
-            var dt = new timezoneJS.Date(2006, 9, 29, 2, 0, 'Africa/Algiers');
+            var dt = new timezoneJS.Date(1912, 1, 12, 'America/Caracas');
 
             alert(dt.getTimezoneOffset());
+
+            alert(dt.toString('MMM dd yyyy HH:mm:ss', 'Etc/UTC'));
         </script>
     </body>
 </html>
