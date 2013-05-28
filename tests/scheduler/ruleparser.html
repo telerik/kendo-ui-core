@@ -147,8 +147,8 @@
                 var rrule = parse("FREQ=MONTHLY;BYMONTHDAY=-1, -31, 3, 4");
 
                 equal(rrule.monthDays.length, 4);
-                equal(rrule.monthDays[0], -1);
-                equal(rrule.monthDays[1], -31);
+                equal(rrule.monthDays[0], -31);
+                equal(rrule.monthDays[1], -1);
                 equal(rrule.monthDays[2], 3);
                 equal(rrule.monthDays[3], 4);
             });
