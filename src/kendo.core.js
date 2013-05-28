@@ -3003,6 +3003,15 @@ function pad(number, digits, end) {
             var month = rule[3];
             var on = rule[4];
             var time = rule[5];
+            var cache = rule[8];
+
+            if (!cache) {
+                rule[8] = cache = {};
+            }
+
+            if (cache[year]) {
+                return cache[year];
+            }
 
             if (!isNaN(on)) {
                 date = new Date(Date.UTC(year, months[month], on, time[0], time[1], time[2], 0));
@@ -3022,7 +3031,7 @@ function pad(number, digits, end) {
                 date.setUTCDate(date.getUTCDate() + targetDay - ourDay + (targetDay < ourDay ? 7 : 0));
             }
 
-            return date;
+            return cache[year] = date;
         }
 
         function findRule(utcTime, rules, zone) {

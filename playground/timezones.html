@@ -2,6 +2,8 @@
 <html>
     <head>
         <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.timezones.js"></script>
         <script src="../build/timezone-js/src/date.js"></script>
     </head>
     <body>
@@ -10,11 +12,32 @@
             tz.loadingScheme = tz.loadingSchemes.MANUAL_LOAD;
             tz.loadZoneJSONData('timezones.json', true);
 
-            var dt = new timezoneJS.Date(1912, 1, 12, 'America/Caracas');
+            var start = Date.now() , yearToMillis = 5 * 365 * 24 * 3600 * 1000 , dates = [];
 
-            alert(dt.getTimezoneOffset());
+            for (var i = 0; i < 5000; i++) {
+                dates.push(start - Math.random() * yearToMillis);
+            }
 
-            alert(dt.toString('MMM dd yyyy HH:mm:ss', 'Etc/UTC'));
+            /*
+            for (var i = 0; i < 5000; i++) {
+                date = new timezoneJS.Date(dates[i], 'America/New_York');
+                date.setTimezone('Europe/Minsk');
+
+            }
+
+            console.log('Took ' + (Date.now() - start) + 'ms to convert 5000 dates');
+
+            start = Date.now();
+            */
+
+            console.profile("Timezone conversion");
+
+            for (i = 0; i < 5000; i++) {
+                kendo.timezone.convert(new Date(dates[i]), 'America/New_York', 'Europe/Minsk');
+            }
+
+            console.profileEnd();
+
         </script>
     </body>
 </html>
