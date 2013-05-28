@@ -24,6 +24,8 @@ kendo_module({
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
+        VELOCITY_MULTIPLIER = 16,
+        MAX_VELOCITY = 60,
         OUT_OF_BOUNDS_FRICTION = 0.5,
         RELEASECLASS = "km-scroller-release",
         REFRESHCLASS = "km-scroller-refresh",
@@ -110,7 +112,7 @@ kendo_module({
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = e.touch[that.axis].velocity * 16;
+                that.velocity = Math.max(Math.min(e.touch[that.axis].velocity * VELOCITY_MULTIPLIER, MAX_VELOCITY), -MAX_VELOCITY);
                 if (that.velocity) {
                     that.tapCapture.captureNext();
                     Animation.fn.start.call(that);
@@ -322,7 +324,7 @@ kendo_module({
         },
 
         height: function() {
-            return this.element.height();
+            return this.dimensions.y.size;
         },
 
         scrollHeight: function() {
