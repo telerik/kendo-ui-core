@@ -1598,17 +1598,12 @@ kendo_module({
                 end = new Date(rule.until);
             }
 
-            //rule._currentPos = 1;
-
             freq.setup(rule, start, event.start);
             start = freq.setDate(start, event.start); //FURTHER tests are required. DST and etc
             start = freq.limit(start, end, rule);
 
             while (+start <= end) {
-                //if (freq.position(rule)) {
-                    events.push(cloneEvent(event, start, durationMS));
-                //}
-
+                events.push(cloneEvent(event, start, durationMS));
                 if (count && count === current) {
                     break;
                 }
@@ -1617,8 +1612,10 @@ kendo_module({
 
                 start = freq.next(start, rule);
                 start = freq.limit(start, end, rule);
+            }
 
-                //rule._currentPos += 1;
+            if (rule.setPositions) {
+                events = eventsByPosition(events, rule.setPositions);
             }
 
             return events;
@@ -1707,10 +1704,6 @@ kendo_module({
                     return date;
                 },
 
-                /*position: function() {
-                    return true;
-                },*/
-
                 setDate: function(currentDate, eventDate) {
                     currentDate = new Date(currentDate);
                     currentDate.setHours(eventDate.getHours());
@@ -1751,10 +1744,6 @@ kendo_module({
                     if (rule.seconds) {
                         rule._secondRules = rule.seconds.slice();
                     }
-
-                   // if (rule._setPositions === undefined) {
-                   //     rule._setPositions = rule.setPositions.slice(0);
-                   // }
                 },
 
                 limit: function(date, end, rule) {
@@ -1786,24 +1775,6 @@ kendo_module({
 
                     return date;
                 },
-
-                /*position: function(rule) {
-                    var setPositions = rule._setPositions,
-                        position;
-
-                    if (setPositions) {
-                        position = setPositions.shift();
-                        if (!position) {
-                            rule._setPositions = setPositions = rule.setPositions.slice(0);
-                            position = setPositions.shift(0);
-
-                        }
-
-                        return rule._currentPos === position;
-                    }
-
-                    return true;
-                },*/
 
                 setDate: function(currentDate, eventDate) {
                     //same as DAILY.setDate
@@ -2112,6 +2083,7 @@ kendo_module({
                         instance.weekDays = weekDays = parseWeekDayList(value);
                         break;
                     case "BYSETPOS":
+                        //TODO: rename to positions
                         instance.setPositions = parseArray(value, { start: 1, end: 366 });
                         break;
                     case "BYWEEKNO":
@@ -2402,6 +2374,22 @@ kendo_module({
            end: end,
            uid: "" //generate uid ???
         });
+    }
+
+    function eventsByPosition(events, positions) {
+        var result = [],
+            length = positions.length,
+            idx = 0, event;
+
+        for (;idx < length; idx++) {
+            event = events[positions[idx] - 1];
+
+            if (event) {
+                result.push(event);
+            }
+        }
+
+        return result;
     }
 
     function parseArray(list, range) {
