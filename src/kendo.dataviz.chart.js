@@ -1185,6 +1185,129 @@ kendo_module({
     });
     PlotAreaFactory.current = new PlotAreaFactory();
 
+    var SeriesBinder = Class.extend({
+        init: function() {
+            this._valueFields = {};
+            this._otherFields = {};
+        },
+
+        register: function(seriesTypes, valueFields, otherFields) {
+            var i, type;
+
+            for (i = 0; i < seriesTypes.length; i++) {
+                type = seriesTypes[i];
+
+                this._valueFields[type] = valueFields;
+                this._otherFields[type] = otherFields;
+            }
+        },
+
+        valueFields: function(series) {
+            return this._valueFields[series.type] || [VALUE];
+        },
+
+        bindPoint: function(series, pointIx) {
+            var binder = this,
+                pointData = series.data[pointIx],
+                fieldData,
+                fields = {},
+                srcValueFields,
+                srcPointFields,
+                valueFields = binder.valueFields(series),
+                otherFields = binder._otherFields[series.type],
+                value,
+                result = { value: pointData };
+
+            if (defined(pointData)) {
+                if (isArray(pointData)) {
+                    fieldData = pointData.slice(valueFields.length);
+                    value = binder._bindFromArray(pointData, valueFields);
+                    fields = binder._bindFromArray(fieldData, otherFields);
+                } else if (typeof pointData === "object") {
+                    srcValueFields = binder._mapSeriesFields(series, valueFields);
+                    srcPointFields = binder._mapSeriesFields(series, otherFields);
+
+                    value = binder._bindFromObject(pointData, valueFields, srcValueFields);
+                    fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
+                }
+            } else {
+                value = binder._bindFromObject({}, valueFields);
+            }
+
+            if (defined(value)) {
+                if (valueFields.length === 1) {
+                    value = value[valueFields[0]];
+                }
+
+                result.value = value;
+            }
+
+            result.fields = fields;
+
+            return result;
+        },
+
+        _bindFromArray: function(array, fields) {
+            var value = {},
+                i,
+                length;
+
+            if (fields) {
+                length = math.min(fields.length, array.length);
+
+                for (i = 0; i < length; i++) {
+                    value[fields[i]] = array[i];
+                }
+            }
+
+            return value;
+        },
+
+        _bindFromObject: function(object, fields, srcFields) {
+            var value = {},
+                i,
+                length,
+                fieldName,
+                srcFieldName;
+
+            if (fields) {
+                length = fields.length;
+                srcFields = srcFields || fields;
+
+                for (i = 0; i < length; i++) {
+                    fieldName = fields[i];
+                    srcFieldName = srcFields[i];
+                    value[fieldName] = getField(srcFieldName, object);
+                }
+            }
+
+            return value;
+        },
+
+        _mapSeriesFields: function(series, fields) {
+            var i,
+                length,
+                fieldName,
+                sourceFields,
+                sourceFieldName;
+
+            if (fields) {
+                length = fields.length;
+                sourceFields = [];
+
+                for (i = 0; i < length; i++) {
+                    fieldName = fields[i];
+                    sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
+
+                    sourceFields.push(series[sourceFieldName] || fieldName);
+                }
+            }
+
+            return sourceFields;
+        }
+    });
+    SeriesBinder.current = new SeriesBinder();
+
     var BarLabel = ChartElement.extend({
         init: function(content, options) {
             var barLabel = this;
@@ -9542,6 +9665,7 @@ kendo_module({
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,
+        SeriesBinder: SeriesBinder,
         ShapeElement: ShapeElement,
         StackLayout: StackLayout,
         Tooltip: Tooltip,
