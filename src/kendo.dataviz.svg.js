@@ -447,7 +447,7 @@ kendo_module({
 
             for (i = 0; i < points.length; i++) {
                 result.push(line._print(
-                    points[i].rotate(rCenter, rAmount)
+                    points[i].clone().rotate(rCenter, rAmount)
                 ));
             }
 

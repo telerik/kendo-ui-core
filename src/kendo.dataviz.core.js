@@ -2801,10 +2801,10 @@ kendo_module({
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEG_TO_RAD;
 
-        return {
-            x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
-            y: cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
-        };
+        return new Point2D(
+            cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
+            cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
+        );
     }
 
     function boxDiff(r, s) {
