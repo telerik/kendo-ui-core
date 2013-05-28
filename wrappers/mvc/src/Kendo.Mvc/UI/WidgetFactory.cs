@@ -1068,6 +1068,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new MobileTabStripBuilder(new MobileTabStrip(ViewContext, Initializer, UrlGenerator));
         }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileView()
+        ///             .Name("MobileView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileViewBuilder MobileView()
+        {
+            return new MobileViewBuilder(new MobileView(ViewContext, Initializer, UrlGenerator));
+        }
         //<< MobileComponents
     }
 
