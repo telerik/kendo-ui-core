@@ -783,9 +783,33 @@ kendo_module({
 
                     if (rule.seconds) {
                         rule._secondRules = rule.seconds.slice();
-                    }*/
+                    }
                 },
                 limit: function(date, end, rule) {
+                    var dateMS;
+                    while (+date <= end) {
+                        dateMS = +date;
+
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+                            date = recurrence._time(date, end, rule);
+                        }
+
+                        if (+date <= +end) {
+                            break;
+                        }
+                    }
+
                     return date;
                 }
             },
@@ -885,6 +909,7 @@ kendo_module({
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
+                    */
 
                     if (rule.hours) {
                         rule._hourRules = rule.hours.slice();
@@ -1389,7 +1414,7 @@ kendo_module({
                 ruleChanged,
                 modified;
 
-            while (+date < +end) {
+            while (+date <= +end) {
                 modified = false;
 
                 if (hourRules && allowTimeExpand(minuteRules, rule.minutes)) {
