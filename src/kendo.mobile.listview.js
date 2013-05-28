@@ -77,7 +77,7 @@ kendo_module({
     }
 
     function putAt(element, top) {
-        element.css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
+        $(element).css('transform', 'translate3d(0px, ' + top + 'px, 0px)');
     }
 
     var HeaderFixer = kendo.Class.extend({
@@ -382,7 +382,7 @@ kendo_module({
         },
 
         update: function(dataItem) {
-            this.element = this.listView.setDataItem(this.element, [dataItem]);
+            this.element = this.listView.setDataItem(this.element, dataItem);
             this.height = this.element.offsetHeight;
             this.bottom = this.top + this.height;
             putAt(this.element, this.top);
@@ -915,13 +915,14 @@ kendo_module({
 
         // item is a DOM element, not jQuery object.
         setDataItem: function(item, dataItem) {
-            var listView = this;
+            var listView = this,
+                replaceItem = function(items) {
+                    var newItem = $(items[0]);
+                    $(item).replaceWith(newItem);
+                    listView.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
+                };
 
-            return $(this._renderItems([dataItem], function(items) {
-                var newItem = $(items[0]);
-                $(item).replaceWith(newItem);
-                listView.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
-            })[0]);
+            return this._renderItems([dataItem], replaceItem)[0];
         },
 
         _insert: function(dataItems, method) {
