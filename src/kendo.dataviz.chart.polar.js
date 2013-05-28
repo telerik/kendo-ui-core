@@ -35,12 +35,10 @@ kendo_module({
         ScatterLineChart = dataviz.ScatterLineChart,
         SeriesBinder = dataviz.SeriesBinder,
         append = dataviz.append,
-        defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
         filterSeriesByType = dataviz.filterSeriesByType,
         limitValue = dataviz.limitValue,
-        round = dataviz.round,
-        singleItemOrArray = dataviz.singleItemOrArray;
+        round = dataviz.round;
 
     // Constants ==============================================================
     var
@@ -50,7 +48,6 @@ kendo_module({
         RADAR_AREA = "radarArea",
         RADAR_COLUMN = "radarColumn",
         RADAR_LINE = "radarLine",
-        PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
         POLAR_LINE = "polarLine",
         POLAR_SCATTER = "polarScatter",
@@ -601,9 +598,8 @@ kendo_module({
             );
         },
 
-        getValue: function(point) {
-            // TODO: Implement
-        },
+        // TODO: Implement
+        // getValue: function(point) { },
 
         labelsCount: NumericAxis.fn.labelsCount,
         createAxisLabel: NumericAxis.fn.createAxisLabel
@@ -973,8 +969,10 @@ kendo_module({
 
         seriesCategoryAxis: function() {
             return this.categoryAxis;
-        },
+        }
 
+        // TODO: Implement
+        /*
         click: function(chart, e) {
             var plotArea = this,
                 coords = chart._eventCoordinates(e),
@@ -984,7 +982,6 @@ kendo_module({
 
             category = plotArea.categoryAxis.getCategory(point);
 
-            // TODO: Test
             if (defined(category) && defined(value)) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
@@ -993,6 +990,7 @@ kendo_module({
                 });
             }
         }
+       */
     });
 
     // TODO: Inherit / mixin from RadarPlotArea
@@ -1155,11 +1153,10 @@ kendo_module({
                 areaChart = new PolarAreaChart(plotArea, { series: series });
 
             plotArea.appendChart(areaChart, pane);
-        },
-
-        click: function(chart, e) {
-            // TODO: Implement
         }
+
+        // TODO: Implement
+        // click: function(chart, e) { }
     });
 
     // Helpers ================================================================
