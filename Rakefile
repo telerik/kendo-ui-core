@@ -3,6 +3,8 @@ require 'rake/testtask'
 
 require 'bundler/setup'
 require 'tempfile'
+require 'erb'
+require 'json'
 
 VERBOSE = verbose == true
 
@@ -26,6 +28,7 @@ end
 ADMIN_PASS = 'ultra'
 
 require 'version'
+require 'timezone'
 require 'zip'
 require 'js'
 require 'css'

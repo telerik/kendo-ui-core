@@ -74,6 +74,7 @@ var tests = [
     "core/dispatch.html",
     "core/destroy.html",
     "core/observable.html",
+    "core/time.html",
     "core/widget.html",
     "core/animation.html",
     "core/wrap.html",
