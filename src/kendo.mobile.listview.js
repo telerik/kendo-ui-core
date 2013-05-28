@@ -369,8 +369,8 @@ kendo_module({
 
     var VirtualListViewItem = kendo.Class.extend({
         init: function(listView, dataItem) {
-            var element = listView.append([dataItem]),
-                height = element.outerHeight(true);
+            var element = listView.append([dataItem])[0],
+                height = element.offsetHeight;
 
             $.extend(this, {
                 top: 0,
@@ -382,8 +382,8 @@ kendo_module({
         },
 
         update: function(dataItem) {
-            this.element = this.listView.setDataItem(this.element, dataItem);
-            this.height = this.element.outerHeight(true);
+            this.element = this.listView.setDataItem(this.element, [dataItem]);
+            this.height = this.element.offsetHeight;
             this.bottom = this.top + this.height;
             putAt(this.element, this.top);
         },
@@ -913,13 +913,13 @@ kendo_module({
             return this.element.find(selectors.join(","));
         },
 
+        // item is a DOM element, not jQuery object.
         setDataItem: function(item, dataItem) {
             var listView = this;
 
             return $(this._renderItems([dataItem], function(items) {
                 var newItem = $(items[0]);
                 $(item).replaceWith(newItem);
-
                 listView.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
             })[0]);
         },
@@ -932,24 +932,10 @@ kendo_module({
         },
 
         _renderItems: function(dataItems, callback) {
-            var items,
-                singleItem = dataItems.length === 1,
-                uid = dataItems[0].uid;
-
-            if (singleItem && this._itemsCache[uid]) {
-                items = this._itemsCache[uid];
-                callback(items);
-            } else {
-                items = $(kendo.render(this.template, dataItems));
-                callback(items);
-                this._enhanceItems(items);
-                mobile.init(items);
-            }
-
-
-            if (singleItem) {
-                this._itemsCache[uid] = items;
-            }
+            var items = $(kendo.render(this.template, dataItems));
+            callback(items);
+            this._enhanceItems(items);
+            mobile.init(items);
 
             return items;
         },
