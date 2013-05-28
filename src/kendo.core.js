@@ -3025,20 +3025,21 @@ function pad(number, digits, end) {
             return date;
         }
 
-        function ruleOffset(utcTime, allRules, zone) {
-            var year = new Date(utcTime).getUTCFullYear();
-
-            var rules = allRules[zone];
+        function findRule(utcTime, rules, zone) {
+            rules = rules[zone];
 
             if (!rules) {
                 var time = zone.split(":");
+                var offset = 0;
 
-                if (time.length < 2) {
-                    return 0;
+                if (time.length > 1) {
+                    offset = time[0] * 60 + Number(time[1]);
                 }
 
-                return time[0] * 60 + Number(time[1]);
+                return [-1000000, 'max', '-', 'Jan', 1, [0, 0, 0], offset, '-'];
             }
+
+            var year = new Date(utcTime).getUTCFullYear();
 
             rules = jQuery.grep(rules, function(rule) {
                 var from = rule[0];
@@ -3061,26 +3062,14 @@ function pad(number, digits, end) {
                 return a - b;
             });
 
-            var rule = rules[jQuery.inArray(utcTime, rules) - 1];
-
-            return rule ? rule[6] : 0;
+            return rules[jQuery.inArray(utcTime, rules) - 1];
         }
 
-        function offset(utcTime, timezone) {
-            if (timezone == "Etc/UTC" || timezone == "Etc/GMT") {
-                return 0;
-            }
-
-            var zones = this.zones[timezone];
+        function findZone(utcTime, zones, timezone) {
+            zones = zones[timezone];
 
             if (!zones) {
                 throw new Error('Timezone "' + timezone + '" is either incorrect, or kendo.timezones.min.js is not included.');
-            }
-
-            if (typeof utcTime != NUMBER) {
-                utcTime = Date.UTC(utcTime.getFullYear(), utcTime.getMonth(),
-                    utcTime.getDate(), utcTime.getHours(), utcTime.getMinutes(),
-                    utcTime.getSeconds(), utcTime.getMilliseconds());
             }
 
             for (var idx = zones.length - 1; idx >= 0; idx--) {
@@ -3097,7 +3086,50 @@ function pad(number, digits, end) {
                 throw new Error('Timezone "' + timezone + '" not found on ' + utcTime + ".");
             }
 
-            return zone[0] - ruleOffset(utcTime, this.rules, zone[1]);
+            return zone;
+        }
+
+        function zoneAndRule(utcTime, zones, rules, timezone) {
+            if (typeof utcTime != NUMBER) {
+                utcTime = Date.UTC(utcTime.getFullYear(), utcTime.getMonth(),
+                    utcTime.getDate(), utcTime.getHours(), utcTime.getMinutes(),
+                    utcTime.getSeconds(), utcTime.getMilliseconds());
+            }
+
+            var zone = findZone(utcTime, zones, timezone);
+
+            return {
+                zone: zone,
+                rule: findRule(utcTime, rules, zone[1])
+            };
+        }
+
+        function offset(utcTime, timezone) {
+            if (timezone == "Etc/UTC" || timezone == "Etc/GMT") {
+                return 0;
+            }
+
+            var info = zoneAndRule(utcTime, this.zones, this.rules, timezone);
+            var zone = info.zone;
+            var rule = info.rule;
+
+            return rule? zone[0] - rule[6] : zone[0];
+        }
+
+        function abbr(utcTime, timezone) {
+            var info = zoneAndRule(utcTime, this.zones, this.rules, timezone);
+            var zone = info.zone;
+            var rule = info.rule;
+
+            var base = zone[2];
+
+            if (base.indexOf("/") >= 0) {
+                return base.split("/")[rule && rule[6] ? 1 : 0];
+            } else if (base.indexOf("%s") >= 0) {
+                return base.replace("%s", (!rule || rule[7] == "-") ? '' : rule[7]);
+            }
+
+            return base;
         }
 
         function convert(date, from, to) {
@@ -3123,7 +3155,8 @@ function pad(number, digits, end) {
            zones: {},
            rules: {},
            offset: offset,
-           convert: convert
+           convert: convert,
+           abbr: abbr
         };
     })();
 })(jQuery, eval);

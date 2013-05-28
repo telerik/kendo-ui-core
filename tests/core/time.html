@@ -172,6 +172,21 @@
                 equal(kendo.toString(kendo.timezone.convert(date, "Europe/Sofia"), "MMM dd yyyy HH:mm:ss"), "Mar 27 2013 12:00:00");
             });
 
+            test("abbr returs CET for central EU time", function() {
+                equal(kendo.timezone.abbr(new Date(2010, 0, 1), "Europe/Berlin"), "CET");
+            });
+
+            test("abbr returs CEST for central EU summer time", function() {
+                equal(kendo.timezone.abbr(new Date(2010, 6, 1), "Europe/Berlin"), "CEST");
+            });
+
+            test("abbr returns GMT for London", function () {
+                equal(kendo.timezone.abbr(new Date(2010, 0, 1), "Europe/London"), "GMT");
+            });
+
+            test("abbr returns BST for summer time in London", function () {
+                equal(kendo.timezone.abbr(new Date(2010, 6, 1), "Europe/London"), "BST");
+            });
         </script>
     </body>
 </html>
