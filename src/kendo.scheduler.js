@@ -127,14 +127,6 @@ kendo_module({
         return staticDate;
     }
 
-    function dst() {
-        var today = new Date(),
-            midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
-            noon = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0, 0);
-
-        return -1 * (midnight.getTimezoneOffset() - noon.getTimezoneOffset());
-    }
-
     function getMilliseconds(date) {
         return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
@@ -973,6 +965,7 @@ kendo_module({
                 header = $('<div class="k-scheduler-header-wrap"/>');
 
                 $('<div class="k-scheduler-header k-state-default"/>')
+//                    .css("padding-right", scrollbar)
                     .append(header)
                     .appendTo(that.element);
             } else {
@@ -1204,6 +1197,16 @@ kendo_module({
             }
         },
 
+        _setHeaderPadding: function() {
+            var scrollbar = !kendo.support.kineticScrollNeeded ? kendo.support.scrollbar() : 0,
+                content = this.content,
+                datesHeader = this.datesHeader;
+
+            if (content && content[0].offsetWidth - content[0].clientWidth > 0) {
+                datesHeader.css("padding-right", scrollbar);
+            }
+        },
+
         _render: function(dates) {
             dates = dates || [];
 
@@ -1223,6 +1226,8 @@ kendo_module({
             this._footer();
 
             this._setContentHeight();
+
+            this._setHeaderPadding();
         },
 
         nextDate: function() {

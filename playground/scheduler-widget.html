@@ -87,11 +87,12 @@
             *{border-color:red !important;}
             */
 
-
         </style>
     </head>
     <body>
-        <div id="scheduler" style="overflow: hidden;" ></div>
+        <div id="win">
+            <div id="scheduler"></div>
+        </div>
 
         <script id="template" type="text/x-kendo-template">
             Title: <input name="title"/> <br />
@@ -99,9 +100,12 @@
             End: <input name="end" data-role="datetimepicker"/><br />
         </script>
     <script>
-    //    $("#win").kendoWindow({
-     //      visible: true
-      //  });
+        /*$("#win").kendoWindow({
+            visible: true,
+            resize: function() {
+                $("#scheduler").kendoScheduler("refresh");
+            }
+        });*/
 
         var start = new Date();
         start.setHours(3);
@@ -111,7 +115,7 @@
         end.setHours(end.getHours() + 3);
 
         $("#scheduler").kendoScheduler({
-            editable: {
+            editable:{
                 template: kendo.template($("#template").html())
             },
             height: 800,
