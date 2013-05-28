@@ -33,6 +33,7 @@ kendo_module({
         Ring = dataviz.Ring,
         ScatterChart = dataviz.ScatterChart,
         ScatterLineChart = dataviz.ScatterLineChart,
+        SeriesBinder = dataviz.SeriesBinder,
         append = dataviz.append,
         defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
@@ -993,7 +994,6 @@ kendo_module({
             }
         }
     });
-    PlotAreaFactory.current.register(RadarPlotArea, RADAR_CHARTS, 20);
 
     // TODO: Inherit / mixin from RadarPlotArea
     var PolarPlotArea = PlotAreaBase.extend({
@@ -1161,7 +1161,6 @@ kendo_module({
             // TODO: Implement
         }
     });
-    PlotAreaFactory.current.register(PolarPlotArea, POLAR_CHARTS, 10);
 
     // Helpers ================================================================
     function xComparer(a, b) {
@@ -1169,6 +1168,12 @@ kendo_module({
     }
 
     // Exports ================================================================
+    PlotAreaFactory.current.register(PolarPlotArea, POLAR_CHARTS, 10);
+    PlotAreaFactory.current.register(RadarPlotArea, RADAR_CHARTS, 20);
+
+    SeriesBinder.current.register(POLAR_CHARTS, [X, Y], ["color"]);
+    SeriesBinder.current.register(RADAR_CHARTS, ["value"], ["color"]);
+
     deepExtend(dataviz, {
         PolarNumericAxis: PolarNumericAxis,
         PolarPlotArea: PolarPlotArea,

@@ -84,6 +84,7 @@ kendo_module({
         CIRCLE = "circle",
         CLICK_NS = "click" + NS,
         CLIP = dataviz.CLIP,
+        COLOR = "color",
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         CSS_PREFIX = "k-",
@@ -131,9 +132,6 @@ kendo_module({
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
-        POLAR_AREA = "polarArea",
-        POLAR_LINE = "polarLine",
-        POLAR_SCATTER = "polarScatter",
         POINTER = "pointer",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -182,14 +180,6 @@ kendo_module({
         ZOOM_START = "zoomStart",
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
-        // TODO: Remove after fixing valueFieldsBySeriesType
-        POLAR_CHARTS = [
-            POLAR_AREA, POLAR_LINE, POLAR_SCATTER
-        ],
-        // TODO: Remove after fixing valueFieldsBySeriesType
-        XY_CHARTS = [
-            SCATTER, SCATTER_LINE, BUBBLE
-        ],
         BASE_UNITS = [
             MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ];
@@ -1028,7 +1018,7 @@ kendo_module({
         },
 
         _isBindable: function(series) {
-            var valueFields = valueFieldsBySeriesType(series.type),
+            var valueFields = SeriesBinder.current.valueFields(series),
                 result = true,
                 field, i;
 
@@ -2942,7 +2932,6 @@ kendo_module({
                 series = options.series,
                 categories = chart.categoryAxis.options.categories || [],
                 count = categoriesCount(series),
-                bindableFields = chart.bindableFields(),
                 categoryIx,
                 seriesIx,
                 pointData,
@@ -2954,15 +2943,11 @@ kendo_module({
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentSeries = series[seriesIx];
                     currentCategory = categories[categoryIx];
-                    pointData = bindPoint(currentSeries, categoryIx, bindableFields);
+                    pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
 
                     callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
-        },
-
-        bindableFields: function() {
-            return [];
         },
 
         formatPointValue: function(point, format) {
@@ -3261,10 +3246,6 @@ kendo_module({
             }
 
             return categoryTotals;
-        },
-
-        bindableFields: function() {
-            return ["color"];
         }
     });
 
@@ -4131,10 +4112,6 @@ kendo_module({
 
             group.children = elements;
             return [group];
-        },
-
-        bindableFields: function() {
-            return ["color"];
         }
     });
     deepExtend(LineChart.fn, LineChartMixin);
@@ -4440,10 +4417,13 @@ kendo_module({
                 options = chart.options,
                 series = options.series,
                 seriesPoints = chart.seriesPoints,
-                bindableFields = chart.bindableFields(),
-                pointIx, seriesIx, currentSeries,
-                currentSeriesPoints, pointData,
-                value, fields;
+                pointIx,
+                seriesIx,
+                currentSeries,
+                currentSeriesPoints,
+                pointData,
+                value,
+                fields;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -4453,7 +4433,7 @@ kendo_module({
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = bindPoint(currentSeries, pointIx, bindableFields);
+                    pointData = SeriesBinder.current.bindPoint(currentSeries, pointIx);
                     value = pointData.value;
                     fields = pointData.fields;
 
@@ -4466,10 +4446,6 @@ kendo_module({
                    }, fields));
                 }
             }
-        },
-
-        bindableFields: function() {
-            return ["color"];
         },
 
         formatPointValue: function(point, format) {
@@ -4622,10 +4598,6 @@ kendo_module({
             }
 
             return max;
-        },
-
-        bindableFields: function() {
-            return ["color", "category", "visibleInLegend"];
         },
 
         getViewElements: function(view) {
@@ -4823,10 +4795,6 @@ kendo_module({
 
     var CandlestickChart = CategoricalChart.extend({
         options: {},
-
-        bindableFields: function() {
-            return ["color", "downColor"];
-        },
 
         reflowCategories: function(categorySlots) {
             var chart = this,
@@ -5028,10 +4996,6 @@ kendo_module({
     var OHLCChart = CandlestickChart.extend({
         pointType: function() {
             return OHLCPoint;
-        },
-
-        bindableFields: function() {
-            return ["color"];
         }
     });
 
@@ -5293,7 +5257,6 @@ kendo_module({
                 series = options.series,
                 seriesCount = series.length,
                 overlayId = uniqueId(),
-                bindableFields = chart.bindableFields(),
                 currentSeries, pointData, fields, seriesIx,
                 angle, data, anglePerValue, value, explode,
                 total, currentAngle, i, pointIx = 0;
@@ -5301,7 +5264,7 @@ kendo_module({
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
-                total = chart.pointsTotal(currentSeries, bindableFields);
+                total = chart.pointsTotal(currentSeries);
                 anglePerValue = 360 / total;
 
                 if (defined(currentSeries.startAngle)) {
@@ -5317,7 +5280,7 @@ kendo_module({
                 }
 
                 for (i = 0; i < data.length; i++) {
-                    pointData = bindPoint(currentSeries, i, bindableFields);
+                    pointData = SeriesBinder.current.bindPoint(currentSeries, i);
                     value = pointData.value;
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
@@ -5351,10 +5314,6 @@ kendo_module({
                 }
                 pointIx = 0;
             }
-        },
-
-        bindableFields: function() {
-            return ["category", "color", "explode", "visibleInLegend", "visible"];
         },
 
         evalSegmentOptions: function(options, value, fields) {
@@ -5428,14 +5387,14 @@ kendo_module({
             }
         },
 
-        pointsTotal: function(series, bindableFields) {
+        pointsTotal: function(series) {
             var data = series.data,
                 length = data.length,
                 sum = 0,
                 value, i, pointData;
 
             for (i = 0; i < length; i++) {
-                pointData = bindPoint(series, i, bindableFields);
+                pointData = SeriesBinder.current.bindPoint(series, i);
                 value = pointData.value;
                 if (value && pointData.fields.visible !== false) {
                     sum += value;
@@ -6944,7 +6903,7 @@ kendo_module({
 
                         for (i = 0; i < categoryIndicies.length; i++) {
                             categoryIx = categoryIndicies[i];
-                            pointData = bindPoint(currentSeries, categoryIx);
+                            pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
                             value = pointData.value;
 
                             if (defined(value)) {
@@ -7310,10 +7269,6 @@ kendo_module({
             }
         }
     });
-    PlotAreaFactory.current.register(CategoricalPlotArea, [
-        BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
-        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
-    ]);
 
     var AxisGroupRangeTracker = Class.extend({
         init: function() {
@@ -7507,7 +7462,7 @@ kendo_module({
                 currentSeries = series[seriesIx];
                 seriesAxisName = currentSeries[vertical ? "yAxis" : "xAxis"];
                 if ((seriesAxisName == axisOptions.name) || (axisIndex === 0 && !seriesAxisName)) {
-                    firstPointValue = bindPoint(currentSeries, 0).value;
+                    firstPointValue = SeriesBinder.current.bindPoint(currentSeries, 0).value;
                     typeSamples.push(firstPointValue[vertical ? "y" : "x"]);
 
                     break;
@@ -7605,9 +7560,6 @@ kendo_module({
             }
         }
     });
-    PlotAreaFactory.current.register(XYPlotArea, [
-            SCATTER, SCATTER_LINE, BUBBLE
-    ], 10);
 
     var PiePlotArea = PlotAreaBase.extend({
         render: function() {
@@ -8914,7 +8866,7 @@ kendo_module({
         }
 
         function execComposite(values, aggregate, series) {
-            var valueFields = valueFieldsBySeriesType(series.type),
+            var valueFields = SeriesBinder.current.valueFields(series),
                 valueFieldsCount = valueFields.length,
                 count = values.length,
                 i,
@@ -9288,122 +9240,6 @@ kendo_module({
         return diff;
     }
 
-    // TODO: Register dynamically
-    function valueFieldsBySeriesType(type) {
-        var result = [VALUE];
-
-        if (inArray(type, [CANDLESTICK, OHLC])){
-            result = ["open", "high", "low", "close"];
-        } else if (inArray(type, [BULLET, VERTICAL_BULLET])) {
-            result = ["current", "target"];
-        } else if (inArray(type, XY_CHARTS) || inArray(type, POLAR_CHARTS)) {
-            result = [X, Y];
-            if (type === BUBBLE) {
-                result.push("size");
-            }
-        }
-
-        return result;
-    }
-
-    function bindPoint(series, pointIx, pointFields) {
-        var pointData = series.data[pointIx],
-            fieldData,
-            fields = {},
-            srcValueFields,
-            srcPointFields,
-            valueFields = valueFieldsBySeriesType(series.type),
-            value,
-            result = { value: pointData };
-
-        if (defined(pointData)) {
-            if (isArray(pointData)) {
-                fieldData = pointData.slice(valueFields.length);
-                value = bindFromArray(pointData, valueFields);
-                fields = bindFromArray(fieldData, pointFields);
-            } else if (typeof pointData === "object") {
-                srcValueFields = mapSeriesFields(series, valueFields);
-                srcPointFields = mapSeriesFields(series, pointFields);
-
-                value = bindFromObject(pointData, valueFields, srcValueFields);
-                fields = bindFromObject(pointData, pointFields, srcPointFields);
-            }
-        } else {
-            value = bindFromObject({}, valueFields);
-        }
-
-        if (defined(value)) {
-            if (valueFields.length === 1) {
-                value = value[valueFields[0]];
-            }
-
-            result.value = value;
-        }
-
-        result.fields = fields;
-
-        return result;
-    }
-
-    function bindFromArray(array, fields) {
-        var value = {},
-            i,
-            length;
-
-        if (fields) {
-            length = math.min(fields.length, array.length);
-
-            for (i = 0; i < length; i++) {
-                value[fields[i]] = array[i];
-            }
-        }
-
-        return value;
-    }
-
-    function bindFromObject(object, fields, srcFields) {
-        var value = {},
-            i,
-            length,
-            fieldName,
-            srcFieldName;
-
-        if (fields) {
-            length = fields.length;
-            srcFields = srcFields || fields;
-
-            for (i = 0; i < length; i++) {
-                fieldName = fields[i];
-                srcFieldName = srcFields[i];
-                value[fieldName] = getField(srcFieldName, object);
-            }
-        }
-
-        return value;
-    }
-
-    function mapSeriesFields(series, fields) {
-        var i,
-            length,
-            fieldName,
-            sourceFields,
-            sourceFieldName;
-
-        if (fields) {
-            length = fields.length;
-            sourceFields = [];
-
-            for (i = 0; i < length; i++) {
-                fieldName = fields[i];
-                sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
-
-                sourceFields.push(series[sourceFieldName] || fieldName);
-            }
-        }
-
-        return sourceFields;
-    }
-
     function singleItemOrArray(array) {
         return array.length === 1 ? array[0] : array;
     }
@@ -9623,6 +9459,44 @@ kendo_module({
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
 
+    PlotAreaFactory.current.register(XYPlotArea, [
+        SCATTER, SCATTER_LINE, BUBBLE
+    ], 10);
+
+    PlotAreaFactory.current.register(CategoricalPlotArea, [
+        BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
+        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
+    ]);
+
+    SeriesBinder.current.register(
+        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        [VALUE], [COLOR]
+    );
+
+    SeriesBinder.current.register(
+        [SCATTER, SCATTER_LINE, BUBBLE],
+        [X, Y], [COLOR]
+    );
+
+    SeriesBinder.current.register(
+        [BUBBLE], [X, Y, "size"], [COLOR, CATEGORY]
+    );
+
+    SeriesBinder.current.register(
+        [CANDLESTICK, OHLC],
+        ["open", "high", "low", "close"], [COLOR, "downColor"]
+    );
+
+    SeriesBinder.current.register(
+        [BULLET, VERTICAL_BULLET],
+        ["current", "target"], [COLOR, CATEGORY, "visibleInLegend"]
+    );
+
+    SeriesBinder.current.register(
+        [PIE, DONUT],
+        [VALUE], [CATEGORY, COLOR, "explode", "visibleInLegend", "visible"]
+    );
+
     deepExtend(dataviz, {
         Aggregates: Aggregates,
         AreaChart: AreaChart,
@@ -9676,7 +9550,6 @@ kendo_module({
         addDuration: addDuration,
         axisGroupBox: axisGroupBox,
         validNumbers: validNumbers,
-        bindPoint: bindPoint,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,

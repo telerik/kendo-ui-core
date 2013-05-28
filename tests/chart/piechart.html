@@ -45,9 +45,10 @@
             }
 
             (function() {
-                var values = { data: [1, 2] },
+                var values = { type: "pie", data: [1, 2] },
                     dataValues = {
-                       data: [
+                        type: "pie",
+                        data: [
                            {
                                value: 1,
                                category: "A",
@@ -154,7 +155,7 @@
                 module("Pie Chart / Legend items", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        setupPieChart(plotArea, { series: [ { data: dataValues.data } ] });
+                        setupPieChart(plotArea, { series: [ { type: "pie", data: dataValues.data } ] });
                     }
                 });
 
@@ -180,13 +181,13 @@
                             visibleInLegend: false
                         }];
 
-                    setupPieChart(plotArea, { series: [ { data: data } ] });
+                    setupPieChart(plotArea, { series: [ { type: "pie", data: data } ] });
                     equal(pieChart.legendItems.length, 1);
                 });
 
                 test("set legend item name with template", function() {
                     setupPieChart(plotArea, {
-                        series: [ { data: dataValues.data, test: "test" } ],
+                        series: [ { type: "pie", data: dataValues.data, test: "test" } ],
                         legend: {
                             labels: {
                                 template: "#= series.test #"
@@ -196,6 +197,7 @@
 
                     equal(pieChart.legendItems[0].text, "test");
                     setupPieChart(plotArea, { series: [ {
+                        type: "pie",
                         data: dataValues.data,
                         legend: {
                             labels: {
