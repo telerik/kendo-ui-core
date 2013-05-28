@@ -386,11 +386,11 @@ kendo_module({
                 popup = that.popup,
                 anchor = popup.options.anchor,
                 anchorOffset = $(anchor).offset(),
-                arrowBorder = parseInt(that.arrow.css("borderWidth"), 10),
+                arrowBorder = parseInt(that.arrow.css("border-top-width"), 10),
                 elementOffset = $(popup.element).offset(),
                 cssClass = DIRCLASSES[popup.flipped ? REVERSE[position] : position],
                 offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2) - arrowBorder;
-
+                
            that.arrow
                .removeClass("k-callout-n k-callout-s k-callout-w k-callout-e")
                .addClass("k-callout-" + cssClass)
