@@ -1916,16 +1916,18 @@ kendo_module({
                 next: function(start, rule) {
                     var day;
 
-                    if (!rule.months && !rule.monthDays && !rule.weekDays && !rule.yearDays && !rule.weeks) {
-                        start.setFullYear(start.getFullYear() + 1);
-                    } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
-                        start.setDate(start.getDate() + 1);
-                    } else {
-                        day = start.getDate();
-                        start.setMonth(start.getMonth() + 1);
+                    if (!rule.hours && !rule.minutes && !rule.seconds) {
+                        if (!rule.months && !rule.monthDays && !rule.weekDays && !rule.yearDays && !rule.weeks) {
+                            start.setFullYear(start.getFullYear() + 1);
+                        } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
+                            start.setDate(start.getDate() + 1);
+                        } else {
+                            day = start.getDate();
+                            start.setMonth(start.getMonth() + 1);
 
-                        while(start.getDate() !== day) {
-                            start.setDate(day);
+                            while(start.getDate() !== day) {
+                                start.setDate(day);
+                            }
                         }
                     }
 
@@ -1933,12 +1935,18 @@ kendo_module({
                 },
 
                 limit: function(date, end, rule) {
-                    var day, month,
-                        weekStart = rule.weekStart;
+                    var day, month, dateMS,
+                        allow = allowExpand(rule),
+                        weekStart = rule.weekStart,
+                        modified;
 
                     end = +end;
+
                     while (+date <= end) {
-                        if (rule.months) {
+                        dateMS = +date;
+                        modified = false;
+
+                        if (allow && rule.months) {
                             day = date.getDate();
                             date = recurrence._month(date, end, rule);
                             month = date.getMonth();
@@ -1948,7 +1956,7 @@ kendo_module({
                             }
                         }
 
-                        if (rule.weeks && $.inArray(recurrence.weekInYear(date, weekStart), rule.weeks) === -1) { //TODO: Sort weeks
+                        if (allow && rule.weeks && $.inArray(recurrence.weekInYear(date, weekStart), rule.weeks) === -1) { //TODO: Sort weeks
                             while ((+date <= end) && $.inArray(recurrence.weekInYear(date, weekStart), rule.weeks) === -1) {
                                 date.setDate(date.getDate() + 7);
                             }
@@ -1957,23 +1965,41 @@ kendo_module({
                             date = recurrence.weekDay(date, weekStart, -1); //TODO: implement prevWeekDay
                         }
 
-                        if (rule.yearDays && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) { //TODO: Sort yearDays
+                        if (allow && rule.yearDays && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) { //TODO: Sort yearDays
                             while ((+date <= end) && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) {
                                 date.setDate(date.getDate() + 1);
                             }
                         }
 
-                        if (rule.monthDays) {
+                        if (allow && rule.monthDays) {
                             date = recurrence._monthDay(date, end, rule);
                         }
 
-                        if (rule.weekDays) {
+                        if (allow && rule.weekDays) {
                             date = recurrence._weekDay(date, end, rule);
+                        }
+
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+
+                            day = date.getDate();
+                            date = recurrence._time(date, end, rule);
+                            modified = day !== date.getDate();
                         }
 
                         if (month !== undefined && month !== date.getMonth()) {
                             date.setDate(date.getDate() + 1);
-                        } else if (+date <= end) {
+                        } else if (!modified && +date <= end) {
                             break;
                         }
                     }
@@ -1983,6 +2009,18 @@ kendo_module({
                 setup: function(rule, start) {
                     if (rule.weekDays && rule._weekDayRules === undefined) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+                    }
+
+                    if (rule.hours) {
+                        rule._hourRules = rule.hours.slice();
+                    }
+
+                    if (rule.minutes) {
+                        rule._minuteRules = rule.minutes.slice();
+                    }
+
+                    if (rule.seconds) {
+                        rule._secondRules = rule.seconds.slice();
                     }
                 },
                 setDate: function(currentDate, eventDate) {
