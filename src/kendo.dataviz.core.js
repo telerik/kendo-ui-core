@@ -39,7 +39,7 @@ kendo_module({
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
-        DEGREE = math.PI / 180,
+        DEG_TO_RAD = math.PI / 180,
         FADEIN = "fadeIn",
         FORMAT_REGEX = /\{\d+:?/,
         HEIGHT = "height",
@@ -82,6 +82,7 @@ kendo_module({
 
     // Geometric primitives ===================================================
 
+    // TODO: Rename to Point?
     var Point2D = function(x, y) {
         var point = this;
         if (!(point instanceof Point2D)) {
@@ -99,9 +100,13 @@ kendo_module({
             return new Point2D(point.x, point.y);
         },
 
+        equals: function(point) {
+            return point && point.x === this.x && point.y === this.y;
+        },
+
         rotate: function(center, degrees) {
             var point = this,
-                theta = degrees * DEGREE,
+                theta = degrees * DEG_TO_RAD,
                 cosT = math.cos(theta),
                 sinT = math.sin(theta),
                 cx = center.x,
@@ -121,6 +126,16 @@ kendo_module({
 
             return point;
         }
+    };
+
+    // Clock-wise, 0 points left
+    Point2D.onCircle = function(c, a, r) {
+        a *= DEG_TO_RAD;
+
+        return new Point2D(
+            c.x - r * math.cos(a),
+            c.y - r * math.sin(a)
+        );
     };
 
     var Box2D = function(x1, y1, x2, y2) {
@@ -156,6 +171,7 @@ kendo_module({
             return box;
         },
 
+        // TODO: Accept point!
         move: function(x, y) {
             var box = this,
                 height = box.height(),
@@ -274,10 +290,10 @@ kendo_module({
         center: function() {
             var box = this;
 
-            return {
-                x: box.x1 + box.width() / 2,
-                y: box.y1 + box.height() / 2
-            };
+            return new Point2D(
+                box.x1 + box.width() / 2,
+                box.y1 + box.height() / 2
+            );
         },
 
         containsPoint: function(point) {
@@ -321,10 +337,12 @@ kendo_module({
             return new Ring(r.c, r.ir, r.r, r.startAngle, r.angle);
         },
 
+        // TODO: Rename to median
         middle: function() {
             return this.startAngle + this.angle / 2;
         },
 
+        // TODO: Sounds like a getter
         radius: function(newRadius, innerRadius) {
             var that = this;
 
@@ -337,9 +355,10 @@ kendo_module({
             return that;
         },
 
+        // TODO: Remove and replace with Point2D.onCircle
         point: function(angle, innerRadius) {
             var ring = this,
-                radianAngle = angle * DEGREE,
+                radianAngle = angle * DEG_TO_RAD,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
                 radius = innerRadius ? ring.ir : ring.r,
@@ -347,6 +366,49 @@ kendo_module({
                 y = ring.c.y - (ay * radius);
 
             return new Point2D(x, y);
+        },
+
+        adjacentBox: function(distance, width, height) {
+            var sector = this.clone().expand(distance),
+                midAndle = sector.middle(),
+                midPoint = sector.point(midAndle),
+                hw = width / 2,
+                hh = height / 2,
+                x = midPoint.x - hw,
+                y = midPoint.y - hh,
+                sa = math.sin(midAndle * DEG_TO_RAD),
+                ca = math.cos(midAndle * DEG_TO_RAD);
+
+            if (math.abs(sa) < 0.9) {
+                x += hw * -ca / math.abs(ca);
+            }
+
+            if (math.abs(ca) < 0.9) {
+                y += hh * -sa / math.abs(sa);
+            }
+
+            return new Box2D(x, y, x + width, y + height);
+        },
+
+        containsPoint: function(p) {
+            var ring = this,
+                c = ring.c,
+                ir = ring.ir,
+                r = ring.r,
+                startAngle = ring.startAngle,
+                endAngle = ring.startAngle + ring.angle,
+                dx = p.x - c.x,
+                dy = p.y - c.y,
+                vector = new Point2D(dx, dy),
+                startPoint = ring.point(startAngle),
+                startVector = new Point2D(startPoint.x - c.x, startPoint.y - c.y),
+                endPoint = ring.point(endAngle),
+                endVector = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
+                dist = dx * dx + dy *dy;
+
+            return (startVector.equals(vector) || clockwise(startVector, vector)) &&
+                   !clockwise(endVector, vector) &&
+                   dist >= ir * ir && dist <= r * r;
         },
 
         getBBox: function() {
@@ -394,6 +456,7 @@ kendo_module({
         }
     });
 
+    // TODO: Remove, looks like an alias
     var Sector = Ring.extend({
         init: function(center, radius, startAngle, angle) {
             Ring.fn.init.call(this, center, 0, radius, startAngle, angle);
@@ -1031,6 +1094,7 @@ kendo_module({
             }
         },
 
+        // TODO: Redundant - labels are child elements
         destroy: function() {
             var axis = this,
                 labels = axis.labels,
@@ -1137,13 +1201,13 @@ kendo_module({
             return ticks;
         },
 
-        getViewElements: function(view) {
+        renderLine: function(view) {
             var axis = this,
                 options = axis.options,
                 line = options.line,
                 lineBox = axis.lineBox(),
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                lineOptions;
+                lineOptions,
+                elements = [];
 
             if (line.width > 0 && line.visible) {
                 lineOptions = {
@@ -1154,16 +1218,24 @@ kendo_module({
                     align: options._alignLines
                 };
 
-                childElements.push(view.createLine(
+                elements.push(view.createLine(
                     lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
                     lineOptions));
 
-                append(childElements, axis.renderTicks(view));
+                append(elements, axis.renderTicks(view));
             }
 
-            append(childElements, axis.renderPlotBands(view));
+            return elements;
+        },
 
-            return childElements;
+        getViewElements: function(view) {
+            var axis = this,
+                elements = ChartElement.fn.getViewElements.call(axis, view);
+
+            append(elements, axis.renderLine(view));
+            append(elements, axis.renderPlotBands(view));
+
+            return elements;
         },
 
         getActualTickSize: function () {
@@ -1320,7 +1392,7 @@ kendo_module({
             }
 
             axis.arrangeTitle();
-            axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
+            axis.arrangeLabels();
         },
 
         arrangeLabels: function() {
@@ -1561,7 +1633,7 @@ kendo_module({
             return math.floor(round(range / stepValue, COORD_PRECISION)) + 1;
         },
 
-        getTickPositions: function(stepValue) {
+        getTickPositions: function(unit, skipUnit) {
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
@@ -1570,16 +1642,24 @@ kendo_module({
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
-                step = stepValue * scale,
-                divisions = axis.getDivisions(stepValue),
+                step = unit * scale,
+                skipStep = 0,
+                divisions = axis.getDivisions(unit),
                 dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                 startEdge = dir === 1 ? 1 : 2,
                 pos = lineBox[(vertical ? Y : X) + startEdge],
                 positions = [],
                 i;
 
+            if (skipUnit) {
+                skipStep = skipUnit / unit;
+            }
+
             for (i = 0; i < divisions; i++) {
-                positions.push(round(pos, COORD_PRECISION));
+                if (i % skipStep !== 0) {
+                    positions.push(round(pos, COORD_PRECISION));
+                }
+
                 pos = pos + step * dir;
             }
 
@@ -2719,12 +2799,12 @@ kendo_module({
 
     // TODO: Replace with Point2D.rotate
     function rotatePoint(x, y, cx, cy, angle) {
-        var theta = angle * DEGREE;
+        var theta = angle * DEG_TO_RAD;
 
-        return {
-            x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
-            y: cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
-        };
+        return new Point2D(
+            cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
+            cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
+        );
     }
 
     function boxDiff(r, s) {
@@ -2864,6 +2944,13 @@ kendo_module({
         }
 
         return parent !== doc;
+    }
+
+    function clockwise(v1, v2) {
+        // True if v2 is clockwise of v1
+        // assuming angles grow in clock-wise direction
+        // (as in the pie and radar charts)
+        return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
     // Exports ================================================================

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bar Chart</title>
+        <title>Radar Chart</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
@@ -15,16 +16,131 @@
         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart"></div>
-        <div id="chart1"></div>
+        <div id="chart" style="width: 600px; height: 300px;"></div>
+        <div id="pie" style="width: 600px; height: 300px;"></div>
         <script>
             $(function() {
+                $("#___chart").kendoChart({
+                    seriesDefaults: {
+                        // TODO: Apply
+                        // TODO: Document for radarColumn series
+                        //gap: 0,
+                        //spacing: 0
+                    },
+                    series: [{
+                        type: "radarArea",
+                        //stack: true,
+                        data: [1, 2, 3, 4],
+                        //color: "red",
+                        //opacity: 0.5,
+                        markers: {
+                            //visible: false
+                        }
+                    }, {
+                        type: "radarArea",
+                        // TODO: Theme?
+                        opacity: 0.5,
+                        data: [2, 4, 13, null]
+                    }],
+                    categoryAxis: {
+                        //categories: ["Foo", "Bar", "Baz", "Boo"],
+                        majorGridLines: {
+                            // TODO: Document
+                            // visible: true
+                        }
+                        //justified: false,
+                        //reverse: true
+                        //startAngle: 90 // default
+                    },
+                    valueAxis: {
+                        majorGridLines: {
+                            // TODO: Default to "arc" for radarColumn charts?
+                            //type: "arc"
+                        },
+                        minorGridLines: {
+                            //type: "arc"
+                        },
+                        _plotBands: [{
+                            from: 4, to: 10,
+                            color: "red",
+                            opacity: 0.5
+                        }],
+                        minorUnit: 1
+                        // TODO: Support
+                        //reverse: true
+
+                        // TODO: Round to major unit
+                        // max: 9
+                    },
+                    plotArea: {
+                        background: "green",
+                        opacity: 0.1
+                    },
+                    // TODO: Implement
+                    transitions: false,
+                    tooltip: {
+                        visible: true
+                    }
+                });
+
                 $("#chart").kendoChart({
                     series: [{
-                        data: [1,2,3]
-                    },{
-                        data: [1,2,3]
-                    }]
+                        // polarArea
+                        // polarScatter
+                        // polarLine
+
+                        type: "polarLine",
+                        //stack: true,
+                        data: [[0, 10], [45, 20], [90, 30],
+                               [135, 40], [180, 50], [225, 60],
+                               [270, 70], [315, 80]
+                        ],
+                        //color: "red",
+                        //opacity: 0.5,
+                        markers: {
+                            //visible: false
+                        }
+                    }],
+                    // TODO: Use xAxis to avoid confusion?
+                    polarAxis: {
+                        // reverse: true,
+                        // startAngle: 180,
+                        // gridLines
+                        // plotBands
+                        labels: {
+                            margin: 5
+                        },
+                        plotBands: [{
+                            from: 60,
+                            to: 120,
+                            opacity: 0.5,
+                            color: "red"
+                        }]
+                    },
+                    valueAxis: {
+                        minorUnit: 5
+                    },
+                    plotArea: {
+                    },
+                    // TODO: Implement
+                    transitions: false,
+                    tooltip: {
+                        visible: true
+                    }
+                });
+
+                $("#pie").kendoChart({
+                    series: [{
+                        type: "pie",
+                        data: [1, 2, 3]
+                    }],
+                    plotArea: {
+                        background: "green",
+                        opacity: 0.1
+                    },
+                    tooltip: {
+                        visible: true
+                    }
                 });
             });
         </script>

@@ -565,64 +565,90 @@
             })();
 
             (function() {
-                var bindPoint = kendo.dataviz.bindPoint;
-                var series;
+                var binder,
+                    series;
 
                 // ------------------------------------------------------------
-                module("Data Binding / Helpers / bindPoint", {
+                module("Series Binder", {
                     setup: function() {
+                        binder = new dataviz.SeriesBinder();
+                        binder.register(["foo"]);
+
                         series = {};
                     }
                 });
 
                 test("sets value field from string", function() {
                     series.data = ["abc"];
-                    deepEqual(bindPoint(series, 0, ["value"]),
+                    deepEqual(binder.bindPoint(series, 0),
                         { value: "abc", fields: {} }
                     );
                 });
 
                 test("sets value field from number", function() {
                     series.data = [1];
-                    deepEqual(bindPoint(series, 0, ["value"]),
+                    deepEqual(binder.bindPoint(series, 0),
                         { value: 1, fields: {} }
                     );
                 });
 
                 test("sets value field from undefined", function() {
                     series.data = [undefined];
-                    series.type = "bar";
 
-                    deepEqual(bindPoint(series, 0, ["value"]),
+                    deepEqual(binder.bindPoint(series, 0),
                         { value: undefined, fields: {} }
                     );
                 });
 
                 test("sets value field from null", function() {
                     series.data = [null];
-                    series.type = "bar";
 
-                    deepEqual(bindPoint(series, 0),
+                    deepEqual(binder.bindPoint(series, 0),
                         { value: null, fields: {} }
                     );
                 });
 
-                test("binds array to multiple values", function() {
-                    series.data = [[1, 2]];
-                    series.type = "scatter";
+                test("binds value using field name", function() {
+                    series.field = "aValue";
+                    series.data = [{ aValue: 1 }];
+                    series.type = "foo";
 
-                    deepEqual(bindPoint(series, 0),
+                    deepEqual(binder.bindPoint(series, 0),
+                        { value: 1, fields: {} }
+                    );
+                });
+
+                test("binds array to multiple values", function() {
+                    binder.register(["bar"], ["x", "y"]);
+
+                    series.data = [[1, 2]];
+                    series.type = "bar";
+
+                    deepEqual(binder.bindPoint(series, 0),
                         { value: { x: 1, y: 2 }, fields: {} }
                     );
                 });
 
-                test("binds value to dataItem using field name", function() {
-                    series.field = "aValue";
-                    series.data = [{ aValue: 1 }];
-                    series.type = "pie";
+                test("binds other fields", function() {
+                    binder.register(["bar"], ["value"], ["color"]);
 
-                    deepEqual(bindPoint(series, 0),
-                        { value: 1, fields: {} }
+                    series.data = [{ value: 1, color: "red" }];
+                    series.type = "bar";
+
+                    deepEqual(binder.bindPoint(series, 0).fields,
+                        { color: "red" }
+                    );
+                });
+
+                test("binds other fields using field name", function() {
+                    binder.register(["bar"], ["value"], ["color"]);
+
+                    series.data = [{ value: 1, c: "red" }];
+                    series.type = "bar";
+                    series.colorField = "c";
+
+                    deepEqual(binder.bindPoint(series, 0).fields,
+                        { color: "red" }
                     );
                 });
             })();

@@ -171,6 +171,7 @@ kendo_module({
             );
         },
 
+        // TODO: Refactor to (p1, p2, options)
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
                 new SVGLine([new Point2D(x1, y1),
@@ -438,23 +439,23 @@ kendo_module({
         renderPoints: function() {
             var line = this,
                 points = line.points,
+                rotation = line.options.rotation,
+                rCenter = new Point2D(rotation[1], rotation[2]),
+                rAmount = -rotation[0],
                 i,
-                count = points.length,
-                rotate = function(point) {
-                    var rotation = line.options.rotation;
-                    return rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
-                },
-                result = "M" + line._print(rotate(points[0]));
+                result = [];
 
-            for (i = 1; i < count; i++) {
-                result += " " + line._print(rotate(points[i]));
+            for (i = 0; i < points.length; i++) {
+                result.push(line._print(
+                    points[i].clone().rotate(rCenter, rAmount)
+                ));
             }
 
             if (line.closed) {
-                result += " z";
+                result.push("z");
             }
 
-            return result;
+            return "M" + result.join(" ");
         },
 
         clone: function() {
