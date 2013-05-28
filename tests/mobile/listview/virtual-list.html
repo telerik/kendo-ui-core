@@ -103,7 +103,7 @@
             });
 
             test('update at a given offset updates cells as expected', 2, function() {
-                list.update(450); // bottom point of the viewport will be 650
+                list.update(450, true); // bottom point of the viewport will be 650
                 equal(list.items[0].theContent, 10); // end reached of buffer
                 equal(list.items[list.items.length - 1].theContent, 39);
             });
@@ -114,7 +114,7 @@
                     equal(e.bottom, 800);
                 });
 
-                list.update(450); // bottom point of the viewport will be 650
+                list.update(450, true); // bottom point of the viewport will be 650
             });
 
             test('snapping back re-orders the items', 2, function() {
