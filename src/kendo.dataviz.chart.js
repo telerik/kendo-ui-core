@@ -1178,6 +1178,47 @@ kendo_module({
         });
     };
 
+    var PlotAreaFactory = Class.extend({
+        init: function() {
+            this._registry = [];
+        },
+
+        register: function(type, seriesTypes, priority) {
+            this._registry.push({
+                type: type,
+                seriesTypes: seriesTypes,
+                priority: priority
+            });
+
+            this._registry.sort(function(a, b) {
+                return (b.priority || 0) - (a.priority || 0)
+            });
+        },
+
+        create: function(srcSeries, options) {
+            var registry = this._registry,
+                type = registry[0].type,
+                entry,
+                i,
+                series;
+
+            // TODO: Order by weight?
+            // Pie, Donut, XY, Polar, Radar, Categorical
+            for (i = 0; i < registry.length; i++) {
+                entry = registry[i];
+                series = filterSeriesByType(srcSeries, entry.seriesTypes);
+
+                if (series.length > 0) {
+                    type = entry.type;
+                    break;
+                }
+            }
+
+            return new type(series, options);
+        }
+    });
+    PlotAreaFactory.current = new PlotAreaFactory();
+
     var BarLabel = ChartElement.extend({
         init: function(content, options) {
             var barLabel = this;
@@ -9531,6 +9572,7 @@ kendo_module({
         PiePlotArea: PiePlotArea,
         PieSegment: PieSegment,
         PlotAreaBase: PlotAreaBase,
+        PlotAreaFactory: PlotAreaFactory,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,

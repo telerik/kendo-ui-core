@@ -4134,6 +4134,70 @@
                     equal(plotArea.pointsByCategoryIndex(1).length, 1);
                 });
             })();
+
+            (function() {
+                var factory;
+
+                function FooPlotArea() { }
+                function BarPlotArea() { }
+
+                // ------------------------------------------------------------
+                module("Plot Area Factory", {
+                    setup: function() {
+                        factory = new dataviz.PlotAreaFactory();
+                    }
+                });
+
+                test("plot area type is created for matching series", function() {
+                    factory.register(FooPlotArea, ["foo"]);
+                    factory.register(BarPlotArea, ["bar"]);
+
+                    ok(factory.create([{ type: "bar" }]) instanceof BarPlotArea);
+                });
+
+                test("plot area type is created with set priority", function() {
+                    factory.register(FooPlotArea, ["foo"], 1);
+                    factory.register(BarPlotArea, ["bar"], 2);
+
+                    ok(factory.create([{ type: "foo" }, { type: "bar" }]) instanceof BarPlotArea);
+                });
+
+                test("matching series are passed to plot area", function() {
+                    function PlotArea(series) {
+                        equal(series[0].type, "bar")
+                    };
+
+                    factory.register(PlotArea, ["bar"]);
+                    factory.create([{ type: "bar" }]);
+                });
+
+                test("non-matching series are not passed to plot area", function() {
+                    function PlotArea(series) {
+                        equal(series.length, 1)
+                    };
+
+                    factory.register(PlotArea, ["bar"]);
+
+                    factory.create([{ type: "bar" }, { type: "foo" }]);
+                });
+
+                test("options are passed to plot area", function() {
+                    var PlotArea = function(series, options) {
+                        ok(options.foo, true)
+                    };
+
+                    factory.register(PlotArea, ["bar"]);
+                    factory.create([{ type: "bar" }], { foo: true });
+                });
+
+                test("plot area type with highest priority is default", function() {
+                    factory.register(FooPlotArea, ["foo"], 1);
+                    factory.register(BarPlotArea, ["bar"], 2);
+
+                    ok(factory.create([{ type: "baz" }]) instanceof BarPlotArea);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
