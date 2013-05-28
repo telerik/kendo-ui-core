@@ -16,11 +16,12 @@
 		<div id="ean13"></div>
         <script>
                 $('#ean8').kendoBarcode({
-					value: "1234567",
+					value: "5432167",
 				    encoding: {
 						name: "ean8"
 					}
-                });
+                });				
+				
 				$('#code39').kendoBarcode({
 					value: "KUR",
 				    encoding: {
@@ -28,11 +29,13 @@
 					}
                 })
 				$('#ean13').kendoBarcode({
-					value: "210987654321",
+					value: "323434544532",
 				    encoding: {
 						name: "ean13"
 					}
-                })
+                });
+				
+				console.log($('#ean13').data('kendoBarcode').encoding.pattern);
         </script>
 		<style>
 			.splitter{

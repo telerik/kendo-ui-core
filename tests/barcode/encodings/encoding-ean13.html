@@ -20,13 +20,9 @@
                 encodings = dataviz.encodings;
 
             (function() {
-                var encoding,
-                    characters= {
-                        START: [1,1,1],
-                        MIDDLE: [1,1,1,1,1],
-                    };
+                var encoding;
 
-                module("ean8", {
+                module("ean13", {
                     setup: function() {
                         encoding = new encodings.ean13();
                     },
@@ -35,20 +31,58 @@
                     }
                 });
 
-                test("test value 750103131130", function(){
+                test("pattern for value 750103131130", function(){
                     var result,
                         value = "750103131130",
-                        expectedResult = [10,1,1,1,1,2,3,1,1,1,2,3,2,2,2,1,1,1,2,3,1,4,1,1,1,2,2,2,1,1,1,1,1,1,4,1,1,2,2,2,1,2,2,2,1,1,4,1,1,3,2,1,1,3,1,1,2,1,1,1,10],
-                        
+                        expectedResult = [10,1,1,1,1,2,3,1,1,1,2,3,2,2,2,1,1,1,2,3,1,4,1,1,1,2,2,2,1,1,1,1,1,1,4,1,1,2,2,2,1,2,2,2,1,1,4,1,1,3,2,1,1,3,1,1,2,1,1,1,10],                        
                         result = encoding.encode(value, 300, 100);
                         ok(comparePatterns(result.pattern,expectedResult ));
                 });
 				
-				test("test value 210987654321", function(){
+				test("pattern for value 210987654321", function(){
                     var result,
                         value = "210987654321",
-                        expectedResult = [10,1,1,1,2,2,2,1,3,2,1,1,2,1,1,3,3,1,2,1,1,3,1,2,4,1,1,1,1,1,1,1,1,1,2,3,1,1,1,3,2,1,4,1,1,2,1,2,2,2,2,2,1,3,2,1,1,1,1,1,10]
-                        
+                        expectedResult = [10,1,1,1,2,2,2,1,3,2,1,1,2,1,1,3,3,1,2,1,1,3,1,2,4,1,1,1,1,1,1,1,1,1,2,3,1,1,1,3,2,1,4,1,1,2,1,2,2,2,2,2,1,3,2,1,1,1,1,1,10]                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("pattern for value 999999999999", function(){
+                    var result,
+                        value = "999999999999",
+                        expectedResult = [10,1,1,1,3,1,1,2,2,1,1,3,2,1,1,3,3,1,1,2,2,1,1,3,3,1,1,2,1,1,1,1,1,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,1,1,3,2,1,1,1,10]                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("pattern for value 000000000000", function(){
+                    var result,
+                        value = "000000000000",
+                        expectedResult = [10,1,1,1,3,1,1,2,2,1,1,3,2,1,1,3,3,1,1,2,2,1,1,3,3,1,1,2,1,1,1,1,1,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,1,1,3,2,1,1,1,10]                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("pattern for value 000000000000", function(){
+                    var result,
+                        value = "000000000000",
+                        expectedResult = [10,1,1,1,3,1,1,2,2,1,1,3,2,1,1,3,3,1,1,2,2,1,1,3,3,1,1,2,1,1,1,1,1,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,1,1,3,2,1,1,1,10]                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("pattern for value 323434544532", function(){
+                    var result,
+                        value = "323434544532",
+                        expectedResult = [10,1,1,1,2,1,2,2,1,4,1,1,2,3,1,1,1,1,4,1,2,3,1,1,1,2,3,1,1,1,1,1,1,1,1,3,2,1,1,3,2,1,2,3,1,1,4,1,1,2,1,2,2,1,1,1,4,1,1,1,10]                        
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("value 323434544532 provided as number", function(){
+                    var result,
+                        value = 323434544532,
+                        expectedResult = [10,1,1,1,2,1,2,2,1,4,1,1,2,3,1,1,1,1,4,1,2,3,1,1,1,2,3,1,1,1,1,1,1,1,1,3,2,1,1,3,2,1,2,3,1,1,4,1,1,2,1,2,2,1,1,1,4,1,1,1,10]                        
                         result = encoding.encode(value, 300, 100);
                         ok(comparePatterns(result.pattern,expectedResult ));
                 });

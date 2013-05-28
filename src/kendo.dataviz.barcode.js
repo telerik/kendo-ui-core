@@ -1335,6 +1335,12 @@
 
     encodings.ean13 = Encoding.extend({
         initValue: function(value, width, height){
+			if(typeof(value)=="number"){
+				value+="";
+			}
+			if(value.length!=12 || /\D/.test(value)){
+				throw new Error('Invalid value provided');
+			}
 			var that = this;
             that.pattern = [];
             that.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
@@ -1410,6 +1416,9 @@
     encodings.ean8 = encodings.ean13.extend({
         initValue: function(value, width, height){		
             var that = this;
+			if(value.length!=7 || /\D/.test(value)){
+				throw new Error('Invalid value provided');
+			}
 			that.value = value;
 			that.checksum = that.calculateChecksum(that.value);
 			that.leftPart  = that.value.substr(0,4);
