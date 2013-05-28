@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the afterShow event.</param>
         public MobileViewEventBuilder AfterShow(string handler)
         {
-            Handler("afterShow", handler);
+            Handler("after-show", handler);
 
             return this;
         }
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the beforeShow event.</param>
         public MobileViewEventBuilder BeforeShow(string handler)
         {
-            Handler("beforeShow", handler);
+            Handler("before-show", handler);
 
             return this;
         }

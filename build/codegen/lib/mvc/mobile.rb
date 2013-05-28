@@ -104,7 +104,7 @@ module CodeGen::MVC::Mobile
         /// <param name="handler">The name of the JavaScript function that will handle the <%= name %> event.</param>
         public <%= owner.csharp_class %>EventBuilder <%= csharp_name %>(string handler)
         {
-            Handler("<%= name %>", handler);
+            Handler("<%= name.to_attribute %>", handler);
 
             return this;
         }

@@ -1040,6 +1040,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileModalView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileModalView()
+        ///             .Name("MobileModalView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileModalViewBuilder MobileModalView()
+        {
+            return new MobileModalViewBuilder(new MobileModalView(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileSwitch"/>
         /// </summary>
         /// <example>

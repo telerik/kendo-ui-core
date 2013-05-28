@@ -1,0 +1,28 @@
+:options:
+    - :name: height
+      :type: String
+      :description: The height of the ModalView container in pixels. If not set, the element style is used.
+
+    - :name: width
+      :type: String
+      :description: The width of the ModalView container in pixels. If not set, the element style is used.
+
+    - :name: zoom
+      :type: Boolean
+      :description: If set to true, the user can zoom in/out the contents of the view using the pinch/zoom gesture.
+
+    - :name: stretch
+      :type: Boolean
+      :description: 'If set to true, the view will stretch its child contents to occupy the entire view, while disabling kinetic scrolling.
+                      Useful if the view contains an image or a map.'
+
+
+    - :name: useNativeScrolling
+      :type: Boolean
+      :description: '(available since Q1 2013)
+                     If set to true, the view will use the native scrolling available in the current platform. This should help with form issues on some platforms (namely Android and WP8).
+                     Native scrolling is only enabled on platforms that support it: iOS > 4, Android > 2, WP8. BlackBerry devices do support it, but the native scroller is flaky.'
+
+    - :name: title
+      :type: String
+      :description: The text to display in the navbar title (if present) and the browser title.
