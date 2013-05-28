@@ -583,6 +583,28 @@
                 equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17, 10, 40));
             });
 
+            test("DAILY expands BYDAY and BYHOUR", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 5, 10, 16, 30),
+                    end: new Date(2000, 5, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYDAY=TU;BYHOUR=10, 12"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 5, 10), end: new Date(2013, 5, 11, 16, 50) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 11, 10, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 11, 11));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 5, 11, 12, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 5, 11, 13));
+            });
+
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
                 var schedulerEvent = {
@@ -809,6 +831,72 @@
                 equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 29, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 29, 17, 0));
+            });
+
+            test("WEEKLY occurrences expand BYHOUR", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 10, 10, 16, 30),
+                    end: new Date(2013, 10, 10, 17, 0),
+                    rule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 10), end: new Date(2013, 10, 16) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 10, 15, 13, 0));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 10, 15, 15, 0));
+            });
+
+            test("WEEKLY occurrences expand BYHOUR and BYMINUTE", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 10, 10, 16, 30),
+                    end: new Date(2013, 10, 10, 17, 0),
+                    rule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 10), end: new Date(2013, 10, 16) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 20));
+                equal(events[0].end.getTime(), +new Date(2013, 10, 15, 12, 50));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 20));
+                equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50));
+            });
+
+            test("WEEKLY occurrences expand BYHOUR and BYMINUTE and BYSECOND", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 10, 10, 16, 30),
+                    end: new Date(2013, 10, 10, 17, 0),
+                    rule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 10), end: new Date(2013, 10, 16) } );
+
+                equal(events.length, 2);
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 20, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 10, 15, 12, 50, 30));
+
+                equal(events[1].recurrenceID, schedulerEvent.uid);
+                equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 20, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50, 30));
             });
 
             //TODO: Add test for BYSETPOS
