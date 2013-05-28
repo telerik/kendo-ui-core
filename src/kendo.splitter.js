@@ -366,8 +366,8 @@ kendo_module({
 
             this.element.children(".k-splitbar").each(function() {
                 var splitbar = $(this),
-                    previousPane = splitbar.prev(PANECLASS).data(PANE),
-                    nextPane = splitbar.next(PANECLASS).data(PANE);
+                    previousPane = splitbar.prevAll(PANECLASS).first().data(PANE),
+                    nextPane = splitbar.nextAll(PANECLASS).first().data(PANE);
 
                 if (!nextPane) {
                     return;
@@ -382,7 +382,7 @@ kendo_module({
         _resize: function() {
             var that = this,
                 element = that.element,
-                panes = element.children(":not(.k-splitbar)"),
+                panes = element.children(PANECLASS),
                 isHorizontal = that.orientation == HORIZONTAL,
                 splitBars = element.children(".k-splitbar"),
                 splitBarsCount = splitBars.length,
@@ -459,7 +459,7 @@ kendo_module({
                 lastNonCollapsedPane[sizingProperty](totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
             }
 
-            element.children()
+            element.children(":not(script)")
                 .css(alternateSizingProperty, element[alternateSizingProperty]())
                 .each(function (i, child) {
                     child.style[positioningProperty] = Math.floor(sum) + "px";
