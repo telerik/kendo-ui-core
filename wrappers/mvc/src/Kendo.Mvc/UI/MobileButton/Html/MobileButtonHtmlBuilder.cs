@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-rel", component.Rel.ToString().ToLower());
                 if (component.Rel == MobileButtonRel.ActionSheet)
                 {
-                    html.Attribute("data-actionsheet-context", component.ActionSheetContext);
+                    html.Attribute("data-actionsheet-context", component.ActionsheetContext);
                 }
             }
 

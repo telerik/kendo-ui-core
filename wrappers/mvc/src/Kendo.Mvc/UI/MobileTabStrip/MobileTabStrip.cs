@@ -8,34 +8,30 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
 
-    public class MobileButton : WidgetBase
+    public class MobileTabStrip : WidgetBase
     {
         private readonly IUrlGenerator urlGenerator;
 
-        public MobileButton(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+        public MobileTabStrip(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
             this.urlGenerator = urlGenerator;
 //>> Initialization
         
+            Items = new List<MobileTabStripItem>();
+                
         //<< Initialization
         }
 
 //>> Fields
         
-        public string Icon { get; set; }
+        public int SelectedIndex { get; set; }
         
-        public string Href { get; set; }
-        
-        public string Text { get; set; }
-        
-        public string Transition { get; set; }
-        
-        public string Target { get; set; }
-        
-        public string ActionsheetContext { get; set; }
-        
-        public MobileButtonRel Rel { get; set; }
+        public List<MobileTabStripItem> Items
+        {
+            get;
+            private set;
+        }
         
         //<< Fields
 
@@ -43,11 +39,11 @@ namespace Kendo.Mvc.UI
         {
             //no initializtion scripts for mobile widgets
         }
-        
+
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             
-            var html = new MobileButtonHtmlBuilder(this).Build();
+            var html = new MobileTabStripHtmlBuilder(this).Build();
 
             html.WriteTo(writer);
             

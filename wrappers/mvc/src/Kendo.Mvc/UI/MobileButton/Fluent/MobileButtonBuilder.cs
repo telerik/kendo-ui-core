@@ -78,9 +78,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// This value will be available when the action callback of ActionSheet item is executed
         /// </summary>
         /// <param name="value">The value that configures the actionsheetcontext.</param>
-        public MobileButtonBuilder ActionSheetContext(string value)
+        public MobileButtonBuilder ActionsheetContext(string value)
         {
-            container.ActionSheetContext = value;
+            container.ActionsheetContext = value;
 
             return this;
         }

@@ -16,3 +16,11 @@
     - :name: items.text
       :type: String
       :description: Specifies the text of the item
+
+    - :name: items.target
+      :type: String
+      :description: Specifies the id of target Pane or `_top` for application level Pane
+
+    - :name: items.actionsheetContext
+      :type: String
+      :description: This value will be available when the action callback of ActionSheet item is executed

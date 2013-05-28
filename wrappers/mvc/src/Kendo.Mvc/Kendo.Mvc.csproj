@@ -1346,4 +1346,4 @@
     <Compile Include="UI\MobileSwitch\Fluent\MobileSwitchEventBuilder.cs" />
     <Compile Include="UI\MobileSwitch\Html\MobileSwitchHtmlBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\MobileTabStrip\MobileTabStrip.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripBuilder.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemFactory.cs" /><Compile Include="UI\MobileTabStrip\MobileTabStripItem.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemBuilder.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripEventBuilder.cs" /><Compile Include="UI\MobileTabStrip\Html\MobileTabStripHtmlBuilder.cs" /></ItemGroup></Project>

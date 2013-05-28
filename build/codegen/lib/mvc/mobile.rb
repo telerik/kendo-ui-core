@@ -1,5 +1,11 @@
 require 'debugger'
 
+class String
+    def to_attribute
+        self.gsub(/[A-Z]/, '-\0').downcase
+    end
+end
+
 module CodeGen::MVC::Mobile
 
     module Wrappers
@@ -13,7 +19,12 @@ module CodeGen::MVC::Mobile
             'Date' => 'DateTime'
         }
 
-        SERIALIZATION_SKIP_LIST = ['actionsheet.items.text', 'buttongroup.items.text', 'tabstrip.items.text']
+        SERIALIZATION_SKIP_LIST = [
+            'actionsheet.items.text',
+            'buttongroup.items.text',
+            'tabstrip.items.text',
+            'tabstrip.items.href'
+        ]
 
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 
@@ -184,13 +195,13 @@ module CodeGen::MVC::Mobile
                     return ERB.new(%{
             if (<%=csharp_name%>.HasValue())
             {
-                json["<%=name.camelize%>"] = <%=csharp_name%>;
+                json["<%= name.to_attribute %>"] = <%=csharp_name%>;
             }
             }).result(binding)
                 end
 
                 ERB.new(%{
-            json["<%=name.camelize%>"] = <%=csharp_name%>;
+            json["<%= name.to_attribute %>"] = <%=csharp_name%>;
                 }).result(binding)
             end
 
@@ -226,7 +237,7 @@ module CodeGen::MVC::Mobile
 
             def to_client_option
                 ERB.new(%{
-            json["<%=name.camelize%>"] = <%=csharp_name%>.ToJson();
+            json["<%= name.to_attribute %>"] = <%=csharp_name%>.ToJson();
                 }).result(binding)
             end
 
