@@ -23,11 +23,15 @@ kendo_module({
         proxy = $.proxy,
         isArray = $.isArray,
         NS = ".kendoScheduler",
+        CLICK = "click",
         CHANGE = "change",
+        CANCEL = "cancel",
         REMOVE = "remove",
+        SAVE = "save",
         ADD = "add",
         EDIT = "edit",
         DELETECONFIRM = "Are you sure you want to delete this event?",
+        COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
         /*FREQUENCY = {
             "SECONDLY": 0,
             "MINUTELY": 1,
@@ -92,6 +96,21 @@ kendo_module({
                 '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
             '</div>');
+
+    var defaultCommands = {
+        update: {
+            text: "Update",
+            imageClass: "k-update",
+            className: "k-scheduler-update",
+            iconClass: "k-icon"
+        },
+        canceledit: {
+            text: "Cancel",
+            imageClass: "k-cancel",
+            className: "k-scheduler-cancel",
+            iconClass: "k-icon"
+        }
+    };
 
     function getDate(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
@@ -171,10 +190,28 @@ kendo_module({
 
     function trimOptions(options) {
         delete options.name;
-        delete options.remove;
         delete options.prefix;
 
+        delete options.remove;
+        delete options.edit;
+
         return options;
+    }
+
+    function stringifyAttributes(attributes) {
+        var attr,
+            result = " ";
+
+        if (attributes) {
+            if (typeof attributes === STRING) {
+                return attributes;
+            }
+
+            for (attr in attributes) {
+                result += attr + '="' + attributes[attr] + '"';
+            }
+        }
+        return result;
     }
 
     var Scheduler = Widget.extend({
@@ -215,7 +252,10 @@ kendo_module({
         },
 
         events: [
-            REMOVE
+            REMOVE,
+            EDIT,
+            CANCEL,
+            SAVE
         ],
 
         destroy: function() {
@@ -232,6 +272,8 @@ kendo_module({
                 that.calendar.destroy();
                 that.popup.destroy();
             }
+
+            that._destroyEditable();
 
             element = that.element
                 .add(that.wrapper)
@@ -266,19 +308,205 @@ kendo_module({
         },
 
         addEvent: function(eventInfo) {
-            var dataSource = this.dataSource;
-            var event = dataSource._createNewModel();
+            if ((this.editable && this.editable.end()) || !this.editable) {
 
-            if (event instanceof kendo.data.Model) {
-                event.accept(eventInfo);
-            } else {
-                event = extend({ title: "" }, event, eventInfo);
+                this.cancelEvent();
+
+                var dataSource = this.dataSource;
+                var event = dataSource._createNewModel();
+
+                if (event instanceof kendo.data.Model) {
+                    event.accept(eventInfo);
+                } else {
+                    event = extend({ title: "" }, event, eventInfo);
+                }
+
+                event = this.dataSource.add(event);
+
+                if (event) {
+                    var element = this.wrapper.find(".k-appointment[" + kendo.attr("uid") + "=" + event.uid + "]");
+
+                    this.editEvent(element);
+                }
             }
+       },
 
-            this.dataSource.add(event);
+       saveEvent: function() {
+            var that = this,
+                container = that._editContainer,
+                model = that._modelForContainer(container),
+                editable = that.editable;
+
+            if (container && editable && editable.end() &&
+                !that.trigger(SAVE, { container: container, model: model } )) {
+
+                that.dataSource.sync();
+            }
+        },
+
+        cancelEvent: function() {
+            var that = this,
+                container = that._editContainer,
+                model;
+
+            if (container) {
+                model = that._modelForContainer(container);
+
+                that.dataSource.cancelChanges(model);
+
+                //TODO:handle the cancel in UI
+
+                that._destroyEditable();
+            }
         },
 
         editEvent: function(element) {
+            var that = this,
+                model = that._modelForContainer(element),
+                container;
+
+            that.cancelEvent();
+
+            if (model) {
+                that._createPopupEditor(model);
+
+                container = that._editContainer;
+
+                container.on(CLICK + NS, "a.k-scheduler-cancel", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (that.trigger(CANCEL, { container: container, event: model })) {
+                        return;
+                    }
+
+                    that.cancelEvent();
+                });
+
+                container.on(CLICK + NS, "a.k-scheduler-update", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.saveEvent();
+                });
+            }
+        },
+
+        _createButton: function(command) {
+            var template = command.template || COMMANDBUTTONTMPL,
+                commandName = typeof command === STRING ? command : command.name || command.text,
+                options = { className: "k-scheduler-" + (commandName || "").replace(/\s/g, ""), text: commandName, imageClass: "", attr: "", iconClass: "" };
+
+            if (!commandName && !(isPlainObject(command) && command.template))  {
+                throw new Error("Custom commands should have name specified");
+            }
+
+            if (isPlainObject(command)) {
+                if (command.className) {
+                    command.className += " " + options.className;
+                }
+
+                if (commandName === "edit" && isPlainObject(command.text)) {
+                    command = extend(true, {}, command);
+                    command.text = command.text.edit;
+                }
+
+                if (command.attr && isPlainObject(command.attr)) {
+                    command.attr = stringifyAttributes(command.attr);
+                }
+
+                options = extend(true, options, defaultCommands[commandName], command);
+            } else {
+                options = extend(true, options, defaultCommands[commandName]);
+            }
+
+            return kendo.template(template)(options);
+        },
+
+        _createPopupEditor: function(model) {
+            var that = this,
+                editable = that.options.editable,
+                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '"><div class="k-edit-form-container">',
+                template = editable.template,
+                command = editable.editCommand,
+                updateText,
+                cancelText,
+                attr,
+                options = isPlainObject(editable) ? editable.window : {},
+                settings = extend({}, kendo.Template, that.options.templateSettings);
+
+           if (template) {
+                if (typeof template === STRING) {
+                    template = window.unescape(template);
+                }
+
+                html += (kendo.template(template, settings))(model);
+            } else {
+            }
+
+            if (command) {
+                if (isPlainObject(command)) {
+                   if (command.text && isPlainObject(command.text)) {
+                       updateText = command.text.update;
+                       cancelText = command.text.cancel;
+                   }
+
+                   if (command.attr) {
+                       attr = command.attr;
+                   }
+                }
+            }
+
+            html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
+
+            html += '</div></div>';
+
+            var container = that._editContainer = $(html)
+                .appendTo(that.wrapper).eq(0)
+                .kendoWindow(extend({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Event",
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            if (that.trigger(CANCEL, { container: container, event: model })) {
+                                e.preventDefault();
+                                return;
+                            }
+                            that.cancelEvent();
+                        }
+                    }
+                }, options));
+
+            that.editable = that._editContainer
+                .kendoEditable({
+             //       fields: fields,
+                    model: model,
+                    clearContainer: false
+                }).data("kendoEditable");
+
+            container.data("kendoWindow").center().open();
+
+            that.trigger(EDIT, { container: container, event: model });
+        },
+
+        _destroyEditable: function() {
+            var that = this;
+
+            var destroy = function() {
+                if (that.editable) {
+         //           that._detachModelChange();
+                    that.editable.destroy();
+                    that.editable = null;
+                    that._editContainer = null;
+                }
+            };
+
+            if (that.editable) {
+                that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
+            }
         },
 
         removeEvent: function(element) {
@@ -498,7 +726,7 @@ kendo_module({
 
             kendo.bind(that.toolbar, that._model);
 
-            toolbar.on("click" + NS, ".k-scheduler-navigation li", function(e) {
+            toolbar.on(CLICK + NS, ".k-scheduler-navigation li", function(e) {
                 var li = $(this),
                     date = new Date(that.selectDate());
 
@@ -519,7 +747,7 @@ kendo_module({
 
             });
 
-            toolbar.on("click" + NS, ".k-scheduler-views li", function(e) {
+            toolbar.on(CLICK + NS, ".k-scheduler-views li", function(e) {
                 that.view($(this).attr(kendo.attr("name")));
                 e.preventDefault();
             });
@@ -553,6 +781,8 @@ kendo_module({
         },
 
         refresh: function() {
+            this._destroyEditable();
+
             this.view().renderEvents(this.dataSource.view());
         }
     });
@@ -677,7 +907,7 @@ kendo_module({
                     $(this).find("a:has(.k-i-close)").show();
                 }).on("mouseleave" + NS, ".k-appointment", function() {
                     $(this).find("a:has(.k-i-close)").hide();
-                }).on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
+                }).on(CLICK + NS, ".k-appointment a:has(.k-i-close)", function(e) {
                     that.trigger(REMOVE, { container: $(this).closest(".k-appointment") });
                     e.preventDefault();
                 });

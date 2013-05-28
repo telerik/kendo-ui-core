@@ -11,6 +11,8 @@
         <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
@@ -99,6 +101,9 @@
         end.setHours(end.getHours() + 3);
 
         $("#scheduler").kendoScheduler({
+            editable: {
+                template: "#=title#"
+            },
             height: 800,
             // numberOfTimeSlots: 4,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
