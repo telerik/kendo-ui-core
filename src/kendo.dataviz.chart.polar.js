@@ -22,13 +22,13 @@ kendo_module({
         CategoryAxis = dataviz.CategoryAxis,
         CategoricalChart = dataviz.CategoricalChart,
         CategoricalPlotArea = dataviz.CategoricalPlotArea,
-        Chart = dataviz.ui.Chart,
         ChartElement = dataviz.ChartElement,
         DonutSegment = dataviz.DonutSegment,
         LineChart = dataviz.LineChart,
         LineSegment = dataviz.LineSegment,
         NumericAxis = dataviz.NumericAxis,
         PlotAreaBase = dataviz.PlotAreaBase,
+        PlotAreaFactory = dataviz.PlotAreaFactory,
         Point2D = dataviz.Point2D,
         Ring = dataviz.Ring,
         ScatterChart = dataviz.ScatterChart,
@@ -993,7 +993,7 @@ kendo_module({
             }
         }
     });
-    Chart.registerPlotArea(RadarPlotArea, RADAR_CHARTS);
+    PlotAreaFactory.current.register(RadarPlotArea, RADAR_CHARTS, 20);
 
     // TODO: Inherit / mixin from RadarPlotArea
     var PolarPlotArea = PlotAreaBase.extend({
@@ -1161,7 +1161,7 @@ kendo_module({
             // TODO: Implement
         }
     });
-    Chart.registerPlotArea(PolarPlotArea, POLAR_CHARTS);
+    PlotAreaFactory.current.register(PolarPlotArea, POLAR_CHARTS, 10);
 
     // Helpers ================================================================
     function xComparer(a, b) {

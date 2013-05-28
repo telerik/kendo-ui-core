@@ -454,31 +454,9 @@ kendo_module({
 
         _createPlotArea: function() {
             var chart = this,
-                plotAreaTypes = Chart.plotAreaTypes,
-                options = chart.options,
-                series,
-                i,
-                areaType,
-                plotArea;
+                options = chart.options;
 
-            // TODO: Order by weight?
-            // Pie, Donut, XY, Polar, Radar, Categorical
-            for (i = 0; i < plotAreaTypes.length; i++) {
-                areaType = plotAreaTypes[i];
-                series = filterSeriesByType(options.series, areaType.seriesTypes);
-
-                if (series.length > 0) {
-                    break;
-                }
-            }
-
-            if (series.length === 0) {
-                areaType = plotAreaTypes[0];
-            }
-
-            plotArea = new areaType.type(series, options);
-
-            return plotArea;
+            return PlotAreaFactory.current.create(options.series, options);
         },
 
         _setupSelection: function() {
@@ -1170,14 +1148,6 @@ kendo_module({
         }
     });
 
-    Chart.plotAreaTypes = [];
-    Chart.registerPlotArea = function(type, seriesTypes) {
-        Chart.plotAreaTypes.push({
-            type: type,
-            seriesTypes: seriesTypes
-        });
-    };
-
     var PlotAreaFactory = Class.extend({
         init: function() {
             this._registry = [];
@@ -1191,30 +1161,26 @@ kendo_module({
             });
 
             this._registry.sort(function(a, b) {
-                return (b.priority || 0) - (a.priority || 0)
+                return (b.priority || 0) - (a.priority || 0);
             });
         },
 
         create: function(srcSeries, options) {
             var registry = this._registry,
-                type = registry[0].type,
                 entry,
                 i,
                 series;
 
-            // TODO: Order by weight?
-            // Pie, Donut, XY, Polar, Radar, Categorical
             for (i = 0; i < registry.length; i++) {
                 entry = registry[i];
                 series = filterSeriesByType(srcSeries, entry.seriesTypes);
 
                 if (series.length > 0) {
-                    type = entry.type;
                     break;
                 }
             }
 
-            return new type(series, options);
+            return new entry.type(series, options);
         }
     });
     PlotAreaFactory.current = new PlotAreaFactory();
@@ -7221,7 +7187,7 @@ kendo_module({
             }
         }
     });
-    Chart.registerPlotArea(CategoricalPlotArea, [
+    PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
     ]);
@@ -7516,9 +7482,9 @@ kendo_module({
             }
         }
     });
-    Chart.registerPlotArea(XYPlotArea, [
+    PlotAreaFactory.current.register(XYPlotArea, [
             SCATTER, SCATTER_LINE, BUBBLE
-    ]);
+    ], 10);
 
     var PiePlotArea = PlotAreaBase.extend({
         render: function() {
@@ -7547,7 +7513,7 @@ kendo_module({
             append(this.options.legend.items, chart.legendItems);
         }
     });
-    Chart.registerPlotArea(PiePlotArea, [PIE]);
+    PlotAreaFactory.current.register(PiePlotArea, [PIE], 20);
 
     var DonutPlotArea = PiePlotArea.extend({
         render: function() {
@@ -7570,7 +7536,7 @@ kendo_module({
             plotArea.appendChart(donutChart);
         }
     });
-    Chart.registerPlotArea(DonutPlotArea, [DONUT]);
+    PlotAreaFactory.current.register(DonutPlotArea, [DONUT], 10);
 
     var PieAnimation = ElementAnimation.extend({
         options: {

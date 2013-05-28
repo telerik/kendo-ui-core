@@ -4190,11 +4190,11 @@
                     factory.create([{ type: "bar" }], { foo: true });
                 });
 
-                test("plot area type with highest priority is default", function() {
+                test("plot area type with lowest priority is default", function() {
                     factory.register(FooPlotArea, ["foo"], 1);
                     factory.register(BarPlotArea, ["bar"], 2);
 
-                    ok(factory.create([{ type: "baz" }]) instanceof BarPlotArea);
+                    ok(factory.create([{ type: "baz" }]) instanceof FooPlotArea);
                 });
 
             })();
