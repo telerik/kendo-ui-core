@@ -6,7 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.scheduler.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -16,8 +16,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var recurrence = kendo.recurrence,
-                occurrences = recurrence.expand;
+            var occurrences = kendo.recurrence.expand;
 
             module("Cloning scheduler event");
             test("Occurrence clones original event", function() {

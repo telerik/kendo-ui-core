@@ -6,7 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.scheduler.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -18,7 +18,7 @@
         <script>
             module("RRule parser");
 
-            var parse = kendo.recurrence.parseRule;
+            var parse = kendo.recurrence.rule.parse;
 
             test("Remove RRULE if present", function() {
                 var rrule = parse("RRULE:FREQ=DaILY;UNTIL=19730429T070000Z");
@@ -46,7 +46,7 @@
             });
 
             test("Parse INTERVAL property", function() {
-                var rrule = parse("FREQ=DAILY;INTERVAL=3");
+                    var rrule = parse("FREQ=DAILY;INTERVAL=3");
 
                 equal(rrule.interval, 3);
             });

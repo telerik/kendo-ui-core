@@ -6,7 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.scheduler.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -17,22 +17,12 @@
         <ol id="qunit-tests"></ol>
         <script>
             var recurrence = kendo.recurrence,
+                numberOfWeeks = recurrence.numberOfWeeks,
+                weekInMonth = recurrence.weekInMonth,
                 weekInYear = recurrence.weekInYear,
                 dayInYear = recurrence.dayInYear;
 
             module("Recurring helper methods");
-
-            test("expandEvent method expand original method with rrule object", function() {
-                var schedulerEvent = {
-                    title: "Title",
-                    start: new Date(),
-                    rule: "FREQ=DAILY"
-                }
-
-                recurrence.expandEvent(schedulerEvent);
-
-                ok(schedulerEvent.ruleInstance);
-            });
 
             test("Numbers of weeks in 01/05/2013", function() {
                 equal(recurrence.numberOfWeeks(new Date(2013, 4, 1), 0), 5);
@@ -44,27 +34,27 @@
 
             test("weekInMonth method returns number of the week (first week)", function() {
                 var date = new Date(2013, 5, 1);
-                equal(recurrence.weekInMonth(date, 0), 1);
+                equal(weekInMonth(date, 0), 1);
             });
 
             test("weekInMonth method returns number of the week (second week)", function() {
                 var date = new Date(2013, 5, 2);
-                equal(recurrence.weekInMonth(date, 0), 2);
+                equal(weekInMonth(date, 0), 2);
             });
 
             test("weekInMonth method returns number of the week (third week)", function() {
                 var date = new Date(2013, 5, 16);
-                equal(recurrence.weekInMonth(date, 0), 4);
+                equal(weekInMonth(date, 0), 4);
             });
 
             test("weekInMonth method honours weekStart", function() {
                 var date = new Date(2013, 5, 16);
-                equal(recurrence.weekInMonth(date, 1), 3);
+                equal(weekInMonth(date, 1), 3);
             });
 
             test("weekInMonth method honours weekStart ", function() {
                 var date = new Date(2013, 3, 18);
-                equal(recurrence.weekInMonth(date, 5), 4);
+                equal(weekInMonth(date, 5), 4);
             });
 
             module("Week in year (ISO8601)");
