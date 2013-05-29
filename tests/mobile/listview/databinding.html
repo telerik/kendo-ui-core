@@ -217,12 +217,36 @@
                 teardown: function() { }
             });
 
-            test("detects grouped datasource", function() {
+            test("detects grouped datasource", 1, function() {
                 equal(listView.options.type, "group");
             });
 
-            test("styles root element correctly", function() {
+            test("styles root element correctly", 1, function() {
                 ok(!dom.is(".km-list"));
+            });
+
+            test("adds new items to the correct group", 1, function() {
+                dataSource.add({foo: "Foo", bar: "Qux"});
+
+                var groups = dom.children('li');
+
+                equal(groups.length, 1);
+            });
+
+            test("adding new items makes a new group", 1, function() {
+                dataSource.add({foo: "Baz", bar: "Foo"});
+
+                var groups = dom.children('li');
+
+                equal(groups.length, 2);
+            });
+
+            test("removing the last item from a group removes the group", 2, function() {
+                dataSource.add({foo: "Baz", bar: "Foo"});
+                var item = dataSource.data()[2];
+                equal(dom.children('li').length, 2);
+                dataSource.data().remove(item);
+                equal(dom.children('li').length, 1);
             });
 
             test("uses group values for headers", function() {
@@ -283,7 +307,7 @@
                 link.trigger("mouseup");
             });
 
-            test("resetting dataSource detaches the previouse events", function() {
+            test("resetting the dataSource detaches the previous events", function() {
                 dom = $("<ul/>");
 
                 listView = new ListView(dom, {dataSource: dataSource});
